@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ModuleReferences.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="fileName">The Module file name.</param>
+    <param name="moduleName">The App Module name.</param>
+    <param name="moduleDisplayName">The App Module display name.</param>
+    <returns>The ModuleReference object.</returns>
+  </Add>
+  <BinarySearch1>
+    <summary>
+      Retrieve the App Module by file name and display name.
+    </summary>
+    <param name="fileName">The module file name.</param>
+    <param name="moduleDisplayName">The module display name.</param>
+    <returns>The ModuleReference object.</returns>
+  </BinarySearch1>
+  <BinarySearch2>
+    <summary>
+      Retrieve the App Module by file name and module name.
+    </summary>
+    <param name="fileName">The module file name.</param>
+    <param name="moduleName">The App Module name.</param>
+    <param name="moduleNameComparer">The comparer object.</param>
+    <returns>The ModuleReference object.</returns>
+  </BinarySearch2>
+  <ModuleNameComparer>
+    <summary>
+      Sort and search on file name and module name.
+    </summary>
+    <remarks>
+      <para>Syntax: public class ModuleNameComparer : IComparer&lt;ModuleReference&gt;</para>
+    </remarks>
+  </ModuleNameComparer>
+</items>

@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- FormCommon.xml -->
+<items>
+  <FormCommon>
+    <summary>
+      Provides common WinForms methods.
+    </summary>
+  </FormCommon>
+  
+  <!-- General Functions -->
+  <CreateTablesPrompt>
+    <summary>
+      Verify create of missing tables.
+    </summary>
+    <param name="exceptionMessage">The SystemException message.</param>
+    <param name="fileSpecs">The File specification array.</param>
+    <returns></returns>
+  </CreateTablesPrompt>
+  <RestoreSplitDistance>
+    <summary>
+      Restore the splitter distance.
+    </summary>
+    <param name="splitContainer">The control object.</param>
+    <param name="controlValues">The ControlValues object.</param>
+  </RestoreSplitDistance>
+  <SetLabelsBackColor>
+    <summary>
+      Sets the BackColor for the labels.
+    </summary>
+    <param name="controls">The Controls collection.</param>
+    <param name="backColor">The Background color.</param>
+  </SetLabelsBackColor>
+
+  <!-- Action State Functions -->
+  <SetMenuState>
+    <summary>
+      Sets the enable state for the menu items.
+    </summary>
+    <param name="contextMenuStrip">The menu control.</param>
+    <param name="enableNew">The New Indicator.</param>
+    <param name="enableEdit">The Edit indicator.</param>
+  </SetMenuState>
+  <SetToolState>
+    <summary>
+      Sets the enable state for the tool items.
+    </summary>
+    <param name="toolStrip">The tool control.</param>
+    <param name="enableNew">The New Indicator.</param>
+    <param name="enableEdit">The Edit indicator.</param>
+  </SetToolState>
+
+  <!-- Error Functions -->
+  <ShowError>
+    <summary>
+      Displays the error text if not null.
+    </summary>
+    <param name="errorText">The error text.</param>
+    <param name="caption">The message caption.</param>
+    <returns>True if there is an error, otherwise false.</returns>
+  </ShowError>
+  <ShowHasError>
+    <summary>
+      Displays "No records affeted." if the affected count is less than 1.
+    </summary>
+    <param name="errorText">The error text.</param>
+    <param name="affectedCount">The affected records count.</param>
+    <param name="caption">The message caption.</param>
+    <returns>True if there is an error, otherwise false.</returns>
+  </ShowHasError>
+
+  <!-- Field Key Handler Functions -->
+  <HandleNumberOrEditKey>
+    <summary>
+      Checks the key character for a numeric or allowed control value.
+    </summary>
+    <param name="keyChar">The key character.</param>
+    <returns>True if number or control key, otherwise false.</returns>
+  </HandleNumberOrEditKey>
+  <HandleSpace>
+    <summary>
+      Checks the key character for a space.
+    </summary>
+    <param name="keyChar">The key character.</param>
+    <returns>True if it is a space, otherwise false.</returns>
+  </HandleSpace>
+  <StripBlanks>
+    <summary>
+      Strips blanks from the string.
+    </summary>
+    <param name="text">The string text.</param>
+    <returns>The modified string.</returns>
+  </StripBlanks>
+  <StripNonDigits>
+    <summary>
+      Strips non-digits from a string.
+    </summary>
+    <param name="text">The string text.</param>
+    <returns>The modified string.</returns>
+  </StripNonDigits>
+  <TextBoxNumeric_KeyPress>
+    <summary>
+      Only allows numbers or edit keys.
+    </summary>
+    <param name="sender">The control that fired the event.</param>
+    <param name="e">The event arguments.</param>
+  </TextBoxNumeric_KeyPress>
+  <TextBoxNoSpace_KeyPress>
+    <summary>
+      Does not allow spaces.
+    </summary>
+    <param name="sender">The control that fired the event.</param>
+    <param name="e">The event arguments.</param>
+  </TextBoxNoSpace_KeyPress>
+  <TextBoxNoSpace_TextChanged>
+    <summary>
+      Strips blanks from the text value.
+    </summary>
+    <param name="sender">The control that fired the event.</param>
+    <param name="e">The event arguments.</param>
+  </TextBoxNoSpace_TextChanged>
+
+  <!-- File Functions -->
+  <SaveFile>
+    <summary>
+      Displays the Save dialog to select a file.
+    </summary>
+    <param name="filter">The file filter.</param>
+    <param name="initialDirectory">The initial selected directory.</param>
+    <param name="defaultFileSpec">The default file specification.</param>
+    <returns>The file specification. A null string if the "Cancel" button is selected.</returns>
+  </SaveFile>
+  <SelectFile>
+    <summary>
+      Displays the Open dialog to select a file.
+    </summary>
+    <param name="filter">The file filter.</param>
+    <param name="initialDirectory">The initial selected directory.</param>
+    <param name="defaultFileSpec">The default file specification.</param>
+    <returns>The file specification. A null string if the "Cancel" button is selected.</returns>
+  </SelectFile>
+
+  <!-- Image Functions -->
+  <CropImage>
+    <summary>
+      Crops an image.
+    </summary>
+    <param name="image">The original image.</param>
+    <param name="cropPoint">The crop start point.</param>
+    <param name="cropSize">The crop size.</param>
+    <returns>The cropped image.</returns>
+  </CropImage>
+  <CreateGradient>
+    <summary>
+      Draws a gradient in the specified rectangle.
+    </summary>
+    <param name="graphics">The graphics object.</param>
+    <param name="clientRectangle">The target rectangle.</param>
+    <param name="beginColor">The begin color.</param>
+    <param name="endColor">The end color.</param>
+  </CreateGradient>
+  <ResizeImage>
+    <summary>
+      Resizes an image.
+    </summary>
+    <param name="image">The original image.</param>
+    <param name="controlSize">The target conrol size.</param>
+    <param name="keepAspectRatio">
+      Indicates that the spact ratio should
+      be kept.
+    </param>
+    <returns>The resized image.</returns>
+  </ResizeImage>
+  <TransformCrop>
+    <summary>
+      Transforms the crop rectangle values of the sample image relative
+      to the values of the original picture.
+    </summary>
+    <param name="selection">The current selection rectangle.</param>
+    <param name="selectionImage">The selection sample image.</param>
+    <param name="originalImage">The original image.</param>
+    <returns>The transformed selection rectangle.</returns>
+  </TransformCrop>
+
+  <!-- Screen Point Functions -->
+  <GetDialogScreenPoint>
+    <summary>
+      Gets the Grid target Dialog screen position.
+    </summary>
+    <param name="grid">The source grid.</param>
+    <returns>The target Dialog screen position.</returns>
+  </GetDialogScreenPoint>
+  <GetScreenPoint>
+    <summary>
+      Converts the Control point to Screen point.
+    </summary>
+    <param name="control">The Control reference.</param>
+    <param name="x">The Control point X value.</param>
+    <param name="y">The Control point Y value.</param>
+    <returns>The Screen point.</returns>
+  </GetScreenPoint>
+  <GetScreenRectangle>
+    <summary>
+      Gets the Control screen rectangle.
+    </summary>
+    <param name="control">The Control reference.</param>
+    <returns>The Control Screen rectangle.</returns>
+  </GetScreenRectangle>
+  <GetMenuScreenPoint>
+    <summary>
+      Get the control target menu screen position.
+    </summary>
+    <param name="control">The Control reference.</param>
+    <param name="mousePosition">The mouse position.</param>
+    <returns>The target Menu Screen position.</returns>
+  </GetMenuScreenPoint>
+  
+  <!-- String Value Functions -->
+  <SetString>
+    <summary>
+      Sets the string to "-" if it is empty or blanks and to "" if it is "-".
+    </summary>
+    <param name="text">The string text.</param>
+    <returns>The modified string.</returns>
+  </SetString>
+</items>

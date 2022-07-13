@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ResultGrid.xml -->
+<items>
+  <!--GetDisplayColumns>
+    <summary>
+      Get the Display Columns from the DbColumns definition.
+    </summary>
+    <param name="dbColumns">The DbColumns.</param>
+    <param name="columnNames">The display column names.</param>
+    <returns></returns>
+  </GetDisplayColumns-->
+  <ResultGridC>
+    <summary>
+      Initalizes an object instance.
+    </summary>
+    <param name="grid">The Grid control.</param>
+  </ResultGridC>
+  <LoadRows1>
+    <summary>
+      Loads the grid rows from the result DbRecords records.
+    </summary>
+    <param name="dbResult">The DbResult object.</param>
+  </LoadRows1>
+  <LoadRows2>
+    <summary>
+      Loads the grid rows from the DbRecords object.
+    </summary>
+    <param name="dbRows">The DbRows object.</param>
+  </LoadRows2>
+  <RowAdd>
+    <summary>
+      Adds a grid row and updates it with the DbValues.
+    </summary><param name="record">The DbValues object.</param>
+  </RowAdd>
+  <RowUpdate>
+    <summary>
+      Updates the current row with the DbValues.
+    </summary>
+    <param name="record">The DbValues object.</param>
+  </RowUpdate>
+  <RowSetValues>
+    <summary>
+      Updates a grid row with the DbValues.
+    </summary>
+    <param name="gridRow">The grid row.</param>
+    <param name="record">The DbValues object.</param>
+  </RowSetValues>
+  <OnAddRow>
+    <summary>
+      Fires the AddRow event.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnAddRow()</para>
+    </remarks>
+  </OnAddRow>
+  <SetDisplayColumns1>
+    <summary>
+      Configure the Display Columns from the DbColumns definition.
+    </summary>
+    <param name="dbColumns">The DbColumns.</param>
+    <param name="columnNames">The display column names.</param>
+  </SetDisplayColumns1>
+  <SetDisplayColumns2>
+    <summary>
+      Configure the Display Columns from the DbRequest object definition.
+    </summary>
+    <param name="dbRequest">The DbRequest object.</param>
+    <param name="columnNames">The included columns.</param>
+  </SetDisplayColumns2>
+  <SetDisplayColumns3>
+    <summary>
+      Configure the Display Columns from the Data object properties.
+    </summary>
+    <param name="dataObject">The Data object.</param>
+    <param name="propertyNames">The included columns.</param>
+  </SetDisplayColumns3>
+  <RemoveDisplayColumn>
+    <summary>
+      Removes a display column.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </RemoveDisplayColumn>
+</items>

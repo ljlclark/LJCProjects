@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ControlValues.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates the ControlValue object from the supplied values and adds
+      the element to the collection list.
+    </summary>
+    <param name="controlName">The control name.</param>
+    <param name="left">The left value.</param>
+    <param name="top">The top value.</param>
+    <param name="width">The width value.</param>
+    <param name="height">The height value.</param>
+  </Add>
+</items>

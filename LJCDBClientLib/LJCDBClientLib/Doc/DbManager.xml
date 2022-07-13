@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DbManager.xml -->
+<items>
+  <Reset>
+    <summary>
+      Resets the data access configuration.
+    </summary>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The database table name.</param>
+  </Reset>
+</items>

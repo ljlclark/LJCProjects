@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ChangeTimer.xml -->
+<items>
+  <!-- Methods -->
+  <DoChange>
+    <summary>
+      Uses a timer to allow the list to process outstanding messages.
+    </summary>
+    <param name="changeName">The ChangeName value.</param>
+  </DoChange>
+</items>

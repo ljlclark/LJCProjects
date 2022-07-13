@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- SyntaxColors.xml -->
+<items>
+  <SyntaxColors>
+    <summary>
+      The line color settings.
+    </summary>
+  </SyntaxColors>
+  <CreateColorSettings1>
+    <summary>
+      Parallel processing a text file for the ColorSettings.
+    </summary>
+    <param name="fileSpec">The file specification</param>
+  </CreateColorSettings1>
+  <CreateColorSettings2>
+    <summary>
+      Parallel processing a string array for the ColorSettings.
+    </summary>
+    <param name="lines">The text lines array.</param>
+  </CreateColorSettings2>
+  <CreateLineColorSettings>
+    <summary>
+      Creates the ColorSettings for the specified line.
+    </summary>
+    <param name="setup">The CodeTokenizer object.</param>
+    <param name="lineText">The line text.</param>
+    <param name="lineIndex">The line index value.</param>
+  </CreateLineColorSettings>
+  <ProcessParam>
+    <summary>
+      Processes the Param token.
+    </summary>
+    <param name="lineText">The line text.</param>
+    <param name="lineIndex">The line index value.</param>
+  </ProcessParam>
+  <ProcessXmlComment>
+    <summary>
+      Processes the Summary and Returns tokens.
+    </summary>
+    <param name="tokens">The CodeTokenizer object.</param>
+    <param name="lineText">The line text.</param>
+    <param name="lineIndex">The line index value.</param>
+    <param name="beginTag">The begin delimiter value.</param>
+    <param name="endTag">The end delimiter value.</param>
+    <param name="isSummary">True if a Summary comment, otherwise false.</param>
+  </ProcessXmlComment>
+</items>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCGridRow.xml -->
+<items>
+  <!-- Public Methods -->
+  <LJCSetInt321>
+    <summary>
+      Stores an int key and int value pair.
+    </summary>
+    <param name="key">The int key.</param>
+    <param name="value">The int value.</param>
+  </LJCSetInt321>
+  <LJCSetInt322>
+    <summary>
+      Stores a string key and int value pair.
+    </summary>
+    <param name="key">The string key.</param>
+    <param name="value">The int value.</param>
+  </LJCSetInt322>
+  <LJCSetInt64>
+    <summary>
+      Stores a string key and long value pair.
+    </summary>
+    <param name="key">The string key.</param>
+    <param name="value">The long value.</param>
+  </LJCSetInt64>
+  <LJCSetString1>
+    <summary>
+      Stores a int key and string value pair.
+    </summary>
+    <param name="key">The int key.</param>
+    <param name="value">The string value.</param>
+  </LJCSetString1>
+  <LJCSetString2>
+    <summary>
+      Stores a string key and string value pair.
+    </summary>
+    <param name="key">The string key.</param>
+    <param name="value">The string value.</param>
+  </LJCSetString2>
+  <LJCGetInt321>
+    <summary>
+      Gets the stored int value using an int key.
+    </summary>
+    <param name="key">The int key.</param>
+    <returns>The stored int value.</returns>
+  </LJCGetInt321>
+  <LJCGetInt322>
+    <summary>
+      Gets the stored int value using a string key.
+    </summary>
+    <param name="key">The string key.</param>
+    <returns>The stored int value.</returns>
+  </LJCGetInt322>
+  <LJCGetInt64>
+    <summary>
+      Gets the stored long value using a string key.
+    </summary>
+    <param name="key">The string key.</param>
+    <returns>The stored long value.</returns>
+  </LJCGetInt64>
+  <LJCGetString1>
+    <summary>
+      Gets the stored string value using an int key.
+    </summary>
+    <param name="key">The int key.</param>
+    <returns>The stored string value.</returns>
+  </LJCGetString1>
+  <LJCGetString2>
+    <summary>
+      Gets the stored string value using a string key.
+    </summary>
+    <param name="key">The string key.</param>
+    <returns>The stored string value.</returns>
+  </LJCGetString2>
+  <LJCGetCellText>
+    <summary>
+      Sets the cell value.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </LJCGetCellText>
+  <LJCSetCellText>
+    <summary>
+      Sets the cell value.
+    </summary>
+    <param name="columnName">The column name.</param>
+    <param name="value">The cell value.</param>
+  </LJCSetCellText>
+</items>

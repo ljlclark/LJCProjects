@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCItemCombo.xml -->
+<items>
+  <LJCItemCombo>
+    <summary>
+      Provides custom functionality for a ComboBox control. (R)
+    </summary>
+    <remarks>
+      A simple ComboBox containing LJCItem objects.
+    </remarks>
+  </LJCItemCombo>
+
+  <!-- Methods -->
+  <LJCAddItem>
+    <summary>
+      Adds an Item to the ComboBox.
+    </summary>
+    <param name="id">The Item ID.</param>
+    <param name="text">The Item text.</param>
+    <returns>The added Item.</returns>
+  </LJCAddItem>
+  <LJCSetByItemID>
+    <summary>
+      Sets the combo SelectedIndex to the item with the specified ID value.
+    </summary>
+    <param name="id">The Item ID.</param>
+  </LJCSetByItemID>
+  <LJCSelectedItemID>
+    <summary>
+      Gets the combo SelectedItem ID.
+    </summary>
+    <returns>The Item ID.</returns>
+  </LJCSelectedItemID>
+  <LJCSelectedItemText>
+    <summary>
+      Gets the combo SelectedItem text.
+    </summary>
+    <returns>The Item text.</returns>
+  </LJCSelectedItemText>
+
+  <!-- Classes -->
+  <LJCItem>
+    <summary>
+      Represents an LJCItemCombo Item.
+    </summary>
+  </LJCItem>
+</items>

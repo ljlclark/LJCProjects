@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- IDBService.xml -->
+<items>
+  <IDbService>
+    <summary>
+      The Service Contract for performing database operations using request
+      XML messages.
+    </summary>
+  </IDbService>
+  <Execute>
+    <summary>
+      Executes the specified request XML message.
+    </summary>
+    <param name="request">The request XML message</param>
+    <returns>The database result XML message.</returns>
+  </Execute>
+</items>

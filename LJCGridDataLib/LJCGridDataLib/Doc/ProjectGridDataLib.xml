@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectGridDataLib.xml -->
+<items>
+  <ResultGrid>
+    <summary>
+      Provides DbResult helpers for an LJCDataGrid control.
+    </summary>
+    <remarks>
+      <para>
+        A List Form contains one or more List Grids for displaying a list of items.&lt;br /&gt;
+        When the data formats are known in advance, the List Form can contain data
+        methods that use strongly typed Data Objects.&lt;br /&gt;
+        Each List Grid is coded to have Row Data Methods to display and modify the
+        items in the grid.&lt;br /&gt;
+        These methods are DataRetrieve(), LoadRows(), RowAdd(), RowUpdate(),
+        SetStoredValues() and RowSelect().&lt;br /&gt;
+        The methods may be postfixed with a value that identifies the
+        grid to which it applies. E.G. DataRetrieveAddress(), RowAddAddress(), etc.&lt;br /&gt;
+        This is especially true if the form contains more than one grid.&lt;br /&gt;
+      </para>
+      <para>
+        The ResultGrid class is designed to allow for display of data items when the
+        data formats are not known in advance.&lt;br /&gt;
+        It provides methods for displaying data directly from the DbResult values.
+      </para>
+      <para>
+        &lt;b&gt;The Row Data Methods&lt;/b&gt;&lt;br /&gt;
+        There are methods for managing rows and row data using DbColumn values.&lt;br /&gt;
+        These methods are LoadRows() with 2 overrides, RowAdd(), RowUpdate()
+        and RowSetValues().&lt;br /&gt;
+      </para>
+      <para>
+        &lt;b&gt;The Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
+        This class has methods for the contained grid configuration.&lt;br /&gt;
+        These methods are GetDisplayColumns(), SetDisplayColumns() with 3 overrides
+        and RemoveDisplayColumn().&lt;br /&gt;
+      </para>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides DbResult helpers for an LJCDataGrid control.
+      </para>
+    </remarks>
+  </ResultGrid>
+</items>

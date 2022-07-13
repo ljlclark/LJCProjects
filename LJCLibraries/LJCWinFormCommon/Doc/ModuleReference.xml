@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ModuleReference.xml -->
+<items>
+  <!-- Public Methods -->
+  <GetAssembly>
+    <summary>
+      Retrieves the Assembly reference.
+    </summary>
+    <returns>The Assembly reference.</returns>
+  </GetAssembly>
+  <GetControlType>
+    <summary>
+      Retrieves the ControlType reference.
+    </summary>
+    <returns>The Type reference.</returns>
+  </GetControlType>
+  <GetControlInstance>
+    <summary>
+      Retrieves the ConrolInstance reference.
+    </summary>
+    <returns>The control Object instance.</returns>
+  </GetControlInstance>
+  <GetInitMethodInfo>
+    <summary>
+      Retrieves the LJCInit() MethodInfo reference.
+    </summary>
+    <returns>The MethodInfo reference.</returns>
+  </GetInitMethodInfo>
+  <GetTabsMethodInfo>
+    <summary>
+      Retrieves the LJCTabs() MethodInfo reference.
+    </summary>
+    <returns>The MethodInfo reference.</returns>
+  </GetTabsMethodInfo>
+  <GetTabControl>
+    <summary>
+      Retrieves the TabControl reference.
+    </summary>
+    <returns>The TabControl reference.</returns>
+  </GetTabControl>
+  <GetEventInfo>
+    <summary>
+      Retrieves the PageClose event info.
+    </summary>
+    <returns>The PageClose EventInfo reference.</returns>
+  </GetEventInfo>
+  <SetPageCloseEventHandler>
+    <summary>
+      Adds the Module_PageClose event handler to the module PageClose event.
+    </summary>
+    <param name="parentForm">The parent form object.</param>
+  </SetPageCloseEventHandler>
+</items>

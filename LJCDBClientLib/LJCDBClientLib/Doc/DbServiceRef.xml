@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DbServiceRef.xml -->
+<items>
+  <DbServiceRef>
+    <summary>
+      Contains the
+      &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt;,
+      local &lt;span class="userType"&gt;DbService&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbServiceClient&lt;/span&gt;
+      proxy references.
+    </summary>
+  </DbServiceRef>
+  <DbDataAccess>
+    <summary>
+      Gets or sets the
+      &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt;
+      reference.
+    </summary>
+  </DbDataAccess>
+  <DbService>
+    <summary>
+      Gets or sets the
+      &lt;span class="userType"&gt;DbService&lt;/span&gt;
+      reference.
+    </summary>
+  </DbService>
+  <DbServiceClient>
+    <summary>
+      Gets or sets the
+      &lt;span class="userType"&gt;DbServiceClient&lt;/span&gt;
+      proxy reference.
+    </summary>
+  </DbServiceClient>
+</items>

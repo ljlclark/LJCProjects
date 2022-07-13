@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCTabPanel.xml -->
+<items>
+  <!-- Control Event Overrides -->
+  <OnDragOver>
+    <summary>
+      The DragOver event method override.
+    </summary>
+    <param name="drgevent">The drag event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnDragOver(DragEventArgs drgevent)
+      </para>
+    </remarks>
+  </OnDragOver>
+  <OnAddTile>
+    <summary>
+      The AddTile event method.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnAddTile()</para>
+    </remarks>
+  </OnAddTile>
+  <OnRemoveTile>
+    <summary>
+      The remove tile event method.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnRemoveTile()</para>
+    </remarks>
+  </OnRemoveTile>
+</items>

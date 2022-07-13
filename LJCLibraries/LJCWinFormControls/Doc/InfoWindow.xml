@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- InfoWindow.xml -->
+<items>
+  <OnClosing>
+    <summary>
+      Handles the dialog closing.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnClosing(CancelEventArgs e)
+      </para>
+    </remarks>
+  </OnClosing>
+  <OnClose>
+    <summary>
+      Fires the OnClose event.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnClose()</para>
+    </remarks>
+  </OnClose>
+</items>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- TableGrid.xml -->
+<items>
+  <GetIncludedColumns>
+    <summary>
+      Get the Display Columns from the DataColumns definition.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="columnNames">The display column names.</param>
+    <returns>The DisplayColumns object.</returns>
+  </GetIncludedColumns>
+  <GetDbColumns>
+    <summary>
+      Creates a DbColumns collection from a DataColumns collection.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <returns>The DbColumns collection.</returns>
+  </GetDbColumns>
+  <GetDbColumn>
+    <summary>
+      Creates a DbColumn object from a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The DbColumn object.</returns>
+  </GetDbColumn>
+  <GetColumnNames>
+    <summary>
+      Creates a ColumnNames list from a DataColumns collection.
+    </summary>
+    <param name="dataColumns">The DataColumn collection.</param>
+    <returns>The ColumnNames list.</returns>
+  </GetColumnNames>
+  <CreateDataColumns>
+    <summary>
+      Creates a new DataColumns object.
+    </summary>
+    <returns>The new DataColumns object.</returns>
+  </CreateDataColumns>
+  <DataColumnsClone>
+    <summary>
+      Clones a DataColumn collection.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <returns>The cloned DataColumnCollection object.</returns>
+  </DataColumnsClone>
+  <DataColumnClone>
+    <summary>
+      Clones a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The cloned DataColumn object.</returns>
+  </DataColumnClone>
+  <TableGridC>
+    <summary>
+      Initalizes an object instance.
+    </summary>
+    <param name="grid">The Grid control.</param>
+  </TableGridC>
+  <LoadRows>
+    <summary>
+      Loads the grid rows from the DataRows collection.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+  </LoadRows>
+  <RowAdd>
+    <summary>
+      Adds a grid row and updates it with the DataRow values.
+    </summary>
+    <param name="dataRow">The DataRow object.</param>
+    <returns>The added Grid row object.</returns>
+  </RowAdd>
+  <RowUpdate>
+    <summary>
+      Updates the current row with the DataRow values.
+    </summary>
+    <param name="dataRow">The DataRow object.</param>
+  </RowUpdate>
+  <RowSetValues>
+    <summary>
+      Updates a grid row with the DataRow values.
+    </summary>
+    <param name="gridRow">The Grid row object.</param>
+    <param name="dataRow">The DataRow object.</param>
+  </RowSetValues>
+  <SetDisplayColumns1>
+    <summary>
+      Sets the Display Columns from the DataColumns object.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="columnNames">The display column names.</param>
+  </SetDisplayColumns1>
+  <SetDisplayColumns2>
+    <summary>
+      Sets the Display Columns from the DataObject properties.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="dataObject">The DataObject reference.</param>
+    <param name="propertyNames">The Property Names.</param>
+  </SetDisplayColumns2>
+  <RemoveDisplayColumn>
+    <summary>
+      Removes a display column.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </RemoveDisplayColumn>
+</items>

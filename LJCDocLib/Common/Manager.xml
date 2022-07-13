@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- /// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/> -->
+<items>
+  <!-- Constructors -->
+  <ObjectManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+  </ObjectManagerC>
+  <DataManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <param name="schemaName">The schema name.</param>
+  </DataManagerC>
+
+  <!-- Retrieve/Load Methods -->
+  <Delete>
+    <summary>
+      Deletes a Data Record with the specified ID.
+    </summary>
+    <param name="keyColumns">The key Data Object.</param>
+    <param name="filters">The filter values.</param>
+    <remarks>
+    </remarks>
+  </Delete>
+  <DeleteWithID>
+    <summary>
+      Deletes a Data Record with the supplied value.
+    </summary>
+    <param name="id">The ID value.</param>
+    <returns>The Data Object.</returns>
+  </DeleteWithID>
+  <Add>
+    <summary>
+      Adds a Data Record to the database.
+    </summary>
+    <param name="dataObject">The data record.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object with the DB assigned key values.</returns>
+  </Add>
+  <Load>
+    <summary>
+      Retrieves a collection of Data Records.
+    </summary>
+    <param name="keyColumns">The record containing the key field values.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The Data Object collection.</returns>
+  </Load>
+  <LoadByDescription>
+    <summary>
+      Loads a collection of data records ordered by Description.
+    </summary>
+    <param name="keyColumns">The record containing the key field values.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The collection of data records.</returns>
+  </LoadByDescription>
+  <LoadWithID>
+    <summary>
+      Loads a collection of Data Records with the supplied value.
+    </summary>
+    <param name="id">The ID value.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The collection of Data Objects.</returns>
+  </LoadWithID>
+  <LoadWithParentID>
+    <summary>
+      Loads a collection of Data Records with the supplied value.
+    </summary>
+    <param name="parentID">The Reference ID value.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The collection of Data Objects.</returns>
+  </LoadWithParentID>
+  <LoadWithJoins>
+    <summary>
+      Retrieves a collection of Data Records.
+    </summary>
+    <param name="keyColumns">The record containing the key field values.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The collection of Data Objects.</returns>
+  </LoadWithJoins>
+  <Retrieve>
+    <summary>
+      Retrieves a Data Record from the database.
+    </summary>
+    <param name="keyColumns">The key record object.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The Data Object.</returns>
+  </Retrieve>
+  <RetrieveWithCode>
+    <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary>
+    <param name="code">The Code value.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithCode>
+  <RetrieveWithID>
+    <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary>
+    <param name="id">The ID value.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithID>
+  <RetrieveWithIDs>
+    <summary>
+      Retrieves a Data Record with the supplied values.
+    </summary>
+    <param name="parentID"></param>
+    <param name="childID"></param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithIDs>
+  <RetrieveWithName>
+    <summary>
+      Retrieves a Data Record with the supplied name value.
+    </summary>
+    <param name="name">The Name value.</param>
+    <param name="propertyNames">The included column property names.</param>
+    <returns>The retrieved record object.</returns>
+  </RetrieveWithName>
+  <Update>
+    <summary>
+      Updates the Data Record.
+    </summary>
+    <param name="dataObject">The data record.</param>
+    <param name="keyColumns">The key record object.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="filters">The filter values.</param>
+  </Update>
+  
+  <!-- GetKey Methods -->
+  <GetIDKey>
+    <summary>
+      Gets the ID key record.
+    </summary>
+    <param name="id">The ID value.</param>
+    <returns>The ID key record.</returns>
+  </GetIDKey>
+  <GetIDKeys>
+    <summary>
+      Gets the ID keys record.
+    </summary>
+    <param name="parentID">The ParentID value.</param>
+    <param name="childID">The ChildID value.</param>
+    <returns>The ID keys Object.</returns>
+  </GetIDKeys>
+  <GetCodeKey>
+    <summary>
+      Gets the Code keys record.
+    </summary>
+    <param name="code">The Code value.</param>
+    <returns>The Cdoe keys Object.</returns>
+  </GetCodeKey>
+  <GetNameKey>
+    <summary>
+      Gets the Name keys record.      
+    </summary>
+    <param name="name">The Name value.</param>
+    <returns>The Name keys Object.</returns>
+  </GetNameKey>
+  <GetParentIDKey>
+    <summary>
+      Gets the Parent ID key record.
+    </summary>
+    <param name="id">The Parent ID value.</param>
+    <returns>The Parent ID key record.</returns>
+  </GetParentIDKey>
+  
+  <!-- KeyItem Methods -->
+  <DataColumns>
+    <summary>
+      Creates the DataColumns object.
+    </summary>
+    <returns>The DataColumns object.</returns>
+  </DataColumns>
+  <GetKeyItem>
+    <summary>
+      Creates the KeyItem object.
+    </summary>
+    <param name="propertyName">The record Property name.</param>"
+    <param name="id">The ID value.</param>
+    <returns>The KeyItem object.</returns>
+  </GetKeyItem>
+  <GetKeyItems>
+    <summary>
+      Creates the KeyItems collection.
+    </summary>
+    <param name="propertyName">The record Property name.</param>
+    <param name="keyColumns">The Key object.</param>
+    <returns>The KeyItems collection.</returns>
+  </GetKeyItems>
+  
+  <!-- Joins -->
+  <GetLoadJoins>
+    <summary>
+      Creates and returns the Load Joins object.
+    </summary>
+    <returns>The DBJoins object.</returns>
+  </GetLoadJoins>
+  
+  <!-- Filters -->
+  <GetLoadFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <returns>The DbFilters object.</returns>
+  </GetLoadFilters>
+  
+  <!-- OrderBys -->
+  <SetOrderBy>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderBy>
+  
+  <!-- Other Public Methods -->
+  <IsDuplicate>
+    <summary>
+      Check for duplicate unique key.
+    </summary>
+    <param name="lookupRecord">The Lookup object.</param>
+    <param name="currentRecord">The Current object</param>
+    <param name="isUpdate">The Update flag.</param>
+    <returns>True if duplicates, otherwise false.</returns>
+  </IsDuplicate>
+</items>

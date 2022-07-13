@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCPanelManager.xml -->
+<items>
+  <LJCPanelManagerC>
+    <summary>
+      Initializes an instance of the class.
+    </summary>
+    <param name="split">The splitter control.</param>
+    <param name="mainTabs">The main tab control.</param>
+    <param name="tileTabs">The tiled tab control.</param>
+  </LJCPanelManagerC>
+</items>

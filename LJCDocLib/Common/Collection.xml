@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
-<!-- <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/> -->
+<!-- <include path='items/Collection/*' file='../../LJCDocLib/Common/Collection.xml'/> -->
 <items>
   <Collection>
     <summary>

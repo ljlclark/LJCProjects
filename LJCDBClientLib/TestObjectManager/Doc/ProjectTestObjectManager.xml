@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectTestObjectManager.xml -->
+<items>
+  <summary>
+    A program to test the DataObject class.
+  </summary>
+  <remarks>
+    <para>-- Project Level Remarks</para>
+    <para>
+      The TestObjectManager program is part of the LJC.DBClientLib
+      solution.
+    </para>
+  </remarks>
+</items>

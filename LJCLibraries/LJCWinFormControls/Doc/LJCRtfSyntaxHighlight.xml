@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCRtfSyntaxHighlight.xml -->
+<items>
+  <LJCRtfSyntaxHighlight>
+    <summary>
+    </summary>
+  </LJCRtfSyntaxHighlight>
+  <LJCRtfSyntaxHighlightC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    /// <param name="ljcRtfControl">The RTF control reference.</param>
+  </LJCRtfSyntaxHighlightC>
+  <FormatSyntax>
+    <summary>
+      Formats the Control text with syntax highlighting.
+    </summary>
+  </FormatSyntax>
+  <AddSyntaxHighlight>
+    <summary>
+      Adds the syntax highighting to the line.
+    </summary>
+    <param name="lineText">The line text.</param>
+    <param name="lineIndex">the line index value.</param>
+  </AddSyntaxHighlight>
+</items>
