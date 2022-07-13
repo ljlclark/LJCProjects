@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <MySqlDataAccessC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="connectionString">The connection string.</param>
+  </MySqlDataAccessC>
+  <ExecuteNonQuery>
+    <summary>
+      Executes an Insert, Update or Delete statement.
+    </summary>
+    <param name="sql">The non-query SQL statement.</param>
+    <returns>The affected record count.</returns>
+  </ExecuteNonQuery>
+  <ExecuteScript>
+    <summary>
+      Executes a DB script file.
+    </summary>
+    <param name="scriptFileSpec">The script file specification.</param>
+  </ExecuteScript>
+  <ExecuteScriptText>
+    <summary>
+      Executes a DB script text string.
+    </summary>
+    <param name="scriptText">The script text.</param>
+  </ExecuteScriptText>
+  <FillDataTable>
+    <summary>
+      Executes a Select statement and fills the specified
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <param name="dataTable">
+      The &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.</param>
+  </FillDataTable>
+  <GetDataReader>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;MySqlDataReader&lt;/span&gt;
+      object.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;MySqlDataReader&lt;/span&gt;
+      object.</returns>
+    <remarks>
+      <para>
+        Syntax: public MySqlDataReader GetDataReader(string sql)
+      </para>
+    </remarks>
+  </GetDataReader>
+  <GetDataSet>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DataSet&lt;/span&gt; object.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataSet&lt;/span&gt;
+      object.</returns>
+  </GetDataSet>
+  <GetDataTable>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.</returns>
+  </GetDataTable>
+  <GetDataTableFromReader>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt; object.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.</returns>
+  </GetDataTableFromReader>
+  <GetProcedureDataTable>
+    <summary>
+      Executes a Stored Procedure and retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </summary>
+    <param name="procedureName">The procedure name.</param>
+    <param name="parameters">The procedure parameters.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.</returns>
+  </GetProcedureDataTable>
+  <GetSchemaOnly>
+    <summary>
+      Retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object with schema only.
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>A reference to the
+    &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+    object.</returns>
+  </GetSchemaOnly>
+</items>

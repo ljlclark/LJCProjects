@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DataAccessC>
+    <summary>
+      Initializes an object instance with the provided values.
+    </summary>
+    <param name="connectionString">The database connection string.</param>
+    <param name="providerName">The data access provider name.</param>
+  </DataAccessC>
+  <!-- Public Provider Methods -->
+  <CloseConnection>
+    <summary>
+      Closes the database connection.
+    </summary>
+  </CloseConnection>
+  <ExecuteNonQuery>
+    <summary>
+      Executes an Insert, Update or Delete statement.
+      (E)
+    </summary>
+    <param name="sql">The non-query SQL statement.</param>
+    <returns>The affected record count.</returns>
+    <example>
+      <code>
+        // Executes an Insert, Update or Delete statement.
+        private static void ExecuteNonQuery(DataAccess dataAccess)
+        {
+          string sql = "delete from TableName where ID = 5";
+
+          int affectedRecords = dataAccess.ExecuteNonQuery(sql);
+        }
+      </code>
+    </example>
+  </ExecuteNonQuery>
+  <ExecuteScript>
+    <summary>
+      Executes a DB script file.
+      (E)
+    </summary>
+    <param name="scriptFileSpec">The script file specification.</param>
+    <example>
+      <code>
+        // Executes a DB script file.
+        private static void ExecuteScript(DataAccess dataAccess)
+        {
+          // Create a DB Script file.
+          StringBuilder builder = new StringBuilder(64);
+          builder.AppendLine("insert into TestTable values('Name1');");
+          builder.AppendLine("go");
+          builder.AppendLine("delete from TestTable where Name = 'Name1';");
+          builder.AppendLine("go");
+          string scriptText = builder.ToString();
+          File.WriteAllText("TestScript.sql", scriptText);
+
+          dataAccess.ExecuteScript("TestScript.sql");
+        }
+      </code>
+    </example>
+  </ExecuteScript>
+  <ExecuteScriptText>
+    <summary>
+      Executes a DB script text string.
+      (E)
+    </summary>
+    <param name="scriptText">The script text.</param>
+    <example>
+      <code>
+        // Executes a DB Script text string.
+        private static void ExecuteScriptText(DataAccess dataAccess)
+        {
+          // Create a DB Script string.
+          StringBuilder builder = new StringBuilder(64);
+          builder.AppendLine("insert into TestTable values('Name1');");
+          builder.AppendLine("go");
+          builder.AppendLine("delete from TestTable where Name = 'Name1';");
+          builder.AppendLine("go");
+          string scriptText = builder.ToString();
+
+          dataAccess.ExecuteScriptText(scriptText);
+        }
+      </code>
+    </example>
+  </ExecuteScriptText>
+  <FillDataTable>
+    <summary>
+      Executes a Select statement and fills the specified
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;.
+      (E)
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="dataTable">
+      The &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </param>
+    <param name="tableMapping">The table map collection.</param>
+    <remarks>
+      <para>
+        This method is useful for populating standard
+        &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+        objects and strongly typed DataTable objects.
+      </para>
+    </remarks>
+    <example>
+      <code>
+        // Executes a Select statement and fills the specified DataTable.
+        private static void FillDataTable(DataAccess dataAccess)
+        {
+          string sql = "select * from TableName";
+          DataTable dataTable = new DataTable();
+
+          dataAccess.FillDataTable(sql, dataTable);
+          if (dataTable != null)
+          {
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+              for (int index = 0; index &lt; dataTable.Columns.Count; index++)
+              {
+                string value = dataRow[index].ToString();
+              }
+            }
+          }
+        }
+      </code>
+    </example>
+  </FillDataTable>
+  <GetDataReader>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DbDataReader&lt;/span&gt;
+      object.
+      (E)
+    </summary>
+    <param name="sql">The SQL command text.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DbDataReader&lt;/span&gt;
+      object.
+    </returns>
+    <remarks>
+      It is the calling programs responsibility to close the connection
+      when done.
+    </remarks>
+    <example>
+      <code>
+        // Executes a Select statement and retrieves the DbDataReader object.
+        private static void GetDataReader(DataAccess dataAccess)
+        {
+          DbDataReader dbDataReader = null;
+
+          string sql = "select * from TableName";
+          try
+          {
+            // The "using" statement disposes the object when the scope is exited.
+            using (dbDataReader = dataAccess.GetDataReader(sql))
+            {
+              while (dbDataReader.Read())
+              {
+                // Use the record here.
+                for (int index = 0; index &lt; dbDataReader.FieldCount; index++)
+                {
+                  string value = dbDataReader[index].ToString();
+                }
+              }
+            }
+          }
+          finally
+          {
+            // The calling program must close the connection when done.
+            dataAccess.CloseConnection();
+          }
+        }
+      </code>
+    </example>
+  </GetDataReader>
+  <GetDataSet>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DataSet&lt;/span&gt;
+      object.
+      (E)
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataSet&lt;/span&gt;
+      object.
+    </returns>
+    <example>
+      <code>
+        // Executes a Select statement and retrieves the DataSet object.
+        private static void GetDataSet(DataAccess dataAccess)
+        {
+          string sql = "select * from firstTable; select * from secondTable";
+
+          // Create table map collection.
+          TableMapping tableMapping = new TableMapping();
+          tableMapping.AddTableMap("FirstTable");
+          tableMapping.AddColumnMap("FirstTable", "OriginalName", "NewName");
+          tableMapping.AddTableMap("SecondTable");
+          tableMapping.AddColumnMap("SecondTable", "OriginalName", "NewName");
+
+          var dataSet = dataAccess.GetDataSet(sql, tableMapping.TableMaps);
+          if (dataSet != null)
+          {
+            var dataTable = dataSet.Tables["FirstTable"];
+            if (dataTable != null)
+            {
+              foreach (DataRow dataRow in dataTable.Rows)
+              {
+                for (int index = 0; index &lt; dataTable.Columns.Count; index++)
+                {
+                  string value = dataRow[index].ToString();
+                }
+              }
+            }
+
+            dataTable = dataSet.Tables["SecondTable"];
+            if (dataTable != null)
+            {
+              foreach (DataRow dataRow in dataTable.Rows)
+              {
+                for (int index = 0; index &lt; dataTable.Columns.Count; index++)
+                {
+                  string value = dataRow[index].ToString();
+                }
+              }
+            }
+          }
+        }
+      </code>
+    </example>
+  </GetDataSet>
+  <GetDataTable>
+    <summary>
+      Executes a Select statement and retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+      (E)
+    </summary>
+    <param name="sql">The Select SQL statement.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </returns>
+    <example>
+      <code>
+        // Executes a Select statement and retrieves the DataTable object.
+        private static void GetDataTable(DataAccess dataAccess)
+        {
+          string sql = "select * from TableName";
+
+          DataTable dataTable = dataAccess.GetDataTable(sql);
+          if (dataTable != null)
+          {
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+              for (int index = 0; index &lt; dataTable.Columns.Count; index++)
+              {
+                string value = dataRow[index].ToString();
+              }
+            }
+          }
+        }
+      </code>
+    </example>
+  </GetDataTable>
+  <GetProcedureDataTable>
+    <summary>
+      Executes a Stored Procedure and retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+      (E)
+    </summary>
+    <param name="procedureName">The procedure name.</param>
+    <param name="parameters">The procedure parameters.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </returns>
+    <example>
+      <code>
+        // Executes a Select statement and retrieves the DataTable object.
+        private static void GetProcedureDataTable(DataAccess dataAccess)
+        {
+          // Add(string parameterName, SqlDbType sqlDbType, int size
+          //   , object value = null, ParameterDirection direction = ParameterDirection.Input)
+          var parameters = new ProcedureParameters()
+          {
+            { "@ID", SqlDbType.Int, 0, 8 }
+          };
+
+          string procedureName = "dbo.sp_RetrieveByID";
+
+          var dataTable = dataAccess.GetProcedureDataTable(procedureName
+            , parameters);
+          if (dataTable != null)
+          {
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+              for (int index = 0; index &lt; dataTable.Columns.Count; index++)
+              {
+                string value = dataRow[index].ToString();
+              }
+            }
+          }
+        }
+      </code>
+    </example>
+  </GetProcedureDataTable>
+  <GetSchemaOnly>
+    <summary>
+      Retrieves the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object with schema only.
+      (E)
+    </summary>
+    <param name="sql">The SQL command text.</param>
+    <param name="tableMapping">The table map collection.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      object.
+    </returns>
+    <example>
+      <code>
+        // Retrieves the DataTable object with schema only.
+        private static void GetSchemaOnly(DataAccess dataAccess)
+        {
+          string sql = "select * from TableName";
+
+          var dataTable = dataAccess.GetSchemaOnly(sql);
+          if (dataTable != null)
+          {
+            foreach (DataColumn dataColumn in dataTable.Columns)
+            {
+              string value = dataColumn.ColumnName;
+            }
+          }
+        }
+      </code>
+    </example>
+  </GetSchemaOnly>
+  <!-- Properties -->
+  <ProviderFactory>
+    <summary>
+      Gets a reference to the
+      &lt;span class="userType"&gt;LJCProviderFactory&lt;/span&gt;
+      object.
+    </summary>
+  </ProviderFactory>
+</items>

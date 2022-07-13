@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <LJCCrypto>
+    <summary>
+      Data access encryption.
+    </summary>
+  </LJCCrypto>
+  <GetIsAdministrator>
+    <summary>
+      Retrieves the administrator flag.
+    </summary>
+    <param name="password">The user password.</param>
+  </GetIsAdministrator>
+  <Encrypt>
+    <summary>
+      Encrypt the user information.
+    </summary>
+    <returns>The encrypted string.</returns>
+  </Encrypt>
+  <Decrypt>
+    <summary>
+      Decrypts the user information.
+    </summary>
+    <param name="value">The encrypted string.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </Decrypt>
+</items>

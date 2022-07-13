@@ -21,4 +21,18 @@ echo ----------------- %counter% - LJCTextDataReader ----------- >> Build.txt
 echo LJCTextDataReader >> Build.txt
 call LJCTextDataReader\UpdateTextDataReader.cmd BuildAll >> Build.txt
 msbuild LJCTextDataReader\LJCTextDataReader.sln
+
+set /a counter+=1
+echo on
+echo ----------------- %counter% - LJCDataAccessConfig --------- >> Build.txt
+echo LJCDataAccessConfig >> Build.txt
+call LJCDataAccessConfig\UpdateDataAccessConfig.cmd BuildAll >> Build.txt
+msbuild LJCDataAccessConfig\LJCDataAccessConfig.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDataAccess---------------- >> Build.txt
+echo LJCDataAccess >> Build.txt
+call LJCDataAccess\UpdateDataAccess.cmd BuildAll >> Build.txt
+msbuild LJCDataAccess\LJCDataAccess.sln
 pause

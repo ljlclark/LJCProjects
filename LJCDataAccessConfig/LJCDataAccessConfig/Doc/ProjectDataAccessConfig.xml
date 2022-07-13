@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DataConfig>
+    <summary>
+      Represents a data location configuration.
+      (R)
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The Data Access Configuration library contains classes for deserializing a
+        configuration file and looking up the configuration values.
+      </para>
+    </remarks>
+  </DataConfig>
+</items>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DataCommon>
+    <summary>
+      Provides common data methods.
+    </summary>
+    <remarks>
+      <para>
+        The Data Common class contains static data helper methods.
+      </para>
+    </remarks>
+  </DataCommon>
+  <!-- Data Access Methods -->
+  <GetConnectionType>
+    <summary>
+      Retrieves the database connection
+      &lt;span class="userType"&gt;DatabaseType&lt;/span&gt;
+      value.
+    </summary>
+    <param name="connectionTypeName">The database connection type string.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DatabaseType&lt;/span&gt;
+      value.</returns>
+  </GetConnectionType>
+  <SetTableMapping>
+    <summary>
+      Sets the data adapter table mappings.
+    </summary>
+    <param name="dataAdapter">
+      The &lt;span class="userType"&gt;DataAdaptor&lt;/span&gt;
+      object.</param>
+    <param name="tableMapping">
+      The &lt;span class="userType"&gt;TableMapping&lt;/span&gt;
+      collection.</param>
+  </SetTableMapping>
+  <SetTableMappingMySql>
+    <summary>
+      Sets the data adapter table mappings.
+    </summary>
+    <param name="dataAdapter">
+      The &lt;span class="userType"&gt;DataAdaptor&lt;/span&gt;
+      object.</param>
+    <param name="tableMapping">
+      The &lt;span class="userType"&gt;TableMapping&lt;/span&gt;
+      collection.</param>
+  </SetTableMappingMySql>
+  <!-- Data Conversion Methods -->
+  <GetDbDate>
+    <summary>
+      Converts the date string to a DateTime value.
+    </summary>
+    <param name="dateText">The date/time string.</param>
+    <param name="connectionType">The database connection type.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DataTime&lt;/span&gt;
+      value or MinValue if empty.</returns>
+  </GetDbDate>
+  <GetDbDateString>
+    <summary>
+      Formats the
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value to a date string in database format.
+    </summary>
+    <param name="dateTime">
+      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value.</param>
+    <param name="dbType">The database connection type.</param>
+    <returns>The Date string.</returns>
+  </GetDbDateString>
+  <GetDbDateTimeString>
+    <summary>
+      Formats the
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value to a date/time string in database format.
+    </summary>
+    <param name="dateTime">
+      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value.</param>
+    <returns>The date/time string.</returns>
+  </GetDbDateTimeString>
+  <GetMinDateTime>
+    <summary>
+      Get the minimum date/time value.
+    </summary>
+    <param name="connectionType">The database connection type.</param>
+    <returns>The minimum date/time value.</returns>
+  </GetMinDateTime>
+  <GetMinUIDateTimeString>
+    <summary>
+      Get the minimum date/time string formatted for display.
+    </summary>
+    <param name="connectionType">The database connection type.</param>
+    <returns>The minimum value in display format.</returns>
+  </GetMinUIDateTimeString>
+  <GetUIDateString>
+    <summary>
+      Format the date value for display.
+    </summary>
+    <param name="dateTime">The date/time value.</param>
+    <returns>The date only string or null if not > MinValue.</returns>
+  </GetUIDateString>
+  <GetUIDateTimeString>
+    <summary>
+      Format the date/time value for display.
+    </summary>
+    <param name="dateTime">The date/time value.</param>
+    <returns>The date and time string or null if not >  MinValue.</returns>
+  </GetUIDateTimeString>
+  <GetUITimeString>
+    <summary>
+      Format the date/time to time for display.
+    </summary>
+    <param name="dateTime">The date/time value.</param>
+    <returns>The time string or null if not > MinValue.</returns>
+  </GetUITimeString>
+  <IsDbMinDate>
+    <summary>
+      Checks for DB Minimum date or less.
+    </summary>
+    <param name="dateTime">
+      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value.</param>
+    <returns>True if minimum otherwise false.</returns>
+  </IsDbMinDate>
+</items>

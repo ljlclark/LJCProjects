@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <ConnectionTemplates>
+    <summary>
+      Represents a collection of Connection string templates.
+    </summary>
+  </ConnectionTemplates>
+  <ConnectionTemplatesC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </ConnectionTemplatesC>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided valus.
+    </summary>
+    <param name="name">The template configuration name.</param>
+    <param name="template">The connection string template.</param>
+    <returns></returns>
+  </Add>
+  <LJCLoadData>
+    <summary>
+      Retrieves the connection template data.
+    </summary>
+		<example>
+			<code>
+				using LJCDataAccessConfig;
+
+				ConnectionTemplates templates = new ConnectionTemplates();
+				templates.LJCLoadData();
+			</code>
+		</example>
+	</LJCLoadData>
+  <LJCGetByName>
+    <summary>
+      Retrieve the data configuration.
+    </summary>
+    <param name="name">The connection template configuration name.</param>
+		<example>
+			<code>
+				using LJCDataAccessConfig;
+
+				ConnectionTemplates templates = new ConnectionTemplates();
+				templates.LJCLoadData();
+				ConnectionTemplate template = templates.LJCGetByName("SQLServer");
+			</code>
+		</example>
+	</LJCGetByName>
+  <LJCSave>
+    <summary>
+      Saves the config data.
+    </summary>
+  </LJCSave>
+</items>

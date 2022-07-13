@@ -1,0 +1,149 @@
+----------------- 1 - LJCNetCommon --------------- 
+LJC.Net.Common 
+- 
+----------------- 2 - LJCCodeLineCounter ---------- 
+LJCCodeLineCounter 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCCodeLineCounter\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCCodeLineCounter\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCCodeLineCounter\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ------------------------------------ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
+- 
+----------------- 3 - LJCTextDataReader ----------- 
+LJCTextDataReader 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCTextDataReader\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCTextDataReader\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCTextDataReader\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ----------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCTextDataReader\LJCTextDataReader\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
+----------------- 4 - LJCDataAccessConfig --------- 
+LJCDataAccessConfig 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCDataAccessConfig\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDataAccessConfig\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCDataAccessConfig\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ------------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
+- 
+----------------- 5 - LJCDataAccess---------------- 
+LJCDataAccess 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCDataAccess\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDataAccess\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll LJCDataAccess\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCDataAccess\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy MySql.Data.dll LJCDataAccess\External 
+The system cannot find the file specified.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDataAccess\LJCDataAccess\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
