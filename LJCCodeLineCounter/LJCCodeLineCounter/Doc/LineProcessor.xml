@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <ProcessFolder>
+    <summary>
+      Processes the files and sub-folders in this folder.
+    </summary>
+    <param name="folderPath">The folder name.</param>
+    <param name="folderPathName">The folder path.</param>
+    <param name="pattern">The file selection pattern.</param>
+    <param name="totalLineCount">The total line count.</param>
+  </ProcessFolder>
+</items>

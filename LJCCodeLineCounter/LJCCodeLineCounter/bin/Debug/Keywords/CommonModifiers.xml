@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<CommonModifiers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>override</string>
+  <string>private</string>
+  <string>protected</string>
+  <string>public</string>
+  <string>static</string>
+</CommonModifiers>

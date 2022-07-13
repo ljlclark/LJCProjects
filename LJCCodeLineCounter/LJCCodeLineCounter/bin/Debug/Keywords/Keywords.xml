@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>as</string>
+  <string>catch</string>
+  <string>continue</string>
+  <string>default</string>
+  <string>do</string>
+  <string>finally</string>
+  <string>is</string>
+  <string>out</string>
+  <string>ref</string>
+  <string>this</string>
+  <string>throw</string>
+  <string>try</string>
+  <string>typeof</string>
+</Keywords>

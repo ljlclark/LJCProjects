@@ -10,6 +10,13 @@ msbuild LJCNetCommon\LJCNetCommon.sln
 
 set /a counter+=1
 echo - >> Build.txt
+echo ----------------- %counter% - LJCCodeLineCounter ---------- >> Build.txt
+echo LJCCodeLineCounter >> Build.txt
+call LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll >> Build.txt
+msbuild LJCCodeLineCounter\LJCCodeLineCounter.sln
+
+set /a counter+=1
+echo - >> Build.txt
 echo ----------------- %counter% - LJCTextDataReader ----------- >> Build.txt
 echo LJCTextDataReader >> Build.txt
 call LJCTextDataReader\UpdateTextDataReader.cmd BuildAll >> Build.txt
