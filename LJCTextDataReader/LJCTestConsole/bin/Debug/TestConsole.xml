@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestConsole</name>
+    </assembly>
+    <members>
+        <member name="T:TestConsole.Program">
+            <summary>
+            
+            </summary>
+            <remarks>
+            <para>
+            Syntax: public class Program
+            </para>
+            </remarks>
+        </member>
+        <member name="M:TestConsole.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <remarks>
+            <para>
+            Syntax: private static void Main(string[] args)
+            </para>
+            </remarks>
+        </member>
+        <member name="M:TestConsole.Program.GetByFieldName(LJC.TextDataReader.TextDataReader)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <remarks>
+            <para>
+            Syntax: private static void GetByFieldName(TextDataReader reader)
+            </para>
+            </remarks>
+        </member>
+        <member name="M:TestConsole.Program.Load">
+            <summary>
+            
+            </summary>
+            <remarks>
+            <para>
+            Syntax: public static void Load()
+            </para>
+            </remarks>
+        </member>
+    </members>
+</doc>

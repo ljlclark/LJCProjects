@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <LineOffset>
+    <summary>
+      Represents the file character offset for a text line.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The LJCTextDataReaderLib library contains classes for reading data from
+        text files.
+      </para>
+      <para>
+        The main class is TextDataReader.
+      </para>
+      <para>
+        The LJCTextDataReaderLib project is part of the LJCTextDataReader solution.
+      </para>
+    </remarks>
+  </LineOffset>
+</items>

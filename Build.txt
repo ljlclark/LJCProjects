@@ -1,0 +1,37 @@
+----------------- 1 - LJCNetCommon --------------- 
+LJC.Net.Common 
+- 
+----------------- 2 - LJCTextDataReader ----------- 
+LJCTextDataReader 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCTextDataReader\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCTextDataReader\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCTextDataReader\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ----------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCTextDataReader\LJCTextDataReader\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 

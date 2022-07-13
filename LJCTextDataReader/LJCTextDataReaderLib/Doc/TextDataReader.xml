@@ -1,0 +1,785 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <TextDataReader>
+    <summary>
+      A text file data reader.
+    </summary>
+    <remarks>
+      <para>
+        A class that implements IDataReader must implement the Read() and
+        IDataRecord GetValue() methods. It must also implement the IDataRecord
+        FieldCount property.
+      </para>
+      <para>
+        The GetOrdinal() method must be implemented if field name mapping is used.
+      </para>
+      <para>
+        The currently supported common IDataReader methods are:
+        GetDataTypeName(int/string), GetFieldType(), GetName(), GetOrdinal(),
+        GetSchemaTable(), GetValues(), IsDBNull() and Read().&lt;br /&gt;
+        All IDataRecord Get Type by index methods are supported including:
+        GetBoolean(), GetInt32(), GetString(), GetValue(), etc.
+      </para>
+      <para>
+        Also included are custom Get Type by name method overloads to get the
+        data values by the field name. These methods overload the IDataRecord
+        Get Type by index methods.
+      </para>
+      <para>
+        This data reader expects the lines to be terminated with CR/LF.
+        It can parse comma or tab delimited fields and can handle quoted fields.
+        &lt;br /&gt;
+        Only use quoted fields when necessary to get a slight performance
+        increase.
+      </para>
+      <para>
+        Use the LJCSetFile() method to initialize for the file to be read. This
+        sets the LJCDataFields property with the data field definitions. Use the
+        Read() method to read the next line values from the file.
+      </para>
+      <para>
+        Alternately, you can use the LJCSetLines() method if you want to process
+        a string array. Use the LJCReadLine() method to read the next line from
+        the string array.
+      </para>
+      <para>
+        The data field definition names can be parsed from the file heading line.
+        This can be accomplished in two ways:&lt;br /&gt;
+        1. When creating the TextDataReader, set the hasheadingLine constructor
+        property to 'true' or leave it blank to let it default to 'true'.
+        &lt;br /&gt;
+        2. After creating the TextDataReader, you can set the LJCHasHeadingLine
+        property to 'true'. This must be done before calling the LJCSetFile() or
+        LJCSetLines() method.&lt;br /&gt;
+      </para>
+      <para>
+        The data fields can be in a fixed length format. This can be set in two
+        ways:&lt;br /&gt;
+        1. When creating the TextDataReader, set the fixedLengthFields constructor
+        property to 'true'.&lt;br /&gt;
+        2. After creating the TextDataReader, you can set the LJCFixedLengthFields
+        property to 'true'. This must be done before calling the LJCSetFile() or
+        LJCSetLines() method.&lt;br /&gt;
+        The field MaxLength and DataTypeName can be included in the file heading
+        line. The formats are: Name|MaxLength or Name|MaxLength|DataTypeName.
+        The MaxLength value is required for fixed length fields.
+      </para>
+      <para>
+        The data field definitions can also be loaded from an XML layout file.
+        &lt;br /&gt;
+        Use the LJCSetFields() method to initialize the data field definitions
+        from an XML data definition file. This file uses the DbColumns format.
+        &lt;br /&gt;
+        Set LJCHasHeaderLine to 'false' before calling LJCSetFile() or
+        LJCSetLines().&lt;br /&gt;
+        The MaxLength and Position values are required for fixed length fields.
+        &lt;br /&gt;
+        The field names can be retrieved with the LJCGetFieldNames() method.
+      </para>
+      <para>
+        The Read() or LJCReadLine() methods set the next line values in the
+        LJCDataFields property. A field value can be retrieved by index or field
+        name as in object value = textDataReader[1]; or
+        value = textDataReader["Name"];. A value can also be retrieved as a
+        specific type by index or name using the Get Type methods such as
+        GetBoolean(), GetInt32(), GetString(), GetValue(), etc.
+      </para>
+      <para>
+        A Data Object can be populated with the field values using the
+        LJCSetObjectValues() method.
+      </para>
+    </remarks>
+  </TextDataReader>
+  <TextDataReaderC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="hasHeadingLine">Indicates if there is a header line.</param>
+    <param name="skipHeaderLines">Indicates the number of header lines to skip.</param>
+    <param name="fixedLengthFields">Indicates if the fields are fixed length.</param>
+  </TextDataReaderC>
+
+  <!-- Public IDataReader Methods -->
+  <Close>
+    <summary>
+      Closes the data reader.
+    </summary>
+  </Close>
+  <Dispose>
+    <summary>
+      Disposes the object.
+    </summary>
+  </Dispose>
+  <GetData>
+    <summary>
+      Not supported. Currently returns null.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The DataReader reference.</returns>
+  </GetData>
+  <GetDataTypeName1>
+    <summary>
+      Retrieves the data type name for the specified field index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <remarks>
+      This returns the valid DataTypeName value from the DbColumn data field
+      definition. The valid data type names are: "Boolean", "Byte", "DateTime",
+      "Decimal", "Double", "Int16", "Int32", "Int64", "Single" and "String".
+    </remarks>
+    <returns>The data type name.</returns>
+  </GetDataTypeName1>
+  <GetDataTypeName2>
+    <summary>
+      Retrieves the data type name for the specified field name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data type name.</returns>
+    <remarks>
+      This is a custom method. It is named to act as an Overload method
+      to the inherited reader method.
+    </remarks>
+  </GetDataTypeName2>
+  <GetFieldType>
+    <summary>
+      Retrieves the type of the field for the specified field index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field type object.</returns>
+  </GetFieldType>
+  <GetName>
+    <summary>
+      Retrieves the name of the data field with the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field name.</returns>
+  </GetName>
+  <GetOrdinal>
+    <summary>
+      Retrieves the index of the data field with the specified name.
+      (DE)
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The field index value.</returns>
+    <remarks>
+      Required method if field mapping is used.
+    </remarks>
+    <example>
+      <code>
+        using LJCTextDataReaderLib;
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        string[] lines = new string[]
+        {
+          "FirstName, LastName",
+          "John, Doe",
+          "Jane, Doe"
+        };
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetLines(lines);
+
+        while(textReader.ReadLine())
+        {
+          // Get the current line values as strings.
+          int firstNameIndex = textReader.GetOrdinal("FirstName");
+          int lastNameIndex = textReader.GetOrdinal("LastName");
+          string firstName = textReader.GetString(firstNameIndex);
+          string lastName = textReader.GetString(lastNameIndex);
+        }
+      </code>
+    </example>
+  </GetOrdinal>
+  <GetSchemaTable>
+    <summary>
+      Gets the Schema DataTable object.
+    </summary>
+    <returns>The schema DataTable object.</returns>
+  </GetSchemaTable>
+  <GetValues>
+    <summary>
+      Gets an array of record values.
+    </summary>
+    <param name="values">The record values.</param>
+    <returns>The number of values.</returns>
+  </GetValues>
+  <IsDBNull>
+    <summary>
+      Indicates if the field value is null or whitespace.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>True if the field value is null, otherwise false.</returns>
+  </IsDBNull>
+  <NextResult>
+    <summary>
+      Sets to the next result. Currently returns false.
+    </summary>
+    <returns>True if the next result was found, otherwise false.</returns>
+  </NextResult>
+  <Read>
+    <summary>
+      Reads the next line of the text file.
+      (DE)
+    </summary>
+    <returns>True if read successfully, otherwise false.</returns>
+    <remarks>
+      This is a minimum required method.
+    </remarks>
+    <example>
+      <code>
+        // File Contents
+        // FirstName, LastName
+        // John, Doe
+        // Jane, Doe
+        
+        using LJCTextDataReaderLib;
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetFile("InputFileSpec.txt");
+
+        while(textReader.Read())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &amp;lt; textReader.FieldCount; index++)
+          {
+            string data = textReader.GetString(index);
+          }
+        }
+      </code>
+    </example>
+  </Read>
+
+  <!-- Public DataReader Custom Related Methods -->
+  <LJCReadLine>
+    <summary>
+      Reads the next line from the line string array.
+      (DE)
+    </summary>
+    <returns>True if read successfully, otherwise false.</returns>
+    <remarks>
+      This is used to read a line from the string array that was loaded
+      with the LJCSetLines() method.
+    </remarks>
+    <example>
+      <code>
+        using LJCTextDataReaderLib;
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        string[] lines = new string[]
+        {
+          "FirstName, LastName",
+          "John, Doe",
+          "Jane, Doe"
+        };
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetLines(lines);
+
+        while(textReader.ReadLine())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &amp;lt; textReader.FieldCount; index++)
+          {
+            string data = textReader.GetString(index);
+          }
+        }
+      </code>
+    </example>
+  </LJCReadLine>
+
+  <!-- Public IDataRecord Get Data Methods -->
+  <GetBoolean>
+    <summary>
+      Returns the bool value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field bool value.</returns>
+  </GetBoolean>
+  <GetBooleanN>
+    <summary>
+      Returns the bool value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field bool value.</returns>
+  </GetBooleanN>
+  <GetByte>
+    <summary>
+      Returns the byte value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field byte value.</returns>
+  </GetByte>
+  <GetByteN>
+    <summary>
+      Returns the byte value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field byte value.</returns>
+  </GetByteN>
+  <GetBytes>
+    <summary>
+      Place bytes from field at the specified index into a byte array buffer.
+    </summary>
+    <param name="i">The data field index.</param>
+    <param name="fieldOffset">The field offset.</param>
+    <param name="buffer">The buffer.</param>
+    <param name="bufferoffset">The buffer offset.</param>
+    <param name="length">The length.</param>
+    <returns>The number of bytes copied.</returns>
+  </GetBytes>
+  <GetBytesN>
+    <summary>
+      Place bytes from field with the specified name into a byte array buffer.
+    </summary>
+    <param name="name">The data field name.</param>
+    <param name="fieldOffset">The field offset.</param>
+    <param name="buffer">The buffer.</param>
+    <param name="bufferoffset">The buffer offset.</param>
+    <returns>The number of bytes copied.</returns>
+  </GetBytesN>
+  <GetChar>
+    <summary>
+      Returns the char value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field char value.</returns>
+  </GetChar>
+  <GetCharN>
+    <summary>
+      Returns the char value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field char value.</returns>
+  </GetCharN>
+  <GetChars>
+    <summary>
+      Place characters from field at the specified index into a character array buffer.
+    </summary>
+    <param name="i">The data field index.</param>
+    <param name="fieldOffset">The field offset.</param>
+    <param name="buffer">The buffer.</param>
+    <param name="bufferoffset">The buffer offset.</param>
+    <param name="length">The length.</param>
+    <returns>The number of chars copied.</returns>
+  </GetChars>
+  <GetCharsN>
+    <summary>
+      Place characters from field with the specified name into a character array buffer.
+    </summary>
+    <param name="name">The data field name.</param>
+    <param name="fieldOffset">The field offset.</param>
+    <param name="buffer">The buffer.</param>
+    <param name="bufferoffset">The buffer offset.</param>
+    <returns>The number of chars copied.</returns>
+  </GetCharsN>
+  <GetDateTime>
+    <summary>
+      Returns the DateTime value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field DateTime value.</returns>
+  </GetDateTime>
+  <GetDateTimeN>
+    <summary>
+      Returns the DateTime value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field DateTime value.</returns>
+  </GetDateTimeN>
+  <GetDecimal>
+    <summary>
+      Returns the decimal value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field decimal value.</returns>
+  </GetDecimal>
+  <GetDecimalN>
+    <summary>
+      Returns the decimal value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field decimal value.</returns>
+  </GetDecimalN>
+  <GetDouble>
+    <summary>
+      Returns the double value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field double value.</returns>
+  </GetDouble>
+  <GetDoubleN>
+    <summary>
+      Returns the double value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field double value.</returns>
+  </GetDoubleN>
+  <GetFloat>
+    <summary>
+      Returns the float value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field float value.</returns>
+  </GetFloat>
+  <GetFloatN>
+    <summary>
+      Returns the float value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field float value.</returns>
+  </GetFloatN>
+  <GetGuid>
+    <summary>
+      Returns the Guid value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field Guid value.</returns>
+  </GetGuid>
+  <GetGuidN>
+    <summary>
+      Returns the Guid value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field Guid value.</returns>
+  </GetGuidN>
+  <GetInt16>
+    <summary>
+      Returns the short int value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field short int value.</returns>
+  </GetInt16>
+  <GetInt16N>
+    <summary>
+      Returns the short int value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field short int value.</returns>
+  </GetInt16N>
+  <GetInt32>
+    <summary>
+      Returns the int value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field int value.</returns>
+  </GetInt32>
+  <GetInt32N>
+    <summary>
+      Returns the int value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field int value.</returns>
+  </GetInt32N>
+  <GetInt64>
+    <summary>
+      Returns the long int value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field long int value.</returns>
+  </GetInt64>
+  <GetInt64N>
+    <summary>
+      Returns the long int value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field long int value.</returns>
+  </GetInt64N>
+  <GetString>
+    <summary>
+      Returns the string value of the data field at the specified index.
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field string value.</returns>
+  </GetString>
+  <GetStringN>
+    <summary>
+      Returns the string value of the data field with the specified name.
+    </summary>
+    <param name="name">The data field name.</param>
+    <returns>The data field string value.</returns>
+  </GetStringN>
+  <GetValue>
+    <summary>
+      Returns the object value of the data field at the specified index.
+      (DE)
+    </summary>
+    <param name="i">The data field index.</param>
+    <returns>The data field object value.</returns>
+    <remarks>
+      This is a minimum required method.
+    </remarks>
+    <example>
+      <code>
+        using LJCTextDataReaderLib;
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        string[] lines = new string[]
+        {
+          "FirstName, LastName",
+          "John, Doe",
+          "Jane, Doe"
+        };
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetLines(lines);
+
+        while(textReader.ReadLine())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &amp;lt; textReader.FieldCount; index++)
+          {
+            // All statements lines retrieve the same data.
+            object data = textReader.GetValue(index);
+            data = textReader[index];
+          
+            string name = textReader.GetName(index);
+            data = textReader[name];
+            
+            DbColumn dataField = textReader.LJCDataFields[index];
+            data = dataField.Value;
+          }
+        }
+      </code>
+    </example>
+  </GetValue>
+
+  <!-- Public IDataRecord Properties -->
+  <FieldCount>
+    <summary>
+      Gets the field count.
+    </summary>
+    <remarks>
+      This is a minimum required property.
+    </remarks>
+  </FieldCount>
+  <this1>
+    <summary>
+      Gets the data field value for the specified field index.
+    </summary>
+    <param name="i">The field index.</param>
+    <returns>The field object value.</returns>
+  </this1>
+  <this2>
+    <summary>
+      Gets the data field value for the specified field name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The field object value.</returns>
+  </this2>
+
+  <!-- Public Methods -->
+  <LJCGetFieldNames>
+    <summary>
+      Returns the field names.
+    </summary>
+    <returns>The string array of field names.</returns>
+  </LJCGetFieldNames>
+  <LJCSetFields>
+    <summary>
+      Sets the DataFields layout from an XML file.
+      (E)
+    </summary>
+    <param name="layoutFileName">The layout XML file name.</param>
+    <example>
+      <code>
+        // File Contents
+        // FirstName, LastName
+        // John, Doe
+        // Jane, Doe
+        
+        using LJCTextDataReaderLib;
+
+        // The input file does not have a data configuration heading line.
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        bool hasHeadingLine = false;
+        TextDataReader textReader = new TextDataReader(hasHeadingLine);
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetFile("InputFileSpec.txt");
+      
+        // The data field definition are set from a configuration file.
+        textReader.LJCSetFields("DataFieldConfig.xml");
+
+        while(textReader.Read())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &lt; textReader.FieldCount; index++)
+          {
+            string data = textReader.GetString(index);
+          }
+        }
+      </code>
+    </example>
+  </LJCSetFields>
+  <LJCSetFile>
+    <summary>
+      Sets the source text file values.
+      (E)
+    </summary>
+    <param name="fileName">The delimited text file name.</param>
+    <param name="fieldDelimiter">The field delimiter.</param>
+    <example>
+      <code>
+        // File Contents
+        // FirstName, LastName
+        // John, Doe
+        // Jane, Doe
+        
+        using LJCTextDataReaderLib;
+
+        // The input file has a data configuration heading line.
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        // Use comma as the field delimiter. Any single character can be used.
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetFile("InputFileSpec.txt");
+      
+        while(textReader.Read())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &lt; textReader.FieldCount; index++)
+          {
+            string data = textReader.GetString(index);
+          }
+        }
+      </code>
+    </example>
+  </LJCSetFile>
+  <LJCSetLine>
+    <summary>
+      Sets the line field values.
+    </summary>
+    <param name="line">The text line.</param>
+  </LJCSetLine>
+  <LJCSetLines>
+    <summary>
+      Set the source line string array.
+      (RE)
+    </summary>
+    <param name="lines">The lines.</param>
+    <param name="fieldDelimiter">The field delimiter.</param>
+    <remarks>
+      A string array can be loaded by the program and read instead
+      of a file. Use the LJCReadLine() method to read through the array
+      instead of the Read() method that is used for a file.
+    </remarks>
+    <example>
+      <code>
+        using LJCTextDataReaderLib;
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        string[] lines = new string[]
+        {
+          "FirstName, LastName",
+          "John, Doe",
+          "Jane, Doe"
+        };
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetLines(lines);
+
+        while(textReader.ReadLine())
+        {
+          // Get the current line values as strings.
+          for (int index = 0; index &amp;lt; textReader.FieldCount; index++)
+          {
+            string data = textReader.GetString(index);
+          }
+        }
+      </code>
+    </example>
+  </LJCSetLines>
+  <LJCSetNames>
+    <summary>
+      Sets the data field names.
+    </summary>
+    <param name="line">The line of field names.</param>
+    <returns>
+      Returns true if the field count is greater than zero
+      otherwise returns false.
+    </returns>
+  </LJCSetNames>
+  <LJCSetObjectValues>
+    <summary>
+      Sets the data object property values from the TextDataReader.
+      (RE)
+    </summary>
+    <param name="dataObject">The data object.</param>
+    <param name="dataFields">The DbColumns data field definitions object.</param>
+    <remarks>
+      <para>
+        The custom DbColumns data field definitions are used if provided.
+        Otherwise the internal LJCDataFields property value is used.
+      </para>
+      <para>
+        This method uses the DbColumn.ColumnName (or DbColumn.RenameAs if provided)
+        for the source column name and the DbColumn.PropertyName for the object
+        property name.
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCTextDataReaderLib;
+
+        public class Person
+        {
+          public string FirstName { get; set; }
+          public string LastName { get; set; }
+        }
+
+        // The hasHeadingLine defaults to true if the parameter is not included.
+        TextDataReader textReader = new TextDataReader();
+
+        string[] lines = new string[]
+        {
+          "FirstName, LastName",
+          "John, Doe",
+          "Jane, Doe"
+        };
+
+        // The field delimiter defaults to "," if the parameter is not included.
+        textReader.LJCSetLines(lines);
+
+        while(textReader.ReadLine())
+        {
+          Person person = new Person();
+          textReader.LJCSetObjectValues(person);
+          // First record person.FirstName = "John", person.LastName = "Doe"
+          // second record person.FirstName = "Jane", person.LastName = "Doe"
+        }
+      </code>
+    </example>
+  </LJCSetObjectValues>
+  <LJCSetStartIndex>
+    <summary>
+      Sets the starting record index.
+    </summary>
+    <param name="recordIndex">The record index.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </LJCSetStartIndex>
+  <LJCSetValues1>
+    <summary>
+      Sets the current line values.
+    </summary>
+    <param name="values">The current line values.</param>
+  </LJCSetValues1>
+  <LJCSetValues2>
+    <summary>
+      Sets the current, fixed length, line values.
+    </summary>
+    <param name="line">The current line.</param>
+  </LJCSetValues2>
+</items>
