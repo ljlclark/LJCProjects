@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2022 - All Rights Reserved -->
+<!-- <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/> -->
+<items>
+  <Collection>
+    <summary>
+      Represents a collection of object items.
+    </summary>
+  </Collection>
+
+  <!-- Static Functions -->
+  <Deserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="fileSpec">The file specification value.</param>
+    <returns>The deserialized object.</returns>
+  </Deserialize>
+  <HasItems1>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+    <param name="collectionObject">The collection object.</param>
+    <returns>True if there are items, otherwise false.</returns>
+  </HasItems1>
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="fileSpec">The file specification value.</param>
+    <returns>The deserialized object.</returns>
+  </LJCDeserialize>
+
+  <!-- Constructors -->
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items">The copy from items collection.</param>
+  </CopyConstructor>
+
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <AddCode>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="code">The item code.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </AddCode>
+  <LJCAddCode>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="code">The item code.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </LJCAddCode>
+  <GetCollection>
+    <summary>
+      Get custom collection from List&lt;T&gt;.
+    </summary>
+    <param name="list">The list object reference.</param>
+    <returns>The collection object reference.</returns>
+  </GetCollection>
+  <Serialize>
+    <summary>
+      Serializes the collection to a file.
+    </summary>
+    <param name="fileSpec">The alternate file specification.</param>
+    <remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+  </Serialize>
+  <LJCSerialize>
+    <summary>
+      Serializes the collection to a file.
+    </summary>
+    <param name="fileSpec">The alternate file specification.</param>
+    <remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+  </LJCSerialize>
+  
+  <!-- Public Methods -->
+  <HasItems2>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+    <returns>True if there are items, otherwise false.</returns>
+  </HasItems2>
+  
+  <!-- Sort and Search Methods -->
+  <SearchCode>
+    <summary>
+      Retrieve the collection element with code.
+    </summary>
+    <param name="code">The item code.</param>
+    <returns>A reference to the matching item.</returns>
+  </SearchCode>
+  <LJCSearchCode>
+    <summary>
+      Retrieve the collection element with code.
+    </summary>
+    <param name="code">The item code.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchCode>
+  <SearchID>
+    <summary>
+      Retrieve the collection element with ID.
+    </summary>
+    <param name="id">The item ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </SearchID>
+  <LJCSearchID>
+    <summary>
+      Retrieve the collection element with ID.
+    </summary>
+    <param name="id">The item ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchID>
+  <SearchName>
+    <summary>
+      Retrieve the collection element with name.
+    </summary>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </SearchName>
+  <LJCSearchName>
+    <summary>
+      Retrieve the collection element with name.
+    </summary>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchName>
+  <SortComparer>
+    <summary>
+      Sort with a Comparer.
+    </summary>
+    <param name="comparer">The Comparer object.</param>
+  </SortComparer>
+  <SortName>
+    <summary>
+      Sort on Name.
+    </summary>
+  </SortName>
+  <LJCSortName>
+    <summary>
+      Sort on Name.
+    </summary>
+  </LJCSortName>
+  
+  <!-- IEnumerable Methods and Properties -->
+  <GetEnumerator>
+    <summary>
+      Gets the Collection Enumerator.
+    </summary>
+    <returns>The Collection Enumerator.</returns>
+  </GetEnumerator>
+  <Indexer>
+    <summary>
+      Gets the item by index value.
+    </summary>
+    <param name="index">The index value.</param>
+    <returns>The element item object.</returns>
+  </Indexer>
+</items>

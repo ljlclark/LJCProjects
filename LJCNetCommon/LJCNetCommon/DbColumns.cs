@@ -1,0 +1,628 @@
+// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace LJCNetCommon
+{
+  // Represents a collection of DbColumn objects.
+  /// <include path='items/DbColumns/*' file='Doc/DbColumns.xml'/>
+  [XmlRoot("DbColumns")]
+  public class DbColumns : List<DbColumn>
+  {
+    #region Static Functions
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems1/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public static bool HasItems(DbColumns collectionObject)
+    {
+      bool retValue = false;
+
+      if (collectionObject != null && collectionObject.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Creates DbColumns from a Data Object.
+    /// <include path='items/LJCCreateObjectColumns/*' file='Doc/DbColumns.xml'/>
+    public static DbColumns LJCCreateObjectColumns(object dataObject
+      , DbColumns dataDefinition = null)
+    {
+      DbColumn definitionColumn = null;
+      DbColumns retValue = null;
+
+      LJCReflect reflect = new LJCReflect(dataObject);
+      List<string> propertyNames = reflect.GetPropertyNames();
+
+      if (propertyNames != null)
+      {
+        retValue = new DbColumns();
+        foreach (string propertyName in propertyNames)
+        {
+          if ("ChangedNames" == propertyName)
+          {
+            continue;
+          }
+
+          if (dataDefinition != null)
+          {
+            definitionColumn = dataDefinition.LJCSearchPropertyName(propertyName);
+          }
+
+          DbColumn dbColumn = new DbColumn()
+          {
+            ColumnName = propertyName
+          };
+          Type type = reflect.GetPropertyType(propertyName);
+          if (type != null)
+          {
+            dbColumn.Caption = propertyName;
+            dbColumn.DataTypeName = type.Name;
+            if (definitionColumn != null)
+            {
+              dbColumn.MaxLength = definitionColumn.MaxLength;
+            }
+            dbColumn.Value = reflect.GetValue(propertyName);
+          }
+          retValue.Add(dbColumn);
+        }
+      }
+      return retValue;
+    }
+
+    // Deserializes from the specified XML file.
+    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public static DbColumns LJCDeserialize(string fileSpec = null)
+    {
+      DbColumns retValue;
+
+      if (false == NetString.HasValue(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      retValue = NetCommon.XmlDeserialize(typeof(DbColumns), fileSpec)
+        as DbColumns;
+      return retValue;
+    }
+    #endregion
+
+    #region Constructors
+
+    // Initializes an object instance.
+    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public DbColumns()
+    {
+      mPrevCount = -1;
+    }
+
+    // The Copy constructor.
+    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public DbColumns(DbColumns items)
+    {
+      if (HasItems(items))
+      {
+        foreach (var item in items)
+        {
+          Add(new DbColumn(item));
+        }
+      }
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Adds the object element to the collection
+    /// <include path='items/Add/*' file='Doc/DbColumns.xml'/>
+    public new void Add(DbColumn dbColumn)
+    {
+      LJCSortAddOrderIndex();
+      base.Add(dbColumn);
+      int newIndex = Count - 1;
+      dbColumn.AddOrderIndex = newIndex;
+    }
+
+    // Creates the Object from the arguments and adds it to the collection.
+    // (R)
+    /// <include path='items/Add1/*' file='Doc/DbColumns.xml'/>
+    public DbColumn Add(string columnName, int position, int maxLength)
+    {
+      DbColumn retValue = new DbColumn()
+      {
+        AutoIncrement = false,
+        ColumnName = columnName,
+        MaxLength = maxLength,
+        Position = position
+      };
+      Add(retValue);
+      return retValue;
+    }
+
+    // Creates the Object from the arguments and adds it to the collection.
+    /// <include path='items/Add2/*' file='Doc/DbColumns.xml'/>
+    public DbColumn Add(string columnName, string propertyName = null, string renameAs = null
+      , string dataTypeName = "String", string caption = null)
+    {
+      DbColumn retValue = new DbColumn()
+      {
+        AutoIncrement = false,
+        Caption = caption,
+        ColumnName = columnName,
+        DataTypeName = dataTypeName,
+        PropertyName = propertyName,
+        RenameAs = renameAs
+      };
+      Add(retValue);
+      return retValue;
+    }
+
+    // Creates the Object from the arguments and adds it to the collection.
+    /// <include path='items/Add3/*' file='Doc/DbColumns.xml'/>
+    public DbColumn Add(string columnName, object value
+      , string dataTypeName = "String")
+    {
+      DbColumn retValue = new DbColumn()
+      {
+        AutoIncrement = false,
+        ColumnName = columnName,
+        DataTypeName = dataTypeName,
+        Value = value
+      };
+      Add(retValue);
+      return retValue;
+    }
+
+    // Creates and returns a clone of the object.
+    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public DbColumns Clone()
+    {
+      var retValue = MemberwiseClone() as DbColumns;
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public bool HasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Creates the DbColumn object from the supplied values and adds the
+    //  element to the collection list. (R)
+    /// <include path='items/LJCAddPropertyAs/*' file='Doc/DbColumns.xml'/>
+    public DbColumn LJCAddPropertyAs(string propertyName, string caption = null
+      , string renameAs = null, string dataTypeName = "String")
+    {
+      DbColumn retValue = new DbColumn()
+      {
+        ColumnName = propertyName,
+        PropertyName = propertyName,
+        Caption = caption,
+        DataTypeName = dataTypeName,
+        AutoIncrement = false,
+        Value = null,
+        RenameAs = renameAs
+      };
+
+      if (false == NetString.HasValue(renameAs))
+      {
+        retValue.RenameAs = retValue.PropertyName;
+      }
+      Add(retValue);
+      return retValue;
+    }
+
+    // Serializes the collection
+    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public void LJCSerialize(string fileSpec = null)
+    {
+      if (false == NetString.HasValue(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+    }
+    #endregion
+
+    #region Public Methods
+
+    // Sets the IsChanged value to false for all elements in the collection.
+    /// <include path='items/LJCClearChanged/*' file='Doc/DbColumns.xml'/>
+    public void LJCClearChanged()
+    {
+      foreach (DbColumn dbColumn in this)
+      {
+        dbColumn.IsChanged = false;
+      }
+    }
+
+    // Gets a collection of changed columns.
+    /// <include path='items/LJCGetChanged/*' file='Doc/DbColumns.xml'/>
+    public DbColumns LJCGetChanged()
+    {
+      List<DbColumn> columns;
+      DbColumns retValue = new DbColumns();
+
+      columns = FindAll(x => true == x.IsChanged);
+      foreach (DbColumn dbColumn in columns)
+      {
+        retValue.Add(dbColumn.Clone());
+      }
+      return retValue;
+    }
+
+    // Returns a set of columns that match the supplied list.
+    /// <include path='items/LJCGetColumns/*' file='Doc/DbColumns.xml'/>
+    public DbColumns LJCGetColumns(List<string> propertyNames)
+    {
+      DbColumn searchColumn;
+      DbColumns retValue = null;
+
+      if (propertyNames != null && propertyNames.Count > 0)
+      {
+        retValue = new DbColumns();
+        foreach (string propertyName in propertyNames)
+        {
+          searchColumn = LJCSearchPropertyName(propertyName);
+          if (searchColumn != null)
+          {
+            retValue.Add(new DbColumn(searchColumn));
+          }
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Conversions
+
+    // Creates a DbValues object from a DbColumns object.
+    /// <include path='items/DbValues/*' file='Doc/DbColumns.xml'/>
+    public static implicit operator DbValues(DbColumns dbColumns)
+    {
+      DbValues retValue = null;
+
+      if (HasItems(dbColumns))
+      {
+        retValue = new DbValues();
+        foreach (DbColumn dbColumn in dbColumns)
+        {
+          var dbValue = dbColumn;
+          retValue.Add(dbValue);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Public Search Methods
+
+    // Finds and returns the object that matches the supplied values.
+    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public DbColumn LJCSearchName(string name)
+    {
+      DbColumnNameComparer comparer;
+      DbColumn retValue = null;
+
+      comparer = new DbColumnNameComparer();
+      LJCSortName(comparer);
+
+      DbColumn searchDbColumn = new DbColumn()
+      {
+        ColumnName = name
+      };
+      int index = BinarySearch(searchDbColumn, comparer);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+
+    // Finds and returns the column that contains the supplied property name.
+    /// <include path='items/LJCSearchPropertyName/*' file='Doc/DbColumns.xml'/>
+    public DbColumn LJCSearchPropertyName(string propertyName)
+    {
+      DbColumnPropertyComparer comparer;
+      DbColumn retValue = null;
+
+      comparer = new DbColumnPropertyComparer();
+      LJCSortProperty(comparer);
+
+      DbColumn searchDbColumn = new DbColumn()
+      {
+        PropertyName = propertyName
+      };
+      int index = BinarySearch(searchDbColumn, comparer);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+
+    // Finds and returns the column that contains the supplied property name.
+    /// <include path='items/LJCSearchRenameAs/*' file='Doc/DbColumns.xml'/>
+    public DbColumn LJCSearchRenameAs(string renameAs)
+    {
+      DbColumnRenameAsComparer comparer;
+      DbColumn retValue = null;
+
+      comparer = new DbColumnRenameAsComparer();
+      LJCSortRenameAs(comparer);
+
+      DbColumn searchDbColumn = new DbColumn()
+      {
+        RenameAs = renameAs
+      };
+      int index = BinarySearch(searchDbColumn, comparer);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+
+    /// <summary>Sort on AddOrderIndex.</summary>
+    public void LJCSortAddOrderIndex()
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.AddOrderIndex) != 0)
+      {
+        mPrevCount = Count;
+        Sort();
+        mSortType = SortType.AddOrderIndex;
+      }
+    }
+
+    /// <summary>Sort on ColumnName.</summary>
+    public void LJCSortName(DbColumnNameComparer comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.ColumnName) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.ColumnName;
+      }
+    }
+
+    /// <summary>Sort on RenameAs.</summary>
+    public void LJCSortProperty(DbColumnPropertyComparer comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.PropertyName) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.PropertyName;
+      }
+    }
+
+    /// <summary>Sort on RenameAs.</summary>
+    public void LJCSortRenameAs(DbColumnRenameAsComparer comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.RenameAs) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.RenameAs;
+      }
+    }
+    #endregion
+
+    #region Other Public Methods
+
+    // Sets the caption properties.
+    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetColumnCaptions(DbColumns dbColumns)
+    {
+      DbColumn searchColumn;
+
+      if (HasItems(dbColumns))
+      {
+        foreach (DbColumn dbColumn in dbColumns)
+        {
+          searchColumn = LJCSearchName(dbColumn.ColumnName);
+          if (searchColumn != null)
+          {
+            dbColumn.Caption = searchColumn.Caption;
+          }
+        }
+      }
+    }
+
+    // Maps the column property and rename values.
+    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
+    public void MapNames(string columnName, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      DbColumn dbColumn = LJCSearchName(columnName);
+      SetMapValues(dbColumn, propertyName, renameAs, caption);
+    }
+
+    // Sets the Map values.
+    private void SetMapValues(DbColumn dbColumn, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      if (dbColumn != null)
+      {
+        if (propertyName != null)
+        {
+          dbColumn.PropertyName = propertyName;
+        }
+        if (renameAs != null)
+        {
+          dbColumn.RenameAs = renameAs;
+        }
+        if (caption != null)
+        {
+          dbColumn.Caption = caption;
+        }
+      }
+    }
+    #endregion
+
+    #region Value Methods
+
+    // Gets the column object value as a bool.
+    /// <include path='items/LJCGetBoolean/*' file='Doc/DbColumns.xml'/>
+    public bool LJCGetBoolean(string name)
+    {
+      string value;
+      bool retValue = false;
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        try
+        {
+          retValue = Convert.ToBoolean(value);
+        }
+        catch
+        {
+          retValue = false;
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a DateTime.
+    /// <include path='items/LJCGetDbDateTime/*' file='Doc/DbColumns.xml'/>
+    public DateTime LJCGetDbDateTime(string name)
+    {
+      string value;
+      DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        retValue = DateTime.Parse(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a decimal.
+    /// <include path='items/LJCGetDecimal/*' file='Doc/DbColumns.xml'/>
+    public decimal LJCGetDecimal(string name)
+    {
+      string value;
+      decimal retValue = 0;
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        retValue = Convert.ToDecimal(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a short int.
+    /// <include path='items/LJCGetInt16/*' file='Doc/DbColumns.xml'/>
+    public short LJCGetInt16(string name)
+    {
+      string value;
+      short retValue = 0;
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        retValue = Convert.ToInt16(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as an int.
+    /// <include path='items/LJCGetInt32/*' file='Doc/DbColumns.xml'/>
+    public int LJCGetInt32(string name)
+    {
+      string value;
+      int retValue = 0;
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        retValue = Convert.ToInt32(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a long int.
+    /// <include path='items/LJCGetInt64/*' file='Doc/DbColumns.xml'/>
+    public long LJCGetInt64(string name)
+    {
+      string value;
+      long retValue = 0;
+
+      value = LJCGetValue(name);
+      if (value != null)
+      {
+        retValue = Convert.ToInt64(value);
+      }
+      return retValue;
+    }
+
+    // Get the minimum date value.
+    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
+    public static string LJCGetMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+
+    // Gets the string value for the column with the specified name.
+    /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
+    public string LJCGetValue(string name)
+    {
+      DbColumn dbColumn;
+      string retValue = null;
+
+      dbColumn = LJCSearchName(name);
+      if (dbColumn != null
+        && dbColumn.Value != null
+        && NetString.HasValue(dbColumn.Value.ToString()))
+      {
+        retValue = dbColumn.Value.ToString();
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Gets the Default File Name.</summary>
+    public static string LJCDefaultFileName
+    {
+      get { return "DbColumns.xml"; }
+    }
+
+    // The column for the specified name.
+    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    public DbColumn this[string name]
+    {
+      get { return LJCSearchName(name); }
+    }
+    #endregion
+
+    #region Class Data
+
+    private int mPrevCount;
+    private SortType mSortType;
+
+    private enum SortType
+    {
+      AddOrderIndex,
+      ColumnName,
+      PropertyName,
+      RenameAs
+    }
+    #endregion
+  }
+}

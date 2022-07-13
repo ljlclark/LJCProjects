@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <!-- Methods -->
+  <Decrypt>
+    <summary>
+      Returns a decrypted string from a cipher byte array. (E)
+    </summary>
+    <param name="cipher">The cipher byte array.</param>
+    <param name="key">The encryption key.</param>
+    <param name="initializationVector">The IV value.</param>
+    <returns>The decrypted text value.</returns>
+    <example>
+      <code>        MemoryCrypto crypto = new MemoryCrypto();
+        string text = null;
+        byte[] key = {230, 191, 149, 1, 207, 136, 112, 200
+                       , 7, 192, 109, 130, 188, 192, 27, 183
+                       , 238, 1, 248, 74, 35, 47, 1, 144
+                       , 90, 91, 5, 167, 87, 170, 11, 141};
+        byte[] iv = {94, 9, 42, 5, 218, 86, 120, 94
+                     , 209, 208, 216, 111, 24, 4, 255, 67};
+        byte[] cipher;
+        
+        // Retrieve value.
+        text = GetEncryptedValue();
+        
+        // Convert from Base64 and decrypt to text.
+        cipher = Convert.FromBase64String(text);
+        crypto.CryptoType = Crypto_Type.Crypto_Rijndael;
+        text = crypto.Decrypt(cipher, key, iv);</code>
+    </example>
+  </Decrypt>
+  <DecryptBytes>
+    <summary>
+      Returns a decrypted byte array from a cipher byte array.
+    </summary>
+    <param name="cipher">The cipher byte array.</param>
+    <param name="key">The encryption key.</param>
+    <param name="initializationVector">The IV value.</param>
+    <returns>The decrypted byte array.</returns>
+  </DecryptBytes>
+  <Encrypt1>
+    <summary>
+      Returns an encrypted byte array from a byte array.
+    </summary>
+    <param name="bytes">The byte array.</param>
+    <param name="key">The encryption key.</param>
+    <param name="initializationVector">The IV value.</param>
+    <returns>The encrypted byte array.</returns>
+  </Encrypt1>
+  <Encrypt2>
+    <summary>
+      Returns an encrypted byte array from a string value. (E)
+    </summary>
+    <param name="plainText">The text value.</param>
+    <param name="key">The encryption key.</param>
+    <param name="initializationVector">The IV value.</param>
+    <returns>The encrypted byte array.</returns>
+    <example>
+      <code>        MemoryCrypto crypto = new MemoryCrypto();
+        byte[] key;
+        byte[] iv;
+        byte[] cipher;
+        string text;
+        
+        // Generate the key and initialization vector.
+        crypto.CryptoType = Crypto_Type.Crypto_Rijndael;
+        key = crypto.GenerateKey();
+        iv = crypto.GenerateIV();
+        
+        // Encrypt and convert to Base64.
+        cipher = crypto.Encrypt(GetPlainText(), key, iv);
+        text = StringHelper.ByteArrayToBase64(cipher);</code>
+    </example>
+  </Encrypt2>
+  <GenerateIV>
+    <summary>
+      Generates a random initialization vector based on the encryption type.
+    </summary>
+    <returns>The initialization vector.</returns>
+  </GenerateIV>
+  <GenerateKey>
+    <summary>
+      Generates a random encryption key based on the encryption type.
+    </summary>
+    <returns>The encryption key.</returns>
+  </GenerateKey>
+  <IsValidKeySize>
+    <summary>
+      Returns true if the key size is valid otherwise returns false.
+    </summary>
+    <param name="sizeValue">The size value.</param>
+    <returns>True if valid, otherwise false.</returns>
+  </IsValidKeySize>
+
+  <!-- Properties -->
+  <LegalKeySizes>
+    <summary>
+      Gets the supported key sizes.
+    </summary>
+    <returns></returns>
+  </LegalKeySizes>
+</items>

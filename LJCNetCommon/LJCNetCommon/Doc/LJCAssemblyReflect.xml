@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <LJCAssemblyReflect>
+    <summary>
+      Provides Assembly Reflection methods.
+      (DE)
+    </summary>
+    <remarks>
+      <para>
+        Provides information for Constructors, Types, Methods, Properties and Fields.
+      </para>
+      <para>
+        The object reflection properties are set using the methods: SetAssembly(),
+        SetConstructorInfo(), SetFieldInfo(), SetMethodInfo(), SetPropertyInfo()
+        and SetTypeReference().
+      </para>
+      <para>
+        Once the reflection properties are set, the Syntax strings can be retrieved
+        with the syntax methods: Get*Syntax();
+      </para>
+    </remarks>
+  </LJCAssemblyReflect>
+
+  <!-- Public Set Methods -->
+  <SetAssembly>
+    <summary>
+      Retrieves the Assembly reference. (R)
+    </summary>
+    <param name="fileSpec">The file specification.</param>
+    <returns>The Assembly reference.</returns>
+    <remarks>
+      Sets the FileSpec property value and attempts to set the Assembly property
+      value if the assembly exists.
+    </remarks>
+  </SetAssembly>
+  <SetConstructorInfo>
+    <summary>
+      Set the ConstructorInfo reference. (RE)
+    </summary>
+    <param name="methodName">The Method name.</param>
+    <param name="parameterNames">The parameter types.</param>
+    <returns>The ConstructorInfo value.</returns>
+    <remarks>
+      Sets the MethodName property value and attempts to set the ConstructorInfo
+      property value if the type reference and constructor with the correct
+      parameters exist.
+    </remarks>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public ConstructorInfo RetrieveConstructorInfo(string assemblyFileSpec, string fullTypeName
+          , string constructorName, string[] parameterNames)
+        {
+          ConstructorInfo retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+
+          retValue = assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
+          return retValue;
+        }</code>
+    </example>
+  </SetConstructorInfo>
+  <SetFieldInfo>
+    <summary>
+      Set the FieldInfo reference. (RE)
+    </summary>
+    <param name="fieldName">The Field name.</param>
+    <returns>The FieldInfo value.</returns>
+    <remarks>
+      Sets the FieldName property value and attempts to set the FieldInfo
+      property value if the type reference and the field exist.
+    </remarks>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public FieldInfo RetrieveFieldInfo(string assemblyFileSpec, string fullTypeName
+          , string fieldName)
+        {
+          FieldInfo retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          
+          retValue = assemblyReflect.SetFieldInfo(fieldName);
+          return retValue;
+        }</code>
+    </example>
+  </SetFieldInfo>
+  <GetIndexerInfo>
+    <summary>
+      Gets the Indexer Property info.
+    </summary>
+    <returns>The XMLDoc full name.</returns>
+  </GetIndexerInfo>
+  <SetMethodInfo>
+    <summary>
+      Set the MethodInfo reference. (RE)
+    </summary>
+    <param name="methodName">The Method name.</param>
+    <param name="parameterNames">The parameter types.</param>
+    <returns>The MethodInfo value.</returns>
+    <remarks>
+      Sets the MethodName property value and attempts to set the MethodInfo
+      property value if the type reference and method with the correct
+      parameters exist.
+    </remarks>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public MethodInfo RetrieveMethodInfo(string assemblyFileSpec, string fullTypeName
+          , string methodName, string[] parameterNames)
+        {
+          MethodInfo retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          
+          retValue = assemblyReflect.SetMethodInfo(methodName, parameterNames);
+          return retValue;
+        }</code>
+    </example>
+  </SetMethodInfo>
+  <SetPropertyInfo>
+    <summary>
+      Set the PropertyInfo reference. (RE)
+    </summary>
+    <param name="propertyName">The Property name.</param>
+    <param name="fullName">The XMLDoc full name.</param>
+    <returns>The PropertyInfo value.</returns>
+    <remarks>
+      Sets the PropertyName property value and attempts to set the PropertyInfo
+      property value if the type reference and the property exist.
+    </remarks>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public PropertyInfo RetrievePropertyInfo(string assemblyFileSpec, string fullTypeName
+          , string propertyName, string fullName)
+        {
+          PropertyInfo retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          
+          retValue = assemblyReflect.SetPropertyInfo(propertyName, fullName);
+          return retValue;
+        }</code>
+    </example>
+  </SetPropertyInfo>
+  <SetTypeReference>
+    <summary>
+      Set the Type reference. (RE)
+    </summary>
+    <param name="typeName">The fully qualified Type name.</param>
+    <returns>The Type reference.</returns>
+    <remarks>
+      Sets the TypeName property value and attempts to set the TypeReference
+      property value if the assembly reference and type name exist.
+    </remarks>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public Type RetrieveTypeReference(string assemblyFileSpec, string fullTypeName)
+        {
+          Type retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+
+          retValue = assemblyReflect.SetTypeReference(fullTypeName);
+          return retValue;
+        }</code>
+    </example>
+  </SetTypeReference>
+
+  <!-- Public Get Syntax Methods -->
+  <GetConstructorSyntax>
+    <summary>
+      Creates and returns the Constructor syntax. (E)
+    </summary>
+    <param name="constructorInfo">The ConstructorInfo object.</param>
+    <returns>The Constructor syntax.</returns>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public string RetrieveConstructorSyntax(string assemblyFileSpec, string fullTypeName
+          , string constructorName, string[] parameterNames)
+        {
+          string retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
+          
+          retValue = assemblyReflect.GetConstructorSyntax();
+          return retValue;
+        }</code>
+    </example>
+  </GetConstructorSyntax>
+  <GetFieldSyntax>
+    <summary>
+      Creates and returns the Field syntax string. (E)
+    </summary>
+    <param name="fieldInfo">The FieldInfo object.</param>
+    <returns></returns>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public string RetrieveFieldSyntax(string assemblyFileSpec, string fullTypeName
+          , string fieldName)
+        {
+          string retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetFieldInfo(fieldName);
+          
+          retValue = assemblyReflect.GetFieldSyntax();
+          return retValue;
+        }</code>
+    </example>
+  </GetFieldSyntax>
+  <GetGenericTypeSyntax>
+    <summary>
+      Creates and returns the Generic Type syntax.
+    </summary>
+    <param name="typeReference">The Type object.</param>
+    <returns>The Generic Type syntax.</returns>
+  </GetGenericTypeSyntax>
+  <GetMethodSyntax>
+    <summary>
+      Creates and returns the Method syntax. (E)
+    </summary>
+    <param name="methodInfo">The MethodInfo object.</param>
+    <returns>The Method syntax.</returns>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public string RetrieveMethodSyntax(string assemblyFileSpec, string fullTypeName
+          , string methodName, string[] parameterNames)
+        {
+          string retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetMethodInfo(methodName, parameterNames);
+          
+          retValue = assemblyReflect.GetMethodSyntax();
+          return retValue;
+        }</code>
+    </example>
+  </GetMethodSyntax>
+  <GetPropertySyntax>
+    <summary>
+      Creates and returns the Property syntax string. (E)
+    </summary>
+    <param name="propertyInfo">The PropertyInfo object.</param>
+    <returns>The syntax string.</returns>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+
+        public string RetrievePropertySyntax(string assemblyFileSpec, string fullTypeName
+          , string propertyName, string fullName)
+        {
+          string retValue = null;
+
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetPropertyInfo(propertyName, fullName);
+          
+          retValue = assemblyReflect.GetPropertySyntax();
+          return retValue;
+        }</code>
+    </example>
+  </GetPropertySyntax>
+  <GetTypeSyntax>
+    <summary>
+      Creates and returns the Type syntax. (E)
+    </summary>
+    <param name="typeReference">The Type object.</param>
+    <returns>The Type syntax.</returns>
+    <example>
+      <code>        using System;
+        using System.Reflection;
+        using LJC.Net.Common;
+        
+        public string RetrieveTypeSyntax(string assemblyFileSpec, string fullTypeName)
+        {
+          string retValue = null;
+          
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          
+          retValue = assemblyReflect.GetTypeSyntax();
+          return retValue;
+        }</code>
+    </example>
+  </GetTypeSyntax>
+
+  <!-- Public Flag Methods -->
+  <IsNotCommonClassification>
+    <summary>
+      Indicates if the Type is not a common type.
+    </summary>
+    <param name="type">The Type object.</param>
+    <returns>True if not a common type, otherwise false.</returns>
+  </IsNotCommonClassification>
+  <IsNotCommonInterface>
+    <summary>
+      Indicates if the Interface is not a common type.
+    </summary>
+    <param name="type">The Type object.</param>
+    <returns>True if not a common interface, otherwise false.</returns>
+  </IsNotCommonInterface>
+  <IsNotProperty>
+    <summary>
+      Indicates if the Method is not a property getter or setter.
+    </summary>
+    <param name="methodInfo">The MethodInfo object.</param>
+    <returns>True if not a Property, otherwise false.</returns>
+  </IsNotProperty>
+  <IsOverride>
+    <summary>
+      Indicates if the method is "override".
+    </summary>
+    <param name="methodInfo">The MethodInfo object.</param>
+    <returns>True if "override", otherwise false.</returns>
+  </IsOverride>
+  <IsPublic>
+    <summary>
+      Indicates if the method is "public".
+    </summary>
+    <param name="methodInfo">The MethodInfo object.</param>
+    <returns>True if "public", otherwise false.</returns>
+  </IsPublic>
+</items>

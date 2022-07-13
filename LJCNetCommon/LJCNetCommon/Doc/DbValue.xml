@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DbValueC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="propertyName">The PropertyName value.</param>
+    <param name="value">The item value.</param>
+    <param name="dataTypeName">The DataType name.</param>
+  </DbValueC>
+  <CreateColumn>
+    <summary>
+      Creates a combined
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; from a
+      &lt;span class="userType"&gt;DbValue&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;.
+    </summary>
+    <param name="definitionColumn">
+      The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </param>
+    <returns>
+      The combined
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </returns>
+  </CreateColumn>
+</items>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <NetFile>
+    <summary>
+      Contains common file related static functions. (RE)
+    </summary>
+    <remarks>
+      The NetFile class contains file related static helper functions for
+      all .NET program types.
+    </remarks>
+  </NetFile>
+
+  <!-- Public Functions -->
+  <CreateFolder>
+    <summary>
+      Creates a Folder Path if it does not already exist. (E)
+    </summary>
+    <param name="path">The File specification.</param>
+    <example>
+      <code>        using LJCNetCommon;
+
+        // Creates a Folder Path if it does not already exist.
+        private static void CreateFolder()
+        {
+          string fileSpec = @"SubFolder\File.txt";
+
+          // Creates folder "SubFolder" from the current folder.
+          NetFile.CreateFolder(fileSpec);
+        }</code>
+    </example>
+  </CreateFolder>
+  <GetRelativePath>
+    <summary>
+      Returns the relative path.
+    </summary>
+    <param name="fromPath">The "from" path.</param>
+    <param name="toFileSpec">The "to" file specification.</param>
+    <returns>The relative path.</returns>
+  </GetRelativePath>
+  <ReadAllLines>
+    <summary>
+      Get all text lines from a file.
+    </summary>
+    <param name="fileSpec">The file specification.</param>
+    <returns>A string array of text lines.</returns>
+  </ReadAllLines>
+  <WriteLog>
+    <summary>
+      Writes a string format to the Log file with the current date and time.
+    </summary>
+    <param name="logFileSpec">The Log file specification.</param>
+    <param name="formatText">The Format text.</param>
+    <param name="parameters">The Format parameters.</param>
+  </WriteLog>
+  <WriteLogLine>
+    <summary>
+      Writes a string format plus cr/lf to the Log file with the current date
+      and time.
+    </summary>
+    <param name="logFileSpec">The Log file specification.</param>
+    <param name="formatText">The Format text.</param>
+    <param name="parameters">The Format parameters.</param>
+  </WriteLogLine>
+</items>

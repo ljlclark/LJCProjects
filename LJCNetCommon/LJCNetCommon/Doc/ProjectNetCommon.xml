@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <!-- Use the first class in the project to load the Project Level Remarks -->
+  <AppSettings>
+    <summary>
+      Represents the Configuration AppSettings. (RE)
+    </summary>
+    <remarks>
+      <para>
+        The App.Config file layout with a sample setting value.
+      </para>
+      <para>
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;ConnectionType&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;MySql&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
+      </para>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The .NET Common library contains classes that provide common functionality
+        for all .NET program types.
+      </para>
+    </remarks>
+  </AppSettings>
+</items>

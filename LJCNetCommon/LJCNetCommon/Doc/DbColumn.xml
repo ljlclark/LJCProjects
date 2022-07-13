@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DbColumn>
+    <summary>
+      Represents a Data Column definition. (D)
+    </summary>
+    <remarks>
+      <para>
+        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+        object is used extensively throughout the LJC libraries, utilities and
+        applications; wherever data elements need to be dynamically defined or
+        manipulated. It is commonly used to define database table columns, grid
+        control columns and text file columns.
+      </para>
+      <para>
+        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+        object contains several properties that are also defined in the
+        &lt;span class="userType"&gt;System.Data.DataColumn&lt;/span&gt;
+        object plus additional properties to support extended usage in the LJC
+        libraries, utilities and applications.
+      </para>
+      <para>
+        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+        object is often used to facilitate moving data between a database table
+        column, grid control column, text file column or other data source and
+        a data object.
+      </para>
+      <para>
+        A Data Object is an instance of a class that contains properties for
+        each data element in a data source row. It is a strongly typed, object
+        oriented representation of the data source row for use in code. It may
+        contain common methods to assist with cloning, sorting and displaying
+        an object string identifier.
+      </para>
+      <para>
+        When the ColumnName property is set, it will set the PropertyName
+        property to the same value if PropertyName is null. This is the most
+        common scenario where the data object property name is the same as the
+        data source column name.
+      </para>
+      <para>
+        If a data object property name is different than the data source column
+        name, then the PropertyName value must be set to the data object
+        property name.
+      </para>
+      <para>
+        For join columns, it may be the case that a different PropertyName needs
+        to be chosen as there is already a property with that name. This often
+        means that a RenameAs value must be assigned as there is most likely
+        also a table column name conflict with the primary table.
+      </para>
+    </remarks>
+  </DbColumn>
+
+  <!-- Constructors -->
+  <DbColumnC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="columnName">The column name.</param>
+    <param name="value">The data string value.</param>
+    <param name="dataTypeName">The data type name.</param>
+    <param name="propertyName">the property name.</param>
+    <param name="assignedKey">The assigned key indicator.</param>
+    <param name="renameValue">The RenameAs value.</param>
+  </DbColumnC>
+
+  <!-- Data Methods -->
+  <FormatValue>
+    <summary>
+      Formats the column value for the SQL string. (D)
+    </summary>
+    <returns>The formatted value.</returns>
+    <remarks>
+      <para>
+        Returns the string formatted value from the Value property based
+        on the DataTypeName property.
+      </para>
+      <para>
+        If the DataType is Boolean, returns "1" or "0".&lt;br /&gt;
+        If the DataType is DateTime, returns a string Date or Minimum Date
+        value.&lt;br  /&gt;
+        If the DataType is string, returns a string with doubled single quotes.
+      </para>
+    </remarks>
+  </FormatValue>
+
+  <!-- Conversions -->
+  <DbValue>
+    <summary>
+      Creates a
+      &lt;span class="userType"&gt;DbValue&lt;/span&gt;
+      object from a
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object. (E)
+    </summary>
+    <param name="dbColumn">
+      The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </param>
+    <example>
+      <code>        using LJCNetCommon;
+        
+        var dbColumn = new DbColumn()
+        {
+          ColumnName = "Test",
+          DataTypeName = "int",
+          Value = 1
+        };
+        var dbValue = dbColumn;</code>
+    </example>
+  </DbValue>
+
+  <!-- Data Properties -->
+  <Caption>
+    <summary>
+      Gets or sets the Caption value. (R)
+    </summary>
+    <remarks>
+      This is the value that is used for the Grid column header.
+    </remarks>
+  </Caption>
+  <ColumnName>
+    <summary>
+      Gets or sets the ColumnName value. (R)
+    </summary>
+    <remarks>
+      This is the Table Column name for the SQL statement. The result value is
+      retrieved using this name. The Table Name comes from
+      &lt;span class="userType"&gt;DBMessage.DbQuery.TableName&lt;/span&gt;.
+      &lt;pre&gt;      select
+        TableName.ColumnName
+        
+      update TableName set
+        TableName.ColumnName = value&lt;/pre&gt;
+    </remarks>
+  </ColumnName>
+  <Position>
+    <summary>
+      Gets or sets the Position value. (R)
+    </summary>
+    <remarks>
+      This property is useful for data sources that require a column position
+      value. An example would be a text file that does not contain column
+      headings.
+    </remarks>
+  </Position>
+  <PropertyName>
+    <summary>
+      Gets or sets the PropertyName value. (R)
+    </summary>
+    <remarks>
+      This is the Data Object Property name. The result value is mapped into
+      the Property with this name.
+    </remarks>
+  </PropertyName>
+  <RenameAs>
+    <summary>
+      Gets or sets the RenameAs value.
+    </summary>
+    <remarks>
+      This result name is usually the same as the Table Column name. The
+      RenameAs value changes the result name. The result value is retrieved
+      using this name. The Table Name comes from
+      &lt;span class="userType"&gt;DBMessage.DbQuery.TableName&lt;/span&gt;.
+      &lt;pre&gt;      select
+        TableName.ColumnName as RenameAs&lt;/pre&gt;
+    </remarks>
+  </RenameAs>
+
+  <!-- Calculated and Join Data Properties -->
+  <ID>
+    <summary>
+      Gets or sets the ID value. (R)
+    </summary>
+    <remarks>
+      Added to accomodate the ViewColumn and ViewJoinColumn tables.
+    </remarks>
+  </ID>
+  <Sequence>
+    <summary>
+      Gets or sets the Sequence value. (R)
+    </summary>
+    <remarks>Added to accomodate the ViewGridColumn table.</remarks>
+  </Sequence>
+  <ViewDataID>
+    <summary>
+      Gets or sets the ViewData ID value. (R)
+    </summary>
+    <remarks>Added to accomodate the ViewColumn table.</remarks>
+  </ViewDataID>
+  <ViewJoinID>
+    <summary>
+      Gets or sets the ViewJoin ID value. (R)
+    </summary>
+    <remarks>Added to accomodate the ViewJoinColumn table.</remarks>
+  </ViewJoinID>
+  <Width>
+    <summary>
+      Gets or sets the Width value. (R)
+    </summary>
+    <remarks>Added to accomodate the ViewGridColumn table.</remarks>
+  </Width>
+
+  <!-- Other Classes -->
+  <DbColumnPropertyComparer>
+    <summary>
+      Sort and search on PropertyName.
+    </summary>
+  </DbColumnPropertyComparer>
+  <DbColumnRenameAsComparer>
+    <summary>
+      Sort and search on RenameAs value.
+    </summary>
+  </DbColumnRenameAsComparer>
+</items>

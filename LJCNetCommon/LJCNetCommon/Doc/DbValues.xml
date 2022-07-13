@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DbValues>
+    <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;DbValue&lt;/span&gt; objects.
+    </summary>
+    <remarks>
+      <para>
+        The common collection static methods are: HasItems() and
+        LJCDeserialize().&lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add(), Clone, HasItems()
+        and LJCSerialize().
+      </para>
+      <para>
+        Public methods are: LJCClearChanged() and LJCGetChanged().
+      </para>
+      <para>
+        The Search method is LJCSearchName().
+      </para>
+      <para>
+        The get data methods are: LJCGetBoolean(), LJCGetInt32(),
+        LJCGetValue(), etc..&lt;br /&gt;
+        The set data method is LJCSetValue().
+      </para>
+      <para>
+        A DbValues collection can be converted to a DbColumns collection using
+        the LJCCreateColumns() method.
+      </para>
+    </remarks>
+  </DbValues>
+  
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+    </summary>
+    <param name="propertyName">The PropertyName value.</param>
+    <param name="value">The item value.</param>
+    <param name="dataTypeName">The DataType name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+
+  <!-- Conversions -->
+  <LJCCreateColumns>
+    <summary>
+      Creates combined
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; from
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbValues&lt;/span&gt;.
+    </summary>
+    <param name="dataDefinition">The column definitions.</param>
+    <returns>
+      The combined
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
+    </returns>
+  </LJCCreateColumns>
+
+  <!-- Public Search Methods -->
+  <LJCClearChanged>
+    <summary>
+      Sets the IsChanged value to false for all elements in the collection.
+    </summary>
+  </LJCClearChanged>
+  <LJCGetChanged>
+    <summary>
+      Gets a collection of changed columns.
+    </summary>
+    <returns>The changed columns list.</returns>
+  </LJCGetChanged>
+  <LJCSetValue>
+    <summary>
+      Sets the object value for the column with the specified name.
+    </summary>
+    <param name="name">The column name.</param>
+    <param name="value">The string value.</param>
+    <returns>The column value.</returns>
+  </LJCSetValue>
+</items>
