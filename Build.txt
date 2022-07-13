@@ -154,6 +154,8 @@ LJCDBMessage
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
 Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem UpdateDBMessage.cmd 
+
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
 
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 

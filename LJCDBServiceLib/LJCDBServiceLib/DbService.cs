@@ -91,6 +91,7 @@ namespace LJCDBServiceLib
     // Encrypt Request Cipher
     private byte[] GetOutgoingCipher(string plainText)
     {
+      //byte[] cipher = mRequestCipherItems.CreateCipher(plainText, mRequestInsertItems);
       byte[] cipher = mRequestCipherItems.CreateCipher(plainText);
       byte[] retValue = mRequestSendCipher.GetSendCipher(cipher);
       return retValue;

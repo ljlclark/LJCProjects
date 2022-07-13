@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- /// <include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml'/> -->
+<items>
+  <DbManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+  </DbManagerC>
+  <Delete>
+    <summary>
+      Deletes the records with the specified key values.
+    </summary>
+    <param name="keyColumns">The record containing the key column values.</param>
+    <param name="filters">The filter values.</param>
+  </Delete>
+  <ExecuteRequest>
+    <summary>
+      Executes the supplied request.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+    <returns>The result object.</returns>
+  </ExecuteRequest>
+  <Load>
+    <summary>
+      Loads a collection of data records.
+    </summary>
+    <param name="keyColumns">The record containing the key column values.</param>
+    <param name="propertyNames">The column property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The Data Object collection.</returns>
+  </Load>
+  <Retrieve>
+    <summary>
+      Retrieves a record from the database.
+    </summary>
+    <param name="keyColumns">The record containing the key column values.</param>
+    <param name="propertyNames">The column property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The Data Object record.</returns>
+  </Retrieve>
+  <Update>
+    <summary>
+      Updates the record.
+    </summary>
+    <param name="dataObject">The DataObject record.</param>
+    <param name="keyColumns">The record containing the key column values.</param>
+    <param name="propertyNames">The column property names.</param>
+    <param name="filters">The filter values.</param>
+  </Update>
+</items>

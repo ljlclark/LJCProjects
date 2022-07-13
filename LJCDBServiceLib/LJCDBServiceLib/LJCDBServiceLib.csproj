@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CipherLib">
-      <HintPath>..\..\LJCDBClientLib\External\CipherLib.dll</HintPath>
+      <HintPath>..\External\CipherLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
