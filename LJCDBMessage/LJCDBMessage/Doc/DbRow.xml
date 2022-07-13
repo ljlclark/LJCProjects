@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <Item1>
+    <summary>
+      The row value for the specified value column index.
+    </summary>
+    <param name="columnIndex">The row value column index.</param>
+    <returns>The selected DbValue row value object.</returns>
+  </Item1>
+  <Item2>
+    <summary>
+      The row value for the specified value column name.
+    </summary>
+    <param name="columnName">The row value column name.</param>
+    <returns>The selected DbValue row value object.</returns>
+  </Item2>
+</items>

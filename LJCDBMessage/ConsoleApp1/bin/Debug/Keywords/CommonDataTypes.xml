@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CommonDataTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>bool</string>
+  <string>Boolean</string>
+  <string>int</string>
+  <string>Int16</string>
+  <string>Int32</string>
+  <string>object</string>
+  <string>Object</string>
+  <string>short</string>
+  <string>string</string>
+  <string>String</string>
+  <string>var</string>
+  <string>void</string>
+</CommonDataTypes>

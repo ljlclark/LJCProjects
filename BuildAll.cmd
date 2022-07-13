@@ -35,4 +35,11 @@ echo ----------------- %counter% - LJCDataAccess---------------- >> Build.txt
 echo LJCDataAccess >> Build.txt
 call LJCDataAccess\UpdateDataAccess.cmd BuildAll >> Build.txt
 msbuild LJCDataAccess\LJCDataAccess.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBMessage ---------------- >> Build.txt
+echo LJCDBMessage >> Build.txt
+call LJCDBMessage\UpdateDBMessage.cmd BuildAll >> Build.txt
+msbuild LJCDBMessage\LJCDBMessage.sln
 pause

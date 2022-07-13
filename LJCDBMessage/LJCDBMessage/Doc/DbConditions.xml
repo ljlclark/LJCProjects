@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <DbConditions>
+    <summary>Represents a collection of
+    &lt;span class="userType"&gt;DbCondition&lt;/span&gt;
+    objects.</summary>
+    <remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add(), Clone() and
+        HasItems().
+      </para>
+    </remarks>
+  </DbConditions>
+  <Add>
+    <summary>
+      Creates and adds the element from the supplied values.
+    </summary>
+    <param name="value1">The first data value.</param>
+    <param name="value2">The second data value.</param>
+    <param name="comparisonOperator">The comparison operator.</param>
+    <returns>The added condition object.</returns>
+  </Add>
+</items>

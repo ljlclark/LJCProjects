@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <Deserialize>
+    <summary>
+      Deserializes the
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt; message.
+    </summary>
+    <param name="request">The request message.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object.
+    </returns>
+  </Deserialize>
+  <DbRequestC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="requestType">The request type.</param>
+    <param name="tableName">The table name.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+  </DbRequestC>
+  <Serialize1>
+    <summary>
+      Serializes the object and returns the serialized string.
+    </summary>
+  </Serialize1>
+  <Serialize2>
+    <summary>
+      Serialize the object to the specified file.
+    </summary>
+    <param name="fileSpec">The file specification.</param>
+  </Serialize2>
+  <Columns>
+    <summary>The included table columns.</summary>
+    <remarks>
+      <para>
+        The Query Columns are those primary table base columnswhose values are
+        returned from the database. Initially, the Query Column
+        name and Property name are the same.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+  </Columns>
+  <KeyColumns>
+    <summary>The key column values.</summary>
+    <remarks>
+      <para>
+        The Key Columns are those base columns and Join Columns whose value is
+        used in the where clause.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+  </KeyColumns>
+  <RequestTypeName>
+    <summary>
+      The request type.
+      (R)
+    </summary>
+    <remarks>
+      This value can be "Insert", "Select", "Load", "Update", "Delete",
+      "SelectProcedure", "SchemaOnly", "TableNames", "RetrieveSql"
+      , "LoadSql" or "ExecuteSql".
+    </remarks>
+  </RequestTypeName>
+</items>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the element from the supplied values.
+    </summary>
+    <param name="name">The Item name.</param>
+    <param name="insertIndex">The Item index.</param>
+    <param name="insertValue">The Item Insert value.</param>
+    <returns>The new InsertItem object.</returns>
+  </Add>
+</items>

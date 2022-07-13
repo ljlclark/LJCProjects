@@ -147,3 +147,48 @@ C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ----------------------
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDataAccess\LJCDataAccess\bin\Debug 
 
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
+- 
+----------------- 6 - LJCDBMessage ---------------- 
+LJCDBMessage 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCDBMessage\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDBMessage\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDataAccess\LJCDataAccess\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll LJCDBMessage\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCDBMessage\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCTextDataReader\LJCTextDataReaderLib\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.dll LJCDBMessage\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ------------------------------ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDBMessage\LJCDBMessage\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
