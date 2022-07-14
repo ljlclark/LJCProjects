@@ -10,7 +10,7 @@ namespace LJCGenTextEdit
   static class Program
   {
     // The program entry point function.
-    /// <include path='items/Main2/*' file='../../LJCDocLib/Common/Program.xml'/>
+    /// <include path='items/Main/*' file='../../LJCDocLib/Common/Program.xml'/>
     [STAThread]
     static void Main()
     {
