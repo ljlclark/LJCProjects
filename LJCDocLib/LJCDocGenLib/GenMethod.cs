@@ -1,0 +1,135 @@
+// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// GenMethod.cs
+using LJCDocObjLib;
+using LJCGenTextLib;
+using LJCNetCommon;
+using System;
+using System.IO;
+
+namespace LJCDocGenLib
+{
+  // Generates the Method HTML pages.
+  /// <include path='items/GenMethod/*' file='Doc/GenMethod.xml'/>
+  public class GenMethod
+  {
+    #region Constructors
+
+    // Initializes an object instance.
+    /// <include path='items/GenMethodC/*' file='Doc/GenMethod.xml'/>
+    public GenMethod(GenRoot genRoot, GenAssembly genAssembly, DataAssembly dataAssembly
+      , DataType dataType, DataMethod dataMethod)
+    {
+      GenRoot = genRoot;
+      GenAssembly = genAssembly;
+      DataAssembly = dataAssembly;
+      DataType = dataType;
+      DataMethod = dataMethod;
+      HTMLFolderName = Path.Combine(genAssembly.HTMLFolderName, "Methods");
+    }
+    #endregion
+
+    #region Public Methods
+
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public override string ToString()
+    {
+      string retValue;
+
+      retValue = $"{DataAssembly.Name}.{DataType.Name}.{DataMethod.Name}";
+      return retValue;
+    }
+
+    // Creates an HTML page for each Method.
+    /// <include path='items/GenMethodPage/*' file='Doc/GenMethod.xml'/>
+    public void GenMethodPage(LJCAssemblyReflect assemblyReflect
+      , string[] templateLines)
+    {
+      if (DataMethod.Summary.ToLower() != "nogen")
+      {
+        CreateMethodXml createMethodXml = new CreateMethodXml(GenAssembly
+          , DataAssembly, DataType, DataMethod, assemblyReflect);
+        string dataFileSpec = $"XMLFiles\\{DataMethod.Name}.xml";
+        string dataXml = createMethodXml.GetXmlData();
+        if (false == NetString.HasValue(dataXml))
+        {
+          Console.WriteLine("Missing Method XML Data.");
+        }
+        else
+        {
+          // Testing
+          if ("GenAssemblyPage" == DataType.Name)
+          {
+            //File.WriteAllText(dataFileSpec, dataXml);
+          }
+
+          Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
+            , dataXml) as Sections;
+          GenerateText generateText = new GenerateText();
+          generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
+            , true);
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Gets or sets the LJCAssemblyReflect object.</summary>
+    public LJCAssemblyReflect AssemblyReflect { get; set; }
+
+    /// <summary>Gets or sets the DataAssembly reference.</summary>
+    public DataAssembly DataAssembly { get; set; }
+
+    /// <summary>Gets or sets the DataMethod object.</summary>
+    public DataMethod DataMethod
+    {
+      get
+      {
+        return mDataMethod;
+      }
+      set
+      {
+        if (value != null)
+        {
+          mDataMethod = value;
+          OverriddenName = mDataMethod.OverriddenName;
+          HTMLFileName = $"{DataType.Name}.{OverriddenName}.html";
+          HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
+        }
+      }
+    }
+    private DataMethod mDataMethod;
+
+    /// <summary>Gets or sets the DataType object.</summary>
+    public DataType DataType { get; set; }
+
+    /// <summary>Gets or sets the GenAssembly reference.</summary>
+    public GenAssembly GenAssembly { get; set; }
+
+    /// <summary>Gets the DataRootGen object.</summary>
+    public GenRoot GenRoot { get; private set; }
+
+    /// <summary>Gets or sets the HTML file name value.</summary>
+    public string HTMLFileName { get; set; }
+
+    /// <summary>Gets or sets the full HTML file specification value.</summary>
+    public string HTMLFileSpec { get; set; }
+
+    /// <summary>Gets or sets the HTML file folder value.</summary>
+    public string HTMLFolderName { get; set; }
+
+    /// <summary>Gets or sets the public flag.</summary>
+    public bool IsPublic { get; set; }
+
+    /// <summary>The overriden method unique name if required.</summary>
+    public string OverriddenName
+    {
+      get { return mOverriddenName; }
+      set { mOverriddenName = NetString.InitString(value); }
+    }
+    private string mOverriddenName;
+    #endregion
+  }
+}
+

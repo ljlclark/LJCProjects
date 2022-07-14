@@ -127,4 +127,14 @@ echo ----------------- %counter% - LJCGenText ------------------ >> Build.txt
 echo LJCGenText >> Build.txt
 call LJCGenText\UpdateGenText.cmd BuildAll >> Build.txt
 msbuild LJCGenText\LJCGenText.sln
+
+rem *** Requires ***
+rem LJCNetCommon
+rem LJCGenTextLib
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDocLib.sln --------------- >> Build.txt
+echo LJCDocLib >> Build.txt
+call LJCDocLib\UpdateDocLib.cmd BuildAll >> Build.txt
+msbuild LJCDocLib\LJCDocLib.sln
 pause

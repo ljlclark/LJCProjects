@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectDocGenLib.xml -->
+<items>
+  <GenAssembly>
+    <summary>
+      Generates the Assembly HTML pages.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The DocGenLib library contains classes to generate HTML pages.
+      </para>
+      <para>
+        The DocGenLib library is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </GenAssembly>
+</items>

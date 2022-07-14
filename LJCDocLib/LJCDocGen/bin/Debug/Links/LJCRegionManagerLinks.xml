@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021-2022 - All Rights Reserved -->
+<!-- LJCRegionManagerLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>RegionTables.html</Name>
+    <Text>Region DB Diagram</Text>
+  </Link>
+</Links>

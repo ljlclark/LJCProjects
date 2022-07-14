@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LJCDocObjLib.DataRoot">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Members>
+      <Method Name="DataRoot" Hidden="true" />
+      <Field Name="mErrorText" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAABAAAAgAAACAAAAAAACAAAAAJAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocObjLib.DataAssemblies">
+    <Position X="0.5" Y="3" Width="2" />
+    <Members>
+      <Field Name="mPrevCount" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataAssemblies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocObjLib.DataAssembly">
+    <Position X="2.75" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="DataAssembly" Hidden="true" />
+      <Field Name="mErrorText" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gBABBIAAEAIgAAQEAAAAACQACAABAAEAAAAAAAABAAA=</HashCode>
+      <FileName>DataAssembly.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LJCDocObjLib.DataMethods">
+    <Position X="7" Y="0.5" Width="2" />
+    <Members>
+      <Method Name="DataMethods" Hidden="true" />
+      <Field Name="mPrevCount" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>DataMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocObjLib.DataMethod">
+    <Position X="9.25" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="CompareTo" Hidden="true" />
+      <Method Name="DataMethod" Hidden="true" />
+      <Property Name="IsError" Hidden="true" />
+      <Property Name="IsSuccess" Hidden="true" />
+      <Field Name="mErrorText" Hidden="true" />
+      <Field Name="mOverriddenName" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABKBBAIAEAQAAIQMAAIAACQCCCgBABAAAAgAAAAAASA=</HashCode>
+      <FileName>DataMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LJCDocObjLib.DataType">
+    <Position X="5" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="DataType" Hidden="true" />
+      <Property Name="IsError" Hidden="true" />
+      <Property Name="IsSuccess" Hidden="true" />
+      <Field Name="mErrorText" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABSBBAIAAAAQIIAEAAIAACQGCAIBABAAAAgAAAAAARA=</HashCode>
+      <FileName>DataType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocObjLib.DataParams" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataParams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocObjLib.DataParam">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>DataParam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

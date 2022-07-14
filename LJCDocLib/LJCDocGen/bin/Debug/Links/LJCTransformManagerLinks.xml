@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021-2022 - All Rights Reserved -->
+<!-- LJCTransformManagerLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>..\..\..\..\LJCTransformManager\LJCTransformManager\LinkPages\ProcessTables.html</Name>
+    <Text>Process DB Diagram</Text>
+  </Link>
+  <Link>
+    <Name>..\..\..\..\LJCTransformManager\LJCTransformManager\LinkPages\SourceLayoutTables.html</Name>
+    <Text>SourceLayout DB Diagram</Text>
+  </Link>
+  <Link>
+    <Name>..\..\..\..\LJCTransformManager\LJCTransformManager\LinkPages\TaskSourceTables.html</Name>
+    <Text>TaskSource DB Diagram</Text>
+  </Link>
+  <Link>
+    <Name>..\..\..\..\LJCTransformManager\LJCTransformManager\LinkPages\TransformTables.html</Name>
+    <Text>Transform DB Diagram</Text>
+  </Link>
+</Links>

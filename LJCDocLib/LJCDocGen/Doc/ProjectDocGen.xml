@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- App.config -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The DocGen program generates HTML pages.
+      </para>
+      <para>
+        The DocGen program is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

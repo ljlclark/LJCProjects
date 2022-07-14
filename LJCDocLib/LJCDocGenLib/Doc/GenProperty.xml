@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenProperty.xml -->
+<items>
+  <GenProperty>
+    <summary>
+      Generates the Property HTML pages.
+    </summary>
+  </GenProperty>
+  <GenPropertyC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="genRoot">The GenRoot object.</param>
+    <param name="genAssembly">The GenAssembly object.</param>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="dataType">The DataType object.</param>
+    <param name="dataProperty">The DataProperty object.</param>
+  </GenPropertyC>
+  <GenPropertyPage>
+    <summary>
+      Creates an HTML page for each Property.
+    </summary>
+    <param name="assemblyReflect">The AssemblyReflect object.</param>
+    <param name="templateLines">The Property template lines.</param>
+  </GenPropertyPage>
+</items>

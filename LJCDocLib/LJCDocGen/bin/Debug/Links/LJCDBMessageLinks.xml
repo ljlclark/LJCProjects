@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021-2022 - All Rights Reserved -->
+<!-- LJCDBMessageLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>DbRequestColumn.html</Name>
+    <Text>DbRequest Column Diagram</Text>
+  </Link>
+  <Link>
+    <Name>DbRequestJoin.html</Name>
+    <Text>DbRequest Join Diagram</Text>
+  </Link>
+  <Link>
+    <Name>DbRequestResult.html</Name>
+    <Text>DbResult Diagram</Text>
+  </Link>
+</Links>

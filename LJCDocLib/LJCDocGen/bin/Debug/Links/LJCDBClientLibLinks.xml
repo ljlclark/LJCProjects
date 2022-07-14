@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021-2022 - All Rights Reserved -->
+<!-- LJCDBClientLibLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>Configuration.html</Name>
+    <Text>Manager Configuration Diagram</Text>
+  </Link>
+  <Link>
+    <Name>DataMethods.html</Name>
+    <Text>Manager Data Methods Diagram</Text>
+  </Link>
+</Links>

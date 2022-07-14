@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenType.xml -->
+<items>
+  <GenType>
+    <summary>
+      Generates the Class/Type HTML pages.
+    </summary>
+  </GenType>
+  <GenTypeC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="genRoot">The GenRoot object.</param>
+    <param name="genAssembly">The GenAssembly object.</param>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="dataType">The DataType object.</param>
+    <param name="assemblyReflect">The LJCAssemblyReflect object.</param>
+  </GenTypeC>
+  <GenFieldPages>
+    <summary>
+      Generates the field pages.
+    </summary>
+    <param name="templateLines">The template lines.</param>
+  </GenFieldPages>
+  <GenMethodPages>
+    <summary>
+      Generates the method pages.
+    </summary>
+    <param name="templateLines">The template lines.</param>
+  </GenMethodPages>
+  <GenPropertyPages>
+    <summary>
+      Generates the property pages.
+    </summary>
+    <param name="templateLines">The template lines.</param>
+  </GenPropertyPages>
+  <GenTypePage>
+    <summary>
+      Creates an HTML page that lists the methods, properties and fields for
+      a data type. (R)
+    </summary>
+    <param name="templateLines">The template lines.</param>
+    <remarks>
+      The HTML page is created in a folder under "Doc" with the full name of the
+      assembly. Each page file has the name of the type it represents.
+      <para>Called from GenAssembly.GenTypePages().</para>
+    </remarks>
+  </GenTypePage>
+</items>

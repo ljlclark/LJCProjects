@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DataField.xml -->
+<items>
+  <DataField>
+    <summary>
+      Represents the Field documentation data.
+    </summary>
+  </DataField>
+  <DataFieldC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="dataType">The DataType object.</param>
+    <param name="fieldMember">The Field member object.</param>
+    <include path='items/DataField/*' file='Doc/DataField.xml'/>
+  </DataFieldC>
+  <Doc>
+    <summary>Gets or sets the Doc value.</summary>
+    <remarks>
+      The Doc object contains the deserialized documentation XML data.
+    </remarks>
+  </Doc>
+  <FieldMember>
+    <summary>Gets or sets the FieldMember value.</summary>
+    <remarks>
+      This DocMember object contains the deserialized property documentation
+      XML data.
+    </remarks>
+  </FieldMember>
+</items>

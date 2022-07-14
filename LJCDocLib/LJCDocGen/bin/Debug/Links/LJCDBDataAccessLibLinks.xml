@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021-2022 - All Rights Reserved -->
+<!-- LJCDBDataAccessLibLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>DbAccessConfig.html</Name>
+    <Text>Message Data Access Config</Text>
+  </Link>
+  <Link>
+    <Name>DbAccessData.html</Name>
+    <Text>Message Data Access Data Methods</Text>
+  </Link>
+</Links>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LJCDocGenLib.GenType">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="mDataType" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AJAJAAAEQQIAAAAEAAAAAAAAIAAAAAEAAAAAAIAACAA=</HashCode>
+      <FileName>GenType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocGenLib.GenProperty">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="mDataProperty" Hidden="true" />
+      <Field Name="mOverriddenName" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EIAIAAAEAQIAAAAMAAAAAAAAAAgIAAAAAAAAAIAgCAA=</HashCode>
+      <FileName>GenProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDocGenLib.GenField">
+    <Position X="4.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="mDataField" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAIAAAEAQIAAAAEAABACAAAAAAAAAAAAAAgAIAACAA=</HashCode>
+      <FileName>GenField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

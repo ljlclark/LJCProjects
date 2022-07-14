@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DataMethod.xml -->
+<items>
+  <DataMethod>
+    <summary>
+      Represents the Method documentation data.
+    </summary>
+  </DataMethod>
+  <DataMethodC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="dataType">The DataType object.</param>
+    <param name="methodMember">The Method member object.</param>
+    <param name="overriddenName">The unique overridden name.</param>
+  </DataMethodC>
+  <SetMethodInfo>
+    <summary>
+      Sets the MethodInfoValue property.
+    </summary>
+  </SetMethodInfo>
+  <Doc>
+    <summary>Gets or sets the Doc value.</summary>
+    <remarks>
+      The Doc object contains the deserialized documentation XML data.
+    </remarks>
+  </Doc>
+  <MethodMember>
+    <summary>Gets or sets the MethodMember value.</summary>
+    <remarks>
+      This DocMember object contains the deserialized method documentation
+      XML data.
+    </remarks>
+  </MethodMember>
+</items>

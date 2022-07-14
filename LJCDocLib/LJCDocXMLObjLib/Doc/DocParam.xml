@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DocParam.xml -->
+<items>
+  <DocParam>
+    <summary>
+      The deserialied XML documentation "param" node.
+    </summary>
+  </DocParam>
+  <DocParamC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name">The doc member name.</param>
+    <param name="text">The XML element text value.</param>
+  </DocParamC>
+</items>

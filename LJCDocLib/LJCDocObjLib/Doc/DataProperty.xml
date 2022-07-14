@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DataProperty.xml -->
+<items>
+  <DataProperty>
+    <summary>
+      Represents the Property documentation data.
+    </summary>
+  </DataProperty>
+  <DataPropertyC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="dataType">The DataType object.</param>
+    <param name="propertyMember">The Property member object.</param>
+    <param name="overriddenName">The unique overridden name.</param>
+  </DataPropertyC>
+  <Doc>
+    <summary>Gets or sets the Doc value.</summary>
+    <remarks>
+      The Doc object contains the deserialized documentation XML data.
+    </remarks>
+  </Doc>
+  <PropertyMember>
+    <summary>Gets or sets the PropertyMember value.</summary>
+    <remarks>
+      This DocMember object contains the deserialized property documentation
+      XML data.
+    </remarks>
+  </PropertyMember>
+</items>

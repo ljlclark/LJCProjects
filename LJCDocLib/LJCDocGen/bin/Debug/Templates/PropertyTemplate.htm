@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- PropertyTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- #SectionBegin Main -->
+<head>
+  <title>_PropertyName_</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../../CSS/CodeDoc.css' />
+</head>
+<!--X------------------------------------->
+<!-- #Value _AssemblyName_ -->
+<!-- #Value _AssemblyHtm_ -->
+<!-- #Value _Namespace_ -->
+<!-- #Value _TypeName_ -->
+<!-- #Value _Description_ Property -->
+<!-- #Value _PropertyName_ -->
+<!-- #Value _Syntax_ -->
+<!-- #Value _Summary_ -->
+<!-- #Value _HasRemarks_ -->
+<!-- #Value _RemarkText_ -->
+<!-- #Value _Copyright_ -->
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../../CodeDoc.html#_AssemblyName_">Assembly List</a>
+    / <a href="../_AssemblyName_.html">_AssemblyName_</a>
+    / <a href="../_TypeName_.html">_TypeName_</a>
+    / _PropertyName_
+  </div>
+  <br />
+  <div id='Title'>Namespace - _Namespace_</div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>_Description_ _PropertyName_</div>
+  </div>
+  <!--X------------------------------------->
+  <!-- #IfBegin _Syntax_ NotNull -->
+  <br />
+  <div class='Text'>Syntax</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            _Syntax_
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- #IfEnd Syntax -->
+  <!--X------------------------------------->
+  <!-- #IfBegin _Summary_ NotNull -->
+  <br />
+  <div class='Text'>_Summary_</div>
+  <!-- #IfElse Summary -->
+  <br />
+  <div class='RedText'>Missing Summary</div>
+  <!-- #IfEnd Summary -->
+  <!--X------------------------------------->
+  <!-- #IfBegin _HasRemarks_ True -->
+  <br />
+  <div class='Text'>Remarks</div>
+  <!-- #IfEnd HasRemarks -->
+  <!-- #IfBegin _RemarkText_ NotNull -->
+  <br />
+  <div class='Text'>_RemarkText_</div>
+  <!-- #IfEnd RemarkText -->
+  <!--X------------------------------------->
+  <!-- #SectionBegin PropertyRemarks -->
+  <!-- #Value _Para_ -->
+  <br />
+  <div class='Text'>_Para_</div>
+  <!-- #SectionEnd PropertyRemarks -->
+  <br />
+  <div class='SmallText'>_Copyright_</div>
+</body>
+<!-- #SectionEnd Main -->
+</html>

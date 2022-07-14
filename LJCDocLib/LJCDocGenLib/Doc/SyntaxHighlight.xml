@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- SyntaxHighlight.xml -->
+<items>
+  <SyntaxHighlight>
+    <summary>
+      Provides methods for HTML Syntax Highighting.
+    </summary>
+  </SyntaxHighlight>
+  <SaveLeadingWhiteSpace>
+    <summary>
+      Retrieves the leading whitespace string.
+    </summary>
+    <param name="text">The HTML text string.</param>
+    <returns>The leading whitespace string.</returns>
+  </SaveLeadingWhiteSpace>
+  <StripLeadingWhiteSpace>
+    <summary>
+      Strips the specified number of leading whitespace characters from
+      an HTML string.
+    </summary>
+    <param name="text">The HTML text string.</param>
+    <param name="stripLength">The number of leading whitespace characters to strip.</param>
+    <returns>The stripped string value.</returns>
+  </StripLeadingWhiteSpace>
+  <AddSyntaxHighlight>
+    <summary>
+      Adds the Syntax Highlighting to the HTML code line.
+    </summary>
+    <param name="line">The HTML code line.</param>
+    <returns></returns>
+  </AddSyntaxHighlight>
+  <FormatCode>
+    <summary>
+      Strips the defined leading white spaces and applies Syntax Highlighting.
+    </summary>
+    <param name="dataTypeName">The data type name.</param>
+    <param name="dataMemberName">The data member name.</param>
+    <param name="code">The HTML code string.</param>
+    <returns>The formatted code string.</returns>
+  </FormatCode>
+  <SetUserTypes>
+    <summary>
+      Reads the User Types from a file or creates the file if it does not exist
+    </summary>
+    <param name="dataTypeName">The data type name.</param>
+    <param name="dataMemberName">The data member name.</param>
+    <param name="code">The HTML code string.</param>
+  </SetUserTypes>
+  <UpdateUserTypes>
+    <summary>
+      Updates the User Types if a new one is found in the HTML code line.
+    </summary>
+    <param name="line">The HTML code line.</param>
+  </UpdateUserTypes>
+</items>

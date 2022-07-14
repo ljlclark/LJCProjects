@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenRootXml.xml -->
+<items>
+  <CreateRootXmlC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="docGenGroups">The DocGenGroups collection.</param>
+  </CreateRootXmlC>
+  <GetXmlData>
+    <summary>
+      Returns the XML Data values.
+    </summary>
+    <returns></returns>
+  </GetXmlData>
+</items>

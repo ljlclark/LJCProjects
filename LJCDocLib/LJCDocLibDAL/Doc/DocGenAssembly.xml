@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DocGenAssembly.xml -->
+<items>
+  <DocGenAssembly>
+    <summary>
+      The DocGenAssembly table Data Record.
+    </summary>
+  </DocGenAssembly>
+</items>

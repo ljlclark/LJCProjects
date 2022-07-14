@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- DocAssembly.xml -->
+<items>
+  <DocAssembly>
+    <summary>
+      The deserialized XML documentation assembly node.
+    </summary>
+    <remarks>
+      <para>
+        The Assembly documentation object contains the list of class/type documentation objects.
+      </para>
+    </remarks>
+  </DocAssembly>
+</items>

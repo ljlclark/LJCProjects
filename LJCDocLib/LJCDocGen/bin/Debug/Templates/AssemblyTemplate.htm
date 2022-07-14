@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- AssemblyTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- #SectionBegin Main -->
+<head>
+  <title>_AssemblyName_</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <meta name="author" content="Lester J. Clark" />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<!--X------------------------------------->
+<!-- #Value _AssemblyName_ -->
+<!-- #Value _Image_ -->
+<!-- #Value _HasLinks_ -->
+<!-- #Value _ClassCount_ -->
+<!-- #Value _Copyright_ -->
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../CodeDoc.html#_AssemblyName_">Assembly List</a>
+    / _AssemblyName_
+  </div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>Assembly _AssemblyName_</div>
+  </div>
+  <!--X------------------------------------->
+  <!-- #SectionBegin AssemblyRemarks -->
+  <!-- #Value _Para_ -->
+  <br />
+  <div class='Text'>_Para_</div>
+  <!-- #SectionEnd AssemblyRemarks -->
+  <!--X------------------------------------->
+  <!-- #IfBegin _HasLinks_ true -->
+  <br />
+  <div class='Text'>
+    <!-- #IfEnd _HasLinks_ -->
+    <!-- #SectionBegin Links -->
+    <!-- #Value _LinkName_ -->
+    <!-- #Value _LinkText_ -->
+    <!-- #IfBegin _HasLinks_ true -->
+    <a href='_LinkName_' target='_blank'>_LinkText_</a>
+    <!-- #IfEnd _HasLinks_ -->
+    <!-- #SectionEnd Links -->
+    <!-- #IfBegin _HasLinks_ true -->
+  </div>
+  <!-- #IfEnd _HasLinks_ -->
+  <!--X------------------------------------->
+  <br />
+  <div id='Title'>Classes<br></div>
+  <!--X------------------------------------->
+  <!-- #IfBegin _Image_ NotNull -->
+  <table>
+    <tr>
+      <td>
+        <!-- #IfEnd Image -->
+        <!--X------------------------------------->
+        <table class='ListTable'>
+          <!--X------------------------------------->
+          <!-- #SectionBegin ClassList -->
+          <!-- #Value _HTMLFileName_ -->
+          <!-- #Value _Name_ -->
+          <!-- #Value _Summary_ -->
+          <tr>
+            <td class='ListTable' width='25%'><a href='_HTMLFileName_'>_Name_</a></td>
+            <!--X------------------------------------->
+            <!-- #IfBegin _Summary_ NotNull -->
+            <td class='ListTable'>_Summary_</td>
+            <!-- #IfElse -->
+            <td class='ListTableMissing'>Missing Summary</td>
+            <!-- #IfEnd _Summary_ -->
+            <!--X------------------------------------->
+          </tr>
+          <!-- #SectionEnd ClassList -->
+          <!--X------------------------------------->
+        </table>
+        <!--X------------------------------------->
+        <!-- #IfBegin _Image_ NotNull -->
+      </td>
+      <td>
+        <img src='_Image_' height='350' />
+      </td>
+    </tr>
+  </table>
+  <!-- #IfEnd Image -->
+  <!--X------------------------------------->
+  <div class='Text'>_ClassCount_ Types</div>
+  <br />
+  <div class='SmallText'>_Copyright_</div>
+</body>
+<!-- #SectionEnd Main -->
+<!--X------------------------------------->
+</html>
