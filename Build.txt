@@ -504,3 +504,92 @@ C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy MySql.Data.dll LJCDBC
 The system cannot find the file specified.
 
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 
+- 
+----------------- 11 - LJCDBServiceHosts ----------- 
+LJCDBServiceHosts 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved 
+Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem UpdateDBServiceHosts.cmd 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set bin=bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto BuildAll 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set root= 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set runRoot=LJCDBServiceHosts\ 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDBServiceHosts\External 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Referenced Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDataAccess\LJCDataAccess\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDBClientLib\LJCDBClientLib\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDBMessage\LJCDBMessage\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem --- LJCDBServiceLib 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDBServiceLib\LJCDBDataAccessLib\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDBServiceLib\LJCDBDataAccessLib\bin\Debug\LJCDBDataAccessLib.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDBServiceLib\LJCDBServiceLib\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem --- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCNetCommon\LJCNetCommon\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll LJCDBServiceHosts\External 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ***************************** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem *** Runtime-only Binaries *** 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ----------------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDBServiceHosts\LJCDBServiceConsoleHost\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set src=LJCDataAccessConfig\LJCDataAccessConfig 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml LJCDBServiceHosts\LJCDBServiceConsoleHost\bin\Debug 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml LJCDBServiceHosts\LJCDBServiceConsoleHost\bin\Debug 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>rem ---------------------------------- 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>set to=LJCDBServiceHosts\LJCDBServiceHost\bin\Debug 
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml LJCDBServiceHosts\LJCDBServiceHost\bin\Debug 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>copy LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml LJCDBServiceHosts\LJCDBServiceHost\bin\Debug 
+        1 file(s) copied.
+
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects>if BuildAll. == BuildAll. goto End 

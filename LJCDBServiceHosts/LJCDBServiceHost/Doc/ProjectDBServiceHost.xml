@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectDBServiceHost.xml -->
+<items>
+  <DBWindowsService>
+    <summary>
+      The DataService windows service.
+    </summary>
+    <remarks>
+      Hosts the Database Service DbService.
+      <para>-- Project Level Remarks</para>
+      <para>Data Service Host Library</para>
+      <para>
+        The DataService Host library contains classes which host the DbService
+        Data Service.
+      </para>
+      <para>
+        The LJCDBServiceHost program is part of the LJCDBServiceHosts solution.
+      </para>
+    </remarks>
+  </DBWindowsService>
+</items>

@@ -14,11 +14,11 @@
     <summary>
       The program entry point function.
     </summary>
-    <param name="args">The command line arguments.</param>
   </Main>
-  <Main2>
+  <MainArgs>
     <summary>
       The program entry point function.
     </summary>
-  </Main2>
+    <param name="args">The command line arguments.</param>
+  </MainArgs>
 </items>

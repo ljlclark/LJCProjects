@@ -70,4 +70,11 @@ echo ----------------- %counter% - LJCDBClientLib -------------- >> Build.txt
 echo LJCDBClientLib >> Build.txt
 call LJCDBClientLib\UpdateDBClientLib.cmd BuildAll >> Build.txt
 msbuild LJCDBClientLib\LJCDBClientLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBServiceHosts ----------- >> Build.txt
+echo LJCDBServiceHosts >> Build.txt
+call LJCDBServiceHosts\UpdateDBServiceHosts.cmd BuildAll >> Build.txt
+msbuild LJCDBServiceHosts\LJCDBServiceHosts.sln
 pause
