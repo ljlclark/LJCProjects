@@ -1,5 +1,6 @@
 echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 rem ClearBuild.cmd
+del Build.txt
 call LJCCodeLineCounter\ClearCodeLineCounter.cmd ClearAll
 call LJCDataAccess\ClearDataAccess.cmd ClearAll
 call LJCDataAccessConfig\ClearDataAccessConfig.cmd ClearAll
