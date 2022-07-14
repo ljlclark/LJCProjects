@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- Replacement.xml -->
+<items>
+  <Replacement>
+    <summary>
+      Represents a TextGen replacement item.
+    </summary>
+  </Replacement>
+  <ReplacementC>
+    <summary>
+      Initializes the Replacement object with the supplied values.
+    </summary>
+    <param name="name">The section name.</param>
+    <param name="value">The replacement value.</param>
+  </ReplacementC>
+</items>

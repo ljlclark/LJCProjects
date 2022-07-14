@@ -8,6 +8,7 @@ call LJCDBClientLib\ClearDBClientLib.cmd ClearAll
 call LJCDBMessage\ClearDBMessage.cmd ClearAll
 call LJCDBServiceHosts\ClearDBServiceHosts.cmd ClearAll
 call LJCDBServiceLib\ClearDBServiceLib.cmd ClearAll
+call LJCGenText\ClearGenText.cmd ClearAll
 call LJCGridDataLib\ClearGridDataLib.cmd ClearAll
 call LJCLibraries\ClearLibraries.cmd ClearAll
 call LJCNetCommon\ClearNetCommon.cmd ClearAll

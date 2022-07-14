@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenTextEditSplash.xml -->
+<items>
+  <GenTextEditSplash>
+    <summary>
+      The GenTextEdit Splash and About dialog.
+    </summary>
+  </GenTextEditSplash>
+  <GenTextEditSplashC>
+    <summary>
+      Displays the Splash/About dialog.
+    </summary>
+    <param name="isSplash">Indicates if it is a Splash screen or About box.</param>
+  </GenTextEditSplashC>
+</items>

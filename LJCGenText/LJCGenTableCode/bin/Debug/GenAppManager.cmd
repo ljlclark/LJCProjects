@@ -1,0 +1,3 @@
+call ClearOutput.cmd
+copy DefaultValuesAppManager.xml DefaultValues.xml
+LJCGenTableCode AppManager

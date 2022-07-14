@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<DefaultValues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namespace>LJC.GenealogyDAL</Namespace>
+  <CollectionName>TableName</CollectionName>
+  <ClassName>TableName</ClassName>
+  <TableName>DataTable</TableName>
+  <FullAppName>LJC.GenealogyDAL</FullAppName>
+  <AppName>Genealogy</AppName>
+  <ToStringName>Description</ToStringName>
+  <CompareToName>Name</CompareToName>
+</DefaultValues>

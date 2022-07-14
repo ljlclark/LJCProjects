@@ -1,0 +1,3 @@
+call ClearOutput.cmd
+copy DefaultValuesGenealogy.xml DefaultValues.xml
+LJCGenTableCode GenealogyManager

@@ -101,7 +101,7 @@ rem *** Requires ***
 rem LJCNetCommon
 rem LJCDataAccessConfig
 rem LJCDataAccess
-rem LJCDataMessage
+rem LJCDBMessage
 rem LJCDBDataAccessLib (Project-LJCDBServiceLib)
 rem LJCGridDataLib
 rem LJCDBClientLib
@@ -111,4 +111,20 @@ echo ----------------- %counter% - LJCDBServiceHosts ----------- >> Build.txt
 echo LJCDBServiceHosts >> Build.txt
 call LJCDBServiceHosts\UpdateDBServiceHosts.cmd BuildAll >> Build.txt
 msbuild LJCDBServiceHosts\LJCDBServiceHosts.sln
+
+rem *** Requires ***
+rem LJCNetCommon
+rem LJCDataAccessConfig
+rem LJCDataAccess
+rem LJCDBMessage
+rem LJCDBDataAccessLib (Project-LJCDBServiceLib)
+rem LJCDBClientLib
+rem LJCWinFormCommon
+rem LJCWinFormControls
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCGenText ------------------ >> Build.txt
+echo LJCGenText >> Build.txt
+call LJCGenText\UpdateGenText.cmd BuildAll >> Build.txt
+msbuild LJCGenText\LJCGenText.sln
 pause

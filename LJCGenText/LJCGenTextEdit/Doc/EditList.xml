@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- EditList.xml -->
+<items>
+  <MainTabsMove>
+    <summary>
+      Performs a Move of the selected Main Tab to the TileTabs control.
+    </summary>
+    <param name="sender">The object that originated the event request.</param>
+    <param name="e">The event arguments.</param>
+  </MainTabsMove>
+  <TileTabsMove>
+    <summary>
+      Performs a Move of the selected Tile Tab to the MainTabs control.
+    </summary>
+    <param name="sender">The object that originated the event request.</param>
+    <param name="e">The event arguments.</param>
+  </TileTabsMove>
+</items>

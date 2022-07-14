@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Section>
+    <Name>Class</Name>
+    <RepeatItems>
+      <RepeatItem>
+        <Name>Item1</Name>
+        <Replacements>
+          <Replacement>
+            <Name>_a_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_d_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_gt_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_lt/_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_lt_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_nm_</Name>
+          </Replacement>
+          <Replacement>
+            <Name>_/s_</Name>
+          </Replacement>
+        </Replacements>
+      </RepeatItem>
+    </RepeatItems>
+  </Section>
+</Sections>
