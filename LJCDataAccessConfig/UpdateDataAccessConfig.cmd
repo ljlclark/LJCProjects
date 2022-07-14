@@ -1,4 +1,5 @@
 echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+rem UpdateDataAccessConfig.cmd
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
 set root=..\
