@@ -1,4 +1,5 @@
 // Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// TestArgs.cs
 using System;
 
 namespace LJCCodeLineCounter
@@ -17,7 +18,7 @@ namespace LJCCodeLineCounter
       {
         retValue = new string[3];
         //args[0] = @"..\..\..\..\LJC.AppManager";
-        retValue[0] = @"C:\Users\Les\Documents\Visual Studio 2017\Projects";
+        retValue[0] = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
         retValue[1] = "*.cs";
         //retValue[2] = "SetDisplayColumns";
       }
@@ -25,7 +26,7 @@ namespace LJCCodeLineCounter
       {
         retValue = new string[2];
         //retValue[0] = @"..\..\..\..\LJC.DocLib\LJC.DocGen\bin\Debug\Doc";
-        retValue[0] = @"C:\Users\Les\Documents\Visual Studio 2017\Projects\Doc";
+        retValue[0] = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\Doc";
         retValue[1] = "*.html";
       }
       return retValue;
