@@ -1,4 +1,4 @@
-set Find="2017,2018,2019,2020"
+set Find="Keywords"
 
 if %1. == . goto default
 set folder=%1
