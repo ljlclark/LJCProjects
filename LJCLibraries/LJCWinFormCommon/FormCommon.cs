@@ -246,10 +246,12 @@ namespace LJCWinFormCommon
     /// <include path='items/TextBoxNoSpace_TextChanged/*' file='Doc/FormCommon.xml'/>
     public static void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
-      if (sender is TextBox textBox)
+      if (sender is TextBox textBox
+        && textBox.Text.Contains(" "))
       {
+        int selectionStart = textBox.SelectionStart;
         textBox.Text = StripBlanks(textBox.Text);
-        textBox.SelectionStart = textBox.Text.Trim().Length;
+        textBox.SelectionStart = selectionStart;
       }
     }
     #endregion

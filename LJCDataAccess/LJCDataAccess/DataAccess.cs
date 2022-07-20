@@ -218,17 +218,20 @@ namespace LJCDataAccess
         using (dbCommand = ProviderFactory.CreateCommand(procedureName
           , CommandType.StoredProcedure))
         {
-          foreach (ProcedureParameter parameter in parameters)
+          if (parameters != null)
           {
-            SqlParameter parm = new SqlParameter()
+            foreach (ProcedureParameter parameter in parameters)
             {
-              ParameterName = parameter.ParameterName,
-              SqlDbType = parameter.SqlDbType,
-              Size = parameter.Size,
-              Direction = parameter.Direction,
-              Value = parameter.Value
-            };
-            dbCommand.Parameters.Add(parm);
+              SqlParameter parm = new SqlParameter()
+              {
+                ParameterName = parameter.ParameterName,
+                SqlDbType = parameter.SqlDbType,
+                Size = parameter.Size,
+                Direction = parameter.Direction,
+                Value = parameter.Value
+              };
+              dbCommand.Parameters.Add(parm);
+            }
           }
 
           dbDataAdapter = ProviderFactory.CreateDataAdapter();
