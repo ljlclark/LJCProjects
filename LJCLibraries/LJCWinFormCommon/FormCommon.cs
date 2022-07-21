@@ -232,14 +232,20 @@ namespace LJCWinFormCommon
     /// <include path='items/TextBoxNumeric_KeyPress/*' file='Doc/FormCommon.xml'/>
     public static void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+      if (false == e.Handled)
+      {
+        e.Handled = HandleNumberOrEditKey(e.KeyChar);
+      }
     }
 
     // Does not allow spaces.
     /// <include path='items/TextBoxNoSpace_KeyPress/*' file='Doc/FormCommon.xml'/>
     public static void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
-      e.Handled = HandleSpace(e.KeyChar);
+      if (false == e.Handled)
+      {
+        e.Handled = HandleSpace(e.KeyChar);
+      }
     }
 
     // Strips blanks from the text value.
