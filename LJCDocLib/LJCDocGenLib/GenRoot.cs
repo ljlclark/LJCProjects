@@ -55,9 +55,6 @@ namespace LJCDocGenLib
     {
       GenAssembly genAssembly;
 
-      //File.WriteAllText("ClassSyntax.txt", "");
-      //File.WriteAllText("MethodSyntax.txt", "");
-      //File.WriteAllText("PropertySyntax.txt", "");
       string templateFileSpec = "Templates\\AssemblyTemplate.htm";
       string[] templateLines = ReadAllLines(templateFileSpec);
 
@@ -114,8 +111,6 @@ namespace LJCDocGenLib
         }
         else
         {
-          // *** Next Statement Change - 6/09
-          //assemblyPageSpec = Path.Combine($@"HTML\{dataAssembly.Name}", assemblyPageName);
           assemblyPageSpec = $@"HTML/{dataAssembly.Name}/{assemblyPageName}";
         }
 

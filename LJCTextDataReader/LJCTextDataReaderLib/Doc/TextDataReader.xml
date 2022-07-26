@@ -245,10 +245,18 @@
 
         while(textReader.Read())
         {
-          // Get the current line values as strings.
+          // Get the current line values by index.
           for (int index = 0; index &amp;lt; textReader.FieldCount; index++)
           {
-            string data = textReader.GetString(index);
+            object fieldValue = textReader[index];
+            string text = textReader.GetString(index);
+          }
+
+          // Get the current line values by name.
+          foreach (string fieldName in textReader.LJCGetFieldNames())
+          {
+            object fieldValue = textReader[fieldName];
+            string text = textReader.GetString(fieldName);
           }
         }
       </code>

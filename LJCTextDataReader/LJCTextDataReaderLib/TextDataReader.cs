@@ -896,9 +896,14 @@ namespace LJCTextDataReaderLib
     {
       bool isError;
 
-      if (values.Length != FieldCount)
+      // Allow values to be less than FieldCount.
+      // *** Next Statement *** Change
+      //if (values.Length != FieldCount)
+      if (values.Length > FieldCount)
       {
         isError = true;
+
+        // Skip empty line.
         if (1 == values.Length
           && false == NetString.HasValue(values[0]))
         {
@@ -914,7 +919,10 @@ namespace LJCTextDataReaderLib
       }
       else
       {
-        for (int index = 0; index < FieldCount; index++)
+        // Allow values to be less than FieldCount.
+        // *** Next Statement *** Change
+        //for (int index = 0; index < FieldCount; index++)
+        for (int index = 0; index < values.Length; index++)
         {
           DbColumn dataField = LJCDataFields[index];
           if (dataField != null)
@@ -929,7 +937,10 @@ namespace LJCTextDataReaderLib
     /// <include path='items/LJCSetValues2/*' file='Doc/TextDataReader.xml'/>
     public void LJCSetValues(string line)
     {
-      for (int index = 0; index < FieldCount; index++)
+      // Allow values to be less than FieldCount.
+      // *** Next Statement *** Change
+      //for (int index = 0; index < FieldCount; index++)
+      for (int index = 0; index < LJCDataFields.Count; index++)
       {
         DbColumn dataField = LJCDataFields[index];
         if (dataField != null)

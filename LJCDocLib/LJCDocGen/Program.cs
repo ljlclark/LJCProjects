@@ -3,8 +3,6 @@
 using LJCDocGenLib;
 using LJCDocLibDAL;
 using LJCDocObjLib;
-using LJCDocXMLObjLib;
-using LJCNetCommon;
 using System;
 using System.IO;
 

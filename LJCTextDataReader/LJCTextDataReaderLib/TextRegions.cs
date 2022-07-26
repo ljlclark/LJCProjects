@@ -124,7 +124,8 @@ namespace LJCTextDataReaderLib
         }
 
         // Find the end of field.
-        currentIndex = beginIndex + 1;
+        //currentIndex = beginIndex + 1;
+        currentIndex = beginIndex;
         int endIndex = line.IndexOf(LJCFieldDelimiter, currentIndex);
         if (-1 == endIndex)
         {

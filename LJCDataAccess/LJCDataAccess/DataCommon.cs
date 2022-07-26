@@ -162,13 +162,14 @@ namespace LJCDataAccess
 
     // Format the date value for display.
     /// <include path='items/GetUIDateString/*' file='Doc/DataCommon.xml'/>
-    public static string GetUIDateString(DateTime dateTime)
+    public static string GetUIDateString(DateTime? dateTime)
     {
       string retValue = null;
 
-      if (false == IsDbMinDate(dateTime))
+      if (dateTime != null && false == IsDbMinDate(dateTime))
       {
-        retValue = dateTime.ToString("MM/dd/yyyy");
+        DateTime tempDateTime = (DateTime)dateTime;
+        retValue = tempDateTime.ToString("MM/dd/yyyy");
       }
       return retValue;
     }
@@ -205,18 +206,22 @@ namespace LJCDataAccess
 
     // Check for DB Minimum date or less.
     /// <include path='items/IsDbMinDate/*' file='Doc/DataCommon.xml'/>
-    public static bool IsDbMinDate(DateTime dateTime)
+    public static bool IsDbMinDate(DateTime? dateTime)
     {
       bool retValue = false;
-      if (dateTime.Year < 1753)
+      if (dateTime != null)
       {
-        retValue = true;
-      }
-      if (1753 == dateTime.Year
-        && 1 == dateTime.Month
-        && 1 == dateTime.Day)
-      {
-        retValue = true;
+        DateTime tempDateTime = (DateTime)dateTime;
+        if (tempDateTime.Year < 1753)
+        {
+          retValue = true;
+        }
+        if (1753 == tempDateTime.Year
+          && 1 == tempDateTime.Month
+          && 1 == tempDateTime.Day)
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }
