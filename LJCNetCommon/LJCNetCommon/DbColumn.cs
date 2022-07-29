@@ -254,6 +254,10 @@ namespace LJCNetCommon
     /// <summary>Gets or sets the IsPrimaryKey value.</summary>
     public bool IsPrimaryKey { get; set; }
 
+    /// <summary>Gets or sets the KeyType value.</summary>
+    // "Natural", "Natural*", "Foreign"
+    public string KeyType { get; set; }
+
     /// <summary>Gets or sets the MaxLength value.</summary>
     public int MaxLength { get; set; }
 
