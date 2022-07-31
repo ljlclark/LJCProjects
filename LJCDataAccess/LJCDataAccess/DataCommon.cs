@@ -96,6 +96,23 @@ namespace LJCDataAccess
         && dateText.Trim() != "/  /")
       {
         retValue = DateTime.Parse(dateText);
+        retValue = retValue.Date;
+      }
+      return retValue;
+    }
+
+    // Converts the date string to a DateTime value.
+    /// <include path='items/GetDbDateTime/*' file='Doc/DataCommon.xml'/>
+    public static DateTime GetDbDateTime(string dateText
+      , ConnectionType connectionType = ConnectionType.SqlServer)
+    {
+      DateTime retValue;
+
+      retValue = GetMinDateTime(connectionType);
+      if (NetString.HasValue(dateText)
+        && dateText.Trim() != "/  /")
+      {
+        retValue = DateTime.Parse(dateText);
       }
       return retValue;
     }

@@ -50,12 +50,23 @@
     <summary>
       Converts the date string to a DateTime value.
     </summary>
-    <param name="dateText">The date/time string.</param>
+    <param name="dateText">The date string.</param>
     <param name="connectionType">The database connection type.</param>
     <returns>
       The &lt;span class="userType"&gt;DataTime&lt;/span&gt;
       value or MinValue if empty.</returns>
   </GetDbDate>
+  <GetDbDateTime>
+    <summary>
+      Converts the date string to a DateTime value.
+    </summary>
+    <param name="dateText">The date/time string.</param>
+    <param name="connectionType">The database connection type.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DataTime&lt;/span&gt;
+      value or MinValue if empty.
+    </returns>
+  </GetDbDateTime>
   <GetDbDateString>
     <summary>
       Formats the
