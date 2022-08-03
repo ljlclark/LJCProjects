@@ -138,7 +138,9 @@ namespace LJCWinFormControls
     {
       string retValue;
 
-      if (typeof(DateTime) == reflect.GetPropertyType(propertyName))
+      Type propertyType = reflect.GetPropertyType(propertyName);
+      if (propertyType != null
+        && propertyType.FullName.Contains("DateTime"))
       {
         DateTime dateValue = reflect.GetDateTime(propertyName);
         retValue = GetUiDateString(dateValue);

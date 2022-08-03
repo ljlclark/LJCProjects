@@ -285,7 +285,19 @@ namespace LJCNetCommon
       }
       if (info != null)
       {
-        info.SetValue(mSource, value, null);
+        bool setValue = true;
+        if (info.PropertyType == typeof(DateTime?))
+        {
+          if (value != null)
+          {
+            setValue = false;
+            info.SetValue(mSource, Convert.ToDateTime(value), null);
+          }
+        }
+        if (setValue)
+        {
+          info.SetValue(mSource, value, null);
+        }
       }
     }
     #endregion
