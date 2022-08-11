@@ -16,6 +16,7 @@ LJCNetCommon
   1. LJCNetCommon.dll
 
 Additional Data Access projects and DLLs
+
 LJCDataAccessConfig
   2. LJCDataAccessConfig.dll
 LJCDataAccess
@@ -23,6 +24,7 @@ LJCDataAccess
   4. LJCDataAccess.dll
 
 Addition Message Based Data Access projects and DLLs
+
 LJCtextDataReader/LJCTextDataReaderLib
   5. LJCTextDataReaderLib.dll
 LJCDBMessage/CipherLib
@@ -37,6 +39,7 @@ LJDBServicehosts/LJCDBServiceHost
  10. LJCDBServiceHost.exe
 
 Additional Windows Forms projects and DLLs
+
 LJCLibraries/LJCWinFormCommon
  11. LJCWinFormCommon.dll
 LJCLibraries/LJCWinFormControls
