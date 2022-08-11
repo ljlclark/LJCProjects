@@ -11,34 +11,33 @@ The Database Libraries were designed to support the following features:
 
 Most LJC Solutions, Projects and output files are prefixed with "LJC" to distinguish them from other potentially similar named items and help prevent naming conflicts.
 
-Common .NET DLLs
-LJCNetCommon
+Common .NET DLLs  
+LJCNetCommon  
   LJCNetCommon.dll
 
-Additional Data Access projects and DLLs
-LJCDataAccessConfig
-  LJCDataAccessConfig.dll
-LJCDataAccess
-  MySql.Data.dll
-  LJCDataAccess.dll
+Additional Data Access projects and DLLs  
+LJCDataAccessConfig  
+  LJCDataAccessConfig.dll  
+LJCDataAccess  
+  MySql.Data.dll  
+  LJCDataAccess.dll  
 
-Addition Message Based Data Access projects and DLLs
-LJCtextDataReader/LJCTextDataReaderLib
-  LJCTextDataReaderLib.dll
-LJCDBMessage/CipherLib
-  CipherLib.dll
-LJCDBMessage
-  LJCDBMessage.dll
-LJCDBServiceLib/LJCDBDataAccessLib
-  LJCDBDataAccessLib.dll
-LJCDBServiceLib
-  LJCDBServiceLib.dll
-LJDBServicehosts/LJCDBServiceHost
-  LJCDBServiceHost.exe
+Addition Message Based Data Access projects and DLLs  
+LJCtextDataReader/LJCTextDataReaderLib  
+  LJCTextDataReaderLib.dll  
+LJCDBMessage/CipherLib  
+  CipherLib.dll  
+LJCDBMessage  
+  LJCDBMessage.dll  
+LJCDBServiceLib/LJCDBDataAccessLib  
+  LJCDBDataAccessLib.dll  
+LJCDBServiceLib  
+  LJCDBServiceLib.dll  
+LJDBServicehosts/LJCDBServiceHost  
+  LJCDBServiceHost.exe  
 
-Additional Windows Forms projects and DLLs
-LJCLibraries/LJCWinFormCommon
-  LJCWinFormCommon.dll
-LJCLibraries/LJCWinFormControls
-  LJCWinFormControls.dll
-
+Additional Windows Forms projects and DLLs  
+LJCLibraries/LJCWinFormCommon  
+  LJCWinFormCommon.dll  
+LJCLibraries/LJCWinFormControls  
+  LJCWinFormControls.dll  
