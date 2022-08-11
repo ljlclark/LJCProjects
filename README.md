@@ -13,31 +13,31 @@ Most LJC Solutions, Projects and output files are prefixed with "LJC" to disting
 
 Common .NET DLLs  
 LJCNetCommon  
-    LJCNetCommon.dll
+&nbsp;&nbsp;LJCNetCommon.dll
 
 Additional Data Access projects and DLLs  
 LJCDataAccessConfig  
-    LJCDataAccessConfig.dll  
+&nbsp;&nbsp;LJCDataAccessConfig.dll  
 LJCDataAccess  
-    MySql.Data.dll  
-    LJCDataAccess.dll  
+&nbsp;&nbsp;MySql.Data.dll  
+&nbsp;&nbsp;LJCDataAccess.dll  
 
 Addition Message Based Data Access projects and DLLs  
 LJCtextDataReader/LJCTextDataReaderLib  
-    LJCTextDataReaderLib.dll  
+&nbsp;&nbsp;LJCTextDataReaderLib.dll  
 LJCDBMessage/CipherLib  
-    CipherLib.dll  
+&nbsp;&nbsp;CipherLib.dll  
 LJCDBMessage  
-    LJCDBMessage.dll  
+&nbsp;&nbsp;LJCDBMessage.dll  
 LJCDBServiceLib/LJCDBDataAccessLib  
-    LJCDBDataAccessLib.dll  
+&nbsp;&nbsp;LJCDBDataAccessLib.dll  
 LJCDBServiceLib  
-    LJCDBServiceLib.dll  
+&nbsp;&nbsp;LJCDBServiceLib.dll  
 LJDBServicehosts/LJCDBServiceHost  
-    LJCDBServiceHost.exe  
+&nbsp;&nbsp;LJCDBServiceHost.exe  
 
 Additional Windows Forms projects and DLLs  
 LJCLibraries/LJCWinFormCommon  
-    LJCWinFormCommon.dll  
+&nbsp;&nbsp;LJCWinFormCommon.dll  
 LJCLibraries/LJCWinFormControls  
-    LJCWinFormControls.dll  
+&nbsp;&nbsp;LJCWinFormControls.dll  
