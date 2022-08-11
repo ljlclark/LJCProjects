@@ -12,7 +12,9 @@ The Database Libraries were designed to support the following features:
 Most LJC Solutions, Projects and output files are prefixed with "LJC" to distinguish them from other potentially similar named items and help prevent naming conflicts.
 
 Common .NET DLLs
+
 LJCNetCommon
+
   1 LJCNetCommon.dll
 
 Additional Data Access projects and DLLs
@@ -20,6 +22,7 @@ Additional Data Access projects and DLLs
 LJCDataAccessConfig
 
   2 LJCDataAccessConfig.dll
+  
 LJCDataAccess
 
   3 MySql.Data.dll
