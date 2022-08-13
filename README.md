@@ -11,25 +11,25 @@ The Database Libraries were designed to support the following features:
 
 Most LJC Solutions, Projects and output files are prefixed with "LJC" to distinguish them from other potentially similar named items and help prevent naming conflicts.
 
-## Common .NET DLLs  
+### Common .NET DLLs  
 
-### LJCNetCommon  
+#### LJCNetCommon  
 &nbsp;&nbsp; 1. LJCNetCommon.dll
 
-### Windows Forms projects and DLLs  
+#### Windows Forms projects and DLLs  
 LJCLibraries/LJCWinFormCommon  
 &nbsp;&nbsp; 2. LJCWinFormCommon.dll  
 LJCLibraries/LJCWinFormControls  
 &nbsp;&nbsp; 3. LJCWinFormControls.dll  
 
-### Data Access projects and DLLs  
+#### Data Access projects and DLLs  
 LJCDataAccessConfig  
 &nbsp;&nbsp; 4. LJCDataAccessConfig.dll  
 LJCDataAccess  
 &nbsp;&nbsp; 5. MySql.Data.dll  
 &nbsp;&nbsp; 6. LJCDataAccess.dll  
 
-### Message Based Data Access projects and DLLs  
+#### Message Based Data Access projects and DLLs  
 LJCDBMessage  
 &nbsp;&nbsp; 7. LJCDBMessage.dll  
 LJCDBServiceLib/LJCDBDataAccessLib  
@@ -47,7 +47,7 @@ LJCDBClientLib
 LJCtextDataReader/LJCTextDataReaderLib  
 &nbsp;&nbsp;14. LJCTextDataReaderLib.dll  
 
-### Code/Text Generator projects, DLLs and programs  
+#### Code/Text Generator projects, DLLs and programs  
 LJCGenText/LJCGenTextLib  
 &nbsp;&nbsp;15. LJCGenTextLib.dll  
 LJCGenText/LJCGenText  
