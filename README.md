@@ -13,31 +13,46 @@ Most LJC Solutions, Projects and output files are prefixed with "LJC" to disting
 
 Common .NET DLLs  
 LJCNetCommon  
-&nbsp;&nbsp;LJCNetCommon.dll
+&nbsp;&nbsp; 1. LJCNetCommon.dll
 
-Additional Data Access projects and DLLs  
-LJCDataAccessConfig  
-&nbsp;&nbsp;LJCDataAccessConfig.dll  
-LJCDataAccess  
-&nbsp;&nbsp;MySql.Data.dll  
-&nbsp;&nbsp;LJCDataAccess.dll  
-
-Addition Message Based Data Access projects and DLLs  
-LJCtextDataReader/LJCTextDataReaderLib  
-&nbsp;&nbsp;LJCTextDataReaderLib.dll  
-LJCDBMessage/CipherLib  
-&nbsp;&nbsp;CipherLib.dll  
-LJCDBMessage  
-&nbsp;&nbsp;LJCDBMessage.dll  
-LJCDBServiceLib/LJCDBDataAccessLib  
-&nbsp;&nbsp;LJCDBDataAccessLib.dll  
-LJCDBServiceLib  
-&nbsp;&nbsp;LJCDBServiceLib.dll  
-LJDBServicehosts/LJCDBServiceHost  
-&nbsp;&nbsp;LJCDBServiceHost.exe  
-
-Additional Windows Forms projects and DLLs  
+Windows Forms projects and DLLs  
 LJCLibraries/LJCWinFormCommon  
-&nbsp;&nbsp;LJCWinFormCommon.dll  
+&nbsp;&nbsp; 2. LJCWinFormCommon.dll  
 LJCLibraries/LJCWinFormControls  
-&nbsp;&nbsp;LJCWinFormControls.dll  
+&nbsp;&nbsp; 3. LJCWinFormControls.dll  
+
+Data Access projects and DLLs  
+LJCDataAccessConfig  
+&nbsp;&nbsp; 4. LJCDataAccessConfig.dll  
+LJCDataAccess  
+&nbsp;&nbsp; 5. MySql.Data.dll  
+&nbsp;&nbsp; 6. LJCDataAccess.dll  
+
+Message Based Data Access projects and DLLs  
+LJCDBMessage  
+&nbsp;&nbsp; 7. LJCDBMessage.dll  
+LJCDBServiceLib/LJCDBDataAccessLib  
+&nbsp;&nbsp; 8. LJCDBDataAccessLib.dll  
+LJCDBMessage/CipherLib  
+&nbsp;&nbsp; 9. CipherLib.dll  
+LJCDBServiceLib  
+&nbsp;&nbsp;10. LJCDBServiceLib.dll  
+LJDBServicehosts/LJCDBServiceHost  
+&nbsp;&nbsp;11. LJCDBServiceHost.exe  
+LJCGridDataLib
+&nbsp;&nbsp;12. LJCGridDataLib.dll
+LJCDBClientLib
+&nbsp;&nbsp;13. LJCClientLib.dll
+
+LJCtextDataReader/LJCTextDataReaderLib  
+&nbsp;&nbsp;14. LJCTextDataReaderLib.dll  
+
+Code/Text Generator projects, DLLs and programs
+LJCGenText/LJCGenTextLib
+&nbsp;&nbsp;15. LJCGenTextLib.dll
+LJCGenText/LJCGenText
+&nbsp;&nbsp; LJCGenText.exe
+LJCGenText/LJCGenTableCode
+&nbsp;&nbsp; LJCGenTableCode.exe
+LJCGenText/LJCGenTextEdit
+&nbsp;&nbsp; LJGenTextEdit.exe
