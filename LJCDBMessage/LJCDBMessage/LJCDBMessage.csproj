@@ -40,9 +40,6 @@
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
-    <Reference Include="LJCTextDataReaderLib">
-      <HintPath>..\External\LJCTextDataReaderLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

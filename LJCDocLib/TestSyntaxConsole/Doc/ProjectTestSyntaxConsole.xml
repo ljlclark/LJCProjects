@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectTestSyntaxConsole.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The TestSyntaxConsole program is used to test LJCAssemblyReflect
+        class functionality. LJCAssemblyReflect is in project LJC.Net.Common
+        which is part of the LJC.Libraries solution.
+      </para>
+      <para>
+        The TestSyntaxConsole project is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

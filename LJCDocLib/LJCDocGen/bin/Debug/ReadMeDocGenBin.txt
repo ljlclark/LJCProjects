@@ -3,15 +3,15 @@ ReadMeDocGenBin.txt
 
 CodeDoc.css - The HTML Doc css file.
 
-LJCDocCode.cmd - Generates the full LJCProjects HTML Doc using the groups in   |
-"LJCDocCode.xml".
+LJCCodeDoc.cmd - Generates the full LJCProjects HTML Doc using the groups in   |
+"LJCCodeDoc.xml".
 
-LJCDocCode.xml - The full LJCProjects HTML Doc groups.
+LJCCodeDoc.xml - The full LJCProjects HTML Doc groups.
 
-LJCDocDataService.cmd - Generates the Data Service related HTML Doc using the
-groups in "LJCDocDataService.xml".
+LJCCodeDocRelease.cmd - Generates the Release HTML Doc using the
+groups in "LJCCodeDocRelease.xml".
 
-LJCDocDataService.xml - The Data Service related HTML Doc groups.
+LJCCodeDocRelease.xml - The Release HTML Doc groups.
 
 LJCDocGen.exe - The program to generate HTML Doc.
 

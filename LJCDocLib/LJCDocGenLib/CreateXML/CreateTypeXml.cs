@@ -189,8 +189,14 @@ namespace LJCDocGenLib
         , DataType, null);
       foreach (DataMethod dataMethod in DataType.DataMethods)
       {
+        bool gen = true;
+        if (dataMethod.Summary != null
+          && "nogen" == dataMethod.Summary.ToLower())
+        {
+          gen = false;
+        }
         if (usePublic == dataMethod.IsPublic
-          && dataMethod.Summary.ToLower() != "nogen")
+          && true == gen)
         {
           repeatItem = section.RepeatItems.Add(dataMethod.Name);
           replacements = repeatItem.Replacements;

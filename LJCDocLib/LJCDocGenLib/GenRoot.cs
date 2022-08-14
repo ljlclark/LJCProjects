@@ -172,7 +172,7 @@ namespace LJCDocGenLib
           builder.AppendLine("  <meta charset='utf-8' />");
           builder.AppendLine("  <meta name='author' content='Lester J. Clark' />");
           builder.AppendLine("  <meta name='viewport' content='width=device-width initial-scale=1' />");
-          builder.AppendLine("  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />");
+          builder.AppendLine("  <link rel='stylesheet' type='text/css' href='CSS/CodeDoc.css' />");
           builder.AppendLine("</head>");
           builder.AppendLine("<body>");
           builder.AppendLine("  <br />");

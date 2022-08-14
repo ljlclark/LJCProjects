@@ -45,7 +45,13 @@ namespace LJCDocGenLib
     public void GenMethodPage(LJCAssemblyReflect assemblyReflect
       , string[] templateLines)
     {
-      if (DataMethod.Summary.ToLower() != "nogen")
+      bool gen = true;
+      if (DataMethod.Summary != null
+        && "nogen" == DataMethod.Summary.ToLower())
+      {
+        gen = false;
+      }
+      if (true == gen)
       {
         CreateMethodXml createMethodXml = new CreateMethodXml(GenAssembly
           , DataAssembly, DataType, DataMethod, assemblyReflect);
