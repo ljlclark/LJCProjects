@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<!-- Copyright (c) Lester J. Clark 2021 - All Rights Reserved -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Data Config Dropdown</title>
+  <link rel="stylesheet" type="text/css" href="XML.css" />
+</head>
+<body>
+  <h3 style="color:blue">Data Config Dropdown</h3>
+  <p>
+    The Data Config Dropdown contains the available Data Config item names. The
+    names are retrieved from the DataConfigs.xml file.
+  </p>
+  <p>
+    The Table Dropdown list is populated with the Data Source Table names when
+    the Data Config name is selected from the Data Config Dropdown list
+  </p>
+  <p>
+    The DataConfig.xml file definitions are used to connect to the available
+    Data Sources. It uses the following layout.
+  </p>
+  <pre>
+<span class="ltgt">&lt;</span>?<span class="name">xml</span> <span class="attrib">version</span>="<span class="data">1.0</span>" <span class="attrib">encoding</span>="<span class="data">utf-8</span>" ?<span class="ltgt">&gt;</span>
+<span class="ltgt">&lt;</span><span class="name">DataConfigs</span> xmlns:xsi="<span class="data">http://www.w3.org/2001/XMLSchema-instance</span>"
+   xmlns:xsd="<span class="data">http://www.w3.org/2001/XMLSchema</span>"<span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">Name</span><span class="ltgt">&gt;</span>ConfigName<span class="ltgt">&lt;/</span><span class="name">Name</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>DBServer\Instance<span class="ltgt">&lt;/</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">Database</span><span class="ltgt">&gt;</span>DatabaseName<span class="ltgt">&lt;/</span><span class="name">Database</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>SqlServer<span class="ltgt">&lt;/</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;/</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">Name</span><span class="ltgt">&gt;</span>MySQLConfigName<span class="ltgt">&lt;/</span><span class="name">Name</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>LocalHost<span class="ltgt">&lt;/</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">Database</span><span class="ltgt">&gt;</span>DatabaseName<span class="ltgt">&lt;/</span><span class="name">Database</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>MySql<span class="ltgt">&lt;/</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">UserID</span><span class="ltgt">&gt;</span>root<span class="ltgt">&lt;/</span><span class="name">UserID</span><span class="ltgt">&gt;</span>
+      <span class="ltgt">&lt;</span><span class="name">Pswd</span><span class="ltgt">&gt;</span>Password<span class="ltgt">&lt;/</span><span class="name">Pswd</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;/</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+<span class="ltgt">&lt;/</span><span class="name">DataConfigs</span><span class="ltgt">&gt;</span></pre>
+
+  <h3>Context Menu</h3>
+  <p>
+    The Context Menu can be displayed by clicking the right mouse button on the
+    Combobox control.
+  </p>
+  <b>Help</b>
+  <p>
+    Displays the context sensitive Help Page.
+  </p>
+  <h6>DataConfig</h6>
+  <h6>Copyright © Lester J Clark 2021</h6>
+</body>
+</html>

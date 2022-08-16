@@ -1,0 +1,898 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCSQLUtilLibDAL</name>
+    </assembly>
+    <members>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataColumn">
+            <summary>The DbMetaDataColumn table Data Record.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumn.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumn.CompareTo(LJCSQLUtilLibDAL.DbMetaDataColumn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.DbMetaDataTableID">
+            <summary>Gets or sets the DbMetaDataTableID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnName">
+            <summary>Gets or sets the ColumnName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.PropertyName">
+            <summary>Gets or sets the PropertyName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.ShortCaption">
+            <summary>Gets or sets the ShortCaption value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.Caption">
+            <summary>Gets or sets the Caption value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.DataTypeName">
+            <summary>Gets or sets the DataTypeName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.MaxLength">
+            <summary>Gets or sets the MaxLength value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.AllowDBNull">
+            <summary>Gets or sets the AllowDbNull value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.AutoIncrement">
+            <summary>Gets or sets the AutoIncrement value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.Unique">
+            <summary>Gets or sets the Unique value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.DefaultValue">
+            <summary>Gets or sets the DefaultValue value.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataColumn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnDbMetaDataTableID">
+            <summary>The DbMetaDataTableID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.PropertyDbMetaDataTableID">
+            <summary>The DbMetaDataTableID property name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnColumnName">
+            <summary>The ColumnName column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnPropertyName">
+            <summary>The PropertyName column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnXName">
+            <summary>The Name column name.</summary>
+            <remarks>
+            Changed this field because there was already a property named
+            "ColumnName".</remarks>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnShortCaption">
+            <summary>The ShortCaption column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnCaption">
+            <summary>The Caption column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnDataTypeName">
+            <summary>The DataTypeName column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnMaxLength">
+            <summary>The MaxLength column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnAllowDbNull">
+            <summary>The AllowDbNull column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnAutoIncrement">
+            <summary>The AutoIncrement column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnUnique">
+            <summary>The Unique column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.ColumnDefaultValue">
+            <summary>The DefaultValue column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthColumnName">
+            <summary>The ColumnName maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthPropertyName">
+            <summary>The PropertyName maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthShortCaption">
+            <summary>The ShortCaption maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthCaption">
+            <summary>The Caption maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthDataTypeName">
+            <summary>The DataTypeName maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataColumn.LengthDefaultValue">
+            <summary>The DefaultValue maximum length.</summary>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.MDSequenceComparer">
+            <summary>Sort and search MDColumn on Sequence.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.MDSequenceComparer.Compare(LJCSQLUtilLibDAL.DbMetaDataColumn,LJCSQLUtilLibDAL.DbMetaDataColumn)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataColumns">
+            <summary>Represents a collection of DbMetaDataColumn objects.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.LJCSortName">
+            <summary>
+      Sorts the collection with the Name value.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.LJCSortSequence(LJCSQLUtilLibDAL.MDSequenceComparer)">
+            <summary>
+      Sorts the collection wtih the Sequence value.
+    </summary><param name="mdSequenceComparer">The Sequence comparer.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.LJCSearchColumnName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="columnName">The item column name.</param><returns>The element object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumns.LJCSearchSequence(System.Int32)">
+            <summary>
+      Retrieve the collection element with sequence.
+    </summary><param name="sequence">The sequence value.</param><returns>The element object.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKeys">
+            <summary>Represents a collection of DbMetaDataKey objects.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeys.Add(System.Int32,System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="columnID">The column ID.</param><param name="keyTypeID">The key type ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKey">
+            <summary>
+            The DBMetaDataKey table Data Record. 
+            </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKey.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKey.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.DbMetaDataColumnID">
+            <summary>Gets or sets the DbMetaDataColumnID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.DbMetaDataKeyTypeID">
+            <summary>Gets or sets the DbMetaDataKeyTypeID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ToTableID">
+            <summary>Gets or sets the ToTableID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ToColumnID">
+            <summary>Gets or sets the ToColumnID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnName">
+            <summary>Gets or sets the join ColumnName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ToTableName">
+            <summary>Gets or sets the join ToTableName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ToColumnName">
+            <summary>Gets or sets the join ToColumnName value.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKey.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnDbMetaDataColumnID">
+            <summary>The DbMetaDataColumnID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.PropertyDbMetaDataColumnID">
+            <summary>The DbMetaDataColumnID property name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnDbMetaDataKeyTypeID">
+            <summary>The DbMetaDataKeyTypeID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.PropertyDbMetaDataKeyTypeID">
+            <summary>The DbMetaDataKeyTypeID property name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnToTableID">
+            <summary>The ToTableID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnToColumnID">
+            <summary>The ToColumnID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnColumnName">
+            <summary>The ToColumnID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnToTableName">
+            <summary>The ToColumnID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKey.ColumnToColumnName">
+            <summary>The ToColumnID column name.</summary>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKeyType">
+            <summary>The DBMetaDataKeyType table Data Record.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyType.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyType.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyType.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyType.CompareTo(LJCSQLUtilLibDAL.DbMetaDataKeyType)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKeyType.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKeyType.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKeyType.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataKeyType.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataKeyType.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKeyTypes">
+            <summary>Represents a collection of DbMetaDataKeyType objects.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypes.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypes.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataTable">
+            <summary>The DbMetaDataTable table Data Record.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTable.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTable.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTable.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTable.CompareTo(LJCSQLUtilLibDAL.DbMetaDataTable)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.TableName">
+            <summary>Gets or sets the TableName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.PluralName">
+            <summary>Gets or sets the PluralName value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.Caption">
+            <summary>Gets or sets the Caption value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.DbMetaDataTable.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.TableXName">
+            <summary>The table name.</summary>
+            <remarks>
+            Changed field name as there is already a Data Property "TableName".
+            </remarks>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnTableName">
+            <summary>The TableName column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnPluralName">
+            <summary>The PluralName column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnCaption">
+            <summary>The Caption column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.LengthTableName">
+            <summary>The TableName maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.LengthPluralName">
+            <summary>The PluralName maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.LengthCaption">
+            <summary>The Caption maximum length.</summary>
+        </member>
+        <member name="F:LJCSQLUtilLibDAL.DbMetaDataTable.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataTables">
+            <summary>Represents a collection of DbMetaDataTable objects.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTables.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTables.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.ForeignKey">
+            <summary>The ForeignKey Data Record.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKey.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKey.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKey.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKey.CompareTo(LJCSQLUtilLibDAL.ForeignKey)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.TableCatalog">
+            <summary>Gets or sets the Table Database name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.TableSchema">
+            <summary>Gets or sets the Table Schema name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.SourceTable">
+            <summary>Gets or sets the Source Table name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.SourceColumn">
+            <summary>Gets or sets the Source Column name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.SourceConstraint">
+            <summary>Gets or sets the Source Constraint name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.UpdateRule">
+            <summary>Gets or sets the join Update Rule text.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.DeleteRule">
+            <summary>Gets or sets the join Delete Rule text.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.OrdinalPosition">
+            <summary>Gets or sets the join Ordinal Position.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.TargetTable">
+            <summary>Gets or sets the join Target Table name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.TargetColumn">
+            <summary>Gets or sets the join Target Column name.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.ForeignKey.TargetConstraint">
+            <summary>Gets or sets the join Target Constraint name.</summary>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.ForeignKeys">
+            <summary>
+      Represents a collection of object items.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.GetCollection(System.Collections.Generic.List{LJCSQLUtilLibDAL.ForeignKey})">
+            <summary>
+            Get custom collection from List&lt;T&gt;.
+            </summary>
+            <param name="list">The list object reference.</param>
+            <returns>The collection object reference.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.GetForeignKeys(System.String)">
+            <summary>
+            Returns a collection of referenced tables.
+            </summary>
+            <param name="sourceTableName">The source table name.</param>
+            <returns>The collection of referenced tables.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.LJCSortTarget">
+            <summary>
+            Sort on Name.
+            </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeys.LJCSearchTarget(System.String,System.String)">
+            <summary>
+            Retrieve the collection element.
+            </summary>
+            <param name="targetTableName">The target table name.</param>
+            <param name="targetColumnName">The target column name.</param>
+            <returns>The target foreign key.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataColumnManager">
+            <summary>
+      Provides DbMetaDataColumn specific data manipulation methods.
+    </summary><remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJCSQLUtilLib program.
+      </para>
+      <para>
+        The LJCSQLUtilLibDAL library contains Data and Manager classes for
+        presenting an object oriented view of the SQL Utility database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DataAccess to communicate
+        with the database.
+      </para>
+      <para>
+        The LJCSQLUtilLibDAL project is part of the LJCSQLUtilLib solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.LoadByTableID(System.Int32)">
+            <summary>
+      Loads a collection of data records ordered by Description.
+    </summary><param name="tableID">the table ID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.LoadByDescription">
+            <summary>
+      Loads a collection of data records ordered by Description.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves a data record with the supplied values.
+    </summary><param name="tableID">The table ID.</param><param name="columnName">The column name.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.SaveData(LJCSQLUtilLibDAL.DbMetaDataColumn)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="mdColumn">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.AddData(LJCSQLUtilLibDAL.DbMetaDataColumn)">
+            <summary>
+      Adds a data record.
+    </summary><param name="mdColumn">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.GetTableIDKey(System.Int32)">
+            <summary>
+      Get the ID key record.
+    </summary><param name="tableID">The table ID value.</param><returns>The key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load join object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.GetTextFilters">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataColumnManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKeyManager">
+            <summary>
+      Provides DBMetaDataKey specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.LoadPrimaryKeys">
+            <summary>
+      Loads a collection of data records.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.LoadForeignKey(System.Int32)">
+            <summary>
+      Loads a collection of data records.
+    </summary><param name="columnID">The column ID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.LoadByDescription">
+            <summary>
+      Loads a collection of data records ordered by Description.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.RetrieveWithUniqueKey(System.Int32,System.Int32)">
+            <summary>
+      Retrieves a data record with the supplied values.
+    </summary><param name="columnID">The table ID.</param><param name="keyTypeID">The key type ID.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.SaveData(LJCSQLUtilLibDAL.DbMetaDataKey)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="mdKey">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.AddData(LJCSQLUtilLibDAL.DbMetaDataKey)">
+            <summary>
+      Adds a data record.
+    </summary><param name="mdKey">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.GetPrimaryKey(System.Int32)">
+            <summary>
+      Get the Primary key record.
+    </summary><param name="columnID">The Column ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.GetForeignKey(System.Int32)">
+            <summary>
+      Get the Foreign key record.
+    </summary><param name="columnID">The Column ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.GetTextFilters">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager">
+            <summary>
+      Provides DBMetaDataKeyType specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.LoadByDescription">
+            <summary>
+      Loads a collection of data records ordered by Description.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load join object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.GetTextFilters">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataKeyTypeManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.DbMetaDataTableManager">
+            <summary>
+      Provides DbMetaDataTable specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.LoadByDescription">
+            <summary>
+      Loads a collection of data records ordered by Description.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.RetrieveWithUniqueKey(System.String)">
+            <summary>
+      Retrieves a data record with the supplied values.
+    </summary><param name="tableName">The table name.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.SaveData(LJCSQLUtilLibDAL.DbMetaDataTable)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="mdTable">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.AddData(LJCSQLUtilLibDAL.DbMetaDataTable)">
+            <summary>
+      Adds a data record.
+    </summary><param name="mdTable">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.GetTableNameKey(System.String)">
+            <summary>
+      Get the ID key record.
+    </summary><param name="tableName">The table name.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load join object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.GetTextFilters">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.DbMetaDataTableManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.ForeignKeyManager">
+            <summary>
+      Provides Foreign Key specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><param name="schemaName">The schema name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.LoadAll">
+            <summary>
+      Returns all Foreign and Primary key definitions.
+    </summary><returns>The key definitions</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.LoadPrimaryKeys(System.String)">
+            <summary>
+      Returns the Primary key definitions.
+    </summary><param name="tableName">The table name.</param><returns>The key definitions</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.LoadForeignKeys(System.String)">
+            <summary>
+      Returns the Foreign key definitions.
+    </summary><param name="tableName">The table name.</param><returns>The key definitions</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load join object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.GetPrimaryKeyFilters(System.String)">
+            <summary>
+      Creates and returns the PrimaryKey Filters object.
+    </summary><param name="tableName">The table name.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.ForeignKeyManager.GetForeignKeyFilters(System.String)">
+            <summary>
+      Creates and returns the ForeignKey Filters object.
+    </summary><param name="tableName">The table name.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="T:LJCSQLUtilLibDAL.SQLUtilLibManagers">
+            <summary>Gets the SQLUtilLibDAL Managers.</summary>
+        </member>
+        <member name="M:LJCSQLUtilLibDAL.SQLUtilLibManagers.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="dbServiceRef">The database service reference object.</param>
+            <param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.SQLUtilLibManagers.DbMetaDataTableManager">
+            <summary>Gets the DbMetaDataTableManager object.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.SQLUtilLibManagers.DbMetaDataColumnManager">
+            <summary>Gets the DbMetaDataColumnManager object.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.SQLUtilLibManagers.DbMetaDataKeyManager">
+            <summary>Gets the DbMetaDataKeyManager object.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.SQLUtilLibManagers.DbMetaDataKeyTypeManager">
+            <summary>Gets the DbMetaDataKeyTypeManager object.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLibDAL.SQLUtilLibManagers.ForeignKeyManager">
+            <summary>Gets the ForeignKeyManager object.</summary>
+        </member>
+    </members>
+</doc>

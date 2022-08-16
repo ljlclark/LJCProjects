@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <ForeignKeyManager>
+    <summary>
+      Provides Foreign Key specific data manipulation methods.
+    </summary>
+  </ForeignKeyManager>
+  <ForeignKeyManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <param name="schemaName">The schema name.</param>
+  </ForeignKeyManagerC>
+  <LoadAll>
+    <summary>
+      Returns all Foreign and Primary key definitions.
+    </summary>
+    <returns>The key definitions</returns>
+  </LoadAll>
+  <LoadPrimaryKeys>
+    <summary>
+      Returns the Primary key definitions.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <returns>The key definitions</returns>
+  </LoadPrimaryKeys>
+  <LoadForeignKeys>
+    <summary>
+      Returns the Foreign key definitions.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <returns>The key definitions</returns>
+  </LoadForeignKeys>
+  <GetLoadJoins>
+    <summary>
+      Creates and returns the Load join object.
+    </summary>
+    <returns>The DbJoins object.</returns>
+  </GetLoadJoins>
+  <GetPrimaryKeyFilters>
+    <summary>
+      Creates and returns the PrimaryKey Filters object.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <returns>The DbFilters object.</returns>
+  </GetPrimaryKeyFilters>
+  <GetForeignKeyFilters>
+    <summary>
+      Creates and returns the ForeignKey Filters object.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <returns>The DbFilters object.</returns>
+  </GetForeignKeyFilters>
+</items>

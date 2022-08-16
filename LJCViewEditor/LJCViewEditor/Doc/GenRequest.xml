@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2019 - All Rights Reserved -->
+<items>
+  <RequestCode>
+    <summary>
+      Creates and returns the DbRequest create code for the specified DbRequest.
+    </summary>
+    <param name="dbRequest">The DbRequest object.</param>
+    <returns>The DbRequest create code.</returns>
+  </RequestCode>
+  <!-- Child Functions -->
+  <ColumnsCode>
+    <summary>
+      Creates and returns the DbColumns create code for the specified	DbColumns.
+    </summary>
+    <param name="dbColumns">the DbColumns object.</param>
+    <param name="indent">The indent string.</param>
+    <returns>The DbColumns create code.</returns>
+  </ColumnsCode>
+  <ConditionsCode>
+    <summary>
+      Creates and returns the DbConditions create code for the specified DbFilter.
+    </summary>
+    <param name="dbFilter">The DbFilter object.</param>
+    <param name="indent">The indent string.</param>
+    <returns>The DbConditions create code.</returns>
+  </ConditionsCode>
+  <FiltersCode>
+    <summary>
+      Creates and returns the DbFilters create code for the specified DbRequest.
+    </summary>
+    <param name="dbRequest">The DbRequest object.</param>
+    <param name="indent">The indent string.</param>
+    <returns>The DbFilters create code.</returns>
+  </FiltersCode>
+  <JoinOnsCode>
+    <summary>
+      Creates and returns the JoinOns create code for the specified Join.
+    </summary>
+    <param name="dbJoin">The DbJoin object.</param>
+    <param name="indent">The indent string</param>
+    <returns>The DbJoinOns created code.</returns>
+  </JoinOnsCode>
+  <JoinsCode>
+    <summary>
+      Creates and returns the DbJoins create code for the specified DbRequest.
+    </summary>
+    <param name="dbRequest">The DbRequest object.</param>
+    <param name="indent">The indent string.</param>
+    <returns>The DbJoins create code.</returns>
+  </JoinsCode>
+  <Line>
+    <summary>
+      Returns the formatted line from the template array.
+    </summary>
+    <param name="template">The template array.</param>
+    <param name="index">The line index value.</param>
+    <param name="values">The format values.</param>
+    <returns>The formatted string.</returns>
+  </Line>
+  <OrderByNamesCode>
+    <summary>
+      Creates and returns the OrderBynames create code.
+    </summary>
+    <param name="orderByNames">The OrderByNames collection.</param>
+    <param name="indent">The indent string.</param>
+    <returns>The OrderByNames create code.</returns>
+  </OrderByNamesCode>
+</items>

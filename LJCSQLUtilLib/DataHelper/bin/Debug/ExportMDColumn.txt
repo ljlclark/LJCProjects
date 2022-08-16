@@ -1,0 +1,12 @@
+ColumnName	Description	Caption
+ID		ID
+ViewDataID		ViewDataID
+Sequence		Sequence
+ColumnName		ColumnName
+PropertyName		PropertyName
+RenameAs		RenameAs
+Caption		Caption
+DataTypeName		DataTypeName
+Value		Value
+Width		Width
+IsPrimaryKey		IsPrimaryKey

@@ -137,4 +137,25 @@ echo ----------------- %counter% - LJCDocLib.sln --------------- >> Build.txt
 echo LJCDocLib >> Build.txt
 call LJCDocLib\UpdateDocLib.cmd BuildAll >> Build.txt
 msbuild LJCDocLib\LJCDocLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt
+echo LJCDBViewDAL >> Build.txt
+call LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
+msbuild LJCDBViewDAL\LJCDBViewDAL.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCSQLUtilLib --------------- >> Build.txt
+echo LJCSQLUtilLib >> Build.txt
+call LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Build.txt
+msbuild LJCSQLUtilLib\LJCSQLUtilLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCViewEditor --------------- >> Build.txt
+echo LJCViewEditor >> Build.txt
+call LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
+msbuild LJCViewEditor\LJCViewEditor.sln
 pause

@@ -1,0 +1,1696 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCDBViewDAL</name>
+    </assembly>
+    <members>
+        <member name="T:LJCDBViewDAL.ViewColumn">
+            <summary>The ViewColumn table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumn.CompareTo(LJCDBViewDAL.ViewColumn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumn.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.ViewDataID">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.ColumnName">
+            <summary>Gets or sets the ColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.PropertyName">
+            <summary>Gets or sets the PropertyName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.RenameAs">
+            <summary>Gets or sets the RenameAs value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.Caption">
+            <summary>Gets or sets the Caption value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.DataTypeName">
+            <summary>Gets or sets the DataTypeName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.Value">
+            <summary>Gets or sets the Value value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.Width">
+            <summary>Gets or sets the Width value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.IsPrimaryKey">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.SaveState">
+            <summary>Gets or sets the SaveState value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewColumn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnViewDataID">
+            <summary>The ViewData ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnSequence">
+            <summary>The Sequence column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnColumnName">
+            <summary>The ColumnName column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnPropertyName">
+            <summary>The PropertyName column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnRenameAs">
+            <summary>The RenameAs column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnCaption">
+            <summary>The Caption column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnDataTypeName">
+            <summary>The DataTypeName column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnValue">
+            <summary>The Value column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnWidth">
+            <summary>The Width column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.ColumnIsPrimaryKey">
+            <summary>The Value column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthColumnName">
+            <summary>The ColumnName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthPropertyName">
+            <summary>The PropertyName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthRenameAs">
+            <summary>The RenameAs maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthCaption">
+            <summary>The Caption maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthDataTypeName">
+            <summary>The DataTypeName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewColumn.LengthValue">
+            <summary>The Value maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.SaveState">
+            <summary>The record save states.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.SaveState.None">
+            <summary>Do not change the record.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.SaveState.Add">
+            <summary>Add the record.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.SaveState.Update">
+            <summary>Update the record.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.SaveState.Delete">
+            <summary>Delete the record.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewColumns">
+            <summary>
+      Represents a collection of object items.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumns.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumns.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumns.GetCollection(System.Collections.Generic.List{LJCDBViewDAL.ViewColumn})">
+            <summary>
+      Get custom collection from List&lt;T&gt;.
+    </summary><param name="list">The list object reference.</param><returns>The collection object reference.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumns.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewCondition">
+            <summary>The ViewCondition table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewCondition.#ctor">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewCondition.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.ViewConditionSetID">
+            <summary>Gets or sets the ViewConditionSetID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.FirstValue">
+            <summary>Gets or sets the FirstValue value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.SecondValue">
+            <summary>Gets or sets the SecondValue value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.ComparisonOperator">
+            <summary>Gets or sets the ComparisonOperator value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewCondition.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.ColumnViewConditionSetID">
+            <summary>The ViewConditionSet column ID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.ColumnFirstValue">
+            <summary>The FirstValue value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.ColumnSecondValue">
+            <summary>The SecondValue value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.ColumnComparisonOperator">
+            <summary>The ComparisonOperator value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.LengthFirstValue">
+            <summary>The FirstValue maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.LengthSecondValue">
+            <summary>The SecondValue maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewCondition.LengthComparisonOperator">
+            <summary>The ComparisonOperator maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewConditions">
+            <summary>
+      Represents a collection of ViewCondition objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditions.Add(System.Int32,System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="firstValue">The item name.</param><param name="secondValue">The "compare-to" value.</param><param name="comparisonOperator">The comparison operator.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewConditionSet">
+            <summary>The ViewConditionSet table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSet.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewConditionSet.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewConditionSet.ViewFilterID">
+            <summary>Gets or sets the ViewFilterID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewConditionSet.BooleanOperator">
+            <summary>Gets or sets the BooleanOperator value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewConditionSet.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewConditionSet.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewConditionSet.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewConditionSet.ColumnViewFilterID">
+            <summary>The ViewFilterID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewConditionSet.ColumnBooleanOperator">
+            <summary>The BooleanOperator value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewConditionSet.LengthBooleanOperator">
+            <summary>The BooleanOperator maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewConditionSets">
+            <summary>
+      Represents a collection of ViewConditionSet objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSets.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="viewFilterID">The ViewFilter ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewData">
+            <summary>The ViewData table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewData.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewData.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewData.CompareTo(LJCDBViewDAL.ViewData)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewData.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewData.ViewTableID">
+            <summary>Gets or sets the ViewTableID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewData.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewData.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewData.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.ColumnViewTableID">
+            <summary>The ViewTableID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewData.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewFilter">
+            <summary>The ViewFilter table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilter.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilter.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilter.CompareTo(LJCDBViewDAL.ViewFilter)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewFilter.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewFilter.ViewDataID">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewFilter.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewFilter.BooleanOperator">
+            <summary>Gets or sets the BooleanOperator value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewFilter.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.ColumnViewDataID">
+            <summary>The ViewData ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.ColumnBooleanOperator">
+            <summary>The BooleanOperator column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewFilter.LengthBooleanOperator">
+            <summary>The BooleanOperator maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewFilters">
+            <summary>
+      Represents a collection of ViewFilter objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilters.Add(System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewGridColumn">
+            <summary>The ViewGridColumn table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumn.CompareTo(LJCDBViewDAL.ViewGridColumn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.ViewDataID">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.ViewColumnID">
+            <summary>Gets or sets the ViewColumnID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.Caption">
+            <summary>Gets or sets the Caption value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.Width">
+            <summary>Gets or sets the Width value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.ColumnName">
+            <summary>Gets or sets the join ColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.PropertyName">
+            <summary>Gets or sets the join PropertyName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewGridColumn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.ColumnViewDataID">
+            <summary>The ViewDataID column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.ColumnViewColumnID">
+            <summary>The ViewColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.ColumnCaption">
+            <summary>The Caption column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewGridColumn.ColumnWidth">
+            <summary>The Width column name.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewGridColumns">
+            <summary>
+      Represents a collection of ViewGridColumn objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumns.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="viewDataID">The View ID.</param><param name="viewColumnID">The Column ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumns.LJCSearchID(System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="viewDataID">The View ID.</param><param name="viewColumnID">The Column ID.</param>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoin">
+            <summary>The ViewJoin table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoin.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoin.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoin.CompareTo(LJCDBViewDAL.ViewJoin)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.ViewDataID">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.JoinTableName">
+            <summary>Gets or sets the JoinTableName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.JoinType">
+            <summary>Gets or sets the JoinType value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.TableAlias">
+            <summary>Gets or sets the TableAlias value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoin.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.ColumnViewDataID">
+            <summary>The ViewDataID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.ColumnTableName">
+            <summary>The TableName value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.PropertyTableName">
+            <summary>The TableName value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.ColumnJoinType">
+            <summary>The JoinType value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.ColumnTableAlias">
+            <summary>The TableAlias column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.LengthTableName">
+            <summary>The TableName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.LengthJoinType">
+            <summary>The JoinType maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoin.LengthTableAlias">
+            <summary>The TableAlias maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinColumn">
+            <summary>The ViewJoinColumn table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumn.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumn.CompareTo(LJCDBViewDAL.ViewJoinColumn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.ViewJoinID">
+            <summary>Gets or sets the ViewJoinID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.ColumnName">
+            <summary>Gets or sets the ColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.Caption">
+            <summary>Gets or sets the Caption value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.DataTypeName">
+            <summary>Gets or sets the DataTypeName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.PropertyName">
+            <summary>Gets or sets the PropertyName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.RenameAs">
+            <summary>Gets or sets the RenameAs value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.Value">
+            <summary>Gets or sets the Value value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.SaveState">
+            <summary>Gets or sets the SaveState value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnViewJoinID">
+            <summary>The ViewJoinID column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnColumnName">
+            <summary>The ColumnName column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnPropertyName">
+            <summary>The PropertyName column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnRenameAs">
+            <summary>The RenameAs column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnCaption">
+            <summary>The Caption column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnDataTypeName">
+            <summary>The DataTypeName column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.ColumnValue">
+            <summary>The Value column name.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthColumnName">
+            <summary>The ColumnName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthPropertyName">
+            <summary>The PropertyName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthRenameAs">
+            <summary>The RenameAs maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthCaption">
+            <summary>The Caption maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthDataTypeName">
+            <summary>The DataTypeName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinColumn.LengthValue">
+            <summary>The Value maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinColumns">
+            <summary>
+      Represents a collection of object items.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumns.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumns.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumns.GetCollection(System.Collections.Generic.List{LJCDBViewDAL.ViewJoinColumn})">
+            <summary>
+      Get custom collection from List&lt;T&gt;.
+    </summary><param name="list">The list object reference.</param><returns>The collection object reference.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumns.LJCSortName">
+            <summary>
+      Sort on Name.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumns.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumns.LJCErrorText">
+            <summary>Gets or sets the last error text value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumns.LJCIsError">
+            <summary>Returns true if there is an ErrorText value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinColumns.LJCIsSuccess">
+            <summary>Returns true if there is no ErrorText.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinOn">
+            <summary>The ViewJoinOn table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOn.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOn.CompareTo(LJCDBViewDAL.ViewJoinOn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.ViewJoinID">
+            <summary>Gets or sets the ViewJoinID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.FromColumnName">
+            <summary>Gets or sets the FromColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.ToColumnName">
+            <summary>Gets or sets the ToColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.JoinOnOperator">
+            <summary>Gets or sets the JoinOnOperator value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewJoinOn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.ColumnID">
+            <summary>The ID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.ColumnViewJoinID">
+            <summary>The ViewJoinID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.ColumnFromColumnName">
+            <summary>The FromColumnName value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.ColumnToColumnName">
+            <summary>The ToColumnName value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.ColumnJoinOnOperator">
+            <summary>The JoinOnOperator value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.LengthFromColumnName">
+            <summary>The FromColumnName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.LengthToColumnName">
+            <summary>The ToColumnName maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewJoinOn.LengthJoinOperator">
+            <summary>The JoinOperator maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinOns">
+            Represents a collection of ViewJoinOn objects. 
+            <summary>
+      Represents a collection of ViewJoinOn objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOns.Add(System.Int32,System.Int32,System.String,System.String)">
+            Creates and adds the object from the provided values.
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="viewJoinID">The ViewJoin ID.</param><param name="fromColumnName">The "From" column name.</param><param name="toColumnName">The "To" column name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOns.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="fromColumnName">The "From" column name.</param>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoins">
+            <summary>
+      Represents a collection of ViewJoin objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoins.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="joinTableName">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoins.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewOrderBy">
+            <summary>The ViewOrderBy table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderBy.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderBy.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderBy.CompareTo(LJCDBViewDAL.ViewOrderBy)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewOrderBy.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewOrderBy.ViewDataID">
+            <summary>Gets or sets the ViewDataID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewOrderBy.ColumnName">
+            <summary>Gets or sets the ColumnName value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewOrderBy.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewOrderBy.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewOrderBy.ColumnID">
+            <summary>The ID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewOrderBy.ColumnViewDataID">
+            <summary>The ViewDataID column value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewOrderBy.ColumnColumnName">
+            <summary>The ColumnName value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewOrderBy.LengthColumnName">
+            <summary>The ColumnName maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewOrderBys">
+            <summary>
+      Represents a collection of ViewOrderBy objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderBys.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="columnName">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderBys.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="columnName">The item name.</param>
+        </member>
+        <member name="T:LJCDBViewDAL.Views">
+            <summary>
+      Represents a collection of ViewData objects.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.Views.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.Views.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewTable">
+            <summary>The ViewTable table Data Record.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTable.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTable.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTable.ClearChanged">
+            <summary>Clears the ChangeNames object.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTable.CompareTo(LJCDBViewDAL.ViewTable)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewTable.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewTable.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewTable.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewTable.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.ColumnID">
+            <summary>The ID value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDBViewDAL.ViewTable.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewTables">
+            <summary>Represents a collection of ViewTable objects.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTables.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTables.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.DbViewColumnManager">
+            <summary>Provides table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewColumnManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record with ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewColumnManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewColumnManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewColumnManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.DbViewGridColumnManager">
+            <summary>Provides table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewGridColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewGridColumnManager.LoadWithViewIDBySequence(System.Int32)">
+            <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary><param name="viewDataID">The view ID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewGridColumnManager.GetViewDataIDKey(System.Int32)">
+            <summary>
+      Get the ViewDataID key record.
+    </summary><param name="viewDataID">The ViewData ID.</param><returns>The ViewDataID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewGridColumnManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Joins object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.DbViewGridColumnManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewColumnManager">
+            <summary>
+      Provides ViewColumn specific data manipulation methods.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJCDBViewDAL
+        library.
+      </para>
+      <para>
+        The LJCDBViewDAL library contains Data and Manager classes for
+        presenting an object oriented view of the Data Views database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DataAccess to communicate
+        with the database.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.AddWithFlags(LJCDBViewDAL.ViewColumn,System.Collections.Generic.List{System.String})">
+            <summary>
+      Adds a record including the flag values.
+    </summary><param name="dataObject">The Data Object.</param><param name="propertyNames">The included column property names.</param><returns>The object with the DB assigned key values.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.LoadDbColumnsWithParentID(System.Int32)">
+            <summary>
+      Retrieves a DbColumns collection for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The DbColumns collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record with ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record with the unique key.
+    </summary><param name="viewDataID">The ViewData ID value.</param><param name="columnName">The ColumnName value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.IsDuplicate(LJCDBViewDAL.ViewColumn,LJCDBViewDAL.ViewColumn,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.AddData(LJCDBViewDAL.ViewColumn)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewColumn">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewColumnManager.SaveData(LJCDBViewDAL.ViewColumn)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewColumn">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewConditionManager">
+            <summary>
+      Provides ViewCondition specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewConditionSetID">The ViewConditionSet ID.</param><param name="firstValue">The first value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="conditionSetID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.SaveData(LJCDBViewDAL.ViewCondition)">
+            <summary>
+      Updates the record if it already exists, otherwise creates it.
+    </summary><param name="viewCondition">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionManager.AddData(LJCDBViewDAL.ViewCondition)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewCondition">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewConditionSetManager">
+            <summary>
+      Provides ViewConditionSet specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record by ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.RetrieveWithUniqueKey(System.Int32)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewFilterID">The ViewFilter ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="filterID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.SaveData(LJCDBViewDAL.ViewConditionSet)">
+            <summary>
+      Updates the record if it already exists, otherwise creates it.
+    </summary><param name="viewConditionSet">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewConditionSetManager.AddData(LJCDBViewDAL.ViewConditionSet)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewConditionSet">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewDataManager">
+            <summary>
+      Provides ViewData specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewTableID">The ViewTable ID value.</param><param name="name">The Name value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.LoadWithParentID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Loads a collection of Data Records with the supplied value.
+    </summary><param name="parentID">The Reference ID value.</param><param name="propertyNames">The included property names.</param><returns>The collection of Data Objects.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.SaveData(LJCDBViewDAL.ViewData)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewData">The data record.</param><returns>True if successful otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewDataManager.AddData(LJCDBViewDAL.ViewData)">
+            <summary>
+      Adds a ViewData record.
+    </summary><param name="viewData">The data record.</param><returns>The added ViewData record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewFilterManager">
+            <summary>
+      Provides ViewFilter specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record by ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewDataID">The ViewData ID value.</param><param name="name">The Filter value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.SaveData(LJCDBViewDAL.ViewFilter)">
+            <summary>
+      Updates the record if it already exists, otherwise creates it.
+    </summary><param name="viewFilter">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewFilterManager.AddData(LJCDBViewDAL.ViewFilter)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewFilter">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewGridColumnManager">
+            <summary>
+      Provides ViewGridColumn specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.RetrieveWithIDs(System.Int32,System.Int32)">
+            <summary>
+      Retrieves a data record with the supplied value.
+    </summary><param name="viewDataID">The ViewData ID.</param><param name="viewColumnID">The ViewColumn ID.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves a data record with the unique key values.
+    </summary><param name="viewDataID">The ViewData ID.</param><param name="columnName">The column name.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.LoadWithViewIDBySequence(System.Int32)">
+            <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary><param name="viewDataID">The view ID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetIDsKey(System.Int32,System.Int32)">
+            <summary>
+      Get the ID key record.
+    </summary><param name="viewDataID">The ViewData ID.</param><param name="viewColumnID">The ViewColumn ID.</param><returns>The IDs key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetViewDataIDKey(System.Int32)">
+            <summary>
+      Get the ViewDataID key record.
+    </summary><param name="viewDataID">The ViewData ID.</param><returns>The ViewDataID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetUniqueKey(System.Int32,System.String)">
+            <summary>
+      Get the Unique key record.
+    </summary><param name="viewDataID">The ViewData ID.</param><param name="propertyName">The property name.</param><returns>The unique key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Joins object.
+    </summary><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetTextFilters">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.SaveData(LJCDBViewDAL.ViewGridColumn)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewGridColumn">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewGridColumnManager.GetDisplayColumns(System.Int32)">
+            <summary>
+      Retrieves the Display Columns definition.
+    </summary><param name="viewDataID">The view ID value.</param><returns>The display columns.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinColumnManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="viewJoinID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.RetrieveWithUniqueKey(LJCDBViewDAL.ViewJoin,LJCNetCommon.DbColumn)">
+            <summary>
+      Retrieves the record with the unique key.
+    </summary><param name="viewJoin">The ViewJoin object.</param><param name="dbColumn">The DbColumn object.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.LoadDbColumnsWithParentID(System.Int32)">
+            <summary>
+      Retrieves a DbColumns collection for the specified parent ID.
+    </summary><param name="viewJoinID">The parent ID.</param><returns>The DbColumns collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.GetParentIDKey(System.Int32)">
+            <summary>
+      Gets the Parent ID key record.
+    </summary><param name="id">The Parent ID value.</param><returns>The Parent ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.SaveData(LJCDBViewDAL.ViewJoinColumn)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewJoinColumn">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.AddData(LJCDBViewDAL.ViewJoinColumn)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewJoinColumn">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinColumnManager.IsDuplicate(LJCDBViewDAL.ViewJoinColumn,LJCDBViewDAL.ViewJoinColumn,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinOnManager">
+            <summary>
+      Provides ViewJoinOn specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record by ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewJoinID">The join ID value.</param><param name="fromColumnName">The from column name value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of data records for the specified parent ID.
+    </summary><param name="viewJoinID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.SaveData(LJCDBViewDAL.ViewJoinOn)">
+            <summary>
+      Updates the record if it already exists, otherwise creates it.
+    </summary><param name="viewJoinOn">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinOnManager.AddData(LJCDBViewDAL.ViewJoinOn)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewJoinOn">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewJoinManager">
+            <summary>
+      Provides ViewJoin specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record by ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.RetrieveWithUniqueKey(System.Int32,System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="viewDataID">The ViewData ID value.</param><param name="joinTableName">The join table name value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of data records for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.SaveData(LJCDBViewDAL.ViewJoin)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewJoin">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewJoinManager.AddData(LJCDBViewDAL.ViewJoin)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewJoin">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewOrderByManager">
+            <summary>
+      Provides ViewOrderBy specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.RetrieveWithID(System.Int32)">
+            <summary>
+      Retrieve the record by ID.
+    </summary><param name="id">The ID value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.RetrieveWithUniqueKey(System.String)">
+            <summary>
+      Retrieves the record by the unique key.
+    </summary><param name="columnName">The column name value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.LoadWithParentID(System.Int32)">
+            <summary>
+      Retrieves a collection of Data records for the specified parent ID.
+    </summary><param name="viewDataID">The parent ID.</param><returns>The data object record collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.GetNameKey(System.String)">
+            <summary>
+      Gets the Name keys record.      
+    </summary><param name="name">The Name value.</param><returns>The Name keys Object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.GetParentKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.SaveData(LJCDBViewDAL.ViewOrderBy)">
+            <summary>
+      Updates the record if it already exists, othserwise creates it.
+    </summary><param name="viewOrderBy">The data record.</param><returns>True if successful otherwise, false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewOrderByManager.AddData(LJCDBViewDAL.ViewOrderBy)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewOrderBy">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewTableManager">
+            <summary>
+      Provides ViewTable specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTableManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTableManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTableManager.RetrieveWithUniqueKey(System.String)">
+            <summary>
+      Retrieves the record with the unique key.
+    </summary><param name="tableName">The table name value.</param><returns>The data object record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTableManager.SaveData(LJCDBViewDAL.ViewTable)">
+            <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary><param name="viewTable">The data record.</param><returns>True if successful otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewTableManager.AddData(LJCDBViewDAL.ViewTable)">
+            <summary>
+      Adds a data record.
+    </summary><param name="viewTable">The data record.</param><returns>The added data object record with the assigned ID value.</returns>
+        </member>
+        <member name="T:LJCDBViewDAL.ViewHelper">
+            <summary>
+      Provides DB View data access and DbRequest methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The service reference object.</param><param name="dataConfigName">The DataConfig name.</param>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewData(System.String,System.Int32)">
+            <summary>
+     Retrieves the View data.
+    </summary><param name="tableName">The table name.</param><param name="viewDataID">The View ID.</param><returns>The result data.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewRequest(System.String,System.String)">
+            <summary>
+      Creates the DbRequest object for the specified View.
+    </summary><param name="tableName">The table name.</param><param name="viewName">The View Data name.</param><returns>The View DbRequest object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewRequest(System.String,System.Int32)">
+            <summary>
+      Creates the DbRequest object for the specified View.
+    </summary><param name="tableName">The table name.</param><param name="viewDataID">The View ID.</param><returns>The View DbRequest object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetDisplayColumns(System.Int32)">
+            <summary>
+      Gets the ViewGrid columns.
+    </summary><param name="viewDataID">the View ID.</param><returns>The DbColumns object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.CreateDefaultViewTable(System.String)">
+            <summary>
+      Creates and returns the default ViewTable record.
+    </summary><param name="tableName">The table name.</param><returns>The new ViewTable record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.CreateDefaultViewData(LJCDBMessage.DbRequest)">
+            <summary>
+      Creates and returns the default ViewData record.
+    </summary><param name="dbRequest">The table DbRequest object.</param><returns>The new ViewData record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetDbColumnFromViewColumn(LJCDBViewDAL.ViewColumn)">
+            <summary>
+      Creates and returns a DbColumn object from a ViewColumn record.
+    </summary><param name="viewColumn">The ViewColumn record.</param><returns>The new DbColumn object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetDbColumnFromViewJoinColumn(LJCDBViewDAL.ViewJoinColumn)">
+            <summary>
+      Creates and returns a DbColumn object from a ViewJoinColumn record.
+    </summary><param name="viewJoinColumn">The ViewJoinColumn record.</param><returns>The new DbColumn object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetDbColumnFromViewGridColumn(LJCDBViewDAL.ViewGridColumn)">
+            <summary>
+      Creates and returns a DbColumn object from a ViewGridColumn record.
+    </summary><param name="viewGridColumn">The ViewGridColumn record.</param><returns>The new DbColumn object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewColumnFromDbColumn(LJCNetCommon.DbColumn,System.Int32)">
+            <summary>
+      Creates and returns a ViewColumn record from a DbColumn object.
+    </summary><param name="dbColumn">The DbColumn object.</param><param name="viewDataID">The parent ViewData ID.</param><returns>The new ViewColumn record.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewJoinColumnsFromDbColumns(LJCNetCommon.DbColumns,System.Int32)">
+            <summary>
+      Creates and returns a ViewJoinColumns collection from a DbColumns collection.
+    </summary><param name="dbColumns">The DbColumns collection.</param><param name="viewJoinID">The parent ViewJoin ID.</param><returns>The new ViewJoinColumns collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.GetViewJoinColumnFromDbColumn(LJCNetCommon.DbColumn,System.Int32)">
+            <summary>
+      Creates and returns a ViewJoinColumn record from a DbColumn object.
+    </summary><param name="dbColumn">The DbColumn object.</param><param name="viewJoinID">The parent ViewJoin ID.</param><returns>The new ViewJoinColumn object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.SaveRequestViewGridColumns(System.Int32,LJCDBMessage.DbRequest)">
+            <summary>
+      Saves the ViewGridColumns from the specified DbRequest columns.
+    </summary><param name="viewDataID">The View ID.</param><param name="dbRequest">The DbRequest object.</param><returns>The ViewGridColumns collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.SaveRequestJoinGridColumns(System.Int32,LJCDBMessage.DbRequest,System.Int32)">
+            <summary>
+      Saves the ViewGridColumns from the specified DbRequest join columns.
+    </summary><param name="viewDataID">The View ID.</param><param name="dbRequest">The DbRequest object.</param><param name="sequence">The current sequence value.</param><returns>The ViewGridColumns collection.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.SaveJoinGridColumn(LJCDBViewDAL.ViewJoin,LJCNetCommon.DbColumn,System.Int32)">
+            <summary>
+      Saves the ViewGridColumn from the specified ViewJoin column.
+    </summary><param name="viewJoin">The ViewJoin object.</param><param name="dbColumn">The DbColumn object.</param><param name="sequence">The current sequence value.</param><returns>The ViewGridColumn object.</returns>
+        </member>
+        <member name="M:LJCDBViewDAL.ViewHelper.SaveRequestView(System.String,System.String,LJCDBMessage.DbRequest)">
+            <summary>
+      Saves the view from the specified DbRequest object.
+    </summary><param name="viewName">The view name.</param><param name="viewDescription">The view description.</param><param name="dbRequest">The DbRequest object.</param>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewTableManager">
+            <summary>The ViewTable manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewDataManager">
+            <summary>The ViewData manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewColumnManager">
+            <summary>The ViewColumn manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewJoinManager">
+            <summary>The ViewJoin manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewJoinOnManager">
+            <summary>The ViewJoinOn manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewJoinColumnManager">
+            <summary>The ViewJoinColumn manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewFilterManager">
+            <summary>The ViewFilter manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewConditionSetManager">
+            <summary>The ViewConditionSet manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewConditionManager">
+            <summary>The ViewCondition manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewOrderByManager">
+            <summary>The ViewOrderBy manager.</summary>
+        </member>
+        <member name="P:LJCDBViewDAL.ViewHelper.ViewGridColumnManager">
+            <summary>The ViewGridColumn manager.</summary>
+        </member>
+    </members>
+</doc>

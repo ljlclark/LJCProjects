@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCSQLUtilLib</name>
+    </assembly>
+    <members>
+        <member name="T:LJCSQLUtilLib.LJCMetadata">
+            <summary>
+      Contains Metadata helper methods.
+    </summary><remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides SQL Database Utility classes.
+      </para>
+      <para>
+        The Metadata is stored in tables to allow for design of the tables
+        separate from the actual creation of the tables.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetCreateTableSql(System.String,System.Boolean)">
+            <summary>
+      Builds and returns the Create Table SQL statement from the Metadata.
+    </summary><param name="tableName">The table name.</param><param name="includeForeignKeys">
+      Indicates if the Foreign Key constraints
+      are to be included.
+    </param><returns>The Create Table SQL statement.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetCreateTableSql(System.String,LJCSQLUtilLibDAL.DbMetaDataColumns,System.Boolean)">
+            <summary>
+      Builds and returns the Create Table SQL statement with the specified
+      Metadata columns.
+    </summary><param name="tableName">The table name.</param><param name="mdColumns">The Metadata Columns object.</param><param name="includeForeignKeys">Indicates if the Foreign Key constraints</param><returns>The Create Table SQL statement.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetCreateColumnSql(LJCSQLUtilLibDAL.DbMetaDataColumns)">
+            <summary>
+      Creates and returns the Column Definitions SQL for the Create Table SQL
+      statement from the Metadata.
+    </summary><param name="mdColumns">The MdDataColumns object.</param><returns>The Column Definitions SQL string.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetSqlDbTypeName(System.String)">
+            <summary>
+      Get the .NET to SQL data type names.
+    </summary><param name="netTypeName">The .NET type name.</param><returns>The SqlDbType name.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetPrimaryKeyConstraintSql(System.String)">
+            <summary>
+      Creates and returns the Primary Key Constraint SQL for the Create Table
+      SQL statement from the Metadata.
+    </summary><param name="tableName">The table name.</param><returns>The Primary Key Constraint SQL string.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetForeignKeyConstraintSql(System.String,LJCSQLUtilLibDAL.DbMetaDataColumns)">
+            <summary>
+      Creates and returns the Foreign Key Constraing SQL for the foreign keys.
+    </summary><param name="tableName">The table name.</param><param name="mdColumns">The MdDataColumns object.</param><returns>The Foreign Key Constraints SQL string.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.GetRemakeTableScript(System.String,LJCSQLUtilLibDAL.DbMetaDataColumns,LJCSQLUtilLibDAL.DbMetaDataColumns)">
+            <summary>
+            Remake table with new column names and/or column sequences.
+            </summary>
+            <param name="tableName">The table name.</param>
+            <param name="fromMdColumns">The source columns.</param>
+            <param name="toMdColumns">The target columns.</param>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.UpdateMetadataFromSchema(System.String,System.String)">
+            <summary>
+      Creates/Updates the Metadata from the Schema data.
+    </summary><param name="dataConfigName">The Data Config name.</param><param name="tableName">The Table name.</param>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.SaveMdTable(System.String)">
+            <summary>
+      Saves the MD Table from the table name.
+    </summary><param name="tableName">The table name.</param><returns>The DbMetaDataTable object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.SaveMdColumn(System.Int32,System.Int32,LJCNetCommon.DbColumn)">
+            <summary>
+      Saves the MD Column from the DbColumn object.
+    </summary><param name="tableID">The table ID.</param><param name="sequence">The Sequence value.</param><param name="dbColumn">The DbColumn object.</param><returns>The DbMetaDataColumn object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.SaveMdKey(LJCSQLUtilLibDAL.ForeignKey)">
+            <summary>
+      Saves the MD Key from the ForeignKey object.
+    </summary><param name="foreignKey">The ForeignKey object.</param><returns>The DbMetaDataKey object.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.LoadSchemaPrimaryKeys(System.String)">
+            <summary>
+      Loads a collection of Primary Key data records.
+    </summary><param name="tableName">The table name.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.LoadSchemaForeignKeys(System.String)">
+            <summary>
+      Loads a collection of Foreign Key data records.
+    </summary><param name="tableName">The table name.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCSQLUtilLib.LJCMetadata.InitializeData">
+            <summary>
+      Configures the controls and loads the selection control data.
+    </summary>
+        </member>
+        <member name="P:LJCSQLUtilLib.LJCMetadata.MdTableManager">
+            <summary>Gets or sets the MdTableManager value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLib.LJCMetadata.MdColumnManager">
+            <summary>Gets or sets the MdColumnManager value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLib.LJCMetadata.MdKeyManager">
+            <summary>Gets or sets the MdKeyManager value.</summary>
+        </member>
+        <member name="P:LJCSQLUtilLib.LJCMetadata.ForeignKeyManager">
+            <summary>Gets or sets the ForeignKeyManager value.</summary>
+        </member>
+    </members>
+</doc>

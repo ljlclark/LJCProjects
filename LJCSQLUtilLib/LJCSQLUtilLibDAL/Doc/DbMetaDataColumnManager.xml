@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <DbMetaDataColumnManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+  </DbMetaDataColumnManagerC>
+  <SaveData>
+    <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary>
+    <param name="mdColumn">The data record.</param>
+    <returns>True if successful otherwise, false.</returns>
+  </SaveData>
+  <AddData>
+    <summary>
+      Adds a data record.
+    </summary>
+    <param name="mdColumn">The data record.</param>
+    <returns>The added data object record with the assigned ID value.</returns>
+  </AddData>
+  <LoadByTableID>
+    <summary>
+      Loads a collection of data records ordered by Description.
+    </summary>
+    <param name="tableID">the table ID value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadByTableID>
+  <LoadByDescription>
+    <summary>
+      Loads a collection of data records ordered by Description.
+    </summary>
+    <returns>The collection of data records.</returns>
+  </LoadByDescription>
+  <RetrieveWithUniqueKey>
+    <summary>
+      Retrieves a data record with the supplied values.
+    </summary>
+    <param name="tableID">The table ID.</param>
+    <param name="columnName">The column name.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithUniqueKey>
+  <GetTableIDKey>
+    <summary>
+      Get the ID key record.
+    </summary>
+    <param name="tableID">The table ID value.</param>
+    <returns>The key record.</returns>
+  </GetTableIDKey>
+  <SetExcludeKeys>
+    <summary>
+      Set the temporary exclude keys.
+    </summary>
+    <remarks>
+      These exclude keys are only valid for the next manager data method call.
+    </remarks>
+  </SetExcludeKeys>
+  <GetLoadJoins>
+    <summary>
+      Creates and returns the Load join object.
+    </summary>
+    <returns>The DbJoins object.</returns>
+  </GetLoadJoins>
+  <GetTextFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <returns>The DbFilters object.</returns>
+  </GetTextFilters>
+  <SetOrderByDescription>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderByDescription>
+</items>

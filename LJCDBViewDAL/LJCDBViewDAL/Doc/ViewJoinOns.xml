@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <ViewJoinOns>
+    <summary>
+      Represents a collection of ViewJoinOn objects.
+    </summary>
+  </ViewJoinOns>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="viewJoinID">The ViewJoin ID.</param>
+    <param name="fromColumnName">The "From" column name.</param>
+    <param name="toColumnName">The "To" column name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCSearchName>
+    <summary>
+      Retrieve the collection element with name.
+    </summary>
+    <param name="fromColumnName">The "From" column name.</param>
+  </LJCSearchName>
+</items>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <ViewHelper>
+    <summary>
+      Provides DB View data access and DbRequest methods.
+    </summary>
+  </ViewHelper>
+  <ViewHelperC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The service reference object.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+  </ViewHelperC>
+  <GetViewData>
+   <summary>
+     Retrieves the View data.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="viewDataID">The View ID.</param>
+    <returns>The result data.</returns>
+  </GetViewData>
+  <GetViewRequest1>
+    <summary>
+      Creates the DbRequest object for the specified View.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="viewName">The View Data name.</param>
+    <returns>The View DbRequest object.</returns>
+  </GetViewRequest1>
+  <GetViewRequest2>
+    <summary>
+      Creates the DbRequest object for the specified View.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="viewDataID">The View ID.</param>
+    <returns>The View DbRequest object.</returns>
+  </GetViewRequest2>
+  <GetDisplayColumns>
+    <summary>
+      Gets the ViewGrid columns.
+    </summary>
+    <param name="viewDataID">the View ID.</param>
+    <returns>The DbColumns object.</returns>
+  </GetDisplayColumns>
+  <CreateDefaultViewTable>
+    <summary>
+      Creates and returns the default ViewTable record.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <returns>The new ViewTable record.</returns>
+  </CreateDefaultViewTable>
+  <CreateDefaultViewData>
+    <summary>
+      Creates and returns the default ViewData record.
+    </summary>
+    <param name="dbRequest">The table DbRequest object.</param>
+    <returns>The new ViewData record.</returns>
+  </CreateDefaultViewData>
+  <GetDbColumnsFromViewColumns>
+    <summary>
+      Creates and returns a DbColunns collection from a ViewColumns collection.
+    </summary>
+    <param name="viewColumns">The ViewColumns collection.</param>
+    <returns>The DbColumns collection.</returns>
+  </GetDbColumnsFromViewColumns>
+  <GetDbColumnFromViewColumn>
+    <summary>
+      Creates and returns a DbColumn object from a ViewColumn record.
+    </summary>
+    <param name="viewColumn">The ViewColumn record.</param>
+    <returns>The new DbColumn object.</returns>
+  </GetDbColumnFromViewColumn>
+  <GetViewColumnsFromDbColumns>
+    <summary>
+      Creates and returns a ViewColumns collection from a DbColumns collection.
+    </summary>
+    <param name="dbColumns">The DbColumns collection.</param>
+    <param name="viewDataID">The parent ViewData ID.</param>
+    <returns>The new ViewColumns collection.</returns>
+  </GetViewColumnsFromDbColumns>
+  <GetViewColumnFromDbColumn>
+    <summary>
+      Creates and returns a ViewColumn record from a DbColumn object.
+    </summary>
+    <param name="dbColumn">The DbColumn object.</param>
+    <param name="viewDataID">The parent ViewData ID.</param>
+    <returns>The new ViewColumn record.</returns>
+  </GetViewColumnFromDbColumn>
+  <GetViewJoinColumnsFromDbColumns>
+    <summary>
+      Creates and returns a ViewJoinColumns collection from a DbColumns collection.
+    </summary>
+    <param name="dbColumns">The DbColumns collection.</param>
+    <param name="viewJoinID">The parent ViewJoin ID.</param>
+    <returns>The new ViewJoinColumns collection.</returns>
+  </GetViewJoinColumnsFromDbColumns>
+  <GetViewJoinColumnFromDbColumn>
+    <summary>
+      Creates and returns a ViewJoinColumn record from a DbColumn object.
+    </summary>
+    <param name="dbColumn">The DbColumn object.</param>
+    <param name="viewJoinID">The parent ViewJoin ID.</param>
+    <returns>The new ViewJoinColumn object.</returns>
+  </GetViewJoinColumnFromDbColumn>
+  <GetDbColumnFromViewJoinColumn>
+    <summary>
+      Creates and returns a DbColumn object from a ViewJoinColumn record.
+    </summary>
+    <param name="viewJoinColumn">The ViewJoinColumn record.</param>
+    <returns>The new DbColumn object.</returns>
+  </GetDbColumnFromViewJoinColumn>
+  <GetDbColumnFromViewGridColumn>
+    <summary>
+      Creates and returns a DbColumn object from a ViewGridColumn record.
+    </summary>
+    <param name="viewGridColumn">The ViewGridColumn record.</param>
+    <returns>The new DbColumn object.</returns>
+  </GetDbColumnFromViewGridColumn>
+  <GetViewGridColumnFromDbColumn>
+    <summary>
+      Creates and returns a ViewGridColumn record from a DbColumn object.
+    </summary>
+    <param name="dbColumn">The DbColumn object.</param>
+    <returns>The new ViewGridColumn record.</returns>
+  </GetViewGridColumnFromDbColumn>
+  <SaveRequestViewGridColumns>
+    <summary>
+      Saves the ViewGridColumns from the specified DbRequest columns.
+    </summary>
+    <param name="viewDataID">The View ID.</param>
+    <param name="dbRequest">The DbRequest object.</param>
+    <returns>The ViewGridColumns collection.</returns>
+  </SaveRequestViewGridColumns>
+  <SaveRequestJoinGridColumns>
+    <summary>
+      Saves the ViewGridColumns from the specified DbRequest join columns.
+    </summary>
+    <param name="viewDataID">The View ID.</param>
+    <param name="dbRequest">The DbRequest object.</param>
+    <param name="sequence">The current sequence value.</param>
+    <returns>The ViewGridColumns collection.</returns>
+  </SaveRequestJoinGridColumns>
+  <SaveJoinGridColumn>
+    <summary>
+      Saves the ViewGridColumn from the specified ViewJoin column.
+    </summary>
+    <param name="viewJoin">The ViewJoin object.</param>
+    <param name="dbColumn">The DbColumn object.</param>
+    <param name="sequence">The current sequence value.</param>
+    <returns>The ViewGridColumn object.</returns>
+  </SaveJoinGridColumn>
+  <SaveRequestView>
+    <summary>
+      Saves the view from the specified DbRequest object.
+    </summary>
+    <param name="viewName">The view name.</param>
+    <param name="viewDescription">The view description.</param>
+    <param name="dbRequest">The DbRequest object.</param>
+  </SaveRequestView>
+</items>
