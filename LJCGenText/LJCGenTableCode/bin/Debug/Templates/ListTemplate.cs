@@ -816,7 +816,7 @@ namespace _Namespace_
     private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      Select();
+      _ClassName_Grid.Select();
       if (e.Button == MouseButtons.Right
         && _ClassName_Grid.LJCIsDifferentRow(e))
       {
