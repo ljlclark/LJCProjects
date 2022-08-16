@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// CreateFieldXml.cs
+﻿// CreateFieldXml.cs
 using System;
 using LJCNetCommon;
 using LJCGenTextLib;

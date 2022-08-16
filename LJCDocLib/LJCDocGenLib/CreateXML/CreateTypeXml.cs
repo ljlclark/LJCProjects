@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// CreateTypeXml.cs
+﻿// CreateTypeXml.cs
 using System;
 using System.IO;
 using LJCNetCommon;

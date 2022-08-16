@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// DataParas.cs
+﻿// DataParas.cs
 using System.Collections.Generic;
 
 namespace LJCDocObjLib

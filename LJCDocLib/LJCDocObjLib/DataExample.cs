@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// DataExample.cs
+﻿// DataExample.cs
 
 namespace LJCDocObjLib
 {

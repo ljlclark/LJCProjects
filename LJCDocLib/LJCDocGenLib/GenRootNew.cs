@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// GenRootNew.cs
+﻿// GenRootNew.cs
 using LJCGenTextLib;
 using LJCNetCommon;
 using System.IO;

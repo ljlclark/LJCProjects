@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved
-// Links.cs
+﻿// Links.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;

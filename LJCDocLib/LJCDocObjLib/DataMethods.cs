@@ -1,4 +1,3 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DataMethods.cs
 using System.Collections.Generic;
 

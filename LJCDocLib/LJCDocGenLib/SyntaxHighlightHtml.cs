@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// SyntaxHighlightHtml.cs
+﻿// SyntaxHighlightHtml.cs
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

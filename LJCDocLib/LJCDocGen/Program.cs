@@ -1,5 +1,4 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// Program.cs
+// LJCDocGen-Program.cs
 using LJCDocGenLib;
 using LJCDocLibDAL;
 using LJCDocObjLib;

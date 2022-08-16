@@ -1,4 +1,3 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DataMethod.cs
 using LJCDocXMLObjLib;
 using LJCNetCommon;

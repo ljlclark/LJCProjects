@@ -1,4 +1,3 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DataExample.cs
 using System.Xml.Serialization;
 

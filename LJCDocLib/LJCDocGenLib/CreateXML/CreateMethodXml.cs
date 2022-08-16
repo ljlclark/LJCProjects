@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// CreateMethodXml.cs
+﻿// CreateMethodXml.cs
 using System;
 using System.Collections.Generic;
 using LJCNetCommon;
