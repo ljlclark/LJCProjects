@@ -63,7 +63,7 @@
   </DbColumnC>
 
   <!-- Data Methods -->
-  <FormatValue>
+  <SQLFormatValue>
     <summary>
       Formats the column value for the SQL string. (D)
     </summary>
@@ -92,7 +92,7 @@
         
       </code>
     </example>
-  </FormatValue>
+  </SQLFormatValue>
 
   <!-- Conversions -->
   <DbValue>

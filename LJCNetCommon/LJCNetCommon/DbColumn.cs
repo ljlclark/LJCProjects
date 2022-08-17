@@ -88,8 +88,8 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string. (D)
-    /// <include path='items/FormatValue/*' file='Doc/DbColumn.xml'/>
-    public string FormatValue()
+    /// <include path='items/SQLFormatValue/*' file='Doc/DbColumn.xml'/>
+    public string SQLFormatValue()
     {
       string retValue;
 
