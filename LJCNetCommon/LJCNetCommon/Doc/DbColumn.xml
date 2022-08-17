@@ -11,20 +11,9 @@
         object is used extensively throughout the LJC libraries, utilities and
         applications; wherever data elements need to be dynamically defined or
         manipulated. It is commonly used to define database table columns, grid
-        control columns and text file columns.
-      </para>
-      <para>
-        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-        object contains several properties that are also defined in the
-        &lt;span class="userType"&gt;System.Data.DataColumn&lt;/span&gt;
-        object plus additional properties to support extended usage in the LJC
-        libraries, utilities and applications.
-      </para>
-      <para>
-        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-        object is often used to facilitate moving data between a database table
-        column, grid control column, text file column or other data source and
-        a data object.
+        control columns and text file columns and is often used to facilitate
+        moving data between a database table column, grid control column, text
+        file column or other data source and a data object.
       </para>
       <para>
         A Data Object is an instance of a class that contains properties for
@@ -42,13 +31,12 @@
       <para>
         If a data object property name is different than the data source column
         name, then the PropertyName value must be set to the data object
-        property name.
+        property name. For join columns, it may be the case that a different
+        PropertyName needs to be chosen as there is already a property with that
+        name. This often means that a RenameAs value must be assigned as there is
+        most likely also a table column name conflict with the primary table.
       </para>
       <para>
-        For join columns, it may be the case that a different PropertyName needs
-        to be chosen as there is already a property with that name. This often
-        means that a RenameAs value must be assigned as there is most likely
-        also a table column name conflict with the primary table.
       </para>
     </remarks>
   </DbColumn>
@@ -64,6 +52,14 @@
     <param name="propertyName">the property name.</param>
     <param name="assignedKey">The assigned key indicator.</param>
     <param name="renameValue">The RenameAs value.</param>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Must use (object) with a string value to execute this constructor.
+        var dbColumn = new DbColumn("ColumnName", (object)"Value");
+      </code>
+    </example>
   </DbColumnC>
 
   <!-- Data Methods -->
@@ -84,6 +80,18 @@
         If the DataType is string, returns a string with doubled single quotes.
       </para>
     </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumnBool = new DbColumn("TestBool", "1", NetCommon.TypeBoolean);
+        var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
+          , NetCommon.TypeDateTime);
+        var dbColumnString = new DbColumn("TestString", "string");
+        
+        
+      </code>
+    </example>
   </FormatValue>
 
   <!-- Conversions -->
@@ -100,7 +108,8 @@
       object.
     </param>
     <example>
-      <code>        using LJCNetCommon;
+      <code>
+        using LJCNetCommon;
         
         var dbColumn = new DbColumn()
         {
@@ -129,11 +138,13 @@
       This is the Table Column name for the SQL statement. The result value is
       retrieved using this name. The Table Name comes from
       &lt;span class="userType"&gt;DBMessage.DbQuery.TableName&lt;/span&gt;.
-      &lt;pre&gt;      select
+      &lt;pre&gt;
+      select
         TableName.ColumnName
         
       update TableName set
-        TableName.ColumnName = value&lt;/pre&gt;
+        TableName.ColumnName = value
+      &lt;/pre&gt;
     </remarks>
   </ColumnName>
   <Position>
@@ -164,8 +175,10 @@
       RenameAs value changes the result name. The result value is retrieved
       using this name. The Table Name comes from
       &lt;span class="userType"&gt;DBMessage.DbQuery.TableName&lt;/span&gt;.
-      &lt;pre&gt;      select
-        TableName.ColumnName as RenameAs&lt;/pre&gt;
+      &lt;pre&gt;
+      select
+        TableName.ColumnName as RenameAs
+      &lt;/pre&gt;
     </remarks>
   </RenameAs>
 

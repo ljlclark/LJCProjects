@@ -1,4 +1,4 @@
-// Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved
+// NetCommon.cs
 using System;
 using System.Drawing;
 using System.Text;
@@ -28,11 +28,13 @@ namespace LJCNetCommon
         // Null is less than not null.
         retValue = -1;
       }
+
       if (null == y)
       {
         // Not null is greater than null.
         retValue = 1;
       }
+
       if (null == x
         && null == y)
       {
@@ -72,55 +74,63 @@ namespace LJCNetCommon
         string typeName = oldValue.GetType().Name;
         switch (typeName)
         {
-          case "Boolean":
-            if (Convert.ToBoolean(oldValue) == Convert.ToBoolean(newValue))
+          case TypeBoolean:
+            if (GetBoolean(oldValue) == GetBoolean(newValue))
             {
               retValue = true;
             }
             break;
-          case "DateTime":
-            if (Convert.ToDateTime(oldValue) == Convert.ToDateTime(newValue))
+
+          case TypeDateTime:
+            if (GetDateTime(oldValue) == GetDateTime(newValue))
             {
               retValue = true;
             }
             break;
-          case "Decimal":
-            if (Convert.ToDecimal(oldValue) == Convert.ToDecimal(newValue))
+
+          case TypeDecimal:
+            if (GetDecimal(oldValue) == GetDecimal(newValue))
             {
               retValue = true;
             }
             break;
-          case "Double":
-            if (Convert.ToDouble(oldValue) == Convert.ToDouble(newValue))
+
+          case TypeDouble:
+            if (GetDouble(oldValue) == GetDouble(newValue))
             {
               retValue = true;
             }
             break;
-          case "Int16":
-            if (Convert.ToInt16(oldValue) == Convert.ToInt16(newValue))
+
+          case TypeInt16:
+            if (GetInt16(oldValue) == GetInt16(newValue))
             {
               retValue = true;
             }
             break;
-          case "Int32":
-            if (Convert.ToInt32(oldValue) == Convert.ToInt32(newValue))
+
+          case TypeInt32:
+            if (GetInt32(oldValue) == GetInt32(newValue))
             {
               retValue = true;
             }
             break;
-          case "Int64":
-            if (Convert.ToInt64(oldValue) == Convert.ToInt64(newValue))
+
+          case TypeInt64:
+            if (GetInt64(oldValue) == GetInt64(newValue))
             {
               retValue = true;
             }
             break;
-          case "Single":
-            if (Convert.ToSingle(oldValue) == Convert.ToSingle(newValue))
+
+          case TypeSingle:
+            if (GetSingle(oldValue) == GetSingle(newValue))
             {
               retValue = true;
             }
             break;
-          case "String":
+
+          case TypeString:
             if (0 == string.Compare(oldValue.ToString(), newValue.ToString(), true))
             {
               retValue = true;
@@ -348,6 +358,36 @@ namespace LJCNetCommon
     #region Object Data Functions
 
     // Gets a decimal value from an object. (E)
+    /// <include path='items/GetBoolean/*' file='Doc/NetCommon.xml'/>
+    public static bool GetBoolean(object value)
+    {
+      Type type;
+      bool retVal = false;
+
+      type = value.GetType();
+      if (typeof(bool) == type)
+      {
+        retVal = Convert.ToBoolean(value);
+      }
+      return retVal;
+    }
+
+    // Gets a decimal value from an object. (E)
+    /// <include path='items/GetDateTime/*' file='Doc/NetCommon.xml'/>
+    public static DateTime? GetDateTime(object value)
+    {
+      Type type;
+      DateTime? retVal = null;
+
+      type = value.GetType();
+      if (typeof(decimal) == type)
+      {
+        retVal = Convert.ToDateTime(value);
+      }
+      return retVal;
+    }
+
+    // Gets a decimal value from an object. (E)
     /// <include path='items/GetDecimal/*' file='Doc/NetCommon.xml'/>
     public static decimal GetDecimal(object value)
     {
@@ -361,6 +401,24 @@ namespace LJCNetCommon
         || typeof(short) == type)
       {
         retVal = Convert.ToDecimal(value);
+      }
+      return retVal;
+    }
+
+    // Gets a decimal value from an object. (E)
+    /// <include path='items/GetDouble/*' file='Doc/NetCommon.xml'/>
+    public static double GetDouble(object value)
+    {
+      Type type;
+      double retVal = 0;
+
+      type = value.GetType();
+      if (typeof(decimal) == type
+        || typeof(long) == type
+        || typeof(int) == type
+        || typeof(short) == type)
+      {
+        retVal = Convert.ToDouble(value);
       }
       return retVal;
     }
@@ -417,32 +475,67 @@ namespace LJCNetCommon
     /// <include path='items/GetObject/*' file='Doc/NetCommon.xml'/>
     public static object GetObject(object value)
     {
-      Type type;
-      object retVal = null;
+      string typeName;
+      object retValue = null;
 
       if (value != null)
       {
-        type = value.GetType();
-        if (type == typeof(decimal))
+        typeName = value.GetType().Name;
+        switch (typeName)
         {
-          retVal = GetDecimal(value);
+          case TypeBoolean:
+            retValue = GetBoolean(value);
+            break;
+
+          case TypeDateTime:
+            retValue = GetDateTime(value);
+            break;
+
+          case TypeDecimal:
+            retValue = GetDecimal(value);
+            break;
+
+          case TypeDouble:
+            retValue = GetDouble(value);
+            break;
+
+          case TypeInt16:
+            retValue = GetInt16(value);
+            break;
+
+          case TypeInt32:
+            retValue = GetInt32(value);
+            break;
+
+          case TypeInt64:
+            retValue = GetInt64(value);
+            break;
+
+          case TypeSingle:
+            retValue = GetSingle(value);
+            break;
+
+          case TypeString:
+            retValue = GetString(value);
+            break;
         }
-        if (type == typeof(int))
-        {
-          retVal = GetInt32(value);
-        }
-        if (type == typeof(long))
-        {
-          retVal = GetInt64(value);
-        }
-        if (type == typeof(short))
-        {
-          retVal = GetInt16(value);
-        }
-        if (retVal == null)
-        {
-          retVal = GetString(value);
-        }
+      }
+      return retValue;
+    }
+
+    // Gets a long value from an object. (E)
+    /// <include path='items/GetSingle/*' file='Doc/NetCommon.xml'/>
+    public static float GetSingle(object value)
+    {
+      Type type;
+      float retVal = 0;
+
+      type = value.GetType();
+      if (typeof(long) == type
+        || typeof(int) == type
+        || typeof(short) == type)
+      {
+        retVal = Convert.ToSingle(value);
       }
       return retVal;
     }
@@ -665,6 +758,36 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+    #endregion
+
+    #region DataType Names
+
+    /// <summary>The Boolean type name.</summary>
+    public const string TypeBoolean = "Boolean";
+
+    /// <summary>The DateTime type name.</summary>
+    public const string TypeDateTime = "DateTime";
+
+    /// <summary>Type Decimal type name.</summary>
+    public const string TypeDecimal = "Decimal";
+
+    /// <summary>The Double type name.</summary>
+    public const string TypeDouble = "Double";
+
+    /// <summary>The Int16 type name.</summary>
+    public const string TypeInt16 = "Int16";
+
+    /// <summary>The Int32 type name.</summary>
+    public const string TypeInt32 = "Int32";
+
+    /// <summary>The Int64 type name.</summary>
+    public const string TypeInt64 = "Int64";
+
+    /// <summary>The Single type name.</summary>
+    public const string TypeSingle = "Single";
+
+    /// <summary>The String type name.</summary>
+    public const string TypeString = "String";
     #endregion
   }
 }

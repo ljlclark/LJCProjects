@@ -104,11 +104,11 @@ namespace LJCNetCommon
 
       switch (DataTypeName)
       {
-        case "Boolean":
+        case NetCommon.TypeBoolean:
           retValue = retValue == "True" ? "1" : "0";
           break;
 
-        case "DateTime":
+        case NetCommon.TypeDateTime:
           DateTime dateTime = Convert.ToDateTime(retValue);
           if (IsDbMinDate(dateTime))
           {
@@ -120,8 +120,9 @@ namespace LJCNetCommon
           }
           break;
 
-        case "String":
-          if (retValue != "null")
+        case NetCommon.TypeString:
+          if (retValue != null
+            && retValue != "null")
           {
             retValue = retValue.Replace("'", "''");
             retValue = $"'{retValue}'";

@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// DbDataAccess.cs
+﻿// DbDataAccess.cs
 using System;
 using System.Data;
 using System.Text;
@@ -487,12 +486,12 @@ namespace LJCDBDataAccessLib
       {
         retValue = new DbColumn
         {
-          ColumnName = dataColumn.ColumnName,
-          Caption = dataColumn.Caption,
-          DataTypeName = dataColumn.DataType.Name,
-          MaxLength = dataColumn.MaxLength,
           AllowDBNull = dataColumn.AllowDBNull,
-          AutoIncrement = dataColumn.AutoIncrement
+          AutoIncrement = dataColumn.AutoIncrement,
+          Caption = dataColumn.Caption,
+          ColumnName = dataColumn.ColumnName,
+          DataTypeName = dataColumn.DataType.Name,
+          MaxLength = dataColumn.MaxLength
         };
       }
       return retValue;

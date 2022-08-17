@@ -230,11 +230,20 @@ namespace LJCDBMessage
       }
     }
 
+    /// <summary>
+    /// Sets the Columns property from the Request columns.
+    /// </summary>
+    /// <param name="dbRequest">The Request object.</param>
+    public void SetColumns(DbRequest dbRequest)
+    {
+      SetColumns(dbRequest.Columns, dbRequest.Joins);
+    }
+
     // Sets the result records from the DataTable and DbRequest objects.
     /// <include path='items/SetData/*' file='Doc/DbResult.xml'/>
     public void SetData(DataTable dataTable, DbRequest dbRequest)
     {
-      SetColumns(dbRequest.Columns, dbRequest.Joins);
+      SetColumns(dbRequest);
       SetRows(dataTable, dbRequest.Columns, dbRequest.Joins);
     }
 

@@ -224,8 +224,6 @@ namespace LJCDocGenLib
           builder.AppendLine("  <br />");
           builder.AppendLine("  <div class='SmallText'>R=Remark, D=Description, O=Object Pages, G=Object Graph, E=Example</div>");
           builder.AppendLine("  <br />");
-          builder.AppendLine("  <div class='SmallText'>Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved</div>");
-          builder.AppendLine("  <br />");
           builder.AppendLine("</body>");
           builder.AppendLine("</html>");
           break;
