@@ -1,11 +1,5 @@
 ﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
-using LJCDataAccess;
 using LJCDBClientLib;
-using LJCDBDataAccess;
-using LJCDBServiceLib;
-using LJCNetCommon;
-using System;
-using System.Drawing;
 
 namespace DataHelper
 {

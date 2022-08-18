@@ -42,8 +42,9 @@
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDBDataAccess">
-      <HintPath>..\..\..\LJCProjectsDev\LJCDBServiceLib\External\LJCDBDataAccess.dll</HintPath>
+    <Reference Include="LJCDBDataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>

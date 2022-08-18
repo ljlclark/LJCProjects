@@ -1,4 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
+﻿// ColumnGridCode.cs
 using DataDetail;
 using LJCDataDetailLib;
 using LJCDBClientLib;
@@ -65,7 +65,7 @@ namespace DataHelper
 		// Adds a grid row and updates it with the record values.
 		private LJCGridRow RowAddColumn(DbMetaDataColumn record)
 		{
-			LJCGridRow retValue = null;
+			LJCGridRow retValue;
 
 			retValue = mParent.ColumnGrid.LJCRowAdd();
 			SetStoredValuesColumn(retValue, record);
@@ -290,8 +290,8 @@ namespace DataHelper
 		private readonly string ConfigRowFileName = @"DetailConfigs/ColumnDetailConfig.xml";
 		private ControlRows mConfigRows;
 		private readonly string mDataConfigName;
-		private MainList mParent;
-		private SQLUtilLibManagers mManagers;
+		private readonly MainList mParent;
+		private readonly SQLUtilLibManagers mManagers;
 		#endregion
 	}
 }
