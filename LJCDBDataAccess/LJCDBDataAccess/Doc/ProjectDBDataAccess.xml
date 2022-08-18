@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <DbDataAccess>
+    <summary>
+      Implements a Message Based data access class.
+      (DE)
+    </summary>
+    <remarks>
+      <para>
+        The Message Data Access class contains methods for performing common
+        database functions using
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        request objects and returning
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        objects.
+      </para>
+      <para>
+        The single public method is
+        &lt;span class="commonType"&gt;Execute()&lt;/span&gt;.
+        The &lt;span class="commonType"&gt;Execute()&lt;/span&gt;
+        method calls the supporting private data methods based on the
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        query request type. It returns the
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object created in the private data methods.
+      </para>
+      <para>
+        The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object is created from the
+        &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+        using the
+        &lt;span class="userType"&gt;ResultCommon&lt;/span&gt;
+        static
+        &lt;span class="commonType"&gt;GetResultColumns()&lt;/span&gt; and
+        &lt;span class="commonType"&gt;GetResultRecords()&lt;/span&gt;
+        functions.
+      </para>
+      <para>
+        The private data methods create a SQL statement based on the data from
+        the &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        object. The SQL statement is executed and the SQL result is
+        transformed into a
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object.
+      </para>
+      <para>
+        The test code is found in project LJCDBServiceLib\TestDbDataAccess.
+      </para>
+      <para>-- Project Level Remarks</para>
+      <para>Message Data Access Library</para>
+      <para>
+        The Message Data Access library contains classes, which receive
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        Request objects and performs the requested data operations.
+        The data is returned to the calling program as a
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object.
+      </para>
+      <para>
+        The primary class is DbDataAccess.
+      </para>
+      <para>
+        The Message Data Access Library classes use
+        &lt;span class="commonType"&gt;LJCDataAccess&lt;/span&gt;
+        to communicate with the database.
+      </para>
+      <para>
+        The Message Data Access library is part of the
+        &lt;span class="commonType"&gt;LJCDBServiceLib&lt;/span&gt;
+        solution.
+      </para>
+    </remarks>
+    <example>
+      <para>
+        The following example shows how to directly use the
+        &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt;
+        object for database access.
+        Applications should generally encapsulate much of this code in a table
+        specific Manager class to make application programming easier and cleaner.
+      </para>
+      <para>
+        A Manager class is the client code that creates a table specific
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt; object.
+        It passes the
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        object to the
+        &lt;span class="userType"&gt;DbDataAccess.Execute()&lt;/span&gt;
+        method.
+      </para>
+      <para>
+        A common Manager class
+        &lt;span class="userType"&gt;LJCDbClientLib.DataManager&lt;/span&gt;
+        is available to simplify interacting with the data access
+        objects.&lt;br /&gt;
+        It can directly call
+        &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt; or
+        &lt;span class="userType"&gt;LJCDBServiceLib.DbService&lt;/span&gt; and
+        returns data as
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        objects.&lt;br /&gt;
+        It can also access a remote
+        &lt;span class="userType"&gt;DbService&lt;/span&gt;
+        object using a Service Host and a client proxy. The
+        &lt;span class="userType"&gt;LJCDBServiceHost.DBWindowsService&lt;/span&gt;
+        is a host that is provided to run as a windows service.
+      </para>
+      <para>
+        The test code is found in project LJCDBServiceLib\TestDbDataAccess.
+      </para>
+      <code>
+        IF NOT EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
+          WHERE TABLE_NAME = N'PersonTest')
+        BEGIN
+        CREATE TABLE[dbo].[PersonTest]
+        (
+          [Id][int] IDENTITY(1,1) NOT NULL,
+          [Name] [nvarchar] (60) NULL,
+          [PrincipleFlag] [bit] NOT NULL,
+          CONSTRAINT[PK_PersonTest]
+          PRIMARY KEY CLUSTERED(
+            [Id] ASC),
+          )
+        END
+        GO
+
+        using System;
+        using System.Collections.Generic;
+        using System.Data.Common;
+        using LJCNet.Common;
+        using LJCDBMessage;
+        using LJCDBDataAccessLib;
+
+        // A Person Data Record class.
+        public class Person
+        {
+          public Int32 ID { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+        public class Persons : List&lt;Person&gt; { }
+
+        // Test DbDataAccess
+        private static void TestDbDataAccess()
+        {
+          DbConnectionStringBuilder connectionBuilder;
+          DbDataAccess dbDataAccess;
+
+          string databaseName = "DatabaseName";
+          connectionBuilder = new DbConnectionStringBuilder()
+          {
+            { "Data Source", "DataServiceName" },
+            { "Initial Catalog", databaseName },
+            { "Integrated Security", "True" }
+          };
+          string connectionString = connectionBuilder.ConnectionString;
+          string providerName = "System.Data.SqlClient";
+          dbDataAccess = new DbDataAccess(connectionString, providerName
+            , databaseName);
+
+          // Get the table data definition.
+          DbColumns dataDefinition = SchemaOnly(dbDataAccess);
+          DbColumn dbColumn = dataDefinition.LJCSearchByName("Id");
+          dbColumn.PropertyName = "ID";
+
+          Add(dbDataAccess, dataDefinition);
+          Person person = Retrieve(dbDataAccess, dataDefinition);
+          Persons persons = Load(dbDataAccess, dataDefinition);
+          Update(dbDataAccess, dataDefinition);
+          persons = Load(dbDataAccess, dataDefinition);
+          Delete(dbDataAccess, dataDefinition);
+          persons = Load(dbDataAccess, dataDefinition);
+
+          Add(dbDataAccess, dataDefinition);
+          person = RetrieveClientSql(dbDataAccess, dataDefinition);
+          persons = LoadClientSql(dbDataAccess, dataDefinition);
+          ExecuteClientSql(dbDataAccess, dataDefinition);
+          persons = LoadClientSql(dbDataAccess, dataDefinition);
+          Delete(dbDataAccess, dataDefinition);
+          persons = LoadClientSql(dbDataAccess, dataDefinition);
+        }
+
+        // Create the Data Definition from the table schema.
+        private static DbColumns SchemaOnly(DbDataAccess dbDataAccess)
+        {
+          DbColumns retValue = null;
+
+          DbRequest dbRequest = new DbRequest()
+          {
+            QueryType = QueryType.SchemaOnly.ToString(),
+            TableName = "PersonTest"
+          };
+          DbResult dbResult = dbDataAccess.Execute(dbRequest);
+          retValue = dbResult.DbRecordColumns;
+          return retValue;
+        }
+      </code>
+    </example>
+  </DbDataAccess>
+</items>

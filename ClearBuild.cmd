@@ -5,6 +5,7 @@ call LJCCodeLineCounter\ClearCodeLineCounter.cmd ClearAll
 call LJCDataAccess\ClearDataAccess.cmd ClearAll
 call LJCDataAccessConfig\ClearDataAccessConfig.cmd ClearAll
 call LJCDBClientLib\ClearDBClientLib.cmd ClearAll
+call LJCDBClientLib\ClearDBDataAccess.cmd ClearAll
 call LJCDBMessage\ClearDBMessage.cmd ClearAll
 call LJCDBServiceHosts\ClearDBServiceHosts.cmd ClearAll
 call LJCDBServiceLib\ClearDBServiceLib.cmd ClearAll

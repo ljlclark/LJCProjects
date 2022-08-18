@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LJCDBDataAccessLib.DbDataAccess">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="AddTableColumns" Hidden="true" />
+      <Property Name="ConnectionString" Hidden="true" />
+      <Method Name="CreateDbColumnFromDataColumn" Hidden="true" />
+      <Method Name="CreateDbColumnsFromTable" Hidden="true" />
+      <Property Name="DatabaseName" Hidden="true" />
+      <Property Name="DataConfigName" Hidden="true" />
+      <Method Name="DbDataAccess" Hidden="true" />
+      <Method Name="GetConfigValues" Hidden="true" />
+      <Method Name="GetDataConfig" Hidden="true" />
+      <Field Name="mConnectionString" Hidden="true" />
+      <Field Name="mDataAccess" Hidden="true" />
+      <Field Name="mDatabaseName" Hidden="true" />
+      <Field Name="mDbRequest" Hidden="true" />
+      <Field Name="mDbSqlBuilder" Hidden="true" />
+      <Field Name="mProviderName" Hidden="true" />
+      <Property Name="ProviderName" Hidden="true" />
+      <Method Name="SetPrimaryKey" Hidden="true" />
+      <Method Name="SetSQLTypeName" Hidden="true" />
+      <Method Name="TableColumns" Hidden="true" />
+      <Method Name="TableNames" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AJ4ggELACAgATAQAECABIAAAAAEAADQBBCAAAAERoAA=</HashCode>
+      <FileName>DbDataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
