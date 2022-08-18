@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
-using System;
-using System.Windows.Forms;
+using DataDetail;
+using LJCDataDetailLib;
+using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
+using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBMessage;
-using LJCDBClientLib;
-using DataDetail;
-using LJCSQLUtilLibDAL;
-using LJCDataDetailLib;
+using System;
+using System.Windows.Forms;
 
 namespace DataHelper
 {

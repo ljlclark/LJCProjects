@@ -1,13 +1,13 @@
 // Copyright (c) Lester J. Clark 2017-2019- All Rights Reserved
+using LJCDBClientLib;
+using LJCDBDataAccess;
+using LJCDBMessage;
+using LJCNetCommon;
+using LJCSQLUtilLibDAL;
+using LJCWinFormCommon;
 using System;
 using System.Data;
 using System.Text;
-using LJCNetCommon;
-using LJCDBMessage;
-using LJCDBClientLib;
-using LJCSQLUtilLibDAL;
-using LJCWinFormCommon;
-using LJCDBDataAccessLib;
 
 namespace LJCSQLUtilLib
 {

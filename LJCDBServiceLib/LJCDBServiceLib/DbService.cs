@@ -1,10 +1,9 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DbService.cs
 using CipherLib;
-using LJCDBDataAccessLib;
+using LJCDBDataAccess;
+using LJCDBMessage;
 using LJCNetCommon;
 using System;
-using LJCDBMessage;
 
 namespace LJCDBServiceLib
 {

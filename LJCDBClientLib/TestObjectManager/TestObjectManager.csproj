@@ -34,9 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LJCDBDataAccessLib">
-      <HintPath>..\External\LJCDBDataAccessLib.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\..\..\LJCProjectsDev\LJCDBServiceLib\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>

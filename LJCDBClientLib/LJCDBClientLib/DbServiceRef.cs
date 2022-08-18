@@ -1,6 +1,6 @@
 // Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DbServiceRef.cs
-using LJCDBDataAccessLib;
+using LJCDBDataAccess;
 using LJCDBServiceLib;
 
 namespace LJCDBClientLib

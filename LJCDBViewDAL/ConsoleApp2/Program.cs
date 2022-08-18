@@ -1,10 +1,10 @@
 // Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved
 using System;
-using LJCNetCommon;
-using LJCDBMessage;
 using LJCDBClientLib;
-using LJCDBDataAccessLib;
+using LJCDBDataAccess;
+using LJCDBMessage;
 using LJCDBViewDAL;
+using LJCNetCommon;
 
 namespace ConsoleApp2
 {

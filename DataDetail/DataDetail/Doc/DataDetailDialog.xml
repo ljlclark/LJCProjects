@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
+<items>
+  <DataDetailDialog>
+    <summary>
+      The DataDetail Dynamic Detail dialog.
+    </summary>
+    <remarks>
+      <para>
+        The DataDetailDialog form is designed to dynamically create a Detail Dialog
+        to allow display and edit of Data Record values which are contained in the
+        LJCRecord (DbColumns) collection.
+      </para>
+      <para>
+        The Dialog contains one or more TabControl pages. Each TabPage can consist
+        of multiple ControlColumn objects. Each ControlColumn object can consist of
+        multiple ControlRow objects.
+      </para>
+    </remarks>
+  </DataDetailDialog>
+  <DataDetailDialogC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="configRowsFileName">The ConfigRows file name.</param>
+  </DataDetailDialogC>
+  <CreateControlRow>
+    <summary>
+      Creates the ControlRow and associated controls.
+    </summary>
+    <remarks>
+      This method creates and positions the controls for a ControlRow. It creates a
+      ControlRow definition and adds it to the private mControlRows collection.
+    </remarks>
+  </CreateControlRow>
+  <SearchControls>
+    <summary>
+      Returns a reference to a Control by name.
+    </summary>
+    <param name="name">The control name.</param>
+    <returns>The Control reference.</returns>
+  </SearchControls>
+  <SearchLabel>
+    <summary>
+      Returns a reference to a Label control by name.
+    </summary>
+    <param name="name">The Label control name.</param>
+    <returns>The Label control reference.</returns>
+  </SearchLabel>
+  <SearchTextBox>
+    <summary>
+      Return a reference to a TextBox control by name.
+    </summary>
+    <param name="name">The TextBox control name.</param>
+    <returns>The TextBox control reference.</returns>
+  </SearchTextBox>
+  <!-- Properties -->
+  <LJCConfigRows>
+    <summary>
+      The Configuration Rows.
+    </summary>
+    <remarks>
+      This is the layout configuration object. It defines how the controls
+      are positioned and is used to populate the ControlColumns and
+      ControlRows layout definition objects.
+    </remarks>
+  </LJCConfigRows>
+  <LJCDataColumns>
+    <summary>
+      Gets a reference to the record object.
+    </summary>
+    <remarks>
+      This is the main data definition object. This data is used to populate
+      the ControlColumns and ControlRows layout definition objects.
+    </remarks>
+  </LJCDataColumns>
+  <LJCKeyItems>
+    <summary>
+      Gets or sets the ControlItems collection.
+    </summary>
+    <remarks>
+      Contains the StaticCombo, SelectList and StaticKey reference items.
+    </remarks>
+  </LJCKeyItems>
+</items>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021 - All Rights Reserved -->
+<items>
+  <!--  Create ControlColumn confiuration. -->
+  <CreateNewControlColumns>
+    <summary>
+      Configure the New controls.
+    </summary>
+    <param name="dataColumns">The data columns.</param>
+    <returns>The ControlColumns collection.</returns>
+  </CreateNewControlColumns>
+  <Height>
+    <summary>
+      Gets the Controls display height.
+    </summary>
+    <param name="dataColumnsCount">The data columns count.</param>
+    <returns>The Controls height.</returns>
+  </Height>
+  <Width>
+    <summary>
+      Gets the Controls display width.
+    </summary>
+    <returns>The Controls width.</returns>
+  </Width>
+  <CalculateColumnsCount>
+    <summary>
+      Gets the ControlColumn column count.
+    </summary>
+    <param name="dataColumnsCount">The data columns count.</param>
+    <returns>The ControlColumn count.</returns>
+    <remarks>
+      Calculates the ControlColumn count based on the number
+      of dataValues and the initial ColumnRowsLimit.&lt;br /&gt;
+      Recalculates the ColumnRowsLimit to evenly distribute the values.
+    </remarks>
+  </CalculateColumnsCount>
+  <!-- Process ControlColumn configuration. -->
+  <CreateConfigControlColumns>
+    <summary>
+      Sets the ControlColumn values using a configuration XML file.
+    </summary>
+    <param name="dataColumns">The data columns object.</param>
+    <returns>The ControlColumns object.</returns>
+  </CreateConfigControlColumns>
+  <!-- Other Public Methods -->
+  <AdjustedWidth>
+    <summary>
+      Adjust the control for usability.
+    </summary>
+    <param name="dataColumn">The data column object.</param>
+    <returns>The adjusted width.</returns>
+  </AdjustedWidth>
+</items>

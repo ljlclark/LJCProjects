@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<DataConfigs xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+  <DataConfig>
+    <Name>PersonData</Name>
+    <DbServer>Machine_Name\SQL_Instance_Name</DbServer>
+    <Database>Database_Name</Database>
+    <ID>User_ID</ID>
+    <Pswd>Password</Pswd>
+    <ConnectionType>SQLServer</ConnectionType>
+  </DataConfig>
+  <DataConfig>
+    <Name>FacilityManager</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>FacilityData</Database>
+    <ConnectionType>SqlServer</ConnectionType>
+  </DataConfig>
+</DataConfigs>

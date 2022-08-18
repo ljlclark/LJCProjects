@@ -1,16 +1,16 @@
-// Copyright (c) Lester J. Clark 2021 - All Rights Reserved
+// ViewEditorList.cs
+using LJCDataAccessConfig;
+using LJCDBClientLib;
+using LJCDBDataAccess;
+using LJCDBMessage;
+using LJCDBViewDAL;
+using LJCNetCommon;
+using LJCViewEditorDAL;
+using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using LJCNetCommon;
-using LJCWinFormCommon;
-using LJCWinFormControls;
-using LJCDBMessage;
-using LJCDBClientLib;
-using LJCDataAccessConfig;
-using LJCDBDataAccessLib;
-using LJCDBViewDAL;
-using LJCViewEditorDAL;
 
 namespace LJCViewEditor
 {

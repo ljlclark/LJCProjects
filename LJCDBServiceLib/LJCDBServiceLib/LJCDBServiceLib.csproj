@@ -40,6 +40,9 @@
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
@@ -60,12 +63,6 @@
     <Compile Include="DbService.cs" />
     <Compile Include="IDbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LJCDBDataAccessLib\LJCDBDataAccessLib.csproj">
-      <Project>{eb968aaa-6b30-40c3-829b-4c60b7a46184}</Project>
-      <Name>LJCDBDataAccessLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\DbService.xml">

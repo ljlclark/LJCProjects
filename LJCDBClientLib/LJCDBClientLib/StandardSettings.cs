@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // StandardSettings.cs
 using LJCDataAccess;
-using LJCDBDataAccessLib;
+using LJCDBDataAccess;
 using LJCDBServiceLib;
 using LJCNetCommon;
 using System.Drawing;

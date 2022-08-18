@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
+<items>
+  <ControlRow>
+    <summary>
+      Represents the controls for a DataValue.
+    </summary>
+    <remarks>
+      <para>
+        A ControlRow is a definition of the contained RowLabel and RowControl controls.
+        A ControlRow is created for each Data Record value. The controls in a ControlRow
+        are top aligned based on the Dialog BorderVertical, ControlRowSpacing and
+        ControlRowHeight values.
+      </para>
+      <para>
+        DataValueName - The name of the Data Record value in the DataValues
+        collection. The DataValues property is a DbColumns collection object.
+      </para>
+      <para>
+        RowLabel - A reference to the row Label control.
+      </para>
+      <para>
+        RowControl - A reference to the row data control.
+      </para>
+      <para>
+        TabPageIndex - The TabPage where the ControlRow is displayed.
+      </para>
+      <para>
+        ColumnIndex - The ControlColumn where the ControlRow is displayed.
+      </para>
+      <para>
+        RowIndex - The row index where the Label and data Controls are displayed.
+      </para>
+      <para>
+        TabIndex - The tabbing index for the Label control in the ControlRow.
+      </para>
+    </remarks>
+  </ControlRow>
+</items>

@@ -38,6 +38,9 @@
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
@@ -59,12 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LJCDBDataAccessLib\LJCDBDataAccessLib.csproj">
-      <Project>{EB968AAA-6B30-40C3-829B-4C60B7A46184}</Project>
-      <Name>LJCDBDataAccessLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\ConnectionTemplates.xml" />

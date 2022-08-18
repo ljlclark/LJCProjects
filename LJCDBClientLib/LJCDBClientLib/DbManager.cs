@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // DbManager.cs
-using LJCDBDataAccessLib;
+using LJCDBDataAccess;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;

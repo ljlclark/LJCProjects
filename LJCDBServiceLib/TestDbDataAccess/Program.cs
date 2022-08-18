@@ -1,8 +1,7 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// Program.cs
+﻿// Program.cs
 using LJCDataAccess;
+using LJCDBDataAccess;
 using LJCDBMessage;
-using LJCDBDataAccessLib;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

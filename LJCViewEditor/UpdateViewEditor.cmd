@@ -30,8 +30,8 @@ copy %root%%src%\LJCDataDetailLib.dll %to%
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
 copy %root%%src%\LJCDBClientLib.dll %to%
 
-set src=LJCDBServiceLib\LJCDBDataAccessLib\%bin%
-copy %root%%src%\LJCDBDataAccessLib.dll %to%
+set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
+copy %root%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %root%%src%\LJCDBMessage.dll %to%

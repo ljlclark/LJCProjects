@@ -1,0 +1,1607 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCDBMessage</name>
+    </assembly>
+    <members>
+        <member name="T:LJCDBMessage.DbCommon">
+            <summary>Common data message methods.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.RequestColumns(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String})">
+            <summary>
+      Gets Request columns from the baseDefinition using the propertyNames.
+    </summary><param name="baseDefinition">The Base DataDefinition columns.</param><param name="propertyNames">The column property names.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      collection.
+    </returns><remarks>
+      <para>
+        Generally used in the Load() and Retrieve() manager methods to define
+        the columns to be retrieved.
+      </para>
+      <para>
+        Defaults to all baseDefinition columns if the propertyNames parameter
+        has no values.
+      </para>
+      <para>
+        Creates a DbColumns collection of column definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the propertyNames parameter.
+      </para>
+      <para>
+        The DbColumn definitions do not include values.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.RequestDataColumns(System.Object,LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String})">
+            <summary>
+      Gets Request data columns from the baseDefinition using the propertyNames.
+    </summary><param name="dataObject">The record object.</param><param name="baseDefinition">The Base DataDefinition columns.</param><param name="propertyNames">The column property names.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns><remarks>
+      <para>
+        Generally used in the Add() and Update() manager methods to define the
+        columns to be added or updated and the values to use in the add or
+        update.
+      </para>
+      <para>
+        This method attempts to default the property names to the dataObject
+        ChangedNames property if it exists and the propertyNames parameter has
+        no values.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the propertyNames parameter.
+      </para>
+      <para>
+        The dataObject property names must also match the names in the
+        propertyNames parameter and the data value must not be null for the
+        data definition to be included.
+      </para>
+      <para>
+        The DbColumn definitions include the dataObject value. The dataObject
+        property values are retrieved using reflection.
+      </para>
+      <para>
+        A Data Column is excluded if it is an AutoIncrement column.
+      </para>
+      <para>
+        The value is set to "null" if the original value is "-null" or "-".
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.RequestDataKeys(LJCNetCommon.DbColumns,LJCNetCommon.DbColumns)">
+            <summary>
+      Get Request Key columns from the baseDefinition using the keyColumns.
+    </summary><param name="keyColumns">The Key record object.</param><param name="baseDefinition">The Base DataDefinition columns.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns><remarks>
+      <para>
+        Generally used in the Update() manager method to define the update key
+        columns and values.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the keyColumns parameter.
+      </para>
+      <para>
+        The DbColumn definitions include the Key Column ColumnName and Value.
+      </para>
+      <para>
+        A Key Column is not created if it is an AutoIncrement column, the
+        value equals "0" or it is an invalid DateTime.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.RequestKeys(LJCNetCommon.DbColumns,LJCNetCommon.DbColumns,LJCDBMessage.DbJoins)">
+            <summary>
+      Gets Request Key columns from the baseDefinition using the keyColumns and dbJoins.
+    </summary><param name="keyColumns">The Key columns.</param><param name="baseDefinition">The Base DataDefinition columns.</param><param name="dbJoins">The joins definition.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns><remarks>
+      <para>
+        Generally used in the Delete() Load() and Retrieve() manager methods to
+        define the key columns and values.
+      </para>
+      <para>
+        This method allows pre-qualified Join Column names.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the unqualified
+        names in the keyColumns parameter.
+      </para>
+      <para>
+        The DbColumn definitions include the original potentially qualified Key
+        Column ColumnName and Value.
+      </para>
+      <para>
+        The DbColumn definitions also include the original potentially
+        qualified Join Column ColumnName and Value if it is found in the Join
+        Column definitions.
+      </para>
+      <para>
+        A valid Join ColumnName is included unmodified if the ColumnName is
+        already qualified with a Table Name or Alias. Otherwise the ColumnName
+        is qualified with the Join TableName or Alias.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.RequestLookupKeys(System.Object,LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String})">
+            <summary>
+      Get Request Value Key columns from data properties for the specified column
+      property names.
+    </summary><param name="dataObject">The data object.</param><param name="baseDefinition">The Base DataDefinition columns.</param><param name="propertyNames">The column property names.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns><remarks>
+      <para>
+        Generally used in the Add() manager method to define the lookup keys
+        columns and values to retrieve the row that was just added to the
+        database. This allows for retrieving the database assigned values.
+      </para>
+      <para>
+        This method attempts to default the property names to the dataObject
+        ChangedNames property if it exists and the propertyNames parameter has
+        no values.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the propertyNames parameter.
+      </para>
+      <para>
+        The dataObject property names must also match the names in the
+        propertyNames parameter and the data value must not be null for the
+        data definition to be included.
+      </para>
+      <para>
+        The DbColumn definitions include the dataObject value. The dataObject
+        property values are retrieved using reflection.
+      </para>
+      <para>
+        A Key Column is not created if it is an AutoIncrement column, the
+        value equals "0" or it is an invalid DateTime.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.ClearChanged(System.Object)">
+            <summary>
+      Clears the changed names.
+    </summary><param name="dataObject">The data object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.GetChangedNames(System.Object)">
+            <summary>
+      Gets the names of the changed properties.
+    </summary><param name="dataObject">The data object.</param><returns>The changed names list.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.GetDefaultPropertyNames(System.Object,System.Collections.Generic.List{System.String}@)">
+            <summary>
+      Gets the ChangedNames if available and propertyNames is null.
+    </summary><param name="dataObject">The data object.</param><param name="propertyNames">The column names.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.SetObjectValues(LJCNetCommon.DbColumns,System.Object)">
+            <summary>
+      Sets the Data Object property values from the
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </summary><param name="dataColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
+    </param><param name="dataObject">The data object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbCommon.SetObjectValues(LJCNetCommon.DbValues,System.Object)">
+            <summary>
+      Sets the Data Object property values from the
+      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      object.
+    </summary><param name="dbValues">The values object.</param><param name="dataObject">The data object.</param>
+        </member>
+        <member name="T:LJCDBMessage.DbCondition">
+            <summary>Represents a filter condition.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbCondition.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbCondition.#ctor(LJCDBMessage.DbCondition)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbCondition.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbCondition.ComparisonOperator">
+            <summary>The comparison operator.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbCondition.FirstValue">
+            <summary>The first data value.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbCondition.SecondValue">
+            <summary>The second data value.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbConditions">
+            <summary>Represents a collection of
+    &lt;span class="userType"&gt;DbCondition&lt;/span&gt;
+    objects.</summary><remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add(), Clone() and
+        HasItems().
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.HasItems(LJCDBMessage.DbConditions)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.#ctor(LJCDBMessage.DbConditions)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the element from the supplied values.
+    </summary><param name="value1">The first data value.</param><param name="value2">The second data value.</param><param name="comparisonOperator">The comparison operator.</param><returns>The added condition object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbConditions.HasItems">
+            <summary>
+      Checks if the collection has items.
+    </summary><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDBMessage.DbConditionSet">
+            <summary>
+      Represents the conditions and properties.
+      (E)
+    </summary><example>
+      <code>
+        using LJCDBMessage;
+        
+        // Initialize a Filter object.
+        DbFilter dbFilter = new DbFilter();
+        
+        // The BooleanOperator seperatates each Condition statement.
+        // The BooleanOperator can be "and" or "or". If not specified, it
+        // defaults to "and".
+        DbConditionSet conditionSet = dbFilter.ConditionSet;
+        conditionSet.BooleanOperator = "and";
+        
+        // Note that a condition without a specified ComparisonOperator defaults
+        // to the equals "=" comparison operator.
+        DbConditions conditions = conditionSet.Conditions;
+        conditions.Add("Street", "'First Street'", "=");
+        conditions.Add("City", "'Lake Mary'");
+        conditions.Add("PostalCode", "'32746'");
+        
+        // These conditions result in this Where clause.
+        // where ((Street = 'First Street' and City = 'Lake Mary'
+        //   and PostalCode = '32746'))
+        
+        DbFilter secondFilter = new DbFilter
+        {
+          BooleanOperator = "or"
+        };
+        DbConditions secondConditions = secondFilter.ConditionSet.Conditions;
+        secondConditions.Add("Street", "'Somewhere%'", "like");
+        dbFilters.Add(secondFilter);
+        
+        // where ((Street = 'First Street' and City = 'Lake Mary'
+        //    and PostalCode = '32746'))
+        //  or ((Street like 'Somewhere%'))
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCDBMessage.DbConditionSet.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDBMessage.DbConditionSet.#ctor(LJCDBMessage.DbConditionSet)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbConditionSet.Clone">
+            <summary>
+      Creates and returns a clone of the object.
+    </summary><returns>The new cloned value.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbConditionSet.BooleanOperator">
+            <summary>The conditions boolean operator.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbConditionSet.Conditions">
+            <summary>Gets or sets the conditions.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbFilter">
+            <summary>Represents a filter which is part of a where clause.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbFilter.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbFilter.#ctor(LJCDBMessage.DbFilter)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbFilter.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbFilter.BooleanOperator">
+            <summary>The filter boolean operator.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbFilter.ConditionSet">
+            <summary>Gets or sets the filter condition set.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbFilter.Filters">
+            <summary>Gets or sets the contained filters.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbFilter.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbFilters">
+            <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;DbFilter&lt;/span&gt; objects.
+      (E)
+    </summary><remarks>
+      <para>
+        The common collection static methods are: HasItems(),
+        SQLSoundexFilters() and SoundexFilters().
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() + 1 overload
+        and Clone().
+      </para>
+    </remarks><example>
+      <code>
+        using LJCDBMessage;
+      
+        // Create the Conditions collection and Condition objects.
+        DbConditions dbConditions = new DbConditions();
+        DbCondition dbCondition = new DbCondition()
+        {
+          FirstValue = "Name",
+          ComparisonOperator = "=",
+          SecondValue = "John"
+        };
+        dbConditions.Add(dbCondition);
+      
+        // Create the ConditionSet and add the Conditions collection.
+        DbConditionSet dbConditionSet = new DbConditionSet()
+        {
+          // The boolean operator is added before each condition except the first.
+          BooleanOperator = "and",
+          Conditions = dbConditions
+        };
+      
+        // Create the Filter and add the ConditionSet.
+        DbFilter dbFilter = new DbFilter()
+        {
+          Name = "Main Filter",
+      
+          // The boolean operator is added before each filter except the first.
+          BooleanOperator = "and",
+          ConditionSet = dbConditionSet
+        };
+      
+        // Create the Filters collection and add the Filter.
+        DbFilters dbFilters = new DbFilters();
+        dbFilters.Add(dbFilter);
+      
+        // Shortcut using object initialization, only required values and defaults.
+        DbFilter dbFilter = new DbFilter();
+        DbConditions conditions = dbFilter.ConditionSet.Conditions;
+        conditions.Add("FirstName", "'John'");
+        conditions.Add("LastName", "'Smith'");
+        DbFilters dbFilters = new DbFilters
+        {
+          dbFilter
+        };
+      
+        // The Data Service creates the following SQL from this request which.
+        // includes the DbFilters object.
+        DbRequest dbRequest = new DbRequest("Select", "Person")
+        {
+          DataConfigName = "PersonData",
+          Columns = new DbColumns() { {"Name" }},
+          Filters = dbFilters
+        };
+      
+        // select
+        //  [Person].[Name]
+        // from [Person]
+        // where ((FirstName = 'John' and LastName = 'Smith'))
+      
+        // Adding an "or" filter.
+        DbFilter secondFilter = new DbFilter
+        {
+          BooleanOperator = "or"
+        };
+        DbConditions secondConditions = secondFilter.ConditionSet.Conditions;
+        secondConditions.Add("Street", "'Somewhere%'", "like");
+        dbFilters.Add(secondFilter);
+      
+        // where ((FirstName = 'John' and LastName = 'Smith'))
+        //  or ((Street like 'Somewhere%'))
+      
+        // If the second filter is incuded inside the first as in the following
+        // example,then the second filter conditions are grouped with the first
+        // filter conditions.
+        dbFilter.Filters.Add(secondFilter);
+      
+        // where ((FirstName = 'John' and LastName = 'Smith')
+        //  or (Street like 'Somewhere%'))
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.HasItems(LJCDBMessage.DbFilters)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.SQLSoundexFilters(System.String,System.String,System.String)">
+            <summary>
+      Creates the SQL Soundex filters from the supplied values.
+    </summary><param name="columnName">The Search column name.</param><param name="searchValue">The Search value.</param><param name="soundexColumn">The SQL Soundex column name.</param><returns>The filters object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.SoundexFilters(System.String,System.String,System.String,System.String)">
+            <summary>
+      Creates the Soundex filters from the supplied values.
+    </summary><param name="lColumnName">The Letter Soundex column name.</param><param name="lSearchValue">The Letter Search value.</param><param name="pColumnName">The Phonetic Soundex column name.</param><param name="pSearchValue">The Phonetic Search value.</param><returns>The filters object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.#ctor(LJCDBMessage.DbFilters)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the element from the supplied values.
+    </summary><param name="filterBooleanOperator"> The filter boolean operator.</param><param name="conditionSetBooleanOperator">The condition set boolean operator</param><param name="name">The filter name.</param><returns>The filter DbConditions object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.Add(System.String,LJCDBMessage.DbConditionSet,LJCDBMessage.DbFilters,System.String)">
+            <summary>
+      Creates and adds the element from the supplied values.
+    </summary><param name="name">The filter name.</param><param name="dbConditionSet">The filter conditions.</param><param name="dbFilters">The contained filters</param><param name="booleanOperator">The filter boolean operator.</param><returns />
+        </member>
+        <member name="M:LJCDBMessage.DbFilters.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="T:LJCDBMessage.DbJoin">
+            <summary>Represents a database table join.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbJoin.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbJoin.#ctor(LJCDBMessage.DbJoin)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbJoin.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbJoin.Columns">
+            <summary>The included join table columns.</summary><remarks>&lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;</remarks>
+        </member>
+        <member name="P:LJCDBMessage.DbJoin.JoinOns">
+            <summary>The join on definitions.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoin.JoinType">
+            <summary>The join type.</summary><remarks>
+      Join type "Left" is the only join type supported by
+      &lt;span class="commonType"&gt;LJCDBService&lt;/span&gt;
+      at this time.
+    </remarks>
+        </member>
+        <member name="P:LJCDBMessage.DbJoin.TableAlias">
+            <summary>The table alias.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoin.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbJoinOn">
+            <summary>Represents a Join On definition.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOn.#ctor(LJCDBMessage.DbJoinOn)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbJoinOn.BooleanOperator">
+            <summary>The Boolean Operator value.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoinOn.FromColumnName">
+            <summary>The 'From' column name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoinOn.JoinOnOperator">
+            <summary>The Join On Operator.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoinOn.JoinOns">
+            <summary>Gets or sets the contained JoinOns.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbJoinOn.ToColumnName">
+            <summary>The 'To' column name.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbJoinOns">
+            <summary>
+      Represents a collection of join on definitions.
+    </summary><remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() and Clone().
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOns.HasItems(LJCDBMessage.DbJoinOns)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOns.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOns.#ctor(LJCDBMessage.DbJoinOns)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOns.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the element from the supplied values.
+    </summary><param name="fromColumnName">The 'From' column name.</param><param name="toColumnName">The 'To' column name.</param><param name="joinOperator">The join operator.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbJoinOns.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="T:LJCDBMessage.DbJoins">
+            <summary>
+       Represents a collection of table joins.
+       (E)
+    </summary><remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() and Clone().
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+        using LJCDBMessage;
+        
+        // A Person Data Record class.
+        public class Person
+        {
+          /// &lt;summary&gt;Gets or sets the PersonId value.&lt;/summary&gt;
+          public Int32 PersonId { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the Name value.&lt;/summary&gt;
+          public string Name { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the City value.&lt;/summary&gt;
+          public string City { get; set; }
+        }
+        
+        // Creating the Joins collection object.
+        
+        // Create the Joins collection and Join definition objects.
+        DbJoins dbJoins = new DbJoins();
+        dbJoin = new DbJoin()
+        {
+          TableName = "Address",
+          JoinType = "Left"
+        };
+        
+        // Create the JoinOn definitions and add them to the JoinOns collection.
+        // Add the JoinOns collection to the Join definition.
+        DbJoinOns dbJoinOns = new DbJoinOns();
+        DbJoinOn dbJoinOn = new DbJoinOn()
+        {
+          FromColumnName = "ID",
+          ToColumnName = "PersonID",
+          JoinOnOperator = "="  // Default
+        };
+        dbJoinOns.Add(dbJoinOn);
+        dbJoin.JoinOns = dbJoinOns;
+        
+        // Create the Column definitions and add them to the Columns collection.
+        // Add the Columns collection to the Join definition.
+        // Add the Join definition to the Joins collection.
+        DbColumns columns = new DbColumns();
+        DbColumn column = new DbColumn()
+        {
+          ColumnName = "City_Name",
+          PropertyName = "City",  // Defaults to same as ColumnName
+          DataTypeName = "String"  // Default
+        };
+        columns.Add(column);
+        dbJoin.Columns = columns;
+        dbJoins.Add(dbJoin);
+        
+        // Shortcut using object initialization, only required values and defaults.
+        // Note: JoinOn Columns must have properties in the Data Object
+        // to recieve the join values.
+        // The RenameAs property is required if there is another table column
+        // with the same name.
+        // dbJoinOns.Add(string fromColumnName, string toColumnName
+        //   , string joinOperator = "=")
+        // dbColumns.Add(string columnName, string propertyName = null
+        //   , string renameAs = null, string dataTypeName = "String", string caption = null)
+        DbJoins dbJoins = new DbJoins();
+        dbJoin = new DbJoin()
+        {
+          TableName = "Address",
+          JoinOns = new DbJoinOns() {
+            { "ID", "PersonID" }
+          },
+          Columns = new DbColumns() {
+            { "City_Name", "City" }
+          }
+        };
+        dbJoins.Add(dbJoin);
+        
+        // The Data Service creates the following SQL from this request which
+        // includes the DbJoins object.
+        DbRequest dbRequest = new DbRequest("Select", "Person")
+        {
+          DataConfigName = "PersonData",
+          Columns = new DbColumns() { { "Name" }},
+          Joins = dbJoins
+        };
+        
+        // select
+        //  [Person].[Name],
+        //  [Address].[City_Name]
+        // from [Person]
+        // left join [Address]
+        //  on [Person].[ID] = [Address].[PersonID]
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCDBMessage.DbJoins.HasItems(LJCDBMessage.DbJoins)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbJoins.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbJoins.#ctor(LJCDBMessage.DbJoins)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbJoins.Add(System.String,System.String,System.String,System.String)">
+            <summary>
+      Creates the element from the supplied values and adds it to the collection.
+    </summary><param name="tableName">The join table name.</param><param name="tableAlias">The join table alias.</param><param name="fromJoinOnColumn">The 'From' column name.</param><param name="toJoinOnColumn">The 'To' column name.</param><returns />
+        </member>
+        <member name="M:LJCDBMessage.DbJoins.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="T:LJCDBMessage.DbRequest">
+            <summary>
+      Represents a database request.
+      (E)
+    </summary><remarks>
+      <para>-- Project Level Remarks</para>
+      <para>Data Service Message Library</para>
+      <para>
+        The Data Service Message library contains classes for utilizing Request XML
+        messages and Result XML messages.
+      </para>
+      <para>
+        The Data Service Client Library
+        (&lt;span class="commonType"&gt;LJCDBCLientLib&lt;/span&gt;)
+        and the Data Service library
+        (&lt;span class="commonType"&gt;LJCDBServiceLib&lt;/span&gt;)
+        use the Request and Result XML messages to communicate between them.
+      </para>
+      <para>
+        &lt;b&gt;The
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        Object Graph&lt;/b&gt;&lt;br /&gt;
+        The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        object is the top-level of an object hierarchy to serialize and
+        deserialize the Request XML Message.&lt;br /&gt;
+        It uses the objects:
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;,
+        Columns(&lt;span class="userType"&gt;DbColumns&lt;/span&gt;),
+        KeyColumns(&lt;span class="userType"&gt;DbColumns&lt;/span&gt;),
+        Joins(&lt;span class="userType"&gt;DbJoins&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbJoin&lt;/span&gt;,
+        JoinOns(&lt;span class="userType"&gt;DbJoinOns&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbJoinOn&lt;/span&gt;,
+        Filters(&lt;span class="userType"&gt;DbFilters&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbFilter&lt;/span&gt;,
+        (ConditionSet)&lt;span class="userType"&gt;DbConditionSet&lt;/span&gt;,
+        (Conditions)&lt;span class="userType"&gt;DbConditions&lt;/span&gt; and
+        &lt;span class="userType"&gt;DbCondition&lt;/span&gt;.
+      </para>
+      <para>
+        &lt;b&gt;The
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        Object Graph&lt;/b&gt;&lt;br /&gt;
+        The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object is the top-level of an object hierarchy to serialize and
+        deserialize the Result XML Message.&lt;br /&gt;
+        It uses the objects:
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt; and
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;.
+      </para>
+    </remarks><example>
+      <para>
+        The following example shows each step needed to retrieve data. Applications
+        should generally encapsulate much of this code in a table specific Manager class to
+        make application programming easier and cleaner.
+      </para>
+      <para>
+        A Manager class is the client code that creates a table specific DbQuery object.
+        It then serializes the DbRequest object into a request XML message to pass to the
+        DbService.Execute() method.&lt;br /&gt;
+        See examples in LJCDBServiceLib.DbService Methods Add, Retrieve, Load, Update and Delete.
+      </para>
+      <para>
+        The data service DbService can be hosted in a windows service or web service which
+        could run on a separate server machine.
+      </para>
+      <code>
+        using System;
+        using System.Collections.Generic;
+        using LJCNetCommon;
+        using LJCDBMessage;
+        using LJCDBServiceLib;
+        
+        // A Person Data Record class.
+        public class Person
+        {
+          /// &lt;summary&gt;Gets or sets the PersonId value.&lt;/summary&gt;
+          public Int32 PersonId { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the Name value.&lt;/summary&gt;
+          public string Name { get; set; }
+        }
+        
+        // A console program.
+        internal class Program
+        {
+          private static void Main(string[] args)
+          {
+            // Create a Data Definition which is a collection of column definitions.
+            // Column definitions are required to communicate with the database.
+            // The collection initializer uses an available collection "Add" method.
+            // public DbColumn Add(string name, string propertyName = null, string renameAs = null
+            //   , string dataTypeName = "String", string caption = null)
+            string personIDColumnName = "Person_ID";
+            string personIDDataPropertyName = "PersonId";
+            DbColumns personDefinition = new DbColumns()
+            {
+              { personIDColumnName, personIDDataPropertyName, "Int32"},
+              { "Name" }  // Defaults to "String"
+            };
+        
+            // Create a list of the columns to be retrieved.
+            List&lt;string&gt; propertyNames = new List&lt;string&gt;()
+            {
+              "PersonId",
+              "Name"
+            };
+        
+            // Create a key record to specify the record to be retrieved.
+            var keyColumns = new DbColumns()
+            {
+              { "PersonId", 1}
+            };
+        
+            // Create the DbRequest object.
+            string tableName = "Person";
+            DbRequest dbRequest = new DbRequest("Select", tableName)
+            {
+              DataConfigName = "PersonData",
+              Columns = DbCommon.GetRequestColumns(personDefinition, propertyNames),
+              KeyColumns = DbCommon.GetRequestKeyColumns(keyColumns, personDefinition)
+            };
+        
+            // Create the Request XML message.
+            string request = dbRequest.Serialize();
+        
+            // Create the Data Service object.
+            DbService dbService = new DbService();
+        
+            // Execute the Request and get the Result XML message.
+            string result = dbService.Execute(request);
+        
+            // Create a Data Record object to receive the values.
+            Person person = new Person();
+        
+            // Populate the Data Record object with the result values.
+            // Uses resultData as an object and processes with reflection.
+            DbCommon.SetObjectValues(result, person);
+        
+            int id = person.PersonId;
+            string name = person.Name;
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.Deserialize(System.String)">
+            <summary>
+      Deserializes the
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt; message.
+    </summary><param name="request">The request message.</param><returns>
+      The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object.
+    </returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.#ctor(LJCDBMessage.DbRequest)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.#ctor(LJCDBMessage.RequestType,System.String,System.String)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="requestType">The request type.</param><param name="tableName">The table name.</param><param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.Serialize">
+            <summary>
+      Serializes the object and returns the serialized string.
+    </summary>
+        </member>
+        <member name="M:LJCDBMessage.DbRequest.Serialize(System.String)">
+            <summary>
+      Serialize the object to the specified file.
+    </summary><param name="fileSpec">The file specification.</param>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.AddMissingColumns">
+            <summary>Indicates if the missing column should be added.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.DbAssignedColumns">
+            <summary>The Database Assigned columns.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.ClientSql">
+            <summary>Gets or sets the ClientSql value.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.Columns">
+            <summary>The included table columns.</summary><remarks>
+      <para>
+        The Query Columns are those primary table base columnswhose values are
+        returned from the database. Initially, the Query Column
+        name and Property name are the same.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.DataConfigName">
+            <summary>The data configuration name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.Filters">
+            <summary>The where clause filters.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.Joins">
+            <summary>The table joins.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.KeyColumns">
+            <summary>The key column values.</summary><remarks>
+      <para>
+        The Key Columns are those base columns and Join Columns whose value is
+        used in the where clause.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.OrderByNames">
+            <summary>The OrderBy column names.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.PageSize">
+            <summary>The number of records in the page.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.Parameters">
+            <summary>Gets or sets the Parameters list reference.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.PageStartIndex">
+            <summary>The page starting index.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.ProcedureName">
+            <summary>Gets or sets the ProcedureName value.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.RequestTypeName">
+            <summary>
+      The request type.
+      (R)
+    </summary><remarks>
+      This value can be "Insert", "Select", "Load", "Update", "Delete",
+      "SelectProcedure", "SchemaOnly", "TableNames", "RetrieveSql"
+      , "LoadSql" or "ExecuteSql".
+    </remarks>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.SchemaName">
+            <summary>The schema name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbRequest.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="T:LJCDBMessage.RequestType">
+            <summary>The RequestType values.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.Delete">
+            <summary>The "Delete" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.ExecuteSQL">
+            <summary>The "ExecuteSQL" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.Insert">
+            <summary>The "Insert" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.Load">
+            <summary>The "Load" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.LoadSQL">
+            <summary>The "LoadSQL" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.RetrieveSQL">
+            <summary>The "RetrieveSQL" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.SchemaOnly">
+            <summary>The "SchemaOnly" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.Select">
+            <summary>The "Select" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.SelectProcedure">
+            <summary>The "SelectProcedure" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.TableNames">
+            <summary>The "TableNames" request type.</summary>
+        </member>
+        <member name="F:LJCDBMessage.RequestType.Update">
+            <summary>The "Update" request type.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbResult">
+            <summary>
+      Represents a Request result.
+      (R)
+    </summary><remarks>
+      <para>
+        The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object contains the RequestTypeName and TableName that were in the
+        original &lt;span class="userType"&gt;DbQuery&lt;/span&gt;
+        request.
+      </para>
+      <para>
+        It also contains the
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;
+        object with the result data.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.DeserializeMessage(System.String)">
+            <summary>
+      Deserializes the
+      &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      message.
+    </summary><param name="result">The result message.</param><returns>
+      The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      object.
+    </returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasColumns(LJCDBMessage.DbResult)">
+            <summary>
+      Checks if the result has Columns.
+    </summary><param name="dbResult">The DbResult object.</param><returns>True if there are columns, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasData(LJCDBMessage.DbResult)">
+            <summary>
+      Checks if the result has Columns.
+    </summary><param name="dbResult">The DbResult object.</param><returns>True if there are columns, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasRows(LJCDBMessage.DbResult)">
+            <summary>
+      Checks if the result has Rows.
+    </summary><param name="dbResult">The DbResult object.</param><returns>True if there are rows, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.#ctor(LJCDBMessage.DbResult)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="item">The copy from item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.#ctor(LJCDBMessage.DbRequest)">
+            <summary>
+      Initializes an object instance with the DbRequest object.
+    </summary><param name="dbRequest">
+      The &lt;span class="userType"&gt;DbQuery&lt;/span&gt;
+      object.
+    </param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="requestTypeName">The request type name.</param><param name="tableName">The table name.</param><param name="schemaName">The schema name.</param><param name="procedureName">The procedure name.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasColumns">
+            <summary>
+      Checks if the result has Columns.
+    </summary><returns>True if there are columns, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasData">
+            <summary>
+      Checks if the result has Columns.
+    </summary><returns>True if there are columns, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.HasRows">
+            <summary>
+      Checks if the result has Rows.
+    </summary><returns>True if there are rows, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.Serialize">
+            <summary>
+      Serializes the object and returns the serialized string.
+    </summary><returns>The serialized string.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.Serialize(System.String)">
+            <summary>
+      Serialize the object to the specified file.
+    </summary><param name="fileSpec">The file specification.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.GetValueColumns(LJCNetCommon.DbValues)">
+            <summary>
+      Get &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      from result records.
+    </summary><param name="dbValues">The DbValues object.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.SetColumns(LJCNetCommon.DbColumns,LJCDBMessage.DbJoins)">
+            <summary>
+      Sets the Columns property from the principle and join columns.
+    </summary><param name="dbColumns">The principle columns.</param><param name="dbJoins">The joins.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.SetColumns(LJCDBMessage.DbRequest)">
+            <summary>
+            Sets the Columns property from the Request columns.
+            </summary>
+            <param name="dbRequest">The Request object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.SetData(System.Data.DataTable,LJCDBMessage.DbRequest)">
+            <summary>
+      Sets the result records from the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt; objects.
+    </summary><param name="dataTable">The data table.</param><param name="dbRequest">
+      The &lt;span class="userType"&gt;DBQuery&lt;/span&gt;
+      object.
+    </param>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.SetRows(System.Data.DataTable,LJCNetCommon.DbColumns,LJCDBMessage.DbJoins)">
+            <summary>
+      Sets the result records from the DataTable, principle values and join values.
+    </summary><param name="dataTable">The data table.</param><param name="dbColumns">The principle columns.</param><param name="dbJoins">The joins.</param><remarks>
+      <para>
+        Creates a
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;
+        collection of
+        &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+        objects from a
+        &lt;span class="userType"&gt;DataTable&lt;/span&gt;.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.GetRowValues(LJCNetCommon.DbColumns,System.Data.DataRow)">
+            <summary>
+      Gets the result values from the data row.
+    </summary><param name="dbColumns">The columns collection.</param><param name="dataRow">
+      The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+      object.
+    </param><returns>The result values.</returns><remarks>
+      <para>
+        Combines the required column definition values and
+        &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+        data values into a
+        &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+        collection.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbResult.AddJoinRowValues(LJCNetCommon.DbValues,System.Data.DataRow,LJCDBMessage.DbJoins)">
+            <summary>
+      Adds the join values.
+    </summary><param name="dbValues">The values object.</param><param name="dataRow">
+      The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+      object.
+    </param><param name="dbJoins">The joins.</param>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.AffectedRecords">
+            <summary>Gets or sets the non-query affected record count.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.Columns">
+            <summary>Gets the collection of columns that belong to this result.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.DatabaseName">
+            <summary>Gets or sets the Database name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.ExecutedSql">
+            <summary>Gets or sets the executed SQL statement.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.ProcedureName">
+            <summary>Gets or sets the ProcedureName value.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.RequestTypeName">
+            <summary>The request type.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.Rows">
+            <summary>A collection of DbValues objects.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.SchemaName">
+            <summary>The schema name.</summary>
+        </member>
+        <member name="P:LJCDBMessage.DbResult.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbRow">
+            <summary>Represents a result Row.</summary>
+        </member>
+        <member name="M:LJCDBMessage.DbRow.HasItems(LJCDBMessage.DbRow)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRow.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbRow.#ctor(LJCDBMessage.DbRow)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="P:LJCDBMessage.DbRow.Item(System.Int32)">
+            <summary>
+      The row value for the specified value column index.
+    </summary><param name="columnIndex">The row value column index.</param><returns>The selected DbValue row value object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbRow.Item(System.String)">
+            <summary>
+      The row value for the specified value column name.
+    </summary><param name="columnName">The row value column name.</param><returns>The selected DbValue row value object.</returns>
+        </member>
+        <member name="P:LJCDBMessage.DbRow.Values">
+            <summary>Gets or sets the row values.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbRows">
+            <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;LJCNetCommon.DbValues&lt;/span&gt;.
+    </summary><remarks>
+      <para>
+        Each element of the collection is an
+        &lt;span class="userType"&gt;LJCNetCommon.DbValues&lt;/span&gt;
+        object which contains the values of a data row.
+      </para>
+      <para>
+        The common collection static methods are: HasItems() and
+        LJCDeserialize().
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add(), Clone(), HasItems(),
+        and Serialize().
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.HasItems(LJCDBMessage.DbRows)">
+            <summary>
+      Checks if the collection has items.
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.LJCDeserialize(System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.#ctor(LJCDBMessage.DbRows)">
+            <summary>
+      The Copy constructor.
+    </summary><param name="items">The copy from items collection.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.Add(LJCNetCommon.DbValues)">
+            <summary>
+      Adds the specified object.
+    </summary><param name="dbValues">The item object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.HasItems">
+            <summary>
+      Checks if the collection has items.
+    </summary><returns>True if there are items, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbRows.Serialize(System.String)">
+            <summary>
+      Serialize the object to the specified file.
+    </summary><param name="fileSpec">The file specification.</param>
+        </member>
+        <member name="P:LJCDBMessage.DbRows.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:LJCDBMessage.DbSqlBuilder">
+            <summary>
+      Provides SQL builder methods.
+    </summary>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.#ctor(LJCDBMessage.DbRequest)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbRequest">The request object.</param>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.ColumnList(LJCDBMessage.DbRequest,System.Boolean)">
+            <summary>
+      Creates the list of included table columns.
+    </summary><param name="dbRequest">The request object.</param><param name="listOnly">Indicates if parentheses are required.</param><returns>The column list string.</returns><remarks>
+      <para>
+        Query Column names are added to the created SQL statement from the
+        Query Column definitions.
+      </para>
+      <para>
+        Join Columns are added to the created SQL statement from the Join Columns
+        in the join parameter. They are qualified with the Join Table Name or
+        the Table Alias if it is defined. They will include the 'AS' keyword
+        and rename value if the RenameAs value is defined.
+      </para>
+      <para>
+        Join Columns must have properties in the Data Object to receive the
+        join values.
+      </para>
+      <para>
+        The RenameAs value is required if there is another table with the same
+        column name.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.CreateAddSql">
+            <summary>
+      Creates the SQL Insert statement.
+    </summary><returns>The Insert statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.CreateDeleteSql">
+            <summary>
+      Creates the SQL Delete statement.
+    </summary><returns>The Delete statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.CreateLoadSql(LJCDBMessage.DbRequest)">
+            <summary>
+      Creates the SQL Select statement for multiple records.
+    </summary><param name="dbRequest">The request object.</param><returns>The Select statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.CreateRetrieveSql(LJCDBMessage.DbRequest)">
+            <summary>
+      Creates the SQL Select statement for one record.
+    </summary><param name="dbRequest">The request object.</param><returns>The Select statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.CreateUpdateSql">
+            <summary>
+      Creates the SQL Update statement.
+    </summary><returns>The Update statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.FilterWhereClause(LJCDBMessage.DbFilters,System.Boolean)">
+            <summary>
+      Creates the where clause from the filters.
+    </summary><param name="dbFilters">The filters object.</param><param name="recursive">Indicates if this is a recursive call.</param><returns>The filters where clause.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.InsertValueList(System.Boolean)">
+            <summary>
+      Creates a list of record values.
+      (R)
+    </summary><param name="listOnly">
+      Indicates if the value list should be
+      a full SQL value list including the text "values" and parentheses
+      or only the value list.
+    </param><returns>The value list string.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.JoinStatement(LJCDBMessage.DbJoins,System.String)">
+            <summary>
+      Creates the join statement.
+    </summary><param name="dbJoins">The joins object.</param><param name="schemaName">The schema name.</param><returns>The join statements string.</returns><remarks>
+      <para>
+        The JoinOn "FromColumnName" is automatically qualified with the parent
+        request table name unless it is already qualified by the user.
+      </para>
+      <para>
+        The JoinOn "ToColumnName" is automatically qualified with the join
+        table name unless it is already qualified by the user.
+      </para>
+      <para>
+        The "From" and "To" column names are not qualified if the values begin
+        and end, with the "|" character.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.KeyWhereClause">
+            <summary>
+      Creates the where clause from the key values.
+    </summary><returns>The key value where clause.</returns><remarks>
+      <para>
+        A Key Column is not added to a where clause if its value is null.
+      </para>
+      <para>
+        A Key Column is not added to a where clause if it is an AutoIncrement
+        column and its value is zero.
+      </para>
+      <para>
+        If a Key Column is not qualified with a user entered name, then it is
+        qualified with the primary table name
+      </para>
+      <para>
+        Key Columns where clauses use the "=" comparison operator.
+      </para>
+      <para>
+        Key Column where clauses comparisons are separated with an "and".
+      </para>
+      <para>
+        The Key Column where clause will check for "is null" if the value equals
+        "-null" or "-".
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.OrderBy">
+            <summary>
+      Creates the order by statement from the order by column list.
+    </summary><returns>The order by statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.PageFetch">
+            <summary>
+      Creates the offset/fetch next statement.
+    </summary><returns>The pagination statement.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.UpdateValueList">
+            <summary>
+      Creates a list of record update values.
+    </summary><returns>The update value list.</returns>
+        </member>
+        <member name="M:LJCDBMessage.DbSqlBuilder.WhereClause">
+            <summary>
+      Create the where clause.
+    </summary><returns>The where clause string.</returns>
+        </member>
+        <member name="T:LJCDBMessage.ResultConverter`2">
+            <summary>
+      Converts
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      objects to data objects.
+    </summary><typeparam name="TData">The data object type.</typeparam><typeparam name="TList">The collection type.</typeparam>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateCollection(LJCDBMessage.DbResult)">
+            <summary>
+      Creates a collection from the result records.
+    </summary><param name="dbResult">The result object.</param><returns>The collection.</returns>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateCollectionFromTable(System.Data.DataTable,LJCNetCommon.DbColumns)">
+            <summary>
+      Creates a Data Object collection from the Table rows.
+    </summary><param name="dataTable">The DataTable object.</param><param name="dataDefinition">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.</param><returns>The Data Object collection.</returns>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateData(LJCNetCommon.DbColumns)">
+            <summary>
+      Creates a Data Object from the result DbColumns object.
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </summary><param name="dbColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateData(LJCDBMessage.DbResult)">
+            <summary>
+      Creates a Data Object from the result values.
+    </summary><param name="dbResult">
+      The &lt;span class="userType"&gt;DbResult&lt;/span&gt; object.
+    </param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateData(LJCNetCommon.DbValues)">
+            <summary>
+      Creates a Data Object from the data values.
+    </summary><param name="dbValues">
+      The &lt;span class="userType"&gt;DbValues&lt;/span&gt; object.
+    </param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.ResultConverter`2.CreateDataFromTable(System.Data.DataTable,System.Data.DataRow,LJCNetCommon.DbColumns)">
+            <summary>
+      Creates a Data Object from the row values.
+    </summary><param name="dataTable">The DataTable object.</param><param name="dataRow">The DataRow object.</param><param name="dataDefinition">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDBMessage.Testing.RequestColumns(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String})">
+            <summary>
+      Gets Request columns from the baseDefinition using the propertyNames.
+    </summary><param name="baseDefinition">The Base DataDefinition columns.</param><param name="propertyNames">The column property names.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      collection.
+    </returns><remarks>
+      <para>
+        Generally used in the Load() and Retrieve() manager methods to define
+        the columns to be retrieved.
+      </para>
+      <para>
+        Defaults to all baseDefinition columns if the propertyNames parameter
+        has no values.
+      </para>
+      <para>
+        Creates a DbColumns collection of column definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the propertyNames parameter.
+      </para>
+      <para>
+        The DbColumn definitions do not include values.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.Testing.RequestLookupKeys(System.Object,LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String})">
+            <summary>
+      Get Request Value Key columns from data properties for the specified column
+      property names.
+    </summary><param name="dataObject">The data object.</param><param name="baseDefinition">The Base DataDefinition columns.</param><param name="propertyNames">The column property names.</param><returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns><remarks>
+      <para>
+        Generally used in the Add() manager method to define the lookup keys
+        columns and values to retrieve the row that was just added to the
+        database. This allows for retrieving the database assigned values.
+      </para>
+      <para>
+        This method attempts to default the property names to the dataObject
+        ChangedNames property if it exists and the propertyNames parameter has
+        no values.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the propertyNames parameter.
+      </para>
+      <para>
+        The dataObject property names must also match the names in the
+        propertyNames parameter and the data value must not be null for the
+        data definition to be included.
+      </para>
+      <para>
+        The DbColumn definitions include the dataObject value. The dataObject
+        property values are retrieved using reflection.
+      </para>
+      <para>
+        A Key Column is not created if it is an AutoIncrement column, the
+        value equals "0" or it is an invalid DateTime.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDBMessage.Testing.GetDefaultPropertyNames(System.Object,System.Collections.Generic.List{System.String}@)">
+            <summary>
+      Gets the ChangedNames if available and propertyNames is null.
+    </summary><param name="dataObject">The data object.</param><param name="propertyNames">The column names.</param>
+        </member>
+        <member name="M:LJCDBMessage.Testing.GetChangedNames(System.Object)">
+            <summary>
+      Gets the names of the changed properties.
+    </summary><param name="dataObject">The data object.</param><returns>The changed names list.</returns>
+        </member>
+    </members>
+</doc>
