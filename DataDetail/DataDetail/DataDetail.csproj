@@ -44,7 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
-      <HintPath>..\..\..\LJCProjectsDev\LJCDBServiceLib\External\LJCDBDataAccess.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\DataDetail\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
