@@ -50,7 +50,7 @@ namespace LJCSQLUtilLibDAL
 		/// <include path='items/LoadPrimaryKeys/*' file='Doc/ForeignKeyManager.xml'/>
 		public ForeignKeys LoadPrimaryKeys(string tableName = null)
 		{
-			ForeignKeys retValue = null;
+			ForeignKeys retValue;
 
 			DbFilters dbFilters = GetPrimaryKeyFilters(tableName);
 			DbJoins dbJoins = GetLoadJoins();
@@ -62,7 +62,7 @@ namespace LJCSQLUtilLibDAL
 		/// <include path='items/LoadForeignKeys/*' file='Doc/ForeignKeyManager.xml'/>
 		public ForeignKeys LoadForeignKeys(string tableName = null)
 		{
-			ForeignKeys retValue = null;
+			ForeignKeys retValue;
 
 			DbJoins dbJoins = GetLoadJoins();
 			DbFilters dbFilters = GetForeignKeyFilters(tableName);

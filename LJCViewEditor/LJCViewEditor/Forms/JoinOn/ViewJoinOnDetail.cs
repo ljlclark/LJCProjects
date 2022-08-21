@@ -137,7 +137,7 @@ namespace LJCViewEditor
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewJoinOn lookupRecord = null;
+			ViewJoinOn lookupRecord;
 			string title;
 			string message;
 			bool retValue = true;
@@ -239,9 +239,9 @@ namespace LJCViewEditor
 			mViewHelper = new ViewHelper(mSettings.DbServiceRef
 				, mSettings.DataConfigName);
 			mViewJoinOnManager = mViewHelper.ViewJoinOnManager;
-			mViewJoinManager = mViewHelper.ViewJoinManager;
-			mViewDataManager = mViewHelper.ViewDataManager;
-			mViewTableManager = mViewHelper.ViewTableManager;
+			//mViewJoinManager = mViewHelper.ViewJoinManager;
+			//mViewDataManager = mViewHelper.ViewDataManager;
+			//mViewTableManager = mViewHelper.ViewTableManager;
 
 			// Set control values.
 			ParentLabel.BackColor = mSettings.BeginColor;
@@ -384,11 +384,11 @@ namespace LJCViewEditor
 		private DbColumns mJoinOnTableColumns;
 		private DbColumns mJoinTableColumns;
 		private StandardSettings mSettings;
-		private ViewDataManager mViewDataManager;
+		//private ViewDataManager mViewDataManager;
 		private ViewHelper mViewHelper;
-		private ViewJoinManager mViewJoinManager;
+		//private ViewJoinManager mViewJoinManager;
 		private ViewJoinOnManager mViewJoinOnManager;
-		private ViewTableManager mViewTableManager;
+		//private ViewTableManager mViewTableManager;
 
 		// The Change event.
 		internal event EventHandler<EventArgs> LJCChange;

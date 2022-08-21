@@ -44,7 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
-      <HintPath>..\..\..\LJCProjectsDev\DataDetail\External\LJCDBDataAccess.dll</HintPath>
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
@@ -128,6 +128,10 @@
     <ProjectReference Include="..\LJCDataDetailLib\LJCDataDetailLib.csproj">
       <Project>{dc82bc52-6163-4ba8-86f1-c7101eab0320}</Project>
       <Name>LJCDataDetailLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJCTestDataLib\LJCTestDataLib.csproj">
+      <Project>{dbc936ab-213b-40a7-b2ce-6525460de318}</Project>
+      <Name>LJCTestDataLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

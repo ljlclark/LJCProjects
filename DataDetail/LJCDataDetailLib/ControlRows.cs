@@ -18,7 +18,7 @@ namespace LJCDataDetailLib
 		/// <include path='items/Deserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
 		public static ControlRows Deserialize(string fileSpec = null)
 		{
-			ControlRows retValue = null;
+			ControlRows retValue;
 
 			if (false == NetString.HasValue(fileSpec))
 			{

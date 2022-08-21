@@ -30,7 +30,7 @@ namespace LJCDataDetailLib
 		public Label CreateLabel(string name, string text, Point location
 			, int width = 100)
 		{
-			Label retValue = null;
+			Label retValue;
 
 			retValue = new Label()
 			{
@@ -49,7 +49,7 @@ namespace LJCDataDetailLib
 		public TextBox CreateTextBox(string name, string text, Point location
 			, int width = 100)
 		{
-			TextBox retValue = null;
+			TextBox retValue;
 
 			retValue = new TextBox()
 			{
@@ -66,7 +66,7 @@ namespace LJCDataDetailLib
 		/// <include path='items/CreateComboBox/*' file='Doc/ControlHelper.xml'/>
 		public ComboBox CreateComboBox(string name, Point location, int width = 121)
 		{
-			ComboBox retValue = null;
+			ComboBox retValue;
 
 			retValue = new ComboBox()
 			{
@@ -85,7 +85,7 @@ namespace LJCDataDetailLib
 		public CheckBox CreateCheckBox(string name, string text, Point location
 			, int width = 100)
 		{
-			CheckBox retValue = null;
+			CheckBox retValue;
 
 			retValue = new CheckBox()
 			{
@@ -104,7 +104,7 @@ namespace LJCDataDetailLib
 		/// <include path='items/CreateButton/*' file='Doc/ControlHelper.xml'/>
 		public Button CreateButton(string name, string text, Point location)
 		{
-			Button retValue = null;
+			Button retValue;
 
 			retValue = new Button()
 			{

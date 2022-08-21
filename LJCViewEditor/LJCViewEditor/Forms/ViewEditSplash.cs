@@ -45,6 +45,6 @@ namespace LJCViewEditor
 			Close();
 		}
 
-		private Timer mTimer;
+		private readonly Timer mTimer;
 	}
 }

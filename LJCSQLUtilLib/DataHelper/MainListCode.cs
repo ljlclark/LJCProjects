@@ -57,8 +57,8 @@ namespace DataHelper
 		private void ConfigureControls()
 		{
 			// Setup panel manager for main tab splitter.
-			mTablePanelManager = new LJCPanelManager(TableTabsSplit, DataTabs, DataTileTabs);
-			mColumnPanelManager = new LJCPanelManager(ColumnTabsSplit, ColumnTabs, ColumnTileTabs);
+			//mTablePanelManager = new LJCPanelManager(TableTabsSplit, DataTabs, DataTileTabs);
+			//mColumnPanelManager = new LJCPanelManager(ColumnTabsSplit, ColumnTabs, ColumnTileTabs);
 
 			// Make sure lists scroll vertically and counter labels show.
 			if (AutoScaleMode == AutoScaleMode.Font)
@@ -333,8 +333,8 @@ namespace DataHelper
 		private StandardSettings mSettings;
 		private string mControlValuesFileName;
 
-		private LJCPanelManager mTablePanelManager;
-		private LJCPanelManager mColumnPanelManager;
+		//private LJCPanelManager mTablePanelManager;
+		//private LJCPanelManager mColumnPanelManager;
 
 		private TableGridCode mTableGridCode;
 		private ColumnGridCode mColumnGridCode;

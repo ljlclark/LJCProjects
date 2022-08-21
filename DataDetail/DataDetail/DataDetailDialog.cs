@@ -267,15 +267,13 @@ namespace DataDetail
 				CreateAdditionalTabPages(mControlColumns.Count);
 				int tabIndex = 0;
 
-				TabPage currentTabPage = null;
-
 				// Create all controls in all ControlColumns.
 				foreach (ControlRow controlRow in LJCConfigRows.Items)
 				{
 					if (controlRow.AllowDisplay)
 					{
 						int tabPageIndex = controlRow.TabPageIndex;
-						currentTabPage = MainTabs.TabPages[tabPageIndex];
+						TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
 						int columnIndex = controlRow.ColumnIndex;
 						controlColumn = mControlColumns[columnIndex];
 						dataColumn = LJCDataColumns.LJCSearchName(controlRow.DataValueName);
@@ -286,9 +284,10 @@ namespace DataDetail
 							, columnIndex, rowIndex, ref tabIndex);
 					}
 				}
-				ConfigureFormButtons(tabIndex);
-			}
-		}
+				//ConfigureFormButtons(tabIndex);
+        ConfigureFormButtons();
+      }
+    }
 
 		// Creates the ControlRow and associated controls.
 		/// <include path='items/CreateControlRow/*' file='Doc/DataDetailDialog.xml'/>
@@ -455,14 +454,15 @@ namespace DataDetail
 					}
 				}
 				UpdateConfigRows();
-				ConfigureFormButtons(tabIndex);
-			}
-		}
+				//ConfigureFormButtons(tabIndex);
+        ConfigureFormButtons();
+      }
+    }
 
 		// Gets the ControlRow type name.
 		private string GetControlRowType(DbColumn dataColumn)
 		{
-			string retValue = null;
+			string retValue;
 
 			var items = LJCKeyItems.SearchPropertyName(dataColumn.PropertyName);
 			if (items != null && items.Count > 0)
@@ -496,7 +496,7 @@ namespace DataDetail
 			, int controlRowIndex)
 		{
 			ControlColumn controlColumn;
-			int left = 0;
+			int left;
 			int top;
 			Point retValue;
 			int pageColumnIndex;
@@ -557,9 +557,9 @@ namespace DataDetail
 
 		// Returns a reference to a Label control by name.
 		/// <include path='items/SearchLabel/*' file='Doc/DataDetailDialog.xml'/>
-		private Label SearchLabel(string name)
+		internal Label SearchLabel(string name)
 		{
-			Label retValue = null;
+			Label retValue;
 
 			retValue = SearchControls(name) as Label;
 			return retValue;
@@ -567,9 +567,9 @@ namespace DataDetail
 
 		// Return a reference to a TextBox control by name.
 		/// <include path='items/SearchTextBox/*' file='Doc/DataDetailDialog.xml'/>
-		private TextBox SearchTextBox(string name)
+		internal TextBox SearchTextBox(string name)
 		{
-			TextBox retValue = null;
+			TextBox retValue;
 
 			retValue = SearchControls(name) as TextBox;
 			return retValue;
@@ -648,10 +648,9 @@ namespace DataDetail
 		}
 
 		// Completes the controls setup.
-		private void ConfigureFormButtons(int tabIndex)
+		private void ConfigureFormButtons()
 		{
-			tabIndex += 2;
-			tabIndex = LJCDataColumns.Count * 2;
+			int tabIndex = LJCDataColumns.Count * 2;
 			OKButton.TabIndex = tabIndex++;
 			FormCancelButton.TabIndex = tabIndex++;
 		}
@@ -661,7 +660,7 @@ namespace DataDetail
 			, int controlRowIndex)
 		{
 			ControlColumn controlColumn;
-			int left = 0;
+			int left;
 			int top;
 			Point retValue;
 			int pageColumnIndex;
@@ -712,14 +711,13 @@ namespace DataDetail
 		private Button CreateButton(ControlRow controlRow, DbColumn dataColumn
 			, int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
 		{
-			int width;
-			Button retValue = null;
+			Button retValue;
 
 			TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
 			var name = $"{dataColumn.ColumnName}Button";
 			string text = dataColumn.Caption;
 			Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-			width = mControlColumnsHelper.AdjustedWidth(dataColumn);
+			//int width = mControlColumnsHelper.AdjustedWidth(dataColumn);
 			retValue = mControlHelper.CreateButton(name, text, location);
 			retValue.TabIndex = tabIndex;
 			Controls.Add(retValue);
@@ -854,20 +852,20 @@ namespace DataDetail
 			return retValue;
 		}
 
-		// Gets the current TabPage.
-		private TabPage GetCurrentPage(ControlColumn controlColumn
-			, ref int tabPageIndex, int tabIndex)
-		{
-			TabPage retValue = null;
+		//// Gets the current TabPage.
+		//private TabPage GetCurrentPage(ControlColumn controlColumn
+		//	, ref int tabPageIndex, int tabIndex)
+		//{
+		//	TabPage retValue = null;
 
-			int index = GetTabPageIndex(controlColumn, tabPageIndex, tabIndex);
-			if (index > tabPageIndex)
-			{
-				tabPageIndex = index;
-				retValue = MainTabs.TabPages[tabPageIndex];
-			}
-			return retValue;
-		}
+		//	int index = GetTabPageIndex(controlColumn, tabPageIndex, tabIndex);
+		//	if (index > tabPageIndex)
+		//	{
+		//		tabPageIndex = index;
+		//		retValue = MainTabs.TabPages[tabPageIndex];
+		//	}
+		//	return retValue;
+		//}
 		#endregion
 
 		#region Control Event Handlers
@@ -901,14 +899,15 @@ namespace DataDetail
 		// Displays the selection list window.
 		private void EllipseButton_Click(object sender, EventArgs e)
 		{
-			Button button = null;
-			bool success = true;
+			Button button;
+			bool success;
 
 			button = sender as Button;
-			success = CheckSelectListValues(LJCDbServiceRef, button.Name
-				, out KeyItem keyItem);
+			//success = CheckSelectListValues(LJCDbServiceRef, button.Name
+			//	, out KeyItem keyItem);
+      success = CheckSelectListValues(button.Name, out KeyItem keyItem);
 
-			if (success)
+      if (success)
 			{
 				SelectList selectList = new SelectList()
 				{
@@ -926,8 +925,7 @@ namespace DataDetail
 		}
 
 		// Checks the values required for the SelectList window.
-		private bool CheckSelectListValues(DbServiceRef dbServiceRef
-			, string buttonName, out KeyItem keyItem)
+		private bool CheckSelectListValues(string buttonName, out KeyItem keyItem)
 		{
 			int index = 0;
 			string message = null;

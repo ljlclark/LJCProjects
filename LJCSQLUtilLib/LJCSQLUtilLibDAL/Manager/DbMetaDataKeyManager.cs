@@ -310,7 +310,7 @@ namespace LJCSQLUtilLibDAL
 		{
 			DbFilters retValue = null;
 
-			DbFilter dbFilter = new DbFilter();
+			//DbFilter dbFilter = new DbFilter();
 			//dbFilter.ConditionSet.Conditions.Add(DbMetaDataKey.ColumnDescription, "'Text'");
 			//retValue = new DbFilters {
 			//	dbFilter};

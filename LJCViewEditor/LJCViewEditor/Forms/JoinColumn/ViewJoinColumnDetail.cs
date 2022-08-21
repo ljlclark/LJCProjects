@@ -244,7 +244,7 @@ namespace LJCViewEditor
 		// Configures the controls and loads the selection control data.
 		private void InitializeControls()
 		{
-			DataHelper dataHelper = null;
+			DataHelper dataHelper;
 
 			// Get singleton values.
 			ValuesViewEditor values = ValuesViewEditor.Instance;

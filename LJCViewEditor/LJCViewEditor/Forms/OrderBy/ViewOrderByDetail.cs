@@ -118,7 +118,7 @@ namespace LJCViewEditor
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewOrderBy lookupRecord = null;
+			ViewOrderBy lookupRecord;
 			string title;
 			string message;
 			bool retValue = true;
@@ -201,7 +201,7 @@ namespace LJCViewEditor
 		// Configures the controls and loads the selection control data.
 		private void InitializeControls()
 		{
-			DataHelper dataHelper = null;
+			DataHelper dataHelper;
 
 			// Get singleton values.
 			ValuesViewEditor values = ValuesViewEditor.Instance;

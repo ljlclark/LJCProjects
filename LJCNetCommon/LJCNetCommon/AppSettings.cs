@@ -76,7 +76,7 @@ namespace LJCNetCommon
         {
           if (keyValue.Contains(","))
           {
-            retValue = GetColorFromRGBString(keyValue, defaultColor);
+            retValue = GetColorFromRGBString(keyValue);
           }
           else
           {
@@ -89,11 +89,11 @@ namespace LJCNetCommon
 
     // Gets a Color from an RGB string. (E)
     /// <include path='items/GetColorFromRGBString/*' file='Doc/AppSettings.xml'/>
-    public Color GetColorFromRGBString(string rgbText, Color defaultColor)
+    public Color GetColorFromRGBString(string rgbText)
     {
       string[] rgb;
       string errorText;
-      Color retValue = defaultColor;
+      Color retValue;
 
       // Check for comma.
       if (false == rgbText.Contains(","))

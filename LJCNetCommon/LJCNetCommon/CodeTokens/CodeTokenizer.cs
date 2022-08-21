@@ -71,7 +71,8 @@ namespace LJCNetCommon
     /// <include path='items/CombineXmlCommentTokens/*' file='Doc/CodeTokenizer.xml'/>
     public void CombineXmlCommentTokens(short tokenIndex)
     {
-      string comment = CombineTokens(Tokens, tokenIndex);
+      //string comment = CombineTokens(Tokens, tokenIndex);
+      string comment = CombineTokens(Tokens);
       Tokens[tokenIndex] = comment;
       ClearRemainingTokens(tokenIndex + 1);
     }
@@ -424,7 +425,8 @@ namespace LJCNetCommon
     #region Private Methods
 
     // Returns all the combined tokens as a single string.
-    private string CombineTokens(string[] tokens, short startTokenIndex)
+    //private string CombineTokens(string[] tokens, short startTokenIndex)
+    private string CombineTokens(string[] tokens)
     {
       string retValue;
 

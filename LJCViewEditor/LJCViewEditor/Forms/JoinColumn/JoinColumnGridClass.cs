@@ -218,7 +218,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		private void DoRefreshViewJoinColumn()
+		internal void DoRefreshViewJoinColumn()
 		{
 			ViewJoinColumn record;
 			int id = 0;
@@ -266,7 +266,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewJoinColumnManager mViewJoinColumnManager;
 		#endregion
 	}

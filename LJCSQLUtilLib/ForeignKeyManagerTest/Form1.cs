@@ -77,14 +77,14 @@ namespace ForeignKeyManagerTest
 			string retValue = null;
 
 			// Uses the Metadata columns but the Schema foreign keys.
-			DbMetaDataColumns fromMDColumns = null;
-			DbMetaDataColumns toMDColumns = null;
+			DbMetaDataColumns fromMDColumns;
+			DbMetaDataColumns toMDColumns;
 			DbMetaDataColumn mdColumn;
 			DbMetaDataColumn addColumn;
 
 			// Get Table Metadata.
 			mdTable = mMetadata.MdTableManager.RetrieveWithUniqueKey(tableName);
-			if (null == null)
+			if (null == mdTable)
 			{
 				mMetadata.UpdateMetadataFromSchema(mDataConfigName, tableName);
 				mdTable = mMetadata.MdTableManager.RetrieveWithUniqueKey(tableName);
@@ -147,16 +147,16 @@ namespace ForeignKeyManagerTest
 			//mMetadata.UpdateMetadataFromSchema(dataConfigName, "ViewOrderBy");
 		}
 
-		// 
-		private void TestTableCreate()
-		{
-			DbMetaDataTables mdTables = mMetadata.MdTableManager.Load();
-			string createTableSql = mMetadata.GetCreateTableSql("TestTable");
-			TextDisplay textDisplay = new TextDisplay();
-			LJCRtControl rtControl = textDisplay.LJCRichTextBox;
-			rtControl.LJCAppendLine(createTableSql);
-			textDisplay.ShowDialog();
-		}
+		//// 
+		//private void TestTableCreate()
+		//{
+		//	DbMetaDataTables mdTables = mMetadata.MdTableManager.Load();
+		//	string createTableSql = mMetadata.GetCreateTableSql("TestTable");
+		//	TextDisplay textDisplay = new TextDisplay();
+		//	LJCRtControl rtControl = textDisplay.LJCRichTextBox;
+		//	rtControl.LJCAppendLine(createTableSql);
+		//	textDisplay.ShowDialog();
+		//}
 		#endregion
 
 		#region Setup Methods

@@ -609,7 +609,7 @@ namespace LJCDBDataAccess
     private string mConnectionString;
 
     // Gets or sets the Provider name.
-    private string ProviderName
+    internal string ProviderName
     {
       get { return mProviderName; }
       set

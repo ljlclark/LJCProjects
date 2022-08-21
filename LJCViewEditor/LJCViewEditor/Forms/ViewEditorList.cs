@@ -1785,7 +1785,7 @@ namespace LJCViewEditor
 		internal InfoWindow mInfoWindow;
 		private string mPrevConfigName;
 		private StandardSettings mSettings;
-		private string mStartupTableName;
+		private readonly string mStartupTableName;
 		#endregion
 	}
 }

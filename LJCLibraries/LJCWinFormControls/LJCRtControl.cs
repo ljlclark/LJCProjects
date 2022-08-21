@@ -116,7 +116,7 @@ namespace LJCWinFormControls
     {
       string retValue;
 
-      retValue = LJCSetLeadingSpacesToSpaces(lineText, 8, 2);
+      LJCSetLeadingSpacesToSpaces(lineText, 8, 2);
       retValue = LJCSetLeadingTabsToSpaces(lineText, 2);
       return retValue;
     }
@@ -137,7 +137,7 @@ namespace LJCWinFormControls
     /// <summary>Retrieve the current line text.</summary>
     public string LJCGetCurrentLine()
     {
-      string retValue = null;
+      string retValue;
 
       int lineIndex = LJCGetCurrentLineIndex();
       retValue = LJCGetLineText(lineIndex);
@@ -147,7 +147,7 @@ namespace LJCWinFormControls
     /// <summary>Retrieve the current line index value.</summary>
     public int LJCGetCurrentLineIndex()
     {
-      int retValue = -1;
+      int retValue;
 
       int cursorPosition = SelectionStart;
       retValue = GetLineFromCharIndex(cursorPosition);
@@ -243,7 +243,7 @@ namespace LJCWinFormControls
     /// <include path='items/LJCGetLineText/*' file='Doc/LJCRtControl.xml'/>
     public string LJCGetLineText(int lineIndex)
     {
-      string retValue = null;
+      string retValue;
 
       int saveOffset = SelectionStart;
 

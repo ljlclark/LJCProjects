@@ -147,7 +147,7 @@ namespace LJCViewEditor
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewJoin lookupRecord = null;
+			ViewJoin lookupRecord;
 			string title;
 			string message;
 			bool retValue = true;
@@ -252,8 +252,8 @@ namespace LJCViewEditor
 		// Configures the controls and loads the selection control data.
 		private void InitializeControls()
 		{
-			ForeignKeys foreignKeys = null;
-			ViewTable viewTable = null;
+			ForeignKeys foreignKeys;
+			ViewTable viewTable;
 
 			// Get singleton values.
 			ValuesViewEditor values = ValuesViewEditor.Instance;

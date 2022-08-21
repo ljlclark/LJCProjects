@@ -58,7 +58,7 @@ namespace LJCViewEditor
 					if (DialogResult.OK == dialog.ShowDialog())
 					{
 						mConfigRows = dialog.LJCConfigRows;
-						DbColumns resultColumns = dialog.LJCDataColumns;
+						//DbColumns resultColumns = dialog.LJCDataColumns;
 					}
 				}
 			}
@@ -85,7 +85,7 @@ namespace LJCViewEditor
 						DataManager dataManager = new DataManager(Parent.DbServiceRef
 						, Parent.DataConfigName, dbRequest.TableName);
 						SetKeyValues(dbRequest, dataManager.DataDefinition);
-						DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
+						//DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
 
 						Parent.DataGrid.Rows.Remove(row);
 					}
@@ -166,7 +166,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		#endregion
 	}
 }

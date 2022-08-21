@@ -14,6 +14,8 @@ namespace DataHelper
 		internal DataGridCode(MainList parent)
 		{
 			mParent = parent;
+			// Testing
+			if (null == mParent) { }
 		}
 		#endregion
 
@@ -24,31 +26,31 @@ namespace DataHelper
 		{
 		}
 
-		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddData(DbMetaDataKey record)
-		{
-			LJCGridRow retValue = null;
+		//// Adds a grid row and updates it with the record values.
+		//private LJCGridRow RowAddData(DbMetaDataKey record)
+		//{
+		//	LJCGridRow retValue = null;
 
-			return retValue;
-		}
+		//	return retValue;
+		//}
 
-		// Updates the current row with the record values.
-		private void RowUpdateData(DbMetaDataKey record)
-		{
-		}
+		//// Updates the current row with the record values.
+		//private void RowUpdateData(DbMetaDataKey record)
+		//{
+		//}
 
-		// Sets the row stored values.
-		private void SetStoredValuesData(LJCGridRow row, DbMetaDataKey record)
-		{
-		}
+		//// Sets the row stored values.
+		//private void SetStoredValuesData(LJCGridRow row, DbMetaDataKey record)
+		//{
+		//}
 
-		// Selects a row based on the key record values.
-		private bool RowSelectData(DbMetaDataKey record)
-		{
-			bool retValue = true;
+		//// Selects a row based on the key record values.
+		//private bool RowSelectData(DbMetaDataKey record)
+		//{
+		//	bool retValue = true;
 
-			return retValue;
-		}
+		//	return retValue;
+		//}
 		#endregion
 
 		#region Action Methods
@@ -81,7 +83,7 @@ namespace DataHelper
 
 		#region Class Data
 
-		private MainList mParent;
+		private readonly MainList mParent;
 		#endregion
 	}
 }

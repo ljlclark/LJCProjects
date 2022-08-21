@@ -122,7 +122,7 @@ namespace LJCViewEditor
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewConditionSet lookupRecord = null;
+			ViewConditionSet lookupRecord;
 			string title;
 			string message;
 			bool retValue = true;

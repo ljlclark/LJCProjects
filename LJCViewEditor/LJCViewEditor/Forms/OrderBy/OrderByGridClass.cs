@@ -221,7 +221,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		private void DoRefreshViewOrderBy()
+		internal void DoRefreshViewOrderBy()
 		{
 			ViewOrderBy record;
 			int id = 0;
@@ -267,7 +267,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewOrderByManager mViewOrderByManager;
 		#endregion
 	}

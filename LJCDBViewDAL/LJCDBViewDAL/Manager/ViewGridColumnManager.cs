@@ -159,7 +159,7 @@ namespace LJCDBViewDAL
 		{
 			DbFilters retValue = null;
 
-			DbFilter dbFilter = new DbFilter();
+			//DbFilter dbFilter = new DbFilter();
 			//dbFilter.ConditionSet.Conditions.Add(ViewGridColumn.ColumnDescription, "'Text'");
 			//retValue = new DbFilters {
 			//	dbFilter};

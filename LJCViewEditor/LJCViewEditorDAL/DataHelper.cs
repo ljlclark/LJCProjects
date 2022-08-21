@@ -23,7 +23,7 @@ namespace LJCViewEditorDAL
 		/// <include path='items/GetTableColumns/*' file='Doc/DataHelper.xml'/>
 		public DbColumns GetTableColumns(string tableName)
 		{
-			DbColumns retValue = null;
+			DbColumns retValue;
 
 			mDataManager.Reset(null, mDataConfigName, tableName);
 			retValue = mDataManager.DataDefinition;
@@ -73,7 +73,7 @@ namespace LJCViewEditorDAL
 			ViewJoinManager viewJoinManager;
 			DataManager dataManager;
 			ViewJoin viewJoin;
-			DbColumns retValue = null;
+			DbColumns retValue;
 
 			if (null == mViewHelper)
 			{
@@ -95,7 +95,7 @@ namespace LJCViewEditorDAL
 
 		private readonly DbServiceRef mDbServiceRef;
 		private readonly string mDataConfigName;
-		private DataManager mDataManager;
+		private readonly DataManager mDataManager;
 		private ViewHelper mViewHelper;
 		#endregion
 	}

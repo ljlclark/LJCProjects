@@ -16,7 +16,7 @@ namespace LJCViewEditor
 		/// <include path='items/RequestCode/*' file='Doc/GenRequest.xml'/>
 		public static string RequestCode(DbRequest dbRequest)
 		{
-			string retValue = null;
+			string retValue;
 
 			string indent = "  ";
 			StringBuilder builder = new StringBuilder(128);
@@ -39,7 +39,7 @@ namespace LJCViewEditor
 		/// <include path='items/ColumnsCode/*' file='Doc/GenRequest.xml'/>
 		public static string ColumnsCode(DbColumns dbColumns, string indent = null)
 		{
-			string retValue = null;
+			string retValue;
 
 			string[] columns = new string[]
 			{
@@ -131,7 +131,7 @@ namespace LJCViewEditor
 		/// <include path='items/ConditionsCode/*' file='Doc/GenRequest.xml'/>
 		public static string ConditionsCode(DbFilter dbFilter, string indent = null)
 		{
-			string retValue = null;
+			string retValue;
 
 			string[] conditions = new string[] {
 				"0 {0}Conditions = new DbConditions()\r\n",

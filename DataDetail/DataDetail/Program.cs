@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using LJCDataDetailLib;
 using LJCNetCommon;
-//using LJCTestDataLib;
+using LJCTestDataLib;
 
 namespace DataDetail
 {
@@ -19,18 +19,18 @@ namespace DataDetail
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			////string configName = "TestConfig.xml";
-			//DataDetailDialog dialog = new DataDetailDialog("LJCData")
-			//{
-			//	LJCDataColumns = TestData.GetRecord(),
-			//	LJCKeyItems = TestData.GetKeyItems("FifthValue")
-			//};
+			//string configName = "TestConfig.xml";
+			DataDetailDialog dialog = new DataDetailDialog("LJCData")
+			{
+				LJCDataColumns = TestData.GetRecord(),
+				LJCKeyItems = TestData.GetKeyItems("FifthValue")
+			};
 
-			//Application.Run(dialog);
-			//if (DialogResult.OK == dialog.DialogResult)
-			//{
-			//	ShowResult(dialog.LJCDataColumns, dialog.LJCKeyItems);
-			//}
+			Application.Run(dialog);
+			if (DialogResult.OK == dialog.DialogResult)
+			{
+				ShowResult(dialog.LJCDataColumns, dialog.LJCKeyItems);
+			}
 		}
 
 		// 

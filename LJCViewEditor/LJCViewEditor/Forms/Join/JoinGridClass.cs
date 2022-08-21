@@ -219,7 +219,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		private void DoRefreshViewJoin()
+		internal void DoRefreshViewJoin()
 		{
 			ViewJoin record;
 			int id = 0;
@@ -267,7 +267,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewJoinManager mViewJoinManager;
 		#endregion
 	}

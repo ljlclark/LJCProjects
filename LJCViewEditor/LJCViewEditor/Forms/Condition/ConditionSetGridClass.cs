@@ -269,7 +269,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewConditionSetManager mViewConditionSetManager;
 		#endregion
 	}

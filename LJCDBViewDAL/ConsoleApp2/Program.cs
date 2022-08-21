@@ -14,22 +14,24 @@ namespace ConsoleApp2
 	{
 		/// The program entry point function.
 		/// <include path = 'items/Main/*' file='../../LJCDocLib/Common/Program.xml'/>
-		private static void Main(string[] args)
+		private static void Main()
 		{
-			string dataConfigName = "FacilityManager";
-			DbServiceRef dbServiceRef = new DbServiceRef()
-			{
-				DbDataAccess = new DbDataAccess(dataConfigName)
-			};
-			ViewHelper viewHelper = new ViewHelper(dbServiceRef, dataConfigName);
-			DbRequest dbRequest = viewHelper.GetViewRequest("Person", "PersonStandard");
+      // Testing
+   //   string dataConfigName = "FacilityManager";
+			//DbServiceRef dbServiceRef = new DbServiceRef()
+			//{
+			//	DbDataAccess = new DbDataAccess(dataConfigName)
+			//};
+
+			//ViewHelper viewHelper = new ViewHelper(dbServiceRef, dataConfigName);
+			//DbRequest dbRequest = viewHelper.GetViewRequest("Person", "PersonStandard");
 			//viewHelper.SaveRequestView("PersonTest", "The Test View.", dbRequest);
 
-			ViewColumn viewColumn = viewHelper.ViewColumnManager.RetrieveWithID(1261);
+			//ViewColumn viewColumn = viewHelper.ViewColumnManager.RetrieveWithID(1261);
 			//DbColumn dbColumn = viewHelper.DbViewColumnManager.RetrieveWithID(1261);
 
 			//DbColumns dbColumns = viewHelper.DbViewColumnManager.LoadWithParentID(1039);
-			DbColumns dbColumns = viewHelper.ViewColumnManager.LoadDbColumnsWithParentID(1039);
+			//DbColumns dbColumns = viewHelper.ViewColumnManager.LoadDbColumnsWithParentID(1039);
 		}
 	}
 }

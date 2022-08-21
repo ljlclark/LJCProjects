@@ -1401,7 +1401,7 @@ namespace LJCDocGenLib
     #region Include Span Methods
 
     // Set the text as Comments text.
-    private string SetCommentSpan(string line)
+    internal string SetCommentSpan(string line)
     {
       string retValue = line;
       StringBuilder builder = new StringBuilder();
@@ -1764,10 +1764,10 @@ namespace LJCDocGenLib
     }
 
     // Gets or sets the DataMember name value.
-    private string DataMemberName { get; set; }
+    internal string DataMemberName { get; set; }
 
     // Gets or sets the DataType name value.
-    private string DataTypeName { get; set; }
+    internal string DataTypeName { get; set; }
 
     // Gets the ReturnsInProcess flag.
     private bool IsReturnsInProcess { get; set; }
@@ -1778,7 +1778,7 @@ namespace LJCDocGenLib
 
     #region Fields
 
-    private void DoSort()
+    internal void DoSort()
     {
       BooleanOperators.Sort();
       ComparisonOperators.Sort();

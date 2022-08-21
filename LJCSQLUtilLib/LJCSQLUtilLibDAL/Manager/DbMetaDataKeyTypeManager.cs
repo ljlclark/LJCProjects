@@ -65,7 +65,7 @@ namespace LJCSQLUtilLibDAL
 		{
 			var retValue = new DbColumns()
 			{
-				//ID = id
+				{ "ID", id, "Int32" }
 			};
 			return retValue;
 		}
@@ -110,7 +110,7 @@ namespace LJCSQLUtilLibDAL
 		/// <include path='items/GetTextFilters/*' file='Doc/DbMetaDataKeyTypeManager.xml'/>
 		public DbFilters GetTextFilters()
 		{
-			DbFilters retValue = null;
+			DbFilters retValue;
 
 			DbFilter dbFilter = new DbFilter();
 			dbFilter.ConditionSet.Conditions.Add(DbMetaDataKeyType.ColumnDescription, "'Text'");

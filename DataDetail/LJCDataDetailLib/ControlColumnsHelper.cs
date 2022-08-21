@@ -15,7 +15,7 @@ namespace LJCDataDetailLib
 			ControlRows cfg = ConfigRows;
 			int minWidth = 4;
 			int intWidth = 12;
-			int retValue = minWidth * cfg.CharacterPixels;
+			int retValue;
 
 			switch (dataColumn.DataTypeName.ToLower())
 			{
@@ -182,14 +182,14 @@ namespace LJCDataDetailLib
 		// Check the DataValue value.
 		private bool CheckDataColumnCount(int dataColumnsCount)
 		{
-			string message;
+			//string message;
 			bool retValue = true;
 
 			if (dataColumnsCount != ConfigRows.DataValueCount)
 			{
 				retValue = false;
-				message = $"DataValue count ({dataColumnsCount}) does not equal "
-					+ "Configuration DataValue count ({ConfigRows.DataValueCount}).";
+				//message = $"DataValue count ({dataColumnsCount}) does not equal "
+				//	+ "Configuration DataValue count ({ConfigRows.DataValueCount}).";
 			}
 			return retValue;
 		}
@@ -212,7 +212,7 @@ namespace LJCDataDetailLib
 				if (endRowDataIndex > dataColumns.Count - 1)
 				{
 					int excessRowCount = endRowDataIndex - (dataColumns.Count - 1);
-					currentRowsCount = currentRowsCount - excessRowCount;
+					currentRowsCount -= excessRowCount;
 					endRowDataIndex = dataColumns.Count - 1;
 				}
 

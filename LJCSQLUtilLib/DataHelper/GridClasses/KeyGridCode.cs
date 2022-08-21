@@ -34,7 +34,7 @@ namespace DataHelper
 		internal void DataRetrieveKey()
 		{
 			DbMetaDataKeys records;
-			DbMetaDataKeys foreignRecords = null;
+			DbMetaDataKeys foreignRecords;
 
 			mParent.Cursor = Cursors.WaitCursor;
 			mParent.KeyGrid.LJCRowsClear();
@@ -70,7 +70,7 @@ namespace DataHelper
 		// Adds a grid row and updates it with the record values.
 		private LJCGridRow RowAddKey(DbMetaDataKey record)
 		{
-			LJCGridRow retValue = null;
+			LJCGridRow retValue;
 
 			retValue = mParent.KeyGrid.LJCRowAdd();
 			SetStoredValuesKey(retValue, record);
@@ -294,8 +294,8 @@ namespace DataHelper
 		private readonly string ConfigRowFileName = @"DetailConfigs/KeyDetailConfig.xml";
 		private ControlRows mConfigRows;
 		private readonly string mDataConfigName;
-		private MainList mParent;
-		private SQLUtilLibManagers mManagers;
+		private readonly MainList mParent;
+		private readonly SQLUtilLibManagers mManagers;
 		#endregion
 	}
 }

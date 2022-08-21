@@ -56,7 +56,6 @@
       Gets a Color from an RGB string. (E)
     </summary>
     <param name="rgbText">The RGB text.</param>
-    <param name="defaultColor">The default color.</param>
     <returns>The Color value.</returns>
     <example>
       <code>        // App.Config file.
@@ -71,7 +70,7 @@
 
         var appSettings = new AppSettings("AppName.exe.config");
         Color endColor;
-        endColor = appSettings.GetColorFromRGBString("EndColor", Color.White);</code>
+        endColor = appSettings.GetColorFromRGBString("EndColor");</code>
     </example>
   </GetColorFromRGBString>
   <GetColorValue>

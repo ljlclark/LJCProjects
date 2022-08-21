@@ -33,7 +33,7 @@ namespace LJCSQLUtilLib
 					DbDataAccess = new DbDataAccess(dataConfigName)
 				};
 			}
-			mDataConfigName = dataConfigName;
+			//mDataConfigName = dataConfigName;
 			InitializeData();
 		}
 		#endregion
@@ -44,7 +44,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/GetCreateTableSql1/*' file='Doc/LJCMetadata.xml'/>
 		public string GetCreateTableSql(string tableName, bool includeForeignKeys = true)
 		{
-			string retValue = null;
+			string retValue;
 
 			DbMetaDataTable mdTable = MdTableManager.RetrieveWithUniqueKey(tableName);
 			if (null == mdTable)
@@ -66,7 +66,7 @@ namespace LJCSQLUtilLib
 			, bool includeForeignKeys = true)
 		{
 			StringBuilder builder;
-			string primaryKeyConstraintSql = null;
+			string primaryKeyConstraintSql;
 			string retValue = null;
 
 			string columnSql = GetCreateColumnSql(mdColumns);
@@ -101,7 +101,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/GetCreateColumnSql/*' file='Doc/LJCMetadata.xml'/>
 		public string GetCreateColumnSql(DbMetaDataColumns mdColumns)
 		{
-			StringBuilder builder = null;
+			StringBuilder builder;
 			string retValue = null;
 
 			if (mdColumns != null && mdColumns.Count > 0)
@@ -139,7 +139,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/GetSqlDbTypeName/*' file='Doc/LJCMetadata.xml'/>
 		public string GetSqlDbTypeName(string netTypeName)
 		{
-			string retValue = null;
+			string retValue;
 
 			switch (netTypeName)
 			{
@@ -381,7 +381,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/UpdateMetadataFromSchema/*' file='Doc/LJCMetadata.xml'/>
 		public bool UpdateMetadataFromSchema(string dataConfigName, string tableName)
 		{
-			ForeignKeys foreignKeys = null;
+			ForeignKeys foreignKeys;
 			DbMetaDataColumn mdColumn;
 			DbMetaDataKey mdKey;
 			bool retValue = true;
@@ -455,7 +455,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/SaveMdTable/*' file='Doc/LJCMetadata.xml'/>
 		public DbMetaDataTable SaveMdTable(string tableName)
 		{
-			DbMetaDataTable retValue = null;
+			DbMetaDataTable retValue;
 
 			// Get Update record.
 			retValue = MdTableManager.RetrieveWithUniqueKey(tableName);
@@ -480,7 +480,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/SaveMdColumn/*' file='Doc/LJCMetadata.xml'/>
 		public DbMetaDataColumn SaveMdColumn(int tableID, int sequence, DbColumn dbColumn)
 		{
-			DbMetaDataColumn retValue = null;
+			DbMetaDataColumn retValue;
 
 			// Get Update record.
 			retValue = MdColumnManager.RetrieveWithUniqueKey(tableID, dbColumn.ColumnName);
@@ -517,7 +517,7 @@ namespace LJCSQLUtilLib
 			DbMetaDataTable mdSourceTable;
 			DbMetaDataTable mdTargetTable;
 			DbMetaDataColumn mdSourceColumn = null;
-			DbMetaDataColumn mdTargetColumn = null;
+			DbMetaDataColumn mdTargetColumn;
 			DbMetaDataKey retValue = null;
 
 			// Get Update record.
@@ -580,7 +580,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/LoadSchemaPrimaryKeys/*' file='Doc/LJCMetadata.xml'/>
 		public ForeignKeys LoadSchemaPrimaryKeys(string tableName = null)
 		{
-			ForeignKeys retValue = null;
+			ForeignKeys retValue;
 
 			retValue = ForeignKeyManager.LoadPrimaryKeys(tableName);
 			return retValue;
@@ -590,7 +590,7 @@ namespace LJCSQLUtilLib
 		/// <include path='items/LoadSchemaForeignKeys/*' file='Doc/LJCMetadata.xml'/>
 		public ForeignKeys LoadSchemaForeignKeys(string tableName = null)
 		{
-			ForeignKeys retValue = null;
+			ForeignKeys retValue;
 
 			retValue = ForeignKeyManager.LoadForeignKeys(tableName);
 
@@ -674,7 +674,7 @@ namespace LJCSQLUtilLib
 		#region Class Data
 
 		private readonly DbServiceRef mDbServiceRef;
-		private readonly string mDataConfigName;
+		//private readonly string mDataConfigName;
 		#endregion
 	}
 }

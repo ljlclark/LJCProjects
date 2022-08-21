@@ -346,7 +346,7 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewDataManager mViewDataManager;
 		private ViewTableManager mViewTableManager;
 		#endregion

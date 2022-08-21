@@ -348,7 +348,7 @@ namespace LJCViewEditor
 
 		private string mDataConfigName;
 		private DbServiceRef mDbServiceRef;
-		private ViewEditorList Parent;
+		private readonly ViewEditorList Parent;
 		private ViewColumnManager mViewColumnManager;
 		#endregion
 	}

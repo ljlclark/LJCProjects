@@ -55,7 +55,7 @@ namespace DataHelper
 		// Adds a grid row and updates it with the record values.
 		private LJCGridRow RowAddTable(DbMetaDataTable record)
 		{
-			LJCGridRow retValue = null;
+			LJCGridRow retValue;
 
 			retValue = mParent.TableGrid.LJCRowAdd();
 			SetStoredValuesTable(retValue, record);
@@ -294,7 +294,7 @@ namespace DataHelper
 		private readonly string ConfigRowFileName = @"DetailConfigs/TableDetailConfig.xml";
 		private ControlRows mConfigRows;
 		private readonly string mDataConfigName;
-		private SQLUtilLibManagers mManagers;
+		private readonly SQLUtilLibManagers mManagers;
 		private readonly MainList mParent;
 		#endregion
 	}

@@ -52,7 +52,7 @@ namespace LJCDBViewDAL
 		public DbColumns LoadDbColumnsWithParentID(int viewDataID)
 		{
 			DbResult dbResult;
-			DbColumns retValue = new DbColumns();
+			DbColumns retValue;
 
 			// Load from DataManager to get DbColumns result.
 			var keyColumns = GetParentKey(viewDataID);

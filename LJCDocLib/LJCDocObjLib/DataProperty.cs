@@ -34,7 +34,7 @@ namespace LJCDocObjLib
       Summary = PropertyMember.Summary;
       Returns = PropertyMember.Returns;
       Remark = DataCommon.GetDataRemark(PropertyMember.Remarks);
-      IsPublic = DataCommon.IsPublic(Remark, out bool hasSyntax);
+      IsPublic = DataCommon.IsPublic(Remark, out bool _);
     }
     #endregion
 

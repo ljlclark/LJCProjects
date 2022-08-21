@@ -24,7 +24,7 @@ namespace LJCDocObjLib
 
       Summary = fieldMember.Summary;
       Remark = DataCommon.GetDataRemark(fieldMember.Remarks);
-      IsPublic = DataCommon.IsPublic(Remark, out bool hasSyntax);
+      IsPublic = DataCommon.IsPublic(Remark, out bool _);
     }
     #endregion
 
