@@ -86,6 +86,13 @@ msbuild LJCDBServiceHosts\LJCDBServiceHosts.sln
 
 set /a counter+=1
 echo - >> Build.txt
+echo ----------------- %counter% - LJCUnitMeasure -------------- >> Build.txt
+echo LJCUnitMeasure >> Build.txt
+call LJCUnitMeasure\UpdateUnitMeasure.cmd BuildAll >> Build.txt
+msbuild LJCUnitMeasure\LJCUnitMeasure.sln
+
+set /a counter+=1
+echo - >> Build.txt
 echo ----------------- %counter% - LJCGenText ------------------ >> Build.txt
 echo LJCGenText >> Build.txt
 call LJCGenText\UpdateGenText.cmd BuildAll >> Build.txt
@@ -125,4 +132,18 @@ echo ----------------- %counter% - LJCViewEditor --------------- >> Build.txt
 echo LJCViewEditor >> Build.txt
 call LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
 msbuild LJCViewEditor\LJCViewEditor.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
+echo LJCRegionManager >> Build.txt
+call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
+msbuild LJCRegionManager\LJCRegionManager.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - CVRManager ------------ >> Build.txt
+echo CVRManager >> Build.txt
+call CVRManager\UpdateCVRManager.cmd BuildAll >> Build.txt
+msbuild CVRManager\CVRManager.sln
 pause

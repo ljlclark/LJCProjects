@@ -1,0 +1,970 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CVRDAL</name>
+    </assembly>
+    <members>
+        <member name="T:CVRDAL.CVRManagers">
+            <summary>Gets the CVR Manager objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CVRManagers.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVRManagers.SetDBProperties(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+            Sets the DB properties.
+            </summary>
+            <param name="dbServiceRef">The database service reference object.</param>
+            <param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.CVVisitManager">
+            <summary>Gets the CVVisitManager object.</summary>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.CVPersonManager">
+            <summary>Gets the CVPersonManager object.</summary>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.CVSexManager">
+            <summary>Gets the CVSexManager object.</summary>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.FacilityManager">
+            <summary>Gets the FacilityManager object.</summary>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.CodeTypeManager">
+            <summary>Gets the CodeTypeManager object.</summary>
+        </member>
+        <member name="P:CVRDAL.CVRManagers.CodeTypeClassManager">
+            <summary>Gets the CodeTypeClassManager object.</summary>
+        </member>
+        <member name="T:CVRDAL.CodeType">
+            <summary>The CodeType table Data Class.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeType.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CodeType.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeType.CompareTo(CVRDAL.CodeType)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CodeType.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:CVRDAL.CodeType.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeType.Code">
+            <summary>Gets or sets the FirstName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeType.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeType.CodeTypeClassID">
+            <summary>Gets or sets the CodeTypeClassID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeType.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.ColumnCode">
+            <summary>The Code column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.ColumnCodeTypeClassID">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.LengthCode">
+            <summary>The Code maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeType.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:CVRDAL.CodeTypeCodeComparer">
+            <summary>Sort and search on Code value.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeCodeComparer.Compare(CVRDAL.CodeType,CVRDAL.CodeType)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CodeTypeClass">
+            <summary>The CodeTypeClass table Data Class.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClass.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClass.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClass.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClass.CompareTo(CVRDAL.CodeTypeClass)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:CVRDAL.CodeTypeClass.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeTypeClass.Code">
+            <summary>Gets or sets the FirstName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeTypeClass.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:CVRDAL.CodeTypeClass.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.ColumnCode">
+            <summary>The Code column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.LengthCode">
+            <summary>The Code maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CodeTypeClass.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:CVRDAL.CodeTypeClassCodeComparer">
+            <summary>Sort and search on Code value.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClassCodeComparer.Compare(CVRDAL.CodeTypeClass,CVRDAL.CodeTypeClass)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CVPerson">
+            <summary>The CVPerson table Data Object.</summary>
+        </member>
+        <member name="M:CVRDAL.CVPerson.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVPerson.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPerson.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPerson.CompareTo(CVRDAL.CVPerson)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:CVRDAL.CVPerson.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.FirstName">
+            <summary>Gets or sets the FirstName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.MiddleName">
+            <summary>Gets or sets the MiddleName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.LastName">
+            <summary>Gets or sets the LastName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.CVSexID">
+            <summary>Gets or sets the CVSexID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.DeliveryAddressLine">
+            <summary>Gets or sets the DeliveryAddressLine value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.LastLine">
+            <summary>Gets or sets the LastLine value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.Phone">
+            <summary>Gets or sets the Phone value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.RegionID">
+            <summary>Gets or sets the RegionID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.ProvinceID">
+            <summary>Gets or sets the ProvinceID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.CityID">
+            <summary>Gets or sets the CityID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.CitySectionID">
+            <summary>Gets or sets the CitySectionID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.FullName">
+            <summary>Gets the calculated FullName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVPerson.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnFirstName">
+            <summary>The FirstName column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnMiddleName">
+            <summary>The MiddleName column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnLastName">
+            <summary>The LastName column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnCVSexID">
+            <summary>The CVSexID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnDeliveryAddressLine">
+            <summary>The DeliveryAddressLine column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnLastLine">
+            <summary>The LastLine column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnPhone">
+            <summary>The Phone column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnRegionID">
+            <summary>The RegionID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnProvinceID">
+            <summary>The ProvinceID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnCityID">
+            <summary>The CityID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnCitySectionID">
+            <summary>The CitySectionID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthFirstName">
+            <summary>The FirstName maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthMiddleName">
+            <summary>The MiddleName maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthLastName">
+            <summary>The LastName maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthDeliveryAddressLine">
+            <summary>The DeliveryAddressLine maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthLastLine">
+            <summary>The LastLine maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthPhone">
+            <summary>The LastLine maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.ColumnFullName">
+            <summary>The Full Name column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVPerson.LengthFullName">
+            <summary>The LastLine maximum length.</summary>
+        </member>
+        <member name="T:CVRDAL.CVPersonNameComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:CVRDAL.CVPersonNameComparer.Compare(CVRDAL.CVPerson,CVRDAL.CVPerson)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CVPersons">
+            <summary>Represents a collection of CVPerson objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CVPersons.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVPersons.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.CVPersons.LJCSortName(CVRDAL.CVPersonNameComparer)">
+            <summary>Sort on Name.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.CVPersons.LJCSearchID(System.Int64)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPersons.LJCSearchName(System.String,System.String,System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="firstName">The first name.</param><param name="middleName">The middle name.</param><param name="lastName">The last name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.CVSex">
+            <summary>The CVDex table Data Object.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSex.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVSex.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSex.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSex.CompareTo(CVRDAL.CVSex)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:CVRDAL.CVSex.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVSex.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVSex.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVSex.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.ColumnCode">
+            <summary>The Code column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.LengthCode">
+            <summary>the Code maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVSex.LengthName">
+            <summary>the Name maximum length.</summary>
+        </member>
+        <member name="T:CVRDAL.CVSexCodeComparer">
+            <summary>Sort and search on Code value.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSexCodeComparer.Compare(CVRDAL.CVSex,CVRDAL.CVSex)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CVSexNameComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSexNameComparer.Compare(CVRDAL.CVSex,CVRDAL.CVSex)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CVSexes">
+            <summary>Represents a collection of CVSex objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSexes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSortCode(CVRDAL.CVSexCodeComparer)">
+            <summary>Sort on Code.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSortName(CVRDAL.CVSexNameComparer)">
+            <summary>Sort on Name.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSearchID(System.Int64)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexes.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.CVVisit">
+            <summary>The CVVisit table Data Object.</summary>
+        </member>
+        <member name="M:CVRDAL.CVVisit.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVVisit.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisit.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisit.CompareTo(CVRDAL.CVVisit)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:CVRDAL.CVVisit.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.FacilityID">
+            <summary>Gets or sets the CVPersonID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.CVPersonID">
+            <summary>Gets or sets the CVPersonID value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.RegisterTime">
+            <summary>Gets or sets the RegisterTime value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.EnterTime">
+            <summary>Gets or sets the EnterTime value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.ExitTime">
+            <summary>Gets or sets the ExitTime value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.BaseTemperature">
+            <summary>Gets or sets the Temperature value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.BaseTemperatureUnitID">
+            <summary>Gets or sets the ExitTime value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.Temperature">
+            <summary>Gets or sets the Temperature value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.TemperatureUnitID">
+            <summary>Gets or sets the ExitTime value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.FirstName">
+            <summary>Gets or sets the Join FirstName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.MiddleName">
+            <summary>Gets or sets the Join MiddleName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.LastName">
+            <summary>Gets or sets the Join LastName value.</summary>
+        </member>
+        <member name="P:CVRDAL.CVVisit.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.TableName">
+            <summary>The table value.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnFacilityID">
+            <summary>The FacilityID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnCVPersonID">
+            <summary>The CVPersonID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnRegisterTime">
+            <summary>The RegisterTime column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnEnterTime">
+            <summary>The EnterTime column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnExitTime">
+            <summary>The ExitTime column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnBaseTemperature">
+            <summary>The Base Temperature column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnBaseTemperatureUnitID">
+            <summary>The Base Temerature UnitID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnTemperature">
+            <summary>The Temperature column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.ColumnTemperatureUnitID">
+            <summary>The Temerature UnitID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.LengthTemperature">
+            <summary>The Temerature maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.JoinFirstName">
+            <summary>The Join FirstName column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.JoinMiddleName">
+            <summary>The Join MiddleName column name.</summary>
+        </member>
+        <member name="F:CVRDAL.CVVisit.JoinLastName">
+            <summary>The Join LastName column name.</summary>
+        </member>
+        <member name="T:CVRDAL.CVVisits">
+            <summary>Represents a collection of CVVisit objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CVVisits.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CVVisits.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.CVVisits.LJCSearchID(System.Int64)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.CodeTypeClasses">
+            <summary>Represents a collection of CodeTypeClass objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClasses.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClasses.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClasses.LJCSortCode(CVRDAL.CodeTypeClassCodeComparer)">
+            <summary>Sort on Code.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClasses.LJCSearchID(System.Int32)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClasses.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.CodeTypes">
+            <summary>Represents a collection of CodeTypeClass objects.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.CodeTypes.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypes.LJCSortCode(CVRDAL.CodeTypeCodeComparer)">
+            <summary>Sort on Code.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypes.LJCSearchID(System.Int32)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypes.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.Facilities">
+            <summary>Represents a collection of Facility objects.</summary>
+        </member>
+        <member name="M:CVRDAL.Facilities.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.Facilities.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:CVRDAL.Facilities.LJCSortCode(CVRDAL.FacilityCodeComparer)">
+            <summary>Sort on Code.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:CVRDAL.Facilities.LJCSearchID(System.Int32)">
+            <summary>
+      Retrieve the collection element with ID.
+    </summary><param name="id">The item ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:CVRDAL.Facilities.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:CVRDAL.Facility">
+            <summary>The Facility table Data Class.</summary>
+        </member>
+        <member name="M:CVRDAL.Facility.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.Facility.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:CVRDAL.Facility.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRDAL.Facility.CompareTo(CVRDAL.Facility)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:CVRDAL.Facility.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:CVRDAL.Facility.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:CVRDAL.Facility.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:CVRDAL.Facility.CodeTypeID">
+            <summary>Gets or sets the CodeTypeID value.</summary>
+        </member>
+        <member name="P:CVRDAL.Facility.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.ColumnCode">
+            <summary>The Code column name.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.ColumnCodeTypeID">
+            <summary>The CodeTypeID column name.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.LengthCode">
+            <summary>The Code maximum length.</summary>
+        </member>
+        <member name="F:CVRDAL.Facility.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:CVRDAL.FacilityCodeComparer">
+            <summary>Sort and search on Code value.</summary>
+        </member>
+        <member name="M:CVRDAL.FacilityCodeComparer.Compare(CVRDAL.Facility,CVRDAL.Facility)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:CVRDAL.CodeTypeClassManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClassManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClassManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClassManager.DeleteWithID(System.Int32)">
+            <summary>
+            Deletes a Data Record with the supplied values.
+            </summary>
+            <param name="id">The ID value.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypeClassManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="T:CVRDAL.CodeTypeManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.CodeTypeManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypeManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CodeTypeManager.DeleteWithID(System.Int32)">
+            <summary>
+            Deletes a Data Record with the supplied values.
+            </summary>
+            <param name="id">The ID value.</param>
+        </member>
+        <member name="M:CVRDAL.CodeTypeManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="T:CVRDAL.FacilityManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.FacilityManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.FacilityManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.FacilityManager.DeleteWithID(System.Int32)">
+            <summary>
+            Deletes a Data Record with the supplied values.
+            </summary>
+            <param name="id">The ID value.</param>
+        </member>
+        <member name="M:CVRDAL.FacilityManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="T:CVRDAL.CVPersonManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.DeleteWithID(System.Int64)">
+            <summary>
+      Deletes a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.RetrieveWithID(System.Int64,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.GetIDKey(System.Int64)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVPersonManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="T:CVRDAL.CVSexManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVSexManager.GetKeyItems(System.String,LJCNetCommon.DbColumns)">
+            <summary>
+      Creates the KeyItems collection.
+    </summary><param name="propertyName">The record Property name.</param><param name="keyColumns">The Key object.</param><returns>The KeyItems collection.</returns>
+        </member>
+        <member name="T:CVRDAL.CVVisitManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.DeleteWithID(System.Int64)">
+            <summary>
+      Deletes a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.LoadWithJoins(System.Int32,LJCDBMessage.DbFilters)">
+            <summary>
+            Loads a collection of DataObjects with Join data. 
+            </summary>
+            <returns>The DataObject collection.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.RetrieveWithID(System.Int64,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.GetFacilityIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.GetIDKey(System.Int64)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:CVRDAL.CVVisitManager.GetJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="T:CVRDAL.ValuesCVRDAL">
+            <summary>The CVRDAL values.</summary>
+        </member>
+        <member name="M:CVRDAL.ValuesCVRDAL.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRDAL.ValuesCVRDAL.SetProperties(System.String)">
+            <summary>Sets the property values.</summary>
+            <param name="programConfigFileSpec">The Program Config FileSpec.</param>
+        </member>
+        <member name="P:CVRDAL.ValuesCVRDAL.Instance">
+            <summary>The singleton instance.</summary>
+        </member>
+        <member name="P:CVRDAL.ValuesCVRDAL.Managers">
+            <summary>Gets the CVRManagers object.</summary>
+        </member>
+    </members>
+</doc>

@@ -84,8 +84,9 @@ copy %root%%src%\LJCDBClientLib.dll %to%
 set src=LJCDBMessage\CipherLib\%bin%
 copy %root%%src%\CipherLib.dll %to%
 
-set src=LJCDBServiceLib\LJCDBDataAccessLib\%bin%
-copy %root%%src%\LJCDBDataAccessLib.dll %to%
+set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
+copy %root%%src%\LJCDBDataAccess.dll %to%
+
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %root%%src%\LJCDBServiceLib.dll %to%
 

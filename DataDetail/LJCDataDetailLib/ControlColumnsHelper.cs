@@ -1,297 +1,352 @@
-﻿using System;
+﻿using DataDetailDAL;
 using LJCNetCommon;
+using System.Collections.Generic;
 
 namespace LJCDataDetailLib
 {
-	/// <summary>ControlColumns helper class.</summary>
-	public class ControlColumnsHelper
-	{
-		#region Create ControlColumn configuration.
+  /// <summary>Contains methods for creating ControlColumns.</summary>
+  public class ControlColumnsHelper
+  {
+    #region Constructors
 
-		// Adjust the control for usability.
-		/// <include path='items/AdjustedWidth/*' file='Doc/ControlColumnsHelper.xml'/>
-		public int AdjustedWidth(DbColumn dataColumn)
-		{
-			ControlRows cfg = ConfigRows;
-			int minWidth = 4;
-			int intWidth = 12;
-			int retValue;
+    /// <summary>
+    /// Initializes an object instance.
+    /// </summary>
+    /// <param name="managers">The Managers object.</param>
+    public ControlColumnsHelper(DataDetailManagers managers)
+    {
+      mManagers = managers;
+    }
+    #endregion
 
-			switch (dataColumn.DataTypeName.ToLower())
-			{
-				case "string":
-					retValue = dataColumn.MaxLength * cfg.CharacterPixels;
-					if (dataColumn.MaxLength > cfg.MaxControlCharacters)
-					{
-						retValue = cfg.MaxControlCharacters * cfg.CharacterPixels;
-					}
-					break;
+    #region Create ControlColumn configuration.
 
-				case "boolean":
-					retValue = dataColumn.Caption.Length * cfg.CharacterPixels;
-					if (dataColumn.Caption.Length > cfg.MaxControlCharacters)
-					{
-						retValue = cfg.MaxControlCharacters * cfg.CharacterPixels;
-					}
-					break;
+    // Adjust the control for usability.
+    /// <include path='items/AdjustedWidth/*' file='Doc/ControlColumnsHelper.xml'/>
+    public int AdjustedWidth(DbColumn dataColumn)
+    {
+      int minWidth = 4;
+      int intWidth = 12;
+      int retValue;
 
-				case "int16":
-				case "int32":
-				case "int64":
-					retValue = intWidth * cfg.CharacterPixels;
-					break;
+      switch (dataColumn.DataTypeName.ToLower())
+      {
+        case "string":
+          retValue = dataColumn.MaxLength * DetailConfig.CharacterPixels;
+          if (dataColumn.MaxLength > DetailConfig.MaxControlCharacters)
+          {
+            retValue = DetailConfig.MaxControlCharacters
+              * DetailConfig.CharacterPixels;
+          }
+          break;
 
-				default:
-					retValue = minWidth * cfg.CharacterPixels;
-					break;
-			}
-			return retValue;
-		}
+        case "boolean":
+          retValue = dataColumn.Caption.Length * DetailConfig.CharacterPixels;
+          if (dataColumn.Caption.Length > DetailConfig.MaxControlCharacters)
+          {
+            retValue = DetailConfig.MaxControlCharacters
+              * DetailConfig.CharacterPixels;
+          }
+          break;
 
-		// Sets the ControlColumn values using a configuration XML file.
-		/// <include path='items/CreateConfigControlColumns/*' file='Doc/ControlColumnsHelper.xml'/>
-		public ControlColumns CreateConfigControlColumns(DbColumns dataColumns)
-		{
-			ControlColumns retValue = null;
+        case "int16":
+        case "int32":
+        case "int64":
+          retValue = intWidth * DetailConfig.CharacterPixels;
+          break;
 
-			if (dataColumns != null && dataColumns.Count > 0
-				&& CheckDataColumnCount(dataColumns.Count))
-			{
-				retValue = GetControlColumns(ConfigRows.ControlColumnsCount
-					, dataColumns);
-			}
-			return retValue;
-		}
+        default:
+          retValue = minWidth * DetailConfig.CharacterPixels;
+          break;
+      }
+      return retValue;
+    }
 
-		// Configure the New controls.
-		/// <include path='items/CreateNewControlColumns/*' file='Doc/ControlColumnsHelper.xml'/>
-		public ControlColumns CreateNewControlColumns(DbColumns dataColumns)
-		{
-			ControlColumns retValue = null;
+    // Gets the Controls display height.
+    /// <include path='items/Height/*' file='Doc/ControlColumnsHelper.xml'/>
+    public int ControlsHeight(int dataColumnsCount)
+    {
+      int rowCount;
+      int retValue;
 
-			//ConfigRows = configRows;
-			var cfg = ConfigRows;
-			cfg.ControlColumnsCount = 0;
-			if (dataColumns != null && dataColumns.Count > 0)
-			{
-				cfg.ControlColumnsCount = CalculateColumnsCount(dataColumns.Count);
-				retValue = GetControlColumns(cfg.ControlColumnsCount, dataColumns);
-			}
+      // Top and bottom spacing.
+      retValue = DetailConfig.BorderVertical * 2;
 
-			// Calculate config values.
-			cfg.DataValueCount = dataColumns.Count;
-			cfg.ControlsWidth = Width(retValue);
-			if (dataColumns != null)
-			{
-				cfg.ControlsHeight = Height(dataColumns.Count);
-			}
-			return retValue;
-		}
+      // Get the actual row count.
+      rowCount = DetailConfig.ColumnRowsLimit;
+      if (dataColumnsCount < rowCount)
+      {
+        rowCount = dataColumnsCount;
+      }
 
-		// Gets the Controls display height.
-		/// <include path='items/Height/*' file='Doc/ControlColumnsHelper.xml'/>
-		public int Height(int dataColumnsCount)
-		{
-			int rowCount;
-			int retValue;
+      // Space between each ControlRow.
+      retValue += DetailConfig.ControlRowSpacing * (rowCount - 1);
 
-			ControlRows cfg = ConfigRows;
+      // Height of each ControlRow.
+      retValue += DetailConfig.ControlRowHeight * rowCount;
+      return retValue;
+    }
 
-			// Top and bottom spacing.
-			retValue = cfg.BorderVertical * 2;
+    // Gets the Controls display width.
+    /// <include path='items/Width/*' file='Doc/ControlColumnsHelper.xml'/>
+    public int ControlsWidth(ControlColumns controlColumns)
+    {
+      int currentWidth = 0;
+      int retValue = 0;
 
-			// Get the actual row count.
-			rowCount = cfg.ColumnRowsLimit;
-			if (dataColumnsCount < rowCount)
-			{
-				rowCount = dataColumnsCount;
-			}
+      int count = controlColumns.Count;
+      foreach (ControlColumn controlColumn in controlColumns)
+      {
+        // First column of controls for this page.
+        if (0 == controlColumn.ColumnIndex % DetailConfig.PageColumnsLimit)
+        {
+          // Start with border before each ControlColumn and border after last.
+          currentWidth = DetailConfig.BorderHorizontal * (count + 1);
+          if (count > DetailConfig.PageColumnsLimit)
+          {
+            currentWidth = DetailConfig.BorderHorizontal
+              * (DetailConfig.PageColumnsLimit + 1);
+          }
+        }
 
-			// Space between each ControlRow.
-			retValue += cfg.ControlRowSpacing * (rowCount - 1);
+        currentWidth += controlColumn.Width;
+        if (currentWidth > retValue)
+        {
+          // Save widest page.
+          retValue = currentWidth;
+        }
+      }
+      return retValue;
+    }
 
-			// Height of each ControlRow.
-			retValue += cfg.ControlRowHeight * rowCount;
-			return retValue;
-		}
+    // Sets the ControlColumn values using a configuration XML file.
+    /// <include path='items/CreateConfigControlColumns/*' file='Doc/ControlColumnsHelper.xml'/>
+    public ControlColumns CreateConfigControlColumns(DbColumns dataColumns)
+    {
+      DataDetailDAL.ControlColumns retValue = null;
 
-		// Gets the Controls display width.
-		/// <include path='items/Width/*' file='Doc/ControlColumnsHelper.xml'/>
-		public int Width(ControlColumns controlColumns)
-		{
-			int currentWidth = 0;
-			int retValue = 0;
+      if (dataColumns != null && dataColumns.Count > 0
+        && CheckDataColumnCount(dataColumns.Count))
+      {
+        //retValue = GetControlColumns(ControlRows.ControlColumnsCount
+        //  , dataColumns);
+        retValue = GetControlColumns(retValue.Count, dataColumns);
+      }
+      return retValue;
+    }
 
-			int count = controlColumns.Count;
-			foreach (ControlColumn controlColumn in controlColumns)
-			{
-				// First column of controls for this page.
-				var cfg = ConfigRows;
-				if (0 == controlColumn.Index % cfg.PageColumnsLimit)
-				{
-					// Start with border before each ControlColumn and border after last.
-					currentWidth = cfg.BorderHorizontal * (count + 1);
-					if (count > cfg.PageColumnsLimit)
-					{
-						currentWidth = cfg.BorderHorizontal * (cfg.PageColumnsLimit + 1);
-					}
-				}
+    // Configure the New controls.
+    /// <include path='items/CreateNewControlColumns/*' file='Doc/ControlColumnsHelper.xml'/>
+    public ControlColumns CreateNewControlColumns(DbColumns dataColumns)
+    {
+      ControlColumns retValue = null;
 
-				currentWidth += controlColumn.Width;
-				if (currentWidth > retValue)
-				{
-					// Save widest page.
-					retValue = currentWidth;
-				}
-			}
-			return retValue;
-		}
+      //ConfigRows = configRows;
+      ControlColumns = new ControlColumns();
+      if (dataColumns != null && dataColumns.Count > 0)
+      {
+        int controlColumnsCount = CalculateColumnsCount(dataColumns.Count);
+        retValue = GetControlColumns(controlColumnsCount, dataColumns);
+      }
 
-		// Gets the ControlColumn column count. 
-		/// <include path='items/CalculateColumnsCount/*' file='Doc/ControlColumnsHelper.xml'/>
-		private int CalculateColumnsCount(int dataColumnsCount)
-		{
-			int retValue = 1;
+      // Calculate config values.
+      DetailConfig.DataValueCount = dataColumns.Count;
+      DetailConfig.ControlsWidth = ControlsWidth(retValue);
+      if (dataColumns != null)
+      {
+        DetailConfig.ControlsHeight = ControlsHeight(dataColumns.Count);
+      }
+      return retValue;
+    }
+    #endregion
 
-			ControlRows cfg = ConfigRows;
+    #region Private Methods
 
-			// There are more data values than can fit in one ControlColumn.
-			if (dataColumnsCount > cfg.ColumnRowsLimit)
-			{
-				// Divide the data values into columns.
-				retValue = dataColumnsCount / cfg.ColumnRowsLimit;
-				if (dataColumnsCount % cfg.ColumnRowsLimit != 0)
-				{
-					// An extra row is left so add another column.
-					retValue++;
-				}
+    // Gets the ControlColumn column count. 
+    /// <include path='items/CalculateColumnsCount/*' file='Doc/ControlColumnsHelper.xml'/>
+    private int CalculateColumnsCount(int dataColumnsCount)
+    {
+      int retValue = 1;
 
-				// Evenly distribute rows.
-				cfg.ColumnRowsLimit = (dataColumnsCount / retValue);
-				if (dataColumnsCount % retValue != 0)
-				{
-					cfg.ColumnRowsLimit++;
-				}
-			}
-			return retValue;
-		}
-		#endregion
+      // There are more data values than can fit in one ControlColumn.
+      if (dataColumnsCount > DetailConfig.ColumnRowsLimit)
+      {
+        // Divide the data values into columns.
+        retValue = dataColumnsCount / DetailConfig.ColumnRowsLimit;
+        if (dataColumnsCount % DetailConfig.ColumnRowsLimit != 0)
+        {
+          // An extra row is left so add another column.
+          retValue++;
+        }
 
-		#region Private Methods
+        // Evenly distribute rows.
+        DetailConfig.ColumnRowsLimit = (dataColumnsCount / retValue);
+        if (dataColumnsCount % retValue != 0)
+        {
+          DetailConfig.ColumnRowsLimit++;
+        }
+      }
+      return retValue;
+    }
 
-		// Check the DataValue value.
-		private bool CheckDataColumnCount(int dataColumnsCount)
-		{
-			//string message;
-			bool retValue = true;
+    // Check the DataValue value.
+    private bool CheckDataColumnCount(int dataColumnsCount)
+    {
+      //string message;
+      bool retValue = true;
 
-			if (dataColumnsCount != ConfigRows.DataValueCount)
-			{
-				retValue = false;
-				//message = $"DataValue count ({dataColumnsCount}) does not equal "
-				//	+ "Configuration DataValue count ({ConfigRows.DataValueCount}).";
-			}
-			return retValue;
-		}
+      if (dataColumnsCount != DetailConfig.DataValueCount)
+      {
+        retValue = false;
+        //message = $"DataValue count ({dataColumnsCount}) does not equal "
+        //	+ "Configuration DataValue count ({ConfigRows.DataValueCount}).";
+      }
+      return retValue;
+    }
 
-		// Gets the ControlColumns object.
-		private ControlColumns GetControlColumns(int controlColumnsCount, DbColumns dataColumns)
-		{
-			var retValue = new ControlColumns();
+    // Gets the ControlColumns object.
+    private ControlColumns GetControlColumns(int controlColumnsCount, DbColumns dataColumns)
+    {
+      var retValue = new ControlColumns();
 
-			for (int index = 0; index < controlColumnsCount; index++)
-			{
-				// Calculate ControlColumn values.
-				var cfg = ConfigRows;
-				int currentRowsCount = cfg.ColumnRowsLimit;
-				int startRowDataIndex = cfg.ColumnRowsLimit * index;
-				int endRowDataIndex = startRowDataIndex + (currentRowsCount - 1);
+      int tabPageIndex = 0;
+      for (int columnIndex = 0; columnIndex < controlColumnsCount; columnIndex++)
+      {
+        // Calculate ControlColumn values.
+        int currentRowsCount = DetailConfig.ColumnRowsLimit;
+        int startRowDataIndex = DetailConfig.ColumnRowsLimit * columnIndex;
+        int endRowDataIndex = startRowDataIndex + (currentRowsCount - 1);
+        tabPageIndex = GetTabPageIndex(columnIndex, tabPageIndex, startRowDataIndex);
+        currentRowsCount = endRowDataIndex - startRowDataIndex + 1;
 
-				// More rows available for this ControlColumn than remaining data elements.
-				// Set the end row to the number of data elements remaining.
-				if (endRowDataIndex > dataColumns.Count - 1)
-				{
-					int excessRowCount = endRowDataIndex - (dataColumns.Count - 1);
-					currentRowsCount -= excessRowCount;
-					endRowDataIndex = dataColumns.Count - 1;
-				}
+        // More rows available for this ControlColumn than remaining data
+        // elements. Set the end row to the number of data elements remaining.
+        if (endRowDataIndex > dataColumns.Count - 1)
+        {
+          int excessRowCount = endRowDataIndex - (dataColumns.Count - 1);
+          currentRowsCount -= excessRowCount;
+          endRowDataIndex = dataColumns.Count - 1;
+        }
 
-				// get the ControlColumn widths.
-				GetWidths(dataColumns, startRowDataIndex, endRowDataIndex, out int labelsWidth
-					, out int controlsWidth);
+        // get the ControlColumn widths.
+        GetWidths(dataColumns, startRowDataIndex, endRowDataIndex
+          , out int labelsWidth, out int controlsWidth);
 
-				// Create and add the ControlColumn.
-				ControlColumn controlColumn = new ControlColumn()
-				{
-					ControlsWidth = controlsWidth,
-					Index = index,
-					LabelsWidth = labelsWidth,
-					RowCount = currentRowsCount
-				};
-				retValue.Add(controlColumn);
-			}
-			return retValue;
-		}
+        // Create and add the ControlColumn.
+        ControlColumn controlColumn = new ControlColumn()
+        {
+          DetailConfigID = DetailConfig.ID,
+          TabPageIndex = tabPageIndex,
+          ColumnIndex = columnIndex,
+          LabelsWidth = labelsWidth,
+          ControlsWidth = controlsWidth,
+          //TabIndex = 0,
+          RowCount = currentRowsCount
+        };
+        var propertyNames = new List<string>()
+        {
+          ControlColumn.ColumnDetailConfigID,
+          ControlColumn.ColumnTabPageIndex,
+          ControlColumn.ColumnColumnIndex,
+          ControlColumn.ColumnLabelsWidth,
+          ControlColumn.ColumnControlsWidth,
+        };
 
-		// Get labels and controls width for the specified start and stop
-		// DataColumn indexes.
-		private void GetWidths(DbColumns dataColumns, int startIndex, int stopIndex, out int labelsWidth
-			, out int controlsWidth)
-		{
-			DbColumn dbColumn;
-			int width;
+        var columnManager = mManagers.ControlColumnManager;
+        var addedItem = columnManager.Add(controlColumn, propertyNames);
+        if (addedItem != null)
+        {
+          controlColumn.ID = addedItem.ID;
+        }
 
-			labelsWidth = 100;
-			controlsWidth = 120;
+        // Add collection item.
+        retValue.Add(controlColumn);
+      }
+      return retValue;
+    }
 
-			if (dataColumns != null && dataColumns.Count > 0)
-			{
-				for (int index = startIndex; index <= stopIndex; index++)
-				{
-					if (index > dataColumns.Count - 1)
-					{
-						break;
-					}
-					else
-					{
-						dbColumn = dataColumns[index];
+    // Gets the current TabPage index.
+    private int GetTabPageIndex(int columnIndex, int tabPageIndex
+      , int tabbingIndex)
+    {
+      int retValue = tabPageIndex;
 
-						//// Do not include if not AllowDisplay.
-						//if (DetailConfigColumns != null && DetailConfigColumns.Count > 0)
-						//{
-						//	ConfigRow configColumn;
-						//	configColumn = DetailConfigColumns.SearchName(dbColumn.ColumnName);
-						//	if (configColumn != null && false == configColumn.AllowDisplay)
-						//	{
-						//		continue;
-						//	}
-						//}
+      // If column is on next tab page.
+      if (0 == columnIndex % DetailConfig.PageColumnsLimit)
+      {
+        // If not the first tab page.
+        if (tabbingIndex > 0)
+        {
+          // Go to the next tab page.
+          retValue++;
+        }
+      }
+      return retValue;
+    }
 
-						if (dbColumn.Caption != null)
-						{
-							width = dbColumn.Caption.Length * ConfigRows.CharacterPixels;
-							if (width > labelsWidth)
-							{
-								labelsWidth = width;
-							}
+    // Get labels and controls width for the specified start and stop
+    // DataColumn indexes.
+    private void GetWidths(DbColumns dataColumns, int startIndex, int stopIndex
+      , out int labelsWidth, out int controlsWidth)
+    {
+      DbColumn dbColumn;
+      int width;
 
-							width = AdjustedWidth(dbColumn);
-							if (width > controlsWidth)
-							{
-								controlsWidth = width;
-							}
-						}
-					}
-				}
-			}
-		}
-		#endregion
+      labelsWidth = 100;
+      controlsWidth = 120;
 
-		#region Properties
+      if (dataColumns != null && dataColumns.Count > 0)
+      {
+        for (int index = startIndex; index <= stopIndex; index++)
+        {
+          if (index > dataColumns.Count - 1)
+          {
+            break;
+          }
+          else
+          {
+            dbColumn = dataColumns[index];
 
-		// The Configuration Rows.
-		/// <summary>Gets or sets the ConfigRows value.</summary>
-		public ControlRows ConfigRows { get; set; }
-		#endregion
-	}
+            //// Do not include if not AllowDisplay.
+            //if (DetailConfigColumns != null && DetailConfigColumns.Count > 0)
+            //{
+            //	ConfigRow configColumn;
+            //	configColumn = DetailConfigColumns.SearchName(dbColumn.ColumnName);
+            //	if (configColumn != null && false == configColumn.AllowDisplay)
+            //	{
+            //		continue;
+            //	}
+            //}
+
+            if (dbColumn.Caption != null)
+            {
+              width = dbColumn.Caption.Length * DetailConfig.CharacterPixels;
+              if (width > labelsWidth)
+              {
+                labelsWidth = width;
+              }
+
+              width = AdjustedWidth(dbColumn);
+              if (width > controlsWidth)
+              {
+                controlsWidth = width;
+              }
+            }
+          }
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Gets or sets the DetailConfig object.</summary>
+    public DataDetailDAL.DetailConfig DetailConfig { get; set; }
+
+    /// <summary>Gets or sets the ControlColumns collection.</summary>
+    public DataDetailDAL.ControlColumns ControlColumns { get; set; }
+    #endregion
+
+    readonly DataDetailManagers mManagers;
+  }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <FilePaths xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DataXMLPath>DataXML\PersonDAL.xml</DataXMLPath>
+  <DataXMLPath>DataXML\GenSections.xml</DataXMLPath>
   <OutputPath>TempFiles\TestData.cs</OutputPath>
   <TemplatePath>..\..\..\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs</TemplatePath>
 </FilePaths>

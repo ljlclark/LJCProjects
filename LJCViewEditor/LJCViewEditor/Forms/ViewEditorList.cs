@@ -567,15 +567,19 @@ namespace LJCViewEditor
 			enableEdit = ConditionGrid.CurrentRow != null;
 			FormCommon.SetMenuState(ConditionMenu, enableNew, enableEdit);
 			ConditionMenuHelp.Enabled = true;
-		}
-		#endregion
 
-		#region Action Event Handlers
+			enableNew = DataGrid.CurrentRow != null;
+      enableEdit = DataGrid.CurrentRow != null;
+      FormCommon.SetMenuState(DataMenu, enableNew, enableEdit);
+    }
+    #endregion
 
-		#region Form Controls
+    #region Action Event Handlers
 
-		// Shows the Help page.
-		private void DataConfigHelp_Click(object sender, EventArgs e)
+    #region Form Controls
+
+    // Shows the Help page.
+    private void DataConfigHelp_Click(object sender, EventArgs e)
 		{
 			Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
 				, @"DataConfig.html");

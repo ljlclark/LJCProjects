@@ -1,10 +1,9 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 // CollectionTemplate.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using LJCNetCommon;
 
 // #SectionBegin Class
 // #Value _ClassName_
@@ -39,7 +38,7 @@ namespace _Namespace_
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public static _CollectionName_ LJCDeserialize(string fileSpec = null)
     {
-      _CollectionName_ retValue = null;
+      _CollectionName_ retValue;
 
       if (false == NetString.HasValue(fileSpec))
       {
@@ -80,7 +79,7 @@ namespace _Namespace_
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public _ClassName_ Add(int id, string name)
     {
-      _ClassName_ retValue = null;
+      _ClassName_ retValue;
 
       string message = "";
       if (id <= 0)
@@ -112,11 +111,7 @@ namespace _Namespace_
     }
 
     // Get custom collection from List<T>.
-    /// <summary>
-    /// Get custom collection from List&lt;T&gt;.
-    /// </summary>
-    /// <param name="list">The list object reference.</param>
-    /// <returns>The collection object reference.</returns>
+    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public _CollectionName_ GetCollection(List<_ClassName_> list)
     {
       _CollectionName_ retValue = null;

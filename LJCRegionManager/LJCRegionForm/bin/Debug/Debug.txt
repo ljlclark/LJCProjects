@@ -1,0 +1,23 @@
+ProvinceSplit-Restore 115
+CitySplit-Restore 119
+
+RegionSelecedIndexChanged
+ProvinceSplit-Current 115
+CitySplit-Current 119
+
+Startup
+ProvinceSplit-Current 115
+CitySplit-Current 119
+
+RegionBegin
+ProvinceSplit-Current 115
+CitySplit-Current 119
+
+DataRetrieveProvince
+ProvinceSplit-Current 115
+CitySplit-Current 119
+
+RegionEnd
+ProvinceSplit-Current 115
+CitySplit-Current 119
+

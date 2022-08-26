@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Lester J. Clark 2021 - All Rights Reserved
-using System;
-using System.Windows.Forms;
-using LJCWinFormCommon;
-using LJCWinFormControls;
-using LJCNetCommon;
-using LJCDBMessage;
-using LJCDBClientLib;
-using LJCGridDataLib;
 using DataDetail;
 using LJCDataDetailLib;
+using LJCDBClientLib;
+using LJCDBMessage;
+using LJCGridDataLib;
+using LJCNetCommon;
+using LJCWinFormCommon;
+using LJCWinFormControls;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -21,6 +20,9 @@ namespace LJCViewEditor
 		internal DataGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
+
+			mUserID = "Les";
+			mTableName = "DataGrid";
 		}
 		#endregion
 
@@ -50,20 +52,21 @@ namespace LJCViewEditor
 					resultGridData.SetDisplayColumns(dbRequest);
 					dataColumns = CreateDbColumnsFromDbValues(resultGridData.DisplayColumns
 						, dbResult.Rows[0].Values);
-					DataDetailDialog dialog = new DataDetailDialog(Parent.DataConfigName)
+					var dialog = new DataDetailDialog(mUserID, Parent.DataConfigName
+						, mTableName)
 					{
-						LJCConfigRows = mConfigRows,
+						//LJCConfigRows = mConfigRows,
 						LJCDataColumns = dataColumns
 					};
 					if (DialogResult.OK == dialog.ShowDialog())
 					{
-						mConfigRows = dialog.LJCConfigRows;
+						//mConfigRows = dialog.LJCConfigRows;
 						//DbColumns resultColumns = dialog.LJCDataColumns;
 					}
 				}
 			}
 		}
-		private ControlRows mConfigRows;
+		//private ControlRows mConfigRows;
 
 		// Deletes the selected row.
 		internal void DoDeleteData()
@@ -149,7 +152,11 @@ namespace LJCViewEditor
 
 						switch (dbColumn.DataTypeName)
 						{
-							case "Int32":
+              case "Int64":
+                dbColumn.Value = row.LJCGetInt64(dbColumn.ColumnName);
+                break;
+
+              case "Int32":
 								dbColumn.Value = row.LJCGetInt32(dbColumn.ColumnName);
 								break;
 
@@ -167,6 +174,9 @@ namespace LJCViewEditor
 		#region Class Data
 
 		private readonly ViewEditorList Parent;
+
+		private readonly string mUserID;
+		private readonly string mTableName;
 		#endregion
 	}
 }

@@ -22,8 +22,9 @@
     <summary>
       Initializes an object instance.
     </summary>
+    <param name="userID">The User ID.</param>
     <param name="dataConfigName">The DataConfig name.</param>
-    <param name="configRowsFileName">The ConfigRows file name.</param>
+    <param name="tableName">The Table name.</param>
   </DataDetailDialogC>
   <CreateControlRow>
     <summary>

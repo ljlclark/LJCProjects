@@ -1,301 +1,313 @@
 ﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
-using System;
-using System.Windows.Forms;
+//using LJCDataDetailLib;
+using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
+using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBMessage;
-using LJCDBClientLib;
 using DataDetail;
-using LJCSQLUtilLibDAL;
-using LJCDataDetailLib;
+using System;
+using System.Windows.Forms;
 
 namespace DataHelper
 {
-	// Contains the Grid methods.
-	internal class KeyGridCode
-	{
-		#region Constructors
+  // Contains the Grid methods.
+  internal class KeyGridCode
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal KeyGridCode(MainList parent)
-		{
-			// Set default class data.
-			mParent = parent;
-			mManagers = mParent.Managers;
-			mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
-			mDataConfigName = mManagers.DbMetaDataKeyManager.DataConfigName;
-		}
-		#endregion
+    // Initializes an object instance.
+    internal KeyGridCode(MainList parent)
+    {
+      // Set default class data.
+      mParent = parent;
+      mManagers = mParent.Managers;
+      // ToDo: Convert to new DataDetailDialog.
+      //mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
+      mDataConfigName = mManagers.DbMetaDataKeyManager.DataConfigName;
 
-		#region Data Methods
+      mUserID = "Les";
+      mTableName = "ColumnGrid";
+    }
+    #endregion
 
-		// Retrieves the list rows.
-		internal void DataRetrieveKey()
-		{
-			DbMetaDataKeys records;
-			DbMetaDataKeys foreignRecords;
+    #region Data Methods
 
-			mParent.Cursor = Cursors.WaitCursor;
-			mParent.KeyGrid.LJCRowsClear();
+    // Retrieves the list rows.
+    internal void DataRetrieveKey()
+    {
+      DbMetaDataKeys records;
+      DbMetaDataKeys foreignRecords;
 
-			var dataKeyManager = mManagers.DbMetaDataKeyManager;
-			if (mParent.ColumnGrid.CurrentRow is LJCGridRow parentRow)
-			{
-				// Data from items.
-				int parentID = parentRow.LJCGetInt32(DbMetaDataColumn.ColumnID);
+      mParent.Cursor = Cursors.WaitCursor;
+      mParent.KeyGrid.LJCRowsClear();
 
-				records = dataKeyManager.LoadPrimaryKeys();
-				foreignRecords = dataKeyManager.LoadForeignKey(parentID);
-				if (foreignRecords != null)
-				{
-					foreach (DbMetaDataKey foreignRecord in foreignRecords)
-					{
-						records.Add(foreignRecord);
-					}
-				}
+      var dataKeyManager = mManagers.DbMetaDataKeyManager;
+      if (mParent.ColumnGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DbMetaDataColumn.ColumnID);
 
-				if (records != null && records.Count > 0)
-				{
-					foreach (DbMetaDataKey record in records)
-					{
-						RowAddKey(record);
-					}
-				}
-			}
-			mParent.Cursor = Cursors.Default;
-			mParent.DoChange(MainList.ChangeKey);
-		}
+        records = dataKeyManager.LoadPrimaryKeys();
+        foreignRecords = dataKeyManager.LoadForeignKey(parentID);
+        if (foreignRecords != null)
+        {
+          foreach (DbMetaDataKey foreignRecord in foreignRecords)
+          {
+            records.Add(foreignRecord);
+          }
+        }
 
-		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddKey(DbMetaDataKey record)
-		{
-			LJCGridRow retValue;
+        if (records != null && records.Count > 0)
+        {
+          foreach (DbMetaDataKey record in records)
+          {
+            RowAddKey(record);
+          }
+        }
+      }
+      mParent.Cursor = Cursors.Default;
+      mParent.DoChange(MainList.ChangeKey);
+    }
 
-			retValue = mParent.KeyGrid.LJCRowAdd();
-			SetStoredValuesKey(retValue, record);
+    // Adds a grid row and updates it with the record values.
+    private LJCGridRow RowAddKey(DbMetaDataKey record)
+    {
+      LJCGridRow retValue;
 
-			// Sets the row values from a data object.
-			mParent.KeyGrid.LJCRowSetValues(retValue, record);
-			return retValue;
-		}
+      retValue = mParent.KeyGrid.LJCRowAdd();
+      SetStoredValuesKey(retValue, record);
 
-		// Updates the current row with the record values.
-		private void RowUpdateKey(DbMetaDataKey record)
-		{
-			if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
-			{
-				SetStoredValuesKey(row, record);
-				mParent.KeyGrid.LJCRowSetValues(row, record);
-			}
-		}
+      // Sets the row values from a data object.
+      mParent.KeyGrid.LJCRowSetValues(retValue, record);
+      return retValue;
+    }
 
-		// Sets the row stored values.
-		private void SetStoredValuesKey(LJCGridRow row, DbMetaDataKey record)
-		{
-			row.LJCSetInt32(DbMetaDataKey.ColumnID, record.ID);
-		}
+    // Updates the current row with the record values.
+    private void RowUpdateKey(DbMetaDataKey record)
+    {
+      if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValuesKey(row, record);
+        mParent.KeyGrid.LJCRowSetValues(row, record);
+      }
+    }
 
-		// Selects a row based on the key record values.
-		private bool RowSelectKey(DbMetaDataKey record)
-		{
-			int rowID;
-			bool retValue = false;
+    // Sets the row stored values.
+    private void SetStoredValuesKey(LJCGridRow row, DbMetaDataKey record)
+    {
+      row.LJCSetInt32(DbMetaDataKey.ColumnID, record.ID);
+    }
 
-			if (record != null)
-			{
-				mParent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in mParent.KeyGrid.Rows)
-				{
-					rowID = row.LJCGetInt32(DbMetaDataKey.ColumnID);
-					if (rowID == record.ID)
-					{
-						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-						mParent.KeyGrid.LJCSetCurrentRow(row, true);
-						retValue = true;
-						break;
-					}
-				}
-				mParent.Cursor = Cursors.Default;
-			}
-			return retValue;
-		}
-		#endregion
+    // Selects a row based on the key record values.
+    private bool RowSelectKey(DbMetaDataKey record)
+    {
+      int rowID;
+      bool retValue = false;
 
-		#region Action Methods
+      if (record != null)
+      {
+        mParent.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in mParent.KeyGrid.Rows)
+        {
+          rowID = row.LJCGetInt32(DbMetaDataKey.ColumnID);
+          if (rowID == record.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            mParent.KeyGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        mParent.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+    #endregion
 
-		// Displays a detail dialog for a new record.
-		internal void DoNewKey()
-		{
-			DbColumns dataColumns = mManagers.DbMetaDataKeyManager.DataDefinition;
+    #region Action Methods
 
-			DataDetailDialog detail = new DataDetailDialog(mDataConfigName)
-			{
-				LJCConfigRows = mConfigRows,
-				LJCDataColumns = dataColumns,
-				LJCIsUpdate = false
-			};
-			detail.LJCChange += KeyDetail_Change;
-			if (DialogResult.OK == detail.ShowDialog())
-			{
-				mConfigRows = detail.LJCConfigRows;
-			}
-		}
+    // Displays a detail dialog for a new record.
+    internal void DoNewKey()
+    {
+      DbColumns dataColumns = mManagers.DbMetaDataKeyManager.DataDefinition;
 
-		// Displays a detail dialog to edit an existing record.
-		internal void DoEditKey()
-		{
-			if (mParent.ColumnGrid.CurrentRow is LJCGridRow parentRow
-				&& mParent.KeyGrid.CurrentRow is LJCGridRow row)
-			{
-				// Data from items.
-				int id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
-				int parentID = parentRow.LJCGetInt32(DbMetaDataTable.ColumnID);
+      // ToDo: Convert to new DataDetailDialog.
+      var detail = new DataDetailDialog(mUserID, mDataConfigName, mTableName)
+      {
+        //LJCConfigRows = mConfigRows,
+        LJCDataColumns = dataColumns,
+        LJCIsUpdate = false
+      };
+      detail.LJCChange += KeyDetail_Change;
+      if (DialogResult.OK == detail.ShowDialog())
+      {
+        //mConfigRows = detail.LJCConfigRows;
+      }
+    }
 
-				// Retrieve Data
-				var keyColumns = new DbColumns()
-				{
-					{ DbMetaDataKey.ColumnID, id }
-				};
-				DataManager dataKeyManager = mManagers.DbMetaDataKeyManager.DataManager;
-				DbResult dbResult = dataKeyManager.Retrieve(keyColumns);
-				if (DbResult.HasData(dbResult))
-				{
-					// The Data Definition and Record values are merged. 
-					DbColumns dataColumns = dbResult.GetValueColumns();
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEditKey()
+    {
+      if (mParent.ColumnGrid.CurrentRow is LJCGridRow parentRow
+        && mParent.KeyGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        int id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
+        int parentID = parentRow.LJCGetInt32(DbMetaDataTable.ColumnID);
 
-					DataDetailDialog detail = new DataDetailDialog(mDataConfigName)
-					{
-						LJCConfigRows = mConfigRows,
-						LJCDataColumns = dataColumns,
-						LJCIsUpdate = true
-					};
-					detail.LJCChange += KeyDetail_Change;
-					if (DialogResult.OK == detail.ShowDialog())
-					{
-						mConfigRows = detail.LJCConfigRows;
-					}
-				}
-			}
-		}
+        // Retrieve Data
+        var keyColumns = new DbColumns()
+        {
+          { DbMetaDataKey.ColumnID, id }
+        };
+        DataManager dataKeyManager = mManagers.DbMetaDataKeyManager.DataManager;
+        DbResult dbResult = dataKeyManager.Retrieve(keyColumns);
+        if (DbResult.HasData(dbResult))
+        {
+          // The Data Definition and Record values are merged. 
+          DbColumns dataColumns = dbResult.GetValueColumns();
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void KeyDetail_Change(object sender, EventArgs e)
-		{
-			DataDetailDialog detail;
-			DbColumns dataColumns;
+          // ToDo: Convert to new DataDetailDialog.
+          var detail = new DataDetailDialog(mUserID, mDataConfigName, mTableName)
+          {
+            //LJCConfigRows = mConfigRows,
+            LJCDataColumns = dataColumns,
+            LJCIsUpdate = true
+          };
+          detail.LJCChange += KeyDetail_Change;
+          if (DialogResult.OK == detail.ShowDialog())
+          {
+            //mConfigRows = detail.LJCConfigRows;
+          }
+        }
+      }
+    }
 
-			detail = sender as DataDetailDialog;
-			dataColumns = detail.LJCDataColumns;
-			ResultConverter<DbMetaDataKey, DbMetaDataKeys> resultConverter
-				= new ResultConverter<DbMetaDataKey, DbMetaDataKeys>();
-			DbMetaDataKey mdKey = resultConverter.CreateData(dataColumns);
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void KeyDetail_Change(object sender, EventArgs e)
+    {
+      DataDetailDialog detail;
+      DbColumns dataColumns;
 
-			var dataKeyManager = mManagers.DbMetaDataKeyManager;
-			if (detail.LJCIsUpdate)
-			{
-				var keyColumns = new DbColumns()
-				{
-					{ DbMetaDataKey.ColumnID, mdKey.ID }
-				};
-				dataKeyManager.Update(mdKey, keyColumns);
-				if (dataKeyManager.AffectedCount > 0)
-				{
-					DbMetaDataKey lookupRecord = dataKeyManager.RetrieveWithID(mdKey.ID);
-					RowUpdateKey(lookupRecord);
-				}
-			}
-			else
-			{
-				dataKeyManager.Add(mdKey);
-				if (dataKeyManager.AffectedCount > 0)
-				{
-					LJCGridRow row = RowAddKey(mdKey);
-					mParent.ColumnGrid.LJCSetCurrentRow(row, true);
-					mParent.ChangeTimer.DoChange(MainList.ChangeKey);
-				}
-			}
-		}
+      detail = sender as DataDetailDialog;
+      dataColumns = detail.LJCDataColumns;
+      ResultConverter<DbMetaDataKey, DbMetaDataKeys> resultConverter
+        = new ResultConverter<DbMetaDataKey, DbMetaDataKeys>();
+      DbMetaDataKey mdKey = resultConverter.CreateData(dataColumns);
 
-		// Deletes the selected row.
-		internal void DoDeleteKey()
-		{
-			string title;
-			string message;
+      var dataKeyManager = mManagers.DbMetaDataKeyManager;
+      if (detail.LJCIsUpdate)
+      {
+        var keyColumns = new DbColumns()
+        {
+          { DbMetaDataKey.ColumnID, mdKey.ID }
+        };
+        dataKeyManager.Update(mdKey, keyColumns);
+        if (dataKeyManager.AffectedCount > 0)
+        {
+          DbMetaDataKey lookupRecord = dataKeyManager.RetrieveWithID(mdKey.ID);
+          RowUpdateKey(lookupRecord);
+        }
+      }
+      else
+      {
+        dataKeyManager.Add(mdKey);
+        if (dataKeyManager.AffectedCount > 0)
+        {
+          LJCGridRow row = RowAddKey(mdKey);
+          mParent.ColumnGrid.LJCSetCurrentRow(row, true);
+          mParent.ChangeTimer.DoChange(MainList.ChangeKey);
+        }
+      }
+    }
 
-			if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
-			{
-				title = "Delete Confirmation";
-				message = FormCommon.DeleteConfirm;
-				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-					, MessageBoxIcon.Question) == DialogResult.Yes)
-				{
-					// Data from items.
-					int id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
+    // Deletes the selected row.
+    internal void DoDeleteKey()
+    {
+      string title;
+      string message;
 
-					var keyColumns = new DbColumns()
-					{
-						{ DbMetaDataKey.ColumnID, id }
-					};
-					var dataKeyManager = mManagers.DbMetaDataKeyManager;
-					dataKeyManager.Delete(keyColumns);
-					if (dataKeyManager.AffectedCount < 1)
-					{
-						message = FormCommon.DeleteError;
-						MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-							, MessageBoxIcon.Exclamation);
-					}
-					else
-					{
-						mParent.KeyGrid.Rows.Remove(row);
-						mParent.ChangeTimer.DoChange(MainList.ChangeKey);
-					}
-				}
-			}
-		}
+      if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
+      {
+        title = "Delete Confirmation";
+        message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          // Data from items.
+          int id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
 
-		// Refreshes the list.
-		internal void DoRefreshKey()
-		{
-			DbMetaDataKey record;
-			int id = 0;
+          var keyColumns = new DbColumns()
+          {
+            { DbMetaDataKey.ColumnID, id }
+          };
+          var dataKeyManager = mManagers.DbMetaDataKeyManager;
+          dataKeyManager.Delete(keyColumns);
+          if (dataKeyManager.AffectedCount < 1)
+          {
+            message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+          }
+          else
+          {
+            mParent.KeyGrid.Rows.Remove(row);
+            mParent.ChangeTimer.DoChange(MainList.ChangeKey);
+          }
+        }
+      }
+    }
 
-			if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
-			{
-				id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
-			}
-			DataRetrieveKey();
+    // Refreshes the list.
+    internal void DoRefreshKey()
+    {
+      DbMetaDataKey record;
+      int id = 0;
 
-			// Select the original row.
-			if (id > 0)
-			{
-				record = new DbMetaDataKey()
-				{
-					ID = id
-				};
-				RowSelectKey(record);
-			}
-		}
+      if (mParent.KeyGrid.CurrentRow is LJCGridRow row)
+      {
+        id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
+      }
+      DataRetrieveKey();
 
-		// Performs the Close function.
-		internal void DoCloseKey()
-		{
-			if (mConfigRows != null)
-			{
-				RowOrderComparer comparer = new RowOrderComparer();
-				mConfigRows.SortRowOrder(comparer);
-				mConfigRows.Serialize(ConfigRowFileName);
-			}
-		}
-		#endregion
+      // Select the original row.
+      if (id > 0)
+      {
+        record = new DbMetaDataKey()
+        {
+          ID = id
+        };
+        RowSelectKey(record);
+      }
+    }
 
-		#region Class Data
+    // Performs the Close function.
+    internal void DoCloseKey()
+    {
+      //if (mConfigRows != null)
+      //{
+      //  // ToDo: Convert to new DataDetailDialog.
+      //  //RowOrderComparer comparer = new RowOrderComparer();
+      //	//mConfigRows.SortRowOrder(comparer);
+      //  ControlRowUniqueComparer comparer = new ControlRowUniqueComparer();
+      //  mConfigRows.LJCSortUnique(comparer);
+      //	//mConfigRows.Serialize(ConfigRowFileName);
+      //}
+    }
+    #endregion
 
-		private readonly string ConfigRowFileName = @"DetailConfigs/KeyDetailConfig.xml";
-		private ControlRows mConfigRows;
-		private readonly string mDataConfigName;
-		private readonly MainList mParent;
-		private readonly SQLUtilLibManagers mManagers;
-		#endregion
-	}
+    #region Class Data
+
+    //private readonly string ConfigRowFileName = @"DetailConfigs/KeyDetailConfig.xml";
+    //private ControlRows mConfigRows;
+    private readonly string mDataConfigName;
+    private readonly MainList mParent;
+    private readonly SQLUtilLibManagers mManagers;
+
+    private readonly string mUserID;
+    private readonly string mTableName;
+    #endregion
+  }
 }

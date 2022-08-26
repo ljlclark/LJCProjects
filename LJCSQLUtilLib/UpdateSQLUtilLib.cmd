@@ -18,6 +18,9 @@ rem *** Referenced Binaries ***
 set src=DataDetail\DataDetail\%bin%
 copy %root%%src%\DataDetail.exe %to%
 
+set src=DataDetail\DataDetailDAL\%bin%
+copy %root%%src%\DataDetailDAL.dll %to%
+
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %root%%src%\LJCDataAccess.dll %to%
 

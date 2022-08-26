@@ -1,9 +1,8 @@
-﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
-using System;
+﻿// ControlColumns.cs
+using LJCNetCommon;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJCNetCommon;
 
 namespace LJCDataDetailLib
 {

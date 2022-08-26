@@ -2,19 +2,19 @@
 <DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DataConfig>
     <Name>AppManager</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
     <Database>AppManagerData</Database>
     <ConnectionTypeName>SqlServer</ConnectionTypeName>
   </DataConfig>
   <DataConfig>
     <Name>GenealogyManager</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
     <Database>GenealogyData</Database>
     <ConnectionTypeName>SQLServer</ConnectionTypeName>
   </DataConfig>
   <DataConfig>
     <Name>LJCData</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
     <Database>LJCData</Database>
     <ConnectionTypeName>SQLServer</ConnectionTypeName>
   </DataConfig>
@@ -40,13 +40,13 @@
   </DataConfig>
   <DataConfig>
     <Name>TestSqlServer</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
     <Database>TestData</Database>
     <ConnectionTypeName>SqlServer</ConnectionTypeName>
   </DataConfig>
   <DataConfig>
     <Name>TransformManager</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
     <Database>DataTransform</Database>
     <ConnectionTypeName>SqlServer</ConnectionTypeName>
   </DataConfig>

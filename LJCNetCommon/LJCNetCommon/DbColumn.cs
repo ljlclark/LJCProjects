@@ -105,7 +105,14 @@ namespace LJCNetCommon
       switch (DataTypeName)
       {
         case NetCommon.TypeBoolean:
-          retValue = retValue == "True" ? "1" : "0";
+          if ("true" == retValue.ToLower())
+          {
+            retValue = "1";
+          }
+          if ("false" == retValue.ToLower())
+          {
+            retValue = "0";
+          }
           break;
 
         case NetCommon.TypeDateTime:

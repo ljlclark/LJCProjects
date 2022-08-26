@@ -45,12 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlColumn.cs" />
     <Compile Include="ControlColumnsHelper.cs" />
-    <Compile Include="ControlColumns.cs" />
     <Compile Include="ControlHelper.cs" />
-    <Compile Include="ControlRow.cs" />
-    <Compile Include="ControlRows.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +57,12 @@
     <Content Include="Doc\ControlItems.xml" />
     <Content Include="Doc\ControlRow.xml" />
     <Content Include="Doc\ControlRows.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataDetailDAL\DataDetailDAL.csproj">
+      <Project>{762703b7-df03-4889-9df1-eab7614a97b3}</Project>
+      <Name>DataDetailDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

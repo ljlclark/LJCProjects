@@ -4,57 +4,29 @@
         <name>LJCDataDetailLib</name>
     </assembly>
     <members>
-        <member name="T:LJCDataDetailLib.ControlColumn">
-            <summary>
-      Represents a column of Controls consisting of ControlRows.
-    </summary><remarks>
-      <para>
-        A ControlColumn is a definition of the logically contained Labels column
-        and Controls columns. These are defined by the LabelsWidth and ControlsWidth
-        properties.
-      </para>
-      <para>
-        Index - A unique value which defines the relative position of the ControlColumn
-        in the Dialog.
-      </para>
-      <para>
-        LabelsWidth - The width of the widest Label in the Labels column. The Label
-        width is calculated from the Label Text value. The Label controls are left
-        aligned to the Dialog BorderHorizontal value.
-      </para>
-      <para>
-        ControlsWidth - The width of the widest data Control in the Controls column.
-        This is usually a TextBox control. The Control width is calculated from the
-        Control MaxLength property. The controls are left aligned to the associated
-        Labels column.
-      </para>
-      <para>
-        RowCount - Contains the count of the ControlRows in that ControlColumn.
-      </para>
-    </remarks>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumn.Index">
-            <summary>Gets or sets the unique Index value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumn.LabelsWidth">
-            <summary>Gets or sets the Labels column width.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumn.ControlsWidth">
-            <summary>Gets or sets the Controls column width.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumn.Width">
-            <summary>Gets the ControlColumn width.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumn.RowCount">
-            <summary>Gets or sets the number of ControlRows.</summary>
-        </member>
         <member name="T:LJCDataDetailLib.ControlColumnsHelper">
-            <summary>ControlColumns helper class.</summary>
+            <summary>Contains methods for creating ControlColumns.</summary>
+        </member>
+        <member name="M:LJCDataDetailLib.ControlColumnsHelper.#ctor(DataDetailDAL.DataDetailManagers)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="managers">The Managers object.</param>
         </member>
         <member name="M:LJCDataDetailLib.ControlColumnsHelper.AdjustedWidth(LJCNetCommon.DbColumn)">
             <summary>
       Adjust the control for usability.
     </summary><param name="dataColumn">The data column object.</param><returns>The adjusted width.</returns>
+        </member>
+        <member name="M:LJCDataDetailLib.ControlColumnsHelper.ControlsHeight(System.Int32)">
+            <summary>
+      Gets the Controls display height.
+    </summary><param name="dataColumnsCount">The data columns count.</param><returns>The Controls height.</returns>
+        </member>
+        <member name="M:LJCDataDetailLib.ControlColumnsHelper.ControlsWidth(DataDetailDAL.ControlColumns)">
+            <summary>
+      Gets the Controls display width.
+    </summary><returns>The Controls width.</returns>
         </member>
         <member name="M:LJCDataDetailLib.ControlColumnsHelper.CreateConfigControlColumns(LJCNetCommon.DbColumns)">
             <summary>
@@ -66,16 +38,6 @@
       Configure the New controls.
     </summary><param name="dataColumns">The data columns.</param><returns>The ControlColumns collection.</returns>
         </member>
-        <member name="M:LJCDataDetailLib.ControlColumnsHelper.Height(System.Int32)">
-            <summary>
-      Gets the Controls display height.
-    </summary><param name="dataColumnsCount">The data columns count.</param><returns>The Controls height.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumnsHelper.Width(LJCDataDetailLib.ControlColumns)">
-            <summary>
-      Gets the Controls display width.
-    </summary><returns>The Controls width.</returns>
-        </member>
         <member name="M:LJCDataDetailLib.ControlColumnsHelper.CalculateColumnsCount(System.Int32)">
             <summary>
       Gets the ControlColumn column count.
@@ -85,63 +47,14 @@
       Recalculates the ColumnRowsLimit to evenly distribute the values.
     </remarks>
         </member>
-        <member name="P:LJCDataDetailLib.ControlColumnsHelper.ConfigRows">
-            <summary>Gets or sets the ConfigRows value.</summary>
+        <member name="P:LJCDataDetailLib.ControlColumnsHelper.DetailConfig">
+            <summary>Gets or sets the DetailConfig object.</summary>
         </member>
-        <member name="T:LJCDataDetailLib.ControlColumns">
-            <summary>
-      Represents a collection of ControlColumn objects.
-    </summary><remarks>
-      The ControlColumns object is the main layout definition object.
-      The ControlColumn items contain the ControlRows object which is the other
-      main layout definition object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumns.#ctor">
-            <summary>
-      Initializes an object instance.
-    </summary><remarks>
-      A default constructor is required for a serializable object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumns.Add(LJCDataDetailLib.ControlColumn)">
-            <summary>
-      Adds the specified object.
-    </summary><param name="item">The item object.</param>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumns.Serialize(System.String)">
-            <summary>
-      Serializes the collection to a file.
-    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
-      Uses the DefaultFileName value if the fileSpec parameter is null.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumns.ControlRowColumn(LJCDataDetailLib.ControlRow)">
-            <summary>
-      Gets the ControlRow parent column.
-    </summary><param name="controlRow">The ControlRow object.</param><returns>The ControlColumn object.</returns>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumns.Count">
-            <summary>The Collection count.</summary>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlColumns.GetEnumerator">
-            <summary>
-      Gets the Collection Enumerator.
-    </summary><returns>The Collection Enumerator.</returns>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumns.Items">
-            <summary>The ControlColumn items.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumns.Item(System.Int32)">
-            <summary>
-      Gets the item by index value.
-    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlColumns.DefaultFileName">
-            <summary>Gets the Default File Name.</summary>
+        <member name="P:LJCDataDetailLib.ControlColumnsHelper.ControlColumns">
+            <summary>Gets or sets the ControlColumns collection.</summary>
         </member>
         <member name="T:LJCDataDetailLib.ControlHelper">
-            <summary>The Control helper.</summary>
+            <summary>Contains methods for creating Controls.</summary>
         </member>
         <member name="M:LJCDataDetailLib.ControlHelper.#ctor">
             <summary>
@@ -192,227 +105,6 @@
         </member>
         <member name="P:LJCDataDetailLib.ControlHelper.DefaultButtonHeight">
             <summary>Gets or sets the Default Button height.</summary>
-        </member>
-        <member name="T:LJCDataDetailLib.ControlRow">
-            <summary>
-      Represents the controls for a DataValue.
-    </summary><remarks>
-      <para>
-        A ControlRow is a definition of the contained RowLabel and RowControl controls.
-        A ControlRow is created for each Data Record value. The controls in a ControlRow
-        are top aligned based on the Dialog BorderVertical, ControlRowSpacing and
-        ControlRowHeight values.
-      </para>
-      <para>
-        DataValueName - The name of the Data Record value in the DataValues
-        collection. The DataValues property is a DbColumns collection object.
-      </para>
-      <para>
-        RowLabel - A reference to the row Label control.
-      </para>
-      <para>
-        RowControl - A reference to the row data control.
-      </para>
-      <para>
-        TabPageIndex - The TabPage where the ControlRow is displayed.
-      </para>
-      <para>
-        ColumnIndex - The ControlColumn where the ControlRow is displayed.
-      </para>
-      <para>
-        RowIndex - The row index where the Label and data Controls are displayed.
-      </para>
-      <para>
-        TabIndex - The tabbing index for the Label control in the ControlRow.
-      </para>
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRow.#ctor">
-            <summary>
-      Initializes an object instance.
-    </summary><remarks>
-      A default constructor is required for a serializable object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRow.Clone">
-            <summary>
-      Clones the structure of the object.
-    </summary><returns>A new object with the same structure as the current object.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRow.CompareTo(LJCDataDetailLib.ControlRow)">
-            <summary>
-      Provides the default Sort functionality.
-    </summary><param name="other">The compare-to object.</param><returns>
-      The integer that indicates the order relationship of the objects.
-    </returns><remarks>
-      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
-      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
-      A postive integer  - This instance follows the compare-to object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRow.ToString">
-            <summary>
-      The object string identifier.
-    </summary><returns>The identifier value.</returns>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.AllowDisplay">
-            <summary>The AllowDisplay value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.ColumnIndex">
-            <summary>Gets or sets the ControlColumn index.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.DataValueName">
-            <summary>Gets or sets the DataValue name.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.RowControl">
-            <summary>Gets or sets the Row Control value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.RowIndex">
-            <summary>Gets or sets the ControlRow index.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.RowLabel">
-            <summary>Gets or sets the Row Label value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.TabIndex">
-            <summary>Gets or sets the ControlRow Tabbing Index.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.TabPageIndex">
-            <summary>Gets or sets the TabPage index.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRow.Width">
-            <summary>Gets or sets the ControlRow width.</summary>
-        </member>
-        <member name="T:LJCDataDetailLib.RowOrderComparer">
-            <summary>Sort and search on Name value.</summary>
-        </member>
-        <member name="M:LJCDataDetailLib.RowOrderComparer.Compare(LJCDataDetailLib.ControlRow,LJCDataDetailLib.ControlRow)">
-            <summary>
-      Compares two objects.
-    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
-        </member>
-        <member name="T:LJCDataDetailLib.ControlRows">
-            <summary>
-      Represents a collection of ControlRow objects.
-    </summary><remarks>
-      The ControlRows is one of the main layout definition objects.
-      ControlRows belong to a ControlColumn in the ControlColumns collection
-      which is the other main layout definition object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.Deserialize(System.String)">
-            <summary>
-      Deserializes from the specified XML file.
-    </summary><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.#ctor">
-            <summary>
-      Initializes an object instance.
-    </summary><remarks>
-      A default constructor is required for a serializable object.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.Add(LJCDataDetailLib.ControlRow)">
-            <summary>
-      Adds the specified object.
-    </summary><param name="controlRow">The item object.</param>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.Add(System.String,System.Int32,System.Int32,System.Int32)">
-            <summary>
-      Creates and adds the object from the provided values.
-    </summary><param name="dataValueName">The DataValue name.</param><param name="tabPageIndex">the TabPage index.</param><param name="controlColumnIndex">The ControlColumn index.</param><param name="rowIndex">The ControlRow index.</param><returns>A reference to the added element.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.Clone">
-            <summary>
-      Clones the structure of the object.
-    </summary><returns>A new object with the same structure as the current object.</returns>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.Count">
-            <summary>The Collection count.</summary>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.Serialize(System.String)">
-            <summary>
-      Serializes the collection to a file.
-    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
-      Uses the DefaultFileName value if the fileSpec parameter is null.
-    </remarks>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.SearchName(System.String)">
-            <summary>
-      Retrieve the collection element with name.
-    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.SearchRowOrder(System.Int32,System.Int32,System.Int32)">
-            <summary>
-      Retrieve the collection element with control order.
-    </summary><param name="tabIndex">The TabPage index.</param><param name="columnIndex">The ControlColumn index.</param><param name="rowIndex">The ControlRow index.</param><returns>The selected collection element.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.SortName">
-            <summary>
-      Sort on Name.
-    </summary>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.SortRowOrder(LJCDataDetailLib.RowOrderComparer)">
-            <summary>
-      Sort with a Comparer.
-    </summary><param name="comparer">The Comparer object.</param>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.DefaultFileName">
-            <summary>Gets the Default File Name.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.Items">
-            <summary>The ControlRow items.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.Item(System.Int32)">
-            <summary>
-      Gets the item by index value.
-    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
-        </member>
-        <member name="M:LJCDataDetailLib.ControlRows.SetControlRowWidth(LJCDataDetailLib.ControlColumns,LJCDataDetailLib.ControlRow)">
-            <summary>
-      Sets the Width value.
-    </summary><param name="controlColumns">The ControlColumns object.</param><param name="controlRow">The ControlRow object.</param>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.BorderHorizontal">
-            <summary>The Horizontal Border value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.BorderVertical">
-            <summary>The Vertical Border value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.CharacterPixels">
-            <summary>The Pixels per character value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ColumnRowsLimit">
-            <summary>The ControlColumn rows limit.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ConfigRowsFileName">
-            <summary>Gets or sets the Config file name.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ControlColumnsCount">
-            <summary>The ControlColumns count.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ControlRowHeight">
-            <summary>The ControlRow height.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ControlRowSpacing">
-            <summary>The ControlRow spacing.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ControlsHeight">
-            <summary>The Controls Set height.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.ControlsWidth">
-            <summary>The Controls Set width.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.DataConfigName">
-            <summary>The DataConfig name value.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.DataValueCount">
-            <summary>The DataValue count.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.MaxControlCharacters">
-            <summary>The Maximum control display character width.</summary>
-        </member>
-        <member name="P:LJCDataDetailLib.ControlRows.PageColumnsLimit">
-            <summary>The PageColumns limit.</summary>
         </member>
     </members>
 </doc>

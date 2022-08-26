@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ControlValues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ControlValue>
+    <ControlName>FacilityGrid.Code</ControlName>
+    <Left>0</Left>
+    <Top>0</Top>
+    <Width>99</Width>
+    <Height>0</Height>
+  </ControlValue>
+  <ControlValue>
+    <ControlName>FacilityGrid.Description</ControlName>
+    <Left>0</Left>
+    <Top>0</Top>
+    <Width>402</Width>
+    <Height>0</Height>
+  </ControlValue>
+  <ControlValue>
+    <ControlName>FacilityList</ControlName>
+    <Left>95</Left>
+    <Top>58</Top>
+    <Width>520</Width>
+    <Height>557</Height>
+  </ControlValue>
+</ControlValues>

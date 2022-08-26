@@ -49,6 +49,9 @@ rem *** Runtime-only Binaries ***
 rem ----------------------------
 set to=%runRoot%DataDetail\%bin%
 
+set src=LJCDBMessage\CipherLib\%bin%
+copy %root%%src%\CipherLib.dll %to%
+
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %root%%src%\LJCDataAccess.dll %to%
 
@@ -57,6 +60,9 @@ copy %root%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
 copy %root%%src%\LJCDBClientLib.dll %to%
+
+set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
+copy %root%%src%\LJCDBServiceLib.dll %to%
 
 rem ----------------------------
 set to=%runRoot%LJCDataDetailConsole\%bin%

@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9016BB6D-F8FA-4DF8-AE7D-BE2F9553C669}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CVRManager</RootNamespace>
+    <AssemblyName>CVRManager</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CVRManager.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJCDataAccess, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionDAL">
+      <HintPath>..\External\LJCRegionDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionForm">
+      <HintPath>..\External\LJCRegionForm.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionManager">
+      <HintPath>..\External\LJCRegionManager.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCUnitMeasureDAL">
+      <HintPath>..\External\LJCUnitMeasureDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormCommon">
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormControls">
+      <HintPath>..\External\LJCWinFormControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\CVPerson\CVPersonDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVPerson\CVPersonDetail.Designer.cs">
+      <DependentUpon>CVPersonDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CVPerson\CVPersonGridCode.cs" />
+    <Compile Include="Forms\CVPerson\CVPersonList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVPerson\CVPersonList.Designer.cs">
+      <DependentUpon>CVPersonList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CVPerson\CVPersonListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVVisit\CVCommon.cs" />
+    <Compile Include="Forms\CVVisit\CVVisitDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVVisit\CVVisitDetail.Designer.cs">
+      <DependentUpon>CVVisitDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CVVisit\CVVisitGridCode.cs" />
+    <Compile Include="Forms\CVVisit\CVVisitListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityDetail.Designer.cs">
+      <DependentUpon>FacilityDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityGridCode.cs" />
+    <Compile Include="Forms\Facility\FacilityList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityList.Designer.cs">
+      <DependentUpon>FacilityList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVVisit\VisitFilterDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVVisit\VisitFilterDetail.Designer.cs">
+      <DependentUpon>VisitFilterDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LJCMaskBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LJCMaskBox.Designer.cs">
+      <DependentUpon>LJCMaskBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogRange.cs" />
+    <Compile Include="LogRanges.cs" />
+    <Compile Include="LogTime.cs" />
+    <Compile Include="ValuesCVRManager.cs" />
+    <Compile Include="Forms\CVVisit\CVVisitList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVVisit\CVVisitList.Designer.cs">
+      <DependentUpon>CVVisitList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="bin\Debug\MySQLScript\2FacilityShared.sql" />
+    <Content Include="bin\Debug\MySQLScript\3CVRTables.sql" />
+    <Content Include="Help\CVPerson\CVPersonDetailPic.html" />
+    <Content Include="Help\CVPerson\CVPersonDetailPic.jpg" />
+    <Content Include="Help\CVPerson\CVPersonListFilter.jpg" />
+    <Content Include="Help\CVPerson\CVPersonListPic.html" />
+    <Content Include="Help\CVPerson\CVPersonListPic.jpg" />
+    <Content Include="Help\CVVisit\CVVisitDetailPic.html" />
+    <Content Include="Help\CVVisit\CVVisitDetailPic.jpg" />
+    <Content Include="Help\CVVisit\CVVisitListFilter.jpg" />
+    <Content Include="Help\CVVisit\CVVisitListPic.html" />
+    <Content Include="Help\CVVisit\CVVisitListPic.jpg" />
+    <Content Include="Help\CVVisit\CalendarDialogPic.html" />
+    <Content Include="Help\CVVisit\CalendarDialogPic.jpg" />
+    <Content Include="Help\CVVisit\CalendarDialog.html" />
+    <Content Include="Help\CVPerson\CVPersonDetail.html" />
+    <Content Include="Help\CVPerson\CVPersonList.html" />
+    <Content Include="Help\CVRManager.html" />
+    <Content Include="Help\CVVisit\CVVisitDetail.html" />
+    <Content Include="Help\CVVisit\CVVisitList.html" />
+    <Content Include="Help\Facility\FacilityDetail.html" />
+    <Content Include="Help\Facility\FacilityDetailPic.html" />
+    <Content Include="Help\Facility\FacilityDetailPic.jpg" />
+    <Content Include="Help\Facility\FacilityList.html" />
+    <Content Include="Help\Facility\FacilityListPic.html" />
+    <Content Include="Help\Facility\FacilityListPic.jpg" />
+    <Content Include="Help\CVPerson\LJCRegionManager.html" />
+    <Content Include="Help\CVVisit\VisitFilterDetail.html" />
+    <Content Include="Help\CVVisit\VisitFilterDetailPic.html" />
+    <Content Include="Help\CVVisit\VisitFilterDetailPic.jpg" />
+    <EmbeddedResource Include="Forms\CVPerson\CVPersonDetail.resx">
+      <DependentUpon>CVPersonDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CVPerson\CVPersonList.resx">
+      <DependentUpon>CVPersonList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CVVisit\CVVisitDetail.resx">
+      <DependentUpon>CVVisitDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CVVisit\CVVisitList.resx">
+      <DependentUpon>CVVisitList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\FacilityDetail.resx">
+      <DependentUpon>FacilityDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\FacilityList.resx">
+      <DependentUpon>FacilityList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CVVisit\VisitFilterDetail.resx">
+      <DependentUpon>VisitFilterDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Help\CVRManager.chm" />
+    <None Include="Help\CVRManager.hhc" />
+    <None Include="Help\CVRManager.hhp" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CVRDAL\CVRDAL.csproj">
+      <Project>{1FEBC911-92DD-4D42-AFF5-FDBCB44BDA53}</Project>
+      <Name>CVRDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

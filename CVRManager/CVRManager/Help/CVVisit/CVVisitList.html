@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+
+<!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Contact Visit List</title>
+</head>
+<body>
+  <h3 style="color:blue">Contact Visit List</h3>
+  <p>
+    The Contact Visit List contains the visits for the selected filters.
+    Visits can be added, edited and deleted from this list.
+  </p>
+
+  <h3>Visit List Filters</h3>
+  <p>
+    The Visit List Filter controls are located to the right of the Toolbar
+    Buttons.
+  </p>
+  <p>
+    <img src="CVVisitListFilter.jpg" width="200" />
+  </p>
+  <p>
+    The list filters determine which records will appear in the list.
+  </p>
+  <b>Date Filter</b>
+  <p>
+    When the Visit List form is first displayed, the Date Filter contains
+    today's date and the Visit List is filled with the visits using the Date
+    Filter as the Register Date.
+  </p>
+  <p>
+    If the Date Filter is manually changed or changed from the Calendar Dialog,
+    then the "Show" button must be selected before the list is refreshed
+    using the Date Filter value.
+  </p>
+  <b>Calendar Button</b>
+  <p>
+    The Calendar Button displays the
+    <a href="CalendarDialog.html">Calendar Dialog</a>. The Calendar Dialog is
+    used to select a date for the Date Filter. The date is copied back to the
+    Date Filter when the user selects a date.
+  </p>
+  <b>Show Button</b>
+  <p>
+    The Show Button applies the Date Filter and other filters selected from the
+    Visit Filter Detail Dialog.
+  </p>
+  <p>
+    The Show Button retrieves the visits that match the filter values. If the
+    filter values are empty, then all visits are retrieved.
+  </p>
+  <b>Filters Button</b>
+  <p>
+    The Filters Button displays the
+    <a href="VisitFilterDetail.html">Visit Filter Detail</a> dialog. The Visit
+    Filter Detail Dialog allows the user to add additional filter values.
+  </p>
+  <b>Clear Filters Button</b>
+  <p>
+    The Clear Filters Button clears all the filters from the Visit Filter Detail
+    Dialog.
+  </p>
+
+  <h3>Toolbar Buttons</h3>
+  <p>
+    The Contact Visit List has a toolbar above it which provides one touch
+    access to the most common list actions.
+  </p>
+  <b>New</b>
+  <p>
+    The 'New' toolbar button displays the
+    <a href="CVVisitDetail.html">Contact Visit Detail</a> dialog to allow for
+    the creation of a new visit entry.
+  </p>
+  <b>Edit</b>
+  <p>
+    The 'Edit' toolbar button displays the
+    <a href="CVVisitDetail.html">Contact Visit Detail</a> dialog to allow for
+    editing the selected list item.
+  </p>
+  <b>Enter</b>
+  <p>
+    The 'Enter' toolbar button sets the Visit Enter Date and Time to the current
+    date and time. This is the time the Contact actually entered the facility.
+  </p>
+  <b>Exit</b>
+  <p>
+    The 'Exit' toolbar button sets the Visit Exit Date and Time to the current
+    date and time. This is the time the Contact actually exited the facility.
+  </p>
+
+  <h3>Context Menu</h3>
+  <p>
+    The Context Menu can be displayed by clicking the right mouse button on the
+    desired list item. The list item is selected and the menu items apply to the
+    selected item or list.
+  </p>
+  <p>
+    If you are using a Tablet or a laptop in Tablet Mode, touch the desired
+    list item and leave your finger on the item for a short while until a box
+    is displayed. This shows that the touch is considered a right mouse
+    click. Remove your finger and the context menu will be displayed.
+  </p>
+  <b>New</b>
+  <p>
+    The 'New' menu item displays the
+    <a href="CVVisitDetail.html">Contact Visit Detail</a> dialog to allow for
+    the creation of a new visit entry.
+  </p>
+  <b>Edit</b>
+  <p>
+    The 'Edit' menu item displays the
+    <a href="CVVisitDetail.html">Contact Visit Detail</a> dialog to allow for
+    editing the selected list item.
+  </p>
+  <b>Enter</b>
+  <p>
+    The 'Enter' menu item sets the Visit Enter Date and Time to the current
+    date and time. This is the time the Contact actually entered the facility.
+  </p>
+  <b>Exit</b>
+  <p>
+    The 'Exit' menu item sets the Visit Exit Date and Time to the current
+    date and time. This is the time the Contact actually exited the facility.
+  </p>
+  <b>Delete</b>
+  <p>
+    The 'Delete' menu item deletes the selected list item.
+  </p>
+  <b>Refresh</b>
+  <p>
+    The 'Refresh' menu item reloads the list items from the database.
+  </p>
+  <b>Export Text</b>
+  <p>
+    The 'Export Text' menu item creates a tab delimited text file with the file
+    name 'ExportFiles\CVVisit.doc'. It attempts to display the data with the
+    application that is associated with the '.doc' extension.
+  </p>
+  <b>Export CSV</b>
+  <p>
+    The 'Export CSV' menu item creates a comma delimited text file with the file
+    name 'ExportFiles\CVVisit.csv'. It attempts to display the data with the
+    application that is associated with the '.csv' extension.
+  </p>
+  <b>Close</b>
+  <p>
+    The 'Close' menu item closes the window and exits the application.
+  </p>
+  <b>Facility</b>
+  <p>
+    The 'Facility' menu item displays the
+    <a href="..\Facility\FacilityList.html">Facility List</a> to allow for maintaining the
+    Facility data.
+  </p>
+  <b>Help</b>
+  <p>
+    The 'Help' menu item displays the help page for the current list.
+  </p>
+  <h6>CVVisitList</h6>
+  <h6>Copyright © Lester J Clark 2020</h6>
+</body>
+</html>

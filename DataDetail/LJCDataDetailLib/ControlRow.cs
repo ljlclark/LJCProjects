@@ -1,9 +1,9 @@
-﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
+﻿// ControlRow.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using LJCNetCommon;
 
 namespace LJCDataDetailLib
 {

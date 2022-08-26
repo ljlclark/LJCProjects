@@ -9,6 +9,7 @@ using LJCDBClientLib;
 using DataDetail;
 using LJCSQLUtilLibDAL;
 using LJCDataDetailLib;
+using DataDetailDAL;
 
 namespace DataHelper
 {
@@ -23,15 +24,19 @@ namespace DataHelper
 			// Set default class data.
 			mParent = parent;
 			mManagers = mParent.Managers;
-			mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
+      // ToDo: Convert to new DataDetailDialog.
+      //mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
 			mDataConfigName = mManagers.DbMetaDataTableManager.DataConfigName;
-		}
-		#endregion
 
-		#region Data Methods
+      mUserID = "Les";
+      mTableName = "ColumnGrid";
+    }
+    #endregion
 
-		// Retrieves the list rows.
-		internal void DataRetrieveTable()
+    #region Data Methods
+
+    // Retrieves the list rows.
+    internal void DataRetrieveTable()
 		{
 			DbMetaDataTables records;
 
@@ -115,9 +120,11 @@ namespace DataHelper
 			DbColumns dataColumns
 				= mManagers.DbMetaDataTableManager.DataDefinition;
 
-			DataDetailDialog detail = new DataDetailDialog(mDataConfigName)
+      // ToDo: Convert to new DataDetailDialog.
+      DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
+				, mTableName)
 			{
-				LJCConfigRows = mConfigRows,
+				//LJCConfigRows = mConfigRows,
 				LJCDataColumns = dataColumns,
 				LJCKeyItems = new KeyItems(),  // 7/23
 				LJCIsUpdate = false
@@ -125,7 +132,7 @@ namespace DataHelper
 			detail.LJCChange += TableDetail_Change;
 			if (DialogResult.OK == detail.ShowDialog())
 			{
-				mConfigRows = detail.LJCConfigRows;
+				//mConfigRows = detail.LJCConfigRows;
 			}
 		}
 
@@ -150,16 +157,18 @@ namespace DataHelper
 					// The Data Definition and Record values are merged. 
 					DbColumns dataColumns = dbResult.GetValueColumns();
 
-					DataDetailDialog detail = new DataDetailDialog(mDataConfigName)
+          // ToDo: Convert to new DataDetailDialog.
+          DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
+						, mTableName)
 					{
-						LJCConfigRows = mConfigRows,
+						//LJCConfigRows = mConfigRows,
 						LJCDataColumns = dataColumns,
 						LJCIsUpdate = true
 					};
 					detail.LJCChange += TableDetail_Change;
 					if (DialogResult.OK == detail.ShowDialog())
 					{
-						mConfigRows = detail.LJCConfigRows;
+						//mConfigRows = detail.LJCConfigRows;
 					}
 				}
 			}
@@ -266,36 +275,42 @@ namespace DataHelper
 		// Performs the Close function.
 		internal void DoCloseTable()
 		{
-			if (mConfigRows != null)
-			{
-				RowOrderComparer comparer = new RowOrderComparer();
-				mConfigRows.SortRowOrder(comparer);
-				mConfigRows.Serialize(ConfigRowFileName);
-			}
-		}
+      //ToDo: Convert to new DataDetailDAL.
+      //   if (mConfigRows != null)
+      //{
+      //	//RowOrderComparer comparer = new RowOrderComparer();
+      //	//mConfigRows.SortRowOrder(comparer);
+      //  ControlRowUniqueComparer comparer = new ControlRowUniqueComparer();
+      //  mConfigRows.LJCSortUnique(comparer);
+      //	mConfigRows.Serialize(ConfigRowFileName);
+      //}
+    }
 
-		//// Get the data record.
-		//private DbColumns GetRecord(DbRequest dbRequest, DbResult dbResult)
-		//{
-		//	DbValues dbValues;
-		//	DbColumns retValue = null;
+    //// Get the data record.
+    //private DbColumns GetRecord(DbRequest dbRequest, DbResult dbResult)
+    //{
+    //	DbValues dbValues;
+    //	DbColumns retValue = null;
 
-		//	dbValues = dbResult.DbRecords[0];
-		//	DataGrid dataGrid = new DataGrid(mParent.TableGrid);
-		//	dataGrid.SetDisplayColumns(dbRequest);
-		//	DbColumns displayColumns = dataGrid.DisplayColumns;
-		//	retValue = displayColumns.CreateColumnsFromValues(dbValues);
-		//	return retValue;
-		//}
-		#endregion
+    //	dbValues = dbResult.DbRecords[0];
+    //	DataGrid dataGrid = new DataGrid(mParent.TableGrid);
+    //	dataGrid.SetDisplayColumns(dbRequest);
+    //	DbColumns displayColumns = dataGrid.DisplayColumns;
+    //	retValue = displayColumns.CreateColumnsFromValues(dbValues);
+    //	return retValue;
+    //}
+    #endregion
 
-		#region Class Data
+    #region Class Data
 
-		private readonly string ConfigRowFileName = @"DetailConfigs/TableDetailConfig.xml";
-		private ControlRows mConfigRows;
-		private readonly string mDataConfigName;
+    //private readonly string ConfigRowFileName = @"DetailConfigs/TableDetailConfig.xml";
+    //private ControlRows mConfigRows;
+    private readonly string mDataConfigName;
 		private readonly SQLUtilLibManagers mManagers;
 		private readonly MainList mParent;
-		#endregion
-	}
+
+    private readonly string mUserID;
+    private readonly string mTableName;
+    #endregion
+  }
 }

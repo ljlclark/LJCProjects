@@ -9,9 +9,9 @@
     <ConnectionType>SQLServer</ConnectionType>
   </DataConfig>
   <DataConfig>
-    <Name>FacilityManager</Name>
-    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
-    <Database>FacilityData</Database>
-    <ConnectionType>SqlServer</ConnectionType>
+    <Name>LJCData</Name>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
+    <Database>LJCData</Database>
+    <ConnectionType>SQLServer</ConnectionType>
   </DataConfig>
 </DataConfigs>

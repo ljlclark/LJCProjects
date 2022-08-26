@@ -5,8 +5,8 @@ using System.Windows.Forms;
 
 namespace LJCDataDetailLib
 {
-	/// <summary>The Control helper.</summary>
-	public class ControlHelper
+  /// <summary>Contains methods for creating Controls.</summary>
+  public class ControlHelper
 	{
 		#region Constructors
 
