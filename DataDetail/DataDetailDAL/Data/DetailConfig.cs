@@ -95,19 +95,33 @@ namespace DataDetailDAL
     }
     private Int64 mID;
 
-    /// <summary>Gets or sets the UserID value.</summary>
+    /// <summary>Gets or sets the DataConfigName value.</summary>
     //[Required]
-    //[Column("UserID", TypeName="nvarchar(60")]
-    public String UserID
+    //[Column("Name", TypeName="nvarchar(60")]
+    public String Name
     {
-      get { return mUserID; }
+      get { return mName; }
       set
       {
         value = NetString.InitString(value);
-        mUserID = ChangedNames.Add(ColumnUserID, mUserID, value);
+        mName = ChangedNames.Add(ColumnName, mName, value);
       }
     }
-    private String mUserID;
+    private String mName;
+
+    /// <summary>Gets or sets the DataConfigName value.</summary>
+    //[Required]
+    //[Column("Description", TypeName="nvarchar(60")]
+    public String Description
+    {
+      get { return mDescription; }
+      set
+      {
+        value = NetString.InitString(value);
+        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+      }
+    }
+    private String mDescription;
 
     /// <summary>Gets or sets the DataConfigName value.</summary>
     //[Required]
@@ -136,6 +150,19 @@ namespace DataDetailDAL
       }
     }
     private String mTableName;
+
+    /// <summary>Gets or sets the UserID value.</summary>
+    //[Column("UserID", TypeName="nvarchar(60")]
+    public String UserID
+    {
+      get { return mUserID; }
+      set
+      {
+        value = NetString.InitString(value);
+        mUserID = ChangedNames.Add(ColumnUserID, mUserID, value);
+      }
+    }
+    private String mUserID;
 
     /// <summary>Gets or sets the DataValueCount value.</summary>
     //[Required]
@@ -289,20 +316,26 @@ namespace DataDetailDAL
 
     #region Class Data
 
+    /// <summary>The Name column.</summary>
+    public static string ColumnName = "Name";
+
+    /// <summary>The Description column.</summary>
+    public static string ColumnDescription = "Description";
+
     /// <summary>The table name.</summary>
     public static string DataTableName = "DetailDialog";
 
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
-    /// <summary>The UserID column name.</summary>
-    public static string ColumnUserID = "UserID";
-
     /// <summary>The DataConfigName column name.</summary>
     public static string ColumnDataConfigName = "DataConfigName";
 
     /// <summary>The TableName column name.</summary>
     public static string ColumnTableName = "TableName";
+
+    /// <summary>The UserID column name.</summary>
+    public static string ColumnUserID = "UserID";
 
     /// <summary>The DataValueCount column name.</summary>
     public static string ColumnDataValueCount = "DataValueCount";

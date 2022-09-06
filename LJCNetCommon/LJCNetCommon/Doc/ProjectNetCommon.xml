@@ -29,6 +29,17 @@
         The .NET Common library contains classes that provide common functionality
         for all .NET program types.
       </para>
+      <para>
+        The most commonly used Static Function Classes are: NetCommon, NetFile and
+        NetString.
+      </para>
+      <para>
+        The most commonly used Collection and Object class pairs are:
+        DbColumns/DbColumn and DbValues/DbValue.
+      </para>
+      <para>
+        LJCReflect and LJCAssemblyReflect are commonly used reflection classes.
+      </para>
     </remarks>
   </AppSettings>
 </items>

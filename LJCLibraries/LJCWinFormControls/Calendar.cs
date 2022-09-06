@@ -1,4 +1,3 @@
-// Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved
 // Calendar.cs
 using System;
 using System.Windows.Forms;
@@ -6,7 +5,8 @@ using LJCNetCommon;
 
 namespace LJCWinFormControls
 {
-  /// <summary>The calendar form.</summary>
+  // The calendar form.
+  /// <include path='items/Calendar/*' file='Doc/ProjectControls.xml'/>
   public partial class Calendar : Form
   {
     #region Constructors

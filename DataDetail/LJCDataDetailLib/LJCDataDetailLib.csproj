@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\..\LJCSQLUtilLib\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
       <Private>True</Private>

@@ -1,11 +1,11 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// ChangeTimer.cs
+﻿// ChangeTimer.cs
 using System;
 using System.Windows.Forms;
 
 namespace LJCWinFormCommon
 {
-  /// <summary>Provides Change Processing functionality.</summary>
+  // Provides Change Processing functionality.
+  /// <include path='items/ChangeTimer/*' file='Doc/ProjectCommon.xml'/>
   public class ChangeTimer
   {
     #region Constructors

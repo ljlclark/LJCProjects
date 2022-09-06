@@ -188,7 +188,7 @@ namespace DataDetailDAL
     public static string ColumnRowIndex = "RowIndex";
 
     /// <summary>The TabIndex column name.</summary>
-    public static string ColumnTabbingIndex = "TabIndex";
+    public static string ColumnTabbingIndex = "TabbingIndex";
 
     /// <summary>The AllowDisplay column name.</summary>
     public static string ColumnAllowDisplay = "AllowDisplay";

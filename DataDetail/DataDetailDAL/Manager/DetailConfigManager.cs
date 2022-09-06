@@ -31,9 +31,7 @@ namespace DataDetailDAL
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        DetailConfig.ColumnUserID,
-        DetailConfig.ColumnDataConfigName,
-        DetailConfig.ColumnTableName
+        DetailConfig.ColumnName
       });
     }
 
@@ -99,7 +97,7 @@ namespace DataDetailDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DetailConfig RetrieveWithID(int id, List<string> propertyNames = null)
+    public DetailConfig RetrieveWithID(long id, List<string> propertyNames = null)
     {
       DetailConfig retValue;
 
@@ -111,12 +109,25 @@ namespace DataDetailDAL
 
     // Retrieves a record with the supplied name value.
     /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DetailConfig RetrieveWithUnique(string userID, string dataConfigName
+    public DetailConfig RetrieveWithUnique(string name
+      , List<string> propertyNames = null)
+    {
+      DetailConfig retValue;
+
+      var keyColumns = GetUniqueKey(name);
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      retValue = ResultConverter.CreateData(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a record with the supplied name value.
+    /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DetailConfig RetrieveWithUniqueTable(string userID, string dataConfigName
       , string tableName, List<string> propertyNames = null)
     {
       DetailConfig retValue;
 
-      var keyColumns = GetUniqueKey(userID, dataConfigName, tableName);
+      var keyColumns = GetUniqueTableKey(userID, dataConfigName, tableName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -127,7 +138,7 @@ namespace DataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns GetIDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -141,7 +152,19 @@ namespace DataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(string userID, string dataConfigName
+    public DbColumns GetUniqueKey(string name)
+    {
+      // Needs cast to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { DetailConfig.ColumnName, (object)name }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
+    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetUniqueTableKey(string userID, string dataConfigName
       , string tableName)
     {
       // Needs cast to select the correct Add overload.

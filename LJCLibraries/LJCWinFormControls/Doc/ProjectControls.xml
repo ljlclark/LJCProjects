@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ProjectControls.xml -->
+<items>
+  <Calendar>
+    <summary>
+      The calendar form.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The WinForm Controls library contains extended controls for use in WinForm
+        programs.
+      </para>
+      <para>
+        The WinForm Controls library is part of the LJCLibraries solution.
+      </para>
+    </remarks>
+  </Calendar>
+</items>

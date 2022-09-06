@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
 <!-- LJCDataGrid.xml -->
 <items>
   <LJCDataGrid>
@@ -29,14 +28,6 @@
         The grid has extended methods for grid configuration.&lt;br /&gt;
         These methods are LJCSetPlain(), LJCAddColumn(), LJCAddDisplayColumns()
         and LJCRestoreColumnValues().&lt;br /&gt;
-      </para>
-      <para>-- Project Level Remarks</para>
-      <para>
-        The WinForm Controls library contains extended controls for use in WinForm
-        programs.
-      </para>
-      <para>
-        The WinForm Controls library is part of the LJCLibraries solution.
       </para>
     </remarks>
   </LJCDataGrid>

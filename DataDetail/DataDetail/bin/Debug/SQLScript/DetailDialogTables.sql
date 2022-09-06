@@ -12,9 +12,11 @@ if not exists (select * from INFORMATION_SCHEMA.TABLES
 begin
 create table dbo.DetailConfig(
   ID bigint identity(1,1) NOT NULL,
-  UserID nvarchar(60) not null,
+  [Name] nvarchar(60) not null,
+  [Description] nvarchar(60) not null,
   DataConfigName nvarchar(60) not null,
   TableName nvarchar(60) not null,
+  UserID nvarchar(60) null,
   DataValueCount int not null,
   ColumnRowsLimit int not null,
   PageColumnsLimit int not null,
@@ -25,10 +27,11 @@ create table dbo.DetailConfig(
   ControlRowSpacing int not null,
   ControlRowHeight int not null,
   ControlsHeight int not null,
+  ControlsWidth int not null,
   constraint PK_DetailDialog
     primary key clustered (ID asc),
   constraint UK_DetailDialog
-    unique (UserID, DataConfigName, TableName)
+    unique (Name)
 )
 end
 

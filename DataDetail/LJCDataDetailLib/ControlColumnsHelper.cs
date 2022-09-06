@@ -150,12 +150,16 @@ namespace LJCDataDetailLib
       }
 
       // Calculate config values.
-      DetailConfig.DataValueCount = dataColumns.Count;
       DetailConfig.ControlsWidth = ControlsWidth(retValue);
+
+      DetailConfig.DataValueCount = 0;
       if (dataColumns != null)
       {
+        DetailConfig.DataValueCount = dataColumns.Count;
         DetailConfig.ControlsHeight = ControlsHeight(dataColumns.Count);
       }
+      // *** Next Statement *** Add - 9/6
+      UpdateDetailConfig(mManagers.DetailConfigManager, DetailConfig);
       return retValue;
     }
     #endregion
@@ -334,6 +338,18 @@ namespace LJCDataDetailLib
             }
           }
         }
+      }
+    }
+
+    // 
+    private void UpdateDetailConfig(DetailConfigManager configManager
+      , DetailConfig dataObject)
+    {
+      if (dataObject.ID > 0)
+      {
+        var keyColumns = configManager.GetIDKey(dataObject.ID);
+
+        configManager.Update(dataObject, keyColumns);
       }
     }
     #endregion

@@ -22,42 +22,42 @@ namespace DataDetail
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      string userID = "Les";
+      string userID = "-null";
       string dataConfigName = "LJCData";
       string tableName = "PersonTest";
 
       // *** Begin *** - Testing
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName)
-      };
-      var managers = new DataDetailManagers();
-      managers.SetDBProperties(dbServiceRef, dataConfigName);
+      //var dbServiceRef = new DbServiceRef()
+      //{
+      //  DbDataAccess = new DbDataAccess(dataConfigName)
+      //};
+      //var managers = new DataDetailManagers();
+      //managers.SetDBProperties(dbServiceRef, dataConfigName);
 
-      var configManager = managers.DetailConfigManager;
-      var config = configManager.RetrieveWithUnique(userID, dataConfigName
-       , tableName);
+      //var configManager = managers.DetailConfigManager;
+      //var detailConfig = configManager.RetrieveWithUniqueTable(userID, dataConfigName
+      // , tableName);
 
-      var rowManager = managers.ControlRowManager;
-      var keyColumns = new DbColumns()
-      {
-        { ControlRow.ColumnAllowDisplay, 1 }
-      };
-      rowManager.Delete(keyColumns);
+      //var rowManager = managers.ControlRowManager;
+      //var keyColumns = new DbColumns()
+      //{
+      //  { ControlRow.ColumnAllowDisplay, 1 }
+      //};
+      //rowManager.Delete(keyColumns);
 
-      var columnManager = managers.ControlColumnManager;
-      if (config != null)
-      {
-        keyColumns = new DbColumns()
-        {
-          { ControlColumn.ColumnDetailConfigID, config.ID }
-        };
-        columnManager.Delete(keyColumns);
-      }
+      //var columnManager = managers.ControlColumnManager;
+      //if (detailConfig != null)
+      //{
+      //  keyColumns = new DbColumns()
+      //  {
+      //    { ControlColumn.ColumnDetailConfigID, detailConfig.ID }
+      //  };
+      //  columnManager.Delete(keyColumns);
+      //}
 
-      keyColumns = configManager.GetUniqueKey(userID, dataConfigName
-        , tableName);
-      configManager.Delete(keyColumns);
+      //keyColumns = configManager.GetUniqueTableKey(userID, dataConfigName
+      //  , tableName);
+      //configManager.Delete(keyColumns);
       // *** End   *** - Testing
 
       DataDetailDialog dialog = new DataDetailDialog(userID, dataConfigName

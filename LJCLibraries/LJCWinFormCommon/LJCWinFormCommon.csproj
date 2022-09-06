@@ -67,6 +67,7 @@
     <Content Include="Doc\ModuleReferences.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Doc\ProjectCommon.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

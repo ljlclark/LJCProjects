@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -38,15 +39,15 @@ namespace DataDetail
 
       // Get DetailConfig data.
       var configManager = mManagers.DetailConfigManager;
-      LJCDetailConfig = configManager.RetrieveWithUnique(userID
+      LJCDetailConfig = configManager.RetrieveWithUniqueTable(userID
         , dataConfigName, tableName);
 
-      var config = LJCDetailConfig;
-      if (config != null)
+      var detailConfig = LJCDetailConfig;
+      if (detailConfig != null)
       {
         // Get ControlColumns data.
         var columnManager = mManagers.ControlColumnManager;
-        mControlColumns = columnManager.LoadWithParentID(config.ID);
+        mControlColumns = columnManager.LoadWithParentID(detailConfig.ID);
 
         // Get ControlRows data into ControlColumns.
         var rowManager = mManagers.ControlRowManager;
@@ -61,9 +62,11 @@ namespace DataDetail
         // Set default values.
         LJCDetailConfig = new DetailConfig()
         {
-          UserID = userID,
+          Name = $"Detail{tableName}Standard",
+          Description = $"{tableName} Detail Standard",
           DataConfigName = dataConfigName,
           TableName = tableName,
+          UserID = userID,
           BorderHorizontal = 5,
           BorderVertical = 8,
           CharacterPixels = 6,
@@ -75,13 +78,13 @@ namespace DataDetail
           MaxControlCharacters = 40,
           PageColumnsLimit = 2,
         };
-        config = LJCDetailConfig;
+        detailConfig = LJCDetailConfig;
 
         // Add DetailConfig with default data.
-        var addedRecord = configManager.Add(config);
+        var addedRecord = configManager.Add(detailConfig);
         if (addedRecord != null)
         {
-          config.ID = addedRecord.ID;
+          detailConfig.ID = addedRecord.ID;
         }
         mControlColumns = new ControlColumns();
       }
@@ -215,8 +218,19 @@ namespace DataDetail
         // Create new configuration.
         config.ControlRowHeight = GetControlRowHeight(config.ControlRowHeight);
         mControlColumns
+
           = mControlColumnsHelper.CreateNewControlColumns(LJCDataColumns);
         CreateNewData();
+      }
+      else
+      {
+        // *** Begin *** Add - 9/6
+        config.ControlsWidth
+          = mControlColumnsHelper.ControlsWidth(mControlColumns);
+
+        config.ControlsHeight
+          = mControlColumnsHelper.ControlsHeight(LJCDataColumns.Count);
+        // *** End   *** Add - 9/6
       }
 
       CreateConfigControls();

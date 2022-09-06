@@ -144,6 +144,7 @@
     <Content Include="Doc\LJCTabControl.xml" />
     <Content Include="Doc\LJCTabPanel.xml" />
     <Content Include="Doc\PanelControlsAdjust.xml" />
+    <Content Include="Doc\ProjectControls.xml" />
     <Content Include="Doc\SyntaxColors.xml" />
     <Content Include="Doc\CodeTokenizer.xml" />
   </ItemGroup>
