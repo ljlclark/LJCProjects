@@ -218,20 +218,18 @@ namespace DataDetail
         // Create new configuration.
         config.ControlRowHeight = GetControlRowHeight(config.ControlRowHeight);
         mControlColumns
-
           = mControlColumnsHelper.CreateNewControlColumns(LJCDataColumns);
         CreateNewData();
       }
-      else
-      {
-        // *** Begin *** Add - 9/6
-        config.ControlsWidth
-          = mControlColumnsHelper.ControlsWidth(mControlColumns);
 
-        config.ControlsHeight
-          = mControlColumnsHelper.ControlsHeight(LJCDataColumns.Count);
-        // *** End   *** Add - 9/6
-      }
+      // *** Begin *** Add - 9/6
+      config.ControlsWidth
+        = mControlColumnsHelper.ControlsWidth(mControlColumns);
+
+      config.ControlsHeight
+        = mControlColumnsHelper.ControlsHeight(LJCDataColumns.Count);
+      UpdateDetailConfig(mManagers.DetailConfigManager, config);
+      // *** End   *** Add - 9/6
 
       CreateConfigControls();
       MainTabs.Width = ClientSize.Width;
@@ -283,6 +281,18 @@ namespace DataDetail
       DataRetrieve();
     }
     private Timer mTimer;
+
+    // 
+    private void UpdateDetailConfig(DetailConfigManager configManager
+      , DetailConfig dataObject)
+    {
+      if (dataObject.ID > 0)
+      {
+        var keyColumns = configManager.GetIDKey(dataObject.ID);
+
+        configManager.Update(dataObject, keyColumns);
+      }
+    }
     #endregion
 
     #region Process Controls Methods

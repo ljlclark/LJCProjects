@@ -344,11 +344,15 @@ namespace LJCDBClientLib
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
         , propertyNames);
-        var requestKeys = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);
+        // *** Next Statement *** Add - 9/7
+        if (dataColumns.Count > 0)
+        {
+          var requestKeys = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);
 
-        Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
-          , dataColumns, DataConfigName, SchemaName, requestKeys, filters);
-        ExecuteRequest(Request);
+          Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
+            , dataColumns, DataConfigName, SchemaName, requestKeys, filters);
+          ExecuteRequest(Request);
+        }
       }
       else
       {
