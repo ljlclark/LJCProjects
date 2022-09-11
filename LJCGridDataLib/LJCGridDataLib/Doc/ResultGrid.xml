@@ -60,6 +60,38 @@
     </summary>
     <param name="dbColumns">The DbColumns.</param>
     <param name="columnNames">The display column names.</param>
+    <example>
+      <code>
+        using LJCDataGridLib;
+        using LJCDBClientLib;
+        using LJCDBMessage;
+        
+        DbConnectionStringBuilder connectionBuilder;
+        string databaseName = "DatabaseName";
+        connectionBuilder = new DbConnectionStringBuilder()
+        {
+          { "Data Source", "DataServiceName" },
+          { "Initial Catalog", databaseName },
+          { "Integrated Security", "True" }
+        };
+        string connectionString = connectionBuilder.ConnectionString;
+        string providerName = "System.Data.SqlClient";
+        
+        var dbServiceRef = new DbServiceRef()
+        {
+          DbDataAccess = new DbDataAccess(connectionString
+            , providerName, databaseName)
+        };
+        var dataManager = new DataManager(dbServiceRef, null, "TableName");
+        var dbResult = dataManager.Load();
+        if (dbResult.HasData())
+        {
+          // Setup grid columns.
+          var resultGridData = new ResultGridData(LJCDataGridName);
+          resultGridData.SetDisplayColumns(dbResult.Columns);
+        }
+      </code>
+    </example>
   </SetDisplayColumns1>
   <SetDisplayColumns2>
     <summary>
