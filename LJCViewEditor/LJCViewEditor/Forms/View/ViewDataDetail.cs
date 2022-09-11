@@ -69,9 +69,11 @@ namespace LJCViewEditor
 		// Retrieves the initial control data.
 		private void DataRetrieve()
 		{
+      ViewData dataRecord;
+      
 			Cursor = Cursors.WaitCursor;
 			Text = "ViewData Detail";
-			if (LJCID > 0)
+      if (LJCID > 0)
 			{
 				Text += " - Edit";
 				LJCIsUpdate = true;
@@ -79,7 +81,7 @@ namespace LJCViewEditor
 				{
 					{ ViewData.ColumnID, LJCID }
 				};
-				var dataRecord = mViewDataManager.Retrieve(keyColumns);
+				dataRecord = mViewDataManager.Retrieve(keyColumns);
 				GetRecordValues(dataRecord);
 			}
 			else
@@ -88,6 +90,20 @@ namespace LJCViewEditor
 				LJCIsUpdate = false;
 				LJCRecord = new ViewData();
 				ParentTextbox.Text = LJCParentName;
+
+				// Get default values.
+				var name = $"{LJCParentName}Standard";
+        var keyRecord = new DbColumns()
+				{
+					{ ViewData.ColumnName, (object)name }
+				};
+
+				dataRecord = mViewDataManager.Retrieve(keyRecord);
+				if (null == dataRecord)
+				{
+					NameTextbox.Text = name;
+					DescriptionTextbox.Text = $"{LJCParentName} Standard View";
+        }
 			}
 			Cursor = Cursors.Default;
 		}

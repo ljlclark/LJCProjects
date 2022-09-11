@@ -22,6 +22,7 @@
       Retrieves a DbColumns collection for the specified parent ID.
     </summary>
     <param name="viewDataID">The parent ID.</param>
+    <param name="tableName">The Table name.</param>
     <returns>The DbColumns collection.</returns>
   </LoadDbColumnsWithParentID>
   <LoadWithParentID>

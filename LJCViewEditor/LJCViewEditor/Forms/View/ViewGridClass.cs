@@ -42,6 +42,11 @@ namespace LJCViewEditor
       Parent.Cursor = Cursors.WaitCursor;
       Parent.ViewGrid.Rows.Clear();
 
+      // *** Begin *** Add - 9/11
+      Parent.DataGrid.Rows.Clear();
+      Parent.DataGrid.Columns.Clear();
+      // *** End   *** Add - 9/11
+
       // Check for existing ViewTable and write a new one if not found.
       ViewTable viewTable = mViewTableManager.RetrieveWithUniqueKey(tableName);
       if (null == viewTable)

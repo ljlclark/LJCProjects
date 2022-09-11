@@ -475,7 +475,6 @@ namespace LJCDBMessage
           string text = $"{tableName}.{columnName} = {value}\r\n";
 
           // Create the "is null" condition.
-          // *** Begin *** Add - 9/24
           bool isNull = false;
           if (dbColumn.DataTypeName != "String"
             && dbColumn.DataTypeName != "Boolean")
@@ -485,7 +484,6 @@ namespace LJCDBMessage
               isNull = true;
             }
           }
-          // *** End   *** Add - 9/24
           if ("'-null'" == value
             || "'-'" == value)
           {
@@ -582,11 +580,8 @@ namespace LJCDBMessage
             tableName = alias;
           }
         }
-        // *** Next Statement *** Add - 12/24
         retValue = $"{tableName}.{columnName}";
       }
-      // *** Next Statement *** Delete 12/24
-      //retValue = $"{tableName}.{columnName}";
       return retValue;
     }
 

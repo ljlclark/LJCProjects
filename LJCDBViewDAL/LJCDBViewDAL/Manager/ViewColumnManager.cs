@@ -48,54 +48,40 @@ namespace LJCDBViewDAL
 
     // Retrieves a DbColumns collection for the specified parent ID.
     /// <include path='items/LoadDbColumnsWithParentID/*' file='Doc/ViewColumnManager.xml'/>
-    public DbColumns LoadDbColumnsWithParentID(int viewDataID)
+    public DbColumns LoadDbColumnsWithParentID(int viewDataID, string tableName)
     {
-      DbResult dbResult;
+      DbResult viewColumnResult;
       DbColumns retValue;
 
       // Load from DataManager to get DbColumns result.
       var keyColumns = GetParentKey(viewDataID);
-      dbResult = DataManager.Load(keyColumns);
+      viewColumnResult = DataManager.Load(keyColumns);
 
       // Copies ViewColumn properties to DbColumn objects.
       // Where ViewColumn properties match DbColumn.PropertyName.
       ResultConverter<DbColumn, DbColumns> resultConverter
         = new ResultConverter<DbColumn, DbColumns>();
-      retValue = resultConverter.CreateCollection(dbResult);
+      retValue = resultConverter.CreateCollection(viewColumnResult);
 
+      // *** Begin *** - Add 9/11
+      // Get table definition.
+      var dataManager = new DataManager(DataManager.DbServiceRef
+        , DataConfigName, tableName);
+      var recordColumns = dataManager.DataDefinition;
+      // *** End   ***
+
+      // Populate missing values.
       // Process each Data Object column.
-      DbColumns recordColumns = dbResult.Columns;
       foreach (DbColumn column in retValue)
       {
-        // Search each record.
-        foreach (DbRow dbRow in dbResult.Rows)
+        // *** Begin *** Add - 9/11
+        var findColumn = recordColumns.LJCSearchName(column.PropertyName);
+        if (findColumn != null)
         {
-          // Search each value in the record for Value that matches ColumnName.
-          bool success = false;
-          foreach (DbValue dbValue in dbRow.Values)
-          {
-            if (dbValue.Value != null
-              && dbValue.Value.ToString() == column.ColumnName)
-            {
-              // Get the associated Definition Object.
-              // *** Next Statement *** Change- 9/8
-              //var findColumn = recordColumns.LJCSearchName(dbValue.PropertyName);
-              var findColumn = recordColumns.LJCSearchName(dbValue.Value.ToString());
-              if (findColumn != null)
-              {
-                success = true;
-                column.MaxLength = findColumn.MaxLength;
-                // *** Next Statement *** Add - 9/8
-                column.IsPrimaryKey = findColumn.IsPrimaryKey;
-              }
-              break;
-            }
-          }
-          if (success)
-          {
-            break;
-          }
+          column.MaxLength = findColumn.MaxLength;
+          column.IsPrimaryKey = findColumn.IsPrimaryKey;
         }
+        // *** end   ***
       }
       return retValue;
     }

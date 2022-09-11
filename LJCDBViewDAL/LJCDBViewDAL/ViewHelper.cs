@@ -103,7 +103,8 @@ namespace LJCDBViewDAL
     private void GetViewColumns(int viewDataID, DbRequest dbRequest)
     {
       // Retrieve DbColumns directly.
-      dbRequest.Columns = ViewColumnManager.LoadDbColumnsWithParentID(viewDataID);
+      dbRequest.Columns = ViewColumnManager.LoadDbColumnsWithParentID(viewDataID
+        , dbRequest.TableName);
     }
 
     // Creates the DbRequest Joins.
@@ -840,13 +841,11 @@ namespace LJCDBViewDAL
 
       if (null == dbRequest)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestTable - dbRequest is null.";
         throw new ArgumentException(errorText);
       }
       if (false == NetString.HasValue(dbRequest.TableName))
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestTable - dbRequest table name is missing.";
         throw new ArgumentException(errorText);
       }
@@ -861,13 +860,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewDataID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestColumns - viewDataID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbRequest)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestColumns - dbRequest is null.";
         throw new ArgumentException(errorText);
       }
@@ -882,13 +879,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewDataID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoins - viewDataID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbRequest)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoins - dbRequest is null.";
         throw new ArgumentException(errorText);
       }
@@ -903,13 +898,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewJoinID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoinOns - viewJoinID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbJoin)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoinOns - dbJoin is null.";
         throw new ArgumentException(errorText);
       }
@@ -924,13 +917,11 @@ namespace LJCDBViewDAL
 
       if (null == viewJoin)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoinColumns - viewJoin is null.";
         throw new ArgumentException(errorText);
       }
       if (null == dbJoin)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestJoinColumns - dbJoin is null.";
         throw new ArgumentException(errorText);
       }
@@ -945,13 +936,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewDataID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestFilters - viewDataID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbRequest)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestFilters - dbRequest is null.";
         throw new ArgumentException(errorText);
       }
@@ -966,13 +955,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewFilterID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestConditionSet - viewFilterID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbFilter)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestConditionSet - dbFilter is null.";
         throw new ArgumentException(errorText);
       }
@@ -987,13 +974,11 @@ namespace LJCDBViewDAL
 
       if (0 == conditionSetID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestConditions - conditionSetID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbConditionSet)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestConditions - dbConditionSet is null.";
         throw new ArgumentException(errorText);
       }
@@ -1008,13 +993,11 @@ namespace LJCDBViewDAL
 
       if (0 == viewDataID)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestOrderBys - viewDataID == 0.";
         throw new ArgumentException(errorText);
       }
       if (null == dbRequest)
       {
-        retValue = false;
         errorText = "ViewHelper.SaveRequestOrderBys - dbRequest is null.";
         throw new ArgumentException(errorText);
       }

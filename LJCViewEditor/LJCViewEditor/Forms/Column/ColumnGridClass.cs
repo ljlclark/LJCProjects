@@ -1,4 +1,4 @@
-// Copyright (c) Lester J. Clark 2021 - All Rights Reserved
+// ColumnGridClass.cs
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

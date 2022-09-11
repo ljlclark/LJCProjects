@@ -437,6 +437,8 @@ namespace LJCDBDataAccess
       builder.AppendLine("select TABLE_NAME");
       builder.AppendLine($"from {dbName}.INFORMATION_SCHEMA.TABLES");
       builder.AppendLine("where TABLE_TYPE = 'BASE TABLE'");
+      // *** Next Statement *** Add- 9/9
+      builder.AppendLine("order by TABLE_NAME");
       SqlStatement = builder.ToString();
 
       try

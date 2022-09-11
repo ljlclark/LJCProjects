@@ -66,6 +66,7 @@ namespace LJCViewEditor
 
       SqlTableManager sqlTableManager = new SqlTableManager(DbServiceRef
         , DataConfigName);
+
       dbResult = sqlTableManager.DataManager.GetTableNames();
       if (DbResult.HasRows(dbResult))
       {
