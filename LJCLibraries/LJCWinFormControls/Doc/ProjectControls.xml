@@ -8,11 +8,23 @@
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>
-        The WinForm Controls library contains extended controls for use in WinForm
-        programs.
+        The WinForm Controls library contains extended controls for use in
+        WinForm programs.
       </para>
       <para>
         The WinForm Controls library is part of the LJCLibraries solution.
+      </para>
+      <para>
+        The LJCDataGrid and LJCGridRow classes provided enhanced functionality
+        for List Grids.
+      </para>
+      <para>
+        The LJCTabControl, LJCTabPanel and LJCPanelManager classes provide
+        enhanced functionality for Tab controls.
+      </para>
+      <para>
+        LJCItemCombo and LJCItem provide enhanced functionality for Combobox
+        controls.
       </para>
     </remarks>
   </Calendar>
