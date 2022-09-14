@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
 <items>
-	<GetProviderName>
-		<summary>
-			Retrieves the provider name value.
-		</summary>
-		<param name="connectionTypeName">The database connection type string.</param>
-		<returns>The provider name.</returns>
-		<example>
-			<code>
-				using LJCDataAccessConfig;
-
-				string connTypeName = "SQLServer";
-				string providerName = DataConfig.GetProviderName(connTypeName);
-			</code>
-		</example>
-	</GetProviderName>
 	<DataConfigC>
 		<summary>
 			Initializes an object instance.
@@ -27,20 +12,38 @@
 		</summary>
 		<returns>The identifier value.</returns>
 	</ToString>
-	<GetProviderName2>
+  <GetProviderName>
+    <summary>
+      Retrieves the provider name value.
+    </summary>
+    <param name="connectionTypeName">The database connection type string.</param>
+    <returns>The provider name.</returns>
+    <example>
+      <code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+        // Retrieves the provider name value.
+        private static void GetProviderName(string connTypeName)
+        {
+          var providerName = DataConfig.GetProviderName(connTypeName);
+        }
+      </code>
+    </example>
+  </GetProviderName>
+  <GetProviderName2>
 		<summary>
 			Retrieves the provider name value.
 		</summary>
 		<returns>The provider name.</returns>
 		<example>
 			<code>
-				using LJCDataAccessConfig;
+        // See the DataConfig setup code on the DataConfig class page.
 
-				DataConfigs configs = new DataConfigs();
-				configs.LJCLoadData();
-				DataConfig config = dataConfigs.LJCGetByName("ConfigName");
-
-				string providerName = config.GetProviderName();
+        // Retrieves the provider name value.
+        private static void GetProviderName2(DataConfig dataConfig)
+        {
+				  var providerName = dataConfig.GetProviderName();
+        }
 			</code>
 		</example>
 	</GetProviderName2>
@@ -51,13 +54,13 @@
 		<returns>The connection string.</returns>
 		<example>
 			<code>
-				using LJCDataAccessConfig;
+        // See the DataConfig setup code on the DataConfig class page.
 
-				DataConfigs configs = new DataConfigs();
-				configs.LJCLoadData();
-				DataConfig config = configs.LJCGetByName("ConfigName");
-
-				string connString = config.GetConnectionString();
+        // Creates the populated connection string.
+        private static void GetConnectionString(DataConfig dataConfig)
+        {
+				  var connString = dataConfig.GetConnectionString();
+        }
 			</code>
 		</example>
 	</GetConnectionString1>
@@ -69,14 +72,13 @@
 		<returns>The connection string.</returns>
 		<example>
 			<code>
-				using LJCDataAccessConfig;
+        // See the DataConfig setup code on the DataConfig class page.
 
-				DataConfigs configs = new DataConfigs();
-				configs.LJCLoadData();
-				DataConfig config = dataConfigs.LJCGetByName("ConfigName");
-
-				string connTypeName = config.ConnectionTypeName;
-				string connString = config.GetConnectionString(connTypeName);
+				// Creates the populated connection string from the ConnectionType name. 
+        private static void GetConnectionString2(string connTypeName)
+        {
+				  var connString = dataConfig.GetConnectionString(connTypeName);
+        }
 			</code>
 		</example>
 	</GetConnectionString2>
@@ -88,18 +90,19 @@
 		<returns>The connection string.</returns>
 		<example>
 			<code>
-				using LJCDataAccessConfig;
+        // See the DataConfig setup code on the DataConfig class page.
 
-				DataConfigs configs = new DataConfigs();
-				configs.LJCLoadData();
-				DataConfig config = configs.LJCGetByName("ConfigName");
+				// Creates the populated connection string from the template text.
+        private static void GetConnectionStringFromText(DataConfig dataConfig)
+        {
+	  			ConnectionTemplates templates = new ConnectionTemplates();
+		  		templates.LJCLoadData();
+          var connTypeName = dataConfig.ConnectionTypeName;
+			  	ConnectionTemplate template = templates.LJCGetByName(connTypeName);
 
-				ConnectionTemplates templates = new ConnectionTemplates();
-				templates.LJCLoadData();
-				ConnectionTemplate template = templates.LJCGetByName("SQLServer");
-
-				string connString;
-				connString = config.GetConnectionStringFromText(template.Template);
+					string connString;
+  				connString = dataConfig.GetConnectionStringFromText(template.Template);
+        }
 			</code>
 		</example>
 	</GetConnectionStringFromText>
@@ -110,13 +113,15 @@
 		<returns>The connection string.</returns>
 		<example>
 			<code>
-				using LJCDataAccessConfig;
+        // See the DataConfig setup code on the DataConfig class page.
 
-				DataConfigs configs = new DataConfigs();
-				configs.LJCLoadData();
-				DataConfig config = configs.LJCGetByName("ConfigName");
-
-				string connString = config.SQLIntegratedConnectionString("SQLServer");
+        // Creates the SQL integrated connection string from an internal value.
+        private static void SQLIntegratedConnectionString(DataConfig dataConfig)
+        {
+          var connTypeName = dataConfig.ConnectionTypeName;
+          string connString;
+				  connString = dataConfig.SQLIntegratedConnectionString(connTypeName);
+        }
 			</code>
 		</example>
 	</SQLIntegratedConnectionString>

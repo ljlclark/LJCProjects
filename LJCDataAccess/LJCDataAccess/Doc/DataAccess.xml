@@ -23,6 +23,8 @@
     <returns>The affected record count.</returns>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes an Insert, Update or Delete statement.
         private static void ExecuteNonQuery(DataAccess dataAccess)
         {
@@ -41,6 +43,8 @@
     <param name="scriptFileSpec">The script file specification.</param>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a DB script file.
         private static void ExecuteScript(DataAccess dataAccess)
         {
@@ -66,6 +70,8 @@
     <param name="scriptText">The script text.</param>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a DB Script text string.
         private static void ExecuteScriptText(DataAccess dataAccess)
         {
@@ -103,6 +109,8 @@
     </remarks>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a Select statement and fills the specified DataTable.
         private static void FillDataTable(DataAccess dataAccess)
         {
@@ -143,6 +151,8 @@
     </remarks>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a Select statement and retrieves the DbDataReader object.
         private static void GetDataReader(DataAccess dataAccess)
         {
@@ -189,6 +199,8 @@
     </returns>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a Select statement and retrieves the DataSet object.
         private static void GetDataSet(DataAccess dataAccess)
         {
@@ -248,6 +260,8 @@
     </returns>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a Select statement and retrieves the DataTable object.
         private static void GetDataTable(DataAccess dataAccess)
         {
@@ -284,6 +298,8 @@
     </returns>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Executes a Select statement and retrieves the DataTable object.
         private static void GetProcedureDataTable(DataAccess dataAccess)
         {
@@ -328,6 +344,8 @@
     </returns>
     <example>
       <code>
+        // See the DataAccess setup code on the DataAccess class page.
+
         // Retrieves the DataTable object with schema only.
         private static void GetSchemaOnly(DataAccess dataAccess)
         {

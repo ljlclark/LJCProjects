@@ -10,8 +10,38 @@
       <para>-- Project Level Remarks</para>
       <para>
         The Data Access Configuration library contains classes for deserializing a
-        configuration file and looking up the configuration values.
+        DB configuration file and looking up the configuration values.
+      </para>
+      <para>
+        The primary classes are
+        &lt;span class="userType"&gt;DataConfigs&lt;/span&gt; and
+        &lt;span class="userType"&gt;DataConfig&lt;/span&gt;.
       </para>
     </remarks>
+    <example>
+      <para>
+        This is main function sample code for testing. The code for the additional
+        test functions is listed under the methods with the same names.
+      </para>
+      <code>
+        using LJCDataAccessConfig;
+
+        // Test DataConfig.
+        private static void TestDataConfig()
+        {
+          DataConfigs dataConfigs = new DataConfigs();
+          dataConfigs.LJCLoadData();
+          dataConfig = dataConfigs.LJCGetByName("ConfigName");
+
+          var connTypeName = "SQLServer";
+          GetConnectionString(dataConfig);
+          GetConnectionString2(connTypeName);
+          GetConnectionStringFromText(dataConfig);
+          SQLIntegratedConnectionString(dataConfig);
+          GetProviderName(connTypeName);
+          GetProviderName2(dataConfig);
+        }
+      </code>
+    </example>
   </DataConfig>
 </items>
