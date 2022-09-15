@@ -274,7 +274,7 @@ namespace LJCViewEditor
           ResultGridData resultGridData = new ResultGridData(Parent.DataGrid);
           resultGridData.SetDisplayColumns(dbResult.Columns);
 
-          // Set grid data.
+          // Set Grid data.
           Parent.DataGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
           resultGridData.LoadRows(dbResult);
         }

@@ -1,5 +1,4 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// TableGridData.cs
+﻿// TableGridData.cs
 using LJCNetCommon;
 using LJCWinFormControls;
 using System;
@@ -12,88 +11,6 @@ namespace LJCGridDataLib
   public class TableGridData
   {
     #region Static Methods
-
-    // Get the included Columns from the DataColumns definition.
-    /// <include path='items/GetIncludedColumns/*' file='Doc/TableGrid.xml'/>
-    public static DataColumnCollection GetIncludedColumns(DataColumnCollection dataColumns
-      , List<string> columnNames)
-    {
-      DataColumn dataColumnClone;
-      DataColumnCollection retValue = null;
-
-      if (dataColumns != null && dataColumns.Count > 0
-        && columnNames != null && columnNames.Count > 0)
-      {
-        // Create columns from names.
-        DataTable workTable = new DataTable();
-        foreach (string columnName in columnNames)
-        {
-          DataColumn dataColumn = dataColumns[columnName];
-          if (dataColumn != null)
-          {
-            dataColumnClone = DataColumnClone(dataColumn);
-            workTable.Columns.Add(dataColumnClone);
-          }
-        }
-        retValue = workTable.Columns;
-      }
-      return retValue;
-    }
-
-    // Creates a DbColumns collection from a DataColumns collection.
-    /// <include path='items/GetDbColumns/*' file='Doc/TableGrid.xml'/>
-    public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
-    {
-      DbColumns retValue = null;
-
-      if (dataColumns != null && dataColumns.Count > 0)
-      {
-        retValue = new DbColumns();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          DbColumn dbColumn = GetDbColumn(dataColumn);
-          retValue.Add(dbColumn);
-        }
-      }
-      return retValue;
-    }
-
-    // Creates a DbColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/TableGrid.xml'/>
-    public static DbColumn GetDbColumn(DataColumn dataColumn)
-    {
-      DbColumn retValue;
-
-      retValue = new DbColumn()
-      {
-        ColumnName = dataColumn.ColumnName,
-        PropertyName = dataColumn.ColumnName,
-        Caption = dataColumn.ColumnName,
-        DataTypeName = dataColumn.DataType.Name,
-        MaxLength = dataColumn.MaxLength,
-        AutoIncrement = dataColumn.AutoIncrement,
-        AllowDBNull = dataColumn.AllowDBNull,
-        Unique = dataColumn.Unique
-      };
-      return retValue;
-    }
-
-    // Creates a ColumnNames list from a DataColumns collection.
-    /// <include path='items/GetColumnNames/*' file='Doc/TableGrid.xml'/>
-    public static List<string> GetColumnNames(DataColumnCollection dataColumns)
-    {
-      List<string> retValue = null;
-
-      if (dataColumns != null && dataColumns.Count > 0)
-      {
-        retValue = new List<string>();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          retValue.Add(dataColumn.ColumnName);
-        }
-      }
-      return retValue;
-    }
 
     // Creates a new DataColumns object.
     /// <include path='items/CreateDataColumns/*' file='Doc/TableGrid.xml'/>
@@ -144,6 +61,88 @@ namespace LJCGridDataLib
           MaxLength = dataColumn.MaxLength,
           Unique = dataColumn.Unique
         };
+      }
+      return retValue;
+    }
+
+    // Creates a DbColumn object from a DataColumn object.
+    /// <include path='items/GetDbColumn/*' file='Doc/TableGrid.xml'/>
+    public static DbColumn GetDbColumn(DataColumn dataColumn)
+    {
+      DbColumn retValue;
+
+      retValue = new DbColumn()
+      {
+        ColumnName = dataColumn.ColumnName,
+        PropertyName = dataColumn.ColumnName,
+        Caption = dataColumn.ColumnName,
+        DataTypeName = dataColumn.DataType.Name,
+        MaxLength = dataColumn.MaxLength,
+        AutoIncrement = dataColumn.AutoIncrement,
+        AllowDBNull = dataColumn.AllowDBNull,
+        Unique = dataColumn.Unique
+      };
+      return retValue;
+    }
+
+    // Creates a DbColumns collection from a DataColumns collection.
+    /// <include path='items/GetDbColumns/*' file='Doc/TableGrid.xml'/>
+    public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
+    {
+      DbColumns retValue = null;
+
+      if (dataColumns != null && dataColumns.Count > 0)
+      {
+        retValue = new DbColumns();
+        foreach (DataColumn dataColumn in dataColumns)
+        {
+          DbColumn dbColumn = GetDbColumn(dataColumn);
+          retValue.Add(dbColumn);
+        }
+      }
+      return retValue;
+    }
+
+    // Creates a ColumnNames list from a DataColumns collection.
+    /// <include path='items/GetColumnNames/*' file='Doc/TableGrid.xml'/>
+    public static List<string> GetColumnNames(DataColumnCollection dataColumns)
+    {
+      List<string> retValue = null;
+
+      if (dataColumns != null && dataColumns.Count > 0)
+      {
+        retValue = new List<string>();
+        foreach (DataColumn dataColumn in dataColumns)
+        {
+          retValue.Add(dataColumn.ColumnName);
+        }
+      }
+      return retValue;
+    }
+
+    // Get the included Columns from the DataColumns definition.
+    /// <include path='items/GetIncludedColumns/*' file='Doc/TableGrid.xml'/>
+    public static DataColumnCollection GetIncludedColumns(DataColumnCollection dataColumns
+      , List<string> columnNames)
+    {
+      DataColumn dataColumnClone;
+      DataColumnCollection retValue = null;
+
+      if (dataColumns != null && dataColumns.Count > 0
+        && columnNames != null && columnNames.Count > 0)
+      {
+        // Create columns from names.
+        DataTable workTable = new DataTable();
+        foreach (string columnName in columnNames)
+        {
+          DataColumn dataColumn = dataColumns[columnName];
+          if (dataColumn != null)
+          {
+            dataColumnClone = DataColumnClone(dataColumn);
+            workTable.Columns.Add(dataColumnClone);
+          }
+        }
+        retValue = workTable.Columns;
       }
       return retValue;
     }

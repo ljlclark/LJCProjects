@@ -6,6 +6,13 @@
       Initializes an object instance.
     </summary>
     <param name="fileSpec">The Configuration file specification.</param>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var appSettings = new AppSettings("AppName.exe.config");
+      </code>
+    </example>
   </AppSettingsC>
   
   <!-- Get Setting Types -->
@@ -16,7 +23,8 @@
     <param name="keyName">The setting key name.</param>
     <returns>The bool setting value.</returns>
     <example>
-      <code>        // App.Config file.
+      <code>
+        // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
         //     &lt;add key="UseLocal" value="true" /&gt;
@@ -26,7 +34,8 @@
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
-        bool useLocal = appSettings.GetBool("UseLocal");</code>
+        bool useLocal = appSettings.GetBool("UseLocal");
+      </code>
     </example>
   </GetBool>
   <GetColor>
@@ -37,7 +46,8 @@
     <param name="defaultColor">The default color.</param>
     <returns>The Color setting value.</returns>
     <example>
-      <code>        // App.Config file.
+      <code>
+        // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
         //     &lt;add key="BeginColor" value="AliceBlue" /&gt;
@@ -48,7 +58,8 @@
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
-        Color beginColor = appSettings.GetColor("BeginColor", Color.AliceBlue);</code>
+        Color beginColor = appSettings.GetColor("BeginColor", Color.AliceBlue);
+      </code>
     </example>
   </GetColor>
   <GetColorFromRGBString>
@@ -58,7 +69,8 @@
     <param name="rgbText">The RGB text.</param>
     <returns>The Color value.</returns>
     <example>
-      <code>        // App.Config file.
+      <code>
+        // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
         //     &lt;add key="EndColor" value="255,255,255" /&gt;
@@ -70,7 +82,8 @@
 
         var appSettings = new AppSettings("AppName.exe.config");
         Color endColor;
-        endColor = appSettings.GetColorFromRGBString("EndColor");</code>
+        endColor = appSettings.GetColorFromRGBString("EndColor");
+      </code>
     </example>
   </GetColorFromRGBString>
   <GetColorValue>
@@ -80,11 +93,13 @@
     <param name="text">The color string text.</param>
     <returns>The integer color value.</returns>
     <example>
-      <code>        using System.Drawing;
+      <code>
+        using System.Drawing;
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
-        Color white = appSettings.GetColorValue("255,255,255");</code>
+        Color white = appSettings.GetColorValue("255,255,255");
+      </code>
     </example>
   </GetColorValue>
   <GetString>
@@ -96,7 +111,8 @@
       Indicates if a missing value throws an exception.
     </param>
     <example>
-      <code>        // App.Config file.
+      <code>
+        // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
         //     &lt;add key="DataConfigName" value="AppTables" /&gt;
@@ -107,7 +123,8 @@
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
-        string dataConfigName = appSettings.GetString("DataConfigName");</code>
+        string dataConfigName = appSettings.GetString("DataConfigName");
+      </code>
     </example>
     <returns>The string setting value.</returns>
   </GetString>

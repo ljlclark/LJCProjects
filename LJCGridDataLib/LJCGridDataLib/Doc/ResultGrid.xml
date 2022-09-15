@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
 <!-- ResultGrid.xml -->
 <items>
   <!--GetDisplayColumns>
@@ -16,17 +15,65 @@
     </summary>
     <param name="grid">The Grid control.</param>
   </ResultGridC>
+
+  <!-- Row Data Methods -->
   <LoadRows1>
     <summary>
-      Loads the grid rows from the result DbRecords records.
+      Loads the grid rows from the result Rows.
     </summary>
     <param name="dbResult">The DbResult object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGrid class page.
+
+        // Loads the grid rows from the result Rows.
+        private static void LoadRows1(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (dbResult.HasData())
+          {
+            LJCDataGridName.Clear();
+
+            // Setup grid columns.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Set Grid data.
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+            resultGridData.LoadRows(dbResult);
+          }
+        }
+      </code>
+    </example>
   </LoadRows1>
   <LoadRows2>
     <summary>
-      Loads the grid rows from the DbRecords object.
+      Loads the grid rows from the DbRows object.
     </summary>
     <param name="dbRows">The DbRows object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGrid class page.
+
+        // Loads the grid rows from the DbRows object.
+        private static void LoadRows2(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (dbResult.HasData())
+          {
+            LJCDataGridName.Clear();
+
+            // Setup grid columns.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Set Grid data.
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+            resultGridData.LoadRows(dbResult.Rows);
+          }
+        }
+      </code>
+    </example>
   </LoadRows2>
   <RowAdd>
     <summary>
@@ -54,6 +101,8 @@
       <para>Syntax: protected void OnAddRow()</para>
     </remarks>
   </OnAddRow>
+
+  <!-- Configuration Methods -->
   <SetDisplayColumns1>
     <summary>
       Configure the Display Columns from the DbColumns definition.
@@ -62,33 +111,20 @@
     <param name="columnNames">The display column names.</param>
     <example>
       <code>
-        using LJCDataGridLib;
-        using LJCDBClientLib;
-        using LJCDBMessage;
-        
-        DbConnectionStringBuilder connectionBuilder;
-        string databaseName = "DatabaseName";
-        connectionBuilder = new DbConnectionStringBuilder()
+        // See the DataManager setup code on the ResultGrid class page.
+
+        // Configure the Display Columns from the DbColumns definition.
+        private static void SetDisplayColumns1(DataManager dataManager)
         {
-          { "Data Source", "DataServiceName" },
-          { "Initial Catalog", databaseName },
-          { "Integrated Security", "True" }
-        };
-        string connectionString = connectionBuilder.ConnectionString;
-        string providerName = "System.Data.SqlClient";
-        
-        var dbServiceRef = new DbServiceRef()
-        {
-          DbDataAccess = new DbDataAccess(connectionString
-            , providerName, databaseName)
-        };
-        var dataManager = new DataManager(dbServiceRef, null, "TableName");
-        var dbResult = dataManager.Load();
-        if (dbResult.HasData())
-        {
-          // Setup grid columns.
-          var resultGridData = new ResultGridData(LJCDataGridName);
-          resultGridData.SetDisplayColumns(dbResult.Columns);
+          var dbResult = dataManager.Load();
+          if (dbResult.HasData())
+          {
+            LJCDataGridName.Clear();
+
+            // Setup grid columns.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+          }
         }
       </code>
     </example>
@@ -99,6 +135,31 @@
     </summary>
     <param name="dbRequest">The DbRequest object.</param>
     <param name="columnNames">The included columns.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGrid class page.
+
+        using LJCDBViewDAL;
+
+        // Configure the Display Columns from the DbRequest object definition.
+        private static void SetDisplayColumns2(DataManager dataManager)
+        {
+          // Get View Request.
+          var dbRequest = ViewHelper.GetViewRequest("TableName", "ViewDataName");
+
+          // Execute the dbRequest directly since it was retrieved.
+          var dbResult = dataManager.ExecuteRequest(dbRequest);
+          if (DbResult.HasData(dbResult))
+          {
+            LJCDataGridName.Clear();
+
+            // Setup grid columns.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbRequest);
+          }
+        }
+      </code>
+    </example>
   </SetDisplayColumns2>
   <SetDisplayColumns3>
     <summary>

@@ -1,15 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
 <!-- TableGrid.xml -->
 <items>
-  <GetIncludedColumns>
+  <!-- Static Functions -->
+  <CreateDataColumns>
     <summary>
-      Get the Display Columns from the DataColumns definition.
+      Creates a new DataColumns object.
     </summary>
-    <param name="dataColumns">The DataColumnCollection object.</param>
-    <param name="columnNames">The display column names.</param>
-    <returns>The DisplayColumns object.</returns>
-  </GetIncludedColumns>
+    <returns>The new DataColumns object.</returns>
+  </CreateDataColumns>
+  <DataColumnsClone>
+    <summary>
+      Clones a DataColumn collection.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <returns>The cloned DataColumnCollection object.</returns>
+  </DataColumnsClone>
+  <DataColumnClone>
+    <summary>
+      Clones a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The cloned DataColumn object.</returns>
+  </DataColumnClone>
   <GetDbColumns>
     <summary>
       Creates a DbColumns collection from a DataColumns collection.
@@ -31,32 +43,24 @@
     <param name="dataColumns">The DataColumn collection.</param>
     <returns>The ColumnNames list.</returns>
   </GetColumnNames>
-  <CreateDataColumns>
+  <GetIncludedColumns>
     <summary>
-      Creates a new DataColumns object.
+      Get the Display Columns from the DataColumns definition.
     </summary>
-    <returns>The new DataColumns object.</returns>
-  </CreateDataColumns>
-  <DataColumnsClone>
-    <summary>
-      Clones a DataColumn collection.
-    </summary>
-    <param name="dataTable">The DataTable object.</param>
-    <returns>The cloned DataColumnCollection object.</returns>
-  </DataColumnsClone>
-  <DataColumnClone>
-    <summary>
-      Clones a DataColumn object.
-    </summary>
-    <param name="dataColumn">The DataColumn object.</param>
-    <returns>The cloned DataColumn object.</returns>
-  </DataColumnClone>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="columnNames">The display column names.</param>
+    <returns>The DisplayColumns object.</returns>
+  </GetIncludedColumns>
+
+  <!-- Constructors -->
   <TableGridC>
     <summary>
       Initalizes an object instance.
     </summary>
     <param name="grid">The Grid control.</param>
   </TableGridC>
+  
+  <!-- Row Data Methods -->
   <LoadRows>
     <summary>
       Loads the grid rows from the DataRows collection.
@@ -83,6 +87,8 @@
     <param name="gridRow">The Grid row object.</param>
     <param name="dataRow">The DataRow object.</param>
   </RowSetValues>
+  
+  <!-- Configuration Methods -->
   <SetDisplayColumns1>
     <summary>
       Sets the Display Columns from the DataColumns object.

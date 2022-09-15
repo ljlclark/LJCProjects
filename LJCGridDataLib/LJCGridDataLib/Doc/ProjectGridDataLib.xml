@@ -19,29 +19,98 @@
         The methods may be postfixed with a value that identifies the
         grid to which it applies. E.G. DataRetrieveAddress(), RowAddAddress(),
         etc.&lt;br /&gt;
-        This is especially true if the form contains more than one grid.&lt;br /&gt;
+        This is especially true if the form contains more than one grid.
       </para>
       <para>
-        The ResultGrid class is designed to allow for display of data items when the
-        data formats are not known in advance.&lt;br /&gt;
+        The ResultGrid class is designed to allow for display of data items when
+        the data formats are not known in advance.&lt;br /&gt;
         It provides methods for displaying data directly from the DbResult values.
       </para>
       <para>
-        &lt;b&gt;The Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
+        &lt;b&gt;The Result Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
         This class has methods for the contained grid configuration.&lt;br /&gt;
         These methods are SetDisplayColumns() with 3 overrides and
         RemoveDisplayColumn().&lt;br /&gt;
       </para>
       <para>
-        &lt;b&gt;The Row Data Methods&lt;/b&gt;&lt;br /&gt;
-        There are methods for managing rows and row data using DbColumn values.&lt;br /&gt;
-        These methods are LoadRows() with 2 overrides, RowAdd(), RowUpdate()
-        and RowSetValues().&lt;br /&gt;
+        &lt;b&gt;The Result Row Data Methods&lt;/b&gt;&lt;br /&gt;
+        There are methods for managing rows and row data using DbColumn values.
+        &lt;br /&gt;
+        These methods are LoadRows() with 2 overrides, RowAdd(), RowUpdate() and
+        RowSetValues().&lt;br /&gt;
+      </para>
+      <para>
+        The TableGrid class is designed to allow for display of data items when
+        the data formats are not known in advance.&lt;br /&gt;
+        It provides methods for displaying data directly from DataTable values.
+        &lt;br /&gt; It has many of the same Configuration and Row Data methods
+        as the ResultGrid class except they take DataTable objects instead of
+        DbResult objects.
       </para>
       <para>-- Project Level Remarks</para>
       <para>
         Provides DbResult helpers for an LJCDataGrid control.
       </para>
     </remarks>
+    <example>
+      <para>
+        This is main function sample code for testing. The code for the additional
+        test functions is listed under the methods with the same names.
+      </para>
+      <code>
+        using LJCDataAccessConfig;
+        using LJCDataGridLib;
+        using LJCDBClientLib;
+        using LJCDBMessage;
+
+        // Test DataGrid.
+        private static void TestDataGrid()
+        {
+          DataAccess dataAccess;
+          string connectionString;
+          string providerName;
+
+          // Create Data Configuration values.
+          bool useInternal = false;
+          if (useInternal)
+          {
+            // Use internal configuration.
+            DbConnectionStringBuilder connectionBuilder;
+            string databaseName = "DatabaseName";
+            connectionBuilder = new DbConnectionStringBuilder()
+            {
+              { "Data Source", "DataServiceName" },
+              { "Initial Catalog", "databaseName" },
+              { "Integrated Security", "True" }
+            };
+            connectionString = connectionBuilder.ConnectionString;
+            providerName = "System.Data.SqlClient";
+          }
+          else
+          {
+            // Or use external configuration.
+            DataConfigs dataConfigs = new DataConfigs();
+            dataConfigs.LJCLoadData();
+            dataConfig = dataConfigs.LJCGetByName("ConfigName");
+            connectionString = dataConfig.GetConnectionString();
+            providerName = dataConfig.GetProviderName();
+          }
+
+          // Create DataManager.
+          var dbServiceRef = new DbServiceRef()
+          {
+            DbDataAccess = new DbDataAccess(connectionString
+              , providerName, databaseName)
+          };
+          var dataManager = new DataManager(dbServiceRef, null, "TableName");
+
+          // Method Tests.
+          SetDisplayColumns1(dataManager);
+          SetDisplayColumns2(dataManager);
+          LoadRows1(dataManager);
+          LoadRows2(dataManager);
+        }
+      </code>
+    </example>
   </ResultGrid>
 </items>
