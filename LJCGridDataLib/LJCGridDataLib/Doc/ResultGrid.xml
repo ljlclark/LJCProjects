@@ -24,7 +24,7 @@
     <param name="dbResult">The DbResult object.</param>
     <example>
       <code>
-        // See the DataManager setup code on the ResultGrid class page.
+        // See the DataManager setup code on the ResultGridData class page.
 
         // Loads the grid rows from the result Rows.
         private static void LoadRows1(DataManager dataManager)
@@ -53,7 +53,7 @@
     <param name="dbRows">The DbRows object.</param>
     <example>
       <code>
-        // See the DataManager setup code on the ResultGrid class page.
+        // See the DataManager setup code on the ResultGridData class page.
 
         // Loads the grid rows from the DbRows object.
         private static void LoadRows2(DataManager dataManager)
@@ -111,7 +111,7 @@
     <param name="columnNames">The display column names.</param>
     <example>
       <code>
-        // See the DataManager setup code on the ResultGrid class page.
+        // See the DataManager setup code on the ResultGridData class page.
 
         // Configure the Display Columns from the DbColumns definition.
         private static void SetDisplayColumns1(DataManager dataManager)
@@ -137,7 +137,7 @@
     <param name="columnNames">The included columns.</param>
     <example>
       <code>
-        // See the DataManager setup code on the ResultGrid class page.
+        // See the DataManager setup code on the ResultGridData class page.
 
         using LJCDBViewDAL;
 
