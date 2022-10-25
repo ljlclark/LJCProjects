@@ -40,15 +40,15 @@ namespace LJCUnitMeasure
 			mUnitMeasureGridCode = new UnitMeasureGridCode(this);
 
 			// Testing
-			int gallonsMeasureID = 14;
-			int litersMeasureID = 36;
-			var unitConversion
-				= Managers.UnitConversionManager.RetrieveWithIDs(gallonsMeasureID
-				, litersMeasureID);
-			if (unitConversion != null)
-			{
-				var value = unitConversion.ConvertUnit(1.5);
-			}
+			//int gallonsMeasureID = 14;
+			//int litersMeasureID = 36;
+			//var unitConversion
+			//	= Managers.UnitConversionManager.RetrieveWithIDs(gallonsMeasureID
+			//	, litersMeasureID);
+			//if (unitConversion != null)
+			//{
+			//	var value = unitConversion.ConvertUnit(1.5);
+			//}
 
 			// Set initial control values.
 			NetFile.CreateFolder("ExportFiles");
@@ -66,7 +66,7 @@ namespace LJCUnitMeasure
 		internal static void CreateTables(SystemException e, string dataConfigName)
 		{
 			ManagerCommon.GetConfigValues(dataConfigName, out string connectionType
-				, out string connectionString, out string providerName);
+				, out string _, out string _);
 
 			string[] fileSpecs;
 			switch (connectionType)

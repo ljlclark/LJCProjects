@@ -290,11 +290,11 @@ namespace LJCUnitMeasure
 
 		#region Class Data
 
-		private UnitMeasureList mParent;
-		private LJCItemCombo mSystemCombo;
-		private LJCItemCombo mCategoryCombo;
-		private LJCDataGrid mUnitMeasureGrid;
-		private UnitMeasureManagers mManagers;
+		private readonly UnitMeasureList mParent;
+		private readonly LJCItemCombo mSystemCombo;
+		private readonly LJCItemCombo mCategoryCombo;
+		private readonly LJCDataGrid mUnitMeasureGrid;
+		private readonly UnitMeasureManagers mManagers;
 		#endregion
 	}
 }

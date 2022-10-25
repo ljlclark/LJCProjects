@@ -17,7 +17,7 @@ namespace LJCUnitMeasureDAL
 		/// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
 		public static UnitCategories LJCDeserialize(string fileSpec = null)
 		{
-			UnitCategories retValue = null;
+			UnitCategories retValue;
 
 			if (false == NetString.HasValue(fileSpec))
 			{

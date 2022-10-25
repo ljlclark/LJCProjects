@@ -79,8 +79,8 @@ namespace LJCUnitMeasureDAL
 		{
 			var retValue = new DbColumns()
 			{
-				//ID = id
-			};
+        { UnitType.ColumnID, id }
+      };
 			return retValue;
 		}
 		#endregion
@@ -142,27 +142,6 @@ namespace LJCUnitMeasureDAL
 			//	}
 			//};
 			//retValue.Add(dbJoin);
-			return retValue;
-		}
-		#endregion
-
-		#region Filters
-
-		/// <summary>
-		/// Creates and returns the filters object.
-		/// </summary>
-		/// <returns>The DbFilters object.</returns>
-		public DbFilters GetTextFilters()
-		{
-			DbFilters retValue = null;
-
-			DbFilter dbFilter = new DbFilter();
-			DbConditions conditions = dbFilter.ConditionSet.Conditions;
-			//conditions.Add(UnitType.ColumnDescription, "'Text'");
-			//retValue = new DbFilters
-			//{
-			//	dbFilter
-			//};
 			return retValue;
 		}
 		#endregion

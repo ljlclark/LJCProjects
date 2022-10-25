@@ -164,27 +164,6 @@ namespace LJCUnitMeasureDAL
 		}
 		#endregion
 
-		#region Filters
-
-		/// <summary>
-		/// Creates and returns the filters object.
-		/// </summary>
-		/// <returns>The DbFilters object.</returns>
-		public DbFilters GetTextFilters()
-		{
-			DbFilters retValue = null;
-
-			DbFilter dbFilter = new DbFilter();
-			DbConditions conditions = dbFilter.ConditionSet.Conditions;
-			//conditions.Add(UnitCategory.ColumnDescription, "'Text'");
-			//retValue = new DbFilters
-			//{
-			//	dbFilter
-			//};
-			return retValue;
-		}
-		#endregion
-
 		#region OrderBys
 
 		// Sets the current OrderBy names.

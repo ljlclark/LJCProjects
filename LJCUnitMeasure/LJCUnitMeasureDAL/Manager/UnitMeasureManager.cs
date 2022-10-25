@@ -67,8 +67,8 @@ namespace LJCUnitMeasureDAL
 		/// <include path='items/LoadWithCodes/*' file='../Doc/UnitMeasureManager.xml'/>
 		public UnitMeasures LoadWithCodes(string categoryCode, string systemCode = null)
 		{
-			DbColumns keyColumns = null;
-			UnitMeasures retValue = null;
+			DbColumns keyColumns;
+			UnitMeasures retValue;
 
 			var unitCategoryManager = new UnitCategoryManager(DbServiceRef
 				, DataConfigName);
@@ -220,27 +220,6 @@ namespace LJCUnitMeasureDAL
 			//	}
 			//};
 			//retValue.Add(dbJoin);
-			return retValue;
-		}
-		#endregion
-
-		#region Filters
-
-		/// <summary>
-		/// Creates and returns the filters object.
-		/// </summary>
-		/// <returns>The DbFilters object.</returns>
-		public DbFilters GetTextFilters()
-		{
-			DbFilters retValue = null;
-
-			DbFilter dbFilter = new DbFilter();
-			DbConditions conditions = dbFilter.ConditionSet.Conditions;
-			//conditions.Add(UnitMeasure.ColumnDescription, "'Text'");
-			//retValue = new DbFilters
-			//{
-			//	dbFilter
-			//};
 			return retValue;
 		}
 		#endregion

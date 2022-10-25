@@ -17,7 +17,7 @@ namespace LJCUnitMeasureDAL
 		/// <returns>The evaluated result.</returns>
 		public static object Compute(string expression, int digits = 0)
 		{
-			object retValue = 0;
+			object retValue;
 
 			DataTable dataTable = new DataTable();
 			retValue = dataTable.Compute(expression, "");

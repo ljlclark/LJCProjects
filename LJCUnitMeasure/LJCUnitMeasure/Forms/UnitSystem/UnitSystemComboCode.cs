@@ -193,8 +193,8 @@ namespace LJCUnitMeasure
 
 		#region Class Data
 
-		private UnitMeasureList mParent;
-		private UnitMeasureManagers mManagers;
+		private readonly UnitMeasureList mParent;
+		private readonly UnitMeasureManagers mManagers;
 		#endregion
 	}
 }

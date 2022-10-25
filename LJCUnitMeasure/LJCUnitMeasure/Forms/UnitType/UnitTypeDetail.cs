@@ -119,12 +119,6 @@ namespace LJCUnitMeasure
 			return retValue;
 		}
 
-		// Resets the empty record values.
-		private void ResetRecordValues(UnitType dataRecord)
-		{
-			//dataRecord.Description = FormCommon.ReSetString(dataRecord.Description);
-		}
-
 		// Saves the data.
 		private bool DataSave()
 		{
@@ -161,12 +155,10 @@ namespace LJCUnitMeasure
 						{ UnitType.ColumnID, LJCRecord.ID }
 					};
 					Managers.UnitTypeManager.Update(LJCRecord, keyColumns);
-					ResetRecordValues(LJCRecord);
 				}
 				else
 				{
 					var addedRecord = Managers.UnitTypeManager.Add(LJCRecord);
-					ResetRecordValues(LJCRecord);
 					if (addedRecord != null)
 					{
 						LJCRecord.ID = addedRecord.ID;

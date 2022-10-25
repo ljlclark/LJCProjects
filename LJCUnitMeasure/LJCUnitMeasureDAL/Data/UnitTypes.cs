@@ -20,7 +20,7 @@ namespace LJCUnitMeasureDAL
 		/// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
 		public static UnitTypes LJCDeserialize(string fileSpec = null)
 		{
-			UnitTypes retValue = null;
+			UnitTypes retValue;
 
 			if (false == NetString.HasValue(fileSpec))
 			{

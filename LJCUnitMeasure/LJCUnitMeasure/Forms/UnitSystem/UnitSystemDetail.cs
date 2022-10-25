@@ -119,12 +119,6 @@ namespace LJCUnitMeasure
 			return retValue;
 		}
 
-		// Resets the empty record values.
-		private void ResetRecordValues(UnitSystem dataRecord)
-		{
-			//dataRecord.Description = FormCommon.ReSetString(dataRecord.Description);
-		}
-
 		// Saves the data.
 		private bool DataSave()
 		{
@@ -161,7 +155,6 @@ namespace LJCUnitMeasure
 						{ UnitSystem.ColumnID, LJCRecord.ID }
 					};
 					Managers.UnitSystemManager.Update(LJCRecord, keyColumns);
-					ResetRecordValues(LJCRecord);
 					if (0 == Managers.UnitSystemManager.AffectedCount)
 					{
 						title = "Update Error";
@@ -173,7 +166,6 @@ namespace LJCUnitMeasure
 				else
 				{
 					var addedRecord = Managers.UnitSystemManager.Add(LJCRecord);
-					ResetRecordValues(LJCRecord);
 					if (null == addedRecord)
 					{
 						title = "Add Error";

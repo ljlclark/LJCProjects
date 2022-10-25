@@ -767,12 +767,6 @@
       Creates and returns the Load Joins object.
     </summary><returns>The DBJoins object.</returns>
         </member>
-        <member name="M:LJCUnitMeasureDAL.UnitCategoryManager.GetTextFilters">
-            <summary>
-            Creates and returns the filters object.
-            </summary>
-            <returns>The DbFilters object.</returns>
-        </member>
         <member name="M:LJCUnitMeasureDAL.UnitCategoryManager.SetOrderByDescription">
             <summary>Sets the current OrderBy names.</summary><remarks>
       These sort columns are only valid for the next manager data method call.
@@ -868,12 +862,6 @@
       Creates and returns the Load Joins object.
     </summary><returns>The DBJoins object.</returns>
         </member>
-        <member name="M:LJCUnitMeasureDAL.UnitMeasureManager.GetTextFilters">
-            <summary>
-            Creates and returns the filters object.
-            </summary>
-            <returns>The DbFilters object.</returns>
-        </member>
         <member name="M:LJCUnitMeasureDAL.UnitMeasureManager.SetOrderByDescription">
             <summary>Sets the current OrderBy names.</summary><remarks>
       These sort columns are only valid for the next manager data method call.
@@ -930,12 +918,6 @@
       Creates and returns the Load Joins object.
     </summary><returns>The DBJoins object.</returns>
         </member>
-        <member name="M:LJCUnitMeasureDAL.UnitSystemManager.GetTextFilters">
-            <summary>
-            Creates and returns the filters object.
-            </summary>
-            <returns>The DbFilters object.</returns>
-        </member>
         <member name="M:LJCUnitMeasureDAL.UnitSystemManager.SetOrderByDescription">
             <summary>Sets the current OrderBy names.</summary><remarks>
       These sort columns are only valid for the next manager data method call.
@@ -976,12 +958,6 @@
             <summary>
       Creates and returns the Load Joins object.
     </summary><returns>The DBJoins object.</returns>
-        </member>
-        <member name="M:LJCUnitMeasureDAL.UnitTypeManager.GetTextFilters">
-            <summary>
-            Creates and returns the filters object.
-            </summary>
-            <returns>The DbFilters object.</returns>
         </member>
         <member name="M:LJCUnitMeasureDAL.UnitTypeManager.SetOrderByDescription">
             <summary>Sets the current OrderBy names.</summary><remarks>

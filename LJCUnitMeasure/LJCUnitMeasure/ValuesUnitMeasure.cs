@@ -16,7 +16,7 @@ namespace LJCUnitMeasure
 			StandardSettings = new StandardSettings();
 			StandardSettings.SetProperties(fileSpec);
 
-			AppSettings appSettings = new AppSettings(fileSpec);
+			//AppSettings appSettings = new AppSettings(fileSpec);
 		}
 
 		#region Properties
