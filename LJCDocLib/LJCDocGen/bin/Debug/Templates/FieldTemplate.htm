@@ -21,61 +21,63 @@
 <!-- #Value _HasRemarks_ -->
 <!-- #Value _RemarkText_ -->
 <body>
-  <br />
-  <div class="PathText">
-    / <a href="../../../CodeDoc.html#_AssemblyName_">Assembly List</a>
-    / <a href="../_AssemblyName_.html">_AssemblyName_</a>
-    / <a href="../_TypeName_.html">_TypeName_</a>
-    / _FieldName_
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../CodeDoc.html#_AssemblyName_">Assembly List</a>
+      / <a href="../_AssemblyName_.html">_AssemblyName_</a>
+      / <a href="../_TypeName_.html">_TypeName_</a>
+      / _FieldName_
+    </div>
+    <br />
+    <div id='Title'>Namespace - _Namespace_</div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>_Description_ _FieldName_</div>
+    </div>
+    <!--X------------------------------------->
+    <!-- #IfBegin _Syntax_ NotNull -->
+    <br />
+    <div class='Text'>Syntax</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              _Syntax_
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- #IfEnd Syntax -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _Summary_ NotNull -->
+    <br />
+    <div class='Text'>_Summary_</div>
+    <!-- #IfElse Summary -->
+    <br />
+    <div class='RedText'>Missing Summary</div>
+    <!-- #IfEnd Summary -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _HasRemarks_ True -->
+    <br />
+    <div class='Text'>Remarks</div>
+    <!-- #IfEnd HasRemarks -->
+    <!-- #IfBegin _RemarkText_ NotNull -->
+    <br />
+    <div class='Text'>_RemarkText_</div>
+    <!-- #IfEnd RemarkText -->
+    <!--X------------------------------------->
+    <!-- #SectionBegin FieldRemarks -->
+    <!-- #Value _Para_ -->
+    <br />
+    <div class='Text'>_Para_</div>
+    <!-- #SectionEnd FieldRemarks -->
+    <br />
   </div>
-  <br />
-  <div id='Title'>Namespace - _Namespace_</div>
-  <br />
-  <div id='Header'>
-    <div id='Title'>_Description_ _FieldName_</div>
-  </div>
-  <!--X------------------------------------->
-  <!-- #IfBegin _Syntax_ NotNull -->
-  <br />
-  <div class='Text'>Syntax</div>
-  <br />
-  <div class='SectionContainer'>
-    <table class='CodeTable'>
-      <tbody>
-        <tr><th class='CodeTable'>C#</th></tr>
-        <tr class='CodeTable'>
-          <td class='CodeTable'>
-            _Syntax_
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- #IfEnd Syntax -->
-  <!--X------------------------------------->
-  <!-- #IfBegin _Summary_ NotNull -->
-  <br />
-  <div class='Text'>_Summary_</div>
-  <!-- #IfElse Summary -->
-  <br />
-  <div class='RedText'>Missing Summary</div>
-  <!-- #IfEnd Summary -->
-  <!--X------------------------------------->
-  <!-- #IfBegin _HasRemarks_ True -->
-  <br />
-  <div class='Text'>Remarks</div>
-  <!-- #IfEnd HasRemarks -->
-  <!-- #IfBegin _RemarkText_ NotNull -->
-  <br />
-  <div class='Text'>_RemarkText_</div>
-  <!-- #IfEnd RemarkText -->
-  <!--X------------------------------------->
-  <!-- #SectionBegin FieldRemarks -->
-  <!-- #Value _Para_ -->
-  <br />
-  <div class='Text'>_Para_</div>
-  <!-- #SectionEnd FieldRemarks -->
-  <br />
 </body>
 <!-- #SectionEnd Main -->
 </html>
