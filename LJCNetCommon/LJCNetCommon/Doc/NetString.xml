@@ -92,7 +92,69 @@
     <param name="endIndex">The end index.</param>
     <param name="startIndex">The starting index.</param>
     <param name="endDelimiter">The ending delimiter.</param>
-    <returns>True if both delimiters are found, otherwise false.</returns>
+    <returns>The string between the specified delimiters.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Get the delimited string begin and end index.
+        private static void GetDelimitedAndIndexes()
+        {
+          // Get text that has different begin and end delimiter.
+          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
+          int startIndex = 0;
+          var beginDelimiter = "&lt;summary&gt;";
+          var endDelimiter = "&lt;/summary&gt;";
+          var text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+            , out int beginIndex, out int endIndex, ref startIndex, endDelimiter);
+          // text = "This is some text.";
+          // beginIndex = 0;
+          // endIndex = 27;
+          // startIndex = -1;
+
+          // Get text that has the same begin and end delimiter.
+          // The endDelimiter is not specified or null.
+          startIndex = 0;
+          source = "|This is some text.|";
+          beginDelimiter = "|";
+          text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+            , out beginIndex, out endIndex, ref startIndex);
+          // text = "This is some text.";
+          // beginIndex = 0;
+          // endIndex = 19;
+          // startIndex = -1;
+
+          // Get text that has no end delimiter.
+          startIndex = 0;
+          source = "|This is some text.";
+          beginDelimiter = "|";
+          text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+            , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
+          // text = "This is some text.";
+          // beginIndex = 0;
+          // endIndex = 19;
+          // startIndex = -1;
+
+          // Get delimited text where the delimiters occur multiple times.
+          startIndex = 0;
+          source = "|This is some text.| |and some more here.|";
+          beginDelimiter = "|";
+          while (startIndex > -1)
+          {
+            text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+              , out beginIndex, out endIndex, ref startIndex);
+            // First time: text = "This is some text.";
+            // beginIndex = 0;
+            // endIndex = 19;
+            // startIndex = 20;
+            // Second time: text = "and some more here.";
+            // beginIndex = 21;
+            // endIndex = 41;
+            // startIndex = -1
+          }
+        }
+      </code>
+    </example>
   </GetDelimitedAndIndexes>
   <GetDelimitedString>
     <summary>
@@ -103,6 +165,25 @@
     <param name="startIndex">The starting index.</param>
     <param name="endDelimiter">The ending delimiter.</param>
     <returns>The text between the delimiters.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets the string between the specified delimiters.
+        private static void GetDelimitedString()
+        {
+          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
+          var startIndex = 0;
+          var beginDelimiter = "&lt;summary&gt;";
+          var endDelimiter = "&lt;/summary&gt;";
+
+          var text = NetString.GetDelimitedString(source, beginDelimiter, ref startIndex
+            , endDelimiter);
+          // text = "This is some text.";
+          // startIndex = -1;
+        }
+      </code>
+    </example>
   </GetDelimitedString>
   <GetStringWithDelimiters>
     <summary>
@@ -113,6 +194,57 @@
     <param name="startIndex">The starting index.</param>
     <param name="endDelimiter">The ending delimiter.</param>
     <returns>The text including the specified delimiters.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Get the string including the specified delimiters.
+        private static void GetStringWithDelimiters()
+        {
+          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
+          var startIndex = 0;
+          var beginDelimiter = "&lt;summary&gt;";
+          var endDelimiter = "&lt;/summary&gt;";
+          var text = NetString.GetStringWithDelimiters(source, beginDelimiter
+            , ref startIndex, endDelimiter);
+          // text = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
+          // startIndex = -1;
+
+          // Get text that has the same begin and end delimiter.
+          // The endDelimiter is not specified or null.
+          source = "|This is some text.|";
+          startIndex = 0;
+          beginDelimiter = "|";
+          text = NetString.GetStringWithDelimiters(source, beginDelimiter
+            , ref startIndex);
+          // text = "|This is some text.|";
+          // startIndex = -1;
+
+          // Get text that has no end delimiter.
+          source = "|This is some text.";
+          startIndex = 0;
+          beginDelimiter = "|";
+          text = NetString.GetStringWithDelimiters(source, beginDelimiter
+            , ref startIndex, "#NoDelimiter");
+          // text = "|This is some text.";
+          // startIndex = -1;
+
+          // Get delimited text where the delimiters occur multiple times.
+          source = "|This is some text.| |and some more here.|";
+          startIndex = 0;
+          beginDelimiter = "|";
+          while (startIndex > -1)
+          {
+            text = NetString.GetStringWithDelimiters(source, beginDelimiter
+              , ref startIndex);
+            // First time: text = "|This is some text.|";
+            // startIndex = 20;
+            // Second time: text = "|and some more here.|";
+            // startIndex = -1
+          }
+        }
+      </code>
+    </example>
   </GetStringWithDelimiters>
 
   <!-- Soundex Functions -->

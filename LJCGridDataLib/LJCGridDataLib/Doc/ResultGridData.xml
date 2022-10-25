@@ -9,12 +9,12 @@
     <param name="columnNames">The display column names.</param>
     <returns></returns>
   </GetDisplayColumns-->
-  <ResultGridC>
+  <ResultGridDataC>
     <summary>
       Initalizes an object instance.
     </summary>
     <param name="grid">The Grid control.</param>
-  </ResultGridC>
+  </ResultGridDataC>
 
   <!-- Row Data Methods -->
   <LoadRows1>

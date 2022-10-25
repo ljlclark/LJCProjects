@@ -83,15 +83,9 @@
     </summary>
     <param name="propertyName">The property name.</param>
     <returns>The string property value.</returns>
-  </GetString>
-  <GetValue>
-    <summary>
-      Gets the property value as an object using a delegate. (E)
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The object property value.</returns>
     <example>
-      <code>        using LJCNetCommon;
+      <code>
+        using LJCNetCommon;
         
         // Initialize LJCReflect outside of loop.
         var mReflect = new LJCReflect(records[0]);
@@ -100,7 +94,29 @@
           // Use SetSource to change the data record.
           mReflect.SetSource(record);
           var value = mReflect.GetString("LastName");
-        }</code>
+        }
+      </code>
+    </example>
+  </GetString>
+  <GetValue>
+    <summary>
+      Gets the property value as an object using a delegate. (E)
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Initialize LJCReflect outside of loop.
+        var mReflect = new LJCReflect(records[0]);
+        foreach (var record in records)
+        {
+          // Use SetSource to change the data record.
+          mReflect.SetSource(record);
+          var value = mReflect.GetValue("LastName");
+        }
+      </code>
     </example>
   </GetValue>
   <GetValueReflect>
@@ -119,7 +135,8 @@
     <param name="propertyName">The property name.</param>
     <param name="value">The property value.</param>
     <example>
-      <code>        using System;
+      <code>
+        using System;
         using System.Data;
         using System.Data.Common;
         using LJC.DataAccess;
@@ -134,7 +151,8 @@
           {
             reflect.SetPropertyValue(dbColumn.PropertyName, dbColumn.Value);
           }
-        }</code>
+        }
+      </code>
     </example>
   </SetPropertyValue>
   <SetValue>

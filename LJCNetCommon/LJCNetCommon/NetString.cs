@@ -1,4 +1,4 @@
-﻿// Copyright (c) Lester J Clark 2021,2022 - All Rights Reserved
+﻿// NetString.xml
 using System;
 using System.Text;
 
@@ -160,7 +160,9 @@ namespace LJCNetCommon
         {
           if (endDelimiter.ToLower() == "#nodelimiter")
           {
-            endIndex = text.Length - 1;
+            // *** Next Statement *** Change- 9/16/22
+            //endIndex = text.Length - 1;
+            endIndex = text.Length;
           }
           else
           {
@@ -175,7 +177,7 @@ namespace LJCNetCommon
             int beginLength = beginDelimiter.Length;
             int endLength = endDelimiter.Length;
             int startPosition = beginIndex + beginLength;
-            int textLength = endIndex - beginIndex - beginLength;  // 8/3
+            int textLength = endIndex - beginIndex - beginLength;
             retValue = text.Substring(startPosition, textLength);
 
             startIndex = -1;
@@ -211,8 +213,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if ((endDelimiter != null && endDelimiter.ToLower() != "#nodelimiter")
-        || false == NetString.HasValue(endDelimiter))
+      if (false == NetString.HasValue(endDelimiter))
       {
         endDelimiter = beginDelimiter;
       }
@@ -221,18 +222,14 @@ namespace LJCNetCommon
         , out int endIndex, ref startIndex, endDelimiter) != null)
       {
         // Include Delimiters
-        int beginLength = beginDelimiter.Length;
+        //int beginLength = beginDelimiter.Length;
         int endLength = endDelimiter.Length;
+        if (endDelimiter.ToLower() == "#nodelimiter")
+        {
+          endLength = 0;
+        }
         int textLength = endIndex - beginIndex + endLength;
         retValue = text.Substring(beginIndex, textLength);
-
-        startIndex = -1;
-        if (endIndex < text.Length - (beginLength + endLength) - 1)
-        {
-          // There is enough text to potentially contain another begin
-          // and end delimiter.
-          startIndex = endIndex + endLength;
-        }
       }
       return retValue;
     }

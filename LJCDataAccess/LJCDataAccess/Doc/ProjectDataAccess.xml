@@ -71,16 +71,16 @@
         // Test DataAccess.
         private static void TestDataAccess()
         {
-          DbConnectionStringBuilder connectionBuilder;
           DataAccess dataAccess;
           string connectionString;
           string providerName;
 
+          // Create Data Configuration values.
           bool useInternal = false;
           if (useInternal)
           {
             // Use internal configuration.
-            connectionBuilder = new DbConnectionStringBuilder()
+            var connectionBuilder = new DbConnectionStringBuilder()
             {
               { "Data Source", "DataServiceName" },
               { "Initial Catalog", "DatabaseName" },
@@ -99,8 +99,10 @@
             providerName = dataConfig.GetProviderName();
           }
 
+          // Create DataAccess object.
           dataAccess = new DataAccess(connectionString, providerName);
 
+          // Method Tests.
           GetDataReader(dataAccess);
           GetDataTable(dataAccess);
           GetDataSet(dataAccess);

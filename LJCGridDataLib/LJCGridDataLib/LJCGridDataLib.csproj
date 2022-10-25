@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\ProjectGridDataLib.xml" />
-    <Content Include="Doc\ResultGrid.xml" />
+    <Content Include="Doc\ResultGridData.xml" />
     <Content Include="Doc\TableGrid.xml">
       <SubType>Designer</SubType>
     </Content>

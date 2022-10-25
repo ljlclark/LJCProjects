@@ -14,7 +14,7 @@ namespace LJCGridDataLib
     #region Constructors
 
     // Initalizes an object instance.
-    /// <include path='items/ResultGridC/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/ResultGridDataC/*' file='Doc/ResultGridData.xml'/>
     public ResultGridData(LJCDataGrid grid = null)
     {
       Grid = grid;
@@ -24,7 +24,7 @@ namespace LJCGridDataLib
     #region Row Data Methods
 
     // Loads the grid rows from the result DbRecords records.
-    /// <include path='items/LoadRows1/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/LoadRows1/*' file='Doc/ResultGridData.xml'/>
     public void LoadRows(DbResult dbResult)
     {
       if (DbResult.HasRows(dbResult))
@@ -39,7 +39,7 @@ namespace LJCGridDataLib
     }
 
     // Loads the grid rows from the DbRows object.
-    /// <include path='items/LoadRows2/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/LoadRows2/*' file='Doc/ResultGridData.xml'/>
     public void LoadRows(DbRows dbRows)
     {
       if (DbRows.HasItems(dbRows))
@@ -52,7 +52,7 @@ namespace LJCGridDataLib
     }
 
     // Adds a grid row and updates it with the DbValues.
-    /// <include path='items/RowAdd/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/RowAdd/*' file='Doc/ResultGridData.xml'/>
     public LJCGridRow RowAdd(DbValues record)
     {
       LJCGridRow retValue = null;
@@ -71,7 +71,7 @@ namespace LJCGridDataLib
     }
 
     // Updates the current row with the DbValues.
-    /// <include path='items/RowUpdate/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/RowUpdate/*' file='Doc/ResultGridData.xml'/>
     public void RowUpdate(DbValues record)
     {
       if (Grid != null
@@ -82,7 +82,7 @@ namespace LJCGridDataLib
     }
 
     // Updates a grid row with the DbValues.
-    /// <include path='items/RowSetValues/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/RowSetValues/*' file='Doc/ResultGridData.xml'/>
     public void RowSetValues(LJCGridRow gridRow, DbValues record)
     {
       if (DisplayColumns != null && DisplayColumns.Count > 0)
@@ -106,7 +106,7 @@ namespace LJCGridDataLib
     }
 
     // Fires the AddRow event.
-    /// <include path='items/OnAddRow/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/OnAddRow/*' file='Doc/ResultGridData.xml'/>
     protected void OnAddRow()
     {
       AddRow?.Invoke(this, new EventArgs());
@@ -116,7 +116,7 @@ namespace LJCGridDataLib
     #region Configuration Methods
 
     // Configure the Display Columns from the DbColumns definition.
-    /// <include path='items/SetDisplayColumns1/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/SetDisplayColumns1/*' file='Doc/ResultGridData.xml'/>
     public void SetDisplayColumns(DbColumns dbColumns
       , List<string> columnNames = null)
     {
@@ -130,7 +130,7 @@ namespace LJCGridDataLib
     }
 
     // Configure the Display Columns from the DbRequest object definition.
-    /// <include path='items/SetDisplayColumns2/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/SetDisplayColumns2/*' file='Doc/ResultGridData.xml'/>
     public void SetDisplayColumns(DbRequest dbRequest
       , List<string> columnNames = null)
     {
@@ -160,7 +160,7 @@ namespace LJCGridDataLib
     }
 
     // Configure the Display Columns from the Data object properties.
-    /// <include path='items/SetDisplayColumns3/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/SetDisplayColumns3/*' file='Doc/ResultGridData.xml'/>
     public void SetDisplayColumns(object dataObject
       , List<string> propertyNames = null)
     {
@@ -185,7 +185,7 @@ namespace LJCGridDataLib
     }
 
     // Removes a display column.
-    /// <include path='items/RemoveDisplayColumn/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/RemoveDisplayColumn/*' file='Doc/ResultGridData.xml'/>
     public void RemoveDisplayColumn(string columnName)
     {
       DbColumn column = DisplayColumns.Find(x => x.ColumnName == columnName);
