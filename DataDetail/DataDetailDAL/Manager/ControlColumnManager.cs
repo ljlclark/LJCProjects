@@ -94,7 +94,24 @@ namespace DataDetailDAL
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
+
+    // Loads the parent records.
+    /// <include path='items/LoadWithParentID/*' file='Doc/ControlColumnManager.xml'/>
+    public ControlColumns LoadWithParentID(long detailConfigID)
+    {
+      ControlColumns retValue;
+
+      var keyColumns = GetParentKey(detailConfigID);
+      Manager.OrderByNames = new List<string>()
+      {
+        ControlColumn.ColumnTabPageIndex,
+        ControlColumn.ColumnColumnIndex
+      };
+      var dbResult = Manager.Load(keyColumns);
+      retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
@@ -108,8 +125,8 @@ namespace DataDetailDAL
       return retValue;
     }
 
-    // Retrieves a record with the supplied name value.
-    /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    // Retrieves a record with the supplied values.
+    /// <include path='items/RetrieveWithUnique/*' file='Doc/ControlColumnManager.xml'/>
     public ControlColumn RetrieveWithUnique(int detailConfigID, int columnIndex
       , List<string> propertyNames = null)
     {
@@ -118,22 +135,6 @@ namespace DataDetailDAL
       var keyColumns = GetUniqueKey(detailConfigID, columnIndex);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
-      return retValue;
-    }
-
-    // Loads the parent records.
-    /// <summary>
-    /// Loads the parent records.
-    /// </summary>
-    /// <param name="detailConfigID">The DetailConfig parent ID.</param>
-    /// <returns>The ControlColumns related to the parent.</returns>
-    public ControlColumns LoadWithParentID(long detailConfigID)
-    {
-      ControlColumns retValue;
-
-      var keyColumns = GetParentKey(detailConfigID);
-      var dbResult = Manager.Load(keyColumns);
-      retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
     #endregion
@@ -154,11 +155,8 @@ namespace DataDetailDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Gets the Parent ID key columns.
-    /// </summary>
-    /// <param name="detailConfigID">The parent ID value.</param>
-    /// <returns>The Parent KeyColumns object.</returns>
+    // Gets the Parent ID key columns.
+    /// <include path='items/GetParentKey/*' file='Doc/ControlColumnManager.xml'/>
     public DbColumns GetParentKey(long detailConfigID)
     {
       var retValue = new DbColumns()
@@ -169,7 +167,7 @@ namespace DataDetailDAL
     }
 
     // Gets the unique key columns.
-    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetUniqueKey/*' file='Doc/ControlColumnManager.xml'/>
     public DbColumns GetUniqueKey(int detailConfigID, int columnIndex)
     {
       // Needs cast for string to select the correct Add overload.

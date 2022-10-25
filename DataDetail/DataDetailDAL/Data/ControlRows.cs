@@ -53,7 +53,7 @@ namespace DataDetailDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='Doc/ControlRows.xml'/>
     public ControlRows(ControlRows items)
     {
       if (HasItems(items))
@@ -69,7 +69,7 @@ namespace DataDetailDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='Doc/ControlRows.xml'/>
     public ControlRow Add(int id, int controlColumnID, string dataValueName)
     {
       ControlRow retValue;
@@ -153,7 +153,7 @@ namespace DataDetailDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='Doc/ControlRows.xml'/>
     public ControlRow LJCSearchID(long id)
     {
       ControlRow retValue = null;
@@ -172,7 +172,7 @@ namespace DataDetailDAL
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchUnique/*' file='Doc/ControlRows.xml'/>
     public ControlRow LJCSearchUnique(long controlColumnID, string dataValueName)
     {
       ControlRowUniqueComparer comparer;

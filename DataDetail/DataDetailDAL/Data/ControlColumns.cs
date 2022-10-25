@@ -53,7 +53,7 @@ namespace DataDetailDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='Doc/ControlColumns.xml'/>
     public ControlColumns(ControlColumns items)
     {
       if (HasItems(items))
@@ -69,7 +69,7 @@ namespace DataDetailDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='Doc/ControlColumns.xml'/>
     public ControlColumn Add(int id, int detailDialogID, int tabIndex
       , int columnIndex)
     {
@@ -154,7 +154,7 @@ namespace DataDetailDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='Doc/ControlColumns.xml'/>
     public ControlColumn LJCSearchID(long id)
     {
       ControlColumn retValue = null;
@@ -173,7 +173,7 @@ namespace DataDetailDAL
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchUnique/*' file='Doc/ControlColumns.xml'/>
     public ControlColumn LJCSearchUnique(long detailDialogID, int columnIndex)
     {
       ControlColumnUniqueComparer comparer;

@@ -72,7 +72,7 @@ namespace DataDetailDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      return $"Config:{DetailConfigID}-Column:{ColumnIndex}";
+      return $"Config:{DetailConfigID}-Tab:{TabPageIndex}-Column:{ColumnIndex}";
     }
     #endregion
 
@@ -168,7 +168,7 @@ namespace DataDetailDAL
       get { return LabelsWidth + ControlsWidth; }
     }
 
-    // Gets or sets the RowCount value.
+    /// <summary>Gets or sets the RowCount value.</summary>
     public int RowCount { get; set; }
     #endregion
 

@@ -9,10 +9,8 @@ namespace LJCDataDetailLib
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="managers">The Managers object.</param>
+    // Initializes an object instance.
+    /// <include path='items/ControlColumnsHelperC/*' file='Doc/ControlColumnsHelper.xml'/>
     public ControlColumnsHelper(DataDetailManagers managers)
     {
       mManagers = managers;
@@ -94,7 +92,13 @@ namespace LJCDataDetailLib
       int currentWidth = 0;
       int retValue = 0;
 
-      int count = controlColumns.Count;
+      // *** Begin *** Change - 10/26/22
+      int count = DetailConfig.PageColumnsLimit;
+      if (controlColumns.Count < count)
+      {
+        count = controlColumns.Count;
+      }
+
       foreach (ControlColumn controlColumn in controlColumns)
       {
         // First column of controls for this page.

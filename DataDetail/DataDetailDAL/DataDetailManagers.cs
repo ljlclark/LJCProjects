@@ -10,17 +10,14 @@ namespace DataDetailDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../CommonData.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataDetailManagers()
     {
     }
     #endregion
 
-    /// <summary>
-    /// Sets the DB properties.
-    /// </summary>
-    /// <param name="dbServiceRef">The database service reference object.</param>
-    /// <param name="dataConfigName">The data configuration name.</param>
+    // Sets the DB properties
+    /// <include path='items/SetDBProperties/*' file='Doc/DataDetailManagers.xml'/>
     public void SetDBProperties(DbServiceRef dbServiceRef
       , string dataConfigName)
     {

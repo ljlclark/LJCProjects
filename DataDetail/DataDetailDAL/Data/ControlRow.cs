@@ -66,7 +66,7 @@ namespace DataDetailDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      return $"{ControlColumnID}-{DataValueName}";
+      return $"Column:{ControlColumnID}-DataValue:{DataValueName}";
     }
     #endregion
 

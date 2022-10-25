@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2021 - All Rights Reserved -->
+<!-- ControlColumnsHelper -->
 <items>
-  <!--  Create ControlColumn confiuration. -->
+  <ControlColumnsHelperC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="managers">The Managers object.</param>
+  </ControlColumnsHelperC>
+  
+  <!--  Create ControlColumn configuration. -->
   <CreateNewControlColumns>
     <summary>
       Configure the New controls.

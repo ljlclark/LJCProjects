@@ -262,7 +262,7 @@ namespace DataDetail
     {
       if (null == LJCDataColumns || 0 == LJCDataColumns.Count)
       {
-        throw new MissingMemberException(Name, "LJCRecord");
+        throw new MissingMemberException(Name, "LJCDataColumns");
       }
 
       // Let form finish loading then Configure controls.

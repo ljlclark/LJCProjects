@@ -121,7 +121,7 @@ namespace DataDetailDAL
     }
 
     // Retrieves a record with the supplied name value.
-    /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithUniqueTable/*' file='Doc/DetailConfigManager.xml'/>
     public DetailConfig RetrieveWithUniqueTable(string userID, string dataConfigName
       , string tableName, List<string> propertyNames = null)
     {
@@ -163,7 +163,7 @@ namespace DataDetailDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetUniqueTableKey/*' file='Doc/DetailConfigManager.xml'/>
     public DbColumns GetUniqueTableKey(string userID, string dataConfigName
       , string tableName)
     {

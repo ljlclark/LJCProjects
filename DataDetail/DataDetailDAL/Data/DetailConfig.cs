@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace DataDetailDAL
 {
-  /// <summary>The DetailDialog table Data Object.</summary>
+  /// <summary>The DetailConfig table Data Object.</summary>
   public class DetailConfig : IComparable<DetailConfig>
   {
     #region Constructors
@@ -293,10 +293,11 @@ namespace DataDetailDAL
       }
     }
     private Int32 mControlsHeight;
+    #endregion
 
-    /// <summary>Gets or sets the ControlsWidth value.</summary>
-    //[Required]
-    //[Column("ControlsWidth", TypeName="int")]
+    #region Join Data and Calculated Properties
+
+    /// <summary>Gets or sets the Calculated ControlsWidth value.</summary>
     public Int32 ControlsWidth
     {
       get { return mControlsWidth; }
@@ -310,7 +311,7 @@ namespace DataDetailDAL
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    /// <summary>Gets a reference to the Class ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 

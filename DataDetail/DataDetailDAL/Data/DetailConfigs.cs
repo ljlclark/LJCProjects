@@ -53,7 +53,7 @@ namespace DataDetailDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='Doc/DetailConfigs.xml'/>
     public DetailConfigs(DetailConfigs items)
     {
       if (HasItems(items))
@@ -69,7 +69,7 @@ namespace DataDetailDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='Doc/DetailConfigs.xml'/>
     public DetailConfig Add(int id, string userID, string dataConfigName
       , string tableName)
     {
@@ -156,7 +156,7 @@ namespace DataDetailDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='Doc/DetailConfigs.xml'/>
     public DetailConfig LJCSearchID(int id)
     {
       DetailConfig retValue = null;
@@ -175,7 +175,7 @@ namespace DataDetailDAL
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchUnique/*' file='Doc/DetailConfigs.xml'/>
     public DetailConfig LJCSearchUnique(string userID, string dataConfigName
       , string tableName)
     {

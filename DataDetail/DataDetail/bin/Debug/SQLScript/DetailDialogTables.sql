@@ -48,7 +48,11 @@ create table dbo.ControlColumn(
   constraint PK_ControlColumn
     primary key clustered (ID asc),
   constraint UK_ControlColumn
-    unique (DetailConfigID, ColumnIndex)
+    unique (DetailConfigID, ColumnIndex),
+  constraint FKControlColumn
+    foreign key (DetailConfigID)
+    references DetailConfig (ID)
+    on delete no action on update no action
 )
 end
 
@@ -65,6 +69,10 @@ create table dbo.ControlRow(
   constraint PK_ControlRow
     primary key clustered (ID asc),
   constraint UK_ControlRow
-    unique (ControlColumnID, DataValueName)
+    unique (ControlColumnID, DataValueName),
+  constraint FKControlRow
+    foreign key (ControlColumnID)
+    references ControlColumn (ID)
+    on delete no action on update no action
 )
 end

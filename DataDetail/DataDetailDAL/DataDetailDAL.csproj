@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DataDetailDAL.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,6 +65,14 @@
     <Compile Include="Manager\DetailConfigManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Doc\ControlColumnManager.xml" />
+    <Content Include="Doc\ControlColumns.xml" />
+    <Content Include="Doc\ControlRowManager.xml" />
+    <Content Include="Doc\ControlRows.xml" />
+    <Content Include="Doc\DataDetailManagers.xml" />
+    <Content Include="Doc\DetailConfigManager.xml" />
+    <Content Include="Doc\DetailConfigs.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
