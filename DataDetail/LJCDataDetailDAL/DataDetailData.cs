@@ -109,6 +109,7 @@ namespace LJCDataDetailDAL
         MaxControlCharacters = 40,
         PageColumnsLimit = 2,
       };
+      retValue.ColumnRowCount = retValue.ColumnRowsLimit;
 
       // Add DetailConfig with default data.
       var addedRecord = Managers.ControlDetailManager.Add(retValue);
@@ -148,7 +149,8 @@ namespace LJCDataDetailDAL
 
     // Adds the ControlColumn data object.
     /// <include path='items/AddControlColumn/*' file='Doc/DataDetailData.xml'/>
-    public void AddControlColumn(ControlColumn dataObject, List<string> propertyNames)
+    public void AddControlColumn(ControlColumn dataObject
+      , List<string> propertyNames = null)
     {
       var manager = Managers.ControlColumnManager;
       var addedItem = manager.Add(dataObject, propertyNames);

@@ -212,6 +212,25 @@ namespace LJCDBMessage
 
     #region Other Public Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataObject"></param>
+    /// <param name="propertyName"></param>
+    public static void AddChangedName(object dataObject, string propertyName)
+    {
+      List<string> changedNames = GetChangedNames(dataObject);
+      if (changedNames != null)
+      {
+        var name
+          = changedNames.Find(x => 0 == string.Compare(x, propertyName, true));
+        if (null == name)
+        {
+          changedNames.Add(propertyName);
+        }
+      }
+    }
+
     // Clears the changed names.
     /// <include path='items/ClearChanged/*' file='Doc/DbCommon.xml'/>
     public static void ClearChanged(object dataObject)

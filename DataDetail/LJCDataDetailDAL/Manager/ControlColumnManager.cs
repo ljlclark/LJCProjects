@@ -202,18 +202,18 @@ namespace LJCDataDetailDAL
       // on ((ControlColumn.ControlTabID = ControlTab.ID))
       dbJoin = new DbJoin
       {
-      	TableName = "ControlTab",
-      	JoinType = "left",
-      	JoinOns = new DbJoinOns()
-      	{
-      		{ ControlColumn.ColumnControlTabID, ControlTab.ColumnID }
-      	},
-      	Columns = new DbColumns()
-      	{
+        TableName = "ControlTab",
+        JoinType = "left",
+        JoinOns = new DbJoinOns()
+        {
+          { ControlColumn.ColumnControlTabID, ControlTab.ColumnID }
+        },
+        Columns = new DbColumns()
+        {
           // columnName, propertyName = null, renameAs = null
           //  , dataTypeName = "String", caption = null
       		{ ControlTab.ColumnTabIndex }
-      	}
+        }
       };
       retValue.Add(dbJoin);
       return retValue;

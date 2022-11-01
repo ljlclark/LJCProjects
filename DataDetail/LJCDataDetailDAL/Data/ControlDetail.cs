@@ -300,20 +300,27 @@ namespace LJCDataDetailDAL
       }
     }
     private Int32 mContentHeight;
+
+    /// <summary>Gets or sets the ColumnRowCount value.</summary>
+    //[Required]
+    //[Column("ColumnRowCount", TypeName="int")]
+    public Int32 ColumnRowCount
+    {
+      get { return mColumnRowCount; }
+      set
+      {
+        mColumnRowCount = ChangedNames.Add(ColumnColumnRowCount, mColumnRowCount
+          , value);
+      }
+    }
+    private Int32 mColumnRowCount;
     #endregion
 
     #region Join Data and Calculated Properties
 
     /// <summary>Gets or sets the Calculated ContentWidth value.</summary>
-    public Int32 ContentWidth
-    {
-      get { return mContentWidth; }
-      set
-      {
-        mContentWidth = value;
-      }
-    }
-    private Int32 mContentWidth;
+    public Int32 ContentWidth { get; set; }
+
     #endregion
 
     #region Related Data Properties
@@ -383,6 +390,9 @@ namespace LJCDataDetailDAL
 
     /// <summary>The ContentHeight column name.</summary>
     public static string PropertyContentHeight = "ContentHeight";
+
+    /// <summary>The ColumnColumnRowCount column name.</summary>
+    public static string ColumnColumnRowCount = "ColumnRowCount";
 
     /// <summary>The UserID maximum length.</summary>
     public static int LengthUserID = 60;

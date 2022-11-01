@@ -147,7 +147,7 @@ namespace DataDetail
       mControlCode = new ControlCode();
 
       // Contains methods for creating ControlColumns.
-      mControlColumnsCode = new DataDetailCode()
+      mDataDetailCode = new DataDetailCode()
       {
         // Share configuration.
         ControlDetail = ControlDetail,
@@ -159,13 +159,13 @@ namespace DataDetail
       {
         // Create new configuration.
         config.ControlRowHeight = ControlRowHeight(config.ControlRowHeight);
-        mControlColumnsCode.NewControlData(LJCDataColumns, LJCKeyItems);
+        mDataDetailCode.NewControlData(LJCDataColumns, LJCKeyItems);
       }
 
       // *** Begin *** Add - 09/06/22
-      config.ContentWidth = mControlColumnsCode.ContentWidth();
+      config.ContentWidth = mDataDetailCode.ContentWidth();
       config.ContentHeight
-        = mControlColumnsCode.ContentHeight(config.ColumnRowsLimit);
+        = mDataDetailCode.ContentHeight(config.ColumnRowCount);
       DataDetailData.UpdateControlDetail(config);
       // *** End   *** Add
 
@@ -278,7 +278,7 @@ namespace DataDetail
       controlRow = searchControlColumn.ControlRows.LJCSearchUnique(controlColumn.ID
         , dataColumn.ColumnName);
 
-      string controlRowType = mControlColumnsCode.ControlRowType(dataColumn
+      string controlRowType = mDataDetailCode.ControlRowType(dataColumn
         , LJCKeyItems);
       if (controlRowType != "CheckBox")
       {
@@ -565,7 +565,7 @@ namespace DataDetail
       var name = $"{dataColumn.ColumnName}CheckBox";
       string text = dataColumn.Caption;
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mControlColumnsCode.AdjustedWidth(dataColumn);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
       retValue = mControlCode.CreateCheckBox(name, text, location, width);
       retValue.TabIndex = tabIndex;
       Controls.Add(retValue);
@@ -585,7 +585,7 @@ namespace DataDetail
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
       var name = $"{dataColumn.ColumnName}ComboBox";
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mControlColumnsCode.AdjustedWidth(dataColumn);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
       retValue = mControlCode.CreateComboBox(name, location, width);
       retValue.TabIndex = tabIndex;
       Controls.Add(retValue);
@@ -624,7 +624,7 @@ namespace DataDetail
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
       var name = $"{dataColumn.ColumnName}TextBox";
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mControlColumnsCode.AdjustedWidth(dataColumn);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
       string value = null;
       if (dataColumn.Value != null)
       {
@@ -841,7 +841,7 @@ namespace DataDetail
 
     #region Class Data
 
-    private DataDetailCode mControlColumnsCode;
+    private DataDetailCode mDataDetailCode;
     private ControlCode mControlCode;
 
     /// <summary>The Change event.</summary>

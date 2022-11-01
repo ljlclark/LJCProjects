@@ -28,6 +28,7 @@ create table dbo.ControlDetail(
   ControlRowHeight int not null,
   ControlsHeight int not null,
   ControlsWidth int not null,
+  ColumnRowCount int not null,
   constraint PKDetailDialog
     primary key clustered (ID asc),
   constraint UKDetailDialog

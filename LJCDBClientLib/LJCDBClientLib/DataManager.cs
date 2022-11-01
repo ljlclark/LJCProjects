@@ -363,6 +363,21 @@ namespace LJCDBClientLib
 
     #region Other Public Methods
 
+    /// <summary>
+    /// Creates a PropertyNames list from the data definition.
+    /// </summary>
+    /// <returns>The full PropertyNames list.</returns>
+    public List<string> GetPropertyNames()
+    {
+      List<string> retValue = new List<string>();
+
+      foreach (DbColumn dbColumn in DataDefinition)
+      {
+        retValue.Add(dbColumn.PropertyName);
+      }
+      return retValue;
+    }
+
     // Maps the column property and rename values.
     /// <include path='items/MapNames/*' file='Doc/DataManager.xml'/>
     public void MapNames(string columnName, string propertyName = null

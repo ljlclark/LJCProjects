@@ -1,5 +1,6 @@
 ﻿// ControlRow.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

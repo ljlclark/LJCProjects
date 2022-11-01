@@ -1,7 +1,7 @@
 ﻿// DataDetailCode.cs
 using LJCDataDetailDAL;
+using LJCDBMessage;
 using LJCNetCommon;
-using System.Collections.Generic;
 
 namespace LJCDataDetailLib
 {
@@ -249,16 +249,7 @@ namespace LJCDataDetailLib
           {
             dbColumn = dataColumns[index];
 
-            //// Do not include if not AllowDisplay.
-            //if (DetailConfigColumns != null && DetailConfigColumns.Count > 0)
-            //{
-            //	ConfigRow configColumn;
-            //	configColumn = DetailConfigColumns.SearchName(dbColumn.ColumnName);
-            //	if (configColumn != null && false == configColumn.AllowDisplay)
-            //	{
-            //		continue;
-            //	}
-            //}
+            // Do not include if not AllowDisplay.
 
             if (dbColumn.Caption != null)
             {
@@ -312,7 +303,6 @@ namespace LJCDataDetailLib
             ControlDetailID = ControlDetail.ID,
             TabIndex = tabPageIndex
           };
-          // add Touch() method?
           controlTab.ChangedNames.Add(ControlTab.ColumnTabIndex, -1
             , tabPageIndex);
           controlTab = DataDetailData.SetControlTab(controlTab);
@@ -330,6 +320,12 @@ namespace LJCDataDetailLib
           int excessRowCount = endRowDataIndex - (dataColumns.Count - 1);
           currentRowsCount -= excessRowCount;
           endRowDataIndex = dataColumns.Count - 1;
+          // *** Begin *** Add - 11/02/22
+          if (0 == tabPageIndex && 0 == currentColumnIndex)
+          {
+            ControlDetail.ColumnRowCount = currentRowsCount;
+          }
+          // *** End   *** Add
         }
 
         // get the ControlColumn widths.
@@ -345,14 +341,8 @@ namespace LJCDataDetailLib
           ControlsWidth = controlsWidth,
           RowCount = currentRowsCount
         };
-        var propertyNames = new List<string>()
-        {
-          ControlColumn.ColumnControlTabID,
-          ControlColumn.ColumnColumnIndex,
-          ControlColumn.ColumnLabelsWidth,
-          ControlColumn.ColumnControlsWidth,
-        };
-        DataDetailData.AddControlColumn(controlColumn, propertyNames);
+        DbCommon.AddChangedName(controlColumn, ControlColumn.ColumnColumnIndex);
+        DataDetailData.AddControlColumn(controlColumn);
         currentColumnIndex++;
 
         // Add collection item.
@@ -377,22 +367,16 @@ namespace LJCDataDetailLib
         TabbingIndex = tabbingIndex,
         AllowDisplay = true
       };
-      var propertyNames = new List<string>()
-      {
-        ControlRow.ColumnControlColumnID,
-        ControlRow.ColumnDataValueName,
-        ControlRow.ColumnRowIndex,
-        ControlRow.ColumnTabbingIndex,
-        ControlRow.ColumnAllowDisplay
-      };
-      DataDetailData.AddControlRow(retValue, propertyNames);
+      DbCommon.AddChangedName(retValue, ControlRow.ColumnRowIndex);
+      DbCommon.AddChangedName(retValue, ControlRow.ColumnTabbingIndex);
+      DataDetailData.AddControlRow(retValue);
 
       // Add collection item.
       controlRows.Add(retValue);
       return retValue;
     }
 
-    // Creates the ControlRow DB and Collection data.
+    // Creates the ControlRows DB and Collection data.
     private void NewControlRows(DbColumns dataColumns, KeyItems keyItems)
     {
       // Local references.

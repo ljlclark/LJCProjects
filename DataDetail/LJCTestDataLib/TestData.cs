@@ -16,7 +16,14 @@ namespace LJCTestDataLib
 
 			// Set the data elements.
 			int sequence = 0;
-			dbColumn = new DbColumn("FirstName", "Lester")
+      //dbColumn = new DbColumn("ID", "1")
+      //{
+      //  Caption = "ID",
+      //  Sequence = sequence++
+      //};
+      //retValue.Add(dbColumn);
+
+      dbColumn = new DbColumn("FirstName", "Lester")
 			{
 				Caption = "First Name",
 				MaxLength = 40,
