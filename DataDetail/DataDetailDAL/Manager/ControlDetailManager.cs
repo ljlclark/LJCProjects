@@ -1,39 +1,38 @@
-﻿// ControlRowManager.cs
+﻿// DetailDialogManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace LJCDataDetailDAL
 {
   /// <summary>Provides table specific data methods.</summary>
-  public class ControlRowManager
+  public class ControlDetailManager
   {
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlRowManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "ControlRow", string schemaName = null)
+    public ControlDetailManager(DbServiceRef dbServiceRef, string dataConfigName
+      , string tableName = "ControlDetail", string schemaName = null)
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<ControlRow, ControlRows>();
+      ResultConverter = new ResultConverter<ControlDetail, ControlDetails>();
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(ControlRow.ColumnID, caption: "ControlRow ID");
+      Manager.MapNames(ControlDetail.ColumnID, caption: "ControlDetail ID");
+      Manager.MapNames(ControlDetail.ColumnContentHeight, "ContentHeight");
 
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        ControlRow.ColumnID
+        ControlDetail.ColumnID
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        ControlRow.ColumnControlColumnID,
-        ControlRow.ColumnDataValueName
+        ControlDetail.ColumnName
       });
     }
 
@@ -41,9 +40,9 @@ namespace LJCDataDetailDAL
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlRow Add(ControlRow dataObject, List<string> propertyNames = null)
+    public ControlDetail Add(ControlDetail dataObject, List<string> propertyNames = null)
     {
-      ControlRow retValue;
+      ControlDetail retValue;
 
       var dbResult = Manager.Add(dataObject, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
@@ -63,11 +62,11 @@ namespace LJCDataDetailDAL
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlRows Load(DbColumns keyColumns = null
+    public ControlDetails Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      ControlRows retValue;
+      ControlDetails retValue;
 
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateCollection(dbResult);
@@ -76,10 +75,10 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlRow Retrieve(DbColumns keyColumns, List<string> propertyNames = null
+    public ControlDetail Retrieve(DbColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
-      ControlRow retValue;
+      ControlDetail retValue;
 
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateData(dbResult);
@@ -88,32 +87,20 @@ namespace LJCDataDetailDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public void Update(ControlRow dataObject, DbColumns keyColumns
+    public void Update(ControlDetail dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
     }
     #endregion
 
-    #region Custom Load/Retrieve Methods
-
-    // Loads the parent records.
-    /// <include path='items/LoadWithParentID/*' file='Doc/ControlRowManager.xml'/>
-    public ControlRows LoadWithParentID(long detailConfigID)
-    {
-      ControlRows retValue;
-
-      var keyColumns = GetParentKey(detailConfigID);
-      var dbResult = Manager.Load(keyColumns);
-      retValue = ResultConverter.CreateCollection(dbResult);
-      return retValue;
-    }
+    #region Retrieve/Load Methods
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlRow RetrieveWithID(int id, List<string> propertyNames = null)
+    public ControlDetail RetrieveWithID(long id, List<string> propertyNames = null)
     {
-      ControlRow retValue;
+      ControlDetail retValue;
 
       var keyColumns = GetIDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
@@ -122,13 +109,26 @@ namespace LJCDataDetailDAL
     }
 
     // Retrieves a record with the supplied name value.
-    /// <include path='items/RetrieveWithUnique/*' file='Doc/ControlRowManager.xml'/>
-    public ControlRow RetrieveWithUnique(int controlColumnID, string dataValueName
+    /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public ControlDetail RetrieveWithUnique(string name
       , List<string> propertyNames = null)
     {
-      ControlRow retValue;
+      ControlDetail retValue;
 
-      var keyColumns = GetUniqueKey(controlColumnID, dataValueName);
+      var keyColumns = GetUniqueKey(name);
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      retValue = ResultConverter.CreateData(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a record with the supplied name value.
+    /// <include path='items/RetrieveWithUniqueTable/*' file='Doc/DetailConfigManager.xml'/>
+    public ControlDetail RetrieveWithUniqueTable(string userID, string dataConfigName
+      , string tableName, List<string> propertyNames = null)
+    {
+      ControlDetail retValue;
+
+      var keyColumns = GetUniqueTableKey(userID, dataConfigName, tableName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -139,38 +139,41 @@ namespace LJCDataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns GetIDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { ControlRow.ColumnID, id }
-      };
-      return retValue;
-    }
-
-    // Gets the Parent ID key columns.
-    /// <include path='items/GetParentKey/*' file='Doc/ControlRowManager.xml'/>
-    public DbColumns GetParentKey(long controlColumnID)
-    {
-      var retValue = new DbColumns()
-      {
-        { ControlRow.ColumnControlColumnID, controlColumnID }
+        { ControlDetail.ColumnID, id }
       };
       return retValue;
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetUniqueKey/*' file='Doc/ControlRowManager.xml'/>
-    public DbColumns GetUniqueKey(int controlColumnID, string dataValueName)
+    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetUniqueKey(string name)
     {
       // Needs cast to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { ControlRow.ColumnControlColumnID, controlColumnID },
-        { ControlRow.ColumnDataValueName, (object)dataValueName }
+        { ControlDetail.ColumnName, (object)name }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
+    /// <include path='items/GetUniqueTableKey/*' file='Doc/DetailConfigManager.xml'/>
+    public DbColumns GetUniqueTableKey(string userID, string dataConfigName
+      , string tableName)
+    {
+      // Needs cast to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { ControlDetail.ColumnUserID, (object)userID },
+        { ControlDetail.ColumnDataConfigName, (object)dataConfigName },
+        { ControlDetail.ColumnTableName, (object)tableName }
       };
       return retValue;
     }
@@ -182,7 +185,7 @@ namespace LJCDataDetailDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<ControlRow, ControlRows> ResultConverter { get; set; }
+    public ResultConverter<ControlDetail, ControlDetails> ResultConverter { get; set; }
     #endregion
   }
 }

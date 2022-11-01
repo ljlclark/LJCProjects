@@ -3,7 +3,7 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace DataDetailDAL
+namespace LJCDataDetailDAL
 {
   /// <summary>Represents a collection of ControlRow objects.</summary>
   /// <remarks>

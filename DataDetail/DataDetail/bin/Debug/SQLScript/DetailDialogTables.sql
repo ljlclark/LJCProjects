@@ -8,9 +8,9 @@ set quoted_identifier on
 go
 
 if not exists (select * from INFORMATION_SCHEMA.TABLES
- where TABLE_NAME = N'DetailConfig')
+ where TABLE_NAME = N'ControlDetail')
 begin
-create table dbo.DetailConfig(
+create table dbo.ControlDetail(
   ID bigint identity(1,1) NOT NULL,
   [Name] nvarchar(60) not null,
   [Description] nvarchar(60) not null,
@@ -28,10 +28,30 @@ create table dbo.DetailConfig(
   ControlRowHeight int not null,
   ControlsHeight int not null,
   ControlsWidth int not null,
-  constraint PK_DetailDialog
+  constraint PKDetailDialog
     primary key clustered (ID asc),
-  constraint UK_DetailDialog
-    unique (Name)
+  constraint UKDetailDialog
+    unique ([Name])
+)
+end
+
+if not exists (select * from INFORMATION_SCHEMA.TABLES
+ where TABLE_NAME = N'ControlTab')
+begin
+create table dbo.ControlTab(
+  ID bigint identity(1,1) NOT NULL,
+  ControlDetailID bigint not null,
+  TabIndex int not null,
+  Caption nvarchar(40) not null,
+  [Description] nvarchar(60) not null,
+  constraint PKControlTab
+    primary key clustered (ID asc),
+  constraint UKControlTab
+    unique (ControlDetailID, TabIndex),
+  constraint FKControlTab
+    foreign key (ControlDetailID)
+    references ControlDetail (ID)
+    on delete no action on update no action
 )
 end
 
@@ -40,18 +60,17 @@ if not exists (select * from INFORMATION_SCHEMA.TABLES
 begin
 create table dbo.ControlColumn(
   ID bigint identity(1,1) NOT NULL,
-  DetailConfigID bigint not null,
+  ControlTabID bigint not null,
   ColumnIndex int not null,
-  TabPageIndex int not null,
   LabelsWidth int not null,
   ControlsWidth int not null,
-  constraint PK_ControlColumn
+  constraint PKControlColumn
     primary key clustered (ID asc),
-  constraint UK_ControlColumn
-    unique (DetailConfigID, ColumnIndex),
+  constraint UKControlColumn
+    unique (ControlTabID, ColumnIndex),
   constraint FKControlColumn
-    foreign key (DetailConfigID)
-    references DetailConfig (ID)
+    foreign key (ControlTabID)
+    references ControlTab (ID)
     on delete no action on update no action
 )
 end
@@ -66,9 +85,9 @@ create table dbo.ControlRow(
   RowIndex int not null,
   TabbingIndex int not null,
   AllowDisplay bit not null default 1,
-  constraint PK_ControlRow
+  constraint PKControlRow
     primary key clustered (ID asc),
-  constraint UK_ControlRow
+  constraint UKControlRow
     unique (ControlColumnID, DataValueName),
   constraint FKControlRow
     foreign key (ControlColumnID)

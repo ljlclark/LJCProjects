@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCTestDataLib", "LJCTestDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataDetailLib", "LJCDataDetailLib\LJCDataDetailLib.csproj", "{DC82BC52-6163-4BA8-86F1-C7101EAB0320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDetailDAL", "DataDetailDAL\DataDetailDAL.csproj", "{762703B7-DF03-4889-9DF1-EAB7614A97B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataDetailDAL", "DataDetailDAL\LJCDataDetailDAL.csproj", "{762703B7-DF03-4889-9DF1-EAB7614A97B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

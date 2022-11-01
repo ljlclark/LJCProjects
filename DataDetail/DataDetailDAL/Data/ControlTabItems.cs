@@ -1,22 +1,25 @@
-﻿// ControlColumns.cs
+﻿// CollectionTemplate.cs
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataDetailDAL
 {
-  /// <summary>Represents a collection of ControlColumn objects.</summary>
+  /// <summary>Represents a collection of ControlTab objects.</summary>
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("ControlColumns")]
-  public class ControlColumns : List<ControlColumn>
+  [XmlRoot("ControlTabItems")]
+  public class ControlTabItems : List<ControlTab>
   {
     #region Static Functions
 
     // Checks if the collection has items.
     /// <include path='items/HasItems1/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(ControlColumns collectionObject)
+    public static bool HasItems(ControlTabItems collectionObject)
     {
       bool retValue = false;
 
@@ -29,16 +32,16 @@ namespace LJCDataDetailDAL
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static ControlColumns LJCDeserialize(string fileSpec = null)
+    public static ControlTabItems LJCDeserialize(string fileSpec = null)
     {
-      ControlColumns retValue;
+      ControlTabItems retValue;
 
       if (false == NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = NetCommon.XmlDeserialize(typeof(ControlColumns), fileSpec)
-        as ControlColumns;
+      retValue = NetCommon.XmlDeserialize(typeof(ControlTabItems), fileSpec)
+        as ControlTabItems;
       return retValue;
     }
     #endregion
@@ -47,20 +50,20 @@ namespace LJCDataDetailDAL
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ControlColumns()
+    public ControlTabItems()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='Doc/ControlColumns.xml'/>
-    public ControlColumns(ControlColumns items)
+    /// <include path='items/CopyConstructor/*' file='Doc/ControlTabs.xml'/>
+    public ControlTabItems(ControlTabItems items)
     {
       if (HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new ControlColumn(item));
+          Add(new ControlTab(item));
         }
       }
     }
@@ -69,31 +72,31 @@ namespace LJCDataDetailDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='Doc/ControlColumns.xml'/>
-    public ControlColumn Add(int id, int controlTabID, int columnIndex)
+    /// <include path='items/Add/*' file='Doc/ControlTabs.xml'/>
+    public ControlTab Add(int id, int controlDetailID, int tabIndex)
     {
-      ControlColumn retValue;
+      ControlTab retValue;
 
       string message = "";
       if (id <= 0)
       {
         message += "id must be greater than zero.\r\n";
       }
-      if (controlTabID <= 0)
+      if (controlDetailID <= 0)
       {
-        message += "controlTabID must be greater than zero.\r\n";
-        NetString.AddMissingArgument(message, ControlColumn.ColumnControlTabID);
+        message += "controlDetailID must be greater than zero.\r\n";
+        NetString.AddMissingArgument(message, ControlDetail.ColumnID);
       }
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCSearchUnique(controlTabID, columnIndex);
+      retValue = LJCSearchUnique(controlDetailID, tabIndex);
       if (null == retValue)
       {
-        retValue = new ControlColumn()
+        retValue = new ControlTab()
         {
           ID = id,
-          ControlTabID = controlTabID,
-          ColumnIndex = columnIndex
+          ControlDetailID = controlDetailID,
+          TabIndex = tabIndex
         };
         Add(retValue);
       }
@@ -102,22 +105,22 @@ namespace LJCDataDetailDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ControlColumns Clone()
+    public ControlTabItems Clone()
     {
-      var retValue = MemberwiseClone() as ControlColumns;
+      var retValue = MemberwiseClone() as ControlTabItems;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public ControlColumns GetCollection(List<ControlColumn> list)
+    public ControlTabItems GetCollection(List<ControlTab> list)
     {
-      ControlColumns retValue = null;
+      ControlTabItems retValue = null;
 
       if (list != null && list.Count > 0)
       {
-        retValue = new ControlColumns();
-        foreach (ControlColumn item in list)
+        retValue = new ControlTabItems();
+        foreach (ControlTab item in list)
         {
           retValue.Add(item);
         }
@@ -150,16 +153,19 @@ namespace LJCDataDetailDAL
     }
     #endregion
 
+    #region Public Methods
+    #endregion
+
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='Doc/ControlColumns.xml'/>
-    public ControlColumn LJCSearchID(long id)
+    /// <include path='items/LJCSearchID/*' file='Doc/ControlTabs.xml'/>
+    public ControlTab LJCSearchID(long id)
     {
-      ControlColumn retValue = null;
+      ControlTab retValue = null;
 
       LJCSortID();
-      ControlColumn searchItem = new ControlColumn()
+      ControlTab searchItem = new ControlTab()
       {
         ID = id
       };
@@ -172,18 +178,18 @@ namespace LJCDataDetailDAL
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchUnique/*' file='Doc/ControlColumns.xml'/>
-    public ControlColumn LJCSearchUnique(long controlTabID, int columnIndex)
+    /// <include path='items/LJCSearchUnique/*' file='Doc/ControlTabs.xml'/>
+    public ControlTab LJCSearchUnique(long controlDetailID, int tabIndex)
     {
-      ControlColumnUniqueComparer comparer;
-      ControlColumn retValue = null;
+      ControlTabUniqueComparer comparer;
+      ControlTab retValue = null;
 
-      comparer = new ControlColumnUniqueComparer();
+      comparer = new ControlTabUniqueComparer();
       LJCSortUnique(comparer);
-      ControlColumn searchItem = new ControlColumn()
+      ControlTab searchItem = new ControlTab()
       {
-        ControlTabID = controlTabID,
-        ColumnIndex = columnIndex
+        ControlDetailID = controlDetailID,
+        TabIndex = tabIndex
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -207,7 +213,7 @@ namespace LJCDataDetailDAL
 
     /// <summary>Sort on Unique key.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortUnique(ControlColumnUniqueComparer comparer)
+    public void LJCSortUnique(ControlTabUniqueComparer comparer)
     {
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Unique) != 0)
@@ -224,7 +230,7 @@ namespace LJCDataDetailDAL
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
     {
-      get { return "ControlColumns.xml"; }
+      get { return "ControlTabs.xml"; }
     }
     #endregion
 

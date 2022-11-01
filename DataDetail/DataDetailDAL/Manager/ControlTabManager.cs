@@ -1,4 +1,4 @@
-﻿// ControlColumnManager.cs
+﻿// ManagerTemplate.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -7,32 +7,32 @@ using System.Collections.Generic;
 namespace LJCDataDetailDAL
 {
   /// <summary>Provides table specific data methods.</summary>
-  public class ControlColumnManager
+  public class ControlTabManager
   {
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumnManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "ControlColumn", string schemaName = null)
+    public ControlTabManager(DbServiceRef dbServiceRef, string dataConfigName
+      , string tableName = "ControlTab", string schemaName = null)
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<ControlColumn, ControlColumns>();
+      ResultConverter = new ResultConverter<ControlTab, ControlTabItems>();
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(ControlColumn.ColumnID, caption: "ControlColumn ID");
+      Manager.MapNames(ControlTab.ColumnID, caption: "ControlTab ID");
 
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        ControlColumn.ColumnID
+        ControlTab.ColumnID
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        ControlColumn.ColumnControlTabID,
-        ControlColumn.ColumnColumnIndex
+        ControlTab.ColumnControlDetailID,
+        ControlTab.ColumnTabIndex
       });
     }
 
@@ -40,9 +40,9 @@ namespace LJCDataDetailDAL
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumn Add(ControlColumn dataObject, List<string> propertyNames = null)
+    public ControlTab Add(ControlTab dataObject, List<string> propertyNames = null)
     {
-      ControlColumn retValue;
+      ControlTab retValue;
 
       var dbResult = Manager.Add(dataObject, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
@@ -62,11 +62,11 @@ namespace LJCDataDetailDAL
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumns Load(DbColumns keyColumns = null
+    public ControlTabItems Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      ControlColumns retValue;
+      ControlTabItems retValue;
 
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateCollection(dbResult);
@@ -75,10 +75,10 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumn Retrieve(DbColumns keyColumns, List<string> propertyNames = null
+    public ControlTab Retrieve(DbColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
-      ControlColumn retValue;
+      ControlTab retValue;
 
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateData(dbResult);
@@ -87,7 +87,7 @@ namespace LJCDataDetailDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public void Update(ControlColumn dataObject, DbColumns keyColumns
+    public void Update(ControlTab dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -97,16 +97,15 @@ namespace LJCDataDetailDAL
     #region Load/Retrieve Methods
 
     // Loads the parent records.
-    /// <include path='items/LoadWithParentID/*' file='Doc/ControlColumnManager.xml'/>
-    public ControlColumns LoadWithParentID(long controlTabID)
+    /// <include path='items/LoadWithParentID/*' file='Doc/ControlTabManager.xml'/>
+    public ControlTabItems LoadWithParentID(long controlDetailID)
     {
-      ControlColumns retValue;
+      ControlTabItems retValue;
 
-      var keyColumns = GetParentKey(controlTabID);
+      var keyColumns = GetParentKey(controlDetailID);
       Manager.OrderByNames = new List<string>()
       {
-        ControlColumn.ColumnControlTabID,
-        ControlColumn.ColumnColumnIndex
+        ControlTab.ColumnTabIndex
       };
       var dbResult = Manager.Load(keyColumns);
       retValue = ResultConverter.CreateCollection(dbResult);
@@ -115,9 +114,9 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumn RetrieveWithID(int id, List<string> propertyNames = null)
+    public ControlTab RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      ControlColumn retValue;
+      ControlTab retValue;
 
       var keyColumns = GetIDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
@@ -125,14 +124,14 @@ namespace LJCDataDetailDAL
       return retValue;
     }
 
-    // Retrieves a record with the supplied values.
-    /// <include path='items/RetrieveWithUnique/*' file='Doc/ControlColumnManager.xml'/>
-    public ControlColumn RetrieveWithUnique(int controlTabID, int columnIndex
+    // Retrieves a record with the supplied name value.
+    /// <include path='items/RetrieveWithUnique/*' file='Doc/ControlTabManager.xml'/>
+    public ControlTab RetrieveWithUnique(long controlDetailID, int tabIndex
       , List<string> propertyNames = null)
     {
-      ControlColumn retValue;
+      ControlTab retValue;
 
-      var keyColumns = GetUniqueKey(controlTabID, columnIndex);
+      var keyColumns = GetUniqueKey(controlDetailID, tabIndex);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -150,72 +149,32 @@ namespace LJCDataDetailDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { ControlColumn.ColumnID, id }
+        { ControlTab.ColumnID, id }
       };
       return retValue;
     }
 
     // Gets the Parent ID key columns.
-    /// <include path='items/GetParentKey/*' file='Doc/ControlColumnManager.xml'/>
-    public DbColumns GetParentKey(long controlTabID)
+    /// <include path='items/GetParentKey/*' file='Doc/ControlTabManager.xml'/>
+    public DbColumns GetParentKey(long controlDetailID)
     {
       var retValue = new DbColumns()
       {
-        { ControlColumn.ColumnControlTabID, controlTabID }
+        { ControlTab.ColumnControlDetailID, controlDetailID }
       };
       return retValue;
     }
 
-    // Gets the unique key columns.
-    /// <include path='items/GetUniqueKey/*' file='Doc/ControlColumnManager.xml'/>
-    public DbColumns GetUniqueKey(int controlTabID, int columnIndex)
+    // Gets the ID key columns.
+    /// <include path='items/GetUniqueKey/*' file='Doc/ControlTabManager.xml'/>
+    public DbColumns GetUniqueKey(long controlDetailID, int tabIndex)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { ControlColumn.ColumnControlTabID, controlTabID },
-        { ControlColumn.ColumnColumnIndex, columnIndex }
+        { ControlTab.ColumnControlDetailID, controlDetailID },
+        { ControlTab.ColumnTabIndex, tabIndex }
       };
-      return retValue;
-    }
-    #endregion
-
-    #region Joins
-
-    // Creates and returns the Load Joins object.
-    /// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbJoins GetJoins()
-    {
-      DbJoin dbJoin;
-      DbJoins retValue = new DbJoins();
-
-      // Note: JoinOn Columns must have properties in the DataObject
-      // to receive the join values.
-      // The RenameAs property is required if there is another table column
-      // with the same name.
-      // Note: dbColumns.Add(string columnName, string propertyName = null
-      // , string renameAs = null, string dataTypeName = "String"
-      // , string caption = null)
-
-      // ControlTab.TabIndex
-      //left join ControlTab
-      // on ((ControlColumn.ControlTabID = ControlTab.ID))
-      dbJoin = new DbJoin
-      {
-      	TableName = "ControlTab",
-      	JoinType = "left",
-      	JoinOns = new DbJoinOns()
-      	{
-      		{ ControlColumn.ColumnControlTabID, ControlTab.ColumnID }
-      	},
-      	Columns = new DbColumns()
-      	{
-          // columnName, propertyName = null, renameAs = null
-          //  , dataTypeName = "String", caption = null
-      		{ ControlTab.ColumnTabIndex }
-      	}
-      };
-      retValue.Add(dbJoin);
       return retValue;
     }
     #endregion
@@ -226,7 +185,7 @@ namespace LJCDataDetailDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<ControlColumn, ControlColumns> ResultConverter { get; set; }
+    public ResultConverter<ControlTab, ControlTabItems> ResultConverter { get; set; }
     #endregion
   }
 }

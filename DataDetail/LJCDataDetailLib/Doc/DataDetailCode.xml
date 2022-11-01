@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ControlColumnsHelper -->
+<items>
+  <ControlColumnsHelperC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </ControlColumnsHelperC>
+  
+  <!--  Create ControlColumn configuration. -->
+  <AdjustedWidth>
+    <summary>
+      Adjust the control for usability.
+    </summary>
+    <param name="dataColumn">The data column object.</param>
+    <returns>The adjusted width.</returns>
+  </AdjustedWidth>
+  <ContentHeight>
+    <summary>
+      Gets the Contents display height.
+    </summary>
+    <param name="dataColumnsCount">The data columns count.</param>
+    <returns>The Contents height.</returns>
+  </ContentHeight>
+  <ContentWidth>
+    <summary>
+      Gets the Contents display width.
+    </summary>
+    <returns>The Contents width.</returns>
+  </ContentWidth>
+  <ControlRowType>
+    <summary>
+      Gets the ControlRow type name.
+    </summary>
+    <param name="dataColumn"></param>
+    <param name="keyItems"></param>
+    <returns></returns>
+  </ControlRowType>
+  <NewControlData>
+    <summary>
+      Configure the New controls.
+    </summary>
+    <param name="dataColumns">The data columns.</param>
+    <param name="keyItems"></param>
+    <returns>The ControlColumns collection.</returns>
+  </NewControlData>
+  <CalculateColumnsCount>
+    <summary>
+      Gets the ControlColumn column count.
+    </summary>
+    <param name="dataColumnsCount">The data columns count.</param>
+    <returns>The ControlColumn count.</returns>
+    <remarks>
+      Calculates the ControlColumn count based on the number
+      of dataValues and the initial ColumnRowsLimit.&lt;br /&gt;
+      Recalculates the ColumnRowsLimit to evenly distribute the values.
+    </remarks>
+  </CalculateColumnsCount>
+</items>

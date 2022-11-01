@@ -26,7 +26,16 @@
     <param name="dataConfigName">The DataConfig name.</param>
     <param name="tableName">The Table name.</param>
   </DataDetailDialogC>
-  <CreateControlRow>
+  <DefaultDetailConfig>
+    <summary>
+      Creates the Default DetailConfig object.
+    </summary>
+    <param name="dataConfigName">The DataConfigName value.</param>
+    <param name="tableName">The table name.</param>
+    <param name="userID">The User ID value.</param>
+    <returns>The default DetailConfig object.</returns>
+  </DefaultDetailConfig>
+  <ControlRow>
     <summary>
       Creates the ControlRow and associated controls.
     </summary>
@@ -34,7 +43,7 @@
       This method creates and positions the controls for a ControlRow. It creates a
       ControlRow definition and adds it to the private mControlRows collection.
     </remarks>
-  </CreateControlRow>
+  </ControlRow>
   <SearchControls>
     <summary>
       Returns a reference to a Control by name.

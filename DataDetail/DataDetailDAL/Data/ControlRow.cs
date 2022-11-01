@@ -1,11 +1,11 @@
 ﻿// ControlRow.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace DataDetailDAL
+namespace LJCDataDetailDAL
 {
   /// <summary>The ControlRow table Data Object.</summary>
   public class ControlRow : IComparable<ControlRow>
@@ -157,16 +157,16 @@ namespace DataDetailDAL
 
     #region Join Data and Calculated Properties
 
-    /// <summary>Gets or sets the RowLabel reference.</summary>
+    /// <summary>Gets or sets the Object RowLabel reference.</summary>
     public Label RowLabel { get; set; }
 
-    /// <summary>Gets or sets the RowControl reference.</summary>
+    /// <summary>Gets or sets the Object RowControl reference.</summary>
     public Control RowControl { get; set; }
     #endregion
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    /// <summary>Gets a reference to the Object ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 

@@ -1,10 +1,10 @@
 ﻿// ControlColumn.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 
-namespace DataDetailDAL
+namespace LJCDataDetailDAL
 {
   /// <summary>The ControlColumn table Data Object.</summary>
   public class ControlColumn : IComparable<ControlColumn>
@@ -25,16 +25,15 @@ namespace DataDetailDAL
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
-      DetailConfigID = item.DetailConfigID;
+      ControlTabID = item.ControlTabID;
       ColumnIndex = item.ColumnIndex;
-      TabPageIndex = item.TabPageIndex;
       LabelsWidth = item.LabelsWidth;
       ControlsWidth = item.ControlsWidth;
 
       ControlRows = new ControlRows();
       foreach (ControlRow controlRow in item.ControlRows)
       {
-        ControlRows.Add(controlRow);
+        ControlRows.Add(new ControlRow(controlRow));
       }
     }
     #endregion
@@ -72,7 +71,7 @@ namespace DataDetailDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      return $"Config:{DetailConfigID}-Tab:{TabPageIndex}-Column:{ColumnIndex}";
+      return $"Tab:{ControlTabID}-Column:{ColumnIndex}";
     }
     #endregion
 
@@ -94,18 +93,18 @@ namespace DataDetailDAL
     }
     private Int64 mID;
 
-    /// <summary>Gets or sets the DetailDialogID value.</summary>
+    /// <summary>Gets or sets the ControlTabID value.</summary>
     //[Required]
-    //[Column("DetailConfigID", TypeName="bigint")]
-    public Int64 DetailConfigID
+    //[Column("ControlTabID", TypeName="bigint")]
+    public Int64 ControlTabID
     {
-      get { return mDetailConfigID; }
+      get { return mControlTabID; }
       set
       {
-        mDetailConfigID = ChangedNames.Add(ColumnDetailConfigID, mDetailConfigID, value);
+        mControlTabID = ChangedNames.Add(ColumnControlTabID, mControlTabID, value);
       }
     }
-    private Int64 mDetailConfigID;
+    private Int64 mControlTabID;
 
     /// <summary>Gets or sets the ColumnIndex value.</summary>
     //[Required]
@@ -119,19 +118,6 @@ namespace DataDetailDAL
       }
     }
     private Int32 mColumnIndex;
-
-    /// <summary>Gets or sets the TabPageIndex value.</summary>
-    //[Required]
-    //[Column("TabPageIndex", TypeName="int")]
-    public Int32 TabPageIndex
-    {
-      get { return mTabPageIndex; }
-      set
-      {
-        mTabPageIndex = ChangedNames.Add(ColumnTabPageIndex, mTabPageIndex, value);
-      }
-    }
-    private Int32 mTabPageIndex;
 
     /// <summary>Gets or sets the LabelsWidth value.</summary>
     //[Required]
@@ -162,27 +148,25 @@ namespace DataDetailDAL
 
     #region Join Data and Calculated Properties
 
-    /// <summary>Gets the Width value.</summary>
+    /// <summary>Gets the Calculated width LabelsWidth + ControlsWidth.</summary>
     public int Width
     {
       get { return LabelsWidth + ControlsWidth; }
     }
 
-    /// <summary>Gets or sets the RowCount value.</summary>
+    /// <summary>Gets or sets the Calculated RowCount.</summary>
     public int RowCount { get; set; }
     #endregion
 
     #region Related Data Properties
 
-    /// <summary>
-    /// The ControlColumn contained ControlRows.
-    /// </summary>
+    /// <summary>The ControlColumn Object contained ControlRows.</summary>
     public ControlRows ControlRows { get; set; }
     #endregion
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    /// <summary>Gets a reference to the Object ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
@@ -195,13 +179,10 @@ namespace DataDetailDAL
     public static string ColumnID = "ID";
 
     /// <summary>The DetailDialogID column name.</summary>
-    public static string ColumnDetailConfigID = "DetailConfigID";
+    public static string ColumnControlTabID = "ControlTabID";
 
     /// <summary>The ColumnIndex column name.</summary>
     public static string ColumnColumnIndex = "ColumnIndex";
-
-    /// <summary>The TabPageIndex column name.</summary>
-    public static string ColumnTabPageIndex = "TabPageIndex";
 
     /// <summary>The LabelsWidth column name.</summary>
     public static string ColumnLabelsWidth = "LabelsWidth";
@@ -226,7 +207,7 @@ namespace DataDetailDAL
       if (-2 == retValue)
       {
         // Case sensitive.
-        retValue = x.DetailConfigID.CompareTo(y.DetailConfigID);
+        retValue = x.ControlTabID.CompareTo(y.ControlTabID);
         if (0 == retValue)
         {
           // Case sensitive.

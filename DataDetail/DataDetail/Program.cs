@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
 using System;
 using System.Windows.Forms;
-using DataDetailDAL;
-using LJCDataDetailLib;
-using LJCDBClientLib;
-using LJCDBDataAccess;
 using LJCNetCommon;
 using LJCTestDataLib;
 

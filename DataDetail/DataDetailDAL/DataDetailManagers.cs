@@ -1,8 +1,8 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
-// TableManagersTemplate.cs
+﻿// TableManagersTemplate.cs
+using LJCDataDetailDAL;
 using LJCDBClientLib;
 
-namespace DataDetailDAL
+namespace LJCDataDetailDAL
 {
   /// <summary>Gets the Manager objects.</summary>
   public class DataDetailManagers
@@ -27,28 +27,51 @@ namespace DataDetailDAL
 
     #region Properties
 
-    /// <summary>Gets the DetailConfigManager object.</summary>
-    public DetailConfigManager DetailConfigManager
+    /// <summary>Gets the ControlDetailManager object.</summary>
+    public ControlDetailManager ControlDetailManager
     {
       get
       {
-        if (null == mDetailConfigManager)
+        if (null == mControlDetailManager)
         {
-          DetailConfigManager
-            = new DetailConfigManager(mDbServiceRef, mDataConfigName);
+          ControlDetailManager
+            = new ControlDetailManager(mDbServiceRef, mDataConfigName);
         }
-        return mDetailConfigManager;
+        return mControlDetailManager;
       }
 
       private set
       {
         if (value != null)
         {
-          mDetailConfigManager = value;
+          mControlDetailManager = value;
         }
       }
     }
-    private DetailConfigManager mDetailConfigManager;
+    private ControlDetailManager mControlDetailManager;
+
+    /// <summary>Gets the ControlTabManager object.</summary>
+    public ControlTabManager ControlTabManager
+    {
+      get
+      {
+        if (null == mControlTabManager)
+        {
+          ControlTabManager
+            = new ControlTabManager(mDbServiceRef, mDataConfigName);
+        }
+        return mControlTabManager;
+      }
+
+      private set
+      {
+        if (value != null)
+        {
+          mControlTabManager = value;
+        }
+      }
+    }
+    private ControlTabManager mControlTabManager;
 
     /// <summary>Gets the ControlColumnManager object.</summary>
     public ControlColumnManager ControlColumnManager
