@@ -805,6 +805,9 @@ namespace DataDetail
     /// <include path='items/LJCDataColumns/*' file='Doc/DataDetailDialog.xml'/>
     public DbColumns LJCDataColumns { get; set; }
 
+    /// <summary>Gets the LJCIsUpdate value.</summary>
+    public bool LJCIsUpdate { get; set; }
+
     // Gets or sets the ControlItems collection.
     /// <include path='items/LJCKeyItems/*' file='Doc/DataDetailDialog.xml'/>
     public KeyItems LJCKeyItems { get; set; }

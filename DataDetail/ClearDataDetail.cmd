@@ -20,8 +20,8 @@ set File=LJCDataDetailConsole
 call %ClearBuild%
 del %Solution%\%Project%\%bin%\DataDetail.exe
 
-set Project=DataDetailDAL
-set File=DataDetailDAL
+set Project=LJCDataDetailDAL
+set File=LJCDataDetailDAL
 call %ClearBuild%
 
 set Project=LJCDataDetailLib

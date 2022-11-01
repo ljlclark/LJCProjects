@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ControlColumnManager.xml -->
+<items>
+  <LoadWithParentID>
+    <summary>
+      Loads the child records.
+    </summary>
+    <param name="controlDetailID">The ControlTabs parent ID.</param>
+    <returns>The ControlTabItems related to the parent.</returns>
+  </LoadWithParentID>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied values.
+    </summary>
+    <param name="controlDetailID"></param>
+    <param name="tabIndex"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </RetrieveWithUnique>
+
+  <!-- GetKey Methods -->
+  <GetParentKey>
+    <summary>
+      Gets the Parent ID key columns.
+    </summary>
+    <param name="controlDetailID">The parent ID value.</param>
+    <returns>The Parent KeyColumns object.</returns>
+  </GetParentKey>
+  <GetUniqueKey>
+    <summary>
+      Gets the unique key columns.
+    </summary>
+    <param name="controlDetailID"></param>
+    <param name="tabIndex"></param>
+    <returns></returns>
+  </GetUniqueKey>
+</items>

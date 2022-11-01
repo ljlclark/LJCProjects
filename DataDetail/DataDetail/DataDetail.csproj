@@ -126,8 +126,8 @@
     <Content Include="Doc\DataDetailDialog.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataDetailDAL\LJCDataDetailDAL.csproj">
-      <Project>{762703B7-DF03-4889-9DF1-EAB7614A97B3}</Project>
+    <ProjectReference Include="..\LJCDataDetailDAL\LJCDataDetailDAL.csproj">
+      <Project>{762703b7-df03-4889-9df1-eab7614a97b3}</Project>
       <Name>LJCDataDetailDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\LJCDataDetailLib\LJCDataDetailLib.csproj">
