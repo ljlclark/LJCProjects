@@ -22,3 +22,5 @@ call %ClearBuild%
 set Project=ConsoleApp1
 set File=ConsoleApp1
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\LJCDBMessage.xml
+
