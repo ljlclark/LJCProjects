@@ -134,7 +134,6 @@ namespace DataHelper
       DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
         , mTableName)
       {
-        //LJCConfigRows = mConfigRows,
         LJCDataColumns = dataColumns,
         LJCIsUpdate = false
       };

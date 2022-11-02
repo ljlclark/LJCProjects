@@ -172,7 +172,7 @@ namespace _Namespace_
 			DbJoins retValue = new DbJoins();
 
 			// Note: JoinOn Columns must have properties in the DataObject
-			// to recieve the join values.
+			// to receive the join values.
 			// The RenameAs property is required if there is another table column
 			// with the same name.
 			// Note: dbColumns.Add(string columnName, string propertyName = null

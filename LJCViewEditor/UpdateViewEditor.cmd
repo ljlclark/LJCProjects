@@ -83,9 +83,9 @@ set src=LJCDBMessage\CipherLib\%bin%
 echo copy %root%%src%\CipherLib.dll %to%
 copy %root%%src%\CipherLib.dll %to%
 
-set src=DataDetail\DataDetailDAL\%bin%
-echo copy %root%%src%\DataDetailDAL.dll %to%
-copy %root%%src%\DataDetailDAL.dll %to%
+set src=DataDetail\LJCDataDetailDAL\%bin%
+echo copy %root%%src%\LJCDataDetailDAL.dll %to%
+copy %root%%src%\LJCDataDetailDAL.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 echo copy %root%%src%\LJCDataAccess.dll %to%
