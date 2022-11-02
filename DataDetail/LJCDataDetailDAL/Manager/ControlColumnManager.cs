@@ -28,7 +28,7 @@ namespace LJCDataDetailDAL
         ControlColumn.ColumnID
       });
 
-      // Create the list of lookup column names.
+      // Create the list of unique key lookup column names.
       Manager.SetLookupColumns(new string[]
       {
         ControlColumn.ColumnControlTabID,
@@ -94,22 +94,19 @@ namespace LJCDataDetailDAL
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Custom Load/Retrieve Methods
 
     // Loads the parent records.
     /// <include path='items/LoadWithParentID/*' file='Doc/ControlColumnManager.xml'/>
     public ControlColumns LoadWithParentID(long controlTabID)
     {
-      ControlColumns retValue;
-
       var keyColumns = GetParentKey(controlTabID);
       Manager.OrderByNames = new List<string>()
       {
         ControlColumn.ColumnControlTabID,
         ControlColumn.ColumnColumnIndex
       };
-      var dbResult = Manager.Load(keyColumns);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -117,11 +114,8 @@ namespace LJCDataDetailDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public ControlColumn RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      ControlColumn retValue;
-
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
@@ -130,11 +124,8 @@ namespace LJCDataDetailDAL
     public ControlColumn RetrieveWithUnique(int controlTabID, int columnIndex
       , List<string> propertyNames = null)
     {
-      ControlColumn retValue;
-
       var keyColumns = GetUniqueKey(controlTabID, columnIndex);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
     #endregion
@@ -148,6 +139,7 @@ namespace LJCDataDetailDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
+      // Needs (object) cast for string value to select correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlColumn.ColumnID, id }
@@ -168,13 +160,12 @@ namespace LJCDataDetailDAL
 
     // Gets the unique key columns.
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlColumnManager.xml'/>
-    public DbColumns GetUniqueKey(int controlTabID, int columnIndex)
+    public DbColumns GetUniqueKey(int controlTabID, int controlColumnIndex)
     {
-      // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlColumn.ColumnControlTabID, controlTabID },
-        { ControlColumn.ColumnColumnIndex, columnIndex }
+        { ControlColumn.ColumnColumnIndex, controlColumnIndex }
       };
       return retValue;
     }
@@ -226,7 +217,8 @@ namespace LJCDataDetailDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<ControlColumn, ControlColumns> ResultConverter { get; set; }
+    public ResultConverter<ControlColumn, ControlColumns> ResultConverter
+    { get; set; }
     #endregion
   }
 }

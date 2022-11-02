@@ -94,17 +94,14 @@ namespace LJCDataDetailDAL
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public ControlDetail RetrieveWithID(long id, List<string> propertyNames = null)
     {
-      ControlDetail retValue;
-
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
@@ -113,11 +110,8 @@ namespace LJCDataDetailDAL
     public ControlDetail RetrieveWithUnique(string name
       , List<string> propertyNames = null)
     {
-      ControlDetail retValue;
-
       var keyColumns = GetUniqueKey(name);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
@@ -126,11 +120,8 @@ namespace LJCDataDetailDAL
     public ControlDetail RetrieveWithUniqueTable(string userID, string dataConfigName
       , string tableName, List<string> propertyNames = null)
     {
-      ControlDetail retValue;
-
       var keyColumns = GetUniqueTableKey(userID, dataConfigName, tableName);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
     #endregion
@@ -144,6 +135,7 @@ namespace LJCDataDetailDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
+      // Needs (object cast for string value to select correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlDetail.ColumnID, id }
@@ -168,7 +160,6 @@ namespace LJCDataDetailDAL
     public DbColumns GetUniqueTableKey(string userID, string dataConfigName
       , string tableName)
     {
-      // Needs cast to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlDetail.ColumnUserID, (object)userID },
@@ -185,7 +176,8 @@ namespace LJCDataDetailDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<ControlDetail, ControlDetails> ResultConverter { get; set; }
+    public ResultConverter<ControlDetail, ControlDetails> ResultConverter
+    { get; set; }
     #endregion
   }
 }

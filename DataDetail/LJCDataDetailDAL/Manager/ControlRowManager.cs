@@ -101,11 +101,8 @@ namespace LJCDataDetailDAL
     /// <include path='items/LoadWithParentID/*' file='Doc/ControlRowManager.xml'/>
     public ControlRows LoadWithParentID(long detailConfigID)
     {
-      ControlRows retValue;
-
       var keyColumns = GetParentKey(detailConfigID);
-      var dbResult = Manager.Load(keyColumns);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -113,11 +110,8 @@ namespace LJCDataDetailDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public ControlRow RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      ControlRow retValue;
-
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
@@ -126,11 +120,8 @@ namespace LJCDataDetailDAL
     public ControlRow RetrieveWithUnique(int controlColumnID, string dataValueName
       , List<string> propertyNames = null)
     {
-      ControlRow retValue;
-
       var keyColumns = GetUniqueKey(controlColumnID, dataValueName);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
     #endregion
@@ -144,6 +135,7 @@ namespace LJCDataDetailDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
+      // Needs (object) cast for string value to select correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlRow.ColumnID, id }
@@ -166,7 +158,6 @@ namespace LJCDataDetailDAL
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlRowManager.xml'/>
     public DbColumns GetUniqueKey(int controlColumnID, string dataValueName)
     {
-      // Needs cast to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlRow.ColumnControlColumnID, controlColumnID },
@@ -182,7 +173,8 @@ namespace LJCDataDetailDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<ControlRow, ControlRows> ResultConverter { get; set; }
+    public ResultConverter<ControlRow, ControlRows> ResultConverter
+    { get; set; }
     #endregion
   }
 }

@@ -46,15 +46,6 @@ namespace DataDetail
       // Use timer to configure controls and retrieve data after form is loaded.
       mTimer.Start();
     }
-
-    // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
-    protected override void OnPaintBackground(PaintEventArgs e)
-    {
-      base.OnPaintBackground(e);
-      FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
-        , EndColor);
-    }
     #endregion
 
     #region Data Methods

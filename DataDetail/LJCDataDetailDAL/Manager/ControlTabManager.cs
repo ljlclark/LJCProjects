@@ -94,21 +94,18 @@ namespace LJCDataDetailDAL
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Custom Load/Retrieve Methods
 
     // Loads the parent records.
     /// <include path='items/LoadWithParentID/*' file='Doc/ControlTabManager.xml'/>
     public ControlTabItems LoadWithParentID(long controlDetailID)
     {
-      ControlTabItems retValue;
-
       var keyColumns = GetParentKey(controlDetailID);
       Manager.OrderByNames = new List<string>()
       {
         ControlTab.ColumnTabIndex
       };
-      var dbResult = Manager.Load(keyColumns);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -116,11 +113,8 @@ namespace LJCDataDetailDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public ControlTab RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      ControlTab retValue;
-
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
@@ -129,11 +123,8 @@ namespace LJCDataDetailDAL
     public ControlTab RetrieveWithUnique(long controlDetailID, int tabIndex
       , List<string> propertyNames = null)
     {
-      ControlTab retValue;
-
       var keyColumns = GetUniqueKey(controlDetailID, tabIndex);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
     #endregion
@@ -147,6 +138,7 @@ namespace LJCDataDetailDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
+      // Needs (object) cast for string value to select correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlTab.ColumnID, id }
@@ -169,7 +161,6 @@ namespace LJCDataDetailDAL
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlTabManager.xml'/>
     public DbColumns GetUniqueKey(long controlDetailID, int tabIndex)
     {
-      // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { ControlTab.ColumnControlDetailID, controlDetailID },
