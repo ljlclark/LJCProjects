@@ -40,14 +40,15 @@
     </Reference>
     <Reference Include="LJCDBClientLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\LJCDBMessage.dll</HintPath>
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
@@ -70,20 +71,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LJCDataDetailLib\LJCDataDetailLib.csproj">
-      <Project>{DC82BC52-6163-4BA8-86F1-C7101EAB0320}</Project>
-      <Name>LJCDataDetailLib</Name>
-      <Private>True</Private>
-    </ProjectReference>
     <ProjectReference Include="..\DataDetail\DataDetail.csproj">
       <Project>{fa2f382c-44dc-4432-b540-d520bea1bf0a}</Project>
       <Name>DataDetail</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\LJCTestDataLib\LJCTestDataLib.csproj">
-      <Project>{DBC936AB-213B-40A7-B2CE-6525460DE318}</Project>
+      <Project>{dbc936ab-213b-40a7-b2ce-6525460de318}</Project>
       <Name>LJCTestDataLib</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

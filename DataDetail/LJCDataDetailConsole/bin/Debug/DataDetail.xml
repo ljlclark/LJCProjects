@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DataDetail</name>
+    </assembly>
+    <members>
+        <member name="T:DataDetail.SelectList">
+            <summary>The Selection List window</summary>
+        </member>
+        <member name="M:DataDetail.SelectList.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:DataDetail.SelectList.DataRetrieve">
+            <summary>
+      Retrieves the list rows.
+    </summary>
+        </member>
+        <member name="P:DataDetail.SelectList.LJCDataConfigName">
+            <summary>Gets or sets the DataConfigName value.</summary>
+        </member>
+        <member name="P:DataDetail.SelectList.LJCDbServiceRef">
+            <summary>Gets or sets the DbServiceRef value.</summary>
+        </member>
+        <member name="P:DataDetail.SelectList.LJCID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:DataDetail.SelectList.LJCPrimaryKeyName">
+            <summary>Gets or sets the PrimaryKeyName value.</summary>
+        </member>
+        <member name="P:DataDetail.SelectList.LJCTableName">
+            <summary>Gets or sets the TableName value.</summary>
+        </member>
+        <member name="F:DataDetail.SelectList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DataDetail.SelectList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DataDetail.SelectList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DataDetail.DataDetailDialog">
+            <summary>
+      The DataDetail Dynamic Detail dialog.
+    </summary><remarks>
+      <para>
+        The DataDetailDialog form is designed to dynamically create a Detail Dialog
+        to allow display and edit of Data Record values which are contained in the
+        LJCRecord (DbColumns) collection.
+      </para>
+      <para>
+        The Dialog contains one or more TabControl pages. Each TabPage can consist
+        of multiple ControlColumn objects. Each ControlColumn object can consist of
+        multiple ControlRow objects.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.#ctor(System.String,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="userID">The User ID.</param><param name="dataConfigName">The DataConfig name.</param><param name="tableName">The Table name.</param>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.DataRetrieve">
+            <summary>
+      Retrieves the initial control data.
+    </summary>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.ControlRow(LJCDataDetailDAL.ControlColumn,LJCNetCommon.DbColumn,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+      Creates the ControlRow and associated controls.
+    </summary><remarks>
+      This method creates and positions the controls for a ControlRow. It creates a
+      ControlRow definition and adds it to the private mControlRows collection.
+    </remarks>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.SearchControls(System.String)">
+            <summary>
+      Returns a reference to a Control by name.
+    </summary><param name="name">The control name.</param><returns>The Control reference.</returns>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.SearchLabel(System.String)">
+            <summary>
+      Returns a reference to a Label control by name.
+    </summary><param name="name">The Label control name.</param><returns>The Label control reference.</returns>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.SearchTextBox(System.String)">
+            <summary>
+      Return a reference to a TextBox control by name.
+    </summary><param name="name">The TextBox control name.</param><returns>The TextBox control reference.</returns>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="P:DataDetail.DataDetailDialog.LJCDataColumns">
+            <summary>
+      Gets a reference to the record object.
+    </summary><remarks>
+      This is the main data definition object. This data is used to populate
+      the ControlColumns and ControlRows layout definition objects.
+    </remarks>
+        </member>
+        <member name="P:DataDetail.DataDetailDialog.LJCIsUpdate">
+            <summary>Gets the LJCIsUpdate value.</summary>
+        </member>
+        <member name="P:DataDetail.DataDetailDialog.LJCKeyItems">
+            <summary>
+      Gets or sets the ControlItems collection.
+    </summary><remarks>
+      Contains the StaticCombo, SelectList and StaticKey reference items.
+    </remarks>
+        </member>
+        <member name="E:DataDetail.DataDetailDialog.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:DataDetail.DataDetailDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DataDetail.DataDetailDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DataDetail.Program">
+            <summary>
+      The program entry point class.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+    </remarks>
+        </member>
+        <member name="M:DataDetail.Program.Main">
+            <summary>
+      The program entry point function.
+    </summary>
+        </member>
+        <member name="T:DataDetail.TabDetail">
+            <summary>The Tab detail dialog.</summary>
+            <remarks>
+            <para>-- Library Level Remarks</para>
+            </remarks>
+        </member>
+        <member name="M:DataDetail.TabDetail.#ctor">
+            <!-- No matching elements were found for the following include tag --><include path="items/DefaultConstructor/*" file="../../LJCDocLib/Common/Detail.xml" />
+        </member>
+        <member name="M:DataDetail.TabDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:DataDetail.TabDetail.DataRetrieve">
+            <summary>
+      Retrieves the initial control data.
+    </summary>
+        </member>
+        <member name="M:DataDetail.TabDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCID">
+            <summary>Gets or sets the primary ID value.</summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCIsUpdate">
+            <summary>Gets the LJCIsUpdate value.</summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCParentID">
+            <summary>Gets or sets the Parent ID value.</summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCParentName">
+            <summary>Gets or sets the LJCParentName value.</summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCRecord">
+            <summary>Gets a reference to the record object.</summary>
+        </member>
+        <member name="E:DataDetail.TabDetail.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:DataDetail.TabDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DataDetail.TabDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DataDetail.TabDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DataDetail.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DataDetail.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DataDetail.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

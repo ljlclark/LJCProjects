@@ -29,7 +29,6 @@ namespace DataDetail
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
     }
     #endregion
 
@@ -122,6 +121,42 @@ namespace DataDetail
               break;
           }
         }
+      }
+    }
+    #endregion
+
+    #region Action Methods
+
+    // Edit Tab Title
+    internal void TabEdit_Click(object sender, EventArgs e)
+    {
+      // Data from items.
+      var tabPage = MainTabs.SelectedTab;
+      var tabIndex = tabPage.Parent.TabIndex;
+      var manager = DataDetailData.Managers.ControlTabManager;
+      var controlTab = manager.RetrieveWithUnique(ControlDetail.ID
+        , tabIndex);
+      long id = controlTab.ID;
+
+      var detail = new TabDetail()
+      {
+        LJCID = id,
+        LJCParentID = ControlDetail.ID,
+        LJCParentName = ControlDetail.Name,
+        Managers = DataDetailData.Managers
+      };
+      detail.LJCChange += Detail_LJCChange;
+      detail.ShowDialog();
+    }
+
+    // Updates tab with changes from the detail dialog.
+    private void Detail_LJCChange(object sender, EventArgs e)
+    {
+      var detail = sender as TabDetail;
+      if (detail.LJCRecord != null)
+      {
+        var tabPage = MainTabs.SelectedTab;
+        tabPage.Text = detail.LJCRecord.Caption;
       }
     }
     #endregion
@@ -225,11 +260,16 @@ namespace DataDetail
       if (LJCDataColumns != null && LJCDataColumns.Count > 0)
       {
         // Create additional tabs.
-        int count = config.ControlTabItems.Count;
-        for (int index = 1; index < count; count++)
+        foreach (ControlTab controlTab in config.ControlTabItems)
         {
-          var controlTab = config.ControlTabItems[index];
-          MainTabs.TabPages.Add(controlTab.Caption);
+          if (0 == controlTab.TabIndex)
+          {
+            MainTabs.TabPages[0].Text = controlTab.Caption;
+          }
+          else
+          {
+            MainTabs.TabPages.Add(controlTab.Caption);
+          }
         }
 
         int tabIndex = 0;
@@ -825,9 +865,6 @@ namespace DataDetail
 
     // Gets or sets ConfigData.
     private DataDetailData DataDetailData { get; set; }
-
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
     #endregion
 
     #region Class Data
