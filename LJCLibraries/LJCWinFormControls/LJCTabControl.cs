@@ -242,11 +242,8 @@ namespace LJCWinFormControls
       LJCOnLJCPanelRemove();
     }
 
-    /// <summary>
-    /// Gets the tab page with the matching text.
-    /// </summary>
-    /// <param name="text">The Text value.</param>
-    /// <returns>The matching tab page.</returns>
+    // Gets the tab page with the matching text.
+    /// <include path='items/LJCGetTabPage1/*' file='Doc/LJCTabControl.xml'/>
     public TabPage LJCGetTabPage(string text)
     {
       TabPage retValue = null;
@@ -265,7 +262,7 @@ namespace LJCWinFormControls
     }
 
     // Gets the tab page if the position corresponds to a tab label.
-    /// <include path='items/LJCGetTabPage/*' file='Doc/LJCTabControl.xml'/>
+    /// <include path='items/LJCGetTabPage2/*' file='Doc/LJCTabControl.xml'/>
     public TabPage LJCGetTabPage(int x, int y)
     {
       Rectangle tabRectangle;

@@ -11,16 +11,12 @@ using System.Windows.Forms;
 
 namespace DataDetail
 {
-  /// <summary>The Tab detail dialog.</summary>
-  /// <remarks>
-  /// <para>-- Library Level Remarks</para>
-  /// </remarks>
+  // The Tab detail dialog.
   internal partial class TabDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Detail.xml'/>
     internal TabDetail(DataDetailData dataDetailData)
     {
       InitializeComponent();
@@ -52,7 +48,6 @@ namespace DataDetail
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -64,7 +59,6 @@ namespace DataDetail
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -356,7 +350,6 @@ namespace DataDetail
     #region Control Event Handlers
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
@@ -376,30 +369,31 @@ namespace DataDetail
 
     #region Properties
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    public long LJCID { get; set; }
+    // Gets or sets the primary ID value.
+    internal long LJCID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
-    public bool LJCIsUpdate { get; private set; }
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public long LJCParentID { get; set; }
+    // Gets or sets the Parent ID value.
+    internal long LJCParentID { get; set; }
 
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
+    // Gets or sets the LJCParentName value.
+    internal string LJCParentName
     {
       get { return mParentName; }
       set { mParentName = NetString.InitString(value); }
     }
     private string mParentName;
 
-    /// <summary>Gets a reference to the record object.</summary>
-    public ControlTab LJCRecord { get; private set; }
+    // Gets a reference to the record object.
+    internal ControlTab LJCRecord { get; private set; }
 
-    /// <summary>Sets the Index value.</summary>
-    public int LJCSetIndex { get; set; }
+    // Sets the Index value.
+    internal int LJCSetIndex { get; set; }
 
-    public int LJCTabOriginalIndex { get; set; }
+    // Gets or sets the Original Index value.
+    internal int LJCTabOriginalIndex { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
@@ -415,8 +409,8 @@ namespace DataDetail
 
     //private StandardSettings mSettings;
 
-    /// <summary>The Change event.</summary>
-    public event EventHandler<EventArgs> LJCChange;
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
     #endregion
   }
 }

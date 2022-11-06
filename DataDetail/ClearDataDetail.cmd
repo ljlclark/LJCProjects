@@ -23,6 +23,7 @@ set File=LJCDataDetailConsole
 call %ClearBuild%
 del %Solution%\%Project%\%bin%\DataDetail.exe
 del %Solution%\%Project%\%bin%\LJCDataDetailConsole.xml
+del %Solution%\%Project%\%bin%\DataDetail.xml
 del %Solution%\%Project%\%bin%\LJCDataDetailDAL.xml
 del %Solution%\%Project%\%bin%\LJCDataDetailLib.xml
 del %Solution%\%Project%\%bin%\LJCTestDataLib.xml
