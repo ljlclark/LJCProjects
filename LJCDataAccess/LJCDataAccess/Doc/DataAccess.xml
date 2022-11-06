@@ -8,6 +8,7 @@
     <param name="connectionString">The database connection string.</param>
     <param name="providerName">The data access provider name.</param>
   </DataAccessC>
+  
   <!-- Public Provider Methods -->
   <CloseConnection>
     <summary>
@@ -363,6 +364,7 @@
       </code>
     </example>
   </GetSchemaOnly>
+  
   <!-- Properties -->
   <ProviderFactory>
     <summary>

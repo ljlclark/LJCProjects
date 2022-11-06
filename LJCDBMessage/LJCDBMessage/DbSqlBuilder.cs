@@ -434,7 +434,8 @@ namespace LJCDBMessage
         foreach (DbColumn dbColumn in keyColumns)
         {
           // Do not include null or empty values.
-          if (false == NetString.HasValue(dbColumn.Value.ToString()))
+          if (null == dbColumn.Value
+            || false == NetString.HasValue(dbColumn.Value.ToString()))
           {
             continue;
           }

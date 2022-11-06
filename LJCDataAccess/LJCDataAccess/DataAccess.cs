@@ -11,7 +11,7 @@ using System.Text;
 namespace LJCDataAccess
 {
   // Implements an ADO.NET SQL data access control layer.
-  /// <include path='items/LJCDataAccess/*' file='Doc/ProjectDataAccess.xml'/>
+  /// <include path='items/DataAccess/*' file='Doc/ProjectDataAccess.xml'/>
   public partial class DataAccess
   {
     #region Constructors

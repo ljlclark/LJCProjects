@@ -24,7 +24,7 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../CommonData.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Detail.xml'/>
     internal _ClassName_Detail()
     {
       InitializeComponent();
@@ -80,7 +80,7 @@ namespace _Namespace_
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../CommonDetail.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -356,7 +356,7 @@ namespace _Namespace_
     #region Control Event Handlers
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../CommonDetail.xml'/>
+    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

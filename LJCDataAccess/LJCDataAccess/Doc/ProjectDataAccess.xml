@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectDataAccess.xml -->
 <items>
-  <LJCDataAccess>
+  <DataAccess>
     <summary>
       Implements an ADO.NET SQL data access control layer
       (DE).
@@ -41,7 +41,9 @@
         &lt;span class="commonType"&gt;ExecuteNonQuery()&lt;/span&gt; and
         &lt;span class="commonType"&gt;GetSchemaOnly()&lt;/span&gt;.
       </para>
-      <para>-- Project Level Remarks</para>
+      
+      <!-- Project Level Remarks -->
+      <para>-- </para>
       <para>Data Access Library</para>
       <para>
         The Data Access library contains classes that provide common functionality
@@ -130,5 +132,5 @@
         GO
       </code>
     </example>
-  </LJCDataAccess>
+  </DataAccess>
 </items>
