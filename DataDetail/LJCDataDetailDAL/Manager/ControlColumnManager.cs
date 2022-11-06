@@ -112,7 +112,7 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public ControlColumn RetrieveWithID(int id, List<string> propertyNames = null)
+    public ControlColumn RetrieveWithID(long id, List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
       var retValue = Retrieve(keyColumns, propertyNames);
@@ -134,7 +134,7 @@ namespace LJCDataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns GetIDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -167,6 +167,35 @@ namespace LJCDataDetailDAL
         { ControlColumn.ColumnControlTabID, controlTabID },
         { ControlColumn.ColumnColumnIndex, controlColumnIndex }
       };
+      return retValue;
+    }
+    #endregion
+
+    #region Other Public Methods
+
+    // Check for duplicate unique key.
+    /// <include path='items/IsDuplicate/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public bool IsDuplicate(ControlColumn lookupRecord
+      , ControlColumn currentRecord, bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (false == isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          if (lookupRecord.ID != currentRecord.ID)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
       return retValue;
     }
     #endregion
@@ -212,6 +241,14 @@ namespace LJCDataDetailDAL
     #endregion
 
     #region Properties
+
+    /// <summary>
+    /// Gets or sets the non-select affected record count.
+    /// </summary>
+    public int AffectedCount
+    {
+      get { return Manager.AffectedCount; }
+    }
 
     /// <summary>Gets or sets the DataManager reference.</summary>
     public DataManager Manager { get; set; }

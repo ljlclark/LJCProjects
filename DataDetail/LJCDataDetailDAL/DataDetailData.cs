@@ -2,6 +2,7 @@
 using LJCDataDetailDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
+using LJCNetCommon;
 using System.Collections.Generic;
 
 namespace LJCDataDetailDAL
@@ -58,14 +59,17 @@ namespace LJCDataDetailDAL
           foreach (ControlTab controlTab in retValue.ControlTabItems)
           {
             // Load ControlColumns.
-            controlTab.ControlColumns
-              = columnManager.LoadWithParentID(controlTab.ID);
+            var controlColumns = columnManager.LoadWithParentID(controlTab.ID);
 
-            foreach (ControlColumn controlColumn in controlTab.ControlColumns)
+            if (controlColumns != null)
             {
-              // Load ControlRows
-              controlColumn.ControlRows
-                = rowManager.LoadWithParentID(controlColumn.ID);
+              controlTab.ControlColumns = controlColumns;
+              foreach (ControlColumn controlColumn in controlColumns)
+              {
+                // Load ControlRows
+                controlColumn.ControlRows
+                  = rowManager.LoadWithParentID(controlColumn.ID);
+              }
             }
           }
         }
@@ -75,14 +79,23 @@ namespace LJCDataDetailDAL
 
     // Updates the ControlDetail data object.
     /// <include path='items/UpdateControlDetail/*' file='Doc/DataDetailData.xml'/>
-    public void UpdateControlDetail(ControlDetail dataObject)
+    public int UpdateControlDetail(ControlDetail dataObject
+      , DbColumns keyColumns = null)
     {
-      if (dataObject.ID > 0)
+      int retValue = 0;
+
+      var manager = Managers.ControlDetailManager;
+      if (null == keyColumns
+        && dataObject.ID > 0)
       {
-        var manager = Managers.ControlDetailManager;
-        var keyColumns = manager.GetIDKey(dataObject.ID);
-        manager.Update(dataObject, keyColumns);
+        keyColumns = manager.GetIDKey(dataObject.ID);
       }
+      if (keyColumns != null)
+      {
+        manager.Update(dataObject, keyColumns);
+        retValue = manager.AffectedCount;
+      }
+      return retValue;
     }
 
     // Creates the Default ControlDetail data.
@@ -143,6 +156,27 @@ namespace LJCDataDetailDAL
       }
       return retValue;
     }
+
+    // Updates the ControlTab data object.
+    /// <include path='items/UpdateControlTab/*' file='Doc/DataDetailData.xml'/>
+    public int UpdateControlTab(ControlTab dataObject
+      , DbColumns keyColumns = null)
+    {
+      int retValue = 0;
+
+      var manager = Managers.ControlTabManager;
+      if (null == keyColumns
+        && dataObject.ID > 0)
+      {
+        keyColumns = manager.GetIDKey(dataObject.ID);
+      }
+      if (keyColumns != null)
+      {
+        manager.Update(dataObject, keyColumns);
+        retValue = manager.AffectedCount;
+      }
+      return retValue;
+    }
     #endregion
 
     #region ControlColumn
@@ -159,6 +193,27 @@ namespace LJCDataDetailDAL
         dataObject.ID = addedItem.ID;
       }
     }
+
+    // Updates the ControlColumn data object.
+    /// <include path='items/UpdateControlColumn/*' file='Doc/DataDetailData.xml'/>
+    public int UpdateControlColumn(ControlColumn dataObject
+      , DbColumns keyColumns = null)
+    {
+      int retValue = 0;
+
+      var manager = Managers.ControlColumnManager;
+      if (null == keyColumns
+        && dataObject.ID > 0)
+      {
+        keyColumns = manager.GetIDKey(dataObject.ID);
+      }
+      if (keyColumns != null)
+      {
+        manager.Update(dataObject, keyColumns);
+        retValue = manager.AffectedCount;
+      }
+      return retValue;
+    }
     #endregion
 
     #region ControlRow
@@ -174,6 +229,27 @@ namespace LJCDataDetailDAL
       {
         dataObject.ID = addedItem.ID;
       }
+    }
+
+    // Updates the ControlRow data object.
+    /// <include path='items/UpdateControlRow/*' file='Doc/DataDetailData.xml'/>
+    public int UpdateControlRow(ControlRow dataObject
+      , DbColumns keyColumns = null)
+    {
+      int retValue = 0;
+
+      var manager = Managers.ControlRowManager;
+      if (null == keyColumns
+        && dataObject.ID > 0)
+      {
+        keyColumns = manager.GetIDKey(dataObject.ID);
+      }
+      if (keyColumns != null)
+      {
+        manager.Update(dataObject, keyColumns);
+        retValue = manager.AffectedCount;
+      }
+      return retValue;
     }
     #endregion
 

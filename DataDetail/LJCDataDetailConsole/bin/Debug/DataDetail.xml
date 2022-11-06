@@ -58,19 +58,41 @@
       <para>
         The DataDetailDialog form is designed to dynamically create a Detail Dialog
         to allow display and edit of Data Record values which are contained in the
-        LJCRecord (DbColumns) collection.
+        LJCDataColumns (DbColumns) collection.
       </para>
       <para>
-        The Dialog contains one or more TabControl pages. Each TabPage can consist
-        of multiple ControlColumn objects. Each ControlColumn object can consist of
-        multiple ControlRow objects.
+        The Dialog contains one or more Tab pages. Each TabPage is represented
+        by a LJCDataDetailDAL.ControlTab object. A TabPage contains one or more
+        ControlColumn objects. Each ControlColumn object can contain multiple
+        ControlRow objects.
+      </para>
+      
+      <!-- Project Level Remarks -->
+      <para>-- </para>
+      <para>
+        The DataDetail project contains forms for dynamically displaying data.
+      </para>
+      <para>
+        The DataDetailDialog form dynamically displays a detail view of the
+        data. This can be used to create or edit data records.
       </para>
     </remarks>
         </member>
         <member name="M:DataDetail.DataDetailDialog.#ctor(System.String,System.String,System.String)">
             <summary>
       Initializes an object instance.
-    </summary><param name="userID">The User ID.</param><param name="dataConfigName">The DataConfig name.</param><param name="tableName">The Table name.</param>
+    </summary><param name="userID">The User ID.</param><param name="dataConfigName">The DataConfig name.</param><param name="tableName">The Table name.</param><remarks>
+      <para>
+        Creates a private LJCDataDetailDAL.DataDetailData object to provide
+        simplified interaction with the database.
+      </para>
+      <para>
+        Calls DataDetailData.GetControlDetail() to create a private
+        LJCDataDetailDAL.ControlDetail object to contain the dialog
+        configuration retrieved from the database. A default configuration is
+        created if a database configuration is not found.
+      </para>
+    </remarks>
         </member>
         <member name="M:DataDetail.DataDetailDialog.DataRetrieve">
             <summary>
@@ -161,7 +183,7 @@
             <para>-- Library Level Remarks</para>
             </remarks>
         </member>
-        <member name="M:DataDetail.TabDetail.#ctor">
+        <member name="M:DataDetail.TabDetail.#ctor(LJCDataDetailDAL.DataDetailData)">
             <!-- No matching elements were found for the following include tag --><include path="items/DefaultConstructor/*" file="../../LJCDocLib/Common/Detail.xml" />
         </member>
         <member name="M:DataDetail.TabDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
@@ -193,6 +215,9 @@
         </member>
         <member name="P:DataDetail.TabDetail.LJCRecord">
             <summary>Gets a reference to the record object.</summary>
+        </member>
+        <member name="P:DataDetail.TabDetail.LJCSetIndex">
+            <summary>Sets the Index value.</summary>
         </member>
         <member name="E:DataDetail.TabDetail.LJCChange">
             <summary>The Change event.</summary>

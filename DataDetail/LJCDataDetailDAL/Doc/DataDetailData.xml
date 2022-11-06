@@ -20,6 +20,7 @@
       Updates the ControlDetail data object.
     </summary>
     <param name="dataObject">The DataObject.</param>
+    <param name="keyColumns">The key columns.</param>
   </UpdateControlDetail>
   
   <!-- ControlTab -->
@@ -33,7 +34,14 @@
       Creates the data if it does not already exist.
     </remarks>
   </SetControlTab>
-  
+  <UpdateControlTab>
+    <summary>
+      Updates the ControlTab data object.
+    </summary>
+    <param name="dataObject">The DataObject.</param>
+    <param name="keyColumns">The key columns.</param>
+  </UpdateControlTab>
+
   <!-- ControlColumn -->
   <AddControlColumn>
     <summary>
@@ -42,7 +50,14 @@
     <param name="dataObject">The DataObject.</param>
     <param name="propertyNames">The incuded property names.</param>
   </AddControlColumn>
-  
+  <UpdateControlColumn>
+    <summary>
+      Updates the ControlColumn data object.
+    </summary>
+    <param name="dataObject">The DataObject.</param>
+    <param name="keyColumns">The key columns.</param>
+  </UpdateControlColumn>
+
   <!-- ControlRow -->
   <AddControlRow>
     <summary>
@@ -51,4 +66,11 @@
     <param name="dataObject">The DataObject.</param>
     <param name="propertyNames">The incuded property names.</param>
   </AddControlRow>
+  <UpdateControlRow>
+    <summary>
+      Updates the ControlRow data object.
+    </summary>
+    <param name="dataObject">The DataObject.</param>
+    <param name="keyColumns">The key columns.</param>
+  </UpdateControlRow>
 </item>

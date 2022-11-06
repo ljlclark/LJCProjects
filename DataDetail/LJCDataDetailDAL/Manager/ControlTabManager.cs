@@ -201,14 +201,16 @@ namespace LJCDataDetailDAL
 
     #region Properties
 
-    /// <summary>Gets or sets the non-select affected record count.</summary>
+    /// <summary>
+    /// Gets or sets the non-select affected record count.
+    /// </summary>
     public int AffectedCount
     {
       get { return Manager.AffectedCount; }
     }
 
     /// <summary>Gets or sets the DataManager reference.</summary>
-    public DataManager Manager { get; set; }
+    public DataManager Manager { get; private set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
     public ResultConverter<ControlTab, ControlTabItems> ResultConverter { get; set; }

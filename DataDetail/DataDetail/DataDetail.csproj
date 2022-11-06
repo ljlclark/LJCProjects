@@ -97,6 +97,7 @@
     </Compile>
     <Content Include="bin\Debug\ConnectionTemplates.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="Doc\ProjectDataDetailDialog.xml" />
     <EmbeddedResource Include="DataDetailDialog.resx">
       <DependentUpon>DataDetailDialog.cs</DependentUpon>
       <SubType>Designer</SubType>

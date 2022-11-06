@@ -105,6 +105,28 @@
       Closes the tiled split panel.
     </summary>
   </LJCCloseEmptyPanel>
+  <LJCGetTabPage>
+    <summary>
+      Gets the tab page if the position corresponds to a tab label.
+    </summary>
+    <param name="x">The Tab Label mouse X value.</param>
+    <param name="y">The Tab Label mouse Y value.</param>
+    <returns></returns>
+  </LJCGetTabPage>
+  <LJCGetTabPageIndex>
+    <summary>
+      Gets the tab index for a tab page.
+    </summary>
+    <param name="tabPage">The TabPage object.</param>
+    <returns></returns>
+  </LJCGetTabPageIndex>
+  <LJCMoveTabPage>
+    <summary>
+      Moves a tab page.
+    </summary>
+    <param name="sourceIndex">The source TabPage index.</param>
+    <param name="targetIndex">The target TabPage index.</param>
+  </LJCMoveTabPage>
 
   <!-- Member Data -->
   <LJCPanelAdd>

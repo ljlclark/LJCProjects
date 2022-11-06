@@ -593,6 +593,24 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Sets the value for the column with the specified name.
+    /// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetValue(string name, object value)
+    {
+      if (value != null)
+      {
+        var dbColumn = LJCSearchName(name);
+        if (null == dbColumn)
+        {
+          Add(name, value);
+        }
+        else
+        {
+          dbColumn.Value = value;
+        }
+      }
+    }
     #endregion
 
     #region Properties

@@ -1,0 +1,12 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.csproj.SuggestedBindingRedirects.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\NetCommonTest.exe.config
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\NetCommonTest.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\NetCommonTest.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\LJCNetCommon.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\bin\Debug\LJCNetCommon.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCNetCommon\NetCommonTest\obj\Debug\NetCommonTest.pdb

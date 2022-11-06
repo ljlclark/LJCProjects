@@ -89,7 +89,6 @@
       this.TabIndexText.Name = "TabIndexText";
       this.TabIndexText.Size = new System.Drawing.Size(40, 26);
       this.TabIndexText.TabIndex = 3;
-      this.TabIndexText.TabStop = false;
       // 
       // TabIndexLabel
       // 
@@ -107,7 +106,6 @@
       this.TabTextText.Name = "TabTextText";
       this.TabTextText.Size = new System.Drawing.Size(433, 26);
       this.TabTextText.TabIndex = 5;
-      this.TabTextText.TabStop = false;
       // 
       // TabTextLabel
       // 
@@ -125,7 +123,6 @@
       this.DescriptionText.Name = "DescriptionText";
       this.DescriptionText.Size = new System.Drawing.Size(433, 26);
       this.DescriptionText.TabIndex = 7;
-      this.DescriptionText.TabStop = false;
       // 
       // DescriptionLabel
       // 

@@ -271,6 +271,13 @@
     <param name="name">The column name.</param>
     <returns>The column value.</returns>
   </LJCGetValue>
+  <LJCSetValue>
+    <summary>
+      Sets the value for the column with the specified name.
+    </summary>
+    <param name="name">The column name.</param>
+    <param name="value">The column value.</param>
+  </LJCSetValue>
 
   <!-- Properties -->
   <Item>

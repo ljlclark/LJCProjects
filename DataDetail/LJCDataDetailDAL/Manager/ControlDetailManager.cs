@@ -94,7 +94,7 @@ namespace LJCDataDetailDAL
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Custom Load/Retrieve Methods
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
@@ -171,6 +171,14 @@ namespace LJCDataDetailDAL
     #endregion
 
     #region Properties
+
+    /// <summary>
+    /// Gets or sets the non-select affected record count.
+    /// </summary>
+    public int AffectedCount
+    {
+      get { return Manager.AffectedCount; }
+    }
 
     /// <summary>Gets or sets the DataManager reference.</summary>
     public DataManager Manager { get; set; }

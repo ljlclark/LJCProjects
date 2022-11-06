@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "NetCommonTest/1.0.0": {
+        "dependencies": {
+          "LJCNetCommon": "1.0.0"
+        },
+        "runtime": {
+          "NetCommonTest.dll": {}
+        }
+      },
+      "LJCNetCommon/1.0.0": {
+        "runtime": {
+          "LJCNetCommon.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NetCommonTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LJCNetCommon/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

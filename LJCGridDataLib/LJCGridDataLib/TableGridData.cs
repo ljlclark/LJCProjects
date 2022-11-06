@@ -231,7 +231,7 @@ namespace LJCGridDataLib
     }
 
     // Fires the AddRow event.
-    /// <include path='items/OnAddRow/*' file='Doc/ResultGrid.xml'/>
+    /// <include path='items/OnAddRow/*' file='Doc/ResultGridData.xml'/>
     protected void OnAddRow()
     {
       AddRow?.Invoke(this, new EventArgs());

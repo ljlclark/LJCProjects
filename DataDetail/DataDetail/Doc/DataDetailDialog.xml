@@ -1,23 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- DataDetailDialog.xml -->
 <items>
-  <DataDetailDialog>
-    <summary>
-      The DataDetail Dynamic Detail dialog.
-    </summary>
-    <remarks>
-      <para>
-        The DataDetailDialog form is designed to dynamically create a Detail Dialog
-        to allow display and edit of Data Record values which are contained in the
-        LJCRecord (DbColumns) collection.
-      </para>
-      <para>
-        The Dialog contains one or more TabControl pages. Each TabPage can consist
-        of multiple ControlColumn objects. Each ControlColumn object can consist of
-        multiple ControlRow objects.
-      </para>
-    </remarks>
-  </DataDetailDialog>
   <DataDetailDialogC>
     <summary>
       Initializes an object instance.
@@ -25,16 +8,19 @@
     <param name="userID">The User ID.</param>
     <param name="dataConfigName">The DataConfig name.</param>
     <param name="tableName">The Table name.</param>
+    <remarks>
+      <para>
+        Creates a private LJCDataDetailDAL.DataDetailData object to provide
+        simplified interaction with the database.
+      </para>
+      <para>
+        Calls DataDetailData.GetControlDetail() to create a private
+        LJCDataDetailDAL.ControlDetail object to contain the dialog
+        configuration retrieved from the database. A default configuration is
+        created if a database configuration is not found.
+      </para>
+    </remarks>
   </DataDetailDialogC>
-  <DefaultDetailConfig>
-    <summary>
-      Creates the Default DetailConfig object.
-    </summary>
-    <param name="dataConfigName">The DataConfigName value.</param>
-    <param name="tableName">The table name.</param>
-    <param name="userID">The User ID value.</param>
-    <returns>The default DetailConfig object.</returns>
-  </DefaultDetailConfig>
   <ControlRow>
     <summary>
       Creates the ControlRow and associated controls.
@@ -65,17 +51,8 @@
     <param name="name">The TextBox control name.</param>
     <returns>The TextBox control reference.</returns>
   </SearchTextBox>
+  
   <!-- Properties -->
-  <LJCConfigRows>
-    <summary>
-      The Configuration Rows.
-    </summary>
-    <remarks>
-      This is the layout configuration object. It defines how the controls
-      are positioned and is used to populate the ControlColumns and
-      ControlRows layout definition objects.
-    </remarks>
-  </LJCConfigRows>
   <LJCDataColumns>
     <summary>
       Gets a reference to the record object.

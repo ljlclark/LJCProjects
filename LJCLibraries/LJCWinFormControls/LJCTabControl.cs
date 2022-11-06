@@ -44,7 +44,7 @@ namespace LJCWinFormControls
         // Initializes the drag and drop values.
         mIsDragStart = true;
         mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
-        mSourceTabPage = GetTabPage(e.X, e.Y);
+        mSourceTabPage = LJCGetTabPage(e.X, e.Y);
       }
     }
 
@@ -100,7 +100,7 @@ namespace LJCWinFormControls
         else
         {
           // Set target to drop target.
-          targetTabPage = GetTabPage(tabPoint.X, tabPoint.Y);
+          targetTabPage = LJCGetTabPage(tabPoint.X, tabPoint.Y);
         }
 
         if (tabPoint.X > Width - 20)
@@ -171,7 +171,7 @@ namespace LJCWinFormControls
       else
       {
         tabPoint = PointToClient(new Point(drgevent.X, drgevent.Y));
-        targetTabPage = GetTabPage(tabPoint.X, tabPoint.Y);
+        targetTabPage = LJCGetTabPage(tabPoint.X, tabPoint.Y);
       }
 
       if (targetTabPage != sourceTabPage
@@ -189,7 +189,7 @@ namespace LJCWinFormControls
         else
         {
           // Move source tab page to target tab control.
-          targetIndex = GetTabPageIndex(targetTabPage);
+          targetIndex = LJCGetTabPageIndex(targetTabPage);
           TabPages.Insert(targetIndex, sourceTabPage);
         }
         SelectedTab = sourceTabPage;
@@ -241,21 +241,10 @@ namespace LJCWinFormControls
     {
       LJCOnLJCPanelRemove();
     }
-    #endregion
-
-    #region Private Methods
-
-    // Creates a bounding rectangle to determine if the move operation should start.
-    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
-    {
-      Rectangle retVal;
-
-      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
-      return retVal;
-    }
 
     // Gets the tab page if the position corresponds to a tab label.
-    private TabPage GetTabPage(int x, int y)
+    /// <include path='items/LJCGetTabPage/*' file='Doc/LJCTabControl.xml'/>
+    public TabPage LJCGetTabPage(int x, int y)
     {
       Rectangle tabRectangle;
       TabPage retVal = null;
@@ -273,7 +262,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the tab index for a tab page.
-    private int GetTabPageIndex(TabPage tabPage)
+    /// <include path='items/LJCGetTabPageIndex/*' file='Doc/LJCTabControl.xml'/>
+    public int LJCGetTabPageIndex(TabPage tabPage)
     {
       int retVal = -1;
 
@@ -285,6 +275,27 @@ namespace LJCWinFormControls
           break;
         }
       }
+      return retVal;
+    }
+
+    // Moves a tab page.
+    /// <include path='items/LJCMoveTabPage/*' file='Doc/LJCTabControl.xml'/>
+    public void LJCMoveTabPage(int sourceIndex, int targetIndex)
+    {
+      var sourcePage = TabPages[sourceIndex];
+      TabPages.RemoveAt(sourceIndex);
+      TabPages.Insert(targetIndex, sourcePage);
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Creates a bounding rectangle to determine if the move operation should start.
+    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
+    {
+      Rectangle retVal;
+
+      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
       return retVal;
     }
 

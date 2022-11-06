@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DataDetail
 {
   // The DataDetail Dynamic Detail dialog.
-  /// <include path='items/DataDetailDialog/*' file='Doc/DataDetailDialog.xml'/>
+  /// <include path='items/DataDetailDialog/*' file='Doc/ProjectDataDetailDialog.xml'/>
   public partial class DataDetailDialog : Form
   {
     #region Constructors
@@ -127,23 +127,38 @@ namespace DataDetail
 
     #region Action Methods
 
+    // Add a TabPage.
+    private void DoTabAdd()
+    {
+      // Data from items.
+      int newTabIndex = MainTabs.TabCount;
+
+      var detail = new TabDetail(DataDetailData)
+      {
+        LJCParentID = ControlDetail.ID,
+        LJCParentName = ControlDetail.Name,
+        LJCSetIndex = newTabIndex,
+      };
+      detail.LJCChange += Detail_LJCChange;
+      detail.ShowDialog();
+    }
+
     // Edit Tab Title
-    internal void TabEdit_Click(object sender, EventArgs e)
+    private void DoTabEdit()
     {
       // Data from items.
       var tabPage = MainTabs.SelectedTab;
-      var tabIndex = tabPage.Parent.TabIndex;
+      var tabIndex = MainTabs.LJCGetTabPageIndex(tabPage);
       var manager = DataDetailData.Managers.ControlTabManager;
       var controlTab = manager.RetrieveWithUnique(ControlDetail.ID
         , tabIndex);
       long id = controlTab.ID;
 
-      var detail = new TabDetail()
+      var detail = new TabDetail(DataDetailData)
       {
         LJCID = id,
         LJCParentID = ControlDetail.ID,
         LJCParentName = ControlDetail.Name,
-        Managers = DataDetailData.Managers
       };
       detail.LJCChange += Detail_LJCChange;
       detail.ShowDialog();
@@ -155,8 +170,22 @@ namespace DataDetail
       var detail = sender as TabDetail;
       if (detail.LJCRecord != null)
       {
-        var tabPage = MainTabs.SelectedTab;
-        tabPage.Text = detail.LJCRecord.Caption;
+        var dataRecord = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          var tabPage = MainTabs.SelectedTab;
+          if (detail.LJCTabOriginalIndex != dataRecord.TabIndex)
+          {
+            MainTabs.LJCMoveTabPage(detail.LJCTabOriginalIndex
+              , dataRecord.TabIndex);
+          }
+          tabPage.Text = dataRecord.Caption;
+        }
+        else
+        {
+          var tabPage = new TabPage(dataRecord.Caption);
+          MainTabs.TabPages.Insert(dataRecord.TabIndex, tabPage);
+        }
       }
     }
     #endregion
@@ -453,7 +482,7 @@ namespace DataDetail
 
     // Returns a reference to a Label control by name.
     /// <include path='items/SearchLabel/*' file='Doc/DataDetailDialog.xml'/>
-    internal Label SearchLabel(string name)
+    private Label SearchLabel(string name)
     {
       Label retValue;
 
@@ -463,7 +492,7 @@ namespace DataDetail
 
     // Return a reference to a TextBox control by name.
     /// <include path='items/SearchTextBox/*' file='Doc/DataDetailDialog.xml'/>
-    internal TextBox SearchTextBox(string name)
+    private TextBox SearchTextBox(string name)
     {
       TextBox retValue;
 
@@ -696,6 +725,21 @@ namespace DataDetail
     }
     #endregion
 
+    #region Action Event Handlers
+
+    // Add Tab
+    private void DetailTabAdd_Click(object sender, EventArgs e)
+    {
+      DoTabAdd();
+    }
+
+    // Edit Tab Title
+    private void DetailTabEdit_Click(object sender, EventArgs e)
+    {
+      DoTabEdit();
+    }
+    #endregion
+
     #region Control Event Handlers
 
     // Fires the Change event.
@@ -824,7 +868,7 @@ namespace DataDetail
     #region KeyEdit Event Handlers
 
     // Only allows numbers or edit keys.
-    internal void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
       e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
     }

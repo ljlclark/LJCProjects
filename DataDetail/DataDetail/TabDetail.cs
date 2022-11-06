@@ -1,10 +1,12 @@
 ﻿using LJCDataDetailDAL;
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DataDetail
@@ -19,7 +21,7 @@ namespace DataDetail
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Detail.xml'/>
-    internal TabDetail()
+    internal TabDetail(DataDetailData dataDetailData)
     {
       InitializeComponent();
 
@@ -33,6 +35,7 @@ namespace DataDetail
       // Set default class data.
       BeginColor = Color.AliceBlue;
       EndColor = Color.LightSkyBlue;
+      DataDetailData = dataDetailData;
     }
     #endregion
 
@@ -70,8 +73,9 @@ namespace DataDetail
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.ControlTabManager;
+        var manager = DataDetailData.Managers.ControlTabManager;
         var dataRecord = manager.RetrieveWithID(LJCID);
+        LJCTabOriginalIndex = dataRecord.TabIndex;
         GetRecordValues(dataRecord);
       }
       else
@@ -79,6 +83,7 @@ namespace DataDetail
         Text += " - New";
         LJCIsUpdate = false;
         ParentNameText.Text = LJCParentName;
+        TabIndexText.Text = LJCSetIndex.ToString();
 
         // Set default values.
         LJCRecord = new ControlTab();
@@ -127,17 +132,21 @@ namespace DataDetail
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.ControlTabManager;
-      var lookupRecord = manager.RetrieveWithUnique(LJCRecord.ControlDetailID
-        , LJCRecord.TabIndex);
-      if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+      var manager = DataDetailData.Managers.ControlTabManager;
+
+      if (LJCTabOriginalIndex == LJCRecord.TabIndex)
       {
-        retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK
-          , MessageBoxIcon.Exclamation);
+        var lookupRecord = manager.RetrieveWithUnique(LJCRecord.ControlDetailID
+          , LJCRecord.TabIndex);
+        if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+        {
+          retValue = false;
+          title = "Data Entry Error";
+          message = "The record already exists.";
+          Cursor = Cursors.Default;
+          MessageBox.Show(message, title, MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
       }
 
       if (retValue)
@@ -145,6 +154,10 @@ namespace DataDetail
         if (LJCIsUpdate)
         {
           var keyRecord = manager.GetIDKey(LJCRecord.ID);
+          if (LJCTabOriginalIndex != LJCRecord.TabIndex)
+          {
+            MoveTab(keyRecord);
+          }
           manager.Update(LJCRecord, keyRecord);
           if (0 == manager.AffectedCount)
           {
@@ -214,6 +227,108 @@ namespace DataDetail
       }
       return retValue;
     }
+
+    // Moves a TabPage.
+    private void MoveTab(DbColumns keyColumns)
+    {
+      // tab will move to the left.
+      if (LJCRecord.TabIndex < LJCTabOriginalIndex)
+      {
+        MoveLeft(keyColumns);
+      }
+      else
+      {
+        MoveRight(keyColumns);
+      }
+    }
+
+    // Moves a TabPage to the left.
+    private void MoveLeft(DbColumns keyColumns)
+    {
+      var manager = DataDetailData.Managers.ControlTabManager;
+
+      // Move source tab out of the way.
+      int targetIndex = LJCRecord.TabIndex;
+      LJCRecord.TabIndex = -1;
+      manager.Update(LJCRecord, keyColumns);
+      if (1 == manager.AffectedCount)
+      {
+        // Move each tab index one to the right starting with left of
+        // original source to right of target.
+        DbColumns updateKeyColumns = new DbColumns()
+        {
+          { ControlTab.ColumnControlDetailID, LJCRecord.ControlDetailID },
+        };
+        int beginIndex = LJCTabOriginalIndex - 1;
+        int endIndex = targetIndex;
+        for (int index = beginIndex; index >= endIndex; index--)
+        {
+          // Get tab at old position.
+          var controlTab
+            = manager.RetrieveWithUnique(LJCRecord.ControlDetailID, index);
+          if (controlTab != null)
+          {
+            // Update data object
+            int newIndex = index + 1;
+            controlTab.TabIndex = newIndex;
+
+            // Update target keys.
+            updateKeyColumns.LJCSetValue("TabIndex", index);
+
+            // Move to new position.
+            DbCommon.AddChangedName(controlTab, ControlTab.ColumnTabIndex);
+            manager.Update(controlTab, updateKeyColumns);
+          }
+        }
+
+        // Set source tab index to target index.
+        LJCRecord.TabIndex = targetIndex;
+      }
+    }
+
+    // Moves a TabPage to the right.
+    private void MoveRight(DbColumns keyColumns)
+    {
+      var manager = DataDetailData.Managers.ControlTabManager;
+
+      // Move source tab out of the way.
+      int targetIndex = LJCRecord.TabIndex;
+      LJCRecord.TabIndex = -1;
+      manager.Update(LJCRecord, keyColumns);
+      if (1 == manager.AffectedCount)
+      {
+        // Move each tab index one to the left starting with right of
+        // original source to left of target.
+        DbColumns updateKeyColumns = new DbColumns()
+        {
+          { ControlTab.ColumnControlDetailID, LJCRecord.ControlDetailID },
+        };
+        int beginIndex = LJCTabOriginalIndex + 1;
+        int endIndex = targetIndex;
+        for (int index = beginIndex; index <= endIndex; index++)
+        {
+          // Get tab at old position.
+          var controlTab
+            = manager.RetrieveWithUnique(LJCRecord.ControlDetailID, index);
+          if (controlTab != null)
+          {
+            // Update data object
+            int newIndex = index - 1;
+            controlTab.TabIndex = newIndex;
+
+            // Update target keys.
+            updateKeyColumns.LJCSetValue("TabIndex", index);
+
+            // Move to new position.
+            DbCommon.AddChangedName(controlTab, ControlTab.ColumnTabIndex);
+            manager.Update(controlTab, updateKeyColumns);
+          }
+        }
+
+        // Set source tab index to target index.
+        LJCRecord.TabIndex = targetIndex;
+      }
+    }
     #endregion
 
     #region Setup Methods
@@ -281,14 +396,19 @@ namespace DataDetail
     /// <summary>Gets a reference to the record object.</summary>
     public ControlTab LJCRecord { get; private set; }
 
+    /// <summary>Sets the Index value.</summary>
+    public int LJCSetIndex { get; set; }
+
+    public int LJCTabOriginalIndex { get; set; }
+
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
 
-    // The Managers object.
-    public DataDetailManagers Managers { get; set; }
+    // Gets or sets ConfigData.
+    private DataDetailData DataDetailData { get; set; }
     #endregion
 
     #region Class Data

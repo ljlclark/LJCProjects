@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- DataDetailDialog.xml -->
+<items>
+  <DataDetailDialog>
+    <summary>
+      The DataDetail Dynamic Detail dialog.
+    </summary>
+    <remarks>
+      <para>
+        The DataDetailDialog form is designed to dynamically create a Detail Dialog
+        to allow display and edit of Data Record values which are contained in the
+        LJCDataColumns (DbColumns) collection.
+      </para>
+      <para>
+        The Dialog contains one or more Tab pages. Each TabPage is represented
+        by a LJCDataDetailDAL.ControlTab object. A TabPage contains one or more
+        ControlColumn objects. Each ControlColumn object can contain multiple
+        ControlRow objects.
+      </para>
+      
+      <!-- Project Level Remarks -->
+      <para>-- </para>
+      <para>
+        The DataDetail project contains forms for dynamically displaying data.
+      </para>
+      <para>
+        The DataDetailDialog form dynamically displays a detail view of the
+        data. This can be used to create or edit data records.
+      </para>
+    </remarks>
+  </DataDetailDialog>
+</items>
