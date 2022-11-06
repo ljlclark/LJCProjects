@@ -242,23 +242,45 @@ namespace LJCWinFormControls
       LJCOnLJCPanelRemove();
     }
 
+    /// <summary>
+    /// Gets the tab page with the matching text.
+    /// </summary>
+    /// <param name="text">The Text value.</param>
+    /// <returns>The matching tab page.</returns>
+    public TabPage LJCGetTabPage(string text)
+    {
+      TabPage retValue = null;
+
+      TabPage currentTabPage;
+      for (int index = 0; index < TabPages.Count; index++)
+      {
+        currentTabPage = TabPages[index];
+        if (currentTabPage.Text == text)
+        {
+          retValue = currentTabPage;
+          break;
+        }
+      }
+      return retValue;
+    }
+
     // Gets the tab page if the position corresponds to a tab label.
     /// <include path='items/LJCGetTabPage/*' file='Doc/LJCTabControl.xml'/>
     public TabPage LJCGetTabPage(int x, int y)
     {
       Rectangle tabRectangle;
-      TabPage retVal = null;
+      TabPage retValue = null;
 
       for (int index = 0; index < TabPages.Count; index++)
       {
         tabRectangle = GetTabRect(index);
         if (tabRectangle.Contains(new Point(x, y)))
         {
-          retVal = TabPages[index];
+          retValue = TabPages[index];
           break;
         }
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets the tab index for a tab page.

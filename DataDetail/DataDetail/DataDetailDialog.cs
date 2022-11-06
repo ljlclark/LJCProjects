@@ -147,21 +147,96 @@ namespace DataDetail
     private void DoTabEdit()
     {
       // Data from items.
-      var tabPage = MainTabs.SelectedTab;
-      var tabIndex = MainTabs.LJCGetTabPageIndex(tabPage);
-      var manager = DataDetailData.Managers.ControlTabManager;
-      var controlTab = manager.RetrieveWithUnique(ControlDetail.ID
-        , tabIndex);
-      long id = controlTab.ID;
-
-      var detail = new TabDetail(DataDetailData)
+      var tabIndex = CurrentTabIndex();
+      if (tabIndex >= 0)
       {
-        LJCID = id,
-        LJCParentID = ControlDetail.ID,
-        LJCParentName = ControlDetail.Name,
-      };
-      detail.LJCChange += Detail_LJCChange;
-      detail.ShowDialog();
+        var manager = DataDetailData.Managers.ControlTabManager;
+        var controlTab = manager.RetrieveWithUnique(ControlDetail.ID
+          , tabIndex);
+        long id = controlTab.ID;
+
+        var detail = new TabDetail(DataDetailData)
+        {
+          LJCID = id,
+          LJCParentID = ControlDetail.ID,
+          LJCParentName = ControlDetail.Name,
+        };
+        detail.LJCChange += Detail_LJCChange;
+        detail.ShowDialog();
+      }
+    }
+
+    // Deletes the selected tab.
+    private void DoTabDelete()
+    {
+      string message;
+      bool success = true;
+
+      var deleteTitle = "Delete Error";
+      var deleteMessage = FormCommon.DeleteError;
+
+      var tabIndex = CurrentTabIndex();
+      if (tabIndex < 0)
+      {
+        success = false;
+      }
+
+      var manager = DataDetailData.Managers.ControlTabManager;
+      ControlTab controlTab = null;
+      if (success)
+      {
+        controlTab = manager.RetrieveWithUnique(ControlDetail.ID
+          , tabIndex);
+        if (null == controlTab)
+        {
+          success = false;
+        }
+      }
+
+      if (success)
+      {
+        var title = "Delete Confirmation";
+        message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.No)
+        {
+          success = false;
+        }
+      }
+
+      if (success && null == controlTab.ControlColumns)
+      {
+        success = false;
+        MessageBox.Show(deleteMessage, deleteTitle, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
+      }
+
+      if (success)
+      {
+        if (tabIndex != MainTabs.TabPages.Count - 1)
+        {
+          int sourceIndex = tabIndex;
+          tabIndex = MainTabs.TabPages.Count;
+          MainTabs.LJCMoveTabPage(sourceIndex, tabIndex);
+        }
+      }
+
+      if (success)
+      {
+        var keyColumns = manager.GetIDKey(controlTab.ID);
+        manager.Delete(keyColumns);
+        if (0 == manager.AffectedCount)
+        {
+          success = false;
+          MessageBox.Show(deleteMessage, deleteTitle, MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
+      }
+
+      if (success)
+      {
+        MainTabs.TabPages.RemoveAt(tabIndex);
+      }
     }
 
     // Updates tab with changes from the detail dialog.
@@ -276,6 +351,93 @@ namespace DataDetail
     private Timer mTimer;
     #endregion
 
+    #region Private Methods
+
+    // Gets the Current TabIndex.
+    private int CurrentTabIndex()
+    {
+      int retValue = -1;
+
+      if (MainTabs.SelectedTab != null)
+      {
+        var tabPage = MainTabs.SelectedTab;
+        retValue = MainTabs.LJCGetTabPageIndex(tabPage);
+      }
+      return retValue;
+    }
+
+    // Checks the values required for the SelectList window.
+    private bool CheckSelectListValues(string buttonName, out KeyItem keyItem)
+    {
+      int index = 0;
+      string message = null;
+      bool retValue = true;
+
+      keyItem = null;
+
+      if (null == DataDetailData.DbServiceRef)
+      {
+        retValue = false;
+        message = "Missing Data Service Reference.";
+      }
+
+      if (retValue)
+      {
+        if (false == NetString.HasValue(ControlDetail.DataConfigName))
+        {
+          retValue = false;
+          message = "Missing Data Config Name.";
+        }
+      }
+
+      if (retValue)
+      {
+        index = buttonName.IndexOf("Button");
+        if (index < 0)
+        {
+          retValue = false;
+          message = "Sender did not contain the suffix 'Button'.";
+        }
+      }
+
+      if (retValue)
+      {
+        string name = buttonName.Substring(0, index);
+        var keyItems = LJCKeyItems.SearchPropertyName(name);
+        if (keyItems != null && 1 == keyItems.Count)
+        {
+          keyItem = keyItems[0];
+
+          message = "";
+          if (false == NetString.HasValue(keyItem.TableName))
+          {
+            retValue = false;
+            message += "Conrol Item is missing TableName.\r\n";
+          }
+
+          if (false == NetString.HasValue(keyItem.PrimaryKeyName))
+          {
+            retValue = false;
+            message += "Conrol Item is missing PrimaryKeyName.\r\n";
+          }
+
+          if (keyItem.ID < 1)
+          {
+            retValue = false;
+            message += "Conrol Item is missing ID.";
+          }
+        }
+      }
+
+      if (NetString.HasValue(message))
+      {
+        string title = "Display SelectList Error";
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Process Controls Methods
 
     // Create the Controls from the configuration.
@@ -291,13 +453,18 @@ namespace DataDetail
         // Create additional tabs.
         foreach (ControlTab controlTab in config.ControlTabItems)
         {
+          var caption = controlTab.Caption;
           if (0 == controlTab.TabIndex)
           {
-            MainTabs.TabPages[0].Text = controlTab.Caption;
+            var tabPage = MainTabs.TabPages[0];
+            tabPage.Text = caption;
+            tabPage.Name = caption;
           }
           else
           {
-            MainTabs.TabPages.Add(controlTab.Caption);
+            MainTabs.TabPages.Add(caption);
+            var tabPage = MainTabs.LJCGetTabPage(caption);
+            tabPage.Name = caption;
           }
         }
 
@@ -738,6 +905,12 @@ namespace DataDetail
     {
       DoTabEdit();
     }
+
+    // Delete Tab
+    private void DetailTabDelete_Click(object sender, EventArgs e)
+    {
+      DoTabDelete();
+    }
     #endregion
 
     #region Control Event Handlers
@@ -747,22 +920,6 @@ namespace DataDetail
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
-    }
-
-    // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
-    {
-      SetRecordValues();
-      LJCOnChange();
-
-      DialogResult = DialogResult.OK;
-      Close();
-    }
-
-    // Closes the form without saving the data.
-    private void FormCancelButton_Click(object sender, EventArgs e)
-    {
-      Close();
     }
 
     // Displays the selection list window.
@@ -793,75 +950,30 @@ namespace DataDetail
       }
     }
 
-    // Checks the values required for the SelectList window.
-    private bool CheckSelectListValues(string buttonName, out KeyItem keyItem)
+    // Closes the form without saving the data.
+    private void FormCancelButton_Click(object sender, EventArgs e)
     {
-      int index = 0;
-      string message = null;
-      bool retValue = true;
+      Close();
+    }
 
-      keyItem = null;
-
-      if (null == DataDetailData.DbServiceRef)
+    // Handles the MouseDown event.
+    private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      var tabPage = MainTabs.LJCGetTabPage(e.X, e.Y);
+      if (tabPage != null)
       {
-        retValue = false;
-        message = "Missing Data Service Reference.";
+        MainTabs.SelectedTab = tabPage;
       }
+    }
 
-      if (retValue)
-      {
-        if (false == NetString.HasValue(ControlDetail.DataConfigName))
-        {
-          retValue = false;
-          message = "Missing Data Config Name.";
-        }
-      }
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      SetRecordValues();
+      LJCOnChange();
 
-      if (retValue)
-      {
-        index = buttonName.IndexOf("Button");
-        if (index < 0)
-        {
-          retValue = false;
-          message = "Sender did not contain the suffix 'Button'.";
-        }
-      }
-
-      if (retValue)
-      {
-        string name = buttonName.Substring(0, index);
-        var keyItems = LJCKeyItems.SearchPropertyName(name);
-        if (keyItems != null && 1 == keyItems.Count)
-        {
-          keyItem = keyItems[0];
-
-          message = "";
-          if (false == NetString.HasValue(keyItem.TableName))
-          {
-            retValue = false;
-            message += "Conrol Item is missing TableName.\r\n";
-          }
-
-          if (false == NetString.HasValue(keyItem.PrimaryKeyName))
-          {
-            retValue = false;
-            message += "Conrol Item is missing PrimaryKeyName.\r\n";
-          }
-
-          if (keyItem.ID < 1)
-          {
-            retValue = false;
-            message += "Conrol Item is missing ID.";
-          }
-        }
-      }
-
-      if (NetString.HasValue(message))
-      {
-        string title = "Display SelectList Error";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-      return retValue;
+      DialogResult = DialogResult.OK;
+      Close();
     }
     #endregion
 

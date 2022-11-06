@@ -32,12 +32,13 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataDetailDialog));
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.MainTabs = new LJCWinFormControls.LJCTabControl();
+      this.MainTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.DetailMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.DetailTabAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.DetailTabEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.DetailTabDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.s = new System.Windows.Forms.TabPage();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
-      this.DetailTabAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.MainTabs.SuspendLayout();
       this.DetailMenu.SuspendLayout();
       this.SuspendLayout();
@@ -68,29 +69,47 @@
       // 
       // MainTabs
       // 
+      this.MainTabs.AllowDrop = true;
       this.MainTabs.ContextMenuStrip = this.DetailMenu;
       this.MainTabs.Controls.Add(this.s);
+      this.MainTabs.LJCAllowDrag = true;
       this.MainTabs.Location = new System.Drawing.Point(0, 0);
       this.MainTabs.Name = "MainTabs";
       this.MainTabs.SelectedIndex = 0;
       this.MainTabs.Size = new System.Drawing.Size(782, 487);
       this.MainTabs.TabIndex = 0;
+      this.MainTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainTabs_MouseDown);
       // 
       // DetailMenu
       // 
       this.DetailMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.DetailMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DetailTabAdd,
-            this.DetailTabEdit});
+            this.DetailTabEdit,
+            this.DetailTabDelete});
       this.DetailMenu.Name = "DetailMenu";
-      this.DetailMenu.Size = new System.Drawing.Size(241, 101);
+      this.DetailMenu.Size = new System.Drawing.Size(167, 100);
+      // 
+      // DetailTabAdd
+      // 
+      this.DetailTabAdd.Name = "DetailTabAdd";
+      this.DetailTabAdd.Size = new System.Drawing.Size(166, 32);
+      this.DetailTabAdd.Text = "Tab Add";
+      this.DetailTabAdd.Click += new System.EventHandler(this.DetailTabAdd_Click);
       // 
       // DetailTabEdit
       // 
       this.DetailTabEdit.Name = "DetailTabEdit";
-      this.DetailTabEdit.Size = new System.Drawing.Size(240, 32);
+      this.DetailTabEdit.Size = new System.Drawing.Size(166, 32);
       this.DetailTabEdit.Text = "Tab Edit";
       this.DetailTabEdit.Click += new System.EventHandler(this.DetailTabEdit_Click);
+      // 
+      // DetailTabDelete
+      // 
+      this.DetailTabDelete.Name = "DetailTabDelete";
+      this.DetailTabDelete.Size = new System.Drawing.Size(166, 32);
+      this.DetailTabDelete.Text = "Tab Delete";
+      this.DetailTabDelete.Click += new System.EventHandler(this.DetailTabDelete_Click);
       // 
       // s
       // 
@@ -108,13 +127,6 @@
       this.ButtonImages.TransparentColor = System.Drawing.Color.Magenta;
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
-      // 
-      // DetailTabAdd
-      // 
-      this.DetailTabAdd.Name = "DetailTabAdd";
-      this.DetailTabAdd.Size = new System.Drawing.Size(240, 32);
-      this.DetailTabAdd.Text = "Tab Add";
-      this.DetailTabAdd.Click += new System.EventHandler(this.DetailTabAdd_Click);
       // 
       // DataDetailDialog
       // 
@@ -147,6 +159,7 @@
 		private System.Windows.Forms.ContextMenuStrip DetailMenu;
 		private System.Windows.Forms.ToolStripMenuItem DetailTabEdit;
         private System.Windows.Forms.ToolStripMenuItem DetailTabAdd;
+        private System.Windows.Forms.ToolStripMenuItem DetailTabDelete;
     }
 }
 
