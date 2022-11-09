@@ -121,7 +121,7 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record with the supplied values.
     /// <include path='items/RetrieveWithUnique/*' file='Doc/ControlColumnManager.xml'/>
-    public ControlColumn RetrieveWithUnique(int controlTabID, int columnIndex
+    public ControlColumn RetrieveWithUnique(long controlTabID, int columnIndex
       , List<string> propertyNames = null)
     {
       var keyColumns = GetUniqueKey(controlTabID, columnIndex);
@@ -160,7 +160,7 @@ namespace LJCDataDetailDAL
 
     // Gets the unique key columns.
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlColumnManager.xml'/>
-    public DbColumns GetUniqueKey(int controlTabID, int controlColumnIndex)
+    public DbColumns GetUniqueKey(long controlTabID, int controlColumnIndex)
     {
       var retValue = new DbColumns()
       {

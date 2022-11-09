@@ -36,6 +36,21 @@
     <param name="keyItems"></param>
     <returns></returns>
   </ControlRowType>
+  <GetColumnIndex>
+    <summary>
+      Gets the ControlColumn index from X.
+    </summary>
+    <param name="tabPageIndex">The TabPage index.</param>
+    <param name="x">The horizontal value.</param>
+    <returns>The ControlColumn index.</returns>
+  </GetColumnIndex>
+  <GetRowIndex>
+    <summary>
+      Gets the ControlRow index from Y.
+    </summary>
+    <param name="y">The vertical value.</param>
+    <returns>The ControlRow index.</returns>
+  </GetRowIndex>
   <NewControlData>
     <summary>
       Configure the New controls.

@@ -157,6 +157,52 @@ namespace LJCDataDetailLib
       return retValue;
     }
 
+    // Gets the ControlColumn index from X.
+    /// <include path='items/GetColumnIndex/*' file='Doc/DataDetailCode.xml'/>
+    public int GetColumnIndex(int tabPageIndex, int x)
+    {
+      int retValue = -1;
+
+      var config = ControlDetail;
+
+      var controlTab = ControlDetail.ControlTabItems[tabPageIndex];
+
+      int columnLeft = 0;
+      int columnRight = 0;
+      if (controlTab.ControlColumns != null)
+      {
+        foreach (ControlColumn controlColumn in controlTab.ControlColumns)
+        {
+          // *** Next Statement *** Change
+          columnRight += config.BorderHorizontal + controlColumn.Width;
+          if (x >= columnLeft && x <= columnRight)
+          {
+            retValue = controlColumn.ColumnIndex;
+            break;
+          }
+          columnLeft = config.BorderHorizontal + columnRight;
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the ControlRow index from Y.
+    /// <include path='items/GetRowIndex/*' file='Doc/DataDetailCode.xml'/>
+    public int GetRowIndex(int y)
+    {
+      int retValue = 0;
+
+      var config = ControlDetail;
+
+      if (y > config.BorderVertical)
+      {
+        y -= config.BorderVertical;
+        int rowHeight = config.ControlRowSpacing + config.ControlRowHeight;
+        retValue = y / rowHeight;
+      }
+      return retValue;
+    }
+
     // Configure the New controls.
     /// <include path='items/NewControlData/*' file='Doc/DataDetailCode.xml'/>
     public void NewControlData(DbColumns dataColumns, KeyItems keyItems)

@@ -74,8 +74,9 @@ namespace DataDetail
           if (items != null && items.Count > 1)
           {
             isCombo = true;
-            controlName = $"{dbColumn.ColumnName}ComboBox";
-            control = SearchControls(controlName);
+            // ToDo: Change to use PropertyName?
+            controlName = ControlName(dbColumn.ColumnName, "ComboBox");
+            control = GetControlWithName(controlName);
             if (control != null)
             {
               KeyItem searchItem;
@@ -94,8 +95,9 @@ namespace DataDetail
           {
             case "boolean":
               // Get value from CheckBox.
-              controlName = $"{dbColumn.ColumnName}CheckBox";
-              control = SearchControls(controlName);
+              // ToDo: Change to use PropertyName?
+              controlName = ControlName(dbColumn.ColumnName, "CheckBox");
+              control = GetControlWithName(controlName);
               if (control != null)
               {
                 dbColumn.Value = ((CheckBox)control).Checked;
@@ -104,8 +106,9 @@ namespace DataDetail
 
             default:
               // Get value from TextBox.
-              controlName = $"{dbColumn.ColumnName}TextBox";
-              control = SearchControls(controlName);
+              // ToDo: Change to use PropertyName?
+              controlName = ControlName(dbColumn.ColumnName, "TextBox");
+              control = GetControlWithName(controlName);
               if (control != null)
               {
                 if (items != null && 1 == items.Count)
@@ -147,7 +150,7 @@ namespace DataDetail
     private void DoTabEdit()
     {
       // Data from items.
-      var tabIndex = CurrentTabIndex();
+      var tabIndex = CurrentTabPageIndex();
       if (tabIndex >= 0)
       {
         var manager = DataDetailData.Managers.ControlTabManager;
@@ -175,7 +178,7 @@ namespace DataDetail
       var deleteTitle = "Delete Error";
       var deleteMessage = FormCommon.DeleteError;
 
-      var tabIndex = CurrentTabIndex();
+      var tabIndex = CurrentTabPageIndex();
       if (tabIndex < 0)
       {
         success = false;
@@ -259,7 +262,9 @@ namespace DataDetail
         else
         {
           var tabPage = new TabPage(dataRecord.Caption);
+          tabPage.MouseMove += Page_MouseMove;
           MainTabs.TabPages.Insert(dataRecord.TabIndex, tabPage);
+
         }
       }
     }
@@ -323,6 +328,46 @@ namespace DataDetail
       // Add some extra above the buttons.
       ClientSize = new Size(MainTabs.Width - 1, MainTabs.Height
         + clientBorderHeight + 2);
+
+      // *** Begin *** Testing
+      // Make room for one more control row.
+      int insertHeight = config.ControlRowHeight + config.ControlRowSpacing;
+      MainTabs.Height += config.ControlRowHeight + config.ControlRowSpacing;
+      ClientSize = new Size(ClientSize.Width, ClientSize.Height + insertHeight);
+
+      // Get source ControlTab.
+      int tabIndex = 0;
+      var controlTab = config.ControlTabItems[tabIndex];
+
+      // Get source ControlColumn.
+      int columnIndex = 0;
+      var controlColumn = controlTab.ControlColumns[columnIndex];
+
+      // Create blank insert row.
+      Control control;
+      int insertIndex = 1;
+      int count = controlColumn.ControlRows.Count;
+      for (int index = insertIndex; index < count; index++)
+      {
+        var controlRow = controlColumn.ControlRows[index];
+        var dataValueName = controlRow.DataValueName;
+
+        // Get label.
+        var controlName = ControlName(dataValueName, "Label");
+        control = GetControlWithName(controlName);
+        if (control != null)
+        {
+          control.Top += insertHeight;
+        }
+
+        // Get control.
+        control = GetControlWithProperty(dataValueName);
+        if (control != null)
+        {
+          control.Top += insertHeight;
+        }
+      }
+      // *** End  ***
     }
 
     // Configures the controls and loads the selection control data.
@@ -354,7 +399,7 @@ namespace DataDetail
     #region Private Methods
 
     // Gets the Current TabIndex.
-    private int CurrentTabIndex()
+    private int CurrentTabPageIndex()
     {
       int retValue = -1;
 
@@ -459,15 +504,19 @@ namespace DataDetail
             var tabPage = MainTabs.TabPages[0];
             tabPage.Text = caption;
             tabPage.Name = caption;
+            tabPage.MouseMove += Page_MouseMove;
           }
           else
           {
             MainTabs.TabPages.Add(caption);
             var tabPage = MainTabs.LJCGetTabPage(caption);
             tabPage.Name = caption;
+            tabPage.BackColor = BeginColor;
+            tabPage.MouseMove += Page_MouseMove;
           }
         }
 
+        // Create ControlRows controls.
         int tabIndex = 0;
         foreach (ControlTab controlTab in config.ControlTabItems)
         {
@@ -502,9 +551,9 @@ namespace DataDetail
 
       // Create new column to prevent changing original sort.
       var searchControlColumn = new ControlColumn(controlColumn);
+
       controlRow = searchControlColumn.ControlRows.LJCSearchUnique(controlColumn.ID
         , dataColumn.ColumnName);
-
       string controlRowType = mDataDetailCode.ControlRowType(dataColumn
         , LJCKeyItems);
       if (controlRowType != "CheckBox")
@@ -594,6 +643,48 @@ namespace DataDetail
       return retValue;
     }
 
+    // Returns a reference to a Control by name.
+    /// <include path='items/SearchControls/*' file='Doc/DataDetailDialog.xml'/>
+    private Control GetControlWithName(string name)
+    {
+      Control retValue = null;
+
+      Control[] controls = Controls.Find(name, true);
+      if (controls.Length > 0)
+      {
+        retValue = controls[0];
+      }
+      return retValue;
+    }
+
+    // Get control with property name.
+    private Control GetControlWithProperty(string propertyName)
+    {
+      Control retValue;
+
+      var dataColumn = LJCDataColumns.LJCSearchName(propertyName);
+      string controlRowType = mDataDetailCode.ControlRowType(dataColumn
+        , LJCKeyItems);
+      string suffix;
+      switch (controlRowType.ToLower())
+      {
+        case "checkbox":
+          suffix = "CheckBox";
+          break;
+
+        case "staticcombo":
+          suffix = "ComboBox";
+          break;
+
+        default:
+          suffix = "TextBox";
+          break;
+      }
+      var controlName = ControlName(propertyName, suffix);
+      retValue = GetControlWithName(controlName);
+      return retValue;
+    }
+
     // Gets the KeyItem Property text.
     private string KeyPropertyText(string propertyName)
     {
@@ -607,53 +698,13 @@ namespace DataDetail
       return retValue;
     }
 
-    // Gets the Control Column 1 Label Location.
-    private Point LabelLocation(int tabIndex, int controlColumnIndex
-      , int controlRowIndex)
-    {
-      ControlColumn controlColumn;
-      int left;
-      int top;
-      Point retValue;
-
-      // Local references.
-      var config = ControlDetail;
-
-      left = config.BorderHorizontal * (controlColumnIndex * 1);
-      var controlTab = config.ControlTabItems[tabIndex];
-      for (int index = 0; index < controlColumnIndex; index++)
-      {
-        controlColumn = controlTab.ControlColumns[index];
-        left += controlColumn.Width;
-      }
-
-      top = config.BorderVertical + (config.ControlRowSpacing + config.ControlRowHeight)
-        * controlRowIndex + 3;
-      retValue = new Point(left, top);
-      return retValue;
-    }
-
-    // Returns a reference to a Control by name.
-    /// <include path='items/SearchControls/*' file='Doc/DataDetailDialog.xml'/>
-    private Control SearchControls(string name)
-    {
-      Control retValue = null;
-
-      Control[] controls = Controls.Find(name, true);
-      if (controls.Length > 0)
-      {
-        retValue = controls[0];
-      }
-      return retValue;
-    }
-
     // Returns a reference to a Label control by name.
     /// <include path='items/SearchLabel/*' file='Doc/DataDetailDialog.xml'/>
     private Label SearchLabel(string name)
     {
       Label retValue;
 
-      retValue = SearchControls(name) as Label;
+      retValue = GetControlWithName(name) as Label;
       return retValue;
     }
 
@@ -663,7 +714,7 @@ namespace DataDetail
     {
       TextBox retValue;
 
-      retValue = SearchControls(name) as TextBox;
+      retValue = GetControlWithName(name) as TextBox;
       return retValue;
     }
 
@@ -698,6 +749,12 @@ namespace DataDetail
       }
     }
 
+    // 
+    private void SetControlHandlers(Control control)
+    {
+      control.MouseMove += Control_MouseMove;
+    }
+
     // Sets the Control event handlers.
     private void SetTextBoxControlHandlers(TextBox textBox, DbColumn dataColumn)
     {
@@ -711,6 +768,128 @@ namespace DataDetail
     #endregion
 
     #region Create Controls Methods
+
+    // Creates the Button control.
+    private Button AddButton(ControlRow controlRow, DbColumn dataColumn
+      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    {
+      Button retValue;
+
+      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
+      // ToDo: Change to use PropertyName?
+      var name = ControlName(dataColumn.ColumnName, "Button");
+      string text = dataColumn.Caption;
+      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
+      //int width = mControlColumnsHelper.AdjustedWidth(dataColumn);
+      retValue = mControlCode.CreateButton(name, text, location);
+      retValue.TabIndex = tabIndex;
+      Controls.Add(retValue);
+      retValue.Parent = currentTabPage;
+      // ToDo: Not Used?
+      controlRow.RowControl = retValue;
+      return retValue;
+    }
+
+    // Creates the CheckBox control.
+    private CheckBox AddCheckBox(ControlRow controlRow, DbColumn dataColumn
+      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    {
+      int width;
+      CheckBox retValue;
+
+      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
+      // ToDo: Change to use PropertyName?
+      var name = ControlName(dataColumn.ColumnName, "CheckBox");
+      string text = dataColumn.Caption;
+      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
+      retValue = mControlCode.CreateCheckBox(name, text, location, width);
+      retValue.TabIndex = tabIndex;
+      SetControlHandlers(retValue);
+      Controls.Add(retValue);
+      retValue.Parent = currentTabPage;
+      // ToDo: Not Used?
+      controlRow.RowControl = retValue;
+      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
+      return retValue;
+    }
+
+    // Creates the TextBox control.
+    private ComboBox AddComboBox(ControlRow controlRow, DbColumn dataColumn
+      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    {
+      int width;
+      ComboBox retValue;
+
+      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
+      // ToDo: Change to use PropertyName?
+      var name = ControlName(dataColumn.ColumnName, "ComboBox");
+      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
+      retValue = mControlCode.CreateComboBox(name, location, width);
+      retValue.TabIndex = tabIndex;
+      SetControlHandlers(retValue);
+      Controls.Add(retValue);
+      retValue.Parent = currentTabPage;
+      // ToDo: Not Used?
+      controlRow.RowControl = retValue;
+      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
+      return retValue;
+    }
+
+    // Creates the Label control.
+    private void AddLabel(ControlRow controlRow, DbColumn dataColumn, int width
+      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    {
+      Label label;
+
+      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
+      // ToDo: Change to use PropertyName?
+      var name = ControlName(dataColumn.ColumnName, "Label");
+      string text = dataColumn.Caption;
+      Point location = LabelLocation(tabPageIndex, columnIndex, rowIndex);
+      label = mControlCode.CreateLabel(name, text, location, width);
+      label.TabIndex = tabIndex;
+      label.BackColor = BeginColor;
+      SetControlHandlers(label);
+      Controls.Add(label);
+      label.Parent = currentTabPage;
+      controlRow.RowLabel = label;
+      controlRow.TabbingIndex = tabIndex;
+    }
+
+    // Creates the TextBox control.
+    private TextBox AddTextBox(ControlRow controlRow, DbColumn dataColumn
+      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    {
+      int width;
+      TextBox retValue;
+
+      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
+      // ToDo: Change to use PropertyName?
+      var name = ControlName(dataColumn.ColumnName, "TextBox");
+      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
+      width = mDataDetailCode.AdjustedWidth(dataColumn);
+      string value = null;
+      if (dataColumn.Value != null)
+      {
+        value = dataColumn.Value.ToString();
+      }
+      retValue = mControlCode.CreateTextBox(name, value, location, width);
+      retValue.TabIndex = tabIndex;
+      if (dataColumn.MaxLength > 0)
+      {
+        retValue.MaxLength = dataColumn.MaxLength;
+      }
+      SetControlHandlers(retValue);
+      SetTextBoxControlHandlers(retValue, dataColumn);
+      Controls.Add(retValue);
+      retValue.Parent = currentTabPage;
+      // ToDo: Not Used?
+      controlRow.RowControl = retValue;
+      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
+      return retValue;
+    }
 
     // Adjusts the Ellipse button.
     private void AdjustEllipseButton(Button button, TextBox textBox)
@@ -744,7 +923,9 @@ namespace DataDetail
       // Local references.
       var config = ControlDetail;
 
+      // Get all leading borders.
       left = config.BorderHorizontal * (controlColumnIndex + 1);
+
       var controlTab = config.ControlTabItems[tabIndex];
       for (int index = 0; index < controlColumnIndex + 1; index++)
       {
@@ -762,112 +943,33 @@ namespace DataDetail
       return retValue;
     }
 
-    // Creates the Button control.
-    private Button AddButton(ControlRow controlRow, DbColumn dataColumn
-      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
+    // 
+    private string ControlName(string dataName, string controlTypeName)
     {
-      Button retValue;
+      string retValue = null;
 
-      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      var name = $"{dataColumn.ColumnName}Button";
-      string text = dataColumn.Caption;
-      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      //int width = mControlColumnsHelper.AdjustedWidth(dataColumn);
-      retValue = mControlCode.CreateButton(name, text, location);
-      retValue.TabIndex = tabIndex;
-      Controls.Add(retValue);
-      retValue.Parent = currentTabPage;
-      controlRow.RowControl = retValue;
-      return retValue;
-    }
-
-    // Creates the CheckBox control.
-    private CheckBox AddCheckBox(ControlRow controlRow, DbColumn dataColumn
-      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
-    {
-      int width;
-      CheckBox retValue;
-
-      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      var name = $"{dataColumn.ColumnName}CheckBox";
-      string text = dataColumn.Caption;
-      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mDataDetailCode.AdjustedWidth(dataColumn);
-      retValue = mControlCode.CreateCheckBox(name, text, location, width);
-      retValue.TabIndex = tabIndex;
-      Controls.Add(retValue);
-      retValue.Parent = currentTabPage;
-      controlRow.RowControl = retValue;
-      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
-      return retValue;
-    }
-
-    // Creates the TextBox control.
-    private ComboBox AddComboBox(ControlRow controlRow, DbColumn dataColumn
-      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
-    {
-      int width;
-      ComboBox retValue;
-
-      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      var name = $"{dataColumn.ColumnName}ComboBox";
-      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mDataDetailCode.AdjustedWidth(dataColumn);
-      retValue = mControlCode.CreateComboBox(name, location, width);
-      retValue.TabIndex = tabIndex;
-      Controls.Add(retValue);
-      retValue.Parent = currentTabPage;
-      controlRow.RowControl = retValue;
-      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
-      return retValue;
-    }
-
-    // Creates the Label control.
-    private void AddLabel(ControlRow controlRow, DbColumn dataColumn, int width
-      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
-    {
-      Label label;
-
-      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      var name = $"{dataColumn.ColumnName}Label";
-      string text = dataColumn.Caption;
-      Point location = LabelLocation(tabPageIndex, columnIndex, rowIndex);
-      label = mControlCode.CreateLabel(name, text, location, width);
-      label.TabIndex = tabIndex;
-      label.BackColor = BeginColor;
-      Controls.Add(label);
-      label.Parent = currentTabPage;
-      controlRow.RowLabel = label;
-      controlRow.TabbingIndex = tabIndex;
-    }
-
-    // Creates the TextBox control.
-    private TextBox AddTextBox(ControlRow controlRow, DbColumn dataColumn
-      , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
-    {
-      int width;
-      TextBox retValue;
-
-      TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      var name = $"{dataColumn.ColumnName}TextBox";
-      Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
-      width = mDataDetailCode.AdjustedWidth(dataColumn);
-      string value = null;
-      if (dataColumn.Value != null)
+      switch (controlTypeName.ToLower())
       {
-        value = dataColumn.Value.ToString();
+        case "button":
+          retValue = $"{dataName}Button";
+          break;
+
+        case "checkbox":
+          retValue = $"{dataName}CheckBox";
+          break;
+
+        case "combobox":
+          retValue = $"{dataName}ComboBox";
+          break;
+
+        case "label":
+          retValue = $"{dataName}Label";
+          break;
+
+        case "textbox":
+          retValue = $"{dataName}TextBox";
+          break;
       }
-      retValue = mControlCode.CreateTextBox(name, value, location, width);
-      retValue.TabIndex = tabIndex;
-      if (dataColumn.MaxLength > 0)
-      {
-        retValue.MaxLength = dataColumn.MaxLength;
-      }
-      SetTextBoxControlHandlers(retValue, dataColumn);
-      Controls.Add(retValue);
-      retValue.Parent = currentTabPage;
-      controlRow.RowControl = retValue;
-      //mControlRows.SetControlRowWidth(mControlColumns, controlRow);
       return retValue;
     }
 
@@ -889,6 +991,34 @@ namespace DataDetail
             * ControlDetail.CharacterPixels;
         }
       }
+    }
+
+    // Gets the Control Column Label Location.
+    private Point LabelLocation(int tabIndex, int controlColumnIndex
+      , int controlRowIndex)
+    {
+      ControlColumn controlColumn;
+      int left;
+      int top;
+      Point retValue;
+
+      // Local references.
+      var config = ControlDetail;
+
+      // Get all leading borders.
+      left = config.BorderHorizontal * (controlColumnIndex + 1);
+
+      var controlTab = config.ControlTabItems[tabIndex];
+      for (int index = 0; index < controlColumnIndex; index++)
+      {
+        controlColumn = controlTab.ControlColumns[index];
+        left += controlColumn.Width;
+      }
+
+      top = config.BorderVertical + (config.ControlRowSpacing + config.ControlRowHeight)
+        * controlRowIndex + 3;
+      retValue = new Point(left, top);
+      return retValue;
     }
     #endregion
 
@@ -975,6 +1105,35 @@ namespace DataDetail
       DialogResult = DialogResult.OK;
       Close();
     }
+
+    // Sets the current Column and Row index.
+    private void Control_MouseMove(object sender, MouseEventArgs e)
+    {
+      Control control = sender as Control;
+      int x = e.X + control.Left;
+      int y = e.Y + control.Top;
+
+      int tabPageIndex = CurrentTabPageIndex();
+      CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, x);
+      CurrentRowIndex = mDataDetailCode.GetRowIndex(y);
+
+      var text = $"column={CurrentColumnIndex} row={CurrentRowIndex}";
+      StatusLabel.Text = text;
+    }
+
+    // Sets the current Column and Row index.
+    private void Page_MouseMove(object sender, MouseEventArgs e)
+    {
+      if (mDataDetailCode != null)
+      {
+        int tabPageIndex = CurrentTabPageIndex();
+        CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, e.X);
+        CurrentRowIndex = mDataDetailCode.GetRowIndex(e.Y);
+
+        var text = $"x={e.X} column={CurrentColumnIndex} row={CurrentRowIndex}";
+        StatusLabel.Text = text;
+      }
+    }
     #endregion
 
     #region KeyEdit Event Handlers
@@ -1018,6 +1177,12 @@ namespace DataDetail
       }
     }
     private ControlDetail mControlDetail;
+
+    // 
+    private int CurrentColumnIndex { get; set; }
+
+    // 
+    private int CurrentRowIndex { get; set; }
 
     // Gets or sets ConfigData.
     private DataDetailData DataDetailData { get; set; }

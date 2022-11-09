@@ -1,33 +1,33 @@
 ﻿namespace DataDetail
 {
-	partial class DataDetailDialog
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+  partial class DataDetailDialog
+  {
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
 
-		#region Windows Form Designer generated code
+    #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataDetailDialog));
       this.FormCancelButton = new System.Windows.Forms.Button();
@@ -37,8 +37,9 @@
       this.DetailTabAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.DetailTabEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.DetailTabDelete = new System.Windows.Forms.ToolStripMenuItem();
-      this.s = new System.Windows.Forms.TabPage();
+      this.Page1 = new System.Windows.Forms.TabPage();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
+      this.StatusLabel = new System.Windows.Forms.Label();
       this.MainTabs.SuspendLayout();
       this.DetailMenu.SuspendLayout();
       this.SuspendLayout();
@@ -50,7 +51,7 @@
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 2;
+      this.FormCancelButton.TabIndex = 3;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
@@ -62,7 +63,7 @@
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 1;
+      this.OKButton.TabIndex = 2;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -71,7 +72,7 @@
       // 
       this.MainTabs.AllowDrop = true;
       this.MainTabs.ContextMenuStrip = this.DetailMenu;
-      this.MainTabs.Controls.Add(this.s);
+      this.MainTabs.Controls.Add(this.Page1);
       this.MainTabs.LJCAllowDrag = true;
       this.MainTabs.Location = new System.Drawing.Point(0, 0);
       this.MainTabs.Name = "MainTabs";
@@ -111,15 +112,15 @@
       this.DetailTabDelete.Text = "Tab Delete";
       this.DetailTabDelete.Click += new System.EventHandler(this.DetailTabDelete_Click);
       // 
-      // s
+      // Page1
       // 
-      this.s.Location = new System.Drawing.Point(4, 29);
-      this.s.Name = "s";
-      this.s.Padding = new System.Windows.Forms.Padding(3);
-      this.s.Size = new System.Drawing.Size(774, 454);
-      this.s.TabIndex = 0;
-      this.s.Text = "Page 1";
-      this.s.UseVisualStyleBackColor = true;
+      this.Page1.Location = new System.Drawing.Point(4, 29);
+      this.Page1.Name = "Page1";
+      this.Page1.Padding = new System.Windows.Forms.Padding(3);
+      this.Page1.Size = new System.Drawing.Size(774, 454);
+      this.Page1.TabIndex = 0;
+      this.Page1.Text = "Page 1";
+      this.Page1.UseVisualStyleBackColor = true;
       // 
       // ButtonImages
       // 
@@ -128,11 +129,20 @@
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
       // 
+      // StatusLabel
+      // 
+      this.StatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.StatusLabel.Location = new System.Drawing.Point(12, 499);
+      this.StatusLabel.Name = "StatusLabel";
+      this.StatusLabel.Size = new System.Drawing.Size(514, 26);
+      this.StatusLabel.TabIndex = 1;
+      // 
       // DataDetailDialog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(778, 544);
+      this.Controls.Add(this.StatusLabel);
       this.Controls.Add(this.MainTabs);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
@@ -147,19 +157,20 @@
       this.DetailMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
-		}
-
-		#endregion
-
-		private System.Windows.Forms.Button FormCancelButton;
-		private System.Windows.Forms.Button OKButton;
-		private LJCWinFormControls.LJCTabControl MainTabs;
-		private System.Windows.Forms.TabPage s;
-		private System.Windows.Forms.ImageList ButtonImages;
-		private System.Windows.Forms.ContextMenuStrip DetailMenu;
-		private System.Windows.Forms.ToolStripMenuItem DetailTabEdit;
-        private System.Windows.Forms.ToolStripMenuItem DetailTabAdd;
-        private System.Windows.Forms.ToolStripMenuItem DetailTabDelete;
     }
+
+    #endregion
+
+    private System.Windows.Forms.Button FormCancelButton;
+    private System.Windows.Forms.Button OKButton;
+    private LJCWinFormControls.LJCTabControl MainTabs;
+    private System.Windows.Forms.TabPage Page1;
+    private System.Windows.Forms.ImageList ButtonImages;
+    private System.Windows.Forms.ContextMenuStrip DetailMenu;
+    private System.Windows.Forms.ToolStripMenuItem DetailTabEdit;
+    private System.Windows.Forms.ToolStripMenuItem DetailTabAdd;
+    private System.Windows.Forms.ToolStripMenuItem DetailTabDelete;
+    private System.Windows.Forms.Label StatusLabel;
+  }
 }
 
