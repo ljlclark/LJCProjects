@@ -1117,7 +1117,7 @@ namespace DataDetail
       CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, x);
       CurrentRowIndex = mDataDetailCode.GetRowIndex(y);
 
-      var text = $"column={CurrentColumnIndex} row={CurrentRowIndex}";
+      var text = $"Control x={x} column={CurrentColumnIndex} row={CurrentRowIndex}";
       StatusLabel.Text = text;
     }
 
@@ -1130,7 +1130,7 @@ namespace DataDetail
         CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, e.X);
         CurrentRowIndex = mDataDetailCode.GetRowIndex(e.Y);
 
-        var text = $"x={e.X} column={CurrentColumnIndex} row={CurrentRowIndex}";
+        var text = $"Page x={e.X} column={CurrentColumnIndex} row={CurrentRowIndex}";
         StatusLabel.Text = text;
       }
     }

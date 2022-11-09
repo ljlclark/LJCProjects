@@ -173,7 +173,6 @@ namespace LJCDataDetailLib
       {
         foreach (ControlColumn controlColumn in controlTab.ControlColumns)
         {
-          // *** Next Statement *** Change
           columnRight += config.BorderHorizontal + controlColumn.Width;
           if (x >= columnLeft && x <= columnRight)
           {
