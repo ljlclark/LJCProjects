@@ -634,18 +634,22 @@ namespace DataDetail
       {
         case "checkbox":
           suffix = "CheckBox";
+          var controlName = ControlName(propertyName, suffix);
+          retValue = GetControlWithName(controlName) as CheckBox;
           break;
 
         case "staticcombo":
           suffix = "ComboBox";
+          controlName = ControlName(propertyName, suffix);
+          retValue = GetControlWithName(controlName) as ComboBox;
           break;
 
         default:
           suffix = "TextBox";
+          controlName = ControlName(propertyName, suffix);
+          retValue = GetControlWithName(controlName) as TextBox;
           break;
       }
-      var controlName = ControlName(propertyName, suffix);
-      retValue = GetControlWithName(controlName);
       return retValue;
     }
 
@@ -1025,7 +1029,7 @@ namespace DataDetail
       {
         switch (e.KeyCode)
         {
-          case Keys.C:
+          //case Keys.C:
           case Keys.X:
             SourceTabIndex = CurrentTabIndex;
             SourceColumnIndex = CurrentColumnIndex;
@@ -1036,9 +1040,9 @@ namespace DataDetail
 
         switch (e.KeyCode)
         {
-          case Keys.C:
-            CopyAction = "Copy";
-            break;
+          //case Keys.C:
+          //  CopyAction = "Copy";
+          //  break;
 
           case Keys.V:
             if (CopyAction != null)
@@ -1049,10 +1053,8 @@ namespace DataDetail
               var targetColumnIndex = CurrentColumnIndex;
               var targetRowIndex = CurrentRowIndex;
 
-              var sourceTab = config.ControlTabItems[SourceTabIndex];
               var targetTab = config.ControlTabItems[targetTabIndex];
 
-              var sourceColumn = sourceTab.ControlColumns[SourceColumnIndex];
               var targetColumn = targetTab.ControlColumns[targetColumnIndex];
               if (targetColumn.ControlRows.Count >= config.ColumnRowsLimit)
               {
@@ -1060,8 +1062,19 @@ namespace DataDetail
                   , targetRowIndex);
               }
 
-              var sourceRow = sourceColumn.ControlRows[SourceRowIndex];
+              var label = GetLabel(SourceTabIndex, SourceColumnIndex
+                , SourceRowIndex);
+              Point location = LabelLocation(targetTabIndex, targetColumnIndex
+                , targetRowIndex);
+              label.Parent = MainTabs.TabPages[targetTabIndex];
+              label.Location = location;
 
+              var control = GetControl(SourceTabIndex, SourceColumnIndex
+                , SourceRowIndex);
+              location = ControlLocation(targetTabIndex, targetColumnIndex
+                , targetRowIndex);
+              control.Parent = MainTabs.TabPages[targetTabIndex];
+              control.Location = location;
 
               if (CopyAction == "Move")
               {
@@ -1134,6 +1147,33 @@ namespace DataDetail
     private void FormCancelButton_Click(object sender, EventArgs e)
     {
       Close();
+    }
+
+    // Get the ControlRow label control.
+    private Label GetLabel(int tabIndex, int columnIndex, int rowIndex)
+    {
+      Label retValue;
+
+      var controlTab = ControlDetail.ControlTabItems[tabIndex];
+      var controlColumn = controlTab.ControlColumns[columnIndex];
+      var controlRow = controlColumn.ControlRows[rowIndex];
+      var dataValueName = controlRow.DataValueName;
+      var controlName = ControlName(dataValueName, "Label");
+      retValue = GetControlWithName(controlName) as Label;
+      return retValue;
+    }
+
+    // Get the ControlRow label control.
+    private Control GetControl(int tabIndex, int columnIndex, int rowIndex)
+    {
+      Control retValue;
+
+      var controlTab = ControlDetail.ControlTabItems[tabIndex];
+      var controlColumn = controlTab.ControlColumns[columnIndex];
+      var controlRow = controlColumn.ControlRows[rowIndex];
+      var dataValueName = controlRow.DataValueName;
+      retValue = GetControlWithProperty(dataValueName);
+      return retValue;
     }
 
     // Saves the data and closes the form.
