@@ -147,12 +147,14 @@
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+      this.KeyPreview = true;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "DataDetailDialog";
       this.ShowInTaskbar = false;
       this.Text = "Dynamic Detail Dialog";
       this.Load += new System.EventHandler(this.DataDetailDialog_Load);
+      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataDetailDialog_KeyDown);
       this.MainTabs.ResumeLayout(false);
       this.DetailMenu.ResumeLayout(false);
       this.ResumeLayout(false);

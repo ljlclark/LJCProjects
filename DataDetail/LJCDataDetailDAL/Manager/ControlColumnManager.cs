@@ -160,12 +160,12 @@ namespace LJCDataDetailDAL
 
     // Gets the unique key columns.
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlColumnManager.xml'/>
-    public DbColumns GetUniqueKey(long controlTabID, int controlColumnIndex)
+    public DbColumns GetUniqueKey(long controlTabID, int columnIndex)
     {
       var retValue = new DbColumns()
       {
         { ControlColumn.ColumnControlTabID, controlTabID },
-        { ControlColumn.ColumnColumnIndex, controlColumnIndex }
+        { ControlColumn.ColumnColumnIndex, columnIndex }
       };
       return retValue;
     }

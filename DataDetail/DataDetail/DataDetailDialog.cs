@@ -27,6 +27,10 @@ namespace DataDetail
       DataDetailData = new DataDetailData(dataConfigName, tableName, userID);
       ControlDetail = DataDetailData.GetControlDetail();
 
+      SourceTabIndex = -1;
+      SourceColumnIndex = -1;
+      SourceRowIndex = -1;
+
       // Set default class data.
       BeginColor = Color.AliceBlue;
     }
@@ -50,7 +54,7 @@ namespace DataDetail
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       CenterToScreen();
@@ -328,46 +332,6 @@ namespace DataDetail
       // Add some extra above the buttons.
       ClientSize = new Size(MainTabs.Width - 1, MainTabs.Height
         + clientBorderHeight + 2);
-
-      // *** Begin *** Testing
-      // Make room for one more control row.
-      int insertHeight = config.ControlRowHeight + config.ControlRowSpacing;
-      MainTabs.Height += config.ControlRowHeight + config.ControlRowSpacing;
-      ClientSize = new Size(ClientSize.Width, ClientSize.Height + insertHeight);
-
-      // Get source ControlTab.
-      int tabIndex = 0;
-      var controlTab = config.ControlTabItems[tabIndex];
-
-      // Get source ControlColumn.
-      int columnIndex = 0;
-      var controlColumn = controlTab.ControlColumns[columnIndex];
-
-      // Create blank insert row.
-      Control control;
-      int insertIndex = 1;
-      int count = controlColumn.ControlRows.Count;
-      for (int index = insertIndex; index < count; index++)
-      {
-        var controlRow = controlColumn.ControlRows[index];
-        var dataValueName = controlRow.DataValueName;
-
-        // Get label.
-        var controlName = ControlName(dataValueName, "Label");
-        control = GetControlWithName(controlName);
-        if (control != null)
-        {
-          control.Top += insertHeight;
-        }
-
-        // Get control.
-        control = GetControlWithProperty(dataValueName);
-        if (control != null)
-        {
-          control.Top += insertHeight;
-        }
-      }
-      // *** End  ***
     }
 
     // Configures the controls and loads the selection control data.
@@ -539,7 +503,7 @@ namespace DataDetail
     }
 
     // Creates the ControlRow and associated controls.
-    /// <include path='items/ControlRow/*' file='Doc/DataDetailDialog.xml'/>
+    // <include path='items/ControlRow/*' file='Doc/DataDetailDialog.xml'/>
     private void ControlRow(ControlColumn controlColumn, DbColumn dataColumn
       , int labelsWidth, int tabIndex, int columnIndex, int rowIndex, ref int tabbingIndex)
     {
@@ -644,7 +608,7 @@ namespace DataDetail
     }
 
     // Returns a reference to a Control by name.
-    /// <include path='items/SearchControls/*' file='Doc/DataDetailDialog.xml'/>
+    // <include path='items/SearchControls/*' file='Doc/DataDetailDialog.xml'/>
     private Control GetControlWithName(string name)
     {
       Control retValue = null;
@@ -699,7 +663,7 @@ namespace DataDetail
     }
 
     // Returns a reference to a Label control by name.
-    /// <include path='items/SearchLabel/*' file='Doc/DataDetailDialog.xml'/>
+    // <include path='items/SearchLabel/*' file='Doc/DataDetailDialog.xml'/>
     private Label SearchLabel(string name)
     {
       Label retValue;
@@ -709,7 +673,7 @@ namespace DataDetail
     }
 
     // Return a reference to a TextBox control by name.
-    /// <include path='items/SearchTextBox/*' file='Doc/DataDetailDialog.xml'/>
+    // <include path='items/SearchTextBox/*' file='Doc/DataDetailDialog.xml'/>
     private TextBox SearchTextBox(string name)
     {
       TextBox retValue;
@@ -749,13 +713,13 @@ namespace DataDetail
       }
     }
 
-    // 
+    // Sets the Control event handlers.
     private void SetControlHandlers(Control control)
     {
       control.MouseMove += Control_MouseMove;
     }
 
-    // Sets the Control event handlers.
+    // Sets the TextBox event handlers.
     private void SetTextBoxControlHandlers(TextBox textBox, DbColumn dataColumn)
     {
       if ("Int16" == dataColumn.DataTypeName
@@ -943,7 +907,7 @@ namespace DataDetail
       return retValue;
     }
 
-    // 
+    // Creates the ControlName.
     private string ControlName(string dataName, string controlTypeName)
     {
       string retValue = null;
@@ -1045,11 +1009,157 @@ namespace DataDetail
 
     #region Control Event Handlers
 
+    #region DataDetailDialog
+
     // Fires the Change event.
     /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
+    }
+
+    // Handles the form keys.
+    private void DataDetailDialog_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.Control)
+      {
+        switch (e.KeyCode)
+        {
+          case Keys.C:
+          case Keys.X:
+            SourceTabIndex = CurrentTabIndex;
+            SourceColumnIndex = CurrentColumnIndex;
+            SourceRowIndex = CurrentRowIndex;
+            SetStatusText();
+            break;
+        }
+
+        switch (e.KeyCode)
+        {
+          case Keys.C:
+            CopyAction = "Copy";
+            break;
+
+          case Keys.V:
+            if (CopyAction != null)
+            {
+              var config = ControlDetail;
+
+              var targetTabIndex = CurrentTabIndex;
+              var targetColumnIndex = CurrentColumnIndex;
+              var targetRowIndex = CurrentRowIndex;
+
+              var sourceTab = config.ControlTabItems[SourceTabIndex];
+              var targetTab = config.ControlTabItems[targetTabIndex];
+
+              var sourceColumn = sourceTab.ControlColumns[SourceColumnIndex];
+              var targetColumn = targetTab.ControlColumns[targetColumnIndex];
+              if (targetColumn.ControlRows.Count >= config.ColumnRowsLimit)
+              {
+                InsertBlankRow(targetTabIndex, targetColumnIndex
+                  , targetRowIndex);
+              }
+
+              var sourceRow = sourceColumn.ControlRows[SourceRowIndex];
+
+
+              if (CopyAction == "Move")
+              {
+                ClearCopyAction();
+              }
+            }
+            break;
+
+          case Keys.X:
+            CopyAction = "Move";
+            break;
+
+          case Keys.Z:
+            ClearCopyAction();
+            break;
+        }
+        SetStatusText();
+      }
+    }
+
+    // Clear the copy action.
+    private void ClearCopyAction()
+    {
+      SourceTabIndex = -1;
+      SourceColumnIndex = -1;
+      SourceRowIndex = -1;
+      CopyAction = null;
+    }
+
+    // Inserts a blank row.
+    private void InsertBlankRow(int targetTabIndex, int targetColumnIndex
+      , int targetRowIndex)
+    {
+      var config = ControlDetail;
+
+      // Get source ControlTab.
+      var targetControlTab = config.ControlTabItems[targetTabIndex];
+      var targetControlColumn = targetControlTab.ControlColumns[targetColumnIndex];
+
+      // Extend form size for one more control row.
+      int insertHeight = config.ControlRowHeight + config.ControlRowSpacing;
+      MainTabs.Height += config.ControlRowHeight + config.ControlRowSpacing;
+      ClientSize = new Size(ClientSize.Width, ClientSize.Height + insertHeight);
+
+      Control control;
+      int count = targetControlColumn.ControlRows.Count;
+      for (int index = targetRowIndex; index < count; index++)
+      {
+        var controlRow = targetControlColumn.ControlRows[index];
+        var dataValueName = controlRow.DataValueName;
+
+        // Get label.
+        var controlName = ControlName(dataValueName, "Label");
+        control = GetControlWithName(controlName);
+        if (control != null)
+        {
+          control.Top += insertHeight;
+        }
+
+        // Get control.
+        control = GetControlWithProperty(dataValueName);
+        if (control != null)
+        {
+          control.Top += insertHeight;
+        }
+      }
+    }
+
+    // Closes the form without saving the data.
+    private void FormCancelButton_Click(object sender, EventArgs e)
+    {
+      Close();
+    }
+
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      SetRecordValues();
+      LJCOnChange();
+
+      DialogResult = DialogResult.OK;
+      Close();
+    }
+    #endregion
+
+    #region MainTabs Event Handlers
+
+    // Sets the current Column and Row index.
+    private void Control_MouseMove(object sender, MouseEventArgs e)
+    {
+      Control control = sender as Control;
+      int x = e.X + control.Left;
+      int y = e.Y + control.Top;
+
+      CurrentTabIndex = CurrentTabPageIndex();
+      CurrentColumnIndex = mDataDetailCode.GetColumnIndex(CurrentTabIndex, x);
+      CurrentRowIndex = mDataDetailCode.GetRowIndex(y);
+      SetStatusText();
     }
 
     // Displays the selection list window.
@@ -1080,12 +1190,6 @@ namespace DataDetail
       }
     }
 
-    // Closes the form without saving the data.
-    private void FormCancelButton_Click(object sender, EventArgs e)
-    {
-      Close();
-    }
-
     // Handles the MouseDown event.
     private void MainTabs_MouseDown(object sender, MouseEventArgs e)
     {
@@ -1096,44 +1200,48 @@ namespace DataDetail
       }
     }
 
-    // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
-    {
-      SetRecordValues();
-      LJCOnChange();
-
-      DialogResult = DialogResult.OK;
-      Close();
-    }
-
-    // Sets the current Column and Row index.
-    private void Control_MouseMove(object sender, MouseEventArgs e)
-    {
-      Control control = sender as Control;
-      int x = e.X + control.Left;
-      int y = e.Y + control.Top;
-
-      int tabPageIndex = CurrentTabPageIndex();
-      CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, x);
-      CurrentRowIndex = mDataDetailCode.GetRowIndex(y);
-
-      var text = $"Control x={x} column={CurrentColumnIndex} row={CurrentRowIndex}";
-      StatusLabel.Text = text;
-    }
-
     // Sets the current Column and Row index.
     private void Page_MouseMove(object sender, MouseEventArgs e)
     {
       if (mDataDetailCode != null)
       {
-        int tabPageIndex = CurrentTabPageIndex();
-        CurrentColumnIndex = mDataDetailCode.GetColumnIndex(tabPageIndex, e.X);
+        CurrentTabIndex = CurrentTabPageIndex();
+        CurrentColumnIndex = mDataDetailCode.GetColumnIndex(CurrentTabIndex, e.X);
         CurrentRowIndex = mDataDetailCode.GetRowIndex(e.Y);
-
-        var text = $"Page x={e.X} column={CurrentColumnIndex} row={CurrentRowIndex}";
-        StatusLabel.Text = text;
+        SetStatusText();
       }
     }
+
+    // Sets the Status text.
+    private void SetStatusText(string prefix = null)
+    {
+      var text = "";
+      if (prefix != null)
+      {
+        text += prefix;
+      }
+      text += $"{CurrentTabIndex}:{CurrentColumnIndex}:{CurrentRowIndex}";
+      if (SourceTabIndex >= 0
+        || SourceColumnIndex >= 0
+        || SourceRowIndex >= 0)
+      {
+        text += $" - {CopyAction} ";
+      }
+      if (SourceTabIndex >= 0)
+      {
+        text += $"{SourceTabIndex}";
+      }
+      if (SourceColumnIndex >= 0)
+      {
+        text += $":{SourceColumnIndex}";
+      }
+      if (SourceRowIndex >= 0)
+      {
+        text += $":{SourceRowIndex}";
+      }
+      StatusLabel.Text = text;
+    }
+    #endregion
     #endregion
 
     #region KeyEdit Event Handlers
@@ -1178,18 +1286,34 @@ namespace DataDetail
     }
     private ControlDetail mControlDetail;
 
-    // 
+    // The Copy action text.
+    private string CopyAction { get; set; }
+
+    // The current mouse cursor ControlColumn index.
     private int CurrentColumnIndex { get; set; }
 
-    // 
+    // The current mouse cursor ControlRow index.
     private int CurrentRowIndex { get; set; }
+
+    // The current mouse cursor ControlTab index.
+    private int CurrentTabIndex { get; set; }
 
     // Gets or sets ConfigData.
     private DataDetailData DataDetailData { get; set; }
+
+    // The source ControlColumn index.
+    private int SourceColumnIndex { get; set; }
+
+    // The source ControlRow index.
+    private int SourceRowIndex { get; set; }
+
+    // The source ControlTab index.
+    private int SourceTabIndex { get; set; }
     #endregion
 
     #region Class Data
 
+    // Related Code Classes
     private DataDetailCode mDataDetailCode;
     private ControlCode mControlCode;
 

@@ -14,7 +14,7 @@
       Retrieves a record with the supplied name value.
     </summary>
     <param name="controlColumnID"></param>
-    <param name="dataValueName"></param>
+    <param name="rowIndex"></param>
     <param name="propertyNames"></param>
     <returns></returns>
   </RetrieveWithUnique>
@@ -32,7 +32,7 @@
       Gets the ID key columns.
     </summary>
     <param name="controlColumnID"></param>
-    <param name="dataValueName"></param>
+    <param name="rowIndex"></param>
     <returns></returns>
   </GetUniqueKey>
 </items>

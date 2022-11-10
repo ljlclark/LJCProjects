@@ -225,7 +225,7 @@ namespace LJCDataDetailLib
     #region Private Methods
 
     // Gets the ControlColumn column count. 
-    /// <include path='items/CalculateColumnsCount/*' file='Doc/DataDetailCode.xml'/>
+    // <include path='items/CalculateColumnsCount/*' file='Doc/DataDetailCode.xml'/>
     private int CalculateColumnsCount(int dataColumnsCount)
     {
       int retValue = 1;

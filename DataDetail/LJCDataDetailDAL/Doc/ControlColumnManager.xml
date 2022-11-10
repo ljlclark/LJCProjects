@@ -32,7 +32,7 @@
       Gets the unique key columns.
     </summary>
     <param name="controlTabID"></param>
-    <param name="controlColumnIndex"></param>
+    <param name="columnIndex"></param>
     <returns></returns>
   </GetUniqueKey>
 </items>
