@@ -37,6 +37,10 @@
       this.DetailTabAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.DetailTabEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.DetailTabDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.DetailSelectMoveRow = new System.Windows.Forms.ToolStripMenuItem();
+      this.DetailPasteRow = new System.Windows.Forms.ToolStripMenuItem();
+      this.DetailClearSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.Page1 = new System.Windows.Forms.TabPage();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
       this.StatusLabel = new System.Windows.Forms.Label();
@@ -87,30 +91,60 @@
       this.DetailMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DetailTabAdd,
             this.DetailTabEdit,
-            this.DetailTabDelete});
+            this.DetailTabDelete,
+            this.toolStripSeparator1,
+            this.DetailSelectMoveRow,
+            this.DetailPasteRow,
+            this.DetailClearSelect});
       this.DetailMenu.Name = "DetailMenu";
-      this.DetailMenu.Size = new System.Drawing.Size(167, 100);
+      this.DetailMenu.Size = new System.Drawing.Size(220, 202);
       // 
       // DetailTabAdd
       // 
       this.DetailTabAdd.Name = "DetailTabAdd";
-      this.DetailTabAdd.Size = new System.Drawing.Size(166, 32);
+      this.DetailTabAdd.Size = new System.Drawing.Size(219, 32);
       this.DetailTabAdd.Text = "Tab Add";
       this.DetailTabAdd.Click += new System.EventHandler(this.DetailTabAdd_Click);
       // 
       // DetailTabEdit
       // 
       this.DetailTabEdit.Name = "DetailTabEdit";
-      this.DetailTabEdit.Size = new System.Drawing.Size(166, 32);
+      this.DetailTabEdit.Size = new System.Drawing.Size(219, 32);
       this.DetailTabEdit.Text = "Tab Edit";
       this.DetailTabEdit.Click += new System.EventHandler(this.DetailTabEdit_Click);
       // 
       // DetailTabDelete
       // 
       this.DetailTabDelete.Name = "DetailTabDelete";
-      this.DetailTabDelete.Size = new System.Drawing.Size(166, 32);
+      this.DetailTabDelete.Size = new System.Drawing.Size(219, 32);
       this.DetailTabDelete.Text = "Tab Delete";
       this.DetailTabDelete.Click += new System.EventHandler(this.DetailTabDelete_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(216, 6);
+      // 
+      // DetailSelectMoveRow
+      // 
+      this.DetailSelectMoveRow.Name = "DetailSelectMoveRow";
+      this.DetailSelectMoveRow.Size = new System.Drawing.Size(219, 32);
+      this.DetailSelectMoveRow.Text = "Select Move Row";
+      this.DetailSelectMoveRow.Click += new System.EventHandler(this.DetailSelectMoveRow_Click);
+      // 
+      // DetailPasteRow
+      // 
+      this.DetailPasteRow.Name = "DetailPasteRow";
+      this.DetailPasteRow.Size = new System.Drawing.Size(219, 32);
+      this.DetailPasteRow.Text = "Paste Row";
+      this.DetailPasteRow.Click += new System.EventHandler(this.DetailPasteRow_Click);
+      // 
+      // DetailClearSelect
+      // 
+      this.DetailClearSelect.Name = "DetailClearSelect";
+      this.DetailClearSelect.Size = new System.Drawing.Size(219, 32);
+      this.DetailClearSelect.Text = "Clear Select Row";
+      this.DetailClearSelect.Click += new System.EventHandler(this.DetailClearSelect_Click);
       // 
       // Page1
       // 
@@ -154,7 +188,6 @@
       this.ShowInTaskbar = false;
       this.Text = "Dynamic Detail Dialog";
       this.Load += new System.EventHandler(this.DataDetailDialog_Load);
-      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataDetailDialog_KeyDown);
       this.MainTabs.ResumeLayout(false);
       this.DetailMenu.ResumeLayout(false);
       this.ResumeLayout(false);
@@ -173,6 +206,10 @@
     private System.Windows.Forms.ToolStripMenuItem DetailTabAdd;
     private System.Windows.Forms.ToolStripMenuItem DetailTabDelete;
     private System.Windows.Forms.Label StatusLabel;
-  }
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem DetailSelectMoveRow;
+        private System.Windows.Forms.ToolStripMenuItem DetailPasteRow;
+        private System.Windows.Forms.ToolStripMenuItem DetailClearSelect;
+    }
 }
 

@@ -289,6 +289,58 @@ namespace DataDetail
         }
       }
     }
+
+    // Selects the copy/move row.
+    private void DoSelect(string type)
+    {
+      CopyAction = type;
+      SourceTabIndex = CurrentTabIndex;
+      SourceColumnIndex = CurrentColumnIndex;
+      SourceRowIndex = CurrentRowIndex;
+      SetStatusText();
+    }
+
+    // Pastes the selected row.
+    private void DoPaste()
+    {
+      if (CopyAction != null)
+      {
+        var config = ControlDetail;
+
+        var targetTabIndex = CurrentTabIndex;
+        var targetColumnIndex = CurrentColumnIndex;
+        var targetRowIndex = CurrentRowIndex;
+
+        var targetTab = config.ControlTabItems[targetTabIndex];
+
+        var targetColumn = targetTab.ControlColumns[targetColumnIndex];
+        if (targetColumn.ControlRows.Count >= config.ColumnRowsLimit)
+        {
+          InsertBlankRow(targetTabIndex, targetColumnIndex
+            , targetRowIndex);
+        }
+
+        var label = GetLabel(SourceTabIndex, SourceColumnIndex
+          , SourceRowIndex);
+        Point location = LabelLocation(targetTabIndex, targetColumnIndex
+          , targetRowIndex);
+        label.Parent = MainTabs.TabPages[targetTabIndex];
+        label.Location = location;
+
+        var control = GetControl(SourceTabIndex, SourceColumnIndex
+          , SourceRowIndex);
+        location = ControlLocation(targetTabIndex, targetColumnIndex
+          , targetRowIndex);
+        control.Parent = MainTabs.TabPages[targetTabIndex];
+        control.Location = location;
+
+        if ("Move" == CopyAction)
+        {
+          ClearSelectAction();
+        }
+      }
+      SetStatusText();
+    }
     #endregion
 
     #region Setup Methods
@@ -369,12 +421,13 @@ namespace DataDetail
     #region Private Methods
 
     // Clear the copy action.
-    private void ClearCopyAction()
+    private void ClearSelectAction()
     {
       SourceTabIndex = -1;
       SourceColumnIndex = -1;
       SourceRowIndex = -1;
       CopyAction = null;
+      SetStatusText();
     }
 
     // Gets the Current TabIndex.
@@ -1100,6 +1153,24 @@ namespace DataDetail
     {
       DoTabDelete();
     }
+
+    // Select the "Move" row.
+    private void DetailSelectMoveRow_Click(object sender, EventArgs e)
+    {
+      DoSelect("Move");
+    }
+
+    // Pastes the selected row.
+    private void DetailPasteRow_Click(object sender, EventArgs e)
+    {
+      DoPaste();
+    }
+
+    // Clears the "Select" action.
+    private void DetailClearSelect_Click(object sender, EventArgs e)
+    {
+      ClearSelectAction();
+    }
     #endregion
 
     #region Control Event Handlers
@@ -1111,79 +1182,6 @@ namespace DataDetail
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
-    }
-
-    // Handles the form keys.
-    private void DataDetailDialog_KeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.Control)
-      {
-        switch (e.KeyCode)
-        {
-          //case Keys.C:
-          case Keys.X:
-            SourceTabIndex = CurrentTabIndex;
-            SourceColumnIndex = CurrentColumnIndex;
-            SourceRowIndex = CurrentRowIndex;
-            SetStatusText();
-            break;
-        }
-
-        switch (e.KeyCode)
-        {
-          //case Keys.C:
-          //  CopyAction = "Copy";
-          //  break;
-
-          case Keys.V:
-            if (CopyAction != null)
-            {
-              var config = ControlDetail;
-
-              var targetTabIndex = CurrentTabIndex;
-              var targetColumnIndex = CurrentColumnIndex;
-              var targetRowIndex = CurrentRowIndex;
-
-              var targetTab = config.ControlTabItems[targetTabIndex];
-
-              var targetColumn = targetTab.ControlColumns[targetColumnIndex];
-              if (targetColumn.ControlRows.Count >= config.ColumnRowsLimit)
-              {
-                InsertBlankRow(targetTabIndex, targetColumnIndex
-                  , targetRowIndex);
-              }
-
-              var label = GetLabel(SourceTabIndex, SourceColumnIndex
-                , SourceRowIndex);
-              Point location = LabelLocation(targetTabIndex, targetColumnIndex
-                , targetRowIndex);
-              label.Parent = MainTabs.TabPages[targetTabIndex];
-              label.Location = location;
-
-              var control = GetControl(SourceTabIndex, SourceColumnIndex
-                , SourceRowIndex);
-              location = ControlLocation(targetTabIndex, targetColumnIndex
-                , targetRowIndex);
-              control.Parent = MainTabs.TabPages[targetTabIndex];
-              control.Location = location;
-
-              if (CopyAction == "Move")
-              {
-                ClearCopyAction();
-              }
-            }
-            break;
-
-          case Keys.X:
-            CopyAction = "Move";
-            break;
-
-          case Keys.Z:
-            ClearCopyAction();
-            break;
-        }
-        SetStatusText();
-      }
     }
 
     // Saves the data and closes the form.
@@ -1337,6 +1335,6 @@ namespace DataDetail
 
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
-    #endregion
-  }
+        #endregion
+    }
 }
