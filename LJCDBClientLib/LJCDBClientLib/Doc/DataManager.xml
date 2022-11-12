@@ -363,6 +363,7 @@
     </summary>
     <param name="requestType">The request type.</param>
     <param name="sql">The client SQL statement.</param>
+    <param name="requestColumns">The request columns.</param>
     <returns>The result object.</returns>
   </ExecuteClientSql>
   <ExecuteRequest>

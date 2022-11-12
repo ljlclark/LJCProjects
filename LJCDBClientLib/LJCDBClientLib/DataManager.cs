@@ -148,12 +148,18 @@ namespace LJCDBClientLib
 
     // Executes a non-query client SQL statement.
     /// <include path='items/ExecuteClientSql/*' file='Doc/DataManager.xml'/>
-    public DbResult ExecuteClientSql(RequestType requestType, string sql)
+    public DbResult ExecuteClientSql(RequestType requestType, string sql
+      , DbColumns requestColumns = null)
     {
       DbResult retValue;
 
-      Request = ManagerCommon.CreateRequest(requestType, TableName, null
-        , DataConfigName, SchemaName);
+      if (null == requestColumns)
+      {
+        requestColumns = DataDefinition;
+      }
+
+      Request = ManagerCommon.CreateRequest(requestType, TableName
+        , requestColumns, DataConfigName, SchemaName);
       Request.ClientSql = sql;
       retValue = ExecuteRequest(Request);
       return retValue;
@@ -226,10 +232,7 @@ namespace LJCDBClientLib
         SQLStatement = retValue.ExecutedSql;
       }
 
-      if (OrderByNames != null)
-      {
-        OrderByNames.Clear();
-      }
+      OrderByNames?.Clear();
       return retValue;
     }
 
