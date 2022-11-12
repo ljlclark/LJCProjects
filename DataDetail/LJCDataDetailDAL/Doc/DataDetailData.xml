@@ -24,6 +24,13 @@
   </UpdateControlDetail>
   
   <!-- ControlTab -->
+  <AddControlTab>
+    <summary>
+      Adds the ControlTab data object.
+    </summary>
+    <param name="dataObject">The DataObject.</param>
+    <param name="propertyNames">The incuded property names.</param>
+  </AddControlTab>
   <SetControlTab>
     <summary>
       Gets the ControlTab data object.

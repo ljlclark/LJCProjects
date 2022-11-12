@@ -136,6 +136,19 @@ namespace LJCDataDetailDAL
 
     #region ControlTab
 
+    // Adds the ControlColumn data object.
+    /// <include path='items/AddControlTab/*' file='Doc/DataDetailData.xml'/>
+    public void AddControlTab(ControlTab dataObject
+      , List<string> propertyNames = null)
+    {
+      var manager = Managers.ControlTabManager;
+      var addedItem = manager.Add(dataObject, propertyNames);
+      if (addedItem != null)
+      {
+        dataObject.ID = addedItem.ID;
+      }
+    }
+
     // Gets the ControlTab data object.
     /// <include path='items/SetControlTab/*' file='Doc/DataDetailData.xml'/>
     public ControlTab SetControlTab(ControlTab dataObject)

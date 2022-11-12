@@ -73,7 +73,7 @@ namespace LJCDataDetailDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='Doc/ControlTabs.xml'/>
-    public ControlTab Add(int id, int controlDetailID, int tabIndex)
+    public ControlTab Add(long id, long controlDetailID, int tabIndex)
     {
       ControlTab retValue;
 
