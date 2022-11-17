@@ -45,16 +45,16 @@ namespace LJCNetCommon
     public DbColumn(string columnName, string value = null, string dataTypeName = "String"
       , string propertyName = null, bool assignedKey = false, string renameValue = null)
     {
+      AutoIncrement = assignedKey;
       ColumnName = columnName;
-      Value = value;
       DataTypeName = dataTypeName;
       if (NetString.HasValue(propertyName))
       {
         PropertyName = propertyName;
       }
-      AutoIncrement = assignedKey;
-      RenameAs = renameValue;
       IsChanged = false;
+      RenameAs = renameValue;
+      Value = value;
     }
     #endregion
 

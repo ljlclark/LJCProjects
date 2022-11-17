@@ -9,14 +9,14 @@
       <para>
         &lt;b&gt;The Row Data Methods&lt;/b&gt;&lt;br /&gt;
         The grid has extended methods for managing rows and row data.&lt;br /&gt;
-        These methods are LJCRowsClear(), LJCAddRow(), LJCInsertRow()
+        These methods are LJCRowAdd(), LJCRowInsert(), LJCRowsClear()
         and LJCRowSetValues().&lt;br /&gt;
       </para>
       <para>
         &lt;b&gt;The Row Selection Methods&lt;/b&gt;&lt;br /&gt;
         The grid has extended methods for managing the current row.&lt;br /&gt;
-        These methods are LJCGetMouseRow(), LJCSetMouseCurrentRow()
-        and LJCSetCurrentRow().&lt;br /&gt;
+        These methods are LJCGetCurrentRow(), LJCGetMouseRow()
+        LJCGetMouseRowIndex()-2 and LJCSetCurrentRow()-3.&lt;br /&gt;
       </para>
       <para>
         &lt;b&gt;The Row Selection Changed Methods&lt;/b&gt;&lt;br /&gt;
@@ -26,8 +26,8 @@
       <para>
         &lt;b&gt;The Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
         The grid has extended methods for grid configuration.&lt;br /&gt;
-        These methods are LJCSetPlain(), LJCAddColumn(), LJCAddDisplayColumns()
-        and LJCRestoreColumnValues().&lt;br /&gt;
+        These methods are LJCSetPlain(), LJCAddColumn()-2, LJCAddDisplayColumns()
+        , LJCRestoreColumnValues() and LJCSaveColumnValues().&lt;br /&gt;
       </para>
     </remarks>
   </LJCDataGrid>

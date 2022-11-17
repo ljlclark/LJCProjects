@@ -355,7 +355,147 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Object Data Functions
+    #region Serialization Functions
+
+    // Deserialize an XML message file to an object. (E)
+    /// <include path='items/XmlDeserialize/*' file='Doc/NetCommon.xml'/>
+    public static object XmlDeserialize(Type type, string fileSpec
+      , string rootName = null)
+    {
+      string errorText;
+      object retValue = null;
+
+      if (false == File.Exists(fileSpec))
+      {
+        errorText = $"File '{fileSpec}' was not found.";
+        throw new FileNotFoundException(errorText);
+      }
+      else
+      {
+        FileStream fileStream = null;
+        try
+        {
+          XmlSerializer serializer;
+          if (NetString.HasValue(rootName))
+          {
+            XmlRootAttribute root = new XmlRootAttribute(rootName);
+            serializer = new XmlSerializer(type, root);
+          }
+          else
+          {
+            serializer = new XmlSerializer(type);
+          }
+          fileStream = new FileStream(fileSpec, FileMode.Open);
+          retValue = serializer.Deserialize(fileStream);
+        }
+        finally
+        {
+          fileStream?.Close();
+        }
+      }
+      return retValue;
+    }
+
+    // Deserialize an XML message string to an object. (E)
+    /// <include path='items/XmlDeserializeMessage/*' file='Doc/NetCommon.xml'/>
+    public static object XmlDeserializeMessage(Type type, string message)
+    {
+      Stream stream = null;
+      object retValue = null;
+
+      try
+      {
+        stream = StringToMemStream(message);
+        XmlSerializer serializer = new XmlSerializer(type);
+        retValue = serializer.Deserialize(stream);
+      }
+      finally
+      {
+        stream?.Close();
+      }
+      return retValue;
+    }
+
+    // Serialize an object to an XML message file. (E)
+    /// <include path='items/XmlSerialize/*' file='Doc/NetCommon.xml'/>
+    public static void XmlSerialize(Type type, object data
+      , XmlSerializerNamespaces namespaces, string fileSpec
+      , string rootName = null)
+    {
+      FileStream fileStream;
+      string errorText;
+
+      if (false == NetString.HasValue(fileSpec))
+      {
+        errorText = "Missing file specification.";
+        throw new ArgumentException(errorText);
+      }
+
+      string folder = Path.GetDirectoryName(fileSpec);
+      if (NetString.HasValue(folder)
+        && false == Directory.Exists(folder))
+      {
+        Directory.CreateDirectory(folder);
+      }
+
+      // Serialize to XML.
+      XmlSerializer serializer;
+      if (NetString.HasValue(rootName))
+      {
+        XmlRootAttribute root = new XmlRootAttribute(rootName);
+        serializer = new XmlSerializer(type, root);
+      }
+      else
+      {
+        serializer = new XmlSerializer(type);
+      }
+      fileStream = new FileStream(fileSpec, FileMode.Create);
+      try
+      {
+        if (namespaces == null)
+        {
+          serializer.Serialize(fileStream, data);
+        }
+        else
+        {
+          serializer.Serialize(fileStream, data, namespaces);
+        }
+      }
+      finally
+      {
+        fileStream?.Close();
+      }
+      return;
+    }
+
+    // Serialize an object to an XML message string. (E)
+    /// <include path='items/XmlSerializeToString/*' file='Doc/NetCommon.xml'/>
+    public static string XmlSerializeToString(Type type, object data
+      , XmlSerializerNamespaces namespaces)
+    {
+      MemoryStream memStream;
+      string retValue;
+
+      // Serialize to XML.
+      XmlSerializer xmlSerializer = new XmlSerializer(type);
+      memStream = new MemoryStream();
+
+      if (namespaces == null)
+      {
+        xmlSerializer.Serialize(memStream, data);
+      }
+      else
+      {
+        xmlSerializer.Serialize(memStream, data, namespaces);
+      }
+
+      retValue = MemStreamToString(memStream);
+      memStream.Close();
+      return retValue;
+    }
+    #endregion
+
+    #region Value Functions
 
     // Gets a decimal value from an object. (E)
     /// <include path='items/GetBoolean/*' file='Doc/NetCommon.xml'/>
@@ -380,7 +520,7 @@ namespace LJCNetCommon
       DateTime? retVal = null;
 
       type = value.GetType();
-      if (typeof(decimal) == type)
+      if (typeof(DateTime) == type)
       {
         retVal = Convert.ToDateTime(value);
       }
@@ -413,7 +553,8 @@ namespace LJCNetCommon
       double retVal = 0;
 
       type = value.GetType();
-      if (typeof(decimal) == type
+      if ( typeof(double) == type
+        || typeof(decimal) == type
         || typeof(long) == type
         || typeof(int) == type
         || typeof(short) == type)
@@ -531,7 +672,8 @@ namespace LJCNetCommon
       float retVal = 0;
 
       type = value.GetType();
-      if (typeof(long) == type
+      if ( typeof(Single) == type
+        || typeof(long) == type
         || typeof(int) == type
         || typeof(short) == type)
       {
@@ -555,156 +697,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Serialization Functions
-
-    // Deserialize an XML message file to an object. (E)
-    /// <include path='items/XmlDeserialize/*' file='Doc/NetCommon.xml'/>
-    public static object XmlDeserialize(Type type, string fileSpec
-      , string rootName = null)
-    {
-      string errorText;
-      object retValue = null;
-
-      if (false == File.Exists(fileSpec))
-      {
-        errorText = $"File '{fileSpec}' was not found.";
-        throw new FileNotFoundException(errorText);
-      }
-      else
-      {
-        FileStream fileStream = null;
-        try
-        {
-          XmlSerializer serializer;
-          if (NetString.HasValue(rootName))
-          {
-            XmlRootAttribute root = new XmlRootAttribute(rootName);
-            serializer = new XmlSerializer(type, root);
-          }
-          else
-          {
-            serializer = new XmlSerializer(type);
-          }
-          fileStream = new FileStream(fileSpec, FileMode.Open);
-          retValue = serializer.Deserialize(fileStream);
-        }
-        finally
-        {
-          if (fileStream != null)
-          {
-            fileStream.Close();
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Deserialize an XML message string to an object. (E)
-    /// <include path='items/XmlDeserializeMessage/*' file='Doc/NetCommon.xml'/>
-    public static object XmlDeserializeMessage(Type type, string message)
-    {
-      Stream stream = null;
-      object retValue = null;
-
-      try
-      {
-        stream = StringToMemStream(message);
-        XmlSerializer serializer = new XmlSerializer(type);
-        retValue = serializer.Deserialize(stream);
-      }
-      finally
-      {
-        if (stream != null)
-        {
-          stream.Close();
-        }
-      }
-      return retValue;
-    }
-
-    // Serialize an object to an XML message file. (E)
-    /// <include path='items/XmlSerialize/*' file='Doc/NetCommon.xml'/>
-    public static void XmlSerialize(Type type, object data
-      , XmlSerializerNamespaces namespaces, string fileSpec
-      , string rootName = null)
-    {
-      FileStream fileStream;
-      string errorText;
-
-      if (false == NetString.HasValue(fileSpec))
-      {
-        errorText = "Missing file specification.";
-        throw new ArgumentException(errorText);
-      }
-
-      string folder = Path.GetDirectoryName(fileSpec);
-      if (NetString.HasValue(folder)
-        && false == Directory.Exists(folder))
-      {
-        Directory.CreateDirectory(folder);
-      }
-
-      // Serialize to XML.
-      XmlSerializer serializer;
-      if (NetString.HasValue(rootName))
-      {
-        XmlRootAttribute root = new XmlRootAttribute(rootName);
-        serializer = new XmlSerializer(type, root);
-      }
-      else
-      {
-        serializer = new XmlSerializer(type);
-      }
-      fileStream = new FileStream(fileSpec, FileMode.Create);
-      try
-      {
-        if (namespaces == null)
-        {
-          serializer.Serialize(fileStream, data);
-        }
-        else
-        {
-          serializer.Serialize(fileStream, data, namespaces);
-        }
-      }
-      finally
-      {
-        if (fileStream != null)
-        {
-          fileStream.Close();
-        }
-      }
-      return;
-    }
-
-    // Serialize an object to an XML message string. (E)
-    /// <include path='items/XmlSerializeToString/*' file='Doc/NetCommon.xml'/>
-    public static string XmlSerializeToString(Type type, object data
-      , XmlSerializerNamespaces namespaces)
-    {
-      MemoryStream memStream;
-      string retValue;
-
-      // Serialize to XML.
-      XmlSerializer xmlSerializer = new XmlSerializer(type);
-      memStream = new MemoryStream();
-
-      if (namespaces == null)
-      {
-        xmlSerializer.Serialize(memStream, data);
-      }
-      else
-      {
-        xmlSerializer.Serialize(memStream, data, namespaces);
-      }
-
-      retValue = MemStreamToString(memStream);
-      memStream.Close();
-      return retValue;
-    }
-    #endregion
-
-    #region Configuration Functions
+    #region Other Functions
 
     // Retrieves the Config bool value. (RE)
     /// <include path='items/ConfigBool/*' file='Doc/NetCommon.xml'/>

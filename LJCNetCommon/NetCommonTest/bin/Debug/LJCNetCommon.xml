@@ -735,22 +735,6 @@
       Uses the DefaultFileName value if the fileSpec parameter is null.
     </remarks>
         </member>
-        <member name="P:LJCNetCommon.DataTypes.Count">
-            <summary>The Collection count.</summary>
-        </member>
-        <member name="M:LJCNetCommon.DataTypes.GetEnumerator">
-            <summary>
-      Gets the Collection Enumerator.
-    </summary><returns>The Collection Enumerator.</returns>
-        </member>
-        <member name="P:LJCNetCommon.DataTypes.Items">
-            <summary>The KeyItem items.</summary>
-        </member>
-        <member name="P:LJCNetCommon.DataTypes.Item(System.Int32)">
-            <summary>
-      Gets the item by index value.
-    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
-        </member>
         <member name="M:LJCNetCommon.DataTypes.SearchName(System.String)">
             <summary>
       Retrieve the collection element with name.
@@ -760,6 +744,22 @@
             <summary>
       Sort on Name.
     </summary>
+        </member>
+        <member name="M:LJCNetCommon.DataTypes.GetEnumerator">
+            <summary>
+      Gets the Collection Enumerator.
+    </summary><returns>The Collection Enumerator.</returns>
+        </member>
+        <member name="P:LJCNetCommon.DataTypes.Count">
+            <summary>The Collection count.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DataTypes.Items">
+            <summary>The KeyItem items.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DataTypes.Item(System.Int32)">
+            <summary>
+      Gets the item by index value.
+    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
         </member>
         <member name="P:LJCNetCommon.DataTypes.DefaultFileName">
             <summary>Gets the Default File Name.</summary>
@@ -1168,8 +1168,6 @@
         var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
           , NetCommon.TypeDateTime);
         var dbColumnString = new DbColumn("TestString", "string");
-        
-        
       </code>
     </example>
         </member>
@@ -1351,34 +1349,8 @@
       Represents a collection of
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt; objects.
     </summary><remarks>
-      <para>
-        The common collection static methods are: HasItems() and
-        LJCDeserialize(). Another static method is LJCCreateObjectColumns().
-        &lt;br /&gt;
-        The collection contains a copy constructor.&lt;br /&gt;
-        The common collection instance methods are: Add() + 3 overloads,
-        Clone, HasItems() and LJCSerialize(). Another add method is
-        LJCAddPropertyAs().
-      </para>
-      <para>
-        Public methods are: LJCClearChanged(), LJCGetChanged() and
-        LJCGetColumns().
-      </para>
-      <para>
-        Search and Sort methods are LJCSearchName(), LJCSearchPropertyName(),
-        LJCSearchRenameAs(), LJCSortAddOrderIndex(), LJCSortName(),
-        LJCSortProperty() and LJCSortRenameAs().&lt;br /&gt;
-        A DbColumn collection element can also be retrieved by name using
-        the collection object: columns["ColumnName"];
-      </para>
-      <para>
-        The get data methods are: LJCGetBoolean(), LJCGetInt32(),
-        LJCGetValue(), etc.
-      </para>
-      <para>
-        A DbColumns collection can be converted to a DbValues collection using
-        the static op_implicit conversion.
-      </para>
+      A DbColumn collection element can also be retrieved by name using
+      the collection object: columns["ColumnName"];
     </remarks>
         </member>
         <member name="M:LJCNetCommon.DbColumns.HasItems(LJCNetCommon.DbColumns)">
@@ -1395,6 +1367,28 @@
             <summary>
       Deserializes from the specified XML file.
     </summary><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns>
+        </member>
+        <member name="M:LJCNetCommon.DbColumns.op_Implicit(LJCNetCommon.DbColumns)~LJCNetCommon.DbValues">
+            <summary>
+      Creates a
+      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      object from a
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
+      (E)
+    </summary><param name="dbColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param><example>
+      <code>
+        using LJCNetCommon;
+
+        DbColumns dbColumns = new DbColumns();
+        dbColumns.Add("Column1");
+        dbColumns.Add("Column2");
+        
+        DbValues dbValues = DbColumns;
+      </code>
+    </example>
         </member>
         <member name="M:LJCNetCommon.DbColumns.#ctor">
             <summary>
@@ -1487,27 +1481,15 @@
       Returns a set of columns that match the supplied list.
     </summary><param name="propertyNames">The column property names.</param><returns>The created object.</returns>
         </member>
-        <member name="M:LJCNetCommon.DbColumns.op_Implicit(LJCNetCommon.DbColumns)~LJCNetCommon.DbValues">
+        <member name="M:LJCNetCommon.DbColumns.LJCSetColumnCaptions(LJCNetCommon.DbColumns)">
             <summary>
-      Creates a
-      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
-      object from a
-      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
-      (E)
-    </summary><param name="dbColumns">
-      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
-      object.
-    </param><example>
-      <code>
-        using LJCNetCommon;
-
-        DbColumns dbColumns = new DbColumns();
-        dbColumns.Add("Column1");
-        dbColumns.Add("Column2");
-        
-        DbValues dbValues = DbColumns;
-      </code>
-    </example>
+      Sets the caption properties.
+    </summary><param name="dbColumns">The target object.</param>
+        </member>
+        <member name="M:LJCNetCommon.DbColumns.MapNames(System.String,System.String,System.String,System.String)">
+            <summary>
+      Maps the column property and rename values.
+    </summary><param name="columnName">The Column name.</param><param name="propertyName">The Property name.</param><param name="renameAs">The Rename value.</param><param name="caption">The Caption value.</param>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCSearchName(System.String)">
             <summary>
@@ -1535,16 +1517,6 @@
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCSortRenameAs(LJCNetCommon.DbColumnRenameAsComparer)">
             <summary>Sort on RenameAs.</summary>
-        </member>
-        <member name="M:LJCNetCommon.DbColumns.LJCSetColumnCaptions(LJCNetCommon.DbColumns)">
-            <summary>
-      Sets the caption properties.
-    </summary><param name="dbColumns">The target object.</param>
-        </member>
-        <member name="M:LJCNetCommon.DbColumns.MapNames(System.String,System.String,System.String,System.String)">
-            <summary>
-      Maps the column property and rename values.
-    </summary><param name="columnName">The Column name.</param><param name="propertyName">The Property name.</param><param name="renameAs">The Rename value.</param><param name="caption">The Caption value.</param>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCGetBoolean(System.String)">
             <summary>
@@ -1654,7 +1626,29 @@
     </remarks>
         </member>
         <member name="M:LJCNetCommon.DbValue.FormatValue">
-            <!-- No matching elements were found for the following include tag --><include path="items/FormatValue/*" file="Doc/DbColumn.xml" />
+            <summary>
+      Formats the column value for the SQL string. (D)
+    </summary><returns>The formatted value.</returns><remarks>
+      <para>
+        Returns the string formatted value from the Value property based
+        on the DataTypeName property.
+      </para>
+      <para>
+        If the DataType is Boolean, returns "1" or "0".&lt;br /&gt;
+        If the DataType is DateTime, returns a string Date or Minimum Date
+        value.&lt;br  /&gt;
+        If the DataType is string, returns a string with doubled single quotes.
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+
+        var dbValueBool = new DbValue("TestBool", "1", NetCommon.TypeBoolean);
+        var dbValueDate = new DbValue("TestDate", DateTime.Now()
+        , NetCommon.TypeDateTime);
+        var dbValueString = new DbValue("TestString", "string");
+      </code>
+    </example>
         </member>
         <member name="M:LJCNetCommon.DbValue.ToString">
             <summary>
@@ -1693,28 +1687,8 @@
       Represents a collection of
       &lt;span class="userType"&gt;DbValue&lt;/span&gt; objects.
     </summary><remarks>
-      <para>
-        The common collection static methods are: HasItems() and
-        LJCDeserialize().&lt;br /&gt;
-        The collection contains a copy constructor.&lt;br /&gt;
-        The common collection instance methods are: Add(), Clone, HasItems()
-        and LJCSerialize().
-      </para>
-      <para>
-        Public methods are: LJCClearChanged() and LJCGetChanged().
-      </para>
-      <para>
-        The Search method is LJCSearchName().
-      </para>
-      <para>
-        The get data methods are: LJCGetBoolean(), LJCGetInt32(),
-        LJCGetValue(), etc..&lt;br /&gt;
-        The set data method is LJCSetValue().
-      </para>
-      <para>
-        A DbValues collection can be converted to a DbColumns collection using
-        the LJCCreateColumns() method.
-      </para>
+      A DbValue collection element can also be retrieved by name using
+      the collection object: values["PropertyName"];
     </remarks>
         </member>
         <member name="M:LJCNetCommon.DbValues.HasItems(LJCNetCommon.DbValues)">
@@ -1761,16 +1735,6 @@
       Uses the DefaultFileName value if the fileSpec parameter is null.
     </remarks>
         </member>
-        <member name="M:LJCNetCommon.DbValues.LJCClearChanged">
-            <summary>
-      Sets the IsChanged value to false for all elements in the collection.
-    </summary>
-        </member>
-        <member name="M:LJCNetCommon.DbValues.LJCGetChanged">
-            <summary>
-      Gets a collection of changed columns.
-    </summary><returns>The changed columns list.</returns>
-        </member>
         <member name="M:LJCNetCommon.DbValues.LJCCreateColumns(LJCNetCommon.DbColumns)">
             <summary>
       Creates combined
@@ -1781,6 +1745,16 @@
       The combined
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
     </returns>
+        </member>
+        <member name="M:LJCNetCommon.DbValues.LJCClearChanged">
+            <summary>
+      Sets the IsChanged value to false for all elements in the collection.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.DbValues.LJCGetChanged">
+            <summary>
+      Gets a collection of changed columns.
+    </summary><returns>The changed columns list.</returns>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCSearchName(System.String)">
             <summary>
@@ -1852,6 +1826,11 @@
         </member>
         <member name="P:LJCNetCommon.DbValues.LJCDefaultFileName">
             <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbValues.Item(System.String)">
+            <summary>
+      The column for the specified property name.
+    </summary><param name="name">The property name.</param><returns>The selected DbValue object.</returns>
         </member>
         <member name="T:LJCNetCommon.KeyItem">
             <summary>Represents Key item values.</summary>
@@ -2003,22 +1982,6 @@
       Gets the Items with the PropertyName.
     </summary><param name="dataColumn">The DataColumn object.</param><returns>The valid ControlItems.</returns>
         </member>
-        <member name="P:LJCNetCommon.KeyItems.Count">
-            <summary>The Collection count.</summary>
-        </member>
-        <member name="M:LJCNetCommon.KeyItems.GetEnumerator">
-            <summary>
-      Gets the Collection Enumerator.
-    </summary><returns>The Collection Enumerator.</returns>
-        </member>
-        <member name="P:LJCNetCommon.KeyItems.Items">
-            <summary>The KeyItem items.</summary>
-        </member>
-        <member name="P:LJCNetCommon.KeyItems.Item(System.Int32)">
-            <summary>
-      Gets the item by index value.
-    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
-        </member>
         <member name="M:LJCNetCommon.KeyItems.SearchPropertyName(System.String)">
             <summary>
       Retrieve the collection element with name.
@@ -2028,6 +1991,22 @@
             <summary>
       Sort on Name.
     </summary>
+        </member>
+        <member name="M:LJCNetCommon.KeyItems.GetEnumerator">
+            <summary>
+      Gets the Collection Enumerator.
+    </summary><returns>The Collection Enumerator.</returns>
+        </member>
+        <member name="P:LJCNetCommon.KeyItems.Count">
+            <summary>The Collection count.</summary>
+        </member>
+        <member name="P:LJCNetCommon.KeyItems.Item(System.Int32)">
+            <summary>
+      Gets the item by index value.
+    </summary><param name="index">The index value.</param><returns>The element item object.</returns>
+        </member>
+        <member name="P:LJCNetCommon.KeyItems.Items">
+            <summary>The KeyItem items.</summary>
         </member>
         <member name="T:LJCNetCommon.CommonKeywords">
             <summary>Represents a collection of Common Key Words.</summary>
@@ -3015,136 +2994,6 @@
       </code>
     </example>
         </member>
-        <member name="M:LJCNetCommon.NetCommon.GetBoolean(System.Object)">
-            <!-- No matching elements were found for the following include tag --><include path="items/GetBoolean/*" file="Doc/NetCommon.xml" />
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetDateTime(System.Object)">
-            <!-- No matching elements were found for the following include tag --><include path="items/GetDateTime/*" file="Doc/NetCommon.xml" />
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetDecimal(System.Object)">
-            <summary>
-      Gets a decimal value from an object. (E)
-    </summary><param name="value">The value object.</param><returns>
-      The decimal value or zero if the object is null.
-      Also returns zero if the object is not type "decimal", "long", "int"
-      or "short".
-    </returns><example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a decimal value from an object.
-        private static void GetDecimal()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          decimal setup = 3.14m;
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          decimal value = NetCommon.GetDecimal(obj);
-        }
-      </code>
-    </example>
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetDouble(System.Object)">
-            <!-- No matching elements were found for the following include tag --><include path="items/GetDouble/*" file="Doc/NetCommon.xml" />
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetInt16(System.Object)">
-            <summary>
-      Gets a short value from an object. (E)
-    </summary><param name="value">The value object.</param><returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "short".
-    </returns><example>
-      <code>
-        using LJCNetCommon;
-
-        // Gets a short value from an object.
-        private static void GetInt16()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          short setup = 3;
-          object obj = setup;
-
-          // Gets a short value from an object.
-          short value = NetCommon.GetInt16(obj);
-        }
-      </code>
-    </example>
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetInt32(System.Object)">
-            <summary>
-      Gets an integer value from an object. (E)
-    </summary><param name="value">The value object.</param><returns>
-      The integer value or zero if the object is null.
-      Also returns zero if the object is not type "int" or "short".
-    </returns><example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets an int value from an object.
-        private static void GetInt32()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          int setup = 3;
-          object obj = setup;
-
-          // Gets an int value from an object.
-          int value = NetCommon.GetInt32(obj);
-        }
-      </code>
-    </example>
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetInt64(System.Object)">
-            <summary>
-      Gets a long value from an object. (E)
-    </summary><param name="value">The value object.</param><returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "long", "int" or "short".
-    </returns><example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a long value from an object.
-        private static void GetInt64()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          long setup = 3;
-          object obj = setup;
-
-          // Gets a long value from an object.
-          long value = NetCommon.GetInt64(obj);
-        }
-      </code>
-    </example>
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetObject(System.Object)">
-            <summary>
-      Gets an instantiated object value.
-    </summary><param name="value">The value object.</param><returns>The instantiated object.</returns>
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetSingle(System.Object)">
-            <!-- No matching elements were found for the following include tag --><include path="items/GetSingle/*" file="Doc/NetCommon.xml" />
-        </member>
-        <member name="M:LJCNetCommon.NetCommon.GetString(System.Object)">
-            <summary>
-      Gets a trimmed string value from an object. (E)
-    </summary><param name="value">The value object.</param><returns>The trimmed string value or null if the object is null.</returns><example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a trimmed string value from an object.
-        private static void GetString()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "3";
-          object obj = setup;
-
-          // Gets a string value from an object.
-          string value = NetCommon.GetString(obj);
-        }
-      </code>
-    </example>
-        </member>
         <member name="M:LJCNetCommon.NetCommon.XmlDeserialize(System.Type,System.String,System.String)">
             <summary>
       Deserialize an XML message file to an object. (E)
@@ -3277,6 +3126,158 @@
           // Check the object.
           Person newPerson;
           newPerson = NetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetBoolean(System.Object)">
+            <summary>
+      Gets a boolean value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The boolean value or false if the object is null.
+      Also returns false if the object is not type "bool".
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetDateTime(System.Object)">
+            <summary>
+      Gets a DateTime value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The DateTime value or null if the object is null.
+      Also returns null if the object is not type "bool".
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetDecimal(System.Object)">
+            <summary>
+      Gets a decimal value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The decimal value or zero if the object is null.
+      Also returns zero if the object is not type "decimal", "long", "int"
+      or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a decimal value from an object.
+        private static void GetDecimal()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          decimal setup = 3.14m;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          decimal value = NetCommon.GetDecimal(obj);
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetDouble(System.Object)">
+            <summary>
+      Gets a double value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The double value or zero if the object is null.
+      Also returns zero if the object is not type "double", "decimal", "long"
+      , "int" or "short".
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetInt16(System.Object)">
+            <summary>
+      Gets a short value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a short value from an object.
+        private static void GetInt16()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          short setup = 3;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          short value = NetCommon.GetInt16(obj);
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetInt32(System.Object)">
+            <summary>
+      Gets an integer value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The integer value or zero if the object is null.
+      Also returns zero if the object is not type "int" or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets an int value from an object.
+        private static void GetInt32()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          int setup = 3;
+          object obj = setup;
+
+          // Gets an int value from an object.
+          int value = NetCommon.GetInt32(obj);
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetInt64(System.Object)">
+            <summary>
+      Gets a long value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "long", "int" or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a long value from an object.
+        private static void GetInt64()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          long setup = 3;
+          object obj = setup;
+
+          // Gets a long value from an object.
+          long value = NetCommon.GetInt64(obj);
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetObject(System.Object)">
+            <summary>
+      Gets an instantiated object value.
+    </summary><param name="value">The value object.</param><returns>The instantiated object.</returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetSingle(System.Object)">
+            <summary>
+      Gets a single value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The single value or zero if the object is null.
+      Also returns zero if the object is not type "single", "long", "int"
+      or "short".
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetString(System.Object)">
+            <summary>
+      Gets a trimmed string value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>The trimmed string value or null if the object is null.</returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a trimmed string value from an object.
+        private static void GetString()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "3";
+          object obj = setup;
+
+          // Gets a string value from an object.
+          string value = NetCommon.GetString(obj);
         }
       </code>
     </example>
@@ -3481,38 +3482,20 @@
       </para>
     </remarks>
         </member>
-        <member name="M:LJCNetCommon.NetString.AddMissingArgument(System.String,System.String)">
+        <member name="M:LJCNetCommon.NetString.HasValue(System.String)">
             <summary>
-            Adds the missing argument name to the message.
-            </summary>
-            <param name="message">The message text.</param>
-            <param name="argument">The argument value.</param>
+      Checks if a text value exists.
+    </summary><param name="text">The text value.</param><returns>True if there is a text value, otherwise false.</returns>
         </member>
-        <member name="M:LJCNetCommon.NetString.CreateLSoundex(System.String)">
+        <member name="M:LJCNetCommon.NetString.IsDigits(System.String)">
             <summary>
-      Creates a letter based soundex value. (D)
-    </summary><param name="text">The text value.</param><returns>The Letter based soundex value.</returns><remarks>
-      Scatter = SCTR&lt;br /&gt;
-      Aphrodisiac = APHRDSC&lt;br /&gt;
-      Pharmacy = PHRMC&lt;br /&gt;
-      Psychology = PSCHLG&lt;br /&gt;
-      Cart = CRT&lt;br /&gt;
-      Ceiling = CLNG&lt;br /&gt;
-      Cyan = CN
-    </remarks>
+      Checks a string value for digits.
+    </summary><param name="text">The text value.</param><returns>True if all digits, otherwise false.</returns>
         </member>
-        <member name="M:LJCNetCommon.NetString.CreatePSoundex(System.String)">
+        <member name="M:LJCNetCommon.NetString.IsEqual(System.String,System.String)">
             <summary>
-      Creates a Phonetic based soundex value. (D)
-    </summary><param name="text">The text value.</param><returns>The Phonetic based soundex value.</returns><remarks>
-      Scatter = SCTR&lt;br /&gt;
-      Aphrodisiac = AFRDSC&lt;br /&gt;
-      Pharmacy = FRMS&lt;br /&gt;
-      Psychology = SCHLG&lt;br /&gt;
-      Cart = KRT&lt;br /&gt;
-      Ceiling = SLNG&lt;br /&gt;
-      Cyan = SN
-    </remarks>
+      Do an Ignore Case string compare.
+    </summary><param name="stringA">The first string.</param><param name="stringB">The second string.</param>
         </member>
         <member name="M:LJCNetCommon.NetString.GetPropertyName(System.String)">
             <summary>
@@ -3523,6 +3506,14 @@
             <summary>
       Creates an exception string with outer and inner exception.
     </summary><param name="e">The Exception object.</param><returns>The exception string.</returns>
+        </member>
+        <member name="M:LJCNetCommon.NetString.InitString(System.String)">
+            <summary>
+      Initializes a string to the trimmed value or null.
+    </summary><param name="value">The string value.</param><returns>
+      The trimmed string value or null if the string is null
+      or an empty string when trimmed.
+    </returns>
         </member>
         <member name="M:LJCNetCommon.NetString.GetDelimitedAndIndexes(System.String,System.String,System.Int32@,System.Int32@,System.Int32@,System.String)">
             <summary>
@@ -3668,28 +3659,31 @@
       </code>
     </example>
         </member>
-        <member name="M:LJCNetCommon.NetString.HasValue(System.String)">
+        <member name="M:LJCNetCommon.NetString.CreateLSoundex(System.String)">
             <summary>
-      Checks if a text value exists.
-    </summary><param name="text">The text value.</param><returns>True if there is a text value, otherwise false.</returns>
+      Creates a letter based soundex value. (D)
+    </summary><param name="text">The text value.</param><returns>The Letter based soundex value.</returns><remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = APHRDSC&lt;br /&gt;
+      Pharmacy = PHRMC&lt;br /&gt;
+      Psychology = PSCHLG&lt;br /&gt;
+      Cart = CRT&lt;br /&gt;
+      Ceiling = CLNG&lt;br /&gt;
+      Cyan = CN
+    </remarks>
         </member>
-        <member name="M:LJCNetCommon.NetString.InitString(System.String)">
+        <member name="M:LJCNetCommon.NetString.CreatePSoundex(System.String)">
             <summary>
-      Initializes a string to the trimmed value or null.
-    </summary><param name="value">The string value.</param><returns>
-      The trimmed string value or null if the string is null
-      or an empty string when trimmed.
-    </returns>
-        </member>
-        <member name="M:LJCNetCommon.NetString.IsDigits(System.String)">
-            <summary>
-      Checks a string value for digits.
-    </summary><param name="text">The text value.</param><returns>True if all digits, otherwise false.</returns>
-        </member>
-        <member name="M:LJCNetCommon.NetString.IsEqual(System.String,System.String)">
-            <summary>
-      Do an Ignore Case string compare.
-    </summary><param name="stringA">The first string.</param><param name="stringB">The second string.</param>
+      Creates a Phonetic based soundex value. (D)
+    </summary><param name="text">The text value.</param><returns>The Phonetic based soundex value.</returns><remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = AFRDSC&lt;br /&gt;
+      Pharmacy = FRMS&lt;br /&gt;
+      Psychology = SCHLG&lt;br /&gt;
+      Cart = KRT&lt;br /&gt;
+      Ceiling = SLNG&lt;br /&gt;
+      Cyan = SN
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.NetString.IsSoundexLetter(System.Char,System.Char)">
             <summary>
@@ -3716,6 +3710,13 @@
         - Otherwise, the same letter as at the current index.
       </para>
     </remarks>
+        </member>
+        <member name="M:LJCNetCommon.NetString.AddMissingArgument(System.String,System.String)">
+            <summary>
+            Adds the missing argument name to the message.
+            </summary>
+            <param name="message">The message text.</param>
+            <param name="argument">The argument value.</param>
         </member>
         <member name="M:LJCNetCommon.NetString.ThrowInvalidArgument(System.String)">
             <summary>

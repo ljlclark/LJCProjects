@@ -22,7 +22,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Set Methods
+    #region Set Object Reflection Property Methods
 
     // Retrieves the Assembly reference. (R)
     /// <include path='items/SetAssembly/*' file='Doc/LJCAssemblyReflect.xml'/>
@@ -323,7 +323,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Get Syntax Methods
+    #region Get Syntax Methods
 
     // Creates and returns the Constructor syntax. (E)
     /// <include path='items/GetConstructorSyntax/*' file='Doc/LJCAssemblyReflect.xml'/>

@@ -88,6 +88,27 @@ namespace LJCNetCommon
     }
     #endregion
 
+    #region Static Conversion Functions
+
+    // Creates a DbValues object from a DbColumns object.
+    /// <include path='items/DbValues/*' file='Doc/DbColumns.xml'/>
+    public static implicit operator DbValues(DbColumns dbColumns)
+    {
+      DbValues retValue = null;
+
+      if (HasItems(dbColumns))
+      {
+        retValue = new DbValues();
+        foreach (DbColumn dbColumn in dbColumns)
+        {
+          var dbValue = dbColumn;
+          retValue.Add(dbValue);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -231,7 +252,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Methods
+    #region Other Methods
 
     // Sets the IsChanged value to false for all elements in the collection.
     /// <include path='items/LJCClearChanged/*' file='Doc/DbColumns.xml'/>
@@ -279,30 +300,58 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-    #endregion
 
-    #region Conversions
-
-    // Creates a DbValues object from a DbColumns object.
-    /// <include path='items/DbValues/*' file='Doc/DbColumns.xml'/>
-    public static implicit operator DbValues(DbColumns dbColumns)
+    // Sets the caption properties.
+    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetColumnCaptions(DbColumns dbColumns)
     {
-      DbValues retValue = null;
+      DbColumn searchColumn;
 
       if (HasItems(dbColumns))
       {
-        retValue = new DbValues();
         foreach (DbColumn dbColumn in dbColumns)
         {
-          var dbValue = dbColumn;
-          retValue.Add(dbValue);
+          searchColumn = LJCSearchName(dbColumn.ColumnName);
+          if (searchColumn != null)
+          {
+            dbColumn.Caption = searchColumn.Caption;
+          }
         }
       }
-      return retValue;
+    }
+
+    // Maps the column property and rename values.
+    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
+    public void MapNames(string columnName, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      DbColumn dbColumn = LJCSearchName(columnName);
+      SetMapValues(dbColumn, propertyName, renameAs, caption);
+    }
+
+    // Sets the Map values.
+    private void SetMapValues(DbColumn dbColumn, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      if (dbColumn != null)
+      {
+        if (propertyName != null)
+        {
+          dbColumn.PropertyName = propertyName;
+        }
+        if (renameAs != null)
+        {
+          dbColumn.RenameAs = renameAs;
+        }
+        if (caption != null)
+        {
+          dbColumn.Caption = caption;
+        }
+      }
     }
     #endregion
 
-    #region Public Search Methods
+    #region Search and Sort Methods
 
     // Finds and returns the object that matches the supplied values.
     /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -415,58 +464,6 @@ namespace LJCNetCommon
         mPrevCount = Count;
         Sort(comparer);
         mSortType = SortType.RenameAs;
-      }
-    }
-    #endregion
-
-    #region Other Public Methods
-
-    // Sets the caption properties.
-    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
-    public void LJCSetColumnCaptions(DbColumns dbColumns)
-    {
-      DbColumn searchColumn;
-
-      if (HasItems(dbColumns))
-      {
-        foreach (DbColumn dbColumn in dbColumns)
-        {
-          searchColumn = LJCSearchName(dbColumn.ColumnName);
-          if (searchColumn != null)
-          {
-            dbColumn.Caption = searchColumn.Caption;
-          }
-        }
-      }
-    }
-
-    // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
-    public void MapNames(string columnName, string propertyName = null
-      , string renameAs = null, string caption = null)
-    {
-      DbColumn dbColumn = LJCSearchName(columnName);
-      SetMapValues(dbColumn, propertyName, renameAs, caption);
-    }
-
-    // Sets the Map values.
-    private void SetMapValues(DbColumn dbColumn, string propertyName = null
-      , string renameAs = null, string caption = null)
-    {
-      if (dbColumn != null)
-      {
-        if (propertyName != null)
-        {
-          dbColumn.PropertyName = propertyName;
-        }
-        if (renameAs != null)
-        {
-          dbColumn.RenameAs = renameAs;
-        }
-        if (caption != null)
-        {
-          dbColumn.Caption = caption;
-        }
       }
     }
     #endregion

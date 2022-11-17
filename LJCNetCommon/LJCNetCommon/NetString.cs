@@ -8,84 +8,57 @@ namespace LJCNetCommon
   /// <include path='items/NetString/*' file='Doc/NetString.xml'/>
   public class NetString
   {
-    #region Public Functions
+    #region Checking String Values
 
-    // Adds the missing argument name to the message.
-    /// <summary>
-    /// Adds the missing argument name to the message.
-    /// </summary>
-    /// <param name="message">The message text.</param>
-    /// <param name="argument">The argument value.</param>
-    public static void AddMissingArgument(string message, string argument)
+    // Checks if a text value exists.
+    /// <include path='items/HasValue/*' file='Doc/NetString.xml'/>
+    public static bool HasValue(string text)
     {
-      if (false == NetString.HasValue(argument))
-      {
-        message += $"{argument} is missing.\r\n";
-      }
+      return !string.IsNullOrWhiteSpace(text);
     }
 
-    // Creates a letter based soundex value. (D)
-    /// <include path='items/CreateLSoundex/*' file='Doc/NetString.xml'/>
-    public static string CreateLSoundex(string text)
+    // Checks a string value for digits.
+    /// <include path='items/IsDigits/*' file='Doc/NetString.xml'/>
+    public static bool IsDigits(string text)
     {
-      string retValue;
+      string workString;
+      bool retValue = true;
 
-      StringBuilder builder = new StringBuilder(64);
-
-      text = text.ToUpper();
-      for (int index = 0; index < text.Length; index++)
+      if (false == HasValue(text))
       {
-        char letter = text[index];
-
-        if (0 == index)
+        retValue = false;
+      }
+      else
+      {
+        workString = text.Trim();
+        foreach (char digit in workString)
         {
-          builder.Append(letter);
-        }
-        else
-        {
-          if (IsSoundexLetter(text[index], text[index - 1]))
+          if (false == char.IsDigit(digit))
           {
-            builder.Append(letter);
+            retValue = false;
+            break;
           }
         }
       }
-      retValue = builder.ToString();
       return retValue;
     }
 
-    // Creates a Phonetic based soundex value. (D)
-    /// <include path='items/CreatePSoundex/*' file='Doc/NetString.xml'/>
-    public static string CreatePSoundex(string text)
+    // Do an Ignore Case string compare.
+    /// <include path='items/IsEqual/*' file='Doc/NetString.xml'/>
+    public static bool IsEqual(string stringA, string stringB)
     {
-      string retValue;
+      bool retValue = false;
 
-      StringBuilder builder = new StringBuilder(64);
-
-      text = text.ToUpper();
-      for (int index = 0; index < text.Length; index++)
+      if (stringA != null)
       {
-        if (Phonetic(text, ref index, out char letter))
-        {
-          builder.Append(letter);
-        }
-        else
-        {
-          if (0 == index)
-          {
-            builder.Append(letter);
-          }
-          else
-          {
-            if (IsSoundexLetter(text[index], text[index - 1]))
-            {
-              builder.Append(letter);
-            }
-          }
-        }
+        retValue = stringA.Equals(stringB
+          , System.StringComparison.InvariantCultureIgnoreCase);
       }
-      retValue = builder.ToString();
       return retValue;
     }
+    #endregion
+
+    #region Formatting a String
 
     // Gets a column name with underscores converted to Pascal case.
     /// <include path='items/GetPropertyName/*' file='Doc/NetString.xml'/>
@@ -134,6 +107,22 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Initializes a string to the trimmed value or null.
+    /// <include path='items/InitString/*' file='Doc/NetString.xml'/>
+    public static string InitString(string value)
+    {
+      string retVal = null;
+
+      if (NetString.HasValue(value))
+      {
+        retVal = value.Trim();
+      }
+      return retVal;
+    }
+    #endregion
+
+    #region Parsing Delimited String
 
     // Get the delimited string begin and end index.
     /// <include path='items/GetDelimitedAndIndexes/*' file='Doc/NetString.xml'/>
@@ -233,64 +222,70 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+    #endregion
 
-    // Checks if a text value exists.
-    /// <include path='items/HasValue/*' file='Doc/NetString.xml'/>
-    public static bool HasValue(string text)
+    #region Soundex Functions
+
+    // Creates a letter based soundex value. (D)
+    /// <include path='items/CreateLSoundex/*' file='Doc/NetString.xml'/>
+    public static string CreateLSoundex(string text)
     {
-      return !string.IsNullOrWhiteSpace(text);
-    }
+      string retValue;
 
-    // Initializes a string to the trimmed value or null.
-    /// <include path='items/InitString/*' file='Doc/NetString.xml'/>
-    public static string InitString(string value)
-    {
-      string retVal = null;
+      StringBuilder builder = new StringBuilder(64);
 
-      if (NetString.HasValue(value))
+      text = text.ToUpper();
+      for (int index = 0; index < text.Length; index++)
       {
-        retVal = value.Trim();
-      }
-      return retVal;
-    }
+        char letter = text[index];
 
-    // Checks a string value for digits.
-    /// <include path='items/IsDigits/*' file='Doc/NetString.xml'/>
-    public static bool IsDigits(string text)
-    {
-      string workString;
-      bool retValue = true;
-
-      if (false == HasValue(text))
-      {
-        retValue = false;
-      }
-      else
-      {
-        workString = text.Trim();
-        foreach (char digit in workString)
+        if (0 == index)
         {
-          if (false == char.IsDigit(digit))
+          builder.Append(letter);
+        }
+        else
+        {
+          if (IsSoundexLetter(text[index], text[index - 1]))
           {
-            retValue = false;
-            break;
+            builder.Append(letter);
           }
         }
       }
+      retValue = builder.ToString();
       return retValue;
     }
 
-    // Do an Ignore Case string compare.
-    /// <include path='items/IsEqual/*' file='Doc/NetString.xml'/>
-    public static bool IsEqual(string stringA, string stringB)
+    // Creates a Phonetic based soundex value. (D)
+    /// <include path='items/CreatePSoundex/*' file='Doc/NetString.xml'/>
+    public static string CreatePSoundex(string text)
     {
-      bool retValue = false;
+      string retValue;
 
-      if (stringA != null)
+      StringBuilder builder = new StringBuilder(64);
+
+      text = text.ToUpper();
+      for (int index = 0; index < text.Length; index++)
       {
-        retValue = stringA.Equals(stringB
-          , System.StringComparison.InvariantCultureIgnoreCase);
+        if (Phonetic(text, ref index, out char letter))
+        {
+          builder.Append(letter);
+        }
+        else
+        {
+          if (0 == index)
+          {
+            builder.Append(letter);
+          }
+          else
+          {
+            if (IsSoundexLetter(text[index], text[index - 1]))
+            {
+              builder.Append(letter);
+            }
+          }
+        }
       }
+      retValue = builder.ToString();
       return retValue;
     }
 
@@ -369,6 +364,23 @@ namespace LJCNetCommon
         }
       }
       return retValue;
+    }
+    #endregion
+
+    #region Other Functions
+
+    // Adds the missing argument name to the message.
+    /// <summary>
+    /// Adds the missing argument name to the message.
+    /// </summary>
+    /// <param name="message">The message text.</param>
+    /// <param name="argument">The argument value.</param>
+    public static void AddMissingArgument(string message, string argument)
+    {
+      if (false == NetString.HasValue(argument))
+      {
+        message += $"{argument} is missing.\r\n";
+      }
     }
 
     // Throws the invalid argument exception if message has a value.

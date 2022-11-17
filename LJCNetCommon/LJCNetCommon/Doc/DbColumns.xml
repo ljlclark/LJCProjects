@@ -7,34 +7,8 @@
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt; objects.
     </summary>
     <remarks>
-      <para>
-        The common collection static methods are: HasItems() and
-        LJCDeserialize(). Another static method is LJCCreateObjectColumns().
-        &lt;br /&gt;
-        The collection contains a copy constructor.&lt;br /&gt;
-        The common collection instance methods are: Add() + 3 overloads,
-        Clone, HasItems() and LJCSerialize(). Another add method is
-        LJCAddPropertyAs().
-      </para>
-      <para>
-        Public methods are: LJCClearChanged(), LJCGetChanged() and
-        LJCGetColumns().
-      </para>
-      <para>
-        Search and Sort methods are LJCSearchName(), LJCSearchPropertyName(),
-        LJCSearchRenameAs(), LJCSortAddOrderIndex(), LJCSortName(),
-        LJCSortProperty() and LJCSortRenameAs().&lt;br /&gt;
-        A DbColumn collection element can also be retrieved by name using
-        the collection object: columns["ColumnName"];
-      </para>
-      <para>
-        The get data methods are: LJCGetBoolean(), LJCGetInt32(),
-        LJCGetValue(), etc.
-      </para>
-      <para>
-        A DbColumns collection can be converted to a DbValues collection using
-        the static op_implicit conversion.
-      </para>
+      A DbColumn collection element can also be retrieved by name using
+      the collection object: columns["ColumnName"];
     </remarks>
   </DbColumns>
 

@@ -14,3 +14,8 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=LJCNetCommon
 set File=LJCNetCommon
 call %ClearBuild%
+
+:Clear
+set Project=NetCommonTest
+set File=NetCommonTest
+call %ClearBuild%

@@ -136,49 +136,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region IEnumerable Methods and Properties
-
-    /// <summary>The Collection count.</summary>
-    public int Count
-    {
-      get { return Items.Count; }
-    }
-
-    // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
-    public IEnumerator<string> GetEnumerator()
-    {
-      return ((IEnumerable<string>)Items).GetEnumerator();
-    }
-
-    // Gets the Collection Enumerator.
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return ((IEnumerable<string>)Items).GetEnumerator();
-    }
-
-    /// <summary>The KeyItem items.</summary>
-    [XmlArray(RootName)]
-    public List<string> Items { get; set; }
-
-    // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
-    public string this[int index]
-    {
-      get
-      {
-        string retValue = null;
-
-        if (index >= 0 && index < Count)
-        {
-          retValue = Items[index];
-        }
-        return retValue;
-      }
-    }
-    #endregion
-
-    #region Sort and Search Methods
+    #region Search and Sort Methods
 
     // Retrieve the collection element.
     /// <include path='items/SearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -203,6 +161,51 @@ namespace LJCNetCommon
       {
         mPrevCount = Count;
         Items.Sort();
+      }
+    }
+    #endregion
+
+    #region IEnumerable Methods
+
+    // Gets the Collection Enumerator.
+    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    public IEnumerator<string> GetEnumerator()
+    {
+      return ((IEnumerable<string>)Items).GetEnumerator();
+    }
+
+    // Gets the Collection Enumerator.
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return ((IEnumerable<string>)Items).GetEnumerator();
+    }
+    #endregion
+
+    #region IEnumerable Properties
+
+    /// <summary>The Collection count.</summary>
+    public int Count
+    {
+      get { return Items.Count; }
+    }
+
+    /// <summary>The KeyItem items.</summary>
+    [XmlArray(RootName)]
+    public List<string> Items { get; set; }
+
+    // Gets the item by index value.
+    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    public string this[int index]
+    {
+      get
+      {
+        string retValue = null;
+
+        if (index >= 0 && index < Count)
+        {
+          retValue = Items[index];
+        }
+        return retValue;
       }
     }
     #endregion

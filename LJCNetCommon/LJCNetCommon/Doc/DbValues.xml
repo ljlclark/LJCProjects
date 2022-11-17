@@ -7,28 +7,8 @@
       &lt;span class="userType"&gt;DbValue&lt;/span&gt; objects.
     </summary>
     <remarks>
-      <para>
-        The common collection static methods are: HasItems() and
-        LJCDeserialize().&lt;br /&gt;
-        The collection contains a copy constructor.&lt;br /&gt;
-        The common collection instance methods are: Add(), Clone, HasItems()
-        and LJCSerialize().
-      </para>
-      <para>
-        Public methods are: LJCClearChanged() and LJCGetChanged().
-      </para>
-      <para>
-        The Search method is LJCSearchName().
-      </para>
-      <para>
-        The get data methods are: LJCGetBoolean(), LJCGetInt32(),
-        LJCGetValue(), etc..&lt;br /&gt;
-        The set data method is LJCSetValue().
-      </para>
-      <para>
-        A DbValues collection can be converted to a DbColumns collection using
-        the LJCCreateColumns() method.
-      </para>
+      A DbValue collection element can also be retrieved by name using
+      the collection object: values["PropertyName"];
     </remarks>
   </DbValues>
   
@@ -78,4 +58,13 @@
     <param name="value">The string value.</param>
     <returns>The column value.</returns>
   </LJCSetValue>
+
+  <!-- Properties -->
+  <Item>
+    <summary>
+      The column for the specified property name.
+    </summary>
+    <param name="name">The property name.</param>
+    <returns>The selected DbValue object.</returns>
+  </Item>
 </items>

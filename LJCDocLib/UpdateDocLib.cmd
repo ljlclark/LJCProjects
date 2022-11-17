@@ -37,7 +37,10 @@ set src=LJCDocLib\LJCDocLibDAL\%bin%
 copy %root%%src%\LJCDocLibDAL.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-rem copy %root%%src%\LJCDataAccess.dll %to%
+copy %root%%src%\LJCDataAccess.dll %to%
+
+set src=LJCDBClientLib\LJCDBClientLib\%bin%
+copy %root%%src%\LJCDBClientLib.dll %to%
 
 set src=LJCDBMessage\CipherLib\%bin%
 rem copy %root%%src%\CipherLib.dll %to%

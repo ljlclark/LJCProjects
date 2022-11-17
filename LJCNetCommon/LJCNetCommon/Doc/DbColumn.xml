@@ -88,8 +88,6 @@
         var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
           , NetCommon.TypeDateTime);
         var dbColumnString = new DbColumn("TestString", "string");
-        
-        
       </code>
     </example>
   </SQLFormatValue>

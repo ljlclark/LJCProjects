@@ -113,7 +113,30 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Methods
+    #region Conversion Methods
+
+    // Creates combined DbColumns from DbColumns and DbValues.
+    /// <include path='items/LJCCreateColumns/*' file='Doc/DbValues.xml'/>
+    public DbColumns LJCCreateColumns(DbColumns dataDefinition)
+    {
+      DbColumn definitionColumn;
+      DbColumns retValue = null;
+
+      if (dataDefinition != null)
+      {
+        retValue = new DbColumns();
+        foreach (DbValue dbValue in this)
+        {
+          definitionColumn = dataDefinition.LJCSearchName(dbValue.PropertyName);
+          DbColumn dbColumn = dbValue.CreateColumn(definitionColumn);
+          retValue.Add(dbColumn);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Other Methods
 
     // Sets the IsChanged value to false for all elements in the collection.
     /// <include path='items/LJCClearChanged/*' file='Doc/DbValues.xml'/>
@@ -141,30 +164,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Conversions
-
-    // Creates combined DbColumns from DbColumns and DbValues.
-    /// <include path='items/LJCCreateColumns/*' file='Doc/DbValues.xml'/>
-    public DbColumns LJCCreateColumns(DbColumns dataDefinition)
-    {
-      DbColumn definitionColumn;
-      DbColumns retValue = null;
-
-      if (dataDefinition != null)
-      {
-        retValue = new DbColumns();
-        foreach (DbValue dbValue in this)
-        {
-          definitionColumn = dataDefinition.LJCSearchName(dbValue.PropertyName);
-          DbColumn dbColumn = dbValue.CreateColumn(definitionColumn);
-          retValue.Add(dbColumn);
-        }
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Public Search Methods
+    #region Search and Sort Methods
 
     // Finds and returns the object that matches the supplied values.
     /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -340,6 +340,13 @@ namespace LJCNetCommon
     public static string LJCDefaultFileName
     {
       get { return "DbValues.xml"; }
+    }
+
+    // The column for the specified name.
+    /// <include path='items/Item/*' file='Doc/DbValues.xml'/>
+    public DbValue this[string name]
+    {
+      get { return LJCSearchName(name); }
     }
     #endregion
 
