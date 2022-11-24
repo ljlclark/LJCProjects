@@ -301,7 +301,8 @@ namespace LJCDBDataAccess
       if (NetCommon.HasData(dataTable))
       {
         // Add TABLE_NAME if it is not already defined.
-        DbColumn dbColumn = dbRequest.Columns.LJCSearchName("TABLE_NAME");
+        // *** Next Statement *** Change - 11/24/22
+        var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
         if (null == dbColumn)
         {
           dbRequest.Columns.Add("TABLE_NAME");
@@ -373,7 +374,9 @@ namespace LJCDBDataAccess
       {
         foreach (DataColumn dataColumn in dataTable.Columns)
         {
-          DbColumn dbColumn = dbRequest.Columns.LJCSearchName(dataColumn.ColumnName);
+          // *** Next Statement *** Change - 11/24/22
+          var dbColumn
+            = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
           if (null == dbColumn)
           {
             DbColumn newDbColumn = CreateDbColumnFromDataColumn(dataColumn);

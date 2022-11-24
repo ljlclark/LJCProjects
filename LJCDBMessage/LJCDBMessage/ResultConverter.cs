@@ -160,7 +160,7 @@ namespace LJCDBMessage
         }
         else
         {
-          dbColumn = propertyMapping.LJCSearchName(columnName);
+          dbColumn = propertyMapping.LJCSearchColumnName(columnName);
           if (dbColumn != null)
           {
             retValue = dbColumn.PropertyName;

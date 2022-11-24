@@ -74,7 +74,7 @@ namespace LJCDBMessage
     }
     #endregion
 
-    #region Collection Methods
+    #region Data Methods
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -118,21 +118,7 @@ namespace LJCDBMessage
     }
     #endregion
 
-    #region Properties
-
-    /// <summary>Indicates if the missing column should be added.</summary>
-    public bool AddMissingColumns { get; set; }
-
-    /// <summary>The Database Assigned columns.</summary>
-    public DbColumns DbAssignedColumns { get; set; }
-
-    /// <summary>Gets or sets the ClientSql value.</summary>
-    public string ClientSql
-    {
-      get { return mClientSql; }
-      set { mClientSql = NetString.InitString(value); }
-    }
-    private string mClientSql;
+    #region Data Properties
 
     // The included table columns.
     /// <include path='items/Columns/*' file='Doc/DbRequest.xml'/>
@@ -155,18 +141,6 @@ namespace LJCDBMessage
     // The key column values.
     /// <include path='items/KeyColumns/*' file='Doc/DbRequest.xml'/>
     public DbColumns KeyColumns { get; set; }
-
-    /// <summary>The OrderBy column names.</summary>
-    public List<string> OrderByNames { get; set; }
-
-    /// <summary>The number of records in the page.</summary>
-    public int PageSize { get; set; }
-
-    /// <summary>Gets or sets the Parameters list reference.</summary>
-    public ProcedureParameters Parameters { get; set; }
-
-    /// <summary>The page starting index.</summary>
-    public int PageStartIndex { get; set; }
 
     /// <summary>Gets or sets the ProcedureName value.</summary>
     public string ProcedureName
@@ -200,6 +174,35 @@ namespace LJCDBMessage
       set { mTableName = NetString.InitString(value); }
     }
     private string mTableName;
+    #endregion
+
+    #region Other Properties
+
+    /// <summary>Indicates if the missing column should be added.</summary>
+    public bool AddMissingColumns { get; set; }
+
+    /// <summary>The Database Assigned columns.</summary>
+    public DbColumns DbAssignedColumns { get; set; }
+
+    /// <summary>Gets or sets the ClientSql value.</summary>
+    public string ClientSql
+    {
+      get { return mClientSql; }
+      set { mClientSql = NetString.InitString(value); }
+    }
+    private string mClientSql;
+
+    /// <summary>The OrderBy column names.</summary>
+    public List<string> OrderByNames { get; set; }
+
+    /// <summary>The number of records in the page.</summary>
+    public int PageSize { get; set; }
+
+    /// <summary>Gets or sets the Parameters list reference.</summary>
+    public ProcedureParameters Parameters { get; set; }
+
+    /// <summary>The page starting index.</summary>
+    public int PageStartIndex { get; set; }
     #endregion
   }
 

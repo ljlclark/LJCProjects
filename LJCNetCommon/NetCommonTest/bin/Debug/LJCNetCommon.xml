@@ -1231,18 +1231,6 @@
         <member name="P:LJCNetCommon.DbColumn.DataTypeName">
             <summary>Gets or sets the DataTypeName value.</summary>
         </member>
-        <member name="P:LJCNetCommon.DbColumn.DefaultValue">
-            <summary>Gets or sets the DefaultValue value.</summary>
-        </member>
-        <member name="P:LJCNetCommon.DbColumn.IsChanged">
-            <summary>Indicates that the value has changed.</summary>
-        </member>
-        <member name="P:LJCNetCommon.DbColumn.IsPrimaryKey">
-            <summary>Gets or sets the IsPrimaryKey value.</summary>
-        </member>
-        <member name="P:LJCNetCommon.DbColumn.KeyType">
-            <summary>Gets or sets the KeyType value.</summary>
-        </member>
         <member name="P:LJCNetCommon.DbColumn.MaxLength">
             <summary>Gets or sets the MaxLength value.</summary>
         </member>
@@ -1280,11 +1268,23 @@
         <member name="P:LJCNetCommon.DbColumn.SQLTypeName">
             <summary>Gets or sets the SQLTypeName value.</summary>
         </member>
-        <member name="P:LJCNetCommon.DbColumn.Unique">
-            <summary>Gets or sets the Unique value.</summary>
-        </member>
         <member name="P:LJCNetCommon.DbColumn.Value">
             <summary>Gets or sets the Value object.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbColumn.DefaultValue">
+            <summary>Gets or sets the DefaultValue value.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbColumn.IsChanged">
+            <summary>Indicates that the value has changed.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbColumn.IsPrimaryKey">
+            <summary>Gets or sets the IsPrimaryKey value.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbColumn.KeyType">
+            <summary>Gets or sets the KeyType value.</summary>
+        </member>
+        <member name="P:LJCNetCommon.DbColumn.Unique">
+            <summary>Gets or sets the Unique value.</summary>
         </member>
         <member name="P:LJCNetCommon.DbColumn.ID">
             <summary>
@@ -1447,8 +1447,7 @@
             <summary>
       Creates the
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      object from the supplied values and adds the element to the collection
-      list.
+      from the supplied values and adds to the collection.
       (R)
     </summary><param name="propertyName">The property name.</param><param name="caption">The caption value.</param><param name="renameAs">The rename value.</param><param name="dataTypeName">The data type name.</param><returns>
       The created
@@ -1491,7 +1490,7 @@
       Maps the column property and rename values.
     </summary><param name="columnName">The Column name.</param><param name="propertyName">The Property name.</param><param name="renameAs">The Rename value.</param><param name="caption">The Caption value.</param>
         </member>
-        <member name="M:LJCNetCommon.DbColumns.LJCSearchName(System.String)">
+        <member name="M:LJCNetCommon.DbColumns.LJCSearchColumnName(System.String)">
             <summary>
       Retrieve the collection element with name.
     </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
@@ -1521,20 +1520,20 @@
         <member name="M:LJCNetCommon.DbColumns.LJCGetBoolean(System.String)">
             <summary>
       Gets the column object value as a bool.
-    </summary><param name="name">The column name.</param><returns>The bool value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The bool value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCGetDbDateTime(System.String)">
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
-    </summary><param name="name">The column name.</param><returns>The DataTime value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The DataTime value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCGetDecimal(System.String)">
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;decimal&lt;/span&gt;
       value.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
     </returns>
         </member>
@@ -1542,7 +1541,7 @@
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;short&lt;/span&gt; int.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The
       &lt;span class="userType"&gt;short&lt;/span&gt;
       int value.
@@ -1552,7 +1551,7 @@
             <summary>
       Gets the column object value as an
       &lt;span class="userType"&gt;int&lt;/span&gt;.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;int&lt;/span&gt;
       value.
     </returns>
@@ -1561,7 +1560,7 @@
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;long&lt;/span&gt; int.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;long&lt;/span&gt;
       int value.
     </returns>
@@ -1574,12 +1573,12 @@
         <member name="M:LJCNetCommon.DbColumns.LJCGetValue(System.String)">
             <summary>
       Gets the string value for the column with the specified name.
-    </summary><param name="name">The column name.</param><returns>The column value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The column value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCSetValue(System.String,System.Object)">
             <summary>
       Sets the value for the column with the specified name.
-    </summary><param name="name">The column name.</param><param name="value">The column value.</param>
+    </summary><param name="propertyName">The property name.</param><param name="value">The column value.</param>
         </member>
         <member name="P:LJCNetCommon.DbColumns.LJCDefaultFileName">
             <summary>Gets the Default File Name.</summary>
@@ -1756,28 +1755,28 @@
       Gets a collection of changed columns.
     </summary><returns>The changed columns list.</returns>
         </member>
-        <member name="M:LJCNetCommon.DbValues.LJCSearchName(System.String)">
+        <member name="M:LJCNetCommon.DbValues.LJCSearchPropertyName(System.String)">
             <summary>
-      Retrieve the collection element with name.
-    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+      Finds and returns the object that matches the supplied values.
+    </summary><param name="propertyName">The property name.</param><returns>The found DbValue object.</returns>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCGetBoolean(System.String)">
             <summary>
       Gets the column object value as a bool.
-    </summary><param name="name">The column name.</param><returns>The bool value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The bool value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCGetDbDateTime(System.String)">
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
-    </summary><param name="name">The column name.</param><returns>The DataTime value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The DataTime value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCGetDecimal(System.String)">
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;decimal&lt;/span&gt;
       value.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
     </returns>
         </member>
@@ -1785,7 +1784,7 @@
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;short&lt;/span&gt; int.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The
       &lt;span class="userType"&gt;short&lt;/span&gt;
       int value.
@@ -1795,7 +1794,7 @@
             <summary>
       Gets the column object value as an
       &lt;span class="userType"&gt;int&lt;/span&gt;.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;int&lt;/span&gt;
       value.
     </returns>
@@ -1804,7 +1803,7 @@
             <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;long&lt;/span&gt; int.
-    </summary><param name="name">The column name.</param><returns>
+    </summary><param name="propertyName">The property name.</param><returns>
       The &lt;span class="userType"&gt;long&lt;/span&gt;
       int value.
     </returns>
@@ -1817,12 +1816,12 @@
         <member name="M:LJCNetCommon.DbValues.LJCGetValue(System.String)">
             <summary>
       Gets the string value for the column with the specified name.
-    </summary><param name="name">The column name.</param><returns>The column value.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The column value.</returns>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCSetValue(System.String,System.String)">
             <summary>
       Sets the object value for the column with the specified name.
-    </summary><param name="name">The column name.</param><param name="value">The string value.</param><returns>The column value.</returns>
+    </summary><param name="propertyName">The property name.</param><param name="value">The string value.</param><returns>The column value.</returns>
         </member>
         <member name="P:LJCNetCommon.DbValues.LJCDefaultFileName">
             <summary>Gets the Default File Name.</summary>
@@ -1830,7 +1829,7 @@
         <member name="P:LJCNetCommon.DbValues.Item(System.String)">
             <summary>
       The column for the specified property name.
-    </summary><param name="name">The property name.</param><returns>The selected DbValue object.</returns>
+    </summary><param name="propertyName">The property name.</param><returns>The selected DbValue object.</returns>
         </member>
         <member name="T:LJCNetCommon.KeyItem">
             <summary>Represents Key item values.</summary>
@@ -1857,6 +1856,11 @@
       Clones the structure of the object.
     </summary><returns>A new object with the same structure as the current object.</returns>
         </member>
+        <member name="M:LJCNetCommon.KeyItem.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
         <member name="M:LJCNetCommon.KeyItem.CompareTo(LJCNetCommon.KeyItem)">
             <summary>
       Provides the default Sort functionality.
@@ -1867,11 +1871,6 @@
       Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
       A postive integer  - This instance follows the compare-to object.
     </remarks>
-        </member>
-        <member name="M:LJCNetCommon.KeyItem.ToString">
-            <summary>
-      The object string identifier.
-    </summary><returns>The identifier value.</returns>
         </member>
         <member name="P:LJCNetCommon.KeyItem.DataConfigName">
             <summary>Gets or sets the DataConfig name.</summary>

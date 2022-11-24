@@ -10,9 +10,9 @@
   </Item1>
   <Item2>
     <summary>
-      The row value for the specified value column name.
+      The row value for the specified value property name.
     </summary>
-    <param name="columnName">The row value column name.</param>
+    <param name="propertyName">The row value property name.</param>
     <returns>The selected DbValue row value object.</returns>
   </Item2>
 </items>

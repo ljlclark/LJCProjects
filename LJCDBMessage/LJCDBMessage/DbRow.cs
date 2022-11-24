@@ -62,16 +62,16 @@ namespace LJCDBMessage
       }
     }
 
-    // The row value for the specified value column name.
+    // The row value for the specified value property name.
     /// <include path='items/Item2/*' file='Doc/DbRow.xml'/>
-    public DbValue this[string columnName]
+    public DbValue this[string propertyName]
     {
       get
       {
         DbValue retValue = null;
         if (null != Values)
         {
-          retValue = Values.LJCSearchName(columnName);
+          retValue = Values.LJCSearchPropertyName(propertyName);
         }
         return retValue;
       }
