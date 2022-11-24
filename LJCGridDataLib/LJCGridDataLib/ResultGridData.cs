@@ -91,7 +91,7 @@ namespace LJCGridDataLib
         {
           // Grid columns are named after the object property names.
           string propertyName = dbColumn.PropertyName;
-          DbValue dbValue = record.LJCSearchName(propertyName);
+          DbValue dbValue = record.LJCSearchPropertyName(propertyName);
           if (dbValue != null)
           {
             var value = NetCommon.GetString(dbValue.Value);
@@ -174,7 +174,7 @@ namespace LJCGridDataLib
         {
           if (IsIncluded(name, propertyNames))
           {
-            var displayColumn = DataDefinition.LJCSearchName(name);
+            var displayColumn = DataDefinition.LJCSearchPropertyName(name);
             if (displayColumn != null)
             {
               DisplayColumns.Add(displayColumn);

@@ -2,15 +2,43 @@ rem LJCCodeDoc.cmd
 set target=..\..\..\..\..\WebSitesDev\CodeDoc\LJCCodeDoc
 LJCDocGen.exe %target% LJCCodeDoc.xml
 
-set RunCommand=AfterGenRunOnce
-set RunPath=HTML\LJCNetCommon
+set RunCommand=AfterGenRunOnceDataAccess
+set RunPath=HTML\LJCDataAccess
 rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
 call %target%\%RunPath%\%RunCommand%.cmd
 cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug
 rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
 
-set RunCommand=AfterGenRunOnceFormCommon
-set RunPath=HTML\LJCWinFormCommon
+set RunCommand=AfterGenRunOnceDBClient
+set RunPath=HTML\LJCDBClientLib
+rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
+call %target%\%RunPath%\%RunCommand%.cmd
+cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug
+rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
+
+set RunCommand=AfterGenRunOnceDBDataAccess
+set RunPath=HTML\LJCDBDataAccess
+rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
+call %target%\%RunPath%\%RunCommand%.cmd
+cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug
+rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
+
+set RunCommand=AfterGenRunOnceDBMessage
+set RunPath=HTML\LJCDBMessage
+rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
+call %target%\%RunPath%\%RunCommand%.cmd
+cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug
+rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
+
+set RunCommand=AfterGenRunOnceDBService
+set RunPath=HTML\LJCDBServiceLib
+rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
+call %target%\%RunPath%\%RunCommand%.cmd
+cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug
+rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
+
+set RunCommand=AfterGenRunOnce
+set RunPath=HTML\LJCNetCommon
 rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
 call %target%\%RunPath%\%RunCommand%.cmd
 cd ..\..\..\..\..\LJCProjectsDev\LJCDocLib\LJCDocGen\bin\Debug

@@ -56,7 +56,7 @@ namespace TestDbDataAccess
       // Get the table data definition.
       DbColumns dataDefinition = SchemaOnly(dbDataAccess);
       dataDefinition.LJCSerialize("DbColumnsLayout.xml");
-      LJCNetCommon.DbColumn dbColumn = dataDefinition.LJCSearchName("Id");
+      var dbColumn = dataDefinition.LJCSearchPropertyName("Id");
       dbColumn.PropertyName = "ID";
 
       //Persons persons = Load(dbDataAccess, dataDefinition);

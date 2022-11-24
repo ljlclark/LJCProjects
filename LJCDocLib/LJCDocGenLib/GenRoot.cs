@@ -174,6 +174,7 @@ namespace LJCDocGenLib
           builder.AppendLine("  <link rel='stylesheet' type='text/css' href='CSS/CodeDoc.css' />");
           builder.AppendLine("</head>");
           builder.AppendLine("<body>");
+          builder.AppendLine("  <div class=\"page\">");
           builder.AppendLine("  <br />");
           builder.AppendLine("  <div id='Header'>");
           builder.AppendLine("    <div id='Title'>LJC Assemblies</div>");
@@ -224,6 +225,7 @@ namespace LJCDocGenLib
           builder.AppendLine("  <br />");
           builder.AppendLine("  <div class='SmallText'>R=Remark, D=Description, O=Object Pages, G=Object Graph, E=Example</div>");
           builder.AppendLine("  <br />");
+          builder.AppendLine("  </div>");
           builder.AppendLine("</body>");
           builder.AppendLine("</html>");
           break;

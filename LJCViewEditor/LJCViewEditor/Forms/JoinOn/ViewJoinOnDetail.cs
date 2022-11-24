@@ -103,14 +103,16 @@ namespace LJCViewEditor
 				ParentTextbox.Text = LJCParentName;
 
 				FromColumnCombo.Text = dataRecord.FromColumnName;
-				DbColumn dbColumn = mJoinTableColumns.LJCSearchName(dataRecord.FromColumnName);
+				var dbColumn
+					= mJoinTableColumns.LJCSearchPropertyName(dataRecord.FromColumnName);
 				if (dbColumn != null)
 				{
 					FromColumnCombo.SelectedItem = dbColumn;
 				}
 
 				ToColumnCombo.Text = dataRecord.ToColumnName;
-				dbColumn = mJoinOnTableColumns.LJCSearchName(dataRecord.ToColumnName);
+				dbColumn
+					= mJoinOnTableColumns.LJCSearchPropertyName(dataRecord.ToColumnName);
 				if (dbColumn != null)
 				{
 					ToColumnCombo.SelectedItem = dbColumn;

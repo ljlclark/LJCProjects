@@ -117,7 +117,7 @@ namespace LJCViewEditor
         retValue = new DbColumns();
         foreach (DbValue dbValue in dbValues)
         {
-          findColumn = dbColumns.LJCSearchName(dbValue.PropertyName);
+          findColumn = dbColumns.LJCSearchPropertyName(dbValue.PropertyName);
           DbColumn dbColumn = new DbColumn()
           {
             ColumnName = findColumn.ColumnName,

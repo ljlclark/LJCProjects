@@ -75,7 +75,8 @@ namespace LJCDBViewDAL
       foreach (DbColumn column in retValue)
       {
         // *** Begin *** Add - 9/11
-        var findColumn = recordColumns.LJCSearchName(column.PropertyName);
+        var findColumn
+          = recordColumns.LJCSearchPropertyName(column.PropertyName);
         if (findColumn != null)
         {
           column.MaxLength = findColumn.MaxLength;

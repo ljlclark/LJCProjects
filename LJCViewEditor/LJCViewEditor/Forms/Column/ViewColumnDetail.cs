@@ -113,7 +113,8 @@ namespace LJCViewEditor
 				// This is to allow on Edit but not TemplateCombo changed.
 				if (null == TemplateColumnCombo.SelectedItem)
 				{
-					DbColumn dbColumn = mTableColumns.LJCSearchName(dataRecord.ColumnName);
+					var dbColumn
+						= mTableColumns.LJCSearchPropertyName(dataRecord.PropertyName);
 					if (dbColumn != null)
 					{
 						mAllowTemplateGetValues = false;

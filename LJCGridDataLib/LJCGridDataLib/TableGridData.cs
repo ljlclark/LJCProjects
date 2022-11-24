@@ -271,7 +271,8 @@ namespace LJCGridDataLib
         DisplayColumns = new DbColumns();
         foreach (string propertyName in propertyNames)
         {
-          var displayColumn = DataDefinition.LJCSearchName(propertyName);
+          var displayColumn
+            = DataDefinition.LJCSearchPropertyName(propertyName);
           if (displayColumn != null)
           {
             DisplayColumns.Add(displayColumn);
