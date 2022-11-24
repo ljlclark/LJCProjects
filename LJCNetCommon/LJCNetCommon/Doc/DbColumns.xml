@@ -75,8 +75,7 @@
     <summary>
       Creates the
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      object from the supplied values and adds the element to the collection
-      list.
+      from the supplied values and adds to the collection.
       (R)
     </summary>
     <param name="propertyName">The property name.</param>
@@ -176,7 +175,7 @@
     <summary>
       Gets the column object value as a bool.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>The bool value.</returns>
   </LJCGetBoolean>
   <LJCGetDbDateTime>
@@ -184,7 +183,7 @@
       Gets the column object value as a
       &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>The DataTime value.</returns>
   </LJCGetDbDateTime>
   <LJCGetDecimal>
@@ -193,7 +192,7 @@
       &lt;span class="userType"&gt;decimal&lt;/span&gt;
       value.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>
       The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
     </returns>
@@ -203,7 +202,7 @@
       Gets the column object value as a
       &lt;span class="userType"&gt;short&lt;/span&gt; int.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>
       The
       &lt;span class="userType"&gt;short&lt;/span&gt;
@@ -215,7 +214,7 @@
       Gets the column object value as an
       &lt;span class="userType"&gt;int&lt;/span&gt;.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>
       The &lt;span class="userType"&gt;int&lt;/span&gt;
       value.
@@ -226,7 +225,7 @@
       Gets the column object value as a
       &lt;span class="userType"&gt;long&lt;/span&gt; int.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>
       The &lt;span class="userType"&gt;long&lt;/span&gt;
       int value.
@@ -242,14 +241,14 @@
     <summary>
       Gets the string value for the column with the specified name.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>The column value.</returns>
   </LJCGetValue>
   <LJCSetValue>
     <summary>
       Sets the value for the column with the specified name.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <param name="value">The column value.</param>
   </LJCSetValue>
 

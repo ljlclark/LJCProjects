@@ -38,7 +38,7 @@
     </returns>
   </LJCCreateColumns>
 
-  <!-- Public Search Methods -->
+  <!-- Other Methods -->
   <LJCClearChanged>
     <summary>
       Sets the IsChanged value to false for all elements in the collection.
@@ -50,11 +50,22 @@
     </summary>
     <returns>The changed columns list.</returns>
   </LJCGetChanged>
+ 
+  <!-- Search and Sort Methods -->
+  <LJCSearchPropertyName>
+    <summary>
+      Finds and returns the object that matches the supplied values.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The found DbValue object.</returns>
+  </LJCSearchPropertyName>
+  
+  <!-- Value Methods -->
   <LJCSetValue>
     <summary>
       Sets the object value for the column with the specified name.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <param name="value">The string value.</param>
     <returns>The column value.</returns>
   </LJCSetValue>
@@ -64,7 +75,7 @@
     <summary>
       The column for the specified property name.
     </summary>
-    <param name="name">The property name.</param>
+    <param name="propertyName">The property name.</param>
     <returns>The selected DbValue object.</returns>
   </Item>
 </items>

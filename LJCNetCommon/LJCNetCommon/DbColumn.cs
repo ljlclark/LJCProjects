@@ -247,29 +247,10 @@ namespace LJCNetCommon
     }
     private string mDataTypeName;
 
-    /// <summary>Gets or sets the DefaultValue value.</summary>
-    public string DefaultValue
-    {
-      get { return mDefaultValue; }
-      set { mDefaultValue = NetString.InitString(value); }
-    }
-    private string mDefaultValue;
-
-    /// <summary>Indicates that the value has changed.</summary>
-    [XmlIgnore()]
-    public bool IsChanged { get; set; }
-
-    /// <summary>Gets or sets the IsPrimaryKey value.</summary>
-    public bool IsPrimaryKey { get; set; }
-
-    /// <summary>Gets or sets the KeyType value.</summary>
-    // "Natural", "Natural*", "Foreign"
-    public string KeyType { get; set; }
-
     /// <summary>Gets or sets the MaxLength value.</summary>
     public int MaxLength { get; set; }
 
-    // Gets or sets the Position value. (R)
+    // Gets or sets the Fixed Length Field Position value. (R)
     /// <include path='items/Position/*' file='Doc/DbColumn.xml'/>
     public int Position { get; set; }
 
@@ -306,9 +287,6 @@ namespace LJCNetCommon
     }
     private string mSQLTypeName;
 
-    /// <summary>Gets or sets the Unique value.</summary>
-    public bool Unique { get; set; }
-
     /// <summary>Gets or sets the Value object.</summary>
     public object Value
     {
@@ -323,6 +301,31 @@ namespace LJCNetCommon
       }
     }
     private object mValue;
+    #endregion
+
+    #region Additional Properties
+
+    /// <summary>Gets or sets the DefaultValue value.</summary>
+    public string DefaultValue
+    {
+      get { return mDefaultValue; }
+      set { mDefaultValue = NetString.InitString(value); }
+    }
+    private string mDefaultValue;
+
+    /// <summary>Indicates that the value has changed.</summary>
+    [XmlIgnore()]
+    public bool IsChanged { get; set; }
+
+    /// <summary>Gets or sets the IsPrimaryKey value.</summary>
+    public bool IsPrimaryKey { get; set; }
+
+    /// <summary>Gets or sets the KeyType value.</summary>
+    // "Natural", "Natural*", "Foreign"
+    public string KeyType { get; set; }
+
+    /// <summary>Gets or sets the Unique value.</summary>
+    public bool Unique { get; set; }
     #endregion
 
     #region Calculated and Join Data Properties

@@ -801,13 +801,13 @@
     <summary>
       Sets the database assigned value columns.
     </summary>
-    <param name="columnNames">The column names.</param>
+    <param name="propertyNames">The property names.</param>
   </SetDbAssignedColumns>
   <SetLookupColumns>
     <summary>
       Adds the lookup column names.
     </summary>
-    <param name="columnNames">The column names.</param>
+    <param name="propertyNames">The property names.</param>
   </SetLookupColumns>
   
   <!-- Request -->

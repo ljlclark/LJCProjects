@@ -641,7 +641,8 @@ namespace DataDetail
             foreach (ControlRow controlRow in controlColumn.ControlRows)
             {
               int rowIndex = controlRow.RowIndex;
-              dataColumn = LJCDataColumns.LJCSearchName(controlRow.DataValueName);
+              dataColumn
+                = LJCDataColumns.LJCSearchPropertyName(controlRow.DataValueName);
 
               ControlRow(controlColumn, dataColumn, controlColumn.LabelsWidth
                 , tabPageIndex, columnIndex, rowIndex, ref tabIndex);
@@ -789,7 +790,7 @@ namespace DataDetail
     {
       Control retValue;
 
-      var dataColumn = LJCDataColumns.LJCSearchName(propertyName);
+      var dataColumn = LJCDataColumns.LJCSearchPropertyName(propertyName);
       string controlRowType = mDataDetailCode.ControlRowType(dataColumn
         , LJCKeyItems);
       string suffix;

@@ -82,7 +82,7 @@ namespace CVRManager
 				foreach (LJCGridRow row in mCVPersonGrid.Rows)
 				{
 					rowID = row.LJCGetInt64(CVPerson.ColumnID);
-					DbColumn keyColumn = keyColumns.LJCSearchName(CVPerson.ColumnID);
+					var keyColumn = keyColumns.LJCSearchPropertyName(CVPerson.ColumnID);
 					if (rowID == (long)keyColumn.Value)
 					{
 						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.

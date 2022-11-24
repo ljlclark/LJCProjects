@@ -47,6 +47,16 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public override string ToString()
+    {
+      return Description;
+    }
+    #endregion
+
+    #region Search and Sort Methods
+
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
     public int CompareTo(KeyItem other)
@@ -64,13 +74,6 @@ namespace LJCNetCommon
         retValue = string.Compare(PropertyName, other.PropertyName, true);
       }
       return retValue;
-    }
-
-    // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public override string ToString()
-    {
-      return Description;
     }
     #endregion
 

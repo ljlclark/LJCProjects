@@ -56,7 +56,7 @@ namespace DataDetail
 
 			// Create the Display Columns.
 			DbColumns displayColumns = dbResult.Columns.Clone();
-			DbColumn idColumn = displayColumns.LJCSearchName("ID");
+			var idColumn = displayColumns.LJCSearchPropertyName("ID");
 			displayColumns.Remove(idColumn);
 
 			// Configure the grid.

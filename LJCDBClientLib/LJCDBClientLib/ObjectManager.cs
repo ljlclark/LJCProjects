@@ -198,16 +198,16 @@ namespace LJCDBClientLib
 
     // Sets the database assigned value column names.
     /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
-    public void SetDbAssignedColumns(string[] columnNames)
+    public void SetDbAssignedColumns(string[] propertyNames)
     {
-      DataManager.SetDbAssignedColumns(columnNames);
+      DataManager.SetDbAssignedColumns(propertyNames);
     }
 
     // Adds the lookup column names.
     /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
-    public void SetLookupColumns(string[] columnNames)
+    public void SetLookupColumns(string[] propertyNames)
     {
-      DataManager.SetLookupColumns(columnNames);
+      DataManager.SetLookupColumns(propertyNames);
     }
     #endregion
 

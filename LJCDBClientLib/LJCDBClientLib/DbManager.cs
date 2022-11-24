@@ -139,14 +139,14 @@ namespace LJCDBClientLib
 
     // Adds the lookup column names.
     /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
-    public void SetLookupColumns(string[] columnNames)
+    public void SetLookupColumns(string[] propertyNames)
     {
-      foreach (string columnName in columnNames)
+      foreach (string propertyName in propertyNames)
       {
-        string existingName = LookupColumnNames.Find(x => x == columnName);
+        string existingName = LookupColumnNames.Find(x => x == propertyName);
         if (null == existingName)
         {
-          LookupColumnNames.Add(columnName);
+          LookupColumnNames.Add(propertyName);
         }
       }
     }

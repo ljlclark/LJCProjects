@@ -127,7 +127,7 @@ namespace LJCNetCommon
         retValue = new DbColumns();
         foreach (DbValue dbValue in this)
         {
-          definitionColumn = dataDefinition.LJCSearchName(dbValue.PropertyName);
+          definitionColumn = dataDefinition.LJCSearchColumnName(dbValue.PropertyName);
           DbColumn dbColumn = dbValue.CreateColumn(definitionColumn);
           retValue.Add(dbColumn);
         }
@@ -167,8 +167,8 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Finds and returns the object that matches the supplied values.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DbValue LJCSearchName(string name)
+    /// <include path='items/LJCSearchPropertyName/*' file='Doc/DbValues.xml'/>
+    public DbValue LJCSearchPropertyName(string propertyName)
     {
       DbValue retValue = null;
 
@@ -180,7 +180,7 @@ namespace LJCNetCommon
 
       DbValue searchDbColumn = new DbValue()
       {
-        PropertyName = name
+        PropertyName = propertyName
       };
       int index = BinarySearch(searchDbColumn);
       if (index > -1)
@@ -195,12 +195,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as a bool.
     /// <include path='items/LJCGetBoolean/*' file='Doc/DbColumns.xml'/>
-    public bool LJCGetBoolean(string name)
+    public bool LJCGetBoolean(string propertyName)
     {
       string value;
       bool retValue = false;
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         try
@@ -217,12 +217,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as a DateTime.
     /// <include path='items/LJCGetDbDateTime/*' file='Doc/DbColumns.xml'/>
-    public DateTime LJCGetDbDateTime(string name)
+    public DateTime LJCGetDbDateTime(string propertyName)
     {
       string value;
       DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = DateTime.Parse(value);
@@ -232,12 +232,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as a decimal value.
     /// <include path='items/LJCGetDecimal/*' file='Doc/DbColumns.xml'/>
-    public decimal LJCGetDecimal(string name)
+    public decimal LJCGetDecimal(string propertyName)
     {
       string value;
       decimal retValue = 0;
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDecimal(value);
@@ -247,12 +247,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as a short int.
     /// <include path='items/LJCGetInt16/*' file='Doc/DbColumns.xml'/>
-    public short LJCGetInt16(string name)
+    public short LJCGetInt16(string propertyName)
     {
       string value;
       short retValue = 0;
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt16(value);
@@ -262,12 +262,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as an int.
     /// <include path='items/LJCGetInt32/*' file='Doc/DbColumns.xml'/>
-    public int LJCGetInt32(string name)
+    public int LJCGetInt32(string propertyName)
     {
       string value;
       int retValue = 0;
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt32(value);
@@ -277,12 +277,12 @@ namespace LJCNetCommon
 
     // Gets the column object value as a long int.
     /// <include path='items/LJCGetInt64/*' file='Doc/DbColumns.xml'/>
-    public long LJCGetInt64(string name)
+    public long LJCGetInt64(string propertyName)
     {
       string value;
       long retValue = 0;
 
-      value = LJCGetValue(name);
+      value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt64(value);
@@ -299,14 +299,14 @@ namespace LJCNetCommon
 
     // Gets the string value for the column with the specified name.
     /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
-    public string LJCGetValue(string name)
+    public string LJCGetValue(string propertyName)
     {
       DbValue dbValue;
       string retValue = null;
 
-      if (NetString.HasValue(name))
+      if (NetString.HasValue(propertyName))
       {
-        dbValue = LJCSearchName(name);
+        dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null
           && dbValue.Value != null
           && NetString.HasValue(dbValue.Value.ToString()))
@@ -319,13 +319,13 @@ namespace LJCNetCommon
 
     // Sets the object value for the column with the specified name.
     /// <include path='items/LJCSetValue/*' file='Doc/DbValues.xml'/>
-    public void LJCSetValue(string name, string value)
+    public void LJCSetValue(string propertyName, string value)
     {
       DbValue dbValue;
 
-      if (NetString.HasValue(name))
+      if (NetString.HasValue(propertyName))
       {
-        dbValue = LJCSearchName(name);
+        dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null)
         {
           dbValue.Value = value;
@@ -344,9 +344,9 @@ namespace LJCNetCommon
 
     // The column for the specified name.
     /// <include path='items/Item/*' file='Doc/DbValues.xml'/>
-    public DbValue this[string name]
+    public DbValue this[string propertyName]
     {
-      get { return LJCSearchName(name); }
+      get { return LJCSearchPropertyName(propertyName); }
     }
     #endregion
 
