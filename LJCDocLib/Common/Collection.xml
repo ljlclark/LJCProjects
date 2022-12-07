@@ -22,6 +22,9 @@
     </summary>
     <param name="collectionObject">The collection object.</param>
     <returns>True if there are items, otherwise false.</returns>
+    <remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
   </HasItems1>
   <LJCDeserialize>
     <summary>

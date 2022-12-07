@@ -546,7 +546,11 @@ namespace LJCDocGenLib
           {
             if (false == getTypesOnly)
             {
-              AddUserTypeSpan(ref tokens[tokenIndex]);
+              // *** Next Statement *** Add - 11/29/22
+              if (tokenIndex < tokens.Length - 1)
+              {
+                AddUserTypeSpan(ref tokens[tokenIndex]);
+              }
             }
 
             // Don't process any more tokens as user type.

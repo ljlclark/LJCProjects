@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- MethodTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>RetrieveClientSql</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../../CodeDoc.html#LJCDBDataAccessLib">Assembly List</a>
+    / <a href="../LJCDBDataAccessLib.html">LJCDBDataAccessLib</a>
+    / <a href="../DbDataAccess.html">DbDataAccess</a>
+    / RetrieveClientSql
+  </div>
+  <br />
+  <div id='Title'>Namespace - LJCDBDataAccessLib</div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>Method RetrieveClientSql</div>
+  </div>
+  <br />
+  <div class='Text'>Returns</div>
+  <br />
+  <div class='Text'>The result XML message.</div>
+  <br />
+  <div class='Text'>Syntax</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            private DbResult RetrieveClientSql()
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <div class='Text'>
+      Executes a "Retrieve" client SQL statement.
+      (E)
+    </div>
+  <br />
+  <div class='Text'>Remarks</div>
+  <br />
+  <div class='Text'>
+        This method is called from the
+        <span class="userType">Execute()</span>
+        method if the DbRequest.QueryType is "RetrieveSql".
+      </div>
+  <br />
+  <div class='Text'>Example</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            <pre style='margin-left: 2px;'><span class='comment'>// Selects a record with an SQL statement.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='userType'>Person</span> RetrieveClientSql(<span class='userType'>DbDataAccess</span> dbDataAccess
+  , <span class='userType'>DbColumns</span> dataDefinition)
+{
+  <span class='userType'>Person</span> retValue = <span class='keyWord'>null</span>;
+
+  StringBuilder builder = <span class='keyWord'>new</span> <span class='userType'>StringBuilder</span>(64);
+  builder.AppendLine("select * from PersonTest");
+  builder.AppendLine("where Name = 'TestName'");
+  <span class='commonType'>string</span> sql = builder.ToString();
+
+  <span class='userType'>DbColumns</span> dataColumns = <span class='keyWord'>null</span>;
+  <span class='commonType'>bool</span> isColumnModifications = <span class='keyWord'>true</span>;
+  <span class='keyWord'>if</span> (isColumnModifications)
+  {
+    <span class='comment'>// Create the list of included columns.</span>
+    <span class='comment'>// This list should include the database assigned columns.</span>
+    List&lt;string&gt; columnNames = <span class='keyWord'>new</span> <span class='userType'>List</span>&lt;string&gt;();
+    <span class='keyWord'>foreach</span> (DbColumn column <span class='keyWord'>in</span> dataDefinition)
+    {
+      columnNames.Add(column.ColumnName);
+    }
+
+    <span class='comment'>// Create a Data Columns object with the included data definitions</span>
+    <span class='comment'>// and values from the data record.</span>
+    dataColumns = DbCommon.QueryColumns(columnNames, dataDefinition);
+  }
+    
+  DbRequest dbRequest = <span class='keyWord'>new</span> <span class='userType'>DbRequest</span>()
+  {
+    ClientSql = sql
+    Columns = dataColumns,
+    QueryType = QueryType.RetrieveSQL.ToString(),
+    TableName = "PersonTest",
+  };
+  <span class='userType'>DbResult</span> dbResult = dbDataAccess.Execute(dbRequest);
+    
+  <span class='keyWord'>if</span> (dbResult != null)
+  {
+    <span class='commonType'>string</span> sqlStatement = dbResult.ExecutedSql;
+    <span class='keyWord'>if</span> (dbResult.DbRecords != <span class='keyWord'>null</span> && dbResult.DbRecords.Count &gt; 0)
+    {
+      retValue = <span class='keyWord'>new</span> <span class='userType'>Person</span>();
+      DbCommon.SetObjectValues(dbResult.DbRecords[0], retValue);
+    }
+  }
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+</body>
+</html>

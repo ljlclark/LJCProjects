@@ -1,6 +1,6 @@
-echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
 rem UpdateLinks.cmd
-set root=..\..\..\LJCProjects
+
+set root=..\..\..\LJCProjectsDev
 
 rem ---------------
 set src=\GenealogyManager\GenealogyManager\LinkPages
@@ -60,8 +60,8 @@ set src=\LJCDBMessage\LJCDBMessage
 copy %root%%src%\DbMessageGraph.jpg %to%
 
 rem ---------------
-set src=\LJCDBServiceLib\LJCDBDataAccessLib\Diagrams
-set to=HTML\LJCDBDataAccessLib
+set src=\LJCDBDataAccess\LJCDBDataAccess\Diagrams
+set to=HTML\LJCDBDataAccess
 copy %root%%src%\DbAccessConfig.html %to%
 copy %root%%src%\DbAccessConfig.jpg %to%
 copy %root%%src%\DbAccessData.html %to%

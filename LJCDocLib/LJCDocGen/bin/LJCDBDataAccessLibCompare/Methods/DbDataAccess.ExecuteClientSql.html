@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- MethodTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>ExecuteClientSql</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../../CodeDoc.html#LJCDBDataAccessLib">Assembly List</a>
+    / <a href="../LJCDBDataAccessLib.html">LJCDBDataAccessLib</a>
+    / <a href="../DbDataAccess.html">DbDataAccess</a>
+    / ExecuteClientSql
+  </div>
+  <br />
+  <div id='Title'>Namespace - LJCDBDataAccessLib</div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>Method ExecuteClientSql</div>
+  </div>
+  <br />
+  <div class='Text'>Returns</div>
+  <br />
+  <div class='Text'>The result XML message.</div>
+  <br />
+  <div class='Text'>Syntax</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            private DbResult ExecuteClientSql()
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <div class='Text'>
+      Executes a "Non-Query" client SQL statement.
+      (E)
+    </div>
+  <br />
+  <div class='Text'>Remarks</div>
+  <br />
+  <div class='Text'>
+        This method is called from the
+        <span class="userType">Execute()</span>
+        method if the DbRequest.QueryType is "ExecuteSql".
+      </div>
+  <br />
+  <div class='Text'>Example</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            <pre style='margin-left: 2px;'><span class='comment'>// Execute a non-query SQL statement.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> ExecuteClientSql(<span class='userType'>DbDataAccess</span> dbDataAccess
+  , <span class='userType'>DbColumns</span> dataDefinition)
+{
+  StringBuilder builder = <span class='keyWord'>new</span> <span class='userType'>StringBuilder</span>(64);
+  builder.AppendLine("update PersonTest");
+  builder.AppendLine("set Name = 'TestNameUpdated'");
+  builder.AppendLine("where Name = 'TestName'");
+  <span class='commonType'>string</span> sql = builder.ToString();
+
+  DbRequest dbRequest = <span class='keyWord'>new</span> <span class='userType'>DbRequest</span>()
+  {
+    ClientSql = sql
+    QueryType = QueryType.ExecuteSql.ToString()",
+    TableName = "PersonTest",
+  };
+  <span class='userType'>DbResult</span> dbResult = dbDataAccess.Execute(dbRequest);
+    
+  <span class='keyWord'>if</span> (dbResult != null)
+  {
+    <span class='commonType'>string</span> sqlStatement = dbResult.ExecutedSql;
+    <span class='commonType'>int</span> affectedCount = dbResult.AffectedRecords;
+  }
+}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+</body>
+</html>
