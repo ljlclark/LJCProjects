@@ -81,6 +81,20 @@ namespace LJCNetCommon
             }
             break;
 
+          case TypeByte:
+            if (GetByte(oldValue) == GetByte(newValue))
+            {
+              retValue = true;
+            }
+            break;
+
+          case TypeChar:
+            if (GetChar(oldValue) == GetChar(newValue))
+            {
+              retValue = true;
+            }
+            break;
+
           case TypeDateTime:
             if (GetDateTime(oldValue) == GetDateTime(newValue))
             {
@@ -502,12 +516,42 @@ namespace LJCNetCommon
     public static bool GetBoolean(object value)
     {
       Type type;
-      bool retVal = false;
+      bool retVal = default;
 
       type = value.GetType();
       if (typeof(bool) == type)
       {
         retVal = Convert.ToBoolean(value);
+      }
+      return retVal;
+    }
+
+    // Gets a byte value from an object. (E)
+    /// <include path='items/GetByte/*' file='Doc/NetCommon.xml'/>
+    public static byte GetByte(object value)
+    {
+      Type type;
+      byte retVal = default;
+
+      type = value.GetType();
+      if (typeof(byte) == type)
+      {
+        retVal = Convert.ToByte(value);
+      }
+      return retVal;
+    }
+
+    // Gets a character value from an object. (E)
+    /// <include path='items/GetChar/*' file='Doc/NetCommon.xml'/>
+    public static char GetChar(object value)
+    {
+      Type type;
+      char retVal = default;
+
+      type = value.GetType();
+      if (typeof(char) == type)
+      {
+        retVal = Convert.ToChar(value);
       }
       return retVal;
     }
@@ -532,7 +576,7 @@ namespace LJCNetCommon
     public static decimal GetDecimal(object value)
     {
       Type type;
-      decimal retVal = 0;
+      decimal retVal = default;
 
       type = value.GetType();
       if (typeof(decimal) == type
@@ -550,7 +594,7 @@ namespace LJCNetCommon
     public static double GetDouble(object value)
     {
       Type type;
-      double retVal = 0;
+      double retVal = default;
 
       type = value.GetType();
       if ( typeof(double) == type
@@ -569,7 +613,7 @@ namespace LJCNetCommon
     public static short GetInt16(object value)
     {
       Type type;
-      short retVal = 0;
+      short retVal = default;
 
       type = value.GetType();
       if (typeof(short) == type)
@@ -584,7 +628,7 @@ namespace LJCNetCommon
     public static int GetInt32(object value)
     {
       Type type;
-      int retVal = 0;
+      int retVal = default;
 
       type = value.GetType();
       if (typeof(int) == type
@@ -600,7 +644,7 @@ namespace LJCNetCommon
     public static long GetInt64(object value)
     {
       Type type;
-      long retVal = 0;
+      long retVal = default;
 
       type = value.GetType();
       if (typeof(long) == type
@@ -626,6 +670,14 @@ namespace LJCNetCommon
         {
           case TypeBoolean:
             retValue = GetBoolean(value);
+            break;
+
+          case TypeByte:
+            retValue = GetByte(value);
+            break;
+
+          case TypeChar:
+            retValue = GetChar(value);
             break;
 
           case TypeDateTime:
@@ -664,12 +716,12 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a long value from an object. (E)
+    // Gets a float value from an object. (E)
     /// <include path='items/GetSingle/*' file='Doc/NetCommon.xml'/>
     public static float GetSingle(object value)
     {
       Type type;
-      float retVal = 0;
+      float retVal = default;
 
       type = value.GetType();
       if ( typeof(Single) == type
@@ -686,7 +738,7 @@ namespace LJCNetCommon
     /// <include path='items/GetString/*' file='Doc/NetCommon.xml'/>
     public static string GetString(object value)
     {
-      string retVal = null;
+      string retVal = default;
 
       if (value != null
         && false == string.IsNullOrWhiteSpace(value.ToString()))
@@ -757,6 +809,12 @@ namespace LJCNetCommon
 
     /// <summary>The Boolean type name.</summary>
     public const string TypeBoolean = "Boolean";
+
+    /// <summary>The Byte type name.</summary>
+    public const string TypeByte = "Byte";
+
+    /// <summary>The Char type name.</summary>
+    public const string TypeChar = "Char";
 
     /// <summary>The DateTime type name.</summary>
     public const string TypeDateTime = "DateTime";

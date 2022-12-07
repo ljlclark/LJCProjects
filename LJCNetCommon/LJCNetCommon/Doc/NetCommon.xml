@@ -81,7 +81,7 @@
               if (-2 == retValue)
               {
                 // Case sensitive.
-                //retValue = x.Name_.CompareTo(y.Name);
+                //retValue = x.Name.CompareTo(y.Name);
 
                 // Not case sensitive.
                 retValue = string.Compare(x.Name, y.Name, true);
@@ -99,6 +99,9 @@
     </summary>
     <param name="dataTable">The data table object.</param>
     <returns>True if the data table contains any rows.</returns>
+    <remarks>
+      This allows a single if statement where the DataTable value may be null.
+    </remarks>
     <example>
       <code>
         using System.Data;
@@ -121,6 +124,10 @@
     <param name="oldValue"> The previous value.</param>
     <param name="newValue"> The new value.</param>
     <returns>True if equal, otherwise false.</returns>
+    <remarks>
+      Performs a strongly-typed value check of two objects where those
+      objects are built-in system types.
+    </remarks>
   </IsEqual>
   
   <!-- Text Transform Functions -->
@@ -530,6 +537,26 @@
       Also returns false if the object is not type "bool".
     </returns>
   </GetBoolean>
+  <GetByte>
+    <summary>
+      Gets a byte value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The byte value or the byte default if the object is null.
+      Also returns false if the object is not type "byte".
+    </returns>
+  </GetByte>
+  <GetChar>
+    <summary>
+      Gets a byte value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The char value or the char default if the object is null.
+      Also returns false if the object is not type "char".
+    </returns>
+  </GetChar>
   <GetDateTime>
     <summary>
       Gets a DateTime value from an object.
@@ -537,7 +564,7 @@
     <param name="value">The value object.</param>
     <returns>
       The DateTime value or null if the object is null.
-      Also returns null if the object is not type "bool".
+      Also returns null if the object is not type "DateTime".
     </returns>
   </GetDateTime>
   <GetDecimal>
@@ -665,7 +692,7 @@
   </GetObject>
   <GetSingle>
     <summary>
-      Gets a single value from an object.
+      Gets a float value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>

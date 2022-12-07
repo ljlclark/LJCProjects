@@ -59,18 +59,19 @@
       </para>
       <code>
         using LJCDataAccessConfig;
-        using LJCDataGridLib;
         using LJCDBClientLib;
-        using LJCDBMessage;
+        using LJCDBDataAccess;
 
         // Test DataGrid.
-        private static void TestDataGrid()
+        private void TestDataGrid()
         {
-          DataAccess dataAccess;
           string connectionString;
           string providerName;
 
           // Create Data Configuration values.
+          var databaseName = "DatabaseName";
+          var tableName = "TableName";
+      
           bool useInternal = false;
           if (useInternal)
           {
@@ -80,7 +81,7 @@
             connectionBuilder = new DbConnectionStringBuilder()
             {
               { "Data Source", "DataServiceName" },
-              { "Initial Catalog", "databaseName" },
+              { "Initial Catalog", databaseName },
               { "Integrated Security", "True" }
             };
             connectionString = connectionBuilder.ConnectionString;
@@ -99,16 +100,17 @@
           // Create DataManager.
           var dbServiceRef = new DbServiceRef()
           {
-            DbDataAccess = new DbDataAccess(connectionString
-              , providerName, databaseName)
+            DbDataAccess = new DbDataAccess(databaseName
+              , connectionString, providerName)
           };
-          var dataManager = new DataManager(dbServiceRef, null, "TableName");
+          var dataManager = new DataManager(dbServiceRef, null, tableName);
 
           // Method Tests.
+          SetDisplayColumns(dataManager);
           SetDisplayColumns1(dataManager);
-          SetDisplayColumns2(dataManager);
+          SetDisplayColumns2();
+          LoadRows(dataManager);
           LoadRows1(dataManager);
-          LoadRows2(dataManager);
         }
       </code>
     </example>

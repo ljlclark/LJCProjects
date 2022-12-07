@@ -13,5 +13,9 @@ set ClearBuild=ClearBuildDetail.cmd
 :Clear
 set Project=LJCGridDataLib
 set File=LJCGridDataLib
-%ClearBuild%
+call %ClearBuild%
 del %Solution%\%Project%\%bin%\ControlValues /y
+
+set Project=GridDataTest
+set File=GridDataTest
+call %ClearBuild%

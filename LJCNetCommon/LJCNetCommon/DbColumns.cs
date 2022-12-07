@@ -93,6 +93,34 @@ namespace LJCNetCommon
         as DbColumns;
       return retValue;
     }
+
+    // Creates a ColumnNames list from a DataObject.
+    /// <summary>
+    /// Creates a ColumnNames list from a DataObject.
+    /// </summary>
+    /// <param name="dataObject"></param>
+    /// <returns></returns>
+    public static List<string> LJCGetColumnNames(object dataObject)
+    {
+      List<string> retValue = null;
+
+      LJCReflect reflect = new LJCReflect(dataObject);
+      List<string> propertyNames = reflect.GetPropertyNames();
+
+      if (propertyNames != null)
+      {
+        retValue = new List<string>();
+        foreach (string propertyName in propertyNames)
+        {
+          if ("ChangedNames" == propertyName)
+          {
+            continue;
+          }
+          retValue.Add(propertyName);
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Static Conversion Functions

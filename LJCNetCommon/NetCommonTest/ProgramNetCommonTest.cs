@@ -35,6 +35,9 @@ internal class ProgramNetCommonTest
     StringToMemStream();
 
     // Object Data Functions
+    GetBoolean();
+    GetByte();
+    GetChar();
     GetDecimal();
     GetInt16();
     GetInt32();
@@ -369,6 +372,39 @@ internal class ProgramNetCommonTest
   #endregion
 
   #region Object Data Functions
+
+  // Gets a bool value from an object.
+  private static void GetBoolean()
+  {
+    // Simulates an Object value like that received from a DataTable.
+    bool setup = true;
+    object obj = setup;
+
+    // Gets a short value from an object.
+    bool value = NetCommon.GetBoolean(obj);
+  }
+
+  // Gets a byte value from an object.
+  private static void GetByte()
+  {
+    // Simulates an Object value like that received from a DataTable.
+    byte setup = Convert.ToByte('A');
+    object obj = setup;
+
+    // Gets a byte value from an object.
+    byte value = NetCommon.GetByte(obj);
+  }
+
+  // Gets a char value from an object.
+  private static void GetChar()
+  {
+    // Simulates an Object value like that received from a DataTable.
+    char setup = Convert.ToChar('A');
+    object obj = setup;
+
+    // Gets a byte value from an object.
+    char value = NetCommon.GetChar(obj);
+  }
 
   // Gets a decimal value from an object.
   private static void GetDecimal()

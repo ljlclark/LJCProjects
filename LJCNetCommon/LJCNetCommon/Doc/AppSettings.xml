@@ -45,6 +45,9 @@
     <param name="keyName">The setting key name.</param>
     <param name="defaultColor">The default color.</param>
     <returns>The Color setting value.</returns>
+    <remarks>
+      Returns the default color if the config file key is not found.
+    </remarks>
     <example>
       <code>
         // App.Config file.
@@ -119,7 +122,6 @@
         //   &lt;/appSettings&gt;
         // &lt;/configuration&gt;
 
-        using System.Drawing;
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");

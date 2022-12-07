@@ -7,7 +7,8 @@ using System.Data;
 
 namespace LJCGridDataLib
 {
-  /// <summary>Provides DataTable helpers for an LJCDataGrid control.</summary>
+  // Provides DataTable helpers for an LJCDataGrid control.
+  /// <include path='items/TableGridData/*' file='Doc/TableGrid.xml'/>
   public class TableGridData
   {
     #region Static Methods
@@ -20,6 +21,28 @@ namespace LJCGridDataLib
 
       DataTable workTable = new DataTable();
       retValue = workTable.Columns;
+      return retValue;
+    }
+
+    // Clones a DataColumn object.
+    /// <include path='items/DataColumnClone/*' file='Doc/TableGrid.xml'/>
+    public static DataColumn DataColumnClone(DataColumn dataColumn)
+    {
+      DataColumn retValue = null;
+      if (dataColumn != null)
+      {
+        retValue = new DataColumn()
+        {
+          AllowDBNull = dataColumn.AllowDBNull,
+          AutoIncrement = dataColumn.AutoIncrement,
+          Caption = dataColumn.Caption,
+          ColumnName = dataColumn.ColumnName,
+          DataType = dataColumn.DataType,
+          DefaultValue = dataColumn.DefaultValue,
+          MaxLength = dataColumn.MaxLength,
+          Unique = dataColumn.Unique
+        };
+      }
       return retValue;
     }
 
@@ -43,24 +66,19 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/TableGrid.xml'/>
-    public static DataColumn DataColumnClone(DataColumn dataColumn)
+    // Creates a ColumnNames list from a DataColumns collection.
+    /// <include path='items/GetColumnNames/*' file='Doc/TableGrid.xml'/>
+    public static List<string> GetColumnNames(DataColumnCollection dataColumns)
     {
-      DataColumn retValue = null;
-      if (dataColumn != null)
+      List<string> retValue = null;
+
+      if (dataColumns != null && dataColumns.Count > 0)
       {
-        retValue = new DataColumn()
+        retValue = new List<string>();
+        foreach (DataColumn dataColumn in dataColumns)
         {
-          AllowDBNull = dataColumn.AllowDBNull,
-          AutoIncrement = dataColumn.AutoIncrement,
-          Caption = dataColumn.Caption,
-          ColumnName = dataColumn.ColumnName,
-          DataType = dataColumn.DataType,
-          DefaultValue = dataColumn.DefaultValue,
-          MaxLength = dataColumn.MaxLength,
-          Unique = dataColumn.Unique
-        };
+          retValue.Add(dataColumn.ColumnName);
+        }
       }
       return retValue;
     }
@@ -103,26 +121,9 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Creates a ColumnNames list from a DataColumns collection.
-    /// <include path='items/GetColumnNames/*' file='Doc/TableGrid.xml'/>
-    public static List<string> GetColumnNames(DataColumnCollection dataColumns)
-    {
-      List<string> retValue = null;
-
-      if (dataColumns != null && dataColumns.Count > 0)
-      {
-        retValue = new List<string>();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          retValue.Add(dataColumn.ColumnName);
-        }
-      }
-      return retValue;
-    }
-
-    // Get the included Columns from the DataColumns definition.
-    /// <include path='items/GetIncludedColumns/*' file='Doc/TableGrid.xml'/>
-    public static DataColumnCollection GetIncludedColumns(DataColumnCollection dataColumns
+    // Returns a set of DataColumns that match the supplied list.
+    /// <include path='items/GetDataColumns/*' file='Doc/TableGrid.xml'/>
+    public static DataColumnCollection GetDataColumns(DataColumnCollection dataColumns
       , List<string> columnNames)
     {
       DataColumn dataColumnClone;
@@ -158,6 +159,57 @@ namespace LJCGridDataLib
     }
     #endregion
 
+    #region Configuration Methods
+
+    // Sets the Display Columns from the DataColumns object.
+    /// <include path='items/SetDisplayColumns/*' file='Doc/TableGrid.xml'/>
+    public void SetDisplayColumns(DataColumnCollection dataColumns
+      , List<string> propertyNames = null)
+    {
+      if (null == propertyNames)
+      {
+        propertyNames = GetColumnNames(dataColumns);
+      }
+
+      // Create DataDefinition from dataColumns.
+      DataDefinition = GetDbColumns(dataColumns);
+
+      // Create DisplayColumns value.
+      DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+    }
+
+    // Sets the Display Columns from the DataObject properties.
+    /// <include path='items/SetDisplayColumns1/*' file='Doc/TableGrid.xml'/>
+    public void SetDisplayColumns(object dataObject
+      , List<string> propertyNames = null)
+    {
+      if (null == propertyNames)
+      {
+        propertyNames = DbColumns.LJCGetColumnNames(dataObject);
+      }
+
+      // Create DataDefinition from dataObject value.
+      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject);
+
+      // Create DisplayColumns value.
+      DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+    }
+
+    // Removes a display column.
+    /// <include path='items/RemoveDisplayColumn/*' file='Doc/TableGrid.xml'/>
+    public void RemoveDisplayColumn(string columnName)
+    {
+      foreach (DbColumn dataColumn in DisplayColumns)
+      {
+        if (dataColumn.ColumnName == columnName)
+        {
+          DisplayColumns.Remove(dataColumn);
+          break;
+        }
+      }
+    }
+    #endregion
+
     #region Row Data Methods
 
     // Loads the grid rows from the DataRows collection.
@@ -170,7 +222,6 @@ namespace LJCGridDataLib
         if (null == DisplayColumns)
         {
           // Create default DisplayColumns.
-          //DisplayColumns = dataTable.Columns;
           DisplayColumns = GetDbColumns(dataTable.Columns);
         }
         foreach (DataRow dataRow in dataTable.Rows)
@@ -199,24 +250,12 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Updates the current row with the DataRow values.
-    /// <include path='items/RowUpdate/*' file='Doc/TableGrid.xml'/>
-    public void RowUpdate(DataRow dataRow)
-    {
-      if (mGrid != null
-        && mGrid.CurrentRow is LJCGridRow gridRow)
-      {
-        RowSetValues(gridRow, dataRow);
-      }
-    }
-
     // Updates a grid row with the DataRow values.
     /// <include path='items/RowSetValues/*' file='Doc/TableGrid.xml'/>
     public void RowSetValues(LJCGridRow gridRow, DataRow dataRow)
     {
       if (DisplayColumns != null && DisplayColumns.Count > 0)
       {
-        //foreach (DataColumn dataColumn in DisplayColumns)
         foreach (DbColumn dataColumn in DisplayColumns)
         {
           // Grid columns are named after the object property names.
@@ -230,70 +269,22 @@ namespace LJCGridDataLib
       }
     }
 
+    // Updates the current row with the DataRow values.
+    /// <include path='items/RowUpdate/*' file='Doc/TableGrid.xml'/>
+    public void RowUpdate(DataRow dataRow)
+    {
+      if (mGrid != null
+        && mGrid.CurrentRow is LJCGridRow gridRow)
+      {
+        RowSetValues(gridRow, dataRow);
+      }
+    }
+
     // Fires the AddRow event.
     /// <include path='items/OnAddRow/*' file='Doc/ResultGridData.xml'/>
     protected void OnAddRow()
     {
       AddRow?.Invoke(this, new EventArgs());
-    }
-    #endregion
-
-    #region Configuration Methods
-
-    // Sets the Display Columns from the DataColumns object.
-    /// <include path='items/SetDisplayColumns1/*' file='Doc/TableGrid.xml'/>
-    public void SetDisplayColumns(DataColumnCollection dataColumns
-      , List<string> columnNames)
-    {
-      DataDefinition = GetDbColumns(dataColumns);
-      DisplayColumns = DataDefinition.Clone();
-
-      if (columnNames != null)
-      {
-        DisplayColumns = DataDefinition.LJCGetColumns(columnNames);
-      }
-    }
-
-    // Sets the Display Columns from the DataObject properties.
-    /// <include path='items/SetDisplayColumns2/*' file='Doc/TableGrid.xml'/>
-    public void SetDisplayColumns(DataColumnCollection dataColumns
-      , object dataObject, List<string> propertyNames)
-    {
-      //LJCReflect reflect = new LJCReflect(dataObject);
-      var _ = dataColumns.Count;
-
-      // Create DataDefinition from dataObject value.
-      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject);
-      DisplayColumns = DataDefinition.Clone();
-
-      if (propertyNames != null)
-      {
-        DisplayColumns = new DbColumns();
-        foreach (string propertyName in propertyNames)
-        {
-          var displayColumn
-            = DataDefinition.LJCSearchPropertyName(propertyName);
-          if (displayColumn != null)
-          {
-            DisplayColumns.Add(displayColumn);
-          }
-        }
-      }
-    }
-
-    // Removes a display column.
-    /// <include path='items/RemoveDisplayColumn/*' file='Doc/TableGrid.xml'/>
-    public void RemoveDisplayColumn(string columnName)
-    {
-      //foreach (DataColumn dataColumn in DisplayColumns)
-      foreach (DbColumn dataColumn in DisplayColumns)
-      {
-        if (dataColumn.ColumnName == columnName)
-        {
-          DisplayColumns.Remove(dataColumn);
-          break;
-        }
-      }
     }
     #endregion
 

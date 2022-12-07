@@ -31,15 +31,8 @@
         for all .NET program types.
       </para>
       <para>
-        The most commonly used Static Function Classes are: NetCommon, NetFile and
-        NetString.
-      </para>
-      <para>
         The most commonly used Collection and Object class pairs are:
         DbColumns/DbColumn and DbValues/DbValue.
-      </para>
-      <para>
-        LJCReflect and LJCAssemblyReflect are commonly used reflection classes.
       </para>
     </remarks>
         </member>
@@ -76,7 +69,9 @@
         <member name="M:LJCNetCommon.AppSettings.GetColor(System.String,System.Drawing.Color)">
             <summary>
       Gets the Color value of the specified setting. (E)
-    </summary><param name="keyName">The setting key name.</param><param name="defaultColor">The default color.</param><returns>The Color setting value.</returns><example>
+    </summary><param name="keyName">The setting key name.</param><param name="defaultColor">The default color.</param><returns>The Color setting value.</returns><remarks>
+      Returns the default color if the config file key is not found.
+    </remarks><example>
       <code>
         // App.Config file.
         // &lt;configuration&gt;
@@ -141,7 +136,6 @@
         //   &lt;/appSettings&gt;
         // &lt;/configuration&gt;
 
-        using System.Drawing;
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
@@ -547,7 +541,9 @@
         <member name="M:LJCNetCommon.CommonDataTypes.HasItems(LJCNetCommon.CommonDataTypes)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.CommonDataTypes.#ctor">
             <summary>
@@ -623,7 +619,9 @@
         <member name="M:LJCNetCommon.CommonModifiers.HasItems(LJCNetCommon.CommonModifiers)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.CommonModifiers.#ctor">
             <summary>
@@ -699,7 +697,9 @@
         <member name="M:LJCNetCommon.DataTypes.HasItems(LJCNetCommon.DataTypes)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.DataTypes.#ctor">
             <summary>
@@ -775,7 +775,9 @@
         <member name="M:LJCNetCommon.Keywords.HasItems(LJCNetCommon.Keywords)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.Keywords.#ctor">
             <summary>
@@ -851,7 +853,9 @@
         <member name="M:LJCNetCommon.LibTypes.HasItems(LJCNetCommon.LibTypes)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.LibTypes.#ctor">
             <summary>
@@ -927,7 +931,9 @@
         <member name="M:LJCNetCommon.Modifiers.HasItems(LJCNetCommon.Modifiers)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.Modifiers.#ctor">
             <summary>
@@ -1003,7 +1009,9 @@
         <member name="M:LJCNetCommon.RefTypes.HasItems(LJCNetCommon.RefTypes)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.RefTypes.#ctor">
             <summary>
@@ -1121,14 +1129,7 @@
         <member name="M:LJCNetCommon.DbColumn.#ctor(System.String,System.String,System.String,System.String,System.Boolean,System.String)">
             <summary>
       Initializes an object instance with the supplied values.
-    </summary><param name="columnName">The column name.</param><param name="value">The data string value.</param><param name="dataTypeName">The data type name.</param><param name="propertyName">the property name.</param><param name="assignedKey">The assigned key indicator.</param><param name="renameValue">The RenameAs value.</param><example>
-      <code>
-        using LJCNetCommon;
-
-        // Must use (object) with a string value to execute this constructor.
-        var dbColumn = new DbColumn("ColumnName", (object)"Value");
-      </code>
-    </example>
+    </summary><param name="columnName">The column name.</param><param name="value">The data string value.</param><param name="dataTypeName">The data type name.</param><param name="propertyName">the property name.</param><param name="assignedKey">The assigned key indicator.</param><param name="renameValue">The RenameAs value.</param>
         </member>
         <member name="M:LJCNetCommon.DbColumn.Clone">
             <summary>
@@ -1356,7 +1357,9 @@
         <member name="M:LJCNetCommon.DbColumns.HasItems(LJCNetCommon.DbColumns)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.DbColumns.LJCCreateObjectColumns(System.Object,LJCNetCommon.DbColumns)">
             <summary>
@@ -1367,6 +1370,13 @@
             <summary>
       Deserializes from the specified XML file.
     </summary><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns>
+        </member>
+        <member name="M:LJCNetCommon.DbColumns.LJCGetColumnNames(System.Object)">
+            <summary>
+            Creates a ColumnNames list from a DataObject.
+            </summary>
+            <param name="dataObject"></param>
+            <returns></returns>
         </member>
         <member name="M:LJCNetCommon.DbColumns.op_Implicit(LJCNetCommon.DbColumns)~LJCNetCommon.DbValues">
             <summary>
@@ -1431,7 +1441,16 @@
         <member name="M:LJCNetCommon.DbColumns.Add(System.String,System.Object,System.String)">
             <summary>
       Creates the Object from the arguments and adds it to the collection.
-    </summary><param name="columnName">The column name.</param><param name="value">The value object.</param><param name="dataTypeName">The data type name.</param><returns>The created DbColumn object.</returns>
+    </summary><param name="columnName">The column name.</param><param name="value">The value object.</param><param name="dataTypeName">The data type name.</param><returns>The created DbColumn object.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumns = new DbColumns();
+
+        // Must use (object) with a string value to execute this constructor.
+        dbColumns.Add("ColumnName", (object)"Value");
+      </code>
+    </example>
         </member>
         <member name="M:LJCNetCommon.DbColumns.Clone">
             <summary>
@@ -1693,7 +1712,9 @@
         <member name="M:LJCNetCommon.DbValues.HasItems(LJCNetCommon.DbValues)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.DbValues.LJCDeserialize(System.String)">
             <summary>
@@ -1917,7 +1938,9 @@
         <member name="M:LJCNetCommon.KeyItems.HasItems(LJCNetCommon.KeyItems)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.KeyItems.#ctor">
             <summary>
@@ -2018,7 +2041,9 @@
         <member name="M:LJCNetCommon.CommonKeywords.HasItems(LJCNetCommon.CommonKeywords)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.CommonKeywords.#ctor">
             <summary>
@@ -2619,7 +2644,7 @@
               if (-2 == retValue)
               {
                 // Case sensitive.
-                //retValue = x.Name_.CompareTo(y.Name);
+                //retValue = x.Name.CompareTo(y.Name);
 
                 // Not case sensitive.
                 retValue = string.Compare(x.Name, y.Name, true);
@@ -2634,7 +2659,9 @@
         <member name="M:LJCNetCommon.NetCommon.HasData(System.Data.DataTable)">
             <summary>
       Checks a data table and returns true if it contains any rows. (E)
-    </summary><param name="dataTable">The data table object.</param><returns>True if the data table contains any rows.</returns><example>
+    </summary><param name="dataTable">The data table object.</param><returns>True if the data table contains any rows.</returns><remarks>
+      This allows a single if statement where the DataTable value may be null.
+    </remarks><example>
       <code>
         using System.Data;
         using LJCNetCommon;
@@ -2652,7 +2679,10 @@
         <member name="M:LJCNetCommon.NetCommon.IsEqual(System.Object,System.Object)">
             <summary>
       Checks if two values are equal.
-    </summary><param name="oldValue"> The previous value.</param><param name="newValue"> The new value.</param><returns>True if equal, otherwise false.</returns>
+    </summary><param name="oldValue"> The previous value.</param><param name="newValue"> The new value.</param><returns>True if equal, otherwise false.</returns><remarks>
+      Performs a strongly-typed value check of two objects where those
+      objects are built-in system types.
+    </remarks>
         </member>
         <member name="M:LJCNetCommon.NetCommon.Base64BytesToText(System.Byte[])">
             <summary>
@@ -3137,12 +3167,28 @@
       Also returns false if the object is not type "bool".
     </returns>
         </member>
+        <member name="M:LJCNetCommon.NetCommon.GetByte(System.Object)">
+            <summary>
+      Gets a byte value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The byte value or the byte default if the object is null.
+      Also returns false if the object is not type "byte".
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.NetCommon.GetChar(System.Object)">
+            <summary>
+      Gets a byte value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The char value or the char default if the object is null.
+      Also returns false if the object is not type "char".
+    </returns>
+        </member>
         <member name="M:LJCNetCommon.NetCommon.GetDateTime(System.Object)">
             <summary>
       Gets a DateTime value from an object.
     </summary><param name="value">The value object.</param><returns>
       The DateTime value or null if the object is null.
-      Also returns null if the object is not type "bool".
+      Also returns null if the object is not type "DateTime".
     </returns>
         </member>
         <member name="M:LJCNetCommon.NetCommon.GetDecimal(System.Object)">
@@ -3254,7 +3300,7 @@
         </member>
         <member name="M:LJCNetCommon.NetCommon.GetSingle(System.Object)">
             <summary>
-      Gets a single value from an object.
+      Gets a float value from an object.
     </summary><param name="value">The value object.</param><returns>
       The single value or zero if the object is null.
       Also returns zero if the object is not type "single", "long", "int"
@@ -3380,6 +3426,12 @@
         </member>
         <member name="F:LJCNetCommon.NetCommon.TypeBoolean">
             <summary>The Boolean type name.</summary>
+        </member>
+        <member name="F:LJCNetCommon.NetCommon.TypeByte">
+            <summary>The Byte type name.</summary>
+        </member>
+        <member name="F:LJCNetCommon.NetCommon.TypeChar">
+            <summary>The Char type name.</summary>
         </member>
         <member name="F:LJCNetCommon.NetCommon.TypeDateTime">
             <summary>The DateTime type name.</summary>

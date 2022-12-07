@@ -70,6 +70,16 @@
     <param name="value">The value object.</param>
     <param name="dataTypeName">The data type name.</param>
     <returns>The created DbColumn object.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumns = new DbColumns();
+
+        // Must use (object) with a string value to execute this constructor.
+        dbColumns.Add("ColumnName", (object)"Value");
+      </code>
+    </example>
   </Add3>
   <LJCAddPropertyAs>
     <summary>

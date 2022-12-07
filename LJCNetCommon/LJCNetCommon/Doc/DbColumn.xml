@@ -52,14 +52,6 @@
     <param name="propertyName">the property name.</param>
     <param name="assignedKey">The assigned key indicator.</param>
     <param name="renameValue">The RenameAs value.</param>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Must use (object) with a string value to execute this constructor.
-        var dbColumn = new DbColumn("ColumnName", (object)"Value");
-      </code>
-    </example>
   </DbColumnC>
 
   <!-- Data Methods -->

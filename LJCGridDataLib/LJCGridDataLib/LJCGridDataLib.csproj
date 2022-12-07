@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
