@@ -65,17 +65,24 @@ msbuild LJCLibraries\LJCLibraries.sln
 
 set /a counter+=1
 echo - >> Build.txt
-echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
-echo LJCGridDataLib >> Build.txt
-call LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
-msbuild LJCGridDataLib\LJCGridDataLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
 echo ----------------- %counter% - LJCDBClientLib -------------- >> Build.txt
 echo LJCDBClientLib >> Build.txt
 call LJCDBClientLib\UpdateDBClientLib.cmd BuildAll >> Build.txt
 msbuild LJCDBClientLib\LJCDBClientLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
+echo LJCRegionManager >> Build.txt
+call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
+msbuild LJCRegionManager\LJCRegionManager.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
+echo LJCGridDataLib >> Build.txt
+call LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
+msbuild LJCGridDataLib\LJCGridDataLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
@@ -111,13 +118,6 @@ echo ----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt
 echo LJCDBViewDAL >> Build.txt
 call LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
 msbuild LJCDBViewDAL\LJCDBViewDAL.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
-echo LJCRegionManager >> Build.txt
-call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
-msbuild LJCRegionManager\LJCRegionManager.sln
 
 set /a counter+=1
 echo - >> Build.txt

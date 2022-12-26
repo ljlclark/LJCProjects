@@ -34,11 +34,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\DataDetail\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage">
-      <HintPath>..\..\LJCSQLUtilLib\External\LJCDBMessage.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\DataDetail\External\LJCDBMessage.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>

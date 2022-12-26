@@ -33,7 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\..\..\Projects\TestUIManager\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>

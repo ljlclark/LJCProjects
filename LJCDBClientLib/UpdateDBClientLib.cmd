@@ -23,7 +23,7 @@ set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
 copy %root%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-copy %root%%src%\LJCDBClientLib.dll %to%
+copy %root%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBMessage\CipherLib\%bin%
 copy %root%%src%\CipherLib.dll %to%

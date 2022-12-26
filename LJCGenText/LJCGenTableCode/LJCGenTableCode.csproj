@@ -35,7 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\LJCGenText\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>

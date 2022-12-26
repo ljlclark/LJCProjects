@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="LJCDBClientLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\DataDetail\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">

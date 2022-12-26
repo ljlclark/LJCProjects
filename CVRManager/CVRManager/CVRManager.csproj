@@ -40,7 +40,7 @@
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\..\..\LJCProjectsDev\CVRManager\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">

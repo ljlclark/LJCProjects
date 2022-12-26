@@ -33,9 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LJCDBClientLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\..\..\LJCProjectsDev\LJCUnitMeasure\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

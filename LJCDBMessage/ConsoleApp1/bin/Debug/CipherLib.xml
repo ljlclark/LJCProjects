@@ -95,7 +95,9 @@
         <member name="M:CipherLib.InsertItems.HasItems(CipherLib.InsertItems)">
             <summary>
       Checks if the collection has items.
-    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns>
+    </summary><param name="collectionObject">The collection object.</param><returns>True if there are items, otherwise false.</returns><remarks>
+      This allows a single if statement where the collection object may be null.
+    </remarks>
         </member>
         <member name="M:CipherLib.InsertItems.#ctor">
             <summary>
