@@ -1,4 +1,5 @@
-echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+echo Copyright (c) Lester J. Clark and Contributors.
+echo Licensed under the MIT License.
 rem UpdateAll.cmd
 call CVRManager\UpdateCVRManager.cmd BuildAll >> Update.txt
 call DataDetail\UpdateDataDetail.cmd BuildAll >> Update.txt
