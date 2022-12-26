@@ -38,8 +38,7 @@
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\LJCProjectsDev\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
