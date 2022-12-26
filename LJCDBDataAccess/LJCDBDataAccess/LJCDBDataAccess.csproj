@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
