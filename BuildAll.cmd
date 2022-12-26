@@ -72,17 +72,17 @@ msbuild LJCDBClientLib\LJCDBClientLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
-echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
-echo LJCRegionManager >> Build.txt
-call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
-msbuild LJCRegionManager\LJCRegionManager.sln
-
-set /a counter+=1
-echo - >> Build.txt
 echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
 echo LJCGridDataLib >> Build.txt
 call LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
 msbuild LJCGridDataLib\LJCGridDataLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
+echo LJCRegionManager >> Build.txt
+call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
+msbuild LJCRegionManager\LJCRegionManager.sln
 
 set /a counter+=1
 echo - >> Build.txt
