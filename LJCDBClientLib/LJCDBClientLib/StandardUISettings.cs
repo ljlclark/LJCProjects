@@ -1,20 +1,19 @@
-﻿// StandardSettings.cs
+﻿// StandardUISettings.cs
 using LJCDataAccess;
 using LJCDBDataAccess;
-using LJCDBServiceLib;
 using LJCNetCommon;
 using System.Drawing;
 
 namespace LJCDBClientLib
 {
   /// <summary>The Standard Setting values.</summary>
-  public class StandardSettings
+  public class StandardUISettings
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public StandardSettings()
+    public StandardUISettings()
     {
     }
     #endregion
@@ -30,29 +29,11 @@ namespace LJCDBClientLib
       AppSettings = new AppSettings(programConfigFileName);
 
       DataConfigName = AppSettings.GetString("DataConfigName");
-      DbServiceRef = new DbServiceRef();
-
-      LocalDbDataAccess = AppSettings.GetBool("LocalDbDataAccess");
-      if (LocalDbDataAccess)
+      DbServiceRef = new DbServiceRef
       {
-        LocalDbService = false;
-        DbServiceRef.DbDataAccess = new DbDataAccess(DataConfigName);
-      }
-      else
-      {
-        LocalDbService = AppSettings.GetBool("LocalDbService");
-        if (LocalDbService)
-        {
-          DbServiceRef.DbService = new DbService();
-        }
-        else
-        {
-          string endPointConfigurationName = "NetTcpBinding_IDbService";
-          DbServiceRef.DbServiceClient = new DbServiceClient(endPointConfigurationName);
-        }
-      }
+        DbDataAccess = new DbDataAccess(DataConfigName)
+      };
 
-      //StringBuilder builder = new StringBuilder(64);
       string connectionTypeName = AppSettings.GetString("ConnectionType");
       ConnectionType = DataCommon.GetConnectionType(connectionTypeName);
 
@@ -101,12 +82,6 @@ namespace LJCDBClientLib
       set { mExportTextExtension = NetString.InitString(value); }
     }
     private string mExportTextExtension;
-
-    /// <summary>Gets or sets the LocalDbServer flag.</summary>
-    public bool LocalDbDataAccess { get; set; }
-
-    /// <summary>Gets or sets the LocalDbService flag.</summary>
-    public bool LocalDbService { get; set; }
     #endregion
   }
 }
