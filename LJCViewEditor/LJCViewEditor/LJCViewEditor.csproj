@@ -48,7 +48,7 @@
       <HintPath>..\External\LJCDataDetailLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\LJCProjectsDev\LJCViewEditor\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
@@ -69,10 +69,10 @@
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
     <Reference Include="LJCSQLUtilLib">
-      <HintPath>..\..\..\LJCProjectsDev\LJCViewEditor\External\LJCSQLUtilLib.dll</HintPath>
+      <HintPath>..\External\LJCSQLUtilLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCSQLUtilLibDAL">
-      <HintPath>..\..\..\LJCProjectsDev\LJCViewEditor\External\LJCSQLUtilLibDAL.dll</HintPath>
+      <HintPath>..\External\LJCSQLUtilLibDAL.dll</HintPath>
     </Reference>
     <Reference Include="LJCWinFormCommon">
       <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
