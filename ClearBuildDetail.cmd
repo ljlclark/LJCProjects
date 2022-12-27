@@ -1,7 +1,9 @@
-echo Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+echo Copyright (c) Lester J. Clark and Contributors.
+echo Licensed under the MIT License.
 rem ClearBuildDetail.cmd
 rmdir %Solution%\.vs /s /q
 del %Solution%\External\*.* /q
+del %Solution%\%Project%\*.user
 del %Solution%\%Project%\bin\Debug\%File%.exe
 del %Solution%\%Project%\bin\Debug\*.dll
 del %Solution%\%Project%\bin\Debug\*.pdb

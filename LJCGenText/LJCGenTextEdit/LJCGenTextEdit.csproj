@@ -37,9 +37,9 @@
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\LJCProjectsDev\LJCGenText\External\LJCDBClientLib.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="LJCDBClientLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
