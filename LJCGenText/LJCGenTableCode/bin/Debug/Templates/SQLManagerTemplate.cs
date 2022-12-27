@@ -1,4 +1,5 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // SQLManagerTemplate.cs
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,9 @@ namespace _Namespace_
 
         // Create the list of lookup column names.
         SQLManager.SetLookupColumns(new string[]
-          {
-            _ClassName_.ColumnName
-          });
+        {
+          _ClassName_.ColumnName
+        });
       }
     }
     #endregion

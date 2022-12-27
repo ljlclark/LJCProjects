@@ -1,4 +1,5 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DataManagerTemplate.cs
 using System;
 using LJCDBClientLib;
@@ -13,7 +14,7 @@ using LJCDBMessage;
 namespace _Namespace_
 {
   /// <summary>Provides _TableName_ DataManager data methods.</summary>
-  public class _ClassName_DataManager
+  public class _ClassName_DataManager : DataManager
   {
     #region Constructors
 

@@ -1,4 +1,5 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // ListTemplate.cs
 using System;
 using System.Collections.Generic;
@@ -454,7 +455,6 @@ namespace _Namespace_
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
-      SetAppConfigValues();
       InitializeClassData();
       SetupGridCode();
       LoadControlData();
@@ -506,6 +506,9 @@ namespace _Namespace_
     // Initialize the Class Data.
     private void InitializeClassData()
     {
+      var values = Values_AppName_.Instance;
+      mSettings = values.StandardSettings;
+
       Managers = new Managers();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
@@ -591,13 +594,6 @@ namespace _Namespace_
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , mControlValuesFileName);
-    }
-
-    // Sets the Application Configuration values.
-    private void SetAppConfigValues()
-    {
-      var values = Values_AppName_.Instance;
-      mSettings = values.StandardSettings;
     }
 
     // Setup the grid code references.

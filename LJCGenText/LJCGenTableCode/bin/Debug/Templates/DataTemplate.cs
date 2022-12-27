@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // _ClassName_.cs
 using LJCNetCommon;
 using LJCDBClientLib;
