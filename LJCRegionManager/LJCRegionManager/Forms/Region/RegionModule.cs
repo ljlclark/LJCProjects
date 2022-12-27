@@ -1192,7 +1192,7 @@ namespace LJCRegionManager
     internal static void CreateTables(SystemException e, string dataConfigName)
     {
       ManagerCommon.GetConfigValues(dataConfigName, out string connectionType
-        , out string connectionString, out string providerName);
+        , out string _, out string _);
 
       string[] fileSpecs;
       switch (connectionType)
@@ -1443,10 +1443,7 @@ namespace LJCRegionManager
 
       // Collapse tile panel if no tab pages left.
       parentTabControl = tabPage.Parent as LJCTabControl;
-      if (parentTabControl != null)
-      {
-        parentTabControl.LJCCloseEmptyPanel();
-      }
+      parentTabControl?.LJCCloseEmptyPanel();
     }
 
     /// <summary>Gets or sets the close tab page.</summary>

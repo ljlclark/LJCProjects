@@ -144,6 +144,11 @@
       Creates and adds the object from the provided values.
     </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
         </member>
+        <member name="M:LJCRegionDAL.Cities.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
         <member name="M:LJCRegionDAL.Cities.LJCSearchName(System.String)">
             <summary>
       Retrieve the collection element with name.
@@ -242,6 +247,11 @@
       Creates and adds the object from the provided values.
     </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
         </member>
+        <member name="M:LJCRegionDAL.CitySections.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
         <member name="M:LJCRegionDAL.CitySections.LJCSearchName(System.String)">
             <summary>
       Retrieve the collection element with name.
@@ -331,6 +341,11 @@
       Creates and adds the object from the provided values.
     </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
         </member>
+        <member name="M:LJCRegionDAL.Provinces.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
         <member name="M:LJCRegionDAL.Provinces.LJCSearchName(System.String)">
             <summary>
       Retrieve the collection element with name.
@@ -413,6 +428,11 @@
             <summary>
       Creates and adds the object from the provided values.
     </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Regions.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
         </member>
         <member name="M:LJCRegionDAL.Regions.LJCSearchName(System.String)">
             <summary>

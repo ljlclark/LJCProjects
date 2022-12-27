@@ -6,7 +6,7 @@ namespace LJCRegionDAL
   /// <summary>Represents a collection of Region objects.</summary>
   public class Regions : List<RegionData>
   {
-    #region Public Methods
+    #region Collection Methods
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -20,6 +20,17 @@ namespace LJCRegionDAL
       Add(retValue);
       return retValue;
     }
+
+    // Creates and returns a clone of the object.
+    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public Regions Clone()
+    {
+      var retValue = MemberwiseClone() as Regions;
+      return retValue;
+    }
+    #endregion
+
+    #region Search and Sort Methods
 
     // Retrieve the collection element with name.
     /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>

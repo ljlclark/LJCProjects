@@ -39,7 +39,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\Projects\TestUIManager\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
@@ -78,6 +78,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs">
+      <Link>Forms\Templates\DetailTemplate.cs</Link>
+      <SubType>Form</SubType>
+    </Content>
+    <Content Include="..\..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs">
+      <Link>Forms\Templates\ListTemplate.cs</Link>
+      <SubType>Form</SubType>
+    </Content>
     <Compile Include="Forms\Region\CitySectionDetail.cs">
       <SubType>Form</SubType>
     </Compile>

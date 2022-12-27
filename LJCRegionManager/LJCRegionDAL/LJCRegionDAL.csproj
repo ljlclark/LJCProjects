@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\Projects\TestUIManager\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage">
@@ -52,6 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs">
+      <Link>Templates\CollectionTemplate.cs</Link>
+    </Content>
+    <Content Include="..\..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs">
+      <Link>Templates\DataTemplate.cs</Link>
+    </Content>
+    <Content Include="..\..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs">
+      <Link>Templates\ManagerTemplate.cs</Link>
+    </Content>
     <Compile Include="RegionManagers.cs" />
     <Compile Include="Data\City.cs" />
     <Compile Include="Data\Cities.cs" />
