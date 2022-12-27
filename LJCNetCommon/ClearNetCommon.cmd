@@ -19,3 +19,4 @@ call %ClearBuild%
 set Project=NetCommonTest
 set File=NetCommonTest
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\LJCNetCommon.xml
