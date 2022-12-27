@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\LJCProjectsDev\LJCUnitMeasure\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage">

@@ -40,7 +40,7 @@
       <HintPath>..\External\DataDetail.exe</HintPath>
     </Reference>
     <Reference Include="DataDetailDAL">
-      <HintPath>..\..\..\LJCProjectsDev\LJCSQLUtilLib\External\DataDetailDAL.dll</HintPath>
+      <HintPath>..\External\DataDetailDAL.dll</HintPath>
     </Reference>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
