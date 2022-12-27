@@ -24,7 +24,9 @@ namespace LJCNetCommon
       FileSpec = fileSpec;
       if (false == File.Exists(fileSpec))
       {
+        string value = Directory.GetCurrentDirectory();
         errorText = $"File '{FileSpec}' was not found.";
+        errorText += $"\r\nFolder '{value}'";
         throw new FileNotFoundException(errorText);
       }
 

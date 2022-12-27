@@ -1,6 +1,7 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// DbColumns
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -312,6 +313,27 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public DbColumn LJCGetColumn(string propertyName)
+    {
+      DbColumn retValue = null;
+
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.PropertyName) != 0)
+      {
+        retValue = Find(x => x.PropertyName == propertyName);
+      }
+      else
+      {
+        retValue = LJCSearchPropertyName(propertyName);
+      }
+      return retValue;
+    }
+
     // Returns a set of columns that match the supplied list.
     /// <include path='items/LJCGetColumns/*' file='Doc/DbColumns.xml'/>
     public DbColumns LJCGetColumns(List<string> propertyNames)
@@ -414,12 +436,10 @@ namespace LJCNetCommon
     /// <include path='items/LJCSearchPropertyName/*' file='Doc/DbColumns.xml'/>
     public DbColumn LJCSearchPropertyName(string propertyName)
     {
-      DbColumnPropertyComparer comparer;
       DbColumn retValue = null;
 
-      comparer = new DbColumnPropertyComparer();
+      var comparer = new DbColumnPropertyComparer();
       LJCSortProperty(comparer);
-
       DbColumn searchDbColumn = new DbColumn()
       {
         PropertyName = propertyName
@@ -659,9 +679,9 @@ namespace LJCNetCommon
 
     // The column for the specified name.
     /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
-    public DbColumn this[string name]
+    public DbColumn this[string propertyName]
     {
-      get { return LJCSearchColumnName(name); }
+      get { return LJCSearchPropertyName(propertyName); }
     }
     #endregion
 

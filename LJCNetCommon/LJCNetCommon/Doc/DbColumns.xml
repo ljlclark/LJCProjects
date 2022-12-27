@@ -265,9 +265,9 @@
   <!-- Properties -->
   <Item>
     <summary>
-      The column for the specified name.
+      The column for the specified property name.
     </summary>
-    <param name="name">The column name.</param>
+    <param name="propertyName">The column property name.</param>
     <returns>The selected DbColumn object.</returns>
   </Item>
 </items>
