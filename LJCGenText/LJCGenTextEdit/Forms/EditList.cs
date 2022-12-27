@@ -4,6 +4,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace LJCGenTextEdit
@@ -27,6 +28,7 @@ namespace LJCGenTextEdit
       mSyntaxColors = new SyntaxColors();
       mTokenizer = new CodeTokenizer();
       mTokenizer.InitializeKeywords();
+      mAllowClose = false;
     }
     #endregion
 
@@ -44,41 +46,83 @@ namespace LJCGenTextEdit
 
     #region Action Event Handlers
 
+    // Closes the menus.
+    private void DoMenuClose()
+    {
+      mAllowClose = true;
+      TemplateMenu.Close();
+      SectionMenu.Close();
+      ItemMenu.Close();
+      ReplacementMenu.Close();
+    }
+
+    // Handles the menu keys.
+    private void Menu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+    {
+      if (e.KeyCode == Keys.Escape)
+      {
+        DoMenuClose();
+      }
+    }
+
+    // Handles the Menu Closing event.
+    private void Menu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+    {
+      if (false == mAllowClose)
+      {
+        e.Cancel = true;
+      }
+      mAllowClose = false;
+    }
+    private bool mAllowClose;
+
     #region Template
+
+    // Handles the Menu Title click.
+    private void TemplateTitle_Click(object sender, EventArgs e)
+    {
+      TemplateMenu.Focus();
+    }
 
     // Allows for display and edit of a text file.
     private void TemplateFileEdit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       FormCommon.ShellFile("NotePad.exe");
     }
 
     // <summary>Performs the Create Sections function.</summary>
     private void TemplateMenuSections_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoCreateDataFromTemplate();
     }
 
     // <summary>Performs the Generate Output function.</summary>
     private void TemplateGenerate_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoGenerate();
     }
 
     // <summary>Performs the Save function.</summary>
     private void TemplateSave_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoTemplateSave();
     }
 
     // <summary>Performs the Close function.</summary>
     private void TemplateExit_Click(object sender, EventArgs e)
     {
-      mTemplateTextCode.DoClose();
+      DoMenuClose();
+      //mTemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
     private void TemplateHelp_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Template\TemplateText.html");
     }
@@ -86,6 +130,7 @@ namespace LJCGenTextEdit
     // Displays the Splash dialog as an about dialog.
     private void TemplateAbout_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoAbout();
     }
 
@@ -130,45 +175,58 @@ namespace LJCGenTextEdit
       mSectionGridCode.DoDeleteSection();
     }
 
+    // Handles the Menu Title click.
+    private void SectionTitle_Click(object sender, EventArgs e)
+    {
+      SectionMenu.Focus();
+    }
+
     // Calls the New method.
     private void SectionMenuNew_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoNewSection();
     }
 
     // Calls the Edit method.
     private void SectionMenuEdit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoEditSection();
     }
 
     // Calls the Delete method.
     private void SectionMenuDelete_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoDeleteSection();
     }
 
     // Calls the Refresh method.
     private void SectionMenuRefresh_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoRefreshSection();
     }
 
     // Creates the XML data.
     private void SectionMenuCreateData_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoCreateDataFromTable();
     }
 
     // Performs the Generate Output function.
     private void SectionMenuGenerate_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoGenerate();
     }
 
     // Performs the Save function.
     private void SectionMenuSave_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoDataXMLSave();
     }
 
@@ -181,6 +239,7 @@ namespace LJCGenTextEdit
     // Displays the context sensitive help.
     private void SectionMenuHelp_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Data\SectionList.html");
     }
@@ -188,6 +247,7 @@ namespace LJCGenTextEdit
     // Displays the Splash dialog as an about dialog.
     private void SectionMenuAbout_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoAbout();
     }
     #endregion
@@ -212,51 +272,65 @@ namespace LJCGenTextEdit
       mItemGridCode.DoDeleteItem();
     }
 
+    // Handles the Menu Title click.
+    private void ItemTitle_Click(object sender, EventArgs e)
+    {
+      ItemMenu.Focus();
+    }
+
     // <summary>Calls the New method.</summary>
     private void ItemMenuNew_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mItemGridCode.DoNewItem();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ItemMenuEdit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mItemGridCode.DoEditItem();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ItemMenuDelete_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mItemGridCode.DoDeleteItem();
     }
 
     // <summary>Calls the Refresh method.</summary>
     private void ItemMenuRefresh_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mItemGridCode.DoRefreshItem();
     }
 
     // <summary>Performs the Generate Output function.</summary>
     private void ItemMenuGenerate_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoGenerate();
     }
 
     // <summary>Performs the Save function.</summary>
     private void ItemMenuSave_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoDataXMLSave();
     }
 
     // <summary>Performs the Close function.</summary>
     private void ItemMenuExit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
     private void ItemMenuHelp_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Data\ItemList.html");
     }
@@ -282,51 +356,65 @@ namespace LJCGenTextEdit
       mReplacementGridCode.DoDeleteReplacement();
     }
 
+    // Handles the Menu Title click.
+    private void ReplacementTitle_Click(object sender, EventArgs e)
+    {
+      ReplacementMenu.Focus();
+    }
+
     // <summary>Calls the New method.</summary>
     private void ReplacementMenuNew_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mReplacementGridCode.DoNewReplacement();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ReplacementMenuEdit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mReplacementGridCode.DoEditReplacement();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ReplacementMenuDelete_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mReplacementGridCode.DoDeleteReplacement();
     }
 
     // <summary>Calls the Refresh method.</summary>
     private void ReplacementMenuRefresh_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mReplacementGridCode.DoRefreshReplacement();
     }
 
     // <summary>Performs the Generate Output function.</summary>
     private void ReplacementGenerate_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoGenerate();
     }
 
     // <summary>Performs the Save function.</summary>
     private void ReplacementSave_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mSectionGridCode.DoDataXMLSave();
     }
 
     // <summary>Performs the Close function.</summary>
     private void ReplacementMenuExit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
     private void ReplacementMenuHelp_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Data\ReplacementList.html");
     }
@@ -334,39 +422,52 @@ namespace LJCGenTextEdit
 
     #region Output
 
+    // Handles the Menu Title click.
+    private void OutputTitle_Click(object sender, EventArgs e)
+    {
+      DoMenuClose();
+      OutputMenu.Focus();
+    }
+
     // <summary>XML Encodes the output text.</summary>
     private void OutputEncode_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       OutputRichText.Text = NetCommon.XmlEncode(OutputRichText.Text);
     }
 
     // <summary>XML Decodes the output text.</summary>
     private void OutputDecode_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       OutputRichText.Text = NetCommon.XmlDecode(OutputRichText.Text);
     }
 
     // <summary>Performs the Generate Output function.</summary>
     private void OutputGenerate_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoGenerate();
     }
 
     // <summary>Performs the Save function.</summary>
     private void OutputSave_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mOutputTextCode.DoOutputSave();
     }
 
     // <summary>Performs the Close function.</summary>
     private void OutputExit_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       mTemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
     private void OutputHelp_Click(object sender, EventArgs e)
     {
+      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Output\OutputText.html");
     }

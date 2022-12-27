@@ -294,6 +294,7 @@ namespace LJCGenTextEdit
       bool enableEdit = SectionGrid.CurrentRow != null;
       FormCommon.SetToolState(SectionTool, enableNew, enableEdit);
       FormCommon.SetMenuState(SectionMenu, enableNew, enableEdit);
+      SectionTitle.Enabled = true;
       SectionMenuCreateData.Enabled = true;
       SectionMenuAbout.Enabled = true;
       SectionMenuHelp.Enabled = true;
@@ -302,12 +303,14 @@ namespace LJCGenTextEdit
       enableEdit = ItemGrid.CurrentRow != null;
       FormCommon.SetToolState(ItemTool, enableNew, enableEdit);
       FormCommon.SetMenuState(ItemMenu, enableNew, enableEdit);
+      ItemTitle.Enabled = true;
       ItemMenuHelp.Enabled = true;
 
       enableNew = ItemGrid.CurrentRow != null;
       enableEdit = ReplacementGrid.CurrentRow != null;
       FormCommon.SetToolState(ReplacementTool, enableNew, enableEdit);
       FormCommon.SetMenuState(ReplacementMenu, enableNew, enableEdit);
+      ReplacementTitle.Enabled = true;
       ReplacementMenuHelp.Enabled = true;
     }
 
