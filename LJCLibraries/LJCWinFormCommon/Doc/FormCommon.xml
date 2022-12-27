@@ -61,7 +61,7 @@
   </ShowError>
   <ShowHasError>
     <summary>
-      Displays "No records affeted." if the affected count is less than 1.
+      Displays "No records affected." if the affected count is less than 1.
     </summary>
     <param name="errorText">The error text.</param>
     <param name="affectedCount">The affected records count.</param>
@@ -129,6 +129,18 @@
     <param name="initialDirectory">The initial selected directory.</param>
     <param name="defaultFileSpec">The default file specification.</param>
     <returns>The file specification. A null string if the "Cancel" button is selected.</returns>
+    <example>
+      <code>
+        // No Spaces in filter file spec.
+        var filter = "csv files(*.csv)|*.csv|txt files(*.txt)|*.txt|All files(*.*)|*.*";
+        var initialDirectory = Directory.GetCurrentDirectory();
+        var inputFileSpec = FormCommon.SaveFile(filter, initialDirectory);
+        if (inputFileSpec != null)
+        {
+        // Process File
+        }
+      </code>
+    </example>
   </SaveFile>
   <SelectFile>
     <summary>
