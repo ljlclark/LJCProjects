@@ -1,11 +1,13 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// LJCCrypto.cs
 using System;
 using System.Text;
 using LJCNetCommon;
 
 namespace LJCDataAccessConfig
 {
-  // Data access encryptioin.
+  // Data access encryption.
   /// <include path='items/LJCCrypto/*' file='Doc/LJCCrypto.xml'/>
   public class LJCCrypto
   {
