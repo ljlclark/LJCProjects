@@ -1,4 +1,6 @@
-﻿// StandardUISettings.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// StandardUISettings.cs
 using LJCDataAccess;
 using LJCDBDataAccess;
 using LJCNetCommon;
