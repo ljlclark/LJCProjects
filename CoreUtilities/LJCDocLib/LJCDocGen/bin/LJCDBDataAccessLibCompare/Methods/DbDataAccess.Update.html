@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- MethodTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Update</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../../CodeDoc.html#LJCDBDataAccessLib">Assembly List</a>
+    / <a href="../LJCDBDataAccessLib.html">LJCDBDataAccessLib</a>
+    / <a href="../DbDataAccess.html">DbDataAccess</a>
+    / Update
+  </div>
+  <br />
+  <div id='Title'>Namespace - LJCDBDataAccessLib</div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>Method Update</div>
+  </div>
+  <br />
+  <div class='Text'>Returns</div>
+  <br />
+  <div class='Text'>The result XML message.</div>
+  <br />
+  <div class='Text'>Syntax</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            private DbResult Update()
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <div class='Text'>
+      Updates a database record.
+      (E)
+    </div>
+  <br />
+  <div class='Text'>Remarks</div>
+  <br />
+  <div class='Text'>
+        This method is called from the
+        <span class="commonType">Execute()</span>
+        method if the DbRequest.QueryType is "Update".
+        (E)
+      </div>
+  <br />
+  <div class='Text'>Example</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            <pre style='margin-left: 2px;'><span class='comment'>// Updates a record.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> Update(<span class='userType'>DbDataAccess</span> dbDataAccess
+  , <span class='userType'>DbColumns</span> dataDefinition)
+{
+  <span class='comment'>// Create the list of included columns.</span>
+  <span class='comment'>// This list must not include the database assigned columns</span>
+  <span class='comment'>// or the database assigned columns must have the AutoIncrement</span>
+  <span class='comment'>// value set to "true".</span>
+  List&lt;string&gt; columnNames = <span class='keyWord'>new</span> <span class='userType'>List</span>&lt;string&gt;();
+  <span class='keyWord'>foreach</span> (DbColumn column <span class='keyWord'>in</span> dataDefinition)
+  {
+    <span class='keyWord'>if</span> (column.ColumnName != "Id")
+    {
+      columnNames.Add(column.ColumnName);
+    }
+  }
+
+  <span class='userType'>Person</span> dataRecord = <span class='keyWord'>new</span> <span class='userType'>Person</span>()
+  {
+    Name = "TestNameUpdated"
+  };
+
+  <span class='comment'>// Create a Data Columns object with the included data definitions</span>
+  <span class='comment'>// and values from the data record.</span>
+  <span class='commonType'>var</span> dataColumns = DbCommon.QueryDataColumns(dataRecord
+    , dataDefinition, columnNames);
+
+  <span class='comment'>// Create Key Columns.</span>
+  <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+  {
+    { "Name}, (object)"TestName" }
+  };
+  dataDefinition.LJCSetExcludeKeyValue("PrincipleFlag");
+
+  <span class='commonType'>var</span> queryKeyColumns = DbCommon.QueryKeys(keyColumns, dataDefinition);
+
+  <span class='comment'>// Create query with columns containing values from the record.</span>
+  <span class='comment'>// The updated columns must not include the Db assigned columns.</span>
+  DbRequest dbRequest = <span class='keyWord'>new</span> <span class='userType'>DbRequest</span>()
+  {
+    Columns = dataColumns,
+    KeyColumns = queryKeyColumns
+    QueryType = QueryType.Update.ToString(),
+    TableName = "PersonTest",
+  };
+  <span class='userType'>DbResult</span> dbResult = dbDataAccess.Execute(dbRequest);
+
+  <span class='keyWord'>if</span> (dbResult != null)
+  {
+    <span class='commonType'>string</span> sqlStatement = dbResult.ExecutedSql;
+    <span class='commonType'>int</span> affectedCount = dbResult.AffectedRecords;
+  }
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+</body>
+</html>

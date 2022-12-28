@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenAssembly.xml -->
+<items>
+  <GenAssembly>
+    <summary>
+      Generates the Assembly HTML pages.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The DocGen library contains classes to generate HTML pages.
+      </para>
+      <para>
+        The DocGen library is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </GenAssembly>
+  <GenAssemblyC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="genRoot">The DataRootGen object.</param>
+    <param name="dataAssembly">The DataAssembly object.</param>
+  </GenAssemblyC>
+  <GenAssemblyPage>
+    <summary>
+      Creates an HTML page that lists the classes/types in an assembly.
+      (R)
+    </summary>
+    <param name="dataAssembly">The DataAssembly object.</param>
+    <param name="templateLines">The DataAssembly template lines.</param>
+    <remarks>
+      <para>
+        The HTML page is created in a folder under "Doc" with the full name of the
+        assembly. Each page file has the name of the assembly it represents.
+      </para>
+      <para>Called from DataRootGen.GenAssemblyPages().</para>
+    </remarks>
+  </GenAssemblyPage>
+  <GenTypePages>
+    <summary>
+      Generates the class/type pages.
+    </summary>
+    <remarks>Called from DataRootGen.GenAssemblyPages().</remarks>
+  </GenTypePages>
+</items>

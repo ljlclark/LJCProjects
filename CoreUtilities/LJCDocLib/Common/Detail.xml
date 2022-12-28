@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/> -->
+<items>
+  <!-- Form Event Handlers -->
+  <OnPaintBackground>
+    <summary>
+      Paint the form background.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnPaintBackground>
+  <!-- Data Methods -->
+  <DataRetrieve>
+    <summary>
+      Retrieves the initial control data.
+    </summary>
+  </DataRetrieve>
+  <GetRecordValues>
+    <summary>
+      Gets the record values and copies them to the controls.
+    </summary>
+    <param name="dataRecord">The data record object.</param>
+  </GetRecordValues>
+  <SetRecordValues>
+    <summary>
+      Creates and returns a record object with the data from the controls.
+    </summary>
+    <returns>The new record object.</returns>
+  </SetRecordValues>
+  <ResetRecordValues>
+    <summary>
+      Resets the empty record values.
+    </summary>
+    <param name="record">The data record object.</param>
+  </ResetRecordValues>
+  <DataSave>
+    <summary>
+      Saves the data.
+    </summary>
+  </DataSave>
+  <IsValid>
+    <summary>
+      Validates the data.
+    </summary>
+    <returns>True if the data is valid otherwise false.</returns>
+  </IsValid>
+  
+  <!-- Setup Methods -->
+  <InitializeControls>
+    <summary>
+      Configures the controls and loads the selection control data.
+    </summary>
+  </InitializeControls>
+  <LJCOnChange>
+    <summary>
+      Fires the LJCChange event.
+    </summary>
+  </LJCOnChange>
+</items>

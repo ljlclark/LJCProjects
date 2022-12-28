@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectCommon.xml -->
+<items>
+  <ChangeTimer>
+    <summary>
+      Provides Change Processing functionality.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The WinForm Common library contains common classes for use in WinForm
+        programs.
+      </para>
+      <para>
+        The WinForm Common library is part of the LJCLibraries solution.
+      </para>
+      <para>
+        The FormCommon Static Function Class is used in WinForms.
+      </para>
+      <para>
+        The most commonly used Collection and Object class pair is
+        ControlValues/ControlValue.
+      </para>
+      <para>
+        ChangeTimer is a commonly used class in List WinForms.
+      </para>
+    </remarks>
+  </ChangeTimer>
+</items>

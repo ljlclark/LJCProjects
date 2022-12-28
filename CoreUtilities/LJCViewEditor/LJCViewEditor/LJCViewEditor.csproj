@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4812A9C8-BBC0-4750-85B8-F2B17818848B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LJCViewEditor</RootNamespace>
+    <AssemblyName>LJCViewEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCViewEditor.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataDetail">
+      <HintPath>..\External\DataDetail.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCDataAccess">
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDataAccessConfig">
+      <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataDetailLib">
+      <HintPath>..\External\LJCDataDetailLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBServiceLib">
+      <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBViewDAL">
+      <HintPath>..\External\LJCDBViewDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCGridDataLib">
+      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCSQLUtilLib">
+      <HintPath>..\External\LJCSQLUtilLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCSQLUtilLibDAL">
+      <HintPath>..\External\LJCSQLUtilLibDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormCommon">
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormControls">
+      <HintPath>..\External\LJCWinFormControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\ViewEditSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewEditSplash.Designer.cs">
+      <DependentUpon>ViewEditSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewEditorCommon.cs" />
+    <Compile Include="Forms\Condition\ViewConditionDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Condition\ViewConditionDetail.Designer.cs">
+      <DependentUpon>ViewConditionDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Condition\ViewConditionSetDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Condition\ViewConditionSetDetail.Designer.cs">
+      <DependentUpon>ViewConditionSetDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenRequest.cs" />
+    <Compile Include="Forms\Filter\ViewFilterDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Filter\ViewFilterDetail.Designer.cs">
+      <DependentUpon>ViewFilterDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Column\ColumnGridClass.cs" />
+    <Compile Include="Forms\Column\ViewColumnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Column\ViewColumnDetail.Designer.cs">
+      <DependentUpon>ViewColumnDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\View\ViewDataDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\View\ViewDataDetail.Designer.cs">
+      <DependentUpon>ViewDataDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Condition\ConditionGridClass.cs" />
+    <Compile Include="Forms\Condition\ConditionSetGridClass.cs" />
+    <Compile Include="Forms\DataGridClass.cs" />
+    <Compile Include="Forms\Filter\FilterGridClass.cs" />
+    <Compile Include="Forms\JoinColumn\JoinColumnGridClass.cs" />
+    <Compile Include="Forms\Join\JoinGridClass.cs" />
+    <Compile Include="Forms\JoinOn\JoinOnGridClass.cs" />
+    <Compile Include="Forms\OrderBy\OrderByGridClass.cs" />
+    <Compile Include="Forms\ViewEditorList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewEditorList.Designer.cs">
+      <DependentUpon>ViewEditorList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesViewEditor.cs" />
+    <Compile Include="Forms\View\ViewGridClass.cs" />
+    <Compile Include="Forms\JoinColumn\ViewJoinColumnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JoinColumn\ViewJoinColumnDetail.Designer.cs">
+      <DependentUpon>ViewJoinColumnDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Join\ViewJoinDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Join\ViewJoinDetail.Designer.cs">
+      <DependentUpon>ViewJoinDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\JoinOn\ViewJoinOnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JoinOn\ViewJoinOnDetail.Designer.cs">
+      <DependentUpon>ViewJoinOnDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OrderBy\ViewOrderByDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderBy\ViewOrderByDetail.Designer.cs">
+      <DependentUpon>ViewOrderByDetail.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Condition\ViewConditionDetail.resx">
+      <DependentUpon>ViewConditionDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Condition\ViewConditionSetDetail.resx">
+      <DependentUpon>ViewConditionSetDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Filter\ViewFilterDetail.resx">
+      <DependentUpon>ViewFilterDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Column\ViewColumnDetail.resx">
+      <DependentUpon>ViewColumnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ViewEditSplash.resx">
+      <DependentUpon>ViewEditSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\View\ViewDataDetail.resx">
+      <DependentUpon>ViewDataDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ViewEditorList.resx">
+      <DependentUpon>ViewEditorList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\JoinColumn\ViewJoinColumnDetail.resx">
+      <DependentUpon>ViewJoinColumnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Join\ViewJoinDetail.resx">
+      <DependentUpon>ViewJoinDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\JoinOn\ViewJoinOnDetail.resx">
+      <DependentUpon>ViewJoinOnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderBy\ViewOrderByDetail.resx">
+      <DependentUpon>ViewOrderByDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Help\ViewEditor.chm" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJCViewEditorDAL\LJCViewEditorDAL.csproj">
+      <Project>{86e80f3a-5e72-4507-ad2d-b4128c769bfa}</Project>
+      <Name>LJCViewEditorDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="Doc\GenRequest.xml" />
+    <Content Include="Doc\ProjectViewEditor.xml" />
+    <Content Include="Doc\ViewEditorList.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Help\Column\ColumnDetail.html" />
+    <Content Include="Help\Column\ColumnList.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Help\Filter\ConditionDetail.html" />
+    <Content Include="Help\Filter\ConditionList.html" />
+    <Content Include="Help\Filter\ConditionSetDetail.html" />
+    <Content Include="Help\Filter\ConditionSetList.html" />
+    <Content Include="Help\Filter\FilterDetail.html" />
+    <Content Include="Help\Filter\FilterList.html" />
+    <Content Include="Help\Join\JoinColumnDetail.html" />
+    <Content Include="Help\Join\JoinColumnList.html" />
+    <Content Include="Help\Join\JoinDetail.html" />
+    <Content Include="Help\Join\JoinOnDetail.html" />
+    <Content Include="Help\Join\JoinOnList.html" />
+    <Content Include="Help\Join\JoinList.html" />
+    <Content Include="Help\OrderBy\OrderByDetail.html" />
+    <Content Include="Help\OrderBy\OrderByList.html" />
+    <Content Include="Help\View\ViewDetail.html" />
+    <Content Include="Help\XML.css" />
+    <Content Include="Help\DataConfig.html" />
+    <Content Include="Help\Table.html" />
+    <Content Include="Help\ViewEditor.html" />
+    <Content Include="Help\View\ViewList.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

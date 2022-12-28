@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenReplacementManager.xml -->
+<items>
+  <AddReplacement>
+    <summary>
+      Adds a Replacement record to the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <param name="replacement">The Replacement object.</param>
+  </AddReplacement>
+  <RetrieveReplacement>
+    <summary>
+      Retrieves a Replacement record from the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <param name="replacementName">The Replacement name.</param>
+    <returns>The Replacement object.</returns>
+  </RetrieveReplacement>
+  <LoadReplacements>
+    <summary>
+      Retrieves a collection of data records.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <returns>The Replacements collection.</returns>
+  </LoadReplacements>
+  <DeleteReplacement>
+    <summary>
+      Deletes the Replacement record from the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <param name="replacementName">The Replacement name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </DeleteReplacement>
+</items>

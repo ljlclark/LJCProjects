@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LJCDBClientLib.DataManager">
+    <Position X="0.75" Y="0.5" Width="2.5" />
+    <Members>
+      <Property Name="BaseDefinition" Hidden="true" />
+      <Method Name="CreateDataDefinition" Hidden="true" />
+      <Method Name="CreateSchemaColumnsResult" Hidden="true" />
+      <Property Name="DataConfigName" Hidden="true" />
+      <Property Name="DataDefinition" Hidden="true" />
+      <Method Name="DataManager" Hidden="true" />
+      <Property Name="DbAssignedColumns" Hidden="true" />
+      <Property Name="DbServiceRef" Hidden="true" />
+      <Property Name="LookupColumnNames" Hidden="true" />
+      <Method Name="MapNames" Hidden="true" />
+      <Field Name="mDataConfigName" Hidden="true" />
+      <Field Name="mRequestCipherItems" Hidden="true" />
+      <Field Name="mRequestInsertItems" Hidden="true" />
+      <Field Name="mRequestSendCipher" Hidden="true" />
+      <Field Name="mResponseCipherItems" Hidden="true" />
+      <Field Name="mResponseSendCipher" Hidden="true" />
+      <Field Name="mSchemaName" Hidden="true" />
+      <Field Name="mTableName" Hidden="true" />
+      <Property Name="OrderByNames" Hidden="true" />
+      <Property Name="PageSize" Hidden="true" />
+      <Property Name="PageStartIndex" Hidden="true" />
+      <Method Name="Reset" Hidden="true" />
+      <Property Name="SchemaName" Hidden="true" />
+      <Method Name="SetDbAssignedColumns" Hidden="true" />
+      <Method Name="SetLookupColumns" Hidden="true" />
+      <Property Name="TableName" Hidden="true" />
+      <Property Name="UseEncryption" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AJ4AsQSgAAACDABJBAQAAAJQYIEAiACIAAAgEQQBYAA=</HashCode>
+      <FileName>DataManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

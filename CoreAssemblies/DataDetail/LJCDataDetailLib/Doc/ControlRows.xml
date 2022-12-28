@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
+<items>
+  <ControlRows>
+    <summary>
+      Represents a collection of ControlRow objects.
+    </summary>
+    <remarks>
+      The ControlRows is one of the main layout definition objects.
+      ControlRows belong to a ControlColumn in the ControlColumns collection
+      which is the other main layout definition object.
+    </remarks>
+  </ControlRows>
+  <!-- Collection Methods -->
+  <Add1>
+    <summary>
+      Adds the specified object.
+    </summary>
+    <param name="controlRow">The item object.</param>
+  </Add1>
+  <Add2>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="dataValueName">The DataValue name.</param>
+    <param name="tabPageIndex">the TabPage index.</param>
+    <param name="controlColumnIndex">The ControlColumn index.</param>
+    <param name="rowIndex">The ControlRow index.</param>
+    <returns>A reference to the added element.</returns>
+  </Add2>
+  <!-- Sort and Search Methods -->
+  <SearchControlOrder>
+    <summary>
+      Retrieve the collection element with control order.
+    </summary>
+    <param name="tabIndex">The TabPage index.</param>
+    <param name="columnIndex">The ControlColumn index.</param>
+    <param name="rowIndex">The ControlRow index.</param>
+    <returns>The selected collection element.</returns>
+  </SearchControlOrder>
+  <!-- Custom Methods -->
+  <SetControlRowWidth>
+    <summary>
+      Sets the Width value.
+    </summary>
+    <param name="controlColumns">The ControlColumns object.</param>
+    <param name="controlRow">The ControlRow object.</param>
+  </SetControlRowWidth>
+  <!-- Properties -->
+  <Indexer>
+    <summary>
+      Gets the item by index value.
+    </summary>
+    <param name="index">The index value.</param>
+    <returns>The element item object.</returns>
+  </Indexer>
+</items>

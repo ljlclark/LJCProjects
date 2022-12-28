@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbJoin.xml -->
+<items>
+  <JoinType>
+    <summary>The join type.</summary>
+    <remarks>
+      Join type "Left" is the only join type supported by
+      &lt;span class="commonType"&gt;LJCDBService&lt;/span&gt;
+      at this time.
+    </remarks>
+  </JoinType>
+  <Columns>
+    <summary>The included join table columns.</summary>
+    <remarks>&lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;</remarks>
+  </Columns>
+</items>

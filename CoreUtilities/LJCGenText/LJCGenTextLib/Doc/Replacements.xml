@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- Replacements.xml -->
+<items>
+  <Replacements>
+    <summary>
+      Represents a collection of Replacement objects.
+    </summary>
+  </Replacements>
+  <Add>
+    <summary>
+      Creates the Replacement object with the supplied values
+      and adds it to the end of the collection.
+    </summary>
+    <param name="name">The section name.</param>
+    <param name="value">The replacement value.</param>
+    <returns>A reference to the object that was added.</returns>
+    <remarks>
+      Does not create or add the object if the supplied name is blank.
+    </remarks>
+  </Add>
+</items>

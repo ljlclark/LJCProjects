@@ -1,0 +1,14 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\CVRItem.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\CVRItem.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\CVRDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\LJCDBDataAccess.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\LJCRegionDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\LJCRegionItem.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\CVRDAL.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\bin\Debug\CVRDAL.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\obj\Debug\CVRItem.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\obj\Debug\CVRItem.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\obj\Debug\CVRItem.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\obj\Debug\CVRItem.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRItem\obj\Debug\CVRItem.pdb

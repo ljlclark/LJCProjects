@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenDataXml.xml -->
+<items>
+  <CreateDataXml>
+    <summary>
+      Creates the Data XML document.
+    </summary>
+  </CreateDataXml>
+  <CreateDataXmlC1>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="builder">The StringBuilder object.</param>
+  </CreateDataXmlC1>
+  <AddFileHead>
+    <summary>
+      Adds the Head elements.
+    </summary>
+  </AddFileHead>
+  <AddFileTail>
+    <summary>
+      Adds the Tail elements.
+    </summary>
+  </AddFileTail>
+  <AddSectionHead>
+    <summary>
+      Adds the Section Head elements.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="itemName">The first Item name.</param>
+  </AddSectionHead>
+  <AddNewSectionItem>
+    <summary>
+      Adds the new Item elements.
+    </summary>
+    <param name="itemName">The Item name.</param>
+  </AddNewSectionItem>
+  <GetNewSectionItem>
+    <summary>
+      Returns the new Item elements.
+    </summary>
+    <param name="itemName">The Item name.</param>
+    <returns>The new Item elements.</returns>
+  </GetNewSectionItem>
+  <AddSectionItemHead>
+    <summary>
+      Adds the Item Head elements.
+    </summary>
+    <param name="itemName">The Item name.</param>
+  </AddSectionItemHead>
+  <AddSectionItemTail>
+    <summary>
+      Adds the Item Tail elements.
+    </summary>
+  </AddSectionItemTail>
+  <AddSectionTail>
+    <summary>
+      Adds the Section Tail elements.
+    </summary>
+  </AddSectionTail>
+  <AddReplacement>
+    <summary>
+      Adds the new Replacement elements.
+    </summary>
+    <param name="name">The replacement name.</param>
+    <param name="value">The replacement value.</param>
+  </AddReplacement>
+  <GetReplacement>
+    <summary>
+      Returns a new Replacement node.
+    </summary>
+    <param name="name">The replacement name.</param>
+    <param name="value">The replacement value.</param>
+    <returns>The Replacement node.</returns>
+  </GetReplacement>
+</items>

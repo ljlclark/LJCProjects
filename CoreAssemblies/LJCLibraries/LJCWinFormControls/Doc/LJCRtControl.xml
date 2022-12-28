@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCRtControl.xml -->
+<items>
+  <!-- Static Methods -->
+  <LJCReadFileToRTF>
+    <summary>
+      Reads a file into an LJCRtControl and sets the leading tabs.
+    </summary>
+    <param name="fileSpec">The text file specification.</param>
+    <param name="rtfControl">The LJCRtControl control.</param>
+  </LJCReadFileToRTF>
+  <LJCSetLeadingSpacesToTabs>
+    <summary>
+      Sets the text leading spaces to tabs.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="leadingSpaces">
+      The number of leading spaces to convert to a tab.
+    </param>
+    <returns>The modified text.</returns>
+  </LJCSetLeadingSpacesToTabs>
+  <LJCSetLeadingSpacesToSpaces>
+    <summary>
+      Sets the leading spaces to a different number of spaces.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="leadingSpaces">The number of leading spaces to convert.</param>
+    <param name="outputSpaces">
+      The number of spaces to which the leading
+      spaces are converted.
+    </param>
+    <returns>The modified text.</returns>
+  </LJCSetLeadingSpacesToSpaces>
+  <LJCSetLeadingTabsToSpaces>
+    <summary>
+      Sets the leading tabs to spaces.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="outputSpaces">
+      The number of spaces to which the tabs
+      are converted.
+    </param>
+    <returns>The modified text.</returns>
+  </LJCSetLeadingTabsToSpaces>
+  <LJCLeadingSpaceToTabCount>
+    <summary>
+      Gets the number of tabs that are required based on the leadingSpaces
+      count.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="leadingSpaces">
+      The number of leading spaces that are
+      counted as a tab.
+    </param>
+    <returns>The required number of tabs.</returns>
+  </LJCLeadingSpaceToTabCount>
+  <LJCPrepareLine>
+    <summary>
+      Prepares the line for text editor display.
+    </summary>
+    <param name="lineText">The line text.</param>
+    <returns>The prepared line text.</returns>
+  </LJCPrepareLine>
+
+  <!-- Public Methods -->
+  <LJCLoadFromFile>
+    <summary>
+      Reads a file into the Control and sets the leading tabs.
+    </summary>
+    <param name="fileSpec">The source file specification.</param>
+  </LJCLoadFromFile>
+  <LJCSetDelimitedTextColor>
+    <summary>
+      Sets the text color for the delimited string value.
+    </summary>
+    <param name="lineIndex">The line index value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <param name="color">The target text color.</param>
+  </LJCSetDelimitedTextColor>
+  <LJCSetTextColor>
+    <summary>
+      Sets the text color from the beginning offset to length.
+    </summary>
+    <param name="lineIndex">The line index value.</param>
+    <param name="colorBeginIndex">The begin index value.</param>
+    <param name="length">The target text length.</param>
+    <param name="color">The target text color.</param>
+  </LJCSetTextColor>
+  <LJCGetLineText>
+    <summary>
+      Gets the text for the specified line.
+    </summary>
+    <param name="lineIndex">The line index value.</param>
+    <returns>The line text.</returns>
+  </LJCGetLineText>
+  <LJCAppend1>
+    <summary>
+      Adds text to the control.
+    </summary>
+    <param name="text">The text value.</param>
+  </LJCAppend1>
+  <LJCAppend2>
+    <summary>
+      Adds text with a font.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The font style.</param>
+  </LJCAppend2>
+  <LJCAppend3>
+    <summary>
+      Adds text with a font and a color.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The font style.</param>
+    <param name="color">The color value.</param>
+  </LJCAppend3>
+  <LJCAppendLine1>
+    <summary>
+      Adds a carriage return line feed.
+    </summary>
+  </LJCAppendLine1>
+  <LJCAppendLine2>
+    <summary>
+      Adds the text plus a CR/LF.
+    </summary>
+    <param name="text">The text value.</param>
+  </LJCAppendLine2>
+  <LJCAppendLine3>
+    <summary>
+      Adds text with a font and CR/LF.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The font style.</param>
+  </LJCAppendLine3>
+  <LJCAppendLine4>
+    <summary>
+      Adds text with a font, color and CR/LF.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The font style.</param>
+    <param name="color">The color value.</param>
+  </LJCAppendLine4>
+</items>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenFileSpecs.xml -->
+<items>
+  <GenFileSpecs>
+    <summary>
+      Represents a collection of GenFileSpec items.
+    </summary>
+  </GenFileSpecs>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="fileTypeName">The File Type name.</param>
+    <param name="templateFileSpec">The Template File Spec.</param>
+    <param name="outputFileSpec">The Output File Spec.</param>
+    <param name="xmlFormat">The XML format.</param>
+    <param name="isPlural">The is Plural value.</param>
+    <returns>The GenFileSpec object.</returns>
+  </Add>
+</items>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- LJCDocGenLibLinks.xml -->
+<Links xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Link>
+    <Name>GenRootToMethod.html</Name>
+    <Text>GenRoot Class Diagram</Text>
+  </Link>
+  <Link>
+    <Name>GenPropertyToField.html</Name>
+    <Text>GenProperty Class Diagram</Text>
+  </Link>
+</Links>

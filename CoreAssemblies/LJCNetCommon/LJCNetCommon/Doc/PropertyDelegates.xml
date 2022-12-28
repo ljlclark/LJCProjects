@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- PropertyDelegates.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds a PropertyDelegate object to the collection. (R)
+    </summary>
+    <param name="propertyInfo">The PropertyInfo object.</param>
+    <returns>The PropertyDelegate object.</returns>
+    <remarks>
+      Returns the existing PropertyDelegate if it is already in the list.
+    </remarks>
+  </Add>
+  <LJCSearchName>
+    <summary>
+      Returns the PropertyDelegate object if found in the list.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The PropertyDelegate object.</returns>
+  </LJCSearchName>
+  <LJCCreateDelegate>
+    <summary>
+      Creates and returns the delegate for the named property.
+    </summary>
+    <param name="propertyInfo">The PropertyInfo object.</param>
+    <returns>The property access delegate.</returns>
+  </LJCCreateDelegate>
+</items>

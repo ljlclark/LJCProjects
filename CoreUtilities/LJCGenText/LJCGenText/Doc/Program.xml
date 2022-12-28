@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- Program.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The command line utility to generate output text from a template and
+        an XML data file.
+      </para>
+    </remarks>
+  </Program>
+</items>

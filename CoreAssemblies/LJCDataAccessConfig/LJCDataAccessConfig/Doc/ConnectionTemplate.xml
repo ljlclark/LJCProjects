@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ConnectionTemplate.xml -->
+<items>
+	<ConnectionTemplate>
+		<summary>
+			Represents a Connection String template.
+		</summary>
+		<remarks>
+			A connection template contains the connection string format with
+			replaceable	parameters. The replaceable parameters are wrapped in braces.
+			&lt;pre&gt;
+  &amp;lt;ConnectionTemplate&amp;gt;
+    &amp;lt;Name&amp;gt;SQLServer&amp;lt;/Name&amp;gt;
+    &amp;lt;Template&amp;gt;Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True&amp;lt;/Template&amp;gt;
+  &amp;lt;/ConnectionTemplate&amp;gt;&lt;/pre&gt;
+			&lt;p&gt;
+			These replaceable parameters are populated with
+			the associated connection values from the Data Configuration.
+			&lt;/p&gt;
+			&lt;pre&gt;
+  &amp;lt;DataConfig&amp;gt;
+    &amp;lt;Name&amp;gt;ConfigName&amp;lt;/Name&amp;gt;
+    &amp;lt;ConnectionTypeName&amp;gt;SQLServer&amp;lt;/Name&amp;gt;
+    &amp;lt;DbServer&amp;gt;DbServiceName&amp;lt;/DbServer&amp;gt;
+    &amp;lt;Database&amp;gt;DatabaseName&amp;lt;/Database&amp;gt;
+  &amp;lt;/DataConfig&amp;gt;&lt;/pre&gt;
+			&lt;pre&gt;
+  &lt;u&gt;Value&lt;/u&gt;      &lt;u&gt;Parameter&lt;/u&gt;
+  DbServer   {DbServer}
+  Database   {Database}
+  UserID     {UID}
+  Pswd       {PSWD}&lt;/pre&gt;
+		</remarks>
+	</ConnectionTemplate>
+	<ConnectionTemplateC>
+		<summary>
+			Initializes an object instance.
+		</summary>
+	</ConnectionTemplateC>
+	<!-- Methods -->
+	<Clone>
+		<summary>
+			Creates and returns a clone of the object.
+		</summary>
+		<returns>The new cloned value.</returns>
+	</Clone>
+	<ToString>
+		<summary>
+			The object string identifier.
+		</summary>
+		<returns>The identifier value.</returns>
+	</ToString>
+	<CompareTo>
+		<summary>
+			Provides the default Sort functionality.
+		</summary>
+		<param name="other">The compared to object.</param>
+		<returns>An integer value indicating the order relationship.</returns>
+	</CompareTo>
+</items>

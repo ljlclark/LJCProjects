@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Program.xml -->
+<!-- <include path='items/Program/*' file='../../LJCDocLib/Common/Program.xml'/> -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+    </remarks>
+  </Program>
+  <Main>
+    <summary>
+      The program entry point function.
+    </summary>
+  </Main>
+  <MainArgs>
+    <summary>
+      The program entry point function.
+    </summary>
+    <param name="args">The command line arguments.</param>
+  </MainArgs>
+</items>

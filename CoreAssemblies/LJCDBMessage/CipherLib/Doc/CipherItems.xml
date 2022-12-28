@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CipherItems.xml -->
+<items>
+  <CreateCipher>
+    <summary>
+      Creates the Cipher.
+    </summary>
+    <param name="plainText">The Plain Text.</param>
+    <returns>The Cipher value.</returns>
+    <remarks>
+      Must be called after the CreateItems() or SetInsertItems() methods.
+    </remarks>
+  </CreateCipher>
+  <CreateItems>
+    <summary>
+      Creates the InsertItems.
+    </summary>
+    <returns>The InsertItems collection.</returns>
+  </CreateItems>
+  <CreateReceivedItems>
+    <summary>
+      Get bytes from sourceCipher index values knowing only
+      the index locations.
+    </summary>
+    <param name="receivedCipher">The source cipher.</param>
+    <param name="setObjectItems">
+      Indicates if the current object values should be set.
+    </param>
+    <returns>The InsertItems collection.</returns>
+  </CreateReceivedItems>
+  <CreatePlainText>
+    <summary>
+      Returns the Plain Text value.
+    </summary>
+    <param name="cipher">The Cipher.</param>
+    <returns>The Plain Text.</returns>
+    <remarks>
+      Must be called after the CreateItems() or SetInsertItems() methods.
+    </remarks>
+  </CreatePlainText>
+  <SetInsertValues>
+    <summary>
+      Initializes the internal InsertItems properties.
+    </summary>
+    <param name="insertItems">The InsertItems object.</param>
+  </SetInsertValues>
+</items>

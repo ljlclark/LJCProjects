@@ -1,0 +1,8 @@
+CREATE
+DbConnectionStringBuilder
+IF
+LJCDataAccess
+NOT
+SELECT*
+WHERE
+PRIMARY

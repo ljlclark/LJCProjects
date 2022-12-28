@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenFieldXml.xml -->
+<items>
+  <CreateFieldXml>
+    <summary>
+      Creates the Field XML Data values.
+    </summary>
+  </CreateFieldXml>
+  <CreateFieldXmlC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="genAssembly">The GenAssembly generator object.</param>
+    <param name="dataAssembly">The DataAssembly data object.</param>
+    <param name="dataType">The DataType data object.</param>
+    <param name="dataField">The DataField data object.</param>
+    <param name="assemblyReflect">The LJCAssemblyReflect object.</param>
+  </CreateFieldXmlC>
+  <GetXmlData>
+    <summary>
+      Returns the XML Data values.
+    </summary>
+    <returns>The XML Data values string.</returns>
+  </GetXmlData>
+  <AddSyntax>
+    <summary>
+      Adds the Field syntax elements.
+    </summary>
+    <param name="replacements">The Replacements object.</param>
+  </AddSyntax>
+  <SetFieldInfo>
+    <summary>
+      Sets the FieldInfo property.
+    </summary>
+  </SetFieldInfo>
+  <SetFieldRemarks>
+    <summary>
+      Sets the Object Remarks elements.
+    </summary>
+    <param name="section">The Section object.</param>
+    <returns>True if remarks exist, otherwise false.</returns>
+  </SetFieldRemarks>
+</items>

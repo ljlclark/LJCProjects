@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- DocMembers.xml -->
+<items>
+  <DocMembers>
+    <summary>
+      The deserialized XML documentation members.
+    </summary>
+  </DocMembers>
+  <Add>
+    <summary>
+      Creates an element from the supplied values and adds it to the list.
+    </summary>
+    <param name="name">The member name.</param>
+    <param name="summary">The member summary value.</param>
+    <param name="returns">The created element.</param>
+    <returns>A reference to the created element.</returns>
+  </Add>
+  <AddFromList>
+    <summary>
+      Adds elements from another list.
+    </summary>
+    <param name="list">The source list.</param>
+  </AddFromList>
+</items>

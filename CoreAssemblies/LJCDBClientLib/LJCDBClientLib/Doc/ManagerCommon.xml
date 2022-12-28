@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ManagerCommon.xml -->
+<items>
+  <CreateRequest>
+    <summary>
+      Creates the DbRequest object.
+    </summary>
+    <param name="requestType">The request type.</param>
+    <param name="tableName">The database table name.</param>
+    <param name="requestColumns">The Request columns.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="schemaName">The schema name.</param>
+    <param name="keyColumns">The record containing the key column values.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns></returns>
+  </CreateRequest>
+  <CreateTables>
+    <summary>
+      Run the CreateTables script.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="fileSpecs">The File specification array.</param>
+    <returns>True if the tables were created, otherwise false.</returns>
+  </CreateTables>
+  <GetConfigValues>
+    <summary>
+      Gets the additional Config values.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="connectionType">The ConnectionTypeName value.</param>
+    <param name="connectionString">The ConnectionString value.</param>
+    <param name="providerName">The ProviderName value.</param>
+  </GetConfigValues>
+  <GetMissingTableErrorCode>
+    <summary>
+      Gets the Missing Table ErrorCode.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <returns></returns>
+  </GetMissingTableErrorCode>
+</items>

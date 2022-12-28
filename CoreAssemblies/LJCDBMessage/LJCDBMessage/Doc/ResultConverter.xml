@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ResultConverter.xml -->
+<items>
+  <ResultConverter>
+    <summary>
+      Converts
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      objects to data objects.
+    </summary>
+    <typeparam name="TData">The data object type.</typeparam>
+    <typeparam name="TList">The collection type.</typeparam>
+  </ResultConverter>
+  <CreateData1>
+    <summary>
+      Creates a Data Object from the result DbColumns object.
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </summary>
+    <param name="dbColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param>
+    <returns>The Data Object.</returns>
+  </CreateData1>
+  <CreateData2>
+    <summary>
+      Creates a Data Object from the result values.
+    </summary>
+    <param name="dbResult">
+      The &lt;span class="userType"&gt;DbResult&lt;/span&gt; object.
+    </param>
+    <returns>The Data Object.</returns>
+  </CreateData2>
+  <CreateData3>
+    <summary>
+      Creates a Data Object from the data values.
+    </summary>
+    <param name="dbValues">
+      The &lt;span class="userType"&gt;DbValues&lt;/span&gt; object.
+    </param>
+    <returns>The Data Object.</returns>
+  </CreateData3>
+  <CreateDataFromTable>
+    <summary>
+      Creates a Data Object from the row values.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="dataRow">The DataRow object.</param>
+    <param name="dataDefinition">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param>
+    <returns>The Data Object.</returns>
+  </CreateDataFromTable>
+  <CreateCollection>
+    <summary>
+      Creates a collection from the result records.
+    </summary>
+    <param name="dbResult">The result object.</param>
+    <returns>The collection.</returns>
+  </CreateCollection>
+  <CreateCollectionFromTable>
+    <summary>
+      Creates a Data Object collection from the Table rows.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="dataDefinition">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.</param>
+    <returns>The Data Object collection.</returns>
+  </CreateCollectionFromTable>
+</items>

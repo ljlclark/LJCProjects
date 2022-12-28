@@ -1,0 +1,12 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\CVRDAL.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\CVRDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\CVRDAL.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\LJCDBDataAccess.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\LJCDBMessage.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\LJCDBServiceLib.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\obj\Debug\CVRDAL.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\obj\Debug\CVRDAL.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\obj\Debug\CVRDAL.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\obj\Debug\CVRDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CVRManager\CVRDAL\obj\Debug\CVRDAL.pdb

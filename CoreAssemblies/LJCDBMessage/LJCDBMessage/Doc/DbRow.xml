@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbRow.xml -->
+<items>
+  <Item1>
+    <summary>
+      The row value for the specified value column index.
+    </summary>
+    <param name="columnIndex">The row value column index.</param>
+    <returns>The selected DbValue row value object.</returns>
+  </Item1>
+  <Item2>
+    <summary>
+      The row value for the specified value property name.
+    </summary>
+    <param name="propertyName">The row value property name.</param>
+    <returns>The selected DbValue row value object.</returns>
+  </Item2>
+</items>

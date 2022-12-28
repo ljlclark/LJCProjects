@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<!-- TypeTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>DbDataAccess</title>
+  <meta charset='utf-8' />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <br />
+  <div class="PathText">
+    / <a href="../../CodeDoc.html#LJCDBDataAccessLib">Assembly List</a>
+    / <a href="LJCDBDataAccessLib.html">LJCDBDataAccessLib</a>
+    / DbDataAccess
+  </div>
+  <br />
+  <div id='Title'>Namespace - LJCDBDataAccessLib</div>
+  <br />
+  <div id='Header'>
+    <div id='Title'>Class DbDataAccess</div>
+  </div>
+  <br />
+  <div class='Text'>Syntax</div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            public class DbDataAccess
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <div class='Text'>
+    Implements a Message Based data access class.
+    (DE)
+  </div>
+  <br />
+  <div class='Text'>Remarks</div>
+  <br />
+  <div class='Text'>
+    The Message Data Access class contains methods for performing common
+    database functions using
+    <span class="userType">DbRequest</span>
+    request objects and returning
+    <span class="userType">DbResult</span>
+    objects.
+  </div>
+  <br />
+  <div class='Text'>
+    The single public method is
+    <span class="commonType">Execute()</span>.
+    The <span class="commonType">Execute()</span>
+    method calls the supporting private data methods based on the
+    <span class="userType">DbRequest</span>
+    query request type. It returns the
+    <span class="userType">DbResult</span>
+    object created in the private data methods.
+  </div>
+  <br />
+  <div class='Text'>
+    The <span class="userType">DbResult</span>
+    object is created from the
+    <span class="userType">DataTable</span>
+    using the
+    <span class="userType">ResultCommon</span>
+    static
+    <span class="commonType">GetResultColumns()</span> and
+    <span class="commonType">GetResultRecords()</span>
+    functions.
+  </div>
+  <br />
+  <div class='Text'>
+    The private data methods create a SQL statement based on the data from
+    the <span class="userType">DbRequest</span>
+    object. The SQL statement is executed and the SQL result is
+    transformed into a
+    <span class="userType">DbResult</span>
+    object.
+  </div>
+  <br />
+  <div class='Text'>
+    The test code is found in project LJCDBServiceLib\TestDbDataAccess.
+  </div>
+  <br />
+  <div id='Title'>Public Methods</div>
+
+  <!-- ******************** -->
+  <div class="title2">Constructors</div>
+  <table class='ListTable'>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.ctor.html'>DbDataAccess #ctor</a></td>
+      <td class='ListTable'>
+        Initializes an object instance.
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.ctor1.html'>DbDataAccess #ctor</a></td>
+      <td class='ListTable'>
+        Initializes an object instance.
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.ctor2.html'>DbDataAccess #ctor</a></td>
+      <td class='ListTable'>
+        Initializes an object instance with the supplied values.
+      </td>
+    </tr>
+  </table>
+
+  <!-- ******************** -->
+  <div class="title2">Public Data Methods</div>
+  <table class='ListTable'>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Execute.html'>Execute</a></td>
+      <td class='ListTable'>
+        Executes the specified DbRequest definition.
+      </td>
+    </tr>
+  </table>
+  <div class='Text'>4 Method</div>
+
+  <!-- ******************** -->
+  <br />
+  <div id='Title'>Private Common Data Methods</div>
+  <table class='ListTable'>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Add.html'>Add</a></td>
+      <td class='ListTable'>
+        Inserts a record with the specified columns.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Delete.html'>Delete</a></td>
+      <td class='ListTable'>
+        Deletes a record.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Load.html'>Load</a></td>
+      <td class='ListTable'>
+        Retrieves multiple data rows.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Retrieve.html'>Retrieve</a></td>
+      <td class='ListTable'>
+        Retrieves the data row values.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.SelectProcedure.html'>SelectProcedure</a></td>
+      <td class='ListTable'>
+        Retrieves the data row values from a Stored Procedure.
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.Update.html'>Update</a></td>
+      <td class='ListTable'>
+        Updates a database record.
+        (E)
+      </td>
+    </tr>
+  </table>
+  <div class='Text'>6 Methods</div>
+
+  <!-- ******************** -->
+  <br />
+  <div id='Title'>Other Private Data Methods</div>
+  <table class='ListTable'>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.CreateResult.html'>CreateResult</a></td>
+      <td class='ListTable'>
+        Creates the result object with common values.
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.ExecuteClientSql.html'>ExecuteClientSql</a></td>
+      <td class='ListTable'>
+        Executes a "Non-Query" client SQL statement.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.GetConfigValues.html'>GetConfigValues</a></td>
+      <td class='ListTable'>
+        Sets the DataConfig values.
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.LoadClientSql.html'>LoadClientSql</a></td>
+      <td class='ListTable'>
+        Executes a "Load" client SQL statement.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.RetrieveClientSql.html'>RetrieveClientSql</a></td>
+      <td class='ListTable'>
+        Executes a "Retrieve" client SQL statement.
+        (E)
+      </td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Methods\DbDataAccess.TableNames.html'>TableNames</a></td>
+      <td class='ListTable'>
+        Retrieves the table names for the specified database.
+      </td>
+    </tr>
+  </table>
+  <div class='Text'>6 Methods</div>
+
+  <!-- ******************** -->
+  <br />
+  <div id='Title'>Properties</div>
+  <table class='ListTable'>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Properties\DbDataAccess.DatabaseName.html'>DatabaseName</a></td>
+      <td class='ListTable'>Gets or sets the Database name.</td>
+    </tr>
+    <tr>
+      <td class='ListTable' width='25%'><a href='Properties\DbDataAccess.DbRequest.html'>DbRequest</a></td>
+      <td class='ListTable'>Gets or sets the DbRequest object.</td>
+    </tr>
+  </table>
+  <br />
+  <div class='Text'>Example</div>
+  <br />
+  <div class='Text'>
+    The following example shows how to directly use the
+    <span class="userType">DbDataAccess</span>
+    object for database access.
+    Applications should generally encapsulate much of this code in a table
+    specific Manager class to make application programming easier and cleaner.
+  </div>
+  <br />
+  <div class='Text'>
+    A Manager class is the client code that creates a table specific
+    <span class="userType">DbRequest</span> object.
+    It passes the
+    <span class="userType">DbRequest</span>
+    object to the
+    <span class="userType">DbDataAccess.Execute()</span>
+    method.
+  </div>
+  <br />
+  <div class='Text'>
+    A common Manager class
+    <span class="userType">LJCDbClientLib.DataManager</span>
+    is available to simplify interacting with the data access
+    objects.<br />
+    It can directly call
+    <span class="userType">DbDataAccess</span> or
+    <span class="userType">LJCDBServiceLib.DbService</span> and
+    returns data as
+    <span class="userType">DbResult</span>
+    objects.<br />
+    It can also access a remote
+    <span class="userType">DbService</span>
+    object using a Service Host and a client proxy. The
+    <span class="userType">LJCDBServiceHost.DBWindowsService</span>
+    is a host that is provided to run as a windows service.
+  </div>
+  <br />
+  <div class='Text'>
+    The test code is found in project LJCDBServiceLib\TestDbDataAccess.
+  </div>
+  <br />
+  <div class='SectionContainer'>
+    <table class='CodeTable'>
+      <tbody>
+        <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+        <tr class='CodeTable'>
+          <td class='CodeTable'>
+            <pre style='margin-left: 2px;'><span class='userType'>IF</span> <span class='userType'>NOT</span> EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
+  <span class='userType'>WHERE</span> TABLE_NAME = N'PersonTest')
+BEGIN
+<span class='userType'>CREATE</span> TABLE[dbo].[PersonTest]
+(
+  [Id][int] IDENTITY(1,1) <span class='userType'>NOT</span> NULL,
+  [Name] [nvarchar] (60) NULL,
+  [PrincipleFlag] [bit] <span class='userType'>NOT</span> NULL,
+  CONSTRAINT[PK_PersonTest]
+            <span class='userType'>PRIMARY</span> KEY CLUSTERED(
+    [Id] ASC),
+  )
+END
+GO
+
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+<span class='keyWord'>using</span> System.Data.Common;
+<span class='keyWord'>using</span> LJCNet.Common;
+<span class='keyWord'>using</span> LJCDBMessage;
+<span class='keyWord'>using</span> LJCDBDataAccessLib;
+
+<span class='comment'>// A Person Data Record class.</span>
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Person</span>
+{
+            <span class='modifier'>public</span> <span class='commonType'>Int32</span> ID { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+            <span class='modifier'>public</span> <span class='commonType'>string</span> Name { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+            <span class='modifier'>public</span> <span class='commonType'>bool</span> PrincipleFlag { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+}
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span>&lt;<span class='userType'>Person</span>&gt; { }
+
+<span class='comment'>// Test DbDataAccess</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> TestDbDataAccess()
+{
+            <span class='userType'>DbConnectionStringBuilder</span> connectionBuilder;
+            <span class='userType'>DbDataAccess</span> dbDataAccess;
+
+            <span class='commonType'>string</span> databaseName = "DatabaseName";
+  connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
+  {
+    { "Data Source", "DataServiceName" },
+    { "Initial Catalog", databaseName },
+    { "Integrated Security", "True" }
+  };
+            <span class='commonType'>string</span> connectionString = connectionBuilder.ConnectionString;
+            <span class='commonType'>string</span> providerName = "System.Data.SqlClient";
+  dbDataAccess = <span class='keyWord'>new</span> <span class='userType'>DbDataAccess</span>(connectionString, providerName
+    , databaseName);
+
+            <span class='comment'>// Get the table data definition.</span>
+            <span class='userType'>DbColumns</span> dataDefinition = SchemaOnly(dbDataAccess);
+            <span class='userType'>DbColumn</span> dbColumn = dataDefinition.LJCSearchByName("Id");
+  dbColumn.PropertyName = "ID";
+
+  Add(dbDataAccess, dataDefinition);
+            <span class='userType'>Person</span> person = Retrieve(dbDataAccess, dataDefinition);
+            <span class='userType'>Persons</span> persons = Load(dbDataAccess, dataDefinition);
+  Update(dbDataAccess, dataDefinition);
+  persons = Load(dbDataAccess, dataDefinition);
+  Delete(dbDataAccess, dataDefinition);
+  persons = Load(dbDataAccess, dataDefinition);
+
+  Add(dbDataAccess, dataDefinition);
+  person = RetrieveClientSql(dbDataAccess, dataDefinition);
+  persons = LoadClientSql(dbDataAccess, dataDefinition);
+  ExecuteClientSql(dbDataAccess, dataDefinition);
+  persons = LoadClientSql(dbDataAccess, dataDefinition);
+  Delete(dbDataAccess, dataDefinition);
+  persons = LoadClientSql(dbDataAccess, dataDefinition);
+}
+
+<span class='comment'>// Create the Data Definition from the table schema.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='userType'>DbColumns</span> SchemaOnly(<span class='userType'>DbDataAccess</span> dbDataAccess)
+{
+            <span class='userType'>DbColumns</span> retValue = <span class='keyWord'>null</span>;
+
+  DbRequest dbRequest = <span class='keyWord'>new</span> <span class='userType'>DbRequest</span>()
+  {
+    QueryType = QueryType.SchemaOnly.ToString(),
+    TableName = "PersonTest"
+  };
+            <span class='userType'>DbResult</span> dbResult = dbDataAccess.Execute(dbRequest);
+  retValue = dbResult.DbRecordColumns;
+            <span class='keyWord'>return</span> retValue;
+}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+</body>
+</html>

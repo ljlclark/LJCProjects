@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DbColumns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DbColumn>
+    <AllowDBNull>false</AllowDBNull>
+    <AutoIncrement>false</AutoIncrement>
+    <ColumnName>ColumnName</ColumnName>
+    <DataTypeName>String</DataTypeName>
+    <IsPrimaryKey>false</IsPrimaryKey>
+    <MaxLength>0</MaxLength>
+    <Position>0</Position>
+    <PropertyName>ColumnName</PropertyName>
+    <Unique>false</Unique>
+  </DbColumn>
+</DbColumns>

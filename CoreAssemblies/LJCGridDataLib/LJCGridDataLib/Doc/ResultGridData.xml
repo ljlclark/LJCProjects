@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ResultGridData.xml -->
+<items>
+  <ResultGridDataC>
+    <summary>
+      Initalizes an object instance.
+    </summary>
+    <param name="grid">The Grid control.</param>
+  </ResultGridDataC>
+
+  <!-- Configuration Methods -->
+  <SetDisplayColumns>
+    <summary>
+      Configure the Display Columns from the DbColumns definition.
+    </summary>
+    <param name="dbColumns">The DbColumns.</param>
+    <param name="columnNames">The display column names.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        using LJCDBClientLib;
+        using LJCGridDataLib;
+
+        // Configure the Display Columns from the DbColumns definition.
+        private static void SetDisplayColumns1(DataManager dataManager)
+        {
+          DbColumns retValue = null;
+          
+          var dbResult = dataManager.Load();
+          if (DbResult.HasData(dbResult))
+          {
+            // Create the Display columns.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            retValue = resultGridData.DisplayColumns;
+          }
+          return retValue;
+        }
+      </code>
+    </example>
+  </SetDisplayColumns>
+  <SetDisplayColumns1>
+    <summary>
+      Configure the Display Columns from the DbRequest object definition.
+    </summary>
+    <param name="dbRequest">The DbRequest object.</param>
+    <param name="columnNames">The included columns.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        using LJCDBClientLib;
+        using LJCGridDataLib;
+        using LJCDBViewDAL;
+
+        // Configure the Display Columns from the DbRequest object definition.
+        private DbColumns SetDisplayColumns1(DataManager dataManager)
+        {
+          DbColumns retValue;
+          
+          // Get a View Request.
+          var dbRequest = ViewHelper.GetViewRequest("TableName", "ViewDataName");
+
+          // Or Create the Request.
+          dbRequest = new DbRequest()
+          {
+            Columns = dataManager.DataDefinition,
+            DataConfigName = dataManager.DataConfigName,
+            RequestTypeName = RequestType.Load.ToString(),
+            TableName = dataManager.TableName
+          };
+
+          // Create the Display columns.
+          var resultGridData = new ResultGridData(LJCDataGridName);
+          resultGridData.SetDisplayColumns(dbRequest);
+          retValue = resultGridData.DisplayColumns;
+          return retValue;
+        }
+      </code>
+    </example>
+  </SetDisplayColumns1>
+  <SetDisplayColumns2>
+    <summary>
+      Configure the Display Columns from the Data object properties.
+    </summary>
+    <param name="dataObject">The Data object.</param>
+    <param name="propertyNames">The included columns.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        using LJCDBClientLib;
+        using LJCGridDataLib;
+
+        // Configure the Display Columns from the Data object properties.
+        private DbColumns SetDisplayColumns2(DataManager dataManager)
+        {
+          DbColumns retValue;
+
+          var dataObject = new ADataObject();
+
+          // Create the Display columns.
+          var resultGridData = new ResultGridData(LJCDataGridName);
+          resultGridData.SetDisplayColumns(dataObject);
+          retValue = resultGridData.DisplayColumns;
+          return retValue;
+        }
+      </code>
+    </example>
+  </SetDisplayColumns2>
+  <RemoveDisplayColumn>
+    <summary>
+      Removes a display column.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </RemoveDisplayColumn>
+
+  <!-- Row Data Methods -->
+  <LoadRows>
+    <summary>
+      Loads the grid rows from the result Rows.
+    </summary>
+    <param name="dbResult">The DbResult object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        // Loads the grid rows from the result Rows.
+        private void LoadRows(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (DbResult.HasData(dbResult))
+          {
+            // Create the Display column definitions.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+
+            // Load the grid rows.
+            resultGridData.LoadRows(dbResult);
+          }
+        }
+      </code>
+    </example>
+  </LoadRows>
+  <LoadRows1>
+    <summary>
+      Loads the grid rows from the DbRows object.
+    </summary>
+    <param name="dbRows">The DbRows object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        // Loads the grid rows from the DbRows object.
+        private void LoadRows1(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (DbResult.HasData(dbResult))
+          {
+            // Create the Display column definitions.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+
+            // Load the grid rows.
+            resultGridData.LoadRows(dbResult.Rows);
+          }
+        }
+      </code>
+    </example>
+  </LoadRows1>
+  <OnAddRow>
+    <summary>
+      Fires the AddRow event.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnAddRow()</para>
+    </remarks>
+  </OnAddRow>
+  <RowAdd>
+    <summary>
+      Adds a grid row and updates it with the DbValues.
+    </summary><param name="record">The DbValues object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        // Loads the grid rows from the DbRows object.
+        private void RowAdd(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (DbResult.HasData(dbResult))
+          {
+            // Create the Display column definitions.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+
+            // Load the grid rows individually.
+            foreach (DbRow dbRow in dbResult.Rows)
+            {
+              resultGridData.RowAdd(dbRow.Values);
+            }
+          }
+        }
+      </code>
+    </example>
+  </RowAdd>
+  <RowSetValues>
+    <summary>
+      Updates a grid row with the DbValues.
+    </summary>
+    <param name="gridRow">The grid row.</param>
+    <param name="record">The DbValues object.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        // Loads the grid rows from the DbRows object.
+        private void LoadRows1(DataManager dataManager)
+        {
+          var dbResult = dataManager.Load();
+          if (DbResult.HasData(dbResult))
+          {
+            // Create the Display column definitions.
+            var resultGridData = new ResultGridData(LJCDataGridName);
+            resultGridData.SetDisplayColumns(dbResult.Columns);
+            
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+
+            // Create and load the grid rows individually.
+            foreach (DbRow dbRow in dbResult.Rows)
+            {
+              var gridRow = LJCDataGridName.LJCRowAdd();
+              resultGridData.RowSetValues(gridRow, dbRow.Values);
+            }
+          }
+        }
+      </code>
+    </example>
+  </RowSetValues>
+  <RowUpdate>
+    <summary>
+      Updates the current row with the DbValues.
+    </summary>
+    <param name="record">The DbValues object.</param>
+  </RowUpdate>
+</items>

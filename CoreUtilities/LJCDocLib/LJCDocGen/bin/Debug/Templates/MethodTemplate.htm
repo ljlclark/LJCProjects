@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<!-- MethodTemplate.htm -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- #SectionBegin Main -->
+<head>
+  <title>_MethodName_</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/Syntax.css' />
+</head>
+<!--X------------------------------------->
+<!-- #Value _AssemblyName_ -->
+<!-- #Value _AssemblyHtm_ -->
+<!-- #Value _Namespace_ -->
+<!-- #Value _TypeName_ -->
+<!-- #Value _Description_ Method/Constructor -->
+<!-- #Value _MethodName_ -->
+<!-- #Value _HasParams_ -->
+<!-- #Value _Syntax_ -->
+<!-- #Value _Summary_ -->
+<!-- #Value _Returns_ -->
+<!-- #Value _HasRemarks_ -->
+<!-- #Value _RemarkText_ -->
+<!-- #Value _HasExample_ -->
+<!-- #Value _Code_ -->
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../CodeDoc.html#_AssemblyName_">Assembly List</a>
+      / <a href="../_AssemblyName_.html">_AssemblyName_</a>
+      / <a href="../_TypeName_.html">_TypeName_</a>
+      / _MethodName_
+    </div>
+    <br />
+    <div id='Title'>Namespace - _Namespace_</div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>_Description_ _MethodName_</div>
+    </div>
+    <!--X------------------------------------->
+    <!-- #IfBegin _HasParams_ NotNull -->
+    <br />
+    <div id='Title'>Parameters</div>
+    <!-- #IfEnd HasParams -->
+    <!-- #SectionBegin Parameters -->
+    <!-- #Value _ParameterName_ -->
+    <!-- #Value _ParameterText_ -->
+    <div class='Text'>_ParameterName_ - _ParameterText_</div>
+    <!-- #SectionEnd Parameters -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _Returns_ NotNull -->
+    <br />
+    <div class='Text'>Returns</div>
+    <br />
+    <div class='Text'>_Returns_</div>
+    <!-- #IfEnd Returns -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _Syntax_ NotNull -->
+    <br />
+    <div class='Text'>Syntax</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              _Syntax_
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- #IfEnd Syntax -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _Summary_ NotNull -->
+    <br />
+    <div class='Text'>_Summary_</div>
+    <!-- #IfElse Summary -->
+    <br />
+    <div class='RedText'>Missing Summary</div>
+    <!-- #IfEnd Summary -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _HasRemarks_ True -->
+    <br />
+    <div class='Text'>Remarks</div>
+    <!-- #IfEnd HasRemarks -->
+    <!-- #IfBegin _RemarkText_ NotNull -->
+    <br />
+    <div class='Text'>_RemarkText_</div>
+    <!-- #IfEnd RemarkText -->
+    <!--X------------------------------------->
+    <!-- #SectionBegin MethodRemarks -->
+    <!-- #Value _Para_ -->
+    <br />
+    <div class='Text'>_Para_</div>
+    <!-- #SectionEnd MethodRemarks -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _HasExample_ NotNull -->
+    <br />
+    <div class='Text'>Example</div>
+    <!-- #IfEnd HasExample -->
+    <!-- #SectionBegin ExampleRemarks -->
+    <!-- #Value _Para_ -->
+    <!-- #Value _Code_ -->
+    <!-- #IfBegin _Para_ NotNull -->
+    <br />
+    <div class='Text'>_Para_</div>
+    <!-- #IfEnd -->
+    <!-- #SectionEnd ExampleRemarks -->
+    <!--X------------------------------------->
+    <!-- #IfBegin _Code_ NotNull -->
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              <pre style='margin-left: 2px;'>_Code_</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- #IfEnd Code -->
+    <br />
+  </div>
+</body>
+<!-- #SectionEnd Main -->
+</html>

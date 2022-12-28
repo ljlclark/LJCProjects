@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbSqlBuilder.xml -->
+<items>
+  <DbSqlBuilder>
+    <summary>
+      Provides SQL builder methods.
+    </summary>
+  </DbSqlBuilder>
+  <DbSqlBuilderC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+  </DbSqlBuilderC>
+  <ColumnList>
+    <summary>
+      Creates the list of included table columns.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+    <param name="listOnly">Indicates if parentheses are required.</param>
+    <returns>The column list string.</returns>
+    <remarks>
+      <para>
+        Query Column names are added to the created SQL statement from the
+        Query Column definitions.
+      </para>
+      <para>
+        Join Columns are added to the created SQL statement from the Join Columns
+        in the join parameter. They are qualified with the Join Table Name or
+        the Table Alias if it is defined. They will include the 'AS' keyword
+        and rename value if the RenameAs value is defined.
+      </para>
+      <para>
+        Join Columns must have properties in the Data Object to receive the
+        join values.
+      </para>
+      <para>
+        The RenameAs value is required if there is another table with the same
+        column name.
+      </para>
+    </remarks>
+  </ColumnList>
+  <CreateAddSql>
+    <summary>
+      Creates the SQL Insert statement.
+    </summary>
+    <returns>The Insert statement.</returns>
+  </CreateAddSql>
+  <CreateDeleteSql>
+    <summary>
+      Creates the SQL Delete statement.
+    </summary>
+    <returns>The Delete statement.</returns>
+  </CreateDeleteSql>
+  <CreateLoadSql>
+    <summary>
+      Creates the SQL Select statement for multiple records.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+    <returns>The Select statement.</returns>
+  </CreateLoadSql>
+  <CreateRetrieveSql>
+    <summary>
+      Creates the SQL Select statement for one record.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+    <returns>The Select statement.</returns>
+  </CreateRetrieveSql>
+  <CreateUpdateSql>
+    <summary>
+      Creates the SQL Update statement.
+    </summary>
+    <returns>The Update statement.</returns>
+  </CreateUpdateSql>
+  <FilterWhereClause>
+    <summary>
+      Creates the where clause from the filters.
+    </summary>
+    <param name="dbFilters">The filters object.</param>
+    <param name="recursive">Indicates if this is a recursive call.</param>
+    <returns>The filters where clause.</returns>
+  </FilterWhereClause>
+  <InsertValueList>
+    <summary>
+      Creates a list of record values.
+      (R)
+    </summary>
+    <param name="listOnly">
+      Indicates if the value list should be
+      a full SQL value list including the text "values" and parentheses
+      or only the value list.
+    </param>
+    <returns>The value list string.</returns>
+  </InsertValueList>
+  <JoinStatement>
+    <summary>
+      Creates the join statement.
+    </summary>
+    <param name="dbJoins">The joins object.</param>
+    <param name="schemaName">The schema name.</param>
+    <returns>The join statements string.</returns>
+    <remarks>
+      <para>
+        The JoinOn "FromColumnName" is automatically qualified with the parent
+        request table name unless it is already qualified by the user.
+      </para>
+      <para>
+        The JoinOn "ToColumnName" is automatically qualified with the join
+        table name unless it is already qualified by the user.
+      </para>
+      <para>
+        The "From" and "To" column names are not qualified if the values begin
+        and end, with the "|" character.
+      </para>
+    </remarks>
+  </JoinStatement>
+  <KeyWhereClause>
+    <summary>
+      Creates the where clause from the key values.
+    </summary>
+    <returns>The key value where clause.</returns>
+    <remarks>
+      <para>
+        A Key Column is not added to a where clause if its value is null.
+      </para>
+      <para>
+        A Key Column is not added to a where clause if it is an AutoIncrement
+        column and its value is zero.
+      </para>
+      <para>
+        If a Key Column is not qualified with a user entered name, then it is
+        qualified with the primary table name
+      </para>
+      <para>
+        Key Columns where clauses use the "=" comparison operator.
+      </para>
+      <para>
+        Key Column where clauses comparisons are separated with an "and".
+      </para>
+      <para>
+        The Key Column where clause will check for "is null" if the value equals
+        "-null" or "-".
+      </para>
+    </remarks>
+  </KeyWhereClause>
+  <OrderBy>
+    <summary>
+      Creates the order by statement from the order by column list.
+    </summary>
+    <returns>The order by statement.</returns>
+  </OrderBy>
+  <PageFetch>
+    <summary>
+      Creates the offset/fetch next statement.
+    </summary>
+    <returns>The pagination statement.</returns>
+  </PageFetch>
+  <UpdateList>
+    <summary>
+      Creates a list of record update values.
+    </summary>
+    <returns>The update value list.</returns>
+  </UpdateList>
+  <WhereClause>
+    <summary>
+      Create the where clause.
+    </summary>
+    <returns>The where clause string.</returns>
+  </WhereClause>
+</items>

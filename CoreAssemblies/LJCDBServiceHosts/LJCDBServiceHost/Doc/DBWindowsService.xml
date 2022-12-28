@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DBWindowsService.xml -->
+<items>
+  <OnStart>
+    <summary>
+      Starts the windows Database service.
+    </summary>
+    <param name="args">The argument values.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnStart(string[] args)
+      </para>
+    </remarks>
+  </OnStart>
+  <OnStop>
+    <summary>
+      Stops the windows Database service.
+    </summary>
+    <remarks>
+      <para>Syntax: protected override void OnStop()</para>
+    </remarks>
+  </OnStop>
+</items>

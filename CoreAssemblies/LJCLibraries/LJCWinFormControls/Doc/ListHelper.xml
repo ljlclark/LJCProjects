@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ListHelper.xml -->
+<items>
+  <SetPanelSplitControl>
+    <summary>
+      Sets size and position for child SplitterContainer in a SplitterPanel.
+    </summary>
+    <param name="panel">The parent SplitterPanel.</param>
+    <param name="childSplit">The child SplitContainer.</param>
+    <param name="adjust">The adjustment value.</param>
+    <param name="splitLeft">The child Left value.</param>
+    <param name="splitTop">The child Top value.</param>
+  </SetPanelSplitControl>
+  <SetPageSplitControl>
+    <summary>
+      Sets size and position for child SplitterContainer in a TabPage control.
+    </summary>
+    <param name="page">The parent tab page.</param>
+    <param name="childSplit">The child SplitContainer.</param>
+    <param name="adjust">The adjustment value.</param>
+    <param name="splitLeft">The child Left value.</param>
+    <param name="splitTop">The child Top value.</param>
+  </SetPageSplitControl>
+  <SetPanelTabControl>
+    <summary>
+      Sets the size for a TabControl within a SplitterPanel.
+    </summary>
+    <param name="panel">The parent SplitterPanel.</param>
+    <param name="tabControl">The tab control.</param>
+    <param name="adjust">The adjustment value.</param>
+    <param name="tabLeft">The child Left value.</param>
+    <param name="tabTop">The child Top value.</param>
+  </SetPanelTabControl>
+  <SetPanelControls1>
+    <summary>
+      Sets size and position for standard list controls in a SplitterPanel.
+    </summary>
+    <param name="panel">The parent SplitterPanel.</param>
+    <param name="headerBox">The Header Box control.</param>
+    <param name="toolPanel">The Tool Panel control.</param>
+    <param name="dataGrid">The Data Grid control.</param>
+    <param name="adjustAll">The adjustment value.</param>
+    <param name="gridLeft">The Grid Left value.</param>
+    <param name="gridTop">The Grid Top value.</param>
+  </SetPanelControls1>
+  <SetPanelControls2>
+    <summary>
+      Sets size and position for standard list controls in a SplitterPanel.
+    </summary>
+    <param name="panel">The parent SplitterPanel.</param>
+    <param name="headerBox">The Header Box control.</param>
+    <param name="toolPanel">The Tool Panel control.</param>
+    <param name="dataGrid">The Data Grid control.</param>
+    <param name="adjust">The adjustment values.</param>
+  </SetPanelControls2>
+  <SetPageControls1>
+    <summary>
+      Sets size and position for standard list controls in a TabPage control.
+    </summary>
+    <param name="page">The parent tab page.</param>
+    <param name="headerBox">The Header Box control.</param>
+    <param name="toolPanel">The Tool Panel control.</param>
+    <param name="dataGrid">The Data Grid control.</param>
+    <param name="adjustAll">The adjustment value.</param>
+    <param name="gridLeft">The Grid Left value.</param>
+    <param name="gridTop">The Grid Top value.</param>
+  </SetPageControls1>
+  <SetPageControls2>
+    <summary>
+      Sets size and position for standard list controls in a TabPage control.
+    </summary>
+    <param name="page">The parent tab page.</param>
+    <param name="headerBox">The Header Box control.</param>
+    <param name="toolPanel">The Tool Panel control.</param>
+    <param name="dataGrid">The Data Grid control.</param>
+    <param name="adjust">The adjustment values.</param>
+  </SetPageControls2>
+</items>

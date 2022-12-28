@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbColumns.xml -->
+<items>
+  <DbColumns>
+    <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; objects.
+    </summary>
+    <remarks>
+      A DbColumn collection element can also be retrieved by name using
+      the collection object: columns["ColumnName"];
+    </remarks>
+  </DbColumns>
+
+  <!-- Static Functions -->
+  <LJCCreateObjectColumns>
+    <summary>
+      Creates DbColumns from a Data Object.
+    </summary>
+    <param name="dataObject">The Data Object value.</param>
+    <param name="dataDefinition">The data definitions.</param>
+    <returns>The DbColumns collection.</returns>
+  </LJCCreateObjectColumns>
+
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Adds the object element to the collection
+    </summary>
+    <param name="dbColumn">The object element.</param>
+    <remarks>Overrides the base Add method.</remarks>
+  </Add>
+  <Add1>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+      (R)
+    </summary>
+    <param name="columnName">The column name.</param>
+    <param name="position">The column layout position.</param>
+    <param name="maxLength">The column length.</param>
+    <returns>
+      The created
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; object.
+    </returns>
+    <remarks>
+      This method is useful for data sources that require a column position value.
+      An example would be a text file that uses fixed length fields.
+    </remarks>
+  </Add1>
+  <Add2>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+    </summary>
+    <param name="columnName">The column name.</param>
+    <param name="propertyName">The property name.</param>
+    <param name="renameAs">The rename value.</param>
+    <param name="dataTypeName">The data type name.</param>
+    <param name="caption">The caption value.</param>
+    <returns>
+      The created
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </returns>
+  </Add2>
+  <Add3>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+    </summary>
+    <param name="columnName">The column name.</param>
+    <param name="value">The value object.</param>
+    <param name="dataTypeName">The data type name.</param>
+    <returns>The created DbColumn object.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumns = new DbColumns();
+
+        // Must use (object) with a string value to execute this constructor.
+        dbColumns.Add("ColumnName", (object)"Value");
+      </code>
+    </example>
+  </Add3>
+  <LJCAddPropertyAs>
+    <summary>
+      Creates the
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      from the supplied values and adds to the collection.
+      (R)
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <param name="caption">The caption value.</param>
+    <param name="renameAs">The rename value.</param>
+    <param name="dataTypeName">The data type name.</param>
+    <returns>
+      The created
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; object.
+    </returns>
+    <remarks>
+      Accepts the property name and sets the column name the same as the
+      property name. If the renameAs value is null, then it is also set the
+      same as the property name.
+    </remarks>
+  </LJCAddPropertyAs>
+
+  <!-- Conversions -->
+  <DbValues>
+    <summary>
+      Creates a
+      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      object from a
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
+      (E)
+    </summary>
+    <param name="dbColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        DbColumns dbColumns = new DbColumns();
+        dbColumns.Add("Column1");
+        dbColumns.Add("Column2");
+        
+        DbValues dbValues = DbColumns;
+      </code>
+    </example>
+  </DbValues>
+
+  <!-- Public Search Methods -->
+  <LJCClearChanged>
+    <summary>
+      Sets the IsChanged value to false for all elements in the collection.
+    </summary>
+  </LJCClearChanged>
+  <LJCGetChanged>
+    <summary>
+      Gets a collection of changed columns.
+    </summary>
+    <returns>The changed columns list.</returns>
+  </LJCGetChanged>
+  <LJCGetColumns>
+    <summary>
+      Returns a set of columns that match the supplied list.
+    </summary>
+    <param name="propertyNames">The column property names.</param>
+    <returns>The created object.</returns>
+  </LJCGetColumns>
+  <LJCSearchPropertyName>
+    <summary>
+      Finds and returns the column that contains the supplied property name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>A reference to the column object.</returns>
+  </LJCSearchPropertyName>
+  <LJCSearchRenameAs>
+    <summary>
+      Finds and returns the column that contains the supplied RenameAs value.
+    </summary>
+    <param name="renameAs">The RenameAs value.</param>
+    <returns>A reference to the column object.</returns>
+  </LJCSearchRenameAs>
+
+  <!-- Other Public Methods -->
+  <LJCSetColumnCaptions>
+    <summary>
+      Sets the caption properties.
+    </summary>
+    <param name="dbColumns">The target object.</param>
+  </LJCSetColumnCaptions>
+  <MapNames>
+    <summary>
+      Maps the column property and rename values.
+    </summary>
+    <param name="columnName">The Column name.</param>
+    <param name="propertyName">The Property name.</param>
+    <param name="renameAs">The Rename value.</param>
+    <param name="caption">The Caption value.</param>
+  </MapNames>
+
+  <!-- Value Methods -->
+  <LJCGetBoolean>
+    <summary>
+      Gets the column object value as a bool.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The bool value.</returns>
+  </LJCGetBoolean>
+  <LJCGetDbDateTime>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DataTime value.</returns>
+  </LJCGetDbDateTime>
+  <LJCGetDecimal>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;decimal&lt;/span&gt;
+      value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
+    </returns>
+  </LJCGetDecimal>
+  <LJCGetInt16>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;short&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The
+      &lt;span class="userType"&gt;short&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCGetInt16>
+  <LJCGetInt32>
+    <summary>
+      Gets the column object value as an
+      &lt;span class="userType"&gt;int&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;int&lt;/span&gt;
+      value.
+    </returns>
+  </LJCGetInt32>
+  <LJCGetInt64>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;long&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;long&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCGetInt64>
+  <LJCGetMinSqlDate>
+    <summary>
+      Get the minimum date value.
+    </summary>
+    <returns>The minimum value in database format.</returns>
+  </LJCGetMinSqlDate>
+  <LJCGetValue>
+    <summary>
+      Gets the string value for the column with the specified name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The column value.</returns>
+  </LJCGetValue>
+  <LJCSetValue>
+    <summary>
+      Sets the value for the column with the specified name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <param name="value">The column value.</param>
+  </LJCSetValue>
+
+  <!-- Properties -->
+  <Item>
+    <summary>
+      The column for the specified property name.
+    </summary>
+    <param name="propertyName">The column property name.</param>
+    <returns>The selected DbColumn object.</returns>
+  </Item>
+</items>

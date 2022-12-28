@@ -1,0 +1,577 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCRegionDAL</name>
+    </assembly>
+    <members>
+        <member name="T:LJCRegionDAL.RegionManagers">
+            <summary>Creates the RegionManagerDAL Manager objects.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.RegionManagers.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="dbServiceRef">The DbServiceRef object.</param>
+            <param name="dataConfigName">The DataConfigName value.</param>
+        </member>
+        <member name="P:LJCRegionDAL.RegionManagers.RegionDataManager">
+            <summary>Gets the RegionDataManager object.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionManagers.ProvinceManager">
+            <summary>Gets the ProvinceManager object.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionManagers.CityManager">
+            <summary>Gets the CityManager object.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionManagers.CitySectionManager">
+            <summary>Gets the CitySectionManager object.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.City">
+            <summary>The City table Data Record.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.City.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.City.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.City.CompareTo(LJCRegionDAL.City)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.City.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCRegionDAL.City.ID">
+            <summary>Gets or sets the CityID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.ProvinceID">
+            <summary>Gets or sets the ProvinceID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.CityFlag">
+            <summary>Gets or sets the CityFlag value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.ZipCode">
+            <summary>Gets or sets the ZipCode value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.District">
+            <summary>Gets or sets the District value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.City.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnID">
+            <summary>The CityID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnProvinceID">
+            <summary>The ProvinceID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnCityFlag">
+            <summary>The CityFlag value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnZipCode">
+            <summary>The ZipCode value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnDistrict">
+            <summary>The District value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.ColumnParentCityID">
+            <summary>The ParentCityID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.City.LengthZipCode">
+            <summary>The ZipCode maximum length.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.Cities">
+            <summary>
+      Represents a collection of City objects.
+    </summary><remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJCRegionManager
+        program.
+      </para>
+      <para>
+        The LJCRegionDAL library contains Data and Manager classes for
+        presenting an object oriented view of the Region Manager database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DataAccess to communicate
+        with the database.
+      </para>
+      <para>
+        The LJCRegionDAL project is part of the LJCRegionManager solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.Cities.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Cities.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Cities.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCRegionDAL.CitySection">
+            <summary>The CitySection table Data Record.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.CitySection.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.CitySection.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySection.CompareTo(LJCRegionDAL.CitySection)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.CitySection.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.CityID">
+            <summary>Gets or sets the CityID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.ZoneType">
+            <summary>Gets or sets the ZoneType value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.Contact">
+            <summary>Gets or sets the Contact value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.CitySection.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnID">
+            <summary>The ID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnCityID">
+            <summary>The CityID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnZoneType">
+            <summary>The ZoneType column name.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.ColumnContact">
+            <summary>The Contact column name.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.LengthZoneType">
+            <summary>The ZoneType maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.CitySection.LengthContact">
+            <summary>The Contact maximum length.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.CitySections">
+            <summary>Represents a collection of CitySection objects.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.CitySections.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySections.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySections.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCRegionDAL.Province">
+            <summary>The Province table Data Record.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.Province.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.Province.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Province.CompareTo(LJCRegionDAL.Province)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.Province.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCRegionDAL.Province.ID">
+            <summary>Gets or sets the ProvinceID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.Province.RegionID">
+            <summary>Gets or sets the RegionID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.Province.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.Province.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.Province.Abbreviation">
+            <summary>Gets or sets the Abbreviation value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.Province.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.ColumnID">
+            <summary>The ProvinceID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.ColumnRegionID">
+            <summary>The RegionID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.ColumnAbbreviation">
+            <summary>The Abbreviation value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.Province.LengthAbbreviation">
+            <summary>The Abbreviation maximum length.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.Provinces">
+            <summary>Represents a collection of Province objects.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.Provinces.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Provinces.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Provinces.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCRegionDAL.RegionData">
+            <summary>The Region table Data Record.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.RegionData.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.RegionData.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionData.CompareTo(LJCRegionDAL.RegionData)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionDAL.RegionData.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCRegionDAL.RegionData.ID">
+            <summary>Gets or sets the RegionID value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionData.Number">
+            <summary>Gets or sets the Number value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionData.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionData.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCRegionDAL.RegionData.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.ColumnID">
+            <summary>The RegionID value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.ColumnNumber">
+            <summary>The Number value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.ColumnName">
+            <summary>The Name value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.ColumnDescription">
+            <summary>The Description value.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.LengthNumber">
+            <summary>The Number maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCRegionDAL.RegionData.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.Regions">
+            <summary>Represents a collection of Region objects.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.Regions.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Regions.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.Regions.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCRegionDAL.CityManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CityManager.SetOrderByName">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.CitySectionManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.CitySectionManager.SetOrderByName">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.ProvinceManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.GetKeyItems(System.String,LJCNetCommon.DbColumns)">
+            <summary>
+      Creates the KeyItems collection.
+    </summary><param name="propertyName">The record Property name.</param><param name="keyColumns">The Key object.</param><returns>The KeyItems collection.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.ProvinceManager.SetOrderByName">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="T:LJCRegionDAL.RegionDataManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.GetIDKey(System.Int32)">
+            <summary>
+      Gets the ID key record.
+    </summary><param name="id">The ID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.DataColumns(System.Int64)">
+            <summary>
+      Creates the DataColumns object.
+    </summary><returns>The DataColumns object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.GetKeyItem(System.String,System.Int64)">
+            <summary>
+      Creates the KeyItem object.
+    </summary><param name="propertyName">The record Property name.</param><param name="id">The ID value.</param><returns>The KeyItem object.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.GetKeyItems(System.String,LJCNetCommon.DbColumns)">
+            <summary>
+      Creates the KeyItems collection.
+    </summary><param name="propertyName">The record Property name.</param><param name="keyColumns">The Key object.</param><returns>The KeyItems collection.</returns>
+        </member>
+        <member name="M:LJCRegionDAL.RegionDataManager.SetOrderByName">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+    </members>
+</doc>

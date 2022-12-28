@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDataGrid.xml -->
+<items>
+  <LJCDataGrid>
+    <summary>
+      Provides custom functionality for a DataGridView control. (D)
+    </summary>
+    <remarks>
+      <para>
+        &lt;b&gt;The Row Data Methods&lt;/b&gt;&lt;br /&gt;
+        The grid has extended methods for managing rows and row data.&lt;br /&gt;
+        These methods are LJCRowAdd(), LJCRowInsert(), LJCRowsClear()
+        and LJCRowSetValues().&lt;br /&gt;
+      </para>
+      <para>
+        &lt;b&gt;The Row Selection Methods&lt;/b&gt;&lt;br /&gt;
+        The grid has extended methods for managing the current row.&lt;br /&gt;
+        These methods are LJCGetCurrentRow(), LJCGetMouseRow()
+        LJCGetMouseRowIndex()-2 and LJCSetCurrentRow()-3.&lt;br /&gt;
+      </para>
+      <para>
+        &lt;b&gt;The Row Selection Changed Methods&lt;/b&gt;&lt;br /&gt;
+        There are extended methods for checking if the selected row has changed.&lt;br /&gt;
+        These methods are LJCIsDifferentRow() and LJCSetLastRow().&lt;br /&gt;
+      </para>
+      <para>
+        &lt;b&gt;The Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
+        The grid has extended methods for grid configuration.&lt;br /&gt;
+        These methods are LJCSetPlain(), LJCAddColumn()-2, LJCAddDisplayColumns()
+        , LJCRestoreColumnValues() and LJCSaveColumnValues().&lt;br /&gt;
+      </para>
+    </remarks>
+  </LJCDataGrid>
+
+  <!-- Constructors -->
+  <LJCDataGridC>
+    <summary>
+      Initializes an object instance and adds it to a container.
+    </summary>
+    <param name="container">The parent container.</param>
+  </LJCDataGridC>
+
+  <!-- Row Data Methods -->
+  <LJCRowsClear>
+    <summary>
+      Clears the rows without allowing SelectionChange.
+    </summary>
+  </LJCRowsClear>
+  <LJCRowAdd>
+    <summary>
+      Adds a GridRow control to the grid.
+    </summary>
+    <returns>The added LJCGridRow object.</returns>
+  </LJCRowAdd>
+  <LJCRowInsert>
+    <summary>
+      Inserts a GridRow control into the grid.
+    </summary>
+    <param name="index">The insert index value.</param>
+    <returns>The added LJCGridRow object.</returns>
+  </LJCRowInsert>
+  <LJCRowSetValues>
+    <summary>
+      Updates a grid row with the record values.
+    </summary>
+    <param name="row">The grid row.</param>
+    <param name="record">The record object.</param>
+    <param name="DisplayColumns">The display columns.</param>
+  </LJCRowSetValues>
+
+  <!-- Row and Column Selection Methods -->
+  <LJCGetMouseColumnIndex>
+    <summary>
+      Retrieves the column index where the mouse was clicked.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected column index.</returns>
+  </LJCGetMouseColumnIndex>
+  <LJCGetMouseRowIndex>
+    <summary>
+      Retrieves the row index where the mouse was clicked.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected row index.</returns>
+  </LJCGetMouseRowIndex>
+  <LJCGetMouseColumn>
+    <summary>
+      Retrieves the column where the mouse was clicked.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected DataGridViewColumn object.</returns>
+  </LJCGetMouseColumn>
+  <LJCGetMouseRow>
+    <summary>
+      Retrieves the row where the mouse was clicked
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected LJCGridRow object.</returns>
+  </LJCGetMouseRow>
+  <LJCSetMouseCurrentRow>
+    <summary>
+      Sets the current row to the mouse row.
+    </summary>
+    <param name="e">The MouseEvent arguments.</param>
+    <param name="allowSelectionChange">The setting for the allow flag.</param>
+  </LJCSetMouseCurrentRow>
+  <LJCSetCurrentRow1>
+    <summary>
+      Sets the current row.
+    </summary>
+    <param name="row">The grid row.</param>
+    <param name="allowSelectionChange">The setting for the allow flag.</param>
+  </LJCSetCurrentRow1>
+  <LJCSetCurrentRow2>
+    <summary>
+      Sets the current row to the specified index.
+    </summary>
+    <param name="rowIndex">The row index value.</param>
+    <param name="allowSelectionChange">The setting for the allow flag.</param>
+  </LJCSetCurrentRow2>
+
+  <!-- Row Selection Change Methods -->
+  <LJCIsDifferentRow>
+    <summary>
+      Compares the current row against the last selected row.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>True if the row has changed otherwise false.</returns>
+  </LJCIsDifferentRow>
+  <LJCSetLastRow>
+    <summary>
+      Saves the last selected row index.
+    </summary>
+    <param name="row">The grid row object.</param>
+  </LJCSetLastRow>
+
+  <!-- Grid Configuration Methods -->
+  <LJCSetPlain>
+    <summary>
+      Sets the grid to a simple read-only grid.
+    </summary>
+  </LJCSetPlain>
+  <LJCAddDisplayColumns>
+    <summary>
+      Adds the display columns to the grid.
+    </summary>
+    <param name="columns">The columns collection.</param>
+  </LJCAddDisplayColumns>
+  <LJCSetLastColumnAutoSizeFill>
+    <summary>
+      Sets the last column AutoSizeMode to "Fill" if the columns width is less
+      than the grid width.
+    </summary>
+  </LJCSetLastColumnAutoSizeFill>
+  <LJCAddColumn1>
+    <summary>
+      Adds a column to the grid.
+    </summary>
+    <param name="column">The column.</param>
+    <returns>A reference to the added column.</returns>
+  </LJCAddColumn1>
+  <LJCAddColumn2>
+    <summary>
+      Adds a grid column.
+    </summary>
+    <param name="name">The column name.</param>
+    <param name="caption">The column heading.</param>
+    <param name="characterWidth">The initial column character width.</param>
+    <returns>The added grid column object.</returns>
+  </LJCAddColumn2>
+  <LJCAddCheckColumn>
+    <summary>
+      Adds a Checkbox column.
+    </summary>
+    <param name="name">The column name.</param>
+    <param name="caption">The column heading.</param>
+    <returns>The added Check column object.</returns>
+  </LJCAddCheckColumn>
+  <LJCSaveColumnValues>
+    <summary>
+      Saves the grid column values.
+    </summary>
+    <param name="controlValues">The control values object.</param>
+  </LJCSaveColumnValues>
+  <LJCRestoreColumnValues>
+    <summary>
+      Restores the grid column values.
+    </summary>
+    <param name="controlValues">The control values object.</param>
+  </LJCRestoreColumnValues>
+
+  <!-- Other Methods -->
+  <LJCSetCounter>
+    <summary>
+      Sets the grid count in the counter label.
+    </summary>
+    <param name="counter">The counter label.</param>
+  </LJCSetCounter>
+  <LJCExportData>
+    <summary>
+      Exports the grid values to a data file.
+    </summary>
+    <param name="fileName">The file specification.</param>
+  </LJCExportData>
+
+  <!-- Control Event Handlers -->
+  <OnColumnWidthChanged>
+    <summary>
+      The OnColumnWidthChanged event method.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void
+        OnColumnWidthChanged(DataGridViewColumnEventArgs e)
+      </para>
+    </remarks>
+  </OnColumnWidthChanged>
+  <OnEnter>
+    <summary>
+      Sets the focus colors.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnEnter>
+  <OnLeave>
+    <summary>
+      Sets the NoFocus colors.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnLeave>
+  <OnResize>
+    <summary>
+      The OnResize event method.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnResize(EventArgs e)
+      </para>
+    </remarks>
+  </OnResize>
+</items>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ColorSetting.xml -->
+<items>
+  <ColorSettingC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="lineIndex">The line index value.</param>
+    <param name="beginIndex">The text begin index.</param>
+    <param name="textLength">The text length.</param>
+    <param name="color">The text color.</param>
+  </ColorSettingC>
+</items>

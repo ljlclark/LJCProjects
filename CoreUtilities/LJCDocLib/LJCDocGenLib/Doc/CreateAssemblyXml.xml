@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenAssemblyXml.xml -->
+<items>
+  <CreateAssemblyXml>
+    <summary>
+      Creates the Assembly XML Data values.
+    </summary>
+  </CreateAssemblyXml>
+  <CreateAssemblyXmlC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataAssembly">The DataAssembly data object.</param>
+  </CreateAssemblyXmlC>
+  <GetXmlData>
+    <summary>
+      Returns the XML Data values.
+    </summary>
+    <returns>The XML Data values string.</returns>
+  </GetXmlData>
+  <AddClassList>
+    <summary>
+      Gets the Class List elements.
+    </summary>
+    <param name="section">The Section object.</param>
+  </AddClassList>
+  <SetAssemblyRemarks>
+    <summary>
+      Sets the Assembly Remarks elements.
+    </summary>
+    <param name="section">The Section object.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </SetAssemblyRemarks>
+</items>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- SendCipher.xml -->
+<items>
+  <SendCipherC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="insertItems">The InsertItems object.</param>
+  </SendCipherC>
+  <GetInsertItemValue>
+    <summary>
+      Returns the insert value from the sendCipher by name.
+    </summary>
+    <param name="sourceCipher">The source cipher.</param>
+    <param name="name">The InsertItem name.</param>
+    <returns>The Insert Item Value.</returns>
+  </GetInsertItemValue>
+  <GetSendCipher>
+    <summary>
+      Returns the SendCipher value.
+    </summary>
+    <param name="sourceCipher">The source cipher.</param>
+    <returns>The SendCipher value.</returns>
+    <remarks>
+      Sets InsertIndex values that are beyond the end of the Cipher to the
+      Cipher length.
+    </remarks>
+  </GetSendCipher>
+  <SendCipherToCipher>
+    <summary>
+      Returns the Cipher value.
+    </summary>
+    <param name="sourceCipher">The target cipher.</param>
+    <returns>The Cipher value.</returns>
+    <remarks>
+      Calculates the data indexes based on the InsertItems definitions.
+    </remarks>
+  </SendCipherToCipher>
+  <SetInsertItems>
+    <summary>
+      Initializes the internal InsertItems property.
+    </summary>
+    <param name="insertItems">The InsertItems object.</param>
+  </SetInsertItems>
+</items>

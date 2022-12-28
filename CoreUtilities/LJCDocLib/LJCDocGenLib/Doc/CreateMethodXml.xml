@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenMethodXml.xml -->
+<items>
+  <CreateMethodXml>
+    <summary>
+      Creates the Method XML Data values.
+    </summary>
+  </CreateMethodXml>
+  <CreateMethodXmlC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="genAssembly">The GenAssembly generator object.</param>
+    <param name="dataAssembly">The DataAssembly data object.</param>
+    <param name="dataType">The DataType data object.</param>
+    <param name="dataMethod">The DataMethod data object.</param>
+    <param name="assemblyReflect">The LJCAssemblyReflect object.</param>
+  </CreateMethodXmlC>
+  <GetXmlData>
+    <summary>
+      Returns the XML Data values.
+    </summary>
+    <returns>The XML Data values string.</returns>
+  </GetXmlData>
+  <AddSyntax>
+    <summary>
+      Adds the Method syntax elements.
+    </summary>
+    <param name="replacements">The Replacements object.</param>
+  </AddSyntax>
+  <SetExampleRemarks>
+    <summary>
+      The Example Remarks elements.
+    </summary>
+    <param name="section">The Section object.</param>
+    <returns>True if remarks exist, otherwise false.</returns>
+  </SetExampleRemarks>
+  <SetMethodInfo>
+    <summary>
+      Sets the MethodInfo property.
+    </summary>
+  </SetMethodInfo>
+  <SetMethodRemarks>
+    <summary>
+      Sets the Object Remarks elements.
+    </summary>
+    <param name="section">The Section object.</param>
+    <returns>True if remarks exist, otherwise false.</returns>
+  </SetMethodRemarks>
+</items>

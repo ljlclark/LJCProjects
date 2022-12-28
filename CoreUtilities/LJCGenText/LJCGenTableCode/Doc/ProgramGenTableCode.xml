@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProgramGenTableCode.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The command line utility to generate output text from the table
+        definitions in a database.
+      </para>
+      <para>
+        The LJCGenTableCode project is part of the LJCGenText solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

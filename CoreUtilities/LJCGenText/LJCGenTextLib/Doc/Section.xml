@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- Section.xml -->
+<items>
+  <Section>
+    <summary>
+      Represents a TextGen section.
+    </summary>
+  </Section>
+  <SectionC>
+    <summary>
+      Initializes the Section object with the supplied values.
+    </summary>
+    <param name="name">The section name.</param>
+  </SectionC>
+</items>

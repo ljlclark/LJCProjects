@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectDBMessage.xml -->
+<items>
+  <DbRequest>
+    <summary>
+      Represents a database request.
+      (E)
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>Data Service Message Library</para>
+      <para>
+        The Data Service Message library contains classes for utilizing Request XML
+        messages and Result XML messages.
+      </para>
+      <para>
+        The Data Service Client Library
+        (&lt;span class="commonType"&gt;LJCDBCLientLib&lt;/span&gt;)
+        and the Data Service library
+        (&lt;span class="commonType"&gt;LJCDBServiceLib&lt;/span&gt;)
+        use the Request and Result XML messages to communicate between them.
+      </para>
+      <para>
+        &lt;b&gt;The
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        Object Graph&lt;/b&gt;&lt;br /&gt;
+        The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        object is the top-level of an object hierarchy to serialize and
+        deserialize the Request XML Message.&lt;br /&gt;
+        It uses the objects:
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;,
+        Columns(&lt;span class="userType"&gt;DbColumns&lt;/span&gt;),
+        KeyColumns(&lt;span class="userType"&gt;DbColumns&lt;/span&gt;),
+        Joins(&lt;span class="userType"&gt;DbJoins&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbJoin&lt;/span&gt;,
+        JoinOns(&lt;span class="userType"&gt;DbJoinOns&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbJoinOn&lt;/span&gt;,
+        Filters(&lt;span class="userType"&gt;DbFilters&lt;/span&gt;),
+        &lt;span class="userType"&gt;DbFilter&lt;/span&gt;,
+        (ConditionSet)&lt;span class="userType"&gt;DbConditionSet&lt;/span&gt;,
+        (Conditions)&lt;span class="userType"&gt;DbConditions&lt;/span&gt; and
+        &lt;span class="userType"&gt;DbCondition&lt;/span&gt;.
+      </para>
+      <para>
+        &lt;b&gt;The
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        Object Graph&lt;/b&gt;&lt;br /&gt;
+        The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object is the top-level of an object hierarchy to serialize and
+        deserialize the Result XML Message.&lt;br /&gt;
+        It uses the objects:
+        &lt;span class="userType"&gt;DbResult&lt;/span&gt; and
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;.
+      </para>
+    </remarks>
+    <example>
+      <para>
+        The following example shows each step needed to retrieve data. Applications
+        should generally encapsulate much of this code in a table specific Manager class to
+        make application programming easier and cleaner.
+      </para>
+      <para>
+        A Manager class is the client code that creates a table specific DbQuery object.
+        It then serializes the DbRequest object into a request XML message to pass to the
+        DbService.Execute() method.&lt;br /&gt;
+        See examples in LJCDBServiceLib.DbService Methods Add, Retrieve, Load, Update and Delete.
+      </para>
+      <para>
+        The data service DbService can be hosted in a windows service or web service which
+        could run on a separate server machine.
+      </para>
+      <code>
+        using System;
+        using System.Collections.Generic;
+        using LJCNetCommon;
+        using LJCDBMessage;
+        using LJCDBServiceLib;
+        
+        // A Person Data Record class.
+        public class Person
+        {
+          /// &lt;summary&gt;Gets or sets the PersonId value.&lt;/summary&gt;
+          public Int32 PersonId { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the Name value.&lt;/summary&gt;
+          public string Name { get; set; }
+        }
+        
+        // A console program.
+        internal class Program
+        {
+          private static void Main(string[] args)
+          {
+            // Create a Data Definition which is a collection of column definitions.
+            // Column definitions are required to communicate with the database.
+            // The collection initializer uses an available collection "Add" method.
+            // public DbColumn Add(string name, string propertyName = null, string renameAs = null
+            //   , string dataTypeName = "String", string caption = null)
+            string personIDColumnName = "Person_ID";
+            string personIDDataPropertyName = "PersonId";
+            DbColumns personDefinition = new DbColumns()
+            {
+              { personIDColumnName, personIDDataPropertyName, "Int32"},
+              { "Name" }  // Defaults to "String"
+            };
+        
+            // Create a list of the columns to be retrieved.
+            List&lt;string&gt; propertyNames = new List&lt;string&gt;()
+            {
+              "PersonId",
+              "Name"
+            };
+        
+            // Create a key record to specify the record to be retrieved.
+            var keyColumns = new DbColumns()
+            {
+              { "PersonId", 1}
+            };
+        
+            // Create the DbRequest object.
+            string tableName = "Person";
+            DbRequest dbRequest = new DbRequest("Select", tableName)
+            {
+              DataConfigName = "PersonData",
+              Columns = DbCommon.GetRequestColumns(personDefinition, propertyNames),
+              KeyColumns = DbCommon.GetRequestKeyColumns(keyColumns, personDefinition)
+            };
+        
+            // Create the Request XML message.
+            string request = dbRequest.Serialize();
+        
+            // Create the Data Service object.
+            DbService dbService = new DbService();
+        
+            // Execute the Request and get the Result XML message.
+            string result = dbService.Execute(request);
+        
+            // Create a Data Record object to receive the values.
+            Person person = new Person();
+        
+            // Populate the Data Record object with the result values.
+            // Uses resultData as an object and processes with reflection.
+            DbCommon.SetObjectValues(result, person);
+        
+            int id = person.PersonId;
+            string name = person.Name;
+          }
+        }
+      </code>
+    </example>
+  </DbRequest>
+</items>

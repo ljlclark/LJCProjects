@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
+<items>
+  <LJCMetadata>
+    <summary>
+      Contains Metadata helper methods.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides SQL Database Utility classes.
+      </para>
+      <para>
+        The Metadata is stored in tables to allow for design of the tables
+        separate from the actual creation of the tables.
+      </para>
+    </remarks>
+  </LJCMetadata>
+</items>

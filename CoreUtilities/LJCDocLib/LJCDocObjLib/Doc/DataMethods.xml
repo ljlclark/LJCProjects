@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- DataMethods.xml -->
+<items>
+  <DataMethods>
+    <summary>
+      Represents a collection of DataMethod objects.
+    </summary>
+  </DataMethods>
+  <GetOverriddenName>
+    <summary>
+      Returns the unique name for an overriden method.
+    </summary>
+    <param name="name">The original method name.</param>
+    <returns>The overriden name if required or the original name.</returns>
+  </GetOverriddenName>
+  <SearchOverriddenName>
+    <summary>
+      Returns the element with the name matching the supplied value.
+    </summary>
+    <param name="name">The element name.</param>
+  </SearchOverriddenName>
+</items>

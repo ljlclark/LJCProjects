@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenItemManager.xml -->
+<items>
+  <AddRepeatItem>
+    <summary>
+      Adds a RepeatItem record to the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItem">The RepeatItem object.</param>
+  </AddRepeatItem>
+  <RetrieveRepeatItem>
+    <summary>
+      Retrieves a RepeatItem record from the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <returns>The RepeatItem object.</returns>
+  </RetrieveRepeatItem>
+  <LoadRepeatItems>
+    <summary>
+      Retrieves a collection of data records.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <returns>The RepeatItems colletion.</returns>
+  </LoadRepeatItems>
+  <DeleteRepeatItem>
+    <summary>
+      Deletes the RepeatItem record from the object data.
+    </summary>
+    <param name="sectionName">The Section name.</param>
+    <param name="repeatItemName">The RepeatItem name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </DeleteRepeatItem>
+</items>

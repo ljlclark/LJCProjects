@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- DataRoot.xml -->
+<items>
+  <DataRoot>
+    <summary>
+      Represents the Root documentation data.
+      (R)
+    </summary>
+    <remarks>
+      The root documentation contains the DataAssemblies collection of included
+      DataAssembly elements. Each element contains the Doc deserialized
+      documentation XML data.
+    </remarks>
+  </DataRoot>
+  <DataRootC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="assemblyGroups">The XML file names.</param>
+  </DataRootC>
+  <CreateAssembliesData>
+    <summary>
+      Creates the assembly data.
+      (R)
+    </summary>
+    <remarks>
+      <para>
+        Each DataAssembly element contains the Doc property with the
+        deserialized documentation XML data.
+      </para>
+    </remarks>
+  </CreateAssembliesData>
+</items>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ProjectDocObjLib.xml -->
+<items>
+  <DataAssemblies>
+    <summary>
+      Represents a collection of DataAssembly objects.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt; The "Data" classes.&lt;/b&gt; &lt;br /&gt;
+        These classes contain the data parsed from the "Doc" classes. This data
+        is used to generate the HTML documentation pages.
+      </para>
+      <para>
+        The "Data" classes include: DataRoot, DataAssembly, DataType, DataMethod,
+        DataProperty and DataField.
+      </para>
+      <para>
+        The LJCDocObjLib project is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </DataAssemblies>
+</items>

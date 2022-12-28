@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCHeaderBox.xml -->
+<items>
+  <LJCHeaderBox>
+    <summary>
+      A custom control for heading text. (R)
+    </summary>
+    <remarks>
+      The Heading control can display a "Close" button in the heading.
+      This can be used to hide the associated window.
+    </remarks>
+  </LJCHeaderBox>
+
+  <!-- Override Event Methods -->
+  <OnMouseClick>
+    <summary>
+      Provides custom MouseClick event code.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnMouseClick(MouseEventArgs e)
+      </para>
+    </remarks>
+  </OnMouseClick>
+  <OnMouseMove>
+    <summary>
+      Provides custom MouseMove event code.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnMouseMove(MouseEventArgs e)
+      </para>
+    </remarks>
+  </OnMouseMove>
+  <OnMouseLeave>
+    <summary>
+      Provides custom MouseLeave event code.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnMouseLeave(EventArgs e)
+      </para>
+    </remarks>
+  </OnMouseLeave>
+  <OnResize>
+    <summary>
+      Provides custom Resize event code.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnResize(EventArgs e)
+      </para>
+    </remarks>
+  </OnResize>
+  <OnPaint>
+    <summary>
+      Provides custom Paint event code.
+    </summary>
+    <param name="pe">The paint event arguments.</param>
+    <remarks>
+      <para>
+        Syntax: protected override void OnPaint(PaintEventArgs pe)
+      </para>
+    </remarks>
+  </OnPaint>
+
+  <!-- Custom Event Methods -->
+  <OnClosePanel>
+    <summary>
+      Calls the LJCClosePanel event handlers.
+    </summary>
+    <remarks>
+      <para>Syntax: protected void OnClosePanel()</para>
+    </remarks>
+  </OnClosePanel>
+</items>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <DbMetaDataKeyManager>
+    <summary>
+      Provides DBMetaDataKey specific data manipulation methods.
+    </summary>
+  </DbMetaDataKeyManager>
+  <DbMetaDataKeyManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+  </DbMetaDataKeyManagerC>
+  <SaveData>
+    <summary>
+      Updates the record if it exists, otherwise creates it.
+    </summary>
+    <param name="mdKey">The data record.</param>
+    <returns>True if successful otherwise, false.</returns>
+  </SaveData>
+  <AddData>
+    <summary>
+      Adds a data record.
+    </summary>
+    <param name="mdKey">The data record.</param>
+    <returns>The added data object record with the assigned ID value.</returns>
+  </AddData>
+  <LoadPrimaryKeys>
+    <summary>
+      Loads a collection of data records.
+    </summary>
+    <returns>The collection of data records.</returns>
+  </LoadPrimaryKeys>
+  <LoadForeignKey>
+    <summary>
+      Loads a collection of data records.
+    </summary>
+    <param name="columnID">The column ID value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadForeignKey>
+  <LoadByDescription>
+    <summary>
+      Loads a collection of data records ordered by Description.
+    </summary>
+    <returns>The collection of data records.</returns>
+  </LoadByDescription>
+  <RetrieveWithUniqueKey>
+    <summary>
+      Retrieves a data record with the supplied values.
+    </summary>
+    <param name="columnID">The table ID.</param>
+    <param name="keyTypeID">The key type ID.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithUniqueKey>
+  <GetPrimaryKey>
+    <summary>
+      Get the Primary key record.
+    </summary>
+    <param name="columnID">The Column ID value.</param>
+    <returns>The ID key record.</returns>
+  </GetPrimaryKey>
+  <GetForeignKey>
+    <summary>
+      Get the Foreign key record.
+    </summary>
+    <param name="columnID">The Column ID value.</param>
+    <returns>The ID key record.</returns>
+  </GetForeignKey>
+  <SetExcludeKeys>
+    <summary>
+      Set the temporary exclude keys.
+    </summary>
+    <remarks>
+      These exclude keys are only valid for the next manager data method call.
+    </remarks>
+  </SetExcludeKeys>
+  <GetLoadJoins>
+    <summary>
+      Creates and returns the Load join object.
+    </summary>
+    <returns>The DbJoins object.</returns>
+  </GetLoadJoins>
+  <GetTextFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <returns>The DbFilters object.</returns>
+  </GetTextFilters>
+  <SetOrderByDescription>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderByDescription>
+</items>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcedureParameters.xml -->
+<items>
+  <ProcedureParameters>
+    <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;LJCProcedureParameter&lt;/span&gt;
+      objects.
+    </summary>
+  </ProcedureParameters>
+  <!-- Public Methods -->
+  <AddSql>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="parameterName">The parameter name.</param>
+    <param name="sqlDbType">
+      The &lt;span class="userType"&gt;SqlDbType&lt;/span&gt;
+      value.</param>
+    <param name="size">The size value.</param>
+    <param name="value">The parameter value.</param>
+    <param name="direction">The parameter direction.</param>
+    <returns>A reference to the added item.</returns>
+  </AddSql>
+  <AddMySql>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="parameterName">The parameter name.</param>
+    <param name="mySqlDbType">The MySqlDbType value.</param>
+    <param name="size">The size value.</param>
+    <param name="value">The parameter value.</param>
+    <param name="direction">The parameter direction.</param>
+    <returns>A reference to the added item.</returns>
+  </AddMySql>
+</items>

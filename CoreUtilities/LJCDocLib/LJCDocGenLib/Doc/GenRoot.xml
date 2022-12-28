@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- GenRoot.xml -->
+<items>
+  <GenRoot>
+    <summary>
+      Generates the Root HTML page.
+    </summary>
+  </GenRoot>
+  <LogMissing>
+    <summary>
+      Logs the missing values.
+    </summary>
+    <param name="itemName">The object description.</param>
+    <param name="itemTypeName">The object Type name.</param>
+    <param name="itemValue">The object name.</param>
+  </LogMissing>
+  <GenRootC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataRoot">The Root data object.</param>
+    <param name="targetPath">The output target path.</param>
+  </GenRootC>
+  <GenAssemblyPages>
+    <summary>
+      Generates the child assembly page and class/type pages.
+    </summary>
+    <remarks>Called from Program.Main()</remarks>
+  </GenAssemblyPages>
+  <GenRootPage>
+    <summary>
+      Creates an HTML page that lists the assemblies.
+    </summary>
+    <remarks>
+      <para>The HTML page is created in the HTMLFolderName folder.</para>
+      <para>Called from Program.Main()</para>
+    </remarks>
+  </GenRootPage>
+</items>

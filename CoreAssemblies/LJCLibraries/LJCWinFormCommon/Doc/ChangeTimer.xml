@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ChangeTimer.xml -->
+<items>
+  <!-- Methods -->
+  <DoChange>
+    <summary>
+      Uses a timer to allow the list to process outstanding messages.
+    </summary>
+    <param name="changeName">The ChangeName value.</param>
+  </DoChange>
+</items>

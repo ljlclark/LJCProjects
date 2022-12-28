@@ -1,0 +1,644 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCRegionManager</name>
+    </assembly>
+    <members>
+        <member name="T:LJCRegionManager.CitySectionDetail">
+            <summary>The CitySection detail dialog.</summary>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.DataRetrieve">
+            <summary>
+      Retrieves the initial control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.GetRecordValues(LJCRegionDAL.CitySection)">
+            <summary>
+      Gets the record values and copies them to the controls.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.SetRecordValues">
+            <summary>
+      Creates and returns a record object with the data from the controls.
+    </summary><returns>The new record object.</returns>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.ResetRecordValues(LJCRegionDAL.CitySection)">
+            <summary>
+            Resets the empty record values.
+            </summary>
+            <param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.DataSave">
+            <summary>
+      Saves the data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.IsValid">
+            <summary>
+      Validates the data.
+    </summary><returns>True if the data is valid otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.InitializeControls">
+            <summary>
+      Configures the controls and loads the selection control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCParentID">
+            <summary>Gets or sets the Parent ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCParentName">
+            <summary>Gets or sets the LJCParent name value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCIsUpdate">
+            <summary>Gets the LJCIsUpdate value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCRecord">
+            <summary>Gets a reference to the record object.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCHelpFileName">
+            <summary>Gets or sets the LJCHelpFileName value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CitySectionDetail.LJCHelpPageName">
+            <summary>Gets or sets the LJCHelpPageName value.</summary>
+        </member>
+        <member name="E:LJCRegionManager.CitySectionDetail.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:LJCRegionManager.CitySectionDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJCRegionManager.CitySectionDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:LJCRegionManager.ProvinceDetail">
+            <summary>The Province detail dialog.</summary>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.DataRetrieve">
+            <summary>
+      Retrieves the initial control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.GetRecordValues(LJCRegionDAL.Province)">
+            <summary>
+      Gets the record values and copies them to the controls.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.SetRecordValues">
+            <summary>
+      Creates and returns a record object with the data from the controls.
+    </summary><returns>The new record object.</returns>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.ResetRecordValues(LJCRegionDAL.Province)">
+            <summary>
+            Resets the empty record values.
+            </summary>
+            <param name="record">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.DataSave">
+            <summary>
+      Saves the data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.IsValid">
+            <summary>
+      Validates the data.
+    </summary><returns>True if the data is valid otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.InitializeControls">
+            <summary>
+      Configures the controls and loads the selection control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCParentID">
+            <summary>Gets or sets the Parent ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCParentName">
+            <summary>Gets or sets the Parent name value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCIsUpdate">
+            <summary>Gets the IsUpdate value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCRecord">
+            <summary>Gets a reference to the record object.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCHelpFileName">
+            <summary>Gets or sets the LJCHelpFileName value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.ProvinceDetail.LJCHelpPageName">
+            <summary>Gets or sets the LJCHelpPageName value.</summary>
+        </member>
+        <member name="E:LJCRegionManager.ProvinceDetail.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:LJCRegionManager.ProvinceDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJCRegionManager.ProvinceDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:LJCRegionManager.CityDetail">
+            <summary>The City detail dialog.</summary>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.DataRetrieve">
+            <summary>
+      Retrieves the initial control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.GetRecordValues(LJCRegionDAL.City)">
+            <summary>
+      Gets the record values and copies them to the controls.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.SetRecordValues">
+            <summary>
+      Creates and returns a record object with the data from the controls.
+    </summary><returns>The new record object.</returns>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.ResetRecordValues(LJCRegionDAL.City)">
+            <summary>
+            Resets the empty record values.
+            </summary>
+            <param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.DataSave">
+            <summary>
+      Saves the data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.IsValid">
+            <summary>
+      Validates the data.
+    </summary><returns>True if the data is valid otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.InitializeControls">
+            <summary>
+      Configures the controls and loads the selection control data.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCParentID">
+            <summary>Gets or sets the Parent ID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCParentName">
+            <summary>Gets or sets the Parent name value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCIsUpdate">
+            <summary>Gets the IsUpdate value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCRecord">
+            <summary>Gets a reference to the record object.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCHelpFileName">
+            <summary>Gets or sets the LJCHelpFileName value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.CityDetail.LJCHelpPageName">
+            <summary>Gets or sets the LJCHelpPageName value.</summary>
+        </member>
+        <member name="E:LJCRegionManager.CityDetail.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:LJCRegionManager.CityDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJCRegionManager.CityDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:LJCRegionManager.Program">
+            <summary>
+      The program entry point class.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.Program.Main">
+            <summary>
+      The program entry point function.
+    </summary>
+        </member>
+        <member name="T:LJCRegionManager.RegionModule">
+            <summary>
+      The tab composite user control.
+    </summary><remarks>
+      These tabs display the data items and related data.
+      <para>
+      &lt;a href="..\Module.html"&gt;Plugin Members&lt;/a&gt;
+    </para>
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DataRetrieveRegion">
+            <summary>
+      Retrieves the list rows.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetRegion(System.Int32,System.String)">
+            <summary>
+      Sets the selected item from the name value.
+    </summary><param name="regionID">The ID value..</param><param name="regionName">The Region name.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DataRetrieveProvince">
+            <summary>
+      Retrieves the list rows.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowAddProvince(LJCRegionDAL.Province)">
+            <summary>
+      Adds a grid row and updates it with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowUpdateProvince(LJCRegionDAL.Province)">
+            <summary>
+      Updates the current row with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetStoredValuesProvince(LJCWinFormControls.LJCGridRow,LJCRegionDAL.Province)">
+            <summary>
+      Sets the row stored values.
+    </summary><param name="row">The grid row.</param><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowSelectProvince(LJCRegionDAL.Province)">
+            <summary>
+      Selects a row based on the key record values.
+    </summary><param name="dataRecord">The data record object.</param><returns>True if the record exists, otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetProvince(System.Int32,System.String)">
+            <summary>
+      Selects a row based on the supplied province code.
+    </summary><param name="provinceID">The ID value..</param><param name="provinceCode">The Name value.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DataRetrieveCity">
+            <summary>
+      Retrieves the list rows.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowAddCity(LJCRegionDAL.City)">
+            <summary>
+      Adds a grid row and updates it with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowUpdateCity(LJCRegionDAL.City)">
+            <summary>
+      Updates the current row with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetStoredValuesCity(LJCWinFormControls.LJCGridRow,LJCRegionDAL.City)">
+            <summary>
+      Sets the row stored values.
+    </summary><param name="row">The grid row.</param><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowSelectCity(LJCRegionDAL.City)">
+            <summary>
+      Selects a row based on the key record values.
+    </summary><param name="dataRecord">The data record object.</param><returns>True if the record exists, otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetCity(System.Int32,System.String)">
+            <summary>
+      Selects a row based on the supplied value.
+    </summary><param name="cityID">The ID value..</param><param name="cityName">The Name value.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DataRetrieveCitySection">
+            <summary>
+      Retrieves the list rows.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowAddCitySection(LJCRegionDAL.CitySection)">
+            <summary>
+      Adds a grid row and updates it with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowUpdateCitySection(LJCRegionDAL.CitySection)">
+            <summary>
+      Updates the current row with the record values.
+    </summary><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetStoredValuesCitySection(LJCWinFormControls.LJCGridRow,LJCRegionDAL.CitySection)">
+            <summary>
+      Sets the row stored values.
+    </summary><param name="row">The grid row.</param><param name="dataRecord">The data record object.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.RowSelectCitySection(LJCRegionDAL.CitySection)">
+            <summary>
+      Selects a row based on the key record values.
+    </summary><param name="dataRecord">The data record object.</param><returns>True if the record exists, otherwise false.</returns>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.SetCitySection(System.Int32,System.String)">
+            <summary>
+      Sets the selected item from the name value.
+    </summary><param name="citySectionID">The ID value..</param><param name="citySectionName">The Name value.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDefaultProvince">
+            <summary>
+      Performs the default list action.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoNewProvince">
+            <summary>
+      Displays a detail dialog for a new record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoEditProvince">
+            <summary>
+      Displays a detail dialog to edit an existing record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.ProvinceDetail_Change(System.Object,System.EventArgs)">
+            <summary>
+      Adds a new list row or updates the existing list row with the changes
+      from the detail dialog.
+    </summary><param name="sender">The object that originated the event request.</param><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDeleteProvince">
+            <summary>
+      Deletes the selected row.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoRefreshProvince">
+            <summary>
+      Refreshes the list.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoSelectProvince">
+            <summary>
+      Sets the selected item and returns to the parent form.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDefaultCity">
+            <summary>
+      Performs the default list action.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoNewCity">
+            <summary>
+      Displays a detail dialog for a new record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoEditCity">
+            <summary>
+      Displays a detail dialog to edit an existing record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.CityDetail_Change(System.Object,System.EventArgs)">
+            <summary>
+      Adds a new list row or updates the existing list row with the changes
+      from the detail dialog.
+    </summary><param name="sender">The object that originated the event request.</param><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDeleteCity">
+            <summary>
+      Deletes the selected row.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoRefreshCity">
+            <summary>
+      Refreshes the list.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoSelectCity">
+            <summary>
+      Sets the selected item and returns to the parent form.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDefaultCitySection">
+            <summary>
+      Performs the default list action.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoNewCitySection">
+            <summary>
+      Displays a detail dialog for a new record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoEditCitySection">
+            <summary>
+      Displays a detail dialog to edit an existing record.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.CitySectionDetail_Change(System.Object,System.EventArgs)">
+            <summary>
+      Adds a new list row or updates the existing list row with the changes
+      from the detail dialog.
+    </summary><param name="sender">The object that originated the event request.</param><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoDeleteCitySection">
+            <summary>
+      Deletes the selected row.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoRefreshCitySection">
+            <summary>
+      Refreshes the list.
+    </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.DoSelectCitySection">
+            <summary>
+      Sets the selected item and returns to the parent form.
+    </summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.ControlValues">
+            <summary>Gets or sets the Allow Change value.</summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.LJCInit">
+            <summary>
+            Initializes the module.
+            </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.LJCTabs">
+            <summary>
+            Returns a reference to the module tab control.
+            </summary>
+            <returns>A reference to the module tab control.</returns>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCProgramName">
+            <summary>Gets the module assembly name.</summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.ClosePage(System.Windows.Forms.TabPage)">
+            <summary>
+            Closes the current page.
+            </summary>
+            <param name="tabPage">The current tab page.</param>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.CloseTabPage">
+            <summary>Gets or sets the close tab page.</summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.OnPageClose">
+            <summary>Calls the PageClose event handlers.</summary>
+            <remarks><para>Syntax: protected void OnPageClose()</para></remarks>
+        </member>
+        <member name="E:LJCRegionManager.RegionModule.PageClose">
+            <summary>The page close event.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCIsSelect">
+            <summary>Gets or sets the LJCIsSelect value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCSelectedRegion">
+            <summary>Gets a reference to the selected record.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCSelectedProvince">
+            <summary>Gets a reference to the selected record.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCSelectedCity">
+            <summary>Gets a reference to the selected record.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCSelectedCitySection">
+            <summary>Gets a reference to the selected record.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCHelpFile">
+            <summary> The help file name.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCRegionID">
+            <summary>The startup RegionID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCProvinceID">
+            <summary>The startup ProvinceID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCCityID">
+            <summary>The startup CityID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCCitySectionID">
+            <summary>The startup CitySectionID value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCRegionName">
+            <summary>The startup RegionName value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCProvinceCode">
+            <summary>The startup ProvinceCode value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCCityName">
+            <summary>The startup CityName value.</summary>
+        </member>
+        <member name="P:LJCRegionManager.RegionModule.LJCCitySectionName">
+            <summary>The startup CitySectionName value.</summary>
+        </member>
+        <member name="F:LJCRegionManager.RegionModule.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJCRegionManager.RegionModule.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:LJCRegionManager.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:LJCRegionManager.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:LJCRegionManager.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

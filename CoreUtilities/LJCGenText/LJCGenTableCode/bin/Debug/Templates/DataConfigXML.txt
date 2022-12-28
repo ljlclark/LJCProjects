@@ -1,0 +1,19 @@
+// #SectionBegin Class
+// #Value _a_   Attribute
+// #Value _d_   Data
+// #Value _gt_  Greater Than
+// #Value _lt_  Less Than
+// #Value _lt/_ Less Than and slash
+// #Value _nm_  Name
+// #Value _/s_  Close Span
+_lt_?_nm_xml_/s_ _a_version_/s_="_d_1.0_/s_" _a_encoding_/s_="_d_utf-8_/s_" ?_gt_
+_lt__nm_DataConfigs_/s_ xmlns:xsi="_d_http://www.w3.org/2001/XMLSchema-instance_/s_"
+	 xmlns:xsd="_d_http://www.w3.org/2001/XMLSchema_/s_"_gt_
+	_lt__nm_DataConfig_/s__gt_
+		_lt__nm_Name_/s__gt_ConfigName_lt/__nm_Name_/s__gt_
+		_lt__nm_DbServer_/s__gt_DBServer\Instance_lt/__nm_DbServer_/s__gt_
+		_lt__nm_Database_/s__gt_DatabaseName_lt/__nm_Database_/s__gt_
+		_lt__nm_ConnectionTypeName_/s__gt_SqlServer_lt/__nm_ConnectionTypeName_/s__gt_
+	_lt/__nm_DataConfig_/s__gt_
+_lt/__nm_DataConfigs_/s__gt_
+// #SectionEnd Class

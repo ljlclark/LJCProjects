@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbValue.xml -->
+<items>
+  <DbValueC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="propertyName">The PropertyName value.</param>
+    <param name="value">The item value.</param>
+    <param name="dataTypeName">The DataType name.</param>
+  </DbValueC>
+  <FormatValue>
+    <summary>
+      Formats the column value for the SQL string. (D)
+    </summary>
+    <returns>The formatted value.</returns>
+    <remarks>
+      <para>
+        Returns the string formatted value from the Value property based
+        on the DataTypeName property.
+      </para>
+      <para>
+        If the DataType is Boolean, returns "1" or "0".&lt;br /&gt;
+        If the DataType is DateTime, returns a string Date or Minimum Date
+        value.&lt;br  /&gt;
+        If the DataType is string, returns a string with doubled single quotes.
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var dbValueBool = new DbValue("TestBool", "1", NetCommon.TypeBoolean);
+        var dbValueDate = new DbValue("TestDate", DateTime.Now()
+        , NetCommon.TypeDateTime);
+        var dbValueString = new DbValue("TestString", "string");
+      </code>
+    </example>
+  </FormatValue>
+  <CreateColumn>
+    <summary>
+      Creates a combined
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; from a
+      &lt;span class="userType"&gt;DbValue&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;.
+    </summary>
+    <param name="definitionColumn">
+      The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </param>
+    <returns>
+      The combined
+      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      object.
+    </returns>
+  </CreateColumn>
+</items>

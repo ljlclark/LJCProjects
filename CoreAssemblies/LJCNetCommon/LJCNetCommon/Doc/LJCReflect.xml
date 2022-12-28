@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCReflect.xml -->
+<items>
+  <LJCReflect>
+    <summary>
+      Provides object property reflection capabilities. (DE)
+    </summary>
+    <remarks>
+      <para>
+        This class is commonly used when accessing properties of a Data Object.
+        The object reference is passed to the constructor.
+      </para>
+      <para>
+        The property objects can then be accessed with: GetPropertyNames(),
+        GetPropertyType(), GetValue(), SetPropertyValue() and SetValue()
+      </para>
+      <para>
+        The typed property values can be retrieved with: GetDateTime(),
+        GetDbDateString(), GetInt32() and GetString().
+      </para>
+    </remarks>
+  </LJCReflect>
+
+  <!-- Constructor Methods -->
+  <LJCReflectC>
+    <summary>
+      Instantiates an instance of the class.
+    </summary>
+    <param name="source">The source object.</param>
+  </LJCReflectC>
+  <SetSource>
+    <summary>
+      Sets the source object and type values.
+    </summary>
+    <param name="source">The source object.</param>
+  </SetSource>
+
+  <!-- Get Methods -->
+  <GetDateTime>
+    <summary>
+      Gets the property value as a DateTime value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The string property value.</returns>
+  </GetDateTime>
+  <GetDbDateString>
+    <summary>
+      Gets the property value as a DB date/time string.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value or null if not a valid date/time.</returns>
+  </GetDbDateString>
+  <GetInt32>
+    <summary>
+      Gets the property value as an integer.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The integer property value.</returns>
+  </GetInt32>
+  <GetPropertyInfo>
+    <summary>
+      Gets the cached PropertyInfo value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The PropertyInfo object.</returns>
+  </GetPropertyInfo>
+  <GetPropertyNames>
+    <summary>
+      Gets a list of the property names.
+    </summary>
+    <returns>The property name collection.</returns>
+  </GetPropertyNames>
+  <GetPropertyType>
+    <summary>
+      Get the property type.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The property type.</returns>
+  </GetPropertyType>
+  <GetString>
+    <summary>
+      Gets the property value as a string.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The string property value.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Initialize LJCReflect outside of loop.
+        var mReflect = new LJCReflect(records[0]);
+        foreach (var record in records)
+        {
+          // Use SetSource to change the data record.
+          mReflect.SetSource(record);
+          var value = mReflect.GetString("LastName");
+        }
+      </code>
+    </example>
+  </GetString>
+  <GetValue>
+    <summary>
+      Gets the property value as an object using a delegate. (E)
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Initialize LJCReflect outside of loop.
+        var mReflect = new LJCReflect(records[0]);
+        foreach (var record in records)
+        {
+          // Use SetSource to change the data record.
+          mReflect.SetSource(record);
+          var value = mReflect.GetValue("LastName");
+        }
+      </code>
+    </example>
+  </GetValue>
+  <GetValueReflect>
+    <summary>
+      Gets the property value as an object using reflection.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value.</returns>
+  </GetValueReflect>
+
+  <!-- Set Methods -->
+  <SetPropertyValue>
+    <summary>
+      Sets the property value based on value type. (E)
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <param name="value">The property value.</param>
+    <example>
+      <code>
+        using System;
+        using System.Data;
+        using System.Data.Common;
+        using LJC.DataAccess;
+        
+        // Sets the data object values from the DbColumns object.
+        public static void SetObjectValues(DbColumns dbColumns, object dataObject)
+        {
+          LJCReflect reflect;
+
+          reflect = new LJCReflect(dataObject);
+          foreach (DbColumn dbColumn in dbColumns)
+          {
+            reflect.SetPropertyValue(dbColumn.PropertyName, dbColumn.Value);
+          }
+        }
+      </code>
+    </example>
+  </SetPropertyValue>
+  <SetValue>
+    <summary>
+      Sets the property value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <param name="value">The property value.</param>
+    <param name="propertyInfo">The PropertyInfo value.</param>
+  </SetValue>
+</items>

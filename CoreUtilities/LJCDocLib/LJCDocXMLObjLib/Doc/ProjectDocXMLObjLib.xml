@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ProjectDocXMLObjLib.xml -->
+<items>
+  <Doc>
+    <summary>
+      The deserialized XML documentation data.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt; The Documentation "Doc" classes.&lt;/b&gt; &lt;br /&gt;
+        These classes contain the deserialized XML documentation data. This data
+        is used in the "Data" classes.
+      </para>
+      <para>
+        The "Doc" member classes include: Doc, DocAssembly, DocMembers, DocMember,
+        Params(DocParams), DocParam, Paras(DocParas), DocPara, Remarks(DocRemarks)
+        and Example(DocExample).
+      </para>
+      <para>
+        The LJCDocXMLObjLib project is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </Doc>
+</items>

@@ -1,0 +1,3 @@
+ColumnName	ToTableName	ToColumnName
+ID	ViewData	ID
+ID	ViewData	ID

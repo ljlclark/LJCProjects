@@ -1,0 +1,17 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe.config
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionDAL.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionDAL.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.csproj.SuggestedBindingRedirects.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.Properties.Resources.resources
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.RegionTabForm.resources
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.csproj.GenerateResource.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionForm\obj\Debug\LJCRegionForm.pdb

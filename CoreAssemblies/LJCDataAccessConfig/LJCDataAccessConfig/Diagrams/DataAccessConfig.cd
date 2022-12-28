@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LJCDataAccessConfig.DataConfigs">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="DataConfigs" Hidden="true" />
+      <Field Name="mConfigFileName" Hidden="true" />
+      <Field Name="mPrevCount" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>CAIAAAAABAAAAAAIEAAAAABAAAAAAAEAAAAAAEAAAAA=</HashCode>
+      <FileName>DataConfigs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDataAccessConfig.DataConfig">
+    <Position X="2.5" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="B" Hidden="true" />
+      <Method Name="C" Hidden="true" />
+      <Method Name="D" Hidden="true" />
+      <Method Name="DataConfig" Hidden="true" />
+      <Method Name="E" Hidden="true" />
+      <Method Name="F" Hidden="true" />
+      <Field Name="G" Hidden="true" />
+      <Method Name="H" Hidden="true" />
+      <Method Name="J" Hidden="true" />
+      <Method Name="K" Hidden="true" />
+      <Method Name="L" Hidden="true" />
+      <Method Name="M" Hidden="true" />
+      <Field Name="mConnectionTypeName" Hidden="true" />
+      <Field Name="mDatabase" Hidden="true" />
+      <Field Name="mDbServer" Hidden="true" />
+      <Field Name="mName" Hidden="true" />
+      <Field Name="mPswd" Hidden="true" />
+      <Field Name="mUserID" Hidden="true" />
+      <Method Name="N" Hidden="true" />
+      <Method Name="O" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAEAQAAQEBAAAACxRAAACIAAQgAgQnt8BAAA=</HashCode>
+      <FileName>DataConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LJCDataAccessConfig.ConnectionTemplates">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="mPrevCount" Hidden="true" />
+      <Field Name="mTemplateFileName" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>CAIACAAABAAAAAAIEAAAAAAAAAAIAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>ConnectionTemplates.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LJCDataAccessConfig.ConnectionTemplate">
+    <Position X="7.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAQEAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ConnectionTemplate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

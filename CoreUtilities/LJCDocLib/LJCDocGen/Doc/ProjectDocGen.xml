@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ProjectDocGen.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The DocGen program generates HTML pages.
+      </para>
+      <para>
+        The DocGen program is part of the LJCDocLib solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

@@ -1,0 +1,10 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCDBMessage.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\obj\Debug\LJCRegionDAL.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\obj\Debug\LJCRegionDAL.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\obj\Debug\LJCRegionDAL.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\obj\Debug\LJCRegionDAL.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCRegionManager\LJCRegionDAL\obj\Debug\LJCRegionDAL.pdb

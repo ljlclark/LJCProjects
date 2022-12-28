@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021 - All Rights Reserved -->
+<items>
+  <DataRetrieve>
+    <summary>
+      Retrieves the list rows.
+    </summary>
+  </DataRetrieve>
+  <RowAdd>
+    <summary>
+      Adds a grid row and updates it with the record values.
+    </summary>
+    <param name="record">The record object.</param>
+  </RowAdd>
+  <RowUpdate>
+    <summary>
+      Updates the current row with the record values.
+    </summary>
+    <param name="record">The record object.</param>
+  </RowUpdate>
+  <SetStoredValues>
+    <summary>
+      Sets the row stored values.
+    </summary>
+    <param name="row">The grid row.</param>
+    <param name="record">The record object.</param>
+  </SetStoredValues>
+</items>

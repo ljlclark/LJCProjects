@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- KeyItems.xml -->
+<items>
+  <KeyItems>
+    <summary>
+      Represents a collection of
+      &lt;span class="userType"&gt;KeyItem&lt;/span&gt; objects.
+    </summary>
+    <remarks>
+      <para>
+        The common collection static method is: HasItems().&lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() + 1 overload,
+        Append(), Clone(), GetCollection() and HasItems().
+      </para>
+      <para>
+        Public methods are: GetDescription(), GetIndex(), GetItem() and
+        GetItems().
+      </para>
+      <para>
+        The Search and Sort methods are: SearchPropertName() and
+        SortPropertyName().&lt;br /&gt;
+      </para>
+    </remarks>
+  </KeyItems>
+  
+  <!-- Collection Methods -->
+  <Add1>
+    <summary>
+      Adds the specified object.
+    </summary>
+    <param name="item">The item object.</param>
+  </Add1>
+  <Add2>
+    <summary>
+      Creates and adds the object with the provided values.
+    </summary>
+    <param name="propertyName">The Property Name.</param>
+    <param name="id">The ID value.</param>
+    <param name="description">The Description.</param>
+    <param name="maxLength">The MaxLength value.</param>"
+  </Add2>
+  <Append>
+    <summary>
+      Appends the supplied objects to the collection.
+    </summary>
+    <param name="items">The collection to be appended.</param>
+  </Append>
+  <GetCollection>
+    <summary>
+      Get custom collection from List&lt;T&gt;.
+    </summary>
+    <param name="items">The Items collection.</param>
+    <returns>The collection object reference.</returns>
+  </GetCollection>
+  <GetEnumerator>
+    <summary>
+      Gets the Collection Enumerator.
+    </summary>
+    <returns>The Collection Enumerator.</returns>
+  </GetEnumerator>
+
+  <!-- Custom Methods -->
+  <GetDescription>
+    <summary>
+      Gets the Item Description with Value as index within PropertyName.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The Item Description.</returns>
+  </GetDescription>
+  <GetIndex>
+    <summary>
+      Get index from Value.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The item index.</returns>
+  </GetIndex>
+  <GetItem>
+    <summary>
+      Gets the KeyItem with Value as index within PropertyName.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The selected ControlItem.</returns>
+  </GetItem>
+  <GetItems>
+    <summary>
+      Gets the Items with the PropertyName.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The valid ControlItems.</returns>
+  </GetItems>
+
+  <!-- Collection Properties -->
+  <Indexer>
+    <summary>
+      Gets the item by index value.
+    </summary>
+    <param name="index">The index value.</param>
+    <returns>The element item object.</returns>
+  </Indexer>
+</items>

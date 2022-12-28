@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- DocGenAssemblies.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="name">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCSearchBySequence>
+    <summary>
+      Finds and returns the object that contains the supplied value.
+    </summary>
+    <param name="sequence">The sequence value.</param>
+    <returns>A reference to the found object.</returns>
+  </LJCSearchBySequence>
+  <LJCSortByName>
+    <summary>
+      Sorts the collection by Name.
+    </summary>
+  </LJCSortByName>
+  <LJCSortBySequence>
+    <summary>
+      Sorts the collection by Sequence.
+    </summary>
+    <param name="comparer">The SequenceComparer object.</param>
+  </LJCSortBySequence>
+</items>

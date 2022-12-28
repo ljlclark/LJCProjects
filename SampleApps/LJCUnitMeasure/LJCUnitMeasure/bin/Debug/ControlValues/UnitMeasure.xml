@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ControlValues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ControlValue>
+    <ControlName>UnitMeasureGrid.Code</ControlName>
+    <Left>0</Left>
+    <Top>0</Top>
+    <Width>57</Width>
+    <Height>0</Height>
+  </ControlValue>
+  <ControlValue>
+    <ControlName>UnitMeasureGrid.Name</ControlName>
+    <Left>0</Left>
+    <Top>0</Top>
+    <Width>153</Width>
+    <Height>0</Height>
+  </ControlValue>
+  <ControlValue>
+    <ControlName>UnitMeasureGrid.Description</ControlName>
+    <Left>0</Left>
+    <Top>0</Top>
+    <Width>368</Width>
+    <Height>0</Height>
+  </ControlValue>
+  <ControlValue>
+    <ControlName>UnitMeasureList</ControlName>
+    <Left>323</Left>
+    <Top>130</Top>
+    <Width>612</Width>
+    <Height>424</Height>
+  </ControlValue>
+</ControlValues>

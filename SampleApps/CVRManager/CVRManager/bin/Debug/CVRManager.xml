@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CVRManager</name>
+    </assembly>
+    <members>
+        <member name="T:CVRManager.CVPersonDetail">
+            <summary>The CVPerson detail dialog.</summary>
+        </member>
+        <member name="M:CVRManager.CVPersonDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.CVPersonDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="F:CVRManager.CVPersonDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVPersonDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.CVPersonDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CVRManager.CVPersonList">
+            <summary>
+      The list form.
+    </summary><remarks>
+      This form displays the data items and allows for New, Edit, Delete
+      and Select of those items.
+      <para>
+      &lt;a href="..\ListD.html"&gt;Data Methods&lt;/a&gt;
+      &lt;a href="..\ListA.html"&gt;Action Methods&lt;/a&gt;
+      &lt;a href="..\ListW.html"&gt;Worklist Processing&lt;/a&gt;
+    </para>
+    </remarks>
+        </member>
+        <member name="F:CVRManager.CVPersonList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVPersonList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.CVPersonList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVVisitDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.CVVisitDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="F:CVRManager.CVVisitDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVVisitDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.CVVisitDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVVisitGridCode.DoRefreshCVVisit">
+            <summary>
+      Refreshes the list.
+    </summary>
+        </member>
+        <member name="T:CVRManager.CVVisitList">
+            <summary>
+      The list form.
+    </summary><remarks>
+      This form displays the data items and allows for New, Edit, Delete
+      and Select of those items.
+      <para>
+      &lt;a href="..\ListD.html"&gt;Data Methods&lt;/a&gt;
+      &lt;a href="..\ListA.html"&gt;Action Methods&lt;/a&gt;
+      &lt;a href="..\ListW.html"&gt;Worklist Processing&lt;/a&gt;
+    </para>
+    </remarks>
+        </member>
+        <member name="F:CVRManager.CVVisitList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.CVVisitList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.CVVisitList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CVRManager.FacilityDetail">
+            <summary>The Facility detail dialog.</summary>
+        </member>
+        <member name="M:CVRManager.FacilityDetail.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRManager.FacilityDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.FacilityDetail.LJCOnChange">
+            <summary>
+      Fires the LJCChange event.
+    </summary>
+        </member>
+        <member name="E:CVRManager.FacilityDetail.LJCChange">
+            <summary>The Change event.</summary>
+        </member>
+        <member name="F:CVRManager.FacilityDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.FacilityDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.FacilityDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CVRManager.FacilityList">
+            <summary>
+      The list form.
+    </summary><remarks>
+      This form displays the data items and allows for New, Edit, Delete
+      and Select of those items.
+      <para>
+      &lt;a href="..\ListD.html"&gt;Data Methods&lt;/a&gt;
+      &lt;a href="..\ListA.html"&gt;Action Methods&lt;/a&gt;
+      &lt;a href="..\ListW.html"&gt;Worklist Processing&lt;/a&gt;
+    </para>
+    </remarks>
+        </member>
+        <member name="M:CVRManager.FacilityList.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="F:CVRManager.FacilityList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.FacilityList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.FacilityList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CVRManager.VisitFilterDetail">
+            <summary>The Filter detail dialog.</summary>
+        </member>
+        <member name="M:CVRManager.VisitFilterDetail.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRManager.VisitFilterDetail.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+      Paint the form background.
+    </summary><param name="e">The event arguments.</param>
+        </member>
+        <member name="F:CVRManager.VisitFilterDetail.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.VisitFilterDetail.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.VisitFilterDetail.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CVRManager.LJCMaskBox">
+            <summary>The custom MaskTextBox.</summary>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.OnEnter(System.EventArgs)">
+            <summary>
+            Handles the Enter event to set the Mask.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.OnLeave(System.EventArgs)">
+            <summary>
+            Handles the Leave event to clear the Mask if empty.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Handles the KeyPress event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.LJCIsEmpty">
+            <summary>Checks if the control Text matches TextCheckString.</summary>
+        </member>
+        <member name="P:CVRManager.LJCMaskBox.LJCText">
+            <summary>Gets or sets the Mask and Text value.</summary>
+        </member>
+        <member name="P:CVRManager.LJCMaskBox.LJCMaskValue">
+            <summary>Gets or sets the MaskValue.</summary>
+        </member>
+        <member name="P:CVRManager.LJCMaskBox.LJCTextCheckString">
+            <summary>Gets or sets the TextCheckString value.</summary>
+        </member>
+        <member name="F:CVRManager.LJCMaskBox.LJCDateMaskValue">
+            <summary>The Date Mask Value.</summary>
+        </member>
+        <member name="F:CVRManager.LJCMaskBox.LJCTimeMaskValue">
+            <summary>The Time Mask Value.</summary>
+        </member>
+        <member name="F:CVRManager.LJCMaskBox.LJCDateCheckString">
+            <summary>The Date check string.</summary>
+        </member>
+        <member name="F:CVRManager.LJCMaskBox.LJCTimeCheckString">
+            <summary>The Time check string.</summary>
+        </member>
+        <member name="F:CVRManager.LJCMaskBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CVRManager.LJCMaskBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:CVRManager.LogRange.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:CVRManager.LogRange.CompareTo(CVRManager.LogRange)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="T:CVRManager.ValuesCVRManager">
+            <summary>Application values singleton class.</summary>
+        </member>
+        <member name="M:CVRManager.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:CVRManager.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CVRManager.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CVRManager.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

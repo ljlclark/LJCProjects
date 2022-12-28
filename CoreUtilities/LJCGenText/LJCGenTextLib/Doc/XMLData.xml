@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- XMLData.xml -->
+<items>
+  <Add>
+    <summary>
+      Adds padded and formatted text line.
+    </summary>
+    <param name="text">The Format text.</param>
+    <param name="parms">The Format parameters.</param>
+  </Add>
+  <ClassItems>
+    <summary>
+      Creates the Class Items.
+    </summary>
+    <param name="defaultValues">The default values.</param>
+    <returns>The Class Items XML.</returns>
+  </ClassItems>
+  <Create>
+    <summary>
+      Generates the data XML files.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="dbColumns">The property items.</param>
+    <returns>The Data XML text.</returns>
+  </Create>
+  <GetDefaults>
+    <summary>
+      Gets the default values from a file.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="fileSpec">The Defaults file spec.</param>
+    <returns>The default values XML.</returns>
+  </GetDefaults>
+  <GetPlural>
+    <summary>
+      Gets the plural value for the supplied name.
+    </summary>
+    <param name="name">The name value.</param>
+    <returns>The plural name value.</returns>
+  </GetPlural>
+  <Pad>
+    <summary>
+      Pads and formats the text.
+    </summary>
+    <param name="text">The Format text.</param>
+    <param name="parms">The Format parameters.</param>
+    <returns>The padded and formatted text.</returns>
+  </Pad>
+  <PropertyItems>
+    <summary>
+      Creates the Property Items.
+    </summary>
+    <param name="dbColumns">The column definitions.</param>
+    <returns>The XMLData column items.</returns>
+  </PropertyItems>
+</items>

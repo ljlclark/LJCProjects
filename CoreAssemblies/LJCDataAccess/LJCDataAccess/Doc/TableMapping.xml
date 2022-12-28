@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableMapping.xml -->
+<items>
+  <AddColumnMap>
+    <summary>
+      Adds a
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      column map to the table mapping.
+    </summary>
+    <param name="dataSetTable">
+      The &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      name.</param>
+    <param name="sourceColumn">The source column name.</param>
+    <param name="dataSetColumn">
+      The &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      column name.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataColumnMapping&lt;/span&gt;
+      object.</returns>
+  </AddColumnMap>
+  <AddTableMap>
+    <summary>
+      Adds a
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      map to the
+      &lt;span class="userType"&gt;TableMaps&lt;/span&gt; collection.
+    </summary>
+    <param name="dataSetTable">
+      The &lt;span class="userType"&gt;DataTable&lt;/span&gt;
+      name.</param>
+    <returns>
+      A reference to the
+      &lt;span class="userType"&gt;DataTableMapping&lt;/span&gt;
+      object.</returns>
+  </AddTableMap>
+</items>

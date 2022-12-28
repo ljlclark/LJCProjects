@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- LJCCodeDocTest.xml -->
+<DocGenGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DocGenGroup>
+    <Name>ViewBuilder</Name>
+    <Description>Data View Builder</Description>
+    <Sequence>15</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Name>LJCViewBuilder</Name>
+        <Description>A program to create and edit Views. (D)</Description>
+        <FileSpec>..\..\..\..\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.xml</FileSpec>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+</DocGenGroups>

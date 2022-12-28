@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021 - All Rights Reserved -->
+<items>
+  <CreateNewItems>
+    <summary>
+      Get bytes from sourceCipher index values knowing only
+      the index locations.
+    </summary>
+    <param name="sourceCipher">The source cipher.</param>
+    <returns>The InsertItems collection.</returns>
+  </CreateNewItems>
+</items>

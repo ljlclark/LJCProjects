@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- ProjectGenTextLib.xml -->
+<items>
+  <Directive>
+    <summary>
+      Represents a Directive item.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The Text Generator library contains classes that merge XML Data with Text
+        Templates to produce custom generated text. The output can represent any
+        type of text including source code.
+      </para>
+      <para>
+        The LJCGenTextLib project is part of the LJCGenText solution.
+      </para>
+    </remarks>
+  </Directive>
+</items>

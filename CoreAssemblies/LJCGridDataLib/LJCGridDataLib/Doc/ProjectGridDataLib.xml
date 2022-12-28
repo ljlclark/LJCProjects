@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectGridDataLib.xml -->
+<items>
+  <ResultGrid>
+    <summary>
+      Provides DbResult helpers for an LJCDataGrid control.
+    </summary>
+    <remarks>
+      <para>
+        A List Form contains one or more List Grids for displaying a list of
+        items.&lt;br /&gt;
+        When the data formats are known in advance, the List Form can contain data
+        methods that use strongly typed Data Objects.&lt;br /&gt;
+        Each List Grid is coded to have Row Data Methods to display and modify the
+        items in the grid.&lt;br /&gt;
+        These methods are DataRetrieve(), LoadRows(), RowAdd(), RowUpdate(),
+        SetStoredValues() and RowSelect().&lt;br /&gt;
+        The methods may be postfixed with a value that identifies the
+        grid to which it applies. E.G. DataRetrieveAddress(), RowAddAddress(),
+        etc.&lt;br /&gt;
+        This is especially true if the form contains more than one grid.
+      </para>
+      <para>
+        The ResultGrid class is designed to allow for display of data items when
+        the data formats are not known in advance.&lt;br /&gt;
+        It provides methods for displaying data directly from the DbResult values.
+      </para>
+      <para>
+        &lt;b&gt;The Result Grid Configuration Methods&lt;/b&gt;&lt;br /&gt;
+        This class has methods for the contained grid configuration.&lt;br /&gt;
+        These methods are SetDisplayColumns() with 3 overrides and
+        RemoveDisplayColumn().&lt;br /&gt;
+      </para>
+      <para>
+        &lt;b&gt;The Result Row Data Methods&lt;/b&gt;&lt;br /&gt;
+        There are methods for managing rows and row data using DbColumn values.
+        &lt;br /&gt;
+        These methods are LoadRows() with 2 overrides, RowAdd(), RowUpdate() and
+        RowSetValues().&lt;br /&gt;
+      </para>
+      <para>
+        The TableGrid class is designed to allow for display of data items when
+        the data formats are not known in advance.&lt;br /&gt;
+        It provides methods for displaying data directly from DataTable values.
+        &lt;br /&gt; It has many of the same Configuration and Row Data methods
+        as the ResultGrid class except they take DataTable objects instead of
+        DbResult objects.
+      </para>
+      <para>-- Project Level Remarks</para>
+      <para>
+        Provides DbResult helpers for an LJCDataGrid control.
+      </para>
+    </remarks>
+    <example>
+      <para>
+        This is main function sample code for testing. The code for the additional
+        test functions is listed under the methods with the same names.
+      </para>
+      <code>
+        using LJCDataAccessConfig;
+        using LJCDBClientLib;
+        using LJCDBDataAccess;
+
+        // Test DataGrid.
+        private void TestDataGrid()
+        {
+          string connectionString;
+          string providerName;
+
+          // Create Data Configuration values.
+          var databaseName = "DatabaseName";
+          var tableName = "TableName";
+      
+          bool useInternal = false;
+          if (useInternal)
+          {
+            // Use internal configuration.
+            DbConnectionStringBuilder connectionBuilder;
+            string databaseName = "DatabaseName";
+            connectionBuilder = new DbConnectionStringBuilder()
+            {
+              { "Data Source", "DataServiceName" },
+              { "Initial Catalog", databaseName },
+              { "Integrated Security", "True" }
+            };
+            connectionString = connectionBuilder.ConnectionString;
+            providerName = "System.Data.SqlClient";
+          }
+          else
+          {
+            // Or use external configuration.
+            DataConfigs dataConfigs = new DataConfigs();
+            dataConfigs.LJCLoadData();
+            dataConfig = dataConfigs.LJCGetByName("ConfigName");
+            connectionString = dataConfig.GetConnectionString();
+            providerName = dataConfig.GetProviderName();
+          }
+
+          // Create DataManager.
+          var dbServiceRef = new DbServiceRef()
+          {
+            DbDataAccess = new DbDataAccess(databaseName
+              , connectionString, providerName)
+          };
+          var dataManager = new DataManager(dbServiceRef, null, tableName);
+
+          // Method Tests.
+          SetDisplayColumns(dataManager);
+          SetDisplayColumns1(dataManager);
+          SetDisplayColumns2();
+          LoadRows(dataManager);
+          LoadRows1(dataManager);
+        }
+      </code>
+    </example>
+  </ResultGrid>
+</items>

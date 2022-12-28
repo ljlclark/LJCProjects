@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbServiceProxy.xml -->
+<items>
+  <DbServiceClientC1>
+    <summary>The Proxy constructor with values.</summary>
+    <param name="endpointConfigurationName">The endpoint configuration name.</param>
+  </DbServiceClientC1>
+  <DbServiceClientC2>
+    <summary>The Proxy constructor with values.</summary>
+    <param name="endpointConfigurationName">The endpoint configuration name.</param>
+    <param name="remoteAddress">The endpoint address string.</param>
+  </DbServiceClientC2>
+  <DbServiceClientC3>
+    <summary>The Proxy constructor with values.</summary>
+    <param name="endpointConfigurationName">The endpoint configuration name.</param>
+    <param name="remoteAddress">The endpoint address object.</param>
+  </DbServiceClientC3>
+  <DbServiceClientC4>
+    <summary>The Proxy constructor with values.</summary>
+    <param name="binding">The endpoint binding object.</param>
+    <param name="remoteAddress">The endpoint address object.</param>
+  </DbServiceClientC4>
+</items>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- RepeatItems.xml -->
+<items>
+  <RepeatItems>
+    <summary>
+      Represents a collection of RepeatItem objects.
+    </summary>
+  </RepeatItems>
+  <Add>
+    <summary>
+      Creates the RepeateItem object and adds it to the end of the collection.
+    </summary>
+    <param name="name">The item name.</param>
+    <returns>A reference to the object that was added.</returns>
+  </Add>
+</items>

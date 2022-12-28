@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<DbValues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DbValue>
+    <IsChanged>true</IsChanged>
+    <PropertyName>Value1</PropertyName>
+    <Value xsi:type="xsd:int">1</Value>
+  </DbValue>
+  <DbValue>
+    <IsChanged>true</IsChanged>
+    <PropertyName>Value2</PropertyName>
+    <Value xsi:type="xsd:string">2</Value>
+  </DbValue>
+</DbValues>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeTokenizer.xml -->
+<items>
+  <SetTokens>
+    <summary>
+      Sets the Tokens value, split on blanks.
+    </summary>
+    <param name="text">The text value.</param>
+  </SetTokens>
+  <GetToken>
+    <summary>
+      Gets the token at the specified token index.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+    <returns>The token value.</returns>
+  </GetToken>
+  <GetNextToken>
+    <summary>
+      Gets the next token after the specified token index.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+    <returns>The next token value.</returns>
+  </GetNextToken>
+  <CombineXmlCommentTokens>
+    <summary>
+      Combines the tokens for an XMLComment.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+  </CombineXmlCommentTokens>
+  <ClearRemainingTokens>
+    <summary>
+      Clears all the remaining tokens; starting with the specified token index.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+  </ClearRemainingTokens>
+  <EndTokens>
+    <summary>
+      Sets the tokenIndex to the end of the tokens array.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+  </EndTokens>
+  <StripQualifier>
+    <summary>
+      Strips the trailing text from the last qualifier in a qualifier chain.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="prefixCount">The recursive prefix count.</param>
+    <returns>The strip text value.</returns>
+  </StripQualifier>
+  <IsCodeXmlComment>
+    <summary>
+      Check if a XML comment.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if an XML comment, otherwise false.</returns>
+  </IsCodeXmlComment>
+  <IsParam>
+    <summary>
+      Check if the text is a param comment.
+    </summary>
+    <param name="text">The text value.</param>
+
+    <returns>True if a param item, otherwise false.</returns>
+  </IsParam>
+  <IsComment>
+    <summary>
+      Check if a code comment.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if a comment, otherwise false.</returns>
+  </IsComment>
+  <HasBothDelimiters>
+    <summary>
+      Check if the text is a Full summary comment.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>True if both delimiters are found.</returns>
+  </HasBothDelimiters>
+  <HasBeginDelimiter>
+    <summary>
+      Check if the text has the begin delimiter.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <returns>True if the begin delimiter is found.</returns>
+  </HasBeginDelimiter>
+  <HasEndDelimiter>
+    <summary>
+      Check if the text has the end delimiter.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>True if the end delimiter is found.</returns>
+  </HasEndDelimiter>
+  <IsDelimiters>
+    <summary>
+      Check if the text contains a common delimiter.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if a common delimiter, otherwise false.</returns>
+  </IsDelimiters>
+  <IsModifier>
+    <summary>
+      Check if the text is a Keyword.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="firstPass">The first pass for common values.</param>
+    <returns>True if a modifier, otherwise false.</returns>
+  </IsModifier>
+  <IsDataValue>
+    <summary>
+      Check if the text is a Data value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if a data value, otherwise false.</returns>
+  </IsDataValue>
+  <IsKeyword>
+    <summary>
+      Check if the text is a Keyword.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="firstPass">The first pass for common values.</param>
+    <returns>True if a keyword, otherwise false.</returns>
+  </IsKeyword>
+  <IsDataType>
+    <summary>
+      Check if the text is a DataType.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="firstPass">The first pass for common values.</param>
+    <returns>True if a data type, otherwise false.</returns>
+  </IsDataType>
+  <IsRefType>
+    <summary>
+      Check if the text is a RefType.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if a reference type, otherwise false.</returns>
+  </IsRefType>
+  <IsLibType>
+    <summary>
+      Check if the text is a LibType.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>True if a library type, otherwise false.</returns>
+  </IsLibType>
+</items>

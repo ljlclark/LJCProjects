@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- DocParams.xml -->
+<items>
+  <DocParams>
+    <summary>
+      The deserialized XML documentation "param" nodes.
+    </summary>
+  </DocParams>
+  <Add>
+    <summary>
+      Creates an element from the supplied values and adds it to the list.
+    </summary>
+    <param name="name">The doc member name.</param>
+    <param name="text">The XML element text value.</param>
+    <returns></returns>
+  </Add>
+</items>

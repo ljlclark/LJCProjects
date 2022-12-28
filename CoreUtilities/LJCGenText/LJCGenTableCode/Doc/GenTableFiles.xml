@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- GenTableFiles.xml -->
+<items>
+  <GenTableFiles>
+    <summary>
+      Generates the table DAL source files.
+    </summary>
+  </GenTableFiles>
+  <GenFiles>
+    <summary>
+      Generates the table DAL source files.
+    </summary>
+    <param name="genFileSpecs">The Generate File Specs object.</param>
+    <param name="dataManager">The data manager object.</param>
+    <param name="hasError">Indicates if there was an error.</param>
+  </GenFiles>
+  <GetXmlSpec>
+    <summary>
+      Creates the XML data file spec.
+    </summary>
+    <param name="xmlFormat">The XML format.</param>
+    <param name="name">The base name.</param>
+    <param name="isPlural">The plural flag.</param>
+    <returns>The XML data file spec.</returns>
+  </GetXmlSpec>
+  <GetDataXml>
+    <summary>
+      Generates the data XML files.
+    </summary>
+    <param name="dataManager">The data manager object.</param>
+  </GetDataXml>
+  <WriteDataXml>
+    <summary>
+      Writes the XML data file.
+    </summary>
+    <param name="genFileSpecs">The Generate File Specs object.</param>
+    <param name="tableName">The table name.</param>
+    <param name="xmlData">The XML data.</param>
+    <param name="hasError">The error flag.</param>
+  </WriteDataXml>
+</items>

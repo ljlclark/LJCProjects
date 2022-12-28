@@ -1,0 +1,3 @@
+call ClearOutput.cmd
+copy DefaultValuesTransform.xml DefaultValues.xml
+LJCGenTableCode ProcessData

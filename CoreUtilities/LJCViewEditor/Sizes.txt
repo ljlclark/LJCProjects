@@ -1,0 +1,33 @@
+ViewEditorWindow.Width	1350
+
+MainSplit			1326  
+  DataGrid			1322
+
+  ViewSplit			1326
+    ViewHeading			1322, 31
+    ViewToolPanel		1322, 40	0, 31
+    ViewGrid			1322		0, 69
+
+    ViewTabs			1326
+      ColumnToolPanel		1318, 40
+      ColumnGrid		1318		0, 39
+      OrderByToolPanel		1318
+      OrderByGrid		1318		0, 39
+
+      JoinSplit			1320
+        JoinToolPanel		1316, 40
+        JoinGrid		1316		0, 39
+        JoinTabs		1316
+          JoinOnToolPanel	1308, 40
+          JoinOnGrid		1308		0, 39
+          JoinColumnToolPanel	1308, 40
+          JoinColumnGrid	1308		0, 39
+ 
+      FilterSplit		1320
+        FilterToolPanel		1316, 40
+        FilterGrid		1316		0, 39
+        ConditionSetTabs	1316
+          ConditionSetToolPanel	1308, 40
+          ConditionSetGrid	1308		0, 39
+          ConditionToolPanel	1308
+          ConditionGrid		1308		0, 39

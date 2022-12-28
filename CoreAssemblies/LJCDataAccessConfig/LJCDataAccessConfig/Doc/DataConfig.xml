@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataConfig.xml -->
+<items>
+	<DataConfigC>
+		<summary>
+			Initializes an object instance.
+		</summary>
+	</DataConfigC>
+	<ToString>
+		<summary>
+			The object string identifier.
+		</summary>
+		<returns>The identifier value.</returns>
+	</ToString>
+  <GetProviderName>
+    <summary>
+      Retrieves the provider name value.
+    </summary>
+    <param name="connectionTypeName">The database connection type string.</param>
+    <returns>The provider name.</returns>
+    <example>
+      <code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+        // Retrieves the provider name value.
+        private static void GetProviderName(string connTypeName)
+        {
+          var providerName = DataConfig.GetProviderName(connTypeName);
+        }
+      </code>
+    </example>
+  </GetProviderName>
+  <GetProviderName2>
+		<summary>
+			Retrieves the provider name value.
+		</summary>
+		<returns>The provider name.</returns>
+		<example>
+			<code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+        // Retrieves the provider name value.
+        private static void GetProviderName2(DataConfig dataConfig)
+        {
+				  var providerName = dataConfig.GetProviderName();
+        }
+			</code>
+		</example>
+	</GetProviderName2>
+	<GetConnectionString1>
+		<summary>
+			Creates the populated connection string.
+		</summary>
+		<returns>The connection string.</returns>
+		<example>
+			<code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+        // Creates the populated connection string.
+        private static void GetConnectionString(DataConfig dataConfig)
+        {
+				  var connString = dataConfig.GetConnectionString();
+        }
+			</code>
+		</example>
+	</GetConnectionString1>
+	<GetConnectionString2>
+		<summary>
+			Creates the populated connection string from the ConnectionType name.
+		</summary>
+		<param name="connectionTypeName">The ConnectionType name.</param>
+		<returns>The connection string.</returns>
+		<example>
+			<code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+				// Creates the populated connection string from the ConnectionType name. 
+        private static void GetConnectionString2(string connTypeName)
+        {
+				  var connString = dataConfig.GetConnectionString(connTypeName);
+        }
+			</code>
+		</example>
+	</GetConnectionString2>
+	<GetConnectionStringFromText>
+		<summary>
+			Creates the populated connection string from the template text.
+		</summary>
+		<param name="templateText">The connection template text value.</param>
+		<returns>The connection string.</returns>
+		<example>
+			<code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+				// Creates the populated connection string from the template text.
+        private static void GetConnectionStringFromText(DataConfig dataConfig)
+        {
+	  			ConnectionTemplates templates = new ConnectionTemplates();
+		  		templates.LJCLoadData();
+          var connTypeName = dataConfig.ConnectionTypeName;
+			  	ConnectionTemplate template = templates.LJCGetByName(connTypeName);
+
+					string connString;
+  				connString = dataConfig.GetConnectionStringFromText(template.Template);
+        }
+			</code>
+		</example>
+	</GetConnectionStringFromText>
+	<SQLIntegratedConnectionString>
+		<summary>
+			Creates the SQL integrated connection string from an internal value.
+		</summary>
+		<returns>The connection string.</returns>
+		<example>
+			<code>
+        // See the DataConfig setup code on the DataConfig class page.
+
+        // Creates the SQL integrated connection string from an internal value.
+        private static void SQLIntegratedConnectionString(DataConfig dataConfig)
+        {
+          var connTypeName = dataConfig.ConnectionTypeName;
+          string connString;
+				  connString = dataConfig.SQLIntegratedConnectionString(connTypeName);
+        }
+			</code>
+		</example>
+	</SQLIntegratedConnectionString>
+	<CompareTo>
+		<summary>
+			Provides the default Sort functionality.
+		</summary>
+		<param name="other">The compared to object.</param>
+		<returns>An integer value indicating the order relationship.</returns>
+	</CompareTo>
+</items>

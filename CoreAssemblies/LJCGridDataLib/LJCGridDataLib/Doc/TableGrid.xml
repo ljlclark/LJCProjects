@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableGrid.xml -->
+<items>
+  <TableGridData>
+    <summary>
+      Provides DataTable helpers for an LJCDataGrid control.
+    </summary>
+    <example>
+      <para>
+        This is main function sample code for testing. The code for the additional
+        test functions is listed under the methods with the same names.
+      </para>
+      <code>
+        using LJCDataAccessConfig;
+        using LJCDBClientLib;
+        using LJCDBDataAccess;
+
+        // Test DataGrid.
+        private void TestDataGrid()
+        {
+          string connectionString;
+          string providerName;
+
+          // Create Data Configuration values.
+          var databaseName = "DatabaseName";
+      
+          bool useInternal = false;
+          if (useInternal)
+          {
+            // Use internal configuration.
+            DbConnectionStringBuilder connectionBuilder;
+            string databaseName = "DatabaseName";
+            connectionBuilder = new DbConnectionStringBuilder()
+            {
+              { "Data Source", "DataServiceName" },
+              { "Initial Catalog", databaseName },
+              { "Integrated Security", "True" }
+            };
+            connectionString = connectionBuilder.ConnectionString;
+            providerName = "System.Data.SqlClient";
+          }
+          else
+          {
+            // Or use external configuration.
+            DataConfigs dataConfigs = new DataConfigs();
+            dataConfigs.LJCLoadData();
+            dataConfig = dataConfigs.LJCGetByName("ConfigName");
+            connectionString = dataConfig.GetConnectionString();
+            providerName = dataConfig.GetProviderName();
+          }
+
+          // Create DataAccess.
+          retValue = new DataAccess()
+          {
+            ConnectionString = connectionString,
+            ProviderName = providerName
+          };
+        }
+      </code>
+    </example>
+  </TableGridData>
+  
+  <!-- Static Functions -->
+  <CreateDataColumns>
+    <summary>
+      Creates a new DataColumns object.
+    </summary>
+    <returns>The new DataColumns object.</returns>
+  </CreateDataColumns>
+  
+  <DataColumnClone>
+    <summary>
+      Clones a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The cloned DataColumn object.</returns>
+  </DataColumnClone>
+  <DataColumnsClone>
+    <summary>
+      Clones a DataColumn collection.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <returns>The cloned DataColumnCollection object.</returns>
+  </DataColumnsClone>
+
+  <GetColumnNames>
+    <summary>
+      Creates a ColumnNames list from a DataColumns collection.
+    </summary>
+    <param name="dataColumns">The DataColumn collection.</param>
+    <returns>The ColumnNames list.</returns>
+  </GetColumnNames>
+
+  <GetDbColumn>
+    <summary>
+      Creates a DbColumn object from a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The DbColumn object.</returns>
+  </GetDbColumn>
+  <GetDbColumns>
+    <summary>
+      Creates a DbColumns collection from a DataColumns collection.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <returns>The DbColumns collection.</returns>
+  </GetDbColumns>
+
+  <GetDataColumns>
+    <summary>
+      Returns a set of DataColumns that match the supplied list.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="columnNames">The display column names.</param>
+    <returns>The DisplayColumns object.</returns>
+  </GetDataColumns>
+
+  <!-- Constructors -->
+  <TableGridC>
+    <summary>
+      Initalizes an object instance.
+    </summary>
+    <param name="grid">The Grid control.</param>
+  </TableGridC>
+
+  <!-- Configuration Methods -->
+  <SetDisplayColumns>
+    <summary>
+      Sets the Display Columns from the DataColumns object.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="propertyNames">The Property names.</param>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Sets the Display Columns from the DataColumns object.
+        private DbColumns SetDisplayColumns(DataAccess dataAccess)
+        {
+          DbColumns retValue = null;
+
+          var sql = "select * from Province";
+          var dataTable = dataAccess.GetDataTable(sql);
+          if (NetCommon.HasData(dataTable))
+          {
+            var tableGridData = new TableGridData(LJCDataGridName);
+            tableGridData.SetDisplayColumns(dataTable.Columns);
+            retValue = tableGridData.DisplayColumns;
+          }
+          return retValue;
+        }
+      </code>
+    </example>
+  </SetDisplayColumns>
+  <SetDisplayColumns1>
+    <summary>
+      Sets the Display Columns from the DataObject properties.
+    </summary>
+    <param name="dataObject">The DataObject reference.</param>
+    <param name="propertyNames">The Property Names.</param>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Sets the Display Columns from the DataColumns object.
+        private DbColumns SetDisplayColumns(DataAccess dataAccess)
+        {
+          DbColumns retValue = null;
+
+          var sql = "select * from Province";
+          var dataTable = dataAccess.GetDataTable(sql);
+          if (NetCommon.HasData(dataTable))
+          {
+            var province = new Province();
+          
+            var tableGridData = new TableGridData(LJCDataGridName);
+            tableGridData.SetDisplayColumns(province);
+            retValue = tableGridData.DisplayColumns;
+          }
+          return retValue;
+        }
+      </code>
+    </example>
+  </SetDisplayColumns1>
+  <RemoveDisplayColumn>
+    <summary>
+      Removes a display column.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </RemoveDisplayColumn>
+
+  <!-- Row Data Methods -->
+  <LoadRows>
+    <summary>
+      Loads the grid rows from the DataRows collection.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Loads the grid rows from the DataRows collection.
+        private void LoadRows(DataAccess dataAccess)
+        {
+          var sql = "select * from Province";
+          var dataTable = dataAccess.GetDataTable(sql);
+          if (NetCommon.HasData(dataTable))
+          {
+            // Create the Display column definitions.
+            var tableGridData = new TableGridData(LJCDataGridName);
+            tableGridData.SetDisplayColumns(dataTable.Columns);
+
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
+
+            // Load the grid rows.
+            tableGridData.LoadRows(dataTable);
+          }
+        }
+      </code>
+    </example>
+  </LoadRows>
+  <RowAdd>
+    <summary>
+      Adds a grid row and updates it with the DataRow values.
+    </summary>
+    <param name="dataRow">The DataRow object.</param>
+    <returns>The added Grid row object.</returns>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Adds a grid row and updates it with the DbValues.
+        private void RowAdd(DataAccess dataAccess)
+        {
+          var sql = "select * from Province";
+          var dataTable = dataAccess.GetDataTable(sql);
+          if (NetCommon.HasData(dataTable))
+          {
+            // Create the Display column definitions.
+            var tableGridData = new TableGridData(LJCDataGridName);
+            tableGridData.SetDisplayColumns(dataTable.Columns);
+
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
+
+            // Load the grid rows individually.
+            foreach (DataRow row in dataTable.Rows)
+            {
+              tableGridData.RowAdd(row);
+            }
+          }
+        }
+      </code>
+    </example>
+  </RowAdd>
+  <RowSetValues>
+    <summary>
+      Updates a grid row with the DataRow values.
+    </summary>
+    <param name="gridRow">The Grid row object.</param>
+    <param name="dataRow">The DataRow object.</param>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Updates a grid row with the DbValues.
+        private void RowSetValuesSql(DataAccess dataAccess)
+        {
+          var sql = "select * from Province";
+          var dataTable = dataAccess.GetDataTable(sql);
+          if (NetCommon.HasData(dataTable))
+          {
+            // Create the Display column definitions.
+            var tableGridData = new TableGridData(LJCDataGridName);
+            tableGridData.SetDisplayColumns(dataTable.Columns);
+
+            // Configure the grid columns.
+            LJCDataGridName.Columns.Clear();
+            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
+
+            // Create and load the grid rows individually.
+            foreach (DataRow row in dataTable.Rows)
+            {
+              var gridRow = LJCDataGridName.LJCRowAdd();
+              tableGridData.RowSetValues(gridRow, row);
+            }
+          }
+        }
+      </code>
+    </example>
+  </RowSetValues>
+  <RowUpdate>
+    <summary>
+      Updates the current row with the DataRow values.
+    </summary>
+    <param name="dataRow">The DataRow object.</param>
+  </RowUpdate>
+</items>

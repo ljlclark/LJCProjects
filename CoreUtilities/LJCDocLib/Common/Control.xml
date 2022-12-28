@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved -->
+<!-- /// <include path='items/LJCInit/*' file='../../LJCDocLib/Common/Control.xml'/> -->
+<items>
+  <LJCInit>
+    <summary>
+      Initializes the object values after the object has been created.
+    </summary>
+    <remarks>
+      This allows the object to be initialized after the constructor.
+    </remarks>
+  </LJCInit>
+  <LJCLoad>
+    <summary>
+      Loads the object data after it has been initialized with LJCInit().
+    </summary>
+    <remarks>
+      This allows the object to be loaded after any load events.
+    </remarks>
+  </LJCLoad>
+  <LJCSetSelectedItem>
+    <summary>
+      Sets the selected item based on the supplied ID value.
+    </summary>
+    <param name="id">The item ID.</param>
+  </LJCSetSelectedItem>
+  <LJCGetSelectedItem>
+    <summary>
+      Retrieves the select item object.
+    </summary>
+    <returns>A reference to the item object.</returns>
+  </LJCGetSelectedItem>
+  <LJCGetSelectedItemID>
+    <summary>
+      Retrieves the selected item ID value.
+    </summary>
+    <returns>The item ID.</returns>
+  </LJCGetSelectedItemID>
+</items>

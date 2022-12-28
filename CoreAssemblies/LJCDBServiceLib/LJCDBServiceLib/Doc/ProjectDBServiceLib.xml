@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectDBServiceLib.xml -->
+<items>
+  <DbService>
+    <summary>
+      The Service Type for performing database operations using database query
+      XML messages. (RE)
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>Data Service Library</para>
+      <para>
+        The Data Service library contains classes, which receive Request XML
+        messages. These messages are deserialized into Message Objects, which
+        are passed to the
+        &lt;span class="commonType"&gt;LJCDBDataAccessLib&lt;/span&gt;
+        methods to perform the requested data operations.
+      </para>
+      <para>
+        The data is returned to the calling program as a Result XML message.
+      </para>
+      <para>
+        - LJCDBServiceLib
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDataAccess&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDataAccessConfig&lt;/div&gt;
+      </para>
+    </remarks>
+    <example>
+      <para>
+        The &lt;span class="userType"&gt;DbService&lt;/span&gt;
+        can be hosted in a windows service or web service which could run on a
+        separate server machine.
+      </para>
+      <code>
+        // The DbService object retrieves the data configuration from a file named
+        // "DataConfigs.xml". This file must be in the same folder as the application.
+        // This is the XML file layout.
+
+        &lt;?xml version="1.0"?&gt;
+        &lt;DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+          &lt;DataConfig&gt;
+            &lt;Name&gt;PersonData&lt;/Name&gt;
+            &lt;DBServer&gt;Machine_Name\SQL_Instance_Name&lt;/DBServer&gt;
+            &lt;Database&gt;Database_Name&lt;/Database&gt;
+            &lt;ConnectionType&gt;SQLServer&lt;/ConnectionType&gt;
+          &lt;/DataConfig&gt;
+        &lt;/DataConfigs&gt;
+      </code>
+    </example>
+  </DbService>
+</items>

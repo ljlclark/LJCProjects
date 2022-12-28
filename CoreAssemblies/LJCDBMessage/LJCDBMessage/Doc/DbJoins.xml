@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J.Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbJoins.xml -->
+<items>
+  <DbJoins>
+    <summary>
+       Represents a collection of table joins.
+       (E)
+    </summary>
+    <remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() and Clone().
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+        using LJCDBMessage;
+        
+        // A Person Data Record class.
+        public class Person
+        {
+          /// &lt;summary&gt;Gets or sets the PersonId value.&lt;/summary&gt;
+          public Int32 PersonId { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the Name value.&lt;/summary&gt;
+          public string Name { get; set; }
+        
+          /// &lt;summary&gt;Gets or sets the City value.&lt;/summary&gt;
+          public string City { get; set; }
+        }
+        
+        // Creating the Joins collection object.
+        
+        // Create the Joins collection and Join definition objects.
+        DbJoins dbJoins = new DbJoins();
+        dbJoin = new DbJoin()
+        {
+          TableName = "Address",
+          JoinType = "Left"
+        };
+        
+        // Create the JoinOn definitions and add them to the JoinOns collection.
+        // Add the JoinOns collection to the Join definition.
+        DbJoinOns dbJoinOns = new DbJoinOns();
+        DbJoinOn dbJoinOn = new DbJoinOn()
+        {
+          FromColumnName = "ID",
+          ToColumnName = "PersonID",
+          JoinOnOperator = "="  // Default
+        };
+        dbJoinOns.Add(dbJoinOn);
+        dbJoin.JoinOns = dbJoinOns;
+        
+        // Create the Column definitions and add them to the Columns collection.
+        // Add the Columns collection to the Join definition.
+        // Add the Join definition to the Joins collection.
+        DbColumns columns = new DbColumns();
+        DbColumn column = new DbColumn()
+        {
+          ColumnName = "City_Name",
+          PropertyName = "City",  // Defaults to same as ColumnName
+          DataTypeName = "String"  // Default
+        };
+        columns.Add(column);
+        dbJoin.Columns = columns;
+        dbJoins.Add(dbJoin);
+        
+        // Shortcut using object initialization, only required values and defaults.
+        // Note: JoinOn Columns must have properties in the Data Object
+        // to recieve the join values.
+        // The RenameAs property is required if there is another table column
+        // with the same name.
+        // dbJoinOns.Add(string fromColumnName, string toColumnName
+        //   , string joinOperator = "=")
+        // dbColumns.Add(string columnName, string propertyName = null
+        //   , string renameAs = null, string dataTypeName = "String", string caption = null)
+        DbJoins dbJoins = new DbJoins();
+        dbJoin = new DbJoin()
+        {
+          TableName = "Address",
+          JoinOns = new DbJoinOns() {
+            { "ID", "PersonID" }
+          },
+          Columns = new DbColumns() {
+            { "City_Name", "City" }
+          }
+        };
+        dbJoins.Add(dbJoin);
+        
+        // The Data Service creates the following SQL from this request which
+        // includes the DbJoins object.
+        DbRequest dbRequest = new DbRequest("Select", "Person")
+        {
+          DataConfigName = "PersonData",
+          Columns = new DbColumns() { { "Name" }},
+          Joins = dbJoins
+        };
+        
+        // select
+        //  [Person].[Name],
+        //  [Address].[City_Name]
+        // from [Person]
+        // left join [Address]
+        //  on [Person].[ID] = [Address].[PersonID]
+      </code>
+    </example>
+  </DbJoins>
+  <Add>
+    <summary>
+      Creates the element from the supplied values and adds it to the collection.
+    </summary>
+    <param name="tableName">The join table name.</param>
+    <param name="tableAlias">The join table alias.</param>
+    <param name="fromJoinOnColumn">The 'From' column name.</param>
+    <param name="toJoinOnColumn">The 'To' column name.</param>
+    <returns></returns>
+  </Add>
+</items>
