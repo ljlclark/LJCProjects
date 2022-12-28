@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DocGenGroups.cs
 using LJCNetCommon;
 using System;

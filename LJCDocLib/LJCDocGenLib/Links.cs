@@ -1,4 +1,6 @@
-﻿// Links.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// Links.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;

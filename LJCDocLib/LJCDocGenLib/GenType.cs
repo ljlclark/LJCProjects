@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // GenType.cs
 using LJCDocObjLib;
 using LJCGenTextLib;

@@ -1,4 +1,6 @@
-﻿// DataParams.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataParams.cs
 using System.Collections.Generic;
 
 namespace LJCDocObjLib

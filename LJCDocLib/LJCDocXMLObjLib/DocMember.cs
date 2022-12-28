@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DataMember.cs
 using System;
 using System.Xml.Serialization;

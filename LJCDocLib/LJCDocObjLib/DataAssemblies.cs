@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DataAssemblies.cs
 using System.Collections.Generic;
 

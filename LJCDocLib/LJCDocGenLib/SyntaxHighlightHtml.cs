@@ -1,4 +1,6 @@
-﻿// SyntaxHighlightHtml.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// SyntaxHighlightHtml.cs
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DocGenAssembly.cs
 using LJCNetCommon;
 using System;

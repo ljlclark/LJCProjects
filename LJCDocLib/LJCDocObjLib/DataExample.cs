@@ -1,4 +1,6 @@
-﻿// DataExample.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataExample.cs
 
 namespace LJCDocObjLib
 {

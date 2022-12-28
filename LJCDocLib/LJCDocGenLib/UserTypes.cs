@@ -1,4 +1,6 @@
-﻿// UserTypes.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// UserTypes.cs
 using System.Collections.Generic;
 
 namespace LJCDocGenLib

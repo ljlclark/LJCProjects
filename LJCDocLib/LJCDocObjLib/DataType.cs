@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // DataType.cs
 using LJCDocXMLObjLib;
 using LJCNetCommon;

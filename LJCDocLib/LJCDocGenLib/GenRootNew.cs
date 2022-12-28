@@ -1,4 +1,6 @@
-﻿// GenRootNew.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// GenRootNew.cs
 using LJCGenTextLib;
 using LJCNetCommon;
 using System.IO;

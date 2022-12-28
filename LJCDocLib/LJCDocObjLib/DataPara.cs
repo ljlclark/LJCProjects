@@ -1,4 +1,6 @@
-﻿// DataPara.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataPara.cs
 
 namespace LJCDocObjLib
 {
