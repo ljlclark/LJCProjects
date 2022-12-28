@@ -1,4 +1,6 @@
-﻿// NetString.xml
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// NetString.xml
 using System;
 using System.Text;
 

@@ -1,4 +1,6 @@
-﻿// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// Modifiers.cs
 using System;
 using System.Collections;
 using System.Collections.Generic;
