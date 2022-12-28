@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<RefTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <string>class</string>
-  <string>delegate</string>
-  <string>enum</string>
-  <string>interface</string>
-  <string>struct</string>
-</RefTypes>

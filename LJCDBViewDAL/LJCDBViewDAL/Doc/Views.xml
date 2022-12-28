@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
-<items>
-  <Views>
-    <summary>
-      Represents a collection of ViewData objects.
-    </summary>
-  </Views>
-</items>
