@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// ViewEditorCommon.cs
+using System;
 using LJCDBClientLib;
 using LJCWinFormCommon;
 

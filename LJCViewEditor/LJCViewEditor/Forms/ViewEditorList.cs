@@ -1,3 +1,5 @@
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // ViewEditorList.cs
 using LJCDataAccessConfig;
 using LJCDBClientLib;

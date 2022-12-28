@@ -1,4 +1,6 @@
-// Copyright (c) Lester J. Clark 2017-2019- All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// SqlTableManager.cs
 using System;
 using LJCNetCommon;
 using LJCDBClientLib;
