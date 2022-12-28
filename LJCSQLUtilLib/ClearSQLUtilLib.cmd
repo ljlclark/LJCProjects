@@ -1,4 +1,7 @@
-echo Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved
+echo Copyright (c) Lester J. Clark and Contributors.
+echo Licensed under the MIT License.
+rem ClearSQLUtilLib.cmd
+
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
 set Solution=..\LJCSQLUtilLib

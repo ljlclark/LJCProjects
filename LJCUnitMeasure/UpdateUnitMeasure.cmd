@@ -1,4 +1,7 @@
-echo Copyright (c) Lester J. Clark 2021 - All Rights Reserved
+echo Copyright (c) Lester J. Clark and Contributors.
+echo Licensed under the MIT License.
+rem UpdateUnitMeasure.cmd
+
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
 set root=..\
