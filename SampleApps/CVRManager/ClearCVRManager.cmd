@@ -5,11 +5,11 @@ rem ClearCVRManager.cmd
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
 set Solution=..\CVRManager
-set ClearBuild=..\ClearBuildDetail.cmd
+set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 
 :ClearAll
-set Solution=CVRManager
+set Solution=SampleApps\CVRManager
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear

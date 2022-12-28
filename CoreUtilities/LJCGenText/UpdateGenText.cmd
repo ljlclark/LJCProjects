@@ -4,14 +4,14 @@ rem UpdateGenText.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=LJCGenText\
+set root=CoreAssemblies
+set runRoot=CoreUtilities\LJCGenText\
 set to=%runRoot%External
 
 :Update

@@ -3,102 +3,108 @@ echo Licensed under the MIT License.
 rem BuildAll.cmd
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
 
+rem ***************
+rem Core Assemblies
+rem ***************
 set /a counter=1
 echo on
 echo ----------------- %counter% - LJCNetCommon --------------- > Build.txt
 echo LJC.Net.Common >> Build.txt
-msbuild LJCNetCommon\LJCNetCommon.sln
+msbuild CoreAssemblies\LJCNetCommon\LJCNetCommon.sln
 
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCTextDataReader ----------- >> Build.txt
+echo LJCTextDataReader >> Build.txt
+call CoreAssemblies\LJCTextDataReader\UpdateTextDataReader.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCTextDataReader\LJCTextDataReader.sln
+
+set /a counter+=1
+echo on
+echo ----------------- %counter% - LJCDataAccessConfig --------- >> Build.txt
+echo LJCDataAccessConfig >> Build.txt
+call CoreAssemblies\LJCDataAccessConfig\UpdateDataAccessConfig.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDataAccess---------------- >> Build.txt
+echo LJCDataAccess >> Build.txt
+call CoreAssemblies\LJCDataAccess\UpdateDataAccess.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDataAccess\LJCDataAccess.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBMessage ---------------- >> Build.txt
+echo LJCDBMessage >> Build.txt
+call CoreAssemblies\LJCDBMessage\UpdateDBMessage.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBMessage\LJCDBMessage.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBDataAccess ------------- >> Build.txt
+echo LJCDBDataAccess >> Build.txt
+call CoreAssemblies\LJCDBDataAccess\UpdateDBDataAccess.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBServiceLib ------------- >> Build.txt
+echo LJCDBServiceLib >> Build.txt
+call CoreAssemblies\LJCDBServiceLib\UpdateDBServiceLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCLibraries ---------------- >> Build.txt
+echo LJCLibraries >> Build.txt
+call CoreAssemblies\LJCLibraries\UpdateLibraries.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCLibraries\LJCLibraries.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBClientLib -------------- >> Build.txt
+echo LJCDBClientLib >> Build.txt
+call CoreAssemblies\LJCDBClientLib\UpdateDBClientLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBClientLib\LJCDBClientLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
+echo LJCGridDataLib >> Build.txt
+call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCGridDataLib\LJCGridDataLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBServiceHosts ----------- >> Build.txt
+echo LJCDBServiceHosts >> Build.txt
+call CoreAssemblies\LJCDBServiceHosts\UpdateDBServiceHosts.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBServiceHosts\LJCDBServiceHosts.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt
+echo LJCDBViewDAL >> Build.txt
+call CoreAssemblies\LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - DataDetail ------------------ >> Build.txt
+echo DataDetail >> Build.txt
+call CoreAssemblies\DataDetail\UpdateDataDetail.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\DataDetail\DataDetail.sln
+pause
+rem *************
+rem CoreUtilities
+rem *************
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCCodeLineCounter ---------- >> Build.txt
 echo LJCCodeLineCounter >> Build.txt
 call LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll >> Build.txt
 msbuild LJCCodeLineCounter\LJCCodeLineCounter.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCTextDataReader ----------- >> Build.txt
-echo LJCTextDataReader >> Build.txt
-call LJCTextDataReader\UpdateTextDataReader.cmd BuildAll >> Build.txt
-msbuild LJCTextDataReader\LJCTextDataReader.sln
-
-set /a counter+=1
-echo on
-echo ----------------- %counter% - LJCDataAccessConfig --------- >> Build.txt
-echo LJCDataAccessConfig >> Build.txt
-call LJCDataAccessConfig\UpdateDataAccessConfig.cmd BuildAll >> Build.txt
-msbuild LJCDataAccessConfig\LJCDataAccessConfig.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDataAccess---------------- >> Build.txt
-echo LJCDataAccess >> Build.txt
-call LJCDataAccess\UpdateDataAccess.cmd BuildAll >> Build.txt
-msbuild LJCDataAccess\LJCDataAccess.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDBMessage ---------------- >> Build.txt
-echo LJCDBMessage >> Build.txt
-call LJCDBMessage\UpdateDBMessage.cmd BuildAll >> Build.txt
-msbuild LJCDBMessage\LJCDBMessage.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDBDataAccess ------------- >> Build.txt
-echo LJCDBDataAccess >> Build.txt
-call LJCDBDataAccess\UpdateDBDataAccess.cmd BuildAll >> Build.txt
-msbuild LJCDBDataAccess\LJCDBDataAccess.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDBServiceLib ------------- >> Build.txt
-echo LJCDBServiceLib >> Build.txt
-call LJCDBServiceLib\UpdateDBServiceLib.cmd BuildAll >> Build.txt
-msbuild LJCDBServiceLib\LJCDBServiceLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCLibraries ---------------- >> Build.txt
-echo LJCLibraries >> Build.txt
-call LJCLibraries\UpdateLibraries.cmd BuildAll >> Build.txt
-msbuild LJCLibraries\LJCLibraries.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDBClientLib -------------- >> Build.txt
-echo LJCDBClientLib >> Build.txt
-call LJCDBClientLib\UpdateDBClientLib.cmd BuildAll >> Build.txt
-msbuild LJCDBClientLib\LJCDBClientLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
-echo LJCGridDataLib >> Build.txt
-call LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
-msbuild LJCGridDataLib\LJCGridDataLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
-echo LJCRegionManager >> Build.txt
-call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
-msbuild LJCRegionManager\LJCRegionManager.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDBServiceHosts ----------- >> Build.txt
-echo LJCDBServiceHosts >> Build.txt
-call LJCDBServiceHosts\UpdateDBServiceHosts.cmd BuildAll >> Build.txt
-msbuild LJCDBServiceHosts\LJCDBServiceHosts.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCUnitMeasure -------------- >> Build.txt
-echo LJCUnitMeasure >> Build.txt
-call LJCUnitMeasure\UpdateUnitMeasure.cmd BuildAll >> Build.txt
-msbuild LJCUnitMeasure\LJCUnitMeasure.sln
 
 set /a counter+=1
 echo - >> Build.txt
@@ -116,27 +122,6 @@ msbuild LJCDocLib\LJCDocLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
-echo ----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt
-echo LJCDBViewDAL >> Build.txt
-call LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
-msbuild LJCDBViewDAL\LJCDBViewDAL.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - CVRManager ------------ >> Build.txt
-echo CVRManager >> Build.txt
-call CVRManager\UpdateCVRManager.cmd BuildAll >> Build.txt
-msbuild CVRManager\CVRManager.sln
-
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - DataDetail ------------------ >> Build.txt
-echo DataDetail >> Build.txt
-call DataDetail\UpdateDataDetail.cmd BuildAll >> Build.txt
-msbuild DataDetail\DataDetail.sln
-
-set /a counter+=1
-echo - >> Build.txt
 echo ----------------- %counter% - LJCSQLUtilLib --------------- >> Build.txt
 echo LJCSQLUtilLib >> Build.txt
 call LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Build.txt
@@ -148,4 +133,27 @@ echo ----------------- %counter% - LJCViewEditor --------------- >> Build.txt
 echo LJCViewEditor >> Build.txt
 call LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
 msbuild LJCViewEditor\LJCViewEditor.sln
-pause
+
+rem **********
+rem SampleApps
+rem **********
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
+echo LJCRegionManager >> Build.txt
+call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
+msbuild LJCRegionManager\LJCRegionManager.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCUnitMeasure -------------- >> Build.txt
+echo LJCUnitMeasure >> Build.txt
+call LJCUnitMeasure\UpdateUnitMeasure.cmd BuildAll >> Build.txt
+msbuild LJCUnitMeasure\LJCUnitMeasure.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - CVRManager ------------ >> Build.txt
+echo CVRManager >> Build.txt
+call CVRManager\UpdateCVRManager.cmd BuildAll >> Build.txt
+msbuild CVRManager\CVRManager.sln

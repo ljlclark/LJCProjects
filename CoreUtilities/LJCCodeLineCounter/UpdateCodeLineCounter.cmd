@@ -4,14 +4,14 @@ rem UpdateCodeLineCounter.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=LJCCodeLineCounter\
+set root=CoreAssemblies
+set runRoot=CoreUtilities\LJCCodeLineCounter\
 set to=%runRoot%External
 
 :Update

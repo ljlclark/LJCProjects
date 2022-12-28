@@ -5,11 +5,11 @@ rem ClearUnitMeasure.cmd
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
 set Solution=..\LJCUnitMeasure
-set ClearBuild=..\ClearBuildDetail.cmd
+set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 
 :ClearAll
-set Solution=LJCUnitMeasure
+set Solution=SampleApps\LJCUnitMeasure
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear

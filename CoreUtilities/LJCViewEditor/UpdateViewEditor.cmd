@@ -4,14 +4,14 @@ rem UpdateViewEditor.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies
 set runroot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runroot=LJCViewEditor\
+set root=CoreAssemblies
+set runroot=CoreUtilities\LJCViewEditor\
 set to=%runroot%External
 
 :Update

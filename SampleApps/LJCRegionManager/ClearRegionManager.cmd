@@ -5,11 +5,11 @@ rem ClearRegionManager.cmd
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
 set Solution=..\LJCRegionManager
-set ClearBuild=..\ClearBuildDetail.cmd
+set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 
 :ClearAll
-set Solution=LJCRegionManager
+set Solution=SampleApps\LJCRegionManager
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear
