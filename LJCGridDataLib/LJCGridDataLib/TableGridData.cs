@@ -1,4 +1,6 @@
-﻿// TableGridData.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// TableGridData.cs
 using LJCNetCommon;
 using LJCWinFormControls;
 using System;
