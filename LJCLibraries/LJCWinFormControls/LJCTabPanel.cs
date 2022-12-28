@@ -1,4 +1,5 @@
-// Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
 // LJCTabPanel.cs
 using System;
 using System.Drawing;

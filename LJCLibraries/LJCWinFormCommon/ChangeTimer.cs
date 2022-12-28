@@ -1,4 +1,6 @@
-﻿// ChangeTimer.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// ChangeTimer.cs
 using System;
 using System.Windows.Forms;
 
