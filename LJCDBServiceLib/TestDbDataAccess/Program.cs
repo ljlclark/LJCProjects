@@ -1,4 +1,6 @@
-﻿// Program.cs
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// Program.cs
 using LJCDataAccess;
 using LJCDBDataAccess;
 using LJCDBMessage;
