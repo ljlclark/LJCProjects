@@ -3,104 +3,91 @@ echo Licensed under the MIT License.
 rem UpdateViewEditor.cmd
 
 set bin=bin\Debug
+set assm=CoreAssemblies\
+set util=CoreUtilities\
+set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies\
-set altRoot=..\..\CoreUtilities\
-set runroot=
+
+rem Run from Solution folder.
+set assmRoot=..\..\%assm%
+set utilRoot=..\..\%util%
+set appRoot=..\..\%app%
+set toRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies\
-set altRoot=CoreUtilities\
-set runroot=CoreUtilities\LJCViewEditor\
-set to=%runroot%External
+rem Run from main Projects folder.
+set assmRoot=%assm%
+set utilRoot=%util%
+set appRoot=%app%
+set toRoot=%util%\LJCViewEditor\
+set to=%toRoot%External
 
 :Update
 rem ***************************
 rem *** Referenced Binaries ***
 
 set src=DataDetail\DataDetail\%bin%
-echo copy %root%%src%\DataDetail.exe %to%
-copy %root%%src%\DataDetail.exe %to%
+copy %assmRoot%%src%\DataDetail.exe %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-echo copy %root%%src%\LJCDataAccess.dll %to%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-echo copy %root%%src%\LJCDataAccessConfig.dll %to%
-copy %root%%src%\LJCDataAccessConfig.dll %to%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 set src=DataDetail\LJCDataDetailLib\%bin%
-echo copy %root%%src%\LJCDataDetailLib.dll %to%
-copy %root%%src%\LJCDataDetailLib.dll %to%
+copy %assmRoot%%src%\LJCDataDetailLib.dll %to%
 
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
-echo copy %root%%src%\LJCDBClientLib.dll %to%
-copy %root%%src%\LJCDBClientLib.dll %to%
+copy %assmRoot%%src%\LJCDBClientLib.dll %to%
 
 set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-echo copy %root%%src%\LJCDBDataAccess.dll %to%
-copy %root%%src%\LJCDBDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
-echo copy %root%%src%\LJCDBMessage.dll %to%
-copy %root%%src%\LJCDBMessage.dll %to%
+copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
-echo copy %root%%src%\LJCDBServiceLib.dll %to%
-copy %root%%src%\LJCDBServiceLib.dll %to%
+copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
 set src=LJCDBViewDAL\LJCDBViewDAL\%bin%
-echo copy %root%%src%\LJCDBViewDAL.dll %to%
-copy %root%%src%\LJCDBViewDAL.dll %to%
+copy %assmRoot%%src%\LJCDBViewDAL.dll %to%
 
 set src=LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %root%%src%\LJCGridDataLib.dll %to%
-copy %root%%src%\LJCGridDataLib.dll %to%
+copy %assmRoot%%src%\LJCGridDataLib.dll %to%
 
 set src=LJCLibraries\Output
-echo copy %root%%src%\*.dll %to%
-copy %root%%src%\*.dll %to%
+copy %assmRoot%%src%\*.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
-echo copy %root%%src%\LJCNetCommon.dll %to%
-copy %root%%src%\LJCNetCommon.dll %to%
+copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
-rem --- LJCSQLUtilLib
 set src=LJCSQLUtilLib\LJCSQLUtilLib\%bin%
-echo copy %altRoot%%src%\LJCSQLUtilLib.dll %to%
-copy %altRoot%%src%\LJCSQLUtilLib.dll %to%
+copy %utilRoot%%src%\LJCSQLUtilLib.dll %to%
 
 set src=LJCSQLUtilLib\LJCSQLUtilLibDAL\%bin%
-echo copy %altRoot%%src%\LJCSQLUtilLibDAL.dll %to%
-copy %altRoot%%src%\LJCSQLUtilLibDAL.dll %to%
-rem ---
+copy %utilRoot%%src%\LJCSQLUtilLibDAL.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -------------------------------
-set to=%runroot%LJCViewEditor\%bin%
+set to=%toroot%LJCViewEditor\%bin%
 
 set src=LJCDBMessage\CipherLib\%bin%
-echo copy %root%%src%\CipherLib.dll %to%
-copy %root%%src%\CipherLib.dll %to%
+copy %assmRoot%%src%\CipherLib.dll %to%
 
 set src=DataDetail\LJCDataDetailDAL\%bin%
-echo copy %root%%src%\LJCDataDetailDAL.dll %to%
-copy %root%%src%\LJCDataDetailDAL.dll %to%
+copy %assmRoot%%src%\LJCDataDetailDAL.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-echo copy %root%%src%\LJCDataAccess.dll %to%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig
-echo copy %root%%src%\DataConfigs.xml %to%
-copy %root%%src%\DataConfigs.xml %to%
-echo copy %root%%src%\ConnectionTemplates.xml %to%
-copy %root%%src%\ConnectionTemplates.xml %to%
+copy %assmRoot%%src%\DataConfigs.xml %to%
+copy %assmRoot%%src%\ConnectionTemplates.xml %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End
