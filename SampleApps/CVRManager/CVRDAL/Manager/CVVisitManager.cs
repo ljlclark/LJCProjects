@@ -14,7 +14,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public CVVisitManager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "CVVisit")
 			: base(dbServiceRef, dataConfigName, tableName)
@@ -44,7 +44,7 @@ namespace CVRDAL
 		#region Retrieve/Load Methods
 
 		// Deletes a Data Record with the supplied value.
-		/// <include path='items/DeleteWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/DeleteWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public void DeleteWithID(long id)
 		{
 			var keyColumns = GetIDKey(id);
@@ -63,7 +63,7 @@ namespace CVRDAL
 		}
 
 		// Retrieves a Data Record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public CVVisit RetrieveWithID(long id, List<string> propertyNames = null)
 		{
 			var keyColumns = GetIDKey(id);
@@ -75,7 +75,7 @@ namespace CVRDAL
 		#region GetKey Methods
 
 		// Gets the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns GetFacilityIDKey(int id)
 		{
 			var retValue = new DbColumns()
@@ -86,7 +86,7 @@ namespace CVRDAL
 		}
 
 		// Gets the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns GetIDKey(long id)
 		{
 			var retValue = new DbColumns()
@@ -100,7 +100,7 @@ namespace CVRDAL
 		#region KeyItem Methods
 
 		// Creates the RecordColumns object.
-		/// <include path='items/DataColumns/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns DataColumns(long id)
 		{
 			DbColumns retValue = null;
@@ -116,7 +116,7 @@ namespace CVRDAL
 		}
 
 		// Creates the KeyItem object.
-		/// <include path='items/GetKeyItem/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public KeyItem GetKeyItem(string propertyName, long id)
 		{
 			KeyItem retValue = null;
@@ -141,7 +141,7 @@ namespace CVRDAL
 		#region Joins
 
 		// Creates and returns the Load Joins object.
-		/// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetLoadJoins/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbJoins GetJoins()
 		{
 			DbJoin dbJoin;

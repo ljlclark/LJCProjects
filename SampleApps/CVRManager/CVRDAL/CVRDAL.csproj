@@ -38,7 +38,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\LJCProjectsDev\CVRManager\External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">

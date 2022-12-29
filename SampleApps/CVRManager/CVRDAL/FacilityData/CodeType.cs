@@ -12,27 +12,26 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*'
-		///   file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CodeType()
 		{
 			ChangedNames = new ChangedNames();
 		}
-		#endregion
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public CodeType Clone()
+    // Creates and returns a clone of this object.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    public CodeType Clone()
 		{
 			CodeType retValue = MemberwiseClone() as CodeType;
 			return retValue;
 		}
 
-		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public int CompareTo(CodeType other)
+    // Provides the default Sort functionality.
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    public int CompareTo(CodeType other)
 		{
 			int retValue;
 
@@ -48,9 +47,9 @@ namespace CVRDAL
 			return retValue;
 		}
 
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public override string ToString()
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    public override string ToString()
 		{
 			return mCode;
 		}
@@ -154,7 +153,7 @@ namespace CVRDAL
 	public class CodeTypeCodeComparer : IComparer<CodeType>
 	{
 		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public int Compare(CodeType x, CodeType y)
 		{
 			int retValue;

@@ -17,13 +17,13 @@ namespace LJCRegionManager
   //       before they are available. See the build UpdatePost.cmd file.
 
   // The Region tab composite user control.
-  /// <include path='items/ModuleA/*' file='../../LJCDocLib/Common/Module.xml'/>
+  /// <include path='items/ModuleA/*' file='../../../CoreUtilities/LJCDocLib/Common/Module.xml'/>
   public partial class RegionModule : UserControl
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public RegionModule()
     {
       Cursor = Cursors.WaitCursor;
@@ -80,7 +80,7 @@ namespace LJCRegionManager
     #region Region
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DataRetrieveRegion()
     {
       Regions records;
@@ -136,7 +136,7 @@ namespace LJCRegionManager
     #region Province
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     public void DataRetrieveProvince()
     {
       Cursor = Cursors.WaitCursor;
@@ -167,7 +167,7 @@ namespace LJCRegionManager
     }
 
     // Adds a grid row and updates it with the record values.
-    /// <include path='items/RowAdd/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowAdd/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private LJCGridRow RowAddProvince(Province dataRecord)
     {
       LJCGridRow retValue;
@@ -181,7 +181,7 @@ namespace LJCRegionManager
     }
 
     // Updates the current row with the record values.
-    /// <include path='items/RowUpdate/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowUpdate/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void RowUpdateProvince(Province dataRecord)
     {
       if (ProvinceGrid.CurrentRow is LJCGridRow row)
@@ -192,7 +192,7 @@ namespace LJCRegionManager
     }
 
     // Sets the row stored values.
-    /// <include path='items/SetStoredValues/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/SetStoredValues/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void SetStoredValuesProvince(LJCGridRow row, Province dataRecord)
     {
       row.LJCSetInt32(Province.ColumnID, dataRecord.ID);
@@ -200,7 +200,7 @@ namespace LJCRegionManager
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private bool RowSelectProvince(Province dataRecord)
     {
       int rowID;
@@ -259,7 +259,7 @@ namespace LJCRegionManager
     #region City
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     public void DataRetrieveCity()
     {
       Cursor = Cursors.WaitCursor;
@@ -292,7 +292,7 @@ namespace LJCRegionManager
     }
 
     // Adds a grid row and updates it with the record values.
-    /// <include path='items/RowAdd/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowAdd/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private LJCGridRow RowAddCity(City dataRecord)
     {
       LJCGridRow retValue;
@@ -306,7 +306,7 @@ namespace LJCRegionManager
     }
 
     // Updates the current row with the record values.
-    /// <include path='items/RowUpdate/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowUpdate/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void RowUpdateCity(City dataRecord)
     {
       if (CityGrid.CurrentRow is LJCGridRow row)
@@ -317,7 +317,7 @@ namespace LJCRegionManager
     }
 
     // Sets the row stored values.
-    /// <include path='items/SetStoredValues/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/SetStoredValues/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void SetStoredValuesCity(LJCGridRow row, City dataRecord)
     {
       row.LJCSetInt32(City.ColumnID, dataRecord.ID);
@@ -325,7 +325,7 @@ namespace LJCRegionManager
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private bool RowSelectCity(City dataRecord)
     {
       int rowID;
@@ -384,7 +384,7 @@ namespace LJCRegionManager
     #region CitySection
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     public void DataRetrieveCitySection()
     {
       Cursor = Cursors.WaitCursor;
@@ -417,7 +417,7 @@ namespace LJCRegionManager
     }
 
     // Adds a grid row and updates it with the record values.
-    /// <include path='items/RowAdd/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowAdd/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private LJCGridRow RowAddCitySection(CitySection dataRecord)
     {
       LJCGridRow retValue;
@@ -431,7 +431,7 @@ namespace LJCRegionManager
     }
 
     // Updates the current row with the record values.
-    /// <include path='items/RowUpdate/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowUpdate/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void RowUpdateCitySection(CitySection dataRecord)
     {
       if (CitySectionGrid.CurrentRow is LJCGridRow row)
@@ -442,14 +442,14 @@ namespace LJCRegionManager
     }
 
     // Sets the row stored values.
-    /// <include path='items/SetStoredValues/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/SetStoredValues/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void SetStoredValuesCitySection(LJCGridRow row, CitySection dataRecord)
     {
       row.LJCSetInt32(CitySection.ColumnID, dataRecord.ID);
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private bool RowSelectCitySection(CitySection dataRecord)
     {
       int rowID;
@@ -511,7 +511,7 @@ namespace LJCRegionManager
     #region Province
 
     // Performs the default list action.
-    /// <include path='items/DoDefault/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDefault/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDefaultProvince()
     {
       if (LJCIsSelect)
@@ -525,7 +525,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoNew/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoNewProvince()
     {
       ProvinceDetail detail;
@@ -545,7 +545,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog to edit an existing record.
-    /// <include path='items/DoEdit/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoEdit/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoEditProvince()
     {
       ProvinceDetail detail;
@@ -570,7 +570,7 @@ namespace LJCRegionManager
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    /// <include path='items/Detail_Change/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/Detail_Change/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void ProvinceDetail_Change(object sender, EventArgs e)
     {
       ProvinceDetail detail;
@@ -595,7 +595,7 @@ namespace LJCRegionManager
     }
 
     // Deletes the selected row.
-    /// <include path='items/DoDelete/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDelete/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDeleteProvince()
     {
       string title;
@@ -633,7 +633,7 @@ namespace LJCRegionManager
     }
 
     // Refreshes the list.
-    /// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoRefresh/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoRefreshProvince()
     {
       Province record;
@@ -657,7 +657,7 @@ namespace LJCRegionManager
     }
 
     // Sets the selected item and returns to the parent form.
-    /// <include path='items/DoSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoSelectProvince()
     {
       Province record;
@@ -707,7 +707,7 @@ namespace LJCRegionManager
     }
 
     // Performs the default list action.
-    /// <include path='items/DoDefault/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDefault/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDefaultCity()
     {
       if (LJCIsSelect)
@@ -721,7 +721,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoNew/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoNewCity()
     {
       CityDetail detail;
@@ -745,7 +745,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog to edit an existing record.
-    /// <include path='items/DoEdit/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoEdit/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoEditCity()
     {
       CityDetail detail;
@@ -772,7 +772,7 @@ namespace LJCRegionManager
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    /// <include path='items/Detail_Change/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/Detail_Change/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void CityDetail_Change(object sender, EventArgs e)
     {
       CityDetail detail;
@@ -797,7 +797,7 @@ namespace LJCRegionManager
     }
 
     // Deletes the selected row.
-    /// <include path='items/DoDelete/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDelete/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDeleteCity()
     {
       string title;
@@ -835,7 +835,7 @@ namespace LJCRegionManager
     }
 
     // Refreshes the list.
-    /// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoRefresh/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoRefreshCity()
     {
       City record;
@@ -859,7 +859,7 @@ namespace LJCRegionManager
     }
 
     // Sets the selected item and returns to the parent form.
-    /// <include path='items/DoSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoSelectCity()
     {
       City record;
@@ -909,7 +909,7 @@ namespace LJCRegionManager
     }
 
     // Performs the default list action.
-    /// <include path='items/DoDefault/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDefault/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDefaultCitySection()
     {
       if (LJCIsSelect)
@@ -923,7 +923,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoNew/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoNewCitySection()
     {
       CitySectionDetail detail;
@@ -947,7 +947,7 @@ namespace LJCRegionManager
     }
 
     // Displays a detail dialog to edit an existing record.
-    /// <include path='items/DoEdit/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoEdit/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoEditCitySection()
     {
       CitySectionDetail detail;
@@ -974,7 +974,7 @@ namespace LJCRegionManager
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    /// <include path='items/Detail_Change/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/Detail_Change/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void CitySectionDetail_Change(object sender, EventArgs e)
     {
       CitySectionDetail detail;
@@ -999,7 +999,7 @@ namespace LJCRegionManager
     }
 
     // Deletes the selected row.
-    /// <include path='items/DoDelete/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDelete/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoDeleteCitySection()
     {
       string title;
@@ -1037,7 +1037,7 @@ namespace LJCRegionManager
     }
 
     // Refreshes the list.
-    /// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoRefresh/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoRefreshCitySection()
     {
       CitySection record;
@@ -1061,7 +1061,7 @@ namespace LJCRegionManager
     }
 
     // Sets the selected item and returns to the parent form.
-    /// <include path='items/DoSelect/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoSelect/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
     private void DoSelectCitySection()
     {
       CitySection record;

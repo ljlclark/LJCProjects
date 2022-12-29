@@ -4,14 +4,16 @@ rem UpdateCVRManager.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies\
+set altRoot=..\..\SampleApps\
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=CVRManager\
+set root=CoreAssemblies\
+set altRoot=SampleApps\
+set runRoot=SampleApps\CVRManager\
 set to=%runRoot%External
 
 :Update
@@ -49,16 +51,16 @@ copy %root%%src%\LJCNetCommon.dll %to%
 
 rem --- LJCRegionManager
 set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %root%%src%\LJCRegionDAL.dll %to%
+copy %altRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCRegionManager\LJCRegionForm\%bin%
-copy %root%%src%\LJCRegionForm.exe %to%
+copy %altRoot%%src%\LJCRegionForm.exe %to%
 
 set src=LJCRegionManager\LJCRegionItem\%bin%
-copy %root%%src%\LJCRegionItem.dll %to%
+copy %altRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %root%%src%\LJCRegionManager.exe %to%
+copy %altRoot%%src%\LJCRegionManager.exe %to%
 rem ---
 
 rem *****************************
@@ -93,20 +95,20 @@ set src=LJCGridDataLib\LJCGridDataLib\%bin%
 copy %root%%src%\LJCGridDataLib.dll %to%
 
 set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %root%%src%\LJCRegionDAL.dll %to%
+copy %altRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCRegionManager\LJCRegionForm\%bin%
-copy %root%%src%\LJCRegionForm.exe %to%
+copy %altRoot%%src%\LJCRegionForm.exe %to%
 
 set src=LJCRegionManager\LJCRegionItem\%bin%
-copy %root%%src%\LJCRegionItem.dll %to%
+copy %altRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %root%%src%\LJCRegionManager.exe %to%
-copy %root%%src%\LJCRegionManager.exe.config %to%
+copy %altRoot%%src%\LJCRegionManager.exe %to%
+copy %altRoot%%src%\LJCRegionManager.exe.config %to%
 
 set src=LJCUnitMeasure\LJCUnitMeasureDAL\%bin%
-copy %root%%src%\LJCUnitMeasureDAL.dll %to%
+copy %altRoot%%src%\LJCUnitMeasureDAL.dll %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

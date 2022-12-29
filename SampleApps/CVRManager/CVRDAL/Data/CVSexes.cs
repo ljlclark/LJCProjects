@@ -12,7 +12,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CVSexes()
 		{
 			mPrevCount = -1;
@@ -60,7 +60,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element.
-		/// <include path='items/LJCSearchID/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchID/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public CVSex LJCSearchID(long id)
 		{
 			CVSex retValue = null;
@@ -79,7 +79,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchCode/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public CVSex LJCSearchCode(string code)
 		{
 			CVSexCodeComparer comparer;
@@ -100,7 +100,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public CVSex LJCSearchName(string name)
 		{
 			CVSexNameComparer comparer;

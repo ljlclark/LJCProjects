@@ -14,7 +14,7 @@ namespace CVRItem
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CVPersonItem(long id, string dataConfigName)
 		{
 			// Add reference to LJCDBClientLib, DbDataAccessLib and LJCDBMessage.

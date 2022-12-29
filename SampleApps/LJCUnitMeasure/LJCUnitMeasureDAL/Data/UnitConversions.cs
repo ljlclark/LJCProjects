@@ -17,7 +17,7 @@ namespace LJCUnitMeasureDAL
 		#region Static Functions
 
 		// Deserializes from the specified XML file.
-		/// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public static UnitConversions LJCDeserialize(string fileSpec = null)
 		{
 			UnitConversions retValue;
@@ -35,7 +35,7 @@ namespace LJCUnitMeasureDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public UnitConversions()
 		{
 			mPrevCount = -1;
@@ -45,7 +45,7 @@ namespace LJCUnitMeasureDAL
 		#region Collection Methods
 
 		// Creates and returns a clone of the object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public UnitConversions Clone()
 		{
 			UnitConversions retValue = new UnitConversions();
@@ -108,7 +108,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Serializes the collection to a file.
-		/// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public void LJCSerialize(string fileSpec = null)
 		{
 			if (false == NetString.HasValue(fileSpec))

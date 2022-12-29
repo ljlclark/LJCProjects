@@ -14,7 +14,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public CVSexManager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "CVSex")
 			: base(dbServiceRef, dataConfigName, tableName)
@@ -36,7 +36,7 @@ namespace CVRDAL
 		#region Retrieve/Load Methods
 
 		// Retrieves a Data Record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public CVSex RetrieveWithID(int id, List<string> propertyNames = null)
 		{
 			var keyColumns = GetIDKey(id);
@@ -47,7 +47,7 @@ namespace CVRDAL
 		#region GetKey Methods
 
 		// Gets the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns GetIDKey(int id)
 		{
 			var retValue = new DbColumns()
@@ -61,7 +61,7 @@ namespace CVRDAL
 		#region KeyItem Methods
 
 		// Creates the RecordColumns object.
-		/// <include path='items/DataColumns/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns DataColumns(long id)
 		{
 			DbColumns retValue = null;
@@ -77,7 +77,7 @@ namespace CVRDAL
 		}
 
 		// Creates the KeyItem object.
-		/// <include path='items/GetKeyItem/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public KeyItem GetKeyItem(string propertyName, long id)
 		{
 			KeyItem retValue = null;
@@ -99,7 +99,7 @@ namespace CVRDAL
 		}
 
 		// Creates the KeyItems collection.
-		/// <include path='items/GetKeyItems/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetKeyItems/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public KeyItems GetKeyItems(string propertyName, DbColumns keyColumns = null)
 		{
 			KeyItems retValue = null;

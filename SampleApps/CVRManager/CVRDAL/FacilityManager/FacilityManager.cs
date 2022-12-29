@@ -13,7 +13,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public FacilityManager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "Facility")
 			: base(dbServiceRef, dataConfigName, tableName)
@@ -35,7 +35,7 @@ namespace CVRDAL
 		#region Retrieve/Load Methods
 
 		// Retrieves a Data Record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public Facility RetrieveWithID(int id, List<string> propertyNames = null)
 		{
 			var keyColumns = GetIDKey(id);
@@ -56,7 +56,7 @@ namespace CVRDAL
 		#region GetKey Methods
 
 		// Gets the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns GetIDKey(int id)
 		{
 			var retValue = new DbColumns()

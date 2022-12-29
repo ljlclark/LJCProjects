@@ -16,7 +16,7 @@ namespace LJCUnitMeasure
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public UnitMeasureDetail(UnitMeasureManagers managers)
 		{
 			InitializeComponent();
@@ -61,7 +61,7 @@ namespace LJCUnitMeasure
 		}
 
 		// Paint the form background.
-		/// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/OnPaintBackground/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			base.OnPaintBackground(e);
@@ -73,7 +73,7 @@ namespace LJCUnitMeasure
 		#region Data Methods
 
 		// Retrieves the initial control data.
-		/// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
 		private void DataRetrieve()
 		{
 			UnitMeasure dataRecord;
@@ -292,7 +292,7 @@ namespace LJCUnitMeasure
 		#region Control Event Handlers
 
 		// Fires the Change event.
-		/// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
 		protected void LJCOnChange()
 		{
 			LJCChange?.Invoke(this, new EventArgs());

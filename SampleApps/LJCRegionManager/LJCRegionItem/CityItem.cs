@@ -12,7 +12,7 @@ namespace LJCRegionItem
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public CityItem(string dataConfigName)
     {
       DataConfigName = dataConfigName;

@@ -4,15 +4,15 @@ rem UpdateUnitMeasure.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies\
 set runRoot=
 mkdir External
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=LJCUnitMeasure\
+set root=CoreAssemblies\
+set runRoot=SampleApps\LJCUnitMeasure\
 set to=%runRoot%External
 
 :Update

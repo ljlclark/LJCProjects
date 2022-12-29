@@ -10,7 +10,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CodeTypeClasses()
 		{
 			mPrevCount = -1;
@@ -45,7 +45,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element.
-		/// <include path='items/LJCSearchID/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchID/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public CodeTypeClass LJCSearchID(int id)
 		{
 			CodeTypeClass retValue = null;
@@ -64,7 +64,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchCode/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public CodeTypeClass LJCSearchCode(string code)
 		{
 			CodeTypeClassCodeComparer comparer;

@@ -15,7 +15,7 @@ namespace LJCRegionManager
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public ProvinceDetail()
     {
       InitializeComponent();
@@ -57,7 +57,7 @@ namespace LJCRegionManager
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/OnPaintBackground/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -70,7 +70,7 @@ namespace LJCRegionManager
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Province record;
@@ -96,7 +96,7 @@ namespace LJCRegionManager
     }
 
     // Gets the record values and copies them to the controls.
-    /// <include path='items/GetRecordValues/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/GetRecordValues/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private void GetRecordValues(Province dataRecord)
     {
       if (dataRecord != null)
@@ -110,7 +110,7 @@ namespace LJCRegionManager
     }
 
     // Creates and returns a record object with the data from
-    /// <include path='items/SetRecordValues/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/SetRecordValues/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private Province SetRecordValues()
     {
       Province retVal = new Province()
@@ -135,7 +135,7 @@ namespace LJCRegionManager
     }
 
     // Saves the data.
-    /// <include path='items/DataSave/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/DataSave/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private bool DataSave()
     {
       Province lookupRecord;
@@ -187,7 +187,7 @@ namespace LJCRegionManager
     }
 
     // Validates the data.
-    /// <include path='items/IsValid/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/IsValid/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private bool IsValid()
     {
       StringBuilder builder;
@@ -217,7 +217,7 @@ namespace LJCRegionManager
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
-    /// <include path='items/InitializeControls/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/InitializeControls/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     private void InitializeControls()
     {
       // Get singleton values.
@@ -270,7 +270,7 @@ namespace LJCRegionManager
     }
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

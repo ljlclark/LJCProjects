@@ -11,7 +11,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CVVisit()
 		{
 			ChangedNames = new ChangedNames();
@@ -21,7 +21,7 @@ namespace CVRDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public CVVisit Clone()
 		{
 			CVVisit retValue = MemberwiseClone() as CVVisit;
@@ -29,7 +29,7 @@ namespace CVRDAL
 		}
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public override string ToString()
 		{
 			string retValue;
@@ -39,7 +39,7 @@ namespace CVRDAL
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public int CompareTo(CVVisit other)
 		{
 			int retValue;

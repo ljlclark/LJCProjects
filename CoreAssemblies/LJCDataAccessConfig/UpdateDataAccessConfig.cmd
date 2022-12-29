@@ -4,14 +4,14 @@ rem UpdateDataAccessConfig.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies\
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=LJCDataAccessConfig\
+set root=CoreAssemblies\
+set runRoot=CoreAssemblies\LJCDataAccessConfig\
 set to=%runRoot%External
 
 :Update

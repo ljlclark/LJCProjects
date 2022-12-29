@@ -12,7 +12,7 @@ namespace LJCUnitMeasureDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public UnitConversionManager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "UnitConversion")
 			: base(dbServiceRef, dataConfigName, tableName)
@@ -65,7 +65,7 @@ namespace LJCUnitMeasureDAL
 		#region Other Public Methods
 
 		// Check for duplicate unique key.
-		/// <include path='items/IsDuplicate/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public bool IsDuplicate(UnitConversion lookupRecord, UnitConversion currentRecord
 			, bool isUpdate = false)
 		{

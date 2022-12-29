@@ -4,14 +4,14 @@ rem UpdateRegionManager.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\
+set root=..\..\CoreAssemblies\
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=
-set runRoot=LJCRegionManager\
+set root=CoreAssemblies\
+set runRoot=SampleApps\LJCRegionManager\
 set to=%runRoot%External
 
 :Update

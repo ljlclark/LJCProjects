@@ -5,13 +5,13 @@ using System.Windows.Forms;
 namespace CVRManager
 {
 	// The list form.
-	/// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+	/// <include path='items/ListFormDAW/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
 	internal partial class FacilityList : Form
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		internal FacilityList()
 		{
 			Cursor = Cursors.WaitCursor;

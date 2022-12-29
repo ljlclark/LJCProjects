@@ -17,7 +17,7 @@ namespace LJCUnitMeasureDAL
 		#region Static Functions
 
 		// Deserializes from the specified XML file.
-		/// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public static UnitMeasures LJCDeserialize(string fileSpec = null)
 		{
 			UnitMeasures retValue;
@@ -35,7 +35,7 @@ namespace LJCUnitMeasureDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public UnitMeasures()
 		{
 			mPrevCount = -1;
@@ -45,7 +45,7 @@ namespace LJCUnitMeasureDAL
 		#region Collection Methods
 
 		// Creates and returns a clone of the object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
 		public UnitMeasures Clone()
 		{
 			UnitMeasures retValue = new UnitMeasures();
@@ -57,7 +57,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public UnitMeasure Add(int id, string name)
 		{
 			UnitMeasure retValue = null;
@@ -101,7 +101,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Serializes the collection to a file.
-		/// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public void LJCSerialize(string fileSpec = null)
 		{
 			if (false == NetString.HasValue(fileSpec))
@@ -140,7 +140,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Retrieve the collection element.
-		/// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchCode/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public UnitMeasure LJCSearchCode(string code)
 		{
 			UnitMeasure retValue = null;
@@ -159,7 +159,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
 		public UnitMeasure LJCSearchName(string name)
 		{
 			UnitMeasureNameComparer comparer;

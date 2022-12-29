@@ -11,7 +11,7 @@ namespace LJCRegionDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public RegionData()
     {
       ChangedNames = new ChangedNames();
@@ -21,7 +21,7 @@ namespace LJCRegionDAL
     #region Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public RegionData Clone()
     {
       RegionData retValue = MemberwiseClone() as RegionData;
@@ -29,7 +29,7 @@ namespace LJCRegionDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public int CompareTo(RegionData other)
     {
       int retValue;
@@ -50,7 +50,7 @@ namespace LJCRegionDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
       return $"{Number} - {Name}";

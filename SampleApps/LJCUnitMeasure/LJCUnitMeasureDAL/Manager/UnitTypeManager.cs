@@ -17,7 +17,7 @@ namespace LJCUnitMeasureDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public UnitTypeManager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "UnitType")
 			: base(dbServiceRef, dataConfigName, tableName)
@@ -49,7 +49,7 @@ namespace LJCUnitMeasureDAL
 		#region Retrieve/Load Methods
 
 		// Retrieves a Data Record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public UnitType RetrieveWithID(int id, List<string> propertyNames = null)
 		{
 			var keyColumns = GetIDKey(id);
@@ -57,7 +57,7 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// Loads a collection of data records ordered by Description.
-		/// <include path='items/LoadByDescription/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/LoadByDescription/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public UnitTypes LoadByDescription(DbColumns keyColumns = null
 			, List<string> propertyNames = null, DbFilters filters = null
 			, DbJoins joins = null)
@@ -74,7 +74,7 @@ namespace LJCUnitMeasureDAL
 		#region GetKey Methods
 
 		// Gets the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbColumns GetIDKey(int id)
 		{
 			var retValue = new DbColumns()
@@ -88,7 +88,7 @@ namespace LJCUnitMeasureDAL
 		#region Joins
 
 		// Creates and returns the Load Joins object.
-		/// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetLoadJoins/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public DbJoins GetLoadJoins()
 		{
 			//DbJoin dbJoin;
@@ -149,7 +149,7 @@ namespace LJCUnitMeasureDAL
 		#region OrderBys
 
 		// Sets the current OrderBy names.
-		/// <include path='items/SetOrderBy/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/SetOrderBy/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public void SetOrderByDescription() => DataManager.OrderByNames = new List<string>()
 		{
 			//UnitType.ColumnDescription
@@ -159,7 +159,7 @@ namespace LJCUnitMeasureDAL
 		#region Other Public Methods
 
 		// Check for duplicate unique key.
-		/// <include path='items/IsDuplicate/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
 		public bool IsDuplicate(UnitType lookupRecord, UnitType currentRecord
 			, bool isUpdate = false)
 		{
