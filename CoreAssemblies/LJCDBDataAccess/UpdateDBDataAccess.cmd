@@ -21,10 +21,14 @@ rem Run from main Projects folder.
 set assmRoot=%assm%
 set utilRoot=%util%
 set appRoot=%app%
-set toRoot=%assm%\LJCDBDataAccess\
+set toRoot=%assmRoot%LJCDBDataAccess\
 set to=%toRoot%External
 
 :Update
+if exist %to%\NUL goto continue
+mkdir %to%
+:continue
+
 rem ***************************
 rem *** Referenced Binaries ***
 
