@@ -2,15 +2,20 @@ echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
 rem UpdateDocLib.cmd
 
+echo Licensed under the MIT License.
+rem UpdateDocLib.cmd
+
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies
+set root=..\..\CoreAssemblies\
+set altRoot=..\..\CoreUtilities\
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies
+set root=CoreAssemblies\
+set altRoot=CoreUtilities\
 set runRoot=CoreUtilities\LJCDocLib\
 set to=%runRoot%External
 
@@ -19,7 +24,7 @@ rem ***************************
 rem *** Referenced Binaries ***
 
 set src=LJCGenText\LJCGenText\%bin%
-copy %root%%src%\LJCGenTextLib.dll %to%
+copy %altRoot%%src%\LJCGenTextLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %root%%src%\LJCNetCommon.dll %to%
@@ -43,17 +48,19 @@ set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %root%%src%\LJCDBMessage.dll %to%
 
 set src=LJCDocGroupEditor\LJCDocGroupEditor\%bin%
-copy %root%%src%\LJCDocGroupEditor.exe %to%
-copy %root%%src%\LJCDocGroupEditor.exe.config %to%
+rem copy %altRoot%%src%\LJCDocGroupEditor.exe %to%
+rem copy %altRoot%%src%\LJCDocGroupEditor.exe.config %to%
 
 set src=LJCDocLib\LJCDocLibDAL\%bin%
-copy %root%%src%\LJCDocLibDAL.dll %to%
+copy %altRoot%%src%\LJCDocLibDAL.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %root%%src%\LJCNetCommon.dll %to%
 
 set src=LJCLibraries\LJCWinFormCommon\%bin%
 copy %root%%src%\LJCWinFormCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormControls\%bin%
 copy %root%%src%\LJCWinFormControls.dll %to%
 
 if %1%. == BuildAll. goto End

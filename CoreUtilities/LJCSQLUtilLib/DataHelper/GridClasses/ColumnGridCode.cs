@@ -1,7 +1,5 @@
 ﻿// ColumnGridCode.cs
 using DataDetail;
-using DataDetailDAL;
-//using LJCDataDetailLib;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;

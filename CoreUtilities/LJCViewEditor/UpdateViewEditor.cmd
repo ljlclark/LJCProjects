@@ -4,13 +4,15 @@ rem UpdateViewEditor.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies
+set root=..\..\CoreAssemblies\
+set altRoot=..\..\CoreUtilities\
 set runroot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies
+set root=CoreAssemblies\
+set altRoot=CoreUtilities\
 set runroot=CoreUtilities\LJCViewEditor\
 set to=%runroot%External
 
@@ -68,12 +70,12 @@ copy %root%%src%\LJCNetCommon.dll %to%
 
 rem --- LJCSQLUtilLib
 set src=LJCSQLUtilLib\LJCSQLUtilLib\%bin%
-echo copy %root%%src%\LJCSQLUtilLib.dll %to%
-copy %root%%src%\LJCSQLUtilLib.dll %to%
+echo copy %altRoot%%src%\LJCSQLUtilLib.dll %to%
+copy %altRoot%%src%\LJCSQLUtilLib.dll %to%
 
 set src=LJCSQLUtilLib\LJCSQLUtilLibDAL\%bin%
-echo copy %root%%src%\LJCSQLUtilLibDAL.dll %to%
-copy %root%%src%\LJCSQLUtilLibDAL.dll %to%
+echo copy %altRoot%%src%\LJCSQLUtilLibDAL.dll %to%
+copy %altRoot%%src%\LJCSQLUtilLibDAL.dll %to%
 rem ---
 
 rem *****************************

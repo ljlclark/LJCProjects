@@ -4,13 +4,13 @@ rem UpdateSQLUtilLib.cmd
 
 set bin=bin\Debug
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies
+set root=..\..\CoreAssemblies\
 set runRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies
+set root=CoreAssemblies\
 set runRoot=CoreUtilities\LJCSQLUtilLib\
 set to=%runRoot%External
 
@@ -21,8 +21,8 @@ rem *** Referenced Binaries ***
 set src=DataDetail\DataDetail\%bin%
 copy %root%%src%\DataDetail.exe %to%
 
-set src=DataDetail\DataDetailDAL\%bin%
-copy %root%%src%\DataDetailDAL.dll %to%
+set src=DataDetail\LJCDataDetailDAL\%bin%
+copy %root%%src%\LJCDataDetailDAL.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %root%%src%\LJCDataAccess.dll %to%

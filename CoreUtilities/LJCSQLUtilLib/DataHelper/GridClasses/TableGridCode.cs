@@ -8,8 +8,6 @@ using LJCDBMessage;
 using LJCDBClientLib;
 using DataDetail;
 using LJCSQLUtilLibDAL;
-using LJCDataDetailLib;
-using DataDetailDAL;
 
 namespace DataHelper
 {

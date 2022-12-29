@@ -39,12 +39,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\DataDetail.exe</HintPath>
     </Reference>
-    <Reference Include="DataDetailDAL">
-      <HintPath>..\External\DataDetailDAL.dll</HintPath>
-    </Reference>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDataDetailDAL">
+      <HintPath>..\External\LJCDataDetailDAL.dll</HintPath>
     </Reference>
     <Reference Include="LJCDataDetailLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
