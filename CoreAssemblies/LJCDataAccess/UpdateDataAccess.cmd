@@ -3,34 +3,44 @@ echo Licensed under the MIT License.
 rem UpdateDataAccess.cmd
 
 set bin=bin\Debug
+set assm=CoreAssemblies\
+set util=CoreUtilities\
+set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies\
-set runRoot=
+
+rem Run from Solution folder.
+set assmRoot=..\..\%assm%
+set utilRoot=..\..\%util%
+set appRoot=..\..\%app%
+set toRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies\
-set runRoot=CoreAssemblies\LJCDataAccess\
-set to=%runRoot%External
+rem Run from main Projects folder.
+set assmRoot=%assm%
+set utilRoot=%util%
+set appRoot=%app%
+set toRoot=%assm%\LJCDataAccess\
+set to=%toRoot%External
 
 :Update
 rem ***************************
 rem *** Referenced Binaries ***
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %root%%src%\LJCDataAccessConfig.dll %to%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon
-copy %root%%src%\%bin%\LJCNetCommon.dll %to%
+copy %assmRoot%%src%\%bin%\LJCNetCommon.dll %to%
 
-copy %root%MySql.Data.dll %to%
+copy %assmRoot%MySql.Data.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -------------------------------
-set to=%runRoot%LJCDataAccess\%bin%
+set to=%toRoot%LJCDataAccess\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

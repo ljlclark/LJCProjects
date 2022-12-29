@@ -3,29 +3,39 @@ echo Licensed under the MIT License.
 rem UpdateDataAccessConfig.cmd
 
 set bin=bin\Debug
+set assm=CoreAssemblies\
+set util=CoreUtilities\
+set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies\
-set runRoot=
+
+rem Run from Solution folder.
+set assmRoot=..\..\%assm%
+set utilRoot=..\..\%util%
+set appRoot=..\..\%app%
+set toRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies\
-set runRoot=CoreAssemblies\LJCDataAccessConfig\
-set to=%runRoot%External
+rem Run from main Projects folder.
+set assmRoot=%assm%
+set utilRoot=%util%
+set appRoot=%app%
+set toRoot=%assm%\LJCDataAccessConfig\
+set to=%toRoot%External
 
 :Update
 rem ***************************
 rem *** Referenced Binaries ***
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %root%%src%\LJCNetCommon.dll %to%
+copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -------------------------------------
-set to=%runRoot%LJCDataAccessConfig\%bin%
+set to=%toRoot%LJCDataAccessConfig\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

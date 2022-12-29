@@ -3,41 +3,51 @@ echo Licensed under the MIT License.
 rem UpdateDBDataAccess.cmd
 
 set bin=bin\Debug
+set assm=CoreAssemblies\
+set util=CoreUtilities\
+set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies\
-set runRoot=
+
+rem Run from Solution folder.
+set assmRoot=..\..\%assm%
+set utilRoot=..\..\%util%
+set appRoot=..\..\%app%
+set toRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies\
-set runRoot=CoreAssemblies\LJCDBDataAccess\
-set to=%runRoot%External
+rem Run from main Projects folder.
+set assmRoot=%assm%
+set utilRoot=%util%
+set appRoot=%app%
+set toRoot=%assm%\LJCDBDataAccess\
+set to=%toRoot%External
 
 :Update
 rem ***************************
 rem *** Referenced Binaries ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %root%%src%\LJCDataAccessConfig.dll %to%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
-copy %root%%src%\LJCDBMessage.dll %to%
+copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
 set src=LJCDBMessage\CipherLib\%bin%
-copy %root%%src%\CipherLib.dll %to%
+copy %assmRoot%%src%\CipherLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %root%%src%\LJCNetCommon.dll %to%
+copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -------------------------------
-set to=%runRoot%LJCDBDataAccess\%bin%
+set to=%toRoot%LJCDBDataAccess\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

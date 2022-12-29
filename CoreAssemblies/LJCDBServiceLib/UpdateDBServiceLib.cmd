@@ -3,66 +3,74 @@ echo Licensed under the MIT License.
 rem UpdateDBServiceLib.cmd
 
 set bin=bin\Debug
+set assm=CoreAssemblies\
+set util=CoreUtilities\
+set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-set root=..\..\CoreAssemblies\
-set runRoot=
+
+rem Run from Solution folder.
+set assmRoot=..\..\%assm%
+set utilRoot=..\..\%util%
+set appRoot=..\..\%app%
+set toRoot=
 set to=External
 goto Update
 
 :BuildAll
-set root=CoreAssemblies\
-set runRoot=CoreAssemblies\LJCDBServiceLib\
-set to=%runRoot%External
+rem Run from main Projects folder.
+set assmRoot=%assm%
+set utilRoot=%util%
+set appRoot=%app%
+set toRoot=%assm%\LJCDBServiceLib\
+set to=%toRoot%External
 
 :Update
 rem ***************************
 rem *** Referenced Binaries ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %root%%src%\LJCDataAccessConfig.dll %to%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-copy %root%%src%\LJCDBDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
-copy %root%%src%\LJCDBMessage.dll %to%
+copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
 set src=LJCDBMessage\CipherLib\%bin%
-copy %root%%src%\CipherLib.dll %to%
+copy %assmRoot%%src%\CipherLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %root%%src%\LJCNetCommon.dll %to%
+copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -----------------------------------
-set to=%runRoot%ConfigTestConsole\%bin%
+set to=%toRoot%ConfigTestConsole\%bin%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig
-copy %root%%src%\DataConfigs.xml %to%
-copy %root%%src%\ConnectionTemplates.xml %to%
+copy %assmRoot%%src%\DataConfigs.xml %to%
+copy %assmRoot%%src%\ConnectionTemplates.xml %to%
 
 rem ----------------------------------
-set to=%runRoot%TestDbDataAccess\%bin%
+set to=%toRoot%TestDbDataAccess\%bin%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %root%%src%\LJCDataAccess.dll %to%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
-rem --- LJCDataAccessConfig
 set src=LJCDataAccessConfig\LJCDataAccessConfig
-copy %root%%src%\DataConfigs.xml %to%
-copy %root%%src%\ConnectionTemplates.xml %to%
+copy %assmRoot%%src%\DataConfigs.xml %to%
+copy %assmRoot%%src%\ConnectionTemplates.xml %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %root%%src%\LJCDataAccessConfig.dll %to%
-rem ---
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End
