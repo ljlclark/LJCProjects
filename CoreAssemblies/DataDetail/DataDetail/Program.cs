@@ -2,7 +2,6 @@
 using System;
 using System.Windows.Forms;
 using LJCNetCommon;
-using LJCTestDataLib;
 
 namespace DataDetail
 {
@@ -57,11 +56,11 @@ namespace DataDetail
       // *** End   *** - Testing
 
       DataDetailDialog dialog = new DataDetailDialog(userID, dataConfigName
-        , tableName)
-      {
-        LJCDataColumns = TestData.GetRecord(),
-        LJCKeyItems = TestData.GetKeyItems("FifthValue")
-      };
+        , tableName);
+      //{
+      //  LJCDataColumns = TestData.GetRecord(),
+      //  LJCKeyItems = TestData.GetKeyItems("FifthValue")
+      //};
 
       // Testing
       //dialog.LJCDetailConfig.PageColumnsLimit = 1;

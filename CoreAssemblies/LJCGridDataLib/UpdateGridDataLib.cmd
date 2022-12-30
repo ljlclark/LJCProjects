@@ -60,19 +60,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem --------------------------------
-set to=%toRoot%GridDataTest\%bin%
-
-set src=LJCDBMessage\CipherLib\%bin%
-copy %assmRoot%%src%\CipherLib.dll %to%
-
-set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %assmRoot%%src%\LJCDataAccess.dll %to%
-
-set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
-
-set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
-copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
+set to=%toRoot%LJCGridDataLib\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

@@ -63,25 +63,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem -----------------------------------
-set to=%toRoot%TestObjectManager\%bin%
-
-set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %assmRoot%%src%\LJCDataAccess.dll %to%
-
-set src=LJCDataAccessConfig\LJCDataAccessConfig
-copy %assmRoot%%src%\DataConfigs.xml %to%
-copy %assmRoot%%src%\ConnectionTemplates.xml %to%
-
-set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
-
-set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
-
-set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %assmRoot%%src%\LJCNetCommon.dll %to%
-
-copy %assmRoot%MySql.Data.dll %to%
+set to=%toRoot%LJCDBClientLib\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

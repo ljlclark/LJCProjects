@@ -5,10 +5,6 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDBServiceLib", "LJCDBServiceLib\LJCDBServiceLib.csproj", "{1F0625B3-0EBF-4DA2-9309-92D81D95FF3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTestConsole", "ConfigTestConsole\ConfigTestConsole.csproj", "{E9C11AA1-D834-48E4-B52E-465B4391D664}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDbDataAccess", "TestDbDataAccess\TestDbDataAccess.csproj", "{AC537097-310B-49F0-B6DE-541C6D8371B7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{1F0625B3-0EBF-4DA2-9309-92D81D95FF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F0625B3-0EBF-4DA2-9309-92D81D95FF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F0625B3-0EBF-4DA2-9309-92D81D95FF3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9C11AA1-D834-48E4-B52E-465B4391D664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9C11AA1-D834-48E4-B52E-465B4391D664}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9C11AA1-D834-48E4-B52E-465B4391D664}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9C11AA1-D834-48E4-B52E-465B4391D664}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC537097-310B-49F0-B6DE-541C6D8371B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC537097-310B-49F0-B6DE-541C6D8371B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC537097-310B-49F0-B6DE-541C6D8371B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC537097-310B-49F0-B6DE-541C6D8371B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
