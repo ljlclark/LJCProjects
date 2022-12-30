@@ -95,7 +95,7 @@ echo ----------------- %counter% - DataDetail ------------------ >> Build.txt
 echo DataDetail >> Build.txt
 call CoreAssemblies\DataDetail\UpdateDataDetail.cmd BuildAll >> Build.txt
 msbuild CoreAssemblies\DataDetail\DataDetail.sln
-pause
+
 rem *************
 rem CoreUtilities
 rem *************
