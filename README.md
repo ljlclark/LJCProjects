@@ -43,8 +43,8 @@ LJDBServicehosts/LJCDBServiceHost
 LJCGridDataLib  
 &nbsp;&nbsp;12. LJCGridDataLib.dll  
 LJCDBClientLib  
-&nbsp;&nbsp;13. LJCClientLib.dll  
-LJCtextDataReader/LJCTextDataReaderLib  
+&nbsp;&nbsp;13. LJCDBClientLib.dll  
+LJCTextDataReader/LJCTextDataReaderLib  
 &nbsp;&nbsp;14. LJCTextDataReaderLib.dll  
 
 #### Code/Text Generator projects, DLLs and programs  
