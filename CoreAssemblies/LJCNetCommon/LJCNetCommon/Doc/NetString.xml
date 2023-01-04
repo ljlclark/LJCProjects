@@ -116,8 +116,8 @@
 
           // Get text that has the same begin and end delimiter.
           // The endDelimiter is not specified or null.
-          startIndex = 0;
           source = "|This is some text.|";
+          startIndex = 0;
           beginDelimiter = "|";
           text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
             , out beginIndex, out endIndex, ref startIndex);
@@ -127,8 +127,8 @@
           // startIndex = -1;
 
           // Get text that has no end delimiter.
-          startIndex = 0;
           source = "|This is some text.";
+          startIndex = 0;
           beginDelimiter = "|";
           text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
             , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
@@ -138,8 +138,8 @@
           // startIndex = -1;
 
           // Get delimited text where the delimiters occur multiple times.
-          startIndex = 0;
           source = "|This is some text.| |and some more here.|";
+          startIndex = 0;
           beginDelimiter = "|";
           while (startIndex > -1)
           {
