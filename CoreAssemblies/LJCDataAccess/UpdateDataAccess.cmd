@@ -2,32 +2,16 @@ echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
 rem UpdateDataAccess.cmd
 
-set bin=bin\Debug
-set assm=CoreAssemblies\
-set util=CoreUtilities\
-set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-
-rem Run from Solution folder.
-set assmRoot=..\..\%assm%
-set utilRoot=..\..\%util%
-set appRoot=..\..\%app%
-set toRoot=
-set to=External
-goto Update
-
+set mainRoot=..\..\
+call %mainRoot%SetupUpdate.cmd %1%
+call %mainRoot%SetupFolder.cmd
+goto Process:
 :BuildAll
-rem Run from main Projects folder.
-set assmRoot=%assm%
-set utilRoot=%util%
-set appRoot=%app%
-set toRoot=%assmRoot%LJCDataAccess\
-set to=%toRoot%External
-
-:Update
-if exist %to%\NUL goto continue
-mkdir %to%
-:continue
+call SetupUpdate.cmd %1%
+set toRoot=%assm%\LJCDataAccess\
+call SetupFolder.cmd
+:Process
 
 rem ***************************
 rem *** Referenced Binaries ***
@@ -38,7 +22,7 @@ copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 set src=LJCNetCommon\LJCNetCommon
 copy %assmRoot%%src%\%bin%\LJCNetCommon.dll %to%
 
-copy %assmRoot%MySql.Data.dll %to%
+copy %mainRoot%MySql.Data.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

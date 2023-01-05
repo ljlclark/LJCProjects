@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // DataCommon.cs
 using System;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlTypes;
 using LJCNetCommon;
@@ -14,6 +15,52 @@ namespace LJCDataAccess
   public class DataCommon
   {
     #region Data Access Methods
+
+    /// <summary>
+    /// Clones a DataColumn object.
+    /// </summary>
+    /// <param name="dataColumn">The DataColumn object.</param>
+    /// <returns>The cloned DataColumn object.</returns>
+    public static DataColumn DataColumnClone(DataColumn dataColumn)
+    {
+      DataColumn retValue = null;
+      if (dataColumn != null)
+      {
+        retValue = new DataColumn()
+        {
+          AllowDBNull = dataColumn.AllowDBNull,
+          Caption = dataColumn.Caption,
+          ColumnName = dataColumn.ColumnName,
+          DataType = dataColumn.DataType,
+          DefaultValue = dataColumn.DefaultValue,
+          MaxLength = dataColumn.MaxLength,
+          Unique = dataColumn.Unique
+        };
+      }
+      return retValue;
+    }
+
+    /// <summary>
+    /// Get a DataColumn collection from the specified ColumnName values.
+    /// </summary>
+    /// <param name="dataTable">The DataTable object.</param>
+    /// <param name="columnNames">The Column Name array.</param>
+    /// <returns>The DataColumn collection.</returns>
+    public static DataColumnCollection GetColumns(DataTable dataTable
+      , string[] columnNames = null)
+    {
+      DataTable workTable = new DataTable();
+      foreach (string columnName in columnNames)
+      {
+        DataColumn dataColumn = dataTable.Columns[columnName];
+        if (dataColumn != null)
+        {
+          var dataColumnClone = DataColumnClone(dataColumn);
+          workTable.Columns.Add(dataColumnClone);
+        }
+      }
+      return workTable.Columns;
+    }
 
     // Retrieves the database connection ConnectionType value.
     /// <include path='items/GetConnectionType/*' file='Doc/DataCommon.xml'/>
@@ -45,6 +92,30 @@ namespace LJCDataAccess
         }
       }
       return retVal;
+    }
+
+    /// <summary>
+    /// Creates the DataAccess object.
+    /// </summary>
+    /// <param name="dataSourceName">The DataService name.</param>
+    /// <param name="databaseName">The Database name.</param>
+    /// <param name="providerName">The Provider name.</param>
+    /// <returns>The DataAccess object.</returns>
+    public static DataAccess GetDataAccess(string dataSourceName
+      , string databaseName, string providerName = "System.Data.SqlClient")
+    {
+      DbConnectionStringBuilder connectionBuilder;
+      DataAccess retValue;
+
+      connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { "Data Source", dataSourceName },
+        { "Initial Catalog", databaseName },
+        { "Integrated Security", "True" }
+      };
+      string connectionString = connectionBuilder.ConnectionString;
+      retValue = new DataAccess(connectionString, providerName);
+      return retValue;
     }
 
     // Sets the data adapter table mappings.

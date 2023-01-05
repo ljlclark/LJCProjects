@@ -2,32 +2,16 @@ echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
 rem UpdateUnitMeasure.cmd
 
-set bin=bin\Debug
-set assm=CoreAssemblies\
-set util=CoreUtilities\
-set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-
-rem Run from Solution folder.
-set assmRoot=..\..\%assm%
-set utilRoot=..\..\%util%
-set appRoot=..\..\%app%
-set toRoot=
-set to=External
-goto Update
-
+set mainRoot=..\..\
+call %mainRoot%SetupUpdate.cmd %1%
+call %mainRoot%SetupFolder.cmd
+goto Process:
 :BuildAll
-rem Run from main Projects folder.
-set assmRoot=%assm%
-set utilRoot=%util%
-set appRoot=%app%
-set toRoot=%appRoot%LJCUnitMeasure\
-set to=%toRoot%External
-
-:Update
-if exist %to%\NUL goto continue
-mkdir %to%
-:continue
+call SetupUpdate.cmd %1%
+set toRoot=%apps%\LJCUnitMeasure\
+call SetupFolder.cmd
+:Process
 
 rem ***************************
 rem *** Referenced Binaries ***
@@ -66,8 +50,8 @@ copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 set src=LJCDBMessage\CipherLib\%bin%
 copy %assmRoot%%src%\CipherLib.dll %to%
 
-set src=LJCDBServiceLib\LJCDBDataAccessLib\%bin%
-copy %assmRoot%%src%\LJCDBDataAccessLib.dll %to%
+set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
+copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%

@@ -2,32 +2,16 @@ echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
 rem UpdateGridDataLib.cmd
 
-set bin=bin\Debug
-set assm=CoreAssemblies\
-set util=CoreUtilities\
-set app=SampleApps\
 if %1%. == BuildAll. goto BuildAll
-
-rem Run from Solution folder.
-set assmRoot=..\..\%assm%
-set utilRoot=..\..\%util%
-set appRoot=..\..\%app%
-set toRoot=
-set to=External
-goto Update
-
+set mainRoot=..\..\
+call %mainRoot%SetupUpdate.cmd %1%
+call %mainRoot%SetupFolder.cmd
+goto Process:
 :BuildAll
-rem Run from main Projects folder.
-set assmRoot=%assm%
-set utilRoot=%util%
-set appRoot=%app%
-set toRoot=%assmRoot%LJCGridDataLib\
-set to=%toRoot%\External
-
-:Update
-if exist %to%\NUL goto continue
-mkdir %to%
-:continue
+call SetupUpdate.cmd %1%
+set toRoot=%assm%\LJCGridDataLib\
+call SetupFolder.cmd
+:Process
 
 rem ***************************
 rem *** Referenced Binaries ***
@@ -51,7 +35,7 @@ set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %assmRoot%%src%\LJCRegionDAL.dll %to%
+rem copy %appsRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCLibraries\Output
 copy %assmRoot%%src%\LJCWinFormControls.dll %to%
