@@ -8,7 +8,7 @@ call CoreAssemblies\DataDetail\ClearDataDetail.cmd ClearAll
 call CoreAssemblies\LJCDataAccess\ClearDataAccess.cmd ClearAll
 call CoreAssemblies\LJCDataAccessConfig\ClearDataAccessConfig.cmd ClearAll
 call CoreAssemblies\LJCDBClientLib\ClearDBClientLib.cmd ClearAll
-call CoreAssemblies\LJCDBDataAccess\ClearDbDataAccess.cmd ClearAll
+call CoreAssemblies\LJCDBDataAccess\ClearDBDataAccess.cmd ClearAll
 call CoreAssemblies\LJCDBMessage\ClearDBMessage.cmd ClearAll
 call CoreAssemblies\LJCDBServiceHosts\ClearDBServiceHosts.cmd ClearAll
 call CoreAssemblies\LJCDBServiceLib\ClearDBServiceLib.cmd ClearAll

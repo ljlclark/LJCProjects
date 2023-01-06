@@ -103,36 +103,36 @@ set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCCodeLineCounter ---------- >> Build.txt
 echo LJCCodeLineCounter >> Build.txt
-call LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll >> Build.txt
-msbuild LJCCodeLineCounter\LJCCodeLineCounter.sln
+call CoreUtilities\LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCGenText ------------------ >> Build.txt
 echo LJCGenText >> Build.txt
-call LJCGenText\UpdateGenText.cmd BuildAll >> Build.txt
-msbuild LJCGenText\LJCGenText.sln
+call CoreUtilities\LJCGenText\UpdateGenText.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCGenText\LJCGenText.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCDocLib.sln --------------- >> Build.txt
 echo LJCDocLib >> Build.txt
-call LJCDocLib\UpdateDocLib.cmd BuildAll >> Build.txt
-msbuild LJCDocLib\LJCDocLib.sln
+call CoreUtilities\LJCDocLib\UpdateDocLib.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCDocLib\LJCDocLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCSQLUtilLib --------------- >> Build.txt
 echo LJCSQLUtilLib >> Build.txt
-call LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Build.txt
-msbuild LJCSQLUtilLib\LJCSQLUtilLib.sln
+call CoreUtilities\LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCViewEditor --------------- >> Build.txt
 echo LJCViewEditor >> Build.txt
-call LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
-msbuild LJCViewEditor\LJCViewEditor.sln
+call CoreUtilities\LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCViewEditor\LJCViewEditor.sln
 
 rem **********
 rem SampleApps
@@ -141,19 +141,19 @@ set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
 echo LJCRegionManager >> Build.txt
-call LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
-msbuild LJCRegionManager\LJCRegionManager.sln
+call SampleApps\LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
+msbuild SampleApps\LJCRegionManager\LJCRegionManager.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - LJCUnitMeasure -------------- >> Build.txt
 echo LJCUnitMeasure >> Build.txt
-call LJCUnitMeasure\UpdateUnitMeasure.cmd BuildAll >> Build.txt
-msbuild LJCUnitMeasure\LJCUnitMeasure.sln
+call SampleApps\LJCUnitMeasure\UpdateUnitMeasure.cmd BuildAll >> Build.txt
+msbuild SampleApps\LJCUnitMeasure\LJCUnitMeasure.sln
 
 set /a counter+=1
 echo - >> Build.txt
 echo ----------------- %counter% - CVRManager ------------ >> Build.txt
 echo CVRManager >> Build.txt
-call CVRManager\UpdateCVRManager.cmd BuildAll >> Build.txt
-msbuild CVRManager\CVRManager.sln
+call SampleApps\CVRManager\UpdateCVRManager.cmd BuildAll >> Build.txt
+msbuild SampleApps\CVRManager\CVRManager.sln
