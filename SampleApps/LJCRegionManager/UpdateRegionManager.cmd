@@ -83,10 +83,10 @@ set src=LJCLibraries\LJCWinFormControls\%bin%
 copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %appRoot%%src%\LJCRegionManager.exe %to%
+copy %appsRoot%%src%\LJCRegionManager.exe %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %appRoot%%src%\LJCRegionManager.exe.config %to%
+copy %appsRoot%%src%\LJCRegionManager.exe.config %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

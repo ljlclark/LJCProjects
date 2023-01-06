@@ -38,7 +38,7 @@ set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 set src=LJCRegionManager\LJCRegionItem\%bin%
-copy %appRoot%%src%\LJCRegionItem.dll %to%
+copy %appsRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCLibraries\Output
 copy %assmRoot%%src%\LJCWinFormCommon.dll %to%

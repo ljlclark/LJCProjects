@@ -41,16 +41,16 @@ set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
 set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %appRoot%%src%\LJCRegionDAL.dll %to%
+copy %appsRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCRegionManager\LJCRegionForm\%bin%
-copy %appRoot%%src%\LJCRegionForm.exe %to%
+copy %appsRoot%%src%\LJCRegionForm.exe %to%
 
 set src=LJCRegionManager\LJCRegionItem\%bin%
-copy %appRoot%%src%\LJCRegionItem.dll %to%
+copy %appsRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %appRoot%%src%\LJCRegionManager.exe %to%
+copy %appsRoot%%src%\LJCRegionManager.exe %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
@@ -86,20 +86,20 @@ set src=LJCGridDataLib\LJCGridDataLib\%bin%
 copy %assmRoot%%src%\LJCGridDataLib.dll %to%
 
 set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %appRoot%%src%\LJCRegionDAL.dll %to%
+copy %appsRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCRegionManager\LJCRegionForm\%bin%
-copy %appRoot%%src%\LJCRegionForm.exe %to%
+copy %appsRoot%%src%\LJCRegionForm.exe %to%
 
 set src=LJCRegionManager\LJCRegionItem\%bin%
-copy %appRoot%%src%\LJCRegionItem.dll %to%
+copy %appsRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
-copy %appRoot%%src%\LJCRegionManager.exe %to%
-copy %appRoot%%src%\LJCRegionManager.exe.config %to%
+copy %appsRoot%%src%\LJCRegionManager.exe %to%
+copy %appsRoot%%src%\LJCRegionManager.exe.config %to%
 
 set src=LJCUnitMeasure\LJCUnitMeasureDAL\%bin%
-copy %appRoot%%src%\LJCUnitMeasureDAL.dll %to%
+copy %appsRoot%%src%\LJCUnitMeasureDAL.dll %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End
