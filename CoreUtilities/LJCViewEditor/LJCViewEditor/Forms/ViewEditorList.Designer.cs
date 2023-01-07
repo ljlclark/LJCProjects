@@ -29,8 +29,7 @@
 		private void InitializeComponent()
 		{
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,7 +37,8 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
       this.MainSplit = new System.Windows.Forms.SplitContainer();
       this.ViewSplit = new System.Windows.Forms.SplitContainer();
       this.ViewHeading = new LJCWinFormControls.LJCHeaderBox();
@@ -306,14 +306,14 @@
       this.ViewGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ViewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ViewGrid.ContextMenuStrip = this.ViewMenu;
-      dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ViewGrid.DefaultCellStyle = dataGridViewCellStyle11;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ViewGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.ViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ViewGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ViewGrid.LJCAllowSelectionChange = false;
@@ -358,8 +358,6 @@
             this.ViewMenuAbout});
       this.ViewMenu.Name = "ViewMenu";
       this.ViewMenu.Size = new System.Drawing.Size(268, 418);
-      this.ViewMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ViewMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ViewTitle
       // 
@@ -367,7 +365,6 @@
       this.ViewTitle.Name = "ViewTitle";
       this.ViewTitle.Size = new System.Drawing.Size(267, 32);
       this.ViewTitle.Text = "View Menu";
-      this.ViewTitle.Click += new System.EventHandler(this.ViewTitle_Click);
       // 
       // ViewMenuNew
       // 
@@ -511,14 +508,14 @@
       this.ColumnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ColumnGrid.ContextMenuStrip = this.ColumnMenu;
-      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle10;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.ColumnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ColumnGrid.LJCAllowSelectionChange = false;
@@ -556,8 +553,6 @@
             this.ColumnMenuHelp});
       this.ColumnMenu.Name = "ViewMenu";
       this.ColumnMenu.Size = new System.Drawing.Size(197, 246);
-      this.ColumnMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ColumnMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ColumnTitle
       // 
@@ -565,7 +560,6 @@
       this.ColumnTitle.Name = "ColumnTitle";
       this.ColumnTitle.Size = new System.Drawing.Size(196, 32);
       this.ColumnTitle.Text = "Column Menu";
-      this.ColumnTitle.Click += new System.EventHandler(this.ColumnTitle_Click);
       // 
       // ColumnMenuAdd
       // 
@@ -672,14 +666,14 @@
       this.JoinGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinGrid.ContextMenuStrip = this.JoinMenu;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.JoinGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinGrid.LJCAllowSelectionChange = false;
@@ -716,8 +710,6 @@
             this.JoinMenuHelp});
       this.JoinMenu.Name = "ViewMenu";
       this.JoinMenu.Size = new System.Drawing.Size(184, 214);
-      this.JoinMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.JoinMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // JoinTitle
       // 
@@ -725,7 +717,6 @@
       this.JoinTitle.Name = "JoinTitle";
       this.JoinTitle.Size = new System.Drawing.Size(183, 32);
       this.JoinTitle.Text = "Join Menu";
-      this.JoinTitle.Click += new System.EventHandler(this.JoinTitle_Click);
       // 
       // JoinMenuNew
       // 
@@ -814,14 +805,14 @@
       this.JoinOnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinOnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinOnGrid.ContextMenuStrip = this.JoinOnMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinOnGrid.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinOnGrid.DefaultCellStyle = dataGridViewCellStyle4;
       this.JoinOnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinOnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinOnGrid.LJCAllowSelectionChange = false;
@@ -858,8 +849,6 @@
             this.JoinOnMenuHelp});
       this.JoinOnMenu.Name = "ViewMenu";
       this.JoinOnMenu.Size = new System.Drawing.Size(190, 214);
-      this.JoinOnMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.JoinOnMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // JoinOnTitle
       // 
@@ -867,7 +856,6 @@
       this.JoinOnTitle.Name = "JoinOnTitle";
       this.JoinOnTitle.Size = new System.Drawing.Size(189, 32);
       this.JoinOnTitle.Text = "JoinOn Menu";
-      this.JoinOnTitle.Click += new System.EventHandler(this.JoinOnTitle_Click);
       // 
       // JoinOnMenuNew
       // 
@@ -943,14 +931,14 @@
       this.JoinColumnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinColumnGrid.ContextMenuStrip = this.JoinColumnMenu;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinColumnGrid.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinColumnGrid.DefaultCellStyle = dataGridViewCellStyle5;
       this.JoinColumnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinColumnGrid.LJCAllowSelectionChange = false;
@@ -987,8 +975,6 @@
             this.JoinColumnHelp});
       this.JoinColumnMenu.Name = "ViewMenu";
       this.JoinColumnMenu.Size = new System.Drawing.Size(228, 214);
-      this.JoinColumnMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.JoinColumnMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // JoinColumnTitle
       // 
@@ -996,7 +982,6 @@
       this.JoinColumnTitle.Name = "JoinColumnTitle";
       this.JoinColumnTitle.Size = new System.Drawing.Size(227, 32);
       this.JoinColumnTitle.Text = "JoinColumn Menu";
-      this.JoinColumnTitle.Click += new System.EventHandler(this.JoinColumnTitle_Click);
       // 
       // JoinColumnNew
       // 
@@ -1094,14 +1079,14 @@
       this.FilterGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.FilterGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.FilterGrid.ContextMenuStrip = this.FilterMenu;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FilterGrid.DefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.FilterGrid.DefaultCellStyle = dataGridViewCellStyle6;
       this.FilterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.FilterGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.FilterGrid.LJCAllowSelectionChange = false;
@@ -1138,8 +1123,6 @@
             this.FilterMenuHelp});
       this.FilterMenu.Name = "ViewMenu";
       this.FilterMenu.Size = new System.Drawing.Size(184, 214);
-      this.FilterMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.FilterMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // FilterTitle
       // 
@@ -1147,7 +1130,6 @@
       this.FilterTitle.Name = "FilterTitle";
       this.FilterTitle.Size = new System.Drawing.Size(183, 32);
       this.FilterTitle.Text = "Filter Menu";
-      this.FilterTitle.Click += new System.EventHandler(this.FilterTitle_Click);
       // 
       // FilterMenuNew
       // 
@@ -1236,14 +1218,14 @@
       this.ConditionSetGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ConditionSetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ConditionSetGrid.ContextMenuStrip = this.ConditionSetMenu;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ConditionSetGrid.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ConditionSetGrid.DefaultCellStyle = dataGridViewCellStyle7;
       this.ConditionSetGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ConditionSetGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ConditionSetGrid.LJCAllowSelectionChange = false;
@@ -1280,8 +1262,6 @@
             this.ConditionSetHelp});
       this.ConditionSetMenu.Name = "ViewMenu";
       this.ConditionSetMenu.Size = new System.Drawing.Size(238, 214);
-      this.ConditionSetMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ConditionSetMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ConditionSetTitle
       // 
@@ -1289,7 +1269,6 @@
       this.ConditionSetTitle.Name = "ConditionSetTitle";
       this.ConditionSetTitle.Size = new System.Drawing.Size(237, 32);
       this.ConditionSetTitle.Text = "ConditionSet Menu";
-      this.ConditionSetTitle.Click += new System.EventHandler(this.ConditionSetTitle_Click);
       // 
       // ConditionSetNew
       // 
@@ -1365,14 +1344,14 @@
       this.ConditionGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ConditionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ConditionGrid.ContextMenuStrip = this.ConditionMenu;
-      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ConditionGrid.DefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ConditionGrid.DefaultCellStyle = dataGridViewCellStyle8;
       this.ConditionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ConditionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ConditionGrid.LJCAllowSelectionChange = false;
@@ -1409,8 +1388,6 @@
             this.ConditionMenuHelp});
       this.ConditionMenu.Name = "ViewMenu";
       this.ConditionMenu.Size = new System.Drawing.Size(213, 214);
-      this.ConditionMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ConditionMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ConditionTitle
       // 
@@ -1418,7 +1395,6 @@
       this.ConditionTitle.Name = "ConditionTitle";
       this.ConditionTitle.Size = new System.Drawing.Size(212, 32);
       this.ConditionTitle.Text = "Condition Menu";
-      this.ConditionTitle.Click += new System.EventHandler(this.ConditionTitle_Click);
       // 
       // ConditionMenuNew
       // 
@@ -1493,14 +1469,14 @@
       this.OrderByGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.OrderByGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.OrderByGrid.ContextMenuStrip = this.OrderByMenu;
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.OrderByGrid.DefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.OrderByGrid.DefaultCellStyle = dataGridViewCellStyle9;
       this.OrderByGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.OrderByGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.OrderByGrid.LJCAllowSelectionChange = false;
@@ -1537,8 +1513,6 @@
             this.OrderByMenuHelp});
       this.OrderByMenu.Name = "ViewMenu";
       this.OrderByMenu.Size = new System.Drawing.Size(200, 214);
-      this.OrderByMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.OrderByMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // OrderByTitle
       // 
@@ -1546,7 +1520,6 @@
       this.OrderByTitle.Name = "OrderByTitle";
       this.OrderByTitle.Size = new System.Drawing.Size(199, 32);
       this.OrderByTitle.Text = "OrderBy Menu";
-      this.OrderByTitle.Click += new System.EventHandler(this.OrderByTitle_Click);
       // 
       // OrderByMenuNew
       // 
@@ -1611,14 +1584,14 @@
       this.DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.DataGrid.ContextMenuStrip = this.DataMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DataGrid.DefaultCellStyle = dataGridViewCellStyle10;
       this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.DataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.DataGrid.LJCAllowSelectionChange = false;
@@ -1655,8 +1628,6 @@
             this.DataMenuExit});
       this.DataMenu.Name = "ViewMenu";
       this.DataMenu.Size = new System.Drawing.Size(184, 214);
-      this.DataMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.DataMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // DataTitle
       // 
@@ -1664,7 +1635,6 @@
       this.DataTitle.Name = "DataTitle";
       this.DataTitle.Size = new System.Drawing.Size(183, 32);
       this.DataTitle.Text = "Data Menu";
-      this.DataTitle.Click += new System.EventHandler(this.DataTitle_Click);
       // 
       // DataMenuNew
       // 
@@ -1747,15 +1717,13 @@
             this.TableTitle,
             this.TableHelp});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(241, 101);
-      this.TableMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.TableMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
+      this.TableMenu.Size = new System.Drawing.Size(175, 68);
       // 
       // TableTitle
       // 
       this.TableTitle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.TableTitle.Name = "TableTitle";
-      this.TableTitle.Size = new System.Drawing.Size(240, 32);
+      this.TableTitle.Size = new System.Drawing.Size(174, 32);
       this.TableTitle.Text = "Table Menu";
       this.TableTitle.Click += new System.EventHandler(this.TableTitle_Click);
       // 
@@ -1787,22 +1755,19 @@
             this.DataConfigHelp});
       this.DataConfigMenu.Name = "DataConfigMenu";
       this.DataConfigMenu.Size = new System.Drawing.Size(225, 68);
-      this.DataConfigMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.DataConfigMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // DataConfigTitle
       // 
       this.DataConfigTitle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.DataConfigTitle.Name = "DataConfigTitle";
-      this.DataConfigTitle.Size = new System.Drawing.Size(240, 32);
+      this.DataConfigTitle.Size = new System.Drawing.Size(224, 32);
       this.DataConfigTitle.Text = "DataConfig Menu";
-      this.DataConfigTitle.Click += new System.EventHandler(this.DataConfigTitle_Click);
       // 
       // DataConfigHelp
       // 
       this.DataConfigHelp.Name = "DataConfigHelp";
       this.DataConfigHelp.ShortcutKeyDisplayString = "F1";
-      this.DataConfigHelp.Size = new System.Drawing.Size(240, 32);
+      this.DataConfigHelp.Size = new System.Drawing.Size(224, 32);
       this.DataConfigHelp.Text = "&Help";
       this.DataConfigHelp.Click += new System.EventHandler(this.DataConfigHelp_Click);
       // 

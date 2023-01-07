@@ -589,52 +589,11 @@ namespace LJCViewEditor
 
     #region Action Event Handlers
 
-    // Closes the menus.
-    private void DoMenuClose()
-    {
-      mAllowClose = true;
-      ViewMenu.Close();
-      JoinMenu.Close();
-      JoinOnMenu.Close();
-      JoinColumnMenu.Close();
-      FilterMenu.Close();
-      ConditionSetMenu.Close();
-      ConditionMenu.Close();
-      DataMenu.Close();
-    }
-
-    // Handles the menu keys.
-    private void Menu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-    {
-      if (e.KeyCode == Keys.Escape)
-      {
-        DoMenuClose();
-      }
-    }
-
-    // Handles the Menu Closing event.
-    private void Menu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
-    {
-      if (false == mAllowClose)
-      {
-        e.Cancel = true;
-      }
-      mAllowClose = false;
-    }
-    private bool mAllowClose;
-
     #region Form Controls
-
-    // Handles the Menu Title click.
-    private void DataConfigTitle_Click(object sender, EventArgs e)
-    {
-      DataConfigMenu.Focus();
-    }
 
     // Shows the Help page.
     private void DataConfigHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"DataConfig.html");
     }
@@ -642,13 +601,12 @@ namespace LJCViewEditor
     // Handles the Menu Title click.
     private void TableTitle_Click(object sender, EventArgs e)
     {
-      TableMenu.Focus();
+      //TableMenu.Focus();
     }
 
     // Shows the Help page.
     private void TableHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Table.html");
     }
@@ -656,72 +614,57 @@ namespace LJCViewEditor
 
     #region View Data
 
-    // Handles the Menu Title click.
-    private void ViewTitle_Click(object sender, EventArgs e)
-    {
-      ViewMenu.Focus();
-    }
-
     // Calls the New method.
     private void ViewMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoNewViewData();
     }
 
     // Calls the Edit method.
     private void ViewMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoEditViewData();
     }
 
     // Calls the Delete method.
     private void ViewMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoDeleteViewData();
     }
 
     // Calls the Refresh method.
     private void ViewMenuRefresh_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoRefreshViewData();
     }
 
     // Allows for display and edit of a file.
     private void ViewFileEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       FormCommon.ShellFile("NotePad.exe");
     }
 
     // Shows the Data.
     private void ViewMenuShowData_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoShowData();
     }
 
     // Shows the SQL statement.
     private void ViewMenuShowSQL_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoShowSQL();
     }
 
     // Show the DbRequest code.
     private void ViewMenuShowCode_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.ShowCode();
     }
 
     // Performs the Close function.
     private void ViewMenuExit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       SaveControlValues();
       Close();
     }
@@ -729,7 +672,6 @@ namespace LJCViewEditor
     // Shows the Help page.
     private void ViewMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"View\ViewList.html");
     }
@@ -737,7 +679,6 @@ namespace LJCViewEditor
     // Shows the About box.
     private void ViewMenuAbout_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewEditSplash splash = new ViewEditSplash();
       splash.ShowDialog();
     }
@@ -745,51 +686,39 @@ namespace LJCViewEditor
 
     #region Column
 
-    // Handles the Menu Title click.
-    private void ColumnTitle_Click(object sender, EventArgs e)
-    {
-      ColumnMenu.Focus();
-    }
-
     // Calls the AddAll method.
     private void ColumnMenuAdd_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ColumnGridClass.DoAddAll(TableCombo.Text.Trim());
     }
 
     // Calls the New method.
     private void ColumnMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ColumnGridClass.DoNewViewColumn();
     }
 
     // Calls the Edit method.
     private void ColumnMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ColumnGridClass.DoEditViewColumn();
     }
 
     // Calls the Delete method.
     private void ColumnMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ColumnGridClass.DoDeleteViewColumn();
     }
 
     // Calls the Refresh method.
     private void ColumnMenuRefresh_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ColumnGridClass.DoRefreshViewColumn();
     }
 
     // Shows the Help page.
     private void ColumnMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Column\ColumnList.html");
     }
@@ -797,37 +726,27 @@ namespace LJCViewEditor
 
     #region Join
 
-    // Handles the Menu Title click.
-    private void JoinTitle_Click(object sender, EventArgs e)
-    {
-      JoinMenu.Focus();
-    }
-
     // Calls the New method.
     private void JoinMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinGridClass.DoNewViewJoin();
     }
 
     // Calls the Edit method.
     private void JoinMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinGridClass.DoEditViewJoin();
     }
 
     // Calls the Delete method.
     private void JoinMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinGridClass.DoDeleteViewJoin();
     }
 
     // Shows the Help page.
     private void JoinMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Join\JoinList.html");
     }
@@ -835,37 +754,27 @@ namespace LJCViewEditor
 
     #region JoinOn
 
-    // Handles the Menu Title click.
-    private void JoinOnTitle_Click(object sender, EventArgs e)
-    {
-      JoinOnMenu.Focus();
-    }
-
     // Calls the New method.
     private void JoinOnMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinOnGridClass.DoNewViewJoinOn();
     }
 
     // Calls the Edit method.
     private void JoinOnMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinOnGridClass.DoEditViewJoinOn();
     }
 
     // Calls the Delete method.
     private void JoinOnMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinOnGridClass.DoDeleteViewJoinOn();
     }
 
     // Shows the Help page.
     private void JoinOnMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Join\JoinOnList.html");
     }
@@ -873,37 +782,27 @@ namespace LJCViewEditor
 
     #region JoinColumn
 
-    // Handles the Menu Title click.
-    private void JoinColumnTitle_Click(object sender, EventArgs e)
-    {
-      JoinColumnMenu.Focus();
-    }
-
     // Calls the New method.
     private void JoinColumnNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinColumnGridClass.DoNewViewJoinColumn();
     }
 
     // Calls the Edit method.
     private void JoinColumnEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinColumnGridClass.DoEditViewJoinColumn();
     }
 
     // Calls the Delete method.
     private void JoinColumnDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       JoinColumnGridClass.DoDeleteViewJoinColumn();
     }
 
     // Shows the Help page.
     private void JoinColumnHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Join\JoinColumnList.html");
     }
@@ -911,37 +810,27 @@ namespace LJCViewEditor
 
     #region Filter
 
-    // Handles the Menu Title click.
-    private void FilterTitle_Click(object sender, EventArgs e)
-    {
-      FilterMenu.Focus();
-    }
-
     // Calls the New method.
     private void FilterMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       FilterGridClass.DoNewViewFilter();
     }
 
     // Calls the Edit method.
     private void FilterMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       FilterGridClass.DoEditViewFilter();
     }
 
     // Calls the Delete method.
     private void FilterMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       FilterGridClass.DoDeleteViewFilter();
     }
 
     // Shows the Help page.
     private void FilterMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Filter\FilterList.html");
     }
@@ -949,37 +838,27 @@ namespace LJCViewEditor
 
     #region ConditionSet
 
-    // Handles the Menu Title click.
-    private void ConditionSetTitle_Click(object sender, EventArgs e)
-    {
-      ConditionSetMenu.Focus();
-    }
-
     // Calls the New method.
     private void ConditionSetNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionSetGridClass.DoNewViewConditionSet();
     }
 
     // Calls the Edit method.
     private void ConditionSetEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionSetGridClass.DoEditViewConditionSet();
     }
 
     // Calls the Delete method.
     private void ConditionSetDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionSetGridClass.DoDeleteViewConditionSet();
     }
 
     // Shows the Help page.
     private void ConditionSetHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Filter\ConditionSetList.html");
     }
@@ -987,37 +866,27 @@ namespace LJCViewEditor
 
     #region Condition
 
-    // Handles the Menu Title click.
-    private void ConditionTitle_Click(object sender, EventArgs e)
-    {
-      ConditionMenu.Focus();
-    }
-
     // Calls the New method.
     private void ConditionMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionGridClass.DoNewViewCondition();
     }
 
     // Calls the Edit method.
     private void ConditionMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionGridClass.DoEditViewCondition();
     }
 
     // Calls the Delete method.
     private void ConditionMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ConditionGridClass.DoDeleteViewCondition();
     }
 
     // Shows the Help page.
     private void ConditionMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Filter\ConditionList.html");
     }
@@ -1025,37 +894,27 @@ namespace LJCViewEditor
 
     #region OrderBy
 
-    // Handles the Menu Title click.
-    private void OrderByTitle_Click(object sender, EventArgs e)
-    {
-      OrderByMenu.Focus();
-    }
-
     // Calls the New method.
     private void OrderByMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       OrderByGridClass.DoNewViewOrderBy();
     }
 
     // Calls the Edit method.
     private void OrderByMenuEdit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       OrderByGridClass.DoEditViewOrderBy();
     }
 
     // Calls the Delete method.
     private void OrderByMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       OrderByGridClass.DoDeleteViewOrderBy();
     }
 
     // Shows the Help page.
     private void OrderByMenuHelp_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"OrderBy\OrderByList.html");
     }
@@ -1063,16 +922,9 @@ namespace LJCViewEditor
 
     #region Data
 
-    // Handles the Menu Title click.
-    private void DataTitle_Click(object sender, EventArgs e)
-    {
-      DataMenu.Focus();
-    }
-
     // Calls the New method.
     private void DataMenuNew_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       DataGridClass.DoNewData();
     }
 
@@ -1080,28 +932,24 @@ namespace LJCViewEditor
     private void DataMenuEdit_Click(object sender, EventArgs e)
     {
       DataGridClass.TableName = TableCombo.Text.Trim();
-      DoMenuClose();
       DataGridClass.DoEditData();
     }
 
     // Calls the Delete method.
     private void DataMenuDelete_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       DataGridClass.DoDeleteData();
     }
 
     // Calls the Refresh method.
     private void DataMenuRefresh_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       ViewGridClass.DoShowData();
     }
 
     // Performs the Close function.
     private void DataMenuExit_Click(object sender, EventArgs e)
     {
-      DoMenuClose();
       SaveControlValues();
       Close();
     }
@@ -1178,7 +1026,6 @@ namespace LJCViewEditor
     private void ViewGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      ViewGrid.Select();
       if (e.Button == MouseButtons.Right
         && ViewGrid.LJCIsDifferentRow(e))
       {
@@ -1260,7 +1107,6 @@ namespace LJCViewEditor
     private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      ColumnGrid.Select();
       if (e.Button == MouseButtons.Right
         && ColumnGrid.LJCIsDifferentRow(e))
       {
@@ -1337,7 +1183,6 @@ namespace LJCViewEditor
     private void JoinGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      JoinGrid.Select();
       if (e.Button == MouseButtons.Right
         && JoinGrid.LJCIsDifferentRow(e))
       {
@@ -1414,7 +1259,6 @@ namespace LJCViewEditor
     private void JoinOnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      JoinOnGrid.Select();
       if (e.Button == MouseButtons.Right
         && JoinOnGrid.LJCIsDifferentRow(e))
       {
@@ -1491,7 +1335,6 @@ namespace LJCViewEditor
     private void JoinColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      JoinColumnGrid.Select();
       if (e.Button == MouseButtons.Right
         && JoinColumnGrid.LJCIsDifferentRow(e))
       {
@@ -1568,7 +1411,6 @@ namespace LJCViewEditor
     private void FilterGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      FilterGrid.Select();
       if (e.Button == MouseButtons.Right
         && FilterGrid.LJCIsDifferentRow(e))
       {
@@ -1645,7 +1487,6 @@ namespace LJCViewEditor
     private void ConditionSetGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      ConditionSetGrid.Select();
       if (e.Button == MouseButtons.Right
         && ConditionSetGrid.LJCIsDifferentRow(e))
       {
@@ -1722,7 +1563,6 @@ namespace LJCViewEditor
     private void ConditionGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      ConditionGrid.Select();
       if (e.Button == MouseButtons.Right
         && ConditionGrid.LJCIsDifferentRow(e))
       {
@@ -1799,7 +1639,6 @@ namespace LJCViewEditor
     private void OrderByGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      OrderByGrid.Select();
       if (e.Button == MouseButtons.Right
         && OrderByGrid.LJCIsDifferentRow(e))
       {
@@ -1859,7 +1698,6 @@ namespace LJCViewEditor
     private void DataGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      DataGrid.Select();
       if (e.Button == MouseButtons.Right
         && DataGrid.LJCIsDifferentRow(e))
       {
