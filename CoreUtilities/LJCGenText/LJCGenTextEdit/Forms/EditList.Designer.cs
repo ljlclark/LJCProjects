@@ -1,33 +1,33 @@
 ﻿namespace LJCGenTextEdit
 {
-	partial class EditList
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+  partial class EditList
+  {
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
 
-		#region Windows Form Designer generated code
+    #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditList));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -247,8 +247,8 @@
       // TemplateRichText
       // 
       this.TemplateRichText.AcceptsTab = true;
-      this.TemplateRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.TemplateRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.TemplateRichText.ContextMenuStrip = this.TemplateMenu;
       this.TemplateRichText.Location = new System.Drawing.Point(-2, 38);
@@ -276,8 +276,6 @@
             this.TemplateAbout});
       this.TemplateMenu.Name = "TemplateMenu";
       this.TemplateMenu.Size = new System.Drawing.Size(217, 278);
-      this.TemplateMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.TemplateMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // TemplateTitle
       // 
@@ -285,7 +283,6 @@
       this.TemplateTitle.Name = "TemplateTitle";
       this.TemplateTitle.Size = new System.Drawing.Size(216, 32);
       this.TemplateTitle.Text = "Template Menu";
-      this.TemplateTitle.Click += new System.EventHandler(this.TemplateTitle_Click);
       // 
       // TemplateFileEdit
       // 
@@ -430,8 +427,8 @@
       // 
       // SectionSplit
       // 
-      this.SectionSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.SectionSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionSplit.Location = new System.Drawing.Point(0, 38);
       this.SectionSplit.Name = "SectionSplit";
@@ -452,7 +449,7 @@
       // 
       // SectionHeading
       // 
-      this.SectionHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.SectionHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.SectionHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -466,7 +463,7 @@
       // 
       // SectionToolPanel
       // 
-      this.SectionToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.SectionToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.SectionToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -542,8 +539,8 @@
       this.SectionGrid.AllowUserToAddRows = false;
       this.SectionGrid.AllowUserToDeleteRows = false;
       this.SectionGrid.AllowUserToResizeRows = false;
-      this.SectionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.SectionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.SectionGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -599,8 +596,6 @@
             this.SectionMenuAbout});
       this.SectionMenu.Name = "mFacilityMenu";
       this.SectionMenu.Size = new System.Drawing.Size(217, 386);
-      this.SectionMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.SectionMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // SectionTitle
       // 
@@ -608,7 +603,6 @@
       this.SectionTitle.Name = "SectionTitle";
       this.SectionTitle.Size = new System.Drawing.Size(216, 32);
       this.SectionTitle.Text = "Section Menu";
-      this.SectionTitle.Click += new System.EventHandler(this.SectionTitle_Click);
       // 
       // SectionMenuNew
       // 
@@ -712,8 +706,8 @@
       // 
       // ItemSplit
       // 
-      this.ItemSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.ItemSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemSplit.Location = new System.Drawing.Point(0, 1);
       this.ItemSplit.Name = "ItemSplit";
@@ -736,7 +730,7 @@
       // 
       // ItemHeading
       // 
-      this.ItemHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.ItemHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.ItemHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -750,7 +744,7 @@
       // 
       // ItemToolPanel
       // 
-      this.ItemToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.ItemToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.ItemToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -826,8 +820,8 @@
       this.ItemGrid.AllowUserToAddRows = false;
       this.ItemGrid.AllowUserToDeleteRows = false;
       this.ItemGrid.AllowUserToResizeRows = false;
-      this.ItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.ItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ItemGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -881,8 +875,6 @@
             this.ItemMenuHelp});
       this.ItemMenu.Name = "mFacilityMenu";
       this.ItemMenu.Size = new System.Drawing.Size(217, 322);
-      this.ItemMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ItemMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ItemTitle
       // 
@@ -890,7 +882,6 @@
       this.ItemTitle.Name = "ItemTitle";
       this.ItemTitle.Size = new System.Drawing.Size(216, 32);
       this.ItemTitle.Text = "Item Menu";
-      this.ItemTitle.Click += new System.EventHandler(this.ItemTitle_Click);
       // 
       // ItemMenuNew
       // 
@@ -980,7 +971,7 @@
       // 
       // ReplacementHeading
       // 
-      this.ReplacementHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.ReplacementHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.ReplacementHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -994,7 +985,7 @@
       // 
       // ReplacementToolPanel
       // 
-      this.ReplacementToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.ReplacementToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.ReplacementToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1070,8 +1061,8 @@
       this.ReplacementGrid.AllowUserToAddRows = false;
       this.ReplacementGrid.AllowUserToDeleteRows = false;
       this.ReplacementGrid.AllowUserToResizeRows = false;
-      this.ReplacementGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.ReplacementGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ReplacementGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -1125,8 +1116,6 @@
             this.ReplacementMenuHelp});
       this.ReplacementMenu.Name = "mFacilityMenu";
       this.ReplacementMenu.Size = new System.Drawing.Size(236, 322);
-      this.ReplacementMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.ReplacementMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // ReplacementTitle
       // 
@@ -1134,7 +1123,6 @@
       this.ReplacementTitle.Name = "ReplacementTitle";
       this.ReplacementTitle.Size = new System.Drawing.Size(235, 32);
       this.ReplacementTitle.Text = "Replacement Menu";
-      this.ReplacementTitle.Click += new System.EventHandler(this.ReplacementTitle_Click);
       // 
       // ReplacementMenuNew
       // 
@@ -1238,8 +1226,8 @@
       // OutputRichText
       // 
       this.OutputRichText.AcceptsTab = true;
-      this.OutputRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.OutputRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.OutputRichText.ContextMenuStrip = this.OutputMenu;
       this.OutputRichText.Location = new System.Drawing.Point(-2, 38);
@@ -1265,8 +1253,6 @@
             this.OutputHelp});
       this.OutputMenu.Name = "OutputMenu";
       this.OutputMenu.Size = new System.Drawing.Size(241, 273);
-      this.OutputMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.Menu_Closing);
-      this.OutputMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Menu_PreviewKeyDown);
       // 
       // OutputTitle
       // 
@@ -1274,7 +1260,6 @@
       this.OutputTitle.Name = "OutputTitle";
       this.OutputTitle.Size = new System.Drawing.Size(240, 32);
       this.OutputTitle.Text = "Output Menu";
-      this.OutputTitle.Click += new System.EventHandler(this.OutputTitle_Click);
       // 
       // OutputEncode
       // 
@@ -1435,122 +1420,122 @@
       this.TileTabsMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
-		}
+    }
 
-		#endregion
+    #endregion
 
-		private System.Windows.Forms.SplitContainer MainSplit;
-		private LJCWinFormControls.LJCTabControl MainTabs;
-		private System.Windows.Forms.TabPage TemplateTab;
-		private System.Windows.Forms.TabPage DataTab;
-		private LJCWinFormControls.LJCTabControl TileTabs;
-		private System.Windows.Forms.SplitContainer SectionSplit;
-		private System.Windows.Forms.SplitContainer ItemSplit;
-		private System.Windows.Forms.TabPage OutputTab;
-		internal LJCWinFormControls.LJCDataGrid SectionGrid;
-		internal LJCWinFormControls.LJCDataGrid ItemGrid;
-		internal LJCWinFormControls.LJCDataGrid ReplacementGrid;
-		internal System.Windows.Forms.TextBox DataXMLTextbox;
-		private System.Windows.Forms.Label DataXMLLabel;
-		private System.Windows.Forms.Button DataXMLButton;
-		private System.Windows.Forms.ImageList ButtonImages;
-		private System.Windows.Forms.ContextMenuStrip SectionMenu;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuNew;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuEdit;
-		private System.Windows.Forms.ToolStripSeparator AddressDeleteSeparator;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuDelete;
-		private System.Windows.Forms.ToolStripSeparator AddressRefreshSeparator;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuRefresh;
-		private System.Windows.Forms.ToolStripSeparator AddressCloseSeparator;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuExit;
-		private System.Windows.Forms.ContextMenuStrip ItemMenu;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuNew;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuEdit;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuDelete;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuRefresh;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuExit;
-		private System.Windows.Forms.ContextMenuStrip ReplacementMenu;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuNew;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuEdit;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuDelete;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuRefresh;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuExit;
-		private LJCWinFormControls.LJCHeaderBox ItemHeading;
-		private System.Windows.Forms.Panel ItemToolPanel;
-		private System.Windows.Forms.Label ItemCounter;
-		private System.Windows.Forms.ToolStrip ItemTool;
-		private System.Windows.Forms.ToolStripButton ItemToolNew;
-		private System.Windows.Forms.ToolStripButton ItemToolEdit;
-		private System.Windows.Forms.ToolStripButton ItemToolDelete;
-		private LJCWinFormControls.LJCHeaderBox SectionHeading;
-		private System.Windows.Forms.Panel SectionToolPanel;
-		private System.Windows.Forms.Label SectionCounter;
-		private System.Windows.Forms.ToolStrip SectionTool;
-		private System.Windows.Forms.ToolStripButton SectionToolNew;
-		private System.Windows.Forms.ToolStripButton SectionToolEdit;
-		private System.Windows.Forms.ToolStripButton SectionToolDelete;
-		private LJCWinFormControls.LJCHeaderBox ReplacementHeading;
-		private System.Windows.Forms.Panel ReplacementToolPanel;
-		private System.Windows.Forms.Label ReplacementCounter;
-		private System.Windows.Forms.ToolStrip ReplacementTool;
-		private System.Windows.Forms.ToolStripButton ReplacementToolNew;
-		private System.Windows.Forms.ToolStripButton ReplacementToolEdit;
-		private System.Windows.Forms.ToolStripButton ReplacementToolDelete;
-		private System.Windows.Forms.Button TemplateButton;
-		internal System.Windows.Forms.TextBox TemplateTextbox;
-		private System.Windows.Forms.Label TemplateLabel;
-		internal LJCWinFormControls.LJCRtControl TemplateRichText;
-		internal LJCWinFormControls.LJCRtControl OutputRichText;
-		private System.Windows.Forms.Button OutputButton;
-		internal System.Windows.Forms.TextBox OutputTextbox;
-		private System.Windows.Forms.Label OutputLabel;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuSave;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuGenerate;
-		private System.Windows.Forms.ContextMenuStrip MainTabsMenu;
-		private System.Windows.Forms.ToolStripMenuItem MainTabsMove;
-		private System.Windows.Forms.ContextMenuStrip TileTabsMenu;
-		private System.Windows.Forms.ToolStripMenuItem TileTabsMove;
-		private System.Windows.Forms.ContextMenuStrip TemplateMenu;
-		private System.Windows.Forms.ToolStripMenuItem TemplateGenerate;
-		private System.Windows.Forms.ToolStripMenuItem TemplateSave;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-		private System.Windows.Forms.ToolStripMenuItem TemplateExit;
-		private System.Windows.Forms.ContextMenuStrip OutputMenu;
-		private System.Windows.Forms.ToolStripMenuItem OutputGenerate;
-		private System.Windows.Forms.ToolStripMenuItem OutputSave;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-		private System.Windows.Forms.ToolStripMenuItem OutputExit;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuGenerate;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuSave;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementGenerate;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementSave;
-		private System.Windows.Forms.ToolStripMenuItem TemplateAbout;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuAbout;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-		private System.Windows.Forms.ToolStripMenuItem TemplateMenuSections;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuCreateData;
-		private System.Windows.Forms.ToolStripMenuItem TemplateHelp;
-		private System.Windows.Forms.ToolStripMenuItem SectionMenuHelp;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-		private System.Windows.Forms.ToolStripMenuItem ItemMenuHelp;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
-		private System.Windows.Forms.ToolStripMenuItem ReplacementMenuHelp;
-		private System.Windows.Forms.ToolStripMenuItem OutputHelp;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-		private System.Windows.Forms.ToolStripMenuItem OutputEncode;
-		private System.Windows.Forms.ToolStripMenuItem OutputDecode;
-		private System.Windows.Forms.ToolStripMenuItem TemplateFileEdit;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+    private System.Windows.Forms.SplitContainer MainSplit;
+    private LJCWinFormControls.LJCTabControl MainTabs;
+    private System.Windows.Forms.TabPage TemplateTab;
+    private System.Windows.Forms.TabPage DataTab;
+    private LJCWinFormControls.LJCTabControl TileTabs;
+    private System.Windows.Forms.SplitContainer SectionSplit;
+    private System.Windows.Forms.SplitContainer ItemSplit;
+    private System.Windows.Forms.TabPage OutputTab;
+    internal LJCWinFormControls.LJCDataGrid SectionGrid;
+    internal LJCWinFormControls.LJCDataGrid ItemGrid;
+    internal LJCWinFormControls.LJCDataGrid ReplacementGrid;
+    internal System.Windows.Forms.TextBox DataXMLTextbox;
+    private System.Windows.Forms.Label DataXMLLabel;
+    private System.Windows.Forms.Button DataXMLButton;
+    private System.Windows.Forms.ImageList ButtonImages;
+    private System.Windows.Forms.ContextMenuStrip SectionMenu;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuNew;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuEdit;
+    private System.Windows.Forms.ToolStripSeparator AddressDeleteSeparator;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuDelete;
+    private System.Windows.Forms.ToolStripSeparator AddressRefreshSeparator;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuRefresh;
+    private System.Windows.Forms.ToolStripSeparator AddressCloseSeparator;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuExit;
+    private System.Windows.Forms.ContextMenuStrip ItemMenu;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuNew;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuRefresh;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuExit;
+    private System.Windows.Forms.ContextMenuStrip ReplacementMenu;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuNew;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuRefresh;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuExit;
+    private LJCWinFormControls.LJCHeaderBox ItemHeading;
+    private System.Windows.Forms.Panel ItemToolPanel;
+    private System.Windows.Forms.Label ItemCounter;
+    private System.Windows.Forms.ToolStrip ItemTool;
+    private System.Windows.Forms.ToolStripButton ItemToolNew;
+    private System.Windows.Forms.ToolStripButton ItemToolEdit;
+    private System.Windows.Forms.ToolStripButton ItemToolDelete;
+    private LJCWinFormControls.LJCHeaderBox SectionHeading;
+    private System.Windows.Forms.Panel SectionToolPanel;
+    private System.Windows.Forms.Label SectionCounter;
+    private System.Windows.Forms.ToolStrip SectionTool;
+    private System.Windows.Forms.ToolStripButton SectionToolNew;
+    private System.Windows.Forms.ToolStripButton SectionToolEdit;
+    private System.Windows.Forms.ToolStripButton SectionToolDelete;
+    private LJCWinFormControls.LJCHeaderBox ReplacementHeading;
+    private System.Windows.Forms.Panel ReplacementToolPanel;
+    private System.Windows.Forms.Label ReplacementCounter;
+    private System.Windows.Forms.ToolStrip ReplacementTool;
+    private System.Windows.Forms.ToolStripButton ReplacementToolNew;
+    private System.Windows.Forms.ToolStripButton ReplacementToolEdit;
+    private System.Windows.Forms.ToolStripButton ReplacementToolDelete;
+    private System.Windows.Forms.Button TemplateButton;
+    internal System.Windows.Forms.TextBox TemplateTextbox;
+    private System.Windows.Forms.Label TemplateLabel;
+    internal LJCWinFormControls.LJCRtControl TemplateRichText;
+    internal LJCWinFormControls.LJCRtControl OutputRichText;
+    private System.Windows.Forms.Button OutputButton;
+    internal System.Windows.Forms.TextBox OutputTextbox;
+    private System.Windows.Forms.Label OutputLabel;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuSave;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuGenerate;
+    private System.Windows.Forms.ContextMenuStrip MainTabsMenu;
+    private System.Windows.Forms.ToolStripMenuItem MainTabsMove;
+    private System.Windows.Forms.ContextMenuStrip TileTabsMenu;
+    private System.Windows.Forms.ToolStripMenuItem TileTabsMove;
+    private System.Windows.Forms.ContextMenuStrip TemplateMenu;
+    private System.Windows.Forms.ToolStripMenuItem TemplateGenerate;
+    private System.Windows.Forms.ToolStripMenuItem TemplateSave;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+    private System.Windows.Forms.ToolStripMenuItem TemplateExit;
+    private System.Windows.Forms.ContextMenuStrip OutputMenu;
+    private System.Windows.Forms.ToolStripMenuItem OutputGenerate;
+    private System.Windows.Forms.ToolStripMenuItem OutputSave;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.ToolStripMenuItem OutputExit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuGenerate;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuSave;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementGenerate;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementSave;
+    private System.Windows.Forms.ToolStripMenuItem TemplateAbout;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuAbout;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+    private System.Windows.Forms.ToolStripMenuItem TemplateMenuSections;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuCreateData;
+    private System.Windows.Forms.ToolStripMenuItem TemplateHelp;
+    private System.Windows.Forms.ToolStripMenuItem SectionMenuHelp;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+    private System.Windows.Forms.ToolStripMenuItem ItemMenuHelp;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+    private System.Windows.Forms.ToolStripMenuItem ReplacementMenuHelp;
+    private System.Windows.Forms.ToolStripMenuItem OutputHelp;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+    private System.Windows.Forms.ToolStripMenuItem OutputEncode;
+    private System.Windows.Forms.ToolStripMenuItem OutputDecode;
+    private System.Windows.Forms.ToolStripMenuItem TemplateFileEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     private System.Windows.Forms.ToolStripMenuItem SectionTitle;
     private System.Windows.Forms.ToolStripMenuItem ItemTitle;
     private System.Windows.Forms.ToolStripMenuItem ReplacementTitle;
