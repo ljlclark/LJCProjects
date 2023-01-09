@@ -10,7 +10,7 @@ namespace LJCRegionManager
     // Initializes an object instance.
     internal ValuesRegion()
     {
-      StandardSettings = new StandardSettings();
+      StandardSettings = new StandardUISettings();
       StandardSettings.SetProperties("LJCRegionManager.exe.config");
     }
 
@@ -20,7 +20,7 @@ namespace LJCRegionManager
     internal static ValuesRegion Instance { get; } = new ValuesRegion();
 
     // Gets or sets the StandardSettings value.
-    internal StandardSettings StandardSettings { get; set; }
+    internal StandardUISettings StandardSettings { get; set; }
     #endregion
   }
 }

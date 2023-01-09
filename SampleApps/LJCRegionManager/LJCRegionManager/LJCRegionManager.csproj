@@ -113,8 +113,6 @@
     <Compile Include="Forms\Region\RegionModule.Designer.cs">
       <DependentUpon>RegionModule.cs</DependentUpon>
     </Compile>
-    <Content Include="bin\Debug\ConnectionTemplates.xml" />
-    <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\MySQLScript\2RegionTables.sql" />
     <Content Include="bin\Debug\MySQLScript\3RegionData.sql" />
     <Content Include="bin\Debug\MySQLScript\4ProvinceData.sql" />

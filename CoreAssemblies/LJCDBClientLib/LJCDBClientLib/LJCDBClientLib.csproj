@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="DbManager.cs" />
     <Compile Include="ManagerCommon.cs" />
-    <Compile Include="StandardSettings.cs" />
     <Compile Include="ChangedNames.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="DbServiceRef.cs" />

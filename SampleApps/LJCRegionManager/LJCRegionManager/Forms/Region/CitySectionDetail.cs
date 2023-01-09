@@ -318,7 +318,7 @@ namespace LJCRegionManager
 
     #region Class Data
 
-    private StandardSettings mSettings;
+    private StandardUISettings mSettings;
     private CitySectionManager mCitySectionManager;
 
     /// <summary>The Change event.</summary>

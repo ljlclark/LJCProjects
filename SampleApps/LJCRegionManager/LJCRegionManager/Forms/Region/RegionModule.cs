@@ -2123,7 +2123,7 @@ namespace LJCRegionManager
 
     #region Class Data
 
-    private StandardSettings mSettings;
+    private StandardUISettings mSettings;
     private string mControlValuesFileName;
     #endregion
   }
