@@ -41,8 +41,8 @@ set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
 set src=LJCDocGroupEditor\LJCDocGroupEditor\%bin%
-rem copy %utilRoot%%src%\LJCDocGroupEditor.exe %to%
-rem copy %utilRoot%%src%\LJCDocGroupEditor.exe.config %to%
+copy %utilRoot%%src%\LJCDocGroupEditor.exe %to%
+copy %utilRoot%%src%\LJCDocGroupEditor.exe.config %to%
 
 set src=LJCDocLib\LJCDocLibDAL\%bin%
 copy %utilRoot%%src%\LJCDocLibDAL.dll %to%

@@ -27,10 +27,10 @@ del %Solution%\%Project%\%bin%\*.log
 del %Solution%\%Project%\%bin%\LJCDocGroupEditor.exe
 del %Solution%\%Project%\%bin%\LJCDocGenLib.xml
 del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
-del %Solution%\%Project%\%bin%\LJCDocLib.xml
+del %Solution%\%Project%\%bin%\LJCDocObjLib.log
 del %Solution%\%Project%\%bin%\LJCDocObjLib.xml
 del %Solution%\%Project%\%bin%\LJCDocXMLObjLib.xml
-del %Solution%\%Project%\%bin%\LJCGenTextLib.xml
+del %Solution%\%Project%\%bin%\Missing.txt
 
 set Project=LJCDocGenLib
 set File=LJCDocGenLib
