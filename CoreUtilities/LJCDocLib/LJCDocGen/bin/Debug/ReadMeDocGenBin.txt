@@ -7,17 +7,10 @@ LJCCodeDoc.cmd - Generates the full LJCProjects HTML Doc using the groups in   |
 
 LJCCodeDoc.xml - The full LJCProjects HTML Doc groups.
 
-LJCCodeDocRelease.cmd - Generates the Release HTML Doc using the
-groups in "LJCCodeDocRelease.xml".
-
-LJCCodeDocRelease.xml - The Release HTML Doc groups.
-
 LJCDocGen.exe - The program to generate HTML Doc.
 
 LJCDocGenLib.dll - The HTML Doc generation library code. Referenced by
 LJCDocGen.
-
-LJCDocGroupEditor.exe - The HTML Doc Groups editor.
 
 LJCDocLibDAL.dll - The Code HTML Documentation Generator Data Access Layer
 library. Referenced by LJCDocGen, LJCDocGenLib and LJCDocObjLib.

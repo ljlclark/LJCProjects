@@ -510,7 +510,7 @@
       <DocGenAssembly>
         <Name>LJCCodeLineCounter</Name>
         <Description>The Code Line Counter console application.</Description>
-        <FileSpec>..\..\..\..\..\CoreUtilitis\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml</FileSpec>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml</FileSpec>
         <Sequence>1</Sequence>
       </DocGenAssembly>
     </DocGenAssemblies>
