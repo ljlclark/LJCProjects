@@ -429,7 +429,7 @@ namespace LJCViewEditor
 		#region Class Data
 
 		private DataTypeManager mDataTypeManager;
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private DbColumns mTableDbColumns;
 		private ViewJoinColumnManager mViewJoinColumnManager;
 

@@ -280,7 +280,7 @@ namespace LJCUnitMeasure
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private string mControlValuesFileName;
 		private UnitSystemComboCode mUnitSystemComboCode;
 		private UnitCategoryComboCode mUnitCategoryComboCode;

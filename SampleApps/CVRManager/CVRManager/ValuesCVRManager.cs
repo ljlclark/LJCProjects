@@ -13,7 +13,7 @@ namespace CVRManager
 		// Initializes an object instance.
 		internal ValuesCVRManager()
 		{
-			StandardSettings = new StandardSettings();
+			StandardSettings = new StandardUISettings();
 			StandardSettings.SetProperties("CVRManager.exe.config");
 
 			string value;
@@ -71,8 +71,8 @@ namespace CVRManager
 		internal static ValuesCVRManager Instance { get; }
 			= new ValuesCVRManager();
 
-		// Gets or sets the StandardSettings value.
-		internal StandardSettings StandardSettings { get; set; }
+		// Gets or sets the StandardUISettings value.
+		internal StandardUISettings StandardSettings { get; set; }
 
 		// Gets or sets the Temperature Low value.
 		internal decimal TemperatureLowValue { get; set; }

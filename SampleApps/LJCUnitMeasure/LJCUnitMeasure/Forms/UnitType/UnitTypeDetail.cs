@@ -320,7 +320,7 @@ namespace LJCUnitMeasure
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 
 		/// <summary>The Change event.</summary>
 		public event EventHandler<EventArgs> LJCChange;

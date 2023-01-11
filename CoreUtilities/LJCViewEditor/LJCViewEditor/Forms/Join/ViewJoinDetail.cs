@@ -402,7 +402,7 @@ namespace LJCViewEditor
 		#region Class Data
 
 		// Singleton values.
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private ViewJoinManager mViewJoinManager;
 		private ViewDataManager mViewDataManager;
 		private ViewTableManager mViewTableManager;

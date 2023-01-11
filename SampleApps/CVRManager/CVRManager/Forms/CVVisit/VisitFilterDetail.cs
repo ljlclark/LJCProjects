@@ -222,7 +222,7 @@ namespace CVRManager
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		#endregion
 	}
 }

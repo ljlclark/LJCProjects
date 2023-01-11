@@ -637,7 +637,7 @@ namespace CVRManager
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private string mSettingTemperatureUnitCode;
 		private decimal mSettingTemperatureHighValue;
 		private decimal mSettingTemperatureLowValue;

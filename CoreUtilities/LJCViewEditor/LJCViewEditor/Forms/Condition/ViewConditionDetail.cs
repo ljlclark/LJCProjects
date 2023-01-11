@@ -369,7 +369,7 @@ namespace LJCViewEditor
 
 		// Singleton values.
 		private DbColumns mFirstValueColumns;
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private ViewHelper mViewHelper;
 		private ViewConditionManager mViewConditionManager;
 

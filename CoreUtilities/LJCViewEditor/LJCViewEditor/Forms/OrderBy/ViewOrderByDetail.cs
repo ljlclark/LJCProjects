@@ -312,7 +312,7 @@ namespace LJCViewEditor
 		#region Class Data
 
 		// Singleton values.
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private ViewOrderByManager mViewOrderByManager;
 		private DbColumns mTableColumns;
 

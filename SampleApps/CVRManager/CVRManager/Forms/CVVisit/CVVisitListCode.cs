@@ -299,7 +299,7 @@ namespace CVRManager
 		internal CVRManagers Managers { get; set; }
 
 		// The Settings object.
-		internal StandardSettings Settings { get; set; }
+		internal StandardUISettings Settings { get; set; }
 		#endregion
 
 		#region Class Data

@@ -448,7 +448,7 @@ namespace CVRManager
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 
 		// Foreign Keys
 		private int mCityID;

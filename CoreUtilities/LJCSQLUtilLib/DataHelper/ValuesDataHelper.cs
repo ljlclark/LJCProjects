@@ -14,7 +14,7 @@ namespace DataHelper
 		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
 		public ValuesDataHelper()
 		{
-			StandardSettings = new StandardSettings();
+			StandardSettings = new StandardUISettings();
 			StandardSettings.SetProperties("DataHelper.exe.config");
 		}
 		#endregion
@@ -25,7 +25,7 @@ namespace DataHelper
 		internal static ValuesDataHelper Instance { get; } = new ValuesDataHelper();
 
 		// Gets or sets the StandardSettings value.
-		internal StandardSettings StandardSettings { get; set; }
+		internal StandardUISettings StandardSettings { get; set; }
 		#endregion
 	}
 }

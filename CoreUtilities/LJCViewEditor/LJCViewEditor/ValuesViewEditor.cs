@@ -14,7 +14,7 @@ namespace LJCViewEditor
 		// Initializes an object instance.
 		internal ValuesViewEditor()
 		{
-			StandardSettings = new StandardSettings();
+			StandardSettings = new StandardUISettings();
 			StandardSettings.SetProperties("LJCViewEditor.exe.config");
 		}
 		#endregion
@@ -25,7 +25,7 @@ namespace LJCViewEditor
 		internal static ValuesViewEditor Instance { get; } = new ValuesViewEditor();
 
 		// Gets or sets the StandardSettings value.
-		internal StandardSettings StandardSettings { get; set; }
+		internal StandardUISettings StandardSettings { get; set; }
 		#endregion
 	}
 }

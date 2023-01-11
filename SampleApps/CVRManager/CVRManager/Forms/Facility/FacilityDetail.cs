@@ -287,7 +287,7 @@ namespace CVRManager
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 
 		/// <summary>The Change event.</summary>
 		internal event EventHandler<EventArgs> LJCChange;

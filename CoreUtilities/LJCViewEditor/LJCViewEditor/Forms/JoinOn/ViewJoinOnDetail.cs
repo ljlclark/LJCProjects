@@ -387,7 +387,7 @@ namespace LJCViewEditor
 
 		private DbColumns mJoinOnTableColumns;
 		private DbColumns mJoinTableColumns;
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		//private ViewDataManager mViewDataManager;
 		private ViewHelper mViewHelper;
 		//private ViewJoinManager mViewJoinManager;

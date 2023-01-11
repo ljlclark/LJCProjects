@@ -13,7 +13,7 @@ namespace LJCUnitMeasure
 		{
 			string fileSpec = "LJCUnitMeasure.exe.config";
 
-			StandardSettings = new StandardSettings();
+			StandardSettings = new StandardUISettings();
 			StandardSettings.SetProperties(fileSpec);
 
 			//AppSettings appSettings = new AppSettings(fileSpec);
@@ -25,7 +25,7 @@ namespace LJCUnitMeasure
 		internal static ValuesUnitMeasure Instance { get; } = new ValuesUnitMeasure();
 
 		// Gets or sets the StandardSettings value.
-		internal StandardSettings StandardSettings { get; set; }
+		internal StandardUISettings StandardSettings { get; set; }
 		#endregion
 	}
 }

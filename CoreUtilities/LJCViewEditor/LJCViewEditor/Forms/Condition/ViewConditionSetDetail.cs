@@ -301,7 +301,7 @@ namespace LJCViewEditor
 		#region Class Data
 
 		// Singleton values.
-		StandardSettings mSettings;
+		StandardUISettings mSettings;
 		private ViewConditionSetManager mViewConditionSetManager;
 
 		// The Change event.

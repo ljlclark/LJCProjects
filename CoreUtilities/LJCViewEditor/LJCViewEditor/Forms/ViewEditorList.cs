@@ -1799,7 +1799,7 @@ namespace LJCViewEditor
     private string mControlValuesFileName;
     internal InfoWindow mInfoWindow;
     private string mPrevConfigName;
-    private StandardSettings mSettings;
+    private StandardUISettings mSettings;
     private readonly string mStartupTableName;
     #endregion
   }

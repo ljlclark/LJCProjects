@@ -386,7 +386,7 @@ namespace LJCUnitMeasure
 
 		#region Class Data
 
-		private StandardSettings mSettings;
+		private StandardUISettings mSettings;
 		private UnitSystemComboCode mUnitSystemComboCode;
 		private UnitCategoryComboCode mUnitCategoryComboCode;
 
