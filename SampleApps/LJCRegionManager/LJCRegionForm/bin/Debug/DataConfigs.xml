@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DataConfig>
-    <Name>LJCData</Name>
-    <DbServer>DESKTOP-PDPBE34</DbServer>
-    <Database>LJCData</Database>
-    <ConnectionTypeName>SQLServer</ConnectionTypeName>
-  </DataConfig>
-</DataConfigs>
