@@ -16,11 +16,75 @@ namespace LJCDocLibDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DocGenGroupManager()
     {
-      FileName = "DocGenGroups.xml";
+      FileName = "LJCCodeDoc.xml";
     }
     #endregion
 
     #region Retrieve/Load Methods
+
+    #region Group
+
+    // Deletes a DocGenGroup and all associated DocGenAssemblies.
+    /// <include path='items/DeleteGroup/*' file='Doc/DocGenGroupManager.xml'/>
+    public void DeleteGroup(DocGenGroup keyObject)
+    {
+      if (keyObject != null && keyObject.Name != null)
+      {
+        if (null == DocGenGroups)
+        {
+          Load();
+        }
+
+        DocGenGroup searchRecord = DocGenGroups.LJCSearchName(keyObject.Name);
+        if (searchRecord != null)
+        {
+          DocGenGroups.Remove(searchRecord);
+        }
+      }
+    }
+
+    // Loads a collection of data records from the XML file.
+    /// <include path='items/Load/*' file='Doc/DocGenGroupManager.xml'/>
+    public DocGenGroups Load(string xmlFileName = null)
+    {
+      DocGenGroups retValue;
+
+      if (false == string.IsNullOrWhiteSpace(xmlFileName))
+      {
+        FileName = xmlFileName;
+      }
+
+      if (File.Exists(FileName))
+      {
+        retValue = NetCommon.XmlDeserialize(typeof(DocGenGroups)
+          , FileName) as DocGenGroups;
+      }
+      else
+      {
+        string errorText = $"File '{FileName}' was not found.";
+        throw new FileNotFoundException(errorText);
+      }
+      retValue.LJCSortBySequence(new DocGenGroupSequenceComparer());
+      DocGenGroups = retValue;
+      return retValue;
+    }
+
+    // Retrieves a data record with the supplied value.
+    /// <include path='items/RetrieveWithName/*' file='Doc/DocGenGroupManager.xml'/>
+    public DocGenGroup SearchName(string name)
+    {
+      DocGenGroup retValue;
+
+      if (null == DocGenGroups)
+      {
+        Load();
+      }
+      retValue = DocGenGroups.LJCSearchName(name);
+      return retValue;
+    }
+    #endregion
+
+    #region Assembly
 
     // Deletes a DocGenAssembly entry.
     /// <include path='items/DeleteAssembly/*' file='Doc/DocGenGroupManager.xml'/>
@@ -50,32 +114,13 @@ namespace LJCDocLibDAL
       }
     }
 
-    // Deletes a DocGenGroup and all associated DocGenAssemblies.
-    /// <include path='items/DeleteGroup/*' file='Doc/DocGenGroupManager.xml'/>
-    public void DeleteGroup(DocGenGroup keyObject)
-    {
-      if (keyObject != null && keyObject.Name != null)
-      {
-        if (null == DocGenGroups)
-        {
-          Load();
-        }
-
-        DocGenGroup searchRecord = DocGenGroups.LJCSearchName(keyObject.Name);
-        if (searchRecord != null)
-        {
-          DocGenGroups.Remove(searchRecord);
-        }
-      }
-    }
-
     // Loads the group assembly data records.
     /// <include path='items/LoadAssemblies/*' file='Doc/DocGenGroupManager.xml'/>
     public DocGenAssemblies LoadAssemblies(string groupName)
     {
       DocGenAssemblies retValue = null;
 
-      DocGenGroup docGenGroup = RetrieveWithName(groupName);
+      DocGenGroup docGenGroup = SearchName(groupName);
       if (docGenGroup != null)
       {
         retValue = docGenGroup.DocGenAssemblies;
@@ -84,40 +129,14 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
-    // Loads a collection of data records from the XML file.
-    /// <include path='items/Load/*' file='Doc/DocGenGroupManager.xml'/>
-    public DocGenGroups Load(string xmlFileName = null)
-    {
-      DocGenGroups retValue;
-
-      if (false == string.IsNullOrWhiteSpace(xmlFileName))
-      {
-        FileName = xmlFileName;
-      }
-
-      if (File.Exists(FileName))
-      {
-        retValue = NetCommon.XmlDeserialize(typeof(DocGenGroups)
-          , FileName) as DocGenGroups;
-      }
-      else
-      {
-        string errorText = $"File '{FileName}' was not found.";
-        throw new FileNotFoundException(errorText);
-      }
-      retValue.LJCSortBySequence(new DocGenGroupSequenceComparer());
-      DocGenGroups = retValue;
-      return retValue;
-    }
-
     // Retrieves a data record with the supplied values.
     /// <include path='items/RetrieveAssemblyWithName/*' file='Doc/DocGenGroupManager.xml'/>
-    public DocGenAssembly RetrieveAssemblyWithName(string docGroupName
+    public DocGenAssembly SearchNameAssembly(string docGroupName
       , string docAssemblyName)
     {
       DocGenAssembly retValue = null;
 
-      DocGenGroup docGenGroup = RetrieveWithName(docGroupName);
+      DocGenGroup docGenGroup = SearchName(docGroupName);
       if (docGenGroup != null)
       {
         DocGenAssemblies docGenAssemblies = docGenGroup.DocGenAssemblies;
@@ -128,20 +147,7 @@ namespace LJCDocLibDAL
       }
       return retValue;
     }
-
-    // Retrieves a data record with the supplied value.
-    /// <include path='items/RetrieveWithName/*' file='Doc/DocGenGroupManager.xml'/>
-    public DocGenGroup RetrieveWithName(string name)
-    {
-      DocGenGroup retValue;
-
-      if (null == DocGenGroups)
-      {
-        Load();
-      }
-      retValue = DocGenGroups.LJCSearchName(name);
-      return retValue;
-    }
+    #endregion
 
     // Saves the updated XML file.
     /// <include path='items/Save/*' file='Doc/DocGenGroupManager.xml'/>

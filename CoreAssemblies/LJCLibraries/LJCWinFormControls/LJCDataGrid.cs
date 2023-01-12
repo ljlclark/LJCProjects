@@ -127,7 +127,7 @@ namespace LJCWinFormControls
         // Attempt to populate all existing columns.
         foreach (DataGridViewColumn column in Columns)
         {
-          // Use the existing column names which were set to the object property names.
+          // Use existing column names which are the object property names.
           value = GetPropertyValue(reflect, column.Name);
           row.LJCSetCellText(column.Name, value);
         }
