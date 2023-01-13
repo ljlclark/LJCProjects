@@ -31,7 +31,7 @@
       this.components = new System.ComponentModel.Container();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      this.DocGenGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.GroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.GroupMenuNew = new System.Windows.Forms.ToolStripMenuItem();
       this.GroupMenuEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,12 +40,13 @@
       this.DocGenGroupRefreshSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.GroupMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.GroupMenuSelect = new System.Windows.Forms.ToolStripMenuItem();
-      this.GroupFileEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.GroupMenuFileEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.GroupMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
       this.DocGenGroupCloseSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.GroupMenuClose = new System.Windows.Forms.ToolStripMenuItem();
       this.MainSplit = new System.Windows.Forms.SplitContainer();
       this.DocGenGroupHeading = new LJCWinFormControls.LJCHeaderBox();
-      this.DocGenGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.GroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.DocAssemblyHeader = new LJCWinFormControls.LJCHeaderBox();
       this.DocAssemblyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.DocAssemblyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -57,24 +58,23 @@
       this.DocAssemblyRefreshSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.DocAssemblyMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.DocAssemblyMenuSelect = new System.Windows.Forms.ToolStripMenuItem();
+      this.DocAssemblyMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
       this.FileLabel = new System.Windows.Forms.Label();
       this.FileCombo = new System.Windows.Forms.ComboBox();
-      this.GroupMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
-      this.DocAssemblyMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
-      this.DocGenGroupMenu.SuspendLayout();
+      this.GroupMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).BeginInit();
       this.MainSplit.Panel1.SuspendLayout();
       this.MainSplit.Panel2.SuspendLayout();
       this.MainSplit.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.DocGenGroupGrid)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GroupGrid)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.DocAssemblyGrid)).BeginInit();
       this.DocAssemblyMenu.SuspendLayout();
       this.SuspendLayout();
       // 
-      // DocGenGroupMenu
+      // GroupMenu
       // 
-      this.DocGenGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.DocGenGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.GroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.GroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.GroupMenuNew,
             this.GroupMenuEdit,
@@ -83,12 +83,12 @@
             this.DocGenGroupRefreshSeparator,
             this.GroupMenuRefresh,
             this.GroupMenuSelect,
-            this.GroupFileEdit,
+            this.GroupMenuFileEdit,
             this.GroupMenuSequence,
             this.DocGenGroupCloseSeparator,
             this.GroupMenuClose});
-      this.DocGenGroupMenu.Name = "mFacilityMenu";
-      this.DocGenGroupMenu.Size = new System.Drawing.Size(185, 310);
+      this.GroupMenu.Name = "mFacilityMenu";
+      this.GroupMenu.Size = new System.Drawing.Size(185, 310);
       // 
       // toolStripMenuItem1
       // 
@@ -146,12 +146,19 @@
       this.GroupMenuSelect.Text = "&Select";
       this.GroupMenuSelect.Click += new System.EventHandler(this.GroupMenuSelect_Click);
       // 
-      // GroupFileEdit
+      // GroupMenuFileEdit
       // 
-      this.GroupFileEdit.Name = "GroupFileEdit";
-      this.GroupFileEdit.Size = new System.Drawing.Size(184, 32);
-      this.GroupFileEdit.Text = "F&ile Edit";
-      this.GroupFileEdit.Click += new System.EventHandler(this.GroupFileEdit_Click);
+      this.GroupMenuFileEdit.Name = "GroupMenuFileEdit";
+      this.GroupMenuFileEdit.Size = new System.Drawing.Size(184, 32);
+      this.GroupMenuFileEdit.Text = "F&ile Edit";
+      this.GroupMenuFileEdit.Click += new System.EventHandler(this.GroupMenuFileEdit_Click);
+      // 
+      // GroupMenuSequence
+      // 
+      this.GroupMenuSequence.Name = "GroupMenuSequence";
+      this.GroupMenuSequence.Size = new System.Drawing.Size(184, 32);
+      this.GroupMenuSequence.Text = "Sequence";
+      this.GroupMenuSequence.Click += new System.EventHandler(this.GroupMenuSequence_Click);
       // 
       // DocGenGroupCloseSeparator
       // 
@@ -177,7 +184,7 @@
       // MainSplit.Panel1
       // 
       this.MainSplit.Panel1.Controls.Add(this.DocGenGroupHeading);
-      this.MainSplit.Panel1.Controls.Add(this.DocGenGroupGrid);
+      this.MainSplit.Panel1.Controls.Add(this.GroupGrid);
       // 
       // MainSplit.Panel2
       // 
@@ -201,18 +208,18 @@
       this.DocGenGroupHeading.TabStop = false;
       this.DocGenGroupHeading.Text = "Doc Group";
       // 
-      // DocGenGroupGrid
+      // GroupGrid
       // 
-      this.DocGenGroupGrid.AllowUserToAddRows = false;
-      this.DocGenGroupGrid.AllowUserToDeleteRows = false;
-      this.DocGenGroupGrid.AllowUserToResizeRows = false;
-      this.DocGenGroupGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.GroupGrid.AllowUserToAddRows = false;
+      this.GroupGrid.AllowUserToDeleteRows = false;
+      this.GroupGrid.AllowUserToResizeRows = false;
+      this.GroupGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.DocGenGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
-      this.DocGenGroupGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.DocGenGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.DocGenGroupGrid.ContextMenuStrip = this.DocGenGroupMenu;
+      this.GroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.GroupGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.GroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.GroupGrid.ContextMenuStrip = this.GroupMenu;
       dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,26 +227,26 @@
       dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
       dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
       dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DocGenGroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
-      this.DocGenGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-      this.DocGenGroupGrid.LJCAllowSelectionChange = false;
-      this.DocGenGroupGrid.LJCLastRowIndex = -1;
-      this.DocGenGroupGrid.LJCRowHeight = 0;
-      this.DocGenGroupGrid.Location = new System.Drawing.Point(0, 30);
-      this.DocGenGroupGrid.MultiSelect = false;
-      this.DocGenGroupGrid.Name = "DocGenGroupGrid";
-      this.DocGenGroupGrid.RowHeadersVisible = false;
-      this.DocGenGroupGrid.RowHeadersWidth = 62;
-      this.DocGenGroupGrid.RowTemplate.Height = 28;
-      this.DocGenGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.DocGenGroupGrid.ShowCellToolTips = false;
-      this.DocGenGroupGrid.Size = new System.Drawing.Size(778, 226);
-      this.DocGenGroupGrid.TabIndex = 1;
-      this.DocGenGroupGrid.Text = "LJCDataGrid";
-      this.DocGenGroupGrid.SelectionChanged += new System.EventHandler(this.DocGenGroupGrid_SelectionChanged);
-      this.DocGenGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocGenGroupGrid_KeyDown);
-      this.DocGenGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DocGenGroupGrid_MouseDoubleClick);
-      this.DocGenGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DocGenGroupGrid_MouseDown);
+      this.GroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      this.GroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.GroupGrid.LJCAllowSelectionChange = false;
+      this.GroupGrid.LJCLastRowIndex = -1;
+      this.GroupGrid.LJCRowHeight = 0;
+      this.GroupGrid.Location = new System.Drawing.Point(0, 30);
+      this.GroupGrid.MultiSelect = false;
+      this.GroupGrid.Name = "GroupGrid";
+      this.GroupGrid.RowHeadersVisible = false;
+      this.GroupGrid.RowHeadersWidth = 62;
+      this.GroupGrid.RowTemplate.Height = 28;
+      this.GroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.GroupGrid.ShowCellToolTips = false;
+      this.GroupGrid.Size = new System.Drawing.Size(778, 226);
+      this.GroupGrid.TabIndex = 1;
+      this.GroupGrid.Text = "LJCDataGrid";
+      this.GroupGrid.SelectionChanged += new System.EventHandler(this.GroupGrid_SelectionChanged);
+      this.GroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GroupGrid_KeyDown);
+      this.GroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDoubleClick);
+      this.GroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDown);
       // 
       // DocAssemblyHeader
       // 
@@ -290,10 +297,10 @@
       this.DocAssemblyGrid.Size = new System.Drawing.Size(778, 208);
       this.DocAssemblyGrid.TabIndex = 1;
       this.DocAssemblyGrid.Text = "LJCDataGrid";
-      this.DocAssemblyGrid.SelectionChanged += new System.EventHandler(this.DocGenAssemblyGrid_SelectionChanged);
-      this.DocAssemblyGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocGenAssemblyGrid_KeyDown);
-      this.DocAssemblyGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DocGenAssemblyGrid_MouseDoubleClick);
-      this.DocAssemblyGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DocGenAssemblyGrid_MouseDown);
+      this.DocAssemblyGrid.SelectionChanged += new System.EventHandler(this.DocAssemblyGrid_SelectionChanged);
+      this.DocAssemblyGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocAssemblyGrid_KeyDown);
+      this.DocAssemblyGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DocAssemblyGrid_MouseDoubleClick);
+      this.DocAssemblyGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DocAssemblyGrid_MouseDown);
       // 
       // DocAssemblyMenu
       // 
@@ -309,20 +316,20 @@
             this.DocAssemblyMenuSelect,
             this.DocAssemblyMenuSequence});
       this.DocAssemblyMenu.Name = "mFacilityMenu";
-      this.DocAssemblyMenu.Size = new System.Drawing.Size(241, 273);
+      this.DocAssemblyMenu.Size = new System.Drawing.Size(212, 240);
       // 
       // toolStripMenuItem2
       // 
       this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(240, 32);
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(211, 32);
       this.toolStripMenuItem2.Text = "Assembly Menu";
       // 
       // DocAssemblyMenuNew
       // 
       this.DocAssemblyMenuNew.Name = "DocAssemblyMenuNew";
       this.DocAssemblyMenuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.DocAssemblyMenuNew.Size = new System.Drawing.Size(240, 32);
+      this.DocAssemblyMenuNew.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuNew.Text = "&New";
       this.DocAssemblyMenuNew.Click += new System.EventHandler(this.AssemblyMenuNew_Click);
       // 
@@ -330,42 +337,49 @@
       // 
       this.DocAssemblyMenuEdit.Name = "DocAssemblyMenuEdit";
       this.DocAssemblyMenuEdit.ShortcutKeyDisplayString = "Enter";
-      this.DocAssemblyMenuEdit.Size = new System.Drawing.Size(240, 32);
+      this.DocAssemblyMenuEdit.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuEdit.Text = "&Edit";
       this.DocAssemblyMenuEdit.Click += new System.EventHandler(this.AssemblyMenuEdit_Click);
       // 
       // DocAssemblyDeleteSeparater
       // 
       this.DocAssemblyDeleteSeparater.Name = "DocAssemblyDeleteSeparater";
-      this.DocAssemblyDeleteSeparater.Size = new System.Drawing.Size(237, 6);
+      this.DocAssemblyDeleteSeparater.Size = new System.Drawing.Size(208, 6);
       // 
       // DocAssemblyMenuDelete
       // 
       this.DocAssemblyMenuDelete.Name = "DocAssemblyMenuDelete";
       this.DocAssemblyMenuDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.DocAssemblyMenuDelete.Size = new System.Drawing.Size(240, 32);
+      this.DocAssemblyMenuDelete.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuDelete.Text = "&Delete";
       this.DocAssemblyMenuDelete.Click += new System.EventHandler(this.AssemblyMenuDelete_Click);
       // 
       // DocAssemblyRefreshSeparator
       // 
       this.DocAssemblyRefreshSeparator.Name = "DocAssemblyRefreshSeparator";
-      this.DocAssemblyRefreshSeparator.Size = new System.Drawing.Size(237, 6);
+      this.DocAssemblyRefreshSeparator.Size = new System.Drawing.Size(208, 6);
       // 
       // DocAssemblyMenuRefresh
       // 
       this.DocAssemblyMenuRefresh.Name = "DocAssemblyMenuRefresh";
       this.DocAssemblyMenuRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.DocAssemblyMenuRefresh.Size = new System.Drawing.Size(240, 32);
+      this.DocAssemblyMenuRefresh.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuRefresh.Text = "&Refresh";
       this.DocAssemblyMenuRefresh.Click += new System.EventHandler(this.AssemblyMenuRefresh_Click);
       // 
       // DocAssemblyMenuSelect
       // 
       this.DocAssemblyMenuSelect.Name = "DocAssemblyMenuSelect";
-      this.DocAssemblyMenuSelect.Size = new System.Drawing.Size(240, 32);
+      this.DocAssemblyMenuSelect.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuSelect.Text = "&Select";
       this.DocAssemblyMenuSelect.Click += new System.EventHandler(this.AssemblyMenuSelect_Click);
+      // 
+      // DocAssemblyMenuSequence
+      // 
+      this.DocAssemblyMenuSequence.Name = "DocAssemblyMenuSequence";
+      this.DocAssemblyMenuSequence.Size = new System.Drawing.Size(211, 32);
+      this.DocAssemblyMenuSequence.Text = "Sequence";
+      this.DocAssemblyMenuSequence.Click += new System.EventHandler(this.DocAssemblyMenuSequence_Click);
       // 
       // FileLabel
       // 
@@ -385,20 +399,6 @@
       this.FileCombo.TabIndex = 1;
       this.FileCombo.SelectedIndexChanged += new System.EventHandler(this.FileCombo_SelectedIndexChanged);
       // 
-      // GroupMenuSequence
-      // 
-      this.GroupMenuSequence.Name = "GroupMenuSequence";
-      this.GroupMenuSequence.Size = new System.Drawing.Size(184, 32);
-      this.GroupMenuSequence.Text = "Sequence";
-      this.GroupMenuSequence.Click += new System.EventHandler(this.GroupMenuSequence_Click);
-      // 
-      // DocAssemblyMenuSequence
-      // 
-      this.DocAssemblyMenuSequence.Name = "DocAssemblyMenuSequence";
-      this.DocAssemblyMenuSequence.Size = new System.Drawing.Size(240, 32);
-      this.DocAssemblyMenuSequence.Text = "Sequence";
-      this.DocAssemblyMenuSequence.Click += new System.EventHandler(this.DocAssemblyMenuSequence_Click);
-      // 
       // DocGenGroupList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -410,12 +410,12 @@
       this.Name = "DocGenGroupList";
       this.Text = "DocGroup List";
       this.Load += new System.EventHandler(this.DocGenGroupList_Load);
-      this.DocGenGroupMenu.ResumeLayout(false);
+      this.GroupMenu.ResumeLayout(false);
       this.MainSplit.Panel1.ResumeLayout(false);
       this.MainSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).EndInit();
       this.MainSplit.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.DocGenGroupGrid)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GroupGrid)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.DocAssemblyGrid)).EndInit();
       this.DocAssemblyMenu.ResumeLayout(false);
       this.ResumeLayout(false);
@@ -424,7 +424,7 @@
 		}
 
 		#endregion
-		private System.Windows.Forms.ContextMenuStrip DocGenGroupMenu;
+		private System.Windows.Forms.ContextMenuStrip GroupMenu;
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuNew;
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuEdit;
 		private System.Windows.Forms.ToolStripSeparator DocGenGroupDeleteSeparator;
@@ -435,7 +435,7 @@
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuClose;
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuSelect;
 		private System.Windows.Forms.SplitContainer MainSplit;
-		private LJCWinFormControls.LJCDataGrid DocGenGroupGrid;
+		private LJCWinFormControls.LJCDataGrid GroupGrid;
 		private LJCWinFormControls.LJCDataGrid DocAssemblyGrid;
 		private LJCWinFormControls.LJCHeaderBox DocGenGroupHeading;
 		private LJCWinFormControls.LJCHeaderBox DocAssemblyHeader;
@@ -447,7 +447,7 @@
 		private System.Windows.Forms.ToolStripSeparator DocAssemblyRefreshSeparator;
 		private System.Windows.Forms.ToolStripMenuItem DocAssemblyMenuRefresh;
 		private System.Windows.Forms.ToolStripMenuItem DocAssemblyMenuSelect;
-		private System.Windows.Forms.ToolStripMenuItem GroupFileEdit;
+		private System.Windows.Forms.ToolStripMenuItem GroupMenuFileEdit;
 		private System.Windows.Forms.Label FileLabel;
 		private System.Windows.Forms.ComboBox FileCombo;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;

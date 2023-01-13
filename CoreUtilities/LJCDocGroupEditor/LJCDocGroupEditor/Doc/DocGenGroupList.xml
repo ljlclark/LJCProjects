@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (c) Lester J. Clark 2020 - All Rights Reserved -->
 <items>
-  <AddDocGenGroup>
+  <AddGroup>
     <summary>
       Adds the new record.
     </summary>
     <param name="docGenGroup">The data record.</param>
-  </AddDocGenGroup>
-  <UpdateDocGenGroup>
+  </AddGroup>
+  <UpdateGroup>
     <summary>
       Updates the record.
     </summary>
     <param name="docGenGroup">The data record.</param>
-  </UpdateDocGenGroup>
-  <AddDocGenAssembly>
+  </UpdateGroup>
+  <AddAssembly>
     <summary>
       Adds the new record.
       ///
     </summary>
     <param name="groupName">The DocGenGroup name.</param>
     <param name="docAssembly">The data record.</param>
-  </AddDocGenAssembly>
-  <UpdateDocGenAssembly>
+  </AddAssembly>
+  <UpdateAssembly>
     <summary>
       Updates the record.
     </summary>
     <param name="groupName">The DocGenGroup name.</param>
     <param name="docAssembly">The data record.</param>
     <param name="previousName">The previous name value.</param>
-  </UpdateDocGenAssembly>
+  </UpdateAssembly>
 </items>
