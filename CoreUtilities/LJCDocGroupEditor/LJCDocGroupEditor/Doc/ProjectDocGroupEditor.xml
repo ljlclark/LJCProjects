@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <DocGenAssemblyDetail>
+    <summary>
+      The DocGenAssembly detail dialog.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The DocGroup Editor allows the user to modify the DocGroup XML data.
+      </para>
+    </remarks>
+  </DocGenAssemblyDetail>
+</items>

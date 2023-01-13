@@ -1,0 +1,529 @@
+<?xml version="1.0"?>
+<DocGenGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DocGenGroup>
+    <Description>Common Libraries</Description>
+    <Name>CommonLibraries</Name>
+    <Sequence>1</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The System Build documentation.</Description>
+        <FileSpec>SystemBuild.html</FileSpec>
+        <Name>SystemBuild</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The .NET Common library. (DE1)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.xml</FileSpec>
+        <Name>LJCNetCommon</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A Console program to execute a SQL Script.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCExecuteScript\LJCExecuteScript\bin\Debug\LJCExecuteScript.xml</FileSpec>
+        <Name>LJCExecuteScript</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A library for parsing U.S. Address data. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCAddressParserLib\LJCAddressParserLib\bin\Debug\LJCAddressParserLib.xml</FileSpec>
+        <Name>LJCAddressParserLib</Name>
+        <Sequence>4</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The WinForm Common library.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.xml</FileSpec>
+        <Name>LJCWinFormCommon</Name>
+        <Sequence>5</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The WinForm Controls library.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssembliles\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.xml</FileSpec>
+        <Name>LJCWinFormControls</Name>
+        <Sequence>6</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The DbResult Grid Helper Library.</Description>
+        <FileSpec>..\..\..\..\..\..\CoreAssemblies\LJCGridDataLib\LJCGridDataLib\bin\Debug\LJCGridDataLib.xml</FileSpec>
+        <Name>LJCGridDataLib</Name>
+        <Sequence>7</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Text Data Reader library.</Description>
+        <FileSpec>..\..\..\..\..\..\CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.xml</FileSpec>
+        <Name>LJCTextDataReaderLib</Name>
+        <Sequence>8</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The DataDetail Dynamic Detail dialog. (D)</Description>
+        <FileSpec>..\..\..\..\..\..\CoreAssemblies\DataDetail\DataDetail\bin\Debug\DataDetail.xml</FileSpec>
+        <Name>DataDetail</Name>
+        <Sequence>9</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The DataDetail Supporting Library. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\DataDetail\LJCDataDetailLib\bin\Debug\LJCDataDetailLib.xml</FileSpec>
+        <Name>LJCDataDetailLib</Name>
+        <Sequence>10</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The DataDetail Test Console. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\DataDetail\LJCDataDetailConsole\bin\Debug\LJCDataDetailConsole.xml</FileSpec>
+        <Name>LJCDataDetailConsole</Name>
+        <Sequence>11</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Data Libraries</Description>
+    <Name>DataLibraries</Name>
+    <Sequence>2</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Data Service Libraries Overview.</Description>
+        <FileSpec>DataOverview.html</FileSpec>
+        <Name>DataOverview</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The ADO.NET Data Access library. (DE)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.xml</FileSpec>
+        <Name>LJCDataAccess</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Message Data Access library. (DE4)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBServiceLib\LJCDBDataAccessLib\bin\Debug\LJCDBDataAccessLib.xml</FileSpec>
+        <Name>LJCDBDataAccessLib</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Data Access Configuration library.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.xml</FileSpec>
+        <Name>LJCDataAccessConfig</Name>
+        <Sequence>5</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Data Service Client library. (DOE3)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.xml</FileSpec>
+        <Name>LJCDBClientLib</Name>
+        <Sequence>7</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Data Service Message library. (DOGE2)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.xml</FileSpec>
+        <MainImage>DBMessageGraph.jpg</MainImage>
+        <Name>LJCDBMessage</Name>
+        <Sequence>8</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The testing application.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug\ForeignKeyManagerTest.xml</FileSpec>
+        <Name>ForeignKeyManagerTest</Name>
+        <Sequence>9</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The SQL Utilities library.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.xml</FileSpec>
+        <Name>LJCSQLUtilLib</Name>
+        <Sequence>10</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The SQL Utilities Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLibDAL\bin\Debug\LJCSQLUtilLibDAL.xml</FileSpec>
+        <Name>LJCSQLUtilLibDAL</Name>
+        <Sequence>11</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The LJCDBServiceLib windows host.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBServiceHosts\LJCDBServiceHost\bin\Debug\LJCDBServiceHost.xml</FileSpec>
+        <Name>LJCDBServiceHost</Name>
+        <Sequence>12</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The LJCDBServiceLib console host.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBServiceHosts\LJCDBServiceConsoleHost\bin\Debug\LJCDBServiceConsoleHost.xml</FileSpec>
+        <Name>LJCDBServiceConsoleHost</Name>
+        <Sequence>13</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Data Service library. (ROE)</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.xml</FileSpec>
+        <Name>LJCDBServiceLib</Name>
+        <Sequence>14</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Code Generator Utility</Description>
+    <Name>CodeGen</Name>
+    <Sequence>3</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Gen Text console program.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenText\bin\Debug\LJCGenText.xml</FileSpec>
+        <Name>LJCGenText</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A program to generate table related code.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\LJCGenTableCode.xml</FileSpec>
+        <Name>LJCGenTableCode</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A Text Generator library. (RO)</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTextLib\bin\Debug\LJCGenTextLib.xml</FileSpec>
+        <Name>LJCGenTextLib</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The GenText Editor Test Program. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug\LJCGenTextEdit.xml</FileSpec>
+        <Name>LJCGenTextEdit</Name>
+        <Sequence>4</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>HTML Documentation Generator</Description>
+    <Name>DocGen</Name>
+    <Sequence>4</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to generate code documentation.</Description>
+        <FileSpec>LJCDocGen.xml</FileSpec>
+        <Name>LJCDocGen</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>Genealogy Page Generation.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\Genealogy\LJCGenPageGen\bin\Debug\LJCGenPageGen.xml</FileSpec>
+        <Name>LJCGenPageGen</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Code HTML Documentation Generator library. (O)</Description>
+        <FileSpec>LJCDocGenLib.xml</FileSpec>
+        <Name>LJCDocGenLib</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Code Documentation Generator Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\CoreUtilities\LJCDocLibDAL\bin\Debug\LJCDocLibDAL.xml</FileSpec>
+        <Name>LJCDocLibDAL</Name>
+        <Sequence>4</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Code Documentation data object library. (DOG)</Description>
+        <FileSpec>..\..\..\..\CoreUtilities\LJCDocObjLib\bin\Debug\LJCDocObjLib.xml</FileSpec>
+        <MainImage>DocLibDataGraph.jpg</MainImage>
+        <Name>LJCDocObjLib</Name>
+        <Sequence>5</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Code Documentation XML object library. (DOG)</Description>
+        <FileSpec>..\..\..\..\CoreUtilities\LJCDocXmlObjLib\bin\Debug\LJCDocXmlObjLib.xml</FileSpec>
+        <MainImage>DocLibXMLGraph.jpg</MainImage>
+        <Name>LJCDocXmlObjLib</Name>
+        <Sequence>6</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Documentation Group Manager.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCDocGroupEditor\LJCDocGroupEditor\bin\Debug\LJCDocGroupEditor.xml</FileSpec>
+        <Name>LJCDocGroupEditor</Name>
+        <Sequence>7</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Data Transform Projects</Description>
+    <Name>DataTransform</Name>
+    <Sequence>5</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to manage Data Transform data.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug\LJCTransformManager.xml</FileSpec>
+        <Name>LJCTransformManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A program to Automate Data Processes.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug\LJCDataTransformProcess.xml</FileSpec>
+        <Name>LJCDataTransformProcess</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A library for common Transform Process Modules. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDataTransform\LJCCommonModuleLib\bin\Debug\LJCCommonModuleLib.xml</FileSpec>
+        <Name>CommonModuleLib</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Data Transform Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDataTransform\LJCDataTransformDAL\bin\Debug\LJCDataTransformDAL.xml</FileSpec>
+        <Name>LJCDataTransformDAL</Name>
+        <Sequence>4</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A program to test the LJCDataTransformProcess library. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug\TransformServiceTest.xml</FileSpec>
+        <Name>TransformServiceTest</Name>
+        <Sequence>5</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Contact Visit Record Manager</Description>
+    <Name>CVRManager</Name>
+    <Sequence>6</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Contact Visit Record Manager.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\CVRManager\CVRManager\bin\Debug\CVRManager.xml</FileSpec>
+        <Name>CVRManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The CVR Data Access Layer library. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\CVRManager\CVRDAL\bin\Debug\CVRDAL.xml</FileSpec>
+        <Name>CVRDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Sales Manager</Description>
+    <Name>LJCSales</Name>
+    <Sequence>7</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Sales Manager program. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCSales\LJCSalesManager\bin\Debug\LJCSalesManager.xml</FileSpec>
+        <Name>LJCSalesManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Sales Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCSales\LJCSalesDAL\bin\Debug\LJCSalesDAL.xml</FileSpec>
+        <Name>LJCSalesDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Unit Measure</Description>
+    <Name>LJCUnitMeasure</Name>
+    <Sequence>8</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Unit Measure program. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasure\bin\Debug\LJCUnitMeasure.xml</FileSpec>
+        <Name>LJCUnitMeasure</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Unit Measure Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasureDAL\bin\Debug\LJCUnitMeasureDAL.xml</FileSpec>
+        <Name>LJCUnitMeasureDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Facility Manager</Description>
+    <Name>FacilityManager</Name>
+    <Sequence>9</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to manage facility assets such as buildings, rooms, fixtures and equipment. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug\LJCFacilityManager.xml</FileSpec>
+        <Name>LJCFacilityManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The LJCFacilityManager Data Access Layer library. (R)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManagerDAL\bin\Debug\LJCFacilityManagerDAL.xml</FileSpec>
+        <Name>LJCFacilityManagerDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Facility Test program.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCFacilityManager\FacilityForm\bin\Debug\LJCFacilityForm.xml</FileSpec>
+        <Name>FacilityForm</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The FacilityManager Module Test program.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCFacilityManager\ModuleHost\bin\Debug\ModuleHost.xml</FileSpec>
+        <Name>ModuleHost</Name>
+        <Sequence>4</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Facility Manager Setup</Description>
+    <Name>FacilityManagerSetup</Name>
+    <Sequence>10</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Facility Manager Setup program.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug\LJCFacilityManagerSetup.xml</FileSpec>
+        <Name>LJCFacilityManagerSetup</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Region Manager</Description>
+    <Name>RegionManager</Name>
+    <Sequence>11</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to manage Region data. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.xml</FileSpec>
+        <Name>LJCRegionManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Region Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.xml</FileSpec>
+        <Name>LJCRegionDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The Region Manager Test program.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.xml</FileSpec>
+        <Name>LJCRegionForm</Name>
+        <Sequence>3</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Application Manager</Description>
+    <Name>AppManager</Name>
+    <Sequence>12</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to manage and host application modules. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManager\bin\Debug\LJCAppManager.xml</FileSpec>
+        <Name>LJCAppManager</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The LJCAppManager Data Access Layer library. (D)</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManagerDAL\bin\Debug\LJCAppManagerDAL.xml</FileSpec>
+        <Name>LJCAppManagerDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>DocApp Manager</Description>
+    <Name>DocAppManager</Name>
+    <Sequence>13</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to manage Document images.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug\LJCDocAppManager.xml</FileSpec>
+        <Name>LJCDocAppManager</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The DocApp Manager Data Access Layer library.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\bin\Debug\LJCDocAppManagerDAL.xml</FileSpec>
+        <Name>LJCDocAppManagerDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Data View Data Access Layer</Description>
+    <Name>DBViewDAL</Name>
+    <Sequence>14</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Data View library.</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.xml</FileSpec>
+        <Name>LJCDBViewDAL</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Data View Builder</Description>
+    <Name>ViewBuilder</Name>
+    <Sequence>15</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to create and edit Views. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.xml</FileSpec>
+        <Name>LJCViewBuilder</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Data View Editor</Description>
+    <Name>ViewEditor</Name>
+    <Sequence>16</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A program to maintain View data. (D)</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.xml</FileSpec>
+        <Name>LJCViewEditor</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>The LJCViewEditor Data Access Library.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.xml</FileSpec>
+        <Name>LJCViewEditorDAL</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Code Line Counter and Text Finder.</Description>
+    <Name>CodeLine</Name>
+    <Sequence>17</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>The Code Line Counter console application.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml</FileSpec>
+        <Name>LJCCodeLineCounter</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Text Invasion Typing Game</Description>
+    <Name>TextInvasion</Name>
+    <Sequence>18</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>A typing tudor game.</Description>
+        <FileSpec>..\..\..\..\..\SampleApps\LJCTextInvasion\LJCTextInvasion\bin\Debug\LJCTextInvasion.xml</FileSpec>
+        <Name>LJCTextInvasion</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+  <DocGenGroup>
+    <Description>Pagination Testing</Description>
+    <Name>LJCPagination</Name>
+    <Sequence>19</Sequence>
+    <DocGenAssemblies>
+      <DocGenAssembly>
+        <Description>Database Pagination</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug\LJCDataPageList.xml</FileSpec>
+        <Name>LJCDataPageList</Name>
+        <Sequence>1</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>Text File Pagination</Description>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug\LJCTextPageList.xml</FileSpec>
+        <Name>LJCTextPageList</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+    </DocGenAssemblies>
+  </DocGenGroup>
+</DocGenGroups>

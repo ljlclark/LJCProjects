@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved -->
+<items>
+  <ResetRecordValues>
+    <summary>
+      Resets the empty record values.
+    </summary>
+    <param name="record">The data record object.</param>
+  </ResetRecordValues>
+</items>
