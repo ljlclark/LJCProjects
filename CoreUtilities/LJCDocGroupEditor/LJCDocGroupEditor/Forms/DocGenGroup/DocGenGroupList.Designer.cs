@@ -210,6 +210,7 @@
       // 
       // GroupGrid
       // 
+      this.GroupGrid.AllowDrop = true;
       this.GroupGrid.AllowUserToAddRows = false;
       this.GroupGrid.AllowUserToDeleteRows = false;
       this.GroupGrid.AllowUserToResizeRows = false;
@@ -244,9 +245,14 @@
       this.GroupGrid.TabIndex = 1;
       this.GroupGrid.Text = "LJCDataGrid";
       this.GroupGrid.SelectionChanged += new System.EventHandler(this.GroupGrid_SelectionChanged);
+      this.GroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.GroupGrid_DragDrop);
+      this.GroupGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.GroupGrid_DragOver);
+      this.GroupGrid.DragLeave += new System.EventHandler(this.GroupGrid_DragLeave);
       this.GroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GroupGrid_KeyDown);
       this.GroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDoubleClick);
       this.GroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDown);
+      this.GroupGrid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseMove);
+      this.GroupGrid.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseUp);
       // 
       // DocAssemblyHeader
       // 

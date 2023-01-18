@@ -666,6 +666,7 @@ namespace LJCDocGroupEditor
       {
         retValue = true;
       }
+      mIsDragStart = false;
 
       // Configure controls.
       if (LJCIsSelect)
@@ -834,24 +835,35 @@ namespace LJCDocGroupEditor
       return retValue;
     }
 
-    // Updates the record.
-    // <include path='items/UpdateGroup/*' file='Doc/DocGenGroupList.xml'/>
-    private bool UpdateGroup(DocGenGroup record)
+    // Creates a bounding rectangle to determine if the move operation should start.
+    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
     {
-      bool retValue = true;
+      Rectangle retVal;
 
-      var source = mDocGenGroupManager.SearchName(record.Name);
-      if (null == source)
+      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
+      return retVal;
+    }
+
+    private Point DragPointToGrid(Point dragPoint)
+    {
+      Point retValue;
+
+      var gridHeadingHeight = DocGenGroupHeading.Height;
+      var columnHeadersHeight = GroupGrid.ColumnHeadersHeight;
+      retValue = PointToClient(dragPoint);
+      retValue.Y -= gridHeadingHeight + columnHeadersHeight + 7;
+      return retValue;
+    }
+
+    // Gets the GroupRow at the cursor location.
+    private LJCGridRow GetGroupRow(int x, int y)
+    {
+      LJCGridRow retValue = null;
+
+      int rowIndex = GroupGrid.LJCGetMouseRowIndex(x, y);
+      if (rowIndex > -1)
       {
-        retValue = false;
-        string title = "Data Entry Error";
-        string message = "The record was not found.";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
-      else
-      {
-        source.Description = record.Description;
-        MoveGroups(source, record);
+        retValue = GroupGrid.Rows[rowIndex] as LJCGridRow;
       }
       return retValue;
     }
@@ -950,6 +962,22 @@ namespace LJCDocGroupEditor
       }
     }
 
+    // Sets the DragOver background.
+    private void SetDragOverBackground(DataGridViewRow currentRow)
+    {
+      if (mPrevRow != null)
+      {
+        mPrevRow.DefaultCellStyle.BackColor = Color.White;
+      }
+      if (currentRow != null)
+      {
+        mPrevRow = currentRow;
+        var color = Color.FromArgb(0xe0, 0xe8, 0xee);
+        currentRow.DefaultCellStyle.BackColor = color;
+      }
+    }
+    private DataGridViewRow mPrevRow;
+
     // Resequence the groups.
     private void SequenceGroups()
     {
@@ -965,6 +993,28 @@ namespace LJCDocGroupEditor
           sequence++;
         }
       }
+    }
+
+    // Updates the record.
+    // <include path='items/UpdateGroup/*' file='Doc/DocGenGroupList.xml'/>
+    private bool UpdateGroup(DocGenGroup record)
+    {
+      bool retValue = true;
+
+      var source = mDocGenGroupManager.SearchName(record.Name);
+      if (null == source)
+      {
+        retValue = false;
+        string title = "Data Entry Error";
+        string message = "The record was not found.";
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+      }
+      else
+      {
+        source.Description = record.Description;
+        MoveGroups(source, record);
+      }
+      return retValue;
     }
     #endregion
 
@@ -1279,6 +1329,52 @@ namespace LJCDocGroupEditor
 
     #region Group
 
+    // Handles the Group DragDrop event.
+    private void GroupGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      SetDragOverBackground(null);
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var gridPoint = DragPointToGrid(new Point(e.X, e.Y));
+      var rowIndex = GroupGrid.LJCGetMouseRowIndex(gridPoint.X, gridPoint.Y);
+      if (rowIndex > -1)
+      {
+        var sourceName = sourceRow.LJCGetString(DocGenGroup.ColumnName);
+        var sourceGroup = mDocGenGroupManager.SearchName(sourceName);
+        var targetRow = GroupGrid.Rows[rowIndex] as LJCGridRow;
+        var targetName = targetRow.LJCGetString(DocGenGroup.ColumnName);
+        var targetGroup = mDocGenGroupManager.SearchName(targetName);
+        MoveGroups(sourceGroup, targetGroup);
+      }
+    }
+
+    // Handles the DragLeave event.
+    private void GroupGrid_DragLeave(object sender, EventArgs e)
+    {
+      SetDragOverBackground(null);
+    }
+
+    // Handles the Group DragOver event.
+    private void GroupGrid_DragOver(object sender, DragEventArgs e)
+    {
+      e.Effect = DragDropEffects.None;
+
+      if (e.Data.GetDataPresent(typeof(LJCGridRow)))
+      {
+        var gridPoint = DragPointToGrid(new Point(e.X, e.Y));
+        var rowIndex = GroupGrid.LJCGetMouseRowIndex(gridPoint.X, gridPoint.Y);
+        if (rowIndex >= 0 && rowIndex < GroupGrid.RowCount)
+        {
+          var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+          if (GroupGrid.Rows[rowIndex] is LJCGridRow targetRow
+            && targetRow != sourceRow)
+          {
+            SetDragOverBackground(targetRow);
+            e.Effect = DragDropEffects.Move;
+          }
+        }
+      }
+    }
+
     // Handles the form keys.
     private void GroupGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -1312,15 +1408,50 @@ namespace LJCDocGroupEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void GroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (GroupGrid.LJCGetMouseRow(e) != null)
+      {
+        DoDefaultGroup();
+      }
+    }
+
     // Handles the MouseDown event.
     private void GroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
+      // Initializes the drag and drop values.
+      mIsDragStart = true;
+      mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
+      mSourceRow = GetGroupRow(e.X, e.Y);
+
       if (e.Button == MouseButtons.Right
         && GroupGrid.LJCIsDifferentRow(e))
       {
         GroupGrid.LJCSetCurrentRow(e);
         TimedChange(Change.Group);
       }
+    }
+
+    // Handles the MouseMove event.
+    private void GroupGrid_MouseMove(object sender, MouseEventArgs e)
+    {
+      // Starts the drag operation if the mouse moves outside the drag start bounds.
+      Point mousePoint = new Point(e.X, e.Y);
+      if (mIsDragStart
+        && mSourceRow != null
+        && mDragStartBounds.Contains(mousePoint) == false)
+      {
+        mIsDragStart = false;
+        DoDragDrop(mSourceRow, DragDropEffects.Move);
+      }
+    }
+
+    // Handles the MouseUp event.
+    private void GroupGrid_MouseUp(object sender, MouseEventArgs e)
+    {
+      // Reset the drag start flag.
+      mIsDragStart = false;
     }
 
     // Handles the SelectionChanged event.
@@ -1331,15 +1462,6 @@ namespace LJCDocGroupEditor
         TimedChange(Change.Group);
       }
       GroupGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void GroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (GroupGrid.LJCGetMouseRow(e) != null)
-      {
-        DoDefaultGroup();
-      }
     }
     #endregion
 
@@ -1462,6 +1584,10 @@ namespace LJCDocGroupEditor
     private readonly Color mBeginColor = Color.AliceBlue;
     private string mControlValuesFileName;
     private DocGenGroupManager mDocGenGroupManager;
+
+    private Rectangle mDragStartBounds;
+    private bool mIsDragStart;
+    private DataGridViewRow mSourceRow;
     #endregion
   }
 }
