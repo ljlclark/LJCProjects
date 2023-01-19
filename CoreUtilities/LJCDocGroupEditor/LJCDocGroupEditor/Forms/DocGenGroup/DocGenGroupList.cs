@@ -234,7 +234,8 @@ namespace LJCDocGroupEditor
         LJCHelpFileName = LJCHelpFile,
         LJCHelpPageName = LJCHelpPageDetail,
       };
-      detail.DocGenGroupManager.DocGenGroups = mDocGenGroupManager.DocGenGroups;
+      var docGroups = mDocGenGroupManager.DocGenGroups;
+      detail.DocGenGroupManager.DocGenGroups = docGroups;
       detail.Change += new EventHandler<EventArgs>(GroupDetail_Change);
       detail.ShowDialog();
     }
@@ -254,7 +255,8 @@ namespace LJCDocGroupEditor
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = LJCHelpPageDetail,
         };
-        detail.DocGenGroupManager.DocGenGroups = mDocGenGroupManager.DocGenGroups;
+        var docGroups = mDocGenGroupManager.DocGenGroups;
+        detail.DocGenGroupManager.DocGenGroups = docGroups;
         detail.Change += new EventHandler<EventArgs>(GroupDetail_Change);
         detail.ShowDialog();
       }
@@ -409,7 +411,8 @@ namespace LJCDocGroupEditor
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = "DocGenAssemblyDetail.htm"
         };
-        detail.DocGenGroupManager.DocGenGroups = mDocGenGroupManager.DocGenGroups;
+        var docGroups = mDocGenGroupManager.DocGenGroups;
+        detail.DocGenGroupManager.DocGenGroups = docGroups;
         detail.Change += new EventHandler<EventArgs>(AssemblyDetail_Change);
         detail.ShowDialog();
       }
@@ -435,7 +438,8 @@ namespace LJCDocGroupEditor
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = "DocGenAssemblyDetail.htm"
         };
-        detail.DocGenGroupManager.DocGenGroups = mDocGenGroupManager.DocGenGroups;
+        var docGroups = mDocGenGroupManager.DocGenGroups;
+        detail.DocGenGroupManager.DocGenGroups = docGroups;
         detail.Change += new EventHandler<EventArgs>(AssemblyDetail_Change);
         detail.ShowDialog();
       }
@@ -748,7 +752,8 @@ namespace LJCDocGroupEditor
         // Done this way because there is no database table.
         DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnSequence, "Sequence");
         DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnName, "Name");
-        DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnDescription, "Description");
+        DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnDescription
+          , "Description");
       }
       DocAssemblyGrid.LJCDragDataName = "DocGenAssembly";
     }
@@ -820,13 +825,16 @@ namespace LJCDocGroupEditor
       DocGenGroup source;
       bool retValue = true;
 
-      source = mDocGenGroupManager.DocGenGroups.LJCSearchName(record.Name);
+      // *** Next Statement *** Change - 1/20/23
+      //source = mDocGenGroupManager.DocGenGroups.LJCSearchName(record.Name);
+      source = mDocGenGroupManager.SearchName(record.Name);
       if (source != null)
       {
         retValue = false;
         string title = "Data Entry Error";
         string message = "The record already exists.";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
       }
       else
       {
@@ -885,6 +893,9 @@ namespace LJCDocGroupEditor
     private void MoveGroupsDown(DocGenGroup source, DocGenGroup target
       , bool isAddedItem = false)
     {
+      // Save target sequence before it is updated.
+      var targetSequence = target.Sequence;
+
       var docGroups = mDocGenGroupManager.DocGenGroups;
       var updateGroups = docGroups.FindAll(x => x.Sequence >= target.Sequence
         && x.Sequence < source.Sequence);
@@ -905,7 +916,7 @@ namespace LJCDocGroupEditor
         // Update the sequence for the updated item only.
         if (false == isAddedItem)
         {
-          source.Sequence = target.Sequence;
+          source.Sequence = targetSequence;
         }
       }
     }
@@ -933,15 +944,15 @@ namespace LJCDocGroupEditor
     // Resequence the groups.
     private void SequenceGroups()
     {
-      var groups = mDocGenGroupManager.DocGenGroups;
-      if (groups != null && groups.Count > 0)
+      var docGroups = mDocGenGroupManager.DocGenGroups;
+      if (docGroups != null && docGroups.Count > 0)
       {
         // Sort in ascending order.
-        groups.Sort((x, y) => x.Sequence.CompareTo(y.Sequence));
+        docGroups.Sort((x, y) => x.Sequence.CompareTo(y.Sequence));
         int sequence = 1;
-        foreach (DocGenGroup group in groups)
+        foreach (DocGenGroup docGroup in docGroups)
         {
-          group.Sequence = sequence;
+          docGroup.Sequence = sequence;
           sequence++;
         }
       }
@@ -959,7 +970,8 @@ namespace LJCDocGroupEditor
         retValue = false;
         string title = "Data Entry Error";
         string message = "The record was not found.";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
       }
       else
       {
@@ -978,13 +990,14 @@ namespace LJCDocGroupEditor
     {
       bool retValue = true;
 
-      var docGroup = mDocGenGroupManager.DocGenGroups.LJCSearchName(groupName);
+      var docGroup = mDocGenGroupManager.SearchName(groupName);
       if (null == docGroup)
       {
         retValue = false;
         string title = "Data Entry Error";
         string message = "The DocGroup record was not found.";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
       }
       else
       {
@@ -1000,44 +1013,6 @@ namespace LJCDocGroupEditor
         else
         {
           docGroup.DocGenAssemblies.Add(record);
-          MoveAssemblies(docGroup, source, record);
-        }
-      }
-      return retValue;
-    }
-
-    // Updates the record.
-    // <include path='items/UpdateAssembly/*' file='Doc/DocGenGroupList.xml'/>
-    private bool UpdateAssembly(string groupName, DocGenAssembly record
-      , string previousName)
-    {
-      bool retValue = true;
-
-      var docGroup = mDocGenGroupManager.SearchName(groupName);
-      if (null == docGroup)
-      {
-        retValue = false;
-        string title = "Data Entry Error";
-        string message = "The DocGroup record was not found.";
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
-      else
-      {
-        var source = mDocGenGroupManager.SearchNameAssembly(groupName
-          , previousName);
-        if (null == source)
-        {
-          retValue = false;
-          string title = "Data Entry Error";
-          string message = "The DocAssembly record was not found.";
-          MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-        else
-        {
-          source.Name = record.Name;
-          source.Description = record.Description;
-          source.FileSpec = record.FileSpec;
-          source.MainImage = record.MainImage;
           MoveAssemblies(docGroup, source, record);
         }
       }
@@ -1094,6 +1069,9 @@ namespace LJCDocGroupEditor
     private void MoveAssembliesDown(DocGenGroup sourceGroup
       , DocGenAssembly source, DocGenAssembly target, bool isAddedItem = false)
     {
+      // Save target sequence before it is updated.
+      var targetSequence = target.Sequence;
+
       var docAssemblies = sourceGroup.DocGenAssemblies;
       var updateAssemblies = docAssemblies.FindAll(x =>
         x.Sequence >= target.Sequence && x.Sequence < source.Sequence);
@@ -1114,7 +1092,7 @@ namespace LJCDocGroupEditor
         // Update the sequence for the updated item only.
         if (false == isAddedItem)
         {
-          source.Sequence = target.Sequence;
+          source.Sequence = targetSequence;
         }
       }
     }
@@ -1158,6 +1136,46 @@ namespace LJCDocGroupEditor
           }
         }
       }
+    }
+
+    // Updates the record.
+    // <include path='items/UpdateAssembly/*' file='Doc/DocGenGroupList.xml'/>
+    private bool UpdateAssembly(string groupName, DocGenAssembly record
+      , string previousName)
+    {
+      bool retValue = true;
+
+      var docGroup = mDocGenGroupManager.SearchName(groupName);
+      if (null == docGroup)
+      {
+        retValue = false;
+        string title = "Data Entry Error";
+        string message = "The DocGroup record was not found.";
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
+      }
+      else
+      {
+        var source = mDocGenGroupManager.SearchNameAssembly(groupName
+          , previousName);
+        if (null == source)
+        {
+          retValue = false;
+          string title = "Data Entry Error";
+          string message = "The DocAssembly record was not found.";
+          MessageBox.Show(message, title, MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
+        else
+        {
+          source.Name = record.Name;
+          source.Description = record.Description;
+          source.FileSpec = record.FileSpec;
+          source.MainImage = record.MainImage;
+          MoveAssemblies(docGroup, source, record);
+        }
+      }
+      return retValue;
     }
     #endregion
 
@@ -1311,7 +1329,8 @@ namespace LJCDocGroupEditor
       switch (e.KeyCode)
       {
         case Keys.F1:
-          Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic, LJCHelpPageList);
+          Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+            , LJCHelpPageList);
           break;
 
         case Keys.F5:
@@ -1371,6 +1390,36 @@ namespace LJCDocGroupEditor
 
     #region Doc Assembly
 
+    // Handles the Assembly DragDrop event.
+    private void DocAssemblyGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      var groupRow = GroupGrid.LJCGetCurrentRow();
+      var groupName = groupRow.LJCGetString(DocGenGroup.ColumnName);
+      var sourceGroup = mDocGenGroupManager.SearchName(groupName);
+
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == DocAssemblyGrid.LJCDragDataName)
+      {
+        var targetIndex = DocAssemblyGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
+        {
+          // Get source group.
+          var sourceName = sourceRow.LJCGetString(DocGenAssembly.ColumnName);
+          var sourceAssembly = mDocGenGroupManager.SearchNameAssembly(groupName
+            , sourceName);
+
+          // Get target group.
+          var targetRow = DocAssemblyGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = targetRow.LJCGetString(DocGenAssembly.ColumnName);
+          var targetAssembly = mDocGenGroupManager.SearchNameAssembly(groupName
+            , targetName);
+
+          MoveAssemblies(sourceGroup, sourceAssembly, targetAssembly);
+        }
+      }
+    }
+
     // Handles the form keys.
     private void DocAssemblyGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -1415,6 +1464,16 @@ namespace LJCDocGroupEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void DocAssemblyGrid_MouseDoubleClick(object sender
+      , MouseEventArgs e)
+    {
+      if (DocAssemblyGrid.LJCGetMouseRow(e) != null)
+      {
+        DoDefaultAssembly();
+      }
+    }
+
     // Handles the SelectionChanged event.
     private void DocAssemblyGrid_SelectionChanged(object sender, EventArgs e)
     {
@@ -1423,15 +1482,6 @@ namespace LJCDocGroupEditor
         TimedChange(Change.DocAssembly);
       }
       DocAssemblyGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void DocAssemblyGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (DocAssemblyGrid.LJCGetMouseRow(e) != null)
-      {
-        DoDefaultAssembly();
-      }
     }
     #endregion
     #endregion

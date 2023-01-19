@@ -303,6 +303,7 @@
       this.DocAssemblyGrid.TabIndex = 1;
       this.DocAssemblyGrid.Text = "LJCDataGrid";
       this.DocAssemblyGrid.SelectionChanged += new System.EventHandler(this.DocAssemblyGrid_SelectionChanged);
+      this.DocAssemblyGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.DocAssemblyGrid_DragDrop);
       this.DocAssemblyGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocAssemblyGrid_KeyDown);
       this.DocAssemblyGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DocAssemblyGrid_MouseDoubleClick);
       this.DocAssemblyGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DocAssemblyGrid_MouseDown);
