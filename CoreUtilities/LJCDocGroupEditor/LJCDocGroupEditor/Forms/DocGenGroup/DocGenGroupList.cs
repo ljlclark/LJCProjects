@@ -666,7 +666,6 @@ namespace LJCDocGroupEditor
       {
         retValue = true;
       }
-      mIsDragStart = false;
 
       // Configure controls.
       if (LJCIsSelect)
@@ -735,6 +734,7 @@ namespace LJCDocGroupEditor
         GroupGrid.LJCAddColumn(DocGenGroup.ColumnName, "Name");
         GroupGrid.LJCAddColumn(DocGenGroup.ColumnDescription, "Description");
       }
+      GroupGrid.LJCDragDataName = "DocGenGroup";
     }
 
     // Setup the DocAssembly grid.
@@ -750,6 +750,7 @@ namespace LJCDocGroupEditor
         DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnName, "Name");
         DocAssemblyGrid.LJCAddColumn(DocGenAssembly.ColumnDescription, "Description");
       }
+      DocAssemblyGrid.LJCDragDataName = "DocGenAssembly";
     }
 
     // Saves the control values.
@@ -831,39 +832,6 @@ namespace LJCDocGroupEditor
       {
         mDocGenGroupManager.DocGenGroups.Add(record);
         MoveGroups(source, record);
-      }
-      return retValue;
-    }
-
-    // Creates a bounding rectangle to determine if the move operation should start.
-    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
-    {
-      Rectangle retVal;
-
-      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
-      return retVal;
-    }
-
-    private Point DragPointToGrid(Point dragPoint)
-    {
-      Point retValue;
-
-      var gridHeadingHeight = DocGenGroupHeading.Height;
-      var columnHeadersHeight = GroupGrid.ColumnHeadersHeight;
-      retValue = PointToClient(dragPoint);
-      retValue.Y -= gridHeadingHeight + columnHeadersHeight + 7;
-      return retValue;
-    }
-
-    // Gets the GroupRow at the cursor location.
-    private LJCGridRow GetGroupRow(int x, int y)
-    {
-      LJCGridRow retValue = null;
-
-      int rowIndex = GroupGrid.LJCGetMouseRowIndex(x, y);
-      if (rowIndex > -1)
-      {
-        retValue = GroupGrid.Rows[rowIndex] as LJCGridRow;
       }
       return retValue;
     }
@@ -961,22 +929,6 @@ namespace LJCDocGroupEditor
         source.Sequence = target.Sequence;
       }
     }
-
-    // Sets the DragOver background.
-    private void SetDragOverBackground(DataGridViewRow currentRow)
-    {
-      if (mPrevRow != null)
-      {
-        mPrevRow.DefaultCellStyle.BackColor = Color.White;
-      }
-      if (currentRow != null)
-      {
-        mPrevRow = currentRow;
-        var color = Color.FromArgb(0xe0, 0xe8, 0xee);
-        currentRow.DefaultCellStyle.BackColor = color;
-      }
-    }
-    private DataGridViewRow mPrevRow;
 
     // Resequence the groups.
     private void SequenceGroups()
@@ -1332,45 +1284,23 @@ namespace LJCDocGroupEditor
     // Handles the Group DragDrop event.
     private void GroupGrid_DragDrop(object sender, DragEventArgs e)
     {
-      SetDragOverBackground(null);
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
-      var gridPoint = DragPointToGrid(new Point(e.X, e.Y));
-      var rowIndex = GroupGrid.LJCGetMouseRowIndex(gridPoint.X, gridPoint.Y);
-      if (rowIndex > -1)
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == GroupGrid.LJCDragDataName)
       {
-        var sourceName = sourceRow.LJCGetString(DocGenGroup.ColumnName);
-        var sourceGroup = mDocGenGroupManager.SearchName(sourceName);
-        var targetRow = GroupGrid.Rows[rowIndex] as LJCGridRow;
-        var targetName = targetRow.LJCGetString(DocGenGroup.ColumnName);
-        var targetGroup = mDocGenGroupManager.SearchName(targetName);
-        MoveGroups(sourceGroup, targetGroup);
-      }
-    }
-
-    // Handles the DragLeave event.
-    private void GroupGrid_DragLeave(object sender, EventArgs e)
-    {
-      SetDragOverBackground(null);
-    }
-
-    // Handles the Group DragOver event.
-    private void GroupGrid_DragOver(object sender, DragEventArgs e)
-    {
-      e.Effect = DragDropEffects.None;
-
-      if (e.Data.GetDataPresent(typeof(LJCGridRow)))
-      {
-        var gridPoint = DragPointToGrid(new Point(e.X, e.Y));
-        var rowIndex = GroupGrid.LJCGetMouseRowIndex(gridPoint.X, gridPoint.Y);
-        if (rowIndex >= 0 && rowIndex < GroupGrid.RowCount)
+        var targetIndex = GroupGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
         {
-          var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
-          if (GroupGrid.Rows[rowIndex] is LJCGridRow targetRow
-            && targetRow != sourceRow)
-          {
-            SetDragOverBackground(targetRow);
-            e.Effect = DragDropEffects.Move;
-          }
+          // Get source group.
+          var sourceName = sourceRow.LJCGetString(DocGenGroup.ColumnName);
+          var sourceGroup = mDocGenGroupManager.SearchName(sourceName);
+
+          // Get target group.
+          var targetRow = GroupGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = targetRow.LJCGetString(DocGenGroup.ColumnName);
+          var targetGroup = mDocGenGroupManager.SearchName(targetName);
+
+          MoveGroups(sourceGroup, targetGroup);
         }
       }
     }
@@ -1420,38 +1350,12 @@ namespace LJCDocGroupEditor
     // Handles the MouseDown event.
     private void GroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // Initializes the drag and drop values.
-      mIsDragStart = true;
-      mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
-      mSourceRow = GetGroupRow(e.X, e.Y);
-
       if (e.Button == MouseButtons.Right
         && GroupGrid.LJCIsDifferentRow(e))
       {
         GroupGrid.LJCSetCurrentRow(e);
         TimedChange(Change.Group);
       }
-    }
-
-    // Handles the MouseMove event.
-    private void GroupGrid_MouseMove(object sender, MouseEventArgs e)
-    {
-      // Starts the drag operation if the mouse moves outside the drag start bounds.
-      Point mousePoint = new Point(e.X, e.Y);
-      if (mIsDragStart
-        && mSourceRow != null
-        && mDragStartBounds.Contains(mousePoint) == false)
-      {
-        mIsDragStart = false;
-        DoDragDrop(mSourceRow, DragDropEffects.Move);
-      }
-    }
-
-    // Handles the MouseUp event.
-    private void GroupGrid_MouseUp(object sender, MouseEventArgs e)
-    {
-      // Reset the drag start flag.
-      mIsDragStart = false;
     }
 
     // Handles the SelectionChanged event.
@@ -1584,10 +1488,6 @@ namespace LJCDocGroupEditor
     private readonly Color mBeginColor = Color.AliceBlue;
     private string mControlValuesFileName;
     private DocGenGroupManager mDocGenGroupManager;
-
-    private Rectangle mDragStartBounds;
-    private bool mIsDragStart;
-    private DataGridViewRow mSourceRow;
     #endregion
   }
 }

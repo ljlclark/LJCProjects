@@ -231,6 +231,7 @@
       this.GroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.GroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.GroupGrid.LJCAllowSelectionChange = false;
+      this.GroupGrid.LJCDragDataName = null;
       this.GroupGrid.LJCLastRowIndex = -1;
       this.GroupGrid.LJCRowHeight = 0;
       this.GroupGrid.Location = new System.Drawing.Point(0, 30);
@@ -246,13 +247,9 @@
       this.GroupGrid.Text = "LJCDataGrid";
       this.GroupGrid.SelectionChanged += new System.EventHandler(this.GroupGrid_SelectionChanged);
       this.GroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.GroupGrid_DragDrop);
-      this.GroupGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.GroupGrid_DragOver);
-      this.GroupGrid.DragLeave += new System.EventHandler(this.GroupGrid_DragLeave);
       this.GroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GroupGrid_KeyDown);
       this.GroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDoubleClick);
       this.GroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseDown);
-      this.GroupGrid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseMove);
-      this.GroupGrid.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GroupGrid_MouseUp);
       // 
       // DocAssemblyHeader
       // 
@@ -270,6 +267,7 @@
       // 
       // DocAssemblyGrid
       // 
+      this.DocAssemblyGrid.AllowDrop = true;
       this.DocAssemblyGrid.AllowUserToAddRows = false;
       this.DocAssemblyGrid.AllowUserToDeleteRows = false;
       this.DocAssemblyGrid.AllowUserToResizeRows = false;
@@ -290,6 +288,7 @@
       this.DocAssemblyGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.DocAssemblyGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.DocAssemblyGrid.LJCAllowSelectionChange = false;
+      this.DocAssemblyGrid.LJCDragDataName = null;
       this.DocAssemblyGrid.LJCLastRowIndex = -1;
       this.DocAssemblyGrid.LJCRowHeight = 0;
       this.DocAssemblyGrid.Location = new System.Drawing.Point(0, 30);

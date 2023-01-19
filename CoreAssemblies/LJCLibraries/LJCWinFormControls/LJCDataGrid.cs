@@ -40,16 +40,6 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    ///// <summary>
-    ///// The overridden OnSelectionChanged event.
-    ///// </summary>
-    ///// <param name="e">The event arguments.</param>
-    //protected override void OnSelectionChanged(EventArgs e)
-    //{
-    //	base.OnSelectionChanged(e);
-    //	//SetLastRow();
-    //}
-
     #region Row Data Methods
 
     // Clears the rows without allowing SelectionChange.
@@ -183,7 +173,39 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    #region Row and Column Selection Methods
+    #region Column Get Methods
+
+    // Retrieves the column where the mouse was clicked.
+    /// <include path='items/LJCGetMouseColumn/*' file='Doc/LJCDataGrid.xml'/>
+    public DataGridViewColumn LJCGetMouseColumn(MouseEventArgs e)
+    {
+      DataGridViewColumn retValue = null;
+
+      int columnIndex = LJCGetMouseColumnIndex(e);
+      if (columnIndex >= 0)
+      {
+        retValue = Columns[columnIndex];
+      }
+      return retValue;
+    }
+
+    // Retrieves the column index where the mouse was clicked.
+    /// <include path='items/LJCGetMouseColumnIndex/*' file='Doc/LJCDataGrid.xml'/>
+    public int LJCGetMouseColumnIndex(MouseEventArgs e)
+    {
+      int retValue = -1;
+
+      HitTestInfo info = HitTest(e.X, e.Y);
+      if (info.RowIndex >= 0
+        && info.RowIndex < Rows.Count)
+      {
+        retValue = info.ColumnIndex;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Row Get Methods
 
     ///<summary>Returns the current or first row.</summary>
     public LJCGridRow LJCGetCurrentRow()
@@ -199,17 +221,50 @@ namespace LJCWinFormControls
       return retValue;
     }
 
-    // Retrieves the column index where the mouse was clicked.
-    /// <include path='items/LJCGetMouseColumnIndex/*' file='Doc/LJCDataGrid.xml'/>
-    public int LJCGetMouseColumnIndex(MouseEventArgs e)
+    // Retrieves the row for a DragOver or DragDrop event.
+    /// <summary>
+    /// Retrieves the row for a DragOver or DragDrop event.
+    /// </summary>
+    /// <param name="dragPoint"></param>
+    /// <returns></returns>
+    public int LJCGetDragRowIndex(Point dragPoint)
     {
-      int retValue = -1;
+      int retValue;
 
-      HitTestInfo info = HitTest(e.X, e.Y);
-      if (info.RowIndex >= 0
-        && info.RowIndex < Rows.Count)
+      var adjustPoint = PointToClient(dragPoint);
+      retValue = LJCGetMouseRowIndex(adjustPoint.X, adjustPoint.Y);
+      return retValue;
+    }
+
+    // Gets the GroupRow at the cursor location.
+    /// <summary>
+    /// Gets the GroupRow at the cursor location.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public LJCGridRow LJCGetMouseRow(int x, int y)
+    {
+      LJCGridRow retValue = null;
+
+      int rowIndex = LJCGetMouseRowIndex(x, y);
+      if (rowIndex >= 0)
       {
-        retValue = info.ColumnIndex;
+        retValue = Rows[rowIndex] as LJCGridRow;
+      }
+      return retValue;
+    }
+
+    // Retrieves the row where the mouse was clicked
+    /// <include path='items/LJCGetMouseRow/*' file='Doc/LJCDataGrid.xml'/>
+    public LJCGridRow LJCGetMouseRow(MouseEventArgs e)
+    {
+      LJCGridRow retValue = null;
+
+      int rowIndex = LJCGetMouseRowIndex(e);
+      if (rowIndex >= 0)
+      {
+        retValue = Rows[rowIndex] as LJCGridRow;
       }
       return retValue;
     }
@@ -243,34 +298,9 @@ namespace LJCWinFormControls
       }
       return retValue;
     }
+    #endregion
 
-    // Retrieves the column where the mouse was clicked.
-    /// <include path='items/LJCGetMouseColumn/*' file='Doc/LJCDataGrid.xml'/>
-    public DataGridViewColumn LJCGetMouseColumn(MouseEventArgs e)
-    {
-      DataGridViewColumn retValue = null;
-
-      int columnIndex = LJCGetMouseColumnIndex(e);
-      if (columnIndex >= 0)
-      {
-        retValue = Columns[columnIndex];
-      }
-      return retValue;
-    }
-
-    // Retrieves the row where the mouse was clicked
-    /// <include path='items/LJCGetMouseRow/*' file='Doc/LJCDataGrid.xml'/>
-    public LJCGridRow LJCGetMouseRow(MouseEventArgs e)
-    {
-      LJCGridRow retValue = null;
-
-      int rowIndex = LJCGetMouseRowIndex(e);
-      if (rowIndex >= 0)
-      {
-        retValue = Rows[rowIndex] as LJCGridRow;
-      }
-      return retValue;
-    }
+    #region Row Set Methods
 
     // Sets the current row to the mouse row.
     /// <include path='items/LJCSetMouseCurrentRow/*' file='Doc/LJCDataGrid.xml'/>
@@ -676,11 +706,139 @@ namespace LJCWinFormControls
     }
     #endregion
 
+    #region DragDrop Event Handlers
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="drgevent"></param>
+    protected override void OnDragDrop(DragEventArgs drgevent)
+    {
+      base.OnDragDrop(drgevent);
+
+      SetDragOverBackground(null);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnDragLeave(EventArgs e)
+    {
+      base.OnDragLeave(e);
+
+      SetDragOverBackground(null);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="drgevent"></param>
+    protected override void OnDragOver(DragEventArgs drgevent)
+    {
+      base.OnDragOver(drgevent);
+
+      drgevent.Effect = DragDropEffects.None;
+
+      if (drgevent.Data.GetDataPresent(typeof(LJCGridRow)))
+      {
+        var targetIndex = LJCGetDragRowIndex(new Point(drgevent.X, drgevent.Y));
+        if (targetIndex >= 0 && targetIndex < RowCount)
+        {
+          var sourceRow = drgevent.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+          var dragDataName = sourceRow.LJCGetString("DragDataName");
+          if (dragDataName == LJCDragDataName)
+          {
+            if (Rows[targetIndex] is LJCGridRow targetRow
+              && targetRow != sourceRow)
+            {
+              SetDragOverBackground(targetRow);
+              drgevent.Effect = DragDropEffects.Move;
+            }
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+      base.OnMouseDown(e);
+
+      // Initializes the drag and drop values.
+      if (e.Button == MouseButtons.Left)
+      {
+        mIsDragStart = true;
+        mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
+        mSourceRow = LJCGetMouseRow(e.X, e.Y);
+        mSourceRow.LJCSetString("DragDataName", LJCDragDataName);
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+      base.OnMouseMove(e);
+
+      // Starts the drag operation if the mouse moves outside
+      // the drag start bounds.
+      Point mousePoint = new Point(e.X, e.Y);
+      if (mIsDragStart
+        && mSourceRow != null
+        && mDragStartBounds.Contains(mousePoint) == false)
+      {
+        mIsDragStart = false;
+        DoDragDrop(mSourceRow, DragDropEffects.Move);
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+      base.OnMouseUp(e);
+
+      // Reset the drag start flag.
+      mIsDragStart = false;
+    }
+
+    // Creates a bounding rectangle to determine if the move operation should start.
+    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
+    {
+      Rectangle retVal;
+
+      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
+      return retVal;
+    }
+
+    // Sets the DragOver background.
+    private void SetDragOverBackground(LJCGridRow currentRow)
+    {
+      if (mPrevRow != null)
+      {
+        mPrevRow.DefaultCellStyle.BackColor = Color.White;
+      }
+      if (currentRow != null)
+      {
+        mPrevRow = currentRow;
+        var color = Color.FromArgb(0xe0, 0xe8, 0xee);
+        currentRow.DefaultCellStyle.BackColor = color;
+      }
+    }
+    #endregion
+
     #region Properties
 
-    /// <summary>Gets or sets the Row Height value.</summary>
-    [DefaultValue(18)]
-    public int LJCRowHeight { get; set; }
+    /// <summary></summary>
+    public string LJCDragDataName { get; set; }
 
     /// <summary>Gets or sets the allow SelectionChange indicator.</summary>
     [Browsable(false)]
@@ -689,12 +847,23 @@ namespace LJCWinFormControls
     /// <summary>The last changed row index.</summary>
     [Browsable(false)]
     public int LJCLastRowIndex { get; set; }
+
+    /// <summary>Gets or sets the Row Height value.</summary>
+    [DefaultValue(18)]
+    public int LJCRowHeight { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly int mAverageCharWidth = 8;
     private Timer mTimer;
+
+    private Rectangle mDragStartBounds;
+    private bool mIsDragStart;
+    //private DataGridViewRow mSourceRow;
+    //private DataGridViewRow mPrevRow;
+    private LJCGridRow mSourceRow;
+    private LJCGridRow mPrevRow;
     #endregion
   }
 }
