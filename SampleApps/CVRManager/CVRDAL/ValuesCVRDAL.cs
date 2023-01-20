@@ -24,7 +24,7 @@ namespace CVRDAL
 		/// <param name="programConfigFileSpec">The Program Config FileSpec.</param>
 		public void SetProperties(string programConfigFileSpec)
 		{
-			StandardSettings = new StandardSettings();
+			StandardSettings = new StandardUISettings();
 			StandardSettings.SetProperties(programConfigFileSpec);
 
 			var settings = StandardSettings;
@@ -43,7 +43,7 @@ namespace CVRDAL
 		public CVRManagers Managers { get; private set; }
 
 		// Gets or sets the StandardSettings value.
-		internal StandardSettings StandardSettings { get; set; }
+		internal StandardUISettings StandardSettings { get; set; }
 		#endregion
 	}
 }
