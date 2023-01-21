@@ -1,13 +1,5 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// ListTemplate.cs
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using LJCDBClientLib;
-using LJCNetCommon;
-using LJCWinFormCommon;
 // #SectionBegin Class
 // #Value _AppName_
 // #Value _ClassName_
@@ -15,6 +7,16 @@ using LJCWinFormCommon;
 // #Value _FullAppName_
 // #Value _NameSpace_
 // #Value _VarClassName_
+// _FullAppName_.cs
+using System;
+//using System.Collections.Generic;
+using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
+//using LJCDBClientLib;
+using LJCNetCommon;
+using LJCWinFormCommon;
+using LJCWinFormControls;
 using _FullAppName_DAL;
 
 namespace _Namespace_
@@ -86,14 +88,11 @@ namespace _Namespace_
     // Retrieves the list rows.
     private void DataRetrieve_ClassName_()
     {
-      _CollectionName_ dataRecords;
-
       Cursor = Cursors.WaitCursor;
       _ClassName_Grid.LJCRowsClear();
 
-      // If the grid is a child grid.
-      //var parentRow = SalesCommon.CurrentRow(_ClassName_Grid);
-      //if (parentRow != null)
+      // If child grid.
+      //if (_ClassName_Grid.CurrentRow is LJCGridRow parentRow)
       //{
       //  // Data from items.
       //  int parentID = parentRow.LJCGetInt32(Parent.ColumnID);
@@ -103,10 +102,10 @@ namespace _Namespace_
       //		{ _ClassName_.ColumnParentID, parentID }
       //	};
       //var manager = Managers._ClassName_Manager;
-      //	dataRecords = manager.Load(keyRecord);
-      // If the grid is not a child grid.
+      //var	dataRecords = manager.Load(keyRecord);
+      // If not child grid.
       var manager = Managers._ClassName_Manager;
-      dataRecords = manager.Load();
+      var dataRecords = manager.Load();
 
       if (dataRecords != null && dataRecords.Count > 0)
       {
@@ -115,17 +114,16 @@ namespace _Namespace_
           RowAdd_ClassName_(dataRecord);
         }
       }
-      //}
       Cursor = Cursors.Default;
       DoChange(Change._ClassName_);
+      //}
+      Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd_ClassName_(_ClassName_ dataRecord)
     {
-      LJCGridRow retValue;
-
-      retValue = _ClassName_Grid.LJCRowAdd();
+      var retValue = _ClassName_Grid.LJCRowAdd();
       SetStoredValues_ClassName_(retValue, dataRecord);
 
       // Sets the row values from a data object.
@@ -251,11 +249,10 @@ namespace _Namespace_
       string message;
       bool success = false;
 
-      LJCGridRow row = _ClassName_Grid.CurrentRow as LJCGridRow;
       //if (ParentGrid.CurrentRow is LJCGridRow parentRow
-      //  && row != null)
+      //  && _ClassName_Grid.CurrentRow is LJCGridRow row)
       //{
-      if (row != null)
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
       {
         title = "Delete Confirmation";
         message = FormCommon.DeleteConfirm;
@@ -335,8 +332,8 @@ namespace _Namespace_
           LJCSelectedRecord = dataRecord;
         }
         Cursor = Cursors.Default;
-        DialogResult = DialogResult.OK;
       }
+      DialogResult = DialogResult.OK;
     }
 
     // Adds new row or updates row with changes from the detail dialog.
@@ -402,12 +399,6 @@ namespace _Namespace_
 
     #region Item Change Support
 
-    // Starts the Timer with the Change value.
-    internal void TimedChange(Change change)
-    {
-      ChangeTimer.DoChange(change.ToString());
-    }
-
     // Start the Change processing.
     private void StartChangeProcessing()
     {
@@ -424,6 +415,12 @@ namespace _Namespace_
       changeType = (Change)Enum.Parse(typeof(Change)
         , ChangeTimer.ChangeName);
       DoChange(changeType);
+    }
+
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
     }
 
     // Gets or sets the ChangeTimer object.
@@ -808,26 +805,28 @@ namespace _Namespace_
       }
     }
 
-    // Handles the MouseDown event.
-    private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
-    {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      _ClassName_Grid.Select();
-      if (e.Button == MouseButtons.Right
-        && _ClassName_Grid.LJCIsDifferentRow(e))
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        _ClassName_Grid.LJCSetCurrentRow(e);
-        ChangeTimer.DoChange(Change._ClassName_.ToString());
-      }
-    }
-
     // Handles the MouseDoubleClick event.
     private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
       if (_ClassName_Grid.LJCGetMouseRowIndex(e) > -1)
       {
         DoDefault_ClassName_();
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
+    {
+      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+      if (e.Button == MouseButtons.Right)
+      {
+        _ClassName_Grid.Select();
+        if (_ClassName_Grid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          _ClassName_Grid.LJCSetCurrentRow(e);
+          ChangeTimer.DoChange(Change._ClassName_.ToString());
+        }
       }
     }
 

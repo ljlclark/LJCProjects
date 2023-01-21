@@ -9,25 +9,27 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDocLibDAL;
-using System.Diagnostics;
 
 namespace LJCDocGroupEditor
 {
   // The list form.
   /// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
-  public partial class DocGenGroupList : Form
+  internal partial class DocGenGroupList : Form
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocGenGroupList()
+    internal DocGenGroupList()
     {
+      Cursor = Cursors.WaitCursor;
       InitializeComponent();
 
-      LJCHelpFile = "FacilityManager.chm";
+      // Initialize property values.
+      LJCHelpFile = "DocGenGroupEditor.chm";
       LJCHelpPageList = "DocGenGroupList.htm";
       LJCHelpPageDetail = "DocGenGroupDetail.htm";
+      Cursor = Cursors.Default;
     }
     #endregion
 
@@ -46,31 +48,28 @@ namespace LJCDocGroupEditor
     #region Group
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DataRetrieveGroup()
     {
-      DocGenGroups records;
-
+      Cursor = Cursors.WaitCursor;
       GroupGrid.LJCRowsClear();
-      records = mDocGenGroupManager.Load();
 
-      if (records != null && records.Count > 0)
+      var dataRecords = mDocGenGroupManager.Load();
+
+      if (dataRecords != null && dataRecords.Count > 0)
       {
-        foreach (DocGenGroup record in records)
+        foreach (DocGenGroup dataRecord in dataRecords)
         {
-          RowAddGroup(record);
+          RowAddGroup(dataRecord);
         }
       }
+      Cursor = Cursors.Default;
       DoChange(Change.Group);
     }
 
     // Adds a grid row and updates it with the record values.
-    /// <include path='items/RowAdd/*' file='../../LJCDocLib/Common/List.xml'/>
     private LJCGridRow RowAddGroup(DocGenGroup dataRecord)
     {
-      LJCGridRow retValue;
-
-      retValue = GroupGrid.LJCRowAdd();
+      var retValue = GroupGrid.LJCRowAdd();
       SetStoredValuesGroup(retValue, dataRecord);
 
       // Sets the row values from a data object.
@@ -79,7 +78,6 @@ namespace LJCDocGroupEditor
     }
 
     // Updates the current row with the record values.
-    /// <include path='items/RowUpdate/*' file='../../LJCDocLib/Common/List.xml'/>
     private void RowUpdateGroup(DocGenGroup dataRecord)
     {
       if (GroupGrid.CurrentRow is LJCGridRow row)
@@ -90,28 +88,30 @@ namespace LJCDocGroupEditor
     }
 
     // Sets the row stored values.
-    /// <include path='items/SetStoredValues/*' file='../../LJCDocLib/Common/List.xml'/>
     private void SetStoredValuesGroup(LJCGridRow row, DocGenGroup dataRecord)
     {
       row.LJCSetString(DocGenGroup.ColumnName, dataRecord.Name);
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../LJCDocLib/Common/List.xml'/>
     private bool RowSelectGroup(DocGenGroup dataRecord)
     {
-      string rowID;
       bool retValue = false;
 
-      foreach (LJCGridRow row in GroupGrid.Rows)
+      if (dataRecord != null)
       {
-        rowID = row.LJCGetString(DocGenGroup.ColumnName);
-        if (rowID == dataRecord.Name)
+        Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in GroupGrid.Rows)
         {
-          GroupGrid.LJCSetCurrentRow(row, true);
-          retValue = true;
-          break;
+          var rowName = row.LJCGetString(DocGenGroup.ColumnName);
+          if (rowName == dataRecord.Name)
+          {
+            GroupGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
         }
+        Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -120,40 +120,38 @@ namespace LJCDocGroupEditor
     #region Doc Assembly
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DataRetrieveAssembly()
     {
-      DocGenAssemblies records;
-
+      Cursor = Cursors.WaitCursor;
       DocAssemblyGrid.LJCRowsClear();
 
-      // if child grid.
       if (GroupGrid.CurrentRow is LJCGridRow parentRow)
       {
+        // Data from items.
         string groupName = parentRow.LJCGetString(DocGenGroup.ColumnName);
         if (NetString.HasValue(groupName))
         {
-          records = mDocGenGroupManager.LoadAssemblies(groupName);
+          var manager = mDocGenGroupManager;
+          var dataRecords = manager.LoadAssemblies(groupName);
 
-          if (records != null && records.Count > 0)
+          if (dataRecords != null && dataRecords.Count > 0)
           {
-            foreach (DocGenAssembly record in records)
+            foreach (DocGenAssembly dataRecord in dataRecords)
             {
-              RowAddAssembly(record);
+              RowAddAssembly(dataRecord);
             }
           }
+          Cursor = Cursors.Default;
           DoChange(Change.DocAssembly);
         }
       }
+      Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
-    /// <include path='items/RowAdd/*' file='../../LJCDocLib/Common/List.xml'/>
     private LJCGridRow RowAddAssembly(DocGenAssembly dataRecord)
     {
-      LJCGridRow retValue;
-
-      retValue = DocAssemblyGrid.LJCRowAdd();
+      var retValue = DocAssemblyGrid.LJCRowAdd();
       SetStoredValuesAssembly(retValue, dataRecord);
 
       // Sets the row values from a data object.
@@ -162,7 +160,6 @@ namespace LJCDocGroupEditor
     }
 
     // Updates the current row with the record values.
-    /// <include path='items/RowUpdate/*' file='../../LJCDocLib/Common/List.xml'/>
     private void RowUpdateAssembly(DocGenAssembly dataRecord)
     {
       if (DocAssemblyGrid.CurrentRow is LJCGridRow row)
@@ -173,7 +170,6 @@ namespace LJCDocGroupEditor
     }
 
     // Sets the row stored values.
-    /// <include path='items/SetStoredValues/*' file='../../LJCDocLib/Common/List.xml'/>
     private void SetStoredValuesAssembly(LJCGridRow row
       , DocGenAssembly dataRecord)
     {
@@ -181,21 +177,24 @@ namespace LJCDocGroupEditor
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../LJCDocLib/Common/List.xml'/>
     private bool RowSelectAssembly(DocGenAssembly dataRecord)
     {
-      string rowID;
       bool retValue = false;
 
-      foreach (LJCGridRow row in DocAssemblyGrid.Rows)
+      if (dataRecord != null)
       {
-        rowID = row.LJCGetString(DocGenAssembly.ColumnName);
-        if (rowID == dataRecord.Name)
+        Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in DocAssemblyGrid.Rows)
         {
-          DocAssemblyGrid.LJCSetCurrentRow(row, true);
-          retValue = true;
-          break;
+          var rowName = row.LJCGetString(DocGenAssembly.ColumnName);
+          if (rowName == dataRecord.Name)
+          {
+            DocAssemblyGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
         }
+        Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -207,7 +206,6 @@ namespace LJCDocGroupEditor
     #region Group
 
     // Performs the default list action.
-    /// <include path='items/DoDefault/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoDefaultGroup()
     {
       if (LJCIsSelect)
@@ -221,17 +219,10 @@ namespace LJCDocGroupEditor
     }
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoNewGroup()
     {
-      DocGenGroupDetail detail;
-
-      detail = new DocGenGroupDetail()
+      var detail = new DocGenGroupDetail()
       {
-        // Data from parent window or list.
-        //LJCParentID = parentRow.LJCGetInt(Parent.ColumnID),
-        //LJCParentName = parentRow.LJCGetString(Parent.ColumnName),
-
         LJCHelpFileName = LJCHelpFile,
         LJCHelpPageName = LJCHelpPageDetail,
       };
@@ -242,17 +233,16 @@ namespace LJCDocGroupEditor
     }
 
     //  Displays a detail dialog to edit an existing record.
-    /// <include path='items/DoEdit/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoEditGroup()
     {
-      DocGenGroupDetail detail;
-
       if (GroupGrid.CurrentRow is LJCGridRow row)
       {
-        detail = new DocGenGroupDetail()
-        {
-          LJCID = row.LJCGetString(DocGenGroup.ColumnName),
+        // Data from items.
+        var name = row.LJCGetString(DocGenGroup.ColumnName);
 
+        var detail = new DocGenGroupDetail()
+        {
+          LJCID = name,  // ?
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = LJCHelpPageDetail,
         };
@@ -263,32 +253,7 @@ namespace LJCDocGroupEditor
       }
     }
 
-    // Adds new row or updates existing row with changes from the detail dialog.
-    /// <include path='items/Detail_Change/*' file='../../LJCDocLib/Common/List.xml'/>
-    void GroupDetail_Change(object sender, EventArgs e)
-    {
-      DocGenGroupDetail detail;
-
-      detail = sender as DocGenGroupDetail;
-      if (detail.LJCIsUpdate)
-      {
-        if (UpdateGroup(detail.LJCRecord))
-        {
-          mDocGenGroupManager.Save();
-          RowUpdateGroup(detail.LJCRecord);
-        }
-      }
-      else
-      {
-        if (AddGroup(detail.LJCRecord))
-        {
-          TimedChange(Change.Group);
-        }
-      }
-    }
-
     // Deletes the selected row.
-    /// <include path='items/DoDelete/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoDeleteGroup()
     {
       string title;
@@ -297,7 +262,7 @@ namespace LJCDocGroupEditor
       if (GroupGrid.CurrentRow is LJCGridRow row)
       {
         title = "Delete Confirmation";
-        message = "Are you sure you want to delete the selected item?";
+        message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
@@ -306,66 +271,55 @@ namespace LJCDocGroupEditor
             Name = row.LJCGetString(DocGenGroup.ColumnName)
           };
           mDocGenGroupManager.DeleteGroup(keyObject);
-          //if (NetString.HasValue(mDocGenGroupManager.ErrorText))
-          //{
-          //	message = "Unable to delete the selected item.\r\n"
-          //	+ "There may be attached items or referencing items.";
-          //	MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-          //		, MessageBoxIcon.Exclamation);
-          //}
-          //else
-          //{
           if (mDocGenGroupManager.Save())
           {
             GroupGrid.Rows.Remove(row);
             TimedChange(Change.Group);
           }
-          //}
         }
       }
     }
 
     // Refreshes the list.
-    /// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoRefreshGroup()
     {
-      DocGenGroup record;
-      string id = null;
+      string name = null;
 
+      Cursor = Cursors.WaitCursor;
       if (GroupGrid.CurrentRow is LJCGridRow row)
       {
-        id = row.LJCGetString(DocGenGroup.ColumnName);
+        name = row.LJCGetString(DocGenGroup.ColumnName);
       }
       DataRetrieveGroup();
 
       // Select the original row.
-      if (NetString.HasValue(id))
+      if (NetString.HasValue(name))
       {
-        record = new DocGenGroup()
+        var dataRecord = new DocGenGroup()
         {
-          Name = id
+          Name = name
         };
-        RowSelectGroup(record);
+        RowSelectGroup(dataRecord);
       }
+      Cursor = Cursors.Default;
     }
 
     // Sets the selected item and returns to the parent form.
-    /// <include path='items/DoSelect/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoSelectGroup()
     {
-      DocGenGroup record;
-      string name;
-
       LJCSelectedRecord = null;
       if (GroupGrid.CurrentRow is LJCGridRow row)
       {
-        name = row.LJCGetString(DocGenGroup.ColumnName);
-        record = mDocGenGroupManager.SearchName(name);
-        if (record != null)
+        Cursor = Cursors.WaitCursor;
+        var name = row.LJCGetString(DocGenGroup.ColumnName);
+
+        var dataRecord = mDocGenGroupManager.SearchName(name);
+        if (dataRecord != null)
         {
-          LJCSelectedRecord = record;
+          LJCSelectedRecord = dataRecord;
         }
       }
+      Cursor = Cursors.Default;
       DialogResult = DialogResult.OK;
     }
 
@@ -376,12 +330,36 @@ namespace LJCDocGroupEditor
       mDocGenGroupManager.Save();
       DoRefreshGroup();
     }
+
+    // Adds new row or updates existing row with changes from the detail dialog.
+    void GroupDetail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as DocGenGroupDetail;
+      if (detail.LJCRecord != null)
+      {
+        var dataRecord = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          if (UpdateGroup(dataRecord))
+          {
+            mDocGenGroupManager.Save();
+            RowUpdateGroup(dataRecord);
+          }
+        }
+        else
+        {
+          if (AddGroup(dataRecord))
+          {
+            TimedChange(Change.Group);
+          }
+        }
+      }
+    }
     #endregion
 
     #region Doc Assembly
 
     // Performs the default list action.
-    /// <include path='items/DoDefault/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoDefaultAssembly()
     {
       if (LJCIsSelect)
@@ -395,17 +373,13 @@ namespace LJCDocGroupEditor
     }
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoNewAssembly()
     {
-      DocGenAssemblyDetail detail;
-
-      if (GroupGrid.CurrentRow is LJCGridRow parentRow
-        && DocAssemblyGrid.CurrentRow is LJCGridRow row)
+      if (GroupGrid.CurrentRow is LJCGridRow parentRow)
       {
-        detail = new DocGenAssemblyDetail()
+        var detail = new DocGenAssemblyDetail()
         {
-          // Data from parent window or list.
+          // Data from items.
           LJCParentID = parentRow.LJCGetString(DocGenGroup.ColumnName),
           LJCParentName = parentRow.LJCGetString(DocGenGroup.ColumnName),
 
@@ -420,7 +394,6 @@ namespace LJCDocGroupEditor
     }
 
     //  Displays a detail dialog to edit an existing record.
-    /// <include path='items/DoEdit/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoEditAssembly()
     {
       DocGenAssemblyDetail detail;
@@ -428,14 +401,16 @@ namespace LJCDocGroupEditor
       if (GroupGrid.CurrentRow is LJCGridRow parentRow
         && DocAssemblyGrid.CurrentRow is LJCGridRow row)
       {
+        // Data from items.
+        var name = row.LJCGetString(DocGenAssembly.ColumnName);
+        var parentID = parentRow.LJCGetString(DocGenGroup.ColumnName);
+        var parentName = parentRow.LJCGetString(DocGenGroup.ColumnName);
+
         detail = new DocGenAssemblyDetail()
         {
-          LJCID = row.LJCGetString(DocGenAssembly.ColumnName),
-
-          // Data from parent window or list.
-          LJCParentID = parentRow.LJCGetString(DocGenGroup.ColumnName),
-          LJCParentName = parentRow.LJCGetString(DocGenGroup.ColumnName),
-
+          LJCID = name,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = "DocGenAssemblyDetail.htm"
         };
@@ -446,33 +421,7 @@ namespace LJCDocGroupEditor
       }
     }
 
-    // Adds new row or updates existing row with changes from the detail dialog.
-    /// <include path='items/Detail_Change/*' file='../../LJCDocLib/Common/List.xml'/>
-    void AssemblyDetail_Change(object sender, EventArgs e)
-    {
-      DocGenAssemblyDetail detail;
-
-      detail = sender as DocGenAssemblyDetail;
-      if (detail.LJCIsUpdate)
-      {
-        if (UpdateAssembly(detail.LJCParentName, detail.LJCRecord
-          , detail.PreviousName))
-        {
-          mDocGenGroupManager.Save();
-          RowUpdateAssembly(detail.LJCRecord);
-        }
-      }
-      else
-      {
-        if (AddAssembly(detail.LJCParentName, detail.LJCRecord))
-        {
-          TimedChange(Change.DocAssembly);
-        }
-      }
-    }
-
     // Deletes the selected row.
-    /// <include path='items/DoDelete/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoDeleteAssembly()
     {
       string title;
@@ -482,7 +431,7 @@ namespace LJCDocGroupEditor
         && DocAssemblyGrid.CurrentRow is LJCGridRow row)
       {
         title = "Delete Confirmation";
-        message = "Are you sure you want to delete the selected item?";
+        message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
@@ -492,66 +441,56 @@ namespace LJCDocGroupEditor
             Name = row.LJCGetString(DocGenAssembly.ColumnName)
           };
           mDocGenGroupManager.DeleteAssembly(parentName, keyObject);
-          //if (NetString.HasValue(mDocGenGroupManager.ErrorText))
-          //{
-          //	message = "Unable to delete the selected item.\r\n"
-          //		+ "There may be attached items or referencing items.";
-          //	MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-          //		, MessageBoxIcon.Exclamation);
-          //}
-          //else
-          //{
           if (mDocGenGroupManager.Save())
           {
             DocAssemblyGrid.Rows.Remove(row);
             TimedChange(Change.DocAssembly);
           }
-          //}
         }
       }
     }
 
     // Refreshes the list.
-    /// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoRefreshAssembly()
     {
-      DocGenAssembly record;
-      string id = null;
+      string name = null;
 
+      Cursor = Cursors.WaitCursor;
       if (DocAssemblyGrid.CurrentRow is LJCGridRow row)
       {
-        id = row.LJCGetString(DocGenAssembly.ColumnName);
+        name = row.LJCGetString(DocGenAssembly.ColumnName);
       }
       DataRetrieveAssembly();
 
       // Select the original row.
-      if (NetString.HasValue(id))
+      if (NetString.HasValue(name))
       {
-        record = new DocGenAssembly()
+        var dataRecord = new DocGenAssembly()
         {
-          Name = id
+          Name = name
         };
-        RowSelectAssembly(record);
+        RowSelectAssembly(dataRecord);
       }
+      Cursor = Cursors.Default;
     }
 
     // Sets the selected item and returns to the parent form.
-    /// <include path='items/DoSelect/*' file='../../LJCDocLib/Common/List.xml'/>
     private void DoSelectAssembly()
     {
-      DocGenAssembly record;
-
       LJCSelectedAssembly = null;
       if (GroupGrid.CurrentRow is LJCGridRow parentRow
         && DocAssemblyGrid.CurrentRow is LJCGridRow row)
       {
+        Cursor = Cursors.WaitCursor;
         var groupName = parentRow.LJCGetString(DocGenGroup.ColumnName);
         var name = row.LJCGetString(DocGenAssembly.ColumnName);
-        record = mDocGenGroupManager.SearchNameAssembly(groupName, name);
-        if (record != null)
+
+        var dataRecord = mDocGenGroupManager.SearchNameAssembly(groupName, name);
+        if (dataRecord != null)
         {
-          LJCSelectedAssembly = record;
+          LJCSelectedAssembly = dataRecord;
         }
+        Cursor = Cursors.Default;
       }
       DialogResult = DialogResult.OK;
     }
@@ -568,6 +507,32 @@ namespace LJCDocGroupEditor
           SequenceAssemblies(group);
           mDocGenGroupManager.Save();
           DoRefreshAssembly();
+        }
+      }
+    }
+
+    // Adds new row or updates existing row with changes from the detail dialog.
+    void AssemblyDetail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as DocGenAssemblyDetail;
+      if (detail.LJCRecord != null)
+      {
+        var dataRecord = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          if (UpdateAssembly(detail.LJCParentName, dataRecord
+            , detail.PreviousName))
+          {
+            mDocGenGroupManager.Save();
+            RowUpdateAssembly(dataRecord);
+          }
+        }
+        else
+        {
+          if (AddAssembly(detail.LJCParentName, dataRecord))
+          {
+            TimedChange(Change.DocAssembly);
+          }
         }
       }
     }
@@ -671,8 +636,27 @@ namespace LJCDocGroupEditor
       {
         retValue = true;
       }
+      ControlSetup();
 
-      // Configure controls.
+      // Set initial control values.
+      NetFile.CreateFolder("ControlValues");
+      mControlValuesFileName = @"ControlValues\DocGenGroup.xml";
+
+      if (retValue)
+      {
+        SetupGrids();
+        StartChangeProcessing();
+        Cursor = Cursors.Default;
+      }
+      Cursor = Cursors.Default;
+      return retValue;
+    }
+
+    #region Setup Support
+
+    // Initial Control setup.
+    private void ControlSetup()
+    {
       if (LJCIsSelect)
       {
         // This is a Selection List.
@@ -686,22 +670,7 @@ namespace LJCDocGroupEditor
         Text = "Group List";
         GroupMenuSelect.Visible = false;
       }
-
-      // Set initial control values.
-      NetFile.CreateFolder("ControlValues");
-      mControlValuesFileName = @"ControlValues\DocGenGroup.xml";
-
-      if (retValue)
-      {
-        SetupGrids();
-        StartChangeProcessing();
-      }
-
-      Cursor = Cursors.Default;
-      return retValue;
     }
-
-    #region Setup Support
 
     // Loads the initial Control data.
     private void LoadControlData()
@@ -717,6 +686,57 @@ namespace LJCDocGroupEditor
       {
         FileCombo.SelectedIndex = 0;
       }
+    }
+
+    // Restores the control values.
+    private void RestoreControlValues()
+    {
+      ControlValue controlValue;
+
+      if (File.Exists(mControlValuesFileName))
+      {
+        ControlValues = NetCommon.XmlDeserialize(typeof(ControlValues)
+          , mControlValuesFileName) as ControlValues;
+
+        if (ControlValues != null)
+        {
+          // Restore Window values.
+          controlValue = ControlValues.LJCSearchName(Name);
+          if (controlValue != null)
+          {
+            Left = controlValue.Left;
+            Top = controlValue.Top;
+            Width = controlValue.Width;
+            Height = controlValue.Height;
+          }
+
+          // Restore Splitter, Grid and other values.
+          FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
+
+          GroupGrid.LJCRestoreColumnValues(ControlValues);
+          DocAssemblyGrid.LJCRestoreColumnValues(ControlValues);
+        }
+      }
+    }
+
+    // Saves the control values.
+    private void SaveControlValues()
+    {
+      ControlValues controlValues = new ControlValues();
+
+      // Save Grid Column values.
+      GroupGrid.LJCSaveColumnValues(controlValues);
+      DocAssemblyGrid.LJCSaveColumnValues(controlValues);
+
+      // Save Splitter values.
+      controlValues.Add("DocGenGroupSplit.SplitterDistance", 0, 0, 0
+        , MainSplit.SplitterDistance);
+
+      // Save Window values.
+      controlValues.Add(Name, Left, Top, Width, Height);
+
+      NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
+        , mControlValuesFileName);
     }
 
     // Setup the data grids.
@@ -759,57 +779,6 @@ namespace LJCDocGroupEditor
       DocAssemblyGrid.LJCDragDataName = "DocGenAssembly";
     }
 
-    // Saves the control values.
-    private void SaveControlValues()
-    {
-      ControlValues controlValues = new ControlValues();
-
-      // Save Grid Column values.
-      GroupGrid.LJCSaveColumnValues(controlValues);
-      DocAssemblyGrid.LJCSaveColumnValues(controlValues);
-
-      // Save Splitter values.
-      controlValues.Add("DocGenGroupSplit.SplitterDistance", 0, 0, 0
-        , MainSplit.SplitterDistance);
-
-      // Save Window values.
-      controlValues.Add(Name, Left, Top, Width, Height);
-
-      NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
-        , mControlValuesFileName);
-    }
-
-    // Restores the control values.
-    private void RestoreControlValues()
-    {
-      ControlValue controlValue;
-
-      if (File.Exists(mControlValuesFileName))
-      {
-        ControlValues = NetCommon.XmlDeserialize(typeof(ControlValues)
-          , mControlValuesFileName) as ControlValues;
-
-        if (ControlValues != null)
-        {
-          // Restore Window values.
-          controlValue = ControlValues.LJCSearchName(Name);
-          if (controlValue != null)
-          {
-            Left = controlValue.Left;
-            Top = controlValue.Top;
-            Width = controlValue.Width;
-            Height = controlValue.Height;
-          }
-
-          // Restore Splitter, Grid and other values.
-          FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
-
-          GroupGrid.LJCRestoreColumnValues(ControlValues);
-          DocAssemblyGrid.LJCRestoreColumnValues(ControlValues);
-        }
-      }
-    }
-
     /// <summary>Gets or sets the ControlValues item.</summary>
     public ControlValues ControlValues { get; set; }
     #endregion
@@ -826,8 +795,6 @@ namespace LJCDocGroupEditor
       DocGenGroup source;
       bool retValue = true;
 
-      // *** Next Statement *** Change - 1/20/23
-      //source = mDocGenGroupManager.DocGenGroups.LJCSearchName(record.Name);
       source = mDocGenGroupManager.SearchName(record.Name);
       if (source != null)
       {
@@ -1303,7 +1270,6 @@ namespace LJCDocGroupEditor
     // Handles the Group DragDrop event.
     private void GroupGrid_DragDrop(object sender, DragEventArgs e)
     {
-      Debug.WriteLine("GroupGrid_DragDrop");
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
       var dragDataName = sourceRow.LJCGetString("DragDataName");
       if (dragDataName == GroupGrid.LJCDragDataName)
@@ -1385,7 +1351,6 @@ namespace LJCDocGroupEditor
     // Handles the SelectionChanged event.
     private void GroupGrid_SelectionChanged(object sender, EventArgs e)
     {
-      Debug.WriteLine("GroupGrid_SelectionChanged");
       if (GroupGrid.LJCAllowSelectionChange)
       {
         TimedChange(Change.Group);
@@ -1459,6 +1424,16 @@ namespace LJCDocGroupEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void DocAssemblyGrid_MouseDoubleClick(object sender
+      , MouseEventArgs e)
+    {
+      if (DocAssemblyGrid.LJCGetMouseRow(e) != null)
+      {
+        DoDefaultAssembly();
+      }
+    }
+
     // Handles the MouseDown event.
     private void DocAssemblyGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -1470,16 +1445,6 @@ namespace LJCDocGroupEditor
           DocAssemblyGrid.LJCSetCurrentRow(e);
           TimedChange(Change.DocAssembly);
         }
-      }
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void DocAssemblyGrid_MouseDoubleClick(object sender
-      , MouseEventArgs e)
-    {
-      if (DocAssemblyGrid.LJCGetMouseRow(e) != null)
-      {
-        DoDefaultAssembly();
       }
     }
 
