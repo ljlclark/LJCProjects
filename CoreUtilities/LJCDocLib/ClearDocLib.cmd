@@ -21,7 +21,7 @@ del %Solution%\%Project%\bin\Debug\LJCDocLibDAL.xml
 set Project=LJCDocGen
 set File=LJCDocGen
 call %ClearBuild%
-del %Solution%\%Project%\%bin%\ControlValues*.xml
+del %Solution%\%Project%\%bin%\ControlValues\*.xml
 rmdir %Solution%\%Project%\%bin%\ControlValues
 del %Solution%\%Project%\%bin%\*.log
 del %Solution%\%Project%\%bin%\LJCDocGroupEditor.exe

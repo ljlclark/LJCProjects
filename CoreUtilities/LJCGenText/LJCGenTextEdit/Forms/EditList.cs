@@ -475,11 +475,14 @@ namespace LJCGenTextEdit
     // <summary>Handles the MouseDown event.</summary>
     private void SectionGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right
-        && SectionGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        SectionGrid.LJCSetCurrentRow(e);
-        ChangeTimer.DoChange(ChangeSection);
+        SectionGrid.Select();
+        if (SectionGrid.LJCIsDifferentRow(e))
+        {
+          SectionGrid.LJCSetCurrentRow(e);
+          ChangeTimer.DoChange(ChangeSection);
+        }
       }
     }
 
@@ -554,11 +557,14 @@ namespace LJCGenTextEdit
     // <summary>Handles the MouseDown event.</summary>
     private void ItemGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right
-        && ItemGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        ItemGrid.LJCSetCurrentRow(e);
-        ChangeTimer.DoChange(ChangeItem);
+        ItemGrid.Select();
+        if (ItemGrid.LJCIsDifferentRow(e))
+        {
+          ItemGrid.LJCSetCurrentRow(e);
+          ChangeTimer.DoChange(ChangeItem);
+        }
       }
     }
 
@@ -633,11 +639,14 @@ namespace LJCGenTextEdit
     // <summary>Handles the MouseDown event.</summary>
     private void ReplacementGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right
-        && ReplacementGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        ReplacementGrid.LJCSetCurrentRow(e);
-        ChangeTimer.DoChange(ChangeReplacement);
+        ReplacementGrid.Select();
+        if (ReplacementGrid.LJCIsDifferentRow(e))
+        {
+          ReplacementGrid.LJCSetCurrentRow(e);
+          ChangeTimer.DoChange(ChangeReplacement);
+        }
       }
     }
 

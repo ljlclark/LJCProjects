@@ -1026,12 +1026,15 @@ namespace LJCViewEditor
     private void ViewGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && ViewGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        ViewGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.View);
+        ViewGrid.Select();
+        if (ViewGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ViewGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.View);
+        }
       }
     }
 
@@ -1107,12 +1110,15 @@ namespace LJCViewEditor
     private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && ColumnGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        ColumnGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Column);
+        ColumnGrid.Select();
+        if (ColumnGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ColumnGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Column);
+        }
       }
     }
 
@@ -1183,12 +1189,15 @@ namespace LJCViewEditor
     private void JoinGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && JoinGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        JoinGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Join);
+        JoinGrid.Select();
+        if (JoinGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          JoinGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Join);
+        }
       }
     }
 
@@ -1259,12 +1268,15 @@ namespace LJCViewEditor
     private void JoinOnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && JoinOnGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        JoinOnGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.JoinOn);
+        JoinOnGrid.Select();
+        if (JoinOnGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          JoinOnGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.JoinOn);
+        }
       }
     }
 
@@ -1335,12 +1347,15 @@ namespace LJCViewEditor
     private void JoinColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && JoinColumnGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        JoinColumnGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.JoinColumn);
+        JoinColumnGrid.Select();
+        if (JoinColumnGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          JoinColumnGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.JoinColumn);
+        }
       }
     }
 
@@ -1411,12 +1426,15 @@ namespace LJCViewEditor
     private void FilterGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && FilterGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        FilterGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Filter);
+        FilterGrid.Select();
+        if (FilterGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          FilterGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Filter);
+        }
       }
     }
 
@@ -1487,12 +1505,15 @@ namespace LJCViewEditor
     private void ConditionSetGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && ConditionSetGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        ConditionSetGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.ConditionSet);
+        ConditionSetGrid.Select();
+        if (ConditionSetGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ConditionSetGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.ConditionSet);
+        }
       }
     }
 
@@ -1563,12 +1584,15 @@ namespace LJCViewEditor
     private void ConditionGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && ConditionGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        ConditionGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Condition);
+        ConditionGrid.Select();
+        if (ConditionGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ConditionGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Condition);
+        }
       }
     }
 
@@ -1639,12 +1663,15 @@ namespace LJCViewEditor
     private void OrderByGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && OrderByGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        OrderByGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.OrderBy);
+        OrderByGrid.Select();
+        if (OrderByGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          OrderByGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.OrderBy);
+        }
       }
     }
 
@@ -1698,12 +1725,15 @@ namespace LJCViewEditor
     private void DataGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-      if (e.Button == MouseButtons.Right
-        && DataGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        DataGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Data);
+        DataGrid.Select();
+        if (DataGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          DataGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Data);
+        }
       }
     }
 

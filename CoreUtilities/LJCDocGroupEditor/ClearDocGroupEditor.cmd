@@ -16,4 +16,7 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=LJCDocGroupEditor
 set File=LJCDocGroupEditor
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\ControlValues\*.xml
+rmdir %Solution%\%Project%\%bin%\ControlValues
 del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
+pause

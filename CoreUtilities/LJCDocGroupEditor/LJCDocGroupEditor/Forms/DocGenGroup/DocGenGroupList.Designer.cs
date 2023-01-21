@@ -230,6 +230,7 @@
       dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.GroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.GroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.GroupGrid.LJCAllowDrag = true;
       this.GroupGrid.LJCAllowSelectionChange = false;
       this.GroupGrid.LJCDragDataName = null;
       this.GroupGrid.LJCLastRowIndex = -1;
@@ -287,6 +288,7 @@
       dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.DocAssemblyGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.DocAssemblyGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.DocAssemblyGrid.LJCAllowDrag = true;
       this.DocAssemblyGrid.LJCAllowSelectionChange = false;
       this.DocAssemblyGrid.LJCDragDataName = null;
       this.DocAssemblyGrid.LJCLastRowIndex = -1;

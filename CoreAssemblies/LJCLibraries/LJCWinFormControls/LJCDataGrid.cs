@@ -768,13 +768,19 @@ namespace LJCWinFormControls
     {
       base.OnMouseDown(e);
 
-      // Initializes the drag and drop values.
       if (e.Button == MouseButtons.Left)
       {
-        mIsDragStart = true;
-        mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
-        mSourceRow = LJCGetMouseRow(e.X, e.Y);
-        mSourceRow.LJCSetString("DragDataName", LJCDragDataName);
+        if (LJCAllowDrag)
+        {
+          // Initializes the drag and drop values.
+          mSourceRow = LJCGetMouseRow(e.X, e.Y);
+          if (mSourceRow != null)
+          {
+            mIsDragStart = true;
+            mDragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
+            mSourceRow.LJCSetString("DragDataName", LJCDragDataName);
+          }
+        }
       }
     }
 
@@ -786,15 +792,18 @@ namespace LJCWinFormControls
     {
       base.OnMouseMove(e);
 
-      // Starts the drag operation if the mouse moves outside
-      // the drag start bounds.
-      Point mousePoint = new Point(e.X, e.Y);
-      if (mIsDragStart
-        && mSourceRow != null
-        && mDragStartBounds.Contains(mousePoint) == false)
+      if (LJCAllowDrag)
       {
-        mIsDragStart = false;
-        DoDragDrop(mSourceRow, DragDropEffects.Move);
+        // Starts the drag operation if the mouse moves outside
+        // the drag start bounds.
+        Point mousePoint = new Point(e.X, e.Y);
+        if (mIsDragStart
+          && mSourceRow != null
+          && mDragStartBounds.Contains(mousePoint) == false)
+        {
+          mIsDragStart = false;
+          DoDragDrop(mSourceRow, DragDropEffects.Move);
+        }
       }
     }
 
@@ -838,11 +847,16 @@ namespace LJCWinFormControls
     #region Properties
 
     /// <summary></summary>
-    public string LJCDragDataName { get; set; }
+    [DefaultValue(false)]
+    public bool LJCAllowDrag { get; set; }
 
     /// <summary>Gets or sets the allow SelectionChange indicator.</summary>
     [Browsable(false)]
     public bool LJCAllowSelectionChange { get; set; }
+
+    /// <summary></summary>
+    [Browsable(false)]
+    public string LJCDragDataName { get; set; }
 
     /// <summary>The last changed row index.</summary>
     [Browsable(false)]

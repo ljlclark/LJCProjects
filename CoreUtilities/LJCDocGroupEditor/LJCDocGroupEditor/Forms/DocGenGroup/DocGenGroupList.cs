@@ -9,6 +9,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDocLibDAL;
+using System.Diagnostics;
 
 namespace LJCDocGroupEditor
 {
@@ -1302,6 +1303,7 @@ namespace LJCDocGroupEditor
     // Handles the Group DragDrop event.
     private void GroupGrid_DragDrop(object sender, DragEventArgs e)
     {
+      Debug.WriteLine("GroupGrid_DragDrop");
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
       var dragDataName = sourceRow.LJCGetString("DragDataName");
       if (dragDataName == GroupGrid.LJCDragDataName)
@@ -1369,17 +1371,21 @@ namespace LJCDocGroupEditor
     // Handles the MouseDown event.
     private void GroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right
-        && GroupGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        GroupGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.Group);
+        GroupGrid.Select();
+        if (GroupGrid.LJCIsDifferentRow(e))
+        {
+          GroupGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.Group);
+        }
       }
     }
 
     // Handles the SelectionChanged event.
     private void GroupGrid_SelectionChanged(object sender, EventArgs e)
     {
+      Debug.WriteLine("GroupGrid_SelectionChanged");
       if (GroupGrid.LJCAllowSelectionChange)
       {
         TimedChange(Change.Group);
@@ -1456,11 +1462,14 @@ namespace LJCDocGroupEditor
     // Handles the MouseDown event.
     private void DocAssemblyGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      if (e.Button == MouseButtons.Right
-        && DocAssemblyGrid.LJCIsDifferentRow(e))
+      if (e.Button == MouseButtons.Right)
       {
-        DocAssemblyGrid.LJCSetCurrentRow(e);
-        TimedChange(Change.DocAssembly);
+        DocAssemblyGrid.Select();
+        if (DocAssemblyGrid.LJCIsDifferentRow(e))
+        {
+          DocAssemblyGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.DocAssembly);
+        }
       }
     }
 
@@ -1483,6 +1492,7 @@ namespace LJCDocGroupEditor
       }
       DocAssemblyGrid.LJCAllowSelectionChange = true;
     }
+
     #endregion
     #endregion
 
