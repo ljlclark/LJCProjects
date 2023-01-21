@@ -205,19 +205,6 @@ namespace LJCDocGroupEditor
 
     #region Group
 
-    // Performs the default list action.
-    private void DoDefaultGroup()
-    {
-      if (LJCIsSelect)
-      {
-        DoSelectGroup();
-      }
-      else
-      {
-        DoEditGroup();
-      }
-    }
-
     // Displays a detail dialog for a new record.
     private void DoNewGroup()
     {
@@ -242,7 +229,7 @@ namespace LJCDocGroupEditor
 
         var detail = new DocGenGroupDetail()
         {
-          LJCID = name,  // ?
+          LJCName = name,
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = LJCHelpPageDetail,
         };
@@ -304,25 +291,6 @@ namespace LJCDocGroupEditor
       Cursor = Cursors.Default;
     }
 
-    // Sets the selected item and returns to the parent form.
-    private void DoSelectGroup()
-    {
-      LJCSelectedRecord = null;
-      if (GroupGrid.CurrentRow is LJCGridRow row)
-      {
-        Cursor = Cursors.WaitCursor;
-        var name = row.LJCGetString(DocGenGroup.ColumnName);
-
-        var dataRecord = mDocGenGroupManager.SearchName(name);
-        if (dataRecord != null)
-        {
-          LJCSelectedRecord = dataRecord;
-        }
-      }
-      Cursor = Cursors.Default;
-      DialogResult = DialogResult.OK;
-    }
-
     // Resequences the groups.
     private void DoSequenceGroups()
     {
@@ -359,19 +327,6 @@ namespace LJCDocGroupEditor
 
     #region Doc Assembly
 
-    // Performs the default list action.
-    private void DoDefaultAssembly()
-    {
-      if (LJCIsSelect)
-      {
-        DoSelectAssembly();
-      }
-      else
-      {
-        DoEditAssembly();
-      }
-    }
-
     // Displays a detail dialog for a new record.
     private void DoNewAssembly()
     {
@@ -380,7 +335,6 @@ namespace LJCDocGroupEditor
         var detail = new DocGenAssemblyDetail()
         {
           // Data from items.
-          LJCParentID = parentRow.LJCGetString(DocGenGroup.ColumnName),
           LJCParentName = parentRow.LJCGetString(DocGenGroup.ColumnName),
 
           LJCHelpFileName = LJCHelpFile,
@@ -403,13 +357,11 @@ namespace LJCDocGroupEditor
       {
         // Data from items.
         var name = row.LJCGetString(DocGenAssembly.ColumnName);
-        var parentID = parentRow.LJCGetString(DocGenGroup.ColumnName);
         var parentName = parentRow.LJCGetString(DocGenGroup.ColumnName);
 
         detail = new DocGenAssemblyDetail()
         {
-          LJCID = name,
-          LJCParentID = parentID,
+          LJCName = name,
           LJCParentName = parentName,
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = "DocGenAssemblyDetail.htm"
@@ -472,27 +424,6 @@ namespace LJCDocGroupEditor
         RowSelectAssembly(dataRecord);
       }
       Cursor = Cursors.Default;
-    }
-
-    // Sets the selected item and returns to the parent form.
-    private void DoSelectAssembly()
-    {
-      LJCSelectedAssembly = null;
-      if (GroupGrid.CurrentRow is LJCGridRow parentRow
-        && DocAssemblyGrid.CurrentRow is LJCGridRow row)
-      {
-        Cursor = Cursors.WaitCursor;
-        var groupName = parentRow.LJCGetString(DocGenGroup.ColumnName);
-        var name = row.LJCGetString(DocGenAssembly.ColumnName);
-
-        var dataRecord = mDocGenGroupManager.SearchNameAssembly(groupName, name);
-        if (dataRecord != null)
-        {
-          LJCSelectedAssembly = dataRecord;
-        }
-        Cursor = Cursors.Default;
-      }
-      DialogResult = DialogResult.OK;
     }
 
     // Resequences the doc assemblies.
@@ -636,7 +567,7 @@ namespace LJCDocGroupEditor
       {
         retValue = true;
       }
-      ControlSetup();
+      Text = "Group List";
 
       // Set initial control values.
       NetFile.CreateFolder("ControlValues");
@@ -653,24 +584,6 @@ namespace LJCDocGroupEditor
     }
 
     #region Setup Support
-
-    // Initial Control setup.
-    private void ControlSetup()
-    {
-      if (LJCIsSelect)
-      {
-        // This is a Selection List.
-        Text = "Group Selection";
-        GroupMenuEdit.ShortcutKeyDisplayString = "";
-        GroupMenuEdit.ShortcutKeys = ((Keys)(Keys.Control | Keys.E));
-      }
-      else
-      {
-        // This is a display list.
-        Text = "Group List";
-        GroupMenuSelect.Visible = false;
-      }
-    }
 
     // Loads the initial Control data.
     private void LoadControlData()
@@ -1186,12 +1099,6 @@ namespace LJCDocGroupEditor
       DoRefreshGroup();
     }
 
-    // <summary>Calls the Select method.</summary>
-    private void GroupMenuSelect_Click(object sender, EventArgs e)
-    {
-      DoSelectGroup();
-    }
-
     // Allows display and edit of text file.
     private void GroupMenuFileEdit_Click(object sender, EventArgs e)
     {
@@ -1236,12 +1143,6 @@ namespace LJCDocGroupEditor
     private void AssemblyMenuRefresh_Click(object sender, EventArgs e)
     {
       DoRefreshAssembly();
-    }
-
-    // <summary>Calls the Select method.</summary>
-    private void AssemblyMenuSelect_Click(object sender, EventArgs e)
-    {
-      DoSelectAssembly();
     }
 
     // Resequences the doc assemblies.
@@ -1307,7 +1208,7 @@ namespace LJCDocGroupEditor
           break;
 
         case Keys.Enter:
-          DoDefaultGroup();
+          DoEditGroup();
           e.Handled = true;
           break;
 
@@ -1330,7 +1231,7 @@ namespace LJCDocGroupEditor
     {
       if (GroupGrid.LJCGetMouseRow(e) != null)
       {
-        DoDefaultGroup();
+        DoEditGroup();
       }
     }
 
@@ -1406,7 +1307,7 @@ namespace LJCDocGroupEditor
           break;
 
         case Keys.Enter:
-          DoDefaultAssembly();
+          DoEditAssembly();
           e.Handled = true;
           break;
 
@@ -1430,7 +1331,7 @@ namespace LJCDocGroupEditor
     {
       if (DocAssemblyGrid.LJCGetMouseRow(e) != null)
       {
-        DoDefaultAssembly();
+        DoEditAssembly();
       }
     }
 
@@ -1462,26 +1363,6 @@ namespace LJCDocGroupEditor
     #endregion
 
     #region Public Properties
-
-    /// <summary>Gets or sets the parent ID value.</summary>
-    public int LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
-
-    /// <summary>Gets or sets the LJCIsSelect value.</summary>
-    public bool LJCIsSelect { get; set; }
-
-    /// <summary>Gets a reference to the selected record.</summary>
-    public DocGenGroup LJCSelectedRecord { get; private set; }
-
-    /// <summary>Gets a reference to the selected assembly record.</summary>
-    public DocGenAssembly LJCSelectedAssembly { get; private set; }
 
     /// <summary>The help file name.</summary>
     public string LJCHelpFile

@@ -1,4 +1,6 @@
-// Copyright (c) Lester J. Clark 2019 - All Rights Reserved
+// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DocGenGroupDetail.cs
 using System;
 using System.Drawing;
 using System.Text;
@@ -21,7 +23,7 @@ namespace LJCDocGroupEditor
 			InitializeComponent();
 
 			// Initialize property values.
-			LJCID = null;
+			LJCName = null;
 			LJCIsUpdate = false;
 			LJCRecord = null;
 			LJCHelpFileName = "FacilityManager.chm";
@@ -74,11 +76,11 @@ namespace LJCDocGroupEditor
 			DocGenGroup record;
 
 			Cursor = Cursors.WaitCursor;
-			if (NetString.HasValue(LJCID))
+			if (NetString.HasValue(LJCName))
 			{
 				LJCIsUpdate = true;
 				NameTextbox.ReadOnly = true;
-				record = DocGenGroupManager.SearchName(LJCID);
+				record = DocGenGroupManager.SearchName(LJCName);
 				GetRecordValues(record);
 			}
 			else
@@ -225,7 +227,7 @@ namespace LJCDocGroupEditor
 		#region Properties
 
 		/// <summary>Gets or sets the primary ID value.</summary>
-		public string LJCID { get; set; }
+		public string LJCName { get; set; }
 
 		/// <summary>Gets the LJCIsUpdate value.</summary>
 		public bool LJCIsUpdate { get; private set; }

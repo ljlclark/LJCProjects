@@ -22,8 +22,7 @@ namespace LJCDocGroupEditor
 			InitializeComponent();
 
 			// Initialize property values.
-			LJCID = null;
-			LJCParentID = null;
+			LJCName = null;
 			LJCParentName = null;
 			LJCIsUpdate = false;
 			LJCRecord = null;
@@ -77,12 +76,12 @@ namespace LJCDocGroupEditor
 			DocGenAssembly record = null;
 
 			Cursor = Cursors.WaitCursor;
-			if (NetString.HasValue(LJCID))
+			if (NetString.HasValue(LJCName))
 			{
 				LJCIsUpdate = true;
 				//NameTextbox.ReadOnly = true;
 				record = DocGenGroupManager.SearchNameAssembly(LJCParentName
-					, LJCID);
+					, LJCName);
 				GetRecordValues(record);
 			}
 			else
@@ -275,10 +274,7 @@ namespace LJCDocGroupEditor
 		#region Properties
 
 		/// <summary>Gets or sets the primary ID value.</summary>
-		public string LJCID { get; set; }
-
-		/// <summary>Gets or sets the Parent ID value.</summary>
-		public string LJCParentID { get; set; }
+		public string LJCName { get; set; }
 
 		/// <summary>Gets or sets the LJCParentName value.</summary>
 		public string LJCParentName

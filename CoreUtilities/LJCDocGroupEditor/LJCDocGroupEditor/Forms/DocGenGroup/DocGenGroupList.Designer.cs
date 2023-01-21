@@ -39,7 +39,6 @@
       this.GroupMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.DocGenGroupRefreshSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.GroupMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.GroupMenuSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.GroupMenuFileEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.GroupMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
       this.DocGenGroupCloseSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -57,7 +56,6 @@
       this.DocAssemblyMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.DocAssemblyRefreshSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.DocAssemblyMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.DocAssemblyMenuSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.DocAssemblyMenuSequence = new System.Windows.Forms.ToolStripMenuItem();
       this.FileLabel = new System.Windows.Forms.Label();
       this.FileCombo = new System.Windows.Forms.ComboBox();
@@ -82,13 +80,12 @@
             this.GroupMenuDelete,
             this.DocGenGroupRefreshSeparator,
             this.GroupMenuRefresh,
-            this.GroupMenuSelect,
             this.GroupMenuFileEdit,
             this.GroupMenuSequence,
             this.DocGenGroupCloseSeparator,
             this.GroupMenuClose});
       this.GroupMenu.Name = "mFacilityMenu";
-      this.GroupMenu.Size = new System.Drawing.Size(185, 310);
+      this.GroupMenu.Size = new System.Drawing.Size(185, 278);
       // 
       // toolStripMenuItem1
       // 
@@ -138,13 +135,6 @@
       this.GroupMenuRefresh.Size = new System.Drawing.Size(184, 32);
       this.GroupMenuRefresh.Text = "&Refresh";
       this.GroupMenuRefresh.Click += new System.EventHandler(this.GroupMenuRefresh_Click);
-      // 
-      // GroupMenuSelect
-      // 
-      this.GroupMenuSelect.Name = "GroupMenuSelect";
-      this.GroupMenuSelect.Size = new System.Drawing.Size(184, 32);
-      this.GroupMenuSelect.Text = "&Select";
-      this.GroupMenuSelect.Click += new System.EventHandler(this.GroupMenuSelect_Click);
       // 
       // GroupMenuFileEdit
       // 
@@ -321,10 +311,9 @@
             this.DocAssemblyMenuDelete,
             this.DocAssemblyRefreshSeparator,
             this.DocAssemblyMenuRefresh,
-            this.DocAssemblyMenuSelect,
             this.DocAssemblyMenuSequence});
       this.DocAssemblyMenu.Name = "mFacilityMenu";
-      this.DocAssemblyMenu.Size = new System.Drawing.Size(212, 240);
+      this.DocAssemblyMenu.Size = new System.Drawing.Size(212, 208);
       // 
       // toolStripMenuItem2
       // 
@@ -374,13 +363,6 @@
       this.DocAssemblyMenuRefresh.Size = new System.Drawing.Size(211, 32);
       this.DocAssemblyMenuRefresh.Text = "&Refresh";
       this.DocAssemblyMenuRefresh.Click += new System.EventHandler(this.AssemblyMenuRefresh_Click);
-      // 
-      // DocAssemblyMenuSelect
-      // 
-      this.DocAssemblyMenuSelect.Name = "DocAssemblyMenuSelect";
-      this.DocAssemblyMenuSelect.Size = new System.Drawing.Size(211, 32);
-      this.DocAssemblyMenuSelect.Text = "&Select";
-      this.DocAssemblyMenuSelect.Click += new System.EventHandler(this.AssemblyMenuSelect_Click);
       // 
       // DocAssemblyMenuSequence
       // 
@@ -441,7 +423,6 @@
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuRefresh;
 		private System.Windows.Forms.ToolStripSeparator DocGenGroupCloseSeparator;
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuClose;
-		private System.Windows.Forms.ToolStripMenuItem GroupMenuSelect;
 		private System.Windows.Forms.SplitContainer MainSplit;
 		private LJCWinFormControls.LJCDataGrid GroupGrid;
 		private LJCWinFormControls.LJCDataGrid DocAssemblyGrid;
@@ -454,7 +435,6 @@
 		private System.Windows.Forms.ToolStripMenuItem DocAssemblyMenuDelete;
 		private System.Windows.Forms.ToolStripSeparator DocAssemblyRefreshSeparator;
 		private System.Windows.Forms.ToolStripMenuItem DocAssemblyMenuRefresh;
-		private System.Windows.Forms.ToolStripMenuItem DocAssemblyMenuSelect;
 		private System.Windows.Forms.ToolStripMenuItem GroupMenuFileEdit;
 		private System.Windows.Forms.Label FileLabel;
 		private System.Windows.Forms.ComboBox FileCombo;
