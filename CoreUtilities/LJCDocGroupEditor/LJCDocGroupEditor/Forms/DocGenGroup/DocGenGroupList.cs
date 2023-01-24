@@ -1,4 +1,4 @@
-// Copyright(c) Lester J.Clark and Contributors.
+// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DocGenGroupList.cs
 using System;
@@ -744,7 +744,7 @@ namespace LJCDocGroupEditor
         {
           // Set source to end of groups.
           isAddedItem = true;
-          source.Sequence = docGroups.Count;
+          source.Sequence = docGroups.Count + 1;
         }
       }
 
@@ -774,14 +774,17 @@ namespace LJCDocGroupEditor
     private void MoveGroupsDown(DocGenGroup source, DocGenGroup target
       , bool isAddedItem = false)
     {
-      // Save target sequence before it is updated.
-      var targetSequence = target.Sequence;
-
       var docGroups = mDocGenGroupManager.DocGenGroups;
       var updateGroups = docGroups.FindAll(x => x.Sequence >= target.Sequence
         && x.Sequence < source.Sequence);
       if (updateGroups != null && updateGroups.Count > 0)
       {
+        // Change source sequence to make room for moved sequences.
+        source.Sequence = docGroups.Count + 1;
+
+        // Save target sequence before it gets updated.
+        var targetSequence = target.Sequence;
+
         // Sort in descending order.
         updateGroups.Sort((x, y) => y.Sequence.CompareTo(x.Sequence));
         foreach (DocGenGroup updateGroup in updateGroups)
@@ -812,13 +815,19 @@ namespace LJCDocGroupEditor
         && x.Sequence > source.Sequence);
       if (updateGroups != null && updateGroups.Count > 0)
       {
+        // Change source sequence to make room for moved sequences.
+        source.Sequence = docGroups.Count + 1;
+
+        // Save target sequence before it gets updated.
+        var targetSequence = target.Sequence;
+
         // Sort in ascending order.
         updateGroups.Sort((x, y) => x.Sequence.CompareTo(y.Sequence));
         foreach (DocGenGroup updateGroup in updateGroups)
         {
           updateGroup.Sequence--;
         }
-        source.Sequence = target.Sequence;
+        source.Sequence = targetSequence;
       }
     }
 
@@ -920,7 +929,7 @@ namespace LJCDocGroupEditor
         {
           // Set source to end of groups.
           isAddedItem = true;
-          source.Sequence = docAssemblies.Count;
+          source.Sequence = docAssemblies.Count + 1;
         }
       }
 
@@ -950,14 +959,17 @@ namespace LJCDocGroupEditor
     private void MoveAssembliesDown(DocGenGroup sourceGroup
       , DocGenAssembly source, DocGenAssembly target, bool isAddedItem = false)
     {
-      // Save target sequence before it is updated.
-      var targetSequence = target.Sequence;
-
       var docAssemblies = sourceGroup.DocGenAssemblies;
       var updateAssemblies = docAssemblies.FindAll(x =>
         x.Sequence >= target.Sequence && x.Sequence < source.Sequence);
       if (updateAssemblies != null && updateAssemblies.Count > 0)
       {
+        // Change source sequence to make room for moved sequences.
+        source.Sequence = docAssemblies.Count + 1;
+
+        // Save target sequence before it gets updated.
+        var targetSequence = target.Sequence;
+
         // Sort in descending order.
         updateAssemblies.Sort((x, y) => y.Sequence.CompareTo(x.Sequence));
         foreach (DocGenAssembly updateAssembly in updateAssemblies)
@@ -989,13 +1001,19 @@ namespace LJCDocGroupEditor
         x.Sequence <= target.Sequence && x.Sequence > source.Sequence);
       if (updateAssemblies != null && updateAssemblies.Count > 0)
       {
+        // Change source sequence to make room for moved sequences.
+        source.Sequence = docAssemblies.Count + 1;
+
+        // Save target sequence before it gets updated.
+        var targetSequence = target.Sequence;
+
         // Sort in ascending order.
         updateAssemblies.Sort((x, y) => x.Sequence.CompareTo(y.Sequence));
         foreach (DocGenAssembly updateAssembly in updateAssemblies)
         {
           updateAssembly.Sequence--;
         }
-        source.Sequence = target.Sequence;
+        source.Sequence = targetSequence;
       }
     }
 
