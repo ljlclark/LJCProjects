@@ -165,15 +165,15 @@
         <Sequence>1</Sequence>
       </DocGenAssembly>
       <DocGenAssembly>
-        <Description>A program to generate table related code.</Description>
-        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\LJCGenTableCode.xml</FileSpec>
-        <Name>LJCGenTableCode</Name>
-        <Sequence>2</Sequence>
-      </DocGenAssembly>
-      <DocGenAssembly>
         <Description>A Text Generator library. (RO)</Description>
         <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTextLib\bin\Debug\LJCGenTextLib.xml</FileSpec>
         <Name>LJCGenTextLib</Name>
+        <Sequence>2</Sequence>
+      </DocGenAssembly>
+      <DocGenAssembly>
+        <Description>A program to generate table related code.</Description>
+        <FileSpec>..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\LJCGenTableCode.xml</FileSpec>
+        <Name>LJCGenTableCode</Name>
         <Sequence>3</Sequence>
       </DocGenAssembly>
       <DocGenAssembly>
