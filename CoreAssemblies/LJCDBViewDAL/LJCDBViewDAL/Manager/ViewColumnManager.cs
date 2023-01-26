@@ -1,3 +1,5 @@
+// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
 // ViewColumnManager.cs
 using LJCDBMessage;
 using LJCDBClientLib;
