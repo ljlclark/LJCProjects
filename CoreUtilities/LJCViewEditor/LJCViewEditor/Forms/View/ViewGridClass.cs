@@ -1,4 +1,4 @@
-// Copyright(c) Lester J.Clark and Contributors.
+// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewGridClass.cs
 using System;
