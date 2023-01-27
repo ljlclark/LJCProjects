@@ -1,4 +1,6 @@
-﻿// Copyright (c) Lester J. Clark 2021 - All Rights Reserved
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// UnitMeasureManagers.cs
 using System;
 using LJCDBClientLib;
 
