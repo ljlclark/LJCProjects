@@ -38,8 +38,9 @@ namespace LJCDocGenLib
       replacements.Add("_Title_", "Assembly Groups");
       string assemblyCount = AssemblyCount().ToString();
       replacements.Add("_AssemblyCount_", assemblyCount);
-      replacements.Add("_Copyright_"
-        , "Copyright &copy; Lester J. Clark 2021,2022 - All Rights Reserved");
+      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
+      copyRight += "Licensed under the MIT License.";
+      replacements.Add("_Copyright_", copyRight);
 
       Section assemblySection = sections.Add("Assembly");
       section = sections.Add("Group");

@@ -166,7 +166,8 @@ namespace LJCDocGenLib
       {
         case HTMLSection.Head:
           builder.AppendLine("<!DOCTYPE html>");
-          builder.AppendLine("<!-- Copyright(c) Lester J. Clark 2021,2022 - All Rights Reserved -->");
+          builder.AppendLine("<!-- Copyright(c) Lester J. Clark and Contributors. -->");
+          builder.AppendLine("<!-- Licensed under the MIT License. -->");
           builder.AppendLine("<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>");
           builder.AppendLine("<head>");
           builder.AppendLine("  <title>LJC Assemblies</title>");

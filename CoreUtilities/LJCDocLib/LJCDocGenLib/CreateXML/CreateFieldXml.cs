@@ -85,8 +85,9 @@ namespace LJCDocGenLib
         replacements.Add("_HasRemarks_", "True");
       }
 
-      replacements.Add("_Copyright_"
-        , "Copyright &copy; Lester J. Clark 2021,2022 - All Rights Reserved");
+      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
+      copyRight += "Licensed under the MIT License.";
+      replacements.Add("_Copyright_", copyRight);
       retValue = NetCommon.XmlSerializeToString(sections.GetType()
         , sections, null);
       return retValue;
