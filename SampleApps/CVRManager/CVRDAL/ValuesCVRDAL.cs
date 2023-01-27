@@ -1,4 +1,6 @@
-﻿// Copyright (c) Lester J. Clark 2020 - All Rights Reserved
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ValuesCVRDAL.cs
 using System;
 using LJCDBClientLib;
 using LJCNetCommon;

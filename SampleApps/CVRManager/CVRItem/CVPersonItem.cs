@@ -1,4 +1,7 @@
-﻿using CVRDAL;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CVPersonItem.cs
+using CVRDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;

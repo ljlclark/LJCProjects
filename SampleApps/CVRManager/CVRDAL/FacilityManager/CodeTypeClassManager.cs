@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CodeTypeClassManager.cs
+using System;
 using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCNetCommon;
