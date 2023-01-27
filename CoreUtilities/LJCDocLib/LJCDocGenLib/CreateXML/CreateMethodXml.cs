@@ -1,4 +1,6 @@
-﻿// CreateMethodXml.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CreateMethodXml.cs
 using System;
 using System.Collections.Generic;
 using LJCNetCommon;

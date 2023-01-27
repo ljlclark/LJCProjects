@@ -1,4 +1,6 @@
-﻿// CreateFieldXml.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CreateFieldXml.cs
 using System;
 using LJCNetCommon;
 using LJCGenTextLib;

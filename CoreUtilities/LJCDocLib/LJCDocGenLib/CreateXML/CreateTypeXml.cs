@@ -1,4 +1,6 @@
-﻿// CreateTypeXml.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CreateTypeXml.cs
 using System;
 using System.IO;
 using LJCNetCommon;

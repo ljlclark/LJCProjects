@@ -1,4 +1,6 @@
-﻿// CreateAssemblyXml.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CreateAssemblyXml.cs
 using System;
 using LJCNetCommon;
 using LJCGenTextLib;
