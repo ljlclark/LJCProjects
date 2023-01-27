@@ -7,7 +7,6 @@ using LJCRegionManager;
 
 namespace LJCRegionForm
 {
-  // Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved
   /// <summary>Displays the RegionModule form.</summary>
   public partial class RegionTabForm : Form
   {
