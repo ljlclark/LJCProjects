@@ -1,4 +1,6 @@
-﻿// ColumnGridCode.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ColumnGridCode.cs
 using DataDetail;
 using LJCDBClientLib;
 using LJCDBMessage;

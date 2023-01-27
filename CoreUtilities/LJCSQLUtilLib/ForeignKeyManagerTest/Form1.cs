@@ -1,4 +1,6 @@
-// Copyright (c) Lester J. Clark 2017-2019 - All Rights Reserved
+// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// Form1.cs
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
