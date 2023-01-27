@@ -1,3 +1,6 @@
+// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// RegionTabForm.cs
 using System;
 using System.Windows.Forms;
 using LJCRegionManager;

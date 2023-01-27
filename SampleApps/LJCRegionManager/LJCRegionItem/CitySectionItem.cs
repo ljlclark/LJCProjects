@@ -1,4 +1,7 @@
-﻿using LJCDBClientLib;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CitySectionItem.cs
+using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;
 using LJCRegionDAL;

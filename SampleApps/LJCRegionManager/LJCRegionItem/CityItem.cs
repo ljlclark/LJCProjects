@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// CityItem.cs
+using System;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;

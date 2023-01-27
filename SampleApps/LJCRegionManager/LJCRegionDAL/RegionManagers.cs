@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// RegionManagers.cs
+using System;
 using LJCDBClientLib;
 
 namespace LJCRegionDAL
