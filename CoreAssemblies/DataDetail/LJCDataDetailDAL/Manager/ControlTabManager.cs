@@ -1,4 +1,6 @@
-﻿// ManagerTemplate.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlTabManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;

@@ -1,4 +1,6 @@
-﻿// ControlRowManager.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlRowManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;

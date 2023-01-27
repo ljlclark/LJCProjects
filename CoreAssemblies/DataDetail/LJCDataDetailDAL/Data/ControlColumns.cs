@@ -1,4 +1,6 @@
-﻿// ControlColumns.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlColumns.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;

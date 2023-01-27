@@ -1,4 +1,6 @@
-﻿// CollectionTemplate.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlTabItems.cs
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

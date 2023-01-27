@@ -1,4 +1,6 @@
-﻿// ControlCode.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlCode.cs
 using System.Drawing;
 using System.Windows.Forms;
 

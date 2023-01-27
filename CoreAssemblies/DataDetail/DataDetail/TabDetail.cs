@@ -1,4 +1,7 @@
-﻿using LJCDataDetailDAL;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// TabDetail.cs
+using LJCDataDetailDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;

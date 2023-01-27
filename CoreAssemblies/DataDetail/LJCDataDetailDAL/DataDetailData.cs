@@ -1,4 +1,6 @@
-﻿// DataDetailData.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataDetailData.cs
 using LJCDataDetailDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;

@@ -1,4 +1,6 @@
-﻿// DataDetailDialog.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataDetailDialog.cs
 using LJCDataDetailDAL;
 using LJCDataDetailLib;
 using LJCNetCommon;

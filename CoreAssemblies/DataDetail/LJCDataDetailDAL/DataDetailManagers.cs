@@ -1,4 +1,6 @@
-﻿// TableManagersTemplate.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataDetailManagers.cs
 using LJCDataDetailDAL;
 using LJCDBClientLib;
 

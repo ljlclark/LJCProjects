@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- DetailConfigManager.xml -->
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DetailConfigs.xml -->
 <items>
   <CopyConstructor>
     <summary>

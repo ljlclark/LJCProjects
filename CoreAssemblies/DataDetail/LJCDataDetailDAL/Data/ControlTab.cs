@@ -1,4 +1,6 @@
-﻿// ControlTab.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlTab.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using System;

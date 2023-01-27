@@ -1,4 +1,6 @@
-﻿// DetailDialogs.cs
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ControlDetails.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using LJCNetCommon;
