@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lester J. Clark")]
 [assembly: AssemblyProduct("LJCGridDataLib")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark 2020")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark and Contributors. Licensed under the MIT License.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

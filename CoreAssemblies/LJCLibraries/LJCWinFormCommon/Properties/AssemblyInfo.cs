@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lester J. Clark")]
 [assembly: AssemblyProduct("LJCWinFormCommon")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark 2021,2022 - All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark and Contributors. Licensed under the MIT License.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
