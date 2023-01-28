@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lester J. Clark")]
 [assembly: AssemblyProduct("CVRDAL")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark 2020")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark - MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

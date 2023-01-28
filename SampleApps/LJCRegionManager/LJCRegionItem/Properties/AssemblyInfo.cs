@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lester J. Clark")]
 [assembly: AssemblyProduct("LJCRegionItem")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark 2021")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark - MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
