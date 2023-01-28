@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Program.xml -->
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocLib\Common\Program.xml -->
 <!-- <include path='items/Program/*' file='../../LJCDocLib/Common/Program.xml'/> -->
 <items>
   <Program>
