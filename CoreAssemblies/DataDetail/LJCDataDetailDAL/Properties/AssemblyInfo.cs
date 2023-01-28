@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP")]
 [assembly: AssemblyProduct("DataDetailDAL")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark and Contributors. Licensed under the MIT License.")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark - MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

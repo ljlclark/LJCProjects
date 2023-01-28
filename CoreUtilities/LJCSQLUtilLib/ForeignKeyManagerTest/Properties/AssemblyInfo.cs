@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lester J. Clark")]
 [assembly: AssemblyProduct("ForeignKeyManagerTest")]
-[assembly: AssemblyCopyright("Copyright © Lester J. Clark 2017-2019 - All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright © Lester J. Clark - MIT License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
