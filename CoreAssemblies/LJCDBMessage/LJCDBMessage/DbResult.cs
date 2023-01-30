@@ -196,27 +196,27 @@ namespace LJCDBMessage
 
     // Get DbColumns from result records.
     /// <include path='items/GetValueColumns/*' file='Doc/DbResult.xml'/>
-    public DbColumns GetValueColumns(DbValues dbValues = null)
+    public DbColumns GetValueColumns(DbValues dataValues = null)
     {
       DbColumns retValue = null;
 
       if (HasRows())
       {
-        if (null == dbValues)
+        if (null == dataValues)
         {
           //dbValues = Rows[0];
-          dbValues = Rows[0].Values;
+          dataValues = Rows[0].Values;
         }
-        retValue = dbValues.LJCCreateColumns(Columns);
+        retValue = dataValues.LJCCreateColumns(Columns);
       }
       return retValue;
     }
 
     // Sets the Columns property from the principle and join columns.
     /// <include path='items/SetColumns/*' file='Doc/DbResult.xml'/>
-    public void SetColumns(DbColumns dbColumns, DbJoins dbJoins = null)
+    public void SetColumns(DbColumns dataColumns, DbJoins dbJoins = null)
     {
-      Columns = dbColumns.Clone();
+      Columns = dataColumns.Clone();
       if (dbJoins != null && dbJoins.Count > 0)
       {
         foreach (DbJoin dbJoin in dbJoins)
@@ -252,17 +252,17 @@ namespace LJCDBMessage
     // Sets the result records from the DataTable, principle values and join values.
     /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
     public void SetRows(DataTable dataTable
-      , DbColumns dbColumns, DbJoins dbJoins = null)
+      , DbColumns dataColumns, DbJoins dbJoins = null)
     {
       if (NetCommon.HasData(dataTable))
       {
         foreach (DataRow dataRow in dataTable.Rows)
         {
-          DbValues dbValues = GetRowValues(dbColumns, dataRow);
-          AddJoinRowValues(dbValues, dataRow, dbJoins);
+          DbValues dataValues = GetRowValues(dataColumns, dataRow);
+          AddJoinRowValues(dataValues, dataRow, dbJoins);
           DbRow row = new DbRow()
           {
-            Values = dbValues
+            Values = dataValues
           };
           Rows.Add(row);
         }
@@ -271,13 +271,13 @@ namespace LJCDBMessage
 
     // Gets the result values from the data row.
     /// <include path='items/GetRowValues/*' file='Doc/DbResult.xml'/>
-    public DbValues GetRowValues(DbColumns dbColumns, DataRow dataRow)
+    public DbValues GetRowValues(DbColumns dataColumns, DataRow dataRow)
     {
       // Similar logic in LJCDBMessage.ResultConverter.GetPropertyName().
       object value;
       DbValues retValue = new DbValues();
 
-      foreach (DbColumn dbColumn in dbColumns)
+      foreach (DbColumn dbColumn in dataColumns)
       {
         // Get the datarow value.
         string columnName = dbColumn.ColumnName;
@@ -294,9 +294,9 @@ namespace LJCDBMessage
 
         if (value != null || dbColumn.AllowDBNull)
         {
-          DbValue dbValue = dbColumn;
-          dbValue.Value = value;
-          retValue.Add(dbValue);
+          DbValue dataValue = dbColumn;
+          dataValue.Value = value;
+          retValue.Add(dataValue);
         }
       }
       return retValue;

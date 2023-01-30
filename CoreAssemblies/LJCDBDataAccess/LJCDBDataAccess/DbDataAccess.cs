@@ -531,15 +531,15 @@ namespace LJCDBDataAccess
     }
 
     // Get the SQL Type name.
-    private void SetSQLTypeName(DataTable sqlTypesTable, DbColumn dbColumn)
+    private void SetSQLTypeName(DataTable sqlTypesTable, DbColumn dataColumn)
     {
       if (NetCommon.HasData(sqlTypesTable))
       {
         foreach (DataRow dataRow in sqlTypesTable.Rows)
         {
-          if (dataRow["COLUMN_NAME"].ToString() == dbColumn.ColumnName)
+          if (dataRow["COLUMN_NAME"].ToString() == dataColumn.ColumnName)
           {
-            dbColumn.SQLTypeName = dataRow["DATA_TYPE"].ToString();
+            dataColumn.SQLTypeName = dataRow["DATA_TYPE"].ToString();
             break;
           }
         }
@@ -547,15 +547,15 @@ namespace LJCDBDataAccess
     }
 
     // Sets the PrimaryKey value.
-    private void SetPrimaryKey(DataTable dataTable, DbColumn dbColumn)
+    private void SetPrimaryKey(DataTable dataTable, DbColumn dataColumn)
     {
       if (dataTable.PrimaryKey != null && dataTable.PrimaryKey.Length > 0)
       {
         foreach (DataColumn primaryColumn in dataTable.PrimaryKey)
         {
-          if (primaryColumn.ColumnName == dbColumn.ColumnName)
+          if (primaryColumn.ColumnName == dataColumn.ColumnName)
           {
-            dbColumn.IsPrimaryKey = true;
+            dataColumn.IsPrimaryKey = true;
             break;
           }
         }

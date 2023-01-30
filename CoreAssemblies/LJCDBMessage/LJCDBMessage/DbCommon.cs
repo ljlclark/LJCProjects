@@ -238,10 +238,7 @@ namespace LJCDBMessage
     public static void ClearChanged(object dataObject)
     {
       List<string> changedNames = GetChangedNames(dataObject);
-      if (changedNames != null)
-      {
-        changedNames.Clear();
-      }
+      changedNames?.Clear();
     }
 
     // Gets the names of the changed properties.
@@ -296,12 +293,12 @@ namespace LJCDBMessage
 
     // Sets the Data Object property values from the DbValues object.
     /// <include path='items/SetObjectValues2/*' file='Doc/DbCommon.xml'/>
-    public static void SetObjectValues(DbValues dbValues, object dataObject)
+    public static void SetObjectValues(DbValues dataValues, object dataObject)
     {
       LJCReflect reflect;
 
       reflect = new LJCReflect(dataObject);
-      foreach (DbValue dbValue in dbValues)
+      foreach (DbValue dbValue in dataValues)
       {
         // Similar logic in ResultConverter.CreateDataFromTable().
         reflect.SetPropertyValue(dbValue.PropertyName, dbValue.Value);
@@ -342,12 +339,12 @@ namespace LJCDBMessage
     }
 
     // Creates the value DbColumn object.
-    private static DbColumn CreateValueColumn(DbColumn dbColumn, object value)
+    private static DbColumn CreateValueColumn(DbColumn dataColumn, object value)
     {
       DbColumn retValue = null;
       bool include = true;
 
-      if (null == dbColumn
+      if (null == dataColumn
         || null == value)
       {
         include = false;
@@ -356,7 +353,7 @@ namespace LJCDBMessage
       if (include)
       {
         // Do not include AutoIncrement columns for "Insert".
-        if (true == dbColumn.AutoIncrement)
+        if (true == dataColumn.AutoIncrement)
         {
           include = false;
         }
@@ -371,7 +368,7 @@ namespace LJCDBMessage
           value = "null";
         }
 
-        retValue = new DbColumn(dbColumn)
+        retValue = new DbColumn(dataColumn)
         {
           Value = value
         };
@@ -380,7 +377,7 @@ namespace LJCDBMessage
     }
 
     // Gets the Key Column using the column collection and Key Column values. 
-    private static DbColumn GetKeyColumn(DbColumns dbColumns, DbColumn keyColumn)
+    private static DbColumn GetKeyColumn(DbColumns dataColumns, DbColumn keyColumn)
     {
       DbColumn retValue;
 
@@ -389,7 +386,7 @@ namespace LJCDBMessage
 
       // Get column definition by property name.
       var searchPropertyName = GetSearchPropertyName(keyColumn.ColumnName);
-      retValue = dbColumns.LJCSearchPropertyName(searchPropertyName);
+      retValue = dataColumns.LJCSearchPropertyName(searchPropertyName);
       if (retValue != null)
       {
         // Create key column with original name.
@@ -418,13 +415,13 @@ namespace LJCDBMessage
     }
 
     // Checks if the column should be included.
-    private static bool IsKeyColumn(DbColumn dbColumn
+    private static bool IsKeyColumn(DbColumn dataColumn
       , bool includeAutoIncrement = false)
     {
       bool retValue = true;
 
-      if (null == dbColumn
-        || null == dbColumn.Value)
+      if (null == dataColumn
+        || null == dataColumn.Value)
       {
         retValue = false;
       }
@@ -432,18 +429,18 @@ namespace LJCDBMessage
       if (retValue)
       {
         // Exclude AutoIncrement column with value of zero.
-        if (true == dbColumn.AutoIncrement
+        if (true == dataColumn.AutoIncrement
           && false == includeAutoIncrement
-          && "0" == dbColumn.Value.ToString())
+          && "0" == dataColumn.Value.ToString())
         {
           retValue = false;
         }
       }
 
       // Exclude invalid DateTime value.
-      if (retValue && "DateTime" == dbColumn.DataTypeName)
+      if (retValue && "DateTime" == dataColumn.DataTypeName)
       {
-        if (false == DateTime.TryParse(dbColumn.Value.ToString()
+        if (false == DateTime.TryParse(dataColumn.Value.ToString()
           , out DateTime dateTime))
         {
           retValue = false;

@@ -228,7 +228,7 @@
       &lt;span class="userType"&gt;DbValues&lt;/span&gt;
       object.
     </summary>
-    <param name="dbValues">The values object.</param>
+    <param name="dataValues">The values object.</param>
     <param name="dataObject">The data object.</param>
   </SetObjectValues2>
 </items>

@@ -30,6 +30,6 @@
     <summary>
       Adds the specified object.
     </summary>
-    <param name="dbValues">The item object.</param>
+    <param name="dataValues">The item object.</param>
   </Add>
 </items>

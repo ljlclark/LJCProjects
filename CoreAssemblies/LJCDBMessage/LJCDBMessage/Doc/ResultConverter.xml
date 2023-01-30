@@ -19,7 +19,7 @@
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
       object.
     </summary>
-    <param name="dbColumns">
+    <param name="dataColumns">
       The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
       object.
     </param>
@@ -38,7 +38,7 @@
     <summary>
       Creates a Data Object from the data values.
     </summary>
-    <param name="dbValues">
+    <param name="dataValues">
       The &lt;span class="userType"&gt;DbValues&lt;/span&gt; object.
     </param>
     <returns>The Data Object.</returns>

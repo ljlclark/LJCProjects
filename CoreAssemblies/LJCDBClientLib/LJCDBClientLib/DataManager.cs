@@ -77,7 +77,6 @@ namespace LJCDBClientLib
         LookupColumnNames = new List<string>();
         OrderByNames = new List<string>();
       }
-
     }
     #endregion
 
@@ -117,10 +116,11 @@ namespace LJCDBClientLib
       DbRequest retValue;
 
       var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
-      var requestKeys = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+      var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
 
       retValue = ManagerCommon.CreateRequest(RequestType.Load, TableName
-        , requestColumns, DataConfigName, SchemaName, requestKeys, filters, joins);
+        , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
+        , joins);
       retValue.OrderByNames = OrderByNames;
       retValue.PageSize = PageSize;
       retValue.PageStartIndex = PageStartIndex;
@@ -135,10 +135,10 @@ namespace LJCDBClientLib
       if ((keyColumns != null && keyColumns.Count > 0)
         || (filters != null && filters.Count > 0))
       {
-        var requestKeys = DbCommon.RequestKeys(keyColumns, BaseDefinition);
+        var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 
         Request = ManagerCommon.CreateRequest(RequestType.Delete, TableName
-          , null, DataConfigName, SchemaName, requestKeys, filters);
+          , null, DataConfigName, SchemaName, requestKeyColumns, filters);
         ExecuteRequest(Request);
       }
       else
@@ -329,10 +329,11 @@ namespace LJCDBClientLib
       DbResult retValue;
 
       var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
-      var requestKeys = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+      var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
 
       Request = ManagerCommon.CreateRequest(RequestType.Select, TableName
-        , requestColumns, DataConfigName, SchemaName, requestKeys, filters, joins);
+        , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
+        , joins);
       retValue = ExecuteRequest(Request);
       return retValue;
     }
@@ -351,10 +352,11 @@ namespace LJCDBClientLib
         // *** Next Statement *** Add - 9/7
         if (dataColumns.Count > 0)
         {
-          var requestKeys = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);
+          var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);
 
           Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
-            , dataColumns, DataConfigName, SchemaName, requestKeys, filters);
+            , dataColumns, DataConfigName, SchemaName, requestKeyColumns
+            , filters);
           ExecuteRequest(Request);
         }
       }

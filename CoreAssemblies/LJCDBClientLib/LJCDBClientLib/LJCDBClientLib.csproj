@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\ManagerCommon.xml" />
+    <Content Include="Doc\Names.txt" />
     <Content Include="Doc\ObjectManager.xml">
       <SubType>Designer</SubType>
     </Content>

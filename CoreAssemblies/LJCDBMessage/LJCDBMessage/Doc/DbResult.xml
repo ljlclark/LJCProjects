@@ -92,7 +92,7 @@
       Get &lt;span class="userType"&gt;DbValues&lt;/span&gt;
       from result records.
     </summary>
-    <param name="dbValues">The DbValues object.</param>"
+    <param name="dataValues">The DbValues object.</param>"
     <returns>
       The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
       object.
@@ -114,7 +114,7 @@
     <summary>
       Sets the Columns property from the principle and join columns.
     </summary>
-    <param name="dbColumns">The principle columns.</param>
+    <param name="dataColumns">The principle columns.</param>
     <param name="dbJoins">The joins.</param>
   </SetColumns>
   <SetData>
@@ -134,7 +134,7 @@
       Sets the result records from the DataTable, principle values and join values.
     </summary>
     <param name="dataTable">The data table.</param>
-    <param name="dbColumns">The principle columns.</param>
+    <param name="dataColumns">The principle columns.</param>
     <param name="dbJoins">The joins.</param>
     <remarks>
       <para>
@@ -151,7 +151,7 @@
     <summary>
       Gets the result values from the data row.
     </summary>
-    <param name="dbColumns">The columns collection.</param>
+    <param name="dataColumns">The columns collection.</param>
     <param name="dataRow">
       The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
       object.

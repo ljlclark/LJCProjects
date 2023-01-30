@@ -1,0 +1,89 @@
+﻿-----------
+Data Object    - A Data Object is a language object that contains public
+                 properties for data elements from a data source row.
+Property Names - The property names are usually the same as the data source
+                 column names.
+Var Name       - The associated Result Set, database Table or text file Name
+                 as in (<"Person").
+Parameter      - dataObject
+------------
+Data Rows      - This is generally a List<> collection of Data Object items
+                 with multiple rows from a data source.
+Var Name       - The plural of the contained items as in ("Persons").
+Parameter      - dataRows
+
+-------------
+Data Column    - A Data Column is an LJCNetCommon.DbColumn object that contains
+                 the data definition for one column of a data source row.
+ColumnName     - The ColumnName property must match the data source row column
+                 name or be renamed with the RenameAs property.
+PropertyName   - The PropertyName property must match the property name in the
+                 target Data Object to allow the data value to be automatically
+                 copied to the Data Object. This process is sometimes referred
+                 to as (ORM) Object Relational Mapping.
+Var Name       - The ColumnName plus "Column" as in ("nameColumn").
+Parameter      - dataColumn
+--------------
+Data Columns   - This is an LJCNetCommon.DbColumns collection of Data Column
+                 items. 
+Var Name       - The Data Object name plus "Columns" as in ("personColumns").
+Parameter      - dataColumns
+
+----------
+Data Value     -
+Var Name       - ("nameValue")
+Parmeter       - dataValue
+-----------
+Data Values    -
+Var Name       - ("personValues")
+Parameter      - dataValues
+
+----------
+Key Object     - This is a Data Object that contains a single lookup key
+                 definition and value.
+Var Name       - The ColumnName plus "Key" as in ("nameKey").
+Parameter      - keyObject
+-----------
+Key Objects    - This is generally a List<> collection of Data Object items.
+Var Name       - The Data Object name plus "Keys" as in ("personKeys").
+Parameter      - keyObjects
+
+----------
+Key Column     - A Key Column is an LJCNetCommon.DbColumn object that contains
+                 a single key definition and value.
+Var Name       - The ColumnName plus "KeyColumn" as in ("nameKeyColumn").
+Parameter      - keyColumn
+-----------
+Key Columns    - This is an LJCNetCommon.Dbolumns collection of Key Column
+                 items.
+Var Name       - The Data Object name plus "KeyColumns" as in ("personKeyColumns").
+Parameter      - keyColumns
+
+---------
+Key Value      -
+Var Name       - ("nameKeyValue")
+Parameter      - keyValue
+----------
+Key Values     -
+Var Name       - ("personKeyValues")
+Parameters     - keyValues
+
+Name         Type      Var Name           Parameter
+------------ --------- ------------------ -----------
+Data Object  object    "person"           dataObject
+Data Rows    List<>    "persons"          dataRows
+
+Data Column  DbColumn  "nameColumn"       dataColumn
+Data Columns DbColumns "personColumns"    dataColumns
+
+Data Value   DbValue   "nameValue"        dataValue
+Data Values  DbValues  "personValues"     dataValues
+
+Key Object   object    "nameKey"          keyObject
+Key Objects  List<>    "personKeys"       keyObjects
+
+Key Column   DbColumn  "nameKeyColumn"    keyColumn
+Key Columns  DbColumns "personKeyColumns" keyColumns
+
+Key Value    DbValue   "nameKeyValue"     keyValue
+Key Values   DbValues  "personKeyValues"  keyValues

@@ -66,14 +66,14 @@ namespace LJCDBMessage
 
     // Creates a Data Object from the result DbColumns object.
     /// <include path='items/CreateData1/*' file='Doc/ResultConverter.xml'/>
-    public TData CreateData(DbColumns dbColumns)
+    public TData CreateData(DbColumns dataColumns)
     {
       TData retValue;
 
       // Populate a data object with the result values.
       // Uses retValue as an object and processes with reflection.
       retValue = new TData();
-      DbCommon.SetObjectValues(dbColumns, retValue);
+      DbCommon.SetObjectValues(dataColumns, retValue);
       DbCommon.ClearChanged(retValue);
       return retValue;
     }
@@ -94,18 +94,18 @@ namespace LJCDBMessage
 
     // Creates a Data Object from the data values.
     /// <include path='items/CreateData3/*' file='Doc/ResultConverter.xml'/>
-    public TData CreateData(DbValues dbValues)
+    public TData CreateData(DbValues dataValues)
     {
       // Also in LJCDBClientLib.ObjectManager.
       // Used here to allow for different TData.
       TData retValue = null;
 
-      if (DbValues.HasItems(dbValues))
+      if (DbValues.HasItems(dataValues))
       {
         // Populate a data object with the result values.
         // Uses retValue as an object and processes with reflection.
         retValue = new TData();
-        DbCommon.SetObjectValues(dbValues, retValue);
+        DbCommon.SetObjectValues(dataValues, retValue);
         DbCommon.ClearChanged(retValue);
       }
       return retValue;

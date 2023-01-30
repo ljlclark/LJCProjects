@@ -70,15 +70,15 @@ namespace LJCDBMessage
 
     // Adds the specified object.
     /// <include path='items/Add/*' file='Doc/DbRows.xml'/>
-    public DbRow Add(DbValues dbValues)
+    public DbRow Add(DbValues dataValues)
     {
       DbRow retValue = null;
 
-      if (DbValues.HasItems(dbValues))
+      if (DbValues.HasItems(dataValues))
       {
         retValue = new DbRow()
         {
-          Values = new DbValues(dbValues)
+          Values = new DbValues(dataValues)
         };
         Add(retValue);
       }
