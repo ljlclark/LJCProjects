@@ -19,7 +19,7 @@ namespace LJCViewEditor
 		{
 			InitializeComponent();
 
-			Size = new Size(369, 166);
+			Size = new Size(400, 166);
 
 			Version versionInfo = Assembly.GetExecutingAssembly().GetName().Version;
 			VersionLabel.Text = "Version " + versionInfo.ToString();
