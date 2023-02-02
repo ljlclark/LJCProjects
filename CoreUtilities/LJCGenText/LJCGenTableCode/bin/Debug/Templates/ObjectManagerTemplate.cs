@@ -31,6 +31,8 @@ namespace _Namespace_
       , string tableName = "_TableName_")
       : base(dbServiceRef, dataConfigName, tableName)
     {
+      // The base ObjectManager constructor sets the DataDefinition property.
+
       // Map table names with property names or captions
       // that differ from the column names.
       //MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID, caption: "ID");
@@ -79,8 +81,8 @@ namespace _Namespace_
     {
       _ClassName_ retValue;
 
-      var keyRecord = GetIDKey(id);
-      retValue = Retrieve(keyRecord, columnNames);
+      var keyColumns = GetIDKey(id);
+      retValue = Retrieve(keyColumns, columnNames);
       return retValue;
     }
 

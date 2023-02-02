@@ -159,10 +159,11 @@ namespace LJCNetCommon
       if (null == propertyDelegate)
       {
         var propertyInfo = GetPropertyInfo(propertyName);
-        if (propertyInfo != null)
+        if (null == propertyInfo)
         {
-          propertyDelegate = mPropertyDelegates.Add(propertyInfo);
+          throw new ArgumentException($"Property {propertyName} was not found.");
         }
+        propertyDelegate = mPropertyDelegates.Add(propertyInfo);
       }
 
       if (propertyDelegate != null)

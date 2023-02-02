@@ -99,11 +99,11 @@ namespace LJCNetCommon
 
     // Creates a ColumnNames list from a DataObject.
     /// <summary>
-    /// Creates a ColumnNames list from a DataObject.
+    /// Creates a PropertyNames list from a DataObject.
     /// </summary>
     /// <param name="dataObject"></param>
-    /// <returns></returns>
-    public static List<string> LJCGetColumnNames(object dataObject)
+    /// <returns>The PropertyNames list.</returns>
+    public static List<string> LJCGetPropertyNames(object dataObject)
     {
       List<string> retValue = null;
 
@@ -349,10 +349,11 @@ namespace LJCNetCommon
         foreach (string propertyName in propertyNames)
         {
           searchColumn = LJCSearchPropertyName(propertyName);
-          if (searchColumn != null)
+          if (null == searchColumn)
           {
-            retValue.Add(new DbColumn(searchColumn));
+            throw new ArgumentException($"Property {propertyName} was not found.");
           }
+          retValue.Add(new DbColumn(searchColumn));
         }
       }
       return retValue;

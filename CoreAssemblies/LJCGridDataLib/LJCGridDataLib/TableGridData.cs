@@ -187,7 +187,7 @@ namespace LJCGridDataLib
     {
       if (null == propertyNames)
       {
-        propertyNames = DbColumns.LJCGetColumnNames(dataObject);
+        propertyNames = DbColumns.LJCGetPropertyNames(dataObject);
       }
 
       // Create DataDefinition from dataObject value.
