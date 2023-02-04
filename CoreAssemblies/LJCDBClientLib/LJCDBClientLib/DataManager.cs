@@ -401,11 +401,12 @@ namespace LJCDBClientLib
       foreach (string propertyName in propertyNames)
       {
         DbColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
-        if (dbColumn != null)
+        if (null == dbColumn)
         {
-          dbColumn.AutoIncrement = true;
-          DbAssignedColumns.Add(dbColumn.Clone());
+          throw new MissingMemberException($"Column '{propertyName}' was not found.");
         }
+        dbColumn.AutoIncrement = true;
+        DbAssignedColumns.Add(dbColumn.Clone());
       }
     }
 
