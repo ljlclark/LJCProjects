@@ -384,9 +384,9 @@ namespace LJCDBMessage
       // Preserve original and potentially user qualified name.
       var columnName = keyColumn.ColumnName;
 
-      // Get column definition by property name.
-      var searchPropertyName = GetSearchPropertyName(keyColumn.ColumnName);
-      retValue = dataColumns.LJCSearchPropertyName(searchPropertyName);
+      // Get column definition by column name.
+      var searchName = GetSearchName(keyColumn.ColumnName);
+      retValue = dataColumns.LJCSearchColumnName(searchName);
       if (retValue != null)
       {
         // Create key column with original name.
@@ -401,15 +401,15 @@ namespace LJCDBMessage
     }
 
     // Gets the Search Property name.
-    private static string GetSearchPropertyName(string propertyName)
+    private static string GetSearchName(string columnName)
     {
-      var retValue = propertyName;
+      var retValue = columnName;
 
-      var index = propertyName.IndexOf(".");
+      var index = columnName.IndexOf(".");
       if (index > -1)
       {
         // Get property name from qualified name.
-        retValue = propertyName.Substring(index + 1);
+        retValue = columnName.Substring(index + 1);
       }
       return retValue;
     }
