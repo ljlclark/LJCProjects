@@ -8,16 +8,13 @@
 // #Value _NameSpace_
 // #Value _VarClassName_
 // _FullAppName_.cs
-using System;
-//using System.Collections.Generic;
-using System.IO;
-using System.Drawing;
-using System.Windows.Forms;
-//using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using _FullAppName_DAL;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace _Namespace_
 {
@@ -39,6 +36,8 @@ namespace _Namespace_
       LJCHelpPageDetail = "_ClassName_Detail.htm";
 
       // Set default class data.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.LightSkyBlue;
       mViewTableName = _ClassName_.TableName;
       Cursor = Cursors.Default;
     }
@@ -117,7 +116,7 @@ namespace _Namespace_
       Cursor = Cursors.Default;
       DoChange(Change._ClassName_);
       //}
-      Cursor = Cursors.Default;
+      //Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
@@ -825,7 +824,7 @@ namespace _Namespace_
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           _ClassName_Grid.LJCSetCurrentRow(e);
-          ChangeTimer.DoChange(Change._ClassName_.ToString());
+          TimedChange(Change._ClassName_);
         }
       }
     }
@@ -835,7 +834,7 @@ namespace _Namespace_
     {
       if (_ClassName_Grid.LJCAllowSelectionChange)
       {
-        ChangeTimer.DoChange(Change._ClassName_.ToString());
+        TimedChange(Change._ClassName_);
       }
       _ClassName_Grid.LJCAllowSelectionChange = true;
     }
@@ -892,7 +891,13 @@ namespace _Namespace_
     internal _ClassName_Managers Managers { get; set; }
     #endregion
 
-    #region GridClass Properties
+    #region Private Properties
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
+
+    // Gets or sets the End Color.
+    private Color EndColor { get; set; }
 
     // Gets or sets the _ClassName_GridClass value.
     private _ClassName_GridClass _ClassName_GridClass { get; set; }

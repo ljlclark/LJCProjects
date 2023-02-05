@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // JoinOnGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -162,28 +162,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void JoinOnDetail_Change(object sender, EventArgs e)
-		{
-			ViewJoinOnDetail detail;
-			ViewJoinOn record;
-			LJCGridRow row;
-
-			detail = sender as ViewJoinOnDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateJoinOn(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddJoinOn(record);
-				Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.JoinOn);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewJoinOn()
 		{
@@ -241,12 +219,34 @@ namespace LJCViewEditor
 				RowSelectViewJoinOn(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void JoinOnDetail_Change(object sender, EventArgs e)
+    {
+      ViewJoinOnDetail detail;
+      ViewJoinOn record;
+      LJCGridRow row;
 
-		// Configures the View JoinOn Grid.
-		private void ConfigureJoinOnGrid()
+      detail = sender as ViewJoinOnDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateJoinOn(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddJoinOn(record);
+        Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.JoinOn);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View JoinOn Grid.
+    private void ConfigureJoinOnGrid()
 		{
 			if (0 == Parent.JoinOnGrid.Columns.Count)
 			{

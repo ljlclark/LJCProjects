@@ -1,9 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
@@ -11,6 +8,9 @@ using LJCDBMessage;
 using LJCDBClientLib;
 using LJCGridDataLib;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -177,28 +177,6 @@ namespace LJCViewEditor
       }
     }
 
-    // Adds new row or updates existing row with changes from the detail dialog.
-    private void Detail_Change(object sender, EventArgs e)
-    {
-      ViewDataDetail detail;
-      ViewData record;
-      LJCGridRow row;
-
-      detail = sender as ViewDataDetail;
-      record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
-      {
-        RowUpdateViewData(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddViewData(record);
-        Parent.ViewGrid.LJCSetCurrentRow(row, true);
-        Parent.TimedChange(ViewEditorList.Change.View);
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDeleteViewData()
     {
@@ -254,6 +232,28 @@ namespace LJCViewEditor
           ID = id
         };
         RowSelectViewData(record);
+      }
+    }
+
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      ViewDataDetail detail;
+      ViewData record;
+      LJCGridRow row;
+
+      detail = sender as ViewDataDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateViewData(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddViewData(record);
+        Parent.ViewGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.View);
       }
     }
 

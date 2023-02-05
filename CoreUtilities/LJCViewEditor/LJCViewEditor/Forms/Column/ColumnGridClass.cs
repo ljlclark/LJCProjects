@@ -1,15 +1,15 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
 using LJCViewEditorDAL;
 using LJCDBClientLib;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -215,28 +215,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void ColumnDetail_Change(object sender, EventArgs e)
-		{
-			ViewColumnDetail detail;
-			ViewColumn record;
-			LJCGridRow row;
-
-			detail = sender as ViewColumnDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateColumn(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddColumn(record);
-				Parent.ColumnGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.Column);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewColumn()
 		{
@@ -319,12 +297,34 @@ namespace LJCViewEditor
 				RowSelectViewColumn(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void ColumnDetail_Change(object sender, EventArgs e)
+    {
+      ViewColumnDetail detail;
+      ViewColumn record;
+      LJCGridRow row;
 
-		// Configures the View Column Grid.
-		private void ConfigureColumnGrid()
+      detail = sender as ViewColumnDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateColumn(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddColumn(record);
+        Parent.ColumnGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.Column);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View Column Grid.
+    private void ConfigureColumnGrid()
 		{
 			if (0 == Parent.ColumnGrid.Columns.Count)
 			{

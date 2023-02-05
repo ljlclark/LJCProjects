@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 //OrderByGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -167,28 +167,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void OrderByDetail_Change(object sender, EventArgs e)
-		{
-			ViewOrderByDetail detail;
-			ViewOrderBy record;
-			LJCGridRow row;
-
-			detail = sender as ViewOrderByDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateOrderBy(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddOrderBy(record);
-				Parent.OrderByGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.OrderBy);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewOrderBy()
 		{
@@ -244,12 +222,34 @@ namespace LJCViewEditor
 				RowSelectViewOrderBy(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void OrderByDetail_Change(object sender, EventArgs e)
+    {
+      ViewOrderByDetail detail;
+      ViewOrderBy record;
+      LJCGridRow row;
 
-		// Configures the View OrderBy Grid.
-		private void ConfigureOrderByGrid()
+      detail = sender as ViewOrderByDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateOrderBy(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddOrderBy(record);
+        Parent.OrderByGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.OrderBy);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View OrderBy Grid.
+    private void ConfigureOrderByGrid()
 		{
 			if (0 == Parent.OrderByGrid.Columns.Count)
 			{

@@ -54,7 +54,7 @@ namespace LJCGenTextEdit
         }
       }
       mParent.Cursor = Cursors.Default;
-      mParent.DoChange(EditList.ChangeSection);
+      mParent.DoChange(EditList.Change.Section);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -187,27 +187,6 @@ namespace LJCGenTextEdit
       }
     }
 
-    // Adds new row or updates existing row with changes from the detail dialog.
-    internal void SectionDetail_Change(object sender, EventArgs e)
-    {
-      SectionDetail detail;
-      Section dataRecord;
-      LJCGridRow row;
-
-      detail = sender as SectionDetail;
-      dataRecord = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
-      {
-        RowUpdateSection(dataRecord);
-      }
-      else
-      {
-        row = RowAddSection(dataRecord);
-        mSectionGrid.LJCSetCurrentRow(row, true);
-        mParent.ChangeTimer.DoChange(EditList.ChangeSection);
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDeleteSection()
     {
@@ -229,7 +208,7 @@ namespace LJCGenTextEdit
           manager.DeleteSection(name);
           manager.Save();
           mSectionGrid.Rows.Remove(row);
-          mParent.ChangeTimer.DoChange(EditList.ChangeSection);
+          mParent.TimedChange(EditList.Change.Section);
         }
       }
     }
@@ -257,6 +236,27 @@ namespace LJCGenTextEdit
         RowSelectSection(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates existing row with changes from the detail dialog.
+    internal void SectionDetail_Change(object sender, EventArgs e)
+    {
+      SectionDetail detail;
+      Section dataRecord;
+      LJCGridRow row;
+
+      detail = sender as SectionDetail;
+      dataRecord = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateSection(dataRecord);
+      }
+      else
+      {
+        row = RowAddSection(dataRecord);
+        mSectionGrid.LJCSetCurrentRow(row, true);
+        mParent.TimedChange(EditList.Change.Section);
+      }
     }
 
     // Creates the DataXML data.

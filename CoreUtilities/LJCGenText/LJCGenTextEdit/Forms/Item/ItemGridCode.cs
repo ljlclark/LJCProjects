@@ -49,7 +49,7 @@ namespace LJCGenTextEdit
           }
         }
       }
-      mParent.DoChange(EditList.ChangeItem);
+      mParent.DoChange(EditList.Change.Item);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -147,28 +147,6 @@ namespace LJCGenTextEdit
       }
     }
 
-    // Adds new row or updates row with changes from the detail dialog.
-    private void ItemDetail_Change(object sender, EventArgs e)
-    {
-      ItemDetail detail;
-      RepeatItem dataRecord;
-      LJCGridRow row;
-
-      detail = sender as ItemDetail;
-      dataRecord = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
-      {
-        RowUpdateItem(dataRecord);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddItem(dataRecord);
-        mItemGrid.LJCSetCurrentRow(row, true);
-        mParent.ChangeTimer.DoChange(EditList.ChangeItem);
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDeleteItem()
     {
@@ -191,7 +169,7 @@ namespace LJCGenTextEdit
           manager.DeleteRepeatItem(parentName, name);
           manager.Save();
           mItemGrid.Rows.Remove(row);
-          mParent.ChangeTimer.DoChange(EditList.ChangeItem);
+          mParent.TimedChange(EditList.Change.Item);
         }
       }
     }
@@ -219,6 +197,28 @@ namespace LJCGenTextEdit
         RowSelectItem(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with changes from the detail dialog.
+    private void ItemDetail_Change(object sender, EventArgs e)
+    {
+      ItemDetail detail;
+      RepeatItem dataRecord;
+      LJCGridRow row;
+
+      detail = sender as ItemDetail;
+      dataRecord = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateItem(dataRecord);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddItem(dataRecord);
+        mItemGrid.LJCSetCurrentRow(row, true);
+        mParent.TimedChange(EditList.Change.Item);
+      }
     }
     #endregion
 

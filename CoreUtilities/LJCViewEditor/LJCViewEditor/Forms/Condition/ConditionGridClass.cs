@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConditionGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -172,28 +172,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void ConditionDetail_Change(object sender, EventArgs e)
-		{
-			ViewConditionDetail detail;
-			ViewCondition record;
-			LJCGridRow row;
-
-			detail = sender as ViewConditionDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateCondition(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddCondition(record);
-				mParent.ConditionGrid.LJCSetCurrentRow(row, true);
-				mParent.TimedChange(ViewEditorList.Change.ConditionSet);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewCondition()
 		{
@@ -252,12 +230,34 @@ namespace LJCViewEditor
 				RowSelectViewCondition(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void ConditionDetail_Change(object sender, EventArgs e)
+    {
+      ViewConditionDetail detail;
+      ViewCondition record;
+      LJCGridRow row;
 
-		// Configures the View Condition Grid.
-		private void ConfigureConditionGrid()
+      detail = sender as ViewConditionDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateCondition(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddCondition(record);
+        mParent.ConditionGrid.LJCSetCurrentRow(row, true);
+        mParent.TimedChange(ViewEditorList.Change.ConditionSet);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View Condition Grid.
+    private void ConfigureConditionGrid()
 		{
 			if (0 == mParent.ConditionGrid.Columns.Count)
 			{

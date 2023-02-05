@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // JoinColumnGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -164,28 +164,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void JoinColumnDetail_Change(object sender, EventArgs e)
-		{
-			ViewJoinColumnDetail detail;
-			ViewJoinColumn record;
-			LJCGridRow row;
-
-			detail = sender as ViewJoinColumnDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateJoinColumn(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddJoinColumn(record);
-				Parent.JoinColumnGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.JoinColumn);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewJoinColumn()
 		{
@@ -241,12 +219,34 @@ namespace LJCViewEditor
 				RowSelectViewJoinColumn(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void JoinColumnDetail_Change(object sender, EventArgs e)
+    {
+      ViewJoinColumnDetail detail;
+      ViewJoinColumn record;
+      LJCGridRow row;
 
-		// Configures the View JoinColumn Grid.
-		private void ConfigureJoinColumnGrid()
+      detail = sender as ViewJoinColumnDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateJoinColumn(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddJoinColumn(record);
+        Parent.JoinColumnGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.JoinColumn);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View JoinColumn Grid.
+    private void ConfigureJoinColumnGrid()
 		{
 			if (0 == Parent.JoinColumnGrid.Columns.Count)
 			{

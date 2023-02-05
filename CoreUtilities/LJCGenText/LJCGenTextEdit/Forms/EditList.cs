@@ -5,6 +5,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LJCGenTextEdit
@@ -19,15 +20,19 @@ namespace LJCGenTextEdit
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public EditList()
     {
+      Cursor = Cursors.WaitCursor;
       InitializeComponent();
 
       // Initialize property values.
       LJCHelpFile = "GenTextEdit.chm";
 
       // Set default class data.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.LightSkyBlue;
       mSyntaxColors = new SyntaxColors();
       mTokenizer = new CodeTokenizer();
       mTokenizer.InitializeKeywords();
+      Cursor = Cursors.Default;
     }
     #endregion
 
@@ -44,6 +49,26 @@ namespace LJCGenTextEdit
     #endregion
 
     #region Action Event Handlers
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void MainTabsMove_Click(object sender, EventArgs e)
+    {
+      if (MainTabs.TabPages.Count > 1)
+      {
+        MainSplit.Panel2Collapsed = false;
+        MainTabs.SelectedTab.Parent = TileTabs;
+      }
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void TileTabsMove_Click(object sender, EventArgs e)
+    {
+      TileTabs.SelectedTab.Parent = MainTabs;
+      if (0 == TileTabs.TabPages.Count)
+      {
+        MainSplit.Panel2Collapsed = true;
+      }
+    }
 
     #region Template
 
@@ -88,26 +113,6 @@ namespace LJCGenTextEdit
     private void TemplateAbout_Click(object sender, EventArgs e)
     {
       mTemplateTextCode.DoAbout();
-    }
-
-    // Performs a Move of the selected Main Tab to the TileTabs control.
-    private void MainTabsMove_Click(object sender, EventArgs e)
-    {
-      if (MainTabs.TabPages.Count > 1)
-      {
-        MainSplit.Panel2Collapsed = false;
-        MainTabs.SelectedTab.Parent = TileTabs;
-      }
-    }
-
-    // Performs a Move of the selected Tile Tab to the MainTabs control.
-    private void TileTabsMove_Click(object sender, EventArgs e)
-    {
-      TileTabs.SelectedTab.Parent = MainTabs;
-      if (0 == TileTabs.TabPages.Count)
-      {
-        MainSplit.Panel2Collapsed = true;
-      }
     }
     #endregion
 
@@ -472,6 +477,15 @@ namespace LJCGenTextEdit
       }
     }
 
+    // <summary>Handles the MouseDoubleClick event.</summary>
+    private void SectionGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (SectionGrid.LJCGetMouseRow(e) != null)
+      {
+        mSectionGridCode.DoDefault();
+      }
+    }
+
     // <summary>Handles the MouseDown event.</summary>
     private void SectionGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -481,7 +495,7 @@ namespace LJCGenTextEdit
         if (SectionGrid.LJCIsDifferentRow(e))
         {
           SectionGrid.LJCSetCurrentRow(e);
-          ChangeTimer.DoChange(ChangeSection);
+          TimedChange(Change.Section);
         }
       }
     }
@@ -491,18 +505,9 @@ namespace LJCGenTextEdit
     {
       if (SectionGrid.LJCAllowSelectionChange)
       {
-        ChangeTimer.DoChange(ChangeSection);
+        TimedChange(Change.Section);
       }
       SectionGrid.LJCAllowSelectionChange = true;
-    }
-
-    // <summary>Handles the MouseDoubleClick event.</summary>
-    private void SectionGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (SectionGrid.LJCGetMouseRow(e) != null)
-      {
-        mSectionGridCode.DoDefault();
-      }
     }
     #endregion
 
@@ -554,6 +559,15 @@ namespace LJCGenTextEdit
       }
     }
 
+    // <summary>Handles the MouseDoubleClick event.</summary>
+    private void ItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ItemGrid.LJCGetMouseRow(e) != null)
+      {
+        mItemGridCode.DoEditItem();
+      }
+    }
+
     // <summary>Handles the MouseDown event.</summary>
     private void ItemGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -563,7 +577,7 @@ namespace LJCGenTextEdit
         if (ItemGrid.LJCIsDifferentRow(e))
         {
           ItemGrid.LJCSetCurrentRow(e);
-          ChangeTimer.DoChange(ChangeItem);
+          TimedChange(Change.Item);
         }
       }
     }
@@ -573,18 +587,9 @@ namespace LJCGenTextEdit
     {
       if (ItemGrid.LJCAllowSelectionChange)
       {
-        ChangeTimer.DoChange(ChangeItem);
+        TimedChange(Change.Item);
       }
       ItemGrid.LJCAllowSelectionChange = true;
-    }
-
-    // <summary>Handles the MouseDoubleClick event.</summary>
-    private void ItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ItemGrid.LJCGetMouseRow(e) != null)
-      {
-        mItemGridCode.DoEditItem();
-      }
     }
     #endregion
 
@@ -636,6 +641,15 @@ namespace LJCGenTextEdit
       }
     }
 
+    // <summary>Handles the MouseDoubleClick event.</summary>
+    private void ReplacementGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ReplacementGrid.LJCGetMouseRow(e) != null)
+      {
+        mReplacementGridCode.DoEditReplacement();
+      }
+    }
+
     // <summary>Handles the MouseDown event.</summary>
     private void ReplacementGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -645,7 +659,7 @@ namespace LJCGenTextEdit
         if (ReplacementGrid.LJCIsDifferentRow(e))
         {
           ReplacementGrid.LJCSetCurrentRow(e);
-          ChangeTimer.DoChange(ChangeReplacement);
+          TimedChange(Change.Replacement);
         }
       }
     }
@@ -655,18 +669,9 @@ namespace LJCGenTextEdit
     {
       if (ReplacementGrid.LJCAllowSelectionChange)
       {
-        ChangeTimer.DoChange(ChangeReplacement);
+        TimedChange(Change.Replacement);
       }
       ReplacementGrid.LJCAllowSelectionChange = true;
-    }
-
-    // <summary>Handles the MouseDoubleClick event.</summary>
-    private void ReplacementGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ReplacementGrid.LJCGetMouseRow(e) != null)
-      {
-        mReplacementGridCode.DoEditReplacement();
-      }
     }
     #endregion
 
@@ -713,7 +718,7 @@ namespace LJCGenTextEdit
     #endregion
     #endregion
 
-    #region Properties
+    #region Internal Properties
 
     // The help file name.
     internal string LJCHelpFile
@@ -722,6 +727,15 @@ namespace LJCGenTextEdit
       set { mHelpFile = NetString.InitString(value); }
     }
     private string mHelpFile;
+    #endregion
+
+    #region Private Properties
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
+
+    // Gets or sets the End Color.
+    private Color EndColor { get; set; }
     #endregion
   }
 }

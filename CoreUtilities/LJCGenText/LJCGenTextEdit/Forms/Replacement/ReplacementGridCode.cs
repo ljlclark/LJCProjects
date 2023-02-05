@@ -52,7 +52,7 @@ namespace LJCGenTextEdit
           }
         }
       }
-      mParent.DoChange(EditList.ChangeReplacement);
+      mParent.DoChange(EditList.Change.Replacement);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -156,27 +156,6 @@ namespace LJCGenTextEdit
       }
     }
 
-    // Adds new row or updates row with changes from the detail dialog.
-    private void ReplacementDetail_Change(object sender, EventArgs e)
-    {
-      ReplacementDetail detail;
-      Replacement dataRecord;
-      LJCGridRow row;
-
-      detail = sender as ReplacementDetail;
-      dataRecord = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
-      {
-        RowUpdateReplacement(dataRecord);
-      }
-      else
-      {
-        row = RowAddReplacement(dataRecord);
-        mReplacementGrid.LJCSetCurrentRow(row, true);
-        mParent.ChangeTimer.DoChange(EditList.ChangeReplacement);
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDeleteReplacement()
     {
@@ -201,7 +180,7 @@ namespace LJCGenTextEdit
           manager.DeleteReplacement(sectionName, parentName, name);
           manager.Save();
           mReplacementGrid.Rows.Remove(row);
-          mParent.ChangeTimer.DoChange(EditList.ChangeReplacement);
+          mParent.TimedChange(EditList.Change.Replacement);
         }
       }
     }
@@ -229,6 +208,27 @@ namespace LJCGenTextEdit
         RowSelectReplacement(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with changes from the detail dialog.
+    private void ReplacementDetail_Change(object sender, EventArgs e)
+    {
+      ReplacementDetail detail;
+      Replacement dataRecord;
+      LJCGridRow row;
+
+      detail = sender as ReplacementDetail;
+      dataRecord = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateReplacement(dataRecord);
+      }
+      else
+      {
+        row = RowAddReplacement(dataRecord);
+        mReplacementGrid.LJCSetCurrentRow(row, true);
+        mParent.TimedChange(EditList.Change.Replacement);
+      }
     }
     #endregion
 

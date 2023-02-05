@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenTextLib", "LJCGenTextLib\LJCGenTextLib.csproj", "{01399D77-AE27-4800-A6FF-3E1283208C71}"
 EndProject
@@ -10,6 +10,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenText", "LJCGenText\LJCGenText.csproj", "{EEF9D56F-9083-4322-9ACC-8A31DA03B09C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenTextEdit", "LJCGenTextEdit\LJCGenTextEdit.csproj", "{DB2DCC95-BD3F-4B05-B86D-73C5FE93D766}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTemplates", "DataTemplates", "{FC78F1D9-E841-4050-BD4C-82BA4D91966E}"
+	ProjectSection(SolutionItems) = preProject
+		LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs = LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs = LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs = LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

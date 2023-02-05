@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // JoinGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -165,28 +165,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void JoinDetail_Change(object sender, EventArgs e)
-		{
-			ViewJoinDetail detail;
-			ViewJoin record;
-			LJCGridRow row;
-
-			detail = sender as ViewJoinDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateJoin(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddJoin(record);
-				Parent.JoinGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.Join);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewJoin()
 		{
@@ -242,12 +220,34 @@ namespace LJCViewEditor
 				RowSelectViewJoin(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void JoinDetail_Change(object sender, EventArgs e)
+    {
+      ViewJoinDetail detail;
+      ViewJoin record;
+      LJCGridRow row;
 
-		// Configures the View Join Grid.
-		private void ConfigureJoinGrid()
+      detail = sender as ViewJoinDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateJoin(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddJoin(record);
+        Parent.JoinGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.Join);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View Join Grid.
+    private void ConfigureJoinGrid()
 		{
 			if (0 == Parent.JoinGrid.Columns.Count)
 			{

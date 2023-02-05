@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // FilterGridClass.cs
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormControls;
 using LJCDBViewDAL;
 using LJCWinFormCommon;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -167,28 +167,6 @@ namespace LJCViewEditor
 			}
 		}
 
-		// Adds new row or updates existing row with changes from the detail dialog.
-		private void FilterDetail_Change(object sender, EventArgs e)
-		{
-			ViewFilterDetail detail;
-			ViewFilter record;
-			LJCGridRow row;
-
-			detail = sender as ViewFilterDetail;
-			record = detail.LJCRecord;
-			if (detail.LJCIsUpdate)
-			{
-				RowUpdateFilter(record);
-			}
-			else
-			{
-				// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-				row = RowAddFilter(record);
-				Parent.FilterGrid.LJCSetCurrentRow(row, true);
-				Parent.TimedChange(ViewEditorList.Change.Filter);
-			}
-		}
-
 		// Deletes the selected row.
 		internal void DoDeleteViewFilter()
 		{
@@ -244,12 +222,34 @@ namespace LJCViewEditor
 				RowSelectViewFilter(record);
 			}
 		}
-		#endregion
 
-		#region Setup Methods
+    // Adds new row or updates existing row with changes from the detail dialog.
+    private void FilterDetail_Change(object sender, EventArgs e)
+    {
+      ViewFilterDetail detail;
+      ViewFilter record;
+      LJCGridRow row;
 
-		// Configures the View Filter Grid.
-		private void ConfigureFilterGrid()
+      detail = sender as ViewFilterDetail;
+      record = detail.LJCRecord;
+      if (detail.LJCIsUpdate)
+      {
+        RowUpdateFilter(record);
+      }
+      else
+      {
+        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+        row = RowAddFilter(record);
+        Parent.FilterGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.Filter);
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the View Filter Grid.
+    private void ConfigureFilterGrid()
 		{
 			if (0 == Parent.FilterGrid.Columns.Count)
 			{

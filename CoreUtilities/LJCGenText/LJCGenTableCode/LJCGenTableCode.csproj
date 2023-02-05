@@ -57,18 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Templates\CollectionTemplate.cs" />
-    <Content Include="bin\Debug\Templates\DataTemplate.cs" />
-    <Content Include="bin\Debug\Templates\ListTemplate.cs" />
-    <Content Include="bin\Debug\Templates\ObjectManagerTemplate.cs" />
-    <Content Include="bin\Debug\Templates\DetailTemplate.cs" />
-    <Content Include="bin\Debug\Templates\DetailTemplate.Designer.cs">
-      <DependentUpon>DetailTemplate.cs</DependentUpon>
-    </Content>
-    <Content Include="bin\Debug\Templates\TableManagersTemplate.cs" />
-    <Content Include="bin\Debug\Templates\DbManagerTemplate.cs" />
-    <Content Include="bin\Debug\Templates\SQLManagerTemplate.cs" />
-    <Content Include="bin\Debug\Templates\DataManagerTemplate.cs" />
     <Compile Include="DefaultValues.cs" />
     <Compile Include="GenFileSpec.cs" />
     <Compile Include="GenFileSpecs.cs" />

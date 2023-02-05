@@ -15,46 +15,88 @@ namespace LJCGenTextEdit
   // The GenText Edit list form.
   public partial class EditList : Form
   {
-    #region Setup Methods
+    #region Item Change Processing
 
-    // Configures the controls and loads the selection control data.
-    private void InitializeControls()
+    // Execute the related item functions.
+    internal void DoChange(Change change)
     {
-      // Initialize Class Data.
       Cursor = Cursors.WaitCursor;
-      mBeginColor = Color.AliceBlue;
-
-      // Initialize Grid Code.
-      mSectionGridCode = new SectionGridCode(this);
-      mItemGridCode = new ItemGridCode(this);
-      mReplacementGridCode = new ReplacementGridCode(this);
-      mOutputTextCode = new OutputTextCode(this);
-
-      // Configure controls.
-      MainSplit.Panel2Collapsed = true;
-      MainTabs.LJCAllowDrag = true;
-      MainTabs.AllowDrop = true;
-      TileTabs.LJCAllowDrag = true;
-      TileTabs.AllowDrop = true;
-
-      // Set initial control values.
-      NetFile.CreateFolder("ControlValues");
-      mControlValuesFileName = @"ControlValues\Section.xml";
-      if (File.Exists(FilePaths.DefaultFileName))
+      switch (change)
       {
-        mFilePaths = FilePaths.Deserialize(FilePaths.DefaultFileName);
-      }
-      else
-      {
-        mFilePaths = new FilePaths();
-      }
+        case Change.Startup:
+          ConfigureControls();
+          RestoreControlValues();
+          SectionSplit.SplitterDistance = SectionSplit.Height / 4;
+          ItemSplit.SplitterDistance = ItemSplit.Height / 3;
+          MainSplit.SplitterDistance = MainSplit.Width / 2;
+          SectionGrid.LJCRestoreColumnValues(ControlValues);
+          ItemGrid.LJCRestoreColumnValues(ControlValues);
+          ReplacementGrid.LJCRestoreColumnValues(ControlValues);
 
-      SetupGridSection();
-      SetupGridItem();
-      SetupGridReplacement();
-      StartItemChange();
+          // Load first list.
+          mSectionGridCode.DataRetrieveSection();
+          break;
+
+        case Change.Section:
+          SectionGrid.LJCSetCounter(SectionCounter);
+          mItemGridCode.DataRetrieveItem();
+          break;
+
+        case Change.Item:
+          ItemGrid.LJCSetCounter(ItemCounter);
+          mReplacementGridCode.DataRetrieveReplacement();
+          break;
+
+        case Change.Replacement:
+          ReplacementGrid.LJCSetLastRow();
+          ReplacementGrid.LJCSetCounter(ReplacementCounter);
+          break;
+      }
+      SetControlState();
       Cursor = Cursors.Default;
     }
+
+    // The ChangeType values.
+    internal enum Change
+    {
+      Startup,
+      Section,
+      Item,
+      Replacement
+    }
+
+    #region Item Change Support
+
+    // Start the Change processing.
+    private void StartChangeProcessing()
+    {
+      ChangeTimer = new ChangeTimer();
+      ChangeTimer.ItemChange += ChangeTimer_ItemChange;
+      TimedChange(Change.Startup);
+    }
+
+    // Change Event Handler
+    private void ChangeTimer_ItemChange(object sender, EventArgs e)
+    {
+      Change changeType;
+
+      changeType = (Change)Enum.Parse(typeof(Change)
+        , ChangeTimer.ChangeName);
+      DoChange(changeType);
+    }
+
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
+    // Gets or sets the ChangeTimer object.
+    internal ChangeTimer ChangeTimer { get; set; }
+    #endregion
+    #endregion
+
+    #region Setup Methods
 
     // Configure the initial control settings.
     private void ConfigureControls()
@@ -94,82 +136,44 @@ namespace LJCGenTextEdit
       }
     }
 
-    // Setup the grid display columns.
-    private void SetupGridSection()
+    // Configures the controls and loads the selection control data.
+    private void InitializeControls()
     {
-      SectionGrid.BackgroundColor = mBeginColor;
-
-      if (0 == SectionGrid.Columns.Count)
-      {
-        mDisplayColumnsSection = new DbColumns()
-        {
-          "Name"
-        };
-
-        // Setup the grid display columns and column values.
-        SectionGrid.LJCAddDisplayColumns(mDisplayColumnsSection);
-      }
+      Cursor = Cursors.WaitCursor;
+      SetupGridCode();
+      ControlSetup();
+      InitialControlValues();
+      SetupGrids();
+      StartChangeProcessing();
+      Cursor = Cursors.Default;
     }
-    private DbColumns mDisplayColumnsSection;
 
-    // Setup the grid display columns.
-    private void SetupGridItem()
+    #region Setup Support
+
+    // Initial Control setup.
+    private void ControlSetup()
     {
-      ItemGrid.BackgroundColor = mBeginColor;
-
-      if (0 == ItemGrid.Columns.Count)
-      {
-        mDisplayColumnsItem = new DbColumns()
-        {
-          "Name"
-        };
-
-        // Setup the grid display columns and column values.
-        ItemGrid.LJCAddDisplayColumns(mDisplayColumnsItem);
-      }
+      MainSplit.Panel2Collapsed = true;
+      MainTabs.LJCAllowDrag = true;
+      MainTabs.AllowDrop = true;
+      TileTabs.LJCAllowDrag = true;
+      TileTabs.AllowDrop = true;
     }
-    private DbColumns mDisplayColumnsItem;
 
-    // Setup the grid display columns.
-    private void SetupGridReplacement()
+    // Set initial Control values.
+    private void InitialControlValues()
     {
-      ReplacementGrid.BackgroundColor = mBeginColor;
-
-      if (0 == ReplacementGrid.Columns.Count)
+      NetFile.CreateFolder("ControlValues");
+      mControlValuesFileName = @"ControlValues\Section.xml";
+      if (File.Exists(FilePaths.DefaultFileName))
       {
-        mDisplayColumnsReplacement = new DbColumns()
-        {
-          "Name",
-          "Value"
-        };
-
-        // Setup the grid display columns and column values.
-        ReplacementGrid.LJCAddDisplayColumns(mDisplayColumnsReplacement);
+        mFilePaths = FilePaths.Deserialize(FilePaths.DefaultFileName);
       }
-    }
-    private DbColumns mDisplayColumnsReplacement;
-
-    // Saves the control values. 
-    internal void SaveControlValues()
-    {
-      ControlValues controlValues = new ControlValues();
-
-      // Save Grid Column values.
-      SectionGrid.LJCSaveColumnValues(controlValues);
-      ItemGrid.LJCSaveColumnValues(controlValues);
-      ReplacementGrid.LJCSaveColumnValues(controlValues);
-
-      // Save Splitter values.
-      controlValues.Add("SectionSplit.SplitterDistance", 0, 0, 0
-        , SectionSplit.SplitterDistance);
-      controlValues.Add("ItemSplit.SplitterDistance", 0, 0, 0
-        , ItemSplit.SplitterDistance);
-
-      // Save Window values.
-      controlValues.Add(Name, Left, Top, Width, Height);
-
-      NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
-        , mControlValuesFileName);
+      else
+      {
+        mFilePaths = new FilePaths();
+      }
+      BackColor = BeginColor;
     }
 
     // Restores the control values.
@@ -214,8 +218,134 @@ namespace LJCGenTextEdit
       }
     }
 
+    // Saves the control values. 
+    internal void SaveControlValues()
+    {
+      ControlValues controlValues = new ControlValues();
+
+      // Save Grid Column values.
+      SectionGrid.LJCSaveColumnValues(controlValues);
+      ItemGrid.LJCSaveColumnValues(controlValues);
+      ReplacementGrid.LJCSaveColumnValues(controlValues);
+
+      // Save Splitter values.
+      controlValues.Add("SectionSplit.SplitterDistance", 0, 0, 0
+        , SectionSplit.SplitterDistance);
+      controlValues.Add("ItemSplit.SplitterDistance", 0, 0, 0
+        , ItemSplit.SplitterDistance);
+
+      // Save Window values.
+      controlValues.Add(Name, Left, Top, Width, Height);
+
+      NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
+        , mControlValuesFileName);
+    }
+
+    // Setup the grid code references.
+    private void SetupGridCode()
+    {
+      mSectionGridCode = new SectionGridCode(this);
+      mItemGridCode = new ItemGridCode(this);
+      mReplacementGridCode = new ReplacementGridCode(this);
+      mOutputTextCode = new OutputTextCode(this);
+    }
+
+    // Setup the data grids.
+    private void SetupGrids()
+    {
+      SetupGridSection();
+      SetupGridItem();
+      SetupGridReplacement();
+    }
+
+    // Setup the grid display columns.
+    private void SetupGridSection()
+    {
+      SectionGrid.BackgroundColor = BeginColor;
+
+      if (0 == SectionGrid.Columns.Count)
+      {
+        mDisplayColumnsSection = new DbColumns()
+        {
+          "Name"
+        };
+
+        // Setup the grid display columns and column values.
+        SectionGrid.LJCAddDisplayColumns(mDisplayColumnsSection);
+      }
+    }
+    private DbColumns mDisplayColumnsSection;
+
+    // Setup the grid display columns.
+    private void SetupGridItem()
+    {
+      ItemGrid.BackgroundColor = BeginColor;
+
+      if (0 == ItemGrid.Columns.Count)
+      {
+        mDisplayColumnsItem = new DbColumns()
+        {
+          "Name"
+        };
+
+        // Setup the grid display columns and column values.
+        ItemGrid.LJCAddDisplayColumns(mDisplayColumnsItem);
+      }
+    }
+    private DbColumns mDisplayColumnsItem;
+
+    // Setup the grid display columns.
+    private void SetupGridReplacement()
+    {
+      ReplacementGrid.BackgroundColor = BeginColor;
+
+      if (0 == ReplacementGrid.Columns.Count)
+      {
+        mDisplayColumnsReplacement = new DbColumns()
+        {
+          "Name",
+          "Value"
+        };
+
+        // Setup the grid display columns and column values.
+        ReplacementGrid.LJCAddDisplayColumns(mDisplayColumnsReplacement);
+      }
+    }
+    private DbColumns mDisplayColumnsReplacement;
+
     // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }
+    #endregion
+    #endregion
+
+    #region Private Methods
+
+    // Sets the control states based on the current control values.
+    private void SetControlState()
+    {
+      bool enableNew = true;
+      bool enableEdit = SectionGrid.CurrentRow != null;
+      FormCommon.SetToolState(SectionTool, enableNew, enableEdit);
+      FormCommon.SetMenuState(SectionMenu, enableNew, enableEdit);
+      SectionTitle.Enabled = true;
+      SectionMenuCreateData.Enabled = true;
+      SectionMenuAbout.Enabled = true;
+      SectionMenuHelp.Enabled = true;
+
+      enableNew = SectionGrid.CurrentRow != null;
+      enableEdit = ItemGrid.CurrentRow != null;
+      FormCommon.SetToolState(ItemTool, enableNew, enableEdit);
+      FormCommon.SetMenuState(ItemMenu, enableNew, enableEdit);
+      ItemTitle.Enabled = true;
+      ItemMenuHelp.Enabled = true;
+
+      enableNew = ItemGrid.CurrentRow != null;
+      enableEdit = ReplacementGrid.CurrentRow != null;
+      FormCommon.SetToolState(ReplacementTool, enableNew, enableEdit);
+      FormCommon.SetMenuState(ReplacementMenu, enableNew, enableEdit);
+      ReplacementTitle.Enabled = true;
+      ReplacementMenuHelp.Enabled = true;
+    }
     #endregion
 
     #region RTF Methods
@@ -247,107 +377,6 @@ namespace LJCGenTextEdit
     }
     #endregion
 
-    #region Item Change Processing
-
-    // Execute the related item functions.
-    internal void DoChange(string changeName)
-    {
-      Cursor = Cursors.WaitCursor;
-      switch (changeName)
-      {
-        case ChangeStartup:
-          ConfigureControls();
-          RestoreControlValues();
-          SectionSplit.SplitterDistance = SectionSplit.Height / 4;
-          ItemSplit.SplitterDistance = ItemSplit.Height / 3;
-          MainSplit.SplitterDistance = MainSplit.Width / 2;
-          SectionGrid.LJCRestoreColumnValues(ControlValues);
-          ItemGrid.LJCRestoreColumnValues(ControlValues);
-          ReplacementGrid.LJCRestoreColumnValues(ControlValues);
-
-          // Load first list.
-          mSectionGridCode.DataRetrieveSection();
-          break;
-
-        case ChangeSection:
-          SectionGrid.LJCSetCounter(SectionCounter);
-          mItemGridCode.DataRetrieveItem();
-          break;
-
-        case ChangeItem:
-          ItemGrid.LJCSetCounter(ItemCounter);
-          mReplacementGridCode.DataRetrieveReplacement();
-          break;
-
-        case ChangeReplacement:
-          ReplacementGrid.LJCSetLastRow();
-          ReplacementGrid.LJCSetCounter(ReplacementCounter);
-          break;
-      }
-      SetControlState();
-      Cursor = Cursors.Default;
-    }
-
-    // Sets the control states based on the current control values.
-    private void SetControlState()
-    {
-      bool enableNew = true;
-      bool enableEdit = SectionGrid.CurrentRow != null;
-      FormCommon.SetToolState(SectionTool, enableNew, enableEdit);
-      FormCommon.SetMenuState(SectionMenu, enableNew, enableEdit);
-      SectionTitle.Enabled = true;
-      SectionMenuCreateData.Enabled = true;
-      SectionMenuAbout.Enabled = true;
-      SectionMenuHelp.Enabled = true;
-
-      enableNew = SectionGrid.CurrentRow != null;
-      enableEdit = ItemGrid.CurrentRow != null;
-      FormCommon.SetToolState(ItemTool, enableNew, enableEdit);
-      FormCommon.SetMenuState(ItemMenu, enableNew, enableEdit);
-      ItemTitle.Enabled = true;
-      ItemMenuHelp.Enabled = true;
-
-      enableNew = ItemGrid.CurrentRow != null;
-      enableEdit = ReplacementGrid.CurrentRow != null;
-      FormCommon.SetToolState(ReplacementTool, enableNew, enableEdit);
-      FormCommon.SetMenuState(ReplacementMenu, enableNew, enableEdit);
-      ReplacementTitle.Enabled = true;
-      ReplacementMenuHelp.Enabled = true;
-    }
-
-    // The Section Change Name.
-    internal const string ChangeSection = "Section";
-
-    // The Item Change Name.
-    internal const string ChangeItem = "Item";
-
-    // The Replacement Change Name.
-    internal const string ChangeReplacement = "Replacement";
-
-    #region Item Change Support
-
-    // Start the Change processing.
-    private void StartItemChange()
-    {
-      ChangeTimer = new ChangeTimer();
-      ChangeTimer.ItemChange += ChangeTimer_ItemChange;
-      ChangeTimer.DoChange(ChangeStartup);
-    }
-
-    // Change Event Handler
-    private void ChangeTimer_ItemChange(object sender, EventArgs e)
-    {
-      DoChange(ChangeTimer.ChangeName);
-    }
-
-    // Gets or sets the ChangeTimer object.
-    internal ChangeTimer ChangeTimer { get; set; }
-
-    // The Startup Change Name.
-    private const string ChangeStartup = "Startup";
-    #endregion
-    #endregion
-
     #region Properties
 
     // Gets the GenDataManager reference.
@@ -365,7 +394,6 @@ namespace LJCGenTextEdit
     private OutputTextCode mOutputTextCode;
     private ReplacementGridCode mReplacementGridCode;
 
-    private Color mBeginColor;
     private string mControlValuesFileName;
     private readonly CodeTokenizer mTokenizer;
     #endregion
