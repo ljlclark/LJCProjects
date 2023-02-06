@@ -33,25 +33,25 @@ namespace LJCViewEditor
 		#region Data Methods
 
 		// Retrieves the list rows.
-		internal void DataRetrieveOrderBy()
+		internal void DataRetrieve()
 		{
 			ViewOrderBys dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.OrderByGrid.Rows.Clear();
 
-			ConfigureOrderByGrid();
+			SetupGridOrderBy();
 			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
 				dataRecords = mViewOrderByManager.LoadWithParentID(viewDataID);
-				if (dataRecords != null && dataRecords.Count > 0)
+				if (NetCommon.HasItems(dataRecords))
 				{
 					foreach (ViewOrderBy dataRecord in dataRecords)
 					{
-						RowAddOrderBy(dataRecord);
+						RowAdd(dataRecord);
 					}
 				}
 			}
@@ -59,12 +59,12 @@ namespace LJCViewEditor
 		}
 
 		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddOrderBy(ViewOrderBy dataRecord)
+		private LJCGridRow RowAdd(ViewOrderBy dataRecord)
 		{
 			LJCGridRow retValue;
 
 			retValue = Parent.OrderByGrid.LJCRowAdd();
-			SetStoredValuesOrderBy(retValue, dataRecord);
+			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
 			Parent.OrderByGrid.LJCRowSetValues(retValue, dataRecord);
@@ -72,23 +72,23 @@ namespace LJCViewEditor
 		}
 
 		// Updates the current row with the record values.
-		private void RowUpdateOrderBy(ViewOrderBy dataRecord)
+		private void RowUpdate(ViewOrderBy dataRecord)
 		{
 			if (Parent.OrderByGrid.CurrentRow is LJCGridRow row)
 			{
-				SetStoredValuesOrderBy(row, dataRecord);
+				SetStoredValues(row, dataRecord);
 				Parent.OrderByGrid.LJCRowSetValues(row, dataRecord);
 			}
 		}
 
 		// Sets the row stored values.
-		private void SetStoredValuesOrderBy(LJCGridRow row, ViewOrderBy dataRecord)
+		private void SetStoredValues(LJCGridRow row, ViewOrderBy dataRecord)
 		{
 			row.LJCSetInt32(ViewOrderBy.ColumnID, dataRecord.ID);
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelectViewOrderBy(ViewOrderBy record)
+		private void RowSelect(ViewOrderBy record)
 		{
 			int rowID;
 
@@ -113,7 +113,7 @@ namespace LJCViewEditor
 		#region Action Methods
 
 		// Displays a detail dialog for a new record.
-		internal void DoNewViewOrderBy()
+		internal void DoNew()
 		{
 			ViewOrderByDetail detail;
 
@@ -139,7 +139,7 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog to edit an existing record.
-		internal void DoEditViewOrderBy()
+		internal void DoEdit()
 		{
 			ViewOrderByDetail detail;
 
@@ -168,7 +168,7 @@ namespace LJCViewEditor
 		}
 
 		// Deletes the selected row.
-		internal void DoDeleteViewOrderBy()
+		internal void DoDelete()
 		{
 			string title;
 			string message;
@@ -201,7 +201,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		internal void DoRefreshViewOrderBy()
+		internal void DoRefresh()
 		{
 			ViewOrderBy record;
 			int id = 0;
@@ -210,7 +210,7 @@ namespace LJCViewEditor
 			{
 				id = row.LJCGetInt32(ViewOrderBy.ColumnID);
 			}
-			DataRetrieveOrderBy();
+			DataRetrieve();
 
 			// Select the original row.
 			if (id > 0)
@@ -219,7 +219,7 @@ namespace LJCViewEditor
 				{
 					ID = id
 				};
-				RowSelectViewOrderBy(record);
+				RowSelect(record);
 			}
 		}
 
@@ -234,12 +234,12 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateOrderBy(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddOrderBy(record);
+        row = RowAdd(record);
         Parent.OrderByGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.OrderBy);
       }
@@ -249,7 +249,7 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View OrderBy Grid.
-    private void ConfigureOrderByGrid()
+    private void SetupGridOrderBy()
 		{
 			if (0 == Parent.OrderByGrid.Columns.Count)
 			{
@@ -269,8 +269,8 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private readonly ViewEditorList Parent;
 		private ViewOrderByManager mViewOrderByManager;
-		#endregion
-	}
+    private readonly ViewEditorList Parent;
+    #endregion
+  }
 }

@@ -19,98 +19,97 @@ namespace LJCViewEditor
 		// Initializes an object instance.
 		internal ConditionGridClass(ViewEditorList parent)
 		{
-			mParent = parent;
+			Parent = parent;
 			ResetData();
 		}
 
 		// Resets the DataConfig dependent objects.
 		internal void ResetData()
 		{
-			mViewConditionManager = mParent.ViewHelper.ViewConditionManager;
+			mViewConditionManager = Parent.ViewHelper.ViewConditionManager;
 		}
 		#endregion
 
 		#region Data Methods
 
 		// Retrieves the list rows.
-		internal void DataRetrieveCondition()
+		internal void DataRetrieve()
 		{
 			ViewConditions dataRecords;
 
-			mParent.Cursor = Cursors.WaitCursor;
-			mParent.ConditionGrid.Rows.Clear();
+			Parent.Cursor = Cursors.WaitCursor;
+			Parent.ConditionGrid.Rows.Clear();
 
-			ConfigureConditionGrid();
-			if (mParent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow)
+			SetupGridCondition();
+			if (Parent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewConditionSetID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
 
 				dataRecords = mViewConditionManager.LoadWithParentID(viewConditionSetID);
-				if (dataRecords != null && dataRecords.Count > 0)
+				if (NetCommon.HasItems(dataRecords))
 				{
 					foreach (ViewCondition dataRecord in dataRecords)
 					{
-						RowAddCondition(dataRecord);
+						RowAdd(dataRecord);
 					}
 				}
 			}
-			mParent.Cursor = Cursors.Default;
-			mParent.DoChange(ViewEditorList.Change.Condition);
+			Parent.Cursor = Cursors.Default;
+			Parent.DoChange(ViewEditorList.Change.Condition);
 		}
 
 		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddCondition(ViewCondition dataRecord)
+		private LJCGridRow RowAdd(ViewCondition dataRecord)
 		{
 			LJCGridRow retValue;
 
-			retValue = mParent.ConditionGrid.LJCRowAdd();
-			SetStoredValuesCondition(retValue, dataRecord);
+			retValue = Parent.ConditionGrid.LJCRowAdd();
+			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			mParent.ConditionGrid.LJCRowSetValues(retValue, dataRecord);
+			Parent.ConditionGrid.LJCRowSetValues(retValue, dataRecord);
 			return retValue;
 		}
 
 		// Updates the current row with the record values.
-		private void RowUpdateCondition(ViewCondition dataRecord)
+		private void RowUpdate(ViewCondition dataRecord)
 		{
 			LJCGridRow row;
 
-			row = mParent.ConditionGrid.CurrentRow as LJCGridRow;
+			row = Parent.ConditionGrid.CurrentRow as LJCGridRow;
 			if (row != null)
 			{
-				SetStoredValuesCondition(row, dataRecord);
-				mParent.ConditionGrid.LJCRowSetValues(row, dataRecord);
+				SetStoredValues(row, dataRecord);
+				Parent.ConditionGrid.LJCRowSetValues(row, dataRecord);
 			}
 		}
 
 		// Sets the row stored values.
-		private void SetStoredValuesCondition(LJCGridRow row
+		private void SetStoredValues(LJCGridRow row
 			, ViewCondition dataRecord)
 		{
 			row.LJCSetInt32(ViewCondition.ColumnID, dataRecord.ID);
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelectViewCondition(ViewCondition record)
+		private void RowSelect(ViewCondition record)
 		{
 			int rowID;
 
 			if (record != null)
 			{
-				mParent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in mParent.ConditionGrid.Rows)
+				Parent.Cursor = Cursors.WaitCursor;
+				foreach (LJCGridRow row in Parent.ConditionGrid.Rows)
 				{
 					rowID = row.LJCGetInt32(ViewCondition.ColumnID);
 					if (rowID == record.ID)
 					{
-						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-						mParent.ConditionGrid.LJCSetCurrentRow(row, true);
+						Parent.ConditionGrid.LJCSetCurrentRow(row, true);
 						break;
 					}
 				}
-				mParent.Cursor = Cursors.Default;
+				Parent.Cursor = Cursors.Default;
 			}
 		}
 		#endregion
@@ -118,16 +117,16 @@ namespace LJCViewEditor
 		#region Action Methods
 
 		// Displays a detail dialog for a new record.
-		internal void DoNewViewCondition()
+		internal void DoNew()
 		{
 			ViewConditionDetail detail;
 
-			if (mParent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow)
+			if (Parent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				int parentID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewConditionSet.ColumnBooleanOperator);
 
-				var grid = mParent.ConditionGrid;
+				var grid = Parent.ConditionGrid;
 				var location = FormCommon.GetDialogScreenPoint(grid);
 				detail = new ViewConditionDetail
 				{
@@ -136,7 +135,7 @@ namespace LJCViewEditor
 					LJCLocation = location,
 
 					// Use table name to get table columns.
-					LJCTableName = mParent.TableCombo.Text,
+					LJCTableName = Parent.TableCombo.Text,
 				};
 				detail.LJCChange += ConditionDetail_Change;
 				detail.ShowDialog();
@@ -144,18 +143,18 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog to edit an existing record.
-		internal void DoEditViewCondition()
+		internal void DoEdit()
 		{
 			ViewConditionDetail detail;
 
-			if (mParent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow
-				&& mParent.ConditionGrid.CurrentRow is LJCGridRow row)
+			if (Parent.ConditionSetGrid.CurrentRow is LJCGridRow parentRow
+				&& Parent.ConditionGrid.CurrentRow is LJCGridRow row)
 			{
 				int id = row.LJCGetInt32(ViewCondition.ColumnID);
 				int parentID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewConditionSet.ColumnBooleanOperator);
 
-				var grid = mParent.ConditionGrid;
+				var grid = Parent.ConditionGrid;
 				var location = FormCommon.GetDialogScreenPoint(grid);
 				detail = new ViewConditionDetail()
 				{
@@ -165,7 +164,7 @@ namespace LJCViewEditor
 					LJCLocation = location,
 
 					// Use table name to get table columns.
-					LJCTableName = mParent.TableCombo.Text,
+					LJCTableName = Parent.TableCombo.Text,
 				};
 				detail.LJCChange += ConditionDetail_Change;
 				detail.ShowDialog();
@@ -173,12 +172,12 @@ namespace LJCViewEditor
 		}
 
 		// Deletes the selected row.
-		internal void DoDeleteViewCondition()
+		internal void DoDelete()
 		{
 			string title;
 			string message;
 
-			if (mParent.ConditionGrid.CurrentRow is LJCGridRow row)
+			if (Parent.ConditionGrid.CurrentRow is LJCGridRow row)
 			{
 				title = "Delete Confirmation";
 				message = FormCommon.DeleteConfirm;
@@ -198,27 +197,27 @@ namespace LJCViewEditor
 					}
 					else
 					{
-						mParent.ConditionGrid.Rows.Remove(row);
-						mParent.TimedChange(ViewEditorList.Change.Condition);
+						Parent.ConditionGrid.Rows.Remove(row);
+						Parent.TimedChange(ViewEditorList.Change.Condition);
 					}
 				}
 			}
 		}
 
 		// Refreshes the list.
-		internal void DoRefreshViewCondition()
+		internal void DoRefresh()
 		{
 			ViewCondition record;
 			LJCGridRow row;
 			int id = 0;
 
-			row = mParent.ConditionGrid.CurrentRow as LJCGridRow;
+			row = Parent.ConditionGrid.CurrentRow as LJCGridRow;
 
 			if (row != null)
 			{
 				id = row.LJCGetInt32(ViewCondition.ColumnID);
 			}
-			DataRetrieveCondition();
+			DataRetrieve();
 
 			// Select the original row.
 			if (id > 0)
@@ -227,7 +226,7 @@ namespace LJCViewEditor
 				{
 					ID = id
 				};
-				RowSelectViewCondition(record);
+				RowSelect(record);
 			}
 		}
 
@@ -242,14 +241,14 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateCondition(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddCondition(record);
-        mParent.ConditionGrid.LJCSetCurrentRow(row, true);
-        mParent.TimedChange(ViewEditorList.Change.ConditionSet);
+        row = RowAdd(record);
+        Parent.ConditionGrid.LJCSetCurrentRow(row, true);
+        Parent.TimedChange(ViewEditorList.Change.ConditionSet);
       }
     }
     #endregion
@@ -257,9 +256,9 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View Condition Grid.
-    private void ConfigureConditionGrid()
+    private void SetupGridCondition()
 		{
-			if (0 == mParent.ConditionGrid.Columns.Count)
+			if (0 == Parent.ConditionGrid.Columns.Count)
 			{
 				List<string> propertyNames = new List<string> {
 					ViewCondition.ColumnFirstValue,
@@ -272,7 +271,7 @@ namespace LJCViewEditor
 					= mViewConditionManager.GetColumns(propertyNames);
 
 				// Setup the grid display columns.
-				mParent.ConditionGrid.LJCAddDisplayColumns(conditionDisplayColumns);
+				Parent.ConditionGrid.LJCAddDisplayColumns(conditionDisplayColumns);
 			}
 		}
 		#endregion
@@ -280,7 +279,7 @@ namespace LJCViewEditor
 		#region Class Data
 
 		private ViewConditionManager mViewConditionManager;
-		private readonly ViewEditorList mParent;
+		private readonly ViewEditorList Parent;
 		#endregion
 	}
 }

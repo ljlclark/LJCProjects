@@ -37,40 +37,39 @@ namespace LJCViewEditor
 		#region Data Methods
 
 		// Retrieves the list rows.
-		internal void DataRetrieveColumn()
+		internal void DataRetrieve()
 		{
 			ViewColumns dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.ColumnGrid.Rows.Clear();
 
-			ConfigureColumnGrid();
+			SetupGridColumn();
 			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
 				dataRecords = mViewColumnManager.LoadWithParentID(viewDataID);
-
-				if (dataRecords != null && dataRecords.Count > 0)
+				if (NetCommon.HasItems(dataRecords))
 				{
 					foreach (ViewColumn dataRecord in dataRecords)
 					{
-						RowAddColumn(dataRecord);
+						RowAdd(dataRecord);
 					}
 				}
 			}
 			Parent.Cursor = Cursors.Default;
-			Parent.TimedChange(ViewEditorList.Change.Column);
+			Parent.DoChange(ViewEditorList.Change.Column);
 		}
 
 		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddColumn(ViewColumn dataRecord)
+		private LJCGridRow RowAdd(ViewColumn dataRecord)
 		{
 			LJCGridRow retValue;
 
 			retValue = Parent.ColumnGrid.LJCRowAdd();
-			SetStoredValuesColumn(retValue, dataRecord);
+			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
 			Parent.ColumnGrid.LJCRowSetValues(retValue, dataRecord);
@@ -78,35 +77,34 @@ namespace LJCViewEditor
 		}
 
 		// Updates the current row with the record values.
-		private void RowUpdateColumn(ViewColumn dataRecord)
+		private void RowUpdate(ViewColumn dataRecord)
 		{
 			if (Parent.ColumnGrid.CurrentRow is LJCGridRow row)
 			{
-				SetStoredValuesColumn(row, dataRecord);
+				SetStoredValues(row, dataRecord);
 				Parent.ColumnGrid.LJCRowSetValues(row, dataRecord);
 			}
 		}
 
 		// Sets the row stored values.
-		private void SetStoredValuesColumn(LJCGridRow row, ViewColumn dataRecord)
+		private void SetStoredValues(LJCGridRow row, ViewColumn dataRecord)
 		{
 			row.LJCSetInt32(ViewColumn.ColumnID, dataRecord.ID);
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelectViewColumn(ViewColumn record)
+		private void RowSelect(ViewColumn dataRecord)
 		{
 			int rowID;
 
-			if (record != null)
+			if (dataRecord != null)
 			{
 				Parent.Cursor = Cursors.WaitCursor;
 				foreach (LJCGridRow row in Parent.ColumnGrid.Rows)
 				{
 					rowID = row.LJCGetInt32(ViewColumn.ColumnID);
-					if (rowID == record.ID)
+					if (rowID == dataRecord.ID)
 					{
-						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
 						Parent.ColumnGrid.LJCSetCurrentRow(row, true);
 						break;
 					}
@@ -146,7 +144,7 @@ namespace LJCViewEditor
 						if (addedRecord != null)
 						{
 							viewColumn.ID = addedRecord.ID;
-							var row = RowAddColumn(viewColumn);
+							var row = RowAdd(viewColumn);
 							Parent.ColumnGrid.LJCSetCurrentRow(row, true);
 						}
 					}
@@ -155,7 +153,7 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog for a new record.
-		internal void DoNewViewColumn()
+		internal void DoNew()
 		{
 			ViewColumnDetail detail;
 
@@ -184,7 +182,7 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog to edit an existing record.
-		internal void DoEditViewColumn()
+		internal void DoEdit()
 		{
 			ViewColumnDetail detail;
 
@@ -216,7 +214,7 @@ namespace LJCViewEditor
 		}
 
 		// Deletes the selected row.
-		internal void DoDeleteViewColumn()
+		internal void DoDelete()
 		{
 			string title;
 			string message;
@@ -276,7 +274,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		internal void DoRefreshViewColumn()
+		internal void DoRefresh()
 		{
 			ViewColumn record;
 			int id = 0;
@@ -285,7 +283,7 @@ namespace LJCViewEditor
 			{
 				id = row.LJCGetInt32(ViewColumn.ColumnID);
 			}
-			DataRetrieveColumn();
+			DataRetrieve();
 
 			// Select the original row.
 			if (id > 0)
@@ -294,7 +292,7 @@ namespace LJCViewEditor
 				{
 					ID = id
 				};
-				RowSelectViewColumn(record);
+				RowSelect(record);
 			}
 		}
 
@@ -309,12 +307,12 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateColumn(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddColumn(record);
+        row = RowAdd(record);
         Parent.ColumnGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.Column);
       }
@@ -324,7 +322,7 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View Column Grid.
-    private void ConfigureColumnGrid()
+    private void SetupGridColumn()
 		{
 			if (0 == Parent.ColumnGrid.Columns.Count)
 			{
@@ -350,8 +348,8 @@ namespace LJCViewEditor
 
 		private string mDataConfigName;
 		private DbServiceRef mDbServiceRef;
-		private readonly ViewEditorList Parent;
 		private ViewColumnManager mViewColumnManager;
-		#endregion
-	}
+    private readonly ViewEditorList Parent;
+    #endregion
+  }
 }

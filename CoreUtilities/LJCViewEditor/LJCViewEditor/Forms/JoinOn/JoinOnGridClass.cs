@@ -33,25 +33,25 @@ namespace LJCViewEditor
 		#region Data Methods
 
 		// Retrieves the list rows.
-		internal void DataRetrieveJoinOn()
+		internal void DataRetrieve()
 		{
 			ViewJoinOns dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.JoinOnGrid.Rows.Clear();
 
-			ConfigureJoinOnGrid();
+			SetupGridJoinOn();
 			if (Parent.JoinGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewJoinID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
 				dataRecords = mViewJoinOnManager.LoadWithParentID(viewJoinID);
-				if (dataRecords != null && dataRecords.Count > 0)
+				if (NetCommon.HasItems(dataRecords))
 				{
 					foreach (ViewJoinOn dataRecord in dataRecords)
 					{
-						RowAddJoinOn(dataRecord);
+						RowAdd(dataRecord);
 					}
 				}
 			}
@@ -60,12 +60,12 @@ namespace LJCViewEditor
 		}
 
 		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddJoinOn(ViewJoinOn dataRecord)
+		private LJCGridRow RowAdd(ViewJoinOn dataRecord)
 		{
 			LJCGridRow retValue;
 
 			retValue = Parent.JoinOnGrid.LJCRowAdd();
-			SetStoredValuesJoinOn(retValue, dataRecord);
+			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
 			Parent.JoinOnGrid.LJCRowSetValues(retValue, dataRecord);
@@ -73,35 +73,34 @@ namespace LJCViewEditor
 		}
 
 		// Updates the current row with the record values.
-		private void RowUpdateJoinOn(ViewJoinOn dataRecord)
+		private void RowUpdate(ViewJoinOn dataRecord)
 		{
 			if (Parent.JoinOnGrid.CurrentRow is LJCGridRow row)
 			{
-				SetStoredValuesJoinOn(row, dataRecord);
+				SetStoredValues(row, dataRecord);
 				Parent.JoinOnGrid.LJCRowSetValues(row, dataRecord);
 			}
 		}
 
 		// Sets the row stored values.
-		private void SetStoredValuesJoinOn(LJCGridRow row, ViewJoinOn dataRecord)
+		private void SetStoredValues(LJCGridRow row, ViewJoinOn dataRecord)
 		{
 			row.LJCSetInt32(ViewJoinOn.ColumnID, dataRecord.ID);
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelectViewJoinOn(ViewJoinOn record)
+		private void RowSelect(ViewJoinOn dataRecord)
 		{
 			int rowID;
 
-			if (record != null)
+			if (dataRecord != null)
 			{
 				Parent.Cursor = Cursors.WaitCursor;
 				foreach (LJCGridRow row in Parent.JoinOnGrid.Rows)
 				{
 					rowID = row.LJCGetInt32(ViewJoinOn.ColumnID);
-					if (rowID == record.ID)
+					if (rowID == dataRecord.ID)
 					{
-						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
 						Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
 						break;
 					}
@@ -114,7 +113,7 @@ namespace LJCViewEditor
 		#region Action Methods
 
 		// Displays a detail dialog for a new record.
-		internal void DoNewViewJoinOn()
+		internal void DoNew()
 		{
 			ViewJoinOnDetail detail;
 
@@ -137,7 +136,7 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog to edit an existing record.
-		internal void DoEditViewJoinOn()
+		internal void DoEdit()
 		{
 			ViewJoinOnDetail detail;
 
@@ -163,7 +162,7 @@ namespace LJCViewEditor
 		}
 
 		// Deletes the selected row.
-		internal void DoDeleteViewJoinOn()
+		internal void DoDelete()
 		{
 			LJCGridRow row;
 			string title;
@@ -198,7 +197,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		internal void DoRefreshViewJoinOn()
+		internal void DoRefresh()
 		{
 			ViewJoinOn record;
 			int id = 0;
@@ -207,7 +206,7 @@ namespace LJCViewEditor
 			{
 				id = row.LJCGetInt32(ViewJoinOn.ColumnID);
 			}
-			DataRetrieveJoinOn();
+			DataRetrieve();
 
 			// Select the original row.
 			if (id > 0)
@@ -216,7 +215,7 @@ namespace LJCViewEditor
 				{
 					ID = id
 				};
-				RowSelectViewJoinOn(record);
+				RowSelect(record);
 			}
 		}
 
@@ -231,12 +230,12 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateJoinOn(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddJoinOn(record);
+        row = RowAdd(record);
         Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.JoinOn);
       }
@@ -246,7 +245,7 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View JoinOn Grid.
-    private void ConfigureJoinOnGrid()
+    private void SetupGridJoinOn()
 		{
 			if (0 == Parent.JoinOnGrid.Columns.Count)
 			{
@@ -268,8 +267,8 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private readonly ViewEditorList Parent;
 		private ViewJoinOnManager mViewJoinOnManager;
-		#endregion
-	}
+    private readonly ViewEditorList Parent;
+    #endregion
+  }
 }

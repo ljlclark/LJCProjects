@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // DataGridClass.cs
 using DataDetail;
-using LJCDataDetailLib;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCGridDataLib;
@@ -31,12 +30,12 @@ namespace LJCViewEditor
     #region Action Methods
 
     // Displays a detail dialog for a new record.
-    internal void DoNewData()
+    internal void DoNew()
     {
     }
 
     // Displays a detail dialog to edit an existing record.
-    internal void DoEditData()
+    internal void DoEdit()
     {
       DbColumns dataColumns;
 
@@ -75,7 +74,7 @@ namespace LJCViewEditor
     }
 
     // Deletes the selected row.
-    internal void DoDeleteData()
+    internal void DoDelete()
     {
       string title;
       string message;
@@ -185,9 +184,8 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    private readonly ViewEditorList Parent;
-
     private readonly string mUserID;
+    private readonly ViewEditorList Parent;
     #endregion
   }
 }

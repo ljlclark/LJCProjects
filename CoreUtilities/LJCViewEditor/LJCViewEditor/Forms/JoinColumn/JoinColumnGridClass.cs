@@ -33,25 +33,25 @@ namespace LJCViewEditor
 		#region Data Methods
 
 		// Retrieves the list rows.
-		internal void DataRetrieveJoinColumn()
+		internal void DataRetrieve()
 		{
 			ViewJoinColumns dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.JoinColumnGrid.Rows.Clear();
 
-			ConfigureJoinColumnGrid();
+			SetupGridJoinColumn();
 			if (Parent.JoinGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewJoinID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
 				dataRecords = mViewJoinColumnManager.LoadWithParentID(viewJoinID);
-				if (dataRecords != null && dataRecords.Count > 0)
+				if (NetCommon.HasItems(dataRecords))
 				{
 					foreach (ViewJoinColumn dataRecord in dataRecords)
 					{
-						RowAddJoinColumn(dataRecord);
+						RowAdd(dataRecord);
 					}
 				}
 			}
@@ -60,12 +60,12 @@ namespace LJCViewEditor
 		}
 
 		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAddJoinColumn(ViewJoinColumn dataRecord)
+		private LJCGridRow RowAdd(ViewJoinColumn dataRecord)
 		{
 			LJCGridRow retValue;
 
 			retValue = Parent.JoinColumnGrid.LJCRowAdd();
-			SetStoredValuesJoinColumn(retValue, dataRecord);
+			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
 			Parent.JoinColumnGrid.LJCRowSetValues(retValue, dataRecord);
@@ -73,24 +73,24 @@ namespace LJCViewEditor
 		}
 
 		// Updates the current row with the record values.
-		private void RowUpdateJoinColumn(ViewJoinColumn dataRecord)
+		private void RowUpdate(ViewJoinColumn dataRecord)
 		{
 			if (Parent.JoinColumnGrid.CurrentRow is LJCGridRow row)
 			{
-				SetStoredValuesJoinColumn(row, dataRecord);
+				SetStoredValues(row, dataRecord);
 				Parent.JoinColumnGrid.LJCRowSetValues(row, dataRecord);
 			}
 		}
 
 		// Sets the row stored values.
-		private void SetStoredValuesJoinColumn(LJCGridRow row
+		private void SetStoredValues(LJCGridRow row
 			, ViewJoinColumn dataRecord)
 		{
 			row.LJCSetInt32(ViewJoinColumn.ColumnID, dataRecord.ID);
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelectViewJoinColumn(ViewJoinColumn record)
+		private void RowSelect(ViewJoinColumn record)
 		{
 			int rowID;
 
@@ -115,7 +115,7 @@ namespace LJCViewEditor
 		#region Action Methods
 
 		// Displays a detail dialog for a new record.
-		internal void DoNewViewJoinColumn()
+		internal void DoNew()
 		{
 			ViewJoinColumnDetail detail;
 
@@ -138,7 +138,7 @@ namespace LJCViewEditor
 		}
 
 		// Displays a detail dialog to edit an existing record.
-		internal void DoEditViewJoinColumn()
+		internal void DoEdit()
 		{
 			ViewJoinColumnDetail detail;
 
@@ -165,7 +165,7 @@ namespace LJCViewEditor
 		}
 
 		// Deletes the selected row.
-		internal void DoDeleteViewJoinColumn()
+		internal void DoDelete()
 		{
 			string title;
 			string message;
@@ -198,7 +198,7 @@ namespace LJCViewEditor
 		}
 
 		// Refreshes the list.
-		internal void DoRefreshViewJoinColumn()
+		internal void DoRefresh()
 		{
 			ViewJoinColumn record;
 			int id = 0;
@@ -207,7 +207,7 @@ namespace LJCViewEditor
 			{
 				id = row.LJCGetInt32(ViewJoinColumn.ColumnID);
 			}
-			DataRetrieveJoinColumn();
+			DataRetrieve();
 
 			// Select the original row.
 			if (id > 0)
@@ -216,7 +216,7 @@ namespace LJCViewEditor
 				{
 					ID = id
 				};
-				RowSelectViewJoinColumn(record);
+				RowSelect(record);
 			}
 		}
 
@@ -231,12 +231,12 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateJoinColumn(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddJoinColumn(record);
+        row = RowAdd(record);
         Parent.JoinColumnGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.JoinColumn);
       }
@@ -246,7 +246,7 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View JoinColumn Grid.
-    private void ConfigureJoinColumnGrid()
+    private void SetupGridJoinColumn()
 		{
 			if (0 == Parent.JoinColumnGrid.Columns.Count)
 			{
@@ -268,8 +268,8 @@ namespace LJCViewEditor
 
 		#region Class Data
 
-		private readonly ViewEditorList Parent;
 		private ViewJoinColumnManager mViewJoinColumnManager;
-		#endregion
-	}
+    private readonly ViewEditorList Parent;
+    #endregion
+  }
 }
