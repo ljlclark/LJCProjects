@@ -1,12 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ObjectManagerTemplate.cs
-using System;
-using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDBServiceLib;
 using LJCNetCommon;
+using System;
+using System.Collections.Generic;
 
 // #SectionBegin Class
 // #Value _ClassName_
@@ -56,7 +56,7 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
 
     // Loads a collection of data records ordered by Description.
     /// <include path='items/LoadByDescription/*' file='../../LJCDocLib/Common/Manager.xml'/>

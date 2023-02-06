@@ -18,6 +18,7 @@ set File=CVRManager
 call %ClearBuild%
 del %Solution%\%Project%\%bin%\ControlValues /y
 rmdir %Solution%\%Project%\%bin%\ControlValues
+del %Solution%\%Project%\%bin%\CVRDAL.xml
 del %Solution%\%Project%\%bin%\CVRManagerDAL.xml
 del %Solution%\%Project%\%bin%\LJCRegionForm.exe
 del %Solution%\%Project%\%bin%\LJCRegionManager.exe
@@ -30,3 +31,4 @@ call %ClearBuild%
 set Project=CVRItem
 set File=CVRItem
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\CVRDAL.xml

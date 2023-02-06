@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1267
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCUnitMeasure", "LJCUnitMeasure\LJCUnitMeasure.csproj", "{B05672EC-874F-4B27-BCEB-A323A6195173}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCUnitMeasureDAL", "LJCUnitMeasureDAL\LJCUnitMeasureDAL.csproj", "{8C74D6F1-FF0F-43DA-9222-C39DA26B12AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTemplates", "DataTemplates", "{5637B0BC-6831-459F-99DF-4A92E797DB82}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ObjectManagerTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ObjectManagerTemplate.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
