@@ -1,8 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewColumnManager.cs
-using LJCDBMessage;
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 
@@ -10,28 +10,30 @@ namespace LJCDBViewDAL
 {
   // Provides ViewColumn specific data manipulation methods.
   /// <include path='items/ViewColumnManager/*' file='Doc/ProjectDbViewDAL.xml'/>
-  public class ViewColumnManager : ObjectManager<ViewColumn, ViewColumns>
+  public class ViewColumnManager
+    : ObjectManager<ViewColumn, ViewColumns>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/ViewColumnManagerC/*' file='Doc/ViewColumnManager.xml'/>
     public ViewColumnManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "ViewColumn") : base(dbServiceRef, dataConfigName, tableName)
+      , string tableName = "ViewColumn")
+      : base(dbServiceRef, dataConfigName, tableName)
     {
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]
-        {
-          ViewColumn.ColumnID
-        });
+      {
+        ViewColumn.ColumnID
+      });
 
       // Create the list of lookup column names.
       SetLookupColumns(new string[]
-        {
-          ViewColumn.ColumnViewDataID,
-          ViewColumn.ColumnPropertyName,
-          ViewColumn.ColumnRenameAs
-        });
+      {
+        ViewColumn.ColumnViewDataID,
+        ViewColumn.ColumnPropertyName,
+        ViewColumn.ColumnRenameAs
+      });
     }
     #endregion
 
@@ -65,18 +67,15 @@ namespace LJCDBViewDAL
         = new ResultConverter<DbColumn, DbColumns>();
       retValue = resultConverter.CreateCollection(viewColumnResult);
 
-      // *** Begin *** - Add 9/11
       // Get table definition.
       var dataManager = new DataManager(DataManager.DbServiceRef
         , DataConfigName, tableName);
       var recordColumns = dataManager.DataDefinition;
-      // *** End   ***
 
       // Populate missing values.
       // Process each Data Object column.
       foreach (DbColumn column in retValue)
       {
-        // *** Begin *** Add - 9/11
         var findColumn
           = recordColumns.LJCSearchPropertyName(column.PropertyName);
         if (findColumn != null)
@@ -84,7 +83,6 @@ namespace LJCDBViewDAL
           column.MaxLength = findColumn.MaxLength;
           column.IsPrimaryKey = findColumn.IsPrimaryKey;
         }
-        // *** end   ***
       }
       return retValue;
     }
