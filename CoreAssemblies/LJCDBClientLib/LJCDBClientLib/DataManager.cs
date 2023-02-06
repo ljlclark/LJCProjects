@@ -271,7 +271,8 @@ namespace LJCDBClientLib
       {
         DataDefinition = new DbColumns()
         {
-          new DbColumn("TABLE_NAME", "Name")
+          // *** Next Statement *** Change - 2/6/23
+          new DbColumn("TABLE_NAME", propertyName: "Name")
         };
       }
 
@@ -349,7 +350,6 @@ namespace LJCDBClientLib
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
         , propertyNames);
-        // *** Next Statement *** Add - 9/7
         if (dataColumns.Count > 0)
         {
           var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);

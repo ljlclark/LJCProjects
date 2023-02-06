@@ -11,6 +11,7 @@ using LJCViewEditorDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -27,18 +28,19 @@ namespace LJCViewEditor
     public ViewEditorList(string tableName = null, bool splash = true)
     {
       Cursor = Cursors.WaitCursor;
-      // *** Begin *** Add - 8/24/21
       mStartupTableName = tableName;
       if (splash)
       {
         ViewEditSplash splashDialog = new ViewEditSplash(true);
         splashDialog.ShowDialog();
       }
-      // *** End *** Add - 8/24/21
       InitializeComponent();
 
       // Initialize property values.
       LJCHelpFile = "ViewEditor.chm";
+
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
       Cursor = Cursors.Default;
     }
     #endregion
@@ -161,7 +163,6 @@ namespace LJCViewEditor
             ConfigCombo.SelectedIndex = comboIndex;
           }
 
-          // *** Begin *** Add - 8/24/21
           if (NetString.HasValue(mStartupTableName))
           {
             comboIndex = TableCombo.FindString(mStartupTableName);
@@ -170,13 +171,16 @@ namespace LJCViewEditor
               TableCombo.SelectedIndex = comboIndex;
             }
           }
-          // *** End *** Add - 8/24/21
+          break;
+
+        case Change.Config:
+          DataConfigName = ConfigCombo.Text;
+          DataRetrieveTable();
           break;
 
         case Change.Table:
           ViewGridClass.DataRetrieveViewData();
 
-          // *** Begin *** Add - 8/24/21
           if (StartupViewDataID > 0)
           {
             ViewData viewData = new ViewData()
@@ -185,7 +189,6 @@ namespace LJCViewEditor
             };
             ViewGridClass.RowSelectViewData(viewData);
           }
-          // *** End *** Add - 8/24/21
           break;
 
         case Change.View:
@@ -244,6 +247,7 @@ namespace LJCViewEditor
     internal enum Change
     {
       Startup,
+      Config,
       Table,
       View,
       Column,
@@ -343,19 +347,7 @@ namespace LJCViewEditor
     {
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
-      SetAppConfigValues();
-
-      // Initialize Class Data
-      try
-      {
-        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
-      }
-      catch (SystemException e)
-      {
-        ViewEditorCommon.CreateTables(e, DataConfigName);
-        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
-      }
-
+      InitializeClassData();
       SetupGridCode();
       LoadControlData();
       InitialControlValues();
@@ -373,6 +365,29 @@ namespace LJCViewEditor
 
       JoinSplit.Resize += JoinSplit_Resize;
       FilterSplit.Resize += FilterSplit_Resize;
+
+      BackColor = BeginColor;
+    }
+
+    // Initialize the Class Data.
+    private void InitializeClassData()
+    {
+      var values = ValuesViewEditor.Instance;
+      mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      DataConfigName = mSettings.DataConfigName;
+      DbServiceRef = mSettings.DbServiceRef;
+      mPrevConfigName = DataConfigName;
+
+      try
+      {
+        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+      }
+      catch (SystemException e)
+      {
+        ViewEditorCommon.CreateTables(e, DataConfigName);
+        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+      }
     }
 
     // Load initial Control data.
@@ -458,16 +473,6 @@ namespace LJCViewEditor
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , mControlValuesFileName);
-    }
-
-    // Sets the Application Configuration values.
-    private void SetAppConfigValues()
-    {
-      var values = ValuesViewEditor.Instance;
-      mSettings = values.StandardSettings;
-      DataConfigName = mSettings.DataConfigName;
-      DbServiceRef = mSettings.DbServiceRef;
-      mPrevConfigName = mSettings.DataConfigName;
     }
 
     // Setup the grid code references.
@@ -963,8 +968,7 @@ namespace LJCViewEditor
     // Handles the SelectionChanged event.
     private void ConfigCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
-      DataConfigName = ConfigCombo.Text;
-      DataRetrieveTable();
+      TimedChange(Change.Config);
     }
 
     // Handles the SelectionChanged event.
@@ -1022,16 +1026,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void ViewGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ViewGrid.LJCGetMouseRow(e) != null)
+      {
+        ViewGridClass.DoEditViewData();
+      }
+    }
+
     // Handles the MouseDown event.
     private void ViewGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         ViewGrid.Select();
         if (ViewGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ViewGrid.LJCSetCurrentRow(e);
           TimedChange(Change.View);
         }
@@ -1046,15 +1057,6 @@ namespace LJCViewEditor
         TimedChange(Change.View);
       }
       ViewGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void ViewGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ViewGrid.LJCGetMouseRow(e) != null)
-      {
-        ViewGridClass.DoEditViewData();
-      }
     }
     #endregion
 
@@ -1106,16 +1108,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void ColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ColumnGrid.LJCGetMouseRow(e) != null)
+      {
+        ColumnGridClass.DoEditViewColumn();
+      }
+    }
+
     // Handles the MouseDown event.
     private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         ColumnGrid.Select();
         if (ColumnGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ColumnGrid.LJCSetCurrentRow(e);
           TimedChange(Change.Column);
         }
@@ -1130,15 +1139,6 @@ namespace LJCViewEditor
         TimedChange(Change.Column);
       }
       ColumnGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void ColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ColumnGrid.LJCGetMouseRow(e) != null)
-      {
-        ColumnGridClass.DoEditViewColumn();
-      }
     }
     #endregion
 
@@ -1185,16 +1185,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void JoinGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (JoinGrid.LJCGetMouseRow(e) != null)
+      {
+        JoinGridClass.DoEditViewJoin();
+      }
+    }
+
     // Handles the MouseDown event.
     private void JoinGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         JoinGrid.Select();
         if (JoinGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           JoinGrid.LJCSetCurrentRow(e);
           TimedChange(Change.Join);
         }
@@ -1209,15 +1216,6 @@ namespace LJCViewEditor
         TimedChange(Change.Join);
       }
       JoinGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void JoinGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (JoinGrid.LJCGetMouseRow(e) != null)
-      {
-        JoinGridClass.DoEditViewJoin();
-      }
     }
     #endregion
 
@@ -1264,16 +1262,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void JoinOnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (JoinOnGrid.LJCGetMouseRow(e) != null)
+      {
+        JoinOnGridClass.DoEditViewJoinOn();
+      }
+    }
+
     // Handles the MouseDown event.
     private void JoinOnGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         JoinOnGrid.Select();
         if (JoinOnGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           JoinOnGrid.LJCSetCurrentRow(e);
           TimedChange(Change.JoinOn);
         }
@@ -1288,15 +1293,6 @@ namespace LJCViewEditor
         TimedChange(Change.JoinOn);
       }
       JoinOnGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void JoinOnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (JoinOnGrid.LJCGetMouseRow(e) != null)
-      {
-        JoinOnGridClass.DoEditViewJoinOn();
-      }
     }
     #endregion
 
@@ -1343,16 +1339,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void JoinColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (JoinColumnGrid.LJCGetMouseRow(e) != null)
+      {
+        JoinColumnGridClass.DoEditViewJoinColumn();
+      }
+    }
+
     // Handles the MouseDown event.
     private void JoinColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         JoinColumnGrid.Select();
         if (JoinColumnGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           JoinColumnGrid.LJCSetCurrentRow(e);
           TimedChange(Change.JoinColumn);
         }
@@ -1367,15 +1370,6 @@ namespace LJCViewEditor
         TimedChange(Change.JoinColumn);
       }
       JoinColumnGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void JoinColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (JoinColumnGrid.LJCGetMouseRow(e) != null)
-      {
-        JoinColumnGridClass.DoEditViewJoinColumn();
-      }
     }
     #endregion
 
@@ -1422,16 +1416,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void FilterGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (FilterGrid.LJCGetMouseRow(e) != null)
+      {
+        FilterGridClass.DoEditViewFilter();
+      }
+    }
+
     // Handles the MouseDown event.
     private void FilterGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         FilterGrid.Select();
         if (FilterGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           FilterGrid.LJCSetCurrentRow(e);
           TimedChange(Change.Filter);
         }
@@ -1446,15 +1447,6 @@ namespace LJCViewEditor
         TimedChange(Change.Filter);
       }
       FilterGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void FilterGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (FilterGrid.LJCGetMouseRow(e) != null)
-      {
-        FilterGridClass.DoEditViewFilter();
-      }
     }
     #endregion
 
@@ -1501,16 +1493,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void ConditionSetGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ConditionSetGrid.LJCGetMouseRow(e) != null)
+      {
+        ConditionSetGridClass.DoEditViewConditionSet();
+      }
+    }
+
     // Handles the MouseDown event.
     private void ConditionSetGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         ConditionSetGrid.Select();
         if (ConditionSetGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ConditionSetGrid.LJCSetCurrentRow(e);
           TimedChange(Change.ConditionSet);
         }
@@ -1525,15 +1524,6 @@ namespace LJCViewEditor
         TimedChange(Change.ConditionSet);
       }
       ConditionSetGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void ConditionSetGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ConditionSetGrid.LJCGetMouseRow(e) != null)
-      {
-        ConditionSetGridClass.DoEditViewConditionSet();
-      }
     }
     #endregion
 
@@ -1580,16 +1570,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void ConditionGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ConditionGrid.LJCGetMouseRow(e) != null)
+      {
+        ConditionGridClass.DoEditViewCondition();
+      }
+    }
+
     // Handles the MouseDown event.
     private void ConditionGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         ConditionGrid.Select();
         if (ConditionGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ConditionGrid.LJCSetCurrentRow(e);
           TimedChange(Change.Condition);
         }
@@ -1604,15 +1601,6 @@ namespace LJCViewEditor
         TimedChange(Change.Condition);
       }
       ConditionGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void ConditionGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ConditionGrid.LJCGetMouseRow(e) != null)
-      {
-        ConditionGridClass.DoEditViewCondition();
-      }
     }
     #endregion
 
@@ -1659,16 +1647,23 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void OrderByGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (OrderByGrid.LJCGetMouseRow(e) != null)
+      {
+        OrderByGridClass.DoEditViewOrderBy();
+      }
+    }
+
     // Handles the MouseDown event.
     private void OrderByGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         OrderByGrid.Select();
         if (OrderByGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           OrderByGrid.LJCSetCurrentRow(e);
           TimedChange(Change.OrderBy);
         }
@@ -1683,15 +1678,6 @@ namespace LJCViewEditor
         TimedChange(Change.OrderBy);
       }
       OrderByGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void OrderByGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (OrderByGrid.LJCGetMouseRow(e) != null)
-      {
-        OrderByGridClass.DoEditViewOrderBy();
-      }
     }
     #endregion
 
@@ -1721,16 +1707,24 @@ namespace LJCViewEditor
       }
     }
 
+    // Handles the MouseDoubleClick event.
+    private void DataGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (DataGrid.LJCGetMouseRow(e) != null)
+      {
+        DataGridClass.TableName = TableCombo.Text.Trim();
+        DataGridClass.DoEditData();
+      }
+    }
+
     // Handles the MouseDown event.
     private void DataGrid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
         DataGrid.Select();
         if (DataGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           DataGrid.LJCSetCurrentRow(e);
           TimedChange(Change.Data);
         }
@@ -1745,16 +1739,6 @@ namespace LJCViewEditor
         TimedChange(Change.Data);
       }
       DataGrid.LJCAllowSelectionChange = true;
-    }
-
-    // Handles the MouseDoubleClick event.
-    private void DataGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (DataGrid.LJCGetMouseRow(e) != null)
-      {
-        DataGridClass.TableName = TableCombo.Text.Trim();
-        DataGridClass.DoEditData();
-      }
     }
     #endregion
 
@@ -1791,7 +1775,10 @@ namespace LJCViewEditor
     internal ViewHelper ViewHelper { get; set; }
     #endregion
 
-    #region GridClass Properties
+    #region Private Properties
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
 
     // Gets or sets the ViewColumnClass value.
     private ColumnGridClass ColumnGridClass { get; set; }

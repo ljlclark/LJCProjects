@@ -1,14 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DocGenGroupList.cs
-using System;
-using System.IO;
-using System.Drawing;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDocLibDAL;
+using System;
+using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace LJCDocGroupEditor
 {
@@ -29,6 +29,10 @@ namespace LJCDocGroupEditor
       LJCHelpFile = "DocGenGroupEditor.chm";
       LJCHelpPageList = "DocGenGroupList.htm";
       LJCHelpPageDetail = "DocGenGroupDetail.htm";
+
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.LightSkyBlue;
       Cursor = Cursors.Default;
     }
     #endregion
@@ -55,7 +59,7 @@ namespace LJCDocGroupEditor
 
       var dataRecords = mDocGenGroupManager.Load();
 
-      if (dataRecords != null && dataRecords.Count > 0)
+      if (NetCommon.HasItems(dataRecords))
       {
         foreach (DocGenGroup dataRecord in dataRecords)
         {
@@ -134,7 +138,7 @@ namespace LJCDocGroupEditor
           var manager = mDocGenGroupManager;
           var dataRecords = manager.LoadAssemblies(groupName);
 
-          if (dataRecords != null && dataRecords.Count > 0)
+          if (NetCommon.HasItems(dataRecords))
           {
             foreach (DocGenAssembly dataRecord in dataRecords)
             {
@@ -562,11 +566,15 @@ namespace LJCDocGroupEditor
 
       // Initialize Class Data.
       Cursor = Cursors.WaitCursor;
+
+      // Initialize the Class Data.
       mDocGenGroupManager = new DocGenGroupManager();
       if (mDocGenGroupManager != null)
       {
         retValue = true;
       }
+
+      // Initial Control Setup
       Text = "Group List";
 
       // Set initial control values.
@@ -659,10 +667,10 @@ namespace LJCDocGroupEditor
       SetupGridAssembly();
     }
 
-    // Setup the DocGenGroup grid.
+    // Setup the grid display columns.
     private void SetupGridGroup()
     {
-      GroupGrid.BackgroundColor = mBeginColor;
+      GroupGrid.BackgroundColor = BeginColor;
 
       // Setup default display columns if no columns are defined.
       if (0 == GroupGrid.Columns.Count)
@@ -675,10 +683,10 @@ namespace LJCDocGroupEditor
       GroupGrid.LJCDragDataName = "DocGenGroup";
     }
 
-    // Setup the DocAssembly grid.
+    // Setup the grid display columns.
     private void SetupGridAssembly()
     {
-      DocAssemblyGrid.BackgroundColor = mBeginColor;
+      DocAssemblyGrid.BackgroundColor = BeginColor;
 
       // Setup default display columns if no columns are defined.
       if (0 == DocAssemblyGrid.Columns.Count)
@@ -1380,10 +1388,10 @@ namespace LJCDocGroupEditor
     #endregion
     #endregion
 
-    #region Public Properties
+    #region Internal Properties
 
     /// <summary>The help file name.</summary>
-    public string LJCHelpFile
+    internal string LJCHelpFile
     {
       get { return mHelpFile; }
       set { mHelpFile = NetString.InitString(value); }
@@ -1391,7 +1399,7 @@ namespace LJCDocGroupEditor
     private string mHelpFile;
 
     /// <summary>The List help page name.</summary>
-    public string LJCHelpPageList
+    internal string LJCHelpPageList
     {
       get { return mHelpPageList; }
       set { mHelpPageList = NetString.InitString(value); }
@@ -1399,7 +1407,7 @@ namespace LJCDocGroupEditor
     private string mHelpPageList;
 
     /// <summary>The Detail help page name.</summary>
-    public string LJCHelpPageDetail
+    internal string LJCHelpPageDetail
     {
       get { return mHelpPageDetail; }
       set { mHelpPageDetail = NetString.InitString(value); }
@@ -1407,9 +1415,17 @@ namespace LJCDocGroupEditor
     private string mHelpPageDetail;
     #endregion
 
+    #region Private Properties
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
+
+    // Gets or sets the End Color.
+    private Color EndColor { get; set; }
+    #endregion
+
     #region Class Data
 
-    private readonly Color mBeginColor = Color.AliceBlue;
     private string mControlValuesFileName;
     private DocGenGroupManager mDocGenGroupManager;
     #endregion

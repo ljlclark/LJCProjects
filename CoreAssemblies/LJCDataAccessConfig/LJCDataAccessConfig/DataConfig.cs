@@ -205,10 +205,10 @@ namespace LJCDataAccessConfig
       else
       {
         // Case sensitive.
-        retValue = Name.CompareTo(other.Name);
+        //retValue = Name.CompareTo(other.Name);
 
         // Not case sensitive.
-        //retValue = string.Compare(Name, other.Name, true);
+        retValue = string.Compare(Name, other.Name, true);
       }
       return retValue;
     }

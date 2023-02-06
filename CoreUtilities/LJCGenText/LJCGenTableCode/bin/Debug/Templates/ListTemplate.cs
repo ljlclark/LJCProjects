@@ -106,7 +106,7 @@ namespace _Namespace_
       var manager = Managers._ClassName_Manager;
       var dataRecords = manager.Load();
 
-      if (dataRecords != null && dataRecords.Count > 0)
+      if (NetCommon.HasItems(dataRecords))
       {
         foreach (_ClassName_ dataRecord in dataRecords)
         {
@@ -504,6 +504,7 @@ namespace _Namespace_
     {
       var values = Values_AppName_.Instance;
       mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
 
       Managers = new Managers();
       Managers.SetDBProperties(mSettings.DbServiceRef
@@ -807,7 +808,8 @@ namespace _Namespace_
     // Handles the MouseDoubleClick event.
     private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      if (_ClassName_Grid.LJCGetMouseRowIndex(e) > -1)
+      //if (_ClassName_Grid.LJCGetMouseRowIndex(e) > -1)
+      if (_ClassName_Grid.LJCGetMouseRow(e) != null)
       {
         DoDefault_ClassName_();
       }
@@ -816,9 +818,9 @@ namespace _Namespace_
     // Handles the MouseDown event.
     private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
     {
-      // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
       if (e.Button == MouseButtons.Right)
       {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         _ClassName_Grid.Select();
         if (_ClassName_Grid.LJCIsDifferentRow(e))
         {

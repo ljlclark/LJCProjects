@@ -8,6 +8,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Configuration;
 using System.Data;
+using System.Collections;
 
 namespace LJCNetCommon
 {
@@ -15,7 +16,7 @@ namespace LJCNetCommon
   /// <include path='items/NetCommon/*' file='Doc/NetCommon.xml'/>
   public class NetCommon
   {
-    #region Other Functions
+    #region Check Values Functions
 
     // Compare null values. (DE)
     /// <include path='items/CompareNull/*' file='Doc/NetCommon.xml'/>
@@ -58,6 +59,22 @@ namespace LJCNetCommon
         retVal = false;
       }
       return retVal;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    public static bool HasItems(IList list)
+    {
+      bool retValue = false;
+
+      if (list != null && list.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
     }
 
     // Checks if two values are equal.
@@ -751,7 +768,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Other Functions
+    #region Config Functions
 
     // Retrieves the Config bool value. (RE)
     /// <include path='items/ConfigBool/*' file='Doc/NetCommon.xml'/>

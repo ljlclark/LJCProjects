@@ -1,13 +1,13 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DocGenAssemblyDetail.cs
+using LJCNetCommon;
+using LJCWinFormCommon;
+using LJCDocLibDAL;
 using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LJCNetCommon;
-using LJCWinFormCommon;
-using LJCDocLibDAL;
 
 namespace LJCDocGroupEditor
 {
