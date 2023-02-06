@@ -1,39 +1,41 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ProvinceManager.cs
-using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using System.Collections.Generic;
 
 namespace LJCRegionDAL
 {
   /// <summary>Provides Table specific data manipulation methods.</summary>
-  public class ProvinceManager : ObjectManager<Province, Provinces>
+  public class ProvinceManager
+    : ObjectManager<Province, Provinces>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public ProvinceManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "Province") : base(dbServiceRef, dataConfigName, tableName)
+      , string tableName = "Province")
+      : base(dbServiceRef, dataConfigName, tableName)
     {
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]
-        {
-          Province.ColumnID
-        });
+      {
+        Province.ColumnID
+      });
 
       // Create the list of lookup column names.
       SetLookupColumns(new string[]
-        {
-          Province.ColumnRegionID,
-          Province.ColumnName
-        });
+      {
+        Province.ColumnRegionID,
+        Province.ColumnName
+      });
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>

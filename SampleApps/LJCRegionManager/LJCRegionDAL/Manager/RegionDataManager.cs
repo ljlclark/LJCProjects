@@ -1,38 +1,40 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RegionDataManager.cs
-using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using System.Collections.Generic;
 
 namespace LJCRegionDAL
 {
   /// <summary>Provides Table specific data manipulation methods.</summary>
-  public class RegionDataManager : ObjectManager<RegionData, Regions>
+  public class RegionDataManager
+    : ObjectManager<RegionData, Regions>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public RegionDataManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "Region") : base(dbServiceRef, dataConfigName, tableName)
+      , string tableName = "Region")
+      : base(dbServiceRef, dataConfigName, tableName)
     {
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]
-        {
-          RegionData.ColumnID
-        });
+      {
+        RegionData.ColumnID
+      });
 
       // Create the list of lookup column names.
       SetLookupColumns(new string[]
-        {
-          RegionData.ColumnName
-        });
+      {
+        RegionData.ColumnName
+      });
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>

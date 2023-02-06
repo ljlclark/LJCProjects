@@ -1,39 +1,41 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CityManager.cs
-using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using System.Collections.Generic;
 
 namespace LJCRegionDAL
 {
   /// <summary>Provides Table specific data manipulation methods.</summary>
-  public class CityManager : ObjectManager<City, Cities>
+  public class CityManager
+    : ObjectManager<City, Cities>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public CityManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "City") : base(dbServiceRef, dataConfigName, tableName)
+      , string tableName = "City")
+      : base(dbServiceRef, dataConfigName, tableName)
     {
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]
-        {
-          City.ColumnID
-        });
+      {
+        City.ColumnID
+      });
 
       // Create the list of lookup column names.
       SetLookupColumns(new string[]
-        {
-          City.ColumnProvinceID,
-          City.ColumnName
-        });
+      {
+        City.ColumnProvinceID,
+        City.ColumnName
+      });
     }
     #endregion
 
-    #region Data Load/Retrieve Methods
+    #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>

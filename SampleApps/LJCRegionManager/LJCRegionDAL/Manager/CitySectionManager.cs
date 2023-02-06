@@ -1,10 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CitySectionManager.cs
-using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using System.Collections.Generic;
 
 namespace LJCRegionDAL
 {
@@ -20,20 +20,20 @@ namespace LJCRegionDAL
     {
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]
-        {
-          CitySection.ColumnID
-        });
+      {
+        CitySection.ColumnID
+      });
 
       // Create the list of lookup column names.
       SetLookupColumns(new string[]
-        {
-          CitySection.ColumnCityID,
-          CitySection.ColumnName
-        });
+      {
+        CitySection.ColumnCityID,
+        CitySection.ColumnName
+      });
     }
     #endregion
 
-    #region Retrieve/Load Methods
+    #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
