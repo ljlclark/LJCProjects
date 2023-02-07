@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinColumn.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -56,9 +56,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = Name.CompareTo(other.Name);
-
 				// Not case sensitive.
 				retValue = string.Compare(ColumnName, other.ColumnName, true);
 			}

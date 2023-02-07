@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewTable.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -20,14 +20,7 @@ namespace LJCDBViewDAL
 		}
 		#endregion
 
-		#region Public Methods
-
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
-		public override string ToString()
-		{
-			return mName;
-		}
+		#region Data Methods
 
 		/// <summary>Clears the ChangeNames object.</summary>
 		public void ClearChanged()
@@ -47,25 +40,29 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = Name.CompareTo(other.Name);
-
 				// Not case sensitive.
 				retValue = string.Compare(Name, other.Name, true);
 			}
 			return retValue;
 		}
-		#endregion
 
-		#region Data Properties
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    public override string ToString()
+    {
+      return mName;
+    }
+    #endregion
 
-		// Update ChangedNames.Add() statements to "Property" constant
-		// if property was renamed.
+    #region Data Properties
 
-		/// <summary>Gets or sets the ID value.</summary>
-		//[Required]
-		//[Column("ID", TypeName="int")]
-		public Int32 ID
+    // Update ChangedNames.Add() statements to "Property" constant
+    // if property was renamed.
+
+    /// <summary>Gets or sets the ID value.</summary>
+    //[Required]
+    //[Column("ID", TypeName="int")]
+    public Int32 ID
 		{
 			get { return mID; }
 			set

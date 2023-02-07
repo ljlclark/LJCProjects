@@ -23,19 +23,6 @@ namespace _Namespace_
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(_CollectionName_ collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public static _CollectionName_ LJCDeserialize(string fileSpec = null)
@@ -46,8 +33,16 @@ namespace _Namespace_
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = NetCommon.XmlDeserialize(typeof(_CollectionName_), fileSpec)
+      if (false == File.Exists(fileSpec))
+      {
+        string errorText = $"File '{fileSpec}' was not found.";
+        throw new FileNotFoundException(errorText);
+      }
+      else
+      {
+        retValue = NetCommon.XmlDeserialize(typeof(_CollectionName_), fileSpec)
         as _CollectionName_;
+      }
       return retValue;
     }
     #endregion

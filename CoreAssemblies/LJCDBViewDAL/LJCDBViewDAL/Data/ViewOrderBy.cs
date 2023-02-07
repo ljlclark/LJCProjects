@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderBy.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -41,9 +41,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				retValue = ColumnName.CompareTo(other.ColumnName);
-
 				// Not case sensitive.
 				retValue = string.Compare(ColumnName, other.ColumnName, true);
 			}

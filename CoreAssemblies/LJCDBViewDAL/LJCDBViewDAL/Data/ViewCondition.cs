@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewCondition.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -131,9 +131,6 @@ namespace LJCDBViewDAL
 
 		/// <summary>The ComparisonOperator value.</summary>
 		public static string ColumnComparisonOperator = "ComparisonOperator";
-
-		#region Join Class Data
-		#endregion
 
 		/// <summary>The FirstValue maximum length.</summary>
 		public static int LengthFirstValue = 60;

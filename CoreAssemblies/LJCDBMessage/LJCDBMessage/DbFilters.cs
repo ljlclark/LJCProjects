@@ -12,19 +12,6 @@ namespace LJCDBMessage
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbFilters collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Creates the SQL Soundex filters from the supplied values.
     /// <include path='items/SQLSoundexFilters/*' file='Doc/DbFilters.xml'/>
     public static DbFilters SQLSoundexFilters(string columnName
@@ -84,7 +71,7 @@ namespace LJCDBMessage
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbFilters(DbFilters items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {

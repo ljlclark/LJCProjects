@@ -113,7 +113,7 @@ namespace LJCViewEditor
       DbColumns retValue = null;
 
       //if (dbColumns != null && dbValues != null)
-      if (DbColumns.HasItems(dbColumns) && DbValues.HasItems(dbValues))
+      if (NetCommon.HasItems(dbColumns) && NetCommon.HasItems(dbValues))
       {
         retValue = new DbColumns();
         foreach (DbValue dbValue in dbValues)

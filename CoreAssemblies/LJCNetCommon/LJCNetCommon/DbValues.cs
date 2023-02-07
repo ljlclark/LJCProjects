@@ -14,19 +14,6 @@ namespace LJCNetCommon
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbValues collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public static DbValues LJCDeserialize(string fileSpec = null)
@@ -55,7 +42,7 @@ namespace LJCNetCommon
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbValues(DbValues items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {

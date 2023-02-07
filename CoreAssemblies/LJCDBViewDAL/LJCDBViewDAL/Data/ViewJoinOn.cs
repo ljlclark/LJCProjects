@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinOn.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -41,9 +41,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = FromColumnName.CompareTo(other.FromColumnName);
-
 				// Not case sensitive.
 				retValue = string.Compare(FromColumnName, other.FromColumnName, true);
 			}
@@ -122,9 +119,6 @@ namespace LJCDBViewDAL
 			}
 		}
 		private String mJoinOnOperator;
-		#endregion
-
-		#region Calculated and Join Data Properties
 		#endregion
 
 		#region Class Properties

@@ -227,7 +227,7 @@ namespace LJCDBClientLib
         foreach (DbRow dbRow in dbResult.Rows)
         {
           DbValues dbValues = dbRow.Values;
-          if (DbValues.HasItems(dbValues))
+          if (NetCommon.HasItems(dbValues))
           {
             TData data = CreateData(dbValues);
             retValue.Add(data);

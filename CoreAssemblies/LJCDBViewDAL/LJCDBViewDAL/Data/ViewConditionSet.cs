@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewConditionSet.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -88,9 +88,6 @@ namespace LJCDBViewDAL
 
 		/// <summary>The BooleanOperator value.</summary>
 		public static string ColumnBooleanOperator = "BooleanOperator";
-
-		#region Join Class Data
-		#endregion
 
 		/// <summary>The BooleanOperator maximum length.</summary>
 		public static int LengthBooleanOperator = 10;

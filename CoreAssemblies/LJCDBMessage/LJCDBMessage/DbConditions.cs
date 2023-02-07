@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbConditions.cs
+using LJCNetCommon;
 using System.Collections.Generic;
 
 namespace LJCDBMessage
@@ -9,22 +10,6 @@ namespace LJCDBMessage
   /// <include path='items/DbConditions/*' file='Doc/DbConditions.xml'/>
   public class DbConditions : List<DbCondition>
   {
-    #region Static Functions
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbConditions collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Constructors
 
     // Initializes an object instance.
@@ -37,7 +22,7 @@ namespace LJCDBMessage
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbConditions(DbConditions items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {

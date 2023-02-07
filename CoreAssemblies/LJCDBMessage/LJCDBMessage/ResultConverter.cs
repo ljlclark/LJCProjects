@@ -100,7 +100,7 @@ namespace LJCDBMessage
       // Used here to allow for different TData.
       TData retValue = null;
 
-      if (DbValues.HasItems(dataValues))
+      if (NetCommon.HasItems(dataValues))
       {
         // Populate a data object with the result values.
         // Uses retValue as an object and processes with reflection.

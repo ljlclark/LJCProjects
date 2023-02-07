@@ -10,22 +10,6 @@ namespace LJCDBMessage
   /// <include path='items/DbJoins/*' file='Doc/DbJoins.xml'/>
   public class DbJoins : List<DbJoin>
   {
-    #region Static Functions
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbJoins collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Constructors
 
     // Initializes an object instance.
@@ -38,7 +22,7 @@ namespace LJCDBMessage
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbJoins(DbJoins items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {

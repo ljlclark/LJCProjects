@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewGridColumn.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -42,7 +42,8 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				retValue = ViewDataID.CompareTo(other.ViewDataID);
+        // Case sensitive.
+        retValue = ViewDataID.CompareTo(other.ViewDataID);
 				if (0 == retValue)
 				{
 					retValue = ViewColumnID.CompareTo(other.ViewColumnID);

@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataType.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCViewEditorDAL
 {
@@ -21,13 +21,6 @@ namespace LJCViewEditorDAL
 		#endregion
 
 		#region Data Methods
-
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public override string ToString()
-		{
-			return mName;
-		}
 
 		// Provides the default Sort functionality.
 		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -49,17 +42,24 @@ namespace LJCViewEditorDAL
 			}
 			return retValue;
 		}
-		#endregion
 
-		#region Data Properties
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public override string ToString()
+    {
+      return mName;
+    }
+    #endregion
 
-		// Update ChangedNames.Add() statements to "Property" constant
-		// if property was renamed.
+    #region Data Properties
 
-		/// <summary>Gets or sets the DataTypeID value.</summary>
-		//[Required]
-		//[Column("DataTypeID", TypeName="smallint")]
-		public Int16 DataTypeID
+    // Update ChangedNames.Add() statements to "Property" constant
+    // if property was renamed.
+
+    /// <summary>Gets or sets the DataTypeID value.</summary>
+    //[Required]
+    //[Column("DataTypeID", TypeName="smallint")]
+    public Int16 DataTypeID
 		{
 			get { return mDataTypeID; }
 			set

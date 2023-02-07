@@ -15,19 +15,6 @@ namespace LJCDBMessage
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbRows collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public static DbRows LJCDeserialize(string fileSpec = null)
@@ -56,7 +43,7 @@ namespace LJCDBMessage
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbRows(DbRows items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
@@ -74,7 +61,7 @@ namespace LJCDBMessage
     {
       DbRow retValue = null;
 
-      if (DbValues.HasItems(dataValues))
+      if (NetCommon.HasItems(dataValues))
       {
         retValue = new DbRow()
         {

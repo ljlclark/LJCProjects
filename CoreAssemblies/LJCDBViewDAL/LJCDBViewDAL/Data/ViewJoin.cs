@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoin.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -41,9 +41,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = JoinTableName.CompareTo(other.JoinTableName);
-
 				// Not case sensitive.
 				retValue = string.Compare(JoinTableName, other.JoinTableName, true);
 			}
@@ -123,9 +120,6 @@ namespace LJCDBViewDAL
 		private String mTableAlias;
 		#endregion
 
-		#region Calculated and Join Data Properties
-		#endregion
-
 		#region Class Properties
 
 		/// <summary>Gets a reference to the ChangedNames list.</summary>
@@ -154,9 +148,6 @@ namespace LJCDBViewDAL
 
 		/// <summary>The TableAlias column name.</summary>
 		public static string ColumnTableAlias = "TableAlias";
-
-		#region Join Class Data
-		#endregion
 
 		/// <summary>The TableName maximum length.</summary>
 		public static int LengthTableName = 60;

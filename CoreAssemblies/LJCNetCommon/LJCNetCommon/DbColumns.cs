@@ -16,19 +16,6 @@ namespace LJCNetCommon
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(DbColumns collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Creates DbColumns from a Data Object.
     /// <include path='items/LJCCreateObjectColumns/*' file='Doc/DbColumns.xml'/>
     public static DbColumns LJCCreateObjectColumns(object dataObject
@@ -134,7 +121,7 @@ namespace LJCNetCommon
     {
       DbValues retValue = null;
 
-      if (HasItems(dbColumns))
+      if (NetCommon.HasItems(dbColumns))
       {
         retValue = new DbValues();
         foreach (DbColumn dbColumn in dbColumns)
@@ -160,7 +147,7 @@ namespace LJCNetCommon
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public DbColumns(DbColumns items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
@@ -365,7 +352,7 @@ namespace LJCNetCommon
     {
       DbColumn searchColumn;
 
-      if (HasItems(dbColumns))
+      if (NetCommon.HasItems(dbColumns))
       {
         foreach (DbColumn dbColumn in dbColumns)
         {

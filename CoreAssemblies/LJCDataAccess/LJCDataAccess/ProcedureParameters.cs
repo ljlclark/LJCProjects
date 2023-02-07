@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using LJCNetCommon;
 using MySql.Data.MySqlClient;
 
 namespace LJCDataAccess
@@ -12,22 +13,6 @@ namespace LJCDataAccess
   /// <include path='items/ProcedureParameters/*' file='Doc/ProcedureParameters.xml'/>
   public class ProcedureParameters : List<ProcedureParameter>
   {
-    #region Static Functions
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(ProcedureParameters collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Constructors
 
     // Initializes an object instance.
@@ -40,7 +25,7 @@ namespace LJCDataAccess
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public ProcedureParameters(ProcedureParameters items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {

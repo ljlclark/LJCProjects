@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewFilter.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -41,9 +41,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = Name.CompareTo(other.Name);
-
 				// Not case sensitive.
 				retValue = string.Compare(Name, other.Name, true);
 			}
@@ -135,9 +132,6 @@ namespace LJCDBViewDAL
 
 		/// <summary>The BooleanOperator column name.</summary>
 		public static string ColumnBooleanOperator = "BooleanOperator";
-
-		#region Join Class Data
-		#endregion
 
 		/// <summary>The Name maximum length.</summary>
 		public static int LengthName = 60;

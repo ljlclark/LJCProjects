@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewData.cs
-using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 
 namespace LJCDBViewDAL
 {
@@ -41,9 +41,6 @@ namespace LJCDBViewDAL
 			}
 			else
 			{
-				// Case sensitive.
-				//retValue = Name.CompareTo(other.Name);
-
 				// Not case sensitive.
 				retValue = string.Compare(Name, other.Name, true);
 			}
@@ -136,9 +133,6 @@ namespace LJCDBViewDAL
 
 		/// <summary>The Description value.</summary>
 		public static string ColumnDescription = "Description";
-
-		#region Join Class Data
-		#endregion
 
 		/// <summary>The Name maximum length.</summary>
 		public static int LengthName = 60;

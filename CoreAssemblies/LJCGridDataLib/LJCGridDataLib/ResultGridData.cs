@@ -127,7 +127,7 @@ namespace LJCGridDataLib
     /// <include path='items/LoadRows1/*' file='Doc/ResultGridData.xml'/>
     public void LoadRows(DbRows dbRows)
     {
-      if (DbRows.HasItems(dbRows))
+      if (NetCommon.HasItems(dbRows))
       {
         foreach (DbRow dbRow in dbRows)
         {

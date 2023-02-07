@@ -15,19 +15,6 @@ namespace LJCGenTableCode
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(GenFileSpecs collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public static GenFileSpecs LJCDeserialize(string fileSpec = null)

@@ -19,19 +19,6 @@ namespace LJCDataDetailDAL
   {
     #region Static Functions
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public static bool HasItems(ControlTabItems collectionObject)
-    {
-      bool retValue = false;
-
-      if (collectionObject != null && collectionObject.Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
     public static ControlTabItems LJCDeserialize(string fileSpec = null)
@@ -61,7 +48,7 @@ namespace LJCDataDetailDAL
     /// <include path='items/CopyConstructor/*' file='Doc/ControlTabs.xml'/>
     public ControlTabItems(ControlTabItems items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
