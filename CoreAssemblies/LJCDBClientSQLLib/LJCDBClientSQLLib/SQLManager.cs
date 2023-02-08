@@ -3,13 +3,14 @@
 // SQLManager.cs
 using LJCDataAccess;
 using LJCDataAccessConfig;
+using LJCDBClientLib;
 using LJCDBMessage;
 using LJCGridDataLib;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 
-namespace LJCDBClientLib
+namespace LJCDBClientSQLLib
 {
   /// <summary>Provides SQL data manipulation methods.</summary>
   public class SQLManager
@@ -17,7 +18,7 @@ namespace LJCDBClientLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/SQLManagerC/*' file='Doc/SQLManager.xml'/>
+    /// <include path='items/SQLManagerC/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
     public SQLManager(string dataConfigName, string tableName)
     {
       Reset(dataConfigName, tableName);
@@ -50,7 +51,7 @@ namespace LJCDBClientLib
     #region DataManager Related Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='Doc/SQLManager.xml'/>
+    /// <include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
     public DataTable Add(object dataObject, List<string> propertyNames = null)
     {
       // The record must not contain a value for DB Assigned columns.
@@ -68,7 +69,7 @@ namespace LJCDBClientLib
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='Doc/SQLManager.xml'/>
+    /// <include path='items/Delete/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
@@ -76,7 +77,7 @@ namespace LJCDBClientLib
     }
 
     // Gets a DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/SQLManager.xml'/>
+    /// <include path='items/GetDataTable/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
     public DataTable GetDataTable(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -90,7 +91,7 @@ namespace LJCDBClientLib
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
+    /// <include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
     public void Update(object dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {

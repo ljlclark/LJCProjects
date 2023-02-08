@@ -352,7 +352,8 @@ namespace LJCDBClientLib
         , propertyNames);
         if (dataColumns.Count > 0)
         {
-          var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns, BaseDefinition);
+          var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
+            , BaseDefinition);
 
           Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
             , dataColumns, DataConfigName, SchemaName, requestKeyColumns
