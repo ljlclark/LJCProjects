@@ -8,7 +8,6 @@ rename %target%\%RunPath%\%RunCommand%.txt %RunCommand%.cmd
 call %target%\%RunPath%\%RunCommand%.cmd
 cd ..\..\..\..\..\LJCProjectsDev\CoreUtilities\LJCDocLib\LJCDocGen\bin\Debug
 rename %target%\%RunPath%\%RunCommand%.cmd %RunCommand%.txt
-pause
 
 set RunCommand=AfterGenRunOnceDBClient
 set RunPath=HTML\LJCDBClientLib

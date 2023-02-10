@@ -186,10 +186,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetBoolean/*' file='Doc/DbColumns.xml'/>
     public bool LJCGetBoolean(string propertyName)
     {
-      string value;
       bool retValue = false;
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         try
@@ -208,10 +207,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetDbDateTime/*' file='Doc/DbColumns.xml'/>
     public DateTime LJCGetDbDateTime(string propertyName)
     {
-      string value;
       DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = DateTime.Parse(value);
@@ -223,10 +221,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetDecimal/*' file='Doc/DbColumns.xml'/>
     public decimal LJCGetDecimal(string propertyName)
     {
-      string value;
       decimal retValue = 0;
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDecimal(value);
@@ -238,10 +235,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetInt16/*' file='Doc/DbColumns.xml'/>
     public short LJCGetInt16(string propertyName)
     {
-      string value;
       short retValue = 0;
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt16(value);
@@ -253,10 +249,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetInt32/*' file='Doc/DbColumns.xml'/>
     public int LJCGetInt32(string propertyName)
     {
-      string value;
       int retValue = 0;
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt32(value);
@@ -268,10 +263,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetInt64/*' file='Doc/DbColumns.xml'/>
     public long LJCGetInt64(string propertyName)
     {
-      string value;
       long retValue = 0;
 
-      value = LJCGetValue(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt64(value);
@@ -290,12 +284,11 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
     public string LJCGetValue(string propertyName)
     {
-      DbValue dbValue;
       string retValue = null;
 
       if (NetString.HasValue(propertyName))
       {
-        dbValue = LJCSearchPropertyName(propertyName);
+        var dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null
           && dbValue.Value != null
           && NetString.HasValue(dbValue.Value.ToString()))
@@ -310,11 +303,9 @@ namespace LJCNetCommon
     /// <include path='items/LJCSetValue/*' file='Doc/DbValues.xml'/>
     public void LJCSetValue(string propertyName, string value)
     {
-      DbValue dbValue;
-
       if (NetString.HasValue(propertyName))
       {
-        dbValue = LJCSearchPropertyName(propertyName);
+        var dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null)
         {
           dbValue.Value = value;

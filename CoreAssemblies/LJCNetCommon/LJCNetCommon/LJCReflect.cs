@@ -39,10 +39,9 @@ namespace LJCNetCommon
     /// <include path='items/GetDateTime/*' file='Doc/LJCReflect.xml'/>
     public DateTime GetDateTime(string propertyName)
     {
-      object value;
       DateTime retVal = DateTime.MinValue;
 
-      value = GetValue(propertyName);
+      var value = GetValue(propertyName);
       if (value != null
         && value.GetType() == typeof(DateTime))
       {
@@ -55,16 +54,14 @@ namespace LJCNetCommon
     /// <include path='items/GetDbDateString/*' file='Doc/LJCReflect.xml'/>
     public string GetDbDateString(string propertyName)
     {
-      Type type;
-      DateTime dateTime;
       string retVal = null;
 
       if (NetString.HasValue(propertyName))
       {
-        type = GetPropertyType(propertyName);
+        var type = GetPropertyType(propertyName);
         if (type == typeof(DateTime))
         {
-          dateTime = GetDateTime(propertyName);
+          var dateTime = GetDateTime(propertyName);
           retVal = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
         }
       }
@@ -75,10 +72,9 @@ namespace LJCNetCommon
     /// <include path='items/GetInt32/*' file='Doc/LJCReflect.xml'/>
     public int GetInt32(string propertyName)
     {
-      object value;
       int retVal = 0;
 
-      value = GetValue(propertyName);
+      var value = GetValue(propertyName);
       if (value != null
         && value.GetType() == typeof(int))
       {
@@ -123,10 +119,9 @@ namespace LJCNetCommon
     /// <include path='items/GetPropertyType/*' file='Doc/LJCReflect.xml'/>
     public Type GetPropertyType(string propertyName)
     {
-      PropertyInfo info;
       Type retVal = null;
 
-      info = GetPropertyInfo(propertyName);
+      var info = GetPropertyInfo(propertyName);
       if (info != null)
       {
         retVal = info.PropertyType;
@@ -138,10 +133,9 @@ namespace LJCNetCommon
     /// <include path='items/GetString/*' file='Doc/LJCReflect.xml'/>
     public string GetString(string propertyName)
     {
-      object value;
       string retVal = null;
 
-      value = GetValue(propertyName);
+      var value = GetValue(propertyName);
       if (value != null)
       {
         retVal = value.ToString();
@@ -178,12 +172,11 @@ namespace LJCNetCommon
     /// <include path='items/GetValueReflect/*' file='Doc/LJCReflect.xml'/>
     public object GetValueReflect(string propertyName)
     {
-      PropertyInfo propertyInfo;
       object retVal = null;
 
       if (NetString.HasValue(propertyName))
       {
-        propertyInfo = GetPropertyInfo(propertyName);
+        var propertyInfo = GetPropertyInfo(propertyName);
         if (propertyInfo != null)
         {
           retVal = propertyInfo.GetValue(mSource, null);
