@@ -34,7 +34,7 @@
       </para>
       <para>
         The "Script" methods are:
-        &lt;span class="commonType"&gt;ExecuteScript() and
+        &lt;span class="commonType"&gt;ExecuteScript()&lt;/span&gt; and
         &lt;span class="commonType"&gt;ExecuteScriptText()&lt;/span&gt;.
       </para>
       <para>

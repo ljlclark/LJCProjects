@@ -542,11 +542,7 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a byte.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/LJCGetByte/*' file='Doc/DbColumns.xml'/>
     public byte LJCGetByte(string propertyName)
     {
       byte retValue = default;
@@ -560,11 +556,7 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a char.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/LJCGetChar/*' file='Doc/DbColumns.xml'/>
     public char LJCGetChar(string propertyName)
     {
       char retValue = default;
@@ -605,12 +597,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the column object value as a decimal double.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    // Gets the column object value as a double.
+    /// <include path='items/LJCGetDouble/*' file='Doc/DbColumns.xml'/>
     public double LJCGetDouble(string propertyName)
     {
       double retValue = default;
@@ -666,11 +654,7 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a single.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/LJCGetSingle/*' file='Doc/DbColumns.xml'/>
     public float LJCGetSingle(string propertyName)
     {
       float retValue = default;

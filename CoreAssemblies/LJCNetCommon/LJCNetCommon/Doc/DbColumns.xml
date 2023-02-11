@@ -166,6 +166,12 @@
   </LJCSearchRenameAs>
 
   <!-- Other Public Methods -->
+  <LJCGetMinSqlDate>
+    <summary>
+      Get the minimum date value.
+    </summary>
+    <returns>The minimum value in database format.</returns>
+  </LJCGetMinSqlDate>
   <LJCSetColumnCaptions>
     <summary>
       Sets the caption properties.
@@ -190,13 +196,27 @@
     <param name="propertyName">The property name.</param>
     <returns>The bool value.</returns>
   </LJCGetBoolean>
+  <LJCGetByte>
+    <summary>
+      Gets the column object value as a byte.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte value.</returns>
+  </LJCGetByte>
+  <LJCGetChar>
+    <summary>
+      Gets the column object value as a char.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char value.</returns>
+  </LJCGetChar>
   <LJCGetDbDateTime>
     <summary>
       Gets the column object value as a
       &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
     </summary>
     <param name="propertyName">The property name.</param>
-    <returns>The DataTime value.</returns>
+    <returns>The DateTime value.</returns>
   </LJCGetDbDateTime>
   <LJCGetDecimal>
     <summary>
@@ -209,6 +229,13 @@
       The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
     </returns>
   </LJCGetDecimal>
+  <LJCGetDouble>
+    <summary>
+      Gets the column object value as a double.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The double value.</returns>
+  </LJCGetDouble>
   <LJCGetInt16>
     <summary>
       Gets the column object value as a
@@ -243,12 +270,13 @@
       int value.
     </returns>
   </LJCGetInt64>
-  <LJCGetMinSqlDate>
+  <LJCGetSingle>
     <summary>
-      Get the minimum date value.
+      Gets the column object value as a single.
     </summary>
-    <returns>The minimum value in database format.</returns>
-  </LJCGetMinSqlDate>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </LJCGetSingle>
   <LJCGetValue>
     <summary>
       Gets the string value for the column with the specified name.

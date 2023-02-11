@@ -85,11 +85,7 @@ namespace LJCNetCommon
     #region Value Methods
 
     // Gets the property value as a boolean.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetBoolean/*' file='Doc/LJCReflect.xml'/>
     public bool GetBoolean(string propertyName)
     {
       bool retVal = default;
@@ -104,11 +100,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a byte.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetByte/*' file='Doc/LJCReflect.xml'/>
     public byte GetByte(string propertyName)
     {
       byte retVal = default;
@@ -123,11 +115,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a char.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetChar/*' file='Doc/LJCReflect.xml'/>
     public char GetChar(string propertyName)
     {
       char retVal = default;
@@ -175,11 +163,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a decimal.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetDecimal/*' file='Doc/LJCReflect.xml'/>
     public decimal GetDecimal(string propertyName)
     {
       decimal retVal = default;
@@ -194,11 +178,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a double.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetDouble/*' file='Doc/LJCReflect.xml'/>
     public double GetDouble(string propertyName)
     {
       double retVal = default;
@@ -213,11 +193,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a short.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetInt16/*' file='Doc/LJCReflect.xml'/>
     public short GetInt16(string propertyName)
     {
       short retVal = default;
@@ -247,11 +223,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a long.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetInt64/*' file='Doc/LJCReflect.xml'/>
     public long GetInt64(string propertyName)
     {
       long retVal = default;
@@ -266,11 +238,7 @@ namespace LJCNetCommon
     }
 
     // Gets the property value as a float.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <include path='items/GetSingle/*' file='Doc/LJCReflect.xml'/>
     public float GetSingle(string propertyName)
     {
       float retVal = default;

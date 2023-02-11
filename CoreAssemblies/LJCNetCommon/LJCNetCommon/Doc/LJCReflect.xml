@@ -37,28 +37,7 @@
     <param name="source">The source object.</param>
   </SetSource>
 
-  <!-- Get Methods -->
-  <GetDateTime>
-    <summary>
-      Gets the property value as a DateTime value.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The string property value.</returns>
-  </GetDateTime>
-  <GetDbDateString>
-    <summary>
-      Gets the property value as a DB date/time string.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The object property value or null if not a valid date/time.</returns>
-  </GetDbDateString>
-  <GetInt32>
-    <summary>
-      Gets the property value as an integer.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The integer property value.</returns>
-  </GetInt32>
+  <!-- public Methods -->
   <GetPropertyInfo>
     <summary>
       Gets the cached PropertyInfo value.
@@ -79,6 +58,85 @@
     <param name="propertyName">The property name.</param>
     <returns>The property type.</returns>
   </GetPropertyType>
+
+  <!-- Value Methods -->
+  <GetBoolean>
+    <summary>
+      Gets the property value as a boolean.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The bool value.</returns>
+  </GetBoolean>
+  <GetByte>
+    <summary>
+      Gets the property value as a byte.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte value.</returns>
+  </GetByte>
+  <GetChar>
+    <summary>
+      Gets the property value as a char.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char value.</returns>
+  </GetChar>
+  <GetDateTime>
+    <summary>
+      Gets the property value as a DateTime value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The string property value.</returns>
+  </GetDateTime>
+  <GetDbDateString>
+    <summary>
+      Gets the property value as a DB date/time string.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value or null if not a valid date/time.</returns>
+  </GetDbDateString>
+  <GetDecimal>
+    <summary>
+      Gets the property value as a decimal.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The decimal value.</returns>
+  </GetDecimal>
+  <GetDouble>
+    <summary>
+      Gets the property value as a double.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The double value.</returns>
+  </GetDouble>
+  <GetInt16>
+    <summary>
+      Gets the property value as a short.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The short value.</returns>
+  </GetInt16>
+  <GetInt32>
+    <summary>
+      Gets the property value as an integer.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The integer property value.</returns>
+  </GetInt32>
+  <GetInt64>
+    <summary>
+      Gets the property value as a long.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The long value.</returns>
+  </GetInt64>
+  <GetSingle>
+    <summary>
+      Gets the property value as a float.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </GetSingle>
   <GetString>
     <summary>
       Gets the property value as a string.
