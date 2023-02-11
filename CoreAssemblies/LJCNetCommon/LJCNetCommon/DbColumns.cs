@@ -3,8 +3,6 @@
 // DbColumns
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon
@@ -346,6 +344,13 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Get the minimum date value.
+    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
+    public static string LJCGetMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+
     // Sets the caption properties.
     /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
     public void LJCSetColumnCaptions(DbColumns dbColumns)
@@ -519,7 +524,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetBoolean/*' file='Doc/DbColumns.xml'/>
     public bool LJCGetBoolean(string propertyName)
     {
-      bool retValue = false;
+      bool retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -532,6 +537,42 @@ namespace LJCNetCommon
         {
           retValue = false;
         }
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a byte.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public byte LJCGetByte(string propertyName)
+    {
+      byte retValue = default;
+
+      var value = LJCGetValue(propertyName);
+      if (value != null)
+      {
+        retValue = Convert.ToByte(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a char.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public char LJCGetChar(string propertyName)
+    {
+      char retValue = default;
+
+      var value = LJCGetValue(propertyName);
+      if (value != null)
+      {
+        retValue = Convert.ToChar(value);
       }
       return retValue;
     }
@@ -554,7 +595,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetDecimal/*' file='Doc/DbColumns.xml'/>
     public decimal LJCGetDecimal(string propertyName)
     {
-      decimal retValue = 0;
+      decimal retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -564,11 +605,29 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Gets the column object value as a decimal double.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public double LJCGetDouble(string propertyName)
+    {
+      double retValue = default;
+
+      var value = LJCGetValue(propertyName);
+      if (value != null)
+      {
+        retValue = Convert.ToDouble(value);
+      }
+      return retValue;
+    }
+
     // Gets the column object value as a short int.
     /// <include path='items/LJCGetInt16/*' file='Doc/DbColumns.xml'/>
     public short LJCGetInt16(string propertyName)
     {
-      short retValue = 0;
+      short retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -582,7 +641,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetInt32/*' file='Doc/DbColumns.xml'/>
     public int LJCGetInt32(string propertyName)
     {
-      int retValue = 0;
+      int retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -596,7 +655,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCGetInt64/*' file='Doc/DbColumns.xml'/>
     public long LJCGetInt64(string propertyName)
     {
-      long retValue = 0;
+      long retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -606,18 +665,29 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
-    public static string LJCGetMinSqlDate()
+    // Gets the column object value as a single.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public float LJCGetSingle(string propertyName)
     {
-      return "1753/01/01 00:00:00";
+      float retValue = default;
+
+      var value = LJCGetValue(propertyName);
+      if (value != null)
+      {
+        retValue = Convert.ToSingle(value);
+      }
+      return retValue;
     }
 
     // Gets the string value for the column with the specified name.
     /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
     public string LJCGetValue(string propertyName)
     {
-      string retValue = null;
+      string retValue = default;
 
       var dbColumn = LJCSearchPropertyName(propertyName);
       if (dbColumn != null
@@ -635,8 +705,6 @@ namespace LJCNetCommon
     {
       if (value != null)
       {
-        // *** Next Statement *** Change - 11/24/22
-        //var dbColumn = LJCSearchColumnName(name);
         var dbColumn = LJCSearchPropertyName(propertyName);
         if (null == dbColumn)
         {

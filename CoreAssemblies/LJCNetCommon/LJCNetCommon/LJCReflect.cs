@@ -33,55 +33,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Methods
-
-    // Gets the property value as a DateTime value.
-    /// <include path='items/GetDateTime/*' file='Doc/LJCReflect.xml'/>
-    public DateTime GetDateTime(string propertyName)
-    {
-      DateTime retVal = DateTime.MinValue;
-
-      var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(DateTime))
-      {
-        retVal = Convert.ToDateTime(value);
-      }
-      return retVal;
-    }
-
-    // Gets the property value as a DB date/time string.
-    /// <include path='items/GetDbDateString/*' file='Doc/LJCReflect.xml'/>
-    public string GetDbDateString(string propertyName)
-    {
-      string retVal = null;
-
-      if (NetString.HasValue(propertyName))
-      {
-        var type = GetPropertyType(propertyName);
-        if (type == typeof(DateTime))
-        {
-          var dateTime = GetDateTime(propertyName);
-          retVal = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
-        }
-      }
-      return retVal;
-    }
-
-    // Gets the property value as an integer.
-    /// <include path='items/GetInt32/*' file='Doc/LJCReflect.xml'/>
-    public int GetInt32(string propertyName)
-    {
-      int retVal = 0;
-
-      var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(int))
-      {
-        retVal = (int)value;
-      }
-      return retVal;
-    }
+    #region Public Methods
 
     // Gets the cached PropertyInfo value.
     /// <include path='items/GetPropertyInfo/*' file='Doc/LJCReflect.xml'/>
@@ -125,6 +77,209 @@ namespace LJCNetCommon
       if (info != null)
       {
         retVal = info.PropertyType;
+      }
+      return retVal;
+    }
+    #endregion
+
+    #region Value Methods
+
+    // Gets the property value as a boolean.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public bool GetBoolean(string propertyName)
+    {
+      bool retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(bool))
+      {
+        retVal = (bool)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a byte.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public byte GetByte(string propertyName)
+    {
+      byte retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(byte))
+      {
+        retVal = (byte)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a char.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public char GetChar(string propertyName)
+    {
+      char retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(char))
+      {
+        retVal = (char)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a DateTime value.
+    /// <include path='items/GetDateTime/*' file='Doc/LJCReflect.xml'/>
+    public DateTime GetDateTime(string propertyName)
+    {
+      DateTime retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(DateTime))
+      {
+        retVal = Convert.ToDateTime(value);
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a DB date/time string.
+    /// <include path='items/GetDbDateString/*' file='Doc/LJCReflect.xml'/>
+    public string GetDbDateString(string propertyName)
+    {
+      string retVal = default;
+
+      if (NetString.HasValue(propertyName))
+      {
+        var type = GetPropertyType(propertyName);
+        if (type == typeof(DateTime))
+        {
+          var dateTime = GetDateTime(propertyName);
+          retVal = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+        }
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a decimal.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public decimal GetDecimal(string propertyName)
+    {
+      decimal retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(decimal))
+      {
+        retVal = (decimal)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a double.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public double GetDouble(string propertyName)
+    {
+      double retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(double))
+      {
+        retVal = (double)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a short.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public short GetInt16(string propertyName)
+    {
+      short retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(short))
+      {
+        retVal = (short)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as an integer.
+    /// <include path='items/GetInt32/*' file='Doc/LJCReflect.xml'/>
+    public int GetInt32(string propertyName)
+    {
+      int retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(int))
+      {
+        retVal = (int)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a long.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public long GetInt64(string propertyName)
+    {
+      long retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(long))
+      {
+        retVal = (long)value;
+      }
+      return retVal;
+    }
+
+    // Gets the property value as a float.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public float GetSingle(string propertyName)
+    {
+      float retVal = default;
+
+      var value = GetValue(propertyName);
+      if (value != null
+        && value.GetType() == typeof(float))
+      {
+        retVal = (float)value;
       }
       return retVal;
     }
