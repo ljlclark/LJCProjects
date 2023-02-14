@@ -5,22 +5,38 @@
 <ConnectionTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ConnectionTemplate>
     <Name>SQLServer</Name>
-    <Template>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True</Template>
+    <Template>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security={SSPI}; User Id={UID} Password={PSWD}; </Template>
   </ConnectionTemplate>
   <ConnectionTemplate>
     <Name>MySQL</Name>
-    <Template>server={DbServer}; UserId={UID}; Password={PSWD}; database={Database}</Template>
+    <Template>server={DbServer}; UserId={UID}; Password={PSWD}; database={Database};</Template>
   </ConnectionTemplate>
   <ConnectionTemplate>
     <Name>OLEDB</Name>
-    <Template>Provider=SQLOLEDB; Data Source={DbServer}\instance; Initial Catalog={Database}; User Id={UID}; Password={PSWD}</Template>
+    <Template>Provider=SQLOLEDB; Data Source={DbServer}\instance; Initial Catalog={Database}; User Id={UID}; Password={PSWD};</Template>
   </ConnectionTemplate>
   <ConnectionTemplate>
     <Name>Access</Name>
-    <Template>Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\myAccessFile.accdb; Persist Security Info=False;</Template>
+    <Template>Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\myAccessFile.accdb; Persist Security Info=False; Jet OLEDB:Database Password={PSWD};</Template>
   </ConnectionTemplate>
   <ConnectionTemplate>
     <Name>ODBC</Name>
-    <Template>Driver={SQL Server}; Server=myServerAddress; Database=myDataBase; Uid={UID}; Pwd={PSWD};</Template>
+    <Template>Driver={SQL Native Client}; Server={DbServer}; Database={Databaase}; uid={UID}; pwd={PSWD};</Template>
+  </ConnectionTemplate>
+  <ConnectionTemplate>
+    <Name>XLSX</Name>
+    <Template>Data Source=C:\myExcelFile.xlsx; Extended Properties=\"Excel 12.0;HDR=YES\";</Template>
+  </ConnectionTemplate>
+  <ConnectionTemplate>
+    <Name>XLS</Name>
+    <Template>Data Source=C:\myExcelFile.xls; Extended Properties=\"Excel 8.0;HDR=YES\";</Template>
+  </ConnectionTemplate>
+  <ConnectionTemplate>
+    <Name>ORCL</Name>
+    <Template>Data Source=ORCL;Integrated Security=yes;User Id={UID};Password={PSWD};</Template>
+  </ConnectionTemplate>
+  <ConnectionTemplate>
+    <Name>Text</Name>
+    <Template>Provider=Microsoft.ACE.OLEDB.12.0; Data Source=C:\; Extended Properties="text;HDR=yes;FMT=Delimited";</Template>
   </ConnectionTemplate>
 </ConnectionTemplates>

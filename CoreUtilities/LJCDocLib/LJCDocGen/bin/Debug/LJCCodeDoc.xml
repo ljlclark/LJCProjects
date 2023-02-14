@@ -48,7 +48,7 @@
       <DocGenAssembly>
         <Name>LJCGridDataLib</Name>
         <Description>The DbResult Grid Helper Library.</Description>
-        <FileSpec>..\..\..\..\..\..\CoreAssemblies\LJCGridDataLib\LJCGridDataLib\bin\Debug\LJCGridDataLib.xml</FileSpec>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCGridDataLib\LJCGridDataLib\bin\Debug\LJCGridDataLib.xml</FileSpec>
         <Sequence>7</Sequence>
       </DocGenAssembly>
 
@@ -56,7 +56,7 @@
       <DocGenAssembly>
         <Name>LJCTextDataReaderLib</Name>
         <Description>The Text Data Reader library.</Description>
-        <FileSpec>..\..\..\..\..\..\CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.xml</FileSpec>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.xml</FileSpec>
         <Sequence>8</Sequence>
       </DocGenAssembly>
 
@@ -64,7 +64,7 @@
       <DocGenAssembly>
         <Name>DataDetail</Name>
         <Description>The DataDetail Dynamic Detail dialog. (D)</Description>
-        <FileSpec>..\..\..\..\..\..\CoreAssemblies\DataDetail\DataDetail\bin\Debug\DataDetail.xml</FileSpec>
+        <FileSpec>..\..\..\..\..\CoreAssemblies\DataDetail\DataDetail\bin\Debug\DataDetail.xml</FileSpec>
         <Sequence>10</Sequence>
       </DocGenAssembly>
       <DocGenAssembly>
