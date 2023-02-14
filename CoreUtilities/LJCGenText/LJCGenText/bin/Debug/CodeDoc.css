@@ -1,137 +1,155 @@
-﻿body {
-	font-family: Verdana, Tahoma, Arial, Sans-Serif;
-	font-size: 8pt;
-	color: #000000;
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
-	max-height: 100%;
+﻿/* CodeDoc.css */
+
+/* Type Selectors */
+body {
+  background: #f3f7ff;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 8pt;
+  height: 100%;
+  margin: 0px;
 }
 
-div#Header {
-	width: 100%;
-	height: 25px;
-	overflow: auto;
-	background-color: #d4dfff;
-	border-bottom: solid #c8cdde 1px;
-}
-
-div#Title {
-	font-family: Verdana, Tahoma, Arial, Sans-Serif;
-	font-size: 9pt;
-	font-weight: bold;
-	color: #003399;
-	padding-top: 5px;
-	padding-left: 15px;
-}
-
-div.Text {
-	padding-left: 15px;
+/* Type/Class Selectors */
+div.PathText {
+  color: #003399;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 9pt;
+  /*font-weight: bold;*/
+  padding-left: 15px;
+  padding-top: 5px;
 }
 
 div.RedText {
-	padding-left: 15px;
-	color:red;
-}
-
-div.Smalltext {
-	padding-left: 15px;
-	font-family: Arial;
-	font-size: 6pt;
+  color: red;
+  padding-left: 15px;
 }
 
 div.SectionContainer {
-	padding-left: 17px;
-	padding-right: 17px;
+  padding-left: 17px;
+  padding-right: 17px;
 }
 
-table.ListTable {
-	width: 100%;
-	margin-bottom: 0px;
-	font-family: Courier New, Monospace;
-	font-size: 9pt;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 15px;
+div.SmallText {
+  font-family: Arial;
+  font-size: 6pt;
+  padding-left: 15px;
 }
 
-td.ListTable {
-	color: #000066;
-	background-color: #f7f7ff;
-	border-bottom: solid #d5d5d3 1px;
-	padding-top: 2px;
-	padding-bottom: 2px;
+div.Text {
+  padding-left: 15px;
 }
 
-td.ListTableMissing {
-	color: red;
-	background-color: #f7f7ff;
-	border-bottom: solid #d5d5d3 1px;
-	padding-top: 2px;
-	padding-bottom: 2px;
+div.Text2 {
+  padding-left: 30px;
+}
+
+div.Text3 {
+  padding-left: 45px;
 }
 
 table.CodeTable {
-	width: 100%;
-	margin-bottom: 0px;
-	font-family: Courier New, Monospace;
-	font-size: 9pt;
-}
-
-th.CodeTable {
-	font-family: Verdana, Tahoma, Arial, Sans-Serif;
-	font-size: 8pt;
-	color: #000066;
-	font-weight: bold;
-	background-color: #efeff7;
-	border-bottom: solid #c8cdde 1px;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	padding-left: 5px;
-	padding-right: 5px;
-	text-align: left;
+  font-family: Courier New, Monospace;
+  font-size: 9pt;
+  width: 100%;
 }
 
 td.CodeTable {
-	color: #000066;
-	background-color: #f7f7ff;
-	border-bottom: solid #d5d5d3 1px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 5px;
-	padding-right: 10px;
-	text-align: left;
+  background-color: #f1f7ff;
+  border-bottom: solid #d5d5d3 1px;
+  color: #000066;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-top: 5px;
+  text-align: left;
 }
 
-.xmlComment{
-	color: grey;
+th.CodeTable {
+  background-color: #efeff7;
+  border-bottom: solid #c8cdde 1px;
+  color: #000066;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 8pt;
+  font-weight: bold;
+  padding-bottom: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  text-align: left;
 }
 
-.comment {
-	color: green;
+table.ListTable {
+  font-family: Courier New, Monospace;
+  font-size: 9pt;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-top: 5px;
+  width: 100%;
 }
 
-.modifier {
-	color: blue;
+td.ListTable {
+  background-color: #f1f7ff;
+  border-bottom: solid #d5d5d3 1px;
+  color: #000066;
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 
-.keyWord {
-	color: blue;
+td.ListTableMissing {
+  background-color: #f7f7ff;
+  border-bottom: solid #d5d5d3 1px;
+  color: red;
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 
-.commonType {
-	color: blue;
+/* Type/ID Selectors */
+div#Header {
+  background-color: #d4dfff;
+  border-bottom: solid #c8cdde 1px;
+  height: 25px;
+  overflow: auto;
+  width: 100%;
 }
 
-.refType {
-	color: blue;
+div#Title {
+  color: #003399;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 9pt;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-top: 5px;
 }
 
-.libType {
-	color: lightseagreen;
+/* Class Selectors */
+.page {
+  margin-left: 18px;
+  margin-right: 20px;
 }
 
-.userType{
-	color: lightseagreen;
+.Title1 {
+  color: #003399;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 9pt;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-top: 5px;
 }
 
+/* Backward Compatible */
+.title2 {
+  color: #003399;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 8pt;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+
+.Title2 {
+  color: #003399;
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 8pt;
+  padding-left: 15px;
+  padding-top: 5px;
+}
