@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DocClassGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AssemblyName>LJCNetCommon</AssemblyName>
+  <DocClassGroup>
+    <Name>Static Classes</Name>
+    <Sequence>1</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>NetCommon</Name>
+        <Description>Contains common file related functions. (RE)</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>NetFile</Name>
+        <Description>Contains common string related functions.</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>NetString</Name>
+        <Description>Contains common string related functions.</Description>
+        <Sequence>3</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+  <DocClassGroup>
+    <Name>Collection and Object Classes</Name>
+    <Sequence>2</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>DbColumn</Name>
+        <Description>Represents a Data Column definition. (D)</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbColumns</Name>
+        <Description>Represents a collection of DbColumn objects.</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbValue</Name>
+        <Description>Represents a data source value.</Description>
+        <Sequence>3</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbValues</Name>
+        <Description>Represents a collection of DbValue objects.</Description>
+        <Sequence>4</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>KeyItem</Name>
+        <Description>Represents Key item values.</Description>
+        <Sequence>5</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>KeyItems</Name>
+        <Description>Represents a collection of KeyItem objects.</Description>
+        <Sequence>6</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+  <DocClassGroup>
+    <Name>Comparer Classes</Name>
+    <Sequence>3</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>DbColumnNameComparer</Name>
+        <Description>Sort and search on column name.</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbColumnNameComparer</Name>
+        <Description>Sort and search on column name.</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbColumnPropertyComparer</Name>
+        <Description>Sort and search on PropertyName.</Description>
+        <Sequence>3</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DbColumnRenameAsComparer</Name>
+        <Description>Sort and search on RenameAs value.</Description>
+        <Sequence>4</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+  <DocClassGroup>
+    <Name>Reflection Classes</Name>
+    <Sequence>4</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>LJCAssemblyReflect</Name>
+        <Description>Provides Assembly Reflection methods. (DE)</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>LJCReflect</Name>
+        <Description>Provides object property reflection capabilities. (DE)</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+  <DocClassGroup>
+    <Name>Other Classes</Name>
+    <Sequence>5</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>AppSettings</Name>
+        <Description>Represents the Configuration AppSettings. (RE)</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>CodeTokenizer</Name>
+        <Description>A C# Code Tokenizer class. (RE)</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>Cryptography_Type</Name>
+        <Description>The encryption types.</Description>
+        <Sequence>3</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>DataTypes</Name>
+        <Description>Represents a collection of Data Types.</Description>
+        <Sequence>4</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>LJCCryptography</Name>
+        <Description>Provides methods to encrypt and decrypt data in memory.</Description>
+        <Sequence>5</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+  <DocClassGroup>
+    <Name>Syntax Classes</Name>
+    <Sequence>6</Sequence>
+    <DocClasses>
+      <DocClass>
+        <Name>CommonDataTypes</Name>
+        <Description>Represents a collection of Common Data Types.</Description>
+        <Sequence>1</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>CommonKeywords</Name>
+        <Description>Represents a collection of Common Key Words.</Description>
+        <Sequence>2</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>CommonModifiers</Name>
+        <Description>Represents a collection of Common Modifiers.</Description>
+        <Sequence>3</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>Keywords</Name>
+        <Description>Represents a collection of Keywords.</Description>
+        <Sequence>4</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>LibTypes</Name>
+        <Description>Represents a collection of Library Types.</Description>
+        <Sequence>5</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>Modifiers</Name>
+        <Description>Represents a collection of Modifiers.</Description>
+        <Sequence>6</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>PropertyDelegate</Name>
+        <Description>Represents a PropertyDelegate definition.</Description>
+        <Sequence>7</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>PropertyDelegates</Name>
+        <Description>Represents a collection of PropertyDelegate objects.</Description>
+        <Sequence>8</Sequence>
+      </DocClass>
+      <DocClass>
+        <Name>RefTypes</Name>
+        <Description>Represents a collection of Reference Types.</Description>
+        <Sequence>9</Sequence>
+      </DocClass>
+    </DocClasses>
+  </DocClassGroup>
+</DocClassGroups>
