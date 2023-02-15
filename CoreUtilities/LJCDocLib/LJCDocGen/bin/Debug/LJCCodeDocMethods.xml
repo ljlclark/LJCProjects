@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DocMethodGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AssemblyName>LJCNetCommon</AssemblyName>
+  <ClassName>NetCommon</ClassName>
+  <DocMethodGroup>
+    <Name>Static Functions</Name>
+    <Sequence>1</Sequence>
+    <DocMethods>
+      <DocMethod>
+        <Description>Compare null values. (DE)</Description>
+        <Name>CompareNull</Name>
+        <Sequence>1</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Checks a data table and returns true if it contains any rows. (E)</Description>
+        <Name>HasData</Name>
+        <Sequence>2</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description></Description>
+        <Name>HasItems</Name>
+        <Sequence>3</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Checks if two values are equal.</Description>
+        <Name>IsEqual</Name>
+        <Sequence>4</Sequence>
+      </DocMethod>
+    </DocMethods>
+  </DocMethodGroup>
+  <DocMethodGroup>
+    <Name>Text Transform Functions</Name>
+    <Sequence>2</Sequence>
+    <DocMethods>
+      <DocMethod>
+        <Description>Decodes a Base64 byte array to a Text value. (E)</Description>
+        <Name>Base64BytesToText</Name>
+        <Sequence>1</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Encodes a Text value to a Base64 byte array. (E)</Description>
+        <Name>TextToBase64Bytes</Name>
+        <Sequence>2</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Decodes a Base64 byte array to a Text byte array. (E)</Description>
+        <Name>Base64BytesToTextBytes</Name>
+        <Sequence>3</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Encodes a byte array to a Base64 byte array. (E)</Description>
+        <Name>TextBytesToBase64Bytes</Name>
+        <Sequence>4</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Decodes a Base64 value to a Text value. (E)</Description>
+        <Name>Base64ToText</Name>
+        <Sequence>5</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Encodes a Text value to a Base64 value. (E)</Description>
+        <Name>TextToBase64</Name>
+        <Sequence>6</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Decodes a Base64 value to a Text byte array. (E)</Description>
+        <Name>Base64ToTextBytes</Name>
+        <Sequence>7</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Encodes a Text byte array to a Base64 value. (E)</Description>
+        <Name>TextBytesToBase64</Name>
+        <Sequence>8</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Creates text from a byte array. (E)</Description>
+        <Name>BytesToText</Name>
+        <Sequence>9</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Creates a byte array from text. (E)</Description>
+        <Name>TextToBytes</Name>
+        <Sequence>10</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Copies a memory stream to a byte array. (E)</Description>
+        <Name>MemStreamToBytes</Name>
+        <Sequence>11</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Copies a byte array to a memory stream. (E)</Description>
+        <Name>BytesToMemStream</Name>
+        <Sequence>12</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Creates a string from a memory stream. (E)</Description>
+        <Name>MemStreamToString</Name>
+        <Sequence>13</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Creates a memory stream from a string. (E)</Description>
+        <Name>StringToMemStream</Name>
+        <Sequence>14</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Decodes an encoded XML string. (E)</Description>
+        <Name>XmlDecode</Name>
+        <Sequence>15</Sequence>
+      </DocMethod>
+      <DocMethod>
+        <Description>Encodes a string with XML escape values. (E)</Description>
+        <Name>XmlEncode</Name>
+        <Sequence>16</Sequence>
+      </DocMethod>
+    </DocMethods>
+  </DocMethodGroup>
+</DocMethodGroups>
