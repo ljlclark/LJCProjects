@@ -1,28 +1,28 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DocClass.cs
-using LJCNetCommon;
+// DocMethodGroup.cs
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>The DocClass table Data Object.</summary>
-  public class DocClass : IComparable<DocClass>
+  /// <summary>The DocMethodGroup table Data Object.</summary>
+  public class DocMethodGroup : IComparable<DocMethodGroup>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass()
+    public DocMethodGroup()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass(DocClass item)
+    public DocMethodGroup(DocMethodGroup item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
@@ -33,15 +33,15 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass Clone()
+    public DocMethodGroup Clone()
     {
-      var retValue = MemberwiseClone() as DocClass;
+      var retValue = MemberwiseClone() as DocMethodGroup;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DocClass other)
+    public int CompareTo(DocMethodGroup other)
     {
       int retValue;
 
@@ -62,8 +62,8 @@ namespace LJCDocLibDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      // $"{mSequence}){mName}:{mID}-{mValue}"
-      return $"{mSequence}){mName}";
+      // $"{mSequence}){mName}:{mID}-{mValue}";
+      return $"{mSequence}){mDocClassID}";
     }
     #endregion
 
@@ -85,46 +85,31 @@ namespace LJCDocLibDAL
     }
     private Int16 mID;
 
-    /// <summary>Gets or sets the DocClassGroupID value.</summary>
+    /// <summary>Gets or sets the DocClassID value.</summary>
     //[Required]
-    //[Column("DocClassGroupID", TypeName="smallint")]
-    public Int16 DocClassGroupID
+    //[Column("DocClassID", TypeName="smallint")]
+    public Int16 DocClassID
     {
-      get { return mDocClassGroupID; }
+      get { return mDocClassID; }
       set
       {
-        mDocClassGroupID = ChangedNames.Add(ColumnDocClassGroupID, mDocClassGroupID, value);
+        mDocClassID = ChangedNames.Add(ColumnDocClassID, mDocClassID, value);
       }
     }
-    private Int16 mDocClassGroupID;
+    private Int16 mDocClassID;
 
-    /// <summary>Gets or sets the Description value.</summary>
+    /// <summary>Gets or sets the DocMethodGroupHeadingID value.</summary>
     //[Required]
-    //[Column("Description", TypeName="nvarchar(100")]
-    public String Description
+    //[Column("DocMethodGroupHeadingID", TypeName="smallint")]
+    public Int16 DocMethodGroupHeadingID
     {
-      get { return mDescription; }
+      get { return mDocMethodGroupHeadingID; }
       set
       {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+        mDocMethodGroupHeadingID = ChangedNames.Add(ColumnDocMethodGroupHeadingID, mDocMethodGroupHeadingID, value);
       }
     }
-    private String mDescription;
-
-    /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
-    {
-      get { return mName; }
-      set
-      {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
-      }
-    }
-    private String mName;
+    private Int16 mDocMethodGroupHeadingID;
 
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
@@ -149,50 +134,42 @@ namespace LJCDocLibDAL
     #region Class Data
 
     /// <summary>The table name.</summary>
-    public static string TableName = "DocClass";
+    public static string TableName = "DocMethodGroup";
 
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
-    /// <summary>The DocClassGroupID column name.</summary>
-    public static string ColumnDocClassGroupID = "DocClassGroupID";
+    /// <summary>The DocClassID column name.</summary>
+    public static string ColumnDocClassID = "DocClassID";
 
-    /// <summary>The Description column name.</summary>
-    public static string ColumnDescription = "Description";
-
-    /// <summary>The Name column name.</summary>
-    public static string ColumnName = "Name";
+    /// <summary>The DocMethodGroupHeadingID column name.</summary>
+    public static string ColumnDocMethodGroupHeadingID = "DocMethodGroupHeadingID";
 
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
-
-    /// <summary>The Description maximum length.</summary>
-    public static int LengthDescription = 100;
-
-    /// <summary>The Name maximum length.</summary>
-    public static int LengthName = 60;
     #endregion
   }
 
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DocClassUniqueComparer : IComparer<DocClass>
+  public class DocMethodGroupUniqueComparer : IComparer<DocMethodGroup>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DocClass x, DocClass y)
+    public int Compare(DocMethodGroup x, DocMethodGroup y)
     {
       int retValue;
 
       retValue = NetCommon.CompareNull(x, y);
       if (-2 == retValue)
       {
-        retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (-2 == retValue)
+        // Case sensitive.
+        retValue = x.ID.CompareTo(y.ID);
+        if (0 == retValue)
         {
-          // Not case sensitive.
-          retValue = string.Compare(x.Name, y.Name, true);
+          // Case sensitive.
+          retValue = x.DocClassID.CompareTo(y.DocClassID);
         }
       }
       return retValue;

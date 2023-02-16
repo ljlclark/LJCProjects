@@ -2,26 +2,27 @@
 // Licensed under the MIT License.
 // CollectionTemplate.cs
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>Represents a collection of DocClass objects.</summary>
+  /// <summary>Represents a collection of DocAssembly objects.</summary>
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("DocClasses")]
-  public class DocClasses : List<DocClass>
+  [XmlRoot("DocAssemblies")]
+  public class DocAssemblies : List<DocAssembly>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static DocClasses LJCDeserialize(string fileSpec = null)
+    public static DocAssemblies LJCDeserialize(string fileSpec = null)
     {
-      DocClasses retValue;
+      DocAssemblies retValue;
 
       if (false == NetString.HasValue(fileSpec))
       {
@@ -34,8 +35,8 @@ namespace LJCDocLibDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DocClasses), fileSpec)
-        as DocClasses;
+        retValue = NetCommon.XmlDeserialize(typeof(DocAssemblies), fileSpec)
+        as DocAssemblies;
       }
       return retValue;
     }
@@ -45,20 +46,20 @@ namespace LJCDocLibDAL
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses()
+    public DocAssemblies()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses(DocClasses items)
+    public DocAssemblies(DocAssemblies items)
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new DocClass(item));
+          Add(new DocAssembly(item));
         }
       }
     }
@@ -68,9 +69,9 @@ namespace LJCDocLibDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClass Add(short id, string name)
+    public DocAssembly Add(short id, string name)
     {
-      DocClass retValue;
+      DocAssembly retValue;
 
       string message = "";
       if (id <= 0)
@@ -83,7 +84,7 @@ namespace LJCDocLibDAL
       retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
-        retValue = new DocClass()
+        retValue = new DocAssembly()
         {
           ID = id,
           Name = name
@@ -95,22 +96,22 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses Clone()
+    public DocAssemblies Clone()
     {
-      var retValue = MemberwiseClone() as DocClasses;
+      var retValue = MemberwiseClone() as DocAssemblies;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses GetCollection(List<DocClass> list)
+    public DocAssemblies GetCollection(List<DocAssembly> list)
     {
-      DocClasses retValue = null;
+      DocAssemblies retValue = null;
 
       if (list != null && list.Count > 0)
       {
-        retValue = new DocClasses();
-        foreach (DocClass item in list)
+        retValue = new DocAssemblies();
+        foreach (DocAssembly item in list)
         {
           retValue.Add(item);
         }
@@ -143,6 +144,9 @@ namespace LJCDocLibDAL
     }
     #endregion
 
+    #region Public Methods
+    #endregion
+
     #region Search and Sort Methods
 
     // Retrieve the collection element with unique values.
@@ -151,14 +155,14 @@ namespace LJCDocLibDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public DocClass LJCSearchUnique(string name)
+    public DocAssembly LJCSearchUnique(string name)
     {
-      DocClassUniqueComparer comparer;
-      DocClass retValue = null;
+      DocAssemblyUniqueComparer comparer;
+      DocAssembly retValue = null;
 
-      comparer = new DocClassUniqueComparer();
+      comparer = new DocAssemblyUniqueComparer();
       LJCSortUnique(comparer);
-      DocClass searchItem = new DocClass()
+      DocAssembly searchItem = new DocAssembly()
       {
         Name = name
       };
@@ -170,16 +174,16 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
-    /// <summary>Sort on Name.</summary>
+    /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortUnique(DocClassUniqueComparer comparer)
+    public void LJCSortUnique(DocAssemblyUniqueComparer comparer)
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.Unique) != 0)
+        || mSortType.CompareTo(SortType.Name) != 0)
       {
         mPrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.Unique;
+        mSortType = SortType.Name;
       }
     }
     #endregion
@@ -189,7 +193,7 @@ namespace LJCDocLibDAL
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
     {
-      get { return "DocClasses.xml"; }
+      get { return "DocAssemblies.xml"; }
     }
     #endregion
 
@@ -200,7 +204,7 @@ namespace LJCDocLibDAL
 
     private enum SortType
     {
-      Unique
+      Name
     }
     #endregion
   }

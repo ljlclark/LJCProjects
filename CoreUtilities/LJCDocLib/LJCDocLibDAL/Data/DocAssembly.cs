@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DocClass.cs
+// DocAssembly.cs
 using LJCNetCommon;
 using LJCDBClientLib;
 using System;
@@ -8,21 +8,21 @@ using System.Collections.Generic;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>The DocClass table Data Object.</summary>
-  public class DocClass : IComparable<DocClass>
+  /// <summary>The DocAssembly table Data Object.</summary>
+  public class DocAssembly : IComparable<DocAssembly>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass()
+    public DocAssembly()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass(DocClass item)
+    public DocAssembly(DocAssembly item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
@@ -33,15 +33,15 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass Clone()
+    public DocAssembly Clone()
     {
-      var retValue = MemberwiseClone() as DocClass;
+      var retValue = MemberwiseClone() as DocAssembly;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DocClass other)
+    public int CompareTo(DocAssembly other)
     {
       int retValue;
 
@@ -85,18 +85,18 @@ namespace LJCDocLibDAL
     }
     private Int16 mID;
 
-    /// <summary>Gets or sets the DocClassGroupID value.</summary>
+    /// <summary>Gets or sets the DocAssemblyGroupID value.</summary>
     //[Required]
-    //[Column("DocClassGroupID", TypeName="smallint")]
-    public Int16 DocClassGroupID
+    //[Column("DocAssemblyGroupID", TypeName="smallint")]
+    public Int16 DocAssemblyGroupID
     {
-      get { return mDocClassGroupID; }
+      get { return mDocAssemblyGroupID; }
       set
       {
-        mDocClassGroupID = ChangedNames.Add(ColumnDocClassGroupID, mDocClassGroupID, value);
+        mDocAssemblyGroupID = ChangedNames.Add(ColumnDocAssemblyGroupID, mDocAssemblyGroupID, value);
       }
     }
-    private Int16 mDocClassGroupID;
+    private Int16 mDocAssemblyGroupID;
 
     /// <summary>Gets or sets the Description value.</summary>
     //[Required]
@@ -111,6 +111,32 @@ namespace LJCDocLibDAL
       }
     }
     private String mDescription;
+
+    /// <summary>Gets or sets the FileSpec value.</summary>
+    //[Column("FileSpec", TypeName="nvarchar(60")]
+    public String FileSpec
+    {
+      get { return mFileSpec; }
+      set
+      {
+        value = NetString.InitString(value);
+        mFileSpec = ChangedNames.Add(ColumnFileSpec, mFileSpec, value);
+      }
+    }
+    private String mFileSpec;
+
+    /// <summary>Gets or sets the MainImage value.</summary>
+    //[Column("MainImage", TypeName="nvarchar(60")]
+    public String MainImage
+    {
+      get { return mMainImage; }
+      set
+      {
+        value = NetString.InitString(value);
+        mMainImage = ChangedNames.Add(ColumnMainImage, mMainImage, value);
+      }
+    }
+    private String mMainImage;
 
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
@@ -149,16 +175,22 @@ namespace LJCDocLibDAL
     #region Class Data
 
     /// <summary>The table name.</summary>
-    public static string TableName = "DocClass";
+    public static string TableName = "DocAssembly";
 
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
-    /// <summary>The DocClassGroupID column name.</summary>
-    public static string ColumnDocClassGroupID = "DocClassGroupID";
+    /// <summary>The DocAssemblyGroupID column name.</summary>
+    public static string ColumnDocAssemblyGroupID = "DocAssemblyGroupID";
 
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";
+
+    /// <summary>The FileSpec column name.</summary>
+    public static string ColumnFileSpec = "FileSpec";
+
+    /// <summary>The MainImage column name.</summary>
+    public static string ColumnMainImage = "MainImage";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -169,6 +201,12 @@ namespace LJCDocLibDAL
     /// <summary>The Description maximum length.</summary>
     public static int LengthDescription = 100;
 
+    /// <summary>The FileSpec maximum length.</summary>
+    public static int LengthFileSpec = 60;
+
+    /// <summary>The MainImage maximum length.</summary>
+    public static int LengthMainImage = 60;
+
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;
     #endregion
@@ -177,11 +215,11 @@ namespace LJCDocLibDAL
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DocClassUniqueComparer : IComparer<DocClass>
+  public class DocAssemblyUniqueComparer : IComparer<DocAssembly>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DocClass x, DocClass y)
+    public int Compare(DocAssembly x, DocAssembly y)
     {
       int retValue;
 

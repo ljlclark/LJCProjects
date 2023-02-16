@@ -19,7 +19,7 @@ namespace LJCDocLibDAL
     }
     #endregion
 
-    #region Methods
+    #region Data Methods
 
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -32,7 +32,7 @@ namespace LJCDocLibDAL
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DocGenGroup Clone()
     {
-      DocGenGroup retValue = MemberwiseClone() as DocGenGroup;
+      var retValue = MemberwiseClone() as DocGenGroup;
       return retValue;
     }
 
@@ -48,9 +48,6 @@ namespace LJCDocLibDAL
       }
       else
       {
-        // Case sensitive.
-        //retValue = Name.CompareTo(other.Name);
-
         // Not case sensitive.
         retValue = string.Compare(Name, other.Name, true);
       }
@@ -149,9 +146,6 @@ namespace LJCDocLibDAL
       {
         // Case sensitive.
         retValue = x.Sequence.CompareTo(y.Sequence);
-
-        // Not case sensitive.
-        //retValue = string.Compare(x.PropertyName, y.PropertyName, true);
       }
       return retValue;
     }

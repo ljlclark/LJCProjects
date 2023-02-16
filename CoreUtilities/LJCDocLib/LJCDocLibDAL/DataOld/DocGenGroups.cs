@@ -71,7 +71,7 @@ namespace LJCDocLibDAL
       DocGenGroup retValue = null;
 
       LJCSortByName();
-      DocGenGroup searchItem = new DocGenGroup()
+      var searchItem = new DocGenGroup()
       {
         Name = name
       };

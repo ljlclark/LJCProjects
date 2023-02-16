@@ -8,20 +8,20 @@ using System.Xml.Serialization;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>Represents a collection of DocClass objects.</summary>
+  /// <summary>Represents a collection of DocClassGroupHeading objects.</summary>
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("DocClasses")]
-  public class DocClasses : List<DocClass>
+  [XmlRoot("DocClassGroupHeadings")]
+  public class DocClassGroupHeadings : List<DocClassGroupHeading>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static DocClasses LJCDeserialize(string fileSpec = null)
+    public static DocClassGroupHeadings LJCDeserialize(string fileSpec = null)
     {
-      DocClasses retValue;
+      DocClassGroupHeadings retValue;
 
       if (false == NetString.HasValue(fileSpec))
       {
@@ -34,8 +34,8 @@ namespace LJCDocLibDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DocClasses), fileSpec)
-        as DocClasses;
+        retValue = NetCommon.XmlDeserialize(typeof(DocClassGroupHeadings), fileSpec)
+        as DocClassGroupHeadings;
       }
       return retValue;
     }
@@ -45,20 +45,20 @@ namespace LJCDocLibDAL
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses()
+    public DocClassGroupHeadings()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses(DocClasses items)
+    public DocClassGroupHeadings(DocClassGroupHeadings items)
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new DocClass(item));
+          Add(new DocClassGroupHeading(item));
         }
       }
     }
@@ -68,9 +68,9 @@ namespace LJCDocLibDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClass Add(short id, string name)
+    public DocClassGroupHeading Add(short id, string name)
     {
-      DocClass retValue;
+      DocClassGroupHeading retValue;
 
       string message = "";
       if (id <= 0)
@@ -83,10 +83,10 @@ namespace LJCDocLibDAL
       retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
-        retValue = new DocClass()
+        retValue = new DocClassGroupHeading()
         {
           ID = id,
-          Name = name
+          Heading = name
         };
         Add(retValue);
       }
@@ -95,22 +95,22 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses Clone()
+    public DocClassGroupHeadings Clone()
     {
-      var retValue = MemberwiseClone() as DocClasses;
+      var retValue = MemberwiseClone() as DocClassGroupHeadings;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses GetCollection(List<DocClass> list)
+    public DocClassGroupHeadings GetCollection(List<DocClassGroupHeading> list)
     {
-      DocClasses retValue = null;
+      DocClassGroupHeadings retValue = null;
 
       if (list != null && list.Count > 0)
       {
-        retValue = new DocClasses();
-        foreach (DocClass item in list)
+        retValue = new DocClassGroupHeadings();
+        foreach (DocClassGroupHeading item in list)
         {
           retValue.Add(item);
         }
@@ -145,22 +145,18 @@ namespace LJCDocLibDAL
 
     #region Search and Sort Methods
 
-    // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
-    public DocClass LJCSearchUnique(string name)
+    // Retrieve the collection element with name.
+    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public DocClassGroupHeading LJCSearchUnique(string name)
     {
-      DocClassUniqueComparer comparer;
-      DocClass retValue = null;
+      DocClassGroupHeadingUniqueComparer comparer;
+      DocClassGroupHeading retValue = null;
 
-      comparer = new DocClassUniqueComparer();
+      comparer = new DocClassGroupHeadingUniqueComparer();
       LJCSortUnique(comparer);
-      DocClass searchItem = new DocClass()
+      DocClassGroupHeading searchItem = new DocClassGroupHeading()
       {
-        Name = name
+        Heading = name
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -172,14 +168,14 @@ namespace LJCDocLibDAL
 
     /// <summary>Sort on Name.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortUnique(DocClassUniqueComparer comparer)
+    public void LJCSortUnique(DocClassGroupHeadingUniqueComparer comparer)
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.Unique) != 0)
+        || mSortType.CompareTo(SortType.Name) != 0)
       {
         mPrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.Unique;
+        mSortType = SortType.Name;
       }
     }
     #endregion
@@ -189,7 +185,7 @@ namespace LJCDocLibDAL
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
     {
-      get { return "DocClasses.xml"; }
+      get { return "DocClassGroupHeadings.xml"; }
     }
     #endregion
 
@@ -200,7 +196,7 @@ namespace LJCDocLibDAL
 
     private enum SortType
     {
-      Unique
+      Name
     }
     #endregion
   }

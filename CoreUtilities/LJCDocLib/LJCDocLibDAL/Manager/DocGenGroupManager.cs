@@ -35,7 +35,7 @@ namespace LJCDocLibDAL
           Load();
         }
 
-        DocGenGroup searchRecord = DocGenGroups.LJCSearchName(keyObject.Name);
+        var searchRecord = DocGenGroups.LJCSearchName(keyObject.Name);
         if (searchRecord != null)
         {
           DocGenGroups.Remove(searchRecord);

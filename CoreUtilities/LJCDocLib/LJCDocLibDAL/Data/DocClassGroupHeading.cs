@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DocClass.cs
+// DocClassGroupHeading.cs
 using LJCNetCommon;
 using LJCDBClientLib;
 using System;
@@ -8,21 +8,21 @@ using System.Collections.Generic;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>The DocClass table Data Object.</summary>
-  public class DocClass : IComparable<DocClass>
+  /// <summary>The DocClassGroupHeading table Data Object.</summary>
+  public class DocClassGroupHeading : IComparable<DocClassGroupHeading>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass()
+    public DocClassGroupHeading()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass(DocClass item)
+    public DocClassGroupHeading(DocClassGroupHeading item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
@@ -33,15 +33,15 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClass Clone()
+    public DocClassGroupHeading Clone()
     {
-      var retValue = MemberwiseClone() as DocClass;
+      var retValue = MemberwiseClone() as DocClassGroupHeading;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DocClass other)
+    public int CompareTo(DocClassGroupHeading other)
     {
       int retValue;
 
@@ -63,7 +63,7 @@ namespace LJCDocLibDAL
     public override string ToString()
     {
       // $"{mSequence}){mName}:{mID}-{mValue}"
-      return $"{mSequence}){mName}";
+      return $"{mSequence}){mHeading}";
     }
     #endregion
 
@@ -85,46 +85,19 @@ namespace LJCDocLibDAL
     }
     private Int16 mID;
 
-    /// <summary>Gets or sets the DocClassGroupID value.</summary>
+    /// <summary>Gets or sets the Heading value.</summary>
     //[Required]
-    //[Column("DocClassGroupID", TypeName="smallint")]
-    public Int16 DocClassGroupID
+    //[Column("Heading", TypeName="nvarchar(100")]
+    public String Heading
     {
-      get { return mDocClassGroupID; }
-      set
-      {
-        mDocClassGroupID = ChangedNames.Add(ColumnDocClassGroupID, mDocClassGroupID, value);
-      }
-    }
-    private Int16 mDocClassGroupID;
-
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(100")]
-    public String Description
-    {
-      get { return mDescription; }
+      get { return mHeading; }
       set
       {
         value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+        mHeading = ChangedNames.Add(ColumnHeading, mHeading, value);
       }
     }
-    private String mDescription;
-
-    /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
-    {
-      get { return mName; }
-      set
-      {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
-      }
-    }
-    private String mName;
+    private String mHeading;
 
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
@@ -149,50 +122,41 @@ namespace LJCDocLibDAL
     #region Class Data
 
     /// <summary>The table name.</summary>
-    public static string TableName = "DocClass";
+    public static string TableName = "DocClassGroupHeading";
 
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
-    /// <summary>The DocClassGroupID column name.</summary>
-    public static string ColumnDocClassGroupID = "DocClassGroupID";
-
-    /// <summary>The Description column name.</summary>
-    public static string ColumnDescription = "Description";
-
-    /// <summary>The Name column name.</summary>
-    public static string ColumnName = "Name";
+    /// <summary>The Heading column name.</summary>
+    public static string ColumnHeading = "Heading";
 
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
 
-    /// <summary>The Description maximum length.</summary>
-    public static int LengthDescription = 100;
-
-    /// <summary>The Name maximum length.</summary>
-    public static int LengthName = 60;
+    /// <summary>The Heading maximum length.</summary>
+    public static int LengthHeading = 100;
     #endregion
   }
 
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DocClassUniqueComparer : IComparer<DocClass>
+  public class DocClassGroupHeadingUniqueComparer : IComparer<DocClassGroupHeading>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DocClass x, DocClass y)
+    public int Compare(DocClassGroupHeading x, DocClassGroupHeading y)
     {
       int retValue;
 
       retValue = NetCommon.CompareNull(x, y);
       if (-2 == retValue)
       {
-        retValue = NetCommon.CompareNull(x.Name, y.Name);
+        retValue = NetCommon.CompareNull(x.Heading, y.Heading);
         if (-2 == retValue)
         {
           // Not case sensitive.
-          retValue = string.Compare(x.Name, y.Name, true);
+          retValue = string.Compare(x.Heading, y.Heading, true);
         }
       }
       return retValue;

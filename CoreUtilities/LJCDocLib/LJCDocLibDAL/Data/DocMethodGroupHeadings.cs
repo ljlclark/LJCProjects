@@ -8,20 +8,20 @@ using System.Xml.Serialization;
 
 namespace LJCDocLibDAL
 {
-  /// <summary>Represents a collection of DocClass objects.</summary>
+  /// <summary>Represents a collection of DocMethodGroupHeading objects.</summary>
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("DocClasses")]
-  public class DocClasses : List<DocClass>
+  [XmlRoot("DocMethodGroupHeadings")]
+  public class DocMethodGroupHeadings : List<DocMethodGroupHeading>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public static DocClasses LJCDeserialize(string fileSpec = null)
+    public static DocMethodGroupHeadings LJCDeserialize(string fileSpec = null)
     {
-      DocClasses retValue;
+      DocMethodGroupHeadings retValue;
 
       if (false == NetString.HasValue(fileSpec))
       {
@@ -34,8 +34,8 @@ namespace LJCDocLibDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DocClasses), fileSpec)
-        as DocClasses;
+        retValue = NetCommon.XmlDeserialize(typeof(DocMethodGroupHeadings), fileSpec)
+        as DocMethodGroupHeadings;
       }
       return retValue;
     }
@@ -45,20 +45,20 @@ namespace LJCDocLibDAL
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses()
+    public DocMethodGroupHeadings()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses(DocClasses items)
+    public DocMethodGroupHeadings(DocMethodGroupHeadings items)
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new DocClass(item));
+          Add(new DocMethodGroupHeading(item));
         }
       }
     }
@@ -68,9 +68,9 @@ namespace LJCDocLibDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClass Add(short id, string name)
+    public DocMethodGroupHeading Add(short id, string name)
     {
-      DocClass retValue;
+      DocMethodGroupHeading retValue;
 
       string message = "";
       if (id <= 0)
@@ -83,10 +83,10 @@ namespace LJCDocLibDAL
       retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
-        retValue = new DocClass()
+        retValue = new DocMethodGroupHeading()
         {
           ID = id,
-          Name = name
+          Heading = name
         };
         Add(retValue);
       }
@@ -95,22 +95,22 @@ namespace LJCDocLibDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocClasses Clone()
+    public DocMethodGroupHeadings Clone()
     {
-      var retValue = MemberwiseClone() as DocClasses;
+      var retValue = MemberwiseClone() as DocMethodGroupHeadings;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DocClasses GetCollection(List<DocClass> list)
+    public DocMethodGroupHeadings GetCollection(List<DocMethodGroupHeading> list)
     {
-      DocClasses retValue = null;
+      DocMethodGroupHeadings retValue = null;
 
       if (list != null && list.Count > 0)
       {
-        retValue = new DocClasses();
-        foreach (DocClass item in list)
+        retValue = new DocMethodGroupHeadings();
+        foreach (DocMethodGroupHeading item in list)
         {
           retValue.Add(item);
         }
@@ -145,22 +145,22 @@ namespace LJCDocLibDAL
 
     #region Search and Sort Methods
 
-    // Retrieve the collection element with unique values.
+    // Retrieve the collection element with name.
     /// <summary>
-    /// Retrieve the collection element with unique values.
+    /// 
     /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
-    public DocClass LJCSearchUnique(string name)
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public DocMethodGroupHeading LJCSearchUnique(string name)
     {
-      DocClassUniqueComparer comparer;
-      DocClass retValue = null;
+      DocMethodGroupHeadingUniqueComparer comparer;
+      DocMethodGroupHeading retValue = null;
 
-      comparer = new DocClassUniqueComparer();
+      comparer = new DocMethodGroupHeadingUniqueComparer();
       LJCSortUnique(comparer);
-      DocClass searchItem = new DocClass()
+      DocMethodGroupHeading searchItem = new DocMethodGroupHeading()
       {
-        Name = name
+        Heading = name
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -172,7 +172,7 @@ namespace LJCDocLibDAL
 
     /// <summary>Sort on Name.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortUnique(DocClassUniqueComparer comparer)
+    public void LJCSortUnique(DocMethodGroupHeadingUniqueComparer comparer)
     {
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Unique) != 0)
@@ -189,7 +189,7 @@ namespace LJCDocLibDAL
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
     {
-      get { return "DocClasses.xml"; }
+      get { return "DocMethodGroupHeadings.xml"; }
     }
     #endregion
 
