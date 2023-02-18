@@ -28,6 +28,7 @@ CREATE TABLE [dbo].[DocAssemblyGroup](
 	[Name] [nvarchar](60) NOT NULL,
 	[Heading] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocAssemblyGroup]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC)
@@ -47,6 +48,7 @@ CREATE TABLE [dbo].[DocAssembly](
 	[Sequence] [smallint] NOT NULL,
 	[FileSpec] [nvarchar](120) NULL,
 	[MainImage][nvarchar](60) NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocAssembly]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),
@@ -83,6 +85,7 @@ CREATE TABLE [dbo].[DocClassGroup](
 	[DocAssemblyID] [smallint] NOT NULL,
 	[DocClassGroupHeadingID] [smallint] NOT NULL,
 	[Sequence] [smallint] NOT NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocClassGroup]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),
@@ -108,6 +111,7 @@ CREATE TABLE [dbo].[DocClass](
 	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocClass]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),
@@ -144,6 +148,7 @@ CREATE TABLE [dbo].[DocMethodGroup](
 	[DocClassID] [smallint] NOT NULL,
 	[DocMethodGroupHeadingID] [smallint] NOT NULL,
 	[Sequence] [smallint] NOT NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocMethodGroup]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),
@@ -169,6 +174,7 @@ CREATE TABLE [dbo].[DocMethod](
 	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
+	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocMethod]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),

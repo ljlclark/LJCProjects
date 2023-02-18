@@ -9,7 +9,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /*
-select ID, DocAssemblyGroupID, Sequence, Name, Description, FileSpec, MainImage from DocAssembly;
+select
+  ID, DocAssemblyGroupID, Sequence, Name, Description, FileSpec, MainImage
+from DocAssembly;
 */
 
 declare @DocAssemblyGroupID smallint
@@ -298,4 +300,312 @@ insert into DocAssembly
    , 'The Documentation Group Manager.'
    , '..\..\..\..\..\CoreUtilities\LJCDocGroupEditor\LJCDocGroupEditor\bin\Debug\LJCDocGroupEditor.xml'
    , null, 7);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'DataTransform');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCTransformManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCTransformManager', @DocAssemblyGroupID
+   , 'A program to manage Data Transform data.'
+   , '..\..\..\..\..\SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug\LJCTransformManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDataTransformProcess')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDataTransformProcess', @DocAssemblyGroupID
+   , 'A program to Automate Data Processes.'
+   , '..\..\..\..\..\SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug\LJCDataTransformProcess.xml'
+   , null, 2);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'CommonModuleLib')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('CommonModuleLib', @DocAssemblyGroupID
+   , 'A library for common Transform Process Modules. (D)'
+   , '..\..\..\..\..\SampleApps\LJCDataTransform\LJCCommonModuleLib\bin\Debug\LJCCommonModuleLib.xml'
+   , null, 3);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDataTransformDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDataTransformDAL', @DocAssemblyGroupID
+   , 'The Data Transform Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCDataTransform\LJCDataTransformDAL\bin\Debug\LJCDataTransformDAL.xml'
+   , null, 4);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'TransformServiceTest')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('TransformServiceTest', @DocAssemblyGroupID
+   , 'A program to test the LJCDataTransformProcess library. (D)'
+   , '..\..\..\..\..\SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug\TransformServiceTest.xml'
+   , null, 5);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'CVRManager');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'CVRManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('CVRManager', @DocAssemblyGroupID
+   , 'The Contact Visit Record Manager.'
+   , '..\..\..\..\..\SampleApps\CVRManager\CVRManager\bin\Debug\CVRManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'CVRDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('CVRDAL', @DocAssemblyGroupID
+   , 'The CVR Data Access Layer library. (D)'
+   , '..\..\..\..\..\SampleApps\CVRManager\CVRDAL\bin\Debug\CVRDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'LJCSales');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCSalesManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCSalesManager', @DocAssemblyGroupID
+   , 'The Sales Manager program. (D)'
+   , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesManager\bin\Debug\LJCSalesManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCSalesDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCSalesDAL', @DocAssemblyGroupID
+   , 'The Sales Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesDAL\bin\Debug\LJCSalesDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'LJCUnitMeasure');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCUnitMeasure')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCUnitMeasure', @DocAssemblyGroupID
+   , 'The Unit Measure program. (D)'
+   , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasure\bin\Debug\LJCUnitMeasure.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCUnitMeasureDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCUnitMeasureDAL', @DocAssemblyGroupID
+   , 'The Unit Measure Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasureDAL\bin\Debug\LJCUnitMeasureDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'FacilityManager');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCFacilityManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCFacilityManager', @DocAssemblyGroupID
+   , 'A program to manage facility assets such as buildings, rooms, fixtures and equipment. (D)'
+   , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug\LJCFacilityManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCFacilityManagerDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCFacilityManagerDAL', @DocAssemblyGroupID
+   , 'The LJCFacilityManager Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManagerDAL\bin\Debug\LJCFacilityManagerDAL.xml'
+   , null, 2);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'FacilityForm')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('FacilityForm', @DocAssemblyGroupID
+   , 'The Facility Test program.'
+   , '..\..\..\..\..\SampleApps\LJCFacilityManager\FacilityForm\bin\Debug\LJCFacilityForm.xml'
+   , null, 3);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'ModuleHost')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('ModuleHost', @DocAssemblyGroupID
+   , 'The FacilityManager Module Test program.'
+   , '..\..\..\..\..\SampleApps\LJCFacilityManager\ModuleHost\bin\Debug\ModuleHost.xml'
+   , null, 4);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'FacilityManagerSetup');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCFacilityManagerSetup')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCFacilityManagerSetup', @DocAssemblyGroupID
+   , 'The Facility Manager Setup program.'
+   , '..\..\..\..\..\SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug\LJCFacilityManagerSetup.xml'
+   , null, 1);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'RegionManager');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCRegionManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCRegionManager', @DocAssemblyGroupID
+   , 'A program to manage Region data. (D)'
+   , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCRegionDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCRegionDAL', @DocAssemblyGroupID
+   , 'The Region Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.xml'
+   , null, 2);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCRegionForm')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCRegionForm', @DocAssemblyGroupID
+   , 'The Region Manager Test program.'
+   , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.xml'
+   , null, 3);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'AppManager');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCAppManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCAppManager', @DocAssemblyGroupID
+   , 'A program to manage and host application modules.'
+   , '..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManager\bin\Debug\LJCAppManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCAppManagerDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCAppManagerDAL', @DocAssemblyGroupID
+   , 'The LJCAppManager Data Access Layer library. (D)'
+   , '..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManagerDAL\bin\Debug\LJCAppManagerDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'DocAppManager');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDocAppManager')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDocAppManager', @DocAssemblyGroupID
+   , 'A program to manage Document images.'
+   , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug\LJCDocAppManager.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDocAppManagerDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDocAppManagerDAL', @DocAssemblyGroupID
+   , 'The DocApp Manager Data Access Layer library.'
+   , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\bin\Debug\LJCDocAppManagerDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'DBViewDAL');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDBViewDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDBViewDAL', @DocAssemblyGroupID
+   , 'The Data View library.'
+   , '..\..\..\..\..\CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.xml'
+   , null, 1);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'ViewBuilder');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCViewBuilder')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCViewBuilder', @DocAssemblyGroupID
+   , 'A program to create and edit Views. (D)'
+   , '..\..\..\..\..\CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.xml'
+   , null, 1);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'ViewEditor');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCViewEditor')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCViewEditor', @DocAssemblyGroupID
+   , 'A program to maintain View data. (D)'
+   , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCViewEditorDAL')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCViewEditorDAL', @DocAssemblyGroupID
+   , 'The LJCViewEditor Data Access Library.'
+   , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.xml'
+   , null, 2);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'CodeLine');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCCodeLineCounter')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCCodeLineCounter', @DocAssemblyGroupID
+   , 'The Code Line Counter console application.'
+   , '..\..\..\..\..\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml'
+   , null, 1);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'TextInvasion');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCTextInvasion')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCTextInvasion', @DocAssemblyGroupID
+   , 'A typing tudor game.'
+   , '..\..\..\..\..\SampleApps\LJCTextInvasion\LJCTextInvasion\bin\Debug\LJCTextInvasion.xml'
+   , null, 1);
+go
+
+declare @DocAssemblyGroupID smallint
+  = (select ID from DocAssemblyGroup where Name = 'LJCPagination');
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'LJCDataPageList')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('LJCDataPageList', @DocAssemblyGroupID
+   , 'Database Pagination'
+   , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug\LJCDataPageList.xml'
+   , null, 1);
+IF NOT EXISTS (select ID from DocAssembly
+  where Name = 'Text File Pagination')
+insert into DocAssembly
+ (Name, DocAssemblyGroupID, Description, FileSpec, MainImage, Sequence)
+ values ('Text File Pagination', @DocAssemblyGroupID
+   , 'A typing tudor game.'
+   , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug\LJCTextPageList.xml'
+   , null, 2);
 go

@@ -9,7 +9,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /*
-select * from DocAssemblyGroup;
+select
+  ID, Name, Heading, Sequence
+from DocAssemblyGroup;
 */
 
 IF NOT EXISTS (select ID from DocAssemblyGroup
