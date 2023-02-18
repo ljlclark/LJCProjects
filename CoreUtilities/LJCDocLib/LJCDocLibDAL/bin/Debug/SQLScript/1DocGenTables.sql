@@ -19,7 +19,7 @@ drop table DocAssembly;
 drop table DocAssemblyGroup;
 */
 
-/* 1 - Group for Main Page */
+/* 1 Assembly Group for Main Page */
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocAssemblyGroup')
 BEGIN
@@ -35,18 +35,18 @@ CREATE TABLE [dbo].[DocAssemblyGroup](
 END
 GO
 
-/* 2 */
+/* 2 Assembly for Main Page*/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocAssembly')
 BEGIN
 CREATE TABLE [dbo].[DocAssembly](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
 	[DocAssemblyGroupID] [smallint] NOT NULL,
+	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
+	[Sequence] [smallint] NOT NULL,
 	[FileSpec] [nvarchar](120) NULL,
 	[MainImage][nvarchar](60) NULL,
-	[Name] [nvarchar](60) NOT NULL,
-	[Sequence] [smallint] NOT NULL,
 	CONSTRAINT [PK_DocAssembly]
 	PRIMARY KEY CLUSTERED (
 	  [ID] ASC),
@@ -58,12 +58,13 @@ CREATE TABLE [dbo].[DocAssembly](
 END
 GO
 
-/* 3 */
+/* 3 Class Group Heading for Assembly Page*/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocClassGroupHeading')
 BEGIN
 CREATE TABLE [dbo].[DocClassGroupHeading](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](60) NOT NULL,
 	[Heading] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
 	CONSTRAINT [PK_DocClassGroupHeading]
@@ -73,7 +74,7 @@ CREATE TABLE [dbo].[DocClassGroupHeading](
 END
 GO
 
-/* 4 - Group for Assembly Page */
+/* 4 Class Group for Assembly Page */
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocClassGroup')
 BEGIN
@@ -97,15 +98,15 @@ CREATE TABLE [dbo].[DocClassGroup](
 END
 GO
 
-/* 5 */
+/* 5 Class for Assembly Page*/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocClass')
 BEGIN
 CREATE TABLE [dbo].[DocClass](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
 	[DocClassGroupID] [smallint] NOT NULL,
-	[Description] [nvarchar](100) NOT NULL,
 	[Name] [nvarchar](60) NOT NULL,
+	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
 	CONSTRAINT [PK_DocClass]
 	PRIMARY KEY CLUSTERED (
@@ -118,12 +119,13 @@ CREATE TABLE [dbo].[DocClass](
 END
 GO
 
-/* 6 */
+/* 6 Method Group Heading for Class Page*/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocMethodGroupHeading')
 BEGIN
 CREATE TABLE [dbo].[DocMethodGroupHeading](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](60) NOT NULL,
 	[Heading] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
 	CONSTRAINT [PK_DocMethodGroupHeading]
@@ -133,7 +135,7 @@ CREATE TABLE [dbo].[DocMethodGroupHeading](
 END
 GO
 
-/* 7 - Group for Class Page */
+/* 7 Method Group for Class Page */
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocMethodGroup')
 BEGIN
@@ -157,15 +159,15 @@ CREATE TABLE [dbo].[DocMethodGroup](
 END
 GO
 
-/* 8 */
+/* 8 Method for Class Page*/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
  WHERE TABLE_NAME = N'DocMethod')
 BEGIN
 CREATE TABLE [dbo].[DocMethod](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
 	[DocMethodGroupID] [smallint] NOT NULL,
-	[Description] [nvarchar](100) NOT NULL,
 	[Name] [nvarchar](60) NOT NULL,
+	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
 	CONSTRAINT [PK_DocMethod]
 	PRIMARY KEY CLUSTERED (
