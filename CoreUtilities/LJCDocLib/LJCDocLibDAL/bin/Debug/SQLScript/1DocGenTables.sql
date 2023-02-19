@@ -83,7 +83,9 @@ BEGIN
 CREATE TABLE [dbo].[DocClassGroup](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
 	[DocAssemblyID] [smallint] NOT NULL,
-	[DocClassGroupHeadingID] [smallint] NOT NULL,
+	[DocClassGroupHeadingID] [smallint] NULL,
+	[HeadingName] [nvarchar](60) NOT NULL,
+	[HeadingTextCustom] [nvarchar](100) NULL,
 	[Sequence] [smallint] NOT NULL,
 	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocClassGroup]
@@ -146,7 +148,9 @@ BEGIN
 CREATE TABLE [dbo].[DocMethodGroup](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
 	[DocClassID] [smallint] NOT NULL,
-	[DocMethodGroupHeadingID] [smallint] NOT NULL,
+	[DocMethodGroupHeadingID] [smallint] NULL,
+	[HeadingName] [nvarchar](60) NOT NULL,
+	[HeadingTextCustom] [nvarchar](100) NULL,
 	[Sequence] [smallint] NOT NULL,
 	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocMethodGroup]

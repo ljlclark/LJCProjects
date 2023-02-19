@@ -10,64 +10,80 @@ GO
 
 /*
 select
-  ID, DocAssemblyID, DocClassGroupHeadingID, Sequence
+  ID, DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom
+    , Sequence
 from DocClassGroup;
 */
 
 declare @DocAssemblyID smallint
   = (select ID from DocAssembly where Name = 'LJCNetCommon');
 
-declare @DocClassGroupHeadingID smallint
-  = (select ID from DocClassGroupHeading where Name = 'StaticClasses');
-IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 1);
+declare @HeadingName nvarchar(60);
+declare @DocClassGroupHeadingID smallint;
 
+set @HeadingName = 'Static';
 set @DocClassGroupHeadingID
-  = (select ID from DocClassGroupHeading where Name = 'CollectionClasses');
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
 IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 2);
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , null, 1);
 
+set @HeadingName = 'Collection';
 set @DocClassGroupHeadingID
-  = (select ID from DocClassGroupHeading where Name = 'ComparerClasses');
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
 IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 3);
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , null, 1);
 
+set @HeadingName = 'Comparer';
 set @DocClassGroupHeadingID
-  = (select ID from DocClassGroupHeading where Name = 'ReflectionClasses');
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
 IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 4);
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , null, 3);
 
+set @HeadingName = 'Reflection';
 set @DocClassGroupHeadingID
-  = (select ID from DocClassGroupHeading where Name = 'OtherClasses');
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
 IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 5);
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , 'Reflection Classes', 4);
 
+set @HeadingName = 'Other';
 set @DocClassGroupHeadingID
-  = (select ID from DocClassGroupHeading where Name = 'SyntaxClasses');
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
 IF NOT EXISTS (select ID from DocClassGroup
-  where DocAssemblyID = @DocAssemblyID
-  and DocClassGroupHeadingID = @DocClassGroupHeadingID)
-insert into DocClassGroup
- (DocAssemblyID, DocClassGroupHeadingID, Sequence)
- values (@DocAssemblyID, @DocClassGroupHeadingID, 6);
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , null, 5);
+
+set @HeadingName = 'Syntax';
+set @DocClassGroupHeadingID
+  = (select ID from DocClassGroupHeading where Name = @HeadingName);
+IF NOT EXISTS (select ID from DocClassGroup
+where DocAssemblyID = @DocAssemblyID
+  and HeadingName = @HeadingName)
+  insert into DocClassGroup
+   (DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, Sequence)
+   values (@DocAssemblyID, @DocClassGroupHeadingID, @HeadingName
+     , 'Syntax Classes', 6);
 go
