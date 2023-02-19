@@ -1,4 +1,4 @@
-﻿/* 3DocAssemblyData.sql */
+﻿/* 3DocAssembly.sql */
 USE [LJCData]
 GO
 
