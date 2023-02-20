@@ -69,7 +69,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="bin\Debug\LJCCodeDoc.cmd" />
-    <None Include="bin\Debug\LJCCodeDocRelease.cmd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDocObjLib\LJCDocObjLib.csproj">
@@ -92,8 +91,6 @@
   <ItemGroup>
     <Content Include="bin\Debug\CodeDoc.css" />
     <Content Include="bin\Debug\LJCCodeDoc.xml" />
-    <Content Include="bin\Debug\LJCCodeDocRelease.xml" />
-    <Content Include="bin\Debug\LJCCodeDocTest.xml" />
     <Content Include="bin\Debug\RootHead.html" />
     <Content Include="bin\Debug\Templates\AssemblyTemplate.htm" />
     <Content Include="bin\Debug\Templates\FieldTemplate.htm" />

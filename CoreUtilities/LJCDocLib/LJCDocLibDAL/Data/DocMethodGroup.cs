@@ -111,6 +111,31 @@ namespace LJCDocLibDAL
     }
     private Int16 mDocMethodGroupHeadingID;
 
+    /// <summary>Gets or sets the DocClassGroupHeadingID value.</summary>
+    //[Required]
+    //[Column("HeadingName", TypeName="nvarchar(60)")]
+    public string HeadingName
+    {
+      get { return mHeadingName; }
+      set
+      {
+        mHeadingName = ChangedNames.Add(ColumnHeadingName, mHeadingName, value);
+      }
+    }
+    private string mHeadingName;
+
+    /// <summary>Gets or sets the DocClassGroupHeadingID value.</summary>
+    //[Column("DocClassGroupHeadingID", TypeName="smallint")]
+    public string HeadingTextCustom
+    {
+      get { return mHeadingTextCustom; }
+      set
+      {
+        mHeadingTextCustom = ChangedNames.Add(ColumnHeadingTextCustom, mHeadingTextCustom, value);
+      }
+    }
+    private string mHeadingTextCustom;
+
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
     //[Column("Sequence", TypeName="smallint")]
@@ -123,6 +148,19 @@ namespace LJCDocLibDAL
       }
     }
     private Int16 mSequence;
+
+    /// <summary>Gets or sets the Sequence value.</summary>
+    //[Required]
+    //[Column("ActiveFlag", TypeName="bit")]
+    public bool ActiveFlag
+    {
+      get { return mActiveFlag; }
+      set
+      {
+        mActiveFlag = ChangedNames.Add(ColumnActiveFlag, mActiveFlag, value);
+      }
+    }
+    private bool mActiveFlag;
     #endregion
 
     #region Class Properties
@@ -145,8 +183,17 @@ namespace LJCDocLibDAL
     /// <summary>The DocMethodGroupHeadingID column name.</summary>
     public static string ColumnDocMethodGroupHeadingID = "DocMethodGroupHeadingID";
 
+    /// <summary>The HeadingName column name.</summary>
+    public static string ColumnHeadingName = "HeadingName";
+
+    /// <summary>The HeadingTextCustom column name.</summary>
+    public static string ColumnHeadingTextCustom = "HeadingTextCustom";
+
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
+
+    /// <summary>The ActiveFlag column name.</summary>
+    public static string ColumnActiveFlag = "ActiveFlag";
     #endregion
   }
 

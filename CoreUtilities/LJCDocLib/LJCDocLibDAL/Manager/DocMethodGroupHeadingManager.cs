@@ -33,7 +33,7 @@ namespace LJCDocLibDAL
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        DocMethodGroupHeading.ColumnHeading
+        DocMethodGroupHeading.ColumnName
       });
     }
 
@@ -148,7 +148,7 @@ namespace LJCDocLibDAL
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DocMethodGroupHeading.ColumnHeading, (object)name }
+        { DocMethodGroupHeading.ColumnName, (object)name }
       };
       return retValue;
     }

@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
@@ -45,14 +53,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DocGenAssemblies.cs" />
-    <Compile Include="Data\DocGenAssembly.cs" />
-    <Compile Include="Data\DocGenGroup.cs" />
-    <Compile Include="Data\DocGenGroups.cs" />
-    <Compile Include="Manager\DocGenGroupManager.cs" />
+    <Compile Include="Data\DataAssemblyGroups.cs" />
+    <Compile Include="Data\DocAssemblies.cs" />
+    <Compile Include="Data\DocAssembly.cs" />
+    <Compile Include="Data\DocAssemblyGroup.cs" />
+    <Compile Include="DataXML\DocGenAssemblies.cs" />
+    <Compile Include="DataXML\DocGenAssembly.cs" />
+    <Compile Include="DataXML\DocGenGroup.cs" />
+    <Compile Include="DataXML\DocGenGroups.cs" />
+    <Compile Include="Data\DocClasses.cs" />
+    <Compile Include="Data\DocClassGroupHeadings.cs" />
+    <Compile Include="Data\DocClass.cs" />
+    <Compile Include="Data\DocClassGroup.cs" />
+    <Compile Include="Data\DocClassGroupHeading.cs" />
+    <Compile Include="Data\DocClassGroups.cs" />
+    <Compile Include="Data\DocMethod.cs" />
+    <Compile Include="Data\DocMethodGroup.cs" />
+    <Compile Include="Data\DocMethodGroupHeading.cs" />
+    <Compile Include="Data\DocMethodGroupHeadings.cs" />
+    <Compile Include="Data\DocMethodGroups.cs" />
+    <Compile Include="Data\DocMethods.cs" />
+    <Compile Include="ManagersDocLib.cs" />
+    <Compile Include="Manager\DocAssemblyGroupManager.cs" />
+    <Compile Include="Manager\DocAssemblyManager.cs" />
+    <Compile Include="Manager\DocClassGroupHeadingManager.cs" />
+    <Compile Include="Manager\DocClassGroupManager.cs" />
+    <Compile Include="Manager\DocClassManager.cs" />
+    <Compile Include="ManagerXML\DocGenGroupManager.cs" />
+    <Compile Include="Manager\DocMethodGroupHeadingManager.cs" />
+    <Compile Include="Manager\DocMethodGroupManager.cs" />
+    <Compile Include="Manager\DocMethodManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\SQLScript\2DocAssemblyGroup.sql" />
+    <Content Include="bin\Debug\SQLScript\3DocAssembly.sql" />
+    <Content Include="bin\Debug\SQLScript\1DocGenTables.sql" />
+    <Content Include="bin\Debug\SQLScript\5DocClassGroup.sql" />
+    <Content Include="bin\Debug\SQLScript\4DocClassGroupHeading.sql" />
+    <Content Include="bin\Debug\SQLScript\6DocClass.sql" />
+    <Content Include="bin\Debug\SQLScript\7DocMethodGroupHeading.sql" />
+    <Content Include="bin\Debug\SQLScript\8DMG_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\9DM_NetCommon.sql" />
     <Content Include="Doc\DocGenAssemblies.xml" />
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />

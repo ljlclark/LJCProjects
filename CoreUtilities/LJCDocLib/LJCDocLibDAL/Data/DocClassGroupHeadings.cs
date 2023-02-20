@@ -86,7 +86,7 @@ namespace LJCDocLibDAL
         retValue = new DocClassGroupHeading()
         {
           ID = id,
-          Heading = name
+          Name = name
         };
         Add(retValue);
       }
@@ -156,7 +156,7 @@ namespace LJCDocLibDAL
       LJCSortUnique(comparer);
       DocClassGroupHeading searchItem = new DocClassGroupHeading()
       {
-        Heading = name
+        Name = name
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)

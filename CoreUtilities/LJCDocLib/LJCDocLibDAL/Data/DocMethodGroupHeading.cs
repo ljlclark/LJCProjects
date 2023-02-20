@@ -86,9 +86,23 @@ namespace LJCDocLibDAL
     }
     private Int16 mID;
 
+    /// <summary>Gets or sets the HeNameading value.</summary>
+    //[Required]
+    //[Column("Name", TypeName="nvarchar(60)")]
+    public String Name
+    {
+      get { return mName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mName = ChangedNames.Add(ColumnName, mName, value);
+      }
+    }
+    private String mName;
+
     /// <summary>Gets or sets the Heading value.</summary>
     //[Required]
-    //[Column("Heading", TypeName="nvarchar(100")]
+    //[Column("Heading", TypeName="nvarchar(100)")]
     public String Heading
     {
       get { return mHeading; }
@@ -128,11 +142,17 @@ namespace LJCDocLibDAL
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
+    /// <summary>The Name column name.</summary>
+    public static string ColumnName = "Name";
+
     /// <summary>The Heading column name.</summary>
     public static string ColumnHeading = "Heading";
 
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
+
+    /// <summary>The Name maximum length.</summary>
+    public static int LengthName = 60;
 
     /// <summary>The Heading maximum length.</summary>
     public static int LengthHeading = 100;
@@ -153,14 +173,11 @@ namespace LJCDocLibDAL
       retValue = NetCommon.CompareNull(x, y);
       if (-2 == retValue)
       {
-        retValue = NetCommon.CompareNull(x.Heading, y.Heading);
+        retValue = NetCommon.CompareNull(x.Name, y.Name);
         if (-2 == retValue)
         {
-          // Case sensitive.
-          //retValue = x.Name.CompareTo(y.Name);
-
           // Not case sensitive.
-          retValue = string.Compare(x.Heading, y.Heading, true);
+          retValue = string.Compare(x.Name, y.Name, true);
         }
       }
       return retValue;

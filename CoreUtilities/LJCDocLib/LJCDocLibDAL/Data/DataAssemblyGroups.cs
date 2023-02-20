@@ -160,7 +160,7 @@ namespace LJCDocLibDAL
       LJCSortUnique(comparer);
       DocAssemblyGroup searchItem = new DocAssemblyGroup()
       {
-        Heading = name
+        Name = name
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)

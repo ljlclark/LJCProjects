@@ -87,6 +87,20 @@ namespace LJCDocLibDAL
 
     /// <summary>Gets or sets the Heading value.</summary>
     //[Required]
+    //[Column("Name", TypeName="nvarchar(60")]
+    public String Name
+    {
+      get { return mName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mName = ChangedNames.Add(ColumnName, mName, value);
+      }
+    }
+    private String mName;
+
+    /// <summary>Gets or sets the Heading value.</summary>
+    //[Required]
     //[Column("Heading", TypeName="nvarchar(100")]
     public String Heading
     {
@@ -111,6 +125,19 @@ namespace LJCDocLibDAL
       }
     }
     private Int16 mSequence;
+
+    /// <summary>Gets or sets the ActiveFlag value.</summary>
+    //[Required]
+    //[Column("ActiveFlag", TypeName="bit")]
+    public bool ActiveFlag
+    {
+      get { return mActiveFlag; }
+      set
+      {
+        mActiveFlag = ChangedNames.Add(ColumnActiveFlag, mActiveFlag, value);
+      }
+    }
+    private bool mActiveFlag;
     #endregion
 
     #region Class Properties
@@ -127,11 +154,17 @@ namespace LJCDocLibDAL
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
+    /// <summary>The Name column name.</summary>
+    public static string ColumnName = "Name";
+
     /// <summary>The Heading column name.</summary>
     public static string ColumnHeading = "Heading";
 
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
+
+    /// <summary>The ActiveFlag column name.</summary>
+    public static string ColumnActiveFlag = "ActiveFlag";
 
     /// <summary>The Heading maximum length.</summary>
     public static int LengthHeading = 100;
@@ -152,11 +185,11 @@ namespace LJCDocLibDAL
       retValue = NetCommon.CompareNull(x, y);
       if (-2 == retValue)
       {
-        retValue = NetCommon.CompareNull(x.Heading, y.Heading);
+        retValue = NetCommon.CompareNull(x.Name, y.Name);
         if (-2 == retValue)
         {
           // Not case sensitive.
-          retValue = string.Compare(x.Heading, y.Heading, true);
+          retValue = string.Compare(x.Name, y.Name, true);
         }
       }
       return retValue;

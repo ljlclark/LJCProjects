@@ -98,20 +98,6 @@ namespace LJCDocLibDAL
     }
     private Int16 mDocMethodGroupID;
 
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(100")]
-    public String Description
-    {
-      get { return mDescription; }
-      set
-      {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
-      }
-    }
-    private String mDescription;
-
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
     //[Column("Name", TypeName="nvarchar(60")]
@@ -126,6 +112,20 @@ namespace LJCDocLibDAL
     }
     private String mName;
 
+    /// <summary>Gets or sets the Description value.</summary>
+    //[Required]
+    //[Column("Description", TypeName="nvarchar(100")]
+    public String Description
+    {
+      get { return mDescription; }
+      set
+      {
+        value = NetString.InitString(value);
+        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+      }
+    }
+    private String mDescription;
+
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
     //[Column("Sequence", TypeName="smallint")]
@@ -138,6 +138,19 @@ namespace LJCDocLibDAL
       }
     }
     private Int16 mSequence;
+
+    /// <summary>Gets or sets the Sequence value.</summary>
+    //[Required]
+    //[Column("ActiveFlag", TypeName="bit")]
+    public bool ActiveFlag
+    {
+      get { return mActiveFlag; }
+      set
+      {
+        mActiveFlag = ChangedNames.Add(ColumnActiveFlag, mActiveFlag, value);
+      }
+    }
+    private bool mActiveFlag;
     #endregion
 
     #region Class Properties
@@ -157,20 +170,23 @@ namespace LJCDocLibDAL
     /// <summary>The DocMethodGroupID column name.</summary>
     public static string ColumnDocMethodGroupID = "DocMethodGroupID";
 
-    /// <summary>The Description column name.</summary>
-    public static string ColumnDescription = "Description";
-
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
+
+    /// <summary>The Description column name.</summary>
+    public static string ColumnDescription = "Description";
 
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
 
-    /// <summary>The Description maximum length.</summary>
-    public static int LengthDescription = 100;
+    /// <summary>The ActiveFlag column name.</summary>
+    public static string ColumnActiveFlag = "ActiveFlag";
 
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;
+
+    /// <summary>The Description maximum length.</summary>
+    public static int LengthDescription = 100;
     #endregion
   }
 

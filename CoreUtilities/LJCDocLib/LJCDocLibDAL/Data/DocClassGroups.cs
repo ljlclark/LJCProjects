@@ -72,8 +72,9 @@ namespace LJCDocLibDAL
     /// </summary>
     /// <param name="id"></param>
     /// <param name="docAssemblyID"></param>
+    /// <param name="headingName"></param>
     /// <returns></returns>
-    public DocClassGroup Add(short id, short docAssemblyID)
+    public DocClassGroup Add(short id, short docAssemblyID, string headingName)
     {
       DocClassGroup retValue;
 
@@ -88,13 +89,14 @@ namespace LJCDocLibDAL
       }
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCSearchUnique(id, docAssemblyID);
+      retValue = LJCSearchUnique(docAssemblyID, headingName);
       if (null == retValue)
       {
         retValue = new DocClassGroup()
         {
           ID = id,
-          DocAssemblyID = docAssemblyID
+          DocAssemblyID = docAssemblyID,
+          HeadingName = headingName
         };
         Add(retValue);
       }
@@ -157,10 +159,11 @@ namespace LJCDocLibDAL
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="id"></param>
     /// <param name="docAssemblyID"></param>
+    /// <param name="headingName"></param>
     /// <returns></returns>
-    public DocClassGroup LJCSearchUnique(short id, short docAssemblyID)
+    public DocClassGroup LJCSearchUnique(short docAssemblyID
+      , string headingName)
     {
       DocClassGroupUniqueComparer comparer;
       DocClassGroup retValue = null;
@@ -169,8 +172,8 @@ namespace LJCDocLibDAL
       LJCSortUnique(comparer);
       DocClassGroup searchItem = new DocClassGroup()
       {
-        ID = id,
-        DocAssemblyID = docAssemblyID
+        DocAssemblyID = docAssemblyID,
+        HeadingName = headingName
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)

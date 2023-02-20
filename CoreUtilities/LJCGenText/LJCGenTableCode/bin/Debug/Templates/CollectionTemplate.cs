@@ -1,17 +1,16 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// CollectionTemplate.cs
-using LJCNetCommon;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-
 // #SectionBegin Class
 // #Value _ClassName_
 // #Value _CollectionName_
 // #Value _CompareToName_
 // #Value _Namespace_
+// _CollectionName_.cs
+using LJCNetCommon;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+
 namespace _Namespace_
 {
   /// <summary>Represents a collection of _ClassName_ objects.</summary>
@@ -57,10 +56,10 @@ namespace _Namespace_
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public _CollectionName_(_CollectionName_ items)
     {
-      if (HasItems(items))
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
@@ -86,7 +85,7 @@ namespace _Namespace_
       NetString.AddMissingArgument(message, name);
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCSearchName(name);
+      retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
         retValue = new _ClassName_()
@@ -173,18 +172,22 @@ namespace _Namespace_
       return retValue;
     }
 
-    // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public _ClassName_ LJCSearchName(string name)
+    // Retrieve the collection element with unique values.
+    /// <summary>
+    /// Retrieve the collection element with unique values.
+    /// </summary>
+    /// <param name="name">The item name.</param>
+    /// <returns>A reference to the matching item.</returns>
+    public _ClassName_ LJCSearchUnique(string name)
     {
-      _ClassName_NameComparer comparer;
+      _ClassName_UniqueComparer comparer;
       _ClassName_ retValue = null;
 
-      comparer = new _ClassName_NameComparer();
-      LJCSortName(comparer);
+      comparer = new _ClassName_UniqueComparer();
+      LJCSortUnique(comparer);
       _ClassName_ searchItem = new _ClassName_()
       {
-        _CompareToName_ = name
+        _ComparerName_ = name
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -206,16 +209,16 @@ namespace _Namespace_
       }
     }
 
-    /// <summary>Sort on Name.</summary>
+    /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortName(_ClassName_NameComparer comparer)
+    public void LJCSortUnique(_ClassName_UniqueComparer comparer)
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.Name) != 0)
+        || mSortType.CompareTo(SortType.Unique) != 0)
       {
         mPrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.Name;
+        mSortType = SortType.Unique;
       }
     }
     #endregion
@@ -237,7 +240,7 @@ namespace _Namespace_
     private enum SortType
     {
       Code,
-      Name
+      Unique
     }
     #endregion
   }

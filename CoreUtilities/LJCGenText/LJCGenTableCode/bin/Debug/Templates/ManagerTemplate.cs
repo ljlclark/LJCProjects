@@ -1,18 +1,17 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// ManagerTemplate.cs
-using LJCDBClientLib;
-using LJCDBMessage;
-using LJCNetCommon;
-using System;
-using System.Collections.Generic;
-
 // #SectionBegin Class
 // #Value _ClassName_
 // #Value _CollectionName_
 // #Value _JoinTableName_
 // #Value _Namespace_
 // #Value _TableName_
+// _ClassName_Manager.cs
+using LJCDBClientLib;
+using LJCDBMessage;
+using LJCNetCommon;
+using System.Collections.Generic;
+
 namespace _Namespace_
 {
 	/// <summary>Provides table specific data methods.</summary>
@@ -53,7 +52,8 @@ namespace _Namespace_
 
 		// Adds a record to the database.
 		/// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ Add(_ClassName_ dataObject, List<string> propertyNames = null)
+		public _ClassName_ Add(_ClassName_ dataObject
+			, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
 
@@ -88,8 +88,9 @@ namespace _Namespace_
 
 		// Retrieves a record from the database.
 		/// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ Retrieve(DbColumns keyColumns, List<string> propertyNames = null
-			, DbFilters filters = null, DbJoins joins = null)
+		public _ClassName_ Retrieve(DbColumns keyColumns
+			, List<string> propertyNames = null, DbFilters filters = null
+			, DbJoins joins = null)
 		{
 			_ClassName_ retValue;
 
@@ -107,7 +108,7 @@ namespace _Namespace_
 		}
 		#endregion
 
-		#region Retrieve/Load Methods
+		#region Load/Retrieve Methods
 
 		// Retrieves a record with the supplied value.
 		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
@@ -121,13 +122,14 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Retrieves a record with the supplied name value.
+		// Retrieves a record with the supplied unique values.
 		/// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ RetrieveWithName(string name, List<string> propertyNames = null)
+		public _ClassName_ RetrieveWithUnique(string name
+			, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
 
-			var keyColumns = GetNameKey(name);
+			var keyColumns = GetUniqueKey(name);
 			var joins = GetJoins();
 			var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
 			retValue = ResultConverter.CreateData(dbResult);
@@ -153,7 +155,7 @@ namespace _Namespace_
 
 		// Gets the ID key columns.
 		/// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbColumns GetNameKey(string name)
+		public DbColumns GetUniqueKey(string name)
 		{
 			// Needs cast for string to select the correct Add overload.
 			var retValue = new DbColumns()

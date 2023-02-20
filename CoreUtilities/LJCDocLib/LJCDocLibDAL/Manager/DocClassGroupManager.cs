@@ -34,7 +34,7 @@ namespace LJCDocLibDAL
       Manager.SetLookupColumns(new string[]
       {
         DocClassGroup.ColumnDocAssemblyID,
-        DocClassGroup.ColumnDocClassGroupHeadingID
+        DocClassGroup.ColumnHeadingName
       });
     }
 
@@ -117,15 +117,15 @@ namespace LJCDocLibDAL
     /// 
     /// </summary>
     /// <param name="docAssemblyID"></param>
-    /// <param name="docClassGroupHeadingID"></param>
+    /// <param name="headingName"></param>
     /// <param name="propertyNames"></param>
     /// <returns></returns>
     public DocClassGroup RetrieveWithUnique(short docAssemblyID
-      , short docClassGroupHeadingID, List<string> propertyNames = null)
+      , short headingName, List<string> propertyNames = null)
     {
       DocClassGroup retValue;
 
-      var keyColumns = GetUniqueKey(docAssemblyID, docClassGroupHeadingID);
+      var keyColumns = GetUniqueKey(docAssemblyID, headingName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -153,16 +153,16 @@ namespace LJCDocLibDAL
     /// 
     /// </summary>
     /// <param name="docAssemblyID"></param>
-    /// <param name="docClassGroupHeadingID"></param>
+    /// <param name="headingName"></param>
     /// <returns></returns>
     public DbColumns GetUniqueKey(short docAssemblyID
-      , short docClassGroupHeadingID)
+      , short headingName)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocClassGroup.ColumnDocAssemblyID, docAssemblyID },
-        { DocClassGroup.ColumnDocClassGroupHeadingID, docClassGroupHeadingID}
+        { DocClassGroup.ColumnHeadingName, headingName}
       };
       return retValue;
     }

@@ -98,49 +98,9 @@ namespace LJCDocLibDAL
     }
     private Int16 mDocAssemblyGroupID;
 
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(100")]
-    public String Description
-    {
-      get { return mDescription; }
-      set
-      {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
-      }
-    }
-    private String mDescription;
-
-    /// <summary>Gets or sets the FileSpec value.</summary>
-    //[Column("FileSpec", TypeName="nvarchar(60")]
-    public String FileSpec
-    {
-      get { return mFileSpec; }
-      set
-      {
-        value = NetString.InitString(value);
-        mFileSpec = ChangedNames.Add(ColumnFileSpec, mFileSpec, value);
-      }
-    }
-    private String mFileSpec;
-
-    /// <summary>Gets or sets the MainImage value.</summary>
-    //[Column("MainImage", TypeName="nvarchar(60")]
-    public String MainImage
-    {
-      get { return mMainImage; }
-      set
-      {
-        value = NetString.InitString(value);
-        mMainImage = ChangedNames.Add(ColumnMainImage, mMainImage, value);
-      }
-    }
-    private String mMainImage;
-
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
+    //[Column("Name", TypeName="nvarchar(60)")]
     public String Name
     {
       get { return mName; }
@@ -151,6 +111,20 @@ namespace LJCDocLibDAL
       }
     }
     private String mName;
+
+    /// <summary>Gets or sets the Description value.</summary>
+    //[Required]
+    //[Column("Description", TypeName="nvarchar(100)")]
+    public String Description
+    {
+      get { return mDescription; }
+      set
+      {
+        value = NetString.InitString(value);
+        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+      }
+    }
+    private String mDescription;
 
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
@@ -164,6 +138,45 @@ namespace LJCDocLibDAL
       }
     }
     private Int16 mSequence;
+
+    /// <summary>Gets or sets the FileSpec value.</summary>
+    //[Column("FileSpec", TypeName="nvarchar(60)")]
+    public String FileSpec
+    {
+      get { return mFileSpec; }
+      set
+      {
+        value = NetString.InitString(value);
+        mFileSpec = ChangedNames.Add(ColumnFileSpec, mFileSpec, value);
+      }
+    }
+    private String mFileSpec;
+
+    /// <summary>Gets or sets the MainImage value.</summary>
+    //[Column("MainImage", TypeName="nvarchar(60)")]
+    public String MainImage
+    {
+      get { return mMainImage; }
+      set
+      {
+        value = NetString.InitString(value);
+        mMainImage = ChangedNames.Add(ColumnMainImage, mMainImage, value);
+      }
+    }
+    private String mMainImage;
+
+    /// <summary>Gets or sets the ActiveFlag value.</summary>
+    //[Required]
+    //[Column("ActiveFlag", TypeName="bit")]
+    public bool ActiveFlag
+    {
+      get { return mActiveFlag; }
+      set
+      {
+        mActiveFlag = ChangedNames.Add(ColumnActiveFlag, mActiveFlag, value);
+      }
+    }
+    private bool mActiveFlag;
     #endregion
 
     #region Class Properties
@@ -183,8 +196,14 @@ namespace LJCDocLibDAL
     /// <summary>The DocAssemblyGroupID column name.</summary>
     public static string ColumnDocAssemblyGroupID = "DocAssemblyGroupID";
 
+    /// <summary>The Name column name.</summary>
+    public static string ColumnName = "Name";
+
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";
+
+    /// <summary>The Sequence column name.</summary>
+    public static string ColumnSequence = "Sequence";
 
     /// <summary>The FileSpec column name.</summary>
     public static string ColumnFileSpec = "FileSpec";
@@ -192,23 +211,20 @@ namespace LJCDocLibDAL
     /// <summary>The MainImage column name.</summary>
     public static string ColumnMainImage = "MainImage";
 
-    /// <summary>The Name column name.</summary>
-    public static string ColumnName = "Name";
+    /// <summary>The ActiveFlag column name.</summary>
+    public static string ColumnActiveFlag = "ActiveFlag";
 
-    /// <summary>The Sequence column name.</summary>
-    public static string ColumnSequence = "Sequence";
+    /// <summary>The Name maximum length.</summary>
+    public static int LengthName = 60;
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthDescription = 100;
 
     /// <summary>The FileSpec maximum length.</summary>
-    public static int LengthFileSpec = 60;
+    public static int LengthFileSpec = 120;
 
     /// <summary>The MainImage maximum length.</summary>
     public static int LengthMainImage = 60;
-
-    /// <summary>The Name maximum length.</summary>
-    public static int LengthName = 60;
     #endregion
   }
 
