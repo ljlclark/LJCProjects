@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
@@ -67,6 +71,7 @@
     <ProjectReference Include="..\LJCDocLibDAL\LJCDocLibDAL.csproj">
       <Project>{c3d5c785-74a8-473e-81b4-35e07be7832a}</Project>
       <Name>LJCDocLibDAL</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\LJCDocXMLObjLib\LJCDocXMLObjLib.csproj">
       <Project>{2037180d-f3fd-4559-ad78-37e7f018bd33}</Project>

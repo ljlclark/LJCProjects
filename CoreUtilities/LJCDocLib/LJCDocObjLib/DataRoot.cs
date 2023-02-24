@@ -15,9 +15,11 @@ namespace LJCDocObjLib
 
     // Initializes an object instance.
     /// <include path='items/DataRootC/*' file='Doc/DataRoot.xml'/>
-    public DataRoot(DocGenGroups assemblyGroups)
+    //public DataRoot(DocGenGroups assemblyGroups)
+    public DataRoot(DocAssemblyGroups assemblyGroups)
     {
-      DocGenGroups = assemblyGroups;
+      AssemblyGroups = assemblyGroups;
+      Managers = ValuesDocGen.Instance.Managers;
       File.WriteAllText("LJCDocObjLib.log", "");
       CreateAssembliesData();
     }
@@ -32,21 +34,24 @@ namespace LJCDocObjLib
       bool success;
 
       DataAssemblies = new DataAssemblies();
-      foreach (DocGenGroup docGenGroup in DocGenGroups)
+      foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
-        foreach (DocGenAssembly docGenAssembly in docGenGroup.DocGenAssemblies)
+        var assemblyManager = Managers.DocAssemblyManager;
+        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        foreach (DocAssembly docAssembly in docAssemblies)
         {
           // Check if assembly file is HTML.
-          success = true;
-          bool isHtml = ".html" == Path.GetExtension(docGenAssembly.FileSpec).ToLower();
+          success = false;
+          bool isHtml = ".html" == Path.GetExtension(docAssembly.FileSpec).ToLower();
           if (false == isHtml)
           {
             // Check if assembly XML file exists.
-            if (false == File.Exists(docGenAssembly.FileSpec))
+            success = true;
+            if (false == File.Exists(docAssembly.FileSpec))
             {
               success = false;
               string errorText = $"{DateTime.Now} - File"
-                + $" '{docGenAssembly.FileSpec}' was not found.\r\n";
+                + $" '{docAssembly.FileSpec}' was not found.\r\n";
               File.AppendAllText("LJCDocObjLib.log", errorText);
             }
           }
@@ -55,8 +60,8 @@ namespace LJCDocObjLib
           {
             // Create the DataAssembly data.
             DataAssembly dataAssembly = new DataAssembly(this
-              , docGenAssembly.FileSpec, docGenAssembly.Description
-              , docGenAssembly.MainImage);
+              , docAssembly.FileSpec, docAssembly.Description
+              , docAssembly.MainImage);
             if (dataAssembly.Name != null)
             {
               DataAssemblies.Add(dataAssembly);
@@ -76,7 +81,10 @@ namespace LJCDocObjLib
     #region Class Properties
 
     /// <summary>Gets or sets the AssemblyGroups list.</summary>
-    public DocGenGroups DocGenGroups { get; set; }
+    public DocAssemblyGroups AssemblyGroups { get; set; }
+
+    /// <summary></summary>
+    public ManagersDocGen Managers { get; set; }
     #endregion
   }
 }

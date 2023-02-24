@@ -80,6 +80,23 @@ namespace LJCNetCommon
       }
       return retVal;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public bool HasProperty(string propertyName)
+    {
+      bool retValue = true;
+
+      var propertyInfo = GetPropertyInfo(propertyName);
+      if (null == propertyInfo)
+      {
+        retValue = false;
+      }
+      return retValue;
+    }
     #endregion
 
     #region Value Methods

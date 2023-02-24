@@ -15,9 +15,10 @@ namespace LJCDocGenLib
 
     // Initializes an object instance.
     /// <include path='items/CreateRootXmlC/*' file='Doc/CreateRootXml.xml'/>
-    public CreateRootXml(DocGenGroups docGenGroups)
+    public CreateRootXml(DocAssemblyGroups docGenGroups)
     {
-      DocGenGroups = docGenGroups;
+      AssemblyGroups = docGenGroups;
+      Managers = ValuesDocGen.Instance.Managers;
     }
     #endregion
 
@@ -44,17 +45,20 @@ namespace LJCDocGenLib
 
       Section assemblySection = sections.Add("Assembly");
       section = sections.Add("Group");
-      foreach (DocGenGroup docGenGroup in DocGenGroups)
+      foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
-        repeatItem = section.RepeatItems.Add(docGenGroup.Name);
+        repeatItem = section.RepeatItems.Add(assemblyGroup.Name);
         replacements = repeatItem.Replacements;
-        replacements.Add("_GroupDescription_", docGenGroup.Description);
-        foreach (DocGenAssembly docGenAssembly in docGenGroup.DocGenAssemblies)
+        replacements.Add("_GroupDescription_", assemblyGroup.Heading);
+
+        var assemblyManager = Managers.DocAssemblyManager;
+        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        foreach (DocAssembly docAssembly in docAssemblies)
         {
           repeatItem = assemblySection.RepeatItems.Add("");
           replacements = repeatItem.Replacements;
-          replacements.Add("_AssemblyName_", docGenAssembly.Name);
-          replacements.Add("_AssemblyDescription_", docGenAssembly.Description);
+          replacements.Add("_AssemblyName_", docAssembly.Name);
+          replacements.Add("_AssemblyDescription_", docAssembly.Description);
         }
       }
       retValue = NetCommon.XmlSerializeToString(sections.GetType()
@@ -70,9 +74,11 @@ namespace LJCDocGenLib
     {
       int retValue = 0;
 
-      foreach (DocGenGroup docGenGroup in DocGenGroups)
+      foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
-        foreach (DocGenAssembly docGenAssembly in docGenGroup.DocGenAssemblies)
+        var assemblyManager = Managers.DocAssemblyManager;
+        var docAssemblies = assemblyManager.Load();
+        foreach (DocAssembly docAssembly in docAssemblies)
         {
           retValue++;
         }
@@ -83,7 +89,11 @@ namespace LJCDocGenLib
 
     #region Properties
 
-    private DocGenGroups DocGenGroups { get; }
+    //private DocGenGroups DocGenGroups { get; }
+    private DocAssemblyGroups AssemblyGroups { get; }
+
+    /// <summary></summary>
+    public ManagersDocGen Managers { get; set; }
     #endregion
   }
 }

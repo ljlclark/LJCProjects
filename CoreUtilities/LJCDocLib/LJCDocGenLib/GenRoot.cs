@@ -24,6 +24,7 @@ namespace LJCDocGenLib
       HTMLFolderName = targetPath;
       HTMLFileName = "CodeDoc.html";
       HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
+      Managers = ValuesDocGen.Instance.Managers;
     }
     #endregion
 
@@ -56,7 +57,7 @@ namespace LJCDocGenLib
     {
       GenAssembly genAssembly;
 
-      string templateFileSpec = "Templates\\AssemblyTemplate.htm";
+      string templateFileSpec = "Templates\\AssemblyTemplate.html";
       string[] templateLines = ReadAllLines(templateFileSpec);
 
       foreach (DataAssembly dataAssembly in DataRoot.DataAssemblies)
@@ -74,12 +75,15 @@ namespace LJCDocGenLib
       StringBuilder builder = new StringBuilder(128);
 
       builder.Append(CreateHTMLSection(HTMLSection.Head));
-      foreach (DocGenGroup docGenGroup in DataRoot.DocGenGroups)
+      foreach (DocAssemblyGroup assemblyGroup in DataRoot.AssemblyGroups)
       {
-        builder.Append(CreateGroupSection(HTMLSection.Head, docGenGroup.Description));
-        foreach (DocGenAssembly config in docGenGroup.DocGenAssemblies)
+        builder.Append(CreateGroupSection(HTMLSection.Head, assemblyGroup.Heading));
+
+        var assemblyManager = Managers.DocAssemblyManager;
+        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        foreach (DocAssembly docAssembly in docAssemblies)
         {
-          builder.Append(CreateAssemblySection(config.Description));
+          builder.Append(CreateAssemblySection(docAssembly.Description));
         }
         builder.Append(CreateGroupSection(HTMLSection.Tail));
       }
@@ -271,6 +275,9 @@ namespace LJCDocGenLib
 
     /// <summary>Gets or sets the HTML file folder value.</summary>
     public string HTMLFolderName { get; set; }
+
+    /// <summary></summary>
+    public ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data

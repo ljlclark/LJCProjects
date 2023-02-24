@@ -5,7 +5,7 @@
 <ConnectionTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ConnectionTemplate>
     <Name>SQLServer</Name>
-    <Template>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security={SSPI}; User Id={UID} Password={PSWD}; </Template>
+    <Template>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True; User Id={UID} Password={PSWD}; </Template>
   </ConnectionTemplate>
   <ConnectionTemplate>
     <Name>MySQL</Name>

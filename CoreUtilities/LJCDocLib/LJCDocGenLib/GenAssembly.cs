@@ -71,10 +71,10 @@ namespace LJCDocGenLib
     {
       if (DataAssembly.DataTypes != null)
       {
-        string[] typeLines = ReadAllLines("Templates\\TypeTemplate.htm");
-        string[] methodLines = ReadAllLines("Templates\\MethodTemplate.htm");
-        string[] propertyLines = ReadAllLines("Templates\\PropertyTemplate.htm");
-        string[] fieldLines = ReadAllLines("Templates\\FieldTemplate.htm");
+        string[] typeLines = ReadAllLines("Templates\\TypeTemplate.html");
+        string[] methodLines = ReadAllLines("Templates\\MethodTemplate.html");
+        string[] propertyLines = ReadAllLines("Templates\\PropertyTemplate.html");
+        string[] fieldLines = ReadAllLines("Templates\\FieldTemplate.html");
 
         GenType genType = new GenType(GenRoot, this, DataAssembly, null
           , AssemblyReflect);

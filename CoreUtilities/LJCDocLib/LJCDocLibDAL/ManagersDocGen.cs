@@ -6,13 +6,13 @@ using LJCDBClientLib;
 namespace LJCDocLibDAL
 {
   /// <summary>Gets the Manager objects.</summary>
-  public class ManagersDocLib
+  public class ManagersDocGen
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ManagersDocLib()
+    public ManagersDocGen()
     {
     }
 

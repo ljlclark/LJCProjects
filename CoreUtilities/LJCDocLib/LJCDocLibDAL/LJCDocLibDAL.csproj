@@ -36,6 +36,9 @@
       <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>
@@ -73,7 +76,7 @@
     <Compile Include="Data\DocMethodGroupHeadings.cs" />
     <Compile Include="Data\DocMethodGroups.cs" />
     <Compile Include="Data\DocMethods.cs" />
-    <Compile Include="ManagersDocLib.cs" />
+    <Compile Include="ManagersDocGen.cs" />
     <Compile Include="Manager\DocAssemblyGroupManager.cs" />
     <Compile Include="Manager\DocAssemblyManager.cs" />
     <Compile Include="Manager\DocClassGroupHeadingManager.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="Manager\DocMethodGroupManager.cs" />
     <Compile Include="Manager\DocMethodManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesDocGen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\SQLScript\2DocAssemblyGroup.sql" />

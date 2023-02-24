@@ -1,4 +1,5 @@
-use LJCData;sR
+/* 3PersonViewData.sql */
+use [LJCData]
 
 -- ViewTable
 IF NOT EXISTS (select ID from ViewTable where Name = 'Person')

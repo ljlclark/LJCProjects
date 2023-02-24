@@ -29,16 +29,26 @@ rem ---------------------------
 set to=%toRoot%LJCDocGen\%bin%
 
 set src=LJCDBMessage\CipherLib\%bin%
-rem copy %assmRoot%%src%\CipherLib.dll %to%
+copy %assmRoot%%src%\CipherLib.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
+
+set src=LJCDataAccessConfig\LJCDataAccessConfig
+copy %assmRoot%%src%\DataConfigs.xml %to%
+copy %assmRoot%%src%\ConnectionTemplates.xml %to%
+
+set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
 copy %assmRoot%%src%\LJCDBClientLib.dll %to%
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %assmRoot%%src%\LJCDBMessage.dll %to%
+
+set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
+copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
 set src=LJCDocGroupEditor\LJCDocGroupEditor\%bin%
 copy %utilRoot%%src%\LJCDocGroupEditor.exe %to%

@@ -50,6 +50,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDBClientLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
@@ -90,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\CodeDoc.css" />
+    <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\LJCCodeDoc.xml" />
     <Content Include="bin\Debug\RootHead.html" />
     <Content Include="bin\Debug\Templates\AssemblyTemplate.htm" />

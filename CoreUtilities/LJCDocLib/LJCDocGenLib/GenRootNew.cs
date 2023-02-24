@@ -15,7 +15,7 @@ namespace LJCDocGenLib
     /// <include path='items/GenRootPage/*' file='Doc/GenRoot.xml'/>
     public void GenRootPageNew()
     {
-      CreateRootXml createRootXml = new CreateRootXml(DataRoot.DocGenGroups);
+      CreateRootXml createRootXml = new CreateRootXml(DataRoot.AssemblyGroups);
       string dataXml = createRootXml.GetXmlData();
       string dataFileSpec = "XMLFiles\\Root.xml";
       //File.WriteAllText(dataFileSpec, dataXml);  // Testing

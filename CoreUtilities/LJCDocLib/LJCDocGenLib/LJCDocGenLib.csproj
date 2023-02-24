@@ -32,6 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCGenTextLib">
       <HintPath>..\External\LJCGenTextLib.dll</HintPath>
     </Reference>
@@ -66,7 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxHighlightHtml.cs" />
     <Compile Include="UserTypes.cs" />
-    <Compile Include="ValuesDocLib.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateXML\DocLibObjGraph.jpg" />

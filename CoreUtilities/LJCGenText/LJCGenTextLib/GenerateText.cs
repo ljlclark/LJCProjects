@@ -159,8 +159,12 @@ namespace LJCGenTextLib
               replacement = replacements.LJCSearchName(directive.Name);
               if (null == replacement)
               {
-                string propertyName = directive.Name.Replace("_", "");
-                string propertyValue = reflect.GetString(propertyName);
+                string propertyValue = null;
+                var propertyName = directive.Name.Replace("_", "");
+                if (reflect.HasProperty(propertyName))
+                {
+                  propertyValue = reflect.GetString(propertyName);
+                }
                 replacements.Add(directive.Name, propertyValue);
               }
             }

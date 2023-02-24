@@ -1,6 +1,8 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDocGen-Program.cs
+using LJCDBClientLib;
+using LJCDBDataAccess;
 using LJCDocGenLib;
 using LJCDocLibDAL;
 using LJCDocObjLib;
@@ -39,20 +41,18 @@ namespace LJCDocGen
 
       if (success)
       {
-        GetArgs(args, out string outputPath, out string groupXMLFile);
+        //GetArgs(args, out string outputPath, out string groupXMLFile);
+        GetArgs(args, out string outputPath, out string _);
 
-        // Generate the root page with groups and group assemblies.
-        DocGenGroupManager groupManager = new DocGenGroupManager
-        {
-          FileName = groupXMLFile
-        };
-        DocGenGroups docGenGroups = groupManager.Load();
+        var managers = ValuesDocGen.Instance.Managers;
+        var assemblyGroupManager = managers.DocAssemblyGroupManager;
+        var assemblyGroups = assemblyGroupManager.Load();
+
+        File.WriteAllText("Missing.txt", null);
 
         // Creates the DataAssemblies collection with the deserialized
         // documentation XML data.
-        DataRoot dataRoot = new DataRoot(docGenGroups);
-
-        File.WriteAllText("Missing.txt", null);
+        DataRoot dataRoot = new DataRoot(assemblyGroups);
 
         GenRoot genRoot = new GenRoot(dataRoot, outputPath);
         genRoot.GenRootPage();
