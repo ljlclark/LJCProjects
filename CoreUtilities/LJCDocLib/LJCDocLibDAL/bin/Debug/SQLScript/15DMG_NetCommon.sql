@@ -13,7 +13,7 @@ select
 from DocMethodGroup;
 */
 
-set @className = 'NetCommon';
+declare @className nvarchar(60) = 'NetCommon';
 exec sp_DMGAddUnique @className, 'Static'
   , null, 1;
 exec sp_DMGAddUnique @className, 'TextTransform'

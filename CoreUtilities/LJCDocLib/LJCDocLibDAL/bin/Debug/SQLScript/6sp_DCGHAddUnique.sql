@@ -19,7 +19,7 @@ BEGIN
 IF NOT EXISTS (select ID from DocClassGroupHeading
 where Name = @name)
   insert into DocClassGroupHeading
-    (Name, Description, Sequence)
-    values (@name, @description, @sequence);
+    (Name, Heading, Sequence)
+    values (@name, @heading, @sequence);
 END
 GO
