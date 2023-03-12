@@ -73,7 +73,6 @@
       <Name>LJCGenTextLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Doc\GenFileSpecs.xml" />
     <Content Include="Doc\GenTableFiles.xml" />

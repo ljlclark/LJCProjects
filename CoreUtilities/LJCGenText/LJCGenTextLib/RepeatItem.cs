@@ -62,6 +62,9 @@ namespace LJCGenTextLib
 
     /// <summary>Gets or sets the replacement values.</summary>
     public Replacements Replacements { get; set; }
+
+    /// <summary>Gets or sets the sub section.</summary>
+    public Section SubSection { get; set; }
   }
   #endregion
 }
