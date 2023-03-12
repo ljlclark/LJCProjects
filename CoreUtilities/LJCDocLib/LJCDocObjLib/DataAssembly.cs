@@ -111,12 +111,12 @@ namespace LJCDocObjLib
     {
       string prefix = "T:";
       List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers docMembers = new DocMembers();
-      docMembers.AddFromList(members);
-      docMembers.Sort();
+      DocMembers typeMembers = new DocMembers();
+      typeMembers.AddFromList(members);
+      typeMembers.Sort();
 
       DataTypes = new List<DataType>();
-      foreach (DocMember typeMember in docMembers)
+      foreach (DocMember typeMember in typeMembers)
       {
         DataTypes.Add(new DataType(this, typeMember, AssemblyReflect));
       }

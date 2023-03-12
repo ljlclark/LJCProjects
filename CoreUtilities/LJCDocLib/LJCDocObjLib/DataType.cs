@@ -59,14 +59,14 @@ namespace LJCDocObjLib
     {
       string prefix = $"F:{NamespaceValue}.{Name}";
       List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers docMembers = new DocMembers();
-      docMembers.AddFromList(members);
-      docMembers.Sort();
+      DocMembers fieldMembers = new DocMembers();
+      fieldMembers.AddFromList(members);
+      fieldMembers.Sort();
 
       DataFields = new List<DataField>();
-      foreach (DocMember fieldMember in docMembers)
+      foreach (DocMember fieldMember in fieldMembers)
       {
-        // Make sure prefix is not part of another type.
+        // Make sure prefix is not part of a contained type.
         string fullName = fieldMember.Name;
         string name = DataCommon.GetMemberName(fullName, prefix);
 
@@ -84,14 +84,14 @@ namespace LJCDocObjLib
     {
       string prefix = $"M:{NamespaceValue}.{Name}";
       List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers docMembers = new DocMembers();
-      docMembers.AddFromList(members);
-      docMembers.Sort();
+      DocMembers methodMembers = new DocMembers();
+      methodMembers.AddFromList(members);
+      methodMembers.Sort();
 
       DataMethods = new DataMethods();
-      foreach (DocMember methodMember in docMembers)
+      foreach (DocMember methodMember in methodMembers)
       {
-        // Make sure prefix is not part of another type.
+        // Make sure prefix is not part of a contained type.
         string fullName = methodMember.Name;
         string name = DataCommon.GetMemberName(fullName, prefix);
 
@@ -116,14 +116,14 @@ namespace LJCDocObjLib
     {
       string prefix = $"P:{NamespaceValue}.{Name}";
       List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers docMembers = new DocMembers();
-      docMembers.AddFromList(members);
-      docMembers.Sort();
+      DocMembers propertyMembers = new DocMembers();
+      propertyMembers.AddFromList(members);
+      propertyMembers.Sort();
 
       DataProperties = new DataProperties();
-      foreach (DocMember propertyMember in docMembers)
+      foreach (DocMember propertyMember in propertyMembers)
       {
-        // Make sure prefix is not part of another type.
+        // Make sure prefix is not part of contained type.
         string fullName = propertyMember.Name;
         string name = DataCommon.GetMemberName(fullName, prefix);
 
