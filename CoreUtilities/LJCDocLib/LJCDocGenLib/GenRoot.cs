@@ -133,7 +133,8 @@ namespace LJCDocGenLib
 
     // Creates the group section.
     // ToDo: Convert to generate from template?
-    private string CreateGroupSection(HTMLSection section, string description = null)
+    private string CreateGroupSection(HTMLSection section
+      , string heading = null)
     {
       StringBuilder builder = new StringBuilder(128);
       string retValue;
@@ -142,7 +143,7 @@ namespace LJCDocGenLib
       {
         case HTMLSection.Head:
           builder.AppendLine("    <tr class='ListTable'>");
-          builder.AppendLine($"      <td class='ListTable' colspan='2'>{description}</td>");
+          builder.AppendLine($"      <td class='ListTable' colspan='2'>{heading}</td>");
           builder.AppendLine("    </tr>");
           builder.AppendLine("    <tr>");
           builder.AppendLine("      <td colspan='2'>");

@@ -5,6 +5,7 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenTextLib
 {
@@ -177,133 +178,78 @@ namespace LJCGenTextLib
 
     #region Private Methods
 
-    // Generates each RepeatItem in a section.
-    /// <include path='items/GenSection/*' file='Doc/GenerateText.xml'/>
-    private void GenSection(Section section)
+    // Retrieves the active session replacement value.
+    // <include path='items/ActiveSessionReplacementValue/*' file='Doc/GenerateText.xml'/>
+    private string ActiveSessionReplacementValue(string replacementName)
     {
-      // #001 Next Statement - Add
-      mSectionHasData = true;
-      if (null == section || 0 == section.RepeatItems.Count)
+      string retValue = null;
+
+      RepeatItems repeatItems = ActiveSessionRepeateItems();
+      foreach (RepeatItem repeatItem in repeatItems)
       {
-        // Generate non-section lines.
-        GenRepeatItem(null);
+        Replacement replacement = repeatItem.Replacements.LJCSearchName(replacementName);
+        if (replacement != null)
+        {
+          retValue = replacement.Value;
+        }
+      }
+      return retValue;
+    }
+
+    // Retrieves the active session current repeat items.
+    // <include path='items/ActiveSessionRepeateItems/*' file='Doc/GenerateText.xml'/>
+    private RepeatItems ActiveSessionRepeateItems()
+    {
+      RepeatItems retValue = new RepeatItems();
+
+      if (ActiveSections != null && ActiveSections.Count > 0)
+      {
+        for (int index = ActiveSections.Count - 1; index >= 0; index--)
+        {
+          RepeatItem repeatItem = ActiveSections[index].CurrentRepeatItem;
+          if (repeatItem != null && repeatItem.Replacements != null)
+          {
+            retValue.Add(repeatItem);
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Get the Sections from the data file.
+    private Sections GetDataSections(string dataFileSpec)
+    {
+      string errorText = null;
+      Sections retValue;
+
+      if (string.IsNullOrWhiteSpace(dataFileSpec))
+      {
+        errorText += "Missing Data file specification.\r\n";
+        throw new ArgumentException(errorText);
       }
       else
       {
-        bool lastRepeateItem = false;
-        for (int index = 0; index < section.RepeatItems.Count; index++)
+        if (false == File.Exists(dataFileSpec))
         {
-          RepeatItem repeatItem = section.RepeatItems[index];
-          section.CurrentRepeatItem = repeatItem;
-          if (index == section.RepeatItems.Count - 1)
-          {
-            lastRepeateItem = true;
-          }
-          GenRepeatItem(section, lastRepeateItem);
-        }
-        PopSection();
-      }
-    }
-
-    // Generates the code for the current RepeatItem.
-    /// <include path='items/GenRepeatItem/*' file='Doc/GenerateText.xml'/>
-    private void GenRepeatItem(Section section, bool lastRepeatItem = false)
-    {
-      Directive directive;
-      Section newSection;
-
-      int startLineIndex = 0;
-
-      if (section != null)
-      {
-        // Start at the beginning of the section.
-        startLineIndex = section.StartLineIndex;
-      }
-      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length; lineIndex++)
-      {
-        string line = TemplateLines[lineIndex];
-        directive = GenCommon.GetDirective(line);
-        if (GenCommon.IsSectionDirective(directive))
-        {
-          // Handle directive and do not generate line.
-          if (GenCommon.IsBeginSection(directive))
-          {
-            // Push section to ActiveSections with the section starting index.
-            newSection = PushSection(directive, lineIndex);
-            // #001 Begin - Add
-            if (null == newSection
-              || 0 == newSection.RepeatItems.Count)
-            {
-              mSectionHasData = false;
-            }
-            else
-            {
-              mSectionHasData = true;
-              // #001 End - Add
-              GenSection(newSection);
-
-              // Set the index to continue at the end of the processed section.
-              lineIndex = SectionEndLineIndex;
-            }
-          }
-          if (GenCommon.IsEndSection(directive))
-          {
-            // Continue processing if the section does not have data.
-            // #001 Next Statement - Add
-            if (mSectionHasData)
-            {
-              // Save the section ending line and stop processing lines for
-              // the current Repeatitem.
-              SectionEndLineIndex = lineIndex;
-              lineIndex = TemplateLines.Length;
-            }
-            // #001 Next Statement - Add
-            mSectionHasData = true;
-          }
+          errorText += $"Data file '{dataFileSpec}' was not found.\r\n";
+          throw new FileNotFoundException(errorText);
         }
         else
         {
-          if (section != null)
+          retValue = NetCommon.XmlDeserialize(typeof(Sections)
+            , dataFileSpec) as Sections;
+          if (null == retValue || 0 == retValue.Count)
           {
-            if (directive != null)
-            {
-              // #002 Begin - Add
-              if (GenCommon.IsValue(directive))
-              {
-                line = null;
-              }
-              // #002 End - Add
-              if (GenCommon.IsBeginIf(directive))
-              {
-                GenIfBlock(section, directive, ref lineIndex, lastRepeatItem);
-                line = null;
-              }
-            }
-            else
-            {
-              line = ReplaceValues(line);
-              if (section.IsList && false == lastRepeatItem)
-              {
-                line += ",";
-              }
-            }
-          }
-
-          // #001 Next Statement - Change
-          if (mSectionHasData
-            && line != null)
-          {
-            if (false == line.Trim().StartsWith("<!--X-"))
-            {
-              OutLines.Add(line);
-            }
+            errorText += "Unable to read replacement data or no 'Sections' are defined.\r\n";
+            throw new InvalidOperationException(errorText);
           }
         }
       }
+      return retValue;
     }
 
     // Generate the If Block statements.
-    /// <include path='items/GenIfBegin/*' file='Doc/GenerateText.xml'/>
+    // <include path='items/GenIfBegin/*' file='Doc/GenerateText.xml'/>
     private void GenIfBlock(Section section, Directive directive, ref int lineIndex
       , bool lastRepeatItem)
     {
@@ -369,8 +315,167 @@ namespace LJCGenTextLib
       }
     }
 
+    // Generates the code for the current RepeatItem.
+    // <include path='items/GenRepeatItem/*' file='Doc/GenerateText.xml'/>
+    private void GenRepeatItem(Section section, bool lastRepeatItem = false)
+    {
+      Directive directive;
+      //Section newSection;
+
+      // Start at beginning of template if not in a section.
+      int startLineIndex = 0;
+
+      if (section != null)
+      {
+        // Start at the beginning of the section.
+        startLineIndex = section.StartLineIndex;
+      }
+      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length; lineIndex++)
+      {
+        string line = TemplateLines[lineIndex];
+
+        directive = GenCommon.GetDirective(line);
+
+        // May change lineIndex to end of section or template.
+        // May change mSectionHasData.
+        if (false == SectionDirective(directive, ref lineIndex))
+        {
+          if (section != null)
+          {
+            // Sets line to null if other directive.
+            // Changes lineIndex for If directive.
+            if (false == OtherDirective(section, directive, ref line, lastRepeatItem
+              , ref lineIndex))
+            {
+              line = ReplaceValues(line);
+              if (section.IsList && false == lastRepeatItem)
+              {
+                line += ",";
+              }
+            }
+          }
+
+          // #001 Next Statement - Change
+          if (mSectionHasData
+            && line != null)
+          {
+            // Not Disappearing comment.
+            if (false == line.Trim().StartsWith("<!--X-"))
+            {
+              OutLines.Add(line);
+            }
+          }
+        }
+      }
+    }
+
+    // Generates each RepeatItem in a section.
+    // <include path='items/GenSection/*' file='Doc/GenerateText.xml'/>
+    private void GenSection(Section section)
+    {
+      // #001 Next Statement - Add
+      mSectionHasData = true;
+      if (null == section || 0 == section.RepeatItems.Count)
+      {
+        // Generate non-section lines.
+        GenRepeatItem(null);
+      }
+      else
+      {
+        bool lastRepeateItem = false;
+        for (int index = 0; index < section.RepeatItems.Count; index++)
+        {
+          RepeatItem repeatItem = section.RepeatItems[index];
+          section.CurrentRepeatItem = repeatItem;
+          if (index == section.RepeatItems.Count - 1)
+          {
+            lastRepeateItem = true;
+          }
+          GenRepeatItem(section, lastRepeateItem);
+        }
+        PopSection();
+      }
+    }
+
+    // Create the Out filespec from the dataFileSpec and outputFileSpec values.
+    private string GetOutFileSpec(string dataFileSpec, string outputFileSpec)
+    {
+      string retValue = null;
+
+      if (false == string.IsNullOrWhiteSpace(outputFileSpec))
+      {
+        outputFileSpec = outputFileSpec.Trim();
+        if (outputFileSpec.Contains("*."))
+        {
+          string dataFileName = Path.GetFileNameWithoutExtension(dataFileSpec);
+          retValue = outputFileSpec.Replace("*", dataFileName);
+        }
+        else
+        {
+          retValue = outputFileSpec;
+        }
+      }
+      return retValue;
+    }
+
+    // Handle other directives.
+    private bool OtherDirective(Section section, Directive directive
+      , ref string line, bool lastRepeatItem, ref int lineIndex)
+    {
+      bool retValue = false;
+
+      if (directive != null)
+      {
+        // #002 Begin - Add
+        if (GenCommon.IsValue(directive))
+        {
+          retValue = true;
+          line = null;
+        }
+        // #002 End - Add
+        if (GenCommon.IsBeginIf(directive))
+        {
+          retValue = true;
+          GenIfBlock(section, directive, ref lineIndex, lastRepeatItem);
+          line = null;
+        }
+      }
+      return retValue;
+    }
+
+    // Pops the completed Section off of the Active stack.
+    // <include path='items/PopSection/*' file='Doc/GenerateText.xml'/>
+    private void PopSection()
+    {
+      if (ActiveSections != null && ActiveSections.Count > 0)
+      {
+        ActiveSections.RemoveAt(ActiveSections.Count - 1);
+      }
+    }
+
+    // Pushes the current Section object on the Active stack.
+    // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
+    private Section PushSection(Directive directive, int lineIndex)
+    {
+      Section retValue = Sections.LJCSearchName(directive.Name);
+      if (retValue != null
+        && retValue.RepeatItems != null
+        && retValue.RepeatItems.Count > 0)
+      {
+        //Section activeSection = ActiveSections.LJCSearchName(directive.Name);
+        if (directive.Modifier != null
+          && "list" == directive.Modifier.ToLower())
+        {
+          retValue.IsList = true;
+        }
+        retValue.StartLineIndex = lineIndex + 1;
+        ActiveSections.Add(retValue);
+      }
+      return retValue;
+    }
+
     // Replaces the values for the active RepeateItems.
-    /// <include path='items/ReplaceValues/*' file='Doc/GenerateText.xml'/>
+    // <include path='items/ReplaceValues/*' file='Doc/GenerateText.xml'/>
     private string ReplaceValues(string line)
     {
       GenTokens genTokens = new GenTokens();
@@ -399,123 +504,49 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Retrieves the active session replacement value.
-    /// <include path='items/ActiveSessionReplacementValue/*' file='Doc/GenerateText.xml'/>
-    private string ActiveSessionReplacementValue(string replacementName)
+    // Handle Section Directives
+    private bool SectionDirective(Directive directive, ref int lineIndex)
     {
-      string retValue = null;
+      bool retValue = false;
 
-      RepeatItems repeatItems = ActiveSessionRepeateItems();
-      foreach (RepeatItem repeatItem in repeatItems)
+      if (GenCommon.IsSectionDirective(directive))
       {
-        Replacement replacement = repeatItem.Replacements.LJCSearchName(replacementName);
-        if (replacement != null)
-        {
-          retValue = replacement.Value;
-        }
-      }
-      return retValue;
-    }
+        retValue = true;
 
-    // Retrieves the active session current repeat items.
-    /// <include path='items/ActiveSessionRepeateItems/*' file='Doc/GenerateText.xml'/>
-    private RepeatItems ActiveSessionRepeateItems()
-    {
-      RepeatItems retValue = new RepeatItems();
-
-      if (ActiveSections != null && ActiveSections.Count > 0)
-      {
-        for (int index = ActiveSections.Count - 1; index >= 0; index--)
+        // Handle directive and do not generate line.
+        if (GenCommon.IsBeginSection(directive))
         {
-          RepeatItem repeatItem = ActiveSections[index].CurrentRepeatItem;
-          if (repeatItem != null && repeatItem.Replacements != null)
+          // Push section to ActiveSections with the section starting index.
+          var newSection = PushSection(directive, lineIndex);
+          // #001 Begin - Add
+          if (null == newSection
+            || 0 == newSection.RepeatItems.Count)
           {
-            retValue.Add(repeatItem);
+            mSectionHasData = false;
+          }
+          else
+          {
+            mSectionHasData = true;
+            // #001 End - Add
+            GenSection(newSection);
+
+            // Set the index to continue at the end of the processed section.
+            lineIndex = SectionEndLineIndex;
           }
         }
-      }
-      return retValue;
-    }
-
-    // Pushes the current Section object on the Active stack.
-    /// <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
-    private Section PushSection(Directive directive, int lineIndex)
-    {
-      Section retValue = Sections.LJCSearchName(directive.Name);
-      if (retValue != null
-        && retValue.RepeatItems != null
-        && retValue.RepeatItems.Count > 0)
-      {
-        //Section activeSection = ActiveSections.LJCSearchName(directive.Name);
-        if (directive.Modifier != null
-          && "list" == directive.Modifier.ToLower())
+        if (GenCommon.IsEndSection(directive))
         {
-          retValue.IsList = true;
-        }
-        retValue.StartLineIndex = lineIndex + 1;
-        ActiveSections.Add(retValue);
-      }
-      return retValue;
-    }
-
-    // Pops the completed Section off of the Active stack.
-    /// <include path='items/PopSection/*' file='Doc/GenerateText.xml'/>
-    private void PopSection()
-    {
-      if (ActiveSections != null && ActiveSections.Count > 0)
-      {
-        ActiveSections.RemoveAt(ActiveSections.Count - 1);
-      }
-    }
-
-    // Get the Sections from the data file.
-    private Sections GetDataSections(string dataFileSpec)
-    {
-      string errorText = null;
-      Sections retValue;
-
-      if (string.IsNullOrWhiteSpace(dataFileSpec))
-      {
-        errorText += "Missing Data file specification.\r\n";
-        throw new ArgumentException(errorText);
-      }
-      else
-      {
-        if (false == File.Exists(dataFileSpec))
-        {
-          errorText += $"Data file '{dataFileSpec}' was not found.\r\n";
-          throw new FileNotFoundException(errorText);
-        }
-        else
-        {
-          retValue = NetCommon.XmlDeserialize(typeof(Sections)
-            , dataFileSpec) as Sections;
-          if (null == retValue || 0 == retValue.Count)
+          // Continue processing if the section does not have data.
+          // #001 Next Statement - Add
+          if (mSectionHasData)
           {
-            errorText += "Unable to read replacement data or no 'Sections' are defined.\r\n";
-            throw new InvalidOperationException(errorText);
+            // Save the section ending line and stop processing lines for
+            // the current Repeatitem.
+            SectionEndLineIndex = lineIndex;
+            lineIndex = TemplateLines.Length;
           }
-        }
-      }
-      return retValue;
-    }
-
-    // Create the Out filespec from the dataFileSpec and outputFileSpec values.
-    private string GetOutFileSpec(string dataFileSpec, string outputFileSpec)
-    {
-      string retValue = null;
-
-      if (false == string.IsNullOrWhiteSpace(outputFileSpec))
-      {
-        outputFileSpec = outputFileSpec.Trim();
-        if (outputFileSpec.Contains("*."))
-        {
-          string dataFileName = Path.GetFileNameWithoutExtension(dataFileSpec);
-          retValue = outputFileSpec.Replace("*", dataFileName);
-        }
-        else
-        {
-          retValue = outputFileSpec;
+          // #001 Next Statement - Add
+          mSectionHasData = true;
         }
       }
       return retValue;

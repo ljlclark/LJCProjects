@@ -90,15 +90,23 @@
     <Compile Include="ValuesDocGen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\SQLScript\2DocAssemblyGroup.sql" />
-    <Content Include="bin\Debug\SQLScript\3DocAssembly.sql" />
+    <Content Include="bin\Debug\SQLScript\10sp_DCAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\12sp_DMGHAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\14sp_DMGAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\15DMG_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\16sp_DMAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\17DM_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\2sp_DAGAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\1DocGenTables.sql" />
-    <Content Include="bin\Debug\SQLScript\5DocClassGroup.sql" />
-    <Content Include="bin\Debug\SQLScript\4DocClassGroupHeading.sql" />
-    <Content Include="bin\Debug\SQLScript\6DocClass.sql" />
-    <Content Include="bin\Debug\SQLScript\7DocMethodGroupHeading.sql" />
-    <Content Include="bin\Debug\SQLScript\8DMG_NetCommon.sql" />
-    <Content Include="bin\Debug\SQLScript\9DM_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\3DocAssemblyGroup.sql" />
+    <Content Include="bin\Debug\SQLScript\4sp_DAAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\5DocAssembly.sql" />
+    <Content Include="bin\Debug\SQLScript\7DocClassGroupHeading.sql" />
+    <Content Include="bin\Debug\SQLScript\6sp_DCGHAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\8sp_DCGAddUnique.sql" />
+    <Content Include="bin\Debug\SQLScript\9DocClassGroup.sql" />
+    <Content Include="bin\Debug\SQLScript\11DocClass.sql" />
+    <Content Include="bin\Debug\SQLScript\13DocMethodGroupHeading.sql" />
     <Content Include="Doc\DocGenAssemblies.xml" />
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />

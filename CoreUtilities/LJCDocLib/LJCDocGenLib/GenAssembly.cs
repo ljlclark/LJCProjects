@@ -24,8 +24,8 @@ namespace LJCDocGenLib
       if (NetString.HasValue(dataAssembly.XmlFileSpec))
       {
         AssemblyReflect = DataAssembly.AssemblyReflect;
-        // *** Next Statement *** Change - 5/31
-        HTMLFolderName = Path.Combine(genRoot.HTMLFolderName, $@"HTML\{DataAssembly.Name}");
+        HTMLFolderName = Path.Combine(genRoot.HTMLFolderName
+          , $@"HTML\{DataAssembly.Name}");
         HTMLFileName = $"{DataAssembly.Name}.html";
         HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
       }
@@ -36,12 +36,14 @@ namespace LJCDocGenLib
 
     // Creates an HTML page that lists the classes/types in an assembly.
     /// <include path='items/GenAssemblyPage/*' file='Doc/GenAssembly.xml'/>
-    public void GenAssemblyPage(DataAssembly dataAssembly, string[] templateLines)
+    public void GenAssemblyPage(DataAssembly dataAssembly
+      , string[] templateLines)
     {
       if (dataAssembly.DataTypes != null)
       {
         Console.WriteLine($"Generating Assembly Page: {HTMLFileSpec}");
-        CreateAssemblyXml createAssemblyXml = new CreateAssemblyXml(dataAssembly);
+        CreateAssemblyXml createAssemblyXml
+          = new CreateAssemblyXml(dataAssembly);
         string dataFileSpec = $"XMLFiles\\{dataAssembly.Name}.xml";
         string dataXml = createAssemblyXml.GetXmlData();
         if (false == NetString.HasValue(dataXml))
@@ -51,10 +53,10 @@ namespace LJCDocGenLib
         else
         {
           // Testing
-          //if ("LJCDocGenLib" == dataAssembly.Name)
-          //{
-          //	File.WriteAllText(dataFileSpec, dataXml);
-          //}
+          if ("LJCNetCommon" == dataAssembly.Name)
+          {
+            File.WriteAllText(dataFileSpec, dataXml);
+          }
 
           Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
             , dataXml) as Sections;

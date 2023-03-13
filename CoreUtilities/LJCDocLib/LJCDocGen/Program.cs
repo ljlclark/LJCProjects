@@ -51,7 +51,7 @@ namespace LJCDocGen
         File.WriteAllText("Missing.txt", null);
 
         // Creates the DataAssemblies collection with the deserialized
-        // documentation XML data.
+        // "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
 
         GenRoot genRoot = new GenRoot(dataRoot, outputPath);

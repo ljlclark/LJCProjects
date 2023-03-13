@@ -649,7 +649,15 @@ namespace LJCNetCommon
             serializer = new XmlSerializer(type);
           }
           fileStream = new FileStream(fileSpec, FileMode.Open);
-          retValue = serializer.Deserialize(fileStream);
+          try
+          {
+            retValue = serializer.Deserialize(fileStream);
+          }
+          catch (Exception e)
+          {
+            errorText = e.Message;
+            throw new Exception(errorText);
+          }
         }
         finally
         {

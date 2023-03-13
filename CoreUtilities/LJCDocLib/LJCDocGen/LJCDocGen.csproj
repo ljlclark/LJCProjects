@@ -106,12 +106,14 @@
     <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\LJCCodeDoc.xml" />
     <Content Include="bin\Debug\RootHead.html" />
-    <Content Include="bin\Debug\Templates\AssemblyTemplate.htm" />
-    <Content Include="bin\Debug\Templates\FieldTemplate.htm" />
-    <Content Include="bin\Debug\Templates\RootTemplate.htm" />
-    <Content Include="bin\Debug\Templates\MethodTemplate.htm" />
-    <Content Include="bin\Debug\Templates\PropertyTemplate.htm" />
-    <Content Include="bin\Debug\Templates\TypeTemplate.htm" />
+    <Content Include="bin\Debug\Templates\AssemblyTemplate.html" />
+    <Content Include="bin\Debug\Templates\FieldTemplate.html" />
+    <Content Include="bin\Debug\Templates\MethodTemplate.html" />
+    <Content Include="bin\Debug\Templates\PropertyTemplate.html" />
+    <Content Include="bin\Debug\Templates\RootTemplate.html" />
+    <Content Include="bin\Debug\Templates\TypeTemplate.html" />
+    <Content Include="bin\Debug\XMLFiles\GenAssembly.xml" />
+    <Content Include="bin\Debug\XMLFiles\LJCNetCommonTest.xml" />
     <Content Include="Doc\ProjectDocGen.xml" />
   </ItemGroup>
   <ItemGroup>
