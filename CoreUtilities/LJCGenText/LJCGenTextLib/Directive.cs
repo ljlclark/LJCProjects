@@ -40,7 +40,7 @@ namespace LJCGenTextLib
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      return Name;
+      return $"{ID},{Name}";
     }
     #endregion
 

@@ -13,10 +13,6 @@ namespace LJCGenTextLib
   /// <include path='items/GenerateText/*' file='Doc/GenerateText.xml'/>
   public class GenerateText
   {
-    // #001 - Allow section to work even if the data file has no data for that section.
-    // #002 - Handle the #Value directive.
-    // #003 - Modify to work with HTML.
-
     #region Constructors
 
     //Initializes an object instance.
@@ -216,6 +212,40 @@ namespace LJCGenTextLib
       return retValue;
     }
 
+    // Adds the current Section object to the Active List.
+    // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
+    private Section AddActiveSection(Section section, Directive directive
+      , int lineIndex)
+    {
+      Section retValue = Sections.LJCSearchName(directive.Name);
+
+      // *** Begin *** Add SubSection
+      if (null == retValue)
+      {
+        Section subSection = section.CurrentRepeatItem.SubSection;
+        if (subSection != null)
+        {
+          retValue = subSection;
+        }
+      }
+      // *** Begin *** Add SubSection
+
+      if (retValue != null
+        && retValue.RepeatItems != null
+        && retValue.RepeatItems.Count > 0)
+      {
+        //Section activeSection = ActiveSections.LJCSearchName(directive.Name);
+        if (directive.Modifier != null
+          && "list" == directive.Modifier.ToLower())
+        {
+          retValue.IsList = true;
+        }
+        retValue.StartLineIndex = lineIndex + 1;
+        ActiveSections.Add(retValue);
+      }
+      return retValue;
+    }
+
     // Get the Sections from the data file.
     private Sections GetDataSections(string dataFileSpec)
     {
@@ -250,8 +280,8 @@ namespace LJCGenTextLib
 
     // Generate the If Block statements.
     // <include path='items/GenIfBegin/*' file='Doc/GenerateText.xml'/>
-    private void GenIfBlock(Section section, Directive directive, ref int lineIndex
-      , bool lastRepeatItem)
+    private void GenIfBlock(Section section, Directive directive
+      , ref int lineIndex, bool lastRepeatItem)
     {
       lineIndex++;
       bool isValid = false;
@@ -288,7 +318,6 @@ namespace LJCGenTextLib
           }
           if (GenCommon.IsElseIf(ifDirective))
           {
-            // #001 Next Statement - Add
             if (mSectionHasData)
             {
               isValid = !isValid;
@@ -330,22 +359,20 @@ namespace LJCGenTextLib
         // Start at the beginning of the section.
         startLineIndex = section.StartLineIndex;
       }
-      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length; lineIndex++)
+      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
+        lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-
         directive = GenCommon.GetDirective(line);
 
         // May change lineIndex to end of section or template.
-        // May change mSectionHasData.
-        if (false == SectionDirective(directive, ref lineIndex))
+        if (false == SectionDirective(section, directive, ref lineIndex))
         {
           if (section != null)
           {
             // Sets line to null if other directive.
-            // Changes lineIndex for If directive.
-            if (false == OtherDirective(section, directive, ref line, lastRepeatItem
-              , ref lineIndex))
+            if (false == OtherDirective(section, directive, ref line
+              , lastRepeatItem, ref lineIndex))
             {
               line = ReplaceValues(line);
               if (section.IsList && false == lastRepeatItem)
@@ -354,16 +381,11 @@ namespace LJCGenTextLib
               }
             }
           }
-
-          // #001 Next Statement - Change
           if (mSectionHasData
-            && line != null)
+            && line != null
+            && false == line.Trim().StartsWith("<!--X-"))
           {
-            // Not Disappearing comment.
-            if (false == line.Trim().StartsWith("<!--X-"))
-            {
-              OutLines.Add(line);
-            }
+            OutLines.Add(line);
           }
         }
       }
@@ -373,7 +395,6 @@ namespace LJCGenTextLib
     // <include path='items/GenSection/*' file='Doc/GenerateText.xml'/>
     private void GenSection(Section section)
     {
-      // #001 Next Statement - Add
       mSectionHasData = true;
       if (null == section || 0 == section.RepeatItems.Count)
       {
@@ -393,7 +414,7 @@ namespace LJCGenTextLib
           }
           GenRepeatItem(section, lastRepeateItem);
         }
-        PopSection();
+        RemoveActiveSection();
       }
     }
 
@@ -426,13 +447,11 @@ namespace LJCGenTextLib
 
       if (directive != null)
       {
-        // #002 Begin - Add
         if (GenCommon.IsValue(directive))
         {
           retValue = true;
           line = null;
         }
-        // #002 End - Add
         if (GenCommon.IsBeginIf(directive))
         {
           retValue = true;
@@ -443,35 +462,14 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Pops the completed Section off of the Active stack.
+    // Removes the completed Section from the Active list.
     // <include path='items/PopSection/*' file='Doc/GenerateText.xml'/>
-    private void PopSection()
+    private void RemoveActiveSection()
     {
       if (ActiveSections != null && ActiveSections.Count > 0)
       {
         ActiveSections.RemoveAt(ActiveSections.Count - 1);
       }
-    }
-
-    // Pushes the current Section object on the Active stack.
-    // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
-    private Section PushSection(Directive directive, int lineIndex)
-    {
-      Section retValue = Sections.LJCSearchName(directive.Name);
-      if (retValue != null
-        && retValue.RepeatItems != null
-        && retValue.RepeatItems.Count > 0)
-      {
-        //Section activeSection = ActiveSections.LJCSearchName(directive.Name);
-        if (directive.Modifier != null
-          && "list" == directive.Modifier.ToLower())
-        {
-          retValue.IsList = true;
-        }
-        retValue.StartLineIndex = lineIndex + 1;
-        ActiveSections.Add(retValue);
-      }
-      return retValue;
     }
 
     // Replaces the values for the active RepeateItems.
@@ -505,7 +503,8 @@ namespace LJCGenTextLib
     }
 
     // Handle Section Directives
-    private bool SectionDirective(Directive directive, ref int lineIndex)
+    private bool SectionDirective(Section section, Directive directive
+      , ref int lineIndex)
     {
       bool retValue = false;
 
@@ -517,18 +516,16 @@ namespace LJCGenTextLib
         if (GenCommon.IsBeginSection(directive))
         {
           // Push section to ActiveSections with the section starting index.
-          var newSection = PushSection(directive, lineIndex);
-          // #001 Begin - Add
-          if (null == newSection
-            || 0 == newSection.RepeatItems.Count)
+          var addSection = AddActiveSection(section, directive, lineIndex);
+          if (null == addSection
+            || 0 == addSection.RepeatItems.Count)
           {
             mSectionHasData = false;
           }
           else
           {
             mSectionHasData = true;
-            // #001 End - Add
-            GenSection(newSection);
+            GenSection(addSection);
 
             // Set the index to continue at the end of the processed section.
             lineIndex = SectionEndLineIndex;
@@ -537,7 +534,6 @@ namespace LJCGenTextLib
         if (GenCommon.IsEndSection(directive))
         {
           // Continue processing if the section does not have data.
-          // #001 Next Statement - Add
           if (mSectionHasData)
           {
             // Save the section ending line and stop processing lines for
@@ -545,7 +541,6 @@ namespace LJCGenTextLib
             SectionEndLineIndex = lineIndex;
             lineIndex = TemplateLines.Length;
           }
-          // #001 Next Statement - Add
           mSectionHasData = true;
         }
       }
@@ -576,7 +571,6 @@ namespace LJCGenTextLib
 
     #region Class Data
 
-    // #001 Next Statement - Add
     private bool mSectionHasData;
     #endregion
   }

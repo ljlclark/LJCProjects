@@ -60,6 +60,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\AssemblyTemplateNew.html" />
     <Content Include="bin\Debug\LJCNetCommonTest.xml" />
     <Content Include="Doc\Program.xml" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--X------------------------------------->
 <!-- #SectionBegin Main -->
 <!-- #Value _AssemblyName_ -->
@@ -49,6 +49,50 @@
       <!-- #IfBegin _HasLinks_ true -->
     </div>
     <!-- #IfEnd _HasLinks_ -->
+    <!--X------------------------------------->
+    <!-- #SectionBegin ClassGroups -->
+    <!-- #Value _Heading_ -->
+    <br />
+    <div id='Title'>_Heading_<br></div>
+    <!--X------------------------------------->
+    <!-- #IfBegin _Image_ NotNull -->
+    <table>
+      <tr>
+        <td>
+          <!-- #IfEnd Image -->
+          <!--X------------------------------------->
+          <table class='ListTable'>
+            <!--X------------------------------------->
+            <!-- #SectionBegin SubSection -->
+            <!-- #Value _HTMLFileName_ -->
+            <!-- #Value _Name_ -->
+            <!-- #Value _Summary_ -->
+            <tr>
+              <td class='ListTable' width='25%'>
+                <a href='_HTMLFileName_'>_Name_</a>
+              </td>
+              <!--X------------------------------------->
+              <!-- #IfBegin _Summary_ NotNull -->
+              <td class='ListTable'>_Summary_</td>
+              <!-- #IfElse -->
+              <td class='ListTableMissing'>Missing Summary</td>
+              <!-- #IfEnd _Summary_ -->
+              <!--X------------------------------------->
+            </tr>
+            <!-- #SectionEnd SubSection -->
+            <!--X------------------------------------->
+          </table>
+          <!--X------------------------------------->
+          <!-- #IfBegin _Image_ NotNull -->
+        </td>
+        <td>
+          <img src='_Image_' height='350' />
+        </td>
+      </tr>
+    </table>
+    <!-- #IfEnd Image -->
+    <!-- #SectionEnd ClassGroups -->
+    <!--X------------------------------------->
     <!--X------------------------------------->
     <br />
     <div id='Title'>Classes<br></div>
