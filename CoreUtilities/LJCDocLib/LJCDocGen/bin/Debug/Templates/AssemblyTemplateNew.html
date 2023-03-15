@@ -2,10 +2,12 @@
 <!--X------------------------------------->
 <!-- #SectionBegin Main -->
 <!-- #Value _AssemblyName_ -->
-<!-- #Value _Image_ -->
-<!-- #Value _HasLinks_ -->
 <!-- #Value _ClassCount_ -->
+<!-- #Value _ClassListHeading_ -->
 <!-- #Value _Copyright_ -->
+<!-- #Value _GenDate_ -->
+<!-- #Value _HasLinks_ -->
+<!-- #Value _Image_ -->
 <!-- _AssemblyName_.html -->
 <!-- Generated _GenDate_ -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -39,6 +41,7 @@
     <br />
     <div class='Text'>
       <!-- #IfEnd _HasLinks_ -->
+      <!--X------------------------------------->
       <!-- #SectionBegin Links -->
       <!-- #Value _LinkName_ -->
       <!-- #Value _LinkText_ -->
@@ -46,21 +49,20 @@
       <a href='_LinkName_' target='_blank'>_LinkText_</a>
       <!-- #IfEnd _HasLinks_ -->
       <!-- #SectionEnd Links -->
+      <!--X------------------------------------->
       <!-- #IfBegin _HasLinks_ true -->
     </div>
     <!-- #IfEnd _HasLinks_ -->
-    <!--X------------------------------------->
-    <!-- #SectionBegin ClassGroups -->
-    <!-- #Value _Heading_ -->
-    <br />
-    <div id='Title'>_Heading_<br></div>
-    <!--X------------------------------------->
     <!-- #IfBegin _Image_ NotNull -->
     <table>
       <tr>
         <td>
           <!-- #IfEnd Image -->
           <!--X------------------------------------->
+          <!-- #SectionBegin ClassGroups -->
+          <!-- #Value _Heading_ -->
+          <br />
+          <div id='Title'>_Heading_<br></div>
           <table class='ListTable'>
             <!--X------------------------------------->
             <!-- #SectionBegin SubSection -->
@@ -71,37 +73,19 @@
               <td class='ListTable' width='25%'>
                 <a href='_HTMLFileName_'>_Name_</a>
               </td>
-              <!--X------------------------------------->
               <!-- #IfBegin _Summary_ NotNull -->
               <td class='ListTable'>_Summary_</td>
               <!-- #IfElse -->
               <td class='ListTableMissing'>Missing Summary</td>
               <!-- #IfEnd _Summary_ -->
-              <!--X------------------------------------->
             </tr>
             <!-- #SectionEnd SubSection -->
             <!--X------------------------------------->
           </table>
+          <!-- #SectionEnd ClassGroups -->
           <!--X------------------------------------->
-          <!-- #IfBegin _Image_ NotNull -->
-        </td>
-        <td>
-          <img src='_Image_' height='350' />
-        </td>
-      </tr>
-    </table>
-    <!-- #IfEnd Image -->
-    <!-- #SectionEnd ClassGroups -->
-    <!--X------------------------------------->
-    <!--X------------------------------------->
-    <br />
-    <div id='Title'>Classes<br></div>
-    <!--X------------------------------------->
-    <!-- #IfBegin _Image_ NotNull -->
-    <table>
-      <tr>
-        <td>
-          <!-- #IfEnd Image -->
+          <br />
+          <div id='Title'>_ClassListHeading_<br></div>
           <table class='ListTable'>
             <!--X------------------------------------->
             <!-- #SectionBegin ClassList -->
@@ -112,13 +96,11 @@
               <td class='ListTable' width='25%'>
                 <a href='_HTMLFileName_'>_Name_</a>
               </td>
-              <!--X------------------------------------->
               <!-- #IfBegin _Summary_ NotNull -->
               <td class='ListTable'>_Summary_</td>
               <!-- #IfElse -->
               <td class='ListTableMissing'>Missing Summary</td>
               <!-- #IfEnd _Summary_ -->
-              <!--X------------------------------------->
             </tr>
             <!-- #SectionEnd ClassList -->
             <!--X------------------------------------->
@@ -131,7 +113,6 @@
       </tr>
     </table>
     <!-- #IfEnd Image -->
-    <!--X------------------------------------->
     <div class='Text'>_ClassCount_ Types</div>
     <br />
     <div class="SmallText">_Copyright_</div>
