@@ -5,7 +5,6 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenTextLib
 {
@@ -310,13 +309,13 @@ namespace LJCGenTextLib
         Directive ifDirective = GenCommon.GetDirective(line);
         if (ifDirective != null)
         {
-          if (GenCommon.IsEndIf(ifDirective))
+          if (GenCommon.IsIfEnd(ifDirective))
           {
             isValid = false;
             lineIndex = ifIndex++;
             ifIndex = TemplateLines.Length;
           }
-          if (GenCommon.IsElseIf(ifDirective))
+          if (GenCommon.IsIfElse(ifDirective))
           {
             if (mSectionHasData)
             {
@@ -452,7 +451,7 @@ namespace LJCGenTextLib
           retValue = true;
           line = null;
         }
-        if (GenCommon.IsBeginIf(directive))
+        if (GenCommon.IsIfBegin(directive))
         {
           retValue = true;
           GenIfBlock(section, directive, ref lineIndex, lastRepeatItem);

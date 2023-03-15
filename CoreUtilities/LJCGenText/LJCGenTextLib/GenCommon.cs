@@ -126,7 +126,7 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfBegin directive.
-    internal static bool IsBeginIf(Directive directive)
+    internal static bool IsIfBegin(Directive directive)
     {
       bool retValue = false;
 
@@ -139,7 +139,7 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfElse directive.
-    internal static bool IsElseIf(Directive directive)
+    internal static bool IsIfElse(Directive directive)
     {
       bool retValue = false;
 
@@ -152,7 +152,7 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfEnd directive.
-    internal static bool IsEndIf(Directive directive)
+    internal static bool IsIfEnd(Directive directive)
     {
       bool retValue = false;
 
