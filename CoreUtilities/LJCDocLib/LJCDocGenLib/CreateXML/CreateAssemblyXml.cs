@@ -65,6 +65,9 @@ namespace LJCDocGenLib
       string typeCount = DataAssembly.DataTypes.Count.ToString();
       replacements.Add("_ClassCount_", typeCount);
 
+      // *** Next Statement *** Add - 3/16/23
+      replacements.Add("_ClassListHeading_", "Classes");
+
       var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
       copyRight += "Licensed under the MIT License.";
       replacements.Add("_Copyright_", copyRight);

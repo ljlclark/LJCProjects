@@ -107,6 +107,7 @@
     <Content Include="bin\Debug\LJCCodeDoc.xml" />
     <Content Include="bin\Debug\RootHead.html" />
     <Content Include="bin\Debug\Templates\AssemblyTemplate.html" />
+    <Content Include="bin\Debug\Templates\AssemblyTemplateNew.html" />
     <Content Include="bin\Debug\Templates\FieldTemplate.html" />
     <Content Include="bin\Debug\Templates\MethodTemplate.html" />
     <Content Include="bin\Debug\Templates\PropertyTemplate.html" />

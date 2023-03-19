@@ -67,15 +67,19 @@ namespace LJCGenTextLib
 
     #region Data Properties
 
+    /// <summary>Gets or sets the HasData indicator.</summary>
+    [XmlIgnore()]
+    public bool HasData { get; set; }
+
+    /// <summary>Gets or sets the IsList indicator.</summary>
+    [XmlIgnore()]
+    public bool IsList { get; set; }
+
     /// <summary>Gets or sets the section name.</summary>
     public string Name { get; set; }
 
     /// <summary>Gets or sets the repeate items.</summary>
     public RepeatItems RepeatItems { get; set; }
-
-    /// <summary>Gets or sets the IsList indicator.</summary>
-    [XmlIgnore()]
-    public bool IsList { get; set; }
     #endregion
 
     #region Class Properties
