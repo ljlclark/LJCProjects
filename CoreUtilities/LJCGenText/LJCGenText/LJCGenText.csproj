@@ -62,6 +62,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\AssemblyTemplateNew.html" />
     <Content Include="bin\Debug\LJCNetCommonTest.xml" />
+    <Content Include="bin\Debug\LJCNetCommonTestNew.xml" />
     <Content Include="Doc\Program.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,8 +5,6 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenTextLib
 {
@@ -181,7 +179,7 @@ namespace LJCGenTextLib
     {
       string retValue = null;
 
-      RepeatItems repeatItems = ActiveSessionsRepeateItems();
+      RepeatItems repeatItems = ActiveSessionsRepeatItems();
       foreach (RepeatItem repeatItem in repeatItems)
       {
         Replacement replacement = repeatItem.Replacements.LJCSearchName(replacementName);
@@ -195,7 +193,7 @@ namespace LJCGenTextLib
 
     // Retrieves the active session current repeat items.
     // <include path='items/ActiveSessionRepeateItems/*' file='Doc/GenerateText.xml'/>
-    private RepeatItems ActiveSessionsRepeateItems()
+    private RepeatItems ActiveSessionsRepeatItems()
     {
       RepeatItems retValue = new RepeatItems();
 
@@ -270,7 +268,6 @@ namespace LJCGenTextLib
         var addSection = AddActiveSection(currentSection, directive, lineIndex);
         if (addSection.HasData)
         {
-          mProcessLines = true;
           GenSection(addSection);
 
           // Set the index to continue at the end of the processed section.
@@ -386,14 +383,8 @@ namespace LJCGenTextLib
     // <include path='items/GenRepeatItem/*' file='Doc/GenerateText.xml'/>
     private void GenRepeatItem(Section section, bool lastRepeatItem = false)
     {
-      //// Start at beginning of template if not in a section.
-      //int startLineIndex = 0;
-
-      //if (section != null)
-      //{
       // Start at the beginning of the section.
       var startLineIndex = section.StartLineIndex;
-      //}
       for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
         lineIndex++)
       {
@@ -404,9 +395,7 @@ namespace LJCGenTextLib
         if (false == SectionDirective(section, directive, ref line
           , lastRepeatItem, ref lineIndex))
         {
-          // *** Next Statement *** Change - 3/19/23
-          if (section != null
-            && section.HasData)
+          if (section.HasData)
           {
             // Sets line to null if other directive.
             if (false == OtherDirective(section, directive, ref line
@@ -448,7 +437,7 @@ namespace LJCGenTextLib
       }
     }
 
-    //
+    // Generates lines outside of any Section.
     private void GenSectionNone()
     {
       int startLineIndex = 0;
@@ -542,7 +531,7 @@ namespace LJCGenTextLib
       genTokens.SetTokens(line);
       if (genTokens.Count > 0)
       {
-        RepeatItems repeatItems = ActiveSessionsRepeateItems();
+        RepeatItems repeatItems = ActiveSessionsRepeatItems();
         foreach (RepeatItem repeatItem in repeatItems)
         {
           bool doNextLevel = false;
