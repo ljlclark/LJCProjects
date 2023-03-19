@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--X------------------------------------->
 <!-- #SectionBegin Main -->
 <!-- #Value _AssemblyName_ -->
 <!-- #Value _ClassCount_ -->
+<!-- #Value _ClassListHeading_ -->
 <!-- #Value _Copyright_ -->
 <!-- #Value _GenDate_ -->
 <!-- #Value _HasLinks_ -->
@@ -52,13 +53,39 @@
       <!-- #IfBegin _HasLinks_ true -->
     </div>
     <!-- #IfEnd _HasLinks_ -->
-    <br />
-    <div id='Title'>Classes<br></div>
     <!-- #IfBegin _Image_ NotNull -->
     <table>
       <tr>
         <td>
           <!-- #IfEnd Image -->
+          <!--X------------------------------------->
+          <!-- #SectionBegin ClassGroups -->
+          <!-- #Value _Heading_ -->
+          <br />
+          <div id='Title'>_Heading_<br></div>
+          <table class='ListTable'>
+            <!--X------------------------------------->
+            <!-- #SectionBegin SubSection -->
+            <!-- #Value _HTMLFileName_ -->
+            <!-- #Value _Name_ -->
+            <!-- #Value _Summary_ -->
+            <tr>
+              <td class='ListTable' width='25%'>
+                <a href='_HTMLFileName_'>_Name_</a>
+              </td>
+              <!-- #IfBegin _Summary_ NotNull -->
+              <td class='ListTable'>_Summary_</td>
+              <!-- #IfElse -->
+              <td class='ListTableMissing'>Missing Summary</td>
+              <!-- #IfEnd _Summary_ -->
+            </tr>
+            <!-- #SectionEnd SubSection -->
+            <!--X------------------------------------->
+          </table>
+          <!-- #SectionEnd ClassGroups -->
+          <!--X------------------------------------->
+          <br />
+          <div id='Title'>_ClassListHeading_<br></div>
           <table class='ListTable'>
             <!--X------------------------------------->
             <!-- #SectionBegin ClassList -->
