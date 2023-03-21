@@ -84,9 +84,11 @@
           </table>
           <!-- #SectionEnd ClassGroups -->
           <!--X------------------------------------->
+          <!-- #IfBegin _HasClasses_ true -->
           <br />
           <div id='Title'>_ClassListHeading_<br></div>
           <table class='ListTable'>
+            <!-- #IfEnd _HasClasses_ -->
             <!--X------------------------------------->
             <!-- #SectionBegin ClassList -->
             <!-- #Value _HTMLFileName_ -->
@@ -104,7 +106,9 @@
             </tr>
             <!-- #SectionEnd ClassList -->
             <!--X------------------------------------->
+            <!-- #IfBegin _HasClasses_ true -->
           </table>
+          <!-- #IfEnd _HasClasses_ -->
           <!-- #IfBegin _Image_ NotNull -->
         </td>
         <td>

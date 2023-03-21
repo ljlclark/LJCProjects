@@ -6,6 +6,9 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using System.IO;
+using LJCDocLibDAL;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace LJCDocGenLib
 {
@@ -34,20 +37,28 @@ namespace LJCDocGenLib
       Replacements replacements;
       string retValue;
 
-      // Main section.
       Sections sections = new Sections();
+
       section = sections.Add("Main");
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
+
       replacements.Add("_AssemblyName_", DataAssembly.Name);
+
+      string typeCount = DataAssembly.DataTypes.Count.ToString();
+      replacements.Add("_ClassCount_", typeCount);
+
+      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
+      copyRight += "Licensed under the MIT License.";
+      replacements.Add("_Copyright_", copyRight);
+
+      replacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
+        + $" {DateTime.Now.ToShortTimeString()}");
       if (NetString.HasValue(DataAssembly.MainImage))
       {
         replacements.Add("_Image_", DataAssembly.MainImage);
       }
-      replacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
-        + $" {DateTime.Now.ToShortTimeString()}");
 
-      // AssemblyRemarks section.
       if (SetAssemblyRemarks())
       {
         section = sections.Add("AssemblyRemarks");
@@ -59,34 +70,95 @@ namespace LJCDocGenLib
         replacements.Add("_HasLinks_", "true");
       }
 
-      // ClassList section.
-      section = sections.Add("ClassList");
-      AddClassList(section);
-      string typeCount = DataAssembly.DataTypes.Count.ToString();
-      replacements.Add("_ClassCount_", typeCount);
+      var classListHeading = "Classes";
+      mOtherTypes = DataAssembly.DataTypes;
+      if (AddClassGroups(sections))
+      {
+        classListHeading = "Other Classes";
+      }
 
-      // *** Next Statement *** Add - 3/16/23
-      replacements.Add("_ClassListHeading_", "Classes");
+      if (NetCommon.HasItems(mOtherTypes))
+      {
+        replacements.Add("_HasClasses_", "true");
+        replacements.Add("_ClassListHeading_", classListHeading);
+        section = sections.Add("ClassList");
+        AddClassList(section);
+      }
 
-      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
-      copyRight += "Licensed under the MIT License.";
-      replacements.Add("_Copyright_", copyRight);
       retValue = NetCommon.XmlSerializeToString(sections.GetType(), sections
         , null);
       return retValue;
     }
+    private List<DataType> mOtherTypes;
     #endregion
 
     #region Private Methods
 
-    // Gets the Class List elements.
+    // Creates the Class Groups
+    private bool AddClassGroups(Sections sections)
+    {
+      bool retValue = false;
+
+      var managers = ValuesDocGen.Instance.Managers;
+
+      // Get the DocAssembly data.
+      var docAssemblyManager = managers.DocAssemblyManager;
+      var docAssembly = docAssemblyManager.RetrieveWithName(DataAssembly.Name);
+
+      // Get the DocGroups for the DocAssembly.
+      if (docAssembly != null)
+      {
+        var classGroupManager = managers.DocClassGroupManager;
+        var classGroups = classGroupManager.LoadWithParent(docAssembly.ID);
+        if (NetCommon.HasItems(classGroups))
+        {
+          var section = sections.Add("ClassGroups");
+          var repeatItems = section.RepeatItems;
+          foreach (var classGroup in classGroups)
+          {
+            var repeatItem = repeatItems.Add(classGroup.HeadingName);
+            repeatItem.Replacements.Add("_Heading_", classGroup.HeadingName);
+
+            // Get the DocClasses for the DocGroup.
+            var classManager = managers.DocClassManager;
+            var docClasses
+              = classManager.LoadWithParent(classGroup.ID);
+            if (NetCommon.HasItems(docClasses))
+            {
+              retValue = true;
+              repeatItem.SubSection = new Section("SubSection");
+              var subRepeatItems = repeatItem.SubSection.RepeatItems;
+              foreach (var docClass in docClasses)
+              {
+                var className = docClass.Name;
+
+                var dataType = mOtherTypes.Find(x => x.Name == className);
+                if (dataType != null)
+                {
+                  mOtherTypes.Remove(dataType);
+                }
+
+                var subRepeatItem = subRepeatItems.Add(className);
+                var subReplacements = subRepeatItem.Replacements;
+                subReplacements.Add("_HTMLFileName_", $"{className}.html");
+                subReplacements.Add("_Name_", className);
+                subReplacements.Add("_Summary_", docClass.Description);
+              }
+            }
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Creates the Class List.
     /// <include path='items/AddClassList/*' file='Doc/CreateAssemblyXml.xml'/>
     private void AddClassList(Section section)
     {
       RepeatItem repeatItem;
       Replacements replacements;
 
-      foreach (DataType dataType in DataAssembly.DataTypes)
+      foreach (DataType dataType in mOtherTypes)
       {
         if (dataType.Summary.ToLower() != "nogen")
         {

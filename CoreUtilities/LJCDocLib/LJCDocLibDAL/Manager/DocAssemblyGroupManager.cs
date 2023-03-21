@@ -146,7 +146,7 @@ namespace LJCDocLibDAL
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DbColumns GetUniqueKey(string name)
     {
-      // Needs cast for string to select the correct Add overload.
+      // Needs object cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocAssemblyGroup.ColumnName, (object)name }

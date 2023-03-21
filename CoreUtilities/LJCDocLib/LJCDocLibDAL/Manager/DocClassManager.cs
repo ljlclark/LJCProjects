@@ -99,15 +99,26 @@ namespace LJCDocLibDAL
 
     #region Load/Retrieve Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentID"></param>
+    /// <returns></returns>
+    public DocClasses LoadWithParent(short parentID)
+    {
+      var keyColumns = GetParentKey(parentID);
+      var dbResult = Manager.Load(keyColumns);
+      var retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DocClass RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      DocClass retValue;
-
       var keyColumns = GetIDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
@@ -116,11 +127,9 @@ namespace LJCDocLibDAL
     public DocClass RetrieveWithUnique(string name
       , List<string> propertyNames = null)
     {
-      DocClass retValue;
-
       var keyColumns = GetUniqueKey(name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
     #endregion
@@ -137,6 +146,22 @@ namespace LJCDocLibDAL
       var retValue = new DbColumns()
       {
         { DocClass.ColumnID, id }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentID"></param>
+    /// <returns></returns>
+    public DbColumns GetParentKey(short parentID)
+    {
+      // Needs cast for string to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { DocClass.ColumnDocClassGroupID, parentID }
       };
       return retValue;
     }
