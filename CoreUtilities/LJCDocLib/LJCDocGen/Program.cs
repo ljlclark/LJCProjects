@@ -59,6 +59,9 @@ namespace LJCDocGen
 
         // Generate each assembly page.
         genRoot.GenAssemblyPages();
+        Console.WriteLine($"Generated {ValuesDocGen.Instance.GenPageCount} Pages");
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
       }
     }
 

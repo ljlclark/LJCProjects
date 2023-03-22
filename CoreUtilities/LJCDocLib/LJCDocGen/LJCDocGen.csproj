@@ -115,6 +115,12 @@
     <Content Include="bin\Debug\XMLFiles\GenAssembly.xml" />
     <Content Include="bin\Debug\XMLFiles\LJCNetCommonTest.xml" />
     <Content Include="Doc\ProjectDocGen.xml" />
+    <Content Include="LinkPages\DocAssemblyGroup.html" />
+    <Content Include="LinkPages\DocAssemblyGroup.jpg" />
+    <Content Include="LinkPages\DocClassGroup.html" />
+    <Content Include="LinkPages\DocClassGroup.jpg" />
+    <Content Include="LinkPages\DocMethodGroup.html" />
+    <Content Include="LinkPages\DocMethodGroup.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

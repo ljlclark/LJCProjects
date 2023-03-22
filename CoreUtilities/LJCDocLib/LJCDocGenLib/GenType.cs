@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenType.cs
+using LJCDocLibDAL;
 using LJCDocObjLib;
 using LJCGenTextLib;
 using LJCNetCommon;
@@ -105,6 +106,7 @@ namespace LJCDocGenLib
         GenerateText generateText = new GenerateText();
         generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
           , true);
+        ValuesDocGen.Instance.GenPageCount++;
       }
     }
     #endregion

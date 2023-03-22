@@ -39,30 +39,17 @@ namespace LJCDocGenLib
       Replacements replacements;
       string retValue;
 
-      // Main section.
       Sections sections = new Sections();
       section = sections.Add("Main");
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
       replacements.Add("_AssemblyName_", DataAssembly.Name);
       replacements.Add("_AssemblyHtm_", GenAssembly.HTMLFileName);
-      replacements.Add("_Namespace_", DataType.NamespaceValue);
-      replacements.Add("_TypeName_", DataType.Name);
       replacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
         + $" {DateTime.Now.ToShortTimeString()}");
+      replacements.Add("_Namespace_", DataType.NamespaceValue);
+      replacements.Add("_TypeName_", DataType.Name);
 
-      // Syntax
-      AddSyntax(replacements);
-      if (false == NetString.HasValue(DataType.Summary))
-      {
-        GenRoot.LogMissing("Type Summary", DataType.NamespaceValue, DataType.Name);
-      }
-      else
-      {
-        replacements.Add("_Summary_", DataType.Summary);
-      }
-
-      // TypeRemarks Section
       bool hasRemarks = false;
       if (DataType.Remark != null
         && DataType.Remark.Text != null)
@@ -81,7 +68,16 @@ namespace LJCDocGenLib
         replacements.Add("_HasRemarks_", "True");
       }
 
-      // PublicMethods section.
+      if (false == NetString.HasValue(DataType.Summary))
+      {
+        GenRoot.LogMissing("Type Summary", DataType.NamespaceValue, DataType.Name);
+      }
+      else
+      {
+        replacements.Add("_Summary_", DataType.Summary);
+      }
+      AddSyntax(replacements);
+
       int publicMethodCount = MethodCount(true);
       if (publicMethodCount > 0)
       {
@@ -90,7 +86,6 @@ namespace LJCDocGenLib
         AddMethods(section, true);
       }
 
-      // PrivateMethods section.
       int privateMethodCount = MethodCount(false);
       if (privateMethodCount > 0)
       {
@@ -99,7 +94,6 @@ namespace LJCDocGenLib
         AddMethods(section, false);
       }
 
-      // Properties Section
       int propertyCount = PropertyCount();
       if (propertyCount > 0)
       {
@@ -108,7 +102,6 @@ namespace LJCDocGenLib
         AddProperties(section);
       }
 
-      // Fields Section
       int fieldCount = FieldCount();
       if (fieldCount > 0)
       {
@@ -117,7 +110,6 @@ namespace LJCDocGenLib
         AddFields(section);
       }
 
-      // Example Section
       bool hasExample = false;
       if (DataType.Example != null)
       {
@@ -135,7 +127,6 @@ namespace LJCDocGenLib
           {
             SyntaxHighlightHtml highlight = new SyntaxHighlightHtml();
             code = highlight.FormatCode(DataType.Name, null, code);
-            // *** Next Statement *** Change - 5/24
             replacements.Add("_Code_", code.Trim());
           }
         }

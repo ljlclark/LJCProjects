@@ -109,7 +109,8 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 CREATE TABLE [dbo].[DocClass](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
-	[DocClassGroupID] [smallint] NOT NULL,
+	[DocAssemblyID] [smallint] NOT NULL,
+	[DocClassGroupID] [smallint] NULL,
 	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,

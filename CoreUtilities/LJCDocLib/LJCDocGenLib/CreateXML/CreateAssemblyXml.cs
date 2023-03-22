@@ -42,16 +42,12 @@ namespace LJCDocGenLib
       section = sections.Add("Main");
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
-
       replacements.Add("_AssemblyName_", DataAssembly.Name);
-
       string typeCount = DataAssembly.DataTypes.Count.ToString();
       replacements.Add("_ClassCount_", typeCount);
-
       var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
       copyRight += "Licensed under the MIT License.";
       replacements.Add("_Copyright_", copyRight);
-
       replacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
         + $" {DateTime.Now.ToShortTimeString()}");
       if (NetString.HasValue(DataAssembly.MainImage))

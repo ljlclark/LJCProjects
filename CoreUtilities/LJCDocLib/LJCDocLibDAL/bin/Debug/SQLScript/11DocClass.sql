@@ -62,23 +62,6 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCReflect'
   , 'Provides object property reflection capabilities. (DE)', 2;
 
-set @headingName = 'Other';
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'AppSettings'
-  , 'Represents the Configuration AppSettings. (RE)', 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'CodeTokenizer'
-  , 'A C# Code Tokenizer class. (RE)', 2;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'Cryptography_Type'
-  , 'The encryption types.', 3;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'DataTypes'
-  , 'Represents a collection of Data Types.', 4;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LJCCryptography'
-  , 'Provides methods to encrypt and decrypt data in memory.', 5;
-
 set @headingName = 'Syntax';
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'CommonDataTypes'
@@ -107,3 +90,19 @@ exec sp_DCAddUnique @assemblyName, @headingName
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'RefTypes'
   , 'Represents a collection of Reference Types.', 9;
+
+exec sp_DCAddUnique @assemblyName, null
+  , 'AppSettings'
+  , 'Represents the Configuration AppSettings. (RE)', 1;
+exec sp_DCAddUnique @assemblyName, null
+  , 'CodeTokenizer'
+  , 'A C# Code Tokenizer class. (RE)', 2;
+exec sp_DCAddUnique @assemblyName, null
+  , 'Cryptography_Type'
+  , 'The encryption types.', 3;
+exec sp_DCAddUnique @assemblyName, null
+  , 'DataTypes'
+  , 'Represents a collection of Data Types.', 4;
+exec sp_DCAddUnique @assemblyName, null
+  , 'LJCCryptography'
+  , 'Provides methods to encrypt and decrypt data in memory.', 5;

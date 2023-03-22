@@ -27,13 +27,16 @@ namespace LJCDocLibDAL
 
     #region Properties
 
+    /// <summary>Gets or sets the generated page count.</summary>
+    public int GenPageCount { get; set; }
+
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesDocGen Instance
     {
       get { return mInstance; }
     }
 
-    /// <summary></summary>
+    /// <summary>Gets or sets the Managers class reference.</summary>
     public ManagersDocGen Managers { get; set; }
     #endregion
 

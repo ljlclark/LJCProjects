@@ -25,9 +25,12 @@ declare @docClassGroupID smallint
   = (select ID from DocClassGroup where DocAssemblyID = @docAssemblyID
      and HeadingName = @headingName);
 IF NOT EXISTS (select ID from DocClass
-where DocClassGroupID = @docClassGroupID
+where DocAssemblyID = @docAssemblyID
+  and DocClassGroupID = @docClassGroupID
   and Name = @name)
-  insert into DocClass (DocClassGroupID, Name, Description, Sequence, ActiveFlag)
-    values (@docClassGroupID, @name, @description, @sequence, @activeFlag);
+  insert into DocClass (DocAssemblyID, DocClassGroupID, Name, Description
+	, Sequence, ActiveFlag)
+    values (@docAssemblyID, @docClassGroupID, @name, @description
+	, @sequence, @activeFlag);
 END
 GO

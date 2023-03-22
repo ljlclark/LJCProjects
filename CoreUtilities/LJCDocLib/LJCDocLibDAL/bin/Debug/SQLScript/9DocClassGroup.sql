@@ -21,7 +21,5 @@ exec sp_DCGAddUnique @assemblyName, 'Comparer'
   , null, 3;
 exec sp_DCGAddUnique @assemblyName, 'Reflection'
   , 'Reflection Classes', 4;
-exec sp_DCGAddUnique @assemblyName, 'Other'
-  , null, 5;
 exec sp_DCGAddUnique @assemblyName, 'Syntax'
-  , 'Syntax Classes', 6;
+  , 'Syntax Classes', 5;

@@ -85,8 +85,20 @@ namespace LJCDocLibDAL
     }
     private Int16 mID;
 
-    /// <summary>Gets or sets the DocClassGroupID value.</summary>
+    /// <summary>Gets or sets the DocAssemblyID value.</summary>
     //[Required]
+    //[Column("DocAssemblyID", TypeName="smallint")]
+    public Int16 DocAssemblyID
+    {
+      get { return mDocAssemblyID; }
+      set
+      {
+        mDocAssemblyID = ChangedNames.Add(ColumnDocAssemblyID, mDocAssemblyID, value);
+      }
+    }
+    private Int16 mDocAssemblyID;
+
+    /// <summary>Gets or sets the DocClassGroupID value.</summary>
     //[Column("DocClassGroupID", TypeName="smallint")]
     public Int16 DocClassGroupID
     {
@@ -166,6 +178,9 @@ namespace LJCDocLibDAL
 
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
+
+    /// <summary>The DocAssemblyID column name.</summary>
+    public static string ColumnDocAssemblyID = "DocAssemblyID";
 
     /// <summary>The DocClassGroupID column name.</summary>
     public static string ColumnDocClassGroupID = "DocClassGroupID";
