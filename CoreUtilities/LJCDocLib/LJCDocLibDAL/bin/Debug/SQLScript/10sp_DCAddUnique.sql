@@ -29,8 +29,8 @@ where DocAssemblyID = @docAssemblyID
   and DocClassGroupID = @docClassGroupID
   and Name = @name)
   insert into DocClass (DocAssemblyID, DocClassGroupID, Name, Description
-	, Sequence, ActiveFlag)
+	  , Sequence, ActiveFlag)
     values (@docAssemblyID, @docClassGroupID, @name, @description
-	, @sequence, @activeFlag);
+	  , @sequence, @activeFlag);
 END
 GO

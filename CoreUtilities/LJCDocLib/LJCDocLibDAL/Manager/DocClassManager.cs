@@ -102,6 +102,19 @@ namespace LJCDocLibDAL
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="groupID"></param>
+    /// <returns></returns>
+    public DocClasses LoadWithGroup(short groupID)
+    {
+      var keyColumns = GetGroupKey(groupID);
+      var dbResult = Manager.Load(keyColumns);
+      var retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="parentID"></param>
     /// <returns></returns>
     public DocClasses LoadWithParent(short parentID)
@@ -123,11 +136,17 @@ namespace LJCDocLibDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DocClass RetrieveWithUnique(string name
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="assemblyID"></param>
+    /// <param name="name"></param>
+    /// <param name="propertyNames"></param>
+    /// <returns></returns>
+    public DocClass RetrieveWithUnique(short assemblyID, string name
       , List<string> propertyNames = null)
     {
-      var keyColumns = GetUniqueKey(name);
+      var keyColumns = GetUniqueKey(assemblyID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -135,6 +154,22 @@ namespace LJCDocLibDAL
     #endregion
 
     #region GetKey Methods
+
+    // Gets the ID key columns.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="groupID"></param>
+    /// <returns></returns>
+    public DbColumns GetGroupKey(short groupID)
+    {
+      // Needs cast for string to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { DocClass.ColumnDocClassGroupID, groupID }
+      };
+      return retValue;
+    }
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
@@ -161,18 +196,24 @@ namespace LJCDocLibDAL
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DocClass.ColumnDocClassGroupID, parentID }
+        { DocClass.ColumnDocAssemblyID, parentID }
       };
       return retValue;
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(string name)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="assemblyID"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public DbColumns GetUniqueKey(short assemblyID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
+        { DocClass.ColumnDocAssemblyID, assemblyID },
         { DocClass.ColumnName, (object)name }
       };
       return retValue;

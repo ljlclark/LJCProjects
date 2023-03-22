@@ -9,6 +9,7 @@
 <!-- #Value _GenDate_ -->
 <!-- #Value _HasExample_ -->
 <!-- #Value _HasRemarks_ -->
+<!-- #Value _MethodListPreface_ -->
 <!-- #Value _Namespace_ -->
 <!-- #Value _PrivateMethodCount_ -->
 <!-- #Value _PropertyCount_ -->
@@ -84,9 +85,35 @@
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd TypeRemarks -->
     <!--X------------------------------------->
+    <!-- #SectionBegin MethodGroups -->
+    <!-- #Value _Heading_ -->
+    <br />
+    <div id='Title'>_Heading_<br></div>
+    <table class='ListTable'>
+      <!--X------------------------------------->
+      <!-- #SectionBegin SubSection -->
+      <!-- #Value _HTMLFileName_ -->
+      <!-- #Value _Name_ -->
+      <!-- #Value _Summary_ -->
+      <tr>
+        <td class='ListTable' width='25%'>
+          <a href='_HTMLFileName_'>_Name_</a>
+        </td>
+        <!-- #IfBegin _Summary_ NotNull -->
+        <td class='ListTable'>_Summary_</td>
+        <!-- #IfElse -->
+        <td class='ListTableMissing'>Missing Summary</td>
+        <!-- #IfEnd _Summary_ -->
+      </tr>
+      <!-- #SectionEnd SubSection -->
+      <!--X------------------------------------->
+    </table>
+    <!-- #SectionEnd MethodGroups -->
+    <!--X------------------------------------->
+    <!--X------------------------------------->
     <!-- #IfBegin _PublicMethodCount_ NotNull -->
     <br />
-    <div class='Title2'>Public Methods</div>
+    <div class='Title2'>_MethodListPreface_Public Methods</div>
     <table class='ListTable'>
       <!-- #IfEnd PublicMethodCount -->
       <!-- #SectionBegin PublicMethods -->
@@ -111,7 +138,7 @@
     <!--X------------------------------------->
     <!-- #IfBegin _PrivateMethodCount_ NotNull -->
     <br />
-    <div class='Title2'>Private Methods</div>
+    <div class='Title2'>_MethodListPreface_Private Methods</div>
     <table class='ListTable'>
       <!-- #IfEnd PrivateMethodCount -->
       <!-- #SectionBegin PrivateMethods -->

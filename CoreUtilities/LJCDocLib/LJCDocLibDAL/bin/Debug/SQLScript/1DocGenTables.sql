@@ -175,7 +175,8 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 CREATE TABLE [dbo].[DocMethod](
 	[ID] [smallint] IDENTITY(1,1) NOT NULL,
-	[DocMethodGroupID] [smallint] NOT NULL,
+	[DocClassID] [smallint] NOT NULL,
+	[DocMethodGroupID] [smallint] NULL,
 	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,

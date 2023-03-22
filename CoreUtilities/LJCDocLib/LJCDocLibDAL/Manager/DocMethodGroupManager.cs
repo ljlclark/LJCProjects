@@ -100,9 +100,22 @@ namespace LJCDocLibDAL
 
     #region Load/Retrieve Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentID"></param>
+    /// <returns></returns>
+    public DocMethodGroups LoadWithParent(short parentID)
+    {
+      var keyColumns = GetParentID(parentID);
+      var dbResult = Manager.Load(keyColumns);
+      var retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DocMethodGroup RetrieveWithID(int id, List<string> propertyNames = null)
+    public DocMethodGroup RetrieveWithID(short id, List<string> propertyNames = null)
     {
       DocMethodGroup retValue;
 
@@ -136,7 +149,7 @@ namespace LJCDocLibDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns GetIDKey(short id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -148,20 +161,35 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentID"></param>
+    /// <returns></returns>
+    public DbColumns GetParentID(short parentID)
+    {
+      // Needs object cast for string to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { DocMethodGroup.ColumnDocClassID, parentID },
+      };
+      return retValue;
+    }
+
     // Gets the ID key columns.
     /// <summary>
     /// 
     /// </summary>
     /// <param name="docClassID"></param>
-    /// <param name="docClassGroupHeadingID"></param>
+    /// <param name="docMethodGroupHeadingID"></param>
     /// <returns></returns>
-    public DbColumns GetUniqueKey(short docClassID, short docClassGroupHeadingID)
+    public DbColumns GetUniqueKey(short docClassID, short docMethodGroupHeadingID)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocMethodGroup.ColumnDocClassID, docClassID},
-        { DocMethodGroup.ColumnDocMethodGroupHeadingID, docClassID }
+        { DocMethodGroup.ColumnDocMethodGroupHeadingID, docMethodGroupHeadingID }
       };
       return retValue;
     }

@@ -27,7 +27,9 @@ declare @docMethodGroupID smallint
 IF NOT EXISTS (select ID from DocMethod
 where DocMethodGroupID = @docMethodGroupID
   and Name = @name)
-  insert into DocMethod (DocMethodGroupID, Name, Description, Sequence, ActiveFlag)
-    values (@docMethodGroupID, @name, @description, @sequence, @activeFlag);
+  insert into DocMethod (DocClassID, DocMethodGroupID, Name, Description
+    , Sequence, ActiveFlag)
+    values (@docClassID, @docMethodGroupID, @name, @description
+    , @sequence, @activeFlag);
 END
 GO

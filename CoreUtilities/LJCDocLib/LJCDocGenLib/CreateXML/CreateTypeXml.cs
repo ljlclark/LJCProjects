@@ -6,12 +6,14 @@ using System.IO;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using LJCDocLibDAL;
+using System.Collections.Generic;
 
 namespace LJCDocGenLib
 {
   // Creates the Type XML Data values.
   /// <include path='items/CreateTypeXml/*' file='Doc/CreateTypeXml.xml'/>
-  public partial class CreateTypeXml
+  public class CreateTypeXml
   {
     #region Constructors
 
@@ -34,39 +36,47 @@ namespace LJCDocGenLib
     /// <include path='items/GetXmlData/*' file='Doc/CreateTypeXml.xml'/>
     public string GetXmlData()
     {
-      Section section;
-      RepeatItem repeatItem;
-      Replacements replacements;
       string retValue;
 
       Sections sections = new Sections();
-      section = sections.Add("Main");
-      repeatItem = section.RepeatItems.Add("Main");
-      replacements = repeatItem.Replacements;
-      replacements.Add("_AssemblyName_", DataAssembly.Name);
-      replacements.Add("_AssemblyHtm_", GenAssembly.HTMLFileName);
-      replacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
+      var mainSection = sections.Add("Main");
+      var repeatItem = mainSection.RepeatItems.Add("Main");
+      var mainReplacements = repeatItem.Replacements;
+      mainReplacements.Add("_AssemblyName_", DataAssembly.Name);
+      mainReplacements.Add("_AssemblyHtm_", GenAssembly.HTMLFileName);
+      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
+      copyRight += "Licensed under the MIT License.";
+      mainReplacements.Add("_Copyright_", copyRight);
+
+      int fieldCount = FieldCount();
+      if (fieldCount > 0)
+      {
+        mainReplacements.Add("_FieldCount_", fieldCount.ToString());
+        var section = sections.Add("Fields");
+        AddFields(section);
+      }
+
+      mainReplacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
         + $" {DateTime.Now.ToShortTimeString()}");
-      replacements.Add("_Namespace_", DataType.NamespaceValue);
-      replacements.Add("_TypeName_", DataType.Name);
 
       bool hasRemarks = false;
       if (DataType.Remark != null
         && DataType.Remark.Text != null)
       {
         hasRemarks = true;
-        replacements.Add("_RemarkText_", DataType.Remark.Text);
+        mainReplacements.Add("_RemarkText_", DataType.Remark.Text);
       }
       if (SetTypeRemarks())
       {
         hasRemarks = true;
-        section = sections.Add("TypeRemarks");
-        SetTypeRemarks(section);
+        var remarksSection = sections.Add("TypeRemarks");
+        SetTypeRemarks(remarksSection);
       }
       if (hasRemarks)
       {
-        replacements.Add("_HasRemarks_", "True");
+        mainReplacements.Add("_HasRemarks_", "True");
       }
+      mainReplacements.Add("_Namespace_", DataType.NamespaceValue);
 
       if (false == NetString.HasValue(DataType.Summary))
       {
@@ -74,40 +84,45 @@ namespace LJCDocGenLib
       }
       else
       {
-        replacements.Add("_Summary_", DataType.Summary);
+        mainReplacements.Add("_Summary_", DataType.Summary);
       }
-      AddSyntax(replacements);
+      AddSyntax(mainReplacements);
+      mainReplacements.Add("_TypeName_", DataType.Name);
+
+      string methodListPrefix = null;
+      mOtherMethods = new DataMethods();
+      foreach (var dataType in DataType.DataMethods)
+      {
+        mOtherMethods.Add(dataType);
+      }
+      if (AddMethodGroups(sections))
+      {
+        methodListPrefix = "Other ";
+      }
+      mainReplacements.Add("_MethodListPrefix_", methodListPrefix);
 
       int publicMethodCount = MethodCount(true);
       if (publicMethodCount > 0)
       {
-        replacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
-        section = sections.Add("PublicMethods");
+        mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
+        var section = sections.Add("PublicMethods");
         AddMethods(section, true);
       }
 
       int privateMethodCount = MethodCount(false);
       if (privateMethodCount > 0)
       {
-        replacements.Add("_PrivateMethodCount_", privateMethodCount.ToString());
-        section = sections.Add("PrivateMethods");
+        mainReplacements.Add("_PrivateMethodCount_", privateMethodCount.ToString());
+        var section = sections.Add("PrivateMethods");
         AddMethods(section, false);
       }
 
       int propertyCount = PropertyCount();
       if (propertyCount > 0)
       {
-        replacements.Add("_PropertyCount_", propertyCount.ToString());
-        section = sections.Add("Properties");
+        mainReplacements.Add("_PropertyCount_", propertyCount.ToString());
+        var section = sections.Add("Properties");
         AddProperties(section);
-      }
-
-      int fieldCount = FieldCount();
-      if (fieldCount > 0)
-      {
-        replacements.Add("_FieldCount_", fieldCount.ToString());
-        section = sections.Add("Fields");
-        AddFields(section);
       }
 
       bool hasExample = false;
@@ -116,7 +131,7 @@ namespace LJCDocGenLib
         if (SetExampleRemarks())
         {
           hasExample = true;
-          section = sections.Add("ExampleRemarks");
+          var section = sections.Add("ExampleRemarks");
           SetExampleRemarks(section);
         }
         if (NetString.HasValue(DataType.Example.Code))
@@ -127,18 +142,15 @@ namespace LJCDocGenLib
           {
             SyntaxHighlightHtml highlight = new SyntaxHighlightHtml();
             code = highlight.FormatCode(DataType.Name, null, code);
-            replacements.Add("_Code_", code.Trim());
+            mainReplacements.Add("_Code_", code.Trim());
           }
         }
       }
       if (hasExample)
       {
-        replacements.Add("_HasExample_", "True");
+        mainReplacements.Add("_HasExample_", "True");
       }
 
-      var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
-      copyRight += "Licensed under the MIT License.";
-      replacements.Add("_Copyright_", copyRight);
       retValue = NetCommon.XmlSerializeToString(sections.GetType()
         , sections, null);
       return retValue;
@@ -171,6 +183,70 @@ namespace LJCDocGenLib
       }
     }
 
+    // Create the Method Groups
+    private bool AddMethodGroups(Sections sections)
+    {
+      bool retValue = false;
+
+      var managers = ValuesDocGen.Instance.Managers;
+
+      // Get the DocAssembly data.
+      var docAssemblyManager = managers.DocAssemblyManager;
+      var docAssembly = docAssemblyManager.RetrieveWithName(DataAssembly.Name);
+
+      if (docAssembly != null)
+      {
+        var classManager = managers.DocClassManager;
+        var docClass = classManager.RetrieveWithUnique(docAssembly.ID
+          , DataType.Name);
+
+        // Get the DocMethodGroups for the DocClass.
+        if (docClass != null)
+        {
+          var methodGroupManager = managers.DocMethodGroupManager;
+          var methodGroups = methodGroupManager.LoadWithParent(docClass.ID);
+          if (NetCommon.HasItems(methodGroups))
+          {
+            var section = sections.Add("MethodGroups");
+            var repeatItems = section.RepeatItems;
+            foreach (var methodGroup in methodGroups)
+            {
+              var repeatItem = repeatItems.Add(methodGroup.HeadingName);
+              repeatItem.Replacements.Add("_Heading_", methodGroup.HeadingName);
+
+              // Get the DocClasses for the DocGroup.
+              var methodManager = managers.DocMethodManager;
+              var docMethods
+                = methodManager.LoadWithGroup(methodGroup.ID);
+              if (NetCommon.HasItems(docMethods))
+              {
+                retValue = true;
+                repeatItem.SubSection = new Section("SubSection");
+                var subRepeatItems = repeatItem.SubSection.RepeatItems;
+                foreach (var docMethod in docMethods)
+                {
+                  var methodName = docMethod.Name;
+
+                  var dataType = mOtherMethods.Find(x => x.Name == methodName);
+                  if (dataType != null)
+                  {
+                    mOtherMethods.Remove(dataType);
+                  }
+
+                  var subRepeatItem = subRepeatItems.Add(methodName);
+                  var subReplacements = subRepeatItem.Replacements;
+                  subReplacements.Add("_HTMLFileName_", $"{methodName}.html");
+                  subReplacements.Add("_Name_", methodName);
+                  subReplacements.Add("_Summary_", docMethod.Description);
+                }
+              }
+            }
+          }
+        }
+      }
+      return retValue;
+    }
+
     // Adds the Methods data elements.
     /// <include path='items/AddMethods/*' file='Doc/CreateTypeXml.xml'/>
     private void AddMethods(Section section, bool usePublic)
@@ -180,7 +256,7 @@ namespace LJCDocGenLib
 
       GenMethod genMethod = new GenMethod(GenRoot, GenAssembly, DataAssembly
         , DataType, null);
-      foreach (DataMethod dataMethod in DataType.DataMethods)
+      foreach (DataMethod dataMethod in mOtherMethods)
       {
         bool gen = true;
         if (dataMethod.Summary != null
@@ -279,13 +355,9 @@ namespace LJCDocGenLib
     {
       int retValue = 0;
 
-      if (DataType.DataFields != null
-        && DataType.DataFields.Count > 0)
+      if (DataType.DataFields != null)
       {
-        foreach (DataField dataField in DataType.DataFields)
-        {
-          retValue++;
-        }
+        retValue = DataType.DataFields.Count;
       }
       return retValue;
     }
@@ -296,10 +368,10 @@ namespace LJCDocGenLib
     {
       int retValue = 0;
 
-      if (DataType.DataMethods != null
-        && DataType.DataMethods.Count > 0)
+      if (mOtherMethods != null
+        && mOtherMethods.Count > 0)
       {
-        foreach (DataMethod dataMethod in DataType.DataMethods)
+        foreach (DataMethod dataMethod in mOtherMethods)
         {
           if (usePublic == dataMethod.IsPublic)
           {
@@ -316,13 +388,9 @@ namespace LJCDocGenLib
     {
       int retValue = 0;
 
-      if (DataType.DataProperties != null
-        && DataType.DataProperties.Count > 0)
+      if (DataType.DataProperties != null)
       {
-        foreach (DataProperty dataProperty in DataType.DataProperties)
-        {
-          retValue++;
-        }
+        retValue = DataType.DataProperties.Count;
       }
       return retValue;
     }
@@ -410,6 +478,8 @@ namespace LJCDocGenLib
     private DataType DataType { get; }
     private GenAssembly GenAssembly { get; }
     private GenRoot GenRoot { get; }
+
+    private DataMethods mOtherMethods;
     #endregion
   }
 }

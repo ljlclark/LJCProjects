@@ -8,7 +8,6 @@ using LJCDocObjLib;
 using System.IO;
 using LJCDocLibDAL;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace LJCDocGenLib
 {
@@ -38,7 +37,6 @@ namespace LJCDocGenLib
       string retValue;
 
       Sections sections = new Sections();
-
       section = sections.Add("Main");
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
@@ -60,14 +58,17 @@ namespace LJCDocGenLib
         section = sections.Add("AssemblyRemarks");
         SetAssemblyRemarks(section);
       }
-
       if (AddLinks(sections))
       {
         replacements.Add("_HasLinks_", "true");
       }
 
       var classListHeading = "Classes";
-      mOtherTypes = DataAssembly.DataTypes;
+      mOtherTypes = new List<DataType>();
+      foreach (var dataType in DataAssembly.DataTypes)
+      {
+        mOtherTypes.Add(dataType);
+      }
       if (AddClassGroups(sections))
       {
         classListHeading = "Other Classes";
@@ -85,7 +86,6 @@ namespace LJCDocGenLib
         , null);
       return retValue;
     }
-    private List<DataType> mOtherTypes;
     #endregion
 
     #region Private Methods
@@ -97,7 +97,6 @@ namespace LJCDocGenLib
 
       var managers = ValuesDocGen.Instance.Managers;
 
-      // Get the DocAssembly data.
       var docAssemblyManager = managers.DocAssemblyManager;
       var docAssembly = docAssemblyManager.RetrieveWithName(DataAssembly.Name);
 
@@ -118,7 +117,7 @@ namespace LJCDocGenLib
             // Get the DocClasses for the DocGroup.
             var classManager = managers.DocClassManager;
             var docClasses
-              = classManager.LoadWithParent(classGroup.ID);
+              = classManager.LoadWithGroup(classGroup.ID);
             if (NetCommon.HasItems(docClasses))
             {
               retValue = true;
@@ -261,5 +260,7 @@ namespace LJCDocGenLib
 
     private DataAssembly DataAssembly { get; }
     #endregion
+
+    private List<DataType> mOtherTypes;
   }
 }

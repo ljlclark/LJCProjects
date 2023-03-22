@@ -96,9 +96,9 @@ namespace LJCDocGenLib
       else
       {
         // Testing
-        if ("GenAssembly" == DataType.Name)
+        if ("NetCommon" == DataType.Name)
         {
-          //File.WriteAllText(dataFileSpec, dataXml);
+          File.WriteAllText(dataFileSpec, dataXml);
         }
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
