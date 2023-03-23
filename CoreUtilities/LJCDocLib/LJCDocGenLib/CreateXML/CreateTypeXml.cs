@@ -89,7 +89,7 @@ namespace LJCDocGenLib
       AddSyntax(mainReplacements);
       mainReplacements.Add("_TypeName_", DataType.Name);
 
-      string methodListPrefix = null;
+      string methodListPreface = "";
       mOtherMethods = new DataMethods();
       foreach (var dataType in DataType.DataMethods)
       {
@@ -97,9 +97,9 @@ namespace LJCDocGenLib
       }
       if (AddMethodGroups(sections))
       {
-        methodListPrefix = "Other ";
+        methodListPreface = "Other ";
       }
-      mainReplacements.Add("_MethodListPrefix_", methodListPrefix);
+      mainReplacements.Add("_MethodListPreface_", methodListPreface);
 
       int publicMethodCount = MethodCount(true);
       if (publicMethodCount > 0)
