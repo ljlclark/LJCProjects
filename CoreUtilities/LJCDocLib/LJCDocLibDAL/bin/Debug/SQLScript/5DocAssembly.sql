@@ -34,7 +34,7 @@ exec sp_DAAddUnique @groupName, 'LJCWinFormCommon'
   , null, 5;
 exec sp_DAAddUnique @groupName, 'LJCWinFormControls'
   , 'The WinForm Controls library.'
-  , '..\..\..\..\..\CoreAssembliles\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.xml'
+  , '..\..\..\..\..\CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.xml'
   , null, 6;
 exec sp_DAAddUnique @groupName, 'LJCGridDataLib'
   , 'The DbResult Grid Helper Library.'
