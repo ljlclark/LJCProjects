@@ -7,7 +7,7 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using LJCDocLibDAL;
-using System.Collections.Generic;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCDocGenLib
 {
@@ -58,6 +58,8 @@ namespace LJCDocGenLib
 
       mainReplacements.Add("_GenDate_", $"{DateTime.Now.ToShortDateString()}"
         + $" {DateTime.Now.ToShortTimeString()}");
+
+      AddLinks(sections, mainReplacements);
 
       bool hasRemarks = false;
       if (DataType.Remark != null
@@ -235,7 +237,8 @@ namespace LJCDocGenLib
 
                   var subRepeatItem = subRepeatItems.Add(methodName);
                   var subReplacements = subRepeatItem.Replacements;
-                  subReplacements.Add("_HTMLFileName_", $"{methodName}.html");
+                  var htmlFileName = $"{DataType.Name}.{methodName}.html";
+                  subReplacements.Add("_HTMLFileName_", $@"Methods\{htmlFileName}");
                   subReplacements.Add("_Name_", methodName);
                   subReplacements.Add("_Summary_", docMethod.Description);
                 }
@@ -286,19 +289,41 @@ namespace LJCDocGenLib
       }
     }
 
+    // Adds the Link data elements.
+    private void AddLinks(Sections sections, Replacements mainReplacements)
+    {
+      if (NetCommon.HasItems(DataType.DataLinks))
+      {
+        mainReplacements.Add("_HasLinks_", "true");
+        var section = sections.Add("Links");
+        foreach (DataLink dataLink in DataType.DataLinks)
+        {
+          var fileSpec = dataLink.FileName;
+          var text = dataLink.Text;
+          var fileName = Path.GetFileNameWithoutExtension(fileSpec);
+          var repeatItem = section.RepeatItems.Add(fileName);
+          var replacements = repeatItem.Replacements;
+          replacements.Add("_LinkFile_", fileSpec);
+          if (false == NetString.HasValue(text))
+          {
+            var errorText = $"{DataType.NamespaceValue}.{DataType.Name}";
+            GenRoot.LogMissing("Link FileName", errorText, fileSpec);
+          }
+          replacements.Add("_LinkText_", text);
+        }
+      }
+    }
+
     // Adds the Properties data elements.
     /// <include path='items/AddProperties/*' file='Doc/CreateTypeXml.xml'/>
     private void AddProperties(Section section)
     {
-      RepeatItem repeatItem;
-      Replacements replacements;
-
       GenProperty genProperty = new GenProperty(GenRoot, GenAssembly
         , DataAssembly, DataType, null);
       foreach (DataProperty dataProperty in DataType.DataProperties)
       {
-        repeatItem = section.RepeatItems.Add(dataProperty.Name);
-        replacements = repeatItem.Replacements;
+        var repeatItem = section.RepeatItems.Add(dataProperty.Name);
+        var replacements = repeatItem.Replacements;
 
         // Create relative path.
         genProperty.DataProperty = dataProperty;
@@ -310,7 +335,7 @@ namespace LJCDocGenLib
       }
     }
 
-    // Adds the Type syntax elements.
+    // Adds the Type syntax element.
     /// <include path='items/AddSyntax/*' file='Doc/CreateTypeXml.xml'/>
     private void AddSyntax(Replacements replacements)
     {
@@ -403,7 +428,6 @@ namespace LJCDocGenLib
       Replacements replacements;
       bool retValue = false;
 
-      // Only this line is different from Method.
       DataExample example = DataType.Example;
 
       if (example != null
@@ -435,7 +459,6 @@ namespace LJCDocGenLib
       Replacements replacements;
       bool retValue = false;
 
-      // This line is different from Method, Property and Field.
       DataRemark remark = DataType.Remark;
 
       if (remark != null

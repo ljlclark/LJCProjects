@@ -91,13 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\SQLScript\10sp_DCAddUnique.sql" />
-    <Content Include="bin\Debug\SQLScript\11DCLJCDBMessage.sql" />
-    <Content Include="bin\Debug\SQLScript\11DCLJCWinFormControls.sql" />
+    <Content Include="bin\Debug\SQLScript\11DocClass.sql" />
     <Content Include="bin\Debug\SQLScript\12sp_DMGHAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\14sp_DMGAddUnique.sql" />
-    <Content Include="bin\Debug\SQLScript\15DMG_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\15DocMethodGroup.sql" />
     <Content Include="bin\Debug\SQLScript\16sp_DMAddUnique.sql" />
-    <Content Include="bin\Debug\SQLScript\17DM_NetCommon.sql" />
+    <Content Include="bin\Debug\SQLScript\17DocMethod.sql" />
     <Content Include="bin\Debug\SQLScript\2sp_DAGAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\1DocGenTables.sql" />
     <Content Include="bin\Debug\SQLScript\3DocAssemblyGroup.sql" />
@@ -107,13 +106,18 @@
     <Content Include="bin\Debug\SQLScript\6sp_DCGHAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\8sp_DCGAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\9DocClassGroup.sql" />
-    <Content Include="bin\Debug\SQLScript\11DCLJCNetCommon.sql" />
     <Content Include="bin\Debug\SQLScript\13DocMethodGroupHeading.sql" />
     <Content Include="Doc\DocGenAssemblies.xml" />
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />
     <Content Include="Doc\DocGenGroups.xml" />
     <Content Include="Doc\ProjectDocLibDAL.xml" />
+    <Content Include="LinkPages\DocAssemblyTables.html" />
+    <Content Include="LinkPages\DocAssemblyTables.jpg" />
+    <Content Include="LinkPages\DocClassTables.html" />
+    <Content Include="LinkPages\DocClassTables.jpg" />
+    <Content Include="LinkPages\DocMethodTables.html" />
+    <Content Include="LinkPages\DocMethodTables.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

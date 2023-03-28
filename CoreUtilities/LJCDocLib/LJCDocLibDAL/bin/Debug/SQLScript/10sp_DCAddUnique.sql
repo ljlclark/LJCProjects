@@ -28,6 +28,10 @@ IF NOT EXISTS (select ID from DocClass
 where DocAssemblyID = @docAssemblyID
   and DocClassGroupID = @docClassGroupID
   and Name = @name)
+  IF NOT EXISTS (select ID from DocClass
+  where DocAssemblyID = @docAssemblyID
+    and DocClassGroupID is null
+    and Name = @name)
   insert into DocClass (DocAssemblyID, DocClassGroupID, Name, Description
 	  , Sequence, ActiveFlag)
     values (@docAssemblyID, @docClassGroupID, @name, @description

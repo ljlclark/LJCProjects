@@ -40,13 +40,38 @@ namespace LJCDocObjLib
       return retValue;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="docLinks"></param>
+    /// <returns></returns>
+    public static DataLinks GetDataLinks(DocLinks docLinks)
+    {
+      DataLinks retValue = null;
+
+      if (NetCommon.HasItems(docLinks))
+      {
+        retValue = new DataLinks();
+        foreach (DocLink docLink in docLinks)
+        {
+          DataLink dataLink = new DataLink()
+          {
+            FileName = docLink.FileName,
+            Text = docLink.Text
+          };
+          retValue.Add(dataLink);
+        }
+      }
+      return retValue;
+    }
+
     // Creates and returns the DataParams from the DocParams object.
     /// <include path='items/GetDataParams/*' file='Doc/DataCommon.xml'/>
     public static DataParams GetDataParams(DocParams docParams)
     {
       DataParams retValue = null;
 
-      if (docParams != null && docParams.Count > 0)
+      if (NetCommon.HasItems(docParams))
       {
         retValue = new DataParams();
         foreach (DocParam docParam in docParams)

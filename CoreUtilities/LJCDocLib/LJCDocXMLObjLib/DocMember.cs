@@ -40,6 +40,10 @@ namespace LJCDocXMLObjLib
     [XmlAttribute("name")]
     public string Name { get; set; }
 
+    /// <summary>Gets or sets the member remarks node.</summary>
+    [XmlElement("link")]
+    public DocLinks Links { get; set; }
+    
     /// <summary>Gets or sets the parameters (param) nodes.</summary>
     [XmlElement("param")]
     public DocParams Params { get; set; }

@@ -53,6 +53,7 @@
     <Compile Include="DataAssembly.cs" />
     <Compile Include="DataExample.cs" />
     <Compile Include="DataField.cs" />
+    <Compile Include="DataLink.cs" />
     <Compile Include="DataMethod.cs" />
     <Compile Include="DataMethods.cs" />
     <Compile Include="DataParam.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="DataType.cs" />
     <Compile Include="DataCommon.cs" />
     <Compile Include="DataPara.cs" />
+    <Compile Include="DataLinks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

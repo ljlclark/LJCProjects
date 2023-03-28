@@ -31,6 +31,7 @@ namespace LJCDocObjLib
       Returns = TypeMember.Returns;
       Remark = DataCommon.GetDataRemark(TypeMember.Remarks);
       Example = DataCommon.GetDataExample(TypeMember.Example);
+      DataLinks = DataCommon.GetDataLinks(TypeMember.Links);
 
       string typeName = $"{NamespaceValue}.{Name}";
       AssemblyReflect.SetTypeReference(typeName);
@@ -151,6 +152,9 @@ namespace LJCDocObjLib
 
     /// <summary>Gets or sets the Remarks value.</summary>
     public DataExample Example { get; set; }
+
+    /// <summary>Gets or sets the DataLinks list.</summary>
+    public DataLinks DataLinks { get; set; }
 
     /// <summary>Gets or sets the Class/Type Name value.</summary>
     public string Name { get; set; }

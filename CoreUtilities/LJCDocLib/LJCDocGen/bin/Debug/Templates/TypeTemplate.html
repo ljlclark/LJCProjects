@@ -85,6 +85,23 @@
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd TypeRemarks -->
     <!--X------------------------------------->
+    <!-- #IfBegin _HasLinks_ true -->
+    <br />
+    <div class='Text'>
+      <!-- #IfEnd _HasLinks_ -->
+      <!--X------------------------------------->
+      <!-- #SectionBegin Links -->
+      <!-- #Value _LinkFile_ -->
+      <!-- #Value _LinkText_ -->
+      <!-- #IfBegin _HasLinks_ true -->
+      <a href='_LinkFile_' target='_blank'>_LinkText_</a>
+      <!-- #IfEnd _HasLinks_ -->
+      <!-- #SectionEnd Links -->
+      <!--X------------------------------------->
+      <!-- #IfBegin _HasLinks_ true -->
+    </div>
+    <!-- #IfEnd _HasLinks_ -->
+    <!--X------------------------------------->
     <!-- #SectionBegin MethodGroups -->
     <!-- #Value _Heading_ -->
     <br />

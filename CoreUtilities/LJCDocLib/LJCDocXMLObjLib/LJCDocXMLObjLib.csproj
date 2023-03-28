@@ -45,6 +45,7 @@
     <Compile Include="Doc.cs" />
     <Compile Include="DocAssembly.cs" />
     <Compile Include="DocExample.cs" />
+    <Compile Include="DocLinks.cs" />
     <Compile Include="DocMember.cs" />
     <Compile Include="DocMembers.cs" />
     <Compile Include="DocPara.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="DocParams.cs" />
     <Compile Include="DocParas.cs" />
     <Compile Include="DocRemarks.cs" />
+    <Compile Include="DocLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

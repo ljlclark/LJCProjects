@@ -195,7 +195,7 @@ namespace LJCDocGenLib
 
             repeatItem = section.RepeatItems.Add($"Link{count}");
             replacements = repeatItem.Replacements;
-            replacements.Add("_LinkName_", fileName);
+            replacements.Add("_LinkFile_", fileName);
             replacements.Add("_LinkText_", link.Text);
           }
         }

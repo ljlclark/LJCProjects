@@ -54,7 +54,7 @@ namespace LJCDocGenLib
         else
         {
           // Testing
-          if ("LJCNetCommon" == dataAssembly.Name)
+          if ("LJCWinFormControls" == dataAssembly.Name)
           {
             File.WriteAllText(dataFileSpec, dataXml);
           }

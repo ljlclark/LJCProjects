@@ -20,5 +20,8 @@
         The LJCDocLibDAL project is part of the LJC.DocLib solution.
       </para>
     </remarks>
+    <link text="Doc Assembly Tables">DocAssemblyTables.html</link>
+    <link text="Doc Class Tables">DocClassTables.html</link>
+    <link text="Doc Method Tables">DocMethodTables.html</link>
   </DocGenAssemblies>
 </items>

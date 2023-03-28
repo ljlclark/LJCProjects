@@ -83,6 +83,15 @@ copy %root%%src%\GenRootToMethod.jpg %to%
 copy %root%%src%\GenPropertyToField.html %to%
 copy %root%%src%\GenPropertyToField.jpg %to%
 
+set src=\LJCDocLib\LJCDocLibDAL\LinkPages
+set to=HTML\LJCDocGenLib
+copy %root%%src%\DocAssemblyTables.html %to%
+copy %root%%src%\DocAssemblyTables.jpg %to%
+copy %root%%src%\DocClassTables.html %to%
+copy %root%%src%\DocClassTables.jpg %to%
+copy %root%%src%\DocMethodTables.html %to%
+copy %root%%src%\DocMethodTables.jpg %to%
+
 set src=\LJCDocLib\LJCDocObjLib\Diagrams
 set to=HTML\LJCDocObjLib
 copy %root%%src%\DataRootToMethod.html %to%

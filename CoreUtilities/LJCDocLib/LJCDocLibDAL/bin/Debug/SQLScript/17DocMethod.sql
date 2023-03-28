@@ -13,8 +13,73 @@ select
 from DocMethod;
 */
 
-declare @docClassName nvarchar(60) = 'NetCommon';
-declare @headingName nvarchar(60) = 'Static';
+declare @docClassName nvarchar(60);
+declare @headingName nvarchar(60);
+
+/* ------------------------------ */
+set @docClassName = 'DataAccess';
+set @headingName = 'Constructor';
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor1'
+  , 'Initializes an object instance with the provided values.'
+  , 2;
+
+set @docClassName = 'DataAccess';
+set @headingName = 'Data';
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , 2;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , 3;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , 4;
+
+/* ------------------------------ */
+set @docClassName = 'ProcedureParameters';
+set @headingName = 'Constructor';
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor1'
+  , 'Initializes an object instance with the provided values.'
+  , 2;
+
+set @docClassName = 'ProcedureParameters';
+set @headingName = 'Collection';
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Creates and adds the object from the provided values.'
+  , 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add1'
+  , 'Creates and adds the object from the provided values.'
+  , 2;
+
+set @docClassName = 'ProcedureParameters';
+set @headingName = 'SearchSort';
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LJCSearchName'
+  , 'Retrieve the collection element with name.'
+  , 1;
+
+/* ------------------------------ */
+set @docClassName = 'NetCommon';
+set @headingName = 'Static';
 exec sp_DMAddUnique @docClassName, @headingName
   , 'CompareNull'
   , 'Compare null values. (DE)'
@@ -32,6 +97,7 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Checks if two values are equal.'
   , 4;
 
+set @docClassName = 'NetCommon';
 set @headingName = 'TextTransform';
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Base64BytesToText'
@@ -98,6 +164,7 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Encodes a string with XML escape values. (E)'
   , 16;
 
+set @docClassName = 'NetCommon';
 set @headingName = 'Serialize';
 exec sp_DMAddUnique @docClassName, @headingName
   , 'XmlDeserialize'
@@ -116,6 +183,7 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Serialize an object to an XML message string. (E)'
   , 4;
 
+set @docClassName = 'NetCommon';
 set @HeadingName = 'Config';
 exec sp_DMAddUnique @docClassName, @headingName
   , 'ConfigBool'
@@ -130,6 +198,7 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieves the Config string value. (RE)'
   , 3;
 
+set @docClassName = 'NetCommon';
 set @HeadingName = 'Value';
 exec sp_DMAddUnique @docClassName, @headingName
   , 'GetBoolean'

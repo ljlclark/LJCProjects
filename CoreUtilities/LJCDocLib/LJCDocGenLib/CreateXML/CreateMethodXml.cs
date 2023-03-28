@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCDocGenLib
 {
@@ -62,25 +63,7 @@ namespace LJCDocGenLib
       replacements.Add("_Description_", description);
       replacements.Add("_MethodName_", displayString);
 
-      // Parameters Section
-      if (DataMethod.Params != null
-        && DataMethod.Params.Count > 0)
-      {
-        replacements.Add("_HasParams_", "true");
-        section = sections.Add("Parameters");
-        foreach (DataParam param in DataMethod.Params)
-        {
-          repeatItem = section.RepeatItems.Add(param.Name);
-          Replacements paramReplacements = repeatItem.Replacements;
-          paramReplacements.Add("_ParameterName_", param.Name);
-          if (false == NetString.HasValue(param.Text))
-          {
-            var text = $"{DataType.NamespaceValue}.{DataType.Name}.{DataMethod.Name}";
-            GenRoot.LogMissing("Parameter Text", text, param.Name);
-          }
-          paramReplacements.Add("_ParameterText_", param.Text);
-        }
-      }
+      AddParams(sections, replacements);
 
       if (NetString.HasValue(DataMethod.Returns))
       {
@@ -190,6 +173,31 @@ namespace LJCDocGenLib
           syntax = syntax.Replace("<", "&lt;");
           syntax = syntax.Replace(">", "&gt;");
           replacements.Add("_Syntax_", syntax);
+        }
+      }
+    }
+
+    // Adds the Method parameter elements.
+    private void AddParams(Sections sections, Replacements mainReplacements)
+    {
+      if (NetCommon.HasItems(DataMethod.Params))
+      {
+        mainReplacements.Add("_HasParams_", "true");
+        var section = sections.Add("Parameters");
+        foreach (DataParam param in DataMethod.Params)
+        {
+          var name = param.Name;
+          var text = param.Text;
+          var repeatItem = section.RepeatItems.Add(name);
+          var replacements = repeatItem.Replacements;
+          replacements.Add("_ParameterName_", name);
+          if (false == NetString.HasValue(text))
+          {
+            var errorText
+              = $"{DataType.NamespaceValue}.{DataType.Name}.{DataMethod.Name}";
+            GenRoot.LogMissing("Parameter Text", errorText, name);
+          }
+          replacements.Add("_ParameterText_", text);
         }
       }
     }

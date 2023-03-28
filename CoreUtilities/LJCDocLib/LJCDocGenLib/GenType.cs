@@ -96,7 +96,8 @@ namespace LJCDocGenLib
       else
       {
         // Testing
-        if ("NetCommon" == DataType.Name)
+        if ("NetCommon" == DataType.Name
+          || "DocGenAssemblies" == DataType.Name)
         {
           File.WriteAllText(dataFileSpec, dataXml);
         }
