@@ -12,37 +12,6 @@
         The NetCommon class contains static helper functions for all .NET
         program types.
       </para>
-      <para>
-        There are three groups of static functions:
-      </para>
-      <para>
-        &lt;b&gt;Text Transform Functions&lt;/b&gt; &lt;br /&gt;
-        These are useful for transforming text between different formats.
-        &lt;br /&gt;
-        These include: &lt;br /&gt;
-        Base64BytesToText(), TextToBase64Bytes(),&lt;br /&gt;
-        Base64BytesToTextBytes(), TextBytesToBase64Bytes(),&lt;br /&gt;
-        Base64ToText(), TextToBase64(),&lt;br /&gt;
-        Base64ToTextBytes(), TextBytesToBase64(),&lt;br /&gt;
-        BytesToText(), TextToBytes(),&lt;br /&gt;
-        MemStreamToBytes(), BytesToMemStream(),&lt;br /&gt;
-        MemStreamToString(), StringToMemSream(),&lt;br /&gt;
-        XmlDecode(), XmlEncode().
-      </para>
-      <para>
-        &lt;b&gt;Object Data Functions&lt;/b&gt; &lt;br /&gt;
-        These are useful for taking object values such as those in
-        a DataTable and converting them to their correct types.&lt;br /&gt;
-        These include: GetDecimal(), GetInt16(), GetInt32(), GetInt64(),
-        GetObject() and GetString().
-      </para>
-      <para>
-        &lt;b&gt;Serialization Functions&lt;/b&gt; &lt;br /&gt;
-        These are helper functions for serializing and deserializing strings.
-        &lt;br /&gt;
-        These include: XmlDeserialize, XmlDeserializeMessage(), XmlSerialize()
-        and XmlSerializeToString().
-      </para>
     </remarks>
   </NetCommon>
   

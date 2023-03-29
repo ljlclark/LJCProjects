@@ -71,7 +71,7 @@ exec sp_DAAddUnique @groupName, 'LJCDBDataAccessLib'
   , '..\..\..\..\..\CoreAssemblies\LJCDBServiceLib\LJCDBDataAccessLib\bin\Debug\LJCDBDataAccessLib.xml'
   , null, 3;
 exec sp_DAAddUnique @groupName, 'LJCDataAccessConfig'
-  , 'The Data Access Configuration library.'
+  , 'The Data Access Configuration library. (DO)'
   , '..\..\..\..\..\CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.xml'
   , null, 4;
 exec sp_DAAddUnique @groupName, 'LJCDBClientLib'
@@ -87,7 +87,7 @@ exec sp_DAAddUnique @groupName, 'ForeignKeyManagerTest'
   , '..\..\..\..\..\CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug\ForeignKeyManagerTest.xml'
   , null, 7;
 exec sp_DAAddUnique @groupName, 'LJCSQLUtilLib'
-  , 'The SQL Utilities library.'
+  , 'The SQL Utilities library. (DO)'
   , '..\..\..\..\..\CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.xml'
   , null, 8;
 exec sp_DAAddUnique @groupName, 'LJCSQLUtilLibDAL'
@@ -109,7 +109,7 @@ exec sp_DAAddUnique @groupName, 'LJCDBServiceLib'
 
 set @groupName = 'CodeGen';
 exec sp_DAAddUnique @groupName, 'LJCGenText'
-  , 'The Gen Text console program.'
+  , 'The Gen Text console program. (RO)'
   , '..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenText\bin\Debug\LJCGenText.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCGenTableCode'
@@ -135,11 +135,11 @@ exec sp_DAAddUnique @groupName, 'LJCGenPageGen'
   , '..\..\..\..\..\SampleApps\Genealogy\LJCGenPageGen\bin\Debug\LJCGenPageGen.xml'
   , null, 2;
 exec sp_DAAddUnique @groupName, 'LJCDocGenLib'
-  , 'The Code HTML Documentation Generator library. (O)'
+  , 'The Code HTML Documentation Generator library.'
   , 'LJCDocGenLib.xml'
   , null, 3;
 exec sp_DAAddUnique @groupName, 'LJCDocLibDAL'
-  , 'The Code Documentation Generator Data Access Layer library.'
+  , 'The Code Documentation Generator Data Access Layer library. (DO)'
   , '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCDocLibDAL\bin\Debug\LJCDocLibDAL.xml'
   , null, 4;
 exec sp_DAAddUnique @groupName, 'LJCDocObjLib'
@@ -157,7 +157,7 @@ exec sp_DAAddUnique @groupName, 'LJCDocGroupEditor'
 
 set @groupName = 'DataTransform';
 exec sp_DAAddUnique @groupName, 'LJCTransformManager'
-  , 'A program to manage Data Transform data.'
+  , 'A program to manage Data Transform data. (RO)'
   , '..\..\..\..\..\SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug\LJCTransformManager.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCDataTransformProcess'
@@ -189,7 +189,7 @@ exec sp_DAAddUnique @groupName, 'CVRDAL'
 
 set @groupName = 'LJCSales';
 exec sp_DAAddUnique @groupName, 'LJCSalesManager'
-  , 'The Sales Manager program. (D)'
+  , 'The Sales Manager program. (DO)'
   , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesManager\bin\Debug\LJCSalesManager.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCSalesDAL'
@@ -233,7 +233,7 @@ exec sp_DAAddUnique @groupName, 'LJCFacilityManagerSetup'
 
 set @groupName = 'RegionManager';
 exec sp_DAAddUnique @groupName, 'LJCRegionManager'
-  , 'A program to manage Region data. (D)'
+  , 'A program to manage Region data. (DO)'
   , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCRegionDAL'
@@ -247,7 +247,7 @@ exec sp_DAAddUnique @groupName, 'LJCRegionForm'
 
 set @groupName = 'AppManager';
 exec sp_DAAddUnique @groupName, 'LJCAppManager'
-  , 'A program to manage and host application modules.'
+  , 'A program to manage and host application modules. (DO)'
   , '..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManager\bin\Debug\LJCAppManager.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCAppManagerDAL'
@@ -257,7 +257,7 @@ exec sp_DAAddUnique @groupName, 'LJCAppManagerDAL'
 
 set @groupName = 'DocAppManager';
 exec sp_DAAddUnique @groupName, 'LJCDocAppManager'
-  , 'A program to manage Document images.'
+  , 'A program to manage Document images. (O)'
   , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug\LJCDocAppManager.xml'
   , null, 1;
 exec sp_DAAddUnique @groupName, 'LJCDocAppManagerDAL'

@@ -7,6 +7,9 @@
     <summary>
       Provides ColumnGrid methods for the ViewEditorList window.
     </summary>
+    <link file="ViewDataTables.html">--ViewData DB Diagram</link>
+    <link file="ViewGridTables.html">--ViewGrid DB Diagram</link>
+    <link file="ViewJoin.html">--ViewJoin DB Diagram</link>
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>

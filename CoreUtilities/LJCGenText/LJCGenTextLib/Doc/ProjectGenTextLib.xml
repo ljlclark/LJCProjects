@@ -7,6 +7,8 @@
     <summary>
       Represents a Directive item.
     </summary>
+    <link file="GenRootToMethod.html">--GenRoot Class Diagram</link>
+    <link file="GenPropertyToField.html">--GenProperty Class Diagram</link>
     <remarks>
       <para>-- Library Level Remarks</para>
       <para>

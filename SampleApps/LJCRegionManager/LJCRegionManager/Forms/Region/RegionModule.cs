@@ -20,6 +20,7 @@ namespace LJCRegionManager
 
   // The Region tab composite user control.
   /// <include path='items/ModuleA/*' file='../../../CoreUtilities/LJCDocLib/Common/Module.xml'/>
+  /// <link file="RegionTables.html">--Region DB Diagram</link>
   public partial class RegionModule : UserControl
   {
     #region Constructors
