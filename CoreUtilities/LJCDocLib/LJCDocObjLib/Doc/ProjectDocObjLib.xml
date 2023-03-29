@@ -7,6 +7,8 @@
     <summary>
       Represents a collection of DataAssembly objects.
     </summary>
+    <link file="DataRootToMethod.html">--Data Root Class Diagram</link>
+    <link file="DataPropertyToExample.html">--Data Property Class Diagram</link>
     <remarks>
       <para>-- Library Level Remarks</para>
       <para>

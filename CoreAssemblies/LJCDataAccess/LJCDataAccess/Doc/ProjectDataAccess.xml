@@ -8,6 +8,7 @@
       Implements an ADO.NET SQL data access control layer
       (DE).
     </summary>
+    <link file="DataAccessLink.html">Data Access Class Diagram</link>
     <remarks>
       <para>
         The Data Access class encapsulates the repetitive code required to

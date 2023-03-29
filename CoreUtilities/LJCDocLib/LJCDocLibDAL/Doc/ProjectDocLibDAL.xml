@@ -7,6 +7,9 @@
     <summary>
       Represents a collection of DocGenAssembly objects.
     </summary>
+    <link file="DocAssemblyTables.html">--Doc Assembly Tables</link>
+    <link file="DocClassTables.html">--Doc Class Tables</link>
+    <link file="DocMethodTables.html">--Doc Method Tables</link>
     <remarks>
       <para>-- Library Level Remarks</para>
       <para>
@@ -20,8 +23,5 @@
         The LJCDocLibDAL project is part of the LJC.DocLib solution.
       </para>
     </remarks>
-    <link text="Doc Assembly Tables">DocAssemblyTables.html</link>
-    <link text="Doc Class Tables">DocClassTables.html</link>
-    <link text="Doc Method Tables">DocMethodTables.html</link>
   </DocGenAssemblies>
 </items>

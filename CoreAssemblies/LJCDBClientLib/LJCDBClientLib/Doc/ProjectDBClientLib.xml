@@ -7,6 +7,8 @@
     <summary>
       Contains the list of changed property names.
     </summary>
+    <link file="Configuration.html">--Manager Configuration Diagram</link>
+    <link file="DataMethods.html">--Manager Data Methods Diagram</link>
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>Data Service Client Library</para>

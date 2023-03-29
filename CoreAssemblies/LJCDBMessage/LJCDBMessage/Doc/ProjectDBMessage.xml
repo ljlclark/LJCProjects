@@ -8,6 +8,9 @@
       Represents a database request.
       (E)
     </summary>
+    <link file="DbRequestColumn.html">--DbRequest Column Diagram</link>
+    <link file="DbRequestJoin.html">--DbRequest Join Diagram</link>
+    <link file="DbRequestResult.html">--DbResult Diagram</link>
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>Data Service Message Library</para>

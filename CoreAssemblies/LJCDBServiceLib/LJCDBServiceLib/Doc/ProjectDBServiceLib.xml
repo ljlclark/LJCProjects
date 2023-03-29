@@ -8,6 +8,8 @@
       The Service Type for performing database operations using database query
       XML messages. (RE)
     </summary>
+    <link file="DbAccessConfig.html">--Message Data Access Config</link>
+    <link file="DbAccessData.html">--Message Data Access Data Methods</link>
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>Data Service Library</para>

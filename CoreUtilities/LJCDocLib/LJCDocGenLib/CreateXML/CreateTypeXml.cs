@@ -294,22 +294,30 @@ namespace LJCDocGenLib
     {
       if (NetCommon.HasItems(DataType.DataLinks))
       {
-        mainReplacements.Add("_HasLinks_", "true");
-        var section = sections.Add("Links");
+        Section section = null;
         foreach (DataLink dataLink in DataType.DataLinks)
         {
           var fileSpec = dataLink.FileName;
           var text = dataLink.Text;
-          var fileName = Path.GetFileNameWithoutExtension(fileSpec);
-          var repeatItem = section.RepeatItems.Add(fileName);
-          var replacements = repeatItem.Replacements;
-          replacements.Add("_LinkFile_", fileSpec);
-          if (false == NetString.HasValue(text))
+          if (false == text.StartsWith("--"))
           {
-            var errorText = $"{DataType.NamespaceValue}.{DataType.Name}";
-            GenRoot.LogMissing("Link FileName", errorText, fileSpec);
+            if (null == section)
+            {
+              mainReplacements.Add("_HasLinks_", "true");
+              section = sections.Add("Links");
+            }
+
+            var fileName = Path.GetFileNameWithoutExtension(fileSpec);
+            var repeatItem = section.RepeatItems.Add(fileName);
+            var replacements = repeatItem.Replacements;
+            replacements.Add("_LinkFile_", fileSpec);
+            if (false == NetString.HasValue(text))
+            {
+              var errorText = $"{DataType.NamespaceValue}.{DataType.Name}";
+              GenRoot.LogMissing("Link FileName", errorText, fileSpec);
+            }
+            replacements.Add("_LinkText_", text);
           }
-          replacements.Add("_LinkText_", text);
         }
       }
     }
@@ -455,38 +463,34 @@ namespace LJCDocGenLib
     /// <include path='items/SetTypeRemarks/*' file='Doc/CreateTypeXml.xml'/>
     private bool SetTypeRemarks(Section section = null)
     {
-      RepeatItem repeatItem;
-      Replacements replacements;
       bool retValue = false;
 
       DataRemark remark = DataType.Remark;
-
       if (remark != null
-        && (remark.Paras != null && remark.Paras.Count > 0))
+        && NetCommon.HasItems(remark.Paras))
       {
-        bool showGroups = true;
+        bool showParas = true;
         foreach (DataPara para in remark.Paras)
         {
-          if (para.Text != null && para.Text.Contains("--"))
+          if (para.Text != null
+            && para.Text.Contains("--"))
           {
-            // Do not show the "--" paragraph.
             // Do not show the remaining paragraphs.
-            showGroups = false;
+            // Do not show the "--" paragraph.
+            showParas = false;
           }
 
-          if (showGroups)
+          if (showParas
+            && NetString.HasValue(para.Text))
           {
-            if (NetString.HasValue(para.Text))
+            retValue = true;
+            if (null == section)
             {
-              retValue = true;
-              if (null == section)
-              {
-                break;
-              }
-              repeatItem = section.RepeatItems.Add("Para");
-              replacements = repeatItem.Replacements;
-              replacements.Add("_Para_", para.Text);
+              break;
             }
+            var repeatItem = section.RepeatItems.Add("Para");
+            var replacements = repeatItem.Replacements;
+            replacements.Add("_Para_", para.Text);
           }
         }
       }

@@ -58,10 +58,11 @@ namespace LJCDocGenLib
         section = sections.Add("AssemblyRemarks");
         SetAssemblyRemarks(section);
       }
-      if (AddLinks(sections))
-      {
-        replacements.Add("_HasLinks_", "true");
-      }
+      //if (AddLinksFile(sections))
+      //{
+      //  replacements.Add("_HasLinks_", "true");
+      //}
+      AddLinks(sections, replacements);
 
       var classListHeading = "Classes";
       mOtherTypes = new List<DataType>();
@@ -171,44 +172,49 @@ namespace LJCDocGenLib
     }
 
     // Gets the Link elements.
-    private bool AddLinks(Sections sections)
+    private void AddLinks(Sections sections, Replacements mainReplacements)
     {
-      Section section;
-      RepeatItem repeatItem;
-      Replacements replacements;
-      bool retValue = false;
-
-      string linksFileName = $"Links\\{DataAssembly.Name}Links.xml";
-      if (File.Exists(linksFileName))
+      // Look through all data types for Assembly Remarks.
+      foreach (DataType dataType in DataAssembly.DataTypes)
       {
-        Links links = Links.LJCDeserialize(linksFileName);
-        if (links != null && links.Count > 0)
+        if (NetCommon.HasItems(dataType.DataLinks))
         {
-          retValue = true;
-          section = sections.Add("Links");
-          int count = 0;
-          foreach (Link link in links)
+          Section section = null;
+          foreach (DataLink dataLink in dataType.DataLinks)
           {
-            count++;
+            var fileSpec = dataLink.FileName;
+            var text = dataLink.Text;
+            if (text.StartsWith("--"))
+            {
+              if (null == section)
+              {
+                mainReplacements.Add("_HasLinks_", "true");
+                section = sections.Add("Links");
+              }
 
-            string fileName = Path.GetFileName(link.Name);
-
-            repeatItem = section.RepeatItems.Add($"Link{count}");
-            replacements = repeatItem.Replacements;
-            replacements.Add("_LinkFile_", fileName);
-            replacements.Add("_LinkText_", link.Text);
+              int startIndex = 0;
+              text = NetString.GetDelimitedString(text, "--", ref startIndex
+                , "#NoDelimiter");
+              var fileName = Path.GetFileNameWithoutExtension(fileSpec);
+              var repeatItem = section.RepeatItems.Add(fileName);
+              var replacements = repeatItem.Replacements;
+              replacements.Add("_LinkFile_", fileSpec);
+              if (false == NetString.HasValue(text))
+              {
+                var errorText = $"{dataType.NamespaceValue}.{dataType.Name}";
+                GenRoot.LogMissing("Link FileName", errorText, fileSpec);
+              }
+              replacements.Add("_LinkText_", text);
+            }
           }
         }
       }
-      return retValue;
     }
 
     // Sets the Object Remarks elements.
     /// <include path='items/SetAssemblyRemarks/*' file='Doc/CreateAssemblyXml.xml'/>
     private bool SetAssemblyRemarks(Section section = null)
     {
-      RepeatItem repeatItem;
-      Replacements replacements;
       bool retValue = false;
 
       // Look through all data types for Assembly Remarks.
@@ -216,20 +222,21 @@ namespace LJCDocGenLib
       {
         DataRemark remark = dataType.Remark;
         if (remark != null
-          && (remark.Paras != null && remark.Paras.Count > 0))
+          && NetCommon.HasItems(remark.Paras))
         {
-          bool showGroups = false;
+          bool showParas = false;
           foreach (DataPara para in remark.Paras)
           {
-            if (para.Text != null && para.Text.Contains("--"))
+            if (para.Text != null
+              && para.Text.Contains("--"))
             {
               // Show all remaining paragraphs.
               // Do not show the "--" paragraph.
-              showGroups = true;
+              showParas = true;
             }
             else
             {
-              if (showGroups)
+              if (showParas)
               {
                 retValue = true;
                 if (null == section)
@@ -238,8 +245,8 @@ namespace LJCDocGenLib
                 }
                 if (NetString.HasValue(para.Text))
                 {
-                  repeatItem = section.RepeatItems.Add("Para");
-                  replacements = repeatItem.Replacements;
+                  var repeatItem = section.RepeatItems.Add("Para");
+                  var replacements = repeatItem.Replacements;
                   replacements.Add("_Para_", para.Text);
                 }
               }

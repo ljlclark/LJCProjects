@@ -8,6 +8,8 @@
       Implements a Message Based data access class.
       (DE)
     </summary>
+    <link file="DbAccessConfig.html">--Message Data Access Config</link>
+    <link file="DbAccessData.html">--Message Data Access Data Methods</link>
     <remarks>
       <para>
         The Message Data Access class contains methods for performing common

@@ -8,6 +8,7 @@
       Represents a data location configuration.
       (R)
     </summary>
+    <link file="DataAccessConfig.html">--Data Access Configuration Diagram</link>
     <remarks>
       <para>-- Project Level Remarks</para>
       <para>
