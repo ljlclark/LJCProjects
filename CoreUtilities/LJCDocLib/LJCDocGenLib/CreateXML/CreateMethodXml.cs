@@ -119,7 +119,6 @@ namespace LJCDocGenLib
           {
             SyntaxHighlightHtml highlight = new SyntaxHighlightHtml();
             code = highlight.FormatCode(DataType.Name, DataMethod.Name, code);
-            // *** Next Statement *** Change - 5/24
             replacements.Add("_Code_", code.Trim());
           }
         }
@@ -141,7 +140,7 @@ namespace LJCDocGenLib
     #region Private Methods
 
     // Adds the Method syntax elements.
-    /// <include path='items/AddSyntax/*' file='Doc/CreateMethodXml.xml'/>
+    // <include path='items/AddSyntax/*' file='Doc/CreateMethodXml.xml'/>
     private void AddSyntax(Replacements replacements)
     {
       string syntax = DataCommon.GetSyntax(DataMethod.Remark
@@ -178,6 +177,7 @@ namespace LJCDocGenLib
     }
 
     // Adds the Method parameter elements.
+    // <include path='items/AddParams/*' file='Doc/CreateMethodXml.xml'/>
     private void AddParams(Sections sections, Replacements mainReplacements)
     {
       if (NetCommon.HasItems(DataMethod.Params))
@@ -203,7 +203,7 @@ namespace LJCDocGenLib
     }
 
     // The Example Remarks elements.
-    /// <include path='items/SetExampleRemarks/*' file='Doc/CreateMethodXml.xml'/>
+    // <include path='items/SetExampleRemarks/*' file='Doc/CreateMethodXml.xml'/>
     private bool SetExampleRemarks(Section section = null)
     {
       RepeatItem repeatItem;
@@ -235,7 +235,7 @@ namespace LJCDocGenLib
     }
 
     // Sets the MethodInfo property.
-    /// <include path='items/SetMethodInfo/*' file='Doc/CreateMethodXml.xml'/>
+    // <include path='items/SetMethodInfo/*' file='Doc/CreateMethodXml.xml'/>
     private void SetMethodInfo()
     {
       if (AssemblyReflect != null)
@@ -265,7 +265,7 @@ namespace LJCDocGenLib
     }
 
     // Sets the Object Remarks elements.
-    /// <include path='items/SetMethodRemarks/*' file='Doc/CreateMethodXml.xml'/>
+    // <include path='items/SetMethodRemarks/*' file='Doc/CreateMethodXml.xml'/>
     private bool SetMethodRemarks(Section section = null)
     {
       RepeatItem repeatItem;
@@ -312,10 +312,19 @@ namespace LJCDocGenLib
 
     #region Properties
 
+    // Gets the AssemblyReflect reference.
     private LJCAssemblyReflect AssemblyReflect { get; }
+
+    // Gets the DataAssembly reference.
     private DataAssembly DataAssembly { get; }
+
+    // Gets the DataMethod reference.
     private DataMethod DataMethod { get; }
+
+    // Gets the DataType reference.
     private DataType DataType { get; }
+
+    // Gets the GenAssembly reference.
     private GenAssembly GenAssembly { get; }
     #endregion
   }

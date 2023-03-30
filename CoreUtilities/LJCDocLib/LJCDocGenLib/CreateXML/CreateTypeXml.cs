@@ -162,7 +162,7 @@ namespace LJCDocGenLib
     #region Private Methods
 
     // Adds the Field data elements.
-    /// <include path='items/AddFields/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/AddFields/*' file='Doc/CreateTypeXml.xml'/>
     private void AddFields(Section section)
     {
       RepeatItem repeatItem;
@@ -186,6 +186,7 @@ namespace LJCDocGenLib
     }
 
     // Create the Method Groups
+    // <include path='items/AddMethodGroups/*' file='Doc/CreateTypeXml.xml'/>
     private bool AddMethodGroups(Sections sections)
     {
       bool retValue = false;
@@ -251,7 +252,7 @@ namespace LJCDocGenLib
     }
 
     // Adds the Methods data elements.
-    /// <include path='items/AddMethods/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/AddMethods/*' file='Doc/CreateTypeXml.xml'/>
     private void AddMethods(Section section, bool usePublic)
     {
       RepeatItem repeatItem;
@@ -290,6 +291,7 @@ namespace LJCDocGenLib
     }
 
     // Adds the Link data elements.
+    // <include path='items/AddLinks/*' file='Doc/CreateTypeXml.xml'/>
     private void AddLinks(Sections sections, Replacements mainReplacements)
     {
       if (NetCommon.HasItems(DataType.DataLinks))
@@ -323,7 +325,7 @@ namespace LJCDocGenLib
     }
 
     // Adds the Properties data elements.
-    /// <include path='items/AddProperties/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/AddProperties/*' file='Doc/CreateTypeXml.xml'/>
     private void AddProperties(Section section)
     {
       GenProperty genProperty = new GenProperty(GenRoot, GenAssembly
@@ -344,7 +346,7 @@ namespace LJCDocGenLib
     }
 
     // Adds the Type syntax element.
-    /// <include path='items/AddSyntax/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/AddSyntax/*' file='Doc/CreateTypeXml.xml'/>
     private void AddSyntax(Replacements replacements)
     {
       string syntax = DataCommon.GetSyntax(DataType.Remark
@@ -383,7 +385,7 @@ namespace LJCDocGenLib
     }
 
     // Gets the Field count.
-    /// <include path='items/FieldCount/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/FieldCount/*' file='Doc/CreateTypeXml.xml'/>
     private int FieldCount()
     {
       int retValue = 0;
@@ -396,7 +398,7 @@ namespace LJCDocGenLib
     }
 
     // Gets the Method count.
-    /// <include path='items/MethodCount/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/MethodCount/*' file='Doc/CreateTypeXml.xml'/>
     private int MethodCount(bool usePublic)
     {
       int retValue = 0;
@@ -416,7 +418,7 @@ namespace LJCDocGenLib
     }
 
     // Gets the Property count.
-    /// <include path='items/PropertyCount/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/PropertyCount/*' file='Doc/CreateTypeXml.xml'/>
     private int PropertyCount()
     {
       int retValue = 0;
@@ -429,7 +431,7 @@ namespace LJCDocGenLib
     }
 
     // The Example Remarks elements.
-    /// <include path='items/SetExampleRemarks/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/SetExampleRemarks/*' file='Doc/CreateTypeXml.xml'/>
     private bool SetExampleRemarks(Section section = null)
     {
       RepeatItem repeatItem;
@@ -460,7 +462,7 @@ namespace LJCDocGenLib
     }
 
     // Sets the Object Remarks elements.
-    /// <include path='items/SetTypeRemarks/*' file='Doc/CreateTypeXml.xml'/>
+    // <include path='items/SetTypeRemarks/*' file='Doc/CreateTypeXml.xml'/>
     private bool SetTypeRemarks(Section section = null)
     {
       bool retValue = false;
@@ -500,13 +502,22 @@ namespace LJCDocGenLib
 
     #region Properties
 
+    // Gets the AssemblyReflect reference.
     private LJCAssemblyReflect AssemblyReflect { get; }
+
+    // Gets the DataAssembly reference.
     private DataAssembly DataAssembly { get; }
+
+    // Gets the DataType reference.
     private DataType DataType { get; }
+
+    // Gets the GenAssembly reference.
     private GenAssembly GenAssembly { get; }
+
+    // Gets the GenRoot reference.
     private GenRoot GenRoot { get; }
+    #endregion
 
     private DataMethods mOtherMethods;
-    #endregion
   }
 }

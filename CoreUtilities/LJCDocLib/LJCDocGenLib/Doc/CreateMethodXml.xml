@@ -30,6 +30,13 @@
     </summary>
     <param name="replacements">The Replacements object.</param>
   </AddSyntax>
+  <AddParams>
+    <summary>
+      Adds the Method parameter elements.
+    </summary>
+    <param name="sections">The Sections collection.</param>
+    <param name="mainReplacements">The main section replacements.</param>
+  </AddParams>
   <SetExampleRemarks>
     <summary>
       The Example Remarks elements.

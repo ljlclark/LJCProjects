@@ -69,7 +69,7 @@ namespace LJCDocGenLib
 
     #region Private Methods
 
-    //
+    // Returns the assembly count.
     private int AssemblyCount()
     {
       int retValue = 0;
@@ -89,10 +89,10 @@ namespace LJCDocGenLib
 
     #region Properties
 
-    //private DocGenGroups DocGenGroups { get; }
+    // Gets the AssemblyGroups reference.
     private DocAssemblyGroups AssemblyGroups { get; }
 
-    /// <summary></summary>
+    /// <summary>Gets or sets the Managers object.</summary>
     public ManagersDocGen Managers { get; set; }
     #endregion
   }

@@ -3,7 +3,7 @@ echo Licensed under the MIT License.
 rem ClearGenTextData.cmd
 
 if %1%. == ClearAll. goto ClearAll
-set RootFolder=..\..\LJCGenText
+set RootFolder=..\LJCGenText
 goto Clear
 :ClearAll
 set RootFolder=CoreUtilities\LJCGenText
@@ -18,3 +18,4 @@ del %RootFolder%\%AppFolder%\bin\Debug\XMLFiles\*.* /q
 set AppFolder=LJCGenTextEdit
 del %RootFolder%\%AppFolder%\bin\Debug\DataXML\*.* /q
 del %RootFolder%\%AppFolder%\bin\Debug\TempFiles\*.* /q
+pause

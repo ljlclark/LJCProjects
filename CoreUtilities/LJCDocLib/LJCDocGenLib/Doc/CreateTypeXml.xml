@@ -33,6 +33,13 @@
     </summary>
     <param name="section">The Section object.</param>
   </AddFields>
+  <AddMethodGroups>
+    <summary>
+      Create the Method Groups
+    </summary>
+    <param name="sections">The Sections collection.</param>
+    <returns>True if groups were added, otherwise false.</returns>
+  </AddMethodGroups>
   <AddMethods>
     <summary>
       Adds the Methods data elements.
@@ -40,6 +47,13 @@
     <param name="section">The Section object.</param>
     <param name="usePublic">The include only Public methods flag.</param>
   </AddMethods>
+  <AddLinks>
+    <summary>
+      Adds the Link data elements.
+    </summary>
+    <param name="sections">The Sections collection.</param>
+    <param name="mainReplacements">The main section replacements.</param>
+  </AddLinks>
   <AddProperties>
     <summary>
       Adds the Properties data elements.

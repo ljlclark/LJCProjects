@@ -5,6 +5,7 @@ using System;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCDocGenLib
 {
@@ -97,7 +98,7 @@ namespace LJCDocGenLib
     #region Private Methods
 
     // Adds the Property syntax elements.
-    /// <include path='items/AddSyntax/*' file='Doc/CreatePropertyXml.xml'/>
+    // <include path='items/AddSyntax/*' file='Doc/CreatePropertyXml.xml'/>
     private void AddSyntax(Replacements replacements)
     {
       if (DataType.Name != "Resources")
@@ -125,17 +126,14 @@ namespace LJCDocGenLib
     }
 
     // Sets the PropertyInfo property.
-    /// <include path='items/SetPropertyInfo/*' file='Doc/CreatePropertyXml.xml'/>
+    // <include path='items/SetPropertyInfo/*' file='Doc/CreatePropertyXml.xml'/>
     private void SetPropertyInfo()
     {
-      if (AssemblyReflect != null)
-      {
-        AssemblyReflect.SetPropertyInfo(DataProperty.Name, DataProperty.FullName);
-      }
+      AssemblyReflect?.SetPropertyInfo(DataProperty.Name, DataProperty.FullName);
     }
 
     // Sets the Object Remarks elements.
-    /// <include path='items/SetPropertyRemarks/*' file='Doc/CreatePropertyXml.xml'/>
+    // <include path='items/SetPropertyRemarks/*' file='Doc/CreatePropertyXml.xml'/>
     private bool SetPropertyRemarks(Section section = null)
     {
       RepeatItem repeatItem;
@@ -182,10 +180,19 @@ namespace LJCDocGenLib
 
     #region Properties
 
+    // Gets the AssemblyReflect reference.
     private LJCAssemblyReflect AssemblyReflect { get; }
+
+    // Gets the DataAssembly reference.
     private DataAssembly DataAssembly { get; }
+
+    // Gets the DataProperty reference.
     private DataProperty DataProperty { get; }
+
+    // Gets the DataType reference.
     private DataType DataType { get; }
+
+    // Gets the GenAssembly reference.
     private GenAssembly GenAssembly { get; }
     #endregion
   }

@@ -26,6 +26,13 @@
     </summary>
     <param name="section">The Section object.</param>
   </AddClassList>
+  <AddLinks>
+    <summary>
+      Gets the Link elements.
+    </summary>
+    <param name="sections">The Sections collection.</param>
+    <param name="mainReplacements">The main section replacements.</param>
+  </AddLinks>
   <SetAssemblyRemarks>
     <summary>
       Sets the Assembly Remarks elements.

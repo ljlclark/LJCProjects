@@ -8,6 +8,7 @@ using LJCDocObjLib;
 using System.IO;
 using LJCDocLibDAL;
 using System.Collections.Generic;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCDocGenLib
 {
@@ -58,10 +59,7 @@ namespace LJCDocGenLib
         section = sections.Add("AssemblyRemarks");
         SetAssemblyRemarks(section);
       }
-      //if (AddLinksFile(sections))
-      //{
-      //  replacements.Add("_HasLinks_", "true");
-      //}
+
       AddLinks(sections, replacements);
 
       var classListHeading = "Classes";
@@ -148,7 +146,7 @@ namespace LJCDocGenLib
     }
 
     // Creates the Class List.
-    /// <include path='items/AddClassList/*' file='Doc/CreateAssemblyXml.xml'/>
+    // <include path='items/AddClassList/*' file='Doc/CreateAssemblyXml.xml'/>
     private void AddClassList(Section section)
     {
       RepeatItem repeatItem;
@@ -172,6 +170,7 @@ namespace LJCDocGenLib
     }
 
     // Gets the Link elements.
+    // <include path='items/AddLinks/*' file='Doc/CreateAssemblyXml.xml'/>
     private void AddLinks(Sections sections, Replacements mainReplacements)
     {
       // Look through all data types for Assembly Remarks.
@@ -212,7 +211,7 @@ namespace LJCDocGenLib
     }
 
     // Sets the Object Remarks elements.
-    /// <include path='items/SetAssemblyRemarks/*' file='Doc/CreateAssemblyXml.xml'/>
+    // <include path='items/SetAssemblyRemarks/*' file='Doc/CreateAssemblyXml.xml'/>
     private bool SetAssemblyRemarks(Section section = null)
     {
       bool retValue = false;
@@ -265,6 +264,7 @@ namespace LJCDocGenLib
 
     #region Properties
 
+    // Gets the DataAssembly reference.
     private DataAssembly DataAssembly { get; }
     #endregion
 

@@ -5,6 +5,7 @@ using System;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCDocGenLib
 {
@@ -97,7 +98,7 @@ namespace LJCDocGenLib
     #region Private Methods
 
     // Adds the Field syntax elements.
-    /// <include path='items/AddSyntax/*' file='Doc/CreateFieldXml.xml'/>
+    // <include path='items/AddSyntax/*' file='Doc/CreateFieldXml.xml'/>
     private void AddSyntax(Replacements replacements)
     {
       string syntax;
@@ -126,17 +127,14 @@ namespace LJCDocGenLib
     }
 
     // Sets the FieldInfo property.
-    /// <include path='items/SetFieldInfo/*' file='Doc/CreateFieldXml.xml'/>
+    // <include path='items/SetFieldInfo/*' file='Doc/CreateFieldXml.xml'/>
     private void SetFieldInfo()
     {
-      if (AssemblyReflect != null)
-      {
-        AssemblyReflect.SetFieldInfo(DataField.Name);
-      }
+      AssemblyReflect?.SetFieldInfo(DataField.Name);
     }
 
     // Sets the Object Remarks elements.
-    /// <include path='items/SetFieldRemarks/*' file='Doc/CreateFieldXml.xml'/>
+    // <include path='items/SetFieldRemarks/*' file='Doc/CreateFieldXml.xml'/>
     private bool SetFieldRemarks(Section section = null)
     {
       RepeatItem repeatItem;
@@ -183,10 +181,19 @@ namespace LJCDocGenLib
 
     #region Properties
 
+    // Gets the AssemblyReflect reference.
     private LJCAssemblyReflect AssemblyReflect { get; }
+
+    // Gets the DataAssembly reference.
     private DataAssembly DataAssembly { get; }
+
+    // Gets the DataField reference.
     private DataField DataField { get; }
+
+    // Gets the DataType reference.
     private DataType DataType { get; }
+
+    // Gets the GenAssembly reference.
     private GenAssembly GenAssembly { get; }
     #endregion
   }

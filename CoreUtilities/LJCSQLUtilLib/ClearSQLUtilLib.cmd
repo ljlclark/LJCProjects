@@ -35,4 +35,6 @@ set File=ForeignKeyManagerTest
 call %ClearBuild%
 del %Solution%\%Project%\%bin%\ConnectionTemplates.xml
 del %Solution%\%Project%\%bin%\DataConfigs.xml
+del %Solution%\%Project%\%bin%\LJCSQLUtilLib.xml
 del %Solution%\%Project%\%bin%\LJCSQLUtilLibDAL.xml
+pause
