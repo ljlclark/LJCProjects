@@ -15,6 +15,13 @@
     <param name="docExample">The DocExample object.</param>
     <returns>DataExample object.</returns>
   </GetDataExample>
+  <GetDataLinks>
+    <summary>
+      Creates and returns the DataLinks from the DocLinks object.
+    </summary>
+    <param name="docLinks">The DocLinks object.</param>
+    <returns>The DataLinks object.</returns>
+  </GetDataLinks>
   <GetDataParams>
     <summary>
       Creates and returns the DataParams from the DocParams object.
@@ -37,6 +44,13 @@
     <param name="prefix">The member prefix value.</param>
     <returns>The doc member name.</returns>
   </GetMemberName>
+  <GetNamespace>
+    <summary>
+      Retrieves the namespace from the full object name.
+    </summary>
+    <param name="fullName">The full object name.</param>
+    <returns>The object namespace.</returns>
+  </GetNamespace>
   <GetSyntax>
     <summary>
       Retrieves and returns the Syntax value.

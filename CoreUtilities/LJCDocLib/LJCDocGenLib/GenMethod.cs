@@ -66,10 +66,10 @@ namespace LJCDocGenLib
         else
         {
           // Testing
-          if ("GenAssemblyPage" == DataType.Name)
-          {
-            //File.WriteAllText(dataFileSpec, dataXml);
-          }
+          //if ("GenAssemblyPage" == DataType.Name)
+          //{
+          //  File.WriteAllText(dataFileSpec, dataXml);
+          //}
 
           Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
             , dataXml) as Sections;

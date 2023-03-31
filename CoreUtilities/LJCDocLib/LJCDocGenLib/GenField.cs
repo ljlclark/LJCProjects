@@ -53,15 +53,15 @@ namespace LJCDocGenLib
       string dataXml = createFieldXml.GetXmlData();
       if (false == NetString.HasValue(dataXml))
       {
-        Console.WriteLine("Missing Method XML Data.");
+        Console.WriteLine("Missing Field XML Data.");
       }
       else
       {
         // Testing
-        if ("PublicField" == DataType.Name)
-        {
-          //File.WriteAllText(dataFileSpec, dataXml);
-        }
+        //if ("PublicField" == DataType.Name)
+        //{
+        //  /File.WriteAllText(dataFileSpec, dataXml);
+        //}
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
           , dataXml) as Sections;

@@ -40,11 +40,8 @@ namespace LJCDocObjLib
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="docLinks"></param>
-    /// <returns></returns>
+    // Creates and returns the DataLinks from the DocLinks object.
+    /// <include path='items/GetDataLinks/*' file='Doc/DataCommon.xml'/>
     public static DataLinks GetDataLinks(DocLinks docLinks)
     {
       DataLinks retValue = null;
@@ -157,11 +154,8 @@ namespace LJCDocObjLib
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves the namespace from the full object name.
-    /// </summary>
-    /// <param name="fullName">The full object name.</param>
-    /// <returns>The object namespace.</returns>
+    // Retrieves the namespace from the full object name.
+    /// <include path='items/GetNamespace/*' file='Doc/DataCommon.xml'/>
     public static string GetNamespace(string fullName)
     {
       string retValue = null;

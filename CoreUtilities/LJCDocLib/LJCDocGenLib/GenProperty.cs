@@ -53,15 +53,15 @@ namespace LJCDocGenLib
       string dataXml = createPropertyXml.GetXmlData();
       if (false == NetString.HasValue(dataXml))
       {
-        Console.WriteLine("Missing Method XML Data.");
+        Console.WriteLine("Missing Property XML Data.");
       }
       else
       {
         // Testing
-        if ("PublicProperty" == DataType.Name)
-        {
-          //File.WriteAllText(dataFileSpec, dataXml);
-        }
+        //if ("PublicProperty" == DataType.Name)
+        //{
+        //  File.WriteAllText(dataFileSpec, dataXml);
+        //}
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
           , dataXml) as Sections;

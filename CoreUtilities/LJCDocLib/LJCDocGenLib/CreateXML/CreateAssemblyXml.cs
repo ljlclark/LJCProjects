@@ -90,6 +90,7 @@ namespace LJCDocGenLib
     #region Private Methods
 
     // Creates the Class Groups
+    // <include path='items/AddClassGroups/*' file='Doc/CreateAssemblyXml.xml'/>
     private bool AddClassGroups(Sections sections)
     {
       bool retValue = false;
@@ -194,6 +195,7 @@ namespace LJCDocGenLib
               int startIndex = 0;
               text = NetString.GetDelimitedString(text, "--", ref startIndex
                 , "#NoDelimiter");
+
               var fileName = Path.GetFileNameWithoutExtension(fileSpec);
               var repeatItem = section.RepeatItems.Add(fileName);
               var replacements = repeatItem.Replacements;

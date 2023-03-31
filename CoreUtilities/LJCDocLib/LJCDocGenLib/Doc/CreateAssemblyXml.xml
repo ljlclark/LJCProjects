@@ -20,6 +20,13 @@
     </summary>
     <returns>The XML Data values string.</returns>
   </GetXmlData>
+  <AddClassGroups>
+    <summary>
+      Creates the Class Groups
+    </summary>
+    <param name="sections">The Sections collection.</param>
+    <returns>True if groups were added, otherwise false.</returns>
+  </AddClassGroups>
   <AddClassList>
     <summary>
       Gets the Class List elements.

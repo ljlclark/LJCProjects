@@ -71,8 +71,6 @@
     <Compile Include="GenMethod.cs" />
     <Compile Include="GenProperty.cs" />
     <Compile Include="GenRoot.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="Links.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxHighlightHtml.cs" />
     <Compile Include="UserTypes.cs" />
