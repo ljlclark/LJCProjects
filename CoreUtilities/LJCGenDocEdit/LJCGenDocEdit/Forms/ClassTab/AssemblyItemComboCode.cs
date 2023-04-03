@@ -28,7 +28,7 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.WaitCursor;
       mCombo.Items.Clear();
 
-      if (mParent.AssemblyGrid.CurrentRow is LJCGridRow parentRow)
+      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
         var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
 
@@ -57,7 +57,7 @@ namespace LJCGenDocEdit
         var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
 
         mParent.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in mParent.AssemblyGrid.Rows)
+        foreach (LJCGridRow row in mParent.AssemblyGroupGrid.Rows)
         {
           var rowID = (short)row.LJCGetInt32(DocAssembly.ColumnID);
           if (rowID == parentID)

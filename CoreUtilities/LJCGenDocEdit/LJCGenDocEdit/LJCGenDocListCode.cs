@@ -29,15 +29,15 @@ namespace LJCGenDocEdit
         TabsSplit.SplitterWidth = 4;
 
         ListHelper.SetPanelControls(AssemblySplit.Panel1, AssemblyHeading
-          , null, AssemblyGrid);
+          , null, AssemblyGroupGrid);
         ListHelper.SetPanelControls(AssemblySplit.Panel2, AssemblyItemHeading
           , null, AssemblyItemGrid);
         ListHelper.SetPanelControls(ClassSplit.Panel1, ClassHeading
-          , null, ClassGrid);
+          , null, ClassGroupGrid);
         ListHelper.SetPanelControls(AssemblySplit.Panel2, ClassItemHeading
           , null, ClassItemGrid);
         ListHelper.SetPanelControls(ClassSplit.Panel1, ClassHeading
-          , null, ClassGrid);
+          , null, ClassGroupGrid);
         ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeading
           , null, ClassItemGrid);
       }
@@ -128,7 +128,10 @@ namespace LJCGenDocEdit
           FormCommon.RestoreSplitDistance(ClassSplit, ControlValues);
           FormCommon.RestoreSplitDistance(TabsSplit, ControlValues);
 
-          //_ClassName_Grid.LJCRestoreColumnValues(ControlValues);
+          AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
+          AssemblyItemGrid.LJCRestoreColumnValues(ControlValues);
+          ClassGroupGrid.LJCRestoreColumnValues(ControlValues);
+          ClassItemGrid.LJCRestoreColumnValues(ControlValues);
         }
       }
     }
@@ -139,7 +142,10 @@ namespace LJCGenDocEdit
       ControlValues controlValues = new ControlValues();
 
       // Save Grid Column values.
-      //_ClassName_Grid.LJCSaveColumnValues(controlValues);
+      AssemblyGroupGrid.LJCSaveColumnValues(controlValues);
+      AssemblyItemGrid.LJCSaveColumnValues(controlValues);
+      ClassGroupGrid.LJCSaveColumnValues(controlValues);
+      ClassItemGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
       controlValues.Add("AssemblySplit.SplitterDistance", 0, 0, 0
@@ -162,7 +168,8 @@ namespace LJCGenDocEdit
       mAssemblyGroupGridCode = new AssemblyGroupGridCode(this);
       mAssemblyItemGridCode = new AssemblyItemGridCode(this);
       mAssemblyItemComboCode = new AssemblyItemComboCode(this);
-      mClassGridCode = new ClassGridCode(this);
+      mClassGroupGridCode = new ClassGroupGridCode(this);
+      mClassItemGridCode = new ClassItemGridCode(this);
     }
 
     // Setup the data grids.
@@ -170,15 +177,17 @@ namespace LJCGenDocEdit
     {
       SetupGridAssembly();
       SetupGridAssemblyItem();
+      SetupGridClass();
+      SetupGridClassItem();
     }
 
     // Setup the grid display columns.
     private void SetupGridAssembly()
     {
-      AssemblyGrid.BackgroundColor = mSettings.BeginColor;
+      AssemblyGroupGrid.BackgroundColor = mSettings.BeginColor;
 
       // Setup default display columns if no columns are defined.
-      if (0 == AssemblyGrid.Columns.Count)
+      if (0 == AssemblyGroupGrid.Columns.Count)
       {
         List<string> columnNames = new List<string>()
         {
@@ -191,7 +200,7 @@ namespace LJCGenDocEdit
         mDisplayColumnsAssembly = assemblyGroupManager.GetColumns(columnNames);
 
         // Setup the grid display columns.
-        AssemblyGrid.LJCAddDisplayColumns(mDisplayColumnsAssembly);
+        AssemblyGroupGrid.LJCAddDisplayColumns(mDisplayColumnsAssembly);
       }
     }
     private DbColumns mDisplayColumnsAssembly;
@@ -219,6 +228,54 @@ namespace LJCGenDocEdit
       }
     }
     private DbColumns mDisplayColumnsAssemblyItem;
+
+    // Setup the grid display columns.
+    private void SetupGridClass()
+    {
+      ClassGroupGrid.BackgroundColor = mSettings.BeginColor;
+
+      // Setup default display columns if no columns are defined.
+      if (0 == ClassGroupGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocClassGroup.ColumnHeadingName,
+          DocClassGroup.ColumnHeadingTextCustom
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var classManager = Managers.DocClassGroupManager;
+        mDisplayColumnsClass = classManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        ClassGroupGrid.LJCAddDisplayColumns(mDisplayColumnsClass);
+      }
+    }
+    private DbColumns mDisplayColumnsClass;
+
+    // Setup the grid display columns.
+    private void SetupGridClassItem()
+    {
+      ClassItemGrid.BackgroundColor = mSettings.BeginColor;
+
+      // Setup default display columns if no columns are defined.
+      if (0 == ClassItemGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocClass.ColumnName,
+          DocClass.ColumnDescription
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var classManager = Managers.DocClassManager;
+        mDisplayColumnsClassItem = classManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        ClassItemGrid.LJCAddDisplayColumns(mDisplayColumnsClassItem);
+      }
+    }
+    private DbColumns mDisplayColumnsClassItem;
 
     // Splitter is not in the first TabPage so Set values on first display.
     private void ClassSplit_Resize(object sender, EventArgs e)
@@ -267,10 +324,11 @@ namespace LJCGenDocEdit
           break;
 
         case Change.AssemblyCombo:
-          mClassGridCode.DataRetrieve();
+          mClassGroupGridCode.DataRetrieve();
           break;
 
         case Change.ClassGroup:
+          mClassItemGridCode.DataRetrieve();
           break;
 
         case Change.ClassItem:
@@ -367,7 +425,8 @@ namespace LJCGenDocEdit
     private AssemblyGroupGridCode mAssemblyGroupGridCode;
     private AssemblyItemGridCode mAssemblyItemGridCode;
     private AssemblyItemComboCode mAssemblyItemComboCode;
-    private ClassGridCode mClassGridCode;
+    private ClassGroupGridCode mClassGroupGridCode;
+    private ClassItemGridCode mClassItemGridCode;
 
     // Foreign Keys
     #endregion

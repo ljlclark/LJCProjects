@@ -1,12 +1,12 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ValuesViewEditor.cs
-using System;
 using LJCDBClientLib;
+using System;
 
 namespace LJCViewEditor
 {
-	//Application config values singleton.
+	//  Application config values singleton.
 	internal sealed class ValuesViewEditor
 	{
 		#region Constructors

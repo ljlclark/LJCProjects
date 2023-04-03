@@ -18,7 +18,7 @@ namespace LJCGenDocEdit
     internal AssemblyGroupGridCode(LJCGenDocList parent)
     {
       mParent = parent;
-      mGrid = mParent.AssemblyGrid;
+      mGrid = mParent.AssemblyGroupGrid;
       mManagers = mParent.Managers;
     }
     #endregion
@@ -99,6 +99,30 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Action Methods
+
+    // Refreshes the list.
+    internal void DoRefresh()
+    {
+      short id = 0;
+
+      mParent.Cursor = Cursors.WaitCursor;
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        id = (short)row.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (id > 0)
+      {
+        var dataRecord = new DocAssemblyGroup()
+        {
+          ID = id
+        };
+        RowSelect(dataRecord);
+      }
+      mParent.Cursor = Cursors.Default;
+    }
     #endregion
 
     #region Class Data

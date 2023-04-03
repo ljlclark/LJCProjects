@@ -8,6 +8,7 @@
 // #Value _NameSpace_
 // #Value _VarClassName_
 // _FullAppName_.cs
+using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
@@ -890,7 +891,7 @@ namespace _Namespace_
     private string mHelpPageDetail;
 
     // The Managers object.
-    internal _ClassName_Managers Managers { get; set; }
+    internal Managers_ClassName_ Managers { get; set; }
     #endregion
 
     #region Private Properties

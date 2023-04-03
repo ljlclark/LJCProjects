@@ -62,6 +62,16 @@ namespace LJCDocLibDAL
       Manager.Delete(keyColumns, filters);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyNames"></param>
+    /// <returns></returns>
+    public DbColumns GetColumns(List<string> propertyNames)
+    {
+      return Manager.DataDefinition.LJCGetColumns(propertyNames);
+    }
+
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DocMethodGroupHeadings Load(DbColumns keyColumns = null

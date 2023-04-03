@@ -67,7 +67,8 @@
     <Compile Include="Forms\ClassTab\AssemblyItemComboCode.cs" />
     <Compile Include="Forms\AssemblyTab\AssemblyGroupGridCode.cs" />
     <Compile Include="Forms\AssemblyTab\AssemblyItemGridCode.cs" />
-    <Compile Include="Forms\ClassTab\ClassGridCode.cs" />
+    <Compile Include="Forms\ClassTab\ClassGroupGridCode.cs" />
+    <Compile Include="Forms\ClassTab\ClassItemGridCode.cs" />
     <Compile Include="LJCGenDocList.cs">
       <SubType>Form</SubType>
     </Compile>

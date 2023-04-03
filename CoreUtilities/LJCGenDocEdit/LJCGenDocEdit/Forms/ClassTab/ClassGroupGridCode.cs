@@ -8,15 +8,15 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  internal class ClassGridCode
+  internal class ClassGroupGridCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal ClassGridCode(LJCGenDocList parent)
+    internal ClassGroupGridCode(LJCGenDocList parent)
     {
       mParent = parent;
-      mGrid = mParent.ClassGrid;
+      mGrid = mParent.ClassGroupGrid;
       mManagers = mParent.Managers;
     }
     #endregion
@@ -29,16 +29,16 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.WaitCursor;
       mGrid.LJCRowsClear();
 
-      if (mParent.AssemblyGrid.CurrentRow is LJCGridRow parentRow)
+      if (mParent.AssemblyItemGrid.CurrentRow is LJCGridRow parentRow)
       {
         var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
 
-        var manager = mManagers.DocClassManager;
+        var manager = mManagers.DocClassGroupManager;
         var dataRecords = manager.LoadWithParent(parentID);
 
         if (NetCommon.HasItems(dataRecords))
         {
-          foreach (DocClass dataRecord in dataRecords)
+          foreach (DocClassGroup dataRecord in dataRecords)
           {
             RowAdd(dataRecord);
           }
@@ -50,7 +50,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DocClass dataRecord)
+    private LJCGridRow RowAdd(DocClassGroup dataRecord)
     {
       var retValue = mGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
@@ -61,7 +61,7 @@ namespace LJCGenDocEdit
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DocClass dataRecord)
+    private void RowUpdate(DocClassGroup dataRecord)
     {
       if (mGrid.CurrentRow is LJCGridRow row)
       {
@@ -71,13 +71,13 @@ namespace LJCGenDocEdit
     }
 
     // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
+    private void SetStoredValues(LJCGridRow row, DocClassGroup dataRecord)
     {
-      row.LJCSetInt32(DocClass.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(DocClassGroup.ColumnID, dataRecord.ID);
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(DocClass dataRecord)
+    private bool RowSelect(DocClassGroup dataRecord)
     {
       bool retValue = false;
 
@@ -86,7 +86,7 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mGrid.Rows)
         {
-          var rowID = row.LJCGetInt32(DocClass.ColumnID);
+          var rowID = row.LJCGetInt32(DocClassGroup.ColumnID);
           if (rowID == dataRecord.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -102,6 +102,30 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Action Methods
+
+    // Refreshes the list.
+    internal void DoRefresh()
+    {
+      short id = 0;
+
+      mParent.Cursor = Cursors.WaitCursor;
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        id = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (id > 0)
+      {
+        var dataRecord = new DocClassGroup()
+        {
+          ID = id
+        };
+        RowSelect(dataRecord);
+      }
+      mParent.Cursor = Cursors.Default;
+    }
     #endregion
 
     #region Class Data
