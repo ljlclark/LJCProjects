@@ -49,6 +49,55 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
 
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocClass CurrentItem()
+    {
+      DocClass retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocClass.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocClassManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
+    // Selects a row based on the key record values.
+    /// <summary>
+    /// Selects a row based on the key record values.
+    /// </summary>
+    /// <param name="dataRecord">The data record to select.</param>
+    /// <returns>True if the row was selected, otherwise false.</returns>
+    internal bool RowSelect(DocClass dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        mParent.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in mGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(DocClass.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            mGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        mParent.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DocClass dataRecord)
     {
@@ -74,30 +123,6 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
     {
       row.LJCSetInt32(DocClass.ColumnID, dataRecord.ID);
-    }
-
-    // Selects a row based on the key record values.
-    private bool RowSelect(DocClass dataRecord)
-    {
-      bool retValue = false;
-
-      if (dataRecord != null)
-      {
-        mParent.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in mGrid.Rows)
-        {
-          var rowID = row.LJCGetInt32(DocClass.ColumnID);
-          if (rowID == dataRecord.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            mGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-        mParent.Cursor = Cursors.Default;
-      }
-      return retValue;
     }
     #endregion
 

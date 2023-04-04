@@ -293,6 +293,8 @@ namespace LJCGenDocEdit
     #endregion
     #endregion
 
+
+
     #region Item Change Processing
 
     // Execute the list and related item functions.
@@ -312,15 +314,16 @@ namespace LJCGenDocEdit
         case Change.AssemblyGroup:
           mAssemblyItemGridCode.DataRetrieve();
           mAssemblyItemComboCode.DataRetrieve();
-          mAssemblyItemComboCode.RowSelect();
+          AssemblyComboSelect();
           break;
 
         case Change.AssemblyItem:
-          mAssemblyItemComboCode.RowSelect();
+          AssemblyComboSelect();
           AssemblyItemGrid.LJCSetLastRow();
           break;
 
         case Change.AssemblyCombo:
+          AssemblyItemSelect();
           mClassGroupGridCode.DataRetrieve();
           break;
 
@@ -390,6 +393,26 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Private Methods
+
+    // Selects the AssemblyCombo item with the current AssemblyItem.
+    private void AssemblyComboSelect()
+    {
+      var assemblyItem = mAssemblyItemGridCode.CurrentItem();
+      if (assemblyItem != null)
+      {
+        mAssemblyItemComboCode.RowSelect(assemblyItem);
+      }
+    }
+
+    // Selects the AssemblyCombo item with the current AssemblyItem.
+    private void AssemblyItemSelect()
+    {
+      var assemblyItem = mAssemblyItemComboCode.CurrentItem();
+      if (assemblyItem != null)
+      {
+        mAssemblyItemGridCode.RowSelect(assemblyItem);
+      }
+    }
 
     // Sets the control states based on the current control values.
     private void SetControlState()

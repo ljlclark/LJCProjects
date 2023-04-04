@@ -4,6 +4,8 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
+using System;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -20,6 +22,7 @@ namespace LJCGenDocEdit
       mManagers = mParent.Managers;
     }
     #endregion
+
     #region Data Methods
 
     // Retrieves the combo items.
@@ -47,22 +50,45 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
 
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocAssembly CurrentItem()
+    {
+      DocAssembly retValue = null;
+
+      if (mCombo.SelectedItem != null)
+      {
+        var id = (short)mCombo.LJCSelectedItemID();
+        if (id > 0)
+        {
+          var manager = mManagers.DocAssemblyManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
     // Selects a row based on the key record values.
-    internal bool RowSelect()
+    /// <summary>
+    /// Selects a row based on the key record values.
+    /// </summary>
+    /// <param name="dataRecord">The data record to be selected.</param>
+    /// <returns>True if the item was selected, otherwise false.</returns>
+    internal bool RowSelect(DocAssembly dataRecord)
     {
       bool retValue = false;
 
-      if (mParent.AssemblyItemGrid.CurrentRow is LJCGridRow parentRow)
+      if (dataRecord != null)
       {
-        var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
-
         mParent.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in mParent.AssemblyGroupGrid.Rows)
+        for (int index = 0; index < mCombo.Items.Count; index++)
         {
-          var rowID = (short)row.LJCGetInt32(DocAssembly.ColumnID);
-          if (rowID == parentID)
+          var item = mCombo.Items[index] as LJCItem;
+          if (item.ID == dataRecord.ID)
           {
-            mParent.AssemblyCombo.LJCSetByItemID(rowID);
+            mCombo.LJCSetByItemID(item.ID);
             retValue = true;
             break;
           }
