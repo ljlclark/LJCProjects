@@ -69,19 +69,19 @@
     <Compile Include="Forms\AssemblyTab\AssemblyItemGridCode.cs" />
     <Compile Include="Forms\ClassTab\ClassGroupGridCode.cs" />
     <Compile Include="Forms\ClassTab\ClassItemGridCode.cs" />
-    <Compile Include="LJCGenDocList.cs">
+    <Compile Include="Forms\LJCGenDocList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LJCGenDocList.Designer.cs">
+    <Compile Include="Forms\LJCGenDocList.Designer.cs">
       <DependentUpon>LJCGenDocList.cs</DependentUpon>
     </Compile>
-    <Compile Include="LJCGenDocListCode.cs">
+    <Compile Include="Forms\LJCGenDocListCode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProgramGenDocEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesGenDocEdit.cs" />
-    <EmbeddedResource Include="LJCGenDocList.resx">
+    <EmbeddedResource Include="Forms\LJCGenDocList.resx">
       <DependentUpon>LJCGenDocList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -122,6 +122,13 @@ msbuild CoreUtilities\LJCDocLib\LJCDocLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
+echo ----------------- %counter% - LJCGenDocEdit.sln --------------- >> Build.txt
+echo LJCDocLib >> Build.txt
+call CoreUtilities\LJCGenDocEdit\UpdateGenDocEdit.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCGenDocEdit\LJCGenDocEdit.sln
+
+set /a counter+=1
+echo - >> Build.txt
 echo ----------------- %counter% - LJCSQLUtilLib --------------- >> Build.txt
 echo LJCSQLUtilLib >> Build.txt
 call CoreUtilities\LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Build.txt
