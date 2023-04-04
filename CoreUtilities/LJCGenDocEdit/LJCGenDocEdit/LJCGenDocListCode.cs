@@ -126,7 +126,6 @@ namespace LJCGenDocEdit
           // Restore Splitter, Grid and other values.
           FormCommon.RestoreSplitDistance(AssemblySplit, ControlValues);
           FormCommon.RestoreSplitDistance(ClassSplit, ControlValues);
-          FormCommon.RestoreSplitDistance(TabsSplit, ControlValues);
 
           AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
           AssemblyItemGrid.LJCRestoreColumnValues(ControlValues);
@@ -152,8 +151,6 @@ namespace LJCGenDocEdit
         , AssemblySplit.SplitterDistance);
       controlValues.Add("ClassSplit.SplitterDistance", 0, 0, 0
         , ClassSplit.SplitterDistance);
-      controlValues.Add("TabsSplit.SplitterDistance", 0, 0, 0
-        , TabsSplit.SplitterDistance);
 
       // Save Window values.
       controlValues.Add(this.Name, Left, Top, Width, Height);

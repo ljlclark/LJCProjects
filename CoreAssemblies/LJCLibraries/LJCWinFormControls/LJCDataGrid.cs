@@ -222,11 +222,7 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row for a DragOver or DragDrop event.
-    /// <summary>
-    /// Retrieves the row for a DragOver or DragDrop event.
-    /// </summary>
-    /// <param name="dragPoint"></param>
-    /// <returns></returns>
+    /// <include path='items/LJCGetDragRowIndex/*' file='Doc/LJCDataGrid.xml'/>
     public int LJCGetDragRowIndex(Point dragPoint)
     {
       int retValue;
@@ -236,13 +232,8 @@ namespace LJCWinFormControls
       return retValue;
     }
 
-    // Gets the GroupRow at the cursor location.
-    /// <summary>
-    /// Gets the GroupRow at the cursor location.
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <returns></returns>
+    // Gets the row at the cursor location.
+    /// <include path='items/LJCGetMouseRow/*' file='Doc/LJCDataGrid.xml'/>
     public LJCGridRow LJCGetMouseRow(int x, int y)
     {
       LJCGridRow retValue = null;
@@ -256,7 +247,7 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row where the mouse was clicked
-    /// <include path='items/LJCGetMouseRow/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include path='items/LJCGetMouseRow1/*' file='Doc/LJCDataGrid.xml'/>
     public LJCGridRow LJCGetMouseRow(MouseEventArgs e)
     {
       LJCGridRow retValue = null;
@@ -280,12 +271,7 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row index for the X and Y values.
-    /// <summary>
-    /// Retrieves the row index for the X and Y values.
-    /// </summary>
-    /// <param name="x">The mouse X value.</param>
-    /// <param name="y">The mouse Y value.</param>
-    /// <returns>The mouse row index.</returns>
+    /// <include path='items/LJCGetMouseRowIndex1/*' file='Doc/LJCDataGrid.xml'/>
     public int LJCGetMouseRowIndex(int x, int y)
     {
       int retValue = -1;

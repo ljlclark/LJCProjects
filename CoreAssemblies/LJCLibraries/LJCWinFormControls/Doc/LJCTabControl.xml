@@ -121,6 +121,13 @@
     <param name="y">The Tab Label mouse Y value.</param>
     <returns></returns>
   </LJCGetTabPage2>
+  <LJCGetTabPage3>
+    <summary>
+      Retrieves the tab page where the mouse was clicked.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected tab page.</returns>
+  </LJCGetTabPage3>
   <LJCGetTabPageIndex>
     <summary>
       Gets the tab index for a tab page.
@@ -135,6 +142,26 @@
     <param name="sourceIndex">The source TabPage index.</param>
     <param name="targetIndex">The target TabPage index.</param>
   </LJCMoveTabPage>
+  <LJCMoveTabPageLeft>
+    <summary>
+      Moves the tab page left to the main tabs.
+    </summary>
+    <param name="targetTabs">The main tabs.</param>
+    <param name="split">The tabs splitter.</param>
+  </LJCMoveTabPageLeft>
+  <LJCMoveTabPageRight>
+    <summary>
+      Moves the tab page right to the tile tabs.
+    </summary>
+    <param name="targetTabs">The tile tabs.</param>
+    <param name="split">The tabs splitter.</param>
+  </LJCMoveTabPageRight>
+  <LJCSetCurrentTabPage>
+    <summary>
+      Sets the current tab page.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </LJCSetCurrentTabPage>
 
   <!-- Member Data -->
   <LJCPanelAdd>

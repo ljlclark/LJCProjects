@@ -281,6 +281,14 @@ namespace LJCWinFormControls
       return retValue;
     }
 
+    // Retrieves the tab page where the mouse was clicked.
+    /// <include path='items/LJCGetTabPage3/*' file='Doc/LJCTabControl.xml'/>
+    public TabPage LJCGetTabPage(MouseEventArgs e)
+    {
+      var retValue = LJCGetTabPage(e.X, e.Y);
+      return retValue;
+    }
+
     // Gets the tab index for a tab page.
     /// <include path='items/LJCGetTabPageIndex/*' file='Doc/LJCTabControl.xml'/>
     public int LJCGetTabPageIndex(TabPage tabPage)
@@ -305,6 +313,40 @@ namespace LJCWinFormControls
       var sourcePage = TabPages[sourceIndex];
       TabPages.RemoveAt(sourceIndex);
       TabPages.Insert(targetIndex, sourcePage);
+    }
+
+    // Moves the tab page left to the main tabs.
+    /// <include path='items/LJCMoveTabPageLeft/*' file='Doc/LJCTabControl.xml'/>
+    public void LJCMoveTabPageLeft(LJCTabControl targetTabs
+      , SplitContainer split)
+    {
+      SelectedTab.Parent = targetTabs;
+      if (0 == TabPages.Count)
+      {
+        split.Panel2Collapsed = true;
+      }
+    }
+
+    // Moves the tab page right to the tile tabs.
+    /// <include path='items/LJCMoveTabPageRight/*' file='Doc/LJCTabControl.xml'/>
+    public void LJCMoveTabPageRight(LJCTabControl targetTabs
+      , SplitContainer split)
+    {
+      if (TabPages.Count > 1)
+      {
+        split.Panel2Collapsed = false;
+        SelectedTab.Parent = targetTabs;
+      }
+    }
+
+    // Sets the current tab page.
+    /// <include path='items/LJCSetCurrentTabPage/*' file='Doc/LJCTabControl.xml'/>
+    public void LJCSetCurrentTabPage(MouseEventArgs e)
+    {
+      if (LJCGetTabPage(e) is TabPage tabPage)
+      {
+        SelectedTab = tabPage;
+      }
     }
     #endregion
 

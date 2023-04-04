@@ -78,13 +78,6 @@
     <param name="e">The event arguments.</param>
     <returns>The selected column index.</returns>
   </LJCGetMouseColumnIndex>
-  <LJCGetMouseRowIndex>
-    <summary>
-      Retrieves the row index where the mouse was clicked.
-    </summary>
-    <param name="e">The event arguments.</param>
-    <returns>The selected row index.</returns>
-  </LJCGetMouseRowIndex>
   <LJCGetMouseColumn>
     <summary>
       Retrieves the column where the mouse was clicked.
@@ -92,13 +85,43 @@
     <param name="e">The event arguments.</param>
     <returns>The selected DataGridViewColumn object.</returns>
   </LJCGetMouseColumn>
+  <LJCGetDragRowIndex>
+    <summary>
+      Retrieves the row for a DragOver or DragDrop event.
+    </summary>
+    <param name="dragPoint"></param>
+    <returns></returns>
+  </LJCGetDragRowIndex>
   <LJCGetMouseRow>
+    <summary>
+      Gets the row at the cursor location.
+    </summary>
+    <param name="x"></param>
+    <param name="y"></param>
+    <returns></returns>
+  </LJCGetMouseRow>
+  <LJCGetMouseRow1>
     <summary>
       Retrieves the row where the mouse was clicked
     </summary>
     <param name="e">The event arguments.</param>
     <returns>The selected LJCGridRow object.</returns>
-  </LJCGetMouseRow>
+  </LJCGetMouseRow1>
+  <LJCGetMouseRowIndex>
+    <summary>
+      Retrieves the row index where the mouse was clicked.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <returns>The selected row index.</returns>
+  </LJCGetMouseRowIndex>
+  <LJCGetMouseRowIndex1>
+    <summary>
+      Retrieves the row index for the X and Y values.
+    </summary>
+    <param name="x">The mouse X value.</param>
+    <param name="y">The mouse Y value.</param>
+    <returns>The mouse row index.</returns>
+  </LJCGetMouseRowIndex1>
   <LJCSetMouseCurrentRow>
     <summary>
       Sets the current row to the mouse row.

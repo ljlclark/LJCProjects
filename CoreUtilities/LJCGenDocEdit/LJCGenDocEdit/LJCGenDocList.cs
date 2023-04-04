@@ -41,6 +41,21 @@ namespace LJCGenDocEdit
 
     #region Action Event Handlers
 
+    #region Tabs
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void MainTabsMove_Click(object sender, EventArgs e)
+    {
+      MainTabs.LJCMoveTabPageRight(TileTabs, TabsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void TileTabsMove_Click(object sender, EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(MainTabs, TabsSplit);
+    }
+    #endregion
+
     #region Assembly Group
 
     // Refreshes the list.
@@ -146,6 +161,27 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Control Event Handlers
+
+    #region Tabs
+
+    // Handles the MouseDown event.
+    private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        MainTabs.LJCSetCurrentTabPage(e);
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        TileTabs.LJCSetCurrentTabPage(e);
+      }
+    }
+    #endregion
 
     #region Assembly Group
 
