@@ -85,6 +85,23 @@ namespace _Namespace_
 
     #region _ClassName_
 
+    // Retrieves the currently selecteditem.
+    private _ClassName_ CurrentItem_ClassName_()
+    {
+      _ClassName_ retValue = null;
+
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      {
+        var id = row.LJCGetInt32(_ClassName_.ColumnID);
+        if (id > 0)
+        {
+          var manager = Managers._ClassName_Manager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
     // Retrieves the list rows.
     private void DataRetrieve_ClassName_()
     {

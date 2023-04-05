@@ -25,20 +25,21 @@ namespace LJCGenDocEdit
       {
         AssemblySplit.SplitterWidth = 4;
         ClassSplit.SplitterWidth = 4;
-        ClassSplit.Top += 4;
+        ClassSplit.Top += 5;
         TabsSplit.SplitterWidth = 4;
+        MethodSplit.Top += 5;
 
-        ListHelper.SetPanelControls(AssemblySplit.Panel1, AssemblyHeading
+        ListHelper.SetPanelControls(AssemblySplit.Panel1, AssemblyGroupHeader
           , null, AssemblyGroupGrid);
-        ListHelper.SetPanelControls(AssemblySplit.Panel2, AssemblyItemHeading
+        ListHelper.SetPanelControls(AssemblySplit.Panel2, AssemblyItemHeader
           , null, AssemblyItemGrid);
-        ListHelper.SetPanelControls(ClassSplit.Panel1, ClassHeading
+        ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
           , null, ClassGroupGrid);
-        ListHelper.SetPanelControls(AssemblySplit.Panel2, ClassItemHeading
+        ListHelper.SetPanelControls(AssemblySplit.Panel2, ClassItemHeader
           , null, ClassItemGrid);
-        ListHelper.SetPanelControls(ClassSplit.Panel1, ClassHeading
+        ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
           , null, ClassGroupGrid);
-        ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeading
+        ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeader
           , null, ClassItemGrid);
       }
     }
@@ -163,116 +164,25 @@ namespace LJCGenDocEdit
     private void SetupGridCode()
     {
       mAssemblyGroupGridCode = new AssemblyGroupGridCode(this);
-      mAssemblyItemGridCode = new AssemblyItemGridCode(this);
       mAssemblyItemComboCode = new AssemblyItemComboCode(this);
+      mAssemblyItemGridCode = new AssemblyItemGridCode(this);
       mClassGroupGridCode = new ClassGroupGridCode(this);
+      mClassItemComboCode = new ClassItemComboCode(this);
       mClassItemGridCode = new ClassItemGridCode(this);
+      mMethodGroupGridCode = new MethodGroupGridCode(this);
+      mMethodItemGridCode = new MethodItemGridCode(this);
     }
 
     // Setup the data grids.
     private void SetupGrids()
     {
-      SetupGridAssembly();
-      SetupGridAssemblyItem();
-      SetupGridClass();
-      SetupGridClassItem();
+      mAssemblyGroupGridCode.SetupGrid();
+      mAssemblyItemGridCode.SetupGrid();
+      mClassGroupGridCode.SetupGrid();
+      mClassItemGridCode.SetupGrid();
+      mMethodGroupGridCode.SetupGrid();
+      mMethodItemGridCode.SetupGrid();
     }
-
-    // Setup the grid display columns.
-    private void SetupGridAssembly()
-    {
-      AssemblyGroupGrid.BackgroundColor = mSettings.BeginColor;
-
-      // Setup default display columns if no columns are defined.
-      if (0 == AssemblyGroupGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocAssemblyGroup.ColumnName,
-          DocAssemblyGroup.ColumnHeading
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var assemblyGroupManager = Managers.DocAssemblyGroupManager;
-        mDisplayColumnsAssembly = assemblyGroupManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        AssemblyGroupGrid.LJCAddDisplayColumns(mDisplayColumnsAssembly);
-      }
-    }
-    private DbColumns mDisplayColumnsAssembly;
-
-    // Setup the grid display columns.
-    private void SetupGridAssemblyItem()
-    {
-      AssemblyItemGrid.BackgroundColor = mSettings.BeginColor;
-
-      // Setup default display columns if no columns are defined.
-      if (0 == AssemblyItemGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocAssembly.ColumnName,
-          DocAssembly.ColumnDescription
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var assemblyManager = Managers.DocAssemblyManager;
-        mDisplayColumnsAssemblyItem = assemblyManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        AssemblyItemGrid.LJCAddDisplayColumns(mDisplayColumnsAssemblyItem);
-      }
-    }
-    private DbColumns mDisplayColumnsAssemblyItem;
-
-    // Setup the grid display columns.
-    private void SetupGridClass()
-    {
-      ClassGroupGrid.BackgroundColor = mSettings.BeginColor;
-
-      // Setup default display columns if no columns are defined.
-      if (0 == ClassGroupGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocClassGroup.ColumnHeadingName,
-          DocClassGroup.ColumnHeadingTextCustom
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var classManager = Managers.DocClassGroupManager;
-        mDisplayColumnsClass = classManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        ClassGroupGrid.LJCAddDisplayColumns(mDisplayColumnsClass);
-      }
-    }
-    private DbColumns mDisplayColumnsClass;
-
-    // Setup the grid display columns.
-    private void SetupGridClassItem()
-    {
-      ClassItemGrid.BackgroundColor = mSettings.BeginColor;
-
-      // Setup default display columns if no columns are defined.
-      if (0 == ClassItemGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocClass.ColumnName,
-          DocClass.ColumnDescription
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var classManager = Managers.DocClassManager;
-        mDisplayColumnsClassItem = classManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        ClassItemGrid.LJCAddDisplayColumns(mDisplayColumnsClassItem);
-      }
-    }
-    private DbColumns mDisplayColumnsClassItem;
 
     // Splitter is not in the first TabPage so Set values on first display.
     private void ClassSplit_Resize(object sender, EventArgs e)
@@ -292,8 +202,6 @@ namespace LJCGenDocEdit
     private ControlValues ControlValues { get; set; }
     #endregion
     #endregion
-
-
 
     #region Item Change Processing
 
@@ -329,18 +237,26 @@ namespace LJCGenDocEdit
 
         case Change.ClassGroup:
           mClassItemGridCode.DataRetrieve();
+          mClassItemComboCode.DataRetrieve();
+          ClassComboSelect();
           break;
 
         case Change.ClassItem:
+          ClassComboSelect();
+          ClassItemGrid.LJCSetLastRow();
           break;
 
         case Change.ClassCombo:
+          ClassItemSelect();
+          mMethodGroupGridCode.DataRetrieve();
           break;
 
         case Change.MethodGroup:
+          mMethodItemGridCode.DataRetrieve();
           break;
 
         case Change.MethodItem:
+          MethodItemGrid.LJCSetLastRow();
           break;
       }
       SetControlState();
@@ -414,6 +330,26 @@ namespace LJCGenDocEdit
       }
     }
 
+    // Selects the ClassCombo item with the current ClassItem.
+    private void ClassComboSelect()
+    {
+      var classItem = mClassItemGridCode.CurrentItem();
+      if (classItem != null)
+      {
+        mClassItemComboCode.RowSelect(classItem);
+      }
+    }
+
+    // Selects the AssemblyCombo item with the current AssemblyItem.
+    private void ClassItemSelect()
+    {
+      var classItem = mClassItemComboCode.CurrentItem();
+      if (classItem != null)
+      {
+        mClassItemGridCode.RowSelect(classItem);
+      }
+    }
+
     // Sets the control states based on the current control values.
     private void SetControlState()
     {
@@ -443,12 +379,13 @@ namespace LJCGenDocEdit
     private string mControlValuesFileName;
     private StandardUISettings mSettings;
     private AssemblyGroupGridCode mAssemblyGroupGridCode;
-    private AssemblyItemGridCode mAssemblyItemGridCode;
     private AssemblyItemComboCode mAssemblyItemComboCode;
+    private AssemblyItemGridCode mAssemblyItemGridCode;
     private ClassGroupGridCode mClassGroupGridCode;
+    private ClassItemComboCode mClassItemComboCode;
     private ClassItemGridCode mClassItemGridCode;
-
-    // Foreign Keys
+    private MethodGroupGridCode mMethodGroupGridCode;
+    private MethodItemGridCode mMethodItemGridCode;
     #endregion
   }
 }

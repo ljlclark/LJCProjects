@@ -158,6 +158,54 @@ namespace LJCGenDocEdit
       ClassItemGrid.LJCExportData(fileSpec);
     }
     #endregion
+
+    #region Method Group
+
+    // Refreshes the list.
+    private void MethodGroupRefresh_Click(object sender, EventArgs e)
+    {
+      mMethodGroupGridCode.DoRefresh();
+    }
+
+    // Export a text file.
+    private void MethodGroupText_Click(object sender, EventArgs e)
+    {
+      string extension = "txt";
+      string fileSpec = $@"ExportFiles\MethodGroup.{extension}";
+      MethodGroupGrid.LJCExportData(fileSpec);
+    }
+
+    // Export a CSV file.
+    private void MethodGroupCSV_Click(object sender, EventArgs e)
+    {
+      string fileSpec = $@"ExportFiles\MethodGroup.csv";
+      MethodGroupGrid.LJCExportData(fileSpec);
+    }
+    #endregion
+
+    #region Method Item
+
+    // Refreshes the list.
+    private void MethodItemRefresh_Click(object sender, EventArgs e)
+    {
+      mMethodItemGridCode.DoRefresh();
+    }
+
+    // Export a text file.
+    private void MethodItemText_Click(object sender, EventArgs e)
+    {
+      string extension = "txt";
+      string fileSpec = $@"ExportFiles\Method.{extension}";
+      MethodItemGrid.LJCExportData(fileSpec);
+    }
+
+    // Export a CSV file.
+    private void MethodItemCSV_Click(object sender, EventArgs e)
+    {
+      string fileSpec = $@"ExportFiles\Method.csv";
+      MethodItemGrid.LJCExportData(fileSpec);
+    }
+    #endregion
     #endregion
 
     #region Control Event Handlers
@@ -305,6 +353,73 @@ namespace LJCGenDocEdit
         TimedChange(Change.ClassItem);
       }
       ClassItemGrid.LJCAllowSelectionChange = true;
+    }
+    #endregion
+
+    #region Class Combo
+
+    // Handles the SelectionChanged event.
+    private void ClassCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      TimedChange(Change.ClassCombo);
+    }
+    #endregion
+
+    #region Method Group
+
+    // Handles the MouseDown event.
+    private void MethodGroupGrid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        MethodGroupGrid.Select();
+        if (MethodGroupGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          MethodGroupGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.MethodGroup);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void MethodGroupGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (MethodGroupGrid.LJCAllowSelectionChange)
+      {
+        TimedChange(Change.MethodGroup);
+      }
+      MethodGroupGrid.LJCAllowSelectionChange = true;
+    }
+    #endregion
+
+    #region Method Item
+
+    // Handles the MouseDown event.
+    private void MethodItemGrid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        MethodItemGrid.Select();
+        if (MethodItemGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          MethodItemGrid.LJCSetCurrentRow(e);
+          TimedChange(Change.MethodItem);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void MethodItemGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (MethodItemGrid.LJCAllowSelectionChange)
+      {
+        TimedChange(Change.MethodItem);
+      }
+      MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
 

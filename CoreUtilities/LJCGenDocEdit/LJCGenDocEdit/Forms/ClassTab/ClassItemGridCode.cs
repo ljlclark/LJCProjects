@@ -4,6 +4,8 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
+using static LJCGenDocEdit.LJCGenDocList;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -18,6 +20,50 @@ namespace LJCGenDocEdit
       mParent = parent;
       mGrid = mParent.ClassItemGrid;
       mManagers = mParent.Managers;
+    }
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocClass CurrentItem()
+    {
+      DocClass retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocClass.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocClassManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
+    // Setup the grid display columns.
+    internal void SetupGrid()
+    {
+      // Setup default display columns if no columns are defined.
+      if (0 == mGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocClass.ColumnName,
+          DocClass.ColumnDescription
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var classManager = mManagers.DocClassManager;
+        DisplayColumns = classManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        mGrid.LJCAddDisplayColumns(DisplayColumns);
+      }
     }
     #endregion
 
@@ -44,29 +90,10 @@ namespace LJCGenDocEdit
           }
         }
         mParent.Cursor = Cursors.Default;
-        mParent.DoChange(LJCGenDocList.Change.ClassItem);
+        //mParent.DoChange(Change.ClassItem);
+        mParent.TimedChange(Change.ClassItem);
       }
       mParent.Cursor = Cursors.Default;
-    }
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocClass CurrentItem()
-    {
-      DocClass retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = (short)row.LJCGetInt32(DocClass.ColumnID);
-        if (id > 0)
-        {
-          var manager = mManagers.DocClassManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
     }
 
     // Selects a row based on the key record values.
@@ -152,6 +179,8 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
     #endregion
+
+    internal DbColumns DisplayColumns { get; set; }
 
     #region Class Data
 

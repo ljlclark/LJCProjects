@@ -6,6 +6,7 @@ using LJCNetCommon;
 using LJCWinFormControls;
 using static LJCGenDocEdit.LJCGenDocList;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace LJCGenDocEdit
 {
@@ -20,6 +21,50 @@ namespace LJCGenDocEdit
       mParent = parent;
       mGrid = mParent.AssemblyGroupGrid;
       mManagers = mParent.Managers;
+    }
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocAssemblyGroup CurrentItem()
+    {
+      DocAssemblyGroup retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocAssemblyGroup.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocAssemblyGroupManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
+    // Setup the grid display columns.
+    internal void SetupGrid()
+    {
+      // Setup default display columns if no columns are defined.
+      if (0 == mGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocAssemblyGroup.ColumnName,
+          DocAssemblyGroup.ColumnHeading
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var assemblyGroupManager = mManagers.DocAssemblyGroupManager;
+        DisplayColumns = assemblyGroupManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        mGrid.LJCAddDisplayColumns(DisplayColumns);
+      }
     }
     #endregion
 
@@ -42,28 +87,9 @@ namespace LJCGenDocEdit
         }
       }
       mParent.Cursor = Cursors.Default;
-      mParent.DoChange(Change.AssemblyGroup);
+      //mParent.DoChange(Change.AssemblyGroup);
+      mParent.TimedChange(Change.AssemblyGroup);
       mParent.Cursor = Cursors.Default;
-    }
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocAssemblyGroup CurrentItem()
-    {
-      DocAssemblyGroup retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = (short)row.LJCGetInt32(DocAssemblyGroup.ColumnID);
-        if (id > 0)
-        {
-          var manager = mManagers.DocAssemblyGroupManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
     }
 
     // Selects a row based on the key record values.
@@ -149,6 +175,8 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
     #endregion
+
+    internal DbColumns DisplayColumns { get; set; }
 
     #region Class Data
 

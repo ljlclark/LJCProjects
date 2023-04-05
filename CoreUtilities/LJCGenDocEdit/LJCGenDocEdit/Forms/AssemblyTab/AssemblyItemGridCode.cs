@@ -4,6 +4,8 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
+using static LJCGenDocEdit.LJCGenDocList;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -22,6 +24,26 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Data Methods
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocAssembly CurrentItem()
+    {
+      DocAssembly retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocAssemblyManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
 
     // Retrieves the list rows.
     internal void DataRetrieve()
@@ -44,29 +66,10 @@ namespace LJCGenDocEdit
           }
         }
         mParent.Cursor = Cursors.Default;
-        mParent.DoChange(LJCGenDocList.Change.AssemblyItem);
+        //mParent.DoChange(Change.AssemblyItem);
+        mParent.TimedChange(Change.AssemblyItem);
       }
       mParent.Cursor = Cursors.Default;
-    }
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocAssembly CurrentItem()
-    {
-      DocAssembly retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
-        if (id > 0)
-        {
-          var manager = mManagers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
     }
 
     // Selects a row based on the key record values.
@@ -96,6 +99,27 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.Default;
       }
       return retValue;
+    }
+
+    // Setup the grid display columns.
+    internal void SetupGrid()
+    {
+      // Setup default display columns if no columns are defined.
+      if (0 == mGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocAssembly.ColumnName,
+          DocAssembly.ColumnDescription
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var assemblyManager = mManagers.DocAssemblyManager;
+        DisplayColumns = assemblyManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        mGrid.LJCAddDisplayColumns(DisplayColumns);
+      }
     }
 
     // Adds a grid row and updates it with the record values.
@@ -152,6 +176,8 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
     #endregion
+
+    internal DbColumns DisplayColumns { get; set; }
 
     #region Class Data
 

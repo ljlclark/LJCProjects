@@ -23,32 +23,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Data Methods
-
-    // Retrieves the combo items.
-    internal void DataRetrieve()
-    {
-      mParent.Cursor = Cursors.WaitCursor;
-      mCombo.Items.Clear();
-
-      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
-      {
-        var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
-
-        var manager = mManagers.DocAssemblyManager;
-        var dataRecords = manager.LoadWithParent(parentID);
-
-        if (NetCommon.HasItems(dataRecords))
-        {
-          foreach (DocAssembly dataRecord in dataRecords)
-          {
-            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID
-              , dataRecord.Description);
-          }
-        }
-      }
-      mParent.Cursor = Cursors.Default;
-    }
+    #region Methods
 
     /// <summary>
     /// Retrieves the currently selecteditem.
@@ -68,6 +43,34 @@ namespace LJCGenDocEdit
         }
       }
       return retValue;
+    }
+    #endregion
+
+    #region Data Methods
+
+    // Retrieves the combo items.
+    internal void DataRetrieve()
+    {
+      mParent.Cursor = Cursors.WaitCursor;
+      mCombo.Items.Clear();
+
+      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+
+        var manager = mManagers.DocAssemblyManager;
+        var dataRecords = manager.LoadWithParent(parentID);
+
+        if (NetCommon.HasItems(dataRecords))
+        {
+          foreach (DocAssembly dataRecord in dataRecords)
+          {
+            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID
+              , dataRecord.Description);
+          }
+        }
+      }
+      mParent.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.
