@@ -51,11 +51,11 @@ namespace LJCGenDocEdit
     // Retrieves the combo items.
     internal void DataRetrieve()
     {
-      mParent.Cursor = Cursors.WaitCursor;
       mCombo.Items.Clear();
 
       if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
+        mParent.Cursor = Cursors.WaitCursor;
         var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
 
         var manager = mManagers.DocAssemblyManager;
@@ -69,8 +69,8 @@ namespace LJCGenDocEdit
             mParent.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
           }
         }
+        mParent.Cursor = Cursors.Default;
       }
-      mParent.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.

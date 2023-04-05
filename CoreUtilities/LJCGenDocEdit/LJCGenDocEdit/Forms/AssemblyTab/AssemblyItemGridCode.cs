@@ -48,11 +48,11 @@ namespace LJCGenDocEdit
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      mParent.Cursor = Cursors.WaitCursor;
       mGrid.LJCRowsClear();
 
       if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
+        mParent.Cursor = Cursors.WaitCursor;
         var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
 
         var manager = mManagers.DocAssemblyManager;
@@ -66,10 +66,9 @@ namespace LJCGenDocEdit
           }
         }
         mParent.Cursor = Cursors.Default;
-        //mParent.DoChange(Change.AssemblyItem);
-        mParent.TimedChange(Change.AssemblyItem);
+        mParent.DoChange(Change.AssemblyItem);
+        //mParent.TimedChange(Change.AssemblyItem);
       }
-      mParent.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.

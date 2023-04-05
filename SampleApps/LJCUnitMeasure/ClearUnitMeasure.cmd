@@ -16,6 +16,8 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=LJCUnitMeasure
 set File=LJCUnitMeasure
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\ControlValues /q
+rmdir %Solution%\%Project%\%bin%\ControlValues
 del %Solution%\%Project%\%bin%\LJCUnitMeasureDAL.xml
 
 set Project=LJCUnitMeasureDAL

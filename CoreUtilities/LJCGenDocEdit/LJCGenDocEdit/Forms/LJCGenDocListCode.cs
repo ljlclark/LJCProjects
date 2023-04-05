@@ -132,6 +132,7 @@ namespace LJCGenDocEdit
           AssemblyItemGrid.LJCRestoreColumnValues(ControlValues);
           ClassGroupGrid.LJCRestoreColumnValues(ControlValues);
           ClassItemGrid.LJCRestoreColumnValues(ControlValues);
+          MethodGroupGrid.LJCRestoreColumnValues(ControlValues);
           MethodItemGrid.LJCRestoreColumnValues(ControlValues);
         }
       }
@@ -147,6 +148,7 @@ namespace LJCGenDocEdit
       AssemblyItemGrid.LJCSaveColumnValues(controlValues);
       ClassGroupGrid.LJCSaveColumnValues(controlValues);
       ClassItemGrid.LJCSaveColumnValues(controlValues);
+      MethodGroupGrid.LJCSaveColumnValues(controlValues);
       MethodItemGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
@@ -233,7 +235,7 @@ namespace LJCGenDocEdit
           break;
 
         case Change.AssemblyCombo:
-          //AssemblyItemSelect();
+          AssemblyItemSelect();
           mClassGroupGridCode.DataRetrieve();
           break;
 
@@ -249,7 +251,7 @@ namespace LJCGenDocEdit
           break;
 
         case Change.ClassCombo:
-          //ClassItemSelect();
+          ClassItemSelect();
           mMethodGroupGridCode.DataRetrieve();
           break;
 

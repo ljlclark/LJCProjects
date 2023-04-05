@@ -87,9 +87,8 @@ namespace LJCGenDocEdit
         }
       }
       mParent.Cursor = Cursors.Default;
-      //mParent.DoChange(Change.AssemblyGroup);
-      mParent.TimedChange(Change.AssemblyGroup);
-      mParent.Cursor = Cursors.Default;
+      mParent.DoChange(Change.AssemblyGroup);
+      //mParent.TimedChange(Change.AssemblyGroup);
     }
 
     // Selects a row based on the key record values.
