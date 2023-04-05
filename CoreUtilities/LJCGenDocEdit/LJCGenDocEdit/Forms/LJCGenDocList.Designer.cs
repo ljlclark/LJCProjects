@@ -447,13 +447,13 @@
       // 
       this.AssemblyCombo.Location = new System.Drawing.Point(107, 6);
       this.AssemblyCombo.Name = "AssemblyCombo";
-      this.AssemblyCombo.Size = new System.Drawing.Size(400, 28);
+      this.AssemblyCombo.Size = new System.Drawing.Size(500, 28);
       this.AssemblyCombo.TabIndex = 1;
       this.AssemblyCombo.SelectedIndexChanged += new System.EventHandler(this.AssemblyCombo_SelectedIndexChanged);
       // 
       // AssemblyLabel
       // 
-      this.AssemblyLabel.Location = new System.Drawing.Point(0, 9);
+      this.AssemblyLabel.Location = new System.Drawing.Point(7, 9);
       this.AssemblyLabel.Name = "AssemblyLabel";
       this.AssemblyLabel.Size = new System.Drawing.Size(100, 23);
       this.AssemblyLabel.TabIndex = 0;
@@ -705,17 +705,17 @@
       // 
       this.ClassCombo.Location = new System.Drawing.Point(107, 6);
       this.ClassCombo.Name = "ClassCombo";
-      this.ClassCombo.Size = new System.Drawing.Size(400, 28);
+      this.ClassCombo.Size = new System.Drawing.Size(500, 28);
       this.ClassCombo.TabIndex = 1;
       this.ClassCombo.SelectedIndexChanged += new System.EventHandler(this.ClassCombo_SelectedIndexChanged);
       // 
       // ClassLabel
       // 
-      this.ClassLabel.Location = new System.Drawing.Point(0, 9);
+      this.ClassLabel.Location = new System.Drawing.Point(7, 9);
       this.ClassLabel.Name = "ClassLabel";
       this.ClassLabel.Size = new System.Drawing.Size(100, 23);
       this.ClassLabel.TabIndex = 0;
-      this.ClassLabel.Text = "Method";
+      this.ClassLabel.Text = "Class";
       // 
       // MethodSplit
       // 

@@ -65,8 +65,8 @@ namespace LJCGenDocEdit
         {
           foreach (DocAssembly dataRecord in dataRecords)
           {
-            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID
-              , dataRecord.Description);
+            var text = $"{dataRecord.Name}-{dataRecord.Description}";
+            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
           }
         }
       }
