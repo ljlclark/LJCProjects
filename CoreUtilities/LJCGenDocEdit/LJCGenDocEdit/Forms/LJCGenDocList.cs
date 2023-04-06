@@ -34,7 +34,8 @@ namespace LJCGenDocEdit
     private void LJCGenDocEdit_Load(object sender, EventArgs e)
     {
       InitializeControls();
-      ClassGroupMenuExit.Click += MenuExit_Click;
+      ClassGroupExit.Click += MenuExit_Click;
+      MethodGroupExit.Click += MenuExit_Click;
       CenterToParent();
     }
     #endregion
@@ -59,13 +60,13 @@ namespace LJCGenDocEdit
     #region Assembly Group
 
     // Refreshes the list.
-    private void AssemblyGroupMenuRefresh_Click(object sender, EventArgs e)
+    private void AssemblyGroupRefresh_Click(object sender, EventArgs e)
     {
       mAssemblyGroupGridCode.DoRefresh();
     }
 
     // Export a text file.
-    private void AssemblyGroupMenuText_Click(object sender, EventArgs e)
+    private void AssemblyGroupText_Click(object sender, EventArgs e)
     {
       string extension = "txt";
       string fileSpec = $@"ExportFiles\AssemblyGroup.{extension}";
@@ -73,7 +74,7 @@ namespace LJCGenDocEdit
     }
 
     // Export a CSV file.
-    private void AssemblyGroupMenuCSV_Click(object sender, EventArgs e)
+    private void AssemblyGroupCSV_Click(object sender, EventArgs e)
     {
       string fileSpec = $@"ExportFiles\AssemblyGroup.csv";
       AssemblyGroupGrid.LJCExportData(fileSpec);
@@ -90,13 +91,13 @@ namespace LJCGenDocEdit
     #region Assembly Item
 
     // Refreshes the list.
-    private void AssemblyMenuRefresh_Click(object sender, EventArgs e)
+    private void AssemblyRefresh_Click(object sender, EventArgs e)
     {
       mAssemblyItemGridCode.DoRefresh();
     }
 
     // Export a text file.
-    private void AssemblyMenuText_Click(object sender, EventArgs e)
+    private void AssemblyText_Click(object sender, EventArgs e)
     {
       string extension = "txt";
       string fileSpec = $@"ExportFiles\Assembly.{extension}";
@@ -104,7 +105,7 @@ namespace LJCGenDocEdit
     }
 
     // Export a CSV file.
-    private void AssemblyMenuCSV_Click(object sender, EventArgs e)
+    private void AssemblyCSV_Click(object sender, EventArgs e)
     {
       string fileSpec = $@"ExportFiles\Assembly.csv";
       AssemblyItemGrid.LJCExportData(fileSpec);
@@ -114,13 +115,13 @@ namespace LJCGenDocEdit
     #region Class Group
 
     // Refreshes the list.
-    private void ClassGroupMenuRefresh_Click(object sender, EventArgs e)
+    private void ClassGroupRefresh_Click(object sender, EventArgs e)
     {
       mClassGroupGridCode.DoRefresh();
     }
 
     // Export a text file.
-    private void ClassGroupMenuText_Click(object sender, EventArgs e)
+    private void ClassGroupText_Click(object sender, EventArgs e)
     {
       string extension = "txt";
       string fileSpec = $@"ExportFiles\ClassGroup.{extension}";
@@ -128,7 +129,7 @@ namespace LJCGenDocEdit
     }
 
     // Export a CSV file.
-    private void ClassGroupMenuCSV_Click(object sender, EventArgs e)
+    private void ClassGroupCSV_Click(object sender, EventArgs e)
     {
       string fileSpec = $@"ExportFiles\ClassGroup.csv";
       ClassGroupGrid.LJCExportData(fileSpec);
@@ -138,13 +139,13 @@ namespace LJCGenDocEdit
     #region Class Item
 
     // Refreshes the list.
-    private void ClassMenuRefresh_Click(object sender, EventArgs e)
+    private void ClassRefresh_Click(object sender, EventArgs e)
     {
       mClassItemGridCode.DoRefresh();
     }
 
     // Export a text file.
-    private void ClassMenuText_Click(object sender, EventArgs e)
+    private void ClassText_Click(object sender, EventArgs e)
     {
       string extension = "txt";
       string fileSpec = $@"ExportFiles\Class.{extension}";
@@ -152,7 +153,7 @@ namespace LJCGenDocEdit
     }
 
     // Export a CSV file.
-    private void ClassMenuCSV_Click(object sender, EventArgs e)
+    private void ClassCSV_Click(object sender, EventArgs e)
     {
       string fileSpec = $@"ExportFiles\Class.csv";
       ClassItemGrid.LJCExportData(fileSpec);

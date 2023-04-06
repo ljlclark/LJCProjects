@@ -64,9 +64,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AssemblyTab\AssemblyDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AssemblyTab\AssemblyDetail.Designer.cs">
+      <DependentUpon>AssemblyDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AssemblyTab\AssemblyGroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AssemblyTab\AssemblyGroupDetail.Designer.cs">
+      <DependentUpon>AssemblyGroupDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ClassTab\AssemblyItemComboCode.cs" />
     <Compile Include="Forms\AssemblyTab\AssemblyGroupGridCode.cs" />
     <Compile Include="Forms\AssemblyTab\AssemblyItemGridCode.cs" />
+    <Compile Include="Forms\ClassTab\ClassDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClassTab\ClassDetail.Designer.cs">
+      <DependentUpon>ClassDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClassTab\ClassGroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClassTab\ClassGroupDetail.Designer.cs">
+      <DependentUpon>ClassGroupDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ClassTab\ClassGroupGridCode.cs" />
     <Compile Include="Forms\ClassTab\ClassItemGridCode.cs" />
     <Compile Include="Forms\LJCGenDocList.cs">
@@ -79,13 +103,43 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MethodTab\ClassItemComboCode.cs" />
+    <Compile Include="Forms\MethodTab\MethodDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MethodTab\MethodDetail.Designer.cs">
+      <DependentUpon>MethodDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MethodTab\MethodGroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MethodTab\MethodGroupDetail.Designer.cs">
+      <DependentUpon>MethodGroupDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MethodTab\MethodGroupGridCode.cs" />
     <Compile Include="Forms\MethodTab\MethodItemGridCode.cs" />
     <Compile Include="ProgramGenDocEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesGenDocEdit.cs" />
+    <EmbeddedResource Include="Forms\AssemblyTab\AssemblyDetail.resx">
+      <DependentUpon>AssemblyDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AssemblyTab\AssemblyGroupDetail.resx">
+      <DependentUpon>AssemblyGroupDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClassTab\ClassDetail.resx">
+      <DependentUpon>ClassDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClassTab\ClassGroupDetail.resx">
+      <DependentUpon>ClassGroupDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LJCGenDocList.resx">
       <DependentUpon>LJCGenDocList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MethodTab\MethodDetail.resx">
+      <DependentUpon>MethodDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MethodTab\MethodGroupDetail.resx">
+      <DependentUpon>MethodGroupDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

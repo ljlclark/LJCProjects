@@ -33,14 +33,23 @@ namespace LJCGenDocEdit
           , null, AssemblyGroupGrid);
         ListHelper.SetPanelControls(AssemblySplit.Panel2, AssemblyItemHeader
           , null, AssemblyItemGrid);
+
         ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
           , null, ClassGroupGrid);
         ListHelper.SetPanelControls(AssemblySplit.Panel2, ClassItemHeader
           , null, ClassItemGrid);
+
         ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
           , null, ClassGroupGrid);
         ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeader
           , null, ClassItemGrid);
+        ClassItemGrid.Height -= 2;
+
+        ListHelper.SetPanelControls(MethodSplit.Panel1, MethodGroupHeader
+          , null, MethodGroupGrid);
+        ListHelper.SetPanelControls(MethodSplit.Panel2, MethodItemHeader
+          , null, MethodItemGrid);
+        MethodItemGrid.Height -= 2;
       }
     }
 
@@ -357,6 +366,29 @@ namespace LJCGenDocEdit
     // Sets the control states based on the current control values.
     private void SetControlState()
     {
+      bool enableNew = true;
+      bool enableEdit = AssemblyGroupGrid.CurrentRow != null;
+      FormCommon.SetMenuState(AssemblyGroupMenu, enableNew, enableEdit);
+
+      enableNew = AssemblyGroupGrid.CurrentRow != null;
+      enableEdit = AssemblyItemGrid.CurrentRow != null;
+      FormCommon.SetMenuState(AssemblyMenu, enableNew, enableEdit);
+
+      enableNew = AssemblyItemGrid.CurrentRow != null;
+      enableEdit = ClassGroupGrid.CurrentRow != null;
+      FormCommon.SetMenuState(ClassGroupMenu, enableNew, enableEdit);
+
+      enableNew = ClassGroupGrid.CurrentRow != null;
+      enableEdit = ClassItemGrid.CurrentRow != null;
+      FormCommon.SetMenuState(ClassMenu, enableNew, enableEdit);
+
+      enableNew = ClassItemGrid.CurrentRow != null;
+      enableEdit = MethodGroupGrid.CurrentRow != null;
+      FormCommon.SetMenuState(MethodGroupMenu, enableNew, enableEdit);
+
+      enableNew = MethodGroupGrid.CurrentRow != null;
+      enableEdit = MethodItemGrid.CurrentRow != null;
+      FormCommon.SetMenuState(MethodItemMenu, enableNew, enableEdit);
     }
     #endregion
 

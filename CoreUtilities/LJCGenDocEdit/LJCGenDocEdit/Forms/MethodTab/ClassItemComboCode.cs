@@ -1,48 +1,28 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// AssemblyItemComboCode.cs
+// ClassItemComboCode.cs
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System;
-using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  internal class AssemblyItemComboCode
+  internal class ClassItemComboCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal AssemblyItemComboCode(LJCGenDocList parent)
+    internal ClassItemComboCode(LJCGenDocList parent)
     {
       mParent = parent;
-      mCombo = mParent.AssemblyCombo;
+      mCombo = mParent.ClassCombo;
       mManagers = mParent.Managers;
-    }
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocAssembly CurrentItem()
-    {
-      DocAssembly retValue = null;
-
-      if (mCombo.SelectedItem != null)
-      {
-        var id = (short)mCombo.LJCSelectedItemID();
-        if (id > 0)
-        {
-          var manager = mManagers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
     }
     #endregion
 
@@ -53,24 +33,47 @@ namespace LJCGenDocEdit
     {
       mCombo.Items.Clear();
 
-      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
+      //if (mParent.AssemblyItemGrid.CurrentRow is LJCGridRow parentRow)
+      if (mParent.ClassGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
         mParent.Cursor = Cursors.WaitCursor;
-        var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+        //var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
+        var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
 
-        var manager = mManagers.DocAssemblyManager;
-        var dataRecords = manager.LoadWithParent(parentID);
+        var manager = mManagers.DocClassManager;
+        //var dataRecords = manager.LoadWithParent(parentID);
+        var dataRecords = manager.LoadWithGroup(parentID);
 
         if (NetCommon.HasItems(dataRecords))
         {
-          foreach (DocAssembly dataRecord in dataRecords)
+          foreach (DocClass dataRecord in dataRecords)
           {
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
-            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
+            mParent.ClassCombo.LJCAddItem(dataRecord.ID, text);
           }
         }
         mParent.Cursor = Cursors.Default;
       }
+    }
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocClass CurrentItem()
+    {
+      DocClass retValue = null;
+
+      if (mCombo.SelectedItem != null)
+      {
+        var id = (short)mCombo.LJCSelectedItemID();
+        if (id > 0)
+        {
+          var manager = mManagers.DocClassManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
     }
 
     // Selects a row based on the key record values.
@@ -79,7 +82,7 @@ namespace LJCGenDocEdit
     /// </summary>
     /// <param name="dataRecord">The data record to be selected.</param>
     /// <returns>True if the item was selected, otherwise false.</returns>
-    internal bool RowSelect(DocAssembly dataRecord)
+    internal bool RowSelect(DocClass dataRecord)
     {
       bool retValue = false;
 
