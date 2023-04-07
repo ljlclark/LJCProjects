@@ -99,7 +99,6 @@ namespace LJCDocLibDAL
     private Int16 mDocAssemblyID;
 
     /// <summary>Gets or sets the DocClassGroupHeadingID value.</summary>
-    //[Required]
     //[Column("DocClassGroupHeadingID", TypeName="smallint")]
     public Int16 DocClassGroupHeadingID
     {
@@ -111,7 +110,7 @@ namespace LJCDocLibDAL
     }
     private Int16 mDocClassGroupHeadingID;
 
-    /// <summary>Gets or sets the DocClassGroupHeadingID value.</summary>
+    /// <summary>Gets or sets the HeadingName value.</summary>
     //[Required]
     //[Column("HeadingName", TypeName="nvarchar(60)")]
     public string HeadingName
@@ -124,8 +123,8 @@ namespace LJCDocLibDAL
     }
     private string mHeadingName;
 
-    /// <summary>Gets or sets the DocClassGroupHeadingID value.</summary>
-    //[Column("DocClassGroupHeadingID", TypeName="smallint")]
+    /// <summary>Gets or sets the HeadingTextCustom value.</summary>
+    //[Column("HeaddingTextCustom", TypeName="smallint")]
     public string HeadingTextCustom
     {
       get { return mHeadingTextCustom; }

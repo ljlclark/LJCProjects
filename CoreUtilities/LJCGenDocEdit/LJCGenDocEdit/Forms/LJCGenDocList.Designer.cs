@@ -44,6 +44,8 @@
       this.AssemblyGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AssemblyGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyGroupText = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +56,8 @@
       this.AssemblyItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyText = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +70,8 @@
       this.ClassGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ClassGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassGroupText = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +82,7 @@
       this.ClassItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassText = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +95,8 @@
       this.MethodGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodGroupText = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,6 +107,8 @@
       this.MethodItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodItemHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodItemText = new System.Windows.Forms.ToolStripMenuItem();
@@ -257,6 +268,8 @@
       this.AssemblyGroupGrid.TabIndex = 1;
       this.AssemblyGroupGrid.Text = "LJCDataGrid";
       this.AssemblyGroupGrid.SelectionChanged += new System.EventHandler(this.AssemblyGrid_SelectionChanged);
+      this.AssemblyGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AssemblyGroupGrid_KeyDown);
+      this.AssemblyGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyGroupGrid_MouseDoubleClick);
       this.AssemblyGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyGrid_MouseDown);
       // 
       // AssemblyGroupMenu
@@ -264,6 +277,8 @@
       this.AssemblyGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.AssemblyGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AssemblyGroupHeading,
+            this.AssemblyGroupEdit,
+            this.toolStripSeparator10,
             this.AssemblyGroupRefresh,
             this.toolStripSeparator3,
             this.AssemblyGroupText,
@@ -271,7 +286,7 @@
             this.toolStripSeparator1,
             this.AssemblyGroupExit});
       this.AssemblyGroupMenu.Name = "AssemblyMenu";
-      this.AssemblyGroupMenu.Size = new System.Drawing.Size(267, 176);
+      this.AssemblyGroupMenu.Size = new System.Drawing.Size(267, 214);
       this.AssemblyGroupMenu.Text = "Assembly Group Menu";
       // 
       // AssemblyGroupHeading
@@ -280,6 +295,18 @@
       this.AssemblyGroupHeading.Name = "AssemblyGroupHeading";
       this.AssemblyGroupHeading.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupHeading.Text = "Assembly Group Menu";
+      // 
+      // AssemblyGroupEdit
+      // 
+      this.AssemblyGroupEdit.Name = "AssemblyGroupEdit";
+      this.AssemblyGroupEdit.Size = new System.Drawing.Size(266, 32);
+      this.AssemblyGroupEdit.Text = "&Edit";
+      this.AssemblyGroupEdit.Click += new System.EventHandler(this.AssemblyGroupEdit_Click);
+      // 
+      // toolStripSeparator10
+      // 
+      this.toolStripSeparator10.Name = "toolStripSeparator10";
+      this.toolStripSeparator10.Size = new System.Drawing.Size(263, 6);
       // 
       // AssemblyGroupRefresh
       // 
@@ -369,6 +396,7 @@
       this.AssemblyItemGrid.TabIndex = 1;
       this.AssemblyItemGrid.Text = "LJCDataGrid";
       this.AssemblyItemGrid.SelectionChanged += new System.EventHandler(this.AssemblyItemGrid_SelectionChanged);
+      this.AssemblyItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDoubleClick);
       this.AssemblyItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDown);
       // 
       // AssemblyMenu
@@ -376,12 +404,14 @@
       this.AssemblyMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.AssemblyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
+            this.AssemblyEdit,
+            this.toolStripSeparator11,
             this.AssemblyRefresh,
             this.toolStripSeparator4,
             this.AssemblyText,
             this.AssemblyCSV});
       this.AssemblyMenu.Name = "AssemblyMenu";
-      this.AssemblyMenu.Size = new System.Drawing.Size(212, 138);
+      this.AssemblyMenu.Size = new System.Drawing.Size(212, 176);
       // 
       // toolStripMenuItem1
       // 
@@ -389,6 +419,18 @@
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
       this.toolStripMenuItem1.Size = new System.Drawing.Size(211, 32);
       this.toolStripMenuItem1.Text = "Assembly Menu";
+      // 
+      // AssemblyEdit
+      // 
+      this.AssemblyEdit.Name = "AssemblyEdit";
+      this.AssemblyEdit.Size = new System.Drawing.Size(211, 32);
+      this.AssemblyEdit.Text = "&Edit";
+      this.AssemblyEdit.Click += new System.EventHandler(this.AssemblyEdit_Click);
+      // 
+      // toolStripSeparator11
+      // 
+      this.toolStripSeparator11.Name = "toolStripSeparator11";
+      this.toolStripSeparator11.Size = new System.Drawing.Size(208, 6);
       // 
       // AssemblyRefresh
       // 
@@ -517,6 +559,7 @@
       this.ClassGroupGrid.TabIndex = 1;
       this.ClassGroupGrid.Text = "LJCDataGrid";
       this.ClassGroupGrid.SelectionChanged += new System.EventHandler(this.ClassGrid_SelectionChanged);
+      this.ClassGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDoubleClick);
       this.ClassGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDown);
       // 
       // ClassGroupMenu
@@ -524,6 +567,8 @@
       this.ClassGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.ClassGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ClassGroupHeading,
+            this.ClassGroupEdit,
+            this.toolStripSeparator12,
             this.ClassGroupRefresh,
             this.toolStripSeparator5,
             this.ClassGroupText,
@@ -531,7 +576,7 @@
             this.toolStripSeparator2,
             this.ClassGroupExit});
       this.ClassGroupMenu.Name = "ClassGroupMenu";
-      this.ClassGroupMenu.Size = new System.Drawing.Size(230, 176);
+      this.ClassGroupMenu.Size = new System.Drawing.Size(230, 214);
       this.ClassGroupMenu.Text = "Class Group Menu";
       // 
       // ClassGroupHeading
@@ -540,6 +585,18 @@
       this.ClassGroupHeading.Name = "ClassGroupHeading";
       this.ClassGroupHeading.Size = new System.Drawing.Size(229, 32);
       this.ClassGroupHeading.Text = "Class Group Menu";
+      // 
+      // ClassGroupEdit
+      // 
+      this.ClassGroupEdit.Name = "ClassGroupEdit";
+      this.ClassGroupEdit.Size = new System.Drawing.Size(229, 32);
+      this.ClassGroupEdit.Text = "&Edit";
+      this.ClassGroupEdit.Click += new System.EventHandler(this.ClassGroupEdit_Click);
+      // 
+      // toolStripSeparator12
+      // 
+      this.toolStripSeparator12.Name = "toolStripSeparator12";
+      this.toolStripSeparator12.Size = new System.Drawing.Size(226, 6);
       // 
       // ClassGroupRefresh
       // 
@@ -628,6 +685,7 @@
       this.ClassItemGrid.TabIndex = 1;
       this.ClassItemGrid.Text = "LJCDataGrid";
       this.ClassItemGrid.SelectionChanged += new System.EventHandler(this.ClassItemGrid_SelectionChanged);
+      this.ClassItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDoubleClick);
       this.ClassItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDown);
       // 
       // ClassMenu
@@ -635,12 +693,13 @@
       this.ClassMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.ClassMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
+            this.ClassEdit,
             this.ClassRefresh,
             this.toolStripSeparator6,
             this.ClassText,
             this.ClassCSV});
       this.ClassMenu.Name = "ClassMenu";
-      this.ClassMenu.Size = new System.Drawing.Size(175, 138);
+      this.ClassMenu.Size = new System.Drawing.Size(175, 170);
       // 
       // toolStripMenuItem2
       // 
@@ -648,6 +707,13 @@
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
       this.toolStripMenuItem2.Size = new System.Drawing.Size(174, 32);
       this.toolStripMenuItem2.Text = "Class Menu";
+      // 
+      // ClassEdit
+      // 
+      this.ClassEdit.Name = "ClassEdit";
+      this.ClassEdit.Size = new System.Drawing.Size(174, 32);
+      this.ClassEdit.Text = "&Edit";
+      this.ClassEdit.Click += new System.EventHandler(this.ClassEdit_Click);
       // 
       // ClassRefresh
       // 
@@ -775,6 +841,7 @@
       this.MethodGroupGrid.TabIndex = 1;
       this.MethodGroupGrid.Text = "LJCDataGrid";
       this.MethodGroupGrid.SelectionChanged += new System.EventHandler(this.MethodGroupGrid_SelectionChanged);
+      this.MethodGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDoubleClick);
       this.MethodGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDown);
       // 
       // MethodGroupMenu
@@ -782,6 +849,8 @@
       this.MethodGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.MethodGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MethodGroupHeading,
+            this.MethodGroupEdit,
+            this.toolStripSeparator13,
             this.MethodGroupRefresh,
             this.toolStripSeparator7,
             this.MethodGroupText,
@@ -789,7 +858,7 @@
             this.toolStripSeparator8,
             this.MethodGroupExit});
       this.MethodGroupMenu.Name = "ClassGroupMenu";
-      this.MethodGroupMenu.Size = new System.Drawing.Size(253, 176);
+      this.MethodGroupMenu.Size = new System.Drawing.Size(253, 214);
       this.MethodGroupMenu.Text = "Class Group Menu";
       // 
       // MethodGroupHeading
@@ -798,6 +867,18 @@
       this.MethodGroupHeading.Name = "MethodGroupHeading";
       this.MethodGroupHeading.Size = new System.Drawing.Size(252, 32);
       this.MethodGroupHeading.Text = "Method Group Menu";
+      // 
+      // MethodGroupEdit
+      // 
+      this.MethodGroupEdit.Name = "MethodGroupEdit";
+      this.MethodGroupEdit.Size = new System.Drawing.Size(252, 32);
+      this.MethodGroupEdit.Text = "&Edit";
+      this.MethodGroupEdit.Click += new System.EventHandler(this.MethodGroupEdit_Click);
+      // 
+      // toolStripSeparator13
+      // 
+      this.toolStripSeparator13.Name = "toolStripSeparator13";
+      this.toolStripSeparator13.Size = new System.Drawing.Size(249, 6);
       // 
       // MethodGroupRefresh
       // 
@@ -886,6 +967,7 @@
       this.MethodItemGrid.TabIndex = 1;
       this.MethodItemGrid.Text = "LJCDataGrid";
       this.MethodItemGrid.SelectionChanged += new System.EventHandler(this.MethodItemGrid_SelectionChanged);
+      this.MethodItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDoubleClick);
       this.MethodItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDown);
       // 
       // MethodItemMenu
@@ -893,12 +975,14 @@
       this.MethodItemMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.MethodItemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MethodItemHeading,
+            this.MethodEdit,
+            this.toolStripSeparator14,
             this.MethodItemRefresh,
             this.toolStripSeparator9,
             this.MethodItemText,
             this.MethodItemCSV});
       this.MethodItemMenu.Name = "ClassMenu";
-      this.MethodItemMenu.Size = new System.Drawing.Size(198, 138);
+      this.MethodItemMenu.Size = new System.Drawing.Size(198, 176);
       // 
       // MethodItemHeading
       // 
@@ -906,6 +990,18 @@
       this.MethodItemHeading.Name = "MethodItemHeading";
       this.MethodItemHeading.Size = new System.Drawing.Size(197, 32);
       this.MethodItemHeading.Text = "Method Menu";
+      // 
+      // MethodEdit
+      // 
+      this.MethodEdit.Name = "MethodEdit";
+      this.MethodEdit.Size = new System.Drawing.Size(197, 32);
+      this.MethodEdit.Text = "&Edit";
+      this.MethodEdit.Click += new System.EventHandler(this.MethodEdit_Click);
+      // 
+      // toolStripSeparator14
+      // 
+      this.toolStripSeparator14.Name = "toolStripSeparator14";
+      this.toolStripSeparator14.Size = new System.Drawing.Size(194, 6);
       // 
       // MethodItemRefresh
       // 
@@ -1095,6 +1191,17 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     private System.Windows.Forms.ToolStripMenuItem MethodItemText;
     private System.Windows.Forms.ToolStripMenuItem MethodItemCSV;
+    private System.Windows.Forms.ToolStripMenuItem AssemblyGroupEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+    private System.Windows.Forms.ToolStripMenuItem AssemblyEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+    private System.Windows.Forms.ToolStripMenuItem ClassGroupEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+    private System.Windows.Forms.ToolStripMenuItem ClassEdit;
+    private System.Windows.Forms.ToolStripMenuItem MethodGroupEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+    private System.Windows.Forms.ToolStripMenuItem MethodEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
   }
 }
 

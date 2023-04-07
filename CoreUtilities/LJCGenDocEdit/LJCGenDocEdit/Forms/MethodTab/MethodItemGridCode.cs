@@ -7,6 +7,7 @@ using LJCWinFormControls;
 using static LJCGenDocEdit.LJCGenDocList;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System;
 
 namespace LJCGenDocEdit
 {
@@ -154,6 +155,24 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var id = (short)row.LJCGetInt32(DocMethod.ColumnID);
+
+        var detail = new MethodDetail()
+        {
+          LJCID = id,
+          Managers = mManagers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
     // Refreshes the list.
     internal void DoRefresh()
     {
@@ -176,6 +195,27 @@ namespace LJCGenDocEdit
         RowSelect(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with changes from the detail dialog.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as MethodDetail;
+      if (detail.LJCRecord != null)
+      {
+        var dataRecord = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(dataRecord);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(dataRecord);
+          mGrid.LJCSetCurrentRow(row, true);
+          mParent.TimedChange(Change.MethodItem);
+        }
+      }
     }
     #endregion
 

@@ -145,8 +145,8 @@ namespace _Namespace_
         //ParentID = LJCParentID;
         //ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
         //ForeignKeyID = mForeignKeyID,
-        Name = LJCFormCommon.SetString(NameText.Text),
-        Description = LJCFormCommon.SetString(DescriptionText.Text),
+        Name = FormCommon.SetString(NameText.Text),
+        Description = FormCommon.SetString(DescriptionText.Text),
 
         // Get control join display values.
         //TypeDescription = TypeCombo.Text.Trim()
@@ -159,7 +159,7 @@ namespace _Namespace_
     // Resets the empty record values.
     private void ResetRecordValues(_ClassName_ dataRecord)
     {
-      dataRecord.Description = FormCommon.ReSetString(dataRecord.Description);
+      dataRecord.Description = FormCommon.SetString(dataRecord.Description);
     }
 
     // Saves the data.
@@ -189,10 +189,10 @@ namespace _Namespace_
       {
         if (LJCIsUpdate)
         {
-          keyRecord = manager.GetIDKey(LJCRecord.ID);
+          var keyRecord = manager.GetIDKey(LJCRecord.ID);
           manager.Update(LJCRecord, keyRecord);
           ResetRecordValues(LJCRecord);
-          if (0 == manager.AffectedCount)
+          if (0 == manager.Manager.AffectedCount)
           {
             title = "Update Error";
             message = "The Record was not updated.";
@@ -216,7 +216,7 @@ namespace _Namespace_
           }
           else
           {
-            LJCRecord.Id = addedRecord.Id;
+            LJCRecord.ID = addedRecord.ID;
           }
         }
       }
@@ -258,7 +258,7 @@ namespace _Namespace_
     #region Get Data Methods
 
     // Retrieves the Product with the ID value.
-    private Product GetWithID(long id)
+    private _ClassName_ GetWithID(long id)
     {
       _ClassName_ retValue = null;
 
@@ -266,7 +266,7 @@ namespace _Namespace_
       {
         var manager = Managers._ClassName_Manager;
         var keyRecord = manager.GetIDKey(LJCID);
-        var retValue = manager.Retrieve(keyRecord);
+        retValue = manager.Retrieve(keyRecord);
       }
       return retValue;
     }
@@ -453,7 +453,7 @@ namespace _Namespace_
 
     #region Class Data
 
-    private StandardSettings mSettings;
+    private StandardUISettings mSettings;
     //private ItemTypeComboCode mItemTypeComboCode;
 
     // Foreign Keys

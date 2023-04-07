@@ -34,71 +34,147 @@
       this.OKButton = new System.Windows.Forms.Button();
       this.DescriptionText = new System.Windows.Forms.TextBox();
       this.DescriptionLabel = new System.Windows.Forms.Label();
+      this.AssemblyText = new System.Windows.Forms.TextBox();
+      this.AssemblyLabel = new System.Windows.Forms.Label();
+      this.GroupText = new System.Windows.Forms.TextBox();
+      this.GroupLabel = new System.Windows.Forms.Label();
+      this.SequenceText = new System.Windows.Forms.TextBox();
+      this.SequenceLabel = new System.Windows.Forms.Label();
+      this.ActiveCheckbox = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(145, 14);
+      this.NameText.Location = new System.Drawing.Point(145, 86);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
       this.NameText.Size = new System.Drawing.Size(413, 26);
-      this.NameText.TabIndex = 1;
+      this.NameText.TabIndex = 5;
       // 
       // NameLabel
       // 
-      this.NameLabel.Location = new System.Drawing.Point(18, 18);
+      this.NameLabel.Location = new System.Drawing.Point(18, 90);
       this.NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(124, 20);
-      this.NameLabel.TabIndex = 0;
+      this.NameLabel.TabIndex = 4;
       this.NameLabel.Text = "Name";
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(448, 89);
+      this.FormCancelButton.Location = new System.Drawing.Point(448, 197);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 5;
+      this.FormCancelButton.TabIndex = 12;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
-      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(326, 89);
+      this.OKButton.Location = new System.Drawing.Point(326, 197);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 4;
+      this.OKButton.TabIndex = 11;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
       // DescriptionText
       // 
-      this.DescriptionText.Location = new System.Drawing.Point(145, 50);
+      this.DescriptionText.Location = new System.Drawing.Point(145, 122);
       this.DescriptionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.DescriptionText.Name = "DescriptionText";
       this.DescriptionText.Size = new System.Drawing.Size(413, 26);
-      this.DescriptionText.TabIndex = 3;
+      this.DescriptionText.TabIndex = 7;
       // 
       // DescriptionLabel
       // 
-      this.DescriptionLabel.Location = new System.Drawing.Point(18, 54);
+      this.DescriptionLabel.Location = new System.Drawing.Point(18, 126);
       this.DescriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.DescriptionLabel.Name = "DescriptionLabel";
       this.DescriptionLabel.Size = new System.Drawing.Size(124, 20);
-      this.DescriptionLabel.TabIndex = 2;
+      this.DescriptionLabel.TabIndex = 6;
       this.DescriptionLabel.Text = "Description";
+      // 
+      // AssemblyText
+      // 
+      this.AssemblyText.Location = new System.Drawing.Point(145, 14);
+      this.AssemblyText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.AssemblyText.Name = "AssemblyText";
+      this.AssemblyText.ReadOnly = true;
+      this.AssemblyText.Size = new System.Drawing.Size(413, 26);
+      this.AssemblyText.TabIndex = 1;
+      // 
+      // AssemblyLabel
+      // 
+      this.AssemblyLabel.Location = new System.Drawing.Point(18, 18);
+      this.AssemblyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.AssemblyLabel.Name = "AssemblyLabel";
+      this.AssemblyLabel.Size = new System.Drawing.Size(124, 20);
+      this.AssemblyLabel.TabIndex = 0;
+      this.AssemblyLabel.Text = "Assembly";
+      // 
+      // GroupText
+      // 
+      this.GroupText.Location = new System.Drawing.Point(145, 50);
+      this.GroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.GroupText.Name = "GroupText";
+      this.GroupText.ReadOnly = true;
+      this.GroupText.Size = new System.Drawing.Size(413, 26);
+      this.GroupText.TabIndex = 3;
+      // 
+      // GroupLabel
+      // 
+      this.GroupLabel.Location = new System.Drawing.Point(18, 54);
+      this.GroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.GroupLabel.Name = "GroupLabel";
+      this.GroupLabel.Size = new System.Drawing.Size(124, 20);
+      this.GroupLabel.TabIndex = 2;
+      this.GroupLabel.Text = "Class Group";
+      // 
+      // SequenceText
+      // 
+      this.SequenceText.Location = new System.Drawing.Point(145, 158);
+      this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.SequenceText.Name = "SequenceText";
+      this.SequenceText.Size = new System.Drawing.Size(45, 26);
+      this.SequenceText.TabIndex = 9;
+      // 
+      // SequenceLabel
+      // 
+      this.SequenceLabel.Location = new System.Drawing.Point(18, 162);
+      this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.SequenceLabel.Name = "SequenceLabel";
+      this.SequenceLabel.Size = new System.Drawing.Size(124, 20);
+      this.SequenceLabel.TabIndex = 8;
+      this.SequenceLabel.Text = "Sequence";
+      // 
+      // ActiveCheckbox
+      // 
+      this.ActiveCheckbox.AutoSize = true;
+      this.ActiveCheckbox.Location = new System.Drawing.Point(277, 159);
+      this.ActiveCheckbox.Name = "ActiveCheckbox";
+      this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
+      this.ActiveCheckbox.TabIndex = 10;
+      this.ActiveCheckbox.Text = "Active";
+      this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
       // ClassDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(578, 136);
+      this.ClientSize = new System.Drawing.Size(578, 244);
+      this.Controls.Add(this.SequenceText);
+      this.Controls.Add(this.SequenceLabel);
+      this.Controls.Add(this.ActiveCheckbox);
+      this.Controls.Add(this.GroupText);
+      this.Controls.Add(this.GroupLabel);
+      this.Controls.Add(this.AssemblyText);
+      this.Controls.Add(this.AssemblyLabel);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -125,5 +201,12 @@
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox DescriptionText;
     private System.Windows.Forms.Label DescriptionLabel;
+    private System.Windows.Forms.TextBox AssemblyText;
+    private System.Windows.Forms.Label AssemblyLabel;
+    private System.Windows.Forms.TextBox GroupText;
+    private System.Windows.Forms.Label GroupLabel;
+    private System.Windows.Forms.TextBox SequenceText;
+    private System.Windows.Forms.Label SequenceLabel;
+    private System.Windows.Forms.CheckBox ActiveCheckbox;
   }
 }

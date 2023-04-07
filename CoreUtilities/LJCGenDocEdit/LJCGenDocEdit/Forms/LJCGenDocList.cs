@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGenDocEdit.cs
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -59,6 +60,12 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Calls the Edit method.
+    private void AssemblyGroupEdit_Click(object sender, EventArgs e)
+    {
+      mAssemblyGroupGridCode.DoEdit();
+    }
+
     // Refreshes the list.
     private void AssemblyGroupRefresh_Click(object sender, EventArgs e)
     {
@@ -90,6 +97,12 @@ namespace LJCGenDocEdit
 
     #region Assembly Item
 
+    // Calls the Edit method.
+    private void AssemblyEdit_Click(object sender, EventArgs e)
+    {
+      mAssemblyItemGridCode.DoEdit();
+    }
+
     // Refreshes the list.
     private void AssemblyRefresh_Click(object sender, EventArgs e)
     {
@@ -113,6 +126,12 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Class Group
+
+    // Calls the Edit method.
+    private void ClassGroupEdit_Click(object sender, EventArgs e)
+    {
+      mClassGroupGridCode.DoEdit();
+    }
 
     // Refreshes the list.
     private void ClassGroupRefresh_Click(object sender, EventArgs e)
@@ -138,6 +157,12 @@ namespace LJCGenDocEdit
 
     #region Class Item
 
+    // Calls the Edit method.
+    private void ClassEdit_Click(object sender, EventArgs e)
+    {
+      mClassItemGridCode.DoEdit();
+    }
+
     // Refreshes the list.
     private void ClassRefresh_Click(object sender, EventArgs e)
     {
@@ -162,6 +187,12 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Calls the Edit method.
+    private void MethodGroupEdit_Click(object sender, EventArgs e)
+    {
+      mMethodGroupGridCode.DoEdit();
+    }
+
     // Refreshes the list.
     private void MethodGroupRefresh_Click(object sender, EventArgs e)
     {
@@ -185,6 +216,12 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Method Item
+
+    // Calls the Edit method.
+    private void MethodEdit_Click(object sender, EventArgs e)
+    {
+      mMethodItemGridCode.DoEdit();
+    }
 
     // Refreshes the list.
     private void MethodItemRefresh_Click(object sender, EventArgs e)
@@ -234,6 +271,39 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Handles the form keys.
+    private void AssemblyGroupGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mAssemblyGroupGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            AssemblyItemGrid.Select();
+          }
+          else
+          {
+            AssemblyGroupGrid.Select();
+          }
+          e.Handled = true;
+          break;
+      }
+    }
+
+    // Handles the MouseDoubleClick event.
+    private void AssemblyGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (AssemblyGroupGrid.LJCGetMouseRow(e) != null)
+      {
+        mAssemblyGroupGridCode.DoEdit();
+      }
+    }
+
     // Handles the MouseDown event.
     private void AssemblyGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -262,6 +332,15 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Assembly Item
+
+    // Handles the MouseDoubleClick event.
+    private void AssemblyItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (AssemblyItemGrid.LJCGetMouseRow(e) != null)
+      {
+        mAssemblyItemGridCode.DoEdit();
+      }
+    }
 
     // Handles the MouseDown event.
     private void AssemblyItemGrid_MouseDown(object sender, MouseEventArgs e)
@@ -301,6 +380,15 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    // Handles the MouseDoubleClick event.
+    private void ClassGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ClassGroupGrid.LJCGetMouseRow(e) != null)
+      {
+        mClassGroupGridCode.DoEdit();
+      }
+    }
+
     // Handles the MouseDown event.
     private void ClassGroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -329,6 +417,15 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Class Item
+
+    // Handles the MouseDoubleClick event.
+    private void ClassItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ClassItemGrid.LJCGetMouseRow(e) != null)
+      {
+        mClassItemGridCode.DoEdit();
+      }
+    }
 
     // Handles the MouseDown event.
     private void ClassItemGrid_MouseDown(object sender, MouseEventArgs e)
@@ -368,6 +465,15 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Handles the MouseDoubleClick event.
+    private void MethodGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (MethodGroupGrid.LJCGetMouseRow(e) != null)
+      {
+        mMethodGroupGridCode.DoEdit();
+      }
+    }
+
     // Handles the MouseDown event.
     private void MethodGroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
@@ -396,6 +502,15 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Method Item
+
+    // Handles the MouseDoubleClick event.
+    private void MethodItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (MethodItemGrid.LJCGetMouseRow(e) != null)
+      {
+        mMethodItemGridCode.DoEdit();
+      }
+    }
 
     // Handles the MouseDown event.
     private void MethodItemGrid_MouseDown(object sender, MouseEventArgs e)
