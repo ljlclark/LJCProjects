@@ -28,7 +28,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(235, 240, 250);
+      EndColor = Color.FromArgb(225, 233, 240);
     }
     #endregion
 
@@ -158,6 +158,10 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
+    // 
+    private DocMethod mOriginalRecord;
+
+    // 
     private StandardUISettings mSettings;
     #endregion
   }

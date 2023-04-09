@@ -24,6 +24,10 @@ namespace LJCDocLibDAL
       // that differ from the column names.
       Manager.MapNames(DocClassGroup.ColumnID, caption: "DocClassGroup ID");
 
+      // Add Calculated and Join columns.
+      // Enables adding Calculated and Join columns to a grid configuration.
+      Manager.DataDefinition.Add(DocClassGroupHeading.ColumnHeading);
+
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
@@ -118,17 +122,20 @@ namespace LJCDocLibDAL
     public DocClassGroups LoadWithParent(short parentID)
     {
       var keyColumns = GetParentID(parentID);
-      var dbResult = Manager.Load(keyColumns);
+      var joins = GetJoins();
+      var dbResult = Manager.Load(keyColumns, joins: joins);
       var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DocClassGroup RetrieveWithID(short id, List<string> propertyNames = null)
+    public DocClassGroup RetrieveWithID(short id
+      , List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -145,7 +152,8 @@ namespace LJCDocLibDAL
       , string headingName, List<string> propertyNames = null)
     {
       var keyColumns = GetUniqueKey(docAssemblyID, headingName);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -198,6 +206,76 @@ namespace LJCDocLibDAL
         { DocClassGroup.ColumnDocAssemblyID, docAssemblyID },
         { DocClassGroup.ColumnHeadingName, (object)headingName}
       };
+      return retValue;
+    }
+    #endregion
+
+    #region Joins
+
+    // Creates and returns the Load Joins object.
+    /// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbJoins GetJoins()
+    {
+      DbJoin dbJoin;
+      DbJoins retValue = new DbJoins();
+
+      // Note: JoinOn Columns must have properties in the DataObject
+      // to receive the join values.
+      // The RenameAs property is required if there is another table column
+      // with the same name.
+      // Note: dbColumns.Add(string columnName, string propertyName = null
+      // , string renameAs = null, string dataTypeName = "String"
+      // , string caption = null)
+
+      // DocClassGroupHeading.Heading,
+      // left join DocClassGroupHeading
+      // on ((DocClassGroup.DocClassGroupHeadingID = DocClassGroupHeading.ID))
+      dbJoin = new DbJoin
+      {
+        TableName = "DocClassGroupHeading",
+        JoinType = "left",
+        JoinOns = new DbJoinOns()
+        {
+          { DocClassGroup.ColumnDocClassGroupHeadingID
+            , DocClassGroupHeading.ColumnID }
+        },
+        Columns = new DbColumns()
+        {
+          // columnName, propertyName = null, renameAs = null
+          //   , dataTypeName = "String", caption = null
+          { DocClassGroupHeading.ColumnHeading }
+        }
+      };
+      retValue.Add(dbJoin);
+      return retValue;
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Check for duplicate unique key.
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    public bool IsDuplicate(DocClassGroup lookupRecord
+      , DocClassGroup currentRecord, bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (false == isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          if (lookupRecord.ID != currentRecord.ID)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
       return retValue;
     }
     #endregion

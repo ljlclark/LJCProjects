@@ -30,7 +30,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(235, 240, 250);
+      EndColor = Color.FromArgb(225, 233, 240);
     }
     #endregion
 
@@ -68,8 +68,8 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var dataRecord = GetWithID(LJCID);
-        GetRecordValues(dataRecord);
+        mOriginalRecord = GetWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
       }
       else
       {
@@ -99,14 +99,16 @@ namespace LJCGenDocEdit
     // Creates and returns a record object with the data from
     private DocAssemblyGroup SetRecordValues()
     {
-      var retValue = new DocAssemblyGroup()
+      var retValue = mOriginalRecord;
+      if (null == retValue)
       {
-        ID = LJCID,
-        Name = FormCommon.SetString(NameText.Text),
-        Heading = FormCommon.SetString(HeadingText.Text),
-        Sequence = Convert.ToInt16(SequenceText.Text),
-        ActiveFlag = ActiveCheckbox.Checked
-      };
+        retValue = new DocAssemblyGroup();
+      }
+      retValue.ID = LJCID;
+      retValue.Name = NameText.Text;
+      retValue.Heading = FormCommon.SetString(HeadingText.Text);
+      retValue.Sequence = Convert.ToInt16(SequenceText.Text);
+      retValue.ActiveFlag = ActiveCheckbox.Checked;
       return retValue;
     }
 
@@ -197,6 +199,11 @@ namespace LJCGenDocEdit
       {
         retValue = false;
         builder.AppendLine($"  {HeadingLabel.Text}");
+      }
+      if (false == NetString.HasValue(SequenceText.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {SequenceLabel.Text}");
       }
 
       if (retValue == false)
@@ -335,6 +342,10 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
+    // 
+    private DocAssemblyGroup mOriginalRecord;
+
+    // 
     private StandardUISettings mSettings;
     #endregion
   }

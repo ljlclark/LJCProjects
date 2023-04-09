@@ -235,6 +235,35 @@ namespace LJCDocLibDAL
     }
     #endregion
 
+    #region Other Methods
+
+    // Check for duplicate unique key.
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    public bool IsDuplicate(DocAssembly lookupRecord
+      , DocAssembly currentRecord, bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (false == isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          if (lookupRecord.ID != currentRecord.ID)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Properties
 
     /// <summary>Gets or sets the DataManager reference.</summary>

@@ -3,9 +3,11 @@
 // ClassDetail.cs
 using LJCDBClientLib;
 using LJCDocLibDAL;
+using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -23,12 +25,14 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCID = 0;
+      LJCParentID = 0;
+      LJCParentName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(235, 240, 250);
+      EndColor = Color.FromArgb(225, 233, 240);
     }
     #endregion
 
@@ -40,7 +44,7 @@ namespace LJCGenDocEdit
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
       InitializeControls();
-      //
+      DataRetrieve();
       CenterToParent();
     }
 
@@ -51,6 +55,203 @@ namespace LJCGenDocEdit
       base.OnPaintBackground(e);
       FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
         , EndColor);
+    }
+    #endregion
+
+    #region Data Methods
+
+    // Retrieves the initial control data.
+    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    private void DataRetrieve()
+    {
+      Cursor = Cursors.WaitCursor;
+      Text = "Class Detail";
+      if (LJCID > 0)
+      {
+        Text += " - Edit";
+        LJCIsUpdate = true;
+        mOriginalRecord = GetClassWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
+      }
+      else
+      {
+        Text += " - New";
+        LJCIsUpdate = false;
+        AssemblyText.Text = LJCParentName;
+
+        // Set default values.
+        LJCRecord = new DocClass();
+      }
+      NameText.Select();
+      NameText.Select(0, 0);
+      Cursor = Cursors.Default;
+    }
+
+    // Gets the record values and copies them to the controls.
+    private void GetRecordValues(DocClass dataRecord)
+    {
+      if (dataRecord != null)
+      {
+        LJCParentID = dataRecord.DocClassGroupID;
+        ParentText.Text = LJCParentName;
+        NameText.Text = dataRecord.Name;
+        DescriptionText.Text = dataRecord.Description;
+        SequenceText.Text = dataRecord.Sequence.ToString();
+        ActiveCheckbox.Checked = dataRecord.ActiveFlag;
+
+        // Get foreign key values.
+        var assemblyItem = GetAssemblyWithID(dataRecord.DocAssemblyID);
+        if (assemblyItem != null)
+        {
+          mDocAssemblyID = assemblyItem.ID;
+          AssemblyText.Text = assemblyItem.Name;
+        }
+      }
+    }
+
+    // Creates and returns a record object with the data from
+    private DocClass SetRecordValues()
+    {
+      var retValue = mOriginalRecord;
+      if (null == retValue)
+      {
+        retValue = new DocClass();
+      }
+      retValue.ID = LJCID;
+      retValue.DocClassGroupID = LJCParentID;
+      retValue.DocAssemblyID = mDocAssemblyID;
+      retValue.Name = NameText.Text.Trim();
+      retValue.Description = DescriptionText.Text.Trim();
+      retValue.Sequence = Convert.ToInt16(SequenceText.Text);
+      retValue.ActiveFlag = ActiveCheckbox.Checked;
+      return retValue;
+    }
+
+    // Resets the empty record values.
+    private void ResetRecordValues(DocClass dataRecord)
+    {
+    }
+
+    // Saves the data.
+    private bool DataSave()
+    {
+      string title;
+      string message;
+      bool retValue = true;
+
+      Cursor = Cursors.WaitCursor;
+      LJCRecord = SetRecordValues();
+
+      var manager = Managers.DocClassManager;
+      var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocAssemblyID
+        , LJCRecord.Name);
+      if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+      {
+        retValue = false;
+        title = "Data Entry Error";
+        message = "The record already exists.";
+        Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
+      }
+
+      if (retValue)
+      {
+        if (LJCIsUpdate)
+        {
+          var keyRecord = manager.GetIDKey(LJCRecord.ID);
+          manager.Update(LJCRecord, keyRecord);
+          ResetRecordValues(LJCRecord);
+          if (0 == manager.Manager.AffectedCount)
+          {
+            title = "Update Error";
+            message = "The Record was not updated.";
+            MessageBox.Show(message, title, MessageBoxButtons.OK
+              , MessageBoxIcon.Information);
+          }
+        }
+        else
+        {
+          var addedRecord = manager.Add(LJCRecord);
+          ResetRecordValues(LJCRecord);
+          if (null == addedRecord)
+          {
+            if (manager.Manager.AffectedCount < 1)
+            {
+              title = "Add Error";
+              message = "The Record was not added.";
+              MessageBox.Show(message, title, MessageBoxButtons.OK
+                , MessageBoxIcon.Information);
+            }
+          }
+          else
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+        }
+      }
+      Cursor = Cursors.Default;
+      return retValue;
+    }
+
+    // Validates the data.
+    private bool IsValid()
+    {
+      StringBuilder builder;
+      string title;
+      string message;
+      bool retValue = true;
+
+      builder = new StringBuilder(64);
+      builder.AppendLine("Invalid or Missing Data:");
+
+      if (false == NetString.HasValue(NameText.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {NameLabel.Text}");
+      }
+      if (false == NetString.HasValue(SequenceText.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {SequenceLabel.Text}");
+      }
+
+      if (retValue == false)
+      {
+        title = "Data Entry Error";
+        message = builder.ToString();
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Get Data Methods
+
+    // Retrieves the Product with the ID value.
+    private DocClass GetClassWithID(short id)
+    {
+      DocClass retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocClassManager;
+        retValue = manager.RetrieveWithID(LJCID);
+      }
+      return retValue;
+    }
+
+    private DocAssembly GetAssemblyWithID(short id)
+    {
+      DocAssembly retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocAssemblyManager;
+        retValue = manager.RetrieveWithID(id);
+      }
+      return retValue;
     }
     #endregion
 
@@ -103,7 +304,12 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-
+      if (IsValid()
+        && DataSave())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
+      }
     }
     #endregion
 
@@ -140,6 +346,17 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
+    /// <summary>Gets or sets the Parent ID value.</summary>
+    public short LJCParentID { get; set; }
+
+    /// <summary>Gets or sets the LJCParentName value.</summary>
+    public string LJCParentName
+    {
+      get { return mParentName; }
+      set { mParentName = NetString.InitString(value); }
+    }
+    private string mParentName;
+
     /// <summary>Gets a reference to the record object.</summary>
     internal DocClass LJCRecord { get; private set; }
 
@@ -158,6 +375,13 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
+    // Foreign Keys
+    private short mDocAssemblyID;
+
+    // 
+    private DocClass mOriginalRecord;
+
+    // 
     private StandardUISettings mSettings;
     #endregion
   }

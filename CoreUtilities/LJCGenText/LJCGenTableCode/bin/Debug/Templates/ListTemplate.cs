@@ -236,8 +236,8 @@ namespace _Namespace_
       //  && _ClassName_Grid.CurrentRow is LJCGridRow row)
       //{
       //  // Data from items.
-      //  int id = row.LJCGetInt(_ClassName_.ColumnID);
-      //  int parentID = parentRow.LJCGetInt(Parent.ColumnID);
+      //  int id = row.LJCGetInt3(_ClassName_.ColumnID);
+      //  int parentID = parentRow.LJCGetInt32(Parent.ColumnID);
       //  string parentName = parentRow.LJCGetString(Parent.ColumnName);
       //
       if (_ClassName_Grid.CurrentRow is LJCGridRow row)

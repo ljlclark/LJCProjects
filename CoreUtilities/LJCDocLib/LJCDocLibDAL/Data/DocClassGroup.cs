@@ -162,6 +162,12 @@ namespace LJCDocLibDAL
     private bool mActiveFlag;
     #endregion
 
+    #region Calculated and Join Data Properties
+
+    /// <summary>Gets or sets the Join Heading value.</summary>
+    public string Heading { get; set; }
+    #endregion
+
     #region Class Properties
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
@@ -193,6 +199,12 @@ namespace LJCDocLibDAL
 
     /// <summary>The ActiveFlag column name.</summary>
     public static string ColumnActiveFlag = "ActiveFlag";
+    #endregion
+
+    #region Calculated and Join Class Data
+
+    /// <summary>The Join Heading column name.</summary>
+    public static string ColumnJoinHeading = "Heading";
     #endregion
   }
 

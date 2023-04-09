@@ -147,6 +147,7 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocAssembly dataRecord)
     {
       row.LJCSetInt32(DocAssembly.ColumnID, dataRecord.ID);
+      row.LJCSetString(DocAssembly.ColumnName, dataRecord.Name);
     }
     #endregion
 
@@ -155,14 +156,19 @@ namespace LJCGenDocEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      if (mGrid.CurrentRow is LJCGridRow row)
+      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow
+        && mGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
+        var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+        var parentName = parentRow.LJCGetString(DocAssemblyGroup.ColumnHeading);
         var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
 
         var detail = new AssemblyDetail()
         {
           LJCID = id,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
           Managers = mManagers
         };
         detail.LJCChange += Detail_Change;

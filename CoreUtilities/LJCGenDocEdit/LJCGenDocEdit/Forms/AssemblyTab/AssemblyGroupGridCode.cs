@@ -146,6 +146,7 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocAssemblyGroup dataRecord)
     {
       row.LJCSetInt32(DocAssemblyGroup.ColumnID, dataRecord.ID);
+      row.LJCSetString(DocAssemblyGroup.ColumnHeading, dataRecord.Heading);
     }
     #endregion
 
