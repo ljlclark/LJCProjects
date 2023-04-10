@@ -158,14 +158,21 @@ namespace LJCGenDocEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      if (mGrid.CurrentRow is LJCGridRow row)
+      if (mParent.ClassItemGrid.CurrentRow is LJCGridRow parentRow
+        && mGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         var id = (short)row.LJCGetInt32(DocMethod.ColumnID);
+        var parentID
+          = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
+        var parentName
+          = parentRow.LJCGetString(DocClass.ColumnName);
 
         var detail = new MethodDetail()
         {
           LJCID = id,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
           Managers = mManagers
         };
         detail.LJCChange += Detail_Change;

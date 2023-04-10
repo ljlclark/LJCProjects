@@ -34,8 +34,8 @@
       this.OKButton = new System.Windows.Forms.Button();
       this.DescriptionText = new System.Windows.Forms.TextBox();
       this.DescriptionLabel = new System.Windows.Forms.Label();
-      this.ClassText = new System.Windows.Forms.TextBox();
-      this.ClassLabel = new System.Windows.Forms.Label();
+      this.ParentText = new System.Windows.Forms.TextBox();
+      this.ParentLabel = new System.Windows.Forms.Label();
       this.GroupText = new System.Windows.Forms.TextBox();
       this.GroupLabel = new System.Windows.Forms.Label();
       this.SequenceText = new System.Windows.Forms.TextBox();
@@ -100,23 +100,23 @@
       this.DescriptionLabel.TabIndex = 6;
       this.DescriptionLabel.Text = "Description";
       // 
-      // ClassText
+      // ParentText
       // 
-      this.ClassText.Location = new System.Drawing.Point(145, 14);
-      this.ClassText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ClassText.Name = "ClassText";
-      this.ClassText.ReadOnly = true;
-      this.ClassText.Size = new System.Drawing.Size(413, 26);
-      this.ClassText.TabIndex = 1;
+      this.ParentText.Location = new System.Drawing.Point(145, 14);
+      this.ParentText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ParentText.Name = "ParentText";
+      this.ParentText.ReadOnly = true;
+      this.ParentText.Size = new System.Drawing.Size(413, 26);
+      this.ParentText.TabIndex = 1;
       // 
-      // ClassLabel
+      // ParentLabel
       // 
-      this.ClassLabel.Location = new System.Drawing.Point(18, 18);
-      this.ClassLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.ClassLabel.Name = "ClassLabel";
-      this.ClassLabel.Size = new System.Drawing.Size(124, 20);
-      this.ClassLabel.TabIndex = 0;
-      this.ClassLabel.Text = "Class";
+      this.ParentLabel.Location = new System.Drawing.Point(18, 18);
+      this.ParentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.ParentLabel.Name = "ParentLabel";
+      this.ParentLabel.Size = new System.Drawing.Size(124, 20);
+      this.ParentLabel.TabIndex = 0;
+      this.ParentLabel.Text = "Class";
       // 
       // GroupText
       // 
@@ -173,8 +173,8 @@
       this.Controls.Add(this.ActiveCheckbox);
       this.Controls.Add(this.GroupText);
       this.Controls.Add(this.GroupLabel);
-      this.Controls.Add(this.ClassText);
-      this.Controls.Add(this.ClassLabel);
+      this.Controls.Add(this.ParentText);
+      this.Controls.Add(this.ParentLabel);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -201,8 +201,8 @@
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox DescriptionText;
     private System.Windows.Forms.Label DescriptionLabel;
-    private System.Windows.Forms.TextBox ClassText;
-    private System.Windows.Forms.Label ClassLabel;
+    private System.Windows.Forms.TextBox ParentText;
+    private System.Windows.Forms.Label ParentLabel;
     private System.Windows.Forms.TextBox GroupText;
     private System.Windows.Forms.Label GroupLabel;
     private System.Windows.Forms.TextBox SequenceText;

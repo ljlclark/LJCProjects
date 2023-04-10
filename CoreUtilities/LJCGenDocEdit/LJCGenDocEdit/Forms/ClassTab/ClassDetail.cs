@@ -32,7 +32,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(225, 233, 240);
+      EndColor = Color.FromArgb(225, 235, 245);
     }
     #endregion
 
@@ -128,7 +128,8 @@ namespace LJCGenDocEdit
     }
 
     // Resets the empty record values.
-    private void ResetRecordValues(DocClass dataRecord)
+    //private void ResetRecordValues(DocClass dataRecord)
+    private void ResetRecordValues(DocClass _)
     {
     }
 
@@ -272,7 +273,7 @@ namespace LJCGenDocEdit
       SetNoSpace(NameText);
       SetNumericOnly(SequenceText);
 
-      //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
+      //HeadingText.MaxLength = DocClassGroup.LengthHeading;
       Cursor = Cursors.Default;
     }
 

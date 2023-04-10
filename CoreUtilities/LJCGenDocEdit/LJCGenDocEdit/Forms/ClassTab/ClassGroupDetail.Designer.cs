@@ -64,22 +64,22 @@
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(458, 195);
+      this.FormCancelButton.Location = new System.Drawing.Point(458, 197);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 14;
+      this.FormCancelButton.TabIndex = 12;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(336, 195);
+      this.OKButton.Location = new System.Drawing.Point(336, 197);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 13;
+      this.OKButton.TabIndex = 11;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -90,7 +90,7 @@
       this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SequenceText.Name = "SequenceText";
       this.SequenceText.Size = new System.Drawing.Size(45, 26);
-      this.SequenceText.TabIndex = 11;
+      this.SequenceText.TabIndex = 9;
       // 
       // SequenceLabel
       // 
@@ -98,7 +98,7 @@
       this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SequenceLabel.Name = "SequenceLabel";
       this.SequenceLabel.Size = new System.Drawing.Size(134, 20);
-      this.SequenceLabel.TabIndex = 10;
+      this.SequenceLabel.TabIndex = 8;
       this.SequenceLabel.Text = "Sequence";
       // 
       // ActiveCheckbox
@@ -107,7 +107,7 @@
       this.ActiveCheckbox.Location = new System.Drawing.Point(287, 159);
       this.ActiveCheckbox.Name = "ActiveCheckbox";
       this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
-      this.ActiveCheckbox.TabIndex = 12;
+      this.ActiveCheckbox.TabIndex = 10;
       this.ActiveCheckbox.Text = "Active";
       this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
@@ -153,7 +153,7 @@
       this.CustomText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.CustomText.Name = "CustomText";
       this.CustomText.Size = new System.Drawing.Size(413, 26);
-      this.CustomText.TabIndex = 9;
+      this.CustomText.TabIndex = 7;
       // 
       // CustomLabel
       // 
@@ -161,14 +161,14 @@
       this.CustomLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.CustomLabel.Name = "CustomLabel";
       this.CustomLabel.Size = new System.Drawing.Size(134, 20);
-      this.CustomLabel.TabIndex = 8;
+      this.CustomLabel.TabIndex = 6;
       this.CustomLabel.Text = "Custom Heading";
       // 
       // ClassGroupDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(588, 242);
+      this.ClientSize = new System.Drawing.Size(588, 244);
       this.Controls.Add(this.CustomText);
       this.Controls.Add(this.CustomLabel);
       this.Controls.Add(this.HeadingText);

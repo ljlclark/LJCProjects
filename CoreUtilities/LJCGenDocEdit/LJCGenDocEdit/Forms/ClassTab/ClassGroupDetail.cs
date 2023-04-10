@@ -84,8 +84,6 @@ namespace LJCGenDocEdit
         HeadingNameText.Select();
         HeadingNameText.Select(0, 0);
       }
-      //HeadingNameText.Select();
-      //HeadingNameText.Select(0, 0);
       Cursor = Cursors.Default;
     }
 

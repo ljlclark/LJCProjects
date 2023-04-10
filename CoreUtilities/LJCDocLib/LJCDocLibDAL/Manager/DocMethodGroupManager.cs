@@ -24,6 +24,10 @@ namespace LJCDocLibDAL
       // that differ from the column names.
       Manager.MapNames(DocMethodGroup.ColumnID, caption: "DocMethodGroup ID");
 
+      // Add Calculated and Join columns.
+      // Enables adding Calculated and Join columns to a grid configuration.
+      Manager.DataDefinition.Add(DocClassGroupHeading.ColumnHeading);
+
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
@@ -118,7 +122,8 @@ namespace LJCDocLibDAL
     public DocMethodGroups LoadWithParent(short parentID)
     {
       var keyColumns = GetParentID(parentID);
-      var dbResult = Manager.Load(keyColumns);
+      var joins = GetJoins();
+      var dbResult = Manager.Load(keyColumns, joins: joins);
       var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
@@ -130,7 +135,8 @@ namespace LJCDocLibDAL
       DocMethodGroup retValue;
 
       var keyColumns = GetIDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -140,16 +146,17 @@ namespace LJCDocLibDAL
     /// 
     /// </summary>
     /// <param name="docClassID"></param>
-    /// <param name="docClassGroupHeadingID"></param>
+    /// <param name="headingName"></param>
     /// <param name="propertyNames"></param>
     /// <returns></returns>
     public DocMethodGroup RetrieveWithUnique(short docClassID
-      , short docClassGroupHeadingID,List<string> propertyNames = null)
+      , string headingName, List<string> propertyNames = null)
     {
       DocMethodGroup retValue;
 
-      var keyColumns = GetUniqueKey(docClassID, docClassGroupHeadingID);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var keyColumns = GetUniqueKey(docClassID, headingName);
+      var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -191,16 +198,89 @@ namespace LJCDocLibDAL
     /// 
     /// </summary>
     /// <param name="docClassID"></param>
-    /// <param name="docMethodGroupHeadingID"></param>
+    /// <param name="headingName"></param>
     /// <returns></returns>
-    public DbColumns GetUniqueKey(short docClassID, short docMethodGroupHeadingID)
+    //public DbColumns GetUniqueKey(short docClassID
+    //, short docMethodGroupHeadingID)
+    public DbColumns GetUniqueKey(short docClassID, string headingName)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocMethodGroup.ColumnDocClassID, docClassID},
-        { DocMethodGroup.ColumnDocMethodGroupHeadingID, docMethodGroupHeadingID }
+        //{ DocMethodGroup.ColumnDocMethodGroupHeadingID, docMethodGroupHeadingID }
+        { DocMethodGroup.ColumnHeadingName, (object)headingName }
       };
+      return retValue;
+    }
+    #endregion
+
+    #region Joins
+
+    // Creates and returns the Load Joins object.
+    /// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbJoins GetJoins()
+    {
+      DbJoin dbJoin;
+      DbJoins retValue = new DbJoins();
+
+      // Note: JoinOn Columns must have properties in the DataObject
+      // to receive the join values.
+      // The RenameAs property is required if there is another table column
+      // with the same name.
+      // Note: dbColumns.Add(string columnName, string propertyName = null
+      // , string renameAs = null, string dataTypeName = "String"
+      // , string caption = null)
+
+      // DocMethodGroupHeading.Heading,
+      // left join DocMethodGroupHeading
+      // on ((DocMethodGroup.DocMethodGroupHeadingID = DocMethodGroupHeading.ID))
+      dbJoin = new DbJoin
+      {
+        TableName = "DocMethodGroupHeading",
+        JoinType = "left",
+        JoinOns = new DbJoinOns()
+        {
+          { DocMethodGroup.ColumnDocMethodGroupHeadingID
+            , DocMethodGroupHeading.ColumnID }
+        },
+        Columns = new DbColumns()
+        {
+          // columnName, propertyName = null, renameAs = null
+          //   , dataTypeName = "String", caption = null
+          { DocMethodGroupHeading.ColumnHeading }
+        }
+      };
+      retValue.Add(dbJoin);
+      return retValue;
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Check for duplicate unique key.
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    public bool IsDuplicate(DocMethodGroup lookupRecord
+      , DocMethodGroup currentRecord, bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (false == isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          if (lookupRecord.ID != currentRecord.ID)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
       return retValue;
     }
     #endregion

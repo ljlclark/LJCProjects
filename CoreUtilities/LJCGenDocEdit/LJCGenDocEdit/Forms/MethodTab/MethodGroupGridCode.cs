@@ -150,10 +150,36 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocMethodGroup dataRecord)
     {
       row.LJCSetInt32(DocMethodGroup.ColumnID, dataRecord.ID);
+      row.LJCSetString(DocMethodGroup.ColumnHeadingName, dataRecord.HeadingName);
+      row.LJCSetInt32(DocMethodGroup.ColumnDocClassID
+        , dataRecord.DocClassID);
     }
     #endregion
 
     #region Action Methods
+
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (mParent.ClassItemGrid.CurrentRow is LJCGridRow parentRow
+        && mGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var id = (short)row.LJCGetInt32(DocMethodGroup.ColumnID);
+        var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
+        var parentName = parentRow.LJCGetString(DocClass.ColumnName);
+
+        var detail = new MethodGroupDetail()
+        {
+          LJCID = id,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+          Managers = mManagers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
 
     // Refreshes the list.
     internal void DoRefresh()
@@ -177,24 +203,6 @@ namespace LJCGenDocEdit
         RowSelect(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        // Data from items.
-        var id = (short)row.LJCGetInt32(DocMethodGroup.ColumnID);
-
-        var detail = new MethodGroupDetail()
-        {
-          LJCID = id,
-          Managers = mManagers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
     }
 
     // Adds new row or updates row with changes from the detail dialog.

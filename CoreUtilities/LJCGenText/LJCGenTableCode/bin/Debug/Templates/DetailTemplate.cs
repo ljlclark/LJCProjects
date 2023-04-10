@@ -90,8 +90,8 @@ namespace _Namespace_
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var dataRecord = GetWithID(LJCID);
-        GetRecordValues(dataRecord);
+        mOriginalRecord = GetWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
       }
       else
       {
@@ -123,34 +123,37 @@ namespace _Namespace_
         // Set Type combos.
         //ItemTypeCombo.LJCSetByItemID(LJCItemTypeID);
 
-        // Get Foreign Key values.
-        //if (dataRecord.ForeignKeyID > 0)
-        //{
-        //	mForeignKeyId = record.ForeignKeyId;
-        //	lookupRecord = m_ClassName_Manager.RetrieveWithID(mForeignKeyId);
-        //	ForeignKeyText.Text = lookupRecord.Name;
-        //}
-
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
+
+        // Get foreign key values.
+        var item = GetItemWithID(dataRecord.ForeignKeyID);
+        if (item != null)
+        {
+          mForeignKeyID = item.ID;
+          NameText.Text = item.Name;
+        }
       }
     }
 
     // Creates and returns a record object with the data from
     private _ClassName_ SetRecordValues()
     {
-      _ClassName_ retValue = new _ClassName_()
+      var retValue = mOriginalRecord;
+      if (null == retValue)
       {
-        ID = LJCID,
-        //ParentID = LJCParentID;
-        //ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
-        //ForeignKeyID = mForeignKeyID,
-        Name = FormCommon.SetString(NameText.Text),
-        Description = FormCommon.SetString(DescriptionText.Text),
+        retValue = new DocMethod();
+      }
+      retValue.ID = LJCID,
+      //retValue.ParentID = LJCParentID;
+      //retValue.ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
+      //ForeignKeyID = mForeignKeyID,
+      retValue.Name = FormCommon.SetString(NameText.Text),
+      retValue.Description = FormCommon.SetString(DescriptionText.Text),
 
-        // Get control join display values.
-        //TypeDescription = TypeCombo.Text.Trim()
-      };
+      // Get control join display values.
+      //TypeDescription = TypeCombo.Text.Trim()
+
       //int.TryParse(IntegerText.Text, out int value);
       //retValue.Value = value;
       return retValue;
@@ -453,14 +456,17 @@ namespace _Namespace_
 
     #region Class Data
 
-    private StandardUISettings mSettings;
-    //private ItemTypeComboCode mItemTypeComboCode;
+    /// <summary>The Change event.</summary>
+    public event EventHandler<EventArgs> LJCChange;
 
     // Foreign Keys
     private int mForeignKeyId;
 
-    /// <summary>The Change event.</summary>
-    public event EventHandler<EventArgs> LJCChange;
+    // 
+    private DataRecord mOriginalRecord;
+
+    private StandardUISettings mSettings;
+    //private ItemTypeComboCode mItemTypeComboCode;
     #endregion
   }
 }

@@ -150,6 +150,7 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
     {
       row.LJCSetInt32(DocClass.ColumnID, dataRecord.ID);
+      row.LJCSetString(DocClass.ColumnName, dataRecord.Name);
     }
     #endregion
 
