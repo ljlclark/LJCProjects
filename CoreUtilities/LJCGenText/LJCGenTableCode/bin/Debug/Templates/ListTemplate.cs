@@ -35,6 +35,7 @@ namespace _Namespace_
       LJCHelpFile = "_AppName_.chm";
       LJCHelpPageList = "_ClassName_List.htm";
       LJCHelpPageDetail = "_ClassName_Detail.htm";
+      LJCIsSelect = false;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -674,7 +675,7 @@ namespace _Namespace_
     // Sets the control states based on the current control values.
     private void SetControlState()
     {
-      bool enableNew = Combo.SelectedIndex != -1; ;
+      bool enableNew = Combo.SelectedIndex != -1;
       bool enableEdit = _ClassName_Grid.CurrentRow != null;
       FormCommon.SetToolState(_ClassName_Tool, enableNew, enableEdit);
       FormCommon.SetMenuState(_ClassName_Menu, enableNew, enableEdit);
@@ -926,7 +927,7 @@ namespace _Namespace_
     #region Class Data
 
     private string mControlValuesFileName;
-    private StandardSettings mSettings;
+    private StandardUISettings mSettings;
 
     // Foreign Keys
     #endregion

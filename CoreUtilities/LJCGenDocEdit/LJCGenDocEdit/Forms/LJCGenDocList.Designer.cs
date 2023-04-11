@@ -396,6 +396,7 @@
       this.AssemblyItemGrid.TabIndex = 1;
       this.AssemblyItemGrid.Text = "LJCDataGrid";
       this.AssemblyItemGrid.SelectionChanged += new System.EventHandler(this.AssemblyItemGrid_SelectionChanged);
+      this.AssemblyItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AssemblyItemGrid_KeyDown);
       this.AssemblyItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDoubleClick);
       this.AssemblyItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDown);
       // 
@@ -559,6 +560,7 @@
       this.ClassGroupGrid.TabIndex = 1;
       this.ClassGroupGrid.Text = "LJCDataGrid";
       this.ClassGroupGrid.SelectionChanged += new System.EventHandler(this.ClassGrid_SelectionChanged);
+      this.ClassGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassGroupGrid_KeyDown);
       this.ClassGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDoubleClick);
       this.ClassGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDown);
       // 
@@ -685,6 +687,7 @@
       this.ClassItemGrid.TabIndex = 1;
       this.ClassItemGrid.Text = "LJCDataGrid";
       this.ClassItemGrid.SelectionChanged += new System.EventHandler(this.ClassItemGrid_SelectionChanged);
+      this.ClassItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassItemGrid_KeyDown);
       this.ClassItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDoubleClick);
       this.ClassItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDown);
       // 
@@ -841,6 +844,7 @@
       this.MethodGroupGrid.TabIndex = 1;
       this.MethodGroupGrid.Text = "LJCDataGrid";
       this.MethodGroupGrid.SelectionChanged += new System.EventHandler(this.MethodGroupGrid_SelectionChanged);
+      this.MethodGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MethodGroupGrid_KeyDown);
       this.MethodGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDoubleClick);
       this.MethodGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDown);
       // 
@@ -967,6 +971,7 @@
       this.MethodItemGrid.TabIndex = 1;
       this.MethodItemGrid.Text = "LJCDataGrid";
       this.MethodItemGrid.SelectionChanged += new System.EventHandler(this.MethodItemGrid_SelectionChanged);
+      this.MethodItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MethodItemGrid_KeyDown);
       this.MethodItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDoubleClick);
       this.MethodItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDown);
       // 

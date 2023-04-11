@@ -281,6 +281,11 @@ namespace LJCGenDocEdit
           e.Handled = true;
           break;
 
+        case Keys.F5:
+          mAssemblyGroupGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+
         case Keys.Tab:
           if (e.Shift)
           {
@@ -333,6 +338,23 @@ namespace LJCGenDocEdit
 
     #region Assembly Item
 
+    // Handles the form keys.
+    private void AssemblyItemGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mAssemblyGroupGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          mAssemblyGroupGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+      }
+    }
+
     // Handles the MouseDoubleClick event.
     private void AssemblyItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
@@ -380,6 +402,23 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    // Handles the form keys.
+    private void ClassGroupGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mClassGroupGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          mClassGroupGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+      }
+    }
+
     // Handles the MouseDoubleClick event.
     private void ClassGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
@@ -417,6 +456,23 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Class Item
+
+    // Handles the form keys.
+    private void ClassItemGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mClassItemGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          mClassItemGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+      }
+    }
 
     // Handles the MouseDoubleClick event.
     private void ClassItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -465,6 +521,23 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Handles the form keys.
+    private void MethodGroupGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mMethodGroupGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          mMethodGroupGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+      }
+    }
+
     // Handles the MouseDoubleClick event.
     private void MethodGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
@@ -503,6 +576,23 @@ namespace LJCGenDocEdit
 
     #region Method Item
 
+    // Handles the form keys.
+    private void MethodItemGrid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          mMethodItemGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          mMethodItemGridCode.DoRefresh();
+          e.Handled = true;
+          break;
+      }
+    }
+
     // Handles the MouseDoubleClick event.
     private void MethodItemGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
@@ -538,7 +628,6 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
-
     #endregion
   }
 }

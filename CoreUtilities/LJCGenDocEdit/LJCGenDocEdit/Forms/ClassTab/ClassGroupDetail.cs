@@ -81,8 +81,8 @@ namespace LJCGenDocEdit
 
         // Set default values.
         LJCRecord = new DocClassGroup();
-        HeadingNameText.Select();
-        HeadingNameText.Select(0, 0);
+        NameText.Select();
+        NameText.Select(0, 0);
       }
       Cursor = Cursors.Default;
     }
@@ -94,7 +94,7 @@ namespace LJCGenDocEdit
       {
         LJCParentID = dataRecord.DocAssemblyID;
         ParentText.Text = LJCParentName;
-        HeadingNameText.Text = dataRecord.HeadingName;
+        NameText.Text = dataRecord.HeadingName;
         CustomText.Text = dataRecord.HeadingTextCustom;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
@@ -106,9 +106,10 @@ namespace LJCGenDocEdit
         mDocClassGroupHeadingID = dataRecord.DocClassGroupHeadingID;
         if (0 == mDocClassGroupHeadingID)
         {
-          HeadingNameText.ReadOnly = false;
-          HeadingNameText.Select();
-          HeadingNameText.Select(0, 0);
+          NameText.ReadOnly = false;
+          HeadingText.ReadOnly = false;
+          NameText.Select();
+          NameText.Select(0, 0);
         }
         else
         {
@@ -129,7 +130,7 @@ namespace LJCGenDocEdit
       retValue.ID = LJCID;
       retValue.DocAssemblyID = LJCParentID;
       retValue.DocClassGroupHeadingID = mDocClassGroupHeadingID;
-      retValue.HeadingName = HeadingNameText.Text.Trim();
+      retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
@@ -216,10 +217,10 @@ namespace LJCGenDocEdit
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(HeadingNameText.Text))
+      if (false == NetString.HasValue(NameText.Text))
       {
         retValue = false;
-        builder.AppendLine($"  {HeadingNameLabel.Text}");
+        builder.AppendLine($"  {NameLabel.Text}");
       }
       if (false == NetString.HasValue(SequenceText.Text))
       {
@@ -268,7 +269,7 @@ namespace LJCGenDocEdit
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-      SetNoSpace(HeadingNameText);
+      SetNoSpace(NameText);
       SetNumericOnly(SequenceText);
 
       //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
@@ -298,6 +299,27 @@ namespace LJCGenDocEdit
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
+    }
+
+    // Displays the ClassGroup selection dialog.
+    private void GroupButton_Click(object sender, EventArgs e)
+    {
+      var list = new ClassHeadingSelect()
+      {
+        LJCIsSelect = true
+      };
+      if (DialogResult.OK == list.ShowDialog())
+      {
+        var groupHeading = list.LJCSelectedRecord;
+        if (groupHeading != null)
+        {
+          mDocClassGroupHeadingID = groupHeading.ID;
+          NameText.Text = groupHeading.Name;
+          NameText.ReadOnly = true;
+          HeadingText.Text = groupHeading.Heading;
+          HeadingText.ReadOnly = true;
+        }
+      }
     }
 
     // Saves the data and closes the form.
