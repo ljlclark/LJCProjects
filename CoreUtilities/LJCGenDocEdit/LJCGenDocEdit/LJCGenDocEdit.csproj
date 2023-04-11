@@ -158,6 +158,9 @@
     <EmbeddedResource Include="Forms\LJCGenDocList.resx">
       <DependentUpon>LJCGenDocList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MethodGroupHeading\MethodHeadingSelect.resx">
+      <DependentUpon>MethodHeadingSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MethodTab\MethodDetail.resx">
       <DependentUpon>MethodDetail.cs</DependentUpon>
     </EmbeddedResource>

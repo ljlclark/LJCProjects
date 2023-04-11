@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ClassHeadingSelect.cs
-using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -24,7 +23,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
+      EndColor = Color.FromArgb(225, 235, 245);
       Cursor = Cursors.Default;
     }
     #endregion
@@ -47,16 +46,16 @@ namespace LJCGenDocEdit
       ClassHeadingGridCode.DoEdit();
     }
 
-    // Calls the Select method.
-    private void HeadingSelect_Click(object sender, EventArgs e)
-    {
-      ClassHeadingGridCode.DoSelect();
-    }
-
     // Calls the Refresh method.
     private void HeadingRefresh_Click(object sender, EventArgs e)
     {
       ClassHeadingGridCode.DoRefresh();
+    }
+
+    // Calls the Select method.
+    private void HeadingSelect_Click(object sender, EventArgs e)
+    {
+      ClassHeadingGridCode.DoSelect();
     }
 
     // Export a text file.
@@ -77,6 +76,7 @@ namespace LJCGenDocEdit
     // Performs the Close function.
     private void HeadingClose_Click(object sender, EventArgs e)
     {
+      SaveControlValues();
       Close();
     }
     #endregion

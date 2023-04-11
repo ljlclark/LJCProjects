@@ -24,6 +24,7 @@ namespace LJCGenDocEdit
       InitialControlValues();
       SetupGrids();
       ClassHeadingGridCode.DataRetrieve();
+      RestoreControlValues();
       Cursor = Cursors.Default;
     }
 
@@ -111,10 +112,10 @@ namespace LJCGenDocEdit
     #endregion
     #endregion
 
-    #region Private Methods
+    #region Methods
 
     // Sets the control states based on the current control values.
-    private void SetControlState()
+    internal void SetControlState()
     {
       bool enableNew = true;
       bool enableEdit = ClassHeadingGrid.CurrentRow != null;

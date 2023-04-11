@@ -42,6 +42,7 @@ namespace LJCGenDocEdit
           RowAdd(dataRecord);
         }
       }
+      mParent.SetControlState();
       mParent.Cursor = Cursors.Default;
     }
 

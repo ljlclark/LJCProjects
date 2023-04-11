@@ -30,7 +30,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(225, 233, 240);
+      EndColor = Color.FromArgb(225, 235, 245);
     }
     #endregion
 
