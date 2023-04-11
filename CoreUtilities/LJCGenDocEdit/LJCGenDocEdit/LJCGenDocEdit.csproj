@@ -112,6 +112,16 @@
     <Compile Include="Forms\LJCGenDocListCode.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\MethodGroupHeading\MethodHeadingGridCode.cs" />
+    <Compile Include="Forms\MethodGroupHeading\MethodHeadingSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MethodGroupHeading\MethodHeadingSelect.Designer.cs">
+      <DependentUpon>MethodHeadingSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MethodGroupHeading\MethodHeadingSelectCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\MethodTab\ClassItemComboCode.cs" />
     <Compile Include="Forms\MethodTab\MethodDetail.cs">
       <SubType>Form</SubType>
