@@ -25,7 +25,7 @@ create table #Resequence (
 
 /* Copy records to temp table. */
 set @sql = 'insert into #Resequence'
-set @sql += '(ID, Sequence)';
+set @sql += '(ID, [Sequence])';
 set @sql += ' select [' + @idColumn + '], [' + @sequenceColumn + ']';
 set @sql += ' from ' + @table;
 if (@where is not null)
