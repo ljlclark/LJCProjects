@@ -230,7 +230,7 @@ namespace LJCGenDocEdit
           { DocAssemblyGroup.ColumnID, parentID },
           { DocAssembly.ColumnID, id }
         };
-        var manager = mManagers.DocAssemblyGroupManager;
+        var manager = mManagers.DocAssemblyManager;
         manager.Delete(keyRecord);
         if (0 == manager.Manager.AffectedCount)
         {

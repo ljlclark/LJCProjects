@@ -8,6 +8,7 @@ using static LJCGenDocEdit.LJCGenDocList;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
+using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
@@ -21,7 +22,7 @@ namespace LJCGenDocEdit
       mParent = parent;
       mGrid = mParent.ClassGroupGrid;
       mManagers = mParent.Managers;
-      mParentGrid = mParent.ClassGroupGrid;
+      mParentGrid = mParent.AssemblyItemGrid;
     }
     #endregion
 
@@ -159,10 +160,30 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (mParentGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from items.
+        var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
+        var parentName = parentRow.LJCGetString(DocAssembly.ColumnName);
+
+        var detail = new ClassGroupDetail()
+        {
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+          Managers = mManagers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      if (mParent.AssemblyItemGrid.CurrentRow is LJCGridRow parentRow
+      if (mParentGrid.CurrentRow is LJCGridRow parentRow
         && mGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
@@ -179,6 +200,56 @@ namespace LJCGenDocEdit
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
+      }
+    }
+
+    // Deletes the selected row.
+    internal void DoDelete()
+    {
+      string title;
+      string message;
+      bool success = false;
+
+      var parentRow = mParentGrid.CurrentRow as LJCGridRow;
+      var row = mGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
+      {
+        title = "Delete Confirmation";
+        message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        var groupID = parentRow.LJCGetInt32(DocAssembly.ColumnID);
+        var id = row.LJCGetInt32(DocClass.ColumnID);
+
+        var keyRecord = new DbColumns()
+        {
+          { DocAssembly.ColumnID, groupID },
+          { DocClass.ColumnID, id }
+        };
+        var manager = mManagers.DocClassGroupManager;
+        manager.Delete(keyRecord);
+        if (0 == manager.Manager.AffectedCount)
+        {
+          success = false;
+          message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
+      }
+
+      if (success)
+      {
+        mGrid.Rows.Remove(row);
+        mParent.TimedChange(Change.ClassGroup);
       }
     }
 

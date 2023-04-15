@@ -60,9 +60,10 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Displays a detail dialog for a new record.
     private void AssemblyGroupNew_Click(object sender, EventArgs e)
     {
-
+      mAssemblyGroupGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -71,9 +72,10 @@ namespace LJCGenDocEdit
       mAssemblyGroupGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void AssemblyGroupDelete_Click(object sender, EventArgs e)
     {
-
+      mAssemblyGroupGridCode.DoDelete();
     }
 
     // Refreshes the list.
@@ -82,6 +84,7 @@ namespace LJCGenDocEdit
       mAssemblyGroupGridCode.DoRefresh();
     }
 
+    // Resets the sequence values.
     private void AssemblyGroupReset_Click(object sender, EventArgs e)
     {
       mAssemblyGroupGridCode.DoResetSequence();
@@ -112,9 +115,10 @@ namespace LJCGenDocEdit
 
     #region Assembly Item
 
+    // Displays a detail dialog for a new record.
     private void AssemblyNew_Click(object sender, EventArgs e)
     {
-
+      mAssemblyItemGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -123,9 +127,10 @@ namespace LJCGenDocEdit
       mAssemblyItemGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void AssemblyDelete_Click(object sender, EventArgs e)
     {
-
+      mAssemblyItemGridCode.DoDelete();
     }
 
     // Refreshes the list.
@@ -152,9 +157,10 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    // Displays a detail dialog for a new record.
     private void ClassGroupNew_Click(object sender, EventArgs e)
     {
-
+      mClassGroupGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -163,9 +169,10 @@ namespace LJCGenDocEdit
       mClassGroupGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void ClassGroupDelete_Click(object sender, EventArgs e)
     {
-
+      mClassGroupGridCode.DoDelete();
     }
 
     // Refreshes the list.
@@ -192,9 +199,10 @@ namespace LJCGenDocEdit
 
     #region Class Item
 
+    // Displays a detail dialog for a new record.
     private void ClassNew_Click(object sender, EventArgs e)
     {
-
+      mClassItemGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -203,9 +211,10 @@ namespace LJCGenDocEdit
       mClassItemGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void ClassDelete_Click(object sender, EventArgs e)
     {
-
+      mClassItemGridCode.DoDelete();
     }
 
     // Refreshes the list.
@@ -272,9 +281,10 @@ namespace LJCGenDocEdit
 
     #region Method Item
 
+    // Displays a detail dialog for a new record.
     private void MethodNew_Click(object sender, EventArgs e)
     {
-
+      mMethodItemGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -283,9 +293,10 @@ namespace LJCGenDocEdit
       mMethodItemGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void MethodDelete_Click(object sender, EventArgs e)
     {
-
+      mMethodItemGridCode.DoDelete();
     }
 
     // Refreshes the list.
