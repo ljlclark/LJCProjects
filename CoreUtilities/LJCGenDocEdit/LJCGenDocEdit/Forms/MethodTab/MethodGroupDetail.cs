@@ -121,7 +121,7 @@ namespace LJCGenDocEdit
     // Creates and returns a record object with the data from
     private DocMethodGroup SetRecordValues()
     {
-      var retValue = mOriginalRecord;
+      var retValue = mOriginalRecord.Clone();
       if (null == retValue)
       {
         retValue = new DocMethodGroup();
@@ -171,6 +171,8 @@ namespace LJCGenDocEdit
         if (LJCIsUpdate)
         {
           var keyRecord = manager.GetIDKey(LJCRecord.ID);
+          manager.SourceSequence = mOriginalRecord.Sequence;
+          manager.TargetSequence = LJCRecord.Sequence;
           manager.Update(LJCRecord, keyRecord);
           ResetRecordValues(LJCRecord);
           if (0 == manager.Manager.AffectedCount)
@@ -183,6 +185,7 @@ namespace LJCGenDocEdit
         }
         else
         {
+          manager.TargetSequence = LJCRecord.Sequence;
           var addedRecord = manager.Add(LJCRecord);
           ResetRecordValues(LJCRecord);
           if (null == addedRecord)

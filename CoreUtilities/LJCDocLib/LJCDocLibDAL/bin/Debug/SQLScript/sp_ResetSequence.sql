@@ -13,7 +13,7 @@ create procedure dbo.sp_ResetSequence
   @table varchar(100),
   @idColumn varchar(100),
   @sequenceColumn varchar(100),
-  @where varchar(200)
+  @where varchar(200) = null
 as
 begin
 declare @sql nvarchar(200);

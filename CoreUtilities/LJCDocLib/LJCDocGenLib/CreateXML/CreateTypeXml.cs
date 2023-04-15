@@ -215,7 +215,12 @@ namespace LJCDocGenLib
             foreach (var methodGroup in methodGroups)
             {
               var repeatItem = repeatItems.Add(methodGroup.HeadingName);
-              repeatItem.Replacements.Add("_Heading_", methodGroup.HeadingName);
+              var heading = methodGroup.HeadingName;
+              if (methodGroup.HeadingTextCustom != null)
+              {
+                heading = methodGroup.HeadingTextCustom;
+              }
+              repeatItem.Replacements.Add("_Heading_", heading);
 
               // Get the DocClasses for the DocGroup.
               var methodManager = managers.DocMethodManager;

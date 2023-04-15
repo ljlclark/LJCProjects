@@ -4,8 +4,10 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static LJCGenDocEdit.LJCGenDocList;
 
 namespace LJCGenDocEdit
 {
@@ -119,8 +121,19 @@ namespace LJCGenDocEdit
       }
     }
 
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+    }
+
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
+    {
+    }
+
+
+    // Deletes the selected row.
+    internal void DoDelete()
     {
     }
 

@@ -25,7 +25,7 @@ namespace LJCViewEditor
 
     // Initializes an object instance.
     /// <include path='items/ViewEditorListC/*' file='Doc/ViewEditorList.xml'/>
-    public ViewEditorList(string tableName = null, bool splash = true)
+    public ViewEditorList(string tableName = null, bool splash = false)
     {
       Cursor = Cursors.WaitCursor;
       mStartupTableName = tableName;

@@ -1,5 +1,4 @@
-﻿/* 2sp_DAGAddUnique.sql */
-/* DocAssemblyGroup Add Unique */
+﻿/* sp_MoveSequenceDown.sql */
 USE [LJCData]
 GO
 SET ANSI_NULLS ON

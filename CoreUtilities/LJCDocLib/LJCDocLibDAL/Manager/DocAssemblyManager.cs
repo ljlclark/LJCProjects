@@ -1,10 +1,12 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DocAssemblyManager.cs
+using LJCDataAccess;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Data;
 
 namespace LJCDocLibDAL
 {
@@ -47,6 +49,7 @@ namespace LJCDocLibDAL
     {
       DocAssembly retValue;
 
+      ChangeSequence(0, TargetSequence);
       var dbResult = Manager.Add(dataObject, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
@@ -60,6 +63,7 @@ namespace LJCDocLibDAL
     /// <include path='items/Delete/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
+      ChangeSequence(-1, TargetSequence);
       Manager.Delete(keyColumns, filters);
     }
 
@@ -104,6 +108,7 @@ namespace LJCDocLibDAL
     public void Update(DocAssembly dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
+      ChangeSequence(SourceSequence, TargetSequence);
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
     }
     #endregion
@@ -237,6 +242,28 @@ namespace LJCDocLibDAL
 
     #region Other Methods
 
+    /// <summary>
+    /// Changes the moved sequence values.
+    /// </summary>
+    /// <param name="sourceSequence">The source sequence.</param>
+    /// <param name="targetSequence">The target sequence.</param>
+    public void ChangeSequence(int sourceSequence, int targetSequence)
+    {
+      if (AssemblyGroupID > 0)
+      {
+        var where = $"where DocAssemblyGroupID = {AssemblyGroupID}";
+        var parms = new ProcedureParameters()
+        {
+          { "@table", SqlDbType.VarChar, 100, "DocAssembly" },
+          { "@column", SqlDbType.VarChar, 100, "Sequence" },
+          { "@sourceSequence", SqlDbType.Int, 0, sourceSequence },
+          { "@targetSequence", SqlDbType.Int, 0, targetSequence },
+          { "@where", SqlDbType.VarChar, 200, where }
+        };
+        Manager.LoadProcedure("sp_ChangeSequence", parms);
+      }
+    }
+
     // Check for duplicate unique key.
     /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public bool IsDuplicate(DocAssembly lookupRecord
@@ -262,15 +289,52 @@ namespace LJCDocLibDAL
       }
       return retValue;
     }
+
+    /// <summary>
+    /// Resets the sequence values.
+    /// </summary>
+    public void ResetSequence()
+    {
+      if (AssemblyGroupID > 0)
+      {
+        var where = $"where DocAssemblyGroupID = {AssemblyGroupID}";
+        var parms = new ProcedureParameters()
+        {
+          { "@table", SqlDbType.VarChar, 100, "DocAssembly" },
+          { "@idColumn", SqlDbType.VarChar, 100, "ID" },
+          { "@sequenceColumn", SqlDbType.VarChar, 100, "Sequence" },
+          { "@where", SqlDbType.VarChar, 200, where}
+        };
+        Manager.LoadProcedure("sp_ResetSequence", parms);
+      }
+    }
+
+    /// <summary>
+    /// Sets the order by names.
+    /// </summary>
+    /// <param name="names">The name list.</param>
+    public void SetOrderBy(List<string> names)
+    {
+      Manager.OrderByNames = names;
+    }
     #endregion
 
     #region Properties
+
+    /// <summary>Gets or sets the GroupID value.</summary>
+    public int AssemblyGroupID { get; set; }
 
     /// <summary>Gets or sets the DataManager reference.</summary>
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
     public ResultConverter<DocAssembly, DocAssemblies> ResultConverter { get; set; }
+
+    /// <summary>Gets or sets the SourceSequence value.</summary>
+    public int SourceSequence { get; set; }
+
+    /// <summary>Gets or sets the TargetSequence value.</summary>
+    public int TargetSequence { get; set; }
     #endregion
   }
 }

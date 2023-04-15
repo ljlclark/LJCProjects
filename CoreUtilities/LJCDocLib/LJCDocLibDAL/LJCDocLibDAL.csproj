@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDataAccess">
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="LJCDBClientLib">
       <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
@@ -45,6 +49,10 @@
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,6 +115,8 @@
     <Content Include="bin\Debug\SQLScript\8sp_DCGAddUnique.sql" />
     <Content Include="bin\Debug\SQLScript\9DocClassGroup.sql" />
     <Content Include="bin\Debug\SQLScript\13DocMethodGroupHeading.sql" />
+    <Content Include="bin\Debug\SQLScript\sp_ChangeSequence.sql" />
+    <Content Include="bin\Debug\SQLScript\sp_ResetSequence.sql" />
     <Content Include="Doc\DocGenAssemblies.xml" />
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />

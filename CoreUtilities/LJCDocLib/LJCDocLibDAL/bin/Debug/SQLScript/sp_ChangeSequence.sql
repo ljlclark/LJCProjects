@@ -14,7 +14,7 @@ create procedure dbo.sp_ChangeSequence
   @column varchar(100),
   @sourceSequence int,
   @targetSequence int,
-  @whereClause varchar(200)
+  @where varchar(200) = null
 as
 begin
 /*
@@ -28,7 +28,7 @@ declare @params nvarchar(100);
 /* Get records end sequence. */
 set @sql = 'select @endSequence = max([' + @column + ']) + 2';
 set @sql += ' from ' + @table;
-set @sql += ' ' + @whereClause;
+set @sql += ' ' + @where;
 set @params = '@endSequence int output';
 exec sp_executesql @sql, @params, @endSequence output;
 
@@ -38,9 +38,9 @@ begin
   set @sql = 'update ' + @table;
   set @sql += ' set [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
   set @sql += ' where [' + @column + '] = ' + cast(@sourceSequence as nvarchar(20));
-  if (@whereClause <> null)
+  if (@where <> null)
   begin
-    set @sql += ' and '+ @whereClause;
+    set @sql += ' and '+ @where;
   end
   exec sp_executesql @sql;
 end
@@ -65,9 +65,9 @@ begin
   set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' - 1';
   set @sql += ' where [' + @column + '] > ' + cast(@sourceSequence as nvarchar(20));
   set @sql += ' and [' + @column + '] <= ' + cast(@targetSequence as nvarchar(20));
-  if (@whereClause <> null)
+  if (@where <> null)
   begin
-    set @sql += ' and '+ @whereClause;
+    set @sql += ' and '+ @where;
   end
 end
 else
@@ -78,9 +78,9 @@ begin
     set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' + 1';
     set @sql += ' where [' + @column + '] < ' + cast(@sourceSequence as nvarchar(20));
     set @sql += ' and [' + @column + '] >= ' + cast(@targetSequence as nvarchar(20));
-    if (@whereClause <> null)
+    if (@where <> null)
     begin
-      set @sql += ' and '+ @whereClause;
+      set @sql += ' and '+ @where;
     end
   end
 end
@@ -92,9 +92,9 @@ and @sourceSequence <> @targetSequence)
 begin
   set @sql = 'update ' + @table + ' set [' + @column + '] = ' + cast(@targetSequence as nvarchar(20));
   set @sql += ' where [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
-  if (@whereClause <> null)
+  if (@where <> null)
   begin
-    set @sql += ' and '+ @whereClause;
+    set @sql += ' and '+ @where;
   end
   exec sp_executesql @sql;
 end

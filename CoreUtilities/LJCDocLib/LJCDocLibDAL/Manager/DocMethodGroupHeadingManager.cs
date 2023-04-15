@@ -1,10 +1,12 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DocMethodGroupHeadingManager.cs
+using LJCDataAccess;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Data;
 
 namespace LJCDocLibDAL
 {
@@ -46,6 +48,7 @@ namespace LJCDocLibDAL
     {
       DocMethodGroupHeading retValue;
 
+      ChangeSequence(0, TargetSequence);
       var dbResult = Manager.Add(dataObject, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
@@ -59,6 +62,7 @@ namespace LJCDocLibDAL
     /// <include path='items/Delete/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
+      ChangeSequence(-1, TargetSequence);
       Manager.Delete(keyColumns, filters);
     }
 
@@ -103,6 +107,7 @@ namespace LJCDocLibDAL
     public void Update(DocMethodGroupHeading dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
+      ChangeSequence(SourceSequence, TargetSequence);
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
     }
     #endregion
@@ -164,6 +169,51 @@ namespace LJCDocLibDAL
     }
     #endregion
 
+    #region Other Methods
+
+    /// <summary>
+    /// Changes the moved sequence values.
+    /// </summary>
+    /// <param name="sourceSequence">The source sequence.</param>
+    /// <param name="targetSequence">The target sequence.</param>
+    public void ChangeSequence(int sourceSequence, int targetSequence)
+    {
+      var parms = new ProcedureParameters()
+      {
+        { "@table", SqlDbType.VarChar, 100, "DocMethodGroupHeading" },
+        { "@column", SqlDbType.VarChar, 100, "Sequence" },
+        { "@sourceSequence", SqlDbType.Int, 0, sourceSequence },
+        { "@targetSequence", SqlDbType.Int, 0, targetSequence }
+      };
+      Manager.LoadProcedure("sp_ChangeSequence", parms);
+    }
+
+    /// <summary>
+    /// Resets the sequence values.
+    /// </summary>
+    /// <param name="where">The where clause.</param>
+    public void ResetSequence(string where = null)
+    {
+      var parms = new ProcedureParameters()
+      {
+        { "@table", SqlDbType.VarChar, 100, "DocMethodGroupHeading" },
+        { "@idColumn", SqlDbType.VarChar, 100, "ID" },
+        { "@sequenceColumn", SqlDbType.VarChar, 100, "Sequence" },
+        { "@where", SqlDbType.VarChar, 200, where}
+      };
+      Manager.LoadProcedure("sp_ResetSequence", parms);
+    }
+
+    /// <summary>
+    /// Sets the order by names.
+    /// </summary>
+    /// <param name="names">The name list.</param>
+    public void SetOrderBy(List<string> names)
+    {
+      Manager.OrderByNames = names;
+    }
+    #endregion
+
     #region Properties
 
     /// <summary>Gets or sets the DataManager reference.</summary>
@@ -171,6 +221,12 @@ namespace LJCDocLibDAL
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
     public ResultConverter<DocMethodGroupHeading, DocMethodGroupHeadings> ResultConverter { get; set; }
+
+    /// <summary>Gets or sets the SourceSequence value.</summary>
+    public int SourceSequence { get; set; }
+
+    /// <summary>Gets or sets the TargetSequence value.</summary>
+    public int TargetSequence { get; set; }
     #endregion
   }
 }

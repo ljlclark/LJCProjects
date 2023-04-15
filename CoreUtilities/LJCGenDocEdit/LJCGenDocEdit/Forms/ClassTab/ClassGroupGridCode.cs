@@ -21,6 +21,7 @@ namespace LJCGenDocEdit
       mParent = parent;
       mGrid = mParent.ClassGroupGrid;
       mManagers = mParent.Managers;
+      mParentGrid = mParent.ClassGroupGrid;
     }
     #endregion
 
@@ -234,6 +235,7 @@ namespace LJCGenDocEdit
     private readonly LJCDataGrid mGrid;
     private readonly ManagersDocGen mManagers;
     private readonly LJCGenDocList mParent;
+    private readonly LJCDataGrid mParentGrid;
     #endregion
   }
 }

@@ -60,16 +60,31 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    private void AssemblyGroupNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void AssemblyGroupEdit_Click(object sender, EventArgs e)
     {
       mAssemblyGroupGridCode.DoEdit();
     }
 
+    private void AssemblyGroupDelete_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Refreshes the list.
     private void AssemblyGroupRefresh_Click(object sender, EventArgs e)
     {
       mAssemblyGroupGridCode.DoRefresh();
+    }
+
+    private void AssemblyGroupReset_Click(object sender, EventArgs e)
+    {
+      mAssemblyGroupGridCode.DoResetSequence();
     }
 
     // Export a text file.
@@ -97,10 +112,20 @@ namespace LJCGenDocEdit
 
     #region Assembly Item
 
+    private void AssemblyNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void AssemblyEdit_Click(object sender, EventArgs e)
     {
       mAssemblyItemGridCode.DoEdit();
+    }
+
+    private void AssemblyDelete_Click(object sender, EventArgs e)
+    {
+
     }
 
     // Refreshes the list.
@@ -127,10 +152,20 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    private void ClassGroupNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void ClassGroupEdit_Click(object sender, EventArgs e)
     {
       mClassGroupGridCode.DoEdit();
+    }
+
+    private void ClassGroupDelete_Click(object sender, EventArgs e)
+    {
+
     }
 
     // Refreshes the list.
@@ -157,10 +192,20 @@ namespace LJCGenDocEdit
 
     #region Class Item
 
+    private void ClassNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void ClassEdit_Click(object sender, EventArgs e)
     {
       mClassItemGridCode.DoEdit();
+    }
+
+    private void ClassDelete_Click(object sender, EventArgs e)
+    {
+
     }
 
     // Refreshes the list.
@@ -187,10 +232,20 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    private void MethodGroupNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void MethodGroupEdit_Click(object sender, EventArgs e)
     {
       mMethodGroupGridCode.DoEdit();
+    }
+
+    private void MethodGroupDelete_Click(object sender, EventArgs e)
+    {
+
     }
 
     // Refreshes the list.
@@ -217,10 +272,20 @@ namespace LJCGenDocEdit
 
     #region Method Item
 
+    private void MethodNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
     // Calls the Edit method.
     private void MethodEdit_Click(object sender, EventArgs e)
     {
       mMethodItemGridCode.DoEdit();
+    }
+
+    private void MethodDelete_Click(object sender, EventArgs e)
+    {
+
     }
 
     // Refreshes the list.
@@ -628,6 +693,7 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
+
     #endregion
   }
 }

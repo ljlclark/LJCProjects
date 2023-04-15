@@ -267,10 +267,10 @@ namespace _Namespace_
       string message;
       bool success = false;
 
-      //if (ParentGrid.CurrentRow is LJCGridRow parentRow
-      //  && _ClassName_Grid.CurrentRow is LJCGridRow row)
-      //{
-      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      var parentRow = ParentGrid.CurrentRow as LJCGridRow;
+      var row = _ClassName_Grid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
       {
         title = "Delete Confirmation";
         message = FormCommon.DeleteConfirm;
@@ -284,16 +284,17 @@ namespace _Namespace_
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt(_ClassName_.ColumnID);
-        //var parentID = parentRow.LJCGetInt(Parent.ColumnId);
+        //var parentID = parentRow.LJCGetInt(Parent.ColumnID);
+        var id = row.LJCGetInt32(_ClassName_.ColumnID);
 
         var keyRecord = new DbColumns()
         {
+					//{ ParentData.ColumnID, parentID}
           { _ClassName_.ColumnID, id }
-					//{ ParentData.ColumnID, id}
 				};
-        Managers._ClassName_Manager.Delete(keyRecord);
-        if (0 == Managers.m_ClassName_Manager.AffectedCount)
+        var manager = mManagers._ClassName_Manager;
+        manager.Delete(keyRecord);
+        if (0 == manager.Manager.AffectedCount)
         {
           success = false;
           message = FormCommon.DeleteError;

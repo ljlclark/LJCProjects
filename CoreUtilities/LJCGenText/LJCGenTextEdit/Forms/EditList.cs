@@ -42,7 +42,7 @@ namespace LJCGenTextEdit
     private void EditForm_Load(object sender, EventArgs e)
     {
       mTemplateTextCode = new TemplateTextCode(this);
-      mTemplateTextCode.DoAbout(true);
+      //mTemplateTextCode.DoAbout(true);
       InitializeControls();
       CenterToParent();
     }
