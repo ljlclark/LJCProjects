@@ -190,8 +190,8 @@ namespace LJCDocLibDAL
 
     // Check for duplicate unique key.
     /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
-    public bool IsDuplicate(DocAssemblyGroup lookupRecord
-      , DocAssemblyGroup currentRecord, bool isUpdate = false)
+    public bool IsDuplicate(DocClassGroupHeading lookupRecord
+      , DocClassGroupHeading currentRecord, bool isUpdate = false)
     {
       bool retValue = false;
 

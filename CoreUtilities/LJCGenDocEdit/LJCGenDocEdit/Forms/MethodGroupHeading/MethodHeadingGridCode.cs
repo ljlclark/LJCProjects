@@ -3,7 +3,9 @@
 // MethodHeadingGridCode.cs
 using LJCDocLibDAL;
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -119,9 +121,85 @@ namespace LJCGenDocEdit
       }
     }
 
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var id = (short)row.LJCGetInt32(DocMethodGroupHeading.ColumnID);
+
+        var detail = new MethodHeadingDetail()
+        {
+          LJCID = id,
+          Managers = mManagers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var id = (short)row.LJCGetInt32(DocMethodGroupHeading.ColumnID);
+
+        var detail = new ClassHeadingDetail()
+        {
+          LJCID = id,
+          Managers = mManagers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Deletes the selected row.
+    internal void DoDelete()
+    {
+      string title;
+      string message;
+      bool success = false;
+
+      var row = mGrid.CurrentRow as LJCGridRow;
+      if (row != null)
+      {
+        title = "Delete Confirmation";
+        message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(DocMethodGroupHeading.ColumnID);
+
+        var keyRecord = new DbColumns()
+        {
+          { DocMethodGroupHeading.ColumnID, id }
+        };
+        var manager = mManagers.DocMethodGroupHeadingManager;
+        manager.Delete(keyRecord);
+        if (0 == manager.Manager.AffectedCount)
+        {
+          success = false;
+          message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
+      }
+
+      if (success)
+      {
+        mGrid.Rows.Remove(row);
+      }
     }
 
     // Refreshes the list.
@@ -167,6 +245,26 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.Default;
       }
       mParent.DialogResult = DialogResult.OK;
+    }
+
+    // Adds new row or updates row with changes from the detail dialog.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as MethodHeadingDetail;
+      if (detail.LJCRecord != null)
+      {
+        var dataRecord = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(dataRecord);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(dataRecord);
+          mGrid.LJCSetCurrentRow(row, true);
+        }
+      }
     }
     #endregion
 
