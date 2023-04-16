@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
 using LJCWinFormCommon;
+using System.Drawing;
 
 namespace LJCGenDocEdit
 {
@@ -276,6 +277,33 @@ namespace LJCGenDocEdit
         }
       }
       return retValue;
+    }
+
+    // The DragDrop method.
+    internal void DoDragDrop(short assemblyID, DragEventArgs e)
+    {
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == mGrid.LJCDragDataName)
+      {
+        var targetIndex = mGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
+        {
+          // Get source group.
+          var sourceName = sourceRow.LJCGetString(DocAssembly.ColumnName);
+          var manager = mManagers.DocClassManager;
+          var sourceGroup = manager.RetrieveWithUnique(assemblyID, sourceName);
+
+          // Get target group.
+          var targetRow = mGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = targetRow.LJCGetString(DocAssembly.ColumnName);
+          var targetGroup = manager.RetrieveWithUnique(assemblyID, targetName);
+
+          var sourceSequence = sourceGroup.Sequence;
+          var targetSequence = targetGroup.Sequence;
+          manager.ChangeSequence(sourceSequence, targetSequence);
+        }
+      }
     }
 
     // Setup the grid display columns.

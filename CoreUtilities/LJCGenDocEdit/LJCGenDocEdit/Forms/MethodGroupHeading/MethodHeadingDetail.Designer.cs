@@ -30,7 +30,6 @@
     {
       this.SequenceText = new System.Windows.Forms.TextBox();
       this.SequenceLabel = new System.Windows.Forms.Label();
-      this.ActiveCheckbox = new System.Windows.Forms.CheckBox();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
@@ -56,16 +55,6 @@
       this.SequenceLabel.TabIndex = 4;
       this.SequenceLabel.Text = "Sequence";
       // 
-      // ActiveCheckbox
-      // 
-      this.ActiveCheckbox.AutoSize = true;
-      this.ActiveCheckbox.Location = new System.Drawing.Point(277, 87);
-      this.ActiveCheckbox.Name = "ActiveCheckbox";
-      this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
-      this.ActiveCheckbox.TabIndex = 6;
-      this.ActiveCheckbox.Text = "Active";
-      this.ActiveCheckbox.UseVisualStyleBackColor = true;
-      // 
       // NameText
       // 
       this.NameText.Location = new System.Drawing.Point(145, 14);
@@ -90,7 +79,7 @@
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 8;
+      this.FormCancelButton.TabIndex = 7;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
@@ -101,7 +90,7 @@
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 7;
+      this.OKButton.TabIndex = 6;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -130,7 +119,6 @@
       this.ClientSize = new System.Drawing.Size(578, 173);
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
-      this.Controls.Add(this.ActiveCheckbox);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -153,7 +141,6 @@
 
     private System.Windows.Forms.TextBox SequenceText;
     private System.Windows.Forms.Label SequenceLabel;
-    private System.Windows.Forms.CheckBox ActiveCheckbox;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
     private System.Windows.Forms.Button FormCancelButton;

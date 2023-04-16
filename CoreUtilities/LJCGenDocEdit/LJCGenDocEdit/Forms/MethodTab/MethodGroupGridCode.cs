@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
 using LJCWinFormCommon;
+using System.Drawing;
 
 namespace LJCGenDocEdit
 {
@@ -299,7 +300,40 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    #region Other Methods
+
+    // The DragDrop method.
+    internal void DoDragDrop(short classID, DragEventArgs e)
+    {
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == mGrid.LJCDragDataName)
+      {
+        var targetIndex = mGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
+        {
+          // Get source group.
+          var sourceName = sourceRow.LJCGetString(DocAssembly.ColumnName);
+          var manager = mManagers.DocMethodGroupManager;
+          var sourceGroup = manager.RetrieveWithUnique(classID, sourceName);
+
+          // Get target group.
+          var targetRow = mGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = targetRow.LJCGetString(DocAssembly.ColumnName);
+          var targetGroup = manager.RetrieveWithUnique(classID, targetName);
+
+          var sourceSequence = sourceGroup.Sequence;
+          var targetSequence = targetGroup.Sequence;
+          manager.ChangeSequence(sourceSequence, targetSequence);
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
+
     internal DbColumns DisplayColumns { get; set; }
+    #endregion
 
     #region Class Data
 

@@ -50,6 +50,7 @@
       this.AssemblyGroupDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyGroupResetSequence = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyGroupText = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyGroupCSV = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,7 +137,6 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
-      this.AssemblyGroupResetSequence = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -254,6 +254,7 @@
       // 
       // AssemblyGroupGrid
       // 
+      this.AssemblyGroupGrid.AllowDrop = true;
       this.AssemblyGroupGrid.AllowUserToAddRows = false;
       this.AssemblyGroupGrid.AllowUserToDeleteRows = false;
       this.AssemblyGroupGrid.AllowUserToResizeRows = false;
@@ -272,6 +273,7 @@
       dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.AssemblyGroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.AssemblyGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.AssemblyGroupGrid.LJCAllowDrag = true;
       this.AssemblyGroupGrid.LJCAllowSelectionChange = false;
       this.AssemblyGroupGrid.LJCDragDataName = null;
       this.AssemblyGroupGrid.LJCLastRowIndex = -1;
@@ -288,6 +290,7 @@
       this.AssemblyGroupGrid.TabIndex = 1;
       this.AssemblyGroupGrid.Text = "LJCDataGrid";
       this.AssemblyGroupGrid.SelectionChanged += new System.EventHandler(this.AssemblyGrid_SelectionChanged);
+      this.AssemblyGroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AssemblyGroupGrid_DragDrop);
       this.AssemblyGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AssemblyGroupGrid_KeyDown);
       this.AssemblyGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyGroupGrid_MouseDoubleClick);
       this.AssemblyGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyGrid_MouseDown);
@@ -310,7 +313,7 @@
             this.toolStripSeparator1,
             this.AssemblyGroupExit});
       this.AssemblyGroupMenu.Name = "AssemblyMenu";
-      this.AssemblyGroupMenu.Size = new System.Drawing.Size(267, 349);
+      this.AssemblyGroupMenu.Size = new System.Drawing.Size(267, 316);
       this.AssemblyGroupMenu.Text = "Assembly Group Menu";
       // 
       // AssemblyGroupHeading
@@ -357,6 +360,13 @@
       this.AssemblyGroupRefresh.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupRefresh.Text = "&Refresh";
       this.AssemblyGroupRefresh.Click += new System.EventHandler(this.AssemblyGroupRefresh_Click);
+      // 
+      // AssemblyGroupResetSequence
+      // 
+      this.AssemblyGroupResetSequence.Name = "AssemblyGroupResetSequence";
+      this.AssemblyGroupResetSequence.Size = new System.Drawing.Size(266, 32);
+      this.AssemblyGroupResetSequence.Text = "ResetSe&quence";
+      this.AssemblyGroupResetSequence.Click += new System.EventHandler(this.AssemblyGroupReset_Click);
       // 
       // toolStripSeparator3
       // 
@@ -405,6 +415,7 @@
       // 
       // AssemblyItemGrid
       // 
+      this.AssemblyItemGrid.AllowDrop = true;
       this.AssemblyItemGrid.AllowUserToAddRows = false;
       this.AssemblyItemGrid.AllowUserToDeleteRows = false;
       this.AssemblyItemGrid.AllowUserToResizeRows = false;
@@ -423,6 +434,7 @@
       dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.AssemblyItemGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.AssemblyItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.AssemblyItemGrid.LJCAllowDrag = true;
       this.AssemblyItemGrid.LJCAllowSelectionChange = false;
       this.AssemblyItemGrid.LJCDragDataName = null;
       this.AssemblyItemGrid.LJCLastRowIndex = -1;
@@ -439,6 +451,7 @@
       this.AssemblyItemGrid.TabIndex = 1;
       this.AssemblyItemGrid.Text = "LJCDataGrid";
       this.AssemblyItemGrid.SelectionChanged += new System.EventHandler(this.AssemblyItemGrid_SelectionChanged);
+      this.AssemblyItemGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AssemblyItemGrid_DragDrop);
       this.AssemblyItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AssemblyItemGrid_KeyDown);
       this.AssemblyItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDoubleClick);
       this.AssemblyItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyItemGrid_MouseDown);
@@ -625,6 +638,7 @@
       this.ClassGroupGrid.TabIndex = 1;
       this.ClassGroupGrid.Text = "LJCDataGrid";
       this.ClassGroupGrid.SelectionChanged += new System.EventHandler(this.ClassGrid_SelectionChanged);
+      this.ClassGroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.ClassGroupGrid_DragDrop);
       this.ClassGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassGroupGrid_KeyDown);
       this.ClassGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDoubleClick);
       this.ClassGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassGroupGrid_MouseDown);
@@ -774,6 +788,7 @@
       this.ClassItemGrid.TabIndex = 1;
       this.ClassItemGrid.Text = "LJCDataGrid";
       this.ClassItemGrid.SelectionChanged += new System.EventHandler(this.ClassItemGrid_SelectionChanged);
+      this.ClassItemGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.ClassItemGrid_DragDrop);
       this.ClassItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassItemGrid_KeyDown);
       this.ClassItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDoubleClick);
       this.ClassItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassItemGrid_MouseDown);
@@ -959,6 +974,7 @@
       this.MethodGroupGrid.TabIndex = 1;
       this.MethodGroupGrid.Text = "LJCDataGrid";
       this.MethodGroupGrid.SelectionChanged += new System.EventHandler(this.MethodGroupGrid_SelectionChanged);
+      this.MethodGroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.MethodGroupGrid_DragDrop);
       this.MethodGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MethodGroupGrid_KeyDown);
       this.MethodGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDoubleClick);
       this.MethodGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodGroupGrid_MouseDown);
@@ -1108,6 +1124,7 @@
       this.MethodItemGrid.TabIndex = 1;
       this.MethodItemGrid.Text = "LJCDataGrid";
       this.MethodItemGrid.SelectionChanged += new System.EventHandler(this.MethodItemGrid_SelectionChanged);
+      this.MethodItemGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.MethodItemGrid_DragDrop);
       this.MethodItemGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MethodItemGrid_KeyDown);
       this.MethodItemGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDoubleClick);
       this.MethodItemGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodItemGrid_MouseDown);
@@ -1234,13 +1251,6 @@
       this.TileTabsMove.Size = new System.Drawing.Size(163, 32);
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
-      // 
-      // AssemblyGroupResetSequence
-      // 
-      this.AssemblyGroupResetSequence.Name = "AssemblyGroupResetSequence";
-      this.AssemblyGroupResetSequence.Size = new System.Drawing.Size(266, 32);
-      this.AssemblyGroupResetSequence.Text = "ResetSe&quence";
-      this.AssemblyGroupResetSequence.Click += new System.EventHandler(this.AssemblyGroupReset_Click);
       // 
       // LJCGenDocList
       // 

@@ -347,6 +347,12 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Handles the DragDrop event.
+    private void AssemblyGroupGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      mAssemblyGroupGridCode.DoDragDrop(e);
+    }
+
     // Handles the form keys.
     private void AssemblyGroupGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -360,6 +366,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mAssemblyGroupGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(AssemblyGroupGrid
+              , MousePosition);
+            AssemblyGroupMenu.Show(position);
+            AssemblyGroupMenu.Select();
+            e.Handled = true;
+          }
           break;
 
         case Keys.Tab:
@@ -414,6 +431,12 @@ namespace LJCGenDocEdit
 
     #region Assembly Item
 
+    // Handles the DragDrop event.
+    private void AssemblyItemGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      mAssemblyItemGridCode.DoDragDrop(e);
+    }
+
     // Handles the form keys.
     private void AssemblyItemGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -427,6 +450,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mAssemblyGroupGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(AssemblyItemGrid
+              , MousePosition);
+            AssemblyMenu.Show(position);
+            AssemblyMenu.Select();
+            e.Handled = true;
+          }
           break;
       }
     }
@@ -478,6 +512,14 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    // Handles the DragDrop event.
+    private void ClassGroupGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      var assemblyItem = mAssemblyItemGridCode.CurrentItem();
+      var assemblyID = assemblyItem.ID;
+      mClassGroupGridCode.DoDragDrop(assemblyID, e);
+    }
+
     // Handles the form keys.
     private void ClassGroupGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -491,6 +533,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mClassGroupGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(ClassGroupGrid
+              , MousePosition);
+            AssemblyMenu.Show(position);
+            AssemblyMenu.Select();
+            e.Handled = true;
+          }
           break;
       }
     }
@@ -533,6 +586,14 @@ namespace LJCGenDocEdit
 
     #region Class Item
 
+    // Handles the DragDrop event.
+    private void ClassItemGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      var assemblyItem = mAssemblyItemGridCode.CurrentItem();
+      var assemblyID = assemblyItem.ID;
+      mClassItemGridCode.DoDragDrop(assemblyID, e);
+    }
+
     // Handles the form keys.
     private void ClassItemGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -546,6 +607,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mClassItemGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(ClassItemGrid
+              , MousePosition);
+            AssemblyMenu.Show(position);
+            AssemblyMenu.Select();
+            e.Handled = true;
+          }
           break;
       }
     }
@@ -597,6 +669,14 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Handles the DragDrop event.
+    private void MethodGroupGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      var classItem = mClassItemGridCode.CurrentItem();
+      var classID = classItem.ID;
+      mMethodGroupGridCode.DoDragDrop(classID, e);
+    }
+
     // Handles the form keys.
     private void MethodGroupGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -610,6 +690,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mMethodGroupGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(MethodGroupGrid
+              , MousePosition);
+            AssemblyMenu.Show(position);
+            AssemblyMenu.Select();
+            e.Handled = true;
+          }
           break;
       }
     }
@@ -652,6 +743,14 @@ namespace LJCGenDocEdit
 
     #region Method Item
 
+    // Handles the DragDrop event.
+    private void MethodItemGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      var classItem = mClassItemGridCode.CurrentItem();
+      var classID = classItem.ID;
+      mMethodItemGridCode.DoDragDrop(classID, e);
+    }
+
     // Handles the form keys.
     private void MethodItemGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -665,6 +764,17 @@ namespace LJCGenDocEdit
         case Keys.F5:
           mMethodItemGridCode.DoRefresh();
           e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(MethodItemGrid
+              , MousePosition);
+            AssemblyMenu.Show(position);
+            AssemblyMenu.Select();
+            e.Handled = true;
+          }
           break;
       }
     }

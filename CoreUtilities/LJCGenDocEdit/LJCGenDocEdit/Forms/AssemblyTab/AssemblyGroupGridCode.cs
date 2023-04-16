@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
 using LJCWinFormCommon;
+using System.Drawing;
 
 namespace LJCGenDocEdit
 {
@@ -67,6 +68,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid display columns.
         mGrid.LJCAddDisplayColumns(DisplayColumns);
+        mGrid.LJCDragDataName = "DocAssemblyGroup";
       }
     }
     #endregion
@@ -153,6 +155,7 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocAssemblyGroup dataRecord)
     {
       row.LJCSetInt32(DocAssemblyGroup.ColumnID, dataRecord.ID);
+      row.LJCSetString(DocAssemblyGroup.ColumnName, dataRecord.Name);
       row.LJCSetString(DocAssemblyGroup.ColumnHeading, dataRecord.Heading);
     }
     #endregion
@@ -284,6 +287,33 @@ namespace LJCGenDocEdit
       }
     }
     #endregion
+
+    // The DragDrop method.
+    internal void DoDragDrop(DragEventArgs e)
+    {
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == mGrid.LJCDragDataName)
+      {
+        var targetIndex = mGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
+        {
+          // Get source group.
+          var sourceName = sourceRow.LJCGetString(DocAssemblyGroup.ColumnName);
+          var manager = mManagers.DocAssemblyGroupManager;
+          var sourceGroup = manager.RetrieveWithUnique(sourceName);
+
+          // Get target group.
+          var targetRow = mGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = targetRow.LJCGetString(DocGenGroup.ColumnName);
+          var targetGroup = manager.RetrieveWithUnique(targetName);
+
+          var sourceSequence = sourceGroup.Sequence;
+          var targetSequence = targetGroup.Sequence;
+          manager.ChangeSequence(sourceSequence, targetSequence);
+        }
+      }
+    }
 
     internal DbColumns DisplayColumns { get; set; }
 
