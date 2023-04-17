@@ -52,7 +52,6 @@ namespace LJCGenDocEdit
         }
         mParent.Cursor = Cursors.Default;
         mParent.DoChange(Change.ClassItem);
-        //mParent.TimedChange(Change.ClassItem);
       }
     }
 
@@ -245,11 +244,13 @@ namespace LJCGenDocEdit
         if (detail.LJCIsUpdate)
         {
           RowUpdate(dataRecord);
+          CheckPreviousAndNext(detail);
         }
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
+          CheckPreviousAndNext(detail);
           mGrid.LJCSetCurrentRow(row, true);
           mParent.TimedChange(Change.AssemblyItem);
         }
@@ -324,6 +325,60 @@ namespace LJCGenDocEdit
 
         // Setup the grid display columns.
         mGrid.LJCAddDisplayColumns(DisplayColumns);
+      }
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Checks for Previous and Next items.
+    private void CheckPreviousAndNext(ClassDetail detail)
+    {
+      PreviousItem(detail);
+      NextItem(detail);
+    }
+
+    // Checks for Next item.
+    private void NextItem(ClassDetail detail)
+    {
+      if (detail.LJCNext)
+      {
+        LJCDataGrid grid = mGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCNext = false;
+        if (currentIndex < grid.Rows.Count - 1)
+        {
+          grid.LJCSetCurrentRow(currentIndex + 1);
+          var row = grid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocClass.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCNext = true;
+            detail.LJCID = id;
+          }
+        }
+      }
+    }
+
+    // Checks for Previous item.
+    private void PreviousItem(ClassDetail detail)
+    {
+      if (detail.LJCPrevious)
+      {
+        LJCDataGrid grid = mGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCPrevious = false;
+        if (currentIndex > 0)
+        {
+          grid.LJCSetCurrentRow(currentIndex - 1);
+          var row = grid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocClass.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCPrevious = true;
+            detail.LJCID = id;
+          }
+        }
       }
     }
     #endregion

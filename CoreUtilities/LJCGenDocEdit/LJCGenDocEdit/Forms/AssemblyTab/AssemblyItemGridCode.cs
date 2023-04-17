@@ -29,26 +29,6 @@ namespace LJCGenDocEdit
 
     #region Data Methods
 
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocAssembly CurrentItem()
-    {
-      DocAssembly retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
-        if (id > 0)
-        {
-          var manager = mManagers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
@@ -102,28 +82,6 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.Default;
       }
       return retValue;
-    }
-
-    // Setup the grid display columns.
-    internal void SetupGrid()
-    {
-      // Setup default display columns if no columns are defined.
-      if (0 == mGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocAssembly.ColumnName,
-          DocAssembly.ColumnDescription
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var assemblyManager = mManagers.DocAssemblyManager;
-        DisplayColumns = assemblyManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        mGrid.LJCAddDisplayColumns(DisplayColumns);
-        mGrid.LJCDragDataName = "DocAssembly";
-      }
     }
 
     // Adds a grid row and updates it with the record values.
@@ -284,17 +242,41 @@ namespace LJCGenDocEdit
         if (detail.LJCIsUpdate)
         {
           RowUpdate(dataRecord);
+          CheckPreviousAndNext(detail);
         }
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
+          CheckPreviousAndNext(detail);
           mGrid.LJCSetCurrentRow(row, true);
           mParent.TimedChange(Change.AssemblyItem);
         }
       }
     }
     #endregion
+
+    #region Other Methods
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocAssembly CurrentItem()
+    {
+      DocAssembly retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocAssemblyManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
 
     // The DragDrop method.
     internal void DoDragDrop(DragEventArgs e)
@@ -322,7 +304,85 @@ namespace LJCGenDocEdit
         }
       }
     }
+
+    // Setup the grid display columns.
+    internal void SetupGrid()
+    {
+      // Setup default display columns if no columns are defined.
+      if (0 == mGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocAssembly.ColumnName,
+          DocAssembly.ColumnDescription
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var assemblyManager = mManagers.DocAssemblyManager;
+        DisplayColumns = assemblyManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        mGrid.LJCAddDisplayColumns(DisplayColumns);
+        mGrid.LJCDragDataName = "DocAssembly";
+      }
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Checks for Previous and Next items.
+    private void CheckPreviousAndNext(AssemblyDetail detail)
+    {
+      PreviousItem(detail);
+      NextItem(detail);
+    }
+
+    // Checks for Next item.
+    private void NextItem(AssemblyDetail detail)
+    {
+      if (detail.LJCNext)
+      {
+        int currentIndex = mGrid.CurrentRow.Index;
+        detail.LJCNext = false;
+        if (currentIndex < mGrid.Rows.Count - 1)
+        {
+          mGrid.LJCSetCurrentRow(currentIndex + 1);
+          var row = mGrid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCNext = true;
+            detail.LJCID = id;
+          }
+        }
+      }
+    }
+
+    // Checks for Previous item.
+    private void PreviousItem(AssemblyDetail detail)
+    {
+      if (detail.LJCPrevious)
+      {
+        int currentIndex = mGrid.CurrentRow.Index;
+        detail.LJCPrevious = false;
+        if (currentIndex > 0)
+        {
+          mGrid.LJCSetCurrentRow(currentIndex - 1);
+          var row = mGrid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocAssembly.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCPrevious = true;
+            detail.LJCID = id;
+          }
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
     internal DbColumns DisplayColumns { get; set; }
+    #endregion
 
     #region Class Data
 

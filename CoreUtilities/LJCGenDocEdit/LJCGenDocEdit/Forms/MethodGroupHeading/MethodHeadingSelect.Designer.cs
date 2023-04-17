@@ -29,13 +29,14 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.MethodHeadingGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.HeadingMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.GroupHeadingHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.HeadingEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.HeadingSelectSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingText = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,14 +54,14 @@
       this.MethodHeadingGrid.AllowUserToResizeRows = false;
       this.MethodHeadingGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.MethodHeadingGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.MethodHeadingGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.MethodHeadingGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.MethodHeadingGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.MethodHeadingGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.MethodHeadingGrid.LJCAllowSelectionChange = false;
@@ -91,6 +92,7 @@
             this.HeadingEdit,
             this.toolStripSeparator3,
             this.HeadingRefresh,
+            this.HeadingSelectSeparator,
             this.HeadingSelect,
             this.toolStripSeparator1,
             this.HeadingText,
@@ -98,7 +100,7 @@
             this.toolStripSeparator2,
             this.HeadingClose});
       this.HeadingMenu.Name = "AssemblyMenu";
-      this.HeadingMenu.Size = new System.Drawing.Size(325, 246);
+      this.HeadingMenu.Size = new System.Drawing.Size(325, 252);
       this.HeadingMenu.Text = "Assembly Group Menu";
       // 
       // GroupHeadingHeading
@@ -111,6 +113,7 @@
       // HeadingEdit
       // 
       this.HeadingEdit.Name = "HeadingEdit";
+      this.HeadingEdit.ShortcutKeyDisplayString = "ENTER";
       this.HeadingEdit.Size = new System.Drawing.Size(324, 32);
       this.HeadingEdit.Text = "&Edit";
       this.HeadingEdit.Click += new System.EventHandler(this.HeadingEdit_Click);
@@ -123,13 +126,20 @@
       // HeadingRefresh
       // 
       this.HeadingRefresh.Name = "HeadingRefresh";
+      this.HeadingRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.HeadingRefresh.Size = new System.Drawing.Size(324, 32);
       this.HeadingRefresh.Text = "&Refresh";
       this.HeadingRefresh.Click += new System.EventHandler(this.HeadingRefresh_Click);
       // 
+      // HeadingSelectSeparator
+      // 
+      this.HeadingSelectSeparator.Name = "HeadingSelectSeparator";
+      this.HeadingSelectSeparator.Size = new System.Drawing.Size(321, 6);
+      // 
       // HeadingSelect
       // 
       this.HeadingSelect.Name = "HeadingSelect";
+      this.HeadingSelect.ShortcutKeyDisplayString = "ENTER";
       this.HeadingSelect.Size = new System.Drawing.Size(324, 32);
       this.HeadingSelect.Text = "&Select";
       this.HeadingSelect.Click += new System.EventHandler(this.HeadingSelect_Click);
@@ -194,5 +204,6 @@
     private System.Windows.Forms.ToolStripMenuItem HeadingCSV;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem HeadingClose;
+    private System.Windows.Forms.ToolStripSeparator HeadingSelectSeparator;
   }
 }

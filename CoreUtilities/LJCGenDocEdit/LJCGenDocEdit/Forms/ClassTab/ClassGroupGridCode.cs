@@ -27,50 +27,6 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Methods
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocClassGroup CurrentItem()
-    {
-      DocClassGroup retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
-        if (id > 0)
-        {
-          var manager = mManagers.DocClassGroupManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-
-    // Setup the grid display columns.
-    internal void SetupGrid()
-    {
-      // Setup default display columns if no columns are defined.
-      if (0 == mGrid.Columns.Count)
-      {
-        List<string> columnNames = new List<string>()
-        {
-          DocClassGroup.ColumnHeadingName,
-          DocClassGroup.ColumnHeadingTextCustom
-        };
-
-        // Get the display columns from the manager Data Definition.
-        var classManager = mManagers.DocClassGroupManager;
-        DisplayColumns = classManager.GetColumns(columnNames);
-
-        // Setup the grid display columns.
-        mGrid.LJCAddDisplayColumns(DisplayColumns);
-      }
-    }
-    #endregion
-
     #region Data Methods
 
     // Retrieves the list rows.
@@ -95,7 +51,6 @@ namespace LJCGenDocEdit
         }
         mParent.Cursor = Cursors.Default;
         mParent.DoChange(Change.ClassGroup);
-        //mParent.TimedChange(Change.ClassGroup);
       }
     }
 
@@ -288,11 +243,13 @@ namespace LJCGenDocEdit
         if (detail.LJCIsUpdate)
         {
           RowUpdate(dataRecord);
+          CheckPreviousAndNext(detail);
         }
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
+          CheckPreviousAndNext(detail);
           mGrid.LJCSetCurrentRow(row, true);
           mParent.TimedChange(Change.ClassGroup);
         }
@@ -301,6 +258,26 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Other Methods
+
+    /// <summary>
+    /// Retrieves the currently selecteditem.
+    /// </summary>
+    /// <returns>The currently selected item.</returns>
+    internal DocClassGroup CurrentItem()
+    {
+      DocClassGroup retValue = null;
+
+      if (mGrid.CurrentRow is LJCGridRow row)
+      {
+        var id = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
+        if (id > 0)
+        {
+          var manager = mManagers.DocClassGroupManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
 
     // The DragDrop method.
     internal void DoDragDrop(short assemblyID, DragEventArgs e)
@@ -325,6 +302,81 @@ namespace LJCGenDocEdit
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
           manager.ChangeSequence(sourceSequence, targetSequence);
+        }
+      }
+    }
+
+    // Setup the grid display columns.
+    internal void SetupGrid()
+    {
+      // Setup default display columns if no columns are defined.
+      if (0 == mGrid.Columns.Count)
+      {
+        List<string> columnNames = new List<string>()
+        {
+          DocClassGroup.ColumnHeadingName,
+          DocClassGroup.ColumnHeadingTextCustom
+        };
+
+        // Get the display columns from the manager Data Definition.
+        var classManager = mManagers.DocClassGroupManager;
+        DisplayColumns = classManager.GetColumns(columnNames);
+
+        // Setup the grid display columns.
+        mGrid.LJCAddDisplayColumns(DisplayColumns);
+      }
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Checks for Previous and Next items.
+    private void CheckPreviousAndNext(ClassGroupDetail detail)
+    {
+      PreviousItem(detail);
+      NextItem(detail);
+    }
+
+    // Checks for Next item.
+    private void NextItem(ClassGroupDetail detail)
+    {
+      if (detail.LJCNext)
+      {
+        LJCDataGrid grid = mGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCNext = false;
+        if (currentIndex < grid.Rows.Count - 1)
+        {
+          grid.LJCSetCurrentRow(currentIndex + 1);
+          var row = grid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCNext = true;
+            detail.LJCID = id;
+          }
+        }
+      }
+    }
+
+    // Checks for Previous item.
+    private void PreviousItem(ClassGroupDetail detail)
+    {
+      if (detail.LJCPrevious)
+      {
+        LJCDataGrid grid = mGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCPrevious = false;
+        if (currentIndex > 0)
+        {
+          grid.LJCSetCurrentRow(currentIndex - 1);
+          var row = grid.CurrentRow as LJCGridRow;
+          var id = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
+          if (id > 0)
+          {
+            detail.LJCPrevious = true;
+            detail.LJCID = id;
+          }
         }
       }
     }

@@ -21,6 +21,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
+      ControlSetup();
       InitialControlValues();
       SetupGrids();
       MethodHeadingGridCode.DataRetrieve();
@@ -29,6 +30,25 @@ namespace LJCGenDocEdit
     }
 
     #region Setup Support
+
+    // Initial Control setup.
+    private void ControlSetup()
+    {
+      if (LJCIsSelect)
+      {
+        // This is a Selection List.
+        Text = "Method Group Heading Selection";
+        HeadingEdit.ShortcutKeyDisplayString = "";
+        HeadingEdit.ShortcutKeys = ((Keys)(Keys.Control | Keys.E));
+      }
+      else
+      {
+        // This is a display list.
+        Text = "Method Group Heading List";
+        HeadingSelectSeparator.Visible = false;
+        HeadingSelect.Visible = false;
+      }
+    }
 
     // Set initial Control values.
     private void InitialControlValues()

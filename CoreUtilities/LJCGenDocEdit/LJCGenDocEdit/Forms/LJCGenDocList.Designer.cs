@@ -326,6 +326,7 @@
       // AssemblyGroupNew
       // 
       this.AssemblyGroupNew.Name = "AssemblyGroupNew";
+      this.AssemblyGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.AssemblyGroupNew.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupNew.Text = "&New";
       this.AssemblyGroupNew.Click += new System.EventHandler(this.AssemblyGroupNew_Click);
@@ -333,6 +334,7 @@
       // AssemblyGroupEdit
       // 
       this.AssemblyGroupEdit.Name = "AssemblyGroupEdit";
+      this.AssemblyGroupEdit.ShortcutKeyDisplayString = "ENTER";
       this.AssemblyGroupEdit.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupEdit.Text = "&Edit";
       this.AssemblyGroupEdit.Click += new System.EventHandler(this.AssemblyGroupEdit_Click);
@@ -345,6 +347,7 @@
       // AssemblyGroupDelete
       // 
       this.AssemblyGroupDelete.Name = "AssemblyGroupDelete";
+      this.AssemblyGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.AssemblyGroupDelete.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupDelete.Text = "&Delete";
       this.AssemblyGroupDelete.Click += new System.EventHandler(this.AssemblyGroupDelete_Click);
@@ -357,6 +360,7 @@
       // AssemblyGroupRefresh
       // 
       this.AssemblyGroupRefresh.Name = "AssemblyGroupRefresh";
+      this.AssemblyGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.AssemblyGroupRefresh.Size = new System.Drawing.Size(266, 32);
       this.AssemblyGroupRefresh.Text = "&Refresh";
       this.AssemblyGroupRefresh.Click += new System.EventHandler(this.AssemblyGroupRefresh_Click);
@@ -483,6 +487,7 @@
       // AssemblyNew
       // 
       this.AssemblyNew.Name = "AssemblyNew";
+      this.AssemblyNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.AssemblyNew.Size = new System.Drawing.Size(211, 32);
       this.AssemblyNew.Text = "&New";
       this.AssemblyNew.Click += new System.EventHandler(this.AssemblyNew_Click);
@@ -490,6 +495,7 @@
       // AssemblyEdit
       // 
       this.AssemblyEdit.Name = "AssemblyEdit";
+      this.AssemblyEdit.ShortcutKeyDisplayString = "ENTER";
       this.AssemblyEdit.Size = new System.Drawing.Size(211, 32);
       this.AssemblyEdit.Text = "&Edit";
       this.AssemblyEdit.Click += new System.EventHandler(this.AssemblyEdit_Click);
@@ -502,6 +508,7 @@
       // AssemblyDelete
       // 
       this.AssemblyDelete.Name = "AssemblyDelete";
+      this.AssemblyDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.AssemblyDelete.Size = new System.Drawing.Size(211, 32);
       this.AssemblyDelete.Text = "&Delete";
       this.AssemblyDelete.Click += new System.EventHandler(this.AssemblyDelete_Click);
@@ -514,6 +521,7 @@
       // AssemblyRefresh
       // 
       this.AssemblyRefresh.Name = "AssemblyRefresh";
+      this.AssemblyRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.AssemblyRefresh.Size = new System.Drawing.Size(211, 32);
       this.AssemblyRefresh.Text = "&Refresh";
       this.AssemblyRefresh.Click += new System.EventHandler(this.AssemblyRefresh_Click);
@@ -673,6 +681,7 @@
       // ClassGroupNew
       // 
       this.ClassGroupNew.Name = "ClassGroupNew";
+      this.ClassGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.ClassGroupNew.Size = new System.Drawing.Size(229, 32);
       this.ClassGroupNew.Text = "&New";
       this.ClassGroupNew.Click += new System.EventHandler(this.ClassGroupNew_Click);
@@ -680,6 +689,7 @@
       // ClassGroupEdit
       // 
       this.ClassGroupEdit.Name = "ClassGroupEdit";
+      this.ClassGroupEdit.ShortcutKeyDisplayString = "ENTER";
       this.ClassGroupEdit.Size = new System.Drawing.Size(229, 32);
       this.ClassGroupEdit.Text = "&Edit";
       this.ClassGroupEdit.Click += new System.EventHandler(this.ClassGroupEdit_Click);
@@ -692,6 +702,7 @@
       // ClassGroupDelete
       // 
       this.ClassGroupDelete.Name = "ClassGroupDelete";
+      this.ClassGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.ClassGroupDelete.Size = new System.Drawing.Size(229, 32);
       this.ClassGroupDelete.Text = "&Delete";
       this.ClassGroupDelete.Click += new System.EventHandler(this.ClassGroupDelete_Click);
@@ -704,6 +715,7 @@
       // ClassGroupRefresh
       // 
       this.ClassGroupRefresh.Name = "ClassGroupRefresh";
+      this.ClassGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.ClassGroupRefresh.Size = new System.Drawing.Size(229, 32);
       this.ClassGroupRefresh.Text = "&Refresh";
       this.ClassGroupRefresh.Click += new System.EventHandler(this.ClassGroupRefresh_Click);
@@ -808,69 +820,73 @@
             this.ClassText,
             this.ClassCSV});
       this.ClassMenu.Name = "ClassMenu";
-      this.ClassMenu.Size = new System.Drawing.Size(175, 246);
+      this.ClassMenu.Size = new System.Drawing.Size(184, 246);
       // 
       // toolStripMenuItem2
       // 
       this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(174, 32);
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(183, 32);
       this.toolStripMenuItem2.Text = "Class Menu";
       // 
       // ClassNew
       // 
       this.ClassNew.Name = "ClassNew";
-      this.ClassNew.Size = new System.Drawing.Size(174, 32);
+      this.ClassNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.ClassNew.Size = new System.Drawing.Size(183, 32);
       this.ClassNew.Text = "&New";
       this.ClassNew.Click += new System.EventHandler(this.ClassNew_Click);
       // 
       // ClassEdit
       // 
       this.ClassEdit.Name = "ClassEdit";
-      this.ClassEdit.Size = new System.Drawing.Size(174, 32);
+      this.ClassEdit.ShortcutKeyDisplayString = "ENTER";
+      this.ClassEdit.Size = new System.Drawing.Size(183, 32);
       this.ClassEdit.Text = "&Edit";
       this.ClassEdit.Click += new System.EventHandler(this.ClassEdit_Click);
       // 
       // toolStripSeparator18
       // 
       this.toolStripSeparator18.Name = "toolStripSeparator18";
-      this.toolStripSeparator18.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator18.Size = new System.Drawing.Size(180, 6);
       // 
       // ClassDelete
       // 
       this.ClassDelete.Name = "ClassDelete";
-      this.ClassDelete.Size = new System.Drawing.Size(174, 32);
+      this.ClassDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.ClassDelete.Size = new System.Drawing.Size(183, 32);
       this.ClassDelete.Text = "&Delete";
       this.ClassDelete.Click += new System.EventHandler(this.ClassDelete_Click);
       // 
       // toolStripSeparator19
       // 
       this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator19.Size = new System.Drawing.Size(180, 6);
       // 
       // ClassRefresh
       // 
       this.ClassRefresh.Name = "ClassRefresh";
-      this.ClassRefresh.Size = new System.Drawing.Size(174, 32);
+      this.ClassRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.ClassRefresh.Size = new System.Drawing.Size(183, 32);
       this.ClassRefresh.Text = "&Refresh";
       this.ClassRefresh.Click += new System.EventHandler(this.ClassRefresh_Click);
       // 
       // toolStripSeparator6
       // 
       this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator6.Size = new System.Drawing.Size(180, 6);
       // 
       // ClassText
       // 
       this.ClassText.Name = "ClassText";
-      this.ClassText.Size = new System.Drawing.Size(174, 32);
+      this.ClassText.Size = new System.Drawing.Size(183, 32);
       this.ClassText.Text = "Export &Text";
       this.ClassText.Click += new System.EventHandler(this.ClassText_Click);
       // 
       // ClassCSV
       // 
       this.ClassCSV.Name = "ClassCSV";
-      this.ClassCSV.Size = new System.Drawing.Size(174, 32);
+      this.ClassCSV.Size = new System.Drawing.Size(183, 32);
       this.ClassCSV.Text = "Export &CSV";
       this.ClassCSV.Click += new System.EventHandler(this.ClassCSV_Click);
       // 
@@ -1009,6 +1025,7 @@
       // MethodGroupNew
       // 
       this.MethodGroupNew.Name = "MethodGroupNew";
+      this.MethodGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.MethodGroupNew.Size = new System.Drawing.Size(252, 32);
       this.MethodGroupNew.Text = "&New";
       this.MethodGroupNew.Click += new System.EventHandler(this.MethodGroupNew_Click);
@@ -1016,6 +1033,7 @@
       // MethodGroupEdit
       // 
       this.MethodGroupEdit.Name = "MethodGroupEdit";
+      this.MethodGroupEdit.ShortcutKeyDisplayString = "ENTER";
       this.MethodGroupEdit.Size = new System.Drawing.Size(252, 32);
       this.MethodGroupEdit.Text = "&Edit";
       this.MethodGroupEdit.Click += new System.EventHandler(this.MethodGroupEdit_Click);
@@ -1028,6 +1046,7 @@
       // MethodGroupDelete
       // 
       this.MethodGroupDelete.Name = "MethodGroupDelete";
+      this.MethodGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.MethodGroupDelete.Size = new System.Drawing.Size(252, 32);
       this.MethodGroupDelete.Text = "&Delete";
       this.MethodGroupDelete.Click += new System.EventHandler(this.MethodGroupDelete_Click);
@@ -1040,6 +1059,7 @@
       // MethodGroupRefresh
       // 
       this.MethodGroupRefresh.Name = "MethodGroupRefresh";
+      this.MethodGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.MethodGroupRefresh.Size = new System.Drawing.Size(252, 32);
       this.MethodGroupRefresh.Text = "&Refresh";
       this.MethodGroupRefresh.Click += new System.EventHandler(this.MethodGroupRefresh_Click);
@@ -1144,69 +1164,73 @@
             this.MethodItemText,
             this.MethodItemCSV});
       this.MethodItemMenu.Name = "ClassMenu";
-      this.MethodItemMenu.Size = new System.Drawing.Size(198, 246);
+      this.MethodItemMenu.Size = new System.Drawing.Size(241, 279);
       // 
       // MethodItemHeading
       // 
       this.MethodItemHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.MethodItemHeading.Name = "MethodItemHeading";
-      this.MethodItemHeading.Size = new System.Drawing.Size(197, 32);
+      this.MethodItemHeading.Size = new System.Drawing.Size(240, 32);
       this.MethodItemHeading.Text = "Method Menu";
       // 
       // MethodNew
       // 
       this.MethodNew.Name = "MethodNew";
-      this.MethodNew.Size = new System.Drawing.Size(197, 32);
+      this.MethodNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.MethodNew.Size = new System.Drawing.Size(240, 32);
       this.MethodNew.Text = "&New";
       this.MethodNew.Click += new System.EventHandler(this.MethodNew_Click);
       // 
       // MethodEdit
       // 
       this.MethodEdit.Name = "MethodEdit";
-      this.MethodEdit.Size = new System.Drawing.Size(197, 32);
+      this.MethodEdit.ShortcutKeyDisplayString = "ENTER";
+      this.MethodEdit.Size = new System.Drawing.Size(240, 32);
       this.MethodEdit.Text = "&Edit";
       this.MethodEdit.Click += new System.EventHandler(this.MethodEdit_Click);
       // 
       // toolStripSeparator14
       // 
       this.toolStripSeparator14.Name = "toolStripSeparator14";
-      this.toolStripSeparator14.Size = new System.Drawing.Size(194, 6);
+      this.toolStripSeparator14.Size = new System.Drawing.Size(237, 6);
       // 
       // MethodDelete
       // 
       this.MethodDelete.Name = "MethodDelete";
-      this.MethodDelete.Size = new System.Drawing.Size(197, 32);
+      this.MethodDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.MethodDelete.Size = new System.Drawing.Size(240, 32);
       this.MethodDelete.Text = "&Delete";
       this.MethodDelete.Click += new System.EventHandler(this.MethodDelete_Click);
       // 
       // toolStripSeparator21
       // 
       this.toolStripSeparator21.Name = "toolStripSeparator21";
-      this.toolStripSeparator21.Size = new System.Drawing.Size(194, 6);
+      this.toolStripSeparator21.Size = new System.Drawing.Size(237, 6);
       // 
       // MethodItemRefresh
       // 
       this.MethodItemRefresh.Name = "MethodItemRefresh";
-      this.MethodItemRefresh.Size = new System.Drawing.Size(197, 32);
+      this.MethodItemRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.MethodItemRefresh.Size = new System.Drawing.Size(240, 32);
       this.MethodItemRefresh.Text = "&Refresh";
       this.MethodItemRefresh.Click += new System.EventHandler(this.MethodItemRefresh_Click);
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(194, 6);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(237, 6);
       // 
       // MethodItemText
       // 
       this.MethodItemText.Name = "MethodItemText";
-      this.MethodItemText.Size = new System.Drawing.Size(197, 32);
+      this.MethodItemText.Size = new System.Drawing.Size(240, 32);
       this.MethodItemText.Text = "Export &Text";
       this.MethodItemText.Click += new System.EventHandler(this.MethodItemText_Click);
       // 
       // MethodItemCSV
       // 
       this.MethodItemCSV.Name = "MethodItemCSV";
-      this.MethodItemCSV.Size = new System.Drawing.Size(197, 32);
+      this.MethodItemCSV.Size = new System.Drawing.Size(240, 32);
       this.MethodItemCSV.Text = "Export &CSV";
       this.MethodItemCSV.Click += new System.EventHandler(this.MethodItemCSV_Click);
       // 

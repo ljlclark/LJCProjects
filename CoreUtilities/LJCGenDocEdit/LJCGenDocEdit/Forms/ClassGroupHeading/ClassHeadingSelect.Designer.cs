@@ -36,6 +36,7 @@
       this.HeadingEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.HeadingSelectSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingText = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +93,7 @@
             this.HeadingEdit,
             this.toolStripSeparator3,
             this.HeadingRefresh,
+            this.HeadingSelectSeparator,
             this.HeadingSelect,
             this.toolStripSeparator1,
             this.HeadingText,
@@ -99,7 +101,7 @@
             this.toolStripSeparator2,
             this.HeadingClose});
       this.HeadingMenu.Name = "AssemblyMenu";
-      this.HeadingMenu.Size = new System.Drawing.Size(302, 246);
+      this.HeadingMenu.Size = new System.Drawing.Size(302, 285);
       this.HeadingMenu.Text = "Assembly Group Menu";
       // 
       // GroupHeadingHeading
@@ -112,6 +114,7 @@
       // HeadingEdit
       // 
       this.HeadingEdit.Name = "HeadingEdit";
+      this.HeadingEdit.ShortcutKeyDisplayString = "ENTER";
       this.HeadingEdit.Size = new System.Drawing.Size(301, 32);
       this.HeadingEdit.Text = "&Edit";
       this.HeadingEdit.Click += new System.EventHandler(this.HeadingEdit_Click);
@@ -124,13 +127,20 @@
       // HeadingRefresh
       // 
       this.HeadingRefresh.Name = "HeadingRefresh";
+      this.HeadingRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.HeadingRefresh.Size = new System.Drawing.Size(301, 32);
       this.HeadingRefresh.Text = "&Refresh";
       this.HeadingRefresh.Click += new System.EventHandler(this.HeadingRefresh_Click);
       // 
+      // HeadingSelectSeparator
+      // 
+      this.HeadingSelectSeparator.Name = "HeadingSelectSeparator";
+      this.HeadingSelectSeparator.Size = new System.Drawing.Size(298, 6);
+      // 
       // HeadingSelect
       // 
       this.HeadingSelect.Name = "HeadingSelect";
+      this.HeadingSelect.ShortcutKeyDisplayString = "ENTER";
       this.HeadingSelect.Size = new System.Drawing.Size(301, 32);
       this.HeadingSelect.Text = "&Select";
       this.HeadingSelect.Click += new System.EventHandler(this.HeadingSelect_Click);
@@ -194,5 +204,6 @@
     private System.Windows.Forms.ToolStripMenuItem HeadingSelect;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripSeparator HeadingSelectSeparator;
   }
 }

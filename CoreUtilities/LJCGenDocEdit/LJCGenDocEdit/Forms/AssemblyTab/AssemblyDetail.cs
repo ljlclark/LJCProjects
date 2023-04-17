@@ -353,6 +353,12 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
+    // Gets or sets the Next flag.
+    internal bool LJCNext { get; set; }
+
+    // Gets or sets the Previous flag.
+    internal bool LJCPrevious { get; set; }
+
     /// <summary>Gets or sets the Parent ID value.</summary>
     public short LJCParentID { get; set; }
 
@@ -387,6 +393,77 @@ namespace LJCGenDocEdit
 
     // 
     private StandardUISettings mSettings;
+    #endregion
+
+    #region Action Event Handlers
+
+    // Save and setup for a new record.
+    private void DialogNew_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCPrevious = false;
+        LJCNext = false;
+        LJCOnChange();
+
+        // Initialize property values.
+        LJCID = 0;
+        NameText.Text = "";
+
+        DataRetrieve();
+      }
+    }
+
+    // Save and move to the Next record.
+    private void DialogNext_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCNext = true;
+        LJCOnChange();
+        if (LJCNext)
+        {
+          LJCNext = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
+    }
+
+    // Save and move to the Previous record.
+    private void DialogPrevious_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCPrevious = true;
+        LJCOnChange();
+        if (LJCPrevious)
+        {
+          LJCPrevious = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
+    }
+
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
     #endregion
   }
 }

@@ -45,6 +45,11 @@
       this.CustomLabel = new System.Windows.Forms.Label();
       this.GroupButton = new System.Windows.Forms.Button();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
+      this.DialogMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // NameText
@@ -188,11 +193,46 @@
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
       // 
+      // DialogMenu
+      // 
+      this.DialogMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.DialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DialogNew,
+            this.DialogPrevious,
+            this.DialogNext});
+      this.DialogMenu.Name = "DialogMenu";
+      this.DialogMenu.Size = new System.Drawing.Size(303, 100);
+      // 
+      // DialogNew
+      // 
+      this.DialogNew.Name = "DialogNew";
+      this.DialogNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.DialogNew.Size = new System.Drawing.Size(302, 32);
+      this.DialogNew.Text = "Save and &New";
+      this.DialogNew.Click += new System.EventHandler(this.DialogNew_Click);
+      // 
+      // DialogPrevious
+      // 
+      this.DialogPrevious.Name = "DialogPrevious";
+      this.DialogPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+      this.DialogPrevious.Size = new System.Drawing.Size(302, 32);
+      this.DialogPrevious.Text = "Save and &Previous";
+      this.DialogPrevious.Click += new System.EventHandler(this.DialogPrevious_Click);
+      // 
+      // DialogNext
+      // 
+      this.DialogNext.Name = "DialogNext";
+      this.DialogNext.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+      this.DialogNext.Size = new System.Drawing.Size(302, 32);
+      this.DialogNext.Text = "&Save and Next";
+      this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
+      // 
       // ClassGroupDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(588, 244);
+      this.ContextMenuStrip = this.DialogMenu;
       this.Controls.Add(this.GroupButton);
       this.Controls.Add(this.CustomText);
       this.Controls.Add(this.CustomLabel);
@@ -214,6 +254,7 @@
       this.ShowInTaskbar = false;
       this.Text = "Class Group Detail";
       this.Load += new System.EventHandler(this.ClassGroupDetail_Load);
+      this.DialogMenu.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -236,5 +277,9 @@
     private System.Windows.Forms.Label CustomLabel;
     private System.Windows.Forms.Button GroupButton;
     private System.Windows.Forms.ImageList ButtonImages;
+    private System.Windows.Forms.ContextMenuStrip DialogMenu;
+    private System.Windows.Forms.ToolStripMenuItem DialogNew;
+    private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
+    private System.Windows.Forms.ToolStripMenuItem DialogNext;
   }
 }
