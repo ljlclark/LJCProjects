@@ -53,7 +53,6 @@ namespace LJCGenDocEdit
       }
       mParent.Cursor = Cursors.Default;
       mParent.DoChange(Change.AssemblyGroup);
-      //mParent.TimedChange(Change.AssemblyGroup);
     }
 
     // Selects a row based on the key record values.
@@ -232,6 +231,7 @@ namespace LJCGenDocEdit
         {
           RowUpdate(dataRecord);
           CheckPreviousAndNext(detail);
+          DoRefresh();
         }
         else
         {
@@ -239,6 +239,7 @@ namespace LJCGenDocEdit
           var row = RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
           mGrid.LJCSetCurrentRow(row, true);
+          DoRefresh();
           mParent.TimedChange(Change.AssemblyGroup);
         }
       }
@@ -290,6 +291,7 @@ namespace LJCGenDocEdit
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
           manager.ChangeSequence(sourceSequence, targetSequence);
+          DoRefresh();
         }
       }
     }

@@ -124,7 +124,12 @@ namespace LJCGenDocEdit
     // Creates and returns a record object with the data from
     private DocClassGroup SetRecordValues()
     {
-      var retValue = mOriginalRecord.Clone();
+      DocClassGroup retValue = null;
+
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
       if (null == retValue)
       {
         retValue = new DocClassGroup();

@@ -40,6 +40,11 @@ namespace LJCGenDocEdit
         var parentID = (short)parentRow.LJCGetInt32(DocMethod.ColumnID);
 
         var manager = mManagers.DocMethodManager;
+        var names = new List<string>()
+        {
+          DocMethod.ColumnSequence
+        };
+        manager.SetOrderBy(names);
         var dataRecords = manager.LoadWithGroup(parentID);
 
         if (NetCommon.HasItems(dataRecords))

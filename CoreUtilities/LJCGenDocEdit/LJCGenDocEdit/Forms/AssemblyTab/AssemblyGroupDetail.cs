@@ -101,7 +101,11 @@ namespace LJCGenDocEdit
     // Creates and returns a record object with the data from
     private DocAssemblyGroup SetRecordValues()
     {
-      var retValue = mOriginalRecord.Clone();
+      DocAssemblyGroup retValue = null;
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
       if (null == retValue)
       {
         retValue = new DocAssemblyGroup();

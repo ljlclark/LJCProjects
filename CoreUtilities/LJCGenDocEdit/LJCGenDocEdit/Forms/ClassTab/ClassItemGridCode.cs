@@ -41,6 +41,11 @@ namespace LJCGenDocEdit
         var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
 
         var manager = mManagers.DocClassManager;
+        var names = new List<string>()
+        {
+          DocClass.ColumnSequence
+        };
+        manager.SetOrderBy(names);
         var dataRecords = manager.LoadWithGroup(parentID);
 
         if (NetCommon.HasItems(dataRecords))
@@ -245,6 +250,7 @@ namespace LJCGenDocEdit
         {
           RowUpdate(dataRecord);
           CheckPreviousAndNext(detail);
+          DoRefresh();
         }
         else
         {
@@ -252,6 +258,7 @@ namespace LJCGenDocEdit
           var row = RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
           mGrid.LJCSetCurrentRow(row, true);
+          DoRefresh();
           mParent.TimedChange(Change.AssemblyItem);
         }
       }

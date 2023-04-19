@@ -101,7 +101,12 @@ namespace LJCGenDocEdit
     // Creates and returns a record object with the data from
     private DocMethodGroupHeading SetRecordValues()
     {
-      var retValue = mOriginalRecord.Clone();
+      DocMethodGroupHeading retValue = null;
+
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
       if (null == retValue)
       {
         retValue = new DocMethodGroupHeading();

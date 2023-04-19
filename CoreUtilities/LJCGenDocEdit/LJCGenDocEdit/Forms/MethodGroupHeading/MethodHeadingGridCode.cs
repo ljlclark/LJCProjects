@@ -257,12 +257,14 @@ namespace LJCGenDocEdit
         if (detail.LJCIsUpdate)
         {
           RowUpdate(dataRecord);
+          DoRefresh();
         }
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
           mGrid.LJCSetCurrentRow(row, true);
+          DoRefresh();
         }
       }
     }
