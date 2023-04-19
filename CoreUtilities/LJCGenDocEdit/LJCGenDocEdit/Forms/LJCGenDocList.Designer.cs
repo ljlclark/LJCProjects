@@ -289,11 +289,11 @@
       this.AssemblyGroupGrid.Size = new System.Drawing.Size(632, 73);
       this.AssemblyGroupGrid.TabIndex = 1;
       this.AssemblyGroupGrid.Text = "LJCDataGrid";
-      this.AssemblyGroupGrid.SelectionChanged += new System.EventHandler(this.AssemblyGrid_SelectionChanged);
+      this.AssemblyGroupGrid.SelectionChanged += new System.EventHandler(this.AssemblyGroupGrid_SelectionChanged);
       this.AssemblyGroupGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.AssemblyGroupGrid_DragDrop);
       this.AssemblyGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AssemblyGroupGrid_KeyDown);
       this.AssemblyGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AssemblyGroupGrid_MouseDoubleClick);
-      this.AssemblyGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyGrid_MouseDown);
+      this.AssemblyGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AssemblyGroupGrid_MouseDown);
       // 
       // AssemblyGroupMenu
       // 

@@ -344,7 +344,7 @@ namespace LJCGenDocEdit
         detail.LJCNext = false;
         if (currentIndex < grid.Rows.Count - 1)
         {
-          grid.LJCSetCurrentRow(currentIndex + 1);
+          grid.LJCSetCurrentRow(currentIndex + 1, true);
           var row = grid.CurrentRow as LJCGridRow;
           var id = (short)row.LJCGetInt32(DocMethod.ColumnID);
           if (id > 0)
@@ -366,7 +366,7 @@ namespace LJCGenDocEdit
         detail.LJCPrevious = false;
         if (currentIndex > 0)
         {
-          grid.LJCSetCurrentRow(currentIndex - 1);
+          grid.LJCSetCurrentRow(currentIndex - 1, true);
           var row = grid.CurrentRow as LJCGridRow;
           var id = (short)row.LJCGetInt32(DocMethod.ColumnID);
           if (id > 0)

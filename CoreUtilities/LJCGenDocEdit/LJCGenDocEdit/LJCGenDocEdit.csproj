@@ -38,7 +38,10 @@
       <HintPath>..\External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDocLibDAL">
       <HintPath>..\External\LJCDocLibDAL.dll</HintPath>
     </Reference>

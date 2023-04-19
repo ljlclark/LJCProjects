@@ -277,6 +277,33 @@ namespace LJCDBMessage
       }
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataObject"></param>
+    /// <param name="propertyNames"></param>
+    /// <returns></returns>
+    public static bool IsChanged(object dataObject, out List<string> propertyNames)
+    {
+      bool retValue = false;
+
+      propertyNames = DbCommon.GetChangedNames(dataObject);
+      if (propertyNames != null)
+      {
+        if (propertyNames.Count > 0)
+        {
+          retValue = true;
+        }
+      }
+      else
+      {
+        retValue = true;
+        propertyNames = DbColumns.LJCGetPropertyNames(dataObject);
+      }
+      return retValue;
+    }
+
     // Sets the Data Object property values from the data columns object.
     /// <include path='items/SetObjectValues1/*' file='Doc/DbCommon.xml'/>
     public static void SetObjectValues(DbColumns dataColumns, object dataObject)

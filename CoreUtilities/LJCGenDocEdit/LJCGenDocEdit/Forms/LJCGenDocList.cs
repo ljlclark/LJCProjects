@@ -403,7 +403,7 @@ namespace LJCGenDocEdit
     }
 
     // Handles the MouseDown event.
-    private void AssemblyGrid_MouseDown(object sender, MouseEventArgs e)
+    private void AssemblyGroupGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
@@ -419,7 +419,7 @@ namespace LJCGenDocEdit
     }
 
     // Handles the SelectionChanged event.
-    private void AssemblyGrid_SelectionChanged(object sender, EventArgs e)
+    private void AssemblyGroupGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (AssemblyGroupGrid.LJCAllowSelectionChange)
       {

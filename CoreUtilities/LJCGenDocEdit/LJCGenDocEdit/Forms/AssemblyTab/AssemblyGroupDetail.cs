@@ -2,10 +2,12 @@
 // Licensed under the MIT License.
 // AssemblyGroupDetail.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -144,17 +146,22 @@ namespace LJCGenDocEdit
       {
         if (LJCIsUpdate)
         {
-          var keyRecord = manager.GetIDKey(LJCRecord.ID);
-          manager.SourceSequence = mOriginalRecord.Sequence;
-          manager.TargetSequence = LJCRecord.Sequence;
-          manager.Update(LJCRecord, keyRecord);
-          ResetRecordValues(LJCRecord);
-          if (0 == manager.Manager.AffectedCount)
+          var isChanged = DbCommon.IsChanged(LJCRecord
+            , out List<string> propertyNames);
+          if (isChanged)
           {
-            title = "Update Error";
-            message = "The Record was not updated.";
-            MessageBox.Show(message, title, MessageBoxButtons.OK
-              , MessageBoxIcon.Information);
+            var keyRecord = manager.GetIDKey(LJCRecord.ID);
+            manager.SourceSequence = mOriginalRecord.Sequence;
+            manager.TargetSequence = LJCRecord.Sequence;
+            manager.Update(LJCRecord, keyRecord, propertyNames);
+            ResetRecordValues(LJCRecord);
+            if (0 == manager.Manager.AffectedCount)
+            {
+              title = "Update Error";
+              message = "The Record was not updated.";
+              MessageBox.Show(message, title, MessageBoxButtons.OK
+                , MessageBoxIcon.Information);
+            }
           }
         }
         else
