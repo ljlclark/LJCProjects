@@ -16,6 +16,13 @@ create procedure dbo.sp_ResetSequence
   @where varchar(200) = null
 as
 begin
+/*
+declare @table varchar(100) = 'DocAssembly';
+declare @idColumn varchar(100) = 'ID';
+declare @sequenceColumn varchar(100) = 'Sequence';
+declare @where varchar(200) = 'DocAssemblyGroupID = 3';
+*/
+
 declare @sql nvarchar(200);
 
 create table #Resequence (
@@ -30,7 +37,7 @@ set @sql += ' select [' + @idColumn + '], [' + @sequenceColumn + ']';
 set @sql += ' from ' + @table;
 if (@where is not null)
 begin
-  set @sql += ' ' + @where;
+  set @sql += ' where ' + @where;
 end
 exec sp_executesql @sql;
 

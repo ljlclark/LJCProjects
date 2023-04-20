@@ -307,7 +307,9 @@ namespace LJCGenDocEdit
 
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
+          manager.AssemblyGroupID = sourceGroup.DocAssemblyGroupID;
           manager.ChangeSequence(sourceSequence, targetSequence);
+          DoRefresh();
         }
       }
     }

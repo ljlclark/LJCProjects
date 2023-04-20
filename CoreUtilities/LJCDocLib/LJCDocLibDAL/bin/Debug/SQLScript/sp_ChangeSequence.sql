@@ -20,7 +20,15 @@ begin
 /*
   Add a sequence space: source = 0, target = space sequence.
   Remove a sequence space: source = -1, target = space sequence.
+exec sp_ResetSequence 'DocAssembly', 'ID', 'Sequence', 'DocAssemblyGroupID = 3';
+declare @table varchar(100) = 'DocAssembly';
+declare @column varchar(100) = 'Sequence';
+declare @sourceSequence int = 3;
+declare @targetSequence int = 1;
+declare @where varchar(200) = 'DocAssemblyGroupID = 3';
+select * from DocAssembly where DocAssemblyGroupID = 3 order by Sequence;
 */
+
 declare @endSequence int;
 declare @sql nvarchar(320);
 declare @params nvarchar(100);
@@ -28,7 +36,10 @@ declare @params nvarchar(100);
 /* Get records end sequence. */
 set @sql = 'select @endSequence = max([' + @column + ']) + 2';
 set @sql += ' from ' + @table;
-set @sql += ' ' + @where;
+if (@where is not null)
+begin
+  set @sql += ' where ' + @where;
+end
 set @params = '@endSequence int output';
 exec sp_executesql @sql, @params, @endSequence output;
 
@@ -38,7 +49,7 @@ begin
   set @sql = 'update ' + @table;
   set @sql += ' set [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
   set @sql += ' where [' + @column + '] = ' + cast(@sourceSequence as nvarchar(20));
-  if (@where <> null)
+  if (@where is not null)
   begin
     set @sql += ' and '+ @where;
   end
@@ -65,7 +76,7 @@ begin
   set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' - 1';
   set @sql += ' where [' + @column + '] > ' + cast(@sourceSequence as nvarchar(20));
   set @sql += ' and [' + @column + '] <= ' + cast(@targetSequence as nvarchar(20));
-  if (@where <> null)
+  if (@where is not null)
   begin
     set @sql += ' and '+ @where;
   end
@@ -78,7 +89,7 @@ begin
     set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' + 1';
     set @sql += ' where [' + @column + '] < ' + cast(@sourceSequence as nvarchar(20));
     set @sql += ' and [' + @column + '] >= ' + cast(@targetSequence as nvarchar(20));
-    if (@where <> null)
+    if (@where is not null)
     begin
       set @sql += ' and '+ @where;
     end
@@ -87,12 +98,17 @@ end
 exec sp_executesql @sql;
 
 /* Set new source sequence. */
-if (@sourceSequence <> @endSequence
-and @sourceSequence <> @targetSequence)
+declare @doUpdate bit = 1;
+if (@endSequence is not null and @sourceSequence = @endSequence)
 begin
+  set @doUpdate = 0;
+end
+if (@doUpdate = 1 and @sourceSequence <> @targetSequence)
+begin
+  /* select @sourceSequence, @targetSequence, @endSequence; */
   set @sql = 'update ' + @table + ' set [' + @column + '] = ' + cast(@targetSequence as nvarchar(20));
   set @sql += ' where [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
-  if (@where <> null)
+  if (@where is not null)
   begin
     set @sql += ' and '+ @where;
   end

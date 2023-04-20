@@ -305,7 +305,8 @@ namespace LJCGenDocEdit
         List<string> columnNames = new List<string>()
         {
           DocAssemblyGroup.ColumnName,
-          DocAssemblyGroup.ColumnHeading
+          DocAssemblyGroup.ColumnHeading,
+          DocAssemblyGroup.ColumnSequence
         };
 
         // Get the display columns from the manager Data Definition.
