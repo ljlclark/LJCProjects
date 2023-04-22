@@ -268,7 +268,7 @@ namespace LJCDocLibDAL
     {
       if (AssemblyID > 0)
       {
-        var where = $"where DocAssemblyID = {AssemblyID}";
+        var where = $"DocAssemblyID = {AssemblyID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocClassGroup" },
@@ -312,7 +312,7 @@ namespace LJCDocLibDAL
     /// </summary>
     public void ResetSequence()
     {
-      var where = $"where DocAssemblyID = {AssemblyID}";
+      var where = $"DocAssemblyID = {AssemblyID}";
       var parms = new ProcedureParameters()
       {
         { "@table", SqlDbType.VarChar, 100, "DocClassGroup" },

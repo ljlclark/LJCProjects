@@ -28,7 +28,8 @@ namespace LJCDocLibDAL
 
       // Add Calculated and Join columns.
       // Enables adding Calculated and Join columns to a grid configuration.
-      Manager.DataDefinition.Add(DocClassGroupHeading.ColumnHeading);
+      //Manager.DataDefinition.Add(DocClassGroupHeading.ColumnHeading);
+      Manager.DataDefinition.Add(DocMethodGroupHeading.ColumnHeading);
 
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
@@ -40,7 +41,8 @@ namespace LJCDocLibDAL
       Manager.SetLookupColumns(new string[]
       {
         DocMethodGroup.ColumnDocClassID,
-        DocMethodGroup.ColumnDocMethodGroupHeadingID
+        //DocMethodGroup.ColumnDocMethodGroupHeadingID
+        DocMethodGroup.ColumnHeadingName
       });
     }
 
@@ -272,7 +274,7 @@ namespace LJCDocLibDAL
     {
       if (ClassID > 0)
       {
-        var where = $"where DocClassID = {ClassID}";
+        var where = $"DocClassID = {ClassID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocMethodGroup" },
@@ -318,7 +320,7 @@ namespace LJCDocLibDAL
     {
       if (ClassID > 0)
       {
-        var where = $"where DocClassID = {ClassID}";
+        var where = $"DocClassID = {ClassID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocMethodGroup" },

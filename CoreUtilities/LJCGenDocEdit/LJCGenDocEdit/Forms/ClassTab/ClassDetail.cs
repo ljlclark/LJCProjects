@@ -102,10 +102,10 @@ namespace LJCGenDocEdit
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
 
         // Get foreign key values.
+        mDocAssemblyID = dataRecord.DocAssemblyID;
         var assemblyItem = GetAssemblyWithID(dataRecord.DocAssemblyID);
         if (assemblyItem != null)
         {
-          mDocAssemblyID = assemblyItem.ID;
           AssemblyText.Text = assemblyItem.Name;
         }
       }

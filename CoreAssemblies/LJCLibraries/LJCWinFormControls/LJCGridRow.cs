@@ -187,13 +187,17 @@ namespace LJCWinFormControls
     /// <include path='items/LJCGetString2/*' file='Doc/LJCGridRow.xml'/>
     public string LJCGetString(string key)
     {
-      string retVal = null;
+      string retValue = null;
 
       if (mStringStrings.ContainsKey(key))
       {
-        retVal = mStringStrings[key].ToString();
+        var val = mStringStrings[key];
+        if (val != null)
+        {
+          retValue = val.ToString();
+        }
       }
-      return retVal;
+      return retValue;
     }
 
 

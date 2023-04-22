@@ -247,7 +247,7 @@ namespace LJCDocLibDAL
     {
       if (ClassGroupID > 0)
       {
-        var where = $"where DocClassGroupID = {ClassGroupID}";
+        var where = $"DocClassGroupID = {ClassGroupID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocClass" },
@@ -293,7 +293,7 @@ namespace LJCDocLibDAL
     {
       if (ClassGroupID > 0)
       {
-        var where = $"where DocClassGroupID = {ClassGroupID}";
+        var where = $"DocClassGroupID = {ClassGroupID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocClass" },

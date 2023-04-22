@@ -106,7 +106,6 @@ namespace LJCGenDocEdit
         var methodGroup = GetMethodGroupWithID(mDocMethodGroupID);
         if (methodGroup != null)
         {
-          //mDocMethodGroupID = methodGroup.ID;
           GroupText.Text = methodGroup.HeadingName;
         }
       }

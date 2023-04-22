@@ -733,7 +733,8 @@ namespace LJCWinFormControls
         {
           var sourceRow = drgevent.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
           var dragDataName = sourceRow.LJCGetString("DragDataName");
-          if (dragDataName == LJCDragDataName)
+          if (dragDataName != null
+            && dragDataName == LJCDragDataName)
           {
             if (Rows[targetIndex] is LJCGridRow targetRow
               && targetRow != sourceRow)

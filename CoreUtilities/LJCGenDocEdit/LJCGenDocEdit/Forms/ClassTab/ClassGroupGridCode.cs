@@ -238,6 +238,14 @@ namespace LJCGenDocEdit
       mParent.Cursor = Cursors.Default;
     }
 
+    internal void DoResetSequence()
+    {
+      var classGroup = CurrentItem();
+      var manager = mManagers.DocClassGroupManager;
+      manager.AssemblyID = classGroup.DocAssemblyID;
+      manager.ResetSequence();
+    }
+
     // Adds new row or updates row with changes from the detail dialog.
     private void Detail_Change(object sender, EventArgs e)
     {
@@ -297,18 +305,20 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = sourceRow.LJCGetString(DocAssembly.ColumnName);
+          var sourceName = sourceRow.LJCGetString(DocClassGroup.ColumnHeadingName);
           var manager = mManagers.DocClassGroupManager;
           var sourceGroup = manager.RetrieveWithUnique(assemblyID, sourceName);
 
           // Get target group.
           var targetRow = mGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = targetRow.LJCGetString(DocAssembly.ColumnName);
+          var targetName = targetRow.LJCGetString(DocClassGroup.ColumnHeadingName);
           var targetGroup = manager.RetrieveWithUnique(assemblyID, targetName);
 
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
+          manager.AssemblyID = sourceGroup.DocAssemblyID;
           manager.ChangeSequence(sourceSequence, targetSequence);
+          DoRefresh();
         }
       }
     }
@@ -331,6 +341,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid display columns.
         mGrid.LJCAddDisplayColumns(DisplayColumns);
+        mGrid.LJCDragDataName = "DocClassGroup";
       }
     }
     #endregion

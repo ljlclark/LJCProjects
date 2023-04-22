@@ -137,6 +137,11 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyReset = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassGroupReset = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassReset = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodGroupReset = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodItemReset = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -471,11 +476,12 @@
             this.AssemblyDelete,
             this.toolStripSeparator16,
             this.AssemblyRefresh,
+            this.AssemblyReset,
             this.toolStripSeparator4,
             this.AssemblyText,
             this.AssemblyCSV});
       this.AssemblyMenu.Name = "AssemblyMenu";
-      this.AssemblyMenu.Size = new System.Drawing.Size(212, 246);
+      this.AssemblyMenu.Size = new System.Drawing.Size(212, 278);
       // 
       // toolStripMenuItem1
       // 
@@ -612,6 +618,7 @@
       // 
       // ClassGroupGrid
       // 
+      this.ClassGroupGrid.AllowDrop = true;
       this.ClassGroupGrid.AllowUserToAddRows = false;
       this.ClassGroupGrid.AllowUserToDeleteRows = false;
       this.ClassGroupGrid.AllowUserToResizeRows = false;
@@ -630,6 +637,7 @@
       dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.ClassGroupGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.ClassGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.ClassGroupGrid.LJCAllowDrag = true;
       this.ClassGroupGrid.LJCAllowSelectionChange = false;
       this.ClassGroupGrid.LJCDragDataName = null;
       this.ClassGroupGrid.LJCLastRowIndex = -1;
@@ -662,13 +670,14 @@
             this.ClassGroupDelete,
             this.toolStripSeparator17,
             this.ClassGroupRefresh,
+            this.ClassGroupReset,
             this.toolStripSeparator5,
             this.ClassGroupText,
             this.ClassGroupCSV,
             this.toolStripSeparator2,
             this.ClassGroupExit});
       this.ClassGroupMenu.Name = "ClassGroupMenu";
-      this.ClassGroupMenu.Size = new System.Drawing.Size(230, 284);
+      this.ClassGroupMenu.Size = new System.Drawing.Size(230, 316);
       this.ClassGroupMenu.Text = "Class Group Menu";
       // 
       // ClassGroupHeading
@@ -766,6 +775,7 @@
       // 
       // ClassItemGrid
       // 
+      this.ClassItemGrid.AllowDrop = true;
       this.ClassItemGrid.AllowUserToAddRows = false;
       this.ClassItemGrid.AllowUserToDeleteRows = false;
       this.ClassItemGrid.AllowUserToResizeRows = false;
@@ -784,6 +794,7 @@
       dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.ClassItemGrid.DefaultCellStyle = dataGridViewCellStyle4;
       this.ClassItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.ClassItemGrid.LJCAllowDrag = true;
       this.ClassItemGrid.LJCAllowSelectionChange = false;
       this.ClassItemGrid.LJCDragDataName = null;
       this.ClassItemGrid.LJCLastRowIndex = -1;
@@ -816,24 +827,25 @@
             this.ClassDelete,
             this.toolStripSeparator19,
             this.ClassRefresh,
+            this.ClassReset,
             this.toolStripSeparator6,
             this.ClassText,
             this.ClassCSV});
       this.ClassMenu.Name = "ClassMenu";
-      this.ClassMenu.Size = new System.Drawing.Size(184, 246);
+      this.ClassMenu.Size = new System.Drawing.Size(208, 278);
       // 
       // toolStripMenuItem2
       // 
       this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(183, 32);
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(207, 32);
       this.toolStripMenuItem2.Text = "Class Menu";
       // 
       // ClassNew
       // 
       this.ClassNew.Name = "ClassNew";
       this.ClassNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.ClassNew.Size = new System.Drawing.Size(183, 32);
+      this.ClassNew.Size = new System.Drawing.Size(207, 32);
       this.ClassNew.Text = "&New";
       this.ClassNew.Click += new System.EventHandler(this.ClassNew_Click);
       // 
@@ -841,52 +853,52 @@
       // 
       this.ClassEdit.Name = "ClassEdit";
       this.ClassEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ClassEdit.Size = new System.Drawing.Size(183, 32);
+      this.ClassEdit.Size = new System.Drawing.Size(207, 32);
       this.ClassEdit.Text = "&Edit";
       this.ClassEdit.Click += new System.EventHandler(this.ClassEdit_Click);
       // 
       // toolStripSeparator18
       // 
       this.toolStripSeparator18.Name = "toolStripSeparator18";
-      this.toolStripSeparator18.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator18.Size = new System.Drawing.Size(204, 6);
       // 
       // ClassDelete
       // 
       this.ClassDelete.Name = "ClassDelete";
       this.ClassDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.ClassDelete.Size = new System.Drawing.Size(183, 32);
+      this.ClassDelete.Size = new System.Drawing.Size(207, 32);
       this.ClassDelete.Text = "&Delete";
       this.ClassDelete.Click += new System.EventHandler(this.ClassDelete_Click);
       // 
       // toolStripSeparator19
       // 
       this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator19.Size = new System.Drawing.Size(204, 6);
       // 
       // ClassRefresh
       // 
       this.ClassRefresh.Name = "ClassRefresh";
       this.ClassRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.ClassRefresh.Size = new System.Drawing.Size(183, 32);
+      this.ClassRefresh.Size = new System.Drawing.Size(207, 32);
       this.ClassRefresh.Text = "&Refresh";
       this.ClassRefresh.Click += new System.EventHandler(this.ClassRefresh_Click);
       // 
       // toolStripSeparator6
       // 
       this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator6.Size = new System.Drawing.Size(204, 6);
       // 
       // ClassText
       // 
       this.ClassText.Name = "ClassText";
-      this.ClassText.Size = new System.Drawing.Size(183, 32);
+      this.ClassText.Size = new System.Drawing.Size(207, 32);
       this.ClassText.Text = "Export &Text";
       this.ClassText.Click += new System.EventHandler(this.ClassText_Click);
       // 
       // ClassCSV
       // 
       this.ClassCSV.Name = "ClassCSV";
-      this.ClassCSV.Size = new System.Drawing.Size(183, 32);
+      this.ClassCSV.Size = new System.Drawing.Size(207, 32);
       this.ClassCSV.Text = "Export &CSV";
       this.ClassCSV.Click += new System.EventHandler(this.ClassCSV_Click);
       // 
@@ -956,6 +968,7 @@
       // 
       // MethodGroupGrid
       // 
+      this.MethodGroupGrid.AllowDrop = true;
       this.MethodGroupGrid.AllowUserToAddRows = false;
       this.MethodGroupGrid.AllowUserToDeleteRows = false;
       this.MethodGroupGrid.AllowUserToResizeRows = false;
@@ -974,6 +987,7 @@
       dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.MethodGroupGrid.DefaultCellStyle = dataGridViewCellStyle5;
       this.MethodGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.MethodGroupGrid.LJCAllowDrag = true;
       this.MethodGroupGrid.LJCAllowSelectionChange = false;
       this.MethodGroupGrid.LJCDragDataName = null;
       this.MethodGroupGrid.LJCLastRowIndex = -1;
@@ -1006,13 +1020,14 @@
             this.MethodGroupDelete,
             this.toolStripSeparator20,
             this.MethodGroupRefresh,
+            this.MethodGroupReset,
             this.toolStripSeparator7,
             this.MethodGroupText,
             this.MethodGroupCSV,
             this.toolStripSeparator8,
             this.MethodGroupExit});
       this.MethodGroupMenu.Name = "ClassGroupMenu";
-      this.MethodGroupMenu.Size = new System.Drawing.Size(253, 284);
+      this.MethodGroupMenu.Size = new System.Drawing.Size(253, 316);
       this.MethodGroupMenu.Text = "Class Group Menu";
       // 
       // MethodGroupHeading
@@ -1110,6 +1125,7 @@
       // 
       // MethodItemGrid
       // 
+      this.MethodItemGrid.AllowDrop = true;
       this.MethodItemGrid.AllowUserToAddRows = false;
       this.MethodItemGrid.AllowUserToDeleteRows = false;
       this.MethodItemGrid.AllowUserToResizeRows = false;
@@ -1128,6 +1144,7 @@
       dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.MethodItemGrid.DefaultCellStyle = dataGridViewCellStyle6;
       this.MethodItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.MethodItemGrid.LJCAllowDrag = true;
       this.MethodItemGrid.LJCAllowSelectionChange = false;
       this.MethodItemGrid.LJCDragDataName = null;
       this.MethodItemGrid.LJCLastRowIndex = -1;
@@ -1160,11 +1177,12 @@
             this.MethodDelete,
             this.toolStripSeparator21,
             this.MethodItemRefresh,
+            this.MethodItemReset,
             this.toolStripSeparator9,
             this.MethodItemText,
             this.MethodItemCSV});
       this.MethodItemMenu.Name = "ClassMenu";
-      this.MethodItemMenu.Size = new System.Drawing.Size(241, 279);
+      this.MethodItemMenu.Size = new System.Drawing.Size(241, 311);
       // 
       // MethodItemHeading
       // 
@@ -1275,6 +1293,41 @@
       this.TileTabsMove.Size = new System.Drawing.Size(163, 32);
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
+      // 
+      // AssemblyReset
+      // 
+      this.AssemblyReset.Name = "AssemblyReset";
+      this.AssemblyReset.Size = new System.Drawing.Size(211, 32);
+      this.AssemblyReset.Text = "ResetSe&quence";
+      this.AssemblyReset.Click += new System.EventHandler(this.AssemblyReset_Click);
+      // 
+      // ClassGroupReset
+      // 
+      this.ClassGroupReset.Name = "ClassGroupReset";
+      this.ClassGroupReset.Size = new System.Drawing.Size(229, 32);
+      this.ClassGroupReset.Text = "Reset Se&quence";
+      this.ClassGroupReset.Click += new System.EventHandler(this.ClassGroupReset_Click);
+      // 
+      // ClassReset
+      // 
+      this.ClassReset.Name = "ClassReset";
+      this.ClassReset.Size = new System.Drawing.Size(207, 32);
+      this.ClassReset.Text = "Reset Se&quence";
+      this.ClassReset.Click += new System.EventHandler(this.ClassReset_Click);
+      // 
+      // MethodGroupReset
+      // 
+      this.MethodGroupReset.Name = "MethodGroupReset";
+      this.MethodGroupReset.Size = new System.Drawing.Size(252, 32);
+      this.MethodGroupReset.Text = "Reset Se&quence";
+      this.MethodGroupReset.Click += new System.EventHandler(this.MethodGroupReset_Click);
+      // 
+      // MethodItemReset
+      // 
+      this.MethodItemReset.Name = "MethodItemReset";
+      this.MethodItemReset.Size = new System.Drawing.Size(240, 32);
+      this.MethodItemReset.Text = "Reset Se&quence";
+      this.MethodItemReset.Click += new System.EventHandler(this.MethodItemReset_Click);
       // 
       // LJCGenDocList
       // 
@@ -1427,6 +1480,11 @@
     private System.Windows.Forms.ToolStripMenuItem MethodDelete;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
     private System.Windows.Forms.ToolStripMenuItem AssemblyGroupResetSequence;
+    private System.Windows.Forms.ToolStripMenuItem AssemblyReset;
+    private System.Windows.Forms.ToolStripMenuItem ClassGroupReset;
+    private System.Windows.Forms.ToolStripMenuItem ClassReset;
+    private System.Windows.Forms.ToolStripMenuItem MethodGroupReset;
+    private System.Windows.Forms.ToolStripMenuItem MethodItemReset;
   }
 }
 

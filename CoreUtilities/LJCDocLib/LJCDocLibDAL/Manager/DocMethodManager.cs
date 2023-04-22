@@ -251,7 +251,7 @@ namespace LJCDocLibDAL
     {
       if (MethodGroupID > 0)
       {
-        var where = $"where DocMethodGroupID = {MethodGroupID}";
+        var where = $"DocMethodGroupID = {MethodGroupID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocMethod" },
@@ -297,7 +297,7 @@ namespace LJCDocLibDAL
     {
       if (MethodGroupID > 0)
       {
-        var where = $"where DocMethodGroupID = {MethodGroupID}";
+        var where = $"DocMethodGroupID = {MethodGroupID}";
         var parms = new ProcedureParameters()
         {
           { "@table", SqlDbType.VarChar, 100, "DocMethod" },

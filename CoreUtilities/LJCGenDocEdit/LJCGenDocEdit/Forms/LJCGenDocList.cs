@@ -139,6 +139,12 @@ namespace LJCGenDocEdit
       mAssemblyItemGridCode.DoRefresh();
     }
 
+    // Resets the sequence values.
+    private void AssemblyReset_Click(object sender, EventArgs e)
+    {
+      mAssemblyItemGridCode.DoResetSequence();
+    }
+
     // Export a text file.
     private void AssemblyText_Click(object sender, EventArgs e)
     {
@@ -179,6 +185,12 @@ namespace LJCGenDocEdit
     private void ClassGroupRefresh_Click(object sender, EventArgs e)
     {
       mClassGroupGridCode.DoRefresh();
+    }
+
+    // Resets the sequence values.
+    private void ClassGroupReset_Click(object sender, EventArgs e)
+    {
+      mClassGroupGridCode.DoResetSequence();
     }
 
     // Export a text file.
@@ -223,6 +235,12 @@ namespace LJCGenDocEdit
       mClassItemGridCode.DoRefresh();
     }
 
+    // Resets the sequence values.
+    private void ClassReset_Click(object sender, EventArgs e)
+    {
+      mClassItemGridCode.DoResetSequence();
+    }
+
     // Export a text file.
     private void ClassText_Click(object sender, EventArgs e)
     {
@@ -261,6 +279,12 @@ namespace LJCGenDocEdit
     private void MethodGroupRefresh_Click(object sender, EventArgs e)
     {
       mMethodGroupGridCode.DoRefresh();
+    }
+
+    // Resets the sequence values.
+    private void MethodGroupReset_Click(object sender, EventArgs e)
+    {
+      mMethodGroupGridCode.DoResetSequence();
     }
 
     // Export a text file.
@@ -303,6 +327,12 @@ namespace LJCGenDocEdit
     private void MethodItemRefresh_Click(object sender, EventArgs e)
     {
       mMethodItemGridCode.DoRefresh();
+    }
+
+    // Resets the sequence values.
+    private void MethodItemReset_Click(object sender, EventArgs e)
+    {
+      mMethodItemGridCode.DoResetSequence();
     }
 
     // Export a text file.
@@ -816,5 +846,6 @@ namespace LJCGenDocEdit
     #endregion
 
     #endregion
+
   }
 }

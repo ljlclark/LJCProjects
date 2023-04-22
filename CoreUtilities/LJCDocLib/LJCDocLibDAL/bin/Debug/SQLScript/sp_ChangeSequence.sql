@@ -43,69 +43,74 @@ end
 set @params = '@endSequence int output';
 exec sp_executesql @sql, @params, @endSequence output;
 
-/* Move source Sequence to end sequence. */
-if (@sourceSequence > 0)
+declare @doUpdate bit = 1;
+if (@sourceSequence = @targetSequence)
 begin
-  set @sql = 'update ' + @table;
-  set @sql += ' set [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
-  set @sql += ' where [' + @column + '] = ' + cast(@sourceSequence as nvarchar(20));
-  if (@where is not null)
-  begin
-    set @sql += ' and '+ @where;
-  end
-  exec sp_executesql @sql;
+  set @doUpdate = 0;
 end
-else
+if (@endSequence is not null and @sourceSequence = @endSequence)
 begin
-  if (0 = @sourceSequence)
+  set @doUpdate = 0;
+end
+/* select @sourceSequence, @targetSequence, @endSequence; */
+
+if (@doUpdate = 1)
+begin
+  /* Move source Sequence to end sequence. */
+  if (@sourceSequence > 0)
   begin
-    /* set to move everything from the target sequence down. */
-    set @sourceSequence = @endSequence;
+    set @sql = 'update ' + @table;
+    set @sql += ' set [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
+    set @sql += ' where [' + @column + '] = ' + cast(@sourceSequence as nvarchar(20));
+    if (@where is not null)
+    begin
+      set @sql += ' and '+ @where;
+    end
+    exec sp_executesql @sql;
   end
   else
   begin
-    /* set to move everything from the target sequence up. */
-    set @sourceSequence = @targetSequence;
-	set @targetSequence = @endSequence;
+    if (0 = @sourceSequence)
+    begin
+      /* set to move everything from the target sequence down. */
+      set @sourceSequence = @endSequence;
+    end
+    else
+    begin
+      /* set to move everything from the target sequence up. */
+      set @sourceSequence = @targetSequence;
+	  set @targetSequence = @endSequence;
+    end
   end
-end
 
-if (@sourceSequence < @targetSequence)
-begin
-  /* Move contained sequences up to fill moved source space. */
-  set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' - 1';
-  set @sql += ' where [' + @column + '] > ' + cast(@sourceSequence as nvarchar(20));
-  set @sql += ' and [' + @column + '] <= ' + cast(@targetSequence as nvarchar(20));
-  if (@where is not null)
+  if (@sourceSequence < @targetSequence)
   begin
-    set @sql += ' and '+ @where;
-  end
-end
-else
-begin
-  if (@sourceSequence <> @targetSequence)
-  begin
-    /* Move contained sequences down to fill moved source space. */
-    set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' + 1';
-    set @sql += ' where [' + @column + '] < ' + cast(@sourceSequence as nvarchar(20));
-    set @sql += ' and [' + @column + '] >= ' + cast(@targetSequence as nvarchar(20));
+    /* Move contained sequences up to fill moved source space. */
+    set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' - 1';
+    set @sql += ' where [' + @column + '] > ' + cast(@sourceSequence as nvarchar(20));
+    set @sql += ' and [' + @column + '] <= ' + cast(@targetSequence as nvarchar(20));
     if (@where is not null)
     begin
       set @sql += ' and '+ @where;
     end
   end
-end
-exec sp_executesql @sql;
+  else
+  begin
+    if (@sourceSequence <> @targetSequence)
+    begin
+      /* Move contained sequences down to fill moved source space. */
+      set @sql = 'update ' + @table + ' set [' + @column + '] = ' + @column + ' + 1';
+      set @sql += ' where [' + @column + '] < ' + cast(@sourceSequence as nvarchar(20));
+      set @sql += ' and [' + @column + '] >= ' + cast(@targetSequence as nvarchar(20));
+      if (@where is not null)
+      begin
+        set @sql += ' and '+ @where;
+      end
+    end
+  end
+  exec sp_executesql @sql;
 
-/* Set new source sequence. */
-declare @doUpdate bit = 1;
-if (@endSequence is not null and @sourceSequence = @endSequence)
-begin
-  set @doUpdate = 0;
-end
-if (@doUpdate = 1 and @sourceSequence <> @targetSequence)
-begin
-  /* select @sourceSequence, @targetSequence, @endSequence; */
+  /* Set new source sequence. */
   set @sql = 'update ' + @table + ' set [' + @column + '] = ' + cast(@targetSequence as nvarchar(20));
   set @sql += ' where [' + @column + '] = ' + cast(@endSequence as nvarchar(20));
   if (@where is not null)
