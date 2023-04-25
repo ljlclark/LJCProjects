@@ -9,6 +9,7 @@ using LJCWinFormCommon;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -63,7 +64,6 @@ namespace LJCGenDocEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -250,7 +250,7 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // Retrieves the Product with the ID value.
+    // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetWithID(short id)
     {
       DocAssembly retValue = null;
@@ -262,149 +262,6 @@ namespace LJCGenDocEdit
       }
       return retValue;
     }
-    #endregion
-
-    #region Setup Methods
-
-    // Configures the controls and loads the selection control data.
-    private void InitializeControls()
-    {
-      // Get singleton values.
-      Cursor = Cursors.WaitCursor;
-      var values = ValuesGenDocEdit.Instance;
-      mSettings = values.StandardSettings;
-      BeginColor = mSettings.BeginColor;
-      EndColor = mSettings.EndColor;
-
-      // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
-      SetNoSpace(NameText);
-      SetNumericOnly(SequenceText);
-
-      //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
-      Cursor = Cursors.Default;
-    }
-
-    // Sets the NoSpace events.
-    private void SetNoSpace(TextBox textBox)
-    {
-      textBox.KeyPress += TextBoxNoSpace_KeyPress;
-      textBox.TextChanged += TextBoxNoSpace_TextChanged;
-    }
-
-    // Sets the NoSpace events.
-    private void SetNumericOnly(TextBox textBox)
-    {
-      textBox.KeyPress += TextBoxNumeric_KeyPress;
-      textBox.KeyPress += TextBoxNoSpace_KeyPress;
-      textBox.TextChanged += TextBoxNoSpace_TextChanged;
-    }
-    #endregion
-
-    #region Control Event Handlers
-
-    // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
-    protected void LJCOnChange()
-    {
-      LJCChange?.Invoke(this, new EventArgs());
-    }
-
-    // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
-    {
-      if (IsValid()
-        && DataSave())
-      {
-        LJCOnChange();
-        DialogResult = DialogResult.OK;
-      }
-    }
-
-    private void FileButton_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void ImageButton_Click(object sender, EventArgs e)
-    {
-
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = textBox.Text.Trim().Length;
-      }
-    }
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
-    }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
-
-    /// <summary>Gets the LJCIsUpdate value.</summary>
-    internal bool LJCIsUpdate { get; private set; }
-
-    // Gets or sets the Next flag.
-    internal bool LJCNext { get; set; }
-
-    // Gets or sets the Previous flag.
-    internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
-
-    /// <summary>Gets a reference to the record object.</summary>
-    internal DocAssembly LJCRecord { get; private set; }
-
-    // The Managers object.
-    internal ManagersDocGen Managers { get; set; }
-
-    // Gets or sets the Begin Color.
-    private Color BeginColor { get; set; }
-
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
-    #endregion
-
-    #region Class Data
-
-    /// <summary>The Change event.</summary>
-    public event EventHandler<EventArgs> LJCChange;
-
-    // 
-    private DocAssembly mOriginalRecord;
-
-    // 
-    private StandardUISettings mSettings;
     #endregion
 
     #region Action Event Handlers
@@ -476,6 +333,175 @@ namespace LJCGenDocEdit
       }
       return retValue;
     }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the controls and loads the selection control data.
+    private void InitializeControls()
+    {
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesGenDocEdit.Instance;
+      mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
+
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      SetNoSpace(NameText);
+      SetNumericOnly(SequenceText);
+
+      //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
+      Cursor = Cursors.Default;
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace(TextBox textBox)
+    {
+      textBox.KeyPress += TextBoxNoSpace_KeyPress;
+      textBox.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+
+    // Sets the NoSpace events.
+    private void SetNumericOnly(TextBox textBox)
+    {
+      textBox.KeyPress += TextBoxNumeric_KeyPress;
+      textBox.KeyPress += TextBoxNoSpace_KeyPress;
+      textBox.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+    #endregion
+
+    #region Control Event Handlers
+
+    // Fires the Change event.
+    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    protected void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsValid()
+        && DataSave())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
+      }
+    }
+
+    // Select the documentation XML file.
+    private void FileButton_Click(object sender, EventArgs e)
+    {
+      // No Spaces in filter file spec.
+      var filter = "XML files(*.xml)|*.xml";
+      filter += "|All files(*.*)|*.*";
+      var initialDirectory = Directory.GetCurrentDirectory();
+      var fileSpec = FormCommon.SelectFile(filter, initialDirectory);
+      if (fileSpec != null)
+      {
+        var fromPath = initialDirectory;
+        var toPath = Path.GetDirectoryName(fileSpec);
+        var filePath = NetFile.GetRelativePath(fromPath, toPath);
+        var fileName = Path.GetFileName(fileSpec);
+        FileText.Text = Path.Combine(filePath, fileName);
+      }
+    }
+
+    // Select the image file spec.
+    private void ImageButton_Click(object sender, EventArgs e)
+    {
+      // No Spaces in filter file spec.
+      var filter = "JPG files(*.jpg)|*.jpg";
+      filter += "|All files(*.*)|*.*";
+      var initialDirectory = Directory.GetCurrentDirectory();
+      var fileSpec = FormCommon.SelectFile(filter, initialDirectory);
+      if (fileSpec != null)
+      {
+        var fromPath = initialDirectory;
+        var toPath = Path.GetPathRoot(fileSpec);
+        var filePath = NetFile.GetRelativePath(fromPath, toPath);
+        var fileName = Path.GetFileName(fileSpec);
+        ImageText.Text = Path.Combine(filePath, fileName);
+      }
+    }
+    #endregion
+
+    #region KeyEdit Event Handlers
+
+    // Does not allow spaces.
+    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleSpace(e.KeyChar);
+    }
+
+    // Strips blanks from the text value.
+    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        textBox.Text = FormCommon.StripBlanks(textBox.Text);
+        textBox.SelectionStart = textBox.Text.Trim().Length;
+      }
+    }
+
+    // Only allows numbers or edit keys.
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Gets or sets the primary ID value.</summary>
+    internal short LJCID { get; set; }
+
+    /// <summary>Gets the LJCIsUpdate value.</summary>
+    internal bool LJCIsUpdate { get; private set; }
+
+    /// <summary>Gets or sets the Next flag.</summary>
+    internal bool LJCNext { get; set; }
+
+    /// <summary>Gets or sets the Previous flag.</summary>
+    internal bool LJCPrevious { get; set; }
+
+    /// <summary>Gets or sets the Parent ID value.</summary>
+    public short LJCParentID { get; set; }
+
+    /// <summary>Gets or sets the LJCParentName value.</summary>
+    public string LJCParentName
+    {
+      get { return mParentName; }
+      set { mParentName = NetString.InitString(value); }
+    }
+    private string mParentName;
+
+    /// <summary>Gets a reference to the record object.</summary>
+    internal DocAssembly LJCRecord { get; private set; }
+
+    /// <summary>The Managers object.</summary>
+    internal ManagersDocGen Managers { get; set; }
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
+
+    // Gets or sets the End Color.
+    private Color EndColor { get; set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The Change event.</summary>
+    public event EventHandler<EventArgs> LJCChange;
+
+    // Record with the original values.
+    private DocAssembly mOriginalRecord;
+
+    // The standard configuration settings.
+    private StandardUISettings mSettings;
     #endregion
   }
 }

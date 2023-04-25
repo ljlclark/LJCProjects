@@ -61,7 +61,6 @@ namespace LJCGenDocEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -409,16 +408,16 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
-    // Gets or sets the Next flag.
+    /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
-    // Gets or sets the Previous flag.
+    /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocAssemblyGroup LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -433,10 +432,10 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
-    // 
+    // Record with the original values.
     private DocAssemblyGroup mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }

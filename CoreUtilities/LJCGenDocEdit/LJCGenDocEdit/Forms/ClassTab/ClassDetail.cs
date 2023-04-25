@@ -63,7 +63,6 @@ namespace LJCGenDocEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -135,7 +134,6 @@ namespace LJCGenDocEdit
     }
 
     // Resets the empty record values.
-    //private void ResetRecordValues(DocClass dataRecord)
     private void ResetRecordValues(DocClass _)
     {
     }
@@ -172,7 +170,7 @@ namespace LJCGenDocEdit
           if (isChanged)
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
-            manager.Update(LJCRecord, keyRecord);
+            manager.Update(LJCRecord, keyRecord, propertyNames);
             ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -242,7 +240,7 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // Retrieves the Product with the ID value.
+    // Retrieves the ClassItem with the ID value.
     private DocClass GetClassWithID(short id)
     {
       DocClass retValue = null;
@@ -255,6 +253,7 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
+    // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetAssemblyWithID(short id)
     {
       DocAssembly retValue = null;
@@ -430,10 +429,10 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
-    // Gets or sets the Next flag.
+    /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
-    // Gets or sets the Previous flag.
+    /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets or sets the Parent ID value.</summary>
@@ -450,7 +449,7 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocClass LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -468,10 +467,10 @@ namespace LJCGenDocEdit
     // Foreign Keys
     private short mDocAssemblyID;
 
-    // 
+    // Record with the original values.
     private DocClass mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }

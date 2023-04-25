@@ -135,8 +135,7 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Resets the empty record values.
-    //private void ResetRecordValues(DocMethod dataRecord)
+    // Resets the empty values.
     private void ResetRecordValues(DocMethod _)
     {
     }
@@ -435,10 +434,10 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
-    // Gets or sets the Next flag.
+    /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
-    // Gets or sets the Previous flag.
+    /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets or sets the Parent ID value.</summary>
@@ -455,7 +454,7 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethod LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -473,10 +472,10 @@ namespace LJCGenDocEdit
     // Foreign Keys
     private short mDocMethodGroupID;
 
-    // 
+    // Record with the original values.
     private DocMethod mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }
