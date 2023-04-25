@@ -53,6 +53,13 @@
     </summary>
     <param name="dataRecord">The data record object.</param>
   </RowAdd>
+  <RowSelect>
+    <summary>
+      Selects a row based on the key record values.
+    </summary>
+    <param name="dataRecord">The data record object.</param>
+    <returns>True if the record exists, otherwise false.</returns>
+  </RowSelect>
   <RowUpdate>
     <summary>
       Updates the current row with the record values.
@@ -66,13 +73,6 @@
     <param name="row">The grid row.</param>
     <param name="dataRecord">The data record object.</param>
   </SetStoredValues>
-  <RowSelect>
-    <summary>
-      Selects a row based on the key record values.
-    </summary>
-    <param name="dataRecord">The data record object.</param>
-    <returns>True if the record exists, otherwise false.</returns>
-  </RowSelect>
   <!-- Action Methods -->
   <DoDefault>
     <summary>
@@ -112,6 +112,33 @@
       Sets the selected item and returns to the parent form.
     </summary>
   </DoSelect>
+  <!-- Other Methods -->
+  <CurrentItem>
+    <summary>
+      Retrieves the current row item.
+    </summary>
+    <returns>The item for the current row.</returns>
+  </CurrentItem>
+  <DoDragDrop>
+    <summary>
+      The DragDrop method.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </DoDragDrop>
+  <DoDragDrop1>
+    <summary>
+      The DragDrop method.
+    </summary>
+    <param name="parentID">The parent ID.</param>
+    <param name="e">The event arguments.</param>
+  </DoDragDrop1>
+  <RowID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="row">The row item.</param>
+    <returns>The row ID value.</returns>
+  </RowID>
   <!-- Setup Methods -->
   <InitializeControls>
     <summary>
