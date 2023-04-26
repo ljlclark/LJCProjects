@@ -184,7 +184,7 @@ namespace LJCGenDocEdit
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
             manager.SourceSequence = mOriginalRecord.Sequence;
             manager.TargetSequence = LJCRecord.Sequence;
-            manager.Update(LJCRecord, keyRecord);
+            manager.Update(LJCRecord, keyRecord, propertyNames);
             ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -452,10 +452,10 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
-    // Gets or sets the Next flag.
+    /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
-    // Gets or sets the Previous flag.
+    /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets or sets the Parent ID value.</summary>
@@ -472,7 +472,7 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethodGroup LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -490,10 +490,10 @@ namespace LJCGenDocEdit
     // Foreign Keys
     private short mDocMethodGroupHeadingID;
 
-    // 
+    // Record with the original values.
     private DocMethodGroup mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }

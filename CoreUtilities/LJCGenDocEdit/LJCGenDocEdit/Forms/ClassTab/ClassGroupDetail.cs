@@ -184,7 +184,7 @@ namespace LJCGenDocEdit
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
             manager.SourceSequence = mOriginalRecord.Sequence;
             manager.TargetSequence = LJCRecord.Sequence;
-            manager.Update(LJCRecord, keyRecord);
+            manager.Update(LJCRecord, keyRecord, propertyNames);
             ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
