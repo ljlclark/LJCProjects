@@ -337,6 +337,19 @@ namespace LJCGenDocEdit
 
     #region Setup Methods
 
+    // Configure the initial control settings.
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Font)
+      {
+        FileButton.Top = FileText.Top;
+        FileButton.Height = FileText.Height;
+        ImageButton.Top = ImageText.Top;
+        ImageButton.Height = ImageText.Height;
+        ActiveCheckbox.Top = SequenceText.Top + 2;
+      }
+    }
+
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
@@ -353,6 +366,7 @@ namespace LJCGenDocEdit
       SetNumericOnly(SequenceText);
 
       //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
+      ConfigureControls();
       Cursor = Cursors.Default;
     }
 
@@ -402,6 +416,7 @@ namespace LJCGenDocEdit
       var fileSpec = FormCommon.SelectFile(filter, initialDirectory);
       if (fileSpec != null)
       {
+        // ToDo: Fix relative path.
         var fromPath = initialDirectory;
         var toPath = Path.GetDirectoryName(fileSpec);
         var filePath = NetFile.GetRelativePath(fromPath, toPath);
@@ -420,6 +435,7 @@ namespace LJCGenDocEdit
       var fileSpec = FormCommon.SelectFile(filter, initialDirectory);
       if (fileSpec != null)
       {
+        // ToDo: Fix relative path.
         var fromPath = initialDirectory;
         var toPath = Path.GetPathRoot(fileSpec);
         var filePath = NetFile.GetRelativePath(fromPath, toPath);

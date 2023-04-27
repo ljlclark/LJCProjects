@@ -8,11 +8,12 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
+  /// <summary>The ClassItem combo code.</summary>
   internal class ClassItemComboCode
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
     internal ClassItemComboCode(LJCGenDocList parent)
     {
       mParent = parent;
@@ -23,20 +24,17 @@ namespace LJCGenDocEdit
 
     #region Data Methods
 
-    // Retrieves the combo items.
+    /// <summary>Retrieves the combo items.</summary>
     internal void DataRetrieve()
     {
       mCombo.Items.Clear();
 
-      //if (mParent.AssemblyItemGrid.CurrentRow is LJCGridRow parentRow)
       if (mParent.ClassGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
         mParent.Cursor = Cursors.WaitCursor;
-        //var parentID = (short)parentRow.LJCGetInt32(DocAssembly.ColumnID);
         var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
 
         var manager = mManagers.DocClassManager;
-        //var dataRecords = manager.LoadWithParent(parentID);
         var dataRecords = manager.LoadWithGroup(parentID);
 
         if (NetCommon.HasItems(dataRecords))
@@ -51,32 +49,8 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocClass CurrentItem()
-    {
-      DocClass retValue = null;
-
-      if (mCombo.SelectedItem != null)
-      {
-        var id = (short)mCombo.LJCSelectedItemID();
-        if (id > 0)
-        {
-          var manager = mManagers.DocClassManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-
     // Selects a row based on the key record values.
-    /// <summary>
-    /// Selects a row based on the key record values.
-    /// </summary>
-    /// <param name="dataRecord">The data record to be selected.</param>
-    /// <returns>True if the item was selected, otherwise false.</returns>
+    /// <include path='items/RowSelect/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal bool RowSelect(DocClass dataRecord)
     {
       bool retValue = false;
@@ -95,6 +69,27 @@ namespace LJCGenDocEdit
           }
         }
         mParent.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Retrieves the currently selecteditem.
+    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal DocClass CurrentItem()
+    {
+      DocClass retValue = null;
+
+      if (mCombo.SelectedItem != null)
+      {
+        var id = (short)mCombo.LJCSelectedItemID();
+        if (id > 0)
+        {
+          var manager = mManagers.DocClassManager;
+          retValue = manager.RetrieveWithID(id);
+        }
       }
       return retValue;
     }

@@ -5,7 +5,6 @@ using LJCDBClientLib;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -65,7 +64,6 @@ namespace LJCGenDocEdit
     {
       var values = ValuesGenDocEdit.Instance;
       mSettings = values.StandardSettings;
-      BeginColor = mSettings.BeginColor;
 
       Managers = new ManagersDocGen();
       Managers.SetDBProperties(mSettings.DbServiceRef
@@ -127,7 +125,7 @@ namespace LJCGenDocEdit
       MethodHeadingGridCode.SetupGrid();
     }
 
-    /// <summary>Gets or sets the ControlValues item.</summary>
+    // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }
     #endregion
     #endregion
@@ -145,23 +143,17 @@ namespace LJCGenDocEdit
 
     #region Internal Properties
 
-    // Gets or sets the LJCIsSelect value.
+    /// <summary>Gets or sets the LJCIsSelect value.</summary>
     internal bool LJCIsSelect { get; set; }
 
-    // Gets a reference to the selected record.
+    /// <summary>Gets a reference to the selected record.</summary>
     internal DocMethodGroupHeading LJCSelectedRecord { get; set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Private Properties
-
-    // Gets or sets the Begin Color.
-    private Color BeginColor { get; set; }
-
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
 
     // Gets or sets the _ClassName_GridClass value.
     private MethodHeadingGridCode MethodHeadingGridCode { get; set; }

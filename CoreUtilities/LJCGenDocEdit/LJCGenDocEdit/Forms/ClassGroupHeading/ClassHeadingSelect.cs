@@ -20,10 +20,6 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCIsSelect = false;
-
-      // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(225, 235, 245);
       Cursor = Cursors.Default;
     }
     #endregion

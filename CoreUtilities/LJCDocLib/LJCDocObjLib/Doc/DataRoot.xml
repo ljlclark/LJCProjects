@@ -13,6 +13,26 @@
       DataAssembly elements. Each element contains the Doc deserialized
       documentation XML data.
     </remarks>
+    <example>
+      <code>
+        <pre>
+          var dataConfigName = "ConfigName";
+          var dbServiceRef = new DbServiceRef()
+          {
+            DbDataAccess = new DbDataAccess(dataConfigName)
+          };
+          var managers = new ManagersDocGen();
+          managers.SetDBProperties(dbServiceRef, dataConfigName);
+
+          var assemblyGroupManager = managers.DocAssemblyGroupManager;
+          var assemblyGroups = assemblyGroupManager.Load();
+
+          // Creates the DataAssemblies collection with the deserialized
+          // "Doc" XML converted to the "Data" XML format.
+          DataRoot dataRoot = new DataRoot(assemblyGroups);
+        </pre>
+      </code>
+    </example>
   </DataRoot>
   <DataRootC>
     <summary>

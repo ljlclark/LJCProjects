@@ -319,6 +319,15 @@ namespace LJCGenDocEdit
 
     #region Setup Methods
 
+    // Configure the initial control settings.
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Font)
+      {
+        ActiveCheckbox.Top = SequenceText.Top + 2;
+      }
+    }
+
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
@@ -335,6 +344,7 @@ namespace LJCGenDocEdit
       SetNumericOnly(SequenceText);
 
       HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
+      ConfigureControls();
       Cursor = Cursors.Default;
     }
 

@@ -14,7 +14,7 @@ namespace LJCGenDocEdit
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
     internal LJCGenDocList()
     {
       Cursor = Cursors.WaitCursor;
@@ -23,8 +23,6 @@ namespace LJCGenDocEdit
       // Initialize property values.
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(225, 235, 245);
       Cursor = Cursors.Default;
     }
     #endregion
@@ -259,9 +257,10 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Displays a detail dialog for a new record.
     private void MethodGroupNew_Click(object sender, EventArgs e)
     {
-
+      mMethodGroupGridCode.DoNew();
     }
 
     // Calls the Edit method.
@@ -270,9 +269,10 @@ namespace LJCGenDocEdit
       mMethodGroupGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
     private void MethodGroupDelete_Click(object sender, EventArgs e)
     {
-
+      mMethodGroupGridCode.DoDelete();
     }
 
     // Refreshes the list.

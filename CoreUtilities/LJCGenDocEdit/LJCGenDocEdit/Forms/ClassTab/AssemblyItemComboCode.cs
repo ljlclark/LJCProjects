@@ -4,17 +4,16 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
-using System;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
+  /// <summary>The AssemblyItem combo code.</summary>
   internal class AssemblyItemComboCode
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
     internal AssemblyItemComboCode(LJCGenDocList parent)
     {
       mParent = parent;
@@ -23,32 +22,9 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Methods
-
-    /// <summary>
-    /// Retrieves the currently selecteditem.
-    /// </summary>
-    /// <returns>The currently selected item.</returns>
-    internal DocAssembly CurrentItem()
-    {
-      DocAssembly retValue = null;
-
-      if (mCombo.SelectedItem != null)
-      {
-        var id = (short)mCombo.LJCSelectedItemID();
-        if (id > 0)
-        {
-          var manager = mManagers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Data Methods
 
-    // Retrieves the combo items.
+    /// <summary>Retrieves the combo items.</summary>
     internal void DataRetrieve()
     {
       mCombo.Items.Clear();
@@ -74,11 +50,7 @@ namespace LJCGenDocEdit
     }
 
     // Selects a row based on the key record values.
-    /// <summary>
-    /// Selects a row based on the key record values.
-    /// </summary>
-    /// <param name="dataRecord">The data record to be selected.</param>
-    /// <returns>True if the item was selected, otherwise false.</returns>
+    /// <include path='items/RowSelect/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal bool RowSelect(DocAssembly dataRecord)
     {
       bool retValue = false;
@@ -97,6 +69,27 @@ namespace LJCGenDocEdit
           }
         }
         mParent.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Retrieves the currently selecteditem.
+    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal DocAssembly CurrentItem()
+    {
+      DocAssembly retValue = null;
+
+      if (mCombo.SelectedItem != null)
+      {
+        var id = (short)mCombo.LJCSelectedItemID();
+        if (id > 0)
+        {
+          var manager = mManagers.DocAssemblyManager;
+          retValue = manager.RetrieveWithID(id);
+        }
       }
       return retValue;
     }

@@ -11,7 +11,7 @@ namespace LJCGenDocEdit
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
     internal MethodHeadingSelect()
     {
       Cursor = Cursors.WaitCursor;
@@ -21,8 +21,6 @@ namespace LJCGenDocEdit
       LJCIsSelect = false;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.FromArgb(225, 235, 245);
       Cursor = Cursors.Default;
     }
     #endregion

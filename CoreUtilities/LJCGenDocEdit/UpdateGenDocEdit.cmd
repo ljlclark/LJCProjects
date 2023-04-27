@@ -25,6 +25,12 @@ copy %assmRoot%%src%\LJCDBMessage.dll %to%
 set src=LJCDocLib\LJCDocLibDAL\%bin%
 copy %utilRoot%%src%\LJCDocLibDAL.dll %to%
 
+set src=LJCDocLib\LJCDocObjLib\%bin%
+copy %utilRoot%%src%\LJCDocObjLib.dll %to%
+
+set src=LJCDocLib\LJCDocXMLObjLib\%bin%
+copy %utilRoot%%src%\LJCDocXMLObjLib.dll %to%
+
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 

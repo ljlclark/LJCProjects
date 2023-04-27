@@ -67,7 +67,7 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetClassGroupHeadingWithID(LJCID);
+        mOriginalRecord = GetWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -115,7 +115,6 @@ namespace LJCGenDocEdit
     }
 
     // Resets the empty record values.
-    //private void ResetRecordValues(DocClass dataRecord)
     private void ResetRecordValues(DocClassGroupHeading _)
     {
     }
@@ -151,7 +150,7 @@ namespace LJCGenDocEdit
           if (isChanged)
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
-            manager.Update(LJCRecord, keyRecord);
+            manager.Update(LJCRecord, keyRecord, propertyNames);
             ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -222,7 +221,7 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the item with the ID value.
-    private DocClassGroupHeading GetClassGroupHeadingWithID(short id)
+    private DocClassGroupHeading GetWithID(short id)
     {
       DocClassGroupHeading retValue = null;
 
@@ -329,7 +328,7 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocClassGroupHeading LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -344,10 +343,10 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
-    // 
+    // Record with the original values.
     private DocClassGroupHeading mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }

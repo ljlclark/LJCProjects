@@ -21,6 +21,9 @@
         DataProperty and DataField.
       </para>
       <para>
+        The main class is DataRoot.
+      </para>
+      <para>
         The LJCDocObjLib project is part of the LJC.DocLib solution.
       </para>
     </remarks>

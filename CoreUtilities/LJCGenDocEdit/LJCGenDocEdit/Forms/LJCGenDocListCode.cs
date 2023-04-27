@@ -7,8 +7,6 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -94,7 +92,6 @@ namespace LJCGenDocEdit
     {
       var values = ValuesGenDocEdit.Instance;
       mSettings = values.StandardSettings;
-      BeginColor = mSettings.BeginColor;
 
       Managers = new ManagersDocGen();
       Managers.SetDBProperties(mSettings.DbServiceRef
@@ -394,20 +391,8 @@ namespace LJCGenDocEdit
 
     #region Internal Properties
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
-    #endregion
-
-    #region Private Properties
-
-    // Gets or sets the Begin Color.
-    private Color BeginColor { get; set; }
-
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
-
-    // Gets or sets the _ClassName_GridClass value.
-    //private _ClassName_GridClass _ClassName_GridClass { get; set; }
     #endregion
 
     #region Class Data

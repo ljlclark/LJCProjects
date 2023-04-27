@@ -71,7 +71,7 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetMethodGroupHeadingWithID(LJCID);
+        mOriginalRecord = GetWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -119,7 +119,6 @@ namespace LJCGenDocEdit
     }
 
     // Resets the empty record values.
-    //private void ResetRecordValues(DocClass dataRecord)
     private void ResetRecordValues(DocMethodGroupHeading _)
     {
     }
@@ -135,7 +134,7 @@ namespace LJCGenDocEdit
       LJCRecord = SetRecordValues();
 
       var manager = Managers.DocMethodGroupHeadingManager;
-      var lookupRecord = manager.RetrieveWithUnique(LJCRecord.Name);
+      //var lookupRecord = manager.RetrieveWithUnique(LJCRecord.Name);
       //if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       //{
       //  retValue = false;
@@ -155,7 +154,7 @@ namespace LJCGenDocEdit
           if (isChanged)
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
-            manager.Update(LJCRecord, keyRecord);
+            manager.Update(LJCRecord, keyRecord, propertyNames);
             ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -226,7 +225,7 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the item with the ID value.
-    private DocMethodGroupHeading GetMethodGroupHeadingWithID(short id)
+    private DocMethodGroupHeading GetWithID(short id)
     {
       DocMethodGroupHeading retValue = null;
 
@@ -333,7 +332,7 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethodGroupHeading LJCRecord { get; private set; }
 
-    // The Managers object.
+    /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
 
     // Gets or sets the Begin Color.
@@ -348,10 +347,10 @@ namespace LJCGenDocEdit
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
 
-    // 
+    // Record with the original values.
     private DocMethodGroupHeading mOriginalRecord;
 
-    // 
+    // The standard configuration settings.
     private StandardUISettings mSettings;
     #endregion
   }
