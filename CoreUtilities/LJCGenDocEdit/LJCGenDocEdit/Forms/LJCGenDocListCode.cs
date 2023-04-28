@@ -79,7 +79,7 @@ namespace LJCGenDocEdit
     {
       NetFile.CreateFolder("ExportFiles");
       NetFile.CreateFolder("ControlValues");
-      mControlValuesFileName = @"ControlValues\_ClassName_.xml";
+      mControlValuesFileName = @"ControlValues\GenDocList.xml";
 
       // Splitter is not in the first TabPage.
       ClassSplit.Resize += ClassSplit_Resize;

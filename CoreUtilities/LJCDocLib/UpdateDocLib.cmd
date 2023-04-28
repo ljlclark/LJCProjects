@@ -16,6 +16,9 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
+set src=LJCDocLib\LJCDocObjLib\%bin%
+copy %utilRoot%%src%\LJCDocObjLib.dll %to%
+
 set src=LJCGenText\LJCGenText\%bin%
 copy %utilRoot%%src%\LJCGenTextLib.dll %to%
 

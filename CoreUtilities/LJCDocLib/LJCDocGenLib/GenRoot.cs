@@ -104,7 +104,7 @@ namespace LJCDocGenLib
       string retValue = null;
 
       // Create relative path.
-      DataAssembly dataAssembly = DataRoot.DataAssemblies.LJCSearchByDescription(description);
+      DataAssembly dataAssembly = DataRoot.DataAssemblies.LJCSearchDescription(description);
       if (dataAssembly != null)
       {
         GenAssembly dataAssemblyGen = new GenAssembly(this, dataAssembly);

@@ -3,10 +3,10 @@
 <!-- Licensed under the MIT License. -->
 <!-- DataAssemblies.xml -->
 <items>
-  <LJCSearchByDescription>
+  <LJCSearchDescription>
     <summary>
       Returns the element with the name matching the supplied value.
     </summary>
     /// <param name="description">The element description.</param>
-  </LJCSearchByDescription>
+  </LJCSearchDescription>
 </items>

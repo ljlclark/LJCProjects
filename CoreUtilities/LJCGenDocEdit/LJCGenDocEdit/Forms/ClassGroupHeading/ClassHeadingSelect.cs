@@ -12,7 +12,7 @@ namespace LJCGenDocEdit
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
     internal ClassHeadingSelect()
     {
       Cursor = Cursors.WaitCursor;
@@ -116,7 +116,6 @@ namespace LJCGenDocEdit
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ClassHeadingGrid.LJCSetCurrentRow(e);
-          //TimedChange(Change._ClassName_);
         }
       }
     }
@@ -124,10 +123,6 @@ namespace LJCGenDocEdit
     // Handles the SelectionChanged event.
     private void ClassHeadingGrid_SelectionChanged(object sender, EventArgs e)
     {
-      if (ClassHeadingGrid.LJCAllowSelectionChange)
-      {
-        //TimedChange(Change._ClassName_);
-      }
       ClassHeadingGrid.LJCAllowSelectionChange = true;
     }
     #endregion

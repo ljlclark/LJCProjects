@@ -54,7 +54,7 @@ namespace LJCGenDocEdit
     {
       NetFile.CreateFolder("ExportFiles");
       NetFile.CreateFolder("ControlValues");
-      mControlValuesFileName = @"ControlValues\_ClassName_.xml";
+      mControlValuesFileName = @"ControlValues\ClassHeading.xml";
 
       BackColor = mSettings.BeginColor;
     }
@@ -155,7 +155,7 @@ namespace LJCGenDocEdit
 
     #region Private Properties
 
-    // Gets or sets the _ClassName_GridClass value.
+    // Gets or sets the ClassHeadingGridCode value.
     private ClassHeadingGridCode ClassHeadingGridCode { get; set; }
     #endregion
 

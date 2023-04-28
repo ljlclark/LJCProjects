@@ -45,6 +45,12 @@
     <Reference Include="LJCDocLibDAL">
       <HintPath>..\External\LJCDocLibDAL.dll</HintPath>
     </Reference>
+    <Reference Include="LJCDocObjLib">
+      <HintPath>..\External\LJCDocObjLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDocXMLObjLib">
+      <HintPath>..\External\LJCDocXMLObjLib.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
@@ -86,6 +92,16 @@
       <DependentUpon>ClassHeadingDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ClassGroupHeading\ClassHeadingSelectCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClassSelect\ClassGridCode.cs" />
+    <Compile Include="Forms\ClassSelect\ClassSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClassSelect\ClassSelect.Designer.cs">
+      <DependentUpon>ClassSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClassSelect\ClassSelectCode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ClassTab\AssemblyItemComboCode.cs" />
@@ -163,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClassGroupHeading\ClassHeadingDetail.resx">
       <DependentUpon>ClassHeadingDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClassSelect\ClassSelect.resx">
+      <DependentUpon>ClassSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClassTab\ClassDetail.resx">
       <DependentUpon>ClassDetail.cs</DependentUpon>

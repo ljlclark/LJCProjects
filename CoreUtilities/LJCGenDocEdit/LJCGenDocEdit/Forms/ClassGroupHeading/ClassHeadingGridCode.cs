@@ -21,7 +21,7 @@ namespace LJCGenDocEdit
     {
       mParent = parent;
       mGrid = mParent.ClassHeadingGrid;
-      mManagers = mParent.Managers;
+      Managers = mParent.Managers;
     }
     #endregion
 
@@ -34,7 +34,7 @@ namespace LJCGenDocEdit
 
       mParent.Cursor = Cursors.WaitCursor;
 
-      var manager = mManagers.DocClassGroupHeadingManager;
+      var manager = Managers.DocClassGroupHeadingManager;
       var names = new List<string>()
       {
         DocClassGroupHeading.ColumnSequence
@@ -127,7 +127,7 @@ namespace LJCGenDocEdit
     {
       var detail = new ClassHeadingDetail()
       {
-        Managers = mManagers
+        Managers = Managers
       };
       detail.LJCChange += Detail_Change;
       detail.ShowDialog();
@@ -144,7 +144,7 @@ namespace LJCGenDocEdit
         var detail = new ClassHeadingDetail()
         {
           LJCID = id,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -179,7 +179,7 @@ namespace LJCGenDocEdit
         {
           { DocClassGroupHeading.ColumnID, id }
         };
-        var manager = mManagers.DocClassGroupHeadingManager;
+        var manager = Managers.DocClassGroupHeadingManager;
         manager.Delete(keyRecord);
         if (0 == manager.Manager.AffectedCount)
         {
@@ -224,7 +224,7 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.WaitCursor;
         var id = RowID();
 
-        var manager = mManagers.DocClassGroupHeadingManager;
+        var manager = Managers.DocClassGroupHeadingManager;
         var keyRecord = manager.GetIDKey(id);
         var dataRecord = manager.Retrieve(keyRecord);
         if (dataRecord != null)
@@ -272,7 +272,7 @@ namespace LJCGenDocEdit
         var id = RowID();
         if (id > 0)
         {
-          var manager = mManagers.DocClassGroupHeadingManager;
+          var manager = Managers.DocClassGroupHeadingManager;
           retValue = manager.RetrieveWithID(id);
         }
       }
@@ -309,7 +309,7 @@ namespace LJCGenDocEdit
         };
 
         // Get the display columns from the manager Data Definition.
-        var classManager = mManagers.DocClassGroupHeadingManager;
+        var classManager = Managers.DocClassGroupHeadingManager;
         DisplayColumns = classManager.GetColumns(columnNames);
 
         // Setup the grid display columns.
@@ -322,12 +322,14 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the DisplayColumns value.</summary>
     internal DbColumns DisplayColumns { get; set; }
+
+    // The Managers object.
+    private ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCDataGrid mGrid;
-    private readonly ManagersDocGen mManagers;
     private readonly ClassHeadingSelect mParent;
     #endregion
   }

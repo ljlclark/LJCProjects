@@ -15,6 +15,11 @@ namespace LJCDocObjLib
   {
     #region Constructors
 
+    /// <summary>Initializes an object instance.</summary>
+    public DataAssembly()
+    {
+    }
+
     // Initializes an object instance.
     /// <include path='items/DataAssemblyC/*' file='Doc/DataAssembly.xml'/>
     public DataAssembly(DataRoot dataRoot, string xmlFileName, string description
@@ -100,7 +105,8 @@ namespace LJCDocObjLib
       }
       else
       {
-        retValue = Description.CompareTo(other.Description);
+        // Not case sensitive.
+        retValue = string.Compare(Name, other.Name, true);
       }
       return retValue;
     }
@@ -193,4 +199,30 @@ namespace LJCDocObjLib
     public string XmlFileSpec { get; private set; }
     #endregion
   }
+
+  #region Comparers
+
+  /// <summary>Sort and search on Name value.</summary>
+  public class DataAssemblyComparer : IComparer<DataAssembly>
+  {
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int Compare(DataAssembly x, DataAssembly y)
+    {
+      int retValue;
+
+      retValue = NetCommon.CompareNull(x, y);
+      if (-2 == retValue)
+      {
+        retValue = NetCommon.CompareNull(x.Description, y.Description);
+        if (-2 == retValue)
+        {
+          // Not case sensitive.
+          retValue = string.Compare(x.Description, y.Description, true);
+        }
+      }
+      return retValue;
+    }
+  }
+  #endregion
 }

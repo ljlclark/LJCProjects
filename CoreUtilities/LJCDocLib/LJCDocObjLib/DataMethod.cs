@@ -67,6 +67,7 @@ namespace LJCDocObjLib
       }
       else
       {
+        // Case sensitive.
         retValue = OverriddenName.CompareTo(other.OverriddenName);
       }
       return retValue;

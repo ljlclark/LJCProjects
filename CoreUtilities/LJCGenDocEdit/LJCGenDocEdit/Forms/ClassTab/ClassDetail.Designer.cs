@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassDetail));
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
@@ -46,6 +47,8 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.NameButton = new System.Windows.Forms.Button();
+      this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -54,7 +57,8 @@
       this.NameText.Location = new System.Drawing.Point(145, 86);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(413, 26);
+      this.NameText.ReadOnly = true;
+      this.NameText.Size = new System.Drawing.Size(377, 26);
       this.NameText.TabIndex = 5;
       // 
       // NameLabel
@@ -73,7 +77,7 @@
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 12;
+      this.FormCancelButton.TabIndex = 13;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
@@ -84,7 +88,7 @@
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 11;
+      this.OKButton.TabIndex = 12;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -95,7 +99,7 @@
       this.DescriptionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.DescriptionText.Name = "DescriptionText";
       this.DescriptionText.Size = new System.Drawing.Size(413, 26);
-      this.DescriptionText.TabIndex = 7;
+      this.DescriptionText.TabIndex = 8;
       // 
       // DescriptionLabel
       // 
@@ -103,7 +107,7 @@
       this.DescriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.DescriptionLabel.Name = "DescriptionLabel";
       this.DescriptionLabel.Size = new System.Drawing.Size(124, 20);
-      this.DescriptionLabel.TabIndex = 6;
+      this.DescriptionLabel.TabIndex = 7;
       this.DescriptionLabel.Text = "Description";
       // 
       // AssemblyText
@@ -148,7 +152,7 @@
       this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SequenceText.Name = "SequenceText";
       this.SequenceText.Size = new System.Drawing.Size(45, 26);
-      this.SequenceText.TabIndex = 9;
+      this.SequenceText.TabIndex = 10;
       // 
       // SequenceLabel
       // 
@@ -156,7 +160,7 @@
       this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SequenceLabel.Name = "SequenceLabel";
       this.SequenceLabel.Size = new System.Drawing.Size(124, 20);
-      this.SequenceLabel.TabIndex = 8;
+      this.SequenceLabel.TabIndex = 9;
       this.SequenceLabel.Text = "Sequence";
       // 
       // ActiveCheckbox
@@ -165,7 +169,7 @@
       this.ActiveCheckbox.Location = new System.Drawing.Point(277, 159);
       this.ActiveCheckbox.Name = "ActiveCheckbox";
       this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
-      this.ActiveCheckbox.TabIndex = 10;
+      this.ActiveCheckbox.TabIndex = 11;
       this.ActiveCheckbox.Text = "Active";
       this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
@@ -177,7 +181,7 @@
             this.DialogPrevious,
             this.DialogNext});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 133);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 100);
       // 
       // DialogNew
       // 
@@ -203,12 +207,33 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
+      // NameButton
+      // 
+      this.NameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.NameButton.ImageKey = "Ellipse.bmp";
+      this.NameButton.ImageList = this.ButtonImages;
+      this.NameButton.Location = new System.Drawing.Point(530, 84);
+      this.NameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.NameButton.Name = "NameButton";
+      this.NameButton.Size = new System.Drawing.Size(28, 28);
+      this.NameButton.TabIndex = 6;
+      this.NameButton.UseVisualStyleBackColor = true;
+      this.NameButton.Click += new System.EventHandler(this.NameButton_Click);
+      // 
+      // ButtonImages
+      // 
+      this.ButtonImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ButtonImages.ImageStream")));
+      this.ButtonImages.TransparentColor = System.Drawing.Color.Magenta;
+      this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
+      this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
+      // 
       // ClassDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(578, 244);
       this.ContextMenuStrip = this.DialogMenu;
+      this.Controls.Add(this.NameButton);
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
       this.Controls.Add(this.ActiveCheckbox);
@@ -254,5 +279,7 @@
     private System.Windows.Forms.ToolStripMenuItem DialogNew;
     private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
     private System.Windows.Forms.ToolStripMenuItem DialogNext;
+    private System.Windows.Forms.Button NameButton;
+    private System.Windows.Forms.ImageList ButtonImages;
   }
 }

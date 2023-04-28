@@ -52,6 +52,7 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.NameButton = new System.Windows.Forms.Button();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -80,7 +81,7 @@
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 16;
+      this.FormCancelButton.TabIndex = 17;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
@@ -91,7 +92,7 @@
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 15;
+      this.OKButton.TabIndex = 16;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -101,7 +102,7 @@
       this.NameText.Location = new System.Drawing.Point(151, 50);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(413, 26);
+      this.NameText.Size = new System.Drawing.Size(377, 26);
       this.NameText.TabIndex = 3;
       // 
       // NameLabel
@@ -119,7 +120,7 @@
       this.DescriptionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.DescriptionText.Name = "DescriptionText";
       this.DescriptionText.Size = new System.Drawing.Size(413, 26);
-      this.DescriptionText.TabIndex = 5;
+      this.DescriptionText.TabIndex = 6;
       // 
       // DescriptionLabel
       // 
@@ -127,7 +128,7 @@
       this.DescriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.DescriptionLabel.Name = "DescriptionLabel";
       this.DescriptionLabel.Size = new System.Drawing.Size(124, 20);
-      this.DescriptionLabel.TabIndex = 4;
+      this.DescriptionLabel.TabIndex = 5;
       this.DescriptionLabel.Text = "Description";
       // 
       // FileText
@@ -136,7 +137,7 @@
       this.FileText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FileText.Name = "FileText";
       this.FileText.Size = new System.Drawing.Size(377, 26);
-      this.FileText.TabIndex = 7;
+      this.FileText.TabIndex = 8;
       // 
       // FileLabel
       // 
@@ -144,7 +145,7 @@
       this.FileLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.FileLabel.Name = "FileLabel";
       this.FileLabel.Size = new System.Drawing.Size(124, 20);
-      this.FileLabel.TabIndex = 6;
+      this.FileLabel.TabIndex = 7;
       this.FileLabel.Text = "Doc File";
       // 
       // ImageText
@@ -153,7 +154,7 @@
       this.ImageText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ImageText.Name = "ImageText";
       this.ImageText.Size = new System.Drawing.Size(377, 26);
-      this.ImageText.TabIndex = 10;
+      this.ImageText.TabIndex = 11;
       // 
       // ImageLabel
       // 
@@ -161,7 +162,7 @@
       this.ImageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.ImageLabel.Name = "ImageLabel";
       this.ImageLabel.Size = new System.Drawing.Size(124, 20);
-      this.ImageLabel.TabIndex = 9;
+      this.ImageLabel.TabIndex = 10;
       this.ImageLabel.Text = "Image";
       // 
       // ActiveCheckbox
@@ -170,7 +171,7 @@
       this.ActiveCheckbox.Location = new System.Drawing.Point(283, 195);
       this.ActiveCheckbox.Name = "ActiveCheckbox";
       this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
-      this.ActiveCheckbox.TabIndex = 14;
+      this.ActiveCheckbox.TabIndex = 15;
       this.ActiveCheckbox.Text = "Active";
       this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
@@ -180,7 +181,7 @@
       this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SequenceText.Name = "SequenceText";
       this.SequenceText.Size = new System.Drawing.Size(45, 26);
-      this.SequenceText.TabIndex = 13;
+      this.SequenceText.TabIndex = 14;
       // 
       // SequenceLabel
       // 
@@ -188,7 +189,7 @@
       this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SequenceLabel.Name = "SequenceLabel";
       this.SequenceLabel.Size = new System.Drawing.Size(124, 20);
-      this.SequenceLabel.TabIndex = 12;
+      this.SequenceLabel.TabIndex = 13;
       this.SequenceLabel.Text = "Sequence";
       // 
       // FileButton
@@ -200,7 +201,7 @@
       this.FileButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FileButton.Name = "FileButton";
       this.FileButton.Size = new System.Drawing.Size(28, 28);
-      this.FileButton.TabIndex = 8;
+      this.FileButton.TabIndex = 9;
       this.FileButton.UseVisualStyleBackColor = true;
       this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
       // 
@@ -220,7 +221,7 @@
       this.ImageButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ImageButton.Name = "ImageButton";
       this.ImageButton.Size = new System.Drawing.Size(28, 28);
-      this.ImageButton.TabIndex = 11;
+      this.ImageButton.TabIndex = 12;
       this.ImageButton.UseVisualStyleBackColor = true;
       this.ImageButton.Click += new System.EventHandler(this.ImageButton_Click);
       // 
@@ -258,12 +259,26 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
+      // NameButton
+      // 
+      this.NameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.NameButton.ImageKey = "Ellipse.bmp";
+      this.NameButton.ImageList = this.ButtonImages;
+      this.NameButton.Location = new System.Drawing.Point(536, 49);
+      this.NameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.NameButton.Name = "NameButton";
+      this.NameButton.Size = new System.Drawing.Size(28, 28);
+      this.NameButton.TabIndex = 4;
+      this.NameButton.UseVisualStyleBackColor = true;
+      this.NameButton.Click += new System.EventHandler(this.NameButton_Click);
+      // 
       // AssemblyDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(584, 279);
       this.ContextMenuStrip = this.DialogMenu;
+      this.Controls.Add(this.NameButton);
       this.Controls.Add(this.ImageButton);
       this.Controls.Add(this.FileButton);
       this.Controls.Add(this.SequenceText);
@@ -318,5 +333,6 @@
     private System.Windows.Forms.ToolStripMenuItem DialogNew;
     private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
     private System.Windows.Forms.ToolStripMenuItem DialogNext;
+    private System.Windows.Forms.Button NameButton;
   }
 }

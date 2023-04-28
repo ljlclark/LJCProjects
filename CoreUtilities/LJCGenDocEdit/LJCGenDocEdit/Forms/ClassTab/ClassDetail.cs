@@ -133,11 +133,6 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Resets the empty record values.
-    private void ResetRecordValues(DocClass _)
-    {
-    }
-
     // Saves the data.
     private bool DataSave()
     {
@@ -171,7 +166,6 @@ namespace LJCGenDocEdit
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
             manager.Update(LJCRecord, keyRecord, propertyNames);
-            ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
               title = "Update Error";
@@ -184,7 +178,6 @@ namespace LJCGenDocEdit
         else
         {
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
           if (null == addedRecord)
           {
             if (manager.Manager.AffectedCount < 1)
@@ -402,6 +395,22 @@ namespace LJCGenDocEdit
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+      }
+    }
+
+    // Select the class.
+    private void NameButton_Click(object sender, EventArgs e)
+    {
+      var list = new ClassSelect()
+      {
+        AssemblyGroupName = "CommonLibraries",
+        AssemblyName = "LJCNetCommon"
+      };
+      if (DialogResult.OK == list.ShowDialog())
+      {
+        var dataType = list.LJCSelectedRecord;
+        NameText.Text = dataType.Name;
+        DescriptionText.Text = dataType.Summary;
       }
     }
     #endregion
