@@ -23,9 +23,9 @@ namespace LJCGenDocEdit
     {
       mParent = parent;
       mGrid = mParent.AssemblyItemGrid;
-      mManagers = mParent.Managers;
+      Managers = mParent.Managers;
       mParentGrid = mParent.AssemblyGroupGrid;
-      DocAssemblyManager = mManagers.DocAssemblyManager;
+      DocAssemblyManager = Managers.DocAssemblyManager;
     }
     #endregion
 
@@ -130,7 +130,7 @@ namespace LJCGenDocEdit
         {
           LJCParentID = parentID,
           LJCParentName = parentName,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -153,7 +153,7 @@ namespace LJCGenDocEdit
           LJCID = id,
           LJCParentID = parentID,
           LJCParentName = parentName,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -233,7 +233,7 @@ namespace LJCGenDocEdit
     internal void DoResetSequence()
     {
       var assemblyItem = CurrentItem();
-      var manager = mManagers.DocAssemblyManager;
+      var manager = Managers.DocAssemblyManager;
       manager.AssemblyGroupID = assemblyItem.DocAssemblyGroupID;
       manager.ResetSequence();
     }
@@ -411,12 +411,14 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Manager value.</summary>
     internal DocAssemblyManager DocAssemblyManager { get; set; }
+
+    // The Managers object.
+    private ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCDataGrid mGrid;
-    private readonly ManagersDocGen mManagers;
     private readonly LJCGenDocList mParent;
     private readonly LJCDataGrid mParentGrid;
     #endregion

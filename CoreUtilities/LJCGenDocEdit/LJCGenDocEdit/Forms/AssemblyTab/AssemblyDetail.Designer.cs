@@ -52,7 +52,6 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
-      this.NameButton = new System.Windows.Forms.Button();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -102,7 +101,7 @@
       this.NameText.Location = new System.Drawing.Point(151, 50);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(377, 26);
+      this.NameText.Size = new System.Drawing.Size(413, 26);
       this.NameText.TabIndex = 3;
       // 
       // NameLabel
@@ -259,26 +258,12 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
-      // NameButton
-      // 
-      this.NameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.NameButton.ImageKey = "Ellipse.bmp";
-      this.NameButton.ImageList = this.ButtonImages;
-      this.NameButton.Location = new System.Drawing.Point(536, 49);
-      this.NameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.NameButton.Name = "NameButton";
-      this.NameButton.Size = new System.Drawing.Size(28, 28);
-      this.NameButton.TabIndex = 4;
-      this.NameButton.UseVisualStyleBackColor = true;
-      this.NameButton.Click += new System.EventHandler(this.NameButton_Click);
-      // 
       // AssemblyDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(584, 279);
       this.ContextMenuStrip = this.DialogMenu;
-      this.Controls.Add(this.NameButton);
       this.Controls.Add(this.ImageButton);
       this.Controls.Add(this.FileButton);
       this.Controls.Add(this.SequenceText);
@@ -333,6 +318,5 @@
     private System.Windows.Forms.ToolStripMenuItem DialogNew;
     private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
     private System.Windows.Forms.ToolStripMenuItem DialogNext;
-    private System.Windows.Forms.Button NameButton;
   }
 }

@@ -153,6 +153,16 @@
     <Compile Include="Forms\MethodGroupHeading\MethodHeadingSelectCode.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\MethodSelect\MethodGridCode.cs" />
+    <Compile Include="Forms\MethodSelect\MethodSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MethodSelect\MethodSelect.Designer.cs">
+      <DependentUpon>MethodSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MethodSelect\MethodSelectCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\MethodTab\ClassItemComboCode.cs" />
     <Compile Include="Forms\MethodTab\MethodDetail.cs">
       <SubType>Form</SubType>
@@ -200,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MethodGroupHeading\MethodHeadingSelect.resx">
       <DependentUpon>MethodHeadingSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MethodSelect\MethodSelect.resx">
+      <DependentUpon>MethodSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MethodTab\MethodDetail.resx">
       <DependentUpon>MethodDetail.cs</DependentUpon>

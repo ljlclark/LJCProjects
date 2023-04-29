@@ -18,7 +18,7 @@ namespace LJCGenDocEdit
     {
       mParent = parent;
       mCombo = mParent.AssemblyCombo;
-      mManagers = mParent.Managers;
+      Managers = mParent.Managers;
     }
     #endregion
 
@@ -34,7 +34,7 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.WaitCursor;
         var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
 
-        var manager = mManagers.DocAssemblyManager;
+        var manager = Managers.DocAssemblyManager;
         var dataRecords = manager.LoadWithParent(parentID);
 
         if (NetCommon.HasItems(dataRecords))
@@ -87,7 +87,7 @@ namespace LJCGenDocEdit
         var id = (short)mCombo.LJCSelectedItemID();
         if (id > 0)
         {
-          var manager = mManagers.DocAssemblyManager;
+          var manager = Managers.DocAssemblyManager;
           retValue = manager.RetrieveWithID(id);
         }
       }
@@ -95,10 +95,15 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    #region Properties
+
+    // The Managers object.
+    private ManagersDocGen Managers { get; set; }
+    #endregion
+
     #region Class Data
 
     private readonly LJCItemCombo mCombo;
-    private readonly ManagersDocGen mManagers;
     private readonly LJCGenDocList mParent;
     #endregion
   }

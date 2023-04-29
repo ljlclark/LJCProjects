@@ -23,8 +23,8 @@ namespace LJCGenDocEdit
     {
       mParent = parent;
       mGrid = mParent.AssemblyGroupGrid;
-      mManagers = mParent.Managers;
-      DocAssemblyGroupManager = mManagers.DocAssemblyGroupManager;
+      Managers = mParent.Managers;
+      DocAssemblyGroupManager = Managers.DocAssemblyGroupManager;
     }
     #endregion
 
@@ -117,7 +117,7 @@ namespace LJCGenDocEdit
     {
       var detail = new AssemblyGroupDetail()
       {
-        Managers = mManagers
+        Managers = Managers
       };
       detail.LJCChange += Detail_Change;
       detail.ShowDialog();
@@ -134,7 +134,7 @@ namespace LJCGenDocEdit
         var detail = new AssemblyGroupDetail()
         {
           LJCID = id,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -271,7 +271,7 @@ namespace LJCGenDocEdit
         {
           // Get source group.
           var sourceName = sourceRow.LJCGetString(DocAssemblyGroup.ColumnName);
-          var manager = mManagers.DocAssemblyGroupManager;
+          var manager = Managers.DocAssemblyGroupManager;
           var sourceGroup = manager.RetrieveWithUnique(sourceName);
 
           // Get target group.
@@ -385,12 +385,14 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Manager value.</summary>
     internal DocAssemblyGroupManager DocAssemblyGroupManager { get; set; }
+
+    // The Managers object.
+    private ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCDataGrid mGrid;
-    private readonly ManagersDocGen mManagers;
     private readonly LJCGenDocList mParent;
     #endregion
   }

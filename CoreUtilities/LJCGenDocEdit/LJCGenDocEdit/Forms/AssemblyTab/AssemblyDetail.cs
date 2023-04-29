@@ -443,11 +443,6 @@ namespace LJCGenDocEdit
         ImageText.Text = Path.Combine(filePath, fileName);
       }
     }
-
-    // Select the assembly.
-    private void NameButton_Click(object sender, EventArgs e)
-    {
-    }
     #endregion
 
     #region KeyEdit Event Handlers

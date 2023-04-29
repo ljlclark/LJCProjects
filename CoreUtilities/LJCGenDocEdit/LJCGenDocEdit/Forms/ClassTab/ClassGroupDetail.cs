@@ -71,7 +71,7 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetClassGroupWithID(LJCID);
+        mOriginalRecord = GetWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -256,7 +256,7 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the Product with the ID value.
-    private DocClassGroup GetClassGroupWithID(short id)
+    private DocClassGroup GetWithID(short id)
     {
       DocClassGroup retValue = null;
 

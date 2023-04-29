@@ -135,11 +135,6 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Resets the empty values.
-    private void ResetRecordValues(DocMethod _)
-    {
-    }
-
     // Saves the data.
     private bool DataSave()
     {
@@ -175,7 +170,6 @@ namespace LJCGenDocEdit
             manager.SourceSequence = mOriginalRecord.Sequence;
             manager.TargetSequence = LJCRecord.Sequence;
             manager.Update(LJCRecord, keyRecord, propertyNames);
-            ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
               title = "Update Error";
@@ -189,7 +183,6 @@ namespace LJCGenDocEdit
         {
           manager.TargetSequence = LJCRecord.Sequence;
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
           if (null == addedRecord)
           {
             if (manager.Manager.AffectedCount < 1)
@@ -407,6 +400,23 @@ namespace LJCGenDocEdit
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+      }
+    }
+
+    // Select the method.
+    private void NameButton_Click(object sender, EventArgs e)
+    {
+      var list = new MethodSelect()
+      {
+        AssemblyGroupName = "CommonLibraries",
+        AssemblyName = "LJCNetCommon",
+        ClassName = "NetCommon"
+      };
+      if (DialogResult.OK == list.ShowDialog())
+      {
+        var dataMethod = list.LJCSelectedRecord;
+        NameText.Text = dataMethod.Name;
+        DescriptionText.Text = dataMethod.Summary;
       }
     }
     #endregion

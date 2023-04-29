@@ -23,7 +23,7 @@ namespace LJCGenDocEdit
     {
       mParent = parent;
       mGrid = mParent.ClassItemGrid;
-      mManagers = mParent.Managers;
+      Managers = mParent.Managers;
       mParentGrid = mParent.ClassGroupGrid;
     }
     #endregion
@@ -40,7 +40,7 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.WaitCursor;
         var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
 
-        var manager = mManagers.DocClassManager;
+        var manager = Managers.DocClassManager;
         var names = new List<string>()
         {
           DocClass.ColumnSequence
@@ -129,7 +129,7 @@ namespace LJCGenDocEdit
         {
           LJCParentID = parentID,
           LJCParentName = parentName,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -154,7 +154,7 @@ namespace LJCGenDocEdit
           LJCID = id,
           LJCParentID = parentID,
           LJCParentName = parentName,
-          Managers = mManagers
+          Managers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -193,7 +193,7 @@ namespace LJCGenDocEdit
           { DocClassGroup.ColumnID, parentID },
           { DocClass.ColumnID, id }
         };
-        var manager = mManagers.DocClassManager;
+        var manager = Managers.DocClassManager;
         manager.Delete(keyRecord);
         if (0 == manager.Manager.AffectedCount)
         {
@@ -234,7 +234,7 @@ namespace LJCGenDocEdit
     internal void DoResetSequence()
     {
       var classItem = CurrentItem();
-      var manager = mManagers.DocClassManager;
+      var manager = Managers.DocClassManager;
       manager.ClassGroupID = classItem.DocClassGroupID;
       manager.ResetSequence();
     }
@@ -278,7 +278,7 @@ namespace LJCGenDocEdit
         var id = RowID();
         if (id > 0)
         {
-          var manager = mManagers.DocClassManager;
+          var manager = Managers.DocClassManager;
           retValue = manager.RetrieveWithID(id);
         }
       }
@@ -298,7 +298,7 @@ namespace LJCGenDocEdit
         {
           // Get source group.
           var sourceName = sourceRow.LJCGetString(DocClass.ColumnName);
-          var manager = mManagers.DocClassManager;
+          var manager = Managers.DocClassManager;
           var sourceGroup = manager.RetrieveWithUnique(parentID, sourceName);
 
           // Get target group.
@@ -345,7 +345,7 @@ namespace LJCGenDocEdit
         };
 
         // Get the display columns from the manager Data Definition.
-        var classManager = mManagers.DocClassManager;
+        var classManager = Managers.DocClassManager;
         DisplayColumns = classManager.GetColumns(columnNames);
 
         // Setup the grid display columns.
@@ -411,12 +411,14 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the DisplayColumns value.</summary>
     internal DbColumns DisplayColumns { get; set; }
+
+    // The Managers object.
+    private ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCDataGrid mGrid;
-    private readonly ManagersDocGen mManagers;
     private readonly LJCGenDocList mParent;
     private readonly LJCDataGrid mParentGrid;
     #endregion

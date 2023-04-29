@@ -1,4 +1,7 @@
-﻿using LJCDBClientLib;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// ClassHeadingDetail.cs
+using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
@@ -114,11 +117,6 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Resets the empty record values.
-    private void ResetRecordValues(DocClassGroupHeading _)
-    {
-    }
-
     // Saves the data.
     private bool DataSave()
     {
@@ -151,7 +149,6 @@ namespace LJCGenDocEdit
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
             manager.Update(LJCRecord, keyRecord, propertyNames);
-            ResetRecordValues(LJCRecord);
             if (0 == manager.Manager.AffectedCount)
             {
               title = "Update Error";
@@ -164,7 +161,6 @@ namespace LJCGenDocEdit
         else
         {
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
           if (null == addedRecord)
           {
             if (manager.Manager.AffectedCount < 1)
