@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJCNetCommon;
@@ -91,6 +92,17 @@ namespace LJCWinFormControls
       retValue.Height = Font.Height + 4;
 
       return retValue;
+    }
+
+    // Updates a grid row with the object values.
+    /// <include path='items/LJCRowSetValues1/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCRowSetValues(LJCGridRow row, object[] values)
+    {
+      if ((values != null && values.Count() > 0)
+        && (values.Count() <= ColumnCount))
+      {
+        row.SetValues(values);
+      }
     }
 
     // Updates a grid row with the record values.

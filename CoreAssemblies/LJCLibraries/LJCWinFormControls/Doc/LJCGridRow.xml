@@ -3,7 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCGridRow.xml -->
 <items>
-  <!-- Public Methods -->
+  <!-- Saved Value Methods -->
   <LJCSetInt321>
     <summary>
       Stores an int key and int value pair.
@@ -93,16 +93,24 @@
     <param name="key">The string key.</param>
     <returns>The stored string value.</returns>
   </LJCGetString2>
-  
+
+  <!-- Cell Methods -->
   <LJCGetCellText>
     <summary>
       Sets the cell value.
     </summary>
     <param name="columnName">The column name.</param>
   </LJCGetCellText>
+  <LJCSetCellText1>
+    <summary>
+      Sets the cell value by index.
+    </summary>
+    <param name="index">The column index.</param>
+    <param name="value">The cell value.</param>
+  </LJCSetCellText1>
   <LJCSetCellText>
     <summary>
-      Sets the cell value.
+      Sets the cell value by name.
     </summary>
     <param name="columnName">The column name.</param>
     <param name="value">The cell value.</param>

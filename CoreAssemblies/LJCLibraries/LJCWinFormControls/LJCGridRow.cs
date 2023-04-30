@@ -27,7 +27,7 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    #region Public Methods
+    #region Saved Value Methods
 
     // Stores an int key and int value pair.
     /// <include path='items/LJCSetInt321/*' file='Doc/LJCGridRow.xml'/>
@@ -57,7 +57,6 @@ namespace LJCWinFormControls
       }
     }
 
-
     // Stores an int key and int value pair.
     /// <include path='items/LJCSetInt641/*' file='Doc/LJCGridRow.xml'/>
     public void LJCSetInt64(long key, long value)
@@ -85,7 +84,6 @@ namespace LJCWinFormControls
         mStringLongs.Add(key, value);
       }
     }
-
 
     // Stores a int key and string value pair.
     /// <include path='items/LJCSetString1/*' file='Doc/LJCGridRow.xml'/>
@@ -115,7 +113,6 @@ namespace LJCWinFormControls
       }
     }
 
-
     // Gets the stored int value using an int key.
     /// <include path='items/LJCGetInt321/*' file='Doc/LJCGridRow.xml'/>
     public int LJCGetInt32(int key)
@@ -142,7 +139,6 @@ namespace LJCWinFormControls
       return retVal;
     }
 
-
     // Gets the stored long value using a long key.
     /// <include path='items/LJCGetInt641/*' file='Doc/LJCGridRow.xml'/>
     public long LJCGetInt64(long key)
@@ -168,7 +164,6 @@ namespace LJCWinFormControls
       }
       return retVal;
     }
-
 
     // Gets the stored string value using an int key.
     /// <include path='items/LJCGetString1/*' file='Doc/LJCGridRow.xml'/>
@@ -199,7 +194,9 @@ namespace LJCWinFormControls
       }
       return retValue;
     }
+    #endregion
 
+    #region Cell Methods
 
     // Sets the cell value.
     /// <include path='items/LJCGetCellText/*' file='Doc/LJCGridRow.xml'/>
@@ -216,6 +213,24 @@ namespace LJCWinFormControls
         }
       }
       return retVal;
+    }
+
+    // Sets the cell value by index.
+    /// <include path='items/LJCGetCellText1/*' file='Doc/LJCGridRow.xml'/>
+    public void LJCSetCellText(int index, object value)
+    {
+      if (DataGridView != null)
+      {
+        // Ensure that column exists.
+        if (index >= 0 && index < Cells.Count)
+        {
+          if (null == value)
+          {
+            value = "";
+          }
+          Cells[index].Value = value.ToString();
+        }
+      }
     }
 
     // Sets the cell value.

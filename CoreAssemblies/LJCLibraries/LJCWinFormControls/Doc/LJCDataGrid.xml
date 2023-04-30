@@ -61,6 +61,13 @@
     <param name="index">The insert index value.</param>
     <returns>The added LJCGridRow object.</returns>
   </LJCRowInsert>
+  <LJCRowSetValues1>
+    <summary>
+      Updates a grid row with the object values.
+    </summary>
+    <param name="row">The grid row.</param>
+    <param name="values">The object values.</param>
+  </LJCRowSetValues1>
   <LJCRowSetValues>
     <summary>
       Updates a grid row with the record values.
