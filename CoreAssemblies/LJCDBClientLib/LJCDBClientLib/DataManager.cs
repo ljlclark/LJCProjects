@@ -178,6 +178,7 @@ namespace LJCDBClientLib
       {
         // Use DbDataAccess.
         retValue = DbServiceRef.DbDataAccess.Execute(dbRequest);
+        Result = retValue.Clone();
       }
       else
       {
@@ -223,6 +224,7 @@ namespace LJCDBClientLib
               resultText = NetCommon.Base64ToText(result);
             }
             retValue = DbResult.DeserializeMessage(resultText);
+            Result = retValue.Clone();
           }
         }
       }
@@ -559,9 +561,12 @@ namespace LJCDBClientLib
     /// <summary>Gets or sets the pagination start index.</summary>
     public int PageStartIndex { get; set; }
 
-    // Gets or sets the
+    // Gets or sets the DbRequest object reference.
     /// <include path='items/Request/*' file='Doc/DataManager.xml'/>
     public DbRequest Request { get; set; }
+
+    /// <summary>Gets or sets the DbResult object reference.</summary>
+    public DbResult Result { get; set; }
 
     /// <summary>Gets or sets the UseEncyption flag.</summary>
     public bool UseEncryption { get; set; }

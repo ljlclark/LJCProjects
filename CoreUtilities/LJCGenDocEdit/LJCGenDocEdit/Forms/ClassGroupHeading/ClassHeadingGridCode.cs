@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ClassHeadingGridCode.cs
+using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -40,13 +41,13 @@ namespace LJCGenDocEdit
         DocClassGroupHeading.ColumnSequence
       };
       manager.SetOrderBy(names);
-      var dataRecords = manager.Load();
+      DbResult result = manager.Manager.Load();
 
-      if (NetCommon.HasItems(dataRecords))
+      if (DbResult.HasRows(result))
       {
-        foreach (DocClassGroupHeading dataRecord in dataRecords)
+        foreach (DbRow dbRow in result.Rows)
         {
-          RowAdd(dataRecord);
+          RowAddValues(dbRow.Values);
         }
       }
       mParent.SetControlState();
@@ -83,9 +84,18 @@ namespace LJCGenDocEdit
     {
       var retValue = mGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-
-      // Sets the row values from a data object.
       mGrid.LJCRowSetValues(retValue, dataRecord);
+      return retValue;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var retValue = mGrid.LJCRowAdd();
+      var columnName = DocClassGroupHeading.ColumnID;
+      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
+
+      mGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
     }
 

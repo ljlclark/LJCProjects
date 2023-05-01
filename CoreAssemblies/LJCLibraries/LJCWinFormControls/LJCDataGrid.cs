@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJCDataGrid.cs
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -92,6 +93,22 @@ namespace LJCWinFormControls
       retValue.Height = Font.Height + 4;
 
       return retValue;
+    }
+
+    // Updates a grid row with DbValues.
+    /// <include path='items/LJCRowSetValues2/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCRowSetValues(LJCGridRow row, DbValues dbValues)
+    {
+      if ((dbValues != null && dbValues.Count() > 0))
+      {
+        List<object> listValues = new List<object>();
+        foreach (DataGridViewColumn gridColumn in Columns)
+        {
+          listValues.Add(dbValues.LJCGetValue(gridColumn.Name));
+        }
+        var values = listValues.ToArray();
+        row.SetValues(values);
+      }
     }
 
     // Updates a grid row with the object values.

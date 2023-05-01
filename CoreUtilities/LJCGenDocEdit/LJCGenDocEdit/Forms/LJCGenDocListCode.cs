@@ -226,10 +226,12 @@ namespace LJCGenDocEdit
           RestoreControlValues();
 
           // Load first control.
+          //mAssemblyGroupGridCode.DataRetrieve();
           mAssemblyGroupGridCode.DataRetrieve();
           break;
 
         case Change.AssemblyGroup:
+          //mAssemblyItemGridCode.DataRetrieve();
           mAssemblyItemGridCode.DataRetrieve();
           mAssemblyItemComboCode.DataRetrieve();
           AssemblyComboSelect();

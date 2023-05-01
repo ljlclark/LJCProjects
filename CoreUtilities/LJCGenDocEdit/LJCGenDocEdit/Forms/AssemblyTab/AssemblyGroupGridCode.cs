@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System;
 using LJCWinFormCommon;
 using System.Drawing;
+using LJCDBMessage;
+using System.Data;
 
 namespace LJCGenDocEdit
 {
@@ -42,13 +44,13 @@ namespace LJCGenDocEdit
         DocAssemblyGroup.ColumnSequence
       };
       manager.SetOrderBy(names);
-      var dataRecords = manager.Load();
+      DbResult result = manager.Manager.Load();
 
-      if (NetCommon.HasItems(dataRecords))
+      if (DbResult.HasRows(result))
       {
-        foreach (DocAssemblyGroup dataRecord in dataRecords)
+        foreach (DbRow dbRow in result.Rows)
         {
-          RowAdd(dataRecord);
+          RowAddValues(dbRow.Values);
         }
       }
       mParent.Cursor = Cursors.Default;
@@ -84,10 +86,19 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAdd(DocAssemblyGroup dataRecord)
     {
       var retValue = mGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-
-      // Sets the row values from a data object.
+      SetStored(retValue, dataRecord);
       mGrid.LJCRowSetValues(retValue, dataRecord);
+      return retValue;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var retValue = mGrid.LJCRowAdd();
+      var columnName = DocAssemblyGroup.ColumnID;
+      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt16(columnName));
+
+      mGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
     }
 
@@ -96,17 +107,15 @@ namespace LJCGenDocEdit
     {
       if (mGrid.CurrentRow is LJCGridRow row)
       {
-        SetStoredValues(row, dataRecord);
+        SetStored(row, dataRecord);
         mGrid.LJCRowSetValues(row, dataRecord);
       }
     }
 
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DocAssemblyGroup dataRecord)
+    // Sets the row stored record values.
+    private void SetStored(LJCGridRow row, DocAssemblyGroup dataRecord)
     {
       row.LJCSetInt32(DocAssemblyGroup.ColumnID, dataRecord.ID);
-      row.LJCSetString(DocAssemblyGroup.ColumnName, dataRecord.Name);
-      row.LJCSetString(DocAssemblyGroup.ColumnHeading, dataRecord.Heading);
     }
     #endregion
 

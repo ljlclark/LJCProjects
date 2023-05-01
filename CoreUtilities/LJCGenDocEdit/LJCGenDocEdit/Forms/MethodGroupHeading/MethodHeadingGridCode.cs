@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // MethodHeadingGridCode.cs
+using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -40,13 +41,13 @@ namespace LJCGenDocEdit
         DocMethodGroupHeading.ColumnSequence
       };
       manager.SetOrderBy(names);
-      var dataRecords = manager.Load();
+      DbResult result = manager.Manager.Load();
 
-      if (NetCommon.HasItems(dataRecords))
+      if (DbResult.HasRows(result))
       {
-        foreach (DocMethodGroupHeading dataRecord in dataRecords)
+        foreach (DbRow dbRow in result.Rows)
         {
-          RowAdd(dataRecord);
+          RowAddValues(dbRow.Values);
         }
       }
       mParent.SetControlState();
@@ -83,9 +84,18 @@ namespace LJCGenDocEdit
     {
       var retValue = mGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-
-      // Sets the row values from a data object.
       mGrid.LJCRowSetValues(retValue, dataRecord);
+      return retValue;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var retValue = mGrid.LJCRowAdd();
+      var columnName = DocMethodGroupHeading.ColumnID;
+      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
+
+      mGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
     }
 
@@ -260,24 +270,6 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Other Methods
-
-    // Retrieves the current row item.
-    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal DocMethodGroupHeading CurrentItem()
-    {
-      DocMethodGroupHeading retValue = null;
-
-      if (mGrid.CurrentRow is LJCGridRow _)
-      {
-        var id = RowID();
-        if (id > 0)
-        {
-          var manager = Managers.DocMethodGroupHeadingManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
 
     // Retrieves the current row item ID.
     /// <include path='items/RowID/*' file='../../../../LJCDocLib/Common/List.xml'/>

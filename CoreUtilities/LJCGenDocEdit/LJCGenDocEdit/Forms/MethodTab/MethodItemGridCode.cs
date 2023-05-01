@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System;
 using LJCWinFormCommon;
 using System.Drawing;
+using LJCDBMessage;
 
 namespace LJCGenDocEdit
 {
@@ -38,7 +39,7 @@ namespace LJCGenDocEdit
       if (mParent.MethodGroupGrid.CurrentRow is LJCGridRow parentRow)
       {
         mParent.Cursor = Cursors.WaitCursor;
-        var parentID = (short)parentRow.LJCGetInt32(DocMethodGroup.ColumnID);
+        var groupID = (short)parentRow.LJCGetInt32(DocMethodGroup.ColumnID);
 
         var manager = Managers.DocMethodManager;
         var names = new List<string>()
@@ -46,13 +47,17 @@ namespace LJCGenDocEdit
           DocMethod.ColumnSequence
         };
         manager.SetOrderBy(names);
-        var dataRecords = manager.LoadWithGroup(parentID);
-
-        if (NetCommon.HasItems(dataRecords))
+        var keyColumns = new DbColumns()
         {
-          foreach (DocMethod dataRecord in dataRecords)
+          { DocMethod.ColumnDocMethodGroupID, groupID }
+        };
+        DbResult result = manager.Manager.Load(keyColumns);
+
+        if (DbResult.HasRows(result))
+        {
+          foreach (DbRow dbRow in result.Rows)
           {
-            RowAdd(dataRecord);
+            RowAddValues(dbRow.Values);
           }
         }
         mParent.Cursor = Cursors.Default;
@@ -90,9 +95,20 @@ namespace LJCGenDocEdit
     {
       var retValue = mGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-
-      // Sets the row values from a data object.
       mGrid.LJCRowSetValues(retValue, dataRecord);
+      return retValue;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var retValue = mGrid.LJCRowAdd();
+      var columnName = DocMethod.ColumnID;
+      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
+      columnName = DocMethod.ColumnName;
+      retValue.LJCSetString(columnName, dbValues.LJCGetValue(columnName));
+
+      mGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
     }
 
@@ -122,8 +138,9 @@ namespace LJCGenDocEdit
       if (mParentGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
-        var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
-        var parentName = parentRow.LJCGetString(DocClass.ColumnName);
+        var parentID = ParentID(parentRow);
+        var parentData = CurrentParent();
+        var parentName = parentData.Name;
 
         var detail = new AssemblyDetail()
         {
@@ -143,8 +160,9 @@ namespace LJCGenDocEdit
         && mGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
-        var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
-        var parentName = parentRow.LJCGetString(DocClass.ColumnName);
+        var parentID = ParentID(parentRow);
+        var parentData = CurrentParent();
+        var parentName = parentData.Name;
         var id = RowID();
 
         var detail = new MethodDetail()
@@ -183,7 +201,7 @@ namespace LJCGenDocEdit
       if (success)
       {
         // Data from items.
-        var parentID = parentRow.LJCGetInt32(DocClass.ColumnID);
+        var parentID = ParentID(parentRow);
         var id = RowID();
 
         var keyRecord = new DbColumns()
@@ -281,6 +299,26 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
+    /// <summary>
+    /// Retrieves the current parent row item.
+    /// </summary>
+    /// <returns>The current parent row item.</returns>
+    internal DocClass CurrentParent()
+    {
+      DocClass retValue = null;
+
+      if (mParentGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        var id = ParentID(parentRow);
+        if (id > 0)
+        {
+          var manager = Managers.DocClassManager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
+
     // The DragDrop method.
     /// <include path='items/DoDragDrop1/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal void DoDragDrop(short parentID, DragEventArgs e)
@@ -309,6 +347,22 @@ namespace LJCGenDocEdit
           DoRefresh();
         }
       }
+    }
+
+    /// <summary>
+    /// Retrieves the row parent ID.
+    /// </summary>
+    /// <param name="parentRow">The parent row.</param>
+    /// <returns>The parent row ID.</returns>
+    internal short ParentID(LJCGridRow parentRow)
+    {
+      short retValue = 0;
+
+      if (parentRow != null)
+      {
+        retValue = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
+      }
+      return retValue;
     }
 
     // Retrieves the current row item ID.
