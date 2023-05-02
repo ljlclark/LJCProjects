@@ -24,6 +24,14 @@
   </DataManagerC>
 
   <!-- Retrieve/Load Methods -->
+  <Add>
+    <summary>
+      Adds a Data Record to the database.
+    </summary>
+    <param name="dataObject">The data record.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object with the DB assigned key values.</returns>
+  </Add>
   <Delete>
     <summary>
       Deletes a Data Record with the specified ID.
@@ -40,14 +48,13 @@
     <param name="id">The ID value.</param>
     <returns>The Data Object.</returns>
   </DeleteWithID>
-  <Add>
+  <GetColumns>
     <summary>
-      Adds a Data Record to the database.
+        Gets the collection of specified columns.
     </summary>
-    <param name="dataObject">The data record.</param>
     <param name="propertyNames">The included property names.</param>
-    <returns>The Data Object with the DB assigned key values.</returns>
-  </Add>
+    <returns>The columns collection.</returns>
+  </GetColumns>
   <Load>
     <summary>
       Retrieves a collection of Data Records.
@@ -58,7 +65,7 @@
     <param name="joins">The join values.</param>
     <returns>The Data Object collection.</returns>
   </Load>
-  <LoadByDescription>
+  <LoadWithDescription>
     <summary>
       Loads a collection of data records ordered by Description.
     </summary>
@@ -67,15 +74,7 @@
     <param name="filters">The filter values.</param>
     <param name="joins">The join values.</param>
     <returns>The collection of data records.</returns>
-  </LoadByDescription>
-  <LoadWithID>
-    <summary>
-      Loads a collection of Data Records with the supplied value.
-    </summary>
-    <param name="id">The ID value.</param>
-    <param name="propertyNames">The included property names.</param>
-    <returns>The collection of Data Objects.</returns>
-  </LoadWithID>
+  </LoadWithDescription>
   <LoadWithParentID>
     <summary>
       Loads a collection of Data Records with the supplied value.
@@ -144,6 +143,15 @@
     <param name="propertyNames">The included property names.</param>
     <param name="filters">The filter values.</param>
   </Update>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied unique values.
+    </summary>
+    <param name="parentID"></param>
+    <param name="name"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </RetrieveWithUnique>
   
   <!-- GetKey Methods -->
   <GetIDKey>
@@ -168,6 +176,13 @@
     <param name="code">The Code value.</param>
     <returns>The Cdoe keys Object.</returns>
   </GetCodeKey>
+  <GetForeignKey>
+    <summary>
+      Gets the Foreign Key columns.
+    </summary>
+    <param name="foreignID">The foreign ID value.</param>
+    <returns>The foreign ID key record.</returns>
+  </GetForeignKey>
   <GetNameKey>
     <summary>
       Gets the Name keys record.      
@@ -179,9 +194,17 @@
     <summary>
       Gets the Parent ID key record.
     </summary>
-    <param name="id">The Parent ID value.</param>
+    <param name="parentID">The Parent ID value.</param>
     <returns>The Parent ID key record.</returns>
   </GetParentIDKey>
+  <GetUniqueKey>
+    <summary>
+      Gets the Unique key columns.
+    </summary>
+    <param name="parentID"></param>
+    <param name="name"></param>
+    <returns>The Unique keys object.</returns>
+  </GetUniqueKey>
   
   <!-- KeyItem Methods -->
   <DataColumns>
@@ -226,12 +249,20 @@
   <!-- OrderBys -->
   <SetOrderBy>
     <summary>Sets the current OrderBy names.</summary>
+    <param name="names">The name list.</param>
     <remarks>
       These sort columns are only valid for the next manager data method call.
     </remarks>
   </SetOrderBy>
   
   <!-- Other Public Methods -->
+  <ChangeSequence>
+    <summary>
+      Changes the moved sequence values.
+    </summary>
+    <param name="sourceSequence">The source sequence.</param>
+    <param name="targetSequence">The target sequence.</param>
+  </ChangeSequence>
   <IsDuplicate>
     <summary>
       Check for duplicate unique key.

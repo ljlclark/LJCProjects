@@ -66,11 +66,8 @@ namespace LJCDocLibDAL
       Manager.Delete(keyColumns, filters);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyNames"></param>
-    /// <returns></returns>
+    // Gets the collection of specified columns.
+    /// <include path='items/GetColumns/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames)
     {
       return Manager.DataDefinition.LJCGetColumns(propertyNames);
@@ -84,8 +81,20 @@ namespace LJCDocLibDAL
     {
       DocAssemblyGroups retValue;
 
-      var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
+      var dbResult = LoadResult(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a collection of data records.
+    /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbResult LoadResult(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
+      , DbJoins joins = null)
+    {
+      DbResult retValue;
+
+      retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
       return retValue;
     }
 
@@ -172,11 +181,8 @@ namespace LJCDocLibDAL
 
     #region Other Methods
 
-    /// <summary>
-    /// Changes the moved sequence values.
-    /// </summary>
-    /// <param name="sourceSequence">The source sequence.</param>
-    /// <param name="targetSequence">The target sequence.</param>
+    // Changes the moved sequence values.
+    /// <include path='items/ChangeSequence/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public void ChangeSequence(int sourceSequence, int targetSequence)
     {
       var parms = new ProcedureParameters()
@@ -215,9 +221,7 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Resets the sequence values.
-    /// </summary>
+    /// <summary>Resets the sequence values.</summary>
     public void ResetSequence()
     {
       var parms = new ProcedureParameters()
@@ -229,10 +233,8 @@ namespace LJCDocLibDAL
       Manager.LoadProcedure("sp_ResetSequence", parms);
     }
 
-    /// <summary>
-    /// Sets the order by names.
-    /// </summary>
-    /// <param name="names">The name list.</param>
+    // Sets the current OrderBy names.
+    /// <include path='items/SetOrderBy/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public void SetOrderBy(List<string> names)
     {
       Manager.OrderByNames = names;

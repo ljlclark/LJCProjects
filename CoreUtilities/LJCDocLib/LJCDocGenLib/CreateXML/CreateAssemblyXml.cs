@@ -104,7 +104,7 @@ namespace LJCDocGenLib
       if (docAssembly != null)
       {
         var classGroupManager = managers.DocClassGroupManager;
-        var classGroups = classGroupManager.LoadWithParent(docAssembly.ID);
+        var classGroups = classGroupManager.LoadWithParentID(docAssembly.ID);
         if (NetCommon.HasItems(classGroups))
         {
           var section = sections.Add("ClassGroups");

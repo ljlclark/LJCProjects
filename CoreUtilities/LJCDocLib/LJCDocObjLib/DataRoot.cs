@@ -37,7 +37,7 @@ namespace LJCDocObjLib
       foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
         var assemblyManager = Managers.DocAssemblyManager;
-        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
         foreach (DocAssembly docAssembly in docAssemblies)
         {
           // Check if assembly file is HTML.

@@ -52,7 +52,7 @@ namespace LJCDocGenLib
         replacements.Add("_GroupDescription_", assemblyGroup.Heading);
 
         var assemblyManager = Managers.DocAssemblyManager;
-        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
         foreach (DocAssembly docAssembly in docAssemblies)
         {
           repeatItem = assemblySection.RepeatItems.Add("");

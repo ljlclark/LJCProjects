@@ -35,7 +35,7 @@ namespace LJCGenDocEdit
         var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
 
         var manager = Managers.DocAssemblyManager;
-        var dataRecords = manager.LoadWithParent(parentID);
+        var dataRecords = manager.LoadWithParentID(parentID);
 
         if (NetCommon.HasItems(dataRecords))
         {

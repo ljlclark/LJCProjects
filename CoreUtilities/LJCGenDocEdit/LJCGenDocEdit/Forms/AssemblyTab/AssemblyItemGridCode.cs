@@ -52,7 +52,7 @@ namespace LJCGenDocEdit
         {
           { DocAssembly.ColumnDocAssemblyGroupID, parentID }
         };
-        DbResult result = manager.Manager.Load(keyColumns);
+        DbResult result = manager.LoadResult(keyColumns);
 
         if (DbResult.HasRows(result))
         {

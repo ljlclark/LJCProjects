@@ -41,7 +41,7 @@ namespace LJCGenDocEdit
         DocMethodGroupHeading.ColumnSequence
       };
       manager.SetOrderBy(names);
-      DbResult result = manager.Manager.Load();
+      DbResult result = manager.LoadResult();
 
       if (DbResult.HasRows(result))
       {

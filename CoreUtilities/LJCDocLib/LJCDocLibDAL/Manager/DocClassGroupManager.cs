@@ -72,11 +72,8 @@ namespace LJCDocLibDAL
       Manager.Delete(keyColumns, filters);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyNames"></param>
-    /// <returns></returns>
+    // Gets the collection of specified columns.
+    /// <include path='items/GetColumns/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames)
     {
       return Manager.DataDefinition.LJCGetColumns(propertyNames);
@@ -92,6 +89,18 @@ namespace LJCDocLibDAL
 
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a collection of data records.
+    /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbResult LoadResult(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
+      , DbJoins joins = null)
+    {
+      DbResult retValue;
+
+      retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
       return retValue;
     }
 
@@ -120,16 +129,14 @@ namespace LJCDocLibDAL
 
     #region Load/Retrieve Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="parentID"></param>
-    /// <returns></returns>
-    public DocClassGroups LoadWithParent(short parentID)
+    // Retrieves a collection of data records with the supplied values.
+    /// <include path='items/LoadWithParentID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DocClassGroups LoadWithParentID(short parentID
+      , List<string> propertyNames = null)
     {
-      var keyColumns = GetParentID(parentID);
+      var keyColumns = GetParentIDKey(parentID);
       var joins = GetJoins();
-      var dbResult = Manager.Load(keyColumns, joins: joins);
+      var dbResult = Manager.Load(keyColumns, propertyNames, joins: joins);
       var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
@@ -147,17 +154,11 @@ namespace LJCDocLibDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="docAssemblyID"></param>
-    /// <param name="headingName"></param>
-    /// <param name="propertyNames"></param>
-    /// <returns></returns>
-    public DocClassGroup RetrieveWithUnique(short docAssemblyID
-      , string headingName, List<string> propertyNames = null)
+    /// <include path='items/RetrieveWithUnique/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DocClassGroup RetrieveWithUnique(short parentID
+      , string name, List<string> propertyNames = null)
     {
-      var keyColumns = GetUniqueKey(docAssemblyID, headingName);
+      var keyColumns = GetUniqueKey(parentID, name);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -181,12 +182,9 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="parentID"></param>
-    /// <returns></returns>
-    public DbColumns GetParentID(int parentID)
+    // Gets the Parent key columns.
+    /// <include path='items/GetParentIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetParentIDKey(int parentID)
     {
       // Needs object cast for string to select the correct Add overload.
       var retValue = new DbColumns()
@@ -197,20 +195,15 @@ namespace LJCDocLibDAL
     }
 
     // Gets the Unique key columns.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="docAssemblyID"></param>
-    /// <param name="headingName"></param>
-    /// <returns></returns>
-    public DbColumns GetUniqueKey(short docAssemblyID
-      , string headingName)
+    /// <include path='items/GetUniqueKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetUniqueKey(short parentID
+      , string name)
     {
       // Needs object cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DocClassGroup.ColumnDocAssemblyID, docAssemblyID },
-        { DocClassGroup.ColumnHeadingName, (object)headingName}
+        { DocClassGroup.ColumnDocAssemblyID, parentID },
+        { DocClassGroup.ColumnHeadingName, (object)name}
       };
       return retValue;
     }
@@ -259,11 +252,8 @@ namespace LJCDocLibDAL
 
     #region Other Methods
 
-    /// <summary>
-    /// Changes the moved sequence values.
-    /// </summary>
-    /// <param name="sourceSequence">The source sequence.</param>
-    /// <param name="targetSequence">The target sequence.</param>
+    // Changes the moved sequence values.
+    /// <include path='items/ChangeSequence/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public void ChangeSequence(int sourceSequence, int targetSequence)
     {
       if (AssemblyID > 0)
@@ -307,9 +297,7 @@ namespace LJCDocLibDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Resets the sequence values.
-    /// </summary>
+    /// <summary>Resets the sequence values.</summary>
     public void ResetSequence()
     {
       var where = $"DocAssemblyID = {AssemblyID}";
@@ -323,10 +311,8 @@ namespace LJCDocLibDAL
       Manager.LoadProcedure("sp_ResetSequence", parms);
     }
 
-    /// <summary>
-    /// Sets the order by names.
-    /// </summary>
-    /// <param name="names">The name list.</param>
+    // Sets the current OrderBy names.
+    /// <include path='items/SetOrderBy/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
     public void SetOrderBy(List<string> names)
     {
       Manager.OrderByNames = names;

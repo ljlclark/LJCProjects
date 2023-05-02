@@ -80,7 +80,7 @@ namespace LJCDocGenLib
         builder.Append(CreateGroupSection(HTMLSection.Head, assemblyGroup.Heading));
 
         var assemblyManager = Managers.DocAssemblyManager;
-        var docAssemblies = assemblyManager.LoadWithParent(assemblyGroup.ID);
+        var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
         foreach (DocAssembly docAssembly in docAssemblies)
         {
           builder.Append(CreateAssemblySection(docAssembly.Description));

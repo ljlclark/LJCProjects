@@ -117,6 +117,7 @@
     <Content Include="bin\Debug\SQLScript\13DocMethodGroupHeading.sql" />
     <Content Include="bin\Debug\SQLScript\sp_ChangeSequence.sql" />
     <Content Include="bin\Debug\SQLScript\sp_ResetSequence.sql" />
+    <Content Include="Doc\DocClassManager.xml" />
     <Content Include="Doc\DocGenAssemblies.xml" />
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />

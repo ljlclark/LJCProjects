@@ -207,7 +207,7 @@ namespace LJCDocGenLib
         if (docClass != null)
         {
           var methodGroupManager = managers.DocMethodGroupManager;
-          var methodGroups = methodGroupManager.LoadWithParent(docClass.ID);
+          var methodGroups = methodGroupManager.LoadWithParentID(docClass.ID);
           if (NetCommon.HasItems(methodGroups))
           {
             var section = sections.Add("MethodGroups");
