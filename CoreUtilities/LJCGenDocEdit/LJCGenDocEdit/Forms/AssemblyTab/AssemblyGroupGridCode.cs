@@ -23,6 +23,7 @@ namespace LJCGenDocEdit
     /// <summary>Initializes an object instance.</summary>
     internal AssemblyGroupGridCode(LJCGenDocList parent)
     {
+      // Initialize property values.
       mParent = parent;
       mGrid = mParent.AssemblyGroupGrid;
       Managers = mParent.Managers;
@@ -396,7 +397,7 @@ namespace LJCGenDocEdit
     internal DocAssemblyGroupManager DocAssemblyGroupManager { get; set; }
 
     // The Managers object.
-    private ManagersDocGen Managers { get; set; }
+    internal ManagersDocGen Managers { get; set; }
     #endregion
 
     #region Class Data

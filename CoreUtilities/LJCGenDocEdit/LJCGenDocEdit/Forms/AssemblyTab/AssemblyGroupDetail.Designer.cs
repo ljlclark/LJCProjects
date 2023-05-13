@@ -42,6 +42,8 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -135,9 +137,11 @@
       this.DialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DialogNew,
             this.DialogPrevious,
-            this.DialogNext});
+            this.DialogNext,
+            this.toolStripSeparator1,
+            this.DialogHelp});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 100);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 171);
       // 
       // DialogNew
       // 
@@ -162,6 +166,18 @@
       this.DialogNext.Size = new System.Drawing.Size(302, 32);
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
+      // 
+      // DialogHelp
+      // 
+      this.DialogHelp.Name = "DialogHelp";
+      this.DialogHelp.Size = new System.Drawing.Size(302, 32);
+      this.DialogHelp.Text = "&Help";
+      this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
       // 
       // AssemblyGroupDetail
       // 
@@ -206,5 +222,7 @@
     private System.Windows.Forms.ToolStripMenuItem DialogNew;
     private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
     private System.Windows.Forms.ToolStripMenuItem DialogNext;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem DialogHelp;
   }
 }

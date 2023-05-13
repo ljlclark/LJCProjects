@@ -322,6 +322,13 @@ namespace LJCGenDocEdit
       }
     }
 
+    // Shows the help page.
+    private void DialogHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Method\MethodItemDetail.html");
+    }
+
     // Check for saved data.
     private bool IsDataSaved()
     {

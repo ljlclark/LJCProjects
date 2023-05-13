@@ -245,6 +245,22 @@
   <ItemGroup>
     <Content Include="bin\Debug\ConnectionTemplates.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="Help\Assembly\AssemblyGroupDetail.html" />
+    <Content Include="Help\Assembly\AssemblyGroupList.html" />
+    <Content Include="Help\Assembly\AssemblyItemDetail.html" />
+    <Content Include="Help\Assembly\AssemblyItemList.html" />
+    <Content Include="Help\Assembly\AssemblyTab.html" />
+    <Content Include="Help\Class\ClassGroupDetail.html" />
+    <Content Include="Help\Class\ClassGroupList.html" />
+    <Content Include="Help\Class\ClassItemDetail.html" />
+    <Content Include="Help\Class\ClassItemList.html" />
+    <Content Include="Help\Class\ClassTab.html" />
+    <Content Include="Help\GenDocEdit.html" />
+    <Content Include="Help\Method\MethodGroupDetail.html" />
+    <Content Include="Help\Method\MethodGroupList.html" />
+    <Content Include="Help\Method\MethodItemDetail.html" />
+    <Content Include="Help\Method\MethodItemList.html" />
+    <Content Include="Help\Method\MethodTab.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

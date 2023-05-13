@@ -1,9 +1,10 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGenDocEdit.cs
+using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
-using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -21,6 +22,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
+      LJCHelpFile = "GenDocEdit.chm";
 
       // Set default class data.
       Cursor = Cursors.Default;
@@ -109,6 +111,13 @@ namespace LJCGenDocEdit
       SaveControlValues();
       Close();
     }
+
+    // Shows the help page.
+    private void AssemblyGroupHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Assembly\AssemblyGroupList.html");
+    }
     #endregion
 
     #region Assembly Item
@@ -156,6 +165,13 @@ namespace LJCGenDocEdit
     {
       string fileSpec = $@"ExportFiles\Assembly.csv";
       AssemblyItemGrid.LJCExportData(fileSpec);
+    }
+
+    // Shows the help page.
+    private void AssemblyHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Assembly\AssemblyItemList.html");
     }
     #endregion
 
@@ -205,6 +221,13 @@ namespace LJCGenDocEdit
       string fileSpec = $@"ExportFiles\ClassGroup.csv";
       ClassGroupGrid.LJCExportData(fileSpec);
     }
+
+    // Shows the help page.
+    private void ClassGroupHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Class\ClassGroupList.html");
+    }
     #endregion
 
     #region Class Item
@@ -252,6 +275,13 @@ namespace LJCGenDocEdit
     {
       string fileSpec = $@"ExportFiles\Class.csv";
       ClassItemGrid.LJCExportData(fileSpec);
+    }
+
+    // Shows the help page.
+    private void ClassHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Class\ClassItemList.html");
     }
     #endregion
 
@@ -301,6 +331,13 @@ namespace LJCGenDocEdit
       string fileSpec = $@"ExportFiles\MethodGroup.csv";
       MethodGroupGrid.LJCExportData(fileSpec);
     }
+
+    // Shows the help page.
+    private void MethodGroupHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Method\MethodGroupList.html");
+    }
     #endregion
 
     #region Method Item
@@ -348,6 +385,13 @@ namespace LJCGenDocEdit
     {
       string fileSpec = $@"ExportFiles\Method.csv";
       MethodItemGrid.LJCExportData(fileSpec);
+    }
+
+    // Shows the help page.
+    private void MethodItemHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
+        , @"Method\MethodItemList.html");
     }
     #endregion
     #endregion
@@ -845,6 +889,17 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    #endregion
+
+    #region Internal Properties
+
+    // The help file name.
+    internal string LJCHelpFile
+    {
+      get { return mHelpFile; }
+      set { mHelpFile = NetString.InitString(value); }
+    }
+    private string mHelpFile;
     #endregion
   }
 }

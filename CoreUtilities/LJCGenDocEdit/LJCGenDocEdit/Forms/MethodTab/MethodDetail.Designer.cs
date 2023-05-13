@@ -49,6 +49,8 @@
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
       this.NameButton = new System.Windows.Forms.Button();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -179,9 +181,11 @@
       this.DialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DialogNew,
             this.DialogPrevious,
-            this.DialogNext});
+            this.DialogNext,
+            this.toolStripSeparator1,
+            this.DialogHelp});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 100);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 171);
       // 
       // DialogNew
       // 
@@ -226,6 +230,18 @@
       this.ButtonImages.TransparentColor = System.Drawing.Color.Magenta;
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
+      // 
+      // DialogHelp
+      // 
+      this.DialogHelp.Name = "DialogHelp";
+      this.DialogHelp.Size = new System.Drawing.Size(302, 32);
+      this.DialogHelp.Text = "&Help";
+      this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
       // 
       // MethodDetail
       // 
@@ -281,5 +297,7 @@
     private System.Windows.Forms.ToolStripMenuItem DialogNext;
     private System.Windows.Forms.Button NameButton;
     private System.Windows.Forms.ImageList ButtonImages;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem DialogHelp;
   }
 }

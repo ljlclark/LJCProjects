@@ -33,8 +33,8 @@ namespace _Namespace_
 
       // Initialize property values.
       LJCHelpFile = "_AppName_.chm";
-      LJCHelpPageList = "_ClassName_List.htm";
-      LJCHelpPageDetail = "_ClassName_Detail.htm";
+      LJCHelpPageList = "_ClassName_List.html";
+      LJCHelpPageDetail = "_ClassName_Detail.html";
       LJCIsSelect = false;
 
       // Set default class data.

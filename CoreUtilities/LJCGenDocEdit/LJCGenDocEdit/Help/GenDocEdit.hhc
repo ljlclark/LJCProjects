@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GenDoc Edit">
+		<param name="Local" value="GenDocEdit.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Assembly Tab">
+			<param name="Local" value="Assembly\AssemblyTab.html">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Assembly Group List">
+				<param name="Local" value="Assembly\AssemblyGroupList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Assembly Group Detail">
+				<param name="Local" value="Assembly\AssemblyGroupDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Assembly Item List">
+				<param name="Local" value="Assembly\AssemblyItemList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Assembly Item Detail">
+				<param name="Local" value="Assembly\AssemblyItemDetail.html">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Class Tab">
+			<param name="Local" value="Class\ClassTab.html">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Group List">
+				<param name="Local" value="Class\ClassGroupList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Group Detail">
+				<param name="Local" value="Class\ClassGroupDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Item List">
+				<param name="Local" value="Class\ClassItemList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Item Detail">
+				<param name="Local" value="Class\ClassItemDetail.html">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Method Tab">
+			<param name="Local" value="Method\MethodTab.html">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Group List">
+				<param name="Local" value="Method\MethodGroupList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Group Detail">
+				<param name="Local" value="Method\MethodGroupDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Item List">
+				<param name="Local" value="Method\MethodItemList.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Item Detail">
+				<param name="Local" value="Method\MethodItemDetail.html">
+				</OBJECT>
+		</UL>
+	</UL>
+</UL>
+</BODY></HTML>
