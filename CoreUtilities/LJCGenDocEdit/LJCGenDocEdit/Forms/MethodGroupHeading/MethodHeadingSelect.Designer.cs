@@ -43,6 +43,7 @@
       this.HeadingCSV = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingClose = new System.Windows.Forms.ToolStripMenuItem();
+      this.HeadingHelp = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.MethodHeadingGrid)).BeginInit();
       this.HeadingMenu.SuspendLayout();
       this.SuspendLayout();
@@ -54,6 +55,7 @@
       this.MethodHeadingGrid.AllowUserToResizeRows = false;
       this.MethodHeadingGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.MethodHeadingGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.MethodHeadingGrid.ContextMenuStrip = this.HeadingMenu;
       dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -98,9 +100,10 @@
             this.HeadingText,
             this.HeadingCSV,
             this.toolStripSeparator2,
-            this.HeadingClose});
+            this.HeadingClose,
+            this.HeadingHelp});
       this.HeadingMenu.Name = "AssemblyMenu";
-      this.HeadingMenu.Size = new System.Drawing.Size(325, 252);
+      this.HeadingMenu.Size = new System.Drawing.Size(325, 284);
       this.HeadingMenu.Text = "Assembly Group Menu";
       // 
       // GroupHeadingHeading
@@ -175,6 +178,13 @@
       this.HeadingClose.Text = "&Close";
       this.HeadingClose.Click += new System.EventHandler(this.HeadingClose_Click);
       // 
+      // HeadingHelp
+      // 
+      this.HeadingHelp.Name = "HeadingHelp";
+      this.HeadingHelp.Size = new System.Drawing.Size(324, 32);
+      this.HeadingHelp.Text = "&Help";
+      this.HeadingHelp.Click += new System.EventHandler(this.HeadingHelp_Click);
+      // 
       // MethodHeadingSelect
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -205,5 +215,6 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem HeadingClose;
     private System.Windows.Forms.ToolStripSeparator HeadingSelectSeparator;
+    private System.Windows.Forms.ToolStripMenuItem HeadingHelp;
   }
 }

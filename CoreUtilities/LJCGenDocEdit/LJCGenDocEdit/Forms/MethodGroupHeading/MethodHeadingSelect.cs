@@ -76,6 +76,13 @@ namespace LJCGenDocEdit
       SaveControlValues();
       Close();
     }
+
+    // Shows the help page.
+    private void HeadingHelp_Click(object sender, System.EventArgs e)
+    {
+      Help.ShowHelp(this, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Method\MethodHeadingSelect.html");
+    }
     #endregion
 
     #region Control Event Handlers

@@ -49,6 +49,14 @@
 				<param name="Local" value="Class\ClassGroupDetail.html">
 				</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Heading Select">
+				<param name="Local" value="Class\ClassHeadingSelect.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Heading Detail">
+				<param name="Local" value="Class\ClassHeadingDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
 				<param name="Name" value="Class Item List">
 				<param name="Local" value="Class\ClassItemList.html">
 				</OBJECT>
@@ -69,6 +77,14 @@
 			<LI> <OBJECT type="text/sitemap">
 				<param name="Name" value="Method Group Detail">
 				<param name="Local" value="Method\MethodGroupDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Heading Select">
+				<param name="Local" value="Method\MethodHeadingSelect.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Heading Detail">
+				<param name="Local" value="Method\MethodHeadingDetail.html">
 				</OBJECT>
 			<LI> <OBJECT type="text/sitemap">
 				<param name="Name" value="Method Item List">

@@ -279,7 +279,7 @@ namespace LJCGenDocEdit
       }
     }
 
-    // Save and move to the Previous record.
+    // Save and move to the Next record.
     private void DialogNext_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())
@@ -298,7 +298,7 @@ namespace LJCGenDocEdit
       }
     }
 
-    // Save and move to the Next record.
+    // Save and move to the Previous record.
     private void DialogPrevious_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())

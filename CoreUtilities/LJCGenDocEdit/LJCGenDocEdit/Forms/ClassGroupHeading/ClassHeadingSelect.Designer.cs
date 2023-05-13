@@ -43,6 +43,8 @@
       this.HeadingCSV = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingClose = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.HeadingHelp = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.ClassHeadingGrid)).BeginInit();
       this.HeadingMenu.SuspendLayout();
       this.SuspendLayout();
@@ -99,9 +101,11 @@
             this.HeadingText,
             this.HeadingCSV,
             this.toolStripSeparator2,
-            this.HeadingClose});
+            this.HeadingClose,
+            this.toolStripSeparator4,
+            this.HeadingHelp});
       this.HeadingMenu.Name = "AssemblyMenu";
-      this.HeadingMenu.Size = new System.Drawing.Size(302, 285);
+      this.HeadingMenu.Size = new System.Drawing.Size(302, 290);
       this.HeadingMenu.Text = "Assembly Group Menu";
       // 
       // GroupHeadingHeading
@@ -176,9 +180,22 @@
       this.HeadingClose.Text = "&Close";
       this.HeadingClose.Click += new System.EventHandler(this.HeadingClose_Click);
       // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(298, 6);
+      // 
+      // HeadingHelp
+      // 
+      this.HeadingHelp.Name = "HeadingHelp";
+      this.HeadingHelp.Size = new System.Drawing.Size(301, 32);
+      this.HeadingHelp.Text = "&Help";
+      this.HeadingHelp.Click += new System.EventHandler(this.HeadingHelp_Click);
+      // 
       // ClassHeadingSelect
       // 
       this.ClientSize = new System.Drawing.Size(578, 344);
+      this.ContextMenuStrip = this.HeadingMenu;
       this.Controls.Add(this.ClassHeadingGrid);
       this.Name = "ClassHeadingSelect";
       this.ShowInTaskbar = false;
@@ -205,5 +222,7 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripSeparator HeadingSelectSeparator;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripMenuItem HeadingHelp;
   }
 }

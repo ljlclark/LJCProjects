@@ -151,7 +151,7 @@ namespace LJCGenDocEdit
         // Data from items.
         var id = RowID();
 
-        var detail = new ClassHeadingDetail()
+        var detail = new MethodHeadingDetail()
         {
           LJCID = id,
           Managers = Managers

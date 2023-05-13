@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.SequenceText = new System.Windows.Forms.TextBox();
       this.SequenceLabel = new System.Windows.Forms.Label();
       this.NameText = new System.Windows.Forms.TextBox();
@@ -36,6 +37,13 @@
       this.OKButton = new System.Windows.Forms.Button();
       this.HeadingText = new System.Windows.Forms.TextBox();
       this.HeadingLabel = new System.Windows.Forms.Label();
+      this.DialogMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
+      this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // SequenceText
@@ -112,11 +120,60 @@
       this.HeadingLabel.TabIndex = 2;
       this.HeadingLabel.Text = "Heading";
       // 
+      // DialogMenu
+      // 
+      this.DialogMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.DialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DialogNew,
+            this.DialogPrevious,
+            this.DialogNext,
+            this.toolStripSeparator1,
+            this.DialogHelp});
+      this.DialogMenu.Name = "DialogMenu";
+      this.DialogMenu.Size = new System.Drawing.Size(303, 138);
+      // 
+      // DialogNew
+      // 
+      this.DialogNew.Name = "DialogNew";
+      this.DialogNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.DialogNew.Size = new System.Drawing.Size(302, 32);
+      this.DialogNew.Text = "Save and &New";
+      this.DialogNew.Click += new System.EventHandler(this.DialogNew_Click);
+      // 
+      // DialogPrevious
+      // 
+      this.DialogPrevious.Name = "DialogPrevious";
+      this.DialogPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+      this.DialogPrevious.Size = new System.Drawing.Size(302, 32);
+      this.DialogPrevious.Text = "Save and &Previous";
+      this.DialogPrevious.Click += new System.EventHandler(this.DialogPrevious_Click);
+      // 
+      // DialogNext
+      // 
+      this.DialogNext.Name = "DialogNext";
+      this.DialogNext.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+      this.DialogNext.Size = new System.Drawing.Size(302, 32);
+      this.DialogNext.Text = "&Save and Next";
+      this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
+      // 
+      // DialogHelp
+      // 
+      this.DialogHelp.Name = "DialogHelp";
+      this.DialogHelp.Size = new System.Drawing.Size(302, 32);
+      this.DialogHelp.Text = "&Help";
+      this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
+      // 
       // ClassHeadingDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(578, 173);
+      this.ContextMenuStrip = this.DialogMenu;
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
       this.Controls.Add(this.NameText);
@@ -132,6 +189,7 @@
       this.ShowInTaskbar = false;
       this.Text = "Class Group Heading Detail";
       this.Load += new System.EventHandler(this.ClassHeadingDetail_Load);
+      this.DialogMenu.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -147,5 +205,11 @@
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox HeadingText;
     private System.Windows.Forms.Label HeadingLabel;
+    private System.Windows.Forms.ContextMenuStrip DialogMenu;
+    private System.Windows.Forms.ToolStripMenuItem DialogNew;
+    private System.Windows.Forms.ToolStripMenuItem DialogPrevious;
+    private System.Windows.Forms.ToolStripMenuItem DialogNext;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem DialogHelp;
   }
 }

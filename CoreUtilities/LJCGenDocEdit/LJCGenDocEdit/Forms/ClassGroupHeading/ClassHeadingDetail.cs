@@ -230,6 +230,34 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    #region Action Event Handlers
+
+    // Save and setup for a new record.
+    private void DialogNew_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    // Save and move to the Next record.
+    private void DialogNext_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    // Save and move to the Previous record.
+    private void DialogPrevious_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    // Shows the help page.
+    private void DialogHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Class\ClassHeadingDetail.html");
+    }
+    #endregion
+
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.

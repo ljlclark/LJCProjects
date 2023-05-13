@@ -408,7 +408,7 @@ namespace LJCGenDocEdit
     // Displays the MethodGroup selection dialog.
     private void GroupButton_Click(object sender, EventArgs e)
     {
-      var list = new ClassHeadingSelect()
+      var list = new MethodHeadingSelect()
       {
         LJCIsSelect = true
       };

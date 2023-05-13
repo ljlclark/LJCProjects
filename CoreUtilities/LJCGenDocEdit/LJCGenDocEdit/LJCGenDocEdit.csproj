@@ -252,14 +252,20 @@
     <Content Include="Help\Assembly\AssemblyTab.html" />
     <Content Include="Help\Class\ClassGroupDetail.html" />
     <Content Include="Help\Class\ClassGroupList.html" />
+    <Content Include="Help\Class\ClassHeadingDetail.html" />
+    <Content Include="Help\Class\ClassHeadingSelect.html" />
     <Content Include="Help\Class\ClassItemDetail.html" />
     <Content Include="Help\Class\ClassItemList.html" />
+    <Content Include="Help\Class\ClassSelect.html" />
     <Content Include="Help\Class\ClassTab.html" />
     <Content Include="Help\GenDocEdit.html" />
     <Content Include="Help\Method\MethodGroupDetail.html" />
     <Content Include="Help\Method\MethodGroupList.html" />
+    <Content Include="Help\Method\MethodHeadingDetail.html" />
+    <Content Include="Help\Method\MethodHeadingSelect.html" />
     <Content Include="Help\Method\MethodItemDetail.html" />
     <Content Include="Help\Method\MethodItemList.html" />
+    <Content Include="Help\Method\MethodSelect.html" />
     <Content Include="Help\Method\MethodTab.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
