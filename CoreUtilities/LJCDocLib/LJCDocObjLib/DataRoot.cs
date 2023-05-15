@@ -34,9 +34,9 @@ namespace LJCDocObjLib
       bool success;
 
       DataAssemblies = new DataAssemblies();
+      var assemblyManager = Managers.DocAssemblyManager;
       foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
-        var assemblyManager = Managers.DocAssemblyManager;
         var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
         foreach (DocAssembly docAssembly in docAssemblies)
         {

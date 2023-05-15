@@ -18,17 +18,13 @@ namespace LJCDocObjLib
     {
       DataAssembly retValue = null;
 
-      if (Count != mPrevCount)
-      {
-        mPrevCount = Count;
-        Sort();
-      }
-
+      var comparer = new DataAssemblyComparer();
+      LJCSortDescription(comparer);
       DataAssembly dataAssembly = new DataAssembly(null, null, null)
       {
         Description = description
       };
-      int index = BinarySearch(dataAssembly);
+      int index = BinarySearch(dataAssembly, comparer);
       if (index > -1)
       {
         retValue = this[index];

@@ -64,6 +64,10 @@
 				<param name="Name" value="Class Item Detail">
 				<param name="Local" value="Class\ClassItemDetail.html">
 				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Class Name Select">
+				<param name="Local" value="Class\ClassSelect.html">
+				</OBJECT>
 		</UL>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Method Tab">
@@ -93,6 +97,10 @@
 			<LI> <OBJECT type="text/sitemap">
 				<param name="Name" value="Method Item Detail">
 				<param name="Local" value="Method\MethodItemDetail.html">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Method Name Select">
+				<param name="Local" value="Method\MethodSelect.html">
 				</OBJECT>
 		</UL>
 	</UL>

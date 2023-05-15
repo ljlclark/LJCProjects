@@ -180,10 +180,9 @@ namespace _Namespace_
     /// <returns>A reference to the matching item.</returns>
     public _ClassName_ LJCSearchUnique(string name)
     {
-      _ClassName_UniqueComparer comparer;
       _ClassName_ retValue = null;
 
-      comparer = new _ClassName_UniqueComparer();
+      var comparer = new _ClassName_UniqueComparer();
       LJCSortUnique(comparer);
       _ClassName_ searchItem = new _ClassName_()
       {
