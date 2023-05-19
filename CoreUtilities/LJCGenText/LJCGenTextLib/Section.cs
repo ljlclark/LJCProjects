@@ -10,6 +10,23 @@ namespace LJCGenTextLib
   /// <include path='items/Section/*' file='Doc/Section.xml'/>
   public class Section : IComparable<Section>
   {
+    #region Static Functions
+
+    /// <summary>Checks for RepeatItem data.</summary>
+    public static bool HasData(Section section)
+    {
+      bool retValue = false;
+
+      if (section != null
+        && section.RepeatItems != null
+        && section.RepeatItems.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Constructors
 
     //Initializes an object instance.
@@ -28,7 +45,7 @@ namespace LJCGenTextLib
     }
     #endregion
 
-    #region Methods
+    #region Data Methods
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -65,11 +82,36 @@ namespace LJCGenTextLib
     }
     #endregion
 
-    #region Data Properties
+    #region Other Methods
 
-    /// <summary>Gets or sets the HasData indicator.</summary>
-    [XmlIgnore()]
-    public bool HasData { get; set; }
+    /// <summary>Checks for RepeatItem data.</summary>
+    public bool HasData()
+    {
+      bool retValue = false;
+
+      if (RepeatItems != null
+        && RepeatItems.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for SubSection.</summary>
+    public bool HasSubSection()
+    {
+      bool retValue = false;
+
+      if (CurrentRepeatItem != null
+        && CurrentRepeatItem.SubSection != null)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Data Properties
 
     /// <summary>Gets or sets the IsList indicator.</summary>
     [XmlIgnore()]

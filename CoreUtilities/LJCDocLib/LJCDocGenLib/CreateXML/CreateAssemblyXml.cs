@@ -100,7 +100,7 @@ namespace LJCDocGenLib
       var docAssemblyManager = managers.DocAssemblyManager;
       var docAssembly = docAssemblyManager.RetrieveWithName(DataAssembly.Name);
 
-      // Get the DocGroups for the DocAssembly.
+      // Get the DocClassGroups for the DocAssembly.
       if (docAssembly != null)
       {
         var classGroupManager = managers.DocClassGroupManager;
@@ -114,7 +114,7 @@ namespace LJCDocGenLib
             var repeatItem = repeatItems.Add(classGroup.HeadingName);
             repeatItem.Replacements.Add("_Heading_", classGroup.HeadingName);
 
-            // Get the DocClasses for the DocGroup.
+            // Get the DocClasses for the DocClassGroup.
             var classManager = managers.DocClassManager;
             var docClasses
               = classManager.LoadWithGroup(classGroup.ID);

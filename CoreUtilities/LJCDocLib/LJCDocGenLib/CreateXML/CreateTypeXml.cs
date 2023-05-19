@@ -222,7 +222,7 @@ namespace LJCDocGenLib
               }
               repeatItem.Replacements.Add("_Heading_", heading);
 
-              // Get the DocClasses for the DocGroup.
+              // Get the DocMethods for the DocMethodGroup.
               var methodManager = managers.DocMethodManager;
               var docMethods
                 = methodManager.LoadWithGroup(methodGroup.ID);

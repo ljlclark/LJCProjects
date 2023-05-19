@@ -83,6 +83,12 @@ namespace LJCDocObjLib
     /// <include path='items/CreateMethodsData/*' file='Doc/DataType.xml'/>
     public void CreateMethodsData(DataAssembly dataAssembly)
     {
+      // T - Type
+      // M - Method
+      // P - Property
+      // F - Field
+      // E - Event
+
       string prefix = $"M:{NamespaceValue}.{Name}";
       List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
       DocMembers methodMembers = new DocMembers();

@@ -19,12 +19,6 @@ namespace LJCDocGen
     /// <include path='items/MainArgs/*' file='../../LJCDocLib/Common/Program.xml'/>
     private static void Main(string[] args)
     {
-      // T - Type
-      // M - Method
-      // P - Property
-      // F - Field
-      // E - Event
-
       bool success = true;
       if (args.Length < 0 || args.Length > 2)
       {

@@ -76,6 +76,7 @@
     <Content Include="Doc\Section.xml" />
     <Content Include="Doc\Sections.xml" />
     <Content Include="Doc\XMLData.xml" />
+    <Content Include="Flow.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\GenTextLib.cd" />
