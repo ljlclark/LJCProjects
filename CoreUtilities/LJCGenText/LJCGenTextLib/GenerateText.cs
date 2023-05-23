@@ -128,7 +128,7 @@ namespace LJCGenTextLib
 
             switch (directive.ID.ToLower())
             {
-              case Directive.BeginSection:
+              case Directive.SectionBegin:
                 section = retValue.LJCSearchName(directive.Name);
                 if (null == section)
                 {
@@ -136,7 +136,7 @@ namespace LJCGenTextLib
                 }
                 break;
 
-              case Directive.EndSection:
+              case Directive.SectionEnd:
                 section = null;
                 break;
             }
@@ -172,7 +172,247 @@ namespace LJCGenTextLib
     }
     #endregion
 
-    #region Private Methods
+    #region Private Main Processing Methods
+
+    // Adds the current Section object to the Active List.
+    // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
+    private Section AddActiveSection(Section currentSection, Directive directive
+      , int lineIndex)
+    {
+      // Get directive Section data.
+      Section retValue = Sections.LJCSearchName(directive.Name);
+
+      // No Section data.
+      if (null == retValue
+        && currentSection != null)
+      {
+        if (currentSection.HasSubSection())
+        {
+          // Add SubSection if it exists.
+          Section subSection = currentSection.CurrentRepeatItem.SubSection;
+          if (subSection != null)
+          {
+            retValue = subSection;
+          }
+        }
+      }
+
+      // Add directive Section even if there is no Section data.
+      if (null == retValue)
+      {
+        retValue = new Section()
+        {
+          Name = directive.Name
+        };
+      }
+
+      retValue.EndProcessing = true;
+      if (retValue.HasData())
+      {
+        if (directive.Modifier != null
+          && "list" == directive.Modifier.ToLower())
+        {
+          retValue.IsList = true;
+        }
+        if (retValue.RepeatItems.Count > 1)
+        {
+          retValue.EndProcessing = false;
+        }
+      }
+      retValue.StartLineIndex = lineIndex + 1;
+      ActiveSections.Add(retValue);
+      return retValue;
+    }
+
+    // Handle begin directive and do not generate line.
+    private bool BeginSection(Section currentSection, Directive directive
+      , ref int lineIndex)
+    {
+      bool retValue = false;
+
+      if (Directive.IsSectionBegin(directive))
+      {
+        retValue = true;
+
+        // Add section to ActiveSections with the section starting index.
+        var addSection = AddActiveSection(currentSection, directive, lineIndex);
+        if (addSection.HasData())
+        {
+          GenSection(addSection);
+
+          // Set index to continue at end of processed section.
+          lineIndex = SectionEndLineIndex;
+        }
+        else
+        {
+          mProcessLines = false;
+        }
+      }
+      return retValue;
+    }
+
+    // Generates the code for the current RepeatItem.
+    // <include path='items/GenRepeatItem/*' file='Doc/GenerateText.xml'/>
+    private void GenRepeatItem(Section currentSection)
+    {
+      // Start at the beginning of the section.
+      var startLineIndex = currentSection.StartLineIndex;
+      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
+        lineIndex++)
+      {
+        string line = TemplateLines[lineIndex];
+        var directive = Directive.GetDirective(line);
+
+        // Testing
+        if (directive != null
+          && ("TypeRemarks" == directive.Name
+          || "Links" == directive.Name
+          || "MethodGroups" == directive.Name
+          || "SubSection" == directive.Name))
+        {
+          int i = 0;
+        }
+
+        // Sets line to null if a Section directive.
+        // May change lineIndex to end of section or template.
+        if (false == SectionDirective(currentSection, directive, ref line
+          , ref lineIndex))
+        {
+          if (line != null
+            && currentSection.HasData())
+          {
+            // Sets line to null if other directive.
+            if (false == OtherDirective(currentSection, directive, ref line
+              , ref lineIndex))
+            {
+              line = ReplaceValues(line);
+              if (currentSection.IsList
+                && false == currentSection.EndProcessing)
+              {
+                line += ",";
+              }
+            }
+          }
+
+          if (mProcessLines
+            && line != null)
+          {
+            OutLines.Add(line);
+          }
+        }
+      }
+    }
+
+    // Generates each RepeatItem in a section.
+    // <include path='items/GenSection/*' file='Doc/GenerateText.xml'/>
+    private void GenSection(Section currentSection)
+    {
+      mProcessLines = true;
+
+      //currentSection.LastRepeatItem = false;
+      for (int index = 0; index < currentSection.RepeatItems.Count; index++)
+      {
+        RepeatItem repeatItem = currentSection.RepeatItems[index];
+        currentSection.CurrentRepeatItem = repeatItem;
+        if (index == currentSection.RepeatItems.Count - 1)
+        {
+          currentSection.EndProcessing = true;
+        }
+        GenRepeatItem(currentSection);
+      }
+    }
+
+    // Generates lines outside of any Section.
+    private void GenSectionNone()
+    {
+      int startLineIndex = 0;
+      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
+        lineIndex++)
+      {
+        string line = TemplateLines[lineIndex];
+        var directive = Directive.GetDirective(line);
+
+        if (Directive.IsSectionBegin(directive))
+        {
+          line = null;
+
+          // Calls GenSection() with section values.
+          Section section = null;
+          BeginSection(section, directive, ref lineIndex);
+          // Returns when no longer in a section.
+        }
+
+        if (line != null
+          && false == line.Trim().StartsWith("<!--X-"))
+        {
+          OutLines.Add(line);
+        }
+      }
+    }
+
+    // Handle Section Directives
+    private bool SectionDirective(Section currentSection, Directive directive
+      , ref string line, ref int lineIndex)
+    {
+      bool retValue = false;
+
+      if (line != null
+        && line.Trim().StartsWith("<!--X-"))
+      {
+        line = null;
+      }
+
+      // Handle directive and do not generate line.
+      if (line != null)
+      {
+        retValue = BeginSection(currentSection, directive, ref lineIndex);
+        if (retValue)
+        {
+          line = null;
+        }
+      }
+
+      if (Directive.IsSectionEnd(directive))
+      {
+        line = null;
+
+        if (currentSection.EndProcessing
+          || false == mProcessLines
+          || Directive.IsSubsection(directive))
+        {
+          retValue = true;
+
+          SectionEndLineIndex = lineIndex;
+
+          if (IsProcessing(currentSection, directive)
+            || IsEmptySubsection(directive))
+          {
+            // Stop processing RepeatItems.
+            lineIndex = TemplateLines.Length;
+          }
+
+          if (false == Directive.IsSubsection(directive)
+            || IsEmptySubsection(directive))
+          {
+            RemoveActiveSection();
+            if (ActiveSections.Count > 0)
+            {
+              var section = ActiveSections[ActiveSections.Count - 1];
+              mProcessLines = section.HasData();
+            }
+            else
+            {
+              // Continue processing outside of section.
+              mProcessLines = true;
+            }
+          }
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Other Private Methods
 
     // Retrieves the active session replacement value.
     // <include path='items/ActiveSessionReplacementValue/*' file='Doc/GenerateText.xml'/>
@@ -212,82 +452,10 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Adds the current Section object to the Active List.
-    // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
-    private Section AddActiveSection(Section currentSection, Directive directive
-      , int lineIndex)
-    {
-      // Get directive Section data.
-      Section retValue = Sections.LJCSearchName(directive.Name);
-
-      // No Section data.
-      if (null == retValue
-        && currentSection != null)
-      {
-        if (currentSection.HasSubSection())
-        {
-          // Add SubSection if it exists.
-          Section subSection = currentSection.CurrentRepeatItem.SubSection;
-          if (subSection != null)
-          {
-            retValue = subSection;
-          }
-        }
-      }
-
-      // Add directive Section even if there is no Section data.
-      if (null == retValue)
-      {
-        retValue = new Section()
-        {
-          Name = directive.Name,
-        };
-      }
-
-      if (retValue.HasData())
-      {
-        if (directive.Modifier != null
-          && "list" == directive.Modifier.ToLower())
-        {
-          retValue.IsList = true;
-        }
-      }
-      retValue.StartLineIndex = lineIndex + 1;
-      ActiveSections.Add(retValue);
-      return retValue;
-    }
-
-    // Handle begin directive and do not generate line.
-    private bool BeginSection(Section currentSection, Directive directive
-      , ref int lineIndex)
-    {
-      bool retValue = false;
-
-      if (Directive.IsBeginSection(directive))
-      {
-        retValue = true;
-
-        // Add section to ActiveSections with the section starting index.
-        var addSection = AddActiveSection(currentSection, directive, lineIndex);
-        if (addSection.HasData())
-        {
-          GenSection(addSection);
-
-          // Set the index to continue at the end of the processed section.
-          lineIndex = SectionEndLineIndex;
-        }
-        else
-        {
-          mProcessLines = false;
-        }
-      }
-      return retValue;
-    }
-
     // Generate the If Block statements.
     // <include path='items/GenIfBegin/*' file='Doc/GenerateText.xml'/>
     private void GenIfBlock(Section section, Directive directive
-      , ref int lineIndex, bool lastRepeatItem)
+      , ref int lineIndex)
     {
       lineIndex++;
       bool isValid = false;
@@ -300,6 +468,7 @@ namespace LJCGenTextLib
             isValid = true;
           }
           break;
+
         default:
           if (NetString.HasValue(replacementValue))
           {
@@ -310,6 +479,7 @@ namespace LJCGenTextLib
           }
           break;
       }
+
       for (int ifIndex = lineIndex; ifIndex < TemplateLines.Length; ifIndex++)
       {
         string line = TemplateLines[ifIndex];
@@ -336,7 +506,7 @@ namespace LJCGenTextLib
           if (mProcessLines && isValid)
           {
             line = ReplaceValues(line);
-            if (section.IsList && false == lastRepeatItem)
+            if (section.IsList && false == section.EndProcessing)
             {
               string trimLine = line.Trim();
               if (trimLine[trimLine.Length - 1] != ',')
@@ -346,102 +516,6 @@ namespace LJCGenTextLib
             }
             OutLines.Add(line);
           }
-        }
-      }
-    }
-
-    // Generates the code for the current RepeatItem.
-    // <include path='items/GenRepeatItem/*' file='Doc/GenerateText.xml'/>
-    private void GenRepeatItem(Section currentSection
-      , bool lastRepeatItem = false)
-    {
-      // Start at the beginning of the section.
-      var startLineIndex = currentSection.StartLineIndex;
-      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
-        lineIndex++)
-      {
-        string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line);
-
-        // Testing
-        if (directive != null
-          && "Links" == directive.Name)
-        {
-          int i = 0;
-        }
-
-        // Sets line to null if a Section directive.
-        // May change lineIndex to end of section or template.
-        if (false == SectionDirective(currentSection, directive, ref line
-          , lastRepeatItem, ref lineIndex))
-        {
-          if (line != null
-            && currentSection.HasData())
-          {
-            // Sets line to null if other directive.
-            if (false == OtherDirective(currentSection, directive, ref line
-              , lastRepeatItem, ref lineIndex))
-            {
-              line = ReplaceValues(line);
-              if (currentSection.IsList && false == lastRepeatItem)
-              {
-                line += ",";
-              }
-            }
-          }
-
-          if (mProcessLines
-            && line != null)
-          {
-            OutLines.Add(line);
-          }
-        }
-      }
-    }
-
-    // Generates each RepeatItem in a section.
-    // <include path='items/GenSection/*' file='Doc/GenerateText.xml'/>
-    private void GenSection(Section currentSection)
-    {
-      mProcessLines = true;
-
-      bool lastRepeateItem = false;
-      for (int index = 0; index < currentSection.RepeatItems.Count; index++)
-      {
-        RepeatItem repeatItem = currentSection.RepeatItems[index];
-        currentSection.CurrentRepeatItem = repeatItem;
-        if (index == currentSection.RepeatItems.Count - 1)
-        {
-          lastRepeateItem = true;
-        }
-        GenRepeatItem(currentSection, lastRepeateItem);
-      }
-    }
-
-    // Generates lines outside of any Section.
-    private void GenSectionNone()
-    {
-      int startLineIndex = 0;
-      for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
-        lineIndex++)
-      {
-        string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line);
-
-        if (Directive.IsBeginSection(directive))
-        {
-          line = null;
-
-          // Calls GenSection() with section values.
-          Section section = null;
-          BeginSection(section, directive, ref lineIndex);
-          // Returns when no longer in a section.
-        }
-
-        if (line != null
-          && false == line.Trim().StartsWith("<!--X-"))
-        {
-          OutLines.Add(line);
         }
       }
     }
@@ -499,9 +573,35 @@ namespace LJCGenTextLib
       return retValue;
     }
 
+    // Check if an empty subsection.
+    private bool IsEmptySubsection(Directive directive)
+    {
+      bool retValue = false;
+
+      if (Directive.IsSubsection(directive)
+        && false == mProcessLines)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks if processing repeat items.
+    private bool IsProcessing(Section currentSection, Directive directive)
+    {
+      bool retValue = false;
+
+      if ((Section.HasData(currentSection)
+        && currentSection.Name == directive.Name))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Handle other directives.
     private bool OtherDirective(Section section, Directive directive
-      , ref string line, bool lastRepeatItem, ref int lineIndex)
+      , ref string line, ref int lineIndex)
     {
       bool retValue = false;
 
@@ -517,7 +617,7 @@ namespace LJCGenTextLib
         {
           retValue = true;
           line = null;
-          GenIfBlock(section, directive, ref lineIndex, lastRepeatItem);
+          GenIfBlock(section, directive, ref lineIndex);
         }
       }
       return retValue;
@@ -566,62 +666,6 @@ namespace LJCGenTextLib
           if (false == doNextLevel)
           {
             break;
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Handle Section Directives
-    private bool SectionDirective(Section currentSection, Directive directive
-      , ref string line, bool lastRepeatItem, ref int lineIndex)
-    {
-      bool retValue = false;
-
-      if (line != null
-        && line.Trim().StartsWith("<!--X-"))
-      {
-        line = null;
-      }
-
-      // Handle directive and do not generate line.
-      if (line != null)
-      {
-        retValue = BeginSection(currentSection, directive, ref lineIndex);
-        if (retValue)
-        {
-          line = null;
-        }
-      }
-
-      if (line != null
-        && false == retValue
-        && Directive.IsEndSection(directive))
-      {
-        retValue = true;
-        line = null;
-
-        // *** Next Statement *** Change- 3/19/23
-        if (Section.HasData(currentSection)
-          && currentSection.Name == directive.Name)
-        {
-          // If current section changed stop processing lines for
-          // current Repeatitem.
-          SectionEndLineIndex = lineIndex;
-          lineIndex = TemplateLines.Length;
-        }
-
-        if ((false == Section.HasData(currentSection))
-          || lastRepeatItem)
-        {
-          RemoveActiveSection();
-          if (ActiveSections.Count > 0)
-          {
-            mProcessLines = ActiveSections[ActiveSections.Count - 1].HasData();
-          }
-          else
-          {
-            mProcessLines = true;
           }
         }
       }

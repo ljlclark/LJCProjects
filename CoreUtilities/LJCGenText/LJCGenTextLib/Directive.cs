@@ -47,13 +47,52 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks for Begin Section.</summary>
-    public static bool IsBeginSection(Directive directive)
+    // Checks for a valid IfBegin directive.
+    internal static bool IsIfBegin(Directive directive)
     {
       bool retValue = false;
 
       if (directive != null
-        && BeginSection == directive.ID.ToLower())
+        && IfBegin == directive.ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a valid IfElse directive.
+    internal static bool IsIfElse(Directive directive)
+    {
+      bool retValue = false;
+
+      if (directive != null
+        && IfElse == directive.ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a valid IfEnd directive.
+    internal static bool IsIfEnd(Directive directive)
+    {
+      bool retValue = false;
+
+      if (directive != null
+        && IfEnd == directive.ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for Begin Section.</summary>
+    public static bool IsSectionBegin(Directive directive)
+    {
+      bool retValue = false;
+
+      if (directive != null
+        && SectionBegin == directive.ID.ToLower())
       {
         retValue = true;
       }
@@ -61,12 +100,12 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid SectionEnd directive.
-    internal static bool IsEndSection(Directive directive)
+    internal static bool IsSectionEnd(Directive directive)
     {
       bool retValue = false;
 
       if (directive != null
-        && EndSection == directive.ID.ToLower())
+        && SectionEnd == directive.ID.ToLower())
       {
         retValue = true;
       }
@@ -79,8 +118,21 @@ namespace LJCGenTextLib
       bool retValue = false;
 
       if (directive != null
-        && (IsBeginSection(directive)
-        || IsEndSection(directive)))
+        && (IsSectionBegin(directive)
+        || IsSectionEnd(directive)))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if a subsection.
+    internal static bool IsSubsection(Directive directive)
+    {
+      bool retValue = false;
+
+      if (directive != null
+        && "subsection" == directive.Name.ToLower())
       {
         retValue = true;
       }
@@ -94,45 +146,6 @@ namespace LJCGenTextLib
 
       if (directive != null
         && ValueDirective == directive.ID.ToLower())
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks for a valid IfBegin directive.
-    internal static bool IsIfBegin(Directive directive)
-    {
-      bool retValue = false;
-
-      if (directive != null
-        && BeginIf == directive.ID.ToLower())
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks for a valid IfElse directive.
-    internal static bool IsIfElse(Directive directive)
-    {
-      bool retValue = false;
-
-      if (directive != null
-        && ElseIf == directive.ID.ToLower())
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks for a valid IfEnd directive.
-    internal static bool IsIfEnd(Directive directive)
-    {
-      bool retValue = false;
-
-      if (directive != null
-        && EndIf == directive.ID.ToLower())
       {
         retValue = true;
       }
@@ -190,12 +203,12 @@ namespace LJCGenTextLib
 
     #region Class Data
 
-    internal const string BeginSection = "#sectionbegin";
-    internal const string EndSection = "#sectionend";
+    internal const string IfBegin = "#ifbegin";
+    internal const string IfElse = "#ifelse";
+    internal const string IfEnd = "#ifend";
+    internal const string SectionBegin = "#sectionbegin";
+    internal const string SectionEnd = "#sectionend";
     internal const string ValueDirective = "#value";
-    internal const string BeginIf = "#ifbegin";
-    internal const string ElseIf = "#ifelse";
-    internal const string EndIf = "#ifend";
     #endregion
   }
 }

@@ -130,6 +130,9 @@ namespace LJCGenTextLib
     [XmlIgnore()]
     public RepeatItem CurrentRepeatItem { get; set; }
 
+    /// <summary>Gets or sets the EndProcessing flag.</summary>
+    public bool EndProcessing { get; set; }
+
     /// <summary>Gets or sets the starting line index.</summary>
     [XmlIgnore()]
     public int StartLineIndex { get; set; }
