@@ -64,7 +64,7 @@ namespace LJCGenTextLib
     public Replacements Replacements { get; set; }
 
     /// <summary>Gets or sets the sub section.</summary>
-    public Section SubSection { get; set; }
+    public Section Subsection { get; set; }
   }
   #endregion
 }

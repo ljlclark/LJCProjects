@@ -97,13 +97,26 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks for SubSection.</summary>
-    public bool HasSubSection()
+    /// <summary>Checks for Subsection.</summary>
+    public bool HasSubsection()
     {
       bool retValue = false;
 
       if (CurrentRepeatItem != null
-        && CurrentRepeatItem.SubSection != null)
+        && CurrentRepeatItem.Subsection != null)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for Current Subsection RepeatItems.</summary>
+    public bool HasSubsectionData()
+    {
+      bool retValue = false;
+
+      if (HasSubsection()
+        && CurrentRepeatItem.Subsection.HasData())
       {
         retValue = true;
       }
