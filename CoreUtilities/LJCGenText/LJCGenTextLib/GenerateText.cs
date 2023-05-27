@@ -186,10 +186,10 @@ namespace LJCGenTextLib
       if (null == retValue
         && currentSection != null)
       {
-        if (currentSection.HasSubSection())
+        if (currentSection.HasSubsection())
         {
           // Add SubSection if it exists.
-          Section subSection = currentSection.CurrentRepeatItem.SubSection;
+          Section subSection = currentSection.CurrentRepeatItem.Subsection;
           if (subSection != null)
           {
             retValue = subSection;
@@ -378,7 +378,8 @@ namespace LJCGenTextLib
 
         if (currentSection.EndProcessing
           || false == mProcessLines
-          || Directive.IsSubsection(directive))
+          || Directive.IsSubsection(directive)
+          || currentSection.HasSubsectionData())
         {
           retValue = true;
 
@@ -391,7 +392,7 @@ namespace LJCGenTextLib
             lineIndex = TemplateLines.Length;
           }
 
-          if (false == Directive.IsSubsection(directive)
+          if (currentSection.EndProcessing
             || IsEmptySubsection(directive))
           {
             RemoveActiveSection();
@@ -592,7 +593,7 @@ namespace LJCGenTextLib
       bool retValue = false;
 
       if ((Section.HasData(currentSection)
-        && currentSection.Name == directive.Name))
+        && currentSection.Name.ToLower() == directive.Name.ToLower()))
       {
         retValue = true;
       }
