@@ -229,8 +229,8 @@ namespace LJCDocGenLib
               if (NetCommon.HasItems(docMethods))
               {
                 retValue = true;
-                repeatItem.SubSection = new Section("SubSection");
-                var subRepeatItems = repeatItem.SubSection.RepeatItems;
+                repeatItem.Subsection = new Section("Subsection");
+                var subRepeatItems = repeatItem.Subsection.RepeatItems;
                 foreach (var docMethod in docMethods)
                 {
                   var methodName = docMethod.Name;

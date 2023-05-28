@@ -121,8 +121,8 @@ namespace LJCDocGenLib
             if (NetCommon.HasItems(docClasses))
             {
               retValue = true;
-              repeatItem.SubSection = new Section("SubSection");
-              var subRepeatItems = repeatItem.SubSection.RepeatItems;
+              repeatItem.Subsection = new Section("Subsection");
+              var subRepeatItems = repeatItem.Subsection.RepeatItems;
               foreach (var docClass in docClasses)
               {
                 var className = docClass.Name;

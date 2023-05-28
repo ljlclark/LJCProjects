@@ -265,10 +265,8 @@ namespace LJCGenTextLib
 
         // Testing
         if (directive != null
-          && ("TypeRemarks" == directive.Name
-          || "Links" == directive.Name
-          || "MethodGroups" == directive.Name
-          || "SubSection" == directive.Name))
+          && ("Subsection" == directive.Name.ToLower()
+          || "PublicMethods" == directive.Name))
         {
           int i = 0;
         }
@@ -375,37 +373,29 @@ namespace LJCGenTextLib
       if (Directive.IsSectionEnd(directive))
       {
         line = null;
+        retValue = true;
+        SectionEndLineIndex = lineIndex;
+
+        if (IsProcessing(currentSection, directive)
+          || IsEmptySubsection(directive))
+        {
+          // Stop processing RepeatItem.
+          lineIndex = TemplateLines.Length;
+        }
 
         if (currentSection.EndProcessing
-          || false == mProcessLines
-          || Directive.IsSubsection(directive)
-          || currentSection.HasSubsectionData())
+          || IsEmptySubsection(directive))
         {
-          retValue = true;
-
-          SectionEndLineIndex = lineIndex;
-
-          if (IsProcessing(currentSection, directive)
-            || IsEmptySubsection(directive))
+          RemoveActiveSection();
+          if (ActiveSections.Count > 0)
           {
-            // Stop processing RepeatItems.
-            lineIndex = TemplateLines.Length;
+            var section = ActiveSections[ActiveSections.Count - 1];
+            mProcessLines = section.HasData();
           }
-
-          if (currentSection.EndProcessing
-            || IsEmptySubsection(directive))
+          else
           {
-            RemoveActiveSection();
-            if (ActiveSections.Count > 0)
-            {
-              var section = ActiveSections[ActiveSections.Count - 1];
-              mProcessLines = section.HasData();
-            }
-            else
-            {
-              // Continue processing outside of section.
-              mProcessLines = true;
-            }
+            // Continue processing outside of section.
+            mProcessLines = true;
           }
         }
       }
