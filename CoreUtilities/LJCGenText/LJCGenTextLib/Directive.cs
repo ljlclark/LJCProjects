@@ -86,6 +86,19 @@ namespace LJCGenTextLib
       return retValue;
     }
 
+    // Checks the Name value.
+    internal static bool IsName(Directive directive, string name
+      , bool caseInsensitive = true)
+    {
+      bool retValue = false;
+
+      if (directive != null)
+      {
+        retValue = directive.IsName(name, caseInsensitive);
+      }
+      return retValue;
+    }
+
     /// <summary>Checks for Begin Section.</summary>
     public static bool IsSectionBegin(Directive directive)
     {
@@ -132,7 +145,7 @@ namespace LJCGenTextLib
       bool retValue = false;
 
       if (directive != null
-        && "subsection" == directive.Name.ToLower())
+        && directive.IsName("Subsection"))
       {
         retValue = true;
       }
@@ -171,7 +184,7 @@ namespace LJCGenTextLib
     }
     #endregion
 
-    #region Public Methods
+    #region Data Methods
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -186,6 +199,36 @@ namespace LJCGenTextLib
     public override string ToString()
     {
       return $"{ID},{Name}";
+    }
+    #endregion
+
+    #region Other Methods
+
+    /// <summary>
+    /// Checks the Name value.
+    /// </summary>
+    /// <param name="name">The Name value.</param>
+    /// <param name="caseInsensitive">Use insensitive compare.</param>
+    /// <returns>True if equal, otherwise false.</returns>
+    public bool IsName(string name, bool caseInsensitive = true)
+    {
+      bool retValue = false;
+
+      if (caseInsensitive)
+      {
+        if (Name.ToLower() == name.ToLower())
+        {
+          retValue = true;
+        }
+      }
+      else
+      {
+        if (Name == name)
+        {
+          retValue = true;
+        }
+      }
+      return retValue;
     }
     #endregion
 

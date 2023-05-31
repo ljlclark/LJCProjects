@@ -263,10 +263,9 @@ namespace LJCGenTextLib
         string line = TemplateLines[lineIndex];
         var directive = Directive.GetDirective(line);
 
-        // Testing
-        if (directive != null
-          && ("Subsection" == directive.Name.ToLower()
-          || "PublicMethods" == directive.Name))
+        // Debugging
+        if (Directive.IsName(directive, "Subsection")
+          || Directive.IsName(directive, "PublicMethods"))
         {
           int i = 0;
         }
@@ -377,7 +376,7 @@ namespace LJCGenTextLib
         SectionEndLineIndex = lineIndex;
 
         if (IsProcessing(currentSection, directive)
-          || IsEmptySubsection(directive))
+          || SubSectionParentHasData(directive))
         {
           // Stop processing RepeatItem.
           lineIndex = TemplateLines.Length;
@@ -569,10 +568,35 @@ namespace LJCGenTextLib
     {
       bool retValue = false;
 
+      var index = ActiveSections.Count - 1;
+      var currentSection = ActiveSections[index];
       if (Directive.IsSubsection(directive)
-        && false == mProcessLines)
+        && false == currentSection.HasData())
       {
         retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if parent has data.
+    private bool SubSectionParentHasData(Directive directive)
+    {
+      bool retValue = false;
+
+      var index = ActiveSections.Count - 1;
+      var currentSection = ActiveSections[index];
+      if (Directive.IsSubsection(directive)
+        || Section.HasSubsection(currentSection))
+      {
+        if (Section.IsName(currentSection, "Subsection"))
+        {
+          index--;
+          currentSection = ActiveSections[index];
+        }
+        if (Section.HasData(currentSection))
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }
@@ -606,6 +630,10 @@ namespace LJCGenTextLib
 
         if (Directive.IsIfBegin(directive))
         {
+          if (directive.IsName("_PublicMethodCount_"))
+          {
+            int i = 0;
+          }
           retValue = true;
           line = null;
           GenIfBlock(section, directive, ref lineIndex);
@@ -640,11 +668,18 @@ namespace LJCGenTextLib
         RepeatItems repeatItems = ActiveSessionsRepeatItems();
         foreach (RepeatItem repeatItem in repeatItems)
         {
+          var replacements = repeatItem.Replacements;
           bool doNextLevel = false;
           foreach (string token in genTokens)
           {
+            // Debugging
+            //if ("_methodlistpreface_" == token.ToLower())
+            //{
+            //  int i = 0;
+            //}
+
             // Replace values if the token has a replacement value.
-            Replacement replacement = repeatItem.Replacements.LJCSearchName(token);
+            Replacement replacement = replacements.LJCSearchName(token);
             if (replacement != null)
             {
               retValue = retValue.Replace(token, replacement.Value);

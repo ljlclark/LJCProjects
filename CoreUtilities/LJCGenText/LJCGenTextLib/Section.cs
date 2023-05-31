@@ -18,10 +18,34 @@ namespace LJCGenTextLib
       bool retValue = false;
 
       if (section != null
-        && section.RepeatItems != null
-        && section.RepeatItems.Count > 0)
+        && section.HasData())
       {
         retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for Subsection.</summary>
+    public static bool HasSubsection(Section section)
+    {
+      bool retValue = false;
+
+      if (section != null
+        && section.HasSubsection())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for specified name.</summary>
+    public static bool IsName(Section section, string name)
+    {
+      bool retValue = false;
+
+      if (section != null)
+      {
+        retValue = section.IsName(name);
       }
       return retValue;
     }
@@ -117,6 +141,18 @@ namespace LJCGenTextLib
 
       if (HasSubsection()
         && CurrentRepeatItem.Subsection.HasData())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks for specified name.</summary>
+    public bool IsName(string name)
+    {
+      bool retValue = false;
+
+      if (Name.ToLower() == name.ToLower())
       {
         retValue = true;
       }
