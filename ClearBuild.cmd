@@ -21,6 +21,7 @@ call CoreAssemblies\LJCTextDataReader\ClearTextDataReader.cmd ClearAll
 rem CoreUtilities
 call CoreUtilities\LJCCodeLineCounter\ClearCodeLineCounter.cmd ClearAll
 call CoreUtilities\LJCDocLib\ClearDocLib.cmd ClearAll
+call CoreUtilities\LJCGenDocEdit\ClearGenDocEdit.cmd ClearAll
 call CoreUtilities\LJCGenText\ClearGenText.cmd ClearAll
 call CoreUtilities\LJCGenText\ClearGenTextData.cmd ClearAll
 call CoreUtilities\LJCSQLUtilLib\ClearSQLUtilLib.cmd ClearAll

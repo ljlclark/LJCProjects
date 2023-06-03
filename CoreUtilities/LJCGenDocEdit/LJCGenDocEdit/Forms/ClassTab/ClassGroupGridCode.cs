@@ -47,6 +47,7 @@ namespace LJCGenDocEdit
           DocClassGroup.ColumnSequence
         };
         manager.SetOrderBy(names);
+
         var keyColumns = new DbColumns()
         {
           { DocClassGroup.ColumnDocAssemblyID, parentID }

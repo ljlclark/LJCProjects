@@ -36,33 +36,36 @@ namespace LJCGenDocEdit
     {
       mGrid.LJCRowsClear();
 
-      if (mParent.ClassGroupGrid.CurrentRow is LJCGridRow parentRow)
-      {
-        mParent.Cursor = Cursors.WaitCursor;
-        var parentID = ParentID(parentRow);
+      mParent.Cursor = Cursors.WaitCursor;
+      var parentRow = mParent.ClassGroupGrid.CurrentRow as LJCGridRow;
+      var parentID = ParentID(parentRow);
 
-        var manager = Managers.DocClassManager;
-        var names = new List<string>()
-        {
-          DocClass.ColumnSequence
-        };
-        manager.SetOrderBy(names);
-        var keyColumns = new DbColumns()
+      var manager = Managers.DocClassManager;
+      var names = new List<string>()
+      {
+        DocClass.ColumnSequence
+      };
+      manager.SetOrderBy(names);
+
+      DbColumns keyColumns = null;
+      if (parentID > 0)
+      {
+        keyColumns = new DbColumns()
         {
           { DocClass.ColumnDocClassGroupID, parentID }
         };
-        DbResult result = manager.LoadResult(keyColumns);
-
-        if (DbResult.HasRows(result))
-        {
-          foreach (DbRow dbRow in result.Rows)
-          {
-            RowAddValues(dbRow.Values);
-          }
-        }
-        mParent.Cursor = Cursors.Default;
-        mParent.DoChange(Change.ClassItem);
       }
+      DbResult result = manager.LoadResult(keyColumns);
+
+      if (DbResult.HasRows(result))
+      {
+        foreach (DbRow dbRow in result.Rows)
+        {
+          RowAddValues(dbRow.Values);
+        }
+      }
+      mParent.Cursor = Cursors.Default;
+      mParent.DoChange(Change.ClassItem);
     }
 
     // Selects a row based on the key record values.

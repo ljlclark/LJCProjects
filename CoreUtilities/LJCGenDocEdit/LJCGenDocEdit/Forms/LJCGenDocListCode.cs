@@ -231,13 +231,14 @@ namespace LJCGenDocEdit
           break;
 
         case Change.AssemblyGroup:
-          //mAssemblyItemGridCode.DataRetrieve();
           mAssemblyItemGridCode.DataRetrieve();
           mAssemblyItemComboCode.DataRetrieve();
           AssemblyComboSelect();
           break;
 
         case Change.AssemblyItem:
+          // *** Next Statement *** Add
+          mClassItemGridCode.DataRetrieve();
           AssemblyComboSelect();
           AssemblyItemGrid.LJCSetLastRow();
           break;
