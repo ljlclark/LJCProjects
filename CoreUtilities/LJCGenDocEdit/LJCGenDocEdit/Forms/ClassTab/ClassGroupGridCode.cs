@@ -41,6 +41,14 @@ namespace LJCGenDocEdit
         mParent.Cursor = Cursors.WaitCursor;
         var parentID = ParentID(parentRow);
 
+        var docClassGroup = new DocClassGroup()
+        {
+          ID = 0,
+          HeadingName = "Ungrouped Classes",
+          DocAssemblyID = parentID
+        };
+        RowAdd(docClassGroup);
+
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
         {

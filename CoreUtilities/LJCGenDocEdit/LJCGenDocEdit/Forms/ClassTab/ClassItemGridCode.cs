@@ -48,7 +48,17 @@ namespace LJCGenDocEdit
       manager.SetOrderBy(names);
 
       DbColumns keyColumns = null;
-      if (parentID > 0)
+      if (0 == parentID)
+      {
+        // Get ungrouped classes.
+        var assemblyID = AssemblyID(parentRow);
+        keyColumns = new DbColumns()
+        {
+          { DocClass.ColumnDocClassGroupID, (object)"'-null'" },
+          { DocClass.ColumnDocAssemblyID, assemblyID }
+        };
+      }
+      else
       {
         keyColumns = new DbColumns()
         {
@@ -285,6 +295,22 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Other Methods
+
+    /// <summary>
+    /// Retrieves the row parent ID.
+    /// </summary>
+    /// <param name="parentRow">The parent row.</param>
+    /// <returns>The parent row ID.</returns>
+    internal short AssemblyID(LJCGridRow parentRow)
+    {
+      short retValue = 0;
+
+      if (parentRow != null)
+      {
+        retValue = (short)parentRow.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
+      }
+      return retValue;
+    }
 
     // Retrieves the current row item.
     /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
