@@ -16,6 +16,8 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=LJCGenDocEdit
 set File=LJCGenDocEdit
 call %ClearBuild%
+del %Solution%\%Project%\%bin%\ControlValues /q
+rmdir %Solution%\%Project%\%bin%\ControlValues
 del %Solution%\%Project%\%bin%\ConnectionTemplates.xml
 del %Solution%\%Project%\%bin%\DataConfigs.xml
 del %Solution%\%Project%\%bin%\LJCGenDocEdit.xml
