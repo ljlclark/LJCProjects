@@ -47,7 +47,7 @@ namespace LJCGenDocEdit
       };
       manager.SetOrderBy(names);
 
-      DbColumns keyColumns = null;
+      DbColumns keyColumns;
       if (0 == parentID)
       {
         // Get ungrouped classes.

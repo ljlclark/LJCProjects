@@ -18,4 +18,3 @@ del %RootFolder%\%AppFolder%\bin\Debug\XMLFiles\*.* /q
 set AppFolder=LJCGenTextEdit
 del %RootFolder%\%AppFolder%\bin\Debug\DataXML\*.* /q
 del %RootFolder%\%AppFolder%\bin\Debug\TempFiles\*.* /q
-pause
