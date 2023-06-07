@@ -42,6 +42,12 @@ namespace LJCDocGenLib
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
       replacements.Add("_AssemblyName_", DataAssembly.Name);
+
+      // Testing
+      if ("LJCDBClientLib" == DataAssembly.Name)
+      {
+        int i = 0;
+      }
       string typeCount = DataAssembly.DataTypes.Count.ToString();
       replacements.Add("_ClassCount_", typeCount);
       var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";
@@ -131,13 +137,12 @@ namespace LJCDocGenLib
                 if (dataType != null)
                 {
                   mOtherTypes.Remove(dataType);
+                  var subRepeatItem = subRepeatItems.Add(className);
+                  var subReplacements = subRepeatItem.Replacements;
+                  subReplacements.Add("_HTMLFileName_", $"{className}.html");
+                  subReplacements.Add("_Name_", className);
+                  subReplacements.Add("_Summary_", docClass.Description);
                 }
-
-                var subRepeatItem = subRepeatItems.Add(className);
-                var subReplacements = subRepeatItem.Replacements;
-                subReplacements.Add("_HTMLFileName_", $"{className}.html");
-                subReplacements.Add("_Name_", className);
-                subReplacements.Add("_Summary_", docClass.Description);
               }
             }
           }
