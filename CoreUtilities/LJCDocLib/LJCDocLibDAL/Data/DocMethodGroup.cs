@@ -166,7 +166,15 @@ namespace LJCDocLibDAL
     #region Calculated and Join Data Properties
 
     /// <summary>Gets or sets the Join Heading value.</summary>
-    public string Heading { get; set; }
+    public string Heading
+    {
+      get { return mHeading; }
+      set
+      {
+        mHeading = ChangedNames.Add(ColumnHeading, mHeadingText, value);
+      }
+    }
+    private string mHeading;
     #endregion
 
     #region Class Properties

@@ -100,22 +100,23 @@ namespace LJCGenDocEdit
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
 
-        // Join values.
-        HeadingText.Text = dataRecord.Heading;
-
         // Get foreign key values.
         mDocClassGroupHeadingID = dataRecord.DocClassGroupHeadingID;
-        if (0 == mDocClassGroupHeadingID)
+        if (mDocClassGroupHeadingID > 0)
         {
-          NameText.ReadOnly = false;
-          HeadingText.ReadOnly = false;
-          NameText.Select();
-          NameText.Select(0, 0);
+          // Join values.
+          //NameText.Text = dataRecord.GroupName;
+          NameText.ReadOnly = true;
+          HeadingText.Text = dataRecord.Heading;
+          HeadingText.ReadOnly = true;
+
+          CustomText.Select();
+          CustomText.Select(0, 0);
         }
         else
         {
-          CustomText.Select();
-          CustomText.Select(0, 0);
+          NameText.Select();
+          NameText.Select(0, 0);
         }
       }
     }
@@ -140,6 +141,9 @@ namespace LJCGenDocEdit
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Join values.
+      retValue.Heading = HeadingText.Text.Trim();
       return retValue;
     }
 

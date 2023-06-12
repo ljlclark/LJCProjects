@@ -143,10 +143,14 @@ namespace LJCGenDocEdit
       {
         // Data from items.
         var parentID = ParentID(parentRow);
-        var parentData = CurrentParent();
-        var parentName = parentData.Name;
+        string parentName = null;
+        if (parentID > 0)
+        {
+          var parentData = CurrentParent();
+          parentName = parentData.Name;
+        }
 
-        var detail = new AssemblyDetail()
+        var detail = new MethodGroupDetail()
         {
           LJCParentID = parentID,
           LJCParentName = parentName,
@@ -165,8 +169,12 @@ namespace LJCGenDocEdit
       {
         // Data from items.
         var parentID = ParentID(parentRow);
-        var parentData = CurrentParent();
-        var parentName = parentData.Name;
+        string parentName = null;
+        if (parentID > 0)
+        {
+          var parentData = CurrentParent();
+          parentName = parentData.Name;
+        }
         var id = RowID();
 
         var detail = new MethodGroupDetail()

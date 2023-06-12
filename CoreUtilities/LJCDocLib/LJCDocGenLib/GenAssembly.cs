@@ -54,10 +54,10 @@ namespace LJCDocGenLib
         else
         {
           // Testing
-          //if ("LJCWinFormControls" == dataAssembly.Name)
-          //{
-          //  File.WriteAllText(dataFileSpec, dataXml);
-          //}
+          if ("LJCWinFormControls" == dataAssembly.Name)
+          {
+            File.WriteAllText(dataFileSpec, dataXml);
+          }
 
           Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
             , dataXml) as Sections;

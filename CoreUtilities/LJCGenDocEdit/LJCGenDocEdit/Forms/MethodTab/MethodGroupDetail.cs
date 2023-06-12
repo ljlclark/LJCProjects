@@ -63,7 +63,7 @@ namespace LJCGenDocEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -97,6 +97,7 @@ namespace LJCGenDocEdit
         LJCParentID = dataRecord.DocClassID;
         ParentText.Text = LJCParentName;
         NameText.Text = dataRecord.HeadingName;
+        HeadingText.Text = dataRecord.Heading;
         CustomText.Text = dataRecord.HeadingTextCustom;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
@@ -106,16 +107,21 @@ namespace LJCGenDocEdit
 
         // Get foreign key values.
         mDocMethodGroupHeadingID = dataRecord.DocMethodGroupHeadingID;
-        if (0 == mDocMethodGroupHeadingID)
+        if (mDocMethodGroupHeadingID > 0)
         {
-          NameText.ReadOnly = false;
-          NameText.Select();
-          NameText.Select(0, 0);
+          // Join values.
+          //NameText.Text = dataRecord.GroupName;
+          NameText.ReadOnly = true;
+          HeadingText.Text = dataRecord.Heading;
+          HeadingText.ReadOnly = true;
+
+          CustomText.Select();
+          CustomText.Select(0, 0);
         }
         else
         {
-          CustomText.Select();
-          CustomText.Select(0, 0);
+          NameText.Select();
+          NameText.Select(0, 0);
         }
       }
     }
@@ -140,6 +146,9 @@ namespace LJCGenDocEdit
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Join values.
+      retValue.Heading = HeadingText.Text.Trim();
       return retValue;
     }
 

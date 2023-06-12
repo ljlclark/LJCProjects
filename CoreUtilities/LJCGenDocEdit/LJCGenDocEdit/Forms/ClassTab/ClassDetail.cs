@@ -128,7 +128,8 @@ namespace LJCGenDocEdit
       retValue.DocAssemblyID = mDocAssemblyID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
-      retValue.Sequence = Convert.ToInt16(SequenceText.Text);
+      short.TryParse(SequenceText.Text, out short value);
+      retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
       return retValue;
     }
@@ -233,19 +234,6 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // Retrieves the ClassItem with the ID value.
-    private DocClass GetClassWithID(short id)
-    {
-      DocClass retValue = null;
-
-      if (id > 0)
-      {
-        var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(LJCID);
-      }
-      return retValue;
-    }
-
     // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetAssemblyWithID(short id)
     {
@@ -255,6 +243,19 @@ namespace LJCGenDocEdit
       {
         var manager = Managers.DocAssemblyManager;
         retValue = manager.RetrieveWithID(id);
+      }
+      return retValue;
+    }
+
+    // Retrieves the ClassItem with the ID value.
+    private DocClass GetClassWithID(short id)
+    {
+      DocClass retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocClassManager;
+        retValue = manager.RetrieveWithID(LJCID);
       }
       return retValue;
     }
@@ -345,6 +346,8 @@ namespace LJCGenDocEdit
     {
       if (AutoScaleMode == AutoScaleMode.Font)
       {
+        NameButton.Top = NameText.Top;
+        NameButton.Height = NameText.Height;
         ActiveCheckbox.Top = SequenceText.Top + 2;
       }
     }
@@ -410,8 +413,7 @@ namespace LJCGenDocEdit
     {
       var list = new ClassSelect()
       {
-        AssemblyGroupName = "CommonLibraries",
-        AssemblyName = "LJCNetCommon"
+        LJCAssemblyID = LJCAssemblyID
       };
       if (DialogResult.OK == list.ShowDialog())
       {
@@ -449,6 +451,9 @@ namespace LJCGenDocEdit
 
     #region Properties
 
+    /// <summary>Gets or sets the Assembly ID value.</summary>
+    internal short LJCAssemblyID { get; set; }
+
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }
 
@@ -457,9 +462,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
-
-    /// <summary>Gets or sets the Previous flag.</summary>
-    internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets or sets the Parent ID value.</summary>
     public short LJCParentID { get; set; }
@@ -471,6 +473,9 @@ namespace LJCGenDocEdit
       set { mParentName = NetString.InitString(value); }
     }
     private string mParentName;
+
+    /// <summary>Gets or sets the Previous flag.</summary>
+    internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocClass LJCRecord { get; private set; }

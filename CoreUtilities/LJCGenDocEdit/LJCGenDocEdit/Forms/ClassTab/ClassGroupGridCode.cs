@@ -150,10 +150,14 @@ namespace LJCGenDocEdit
     {
       if (mParentGrid.CurrentRow is LJCGridRow parentRow)
       {
-        // Data from items.
+        // Data from items. (DocAssembly)
         var parentID = ParentID(parentRow);
-        var parentData = CurrentParent();
-        var parentName = parentData.Name;
+        string parentName = null;
+        if (parentID > 0)
+        {
+          var parentData = CurrentParent();
+          parentName = parentData.Name;
+        }
 
         var detail = new ClassGroupDetail()
         {
@@ -172,10 +176,14 @@ namespace LJCGenDocEdit
       if (mParentGrid.CurrentRow is LJCGridRow parentRow
         && mGrid.CurrentRow is LJCGridRow row)
       {
-        // Data from items.
+        // Data from items. (DocAssembly)
         var parentID = ParentID(parentRow);
-        var parentData = CurrentParent();
-        var parentName = parentData.Name;
+        string parentName = null;
+        if (parentID > 0)
+        {
+          var parentData = CurrentParent();
+          parentName = parentData.Name;
+        }
         var id = RowID();
 
         var detail = new ClassGroupDetail()

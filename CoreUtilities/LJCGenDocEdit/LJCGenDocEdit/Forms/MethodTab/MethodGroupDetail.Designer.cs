@@ -49,8 +49,8 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
-      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -59,7 +59,6 @@
       this.NameText.Location = new System.Drawing.Point(155, 50);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
-      this.NameText.ReadOnly = true;
       this.NameText.Size = new System.Drawing.Size(377, 26);
       this.NameText.TabIndex = 3;
       // 
@@ -146,7 +145,7 @@
       this.HeadingLabel.Name = "HeadingLabel";
       this.HeadingLabel.Size = new System.Drawing.Size(134, 20);
       this.HeadingLabel.TabIndex = 5;
-      this.HeadingLabel.Text = "Heading";
+      this.HeadingLabel.Text = "Group Heading";
       // 
       // SequenceText
       // 
@@ -205,7 +204,7 @@
             this.toolStripSeparator1,
             this.DialogHelp});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 171);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 138);
       // 
       // DialogNew
       // 
@@ -231,17 +230,17 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
+      // 
       // DialogHelp
       // 
       this.DialogHelp.Name = "DialogHelp";
       this.DialogHelp.Size = new System.Drawing.Size(302, 32);
       this.DialogHelp.Text = "&Help";
       this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
-      // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
       // 
       // MethodGroupDetail
       // 

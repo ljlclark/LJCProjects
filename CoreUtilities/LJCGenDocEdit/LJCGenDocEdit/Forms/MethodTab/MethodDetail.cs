@@ -350,6 +350,8 @@ namespace LJCGenDocEdit
     {
       if (AutoScaleMode == AutoScaleMode.Font)
       {
+        NameButton.Top = NameText.Top;
+        NameButton.Height = NameText.Height;
         ActiveCheckbox.Top = SequenceText.Top + 2;
       }
     }
@@ -415,9 +417,7 @@ namespace LJCGenDocEdit
     {
       var list = new MethodSelect()
       {
-        AssemblyGroupName = "CommonLibraries",
-        AssemblyName = "LJCNetCommon",
-        ClassName = "NetCommon"
+        LJCClassID = LJCParentID
       };
       if (DialogResult.OK == list.ShowDialog())
       {
