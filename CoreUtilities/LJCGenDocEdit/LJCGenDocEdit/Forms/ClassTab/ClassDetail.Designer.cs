@@ -38,8 +38,8 @@
       this.DescriptionLabel = new System.Windows.Forms.Label();
       this.AssemblyText = new System.Windows.Forms.TextBox();
       this.AssemblyLabel = new System.Windows.Forms.Label();
-      this.ParentText = new System.Windows.Forms.TextBox();
-      this.ParentLabel = new System.Windows.Forms.Label();
+      this.GroupText = new System.Windows.Forms.TextBox();
+      this.GroupLabel = new System.Windows.Forms.Label();
       this.SequenceText = new System.Windows.Forms.TextBox();
       this.SequenceLabel = new System.Windows.Forms.Label();
       this.ActiveCheckbox = new System.Windows.Forms.CheckBox();
@@ -47,10 +47,10 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.NameButton = new System.Windows.Forms.Button();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
-      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -130,23 +130,23 @@
       this.AssemblyLabel.TabIndex = 0;
       this.AssemblyLabel.Text = "Assembly";
       // 
-      // ParentText
+      // GroupText
       // 
-      this.ParentText.Location = new System.Drawing.Point(145, 50);
-      this.ParentText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ParentText.Name = "ParentText";
-      this.ParentText.ReadOnly = true;
-      this.ParentText.Size = new System.Drawing.Size(413, 26);
-      this.ParentText.TabIndex = 3;
+      this.GroupText.Location = new System.Drawing.Point(145, 50);
+      this.GroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.GroupText.Name = "GroupText";
+      this.GroupText.ReadOnly = true;
+      this.GroupText.Size = new System.Drawing.Size(413, 26);
+      this.GroupText.TabIndex = 3;
       // 
-      // ParentLabel
+      // GroupLabel
       // 
-      this.ParentLabel.Location = new System.Drawing.Point(18, 54);
-      this.ParentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.ParentLabel.Name = "ParentLabel";
-      this.ParentLabel.Size = new System.Drawing.Size(124, 20);
-      this.ParentLabel.TabIndex = 2;
-      this.ParentLabel.Text = "Class Group";
+      this.GroupLabel.Location = new System.Drawing.Point(18, 54);
+      this.GroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.GroupLabel.Name = "GroupLabel";
+      this.GroupLabel.Size = new System.Drawing.Size(124, 20);
+      this.GroupLabel.TabIndex = 2;
+      this.GroupLabel.Text = "Class Group";
       // 
       // SequenceText
       // 
@@ -185,7 +185,7 @@
             this.toolStripSeparator1,
             this.DialogHelp});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 171);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 138);
       // 
       // DialogNew
       // 
@@ -211,6 +211,18 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
+      // 
+      // DialogHelp
+      // 
+      this.DialogHelp.Name = "DialogHelp";
+      this.DialogHelp.Size = new System.Drawing.Size(302, 32);
+      this.DialogHelp.Text = "&Help";
+      this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
+      // 
       // NameButton
       // 
       this.NameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -231,18 +243,6 @@
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
       // 
-      // DialogHelp
-      // 
-      this.DialogHelp.Name = "DialogHelp";
-      this.DialogHelp.Size = new System.Drawing.Size(302, 32);
-      this.DialogHelp.Text = "&Help";
-      this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
-      // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
-      // 
       // ClassDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -253,8 +253,8 @@
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
       this.Controls.Add(this.ActiveCheckbox);
-      this.Controls.Add(this.ParentText);
-      this.Controls.Add(this.ParentLabel);
+      this.Controls.Add(this.GroupText);
+      this.Controls.Add(this.GroupLabel);
       this.Controls.Add(this.AssemblyText);
       this.Controls.Add(this.AssemblyLabel);
       this.Controls.Add(this.NameText);
@@ -286,8 +286,8 @@
     private System.Windows.Forms.Label DescriptionLabel;
     private System.Windows.Forms.TextBox AssemblyText;
     private System.Windows.Forms.Label AssemblyLabel;
-    private System.Windows.Forms.TextBox ParentText;
-    private System.Windows.Forms.Label ParentLabel;
+    private System.Windows.Forms.TextBox GroupText;
+    private System.Windows.Forms.Label GroupLabel;
     private System.Windows.Forms.TextBox SequenceText;
     private System.Windows.Forms.Label SequenceLabel;
     private System.Windows.Forms.CheckBox ActiveCheckbox;

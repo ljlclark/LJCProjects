@@ -37,7 +37,7 @@
       this.SequenceText = new System.Windows.Forms.TextBox();
       this.SequenceLabel = new System.Windows.Forms.Label();
       this.ActiveCheckbox = new System.Windows.Forms.CheckBox();
-      this.ParentText = new System.Windows.Forms.TextBox();
+      this.AssemblyText = new System.Windows.Forms.TextBox();
       this.ParentLabel = new System.Windows.Forms.Label();
       this.HeadingText = new System.Windows.Forms.TextBox();
       this.HeadingLabel = new System.Windows.Forms.Label();
@@ -121,14 +121,14 @@
       this.ActiveCheckbox.Text = "Active";
       this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
-      // ParentText
+      // AssemblyText
       // 
-      this.ParentText.Location = new System.Drawing.Point(155, 14);
-      this.ParentText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ParentText.Name = "ParentText";
-      this.ParentText.ReadOnly = true;
-      this.ParentText.Size = new System.Drawing.Size(413, 26);
-      this.ParentText.TabIndex = 1;
+      this.AssemblyText.Location = new System.Drawing.Point(155, 14);
+      this.AssemblyText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.AssemblyText.Name = "AssemblyText";
+      this.AssemblyText.ReadOnly = true;
+      this.AssemblyText.Size = new System.Drawing.Size(413, 26);
+      this.AssemblyText.TabIndex = 1;
       // 
       // ParentLabel
       // 
@@ -253,7 +253,7 @@
       this.Controls.Add(this.CustomLabel);
       this.Controls.Add(this.HeadingText);
       this.Controls.Add(this.HeadingLabel);
-      this.Controls.Add(this.ParentText);
+      this.Controls.Add(this.AssemblyText);
       this.Controls.Add(this.ParentLabel);
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
@@ -284,7 +284,7 @@
     private System.Windows.Forms.TextBox SequenceText;
     private System.Windows.Forms.Label SequenceLabel;
     private System.Windows.Forms.CheckBox ActiveCheckbox;
-    private System.Windows.Forms.TextBox ParentText;
+    private System.Windows.Forms.TextBox AssemblyText;
     private System.Windows.Forms.Label ParentLabel;
     private System.Windows.Forms.TextBox HeadingText;
     private System.Windows.Forms.Label HeadingLabel;

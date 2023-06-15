@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCID = 0;
-      LJCParentID = 0;
-      LJCParentName = null;
+      LJCClassID = 0;
+      LJCClassName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -79,10 +79,12 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCParentName;
+        ParentText.Text = LJCClassName;
 
         // Set default values.
         LJCRecord = new DocMethod();
+        SequenceText.Text = "1";
+        ActiveCheckbox.Checked = true;
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -94,16 +96,16 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.DocClassID;
-        ParentText.Text = LJCParentName;
+        LJCClassID = dataRecord.DocClassID;
+        ParentText.Text = LJCClassName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
 
         // Get foreign key values.
-        mDocMethodGroupID = dataRecord.DocMethodGroupID;
-        var methodGroup = GetMethodGroupWithID(mDocMethodGroupID);
+        LJCGroupID = dataRecord.DocMethodGroupID;
+        var methodGroup = GetMethodGroupWithID(LJCGroupID);
         if (methodGroup != null)
         {
           GroupText.Text = methodGroup.HeadingName;
@@ -125,13 +127,15 @@ namespace LJCGenDocEdit
         retValue = new DocMethod();
       }
       retValue.ID = LJCID;
-      retValue.DocClassID = LJCParentID;
-      retValue.DocMethodGroupID = mDocMethodGroupID;
+      retValue.DocClassID = LJCClassID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Foreign key values.
+      retValue.DocMethodGroupID = LJCGroupID;
       return retValue;
     }
 
@@ -371,7 +375,9 @@ namespace LJCGenDocEdit
       SetNoSpace(NameText);
       SetNumericOnly(SequenceText);
 
-      //HeadingText.MaxLength = DocMethodGroup.LengthHeading;
+      NameText.MaxLength = DocMethod.LengthName;
+      DescriptionText.MaxLength = DocMethod.LengthDescription;
+      GroupText.MaxLength = DocMethod.LengthDescription;
       ConfigureControls();
       Cursor = Cursors.Default;
     }
@@ -401,6 +407,23 @@ namespace LJCGenDocEdit
       LJCChange?.Invoke(this, new EventArgs());
     }
 
+    // Select the method.
+    private void NameButton_Click(object sender, EventArgs e)
+    {
+      var list = new MethodSelect()
+      {
+        LJCClassID = LJCClassID
+      };
+      if (DialogResult.OK == list.ShowDialog())
+      {
+        var dataMethod = list.LJCSelectedRecord;
+        NameText.Text = dataMethod.Name;
+        var description = NetString.RemoveTags(dataMethod.Summary);
+        DescriptionText.Text = NetString.Truncate(description
+          , DocMethod.LengthDescription);
+      }
+    }
+
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
@@ -409,21 +432,6 @@ namespace LJCGenDocEdit
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
-      }
-    }
-
-    // Select the method.
-    private void NameButton_Click(object sender, EventArgs e)
-    {
-      var list = new MethodSelect()
-      {
-        LJCClassID = LJCParentID
-      };
-      if (DialogResult.OK == list.ShowDialog())
-      {
-        var dataMethod = list.LJCSelectedRecord;
-        NameText.Text = dataMethod.Name;
-        DescriptionText.Text = dataMethod.Summary;
       }
     }
     #endregion
@@ -455,28 +463,31 @@ namespace LJCGenDocEdit
 
     #region Properties
 
+    /// <summary>Gets or sets the Class ID value.</summary>
+    public short LJCClassID { get; set; }
+
+    /// <summary>Gets or sets the Class Name value.</summary>
+    public string LJCClassName
+    {
+      get { return mClassName; }
+      set { mClassName = NetString.InitString(value); }
+    }
+    private string mClassName;
+
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
+    /// <summary>Gets or sets the foreign ID value.</summary>
+    public short LJCGroupID { get; set; }
+
     /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
     /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethod LJCRecord { get; private set; }
@@ -495,9 +506,6 @@ namespace LJCGenDocEdit
 
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
-
-    // Foreign Keys
-    private short mDocMethodGroupID;
 
     // Record with the original values.
     private DocMethod mOriginalRecord;

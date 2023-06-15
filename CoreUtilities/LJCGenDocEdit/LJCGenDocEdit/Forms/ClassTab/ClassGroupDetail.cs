@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCID = 0;
-      LJCParentID = 0;
-      LJCParentName = null;
+      LJCAssemblyID = 0;
+      LJCAssemblyName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -71,17 +71,19 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        mOriginalRecord = GetGroupWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCParentName;
+        AssemblyText.Text = LJCAssemblyName;
 
         // Set default values.
         LJCRecord = new DocClassGroup();
+        SequenceText.Text = "1";
+        ActiveCheckbox.Checked = true;
         NameText.Select();
         NameText.Select(0, 0);
       }
@@ -93,12 +95,15 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.DocAssemblyID;
-        ParentText.Text = LJCParentName;
+        LJCAssemblyID = dataRecord.DocAssemblyID;
+        AssemblyText.Text = LJCAssemblyName;
         NameText.Text = dataRecord.HeadingName;
         CustomText.Text = dataRecord.HeadingTextCustom;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
+
+        // Join values.
+        HeadingText.Text = dataRecord.Heading;
 
         // Get foreign key values.
         mDocClassGroupHeadingID = dataRecord.DocClassGroupHeadingID;
@@ -135,12 +140,14 @@ namespace LJCGenDocEdit
         retValue = new DocClassGroup();
       }
       retValue.ID = LJCID;
-      retValue.DocAssemblyID = LJCParentID;
-      retValue.DocClassGroupHeadingID = mDocClassGroupHeadingID;
+      retValue.DocAssemblyID = LJCAssemblyID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Foreign key values.
+      retValue.DocClassGroupHeadingID = mDocClassGroupHeadingID;
 
       // Join values.
       retValue.Heading = HeadingText.Text.Trim();
@@ -260,7 +267,7 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the Product with the ID value.
-    private DocClassGroup GetWithID(short id)
+    private DocClassGroup GetGroupWithID(short id)
     {
       DocClassGroup retValue = null;
 
@@ -469,6 +476,17 @@ namespace LJCGenDocEdit
 
     #region Properties
 
+    /// <summary>Gets or sets the parent Assembly ID value.</summary>
+    public short LJCAssemblyID { get; set; }
+
+    /// <summary>Gets or sets the parent Assembly name.</summary>
+    public string LJCAssemblyName
+    {
+      get { return mAssemblyName; }
+      set { mAssemblyName = NetString.InitString(value); }
+    }
+    private string mAssemblyName;
+
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }
 
@@ -480,17 +498,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocClassGroup LJCRecord { get; private set; }

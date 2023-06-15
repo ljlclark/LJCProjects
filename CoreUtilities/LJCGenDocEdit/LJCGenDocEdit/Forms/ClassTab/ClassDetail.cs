@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCID = 0;
-      LJCParentID = 0;
-      LJCParentName = null;
+      LJCGroupID = 0;
+      LJCGroupName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -78,10 +78,12 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        AssemblyText.Text = LJCParentName;
+        AssemblyText.Text = LJCGroupName;
 
         // Set default values.
         LJCRecord = new DocClass();
+        SequenceText.Text = "1";
+        ActiveCheckbox.Checked = true;
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -93,8 +95,8 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.DocClassGroupID;
-        ParentText.Text = LJCParentName;
+        LJCGroupID = dataRecord.DocClassGroupID;
+        GroupText.Text = LJCGroupName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         SequenceText.Text = dataRecord.Sequence.ToString();
@@ -124,13 +126,15 @@ namespace LJCGenDocEdit
         retValue = new DocClass();
       }
       retValue.ID = LJCID;
-      retValue.DocClassGroupID = LJCParentID;
-      retValue.DocAssemblyID = mDocAssemblyID;
+      retValue.DocClassGroupID = LJCGroupID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Foreign key values.
+      retValue.DocAssemblyID = mDocAssemblyID;
       return retValue;
     }
 
@@ -397,17 +401,6 @@ namespace LJCGenDocEdit
       LJCChange?.Invoke(this, new EventArgs());
     }
 
-    // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
-    {
-      if (IsValid()
-        && DataSave())
-      {
-        LJCOnChange();
-        DialogResult = DialogResult.OK;
-      }
-    }
-
     // Select the class.
     private void NameButton_Click(object sender, EventArgs e)
     {
@@ -419,7 +412,20 @@ namespace LJCGenDocEdit
       {
         var dataType = list.LJCSelectedRecord;
         NameText.Text = dataType.Name;
-        DescriptionText.Text = dataType.Summary;
+        var description = NetString.RemoveTags(dataType.Summary);
+        DescriptionText.Text = NetString.Truncate(description
+          , DocClass.LengthDescription);
+      }
+    }
+
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsValid()
+        && DataSave())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
       }
     }
     #endregion
@@ -451,28 +457,28 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the Assembly ID value.</summary>
+    /// <summary>Gets or sets the foreign ID value.</summary>
     internal short LJCAssemblyID { get; set; }
 
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }
+
+    /// <summary>Gets or sets the parent Group ID value.</summary>
+    public short LJCGroupID { get; set; }
+
+    /// <summary>Gets or sets the parent Group name.</summary>
+    public string LJCGroupName
+    {
+      get { return mGroupName; }
+      set { mGroupName = NetString.InitString(value); }
+    }
+    private string mGroupName;
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
     /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
 
     /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }

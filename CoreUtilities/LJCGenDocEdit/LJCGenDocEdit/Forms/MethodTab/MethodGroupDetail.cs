@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCID = 0;
-      LJCParentID = 0;
-      LJCParentName = null;
+      LJCClassID = 0;
+      LJCClassName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -72,17 +72,19 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        mOriginalRecord = GetMethodWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCParentName;
+        ParentText.Text = LJCClassName;
 
         // Set default values.
         LJCRecord = new DocMethodGroup();
+        SequenceText.Text = "1";
+        ActiveCheckbox.Checked = true;
         NameText.Select();
         NameText.Select(0, 0);
       }
@@ -94,8 +96,8 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.DocClassID;
-        ParentText.Text = LJCParentName;
+        LJCClassID = dataRecord.DocClassID;
+        ParentText.Text = LJCClassName;
         NameText.Text = dataRecord.HeadingName;
         HeadingText.Text = dataRecord.Heading;
         CustomText.Text = dataRecord.HeadingTextCustom;
@@ -140,12 +142,14 @@ namespace LJCGenDocEdit
         retValue = new DocMethodGroup();
       }
       retValue.ID = LJCID;
-      retValue.DocClassID = LJCParentID;
-      retValue.DocMethodGroupHeadingID = mDocMethodGroupHeadingID;
+      retValue.DocClassID = LJCClassID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Foreign key values.
+      retValue.DocMethodGroupHeadingID = mDocMethodGroupHeadingID;
 
       // Join values.
       retValue.Heading = HeadingText.Text.Trim();
@@ -265,7 +269,7 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the Product with the ID value.
-    private DocMethodGroup GetWithID(short id)
+    private DocMethodGroup GetMethodWithID(short id)
     {
       DocMethodGroup retValue = null;
 
@@ -474,6 +478,17 @@ namespace LJCGenDocEdit
 
     #region Properties
 
+    /// <summary>Gets or sets the parent Class ID value.</summary>
+    public short LJCClassID { get; set; }
+
+    /// <summary>Gets or sets the parent Class name.</summary>
+    public string LJCClassName
+    {
+      get { return mClassName; }
+      set { mClassName = NetString.InitString(value); }
+    }
+    private string mClassName;
+
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }
 
@@ -485,17 +500,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethodGroup LJCRecord { get; private set; }

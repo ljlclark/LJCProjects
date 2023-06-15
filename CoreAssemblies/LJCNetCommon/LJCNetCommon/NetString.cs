@@ -122,9 +122,91 @@ namespace LJCNetCommon
       }
       return retVal;
     }
+
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <param name="text"></param>
+  /// <param name="beginIndex"></param>
+  /// <param name="endIndex"></param>
+  /// <returns></returns>
+  public static string RemoveSection(string text, int beginIndex, int endIndex)
+  {
+    string retValue = text;
+
+    if (beginIndex >= 0
+      && endIndex >= beginIndex)
+    {
+      var value = retValue.Substring(0, beginIndex);
+      value += retValue.Substring(endIndex + 1);
+      retValue = value;
+    }
+    return retValue;
+  }
+
+  /// <summary>
+  /// Truncates a text string to the specified length.
+  /// </summary>
+  /// <param name="text">The text value.</param>
+  /// <param name="length">The maximum length.</param>
+  /// <returns>The truncated string.</returns>
+  public static string Truncate(string text, int length)
+    {
+      var retValue = text;
+
+      if (text.Length > length)
+      {
+        retValue = text.Substring(0, length);
+      }
+      return retValue;
+    }
     #endregion
 
     #region Parsing Delimited String
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="tagName"></param>
+    /// <param name="beginIndex"></param>
+    /// <param name="endIndex"></param>
+    /// <param name="startIndex"></param>
+    /// <returns></returns>
+    public static string FindTag(string text, ref string tagName, out int beginIndex
+      , out int endIndex, ref int startIndex)
+    {
+      string retValue = null;
+
+      var findValue = "<";
+      if (false == NetString.HasValue(tagName))
+      {
+        findValue += tagName;
+      }
+      retValue = NetString.GetDelimitedAndIndexes(text, findValue
+        , out beginIndex, out endIndex, ref startIndex, ">");
+      var name = retValue;
+
+      // Eliminate attributes.
+      if (name != null
+        && false == findValue.Contains("/"))
+      {
+        var index = 0;
+        name = NetString.GetStringWithDelimiters(retValue
+          , retValue[0].ToString(), ref index, " ");
+        if (NetString.HasValue(name))
+        {
+          name = name.Substring(0, name.Length - 1);
+        }
+      }
+
+      if (tagName == "/")
+      {
+        name = $"/{name}";
+      }
+      tagName = name;
+      return retValue;
+    }
 
     // Get the delimited string begin and end index.
     /// <include path='items/GetDelimitedAndIndexes/*' file='Doc/NetString.xml'/>
@@ -137,7 +219,8 @@ namespace LJCNetCommon
       beginIndex = -1;
       endIndex = -1;
 
-      if (false == NetString.HasValue(endDelimiter))
+      // *** Next Statement *** Change - 6/13/23
+      if (string.IsNullOrEmpty(endDelimiter))
       {
         endDelimiter = beginDelimiter;
       }
@@ -204,7 +287,8 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (false == NetString.HasValue(endDelimiter))
+      // *** Next Statement *** Change - 6/13/23
+      if (string.IsNullOrEmpty(endDelimiter))
       {
         endDelimiter = beginDelimiter;
       }
@@ -222,6 +306,27 @@ namespace LJCNetCommon
         int textLength = endIndex - beginIndex + endLength;
         retValue = text.Substring(beginIndex, textLength);
       }
+      return retValue;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public static string RemoveTags(string text)
+    {
+      string retValue = text;
+
+      string tag = null;
+      do
+      {
+        string tagName = null;
+        int startIndex = 0;
+        tag = FindTag(retValue, ref tagName, out int beginIndex
+          , out int endIndex, ref startIndex);
+        retValue = RemoveSection(retValue, beginIndex, endIndex);
+      } while (tag != null);
       return retValue;
     }
     #endregion
