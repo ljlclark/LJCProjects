@@ -79,7 +79,7 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCClassName;
+        ClassText.Text = LJCClassName;
 
         // Set default values.
         LJCRecord = new DocMethodGroup();
@@ -97,7 +97,7 @@ namespace LJCGenDocEdit
       if (dataRecord != null)
       {
         LJCClassID = dataRecord.DocClassID;
-        ParentText.Text = LJCClassName;
+        ClassText.Text = LJCClassName;
         NameText.Text = dataRecord.HeadingName;
         HeadingText.Text = dataRecord.Heading;
         CustomText.Text = dataRecord.HeadingTextCustom;

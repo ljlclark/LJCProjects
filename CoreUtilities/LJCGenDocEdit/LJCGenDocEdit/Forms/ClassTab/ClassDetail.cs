@@ -78,7 +78,7 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        AssemblyText.Text = LJCGroupName;
+        GroupText.Text = LJCGroupName;
 
         // Set default values.
         LJCRecord = new DocClass();

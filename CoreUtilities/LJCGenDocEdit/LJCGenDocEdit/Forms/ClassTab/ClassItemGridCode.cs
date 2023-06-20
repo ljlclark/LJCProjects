@@ -38,7 +38,7 @@ namespace LJCGenDocEdit
 
       mDocList.Cursor = Cursors.WaitCursor;
       var groupRow = mGroupGrid.CurrentRow as LJCGridRow;
-      var groupID = GroupID(groupRow);
+      var groupID = GroupID();
 
       var manager = Managers.DocClassManager;
       var names = new List<string>()
@@ -150,9 +150,9 @@ namespace LJCGenDocEdit
     {
       if (mGroupGrid.CurrentRow is LJCGridRow groupRow)
       {
-        // Data from items. (DocClassGroup)
+        // Data from items.
         var assemblyID = AssemblyID(groupRow);
-        var groupID = GroupID(groupRow);
+        var groupID = GroupID();
         string groupName = null;
         if (groupID > 0)
         {
@@ -180,7 +180,7 @@ namespace LJCGenDocEdit
       {
         // Data from items. (DocClassGroup)
         var assemblyID = AssemblyID(groupRow);
-        var groupID = GroupID(groupRow);
+        var groupID = GroupID();
         string groupName = null;
         if (groupID > 0)
         {
@@ -226,7 +226,7 @@ namespace LJCGenDocEdit
       if (success)
       {
         // Data from items.
-        var groupID = GroupID(groupRow);
+        var groupID = GroupID();
         var id = ClassID();
 
         var keyRecord = new DbColumns()
@@ -409,18 +409,19 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>
-    /// Retrieves the parent Group ID.
-    /// </summary>
-    /// <param name="groupRow">The parent Group row.</param>
-    /// <returns>The parent Group row ID.</returns>
-    internal short GroupID(LJCGridRow groupRow)
+    // Retrieves the current row item ID.
+    /// <include path='items/RowID/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal short GroupID(LJCGridRow row = null)
     {
       short retValue = 0;
 
-      if (groupRow != null)
+      if (null == row)
       {
-        retValue = (short)groupRow.LJCGetInt32(DocClassGroup.ColumnID);
+        row = mClassGrid.CurrentRow as LJCGridRow;
+      }
+      if (row != null)
+      {
+        retValue = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
       }
       return retValue;
     }

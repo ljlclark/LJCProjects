@@ -6,6 +6,7 @@ using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -80,6 +81,7 @@ namespace LJCGenDocEdit
         Text += " - New";
         LJCIsUpdate = false;
         ClassText.Text = LJCClassName;
+        GroupText.Text = GetGroupText(LJCGroupID);
 
         // Set default values.
         LJCRecord = new DocMethod();
@@ -105,11 +107,7 @@ namespace LJCGenDocEdit
 
         // Get foreign key values.
         LJCGroupID = dataRecord.DocMethodGroupID;
-        var methodGroup = GetMethodGroupWithID(LJCGroupID);
-        if (methodGroup != null)
-        {
-          GroupText.Text = methodGroup.HeadingName;
-        }
+        GroupText.Text = GetGroupText(LJCGroupID);
       }
     }
 
@@ -241,6 +239,19 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Get Data Methods
+
+    // 
+    private string GetGroupText(short id)
+    {
+      string retValue = null;
+
+      var methodGroup = GetMethodGroupWithID(id);
+      if (methodGroup != null)
+      {
+        retValue = methodGroup.HeadingName;
+      }
+      return retValue;
+    }
 
     // Retrieves the Product with the ID value.
     private DocMethod GetMethodWithID(short id)

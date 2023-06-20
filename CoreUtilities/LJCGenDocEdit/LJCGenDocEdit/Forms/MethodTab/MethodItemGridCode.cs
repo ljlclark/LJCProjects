@@ -136,10 +136,10 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog for a new record.</summary>
     internal void DoNew()
     {
-      if (mClassGrid.CurrentRow is LJCGridRow classRow)
+      if (mClassGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
-        var classID = ClassID(classRow);
+        var classID = ClassID();
         string className = null;
         if (classID > 0)
         {
@@ -163,11 +163,11 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog to edit an existing record.</summary>
     internal void DoEdit()
     {
-      if (mClassGrid.CurrentRow is LJCGridRow classRow
+      if (mClassGrid.CurrentRow is LJCGridRow _
         && mMethodGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
-        var classID = ClassID(classRow);
+        var classID = ClassID();
         string className = null;
         if (classID > 0)
         {
@@ -292,15 +292,16 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    /// <summary>
-    /// Retrieves the parent Class ID.
-    /// </summary>
-    /// <param name="row">The parent Class row.</param>
-    /// <returns>The parent Class row ID.</returns>
-    internal short ClassID(LJCGridRow row)
+    // Retrieves the current row item ID.
+    /// <include path='items/RowID/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal short ClassID(LJCGridRow row = null)
     {
       short retValue = 0;
 
+      if (null == row)
+      {
+        row = mClassGrid.CurrentRow as LJCGridRow;
+      }
       if (row != null)
       {
         retValue = (short)row.LJCGetInt32(DocClass.ColumnID);
@@ -316,9 +317,9 @@ namespace LJCGenDocEdit
     {
       DocClass retValue = null;
 
-      if (mClassGrid.CurrentRow is LJCGridRow parentRow)
+      if (mClassGrid.CurrentRow is LJCGridRow _)
       {
-        var id = ClassID(parentRow);
+        var id = ClassID();
         if (id > 0)
         {
           var manager = Managers.DocClassManager;
