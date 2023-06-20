@@ -44,10 +44,10 @@ namespace LJCDocGenLib
       replacements.Add("_AssemblyName_", DataAssembly.Name);
 
       // Testing
-      if ("LJCDBClientLib" == DataAssembly.Name)
-      {
-        int i = 0;
-      }
+      //if ("LJCDBClientLib" == DataAssembly.Name)
+      //{
+      //  int i = 0;
+      //}
       string typeCount = DataAssembly.DataTypes.Count.ToString();
       replacements.Add("_ClassCount_", typeCount);
       var copyRight = "Copyright &copy Lester J. Clark and Contributors.<br />\r\n";

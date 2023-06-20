@@ -79,7 +79,7 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCClassName;
+        ClassText.Text = LJCClassName;
 
         // Set default values.
         LJCRecord = new DocMethod();
@@ -97,7 +97,7 @@ namespace LJCGenDocEdit
       if (dataRecord != null)
       {
         LJCClassID = dataRecord.DocClassID;
-        ParentText.Text = LJCClassName;
+        ClassText.Text = LJCClassName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         SequenceText.Text = dataRecord.Sequence.ToString();
@@ -174,7 +174,7 @@ namespace LJCGenDocEdit
             manager.SourceSequence = mOriginalRecord.Sequence;
             manager.TargetSequence = LJCRecord.Sequence;
             manager.Update(LJCRecord, keyRecord, propertyNames);
-            if (0 == manager.Manager.AffectedCount)
+            if (manager.Manager.AffectedCount < 1)
             {
               title = "Update Error";
               message = "The Record was not updated.";
@@ -263,7 +263,7 @@ namespace LJCGenDocEdit
       if (id > 0)
       {
         var manager = Managers.DocMethodGroupManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(LJCGroupID);
       }
       return retValue;
     }

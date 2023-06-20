@@ -171,8 +171,8 @@ namespace LJCGenDocEdit
         string className = null;
         if (classID > 0)
         {
-          var parentData = CurrentClass();
-          className = parentData.Name;
+          var docClass = CurrentClass();
+          className = docClass.Name;
         }
         var id = MethodID();
 

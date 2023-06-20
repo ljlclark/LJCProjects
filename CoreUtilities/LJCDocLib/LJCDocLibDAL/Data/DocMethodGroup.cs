@@ -166,15 +166,7 @@ namespace LJCDocLibDAL
     #region Calculated and Join Data Properties
 
     /// <summary>Gets or sets the Join Heading value.</summary>
-    public string Heading
-    {
-      get { return mHeading; }
-      set
-      {
-        mHeading = ChangedNames.Add(ColumnHeading, mHeadingText, value);
-      }
-    }
-    private string mHeading;
+    public string Heading { get; set; }
     #endregion
 
     #region Class Properties
@@ -210,11 +202,11 @@ namespace LJCDocLibDAL
     public static string ColumnActiveFlag = "ActiveFlag";
     #endregion
 
-    #region Calculated and Join Class Data
+    //#region Calculated and Join Class Data
 
-    /// <summary>The Join Heading column name.</summary>
-    public static string ColumnJoinHeading = "Heading";
-    #endregion
+    ///// <summary>The Join Heading column name.</summary>
+    //public static string ColumnJoinHeading = "Heading";
+    //#endregion
   }
 
   #region Comparers
