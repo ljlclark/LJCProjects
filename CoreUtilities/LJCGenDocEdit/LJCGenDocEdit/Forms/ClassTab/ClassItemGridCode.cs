@@ -417,7 +417,7 @@ namespace LJCGenDocEdit
 
       if (null == row)
       {
-        row = mClassGrid.CurrentRow as LJCGridRow;
+        row = mGroupGrid.CurrentRow as LJCGridRow;
       }
       if (row != null)
       {

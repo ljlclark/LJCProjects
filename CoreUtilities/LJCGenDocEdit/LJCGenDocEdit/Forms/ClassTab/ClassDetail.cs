@@ -79,6 +79,7 @@ namespace LJCGenDocEdit
         Text += " - New";
         LJCIsUpdate = false;
         GroupText.Text = LJCGroupName;
+        AssemblyText.Text = GetAssemblyText(LJCAssemblyID);
 
         // Set default values.
         LJCRecord = new DocClass();
@@ -103,12 +104,8 @@ namespace LJCGenDocEdit
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
 
         // Get foreign key values.
-        mDocAssemblyID = dataRecord.DocAssemblyID;
-        var assemblyItem = GetAssemblyWithID(dataRecord.DocAssemblyID);
-        if (assemblyItem != null)
-        {
-          AssemblyText.Text = assemblyItem.Name;
-        }
+        LJCAssemblyID = dataRecord.DocAssemblyID;
+        AssemblyText.Text = GetAssemblyText(LJCAssemblyID);
       }
     }
 
@@ -134,7 +131,7 @@ namespace LJCGenDocEdit
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
       // Foreign key values.
-      retValue.DocAssemblyID = mDocAssemblyID;
+      retValue.DocAssemblyID = LJCAssemblyID;
       return retValue;
     }
 
@@ -237,6 +234,19 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Get Data Methods
+
+    // 
+    private string GetAssemblyText(short id)
+    {
+      string retValue = null;
+
+      var docAssembly = GetAssemblyWithID(id);
+      if (docAssembly != null)
+      {
+        retValue = docAssembly.Name;
+      }
+      return retValue;
+    }
 
     // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetAssemblyWithID(short id)
@@ -500,9 +510,6 @@ namespace LJCGenDocEdit
 
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
-
-    // Foreign Keys
-    private short mDocAssemblyID;
 
     // Record with the original values.
     private DocClass mOriginalRecord;
