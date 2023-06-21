@@ -139,7 +139,6 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
     {
       row.LJCSetInt32(DocClass.ColumnID, dataRecord.ID);
-      row.LJCSetString(DocClass.ColumnName, dataRecord.Name);
     }
     #endregion
 
@@ -148,23 +147,12 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog for a new record.</summary>
     internal void DoNew()
     {
-      if (mGroupGrid.CurrentRow is LJCGridRow groupRow)
+      if (mGroupGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items.
-        var assemblyID = AssemblyID(groupRow);
-        var groupID = GroupID();
-        string groupName = null;
-        if (groupID > 0)
-        {
-          var groupData = CurrentGroup();
-          groupName = groupData.Heading;
-        }
-
         var detail = new ClassDetail()
         {
-          LJCAssemblyID = assemblyID,
-          LJCGroupID = groupID,
-          LJCGroupName = groupName,
+          LJCGroupID = GroupID(),
+          LJCAssemblyID = AssemblyID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -175,26 +163,14 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog to edit an existing record.</summary>
     internal void DoEdit()
     {
-      if (mGroupGrid.CurrentRow is LJCGridRow groupRow
-        && mClassGrid.CurrentRow is LJCGridRow row)
+      if (mGroupGrid.CurrentRow is LJCGridRow _
+        && mClassGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items. (DocClassGroup)
-        var assemblyID = AssemblyID(groupRow);
-        var groupID = GroupID();
-        string groupName = null;
-        if (groupID > 0)
-        {
-          var groupData = CurrentGroup();
-          groupName = groupData.Heading;
-        }
-        var id = ClassID();
-
         var detail = new ClassDetail()
         {
-          LJCAssemblyID = assemblyID,
-          LJCID = id,
-          LJCGroupID = groupID,
-          LJCGroupName = groupName,
+          LJCID = ClassID(),
+          LJCGroupID = GroupID(),
+          LJCAssemblyID = AssemblyID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -308,18 +284,19 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    /// <summary>
-    /// Retrieves the row parent ID.
-    /// </summary>
-    /// <param name="groupRow">The group row.</param>
-    /// <returns>The group row Assembly ID.</returns>
-    internal short AssemblyID(LJCGridRow groupRow)
+    // Retrieves the current row item ID.
+    /// <include path='items/RowID/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal short AssemblyID(LJCGridRow row = null)
     {
       short retValue = 0;
 
-      if (groupRow != null)
+      if (null == row)
       {
-        retValue = (short)groupRow.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
+        row = mGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (row != null)
+      {
+        retValue = (short)row.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
       }
       return retValue;
     }

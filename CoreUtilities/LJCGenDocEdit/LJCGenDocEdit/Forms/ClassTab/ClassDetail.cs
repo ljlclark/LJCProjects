@@ -28,7 +28,6 @@ namespace LJCGenDocEdit
       // Initialize property values.
       LJCID = 0;
       LJCGroupID = 0;
-      LJCGroupName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -66,6 +65,11 @@ namespace LJCGenDocEdit
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
+
+      // Get Parent values.
+      GroupText.Text = GetGroupHeading(LJCGroupID);
+      AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
+
       Text = "Class Detail";
       if (LJCID > 0)
       {
@@ -78,8 +82,6 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        GroupText.Text = LJCGroupName;
-        AssemblyText.Text = GetAssemblyText(LJCAssemblyID);
 
         // Set default values.
         LJCRecord = new DocClass();
@@ -96,16 +98,10 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCGroupID = dataRecord.DocClassGroupID;
-        GroupText.Text = LJCGroupName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
-
-        // Get foreign key values.
-        LJCAssemblyID = dataRecord.DocAssemblyID;
-        AssemblyText.Text = GetAssemblyText(LJCAssemblyID);
       }
     }
 
@@ -123,14 +119,14 @@ namespace LJCGenDocEdit
         retValue = new DocClass();
       }
       retValue.ID = LJCID;
-      retValue.DocClassGroupID = LJCGroupID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
-      // Foreign key values.
+      // Get Parent key values.
+      retValue.DocClassGroupID = LJCGroupID;
       retValue.DocAssemblyID = LJCAssemblyID;
       return retValue;
     }
@@ -235,8 +231,8 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // 
-    private string GetAssemblyText(short id)
+    // Retrieves the AssemblyItem name.
+    private string GetAssemblyName(short id)
     {
       string retValue = null;
 
@@ -244,6 +240,19 @@ namespace LJCGenDocEdit
       if (docAssembly != null)
       {
         retValue = docAssembly.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the ClassGroup heading.
+    private string GetGroupHeading(short id)
+    {
+      string retValue = null;
+
+      var classGroup = GetGroupWithID(id);
+      if (classGroup != null)
+      {
+        retValue = classGroup.Heading;
       }
       return retValue;
     }
@@ -269,7 +278,20 @@ namespace LJCGenDocEdit
       if (id > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(id);
+      }
+      return retValue;
+    }
+
+    // Retrieves the ClassGroup with the ID value.
+    private DocClassGroup GetGroupWithID(short id)
+    {
+      DocClassGroup retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocClassGroupManager;
+        retValue = manager.RetrieveWithID(id);
       }
       return retValue;
     }
@@ -470,19 +492,11 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the foreign ID value.</summary>
     internal short LJCAssemblyID { get; set; }
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
-
     /// <summary>Gets or sets the parent Group ID value.</summary>
     public short LJCGroupID { get; set; }
 
-    /// <summary>Gets or sets the parent Group name.</summary>
-    public string LJCGroupName
-    {
-      get { return mGroupName; }
-      set { mGroupName = NetString.InitString(value); }
-    }
-    private string mGroupName;
+    /// <summary>Gets or sets the primary ID value.</summary>
+    internal short LJCID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }

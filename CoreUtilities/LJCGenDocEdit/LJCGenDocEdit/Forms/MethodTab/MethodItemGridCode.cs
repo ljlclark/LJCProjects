@@ -127,7 +127,6 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocMethod dataRecord)
     {
       row.LJCSetInt32(DocMethod.ColumnID, dataRecord.ID);
-      row.LJCSetString(DocMethod.ColumnName, dataRecord.Name);
     }
     #endregion
 
@@ -138,21 +137,10 @@ namespace LJCGenDocEdit
     {
       if (mClassGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items.
-        var classID = ClassID();
-        string className = null;
-        if (classID > 0)
-        {
-          var docClass = CurrentClass();
-          className = docClass.Name;
-        }
-        var groupID = GroupID();
-
         var detail = new MethodDetail()
         {
-          LJCClassID = classID,
-          LJCClassName = className,
-          LJCGroupID = groupID,
+          LJCGroupID = GroupID(),
+          LJCClassID = ClassID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -166,21 +154,11 @@ namespace LJCGenDocEdit
       if (mClassGrid.CurrentRow is LJCGridRow _
         && mMethodGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items.
-        var classID = ClassID();
-        string className = null;
-        if (classID > 0)
-        {
-          var docClass = CurrentClass();
-          className = docClass.Name;
-        }
-        var id = MethodID();
-
         var detail = new MethodDetail()
         {
-          LJCID = id,
-          LJCClassID = classID,
-          LJCClassName = className,
+          LJCID = MethodID(),
+          LJCGroupID = GroupID(),
+          LJCClassID = ClassID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;

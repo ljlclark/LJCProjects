@@ -6,7 +6,6 @@ using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
-using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -29,7 +28,6 @@ namespace LJCGenDocEdit
       // Initialize property values.
       LJCID = 0;
       LJCClassID = 0;
-      LJCClassName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -68,6 +66,11 @@ namespace LJCGenDocEdit
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
+
+      // Get Parent values.
+      GroupText.Text = GetGroupHeadingName(LJCGroupID);
+      ClassText.Text = GetClassName(LJCClassID);
+
       Text = "Method Detail";
       if (LJCID > 0)
       {
@@ -80,8 +83,6 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ClassText.Text = LJCClassName;
-        GroupText.Text = GetGroupText(LJCGroupID);
 
         // Set default values.
         LJCRecord = new DocMethod();
@@ -98,16 +99,10 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCClassID = dataRecord.DocClassID;
-        ClassText.Text = LJCClassName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
-
-        // Get foreign key values.
-        LJCGroupID = dataRecord.DocMethodGroupID;
-        GroupText.Text = GetGroupText(LJCGroupID);
       }
     }
 
@@ -125,15 +120,15 @@ namespace LJCGenDocEdit
         retValue = new DocMethod();
       }
       retValue.ID = LJCID;
-      retValue.DocClassID = LJCClassID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
-      // Foreign key values.
+      // Get Parent key values.
       retValue.DocMethodGroupID = LJCGroupID;
+      retValue.DocClassID = LJCClassID;
       return retValue;
     }
 
@@ -240,8 +235,21 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // 
-    private string GetGroupText(short id)
+    // Retrieves the ClassItem name.
+    private string GetClassName(short id)
+    {
+      string retValue = null;
+
+      var docClass = GetClassWithID(id);
+      if (docClass != null)
+      {
+        retValue = docClass.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the MethodGroup heading name.
+    private string GetGroupHeadingName(short id)
     {
       string retValue = null;
 
@@ -249,6 +257,19 @@ namespace LJCGenDocEdit
       if (methodGroup != null)
       {
         retValue = methodGroup.HeadingName;
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocClass with the ID value.
+    private DocClass GetClassWithID(short id)
+    {
+      DocClass retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocClassManager;
+        retValue = manager.RetrieveWithID(id);
       }
       return retValue;
     }
@@ -476,14 +497,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Class ID value.</summary>
     public short LJCClassID { get; set; }
-
-    /// <summary>Gets or sets the Class Name value.</summary>
-    public string LJCClassName
-    {
-      get { return mClassName; }
-      set { mClassName = NetString.InitString(value); }
-    }
-    private string mClassName;
 
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }

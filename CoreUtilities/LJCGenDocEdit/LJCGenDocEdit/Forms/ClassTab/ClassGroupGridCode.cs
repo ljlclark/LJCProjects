@@ -137,7 +137,6 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocClassGroup dataRecord)
     {
       row.LJCSetInt32(DocClassGroup.ColumnID, dataRecord.ID);
-      row.LJCSetString(DocClassGroup.ColumnHeadingName, dataRecord.HeadingName);
       row.LJCSetInt32(DocClassGroup.ColumnDocAssemblyID
         , dataRecord.DocAssemblyID);
     }
