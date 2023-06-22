@@ -70,7 +70,7 @@ namespace LJCGenDocEdit
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        mOriginalRecord = GetHeadingWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -80,6 +80,7 @@ namespace LJCGenDocEdit
 
         // Set default values.
         LJCRecord = new DocMethodGroupHeading();
+        SequenceText.Text = "1";
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -113,7 +114,8 @@ namespace LJCGenDocEdit
       retValue.ID = LJCID;
       retValue.Name = NameText.Text.Trim();
       retValue.Heading = HeadingText.Text.Trim();
-      retValue.Sequence = Convert.ToInt16(SequenceText.Text);
+      short.TryParse(SequenceText.Text, out short value);
+      retValue.Sequence = value;
       return retValue;
     }
 
@@ -217,14 +219,14 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the item with the ID value.
-    private DocMethodGroupHeading GetWithID(short id)
+    private DocMethodGroupHeading GetHeadingWithID(short id)
     {
       DocMethodGroupHeading retValue = null;
 
       if (id > 0)
       {
         var manager = Managers.DocMethodGroupHeadingManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(id);
       }
       return retValue;
     }

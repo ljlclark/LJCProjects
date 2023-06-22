@@ -28,7 +28,6 @@ namespace LJCGenDocEdit
       // Initialize property values.
       LJCID = 0;
       LJCAssemblyID = 0;
-      LJCAssemblyName = null;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -66,6 +65,10 @@ namespace LJCGenDocEdit
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
+
+      // Get Parent values.
+      AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
+
       Text = "Class Group Detail";
       if (LJCID > 0)
       {
@@ -78,7 +81,6 @@ namespace LJCGenDocEdit
       {
         Text += " - New";
         LJCIsUpdate = false;
-        AssemblyText.Text = LJCAssemblyName;
 
         // Set default values.
         LJCRecord = new DocClassGroup();
@@ -95,12 +97,13 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCAssemblyID = dataRecord.DocAssemblyID;
-        AssemblyText.Text = LJCAssemblyName;
         NameText.Text = dataRecord.HeadingName;
         CustomText.Text = dataRecord.HeadingTextCustom;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
+
+        // Get Parent values.
+        AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
 
         // Join values.
         HeadingText.Text = dataRecord.Heading;
@@ -140,11 +143,13 @@ namespace LJCGenDocEdit
         retValue = new DocClassGroup();
       }
       retValue.ID = LJCID;
-      retValue.DocAssemblyID = LJCAssemblyID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Get Parent key values.
+      retValue.DocAssemblyID = LJCAssemblyID;
 
       // Foreign key values.
       retValue.DocClassGroupHeadingID = mDocClassGroupHeadingID;
@@ -265,6 +270,32 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Get Data Methods
+
+    // Retrieves the ClassItem name.
+    private string GetAssemblyName(short id)
+    {
+      string retValue = null;
+
+      var docAssembly = GetAssemblyWithID(id);
+      if (docAssembly != null)
+      {
+        retValue = docAssembly.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the Assembly with the ID value.
+    private DocAssembly GetAssemblyWithID(short id)
+    {
+      DocAssembly retValue = null;
+
+      if (id > 0)
+      {
+        var manager = Managers.DocAssemblyManager;
+        retValue = manager.RetrieveWithID(id);
+      }
+      return retValue;
+    }
 
     // Retrieves the Product with the ID value.
     private DocClassGroup GetGroupWithID(short id)
@@ -478,14 +509,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the parent Assembly ID value.</summary>
     public short LJCAssemblyID { get; set; }
-
-    /// <summary>Gets or sets the parent Assembly name.</summary>
-    public string LJCAssemblyName
-    {
-      get { return mAssemblyName; }
-      set { mAssemblyName = NetString.InitString(value); }
-    }
-    private string mAssemblyName;
 
     /// <summary>Gets or sets the primary ID value.</summary>
     internal short LJCID { get; set; }

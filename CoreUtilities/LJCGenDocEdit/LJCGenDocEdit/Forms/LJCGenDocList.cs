@@ -589,7 +589,7 @@ namespace LJCGenDocEdit
     // Handles the DragDrop event.
     private void ClassGroupGrid_DragDrop(object sender, DragEventArgs e)
     {
-      var assemblyItem = mAssemblyItemGridCode.CurrentItem();
+      var assemblyItem = mAssemblyItemGridCode.CurrentAssembly();
       var assemblyID = assemblyItem.ID;
       mClassGroupGridCode.DoDragDrop(assemblyID, e);
     }
@@ -663,7 +663,7 @@ namespace LJCGenDocEdit
     // Handles the DragDrop event.
     private void ClassItemGrid_DragDrop(object sender, DragEventArgs e)
     {
-      var assemblyItem = mAssemblyItemGridCode.CurrentItem();
+      var assemblyItem = mAssemblyItemGridCode.CurrentAssembly();
       var assemblyID = assemblyItem.ID;
       mClassItemGridCode.DoDragDrop(assemblyID, e);
     }

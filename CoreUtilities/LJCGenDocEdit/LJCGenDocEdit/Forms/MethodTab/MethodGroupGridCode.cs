@@ -1,16 +1,16 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // MethodGroupGridCode.cs
+using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using static LJCGenDocEdit.LJCGenDocList;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using System;
-using LJCWinFormCommon;
+using System.Collections.Generic;
 using System.Drawing;
-using LJCDBMessage;
+using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
@@ -24,8 +24,8 @@ namespace LJCGenDocEdit
     {
       mDocList = parentList;
       mClassGrid = mDocList.ClassItemGrid;
-      mGroupGrid = mDocList.MethodGroupGrid;
       Managers = mDocList.Managers;
+      mMethodGroupGrid = mDocList.MethodGroupGrid;
     }
     #endregion
 
@@ -34,22 +34,21 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the list rows.</summary>
     internal void DataRetrieve()
     {
-      mGroupGrid.LJCRowsClear();
+      mMethodGroupGrid.LJCRowsClear();
 
-      if (mClassGrid.CurrentRow is LJCGridRow classRow)
+      if (mClassGrid.CurrentRow is LJCGridRow _)
       {
         mDocList.Cursor = Cursors.WaitCursor;
-        var parentID = ClassID(classRow);
-
         var manager = Managers.DocMethodGroupManager;
         var names = new List<string>()
         {
           DocMethodGroup.ColumnSequence
         };
         manager.SetOrderBy(names);
+
         var keyColumns = new DbColumns()
         {
-          { DocMethodGroup.ColumnDocClassID, parentID }
+          { DocMethodGroup.ColumnDocClassID, ClassID() }
         };
         DbResult result = manager.LoadResult(keyColumns);
 
@@ -74,13 +73,12 @@ namespace LJCGenDocEdit
       if (dataRecord != null)
       {
         mDocList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in mGroupGrid.Rows)
+        foreach (LJCGridRow row in mMethodGroupGrid.Rows)
         {
-          var rowID = GroupID(row);
-          if (rowID == dataRecord.ID)
+          if (MethodGroupID(row) == dataRecord.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            mGroupGrid.LJCSetCurrentRow(row, true);
+            mMethodGroupGrid.LJCSetCurrentRow(row, true);
             retValue = true;
             break;
           }
@@ -93,34 +91,32 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DocMethodGroup dataRecord)
     {
-      var retValue = mGroupGrid.LJCRowAdd();
+      var retValue = mMethodGroupGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      mGroupGrid.LJCRowSetValues(retValue, dataRecord);
+      mMethodGroupGrid.LJCRowSetValues(retValue, dataRecord);
       return retValue;
     }
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var retValue = mGroupGrid.LJCRowAdd();
+      var retValue = mMethodGroupGrid.LJCRowAdd();
       var columnName = DocMethodGroup.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
-      columnName = DocMethodGroup.ColumnHeadingName;
-      retValue.LJCSetString(columnName, dbValues.LJCGetValue(columnName));
       columnName = DocMethodGroup.ColumnDocClassID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
-      mGroupGrid.LJCRowSetValues(retValue, dbValues);
+      mMethodGroupGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdate(DocMethodGroup dataRecord)
     {
-      if (mGroupGrid.CurrentRow is LJCGridRow row)
+      if (mMethodGroupGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        mGroupGrid.LJCRowSetValues(row, dataRecord);
+        mMethodGroupGrid.LJCRowSetValues(row, dataRecord);
       }
     }
 
@@ -128,7 +124,6 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocMethodGroup dataRecord)
     {
       row.LJCSetInt32(DocMethodGroup.ColumnID, dataRecord.ID);
-      row.LJCSetString(DocMethodGroup.ColumnHeadingName, dataRecord.HeadingName);
       row.LJCSetInt32(DocMethodGroup.ColumnDocClassID
         , dataRecord.DocClassID);
     }
@@ -141,19 +136,9 @@ namespace LJCGenDocEdit
     {
       if (mClassGrid.CurrentRow is LJCGridRow classRow)
       {
-        // Data from items.
-        var classID = ClassID(classRow);
-        string className = null;
-        if (classID > 0)
-        {
-          var classData = CurrentClass();
-          className = classData.Name;
-        }
-
         var detail = new MethodGroupDetail()
         {
-          LJCClassID = classID,
-          LJCClassName = className,
+          LJCClassID = ClassID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -164,24 +149,13 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog to edit an existing record.</summary>
     internal void DoEdit()
     {
-      if (mClassGrid.CurrentRow is LJCGridRow classRow
-        && mGroupGrid.CurrentRow is LJCGridRow row)
+      if (mClassGrid.CurrentRow is LJCGridRow _
+        && mMethodGroupGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items.
-        var classID = ClassID(classRow);
-        string className = null;
-        if (classID > 0)
-        {
-          var classData = CurrentClass();
-          className = classData.Name;
-        }
-        var id = GroupID();
-
         var detail = new MethodGroupDetail()
         {
-          LJCID = id,
-          LJCClassID = classID,
-          LJCClassName = className,
+          LJCID = MethodGroupID(),
+          LJCClassID = ClassID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -197,9 +171,9 @@ namespace LJCGenDocEdit
       bool success = false;
 
       var classRow = mClassGrid.CurrentRow as LJCGridRow;
-      var row = mGroupGrid.CurrentRow as LJCGridRow;
+      var methodGroupRow = mMethodGroupGrid.CurrentRow as LJCGridRow;
       if (classRow != null
-        && row != null)
+        && methodGroupRow != null)
       {
         title = "Delete Confirmation";
         message = FormCommon.DeleteConfirm;
@@ -212,14 +186,10 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        // Data from items.
-        var classID = ClassID(classRow);
-        var id = GroupID();
-
         var keyRecord = new DbColumns()
         {
-          { DocMethodGroup.ColumnID, classID },
-          { DocClass.ColumnID, id }
+          { DocMethodGroup.ColumnID, MethodGroupID() },
+          { DocClass.ColumnID, ClassID() }
         };
         var manager = Managers.DocMethodGroupManager;
         manager.Delete(keyRecord);
@@ -234,7 +204,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        mGroupGrid.Rows.Remove(row);
+        mMethodGroupGrid.Rows.Remove(methodGroupRow);
         mDocList.TimedChange(Change.MethodGroup);
       }
     }
@@ -243,15 +213,15 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       mDocList.Cursor = Cursors.WaitCursor;
-      short id = GroupID();
       DataRetrieve();
 
       // Select the original row.
-      if (id > 0)
+      var methodGroupID = MethodGroupID();
+      if (methodGroupID > 0)
       {
         var dataRecord = new DocMethodGroup()
         {
-          ID = id
+          ID = methodGroupID
         };
         RowSelect(dataRecord);
       }
@@ -261,9 +231,8 @@ namespace LJCGenDocEdit
     /// <summary>Resets the Sequence column values.</summary>
     internal void DoResetSequence()
     {
-      var methodGroup = CurrentGroup();
       var manager = Managers.DocMethodGroupManager;
-      manager.ClassID = methodGroup.DocClassID;
+      manager.ClassID = ClassID();
       manager.ResetSequence();
     }
 
@@ -285,7 +254,7 @@ namespace LJCGenDocEdit
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
-          mGroupGrid.LJCSetCurrentRow(row, true);
+          mMethodGroupGrid.LJCSetCurrentRow(row, true);
           DoRefresh();
           mDocList.TimedChange(Change.MethodGroup);
         }
@@ -295,56 +264,23 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    // Retrieves the current row item ID.
     /// <summary>
-    /// Retrieves the parent Class ID.
+    /// Retrieves the current row item ID.
     /// </summary>
-    /// <param name="classRow">The parent Class row.</param>
-    /// <returns>The parent Class row ID.</returns>
-    internal short ClassID(LJCGridRow classRow)
+    /// <param name="classRow">The DocClass grid row.</param>
+    /// <returns></returns>
+    internal short ClassID(LJCGridRow classRow = null)
     {
       short retValue = 0;
 
+      if (null == classRow)
+      {
+        classRow = mClassGrid.CurrentRow as LJCGridRow;
+      }
       if (classRow != null)
       {
         retValue = (short)classRow.LJCGetInt32(DocClass.ColumnID);
-      }
-      return retValue;
-    }
-
-    /// <summary>
-    /// Retrieves the current parent Class row item.
-    /// </summary>
-    /// <returns>The current parent Class row item.</returns>
-    internal DocClass CurrentClass()
-    {
-      DocClass retValue = null;
-
-      if (mClassGrid.CurrentRow is LJCGridRow classRow)
-      {
-        var id = ClassID(classRow);
-        if (id > 0)
-        {
-          var manager = Managers.DocClassManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item.
-    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal DocMethodGroup CurrentGroup()
-    {
-      DocMethodGroup retValue = null;
-
-      if (mGroupGrid.CurrentRow is LJCGridRow _)
-      {
-        var id = GroupID();
-        if (id > 0)
-        {
-          var manager = Managers.DocMethodGroupManager;
-          retValue = manager.RetrieveWithID(id);
-        }
       }
       return retValue;
     }
@@ -355,9 +291,9 @@ namespace LJCGenDocEdit
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
       var dragDataName = sourceRow.LJCGetString("DragDataName");
-      if (dragDataName == mGroupGrid.LJCDragDataName)
+      if (dragDataName == mMethodGroupGrid.LJCDragDataName)
       {
-        var targetIndex = mGroupGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        var targetIndex = mMethodGroupGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
         if (targetIndex >= 0)
         {
           // Get source group.
@@ -366,7 +302,7 @@ namespace LJCGenDocEdit
           var sourceGroup = manager.RetrieveWithUnique(parentID, sourceName);
 
           // Get target group.
-          var targetRow = mGroupGrid.Rows[targetIndex] as LJCGridRow;
+          var targetRow = mMethodGroupGrid.Rows[targetIndex] as LJCGridRow;
           var targetName = targetRow.LJCGetString(DocMethodGroup.ColumnHeadingName);
           var targetGroup = manager.RetrieveWithUnique(parentID, targetName);
 
@@ -380,18 +316,22 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <include path='items/RowID/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal short GroupID(LJCGridRow row = null)
+    /// <summary>
+    /// Retrieves the current row item ID.
+    /// </summary>
+    /// <param name="methodGroupRow">The MethodGroup grid row.</param>
+    /// <returns>The MethodGroup ID.</returns>
+    internal short MethodGroupID(LJCGridRow methodGroupRow = null)
     {
       short retValue = 0;
 
-      if (null == row)
+      if (null == methodGroupRow)
       {
-        row = mGroupGrid.CurrentRow as LJCGridRow;
+        methodGroupRow = mMethodGroupGrid.CurrentRow as LJCGridRow;
       }
-      if (row != null)
+      if (methodGroupRow != null)
       {
-        retValue = (short)row.LJCGetInt32(DocMethodGroup.ColumnID);
+        retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
       }
       return retValue;
     }
@@ -400,7 +340,7 @@ namespace LJCGenDocEdit
     internal void SetupGrid()
     {
       // Setup default display columns if no columns are defined.
-      if (0 == mGroupGrid.Columns.Count)
+      if (0 == mMethodGroupGrid.Columns.Count)
       {
         List<string> columnNames = new List<string>()
         {
@@ -413,8 +353,8 @@ namespace LJCGenDocEdit
         DisplayColumns = classGroupManager.GetColumns(columnNames);
 
         // Setup the grid display columns.
-        mGroupGrid.LJCAddDisplayColumns(DisplayColumns);
-        mGroupGrid.LJCDragDataName = "DocMethodGroup";
+        mMethodGroupGrid.LJCAddDisplayColumns(DisplayColumns);
+        mMethodGroupGrid.LJCDragDataName = "DocMethodGroup";
       }
     }
     #endregion
@@ -433,17 +373,17 @@ namespace LJCGenDocEdit
     {
       if (detail.LJCNext)
       {
-        LJCDataGrid grid = mGroupGrid;
+        LJCDataGrid grid = mMethodGroupGrid;
         int currentIndex = grid.CurrentRow.Index;
         detail.LJCNext = false;
         if (currentIndex < grid.Rows.Count - 1)
         {
           grid.LJCSetCurrentRow(currentIndex + 1, true);
-          var id = GroupID();
-          if (id > 0)
+          var methodGroupID = MethodGroupID();
+          if (methodGroupID > 0)
           {
             detail.LJCNext = true;
-            detail.LJCID = id;
+            detail.LJCID = methodGroupID;
           }
         }
       }
@@ -454,17 +394,17 @@ namespace LJCGenDocEdit
     {
       if (detail.LJCPrevious)
       {
-        LJCDataGrid grid = mGroupGrid;
-        int currentIndex = grid.CurrentRow.Index;
+        LJCDataGrid groupGrid = mMethodGroupGrid;
+        int currentIndex = groupGrid.CurrentRow.Index;
         detail.LJCPrevious = false;
         if (currentIndex > 0)
         {
-          grid.LJCSetCurrentRow(currentIndex - 1, true);
-          var id = GroupID();
-          if (id > 0)
+          groupGrid.LJCSetCurrentRow(currentIndex - 1, true);
+          var methodGroupID = MethodGroupID();
+          if (methodGroupID > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCID = id;
+            detail.LJCID = methodGroupID;
           }
         }
       }
@@ -484,7 +424,7 @@ namespace LJCGenDocEdit
 
     private readonly LJCDataGrid mClassGrid;
     private readonly LJCGenDocList mDocList;
-    private readonly LJCDataGrid mGroupGrid;
+    private readonly LJCDataGrid mMethodGroupGrid;
     #endregion
   }
 }
