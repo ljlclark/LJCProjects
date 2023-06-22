@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ClassHeadingGridCode.xml -->
+<items>
+  <ClassHeadingID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="classHeadingRow">The ClassGroupHeading grid row.</param>
+    <returns>The ClassGroupHeading ID.</returns>
+  </ClassHeadingID>
+</items>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- MethodHeadingGridCode.xml -->
+<items>
+  <MethodHeadingID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="methodheadingRow">The MethodGroupHeading grid row.</param>
+    <returns>The MethodGroupHeading ID.</returns>
+  </MethodHeadingID>
+</items>

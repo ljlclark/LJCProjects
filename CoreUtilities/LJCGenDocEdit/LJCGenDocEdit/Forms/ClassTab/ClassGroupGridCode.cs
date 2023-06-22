@@ -273,11 +273,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="assemblyRow">The DocAssembly grid row.</param>
-    /// <returns>The DocAssembly ID.</returns>
+    /// <include path='items/AssemblyID/*' file='../../Doc/ClassGroupGridCode.xml'/>
     internal short AssemblyID(LJCGridRow assemblyRow = null)
     {
       short retValue = 0;
@@ -324,11 +320,7 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="classGroupRow">The ClassGroup grid row.</param>
-    /// <returns>The ClassGroup ID.</returns>
+    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassGroupGridCode.xml'/>
     internal short ClassGroupID(LJCGridRow classGroupRow = null)
     {
       short retValue = 0;

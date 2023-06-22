@@ -263,11 +263,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="classHeadingRow">The ClassGroupHeading grid row.</param>
-    /// <returns>The ClassGroupHeading ID.</returns>
+    /// <include path='items/ClassHeadingID/*' file='../../Doc/ClassHeadingGridCode.xml'/>
     internal short ClassHeadingID(LJCGridRow classHeadingRow = null)
     {
       short retValue = 0;

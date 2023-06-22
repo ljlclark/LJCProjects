@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- MethodGridCode.xml -->
+<items>
+  <MethodName>
+    <summary>
+      Retrieves the current row item Name.
+    </summary>
+    <param name="methodRow">The optional row value.</param>
+    <returns>The row Name value.</returns>
+  </MethodName>
+</items>

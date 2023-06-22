@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AssemblyGroupGridCode.xml -->
+<items>
+  <AssemblyGroupID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="assemblyGroupRow">The AssemblyGroup grid row.</param>
+    <returns>The AssemblyGroup ID.</returns>
+  </AssemblyGroupID>
+</items>

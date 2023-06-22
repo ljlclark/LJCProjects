@@ -273,22 +273,18 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="groupRow">The AssemblyGroup grid row.</param>
-    /// <returns>The AssemblyGroup ID.</returns>
-    internal short AssemblyGroupID(LJCGridRow groupRow = null)
+    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyGroupGridCode.xml'/>
+    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
     {
       short retValue = 0;
 
-      if (null == groupRow)
+      if (null == assemblyGroupRow)
       {
-        groupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
       }
-      if (groupRow != null)
+      if (assemblyGroupRow != null)
       {
-        retValue = (short)groupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
       }
       return retValue;
     }

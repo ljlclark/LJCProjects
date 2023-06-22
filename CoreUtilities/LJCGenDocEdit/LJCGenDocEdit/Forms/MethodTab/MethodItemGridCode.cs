@@ -259,11 +259,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="classRow">The DocClass grid row.</param>
-    /// <returns>The DocClass ID.</returns>
+    /// <include path='items/ClassID/*' file='../../Doc/MethodItemGridCode.xml'/>
     internal short ClassID(LJCGridRow classRow = null)
     {
       short retValue = 0;
@@ -310,11 +306,7 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="methodGroupRow">The MethodGroup grid row.</param>
-    /// <returns>The MethodGroup ID.</returns>
+    /// <include path='items/MethodGroupID/*' file='../../Doc/MethodItemGridCode.xml'/>
     internal short MethodGroupID(LJCGridRow methodGroupRow = null)
     {
       short retValue = 0;
@@ -331,11 +323,7 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="methodRow">The DocMethod grid row.</param>
-    /// <returns>The DocMethod ID.</returns>
+    /// <include path='items/MethodID/*' file='../../Doc/MethodItemGridCode.xml'/>
     internal short MethodID(LJCGridRow methodRow = null)
     {
       short retValue = 0;

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- MethodItemGridCode.xml -->
+<items>
+  <ClassID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="classRow">The DocClass grid row.</param>
+    <returns>The DocClass ID.</returns>
+  </ClassID>
+  <MethodGroupID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="methodGroupRow">The MethodGroup grid row.</param>
+    <returns>The MethodGroup ID.</returns>
+  </MethodGroupID>
+  <MethodID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="methodRow">The DocMethod grid row.</param>
+    <returns>The DocMethod ID.</returns>
+  </MethodID>
+</items>

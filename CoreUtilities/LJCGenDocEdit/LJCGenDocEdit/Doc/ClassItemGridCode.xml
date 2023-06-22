@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ClassItemGridCode.xml -->
+<items>
+  <AssemblyID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="classGroupRow">The ClassGroup grid row.</param>
+    <returns>The DocAssembly ID.</returns>
+  </AssemblyID>
+  <ClassID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="docClassRow">The DocClass grid row.</param>
+    <returns>The DocClass ID.</returns>
+  </ClassID>
+  <ClassGroupID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="classGroupRow">The ClassGroup grid row.</param>
+    <returns>The ClassGroup ID.</returns>
+  </ClassGroupID>
+</items>

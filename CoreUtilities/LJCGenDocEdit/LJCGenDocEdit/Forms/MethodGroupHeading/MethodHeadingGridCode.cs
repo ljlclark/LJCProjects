@@ -263,11 +263,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // Retrieves the current row item ID.
-    /// <summary>
-    /// Retrieves the current row item ID.
-    /// </summary>
-    /// <param name="methodheadingRow">The MethodGroupHeading grid row.</param>
-    /// <returns>The MethodGroupHeading ID.</returns>
+    /// <include path='items/MethodHeadingID/*' file='../../Doc/MethodHeadingGridCode.xml'/>
     internal short MethodHeadingID(LJCGridRow methodheadingRow = null)
     {
       short retValue = 0;
