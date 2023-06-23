@@ -81,7 +81,7 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithUniqueKey/*' file='Doc/ViewJoinColumnManager.xml'/>
     public ViewJoinColumn RetrieveWithUniqueKey(ViewJoin viewJoin, DbColumn dbColumn)
     {
-      ViewJoinColumn retValue = null;
+      ViewJoinColumn retValue;
 
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -112,11 +112,11 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetParentIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetParentIDKey(int id)
+    public DbColumns GetParentIDKey(int parentID)
     {
       var retValue = new DbColumns()
       {
-        { ViewJoinColumn.ColumnViewJoinID, id }
+        { ViewJoinColumn.ColumnViewJoinID, parentID }
       };
       return retValue;
     }

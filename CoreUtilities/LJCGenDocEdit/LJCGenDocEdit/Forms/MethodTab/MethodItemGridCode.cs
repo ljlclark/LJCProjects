@@ -306,23 +306,6 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    /// <include path='items/MethodGroupID/*' file='../../Doc/MethodItemGridCode.xml'/>
-    internal short MethodGroupID(LJCGridRow methodGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == methodGroupRow)
-      {
-        methodGroupRow = mMethodGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (methodGroupRow != null)
-      {
-        retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
     /// <include path='items/MethodID/*' file='../../Doc/MethodItemGridCode.xml'/>
     internal short MethodID(LJCGridRow methodRow = null)
     {
@@ -335,6 +318,23 @@ namespace LJCGenDocEdit
       if (methodRow != null)
       {
         retValue = (short)methodRow.LJCGetInt32(DocMethod.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
+    /// <include path='items/MethodGroupID/*' file='../../Doc/MethodItemGridCode.xml'/>
+    internal short MethodGroupID(LJCGridRow methodGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == methodGroupRow)
+      {
+        methodGroupRow = mMethodGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (methodGroupRow != null)
+      {
+        retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
       }
       return retValue;
     }

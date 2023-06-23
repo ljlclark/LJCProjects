@@ -264,11 +264,11 @@ namespace LJCGenTextLib
         var directive = Directive.GetDirective(line);
 
         // Debugging
-        if (Directive.IsName(directive, "Subsection")
-          || Directive.IsName(directive, "PublicMethods"))
-        {
-          int i = 0;
-        }
+        //if (Directive.IsName(directive, "Subsection")
+        //  || Directive.IsName(directive, "PublicMethods"))
+        //{
+        //  int i = 0;
+        //}
 
         // Sets line to null if a Section directive.
         // May change lineIndex to end of section or template.
@@ -630,10 +630,11 @@ namespace LJCGenTextLib
 
         if (Directive.IsIfBegin(directive))
         {
-          if (directive.IsName("_PublicMethodCount_"))
-          {
-            int i = 0;
-          }
+          // Debugging
+          //if (directive.IsName("_PublicMethodCount_"))
+          //{
+          //  int i = 0;
+          //}
           retValue = true;
           line = null;
           GenIfBlock(section, directive, ref lineIndex);

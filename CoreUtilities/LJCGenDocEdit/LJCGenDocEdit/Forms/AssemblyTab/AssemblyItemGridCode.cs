@@ -262,6 +262,40 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    // Retrieves the current row item ID.
+    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
+    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyGroupRow)
+      {
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyGroupRow != null)
+      {
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
+    /// <include path='items/AssemblyID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
+    internal short AssemblyID(LJCGridRow assemblyRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyRow)
+      {
+        assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyRow != null)
+      {
+        retValue = (short)assemblyRow.LJCGetInt32(DocAssembly.ColumnID);
+      }
+      return retValue;
+    }
+
     // Retrieves the current row item.
     /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal DocAssembly CurrentAssembly()
@@ -308,40 +342,6 @@ namespace LJCGenDocEdit
           DoRefresh();
         }
       }
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
-    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyGroupRow)
-      {
-        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyGroupRow != null)
-      {
-        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
-    internal short AssemblyID(LJCGridRow assemblyRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyRow)
-      {
-        assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyRow != null)
-      {
-        retValue = (short)assemblyRow.LJCGetInt32(DocAssembly.ColumnID);
-      }
-      return retValue;
     }
 
     /// <summary>Setup the grid display columns.</summary>

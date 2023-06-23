@@ -243,6 +243,23 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    // Retrieves the current row item ID.
+    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyGroupGridCode.xml'/>
+    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyGroupRow)
+      {
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyGroupRow != null)
+      {
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      return retValue;
+    }
+
     // The DragDrop method.
     /// <include path='items/DoDragDrop/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal void DoDragDrop(DragEventArgs e)
@@ -270,23 +287,6 @@ namespace LJCGenDocEdit
           DoRefresh();
         }
       }
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyGroupGridCode.xml'/>
-    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyGroupRow)
-      {
-        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyGroupRow != null)
-      {
-        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-      }
-      return retValue;
     }
 
     /// <summary>Setup the grid display columns.</summary>

@@ -290,6 +290,23 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
+    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassItemGridCode.xml'/>
+    internal short ClassGroupID(LJCGridRow classGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == classGroupRow)
+      {
+        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (classGroupRow != null)
+      {
+        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
     /// <include path='items/ClassID/*' file='../../Doc/ClassItemGridCode.xml'/>
     internal short ClassID(LJCGridRow docClassRow = null)
     {
@@ -352,23 +369,6 @@ namespace LJCGenDocEdit
           DoRefresh();
         }
       }
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassItemGridCode.xml'/>
-    internal short ClassGroupID(LJCGridRow classGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == classGroupRow)
-      {
-        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (classGroupRow != null)
-      {
-        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
-      }
-      return retValue;
     }
 
     /// <summary>Setup the grid display columns.</summary>

@@ -289,6 +289,23 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
+    // Retrieves the current row item ID.
+    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassGroupGridCode.xml'/>
+    internal short ClassGroupID(LJCGridRow classGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == classGroupRow)
+      {
+        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (classGroupRow != null)
+      {
+        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+      }
+      return retValue;
+    }
+
     // The DragDrop method.
     /// <include path='items/DoDragDrop1/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal void DoDragDrop(short parentID, DragEventArgs e)
@@ -317,23 +334,6 @@ namespace LJCGenDocEdit
           DoRefresh();
         }
       }
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassGroupGridCode.xml'/>
-    internal short ClassGroupID(LJCGridRow classGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == classGroupRow)
-      {
-        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (classGroupRow != null)
-      {
-        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
-      }
-      return retValue;
     }
 
     /// <summary>Setup the grid display columns.</summary>

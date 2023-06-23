@@ -152,15 +152,13 @@ namespace LJCUnitMeasureDAL
 
     #region OrderBys
 
-    // Sets the current OrderBy names.
-    /// <include path='items/SetOrderBy/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <summary>Sets the current OrderBy names.</summary>
     public void SetOrderByDescription() => DataManager.OrderByNames = new List<string>()
     {
       UnitMeasure.ColumnDescription
     };
 
-    // Sets the current OrderBy names.
-    /// <include path='items/SetOrderBy/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <summary>Sets the current OrderBy names.</summary>
     public void SetOrderBySequence() => DataManager.OrderByNames = new List<string>()
     {
       UnitMeasure.ColumnSequence

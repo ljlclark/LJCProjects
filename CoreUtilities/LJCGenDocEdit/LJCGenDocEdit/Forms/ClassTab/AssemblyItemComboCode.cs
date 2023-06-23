@@ -14,11 +14,12 @@ namespace LJCGenDocEdit
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    internal AssemblyItemComboCode(LJCGenDocList parent)
+    internal AssemblyItemComboCode(LJCGenDocList parentList)
     {
-      mParent = parent;
-      mCombo = mParent.AssemblyCombo;
-      Managers = mParent.Managers;
+      mDocList = parentList;
+      mAssemblyCombo = mDocList.AssemblyCombo;
+      mAssemblyGroupGrid = mDocList.AssemblyGroupGrid;
+      Managers = mDocList.Managers;
     }
     #endregion
 
@@ -27,25 +28,24 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the combo items.</summary>
     internal void DataRetrieve()
     {
-      mCombo.Items.Clear();
+      mAssemblyCombo.Items.Clear();
 
-      if (mParent.AssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
+      if (mDocList.AssemblyGroupGrid.CurrentRow is LJCGridRow _)
       {
-        mParent.Cursor = Cursors.WaitCursor;
-        var parentID = (short)parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+        mDocList.Cursor = Cursors.WaitCursor;
 
         var manager = Managers.DocAssemblyManager;
-        var dataRecords = manager.LoadWithParentID(parentID);
+        var dataRecords = manager.LoadWithParentID(AssemblyGroupID());
 
         if (NetCommon.HasItems(dataRecords))
         {
           foreach (DocAssembly dataRecord in dataRecords)
           {
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
-            mParent.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
+            mDocList.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
           }
         }
-        mParent.Cursor = Cursors.Default;
+        mDocList.Cursor = Cursors.Default;
       }
     }
 
@@ -57,18 +57,18 @@ namespace LJCGenDocEdit
 
       if (dataRecord != null)
       {
-        mParent.Cursor = Cursors.WaitCursor;
-        for (int index = 0; index < mCombo.Items.Count; index++)
+        mDocList.Cursor = Cursors.WaitCursor;
+        for (int index = 0; index < mAssemblyCombo.Items.Count; index++)
         {
-          var item = mCombo.Items[index] as LJCItem;
-          if (item.ID == dataRecord.ID)
+          var assemblyID = AssemblyComboID(index);
+          if (assemblyID == dataRecord.ID)
           {
-            mCombo.LJCSetByItemID(item.ID);
+            mAssemblyCombo.LJCSetByItemID(assemblyID);
             retValue = true;
             break;
           }
         }
-        mParent.Cursor = Cursors.Default;
+        mDocList.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -76,19 +76,60 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    // Retrieves the current row item ID.
+    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
+    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyGroupRow)
+      {
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyGroupRow != null)
+      {
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    internal short AssemblyComboID(int index = 0)
+    {
+      short retValue = default;
+
+      if (0 == index)
+      {
+        index = mAssemblyCombo.SelectedIndex;
+      }
+      if (index > 0)
+      {
+        var item = mAssemblyCombo.Items[index] as LJCItem;
+        if (item != null)
+        {
+          retValue = (short)item.ID;
+        }
+      }
+      return retValue;
+    }
+
     // Retrieves the currently selecteditem.
     /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal DocAssembly CurrentItem()
+    internal DocAssembly CurrentAssembly()
     {
       DocAssembly retValue = null;
 
-      if (mCombo.SelectedItem != null)
+      if (mAssemblyCombo.SelectedItem != null)
       {
-        var id = (short)mCombo.LJCSelectedItemID();
-        if (id > 0)
+        var assemblyID = (short)mAssemblyCombo.LJCSelectedItemID();
+        if (assemblyID > 0)
         {
           var manager = Managers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
+          retValue = manager.RetrieveWithID(assemblyID);
         }
       }
       return retValue;
@@ -103,8 +144,9 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    private readonly LJCItemCombo mCombo;
-    private readonly LJCGenDocList mParent;
+    private readonly LJCItemCombo mAssemblyCombo;
+    private readonly LJCDataGrid mAssemblyGroupGrid;
+    private readonly LJCGenDocList mDocList;
     #endregion
   }
 }

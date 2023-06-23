@@ -4,6 +4,7 @@
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -16,9 +17,10 @@ namespace LJCGenDocEdit
     /// <summary>Initializes an object instance.</summary>
     internal ClassItemComboCode(LJCGenDocList parent)
     {
-      mParent = parent;
-      mCombo = mParent.ClassCombo;
-      mManagers = mParent.Managers;
+      mDocList = parent;
+      mClassCombo = mDocList.ClassCombo;
+      mClassGroupGrid = mDocList.ClassGroupGrid;
+      mManagers = mDocList.Managers;
     }
     #endregion
 
@@ -27,25 +29,24 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the combo items.</summary>
     internal void DataRetrieve()
     {
-      mCombo.Items.Clear();
+      mClassCombo.Items.Clear();
 
-      if (mParent.ClassGroupGrid.CurrentRow is LJCGridRow parentRow)
+      if (mDocList.ClassGroupGrid.CurrentRow is LJCGridRow _)
       {
-        mParent.Cursor = Cursors.WaitCursor;
-        var parentID = (short)parentRow.LJCGetInt32(DocClass.ColumnID);
+        mDocList.Cursor = Cursors.WaitCursor;
 
         var manager = mManagers.DocClassManager;
-        var dataRecords = manager.LoadWithGroup(parentID);
+        var dataRecords = manager.LoadWithGroup(ClassGroupID());
 
         if (NetCommon.HasItems(dataRecords))
         {
           foreach (DocClass dataRecord in dataRecords)
           {
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
-            mParent.ClassCombo.LJCAddItem(dataRecord.ID, text);
+            mDocList.ClassCombo.LJCAddItem(dataRecord.ID, text);
           }
         }
-        mParent.Cursor = Cursors.Default;
+        mDocList.Cursor = Cursors.Default;
       }
     }
 
@@ -57,18 +58,18 @@ namespace LJCGenDocEdit
 
       if (dataRecord != null)
       {
-        mParent.Cursor = Cursors.WaitCursor;
-        for (int index = 0; index < mCombo.Items.Count; index++)
+        mDocList.Cursor = Cursors.WaitCursor;
+        for (int index = 0; index < mClassCombo.Items.Count; index++)
         {
-          var item = mCombo.Items[index] as LJCItem;
-          if (item.ID == dataRecord.ID)
+          var classID = ClassComboID(index);
+          if (classID == dataRecord.ID)
           {
-            mCombo.LJCSetByItemID(item.ID);
+            mClassCombo.LJCSetByItemID(classID);
             retValue = true;
             break;
           }
         }
-        mParent.Cursor = Cursors.Default;
+        mDocList.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -76,19 +77,63 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="classComboIndex"></param>
+    /// <returns></returns>
+    internal short ClassComboID(int classComboIndex = 0)
+    {
+      short retValue = default;
+
+      if (0 == classComboIndex)
+      {
+        classComboIndex = mClassCombo.SelectedIndex;
+      }
+      if (classComboIndex > 0)
+      {
+        var item = mClassCombo.Items[classComboIndex] as LJCItem;
+        if (item != null)
+        {
+          retValue = (short)item.ID;
+        }
+      }
+      return retValue;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="classGroupGridRow"></param>
+    /// <returns></returns>
+    internal short ClassGroupID(LJCGridRow classGroupGridRow = null)
+    {
+      short retValue = default;
+
+      if (null == classGroupGridRow)
+      {
+        classGroupGridRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (classGroupGridRow != null)
+      {
+        retValue = (short)classGroupGridRow.LJCGetInt32(DocClassGroup.ColumnID);
+      }
+      return retValue;
+    }
+
     // Retrieves the currently selecteditem.
     /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal DocClass CurrentItem()
+    internal DocClass CurrentClass()
     {
       DocClass retValue = null;
 
-      if (mCombo.SelectedItem != null)
+      if (mClassCombo.SelectedItem != null)
       {
-        var id = (short)mCombo.LJCSelectedItemID();
-        if (id > 0)
+        var classID = (short)mClassCombo.LJCSelectedItemID();
+        if (classID > 0)
         {
           var manager = mManagers.DocClassManager;
-          retValue = manager.RetrieveWithID(id);
+          retValue = manager.RetrieveWithID(classID);
         }
       }
       return retValue;
@@ -97,9 +142,10 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    private readonly LJCItemCombo mCombo;
+    private readonly LJCItemCombo mClassCombo;
+    private readonly LJCDataGrid mClassGroupGrid;
+    private readonly LJCGenDocList mDocList;
     private readonly ManagersDocGen mManagers;
-    private readonly LJCGenDocList mParent;
     #endregion
   }
 }

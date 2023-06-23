@@ -336,7 +336,7 @@ namespace LJCGenDocEdit
     // Selects the AssemblyCombo item with the current AssemblyItem.
     private void AssemblyItemSelect()
     {
-      var assemblyItem = mAssemblyItemComboCode.CurrentItem();
+      var assemblyItem = mAssemblyItemComboCode.CurrentAssembly();
       if (assemblyItem != null)
       {
         mAssemblyItemGridCode.RowSelect(assemblyItem);
@@ -356,7 +356,7 @@ namespace LJCGenDocEdit
     // Selects the AssemblyCombo item with the current AssemblyItem.
     private void ClassItemSelect()
     {
-      var classItem = mClassItemComboCode.CurrentItem();
+      var classItem = mClassItemComboCode.CurrentClass();
       if (classItem != null)
       {
         mClassItemGridCode.RowSelect(classItem);
