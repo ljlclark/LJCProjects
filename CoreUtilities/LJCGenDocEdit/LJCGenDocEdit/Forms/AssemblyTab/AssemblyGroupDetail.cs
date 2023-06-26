@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCGroupID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -65,11 +65,11 @@ namespace LJCGenDocEdit
     {
       Cursor = Cursors.WaitCursor;
       Text = "Assembly Group Detail";
-      if (LJCID > 0)
+      if (LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        mOriginalRecord = GetGroupWithID(LJCGroupID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -109,7 +109,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocAssemblyGroup();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCGroupID;
       retValue.Name = NameText.Text;
       retValue.Heading = FormCommon.SetString(HeadingText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
@@ -233,14 +233,14 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the Product with the ID value.
-    private DocAssemblyGroup GetWithID(short id)
+    private DocAssemblyGroup GetGroupWithID(short groupID)
     {
       DocAssemblyGroup retValue = null;
 
-      if (id > 0)
+      if (groupID > 0)
       {
         var manager = Managers.DocAssemblyGroupManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(LJCGroupID);
       }
       return retValue;
     }
@@ -258,7 +258,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCGroupID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -420,7 +420,7 @@ namespace LJCGenDocEdit
     #region Properties
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCGroupID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }

@@ -139,7 +139,7 @@ namespace LJCGenDocEdit
       {
         var detail = new AssemblyGroupDetail()
         {
-          LJCID = AssemblyGroupID(),
+          LJCGroupID = AssemblyGroupID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -337,7 +337,7 @@ namespace LJCGenDocEdit
           if (assemblyGroupID > 0)
           {
             detail.LJCNext = true;
-            detail.LJCID = assemblyGroupID;
+            detail.LJCGroupID = assemblyGroupID;
           }
         }
       }
@@ -357,7 +357,7 @@ namespace LJCGenDocEdit
           if (AssemblyGroupID() > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCID = AssemblyGroupID();
+            detail.LJCGroupID = AssemblyGroupID();
           }
         }
       }

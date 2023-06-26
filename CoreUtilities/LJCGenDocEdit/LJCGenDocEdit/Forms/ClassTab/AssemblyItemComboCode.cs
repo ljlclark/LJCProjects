@@ -44,6 +44,7 @@ namespace LJCGenDocEdit
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
             mDocList.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
           }
+          mDocList.AssemblyCombo.SelectedIndex = 0;
         }
         mDocList.Cursor = Cursors.Default;
       }
@@ -76,8 +77,29 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
+    // Retrieves the current combo item ID.
+    /// <include path='items/AssemblyComboID/*' file='../../Doc/AssemblyItemComboCode.xml'/>
+    internal short AssemblyComboID(int assemblyComboIndex = -1)
+    {
+      short retValue = default;
+
+      if (-1 == assemblyComboIndex)
+      {
+        assemblyComboIndex = mAssemblyCombo.SelectedIndex;
+      }
+      if (assemblyComboIndex >= 0)
+      {
+        var item = mAssemblyCombo.Items[assemblyComboIndex] as LJCItem;
+        if (item != null)
+        {
+          retValue = (short)item.ID;
+        }
+      }
+      return retValue;
+    }
+
     // Retrieves the current row item ID.
-    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
+    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemComboCode.xml'/>
     internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
     {
       short retValue = 0;
@@ -89,30 +111,6 @@ namespace LJCGenDocEdit
       if (assemblyGroupRow != null)
       {
         retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    internal short AssemblyComboID(int index = 0)
-    {
-      short retValue = default;
-
-      if (0 == index)
-      {
-        index = mAssemblyCombo.SelectedIndex;
-      }
-      if (index > 0)
-      {
-        var item = mAssemblyCombo.Items[index] as LJCItem;
-        if (item != null)
-        {
-          retValue = (short)item.ID;
-        }
       }
       return retValue;
     }

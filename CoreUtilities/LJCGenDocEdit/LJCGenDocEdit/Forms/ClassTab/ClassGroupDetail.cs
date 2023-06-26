@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCGroupID = 0;
       LJCAssemblyID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
@@ -70,11 +70,12 @@ namespace LJCGenDocEdit
       AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
 
       Text = "Class Group Detail";
-      if (LJCID > 0)
+      if (-1 == LJCGroupID
+        || LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetGroupWithID(LJCID);
+        mOriginalRecord = GetGroupWithID(LJCGroupID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -88,6 +89,10 @@ namespace LJCGenDocEdit
         ActiveCheckbox.Checked = true;
         NameText.Select();
         NameText.Select(0, 0);
+      }
+      if (-1 == LJCGroupID)
+      {
+        SetUngrouped();
       }
       Cursor = Cursors.Default;
     }
@@ -142,7 +147,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocClassGroup();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCGroupID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
@@ -267,16 +272,33 @@ namespace LJCGenDocEdit
       }
       return retValue;
     }
+
+    // Set the controls for Ungrouped classes.
+    private void SetUngrouped()
+    {
+      LJCGroupID = 0;
+      NameText.Text = "Ungrouped Classes";
+      SequenceText.Text = "1";
+      ActiveCheckbox.Checked = true;
+
+      NameText.ReadOnly = true;
+      GroupButton.Enabled = false;
+      HeadingText.ReadOnly = true;
+      CustomText.ReadOnly = true;
+      SequenceText.ReadOnly = true;
+      ActiveCheckbox.Enabled = false;
+      OKButton.Enabled = false;
+    }
     #endregion
 
     #region Get Data Methods
 
     // Retrieves the ClassItem name.
-    private string GetAssemblyName(short id)
+    private string GetAssemblyName(short assemblyID)
     {
       string retValue = null;
 
-      var docAssembly = GetAssemblyWithID(id);
+      var docAssembly = GetAssemblyWithID(assemblyID);
       if (docAssembly != null)
       {
         retValue = docAssembly.Name;
@@ -285,27 +307,27 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the Assembly with the ID value.
-    private DocAssembly GetAssemblyWithID(short id)
+    private DocAssembly GetAssemblyWithID(short assemblyID)
     {
       DocAssembly retValue = null;
 
-      if (id > 0)
+      if (assemblyID > 0)
       {
         var manager = Managers.DocAssemblyManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(assemblyID);
       }
       return retValue;
     }
 
     // Retrieves the Product with the ID value.
-    private DocClassGroup GetGroupWithID(short id)
+    private DocClassGroup GetGroupWithID(short groupID)
     {
       DocClassGroup retValue = null;
 
-      if (id > 0)
+      if (groupID > 0)
       {
         var manager = Managers.DocClassGroupManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(groupID);
       }
       return retValue;
     }
@@ -323,7 +345,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCGroupID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -511,7 +533,7 @@ namespace LJCGenDocEdit
     public short LJCAssemblyID { get; set; }
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCGroupID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }

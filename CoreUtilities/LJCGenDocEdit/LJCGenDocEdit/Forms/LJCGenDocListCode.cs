@@ -226,42 +226,35 @@ namespace LJCGenDocEdit
           RestoreControlValues();
 
           // Load first control.
-          //mAssemblyGroupGridCode.DataRetrieve();
           mAssemblyGroupGridCode.DataRetrieve();
           break;
 
         case Change.AssemblyGroup:
           mAssemblyItemGridCode.DataRetrieve();
+          break;
+
+        case Change.AssemblyItem:
+          mClassGroupGridCode.DataRetrieve();
           mAssemblyItemComboCode.DataRetrieve();
           AssemblyComboSelect();
           break;
 
-        case Change.AssemblyItem:
-          // *** Next Statement *** Add
-          mClassItemGridCode.DataRetrieve();
-          AssemblyComboSelect();
-          AssemblyItemGrid.LJCSetLastRow();
-          break;
-
         case Change.AssemblyCombo:
           AssemblyItemSelect();
-          mClassGroupGridCode.DataRetrieve();
           break;
 
         case Change.ClassGroup:
           mClassItemGridCode.DataRetrieve();
+          break;
+
+        case Change.ClassItem:
+          mMethodGroupGridCode.DataRetrieve();
           mClassItemComboCode.DataRetrieve();
           ClassComboSelect();
           break;
 
-        case Change.ClassItem:
-          ClassComboSelect();
-          ClassItemGrid.LJCSetLastRow();
-          break;
-
         case Change.ClassCombo:
           ClassItemSelect();
-          mMethodGroupGridCode.DataRetrieve();
           break;
 
         case Change.MethodGroup:

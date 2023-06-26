@@ -30,8 +30,8 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssemblyDetail));
-      this.ParentText = new System.Windows.Forms.TextBox();
-      this.ParentLabel = new System.Windows.Forms.Label();
+      this.GroupText = new System.Windows.Forms.TextBox();
+      this.GroupLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
       this.NameText = new System.Windows.Forms.TextBox();
@@ -52,28 +52,28 @@
       this.DialogNew = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogPrevious = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogNext = new System.Windows.Forms.ToolStripMenuItem();
-      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
-      // ParentText
+      // GroupText
       // 
-      this.ParentText.Location = new System.Drawing.Point(151, 14);
-      this.ParentText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ParentText.Name = "ParentText";
-      this.ParentText.ReadOnly = true;
-      this.ParentText.Size = new System.Drawing.Size(413, 26);
-      this.ParentText.TabIndex = 1;
+      this.GroupText.Location = new System.Drawing.Point(151, 14);
+      this.GroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.GroupText.Name = "GroupText";
+      this.GroupText.ReadOnly = true;
+      this.GroupText.Size = new System.Drawing.Size(413, 26);
+      this.GroupText.TabIndex = 1;
       // 
-      // ParentLabel
+      // GroupLabel
       // 
-      this.ParentLabel.Location = new System.Drawing.Point(18, 18);
-      this.ParentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.ParentLabel.Name = "ParentLabel";
-      this.ParentLabel.Size = new System.Drawing.Size(130, 20);
-      this.ParentLabel.TabIndex = 0;
-      this.ParentLabel.Text = "Assembly Group";
+      this.GroupLabel.Location = new System.Drawing.Point(18, 18);
+      this.GroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.GroupLabel.Name = "GroupLabel";
+      this.GroupLabel.Size = new System.Drawing.Size(130, 20);
+      this.GroupLabel.TabIndex = 0;
+      this.GroupLabel.Text = "Assembly Group";
       // 
       // FormCancelButton
       // 
@@ -236,7 +236,7 @@
             this.toolStripSeparator1,
             this.DialogHelp});
       this.DialogMenu.Name = "DialogMenu";
-      this.DialogMenu.Size = new System.Drawing.Size(303, 171);
+      this.DialogMenu.Size = new System.Drawing.Size(303, 138);
       // 
       // DialogNew
       // 
@@ -262,17 +262,17 @@
       this.DialogNext.Text = "&Save and Next";
       this.DialogNext.Click += new System.EventHandler(this.DialogNext_Click);
       // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
+      // 
       // DialogHelp
       // 
       this.DialogHelp.Name = "DialogHelp";
       this.DialogHelp.Size = new System.Drawing.Size(302, 32);
       this.DialogHelp.Text = "&Help";
       this.DialogHelp.Click += new System.EventHandler(this.DialogHelp_Click);
-      // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(299, 6);
       // 
       // AssemblyDetail
       // 
@@ -291,8 +291,8 @@
       this.Controls.Add(this.FileLabel);
       this.Controls.Add(this.DescriptionText);
       this.Controls.Add(this.DescriptionLabel);
-      this.Controls.Add(this.ParentText);
-      this.Controls.Add(this.ParentLabel);
+      this.Controls.Add(this.GroupText);
+      this.Controls.Add(this.GroupLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
       this.Controls.Add(this.NameText);
@@ -312,8 +312,8 @@
 
     #endregion
 
-    private System.Windows.Forms.TextBox ParentText;
-    private System.Windows.Forms.Label ParentLabel;
+    private System.Windows.Forms.TextBox GroupText;
+    private System.Windows.Forms.Label GroupLabel;
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox NameText;

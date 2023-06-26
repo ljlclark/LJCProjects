@@ -45,6 +45,7 @@ namespace LJCGenDocEdit
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
             mDocList.ClassCombo.LJCAddItem(dataRecord.ID, text);
           }
+          mDocList.ClassCombo.SelectedIndex = 0;
         }
         mDocList.Cursor = Cursors.Default;
       }
@@ -77,20 +78,17 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="classComboIndex"></param>
-    /// <returns></returns>
-    internal short ClassComboID(int classComboIndex = 0)
+    // Retrieves the current combo item ID.
+    /// <include path='items/ClassComboID/*' file='../../Doc/ClassItemComboCode.xml'/>
+    internal short ClassComboID(int classComboIndex = -1)
     {
       short retValue = default;
 
-      if (0 == classComboIndex)
+      if (-1 == classComboIndex)
       {
         classComboIndex = mClassCombo.SelectedIndex;
       }
-      if (classComboIndex > 0)
+      if (classComboIndex >= 0)
       {
         var item = mClassCombo.Items[classComboIndex] as LJCItem;
         if (item != null)
@@ -101,11 +99,8 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="classGroupGridRow"></param>
-    /// <returns></returns>
+    // Retrieves the current row item ID.
+    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassItemComboCode.xml'/>
     internal short ClassGroupID(LJCGridRow classGroupGridRow = null)
     {
       short retValue = default;

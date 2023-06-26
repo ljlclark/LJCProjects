@@ -161,7 +161,7 @@ namespace LJCGenDocEdit
       {
         var detail = new ClassDetail()
         {
-          LJCID = ClassID(),
+          LJCClassID = ClassID(),
           LJCGroupID = ClassGroupID(),
           LJCAssemblyID = AssemblyID(),
           Managers = Managers
@@ -417,7 +417,7 @@ namespace LJCGenDocEdit
           if (ClassID() > 0)
           {
             detail.LJCNext = true;
-            detail.LJCID = ClassID();
+            detail.LJCClassID = ClassID();
           }
         }
       }
@@ -437,7 +437,7 @@ namespace LJCGenDocEdit
           if (ClassID() > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCID = ClassID();
+            detail.LJCClassID = ClassID();
           }
         }
       }

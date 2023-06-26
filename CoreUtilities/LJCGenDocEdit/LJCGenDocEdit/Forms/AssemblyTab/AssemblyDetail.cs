@@ -27,9 +27,8 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
-      LJCParentID = 0;
-      LJCParentName = null;
+      LJCAssemblyID = 0;
+      LJCGroupID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -67,22 +66,27 @@ namespace LJCGenDocEdit
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
+
+      // Get Parent values.
+      GroupText.Text = GetGroupName(LJCGroupID);
+
       Text = "Assembly Detail";
-      if (LJCID > 0)
+      if (LJCAssemblyID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        mOriginalRecord = GetAssemblyWithID(LJCAssemblyID);
         GetRecordValues(mOriginalRecord);
       }
       else
       {
         Text += " - New";
         LJCIsUpdate = false;
-        ParentText.Text = LJCParentName;
 
         // Set default values.
         LJCRecord = new DocAssembly();
+        SequenceText.Text = "1";
+        ActiveCheckbox.Checked = true;
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -94,8 +98,6 @@ namespace LJCGenDocEdit
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.DocAssemblyGroupID;
-        ParentText.Text = LJCParentName;
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         FileText.Text = dataRecord.FileSpec;
@@ -118,14 +120,16 @@ namespace LJCGenDocEdit
       {
         retValue = new DocAssembly();
       }
-      retValue.ID = LJCID;
-      retValue.DocAssemblyGroupID = LJCParentID;
+      retValue.ID = LJCAssemblyID;
       retValue.Name = NameText.Text;
       retValue.Description = DescriptionText.Text;
       retValue.FileSpec = FileText.Text;
       retValue.MainImage = FormCommon.SetString(ImageText.Text);
       retValue.Sequence = Convert.ToInt16(SequenceText.Text);
       retValue.ActiveFlag = ActiveCheckbox.Checked;
+
+      // Get Parent key values.
+      retValue.DocAssemblyGroupID = LJCGroupID;
       return retValue;
     }
 
@@ -250,15 +254,41 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
+    // Retrieves the AssemblyItem name.
+    private string GetGroupName(short groupID)
+    {
+      string retValue = null;
+
+      var assemblyGroup = GetGroupWithID(groupID);
+      if (assemblyGroup != null)
+      {
+        retValue = assemblyGroup.Name;
+      }
+      return retValue;
+    }
+
     // Retrieves the AssemblyItem with the ID value.
-    private DocAssembly GetWithID(short id)
+    private DocAssembly GetAssemblyWithID(short assemblyID)
     {
       DocAssembly retValue = null;
 
-      if (id > 0)
+      if (assemblyID > 0)
       {
         var manager = Managers.DocAssemblyManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(LJCAssemblyID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the AssemblyGroup with the ID value.
+    private DocAssemblyGroup GetGroupWithID(short assemblyGroupID)
+    {
+      DocAssemblyGroup retValue = null;
+
+      if (assemblyGroupID > 0)
+      {
+        var manager = Managers.DocAssemblyGroupManager;
+        retValue = manager.RetrieveWithID(assemblyGroupID);
       }
       return retValue;
     }
@@ -276,7 +306,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCAssemblyID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -480,7 +510,10 @@ namespace LJCGenDocEdit
     #region Properties
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCAssemblyID { get; set; }
+
+    /// <summary>Gets or sets the Parent Group ID value.</summary>
+    public short LJCGroupID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
@@ -490,17 +523,6 @@ namespace LJCGenDocEdit
 
     /// <summary>Gets or sets the Previous flag.</summary>
     internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public short LJCParentID { get; set; }
-
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocAssembly LJCRecord { get; private set; }

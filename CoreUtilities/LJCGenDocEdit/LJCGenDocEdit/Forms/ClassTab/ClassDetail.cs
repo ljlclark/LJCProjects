@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCClassID = 0;
       LJCGroupID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
@@ -68,14 +68,18 @@ namespace LJCGenDocEdit
 
       // Get Parent values.
       GroupText.Text = GetGroupHeading(LJCGroupID);
+      if (0 == LJCGroupID)
+      {
+        GroupText.Text = "Ungrouped Classes";
+      }
       AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
 
       Text = "Class Detail";
-      if (LJCID > 0)
+      if (LJCClassID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetClassWithID(LJCID);
+        mOriginalRecord = GetClassWithID(LJCClassID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -118,7 +122,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocClass();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCClassID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
@@ -245,11 +249,11 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the ClassGroup heading.
-    private string GetGroupHeading(short id)
+    private string GetGroupHeading(short classGroupID)
     {
       string retValue = null;
 
-      var classGroup = GetGroupWithID(id);
+      var classGroup = GetGroupWithID(classGroupID);
       if (classGroup != null)
       {
         retValue = classGroup.Heading;
@@ -258,40 +262,40 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the AssemblyItem with the ID value.
-    private DocAssembly GetAssemblyWithID(short id)
+    private DocAssembly GetAssemblyWithID(short assemblyID)
     {
       DocAssembly retValue = null;
 
-      if (id > 0)
+      if (assemblyID > 0)
       {
         var manager = Managers.DocAssemblyManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(assemblyID);
       }
       return retValue;
     }
 
     // Retrieves the ClassItem with the ID value.
-    private DocClass GetClassWithID(short id)
+    private DocClass GetClassWithID(short classID)
     {
       DocClass retValue = null;
 
-      if (id > 0)
+      if (classID > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(classID);
       }
       return retValue;
     }
 
     // Retrieves the ClassGroup with the ID value.
-    private DocClassGroup GetGroupWithID(short id)
+    private DocClassGroup GetGroupWithID(short classGroupID)
     {
       DocClassGroup retValue = null;
 
-      if (id > 0)
+      if (classGroupID > 0)
       {
         var manager = Managers.DocClassGroupManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(classGroupID);
       }
       return retValue;
     }
@@ -309,7 +313,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCClassID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -496,7 +500,7 @@ namespace LJCGenDocEdit
     public short LJCGroupID { get; set; }
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCClassID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }

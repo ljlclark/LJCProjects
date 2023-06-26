@@ -45,7 +45,7 @@ namespace LJCGenDocEdit
           HeadingName = "Ungrouped Classes",
           DocAssemblyID = AssemblyID()
         };
-        RowAdd(docClassGroup);
+        //RowAdd(docClassGroup);
 
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
@@ -162,7 +162,7 @@ namespace LJCGenDocEdit
       {
         var detail = new ClassGroupDetail()
         {
-          LJCID = ClassGroupID(),
+          LJCGroupID = ClassGroupID(),
           LJCAssemblyID = AssemblyID(),
           Managers = Managers
         };
@@ -302,6 +302,10 @@ namespace LJCGenDocEdit
       if (classGroupRow != null)
       {
         retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+        if (0 == retValue)
+        {
+          retValue = -1;
+        }
       }
       return retValue;
     }
@@ -383,7 +387,7 @@ namespace LJCGenDocEdit
           if (classGroupID > 0)
           {
             detail.LJCNext = true;
-            detail.LJCID = classGroupID;
+            detail.LJCGroupID = classGroupID;
           }
         }
       }
@@ -404,7 +408,7 @@ namespace LJCGenDocEdit
           if (classGroupID > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCID = classGroupID;
+            detail.LJCGroupID = classGroupID;
           }
         }
       }

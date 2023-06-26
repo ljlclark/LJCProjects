@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCMethodID = 0;
       LJCClassID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
@@ -72,11 +72,11 @@ namespace LJCGenDocEdit
       ClassText.Text = GetClassName(LJCClassID);
 
       Text = "Method Detail";
-      if (LJCID > 0)
+      if (LJCMethodID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetMethodWithID(LJCID);
+        mOriginalRecord = GetMethodWithID(LJCMethodID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -119,7 +119,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocMethod();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCMethodID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
@@ -236,11 +236,11 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the ClassItem name.
-    private string GetClassName(short id)
+    private string GetClassName(short classID)
     {
       string retValue = null;
 
-      var docClass = GetClassWithID(id);
+      var docClass = GetClassWithID(classID);
       if (docClass != null)
       {
         retValue = docClass.Name;
@@ -249,11 +249,11 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the MethodGroup heading name.
-    private string GetGroupHeadingName(short id)
+    private string GetGroupHeadingName(short groupID)
     {
       string retValue = null;
 
-      var methodGroup = GetMethodGroupWithID(id);
+      var methodGroup = GetMethodGroupWithID(groupID);
       if (methodGroup != null)
       {
         retValue = methodGroup.HeadingName;
@@ -262,37 +262,37 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the DocClass with the ID value.
-    private DocClass GetClassWithID(short id)
+    private DocClass GetClassWithID(short classID)
     {
       DocClass retValue = null;
 
-      if (id > 0)
+      if (classID > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(classID);
       }
       return retValue;
     }
 
     // Retrieves the Product with the ID value.
-    private DocMethod GetMethodWithID(short id)
+    private DocMethod GetMethodWithID(short methodID)
     {
       DocMethod retValue = null;
 
-      if (id > 0)
+      if (methodID > 0)
       {
         var manager = Managers.DocMethodManager;
-        retValue = manager.RetrieveWithID(LJCID);
+        retValue = manager.RetrieveWithID(LJCMethodID);
       }
       return retValue;
     }
 
     // Retrieves the Product with the ID value.
-    private DocMethodGroup GetMethodGroupWithID(short id)
+    private DocMethodGroup GetMethodGroupWithID(short groupID)
     {
       DocMethodGroup retValue = null;
 
-      if (id > 0)
+      if (groupID > 0)
       {
         var manager = Managers.DocMethodGroupManager;
         retValue = manager.RetrieveWithID(LJCGroupID);
@@ -313,7 +313,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCMethodID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -498,14 +498,14 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the Class ID value.</summary>
     public short LJCClassID { get; set; }
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    /// <summary>Gets or sets the foreign ID value.</summary>
+    public short LJCGroupID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>Gets or sets the foreign ID value.</summary>
-    public short LJCGroupID { get; set; }
+    /// <summary>Gets or sets the primary ID value.</summary>
+    internal short LJCMethodID { get; set; }
 
     /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }

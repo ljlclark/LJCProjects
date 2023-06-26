@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCGroupID = 0;
       LJCClassID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
@@ -71,11 +71,11 @@ namespace LJCGenDocEdit
       ClassText.Text = GetClassName(LJCClassID);
 
       Text = "Method Group Detail";
-      if (LJCID > 0)
+      if (LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetMethodWithID(LJCID);
+        mOriginalRecord = GetMethodWithID(LJCGroupID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -141,7 +141,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocMethodGroup();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCGroupID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
       short.TryParse(SequenceText.Text, out short value);
@@ -272,11 +272,11 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the ClassItem name.
-    private string GetClassName(short id)
+    private string GetClassName(short classID)
     {
       string retValue = null;
 
-      var docClass = GetClassWithID(id);
+      var docClass = GetClassWithID(classID);
       if (docClass != null)
       {
         retValue = docClass.Name;
@@ -285,27 +285,27 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the Class with the ID value.
-    private DocClass GetClassWithID(short id)
+    private DocClass GetClassWithID(short classID)
     {
       DocClass retValue = null;
 
-      if (id > 0)
+      if (classID > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(classID);
       }
       return retValue;
     }
 
     // Retrieves the Method with the ID value.
-    private DocMethodGroup GetMethodWithID(short id)
+    private DocMethodGroup GetMethodWithID(short methodID)
     {
       DocMethodGroup retValue = null;
 
-      if (id > 0)
+      if (methodID > 0)
       {
         var manager = Managers.DocMethodGroupManager;
-        retValue = manager.RetrieveWithID(id);
+        retValue = manager.RetrieveWithID(methodID);
       }
       return retValue;
     }
@@ -323,7 +323,7 @@ namespace LJCGenDocEdit
         LJCOnChange();
 
         // Initialize property values.
-        LJCID = 0;
+        LJCGroupID = 0;
         NameText.Text = "";
 
         DataRetrieve();
@@ -511,7 +511,7 @@ namespace LJCGenDocEdit
     public short LJCClassID { get; set; }
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCGroupID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }

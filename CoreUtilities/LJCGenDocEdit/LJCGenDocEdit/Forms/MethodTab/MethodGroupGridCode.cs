@@ -154,7 +154,7 @@ namespace LJCGenDocEdit
       {
         var detail = new MethodGroupDetail()
         {
-          LJCID = MethodGroupID(),
+          LJCGroupID = MethodGroupID(),
           LJCClassID = ClassID(),
           Managers = Managers
         };
@@ -375,7 +375,7 @@ namespace LJCGenDocEdit
           if (methodGroupID > 0)
           {
             detail.LJCNext = true;
-            detail.LJCID = methodGroupID;
+            detail.LJCGroupID = methodGroupID;
           }
         }
       }
@@ -396,7 +396,7 @@ namespace LJCGenDocEdit
           if (methodGroupID > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCID = methodGroupID;
+            detail.LJCGroupID = methodGroupID;
           }
         }
       }
