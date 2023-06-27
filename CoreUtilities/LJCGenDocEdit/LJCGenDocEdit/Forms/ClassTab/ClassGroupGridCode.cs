@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJCDBClientLib;
 
 namespace LJCGenDocEdit
 {
@@ -39,14 +40,6 @@ namespace LJCGenDocEdit
       if (mDocList.AssemblyItemGrid.CurrentRow is LJCGridRow _)
       {
         mDocList.Cursor = Cursors.WaitCursor;
-        var docClassGroup = new DocClassGroup()
-        {
-          ID = 0,
-          HeadingName = "Ungrouped Classes",
-          DocAssemblyID = AssemblyID()
-        };
-        //RowAdd(docClassGroup);
-
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
         {
@@ -221,10 +214,11 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       mDocList.Cursor = Cursors.WaitCursor;
-      DataRetrieve();
 
-      // Select the original row.
+      // Save the original row.
       var classGroupID = ClassGroupID();
+
+      DataRetrieve();
       if (classGroupID > 0)
       {
         var dataRecord = new DocClassGroup()
@@ -239,9 +233,20 @@ namespace LJCGenDocEdit
     /// <summary>Resets the Sequence column values.</summary>
     internal void DoResetSequence()
     {
-      var manager = Managers.DocClassGroupManager;
-      manager.AssemblyID = AssemblyID();
-      manager.ResetSequence();
+      var procedure = true;
+      if (procedure)
+      {
+        var classGroupManager = Managers.DocClassGroupManager;
+        classGroupManager.AssemblyID = AssemblyID();
+        classGroupManager.ResetSequence();
+      }
+      else
+      {
+        var dataManager = Managers.DocClassGroupManager.Manager;
+        var assemblyID = AssemblyID();
+        var where = $"where DocAssemblyID = {assemblyID}";
+        dataManager.Resequence("ID", "Sequence", where);
+      }
     }
 
     // Adds new row or updates row with changes from the detail dialog.
@@ -302,10 +307,6 @@ namespace LJCGenDocEdit
       if (classGroupRow != null)
       {
         retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
-        if (0 == retValue)
-        {
-          retValue = -1;
-        }
       }
       return retValue;
     }

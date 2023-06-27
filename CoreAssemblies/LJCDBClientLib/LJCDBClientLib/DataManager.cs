@@ -396,6 +396,39 @@ namespace LJCDBClientLib
       BaseDefinition.MapNames(columnName, propertyName, renameAs, caption);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="idName"></param>
+    /// <param name="sequenceName"></param>
+    /// <param name="whereClause"></param>
+    public void Resequence(string idName, string sequenceName
+      , string whereClause)
+    {
+      var dataManager = new DataManager(DbServiceRef, DataConfigName
+        , TableName);
+      var columns = new DbColumns()
+      {
+        { idName }
+      };
+      string sql = $"select {idName} from {TableName}";
+      sql += $" {whereClause} order by {sequenceName}";
+      var dbResult = dataManager.ExecuteClientSql(RequestType.LoadSQL, sql
+        , columns);
+      if (dbResult != null)
+      {
+        var sequence = 0;
+        var startSql = $"update {TableName} set {sequenceName} = ";
+        foreach (DbRow dbRow in dbResult.Rows)
+        {
+          sequence++;
+          var id = dbRow.Values[idName].Value;
+          var updateSql = startSql + $"{sequence} where {idName} = {id}";
+          dataManager.ExecuteClientSql(RequestType.ExecuteSQL, updateSql);
+        }
+      }
+    }
+
     // Sets the database assigned value column names. 
     /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
     public void SetDbAssignedColumns(string[] propertyNames)

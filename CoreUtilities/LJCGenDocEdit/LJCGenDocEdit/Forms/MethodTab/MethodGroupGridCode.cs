@@ -213,10 +213,11 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       mDocList.Cursor = Cursors.WaitCursor;
-      DataRetrieve();
 
-      // Select the original row.
+      // Save the original row.
       var methodGroupID = MethodGroupID();
+
+      DataRetrieve();
       if (methodGroupID > 0)
       {
         var dataRecord = new DocMethodGroup()

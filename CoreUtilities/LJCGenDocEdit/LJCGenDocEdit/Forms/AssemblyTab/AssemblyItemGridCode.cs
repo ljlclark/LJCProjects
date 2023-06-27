@@ -211,10 +211,11 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       mDocList.Cursor = Cursors.WaitCursor;
-      DataRetrieve();
 
-      // Select the original row.
+      // Save the original row.
       var assemblyID = AssemblyID();
+
+      DataRetrieve();
       if (assemblyID > 0)
       {
         var dataRecord = new DocAssembly()

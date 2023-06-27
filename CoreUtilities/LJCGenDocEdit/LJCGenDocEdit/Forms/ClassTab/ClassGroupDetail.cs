@@ -6,6 +6,7 @@ using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,8 +71,7 @@ namespace LJCGenDocEdit
       AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
 
       Text = "Class Group Detail";
-      if (-1 == LJCGroupID
-        || LJCGroupID > 0)
+      if (LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
@@ -90,7 +90,7 @@ namespace LJCGenDocEdit
         NameText.Select();
         NameText.Select(0, 0);
       }
-      if (-1 == LJCGroupID)
+      if ("Ungrouped" == mOriginalRecord.HeadingName)
       {
         SetUngrouped();
       }
@@ -276,18 +276,11 @@ namespace LJCGenDocEdit
     // Set the controls for Ungrouped classes.
     private void SetUngrouped()
     {
-      LJCGroupID = 0;
-      NameText.Text = "Ungrouped Classes";
-      SequenceText.Text = "1";
-      ActiveCheckbox.Checked = true;
-
       NameText.ReadOnly = true;
       GroupButton.Enabled = false;
       HeadingText.ReadOnly = true;
       CustomText.ReadOnly = true;
-      SequenceText.ReadOnly = true;
       ActiveCheckbox.Enabled = false;
-      OKButton.Enabled = false;
     }
     #endregion
 

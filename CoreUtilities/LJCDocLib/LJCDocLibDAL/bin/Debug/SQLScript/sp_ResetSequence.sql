@@ -49,7 +49,7 @@ declare @id int;
 declare varCursor cursor for
 select ID, [Sequence] 
 from #Resequence
-order by ID, [Sequence]; 
+order by [Sequence]; 
 
 open varCursor  
 fetch next from varCursor into @id, @sequence
