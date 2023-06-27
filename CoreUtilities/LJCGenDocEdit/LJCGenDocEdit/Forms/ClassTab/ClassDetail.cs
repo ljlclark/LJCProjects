@@ -67,19 +67,19 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
 
       // Get Parent values.
-      GroupText.Text = GetGroupHeading(LJCGroupID);
+      GroupText.Text = ClassGroupHeading(LJCGroupID);
       if (0 == LJCGroupID)
       {
         GroupText.Text = "Ungrouped Classes";
       }
-      AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
+      AssemblyText.Text = DocAssemblyName(LJCAssemblyID);
 
       Text = "Class Detail";
       if (LJCClassID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetClassWithID(LJCClassID);
+        mOriginalRecord = DocClassWithID(LJCClassID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -235,25 +235,12 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // Retrieves the AssemblyItem name.
-    private string GetAssemblyName(short id)
-    {
-      string retValue = null;
-
-      var docAssembly = GetAssemblyWithID(id);
-      if (docAssembly != null)
-      {
-        retValue = docAssembly.Name;
-      }
-      return retValue;
-    }
-
     // Retrieves the ClassGroup heading.
-    private string GetGroupHeading(short classGroupID)
+    private string ClassGroupHeading(short classGroupID)
     {
       string retValue = null;
 
-      var classGroup = GetGroupWithID(classGroupID);
+      var classGroup = ClassGroupWithID(classGroupID);
       if (classGroup != null)
       {
         retValue = classGroup.Heading;
@@ -261,34 +248,8 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Retrieves the AssemblyItem with the ID value.
-    private DocAssembly GetAssemblyWithID(short assemblyID)
-    {
-      DocAssembly retValue = null;
-
-      if (assemblyID > 0)
-      {
-        var manager = Managers.DocAssemblyManager;
-        retValue = manager.RetrieveWithID(assemblyID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the ClassItem with the ID value.
-    private DocClass GetClassWithID(short classID)
-    {
-      DocClass retValue = null;
-
-      if (classID > 0)
-      {
-        var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(classID);
-      }
-      return retValue;
-    }
-
     // Retrieves the ClassGroup with the ID value.
-    private DocClassGroup GetGroupWithID(short classGroupID)
+    private DocClassGroup ClassGroupWithID(short classGroupID)
     {
       DocClassGroup retValue = null;
 
@@ -296,6 +257,45 @@ namespace LJCGenDocEdit
       {
         var manager = Managers.DocClassGroupManager;
         retValue = manager.RetrieveWithID(classGroupID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the AssemblyItem name.
+    private string DocAssemblyName(short docAssemblyID)
+    {
+      string retValue = null;
+
+      var docAssembly = DocAssemblyWithID(docAssemblyID);
+      if (docAssembly != null)
+      {
+        retValue = docAssembly.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the AssemblyItem with the ID value.
+    private DocAssembly DocAssemblyWithID(short docAssemblyID)
+    {
+      DocAssembly retValue = null;
+
+      if (docAssemblyID > 0)
+      {
+        var manager = Managers.DocAssemblyManager;
+        retValue = manager.RetrieveWithID(docAssemblyID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the ClassItem with the ID value.
+    private DocClass DocClassWithID(short docClassID)
+    {
+      DocClass retValue = null;
+
+      if (docClassID > 0)
+      {
+        var manager = Managers.DocClassManager;
+        retValue = manager.RetrieveWithID(docClassID);
       }
       return retValue;
     }

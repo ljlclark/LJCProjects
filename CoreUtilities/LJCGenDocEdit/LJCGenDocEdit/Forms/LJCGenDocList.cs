@@ -746,7 +746,7 @@ namespace LJCGenDocEdit
     // Handles the DragDrop event.
     private void MethodGroupGrid_DragDrop(object sender, DragEventArgs e)
     {
-      var classItem = mClassItemGridCode.CurrentClass();
+      var classItem = mClassItemGridCode.DocClass();
       var classID = classItem.ID;
       mMethodGroupGridCode.DoDragDrop(classID, e);
     }
@@ -820,7 +820,7 @@ namespace LJCGenDocEdit
     // Handles the DragDrop event.
     private void MethodItemGrid_DragDrop(object sender, DragEventArgs e)
     {
-      var classItem = mClassItemGridCode.CurrentClass();
+      var classItem = mClassItemGridCode.DocClass();
       var classID = classItem.ID;
       mMethodItemGridCode.DoDragDrop(classID, e);
     }

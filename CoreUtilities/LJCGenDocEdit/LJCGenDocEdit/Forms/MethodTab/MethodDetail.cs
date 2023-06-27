@@ -68,15 +68,15 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
 
       // Get Parent values.
-      GroupText.Text = GetGroupHeadingName(LJCGroupID);
-      ClassText.Text = GetClassName(LJCClassID);
+      GroupText.Text = MethodGroupHeadingName(LJCGroupID);
+      ClassText.Text = DocClassName(LJCClassID);
 
       Text = "Method Detail";
       if (LJCMethodID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetMethodWithID(LJCMethodID);
+        mOriginalRecord = DocMethodWithID(LJCMethodID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -236,11 +236,11 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the ClassItem name.
-    private string GetClassName(short classID)
+    private string DocClassName(short docClassID)
     {
       string retValue = null;
 
-      var docClass = GetClassWithID(classID);
+      var docClass = DocClassWithID(docClassID);
       if (docClass != null)
       {
         retValue = docClass.Name;
@@ -248,38 +248,25 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Retrieves the MethodGroup heading name.
-    private string GetGroupHeadingName(short groupID)
-    {
-      string retValue = null;
-
-      var methodGroup = GetMethodGroupWithID(groupID);
-      if (methodGroup != null)
-      {
-        retValue = methodGroup.HeadingName;
-      }
-      return retValue;
-    }
-
     // Retrieves the DocClass with the ID value.
-    private DocClass GetClassWithID(short classID)
+    private DocClass DocClassWithID(short docClassID)
     {
       DocClass retValue = null;
 
-      if (classID > 0)
+      if (docClassID > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(classID);
+        retValue = manager.RetrieveWithID(docClassID);
       }
       return retValue;
     }
 
-    // Retrieves the Product with the ID value.
-    private DocMethod GetMethodWithID(short methodID)
+    // Retrieves the DocMethod with the ID value.
+    private DocMethod DocMethodWithID(short docMethodID)
     {
       DocMethod retValue = null;
 
-      if (methodID > 0)
+      if (docMethodID > 0)
       {
         var manager = Managers.DocMethodManager;
         retValue = manager.RetrieveWithID(LJCMethodID);
@@ -287,12 +274,25 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
+    // Retrieves the MethodGroup heading name.
+    private string MethodGroupHeadingName(short methodGroupID)
+    {
+      string retValue = null;
+
+      var methodGroup = MethodGroupWithID(methodGroupID);
+      if (methodGroup != null)
+      {
+        retValue = methodGroup.HeadingName;
+      }
+      return retValue;
+    }
+
     // Retrieves the Product with the ID value.
-    private DocMethodGroup GetMethodGroupWithID(short groupID)
+    private DocMethodGroup MethodGroupWithID(short methodGroupID)
     {
       DocMethodGroup retValue = null;
 
-      if (groupID > 0)
+      if (methodGroupID > 0)
       {
         var manager = Managers.DocMethodGroupManager;
         retValue = manager.RetrieveWithID(LJCGroupID);

@@ -339,7 +339,7 @@ namespace LJCGenDocEdit
     // Selects the ClassCombo item with the current ClassItem.
     private void ClassComboSelect()
     {
-      var classItem = mClassItemGridCode.CurrentClass();
+      var classItem = mClassItemGridCode.DocClass();
       if (classItem != null)
       {
         mClassItemComboCode.RowSelect(classItem);

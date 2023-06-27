@@ -68,14 +68,14 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
 
       // Get Parent values.
-      ClassText.Text = GetClassName(LJCClassID);
+      ClassText.Text = DocClassName(LJCClassID);
 
       Text = "Method Group Detail";
       if (LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetMethodWithID(LJCGroupID);
+        mOriginalRecord = DocMethodWithID(LJCGroupID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -272,11 +272,11 @@ namespace LJCGenDocEdit
     #region Get Data Methods
 
     // Retrieves the ClassItem name.
-    private string GetClassName(short classID)
+    private string DocClassName(short docClassID)
     {
       string retValue = null;
 
-      var docClass = GetClassWithID(classID);
+      var docClass = DocClassWithID(docClassID);
       if (docClass != null)
       {
         retValue = docClass.Name;
@@ -285,27 +285,27 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the Class with the ID value.
-    private DocClass GetClassWithID(short classID)
+    private DocClass DocClassWithID(short docClassID)
     {
       DocClass retValue = null;
 
-      if (classID > 0)
+      if (docClassID > 0)
       {
         var manager = Managers.DocClassManager;
-        retValue = manager.RetrieveWithID(classID);
+        retValue = manager.RetrieveWithID(docClassID);
       }
       return retValue;
     }
 
     // Retrieves the Method with the ID value.
-    private DocMethodGroup GetMethodWithID(short methodID)
+    private DocMethodGroup DocMethodWithID(short docMethodID)
     {
       DocMethodGroup retValue = null;
 
-      if (methodID > 0)
+      if (docMethodID > 0)
       {
         var manager = Managers.DocMethodGroupManager;
-        retValue = manager.RetrieveWithID(methodID);
+        retValue = manager.RetrieveWithID(docMethodID);
       }
       return retValue;
     }

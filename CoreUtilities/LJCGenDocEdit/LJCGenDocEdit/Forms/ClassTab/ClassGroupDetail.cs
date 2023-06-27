@@ -68,15 +68,19 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
 
       // Get Parent values.
-      AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
+      AssemblyText.Text = DocAssemblyName(LJCAssemblyID);
 
       Text = "Class Group Detail";
       if (LJCGroupID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetGroupWithID(LJCGroupID);
+        mOriginalRecord = ClassGroupWithID(LJCGroupID);
         GetRecordValues(mOriginalRecord);
+        if ("Ungrouped" == mOriginalRecord.HeadingName)
+        {
+          SetUngrouped();
+        }
       }
       else
       {
@@ -89,10 +93,6 @@ namespace LJCGenDocEdit
         ActiveCheckbox.Checked = true;
         NameText.Select();
         NameText.Select(0, 0);
-      }
-      if ("Ungrouped" == mOriginalRecord.HeadingName)
-      {
-        SetUngrouped();
       }
       Cursor = Cursors.Default;
     }
@@ -108,7 +108,7 @@ namespace LJCGenDocEdit
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
 
         // Get Parent values.
-        AssemblyText.Text = GetAssemblyName(LJCAssemblyID);
+        AssemblyText.Text = DocAssemblyName(LJCAssemblyID);
 
         // Join values.
         HeadingText.Text = dataRecord.Heading;
@@ -286,12 +286,25 @@ namespace LJCGenDocEdit
 
     #region Get Data Methods
 
-    // Retrieves the ClassItem name.
-    private string GetAssemblyName(short assemblyID)
+    // Retrieves the ClassGroup with the ID value.
+    private DocClassGroup ClassGroupWithID(short groupID)
+    {
+      DocClassGroup retValue = null;
+
+      if (groupID > 0)
+      {
+        var manager = Managers.DocClassGroupManager;
+        retValue = manager.RetrieveWithID(groupID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocAssembly name.
+    private string DocAssemblyName(short assemblyID)
     {
       string retValue = null;
 
-      var docAssembly = GetAssemblyWithID(assemblyID);
+      var docAssembly = DocAssemblyWithID(assemblyID);
       if (docAssembly != null)
       {
         retValue = docAssembly.Name;
@@ -300,7 +313,7 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the Assembly with the ID value.
-    private DocAssembly GetAssemblyWithID(short assemblyID)
+    private DocAssembly DocAssemblyWithID(short assemblyID)
     {
       DocAssembly retValue = null;
 
@@ -308,19 +321,6 @@ namespace LJCGenDocEdit
       {
         var manager = Managers.DocAssemblyManager;
         retValue = manager.RetrieveWithID(assemblyID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the Product with the ID value.
-    private DocClassGroup GetGroupWithID(short groupID)
-    {
-      DocClassGroup retValue = null;
-
-      if (groupID > 0)
-      {
-        var manager = Managers.DocClassGroupManager;
-        retValue = manager.RetrieveWithID(groupID);
       }
       return retValue;
     }

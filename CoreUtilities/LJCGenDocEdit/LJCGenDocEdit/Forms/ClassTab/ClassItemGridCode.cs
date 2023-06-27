@@ -40,7 +40,7 @@ namespace LJCGenDocEdit
       var manager = Managers.DocClassManager;
       var names = new List<string>()
       {
-        DocClass.ColumnSequence
+        LJCDocLibDAL.DocClass.ColumnSequence
       };
       manager.SetOrderBy(names);
 
@@ -50,15 +50,15 @@ namespace LJCGenDocEdit
         // Get ungrouped classes.
         keyColumns = new DbColumns()
         {
-          { DocClass.ColumnDocClassGroupID, (object)"'-null'" },
-          { DocClass.ColumnDocAssemblyID, AssemblyID() }
+          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, (object)"'-null'" },
+          { LJCDocLibDAL.DocClass.ColumnDocAssemblyID, DocAssemblyID() }
         };
       }
       else
       {
         keyColumns = new DbColumns()
         {
-          { DocClass.ColumnDocClassGroupID, ClassGroupID() }
+          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() }
         };
       }
       DbResult result = manager.LoadResult(keyColumns);
@@ -85,7 +85,7 @@ namespace LJCGenDocEdit
         mDocList.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mClassGrid.Rows)
         {
-          if (ClassID(row) == dataRecord.ID)
+          if (DocClassID(row) == dataRecord.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             mClassGrid.LJCSetCurrentRow(row, true);
@@ -111,7 +111,7 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
       var retValue = mClassGrid.LJCRowAdd();
-      var columnName = DocClass.ColumnID;
+      var columnName = LJCDocLibDAL.DocClass.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
       mClassGrid.LJCRowSetValues(retValue, dbValues);
@@ -131,7 +131,7 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
     {
-      row.LJCSetInt32(DocClass.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(LJCDocLibDAL.DocClass.ColumnID, dataRecord.ID);
     }
     #endregion
 
@@ -145,7 +145,7 @@ namespace LJCGenDocEdit
         var detail = new ClassDetail()
         {
           LJCGroupID = ClassGroupID(),
-          LJCAssemblyID = AssemblyID(),
+          LJCAssemblyID = DocAssemblyID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -161,9 +161,9 @@ namespace LJCGenDocEdit
       {
         var detail = new ClassDetail()
         {
-          LJCClassID = ClassID(),
+          LJCClassID = DocClassID(),
           LJCGroupID = ClassGroupID(),
-          LJCAssemblyID = AssemblyID(),
+          LJCAssemblyID = DocAssemblyID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -196,8 +196,8 @@ namespace LJCGenDocEdit
       {
         var keyRecord = new DbColumns()
         {
-          { DocClass.ColumnDocClassGroupID, ClassGroupID() },
-          { DocClass.ColumnID, ClassID() }
+          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() },
+          { LJCDocLibDAL.DocClass.ColumnID, DocClassID() }
         };
         var manager = Managers.DocClassManager;
         manager.Delete(keyRecord);
@@ -223,7 +223,7 @@ namespace LJCGenDocEdit
       mDocList.Cursor = Cursors.WaitCursor;
 
       // Save the original row.
-      var classID = ClassID();
+      var classID = DocClassID();
 
       DataRetrieve();
       if (classID > 0)
@@ -273,45 +273,15 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyID/*' file='../../Doc/ClassItemGridCode.xml'/>
-    internal short AssemblyID(LJCGridRow classGroupRow = null)
+    // Retrieves the DocClass row item.
+    /// <summary>
+    /// Retrieves the DocClass row item.
+    /// </summary>
+    /// <param name="docClassRow">The DocClass grid row.</param>
+    /// <returns>The DocClass item.</returns>
+    internal DocClass DocClass(LJCGridRow docClassRow = null)
     {
-      short retValue = 0;
-
-      if (null == classGroupRow)
-      {
-        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (classGroupRow != null)
-      {
-        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/ClassGroupID/*' file='../../Doc/ClassItemGridCode.xml'/>
-    internal short ClassGroupID(LJCGridRow classGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == classGroupRow)
-      {
-        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (classGroupRow != null)
-      {
-        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/ClassID/*' file='../../Doc/ClassItemGridCode.xml'/>
-    internal short ClassID(LJCGridRow docClassRow = null)
-    {
-      short retValue = 0;
+      DocClass retValue = null;
 
       if (null == docClassRow)
       {
@@ -319,32 +289,18 @@ namespace LJCGenDocEdit
       }
       if (docClassRow != null)
       {
-        retValue = (short)docClassRow.LJCGetInt32(DocClass.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item.
-    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal DocClass CurrentClass()
-    {
-      DocClass retValue = null;
-
-      if (mClassGrid.CurrentRow is LJCGridRow _)
-      {
-        var classID = ClassID();
-        if (classID > 0)
-        {
-          var manager = Managers.DocClassManager;
-          retValue = manager.RetrieveWithID(classID);
-        }
+        retValue = DocClassWithID(DocClassID());
       }
       return retValue;
     }
 
     // The DragDrop method.
-    /// <include path='items/DoDragDrop1/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal void DoDragDrop(short parentID, DragEventArgs e)
+    /// <summary>
+    /// The DragDrop method.
+    /// </summary>
+    /// <param name="assemblyID">The parent DocAssembly ID.</param>
+    /// <param name="e">The DragDrop event arguments.</param>
+    internal void DoDragDrop(short assemblyID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
       var dragDataName = sourceRow.LJCGetString("DragDataName");
@@ -354,14 +310,14 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = sourceRow.LJCGetString(DocClass.ColumnName);
+          var sourceName = DocClassName(DocClassID(sourceRow));
           var manager = Managers.DocClassManager;
-          var sourceGroup = manager.RetrieveWithUnique(parentID, sourceName);
+          var sourceGroup = manager.RetrieveWithUnique(assemblyID, sourceName);
 
           // Get target group.
           var targetRow = mClassGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = targetRow.LJCGetString(DocClass.ColumnName);
-          var targetGroup = manager.RetrieveWithUnique(parentID, targetName);
+          var targetName = DocClassName(DocClassID(targetRow));
+          var targetGroup = manager.RetrieveWithUnique(assemblyID, targetName);
 
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
@@ -380,8 +336,8 @@ namespace LJCGenDocEdit
       {
         List<string> columnNames = new List<string>()
         {
-          DocClass.ColumnName,
-          DocClass.ColumnDescription
+          LJCDocLibDAL.DocClass.ColumnName,
+          LJCDocLibDAL.DocClass.ColumnDescription
         };
 
         // Get the display columns from the manager Data Definition.
@@ -392,6 +348,80 @@ namespace LJCGenDocEdit
         mClassGrid.LJCAddDisplayColumns(DisplayColumns);
         mClassGrid.LJCDragDataName = "DocClass";
       }
+    }
+
+    // Retrieves the current row item ID.
+    private short ClassGroupID(LJCGridRow classGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == classGroupRow)
+      {
+        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (classGroupRow != null)
+      {
+        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
+    private short DocAssemblyID(LJCGridRow classGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == classGroupRow)
+      {
+        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (classGroupRow != null)
+      {
+        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocClass name.
+    private string DocClassName(short docClassID)
+    {
+      string retValue = null;
+
+      var docClass = DocClassWithID(docClassID);
+      if (docClass != null)
+      {
+        retValue = docClass.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
+    private short DocClassID(LJCGridRow docClassRow = null)
+    {
+      short retValue = 0;
+
+      if (null == docClassRow)
+      {
+        docClassRow = mClassGrid.CurrentRow as LJCGridRow;
+      }
+      if (docClassRow != null)
+      {
+        retValue = (short)docClassRow.LJCGetInt32(LJCDocLibDAL.DocClass.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocClass with the ID value.
+    private DocClass DocClassWithID(short docClassID)
+    {
+      DocClass retValue = null;
+
+      if (docClassID > 0)
+      {
+        var manager = Managers.DocClassManager;
+        retValue = manager.RetrieveWithID(docClassID);
+      }
+      return retValue;
     }
     #endregion
 
@@ -415,10 +445,10 @@ namespace LJCGenDocEdit
         if (currentIndex < grid.Rows.Count - 1)
         {
           grid.LJCSetCurrentRow(currentIndex + 1, true);
-          if (ClassID() > 0)
+          if (DocClassID() > 0)
           {
             detail.LJCNext = true;
-            detail.LJCClassID = ClassID();
+            detail.LJCClassID = DocClassID();
           }
         }
       }
@@ -435,10 +465,10 @@ namespace LJCGenDocEdit
         if (currentIndex > 0)
         {
           grid.LJCSetCurrentRow(currentIndex - 1, true);
-          if (ClassID() > 0)
+          if (DocClassID() > 0)
           {
             detail.LJCPrevious = true;
-            detail.LJCClassID = ClassID();
+            detail.LJCClassID = DocClassID();
           }
         }
       }
