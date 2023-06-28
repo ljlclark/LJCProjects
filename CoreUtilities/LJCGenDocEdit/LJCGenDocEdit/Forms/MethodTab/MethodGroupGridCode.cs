@@ -266,8 +266,12 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // The DragDrop method.
-    /// <include path='items/DoDragDrop1/*' file='../../../../LJCDocLib/Common/List.xml'/>
-    internal void DoDragDrop(short parentID, DragEventArgs e)
+    /// <summary>
+    /// The DragDrop method.
+    /// </summary>
+    /// <param name="docClassID">The parent DocClass ID.</param>
+    /// <param name="e">The DragDrop event arguments.</param>
+    internal void DoDragDrop(short docClassID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
       var dragDataName = sourceRow.LJCGetString("DragDataName");
@@ -279,12 +283,12 @@ namespace LJCGenDocEdit
           // Get source group.
           var sourceName = MethodGroupHeadingName(MethodGroupID(sourceRow));
           var manager = Managers.DocMethodGroupManager;
-          var sourceGroup = manager.RetrieveWithUnique(parentID, sourceName);
+          var sourceGroup = manager.RetrieveWithUnique(docClassID, sourceName);
 
           // Get target group.
           var targetRow = mMethodGroupGrid.Rows[targetIndex] as LJCGridRow;
           var targetName = MethodGroupHeadingName(MethodGroupID(targetRow));
-          var targetGroup = manager.RetrieveWithUnique(parentID, targetName);
+          var targetGroup = manager.RetrieveWithUnique(docClassID, targetName);
 
           var sourceSequence = sourceGroup.Sequence;
           var targetSequence = targetGroup.Sequence;
