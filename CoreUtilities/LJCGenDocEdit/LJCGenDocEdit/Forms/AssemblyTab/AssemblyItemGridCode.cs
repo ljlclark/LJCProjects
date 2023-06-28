@@ -263,40 +263,6 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
-    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyGroupRow)
-      {
-        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyGroupRow != null)
-      {
-        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyID/*' file='../../Doc/AssemblyItemGridCode.xml'/>
-    internal short AssemblyID(LJCGridRow assemblyRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyRow)
-      {
-        assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyRow != null)
-      {
-        retValue = (short)assemblyRow.LJCGetInt32(DocAssembly.ColumnID);
-      }
-      return retValue;
-    }
-
     // Retrieves the current row item.
     /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal DocAssembly CurrentAssembly()
@@ -327,13 +293,13 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = sourceRow.LJCGetString(DocAssembly.ColumnName);
+          var sourceName = AssemblyName(AssemblyID(sourceRow));
           var manager = DocAssemblyManager;
           var sourceGroup = manager.RetrieveWithName(sourceName);
 
           // Get target group.
           var targetRow = mAssemblyGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = targetRow.LJCGetString(DocAssembly.ColumnName);
+          var targetName = AssemblyName(AssemblyID(targetRow));
           var targetGroup = manager.RetrieveWithName(targetName);
 
           var sourceSequence = sourceGroup.Sequence;
@@ -365,6 +331,64 @@ namespace LJCGenDocEdit
         mAssemblyGrid.LJCAddDisplayColumns(DisplayColumns);
         mAssemblyGrid.LJCDragDataName = "DocAssembly";
       }
+    }
+
+    // Retrieves the current row item ID.
+    private short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyGroupRow)
+      {
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyGroupRow != null)
+      {
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item ID.
+    private short AssemblyID(LJCGridRow assemblyRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyRow)
+      {
+        assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyRow != null)
+      {
+        retValue = (short)assemblyRow.LJCGetInt32(DocAssembly.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocAssembly name.
+    private string AssemblyName(short docAssemblyID)
+    {
+      string retValue = null;
+
+      var docAssembly = AssemblyWithID(docAssemblyID);
+      if (docAssembly != null)
+      {
+        retValue = docAssembly.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the DoAssembly with the ID value.
+    private DocAssembly AssemblyWithID(short docAssemblyID)
+    {
+      DocAssembly retValue = null;
+
+      if (docAssemblyID > 0)
+      {
+        var manager = Managers.DocAssemblyManager;
+        retValue = manager.RetrieveWithID(docAssemblyID);
+      }
+      return retValue;
     }
     #endregion
 

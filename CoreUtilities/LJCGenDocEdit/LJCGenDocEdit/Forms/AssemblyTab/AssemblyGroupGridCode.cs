@@ -244,23 +244,6 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    // Retrieves the current row item ID.
-    /// <include path='items/AssemblyGroupID/*' file='../../Doc/AssemblyGroupGridCode.xml'/>
-    internal short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
-    {
-      short retValue = 0;
-
-      if (null == assemblyGroupRow)
-      {
-        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
-      }
-      if (assemblyGroupRow != null)
-      {
-        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-      }
-      return retValue;
-    }
-
     // The DragDrop method.
     /// <include path='items/DoDragDrop/*' file='../../../../LJCDocLib/Common/List.xml'/>
     internal void DoDragDrop(DragEventArgs e)
@@ -273,13 +256,13 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = sourceRow.LJCGetString(DocAssemblyGroup.ColumnName);
+          var sourceName = AssemblyGroupName(AssemblyGroupID(sourceRow));
           var manager = Managers.DocAssemblyGroupManager;
           var sourceGroup = manager.RetrieveWithUnique(sourceName);
 
           // Get target group.
           var targetRow = mAssemblyGroupGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = targetRow.LJCGetString(DocGenGroup.ColumnName);
+          var targetName = AssemblyGroupName(AssemblyGroupID(targetRow));
           var targetGroup = manager.RetrieveWithUnique(targetName);
 
           var sourceSequence = sourceGroup.Sequence;
@@ -311,6 +294,48 @@ namespace LJCGenDocEdit
         mAssemblyGroupGrid.LJCAddDisplayColumns(DisplayColumns);
         mAssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
       }
+    }
+
+    // Retrieves the current row item ID.
+    private short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)
+    {
+      short retValue = 0;
+
+      if (null == assemblyGroupRow)
+      {
+        assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
+      }
+      if (assemblyGroupRow != null)
+      {
+        retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the AssemblyGroup name.
+    private string AssemblyGroupName(short assemblyGroupID)
+    {
+      string retValue = null;
+
+      var assemblyGroup = AssemblyGroupWithID(assemblyGroupID);
+      if (assemblyGroup != null)
+      {
+        retValue = assemblyGroup.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the AssemblyGroup with the ID value.
+    private DocAssemblyGroup AssemblyGroupWithID(short assemblyGroupID)
+    {
+      DocAssemblyGroup retValue = null;
+
+      if (assemblyGroupID > 0)
+      {
+        var manager = Managers.DocAssemblyGroupManager;
+        retValue = manager.RetrieveWithID(assemblyGroupID);
+      }
+      return retValue;
     }
     #endregion
 

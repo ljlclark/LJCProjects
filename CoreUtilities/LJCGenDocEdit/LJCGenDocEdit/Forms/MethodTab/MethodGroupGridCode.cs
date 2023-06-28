@@ -103,8 +103,8 @@ namespace LJCGenDocEdit
       var retValue = mMethodGroupGrid.LJCRowAdd();
       var columnName = DocMethodGroup.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
-      columnName = DocMethodGroup.ColumnDocClassID;
-      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
+      //columnName = DocMethodGroup.ColumnDocClassID;
+      //retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
       mMethodGroupGrid.LJCRowSetValues(retValue, dbValues);
       return retValue;
@@ -124,8 +124,8 @@ namespace LJCGenDocEdit
     private void SetStoredValues(LJCGridRow row, DocMethodGroup dataRecord)
     {
       row.LJCSetInt32(DocMethodGroup.ColumnID, dataRecord.ID);
-      row.LJCSetInt32(DocMethodGroup.ColumnDocClassID
-        , dataRecord.DocClassID);
+      //row.LJCSetInt32(DocMethodGroup.ColumnDocClassID
+      //  , dataRecord.DocClassID);
     }
     #endregion
 
@@ -277,13 +277,13 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = sourceRow.LJCGetString(DocMethodGroup.ColumnHeadingName);
+          var sourceName = MethodGroupHeadingName(MethodGroupID(sourceRow));
           var manager = Managers.DocMethodGroupManager;
           var sourceGroup = manager.RetrieveWithUnique(parentID, sourceName);
 
           // Get target group.
           var targetRow = mMethodGroupGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = targetRow.LJCGetString(DocMethodGroup.ColumnHeadingName);
+          var targetName = MethodGroupHeadingName(MethodGroupID(targetRow));
           var targetGroup = manager.RetrieveWithUnique(parentID, targetName);
 
           var sourceSequence = sourceGroup.Sequence;
@@ -333,6 +333,19 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
+    // Retrieves the DocMethodGroup name.
+    private string MethodGroupHeadingName(short methodGroupID)
+    {
+      string retValue = null;
+
+      var docMethodGroup = MethodGroupWithID(methodGroupID);
+      if (docMethodGroup != null)
+      {
+        retValue = docMethodGroup.HeadingName;
+      }
+      return retValue;
+    }
+
     // Retrieves the current row item ID.
     /// <include path='items/MethodGroupID/*' file='../../Doc/MethodGroupGridCode.xml'/>
     private short MethodGroupID(LJCGridRow methodGroupRow = null)
@@ -346,6 +359,19 @@ namespace LJCGenDocEdit
       if (methodGroupRow != null)
       {
         retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the MethodGroup with the ID value.
+    private DocMethodGroup MethodGroupWithID(short methodGroupID)
+    {
+      DocMethodGroup retValue = null;
+
+      if (methodGroupID > 0)
+      {
+        var manager = Managers.DocMethodGroupManager;
+        retValue = manager.RetrieveWithID(methodGroupID);
       }
       return retValue;
     }
