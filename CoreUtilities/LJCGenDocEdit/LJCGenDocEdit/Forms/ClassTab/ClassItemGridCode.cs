@@ -274,11 +274,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // Retrieves the DocClass row item.
-    /// <summary>
-    /// Retrieves the DocClass row item.
-    /// </summary>
-    /// <param name="docClassRow">The DocClass grid row.</param>
-    /// <returns>The DocClass item.</returns>
+    /// <include path='items/DocClass/*' file='../../Doc/ClassItemGridCode.xml'/>
     internal DocClass DocClass(LJCGridRow docClassRow = null)
     {
       DocClass retValue = null;
@@ -295,11 +291,7 @@ namespace LJCGenDocEdit
     }
 
     // The DragDrop method.
-    /// <summary>
-    /// The DragDrop method.
-    /// </summary>
-    /// <param name="assemblyID">The parent DocAssembly ID.</param>
-    /// <param name="e">The DragDrop event arguments.</param>
+    /// <include path='items/DoDragDrop/*' file='../../Doc/ClassItemGridCode.xml'/>
     internal void DoDragDrop(short assemblyID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;

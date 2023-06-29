@@ -3,18 +3,11 @@
 <!-- Licensed under the MIT License. -->
 <!-- ClassGroupGridCode.xml -->
 <items>
-  <AssemblyID>
+  <DoDragDrop>
     <summary>
-      Retrieves the current row item ID.
+      The DragDrop method.
     </summary>
-    <param name="assemblyRow">The DocAssembly grid row.</param>
-    <returns>The DocAssembly ID.</returns>
-  </AssemblyID>
-  <ClassGroupID>
-    <summary>
-      Retrieves the current row item ID.
-    </summary>
-    <param name="classGroupRow">The ClassGroup grid row.</param>
-    <returns>The ClassGroup ID.</returns>
-  </ClassGroupID>
+    <param name="assemblyID">The parent DocAssembly ID.</param>
+    <param name="e">The DragDrop event arguments.</param>
+  </DoDragDrop>
 </items>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ClassItemComboCode.xml -->
+<items>
+  <ClassComboID>
+    <summary>
+      Retrieves the current combo item ID.
+    </summary>
+    <param name="classComboIndex">The DocClass combo index.</param>
+    <returns>The DocClass ID.</returns>
+  </ClassComboID>
+  <ClassGroupID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="classGroupGridRow">The ClassGroup grid row.</param>
+    <returns>The ClassGroup ID.</returns>
+  </ClassGroupID>
+</items>

@@ -266,11 +266,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // The DragDrop method.
-    /// <summary>
-    /// The DragDrop method.
-    /// </summary>
-    /// <param name="docClassID">The parent DocClass ID.</param>
-    /// <param name="e">The DragDrop event arguments.</param>
+    /// <include path='items/DoDragDrop/*' file='../../Doc/MethodGroupGridCode.xml'/>
     internal void DoDragDrop(short docClassID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;

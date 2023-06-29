@@ -3,18 +3,11 @@
 <!-- Licensed under the MIT License. -->
 <!-- MethodGroupGridCode.xml -->
 <items>
-  <ClassID>
+  <DoDragDrop>
     <summary>
-      Retrieves the current row item ID.
+      The DragDrop method.
     </summary>
-    <param name="classRow">The DocClass grid row.</param>
-    <returns></returns>
-  </ClassID>
-  <MethodGroupID>
-    <summary>
-      Retrieves the current row item ID.
-    </summary>
-    <param name="methodGroupRow">The MethodGroup grid row.</param>
-    <returns>The MethodGroup ID.</returns>
-  </MethodGroupID>
+    <param name="docClassID">The parent DocClass ID.</param>
+    <param name="e">The DragDrop event arguments.</param>
+  </DoDragDrop>
 </items>

@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using LJCDBClientLib;
 
 namespace LJCGenDocEdit
 {
@@ -274,11 +273,7 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // The DragDrop method.
-    /// <summary>
-    /// The DragDrop method.
-    /// </summary>
-    /// <param name="assemblyID">The parent DocAssembly ID.</param>
-    /// <param name="e">The DragDrop event arguments.</param>
+    /// <include path='items/DoDragDrop/*' file='../../Doc/ClassGroupGridCode.xml'/>
     internal void DoDragDrop(short assemblyID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
