@@ -6,6 +6,7 @@ using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace LJCGridDataLib
 {
@@ -213,6 +214,34 @@ namespace LJCGridDataLib
     #endregion
 
     #region Row Data Methods
+
+    /// <summary>
+    /// Loads the grid row columns from the DataRows collection.
+    /// </summary>
+    /// <param name="dataTable">The DataTable object.</param>
+    public void LoadColumnRows(DataTable dataTable)
+    {
+      if (dataTable != null
+        && dataTable.Rows != null && dataTable.Rows.Count > 0)
+      {
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          List<object> listValues = new List<object>();
+          var gridRow = mGrid.LJCRowAdd();
+          foreach (DataGridViewColumn gridColumn in mGrid.Columns)
+          {
+            object value = dataRow[gridColumn.Name];
+            if (value != null)
+            {
+              listValues.Add(value);
+              //gridRow.LJCSetCellText(gridColumn.Name, value);
+            }
+          }
+          var values = listValues.ToArray();
+          gridRow.SetValues(values);
+        }
+      }
+    }
 
     // Loads the grid rows from the DataRows collection.
     /// <include path='items/LoadRows/*' file='Doc/TableGrid.xml'/>
