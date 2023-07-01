@@ -149,7 +149,8 @@ namespace LJCGenDocEdit
       retValue.ID = LJCGroupID;
       retValue.HeadingName = NameText.Text.Trim();
       retValue.HeadingTextCustom = FormCommon.SetString(CustomText.Text);
-      retValue.Sequence = Convert.ToInt16(SequenceText.Text);
+      short.TryParse(SequenceText.Text, out short value);
+      retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
       // Get Parent key values.

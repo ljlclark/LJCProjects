@@ -26,7 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCHeadingID = 0;
       LJCRecord = null;
       LJCIsUpdate = false;
 
@@ -66,11 +66,11 @@ namespace LJCGenDocEdit
     {
       Cursor = Cursors.WaitCursor;
       Text = "Method Group Heading Detail";
-      if (LJCID > 0)
+      if (LJCHeadingID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetHeadingWithID(LJCID);
+        mOriginalRecord = GetHeadingWithID(LJCHeadingID);
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -111,7 +111,7 @@ namespace LJCGenDocEdit
       {
         retValue = new DocMethodGroupHeading();
       }
-      retValue.ID = LJCID;
+      retValue.ID = LJCHeadingID;
       retValue.Name = NameText.Text.Trim();
       retValue.Heading = HeadingText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
@@ -150,6 +150,8 @@ namespace LJCGenDocEdit
           if (isChanged)
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
+            manager.SourceSequence = mOriginalRecord.Sequence;
+            manager.TargetSequence = LJCRecord.Sequence;
             manager.Update(LJCRecord, keyRecord, propertyNames);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -162,6 +164,7 @@ namespace LJCGenDocEdit
         }
         else
         {
+          manager.TargetSequence = LJCRecord.Sequence;
           var addedRecord = manager.Add(LJCRecord);
           if (null == addedRecord)
           {
@@ -237,19 +240,56 @@ namespace LJCGenDocEdit
     // Save and setup for a new record.
     private void DialogNew_Click(object sender, EventArgs e)
     {
+      if (IsDataSaved())
+      {
+        LJCPrevious = false;
+        LJCNext = false;
+        LJCOnChange();
 
+        // Initialize property values.
+        LJCHeadingID = 0;
+        NameText.Text = "";
+
+        DataRetrieve();
+      }
     }
 
     // Save and move to the Next record.
     private void DialogNext_Click(object sender, EventArgs e)
     {
-
+      if (IsDataSaved())
+      {
+        LJCNext = true;
+        LJCOnChange();
+        if (LJCNext)
+        {
+          LJCNext = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
     }
 
     // Save and move to the Previous record.
     private void DialogPrevious_Click(object sender, EventArgs e)
     {
-
+      if (IsDataSaved())
+      {
+        LJCPrevious = true;
+        LJCOnChange();
+        if (LJCPrevious)
+        {
+          LJCPrevious = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
     }
 
     // Shows the help page.
@@ -257,6 +297,19 @@ namespace LJCGenDocEdit
     {
       Help.ShowHelp(this, "GenDocEdit.chm", HelpNavigator.Topic
         , @"Method\MethodHeadingDetail.html");
+    }
+
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
     }
     #endregion
 
@@ -346,10 +399,16 @@ namespace LJCGenDocEdit
     #region Properties
 
     /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCID { get; set; }
+    internal short LJCHeadingID { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
+
+    /// <summary>Gets or sets the Next flag.</summary>
+    internal bool LJCNext { get; set; }
+
+    /// <summary>Gets or sets the Previous flag.</summary>
+    internal bool LJCPrevious { get; set; }
 
     /// <summary>Gets a reference to the record object.</summary>
     internal DocMethodGroupHeading LJCRecord { get; private set; }

@@ -35,16 +35,34 @@ namespace LJCGenDocEdit
 
     #region Action Event Handlers
 
+    // Displays a detail dialog for a new record.
+    private void HeadingNew_Click(object sender, EventArgs e)
+    {
+      ClassHeadingGridCode.DoNew();
+    }
+
     // Calls the Edit method.
     private void HeadingEdit_Click(object sender, EventArgs e)
     {
       ClassHeadingGridCode.DoEdit();
     }
 
+    // Deletes the selected row.
+    private void HeadingDelete_Click(object sender, EventArgs e)
+    {
+      ClassHeadingGridCode.DoDelete();
+    }
+
     // Calls the Refresh method.
     private void HeadingRefresh_Click(object sender, EventArgs e)
     {
       ClassHeadingGridCode.DoRefresh();
+    }
+
+    // Resets the sequence values.
+    private void HeadingReset_Click(object sender, EventArgs e)
+    {
+      ClassHeadingGridCode.DoResetSequence();
     }
 
     // Calls the Select method.
@@ -85,13 +103,19 @@ namespace LJCGenDocEdit
 
     #region Control Event Handlers
 
+    // Handles the DragDrop event.
+    private void ClassHeadingGrid_DragDrop(object sender, DragEventArgs e)
+    {
+      ClassHeadingGridCode.DoDragDrop(e);
+    }
+
     // Handles the form keys.
     private void ClassHeadingGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ClassHeadingGridCode.DoDefault();
+          ClassHeadingGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -107,7 +131,7 @@ namespace LJCGenDocEdit
     {
       if (ClassHeadingGrid.LJCGetMouseRow(e) != null)
       {
-        ClassHeadingGridCode.DoDefault();
+        ClassHeadingGridCode.DoEdit();
       }
     }
 

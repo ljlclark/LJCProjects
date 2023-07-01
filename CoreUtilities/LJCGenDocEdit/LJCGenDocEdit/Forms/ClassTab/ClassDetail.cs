@@ -26,6 +26,7 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Initialize property values.
+      LJCAssemblyID = 0;
       LJCClassID = 0;
       LJCGroupID = 0;
       LJCRecord = null;
@@ -167,6 +168,8 @@ namespace LJCGenDocEdit
           if (isChanged)
           {
             var keyRecord = manager.GetIDKey(LJCRecord.ID);
+            manager.SourceSequence = mOriginalRecord.Sequence;
+            manager.TargetSequence = LJCRecord.Sequence;
             manager.Update(LJCRecord, keyRecord, propertyNames);
             if (0 == manager.Manager.AffectedCount)
             {
@@ -179,6 +182,7 @@ namespace LJCGenDocEdit
         }
         else
         {
+          manager.TargetSequence = LJCRecord.Sequence;
           var addedRecord = manager.Add(LJCRecord);
           if (null == addedRecord)
           {

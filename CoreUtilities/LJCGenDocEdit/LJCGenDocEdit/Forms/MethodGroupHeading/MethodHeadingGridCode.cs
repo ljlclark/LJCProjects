@@ -8,6 +8,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -18,11 +19,11 @@ namespace LJCGenDocEdit
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    internal MethodHeadingGridCode(MethodHeadingSelect selectList)
+    internal MethodHeadingGridCode(MethodHeadingSelect parentList)
     {
-      mSelectList = selectList;
-      Managers = mSelectList.Managers;
-      mMethodHeadingGrid = mSelectList.MethodHeadingGrid;
+      mMethodHeadingSelect = parentList;
+      Managers = mMethodHeadingSelect.Managers;
+      mMethodHeadingGrid = mMethodHeadingSelect.MethodHeadingGrid;
     }
     #endregion
 
@@ -31,7 +32,7 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the list rows.</summary>
     internal void DataRetrieve()
     {
-      mSelectList.Cursor = Cursors.WaitCursor;
+      mMethodHeadingSelect.Cursor = Cursors.WaitCursor;
       mMethodHeadingGrid.LJCRowsClear();
 
       var manager = Managers.DocMethodGroupHeadingManager;
@@ -50,8 +51,8 @@ namespace LJCGenDocEdit
           RowAddValues(dbRow.Values);
         }
       }
-      mSelectList.SetControlState();
-      mSelectList.Cursor = Cursors.Default;
+      mMethodHeadingSelect.SetControlState();
+      mMethodHeadingSelect.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.
@@ -62,7 +63,7 @@ namespace LJCGenDocEdit
 
       if (dataRecord != null)
       {
-        mSelectList.Cursor = Cursors.WaitCursor;
+        mMethodHeadingSelect.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mMethodHeadingGrid.Rows)
         {
           if (MethodHeadingID(row) == dataRecord.ID)
@@ -73,7 +74,7 @@ namespace LJCGenDocEdit
             break;
           }
         }
-        mSelectList.Cursor = Cursors.Default;
+        mMethodHeadingSelect.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -118,19 +119,6 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    /// <summary>Performs the default list action.</summary>
-    internal void DoDefault()
-    {
-      if (mSelectList.LJCIsSelect)
-      {
-        DoSelect();
-      }
-      else
-      {
-        DoEdit();
-      }
-    }
-
     /// <summary>Displays a detail dialog for a new record.</summary>
     internal void DoNew()
     {
@@ -149,7 +137,7 @@ namespace LJCGenDocEdit
       {
         var detail = new MethodHeadingDetail()
         {
-          LJCID = MethodHeadingID(),
+          LJCHeadingID = MethodHeadingID(),
           Managers = Managers
         };
         detail.LJCChange += Detail_Change;
@@ -202,7 +190,7 @@ namespace LJCGenDocEdit
     /// <summary>Refreshes the list.</summary>
     internal void DoRefresh()
     {
-      mSelectList.Cursor = Cursors.WaitCursor;
+      mMethodHeadingSelect.Cursor = Cursors.WaitCursor;
 
       // Save the original row.
       var methodHeadingID = MethodHeadingID();
@@ -216,26 +204,33 @@ namespace LJCGenDocEdit
         };
         RowSelect(dataRecord);
       }
-      mSelectList.Cursor = Cursors.Default;
+      mMethodHeadingSelect.Cursor = Cursors.Default;
     }
 
     /// <summary>Sets the selected item and returns to the parent form.</summary>
     internal void DoSelect()
     {
-      mSelectList.LJCSelectedRecord = null;
+      mMethodHeadingSelect.LJCSelectedRecord = null;
       if (mMethodHeadingGrid.CurrentRow is LJCGridRow _)
       {
-        mSelectList.Cursor = Cursors.WaitCursor;
+        mMethodHeadingSelect.Cursor = Cursors.WaitCursor;
         var manager = Managers.DocMethodGroupHeadingManager;
         var keyRecord = manager.GetIDKey(MethodHeadingID());
         var dataRecord = manager.Retrieve(keyRecord);
         if (dataRecord != null)
         {
-          mSelectList.LJCSelectedRecord = dataRecord;
+          mMethodHeadingSelect.LJCSelectedRecord = dataRecord;
         }
-        mSelectList.Cursor = Cursors.Default;
+        mMethodHeadingSelect.Cursor = Cursors.Default;
       }
-      mSelectList.DialogResult = DialogResult.OK;
+      mMethodHeadingSelect.DialogResult = DialogResult.OK;
+    }
+
+    /// <summary>Resets the Sequence column values.</summary>
+    internal void DoResetSequence()
+    {
+      var methodHeadingManager = Managers.DocMethodGroupHeadingManager;
+      methodHeadingManager.ResetSequence();
     }
 
     // Adds new row or updates row with changes from the detail dialog.
@@ -248,12 +243,14 @@ namespace LJCGenDocEdit
         if (detail.LJCIsUpdate)
         {
           RowUpdate(dataRecord);
+          CheckPreviousAndNext(detail);
           DoRefresh();
         }
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(dataRecord);
+          CheckPreviousAndNext(detail);
           mMethodHeadingGrid.LJCSetCurrentRow(row, true);
           DoRefresh();
         }
@@ -262,6 +259,35 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Other Methods
+
+    // The DragDrop method.
+    /// <include path='items/DoDragDrop/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    internal void DoDragDrop(DragEventArgs e)
+    {
+      var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
+      var dragDataName = sourceRow.LJCGetString("DragDataName");
+      if (dragDataName == mMethodHeadingGrid.LJCDragDataName)
+      {
+        var targetIndex = mMethodHeadingGrid.LJCGetDragRowIndex(new Point(e.X, e.Y));
+        if (targetIndex >= 0)
+        {
+          // Get source group.
+          var sourceName = HeadingName(MethodHeadingID(sourceRow));
+          var manager = Managers.DocMethodGroupHeadingManager;
+          var sourceGroup = manager.RetrieveWithUnique(sourceName);
+
+          // Get target group.
+          var targetRow = mMethodHeadingGrid.Rows[targetIndex] as LJCGridRow;
+          var targetName = HeadingName(MethodHeadingID(targetRow));
+          var targetGroup = manager.RetrieveWithUnique(targetName);
+
+          var sourceSequence = sourceGroup.Sequence;
+          var targetSequence = targetGroup.Sequence;
+          manager.ChangeSequence(sourceSequence, targetSequence);
+          DoRefresh();
+        }
+      }
+    }
 
     // Retrieves the current row item ID.
     /// <include path='items/MethodHeadingID/*' file='../../Doc/MethodHeadingGridCode.xml'/>
@@ -298,6 +324,83 @@ namespace LJCGenDocEdit
 
         // Setup the grid display columns.
         mMethodHeadingGrid.LJCAddDisplayColumns(DisplayColumns);
+        mMethodHeadingGrid.LJCDragDataName = "DocMethodGroupHeading";
+      }
+    }
+
+    // Retrieves the DocClassGroupHeading name.
+    private string HeadingName(short methodHeadingID)
+    {
+      string retValue = null;
+
+      var methodHeading = MethodHeadingWithID(methodHeadingID);
+      if (methodHeading != null)
+      {
+        retValue = methodHeading.Name;
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocMethodGroupHeading with the ID value.
+    private DocMethodGroupHeading MethodHeadingWithID(short methodHeadingID)
+    {
+      DocMethodGroupHeading retValue = null;
+
+      if (methodHeadingID > 0)
+      {
+        var manager = Managers.DocMethodGroupHeadingManager;
+        retValue = manager.RetrieveWithID(methodHeadingID);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Checks for Previous and Next items.
+    private void CheckPreviousAndNext(MethodHeadingDetail detail)
+    {
+      PreviousItem(detail);
+      NextItem(detail);
+    }
+
+    // Checks for Next item.
+    private void NextItem(MethodHeadingDetail detail)
+    {
+      if (detail.LJCNext)
+      {
+        LJCDataGrid grid = mMethodHeadingGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCNext = false;
+        if (currentIndex < grid.Rows.Count - 1)
+        {
+          grid.LJCSetCurrentRow(currentIndex + 1, true);
+          if (MethodHeadingID() > 0)
+          {
+            detail.LJCNext = true;
+            detail.LJCHeadingID = MethodHeadingID();
+          }
+        }
+      }
+    }
+
+    // Checks for Previous item.
+    private void PreviousItem(MethodHeadingDetail detail)
+    {
+      if (detail.LJCPrevious)
+      {
+        LJCDataGrid grid = mMethodHeadingGrid;
+        int currentIndex = grid.CurrentRow.Index;
+        detail.LJCPrevious = false;
+        if (currentIndex > 0)
+        {
+          grid.LJCSetCurrentRow(currentIndex - 1, true);
+          if (MethodHeadingID() > 0)
+          {
+            detail.LJCPrevious = true;
+            detail.LJCHeadingID = MethodHeadingID();
+          }
+        }
       }
     }
     #endregion
@@ -314,7 +417,7 @@ namespace LJCGenDocEdit
     #region Class Data
 
     private readonly LJCDataGrid mMethodHeadingGrid;
-    private readonly MethodHeadingSelect mSelectList;
+    private readonly MethodHeadingSelect mMethodHeadingSelect;
     #endregion
   }
 }

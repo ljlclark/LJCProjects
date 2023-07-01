@@ -23,6 +23,7 @@ namespace LJCGenDocEdit
     internal ClassItemGridCode(LJCGenDocList parentList)
     {
       mDocList = parentList;
+      mAssemblyGrid = mDocList.AssemblyItemGrid;
       mClassGrid = mDocList.ClassItemGrid;
       mClassGroupGrid = mDocList.ClassGroupGrid;
       Managers = mDocList.Managers;
@@ -359,17 +360,17 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the current row item ID.
-    private short DocAssemblyID(LJCGridRow classGroupRow = null)
+    private short DocAssemblyID(LJCGridRow docAssemblyRow = null)
     {
       short retValue = 0;
 
-      if (null == classGroupRow)
+      if (null == docAssemblyRow)
       {
-        classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
+        docAssemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
       }
-      if (classGroupRow != null)
+      if (docAssemblyRow != null)
       {
-        retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnDocAssemblyID);
+        retValue = (short)docAssemblyRow.LJCGetInt32(DocAssembly.ColumnID);
       }
       return retValue;
     }
@@ -480,6 +481,7 @@ namespace LJCGenDocEdit
 
     private readonly LJCDataGrid mClassGrid;
     private readonly LJCDataGrid mClassGroupGrid;
+    private readonly LJCDataGrid mAssemblyGrid;
     private readonly LJCGenDocList mDocList;
     #endregion
   }

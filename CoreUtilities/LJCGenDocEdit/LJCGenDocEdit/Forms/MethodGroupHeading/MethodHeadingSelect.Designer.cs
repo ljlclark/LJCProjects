@@ -33,9 +33,13 @@
       this.MethodHeadingGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.HeadingMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.GroupHeadingHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.HeadingNew = new System.Windows.Forms.ToolStripMenuItem();
       this.HeadingEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.HeadingDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.HeadingReset = new System.Windows.Forms.ToolStripMenuItem();
       this.HeadingSelectSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.HeadingSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -50,6 +54,7 @@
       // 
       // MethodHeadingGrid
       // 
+      this.MethodHeadingGrid.AllowDrop = true;
       this.MethodHeadingGrid.AllowUserToAddRows = false;
       this.MethodHeadingGrid.AllowUserToDeleteRows = false;
       this.MethodHeadingGrid.AllowUserToResizeRows = false;
@@ -66,6 +71,7 @@
       this.MethodHeadingGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.MethodHeadingGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.MethodHeadingGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.MethodHeadingGrid.LJCAllowDrag = true;
       this.MethodHeadingGrid.LJCAllowSelectionChange = false;
       this.MethodHeadingGrid.LJCDragDataName = null;
       this.MethodHeadingGrid.LJCLastRowIndex = -1;
@@ -82,6 +88,7 @@
       this.MethodHeadingGrid.TabIndex = 1;
       this.MethodHeadingGrid.Text = "LJCDataGrid";
       this.MethodHeadingGrid.SelectionChanged += new System.EventHandler(this.MethodHeadingGrid_SelectionChanged);
+      this.MethodHeadingGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.MethodHeadingGrid_DragDrop);
       this.MethodHeadingGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MethodHeadingGrid_KeyDown);
       this.MethodHeadingGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodHeadingGrid_MouseDoubleClick);
       this.MethodHeadingGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MethodHeadingGrid_MouseDown);
@@ -91,9 +98,13 @@
       this.HeadingMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.HeadingMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.GroupHeadingHeading,
+            this.HeadingNew,
             this.HeadingEdit,
             this.toolStripSeparator3,
+            this.HeadingDelete,
+            this.toolStripSeparator4,
             this.HeadingRefresh,
+            this.HeadingReset,
             this.HeadingSelectSeparator,
             this.HeadingSelect,
             this.toolStripSeparator1,
@@ -103,7 +114,7 @@
             this.HeadingClose,
             this.HeadingHelp});
       this.HeadingMenu.Name = "AssemblyMenu";
-      this.HeadingMenu.Size = new System.Drawing.Size(325, 284);
+      this.HeadingMenu.Size = new System.Drawing.Size(325, 386);
       this.HeadingMenu.Text = "Assembly Group Menu";
       // 
       // GroupHeadingHeading
@@ -112,6 +123,13 @@
       this.GroupHeadingHeading.Name = "GroupHeadingHeading";
       this.GroupHeadingHeading.Size = new System.Drawing.Size(324, 32);
       this.GroupHeadingHeading.Text = "Method Group Heading Menu";
+      // 
+      // HeadingNew
+      // 
+      this.HeadingNew.Name = "HeadingNew";
+      this.HeadingNew.Size = new System.Drawing.Size(324, 32);
+      this.HeadingNew.Text = "&New";
+      this.HeadingNew.Click += new System.EventHandler(this.HeadingNew_Click);
       // 
       // HeadingEdit
       // 
@@ -126,6 +144,18 @@
       this.toolStripSeparator3.Name = "toolStripSeparator3";
       this.toolStripSeparator3.Size = new System.Drawing.Size(321, 6);
       // 
+      // HeadingDelete
+      // 
+      this.HeadingDelete.Name = "HeadingDelete";
+      this.HeadingDelete.Size = new System.Drawing.Size(324, 32);
+      this.HeadingDelete.Text = "&Delete";
+      this.HeadingDelete.Click += new System.EventHandler(this.HeadingDelete_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(321, 6);
+      // 
       // HeadingRefresh
       // 
       this.HeadingRefresh.Name = "HeadingRefresh";
@@ -133,6 +163,13 @@
       this.HeadingRefresh.Size = new System.Drawing.Size(324, 32);
       this.HeadingRefresh.Text = "&Refresh";
       this.HeadingRefresh.Click += new System.EventHandler(this.HeadingRefresh_Click);
+      // 
+      // HeadingReset
+      // 
+      this.HeadingReset.Name = "HeadingReset";
+      this.HeadingReset.Size = new System.Drawing.Size(324, 32);
+      this.HeadingReset.Text = "Reset Sequence";
+      this.HeadingReset.Click += new System.EventHandler(this.HeadingReset_Click);
       // 
       // HeadingSelectSeparator
       // 
@@ -142,7 +179,8 @@
       // HeadingSelect
       // 
       this.HeadingSelect.Name = "HeadingSelect";
-      this.HeadingSelect.ShortcutKeyDisplayString = "ENTER";
+      this.HeadingSelect.ShortcutKeyDisplayString = "";
+      this.HeadingSelect.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
       this.HeadingSelect.Size = new System.Drawing.Size(324, 32);
       this.HeadingSelect.Text = "&Select";
       this.HeadingSelect.Click += new System.EventHandler(this.HeadingSelect_Click);
@@ -216,5 +254,9 @@
     private System.Windows.Forms.ToolStripMenuItem HeadingClose;
     private System.Windows.Forms.ToolStripSeparator HeadingSelectSeparator;
     private System.Windows.Forms.ToolStripMenuItem HeadingHelp;
+    private System.Windows.Forms.ToolStripMenuItem HeadingNew;
+    private System.Windows.Forms.ToolStripMenuItem HeadingDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripMenuItem HeadingReset;
   }
 }

@@ -221,14 +221,13 @@ namespace LJCDocLibDAL
     }
 
     /// <summary>Resets the sequence values.</summary>
-    public void ResetSequence(string where = null)
+    public void ResetSequence()
     {
       var parms = new ProcedureParameters()
       {
         { "@table", SqlDbType.VarChar, 100, "DocMethodGroupHeading" },
         { "@idColumn", SqlDbType.VarChar, 100, "ID" },
         { "@sequenceColumn", SqlDbType.VarChar, 100, "Sequence" },
-        { "@where", SqlDbType.VarChar, 200, where}
       };
       Manager.LoadProcedure("sp_ResetSequence", parms);
     }

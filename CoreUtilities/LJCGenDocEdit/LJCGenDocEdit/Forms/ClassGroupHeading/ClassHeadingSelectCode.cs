@@ -37,8 +37,8 @@ namespace LJCGenDocEdit
       {
         // This is a Selection List.
         Text = "Class Group Heading Selection";
-        HeadingEdit.ShortcutKeyDisplayString = "";
-        HeadingEdit.ShortcutKeys = ((Keys)(Keys.Control | Keys.E));
+        //HeadingEdit.ShortcutKeyDisplayString = "";
+        //HeadingEdit.ShortcutKeys = ((Keys)(Keys.Control | Keys.E));
       }
       else
       {

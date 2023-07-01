@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AssemblyItemComboCode.xml -->
+<items>
+  <AssemblyComboID>
+    <summary>
+      Retrieves the current combo item ID.
+    </summary>
+    <param name="assemblyComboIndex">The DocAssembly combo index.</param>
+    <returns>The DocAssembly ID.</returns>
+  </AssemblyComboID>
+  <AssemblyGroupID>
+    <summary>
+      Retrieves the current row item ID.
+    </summary>
+    <param name="assemblyGroupRow">The AssemblyGroup grid row.</param>
+    <returns>The AssemblyGroup ID.</returns>
+  </AssemblyGroupID>
+</items>
