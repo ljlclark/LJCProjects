@@ -460,7 +460,7 @@ namespace LJCGenDocEdit
           }
           else
           {
-            AssemblyGroupGrid.Select();
+            AssemblyItemGrid.Select();
           }
           e.Handled = true;
           break;
@@ -535,6 +535,18 @@ namespace LJCGenDocEdit
             AssemblyMenu.Select();
             e.Handled = true;
           }
+          break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            AssemblyGroupGrid.Select();
+          }
+          else
+          {
+            AssemblyGroupGrid.Select();
+          }
+          e.Handled = true;
           break;
       }
     }
@@ -619,6 +631,18 @@ namespace LJCGenDocEdit
             e.Handled = true;
           }
           break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            ClassItemGrid.Select();
+          }
+          else
+          {
+            ClassItemGrid.Select();
+          }
+          e.Handled = true;
+          break;
       }
     }
 
@@ -692,6 +716,18 @@ namespace LJCGenDocEdit
             AssemblyMenu.Select();
             e.Handled = true;
           }
+          break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            ClassGroupGrid.Select();
+          }
+          else
+          {
+            ClassGroupGrid.Select();
+          }
+          e.Handled = true;
           break;
       }
     }
@@ -776,6 +812,18 @@ namespace LJCGenDocEdit
             e.Handled = true;
           }
           break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            MethodItemGrid.Select();
+          }
+          else
+          {
+            MethodItemGrid.Select();
+          }
+          e.Handled = true;
+          break;
       }
     }
 
@@ -849,6 +897,18 @@ namespace LJCGenDocEdit
             AssemblyMenu.Select();
             e.Handled = true;
           }
+          break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            MethodGroupGrid.Select();
+          }
+          else
+          {
+            MethodGroupGrid.Select();
+          }
+          e.Handled = true;
           break;
       }
     }
