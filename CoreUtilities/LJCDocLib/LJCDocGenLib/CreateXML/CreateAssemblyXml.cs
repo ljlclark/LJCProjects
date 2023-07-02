@@ -117,8 +117,10 @@ namespace LJCDocGenLib
           var repeatItems = section.RepeatItems;
           foreach (var classGroup in classGroups)
           {
-            var repeatItem = repeatItems.Add(classGroup.HeadingName);
-            repeatItem.Replacements.Add("_Heading_", classGroup.HeadingName);
+            if ("ungrouped" == classGroup.HeadingName.ToLower())
+            {
+              continue;
+            }
 
             // Get the DocClasses for the DocClassGroup.
             var classManager = managers.DocClassManager;
@@ -127,6 +129,16 @@ namespace LJCDocGenLib
             if (NetCommon.HasItems(docClasses))
             {
               retValue = true;
+              var repeatItem = repeatItems.Add(classGroup.HeadingName);
+              repeatItem.Replacements.Add("_Heading_", classGroup.HeadingName);
+
+              //// Get the DocClasses for the DocClassGroup.
+              //var classManager = managers.DocClassManager;
+              //var docClasses
+              //  = classManager.LoadWithGroup(classGroup.ID);
+              //if (NetCommon.HasItems(docClasses))
+              //{
+              //retValue = true;
               repeatItem.Subsection = new Section("Subsection");
               var subRepeatItems = repeatItem.Subsection.RepeatItems;
               foreach (var docClass in docClasses)

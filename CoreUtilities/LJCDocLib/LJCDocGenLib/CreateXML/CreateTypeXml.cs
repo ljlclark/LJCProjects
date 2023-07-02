@@ -214,14 +214,6 @@ namespace LJCDocGenLib
             var repeatItems = section.RepeatItems;
             foreach (var methodGroup in methodGroups)
             {
-              var repeatItem = repeatItems.Add(methodGroup.HeadingName);
-              var heading = methodGroup.HeadingName;
-              if (methodGroup.HeadingTextCustom != null)
-              {
-                heading = methodGroup.HeadingTextCustom;
-              }
-              repeatItem.Replacements.Add("_Heading_", heading);
-
               // Get the DocMethods for the DocMethodGroup.
               var methodManager = managers.DocMethodManager;
               var docMethods
@@ -229,6 +221,21 @@ namespace LJCDocGenLib
               if (NetCommon.HasItems(docMethods))
               {
                 retValue = true;
+                var repeatItem = repeatItems.Add(methodGroup.HeadingName);
+                var heading = methodGroup.HeadingName;
+                if (methodGroup.HeadingTextCustom != null)
+                {
+                  heading = methodGroup.HeadingTextCustom;
+                }
+                repeatItem.Replacements.Add("_Heading_", heading);
+
+                //// Get the DocMethods for the DocMethodGroup.
+                //var methodManager = managers.DocMethodManager;
+                //var docMethods
+                //  = methodManager.LoadWithGroup(methodGroup.ID);
+                //if (NetCommon.HasItems(docMethods))
+                //{
+                //  retValue = true;
                 repeatItem.Subsection = new Section("Subsection");
                 var subRepeatItems = repeatItem.Subsection.RepeatItems;
                 foreach (var docMethod in docMethods)
