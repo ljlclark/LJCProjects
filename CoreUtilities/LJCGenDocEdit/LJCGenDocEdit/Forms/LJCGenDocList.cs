@@ -407,6 +407,7 @@ namespace LJCGenDocEdit
       {
         MainTabs.LJCSetCurrentTabPage(e);
       }
+      SetFocusTab(e);
     }
 
     // Handles the MouseDown event.
@@ -416,6 +417,7 @@ namespace LJCGenDocEdit
       {
         TileTabs.LJCSetCurrentTabPage(e);
       }
+      SetFocusTab(e);
     }
     #endregion
 
@@ -626,8 +628,8 @@ namespace LJCGenDocEdit
           {
             var position = FormCommon.GetMenuScreenPoint(ClassGroupGrid
               , MousePosition);
-            AssemblyMenu.Show(position);
-            AssemblyMenu.Select();
+            ClassGroupMenu.Show(position);
+            ClassGroupMenu.Select();
             e.Handled = true;
           }
           break;
@@ -712,8 +714,8 @@ namespace LJCGenDocEdit
           {
             var position = FormCommon.GetMenuScreenPoint(ClassItemGrid
               , MousePosition);
-            AssemblyMenu.Show(position);
-            AssemblyMenu.Select();
+            ClassMenu.Show(position);
+            ClassMenu.Select();
             e.Handled = true;
           }
           break;
@@ -807,8 +809,8 @@ namespace LJCGenDocEdit
           {
             var position = FormCommon.GetMenuScreenPoint(MethodGroupGrid
               , MousePosition);
-            AssemblyMenu.Show(position);
-            AssemblyMenu.Select();
+            MethodGroupMenu.Show(position);
+            MethodGroupMenu.Select();
             e.Handled = true;
           }
           break;
@@ -893,8 +895,8 @@ namespace LJCGenDocEdit
           {
             var position = FormCommon.GetMenuScreenPoint(MethodItemGrid
               , MousePosition);
-            AssemblyMenu.Show(position);
-            AssemblyMenu.Select();
+            MethodItemMenu.Show(position);
+            MethodItemMenu.Select();
             e.Handled = true;
           }
           break;

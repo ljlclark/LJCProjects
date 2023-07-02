@@ -231,6 +231,7 @@ namespace LJCGenDocEdit
 
         case Change.AssemblyGroup:
           mAssemblyItemGridCode.DataRetrieve();
+          AssemblyGroupGrid.Select();
           break;
 
         case Change.AssemblyItem:
@@ -382,6 +383,26 @@ namespace LJCGenDocEdit
       enableNew = MethodGroupGrid.CurrentRow != null;
       enableEdit = MethodItemGrid.CurrentRow != null;
       FormCommon.SetMenuState(MethodItemMenu, enableNew, enableEdit);
+    }
+
+    // Sets the tab initial focus control.
+    private void SetFocusTab(MouseEventArgs e)
+    {
+      var tabPage = MainTabs.LJCGetTabPage(e);
+      switch (tabPage.Name)
+      {
+        case "AssemblyTab":
+          AssemblyGroupGrid.Select();
+          break;
+
+        case "ClassTab":
+          ClassGroupGrid.Select();
+          break;
+
+        case "MethodTab":
+          MethodGroupGrid.Select();
+          break;
+      }
     }
     #endregion
 
