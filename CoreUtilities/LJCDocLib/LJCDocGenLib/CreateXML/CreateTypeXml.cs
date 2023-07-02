@@ -103,7 +103,7 @@ namespace LJCDocGenLib
       }
       mainReplacements.Add("_MethodListPreface_", methodListPreface);
 
-      int publicMethodCount = MethodCount(true);
+      int publicMethodCount = MethodCount(DataType.DataMethods, true);
       if (publicMethodCount > 0)
       {
         mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
@@ -111,7 +111,7 @@ namespace LJCDocGenLib
         AddMethods(section, true);
       }
 
-      int privateMethodCount = MethodCount(false);
+      int privateMethodCount = MethodCount(DataType.DataMethods);
       if (privateMethodCount > 0)
       {
         mainReplacements.Add("_PrivateMethodCount_", privateMethodCount.ToString());
@@ -229,13 +229,6 @@ namespace LJCDocGenLib
                 }
                 repeatItem.Replacements.Add("_Heading_", heading);
 
-                //// Get the DocMethods for the DocMethodGroup.
-                //var methodManager = managers.DocMethodManager;
-                //var docMethods
-                //  = methodManager.LoadWithGroup(methodGroup.ID);
-                //if (NetCommon.HasItems(docMethods))
-                //{
-                //  retValue = true;
                 repeatItem.Subsection = new Section("Subsection");
                 var subRepeatItems = repeatItem.Subsection.RepeatItems;
                 foreach (var docMethod in docMethods)
@@ -411,14 +404,14 @@ namespace LJCDocGenLib
 
     // Gets the Method count.
     // <include path='items/MethodCount/*' file='Doc/CreateTypeXml.xml'/>
-    private int MethodCount(bool usePublic)
+    private int MethodCount(DataMethods dataMethods, bool usePublic = false)
     {
       int retValue = 0;
 
-      if (mOtherMethods != null
-        && mOtherMethods.Count > 0)
+      if (dataMethods != null
+        && dataMethods.Count > 0)
       {
-        foreach (DataMethod dataMethod in mOtherMethods)
+        foreach (DataMethod dataMethod in dataMethods)
         {
           if (usePublic == dataMethod.IsPublic)
           {
