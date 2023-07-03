@@ -42,7 +42,6 @@ namespace LJCDocGenLib
       repeatItem = section.RepeatItems.Add("Main");
       replacements = repeatItem.Replacements;
       replacements.Add("_AssemblyName_", DataAssembly.Name);
-
       // Testing
       //if ("LJCDBClientLib" == DataAssembly.Name)
       //{
@@ -110,6 +109,11 @@ namespace LJCDocGenLib
       if (docAssembly != null)
       {
         var classGroupManager = managers.DocClassGroupManager;
+        var orderColumns = new List<string>()
+        {
+          DocClassGroup.ColumnSequence
+        };
+        classGroupManager.SetOrderBy(orderColumns);
         var classGroups = classGroupManager.LoadWithParentID(docAssembly.ID);
         if (NetCommon.HasItems(classGroups))
         {
@@ -124,6 +128,11 @@ namespace LJCDocGenLib
 
             // Get the DocClasses for the DocClassGroup.
             var classManager = managers.DocClassManager;
+            orderColumns = new List<string>()
+            {
+              DocClass.ColumnSequence
+            };
+            classManager.SetOrderBy(orderColumns);
             var docClasses
               = classManager.LoadWithGroup(classGroup.ID);
             if (NetCommon.HasItems(docClasses))

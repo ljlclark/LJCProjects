@@ -10,6 +10,7 @@ using LJCDocLibDAL;
 using Section = LJCGenTextLib.Section;
 using System.Xml.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace LJCDocGenLib
 {
@@ -29,6 +30,8 @@ namespace LJCDocGenLib
       DataAssembly = dataAssembly;
       DataType = dataType;
       AssemblyReflect = assemblyReflect;
+      mGenMethod = new GenMethod(GenRoot, GenAssembly, DataAssembly
+        , DataType, null);
     }
     #endregion
 
@@ -99,11 +102,11 @@ namespace LJCDocGenLib
       {
         mOtherMethods.Add(dataMethod);
       }
-      //// Testing
-      //if ("DataAccess" == DataType.Name)
-      //{
-      //  int i = 0;
-      //}
+      // Testing
+      if ("DataAccess" == DataType.Name)
+      {
+        int i = 0;
+      }
       if (AddMethodGroups(sections))
       {
         methodListPreface = "Other ";
@@ -214,6 +217,11 @@ namespace LJCDocGenLib
         if (docClass != null)
         {
           var methodGroupManager = managers.DocMethodGroupManager;
+          var orderColumns = new List<string>()
+          {
+            DocMethodGroup.ColumnSequence
+          };
+          methodGroupManager.SetOrderBy(orderColumns);
           var methodGroups = methodGroupManager.LoadWithParentID(docClass.ID);
           if (NetCommon.HasItems(methodGroups))
           {
@@ -223,6 +231,11 @@ namespace LJCDocGenLib
             {
               // Get the DocMethods for the DocMethodGroup.
               var methodManager = managers.DocMethodManager;
+              orderColumns = new List<string>()
+              {
+                DocMethod.ColumnSequence
+              };
+              methodManager.SetOrderBy(orderColumns);
               var docMethods
                 = methodManager.LoadWithGroup(methodGroup.ID);
               if (NetCommon.HasItems(docMethods)
@@ -242,15 +255,18 @@ namespace LJCDocGenLib
                 foreach (var docMethod in docMethods)
                 {
                   var methodName = docMethod.Name;
-
-                  var dataType = mOtherMethods.Find(x => x.Name == methodName);
-                  if (dataType != null)
+                  var dataMethod = mOtherMethods.Find(x => x.Name == methodName);
+                  if (dataMethod != null)
                   {
-                    mOtherMethods.Remove(dataType);
+                    // Create relative path.
+                    mGenMethod.DataMethod = dataMethod;
+                    string fileName = Path.Combine("Methods", mGenMethod.HTMLFileName);
+
+                    mOtherMethods.Remove(dataMethod);
                     var subRepeatItem = subRepeatItems.Add(methodName);
                     var subReplacements = subRepeatItem.Replacements;
                     var htmlFileName = $"{DataType.Name}.{methodName}.html";
-                    subReplacements.Add("_HTMLFileName_", $@"Methods\{htmlFileName}");
+                    subReplacements.Add("_HTMLFileName_", fileName);
                     subReplacements.Add("_Name_", methodName);
                     subReplacements.Add("_Summary_", docMethod.Description);
                   }
@@ -270,8 +286,6 @@ namespace LJCDocGenLib
       RepeatItem repeatItem;
       Replacements replacements;
 
-      GenMethod genMethod = new GenMethod(GenRoot, GenAssembly, DataAssembly
-        , DataType, null);
       foreach (DataMethod dataMethod in mOtherMethods)
       {
         bool gen = true;
@@ -287,14 +301,14 @@ namespace LJCDocGenLib
           replacements = repeatItem.Replacements;
 
           // Create relative path.
-          genMethod.DataMethod = dataMethod;
-          string fileName = Path.Combine("Methods", genMethod.HTMLFileName);
+          mGenMethod.DataMethod = dataMethod;
+          string fileName = Path.Combine("Methods", mGenMethod.HTMLFileName);
 
           string displayString = dataMethod.Name;
-          if ("#ctor" == displayString)
-          {
-            displayString = DataType.Name + " #ctor";
-          }
+          //if ("#ctor" == displayString)
+          //{
+          //  displayString = DataType.Name + " #ctor";
+          //}
           replacements.Add("_FileName_", fileName);
           replacements.Add("_MethodName_", displayString);
           replacements.Add("_MethodSummary_", dataMethod.Summary);
@@ -547,6 +561,7 @@ namespace LJCDocGenLib
     private GenRoot GenRoot { get; }
     #endregion
 
+    private GenMethod mGenMethod;
     private DataMethods mOtherMethods;
   }
 }
