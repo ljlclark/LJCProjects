@@ -8,6 +8,8 @@ using LJCGenTextLib;
 using LJCDocObjLib;
 using LJCDocLibDAL;
 using Section = LJCGenTextLib.Section;
+using System.Xml.Linq;
+using System.Reflection;
 
 namespace LJCDocGenLib
 {
@@ -93,10 +95,15 @@ namespace LJCDocGenLib
 
       string methodListPreface = "";
       mOtherMethods = new DataMethods();
-      foreach (var dataType in DataType.DataMethods)
+      foreach (var dataMethod in DataType.DataMethods)
       {
-        mOtherMethods.Add(dataType);
+        mOtherMethods.Add(dataMethod);
       }
+      //// Testing
+      //if ("DataAccess" == DataType.Name)
+      //{
+      //  int i = 0;
+      //}
       if (AddMethodGroups(sections))
       {
         methodListPreface = "Other ";
@@ -218,7 +225,8 @@ namespace LJCDocGenLib
               var methodManager = managers.DocMethodManager;
               var docMethods
                 = methodManager.LoadWithGroup(methodGroup.ID);
-              if (NetCommon.HasItems(docMethods))
+              if (NetCommon.HasItems(docMethods)
+                && HasValidMethods(docMethods))
               {
                 retValue = true;
                 var repeatItem = repeatItems.Add(methodGroup.HeadingName);
@@ -239,14 +247,13 @@ namespace LJCDocGenLib
                   if (dataType != null)
                   {
                     mOtherMethods.Remove(dataType);
+                    var subRepeatItem = subRepeatItems.Add(methodName);
+                    var subReplacements = subRepeatItem.Replacements;
+                    var htmlFileName = $"{DataType.Name}.{methodName}.html";
+                    subReplacements.Add("_HTMLFileName_", $@"Methods\{htmlFileName}");
+                    subReplacements.Add("_Name_", methodName);
+                    subReplacements.Add("_Summary_", docMethod.Description);
                   }
-
-                  var subRepeatItem = subRepeatItems.Add(methodName);
-                  var subReplacements = subRepeatItem.Replacements;
-                  var htmlFileName = $"{DataType.Name}.{methodName}.html";
-                  subReplacements.Add("_HTMLFileName_", $@"Methods\{htmlFileName}");
-                  subReplacements.Add("_Name_", methodName);
-                  subReplacements.Add("_Summary_", docMethod.Description);
                 }
               }
             }
@@ -398,6 +405,23 @@ namespace LJCDocGenLib
       if (DataType.DataFields != null)
       {
         retValue = DataType.DataFields.Count;
+      }
+      return retValue;
+    }
+
+    // Check for valid methods.
+    private bool HasValidMethods(DocMethods docMethods)
+    {
+      bool retValue = false;
+
+      foreach (var docMethod in docMethods)
+      {
+        var dataType = mOtherMethods.Find(x => x.Name == docMethod.Name);
+        if (dataType != null)
+        {
+          retValue = true;
+          break;
+        }
       }
       return retValue;
     }
