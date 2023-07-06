@@ -8,17 +8,17 @@
       Represents a collection of DataMethod objects.
     </summary>
   </DataMethods>
-  <GetOverriddenName>
+  <GetOverloadName>
     <summary>
-      Returns the unique name for an overriden method.
+      Returns the unique name for an overload method.
     </summary>
-    <param name="name">The original method name.</param>
-    <returns>The overriden name if required or the original name.</returns>
-  </GetOverriddenName>
-  <SearchOverriddenName>
+    <param name="methodName">The method name.</param>
+    <returns>The overload name if required or the original name.</returns>
+  </GetOverloadName>
+  <SearchOverloadName>
     <summary>
       Returns the element with the name matching the supplied value.
     </summary>
-    <param name="name">The element name.</param>
-  </SearchOverriddenName>
+    <param name="overloadName">The element name.</param>
+  </SearchOverloadName>
 </items>

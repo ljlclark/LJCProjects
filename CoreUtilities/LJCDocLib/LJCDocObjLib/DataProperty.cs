@@ -22,16 +22,15 @@ namespace LJCDocObjLib
     // Initializes an object instance.
     /// <include path='items/DataPropertyC/*' file='Doc/DataProperty.xml'/>
     public DataProperty(DataAssembly dataAssembly, DataType dataType
-      , DocMember propertyMember, string overriddenName)
+      , DocMember propertyMember)
     {
       Doc = dataAssembly.Doc;
       PropertyMember = propertyMember;
       AssemblyName = dataAssembly.Name;
       TypeName = dataType.Name;
 
-      FullName = propertyMember.Name;
-      Name = DataCommon.GetMemberName(FullName);
-      OverriddenName = overriddenName;
+      MemberName = propertyMember.Name;
+      Name = DataCommon.GetMemberName(MemberName);
 
       Summary = PropertyMember.Summary;
       Returns = PropertyMember.Returns;
@@ -64,7 +63,7 @@ namespace LJCDocObjLib
       }
       else
       {
-        retValue = OverriddenName.CompareTo(other.OverriddenName);
+        retValue = Name.CompareTo(other.Name);
       }
       return retValue;
     }
@@ -76,15 +75,15 @@ namespace LJCDocObjLib
     public bool IsPublic { get; set; }
 
     /// <summary>Gets or sets the Property Name value.</summary>
-    public string Name { get; set; }
-
-    /// <summary>The overriden method unique name if required.</summary>
-    public string OverriddenName
+    public string Name
     {
-      get { return mOverriddenName; }
-      set { mOverriddenName = NetString.InitString(value); }
+      get { return mName; }
+      set
+      {
+        mName = NetString.InitString(value);
+      }
     }
-    private string mOverriddenName;
+    private string mName;
 
     /// <summary>Gets or sets the Remark value.</summary>
     public DataRemark Remark { get; set; }
@@ -105,8 +104,8 @@ namespace LJCDocObjLib
     /// <include path='items/Doc/*' file='Doc/DataProperty.xml'/>
     public Doc Doc { get; set; }
 
-    /// <summary>Gets or sets the object FullName value.</summary>
-    public string FullName { get; set; }
+    /// <summary>Gets or sets the object MemberName value.</summary>
+    public string MemberName { get; set; }
 
     // <remarks>
     /// <include path='items/PropertyMember/*' file='Doc/DataProperty.xml'/>

@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataMethods.cs
+using LJCNetCommon;
 using System.Collections.Generic;
 
 namespace LJCDocObjLib
@@ -15,29 +16,44 @@ namespace LJCDocObjLib
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataMethods()
     {
+      mPrevCount = -1;
+    }
+
+    // The Copy constructor.
+    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    public DataMethods(DataMethods items)
+    {
+      mPrevCount = -1;
+      if (NetCommon.HasItems(items))
+      {
+        foreach (var item in items)
+        {
+          Add(new DataMethod(item));
+        }
+      }
     }
     #endregion
 
     #region Methods
 
-    // Returns the unique name for an overriden method.
-    /// <include path='items/GetOverriddenName/*' file='Doc/DataMethods.xml'/>
-    public string GetOverriddenName(string name)
+    // Returns the unique name for an overload method.
+    /// <include path='items/GetOverloadName/*' file='Doc/DataMethods.xml'/>
+    public string GetOverloadName(string methodName)
     {
-      string retValue = name;
+      string retValue = methodName;
 
       if (retValue.StartsWith("#"))
       {
-        retValue = name.Substring(1);
+        retValue = methodName.Substring(1);
       }
 
       int index = 0;
-      DataMethod dataMethod = SearchOverriddenName(retValue);
+      DataMethod dataMethod = SearchOverloadName(retValue);
       while (dataMethod != null)
       {
         index++;
         string searchValue = $"{retValue}{index}";
-        dataMethod = SearchOverriddenName(searchValue);
+        dataMethod = SearchOverloadName(searchValue);
         if (null == dataMethod)
         {
           retValue = searchValue;
@@ -47,8 +63,8 @@ namespace LJCDocObjLib
     }
 
     // Returns the element with the name matching the supplied value.
-    /// <include path='items/SearchOverriddenName/*' file='Doc/DataMethods.xml'/>
-    public DataMethod SearchOverriddenName(string name)
+    /// <include path='items/SearchOverloadName/*' file='Doc/DataMethods.xml'/>
+    public DataMethod SearchOverloadName(string overloadName)
     {
       DataMethod retValue = null;
 
@@ -60,7 +76,7 @@ namespace LJCDocObjLib
 
       DataMethod dataMethod = new DataMethod()
       {
-        OverriddenName = name
+        OverloadName = overloadName
       };
       int index = BinarySearch(dataMethod);
       if (index > -1)

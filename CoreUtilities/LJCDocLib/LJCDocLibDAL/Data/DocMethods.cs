@@ -86,7 +86,8 @@ namespace LJCDocLibDAL
         retValue = new DocMethod()
         {
           ID = id,
-          Name = name
+          Name = name,
+          //OverrideName = name
         };
         Add(retValue);
       }

@@ -119,10 +119,29 @@ namespace LJCDocLibDAL
       set
       {
         value = NetString.InitString(value);
+        if (value != null
+          && null == OverloadName)
+        {
+          OverloadName = value;
+        }
         mName = ChangedNames.Add(ColumnName, mName, value);
       }
     }
     private String mName;
+
+    /// <summary>Gets or sets the Name value.</summary>
+    //[Required]
+    //[Column("OverloadName", TypeName="nvarchar(60")]
+    public String OverloadName
+    {
+      get { return mOverloadName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mOverloadName = ChangedNames.Add(ColumnOverloadName, mOverloadName, value);
+      }
+    }
+    private String mOverloadName;
 
     /// <summary>Gets or sets the Description value.</summary>
     //[Required]
@@ -187,6 +206,9 @@ namespace LJCDocLibDAL
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
+
+    /// <summary>The OverloadName column name.</summary>
+    public static string ColumnOverloadName = "OverloadName";
 
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";

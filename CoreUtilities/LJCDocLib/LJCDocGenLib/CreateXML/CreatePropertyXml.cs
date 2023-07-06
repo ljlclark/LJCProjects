@@ -129,7 +129,7 @@ namespace LJCDocGenLib
     // <include path='items/SetPropertyInfo/*' file='Doc/CreatePropertyXml.xml'/>
     private void SetPropertyInfo()
     {
-      AssemblyReflect?.SetPropertyInfo(DataProperty.Name, DataProperty.FullName);
+      AssemblyReflect?.SetPropertyInfo(DataProperty.Name, DataProperty.MemberName);
     }
 
     // Sets the Object Remarks elements.

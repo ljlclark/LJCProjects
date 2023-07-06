@@ -21,19 +21,33 @@ namespace LJCDocObjLib
     {
     }
 
+    // The Copy constructor.
+    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public DataMethod(DataMethod item)
+    {
+      Example = item.Example;
+      IsPublic = item.IsPublic;
+      Name = item.Name;
+      OverloadName = item.OverloadName;
+      Params = item.Params;
+      Remark = item.Remark;
+      Returns = item.Returns;
+      Summary = item.Summary;
+    }
+
     // Initializes an object instance.
     /// <include path='items/DataMethodC/*' file='Doc/DataMethod.xml'/>
     public DataMethod(DataAssembly dataAssembly, DataType dataType
-      , DocMember methodMember, string overriddenName)
+      , DocMember methodMember, string overloadName)
     {
       Doc = dataAssembly.Doc;
       MethodMember = methodMember;
       AssemblyName = dataAssembly.Name;
       TypeName = dataType.Name;
 
-      FullName = methodMember.Name;
-      Name = DataCommon.GetMemberName(FullName);
-      OverriddenName = overriddenName;
+      MemberName = methodMember.Name;
+      Name = DataCommon.GetMemberName(MemberName);
+      OverloadName = overloadName;
 
       Params = DataCommon.GetDataParams(methodMember.Params);
       Summary = methodMember.Summary;
@@ -68,7 +82,7 @@ namespace LJCDocObjLib
       else
       {
         // Case sensitive.
-        retValue = OverriddenName.CompareTo(other.OverriddenName);
+        retValue = OverloadName.CompareTo(other.OverloadName);
       }
       return retValue;
     }
@@ -129,15 +143,27 @@ namespace LJCDocObjLib
     public bool IsPublic { get; set; }
 
     /// <summary>Gets or sets the Method Name value.</summary>
-    public string Name { get; set; }
-
-    /// <summary>The overriden method unique name if required.</summary>
-    public string OverriddenName
+    public string Name
     {
-      get { return mOverriddenName; }
-      set { mOverriddenName = NetString.InitString(value); }
+      get { return mName; }
+      set
+      {
+        mName = NetString.InitString(value);
+        if (false == NetString.HasValue(mOverloadName))
+        {
+          mOverloadName = mName;
+        }
+      }
     }
-    private string mOverriddenName;
+    private string mName;
+
+    /// <summary>The overload method unique name if required.</summary>
+    public string OverloadName
+    {
+      get { return mOverloadName; }
+      set { mOverloadName = NetString.InitString(value); }
+    }
+    private string mOverloadName;
 
     /// <summary>Gets or sets the deserialized Params XML data list.</summary>
     public DataParams Params { get; set; }
@@ -164,8 +190,8 @@ namespace LJCDocObjLib
     /// <include path='items/Doc/*' file='Doc/DataMethod.xml'/>
     public Doc Doc { get; set; }
 
-    /// <summary>Gets or sets the object FullName value.</summary>
-    public string FullName { get; set; }
+    /// <summary>Gets or sets the object MemberName value.</summary>
+    public string MemberName { get; set; }
 
     /// <summary>Gets or sets the MethodInfo value.</summary>
     public MethodInfo MethodInfoValue { get; set; }

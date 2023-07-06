@@ -115,18 +115,7 @@ namespace LJCDocObjLib
     /// <include path='items/CreateTypesData/*' file='Doc/DataAssembly.xml'/>
     public void CreateTypesData()
     {
-      // T - Type
-      // M - Method
-      // P - Property
-      // F - Field
-      // E - Event
-
-      string prefix = "T:";
-      List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers typeMembers = new DocMembers();
-      typeMembers.AddFromList(members);
-      typeMembers.Sort();
-
+      var typeMembers = Doc.GetTypes();
       DataTypes = new List<DataType>();
       foreach (DocMember typeMember in typeMembers)
       {

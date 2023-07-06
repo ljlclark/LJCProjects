@@ -33,25 +33,27 @@ namespace LJCDocObjLib
     {
       bool success;
 
+      // Process each DocAssemblyGroup.
       DataAssemblies = new DataAssemblies();
       var assemblyManager = Managers.DocAssemblyManager;
       foreach (DocAssemblyGroup assemblyGroup in AssemblyGroups)
       {
-        var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
-        foreach (DocAssembly docAssembly in docAssemblies)
+        // Process each group DocAssembly.
+        var groupAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
+        foreach (DocAssembly groupAssembly in groupAssemblies)
         {
           // Check if assembly file is HTML.
           success = false;
-          bool isHtml = ".html" == Path.GetExtension(docAssembly.FileSpec).ToLower();
+          bool isHtml = ".html" == Path.GetExtension(groupAssembly.FileSpec).ToLower();
           if (false == isHtml)
           {
             // Check if assembly XML file exists.
             success = true;
-            if (false == File.Exists(docAssembly.FileSpec))
+            if (false == File.Exists(groupAssembly.FileSpec))
             {
               success = false;
               string errorText = $"{DateTime.Now} - File"
-                + $" '{docAssembly.FileSpec}' was not found.\r\n";
+                + $" '{groupAssembly.FileSpec}' was not found.\r\n";
               File.AppendAllText("LJCDocObjLib.log", errorText);
             }
           }
@@ -60,8 +62,8 @@ namespace LJCDocObjLib
           {
             // Create the DataAssembly data.
             DataAssembly dataAssembly = new DataAssembly(this
-              , docAssembly.FileSpec, docAssembly.Description
-              , docAssembly.MainImage);
+              , groupAssembly.FileSpec, groupAssembly.Description
+              , groupAssembly.MainImage);
             if (dataAssembly.Name != null)
             {
               DataAssemblies.Add(dataAssembly);

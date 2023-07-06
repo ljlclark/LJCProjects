@@ -40,11 +40,11 @@
       The Doc object contains the deserialized documentation XML data.
     </remarks>
   </Doc>
-  <TypeMember>
+  <TypeDocMember>
     <summary>Gets or sets the TypeMember value.</summary>
     <remarks>
       This DocMember object contains the deserialized type documentation
       XML data.
     </remarks>
-  </TypeMember>
+  </TypeDocMember>
 </items>

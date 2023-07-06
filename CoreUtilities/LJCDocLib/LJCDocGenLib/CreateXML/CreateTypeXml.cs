@@ -97,11 +97,7 @@ namespace LJCDocGenLib
       mainReplacements.Add("_TypeName_", DataType.Name);
 
       string methodListPreface = "";
-      mOtherMethods = new DataMethods();
-      foreach (var dataMethod in DataType.DataMethods)
-      {
-        mOtherMethods.Add(dataMethod);
-      }
+      mOtherMethods = new DataMethods(DataType.DataMethods);
       // Testing
       if ("DataAccess" == DataType.Name)
       {
@@ -255,7 +251,10 @@ namespace LJCDocGenLib
                 foreach (var docMethod in docMethods)
                 {
                   var methodName = docMethod.Name;
-                  var dataMethod = mOtherMethods.Find(x => x.Name == methodName);
+                  //var dataMethod = mOtherMethods.Find(x => x.Name == methodName);
+                  var overloadName = docMethod.OverloadName;
+                  var dataMethod
+                    = mOtherMethods.Find(x => x.OverloadName == overloadName);
                   if (dataMethod != null)
                   {
                     // Create relative path.
@@ -265,7 +264,6 @@ namespace LJCDocGenLib
                     mOtherMethods.Remove(dataMethod);
                     var subRepeatItem = subRepeatItems.Add(methodName);
                     var subReplacements = subRepeatItem.Replacements;
-                    var htmlFileName = $"{DataType.Name}.{methodName}.html";
                     subReplacements.Add("_HTMLFileName_", fileName);
                     subReplacements.Add("_Name_", methodName);
                     subReplacements.Add("_Summary_", docMethod.Description);
@@ -561,7 +559,7 @@ namespace LJCDocGenLib
     private GenRoot GenRoot { get; }
     #endregion
 
-    private GenMethod mGenMethod;
+    private readonly GenMethod mGenMethod;
     private DataMethods mOtherMethods;
   }
 }

@@ -15,7 +15,6 @@
     <param name="dataAssembly">The DataAssembly object.</param>
     <param name="dataType">The DataType object.</param>
     <param name="propertyMember">The Property member object.</param>
-    <param name="overriddenName">The unique overridden name.</param>
   </DataPropertyC>
   <Doc>
     <summary>Gets or sets the Doc value.</summary>

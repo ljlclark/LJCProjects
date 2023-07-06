@@ -15,7 +15,7 @@
     <param name="dataAssembly">The DataAssembly object.</param>
     <param name="dataType">The DataType object.</param>
     <param name="methodMember">The Method member object.</param>
-    <param name="overriddenName">The unique overridden name.</param>
+    <param name="overloadName">The unique overload name.</param>
   </DataMethodC>
   <SetMethodInfo>
     <summary>

@@ -23,9 +23,8 @@ namespace LJCDocObjLib
       AssemblyName = dataAssembly.Name;
       AssemblyReflect = assemblyReflect;
 
-      FullName = TypeMember.Name;
-      NamespaceValue = DataCommon.GetNamespace(FullName);
-      Name = DataCommon.GetMemberName(FullName);
+      NamespaceValue = DataCommon.GetNamespace(TypeMember.Name);
+      Name = DataCommon.GetMemberName(TypeMember.Name);
 
       Summary = TypeMember.Summary;
       Returns = TypeMember.Returns;
@@ -58,21 +57,17 @@ namespace LJCDocObjLib
     /// <include path='items/CreateFieldsData/*' file='Doc/DataType.xml'/>
     public void CreateFieldsData(DataAssembly dataAssembly)
     {
-      string prefix = $"F:{NamespaceValue}.{Name}";
-      List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers fieldMembers = new DocMembers();
-      fieldMembers.AddFromList(members);
-      fieldMembers.Sort();
-
+      var fieldMembers = Doc.GetFields(NamespaceValue, Name);
       DataFields = new List<DataField>();
       foreach (DocMember fieldMember in fieldMembers)
       {
-        // Make sure prefix is not part of a contained type.
-        string fullName = fieldMember.Name;
-        string name = DataCommon.GetMemberName(fullName, prefix);
+        string memberName = fieldMember.Name;
+        string prefix = $"F:{NamespaceValue}.{Name}";
+        string fieldName = DataCommon.GetMemberName(memberName, prefix);
 
+        // Make sure prefix is not part of a contained type.
         // If "." then only matches beginning of fullName.
-        if (-1 == name.IndexOf('.'))
+        if (-1 == fieldName.IndexOf('.'))
         {
           DataFields.Add(new DataField(dataAssembly, this, fieldMember));
         }
@@ -83,31 +78,22 @@ namespace LJCDocObjLib
     /// <include path='items/CreateMethodsData/*' file='Doc/DataType.xml'/>
     public void CreateMethodsData(DataAssembly dataAssembly)
     {
-      // T - Type
-      // M - Method
-      // P - Property
-      // F - Field
-      // E - Event
-
-      string prefix = $"M:{NamespaceValue}.{Name}";
-      List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers methodMembers = new DocMembers();
-      methodMembers.AddFromList(members);
-      methodMembers.Sort();
-
+      // Get all methods for this type.
+      var methodMembers = Doc.GetMethods(NamespaceValue, Name);
       DataMethods = new DataMethods();
       foreach (DocMember methodMember in methodMembers)
       {
-        // Make sure prefix is not part of a contained type.
-        string fullName = methodMember.Name;
-        string name = DataCommon.GetMemberName(fullName, prefix);
+        string memberName = methodMember.Name;
+        string prefix = $"M:{NamespaceValue}.{Name}";
+        string methodName = DataCommon.GetMemberName(memberName, prefix);
 
-        // If "." then only matches beginning of fullName.
-        if (-1 == name.IndexOf('.'))
+        // Make sure prefix is not part of a contained type.
+        // If "." then only matches beginning of memberName.
+        if (-1 == methodName.IndexOf('.'))
         {
-          string overriddenName = DataMethods.GetOverriddenName(name);
-          DataMethod dataMethod = new DataMethod(dataAssembly, this, methodMember
-            , overriddenName)
+          string overloadName = DataMethods.GetOverloadName(methodName);
+          DataMethod dataMethod = new DataMethod(dataAssembly, this
+            , methodMember, overloadName)
           {
             AssemblyReflect = AssemblyReflect
           };
@@ -121,25 +107,20 @@ namespace LJCDocObjLib
     /// <include path='items/CreatePropertiesData/*' file='Doc/DataType.xml'/>
     public void CreatePropertiesData(DataAssembly dataAssembly)
     {
-      string prefix = $"P:{NamespaceValue}.{Name}";
-      List<DocMember> members = Doc.DocMembers.FindAll(x => x.Name.StartsWith(prefix));
-      DocMembers propertyMembers = new DocMembers();
-      propertyMembers.AddFromList(members);
-      propertyMembers.Sort();
-
+      var propertyMembers = Doc.GetProperties(NamespaceValue, Name);
       DataProperties = new DataProperties();
       foreach (DocMember propertyMember in propertyMembers)
       {
-        // Make sure prefix is not part of contained type.
-        string fullName = propertyMember.Name;
-        string name = DataCommon.GetMemberName(fullName, prefix);
+        string memberName = propertyMember.Name;
+        string prefix = $"P:{NamespaceValue}.{Name}";
+        string propertyName = DataCommon.GetMemberName(memberName, prefix);
 
+        // Make sure prefix is not part of contained type.
         // If "." then only matches beginning of fullName.
-        if (-1 == name.IndexOf('.'))
+        if (-1 == propertyName.IndexOf('.'))
         {
-          string overriddenName = DataProperties.GetOverriddenName(name);
-          DataProperties.Add(new DataProperty(dataAssembly, this, propertyMember
-            , overriddenName));
+          DataProperties.Add(new DataProperty(dataAssembly, this
+            , propertyMember));
         }
       }
     }
@@ -186,9 +167,6 @@ namespace LJCDocObjLib
     // Gets or sets the Doc value.
     /// <include path='items/Doc/*' file='Doc/DataType.xml'/>
     public Doc Doc { get; private set; }
-
-    /// <summary>Gets or sets the object FullName value.</summary>
-    public string FullName { get; set; }
 
     /// <summary>Gets or sets the Namespace value.</summary>
     public string NamespaceValue { get; set; }

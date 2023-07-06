@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataAssemblyGroups.cs" />
+    <Compile Include="Data\DocAssemblyGroups.cs" />
     <Compile Include="Data\DocAssemblies.cs" />
     <Compile Include="Data\DocAssembly.cs" />
     <Compile Include="Data\DocAssemblyGroup.cs" />

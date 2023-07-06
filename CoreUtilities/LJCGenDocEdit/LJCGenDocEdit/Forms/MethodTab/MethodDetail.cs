@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace LJCGenDocEdit
 {
@@ -145,14 +146,16 @@ namespace LJCGenDocEdit
       var manager = Managers.DocMethodManager;
       var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocClassID
         , LJCRecord.Name);
-      if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+      for (int index = 0; index < 10; index++)
       {
-        retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK
-          , MessageBoxIcon.Exclamation);
+        if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+        {
+          LJCRecord.OverloadName = $"{LJCRecord.OverloadName}{index + 1}";
+        }
+        else
+        {
+          break;
+        }
       }
 
       if (retValue)

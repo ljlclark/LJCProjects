@@ -8,17 +8,4 @@
       Represents a collection of DataProperty objects.
     </summary>
   </DataProperties>
-  <GetOverriddenName>
-    <summary>
-      Returns the unique name for an overriden property.
-    </summary>
-    <param name="name">The original property name.</param>
-    <returns>The overriden name if required or the original name.</returns>
-  </GetOverriddenName>
-  <SearchOverriddenName>
-    <summary>
-      Returns the element with the name matching the supplied value.
-    </summary>
-    <param name="name">The element name.</param>
-  </SearchOverriddenName>
 </items>

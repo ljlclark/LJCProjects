@@ -90,8 +90,7 @@ namespace LJCDocGenLib
         if (value != null)
         {
           mDataProperty = value;
-          OverriddenName = mDataProperty.OverriddenName;
-          HTMLFileName = $"{DataType.Name}.{OverriddenName}.html";
+          HTMLFileName = $"{DataType.Name}.{mDataProperty.Name}.html";
           HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
         }
       }
@@ -115,14 +114,6 @@ namespace LJCDocGenLib
 
     /// <summary>Gets or sets the HTML file folder value.</summary>
     public string HTMLFolderName { get; set; }
-
-    /// <summary>The overriden method unique name if required.</summary>
-    public string OverriddenName
-    {
-      get { return mOverriddenName; }
-      set { mOverriddenName = NetString.InitString(value); }
-    }
-    private string mOverriddenName;
     #endregion
   }
 }
