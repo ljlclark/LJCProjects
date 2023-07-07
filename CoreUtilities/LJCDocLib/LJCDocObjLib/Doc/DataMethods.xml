@@ -12,7 +12,7 @@
     <summary>
       Returns the unique name for an overload method.
     </summary>
-    <param name="methodName">The method name.</param>
+    <param name="docMethodName">The method name.</param>
     <returns>The overload name if required or the original name.</returns>
   </GetOverloadName>
   <SearchOverloadName>

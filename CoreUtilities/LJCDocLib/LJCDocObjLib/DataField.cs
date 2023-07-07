@@ -21,8 +21,8 @@ namespace LJCDocObjLib
       AssemblyName = dataAssembly.Name;
       TypeName = dataType.Name;
 
-      MemberName = fieldMember.Name;
-      Name = DataCommon.GetMemberName(MemberName);
+      FieldMemberName = fieldMember.Name;
+      Name = Doc.GetMemberName(FieldMemberName);
 
       Summary = fieldMember.Summary;
       Remark = DataCommon.GetDataRemark(fieldMember.Remarks);
@@ -72,7 +72,7 @@ namespace LJCDocObjLib
     public DocMember FieldMember { get; set; }
 
     /// <summary>Gets or sets the object MemberName value.</summary>
-    public string MemberName { get; set; }
+    public string FieldMemberName { get; set; }
 
     /// <summary>Gets or sets the class/type name value.</summary>
     public string TypeName { get; set; }

@@ -45,8 +45,8 @@ namespace LJCDocObjLib
       AssemblyName = dataAssembly.Name;
       TypeName = dataType.Name;
 
-      MemberName = methodMember.Name;
-      Name = DataCommon.GetMemberName(MemberName);
+      MethodMemberName = methodMember.Name;
+      Name = Doc.GetMemberName(MethodMemberName);
       OverloadName = overloadName;
 
       Params = DataCommon.GetDataParams(methodMember.Params);
@@ -190,15 +190,15 @@ namespace LJCDocObjLib
     /// <include path='items/Doc/*' file='Doc/DataMethod.xml'/>
     public Doc Doc { get; set; }
 
-    /// <summary>Gets or sets the object MemberName value.</summary>
-    public string MemberName { get; set; }
-
     /// <summary>Gets or sets the MethodInfo value.</summary>
     public MethodInfo MethodInfoValue { get; set; }
 
     // Gets or sets the MethodMember value.
     /// <include path='items/MethodMember/*' file='Doc/DataMethod.xml'/>
     public DocMember MethodMember { get; set; }
+
+    /// <summary>Gets or sets the object MemberName value.</summary>
+    public string MethodMemberName { get; set; }
 
     /// <summary>Gets or sets the class/type name value.</summary>
     public string TypeName { get; set; }

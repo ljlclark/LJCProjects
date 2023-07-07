@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// CollectionTemplate.cs
+// DocAssemblyGroups.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;

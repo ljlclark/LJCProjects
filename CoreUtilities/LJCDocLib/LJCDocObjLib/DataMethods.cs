@@ -38,13 +38,13 @@ namespace LJCDocObjLib
 
     // Returns the unique name for an overload method.
     /// <include path='items/GetOverloadName/*' file='Doc/DataMethods.xml'/>
-    public string GetOverloadName(string methodName)
+    public string GetOverloadName(string docMethodName)
     {
-      string retValue = methodName;
+      string retValue = docMethodName;
 
       if (retValue.StartsWith("#"))
       {
-        retValue = methodName.Substring(1);
+        retValue = docMethodName.Substring(1);
       }
 
       int index = 0;

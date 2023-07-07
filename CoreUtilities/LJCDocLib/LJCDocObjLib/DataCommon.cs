@@ -117,67 +117,6 @@ namespace LJCDocObjLib
       return retValue;
     }
 
-    // Retrieves the member name from the full name.
-    /// <include path='items/GetMemberName/*' file='Doc/DataCommon.xml'/>
-    public static string GetMemberName(string fullName, string prefix = null)
-    {
-      string retValue = null;
-
-      if (prefix != null)
-      {
-        retValue = fullName.Substring(prefix.Length + 1);
-        int index = retValue.IndexOf('(');
-        if (index > -1)
-        {
-          // Strip arguments.
-          retValue = retValue.Substring(0, index);
-        }
-      }
-      else
-      {
-        int index = fullName.IndexOf('(');
-        if (index > -1)
-        {
-          string text = fullName.Substring(0, index);
-          index = text.LastIndexOf('.');
-          retValue = text.Substring(index + 1);
-        }
-        else
-        {
-          index = fullName.LastIndexOf('.');
-          if (index > -1)
-          {
-            retValue = fullName.Substring(index + 1);
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Retrieves the namespace from the full object name.
-    /// <include path='items/GetNamespace/*' file='Doc/DataCommon.xml'/>
-    public static string GetNamespace(string fullName)
-    {
-      string retValue = null;
-
-      int index = fullName.IndexOf('(');
-      if (index > -1)
-      {
-        string text = fullName.Substring(0, index);
-        index = text.LastIndexOf('.');
-        retValue = text.Substring(2, index - 2);
-      }
-      else
-      {
-        index = fullName.LastIndexOf('.');
-        if (index > -1)
-        {
-          retValue = fullName.Substring(2, index - 2);
-        }
-      }
-      return retValue;
-    }
-
     // Retrieves and returns the Syntax value.
     /// <include path='items/GetSyntax/*' file='Doc/DataCommon.xml'/>
     public static string GetSyntax(DataRemark remark, out bool hasSyntax)

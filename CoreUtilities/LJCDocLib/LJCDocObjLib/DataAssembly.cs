@@ -115,11 +115,11 @@ namespace LJCDocObjLib
     /// <include path='items/CreateTypesData/*' file='Doc/DataAssembly.xml'/>
     public void CreateTypesData()
     {
-      var typeMembers = Doc.GetTypes();
+      var docTypeMembers = Doc.GetTypes();
       DataTypes = new List<DataType>();
-      foreach (DocMember typeMember in typeMembers)
+      foreach (DocMember docTypeMember in docTypeMembers)
       {
-        DataTypes.Add(new DataType(this, typeMember, AssemblyReflect));
+        DataTypes.Add(new DataType(this, docTypeMember, AssemblyReflect));
       }
     }
 

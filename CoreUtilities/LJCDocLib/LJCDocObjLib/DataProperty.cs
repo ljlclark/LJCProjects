@@ -29,8 +29,8 @@ namespace LJCDocObjLib
       AssemblyName = dataAssembly.Name;
       TypeName = dataType.Name;
 
-      MemberName = propertyMember.Name;
-      Name = DataCommon.GetMemberName(MemberName);
+      PropertyMemberName = propertyMember.Name;
+      Name = Doc.GetMemberName(PropertyMemberName);
 
       Summary = PropertyMember.Summary;
       Returns = PropertyMember.Returns;
@@ -104,12 +104,12 @@ namespace LJCDocObjLib
     /// <include path='items/Doc/*' file='Doc/DataProperty.xml'/>
     public Doc Doc { get; set; }
 
-    /// <summary>Gets or sets the object MemberName value.</summary>
-    public string MemberName { get; set; }
-
     // <remarks>
     /// <include path='items/PropertyMember/*' file='Doc/DataProperty.xml'/>
     public DocMember PropertyMember { get; set; }
+
+    /// <summary>Gets or sets the object MemberName value.</summary>
+    public string PropertyMemberName { get; set; }
 
     /// <summary>Gets or sets the class/type name value.</summary>
     public string TypeName { get; set; }

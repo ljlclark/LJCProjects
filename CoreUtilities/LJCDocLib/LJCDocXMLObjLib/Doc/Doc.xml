@@ -13,4 +13,54 @@
       <para>F: = Field</para>
     </remarks>
   </DocMembers>
+
+  <!-- Static Functons -->
+  <GetMemberName>
+    <summary>
+      Retrieves the member name from the DocMember name.
+    </summary>
+    <param name="docMemberName">The DocMember name.</param>
+    <param name="prefix">The member prefix value.</param>
+    <returns>The member name.</returns>
+  </GetMemberName>
+  <GetNamespace>
+    <summary>
+      Retrieves the namespace from the DocMember name.
+    </summary>
+    <param name="docMemberName">The DocMember name.</param>
+    <returns>The object namespace.</returns>
+  </GetNamespace>
+  <MethodName>
+    <summary>
+      Gets the Method name.
+    </summary>
+    <param name="methodMemberName">The DocMember name.</param>
+    <returns>The method name</returns>
+  </MethodName>
+
+  <!-- Public Methods -->
+  <GetFields>
+    <summary>
+      Gets the Field members for the current Type member.
+    </summary>
+    <returns>A DocMembers collection of field members.</returns>
+  </GetFields>
+  <GetMethods>
+    <summary>
+      Gets the Method members for the current Type member.
+    </summary>
+    <returns>A DocMembers collection of method members.</returns>
+  </GetMethods>
+  <GetProperties>
+    <summary>
+      Gets the Property members for the current Type member.
+    </summary>
+    <returns>A DocMembers collection of property members.</returns>
+  </GetProperties>
+  <GetTypes>
+    <summary>
+      Gets the Type members for the current Doc assembly.
+    </summary>
+    <returns>A DocMembers collection of type members.</returns>
+  </GetTypes>
 </items>

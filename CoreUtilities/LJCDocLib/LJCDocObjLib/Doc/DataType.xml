@@ -13,7 +13,7 @@
       Initializes an object instance.
     </summary>
     <param name="dataAssembly">The DataAssembly object.</param>
-    <param name="typeMember">The Type member object.</param>
+    <param name="docTypeMember">The Type member object.</param>
     <param name="assemblyReflect">The LJCAssemblyReflect object.</param>
   </DataTypeC>
   <CreateMethodsData>

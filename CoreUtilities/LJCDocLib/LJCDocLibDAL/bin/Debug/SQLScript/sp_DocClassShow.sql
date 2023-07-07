@@ -29,7 +29,7 @@ select ID DocClass, DocAssemblyID, DocClassGroupID, Name, Description
  , Sequence, ActiveFlag
 from DocClass where ID = @classID;
 select ID DocMethod, DocClassID, DocMethodGroupID, Name, Description
- , Sequence, ActiveFlag
+ , OverloadName, Sequence, ActiveFlag
 from DocMethod where DocClassID = @classID;
 END
 GO

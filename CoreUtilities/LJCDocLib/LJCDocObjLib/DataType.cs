@@ -15,25 +15,25 @@ namespace LJCDocObjLib
 
     // Initializes an object instance.
     /// <include path='items/DataTypeC/*' file='Doc/DataType.xml'/>
-    public DataType(DataAssembly dataAssembly, DocMember typeMember
+    public DataType(DataAssembly dataAssembly, DocMember docTypeMember
       , LJCAssemblyReflect assemblyReflect)
     {
       Doc = dataAssembly.Doc;
-      TypeMember = typeMember;
+      DocTypeMember = docTypeMember;
       AssemblyName = dataAssembly.Name;
       AssemblyReflect = assemblyReflect;
 
-      NamespaceValue = DataCommon.GetNamespace(TypeMember.Name);
-      Name = DataCommon.GetMemberName(TypeMember.Name);
+      Summary = DocTypeMember.Summary;
+      Returns = DocTypeMember.Returns;
+      Remark = DataCommon.GetDataRemark(DocTypeMember.Remarks);
+      Example = DataCommon.GetDataExample(DocTypeMember.Example);
+      DataLinks = DataCommon.GetDataLinks(DocTypeMember.Links);
 
-      Summary = TypeMember.Summary;
-      Returns = TypeMember.Returns;
-      Remark = DataCommon.GetDataRemark(TypeMember.Remarks);
-      Example = DataCommon.GetDataExample(TypeMember.Example);
-      DataLinks = DataCommon.GetDataLinks(TypeMember.Links);
-
-      string typeName = $"{NamespaceValue}.{Name}";
-      AssemblyReflect.SetTypeReference(typeName);
+      NamespaceValue = Doc.GetNamespace(DocTypeMember.Name);
+      Name = Doc.GetMemberName(DocTypeMember.Name);
+      SetTypeName(NamespaceValue, Name);
+      Doc.TypeName= TypeName;
+      AssemblyReflect.SetTypeReference(TypeName);
 
       CreateMethodsData(dataAssembly);
       CreatePropertiesData(dataAssembly);
@@ -41,7 +41,7 @@ namespace LJCDocObjLib
     }
     #endregion
 
-    #region Public Methods
+    #region Data Methods
 
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -52,25 +52,19 @@ namespace LJCDocObjLib
       retValue = $"{AssemblyName}.{Name}";
       return retValue;
     }
+    #endregion
+
+    #region Public Methods
 
     // Creates the child fields data.
     /// <include path='items/CreateFieldsData/*' file='Doc/DataType.xml'/>
     public void CreateFieldsData(DataAssembly dataAssembly)
     {
-      var fieldMembers = Doc.GetFields(NamespaceValue, Name);
+      var docFieldMembers = Doc.GetFields();
       DataFields = new List<DataField>();
-      foreach (DocMember fieldMember in fieldMembers)
+      foreach (DocMember fieldMember in docFieldMembers)
       {
-        string memberName = fieldMember.Name;
-        string prefix = $"F:{NamespaceValue}.{Name}";
-        string fieldName = DataCommon.GetMemberName(memberName, prefix);
-
-        // Make sure prefix is not part of a contained type.
-        // If "." then only matches beginning of fullName.
-        if (-1 == fieldName.IndexOf('.'))
-        {
-          DataFields.Add(new DataField(dataAssembly, this, fieldMember));
-        }
+        DataFields.Add(new DataField(dataAssembly, this, fieldMember));
       }
     }
 
@@ -79,27 +73,19 @@ namespace LJCDocObjLib
     public void CreateMethodsData(DataAssembly dataAssembly)
     {
       // Get all methods for this type.
-      var methodMembers = Doc.GetMethods(NamespaceValue, Name);
+      var docMethodMembers = Doc.GetMethods();
       DataMethods = new DataMethods();
-      foreach (DocMember methodMember in methodMembers)
+      foreach (DocMember docMethodMember in docMethodMembers)
       {
-        string memberName = methodMember.Name;
-        string prefix = $"M:{NamespaceValue}.{Name}";
-        string methodName = DataCommon.GetMemberName(memberName, prefix);
-
-        // Make sure prefix is not part of a contained type.
-        // If "." then only matches beginning of memberName.
-        if (-1 == methodName.IndexOf('.'))
+        var docMethodName = Doc.MethodName(docMethodMember.Name);
+        var overloadName = DataMethods.GetOverloadName(docMethodName);
+        DataMethod dataMethod = new DataMethod(dataAssembly, this
+          , docMethodMember, overloadName)
         {
-          string overloadName = DataMethods.GetOverloadName(methodName);
-          DataMethod dataMethod = new DataMethod(dataAssembly, this
-            , methodMember, overloadName)
-          {
-            AssemblyReflect = AssemblyReflect
-          };
-          dataMethod.SetIsPublic();
-          DataMethods.Add(dataMethod);
-        }
+          AssemblyReflect = AssemblyReflect
+        };
+        dataMethod.SetIsPublic();
+        DataMethods.Add(dataMethod);
       }
     }
 
@@ -107,22 +93,19 @@ namespace LJCDocObjLib
     /// <include path='items/CreatePropertiesData/*' file='Doc/DataType.xml'/>
     public void CreatePropertiesData(DataAssembly dataAssembly)
     {
-      var propertyMembers = Doc.GetProperties(NamespaceValue, Name);
+      var docPropertyMembers = Doc.GetProperties();
       DataProperties = new DataProperties();
-      foreach (DocMember propertyMember in propertyMembers)
+      foreach (DocMember propertyMember in docPropertyMembers)
       {
-        string memberName = propertyMember.Name;
-        string prefix = $"P:{NamespaceValue}.{Name}";
-        string propertyName = DataCommon.GetMemberName(memberName, prefix);
-
-        // Make sure prefix is not part of contained type.
-        // If "." then only matches beginning of fullName.
-        if (-1 == propertyName.IndexOf('.'))
-        {
-          DataProperties.Add(new DataProperty(dataAssembly, this
-            , propertyMember));
-        }
+        DataProperties.Add(new DataProperty(dataAssembly, this
+          , propertyMember));
       }
+    }
+
+    // Sets the TypeName value.
+    private void SetTypeName(string namespaceValue, string typeName)
+    {
+      TypeName = $"{namespaceValue}.{typeName}";
     }
     #endregion
 
@@ -168,12 +151,15 @@ namespace LJCDocObjLib
     /// <include path='items/Doc/*' file='Doc/DataType.xml'/>
     public Doc Doc { get; private set; }
 
-    /// <summary>Gets or sets the Namespace value.</summary>
-    public string NamespaceValue { get; set; }
-
     // Gets or sets the TypeMember value.
     /// <include path='items/TypeMember/*' file='Doc/DataType.xml'/>
-    public DocMember TypeMember { get; private set; }
+    public DocMember DocTypeMember { get; private set; }
+
+    /// <summary></summary>
+    public string NamespaceValue { get; set; }
+
+    /// <summary></summary>
+    public string TypeName { get; set; }
     #endregion
   }
 }

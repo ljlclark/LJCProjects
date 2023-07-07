@@ -77,7 +77,8 @@ namespace LJCDocGenLib
       builder.Append(CreateHTMLSection(HTMLSection.Head));
       foreach (DocAssemblyGroup assemblyGroup in DataRoot.AssemblyGroups)
       {
-        builder.Append(CreateGroupSection(HTMLSection.Head, assemblyGroup.Heading));
+        builder.Append(CreateGroupSection(HTMLSection.Head
+          , assemblyGroup.Heading));
 
         var assemblyManager = Managers.DocAssemblyManager;
         var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
@@ -87,7 +88,8 @@ namespace LJCDocGenLib
         }
         builder.Append(CreateGroupSection(HTMLSection.Tail));
       }
-      builder.Append(CreateHTMLSection(HTMLSection.Tail, DataRoot.DataAssemblies.Count));
+      builder.Append(CreateHTMLSection(HTMLSection.Tail
+        , DataRoot.DataAssemblies.Count));
 
       string htmlText = builder.ToString();
       WriteFile(htmlText);
@@ -104,7 +106,8 @@ namespace LJCDocGenLib
       string retValue = null;
 
       // Create relative path.
-      DataAssembly dataAssembly = DataRoot.DataAssemblies.LJCSearchDescription(description);
+      var dataAssembly
+        = DataRoot.DataAssemblies.LJCSearchDescription(description);
       if (dataAssembly != null)
       {
         GenAssembly dataAssemblyGen = new GenAssembly(this, dataAssembly);

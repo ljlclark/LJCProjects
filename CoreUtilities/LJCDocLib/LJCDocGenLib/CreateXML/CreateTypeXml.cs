@@ -99,10 +99,10 @@ namespace LJCDocGenLib
       string methodListPreface = "";
       mOtherMethods = new DataMethods(DataType.DataMethods);
       // Testing
-      if ("DataAccess" == DataType.Name)
-      {
-        int i = 0;
-      }
+      //if ("DataAccess" == DataType.Name)
+      //{
+      //  int i = 0;
+      //}
       if (AddMethodGroups(sections))
       {
         methodListPreface = "Other ";

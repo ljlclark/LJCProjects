@@ -36,21 +36,6 @@
     <param name="docRemarks">The DocRemarks object.</param>
     <returns>The DataRemark object.</returns>
   </GetDataRemark>
-  <GetMemberName>
-    <summary>
-      Retrieves the member name from the full name.
-    </summary>
-    <param name="fullName">The member full name.</param>
-    <param name="prefix">The member prefix value.</param>
-    <returns>The doc member name.</returns>
-  </GetMemberName>
-  <GetNamespace>
-    <summary>
-      Retrieves the namespace from the full object name.
-    </summary>
-    <param name="fullName">The full object name.</param>
-    <returns>The object namespace.</returns>
-  </GetNamespace>
   <GetSyntax>
     <summary>
       Retrieves and returns the Syntax value.
