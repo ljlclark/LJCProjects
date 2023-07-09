@@ -18,6 +18,7 @@ namespace LJCDocLibDAL
     public DocMethod()
     {
       ChangedNames = new ChangedNames();
+      ChangedOverload = false;
     }
 
     // The Copy constructor.
@@ -122,7 +123,14 @@ namespace LJCDocLibDAL
         if (value != null
           && null == OverloadName)
         {
+          ChangedOverload = true;
           OverloadName = value;
+          // *** Begin *** Add - 7/9/23
+          if (OverloadName.StartsWith("#"))
+          {
+            OverloadName = OverloadName.Substring(1);
+          }
+          // *** End   *** Add - 7/9/23
         }
         mName = ChangedNames.Add(ColumnName, mName, value);
       }
@@ -188,6 +196,9 @@ namespace LJCDocLibDAL
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
+
+    /// <summary>Gets or sets a flag for a changed OverloadName value.</summary>
+    public bool ChangedOverload { get; set; }
     #endregion
 
     #region Class Data

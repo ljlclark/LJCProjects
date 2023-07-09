@@ -184,7 +184,7 @@ namespace LJCGenDocEdit
       {
         var keyRecord = new DbColumns()
         {
-          { DocAssembly.ColumnID, DocAssemblyID() },
+          { DocClass.ColumnDocAssemblyID, DocAssemblyID() },
           { DocClass.ColumnID, ClassGroupID() }
         };
         var manager = Managers.DocClassGroupManager;

@@ -77,7 +77,8 @@ namespace LJCGenDocEdit
         mMethodSelect.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mMethodGrid.Rows)
         {
-          if (MethodName(row) == dataRecord.Name)
+          // *** Next Statement *** Change - 7/9/23
+          if (DocMethodOverload(row) == dataRecord.OverloadName)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             mMethodGrid.LJCSetCurrentRow(row, true);
@@ -102,7 +103,6 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataMethod dataRecord)
     {
-      //row.LJCSetString("Name", dataRecord.Name);
       row.LJCSetString("OverloadName", dataRecord.OverloadName);
     }
     #endregion
@@ -116,9 +116,10 @@ namespace LJCGenDocEdit
       if (mMethodGrid.CurrentRow is LJCGridRow _)
       {
         mMethodSelect.Cursor = Cursors.WaitCursor;
-        var rowName = MethodName();
-
-        var dataRecord = mDataMethods.Find(x => x.Name == rowName);
+        // *** Begin *** Change - 7/9/23
+        var overloadName = DocMethodOverload();
+        var dataRecord = mDataMethods.Find(x => x.OverloadName == overloadName);
+        // *** End   *** Change - 7/9/23
         if (dataRecord != null)
         {
           mMethodSelect.LJCSelectedRecord = dataRecord;
@@ -173,23 +174,6 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    // Retrieves the current row item Name.
-    /// <include path='items/MethodName/*' file='../../Doc/MethodGridCode.xml'/>
-    internal string MethodName(LJCGridRow methodRow = null)
-    {
-      string retValue = null;
-
-      if (null == methodRow)
-      {
-        methodRow = mMethodGrid.CurrentRow as LJCGridRow;
-      }
-      if (methodRow != null)
-      {
-        retValue = methodRow.LJCGetString("Name");
-      }
-      return retValue;
-    }
-
     /// <summary>Setup the grid display columns.</summary>
     internal void SetupGrid()
     {
@@ -199,12 +183,29 @@ namespace LJCGenDocEdit
         DisplayColumns = new DbColumns()
         {
           { "Name" },
+          { "OverloadName" },
           { "Summary" }
         };
 
         // Setup the grid display columns.
         mMethodGrid.LJCAddDisplayColumns(DisplayColumns);
       }
+    }
+
+    // Retrieves the current row item Name.
+    private string DocMethodOverload(LJCGridRow docMethodRow = null)
+    {
+      string retValue = null;
+
+      if (null == docMethodRow)
+      {
+        docMethodRow = mMethodGrid.CurrentRow as LJCGridRow;
+      }
+      if (docMethodRow != null)
+      {
+        retValue = docMethodRow.LJCGetString("OverloadName");
+      }
+      return retValue;
     }
     #endregion
 

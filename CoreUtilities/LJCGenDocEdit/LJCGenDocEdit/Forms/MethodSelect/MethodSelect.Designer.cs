@@ -40,8 +40,8 @@
       this.MethodCSV = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodClose = new System.Windows.Forms.ToolStripMenuItem();
-      this.MethodHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.MethodHelp = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.MethodGrid)).BeginInit();
       this.MethodMenu.SuspendLayout();
       this.SuspendLayout();
@@ -99,7 +99,7 @@
             this.toolStripSeparator4,
             this.MethodHelp});
       this.MethodMenu.Name = "AssemblyMenu";
-      this.MethodMenu.Size = new System.Drawing.Size(249, 253);
+      this.MethodMenu.Size = new System.Drawing.Size(249, 220);
       this.MethodMenu.Text = "Assembly Group Menu";
       // 
       // toolStripSeparator3
@@ -117,7 +117,8 @@
       // MethodSelectItem
       // 
       this.MethodSelectItem.Name = "MethodSelectItem";
-      this.MethodSelectItem.ShortcutKeyDisplayString = "ENTER";
+      this.MethodSelectItem.ShortcutKeyDisplayString = "";
+      this.MethodSelectItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
       this.MethodSelectItem.Size = new System.Drawing.Size(248, 32);
       this.MethodSelectItem.Text = "&Select";
       this.MethodSelectItem.Click += new System.EventHandler(this.MethodSelectItem_Click);
@@ -153,17 +154,17 @@
       this.MethodClose.Text = "&Close";
       this.MethodClose.Click += new System.EventHandler(this.MethodClose_Click);
       // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(245, 6);
+      // 
       // MethodHelp
       // 
       this.MethodHelp.Name = "MethodHelp";
       this.MethodHelp.Size = new System.Drawing.Size(248, 32);
       this.MethodHelp.Text = "&Help";
       this.MethodHelp.Click += new System.EventHandler(this.MethodHelp_Click);
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(245, 6);
       // 
       // MethodSelect
       // 

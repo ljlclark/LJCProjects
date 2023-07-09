@@ -79,7 +79,6 @@ namespace LJCGenDocEdit
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          MethodGridCode.DoSelect();
           e.Handled = true;
           break;
       }

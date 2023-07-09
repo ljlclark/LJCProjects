@@ -89,9 +89,8 @@ namespace LJCGenDocEdit
       if (mClassGrid.CurrentRow is LJCGridRow _)
       {
         mClassSelect.Cursor = Cursors.WaitCursor;
-        var rowName = ClassName();
-
-        var dataRecord = mDataTypes.Find(x => x.Name == rowName);
+        var name = ClassName();
+        var dataRecord = mDataTypes.Find(x => x.Name == name);
         if (dataRecord != null)
         {
           mClassSelect.LJCSelectedRecord = dataRecord;

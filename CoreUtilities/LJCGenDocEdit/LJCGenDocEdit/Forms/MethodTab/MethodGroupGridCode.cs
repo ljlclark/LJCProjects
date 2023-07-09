@@ -189,7 +189,7 @@ namespace LJCGenDocEdit
         var keyRecord = new DbColumns()
         {
           { DocMethodGroup.ColumnID, MethodGroupID() },
-          { DocClass.ColumnID, DocClassID() }
+          { DocMethodGroup.ColumnDocClassID, DocClassID() }
         };
         var manager = Managers.DocMethodGroupManager;
         manager.Delete(keyRecord);

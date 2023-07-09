@@ -158,13 +158,13 @@ namespace LJCDocLibDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithUnique/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DocMethod RetrieveWithUnique(short parentID, string name
+    /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
+    public DocMethod RetrieveWithUnique(short classID, string overloadName
       , List<string> propertyNames = null)
     {
       DocMethod retValue;
 
-      var keyColumns = GetUniqueKey(parentID, name);
+      var keyColumns = GetUniqueKey(classID, overloadName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -212,14 +212,15 @@ namespace LJCDocLibDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetUiqueKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(short parentID, string name)
+    /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
+    public DbColumns GetUniqueKey(short classID, string overloadName)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DocMethod.ColumnDocClassID, parentID },
-        { DocMethod.ColumnName, (object)name }
+        { DocMethod.ColumnDocClassID, classID },
+        // *** Next Statement *** Change - 7/9/23
+        { DocMethod.ColumnOverloadName, (object)overloadName }
       };
       return retValue;
     }

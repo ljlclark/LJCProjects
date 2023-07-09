@@ -297,13 +297,14 @@ namespace LJCGenDocEdit
       {
         List<string> columnNames = new List<string>()
         {
-          DocClass.ColumnName,
-          DocClass.ColumnDescription
+          DocMethod.ColumnName,
+          DocMethod.ColumnOverloadName,
+          DocMethod.ColumnDescription
         };
 
         // Get the display columns from the manager Data Definition.
-        var classManager = Managers.DocClassManager;
-        DisplayColumns = classManager.GetColumns(columnNames);
+        var methodManager = Managers.DocMethodManager;
+        DisplayColumns = methodManager.GetColumns(columnNames);
 
         // Setup the grid display columns.
         mMethodGrid.LJCAddDisplayColumns(DisplayColumns);

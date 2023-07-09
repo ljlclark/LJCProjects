@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace LJCGenDocEdit
 {
@@ -78,6 +77,12 @@ namespace LJCGenDocEdit
         Text += " - Edit";
         LJCIsUpdate = true;
         mOriginalRecord = DocMethodWithID(LJCMethodID);
+        // *** Begin *** Add - 7/9/23
+        if (mOriginalRecord.ChangedOverload)
+        {
+          mOriginalRecord.ChangedNames.Add(DocMethod.ColumnOverloadName);
+        }
+        // *** End   *** Add - 7/9/23
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -102,6 +107,7 @@ namespace LJCGenDocEdit
       {
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
+        OverloadText.Text = dataRecord.OverloadName;
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
       }
@@ -123,6 +129,7 @@ namespace LJCGenDocEdit
       retValue.ID = LJCMethodID;
       retValue.Name = NameText.Text.Trim();
       retValue.Description = DescriptionText.Text.Trim();
+      retValue.OverloadName = OverloadText.Text.Trim();
       short.TryParse(SequenceText.Text, out short value);
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
@@ -144,18 +151,17 @@ namespace LJCGenDocEdit
       LJCRecord = SetRecordValues();
 
       var manager = Managers.DocMethodManager;
+      // *** Next Statement *** Change - 7/9/23
       var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocClassID
-        , LJCRecord.Name);
-      for (int index = 0; index < 10; index++)
+        , LJCRecord.OverloadName);
+      if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
-        if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
-        {
-          LJCRecord.OverloadName = $"{LJCRecord.OverloadName}{index + 1}";
-        }
-        else
-        {
-          break;
-        }
+        retValue = false;
+        title = "Data Entry Error";
+        message = "The record already exists.";
+        Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
       }
 
       if (retValue)
@@ -453,6 +459,8 @@ namespace LJCGenDocEdit
       {
         var dataMethod = list.LJCSelectedRecord;
         NameText.Text = dataMethod.Name;
+        // *** Next Statement *** Add- 7/923
+        OverloadText.Text = dataMethod.OverloadName;
         var description = NetString.RemoveTags(dataMethod.Summary);
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);

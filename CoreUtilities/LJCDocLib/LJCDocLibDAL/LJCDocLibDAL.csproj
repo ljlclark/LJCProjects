@@ -122,6 +122,7 @@
     <Content Include="Doc\DocGenAssembly.xml" />
     <Content Include="Doc\DocGenGroupManager.xml" />
     <Content Include="Doc\DocGenGroups.xml" />
+    <Content Include="Doc\DocMethodManager.xml" />
     <Content Include="Doc\ProjectDocLibDAL.xml" />
     <Content Include="LinkPages\DocAssemblyTables.html" />
     <Content Include="LinkPages\DocAssemblyTables.jpg" />

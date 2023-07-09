@@ -51,6 +51,8 @@
       this.DialogHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.NameButton = new System.Windows.Forms.Button();
       this.ButtonImages = new System.Windows.Forms.ImageList(this.components);
+      this.OverloadText = new System.Windows.Forms.TextBox();
+      this.OverloadLabel = new System.Windows.Forms.Label();
       this.DialogMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -75,22 +77,22 @@
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(448, 197);
+      this.FormCancelButton.Location = new System.Drawing.Point(448, 233);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 13;
+      this.FormCancelButton.TabIndex = 15;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(326, 197);
+      this.OKButton.Location = new System.Drawing.Point(326, 233);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 12;
+      this.OKButton.TabIndex = 14;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -150,28 +152,28 @@
       // 
       // SequenceText
       // 
-      this.SequenceText.Location = new System.Drawing.Point(145, 158);
+      this.SequenceText.Location = new System.Drawing.Point(145, 194);
       this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SequenceText.Name = "SequenceText";
       this.SequenceText.Size = new System.Drawing.Size(45, 26);
-      this.SequenceText.TabIndex = 10;
+      this.SequenceText.TabIndex = 12;
       // 
       // SequenceLabel
       // 
-      this.SequenceLabel.Location = new System.Drawing.Point(18, 162);
+      this.SequenceLabel.Location = new System.Drawing.Point(18, 198);
       this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SequenceLabel.Name = "SequenceLabel";
       this.SequenceLabel.Size = new System.Drawing.Size(124, 20);
-      this.SequenceLabel.TabIndex = 9;
+      this.SequenceLabel.TabIndex = 11;
       this.SequenceLabel.Text = "Sequence";
       // 
       // ActiveCheckbox
       // 
       this.ActiveCheckbox.AutoSize = true;
-      this.ActiveCheckbox.Location = new System.Drawing.Point(277, 159);
+      this.ActiveCheckbox.Location = new System.Drawing.Point(277, 195);
       this.ActiveCheckbox.Name = "ActiveCheckbox";
       this.ActiveCheckbox.Size = new System.Drawing.Size(78, 24);
-      this.ActiveCheckbox.TabIndex = 11;
+      this.ActiveCheckbox.TabIndex = 13;
       this.ActiveCheckbox.Text = "Active";
       this.ActiveCheckbox.UseVisualStyleBackColor = true;
       // 
@@ -228,7 +230,7 @@
       this.NameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.NameButton.ImageKey = "Ellipse.bmp";
       this.NameButton.ImageList = this.ButtonImages;
-      this.NameButton.Location = new System.Drawing.Point(530, 84);
+      this.NameButton.Location = new System.Drawing.Point(530, 85);
       this.NameButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameButton.Name = "NameButton";
       this.NameButton.Size = new System.Drawing.Size(28, 28);
@@ -243,12 +245,31 @@
       this.ButtonImages.Images.SetKeyName(0, "Ellipse.bmp");
       this.ButtonImages.Images.SetKeyName(1, "Calendar.bmp");
       // 
+      // OverloadText
+      // 
+      this.OverloadText.Location = new System.Drawing.Point(145, 158);
+      this.OverloadText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.OverloadText.Name = "OverloadText";
+      this.OverloadText.Size = new System.Drawing.Size(413, 26);
+      this.OverloadText.TabIndex = 10;
+      // 
+      // OverloadLabel
+      // 
+      this.OverloadLabel.Location = new System.Drawing.Point(18, 162);
+      this.OverloadLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.OverloadLabel.Name = "OverloadLabel";
+      this.OverloadLabel.Size = new System.Drawing.Size(124, 20);
+      this.OverloadLabel.TabIndex = 9;
+      this.OverloadLabel.Text = "Overload Name";
+      // 
       // MethodDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(578, 244);
+      this.ClientSize = new System.Drawing.Size(578, 280);
       this.ContextMenuStrip = this.DialogMenu;
+      this.Controls.Add(this.OverloadText);
+      this.Controls.Add(this.OverloadLabel);
       this.Controls.Add(this.NameButton);
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
@@ -299,5 +320,7 @@
     private System.Windows.Forms.ImageList ButtonImages;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem DialogHelp;
+    private System.Windows.Forms.TextBox OverloadText;
+    private System.Windows.Forms.Label OverloadLabel;
   }
 }

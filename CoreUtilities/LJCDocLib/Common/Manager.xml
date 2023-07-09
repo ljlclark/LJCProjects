@@ -149,8 +149,8 @@
     </summary>
     <param name="parentID"></param>
     <param name="name"></param>
-    <param name="propertyNames"></param>
-    <returns></returns>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The retrieved record object.</returns>
   </RetrieveWithUnique>
   
   <!-- GetKey Methods -->
@@ -201,8 +201,8 @@
     <summary>
       Gets the Unique key columns.
     </summary>
-    <param name="parentID"></param>
-    <param name="name"></param>
+    <param name="parentID">The Parent ID value.</param>
+    <param name="name">The Name value.</param>
     <returns>The Unique keys object.</returns>
   </GetUniqueKey>
   

@@ -141,24 +141,20 @@ namespace LJCGenDocEdit
     /// <summary>Displays a detail dialog for a new record.</summary>
     internal void DoNew()
     {
-      if (mClassGroupGrid.CurrentRow is LJCGridRow _)
+      var detail = new ClassDetail()
       {
-        var detail = new ClassDetail()
-        {
-          LJCGroupID = ClassGroupID(),
-          LJCAssemblyID = DocAssemblyID(),
-          Managers = Managers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
+        LJCGroupID = ClassGroupID(),
+        LJCAssemblyID = DocAssemblyID(),
+        Managers = Managers
+      };
+      detail.LJCChange += Detail_Change;
+      detail.ShowDialog();
     }
 
     /// <summary>Displays a detail dialog to edit an existing record.</summary>
     internal void DoEdit()
     {
-      if (mClassGroupGrid.CurrentRow is LJCGridRow _
-        && mClassGrid.CurrentRow is LJCGridRow _)
+      if (mClassGrid.CurrentRow is LJCGridRow _)
       {
         var detail = new ClassDetail()
         {
@@ -355,6 +351,11 @@ namespace LJCGenDocEdit
       if (classGroupRow != null)
       {
         retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+        var classGroup = DocGroupWithID(retValue);
+        if ("ungrouped" == classGroup.HeadingName.ToLower())
+        {
+          retValue = 0;
+        }
       }
       return retValue;
     }
@@ -371,6 +372,19 @@ namespace LJCGenDocEdit
       if (docAssemblyRow != null)
       {
         retValue = (short)docAssemblyRow.LJCGetInt32(DocAssembly.ColumnID);
+      }
+      return retValue;
+    }
+
+    // Retrieves the DocGroup with the ID value.
+    private DocClassGroup DocGroupWithID(short docGroupID)
+    {
+      DocClassGroup retValue = null;
+
+      if (docGroupID > 0)
+      {
+        var manager = Managers.DocClassGroupManager;
+        retValue = manager.RetrieveWithID(docGroupID);
       }
       return retValue;
     }

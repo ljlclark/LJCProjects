@@ -39,9 +39,9 @@
       this.ClassCSV = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassClose = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassGrid = new LJCWinFormControls.LJCDataGrid(this.components);
-      this.ClassHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.ClassHelp = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ClassGrid)).BeginInit();
       this.SuspendLayout();
@@ -61,59 +61,72 @@
             this.toolStripSeparator4,
             this.ClassHelp});
       this.ClassMenu.Name = "AssemblyMenu";
-      this.ClassMenu.Size = new System.Drawing.Size(241, 253);
+      this.ClassMenu.Size = new System.Drawing.Size(226, 220);
       this.ClassMenu.Text = "Assembly Group Menu";
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(222, 6);
       // 
       // ClassHeading
       // 
       this.ClassHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.ClassHeading.Name = "ClassHeading";
-      this.ClassHeading.Size = new System.Drawing.Size(240, 32);
+      this.ClassHeading.Size = new System.Drawing.Size(225, 32);
       this.ClassHeading.Text = "Class Select Menu";
       // 
       // ClassSelectItem
       // 
       this.ClassSelectItem.Name = "ClassSelectItem";
-      this.ClassSelectItem.ShortcutKeyDisplayString = "ENTER";
-      this.ClassSelectItem.Size = new System.Drawing.Size(240, 32);
+      this.ClassSelectItem.ShortcutKeyDisplayString = "";
+      this.ClassSelectItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+      this.ClassSelectItem.Size = new System.Drawing.Size(225, 32);
       this.ClassSelectItem.Text = "&Select";
       this.ClassSelectItem.Click += new System.EventHandler(this.ClassSelectItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
       // 
       // ClassText
       // 
       this.ClassText.Name = "ClassText";
-      this.ClassText.Size = new System.Drawing.Size(240, 32);
+      this.ClassText.Size = new System.Drawing.Size(225, 32);
       this.ClassText.Text = "Export &Text";
       this.ClassText.Click += new System.EventHandler(this.ClassText_Click);
       // 
       // ClassCSV
       // 
       this.ClassCSV.Name = "ClassCSV";
-      this.ClassCSV.Size = new System.Drawing.Size(240, 32);
+      this.ClassCSV.Size = new System.Drawing.Size(225, 32);
       this.ClassCSV.Text = "Export &CSV";
       this.ClassCSV.Click += new System.EventHandler(this.ClassCSV_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(222, 6);
       // 
       // ClassClose
       // 
       this.ClassClose.Name = "ClassClose";
-      this.ClassClose.Size = new System.Drawing.Size(240, 32);
+      this.ClassClose.Size = new System.Drawing.Size(225, 32);
       this.ClassClose.Text = "&Close";
       this.ClassClose.Click += new System.EventHandler(this.ClassClose_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(222, 6);
+      // 
+      // ClassHelp
+      // 
+      this.ClassHelp.Name = "ClassHelp";
+      this.ClassHelp.Size = new System.Drawing.Size(225, 32);
+      this.ClassHelp.Text = "&Help";
+      this.ClassHelp.Click += new System.EventHandler(this.ClassHelp_Click);
       // 
       // ClassGrid
       // 
@@ -152,18 +165,6 @@
       this.ClassGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassGrid_KeyDown);
       this.ClassGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassGrid_MouseDoubleClick);
       this.ClassGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassGrid_MouseDown);
-      // 
-      // ClassHelp
-      // 
-      this.ClassHelp.Name = "ClassHelp";
-      this.ClassHelp.Size = new System.Drawing.Size(240, 32);
-      this.ClassHelp.Text = "&Help";
-      this.ClassHelp.Click += new System.EventHandler(this.ClassHelp_Click);
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(237, 6);
       // 
       // ClassSelect
       // 

@@ -372,7 +372,8 @@ namespace LJCGenDocEdit
       enableEdit = ClassGroupGrid.CurrentRow != null;
       FormCommon.SetMenuState(ClassGroupMenu, enableNew, enableEdit);
 
-      enableNew = ClassGroupGrid.CurrentRow != null;
+      //enableNew = ClassGroupGrid.CurrentRow != null;
+      enableNew = true;
       enableEdit = ClassItemGrid.CurrentRow != null;
       FormCommon.SetMenuState(ClassMenu, enableNew, enableEdit);
 
