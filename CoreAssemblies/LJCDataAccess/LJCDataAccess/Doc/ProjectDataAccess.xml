@@ -21,24 +21,6 @@
         OLEDB driver, ODBC driver or MySQL data provider.
       </para>
       <para>
-        The "Select" methods are:
-        &lt;span class="commonType"&gt;FillDataTable()&lt;/span&gt;,
-        &lt;span class="commonType"&gt;GetDataReader()&lt;/span&gt;,
-        &lt;span class="commonType"&gt;GetDataSet()&lt;/span&gt;,
-        &lt;span class="commonType"&gt;GetDataTable()&lt;/span&gt;,
-        &lt;span class="commonType"&gt;GetProcedureDataTable()&lt;/span&gt; and
-        &lt;span class="commonType"&gt;GetSchemaOnly()&lt;/span&gt;.
-      </para>
-      <para>
-        The "Insert", "Update" and "Delete" method is
-        &lt;span class="commonType"&gt;ExecuteNonQuery()&lt;/span&gt;.
-      </para>
-      <para>
-        The "Script" methods are:
-        &lt;span class="commonType"&gt;ExecuteScript()&lt;/span&gt; and
-        &lt;span class="commonType"&gt;ExecuteScriptText()&lt;/span&gt;.
-      </para>
-      <para>
         The most commonly used methods are
         &lt;span class="commonType"&gt;GetDataTable()&lt;/span&gt;,
         &lt;span class="commonType"&gt;ExecuteNonQuery()&lt;/span&gt; and
