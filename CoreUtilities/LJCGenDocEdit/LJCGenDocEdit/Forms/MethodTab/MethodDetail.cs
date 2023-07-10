@@ -108,6 +108,10 @@ namespace LJCGenDocEdit
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         OverloadText.Text = dataRecord.OverloadName;
+        if (false == NetString.HasValue(dataRecord.OverloadName))
+        {
+          OverloadText.Text = dataRecord.Name;
+        }
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
       }
@@ -464,6 +468,15 @@ namespace LJCGenDocEdit
         var description = NetString.RemoveTags(dataMethod.Summary);
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);
+      }
+    }
+
+    // Ensures OverloadText has a value.
+    private void OverloadText_Leave(object sender, EventArgs e)
+    {
+      if (false == NetString.HasValue(OverloadText.Text))
+      {
+        OverloadText.Text = NameText.Text;
       }
     }
 

@@ -12,25 +12,6 @@
         The NetCommon class contains string related static helper functions for
         all .NET program types.
       </para>
-      <para>
-        &lt;b&gt;Checking String Values&lt;/b&gt; &lt;br /&gt;
-        These include: HasValue(), IsDigits() and IsEqual().
-      </para>
-      <para>
-        &lt;b&gt;Formatting a String&lt;/b&gt; &lt;br /&gt;
-        These include: GetPropertyName(), ExceptionString() and InitString().
-      </para>
-      <para>
-        &lt;b&gt;Parsing Delimited String Values&lt;/b&gt; &lt;br /&gt;
-        These include: GetDelimitedAndIndexes(), GetDelimitedString() and
-        GetStringWithDelimiters().
-      </para>
-      <para>
-        &lt;b&gt;Soundex Functions&lt;/b&gt; &lt;br /&gt;
-        These are helper functions for creating Soundex values. &lt;br /&gt;
-        These include: CreateLSoundex(), CreatePSoundex(), IsSoundexLetter()
-        and Phonetic().
-      </para>
     </remarks>
   </NetString>
   

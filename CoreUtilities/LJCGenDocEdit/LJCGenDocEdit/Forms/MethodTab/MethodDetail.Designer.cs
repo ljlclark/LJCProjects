@@ -252,6 +252,7 @@
       this.OverloadText.Name = "OverloadText";
       this.OverloadText.Size = new System.Drawing.Size(413, 26);
       this.OverloadText.TabIndex = 10;
+      this.OverloadText.Leave += new System.EventHandler(this.OverloadText_Leave);
       // 
       // OverloadLabel
       // 

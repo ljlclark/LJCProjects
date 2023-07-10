@@ -37,7 +37,16 @@ namespace LJCGenDocEdit
       InitializeControls();
       ClassGroupExit.Click += MenuExit_Click;
       MethodGroupExit.Click += MenuExit_Click;
+      MoveTabRight("Class");
       CenterToParent();
+    }
+
+    private void MoveTabRight(string tabName)
+    {
+      var tabPage = MainTabs.LJCGetTabPage(tabName);
+      MainTabs.SelectTab(tabPage);
+      MainTabs.LJCMoveTabPageRight(TileTabs, TabsSplit);
+      TabsSplit.SplitterDistance = ClientRectangle.Width / 2;
     }
     #endregion
 
