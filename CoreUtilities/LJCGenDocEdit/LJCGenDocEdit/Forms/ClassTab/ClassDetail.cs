@@ -91,6 +91,10 @@ namespace LJCGenDocEdit
         // Set default values.
         LJCRecord = new DocClass();
         SequenceText.Text = "1";
+        if (Sequence > 0)
+        {
+          SequenceText.Text = Sequence.ToString();
+        }
         ActiveCheckbox.Checked = true;
       }
       NameText.Select();
@@ -520,6 +524,9 @@ namespace LJCGenDocEdit
 
     /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
+
+    /// <summary>Gets or sets the next sequence value.</summary>
+    internal int Sequence { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }

@@ -139,7 +139,8 @@ namespace LJCGenDocEdit
         var detail = new MethodGroupDetail()
         {
           LJCClassID = DocClassID(),
-          Managers = Managers
+          Managers = Managers,
+          Sequence = mMethodGroupGrid.Rows.Count + 1
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();

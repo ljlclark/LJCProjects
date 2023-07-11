@@ -959,7 +959,6 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
-
     #endregion
 
     #region Internal Properties

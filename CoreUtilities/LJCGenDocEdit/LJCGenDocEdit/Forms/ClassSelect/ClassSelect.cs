@@ -89,7 +89,7 @@ namespace LJCGenDocEdit
     {
       if (ClassGrid.LJCGetMouseRow(e) != null)
       {
-        ClassGridCode.DoSelect();
+        //ClassGridCode.DoSelect();
       }
     }
 

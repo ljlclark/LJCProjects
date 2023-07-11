@@ -137,7 +137,8 @@ namespace LJCGenDocEdit
         var detail = new AssemblyDetail()
         {
           LJCGroupID = AssemblyGroupID(),
-          Managers = Managers
+          Managers = Managers,
+          Sequence = mAssemblyGrid.Rows.Count + 1
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();

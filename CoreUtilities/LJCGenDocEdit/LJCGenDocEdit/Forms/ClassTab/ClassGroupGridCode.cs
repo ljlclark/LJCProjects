@@ -135,7 +135,8 @@ namespace LJCGenDocEdit
         var detail = new ClassGroupDetail()
         {
           LJCAssemblyID = DocAssemblyID(),
-          Managers = Managers
+          Managers = Managers,
+          Sequence = mClassGroupGrid.Rows.Count + 1
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
