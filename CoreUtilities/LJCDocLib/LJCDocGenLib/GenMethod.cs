@@ -68,6 +68,7 @@ namespace LJCDocGenLib
           // Testing
           //if ("GenAssemblyPage" == DataType.Name)
           //{
+          //  NetFile.CreateFolder("XMLFiles");
           //  File.WriteAllText(dataFileSpec, dataXml);
           //}
 

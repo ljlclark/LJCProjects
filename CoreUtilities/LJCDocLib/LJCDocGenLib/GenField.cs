@@ -60,7 +60,8 @@ namespace LJCDocGenLib
         // Testing
         //if ("PublicField" == DataType.Name)
         //{
-        //  /File.WriteAllText(dataFileSpec, dataXml);
+        //  NetFile.CreateFolder("XMLFiles");
+        //  File.WriteAllText(dataFileSpec, dataXml);
         //}
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)

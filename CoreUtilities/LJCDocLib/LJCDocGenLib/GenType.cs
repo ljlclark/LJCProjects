@@ -96,11 +96,12 @@ namespace LJCDocGenLib
       else
       {
         // Testing
-        if ("NetCommon" == DataType.Name
-          || "NetString" == DataType.Name)
-        {
-          File.WriteAllText(dataFileSpec, dataXml);
-        }
+        //if ("NetCommon" == DataType.Name
+        //  || "NetString" == DataType.Name)
+        //{
+        //  NetFile.CreateFolder("XMLFiles");
+        //  File.WriteAllText(dataFileSpec, dataXml);
+        //}
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
           , dataXml) as Sections;

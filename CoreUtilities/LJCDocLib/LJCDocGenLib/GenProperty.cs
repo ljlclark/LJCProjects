@@ -60,6 +60,7 @@ namespace LJCDocGenLib
         // Testing
         //if ("PublicProperty" == DataType.Name)
         //{
+        //  NetFile.CreateFolder("XMLFiles");
         //  File.WriteAllText(dataFileSpec, dataXml);
         //}
 
