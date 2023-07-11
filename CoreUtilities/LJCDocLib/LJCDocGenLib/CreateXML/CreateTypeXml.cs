@@ -8,8 +8,6 @@ using LJCGenTextLib;
 using LJCDocObjLib;
 using LJCDocLibDAL;
 using Section = LJCGenTextLib.Section;
-using System.Xml.Linq;
-using System.Reflection;
 using System.Collections.Generic;
 
 namespace LJCDocGenLib
@@ -110,7 +108,8 @@ namespace LJCDocGenLib
       mainReplacements.Add("_MethodListPreface_", methodListPreface);
 
       int publicMethodCount = MethodCount(DataType.DataMethods, true);
-      if (publicMethodCount > 0)
+      if (publicMethodCount > 0
+        && mOtherMethods.Count > 0)
       {
         mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
         var section = sections.Add("PublicMethods");
