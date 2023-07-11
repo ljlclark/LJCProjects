@@ -215,10 +215,9 @@ namespace LJCGridDataLib
 
     #region Row Data Methods
 
-    /// <summary>
-    /// Loads the grid row columns from the DataRows collection.
-    /// </summary>
-    /// <param name="dataTable">The DataTable object.</param>
+    // Loads the grid row columns from the DataRows collection for each grid
+    // column name found in the DataTable.
+    /// <include path='items/LoadColumnRows/*' file='Doc/TableGrid.xml'/>
     public void LoadColumnRows(DataTable dataTable)
     {
       if (dataTable != null
@@ -243,7 +242,8 @@ namespace LJCGridDataLib
       }
     }
 
-    // Loads the grid rows from the DataRows collection.
+    // Loads grid rows from the DataRows collection restricted by the
+    // DisplayColumns property.
     /// <include path='items/LoadRows/*' file='Doc/TableGrid.xml'/>
     public void LoadRows(DataTable dataTable)
     {

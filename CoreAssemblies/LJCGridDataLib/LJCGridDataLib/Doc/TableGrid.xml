@@ -192,9 +192,17 @@
   </RemoveDisplayColumn>
 
   <!-- Row Data Methods -->
+  <LoadColumnRows>
+    <summary>
+      Loads the grid row columns from the DataRows collection for each grid
+      column name found in the DataTable.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+  </LoadColumnRows>
   <LoadRows>
     <summary>
-      Loads the grid rows from the DataRows collection.
+      Loads grid rows from the DataRows collection restricted by the
+      DisplayColumns property.
     </summary>
     <param name="dataTable">The DataTable object.</param>
     <example>
