@@ -111,10 +111,12 @@ namespace LJCDocGenLib
       if (publicMethodCount > 0
         && mOtherMethods.Count > 0)
       {
-        mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
+        //mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
+        mainReplacements.Add("_OtherMethodCount_", mOtherMethods.Count.ToString());
         var section = sections.Add("PublicMethods");
         AddMethods(section, true);
       }
+      mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
 
       int privateMethodCount = MethodCount(DataType.DataMethods);
       if (privateMethodCount > 0)
