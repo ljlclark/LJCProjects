@@ -8,22 +8,6 @@
       Represents a collection of
       &lt;span class="userType"&gt;KeyItem&lt;/span&gt; objects.
     </summary>
-    <remarks>
-      <para>
-        The common collection static method is: HasItems().&lt;br /&gt;
-        The collection contains a copy constructor.&lt;br /&gt;
-        The common collection instance methods are: Add() + 1 overload,
-        Append(), Clone(), GetCollection() and HasItems().
-      </para>
-      <para>
-        Public methods are: GetDescription(), GetIndex(), GetItem() and
-        GetItems().
-      </para>
-      <para>
-        The Search and Sort methods are: SearchPropertName() and
-        SortPropertyName().&lt;br /&gt;
-      </para>
-    </remarks>
   </KeyItems>
   
   <!-- Collection Methods -->
