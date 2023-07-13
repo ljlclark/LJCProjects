@@ -469,6 +469,10 @@ namespace LJCGenDocEdit
         NameText.Text = dataMethod.Name;
         // *** Next Statement *** Add- 7/923
         OverloadText.Text = dataMethod.OverloadName;
+        if (false == NetString.HasValue(dataMethod.Summary))
+        {
+          dataMethod.Summary = "Missing Summary";
+        }
         var description = NetString.RemoveTags(dataMethod.Summary);
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);

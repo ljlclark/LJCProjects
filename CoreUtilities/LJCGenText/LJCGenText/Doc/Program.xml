@@ -14,6 +14,11 @@
         The command line utility to generate output text from a template and
         an XML data file.
       </para>
+      <para>
+        - LJCGenText.exe
+        &lt;div class='Text'&gt;- LJCGenTextLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
   </Program>
 </items>

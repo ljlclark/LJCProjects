@@ -57,7 +57,10 @@ namespace LJCGenDocEdit
             mDataMethods = dataType.DataMethods;
             foreach (var dataMethod in mDataMethods)
             {
-              dataMethod.Summary = dataMethod.Summary.Trim();
+              if (NetString.HasValue(dataMethod.Summary))
+              {
+                dataMethod.Summary = dataMethod.Summary.Trim();
+              }
               RowAdd(dataMethod);
             }
           }

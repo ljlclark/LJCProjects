@@ -226,6 +226,7 @@ namespace LJCNetCommon
       }
 
       if (startIndex > -1
+        && NetString.HasValue(text)
         && startIndex < text.Length - 1
         && text.Contains(beginDelimiter))
       {

@@ -16,6 +16,14 @@
       <para>
         The LJCGenTableCode project is part of the LJCGenText solution.
       </para>
+      <para>
+        LJCGenTableCode.exe
+        &lt;div class='Text'&gt;- LJCDBClientLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBServiceLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCGenTextLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
   </Program>
 </items>

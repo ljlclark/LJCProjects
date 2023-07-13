@@ -26,6 +26,16 @@
       <para>
         The LJCGenTextEdit project is part of the LJCGenText solution.
       </para>
+      <para>
+        - LJCGenTextEdit.exe
+        &lt;div class='Text'&gt;- LJCDataAccessConfig&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBClientLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCGenTextLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCWinFormCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCWinFormControl&lt;/div&gt;
+      </para>
     </remarks>
   </EditList>
 </items>

@@ -44,12 +44,14 @@
         manipulate properties in the Data Object using Reflection.
       </para>
       <para>
-        - LJC.DBClientLib
-        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        - LJCDBClientLib
+        &lt;div class='Text'&gt;- LJCDataAccess&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBDataAccess&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDataAccessConfig&lt;/div&gt;
         &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
         &lt;div class='Text'&gt;- LJCDBServiceLib&lt;/div&gt;
-        &lt;div class='Text2'&gt;- LJCDataAccess&lt;/div&gt;
-        &lt;div class='Text2'&gt;- LJCDataAccessConfig&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCGridDataLib&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
       </para>
     </remarks>
   </ChangedNames>
