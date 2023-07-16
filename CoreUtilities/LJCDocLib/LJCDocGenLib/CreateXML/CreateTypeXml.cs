@@ -97,7 +97,7 @@ namespace LJCDocGenLib
       string methodListPreface = "";
       mOtherMethods = new DataMethods(DataType.DataMethods);
       // Testing
-      //if ("DataAccess" == DataType.Name)
+      //if ("DbColumns" == DataType.Name)
       //{
       //  int i = 0;
       //}
@@ -107,16 +107,19 @@ namespace LJCDocGenLib
       }
       mainReplacements.Add("_MethodListPreface_", methodListPreface);
 
-      int publicMethodCount = MethodCount(DataType.DataMethods, true);
-      if (publicMethodCount > 0
-        && mOtherMethods.Count > 0)
+      int otherPublicCount = MethodCount(mOtherMethods, true);
+      if (otherPublicCount > 0)
       {
-        //mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
         mainReplacements.Add("_OtherMethodCount_", mOtherMethods.Count.ToString());
         var section = sections.Add("PublicMethods");
         AddMethods(section, true);
       }
-      mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
+
+      int publicMethodCount = MethodCount(DataType.DataMethods, true);
+      if (publicMethodCount > 0)
+      {
+        mainReplacements.Add("_PublicMethodCount_", publicMethodCount.ToString());
+      }
 
       int privateMethodCount = MethodCount(DataType.DataMethods);
       if (privateMethodCount > 0)
@@ -252,7 +255,6 @@ namespace LJCDocGenLib
                 foreach (var docMethod in docMethods)
                 {
                   var methodName = docMethod.Name;
-                  //var dataMethod = mOtherMethods.Find(x => x.Name == methodName);
                   var overloadName = docMethod.OverloadName;
                   var dataMethod
                     = mOtherMethods.Find(x => x.OverloadName == overloadName);
