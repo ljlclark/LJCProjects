@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BackupWatcher")]
+[assembly: AssemblyTitle("BackupApply")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP")]
-[assembly: AssemblyProduct("BackupWatcher")]
+[assembly: AssemblyProduct("BackupApply")]
 [assembly: AssemblyCopyright("Copyright © HP 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0a02ab72-1dc0-4a01-8fc4-3970953117cd")]
+[assembly: Guid("83c0fd7c-d6c9-4230-8342-935b45cdf45b")]
 
 // Version information for an assembly consists of the following four values:
 //
