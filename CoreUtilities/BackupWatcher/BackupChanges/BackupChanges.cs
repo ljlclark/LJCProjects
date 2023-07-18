@@ -8,23 +8,18 @@ using System.IO;
 namespace BackupChanges
 {
   /// <summary>The Backup Changes class.</summary>
-  internal class BackupChanges
+  public class BackupChanges
   {
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="sourceFolder">The source folder path.</param>
-    /// <param name="changeFile">The Change file name.</param>
-    internal BackupChanges(string sourceFolder, string changeFile)
+    // Initializes an object instance.
+    /// <include path='items/BackupChangesC/*' file='Doc/BackupChanges.xml'/>
+    public BackupChanges(string sourceFolder, string changeFile)
     {
       mSourceFolder = sourceFolder;
       mChangeFile = changeFile;
     }
 
-    /// <summary>
-    /// Applies the change commands.
-    /// </summary>
-    /// <param name="targetPath">The Target file.</param>
+    // Applies the change commands.
+    /// <include path='items/Apply/*' file='Doc/BackupChanges.xml'/>
     public void Apply(string targetPath)
     {
       if (File.Exists(mChangeFile))

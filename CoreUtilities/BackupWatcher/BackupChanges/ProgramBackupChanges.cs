@@ -9,7 +9,6 @@ using System.IO;
 namespace BackupChanges
 {
   // The program entry point class.
-  /// <include path = 'items/Program/*' file='../../LJCDocLib/Common/Program.xml'/>
   internal class Program
   {
     // The program entry point function.
@@ -139,5 +138,5 @@ namespace BackupChanges
       }
       return retValue;
     }
-  }  // Class Program
+  }
 }

@@ -10,7 +10,6 @@ using System.IO;
 namespace BackupWatcher
 {
   // The program entry point class.
-  /// <include path = 'items/Program/*' file='../../LJCDocLib/Common/Program.xml'/>
   internal class Program
   {
     // The program entry point function.
@@ -25,7 +24,7 @@ namespace BackupWatcher
           MultiFilter = multiFilter
         };
 
-        Console.Write("Press ENTER to exit. ");
+        Console.WriteLine("Press ENTER to exit.");
         Console.ReadLine();
       }
     }
@@ -97,5 +96,5 @@ namespace BackupWatcher
         }
       }
     }
-  }  // Class Program
+  }
 }

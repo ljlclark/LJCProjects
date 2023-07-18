@@ -9,14 +9,11 @@ using System.IO;
 namespace BackupWatcher
 {
   /// <summary>The Backup Watcher class.</summary>
-  internal class BackupWatcher
+  public class BackupWatcher
   {
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="watchPath">The watch root path.</param>
-    /// <param name="changeFile">The Change file name.</param>
-    internal BackupWatcher(string watchPath, string changeFile)
+    // Initializes an object instance.
+    /// <include path='items/BackupWatcherC/*' file='Doc/BackupWatcher.xml'/>
+    public BackupWatcher(string watchPath, string changeFile)
     {
       WatchPath = watchPath;
       ChangeFile = changeFile;
@@ -136,7 +133,6 @@ namespace BackupWatcher
           }
           text += "\r\n";
           File.AppendAllText(ChangeFile, text);
-          Console.WriteLine();
           Console.Write(text);
         }
       }
@@ -151,6 +147,7 @@ namespace BackupWatcher
       if (e.ChangeType == WatcherChangeTypes.Changed)
       {
         mFileName = Path.GetFileName(e.FullPath);
+        if ("" == mFileName) { };
         if (IsAllowed(e.FullPath))
         {
           WriteChange("Copy", e.FullPath);
@@ -163,9 +160,10 @@ namespace BackupWatcher
     {
       // For debugging.
       mFileName = Path.GetFileName(e.FullPath);
-      if ("" == mFileName) { };
-
-      WriteChange("Copy", e.FullPath);
+      if (IsAllowed(e.FullPath))
+      {
+        WriteChange("Copy", e.FullPath);
+      }
     }
 
     // Handles the Deleted event.
@@ -174,7 +172,7 @@ namespace BackupWatcher
       // For debugging.
       mFileName = Path.GetFileName(e.FullPath);
       if (IsAllowed(e.FullPath))
-        {
+      {
         WriteChange("Delete", e.FullPath);
       }
     }
@@ -210,10 +208,10 @@ namespace BackupWatcher
 
     #region Public Properties
 
-    // Gets or sets the ChangeFile name.
+    /// <summary>Gets or sets the ChangeFile name.</summary>
     public string ChangeFile { get; set; }
 
-    // Gets or sets the MulitFilter value.
+    /// <summary>Gets or sets the MulitFilter value.</summary>
     public string MultiFilter
     {
       get { return mMultiFilter; }
@@ -225,7 +223,7 @@ namespace BackupWatcher
     }
     private string mMultiFilter;
 
-    // Gets or sets the WatchPath value.
+    /// <summary>Gets or sets the WatchPath value.</summary>
     public string WatchPath { get; set; }
     #endregion
 
