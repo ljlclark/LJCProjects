@@ -3,8 +3,8 @@
 // Backup Watcher.cs
 using LJCNetCommon;
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BackupWatcher
 {
@@ -22,11 +22,11 @@ namespace BackupWatcher
       {
         NotifyFilter =
         //NotifyFilters.Attributes
-        NotifyFilters.CreationTime
+        //NotifyFilters.CreationTime
         //| NotifyFilters.DirectoryName
-        | NotifyFilters.FileName
+        NotifyFilters.FileName
         //| NotifyFilters.LastAccess
-        | NotifyFilters.LastWrite
+        //| NotifyFilters.LastWrite
         //| NotifyFilters.Security
         | NotifyFilters.Size,
         Filter = "*.*",
@@ -43,6 +43,18 @@ namespace BackupWatcher
 
     #region Private Methods
 
+    // Creates a change string.
+    private string CreateChange(string changeType, string fileSpec
+      , string toFileSpec = null)
+    {
+      var retValue = $"{changeType},{fileSpec}";
+      if (NetString.HasValue(toFileSpec))
+      {
+        retValue += $",{toFileSpec}";
+      }
+      return retValue;
+    }
+
     // Creates the ExtValues array.
     private string[] CreateExtValues(string multiFilters)
     {
@@ -55,40 +67,37 @@ namespace BackupWatcher
       return retValue;
     }
 
-    // Checks if the ChangeFile has a matching line.
-    private bool HasText(string changeType, string fileSpec
+    // Gets the change values from a change string.
+    private void GetChangeValues(string line, out string changeType
+      , out string fileSpec, out string toFileSpec)
+    {
+      changeType = null;
+      fileSpec = null;
+      toFileSpec = null;
+
+      var tokens = line.Split(',');
+      if (tokens.Count() > 1)
+      {
+        changeType = tokens[0];
+        fileSpec = tokens[1];
+      }
+      if (tokens.Count() > 2)
+      {
+        toFileSpec = tokens[2];
+      }
+    }
+
+    // Checks if files are valid.
+    private bool IsAllowed(string fileSpec
       , string toFileSpec = null)
     {
       bool retValue = false;
-
-      if (File.Exists(ChangeFile))
+      if (IsWatched(fileSpec))
       {
-        IEnumerable<string> lines = File.ReadLines(ChangeFile);
-        int lineNumber = 0;
-        foreach (string line in lines)
-        {
-          lineNumber++;
-          var text = $"{changeType},{fileSpec}";
-          if (NetString.HasValue(toFileSpec))
-          {
-            text += $",{toFileSpec}";
-          }
-          if (line.Contains(text))
-          {
-            retValue = true;
-            break;
-          }
-        }
+        retValue = true;
       }
-      return retValue;
-    }
-
-    // Checks if the file is allowed.
-    private bool IsAllowed(string fileSpec)
-    {
-      bool retValue = true;
-      var ext = Path.GetExtension(fileSpec);
-      if (".tmp" == ext.ToLower())
+      if (NetString.HasValue(toFileSpec)
+      && false == IsWatched(toFileSpec))
       {
         retValue = false;
       }
@@ -115,25 +124,69 @@ namespace BackupWatcher
       return retValue;
     }
 
+    // Checks if the ChangeFile has a matching line.
+    private void ScrubChangeFile(string changeType, string fileSpec
+      , string toFileSpec = null)
+    {
+      if (File.Exists(ChangeFile))
+      {
+        string[] lines = File.ReadAllLines(ChangeFile);
+        for (int index = 0; index < lines.Count(); index++)
+        {
+          var line = lines[index];
+
+          RemoveMatchLine(lines, index, changeType, fileSpec, toFileSpec);
+          GetChangeValues(line, out string lineChangeType
+            , out string lineFileSpec, out string lineToFileSpec);
+          switch (changeType.ToLower())
+          {
+            case "copy":
+              RemoveMatchLine(lines, index, "Delete", fileSpec, toFileSpec);
+              break;
+
+            case "delete":
+              RemoveMatchLine(lines, index, "Copy", fileSpec, toFileSpec);
+              break;
+          }
+        }
+        WriteLines(ChangeFile, lines);
+      }
+    }
+
+    // Removes the matching line.
+    private void RemoveMatchLine(string[] lines, int index, string changeType
+      , string fileSpec, string toFileSpec = null)
+    {
+      var checkLine = CreateChange(changeType, fileSpec, toFileSpec);
+      if (lines[index] == checkLine)
+      {
+        lines[index] = null;
+      }
+    }
+
     // Writes valid changes to the ChangeFile.
     private void WriteChange(string changeType, string fileSpec
       , string toFileSpec = null)
     {
-      if (IsWatched(fileSpec)
-        || IsWatched(toFileSpec))
+      if (IsAllowed(fileSpec, toFileSpec))
       {
-        // Attempt to prevent double entries.
-        if (false == HasText(changeType, fileSpec, toFileSpec))
+        ScrubChangeFile(changeType, fileSpec, toFileSpec);
+        string text = CreateChange(changeType, fileSpec, toFileSpec);
+        File.AppendAllText(ChangeFile, text);
+      }
+    }
+
+    // Writes lines that have a value.
+    private void WriteLines(string changeFile, string[] lines)
+    {
+      using (StreamWriter writer = new StreamWriter(changeFile))
+      {
+        foreach (string line in lines)
         {
-          string text = "";
-          text += $"{changeType},{fileSpec}";
-          if (NetString.HasValue(toFileSpec))
+          if (NetString.HasValue(line))
           {
-            text += $",{toFileSpec}";
+            writer.WriteLine(line);
           }
-          text += "\r\n";
-          File.AppendAllText(ChangeFile, text);
-          Console.Write(text);
         }
       }
     }
@@ -146,35 +199,20 @@ namespace BackupWatcher
     {
       if (e.ChangeType == WatcherChangeTypes.Changed)
       {
-        mFileName = Path.GetFileName(e.FullPath);
-        if ("" == mFileName) { };
-        if (IsAllowed(e.FullPath))
-        {
-          WriteChange("Copy", e.FullPath);
-        }
+        WriteChange("Copy", e.FullPath);
       }
     }
 
     // Handles the Created event.
     private void Watcher_Created(object sender, FileSystemEventArgs e)
     {
-      // For debugging.
-      mFileName = Path.GetFileName(e.FullPath);
-      if (IsAllowed(e.FullPath))
-      {
-        WriteChange("Copy", e.FullPath);
-      }
+      WriteChange("Copy", e.FullPath);
     }
 
     // Handles the Deleted event.
     private void Watcher_Deleted(object sender, FileSystemEventArgs e)
     {
-      // For debugging.
-      mFileName = Path.GetFileName(e.FullPath);
-      if (IsAllowed(e.FullPath))
-      {
-        WriteChange("Delete", e.FullPath);
-      }
+      WriteChange("Delete", e.FullPath);
     }
 
     // Handles the Error event.
@@ -186,22 +224,14 @@ namespace BackupWatcher
     // Handles the Renamed event.
     private void Watcher_Renamed(object sender, RenamedEventArgs e)
     {
-      // For debugging.
-      mFileName = Path.GetFileName(e.FullPath);
-
-      if (false == IsWatched(e.OldFullPath))
+      if (IsWatched(e.OldFullPath))
       {
-        if (IsAllowed(e.FullPath))
-        {
-          WriteChange("Copy", e.FullPath);
-        }
+        WriteChange("Rename", e.OldFullPath, e.FullPath);
       }
       else
       {
-        if (IsAllowed(e.FullPath))
-        {
-          WriteChange("Rename", e.OldFullPath, e.FullPath);
-        }
+        // Old file is not watched so copy new.
+        WriteChange("Copy", e.FullPath);
       }
     }
     #endregion
@@ -228,7 +258,6 @@ namespace BackupWatcher
     #endregion
 
     private string[] mExtValues;
-    private string mFileName;
     private readonly FileSystemWatcher mWatcher;
   }
 }
