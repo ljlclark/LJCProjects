@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{83C0FD7C-D6C9-4230-8342-935B45CDF45B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BackupApply</RootNamespace>
-    <AssemblyName>BackupApply</AssemblyName>
+    <RootNamespace>BackupChanges</RootNamespace>
+    <AssemblyName>BackupChanges</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackupApply.cs" />
-    <Compile Include="ProgramBackupApply.cs" />
+    <Compile Include="BackupChanges.cs" />
+    <Compile Include="ProgramBackupChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

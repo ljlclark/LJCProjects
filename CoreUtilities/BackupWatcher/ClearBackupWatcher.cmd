@@ -13,7 +13,12 @@ set Solution=CoreUtilities\BackupWatcher
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear
+set Project=BackupChanges
+set File=BackupChanges
+call %ClearBuild%
+rmdir %Solution%\%Project%\bin\Release
+
 set Project=BackupWatcher
 set File=BackupWatcher
 call %ClearBuild%
-rem del %Solution%\%Project%\bin\Debug\LJCDocLibDAL.xml
+rmdir %Solution%\%Project%\bin\Release

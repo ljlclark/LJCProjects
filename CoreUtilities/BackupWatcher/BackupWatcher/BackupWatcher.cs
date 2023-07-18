@@ -1,4 +1,7 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// Backup Watcher.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,10 +15,11 @@ namespace BackupWatcher
     /// Initializes an object instance.
     /// </summary>
     /// <param name="watchPath">The watch root path.</param>
-    internal BackupWatcher(string watchPath)
+    /// <param name="changeFile">The Change file name.</param>
+    internal BackupWatcher(string watchPath, string changeFile)
     {
       WatchPath = watchPath;
-      ChangeFile = "ChangeFile.txt";
+      ChangeFile = changeFile;
 
       mWatcher = new FileSystemWatcher(watchPath)
       {
@@ -67,10 +71,10 @@ namespace BackupWatcher
         foreach (string line in lines)
         {
           lineNumber++;
-          var text = $"{changeType} {fileSpec}";
+          var text = $"{changeType},{fileSpec}";
           if (NetString.HasValue(toFileSpec))
           {
-            text += $" {toFileSpec}";
+            text += $",{toFileSpec}";
           }
           if (line.Contains(text))
           {
@@ -78,6 +82,18 @@ namespace BackupWatcher
             break;
           }
         }
+      }
+      return retValue;
+    }
+
+    // Checks if the file is allowed.
+    private bool IsAllowed(string fileSpec)
+    {
+      bool retValue = true;
+      var ext = Path.GetExtension(fileSpec);
+      if (".tmp" == ext.ToLower())
+      {
+        retValue = false;
       }
       return retValue;
     }
@@ -113,13 +129,15 @@ namespace BackupWatcher
         if (false == HasText(changeType, fileSpec, toFileSpec))
         {
           string text = "";
-          text += $"{changeType} {fileSpec}";
+          text += $"{changeType},{fileSpec}";
           if (NetString.HasValue(toFileSpec))
           {
-            text += $" {toFileSpec}";
+            text += $",{toFileSpec}";
           }
           text += "\r\n";
           File.AppendAllText(ChangeFile, text);
+          Console.WriteLine();
+          Console.Write(text);
         }
       }
     }
@@ -133,22 +151,32 @@ namespace BackupWatcher
       if (e.ChangeType == WatcherChangeTypes.Changed)
       {
         mFileName = Path.GetFileName(e.FullPath);
-        WriteChange("Copy", e.FullPath);
+        if (IsAllowed(e.FullPath))
+        {
+          WriteChange("Copy", e.FullPath);
+        }
       }
     }
 
     // Handles the Created event.
     private void Watcher_Created(object sender, FileSystemEventArgs e)
     {
+      // For debugging.
       mFileName = Path.GetFileName(e.FullPath);
+      if ("" == mFileName) { };
+
       WriteChange("Copy", e.FullPath);
     }
 
     // Handles the Deleted event.
     private void Watcher_Deleted(object sender, FileSystemEventArgs e)
     {
+      // For debugging.
       mFileName = Path.GetFileName(e.FullPath);
-      WriteChange("Delete", e.FullPath);
+      if (IsAllowed(e.FullPath))
+        {
+        WriteChange("Delete", e.FullPath);
+      }
     }
 
     // Handles the Error event.
@@ -160,14 +188,22 @@ namespace BackupWatcher
     // Handles the Renamed event.
     private void Watcher_Renamed(object sender, RenamedEventArgs e)
     {
+      // For debugging.
       mFileName = Path.GetFileName(e.FullPath);
+
       if (false == IsWatched(e.OldFullPath))
       {
-        WriteChange("Copy", e.FullPath);
+        if (IsAllowed(e.FullPath))
+        {
+          WriteChange("Copy", e.FullPath);
+        }
       }
       else
       {
-        WriteChange("Rename", e.OldFullPath, e.FullPath);
+        if (IsAllowed(e.FullPath))
+        {
+          WriteChange("Rename", e.OldFullPath, e.FullPath);
+        }
       }
     }
     #endregion

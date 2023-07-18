@@ -1,21 +1,21 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// BackupApply.cs
+// BackupChanges.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
 
-namespace BackupApply
+namespace BackupChanges
 {
   /// <summary>The Backup Changes class.</summary>
-  internal class BackupApply
+  internal class BackupChanges
   {
     /// <summary>
     /// Initializes an object instance.
     /// </summary>
-    /// <param name="sourceFolder"></param>
-    /// <param name="changeFile"></param>
-    internal BackupApply(string sourceFolder, string changeFile)
+    /// <param name="sourceFolder">The source folder path.</param>
+    /// <param name="changeFile">The Change file name.</param>
+    internal BackupChanges(string sourceFolder, string changeFile)
     {
       mSourceFolder = sourceFolder;
       mChangeFile = changeFile;
@@ -24,7 +24,7 @@ namespace BackupApply
     /// <summary>
     /// Applies the change commands.
     /// </summary>
-    /// <param name="targetPath">The Target file path.</param>
+    /// <param name="targetPath">The Target file.</param>
     public void Apply(string targetPath)
     {
       if (File.Exists(mChangeFile))
@@ -106,8 +106,8 @@ namespace BackupApply
       return retValue;
     }
 
-    private string mChangeFile;
-    private string mSourceFolder;
+    private readonly string mChangeFile;
+    private readonly string mSourceFolder;
     private string mTargetPath;
   }
 }

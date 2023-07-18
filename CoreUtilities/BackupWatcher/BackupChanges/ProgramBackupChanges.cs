@@ -1,12 +1,12 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProgramBackupApply.cs
+// ProgramBackupChanges.cs
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace BackupApply
+namespace BackupChanges
 {
   // The program entry point class.
   /// <include path = 'items/Program/*' file='../../LJCDocLib/Common/Program.xml'/>
@@ -22,7 +22,7 @@ namespace BackupApply
         AddDriveLetter(ref targetPath);
         if (IsTarget(targetPath))
         {
-          var backupChanges = new BackupApply(sourceFolder, changeFile);
+          var backupChanges = new BackupChanges(sourceFolder, changeFile);
           backupChanges.Apply(targetPath);
         }
       }
@@ -80,7 +80,9 @@ namespace BackupApply
         || false == NetString.HasValue(sourceFolder))
       {
         retValue = false;
-        Console.WriteLine("Syntax: \"targetPath\" \"changeFile\" \"sourceFolder\"");
+        var syntax = "Syntax: ProgramBackupChanges \"targetPath\"";
+        syntax += "\"changeFile\" \"sourceFolder\"";
+        Console.WriteLine(syntax);
         Console.Write("Press ENTER to exit. ");
         Console.ReadLine();
       }
@@ -91,9 +93,9 @@ namespace BackupApply
     private static void GetDefaults(out string targetPath
       , out string changeFile, out string sourceFolder)
     {
-      targetPath = null;
-      changeFile = null;
-      sourceFolder = null;
+      targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP";
+      changeFile = @"..\..\..\BackupWatcher\bin\Debug\ChangeFile.txt";
+      sourceFolder = @"LJCProjectsDev";
 
       var fileSpec = "BackupChangesDefaults.txt";
       if (File.Exists(fileSpec))
@@ -137,5 +139,5 @@ namespace BackupApply
       }
       return retValue;
     }
-  }
+  }  // Class Program
 }
