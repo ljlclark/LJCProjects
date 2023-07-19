@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // Backup Watcher.cs
 using LJCNetCommon;
-using System;
 using System.IO;
 using System.Linq;
 
@@ -59,10 +58,14 @@ namespace BackupWatcher
     private string[] CreateExtValues(string multiFilters)
     {
       var retValue = multiFilters.Split(',');
-      for (int i = 0; i < retValue.Length; i++)
+      for (int index = 0; index < retValue.Length; index++)
       {
-        var ext = Path.GetExtension(retValue[i]);
-        retValue[i] = ext.ToLower();
+        var ext = retValue[index].Trim();
+        if (false == ext.StartsWith("-"))
+        {
+          ext = Path.GetExtension(ext);
+        }
+        retValue[index] = ext.ToLower();
       }
       return retValue;
     }
@@ -76,9 +79,12 @@ namespace BackupWatcher
       toFileSpec = null;
 
       var tokens = line.Split(',');
-      if (tokens.Count() > 1)
+      if (tokens.Count() > 0)
       {
         changeType = tokens[0];
+      }
+      if (tokens.Count() > 1)
+      {
         fileSpec = tokens[1];
       }
       if (tokens.Count() > 2)
@@ -97,7 +103,7 @@ namespace BackupWatcher
         retValue = true;
       }
       if (NetString.HasValue(toFileSpec)
-      && false == IsWatched(toFileSpec))
+        && false == IsWatched(toFileSpec))
       {
         retValue = false;
       }
@@ -112,12 +118,32 @@ namespace BackupWatcher
       if (NetString.HasValue(fileSpec))
       {
         var ext = Path.GetExtension(fileSpec);
-        foreach (var extValue in mExtValues)
+        var fileName = Path.GetFileName(fileSpec);
+
+        // Skip files with extra dots except for .config.
+        var valid = true;
+        if (fileName.IndexOf(".") < fileName.Length - ext.Length
+          && ext != ".config")
         {
-          if (ext.ToLower() == extValue)
+          valid = false;
+        }
+
+        if (valid)
+        {
+          foreach (var extValue in mExtValues)
           {
-            retValue = true;
-            break;
+            if (extValue.StartsWith("-"))
+            {
+              if (fileName.ToLower() == extValue.Substring(1))
+              {
+                break;
+              }
+            }
+            if (ext.ToLower() == extValue)
+            {
+              retValue = true;
+              break;
+            }
           }
         }
       }
@@ -130,14 +156,15 @@ namespace BackupWatcher
     {
       if (File.Exists(ChangeFile))
       {
-        string[] lines = File.ReadAllLines(ChangeFile);
+        var lines = File.ReadAllLines(ChangeFile);
         for (int index = 0; index < lines.Count(); index++)
         {
-          var line = lines[index];
-
           RemoveMatchLine(lines, index, changeType, fileSpec, toFileSpec);
-          GetChangeValues(line, out string lineChangeType
-            , out string lineFileSpec, out string lineToFileSpec);
+
+          //var line = lines[index];
+          //GetChangeValues(line, out string lineChangeType
+          //  , out string lineFileSpec, out string lineToFileSpec);
+
           switch (changeType.ToLower())
           {
             case "copy":
@@ -149,7 +176,7 @@ namespace BackupWatcher
               break;
           }
         }
-        WriteLines(ChangeFile, lines);
+        WriteChangeLines(lines);
       }
     }
 
@@ -177,18 +204,10 @@ namespace BackupWatcher
     }
 
     // Writes lines that have a value.
-    private void WriteLines(string changeFile, string[] lines)
+    private void WriteChangeLines(string[] lines)
     {
-      using (StreamWriter writer = new StreamWriter(changeFile))
-      {
-        foreach (string line in lines)
-        {
-          if (NetString.HasValue(line))
-          {
-            writer.WriteLine(line);
-          }
-        }
-      }
+      lines = lines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+      File.WriteAllLines(ChangeFile, lines);
     }
     #endregion
 
@@ -218,7 +237,8 @@ namespace BackupWatcher
     // Handles the Error event.
     private void Watcher_Error(object sender, ErrorEventArgs e)
     {
-      throw new NotImplementedException();
+      var exception = e.GetException();
+      File.AppendAllText(Log, $"{exception.Message}\r\n");
     }
 
     // Handles the Renamed event.
@@ -256,6 +276,8 @@ namespace BackupWatcher
     /// <summary>Gets or sets the WatchPath value.</summary>
     public string WatchPath { get; set; }
     #endregion
+
+    private const string Log = "Watcher.log";
 
     private string[] mExtValues;
     private readonly FileSystemWatcher mWatcher;

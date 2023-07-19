@@ -26,7 +26,7 @@ namespace BackupChanges
       if (File.Exists(mChangeFile))
       {
         mTargetPath = targetPath;
-        IEnumerable<string> lines = File.ReadLines(mChangeFile);
+        var lines = File.ReadAllLines(mChangeFile);
         foreach (string line in lines)
         {
           var tokens = line.Split(',');
@@ -69,7 +69,7 @@ namespace BackupChanges
               if (File.Exists(targetFileSpec))
               {
                 var targetToFileSpec = Path.Combine(mTargetPath, toFileName);
-                File.Copy(targetFileSpec, targetToFileSpec);
+                File.Move(targetFileSpec, targetToFileSpec);
                 Console.WriteLine($"ren {targetFileSpec} {targetToFileSpec}\r\n");
               }
               break;
