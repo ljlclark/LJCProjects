@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // BackupChanges.cs
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -52,6 +53,7 @@ namespace BackupChanges
               {
                 NetFile.CreateFolder(targetFileSpec);
                 File.Copy(fileSpec, targetFileSpec, true);
+                Console.WriteLine($"copy {fileSpec} {targetFileSpec}\r\n");
               }
               break;
 
@@ -59,6 +61,7 @@ namespace BackupChanges
               if (File.Exists(targetFileSpec))
               {
                 File.Delete(targetFileSpec);
+                Console.WriteLine($"del {fileSpec}\r\n");
               }
               break;
 
@@ -67,6 +70,7 @@ namespace BackupChanges
               {
                 var targetToFileSpec = Path.Combine(mTargetPath, toFileName);
                 File.Copy(targetFileSpec, targetToFileSpec);
+                Console.WriteLine($"ren {targetFileSpec} {targetToFileSpec}\r\n");
               }
               break;
           }

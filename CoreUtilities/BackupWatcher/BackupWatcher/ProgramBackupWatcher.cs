@@ -66,7 +66,7 @@ namespace BackupWatcher
     {
       watchPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
       changeFile = @"ChangeFile.txt";
-      multiFilter = @"*.cs, *.cproj, *.sln, *.config, Doc\*.xml";
+      multiFilter = @"*.cs, *.cproj, *.sln, *.config, *.cmd, Doc\*.xml";
 
       var fileSpec = "BackupWatcherDefaults.txt";
       if (File.Exists(fileSpec))

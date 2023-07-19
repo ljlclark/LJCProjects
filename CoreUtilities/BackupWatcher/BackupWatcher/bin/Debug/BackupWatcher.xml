@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BackupWatcher</name>
+    </assembly>
+    <members>
+        <member name="T:BackupWatcher.BackupWatcher">
+            <summary>The Backup Watcher class.</summary>
+        </member>
+        <member name="M:BackupWatcher.BackupWatcher.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="watchPath">The watch root path.</param><param name="changeFile">The Change file name.</param>
+        </member>
+        <member name="P:BackupWatcher.BackupWatcher.ChangeFile">
+            <summary>Gets or sets the ChangeFile name.</summary>
+        </member>
+        <member name="P:BackupWatcher.BackupWatcher.MultiFilter">
+            <summary>Gets or sets the MulitFilter value.</summary>
+        </member>
+        <member name="P:BackupWatcher.BackupWatcher.WatchPath">
+            <summary>Gets or sets the WatchPath value.</summary>
+        </member>
+    </members>
+</doc>
