@@ -21,5 +21,28 @@
         <member name="P:BackupWatcher.BackupWatcher.WatchPath">
             <summary>Gets or sets the WatchPath value.</summary>
         </member>
+        <member name="T:BackupWatcher.FileChange">
+            <summary></summary>
+        </member>
+        <member name="M:BackupWatcher.FileChange.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="changeType"></param>
+            <param name="fileSpec"></param>
+            <param name="toFileName"></param>
+        </member>
+        <member name="M:BackupWatcher.FileChange.Text">
+            <summary></summary>
+        </member>
+        <member name="P:BackupWatcher.FileChange.ChangeType">
+            <summary></summary>
+        </member>
+        <member name="P:BackupWatcher.FileChange.FileSpec">
+            <summary></summary>
+        </member>
+        <member name="P:BackupWatcher.FileChange.ToFileSpec">
+            <summary></summary>
+        </member>
     </members>
 </doc>
