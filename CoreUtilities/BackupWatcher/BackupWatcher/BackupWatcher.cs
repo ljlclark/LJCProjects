@@ -132,6 +132,7 @@ namespace BackupWatcher
         {
           foreach (var extValue in mExtValues)
           {
+            // Skip specified files.
             if (extValue.StartsWith("-"))
             {
               if (fileName.ToLower() == extValue.Substring(1))
@@ -139,6 +140,8 @@ namespace BackupWatcher
                 break;
               }
             }
+
+            // Include specified extensions.
             if (ext.ToLower() == extValue)
             {
               retValue = true;
