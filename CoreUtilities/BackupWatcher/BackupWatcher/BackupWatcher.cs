@@ -162,20 +162,19 @@ namespace BackupWatcher
         var lines = File.ReadAllLines(ChangeFile);
         for (int index = 0; index < lines.Count(); index++)
         {
-          RemoveMatchLine(lines, index, changeType, fileSpec, toFileSpec);
-
-          //var line = lines[index];
-          //GetChangeValues(line, out string lineChangeType
-          //  , out string lineFileSpec, out string lineToFileSpec);
+          // Remove previous changeType as it will be added again.
+          RemoveMatchingLine(lines, index, changeType, fileSpec, toFileSpec);
 
           switch (changeType.ToLower())
           {
             case "copy":
-              RemoveMatchLine(lines, index, "Delete", fileSpec, toFileSpec);
+              // Remove previous redundant delete.
+              RemoveMatchingLine(lines, index, "Delete", fileSpec, toFileSpec);
               break;
 
             case "delete":
-              RemoveMatchLine(lines, index, "Copy", fileSpec, toFileSpec);
+              // Remove previous redundant copy.
+              RemoveMatchingLine(lines, index, "Copy", fileSpec, toFileSpec);
               break;
           }
         }
@@ -184,7 +183,7 @@ namespace BackupWatcher
     }
 
     // Removes the matching line.
-    private void RemoveMatchLine(string[] lines, int index, string changeType
+    private void RemoveMatchingLine(string[] lines, int index, string changeType
       , string fileSpec, string toFileSpec = null)
     {
       var checkLine = CreateChange(changeType, fileSpec, toFileSpec);
@@ -249,7 +248,15 @@ namespace BackupWatcher
     {
       if (IsWatched(e.OldFullPath))
       {
-        WriteChange("Rename", e.OldFullPath, e.FullPath);
+        if (IsWatched(e.FullPath))
+        {
+          WriteChange("Rename", e.OldFullPath, e.FullPath);
+        }
+        else
+        {
+          // New file is not watched so just delete the old file.
+          WriteChange("Delete", e.OldFullPath);
+        }
       }
       else
       {
