@@ -34,7 +34,11 @@ namespace LJCDocObjLib
       SetTypeName(NamespaceValue, Name);
       Doc.TypeName= TypeName;
       AssemblyReflect.SetTypeReference(TypeName);
-
+      // Testing
+      //if ("DbColumns" == Name)
+      //{
+      //  int i = 0;
+      //}
       CreateMethodsData(dataAssembly);
       CreatePropertiesData(dataAssembly);
       CreateFieldsData(dataAssembly);
@@ -84,6 +88,11 @@ namespace LJCDocObjLib
         {
           AssemblyReflect = AssemblyReflect
         };
+        // Testing
+        //if ("LJCSortName" == docMethodName)
+        //{
+        //  int i = 0;
+        //}
         dataMethod.SetIsPublic();
         DataMethods.Add(dataMethod);
       }

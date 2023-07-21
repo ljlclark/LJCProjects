@@ -482,6 +482,7 @@ namespace LJCNetCommon
     }
 
     /// <summary>Sort on ColumnName.</summary>
+    /// <param name="comparer">The comparer function.</param>
     public void LJCSortName(DbColumnNameComparer comparer)
     {
       if (Count != mPrevCount
@@ -494,6 +495,7 @@ namespace LJCNetCommon
     }
 
     /// <summary>Sort on RenameAs.</summary>
+    /// <param name="comparer">The comparer function.</param>
     public void LJCSortProperty(DbColumnPropertyComparer comparer)
     {
       if (Count != mPrevCount
@@ -506,6 +508,7 @@ namespace LJCNetCommon
     }
 
     /// <summary>Sort on RenameAs.</summary>
+    /// <param name="comparer">The comparer function.</param>
     public void LJCSortRenameAs(DbColumnRenameAsComparer comparer)
     {
       if (Count != mPrevCount

@@ -49,6 +49,12 @@ namespace LJCDocObjLib
       Name = Doc.GetMemberName(MethodMemberName);
       OverloadName = overloadName;
 
+      // Testing
+      //if ("DbColumns" == TypeName
+      //  && "LJCSortName" == Name)
+      //{
+      //  int i = 0;
+      //}
       Params = DataCommon.GetDataParams(methodMember.Params);
       Summary = methodMember.Summary;
       Returns = methodMember.Returns;
