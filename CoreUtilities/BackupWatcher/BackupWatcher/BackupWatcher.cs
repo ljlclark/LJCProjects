@@ -75,6 +75,20 @@ namespace BackupWatcher
       return retValue;
     }
 
+    // Checks for  matching line.
+    private bool IsMatchingLine(string line, string changeType
+      , string fileSpec, string toFileSpec = null)
+    {
+      bool retValue = false;
+
+      var change = new FileChange(changeType, fileSpec, toFileSpec);
+      if (line == change.Text())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Check if the fileSpec is being watched.
     private bool IsWatched(string fileSpec)
     {
@@ -118,21 +132,6 @@ namespace BackupWatcher
       return retValue;
     }
 
-    // Removes the matching line.
-    private bool RemoveMatchingLine(ref string line, string changeType
-      , string fileSpec, string toFileSpec = null)
-    {
-      bool retValue = false;
-
-      var change = new FileChange(changeType, fileSpec, toFileSpec);
-      if (line == change.Text())
-      {
-        retValue = true;
-        line = null;
-      }
-      return retValue;
-    }
-
     // Checks if the ChangeFile has a matching line.
     private bool UpdateChangeFile(FileChange change)
     {
@@ -158,18 +157,20 @@ namespace BackupWatcher
           {
             case "copy":
               // Remove previous redundant delete.
-              if (RemoveMatchingLine(ref line, "Delete", change.FileSpec
+              if (IsMatchingLine(line, "Delete", change.FileSpec
                 , change.ToFileSpec))
               {
+                lines[index] = null;
                 scrub = true;
               }
               break;
 
             case "delete":
               // Remove previous redundant copy.
-              if (RemoveMatchingLine(ref line, "Copy", change.FileSpec
+              if (IsMatchingLine(line, "Copy", change.FileSpec
                 , change.ToFileSpec))
               {
+                lines[index] = null;
                 scrub = true;
               }
               break;
@@ -190,7 +191,7 @@ namespace BackupWatcher
       {
         if (UpdateChangeFile(change))
         {
-          File.AppendAllText(ChangeFile, change.Text());
+          File.AppendAllText(ChangeFile, $"{change.Text()}\r\n");
         }
       }
     }
