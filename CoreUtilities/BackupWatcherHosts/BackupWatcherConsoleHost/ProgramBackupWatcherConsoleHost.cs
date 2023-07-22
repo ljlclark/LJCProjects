@@ -1,13 +1,12 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProgramBackupWatcher.cs
+// ProgramBackupWatcherConsoleHost.cs
+using BackupWatcherLib;
 using LJCNetCommon;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
-namespace BackupWatcher
+namespace BackupWatcherConsoleHost
 {
   // The program entry point class.
   internal class Program
@@ -19,10 +18,7 @@ namespace BackupWatcher
         , out string multiFilter);
       if (GetArgs(args, ref watchPath, ref changeFile, ref multiFilter))
       {
-        var _ = new BackupWatcher(watchPath, changeFile)
-        {
-          MultiFilter = multiFilter
-        };
+        var _ = new BackupWatcher(watchPath, changeFile, multiFilter);
 
         Console.WriteLine("Press ENTER to exit.");
         Console.ReadLine();
@@ -73,7 +69,7 @@ namespace BackupWatcher
       var fileSpec = "BackupWatcherDefaults.txt";
       if (File.Exists(fileSpec))
       {
-        IEnumerable<string> lines = File.ReadLines(fileSpec);
+        string[] lines = File.ReadAllLines(fileSpec);
         foreach (string line in lines)
         {
           var tokens = line.Split(',');
