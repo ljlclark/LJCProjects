@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Backup Watcher.cs
+// BackupWatcher.cs
 using LJCNetCommon;
 using System.IO;
 using System.Linq;
@@ -268,23 +268,38 @@ namespace BackupWatcher
 
     #region Public Properties
 
-    /// <summary>Gets or sets the ChangeFile name.</summary>
-    public string ChangeFile { get; set; }
+    /// <summary>Gets or sets the Change file name.</summary>
+    public string ChangeFile
+    {
+      get { return mChangeFile; }
+      set { mChangeFile = NetString.InitString(value); }
+    }
+    private string mChangeFile;
 
-    /// <summary>Gets or sets the MulitFilter value.</summary>
+
+    /// <summary>Gets or sets the Mulitiple filter value.</summary>
     public string MultiFilter
     {
       get { return mMultiFilter; }
       set
       {
-        mMultiFilter = value;
+        mMultiFilter = NetString.InitString(value);
         mExtValues = CreateExtValues(mMultiFilter);
       }
     }
     private string mMultiFilter;
 
-    /// <summary>Gets or sets the WatchPath value.</summary>
-    public string WatchPath { get; set; }
+    /// <summary>Gets or sets the Watch path.</summary>
+    public string WatchPath
+    {
+      get { return mWatchPath; }
+      set
+      {
+        mWatchPath = NetString.InitString(value);
+        mExtValues = CreateExtValues(mMultiFilter);
+      }
+    }
+    private string mWatchPath;
     #endregion
 
     #region Class Data

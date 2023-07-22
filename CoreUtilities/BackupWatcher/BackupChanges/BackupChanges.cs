@@ -19,6 +19,8 @@ namespace BackupChanges
       mChangeFile = changeFile;
     }
 
+    #region Methods
+
     // Applies the change commands.
     /// <include path='items/Apply/*' file='Doc/BackupChanges.xml'/>
     public void Apply(string targetPath)
@@ -104,6 +106,7 @@ namespace BackupChanges
       }
       return retValue;
     }
+    #endregion
 
     private readonly string mChangeFile;
     private readonly string mSourceFolder;

@@ -103,8 +103,8 @@ namespace LJCDBMessage
 
     // Creates and adds the element from the supplied values.
     /// <include path='items/Add2/*' file='Doc/DbFilters.xml'/>
-    public DbFilter Add(string name, DbConditionSet dbConditionSet, DbFilters dbFilters = null
-      , string booleanOperator = "and")
+    public DbFilter Add(string name, DbConditionSet dbConditionSet
+      , DbFilters dbFilters = null, string booleanOperator = "and")
     {
       DbFilter retValue = new DbFilter()
       {

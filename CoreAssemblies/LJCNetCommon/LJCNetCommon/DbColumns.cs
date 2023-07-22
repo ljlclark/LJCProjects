@@ -83,11 +83,7 @@ namespace LJCNetCommon
     }
 
     // Creates a ColumnNames list from a DataObject.
-    /// <summary>
-    /// Creates a PropertyNames list from a DataObject.
-    /// </summary>
-    /// <param name="dataObject"></param>
-    /// <returns>The PropertyNames list.</returns>
+    /// <include path='items/LJCGetPropertyNames/*' file='Doc/DbColumns.xml'/>
     public static List<string> LJCGetPropertyNames(object dataObject)
     {
       List<string> retValue = null;
@@ -109,9 +105,6 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-    #endregion
-
-    #region Static Conversion Functions
 
     // Creates a DbValues object from a DbColumns object.
     /// <include path='items/DbValues/*' file='Doc/DbColumns.xml'/>
@@ -261,45 +254,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public void LJCSerialize(string fileSpec = null)
-    {
-      if (false == NetString.HasValue(fileSpec))
-      {
-        fileSpec = LJCDefaultFileName;
-      }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
-    }
-    #endregion
-
-    #region Other Methods
-
-    // Sets the IsChanged value to false for all elements in the collection.
-    /// <include path='items/LJCClearChanged/*' file='Doc/DbColumns.xml'/>
-    public void LJCClearChanged()
-    {
-      foreach (DbColumn dbColumn in this)
-      {
-        dbColumn.IsChanged = false;
-      }
-    }
-
-    // Gets a collection of changed columns.
-    /// <include path='items/LJCGetChanged/*' file='Doc/DbColumns.xml'/>
-    public DbColumns LJCGetChanged()
-    {
-      List<DbColumn> columns;
-      DbColumns retValue = new DbColumns();
-
-      columns = FindAll(x => true == x.IsChanged);
-      foreach (DbColumn dbColumn in columns)
-      {
-        retValue.Add(dbColumn.Clone());
-      }
-      return retValue;
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -344,62 +298,43 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
-    public static string LJCGetMinSqlDate()
+    // Serializes the collection
+    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    public void LJCSerialize(string fileSpec = null)
     {
-      return "1753/01/01 00:00:00";
-    }
-
-    // Sets the caption properties.
-    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
-    public void LJCSetColumnCaptions(DbColumns dbColumns)
-    {
-      DbColumn searchColumn;
-
-      if (NetCommon.HasItems(dbColumns))
+      if (false == NetString.HasValue(fileSpec))
       {
-        foreach (DbColumn dbColumn in dbColumns)
-        {
-          // *** Next Statement *** Change - 11/24/22
-          //searchColumn = LJCSearchName(dbColumn.ColumnName);
-          searchColumn = LJCSearchPropertyName(dbColumn.PropertyName);
-          if (searchColumn != null)
-          {
-            dbColumn.Caption = searchColumn.Caption;
-          }
-        }
+        fileSpec = LJCDefaultFileName;
+      }
+      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+    }
+    #endregion
+
+    #region Data Methods
+
+    // Sets the IsChanged value to false for all elements in the collection.
+    /// <include path='items/LJCClearChanged/*' file='Doc/DbColumns.xml'/>
+    public void LJCClearChanged()
+    {
+      foreach (DbColumn dbColumn in this)
+      {
+        dbColumn.IsChanged = false;
       }
     }
 
-    // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
-    public void MapNames(string columnName, string propertyName = null
-      , string renameAs = null, string caption = null)
+    // Gets a collection of changed columns.
+    /// <include path='items/LJCGetChanged/*' file='Doc/DbColumns.xml'/>
+    public DbColumns LJCGetChanged()
     {
-      DbColumn dbColumn = LJCSearchColumnName(columnName);
-      SetMapValues(dbColumn, propertyName, renameAs, caption);
-    }
+      List<DbColumn> columns;
+      DbColumns retValue = new DbColumns();
 
-    // Sets the Map values.
-    private void SetMapValues(DbColumn dbColumn, string propertyName = null
-      , string renameAs = null, string caption = null)
-    {
-      if (dbColumn != null)
+      columns = FindAll(x => true == x.IsChanged);
+      foreach (DbColumn dbColumn in columns)
       {
-        if (propertyName != null)
-        {
-          dbColumn.PropertyName = propertyName;
-        }
-        if (renameAs != null)
-        {
-          dbColumn.RenameAs = renameAs;
-        }
-        if (caption != null)
-        {
-          dbColumn.Caption = caption;
-        }
+        retValue.Add(dbColumn.Clone());
       }
+      return retValue;
     }
     #endregion
 
@@ -517,6 +452,67 @@ namespace LJCNetCommon
         mPrevCount = Count;
         Sort(comparer);
         mSortType = SortType.RenameAs;
+      }
+    }
+    #endregion
+
+    #region Other Public Methods
+
+    // Get the minimum date value.
+    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
+    public static string LJCGetMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+
+    // Sets the caption properties.
+    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetColumnCaptions(DbColumns dbColumns)
+    {
+      DbColumn searchColumn;
+
+      if (NetCommon.HasItems(dbColumns))
+      {
+        foreach (DbColumn dbColumn in dbColumns)
+        {
+          // *** Next Statement *** Change - 11/24/22
+          //searchColumn = LJCSearchName(dbColumn.ColumnName);
+          searchColumn = LJCSearchPropertyName(dbColumn.PropertyName);
+          if (searchColumn != null)
+          {
+            dbColumn.Caption = searchColumn.Caption;
+          }
+        }
+      }
+    }
+
+    // Maps the column property and rename values.
+    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
+    public void MapNames(string columnName, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      DbColumn dbColumn = LJCSearchColumnName(columnName);
+      SetMapValues(dbColumn, propertyName, renameAs, caption);
+    }
+
+    // Sets the Map values.
+    private void SetMapValues(DbColumn dbColumn, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      if (dbColumn != null)
+      {
+        if (propertyName != null)
+        {
+          dbColumn.PropertyName = propertyName;
+        }
+        if (renameAs != null)
+        {
+          dbColumn.RenameAs = renameAs;
+        }
+        if (caption != null)
+        {
+          dbColumn.Caption = caption;
+        }
       }
     }
     #endregion

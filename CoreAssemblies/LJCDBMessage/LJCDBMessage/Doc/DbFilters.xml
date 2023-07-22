@@ -116,10 +116,10 @@
     <summary>
       Creates the Soundex filters from the supplied values.
     </summary>
-    <param name="lColumnName">The Letter Soundex column name.</param>
-    <param name="lSearchValue">The Letter Search value.</param>
     <param name="pColumnName">The Phonetic Soundex column name.</param>
     <param name="pSearchValue">The Phonetic Search value.</param>
+    <param name="lColumnName">The Letter Soundex column name.</param>
+    <param name="lSearchValue">The Letter Search value.</param>
     <returns>The filters object.</returns>
   </SoundexFilters>
   

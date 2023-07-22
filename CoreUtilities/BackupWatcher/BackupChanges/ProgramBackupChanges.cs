@@ -27,6 +27,8 @@ namespace BackupChanges
       }
     }
 
+    #region Private Functions
+
     // Prompts for and adds the drive letter if not included.
     private static void AddDriveLetter(ref string targetPath)
     {
@@ -138,5 +140,6 @@ namespace BackupChanges
       }
       return retValue;
     }
+    #endregion
   }
 }

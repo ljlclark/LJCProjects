@@ -1,16 +1,15 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// FileChange.cs
+using LJCNetCommon;
 
 namespace BackupWatcher
 {
-  /// <summary></summary>
+  /// <summary>Represents the File change object.</summary>
   public class FileChange
   {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="changeType"></param>
-    /// <param name="fileSpec"></param>
-    /// <param name="toFileName"></param>
+    // Initializes the object instance.
+    /// <include path='items/FileChangeC/*' file='Doc/FileChange.xml'/>
     public FileChange(string changeType, string fileSpec, string toFileName = null)
     {
       ChangeType = changeType;
@@ -18,7 +17,7 @@ namespace BackupWatcher
       ToFileSpec = toFileName;
     }
 
-    /// <summary></summary>
+    /// <summary>Returns the Change text.</summary>
     public string Text()
     {
       string retValue = ChangeType;
@@ -30,13 +29,31 @@ namespace BackupWatcher
       return retValue;
     }
 
-    /// <summary></summary>
-    public string ChangeType { get; set; }
+    #region Public Properties
 
-    /// <summary></summary>
-    public string FileSpec { get; set; }
+    /// <summary>Gets or sets the Change type.</summary>
+    public string ChangeType
+    {
+      get { return mChangeType; }
+      set { mChangeType = NetString.InitString(value); }
+    }
+    private string mChangeType;
 
-    /// <summary></summary>
-    public string ToFileSpec { get; set; }
+    /// <summary>Gets or sets the FileSpec.</summary>
+    public string FileSpec
+    {
+      get { return mFileSpec; }
+      set { mFileSpec = NetString.InitString(value); }
+    }
+    private string mFileSpec;
+
+    /// <summary>Gets or sets the To FileSpec.</summary>
+    public string ToFileSpec
+    {
+      get { return mToFileSpec; }
+      set { mToFileSpec = NetString.InitString(value); }
+    }
+    private string mToFileSpec;
+    #endregion
   }
 }

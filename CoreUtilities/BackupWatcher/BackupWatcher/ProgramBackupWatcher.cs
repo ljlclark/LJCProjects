@@ -29,6 +29,8 @@ namespace BackupWatcher
       }
     }
 
+    #region Private Functions
+
     // Gets the command line parameters.
     private static bool GetArgs(string[] args, ref string watchPath
       , ref string changeFile, ref string multiFilter)
@@ -96,5 +98,6 @@ namespace BackupWatcher
         }
       }
     }
+    #endregion
   }
 }

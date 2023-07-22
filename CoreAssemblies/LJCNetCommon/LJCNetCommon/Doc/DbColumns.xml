@@ -23,6 +23,38 @@
     <param name="dataDefinition">The data definitions.</param>
     <returns>The DbColumns collection.</returns>
   </LJCCreateObjectColumns>
+  <LJCGetPropertyNames>
+    Creates a ColumnNames list from a DataObject.
+    <summary>
+      Creates a PropertyNames list from a DataObject.
+    </summary>
+    <param name="dataObject">The DataObject value.</param>
+    <returns>The PropertyNames list.</returns>
+  </LJCGetPropertyNames>
+  <DbValues>
+    <summary>
+      Creates a
+      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      object from a
+      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
+      (E)
+    </summary>
+    <param name="dbColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        DbColumns dbColumns = new DbColumns();
+        dbColumns.Add("Column1");
+        dbColumns.Add("Column2");
+
+        DbValues dbValues = DbColumns;
+      </code>
+    </example>
+  </DbValues>
 
   <!-- Collection Methods -->
   <Add>
@@ -104,34 +136,15 @@
       same as the property name.
     </remarks>
   </LJCAddPropertyAs>
-
-  <!-- Conversions -->
-  <DbValues>
+  <LJCGetColumns>
     <summary>
-      Creates a
-      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
-      object from a
-      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
-      (E)
+      Returns a set of columns that match the supplied list.
     </summary>
-    <param name="dbColumns">
-      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
-      object.
-    </param>
-    <example>
-      <code>
-        using LJCNetCommon;
+    <param name="propertyNames">The column property names.</param>
+    <returns>The created object.</returns>
+  </LJCGetColumns>
 
-        DbColumns dbColumns = new DbColumns();
-        dbColumns.Add("Column1");
-        dbColumns.Add("Column2");
-        
-        DbValues dbValues = DbColumns;
-      </code>
-    </example>
-  </DbValues>
-
-  <!-- Public Search Methods -->
+  <!-- Data Methods -->
   <LJCClearChanged>
     <summary>
       Sets the IsChanged value to false for all elements in the collection.
@@ -143,13 +156,8 @@
     </summary>
     <returns>The changed columns list.</returns>
   </LJCGetChanged>
-  <LJCGetColumns>
-    <summary>
-      Returns a set of columns that match the supplied list.
-    </summary>
-    <param name="propertyNames">The column property names.</param>
-    <returns>The created object.</returns>
-  </LJCGetColumns>
+
+  <!-- Search and Sort Methods -->
   <LJCSearchPropertyName>
     <summary>
       Finds and returns the column that contains the supplied property name.
