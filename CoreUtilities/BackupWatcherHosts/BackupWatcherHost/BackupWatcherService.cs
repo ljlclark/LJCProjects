@@ -1,34 +1,37 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
-// Licensed under the MIT License.
-// ProgramBackupWatcherConsoleHost.cs
-using BackupWatcherLib;
+﻿using BackupWatcherLib;
 using LJCNetCommon;
 using System;
 using System.IO;
+using System.ServiceProcess;
 
-namespace BackupWatcherConsoleHost
+namespace BackupWatcherHost
 {
-  // The program entry point class.
-  internal class Program
+  public partial class BackupWatcherService : ServiceBase
   {
-    // The program entry point function.
-    static void Main(string[] args)
+    public BackupWatcherService()
+    {
+      InitializeComponent();
+    }
+
+    protected override void OnStart(string[] args)
     {
       GetDefaults(out string watchPath, out string changeFile
         , out string multiFilter);
       if (GetArgs(args, ref watchPath, ref changeFile, ref multiFilter))
       {
-        var _ = new BackupWatcher(watchPath, changeFile, multiFilter);
-
-        Console.WriteLine("Press ENTER to exit.");
-        Console.ReadLine();
+        mBackupWatcher = new BackupWatcher(watchPath, changeFile, multiFilter);
       }
+    }
+
+    protected override void OnStop()
+    {
+      mBackupWatcher = null;
     }
 
     #region Private Functions
 
     // Gets the command line parameters.
-    private static bool GetArgs(string[] args, ref string watchPath
+    private bool GetArgs(string[] args, ref string watchPath
       , ref string changeFile, ref string multiFilter)
     {
       bool retValue = true;
@@ -59,7 +62,7 @@ namespace BackupWatcherConsoleHost
     }
 
     // Gets the default parameters.
-    private static void GetDefaults(out string watchPath
+    private void GetDefaults(out string watchPath
       , out string changeFile, out string multiFilter)
     {
       watchPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
@@ -95,5 +98,7 @@ namespace BackupWatcherConsoleHost
       }
     }
     #endregion
+
+    BackupWatcher mBackupWatcher;
   }
 }
