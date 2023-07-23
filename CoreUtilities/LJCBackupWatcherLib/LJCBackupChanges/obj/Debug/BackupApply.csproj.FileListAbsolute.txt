@@ -1,0 +1,10 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupApply.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupApply.csproj.SuggestedBindingRedirects.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupApply.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupApply.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\bin\Debug\BackupChanges.exe.config
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\bin\Debug\BackupChanges.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\bin\Debug\BackupChanges.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupChanges.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\BackupApply\obj\Debug\BackupChanges.pdb

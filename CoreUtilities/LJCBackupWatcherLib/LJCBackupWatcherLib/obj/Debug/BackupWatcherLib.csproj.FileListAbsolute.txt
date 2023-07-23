@@ -1,0 +1,16 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\bin\Debug\BackupWatcherLib.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\bin\Debug\BackupWatcherLib.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\obj\Debug\BackupWatcherLib.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\obj\Debug\BackupWatcherLib.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\obj\Debug\BackupWatcherLib.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\obj\Debug\BackupWatcherLib.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcher\obj\Debug\BackupWatcherLib.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\bin\Debug\BackupWatcherLib.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\bin\Debug\BackupWatcherLib.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\bin\Debug\LJCNetCommon.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\obj\Debug\BackupWatcherLib.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\obj\Debug\BackupWatcherLib.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\obj\Debug\BackupWatcherLib.csproj.CopyComplete
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\obj\Debug\BackupWatcherLib.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcherLib\BackupWatcherLib\obj\Debug\BackupWatcherLib.pdb

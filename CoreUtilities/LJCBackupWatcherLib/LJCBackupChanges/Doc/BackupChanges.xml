@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- BackupChanges.xml -->
+<items>
+  <BackupChangesC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="startFolder">The start folder of the matching path.</param>
+    <param name="changeFile">The Change file name.</param>
+  </BackupChangesC>
+  <Apply>
+    <summary>
+      Applies the change commands.
+    </summary>
+    <param name="targetPath">The Target file.</param>
+  </Apply>
+</items>

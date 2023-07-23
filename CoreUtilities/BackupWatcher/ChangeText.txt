@@ -1,0 +1,213 @@
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\clearbuild.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdataaccess\ljcdataaccess\doc\projectdataaccess.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdbclientlib\ljcdbclientlib\datamanager.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdbclientlib\ljcdbclientlib\objectmanager.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdbclientlib\ljcdbclientlib\doc\projectdbclientlib.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdbservicehosts\ljcdbservicehost\bin\debug\installutil.installlog
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcdbviewdal\ljcdbviewdal\manager\viewjoincolumnmanager.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcgriddatalib\ljcgriddatalib\tablegriddata.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcgriddatalib\ljcgriddatalib\doc\projectgriddatalib.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcgriddatalib\ljcgriddatalib\doc\tablegrid.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljclibraries\ljcwinformcontrols\doc\ljcdatagrid.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljclibraries\ljcwinformcontrols\doc\projectcontrols.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcnetcommon\ljcnetcommon\netstring.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcnetcommon\ljcnetcommon\doc\keyitems.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcnetcommon\ljcnetcommon\doc\netstring.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcpagination\clearpagination.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcpagination\ljcpaginationdal\doc\dataprocessmanager.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreassemblies\ljcpagination\ljcpaginationdal\manager\dataprocessmanager.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreutilities\actionbackupwatcher\watchljcprojectsdev.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreutilities\ljccodelinecounter\ljccodelinecounter\bin\debug\projectfindlinesx.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreutilities\ljcdoclib\common\manager.xml
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\coreutilities\ljcdoclib\ljcdocgen\programdocgen.cs
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP\coreutilities\ljcdoclib\ljcdocgen\bin\debug\ljccodedocgroups\ljcnetcommon.xml
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP\coreutilities\ljcdoclib\ljcdocgen\bin\debug\ljccodedocgroups\ljcnetcommon_netcommon.xml
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP\coreutilities\ljcdoclib\ljcdocgen\bin\debug\ljccodedocgroups\ljcnetcommon_netstring.xml
+
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\templates\assemblytemplate.html	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\templates\typetemplate.html	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\appsettings.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccess.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessexecutenonquery.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessexecutescript.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessexecutescripttext.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessfilldatatable.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessgetdatareader.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessgetdataset.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessgetdatatable.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessgetproceduredatatable.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataaccessgetschemaonly.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataconfiggetconnectionstring.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataconfiggetconnectionstringfromtext.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataconfiggetprovidername.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dataconfigsqlintegratedconnectionstring.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanager.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanageradd.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanagerdelete.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanagerload.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanagerretrieve.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\datamanagerupdate.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbcolumn#ctor.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbcolumnop_implicit.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbconditionset.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccess#ctor.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccess.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessadd.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessdelete.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessexecute.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessexecuteclientsql.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessload.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessloadclientsql.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessretrieve.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessretrieveclientsql.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbdataaccessupdate.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbfilters.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbjoins.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbquery.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbrequest.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbservice.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\dbvalueformatvalue.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcassemblyreflectgetmethodsyntax.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcassemblyreflectsettypereference.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljccryptographydecrypt.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccess.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessexecute.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessexecutenonquery.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessexecutescript.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessexecutescripttext.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessfilldatatable.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessgetdatareader.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessgetdataset.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessgetdatatable.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessgetproceduredatatable.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessgetschemaonly.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcdataaccessselect.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcformcommonselectfile.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\ljcreflectsetpropertyvalue.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\mysqldataaccessexecutescript.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\mysqldataaccessexecutescripttext.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\netcommonbytestomemstream.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\netcommongetint.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\netcommongetlong.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\netcommongetshort.dat	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\netcommonmemstreamtobytes.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2add.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2delete.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2executeclientsql.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2load.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2loadclientsql.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2retrieve.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2retrieveclientsql.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\objectmanager`2update.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\resultgriddata.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\resultgriddatasetdisplaycolumns.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgen\bin\debug\usertypefiles\textdatareadergetvalue.dat	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\genassembly.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\genfield.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\genmethod.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\genproperty.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\genroot.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\gentype.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\valuesdoclib.cs	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdocgenlib\createxml\createassemblyxml.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\createxml\createpropertyxml.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocgenlib\createxml\createtypexml.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\ljcdoclibdal.csproj	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\bin\debug\sqlscript\1docgentables.sql	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\bin\debug\sqlscript\sp_docclassshow.sql	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\bin\debug\sqlscript\sp_resetsequence.sql	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\data\dataassemblygroups.cs	only in C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP
+.\coreutilities\ljcdoclib\ljcdoclibdal\data\docmethod.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\data\docmethodgroup.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\data\docmethods.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\manager\docmethodgroupheadingmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdoclibdal\manager\docmethodmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\dataassembly.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\datacommon.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\datafield.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\datamethods.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\dataproperties.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\dataproperty.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\dataroot.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\datacommon.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\datamethod.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\datamethods.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\dataproperties.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\dataproperty.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocobjlib\doc\datatype.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocxmlobjlib\doc.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcdoclib\ljcdocxmlobjlib\doc\doc.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\cleargendocedit.cmd	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\ljcgendocedit.csproj	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\ljcgendoclist.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\ljcgendoclistcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblydetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblydetail.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblydetail.resx	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblygroupdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblygroupgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\assemblytab\assemblyitemgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classgroupheading\classheadingdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classgroupheading\classheadinggridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classgroupheading\classheadingselect.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classgroupheading\classheadingselect.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classgroupheading\classheadingselectcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classselect\classgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classselect\classselect.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classselect\classselect.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classselect\classselectcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\assemblyitemcombocode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classdetail.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classdetail.resx	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classgroupdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classgroupdetail.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classgroupdetail.resx	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classgroupgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\classtab\classitemgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodgroupheading\methodheadingdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodgroupheading\methodheadinggridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodgroupheading\methodheadingselect.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodgroupheading\methodheadingselect.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodgroupheading\methodheadingselectcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodselect\methodgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodselect\methodselect.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodselect\methodselect.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodselect\methodselectcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\classitemcombocode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methoddetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methoddetail.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methoddetail.resx	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methodgroupdetail.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methodgroupdetail.designer.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methodgroupdetail.resx	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methodgroupgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgendocedit\ljcgendocedit\forms\methodtab\methoditemgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\cleargentextdata.cmd	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\ljcgentablecode\doc\programgentablecode.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\ljcgentext\doc\program.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\ljcgentextedit\doc\projectgentextedit.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\ljcgentextlib\generatetext.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcgentext\ljcgentextlib\doc\projectgentextlib.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\coreutilities\ljcsystembuilder\ljcsystembuilddal\manager\buildsolutionmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\genealogy\ljcgenealogydal\manager\datainstancemanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\genealogy\ljcgenealogydal\manager\individualmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljcdatatransformdal\doc\dataprocessmanager.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljcdatatransformdal\manager\dataprocessmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljcdatatransformdal\manager\processstatusmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljcdatatransformdal\manager\steptaskmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljcdatatransformdal\manager\taskstatusmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcdatatransform\ljctransformmanager\forms\processgroup\list\dataprocessgridcode.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\addressmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\businessmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\codetypeclassmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\codetypemanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\facilitydbmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\fixturemanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\personmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcfacilitymanager\ljcfacilitymanagerdal\manager\unitmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcsales\ljcsalesdal\manager\inventorystatusmanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcsales\ljcsalesmanager\bin\debug\ljcsalesdal.xml	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+.\sampleapps\ljcunitmeasure\ljcunitmeasuredal\manager\unitmeasuremanager.cs	different (C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev is more recent)
+-- 216 files listed
