@@ -66,7 +66,7 @@ namespace LJCBackupWatcherHost
       , out string changeFile, out string multiFilter)
     {
       watchPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
-      changeFile = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\ActionBackupWatcher\Bin\ChangeFile.txt";
+      changeFile = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin\ChangeFile.txt";
       multiFilter = @"*.cs, *.cproj, *.sln, *.config, *.cmd, Doc\*.xml, -ChangeFile.txt, *.txt";
 
       var fileSpec = "BackupWatcherDefaults.txt";
