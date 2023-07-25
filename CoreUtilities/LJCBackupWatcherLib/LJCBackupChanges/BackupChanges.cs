@@ -39,7 +39,10 @@ namespace LJCBackupChanges
           }
           fileChange.ChangeType = tokens[0];
           fileChange.FileSpec = tokens[1];
-          fileChange.ToFileSpec = tokens[2];
+          if (tokens.Length > 2)
+          {
+            fileChange.ToFileSpec = tokens[2];
+          }
 
           string fileSpec = fileChange.FileSpec;
           string targetFileSpec = GetTargetFileSpec(fileSpec);

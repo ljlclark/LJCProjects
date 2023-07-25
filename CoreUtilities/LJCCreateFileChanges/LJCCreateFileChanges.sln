@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCCreateFileChanges", "LJCCreateFileChanges\LJCCreateFileChanges.csproj", "{E7E8F7F3-BB43-4A50-8028-BA49DEFC1E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCCreateFileChangesLib", "LJCCreateFileChangesLib\LJCCreateFileChangesLib.csproj", "{ABFC1318-DB28-42C1-A03B-1B22DCFD2A92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7E8F7F3-BB43-4A50-8028-BA49DEFC1E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E8F7F3-BB43-4A50-8028-BA49DEFC1E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E8F7F3-BB43-4A50-8028-BA49DEFC1E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E8F7F3-BB43-4A50-8028-BA49DEFC1E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFC1318-DB28-42C1-A03B-1B22DCFD2A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFC1318-DB28-42C1-A03B-1B22DCFD2A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFC1318-DB28-42C1-A03B-1B22DCFD2A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFC1318-DB28-42C1-A03B-1B22DCFD2A92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A372C5CD-9510-4FD4-9BF8-EC4589E8E5A4}
+	EndGlobalSection
+EndGlobal
