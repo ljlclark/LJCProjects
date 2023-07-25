@@ -5,16 +5,24 @@ echo Licensed under the MIT License.
 rem BackupLocal.cmd
 echo:
 
+set sourcePath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev"
 set changeFile="bin\ChangeFile.txt"
-set sourceFolder="LJCProjectsDev"
+set multiFilter="*.cs|*.cproj|*.sln|*.config|*.cmd|-ChangeFile.txt|*.txt"
+set startFolder="LJCProjectsDev"
 
 echo -----
 set targetPath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage"
-echo bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
+del %changeFile%
+echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter%
+bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter%
+echo bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
 bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
 
 echo -----
 set targetPath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjects"
-echo bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
+del %changeFile%
+echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter%
+bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter%
+echo bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
 bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
 pause

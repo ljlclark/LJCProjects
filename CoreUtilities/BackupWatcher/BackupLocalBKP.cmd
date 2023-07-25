@@ -12,4 +12,3 @@ echo -----
 set targetPath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP"
 echo bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
 bin\LJCBackupChanges %targetPath% %changeFile% %sourceFolder%
-pause

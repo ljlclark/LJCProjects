@@ -4,16 +4,21 @@ rem ClearBackupWatcherHosts.cmd
 
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
-set Solution=..\BackupWatcherHosts
+set Solution=..\LJCBackupWatcherHosts
 set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 
 :ClearAll
-set Solution=CoreUtilities\BackupWatcherHosts
+set Solution=CoreUtilities\LJCBackupWatcherHosts
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear
-set Project=BackupWatcherConsoleHost
-set File=BackupWatcherConsoleHost
+set Project=LJCBackupWatcherConsoleHost
+set File=LJCBackupWatcherConsoleHost
+call %ClearBuild%
+rmdir %Solution%\%Project%\bin\Release
+
+set Project=LJCBackupWatcherHost
+set File=LJCBackupWatcherHost
 call %ClearBuild%
 rmdir %Solution%\%Project%\bin\Release

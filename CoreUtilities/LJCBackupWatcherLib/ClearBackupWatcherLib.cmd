@@ -4,21 +4,26 @@ rem ClearBackupWatcherLib.cmd
 
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
-set Solution=..\BackupWatcherLib
+set Solution=..\LJCBackupWatcherLib
 set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 
 :ClearAll
-set Solution=CoreUtilities\BackupWatcherLib
+set Solution=CoreUtilities\LJCBackupWatcherLib
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear
-set Project=BackupChanges
-set File=BackupChanges
+set Project=LJCBackupChanges
+set File=LJCBackupChanges
 call %ClearBuild%
 rmdir %Solution%\%Project%\bin\Release
 
-set Project=BackupWatcherLib
-set File=BackupWatcherLib
+set Project=LJCBackupChangesLib
+set File=LJCBackupChangesLib
+call %ClearBuild%
+rmdir %Solution%\%Project%\bin\Release
+
+set Project=LJCBackupWatcherLib
+set File=LJCBackupWatcherLib
 call %ClearBuild%
 rmdir %Solution%\%Project%\bin\Release
