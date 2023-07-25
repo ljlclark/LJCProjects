@@ -1,0 +1,7 @@
+GenSectionNone() 
+  BeginSection()
+    AddActiveSection()
+    GenSection(section)
+      GenRepeatItem()
+        SectionDirective()
+          BeginSection()

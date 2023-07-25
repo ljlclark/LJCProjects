@@ -1,0 +1,125 @@
+AppDataAccessConfig.txt
+
+Data Access Configuration
+
+Applications that access a database use an external database configuration XML
+file for the database connection values. They also use an external connection
+template file for the connection string format.
+
+DataConfigs.xml - The collection of Data Configurations.
+
+This is the external database connection values XML file. It can contain one or
+more named connection values definitions. These definitions are usually referred
+to as Data Configurations or DataConfigs.
+
+<?xml version="1.0"?>
+<DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataConfig>
+    <Name>PersonTest</Name>
+    <ConnectionTypeName>SQLServer</ConnectionType>
+    <DbServer>DbServiceName</DbServer>
+    <Database>DatabaseName</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>TestMySql</Name>
+    <ConnectionTypeName>MySQL</ConnectionType>
+    <DbServer>LocalHost</DbServer>
+    <Database>DatabaseName</Database>
+    <UserID>root</UserID>
+    <Pswd>Password</Pswd>
+  </DataConfig>
+</DataConfigs>
+
+The ConnectionTypeName value references the associated named connection string
+template. This is the connection template that will be used for the data
+configuration.
+
+ConnectionTemplate.xml - The collection of Connection String templates.
+
+A connection template contains the connection string format with replaceable
+parameters. These replaceable parameters are populated with the associated
+connection values from the Data Configuration.
+
+Value      Parameter
+DbServer   {DbServer}
+Database   {Database}
+UserID     {UID}
+Pswd       {PSWD}
+
+<?xml version="1.0"?>
+<ConnectionTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConnectionTemplate>
+    <Name>SQLServer</Name>
+    <Template>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True</Template>
+  </ConnectionTemplate>
+  <ConnectionTemplate>
+    <Name>MySQL</Name>
+    <Template>server={DbServer}; UserId={UID}; Password={PSWD}; database={Database}</Template>
+  </ConnectionTemplate>
+</ConnectionTemplates>
+
+These two files must be available in the same folder as the calling program.
+
+
+Copy of Data Configuration files.
+
+The DataConfig files in project LJCDataAccessConfig\LJCDataAccessConfig are
+considered the master copies. Many other projects update their DataConfig files
+from this location just before the build process.
+
+This update occurs in the UpdateAppName.cmd command file which appears in the
+solution folder. The updates normally occur in the Runtime-only section.
+
+rem *****************************
+rem *** Runtime-only Binaries ***
+
+rem ------------------------------------
+set to=%runRoot%ProjectFolder\%bin%
+
+set src=LJCDataAccessConfig\LJCDataAccessConfig
+copy %root%%src%\DataConfigs.xml %to%
+copy %root%%src%\ConnectionTemplates.xml %to%
+
+Projects that update from the master DataConfigs:
+  GenealogyManager\GenealogyManager
+  GenealogyManager\LJCGenPageGen
+
+  LJCAppManager\LJCAppManager
+  LJCDataAccess\LJCDataAccessTest
+  LJCDataManagerTest\LJCDataManagerTest
+  LJCDataTransform\TransformServiceTest
+  LJCDBClientLib\TestObjectManager
+  LJCDBServiceHosts\LJCDBServiceConsoleHost
+
+  LJCDBServiceLib\ConfigTestConsole
+  LJCDBServiceLib\TestDbDataAccess
+
+  LJCDBViewDAL\ConsoleApp2
+  LJCDocAppManager\LJCDocAppManager
+  LJCExecuteScript\LJCExecuteScript
+  
+  LJCFacilityManager\LJCFacilityManager
+  LJCFacilityManager\FacilityForm
+
+  LJCFacilityManagerSetup\LJCFacilityManagerSetup
+  LJCGenText\LJCGenTableCode
+  
+  LJCRegionManger\LJCRegionManager
+  LJCRegionManager\LJCRegionForm
+
+  LJCSQLUtilLib\ForeignKeyManagerTest
+  LJCUnitMeasure\LJCUnitMeasure
+  LJCViewBuilder\LJCViewBuilder
+  LJCViewEditor\LJCViewEditor
+  
+
+LJCDataAccessConfig.dll
+
+This is the assembly with classes for representing and accessing the contents of
+the DataConfigs.xml and ConnectionTemplates.xml files.
+
+It is documented in the CodeDoc pages Group: Data Libraries.
+
+The CodeDoc main page is CodeDoc.html.

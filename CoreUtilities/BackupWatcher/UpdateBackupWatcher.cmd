@@ -22,6 +22,9 @@ set to=Bin
 set src=LJCBackupWatcherLib\LJCBackupChanges\%bin%
 copy %utilRoot%%src%\LJCBackupChanges.exe %to%
 
+set src=LJCBackupWatcherLib\LJCBackupChangesLib\%bin%
+copy %utilRoot%%src%\LJCBackupChangesLib.dll %to%
+
 set src=LJCBackupWatcherLib\LJCBackupWatcherLib\%bin%
 copy %utilRoot%%src%\LJCBackupWatcherLib.dll %to%
 

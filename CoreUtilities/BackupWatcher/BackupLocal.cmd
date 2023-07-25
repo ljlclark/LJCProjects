@@ -5,6 +5,8 @@ echo Licensed under the MIT License.
 rem BackupLocal.cmd
 echo:
 
+del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\Build.txt"
+del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\Update.txt"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\ProjectFindLinesHTMLX.cmd "
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\ProjectFindLinesX.cmd"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\ProjectFindLinesXMLX.cmd"

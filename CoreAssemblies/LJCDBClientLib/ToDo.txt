@@ -1,0 +1,2 @@
+Refactor encryption from DataManager into separate class.
+Add SQLManager back into class?

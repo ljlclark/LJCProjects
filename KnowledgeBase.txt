@@ -1,0 +1,136 @@
+***************************************************
+*** Using Reflection to set Data Object properties.
+LJCDBClientLib
+  ObjectManager
+    CreateData(DbValues);
+
+LJCDBMessage
+  DBQueryCommon
+    SetObjectValues(dbValues, object dataObject);
+
+  ResultConverter
+    CreateData(DbColumns);
+    CreateData(DbValues);
+    CreateDataFromTable(DataTable, DataRow, DbColumns dataDefinition);
+
+LJCNetCommon
+  LJCReflect
+    SetPropertyValue(string propertyName, object value);
+    SetValue(string PropertyName, object value, PropertyInfo propertyInfo = null);
+
+***************************************************
+*** Get the table result name from the dataDefinition.
+LJCDBDataAccessLib
+  ResultCommon
+    GetRowValues(DbValues, DataRow)
+
+***************************************************
+*** Get the property name from the dataDefinition that matches a ColumnName to the
+  RenameAs or ColumnName properties.
+LJCDBMessage
+  ResultConverter
+    GetPropertyName(DbColumns dataDefinition, string columnName);
+
+***************************************************
+*** Get or set a value as a specific type.
+LJCLibraries.LJCWinFormControls
+  LJCGridRow
+    string LJCGetCellText(string columnName);
+    int LJCGetInt32(int key);
+    int LJCGetInt32(string key);
+    long LJCGetInt64(string key);
+    string LJCGetString(int key);
+    string LJCGetString(string key);
+    int LJCSetInt32(int key);
+    int LJCSetInt32(string key);
+    long LJCSetInt64(string key);
+
+LJCNetCommon
+  DbColumns
+    bool LJCGetBoolean(string propertyName);
+    byte GetByte(string propertyName);
+    char GetChar(string propertyName);
+    DateTime LJCGetDbDateTime(string propertyName);
+    decimal LJCGetDecimal(string propertyName);
+    double GetDouble(string propertyName);
+    short LJCGetInt16(string propertyName);
+    int LJCGetInt32(string propertyName);
+    long LJCGetInt64(string propertyName);
+    float GetSingle(string propertyName);
+    string LJCGetValue(string propertyName);
+    void LJCSetValue(propertyName, object value);
+
+  DbValues
+    bool LJCGetBoolean(string propertyName);
+    byte GetByte(string propertyName);
+    char GetChar(string propertyName);
+    DateTime LJCGetDbDateTime(string propertyName);
+    decimal LJCGetDecimal(string propertyName);
+    double GetDouble(string propertyName);
+    short LJCGetInt16(string propertyName);
+    int LJCGetInt32(string propertyName);
+    long LJCGetInt64(string propertyName);
+    float GetSingle(string propertyName);
+    string LJCGetValue(string propertyName);
+    void LJCSetValue(propertyName, string value);
+
+  LJCReflect
+    static bool GetBoolean(string propertyName);
+    static byte GetByte(string propertyName);
+    static char GetChar(string propertyName);
+    DateTime GetDateTime(string propertyName);
+    string GetDbDateString(string propertyName);
+    decimal GetDecimal(string propertyName);
+    double GetDouble(string propertyName);
+    short GetInt16(string propertyName);
+    int GetInt32(string propertyName);
+    long GetInt64(string propertyName);
+    float GetSingle(string propertyName);
+    string GetString(string propertyName);
+    object GetValue(string propertyName);
+    object GetValueReflect(string propertyName);
+
+  NetCommon
+    static bool GetBoolean(object value);
+    static byte GetByte(object value);
+    static char GetChar(object value);
+    static DateTime? GetDateTime(object value);
+    static decimal GetDecimal(object value);
+    static double GetDouble(object value);
+    static short GetInt16(object value);
+    static int GetInt32(object value);
+    static long GetInt64(object value);
+    static object GetObject(object value);
+    static float GetSingle(object value);
+    static string GetString(object value);
+
+LJCTextDataReaderLib
+  TextDataReader
+    bool GetBoolean(int i);
+    bool GetBoolean(string name);
+    byte GetByte(int i);
+    byte GetByte(string name);
+    long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length);
+    long GetBytes(string name, long fieldOffset, byte[] buffer, int bufferoffset, int length);
+    char GetChar(int i);
+    char GetChar(string name);
+    long GetChars(int i, long fieldOffset, char[] buffer, int bufferoffset, int length);
+    long GetChars(string name, long fieldOffset, char[] buffer, int bufferoffset, int length);
+    DateTime GetDateTime(int i);
+    DateTime GetDateTime(string name);
+    decimal GetDecimal(int i);
+    decimal GetDecimal(string name);
+    double GetDouble(int i);
+    double GetDouble(string name);
+    float GetFloat(int i);
+    float GetFloat(string name);
+    Guid GetGuid(int i);
+    Guid GetGuid(string name);
+    short GetInt16(int i);
+    short GetInt16(string name);
+    int GetInt32(int i);
+    int GetInt32(string name);
+    long GetInt64(int i);
+    long GetInt64(string name);
+    string GetString(int i);
+    string GetString(string name);

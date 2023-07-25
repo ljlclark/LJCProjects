@@ -1,0 +1,16 @@
+					\bin\Debug
+CVRManager	   LJCData		CVRManager\ReadMeCVRManager.txt
+Genealogy	   GenealogyData	GenealogyManager\ReadMeGenealogyManager.txt
+LJCAppManager	   (LJCData)		LJCAppManager\ReadMeAppManager.txt
+LJCDataTransform   (LJCData)
+LJCDBViewDAL	   (LJCData)
+LJCDocAppManager   (LJCData)
+LJCFacilityManager (LJCData)
+LJCPagination	   (LJCData)
+LJCRegionManager   MySQL\RegionTables	LJCRegionManager\ReadMeRegionManager
+LJCSales	   SalesData		LJCSalesManager\ReadMeSalesManager.txt
+LJCSQLUtilLib	   (LJCData)
+LJCSystemBuilder   TestData
+LJCUnitMeasure	   (LJCData)
+LJCViewBuilder	   (LJCData)?
+LJCViewEditor	   (LJCData)
