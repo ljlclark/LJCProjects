@@ -219,7 +219,7 @@ namespace LJCCreateFileChangesLib
       var fileName = Path.GetFileName(targetSpec);
       foreach (string skipFile in SkipFiles)
       {
-        if (skipFile == fileName)
+        if (skipFile.ToLower() == fileName.ToLower())
         {
           retValue = true;
           break;
