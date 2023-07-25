@@ -13,9 +13,10 @@ del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCC
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\CountLines.txt"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\FindLines.txt"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LargeFiles.txt"
-del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug\ExportFiles\*.txt"
+del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChanges\bin\Debug\FileChanges.txt"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCDocLib\LJCDocGen\bin\Debug\HTMLPageCount.txt"
 del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCDocLib\LJCDocGen\bin\Debug\Missing.txt"
+del "C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug\ExportFiles\*.txt"
 
 set sourcePath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev"
 set changeFile="bin\ChangeFile.txt"
