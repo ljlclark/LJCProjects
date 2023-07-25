@@ -28,3 +28,4 @@ echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilte
 bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter% %skipFiles%
 echo bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
 bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
+pause

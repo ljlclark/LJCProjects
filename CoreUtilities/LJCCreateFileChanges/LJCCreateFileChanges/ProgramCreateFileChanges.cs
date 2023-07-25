@@ -23,14 +23,48 @@ namespace LJCCreateFileChanges
       {
         return;
       }
-      var createFileChanges = new CreateFileChanges(sourcePath, targetPath
+      AddDriveLetter(ref targetPath);
+      if (IsTarget(targetPath))
+      {
+        var createFileChanges = new CreateFileChanges(sourcePath, targetPath
         , changeFileSpec, multiFilter);
-      var skipList = skipFiles.Split('|').ToList<string>();
-      createFileChanges.SkipFiles = skipList;
-      createFileChanges.Start();
+        var skipList = skipFiles.Split('|').ToList<string>();
+        createFileChanges.SkipFiles = skipList;
+        createFileChanges.Start();
+      }
     }
 
     #region Private Functions
+
+    // Prompts for and adds the drive letter if not included.
+    private static void AddDriveLetter(ref string targetPath)
+    {
+      var driveLetter = targetPath.Substring(0, 2);
+      var hasDrive = false;
+      if (':' == driveLetter[1])
+      {
+        hasDrive = true;
+        driveLetter = driveLetter[0].ToString();
+      }
+      else
+      {
+        driveLetter = null;
+      }
+      while (null == driveLetter)
+      {
+        Console.Write("Enter the Target drive letter: ");
+        driveLetter = Console.ReadLine();
+        if (null == driveLetter || driveLetter.Length > 1)
+        {
+          driveLetter = null;
+          Console.WriteLine("The drive letter must be a single character.");
+        }
+      }
+      if (false == hasDrive)
+      {
+        targetPath = $"{driveLetter}:{targetPath}";
+      }
+    }
 
     // Gets the command line parameters.
     private static bool GetArgs(string[] args, ref string sourcePath
@@ -121,6 +155,20 @@ namespace LJCCreateFileChanges
           }
         }
       }
+    }
+
+    // Checks the target path.
+    private static bool IsTarget(string targetPath)
+    {
+      bool retValue = true;
+      if (false == Directory.Exists(targetPath))
+      {
+        retValue = false;
+        Console.WriteLine($"Target {targetPath} does not exist.");
+        Console.Write("Press ENTER to exit. ");
+        Console.ReadLine();
+      }
+      return retValue;
     }
     #endregion
   }

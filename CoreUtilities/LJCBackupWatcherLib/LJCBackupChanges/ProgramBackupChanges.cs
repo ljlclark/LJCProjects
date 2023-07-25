@@ -17,14 +17,16 @@ namespace LJCBackupChanges
     {
       GetDefaults(out string targetPath, out string changeFile
         , out string startFolder);
-      if (GetArgs(args, ref targetPath, ref changeFile, ref startFolder))
+      if (false == GetArgs(args, ref targetPath, ref changeFile
+        , ref startFolder))
       {
-        AddDriveLetter(ref targetPath);
-        if (IsTarget(targetPath))
-        {
-          var backupChanges = new BackupChanges(startFolder, changeFile);
-          backupChanges.Apply(targetPath);
-        }
+        return;
+      }
+      AddDriveLetter(ref targetPath);
+      if (IsTarget(targetPath))
+      {
+        var backupChanges = new BackupChanges(startFolder, changeFile);
+        backupChanges.Apply(targetPath);
       }
     }
 
