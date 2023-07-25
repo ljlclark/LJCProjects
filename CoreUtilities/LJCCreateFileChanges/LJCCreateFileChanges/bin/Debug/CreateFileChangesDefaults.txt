@@ -1,0 +1,4 @@
+sourcePath,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
+targetPath,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage
+changeFileSpec,FileChanges.txt
+multiFilter,*.cs|*.cproj|*.sln|*.config|*.cmd|-ChangeFile.txt|*.txt

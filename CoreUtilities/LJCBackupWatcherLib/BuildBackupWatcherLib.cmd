@@ -4,5 +4,5 @@ rem BuildBackupWatcherLib.cmd
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
 
 call UpdateBackupWatcherLib.cmd nopause
-msbuild BackupWatcherLib.sln -t:rebuild
+msbuild LJCBackupWatcherLib.sln -t:rebuild
 pause

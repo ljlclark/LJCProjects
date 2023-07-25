@@ -133,7 +133,7 @@ namespace LJCBackupWatcherLib
     }
 
     // Checks if the ChangeFile has a matching line.
-    private bool UpdateChangeFile(FileChange change)
+    private bool UpdateChangeFile(FileChange fileChange)
     {
       bool retValue = true;
 
@@ -145,7 +145,7 @@ namespace LJCBackupWatcherLib
           var line = lines[index];
 
           // File already has the change command.
-          if (line == change.Text())
+          if (line == fileChange.Text())
           {
             retValue = false;
             break;
@@ -153,12 +153,12 @@ namespace LJCBackupWatcherLib
 
           bool scrub = false;
 
-          switch (change.ChangeType.ToLower())
+          switch (fileChange.ChangeType.ToLower())
           {
             case "copy":
               // Remove previous redundant delete.
-              if (IsMatchingLine(line, "Delete", change.FileSpec
-                , change.ToFileSpec))
+              if (IsMatchingLine(line, "Delete", fileChange.FileSpec
+                , fileChange.ToFileSpec))
               {
                 lines[index] = null;
                 scrub = true;
@@ -167,8 +167,8 @@ namespace LJCBackupWatcherLib
 
             case "delete":
               // Remove previous redundant copy.
-              if (IsMatchingLine(line, "Copy", change.FileSpec
-                , change.ToFileSpec))
+              if (IsMatchingLine(line, "Copy", fileChange.FileSpec
+                , fileChange.ToFileSpec))
               {
                 lines[index] = null;
                 scrub = true;

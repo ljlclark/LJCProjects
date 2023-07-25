@@ -3,6 +3,7 @@
 // CreateFileChanges.cs
 using LJCBackupWatcherLib;
 using LJCNetCommon;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -36,11 +37,19 @@ namespace LJCCreateFileChangesLib
     /// <summary>Starts the create FileChanges process.</summary>
     public void Start()
     {
-      string[] filters = mMultiFilter.Split(',');
+      string[] filters = mMultiFilter.Split('|');
       foreach (var filter in filters)
       {
-        DeleteTargetMissingFiles(filter);
-        CopyMissingOrChangedFiles(filter);
+        if (filter.StartsWith("-"))
+        {
+          var skipFile = filter.Substring(1);
+          mSkipFiles.Add(skipFile);
+        }
+        else
+        {
+          DeleteTargetNoSourceFiles(filter);
+          CopyMissingOrChangedFiles(filter);
+        }
       }
     }
     #endregion
@@ -80,14 +89,27 @@ namespace LJCCreateFileChangesLib
     {
       var sourceLines = File.ReadAllLines(sourceSpec);
       var targetLines = File.ReadAllLines(targetSpec);
-      for (int index = 0; index < sourceLines.Length; index++)
+
+      bool copy = false;
+      if (sourceLines.Length != targetLines.Length)
       {
-        if (sourceLines[index] != targetLines[index])
+        copy = true;
+      }
+      if (false == copy)
+      {
+        for (int index = 0; index < sourceLines.Length; index++)
         {
-          FileChange fileChange = new FileChange("Copy", sourceSpec);
-          AppendChangeFile(fileChange);
-          break;
+          if (sourceLines[index] != targetLines[index])
+          {
+            copy = true;
+            break;
+          }
         }
+      }
+      if (copy)
+      {
+        FileChange fileChange = new FileChange("Copy", sourceSpec);
+        AppendChangeFile(fileChange);
       }
     }
 
@@ -102,11 +124,13 @@ namespace LJCCreateFileChangesLib
       foreach (var sourceSpec in sourceSpecs)
       {
         var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder);
+
+        // Skip file for target folders that do not exist.
         var filePath = Path.GetDirectoryName(targetSpec);
         if (false == Directory.Exists(filePath)
+          || IsSkipFile(targetSpec)
           || HasExtraDots(targetSpec, filter))
         {
-          // Skip file for target folders that do not exist.
           continue;
         }
 
@@ -123,8 +147,8 @@ namespace LJCCreateFileChangesLib
       }
     }
 
-    // Creates a "Delete" FileChange command for files not in the target.
-    private void DeleteTargetMissingFiles(string filter)
+    // Creates a "Delete" FileChange command for target files not in the source.
+    private void DeleteTargetNoSourceFiles(string filter)
     {
       var folders = mTargetPath.Split('\\');
       var targetStartFolder = folders[folders.Length - 1];
@@ -185,11 +209,29 @@ namespace LJCCreateFileChangesLib
       }
       return retValue;
     }
+
+    // Checks if file is a skiped file.
+    private bool IsSkipFile(string targetSpec)
+    {
+      bool retValue = false;
+
+      var fileName = Path.GetFileName(targetSpec);
+      foreach (string skipFile in mSkipFiles)
+      {
+        if (skipFile == fileName)
+        {
+          retValue = true;
+          break;
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Class Data
 
     private readonly string mSourcePath;
+    private List<string> mSkipFiles = new List<string>();
     private readonly string mTargetPath;
     private readonly string mChangeFileSpec;
     private readonly string mMultiFilter;

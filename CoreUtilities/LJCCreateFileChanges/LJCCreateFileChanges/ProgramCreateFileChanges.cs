@@ -72,8 +72,8 @@ namespace LJCCreateFileChanges
       sourcePath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
       targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
       changeFileSpec = @"FileChanges.txt";
-      //multiFilter = @"*.cs, *.cproj, *.sln, *.config, *.cmd, Doc\*.xml, -ChangeFile.txt, *.txt";
-      multiFilter = @"*.cs, *.cproj, *.sln, *.config, *.cmd, *.txt";
+      //multiFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|Doc\*.xml|-ChangeFile.txt|*.txt";
+      multiFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|-ChangeFile.txt|*.txt";
 
       var fileSpec = "CreateFileChangesDefaults.txt";
       if (File.Exists(fileSpec))
@@ -92,11 +92,11 @@ namespace LJCCreateFileChanges
               sourcePath = tokens[1].Trim();
               break;
 
-            case "targetPath":
+            case "targetpath":
               targetPath = tokens[1].Trim();
               break;
 
-            case "changefileSpec":
+            case "changefilespec":
               changeFileSpec = tokens[1].Trim();
               break;
 

@@ -1,6 +1,7 @@
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
 rem ClearBuildDetail.cmd
+
 rmdir %Solution%\.vs /s /q
 del %Solution%\External\*.* /q
 del %Solution%\%Project%\*.user
