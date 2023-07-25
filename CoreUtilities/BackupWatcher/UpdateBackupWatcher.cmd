@@ -16,6 +16,9 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
+rmdir External
+set to=Bin
+
 set src=LJCBackupWatcherLib\LJCBackupChanges\%bin%
 copy %utilRoot%%src%\LJCBackupChanges.exe %to%
 
