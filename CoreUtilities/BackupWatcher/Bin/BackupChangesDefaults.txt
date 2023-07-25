@@ -1,1 +1,3 @@
-//TargetPath, \Visual Studio 2022\LJCProjectsDevBackup;
+targetPath, C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage
+changeFile, C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\bin\ChangeFile.txt
+startFolder, LJCProjects_Stage

@@ -97,9 +97,9 @@ namespace LJCBackupChanges
     private static void GetDefaults(out string targetPath
       , out string changeFile, out string startFolder)
     {
-      targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP";
-      changeFile = @"..\..\..\BackupWatcher\bin\Debug\ChangeFile.txt";
-      startFolder = @"LJCProjectsDev";
+      targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
+      changeFile = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\bin\ChangeFile.txt";
+      startFolder = "LJCProjects_Stage";
 
       var fileSpec = "BackupChangesDefaults.txt";
       if (File.Exists(fileSpec))
@@ -112,7 +112,7 @@ namespace LJCBackupChanges
           {
             continue;
           }
-          switch (tokens[0].ToLower())
+          switch (tokens[0].ToLower().Trim())
           {
             case "targetpath":
               targetPath = tokens[1].Trim();

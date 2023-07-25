@@ -16,4 +16,6 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=Bin
 set File=LJCBackupChanges
 call %ClearBuild%
-pause
+del %Solution%\%Project%\*.dll
+del %Solution%\%Project%\LJCBackupChanges.exe
+s

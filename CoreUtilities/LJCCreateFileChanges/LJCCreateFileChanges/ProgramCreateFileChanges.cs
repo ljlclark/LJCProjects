@@ -30,7 +30,7 @@ namespace LJCCreateFileChanges
         , changeFileSpec, multiFilter);
         var skipList = skipFiles.Split('|').ToList<string>();
         createFileChanges.SkipFiles = skipList;
-        createFileChanges.Start();
+        createFileChanges.Run();
       }
     }
 
@@ -115,7 +115,7 @@ namespace LJCCreateFileChanges
     {
       sourcePath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
       targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
-      changeFileSpec = "ChangeFile.txt";
+      changeFileSpec = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\bin\ChangeFile.txt";
       //multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|Doc\*.xml|-ChangeFile.txt|*.txt";
       multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt";
       skipFiles = "ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd";
@@ -131,7 +131,7 @@ namespace LJCCreateFileChanges
           {
             continue;
           }
-          switch (tokens[0].ToLower())
+          switch (tokens[0].ToLower().Trim())
           {
             case "sourcepath":
               sourcePath = tokens[1].Trim();

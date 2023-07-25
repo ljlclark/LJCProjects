@@ -20,12 +20,3 @@ echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilte
 bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter% %skipFiles%
 echo bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
 bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
-
-echo -----
-set targetPath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjects"
-del %changeFile%
-echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter% $skipFiles%
-bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFile% %multiFilter% %skipFiles%
-echo bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
-bin\LJCBackupChanges %targetPath% %changeFile% %startFolder%
-pause

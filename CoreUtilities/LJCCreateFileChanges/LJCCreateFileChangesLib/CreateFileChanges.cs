@@ -35,22 +35,19 @@ namespace LJCCreateFileChangesLib
 
     #region Public Methods
 
-    /// <summary>Starts the create FileChanges process.</summary>
-    public void Start()
+    /// <summary>Runs the create FileChanges process.</summary>
+    public void Run()
     {
+      if (File.Exists(mChangeFileSpec))
+      {
+        File.Delete(mChangeFileSpec);
+      }
+
       string[] filters = mMultiFilter.Split('|');
       foreach (var filter in filters)
       {
-        if (filter.StartsWith("-"))
-        {
-          var skipFile = filter.Substring(1);
-          SkipFiles.Add(skipFile);
-        }
-        else
-        {
-          DeleteTargetNoSourceFiles(filter);
-          CopyMissingOrChangedFiles(filter);
-        }
+        DeleteTargetNoSourceFiles(filter);
+        CopyMissingOrChangedFiles(filter);
       }
     }
     #endregion
@@ -174,14 +171,14 @@ namespace LJCCreateFileChangesLib
       , string fromFileSpec, string fromStartFolder)
     {
       var retValue = toFilePath;
-      var fromFolders = fromFileSpec.Split('\\');
+      var fromPath = Path.GetDirectoryName(fromFileSpec);
+      var fromFolders = fromPath.Split('\\');
       for (int index = fromFolders.Length - 1; index >= 0; index--)
       {
         if (fromFolders[index].ToLower() == fromStartFolder.ToLower())
         {
           // Skip fromStartFolder and add remaining folders.
-          for (int index1 = index + 1; index1 < fromFolders.Length - 1
-            ; index1++)
+          for (int index1 = index + 1; index1 < fromFolders.Length; index1++)
           {
             var fromFolder = fromFolders[index1].Trim();
             if (NetString.HasValue(fromFolder))

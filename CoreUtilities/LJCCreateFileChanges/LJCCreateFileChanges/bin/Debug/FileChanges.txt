@@ -1,4 +1,0 @@
-Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\LJCBackupWatcherLib\LJCBackupChanges\BackupChanges.cs
-Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCBackupWatcherLib\LJCBackupChanges\ProgramBackupChanges.cs
-Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug\TempFiles\GenFile.cs
-Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCBackupWatcherLib\LJCBackupWatcherLib\BackupWatcher.cs
