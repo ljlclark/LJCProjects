@@ -14,7 +14,6 @@ set startFolder="LJCProjectsDev"
 
 echo -----
 set targetPath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDevBKP"
-rem del %changeFileSpec%
 echo bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFilSpec% %multiFilter% %skipFiles%
 bin\LJCCreateFileChanges %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
 echo bin\LJCBackupChanges %targetPath% %changeFileSpec% %startFolder%
