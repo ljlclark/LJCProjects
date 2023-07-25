@@ -29,6 +29,7 @@ namespace LJCCreateFileChangesLib
       mTargetPath = targetPath;
       mChangeFileSpec = changeFileSpec;
       mMultiFilter = multiFilter;
+      SkipFiles = new List<string>();
     }
     #endregion
 
@@ -43,7 +44,7 @@ namespace LJCCreateFileChangesLib
         if (filter.StartsWith("-"))
         {
           var skipFile = filter.Substring(1);
-          mSkipFiles.Add(skipFile);
+          SkipFiles.Add(skipFile);
         }
         else
         {
@@ -216,7 +217,7 @@ namespace LJCCreateFileChangesLib
       bool retValue = false;
 
       var fileName = Path.GetFileName(targetSpec);
-      foreach (string skipFile in mSkipFiles)
+      foreach (string skipFile in SkipFiles)
       {
         if (skipFile == fileName)
         {
@@ -228,10 +229,15 @@ namespace LJCCreateFileChangesLib
     }
     #endregion
 
+    #region Properties
+
+    /// <summary>The skip file list.</summary>
+    public List<string> SkipFiles { get; set; }
+    #endregion
+
     #region Class Data
 
     private readonly string mSourcePath;
-    private List<string> mSkipFiles = new List<string>();
     private readonly string mTargetPath;
     private readonly string mChangeFileSpec;
     private readonly string mMultiFilter;

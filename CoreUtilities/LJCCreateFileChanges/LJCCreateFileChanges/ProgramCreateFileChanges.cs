@@ -5,6 +5,7 @@ using LJCCreateFileChangesLib;
 using LJCNetCommon;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace LJCCreateFileChanges
 {
@@ -15,14 +16,17 @@ namespace LJCCreateFileChanges
     static void Main(string[] args)
     {
       GetDefaults(out string sourcePath, out string targetPath
-        , out string changeFileSpec, out string multiFilter);
+        , out string changeFileSpec, out string multiFilter
+        , out string skipFiles);
       if (false == GetArgs(args, ref sourcePath, ref targetPath
-        , ref changeFileSpec, ref multiFilter))
+        , ref changeFileSpec, ref multiFilter, ref skipFiles))
       {
         return;
       }
       var createFileChanges = new CreateFileChanges(sourcePath, targetPath
         , changeFileSpec, multiFilter);
+      var skipList = skipFiles.Split('|').ToList<string>();
+      createFileChanges.SkipFiles = skipList;
       createFileChanges.Start();
     }
 
@@ -30,7 +34,8 @@ namespace LJCCreateFileChanges
 
     // Gets the command line parameters.
     private static bool GetArgs(string[] args, ref string sourcePath
-      , ref string targetPath, ref string changeFileSpec, ref string multiFilter)
+      , ref string targetPath, ref string changeFileSpec, ref string multiFilter
+      , ref string skipFiles)
     {
       bool retValue = true;
       if (args.Length >= 1)
@@ -49,6 +54,10 @@ namespace LJCCreateFileChanges
       {
         multiFilter = args[3];
       }
+      if (args.Length >= 5)
+      {
+        skipFiles = args[4];
+      }
       if (false == NetString.HasValue(sourcePath)
         || false == NetString.HasValue(targetPath)
         || false == NetString.HasValue(changeFileSpec)
@@ -57,6 +66,7 @@ namespace LJCCreateFileChanges
         retValue = false;
         var syntax = "Syntax: LJCCreateFileChanges \"sourcePath\"";
         syntax += "\"targetPath\" \"changeFileSpec\" \"multiFilter\"";
+        syntax += "[\"skipFiles\"]";
         Console.WriteLine(syntax);
         Console.Write("Press ENTER to exit. ");
         Console.ReadLine();
@@ -67,13 +77,14 @@ namespace LJCCreateFileChanges
     // Gets the default parameters.
     private static void GetDefaults(out string sourcePath
       , out string targetPath, out string changeFileSpec
-      , out string multiFilter)
+      , out string multiFilter, out string skipFiles)
     {
       sourcePath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
       targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
-      changeFileSpec = @"FileChanges.txt";
-      //multiFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|Doc\*.xml|-ChangeFile.txt|*.txt";
-      multiFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|-ChangeFile.txt|*.txt";
+      changeFileSpec = "ChangeFile.txt";
+      //multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|Doc\*.xml|-ChangeFile.txt|*.txt";
+      multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt";
+      skipFiles = "ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
       var fileSpec = "CreateFileChangesDefaults.txt";
       if (File.Exists(fileSpec))
@@ -102,6 +113,10 @@ namespace LJCCreateFileChanges
 
             case "multifilter":
               multiFilter = tokens[1].Trim();
+              break;
+
+            case "skipfiles":
+              skipFiles = tokens[1].Trim();
               break;
           }
         }
