@@ -19,7 +19,10 @@ call CoreAssemblies\LJCNetCommon\ClearNetCommon.cmd ClearAll
 call CoreAssemblies\LJCTextDataReader\ClearTextDataReader.cmd ClearAll
 
 rem CoreUtilities
+call CoreUtilities\LJCBackupWatcherHosts\ClearBackupWatherHosts.cmd ClearAll
+call CoreUtilities\LJCBackupWatcherLib\ClearBackupWatcherLib.cmd ClearAl
 call CoreUtilities\LJCCodeLineCounter\ClearCodeLineCounter.cmd ClearAll
+call CoreUtilities\LJCCreateFileChanges\ClearCreateFileChanges.cmd ClearAll
 call CoreUtilities\LJCDocLib\ClearDocLib.cmd ClearAll
 call CoreUtilities\LJCGenDocEdit\ClearGenDocEdit.cmd ClearAll
 call CoreUtilities\LJCGenText\ClearGenText.cmd ClearAll

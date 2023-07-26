@@ -17,7 +17,10 @@ call CoreAssemblies\LJCLibraries\UpdateLibraries.cmd BuildAll >> Update.txt
 call CoreAssemblies\LJCTextDataReader\UpdateTextDataReader.cmd BuildAll > Update.txt
 
 rem CoreUtilities
-call CoreUtilities\LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll > Update.txt
+call CoreUtilities\LJCBackupWatcherHosts\UpdateBackupWatherHosts.cmd BuildAll >> Update.txt
+call CoreUtilities\LJCBackupWatcherLib\UpdateBackupWatcherLib.cmd BuildAll >> Update.txt
+call CoreUtilities\LJCCodeLineCounter\UpdateCodeLineCounter.cmd BuildAll >> Update.txt
+call CoreUtilities\LJCCreateFileChanges\UpdateCreateFileChanges.cmd BuildAll >> Update.txt
 call CoreUtilities\LJCDocLib\UpdateDocLib.cmd BuildAll >> Update.txt
 call CoreUtilities\LJCGenText\UpdateGenText.cmd BuildAll >> Update.txt
 call CoreUtilities\LJCSQLUtilLib\UpdateSQLUtilLib.cmd BuildAll >> Update.txt
