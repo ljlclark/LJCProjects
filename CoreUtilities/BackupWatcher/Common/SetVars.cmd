@@ -1,0 +1,5 @@
+set sourcePath="C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev"
+set changeFile="bin\ChangeFile.txt"
+set multiFilter="*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt"
+set skipFiles="ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd"
+set startFolder="LJCProjectsDev"
