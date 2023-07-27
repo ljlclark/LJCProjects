@@ -515,17 +515,21 @@ namespace LJCNetCommon
         StringBuilder builder = new StringBuilder(128);
 
         // Access Modifier
-        if (info.IsPublic)
-        {
-          builder.Append("public ");
-        }
         if (info.IsPrivate)
         {
           builder.Append("private ");
         }
+        if (info.IsPublic)
+        {
+          builder.Append("public ");
+        }
         if (info.IsStatic)
         {
           builder.Append("static ");
+        }
+        if (info.IsFamily)
+        {
+          builder.Append("protected ");
         }
         if (IsOverride(info))
         {

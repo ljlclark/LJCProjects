@@ -89,7 +89,7 @@ namespace LJCDocObjLib
           AssemblyReflect = AssemblyReflect
         };
         // Testing
-        //if ("LJCSortName" == docMethodName)
+        //if ("OnColumnWidthChanged" == docMethodName)
         //{
         //  int i = 0;
         //}
