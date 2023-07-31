@@ -12,4 +12,3 @@ echo -----
 set targetPath=%mainPath%\LJCProjects"
 echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
 %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
-pause

@@ -17,4 +17,3 @@ set targetPath=%mainPath%\WebPages\LJCCodeDoc"
 set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
 echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
 %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
-pause

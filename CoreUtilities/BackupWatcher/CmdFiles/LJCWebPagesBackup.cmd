@@ -18,4 +18,3 @@ set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
 echo %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
 %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
 del %changeFileSpec%
-pause
