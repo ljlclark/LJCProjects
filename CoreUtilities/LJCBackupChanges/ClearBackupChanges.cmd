@@ -1,10 +1,10 @@
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
-rem ClearBackupWatcherLib.cmd
+rem ClearBackupChanges.cmd
 
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
-set Solution=..\LJCBackupWatcherLib
+set Solution=..\LJCBackupChanges
 set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 

@@ -1,6 +1,6 @@
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
-rem UpdateBackupWatcherLib.cmd
+rem UpdateBackupChanges.cmd
 
 if %1%. == BuildAll. goto BuildAll
 set mainRoot=..\..\
@@ -9,7 +9,7 @@ call %mainRoot%SetupFolder.cmd
 goto Process:
 :BuildAll
 call SetupUpdate.cmd %1%
-set toRoot=%util%\BackupWatcherLib\
+set toRoot=%util%\LJCBackupChanges\
 call SetupFolder.cmd
 :Process
 
@@ -23,7 +23,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ------------------------------------
-set to=%toRoot%BackupWatcher\%bin%
+set to=%toRoot%LJCBackupChanges\%bin%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End
