@@ -11,5 +11,4 @@ call ..\Common\LJCProjectsDevVars.cmd
 echo -----
 set targetPath="\My Data\Visual Studio 2022\LJCProjectsDevBackup"
 echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFile% %multiFilter% %skipFiles%
-%binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFile% %multiFilter% %skipFiles%
-pause
+%binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%

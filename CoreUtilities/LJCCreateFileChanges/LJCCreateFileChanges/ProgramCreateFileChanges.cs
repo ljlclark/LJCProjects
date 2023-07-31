@@ -24,7 +24,7 @@ namespace LJCCreateFileChanges
         return;
       }
       AddDriveLetter(ref targetPath);
-      if (IsTarget(targetPath))
+      if (HasTarget(targetPath))
       {
         var createFileChanges = new CreateFileChanges(sourcePath, targetPath
         , changeFileSpec, multiFilter);
@@ -113,10 +113,10 @@ namespace LJCCreateFileChanges
       , out string targetPath, out string changeFileSpec
       , out string multiFilter, out string skipFiles)
     {
-      sourcePath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
-      targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
-      changeFileSpec = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\bin\ChangeFile.txt";
-      //multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|Doc\*.xml|-ChangeFile.txt|*.txt";
+      var mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
+      sourcePath = $@"{mainPath}\LJCProjectsDev";
+      targetPath = $@"{mainPath}\LJCProjects_Stage";
+      changeFileSpec = $@"{mainPath}\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangeFile.txt";
       multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt";
       skipFiles = "ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
@@ -158,7 +158,7 @@ namespace LJCCreateFileChanges
     }
 
     // Checks the target path.
-    private static bool IsTarget(string targetPath)
+    private static bool HasTarget(string targetPath)
     {
       bool retValue = true;
       if (false == Directory.Exists(targetPath))

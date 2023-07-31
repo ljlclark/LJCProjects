@@ -122,6 +122,12 @@ namespace LJCCreateFileChangesLib
         , SearchOption.AllDirectories);
       foreach (var sourceSpec in sourceSpecs)
       {
+        // Testing
+        //var sourceFile = Path.GetFileName(sourceSpec);
+        //if ("BackupChanges.cs" == sourceFile)
+        //{
+        //  int i = 0;
+        //}
         var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder);
 
         // Skip file for target folders that do not exist.

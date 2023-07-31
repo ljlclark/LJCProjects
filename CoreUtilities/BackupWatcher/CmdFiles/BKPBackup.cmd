@@ -13,4 +13,3 @@ set targetPath=%mainPath%\LJCProjectsDevBKP"
 echo %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
 %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
 del %changeFileSpec%
-pause

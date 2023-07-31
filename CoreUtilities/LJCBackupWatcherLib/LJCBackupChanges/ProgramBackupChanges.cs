@@ -4,7 +4,6 @@
 using LJCBackupChangesLib;
 using LJCNetCommon;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace LJCBackupChanges
@@ -26,7 +25,7 @@ namespace LJCBackupChanges
       if (HasTarget(targetPath))
       {
         var backupChanges = new BackupChanges(startFolder, changeFileSpec);
-        backupChanges.Apply(targetPath);
+        backupChanges.Run(targetPath);
       }
     }
 
@@ -101,7 +100,7 @@ namespace LJCBackupChanges
       targetPath = $@"{mainPath}\LJCProjects_Stage";
       string changeFilePath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
       changeFileSpec = $@"{mainPath}\{changeFilePath}\ChangeFile.txt";
-      startFolder = "LJCProjects_Stage";
+      startFolder = "LJCProjectsDev";
 
       var fileSpec = "BackupChangesDefaults.txt";
       if (File.Exists(fileSpec))
