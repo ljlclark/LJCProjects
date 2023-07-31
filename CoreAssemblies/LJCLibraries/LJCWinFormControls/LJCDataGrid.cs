@@ -460,14 +460,9 @@ namespace LJCWinFormControls
 
       if (column != null)
       {
-        int characterWidth = 5;
-        if (column.MaxLength > 15)
-        {
-          characterWidth = (int)(column.MaxLength * 0.4);
-        }
-
         // Grid columns are named after the object property names.
-        retVal = LJCAddColumn(column.PropertyName, column.Caption, characterWidth);
+        retVal = LJCAddColumn(column.PropertyName, column.Caption
+          , column.MaxLength);
       }
       return retVal;
     }
@@ -475,7 +470,7 @@ namespace LJCWinFormControls
     // Adds a grid column.
     /// <include path='items/LJCAddColumn2/*' file='Doc/LJCDataGrid.xml'/>
     public DataGridViewColumn LJCAddColumn(string name, string caption
-      , int characterWidth = 0)
+      , int textLength = 0, int averageCapsWordSize = 0)
     {
       int columnIndex;
       DataGridViewColumn retValue;
@@ -484,48 +479,33 @@ namespace LJCWinFormControls
       retValue = Columns[columnIndex];
       retValue.ReadOnly = true;
 
-      SetColumnWidth(retValue, characterWidth);
+      SetColumnWidth(retValue, textLength, averageCapsWordSize);
       return retValue;
     }
 
     // <summary>Sets the column width from the supplied character width value.</summary>
-    private void SetColumnWidth(DataGridViewColumn gridColumn, int characterWidth)
+    private void SetColumnWidth(DataGridViewColumn gridColumn, int textLength
+      , int averageCapsWordSize = 0)
     {
-      Graphics graphics;
-      SizeF headingSize;
-      int headerLength;
-
-      if (characterWidth < 5)
+      if (textLength < 5)
       {
-        characterWidth = 5;
+        textLength = 5;
       }
 
-      if (null == gridColumn.HeaderText)
+      var calcLength = textLength;
+      if (NetString.HasValue(gridColumn.HeaderText)
+        && gridColumn.HeaderText.Length > textLength)
       {
-        gridColumn.Width = characterWidth * mAverageCharWidth;
+        calcLength = gridColumn.HeaderText.Length;
       }
-      else
+      var capsCount = 0;
+      if (averageCapsWordSize > 0)
       {
-        headerLength = gridColumn.HeaderText.Length;
-        if (characterWidth > headerLength)
-        {
-          gridColumn.Width = characterWidth * mAverageCharWidth;
-        }
-        else
-        {
-          if (headerLength < 20)
-          {
-            gridColumn.Width = headerLength * mAverageCharWidth;
-          }
-          else
-          {
-            // Size for large heading.
-            graphics = CreateGraphics();
-            headingSize = graphics.MeasureString(gridColumn.HeaderText, Font);
-            gridColumn.Width = (int)headingSize.Width + (5 * mAverageCharWidth);
-          }
-        }
+        capsCount = calcLength / averageCapsWordSize;
       }
+      var grid = gridColumn.DataGridView;
+      gridColumn.Width = ControlCommon.TextUnitWidth(grid, calcLength
+        , capsCount);
     }
 
     // Adds a Checkbox column.
@@ -885,7 +865,6 @@ namespace LJCWinFormControls
 
     #region Class Data
 
-    private readonly int mAverageCharWidth = 8;
     private Timer mTimer;
 
     private Rectangle mDragStartBounds;

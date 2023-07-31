@@ -1,0 +1,18 @@
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreAssemblies\LJCLibraries\LJCWinFormControls\ControlCommon.cs C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreAssemblies\LJCLibraries\LJCWinFormControls\ControlCommon.cs
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreAssemblies\LJCLibraries\LJCWinFormControls\LJCDataGrid.cs C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreAssemblies\LJCLibraries\LJCWinFormControls\LJCDataGrid.cs
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCBackupWatcherLib\LJCBackupChanges\ProgramBackupChanges.cs C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\LJCBackupWatcherLib\LJCBackupChanges\ProgramBackupChanges.cs
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChangesLib\CreateFileChanges.cs C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChangesLib\CreateFileChanges.cs
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupLJCProjects.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupLJCProjects_Stage.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupLocalBKP.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupOffLineHP.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupOffLinePassport.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\BackupOffLineSeagate.cmd
+del C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\Common\SetVars.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\HPBackup.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\HPBackup.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\HPChanges.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\HPChanges.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\LJCProjectsBackup.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\LJCProjectsBackup.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\LJCProjectsChanges.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\LJCProjectsChanges.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\LJCProjects_StageBackup.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\LJCProjects_StageBackup.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\LJCProjects_StageChanges.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\CmdFiles\LJCProjects_StageChanges.cmd
+copy C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\Common\LJCProjectsDevVars.cmd C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\CoreUtilities\BackupWatcher\Common\LJCProjectsDevVars.cmd

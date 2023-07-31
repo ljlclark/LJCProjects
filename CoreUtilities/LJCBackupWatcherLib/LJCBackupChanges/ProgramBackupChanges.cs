@@ -15,17 +15,17 @@ namespace LJCBackupChanges
     // The program entry point function.
     static void Main(string[] args)
     {
-      GetDefaults(out string targetPath, out string changeFile
+      GetDefaults(out string targetPath, out string changeFileSpec
         , out string startFolder);
-      if (false == GetArgs(args, ref targetPath, ref changeFile
+      if (false == GetArgs(args, ref targetPath, ref changeFileSpec
         , ref startFolder))
       {
         return;
       }
       AddDriveLetter(ref targetPath);
-      if (IsTarget(targetPath))
+      if (HasTarget(targetPath))
       {
-        var backupChanges = new BackupChanges(startFolder, changeFile);
+        var backupChanges = new BackupChanges(startFolder, changeFileSpec);
         backupChanges.Apply(targetPath);
       }
     }
@@ -64,7 +64,7 @@ namespace LJCBackupChanges
 
     // Gets the command line parameters.
     private static bool GetArgs(string[] args, ref string targetPath
-      , ref string changeFile, ref string startFolder)
+      , ref string changeFileSpec, ref string startFolder)
     {
       bool retValue = true;
       if (args.Length >= 1)
@@ -73,19 +73,19 @@ namespace LJCBackupChanges
       }
       if (args.Length >= 2)
       {
-        changeFile = args[1];
+        changeFileSpec = args[1];
       }
       if (args.Length >= 3)
       {
         startFolder = args[2];
       }
       if (false == NetString.HasValue(targetPath)
-        || false == NetString.HasValue(changeFile)
+        || false == NetString.HasValue(changeFileSpec)
         || false == NetString.HasValue(startFolder))
       {
         retValue = false;
         var syntax = "Syntax: ProgramBackupChanges \"targetPath\"";
-        syntax += "\"changeFile\" \"startFolder\"";
+        syntax += "\"changeFileSpec\" \"startFolder\"";
         Console.WriteLine(syntax);
         Console.Write("Press ENTER to exit. ");
         Console.ReadLine();
@@ -95,16 +95,18 @@ namespace LJCBackupChanges
 
     // Gets the default parameters.
     private static void GetDefaults(out string targetPath
-      , out string changeFile, out string startFolder)
+      , out string changeFileSpec, out string startFolder)
     {
-      targetPath = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage";
-      changeFile = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\bin\ChangeFile.txt";
+      string mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
+      targetPath = $@"{mainPath}\LJCProjects_Stage";
+      string changeFilePath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
+      changeFileSpec = $@"{mainPath}\{changeFilePath}\ChangeFile.txt";
       startFolder = "LJCProjects_Stage";
 
       var fileSpec = "BackupChangesDefaults.txt";
       if (File.Exists(fileSpec))
       {
-        IEnumerable<string> lines = File.ReadLines(fileSpec);
+        string[] lines = File.ReadAllLines(fileSpec);
         foreach (string line in lines)
         {
           var tokens = line.Split(',');
@@ -118,8 +120,8 @@ namespace LJCBackupChanges
               targetPath = tokens[1].Trim();
               break;
 
-            case "changefile":
-              changeFile = tokens[1].Trim();
+            case "changefilespec":
+              changeFileSpec = tokens[1].Trim();
               break;
 
             case "startfolder":
@@ -131,7 +133,7 @@ namespace LJCBackupChanges
     }
 
     // Checks the target path.
-    private static bool IsTarget(string targetPath)
+    private static bool HasTarget(string targetPath)
     {
       bool retValue = true;
       if (false == Directory.Exists(targetPath))

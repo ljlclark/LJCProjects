@@ -1,0 +1,14 @@
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreAssemblies\LJCLibraries\LJCWinFormControls\ControlCommon.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreAssemblies\LJCLibraries\LJCWinFormControls\LJCDataGrid.cs
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChangesLib\CreateFileChanges.cs
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupLJCProjects.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupLJCProjects_Stage.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupLocalBKP.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupOffLineHP.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupOffLinePassport.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\BackupOffLineSeagate.cmd
+Delete,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage\CoreUtilities\BackupWatcher\Common\SetVars.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\Common\LJCProjectsDevVars.cmd
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChanges\bin\Debug\CreateFileChangesDefaults.txt
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChanges\bin\Debug\CreateFileChangesDefaultsDev.txt
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCCreateFileChanges\LJCCreateFileChanges\bin\Debug\CreateFileChangesDefaultsWeb.txt

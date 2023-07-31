@@ -97,7 +97,8 @@ namespace LJCCreateFileChangesLib
       {
         for (int index = 0; index < sourceLines.Length; index++)
         {
-          if (sourceLines[index] != targetLines[index])
+          if (sourceLines[index] != targetLines[index]
+            && false == sourceLines[index].StartsWith("<!-- Generated"))
           {
             copy = true;
             break;
