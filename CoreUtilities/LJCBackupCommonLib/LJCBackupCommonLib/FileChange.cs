@@ -3,7 +3,7 @@
 // FileChange.cs
 using LJCNetCommon;
 
-namespace LJCBackupWatcherLib
+namespace LJCBackupCommonLib
 {
   /// <summary>Represents the File change object.</summary>
   public class FileChange

@@ -1,10 +1,10 @@
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
-rem ClearCreateFileChanges.cmd
+rem ClearCreateChanges.cmd
 
 set bin=bin\Debug
 if %1%. == ClearAll. goto ClearAll
-set Solution=..\LJCCreateFileChanges
+set Solution=..\LJCBackupCreateChanges
 set ClearBuild=..\..\ClearBuildDetail.cmd
 goto Clear
 

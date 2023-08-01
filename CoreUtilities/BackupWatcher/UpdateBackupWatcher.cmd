@@ -28,10 +28,10 @@ copy %utilRoot%%src%\LJCBackupChangesLib.dll %to%
 set src=LJCBackupWatcherLib\LJCBackupWatcherLib\%bin%
 copy %utilRoot%%src%\LJCBackupWatcherLib.dll %to%
 
-set src=LJCCreateFileChanges\LJCCreateFileChanges\%bin%
+set src=LJCBackupCreateChanges\LJCCreateFileChanges\%bin%
 copy %utilRoot%%src%\LJCCreateFileChanges.exe %to%
 
-set src=LJCCreateFileChanges\LJCCreateFileChangesLib\%bin%
+set src=LJCBackupCreateChanges\LJCCreateFileChangesLib\%bin%
 copy %utilRoot%%src%\LJCCreateFileChangesLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%

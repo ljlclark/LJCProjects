@@ -1,9 +1,8 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // BackupChanges.cs
-using LJCBackupWatcherLib;
+using LJCBackupCommonLib;
 using LJCNetCommon;
-using System;
 using System.IO;
 
 namespace LJCBackupChangesLib

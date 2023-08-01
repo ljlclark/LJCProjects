@@ -16,8 +16,11 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
-set src=BackupWatcherLib\BackupWatcherLib\%bin%
-copy %utilRoot%%src%\BackupWatcherLib.dll %to%
+set src=LJCBackupCommonLib\LJCBackupCommonLib\%bin%
+copy %utilRoot%%src%\LJCBackupCommonLib.dll %to%
+
+rem *** set src=BackupWatcherLib\BackupWatcherLib\%bin%
+rem *** copy %utilRoot%%src%\BackupWatcherLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%

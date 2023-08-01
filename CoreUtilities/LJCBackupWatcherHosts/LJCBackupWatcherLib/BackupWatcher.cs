@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // BackupWatcher.cs
+using LJCBackupCommonLib;
 using LJCNetCommon;
 using System.IO;
 using System.Linq;

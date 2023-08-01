@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{04B82EAD-C102-47DD-8C3C-70495F018285}</ProjectGuid>
+    <ProjectGuid>{45FBAAED-548A-40E2-83A2-723932BAF94A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LJCBackupWatcherLib</RootNamespace>
-    <AssemblyName>LJCBackupWatcherLib</AssemblyName>
+    <RootNamespace>LJCBackupCommonLib</RootNamespace>
+    <AssemblyName>LJCBackupCommonLib</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackupWatcher.cs" />
     <Compile Include="FileChange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

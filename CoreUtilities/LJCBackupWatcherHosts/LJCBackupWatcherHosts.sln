@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupWatcherConsoleHost
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupWatcherHost", "LJCBackupWatcherHost\LJCBackupWatcherHost.csproj", "{0673249E-78BB-4FE5-9021-CF04BD8E41AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupWatcherLib", "LJCBackupWatcherLib\LJCBackupWatcherLib.csproj", "{04B82EAD-C102-47DD-8C3C-70495F018285}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0673249E-78BB-4FE5-9021-CF04BD8E41AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0673249E-78BB-4FE5-9021-CF04BD8E41AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0673249E-78BB-4FE5-9021-CF04BD8E41AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B82EAD-C102-47DD-8C3C-70495F018285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B82EAD-C102-47DD-8C3C-70495F018285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B82EAD-C102-47DD-8C3C-70495F018285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B82EAD-C102-47DD-8C3C-70495F018285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
