@@ -95,7 +95,7 @@ namespace LJCGenDocEdit
     {
       var retValue = mAssemblyGrid.LJCRowAdd();
       SetStored(retValue, dataRecord);
-      mAssemblyGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(mAssemblyGrid, dataRecord);
       return retValue;
     }
 
@@ -106,7 +106,7 @@ namespace LJCGenDocEdit
       var columnName = DocAssembly.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
-      mAssemblyGrid.LJCRowSetValues(retValue, dbValues);
+      retValue.LJCSetValues(mAssemblyGrid, dbValues);
       return retValue;
     }
 
@@ -116,7 +116,7 @@ namespace LJCGenDocEdit
       if (mAssemblyGrid.CurrentRow is LJCGridRow row)
       {
         SetStored(row, dataRecord);
-        mAssemblyGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(mAssemblyGrid, dataRecord);
       }
     }
 

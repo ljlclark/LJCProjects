@@ -71,8 +71,8 @@ namespace LJCViewEditor
 			retValue = Parent.ColumnGrid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
 
-			// Sets the row values from a data object.
-			Parent.ColumnGrid.LJCRowSetValues(retValue, dataRecord);
+      // Sets the row values from a data object.
+      retValue.LJCSetValues(Parent.ColumnGrid, dataRecord);
 			return retValue;
 		}
 
@@ -82,7 +82,7 @@ namespace LJCViewEditor
 			if (Parent.ColumnGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValues(row, dataRecord);
-				Parent.ColumnGrid.LJCRowSetValues(row, dataRecord);
+				row.LJCSetValues(Parent.ColumnGrid, dataRecord);
 			}
 		}
 

@@ -179,7 +179,8 @@
     </summary>
     <param name="name">The column name.</param>
     <param name="caption">The column heading.</param>
-    <param name="characterWidth">The initial column character width.</param>
+    <param name="textLength">The initial column character width.</param>
+    <param name="averageCapsWordSize">The average word size.</param>
     <returns>The added grid column object.</returns>
   </LJCAddColumn2>
   <LJCAddCheckColumn>

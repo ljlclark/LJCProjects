@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LJCBackupWatcherLib">
-      <HintPath>..\External\LJCBackupWatcherLib.dll</HintPath>
+    <Reference Include="LJCBackupCommonLib">
+      <HintPath>..\..\LJCBackupChanges\External\LJCBackupCommonLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>

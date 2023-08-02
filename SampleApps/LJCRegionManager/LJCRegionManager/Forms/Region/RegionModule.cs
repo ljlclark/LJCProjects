@@ -179,7 +179,7 @@ namespace LJCRegionManager
       SetStoredValuesProvince(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      ProvinceGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(ProvinceGrid, dataRecord);
       return retValue;
     }
 
@@ -190,7 +190,7 @@ namespace LJCRegionManager
       if (ProvinceGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesProvince(row, dataRecord);
-        ProvinceGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(ProvinceGrid, dataRecord);
       }
     }
 
@@ -304,7 +304,7 @@ namespace LJCRegionManager
       SetStoredValuesCity(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      CityGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(CityGrid, dataRecord);
       return retValue;
     }
 
@@ -315,7 +315,7 @@ namespace LJCRegionManager
       if (CityGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesCity(row, dataRecord);
-        CityGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(CityGrid, dataRecord);
       }
     }
 
@@ -429,7 +429,7 @@ namespace LJCRegionManager
       SetStoredValuesCitySection(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      CitySectionGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(CitySectionGrid, dataRecord);
       return retValue;
     }
 
@@ -440,7 +440,7 @@ namespace LJCRegionManager
       if (CitySectionGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesCitySection(row, dataRecord);
-        CitySectionGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(CitySectionGrid, dataRecord);
       }
     }
 

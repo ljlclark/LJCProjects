@@ -52,11 +52,13 @@ namespace LJCViewEditor
         if (DbResult.HasData(dbResult))
         {
           // Setup grid columns.
-          ResultGridData resultGridData = new ResultGridData(Parent.DataGrid);
-          resultGridData.SetDisplayColumns(dbRequest);
+          //ResultGridData resultGridData = new ResultGridData();
+          //resultGridData.SetDisplayColumns(dbRequest);
 
           // Get data.
-          dataColumns = CreateDbColumnsFromDbValues(resultGridData.DisplayColumns
+          //dataColumns = CreateDbColumnsFromDbValues(resultGridData.DisplayColumns
+          //  , dbResult.Rows[0].Values);
+          dataColumns = CreateDbColumnsFromDbValues(dbRequest.Columns
             , dbResult.Rows[0].Values);
 
           // Create and show DataDetail dialog.

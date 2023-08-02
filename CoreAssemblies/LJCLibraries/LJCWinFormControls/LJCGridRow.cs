@@ -1,8 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGridRow.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LJCWinFormControls
@@ -27,7 +29,116 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    #region Saved Value Methods
+    #region SetValues Methods
+
+    // Updates a grid row with DbValues.
+    /// <include path='items/LJCRowSetValues2/*' file='Doc/LJCGridRow.xml'/>
+    public void LJCSetValues(DataGridView grid, DbValues dbValues)
+    {
+      if ((dbValues != null && dbValues.Count() > 0))
+      {
+        List<object> listValues = new List<object>();
+        foreach (DataGridViewColumn gridColumn in grid.Columns)
+        {
+          listValues.Add(dbValues.LJCGetValue(gridColumn.Name));
+        }
+        var values = listValues.ToArray();
+        SetValues(values);
+      }
+    }
+
+    // Updates a grid row with the object values.
+    /// <include path='items/LJCRowSetValues1/*' file='Doc/LJCGridRow.xml'/>
+    public void LJCSetValues(DataGridView grid, object[] values)
+    {
+      if ((values != null && values.Count() > 0)
+        && (values.Count() <= grid.Columns.Count))
+      {
+        SetValues(values);
+      }
+    }
+
+    // Updates a grid row with the record values.
+    /// <include path='items/LJCRowSetValues/*' file='Doc/LJCGridRow.xml'/>
+    public void LJCSetValues(DataGridView grid, object record
+      , DbColumns displayColumns = null)
+    {
+      LJCReflect reflect;
+      string value;
+
+      reflect = new LJCReflect(record);
+      if (displayColumns != null)
+      {
+        // Attempt to populate the specified columns.
+        foreach (DbColumn column in displayColumns)
+        {
+          // Grid columns are named after the object property names.
+          value = GetPropertyValue(reflect, column.PropertyName);
+          LJCSetCellText(column.PropertyName, value);
+        }
+      }
+      else
+      {
+        // Attempt to populate all existing columns.
+        foreach (DataGridViewColumn column in grid.Columns)
+        {
+          // Use existing column names which are the object property names.
+          value = GetPropertyValue(reflect, column.Name);
+          LJCSetCellText(column.Name, value);
+        }
+      }
+    }
+
+    // Gets the Data object property value.
+    private string GetPropertyValue(LJCReflect reflect, string propertyName)
+    {
+      string retValue;
+
+      Type propertyType = reflect.GetPropertyType(propertyName);
+      if (propertyType != null
+        && propertyType.FullName.Contains("DateTime"))
+      {
+        DateTime dateValue = reflect.GetDateTime(propertyName);
+        retValue = GetUiDateString(dateValue);
+      }
+      else
+      {
+        retValue = reflect.GetString(propertyName);
+      }
+      return retValue;
+    }
+
+    // Format the date for display.
+    private string GetUiDateString(DateTime dateTime)
+    {
+      string retVal = null;
+
+      if (false == IsDbMinDate(dateTime))
+      {
+        retVal = dateTime.ToString("MM/dd/yyyy");
+      }
+      return retVal;
+    }
+
+    // Check for DB Minimum date or less.
+    private static bool IsDbMinDate(DateTime dateTime)
+    {
+      bool retValue = false;
+      if (dateTime.Year < 1753)
+      {
+        retValue = true;
+      }
+      if (1753 == dateTime.Year
+        && 1 == dateTime.Month
+        && 1 == dateTime.Day)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Stored Value Methods
 
     // Stores an int key and int value pair.
     /// <include path='items/LJCSetInt321/*' file='Doc/LJCGridRow.xml'/>

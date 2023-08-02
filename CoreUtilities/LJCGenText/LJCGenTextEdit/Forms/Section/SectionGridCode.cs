@@ -65,16 +65,16 @@ namespace LJCGenTextEdit
       retValue = mSectionGrid.LJCRowAdd();
 
       // Sets the row values from a data object.
-      mSectionGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(mSectionGrid, dataRecord);
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdateSection(Section dataRecord)
     {
-      if (mSectionGrid.CurrentRow is LJCGridRow row)
+      if (mSectionGrid.CurrentRow is LJCGridRow gridRow)
       {
-        mSectionGrid.LJCRowSetValues(row, dataRecord);
+        gridRow.LJCSetValues(mSectionGrid, dataRecord);
       }
     }
 

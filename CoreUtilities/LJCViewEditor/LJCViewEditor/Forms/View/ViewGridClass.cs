@@ -84,7 +84,7 @@ namespace LJCViewEditor
 
       retValue = Parent.ViewGrid.LJCRowAdd();
       SetStoredValuesViewData(retValue, dataRecord);
-      Parent.ViewGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(Parent.ViewGrid, dataRecord);
       return retValue;
     }
 
@@ -97,7 +97,7 @@ namespace LJCViewEditor
       if (row != null)
       {
         SetStoredValuesViewData(row, dataRecord);
-        Parent.ViewGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(Parent.ViewGrid, dataRecord);
       }
     }
 
@@ -273,12 +273,18 @@ namespace LJCViewEditor
           Parent.DataGrid.Columns.Clear();
 
           // Setup grid columns.
-          ResultGridData resultGridData = new ResultGridData(Parent.DataGrid);
-          resultGridData.SetDisplayColumns(dbResult.Columns);
+          //ResultGridData resultGridData = new ResultGridData();
+          //resultGridData.SetDisplayColumns(dbResult.Columns);
 
           // Set Grid data.
-          Parent.DataGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
-          resultGridData.LoadRows(dbResult);
+          //Parent.DataGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+          //resultGridData.LoadRows(dbResult);
+          Parent.DataGrid.LJCAddDisplayColumns(dbResult.Columns);
+          foreach (DbRow dbRow in dbResult.Rows)
+          {
+            var gridRow = Parent.DataGrid.LJCRowAdd();
+            gridRow.LJCSetValues(Parent.DataGrid, dbRow.Values);
+          }
         }
       }
     }

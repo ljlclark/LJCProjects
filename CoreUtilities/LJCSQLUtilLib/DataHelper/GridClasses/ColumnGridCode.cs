@@ -76,17 +76,17 @@ namespace DataHelper
       SetStoredValuesColumn(retValue, record);
 
       // Sets the row values from a data object.
-      mParent.ColumnGrid.LJCRowSetValues(retValue, record);
+      retValue.LJCSetValues(mParent.ColumnGrid, record);
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdateColumn(DbMetaDataColumn record)
     {
-      if (mParent.ColumnGrid.CurrentRow is LJCGridRow row)
+      if (mParent.ColumnGrid.CurrentRow is LJCGridRow gridRow)
       {
-        SetStoredValuesColumn(row, record);
-        mParent.ColumnGrid.LJCRowSetValues(row, record);
+        SetStoredValuesColumn(gridRow, record);
+        gridRow.LJCSetValues(mParent.ColumnGrid, record);
       }
     }
 

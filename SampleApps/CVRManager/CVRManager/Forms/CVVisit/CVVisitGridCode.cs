@@ -56,8 +56,8 @@ namespace CVRManager
 			retValue = mCVVisitGrid.LJCRowAdd();
 			SetStoredValuesCVVisit(retValue, dataRecord);
 
-			// Sets the row values from a data object.
-			mCVVisitGrid.LJCRowSetValues(retValue, dataRecord
+      // Sets the row values from a data object.
+      retValue.LJCSetValues(mCVVisitGrid, dataRecord
 				, mParent.mRealDisplayColumnsCVVisit);
 			CustomValuesCVVisit(retValue, dataRecord);
 			return retValue;
@@ -66,12 +66,12 @@ namespace CVRManager
 		// Updates the current row with the record values.
 		private void RowUpdateCVVisit(CVVisit dataRecord)
 		{
-			if (mCVVisitGrid.CurrentRow is LJCGridRow row)
+			if (mCVVisitGrid.CurrentRow is LJCGridRow gridRow)
 			{
-				SetStoredValuesCVVisit(row, dataRecord);
-				mCVVisitGrid.LJCRowSetValues(row, dataRecord
+				SetStoredValuesCVVisit(gridRow, dataRecord);
+				gridRow.LJCSetValues(mCVVisitGrid, dataRecord
 					, mParent.mRealDisplayColumnsCVVisit);
-				CustomValuesCVVisit(row, dataRecord);
+				CustomValuesCVVisit(gridRow, dataRecord);
 			}
 		}
 

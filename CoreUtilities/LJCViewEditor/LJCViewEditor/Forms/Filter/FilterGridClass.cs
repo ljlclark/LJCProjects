@@ -70,7 +70,7 @@ namespace LJCViewEditor
 			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			Parent.FilterGrid.LJCRowSetValues(retValue, dataRecord);
+			retValue.LJCSetValues(Parent.FilterGrid, dataRecord);
 			return retValue;
 		}
 
@@ -80,7 +80,7 @@ namespace LJCViewEditor
 			if (Parent.FilterGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValues(row, dataRecord);
-				Parent.FilterGrid.LJCRowSetValues(row, dataRecord);
+				row.LJCSetValues(Parent.FilterGrid, dataRecord);
 			}
 		}
 

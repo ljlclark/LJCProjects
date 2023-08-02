@@ -467,7 +467,7 @@ namespace LJCGenDocEdit
       {
         var dataMethod = list.LJCSelectedRecord;
         NameText.Text = dataMethod.Name;
-        // *** Next Statement *** Add- 7/923
+        // *** Next Statement *** Add- 7/9/23
         OverloadText.Text = dataMethod.OverloadName;
         if (false == NetString.HasValue(dataMethod.Summary))
         {

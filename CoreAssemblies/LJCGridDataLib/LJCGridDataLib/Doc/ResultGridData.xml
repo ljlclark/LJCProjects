@@ -7,7 +7,7 @@
     <summary>
       Initalizes an object instance.
     </summary>
-    <param name="grid">The Grid control.</param>
+    <!-- param name="grid">The Grid control.</param -->
   </ResultGridDataC>
 
   <!-- Configuration Methods -->
@@ -16,7 +16,7 @@
       Configure the Display Columns from the DbColumns definition.
     </summary>
     <param name="dbColumns">The DbColumns.</param>
-    <param name="columnNames">The display column names.</param>
+    <param name="propertyNames">The display column names.</param>
     <example>
       <code>
         // See the DataManager setup code on the ResultGridData class page.
@@ -47,7 +47,7 @@
       Configure the Display Columns from the DbRequest object definition.
     </summary>
     <param name="dbRequest">The DbRequest object.</param>
-    <param name="columnNames">The included columns.</param>
+    <param name="propertyNames">The included columns.</param>
     <example>
       <code>
         // See the DataManager setup code on the ResultGridData class page.

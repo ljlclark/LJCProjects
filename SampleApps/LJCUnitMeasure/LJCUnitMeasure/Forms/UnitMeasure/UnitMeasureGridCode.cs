@@ -78,18 +78,18 @@ namespace LJCUnitMeasure
 			retValue = mUnitMeasureGrid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
 
-			// Sets the row values from a data object.
-			mUnitMeasureGrid.LJCRowSetValues(retValue, dataRecord);
+      // Sets the row values from a data object.
+      retValue.LJCSetValues(mUnitMeasureGrid, dataRecord);
 			return retValue;
 		}
 
 		// Updates the current row with the record values.
 		private void RowUpdate(UnitMeasure dataRecord)
 		{
-			if (mUnitMeasureGrid.CurrentRow is LJCGridRow row)
+			if (mUnitMeasureGrid.CurrentRow is LJCGridRow gridRow)
 			{
-				SetStoredValues(row, dataRecord);
-				mUnitMeasureGrid.LJCRowSetValues(row, dataRecord);
+				SetStoredValues(gridRow, dataRecord);
+				gridRow.LJCSetValues(mUnitMeasureGrid, dataRecord);
 			}
 		}
 

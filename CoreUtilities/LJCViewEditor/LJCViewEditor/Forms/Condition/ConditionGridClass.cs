@@ -68,7 +68,7 @@ namespace LJCViewEditor
 			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			Parent.ConditionGrid.LJCRowSetValues(retValue, dataRecord);
+			retValue.LJCSetValues(Parent.ConditionGrid, dataRecord);
 			return retValue;
 		}
 
@@ -81,7 +81,7 @@ namespace LJCViewEditor
 			if (row != null)
 			{
 				SetStoredValues(row, dataRecord);
-				Parent.ConditionGrid.LJCRowSetValues(row, dataRecord);
+				row.LJCSetValues(Parent.ConditionGrid, dataRecord);
 			}
 		}
 

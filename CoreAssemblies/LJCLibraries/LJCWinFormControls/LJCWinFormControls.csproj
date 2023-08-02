@@ -128,6 +128,7 @@
   <ItemGroup>
     <Content Include="Doc\ColorSetting.xml" />
     <Content Include="Doc\ColorSettings.xml" />
+    <Content Include="Doc\ControlCommon.xml" />
     <Content Include="Doc\InfoWindow.xml" />
     <Content Include="Doc\ListHelper.xml" />
     <Content Include="Doc\LJCDataGrid.xml">

@@ -60,16 +60,16 @@ namespace LJCGenTextEdit
       retValue = mItemGrid.LJCRowAdd();
 
       // Sets the row values from a data object.
-      mItemGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(mItemGrid, dataRecord);
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdateItem(RepeatItem dataRecord)
     {
-      if (mItemGrid.CurrentRow is LJCGridRow row)
+      if (mItemGrid.CurrentRow is LJCGridRow gridRow)
       {
-        mItemGrid.LJCRowSetValues(row, dataRecord);
+        gridRow.LJCSetValues(mItemGrid, dataRecord);
       }
     }
 

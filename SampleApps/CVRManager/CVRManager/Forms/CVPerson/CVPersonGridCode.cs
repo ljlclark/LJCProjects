@@ -51,18 +51,18 @@ namespace CVRManager
 			retValue = mCVPersonGrid.LJCRowAdd();
 			SetStoredValuesCVPerson(retValue, dataRecord);
 
-			// Sets the row values from a data object.
-			mCVPersonGrid.LJCRowSetValues(retValue, dataRecord);
+      // Sets the row values from a data object.
+      retValue.LJCSetValues(mCVPersonGrid, dataRecord);
 			return retValue;
 		}
 
 		// Updates the current row with the record values.
 		private void RowUpdateCVPerson(CVPerson dataRecord)
 		{
-			if (mCVPersonGrid.CurrentRow is LJCGridRow row)
+			if (mCVPersonGrid.CurrentRow is LJCGridRow gridRow)
 			{
-				SetStoredValuesCVPerson(row, dataRecord);
-				mCVPersonGrid.LJCRowSetValues(row, dataRecord);
+				SetStoredValuesCVPerson(gridRow, dataRecord);
+				gridRow.LJCSetValues(mCVPersonGrid, dataRecord);
 			}
 		}
 

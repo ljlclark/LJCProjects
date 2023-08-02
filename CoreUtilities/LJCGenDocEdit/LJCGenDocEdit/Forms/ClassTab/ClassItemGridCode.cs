@@ -64,6 +64,7 @@ namespace LJCGenDocEdit
       }
       DbResult result = manager.LoadResult(keyColumns);
 
+      // Duplicate in ResultGridData.LoadRows()?
       if (DbResult.HasRows(result))
       {
         foreach (DbRow dbRow in result.Rows)
@@ -104,7 +105,7 @@ namespace LJCGenDocEdit
     {
       var retValue = mClassGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      mClassGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(mClassGrid, dataRecord);
       return retValue;
     }
 
@@ -115,7 +116,7 @@ namespace LJCGenDocEdit
       var columnName = LJCDocLibDAL.DocClass.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
-      mClassGrid.LJCRowSetValues(retValue, dbValues);
+      retValue.LJCSetValues(mClassGrid, dbValues);
       return retValue;
     }
 
@@ -125,7 +126,7 @@ namespace LJCGenDocEdit
       if (mClassGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        mClassGrid.LJCRowSetValues(row, dataRecord);
+        row.LJCSetValues(mClassGrid, dataRecord);
       }
     }
 

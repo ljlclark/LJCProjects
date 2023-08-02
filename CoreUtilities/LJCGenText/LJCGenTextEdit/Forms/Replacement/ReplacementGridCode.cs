@@ -63,16 +63,16 @@ namespace LJCGenTextEdit
       retValue = mReplacementGrid.LJCRowAdd();
 
       // Sets the row values from a data object.
-      mReplacementGrid.LJCRowSetValues(retValue, dataRecord);
+      retValue.LJCSetValues(mReplacementGrid, dataRecord);
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdateReplacement(Replacement dataRecord)
     {
-      if (mReplacementGrid.CurrentRow is LJCGridRow row)
+      if (mReplacementGrid.CurrentRow is LJCGridRow gridRow)
       {
-        mReplacementGrid.LJCRowSetValues(row, dataRecord);
+        gridRow.LJCSetValues(mReplacementGrid, dataRecord);
       }
     }
 
