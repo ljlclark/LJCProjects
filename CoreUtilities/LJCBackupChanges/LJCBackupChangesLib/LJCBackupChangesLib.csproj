@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCBackupCommonLib">
+      <HintPath>..\External\LJCBackupCommonLib.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
@@ -46,12 +49,6 @@
   <ItemGroup>
     <Compile Include="BackupChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LJCBackupWatcherLib\LJCBackupWatcherLib.csproj">
-      <Project>{04b82ead-c102-47dd-8c3c-70495f018285}</Project>
-      <Name>LJCBackupWatcherLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,13 +19,16 @@ rem *** Referenced Binaries ***
 rmdir External
 set to=Bin
 
-set src=LJCBackupWatcherLib\LJCBackupChanges\%bin%
+set src=LJCBackupChanges\LJCBackupChanges\%bin%
 copy %utilRoot%%src%\LJCBackupChanges.exe %to%
 
-set src=LJCBackupWatcherLib\LJCBackupChangesLib\%bin%
+set src=LJCBackupChanges\LJCBackupChangesLib\%bin%
 copy %utilRoot%%src%\LJCBackupChangesLib.dll %to%
 
-set src=LJCBackupWatcherLib\LJCBackupWatcherLib\%bin%
+set src=LJCBackupCommonLib\LJCBackupCommonLib\%bin%
+copy %utilRoot%%src%\LJCBackupCommonLib.dll %to%
+
+set src=LJCBackupWatcherHosts\LJCBackupWatcherLib\%bin%
 copy %utilRoot%%src%\LJCBackupWatcherLib.dll %to%
 
 set src=LJCBackupCreateChanges\LJCCreateFileChanges\%bin%

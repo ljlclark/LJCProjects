@@ -51,10 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\CreateFileChangesDefaultsGit.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\CreateFileChangesDefaults.txt" />
+    <Content Include="bin\Debug\CreateFileChangesDefaultsGit.txt" />
+    <Content Include="bin\Debug\CreateFileChangesDefaultsPassport.txt" />
     <Content Include="bin\Debug\CreateFileChangesDefaultsStage.txt" />
     <Content Include="bin\Debug\CreateFileChangesDefaultsWeb.txt" />
   </ItemGroup>

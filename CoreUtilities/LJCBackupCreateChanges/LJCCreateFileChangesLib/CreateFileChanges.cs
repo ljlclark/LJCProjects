@@ -117,20 +117,21 @@ namespace LJCCreateFileChangesLib
     {
       var folders = mSourcePath.Split('\\');
       var sourceStartFolder = folders[folders.Length - 1];
+      var filterPath = GetFilterPath(ref filter);
 
       var sourceSpecs = Directory.GetFiles(mSourcePath, filter
         , SearchOption.AllDirectories);
       foreach (var sourceSpec in sourceSpecs)
       {
-        // Testing
-        //var sourceFile = Path.GetFileName(sourceSpec);
-        //if ("BackupChanges.cs" == sourceFile)
-        //{
-        //  int i = 0;
-        //}
-        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder);
+        // File spec does not end with the filter path.
+        if (NetString.HasValue(filterPath)
+          && false == HasFilterPath(sourceSpec, filterPath))
+        {
+          continue;
+        }
 
         // Skip file for target folders that do not exist.
+        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder);
         var filePath = Path.GetDirectoryName(targetSpec);
         if (false == Directory.Exists(filePath)
           || IsSkipFile(targetSpec)
@@ -157,11 +158,19 @@ namespace LJCCreateFileChangesLib
     {
       var folders = mTargetPath.Split('\\');
       var targetStartFolder = folders[folders.Length - 1];
+      var filterPath = GetFilterPath(ref filter);
 
       var targetSpecs = Directory.GetFiles(mTargetPath, filter
         , SearchOption.AllDirectories);
       foreach (var targetSpec in targetSpecs)
       {
+        // File spec does not end with the filter path.
+        if (NetString.HasValue(filterPath)
+          && false == HasFilterPath(targetSpec, filterPath))
+        {
+          continue;
+        }
+
         var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetStartFolder);
         if (false == File.Exists(sourceSpec))
         {
@@ -201,6 +210,17 @@ namespace LJCCreateFileChangesLib
       return retValue;
     }
 
+    // Returns the filter path if it exists and updates the filter.
+    private string GetFilterPath(ref string filter)
+    {
+      var retValue = Path.GetDirectoryName(filter);
+      if (NetString.HasValue(retValue))
+      {
+        filter = Path.GetFileName(filter);
+      }
+      return retValue;
+    }
+
     // Checks if a file has more than one dot.
     private bool HasExtraDots(string fileSpec, string filter)
     {
@@ -211,6 +231,29 @@ namespace LJCCreateFileChangesLib
         && filter != ".config")
       {
         retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check for filter path and if file is in the filter path.
+    private bool HasFilterPath(string targetSpec, string filterPath)
+    {
+      bool retValue = false;
+
+      var targetPath = Path.GetDirectoryName(targetSpec);
+      string targetLastFolder = null;
+      var targetFolders = targetPath.Split('\\');
+      if (targetFolders.Length > 0)
+      {
+        targetLastFolder = targetFolders[targetFolders.Length - 1];
+      }
+      if (NetString.HasValue(targetLastFolder))
+      {
+        if (NetString.HasValue(filterPath)
+          && (targetLastFolder == filterPath))
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }

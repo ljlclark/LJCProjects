@@ -124,13 +124,6 @@
     </summary>
     <param name="columnName">The column name.</param>
   </LJCGetCellText>
-  <LJCSetCellText1>
-    <summary>
-      Sets the cell value by index.
-    </summary>
-    <param name="index">The column index.</param>
-    <param name="value">The cell value.</param>
-  </LJCSetCellText1>
   <LJCSetCellText>
     <summary>
       Sets the cell value by name.
@@ -138,4 +131,11 @@
     <param name="columnName">The column name.</param>
     <param name="value">The cell value.</param>
   </LJCSetCellText>
+  <LJCSetCellText1>
+    <summary>
+      Sets the cell value by index.
+    </summary>
+    <param name="index">The column index.</param>
+    <param name="value">The cell value.</param>
+  </LJCSetCellText1>
 </items>

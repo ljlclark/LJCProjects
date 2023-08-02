@@ -1,5 +1,5 @@
 sourcePath,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
-targetPath,\Visual Studio 2022\LJCProjectsDevBackup
+targetPath,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage
 changeFileSpec,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangeFile.txt
-multiFilter,*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt
+multiFilter,*.cs|*.csproj|*.sln|*.config|*.cmd|*.txt|Doc\*.xml
 skipFiles,ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd
