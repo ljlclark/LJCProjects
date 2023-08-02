@@ -326,24 +326,6 @@ namespace LJCWinFormControls
       return retVal;
     }
 
-    // Sets the cell value by index.
-    /// <include path='items/LJCGetCellText1/*' file='Doc/LJCGridRow.xml'/>
-    public void LJCSetCellText(int index, object value)
-    {
-      if (DataGridView != null)
-      {
-        // Ensure that column exists.
-        if (index >= 0 && index < Cells.Count)
-        {
-          if (null == value)
-          {
-            value = "";
-          }
-          Cells[index].Value = value.ToString();
-        }
-      }
-    }
-
     // Sets the cell value.
     /// <include path='items/LJCSetCellText/*' file='Doc/LJCGridRow.xml'/>
     public void LJCSetCellText(string columnName, object value)
@@ -358,6 +340,24 @@ namespace LJCWinFormControls
             value = "";
           }
           Cells[columnName].Value = value.ToString();
+        }
+      }
+    }
+
+    // Sets the cell value by index.
+    /// <include path='items/LJCSetCellText1/*' file='Doc/LJCGridRow.xml'/>
+    public void LJCSetCellText(int index, object value)
+    {
+      if (DataGridView != null)
+      {
+        // Ensure that column exists.
+        if (index >= 0 && index < Cells.Count)
+        {
+          if (null == value)
+          {
+            value = "";
+          }
+          Cells[index].Value = value.ToString();
         }
       }
     }
