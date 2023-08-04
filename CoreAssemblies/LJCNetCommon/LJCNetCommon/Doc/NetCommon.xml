@@ -64,12 +64,19 @@
       </code>
     </example>
   </CompareNull>
-  <HasData>
+  <HasColumns>
     <summary>
-      Checks a data table and returns true if it contains any rows. (E)
+      Checks a data table for columns definitions.
     </summary>
     <param name="dataTable">The data table object.</param>
-    <returns>True if the data table contains any rows.</returns>
+    <returns>True if the data table contains Columns.</returns>
+  </HasColumns>
+  <HasData>
+    <summary>
+      Checks a data table for rows. (E)
+    </summary>
+    <param name="dataTable">The data table object.</param>
+    <returns>True if the data table contains rows.</returns>
     <remarks>
       This allows a single if statement where the DataTable value may be null.
     </remarks>
@@ -88,6 +95,13 @@
       </code>
     </example>
   </HasData>
+  <HasItems>
+    <summary>
+      Checks an IList collection for items.
+    </summary>
+    <param name="list">The IList interface.</param>
+    <returns>True if the collection contains items.</returns>
+  </HasItems>
   <IsEqual>
     <summary>
       Checks if two values are equal.

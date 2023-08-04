@@ -47,25 +47,36 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Checks a data table for columns definitions.
+    /// <include path='items/HasColumns/*' file='Doc/NetCommon.xml'/>
+    public static bool HasColumns(DataTable dataTable)
+    {
+      bool retValue = true;
+
+      if (dataTable.Columns != null
+        && dataTable.Columns.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Checks a data table and returns true if it contains any rows. (E)
     /// <include path='items/HasData/*' file='Doc/NetCommon.xml'/>
     public static bool HasData(DataTable dataTable)
     {
-      bool retVal = true;
+      bool retValue = true;
 
       if (dataTable == null || dataTable.Rows == null
         || dataTable.Rows.Count == 0)
       {
-        retVal = false;
+        retValue = false;
       }
-      return retVal;
+      return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="list"></param>
-    /// <returns></returns>
+    // Checks an IList collection for items.
+    /// <include path='items/HasItems/*' file='Doc/NetCommon.xml'/>
     public static bool HasItems(IList list)
     {
       bool retValue = false;
@@ -182,63 +193,63 @@ namespace LJCNetCommon
     /// <include path='items/GetBoolean/*' file='Doc/NetCommon.xml'/>
     public static bool GetBoolean(object value)
     {
-      bool retVal = default;
+      bool retValue = default;
 
       var type = value.GetType();
       if (typeof(bool) == type)
       {
-        retVal = Convert.ToBoolean(value);
+        retValue = Convert.ToBoolean(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a byte value from an object. (E)
     /// <include path='items/GetByte/*' file='Doc/NetCommon.xml'/>
     public static byte GetByte(object value)
     {
-      byte retVal = default;
+      byte retValue = default;
 
       var type = value.GetType();
       if (typeof(byte) == type)
       {
-        retVal = Convert.ToByte(value);
+        retValue = Convert.ToByte(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a character value from an object. (E)
     /// <include path='items/GetChar/*' file='Doc/NetCommon.xml'/>
     public static char GetChar(object value)
     {
-      char retVal = default;
+      char retValue = default;
 
       var type = value.GetType();
       if (typeof(char) == type)
       {
-        retVal = Convert.ToChar(value);
+        retValue = Convert.ToChar(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a decimal value from an object. (E)
     /// <include path='items/GetDateTime/*' file='Doc/NetCommon.xml'/>
     public static DateTime? GetDateTime(object value)
     {
-      DateTime? retVal = null;
+      DateTime? retValue = null;
 
       var type = value.GetType();
       if (typeof(DateTime) == type)
       {
-        retVal = Convert.ToDateTime(value);
+        retValue = Convert.ToDateTime(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a decimal value from an object. (E)
     /// <include path='items/GetDecimal/*' file='Doc/NetCommon.xml'/>
     public static decimal GetDecimal(object value)
     {
-      decimal retVal = default;
+      decimal retValue = default;
 
       var type = value.GetType();
       if (typeof(decimal) == type
@@ -246,16 +257,16 @@ namespace LJCNetCommon
         || typeof(int) == type
         || typeof(short) == type)
       {
-        retVal = Convert.ToDecimal(value);
+        retValue = Convert.ToDecimal(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a decimal value from an object. (E)
     /// <include path='items/GetDouble/*' file='Doc/NetCommon.xml'/>
     public static double GetDouble(object value)
     {
-      double retVal = default;
+      double retValue = default;
 
       var type = value.GetType();
       if (typeof(double) == type
@@ -264,54 +275,54 @@ namespace LJCNetCommon
         || typeof(int) == type
         || typeof(short) == type)
       {
-        retVal = Convert.ToDouble(value);
+        retValue = Convert.ToDouble(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a short value from an object. (E)
     /// <include path='items/GetInt16/*' file='Doc/NetCommon.xml'/>
     public static short GetInt16(object value)
     {
-      short retVal = default;
+      short retValue = default;
 
       var type = value.GetType();
       if (typeof(short) == type)
       {
-        retVal = Convert.ToInt16(value);
+        retValue = Convert.ToInt16(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets an integer value from an object. (E)
     /// <include path='items/GetInt32/*' file='Doc/NetCommon.xml'/>
     public static int GetInt32(object value)
     {
-      int retVal = default;
+      int retValue = default;
 
       var type = value.GetType();
       if (typeof(int) == type
         || typeof(short) == type)
       {
-        retVal = Convert.ToInt32(value);
+        retValue = Convert.ToInt32(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a long value from an object. (E)
     /// <include path='items/GetInt64/*' file='Doc/NetCommon.xml'/>
     public static long GetInt64(object value)
     {
-      long retVal = default;
+      long retValue = default;
 
       var type = value.GetType();
       if (typeof(long) == type
         || typeof(int) == type
         || typeof(short) == type)
       {
-        retVal = Convert.ToInt64(value);
+        retValue = Convert.ToInt64(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets an instantiated object value.
@@ -377,7 +388,7 @@ namespace LJCNetCommon
     /// <include path='items/GetSingle/*' file='Doc/NetCommon.xml'/>
     public static float GetSingle(object value)
     {
-      float retVal = default;
+      float retValue = default;
 
       var type = value.GetType();
       if (typeof(Single) == type
@@ -385,23 +396,23 @@ namespace LJCNetCommon
         || typeof(int) == type
         || typeof(short) == type)
       {
-        retVal = Convert.ToSingle(value);
+        retValue = Convert.ToSingle(value);
       }
-      return retVal;
+      return retValue;
     }
 
     // Gets a trimmed string value from an object. (E)
     /// <include path='items/GetString/*' file='Doc/NetCommon.xml'/>
     public static string GetString(object value)
     {
-      string retVal = default;
+      string retValue = default;
 
       if (value != null
         && false == string.IsNullOrWhiteSpace(value.ToString()))
       {
-        retVal = value.ToString().Trim();
+        retValue = value.ToString().Trim();
       }
-      return retVal;
+      return retValue;
     }
     #endregion
 
