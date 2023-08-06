@@ -4,5 +4,6 @@ set changeFilePath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFile
 set changeFileSpec=%changeFilePath%\ChangeFile.txt"
 set multiFilter="*.cs|*.csproj|*.sln|*.config|*.cmd|*.txt|Doc\*.xml"
 set skipFiles="ChangeFile.txt|PagesChangeFile.txt|BackupLog.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd"
+
 set startFolder="LJCProjectsDev"
 set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin

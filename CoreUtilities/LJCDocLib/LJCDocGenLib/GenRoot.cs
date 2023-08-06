@@ -5,8 +5,11 @@ using LJCDocLibDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace LJCDocGenLib
 {
@@ -75,12 +78,17 @@ namespace LJCDocGenLib
       StringBuilder builder = new StringBuilder(128);
 
       builder.Append(CreateHTMLSection(HTMLSection.Head));
-      foreach (DocAssemblyGroup assemblyGroup in DataRoot.AssemblyGroups)
+      var assemblyGroups = DataRoot.AssemblyGroups.OrderBy(g => g.Sequence).ToList();
+      foreach (DocAssemblyGroup assemblyGroup in assemblyGroups)
       {
         builder.Append(CreateGroupSection(HTMLSection.Head
           , assemblyGroup.Heading));
 
         var assemblyManager = Managers.DocAssemblyManager;
+        assemblyManager.SetOrderBy(new List<string>()
+        {
+          DocAssembly.ColumnSequence
+        });
         var docAssemblies = assemblyManager.LoadWithParentID(assemblyGroup.ID);
         foreach (DocAssembly docAssembly in docAssemblies)
         {

@@ -49,17 +49,17 @@ msbuild CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess.sln
 
 set /a counter+=1
 echo - >> Build.txt
-echo ----------------- %counter% - LJCDBServiceLib ------------- >> Build.txt
-echo LJCDBServiceLib >> Build.txt
-call CoreAssemblies\LJCDBServiceLib\UpdateDBServiceLib.cmd BuildAll >> Build.txt
-msbuild CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
 echo ----------------- %counter% - LJCLibraries ---------------- >> Build.txt
 echo LJCLibraries >> Build.txt
 call CoreAssemblies\LJCLibraries\UpdateLibraries.cmd BuildAll >> Build.txt
 msbuild CoreAssemblies\LJCLibraries\LJCLibraries.sln
+
+set /a counter+=1
+echo - >> Build.txt
+echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
+echo LJCGridDataLib >> Build.txt
+call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCGridDataLib\LJCGridDataLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
@@ -70,10 +70,10 @@ msbuild CoreAssemblies\LJCDBClientLib\LJCDBClientLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
-echo ----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
-echo LJCGridDataLib >> Build.txt
-call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
-msbuild CoreAssemblies\LJCGridDataLib\LJCGridDataLib.sln
+echo ----------------- %counter% - LJCDBServiceLib ------------- >> Build.txt
+echo LJCDBServiceLib >> Build.txt
+call CoreAssemblies\LJCDBServiceLib\UpdateDBServiceLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib.sln
 
 set /a counter+=1
 echo - >> Build.txt

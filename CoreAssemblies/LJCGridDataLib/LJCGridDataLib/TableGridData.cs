@@ -11,13 +11,13 @@ using System.Windows.Forms;
 namespace LJCGridDataLib
 {
   // Provides DataTable helpers for an LJCDataGrid control.
-  /// <include path='items/TableGridData/*' file='Doc/TableGrid.xml'/>
+  /// <include path='items/TableGridData/*' file='Doc/TableGridData.xml'/>
   public class TableGridData
   {
     #region Static Methods
 
     // Creates a new DataColumns object.
-    /// <include path='items/CreateDataColumns/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/CreateDataColumns/*' file='Doc/TableGridData.xml'/>
     public static DataColumnCollection CreateDataColumns()
     {
       DataColumnCollection retValue;
@@ -28,7 +28,7 @@ namespace LJCGridDataLib
     }
 
     // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/DataColumnClone/*' file='Doc/TableGridData.xml'/>
     public static DataColumn DataColumnClone(DataColumn dataColumn)
     {
       DataColumn retValue = null;
@@ -50,7 +50,7 @@ namespace LJCGridDataLib
     }
 
     // Clones a DataColumn collection.
-    /// <include path='items/DataColumnsClone/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/DataColumnsClone/*' file='Doc/TableGridData.xml'/>
     public static DataColumnCollection DataColumnsClone(DataTable dataTable)
     {
       DataColumn dataColumnClone;
@@ -70,7 +70,7 @@ namespace LJCGridDataLib
     }
 
     // Creates a ColumnNames list from a DataColumns collection.
-    /// <include path='items/GetColumnNames/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/GetColumnNames/*' file='Doc/TableGridData.xml'/>
     public static List<string> GetColumnNames(DataColumnCollection dataColumns)
     {
       List<string> retValue = null;
@@ -87,7 +87,7 @@ namespace LJCGridDataLib
     }
 
     // Creates a DbColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/GetDbColumn/*' file='Doc/TableGridData.xml'/>
     public static DbColumn GetDbColumn(DataColumn dataColumn)
     {
       DbColumn retValue;
@@ -107,7 +107,7 @@ namespace LJCGridDataLib
     }
 
     // Creates a DbColumns collection from a DataColumns collection.
-    /// <include path='items/GetDbColumns/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/GetDbColumns/*' file='Doc/TableGridData.xml'/>
     public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
     {
       DbColumns retValue = null;
@@ -125,7 +125,7 @@ namespace LJCGridDataLib
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    /// <include path='items/GetDataColumns/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/GetDataColumns/*' file='Doc/TableGridData.xml'/>
     public static DataColumnCollection GetDataColumns(DataColumnCollection dataColumns
       , List<string> columnNames)
     {
@@ -155,7 +155,7 @@ namespace LJCGridDataLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/TableGridC/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/TableGridC/*' file='Doc/TableGridData.xml'/>
     public TableGridData(LJCDataGrid grid)
     {
       mGrid = grid;
@@ -165,41 +165,40 @@ namespace LJCGridDataLib
     #region Configuration Methods
 
     // Sets the Display Columns from the DataColumns object.
-    /// <include path='items/SetDisplayColumns/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/SetDisplayColumns/*' file='Doc/TableGridData.xml'/>
     public void SetDisplayColumns(DataColumnCollection dataColumns
       , List<string> propertyNames = null)
     {
-      if (null == propertyNames)
-      {
-        propertyNames = GetColumnNames(dataColumns);
-      }
-
       // Create DataDefinition from dataColumns.
       DataDefinition = GetDbColumns(dataColumns);
+      DisplayColumns = new DbColumns(DataDefinition);
 
-      // Create DisplayColumns value.
-      DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+      // Create DisplayColumns with property names.
+      if (NetCommon.HasItems(propertyNames))
+      {
+        DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+      }
     }
 
     // Sets the Display Columns from the DataObject properties.
-    /// <include path='items/SetDisplayColumns1/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/SetDisplayColumns1/*' file='Doc/TableGridData.xml'/>
     public void SetDisplayColumns(object dataObject
-      , List<string> propertyNames = null)
+      , DbColumns dataDefinition = null, List<string> propertyNames = null)
     {
-      if (null == propertyNames)
-      {
-        propertyNames = DbColumns.LJCGetPropertyNames(dataObject);
-      }
-
       // Create DataDefinition from dataObject value.
-      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject);
+      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject
+        , dataDefinition);
+      DisplayColumns = new DbColumns(DataDefinition);
 
-      // Create DisplayColumns value.
-      DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+      // Create DisplayColumns with property names.
+      if (NetCommon.HasItems(propertyNames))
+      {
+        DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
+      }
     }
 
     // Removes a display column.
-    /// <include path='items/RemoveDisplayColumn/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/RemoveDisplayColumn/*' file='Doc/TableGridData.xml'/>
     public void RemoveDisplayColumn(string columnName)
     {
       foreach (DbColumn dataColumn in DisplayColumns)
@@ -217,11 +216,10 @@ namespace LJCGridDataLib
 
     // Loads the grid row columns from the DataRows collection for each grid
     // column name found in the DataTable.
-    /// <include path='items/LoadColumnRows/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/LoadColumnRows/*' file='Doc/TableGridData.xml'/>
     public void LoadColumnRows(DataTable dataTable)
     {
-      if (dataTable != null
-        && dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
         foreach (DataRow dataRow in dataTable.Rows)
         {
@@ -233,7 +231,6 @@ namespace LJCGridDataLib
             if (value != null)
             {
               listValues.Add(value);
-              //gridRow.LJCSetCellText(gridColumn.Name, value);
             }
           }
           var values = listValues.ToArray();
@@ -244,11 +241,10 @@ namespace LJCGridDataLib
 
     // Loads grid rows from the DataRows collection restricted by the
     // DisplayColumns property.
-    /// <include path='items/LoadRows/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/LoadRows/*' file='Doc/TableGridData.xml'/>
     public void LoadRows(DataTable dataTable)
     {
-      if (dataTable != null
-        && dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
         if (null == DisplayColumns)
         {
@@ -263,7 +259,7 @@ namespace LJCGridDataLib
     }
 
     // Adds a grid row and updates it with the DataRow values.
-    /// <include path='items/RowAdd/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/RowAdd/*' file='Doc/TableGridData.xml'/>
     public LJCGridRow RowAdd(DataRow dataRow)
     {
       LJCGridRow retValue = null;
@@ -282,10 +278,11 @@ namespace LJCGridDataLib
     }
 
     // Updates a grid row with the DataRow values.
-    /// <include path='items/RowSetValues/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/RowSetValues/*' file='Doc/TableGridData.xml'/>
     public void RowSetValues(LJCGridRow gridRow, DataRow dataRow)
     {
-      if (DisplayColumns != null && DisplayColumns.Count > 0)
+      //if (DisplayColumns != null && DisplayColumns.Count > 0)
+      if (NetCommon.HasItems(DisplayColumns))
       {
         foreach (DbColumn dataColumn in DisplayColumns)
         {
@@ -301,7 +298,7 @@ namespace LJCGridDataLib
     }
 
     // Updates the current row with the DataRow values.
-    /// <include path='items/RowUpdate/*' file='Doc/TableGrid.xml'/>
+    /// <include path='items/RowUpdate/*' file='Doc/TableGridData.xml'/>
     public void RowUpdate(DataRow dataRow)
     {
       if (mGrid != null

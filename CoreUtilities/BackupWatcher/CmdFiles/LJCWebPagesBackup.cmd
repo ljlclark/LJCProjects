@@ -6,15 +6,21 @@ rem LJCWebPagesBackup.cmd
 echo:
 
 set mainPath="C:\Users\Les\Documents\Visual Studio 2022
-set changeFileSpec="bin\PagesChangeFile.txt"
+set sourcePath=%mainPath%\WebSitesDev\CodeDoc\LJCCodeDoc"
 set changeFilePath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles
 set changeFileSpec=%changeFilePath%\PagesChangeFile.txt"
-rem set skipFiles="ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd"
+set multiFilter="*.html"
+
 set startFolder="LJCCodeDoc"
+set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
 
 echo -----
 set targetPath=%mainPath%\WebPages\LJCCodeDoc"
-set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
+
+del %changeFileSpec%
+echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
+%binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
+
+del %changeFilePath%\BackupLog.txt
 echo %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
 %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
-del %changeFileSpec%

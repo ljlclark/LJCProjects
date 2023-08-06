@@ -106,6 +106,25 @@
     </summary>
     <param name="dataColumns">The DataColumns collection.</param>
     <returns>The DbColumns collection.</returns>
+    <example>
+      <code>
+        // See the DataAccess setup code on the TableGridData class page.
+
+        // Sets the DbColumns from the DataColumns object.
+        private DbColumns GetDbColumns(DataAccess dataAccess)
+        {
+          DbColumns retValue = null;
+
+          var sql = "select * from TableName";
+          var dataTable = dataAccess.GetSchemaOnly(sql);
+          if (NetCommon.HasColumns(dataTable))
+          {
+            retValue = TableGridData.GetDbColumns(dataTable.Columns);
+          }
+          return retValue;
+        }
+      </code>
+    </example>
   </GetDbColumns>
 
   <GetDataColumns>
@@ -141,9 +160,9 @@
         {
           DbColumns retValue = null;
 
-          var sql = "select * from Province";
+          var sql = "select * from TableName";
           var dataTable = dataAccess.GetDataTable(sql);
-          if (NetCommon.HasData(dataTable))
+          if (NetCommon.HasColumns(dataTable))
           {
             var tableGridData = new TableGridData(LJCDataGridName);
             tableGridData.SetDisplayColumns(dataTable.Columns);
@@ -159,6 +178,7 @@
       Sets the Display Columns from the DataObject properties.
     </summary>
     <param name="dataObject">The DataObject reference.</param>
+    <param name="dataDefinition">The DbColumns data definition.</param>
     <param name="propertyNames">The Property Names.</param>
     <example>
       <code>
@@ -169,14 +189,14 @@
         {
           DbColumns retValue = null;
 
-          var sql = "select * from Province";
-          var dataTable = dataAccess.GetDataTable(sql);
-          if (NetCommon.HasData(dataTable))
+          var sql = "select * from TableName";
+          var dataTable = dataAccess.GetSchemaOnly(sql);
+          if (NetCommon.HasColumns(dataTable))
           {
-            var province = new Province();
-          
+            var dataObject = new DataObject();
+            var dataDefinition = TableGridData.GetDbColumns(dataTable.Columns);
             var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(province);
+            tableGridData.SetDisplayColumns(dataObject, dataDefinition);
             retValue = tableGridData.DisplayColumns;
           }
           return retValue;

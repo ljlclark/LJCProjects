@@ -35,7 +35,8 @@ namespace LJCWinFormControls
     /// <include path='items/LJCRowSetValues2/*' file='Doc/LJCGridRow.xml'/>
     public void LJCSetValues(DataGridView grid, DbValues dbValues)
     {
-      if ((dbValues != null && dbValues.Count() > 0))
+      //if ((dbValues != null && dbValues.Count() > 0))
+      if (NetCommon.HasItems(dbValues))
       {
         List<object> listValues = new List<object>();
         foreach (DataGridViewColumn gridColumn in grid.Columns)

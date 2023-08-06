@@ -16,26 +16,11 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
-set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
-
-set src=LJCDBClientLib\LJCDBClientLib\%bin%
-copy %assmRoot%%src%\LJCDBClientLib.dll %to%
-
-set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
-
-set src=LJCGridDataLib\LJCGridDataLib\%bin%
-copy %assmRoot%%src%\LJCGridDataLib.dll %to%
-
 set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
-
-set src=LJCRegionManager\LJCRegionDAL\%bin%
-copy %appsRoot%%src%\LJCRegionDAL.dll %to%
 
 set src=LJCLibraries\Output
 copy %assmRoot%%src%\LJCWinFormControls.dll %to%
