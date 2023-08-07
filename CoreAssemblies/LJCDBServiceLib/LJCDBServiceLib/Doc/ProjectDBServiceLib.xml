@@ -23,12 +23,14 @@
       <para>
         The data is returned to the calling program as a Result XML message.
       </para>
+      <para>Referenced Assemblies</para>
       <para>
-        - LJCDBServiceLib
-        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCDBDataAccess&lt;/div&gt;
         &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
+        &lt;div class='Text'&gt;- CipherLib&lt;/div&gt;
         &lt;div class='Text'&gt;- LJCDataAccess&lt;/div&gt;
         &lt;div class='Text'&gt;- LJCDataAccessConfig&lt;/div&gt;
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
       </para>
     </remarks>
     <example>

@@ -19,6 +19,10 @@
       <para>
         The LJCTextDataReaderLib project is part of the LJCTextDataReader solution.
       </para>
+      <para>Referenced Assemblies</para>
+      <para>
+        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
   </LineOffset>
 </items>

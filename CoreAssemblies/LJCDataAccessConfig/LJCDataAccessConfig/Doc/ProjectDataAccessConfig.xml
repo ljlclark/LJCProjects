@@ -20,6 +20,10 @@
         &lt;span class="userType"&gt;DataConfigs&lt;/span&gt; and
         &lt;span class="userType"&gt;DataConfig&lt;/span&gt;.
       </para>
+      <para>Referenced Assemblies</para>
+      <para>
+        &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
     <example>
       <para>
