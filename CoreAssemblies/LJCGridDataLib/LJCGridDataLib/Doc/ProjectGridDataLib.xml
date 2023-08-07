@@ -33,10 +33,10 @@
       </para>
       <para>Referenced Assemblies</para>
       <para>
-        &lt;div class='Text'&gt;- LJCWinFormControls&lt;/div&gt;
-        &lt;div class='Text'&gt;- LJCDBMessage&lt;/div&gt;
-        &lt;div class='Text'&gt;- CipherLib&lt;/div&gt;
-        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCWinFormControls&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCDBMessage&lt;/div&gt;
+        &lt;div class='Text'&gt;CipherLib&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
       </para>
     </remarks>
     <example>

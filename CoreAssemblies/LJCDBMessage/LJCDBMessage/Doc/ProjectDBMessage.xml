@@ -59,10 +59,10 @@
       </para>
       <para>Referenced Assemblies</para>
       <para>
-        &lt;div class='Text'&gt;- LJCDataAccess&lt;/div&gt;
-        &lt;div class='Text'&gt;- LJCDataAccessConfig&lt;/div&gt;
-        &lt;div class='Text'&gt;- LJCTextDataReaderLib&lt;/div&gt;
-        &lt;div class='Text'&gt;- LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCDataAccess&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCDataAccessConfig&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCTextDataReaderLib&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
       </para>
     </remarks>
     <example>
