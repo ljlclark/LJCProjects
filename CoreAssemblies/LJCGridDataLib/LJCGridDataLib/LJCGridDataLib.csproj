@@ -40,7 +40,8 @@
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
-    <Reference Include="LJCWinFormControls">
+    <Reference Include="LJCWinFormControls, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\LJCWinFormControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -61,9 +62,7 @@
   <ItemGroup>
     <Content Include="Doc\ProjectGridDataLib.xml" />
     <Content Include="Doc\ResultGridData.xml" />
-    <Content Include="Doc\TableGrid.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Doc\TableGridData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

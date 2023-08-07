@@ -22,11 +22,14 @@ copy %assmRoot%%src%\LJCDBClientLib.dll %to%
 set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %assmRoot%%src%\LJCDBMessage.dll %to%
 
-set src=LJCLibraries\Output
-copy %assmRoot%%src%\*.* %to%
-
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormCommon\%bin%
+copy %assmRoot%%src%\LJCWinFormCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormControls\%bin%
+copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

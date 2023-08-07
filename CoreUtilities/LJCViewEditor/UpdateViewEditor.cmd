@@ -46,9 +46,6 @@ copy %assmRoot%%src%\LJCDBViewDAL.dll %to%
 set src=LJCGridDataLib\LJCGridDataLib\%bin%
 copy %assmRoot%%src%\LJCGridDataLib.dll %to%
 
-set src=LJCLibraries\Output
-copy %assmRoot%%src%\*.dll %to%
-
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
@@ -57,6 +54,12 @@ copy %utilRoot%%src%\LJCSQLUtilLib.dll %to%
 
 set src=LJCSQLUtilLib\LJCSQLUtilLibDAL\%bin%
 copy %utilRoot%%src%\LJCSQLUtilLibDAL.dll %to%
+
+set src=LJCLibraries\LJCWinFormCommon\%bin%
+copy %assmRoot%%src%\LJCWinFormCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormControls\%bin%
+copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

@@ -22,7 +22,7 @@ copy %assmRoot%%src%\LJCDBMessage.dll %to%
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
-set src=LJCLibraries\Output
+set src=LJCLibraries\LJCWinFormControls\%bin%
 copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 rem *****************************

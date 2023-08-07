@@ -34,9 +34,6 @@ copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
-set src=LJCLibraries\Output
-copy %assmRoot%%src%\*.dll %to%
-
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
@@ -51,6 +48,12 @@ copy %appsRoot%%src%\LJCRegionItem.dll %to%
 
 set src=LJCRegionManager\LJCRegionManager\%bin%
 copy %appsRoot%%src%\LJCRegionManager.exe %to%
+
+set src=LJCLibraries\LJCWinFormCommon\%bin%
+copy %assmRoot%%src%\LJCWinFormCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormControls\%bin%
+copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
