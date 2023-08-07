@@ -1,7 +1,3 @@
-
-## WebSite
-https://ljlclark.github.io/LJCProjects/
-
 # LJCProjects
 The LJC Libraries, Utilities and Applications are a set of .NET Assemblies that were developed to work together with the following objectives:
   * Shorten the development time for building .NET Business Database Applications.
