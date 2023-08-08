@@ -4,8 +4,6 @@
 using System;
 using System.Data;
 using System.Data.Common;
-using System.IO;
-using System.Text;
 using LJCNetCommon;
 using MySql.Data.MySqlClient;
 
@@ -208,10 +206,7 @@ namespace LJCDataAccess
         }
       }
 
-      if (reader != null)
-      {
-        reader.Close();
-      }
+      reader?.Close();
       return retValue;
     }
 
@@ -257,10 +252,7 @@ namespace LJCDataAccess
       }
       finally
       {
-        if (connection != null)
-        {
-          connection.Close();
-        }
+        connection?.Close();
       }
       return retValue;
     }

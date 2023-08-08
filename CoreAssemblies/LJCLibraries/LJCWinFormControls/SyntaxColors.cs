@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SyntaxColors.cs
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;

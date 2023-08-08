@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColorSetting.cs
-using System;
 using System.Drawing;
 
 namespace LJCWinFormControls

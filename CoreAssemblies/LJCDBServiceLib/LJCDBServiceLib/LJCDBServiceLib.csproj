@@ -36,10 +36,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\CipherLib.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDataAccess">
-      <HintPath>..\External\LJCDataAccess.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>

@@ -45,6 +45,7 @@
       <para>
         &lt;div class='Text'&gt;LJCDataAccessConfig&lt;/div&gt;
         &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;MySql.Data&lt;/div&gt;
       </para>
     </remarks>
     <example>

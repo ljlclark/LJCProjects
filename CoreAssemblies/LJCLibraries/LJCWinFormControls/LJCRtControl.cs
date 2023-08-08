@@ -1,7 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCRtControl.cs
-using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;

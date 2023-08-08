@@ -4,7 +4,6 @@
 using LJCNetCommon;
 using LJCWinFormControls;
 using LJCDBMessage;
-using System;
 using System.Collections.Generic;
 
 namespace LJCGridDataLib

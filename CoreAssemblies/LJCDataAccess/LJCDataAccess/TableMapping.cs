@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TableMapping.cs
-using System;
 using System.Data.Common;
 
 namespace LJCDataAccess
