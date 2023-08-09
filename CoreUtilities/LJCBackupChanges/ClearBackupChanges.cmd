@@ -3,16 +3,13 @@ echo Licensed under the MIT License.
 rem ClearBackupChanges.cmd
 
 set bin=bin\Debug
-if %1%. == ClearAll. goto ClearAll
-set Solution=..\LJCBackupChanges
-set ClearBuild=..\..\ClearBuildDetail.cmd
-goto Clear
-
-:ClearAll
 set Solution=CoreUtilities\LJCBackupWatcherLib
 set ClearBuild=ClearBuildDetail.cmd
-
-:Clear
+if %1%. neq ClearAll. (
+  set Solution=..\LJCBackupChanges
+  set ClearBuild=..\..\ClearBuildDetail.cmd
+)
+pause
 set Project=LJCBackupChanges
 set File=LJCBackupChanges
 call %ClearBuild%
@@ -27,3 +24,4 @@ set Project=LJCBackupWatcherLib
 set File=LJCBackupWatcherLib
 call %ClearBuild%
 rmdir %Solution%\%Project%\bin\Release
+pause

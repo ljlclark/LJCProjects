@@ -1,17 +1,17 @@
+echo off
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
-rem UpdateCreateChanges.cmd
+rem ***UpdateCreateChanges.cmd
 
-if %1%. == BuildAll. goto BuildAll
 set mainRoot=..\..\
-call %mainRoot%SetupUpdate.cmd %1%
-call %mainRoot%SetupFolder.cmd
-goto Process:
-:BuildAll
-call SetupUpdate.cmd %1%
-set toRoot=%util%\LJCBackupCreateChanges\
-call SetupFolder.cmd
-:Process
+if %1%. == BuildAll. (
+  call SetupUpdate.cmd %1%
+  set toRoot=%util%\LJCBackupCreateChanges\
+  call SetupFolder.cmd
+) else (
+  call %mainRoot%SetupUpdate.cmd %1%
+  call %mainRoot%SetupFolder.cmd
+)
 
 rem ***************************
 rem *** Referenced Binaries ***
@@ -28,7 +28,4 @@ rem *** Runtime-only Binaries ***
 rem ------------------------------------
 set to=%toRoot%LJCBackupCreateChanges\%bin%
 
-if %1%. == BuildAll. goto End
-if %1%. == nopause. goto End
-pause
-:End
+if %1%. neq nopause. pause

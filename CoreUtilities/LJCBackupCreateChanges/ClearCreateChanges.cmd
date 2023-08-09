@@ -22,3 +22,4 @@ set Project=LJCCreateFileChangesLib
 set File=LJCCreateFileChangesLib
 call %ClearBuild%
 rmdir %Solution%\%Project%\bin\Release
+pause
