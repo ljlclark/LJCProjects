@@ -37,11 +37,11 @@ namespace LJCGenDocEdit
         ListHelper.SetPanelControls(AssemblySplit.Panel2, ClassItemHeader
           , null, ClassItemGrid);
 
-        ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
-          , null, ClassGroupGrid);
-        ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeader
-          , null, ClassItemGrid);
-        ClassItemGrid.Height -= 2;
+        //ListHelper.SetPanelControls(ClassSplit.Panel1, ClassGroupHeader
+        //  , null, ClassGroupGrid);
+        //ListHelper.SetPanelControls(ClassSplit.Panel2, ClassItemHeader
+        //  , null, ClassItemGrid);
+        //ClassItemGrid.Height -= 2;
 
         ListHelper.SetPanelControls(MethodSplit.Panel1, MethodGroupHeader
           , null, MethodGroupGrid);
