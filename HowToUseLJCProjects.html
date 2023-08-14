@@ -58,11 +58,19 @@
       </p>
       <p>
         It is recommended to start by copying the following project folders and
-        subfolders: CoreUtilities\LJCNetCommon, CoreUtilities\LJCDataAccessConfig
-        and CoreUtilities\LJCDataAccess.The LJCNetCommon assembly is used in
-        almost all other assemblies and creates the ".NET Common Library". The
-        other two create the "Data Access Configuration Library" and "ADO.NET
-        Data Access Library".
+        subfolders from CoreAssemblies:
+        <pre>
+  LJCNetCommon          .NET Common Library
+  LJCDataAccessConfig   Data Access Configuration Library
+  LJCDataAccess.        ADO.NET Data Access Library</pre> 
+      </p>
+      <p>
+        Copy the "Libraries" folder from CoreAssemblies if you are going to
+        develop with WinForms. This project builds the following assemblies:
+        <pre>
+  LJCWinFormCommon      WinForm Common Library
+  LJCWinFormControls    WinForm Control Library
+</pre>
       </p>
       <p>
         Now just double-click your left mouse button on BuildAll.cmd in your
