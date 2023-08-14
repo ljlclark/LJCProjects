@@ -59,23 +59,7 @@ namespace LJCCreateFileChangesLib
     {
       bool retValue = true;
 
-      if (File.Exists(mChangeFileSpec))
-      {
-        var lines = File.ReadAllLines(mChangeFileSpec);
-        for (int index = 0; index < lines.Count(); index++)
-        {
-          var line = lines[index];
-
-          // File already has the change command.
-          if (line == fileChange.Text())
-          {
-            retValue = false;
-            break;
-          }
-        }
-      }
-
-      if (retValue)
+      if (false == HasLine(mChangeFileSpec, fileChange.Text()))
       {
         File.AppendAllText(mChangeFileSpec, $"{fileChange.Text()}\r\n");
       }
@@ -119,6 +103,8 @@ namespace LJCCreateFileChangesLib
       var sourceStartFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
 
+      var missingFolders = "MissingFolders.txt";
+      File.Delete(missingFolders);
       var sourceSpecs = Directory.GetFiles(mSourcePath, filter
         , SearchOption.AllDirectories);
       foreach (var sourceSpec in sourceSpecs)
@@ -131,11 +117,22 @@ namespace LJCCreateFileChangesLib
         }
 
         // Skip file for target folders that do not exist.
-        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder);
+        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder
+          , out string codePath);
         var filePath = Path.GetDirectoryName(targetSpec);
-        if (false == Directory.Exists(filePath)
-          || IsSkipFile(targetSpec)
-          || HasExtraDots(targetSpec, filter))
+        if (false == Directory.Exists(filePath))
+        {
+          if (NetString.HasValue(codePath))
+          {
+            if (false == HasLine(missingFolders, codePath))
+            {
+              File.AppendAllText(missingFolders, $"{codePath}\r\n");
+            }
+          }
+          continue;
+        }
+        if (IsSkipFile(targetSpec)
+        || HasExtraDots(targetSpec, filter))
         {
           continue;
         }
@@ -171,7 +168,8 @@ namespace LJCCreateFileChangesLib
           continue;
         }
 
-        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetStartFolder);
+        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetStartFolder
+          , out string _);
         if (false == File.Exists(sourceSpec))
         {
           // Target file is not found in source path.
@@ -181,12 +179,37 @@ namespace LJCCreateFileChangesLib
       }
     }
 
+    // Check if text file already has a text line.
+    private bool HasLine(string fileSpec, string textLine)
+    {
+      bool retValue = false;
+
+      if (File.Exists(fileSpec))
+      {
+        var lines = File.ReadAllLines(fileSpec);
+        for (int index = 0; index < lines.Count(); index++)
+        {
+          var line = lines[index];
+
+          // File already has the change command.
+          if (line.ToLower() == textLine.ToLower())
+          {
+            retValue = true;
+            break;
+          }
+        }
+      }
+      return retValue;
+    }
+
     // Create a 'to' file spec using the toFilePath and adding the folders and
     // file name using the fromFileSpec starting after the fromStartFolder.
     private string GetToSpec(string toFilePath
-      , string fromFileSpec, string fromStartFolder)
+      , string fromFileSpec, string fromStartFolder, out string codePath)
     {
       var retValue = toFilePath;
+
+      codePath = "";
       var fromPath = Path.GetDirectoryName(fromFileSpec);
       var fromFolders = fromPath.Split('\\');
       for (int index = fromFolders.Length - 1; index >= 0; index--)
@@ -200,6 +223,7 @@ namespace LJCCreateFileChangesLib
             if (NetString.HasValue(fromFolder))
             {
               retValue = Path.Combine(retValue, fromFolder);
+              codePath = Path.Combine(codePath, fromFolder);
             }
           }
           break;
