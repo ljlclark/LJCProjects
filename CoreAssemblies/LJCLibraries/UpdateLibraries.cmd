@@ -16,19 +16,8 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
-set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %assmRoot%%src%\LJCDataAccess.dll %to%
-
-set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
-
-set src=LJCDBMessage\LJCDBMessage\%bin%
-copy %assmRoot%%src%\LJCDBMessage.dll %to%
-
 set src=LJCNetCommon\LJCNetCommon
 copy %assmRoot%%src%\%bin%\LJCNetCommon.dll %to%
-
-copy %mainRoot%MySql.Data.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

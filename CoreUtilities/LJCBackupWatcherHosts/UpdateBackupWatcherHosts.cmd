@@ -32,6 +32,5 @@ rem ------------------------------------
 set to=%toRoot%BackupWatcherConsoleHost\%bin%
 
 if %1%. == BuildAll. goto End
-if %1%. == nopause. goto End
-pause
+if %1%. neq nopause. pause
 :End

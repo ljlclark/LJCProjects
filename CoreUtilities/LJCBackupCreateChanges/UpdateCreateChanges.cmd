@@ -28,4 +28,6 @@ rem *** Runtime-only Binaries ***
 rem ------------------------------------
 set to=%toRoot%LJCBackupCreateChanges\%bin%
 
+if %1%. == BuildAll. goto End
 if %1%. neq nopause. pause
+:End
