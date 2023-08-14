@@ -16,8 +16,11 @@
       <para>
         The WinForm Controls library is part of the LJCLibraries solution.
       </para>
-      &lt;div class='Text'&gt;LJCWinFormCommon&lt;/div&gt;
-      &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+      <para>Referenced Assemblies</para>
+      <para>
+        &lt;div class='Text'&gt;LJCWinFormCommon&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
   </Calendar>
 </items>
