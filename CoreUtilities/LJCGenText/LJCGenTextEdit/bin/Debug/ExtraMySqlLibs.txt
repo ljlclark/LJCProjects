@@ -1,0 +1,10 @@
+1  BouncyCastle.Crypto.dll
+2  Google.Protobuf.dll
+3  K4os.Compression.LZ4.dll
+4  K4os.Compression.LZ4.Streams.dll
+5  K4os.Hash.xxHash.dll
+6  Renci.SshNet.dll
+7 System.Buffers.dll
+8 System.Runtime.CompilerServices.Unsafe.dll
+9  Ubiety.Dns.Core.dll
+10 Zstandard.Net.dll

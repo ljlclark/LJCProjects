@@ -340,16 +340,48 @@ namespace LJCGenTextEdit
 
     #region Output
 
+    // <summary>XML Decodes the output text.</summary>
+    private void OutputDecode_Click(object sender, EventArgs e)
+    {
+      OutputRichText.Text = NetCommon.XmlDecode(OutputRichText.Text);
+    }
+
     // <summary>XML Encodes the output text.</summary>
     private void OutputEncode_Click(object sender, EventArgs e)
     {
       OutputRichText.Text = NetCommon.XmlEncode(OutputRichText.Text);
     }
 
-    // <summary>XML Decodes the output text.</summary>
-    private void OutputDecode_Click(object sender, EventArgs e)
+    // <summary>HTML Syntax Decodes the output text.</summary>
+    private void XMLSyntaxDecode_Click(object sender, EventArgs e)
     {
-      OutputRichText.Text = NetCommon.XmlDecode(OutputRichText.Text);
+      var text = OutputRichText.Text;
+
+      if (false == string.IsNullOrWhiteSpace(text))
+      {
+        text = Decode(text);
+        text = text.Replace("_ab_", "<span class=\"attrib\">");
+        text = text.Replace("_nb_", Decode("<span class=\"name\">_lt_"));
+        text = text.Replace("_ne_", Decode("</span>_gt_"));
+        text = text.Replace("_se_", "</span>");
+        OutputRichText.Text = text;
+      }
+    }
+
+    // <summary>HTML Syntax Encodes the output text.</summary>
+    private void XMLSyntaxEncode_Click(object sender, EventArgs e)
+    {
+      var text = OutputRichText.Text;
+
+      if (false == string.IsNullOrWhiteSpace(text))
+      {
+        text = Encode(text);
+        text = text.Replace("<span class=\"attrib\">", "_ab_");
+        text = text.Replace(Encode("<span class=\"name\">_lt_"), "_nb_");
+        text = text.Replace(Encode("</span>_gt_"), "_ne_");
+        text = text.Replace("</span>", "_se_");
+        OutputRichText.Text = text;
+      }
     }
 
     // <summary>Performs the Generate Output function.</summary>
@@ -375,6 +407,26 @@ namespace LJCGenTextEdit
     {
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
         , @"Output\OutputText.html");
+    }
+
+    // <summary>HTML Syntax Decodes < and >.</summary>
+    private string Decode(string text)
+    {
+      var retValue = text;
+
+      retValue = retValue.Replace("_lt_", "<span class=\"ltgt\"><</span>");
+      retValue = retValue.Replace("_gt_", "<span class=\"ltgt\">></span>");
+      return retValue;
+    }
+
+    // <summary>HTML Syntax Encodes < and >.</summary>
+    private string Encode(string text)
+    {
+      var retValue = text;
+
+      retValue = retValue.Replace("<span class=\"ltgt\"><</span>", "_lt_");
+      retValue = retValue.Replace("<span class=\"ltgt\">></span>", "_gt_");
+      return retValue;
     }
     #endregion
     #endregion
@@ -737,54 +789,6 @@ namespace LJCGenTextEdit
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
     #endregion
-
-    private void XMLSyntaxDecode_Click(object sender, EventArgs e)
-    {
-      var text = OutputRichText.Text;
-
-      if (false == string.IsNullOrWhiteSpace(text))
-      {
-        text = Decode(text);
-        text = text.Replace("_ab_", "<span class=\"attrib\">");
-        text = text.Replace("_nb_", Decode("<span class=\"name\">_lt_"));
-        text = text.Replace("_ne_", Decode("</span>_gt_"));
-        text = text.Replace("_se_", "</span>");
-        OutputRichText.Text = text;
-      }
-    }
-
-    private void XMLSyntaxEncode_Click(object sender, EventArgs e)
-    {
-      var text = OutputRichText.Text;
-
-      if (false == string.IsNullOrWhiteSpace(text))
-      {
-        text = Encode(text);
-        text = text.Replace("<span class=\"attrib\">", "_ab_");
-        text = text.Replace(Encode("<span class=\"name\">_lt_"), "_nb_");
-        text = text.Replace(Encode("</span>_gt_"), "_ne_");
-        text = text.Replace("</span>", "_se_");
-        OutputRichText.Text = text;
-      }
-    }
-
-    private string Decode(string text)
-    {
-      var retValue = text;
-
-      retValue = retValue.Replace("_lt_", "<span class=\"ltgt\"><</span>");
-      retValue = retValue.Replace("_gt_", "<span class=\"ltgt\">></span>");
-      return retValue;
-    }
-
-    private string Encode(string text)
-    {
-      var retValue = text;
-
-      retValue = retValue.Replace("<span class=\"ltgt\"><</span>", "_lt_");
-      retValue = retValue.Replace("<span class=\"ltgt\">></span>", "_gt_");
-      return retValue;
-    }
   }
 }
 

@@ -47,6 +47,10 @@ namespace LJCGenTextEdit
           , Path.GetDirectoryName(targetFileSpec));
         }
       }
+      if (false == Directory.Exists(sourceFolder))
+      {
+        NetFile.CreateFolder($@"{sourceFolder}\");
+      }
 
       string filter = "C#(*.cs)|*.cs|All Files(*.*)|*.*";
       targetFileSpec = FormCommon.SelectFile(filter, sourceFolder, "*.cs");
@@ -62,8 +66,8 @@ namespace LJCGenTextEdit
         targetFileSpec = NetFile.GetRelativePath(fromPath, targetFileSpec);
 
         // Target Path changed.
-        string targetPath = Path.GetDirectoryName(targetFileSpec);
-        if (0 != string.Compare(prevTargetPath, targetPath, true))
+        string outputPath = Path.GetDirectoryName(targetFileSpec);
+        if (0 != string.Compare(prevTargetPath, outputPath, true))
         {
           var message = $"Save changed Output Path '{targetFileSpec}'?";
           if (DialogResult.Yes == MessageBox.Show(message, "Save Confirmation"
