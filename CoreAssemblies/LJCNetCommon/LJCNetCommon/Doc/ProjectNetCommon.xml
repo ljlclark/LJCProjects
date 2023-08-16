@@ -35,6 +35,9 @@
         The most commonly used Collection and Object class pairs are:
         DbColumns/DbColumn and DbValues/DbValue.
       </para>
+      <para>
+        The test code is found in project CoreTestApps\LJCNetCommonTest.
+      </para>
     </remarks>
   </AppSettings>
 </items>

@@ -39,7 +39,7 @@
         &lt;span class="userType"&gt;DataAccess&lt;/span&gt;.
       </para>
       <para>
-        The test code is found in project LJCDataAccessTest.
+        The test code is found in project CoreTestApps\LJCDataAccessTest.
       </para>
       <para>Referenced Assemblies</para>
       <para>
