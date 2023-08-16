@@ -25,13 +25,22 @@
     <div id='Header'>
       <div id='Title'>How to Configure DataAccess with Configs</div>
     </div>
-    <br />
     <div class='Text'>
-      The LJCDataAccess.DataAccess class is capable of connecting using the SQL
-      Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
       <p>
-
+        The LJCDataAccess.DataAccess class is capable of connecting using the SQL
+        Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
       </p>
+      <pre>
+<span class="ltgt"><</span>?<span class="name"><span class="ltgt"><</span>xml</span><span class="attrib"> version</span>="1.0" ?<span class="ltgt">></span>
+<span class="name"><span class="ltgt"><</span>DataConfigs</span><span class="ltgt">></span><span class="attrib"> xmlns:xsi</span>="http://www.w3.org/2001/XMLSchema-instance"
+             <span class="attrib"> xmlns:xsd</span>="http://www.w3.org/2001/XMLSchema"<span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>DataConfig</span><span class="ltgt">></span>;
+  <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>ConfigName<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>ConnectionTypeName</span><span class="ltgt">></span>SQLServer<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>DbServer</span><span class="ltgt">></span>DataServiceName<span class="name"><span class="ltgt"><</span>/DbServer_ne                   
+  <span class="name"><span class="ltgt"><</span>Database</span><span class="ltgt">></span>DatabaseName<span class="name"><span class="ltgt"><</span>/Database</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>/DataConfig</span><span class="ltgt">></span>
+<span class="name"><span class="ltgt"><</span>/DataConfigs</span><span class="ltgt">></span></pre>
     </div>
     <div class='SmallText'>Copyright &copy; Lester J. Clark  and Contributors.</div>
     <div class='SmallText'>Licensed under the MIT License.</div>
