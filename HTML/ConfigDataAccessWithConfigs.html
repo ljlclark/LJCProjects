@@ -31,7 +31,7 @@
         Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
       </p>
 
-      <h4>DataConfigs File</h4>
+      <h3>DataConfigs File</h3>
       <p>
         DataAccess configuration can be defined externally in file DataConfigs.xml
       </p>
@@ -50,14 +50,19 @@
   <span class="name"><span class="ltgt"><</span>/DataConfig</span><span class="ltgt">></span>
 <span class="name"><span class="ltgt"><</span>/DataConfigs</span><span class="ltgt">></span></pre>
       <p>
-        The available ConnectionTypeNames are: "SQLServer", "OLEDB", "ODBC", "MySQL" and "Access".
+        The available ConnectionTypeNames are: "SQLServer", "OLEDB", "ODBC",
+        "MySQL" and "Access".
       </p>
       <p>
         The DbServer is the "Server Name" that is displayed when you connect to
         the service Using SQL Server Management Studio.
       </p>
+      <p>
+        The DataConfigs.xml file must be in the folder where the calling program
+        is located.
+      </p>
 
-      <h4>The Connection String Templates</h4>
+      <h3>The Connection String Templates</h3>
       <p>
         This is an example of a ConnectionTemplates.xml file.
       </p>
@@ -74,8 +79,21 @@
     <span class="name"><span class="ltgt"><</span>Template</span><span class="ltgt">></span>server={DbServer}; UserId={UID}; Password={PSWD}; database={Database};<span class="name"><span class="ltgt"><</span>/Template</span><span class="ltgt">></span>
   <span class="name"><span class="ltgt"><</span>/ConnectionTemplate</span><span class="ltgt">></span>
 <span class="name"><span class="ltgt"><</span>/ConnectionTemplates</span><span class="ltgt">></span></pre>
+      <p>
+        The "Name" value
+        matches the "ConnectionTypeName" from the DataConfig definition.
+      </p>
+      <p>
+        The template replaceable values: {DbServer}, {Database}, {UID} and
+        {PSWD} also come from the DataConfig definition.
+      </p>
+      <p>
+        The complete ConnectionTemplates.xml file is in the LJCDataAccessConfig
+        project. This file must be in the folder where the calling program is
+        located.
+      </p>
 
-      <h4>Retrieve Configuration and Create DataAccess</h4>
+      <h3>Retrieve Configuration and Create DataAccess</h3>
       <pre style='margin-left: 2px;'>
 <span class='keyWord'>using</span> LJCDataAccess;
 <span class='keyWord'>using</span> LJCDataAccessConfig;
