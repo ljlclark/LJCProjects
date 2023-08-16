@@ -43,10 +43,32 @@
   <span class="name"><span class="ltgt"><</span>DataConfig</span><span class="ltgt">></span>;
     <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>ConfigName<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
     <span class="name"><span class="ltgt"><</span>ConnectionTypeName</span><span class="ltgt">></span>SQLServer<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
-    <span class="name"><span class="ltgt"><</span>DbServer</span><span class="ltgt">></span>DataServiceName<span class="name"><span class="ltgt"><</span>/DbServer_ne                   
+    <span class="name"><span class="ltgt"><</span>DbServer</span><span class="ltgt">></span>DataServiceName<span class="name"><span class="ltgt"><</span>/DbServer</span><span class="ltgt">></span>                   
     <span class="name"><span class="ltgt"><</span>Database</span><span class="ltgt">></span>DatabaseName<span class="name"><span class="ltgt"><</span>/Database</span><span class="ltgt">></span>
   <span class="name"><span class="ltgt"><</span>/DataConfig</span><span class="ltgt">></span>
 <span class="name"><span class="ltgt"><</span>/DataConfigs</span><span class="ltgt">></span></pre>
+
+      <p>
+        Retrieve Configuration and Create DataAccess
+      </p>
+      <pre style='margin-left: 2px;'>
+<span class='keyWord'>using</span> LJCDataAccess;
+<span class='keyWord'>using</span> LJCDataAccessConfig;
+
+<span class='comment'>// Create DataAccess object.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='userType'>DataAccess</span> CreateDataAccess()
+{
+  <span class='comment'>// Get the DataConfig definition.</span>
+  <span class='userType'>DataConfigs</span> dataConfigs = new <span class='userType'>DataConfigs</span>();
+  dataConfigs.LJCLoadData();
+  dataConfig = dataConfigs.LJCGetByName("ConfigName");
+
+  <span class='comment'>// Create the DataAccess object.</span>
+  <span class='commonType'>var</span> connectionString = dataConfig.GetConnectionString();
+  <span class='commonType'>var</span> providerName = dataConfig.GetProviderName();
+  <span class='commonType'>var</span> retValue = <span class='keyWord'>new</span> <span class='userType'>DataAccess</span>(connectionString, providerName);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
     </div>
     <div class='SmallText'>Copyright &copy; Lester J. Clark  and Contributors.</div>
     <div class='SmallText'>Licensed under the MIT License.</div>
