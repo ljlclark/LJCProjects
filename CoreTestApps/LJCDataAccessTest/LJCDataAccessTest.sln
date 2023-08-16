@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataAccessTest", "LJCDataAccessTest\LJCDataAccessTest.csproj", "{E64F3D0A-C28C-43D8-9B5F-9E520316B2BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTemplates", "DataTemplates", "{0E65FE0E-7479-43D2-B099-0081787FB738}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E64F3D0A-C28C-43D8-9B5F-9E520316B2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E64F3D0A-C28C-43D8-9B5F-9E520316B2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E64F3D0A-C28C-43D8-9B5F-9E520316B2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E64F3D0A-C28C-43D8-9B5F-9E520316B2BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B16F89B-61A0-4741-B4B7-24320EFCF8B4}
+	EndGlobalSection
+EndGlobal
