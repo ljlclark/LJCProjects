@@ -30,8 +30,10 @@
         The LJCDataAccess.DataAccess class is capable of connecting using the SQL
         Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
       </p>
+
+      <h4>DataConfigs File</h4>
       <p>
-        DataAccess configurationin can be defined externally in file DataConfigs.xml
+        DataAccess configuration can be defined externally in file DataConfigs.xml
       </p>
       <p>
         This is an example of a DataConfigs.xml file.
@@ -54,20 +56,26 @@
         The DbServer is the "Server Name" that is displayed when you connect to
         the service Using SQL Server Management Studio.
       </p>
+
+      <h4>The Connection String Templates</h4>
+      <p>
+        This is an example of a ConnectionTemplates.xml file.
+      </p>
       <pre>
 <span class="ltgt"><</span>?<span class="name"><span class="ltgt"><</span>xml</span><span class="attrib"> version</span>="1.0" ?<span class="ltgt">></span>
 <span class="name"><span class="ltgt"><</span>ConnectionTemplates</span><span class="ltgt">></span><span class="attrib"> xmlns:xsi</span>="http://www.w3.org/2001/XMLSchema-instance"
-                     <span class="attrib"> xmlns:xsd</span>="http://www.w3.org/2001/XMLSchema"<span class="ltgt">></span>
+   <span class="attrib"> xmlns:xsd</span>="http://www.w3.org/2001/XMLSchema"<span class="ltgt">></span>
   <span class="name"><span class="ltgt"><</span>ConnectionTemplate</span><span class="ltgt">></span>
-    <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>SQLServer</Name</span><span class="ltgt">></span>
-    <span class="name"><span class="ltgt"><</span>Template</span><span class="ltgt">></span>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True; User Id={UID} Password={PSWD}; <span class="name"><span class="ltgt"><</span>/Template</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>SQLServer<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Template</span><span class="ltgt">></span>Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True; User Id={UID} Password={PSWD};<span class="name"><span class="ltgt"><</span>/Template</span><span class="ltgt">></span>
   <span class="name"><span class="ltgt"><</span>/ConnectionTemplate</span><span class="ltgt">></span>
-<span class="name"><span class="ltgt"><</span>/ConnectionTemplates</span><span class="ltgt">></span>
-</pre>
+  <span class="name"><span class="ltgt"><</span>ConnectionTemplate</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>MySQL<span class="name"><span class="ltgt"><</span>/Name</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Template</span><span class="ltgt">></span>server={DbServer}; UserId={UID}; Password={PSWD}; database={Database};<span class="name"><span class="ltgt"><</span>/Template</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>/ConnectionTemplate</span><span class="ltgt">></span>
+<span class="name"><span class="ltgt"><</span>/ConnectionTemplates</span><span class="ltgt">></span></pre>
 
-      <p>
-        Retrieve Configuration and Create DataAccess
-      </p>
+      <h4>Retrieve Configuration and Create DataAccess</h4>
       <pre style='margin-left: 2px;'>
 <span class='keyWord'>using</span> LJCDataAccess;
 <span class='keyWord'>using</span> LJCDataAccessConfig;
