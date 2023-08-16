@@ -737,5 +737,54 @@ namespace LJCGenTextEdit
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
     #endregion
+
+    private void XMLSyntaxDecode_Click(object sender, EventArgs e)
+    {
+      var text = OutputRichText.Text;
+
+      if (false == string.IsNullOrWhiteSpace(text))
+      {
+        text = Decode(text);
+        text = text.Replace("_ab_", "<span class=\"attrib\">");
+        text = text.Replace("_nb_", Decode("<span class=\"name\">_lt_"));
+        text = text.Replace("_ne_", Decode("</span>_gt_"));
+        text = text.Replace("_se_", "</span>");
+        OutputRichText.Text = text;
+      }
+    }
+
+    private void XMLSyntaxEncode_Click(object sender, EventArgs e)
+    {
+      var text = OutputRichText.Text;
+
+      if (false == string.IsNullOrWhiteSpace(text))
+      {
+        text = Encode(text);
+        text = text.Replace("<span class=\"attrib\">", "_ab_");
+        text = text.Replace(Encode("<span class=\"name\">_lt_"), "_nb_");
+        text = text.Replace(Encode("</span>_gt_"), "_ne_");
+        text = text.Replace("</span>", "_se_");
+        OutputRichText.Text = text;
+      }
+    }
+
+    private string Decode(string text)
+    {
+      var retValue = text;
+
+      retValue = retValue.Replace("_lt_", "<span class=\"ltgt\"><</span>");
+      retValue = retValue.Replace("_gt_", "<span class=\"ltgt\">></span>");
+      return retValue;
+    }
+
+    private string Encode(string text)
+    {
+      var retValue = text;
+
+      retValue = retValue.Replace("<span class=\"ltgt\"><</span>", "_lt_");
+      retValue = retValue.Replace("<span class=\"ltgt\">></span>", "_gt_");
+      return retValue;
+    }
   }
 }
+

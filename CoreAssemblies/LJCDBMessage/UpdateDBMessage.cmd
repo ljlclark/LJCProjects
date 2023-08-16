@@ -22,8 +22,8 @@ copy %assmRoot%%src%\LJCDataAccess.dll %to%
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
-set src=LJCTextDataReader\LJCTextDataReaderLib\%bin%
-copy %assmRoot%%src%\LJCTextDataReaderLib.dll %to%
+rem ***set src=LJCTextDataReader\LJCTextDataReaderLib\%bin%
+rem ***copy %assmRoot%%src%\LJCTextDataReaderLib.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

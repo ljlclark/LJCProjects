@@ -1,0 +1,10 @@
+_lt_?_nb_xml_se__ab_ version_se_="1.0" ?_gt_
+_nb_DataConfigs_ne__ab_ xmlns:xsi_se_="http://www.w3.org/2001/XMLSchema-instance"
+			 _ab_ xmlns:xsd_se_="http://www.w3.org/2001/XMLSchema"_gt_
+  _nb_DataConfig_ne_;
+  _nb_Name_ne_ConfigName_nb_/Name_ne_
+  _nb_ConnectionTypeName_ne_SQLServer_nb_/Name_ne_
+  _nb_DbServer_ne_DataServiceName_nb_/DbServer_ne                   
+  _nb_Database_ne_DatabaseName_nb_/Database_ne_
+  _nb_/DataConfig_ne_
+_nb_/DataConfigs_ne_
