@@ -23,7 +23,7 @@ namespace LJCWinFormControls
 
       mLongLongs = new Dictionary<long, long>();
       mStringLongs = new Dictionary<string, long>();
-      
+
       mIntStrings = new Dictionary<int, string>();
       mStringStrings = new Dictionary<string, string>();
     }
@@ -67,25 +67,15 @@ namespace LJCWinFormControls
       LJCReflect reflect;
       string value;
 
+      // Attempt to populate all existing columns.
       reflect = new LJCReflect(record);
-      if (displayColumns != null)
+      foreach (DataGridViewColumn gridColumn in grid.Columns)
       {
-        // Attempt to populate the specified columns.
-        foreach (DbColumn column in displayColumns)
-        {
-          // Grid columns are named after the object property names.
-          value = GetPropertyValue(reflect, column.PropertyName);
-          LJCSetCellText(column.PropertyName, value);
-        }
-      }
-      else
-      {
-        // Attempt to populate all existing columns.
-        foreach (DataGridViewColumn column in grid.Columns)
+        if (IsIncluded(displayColumns, gridColumn.Name))
         {
           // Use existing column names which are the object property names.
-          value = GetPropertyValue(reflect, column.Name);
-          LJCSetCellText(column.Name, value);
+          value = GetPropertyValue(reflect, gridColumn.Name);
+          LJCSetCellText(gridColumn.Name, value);
         }
       }
     }
@@ -134,6 +124,19 @@ namespace LJCWinFormControls
         && 1 == dateTime.Day)
       {
         retValue = true;
+      }
+      return retValue;
+    }
+
+    // If displayColumns, check for included column.
+    private bool IsIncluded(DbColumns displayColumns, string propertyName)
+    {
+      bool retValue = true;
+
+      if (NetCommon.HasItems(displayColumns)
+        && displayColumns.LJCGetColumn(propertyName) != null)
+      {
+        retValue = false;
       }
       return retValue;
     }

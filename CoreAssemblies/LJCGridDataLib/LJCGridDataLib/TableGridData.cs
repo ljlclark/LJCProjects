@@ -165,23 +165,6 @@ namespace LJCGridDataLib
 
     #region Configuration Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
-    public bool HasDisplayColumn(string propertyName)
-    {
-      bool retValue = false;
-
-      var dbColumn = DisplayColumns.LJCGetColumn(propertyName);
-      if (dbColumn != null)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Sets the Display Columns from the DataColumns object.
     /// <include path='items/SetDisplayColumns/*' file='Doc/TableGridData.xml'/>
     public void SetDisplayColumns(DataColumnCollection dataColumns
@@ -273,7 +256,7 @@ namespace LJCGridDataLib
       foreach (DataGridViewColumn gridColumn in mGrid.Columns)
       {
         var propertyName = gridColumn.Name;
-        if (IncludeValue(propertyName))
+        if (IsIncluded(propertyName))
         {
           var value = dataRow[propertyName];
           if (value != null)
@@ -299,12 +282,12 @@ namespace LJCGridDataLib
     }
 
     // If DisplayColumns, check for included column.
-    private bool IncludeValue(string propertyName)
+    private bool IsIncluded(string propertyName)
     {
       bool retValue = true;
 
       if (NetCommon.HasItems(DisplayColumns)
-        && false == HasDisplayColumn(propertyName))
+        && DisplayColumns.LJCGetColumn(propertyName) != null)
       {
         retValue = false;
       }
