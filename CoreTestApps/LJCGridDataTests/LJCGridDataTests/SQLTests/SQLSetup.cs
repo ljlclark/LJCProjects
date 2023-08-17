@@ -5,6 +5,7 @@ using LJCDataAccess;
 using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormControls;
+using System.Collections.Generic;
 using System.Data;
 
 namespace LJCGridDataTests
@@ -33,7 +34,12 @@ namespace LJCGridDataTests
 
       if (NetCommon.HasColumns(DataTable))
       {
-        TableGridData.SetDisplayColumns(DataTable.Columns);
+        List<string> propertyNames = new List<string>()
+        {
+          "Name",
+          "Description"
+        };
+        TableGridData.SetDisplayColumns(DataTable.Columns, propertyNames);
         retValue = TableGridData.DisplayColumns;
       }
       return retValue;

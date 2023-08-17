@@ -6,6 +6,7 @@ using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Windows.Forms;
 
 namespace LJCGridDataLib
@@ -164,6 +165,23 @@ namespace LJCGridDataLib
 
     #region Configuration Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public bool HasDisplayColumn(string propertyName)
+    {
+      bool retValue = false;
+
+      var dbColumn = DisplayColumns.LJCGetColumn(propertyName);
+      if (dbColumn != null)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Sets the Display Columns from the DataColumns object.
     /// <include path='items/SetDisplayColumns/*' file='Doc/TableGridData.xml'/>
     public void SetDisplayColumns(DataColumnCollection dataColumns
@@ -214,31 +232,6 @@ namespace LJCGridDataLib
 
     #region Row Data Methods
 
-    // Loads the grid row columns from the DataRows collection for each grid
-    // column name found in the DataTable.
-    /// <include path='items/LoadColumnRows/*' file='Doc/TableGridData.xml'/>
-    public void LoadColumnRows(DataTable dataTable)
-    {
-      if (NetCommon.HasData(dataTable))
-      {
-        foreach (DataRow dataRow in dataTable.Rows)
-        {
-          List<object> listValues = new List<object>();
-          var gridRow = mGrid.LJCRowAdd();
-          foreach (DataGridViewColumn gridColumn in mGrid.Columns)
-          {
-            object value = dataRow[gridColumn.Name];
-            if (value != null)
-            {
-              listValues.Add(value);
-            }
-          }
-          var values = listValues.ToArray();
-          gridRow.SetValues(values);
-        }
-      }
-    }
-
     // Loads grid rows from the DataRows collection restricted by the
     // DisplayColumns property.
     /// <include path='items/LoadRows/*' file='Doc/TableGridData.xml'/>
@@ -246,11 +239,6 @@ namespace LJCGridDataLib
     {
       if (NetCommon.HasData(dataTable))
       {
-        if (null == DisplayColumns)
-        {
-          // Create default DisplayColumns.
-          DisplayColumns = GetDbColumns(dataTable.Columns);
-        }
         foreach (DataRow dataRow in dataTable.Rows)
         {
           RowAdd(dataRow);
@@ -281,20 +269,22 @@ namespace LJCGridDataLib
     /// <include path='items/RowSetValues/*' file='Doc/TableGridData.xml'/>
     public void RowSetValues(LJCGridRow gridRow, DataRow dataRow)
     {
-      //if (DisplayColumns != null && DisplayColumns.Count > 0)
-      if (NetCommon.HasItems(DisplayColumns))
+      List<object> listValues = new List<object>();
+      foreach (DataGridViewColumn gridColumn in mGrid.Columns)
       {
-        foreach (DbColumn dataColumn in DisplayColumns)
+        var propertyName = gridColumn.Name;
+        if (IncludeValue(propertyName))
         {
-          // Grid columns are named after the object property names.
-          string propertyName = dataColumn.ColumnName;
-          object value = dataRow[propertyName];
+          var value = dataRow[propertyName];
           if (value != null)
           {
-            gridRow.LJCSetCellText(propertyName, value);
+            //gridRow.LJCSetCellText(propertyName, value);
+            listValues.Add(value);
           }
         }
       }
+      var values = listValues.ToArray();
+      gridRow.SetValues(values);
     }
 
     // Updates the current row with the DataRow values.
@@ -306,6 +296,19 @@ namespace LJCGridDataLib
       {
         RowSetValues(gridRow, dataRow);
       }
+    }
+
+    // If DisplayColumns, check for included column.
+    private bool IncludeValue(string propertyName)
+    {
+      bool retValue = true;
+
+      if (NetCommon.HasItems(DisplayColumns)
+        && false == HasDisplayColumn(propertyName))
+      {
+        retValue = false;
+      }
+      return retValue;
     }
 
     // Fires the AddRow event.

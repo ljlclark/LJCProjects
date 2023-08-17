@@ -26,8 +26,8 @@ namespace LJCGridDataTests
       DataAccess dataAccess = SetupSQL();
       var sqlSetup = new SQLSetup(mLJCGrid, dataAccess);
 
-      // *** Test Setting. ***
-      var setupCase = SetupCase.FromDataObject;
+      // *** Test Setting ***
+      var setupCase = SetupCase.FromTable;
       switch (setupCase)
       {
         case SetupCase.FromTable:
