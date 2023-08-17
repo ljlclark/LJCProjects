@@ -39,17 +39,17 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDataAccessConfig">
-      <HintPath>External\LJCDataAccessConfig.dll</HintPath>
+      <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBMessage">
-      <HintPath>External\LJCDBMessage.dll</HintPath>
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
     <Reference Include="LJCGridDataLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
