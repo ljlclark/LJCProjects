@@ -257,12 +257,12 @@ namespace LJCViewEditor
 					ViewOrderBy.ColumnColumnName
 				};
 
-				// Get the display columns from the manager Data Definition.
-				DbColumns orderByDisplayColumns
+				// Get the grid columns from the manager Data Definition.
+				DbColumns orderByGridColumns
 					= mViewOrderByManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				Parent.OrderByGrid.LJCAddDisplayColumns(orderByDisplayColumns);
+				// Setup the grid columns.
+				Parent.OrderByGrid.LJCAddColumns(orderByGridColumns);
 			}
 		}
 		#endregion

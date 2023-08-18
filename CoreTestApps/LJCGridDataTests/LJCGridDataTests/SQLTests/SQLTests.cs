@@ -3,8 +3,9 @@
 // SQLTests.cs
 using LJCDataAccess;
 using LJCDataAccessConfig;
-using LJCNetCommon;
+using LJCGridDataLib;
 using LJCWinFormControls;
+using System.Collections.Generic;
 using System.Data.Common;
 
 namespace LJCGridDataTests
@@ -21,35 +22,30 @@ namespace LJCGridDataTests
     // Runs the tests.
     internal void Run()
     {
+
       // Configure Grid Columns
-      DbColumns displayColumns = null;
-      DataAccess dataAccess = SetupSQL();
-      var sqlSetup = new SQLSetup(mLJCGrid, dataAccess);
-
-      // *** Test Setting ***
-      var setupCase = SetupCase.FromTable;
-      switch (setupCase)
-      {
-        case SetupCase.FromTable:
-          displayColumns = sqlSetup.ColumnsFromTable();
-          break;
-
-        case SetupCase.FromDataObject:
-          displayColumns = sqlSetup.ColumnsFromDataObject();
-          break;
-      }
-
-      // Configure the grid columns.
       mLJCGrid.Columns.Clear();
-      mLJCGrid.LJCAddDisplayColumns(displayColumns);
 
-      // Load Data
-      var dataTable = sqlSetup.DataTable;
-      var tableGridData = sqlSetup.TableGridData;
+      DataAccess dataAccess = SetupSQL();
+      var sql = "select * from Province";
+      var dataTable = dataAccess.GetSchemaOnly(sql);
+      var definition = TableGridData.GetDbColumns(dataTable.Columns);
+      var propertyNames = new List<string>()
+      {
+        { "Name" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+      var gridColumns = definition.LJCGetColumns(propertyNames);
+      mLJCGrid.LJCAddDisplayColumns(gridColumns);
+
+      // Load Data including MaxLength.
+      dataAccess.FillDataTable(sql, dataTable);
       var sqlData = new SQLData(mLJCGrid, dataTable);
 
       // *** Test Setting ***
       var dataCase = DataCase.WithLoad;
+      var tableGridData = new LJCGridDataLib.TableGridData(mLJCGrid);
       switch (dataCase)
       {
         case DataCase.WithLoad:

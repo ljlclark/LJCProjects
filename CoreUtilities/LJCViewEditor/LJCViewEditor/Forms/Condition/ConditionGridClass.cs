@@ -266,12 +266,12 @@ namespace LJCViewEditor
 					ViewCondition.ColumnSecondValue
 				};
 
-				// Get the display columns from the manager Data Definition.
+				// Get the grid columns from the manager Data Definition.
 				DbColumns conditionDisplayColumns
 					= mViewConditionManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				Parent.ConditionGrid.LJCAddDisplayColumns(conditionDisplayColumns);
+				// Setup the grid columns.
+				Parent.ConditionGrid.LJCAddColumns(conditionDisplayColumns);
 			}
 		}
 		#endregion

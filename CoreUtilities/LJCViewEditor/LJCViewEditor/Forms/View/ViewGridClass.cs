@@ -279,7 +279,7 @@ namespace LJCViewEditor
           // Set Grid data.
           //Parent.DataGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
           //resultGridData.LoadRows(dbResult);
-          Parent.DataGrid.LJCAddDisplayColumns(dbResult.Columns);
+          Parent.DataGrid.LJCAddColumns(dbResult.Columns);
           foreach (DbRow dbRow in dbResult.Rows)
           {
             var gridRow = Parent.DataGrid.LJCRowAdd();
@@ -350,11 +350,11 @@ namespace LJCViewEditor
           ViewData.ColumnDescription
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         DbColumns viewDisplayColumns = mViewDataManager.GetColumns(propertyNames);
 
-        // Setup the grid display columns.
-        Parent.ViewGrid.LJCAddDisplayColumns(viewDisplayColumns);
+        // Setup the grid columns.
+        Parent.ViewGrid.LJCAddColumns(viewDisplayColumns);
       }
     }
     #endregion

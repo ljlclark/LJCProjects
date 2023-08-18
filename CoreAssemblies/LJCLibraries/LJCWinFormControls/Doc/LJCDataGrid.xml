@@ -154,12 +154,12 @@
       Sets the grid to a simple read-only grid.
     </summary>
   </LJCSetPlain>
-  <LJCAddDisplayColumns>
+  <LJCAddColumns>
     <summary>
-      Adds the display columns to the grid.
+      Adds the grid columns.
     </summary>
     <param name="columns">The columns collection.</param>
-  </LJCAddDisplayColumns>
+  </LJCAddColumns>
   <LJCSetLastColumnAutoSizeFill>
     <summary>
       Sets the last column AutoSizeMode to "Fill" if the columns width is less

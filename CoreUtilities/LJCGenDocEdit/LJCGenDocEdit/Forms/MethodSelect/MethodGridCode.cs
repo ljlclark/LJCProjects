@@ -180,10 +180,10 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid display columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mMethodGrid.Columns.Count)
       {
-        DisplayColumns = new DbColumns()
+        GridColumns = new DbColumns()
         {
           { "Name" },
           { "OverloadName" },
@@ -191,7 +191,7 @@ namespace LJCGenDocEdit
         };
 
         // Setup the grid display columns.
-        mMethodGrid.LJCAddDisplayColumns(DisplayColumns);
+        mMethodGrid.LJCAddColumns(GridColumns);
       }
     }
 
@@ -217,8 +217,8 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the Class ID value.</summary>
     internal short LJCClassID { get; set; }
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }

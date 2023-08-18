@@ -152,17 +152,17 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid display columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mClassGrid.Columns.Count)
       {
-        DisplayColumns = new DbColumns()
+        GridColumns = new DbColumns()
         {
           { "Name" },
           { "Summary" }
         };
 
-        // Setup the grid display columns.
-        mClassGrid.LJCAddDisplayColumns(DisplayColumns);
+        // Setup the grid columns.
+        mClassGrid.LJCAddColumns(GridColumns);
       }
     }
     #endregion
@@ -172,8 +172,8 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the Assembly ID value.</summary>
     internal short LJCAssemblyID { get; set; }
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }

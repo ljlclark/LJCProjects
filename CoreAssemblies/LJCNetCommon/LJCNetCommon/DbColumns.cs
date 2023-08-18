@@ -177,8 +177,9 @@ namespace LJCNetCommon
 
     // Creates the Object from the arguments and adds it to the collection.
     /// <include path='items/Add2/*' file='Doc/DbColumns.xml'/>
-    public DbColumn Add(string columnName, string propertyName = null, string renameAs = null
-      , string dataTypeName = "String", string caption = null)
+    public DbColumn Add(string columnName, string propertyName = null
+      , string renameAs = null, string dataTypeName = "String"
+      , string caption = null, int maxLength = 5)
     {
       DbColumn retValue = new DbColumn()
       {
@@ -186,6 +187,7 @@ namespace LJCNetCommon
         Caption = caption,
         ColumnName = columnName,
         DataTypeName = dataTypeName,
+        MaxLength = maxLength,
         PropertyName = propertyName,
         RenameAs = renameAs
       };
@@ -196,13 +198,14 @@ namespace LJCNetCommon
     // Creates the Object from the arguments and adds it to the collection.
     /// <include path='items/Add3/*' file='Doc/DbColumns.xml'/>
     public DbColumn Add(string columnName, object value
-      , string dataTypeName = "String")
+      , string dataTypeName = "String", int maxLength = 5)
     {
       DbColumn retValue = new DbColumn()
       {
         AutoIncrement = false,
         ColumnName = columnName,
         DataTypeName = dataTypeName,
+        MaxLength = maxLength,
         Value = value
       };
       Add(retValue);

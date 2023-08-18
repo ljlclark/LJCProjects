@@ -169,9 +169,8 @@ namespace LJCGenDocEdit
       string message;
       bool success = false;
 
-      var assemblyGroupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
       var assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
-      if (assemblyGroupRow != null
+      if (mAssemblyGroupGrid.CurrentRow is LJCGridRow _
         && assemblyRow != null)
       {
         title = "Delete Confirmation";
@@ -324,12 +323,12 @@ namespace LJCGenDocEdit
           DocAssembly.ColumnDescription
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         var assemblyManager = DocAssemblyManager;
-        DisplayColumns = assemblyManager.GetColumns(columnNames);
+        GridColumns = assemblyManager.GetColumns(columnNames);
 
-        // Setup the grid display columns.
-        mAssemblyGrid.LJCAddDisplayColumns(DisplayColumns);
+        // Setup the grid columns.
+        mAssemblyGrid.LJCAddColumns(GridColumns);
         mAssemblyGrid.LJCDragDataName = "DocAssembly";
       }
     }
@@ -445,8 +444,8 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     /// <summary>Gets or sets the Manager value.</summary>
     internal DocAssemblyManager DocAssemblyManager { get; set; }

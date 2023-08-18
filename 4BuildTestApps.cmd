@@ -6,9 +6,9 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDe
 rem ************
 rem CoreTestApps
 rem ************
-set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCDataAccessTest ----------- >> Build.txt
+set /a counter=1
+echo on
+echo ----------------- %counter% - LJCDataAccessTest ----------- > Build.txt
 echo LJCDataAccessTest >> Build.txt
 call CoreTestApps\LJCDataAccessTest\UpdateDataAccessTest.cmd BuildAll >> Build.txt
 msbuild CoreTestApps\LJCDataAccessTest\LJCDataAccessTest.sln

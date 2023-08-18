@@ -308,12 +308,12 @@ namespace LJCGenDocEdit
           DocMethodGroup.ColumnHeadingTextCustom
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         var classGroupManager = Managers.DocMethodGroupManager;
-        DisplayColumns = classGroupManager.GetColumns(columnNames);
+        GridColumns = classGroupManager.GetColumns(columnNames);
 
-        // Setup the grid display columns.
-        mMethodGroupGrid.LJCAddDisplayColumns(DisplayColumns);
+        // Setup the grid columns.
+        mMethodGroupGrid.LJCAddColumns(GridColumns);
         mMethodGroupGrid.LJCDragDataName = "DocMethodGroup";
       }
     }
@@ -432,8 +432,8 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }

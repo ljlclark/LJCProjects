@@ -293,7 +293,7 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid display columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mMethodGrid.Columns.Count)
       {
         List<string> columnNames = new List<string>()
@@ -303,12 +303,12 @@ namespace LJCGenDocEdit
           DocMethod.ColumnDescription
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         var methodManager = Managers.DocMethodManager;
-        DisplayColumns = methodManager.GetColumns(columnNames);
+        GridColumns = methodManager.GetColumns(columnNames);
 
-        // Setup the grid display columns.
-        mMethodGrid.LJCAddDisplayColumns(DisplayColumns);
+        // Setup the grid columns.
+        mMethodGrid.LJCAddColumns(GridColumns);
         mMethodGrid.LJCDragDataName = "DocMethod";
       }
     }
@@ -442,8 +442,8 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }

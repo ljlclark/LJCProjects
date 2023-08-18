@@ -73,19 +73,19 @@ namespace CVRManager
 
 			if (0 == CVPersonGrid.Columns.Count)
 			{
-				List<string> columnNames = new List<string>() {
+				List<string> propertyNames = new List<string>() {
 					CVPerson.ColumnFirstName,
 					CVPerson.ColumnMiddleName,
 					CVPerson.ColumnLastName,
 					CVPerson.ColumnDeliveryAddressLine
 				};
 
-				// Get the display columns from the manager Data Definition.
+				// Get the grid columns from the manager Data Definition.
 				mDisplayColumnsCVPerson
-					= Managers.CVPersonManager.GetColumns(columnNames);
+					= Managers.CVPersonManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				CVPersonGrid.LJCAddDisplayColumns(mDisplayColumnsCVPerson);
+				// Setup the grid columns.
+				CVPersonGrid.LJCAddColumns(mDisplayColumnsCVPerson);
 			}
 		}
 		private DbColumns mDisplayColumnsCVPerson;

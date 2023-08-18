@@ -273,18 +273,18 @@ namespace LJCUnitMeasure
 			// Setup default display columns if no columns are defined.
 			if (0 == mUnitMeasureGrid.Columns.Count)
 			{
-				List<string> columnNames = new List<string>()
+				List<string> propertyNames = new List<string>()
 				{
 					UnitMeasure.ColumnCode,
 					UnitMeasure.ColumnName,
 					UnitMeasure.ColumnDescription
 				};
 
-				// Get the display columns from the manager Data Definition.
-				retValue = mManagers.UnitMeasureManager.GetColumns(columnNames);
+				// Get the grid columns from the manager Data Definition.
+				retValue = mManagers.UnitMeasureManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				mUnitMeasureGrid.LJCAddDisplayColumns(retValue);
+				// Setup the grid columns.
+				mUnitMeasureGrid.LJCAddColumns(retValue);
 			}
 			return retValue;
 		}

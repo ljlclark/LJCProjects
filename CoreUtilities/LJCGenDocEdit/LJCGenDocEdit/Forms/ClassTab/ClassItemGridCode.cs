@@ -177,9 +177,8 @@ namespace LJCGenDocEdit
       string message;
       bool success = false;
 
-      var classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
       var classRow = mClassGrid.CurrentRow as LJCGridRow;
-      if (classGroupRow != null
+      if (mClassGroupGrid.CurrentRow is LJCGridRow _
         && classRow != null)
       {
         title = "Delete Confirmation";
@@ -331,12 +330,12 @@ namespace LJCGenDocEdit
           LJCDocLibDAL.DocClass.ColumnDescription
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         var classManager = Managers.DocClassManager;
-        DisplayColumns = classManager.GetColumns(columnNames);
+        GridColumns = classManager.GetColumns(columnNames);
 
-        // Setup the grid display columns.
-        mClassGrid.LJCAddDisplayColumns(DisplayColumns);
+        // Setup the grid columns.
+        mClassGrid.LJCAddColumns(GridColumns);
         mClassGrid.LJCDragDataName = "DocClass";
       }
     }
@@ -486,8 +485,8 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }

@@ -23,7 +23,6 @@
     </summary>
     <param name="grid">The grid control.</param>
     <param name="record">The record object.</param>
-    <param name="displayColumns">The display columns.</param>
   </LJCRowSetValues>
 
   <!-- Saved Value Methods -->

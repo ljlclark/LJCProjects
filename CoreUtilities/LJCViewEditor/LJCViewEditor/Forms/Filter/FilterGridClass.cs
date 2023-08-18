@@ -257,12 +257,12 @@ namespace LJCViewEditor
 					ViewFilter.ColumnBooleanOperator
 				};
 
-				// Get the display columns from the manager Data Definition.
+				// Get the grid columns from the manager Data Definition.
 				DbColumns filterDisplayColumns
 					= mViewFilterManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				Parent.FilterGrid.LJCAddDisplayColumns(filterDisplayColumns);
+				// Setup the grid columns.
+				Parent.FilterGrid.LJCAddColumns(filterDisplayColumns);
 			}
 		}
 		#endregion

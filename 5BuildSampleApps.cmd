@@ -7,8 +7,8 @@ rem **********
 rem SampleApps
 rem **********
 set /a counter+=1
-echo - >> Build.txt
-echo ----------------- %counter% - LJCRegionManager ------------ >> Build.txt
+echo on
+echo ----------------- %counter% - LJCRegionManager ------------ > Build.txt
 echo LJCRegionManager >> Build.txt
 call SampleApps\LJCRegionManager\UpdateRegionManager.cmd BuildAll >> Build.txt
 msbuild SampleApps\LJCRegionManager\LJCRegionManager.sln

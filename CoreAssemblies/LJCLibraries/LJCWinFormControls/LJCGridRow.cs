@@ -60,8 +60,7 @@ namespace LJCWinFormControls
 
     // Updates a grid row with the record values.
     /// <include path='items/LJCRowSetValues/*' file='Doc/LJCGridRow.xml'/>
-    public void LJCSetValues(DataGridView grid, object record
-      , DbColumns displayColumns = null)
+    public void LJCSetValues(DataGridView grid, object record)
     {
       LJCReflect reflect;
       string value;
@@ -70,12 +69,9 @@ namespace LJCWinFormControls
       reflect = new LJCReflect(record);
       foreach (DataGridViewColumn gridColumn in grid.Columns)
       {
-        if (IsIncluded(displayColumns, gridColumn.Name))
-        {
-          // Use existing column names which are the object property names.
-          value = GetPropertyValue(reflect, gridColumn.Name);
-          LJCSetCellText(gridColumn.Name, value);
-        }
+        // Use existing column names which are the object property names.
+        value = GetPropertyValue(reflect, gridColumn.Name);
+        LJCSetCellText(gridColumn.Name, value);
       }
     }
 
@@ -123,19 +119,6 @@ namespace LJCWinFormControls
         && 1 == dateTime.Day)
       {
         retValue = true;
-      }
-      return retValue;
-    }
-
-    // If displayColumns, check for included column.
-    private bool IsIncluded(DbColumns displayColumns, string propertyName)
-    {
-      bool retValue = true;
-
-      if (NetCommon.HasItems(displayColumns)
-        && displayColumns.LJCGetColumn(propertyName) != null)
-      {
-        retValue = false;
       }
       return retValue;
     }

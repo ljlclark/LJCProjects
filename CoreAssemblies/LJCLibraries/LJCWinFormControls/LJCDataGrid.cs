@@ -300,9 +300,9 @@ namespace LJCWinFormControls
       ShowCellToolTips = false;
     }
 
-    // Adds the display columns to the grid.
+    // Adds grid columns.
     /// <include path='items/LJCAddDisplayColumns/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCAddDisplayColumns(DbColumns columns)
+    public void LJCAddColumns(DbColumns columns)
     {
       if (columns != null)
       {

@@ -96,7 +96,7 @@ namespace CVRManager
 					Caption = "Date",
 					MaxLength = -1
 				};
-				List<string> columnNames = new List<string>() {
+				List<string> propertyNames = new List<string>() {
 					mRegisterDateColumn.ColumnName,
 					CVVisit.ColumnRegisterTime,
 					CVVisit.ColumnEnterTime,
@@ -109,23 +109,23 @@ namespace CVRManager
 				// Get the display columns from the manager Data Definition.
 				try
 				{
-					mDisplayColumnsCVVisit = Managers.CVVisitManager.GetColumns(columnNames);
+					mGridColumnsCVVisit = Managers.CVVisitManager.GetColumns(propertyNames);
 				}
 				catch (SystemException e)
 				{
 					CVCommon.CreateTables(e, Settings.DataConfigName);
-					mDisplayColumnsCVVisit = Managers.CVVisitManager.GetColumns(columnNames);
+					mGridColumnsCVVisit = Managers.CVVisitManager.GetColumns(propertyNames);
 				}
 
-				mRealDisplayColumnsCVVisit = mDisplayColumnsCVVisit.Clone();
-				mDisplayColumnsCVVisit.Insert(0, mRegisterDateColumn);
+				mRealGridColumnsCVVisit = mGridColumnsCVVisit.Clone();
+				mGridColumnsCVVisit.Insert(0, mRegisterDateColumn);
 
-				// Setup the grid display columns.
-				CVVisitGrid.LJCAddDisplayColumns(mDisplayColumnsCVVisit);
+				// Setup the grid columns.
+				CVVisitGrid.LJCAddColumns(mGridColumnsCVVisit);
 			}
 		}
-		public DbColumns mRealDisplayColumnsCVVisit;
-		private DbColumns mDisplayColumnsCVVisit;
+		public DbColumns mRealGridColumnsCVVisit;
+		private DbColumns mGridColumnsCVVisit;
 		internal DbColumn mRegisterDateColumn;
 
 		// Saves the control values. 

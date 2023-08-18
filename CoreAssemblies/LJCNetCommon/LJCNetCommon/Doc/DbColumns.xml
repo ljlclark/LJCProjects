@@ -90,6 +90,7 @@
     <param name="renameAs">The rename value.</param>
     <param name="dataTypeName">The data type name.</param>
     <param name="caption">The caption value.</param>
+    <param name="maxLength">The column length.</param>
     <returns>
       The created
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
@@ -103,6 +104,7 @@
     <param name="columnName">The column name.</param>
     <param name="value">The value object.</param>
     <param name="dataTypeName">The data type name.</param>
+    <param name="maxLength">The column length.</param>
     <returns>The created DbColumn object.</returns>
     <example>
       <code>

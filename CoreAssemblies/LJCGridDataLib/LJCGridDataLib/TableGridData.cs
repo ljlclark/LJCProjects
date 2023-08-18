@@ -6,7 +6,6 @@ using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.Contracts;
 using System.Windows.Forms;
 
 namespace LJCGridDataLib
@@ -157,59 +156,11 @@ namespace LJCGridDataLib
 
     // Initializes an object instance.
     /// <include path='items/TableGridC/*' file='Doc/TableGridData.xml'/>
-    public TableGridData(LJCDataGrid grid)
+    public TableGridData(LJCDataGrid ljcGrid)
     {
-      mGrid = grid;
-    }
-    #endregion
+      ArgumentLJCGrid(ljcGrid);
 
-    #region Configuration Methods
-
-    // Sets the Display Columns from the DataColumns object.
-    /// <include path='items/SetDisplayColumns/*' file='Doc/TableGridData.xml'/>
-    public void SetDisplayColumns(DataColumnCollection dataColumns
-      , List<string> propertyNames = null)
-    {
-      // Create DataDefinition from dataColumns.
-      DataDefinition = GetDbColumns(dataColumns);
-      DisplayColumns = new DbColumns(DataDefinition);
-
-      // Create DisplayColumns with property names.
-      if (NetCommon.HasItems(propertyNames))
-      {
-        DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
-      }
-    }
-
-    // Sets the Display Columns from the DataObject properties.
-    /// <include path='items/SetDisplayColumns1/*' file='Doc/TableGridData.xml'/>
-    public void SetDisplayColumns(object dataObject
-      , DbColumns dataDefinition = null, List<string> propertyNames = null)
-    {
-      // Create DataDefinition from dataObject value.
-      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject
-        , dataDefinition);
-      DisplayColumns = new DbColumns(DataDefinition);
-
-      // Create DisplayColumns with property names.
-      if (NetCommon.HasItems(propertyNames))
-      {
-        DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
-      }
-    }
-
-    // Removes a display column.
-    /// <include path='items/RemoveDisplayColumn/*' file='Doc/TableGridData.xml'/>
-    public void RemoveDisplayColumn(string columnName)
-    {
-      foreach (DbColumn dataColumn in DisplayColumns)
-      {
-        if (dataColumn.ColumnName == columnName)
-        {
-          DisplayColumns.Remove(dataColumn);
-          break;
-        }
-      }
+      mLJCGrid = ljcGrid;
     }
     #endregion
 
@@ -220,110 +171,94 @@ namespace LJCGridDataLib
     /// <include path='items/LoadRows/*' file='Doc/TableGridData.xml'/>
     public void LoadRows(DataTable dataTable)
     {
-      if (NetCommon.HasData(dataTable))
+      MemberLJCGrid();
+      ArgumentDataTable(dataTable);
+
+      foreach (DataRow dataRow in dataTable.Rows)
       {
-        foreach (DataRow dataRow in dataTable.Rows)
-        {
-          RowAdd(dataRow);
-        }
+        var ljcGridRow = mLJCGrid.LJCRowAdd();
+        RowSetValues(ljcGridRow, dataRow);
       }
-    }
-
-    // Adds a grid row and updates it with the DataRow values.
-    /// <include path='items/RowAdd/*' file='Doc/TableGridData.xml'/>
-    public LJCGridRow RowAdd(DataRow dataRow)
-    {
-      LJCGridRow retValue = null;
-
-      if (mGrid != null)
-      {
-        retValue = mGrid.LJCRowAdd();
-        RowSetValues(retValue, dataRow);
-
-        // Allow setting stored values.
-        GridRow = retValue;
-        DataRecord = dataRow;
-        OnAddRow();
-      }
-      return retValue;
     }
 
     // Updates a grid row with the DataRow values.
     /// <include path='items/RowSetValues/*' file='Doc/TableGridData.xml'/>
-    public void RowSetValues(LJCGridRow gridRow, DataRow dataRow)
+    public void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow)
     {
+      MemberLJCGrid();
+      ArgumentDataRow(dataRow);
+
       List<object> listValues = new List<object>();
-      foreach (DataGridViewColumn gridColumn in mGrid.Columns)
+      var gridColumns = ljcGridRow.DataGridView.Columns;
+      foreach (DataGridViewColumn gridColumn in gridColumns)
       {
-        var propertyName = gridColumn.Name;
-        if (IsIncluded(propertyName))
-        {
-          var value = dataRow[propertyName];
-          if (value != null)
-          {
-            //gridRow.LJCSetCellText(propertyName, value);
-            listValues.Add(value);
-          }
-        }
+        listValues.Add(dataRow[gridColumn.Name]);
       }
       var values = listValues.ToArray();
-      gridRow.SetValues(values);
+      ljcGridRow.SetValues(values);
     }
 
     // Updates the current row with the DataRow values.
     /// <include path='items/RowUpdate/*' file='Doc/TableGridData.xml'/>
     public void RowUpdate(DataRow dataRow)
     {
-      if (mGrid != null
-        && mGrid.CurrentRow is LJCGridRow gridRow)
+      MemberLJCGrid();
+      ArgumentDataRow(dataRow);
+
+      if (mLJCGrid.CurrentRow is LJCGridRow ljcGridRow)
       {
-        RowSetValues(gridRow, dataRow);
+        RowSetValues(ljcGridRow, dataRow);
       }
     }
+    #endregion
 
-    // If DisplayColumns, check for included column.
-    private bool IsIncluded(string propertyName)
+    #region Private Methods
+
+    // Checks the DataRow argument.
+    private bool ArgumentDataRow(DataRow dataRow)
     {
-      bool retValue = true;
-
-      if (NetCommon.HasItems(DisplayColumns)
-        && DisplayColumns.LJCGetColumn(propertyName) != null)
+      if (null == dataRow)
       {
-        retValue = false;
+        var message = "Missing argument dataRow.";
+        throw new ArgumentNullException(message);
       }
-      return retValue;
+      return true;
     }
 
-    // Fires the AddRow event.
-    /// <include path='items/OnAddRow/*' file='Doc/ResultGridData.xml'/>
-    protected void OnAddRow()
+    // Checks the DataTable argument.
+    private bool ArgumentDataTable(DataTable dataTable)
     {
-      AddRow?.Invoke(this, new EventArgs());
+      if (false == NetCommon.HasData(dataTable))
+      {
+        var message = "Missing argument dataTable.";
+        throw new ArgumentNullException(message);
+      }
+      return true;
+    }
+
+    // Checks the LJCDataGrid argument.
+    private bool ArgumentLJCGrid(LJCDataGrid ljcGrid)
+    {
+      if (null == ljcGrid)
+      {
+        var message = "Missing argument ljcGrid.";
+        throw new MissingMemberException(message);
+      }
+      return true;
+    }
+
+    // Checks the mLJCGrid member.
+    private bool MemberLJCGrid()
+    {
+      if (null == mLJCGrid)
+      {
+        var message = "Missing member mLJCGrid.";
+        throw new MissingMemberException(message);
+      }
+      return true;
     }
     #endregion
 
-    #region Properties
-
-    /// <summary>Gets or sets the DataDefinition value.</summary>
-    public DbColumns DataDefinition { get; set; }
-
-    /// <summary>Gets or sets the DataRecord value.</summary>
-    public DataRow DataRecord { get; set; }
-
-    /// <summary>Gets the DisplayColumns.</summary>
-    //public DataColumnCollection DisplayColumns { get; private set; }
-    public DbColumns DisplayColumns { get; private set; }
-
-    /// <summary>Gets or sets the GridRow value.</summary>
-    public LJCGridRow GridRow { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private readonly LJCDataGrid mGrid;
-
-    /// <summary>The AddRow event.</summary>
-    public event EventHandler<EventArgs> AddRow;
-    #endregion
+    private readonly LJCDataGrid mLJCGrid;
   }
 }

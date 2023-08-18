@@ -84,7 +84,6 @@
     <Compile Include="ManagerTests\ManagerSetup.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="SQLTests\SQLData.cs" />
-    <Compile Include="SQLTests\SQLSetup.cs" />
     <Compile Include="SQLTests\SQLTests.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>

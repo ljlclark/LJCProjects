@@ -34,9 +34,10 @@ namespace LJCGridDataTests
       if (NetCommon.HasData(mDataTable))
       {
         // Load the grid rows individually.
-        foreach (DataRow row in mDataTable.Rows)
+        foreach (DataRow dataRow in mDataTable.Rows)
         {
-          tableGridData.RowAdd(row);
+          var ljcGridRow = mLJCGrid.LJCRowAdd();
+          tableGridData.RowSetValues(ljcGridRow, dataRow);
         }
       }
     }

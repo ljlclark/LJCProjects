@@ -334,12 +334,12 @@ namespace LJCViewEditor
 					ViewColumn.ColumnDataTypeName
 				};
 
-				// Get the display columns from the manager Data Definition.
-				DbColumns columnDisplayColumns
+				// Get the grid columns from the manager Data Definition.
+				DbColumns gridColumns
 					= mViewColumnManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				Parent.ColumnGrid.LJCAddDisplayColumns(columnDisplayColumns);
+				// Setup the grid columns.
+				Parent.ColumnGrid.LJCAddColumns(gridColumns);
 			}
 		}
 		#endregion

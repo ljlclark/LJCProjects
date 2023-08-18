@@ -287,12 +287,12 @@ namespace LJCGenDocEdit
           DocAssemblyGroup.ColumnSequence
         };
 
-        // Get the display columns from the manager Data Definition.
+        // Get the grid columns from the manager Data Definition.
         var manager = DocAssemblyGroupManager;
-        DisplayColumns = manager.GetColumns(columnNames);
+        GridColumns = manager.GetColumns(columnNames);
 
         // Setup the grid display columns.
-        mAssemblyGroupGrid.LJCAddDisplayColumns(DisplayColumns);
+        mAssemblyGroupGrid.LJCAddColumns(GridColumns);
         mAssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
       }
     }
@@ -393,8 +393,8 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the DisplayColumns value.</summary>
-    internal DbColumns DisplayColumns { get; set; }
+    /// <summary>Gets or sets the GridColumns value.</summary>
+    internal DbColumns GridColumns { get; set; }
 
     /// <summary>Gets or sets the Manager value.</summary>
     internal DocAssemblyGroupManager DocAssemblyGroupManager { get; set; }

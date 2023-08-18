@@ -141,75 +141,8 @@
     <summary>
       Initalizes an object instance.
     </summary>
-    <param name="grid">The Grid control.</param>
+    <param name="ljcGrid">The LJCDataGrid object.</param>
   </TableGridC>
-
-  <!-- Configuration Methods -->
-  <SetDisplayColumns>
-    <summary>
-      Sets the Display Columns from the DataColumns object.
-    </summary>
-    <param name="dataColumns">The DataColumnCollection object.</param>
-    <param name="propertyNames">The Property names.</param>
-    <example>
-      <code>
-        // See the DataAccess setup code on the TableGridData class page.
-
-        // Sets the Display Columns from the DataColumns object.
-        private DbColumns SetDisplayColumns(DataAccess dataAccess)
-        {
-          DbColumns retValue = null;
-
-          var sql = "select * from TableName";
-          var dataTable = dataAccess.GetDataTable(sql);
-          if (NetCommon.HasColumns(dataTable))
-          {
-            var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(dataTable.Columns);
-            retValue = tableGridData.DisplayColumns;
-          }
-          return retValue;
-        }
-      </code>
-    </example>
-  </SetDisplayColumns>
-  <SetDisplayColumns1>
-    <summary>
-      Sets the Display Columns from the DataObject properties.
-    </summary>
-    <param name="dataObject">The DataObject reference.</param>
-    <param name="dataDefinition">The DbColumns data definition.</param>
-    <param name="propertyNames">The Property Names.</param>
-    <example>
-      <code>
-        // See the DataAccess setup code on the TableGridData class page.
-
-        // Sets the Display Columns from the DataColumns object.
-        private DbColumns SetDisplayColumns(DataAccess dataAccess)
-        {
-          DbColumns retValue = null;
-
-          var sql = "select * from TableName";
-          var dataTable = dataAccess.GetSchemaOnly(sql);
-          if (NetCommon.HasColumns(dataTable))
-          {
-            var dataObject = new DataObject();
-            var dataDefinition = TableGridData.GetDbColumns(dataTable.Columns);
-            var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(dataObject, dataDefinition);
-            retValue = tableGridData.DisplayColumns;
-          }
-          return retValue;
-        }
-      </code>
-    </example>
-  </SetDisplayColumns1>
-  <RemoveDisplayColumn>
-    <summary>
-      Removes a display column.
-    </summary>
-    <param name="columnName">The column name.</param>
-  </RemoveDisplayColumn>
 
   <!-- Row Data Methods -->
   <LoadRows>
@@ -244,46 +177,11 @@
       </code>
     </example>
   </LoadRows>
-  <RowAdd>
-    <summary>
-      Adds a grid row and updates it with the DataRow values.
-    </summary>
-    <param name="dataRow">The DataRow object.</param>
-    <returns>The added Grid row object.</returns>
-    <example>
-      <code>
-        // See the DataAccess setup code on the TableGridData class page.
-
-        // Adds a grid row and updates it with the DbValues.
-        private void RowAdd(DataAccess dataAccess)
-        {
-          var sql = "select * from Province";
-          var dataTable = dataAccess.GetDataTable(sql);
-          if (NetCommon.HasData(dataTable))
-          {
-            // Create the Display column definitions.
-            var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(dataTable.Columns);
-
-            // Configure the grid columns.
-            LJCDataGridName.Columns.Clear();
-            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
-
-            // Load the grid rows individually.
-            foreach (DataRow row in dataTable.Rows)
-            {
-              tableGridData.RowAdd(row);
-            }
-          }
-        }
-      </code>
-    </example>
-  </RowAdd>
   <RowSetValues>
     <summary>
       Updates a grid row with the DataRow values.
     </summary>
-    <param name="gridRow">The Grid row object.</param>
+    <param name="ljcGridRow">The LJCGridRow object.</param>
     <param name="dataRow">The DataRow object.</param>
     <example>
       <code>
