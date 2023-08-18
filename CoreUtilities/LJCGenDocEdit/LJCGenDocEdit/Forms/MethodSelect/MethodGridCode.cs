@@ -177,7 +177,7 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -190,7 +190,7 @@ namespace LJCGenDocEdit
           { "Summary" }
         };
 
-        // Setup the grid display columns.
+        // Setup the grid columns.
         mMethodGrid.LJCAddColumns(GridColumns);
       }
     }

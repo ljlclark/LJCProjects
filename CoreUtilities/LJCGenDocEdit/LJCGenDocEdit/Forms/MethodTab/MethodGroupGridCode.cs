@@ -296,13 +296,13 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mMethodGroupGrid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           DocMethodGroup.ColumnHeadingName,
           DocMethodGroup.ColumnHeadingTextCustom
@@ -310,7 +310,7 @@ namespace LJCGenDocEdit
 
         // Get the grid columns from the manager Data Definition.
         var classGroupManager = Managers.DocMethodGroupManager;
-        GridColumns = classGroupManager.GetColumns(columnNames);
+        GridColumns = classGroupManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         mMethodGroupGrid.LJCAddColumns(GridColumns);

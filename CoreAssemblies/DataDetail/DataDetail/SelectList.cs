@@ -56,22 +56,22 @@ namespace DataDetail
       // Get the data.
       dbResult = mDataManager.Load();
 
-      // Create the Display Columns.
+      // Create the Grid Columns.
       if (DbResult.HasData(dbResult))
       {
-        DbColumns displayColumns = dbResult.Columns.Clone();
-        var idColumn = displayColumns.LJCSearchPropertyName("ID");
-        displayColumns.Remove(idColumn);
+        DbColumns gridColumns = dbResult.Columns.Clone();
+        var idColumn = gridColumns.LJCSearchPropertyName("ID");
+        gridColumns.Remove(idColumn);
 
         // Configure the grid.
         DataGrid.LJCRowsClear();
-        DataGrid.LJCAddDisplayColumns(displayColumns);
+        DataGrid.LJCAddColumns(gridColumns);
 
         // Display the data.
         foreach (DbRow dbRow in dbResult.Rows)
         {
-          var gridRow = DataGrid.LJCRowAdd();
-          gridRow.LJCSetValues(DataGrid, dbRow.Values);
+          var ljcGridRow = DataGrid.LJCRowAdd();
+          ljcGridRow.LJCSetValues(DataGrid, dbRow.Values);
         }
       }
 

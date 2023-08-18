@@ -311,13 +311,13 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mAssemblyGrid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           DocAssembly.ColumnName,
           DocAssembly.ColumnDescription
@@ -325,7 +325,7 @@ namespace LJCGenDocEdit
 
         // Get the grid columns from the manager Data Definition.
         var assemblyManager = DocAssemblyManager;
-        GridColumns = assemblyManager.GetColumns(columnNames);
+        GridColumns = assemblyManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         mAssemblyGrid.LJCAddColumns(GridColumns);

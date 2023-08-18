@@ -625,32 +625,32 @@ namespace _Namespace_
       SetupGrid_ClassName_();
     }
 
-    // Setup the grid display columns.
+    // Setup the grid columns.
     private void SetupGrid_ClassName_()
     {
       _ClassName_Grid.BackgroundColor = mSettings.BeginColor;
 
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == _ClassName_Grid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           _ClassName_.ColumnName,
           _ClassName_.ColumnDescription
         };
 
-        // Get the display columns from the manager Data Definition.
-        mDisplayColumns_ClassName_
-          = Managers._ClassName_Manager.GetColumns(columnNames);
+        // Get the grid columns from the manager Data Definition.
+        mGridColumns_ClassName_
+          = Managers._ClassName_Manager.GetColumns(propertyNames);
 
         // Add Calculated columns.
-        //mDisplayColumnsSource.Add(LayoutColumn.ColumnMapTypeName, caption: "MapType Name");
+        //mGridColumnsSource.Add(LayoutColumn.ColumnMapTypeName, caption: "MapType Name");
 
-        // Setup the grid display columns.
-        _ClassName_Grid.LJCAddDisplayColumns(mDisplayColumns_ClassName_);
+        // Setup the grid columns.
+        _ClassName_Grid.LJCAddColumns(mGridColumns_ClassName_);
       }
     }
-    private DbColumns mDisplayColumns_ClassName_;
+    private DbColumns mGridColumns_ClassName_;
 
     // Splitter is not in the first TabPage so Set values on first display.
     //private void Split_Resize(object sender, EventArgs e)

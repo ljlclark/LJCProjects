@@ -290,13 +290,13 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
       if (0 == mMethodGrid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           DocMethod.ColumnName,
           DocMethod.ColumnOverloadName,
@@ -305,7 +305,7 @@ namespace LJCGenDocEdit
 
         // Get the grid columns from the manager Data Definition.
         var methodManager = Managers.DocMethodManager;
-        GridColumns = methodManager.GetColumns(columnNames);
+        GridColumns = methodManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         mMethodGrid.LJCAddColumns(GridColumns);

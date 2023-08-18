@@ -132,8 +132,8 @@
       Returns a set of DataColumns that match the supplied list.
     </summary>
     <param name="dataColumns">The DataColumnCollection object.</param>
-    <param name="columnNames">The display column names.</param>
-    <returns>The DisplayColumns object.</returns>
+    <param name="columnNames">The column names.</param>
+    <returns>The DataColumns object.</returns>
   </GetDataColumns>
 
   <!-- Constructors -->
@@ -162,13 +162,13 @@
           var dataTable = dataAccess.GetDataTable(sql);
           if (NetCommon.HasData(dataTable))
           {
-            // Create the Display column definitions.
+            // Create the Grid column definitions.
             var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(dataTable.Columns);
+            tableGridData.SetGridColumns(dataTable.Columns);
 
             // Configure the grid columns.
             LJCDataGridName.Columns.Clear();
-            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
+            LJCDataGridName.LJCAddColumns(tableGridData.GridColumns);
 
             // Load the grid rows.
             tableGridData.LoadRows(dataTable);
@@ -194,19 +194,19 @@
           var dataTable = dataAccess.GetDataTable(sql);
           if (NetCommon.HasData(dataTable))
           {
-            // Create the Display column definitions.
+            // Create the Grid column definitions.
             var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetDisplayColumns(dataTable.Columns);
+            tableGridData.SetGridColumns(dataTable.Columns);
 
             // Configure the grid columns.
             LJCDataGridName.Columns.Clear();
-            LJCDataGridName.LJCAddDisplayColumns(tableGridData.DisplayColumns);
+            LJCDataGridName.LJCAddColumns(tableGridData.DisplayColumns);
 
             // Create and load the grid rows individually.
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-              var gridRow = LJCDataGridName.LJCRowAdd();
-              tableGridData.RowSetValues(gridRow, row);
+              var ljcGridRow = LJCDataGridName.LJCRowAdd();
+              tableGridData.RowSetValues(ljcGridRow, dataRow);
             }
           }
         }

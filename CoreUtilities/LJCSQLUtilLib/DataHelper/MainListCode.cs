@@ -71,74 +71,74 @@ namespace DataHelper
 			}
 		}
 
-		// Setup the grid display columns.
+		// Setup the grid columns.
 		private void SetupGridTable()
 		{
 			TableGrid.BackgroundColor = mSettings.BeginColor;
 
 			if (0 == TableGrid.Columns.Count)
 			{
-				List<string> columnNames = new List<string> {
+				List<string> propertyNames = new List<string> {
 					DbMetaDataTable.ColumnName,
 					DbMetaDataTable.ColumnDescription,
 					DbMetaDataTable.ColumnCaption
 				};
 
-				// Get the display columns from the manager Data Definition.
-				mDisplayColumnsTable
-					= Managers.DbMetaDataTableManager.GetColumns(columnNames);
+				// Get the grid columns from the manager Data Definition.
+				mGridColumnsTable
+					= Managers.DbMetaDataTableManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				TableGrid.LJCAddDisplayColumns(mDisplayColumnsTable);
+				// Setup the grid columns.
+				TableGrid.LJCAddColumns(mGridColumnsTable);
 			}
 		}
-		private DbColumns mDisplayColumnsTable;
+		private DbColumns mGridColumnsTable;
 
-		// Setup the grid display columns.
+		// Setup the grid columns.
 		private void SetupGridColumn()
 		{
 			ColumnGrid.BackgroundColor = mSettings.BeginColor;
 
 			if (0 == ColumnGrid.Columns.Count)
 			{
-				List<string> columnNames = new List<string> {
+				List<string> propertyNames = new List<string> {
 					DbMetaDataColumn.ColumnColumnName,
 					DbMetaDataColumn.ColumnDescription,
 					DbMetaDataColumn.ColumnCaption
 				};
 
-				// Get the display columns from the manager Data Definition.
-				mDisplayColumnsColumn
-					= Managers.DbMetaDataColumnManager.GetColumns(columnNames);
+				// Get the grid columns from the manager Data Definition.
+				mGridColumnsColumn
+					= Managers.DbMetaDataColumnManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				ColumnGrid.LJCAddDisplayColumns(mDisplayColumnsColumn);
+				// Setup the grid columns.
+				ColumnGrid.LJCAddColumns(mGridColumnsColumn);
 			}
 		}
-		private DbColumns mDisplayColumnsColumn;
+		private DbColumns mGridColumnsColumn;
 
-		// Setup the grid display columns.
+		// Setup the grid columns.
 		private void SetupGridKey()
 		{
 			KeyGrid.BackgroundColor = mSettings.BeginColor;
 
 			if (0 == KeyGrid.Columns.Count)
 			{
-				List<string> columnNames = new List<string> {
+				List<string> propertyNames = new List<string> {
 					DbMetaDataKey.ColumnColumnName,
 					DbMetaDataKey.ColumnToTableName,
 					DbMetaDataKey.ColumnToColumnName
 				};
 
-				// Get the display columns from the manager Data Definition.
-				mDisplayColumnsKey
-					= Managers.DbMetaDataKeyManager.GetColumns(columnNames);
+				// Get the grid columns from the manager Data Definition.
+				mGridColumnsKey
+					= Managers.DbMetaDataKeyManager.GetColumns(propertyNames);
 
-				// Setup the grid display columns.
-				KeyGrid.LJCAddDisplayColumns(mDisplayColumnsKey);
+				// Setup the grid columns.
+				KeyGrid.LJCAddColumns(mGridColumnsKey);
 			}
 		}
-		private DbColumns mDisplayColumnsKey;
+		private DbColumns mGridColumnsKey;
 
 		// Saves the control values. 
 		private void SaveControlValues()

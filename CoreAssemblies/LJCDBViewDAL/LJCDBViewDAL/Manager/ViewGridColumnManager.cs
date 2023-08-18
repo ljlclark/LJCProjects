@@ -181,9 +181,9 @@ namespace LJCDBViewDAL
 
     #region Custom Data Methods
 
-    // Retrieves the Display Columns definition.
-    /// <include path='items/GetDisplayColumns/*' file='Doc/ViewGridColumnManager.xml'/>
-    public DbColumns GetDisplayColumns(int viewDataID)
+    // Retrieves the grid Columns definition.
+    /// <include path='items/GetGridColumns/*' file='Doc/ViewGridColumnManager.xml'/>
+    public DbColumns GetGridColumns(int viewDataID)
     {
       DbColumns retValue = null;
 

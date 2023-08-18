@@ -95,11 +95,11 @@
     <param name="viewGridColumn">The data record.</param>
     <returns>True if successful otherwise, false.</returns>
   </SaveData>
-  <GetDisplayColumns>
+  <GetGridColumns>
     <summary>
-      Retrieves the Display Columns definition.
+      Retrieves the Grid Columns definition.
     </summary>
     <param name="viewDataID">The view ID value.</param>
-    <returns>The display columns.</returns>
-  </GetDisplayColumns>
+    <returns>The grid columns.</returns>
+  </GetGridColumns>
 </items>

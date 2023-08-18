@@ -258,60 +258,60 @@ namespace LJCGenTextEdit
       SetupGridReplacement();
     }
 
-    // Setup the grid display columns.
+    // Setup the grid columns.
     private void SetupGridSection()
     {
       SectionGrid.BackgroundColor = BeginColor;
 
       if (0 == SectionGrid.Columns.Count)
       {
-        mDisplayColumnsSection = new DbColumns()
+        mGridColumnsSection = new DbColumns()
         {
           "Name"
         };
 
-        // Setup the grid display columns and column values.
-        SectionGrid.LJCAddDisplayColumns(mDisplayColumnsSection);
+        // Setup the grid columns and column values.
+        SectionGrid.LJCAddColumns(mGridColumnsSection);
       }
     }
-    private DbColumns mDisplayColumnsSection;
+    private DbColumns mGridColumnsSection;
 
-    // Setup the grid display columns.
+    // Setup the grid columns.
     private void SetupGridItem()
     {
       ItemGrid.BackgroundColor = BeginColor;
 
       if (0 == ItemGrid.Columns.Count)
       {
-        mDisplayColumnsItem = new DbColumns()
+        mGridColumnsItem = new DbColumns()
         {
           "Name"
         };
 
-        // Setup the grid display columns and column values.
-        ItemGrid.LJCAddDisplayColumns(mDisplayColumnsItem);
+        // Setup the grid columns and column values.
+        ItemGrid.LJCAddColumns(mGridColumnsItem);
       }
     }
-    private DbColumns mDisplayColumnsItem;
+    private DbColumns mGridColumnsItem;
 
-    // Setup the grid display columns.
+    // Setup the grid columns.
     private void SetupGridReplacement()
     {
       ReplacementGrid.BackgroundColor = BeginColor;
 
       if (0 == ReplacementGrid.Columns.Count)
       {
-        mDisplayColumnsReplacement = new DbColumns()
+        mGridColumnsReplacement = new DbColumns()
         {
           "Name",
           "Value"
         };
 
-        // Setup the grid display columns and column values.
-        ReplacementGrid.LJCAddDisplayColumns(mDisplayColumnsReplacement);
+        // Setup the grid columns and column values.
+        ReplacementGrid.LJCAddColumns(mGridColumnsReplacement);
       }
     }
-    private DbColumns mDisplayColumnsReplacement;
+    private DbColumns mGridColumnsReplacement;
 
     // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }

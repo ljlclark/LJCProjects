@@ -149,7 +149,7 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.

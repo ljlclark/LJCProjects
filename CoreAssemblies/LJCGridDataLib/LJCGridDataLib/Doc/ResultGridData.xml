@@ -53,7 +53,7 @@
   </SetGridColumns1>
   <SetGridColumns2>
     <summary>
-      Configure the Display Columns from the Data object properties.
+      Configure the Grid Columns from the Data object properties.
     </summary>
     <param name="dataObject">The Data object.</param>
     <param name="propertyNames">The included columns.</param>
@@ -82,7 +82,7 @@
   </SetGridColumns2>
   <RemoveGridColumn>
     <summary>
-      Removes a display column.
+      Removes a grid column.
     </summary>
     <param name="columnName">The column name.</param>
   </RemoveGridColumn>

@@ -274,13 +274,13 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mAssemblyGroupGrid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           DocAssemblyGroup.ColumnName,
           DocAssemblyGroup.ColumnHeading,
@@ -289,9 +289,9 @@ namespace LJCGenDocEdit
 
         // Get the grid columns from the manager Data Definition.
         var manager = DocAssemblyGroupManager;
-        GridColumns = manager.GetColumns(columnNames);
+        GridColumns = manager.GetColumns(propertyNames);
 
-        // Setup the grid display columns.
+        // Setup the grid columns.
         mAssemblyGroupGrid.LJCAddColumns(GridColumns);
         mAssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
       }

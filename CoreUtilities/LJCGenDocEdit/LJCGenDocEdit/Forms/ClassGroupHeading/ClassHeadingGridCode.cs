@@ -306,13 +306,13 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <summary>Setup the grid display columns.</summary>
+    /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (0 == mClassHeadingGrid.Columns.Count)
       {
-        List<string> columnNames = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           DocClassGroupHeading.ColumnName,
           DocClassGroupHeading.ColumnHeading
@@ -320,7 +320,7 @@ namespace LJCGenDocEdit
 
         // Get the grid columns from the manager Data Definition.
         var classManager = Managers.DocClassGroupHeadingManager;
-        GridColumns = classManager.GetColumns(columnNames);
+        GridColumns = classManager.GetColumns(propertyNames);
 
         // Setup the grid  columns.
         mClassHeadingGrid.LJCAddColumns(GridColumns);

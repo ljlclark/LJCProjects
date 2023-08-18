@@ -197,7 +197,7 @@ namespace LJCDBViewDAL
     /// <include path='items/GetDisplayColumns/*' file='Doc/ViewHelper.xml'/>
     public DbColumns GetDisplayColumns(int viewDataID)
     {
-      return ViewGridColumnManager.GetDisplayColumns(viewDataID);
+      return ViewGridColumnManager.GetGridColumns(viewDataID);
     }
     #endregion
 

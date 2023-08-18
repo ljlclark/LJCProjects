@@ -55,7 +55,7 @@ namespace LJCGridDataLib
       }
     }
 
-    // Configure the Display Columns from the Data object properties.
+    // Configure the Grid Columns from the Data object properties.
     /// <include path='items/SetGridColumns2/*' file='Doc/ResultGridData.xml'/>
     public void SetGridColumns(object dataObject
       , List<string> propertyNames = null)
@@ -80,7 +80,7 @@ namespace LJCGridDataLib
       }
     }
 
-    // Removes a display column.
+    // Removes a grid column.
     /// <include path='items/RemoveGridColumn/*' file='Doc/ResultGridData.xml'/>
     public void RemoveGridColumn(string columnName)
     {

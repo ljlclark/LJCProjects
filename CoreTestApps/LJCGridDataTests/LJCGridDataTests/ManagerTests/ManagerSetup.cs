@@ -55,7 +55,7 @@ namespace LJCGridDataTests
       return retValue;
     }
 
-    // Configure the Display Columns using LJCAddColumn().
+    // Configure the Grid Columns using LJCAddColumn().
     private DbColumns ColumnsFromAdd()
     {
       DbColumns retValue = new DbColumns();
@@ -75,7 +75,7 @@ namespace LJCGridDataTests
       return retValue;
     }
 
-    // Configure the Display Columns from the DbColumns definition.
+    // Configure the Grid Columns from the DbColumns definition.
     private DbColumns ColumnsFromResult(List<string> propertyNames)
     {
       DbColumns retValue = null;
@@ -83,13 +83,13 @@ namespace LJCGridDataTests
       var dbResult = mDataManager.Load(propertyNames: propertyNames);
       if (DbResult.HasData(dbResult))
       {
-        // Create the Display column definitions.
+        // Create the Grid column definitions.
         retValue = dbResult.Columns.LJCGetColumns(propertyNames);
       }
       return retValue;
     }
 
-    // Configure the Display Columns from the DbRequest object definition.
+    // Configure the Grid Columns from the DbRequest object definition.
     private DbColumns ColumnsFromRequest(List<string> propertyNames)
     {
       DbColumns retValue;
@@ -106,24 +106,24 @@ namespace LJCGridDataTests
         TableName = mDataManager.TableName
       };
 
-      // Create the Display column definitions.
+      // Create the Grid column definitions.
       var resultGridData = new ResultGridData();
-      resultGridData.SetDisplayColumns(dbRequest, propertyNames);
-      retValue = resultGridData.DisplayColumns;
+      resultGridData.SetGridColumns(dbRequest, propertyNames);
+      retValue = resultGridData.GridColumns;
       return retValue;
     }
 
-    // Configure the Display Columns from the Data object properties.
+    // Configure the Grid Columns from the Data object properties.
     private DbColumns ColumnsFromDataObject(List<string> propertyNames)
     {
       DbColumns retValue;
 
       var dataObject = new Province();
 
-      // Create the Display column definitions.
+      // Create the Grid column definitions.
       var resultGridData = new ResultGridData();
-      resultGridData.SetDisplayColumns(dataObject, propertyNames);
-      retValue = resultGridData.DisplayColumns;
+      resultGridData.SetGridColumns(dataObject, propertyNames);
+      retValue = resultGridData.GridColumns;
       return retValue;
     }
 
