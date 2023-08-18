@@ -21,7 +21,7 @@ namespace LJCCodeLineCounter
         //args[0] = @"..\..\..\..\LJC.AppManager";
         retValue[0] = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev";
         retValue[1] = "*.cs";
-        //retValue[2] = "SetDisplayColumns";
+        //retValue[2] = "SetGridColumns";
       }
       else
       {

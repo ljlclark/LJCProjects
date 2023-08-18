@@ -1321,39 +1321,37 @@ namespace LJCRegionManager
     {
       //ProvinceGrid.BackgroundColor = Color.AliceBlue;
 
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (record != null
         && 0 == ProvinceGrid.Columns.Count)
       {
-        List<string> displayColumns = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           Province.ColumnAbbreviation,
           Province.ColumnName,
           Province.ColumnDescription,
         };
 
-        // Get the display columns from the record.
+        // Get the grid columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetGridColumns(record, displayColumns);
-        //mProvinceDisplayColumns = resultGridData.DisplayColumns;
+        resultGridData.SetGridColumns(record, propertyNames);
 
-        // Setup the grid display columns.
+        // Setup the grid columns.
         ProvinceGrid.LJCAddColumns(resultGridData.GridColumns);
         ProvinceGrid.LJCRestoreColumnValues(ControlValues);
       }
     }
-    //private DbColumns mProvinceDisplayColumns;
 
     // Setup the City grid.
     private void SetupGridCity(City record = null)
     {
       //CityGrid.BackgroundColor = Color.AliceBlue;
 
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (record != null
         && 0 == CityGrid.Columns.Count)
       {
-        List<string> displayColumns = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           City.ColumnName,
           City.ColumnDescription,
@@ -1361,28 +1359,26 @@ namespace LJCRegionManager
           City.ColumnDistrict
         };
 
-        // Get the display columns from the record.
+        // Get the grid columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetGridColumns(record, displayColumns);
-        //mCityDisplayColumns = resultGridData.DisplayColumns;
+        resultGridData.SetGridColumns(record, propertyNames);
 
-        // Setup the grid display columns.
+        // Setup the grid columns.
         CityGrid.LJCAddColumns(resultGridData.GridColumns);
         CityGrid.LJCRestoreColumnValues(ControlValues);
       }
     }
-    //private DbColumns mCityDisplayColumns;
 
     // Setup the CitySection grid.
     private void SetupGridCitySection(CitySection record = null)
     {
       //CitySectionGrid.BackgroundColor = Color.AliceBlue;
 
-      // Setup default display columns if no columns are defined.
+      // Setup default grid columns if no columns are defined.
       if (record != null
         && 0 == CitySectionGrid.Columns.Count)
       {
-        List<string> displayColumns = new List<string>()
+        List<string> propertyNames = new List<string>()
         {
           CitySection.ColumnName,
           CitySection.ColumnDescription,
@@ -1390,17 +1386,15 @@ namespace LJCRegionManager
           "Contact"
         };
 
-        // Get the display columns from the record.
+        // Get the grid columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetGridColumns(record, displayColumns);
-        //mCitySectionDisplayColumns = resultGridData.DisplayColumns;
+        resultGridData.SetGridColumns(record, propertyNames);
 
-        // Setup the grid display columns.
+        // Setup the grid columns.
         CitySectionGrid.LJCAddColumns(resultGridData.GridColumns);
         CitySectionGrid.LJCRestoreColumnValues(ControlValues);
       }
     }
-    //private DbColumns mCitySectionDisplayColumns;
 
     /// <summary>Gets or sets the Allow Change value.</summary>
     public ControlValues ControlValues { get; set; }

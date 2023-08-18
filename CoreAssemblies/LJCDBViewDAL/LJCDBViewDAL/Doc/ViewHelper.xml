@@ -39,13 +39,13 @@
     <param name="viewDataID">The View ID.</param>
     <returns>The View DbRequest object.</returns>
   </GetViewRequest2>
-  <GetDisplayColumns>
+  <GetGridColumns>
     <summary>
       Gets the ViewGrid columns.
     </summary>
     <param name="viewDataID">the View ID.</param>
     <returns>The DbColumns object.</returns>
-  </GetDisplayColumns>
+  </GetGridColumns>
   <CreateDefaultViewTable>
     <summary>
       Creates and returns the default ViewTable record.

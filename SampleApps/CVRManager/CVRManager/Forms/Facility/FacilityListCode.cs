@@ -51,7 +51,7 @@ namespace CVRManager
       }
     }
 
-    // Setup the grid display columns.
+    // Setup the grid columns.
     private void SetupGridFacility()
     {
       FacilityGrid.BackgroundColor = mSettings.BeginColor;
@@ -64,14 +64,14 @@ namespace CVRManager
         };
 
         // Get the grid columns from the manager Data Definition.
-        mDisplayColumnsFacility
+        mGridColumnsFacility
           = Managers.FacilityManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        FacilityGrid.LJCAddColumns(mDisplayColumnsFacility);
+        FacilityGrid.LJCAddColumns(mGridColumnsFacility);
       }
     }
-    private DbColumns mDisplayColumnsFacility;
+    private DbColumns mGridColumnsFacility;
 
     // Saves the control values. 
     private void SaveControlValues()

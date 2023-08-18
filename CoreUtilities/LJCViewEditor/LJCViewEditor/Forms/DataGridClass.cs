@@ -53,10 +53,10 @@ namespace LJCViewEditor
         {
           // Setup grid columns.
           //ResultGridData resultGridData = new ResultGridData();
-          //resultGridData.SetDisplayColumns(dbRequest);
+          //resultGridData.SetGridColumns(dbRequest);
 
           // Get data.
-          //dataColumns = CreateDbColumnsFromDbValues(resultGridData.DisplayColumns
+          //dataColumns = CreateDbColumnsFromDbValues(resultGridData.GridColumns
           //  , dbResult.Rows[0].Values);
           dataColumns = CreateDbColumnsFromDbValues(dbRequest.Columns
             , dbResult.Rows[0].Values);

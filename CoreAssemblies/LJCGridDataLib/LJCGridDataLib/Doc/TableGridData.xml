@@ -147,8 +147,7 @@
   <!-- Row Data Methods -->
   <LoadRows>
     <summary>
-      Loads grid rows from the DataRows collection restricted by the
-      DisplayColumns property.
+      Loads grid rows from the DataRows collection.
     </summary>
     <param name="dataTable">The DataTable object.</param>
     <example>
@@ -200,7 +199,7 @@
 
             // Configure the grid columns.
             LJCDataGridName.Columns.Clear();
-            LJCDataGridName.LJCAddColumns(tableGridData.DisplayColumns);
+            LJCDataGridName.LJCAddColumns(tableGridData.GridColumns);
 
             // Create and load the grid rows individually.
             foreach (DataRow dataRow in dataTable.Rows)

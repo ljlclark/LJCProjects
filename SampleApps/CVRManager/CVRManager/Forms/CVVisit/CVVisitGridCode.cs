@@ -76,7 +76,7 @@ namespace CVRManager
 		// Add the Calulated and Custom values.
 		private void CustomValuesCVVisit(LJCGridRow row, CVVisit dataRecord)
 		{
-			row.LJCSetCellText(mParent.mRegisterDateColumn.ColumnName
+			row.LJCSetCellText(mParent.mGridColumnsRegisterDate.ColumnName
 				, DataCommon.GetUIDateString(dataRecord.RegisterTime));
 			string timeString = DataCommon.GetUITimeString(dataRecord.RegisterTime);
 			row.LJCSetCellText(CVVisit.ColumnRegisterTime, timeString);

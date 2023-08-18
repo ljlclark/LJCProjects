@@ -259,11 +259,11 @@ namespace LJCViewEditor
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns joinDisplayColumns
+				DbColumns joinGridColumns
 					= mViewJoinManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				Parent.JoinGrid.LJCAddColumns(joinDisplayColumns);
+				Parent.JoinGrid.LJCAddColumns(joinGridColumns);
 			}
 		}
 		#endregion

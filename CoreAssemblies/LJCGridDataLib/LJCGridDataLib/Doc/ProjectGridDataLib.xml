@@ -96,11 +96,11 @@
           var dataManager = new DataManager(dbServiceRef, null, tableName);
 
           // Method Tests.
-          SetDisplayColumns(dataManager);
-          SetDisplayColumns1(dataManager);
-          SetDisplayColumns2();
-          LoadRows(dataManager);
-          LoadRows1(dataManager);
+          //SetDisplayColumns(dataManager);
+          //SetDisplayColumns1(dataManager);
+          //SetDisplayColumns2();
+          //LoadRows(dataManager);
+          //LoadRows1(dataManager);
         }
       </code>
     </example>

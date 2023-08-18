@@ -301,7 +301,7 @@ namespace LJCWinFormControls
     }
 
     // Adds grid columns.
-    /// <include path='items/LJCAddDisplayColumns/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include path='items/LJCAddColumns/*' file='Doc/LJCDataGrid.xml'/>
     public void LJCAddColumns(DbColumns columns)
     {
       if (columns != null)

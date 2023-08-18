@@ -265,12 +265,12 @@ namespace LJCUnitMeasure
 
 		#region Setup Methods
 
-		// Setup the grid display columns.
+		// Setup the grid columns.
 		internal DbColumns SetupGrid()
 		{
 			DbColumns retValue = null;
 
-			// Setup default display columns if no columns are defined.
+			// Setup default grid columns if no columns are defined.
 			if (0 == mUnitMeasureGrid.Columns.Count)
 			{
 				List<string> propertyNames = new List<string>()

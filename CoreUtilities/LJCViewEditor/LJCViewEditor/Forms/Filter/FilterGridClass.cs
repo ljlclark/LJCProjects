@@ -258,11 +258,11 @@ namespace LJCViewEditor
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns filterDisplayColumns
+				DbColumns filterGridColumns
 					= mViewFilterManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				Parent.FilterGrid.LJCAddColumns(filterDisplayColumns);
+				Parent.FilterGrid.LJCAddColumns(filterGridColumns);
 			}
 		}
 		#endregion

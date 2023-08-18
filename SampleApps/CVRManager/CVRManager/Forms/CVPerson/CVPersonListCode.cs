@@ -66,7 +66,7 @@ namespace CVRManager
 			}
 		}
 
-		// Setup the grid display columns.
+		// Setup the grid columns.
 		private void SetupGridCVPerson()
 		{
 			CVPersonGrid.BackgroundColor = mSettings.BeginColor;
@@ -81,14 +81,14 @@ namespace CVRManager
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				mDisplayColumnsCVPerson
+				mGridColumnsCVPerson
 					= Managers.CVPersonManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				CVPersonGrid.LJCAddColumns(mDisplayColumnsCVPerson);
+				CVPersonGrid.LJCAddColumns(mGridColumnsCVPerson);
 			}
 		}
-		private DbColumns mDisplayColumnsCVPerson;
+		private DbColumns mGridColumnsCVPerson;
 
 		// Saves the control values. 
 		private void SaveControlValues()

@@ -274,10 +274,10 @@ namespace LJCViewEditor
 
           // Setup grid columns.
           //ResultGridData resultGridData = new ResultGridData();
-          //resultGridData.SetDisplayColumns(dbResult.Columns);
+          //resultGridData.SetGridColumns(dbResult.Columns);
 
           // Set Grid data.
-          //Parent.DataGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+          //Parent.DataGrid.LJCAddColumns(resultGridData.GridColumns);
           //resultGridData.LoadRows(dbResult);
           Parent.DataGrid.LJCAddColumns(dbResult.Columns);
           foreach (DbRow dbRow in dbResult.Rows)
@@ -351,10 +351,10 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns viewDisplayColumns = mViewDataManager.GetColumns(propertyNames);
+        DbColumns viewGridColumns = mViewDataManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        Parent.ViewGrid.LJCAddColumns(viewDisplayColumns);
+        Parent.ViewGrid.LJCAddColumns(viewGridColumns);
       }
     }
     #endregion

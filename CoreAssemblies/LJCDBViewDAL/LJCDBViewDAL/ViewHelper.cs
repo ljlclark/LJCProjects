@@ -194,8 +194,8 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ViewGrid columns.
-    /// <include path='items/GetDisplayColumns/*' file='Doc/ViewHelper.xml'/>
-    public DbColumns GetDisplayColumns(int viewDataID)
+    /// <include path='items/GetGridColumns/*' file='Doc/ViewHelper.xml'/>
+    public DbColumns GetGridColumns(int viewDataID)
     {
       return ViewGridColumnManager.GetGridColumns(viewDataID);
     }

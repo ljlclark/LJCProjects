@@ -256,11 +256,11 @@ namespace LJCViewEditor
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns conditionSetDisplayColumns
+				DbColumns conditionSetGridColumns
 					= mViewConditionSetManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				Parent.ConditionSetGrid.LJCAddColumns(conditionSetDisplayColumns);
+				Parent.ConditionSetGrid.LJCAddColumns(conditionSetGridColumns);
 			}
 		}
 		#endregion

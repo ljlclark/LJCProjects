@@ -285,20 +285,6 @@ namespace DataHelper
       //	mConfigRows.Serialize(ConfigRowFileName);
       //}
     }
-
-    //// Get the data record.
-    //private DbColumns GetRecord(DbRequest dbRequest, DbResult dbResult)
-    //{
-    //	DbValues dbValues;
-    //	DbColumns retValue = null;
-
-    //	dbValues = dbResult.DbRecords[0];
-    //	DataGrid dataGrid = new DataGrid(mParent.TableGrid);
-    //	dataGrid.SetDisplayColumns(dbRequest);
-    //	DbColumns displayColumns = dataGrid.DisplayColumns;
-    //	retValue = displayColumns.CreateColumnsFromValues(dbValues);
-    //	return retValue;
-    //}
     #endregion
 
     #region Class Data

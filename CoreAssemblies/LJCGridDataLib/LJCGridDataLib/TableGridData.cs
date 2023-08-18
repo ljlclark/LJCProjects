@@ -166,8 +166,7 @@ namespace LJCGridDataLib
 
     #region Row Data Methods
 
-    // Loads grid rows from the DataRows collection restricted by the
-    // DisplayColumns property.
+    // Loads grid rows from the DataRows collection.
     /// <include path='items/LoadRows/*' file='Doc/TableGridData.xml'/>
     public void LoadRows(DataTable dataTable)
     {
