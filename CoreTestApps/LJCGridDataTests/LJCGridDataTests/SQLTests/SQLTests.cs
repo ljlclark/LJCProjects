@@ -4,9 +4,11 @@
 using LJCDataAccess;
 using LJCDataAccessConfig;
 using LJCGridDataLib;
+using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data.Common;
+using DbColumn = LJCNetCommon.DbColumn;
 
 namespace LJCGridDataTests
 {
@@ -22,22 +24,36 @@ namespace LJCGridDataTests
     // Runs the tests.
     internal void Run()
     {
-
-      // Configure Grid Columns
-      mLJCGrid.Columns.Clear();
-
       DataAccess dataAccess = SetupSQL();
       var sql = "select * from Province";
       var dataTable = dataAccess.GetSchemaOnly(sql);
-      var definition = TableGridData.GetDbColumns(dataTable.Columns);
-      var propertyNames = new List<string>()
+
+      // Configure Grid Columns
+      mLJCGrid.Columns.Clear();
+      var gridColumns = new DbColumns();
+
+      // *** Test Setting ***
+      var setupCase = ColumnsCase.FromTable;
+      switch (setupCase)
       {
-        { "Name" },
-        { "Description" },
-        { "Abbreviation" }
-      };
-      var gridColumns = definition.LJCGetColumns(propertyNames);
-      mLJCGrid.LJCAddDisplayColumns(gridColumns);
+        case ColumnsCase.FromColumns:
+          gridColumns.Add("Name", maxLength: 60);
+          gridColumns.Add("Description", maxLength: 100);
+          gridColumns.Add("Abbreviation", maxLength: 3);
+          break;
+
+        case ColumnsCase.FromTable:
+          var dbColumns = TableGridData.GetDbColumns(dataTable.Columns);
+          var propertyNames = new List<string>()
+          {
+            { "Name" },
+            { "Description" },
+            { "Abbreviation" }
+          };
+          gridColumns = dbColumns.LJCGetColumns(propertyNames);
+          break;
+      }
+      mLJCGrid.LJCAddColumns(gridColumns);
 
       // Load Data including MaxLength.
       dataAccess.FillDataTable(sql, dataTable);
@@ -65,40 +81,38 @@ namespace LJCGridDataTests
     // Setup SQL DataAccess.
     private DataAccess SetupSQL()
     {
-      string connectionString;
-      string providerName;
+      string connectionString = null;
       DataAccess retValue;
 
       // Create Data Configuration values.
-      //var databaseName = "DatabaseName";
       var databaseName = "LJCData";
 
-      bool useInternal = false;
-      if (useInternal)
+      // *** Test Setting ***
+      var setupCase = SetupCase.External;
+      switch (setupCase)
       {
-        // Use internal configuration.
-        DbConnectionStringBuilder connectionBuilder;
-        connectionBuilder = new DbConnectionStringBuilder()
-        {
-          { "Data Source", "DataServiceName" },
-          { "Initial Catalog", databaseName },
-          { "Integrated Security", "True" }
-        };
+        case SetupCase.Internal:
+          // Use internal configuration.
+          DbConnectionStringBuilder connectionBuilder;
+          connectionBuilder = new DbConnectionStringBuilder()
+          {
+            { "Data Source", "DataServiceName" },
+            { "Initial Catalog", databaseName },
+            { "Integrated Security", "True" }
+          };
+          connectionString = connectionBuilder.ConnectionString;
+          break;
 
-        connectionString = connectionBuilder.ConnectionString;
-        providerName = "System.Data.SqlClient";
+        case SetupCase.External:
+          // Or use external configuration.
+          var configName = "LJCData";
+          DataConfigs dataConfigs = new DataConfigs();
+          dataConfigs.LJCLoadData();
+          var dataConfig = dataConfigs.LJCGetByName(configName);
+          connectionString = dataConfig.GetConnectionString();
+          break;
       }
-      else
-      {
-        // Or use external configuration.
-        var configName = "LJCData";
-        DataConfigs dataConfigs = new DataConfigs();
-        dataConfigs.LJCLoadData();
-        var dataConfig = dataConfigs.LJCGetByName(configName);
-
-        connectionString = dataConfig.GetConnectionString();
-        providerName = dataConfig.GetProviderName();
-      }
+      var providerName = "System.Data.SqlClient";
 
       // Create DataAccess.
       retValue = new DataAccess()
@@ -113,10 +127,10 @@ namespace LJCGridDataTests
 
     private readonly LJCDataGrid mLJCGrid;
 
-    private enum SetupCase
+    private enum ColumnsCase
     {
-      FromTable,
-      FromDataObject
+      FromColumns,
+      FromTable
     }
 
     private enum DataCase
@@ -124,6 +138,12 @@ namespace LJCGridDataTests
       WithLoad,
       WithAdd,
       WithValues
+    }
+
+    private enum SetupCase
+    {
+      Internal,
+      External
     }
     #endregion
   }

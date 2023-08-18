@@ -16,9 +16,6 @@ call SetupFolder.cmd
 rem ***************************
 rem *** Referenced Binaries ***
 
-set src=LJCLibraries\Output
-copy %assmRoot%%src%\*.dll %to%
-
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
@@ -39,6 +36,12 @@ copy %assmRoot%%src%\LJCGridDataLib.dll %to%
 
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormCommon\%bin%
+copy %assmRoot%%src%\LJCWinFormCommon.dll %to%
+
+set src=LJCLibraries\LJCWinFormControls\%bin%
+copy %assmRoot%%src%\LJCWinFormControls.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

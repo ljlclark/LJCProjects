@@ -1334,11 +1334,11 @@ namespace LJCRegionManager
 
         // Get the display columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetDisplayColumns(record, displayColumns);
+        resultGridData.SetGridColumns(record, displayColumns);
         //mProvinceDisplayColumns = resultGridData.DisplayColumns;
 
         // Setup the grid display columns.
-        ProvinceGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+        ProvinceGrid.LJCAddColumns(resultGridData.GridColumns);
         ProvinceGrid.LJCRestoreColumnValues(ControlValues);
       }
     }
@@ -1363,11 +1363,11 @@ namespace LJCRegionManager
 
         // Get the display columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetDisplayColumns(record, displayColumns);
+        resultGridData.SetGridColumns(record, displayColumns);
         //mCityDisplayColumns = resultGridData.DisplayColumns;
 
         // Setup the grid display columns.
-        CityGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+        CityGrid.LJCAddColumns(resultGridData.GridColumns);
         CityGrid.LJCRestoreColumnValues(ControlValues);
       }
     }
@@ -1392,11 +1392,11 @@ namespace LJCRegionManager
 
         // Get the display columns from the record.
         ResultGridData resultGridData = new ResultGridData();
-        resultGridData.SetDisplayColumns(record, displayColumns);
+        resultGridData.SetGridColumns(record, displayColumns);
         //mCitySectionDisplayColumns = resultGridData.DisplayColumns;
 
         // Setup the grid display columns.
-        CitySectionGrid.LJCAddDisplayColumns(resultGridData.DisplayColumns);
+        CitySectionGrid.LJCAddColumns(resultGridData.GridColumns);
         CitySectionGrid.LJCRestoreColumnValues(ControlValues);
       }
     }

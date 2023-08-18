@@ -35,11 +35,11 @@ namespace LJCGridDataTests
 
         case GridCase.ManagerGridSetup:
           var resultSetup = new ManagerSetup(mLJCGrid, dataManager);
-          var displayColumns = resultSetup.CreateColumns();
+          var gridColumns = resultSetup.CreateColumns();
 
           // Configure the grid columns.
           mLJCGrid.Columns.Clear();
-          mLJCGrid.LJCAddDisplayColumns(displayColumns);
+          mLJCGrid.LJCAddColumns(gridColumns);
           break;
       }
 

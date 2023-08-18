@@ -25,23 +25,9 @@ namespace LJCGridDataLib
 
     #region Configuration Methods
 
-    //// Configure the Display Columns from the DbColumns definition.
-    ///// <include path='items/SetDisplayColumns/*' file='Doc/ResultGridData.xml'/>
-    //public void SetDisplayColumns(DbColumns dbColumns
-    //  , List<string> propertyNames = null)
-    //{
-    //  DataDefinition = dbColumns.Clone();
-    //  DisplayColumns = DataDefinition.Clone();
-
-    //  if (propertyNames != null)
-    //  {
-    //    DisplayColumns = DataDefinition.LJCGetColumns(propertyNames);
-    //  }
-    //}
-
-    // Configure the Display Columns from the DbRequest object definition.
-    /// <include path='items/SetDisplayColumns1/*' file='Doc/ResultGridData.xml'/>
-    public void SetDisplayColumns(DbRequest dbRequest
+    // Configure the Grid Columns from the DbRequest object definition.
+    /// <include path='items/SetGridColumns1/*' file='Doc/ResultGridData.xml'/>
+    public void SetGridColumns(DbRequest dbRequest
       , List<string> propertyNames = null)
     {
       DbColumns dbColumns;
@@ -49,11 +35,11 @@ namespace LJCGridDataLib
       if (dbRequest != null && dbRequest.Columns != null)
       {
         DataDefinition = dbRequest.Columns.Clone();
-        DisplayColumns = DataDefinition.Clone();
+        GridColumns = DataDefinition.Clone();
 
         if (propertyNames != null)
         {
-          DisplayColumns = dbRequest.Columns.LJCGetColumns(propertyNames);
+          GridColumns = dbRequest.Columns.LJCGetColumns(propertyNames);
           if (dbRequest.Joins != null)
           {
             foreach (DbJoin dbJoin in dbRequest.Joins)
@@ -61,7 +47,7 @@ namespace LJCGridDataLib
               dbColumns = dbJoin.Columns.LJCGetColumns(propertyNames);
               foreach (DbColumn dbColumn in dbColumns)
               {
-                DisplayColumns.Add(dbColumn.Clone());
+                GridColumns.Add(dbColumn.Clone());
               }
             }
           }
@@ -70,24 +56,24 @@ namespace LJCGridDataLib
     }
 
     // Configure the Display Columns from the Data object properties.
-    /// <include path='items/SetDisplayColumns2/*' file='Doc/ResultGridData.xml'/>
-    public void SetDisplayColumns(object dataObject
+    /// <include path='items/SetGridColumns2/*' file='Doc/ResultGridData.xml'/>
+    public void SetGridColumns(object dataObject
       , List<string> propertyNames = null)
     {
       DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject);
-      DisplayColumns = DataDefinition.Clone();
+      GridColumns = DataDefinition.Clone();
 
       if (propertyNames != null)
       {
-        DisplayColumns = new DbColumns();
+        GridColumns = new DbColumns();
         foreach (string name in propertyNames)
         {
           if (IsIncluded(name, propertyNames))
           {
-            var displayColumn = DataDefinition.LJCSearchPropertyName(name);
-            if (displayColumn != null)
+            var gridColumn = DataDefinition.LJCSearchPropertyName(name);
+            if (gridColumn != null)
             {
-              DisplayColumns.Add(displayColumn);
+              GridColumns.Add(gridColumn);
             }
           }
         }
@@ -95,107 +81,15 @@ namespace LJCGridDataLib
     }
 
     // Removes a display column.
-    /// <include path='items/RemoveDisplayColumn/*' file='Doc/ResultGridData.xml'/>
-    public void RemoveDisplayColumn(string columnName)
+    /// <include path='items/RemoveGridColumn/*' file='Doc/ResultGridData.xml'/>
+    public void RemoveGridColumn(string columnName)
     {
-      DbColumn column = DisplayColumns.Find(x => x.ColumnName == columnName);
+      DbColumn column = GridColumns.Find(x => x.ColumnName == columnName);
       if (column != null)
       {
-        DisplayColumns.Remove(column);
+        GridColumns.Remove(column);
       }
     }
-    #endregion
-
-    #region Row Data Methods
-
-    //// Loads the grid rows from the result DbRecords records.
-    ///// <include path='items/LoadRows/*' file='Doc/ResultGridData.xml'/>
-    //public void LoadRows(DbResult dbResult)
-    //{
-    //  if (DbResult.HasRows(dbResult))
-    //  {
-    //    if (null == DisplayColumns)
-    //    {
-    //      // Create default DisplayColumns
-    //      DisplayColumns = dbResult.Columns;
-    //    }
-    //    LoadRows(dbResult.Rows);
-    //  }
-    //}
-
-    //// Loads the grid rows from the DbRows object.
-    ///// <include path='items/LoadRows1/*' file='Doc/ResultGridData.xml'/>
-    //public void LoadRows(DbRows dbRows)
-    //{
-    //  if (NetCommon.HasItems(dbRows))
-    //  {
-    //    foreach (DbRow dbRow in dbRows)
-    //    {
-    //      RowAdd(dbRow.Values);
-    //    }
-    //  }
-    //}
-
-    //// Adds a grid row and updates it with the DbValues.
-    ///// <include path='items/RowAdd/*' file='Doc/ResultGridData.xml'/>
-    //public LJCGridRow RowAdd(DbValues record)
-    //{
-    //  LJCGridRow retValue = null;
-
-    //  if (Grid != null)
-    //  {
-    //    retValue = Grid.LJCRowAdd();
-    //    RowSetValues(retValue, record);
-
-    //    // Allow setting stored values.
-    //    GridRow = retValue;
-    //    DataRecord = record;
-    //    OnAddRow();
-    //  }
-    //  return retValue;
-    //}
-
-    //// Updates a grid row with the DbValues.
-    ///// <include path='items/RowSetValues/*' file='Doc/ResultGridData.xml'/>
-    //public void RowSetValues(LJCGridRow gridRow, DbValues record)
-    //{
-    //  if (DisplayColumns != null && DisplayColumns.Count > 0)
-    //  {
-    //    foreach (DbColumn dbColumn in DisplayColumns)
-    //    {
-    //      // Grid columns are named after the object property names.
-    //      string propertyName = dbColumn.PropertyName;
-    //      DbValue dbValue = record.LJCSearchPropertyName(propertyName);
-    //      if (dbValue != null)
-    //      {
-    //        var value = NetCommon.GetString(dbValue.Value);
-    //        gridRow.LJCSetCellText(propertyName, value);
-    //        if (dbColumn.IsPrimaryKey)
-    //        {
-    //          AddPrimaryKeyValues(gridRow, dbValue);
-    //        }
-    //      }
-    //    }
-    //  }
-    //}
-
-    //// Updates the current row with the DbValues.
-    ///// <include path='items/RowUpdate/*' file='Doc/ResultGridData.xml'/>
-    //public void RowUpdate(DbValues record)
-    //{
-    //  if (Grid != null
-    //    && Grid.CurrentRow is LJCGridRow gridRow)
-    //  {
-    //    RowSetValues(gridRow, record);
-    //  }
-    //}
-
-    //// Fires the AddRow event.
-    ///// <include path='items/OnAddRow/*' file='Doc/ResultGridData.xml'/>
-    //protected void OnAddRow()
-    //{
-    //  AddRow?.Invoke(this, new EventArgs());
-    //}
     #endregion
 
     #region Private Methods
@@ -251,26 +145,17 @@ namespace LJCGridDataLib
 
     #region Properties
 
-    ///// <summary>Gets or sets the Grid control value.</summary>
-    //public LJCDataGrid Grid;
-
-    /// <summary>Gets or sets the GridRow value.</summary>
-    public LJCGridRow GridRow { get; set; }
+    ///// <summary>Gets or sets the GridRow value.</summary>
+    //public LJCGridRow LJCGridRow { get; set; }
 
     /// <summary>Gets or sets the DataDefinition value.</summary>
     public DbColumns DataDefinition { get; set; }
 
-    /// <summary>Gets or sets the DataRecord value.</summary>
-    public DbValues DataRecord { get; set; }
+    ///// <summary>Gets or sets the DataValues value.</summary>
+    //public DbValues DataValues { get; set; }
 
-    /// <summary>Gets or sets the Display Columns.</summary>
-    public DbColumns DisplayColumns { get; private set; }
-    #endregion
-
-    #region Class Data
-
-    ///// <summary>The AddRow event.</summary>
-    //public event EventHandler<EventArgs> AddRow;
+    /// <summary>Gets or sets the Grid Columns.</summary>
+    public DbColumns GridColumns { get; private set; }
     #endregion
   }
 }
