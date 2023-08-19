@@ -53,29 +53,18 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Configure the Grid Columns from the Data object properties.
-    /// <include path='items/GetGridColumns2/*' file='Doc/ResultGridData.xml'/>
-    public DbColumns GetGridColumns(object dataObject
-      , List<string> propertyNames = null)
-    {
-      var retValue = DbColumns.LJCCreateObjectColumns(dataObject);
-      if (propertyNames != null)
-      {
-        retValue = retValue.LJCGetColumns(propertyNames);
-      }
-      return retValue;
-    }
-
-    // Removes a grid column.
-    /// <include path='items/RemoveGridColumn/*' file='Doc/ResultGridData.xml'/>
-    public void RemoveGridColumn(DbColumns gridColumns, string columnName)
-    {
-      DbColumn column = gridColumns.Find(x => x.ColumnName == columnName);
-      if (column != null)
-      {
-        gridColumns.Remove(column);
-      }
-    }
+    //// Configure the Grid Columns from the Data object properties.
+    ///// <include path='items/GetGridColumns2/*' file='Doc/ResultGridData.xml'/>
+    //public DbColumns GetGridColumns(object dataObject
+    //  , List<string> propertyNames = null)
+    //{
+    //  var retValue = DbColumns.LJCCreateObjectColumns(dataObject);
+    //  if (propertyNames != null)
+    //  {
+    //    retValue = retValue.LJCGetColumns(propertyNames);
+    //  }
+    //  return retValue;
+    //}
     #endregion
 
     #region Private Methods

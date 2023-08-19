@@ -145,6 +145,40 @@
     <param name="propertyNames">The column property names.</param>
     <returns>The created object.</returns>
   </LJCGetColumns>
+  <LJCGetColumns2>
+    <summary>
+      Configure the Grid Columns from the Data object properties.
+    </summary>
+    <param name="dataObject">The Data object.</param>
+    <param name="propertyNames">The included columns.</param>
+    <example>
+      <code>
+        // See the DataManager setup code on the ResultGridData class page.
+
+        using LJCDBClientLib;
+        using LJCGridDataLib;
+
+        // Configure the Grid Columns from the Data object properties.
+        private DbColumns SetGridColumns2(DataManager dataManager)
+        {
+        DbColumns retValue;
+
+        var dataObject = new ADataObject();
+
+        // Create the Grid columns.
+        var resultGridData = new ResultGridData(LJCDataGridName);
+        retValue = resultGridData.GetGridColumns(dataObject);
+        return retValue;
+        }
+      </code>
+    </example>
+  </LJCGetColumns2>
+  <LJCRemoveColumn>
+    <summary>
+      Removes a grid column.
+    </summary>
+    <param name="columnName">The column name.</param>
+  </LJCRemoveColumn>
 
   <!-- Data Methods -->
   <LJCClearChanged>

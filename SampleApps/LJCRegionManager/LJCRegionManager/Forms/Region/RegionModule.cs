@@ -1333,8 +1333,7 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        ResultGridData resultGridData = new ResultGridData();
-        var gridColumns = resultGridData.GetGridColumns(record, propertyNames);
+        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
 
         // Setup the grid columns.
         ProvinceGrid.LJCAddColumns(gridColumns);
@@ -1360,8 +1359,7 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        ResultGridData resultGridData = new ResultGridData();
-        var gridColumns = resultGridData.GetGridColumns(record, propertyNames);
+        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
 
         // Setup the grid columns.
         CityGrid.LJCAddColumns(gridColumns);
@@ -1387,8 +1385,7 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        ResultGridData resultGridData = new ResultGridData();
-        var gridColumns = resultGridData.GetGridColumns(record, propertyNames);
+        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
 
         // Setup the grid columns.
         CitySectionGrid.LJCAddColumns(gridColumns);

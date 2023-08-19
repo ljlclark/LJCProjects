@@ -220,19 +220,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public bool HasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Creates the DbColumn from the supplied values and adds to the collection.
     /// <include path='items/LJCAddPropertyAs/*' file='Doc/DbColumns.xml'/>
     public DbColumn LJCAddPropertyAs(string propertyName, string caption = null
@@ -299,6 +286,43 @@ namespace LJCNetCommon
         }
       }
       return retValue;
+    }
+
+    // Configure the Grid Columns from the Data object properties.
+    /// <include path='items/LJCGetColumns2/*' file='Doc/DbColumns.xml'/>
+    public static DbColumns LJCGetColumns(object dataObject
+      , List<string> propertyNames = null)
+    {
+      var retValue = LJCCreateObjectColumns(dataObject);
+      if (propertyNames != null)
+      {
+        retValue = retValue.LJCGetColumns(propertyNames);
+      }
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    public bool LJCHasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Removes a DbColumn item.
+    /// <include path='items/LJCRemoveColumn/*' file='Doc/DbColumns.xml'/>
+    public void LJCRemoveColumn(string columnName)
+    {
+      DbColumn column = Find(x => x.ColumnName == columnName);
+      if (column != null)
+      {
+        Remove(column);
+      }
     }
 
     // Serializes the collection
