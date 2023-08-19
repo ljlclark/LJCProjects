@@ -44,7 +44,6 @@ namespace LJCNetCommon
           {
             Caption = propertyName,
             ColumnName = propertyName,
-            // *** Next Statement *** Add - 11/24/22
             Value = reflect.GetValue(propertyName)
           };
 
@@ -52,14 +51,11 @@ namespace LJCNetCommon
           if (type != null)
           {
             dbColumn.DataTypeName = type.Name;
-            // *** Next Statement *** Change - 11/24/22
             if (definitionColumn != null
               && "String" == type.Name)
             {
               dbColumn.MaxLength = definitionColumn.MaxLength;
             }
-            // *** Next Statement *** Delete - 11/24/22
-            //dbColumn.Value = reflect.GetValue(propertyName)
           }
           retValue.Add(dbColumn);
         }

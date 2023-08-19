@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- TableGrid.xml -->
+<!-- TableData.xml -->
 <items>
   <TableGridData>
     <summary>
@@ -133,47 +133,6 @@
     <param name="dataColumns">The DataColumn collection.</param>
     <returns>The ColumnNames list.</returns>
   </GetPropertyNames>
-
-  <!-- Constructors -->
-  <TableGridC>
-    <summary>
-      Initalizes an object instance.
-    </summary>
-    <param name="ljcGrid">The LJCDataGrid object.</param>
-  </TableGridC>
-
-  <!-- Row Data Methods -->
-  <LoadRows>
-    <summary>
-      Loads grid rows from the DataRows collection.
-    </summary>
-    <param name="dataTable">The DataTable object.</param>
-    <example>
-      <code>
-        // See the DataAccess setup code on the TableGridData class page.
-
-        // Loads the grid rows from the DataRows collection.
-        private void LoadRows(DataAccess dataAccess)
-        {
-          var sql = "select * from Province";
-          var dataTable = dataAccess.GetDataTable(sql);
-          if (NetCommon.HasData(dataTable))
-          {
-            // Create the Grid column definitions.
-            var tableGridData = new TableGridData(LJCDataGridName);
-            tableGridData.SetGridColumns(dataTable.Columns);
-
-            // Configure the grid columns.
-            LJCDataGridName.Columns.Clear();
-            LJCDataGridName.LJCAddColumns(tableGridData.GridColumns);
-
-            // Load the grid rows.
-            tableGridData.LoadRows(dataTable);
-          }
-        }
-      </code>
-    </example>
-  </LoadRows>
   <RowSetValues>
     <summary>
       Updates a grid row with the DataRow values.
@@ -210,10 +169,4 @@
       </code>
     </example>
   </RowSetValues>
-  <RowUpdate>
-    <summary>
-      Updates the current row with the DataRow values.
-    </summary>
-    <param name="dataRow">The DataRow object.</param>
-  </RowUpdate>
 </items>

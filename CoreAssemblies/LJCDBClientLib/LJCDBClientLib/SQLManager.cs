@@ -209,8 +209,8 @@ namespace LJCDBClientLib
       DataTable dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
-        var dataColumns = TableGridData.DataColumnsClone(dataTable);
-        BaseDefinition = TableGridData.GetDbColumns(dataColumns);
+        var dataColumns = TableData.DataColumnsClone(dataTable);
+        BaseDefinition = TableData.GetDbColumns(dataColumns);
         retValue = BaseDefinition.Clone();
       }
       return retValue;

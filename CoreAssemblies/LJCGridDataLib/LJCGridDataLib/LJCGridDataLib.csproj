@@ -56,13 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultGridData.cs" />
-    <Compile Include="TableGridData.cs" />
+    <Compile Include="TableData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\ProjectGridDataLib.xml" />
-    <Content Include="Doc\ResultGridData.xml" />
-    <Content Include="Doc\TableGridData.xml" />
+    <Content Include="Doc\ResultData.xml" />
+    <Content Include="Doc\TableData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

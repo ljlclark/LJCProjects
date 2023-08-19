@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TableGridData.cs
+// TableData.cs
+using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System;
@@ -10,14 +11,14 @@ using System.Windows.Forms;
 
 namespace LJCGridDataLib
 {
-  // Provides DataTable helpers for an LJCDataGrid control.
-  /// <include path='items/TableGridData/*' file='Doc/TableGridData.xml'/>
-  public class TableGridData
+  // Provides DataTable helpers.
+  /// <include path='items/TableData/*' file='Doc/TableData.xml'/>
+  public class TableData
   {
-    #region Static Methods
+    #region Public Functions
 
     // Creates a new DataColumns object.
-    /// <include path='items/CreateDataColumns/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/CreateDataColumns/*' file='Doc/TableData.xml'/>
     public static DataColumnCollection CreateDataColumns()
     {
       DataColumnCollection retValue;
@@ -28,7 +29,7 @@ namespace LJCGridDataLib
     }
 
     // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/DataColumnClone/*' file='Doc/TableData.xml'/>
     public static DataColumn DataColumnClone(DataColumn dataColumn)
     {
       DataColumn retValue = null;
@@ -50,14 +51,15 @@ namespace LJCGridDataLib
     }
 
     // Clones a DataColumn collection.
-    /// <include path='items/DataColumnsClone/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/DataColumnsClone/*' file='Doc/TableData.xml'/>
     public static DataColumnCollection DataColumnsClone(DataTable dataTable)
     {
       DataColumn dataColumnClone;
       DataColumnCollection retValue = null;
 
-      if (dataTable != null
-        && dataTable.Columns != null && dataTable.Columns.Count > 0)
+      ArgumentDataTable(dataTable);
+
+      if (dataTable.Columns != null && dataTable.Columns.Count > 0)
       {
         retValue = CreateDataColumns();
         foreach (DataColumn dataColumn in dataTable.Columns)
@@ -70,7 +72,7 @@ namespace LJCGridDataLib
     }
 
     // Creates a DbColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/GetDbColumn/*' file='Doc/TableData.xml'/>
     public static DbColumn GetDbColumn(DataColumn dataColumn)
     {
       DbColumn retValue;
@@ -112,7 +114,7 @@ namespace LJCGridDataLib
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    /// <include path='items/GetDataColumns/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/GetDataColumns/*' file='Doc/TableData.xml'/>
     public static DataColumnCollection GetDataColumns(DataColumnCollection dataColumns
       , List<string> columnNames)
     {
@@ -138,8 +140,37 @@ namespace LJCGridDataLib
       return retValue;
     }
 
+    // Configure the Grid Columns from the DbRequest object definition.
+    /// <include path='items/GetGridColumns1/*' file='Doc/ResultData.xml'/>
+    public static DbColumns GetGridColumns(DbRequest dbRequest
+      , List<string> propertyNames = null)
+    {
+      DbColumns retValue = null;
+
+      if (dbRequest != null && dbRequest.Columns != null)
+      {
+        retValue = dbRequest.Columns.Clone();
+        if (propertyNames != null)
+        {
+          retValue = dbRequest.Columns.LJCGetColumns(propertyNames);
+          if (dbRequest.Joins != null)
+          {
+            foreach (DbJoin dbJoin in dbRequest.Joins)
+            {
+              retValue = dbJoin.Columns.LJCGetColumns(propertyNames);
+              foreach (DbColumn dbColumn in retValue)
+              {
+                retValue.Add(dbColumn.Clone());
+              }
+            }
+          }
+        }
+      }
+      return retValue;
+    }
+
     // Creates a PropertyNames list from a DataColumns collection.
-    /// <include path='items/GetPropertyNames/*' file='Doc/TableGridData.xml'/>
+    /// <include path='items/GetPropertyNames/*' file='Doc/TableData.xml'/>
     public static List<string> GetPropertyNames(DataColumnCollection dataColumns)
     {
       List<string> retValue = null;
@@ -154,41 +185,11 @@ namespace LJCGridDataLib
       }
       return retValue;
     }
-    #endregion
-
-    #region Constructors
-
-    // Initializes an object instance.
-    /// <include path='items/TableGridC/*' file='Doc/TableGridData.xml'/>
-    public TableGridData(LJCDataGrid ljcGrid)
-    {
-      ArgumentLJCGrid(ljcGrid);
-
-      mLJCGrid = ljcGrid;
-    }
-    #endregion
-
-    #region Row Data Methods
-
-    // Loads grid rows from the DataRows collection.
-    /// <include path='items/LoadRows/*' file='Doc/TableGridData.xml'/>
-    public void LoadRows(DataTable dataTable)
-    {
-      MemberLJCGrid();
-      ArgumentDataTable(dataTable);
-
-      foreach (DataRow dataRow in dataTable.Rows)
-      {
-        var ljcGridRow = mLJCGrid.LJCRowAdd();
-        RowSetValues(ljcGridRow, dataRow);
-      }
-    }
 
     // Updates a grid row with the DataRow values.
-    /// <include path='items/RowSetValues/*' file='Doc/TableGridData.xml'/>
-    public void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow)
+    /// <include path='items/RowSetValues/*' file='Doc/TableData.xml'/>
+    public static void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow)
     {
-      MemberLJCGrid();
       ArgumentDataRow(dataRow);
 
       List<object> listValues = new List<object>();
@@ -201,24 +202,42 @@ namespace LJCGridDataLib
       ljcGridRow.SetValues(values);
     }
 
-    // Updates the current row with the DataRow values.
-    /// <include path='items/RowUpdate/*' file='Doc/TableGridData.xml'/>
-    public void RowUpdate(DataRow dataRow)
-    {
-      MemberLJCGrid();
-      ArgumentDataRow(dataRow);
+    #region Private Functions
 
-      if (mLJCGrid.CurrentRow is LJCGridRow ljcGridRow)
+    // Add the Primary Key lookup values.
+    private static void AddPrimaryKeyValues(DbColumns dataDefinition, LJCGridRow row
+      , DbValue dbValue)
+    {
+      if (dbValue.Value != null)
       {
-        RowSetValues(ljcGridRow, dataRow);
+        DbColumn dbColumn = dataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
+        if (dbColumn != null && dbColumn.IsPrimaryKey)
+        {
+          switch (dbColumn.DataTypeName)
+          {
+            case "Int32":
+              int intKeyValue = (int)dbValue.Value;
+              row.LJCSetInt32(dbColumn.ColumnName, intKeyValue);
+              break;
+
+            case "Int64":
+              long longKeyValue = (long)dbValue.Value;
+              row.LJCSetInt64(dbColumn.ColumnName, longKeyValue);
+              break;
+
+            case "String":
+              if (dbValue.Value != null)
+              {
+                row.LJCSetString(dbColumn.ColumnName, dbValue.Value.ToString());
+              }
+              break;
+          }
+        }
       }
     }
-    #endregion
-
-    #region Private Methods
 
     // Checks the DataRow argument.
-    private bool ArgumentDataRow(DataRow dataRow)
+    private static bool ArgumentDataRow(DataRow dataRow)
     {
       if (null == dataRow)
       {
@@ -229,7 +248,7 @@ namespace LJCGridDataLib
     }
 
     // Checks the DataTable argument.
-    private bool ArgumentDataTable(DataTable dataTable)
+    private static bool ArgumentDataTable(DataTable dataTable)
     {
       if (false == NetCommon.HasData(dataTable))
       {
@@ -238,30 +257,7 @@ namespace LJCGridDataLib
       }
       return true;
     }
-
-    // Checks the LJCDataGrid argument.
-    private bool ArgumentLJCGrid(LJCDataGrid ljcGrid)
-    {
-      if (null == ljcGrid)
-      {
-        var message = "Missing argument ljcGrid.";
-        throw new MissingMemberException(message);
-      }
-      return true;
-    }
-
-    // Checks the mLJCGrid member.
-    private bool MemberLJCGrid()
-    {
-      if (null == mLJCGrid)
-      {
-        var message = "Missing member mLJCGrid.";
-        throw new MissingMemberException(message);
-      }
-      return true;
-    }
     #endregion
-
-    private readonly LJCDataGrid mLJCGrid;
+    #endregion
   }
 }

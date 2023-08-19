@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- ResultGridData.xml -->
+<!-- ResultData.xml -->
 <items>
-  <ResultGridDataC>
-    <summary>
-      Initalizes an object instance.
-    </summary>
-    <!-- param name="grid">The Grid control.</param -->
-  </ResultGridDataC>
-
   <!-- Configuration Methods -->
   <GetGridColumns>
     <summary>
