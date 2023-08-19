@@ -69,23 +69,6 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Creates a ColumnNames list from a DataColumns collection.
-    /// <include path='items/GetColumnNames/*' file='Doc/TableGridData.xml'/>
-    public static List<string> GetColumnNames(DataColumnCollection dataColumns)
-    {
-      List<string> retValue = null;
-
-      if (dataColumns != null && dataColumns.Count > 0)
-      {
-        retValue = new List<string>();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          retValue.Add(dataColumn.ColumnName);
-        }
-      }
-      return retValue;
-    }
-
     // Creates a DbColumn object from a DataColumn object.
     /// <include path='items/GetDbColumn/*' file='Doc/TableGridData.xml'/>
     public static DbColumn GetDbColumn(DataColumn dataColumn)
@@ -107,7 +90,11 @@ namespace LJCGridDataLib
     }
 
     // Creates a DbColumns collection from a DataColumns collection.
-    /// <include path='items/GetDbColumns/*' file='Doc/TableGridData.xml'/>
+    /// <summary>
+    /// Creates a DbColumns collection from a DataColumns collection.
+    /// </summary>
+    /// <param name="dataColumns"></param>
+    /// <returns></returns>
     public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
     {
       DbColumns retValue = null;
@@ -147,6 +134,23 @@ namespace LJCGridDataLib
           }
         }
         retValue = workTable.Columns;
+      }
+      return retValue;
+    }
+
+    // Creates a PropertyNames list from a DataColumns collection.
+    /// <include path='items/GetPropertyNames/*' file='Doc/TableGridData.xml'/>
+    public static List<string> GetPropertyNames(DataColumnCollection dataColumns)
+    {
+      List<string> retValue = null;
+
+      if (dataColumns != null && dataColumns.Count > 0)
+      {
+        retValue = new List<string>();
+        foreach (DataColumn dataColumn in dataColumns)
+        {
+          retValue.Add(dataColumn.ColumnName);
+        }
       }
       return retValue;
     }

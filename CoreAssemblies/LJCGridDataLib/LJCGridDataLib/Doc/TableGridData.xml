@@ -85,14 +85,6 @@
     <returns>The cloned DataColumnCollection object.</returns>
   </DataColumnsClone>
 
-  <GetColumnNames>
-    <summary>
-      Creates a ColumnNames list from a DataColumns collection.
-    </summary>
-    <param name="dataColumns">The DataColumn collection.</param>
-    <returns>The ColumnNames list.</returns>
-  </GetColumnNames>
-
   <GetDbColumn>
     <summary>
       Creates a DbColumn object from a DataColumn object.
@@ -126,7 +118,6 @@
       </code>
     </example>
   </GetDbColumns>
-
   <GetDataColumns>
     <summary>
       Returns a set of DataColumns that match the supplied list.
@@ -135,6 +126,13 @@
     <param name="columnNames">The column names.</param>
     <returns>The DataColumns object.</returns>
   </GetDataColumns>
+  <GetPropertyNames>
+    <summary>
+      Creates a PropertyNames list from a DataColumns collection.
+    </summary>
+    <param name="dataColumns">The DataColumn collection.</param>
+    <returns>The ColumnNames list.</returns>
+  </GetPropertyNames>
 
   <!-- Constructors -->
   <TableGridC>

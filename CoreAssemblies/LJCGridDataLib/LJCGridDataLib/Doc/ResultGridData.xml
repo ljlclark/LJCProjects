@@ -11,7 +11,7 @@
   </ResultGridDataC>
 
   <!-- Configuration Methods -->
-  <SetGridColumns1>
+  <GetGridColumns1>
     <summary>
       Configure the Grid Columns from the DbRequest object definition.
     </summary>
@@ -28,30 +28,29 @@
         // Configure the Grid Columns from the DbRequest object definition.
         private DbColumns SetGridColumns1(DataManager dataManager)
         {
-          DbColumns retValue;
-          
-          // Get a View Request.
-          var dbRequest = ViewHelper.GetViewRequest("TableName", "ViewDataName");
+        DbColumns retValue;
 
-          // Or Create the Request.
-          dbRequest = new DbRequest()
-          {
-            Columns = dataManager.DataDefinition,
-            DataConfigName = dataManager.DataConfigName,
-            RequestTypeName = RequestType.Load.ToString(),
-            TableName = dataManager.TableName
-          };
+        // Get a View Request.
+        var dbRequest = ViewHelper.GetViewRequest("TableName", "ViewDataName");
 
-          // Create the Grid columns.
-          var resultGridData = new ResultGridData(LJCDataGridName);
-          resultGridData.SetGridColumns(dbRequest);
-          retValue = resultGridData.GridColumns;
-          return retValue;
+        // Or Create the Request.
+        dbRequest = new DbRequest()
+        {
+        Columns = dataManager.DataDefinition,
+        DataConfigName = dataManager.DataConfigName,
+        RequestTypeName = RequestType.Load.ToString(),
+        TableName = dataManager.TableName
+        };
+
+        // Create the Grid columns.
+        var resultGridData = new ResultGridData(LJCDataGridName);
+        retValue = resultGridData.GetGridColumns(dbRequest);
+        return retValue;
         }
       </code>
     </example>
-  </SetGridColumns1>
-  <SetGridColumns2>
+  </GetGridColumns1>
+  <GetGridColumns2>
     <summary>
       Configure the Grid Columns from the Data object properties.
     </summary>
@@ -67,23 +66,23 @@
         // Configure the Grid Columns from the Data object properties.
         private DbColumns SetGridColumns2(DataManager dataManager)
         {
-          DbColumns retValue;
+        DbColumns retValue;
 
-          var dataObject = new ADataObject();
+        var dataObject = new ADataObject();
 
-          // Create the Grid columns.
-          var resultGridData = new ResultGridData(LJCDataGridName);
-          resultGridData.SetGridColumns(dataObject);
-          retValue = resultGridData.GridColumns;
-          return retValue;
+        // Create the Grid columns.
+        var resultGridData = new ResultGridData(LJCDataGridName);
+        retValue = resultGridData.GetGridColumns(dataObject);
+        return retValue;
         }
       </code>
     </example>
-  </SetGridColumns2>
+  </GetGridColumns2>
   <RemoveGridColumn>
     <summary>
       Removes a grid column.
     </summary>
+    <param name="gridColumns"></param>
     <param name="columnName">The column name.</param>
   </RemoveGridColumn>
 </items>

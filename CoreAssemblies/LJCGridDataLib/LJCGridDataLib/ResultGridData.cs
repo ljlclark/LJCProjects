@@ -16,7 +16,6 @@ namespace LJCGridDataLib
 
     // Initalizes an object instance.
     /// <include path='items/ResultGridDataC/*' file='Doc/ResultGridData.xml'/>
-    //public ResultGridData(LJCDataGrid grid = null)
     public ResultGridData()
     {
       //Grid = grid;
@@ -26,68 +25,55 @@ namespace LJCGridDataLib
     #region Configuration Methods
 
     // Configure the Grid Columns from the DbRequest object definition.
-    /// <include path='items/SetGridColumns1/*' file='Doc/ResultGridData.xml'/>
-    public void SetGridColumns(DbRequest dbRequest
+    /// <include path='items/GetGridColumns1/*' file='Doc/ResultGridData.xml'/>
+    public DbColumns GetGridColumns(DbRequest dbRequest
       , List<string> propertyNames = null)
     {
-      DbColumns dbColumns;
+      DbColumns retValue = null;
 
       if (dbRequest != null && dbRequest.Columns != null)
       {
-        DataDefinition = dbRequest.Columns.Clone();
-        GridColumns = DataDefinition.Clone();
-
+        retValue = dbRequest.Columns.Clone();
         if (propertyNames != null)
         {
-          GridColumns = dbRequest.Columns.LJCGetColumns(propertyNames);
+          retValue = dbRequest.Columns.LJCGetColumns(propertyNames);
           if (dbRequest.Joins != null)
           {
             foreach (DbJoin dbJoin in dbRequest.Joins)
             {
-              dbColumns = dbJoin.Columns.LJCGetColumns(propertyNames);
-              foreach (DbColumn dbColumn in dbColumns)
+              retValue = dbJoin.Columns.LJCGetColumns(propertyNames);
+              foreach (DbColumn dbColumn in retValue)
               {
-                GridColumns.Add(dbColumn.Clone());
+                retValue.Add(dbColumn.Clone());
               }
             }
           }
         }
       }
+      return retValue;
     }
 
     // Configure the Grid Columns from the Data object properties.
-    /// <include path='items/SetGridColumns2/*' file='Doc/ResultGridData.xml'/>
-    public void SetGridColumns(object dataObject
+    /// <include path='items/GetGridColumns2/*' file='Doc/ResultGridData.xml'/>
+    public DbColumns GetGridColumns(object dataObject
       , List<string> propertyNames = null)
     {
-      DataDefinition = DbColumns.LJCCreateObjectColumns(dataObject);
-      GridColumns = DataDefinition.Clone();
-
+      var retValue = DbColumns.LJCCreateObjectColumns(dataObject);
       if (propertyNames != null)
       {
-        GridColumns = new DbColumns();
-        foreach (string name in propertyNames)
-        {
-          if (IsIncluded(name, propertyNames))
-          {
-            var gridColumn = DataDefinition.LJCSearchPropertyName(name);
-            if (gridColumn != null)
-            {
-              GridColumns.Add(gridColumn);
-            }
-          }
-        }
+        retValue = retValue.LJCGetColumns(propertyNames);
       }
+      return retValue;
     }
 
     // Removes a grid column.
     /// <include path='items/RemoveGridColumn/*' file='Doc/ResultGridData.xml'/>
-    public void RemoveGridColumn(string columnName)
+    public void RemoveGridColumn(DbColumns gridColumns, string columnName)
     {
-      DbColumn column = GridColumns.Find(x => x.ColumnName == columnName);
+      DbColumn column = gridColumns.Find(x => x.ColumnName == columnName);
       if (column != null)
       {
-        GridColumns.Remove(column);
+        gridColumns.Remove(column);
       }
     }
     #endregion
@@ -95,25 +81,24 @@ namespace LJCGridDataLib
     #region Private Methods
 
     // Add the Primary Key lookup values.
-    private void AddPrimaryKeyValues(LJCGridRow row, DbValue dbValue)
+    private void AddPrimaryKeyValues(DbColumns dataDefinition, LJCGridRow row
+      , DbValue dbValue)
     {
       if (dbValue.Value != null)
       {
-        DbColumn dbColumn = DataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
+        DbColumn dbColumn = dataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
         if (dbColumn != null && dbColumn.IsPrimaryKey)
         {
           switch (dbColumn.DataTypeName)
           {
-            // *** Begin *** Add - 9/8
-            case "Int64":
-              long longKeyValue = (long)dbValue.Value;
-              row.LJCSetInt64(dbColumn.ColumnName, longKeyValue);
-              break;
-            // *** End   *** Add - 9/8
-
             case "Int32":
               int intKeyValue = (int)dbValue.Value;
               row.LJCSetInt32(dbColumn.ColumnName, intKeyValue);
+              break;
+
+            case "Int64":
+              long longKeyValue = (long)dbValue.Value;
+              row.LJCSetInt64(dbColumn.ColumnName, longKeyValue);
               break;
 
             case "String":
@@ -126,36 +111,6 @@ namespace LJCGridDataLib
         }
       }
     }
-
-    // Checks if the column name is in the included names list. 
-    private bool IsIncluded(string name, List<string> includedNames)
-    {
-      bool retValue = true;
-
-      if (includedNames != null)
-      {
-        if (true == string.IsNullOrWhiteSpace(includedNames.Find(x => x.Equals(name))))
-        {
-          retValue = false;
-        }
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Properties
-
-    ///// <summary>Gets or sets the GridRow value.</summary>
-    //public LJCGridRow LJCGridRow { get; set; }
-
-    /// <summary>Gets or sets the DataDefinition value.</summary>
-    public DbColumns DataDefinition { get; set; }
-
-    ///// <summary>Gets or sets the DataValues value.</summary>
-    //public DbValues DataValues { get; set; }
-
-    /// <summary>Gets or sets the Grid Columns.</summary>
-    public DbColumns GridColumns { get; private set; }
     #endregion
   }
 }
