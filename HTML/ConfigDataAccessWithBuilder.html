@@ -44,7 +44,7 @@
   <span class='comment'>// Create Data Configuration values.</span>
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
-    { "Data Source", "DataServiceName" },
+    { "Data Source", "DataServerName" },
     { "Initial Catalog", "DatabaseName" },
     { "Integrated Security", "True" }
     <span class='comment'>// { "User Id", "UserID" },</span>
@@ -63,7 +63,7 @@
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
-    { "server", "DataServiceName" },
+    { "server", "DataServerName" },
     { "database", "DatabaseName" }
     { "UserId", "UserID" },
     { "Password", "Password" }
@@ -81,7 +81,7 @@
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
     { "Provider", "SQLOLEDB" },
-    { "Data Source", "DataServiceName" },
+    { "Data Source", "DataServerName" },
     { "Initial Catalog", "DatabaseName" },
     <span class='comment'>// { "User Id", "UserID" },</span>
     <span class='comment'>// { "Password", "Password" }</span>
@@ -95,7 +95,7 @@
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
     { "Driver", "SQL Native Client" },
-    { "Server", "DataServiceName" },
+    { "Server", "DataServerName" },
     { "Database", "DatabaseName" },
     { "uid", "UserID" },
     { "pwd", "Password" }
