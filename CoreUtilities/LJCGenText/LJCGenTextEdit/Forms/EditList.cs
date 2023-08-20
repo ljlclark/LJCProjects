@@ -388,11 +388,6 @@ namespace LJCGenTextEdit
 
     private void HTMLCodeDecode_Click(object sender, EventArgs e)
     {
-
-    }
-
-    private void HTMLCodeEncode_Click(object sender, EventArgs e)
-    {
       List<string> lines = new List<string>();
       var syntaxHtml = new SyntaxHighlightHtml();
       foreach (var line in OutputRichText.Lines)

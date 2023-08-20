@@ -214,13 +214,15 @@ namespace LJCGenTextEdit
       {
         int lineIndex = rtControl.LJCGetCurrentLineIndex();
         string lineText = rtControl.LJCGetCurrentLine();
+        if (NetString.HasValue(lineText))
+        {
+          // Reset the line to Black.
+          rtControl.LJCSetTextColor(lineIndex, 0, lineText.Length, Color.Black);
 
-        // Reset the line to Black.
-        rtControl.LJCSetTextColor(lineIndex, 0, lineText.Length, Color.Black);
-
-        mParent.mSyntaxColors.ColorSettings = new ColorSettings();
-        mParent.mSyntaxColors.CreateLineColorSettings(tokens, lineText, lineIndex);
-        mParent.SetTextColor(rtControl);
+          mParent.mSyntaxColors.ColorSettings = new ColorSettings();
+          mParent.mSyntaxColors.CreateLineColorSettings(tokens, lineText, lineIndex);
+          mParent.SetTextColor(rtControl);
+        }
       }
     }
 

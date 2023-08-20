@@ -243,16 +243,18 @@ namespace LJCWinFormControls
     /// <include path='items/LJCGetLineText/*' file='Doc/LJCRtControl.xml'/>
     public string LJCGetLineText(int lineIndex)
     {
-      string retValue;
+      string retValue = null;
 
-      int saveOffset = SelectionStart;
+      if (lineIndex < Lines.Length)
+      {
+        int saveOffset = SelectionStart;
+        int lineStartOffset = GetFirstCharIndexFromLine(lineIndex);
+        int lineLength = Lines[lineIndex].Length;
+        Select(lineStartOffset, lineLength);
+        retValue = SelectedText;
 
-      int lineStartOffset = GetFirstCharIndexFromLine(lineIndex);
-      int lineLength = Lines[lineIndex].Length;
-      Select(lineStartOffset, lineLength);
-      retValue = SelectedText;
-
-      Select(saveOffset, 0);
+        Select(saveOffset, 0);
+      }
       return retValue;
     }
     #endregion
