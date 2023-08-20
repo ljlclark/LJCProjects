@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ConfigDataAccessWithConfigs.html -->
+<html lang="en">
+<head>
+  <title>Add Data Rows to LJCDataGrid</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../index.html">Home</a>
+      / <a href="Tutorials.html">HowTo</a>
+      / AddGridRows
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to Add Data Rows to an LJCDataGrid</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The LJCDataGrid can be populated with DataTable Rows. It uses a helper
+        class LJCGridDataLib.TableData.
+      </p>
+
+      <h4>Load Grid Rows from Table</h4>
+      <pre>
+<span class='keyWord'>using</span> LJCGridDataLib;
+<span class='keyWord'>using</span> LJCWinFormControls;
+
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> DataRetrieve()
+{
+  <span class='comment'>// Configure DataAccess using internal configuration.</span>
+  DbConnectionStringBuilder connectionBuilder;
+  connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
+  {
+    { "Data Source", "DataServiceName" },
+    { "Initial Catalog", "DatabaseName" },
+    { "Integrated Security", "True" }
+  };
+  <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
+  <span class='commonType'>var</span> providerName = "System.Data.SqlClient";
+  <span class='commonType'>var</span> dataAccess = <span class='keyWord'>new</span> <span class='userType'>DataAccess</span>(connectionString, providerName);
+
+  <span class='comment'>// Configure GridColumns.</span>
+  DataTable dataTable;
+  DbColumns gridColumns = <span class='keyWord'>null</span>;
+  <span class='commonType'>string</span> sql;
+
+  <span class='comment'>// *** Test Setting ***</span>
+  <span class='comment'>//var configType = "Manually";</span>
+  <span class='commonType'>var</span> configType = "FromTableColumns";
+  <span class='keyWord'>switch</span> (configType)
+  {
+    <span class='keyWord'>case</span> "Manually":
+    <span class='comment'>// Create Grid Columns manually.</span>
+    gridColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>();
+    gridColumns.Add("Name", maxLength: 60);
+    gridColumns.Add("Description", maxLength: 100);
+    gridColumns.Add("Abbreviation", maxLength: 3);
+    <span class='keyWord'>break</span>;
+
+    <span class='keyWord'>case</span> "FromTableColumns":
+    <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
+    sql = "select * from Province";
+    dataTable = dataAccess.GetSchemaOnly(sql);
+    <span class='commonType'>var</span> dbColumns = TableData.GetDbColumns(dataTable.Columns);
+    <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+    {
+      { "Name" },
+      { "Description" },
+      { "Abbreviation" }
+    };
+    gridColumns = dbColumns.LJCGetColumns(propertyNames);
+    <span class='keyWord'>break</span>;
+  }
+
+  <span class='comment'>// This would normally be an LJCDataGrid in a form.</span>
+  LJCDataGrid ljcGrid = <span class='keyWord'>new</span> <span class='userType'>LJCDataGrid</span>();
+  ljcGrid.LJCAddColumns(gridColumns);
+
+  <span class='comment'>// Load the data.</span>
+  sql = "select * from Province";
+  dataTable = dataAccess.GetSchemaOnly(sql);
+  dataAccess.FillDataTable(sql, dataTable);
+  <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+  {
+    <span class='comment'>// Create and populate the grid rows individually.</span>
+    <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
+    {
+      <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
+      TableData.RowSetValues(ljcGridRow, dataRow);
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</body>
+</html>
