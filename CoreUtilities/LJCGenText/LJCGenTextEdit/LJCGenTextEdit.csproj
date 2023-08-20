@@ -46,6 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
+    <Reference Include="LJCDocGenLib">
+      <HintPath>..\External\LJCDocGenLib.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>

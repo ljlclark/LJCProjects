@@ -18,7 +18,7 @@ namespace LJCGridDataTests
     internal void Run()
     {
       // *** Test Setting ***
-      var testCase = TestCase.DataManager;
+      var testCase = TestCase.SQL;
       switch (testCase)
       {
         case TestCase.DataManager:
@@ -28,7 +28,8 @@ namespace LJCGridDataTests
 
         case TestCase.SQL:
           var sqlTest = new SQLTests(mLJCGrid);
-          sqlTest.Run();
+          //sqlTest.Run();
+          SQLTests.DataRetrieve();
           break;
       }
     }

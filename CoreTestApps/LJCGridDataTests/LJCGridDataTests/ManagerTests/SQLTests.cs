@@ -3,12 +3,14 @@
 // SQLTests.cs
 using LJCDataAccess;
 using LJCDataAccessConfig;
+using LJCDBDataAccess;
 using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Reflection;
 
 namespace LJCGridDataTests
 {
@@ -19,6 +21,72 @@ namespace LJCGridDataTests
     internal SQLTests(LJCDataGrid ljcGrid)
     {
       mLJCGrid = ljcGrid;
+    }
+
+    internal static void DataRetrieve()
+    {
+      // Configure DataAccess using internal configuration.
+      DbConnectionStringBuilder connectionBuilder;
+      connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { "Data Source", "DESKTOP-PDPBE34" },
+        { "Initial Catalog", "LJCData" },
+        { "Integrated Security", "True" }
+      };
+      var connectionString = connectionBuilder.ConnectionString;
+      var providerName = "System.Data.SqlClient";
+      var dataAccess = new DataAccess(connectionString, providerName);
+
+      // Configure GridColumns.
+      DataTable dataTable;
+      DbColumns gridColumns = null;
+      string sql;
+
+      // *** Test Setting ***
+      //var configType = "Manually";
+      var configType = "FromTableColumns";
+      switch (configType)
+      {
+        case "Manually":
+          // Create Grid Columns manually.
+          gridColumns = new DbColumns();
+          gridColumns.Add("Name", maxLength: 60);
+          gridColumns.Add("Description", maxLength: 100);
+          gridColumns.Add("Abbreviation", maxLength: 3);
+          break;
+
+        case "FromTableColumns":
+          // Create Grid Columns from DataTable.Columns.
+          sql = "select * from Province";
+          dataTable = dataAccess.GetSchemaOnly(sql);
+          var dataDefinition = TableData.GetDbColumns(dataTable.Columns);
+          var propertyNames = new List<string>()
+          {
+            { "Name" },
+            { "Description" },
+            { "Abbreviation" }
+          };
+          gridColumns = dataDefinition.LJCGetColumns(propertyNames);
+          break;
+      }
+
+      // This would normally be an LJCDataGrid in a form.
+      LJCDataGrid ljcGrid = new LJCDataGrid();
+      ljcGrid.LJCAddColumns(gridColumns);
+
+      // Load the data.
+      sql = "select * from Province";
+      dataTable = dataAccess.GetSchemaOnly(sql);
+      dataAccess.FillDataTable(sql, dataTable);
+      if (NetCommon.HasData(dataTable))
+      {
+        // Create and load the grid rows individually.
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          var ljcGridRow = ljcGrid.LJCRowAdd();
+          TableData.RowSetValues(ljcGridRow, dataRow);
+        }
+      }
     }
 
     // Runs the tests.

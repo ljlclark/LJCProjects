@@ -56,7 +56,7 @@ namespace LJCGridDataTests
       return retValue;
     }
 
-    // Configure the Grid Columns using LJCAddColumn().
+    // Configure the Grid Columns using DbColumns.Add().
     private DbColumns ColumnsFromAdd()
     {
       DbColumns retValue = new DbColumns();

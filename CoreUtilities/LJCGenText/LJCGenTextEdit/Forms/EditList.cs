@@ -1,10 +1,12 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // EditList.cs
+using LJCDocGenLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -341,19 +343,19 @@ namespace LJCGenTextEdit
     #region Output
 
     // <summary>XML Decodes the output text.</summary>
-    private void OutputDecode_Click(object sender, EventArgs e)
+    private void XMLDecode_Click(object sender, EventArgs e)
     {
       OutputRichText.Text = NetCommon.XmlDecode(OutputRichText.Text);
     }
 
     // <summary>XML Encodes the output text.</summary>
-    private void OutputEncode_Click(object sender, EventArgs e)
+    private void XMLEncode_Click(object sender, EventArgs e)
     {
       OutputRichText.Text = NetCommon.XmlEncode(OutputRichText.Text);
     }
 
-    // <summary>HTML Syntax Decodes the output text.</summary>
-    private void XMLSyntaxDecode_Click(object sender, EventArgs e)
+    // <summary>HTML XML Decodes the output text.</summary>
+    private void HTMLXMLDecode_Click(object sender, EventArgs e)
     {
       var text = OutputRichText.Text;
 
@@ -368,8 +370,8 @@ namespace LJCGenTextEdit
       }
     }
 
-    // <summary>HTML Syntax Encodes the output text.</summary>
-    private void XMLSyntaxEncode_Click(object sender, EventArgs e)
+    // <summary>HTML XML Encodes the output text.</summary>
+    private void HTMLXMLEncode_Click(object sender, EventArgs e)
     {
       var text = OutputRichText.Text;
 
@@ -382,6 +384,22 @@ namespace LJCGenTextEdit
         text = text.Replace("</span>", "_se_");
         OutputRichText.Text = text;
       }
+    }
+
+    private void HTMLCodeDecode_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void HTMLCodeEncode_Click(object sender, EventArgs e)
+    {
+      List<string> lines = new List<string>();
+      var syntaxHtml = new SyntaxHighlightHtml();
+      foreach (var line in OutputRichText.Lines)
+      {
+        lines.Add(syntaxHtml.AddSyntaxHighlight(line));
+      }
+      OutputRichText.Lines = lines.ToArray();
     }
 
     // <summary>Performs the Generate Output function.</summary>
