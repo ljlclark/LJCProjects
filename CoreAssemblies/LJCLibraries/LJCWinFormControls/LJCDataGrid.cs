@@ -371,33 +371,8 @@ namespace LJCWinFormControls
       retValue = Columns[columnIndex];
       retValue.ReadOnly = true;
 
-      SetColumnWidth(retValue, textLength, averageCapsWordSize);
+      LJCSetColumnWidth(retValue, textLength, averageCapsWordSize);
       return retValue;
-    }
-
-    // <summary>Sets the column width from the supplied character width value.</summary>
-    private void SetColumnWidth(DataGridViewColumn gridColumn, int textLength
-      , int averageCapsWordSize = 0)
-    {
-      if (textLength < 5)
-      {
-        textLength = 5;
-      }
-
-      var calcLength = textLength;
-      if (NetString.HasValue(gridColumn.HeaderText)
-        && gridColumn.HeaderText.Length > textLength)
-      {
-        calcLength = gridColumn.HeaderText.Length;
-      }
-      var capsCount = 0;
-      if (averageCapsWordSize > 0)
-      {
-        capsCount = calcLength / averageCapsWordSize;
-      }
-      var grid = gridColumn.DataGridView;
-      gridColumn.Width = ControlCommon.TextUnitWidth(grid, calcLength
-        , capsCount);
     }
 
     // Adds a Checkbox column.
@@ -423,17 +398,6 @@ namespace LJCWinFormControls
       return retValue;
     }
 
-    // Saves the grid column values.
-    /// <include path='items/LJCSaveColumnValues/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCSaveColumnValues(ControlValues controlValues)
-    {
-      foreach (DataGridViewColumn column in Columns)
-      {
-        string controlName = $"{Name}.{column.Name}";
-        controlValues.Add(controlName, 0, 0, column.Width, 0);
-      }
-    }
-
     // Restores the grid column values.
     /// <include path='items/LJCRestoreColumnValues/*' file='Doc/LJCDataGrid.xml'/>
     public void LJCRestoreColumnValues(ControlValues controlValues)
@@ -454,6 +418,48 @@ namespace LJCWinFormControls
           }
         }
       }
+    }
+
+    // Saves the grid column values.
+    /// <include path='items/LJCSaveColumnValues/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCSaveColumnValues(ControlValues controlValues)
+    {
+      foreach (DataGridViewColumn column in Columns)
+      {
+        string controlName = $"{Name}.{column.Name}";
+        controlValues.Add(controlName, 0, 0, column.Width, 0);
+      }
+    }
+
+    // Sets the column width from the supplied character width value.
+    /// <summary>
+    /// Sets the column width from the supplied character width value.
+    /// </summary>
+    /// <param name="gridColumn"></param>
+    /// <param name="textLength"></param>
+    /// <param name="averageCapsWordSize"></param>
+    public void LJCSetColumnWidth(DataGridViewColumn gridColumn, int textLength
+      , int averageCapsWordSize = 0)
+    {
+      if (textLength < 5)
+      {
+        textLength = 5;
+      }
+
+      var calcLength = textLength;
+      if (NetString.HasValue(gridColumn.HeaderText)
+        && gridColumn.HeaderText.Length > textLength)
+      {
+        calcLength = gridColumn.HeaderText.Length;
+      }
+      var capsCount = 0;
+      if (averageCapsWordSize > 0)
+      {
+        capsCount = calcLength / averageCapsWordSize;
+      }
+      var grid = gridColumn.DataGridView;
+      gridColumn.Width = ControlCommon.TextUnitWidth(grid, calcLength
+        , capsCount);
     }
     #endregion
 

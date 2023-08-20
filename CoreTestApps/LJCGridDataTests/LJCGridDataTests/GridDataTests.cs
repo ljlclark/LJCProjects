@@ -18,7 +18,7 @@ namespace LJCGridDataTests
     internal void Run()
     {
       // *** Test Setting ***
-      var testCase = TestCase.SQL;
+      var testCase = TestCase.DataManager;
       switch (testCase)
       {
         case TestCase.DataManager:

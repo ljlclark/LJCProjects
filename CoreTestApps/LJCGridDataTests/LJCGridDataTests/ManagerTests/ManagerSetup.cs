@@ -33,7 +33,8 @@ namespace LJCGridDataTests
         "Abbreviation"
       };
 
-      var managerSetupCase = ManagerSetupCase.FromResult;
+      // *** Test Setting ***
+      var managerSetupCase = ManagerSetupCase.FromAdd;
       switch (managerSetupCase)
       {
         case ManagerSetupCase.FromAdd:
@@ -59,19 +60,9 @@ namespace LJCGridDataTests
     private DbColumns ColumnsFromAdd()
     {
       DbColumns retValue = new DbColumns();
-
-      var addedColumn = mLJCGrid.LJCAddColumn("Name", "Name Caption", 60);
-      var averageCharWidth = addedColumn.Width / 60;
-      mLJCGrid.LJCAddColumn("Description", null, 100);
-      mLJCGrid.LJCAddColumn("Abbreviation", null, 3);
-
-      // Testing Only - To return the same value as the other methods.
-      foreach (DataGridViewColumn column in mLJCGrid.Columns)
-      {
-        DbColumn dbColumn = retValue.Add(column.Name, caption: column.HeaderText);
-        dbColumn.MaxLength = column.Width / averageCharWidth;
-      }
-      mLJCGrid.Columns.Clear();
+      retValue.Add("Name", caption: "Name Caption", maxLength: 60);
+      retValue.Add("Description", null, maxLength: 100);
+      retValue.Add("Abbreviation", null, maxLength: 15);
       return retValue;
     }
 
@@ -107,9 +98,7 @@ namespace LJCGridDataTests
       };
 
       // Create the Grid column definitions.
-      var resultGridData = new ResultGridData();
-      resultGridData.SetGridColumns(dbRequest, propertyNames);
-      retValue = resultGridData.GridColumns;
+      retValue = TableData.GetGridColumns(dbRequest, propertyNames);
       return retValue;
     }
 
@@ -121,9 +110,7 @@ namespace LJCGridDataTests
       var dataObject = new Province();
 
       // Create the Grid column definitions.
-      var resultGridData = new ResultGridData();
-      resultGridData.SetGridColumns(dataObject, propertyNames);
-      retValue = resultGridData.GridColumns;
+      retValue = DbColumns.LJCGetColumns(dataObject, propertyNames);
       return retValue;
     }
 

@@ -83,8 +83,7 @@
     <Compile Include="ManagerTests\ManagerData.cs" />
     <Compile Include="ManagerTests\ManagerSetup.cs" />
     <Compile Include="Province.cs" />
-    <Compile Include="SQLTests\SQLData.cs" />
-    <Compile Include="SQLTests\SQLTests.cs" />
+    <Compile Include="ManagerTests\SQLTests.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,5 +123,6 @@
     <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="Doc\GridDataText.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

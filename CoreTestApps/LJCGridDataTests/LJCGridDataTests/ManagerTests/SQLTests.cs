@@ -7,8 +7,8 @@ using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
-using DbColumn = LJCNetCommon.DbColumn;
 
 namespace LJCGridDataTests
 {
@@ -25,11 +25,11 @@ namespace LJCGridDataTests
     internal void Run()
     {
       DataAccess dataAccess = SetupSQL();
-      var sql = "select * from Province";
-      var dataTable = dataAccess.GetSchemaOnly(sql);
 
       // Configure Grid Columns
       mLJCGrid.Columns.Clear();
+      string sql;
+      DataTable dataTable;
       var gridColumns = new DbColumns();
 
       // *** Test Setting ***
@@ -43,7 +43,9 @@ namespace LJCGridDataTests
           break;
 
         case ColumnsCase.FromTable:
-          var dbColumns = TableGridData.GetDbColumns(dataTable.Columns);
+          sql = "select * from Province";
+          dataTable = dataAccess.GetSchemaOnly(sql);
+          var dbColumns = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
             { "Name" },
@@ -56,25 +58,17 @@ namespace LJCGridDataTests
       mLJCGrid.LJCAddColumns(gridColumns);
 
       // Load Data including MaxLength.
+      sql = "select * from Province";
+      dataTable = dataAccess.GetSchemaOnly(sql);
       dataAccess.FillDataTable(sql, dataTable);
-      var sqlData = new SQLData(mLJCGrid, dataTable);
-
-      // *** Test Setting ***
-      var dataCase = DataCase.WithLoad;
-      var tableGridData = new LJCGridDataLib.TableGridData(mLJCGrid);
-      switch (dataCase)
+      if (NetCommon.HasData(dataTable))
       {
-        case DataCase.WithLoad:
-          sqlData.LoadRows(tableGridData);
-          break;
-
-        case DataCase.WithAdd:
-          sqlData.RowAdd(tableGridData);
-          break;
-
-        case DataCase.WithValues:
-          sqlData.RowSetValues(tableGridData);
-          break;
+        // Create and load the grid rows individually.
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          var ljcGridRow = mLJCGrid.LJCRowAdd();
+          TableData.RowSetValues(ljcGridRow, dataRow);
+        }
       }
     }
 
@@ -131,13 +125,6 @@ namespace LJCGridDataTests
     {
       FromColumns,
       FromTable
-    }
-
-    private enum DataCase
-    {
-      WithLoad,
-      WithAdd,
-      WithValues
     }
 
     private enum SetupCase
