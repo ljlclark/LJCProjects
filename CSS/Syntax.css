@@ -9,6 +9,11 @@
 	color: red;
 }
 
+.code {
+	font-size: 9pt;
+	margin-left: 5px;
+}
+
 .comment {
 	color: green;
 }

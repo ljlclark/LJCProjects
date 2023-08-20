@@ -32,7 +32,7 @@
       </p>
 
       <h4>Load Grid Rows from Table</h4>
-      <pre style="font-size: 9pt">
+      <pre class="code">
 <span class='keyWord'>using</span> LJCGridDataLib;
 <span class='keyWord'>using</span> LJCWinFormControls;
 
@@ -65,7 +65,7 @@
     gridColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>();
     gridColumns.Add("Name", maxLength: 60);
     gridColumns.Add("Description", maxLength: 100);
-    gridColumns.Add("Abbreviation", maxLength: 3);
+    gridColumns.Add("Abbreviation", maxLength: 15);
     <span class='keyWord'>break</span>;
 
     <span class='keyWord'>case</span> "FromTableColumns":
