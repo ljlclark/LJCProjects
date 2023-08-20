@@ -174,7 +174,9 @@ namespace LJCDocGenLib
 
       foreach (DataType dataType in mOtherTypes)
       {
-        if (dataType.Summary.ToLower() != "nogen")
+        if (false == NetString.HasValue(dataType.Summary)
+          || (dataType.Summary != null
+          && dataType.Summary.ToLower() != "nogen"))
         {
           repeatItem = section.RepeatItems.Add(dataType.Name);
           replacements = repeatItem.Replacements;
