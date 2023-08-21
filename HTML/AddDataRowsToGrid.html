@@ -36,7 +36,7 @@
 <span class='keyWord'>using</span> LJCGridDataLib;
 <span class='keyWord'>using</span> LJCWinFormControls;
 
-<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> DataRetrieve()
+<span class='modifier'>private</span> <span class='commonType'>void</span> DataRetrieve(<span class='userType'>LJCDataGrid</span> ljcGrid)
 {
   <span class='comment'>// Configure DataAccess using internal configuration.</span>
   DbConnectionStringBuilder connectionBuilder;
@@ -72,7 +72,8 @@
     <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
     sql = "select * from Province";
     dataTable = dataAccess.GetSchemaOnly(sql);
-    <span class='commonType'>var</span> dataDefinition = TableData.GetDbColumns(dataTable.Columns);
+    <span class='commonType'>var</span> dataColumns = TableData.DataColumnsClone(dataTable);
+    <span class='commonType'>var</span> dataDefinition = TableData.GetDbColumns(dataColumns);
     <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
     {
       { "Name" },
@@ -82,9 +83,6 @@
     gridColumns = dataDefinition.LJCGetColumns(propertyNames);
     <span class='keyWord'>break</span>;
   }
-
-  <span class='comment'>// This would normally be an LJCDataGrid in a form.</span>
-  LJCDataGrid ljcGrid = <span class='keyWord'>new</span> <span class='userType'>LJCDataGrid</span>();
   ljcGrid.LJCAddColumns(gridColumns);
 
   <span class='comment'>// Load the data.</span>
