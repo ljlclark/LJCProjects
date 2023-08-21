@@ -250,7 +250,7 @@ namespace LJCGridDataLib
     // Checks the DataTable argument.
     private static bool ArgumentDataTable(DataTable dataTable)
     {
-      if (false == NetCommon.HasData(dataTable))
+      if (null == dataTable)
       {
         var message = "Missing argument dataTable.";
         throw new ArgumentNullException(message);

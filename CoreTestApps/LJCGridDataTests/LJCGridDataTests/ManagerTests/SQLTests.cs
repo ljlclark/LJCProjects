@@ -3,13 +3,16 @@
 // SQLTests.cs
 using LJCDataAccess;
 using LJCDataAccessConfig;
+using LJCDBClientLib;
 using LJCDBDataAccess;
+using LJCDBMessage;
 using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace LJCGridDataTests
@@ -23,7 +26,7 @@ namespace LJCGridDataTests
       mLJCGrid = ljcGrid;
     }
 
-    internal static void DataRetrieve()
+    internal static void DataRetrieve(LJCDataGrid ljcGrid)
     {
       // Configure DataAccess using internal configuration.
       DbConnectionStringBuilder connectionBuilder;
@@ -59,19 +62,16 @@ namespace LJCGridDataTests
           // Create Grid Columns from DataTable.Columns.
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
-          var dataDefinition = TableData.GetDbColumns(dataTable.Columns);
+          var baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
             { "Name" },
             { "Description" },
             { "Abbreviation" }
           };
-          gridColumns = dataDefinition.LJCGetColumns(propertyNames);
+          gridColumns = baseDefinition.LJCGetColumns(propertyNames);
           break;
       }
-
-      // This would normally be an LJCDataGrid in a form.
-      LJCDataGrid ljcGrid = new LJCDataGrid();
       ljcGrid.LJCAddColumns(gridColumns);
 
       // Load the data.
@@ -87,7 +87,59 @@ namespace LJCGridDataTests
           TableData.RowSetValues(ljcGridRow, dataRow);
         }
       }
+
+      // Create the typed objects.
+      var converter = new ResultConverter<Province, Provinces>();
+      var provinces = converter.CreateCollectionFromTable(dataTable);
+      var province = converter.CreateDataFromTable(dataTable);
+
+      // Change Values
+      //province.Description = "";
+      province.Description = "-null";
+
+      // Create the SQLManager.
+      var dataConfigName = "LJCData";
+      var sqlManager = new SQLManager(dataConfigName, "Province");
+
+      // Select the records and properties to be updated.
+      //var keyColumns = new DbColumns()
+      //{
+      //  { "ID" , province.ID }
+      //};
+      var condition = new DbCondition()
+      {
+        FirstValue = "ID",
+        ComparisonOperator = ">",
+        SecondValue = "0"
+      };
+      var conditionSet = new DbConditionSet();
+      conditionSet.Conditions.Add(condition);
+      var filters = new DbFilters()
+      {
+        { "ID", conditionSet }
+      };
+      var xpropertyNames = new List<string>()
+      {
+        { "Description" },
+      };
+
+      // Perform the Update
+      //sqlManager.Update(province, keyColumns, xpropertyNames);
+      sqlManager.Update(province, null, xpropertyNames, filters);
     }
+
+    private class Province
+    {
+      public long ID { get; set; }
+
+      public string Name { get; set; }
+
+      public string Description { get; set; }
+
+      public string Abbreviation { get; set; }
+    }
+
+    private class Provinces : List<Province> { }
 
     // Runs the tests.
     internal void Run()

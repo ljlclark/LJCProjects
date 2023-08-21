@@ -29,7 +29,7 @@ namespace LJCGridDataTests
         case TestCase.SQL:
           var sqlTest = new SQLTests(mLJCGrid);
           //sqlTest.Run();
-          SQLTests.DataRetrieve();
+          SQLTests.DataRetrieve(mLJCGrid);
           break;
       }
     }

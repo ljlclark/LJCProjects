@@ -72,7 +72,10 @@ namespace LJCDBClientLib
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
-      AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
+      if (NetString.HasValue(SQLStatement))
+      {
+        AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
+      }
     }
 
     // Gets a DataTable object.
@@ -96,7 +99,10 @@ namespace LJCDBClientLib
     {
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);
-      AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
+      if (NetString.HasValue(SQLStatement))
+      {
+        AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
+      }
     }
     #endregion
 
@@ -130,7 +136,8 @@ namespace LJCDBClientLib
       string retValue = null;
 
       // Must have a KeyColumns definition.
-      if (keyColumns != null && keyColumns.Count > 0)
+      if (NetCommon.HasItems(keyColumns)
+        || filters != null)
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 
@@ -165,10 +172,12 @@ namespace LJCDBClientLib
     {
       string retValue = null;
 
-      if (dataObject != null)
+      if (dataObject != null
+        && (NetCommon.HasItems(keyColumns)
+        || filters != null))
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
-          , propertyNames);
+      , propertyNames);
         var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
           , BaseDefinition);
 
@@ -209,6 +218,7 @@ namespace LJCDBClientLib
       DataTable dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
+        dataTable.TableName = TableName;  //?
         var dataColumns = TableData.DataColumnsClone(dataTable);
         BaseDefinition = TableData.GetDbColumns(dataColumns);
         retValue = BaseDefinition.Clone();
