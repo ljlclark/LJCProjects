@@ -74,7 +74,6 @@ namespace LJCGridDataTests
 
       // Create Data Configuration values.
       var databaseName = "LJCData";
-      var tableName = "Province";
 
       bool useInternal = false;
       if (useInternal)
@@ -107,6 +106,7 @@ namespace LJCGridDataTests
         DbDataAccess = new DbDataAccess(databaseName
           , connectionString, providerName)
       };
+      var tableName = "Province";
       retValue = new DataManager(dbServiceRef, null, tableName);
       return retValue;
     }

@@ -4,17 +4,13 @@
 using LJCDataAccess;
 using LJCDataAccessConfig;
 using LJCDBClientLib;
-using LJCDBDataAccess;
 using LJCDBMessage;
 using LJCGridDataLib;
 using LJCNetCommon;
-using LJCRegionDAL;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace LJCGridDataTests
 {
@@ -64,6 +60,7 @@ namespace LJCGridDataTests
           // Create Grid Columns from DataTable.Columns.
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
+          dataTable.TableName = "Province";
           var baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
@@ -110,12 +107,11 @@ namespace LJCGridDataTests
         { "Integrated Security", "True" }
       };
       var connectionString = connectionBuilder.ConnectionString;
-      //var providerName = "System.Data.SqlClient";
+      var providerName = "System.Data.SqlClient";
 
       // Create the SQLManager.
-      var sqlManager = new SQLManager("LJCData", "Province");
-      //var sqlManager = new SQLManager(null, "Province", connectionString
-      //  , providerName);
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
 
       // Select the records and properties to be updated.
       var keyColumns = new DbColumns()
@@ -153,7 +149,6 @@ namespace LJCGridDataTests
       var providerName = "System.Data.SqlClient";
 
       // Create the SQLManager.
-      //var sqlManager = new SQLManager("ConfigName", "Province");
       var sqlManager = new SQLManager(null, "Province", connectionString
         , providerName);
 
@@ -256,6 +251,7 @@ namespace LJCGridDataTests
         case ColumnsCase.FromTable:
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
+          dataTable.TableName = "Province";
           var dbColumns = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
@@ -271,6 +267,7 @@ namespace LJCGridDataTests
       // Load Data including MaxLength.
       sql = "select * from Province";
       dataTable = dataAccess.GetSchemaOnly(sql);
+      dataTable.TableName = "Province";
       dataAccess.FillDataTable(sql, dataTable);
       if (NetCommon.HasData(dataTable))
       {
