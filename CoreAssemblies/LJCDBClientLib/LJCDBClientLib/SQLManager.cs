@@ -6,6 +6,8 @@ using LJCDataAccessConfig;
 using LJCDBMessage;
 using LJCGridDataLib;
 using LJCNetCommon;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -18,24 +20,36 @@ namespace LJCDBClientLib
 
     // Initializes an object instance.
     /// <include path='items/SQLManagerC/*' file='Doc/SQLManager.xml'/>
-    public SQLManager(string dataConfigName, string tableName)
+    public SQLManager(string dataConfigName, string tableName
+      , string connectionString = null, string providerName = null)
     {
-      Reset(dataConfigName, tableName);
+      Reset(dataConfigName, tableName, connectionString , providerName);
     }
 
     /// Resets the data access configuration.
-    /// <include path='items/Reset/*' file='Doc/DbManager.xml'/>
-    public void Reset(string dataConfigName, string tableName)
+    /// <include path='items/Reset/*' file='Doc/SQLManager.xml'/>
+    public void Reset(string dataConfigName, string tableName
+      , string connectionString = null, string providerName = null)
     {
       DataConfigName = dataConfigName;
       TableName = tableName;
 
-      DataConfigs dataConfigs = new DataConfigs();
-      dataConfigs.LJCLoadData();
-      DataConfig dataConfig = dataConfigs.LJCGetByName(dataConfigName);
+      if (NetString.HasValue(connectionString))
+      {
+        NetCommon.CheckArgument<string>(providerName);
+      }
+      else
+      {
+        NetCommon.CheckArgument<string>(dataConfigName);
+        NetCommon.CheckArgument<string>(tableName);
 
-      string connectionString = dataConfig.GetConnectionString();
-      string providerName = dataConfig.GetProviderName();
+        DataConfigs dataConfigs = new DataConfigs();
+        dataConfigs.LJCLoadData();
+        DataConfig dataConfig = dataConfigs.LJCGetByName(dataConfigName);
+
+        connectionString = dataConfig.GetConnectionString();
+        providerName = dataConfig.GetProviderName();
+      }
 
       mDataAccess = new DataAccess(connectionString, providerName);
       if (mDataAccess != null
@@ -53,6 +67,8 @@ namespace LJCDBClientLib
     /// <include path='items/Add/*' file='Doc/SQLManager.xml'/>
     public DataTable Add(object dataObject, List<string> propertyNames = null)
     {
+      NetCommon.CheckArgument<object>(dataObject);
+
       // The record must not contain a value for DB Assigned columns.
       var addSQLStatement = CreateAddSQL(dataObject);
       AffectedCount = mDataAccess.ExecuteNonQuery(addSQLStatement);
@@ -98,6 +114,8 @@ namespace LJCDBClientLib
     public void Update(object dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
+      NetCommon.CheckArgument<object>(dataObject);
+
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);
       if (NetString.HasValue(SQLStatement))

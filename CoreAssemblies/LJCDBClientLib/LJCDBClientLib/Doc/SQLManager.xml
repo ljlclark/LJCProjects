@@ -10,7 +10,18 @@
     </summary>
     <param name="dataConfigName">The DataConfig name.</param>
     <param name="tableName">The table name.</param>
+    <param name="connectionString">The Connection string.</param>
+    <param name="providerName">The Provider name.</param>
   </SQLManagerC>
+  <Reset>
+    <summary>
+      Resets the data access configuration.
+    </summary>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The database table name.</param>
+    <param name="connectionString">The Connection string.</param>
+    <param name="providerName">The Provider name.</param>
+  </Reset>
   <Add>
     <summary>
       Adds a record to the database.

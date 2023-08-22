@@ -18,6 +18,72 @@ namespace LJCNetCommon
   {
     #region Check Values Functions
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="argument"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentException"></exception>
+    public static void CheckArgument<T>(T argument)
+    {
+      if (typeof(string) == argument.GetType())
+      {
+        if (false == NetString.HasValue(NetCommon.GetString(argument)))
+        {
+          var message = $"Missing argument {nameof(argument)}.";
+          throw new ArgumentNullException(message);
+        }
+      }
+
+      if (null == argument)
+      {
+        var message = $"Missing argument {nameof(argument)}.";
+        throw new ArgumentNullException(message);
+      }
+
+      if (typeof(long) == argument.GetType()
+        || typeof(int) == argument.GetType()
+        || typeof(short) == argument.GetType())
+      {
+        if (0 == NetCommon.GetInt64(argument))
+        {
+          var message = $"Argument {nameof(argument)} is not allowed to be zero.";
+          throw new ArgumentException(message);
+        }
+      }
+
+      if (typeof(IList) == argument.GetType())
+      {
+        if (NetCommon.HasItems((IList)argument))
+        {
+          var message = $"Missing argument {nameof(argument)}.";
+          throw new ArgumentNullException(message);
+        }
+      }
+
+      if (typeof(double) == argument.GetType()
+        || typeof(decimal) == argument.GetType()
+        || typeof(float) == argument.GetType())
+      {
+        if (0 == NetCommon.GetDouble(argument))
+        {
+          var message = $"Argument {nameof(argument)} is not allowed to be zero.";
+          throw new ArgumentException(message);
+        }
+      }
+
+      if (typeof(DataTable) == argument.GetType())
+      {
+        DataTable dataTable = argument as DataTable;
+        if (NetCommon.HasData(dataTable))
+        {
+          var message = $"Missing argument {nameof(argument)}.";
+          throw new ArgumentNullException(message);
+        }
+      }
+    }
+
     // Compare null values. (DE)
     /// <include path='items/CompareNull/*' file='Doc/NetCommon.xml'/>
     public static int CompareNull(object x, object y)
