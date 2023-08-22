@@ -88,7 +88,8 @@ namespace LJCDBClientLib
 
       // The DataColumn names are the same as the Data Source
       // Table Column Names or the SQL rename 'AS' name.
-      var retValue = mDataAccess.GetDataTable(SQLStatement);
+      var retValue = mSchemaTable.Clone();
+      mDataAccess.FillDataTable(SQLStatement, retValue);
       return retValue;
     }
 
@@ -215,11 +216,11 @@ namespace LJCDBClientLib
       DbColumns retValue = null;
 
       string sql = $"select * from {TableName}";
-      DataTable dataTable = mDataAccess.GetSchemaOnly(sql);
-      if (dataTable != null)
+      mSchemaTable = mDataAccess.GetSchemaOnly(sql);
+      if (mSchemaTable != null)
       {
-        dataTable.TableName = TableName;  //?
-        var dataColumns = TableData.DataColumnsClone(dataTable);
+        mSchemaTable.TableName = TableName;  //?
+        var dataColumns = TableData.DataColumnsClone(mSchemaTable);
         BaseDefinition = TableData.GetDbColumns(dataColumns);
         retValue = BaseDefinition.Clone();
       }
@@ -272,6 +273,7 @@ namespace LJCDBClientLib
     #region Class Data
 
     private DataAccess mDataAccess;
+    private DataTable mSchemaTable;
     #endregion
   }
 }

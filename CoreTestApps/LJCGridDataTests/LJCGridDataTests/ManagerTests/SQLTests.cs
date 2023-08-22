@@ -8,6 +8,7 @@ using LJCDBDataAccess;
 using LJCDBMessage;
 using LJCGridDataLib;
 using LJCNetCommon;
+using LJCRegionDAL;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
@@ -26,7 +27,8 @@ namespace LJCGridDataTests
       mLJCGrid = ljcGrid;
     }
 
-    internal static void DataRetrieve(LJCDataGrid ljcGrid)
+    // Loading Grid rows from a DataTable.
+    internal void DataRetrieve(LJCDataGrid ljcGrid)
     {
       // Configure DataAccess using internal configuration.
       DbConnectionStringBuilder connectionBuilder;
@@ -88,58 +90,117 @@ namespace LJCGridDataTests
         }
       }
 
-      // Create the typed objects.
+      // Create the collection object.
       var converter = new ResultConverter<Province, Provinces>();
       var provinces = converter.CreateCollectionFromTable(dataTable);
-      var province = converter.CreateDataFromTable(dataTable);
+    }
 
-      // Change Values
-      //province.Description = "";
-      province.Description = "-null";
+    // Selecting data with the SQLManager object.
+    internal Province SelectWithSql()
+    {
+      Province retValue;
 
       // Create the SQLManager.
       var dataConfigName = "LJCData";
       var sqlManager = new SQLManager(dataConfigName, "Province");
 
       // Select the records and properties to be updated.
-      //var keyColumns = new DbColumns()
-      //{
-      //  { "ID" , province.ID }
-      //};
-      var condition = new DbCondition()
+      var keyColumns = new DbColumns()
       {
-        FirstValue = "ID",
-        ComparisonOperator = ">",
-        SecondValue = "0"
+        { "ID" , 1 }
       };
+      var propertyNames = new List<string>()
+      {
+        { "Name" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+
+      // Perform the Select
+      var dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
+
+      // Create the Data Object.
+      var converter = new ResultConverter<Province, Provinces>();
+      retValue = converter.CreateDataFromTable(dataTable);
+      return retValue;
+    }
+
+    // Updating data with Filters using the SQLManager object.
+    internal void UpdateWithFilters(Province province)
+    {
+      // Create the SQLManager.
+      var dataConfigName = "LJCData";
+      var sqlManager = new SQLManager(dataConfigName, "Province");
+
+      // Change Values
+      province.Description = "-null";
+
+      // Select the records and properties to be updated.
       var conditionSet = new DbConditionSet();
-      conditionSet.Conditions.Add(condition);
+      conditionSet.Conditions.Add("ID", "0", ">");
       var filters = new DbFilters()
       {
         { "ID", conditionSet }
       };
-      var xpropertyNames = new List<string>()
+      var propertyNames = new List<string>()
       {
         { "Description" },
       };
 
       // Perform the Update
-      //sqlManager.Update(province, keyColumns, xpropertyNames);
-      sqlManager.Update(province, null, xpropertyNames, filters);
+      sqlManager.Update(province, null, propertyNames, filters);
     }
 
-    private class Province
+    // Updating data with Keys using the SQLManager object.
+    internal void UpdateWithKeys(Province province)
     {
+      // Create the SQLManager.
+      var dataConfigName = "LJCData";
+      var sqlManager = new SQLManager(dataConfigName, "Province");
+
+      // Change Values
+      //province.Description = "";
+      province.Description = "-null";
+
+      // Select the records and properties to be updated.
+      var keyColumns = new DbColumns()
+      {
+        { "ID" , province.ID }
+      };
+      //var conditionSet = new DbConditionSet();
+      //conditionSet.Conditions.Add("ID", "0", ">");
+      //var filters = new DbFilters()
+      //{
+      //  { "ID", conditionSet }
+      //};
+      var propertyNames = new List<string>()
+      {
+        { "Description" },
+      };
+
+      // Perform the Update
+      sqlManager.Update(province, keyColumns, propertyNames);
+      //sqlManager.Update(province, null, propertyNames, filters);
+    }
+
+    // Represents a Province
+    internal class Province
+    {
+      /// <summary>Gets or sets the Primary key value.</summary>
       public long ID { get; set; }
 
+      /// <summary>Gets or sets the Name.</summary>
       public string Name { get; set; }
 
+      /// <summary>Gets or sets the Description.</summary>
       public string Description { get; set; }
 
+      /// <summary>Gets or sets the Abbreviation.</summary>
       public string Abbreviation { get; set; }
     }
 
-    private class Provinces : List<Province> { }
+    // Represents a Collection of Province objects.
+    internal class Provinces : List<Province> { }
 
     // Runs the tests.
     internal void Run()
