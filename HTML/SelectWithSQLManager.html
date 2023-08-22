@@ -40,9 +40,19 @@
 {
   Province retValue;
 
+  <span class='comment'>// Create Data Configuration values.</span>
+  <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
+  {
+    { "Data Source", "DataServerName" },
+    { "Initial Catalog", "DatabaseName" },
+    { "Integrated Security", "True" }
+  };
+  <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
+  <span class='commonType'>var</span> providerName = "System.Data.SqlClient";
+
   <span class='comment'>// Create the SQLManager.</span>
-  <span class='commonType'>var</span> dataConfigName = "LJCData";
-  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, "Province");
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
+    , providerName);
 
   <span class='comment'>// Select the records and properties to be updated.</span>
   <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()

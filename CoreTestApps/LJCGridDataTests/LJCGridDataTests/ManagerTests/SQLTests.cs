@@ -95,7 +95,7 @@ namespace LJCGridDataTests
     {
       Province retValue;
 
-      // Configure DataAccess using internal configuration.
+      // Create Data Configuration values.
       DbConnectionStringBuilder connectionBuilder;
       connectionBuilder = new DbConnectionStringBuilder()
       {
@@ -134,7 +134,7 @@ namespace LJCGridDataTests
     // Updating data with Filters using the SQLManager object.
     internal void UpdateWithFilters(Province province)
     {
-      // Configure DataAccess using internal configuration.
+      // Create Data Configuration values.
       DbConnectionStringBuilder connectionBuilder;
       connectionBuilder = new DbConnectionStringBuilder()
       {
@@ -154,6 +154,7 @@ namespace LJCGridDataTests
 
       // Select the records and properties to be updated.
       var conditionSet = new DbConditionSet();
+      // Where ID > 0
       conditionSet.Conditions.Add("ID", "0", ">");
       var filters = new DbFilters()
       {
