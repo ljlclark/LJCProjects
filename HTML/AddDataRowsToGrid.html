@@ -61,27 +61,27 @@
   <span class='keyWord'>switch</span> (configType)
   {
     <span class='keyWord'>case</span> "Manually":
-    <span class='comment'>// Create Grid Columns manually.</span>
-    gridColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>();
-    gridColumns.Add("Name", maxLength: 60);
-    gridColumns.Add("Description", maxLength: 100);
-    gridColumns.Add("Abbreviation", maxLength: 15);
-    <span class='keyWord'>break</span>;
+      <span class='comment'>// Create Grid Columns manually.</span>
+      gridColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>();
+      gridColumns.Add("Name", maxLength: 60);
+      gridColumns.Add("Description", maxLength: 100);
+      gridColumns.Add("Abbreviation", maxLength: 15);
+      <span class='keyWord'>break</span>;
 
     <span class='keyWord'>case</span> "FromTableColumns":
-    <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
-    sql = "select * from Province";
-    dataTable = dataAccess.GetSchemaOnly(sql);
-    <span class='commonType'>var</span> dataColumns = TableData.DataColumnsClone(dataTable);
-    <span class='commonType'>var</span> dataDefinition = TableData.GetDbColumns(dataColumns);
-    <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
-    {
-      { "Name" },
-      { "Description" },
-      { "Abbreviation" }
-    };
-    gridColumns = dataDefinition.LJCGetColumns(propertyNames);
-    <span class='keyWord'>break</span>;
+      <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
+      sql = "select * from Province";
+      dataTable = dataAccess.GetSchemaOnly(sql);
+      <span class='commonType'>var</span> dataColumns = TableData.DataColumnsClone(dataTable);
+      <span class='commonType'>var</span> dataDefinition = TableData.GetDbColumns(dataColumns);
+      <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+      {
+        { "Name" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+      gridColumns = dataDefinition.LJCGetColumns(propertyNames);
+      <span class='keyWord'>break</span>;
   }
   ljcGrid.LJCAddColumns(gridColumns);
 
