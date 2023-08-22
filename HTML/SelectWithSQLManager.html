@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- SelectWithSQLManager.html -->
+<html lang="en">
+<head>
+  <title>Select with SQLManager</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../index.html">Home</a>
+      / <a href="Tutorials.html">HowTo</a>
+      / SQLManagerSelect
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to Select Data using SQLManager</div>
+    </div>
+    <div class='Text'>
+      <p>
+      </p>
+
+      <pre class="code">
+<span class='comment'>// Selecting data with the SQLManager object.</span>
+<span class='modifier'>internal</span> Province SelectWithSql()
+{
+  Province retValue;
+
+  <span class='comment'>// Create the SQLManager.</span>
+  <span class='commonType'>var</span> dataConfigName = "LJCData";
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, "Province");
+
+  <span class='comment'>// Select the records and properties to be updated.</span>
+  <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+  {
+    { "ID" , 1 }
+  };
+  <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+  {
+    { "Name" },
+    { "Description" },
+    { "Abbreviation" }
+  };
+
+  <span class='comment'>// Perform the Select</span>
+  <span class='commonType'>var</span> dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
+
+  <span class='comment'>// Create the Data Object.</span>
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+  retValue = converter.CreateDataFromTable(dataTable);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+    </div>
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
