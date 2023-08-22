@@ -104,10 +104,7 @@ namespace LJCDBClientLib
 
       // The DataColumn names are the same as the Data Source
       // Table Column Names or the SQL rename 'AS' name.
-      //var retValue = mDataAccess.GetDataTable(SQLStatement);
-      var retValue = mDataAccess.GetSchemaOnly(SQLStatement);
-      retValue.TableName = TableName;
-      mDataAccess.FillDataTable(SQLStatement, retValue);
+      var retValue = mDataAccess.GetDataTable(SQLStatement);
       return retValue;
     }
 
@@ -239,7 +236,6 @@ namespace LJCDBClientLib
       var dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
-        dataTable.TableName = TableName;
         var dataColumns = TableData.DataColumnsClone(dataTable);
         BaseDefinition = TableData.GetDbColumns(dataColumns);
         retValue = BaseDefinition.Clone();

@@ -192,11 +192,13 @@ namespace LJCDataAccess
       }
       else
       {
-        DataSet dataSet = GetDataSet(sql, tableMapping);
-        if (dataSet != null && dataSet.Tables.Count > 0)
-        {
-          retValue = dataSet.Tables[0];
-        }
+        //DataSet dataSet = GetDataSet(sql, tableMapping);
+        //if (dataSet != null && dataSet.Tables.Count > 0)
+        //{
+        //  retValue = dataSet.Tables[0];
+        //}
+        retValue = GetSchemaOnly(sql);
+        FillDataTable(sql, retValue, tableMapping);
       }
       return retValue;
     }
@@ -254,9 +256,6 @@ namespace LJCDataAccess
     public DataTable GetSchemaOnly(string sql
       , DataTableMappingCollection tableMapping = null)
     {
-      DbCommand dbCommand;
-      DbDataAdapter dbDataAdapter;
-      DataSet dataSet;
       DataTable retValue = null;
 
       if (IsMySql(mProviderName))
@@ -267,20 +266,38 @@ namespace LJCDataAccess
       {
         if (IsValidateProviderFactory())
         {
-          using (dbCommand = ProviderFactory.CreateCommand(sql))
+          using (var dbCommand = ProviderFactory.CreateCommand(sql))
           {
-            dbDataAdapter = ProviderFactory.CreateDataAdapter();
+            var dbDataAdapter = ProviderFactory.CreateDataAdapter();
             dbDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             DataCommon.SetTableMapping(dbDataAdapter, tableMapping);
             dbDataAdapter.SelectCommand = dbCommand;
-            dataSet = new DataSet();
-            dbDataAdapter.FillSchema(dataSet, SchemaType.Source);
-            if (dataSet != null && dataSet.Tables.Count > 0)
-            {
-              retValue = dataSet.Tables[0];
-            }
+            retValue = new DataTable();
+            dbDataAdapter.FillSchema(retValue, SchemaType.Source);
+            retValue.TableName = GetTableName(sql, retValue.TableName);
           }
         }
+      }
+      return retValue;
+    }
+
+    // Retrieves the Table name from an SQL statement.
+    private string GetTableName(string sql, string tableName)
+    {
+      string retValue = tableName;
+
+      var ignoreCase = StringComparison.InvariantCultureIgnoreCase;
+      var index = sql.IndexOf(" from ", ignoreCase);
+      if (index > -1)
+      {
+        var beginIndex = index + " from ".Length;
+        var endIndex = sql.IndexOf(" ", beginIndex);
+        if (-1 == endIndex)
+        {
+          endIndex = sql.Length;
+        }
+        retValue = sql.Substring(beginIndex, endIndex - beginIndex);
+        retValue = retValue.Trim();
       }
       return retValue;
     }

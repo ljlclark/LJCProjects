@@ -60,7 +60,6 @@ namespace LJCGridDataTests
           // Create Grid Columns from DataTable.Columns.
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
-          dataTable.TableName = "Province";
           var baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
@@ -75,9 +74,7 @@ namespace LJCGridDataTests
 
       // Load the data.
       sql = "select * from Province";
-      dataTable = dataAccess.GetSchemaOnly(sql);
-      dataTable.TableName = "Province";
-      dataAccess.FillDataTable(sql, dataTable);
+      dataTable = dataAccess.GetDataTable(sql);
       if (NetCommon.HasData(dataTable))
       {
         // Create and load the grid rows individually.
@@ -251,7 +248,6 @@ namespace LJCGridDataTests
         case ColumnsCase.FromTable:
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
-          dataTable.TableName = "Province";
           var dbColumns = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
@@ -266,9 +262,7 @@ namespace LJCGridDataTests
 
       // Load Data including MaxLength.
       sql = "select * from Province";
-      dataTable = dataAccess.GetSchemaOnly(sql);
-      dataTable.TableName = "Province";
-      dataAccess.FillDataTable(sql, dataTable);
+      dataTable = dataAccess.GetDataTable(sql);
       if (NetCommon.HasData(dataTable))
       {
         // Create and load the grid rows individually.
