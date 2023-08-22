@@ -79,6 +79,7 @@ namespace LJCGridDataTests
       // Load the data.
       sql = "select * from Province";
       dataTable = dataAccess.GetSchemaOnly(sql);
+      dataTable.TableName = "Province";
       dataAccess.FillDataTable(sql, dataTable);
       if (NetCommon.HasData(dataTable))
       {
@@ -100,9 +101,21 @@ namespace LJCGridDataTests
     {
       Province retValue;
 
+      // Configure DataAccess using internal configuration.
+      DbConnectionStringBuilder connectionBuilder;
+      connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { "Data Source", "DESKTOP-PDPBE34" },
+        { "Initial Catalog", "LJCData" },
+        { "Integrated Security", "True" }
+      };
+      var connectionString = connectionBuilder.ConnectionString;
+      //var providerName = "System.Data.SqlClient";
+
       // Create the SQLManager.
-      var dataConfigName = "LJCData";
-      var sqlManager = new SQLManager(dataConfigName, "Province");
+      var sqlManager = new SQLManager("LJCData", "Province");
+      //var sqlManager = new SQLManager(null, "Province", connectionString
+      //  , providerName);
 
       // Select the records and properties to be updated.
       var keyColumns = new DbColumns()
@@ -128,9 +141,21 @@ namespace LJCGridDataTests
     // Updating data with Filters using the SQLManager object.
     internal void UpdateWithFilters(Province province)
     {
+      // Configure DataAccess using internal configuration.
+      DbConnectionStringBuilder connectionBuilder;
+      connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { "Data Source", "DESKTOP-PDPBE34" },
+        { "Initial Catalog", "LJCData" },
+        { "Integrated Security", "True" }
+      };
+      var connectionString = connectionBuilder.ConnectionString;
+      var providerName = "System.Data.SqlClient";
+
       // Create the SQLManager.
-      var dataConfigName = "LJCData";
-      var sqlManager = new SQLManager(dataConfigName, "Province");
+      //var sqlManager = new SQLManager("ConfigName", "Province");
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
 
       // Change Values
       province.Description = "-null";
@@ -154,9 +179,21 @@ namespace LJCGridDataTests
     // Updating data with Keys using the SQLManager object.
     internal void UpdateWithKeys(Province province)
     {
+      // Configure DataAccess using internal configuration.
+      DbConnectionStringBuilder connectionBuilder;
+      connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { "Data Source", "DESKTOP-PDPBE34" },
+        { "Initial Catalog", "LJCData" },
+        { "Integrated Security", "True" }
+      };
+      var connectionString = connectionBuilder.ConnectionString;
+      var providerName = "System.Data.SqlClient";
+
       // Create the SQLManager.
-      var dataConfigName = "LJCData";
-      var sqlManager = new SQLManager(dataConfigName, "Province");
+      //var sqlManager = new SQLManager("ConfigName", "Province");
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
 
       // Change Values
       //province.Description = "";
@@ -167,12 +204,6 @@ namespace LJCGridDataTests
       {
         { "ID" , province.ID }
       };
-      //var conditionSet = new DbConditionSet();
-      //conditionSet.Conditions.Add("ID", "0", ">");
-      //var filters = new DbFilters()
-      //{
-      //  { "ID", conditionSet }
-      //};
       var propertyNames = new List<string>()
       {
         { "Description" },
@@ -180,7 +211,6 @@ namespace LJCGridDataTests
 
       // Perform the Update
       sqlManager.Update(province, keyColumns, propertyNames);
-      //sqlManager.Update(province, null, propertyNames, filters);
     }
 
     // Represents a Province
