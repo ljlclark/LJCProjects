@@ -87,8 +87,7 @@
 
   <span class='comment'>// Load the data.</span>
   sql = "select * from Province";
-  dataTable = dataAccess.GetSchemaOnly(sql);
-  dataAccess.FillDataTable(sql, dataTable);
+  dataTable = dataAccess.GetDataTable(sql);
   <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
   {
     <span class='comment'>// Create and populate the grid rows individually.</span>
