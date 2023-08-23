@@ -192,11 +192,6 @@ namespace LJCDataAccess
       }
       else
       {
-        //DataSet dataSet = GetDataSet(sql, tableMapping);
-        //if (dataSet != null && dataSet.Tables.Count > 0)
-        //{
-        //  retValue = dataSet.Tables[0];
-        //}
         retValue = GetSchemaOnly(sql);
         FillDataTable(sql, retValue, tableMapping);
       }
@@ -281,27 +276,6 @@ namespace LJCDataAccess
       return retValue;
     }
 
-    // Retrieves the Table name from an SQL statement.
-    private string GetTableName(string sql, string tableName)
-    {
-      string retValue = tableName;
-
-      var ignoreCase = StringComparison.InvariantCultureIgnoreCase;
-      var index = sql.IndexOf(" from ", ignoreCase);
-      if (index > -1)
-      {
-        var beginIndex = index + " from ".Length;
-        var endIndex = sql.IndexOf(" ", beginIndex);
-        if (-1 == endIndex)
-        {
-          endIndex = sql.Length;
-        }
-        retValue = sql.Substring(beginIndex, endIndex - beginIndex);
-        retValue = retValue.Trim();
-      }
-      return retValue;
-    }
-
     /// <summary>
     /// Get the column SQL types.
     /// </summary>
@@ -378,6 +352,27 @@ namespace LJCDataAccess
       if (NetString.HasValue(errorText))
       {
         throw new MissingMemberException(errorText);
+      }
+      return retValue;
+    }
+
+    // Retrieves the Table name from an SQL statement.
+    private string GetTableName(string sql, string tableName)
+    {
+      string retValue = tableName;
+
+      var ignoreCase = StringComparison.InvariantCultureIgnoreCase;
+      var index = sql.IndexOf(" from ", ignoreCase);
+      if (index > -1)
+      {
+        var beginIndex = index + " from ".Length;
+        var endIndex = sql.IndexOf(" ", beginIndex);
+        if (-1 == endIndex)
+        {
+          endIndex = sql.Length;
+        }
+        retValue = sql.Substring(beginIndex, endIndex - beginIndex);
+        retValue = retValue.Trim();
       }
       return retValue;
     }
