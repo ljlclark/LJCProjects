@@ -84,7 +84,7 @@ See the Technical Documentation for more information.</pre>
   <span class='commonType'>var</span> dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
 
   <span class='comment'>// Create the Data Object.</span>
-  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter&lt;Province, Provinces&gt;();
   retValue = converter.CreateDataFromTable(dataTable);
   <span class='keyWord'>return</span> retValue;
 }
