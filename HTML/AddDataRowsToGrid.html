@@ -86,6 +86,8 @@
   ljcGrid.LJCAddColumns(gridColumns);
 
   <span class='comment'>// Load the data.</span>
+  <span class='comment'>// The DataAccess class requires the developer</span>
+  <span class='comment'>// to create the SQL statements to pass to its methods.</span>
   sql = "select * from Province";
   dataTable = dataAccess.GetDataTable(sql);
   <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
