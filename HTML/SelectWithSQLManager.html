@@ -27,7 +27,21 @@
     </div>
     <div class='Text'>
       <p>
+        The SQLManager class methods accept DataObjects and parts of a
+        DbRequest message. It then creates the SQL statements for the
+        developer.
       </p>
+      <pre class="code">
+These DbRequest message parts are:
+KeyColumns    (LJCNetCommon.DbColumns)    - Used to create simple "Where" clause.
+PropertyNames (List&lt;string&gt;())            - Modifies which columns appear in the SQL statement.
+Filters       (LJCDBMessageLib.DbFilters) - Used to create more complex "Where" clauses.
+Joins         (LJCDBMessageLib.DbJoins)   - Used to create "Join" clauses.
+
+The SQLManager class is similar to DataManager except SQLManager is a
+Client/Server only object whereas DataManager can do remote message based
+data access.
+See the Technical Documentation for more information.</pre>
 
       <pre class="code">
 <span class='keyWord'>using</span> LJCDBClientLib;
@@ -38,7 +52,7 @@
 <span class='comment'>// Selecting data with the SQLManager object.</span>
 <span class='modifier'>internal</span> Province SelectWithSql()
 {
-  Province retValue;
+  <span class="userType">Province</span> retValue;
 
   <span class='comment'>// Create Data Configuration values.</span>
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
