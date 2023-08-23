@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       this.TestDataGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.TestDataGrid)).BeginInit();
       this.SuspendLayout();
       // 
@@ -41,17 +42,18 @@
       this.TestDataGrid.AllowUserToResizeRows = false;
       this.TestDataGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.TestDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.TestDataGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.TestDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.TestDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.TestDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.TestDataGrid.LJCAllowSelectionChange = false;
+      this.TestDataGrid.LJCDragDataName = null;
       this.TestDataGrid.LJCLastRowIndex = -1;
       this.TestDataGrid.LJCRowHeight = 0;
       this.TestDataGrid.Location = new System.Drawing.Point(0, 0);
@@ -83,6 +85,7 @@
         #endregion
 
         private LJCWinFormControls.LJCDataGrid TestDataGrid;
-    }
+    private System.Windows.Forms.ToolTip toolTip1;
+  }
 }
 

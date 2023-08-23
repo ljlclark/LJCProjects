@@ -136,8 +136,12 @@
       this.OutputRichText = new LJCWinFormControls.LJCRtControl();
       this.OutputMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.OutputTitle = new System.Windows.Forms.ToolStripMenuItem();
-      this.OutputEncode = new System.Windows.Forms.ToolStripMenuItem();
-      this.OutputDecode = new System.Windows.Forms.ToolStripMenuItem();
+      this.XMLDecode = new System.Windows.Forms.ToolStripMenuItem();
+      this.XMLEncode = new System.Windows.Forms.ToolStripMenuItem();
+      this.HTMLXMLDecode = new System.Windows.Forms.ToolStripMenuItem();
+      this.HTMLXMLEncode = new System.Windows.Forms.ToolStripMenuItem();
+      this.HTMLCodeDecode = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
       this.OutputGenerate = new System.Windows.Forms.ToolStripMenuItem();
       this.OutputSave = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -247,8 +251,8 @@
       // TemplateRichText
       // 
       this.TemplateRichText.AcceptsTab = true;
-      this.TemplateRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.TemplateRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.TemplateRichText.ContextMenuStrip = this.TemplateMenu;
       this.TemplateRichText.Location = new System.Drawing.Point(-2, 38);
@@ -427,8 +431,8 @@
       // 
       // SectionSplit
       // 
-      this.SectionSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.SectionSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionSplit.Location = new System.Drawing.Point(0, 38);
       this.SectionSplit.Name = "SectionSplit";
@@ -449,7 +453,7 @@
       // 
       // SectionHeading
       // 
-      this.SectionHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.SectionHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.SectionHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -463,7 +467,7 @@
       // 
       // SectionToolPanel
       // 
-      this.SectionToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.SectionToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.SectionToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -539,8 +543,8 @@
       this.SectionGrid.AllowUserToAddRows = false;
       this.SectionGrid.AllowUserToDeleteRows = false;
       this.SectionGrid.AllowUserToResizeRows = false;
-      this.SectionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.SectionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.SectionGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -556,6 +560,7 @@
       this.SectionGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.SectionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.SectionGrid.LJCAllowSelectionChange = false;
+      this.SectionGrid.LJCDragDataName = null;
       this.SectionGrid.LJCLastRowIndex = -1;
       this.SectionGrid.LJCRowHeight = 0;
       this.SectionGrid.Location = new System.Drawing.Point(0, 70);
@@ -706,8 +711,8 @@
       // 
       // ItemSplit
       // 
-      this.ItemSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.ItemSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemSplit.Location = new System.Drawing.Point(0, 1);
       this.ItemSplit.Name = "ItemSplit";
@@ -730,7 +735,7 @@
       // 
       // ItemHeading
       // 
-      this.ItemHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.ItemHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.ItemHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -744,7 +749,7 @@
       // 
       // ItemToolPanel
       // 
-      this.ItemToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.ItemToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.ItemToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -820,8 +825,8 @@
       this.ItemGrid.AllowUserToAddRows = false;
       this.ItemGrid.AllowUserToDeleteRows = false;
       this.ItemGrid.AllowUserToResizeRows = false;
-      this.ItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.ItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ItemGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -837,6 +842,7 @@
       this.ItemGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.ItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ItemGrid.LJCAllowSelectionChange = false;
+      this.ItemGrid.LJCDragDataName = null;
       this.ItemGrid.LJCLastRowIndex = -1;
       this.ItemGrid.LJCRowHeight = 0;
       this.ItemGrid.Location = new System.Drawing.Point(0, 70);
@@ -971,7 +977,7 @@
       // 
       // ReplacementHeading
       // 
-      this.ReplacementHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.ReplacementHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
       this.ReplacementHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
@@ -985,7 +991,7 @@
       // 
       // ReplacementToolPanel
       // 
-      this.ReplacementToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+      this.ReplacementToolPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementToolPanel.BackColor = System.Drawing.SystemColors.Control;
       this.ReplacementToolPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1061,8 +1067,8 @@
       this.ReplacementGrid.AllowUserToAddRows = false;
       this.ReplacementGrid.AllowUserToDeleteRows = false;
       this.ReplacementGrid.AllowUserToResizeRows = false;
-      this.ReplacementGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.ReplacementGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ReplacementGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -1078,6 +1084,7 @@
       this.ReplacementGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.ReplacementGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ReplacementGrid.LJCAllowSelectionChange = false;
+      this.ReplacementGrid.LJCDragDataName = null;
       this.ReplacementGrid.LJCLastRowIndex = -1;
       this.ReplacementGrid.LJCRowHeight = 0;
       this.ReplacementGrid.Location = new System.Drawing.Point(0, 70);
@@ -1226,8 +1233,8 @@
       // OutputRichText
       // 
       this.OutputRichText.AcceptsTab = true;
-      this.OutputRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+      this.OutputRichText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.OutputRichText.ContextMenuStrip = this.OutputMenu;
       this.OutputRichText.Location = new System.Drawing.Point(-2, 38);
@@ -1243,8 +1250,12 @@
       this.OutputMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.OutputMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OutputTitle,
-            this.OutputEncode,
-            this.OutputDecode,
+            this.XMLDecode,
+            this.XMLEncode,
+            this.HTMLXMLDecode,
+            this.HTMLXMLEncode,
+            this.HTMLCodeDecode,
+            this.toolStripSeparator18,
             this.OutputGenerate,
             this.OutputSave,
             this.toolStripSeparator9,
@@ -1252,33 +1263,59 @@
             this.toolStripSeparator17,
             this.OutputHelp});
       this.OutputMenu.Name = "OutputMenu";
-      this.OutputMenu.Size = new System.Drawing.Size(241, 273);
+      this.OutputMenu.Size = new System.Drawing.Size(270, 375);
       // 
       // OutputTitle
       // 
       this.OutputTitle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.OutputTitle.Name = "OutputTitle";
-      this.OutputTitle.Size = new System.Drawing.Size(240, 32);
+      this.OutputTitle.Size = new System.Drawing.Size(269, 32);
       this.OutputTitle.Text = "Output Menu";
       // 
-      // OutputEncode
+      // XMLDecode
       // 
-      this.OutputEncode.Name = "OutputEncode";
-      this.OutputEncode.Size = new System.Drawing.Size(240, 32);
-      this.OutputEncode.Text = "XML E&ncode";
-      this.OutputEncode.Click += new System.EventHandler(this.OutputEncode_Click);
+      this.XMLDecode.Name = "XMLDecode";
+      this.XMLDecode.Size = new System.Drawing.Size(269, 32);
+      this.XMLDecode.Text = "XML De&code";
+      this.XMLDecode.Click += new System.EventHandler(this.XMLDecode_Click);
       // 
-      // OutputDecode
+      // XMLEncode
       // 
-      this.OutputDecode.Name = "OutputDecode";
-      this.OutputDecode.Size = new System.Drawing.Size(240, 32);
-      this.OutputDecode.Text = "XML De&code";
-      this.OutputDecode.Click += new System.EventHandler(this.OutputDecode_Click);
+      this.XMLEncode.Name = "XMLEncode";
+      this.XMLEncode.Size = new System.Drawing.Size(269, 32);
+      this.XMLEncode.Text = "XML E&ncode";
+      this.XMLEncode.Click += new System.EventHandler(this.XMLEncode_Click);
+      // 
+      // HTMLXMLDecode
+      // 
+      this.HTMLXMLDecode.Name = "HTMLXMLDecode";
+      this.HTMLXMLDecode.Size = new System.Drawing.Size(269, 32);
+      this.HTMLXMLDecode.Text = "HTML XML Decode";
+      this.HTMLXMLDecode.Click += new System.EventHandler(this.HTMLXMLDecode_Click);
+      // 
+      // HTMLXMLEncode
+      // 
+      this.HTMLXMLEncode.Name = "HTMLXMLEncode";
+      this.HTMLXMLEncode.Size = new System.Drawing.Size(269, 32);
+      this.HTMLXMLEncode.Text = "HTML XML Encode";
+      this.HTMLXMLEncode.Click += new System.EventHandler(this.HTMLXMLEncode_Click);
+      // 
+      // HTMLCodeDecode
+      // 
+      this.HTMLCodeDecode.Name = "HTMLCodeDecode";
+      this.HTMLCodeDecode.Size = new System.Drawing.Size(269, 32);
+      this.HTMLCodeDecode.Text = "HTML C# Syntax Colors";
+      this.HTMLCodeDecode.Click += new System.EventHandler(this.HTMLCodeDecode_Click);
+      // 
+      // toolStripSeparator18
+      // 
+      this.toolStripSeparator18.Name = "toolStripSeparator18";
+      this.toolStripSeparator18.Size = new System.Drawing.Size(266, 6);
       // 
       // OutputGenerate
       // 
       this.OutputGenerate.Name = "OutputGenerate";
-      this.OutputGenerate.Size = new System.Drawing.Size(240, 32);
+      this.OutputGenerate.Size = new System.Drawing.Size(269, 32);
       this.OutputGenerate.Text = "&Generate Output";
       this.OutputGenerate.Click += new System.EventHandler(this.OutputGenerate_Click);
       // 
@@ -1286,32 +1323,32 @@
       // 
       this.OutputSave.Name = "OutputSave";
       this.OutputSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-      this.OutputSave.Size = new System.Drawing.Size(240, 32);
+      this.OutputSave.Size = new System.Drawing.Size(269, 32);
       this.OutputSave.Text = "&Save";
       this.OutputSave.Click += new System.EventHandler(this.OutputSave_Click);
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(266, 6);
       // 
       // OutputExit
       // 
       this.OutputExit.Name = "OutputExit";
-      this.OutputExit.Size = new System.Drawing.Size(240, 32);
+      this.OutputExit.Size = new System.Drawing.Size(269, 32);
       this.OutputExit.Text = "E&xit";
       this.OutputExit.Click += new System.EventHandler(this.OutputExit_Click);
       // 
       // toolStripSeparator17
       // 
       this.toolStripSeparator17.Name = "toolStripSeparator17";
-      this.toolStripSeparator17.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator17.Size = new System.Drawing.Size(266, 6);
       // 
       // OutputHelp
       // 
       this.OutputHelp.Name = "OutputHelp";
       this.OutputHelp.ShortcutKeyDisplayString = "F1";
-      this.OutputHelp.Size = new System.Drawing.Size(240, 32);
+      this.OutputHelp.Size = new System.Drawing.Size(269, 32);
       this.OutputHelp.Text = "&Help";
       this.OutputHelp.Click += new System.EventHandler(this.OutputHelp_Click);
       // 
@@ -1532,8 +1569,8 @@
     private System.Windows.Forms.ToolStripMenuItem ReplacementMenuHelp;
     private System.Windows.Forms.ToolStripMenuItem OutputHelp;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-    private System.Windows.Forms.ToolStripMenuItem OutputEncode;
-    private System.Windows.Forms.ToolStripMenuItem OutputDecode;
+    private System.Windows.Forms.ToolStripMenuItem XMLEncode;
+    private System.Windows.Forms.ToolStripMenuItem XMLDecode;
     private System.Windows.Forms.ToolStripMenuItem TemplateFileEdit;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     private System.Windows.Forms.ToolStripMenuItem SectionTitle;
@@ -1541,6 +1578,10 @@
     private System.Windows.Forms.ToolStripMenuItem ReplacementTitle;
     private System.Windows.Forms.ToolStripMenuItem TemplateTitle;
     private System.Windows.Forms.ToolStripMenuItem OutputTitle;
+    private System.Windows.Forms.ToolStripMenuItem HTMLXMLEncode;
+    private System.Windows.Forms.ToolStripMenuItem HTMLXMLDecode;
+    private System.Windows.Forms.ToolStripMenuItem HTMLCodeDecode;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
   }
 }
 
