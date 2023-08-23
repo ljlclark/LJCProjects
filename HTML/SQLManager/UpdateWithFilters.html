@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- UpdateWithKeys.html -->
+<!-- UpdateWithFilters.html -->
 <html lang="en">
 <head>
-  <title>Update with Keys</title>
+  <title>Update with Filters</title>
   <meta charset='utf-8' />
   <meta name="description" content="How to Use LJCProjects">
   <meta name="keywords" content="LJC, C#, Code, Tutorial">
   <meta name='author' content='Lester J. Clark' />
   <meta name='viewport' content='width=device-width initial-scale=1' />
-  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
-  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
 </head>
 <body>
   <div class="page">
     <br />
     <div class="PathText">
-      / <a href="../index.html">Home</a>
-      / <a href="Tutorials.html">HowTo</a>
-      / UpdateWithKeys
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / UpdateWithFilters
     </div>
     <br />
     <div id='Header'>
-      <div id='Title'>How to Update Data Rows using Keys</div>
+      <div id='Title'>How to Update Data Rows using Filters</div>
     </div>
     <div class='Text'>
       <p>
@@ -35,8 +35,8 @@
 <span class='keyWord'>using</span> LJCGridDataLib;
 <span class='keyWord'>using</span> LJCWinFormControls;
 
-<span class='comment'>// Updating data with Keys using the SQLManager object.</span>
-<span class='modifier'>internal</span> <span class='commonType'>void</span> UpdateWithKeys(Province province)
+<span class='comment'>// Updating data with Filters using the SQLManager object.</span>
+<span class='modifier'>internal</span> <span class='commonType'>void</span> UpdateWithFilters(Province province)
 {
   <span class='comment'>// Create Data Configuration values.</span>
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -53,13 +53,15 @@
     , providerName);
 
   <span class='comment'>// Change Values</span>
-  <span class='comment'>//province.Description = "";</span>
   province.Description = "-null";
 
   <span class='comment'>// Select the records and properties to be updated.</span>
-  <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+  <span class='commonType'>var</span> conditionSet = <span class='keyWord'>new</span> <span class='userType'>DbConditionSet</span>();
+  <span class='comment'>// Where ID > 0</span>
+  conditionSet.Conditions.Add("ID", "0", ">");
+  <span class='commonType'>var</span> filters = <span class='keyWord'>new</span> <span class='userType'>DbFilters</span>()
   {
-    { "ID" , province.ID }
+    { "ID", conditionSet }
   };
   <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
@@ -67,13 +69,13 @@
   };
 
   <span class='comment'>// Perform the Update</span>
-  sqlManager.Update(province, keyColumns, propertyNames);
+  sqlManager.Update(province, <span class='keyWord'>null</span>, propertyNames, filters);
 }</pre>
     </div>
-  <div class="SmallText">
-    Copyright &copy Lester J. Clark and Contributors.<br />
-    Licensed under the MIT License.
-  </div>
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
   </div>
 </body>
 </html>

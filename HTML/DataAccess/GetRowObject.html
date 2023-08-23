@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- GetRowObject.html -->
+<html lang="en">
+<head>
+  <title>Get a grid row Data Object.</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / GetRowDataObject
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to get a Data Object from an LJCGridRow</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The Data Object associated with a grid row can be retrieved if the
+        columns contain a unique key.
+      </p>
+  <pre class="code">
+<span class='modifier'>internal</span> <span class='commonType'>void</span> GetRowDataObject(DataAccess dataAccess
+  , LJCGridRow ljcGridRow)
+{
+  <span class='keyWord'>if</span> (ljcGridRow != null)
+  {
+    <span class='commonType'>var</span> name = ljcGridRow.LJCGetCellText("Name");
+
+    <span class='commonType'>var</span> sql = $"select * from Province where Name=\'{name}\'";
+    <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
+    <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+    {
+      <span class='comment'>// Create the Data Object.</span>
+      <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+      <span class='commonType'>var</span> province = converter.CreateDataFromTable(dataTable);
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</body>
+</html>
