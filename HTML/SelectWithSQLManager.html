@@ -68,7 +68,7 @@ See the Technical Documentation for more information.</pre>
   <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
     , providerName);
 
-  <span class='comment'>// Select the records and properties to be updated.</span>
+  <span class='comment'>// Identify the records and properties to be selected.</span>
   <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
   {
     { "ID" , 1 }
@@ -88,6 +88,9 @@ See the Technical Documentation for more information.</pre>
   retValue = converter.CreateDataFromTable(dataTable);
   <span class='keyWord'>return</span> retValue;
 }
+
+<span class='comment'>// Represents a Collection of Provinces</span>
+<span class='modifier'>internal</span> <span class='refType'>class</span> <span class='userType'>Provinces</span> : <span class="userType">List</span>&lt;<span class="userType">Province</span>&gt; { }
 
 <span class='comment'>// Represents a Province</span>
 <span class='modifier'>internal</span> <span class='refType'>class</span> <span class='userType'>Province</span>
