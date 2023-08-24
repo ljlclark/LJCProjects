@@ -44,14 +44,14 @@
   <span class='comment'>// Create Data Configuration values.</span>
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
-    { "Data Source", "DataServerName" },
-    { "Initial Catalog", "DatabaseName" },
-    { "Integrated Security", "True" }
+    { <span class='text'>"Data Source"</span>, <span class='text'>"DataServerName"</span> },
+    { <span class='text'>"Initial Catalog"</span>, <span class='text'>"DatabaseName"</span> },
+    { <span class='text'>"Integrated Security"</span>, <span class='text'>"True"</span> }
     <span class='comment'>// { "User Id", "UserID" },</span>
     <span class='comment'>// { "Password", "Password" }</span>
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
-  <span class='commonType'>var</span> providerName = "System.Data.SqlClient";
+  <span class='commonType'>var</span> providerName = <span class='text'>"System.Data.SqlClient"</span>;
 
   <span class='comment'>// Create DataAccess object.</span>
   <span class='commonType'>var</span> retValue = <span class='keyWord'>new</span> <span class='userType'>DataAccess</span>(connectionString, providerName);

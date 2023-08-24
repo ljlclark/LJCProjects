@@ -36,9 +36,9 @@
 {
   <span class='keyWord'>if</span> (ljcGridRow != null)
   {
-    <span class='commonType'>var</span> name = ljcGridRow.LJCGetCellText("Name");
+    <span class='commonType'>var</span> name = ljcGridRow.LJCGetCellText(<span class='text'>"Name"</span>);
 
-    <span class='commonType'>var</span> sql = $"select * from Province where Name=\'{name}\'";
+    <span class='commonType'>var</span> sql = <span class="text">$"select * from Province where Name=\'{name}\'"</span>;
     <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {

@@ -41,12 +41,12 @@
   <span class='comment'>// Create Data Configuration values.</span>
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
-    { "Data Source", "DataServerName" },
-    { "Initial Catalog", "DatabaseName" },
-    { "Integrated Security", "True" }
+    { <span class='text'>"Data Source"</span>, <span class='text'>"DataServerName"</span> },
+    { <span class='text'>"Initial Catalog"</span>, <span class='text'>"DatabaseName"</span> },
+    { <span class='text'>"Integrated Security"</span>, <span class='text'>"True"</span> }
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
-  <span class='commonType'>var</span> providerName = "System.Data.SqlClient";
+  <span class='commonType'>var</span> providerName = <span class='text'>"System.Data.SqlClient"</span>;
 
   <span class='comment'>// Create the SQLManager.</span>
   <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
@@ -54,16 +54,16 @@
 
   <span class='comment'>// Change Values</span>
   <span class='comment'>//province.Description = "";</span>
-  province.Description = "-null";
+  province.Description = <span class='text'>"-null"</span>;
 
   <span class='comment'>// Select the records and properties to be updated.</span>
   <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
   {
-    { "ID" , province.ID }
+    { <span class='text'>"ID"</span> , province.ID }
   };
   <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
-    { "Description" },
+    { <span class='text'>"Description"</span> },
   };
 
   <span class='comment'>// Perform the Update</span>

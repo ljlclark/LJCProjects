@@ -42,12 +42,12 @@
   DbConnectionStringBuilder connectionBuilder;
   connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
-    { "Data Source", "DataServiceName" },
-    { "Initial Catalog", "DatabaseName" },
-    { "Integrated Security", "True" }
+    { <span class='text'>"Source"</span>, <span class='text'>"DataServiceName"</span> },
+    { <span class='text'>"Initial Catalog"</span>, <span class='text'>"DatabaseName"</span> },
+    { <span class='text'>"Integrated Security"</span>, "True" }
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
-  <span class='commonType'>var</span> providerName = "System.Data.SqlClient";
+  <span class='commonType'>var</span> providerName = <span class='text'>"System.Data.SqlClient"</span>;
   <span class='commonType'>var</span> dataAccess = <span class='keyWord'>new</span> <span class='userType'>DataAccess</span>(connectionString, providerName);
 
   <span class='comment'>// Configure GridColumns.</span>
@@ -57,27 +57,27 @@
 
   <span class='comment'>// *** Test Setting ***</span>
   <span class='comment'>//var configType = "Manually";</span>
-  <span class='commonType'>var</span> configType = "FromTableColumns";
+  <span class='commonType'>var</span> configType = <span class='text'>"FromTableColumns"</span>;
   <span class='keyWord'>switch</span> (configType)
   {
     <span class='keyWord'>case</span> "Manually":
       <span class='comment'>// Create Grid Columns manually.</span>
       gridColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>();
-      gridColumns.Add("Name", maxLength: 60);
-      gridColumns.Add("Description", maxLength: 100);
-      gridColumns.Add("Abbreviation", maxLength: 15);
+      gridColumns.Add(<span class='text'>"Name"</span>, maxLength: 60);
+      gridColumns.Add(<span class='text'>"Description"</span>, maxLength: 100);
+      gridColumns.Add(<span class='text'>"Abbreviation"</span>, maxLength: 15);
       <span class='keyWord'>break</span>;
 
     <span class='keyWord'>case</span> "FromTableColumns":
       <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
-      sql = "select * from Province";
+      sql = <span class='text'>"select * from Province"</span>;
       dataTable = dataAccess.GetSchemaOnly(sql);
       <span class='commonType'>var</span> dataDefinition = <span class="userType">TableData</span>.GetDbColumns(dataTable.Columns);
       <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
       {
-        { "Name" },
-        { "Description" },
-        { "Abbreviation" }
+        { <span class='text'>"Name"</span> },
+        { <span class='text'>"Description"</span> },
+        { <span class='text'>"Abbreviation"</span> }
       };
       gridColumns = dataDefinition.LJCGetColumns(propertyNames);
       <span class='keyWord'>break</span>;
@@ -87,7 +87,7 @@
   <span class='comment'>// Load the data.</span>
   <span class='comment'>// The DataAccess class requires the developer</span>
   <span class='comment'>// to create the SQL statements to pass to its methods.</span>
-  sql = "select * from Province";
+  sql = <span class='text'>"select * from Province"</span>;
   dataTable = dataAccess.GetDataTable(sql);
   <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
   {
