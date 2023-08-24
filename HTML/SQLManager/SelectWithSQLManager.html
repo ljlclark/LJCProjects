@@ -27,6 +27,10 @@
     </div>
     <div class='Text'>
       <p>
+        How to Configure DataAccess with <a href="ConfigDataAccessWithBuilder.html">ConnectionBuilder</a>.</br />
+        How to Configure DataAccess with <a href="ConfigDataAccessWithConfigs.html">DataConfigs</a>.
+      </p>
+      <p>
         The SQLManager class methods accept DataObjects and parts of a
         DbRequest message. It then creates the SQL statements for the
         developer.
@@ -50,19 +54,9 @@ See the Technical Documentation for more information.</pre>
 <span class='keyWord'>using</span> LJCWinFormControls;
 
 <span class='comment'>// Selecting data with the SQLManager object.</span>
-<span class='modifier'>internal</span> Province SelectWithSql()
+<span class='modifier'>internal</span> Province SelectWithSql(<span class="keyWord">string</span> connectionString, <span class="keyWord">string</span> providerName)
 {
   <span class="userType">Province</span> retValue;
-
-  <span class='comment'>// Create Data Configuration values.</span>
-  <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
-  {
-    { <span class='text'>"Data Source"</span>, <span class='text'>"DataServerName"</span> },
-    { <span class='text'>"Initial Catalog"</span>, <span class='text'>"DatabaseName"</span> },
-    { <span class='text'>"Integrated Security"</span>, <span class='text'>"True"</span> }
-  };
-  <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
-  <span class='commonType'>var</span> providerName = <span class='text'>"System.Data.SqlClient"</span>;
 
   <span class='comment'>// Create the SQLManager.</span>
   <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
