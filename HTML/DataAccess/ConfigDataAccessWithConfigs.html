@@ -104,7 +104,7 @@
   <span class='comment'>// Get the DataConfig definition.</span>
   <span class='userType'>DataConfigs</span> dataConfigs = new <span class='userType'>DataConfigs</span>();
   dataConfigs.LJCLoadData();
-  dataConfig = dataConfigs.LJCGetByName("ConfigName");
+  dataConfig = dataConfigs.LJCGetByName(<span class='text'>"ConfigName"</span>);
 
   <span class='comment'>// Create the DataAccess object.</span>
   <span class='commonType'>var</span> connectionString = dataConfig.GetConnectionString();
