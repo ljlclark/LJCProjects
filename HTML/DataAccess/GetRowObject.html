@@ -31,8 +31,8 @@
         columns contain a unique key.
       </p>
   <pre class="code">
-<span class='modifier'>internal</span> <span class='commonType'>void</span> GetRowDataObject(DataAccess dataAccess
-  , LJCGridRow ljcGridRow)
+<span class='modifier'>internal</span> <span class='commonType'>void</span> GetRowDataObject(<span class="userType">DataAccess</span> dataAccess
+  , <span class="userType">LJCGridRow</span> ljcGridRow)
 {
   <span class='keyWord'>if</span> (ljcGridRow != null)
   {
@@ -40,10 +40,10 @@
 
     <span class='commonType'>var</span> sql = $"select * from Province where Name=\'{name}\'";
     <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
-    <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+    <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       <span class='comment'>// Create the Data Object.</span>
-      <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+      <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
       <span class='commonType'>var</span> province = converter.CreateDataFromTable(dataTable);
     }
   }

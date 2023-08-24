@@ -72,7 +72,7 @@
       <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
       sql = "select * from Province";
       dataTable = dataAccess.GetSchemaOnly(sql);
-      <span class='commonType'>var</span> dataDefinition = TableData.GetDbColumns(dataTable.Columns);
+      <span class='commonType'>var</span> dataDefinition = <span class="userType">TableData</span>.GetDbColumns(dataTable.Columns);
       <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
       {
         { "Name" },
@@ -89,13 +89,13 @@
   <span class='comment'>// to create the SQL statements to pass to its methods.</span>
   sql = "select * from Province";
   dataTable = dataAccess.GetDataTable(sql);
-  <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+  <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
   {
     <span class='comment'>// Create and populate the grid rows individually.</span>
     <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
     {
       <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
-      TableData.RowSetValues(ljcGridRow, dataRow);
+      <span class="userType">TableData</span>.RowSetValues(ljcGridRow, dataRow);
     }
   }
 }</pre>
