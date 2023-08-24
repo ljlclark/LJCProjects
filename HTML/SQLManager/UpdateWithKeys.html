@@ -30,6 +30,13 @@
         How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithBuilder.html">ConnectionBuilder</a>.</br />
         How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithConfigs.html">DataConfigs</a>.
       </p>
+      <pre class="code">
+Key columns can only create a simple where clause with "and" and "=" as in:
+where column1 = 1
+and column2 = "Something"</pre>
+      <p>
+        For more complex where clauses, use Filters.
+      </p>
 
       <pre class="code">
 <span class='keyWord'>using</span> LJCDBClientLib;

@@ -30,6 +30,12 @@
         How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithBuilder.html">ConnectionBuilder</a>.</br />
         How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithConfigs.html">DataConfigs</a>.
       </p>
+      <p>
+        Important values such as key values can be saved in an LJCDataRow for
+        later retrieval with LJCDataRow methods LJCSetInt32(), LJCSetInt64()
+        and LJCSetString(). Each of these methods has a corresponding "Get"
+        method such as LJCGetString(), etc.
+      </p>
       <pre class="code">
 <span class='comment'>// Retrieve data using saved row values.</span>
 <span class='modifier'>internal</span> <span class='commonType'>void</span> RetrieveWithRowValues(LJCDataGrid ljcGrid
