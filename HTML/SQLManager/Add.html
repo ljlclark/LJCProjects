@@ -34,32 +34,32 @@
   Province retValue;
 
   <span class='comment'>// Create the SQLManager.</span>
-  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, <span class='text'>"Province"</span>, connectionString
     , providerName);
 
   <span class='comment'>// Create the list of DB Assigned and Lookup column names.</span>
   sqlManager.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
-    "ID"
+    <span class='text'>"ID"</span>
   };
   sqlManager.SetLookupColumns(new <span class='commonType'>string</span>[]
   {
-    "Name"
+    <span class='text'>"Name"</span>
   });
 
   provider.RegionID = 1;
   <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
-    { "Name" },
-    { "Description" },
-    { "Abbreviation" }
+    { <span class='text'>"Name"</span> },
+    { <span class='text'>"Description"</span> },
+    { <span class='text'>"Abbreviation"</span> }
   };
 
   <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
   DataTable dataTable = sqlManager.Add(provider, propertyNames);
 
   <span class='comment'>// Create the Data Object with added DB Assigned values.</span>
-  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
   retValue = converter.CreateDataFromTable(dataTable);
   <span class='keyWord'>return</span> retValue;
 }</pre>
