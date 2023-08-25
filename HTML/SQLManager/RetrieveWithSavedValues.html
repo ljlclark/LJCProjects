@@ -39,11 +39,12 @@
       <pre class="code">
 <span class='keyWord'>using</span> LJCDBClientLib;
 <span class='keyWord'>using</span> LJCDBMessage;
+<span class='keyWord'>using</span> LJCGridDataLib;
 <span class='keyWord'>using</span> LJCNetCommon;
 <span class='keyWord'>using</span> LJCWinFormControls;
 
 <span class='comment'>// Retrieve data using saved row values.</span>
-<span class='modifier'>internal</span> <span class='commonType'>void</span> RetrieveWithRowValues(LJCDataGrid ljcGrid
+<span class='modifier'>internal</span> <span class='commonType'>void</span> RetrieveWithRowValues(<span class="userType">LJCDataGrid</span> ljcGrid
   , <span class='commonType'>string</span> connectionString, <span class='commonType'>string</span> providerName)
 {
   <span class='comment'>// Create the SQLManager.</span>
@@ -58,7 +59,7 @@
     {
       <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
       ljcGridRow.LJCSetInt32(<span class='text'>"ID"</span>, (int)dataRow[<span class='text'>"ID"]</span>);
-      TableData.RowSetValues(ljcGridRow, dataRow);
+      <span class="userType">TableData</span>.RowSetValues(ljcGridRow, dataRow);
     }
   }
 
@@ -72,7 +73,7 @@
   dataTable = sqlManager.GetDataTable(keyColumns);
 
   <span class='comment'>// Create the Data Object.</span>
-  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter&lt;Province, Provinces&gt;();
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
   <span class='commonType'>var</span> province = converter.CreateDataFromTable(dataTable);
 }</pre>
     </div>
