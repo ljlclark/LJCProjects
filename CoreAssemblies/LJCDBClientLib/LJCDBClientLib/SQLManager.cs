@@ -70,7 +70,7 @@ namespace LJCDBClientLib
       NetCommon.CheckArgument<object>(dataObject);
 
       // The record must not contain a value for DB Assigned columns.
-      var addSQLStatement = CreateAddSQL(dataObject);
+      var addSQLStatement = CreateAddSQL(dataObject, propertyNames);
       AffectedCount = mDataAccess.ExecuteNonQuery(addSQLStatement);
 
       // Return the added record.
@@ -78,7 +78,7 @@ namespace LJCDBClientLib
         , LookupColumnNames);
 
       // GetDataTable sets SQLStatement.
-      var retValue = GetDataTable(keyColumns, propertyNames);
+      var retValue = GetDataTable(keyColumns, DbAssignedColumns);
       SQLStatement = $"{addSQLStatement}\r\n{SQLStatement}";
       return retValue;
     }
@@ -127,7 +127,8 @@ namespace LJCDBClientLib
     #region DataManager and DbDataManager Related SQL Methods
 
     // Creates the SQL "Insert" string.
-    private string CreateAddSQL(object dataObject)
+    private string CreateAddSQL(object dataObject
+      , List<string> propertyNames = null)
     {
       string retValue = null;
 
@@ -135,12 +136,13 @@ namespace LJCDBClientLib
       {
         // Create request with columns containing values from the record.
         // The inserted columns must not include the DB assigned columns.
-        var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition);
+        var dataColumns = DbCommon.RequestDataColumns(dataObject
+          , BaseDefinition, propertyNames);
         var keyColumns = DbCommon.RequestLookupKeys(dataObject, BaseDefinition
           , LookupColumnNames);
 
-        var dbRequest = ManagerCommon.CreateRequest(RequestType.Insert, TableName
-          , dataColumns, DataConfigName, SchemaName, keyColumns);
+        var dbRequest = ManagerCommon.CreateRequest(RequestType.Insert
+          , TableName, dataColumns, DataConfigName, SchemaName, keyColumns);
         DbSqlBuilder sqlBuilder = new DbSqlBuilder(dbRequest);
         retValue = sqlBuilder.CreateAddSql();
       }
@@ -262,6 +264,9 @@ namespace LJCDBClientLib
 
     /// <summary>Gets the data definition columns collection.</summary>
     public DbColumns DataDefinition { get; private set; }
+
+    /// <summary>Gets or sets the Database assigned columns.</summary>
+    public List<string> DbAssignedColumns { get; set; }
 
     /// <summary>Gets or sets the LookupColumn names.</summary>
     public List<string> LookupColumnNames { get; set; }

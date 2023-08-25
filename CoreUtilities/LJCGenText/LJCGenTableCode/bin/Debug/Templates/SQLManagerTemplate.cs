@@ -29,7 +29,7 @@ namespace _Namespace_
       if (SQLManager.DataDefinition != null)
       {
         var baseDataDefinition = SQLManager.DataDefinition;
-        var dataDefinition = SQLManager.DataDefinition;
+        var dataDefinition = baseDataDefinition.Clone();
 
         // Map table names with property names or captions
         // that differ from the column names.
@@ -41,6 +41,8 @@ namespace _Namespace_
         {
           _ClassName_.ColumnName
         });
+
+        ResultConverter = new ResultConverter<_ClassName_, _CollectionName_>();
       }
     }
     #endregion
@@ -153,13 +155,11 @@ namespace _Namespace_
     // Creates the object from the first data row.
     private _ClassName_ Create_ClassName_(DataTable dataTable)
     {
-      ResultConverter<_ClassName_, _CollectionName_> resultConverter;
       _ClassName_ retValue = null;
 
       if (dataTable.Rows != null && dataTable.Rows.Count > 0)
       {
-        resultConverter = new ResultConverter<_ClassName_, _CollectionName_>();
-        retValue = resultConverter.CreateDataFromTable(dataTable, dataTable.Rows[0]
+        retValue = ResultConverter.CreateDataFromTable(dataTable, dataTable.Rows[0]
           , SQLManager.DataDefinition);
       }
       return retValue;
@@ -168,13 +168,11 @@ namespace _Namespace_
     // Creates the collection from a DataTable.
     private _CollectionName_ Create_CollectionName_(DataTable dataTable)
     {
-      ResultConverter<_ClassName_, _CollectionName_> resultConverter;
       _CollectionName_ retValue = null;
 
       if (dataTable.Rows != null && dataTable.Rows.Count > 0)
       {
-        resultConverter = new ResultConverter<_ClassName_, _CollectionName_>();
-        retValue = resultConverter.CreateCollectionFromTable(dataTable
+        retValue = ResultConverter.CreateCollectionFromTable(dataTable
           , SQLManager.DataDefinition);
       }
       return retValue;
@@ -185,6 +183,9 @@ namespace _Namespace_
 
     /// <summary>Gets or sets the non-select affected record count.</summary>
     public int AffectedCount { get; set; }
+
+    /// <summary>Gets or sets the ResultConverter reference.</summary>
+    public ResultConverter<_ClassName_, _CollectionName_> ResultConverter { get; set; }
 
     /// <summary>Gets the SQLManager reference.</summary>
     public SQLManager SQLManager { get; private set; }

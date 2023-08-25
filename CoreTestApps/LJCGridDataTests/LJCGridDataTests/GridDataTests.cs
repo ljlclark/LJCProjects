@@ -1,7 +1,9 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // GridDataTest.cs
+using LJCDataAccess;
 using LJCWinFormControls;
+using System.Data.Common;
 
 namespace LJCGridDataTests
 {
@@ -29,13 +31,43 @@ namespace LJCGridDataTests
         case TestCase.SQL:
           var sqlTests = new SQLTests(mLJCGrid);
           //sqlTests.Run();
-          sqlTests.DataRetrieve(mLJCGrid);
 
-          var province = sqlTests.SelectWithSql();
-          sqlTests.UpdateWithKeys(province);
-          sqlTests.UpdateWithFilters(province);
+          // DataAccess Methods
+          var dataAccess = GetDataAccess(out string connectionString
+            , out string providerName);
+          sqlTests.SQLDataRetrieve(dataAccess, mLJCGrid);
+          var ljcGridRow = mLJCGrid.CurrentRow as LJCGridRow;
+          sqlTests.GetRowDataObject(dataAccess, ljcGridRow);
+
+          // SQLManager Methods
+          var province = sqlTests.Retrieve(connectionString, providerName);
+          sqlTests.RetrieveWithRowValues(mLJCGrid, connectionString
+            , providerName);
+          sqlTests.UpdateWithKeys(province, connectionString, providerName);
+          sqlTests.UpdateWithFilters(province, connectionString, providerName);
+          sqlTests.Add(province, connectionString, providerName);
+
+          var provinceManager = new ProvinceManager(null, null
+            , connectionString, providerName);
+          province = sqlTests.DataRetrieve(provinceManager);
           break;
       }
+    }
+
+    internal DataAccess GetDataAccess(out string connectionString
+      , out string providerName)
+    {
+      DbConnectionStringBuilder connectionBuilder;
+      connectionBuilder = new DbConnectionStringBuilder()
+          {
+            { "Data Source", "DESKTOP-PDPBE34" },
+            { "Initial Catalog", "LJCData" },
+            { "Integrated Security", "True" }
+          };
+      connectionString = connectionBuilder.ConnectionString;
+      providerName = "System.Data.SqlClient";
+      var retValue = new DataAccess(connectionString, providerName);
+      return retValue;
     }
 
     #region Class Data

@@ -82,6 +82,7 @@
     <Compile Include="GridDataTests.cs" />
     <Compile Include="ManagerTests\ManagerData.cs" />
     <Compile Include="ManagerTests\ManagerSetup.cs" />
+    <Compile Include="ManagerTests\ProvinceManager.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="ManagerTests\SQLTests.cs" />
     <Compile Include="TestForm.cs">

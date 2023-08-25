@@ -5,7 +5,7 @@ using System;
 using LJCDBClientLib;
 using LJCNetCommon;
 
-namespace LJCGridDataTests
+namespace LJCGridDataTest
 {
   /// <summary>The Province table Data Record.</summary>
   public class Province : IComparable<Province>

@@ -23,21 +23,27 @@ namespace LJCGridDataTests
       mLJCGrid = ljcGrid;
     }
 
-    // Loading Grid rows from a DataTable.
-    internal void DataRetrieve(LJCDataGrid ljcGrid)
+    internal Province DataRetrieve(ProvinceManager manager)
     {
-      // Configure DataAccess using internal configuration.
-      DbConnectionStringBuilder connectionBuilder;
-      connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Data Source", "DESKTOP-PDPBE34" },
-        { "Initial Catalog", "LJCData" },
-        { "Integrated Security", "True" }
-      };
-      var connectionString = connectionBuilder.ConnectionString;
-      var providerName = "System.Data.SqlClient";
-      var dataAccess = new DataAccess(connectionString, providerName);
+      Province retValue;
 
+      // Select the records and properties to be updated.
+      var keyColumns = manager.GetIDKey(1);
+      var propertyNames = new List<string>()
+      {
+        { "Name" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+      retValue = manager.Retrieve(keyColumns, propertyNames);
+      return retValue;
+    }
+
+    #region DataAccess
+
+    // Loading Grid rows from a DataTable.
+    internal void SQLDataRetrieve(DataAccess dataAccess, LJCDataGrid ljcGrid)
+    {
       // Configure GridColumns.
       DataTable dataTable;
       DbColumns gridColumns = null;
@@ -90,27 +96,93 @@ namespace LJCGridDataTests
       var provinces = converter.CreateCollectionFromTable(dataTable);
     }
 
-    // Selecting data with the SQLManager object.
-    internal Province SelectWithSql()
+    internal void GetRowDataObject(DataAccess dataAccess
+      , LJCGridRow ljcGridRow)
+    {
+      if (ljcGridRow != null)
+      {
+        var name = ljcGridRow.LJCGetCellText("Name");
+
+        var sql = $"select * from Province where Name=\'{name}\'";
+        var dataTable = dataAccess.GetDataTable(sql);
+        if (NetCommon.HasData(dataTable))
+        {
+          // Create the Data Object.
+          var converter = new ResultConverter<Province, Provinces>();
+          var province = converter.CreateDataFromTable(dataTable);
+        }
+      }
+    }
+    #endregion
+
+    #region SQLManager
+
+    // Add a data record.
+    internal Province Add(Province provider, string connectionString
+      , string providerName)
     {
       Province retValue;
-
-      // Create Data Configuration values.
-      DbConnectionStringBuilder connectionBuilder;
-      connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Data Source", "DESKTOP-PDPBE34" },
-        { "Initial Catalog", "LJCData" },
-        { "Integrated Security", "True" }
-      };
-      var connectionString = connectionBuilder.ConnectionString;
-      var providerName = "System.Data.SqlClient";
 
       // Create the SQLManager.
       var sqlManager = new SQLManager(null, "Province", connectionString
         , providerName);
 
-      // Select the records and properties to be updated.
+      // Create the list of DB Assigned and Lookup column names.
+      sqlManager.DbAssignedColumns = new List<string>()
+      {
+        "ID"
+      };
+      sqlManager.SetLookupColumns(new string[]
+      {
+        "Name"
+      });
+
+      provider.RegionID = 1;
+      var propertyNames = new List<string>()
+      {
+        { "RegionID" },
+        { "Name" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+
+      // The data record must not contain a value for DB Assigned columns.
+      DataTable dataTable = sqlManager.Add(provider, propertyNames);
+
+      // Create the Data Object with added DB Assigned values.
+      var converter = new ResultConverter<Province, Provinces>();
+      retValue = converter.CreateDataFromTable(dataTable);
+      return retValue;
+    }
+
+    // Delete a data record.
+    internal void Delete(string connectionString, string providerName)
+    {
+      // Create the SQLManager.
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
+
+      // Identify the records to be deleted.
+      var keyColumns = new DbColumns()
+      {
+        { "ID" , 1 }
+      };
+
+      // Perform the Delete
+      sqlManager.Delete(keyColumns);
+    }
+
+    // Retrieve data with keys.
+    internal Province Retrieve(string connectionString
+      , string providerName)
+    {
+      Province retValue;
+
+      // Create the SQLManager.
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
+      
+      // Identify the records and properties to be selected.
       var keyColumns = new DbColumns()
       {
         { "ID" , 1 }
@@ -131,20 +203,44 @@ namespace LJCGridDataTests
       return retValue;
     }
 
-    // Updating data with Filters using the SQLManager object.
-    internal void UpdateWithFilters(Province province)
+    // Retrieve data using saved row values.
+    internal void RetrieveWithRowValues(LJCDataGrid ljcGrid
+      , string connectionString, string providerName)
     {
-      // Create Data Configuration values.
-      DbConnectionStringBuilder connectionBuilder;
-      connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Data Source", "DESKTOP-PDPBE34" },
-        { "Initial Catalog", "LJCData" },
-        { "Integrated Security", "True" }
-      };
-      var connectionString = connectionBuilder.ConnectionString;
-      var providerName = "System.Data.SqlClient";
+      // Create the SQLManager.
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
 
+      // Load the data and save the "ID" value in each row.
+      var dataTable = sqlManager.GetDataTable();
+      if (NetCommon.HasData(dataTable))
+      {
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          var ljcGridRow = ljcGrid.LJCRowAdd();
+          ljcGridRow.LJCSetInt32("ID", (int)dataRow["ID"]);
+          TableData.RowSetValues(ljcGridRow, dataRow);
+        }
+      }
+
+      // Retrieve the data with the saved row values.
+      var ljcRow = ljcGrid.CurrentRow as LJCGridRow;
+      var id = ljcRow.LJCGetInt32("ID");
+      var keyColumns = new DbColumns()
+      {
+        { "ID" , id }
+      };
+      dataTable = sqlManager.GetDataTable(keyColumns);
+
+      // Create the Data Object.
+      var converter = new ResultConverter<Province, Provinces>();
+      var province = converter.CreateDataFromTable(dataTable);
+    }
+
+    // Updating data with Filters.
+    internal void UpdateWithFilters(Province province, string connectionString
+      , string providerName)
+    {
       // Create the SQLManager.
       var sqlManager = new SQLManager(null, "Province", connectionString
         , providerName);
@@ -169,22 +265,11 @@ namespace LJCGridDataTests
       sqlManager.Update(province, null, propertyNames, filters);
     }
 
-    // Updating data with Keys using the SQLManager object.
-    internal void UpdateWithKeys(Province province)
+    // Updating data with Keys.
+    internal void UpdateWithKeys(Province province, string connectionString
+      , string providerName)
     {
-      // Configure DataAccess using internal configuration.
-      DbConnectionStringBuilder connectionBuilder;
-      connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Data Source", "DESKTOP-PDPBE34" },
-        { "Initial Catalog", "LJCData" },
-        { "Integrated Security", "True" }
-      };
-      var connectionString = connectionBuilder.ConnectionString;
-      var providerName = "System.Data.SqlClient";
-
       // Create the SQLManager.
-      //var sqlManager = new SQLManager("ConfigName", "Province");
       var sqlManager = new SQLManager(null, "Province", connectionString
         , providerName);
 
@@ -205,25 +290,7 @@ namespace LJCGridDataTests
       // Perform the Update
       sqlManager.Update(province, keyColumns, propertyNames);
     }
-
-    // Represents a Province
-    internal class Province
-    {
-      /// <summary>Gets or sets the Primary key value.</summary>
-      public long ID { get; set; }
-
-      /// <summary>Gets or sets the Name.</summary>
-      public string Name { get; set; }
-
-      /// <summary>Gets or sets the Description.</summary>
-      public string Description { get; set; }
-
-      /// <summary>Gets or sets the Abbreviation.</summary>
-      public string Abbreviation { get; set; }
-    }
-
-    // Represents a Collection of Province objects.
-    internal class Provinces : List<Province> { }
+    #endregion
 
     // Runs the tests.
     internal void Run()
@@ -337,4 +404,26 @@ namespace LJCGridDataTests
     }
     #endregion
   }
+
+  // Represents a Province
+  public class Province
+  {
+    /// <summary>Gets or sets the Primary key value.</summary>
+    public int ID { get; set; }
+
+    /// <summary>Gets or sets the Region ID.</summary>
+    public int RegionID { get; set; }
+
+    /// <summary>Gets or sets the Name.</summary>
+    public string Name { get; set; }
+
+    /// <summary>Gets or sets the Description.</summary>
+    public string Description { get; set; }
+
+    /// <summary>Gets or sets the Abbreviation.</summary>
+    public string Abbreviation { get; set; }
+  }
+
+  // Represents a Collection of Province objects.
+  public class Provinces : List<Province> { }
 }
