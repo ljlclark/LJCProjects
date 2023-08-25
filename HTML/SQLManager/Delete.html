@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Delete.html -->
+<html lang="en">
+<head>
+  <title>Delete Data Record</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / DeleteRecord
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to Delete a Data Record</div>
+    </div>
+    <div class='Text'>
+      <pre class="code">
+<span class='comment'>// Delete a data record.</span>
+<span class='modifier'>internal</span> <span class='commonType'>void</span> Delete(string connectionString, <span class='commonType'>string</span> providerName)
+{
+  <span class='comment'>// Create the SQLManager.</span>
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
+    , providerName);
+
+  <span class='comment'>// Identify the records to be deleted.</span>
+  <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+  {
+    { "ID" , 1 }
+  };
+
+  <span class='comment'>// Perform the Delete</span>
+  sqlManager.Delete(keyColumns);
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / DeleteRecord
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
