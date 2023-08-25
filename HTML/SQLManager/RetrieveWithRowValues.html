@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- RetrieveWithRowValues.html -->
+<html lang="en">
+<head>
+  <title>Retrieve with Saved Values</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / RetrieveWithSavedValues
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to Retrieve Data with Row Saved Values</div>
+    </div>
+    <div class='Text'>
+      <p>
+        How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithBuilder.html">ConnectionBuilder</a>.</br />
+        How to Configure DataAccess with <a href="..\DataAccess\ConfigDataAccessWithConfigs.html">DataConfigs</a>.
+      </p>
+      <p>
+        Important values such as key values can be saved in an LJCDataRow for
+        later retrieval with methods LJCSetInt32(), LJCSetInt64() and
+        LJCSetString(). Each of these methods has a corresponding "Get" method
+        such as LJCGetString(), etc.
+      </p>
+      <pre class="code">
+<span class='keyWord'>using</span> LJCDBClientLib;
+<span class='keyWord'>using</span> LJCDBMessage;
+<span class='keyWord'>using</span> LJCGridDataLib;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCWinFormControls;
+
+<span class='comment'>// Retrieve data using saved row values.</span>
+<span class='modifier'>internal</span> <span class='commonType'>void</span> RetrieveWithRowValues(<span class="userType">LJCDataGrid</span> ljcGrid
+  , <span class='commonType'>string</span> connectionString, <span class='commonType'>string</span> providerName)
+{
+  <span class='comment'>// Create the SQLManager.</span>
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, <span class='text'>"Province"</span>, connectionString
+    , providerName);
+
+  <span class='comment'>// Load the data and save the "ID" value in each row.</span>
+  <span class='commonType'>var</span> dataTable = sqlManager.GetDataTable();
+  <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+  {
+     <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
+    {
+      <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
+      ljcGridRow.LJCSetInt32(<span class='text'>"ID"</span>, (int)dataRow[<span class='text'>"ID"]</span>);
+      <span class="userType">TableData</span>.RowSetValues(ljcGridRow, dataRow);
+    }
+  }
+
+  <span class='comment'>// Retrieve the data with the saved row values.</span>
+  <span class='commonType'>var</span> ljcRow = ljcGrid.CurrentRow <span class='keyWord'>as</span> LJCGridRow;
+  <span class='commonType'>var</span> id = ljcRow.LJCGetInt32(<span class='text'>"ID"</span>);
+  <span class='commonType'>var</span> keyColumns = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+  {
+    { <span class='text'>"ID"</span> , id }
+  };
+  dataTable = sqlManager.GetDataTable(keyColumns);
+
+  <span class='comment'>// Create the Data Object.</span>
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
+  <span class='commonType'>var</span> province = converter.CreateDataFromTable(dataTable);
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / RetrieveWithSavedValues
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>

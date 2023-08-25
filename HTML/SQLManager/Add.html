@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Retrieve.html -->
+<html lang="en">
+<head>
+  <title>Add Data Record</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / AddRecorrd
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>How to Add a Data Record</div>
+    </div>
+    <div class='Text'>
+  <pre class="code">
+<span class='comment'>// Add a data record.</span>
+<span class='modifier'>internal</span> Province Add(Province provider, <span class='commonType'>string</span> connectionString
+  , <span class='commonType'>string</span> providerName)
+{
+  Province retValue;
+
+  <span class='comment'>// Create the SQLManager.</span>
+  <span class='commonType'>var</span> sqlManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(null, "Province", connectionString
+    , providerName);
+
+  <span class='comment'>// Create the list of DB Assigned and Lookup column names.</span>
+  sqlManager.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+  {
+    "ID"
+  };
+  sqlManager.SetLookupColumns(new <span class='commonType'>string</span>[]
+  {
+    "Name"
+  });
+
+  provider.RegionID = 1;
+  <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+  {
+    { "Name" },
+    { "Description" },
+    { "Abbreviation" }
+  };
+
+  <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
+  DataTable dataTable = sqlManager.Add(provider, propertyNames);
+
+  <span class='comment'>// Create the Data Object with added DB Assigned values.</span>
+  <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+  retValue = converter.CreateDataFromTable(dataTable);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / AddRecord
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
