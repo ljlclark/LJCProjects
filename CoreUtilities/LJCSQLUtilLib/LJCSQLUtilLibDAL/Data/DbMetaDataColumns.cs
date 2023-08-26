@@ -15,10 +15,9 @@ namespace LJCSQLUtilLibDAL
 		public DbMetaDataColumns Clone()
 		{
 			DbMetaDataColumns retValue = new DbMetaDataColumns();
-
-			foreach (DbMetaDataColumn mdColumn in this)
+			foreach (DbMetaDataColumn item in this)
 			{
-				retValue.Add(mdColumn.Clone());
+				retValue.Add(item.Clone());
 			}
 			return retValue;
 		}

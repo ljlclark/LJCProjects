@@ -105,7 +105,11 @@ namespace LJCDocLibDAL
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DocMethodGroups Clone()
     {
-      var retValue = MemberwiseClone() as DocMethodGroups;
+      var retValue = new DocMethodGroups();
+      foreach (DocMethodGroup item in this)
+      {
+        retValue.Add(item.Clone());
+      }
       return retValue;
     }
 

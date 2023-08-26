@@ -74,9 +74,13 @@ namespace LJCDBMessage
 
     // Clones the structure of the object.
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
-    public DbResult Clone()
+    public DbRows Clone()
     {
-      DbResult retValue = MemberwiseClone() as DbResult;
+      var retValue = new DbRows();
+      foreach (DbRow dbRow in this)
+      {
+        retValue.Add(dbRow.Clone());
+      }
       return retValue;
     }
 

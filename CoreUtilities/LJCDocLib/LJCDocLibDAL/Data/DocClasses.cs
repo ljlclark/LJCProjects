@@ -97,7 +97,11 @@ namespace LJCDocLibDAL
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DocClasses Clone()
     {
-      var retValue = MemberwiseClone() as DocClasses;
+      var retValue = new DocClasses();
+      foreach (DocClass item in this)
+      {
+        retValue.Add(item.Clone());
+      }
       return retValue;
     }
 

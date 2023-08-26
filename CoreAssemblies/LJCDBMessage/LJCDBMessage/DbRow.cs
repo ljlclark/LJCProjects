@@ -47,6 +47,14 @@ namespace LJCDBMessage
     }
     #endregion
 
+    // Creates and returns a clone of the object.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    public DbRow Clone()
+    {
+      DbRow retValue = MemberwiseClone() as DbRow;
+      return retValue;
+    }
+
     #region Properties
 
     // The row value for the specified value column index.

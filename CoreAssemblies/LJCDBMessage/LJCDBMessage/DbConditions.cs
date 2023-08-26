@@ -52,7 +52,11 @@ namespace LJCDBMessage
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public DbConditions Clone()
     {
-      var retValue = MemberwiseClone() as DbConditions;
+      var retValue = new DbConditions();
+      foreach (DbCondition dbCondition in this)
+      {
+        retValue.Add(dbCondition.Clone());
+      }
       return retValue;
     }
 
