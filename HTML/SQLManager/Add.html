@@ -32,7 +32,7 @@
       </p>
   <pre class="code">
 <span class='comment'>// Add a data record.</span>
-<span class='modifier'>internal</span> Province Add(Province provider, <span class='commonType'>string</span> connectionString
+<span class='modifier'>internal</span> Province Add(Province province, <span class='commonType'>string</span> connectionString
   , <span class='commonType'>string</span> providerName)
 {
   Province retValue;
@@ -51,7 +51,7 @@
     <span class='text'>"Name"</span>
   });
 
-  provider.RegionID = 1;
+  province.RegionID = 1;
   <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
     { <span class='text'>"Name"</span> },
@@ -60,7 +60,7 @@
   };
 
   <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
-  DataTable dataTable = sqlManager.Add(provider, propertyNames);
+  DataTable dataTable = sqlManager.Add(province, propertyNames);
 
   <span class='comment'>// Create the Data Object with added DB Assigned values.</span>
   <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
