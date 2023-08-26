@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTemplates", "DataTempla
 		LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
 		LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs = LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs
 		LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs = LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs
+		LJCGenTableCode\bin\Debug\Templates\SQLManagerTemplate.cs = LJCGenTableCode\bin\Debug\Templates\SQLManagerTemplate.cs
 	EndProjectSection
 EndProject
 Global

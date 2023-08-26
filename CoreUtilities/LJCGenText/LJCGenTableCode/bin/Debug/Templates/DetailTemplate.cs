@@ -144,12 +144,12 @@ namespace _Namespace_
       {
         retValue = new DocMethod();
       }
-      retValue.ID = LJCID,
+      retValue.ID = LJCID;
       //retValue.ParentID = LJCParentID;
       //retValue.ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
       //ForeignKeyID = mForeignKeyID,
-      retValue.Name = FormCommon.SetString(NameText.Text),
-      retValue.Description = FormCommon.SetString(DescriptionText.Text),
+      retValue.Name = FormCommon.SetString(NameText.Text);
+      retValue.Description = FormCommon.SetString(DescriptionText.Text);
 
       // Get control join display values.
       //TypeDescription = TypeCombo.Text.Trim()

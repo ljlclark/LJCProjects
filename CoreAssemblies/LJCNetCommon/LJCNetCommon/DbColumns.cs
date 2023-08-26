@@ -212,7 +212,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public DbColumns Clone()
     {
-      var retValue = MemberwiseClone() as DbColumns;
+      var retValue = new DbColumns();
+      foreach (DbColumn dbColumn in this)
+      {
+        retValue.Add(dbColumn.Clone());
+      }
       return retValue;
     }
 

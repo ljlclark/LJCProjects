@@ -9,13 +9,14 @@ using System.Data;
 
 namespace LJCGridDataTests
 {
-  public class ProvinceManager
+  /// <summary>Provides Province SQL data methods.</summary>
+  public class ProvinceSQLManager
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public ProvinceManager(string dataConfigName, string tableName
+    public ProvinceSQLManager(string dataConfigName, string tableName
       , string connectionString = null, string providerName = null)
     {
       Reset(dataConfigName, tableName, connectionString, providerName);
@@ -38,6 +39,16 @@ namespace LJCGridDataTests
       {
         BaseDefinition = SQLManager.DataDefinition;
         DataDefinition = BaseDefinition.Clone();
+
+        // Create the list of DB Assigned and Lookup column names.
+        SQLManager.DbAssignedColumns = new List<string>()
+        {
+          "ID"
+        };
+        SQLManager.SetLookupColumns(new string[]
+        {
+        "Name"
+        });
       }
     }
     #endregion
@@ -46,12 +57,12 @@ namespace LJCGridDataTests
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public Province Add(Province dataObject, List<string> columnNames = null)
+    public Province Add(Province dataObject, List<string> propertyNames = null)
     {
       Province retValue = null;
 
       // The data record must not contain a value for DB Assigned columns.
-      DataTable dataTable = SQLManager.Add(dataObject, columnNames);
+      DataTable dataTable = SQLManager.Add(dataObject, propertyNames);
       AffectedCount = SQLManager.AffectedCount;
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
@@ -63,25 +74,23 @@ namespace LJCGridDataTests
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Delete(DbColumns keyRecord, DbFilters filters = null)
+    public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
-      SQLManager.Delete(keyRecord, filters);
+      SQLManager.Delete(keyColumns, filters);
       AffectedCount = SQLManager.AffectedCount;
       SQLStatement = SQLManager.SQLStatement;
     }
 
     // Loads a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public Provinces Load(DbColumns keyRecord
-      , List<string> columnNames = null, DbFilters filters = null
+    public Provinces Load(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
       Provinces retValue = null;
 
-      DataTable dataTable = SQLManager.GetDataTable(keyRecord, columnNames
-        , filters, joins);
-      AffectedCount = SQLManager.AffectedCount; //?
-      SQLStatement = SQLManager.SQLStatement;
+      DataTable dataTable = LoadDataTable(keyColumns, propertyNames, filters
+        , joins);
       if (dataTable != null)
       {
         retValue = CreateProvinces(dataTable);
@@ -89,15 +98,27 @@ namespace LJCGridDataTests
       return retValue;
     }
 
+    public DataTable LoadDataTable(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
+      , DbJoins joins = null)
+    {
+      DataTable retValue;
+
+      retValue = SQLManager.GetDataTable(keyColumns, propertyNames
+        , filters, joins);
+      SQLStatement = SQLManager.SQLStatement;
+      return retValue;
+    }
+
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public Province Retrieve(DbColumns keyRecord
+    public Province Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
       Province retValue = null;
 
-      DataTable dataTable = SQLManager.GetDataTable(keyRecord, propertyNames
+      DataTable dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
         , filters, joins);
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
@@ -109,10 +130,10 @@ namespace LJCGridDataTests
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Update(Province dataRecord, DbColumns keyRecord
-      , List<string> columnNames = null, DbFilters filters = null)
+    public void Update(Province dataObject, DbColumns keyColumns
+      , List<string> propertyNames = null, DbFilters filters = null)
     {
-      SQLManager.Update(dataRecord, keyRecord, columnNames, filters);
+      SQLManager.Update(dataObject, keyColumns, propertyNames, filters);
       AffectedCount = SQLManager.AffectedCount;
       SQLStatement = SQLManager.SQLStatement;
     }

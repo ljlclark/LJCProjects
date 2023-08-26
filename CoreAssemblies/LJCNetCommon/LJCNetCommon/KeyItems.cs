@@ -103,7 +103,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public KeyItems Clone()
     {
-      KeyItems retValue = MemberwiseClone() as KeyItems;
+      var retValue = new KeyItems();
+      foreach (KeyItem keyItem in this)
+      {
+        retValue.Add(keyItem.Clone());
+      }
       return retValue;
     }
 

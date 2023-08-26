@@ -96,7 +96,11 @@ namespace LJCDataDetailDAL
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public ControlTabItems Clone()
     {
-      var retValue = MemberwiseClone() as ControlTabItems;
+      var retValue = new ControlTabItems();
+      foreach (ControlTab controlTab in this)
+      {
+        retValue.Add(controlTab);
+      }
       return retValue;
     }
 

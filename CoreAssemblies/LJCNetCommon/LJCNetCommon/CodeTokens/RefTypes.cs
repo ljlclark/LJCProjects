@@ -101,7 +101,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public RefTypes Clone()
     {
-      RefTypes retValue = MemberwiseClone() as RefTypes;
+      var retValue = new RefTypes();
+      foreach (string refType in this)
+      {
+        retValue.Add(refType);
+      }
       return retValue;
     }
 

@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Runtime.InteropServices;
 
 namespace LJCGridDataTests
 {
@@ -23,26 +24,10 @@ namespace LJCGridDataTests
       mLJCGrid = ljcGrid;
     }
 
-    internal Province DataRetrieve(ProvinceManager manager)
-    {
-      Province retValue;
-
-      // Select the records and properties to be updated.
-      var keyColumns = manager.GetIDKey(1);
-      var propertyNames = new List<string>()
-      {
-        { "Name" },
-        { "Description" },
-        { "Abbreviation" }
-      };
-      retValue = manager.Retrieve(keyColumns, propertyNames);
-      return retValue;
-    }
-
     #region DataAccess
 
     // Loading Grid rows from a DataTable.
-    internal void SQLDataRetrieve(DataAccess dataAccess, LJCDataGrid ljcGrid)
+    internal void DataAccessRetrieve(DataAccess dataAccess, LJCDataGrid ljcGrid)
     {
       // Configure GridColumns.
       DataTable dataTable;
@@ -181,7 +166,7 @@ namespace LJCGridDataTests
       // Create the SQLManager.
       var sqlManager = new SQLManager(null, "Province", connectionString
         , providerName);
-      
+
       // Identify the records and properties to be selected.
       var keyColumns = new DbColumns()
       {
@@ -289,6 +274,87 @@ namespace LJCGridDataTests
 
       // Perform the Update
       sqlManager.Update(province, keyColumns, propertyNames);
+    }
+    #endregion
+
+    #region ProvinceSQLManager
+
+    // Add a data record.
+    internal void ManagerAdd(string connectionString, string providerName)
+    {
+      var manager = new ProvinceSQLManager(null, null, connectionString
+        , providerName);
+
+      // Create the Data Object.
+      var province = new Province()
+      {
+        RegionID = 1,
+        Name = "ProvinceName",
+        Description = "A Sample Province",
+        Abbreviation = "PN"
+      };
+      var resultProvince = manager.Add(province);
+      var addedID = resultProvince.ID;
+    }
+
+    // Populate a grid with data.
+    internal void ManagerLoadDataTable(LJCDataGrid ljcGrid, string connectionString
+      , string providerName)
+    {
+      var manager = new ProvinceSQLManager(null, null, connectionString
+        , providerName);
+
+      // Create grid columns.
+      var gridColumns = manager.BaseDefinition.Clone();
+      gridColumns.LJCRemoveColumn("ID");
+      ljcGrid.LJCAddColumns(gridColumns);
+
+      // Add data to the grid.
+      var dataTable = manager.LoadDataTable();
+      if (NetCommon.HasData(dataTable))
+      {
+        // Create and load the grid rows individually.
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          var ljcGridRow = ljcGrid.LJCRowAdd();
+          TableData.RowSetValues(ljcGridRow, dataRow);
+        }
+      }
+    }
+
+    // Retrieve a Data Object.
+    internal Province ManagerRetrieve(string connectionString, string providerName)
+    {
+      Province retValue;
+
+      var manager = new ProvinceSQLManager(null, null, connectionString
+        , providerName);
+
+      // Identify the records to be selected.
+      var keyColumns = manager.GetIDKey(1);
+      retValue = manager.Retrieve(keyColumns);
+      return retValue;
+    }
+
+    // Update a Data Object.
+    internal void ManagerUpdate(Province province, string connectionString
+      , string providerName)
+    {
+      var manager = new ProvinceSQLManager(null, null, connectionString
+        , providerName);
+
+      province.Description = "Updated Description";
+
+      // Identify the records and properties to be selected.
+      var keyColumns = new DbColumns()
+      {
+        { "ID" , 1 }
+      };
+      var propertyNames = new List<string>()
+      {
+        { "Description" },
+      };
+      manager.Update(province, keyColumns, propertyNames);
     }
     #endregion
 

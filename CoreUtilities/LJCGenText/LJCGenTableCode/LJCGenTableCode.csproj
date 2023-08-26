@@ -81,5 +81,6 @@
     </Content>
     <Content Include="Doc\ProgramGenTableCode.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

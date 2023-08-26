@@ -73,7 +73,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public DbValues Clone()
     {
-      var retValue = MemberwiseClone() as DbValues;
+      var retValue = new DbValues();
+      foreach (DbValue dbValue in this)
+      {
+        retValue.Add(dbValue.Clone());
+      }
       return retValue;
     }
 

@@ -93,7 +93,11 @@ namespace LJCDataDetailDAL
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public ControlDetails Clone()
     {
-      var retValue = MemberwiseClone() as ControlDetails;
+      var retValue = new ControlDetails();
+      foreach (ControlDetail controlDetail in this)
+      {
+        retValue.Add(controlDetail);
+      }
       return retValue;
     }
 

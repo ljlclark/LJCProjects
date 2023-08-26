@@ -102,7 +102,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public Modifiers Clone()
     {
-      Modifiers retValue = MemberwiseClone() as Modifiers;
+      var retValue = new Modifiers();
+      foreach (string modifier in this)
+      {
+        retValue.Add(modifier);
+      }
       return retValue;
     }
 

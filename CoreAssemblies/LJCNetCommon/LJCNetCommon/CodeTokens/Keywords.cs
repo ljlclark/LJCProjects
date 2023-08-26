@@ -109,7 +109,11 @@ namespace LJCNetCommon
     /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
     public Keywords Clone()
     {
-      Keywords retValue = MemberwiseClone() as Keywords;
+      var retValue = new Keywords();
+      foreach (string keyword in this)
+      {
+        retValue.Add(keyword);
+      }
       return retValue;
     }
 

@@ -35,7 +35,7 @@ namespace LJCGridDataTests
           // DataAccess Methods
           var dataAccess = GetDataAccess(out string connectionString
             , out string providerName);
-          sqlTests.SQLDataRetrieve(dataAccess, mLJCGrid);
+          sqlTests.DataAccessRetrieve(dataAccess, mLJCGrid);
           var ljcGridRow = mLJCGrid.CurrentRow as LJCGridRow;
           sqlTests.GetRowDataObject(dataAccess, ljcGridRow);
 
@@ -47,9 +47,12 @@ namespace LJCGridDataTests
           sqlTests.UpdateWithFilters(province, connectionString, providerName);
           sqlTests.Add(province, connectionString, providerName);
 
-          var provinceManager = new ProvinceManager(null, null
-            , connectionString, providerName);
-          province = sqlTests.DataRetrieve(provinceManager);
+          // ProvinceSQLManager
+          sqlTests.ManagerAdd(connectionString, providerName);
+          sqlTests.ManagerLoadDataTable(mLJCGrid, connectionString
+            , providerName);
+          province = sqlTests.ManagerRetrieve(connectionString , providerName);
+          sqlTests.ManagerUpdate(province, connectionString, providerName);
           break;
       }
     }

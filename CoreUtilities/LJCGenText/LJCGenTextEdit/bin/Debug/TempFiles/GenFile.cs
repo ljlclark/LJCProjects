@@ -7,24 +7,18 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 
-// #SectionBegin Class
-// #Value _ClassName_
-// #Value _CollectionName_
-// #Value _JoinTable_
-// #Value _Namespace_
-// #Value _TableNames_
-namespace _Namespace_
+namespace LJCAppName
 {
-  /// <summary>Provides _TableName_ SQL data methods.</summary>
-  public class _ClassName_SQLManager
+  /// <summary>Provides Province SQL data methods.</summary>
+  public class ProvinceSQLManager
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _ClassName_SQLManager(string dataConfigName)
+    public ProvinceSQLManager(string dataConfigName)
     {
-      SQLManager = new SQLManager(dataConfigName, "_ClassName_");
+      SQLManager = new SQLManager(dataConfigName, "Province");
       if (SQLManager.DataDefinition != null)
       {
         var baseDataDefinition = SQLManager.DataDefinition;
@@ -32,20 +26,20 @@ namespace _Namespace_
 
         // Map table names with property names or captions
         // that differ from the column names.
-        baseDataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
-        dataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
+        baseDataDefinition.MapNames(Province.ColumnID, Province.PropertyID);
+        dataDefinition.MapNames(Province.ColumnID, Province.PropertyID);
 
         // Create the list of DB Assigned and Lookup column names.
         SQLManager.DbAssignedColumns = new List<string>()
         {
-          _ClassName_.ColumnID
+          Province.ColumnID
         };
         SQLManager.SetLookupColumns(new string[]
         {
-          _ClassName_.ColumnName
+          Province.ColumnName
         });
 
-        ResultConverter = new ResultConverter<_ClassName_, _CollectionName_>();
+        ResultConverter = new ResultConverter<Province, Provinces>();
       }
     }
     #endregion
@@ -58,7 +52,7 @@ namespace _Namespace_
     {
       var retValue = new DbColumns()
       {
-        { _ClassName_.ColumnID, id }
+        { Province.ColumnID, id }
       };
       return retValue;
     }
@@ -72,7 +66,7 @@ namespace _Namespace_
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { _ClassName_.ColumnName, (object)name }
+        { Province.ColumnName, (object)name }
       };
       return retValue;
     }
@@ -82,9 +76,9 @@ namespace _Namespace_
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public _ClassName_ Add(_ClassName_ dataObject, List<string> propertyNames = null)
+    public Province Add(Province dataObject, List<string> propertyNames = null)
     {
-      _ClassName_ retValue = null;
+      Province retValue = null;
 
       // The data record must not contain a value for DB Assigned columns.
       DataTable dataTable = SQLManager.Add(dataObject, propertyNames);
@@ -92,7 +86,7 @@ namespace _Namespace_
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
-        retValue = Create_ClassName_(dataTable);
+        retValue = CreateProvince(dataTable);
       }
       return retValue;
     }
@@ -108,43 +102,43 @@ namespace _Namespace_
 
     // Loads a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _CollectionName_ Load(DbColumns keyColumns
+    public Provinces Load(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      _CollectionName_ retValue = null;
+      Provinces retValue = null;
 
       DataTable dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
         , filters, joins);
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
-        retValue = Create_CollectionName_(dataTable);
+        retValue = CreateProvinces(dataTable);
       }
       return retValue;
     }
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _ClassName_ Retrieve(DbColumns keyColumns
+    public Province Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      _ClassName_ retValue = null;
+      Province retValue = null;
 
       DataTable dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
         , filters, joins);
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
-        retValue = Create_ClassName_(dataTable);
+        retValue = CreateProvince(dataTable);
       }
       return retValue;
     }
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Update(_ClassName_ dataObject, DbColumns keyColumns
+    public void Update(Province dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       SQLManager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -156,9 +150,9 @@ namespace _Namespace_
     #region DataManager and ObjectManager Related Create Data Methods
 
     // Creates the object from the first data row.
-    private _ClassName_ Create_ClassName_(DataTable dataTable)
+    private Province CreateProvince(DataTable dataTable)
     {
-      _ClassName_ retValue = null;
+      Province retValue = null;
 
       if (dataTable.Rows != null && dataTable.Rows.Count > 0)
       {
@@ -169,9 +163,9 @@ namespace _Namespace_
     }
 
     // Creates the collection from a DataTable.
-    private _CollectionName_ Create_CollectionName_(DataTable dataTable)
+    private Provinces CreateProvinces(DataTable dataTable)
     {
-      _CollectionName_ retValue = null;
+      Provinces retValue = null;
 
       if (dataTable.Rows != null && dataTable.Rows.Count > 0)
       {
@@ -188,7 +182,7 @@ namespace _Namespace_
     public int AffectedCount { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<_ClassName_, _CollectionName_> ResultConverter { get; set; }
+    public ResultConverter<Province, Provinces> ResultConverter { get; set; }
 
     /// <summary>Gets the SQLManager reference.</summary>
     public SQLManager SQLManager { get; private set; }
@@ -198,4 +192,3 @@ namespace _Namespace_
     #endregion
   }
 }
-// #SectionEnd Class
