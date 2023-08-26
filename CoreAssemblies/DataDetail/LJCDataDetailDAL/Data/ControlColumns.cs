@@ -96,7 +96,7 @@ namespace LJCDataDetailDAL
       var retValue = new ControlColumns();
       foreach (ControlColumn controlColumn in this)
       {
-        retValue.Add(controlColumn);
+        retValue.Add(controlColumn.Clone());
       }
       return retValue;
     }

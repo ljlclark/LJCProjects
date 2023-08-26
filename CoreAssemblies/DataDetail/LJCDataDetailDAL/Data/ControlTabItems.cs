@@ -99,7 +99,7 @@ namespace LJCDataDetailDAL
       var retValue = new ControlTabItems();
       foreach (ControlTab controlTab in this)
       {
-        retValue.Add(controlTab);
+        retValue.Add(controlTab.Clone());
       }
       return retValue;
     }
