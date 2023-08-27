@@ -29,7 +29,12 @@
       <p>
         This Strong Typed Manager is specific to the Provider Data Object and
         the associated Provider Table. This makes it easier to use with less
-        code than the SQLManager alone.
+        application code than the SQLManager alone.
+      </p>
+      <p>
+        This class encapsulates the setup code for the Provider Data Object
+        and prevents it from having to be repeated everywhere it is used in
+        the application code.
       </p>
       <pre class="code">
 <span class='xmlComment'>/// &lt;summary&gt;Provides Province SQL data methods.&lt;/summary&gt;</span>
@@ -51,7 +56,7 @@
   {
     <span class='keyWord'>if</span> <span class='keyWord'>null</span>l == tableName)
     {
-      tableName = "Province";
+      tableName = <span class='text'>"Province"</span>;
     }
 
     SQLManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, tableName, connectionString
@@ -64,14 +69,14 @@
       <span class='comment'>// Create the list of DB Assigned and Lookup column names.</span>
       <span class='userType'>SQLManager</span>.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
       {
-        "ID"
+        <span class='text'>"ID"</span>
       };
       <span class='userType'>SQLManager</span>.SetLookupColumns(new <span class='commonType'>string</span>[]
       {
-        "Name"
+        <span class='text'>"Name"</span>
       });
 
-      ResultConverter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+      ResultConverter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
     }
   }
   #endregion
@@ -170,7 +175,7 @@
   {
     <span class='commonType'>var</span> retValue = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
     {
-      { "ID", id }
+      { <span class='text'>"ID"</span>, id }
     };
     <span class='keyWord'>return</span> retValue;
   }
