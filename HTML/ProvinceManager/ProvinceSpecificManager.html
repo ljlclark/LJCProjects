@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProvinceSpecificManager.html -->
+<html lang="en">
+<head>
+  <title>Province Specific Manager</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / ProvinceManager
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>Strong Typed Province Manager</div>
+    </div>
+    <div class='Text'>
+      <p>
+        This Strong Typed Manager is specific to the Provider Data Object and
+        the associated Provider Table. This makes it easier to use with less
+        code than the SQLManager alone.
+      </p>
+      <pre class="code">
+<span class='xmlComment'>/// &lt;summary&gt;Provides Province SQL data methods.&lt;/summary&gt;</span>
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>ProvinceSQLManager</span>
+{
+  #region Constructors
+
+  <span class='comment'>// Initializes an object instance.</span>
+  <span class='xmlComment'>/// &lt;include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> ProvinceSQLManager(string dataConfigName, <span class='commonType'>string</span> tableName
+  , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
+  {
+    Reset(dataConfigName, tableName, connectionString, providerName);
+  }
+
+  <span class='comment'>// Resets the data access configuration.</span>
+  <span class='modifier'>public</span> <span class='commonType'>void</span> Reset(string dataConfigName, <span class='commonType'>string</span> tableName
+  , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
+  {
+    <span class='keyWord'>if</span> <span class='keyWord'>null</span>l == tableName)
+    {
+      tableName = "Province";
+    }
+
+    SQLManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, tableName, connectionString
+    , providerName);
+    <span class='keyWord'>if</span> <span class='userType'>SQLManager</span>r.DataDefinition != null)
+    {
+      BaseDefinition = <span class='userType'>SQLManager</span>.DataDefinition;
+      DataDefinition = BaseDefinition.Clone();
+
+      <span class='comment'>// Create the list of DB Assigned and Lookup column names.</span>
+      <span class='userType'>SQLManager</span>.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+      {
+        "ID"
+      };
+      <span class='userType'>SQLManager</span>.SetLookupColumns(new <span class='commonType'>string</span>[]
+      {
+        "Name"
+      });
+
+      ResultConverter = <span class='keyWord'>new</span> ResultConverter<Province, Provinces>();
+    }
+  }
+  #endregion
+
+  #region Public Data Methods
+
+  <span class='comment'>// Adds a record to the database.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> Province Add(Province dataObject, <span class='libType'>List</span><string> propertyNames = null)
+  {
+    Province retValue = <span class='keyWord'>null</span>;
+
+    <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
+    DataTable dataTable = <span class='userType'>SQLManager</span>.Add(dataObject, propertyNames);
+    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
+    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    <span class='keyWord'>if</span> (dataTable != null)
+    {
+      retValue = CreateProvince(dataTable);
+    }
+    <span class='keyWord'>return</span> retValue;
+  }
+
+  <span class='comment'>// Deletes the records with the specified key values.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Delete/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>void</span> Delete(DbColumns keyColumns, DbFilters filters = null)
+  {
+    <span class='userType'>SQLManager</span>.Delete(keyColumns, filters);
+    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
+    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+  }
+
+  <span class='comment'>// Loads a collection of data records.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> Provinces Load(DbColumns keyColumns = <span class='keyWord'>null</span>
+  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, DbFilters filters = <span class='keyWord'>null</span>
+  , DbJoins joins = null)
+  {
+    Provinces retValue = <span class='keyWord'>null</span>;
+
+    DataTable dataTable = LoadDataTable(keyColumns, propertyNames, filters
+    , joins);
+    <span class='keyWord'>if</span> (dataTable != null)
+    {
+      retValue = CreateProvinces(dataTable);
+    }
+    <span class='keyWord'>return</span> retValue;
+  }
+
+  <span class='modifier'>public</span> DataTable LoadDataTable(DbColumns keyColumns = <span class='keyWord'>null</span>
+  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, DbFilters filters = <span class='keyWord'>null</span>
+  , DbJoins joins = null)
+  {
+    DataTable retValue;
+
+    retValue = <span class='userType'>SQLManager</span>.GetDataTable(keyColumns, propertyNames
+    , filters, joins);
+    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    <span class='keyWord'>return</span> retValue;
+  }
+
+  <span class='comment'>// Retrieves a record from the database.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> Province Retrieve(DbColumns keyColumns
+  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, DbFilters filters = <span class='keyWord'>null</span>
+  , DbJoins joins = null)
+  {
+    Province retValue = <span class='keyWord'>null</span>;
+
+    DataTable dataTable = <span class='userType'>SQLManager</span>.GetDataTable(keyColumns, propertyNames
+    , filters, joins);
+    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    <span class='keyWord'>if</span> (dataTable != null)
+    {
+      retValue = CreateProvince(dataTable);
+    }
+    <span class='keyWord'>return</span> retValue;
+  }
+
+  <span class='comment'>// Updates the record.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>void</span> Update(Province dataObject, DbColumns keyColumns
+  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, DbFilters filters = null)
+  {
+    <span class='userType'>SQLManager</span>.Update(dataObject, keyColumns, propertyNames, filters);
+    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
+    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+  }
+  #endregion
+
+  #region GetKey Methods
+
+  <span class='comment'>// Gets the ID key record.</span>
+  <span class='xmlComment'>/// &lt;include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml' /&gt;</span>
+  <span class='modifier'>public</span> DbColumns GetIDKey(int id)
+  {
+    <span class='commonType'>var</span> retValue = <span class='keyWord'>new</span> <span class='userType'>DbColumns</span>()
+    {
+      { "ID", id }
+    };
+    <span class='keyWord'>return</span> retValue;
+  }
+  #endregion
+
+  #region Private Methods
+
+  <span class='comment'>// Creates the object from the first data row.</span>
+  <span class='modifier'>private</span> Province CreateProvince(DataTable dataTable)
+  {
+    Province retValue = <span class='keyWord'>null</span>;
+
+    <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+    {
+      retValue = ResultConverter.CreateDataFromTable(dataTable
+      , dataTable.Rows[0], <span class='userType'>SQLManager</span>.DataDefinition);
+    }
+    <span class='keyWord'>return</span> retValue;
+  }
+
+  <span class='comment'>// Creates the collection from a DataTable.</span>
+  <span class='modifier'>private</span> Provinces CreateProvinces(DataTable dataTable)
+  {
+    Provinces retValue = <span class='keyWord'>null</span>;
+
+    <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+    {
+      retValue = ResultConverter.CreateCollectionFromTable(dataTable
+      , <span class='userType'>SQLManager</span>.DataDefinition);
+    }
+    <span class='keyWord'>return</span> retValue;
+  }
+  #endregion
+
+  #region Properties
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the non-select affected record count.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>int</span> AffectedCount { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Base Columns definition.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='userType'>DbColumns</span> BaseDefinition { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Data Columns definition.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='userType'>DbColumns</span> DataDefinition { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the ResultConverter reference.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> ResultConverter<Province, Provinces> ResultConverter { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets the SQLManager reference.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='userType'>SQLManager</span> <span class='userType'>SQLManager</span> { <span class='keyWord'>get</span>; private <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the last SQL statement.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>string</span> SQLStatement { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+  #endregion
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / ProvinceManager
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
