@@ -40,19 +40,19 @@
 
   <span class='comment'>// Create grid columns.</span>
   <span class='commonType'>var</span> gridColumns = manager.BaseDefinition.Clone();
-  gridColumns.LJCRemoveColumn("ID");
+  gridColumns.LJCRemoveColumn(<span class='text'>"ID"</span>);
   ljcGrid.LJCAddColumns(gridColumns);
 
   <span class='comment'>// Add data to the grid.</span>
   <span class='commonType'>var</span> propertyNames = gridColumns.LJCGetPropertyNames();
   <span class='commonType'>var</span> dataTable = manager.LoadDataTable(propertyNames: propertyNames);
-  <span class='keyWord'>if</span> (NetCommon.HasData(dataTable))
+  <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
   {
     <span class='comment'>// Create and load the grid rows individually.</span>
-    <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
+    <span class='keyWord'>foreach</span> (<span class="userType">DataRow</span> dataRow <span class='keyWord'>in</span> dataTable.Rows)
     {
       <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
-      TableData.RowSetValues(ljcGridRow, dataRow);
+      <span class="userType">TableData</span>.RowSetValues(ljcGridRow, dataRow);
     }
   }
 }</pre>
