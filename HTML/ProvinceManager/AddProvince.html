@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AddProvince.html -->
+<html lang="en">
+<head>
+  <title>Add Province</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / AddProvince
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>Add a Province using ProvinceSQLManager</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The ProvinceSQLManager class is a strongly typed manager class
+        specifically for use with the Province table and Province Data Object.
+      </p>
+      <pre class="code">
+<span class='comment'>// Add a data record.</span>
+<span class='modifier'>internal</span> <span class='commonType'>void</span> AddProvince(string connectionString, <span class='commonType'>string</span> providerName)
+{
+  <span class='commonType'>var</span> manager = <span class='keyWord'>new</span> <span class='userType'>ProvinceSQLManager</span>(null, null, connectionString
+  , providerName);
+
+  <span class='comment'>// Create the Data Object.</span>
+  <span class='commonType'>var</span> province = <span class='keyWord'>new</span> <span class='userType'>Province</span>()
+  {
+    RegionID = 1,
+    Name = "ProvinceName",
+    Description = "A Sample Province",
+    Abbreviation = "PN"
+  };
+  <span class='commonType'>var</span> resultProvince = manager.Add(province);
+  <span class='commonType'>var</span> addedID = resultProvince.ID;
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / AddProvince
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>

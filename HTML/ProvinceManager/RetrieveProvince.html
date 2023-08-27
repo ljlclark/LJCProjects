@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- RetrieveProvince.html -->
+<html lang="en">
+<head>
+  <title>Retrieve Province</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / RetrieveProvince
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>Retrieve a Province using ProvinceSQLManager</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The ProvinceSQLManager class is a strongly typed manager class
+        specifically for use with the Province table and Province Data Object.
+      </p>
+      <pre>
+<span class='comment'>// Retrieve a Data Object.</span>
+<span class='modifier'>internal</span> Province RetrieveProvince(string connectionString, <span class='commonType'>string</span> providerName)
+{
+  Province retValue;
+
+  <span class='commonType'>var</span> manager = <span class='keyWord'>new</span> <span class='userType'>ProvinceSQLManager</span>(null, null, connectionString
+  , providerName);
+
+  <span class='comment'>// Identify the records to be selected.</span>
+  <span class='commonType'>var</span> keyColumns = manager.GetIDKey(1);
+  retValue = manager.Retrieve(keyColumns);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / RetrieveProvince
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
