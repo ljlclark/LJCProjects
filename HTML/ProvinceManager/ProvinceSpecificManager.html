@@ -44,7 +44,7 @@
 
   <span class='comment'>// Initializes an object instance.</span>
   <span class='xmlComment'>/// &lt;include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
-  <span class='modifier'>public</span> ProvinceSQLManager(string dataConfigName, <span class='commonType'>string</span> tableName
+  <span class='modifier'>public</span> ProvinceSQLManager(<span class="commonType">string</span> dataConfigName, <span class='commonType'>string</span> tableName
   , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
   {
     Reset(dataConfigName, tableName, connectionString, providerName);
@@ -61,17 +61,17 @@
 
     SQLManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, tableName, connectionString
     , providerName);
-    <span class='keyWord'>if</span> <span class='userType'>SQLManager</span>.DataDefinition != null)
+    <span class='keyWord'>if</span> (SQLManager.DataDefinition != null)
     {
-      BaseDefinition = <span class='userType'>SQLManager</span>.DataDefinition;
+      BaseDefinition = SQLManager.DataDefinition;
       DataDefinition = BaseDefinition.Clone();
 
       <span class='comment'>// Create the list of DB Assigned and Lookup column names.</span>
-      <span class='userType'>SQLManager</span>.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+      SQLManager.DbAssignedColumns = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
       {
         <span class='text'>"ID"</span>
       };
-      <span class='userType'>SQLManager</span>.SetLookupColumns(new <span class='commonType'>string</span>[]
+      SQLManager.SetLookupColumns(new <span class='commonType'>string</span>[]
       {
         <span class='text'>"Name"</span>
       });
@@ -90,9 +90,9 @@
     Province retValue = <span class='keyWord'>null</span>;
 
     <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
-    <span class="userType">DataTable</span> dataTable = <span class='userType'>SQLManager</span>.Add(dataObject, propertyNames);
-    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
-    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    <span class="userType">DataTable</span> dataTable = SQLManager.Add(dataObject, propertyNames);
+    AffectedCount = SQLManager.AffectedCount;
+    SQLStatement = SQLManager.SQLStatement;
     <span class='keyWord'>if</span> (dataTable != null)
     {
       retValue = CreateProvince(dataTable);
@@ -104,9 +104,9 @@
   <span class='xmlComment'>/// &lt;include path='items/Delete/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
   <span class='modifier'>public</span> <span class='commonType'>void</span> Delete(<span class="userType">DbColumns</span> keyColumns, <span class="userType">DbFilters</span> filters = null)
   {
-    <span class='userType'>SQLManager</span>.Delete(keyColumns, filters);
-    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
-    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    SQLManager.Delete(keyColumns, filters);
+    AffectedCount = SQLManager.AffectedCount;
+    SQLStatement = SQLManager.SQLStatement;
   }
 
   <span class='comment'>// Loads a collection of data records.</span>
@@ -132,9 +132,9 @@
   {
     <span class="userType">DataTable</span> retValue;
 
-    retValue = <span class='userType'>SQLManager</span>.GetDataTable(keyColumns, propertyNames
+    retValue = SQLManager.GetDataTable(keyColumns, propertyNames
     , filters, joins);
-    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    SQLStatement = SQLManager.SQLStatement;
     <span class='keyWord'>return</span> retValue;
   }
 
@@ -146,9 +146,9 @@
   {
     <span class="userType">Province</span> retValue = <span class='keyWord'>null</span>;
 
-    <span class="userType">DataTable</span> dataTable = <span class='userType'>SQLManager</span>.GetDataTable(keyColumns, propertyNames
+    <span class="userType">DataTable</span> dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
     , filters, joins);
-    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    SQLStatement = SQLManager.SQLStatement;
     <span class='keyWord'>if</span> (dataTable != null)
     {
       retValue = CreateProvince(dataTable);
@@ -161,9 +161,9 @@
   <span class='modifier'>public</span> <span class='commonType'>void</span> Update(<span class="userType">Province</span> dataObject, <span class="userType">DbColumns</span> keyColumns
   , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = null)
   {
-    <span class='userType'>SQLManager</span>.Update(dataObject, keyColumns, propertyNames, filters);
-    AffectedCount = <span class='userType'>SQLManager</span>.AffectedCount;
-    SQLStatement = <span class='userType'>SQLManager</span>.SQLStatement;
+    SQLManager.Update(dataObject, keyColumns, propertyNames, filters);
+    AffectedCount = SQLManager.AffectedCount;
+    SQLStatement = SQLManager.SQLStatement;
   }
   #endregion
 
@@ -191,7 +191,7 @@
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       retValue = ResultConverter.CreateDataFromTable(dataTable
-      , dataTable.Rows[0], <span class='userType'>SQLManager</span>.DataDefinition);
+      , dataTable.Rows[0], SQLManager.DataDefinition);
     }
     <span class='keyWord'>return</span> retValue;
   }
@@ -204,7 +204,7 @@
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       retValue = ResultConverter.CreateCollectionFromTable(dataTable
-      , <span class='userType'>SQLManager</span>.DataDefinition);
+      , SQLManager.DataDefinition);
     }
     <span class='keyWord'>return</span> retValue;
   }
