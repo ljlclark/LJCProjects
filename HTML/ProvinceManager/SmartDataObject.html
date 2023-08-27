@@ -64,7 +64,7 @@
     <span class='keyWord'>get</span> { <span class='keyWord'>return</span> mID; }
     <span class='keyWord'>set</span>
     {
-      mID = <span class='userType'>ChangedNames</span>.Add("ID", mID, value);
+      mID = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"ID"</span>, mID, value);
     }
   }
   <span class='modifier'>private</span> <span class='commonType'>Int32</span> mID;
@@ -77,7 +77,7 @@
     <span class='keyWord'>get</span> { <span class='keyWord'>return</span> mRegionID; }
     <span class='keyWord'>set</span>
     {
-      mRegionID = <span class='userType'>ChangedNames</span>.Add("RegionID", mRegionID, value);
+      mRegionID = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"RegionID"</span>, mRegionID, value);
     }
   }
   <span class='modifier'>private</span> <span class='commonType'>Int32</span> mRegionID;
@@ -91,7 +91,7 @@
     <span class='keyWord'>set</span>
     {
       value = NetString.InitString(value);
-      mName = <span class='userType'>ChangedNames</span>.Add("Name", mName, value);
+      mName = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"Name"</span>, mName, value);
     }
   }
   <span class='modifier'>private</span> <span class='commonType'>String</span> mName;
@@ -104,7 +104,7 @@
     <span class='keyWord'>set</span>
     {
       value = NetString.InitString(value);
-      mDescription = <span class='userType'>ChangedNames</span>.Add("Description", mDescription, value);
+      mDescription = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"Description"</span>, mDescription, value);
     }
   }
   <span class='modifier'>private</span> <span class='commonType'>String</span> mDescription;
@@ -117,7 +117,7 @@
     <span class='keyWord'>set</span>
     {
       value = NetString.InitString(value);
-      mAbbreviation = <span class='userType'>ChangedNames</span>.Add("Abbreviation", mAbbreviation, value);
+      mAbbreviation = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"Abbreviation"</span>, mAbbreviation, value);
     }
   }
   <span class='modifier'>private</span> <span class='commonType'>String</span> mAbbreviation;
