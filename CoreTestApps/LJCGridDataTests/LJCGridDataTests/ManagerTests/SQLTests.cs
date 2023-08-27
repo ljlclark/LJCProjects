@@ -310,7 +310,8 @@ namespace LJCGridDataTests
       ljcGrid.LJCAddColumns(gridColumns);
 
       // Add data to the grid.
-      var dataTable = manager.LoadDataTable();
+      var propertyNames = gridColumns.LJCGetPropertyNames();
+      var dataTable = manager.LoadDataTable(propertyNames: propertyNames);
       if (NetCommon.HasData(dataTable))
       {
         // Create and load the grid rows individually.
@@ -350,11 +351,7 @@ namespace LJCGridDataTests
       {
         { "ID" , 1 }
       };
-      var propertyNames = new List<string>()
-      {
-        { "Description" },
-      };
-      manager.Update(province, keyColumns, propertyNames);
+      manager.Update(province, keyColumns);
     }
     #endregion
 
@@ -471,24 +468,24 @@ namespace LJCGridDataTests
     #endregion
   }
 
-  // Represents a Province
-  public class Province
-  {
-    /// <summary>Gets or sets the Primary key value.</summary>
-    public int ID { get; set; }
+  //// Represents a Province
+  //public class Province
+  //{
+  //  /// <summary>Gets or sets the Primary key value.</summary>
+  //  public int ID { get; set; }
 
-    /// <summary>Gets or sets the Region ID.</summary>
-    public int RegionID { get; set; }
+  //  /// <summary>Gets or sets the Region ID.</summary>
+  //  public int RegionID { get; set; }
 
-    /// <summary>Gets or sets the Name.</summary>
-    public string Name { get; set; }
+  //  /// <summary>Gets or sets the Name.</summary>
+  //  public string Name { get; set; }
 
-    /// <summary>Gets or sets the Description.</summary>
-    public string Description { get; set; }
+  //  /// <summary>Gets or sets the Description.</summary>
+  //  public string Description { get; set; }
 
-    /// <summary>Gets or sets the Abbreviation.</summary>
-    public string Abbreviation { get; set; }
-  }
+  //  /// <summary>Gets or sets the Abbreviation.</summary>
+  //  public string Abbreviation { get; set; }
+  //}
 
   // Represents a Collection of Province objects.
   public class Provinces : List<Province> { }

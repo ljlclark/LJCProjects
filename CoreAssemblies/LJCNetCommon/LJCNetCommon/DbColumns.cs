@@ -314,6 +314,22 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    /// <summary>Get the list of property names.</summary>
+    public List<string> LJCGetPropertyNames()
+    {
+      List<string> retValue = null;
+
+      if (LJCHasItems())
+      {
+        retValue = new List<string>();
+        foreach (DbColumn dbColumn in this)
+        {
+          retValue.Add(dbColumn.PropertyName);
+        }
+      }
+      return retValue;
+    }
+
     // Removes a DbColumn item.
     /// <include path='items/LJCRemoveColumn/*' file='Doc/DbColumns.xml'/>
     public void LJCRemoveColumn(string columnName)
