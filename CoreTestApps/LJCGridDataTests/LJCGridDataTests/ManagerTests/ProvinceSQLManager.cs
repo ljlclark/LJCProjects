@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProvinceManager.cs
+// ProvinceSQLManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -20,8 +20,6 @@ namespace LJCGridDataTests
       , string connectionString = null, string providerName = null)
     {
       Reset(dataConfigName, tableName, connectionString, providerName);
-
-      ResultConverter = new ResultConverter<Province, Provinces>();
     }
 
     // Resets the data access configuration.
@@ -47,8 +45,10 @@ namespace LJCGridDataTests
         };
         SQLManager.SetLookupColumns(new string[]
         {
-        "Name"
+          "Name"
         });
+
+        ResultConverter = new ResultConverter<Province, Provinces>();
       }
     }
     #endregion
@@ -143,7 +143,7 @@ namespace LJCGridDataTests
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(long id)
+    public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
       {
@@ -160,7 +160,7 @@ namespace LJCGridDataTests
     {
       Province retValue = null;
 
-      if (dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
         retValue = ResultConverter.CreateDataFromTable(dataTable
           , dataTable.Rows[0], SQLManager.DataDefinition);
@@ -173,7 +173,7 @@ namespace LJCGridDataTests
     {
       Provinces retValue = null;
 
-      if (dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
         retValue = ResultConverter.CreateCollectionFromTable(dataTable
           , SQLManager.DataDefinition);

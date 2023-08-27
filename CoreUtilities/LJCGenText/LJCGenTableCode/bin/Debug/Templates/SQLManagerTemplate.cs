@@ -22,13 +22,20 @@ namespace _Namespace_
 
     // Initializes an object instance.
     /// <include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _ClassName_SQLManager(string dataConfigName)
+    public _ClassName_SQLManager(string dataConfigName, string tableName
+      , string connectionString = null, string providerName = null)
     {
-      SQLManager = new SQLManager(dataConfigName, "_ClassName_");
+      if (null == tableName)
+      {
+        tableName = "Province";
+      }
+
+      SQLManager = new SQLManager(dataConfigName, tableName, connectionString
+        , providerName);
       if (SQLManager.DataDefinition != null)
       {
-        var baseDataDefinition = SQLManager.DataDefinition;
-        var dataDefinition = baseDataDefinition.Clone();
+        BaseDataDefinition = SQLManager.DataDefinition;
+        DataDefinition = baseDataDefinition.Clone();
 
         // Map table names with property names or captions
         // that differ from the column names.
@@ -50,35 +57,7 @@ namespace _Namespace_
     }
     #endregion
 
-    #region GetKey Methods
-
-    // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(long id)
-    {
-      var retValue = new DbColumns()
-      {
-        { _ClassName_.ColumnID, id }
-      };
-      return retValue;
-    }
-
-    // Gets the ID key record.
-    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetNameKey(string name)
-    {
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
-      // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
-      {
-        { _ClassName_.ColumnName, (object)name }
-      };
-      return retValue;
-    }
-    #endregion
-
-    #region DataManager and ObjectManager Related Public Data Methods
+    #region Public Data Methods
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
@@ -114,13 +93,24 @@ namespace _Namespace_
     {
       _CollectionName_ retValue = null;
 
-      DataTable dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
+      DataTable dataTable = LoadDataTable(keyColumns, propertyNames
         , filters, joins);
-      SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
         retValue = Create_CollectionName_(dataTable);
       }
+      return retValue;
+    }
+
+    public DataTable LoadDataTable(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
+      , DbJoins joins = null)
+    {
+      DataTable retValue;
+
+      retValue = SQLManager.GetDataTable(keyColumns, propertyNames
+        , filters, joins);
+      SQLStatement = SQLManager.SQLStatement;
       return retValue;
     }
 
@@ -153,17 +143,45 @@ namespace _Namespace_
     }
     #endregion
 
-    #region DataManager and ObjectManager Related Create Data Methods
+    #region GetKey Methods
+
+    // Gets the ID key record.
+    /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetIDKey(long id)
+    {
+      var retValue = new DbColumns()
+      {
+        { _ClassName_.ColumnID, id }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetNameKey(string name)
+    {
+      // Add(columnName, propertyName = null, renameAs = null
+      //   , datatypeName = "String", caption = null);
+      // Add(columnName, object value, dataTypeName = "String");
+      var retValue = new DbColumns()
+      {
+        { _ClassName_.ColumnName, (object)name }
+      };
+      return retValue;
+    }
+    #endregion
+
+    #region Private Methods
 
     // Creates the object from the first data row.
     private _ClassName_ Create_ClassName_(DataTable dataTable)
     {
       _ClassName_ retValue = null;
 
-      if (dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
-        retValue = ResultConverter.CreateDataFromTable(dataTable, dataTable.Rows[0]
-          , SQLManager.DataDefinition);
+        retValue = ResultConverter.CreateDataFromTable(dataTable
+          , dataTable.Rows[0], SQLManager.DataDefinition);
       }
       return retValue;
     }
@@ -173,7 +191,7 @@ namespace _Namespace_
     {
       _CollectionName_ retValue = null;
 
-      if (dataTable.Rows != null && dataTable.Rows.Count > 0)
+      if (NetCommon.HasData(dataTable))
       {
         retValue = ResultConverter.CreateCollectionFromTable(dataTable
           , SQLManager.DataDefinition);
@@ -186,6 +204,12 @@ namespace _Namespace_
 
     /// <summary>Gets or sets the non-select affected record count.</summary>
     public int AffectedCount { get; set; }
+
+    /// <summary>Gets or sets the Base Columns definition.</summary>
+    public DbColumns BaseDefinition { get; set; }
+
+    /// <summary>Gets or sets the Data Columns definition.</summary>
+    public DbColumns DataDefinition { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
     public ResultConverter<_ClassName_, _CollectionName_> ResultConverter { get; set; }
