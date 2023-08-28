@@ -69,19 +69,6 @@
   }
   <span class='modifier'>private</span> <span class='commonType'>Int32</span> mID;
 
-  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the RegionID value.&lt;/summary&gt;</span>
-  <span class='comment'>//[Required]</span>
-  <span class='comment'>//[Column("RegionID", TypeName="int")]</span>
-  <span class='modifier'>public</span> <span class='commonType'>Int32</span> RegionID
-  {
-    <span class='keyWord'>get</span> { <span class='keyWord'>return</span> mRegionID; }
-    <span class='keyWord'>set</span>
-    {
-      mRegionID = <span class='userType'>ChangedNames</span>.Add(<span class='text'>"RegionID"</span>, mRegionID, value);
-    }
-  }
-  <span class='modifier'>private</span> <span class='commonType'>Int32</span> mRegionID;
-
   <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Name value.&lt;/summary&gt;</span>
   <span class='comment'>//[Required]</span>
   <span class='comment'>//[Column("Name", TypeName="varchar(60)")]</span>

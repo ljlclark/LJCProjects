@@ -30,14 +30,14 @@
         The ProvinceSQLManager class is a strongly typed manager class
         specifically for use with the Province table and Province Data Object.
       </p>
-      <pre>
+      <pre class="code">
 <span class='comment'>// Retrieve a Data Object.</span>
 <span class='modifier'>internal</span> <span class="userType">Province</span> RetrieveProvince(string connectionString, <span class='commonType'>string</span> providerName)
 {
   Province retValue;
 
   <span class='commonType'>var</span> manager = <span class='keyWord'>new</span> <span class='userType'>ProvinceSQLManager</span>(null, null, connectionString
-  , providerName);
+    , providerName);
 
   <span class='comment'>// Identify the records to be selected.</span>
   <span class='commonType'>var</span> keyColumns = manager.GetIDKey(1);

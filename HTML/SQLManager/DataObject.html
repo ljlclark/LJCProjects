@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataObject.html -->
+<html lang="en">
+<head>
+  <title>Data Object</title>
+  <meta charset='utf-8' />
+  <meta name="description" content="How to Use LJCProjects">
+  <meta name="keywords" content="LJC, C#, Code, Tutorial">
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / DataObject
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>The Example Data Object</div>
+    </div>
+    <div class='Text'>
+      <pre class="code">
+<span class='comment'>// Represents a Collection of Provinces</span>
+<span class='modifier'>internal</span> <span class='refType'>class</span> <span class='userType'>Provinces</span> : <span class="userType">List</span>&lt;<span class="userType">Province</span>&gt; { }
+
+<span class='comment'>// Represents a Province</span>
+<span class='modifier'>internal</span> <span class='refType'>class</span> <span class='userType'>Province</span>
+{
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Primary key value.&lt;/summary&gt;></span>
+  <span class='modifier'>public</span> <span class='commonType'>int</span> ID { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Name.&lt;/summary&gt;></span>
+  <span class='modifier'>public</span> <span class='commonType'>string</span> Name { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Description.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>string</span> Description { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;Gets or sets the Abbreviation.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>string</span> Abbreviation { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+}</pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../Tutorials.html">HowTo</a>
+      / DataObject
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
