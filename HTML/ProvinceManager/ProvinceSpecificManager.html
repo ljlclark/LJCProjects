@@ -45,14 +45,14 @@
   <span class='comment'>// Initializes an object instance.</span>
   <span class='xmlComment'>/// &lt;include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
   <span class='modifier'>public</span> ProvinceSQLManager(<span class="commonType">string</span> dataConfigName, <span class='commonType'>string</span> tableName
-  , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
+    , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
   {
     Reset(dataConfigName, tableName, connectionString, providerName);
   }
 
   <span class='comment'>// Resets the data access configuration.</span>
   <span class='modifier'>public</span> <span class='commonType'>void</span> Reset(string dataConfigName, <span class='commonType'>string</span> tableName
-  , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
+    , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
   {
     <span class='keyWord'>if</span> <span class='keyWord'>null</span>l == tableName)
     {
@@ -60,7 +60,7 @@
     }
 
     SQLManager = <span class='keyWord'>new</span> <span class='userType'>SQLManager</span>(dataConfigName, tableName, connectionString
-    , providerName);
+      , providerName);
     <span class='keyWord'>if</span> (SQLManager.DataDefinition != null)
     {
       BaseDefinition = SQLManager.DataDefinition;
@@ -85,7 +85,7 @@
 
   <span class='comment'>// Adds a record to the database.</span>
   <span class='xmlComment'>/// &lt;include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
-  <span class='modifier'>public</span> <span class="userType">Province</span> Add(<span class="userType">Province</span> dataObject, <span class='libType'>List</span><string> propertyNames = null)
+  <span class='modifier'>public</span> <span class="userType">Province</span> Add(<span class="userType">Province</span> dataObject, <span class='libType'>List</span>&lt;string&gt; propertyNames = null)
   {
     Province retValue = <span class='keyWord'>null</span>;
 
@@ -112,8 +112,8 @@
   <span class='comment'>// Loads a collection of data records.</span>
   <span class='xmlComment'>/// &lt;include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
   <span class='modifier'>public</span> <span class="userType">Provinces</span> Load(<span class="userType">DbColumns</span> keyColumns = <span class='keyWord'>null</span>
-  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
-  , DbJoins joins = null)
+    , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
+    , DbJoins joins = null)
   {
     <span class="userType">Provinces</span> retValue = <span class='keyWord'>null</span>;
 
@@ -127,8 +127,8 @@
   }
 
   <span class='modifier'>public</span> DataTable LoadDataTable(<span class="userType">DbColumns</span> keyColumns = <span class='keyWord'>null</span>
-  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
-  , <span class="userType">DbJoins</span> joins = null)
+    , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
+    , <span class="userType">DbJoins</span> joins = null)
   {
     <span class="userType">DataTable</span> retValue;
 
@@ -141,8 +141,8 @@
   <span class='comment'>// Retrieves a record from the database.</span>
   <span class='xmlComment'>/// &lt;include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
   <span class='modifier'>public</span> Province Retrieve(<span class="userType">DbColumns</span> keyColumns
-  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
-  , <span class="userType">DbJoins</span> joins = null)
+    , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
+    , <span class="userType">DbJoins</span> joins = null)
   {
     <span class="userType">Province</span> retValue = <span class='keyWord'>null</span>;
 
@@ -191,7 +191,7 @@
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       retValue = ResultConverter.CreateDataFromTable(dataTable
-      , dataTable.Rows[0], SQLManager.DataDefinition);
+        , dataTable.Rows[0], DataDefinition);
     }
     <span class='keyWord'>return</span> retValue;
   }
@@ -204,7 +204,7 @@
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       retValue = ResultConverter.CreateCollectionFromTable(dataTable
-      , SQLManager.DataDefinition);
+        , DataDefinition);
     }
     <span class='keyWord'>return</span> retValue;
   }
