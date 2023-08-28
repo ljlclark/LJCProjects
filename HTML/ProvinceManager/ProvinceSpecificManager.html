@@ -43,7 +43,7 @@
   #region Constructors
 
   <span class='comment'>// Initializes an object instance.</span>
-  <span class='xmlComment'>/// &lt;include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='xmlComment'>/// &lt;include path='items/DbManagerC/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
   <span class='modifier'>public</span> ProvinceSQLManager(<span class="commonType">string</span> dataConfigName, <span class='commonType'>string</span> tableName
     , <span class='commonType'>string</span> connectionString = <span class='keyWord'>null</span>, <span class='commonType'>string</span> providerName = null)
   {
@@ -109,8 +109,8 @@
     SQLStatement = SQLManager.SQLStatement;
   }
 
-  <span class='comment'>// Loads a collection of data records.</span>
-  <span class='xmlComment'>/// &lt;include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='comment'>// Loads a collection of Data Objects.</span>
+  <span class='xmlComment'>/// &lt;include path='items/Load/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
   <span class='modifier'>public</span> <span class="userType">Provinces</span> Load(<span class="userType">DbColumns</span> keyColumns = <span class='keyWord'>null</span>
     , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
     , DbJoins joins = null)
@@ -126,6 +126,7 @@
     <span class='keyWord'>return</span> retValue;
   }
 
+  <span class='comment'>// Loads a DataTable of records.</span>  
   <span class='modifier'>public</span> DataTable LoadDataTable(<span class="userType">DbColumns</span> keyColumns = <span class='keyWord'>null</span>
     , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
     , <span class="userType">DbJoins</span> joins = null)
@@ -139,7 +140,7 @@
   }
 
   <span class='comment'>// Retrieves a record from the database.</span>
-  <span class='xmlComment'>/// &lt;include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml' /&gt;</span>
+  <span class='xmlComment'>/// &lt;include path='items/Retrieve/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
   <span class='modifier'>public</span> Province Retrieve(<span class="userType">DbColumns</span> keyColumns
     , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = <span class='keyWord'>null</span>
     , <span class="userType">DbJoins</span> joins = null)
