@@ -48,11 +48,11 @@ namespace LJCGridDataTests
           sqlTests.Add(province, connectionString, providerName);
 
           // ProvinceSQLManager
-          sqlTests.ManagerAdd(connectionString, providerName);
-          sqlTests.ManagerLoadDataTable(mLJCGrid, connectionString
+          sqlTests.AddProvince(connectionString, providerName);
+          sqlTests.LoadProvince(mLJCGrid, connectionString
             , providerName);
-          province = sqlTests.ManagerRetrieve(connectionString , providerName);
-          sqlTests.ManagerUpdate(province, connectionString, providerName);
+          province = sqlTests.RetrieveProvince(connectionString , providerName);
+          sqlTests.UpdateProvince(province, connectionString, providerName);
           break;
       }
     }

@@ -280,7 +280,7 @@ namespace LJCGridDataTests
     #region ProvinceSQLManager
 
     // Add a data record.
-    internal void ManagerAdd(string connectionString, string providerName)
+    internal void AddProvince(string connectionString, string providerName)
     {
       var manager = new ProvinceSQLManager(null, null, connectionString
         , providerName);
@@ -298,7 +298,7 @@ namespace LJCGridDataTests
     }
 
     // Populate a grid with data.
-    internal void ManagerLoadDataTable(LJCDataGrid ljcGrid, string connectionString
+    internal void LoadProvince(LJCDataGrid ljcGrid, string connectionString
       , string providerName)
     {
       var manager = new ProvinceSQLManager(null, null, connectionString
@@ -324,7 +324,7 @@ namespace LJCGridDataTests
     }
 
     // Retrieve a Data Object.
-    internal Province ManagerRetrieve(string connectionString, string providerName)
+    internal Province RetrieveProvince(string connectionString, string providerName)
     {
       Province retValue;
 
@@ -338,7 +338,7 @@ namespace LJCGridDataTests
     }
 
     // Update a Data Object.
-    internal void ManagerUpdate(Province province, string connectionString
+    internal void UpdateProvince(Province province, string connectionString
       , string providerName)
     {
       var manager = new ProvinceSQLManager(null, null, connectionString
@@ -346,11 +346,8 @@ namespace LJCGridDataTests
 
       province.Description = "Updated Description";
 
-      // Identify the records and properties to be selected.
-      var keyColumns = new DbColumns()
-      {
-        { "ID" , 1 }
-      };
+      // Identify the records to be selected.
+      var keyColumns = manager.GetIDKey(1);
       manager.Update(province, keyColumns);
     }
     #endregion

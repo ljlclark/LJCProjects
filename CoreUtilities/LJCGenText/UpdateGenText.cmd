@@ -49,6 +49,9 @@ rem *** Runtime-only Binaries ***
 rem ---------------------------------
 set to=%toRoot%LJCGenTableCode\%bin%
 
+set src=LJCDBMessage\CipherLib\%bin%
+copy %assmRoot%%src%\CipherLib.dll %to%
+
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
 

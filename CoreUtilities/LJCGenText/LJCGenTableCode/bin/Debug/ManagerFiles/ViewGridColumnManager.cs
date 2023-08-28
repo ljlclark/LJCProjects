@@ -1,28 +1,22 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
-// #Value _ClassName_
-// #Value _CollectionName_
-// #Value _JoinTable_
-// #Value _Namespace_
-// #Value _TableNames_
-// _ClassName_SQLManager.cs
+// ViewGridColumnSQLManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 
-namespace _Namespace_
+namespace LJCAppName
 {
-  /// <summary>Provides _TableName_ SQL data methods.</summary>
-  public class _ClassName_SQLManager
+  /// <summary>Provides ViewGridColumn SQL data methods.</summary>
+  public class ViewGridColumnSQLManager
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DbManagerC/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _ClassName_SQLManager(string dataConfigName, string tableName
+    public ViewGridColumnSQLManager(string dataConfigName, string tableName
       , string connectionString = null, string providerName = null)
     {
       Reset(dataConfigName, tableName, connectionString, providerName);
@@ -35,7 +29,7 @@ namespace _Namespace_
   {
     if (null == tableName)
     {
-      tableName = "_ClassName_";
+      tableName = "ViewGridColumn";
     }
 
     SQLManager = new SQLManager(dataConfigName, tableName, connectionString
@@ -47,20 +41,20 @@ namespace _Namespace_
 
       // Map table names with property names or captions
       // that differ from the column names.
-      baseDataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
-      dataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
+      baseDataDefinition.MapNames(ViewGridColumn.ColumnID, ViewGridColumn.PropertyID);
+      dataDefinition.MapNames(ViewGridColumn.ColumnID, ViewGridColumn.PropertyID);
 
       // Create the list of DB Assigned and Lookup column names.
       SQLManager.DbAssignedColumns = new List<string>()
       {
-        _ClassName_.ColumnID
+        ViewGridColumn.ColumnID
       };
       SQLManager.SetLookupColumns(new string[]
       {
-        _ClassName_.ColumnName
+        ViewGridColumn.ColumnName
       });
 
-      ResultConverter = new ResultConverter<_ClassName_, _CollectionName_>();
+      ResultConverter = new ResultConverter<ViewGridColumn, ViewGridColumns>();
     }
     #endregion
 
@@ -68,9 +62,9 @@ namespace _Namespace_
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public _ClassName_ Add(_ClassName_ dataObject, List<string> propertyNames = null)
+    public ViewGridColumn Add(ViewGridColumn dataObject, List<string> propertyNames = null)
     {
-      _ClassName_ retValue = null;
+      ViewGridColumn retValue = null;
 
       // The data record must not contain a value for DB Assigned columns.
       DataTable dataTable = SQLManager.Add(dataObject, propertyNames);
@@ -78,7 +72,7 @@ namespace _Namespace_
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
-        retValue = Create_ClassName_(dataTable);
+        retValue = CreateViewGridColumn(dataTable);
       }
       return retValue;
     }
@@ -94,17 +88,17 @@ namespace _Namespace_
 
     // Loads a collection of data records and returns a Data Collection.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _CollectionName_ Load(DbColumns keyColumns
+    public ViewGridColumns Load(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      _CollectionName_ retValue = null;
+      ViewGridColumns retValue = null;
 
       DataTable dataTable = LoadDataTable(keyColumns, propertyNames
         , filters, joins);
       if (dataTable != null)
       {
-        retValue = Create_CollectionName_(dataTable);
+        retValue = CreateViewGridColumns(dataTable);
       }
       return retValue;
     }
@@ -124,25 +118,25 @@ namespace _Namespace_
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/DbManager.xml'/>
-    public _ClassName_ Retrieve(DbColumns keyColumns
+    public ViewGridColumn Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      _ClassName_ retValue = null;
+      ViewGridColumn retValue = null;
 
       DataTable dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
         , filters, joins);
       SQLStatement = SQLManager.SQLStatement;
       if (dataTable != null)
       {
-        retValue = Create_ClassName_(dataTable);
+        retValue = CreateViewGridColumn(dataTable);
       }
       return retValue;
     }
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Update(_ClassName_ dataObject, DbColumns keyColumns
+    public void Update(ViewGridColumn dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       SQLManager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -159,7 +153,7 @@ namespace _Namespace_
     {
       var retValue = new DbColumns()
       {
-        { _ClassName_.ColumnID, id }
+        { ViewGridColumn.ColumnID, id }
       };
       return retValue;
     }
@@ -173,7 +167,7 @@ namespace _Namespace_
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { _ClassName_.ColumnName, (object)name }
+        { ViewGridColumn.ColumnName, (object)name }
       };
       return retValue;
     }
@@ -182,9 +176,9 @@ namespace _Namespace_
     #region Private Methods
 
     // Creates the object from the first data row.
-    private _ClassName_ Create_ClassName_(DataTable dataTable)
+    private ViewGridColumn CreateViewGridColumn(DataTable dataTable)
     {
-      _ClassName_ retValue = null;
+      ViewGridColumn retValue = null;
 
       if (NetCommon.HasData(dataTable))
       {
@@ -195,9 +189,9 @@ namespace _Namespace_
     }
 
     // Creates the collection from a DataTable.
-    private _CollectionName_ Create_CollectionName_(DataTable dataTable)
+    private ViewGridColumns CreateViewGridColumns(DataTable dataTable)
     {
-      _CollectionName_ retValue = null;
+      ViewGridColumns retValue = null;
 
       if (NetCommon.HasData(dataTable))
       {
@@ -220,7 +214,7 @@ namespace _Namespace_
   public DbColumns DataDefinition { get; set; }
 
   /// <summary>Gets or sets the ResultConverter reference.</summary>
-  public ResultConverter<_ClassName_, _CollectionName_> ResultConverter { get; set; }
+  public ResultConverter<ViewGridColumn, ViewGridColumns> ResultConverter { get; set; }
 
   /// <summary>Gets the SQLManager reference.</summary>
   public SQLManager SQLManager { get; private set; }
@@ -230,4 +224,3 @@ namespace _Namespace_
   #endregion
 }
 }
-// #SectionEnd Class
