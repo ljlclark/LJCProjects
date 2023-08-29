@@ -37,6 +37,12 @@
         the application code.
       </p>
       <pre class="code">
+<span class='keyWord'>using</span> LJCDBClientLib;
+<span class='keyWord'>using</span> LJCDataGridLib;
+<span class='keyWord'>using</span> LJCDBMessage;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCWinFormControls;
+
 <span class='xmlComment'>/// &lt;summary&gt;Provides Province SQL data methods.&lt;/summary&gt;</span>
 <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>ProvinceSQLManager</span>
 {
@@ -118,7 +124,7 @@
     <span class="userType">Provinces</span> retValue = <span class='keyWord'>null</span>;
 
     <span class="userType">DataTable</span> dataTable = LoadDataTable(keyColumns, propertyNames, filters
-    , joins);
+      , joins);
     <span class='keyWord'>if</span> (dataTable != null)
     {
       retValue = CreateProvinces(dataTable);
@@ -134,7 +140,7 @@
     <span class="userType">DataTable</span> retValue;
 
     retValue = SQLManager.GetDataTable(keyColumns, propertyNames
-    , filters, joins);
+      , filters, joins);
     SQLStatement = SQLManager.SQLStatement;
     <span class='keyWord'>return</span> retValue;
   }
@@ -148,7 +154,7 @@
     <span class="userType">Province</span> retValue = <span class='keyWord'>null</span>;
 
     <span class="userType">DataTable</span> dataTable = SQLManager.GetDataTable(keyColumns, propertyNames
-    , filters, joins);
+      , filters, joins);
     SQLStatement = SQLManager.SQLStatement;
     <span class='keyWord'>if</span> (dataTable != null)
     {
@@ -160,7 +166,7 @@
   <span class='comment'>// Updates the record.</span>
   <span class='xmlComment'>/// &lt;include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml' /&gt;</span>
   <span class='modifier'>public</span> <span class='commonType'>void</span> Update(<span class="userType">Province</span> dataObject, <span class="userType">DbColumns</span> keyColumns
-  , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = null)
+    , <span class='userType'>List</span><string> propertyNames = <span class='keyWord'>null</span>, <span class="userType">DbFilters</span> filters = null)
   {
     SQLManager.Update(dataObject, keyColumns, propertyNames, filters);
     AffectedCount = SQLManager.AffectedCount;

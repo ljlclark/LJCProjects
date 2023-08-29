@@ -31,12 +31,16 @@
         specifically for use with the Province table and Province Data Object.
       </p>
       <pre class="code">
+<span class='keyWord'>using</span> LJCDataGridLib;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCWinFormControls;
+
 <span class='comment'>// Populate a grid with data.</span>
 <span class='modifier'>internal</span> <span class='commonType'>void</span> LoadManager(LJCDataGrid ljcGrid, <span class='commonType'>string</span> connectionString
-, <span class='commonType'>string</span> providerName)
+  , <span class='commonType'>string</span> providerName)
 {
   <span class='commonType'>var</span> manager = <span class='keyWord'>new</span> <span class='userType'>ProvinceSQLManager</span>(null, null, connectionString
-  , providerName);
+    , providerName);
 
   <span class='comment'>// Create grid columns.</span>
   <span class='commonType'>var</span> gridColumns = manager.BaseDefinition.Clone();
