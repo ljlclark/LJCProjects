@@ -113,6 +113,12 @@ div#Header {
   width: 100%;
 }
 
+.Heading2 {
+  font-family: Verdana, Tahoma, Arial, Sans-Serif;
+  font-size: 9pt;
+  font-weight: bold;
+}
+
 div#Title {
   color: #003399;
   font-family: Verdana, Tahoma, Arial, Sans-Serif;
