@@ -12,23 +12,28 @@ namespace LJCGenTextLib
   {
     #region static Functions
 
-    /// <summary>Checks the line for a directive and returns the directive name and value.</summary>
-    public static Directive GetDirective(string line)
+    /// <summary>
+    /// Checks the line for a directive and returns the directive name and
+    /// value.
+    /// </summary>
+    public static Directive GetDirective(string line
+      , string commentStart = "//")
     {
       string[] values;
       char[] separator = { ' ' };
       Directive retValue = null;
 
       // Templates directive is in a comment.
-      if (line.Trim().StartsWith("//")
-        || line.Trim().StartsWith("<!--"))
+      if (line.Trim().StartsWith(commentStart))
       {
         // Template directive starts with "#".
         int index = line.IndexOf('#');
         if (index > -1)
         {
           retValue = new Directive();
-          values = line.Substring(index).Split(separator, StringSplitOptions.RemoveEmptyEntries);
+          retValue.CommentStart = commentStart;
+          values = line.Substring(index).Split(separator
+            , StringSplitOptions.RemoveEmptyEntries);
           if (values.Length > 0)
           {
             // The directive identifier.
@@ -172,6 +177,7 @@ namespace LJCGenTextLib
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public Directive()
     {
+      CommentStart = "//";
     }
 
     // Initializes an object instance.
@@ -181,6 +187,7 @@ namespace LJCGenTextLib
       ID = id;
       Name = name;
       Modifier = modifier;
+      CommentStart = "//";
     }
     #endregion
 
@@ -236,6 +243,9 @@ namespace LJCGenTextLib
 
     /// <summary>Gets or sets the directive ID.</summary>
     public string ID { get; set; }
+
+    /// <summary>Gets or sets the line comment start characters.</summary>
+    public string CommentStart { get; set; }
 
     /// <summary>Gets or sets the name value.</summary>
     public string Name { get; set; }

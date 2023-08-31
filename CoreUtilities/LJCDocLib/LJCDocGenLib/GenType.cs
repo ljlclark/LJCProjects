@@ -105,7 +105,7 @@ namespace LJCDocGenLib
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
           , dataXml) as Sections;
-        GenerateText generateText = new GenerateText();
+        GenerateText generateText = new GenerateText("<!--");
         generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
           , true);
         ValuesDocGen.Instance.GenPageCount++;

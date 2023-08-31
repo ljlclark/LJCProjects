@@ -22,7 +22,7 @@ namespace LJCDocGenLib
       Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
         , dataXml) as Sections;
 
-      GenerateText generateText = new GenerateText();
+      GenerateText generateText = new GenerateText("<!--");
       string[] templateLines = File.ReadAllLines("Templates\\RootTemplate.htm");
       generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
         , true);

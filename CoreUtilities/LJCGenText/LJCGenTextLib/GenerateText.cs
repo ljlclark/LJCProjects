@@ -17,17 +17,18 @@ namespace LJCGenTextLib
 
     //Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public GenerateText()
+    public GenerateText(string commentStart = "//")
     {
-      Reset();
+      Reset(commentStart);
     }
 
     // Resets the current values.
     /// <include path='items/Reset/*' file='Doc/GenerateText.xml'/>
-    public void Reset()
+    public void Reset(string commentStart = "//")
     {
-      OutLines = new List<string>();
       ActiveSections = new Sections();
+      CommentStart = commentStart;
+      OutLines = new List<string>();
     }
     #endregion
 
@@ -118,7 +119,7 @@ namespace LJCGenTextLib
       {
         IsSectionDirective = false;
         string line = templateLines[lineIndex];
-        directive = Directive.GetDirective(line);
+        directive = Directive.GetDirective(line, CommentStart);
 
         if (directive != null)
         {
@@ -261,7 +262,7 @@ namespace LJCGenTextLib
         lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line);
+        var directive = Directive.GetDirective(line, CommentStart);
 
         // Debugging
         //if (Directive.IsName(directive, "Subsection")
@@ -327,7 +328,7 @@ namespace LJCGenTextLib
         lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line);
+        var directive = Directive.GetDirective(line, CommentStart);
 
         if (Directive.IsSectionBegin(directive))
         {
@@ -473,7 +474,7 @@ namespace LJCGenTextLib
       for (int ifIndex = lineIndex; ifIndex < TemplateLines.Length; ifIndex++)
       {
         string line = TemplateLines[ifIndex];
-        Directive ifDirective = Directive.GetDirective(line);
+        Directive ifDirective = Directive.GetDirective(line, CommentStart);
         if (ifDirective != null)
         {
           if (Directive.IsIfEnd(ifDirective))
@@ -702,23 +703,26 @@ namespace LJCGenTextLib
 
     #region Properties
 
+    /// <summary>Gets or sets the active sections.</summary>
+    public Sections ActiveSections { get; private set; }
+
+    /// <summary>Gets or sets the line comment start characters.</summary>
+    public string CommentStart { get; set; }
+
     /// <summary>Gets or sets the output file specification.</summary>
     public string OutFileSpec { get; set; }
-
-    /// <summary>Gets or sets the data sections.</summary>
-    public Sections Sections { get; private set; }
-
-    /// <summary>Gets or sets the template text lines.</summary>
-    public string[] TemplateLines { get; private set; }
 
     /// <summary>Gets or sets the output text lines.</summary>
     public List<string> OutLines { get; private set; }
 
-    /// <summary>Gets or sets the active sections.</summary>
-    public Sections ActiveSections { get; private set; }
+    /// <summary>Gets or sets the data sections.</summary>
+    public Sections Sections { get; private set; }
 
     // Gets or sets the index to the section last line.
     private int SectionEndLineIndex { get; set; }
+
+    /// <summary>Gets or sets the template text lines.</summary>
+    public string[] TemplateLines { get; private set; }
     #endregion
 
     #region Class Data

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TemplateSyntax.cs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Template Syntax</title>
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="TemplateTab.html">TemplateTab</a>
+      / TemplateSyntax
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>The Template Syntax</div>
+    </div>
+    <div class='Text'>
+      <p>
+        An LJCGenText "Template" is a text file with Template Directives and
+        Replacement Names.
+      </p>
+
+      <div class="Heading2">Directives</div>
+      <p>
+        A Template Directive is contained within a single line comment. This
+        allows the text file to be edited with the appropriate code editor
+        regardless of the language type. The single line comment start
+        characters can be specified by the user.
+      </p>
+      <p>
+        A directive starts with the "#" character and has up to three
+        properties. These properties are: The directive ID, Name and optional
+        Value. The directive ID is not case sensitive.
+      </p>
+      <p>
+        These are example Directives:<br />
+        // #SectionBegin MySectionName<br />
+        // #sectionend MySectionName
+      </p>
+      <p>
+        The available Directives are:<br />
+      </p>
+      <pre class="code">
+#SectionBegin - The beginning of a section.
+#SectionEnd   - The end of a section.
+#IfBegin      - The beginning of an If block.
+#IfElse       - The beginning of an Else block.
+#IfEnd        - The end of an If block.
+#Value        - The replacement values available for the section.</pre>
+    </div>
+    <p>
+      The "#Value" directive is used by the GenTextEdit program. It has
+      no effect on the GenText program or generated code.
+    </p>
+
+    <div class="Heading2">Replacement Names</div>
+    <p>
+      Replacement names are placeholders for the values from the GenText Data
+      xml file.
+    </p>
+    <p>
+      A Replacement name starts and ends with an underscore. No spaces are
+      allowed in a replacement name or between the name and the enclosing
+      underscore values. This is a replacement name: "_ClassName_".
+    </p>
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="TemplateTab.html">TemplateTab</a>
+      / TemplateSyntax
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
