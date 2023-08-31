@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // Program.cs
 using LJCGenTextLib;
+using System.IO;
 using static System.Console;
 
 namespace LJCGenText
@@ -40,6 +41,12 @@ namespace LJCGenText
     {
       bool overwrite = true;
       GenerateText genText = new GenerateText();
+      var ext = Path.GetExtension(templateSpec);
+      if (".html" == ext
+        || ".htm" == ext)
+      {
+        genText.CommentStart = "<!--";
+      }
       genText.Generate(templateSpec, dataSpec, outputFile, overwrite);
     }
   }
