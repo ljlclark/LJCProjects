@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TemplateProcess.cs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Template Processing</title>
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="TemplateTab.html">TemplateTab</a>
+      / TemplateProcess
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>The Template Processing</div>
+    </div>
+    <div class='Text'>
+      <br />
+      <div class="Heading2">Section Processing</div>
+      <p>
+        The lines of the Template are evaluated in order from top to bottom.
+      </p>
+      <p>
+        If no Section Item is in scope, the lines are output just as they
+        appear in the template without attempting to process replacement names
+        or values.
+      </p>
+      <p>
+        When a #SectionBegin directive is detected, the Section data from the
+        Data XML file with the same name as the #SectionBegin directive is
+        added to the Active Items list. These Section names are case sensitive.
+        The Items for the current Section are then processed in the same order
+        as they appear in the Data XML file.
+      </p>
+      <p>
+        If the Section data is not found, there are no section items to come
+        into scope and the Section is of course not processed.
+      </p>
+      <p>
+        As each Item is processed, the replacement names are replaced with the
+        available replacement values for the current Item from the Data XML
+        file.
+      </p>
+      <p>
+        If a replacement name is not found in the current Section Item, then
+        the program looks back through the Parent Sections Active Items to see
+        if there is a replacement of the same name in scope. It uses that
+        replacement value if it is found, otherwise no replacement is performed.
+      </p>
+      <p>
+        When the #SectionEnd directive is detected and there are more Items in
+        the current Section, the next available Item comes into scope and the
+        template is processed again from the line after the current
+        #SectionBegin directive.
+      </p>
+      <p>
+        If there are no more Items to process in the current Section, then the
+        current section XML data is removed from the Active Item list and
+        processing continues with the next line after the #SectionEnd directive.
+      </p>
+    </div>
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="TemplateTab.html">TemplateTab</a>
+      / TemplateProcess
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
