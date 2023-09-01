@@ -37,8 +37,11 @@
         When a #SectionBegin directive is detected, the Section data from the
         Data XML file with the same name as the #SectionBegin directive is
         added to the Active Items list. These Section names are case sensitive.
-        The Items for the current Section are then processed in the same order
-        as they appear in the Data XML file.
+      </p>
+      <p>
+        The code between the #SectionBegin and #SectionEnd directives is
+        generated once for each Section Item. The Items for the current Section
+        are processed in the same order as they appear in the Data XML file.
       </p>
       <p>
         If the Section data is not found, there are no section items to come
