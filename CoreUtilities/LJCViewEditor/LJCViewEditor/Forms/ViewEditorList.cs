@@ -590,6 +590,59 @@ namespace LJCViewEditor
       FormCommon.SetMenuState(DataMenu, enableNew, enableEdit);
       DataTitle.Enabled = true;
     }
+
+    // Sets the View tab initial focus control.
+    private void ViewSetFocusTab(TabPage tabPage)
+    {
+      switch (tabPage.Name)
+      {
+        case "ColumnPage":
+          ColumnGrid.Select();
+          break;
+
+        case "JoinPage":
+          JoinGrid.Select();
+          break;
+
+        case "FilterPage":
+          FilterGrid.Select();
+          break;
+
+        case "OrderByPage":
+          OrderByGrid.Select();
+          break;
+      }
+    }
+
+    // Sets the View tab initial focus control.
+    private void JoinSetFocusTab(TabPage tabPage)
+    {
+      switch (tabPage.Name)
+      {
+        case "JoinOnPage":
+          JoinOnGrid.Select();
+          break;
+
+        case "JoinColumnPage":
+          JoinColumnGrid.Select();
+          break;
+      }
+    }
+
+    // Sets the View tab initial focus control.
+    private void FilterSetFocusTab(TabPage tabPage)
+    {
+      switch (tabPage.Name)
+      {
+        case "ConditionSetPage":
+          ConditionSetGrid.Select();
+          break;
+
+        case "ConditionPage":
+          ConditionGrid.Select();
+          break;
+      }
+    }
     #endregion
 
     #region Action Event Handlers
@@ -1058,6 +1111,16 @@ namespace LJCViewEditor
       }
       ViewGrid.LJCAllowSelectionChange = true;
     }
+
+    private void ViewTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        ViewTabs.LJCSetCurrentTabPage(e);
+      }
+      var tabPage = ViewTabs.LJCGetTabPage(e);
+      ViewSetFocusTab(tabPage);
+    }
     #endregion
 
     #region Column
@@ -1216,6 +1279,16 @@ namespace LJCViewEditor
         TimedChange(Change.Join);
       }
       JoinGrid.LJCAllowSelectionChange = true;
+    }
+
+    private void JoinTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        JoinTabs.LJCSetCurrentTabPage(e);
+      }
+      var tabPage = JoinTabs.LJCGetTabPage(e);
+      JoinSetFocusTab(tabPage);
     }
     #endregion
 
@@ -1447,6 +1520,16 @@ namespace LJCViewEditor
         TimedChange(Change.Filter);
       }
       FilterGrid.LJCAllowSelectionChange = true;
+    }
+
+    private void ConditionSetTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        ConditionSetTabs.LJCSetCurrentTabPage(e);
+      }
+      var tabPage = ConditionSetTabs.LJCGetTabPage(e);
+      FilterSetFocusTab(tabPage);
     }
     #endregion
 
