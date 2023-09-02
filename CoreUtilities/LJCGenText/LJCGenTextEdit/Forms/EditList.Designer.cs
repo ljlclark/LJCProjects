@@ -218,6 +218,7 @@
       this.MainTabs.SelectedIndex = 0;
       this.MainTabs.Size = new System.Drawing.Size(746, 544);
       this.MainTabs.TabIndex = 1;
+      this.MainTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainTabs_MouseDown);
       // 
       // MainTabsMenu
       // 
@@ -1263,7 +1264,7 @@
             this.toolStripSeparator17,
             this.OutputHelp});
       this.OutputMenu.Name = "OutputMenu";
-      this.OutputMenu.Size = new System.Drawing.Size(270, 375);
+      this.OutputMenu.Size = new System.Drawing.Size(270, 342);
       // 
       // OutputTitle
       // 
@@ -1388,6 +1389,7 @@
       this.TileTabs.SelectedIndex = 0;
       this.TileTabs.Size = new System.Drawing.Size(29, 544);
       this.TileTabs.TabIndex = 0;
+      this.TileTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TileTabs_MouseDown);
       // 
       // TileTabsMenu
       // 

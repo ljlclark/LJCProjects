@@ -52,6 +52,8 @@ namespace LJCGenTextEdit
 
     #region Action Event Handlers
 
+    #region Tabs
+
     // Performs a Move of the selected Main Tab to the TileTabs control.
     private void MainTabsMove_Click(object sender, EventArgs e)
     {
@@ -71,6 +73,7 @@ namespace LJCGenTextEdit
         MainSplit.Panel2Collapsed = true;
       }
     }
+    #endregion
 
     #region Template
 
@@ -445,6 +448,31 @@ namespace LJCGenTextEdit
     #endregion
 
     #region Control Event Handlers
+
+    #region Tabs
+
+    // Handles the MouseDown event.
+    private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        MainTabs.LJCSetCurrentTabPage(e);
+      }
+      var tabPage = MainTabs.LJCGetTabPage(e);
+      SetFocusTab(tabPage);
+    }
+
+    // Handles the MouseDown event.
+    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        TileTabs.LJCSetCurrentTabPage(e);
+      }
+      var tabPage = TileTabs.LJCGetTabPage(e);
+      SetFocusTab(tabPage);
+    }
+    #endregion
 
     #region Template
 

@@ -346,6 +346,25 @@ namespace LJCGenTextEdit
       ReplacementTitle.Enabled = true;
       ReplacementMenuHelp.Enabled = true;
     }
+
+    // Sets the tab initial focus control.
+    private void SetFocusTab(TabPage tabPage)
+    {
+      switch (tabPage.Name)
+      {
+        case "TemplateTab":
+          TemplateRichText.Select();
+          break;
+
+        case "DataTab":
+          SectionGrid.Select();
+          break;
+
+        case "OutputTab":
+          OutputRichText.Select();
+          break;
+      }
+    }
     #endregion
 
     #region RTF Methods
