@@ -3,6 +3,13 @@
 <!-- Licensed under the MIT License. -->
 <!-- DbManager.xml -->
 <items>
+  <DbManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="tableName">The table name.</param>
+  </DbManagerC>
   <Reset>
     <summary>
       Resets the data access configuration.

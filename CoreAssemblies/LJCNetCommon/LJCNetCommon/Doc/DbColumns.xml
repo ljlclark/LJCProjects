@@ -24,7 +24,6 @@
     <returns>The DbColumns collection.</returns>
   </LJCCreateObjectColumns>
   <LJCGetPropertyNames>
-    Creates a ColumnNames list from a DataObject.
     <summary>
       Creates a PropertyNames list from a DataObject.
     </summary>

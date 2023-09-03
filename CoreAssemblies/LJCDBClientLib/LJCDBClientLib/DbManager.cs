@@ -14,7 +14,7 @@ namespace LJCDBClientLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/SQLManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/SQLManager.xml'/>
+    /// <include path='items/DbManagerC/*' file='Doc/DbManager.xml'/>
     public DbManager(string dataConfigName, string tableName)
     {
       Reset(dataConfigName, tableName);

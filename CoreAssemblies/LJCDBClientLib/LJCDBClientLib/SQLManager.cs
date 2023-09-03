@@ -61,7 +61,7 @@ namespace LJCDBClientLib
     }
     #endregion
 
-    #region DataManager Related Public Data Methods
+    #region Public Data Methods
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='Doc/SQLManager.xml'/>
@@ -108,6 +108,20 @@ namespace LJCDBClientLib
       return retValue;
     }
 
+    // Adds the lookup column names.
+    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    public void SetLookupColumns(string[] propertyNames)
+    {
+      foreach (string propertyName in propertyNames)
+      {
+        string existingName = LookupColumnNames.Find(x => x == propertyName);
+        if (null == existingName)
+        {
+          LookupColumnNames.Add(propertyName);
+        }
+      }
+    }
+
     // Updates the record.
     /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
     public void Update(object dataObject, DbColumns keyColumns
@@ -124,7 +138,7 @@ namespace LJCDBClientLib
     }
     #endregion
 
-    #region DataManager and DbDataManager Related SQL Methods
+    #region Private Methods
 
     // Creates the SQL "Insert" string.
     private string CreateAddSQL(object dataObject
@@ -145,6 +159,22 @@ namespace LJCDBClientLib
           , TableName, dataColumns, DataConfigName, SchemaName, keyColumns);
         DbSqlBuilder sqlBuilder = new DbSqlBuilder(dbRequest);
         retValue = sqlBuilder.CreateAddSql();
+      }
+      return retValue;
+    }
+
+    // Creates a DataDefinition value.
+    private DbColumns CreateDataDefinition()
+    {
+      DbColumns retValue = null;
+
+      string sql = $"select * from {TableName}";
+      var dataTable = mDataAccess.GetSchemaOnly(sql);
+      if (dataTable != null)
+      {
+        var dataColumns = TableData.DataColumnsClone(dataTable);
+        BaseDefinition = TableData.GetDbColumns(dataColumns);
+        retValue = BaseDefinition.Clone();
       }
       return retValue;
     }
@@ -205,42 +235,6 @@ namespace LJCDBClientLib
           , dataColumns, DataConfigName, SchemaName, requestKeyColumns, filters);
         DbSqlBuilder sqlBuilder = new DbSqlBuilder(dbRequest);
         retValue = sqlBuilder.CreateUpdateSql().Trim();
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Other Public Methods
-
-    // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
-    public void SetLookupColumns(string[] propertyNames)
-    {
-      foreach (string propertyName in propertyNames)
-      {
-        string existingName = LookupColumnNames.Find(x => x == propertyName);
-        if (null == existingName)
-        {
-          LookupColumnNames.Add(propertyName);
-        }
-      }
-    }
-    #endregion
-
-    #region DataManager Related Create Data Methods
-
-    // Creates a DataDefinition value.
-    private DbColumns CreateDataDefinition()
-    {
-      DbColumns retValue = null;
-
-      string sql = $"select * from {TableName}";
-      var dataTable = mDataAccess.GetSchemaOnly(sql);
-      if (dataTable != null)
-      {
-        var dataColumns = TableData.DataColumnsClone(dataTable);
-        BaseDefinition = TableData.GetDbColumns(dataColumns);
-        retValue = BaseDefinition.Clone();
       }
       return retValue;
     }
