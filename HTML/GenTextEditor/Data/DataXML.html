@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataXML.cs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Data XML Example</title>
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="DataTab.html">DataTab</a>
+      / DataXML
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>The Data XML Example</div>
+    </div>
+    <div class='Text'>
+      <pre class="code">
+<span class="ltgt">&lt;?</span><span class="name">xml</span> <span class="attrib">version</span><span class="ltgt">=&quot;1.0&quot;?&gt;</span>
+<span class="name"><span class="ltgt"><</span>Sections</span> <span class="attrib">xmlns:xsd</span><span class="ltgt">=&quot;http://www.w3.org/2001/XMLSchema&quot;</span>
+          <span class="attrib">xmlns:xsi</span><span class="ltgt">=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
+  <span class="name"><span class="ltgt"><</span>Section</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>Fields<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>RepeatItems</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt"><</span>RepeatItem</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>TypeBoolean<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacements</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FileName_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>Fields\NetCommon.TypeBoolean.html<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FieldName_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>TypeBoolean<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FieldSummary_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>The Boolean type name.<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacements</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt">&lt;/</span>RepeatItem</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt"><</span>RepeatItem</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>TypeByte<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacements</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FileName_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>Fields\NetCommon.TypeByte.html<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FieldName_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>TypeByte<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_FieldSummary_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+              <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>The Byte type name.<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacements</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt">&lt;/</span>RepeatItem</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt">&lt;/</span>RepeatItems</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>EndProcessing</span><span class="ltgt">></span>false<span class="name"><span class="ltgt">&lt;/</span>EndProcessing</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt">&lt;/</span>Section</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt"><</span>Section</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>Main<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>RepeatItems</span><span class="ltgt">></span>
+      <span class="name"><span class="ltgt"><</span>RepeatItem</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>Main<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt"><</span>Replacements</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_AssemblyName_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>LJCNetCommon<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_AssemblyHtm_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>LJCNetCommon.html<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_Namespace_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>LJCNetCommon<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_HasRemarks_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>True<span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt"><</span>Replacement</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Name</span><span class="ltgt">></span>_Syntax_<span class="name"><span class="ltgt">&lt;/</span>Name</span><span class="ltgt">></span>
+            <span class="name"><span class="ltgt"><</span>Value</span><span class="ltgt">></span>public class NetCommon <span class="name"><span class="ltgt">&lt;/</span>Value</span><span class="ltgt">></span>
+          <span class="name"><span class="ltgt">&lt;/</span>Replacement</span><span class="ltgt">></span>
+        <span class="name"><span class="ltgt">&lt;/</span>Replacements</span><span class="ltgt">></span>
+      <span class="name"><span class="ltgt">&lt;/</span>RepeatItem</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt">&lt;/</span>RepeatItems</span><span class="ltgt">></span>
+    <span class="name"><span class="ltgt"><</span>EndProcessing</span><span class="ltgt">></span>false<span class="name"><span class="ltgt">&lt;/</span>EndProcessing</span><span class="ltgt">></span>
+  <span class="name"><span class="ltgt">&lt;/</span>Section</span><span class="ltgt">></span>
+<span class="name"><span class="ltgt">&lt;/</span>Sections</span><span class="ltgt">></span></pre>
+    </div>
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../GenTextEditor.html">GenTextEditor</a>
+      / <a href="DataTab.html">DataTab</a>
+      / DataXML
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
