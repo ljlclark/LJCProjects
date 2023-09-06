@@ -98,12 +98,12 @@
     Province retValue = <span class='keyWord'>null</span>;
 
     <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
-    <span class="userType">DataTable</span> dataTable = SQLManager.Add(dataObject, propertyNames);
+    <span class="userType">DataTable</span> dbAssignedValues = SQLManager.Add(dataObject, propertyNames);
     AffectedCount = SQLManager.AffectedCount;
     SQLStatement = SQLManager.SQLStatement;
-    <span class='keyWord'>if</span> (dataTable != null)
+    <span class='keyWord'>if</span> (dbAssignedValues != null)
     {
-      retValue = CreateProvince(dataTable);
+      retValue = CreateProvince(dbAssignedValues);
     }
     <span class='keyWord'>return</span> retValue;
   }

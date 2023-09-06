@@ -37,7 +37,7 @@
 <span class='keyWord'>using</span> System.Data;
 
 <span class='comment'>// Add a data record.</span>
-<span class='modifier'>internal</span> Province Add(Province province, <span class='commonType'>string</span> connectionString
+<span class='modifier'>internal</span> <span class="userType">Province</span> Add(<span class="userType">Province</span> province, <span class='commonType'>string</span> connectionString
   , <span class='commonType'>string</span> providerName)
 {
   Province retValue;
@@ -64,11 +64,11 @@
   };
 
   <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
-  DataTable dataTable = sqlManager.Add(province, propertyNames);
+  DataTable dbAssignedValues = sqlManager.Add(province, propertyNames);
 
   <span class='comment'>// Create the Data Object with added DB Assigned values.</span>
   <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
-  retValue = converter.CreateDataFromTable(dataTable);
+  retValue = converter.CreateDataFromTable(dbAssignedValues);
   <span class='keyWord'>return</span> retValue;
 }</pre>
     </div>
