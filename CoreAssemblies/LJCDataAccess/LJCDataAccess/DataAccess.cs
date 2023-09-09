@@ -16,6 +16,75 @@ namespace LJCDataAccess
   /// <include path='items/DataAccess/*' file='Doc/ProjectDataAccess.xml'/>
   public partial class DataAccess
   {
+    #region Static Functions
+
+    // Creates a connection string.
+    /// <include path='items/GetConnectionString/*' file='Doc/DataCommon.xml'/>
+    public static string GetConnectionString(string dataSourceName
+      , string databaseName, string userID = null, string password = null
+      , params string[] pairs)
+    {
+      string retValue;
+
+      var dataSource = GetPair("Data Source", dataSourceName);
+      var database = GetPair("Initial Catalog", databaseName);
+      var connectionBuilder = new DbConnectionStringBuilder()
+      {
+        { dataSource[0], dataSource[1] },
+        { database[0], database[1] },
+      };
+      if (null == userID
+        || null == password)
+      {
+        connectionBuilder.Add("Integrated Security", "True");
+      }
+      else
+      {
+        var pair = GetPair("User Id", userID);
+        connectionBuilder.Add(pair[0], pair[1]);
+        pair = GetPair("Password", password);
+        connectionBuilder.Add(pair[0], pair[1]);
+      }
+      if (pairs != null)
+      {
+        foreach (var value in pairs)
+        {
+          var pair = GetPair("", value);
+          if (pair != null && 2 == pair.Length)
+          {
+            connectionBuilder.Add(pair[0], pair[1]);
+          }
+        }
+      }
+      retValue = connectionBuilder.ConnectionString;
+      return retValue;
+    }
+
+    // Creates the DataAccess object.
+    /// <include path='items/GetDataAccess/*' file='Doc/DataCommon.xml'/>
+    public static DataAccess GetDataAccess(string dataSourceName
+      , string databaseName, string providerName = "System.Data.SqlClient")
+    {
+      DataAccess retValue;
+
+      string connectionString = GetConnectionString(dataSourceName
+        , databaseName);
+      retValue = new DataAccess(connectionString, providerName);
+      return retValue;
+    }
+
+    // Get a Connection String element pair.
+    private static string[] GetPair(string text, string pair)
+    {
+      string[] retValue = pair.Split('|');
+      if (retValue.Length < 2)
+      {
+        retValue = new string[] { text, pair };
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -184,7 +253,7 @@ namespace LJCDataAccess
     public DataTable GetDataTable(string sql
       , DataTableMappingCollection tableMapping = null)
     {
-      DataTable retValue = null;
+      DataTable retValue;
 
       if (IsMySql(mProviderName))
       {
@@ -276,12 +345,8 @@ namespace LJCDataAccess
       return retValue;
     }
 
-    /// <summary>
-    /// Get the column SQL types.
-    /// </summary>
-    /// <param name="dbName">The database name.</param>
-    /// <param name="tableName">The table name.</param>
-    /// <returns>The SQLTypes DataTable.</returns>
+    // Get the column SQL types.
+    /// <include path='items/GetColumnSQLTypes/*' file='Doc/DataAccess.xml'/>
     public DataTable GetColumnSQLTypes(string dbName, string tableName)
     {
       DataTable retValue;

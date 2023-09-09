@@ -3,6 +3,29 @@
 <!-- Licensed under the MIT License. -->
 <!-- DataAccess.xml -->
 <items>
+  <!-- Static Functions -->
+  <GetConnectionString>
+    <summary>
+      Creates a connection string.
+    </summary>
+    <param name="dataSourceName">The DataService name.</param>
+    <param name="databaseName">The Database name.</param>
+    <param name="userID">The User ID.</param>
+    <param name="password">The Password.</param>
+    <param name="pairs">Additional connection string pairs.</param>
+    <returns>The database connection string.</returns>
+  </GetConnectionString>
+  <GetDataAccess>
+    <summary>
+      Creates the DataAccess object.
+    </summary>
+    <param name="dataSourceName">The DataService name.</param>
+    <param name="databaseName">The Database name.</param>
+    <param name="providerName">The Provider name.</param>
+    <returns>The DataAccess object.</returns>
+  </GetDataAccess>
+
+  <!-- Constructors -->
   <DataAccessC>
     <summary>
       Initializes an object instance with the provided values.
@@ -11,7 +34,7 @@
     <param name="providerName">The data access provider name.</param>
   </DataAccessC>
   
-  <!-- Public Provider Methods -->
+  <!-- Public Methods -->
   <CloseConnection>
     <summary>
       Closes the database connection.
@@ -366,6 +389,14 @@
       </code>
     </example>
   </GetSchemaOnly>
+  <GetColumnSQLTypes>
+    <summary>
+      Get the column SQL types.
+    </summary>
+    <param name="dbName">The database name.</param>
+    <param name="tableName">The table name.</param>
+    <returns>The SQLTypes DataTable.</returns>
+  </GetColumnSQLTypes>
   
   <!-- Properties -->
   <ProviderFactory>

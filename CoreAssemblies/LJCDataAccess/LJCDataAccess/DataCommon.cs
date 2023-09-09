@@ -16,11 +16,8 @@ namespace LJCDataAccess
   {
     #region Data Access Methods
 
-    /// <summary>
-    /// Clones a DataColumn object.
-    /// </summary>
-    /// <param name="dataColumn">The DataColumn object.</param>
-    /// <returns>The cloned DataColumn object.</returns>
+    // Clones a DataColumn object.
+    /// <include path='items/DataColumnClone/*' file='Doc/DataCommon.xml'/>
     public static DataColumn DataColumnClone(DataColumn dataColumn)
     {
       DataColumn retValue = null;
@@ -40,12 +37,8 @@ namespace LJCDataAccess
       return retValue;
     }
 
-    /// <summary>
-    /// Get a DataColumn collection from the specified ColumnName values.
-    /// </summary>
-    /// <param name="dataTable">The DataTable object.</param>
-    /// <param name="columnNames">The Column Name array.</param>
-    /// <returns>The DataColumn collection.</returns>
+    // Get a DataColumn collection from the specified ColumnName values.
+    /// <include path='items/GetColumns/*' file='Doc/DataCommon.xml'/>
     public static DataColumnCollection GetColumns(DataTable dataTable
       , string[] columnNames = null)
     {
@@ -92,30 +85,6 @@ namespace LJCDataAccess
         }
       }
       return retVal;
-    }
-
-    /// <summary>
-    /// Creates the DataAccess object.
-    /// </summary>
-    /// <param name="dataSourceName">The DataService name.</param>
-    /// <param name="databaseName">The Database name.</param>
-    /// <param name="providerName">The Provider name.</param>
-    /// <returns>The DataAccess object.</returns>
-    public static DataAccess GetDataAccess(string dataSourceName
-      , string databaseName, string providerName = "System.Data.SqlClient")
-    {
-      DbConnectionStringBuilder connectionBuilder;
-      DataAccess retValue;
-
-      connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Data Source", dataSourceName },
-        { "Initial Catalog", databaseName },
-        { "Integrated Security", "True" }
-      };
-      string connectionString = connectionBuilder.ConnectionString;
-      retValue = new DataAccess(connectionString, providerName);
-      return retValue;
     }
 
     // Sets the data adapter table mappings.

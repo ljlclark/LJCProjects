@@ -10,8 +10,6 @@ using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Runtime.InteropServices;
 
 namespace LJCGridDataTests
 {
@@ -110,12 +108,12 @@ namespace LJCGridDataTests
 
       // Create the SQLManager.
       var sqlManager = new SQLManager(null, "Province", connectionString
-        , providerName);
-
-      // Create the list of DB Assigned and Lookup column names.
-      sqlManager.DbAssignedColumns = new List<string>()
+        , providerName)
       {
-        "ID"
+        DbAssignedColumns = new List<string>()
+        {
+          "ID"
+        }
       };
       sqlManager.SetLookupColumns(new string[]
       {
@@ -405,8 +403,7 @@ namespace LJCGridDataTests
     // Setup SQL DataAccess.
     private DataAccess SetupSQL()
     {
-      string connectionString = null;
-      DataAccess retValue;
+      DataAccess retValue = null;
 
       // Create Data Configuration values.
       var databaseName = "LJCData";
@@ -416,34 +413,25 @@ namespace LJCGridDataTests
       switch (setupCase)
       {
         case SetupCase.Internal:
-          // Use internal configuration.
-          DbConnectionStringBuilder connectionBuilder;
-          connectionBuilder = new DbConnectionStringBuilder()
-          {
-            { "Data Source", "DataServiceName" },
-            { "Initial Catalog", databaseName },
-            { "Integrated Security", "True" }
-          };
-          connectionString = connectionBuilder.ConnectionString;
+          retValue = DataAccess.GetDataAccess("DataServiceName", databaseName
+            , "System.Data.SqlClient");
           break;
 
         case SetupCase.External:
           // Or use external configuration.
-          var configName = "LJCData";
           DataConfigs dataConfigs = new DataConfigs();
           dataConfigs.LJCLoadData();
-          var dataConfig = dataConfigs.LJCGetByName(configName);
-          connectionString = dataConfig.GetConnectionString();
+          var dataConfig = dataConfigs.LJCGetByName("LJCData");
+          if (dataConfig != null)
+          {
+            retValue = new DataAccess()
+            {
+              ConnectionString = dataConfig.GetConnectionString(),
+              ProviderName = "System.Data.SqlClient"
+            };
+          }
           break;
       }
-      var providerName = "System.Data.SqlClient";
-
-      // Create DataAccess.
-      retValue = new DataAccess()
-      {
-        ConnectionString = connectionString,
-        ProviderName = providerName
-      };
       return retValue;
     }
 

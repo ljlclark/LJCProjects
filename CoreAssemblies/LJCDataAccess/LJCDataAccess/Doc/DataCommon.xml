@@ -13,7 +13,23 @@
       </para>
     </remarks>
   </DataCommon>
+  
   <!-- Data Access Methods -->
+  <DataColumnClone>
+    <summary>
+      Clones a DataColumn object.
+    </summary>
+    <param name="dataColumn">The DataColumn object.</param>
+    <returns>The cloned DataColumn object.</returns>
+  </DataColumnClone>
+  <GetColumns>
+    <summary>
+      Get a DataColumn collection from the specified ColumnName values.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="columnNames">The Column Name array.</param>
+    <returns>The DataColumn collection.</returns>
+  </GetColumns>
   <GetConnectionType>
     <summary>
       Retrieves the database connection
@@ -47,6 +63,7 @@
       The &lt;span class="userType"&gt;TableMapping&lt;/span&gt;
       collection.</param>
   </SetTableMappingMySql>
+  
   <!-- Data Conversion Methods -->
   <GetDbDate>
     <summary>

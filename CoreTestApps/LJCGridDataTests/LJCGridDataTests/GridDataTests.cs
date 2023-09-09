@@ -3,7 +3,6 @@
 // GridDataTest.cs
 using LJCDataAccess;
 using LJCWinFormControls;
-using System.Data.Common;
 
 namespace LJCGridDataTests
 {
@@ -33,13 +32,16 @@ namespace LJCGridDataTests
           //sqlTests.Run();
 
           // DataAccess Methods
-          var dataAccess = GetDataAccess(out string connectionString
-            , out string providerName);
+          var providerName = "System.Data.SqlClient";
+
+          var dataAccess = DataAccess.GetDataAccess("DESKTOP-PDPBE34"
+            , "LJCData", providerName);
           sqlTests.DataAccessRetrieve(dataAccess, mLJCGrid);
           var ljcGridRow = mLJCGrid.CurrentRow as LJCGridRow;
           sqlTests.GetRowDataObject(dataAccess, ljcGridRow);
 
           // SQLManager Methods
+          var connectionString = dataAccess.ConnectionString;
           var province = sqlTests.Retrieve(connectionString, providerName);
           sqlTests.RetrieveWithRowValues(mLJCGrid, connectionString
             , providerName);
@@ -55,22 +57,6 @@ namespace LJCGridDataTests
           sqlTests.UpdateProvince(province, connectionString, providerName);
           break;
       }
-    }
-
-    internal DataAccess GetDataAccess(out string connectionString
-      , out string providerName)
-    {
-      DbConnectionStringBuilder connectionBuilder;
-      connectionBuilder = new DbConnectionStringBuilder()
-          {
-            { "Data Source", "DESKTOP-PDPBE34" },
-            { "Initial Catalog", "LJCData" },
-            { "Integrated Security", "True" }
-          };
-      connectionString = connectionBuilder.ConnectionString;
-      providerName = "System.Data.SqlClient";
-      var retValue = new DataAccess(connectionString, providerName);
-      return retValue;
     }
 
     #region Class Data

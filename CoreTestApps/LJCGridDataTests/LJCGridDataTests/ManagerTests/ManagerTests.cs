@@ -4,8 +4,8 @@
 using LJCDBClientLib;
 using LJCDataAccessConfig;
 using LJCDBDataAccess;
-using System.Data.Common;
 using LJCWinFormControls;
+using LJCDataAccess;
 
 namespace LJCGridDataTests
 {
@@ -79,14 +79,8 @@ namespace LJCGridDataTests
       if (useInternal)
       {
         // Use internal configuration.
-        DbConnectionStringBuilder connectionBuilder;
-        connectionBuilder = new DbConnectionStringBuilder()
-        {
-          { "Data Source", "DataServiceName" },
-          { "Initial Catalog", databaseName },
-          { "Integrated Security", "True" }
-        };
-        connectionString = connectionBuilder.ConnectionString;
+        connectionString = DataAccess.GetConnectionString("DataServiceName"
+          , databaseName);
         providerName = "System.Data.SqlClient";
       }
       else
