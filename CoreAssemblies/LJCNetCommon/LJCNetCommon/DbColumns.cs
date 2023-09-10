@@ -301,31 +301,31 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public bool LJCHasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     /// <summary>Get the list of property names.</summary>
     public List<string> LJCGetPropertyNames()
     {
       List<string> retValue = null;
 
-      if (LJCHasItems())
+      if (NetCommon.HasItems(this))
       {
         retValue = new List<string>();
         foreach (DbColumn dbColumn in this)
         {
           retValue.Add(dbColumn.PropertyName);
         }
+      }
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    public bool HasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
       }
       return retValue;
     }
