@@ -65,6 +65,8 @@
     <span class='keyWord'>case</span> "FromTableColumns":
       <span class='comment'>// Create Grid Columns from DataTable.Columns.</span>
       sql = <span class='text'>"select * from Province"</span>;
+      <span class="comment">// Gets columns in "Select" column order.</span>
+      <span class="comment">// If "*" gets columns in database order.</span>
       dataTable = dataAccess.GetSchemaOnly(sql);
       <span class='commonType'>var</span> baseDefinition = <span class="userType">TableData</span>.GetDbColumns(dataTable.Columns);
       <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
@@ -73,9 +75,12 @@
         { <span class='text'>"Description"</span> },
         { <span class='text'>"Abbreviation"</span> }
       };
+      <span class="comment">// Gets grid column definitions in propertyNames order.</span>
+      <span class="comment">// If propertyNames is null, gets definitions in baseDefinition order.</span>
       gridColumns = baseDefinition.LJCGetColumns(propertyNames);
       <span class='keyWord'>break</span>;
   }
+  <span class="comment">// Sets grid column names to DbColumn PropertyNames in grid columns order.</span>
   ljcGrid.LJCAddColumns(gridColumns);
 
   <span class='comment'>// Load the data.</span>
@@ -89,6 +94,7 @@
     <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
     {
       <span class='commonType'>var</span> ljcGridRow = ljcGrid.LJCRowAdd();
+      <span class="comment">// Adds the values in grid columns order.</span>
       <span class="userType">TableData</span>.RowSetValues(ljcGridRow, dataRow);
     }
   }
