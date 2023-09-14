@@ -56,17 +56,19 @@
     <span class='text'>"Name"</span>
   });
 
+  <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
   <span class='commonType'>var</span> propertyNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
   {
     { <span class='text'>"Name"</span> },
     { <span class='text'>"Description"</span> },
     { <span class='text'>"Abbreviation"</span> }
   };
-
-  <span class='comment'>// The data record must not contain a value for DB Assigned columns.</span>
   DataTable dbAssignedValues = sqlManager.Add(province, propertyNames);
 
   <span class='comment'>// Create the Data Object with added DB Assigned values.</span>
+  <span class="comment">// Sets object values where DataTable column names match</span>
+  <span class="comment">// the object property names and DataTable column row</span>
+  <span class="comment">// values are not null.</span>
   <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
   retValue = converter.CreateDataFromTable(dbAssignedValues);
   <span class='keyWord'>return</span> retValue;

@@ -74,6 +74,9 @@
   dataTable = sqlManager.GetDataTable(keyColumns);
 
   <span class='comment'>// Create the Data Object.</span>
+  <span class="comment">// Sets object values where DataTable column names match</span>
+  <span class="comment">// the object property names and DataTable column row</span>
+  <span class="comment">// values are not null.</span>
   <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
   <span class='commonType'>var</span> province = converter.CreateDataFromTable(dataTable);
 }</pre>

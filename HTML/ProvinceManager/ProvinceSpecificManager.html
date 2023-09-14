@@ -199,6 +199,9 @@
 
     <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
+      <span class="comment">// Sets object values where DataTable column names match</span>
+      <span class="comment">// the object property names and DataTable column row</span>
+      <span class="comment">// values are not null.</span>
       retValue = ResultConverter.CreateDataFromTable(dataTable
         , dataTable.Rows[0], DataDefinition);
     }
