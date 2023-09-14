@@ -69,6 +69,7 @@
   <span class="comment">// Sets object values where DataTable column names match</span>
   <span class="comment">// the object property names and DataTable column row</span>
   <span class="comment">// values are not null.</span>
+  <span class="comment">// If DataRow is not provided, first row is used if available.</span>
   <span class='commonType'>var</span> converter = <span class='keyWord'>new</span> <span class="userType">ResultConverter</span>&lt;<span class="userType">Province</span>, <span class="userType">Provinces</span>&gt;();
   retValue = converter.CreateDataFromTable(dbAssignedValues);
   <span class='keyWord'>return</span> retValue;
