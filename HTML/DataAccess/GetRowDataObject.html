@@ -43,13 +43,13 @@
 <span class='modifier'>internal</span> <span class='commonType'>void</span> GetRowDataObject(<span class="userType">DataAccess</span> dataAccess
   , <span class="userType">LJCGridRow</span> ljcGridRow)
 {
-      <span class='keyWord'>if</span> (ljcGridRow != null)
+  <span class='keyWord'>if</span> (ljcGridRow != null)
   {
-      <span class='commonType'>var</span> name = ljcGridRow.LJCGetCellText(<span class='text'>"Name"</span>);
+    <span class='commonType'>var</span> name = ljcGridRow.LJCGetCellText(<span class='text'>"Name"</span>);
 
-      <span class='commonType'>var</span> sql = <span class="text">$"select * from Province where Name=\'{name}\'"</span>;
-      <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
-      <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
+    <span class='commonType'>var</span> sql = <span class="text">$"select * from Province where Name=\'{name}\'"</span>;
+    <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
+    <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
       <span class='comment'>// Use definition for different values.</span>
       <span class="userType">DbColumns</span> dataDefinition = <span class='keyWord'>new</span> <span class="userType">DbColumns</span>()
