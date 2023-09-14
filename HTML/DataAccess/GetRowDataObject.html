@@ -51,8 +51,8 @@
       <span class='commonType'>var</span> dataTable = dataAccess.GetDataTable(sql);
       <span class='keyWord'>if</span> (<span class="userType">NetCommon</span>.HasData(dataTable))
     {
-      // Use definition for different values.
-      DbColumns dataDefinition = new DbColumns()
+      <span class='comment'>// Use definition for different values.</span>
+      <span class="userType">DbColumns</span> dataDefinition = <span class='keyWord'>new</span> <span class="userType">DbColumns</span>()
       {
         <span class='comment'>// Property name is different from DB column name.</span>
         { <span class='text'>"ColumnName"</span>, <span class='text'>"PropertyName"</span> },

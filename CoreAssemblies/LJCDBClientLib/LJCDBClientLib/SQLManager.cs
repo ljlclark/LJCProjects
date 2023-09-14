@@ -108,6 +108,15 @@ namespace LJCDBClientLib
       return retValue;
     }
 
+    // Maps the column property and rename values.
+    /// <include path='items/MapNames/*' file='Doc/DataManager.xml'/>
+    public void MapNames(string columnName, string propertyName = null
+      , string renameAs = null, string caption = null)
+    {
+      DataDefinition.MapNames(columnName, propertyName, renameAs, caption);
+      BaseDefinition.MapNames(columnName, propertyName, renameAs, caption);
+    }
+
     // Adds the lookup column names.
     /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
     public void SetLookupColumns(string[] propertyNames)

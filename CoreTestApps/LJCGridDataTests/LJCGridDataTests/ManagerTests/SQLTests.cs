@@ -48,6 +48,8 @@ namespace LJCGridDataTests
         case "FromTableColumns":
           // Create Grid Columns from DataTable.Columns.
           sql = "select * from Province";
+          // Gets columns in "Select" column order.
+          // If "*" gets columns in database order.
           dataTable = dataAccess.GetSchemaOnly(sql);
           var baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
@@ -56,27 +58,29 @@ namespace LJCGridDataTests
             { "Description" },
             { "Abbreviation" }
           };
+          // Gets grid column definitions in propertyNames order.
+          // If propertyNames is null, gets definitions in baseDefinition order.
           gridColumns = baseDefinition.LJCGetColumns(propertyNames);
           break;
       }
+      // Sets grid column names to DbColumn PropertyNames in grid columns order.
       ljcGrid.LJCAddColumns(gridColumns);
 
       // Load the data.
+      // The DataAccess class requires the developer
+      // to create the SQL statements to pass to its methods.
       sql = "select * from Province";
       dataTable = dataAccess.GetDataTable(sql);
       if (NetCommon.HasData(dataTable))
       {
-        // Create and load the grid rows individually.
+        // Create and populate the grid rows individually.
         foreach (DataRow dataRow in dataTable.Rows)
         {
           var ljcGridRow = ljcGrid.LJCRowAdd();
+          // Adds the values in grid columns order.
           TableData.RowSetValues(ljcGridRow, dataRow);
         }
       }
-
-      // Create the collection object.
-      var converter = new ResultConverter<Province, Provinces>();
-      var provinces = converter.CreateCollectionFromTable(dataTable);
     }
 
     internal void GetRowDataObject(DataAccess dataAccess
@@ -90,9 +94,23 @@ namespace LJCGridDataTests
         var dataTable = dataAccess.GetDataTable(sql);
         if (NetCommon.HasData(dataTable))
         {
+          // Use definition for different values.
+          DbColumns dataDefinition = new DbColumns()
+          {
+            // Property name is different than DB column name.
+            { "ColumnName", "PropertyName" },
+            // DataTable Column and Property name different than DB column name.
+            { "ColumnName", "PropertyName", "RenameAs" }
+          };
+
           // Create the Data Object.
+          // Sets object values where DataTable column names match
+          // the object property names and DataTable column row
+          // values are not null.
+          // If DataRow is not provided, first row is used if available.
           var converter = new ResultConverter<Province, Provinces>();
-          var province = converter.CreateDataFromTable(dataTable);
+          var province = converter.CreateDataFromTable(dataTable
+            , dataDefinition: dataDefinition);
         }
       }
     }
@@ -120,6 +138,7 @@ namespace LJCGridDataTests
         "Name"
       });
 
+      // The data record must not contain a value for DB Assigned columns.
       provider.RegionID = 1;
       var propertyNames = new List<string>()
       {
@@ -128,11 +147,14 @@ namespace LJCGridDataTests
         { "Description" },
         { "Abbreviation" }
       };
-
-      // The data record must not contain a value for DB Assigned columns.
       DataTable dataTable = sqlManager.Add(provider, propertyNames);
 
       // Create the Data Object with added DB Assigned values.
+      // Assumes DataTable column names same as object property names.
+      // Sets object values where DataTable column names match
+      // the object property names and DataTable column row
+      // values are not null.
+      // If DataRow is not provided, first row is used if available.
       var converter = new ResultConverter<Province, Provinces>();
       retValue = converter.CreateDataFromTable(dataTable);
       return retValue;
@@ -181,6 +203,11 @@ namespace LJCGridDataTests
       var dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
 
       // Create the Data Object.
+      // Assumes DataTable column names same as object property names.
+      // Sets object values where DataTable column names match
+      // the object property names and DataTable column row
+      // values are not null.
+      // If DataRow is not provideds, first row is used if available.
       var converter = new ResultConverter<Province, Provinces>();
       retValue = converter.CreateDataFromTable(dataTable);
       return retValue;
@@ -216,6 +243,11 @@ namespace LJCGridDataTests
       dataTable = sqlManager.GetDataTable(keyColumns);
 
       // Create the Data Object.
+      // Assumes DataTable column names same as object property names.
+      // Sets object values where DataTable column names match
+      // the object property names and DataTable column row
+      // values are not null.
+      // If DataRow is not provided, first row is used if available.
       var converter = new ResultConverter<Province, Provinces>();
       var province = converter.CreateDataFromTable(dataTable);
     }
