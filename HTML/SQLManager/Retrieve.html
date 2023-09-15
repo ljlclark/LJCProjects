@@ -78,10 +78,48 @@ See the Technical Documentation for more information.</pre>
     { <span class='text'>"Abbreviation"</span> }
   };
 
+  <span class='comment'>// Create the Join definition.</span>
+  <span class="userType">DbJoins</span> dbJoins = <span class='keyWord'>new</span> <span class="userType">DbJoins</span>();
+  <span class="userType">DbJoin</span> dbJoin = <span class='keyWord'>new</span> <span class="userType">DbJoin()</span>
+  {
+    TableName = "Region",
+    Columns = <span class='keyWord'>new</span> <span class="userType">DbColumns()</span>
+    {
+      <span class='comment'>// PropertyName is "RegionName" as data object cannot have duplicate</span>
+      <span class='comment'>// properties.</span>
+      <span class='comment'>// RenameAs is "JoinName" as DataTable cannot have duplicate columns.</span>
+      { <span class='text'>"Name"</span>, <span class='text'>"RegionName"</span>, <span class='text'>"JoinName"</span> }
+    },
+    JoinOns = new <span class="userType">DbJoinOns</span>()
+    {
+      { <span class='text'>"RegionID"</span>, <span class='text'>"ID"</span> }
+    }
+  };
+  dbJoins.Add(dbJoin);
+
   <span class='comment'>// Perform the Select</span>
-  <span class='commonType'>var</span> dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
+  <span class='commonType'>var</span> dataTable = sqlManager.GetDataTable(keyColumns, propertyNames
+    , dbJoins: dbJoins);
+  <span class='comment'>//Created SQL statement - sqlManager.SQLStatement is:</span>
+  <span class='comment'>// select</span>
+  <span class='comment'>//   Province.Name,</span>
+  <span class='comment'>//   Province.Description,</span>
+  <span class='comment'>//   Province.Abbreviation,</span>
+  <span class='comment'>//   Region.Name as JoinName</span>
+  <span class='comment'>// from Province</span>
+  <span class='comment'>// left join Region</span>
+  <span class='comment'>//   on ((Province.RegionID = Region.ID))</span>
+  <span class='comment'>// where Province.ID = 1;</span>
 
   <span class='comment'>// Create the Data Object.</span>
+  <span class="comment">// Use definition for different values.</span>
+  <span class="comment">// Must add "RegionName" property to Province to receive the join value.</span>
+  <span class="userType">DbColumns</span> dataDefinition = <span class='keyWord'>new</span> <span class="userType">DbColumns</span>()
+  {
+    <span class="comment">// Property and DataTable Column name different than DB column name.</span>
+    { <span class='text'>"Name"</span>, <span class='text'>"RegionName"</span>, <span class='text'>"JoinName"</span> }
+  };
+
   <span class="comment">// Sets object values where DataTable column names match</span>
   <span class="comment">// the object property names and DataTable column row</span>
   <span class="comment">// values are not null.</span>
