@@ -188,15 +188,33 @@ namespace LJCGridDataLib
 
     // Updates a grid row with the DataRow values.
     /// <include path='items/RowSetValues/*' file='Doc/TableData.xml'/>
-    public static void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow)
+    public static void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow
+      , DbColumns dataDefinition)
     {
       ArgumentDataRow(dataRow);
 
+      object value;
       List<object> listValues = new List<object>();
       var gridColumns = ljcGridRow.DataGridView.Columns;
       foreach (DataGridViewColumn gridColumn in gridColumns)
       {
-        listValues.Add(dataRow[gridColumn.Name]);
+        var dataColumnName = gridColumn.Name;
+
+        if (dataDefinition != null)
+        {
+          var dbColumn = dataDefinition.LJCSearchPropertyName(dataColumnName);
+          if (dbColumn?.RenameAs != null)
+          {
+            dataColumnName = dbColumn.RenameAs;
+          }
+        }
+
+        value = null;
+        if (dataRow.Table.Columns.Contains(dataColumnName))
+        {
+          value = dataRow[dataColumnName];
+        }
+        listValues.Add(value);
       }
       var values = listValues.ToArray();
       ljcGridRow.SetValues(values);

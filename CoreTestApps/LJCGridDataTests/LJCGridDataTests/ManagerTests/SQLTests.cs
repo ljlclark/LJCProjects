@@ -30,6 +30,7 @@ namespace LJCGridDataTests
       // Configure GridColumns.
       DataTable dataTable;
       DbColumns gridColumns = null;
+      DbColumns baseDefinition = null;
       string sql;
 
       // *** Test Setting ***
@@ -51,7 +52,7 @@ namespace LJCGridDataTests
           // Gets columns in "Select" column order.
           // If "*" gets columns in database order.
           dataTable = dataAccess.GetSchemaOnly(sql);
-          var baseDefinition = TableData.GetDbColumns(dataTable.Columns);
+          baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
             { "Name" },
@@ -78,7 +79,7 @@ namespace LJCGridDataTests
         {
           var ljcGridRow = ljcGrid.LJCRowAdd();
           // Adds the values in grid columns order.
-          TableData.RowSetValues(ljcGridRow, dataRow);
+          TableData.RowSetValues(ljcGridRow, dataRow, baseDefinition);
         }
       }
     }
@@ -202,12 +203,11 @@ namespace LJCGridDataTests
       // Perform the Select
       var dataTable = sqlManager.GetDataTable(keyColumns, propertyNames);
 
-      // Create the Data Object.
       // Assumes DataTable column names same as object property names.
       // Sets object values where DataTable column names match
       // the object property names and DataTable column row
       // values are not null.
-      // If DataRow is not provideds, first row is used if available.
+      // If DataRow is not provided, first row is used if available.
       var converter = new ResultConverter<Province, Provinces>();
       retValue = converter.CreateDataFromTable(dataTable);
       return retValue;
@@ -229,7 +229,8 @@ namespace LJCGridDataTests
         {
           var ljcGridRow = ljcGrid.LJCRowAdd();
           ljcGridRow.LJCSetInt32("ID", (int)dataRow["ID"]);
-          TableData.RowSetValues(ljcGridRow, dataRow);
+          TableData.RowSetValues(ljcGridRow, dataRow
+            , sqlManager.BaseDefinition);
         }
       }
 
@@ -250,6 +251,83 @@ namespace LJCGridDataTests
       // If DataRow is not provided, first row is used if available.
       var converter = new ResultConverter<Province, Provinces>();
       var province = converter.CreateDataFromTable(dataTable);
+    }
+
+    // Retrieves data with join values.
+    internal Province RetrieveWithJoins(string connectionString
+      , string providerName)
+    {
+      Province retValue;
+
+      // Create the SQLManager.
+      var sqlManager = new SQLManager(null, "Province", connectionString
+        , providerName);
+
+      // Identify the records and properties to be selected.
+      var keyColumns = new DbColumns()
+      {
+        { "ID" , 1 }
+      };
+      // Join columns are provided in DbJoins, not in propertyNames.
+      var propertyNames = new List<string>()
+      {
+        { "Name" },
+        { "RegionID" },
+        { "Description" },
+        { "Abbreviation" }
+      };
+
+      // Create the Join definition.
+      DbJoins dbJoins = new DbJoins();
+      DbJoin dbJoin = new DbJoin()
+      {
+        TableName = "Region",
+        Columns = new DbColumns()
+        {
+          // PropertyName is "RegionName" as data object cannot have duplicate
+          // properties.
+          // RenameAs is "JoinName" as DataTable cannot have duplicate columns.
+          { "Name", "RegionName", "JoinName" }
+        },
+        JoinOns = new DbJoinOns()
+        {
+          { "RegionID", "ID" }
+        }
+      };
+      dbJoins.Add(dbJoin);
+
+      // Perform the Select
+      var dataTable = sqlManager.GetDataTable(keyColumns, propertyNames
+        , joins: dbJoins);
+      //Created SQL statement - sqlManager.SQLStatement is:
+      // select
+      //   Province.Name,
+      //   Province.Description,
+      //   Province.Abbreviation,
+      //   Region.Name as JoinName
+      // from Province
+      // left join Region
+      //   on ((Province.RegionID = Region.ID))
+      // where Province.ID = 1;
+
+      // Create the Data Object.
+      // Use definition for different values.
+      // Must add "RegionName" property to Province to receive the join value.
+      DbColumns dataDefinition = new DbColumns()
+      {
+        // DataTable Column and Property name different than DB column name.
+        { "Region.Name", "RegionName", "JoinName" }
+      };
+
+      // Assumes DataTable column names same as object property names.
+      // Sets object values where DataTable column names match
+      // the object property names and DataTable column row
+      // values are not null.
+      // If DataRow is not provided, first row is used if available.
+      var converter = new ResultConverter<Province, Provinces>();
+      retValue = converter.CreateDataFromTable(dataTable
+        , dataDefinition: dataDefinition);
+      return retValue;
     }
 
     // Updating data with Filters.
@@ -335,20 +413,26 @@ namespace LJCGridDataTests
         , providerName);
 
       // Create grid columns.
-      var gridColumns = manager.BaseDefinition.Clone();
+      ljcGrid.Columns.Clear();
+      // Use DataDefinition to include join columns.
+      var gridColumns = manager.DataDefinition.Clone();
       gridColumns.LJCRemoveColumn("ID");
       ljcGrid.LJCAddColumns(gridColumns);
 
       // Add data to the grid.
+      // Join columns are provided in DbJoins, not in propertyNames.
+      gridColumns.LJCRemoveColumn("Region.Name");
       var propertyNames = gridColumns.LJCGetPropertyNames();
-      var dataTable = manager.LoadDataTable(propertyNames: propertyNames);
+      var dbJoins = manager.GetRegionJoins();
+      var dataTable = manager.LoadDataTable(propertyNames: propertyNames
+        , joins: dbJoins);
       if (NetCommon.HasData(dataTable))
       {
         // Create and load the grid rows individually.
         foreach (DataRow dataRow in dataTable.Rows)
         {
           var ljcGridRow = ljcGrid.LJCRowAdd();
-          TableData.RowSetValues(ljcGridRow, dataRow);
+          TableData.RowSetValues(ljcGridRow, dataRow, manager.DataDefinition);
         }
       }
     }
@@ -392,6 +476,7 @@ namespace LJCGridDataTests
       string sql;
       DataTable dataTable;
       var gridColumns = new DbColumns();
+      DbColumns baseDefinition = null;
 
       // *** Test Setting ***
       var setupCase = ColumnsCase.FromTable;
@@ -406,14 +491,14 @@ namespace LJCGridDataTests
         case ColumnsCase.FromTable:
           sql = "select * from Province";
           dataTable = dataAccess.GetSchemaOnly(sql);
-          var dbColumns = TableData.GetDbColumns(dataTable.Columns);
+          baseDefinition = TableData.GetDbColumns(dataTable.Columns);
           var propertyNames = new List<string>()
           {
             { "Name" },
             { "Description" },
             { "Abbreviation" }
           };
-          gridColumns = dbColumns.LJCGetColumns(propertyNames);
+          gridColumns = baseDefinition.LJCGetColumns(propertyNames);
           break;
       }
       mLJCGrid.LJCAddColumns(gridColumns);
@@ -427,7 +512,7 @@ namespace LJCGridDataTests
         foreach (DataRow dataRow in dataTable.Rows)
         {
           var ljcGridRow = mLJCGrid.LJCRowAdd();
-          TableData.RowSetValues(ljcGridRow, dataRow);
+          TableData.RowSetValues(ljcGridRow, dataRow, baseDefinition);
         }
       }
     }

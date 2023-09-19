@@ -43,6 +43,7 @@ namespace LJCGridDataTests
           // SQLManager Methods
           var connectionString = dataAccess.ConnectionString;
           var province = sqlTests.Retrieve(connectionString, providerName);
+          province = sqlTests.RetrieveWithJoins(connectionString, providerName);
           sqlTests.RetrieveWithRowValues(mLJCGrid, connectionString
             , providerName);
           sqlTests.UpdateWithKeys(province, connectionString, providerName);
@@ -53,8 +54,8 @@ namespace LJCGridDataTests
           sqlTests.AddProvince(connectionString, providerName);
           sqlTests.LoadProvince(mLJCGrid, connectionString
             , providerName);
-          province = sqlTests.RetrieveProvince(connectionString , providerName);
-          sqlTests.UpdateProvince(province, connectionString, providerName);
+          //province = sqlTests.RetrieveProvince(connectionString , providerName);
+          //sqlTests.UpdateProvince(province, connectionString, providerName);
           break;
       }
     }

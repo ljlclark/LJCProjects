@@ -90,6 +90,8 @@ namespace LJCGridDataTests
     }
     private Int32 mRegionID;
 
+    public string RegionName { get; set; }
+
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
     //[Column("Name", TypeName="varchar(60)")]

@@ -27,10 +27,8 @@ namespace LJCDBMessage
       if (DbResult.HasRows(dbResult))
       {
         retValue = new TList();
-        //foreach (DbValues dbValues in dbResult.Rows)
         foreach (DbRow dbRow in dbResult.Rows)
         {
-          //TData dataRecord = CreateData(dbRow);
           TData dataRecord = CreateData(dbRow.Values);
           retValue.Add(dataRecord);
         }
@@ -85,7 +83,6 @@ namespace LJCDBMessage
 
       if (DbResult.HasRows(dbResult))
       {
-        //retValue = CreateData(dbResult.Rows[0]);
         retValue = CreateData(dbResult.Rows[0].Values);
       }
       return retValue;

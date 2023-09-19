@@ -33,10 +33,16 @@ namespace LJCGridDataTests
 
       SQLManager = new SQLManager(dataConfigName, tableName, connectionString
         , providerName);
-      if (SQLManager.DataDefinition != null)
+      if (SQLManager.BaseDefinition != null)
       {
-        BaseDefinition = SQLManager.DataDefinition;
-        DataDefinition = BaseDefinition.Clone();
+        BaseDefinition = SQLManager.BaseDefinition;
+        DataDefinition = SQLManager.DataDefinition;
+
+        // Map property names and captions.
+        //SQLManager.MapNames("ColumnName", "PropertyName", "Column Name");
+
+        // Enable adding Calculated and Join columns to grid configuration.
+        DataDefinition.Add("Region.Name", "RegionName", "JoinName");  
 
         // Create the list of DB Assigned and Lookup column names.
         SQLManager.DbAssignedColumns = new List<string>()
@@ -98,6 +104,7 @@ namespace LJCGridDataTests
       return retValue;
     }
 
+    // Loads DataTable rows.
     public DataTable LoadDataTable(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -139,6 +146,34 @@ namespace LJCGridDataTests
     }
     #endregion
 
+    #region Custom Data Methods
+
+    // Creates the Region joins.
+    public DbJoins GetRegionJoins()
+    {
+      DbJoins retValue = new DbJoins();
+      DbJoin dbJoin = new DbJoin()
+      {
+        TableName = "Region",
+        // Must add join column properties to the data object to receive the
+        // join value.
+        Columns = new DbColumns()
+        {
+          // PropertyName is "RegionName" as data object cannot have
+          // duplicate properties.
+          // RenameAs is "JoinName" as DataTable cannot have duplicate columns.
+          { "Name", "RegionName", "JoinName" }
+        },
+        JoinOns = new DbJoinOns()
+        {
+          { "RegionID", "ID" }
+        }
+      };
+      retValue.Add(dbJoin);
+      return retValue;
+    }
+    #endregion
+
     #region GetKey Methods
 
     // Gets the ID key record.
@@ -163,7 +198,7 @@ namespace LJCGridDataTests
       if (NetCommon.HasData(dataTable))
       {
         retValue = ResultConverter.CreateDataFromTable(dataTable
-          , dataTable.Rows[0], SQLManager.DataDefinition);
+          , dataTable.Rows[0], DataDefinition);
       }
       return retValue;
     }
@@ -176,7 +211,7 @@ namespace LJCGridDataTests
       if (NetCommon.HasData(dataTable))
       {
         retValue = ResultConverter.CreateCollectionFromTable(dataTable
-          , SQLManager.DataDefinition);
+          , DataDefinition);
       }
       return retValue;
     }

@@ -139,6 +139,7 @@
     </summary>
     <param name="ljcGridRow">The LJCGridRow object.</param>
     <param name="dataRow">The DataRow object.</param>
+    <param name="dataDefinition">The DataDefinition object.</param>
     <example>
       <code>
         // See the DataAccess setup code on the TableGridData class page.
