@@ -220,6 +220,19 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    public bool HasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Creates the DbColumn from the supplied values and adds to the collection.
     /// <include path='items/LJCAddPropertyAs/*' file='Doc/DbColumns.xml'/>
     public DbColumn LJCAddPropertyAs(string propertyName, string caption = null
@@ -244,11 +257,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    // Returns a column by property name.
+    /// <include path='items/LJCGetColumn/*' file='Doc/DbColumns.xml'/>
     public DbColumn LJCGetColumn(string propertyName)
     {
       DbColumn retValue = null;
@@ -316,19 +326,6 @@ namespace LJCNetCommon
         {
           retValue.Add(dbColumn.PropertyName);
         }
-      }
-      return retValue;
-    }
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
-    public bool HasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
       }
       return retValue;
     }
@@ -521,8 +518,6 @@ namespace LJCNetCommon
       {
         foreach (DbColumn dbColumn in dbColumns)
         {
-          // *** Next Statement *** Change - 11/24/22
-          //searchColumn = LJCSearchName(dbColumn.ColumnName);
           searchColumn = LJCSearchPropertyName(dbColumn.PropertyName);
           if (searchColumn != null)
           {
@@ -533,8 +528,8 @@ namespace LJCNetCommon
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DbColumns.xml'/>
-    public void MapNames(string columnName, string propertyName = null
+    /// <include path='items/LJCMapNames/*' file='Doc/DbColumns.xml'/>
+    public void LJCMapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
       DbColumn dbColumn = LJCSearchColumnName(columnName);

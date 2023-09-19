@@ -137,6 +137,13 @@
       same as the property name.
     </remarks>
   </LJCAddPropertyAs>
+  <LJCGetColumn>
+    <summary>
+      Returns a column by property name.
+    </summary>
+     <param name="propertyName">The property name.</param>
+    <returns>A reference to the matching column.</returns>
+  </LJCGetColumn>
   <LJCGetColumns>
     <summary>
       Returns a set of columns that match the supplied list.
@@ -221,7 +228,7 @@
     </summary>
     <param name="dbColumns">The target object.</param>
   </LJCSetColumnCaptions>
-  <MapNames>
+  <LJCMapNames>
     <summary>
       Maps the column property and rename values.
     </summary>
@@ -229,7 +236,7 @@
     <param name="propertyName">The Property name.</param>
     <param name="renameAs">The Rename value.</param>
     <param name="caption">The Caption value.</param>
-  </MapNames>
+  </LJCMapNames>
 
   <!-- Value Methods -->
   <LJCGetBoolean>
