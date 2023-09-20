@@ -25,6 +25,46 @@
     is displayed. This shows that the touch is considered a right mouse
     click. Remove your finger and the context menu will be displayed.
   </p>
+  <b>XML Decode</b>
+  <p>
+    Decodes XML entities to XML special characters. This allows HTML
+    display code to be converted back to normal XML.
+  </p>
+  <b>XML Encode</b>
+  <p>
+    Encodes XML special characters to XML entites. This allows HTML to
+    display XML information.
+  </p>
+  <h3>HTML XML Syntax Decode</h3>
+  <p>
+    This is a "Tool" menu item to Decode special replacement values
+    to HTML Syntax colors. It helps the user to work with and visualize
+    the XML easier than dealing with the &lt;span&gt; elements.
+  </p>
+  <p>
+    After the XML is marked up with these replacement values it can be
+    Decoded to the corresponding &lt;span&gt; elements for display in an
+    HTML document.
+  </p>
+  <pre>
+_ab_ "Attribute Begin" = "&lt;span class='attrib'&gt;"
+_nb_ "Name Begin"      = "&lt;span class='name'&gt;&lt;span class='ltgt'&gt;&lt;&lt;/span&gt;"
+_ne_ "Name End"        = "&lt;/span&gt;&lt;span class='ltgt'&gt;&gt;&lt;/span&gt;"
+_se_ "Span End"        = "&lt;span&gt;"</pre>
+  <p>
+    The "attrib", "Name" and "ltgt" selector classes are defined in CodeDoc.css.
+  </p>
+  <b>HTML XML Syntax Encode</b>
+  <p>
+    This "Tool" menu item converts the &lt;span&gt; elements back into
+    replacement values. It is the reverse of the "HTML XML Syntax Decode"
+    menu item.
+  </p>
+  <b>HTML C# Syntax Colors</b>
+  <p>
+    This "Tool" menu item modifies the C# code with &lt;span&gt; elements to
+    give it HTML Syntax coloring. There is no "Encode" function.
+  </p>
   <b>Generate Output</b>
   <p>
     The 'Generate Output' menu item generates the Output Text based on the
@@ -47,7 +87,7 @@
   </p>
   <h6>
     OutputText<br />
-    Copyright © Lester J Clark and Contributors.<br />
+    Copyright &copy; Lester J Clark and Contributors.<br />
     Licensed under the MIT License.
   </h6>
 </body>

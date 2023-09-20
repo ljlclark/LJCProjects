@@ -111,8 +111,8 @@ namespace LJCGridDataTests
     {
       DataTable retValue;
 
-      retValue = SQLManager.GetDataTable(keyColumns, propertyNames
-        , filters, joins);
+      retValue = SQLManager.GetDataTable(keyColumns, propertyNames, filters
+        , joins);
       SQLStatement = SQLManager.SQLStatement;
       return retValue;
     }

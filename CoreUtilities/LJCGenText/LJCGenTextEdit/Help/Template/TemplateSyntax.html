@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TemplateSyntax.cs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Template Syntax</title>
+</head>
+<body>
+  <h3 style="color:blue">The Template Syntax</h3>
+  <p>
+    An LJCGenText "Template" is a text file with Template Directives and
+    Replacement Names.
+  </p>
+
+  <h3>Directives</h3>
+  <p>
+    A Template Directive is contained within a single line comment. This
+    allows the text file to be edited with the appropriate code editor
+    regardless of the language type. The single line comment start
+    characters can be specified by the user.
+  </p>
+  <p>
+    A directive starts with the "#" character and has up to three
+    properties. These properties are: The directive ID, Name and optional
+    Value. The directive ID is not case sensitive.
+  </p>
+  <p>
+    These are example Directives:<br />
+    // #SectionBegin MySectionName<br />
+    // #sectionend MySectionName
+  </p>
+  <p>
+    The available Directives are:<br />
+  </p>
+  <pre class="code">
+#SectionBegin - The beginning of a section.
+#SectionEnd   - The end of a section.
+#IfBegin      - The beginning of an If block.
+#IfElse       - The beginning of an Else block.
+#IfEnd        - The end of an If block.
+#Value        - A replacement name for the parent section.</pre>
+  <p>
+    The "#Value" directive is used by the GenTextEdit program. It has
+    no effect on the GenText program or generated code.
+  </p>
+
+  <h3>Replacement Names</h3>
+  <p>
+    Replacement names are placeholders for the values from the GenText Data
+    xml file. Replacement names are case sensitive.
+  </p>
+  <p>
+    A Replacement name starts and ends with an underscore. No spaces are
+    allowed in a replacement name or between the name and the enclosing
+    underscore values. This is a replacement name: "_ClassName_".
+  </p>
+  <h6>
+    TemplateSyntax<br />
+    Copyright &copy; Lester J Clark and Contributors.<br />
+    Licensed under the MIT License.
+  </h6>
+</body>
+</html>

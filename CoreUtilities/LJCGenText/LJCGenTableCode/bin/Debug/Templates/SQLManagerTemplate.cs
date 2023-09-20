@@ -42,13 +42,11 @@ namespace _Namespace_
       , providerName);
     if (SQLManager.DataDefinition != null)
     {
-      BaseDataDefinition = SQLManager.DataDefinition;
-      DataDefinition = baseDataDefinition.Clone();
+      BaseDefinition = SQLManager.BaseDefinition;
+      DataDefinition = SQLManager.DataDefinition;
 
-      // Map table names with property names or captions
-      // that differ from the column names.
-      baseDataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
-      dataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
+      // Map property names and captions.
+      DataDefinition.MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID);
 
       // Create the list of DB Assigned and Lookup column names.
       SQLManager.DbAssignedColumns = new List<string>()
@@ -100,8 +98,8 @@ namespace _Namespace_
     {
       _CollectionName_ retValue = null;
 
-      DataTable dataTable = LoadDataTable(keyColumns, propertyNames
-        , filters, joins);
+      DataTable dataTable = LoadDataTable(keyColumns, propertyNames, filters
+        , joins);
       if (dataTable != null)
       {
         retValue = Create_CollectionName_(dataTable);
@@ -116,8 +114,8 @@ namespace _Namespace_
     {
       DataTable retValue;
 
-      retValue = SQLManager.GetDataTable(keyColumns, propertyNames
-        , filters, joins);
+      retValue = SQLManager.GetDataTable(keyColumns, propertyNames, filters
+        , joins);
       SQLStatement = SQLManager.SQLStatement;
       return retValue;
     }
@@ -149,6 +147,34 @@ namespace _Namespace_
       AffectedCount = SQLManager.AffectedCount;
       SQLStatement = SQLManager.SQLStatement;
     }
+    #endregion
+
+    #region Custom Data Methods
+
+    //// Creates the Region joins.
+    //public DbJoins GetRegionJoins()
+    //{
+    //  DbJoins retValue = new DbJoins();
+    //  DbJoin dbJoin = new DbJoin()
+    //  {
+    //    TableName = "Table",
+    //    // Must add join column properties to the data object to receive the
+    //    // join value.
+    //    Columns = new DbColumns()
+    //    {
+    //      // PropertyName is "PropertyName" as data object cannot have
+    //      // duplicate properties.
+    //      // RenameAs is "JoinName" as DataTable cannot have duplicate columns.
+    //      { "Name", "PropertyName", "JoinName" }
+    //    },
+    //    JoinOns = new DbJoinOns()
+    //    {
+    //      { "TableID", "ID" }
+    //    }
+    //  };
+    //  retValue.Add(dbJoin);
+    //  return retValue;
+    //}
     #endregion
 
     #region GetKey Methods
