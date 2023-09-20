@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- ViewDbViewManager.xml -->
+<!-- ProjectDbViewDAL.xml -->
 <items>
   <ViewColumnManager>
     <summary>
@@ -18,7 +18,7 @@
         presenting an object oriented view of the Data Views database data.
       </para>
       <para>
-        The Manager classes use LJC.DataAccess to communicate
+        The Manager classes use LJCDataAccess to communicate
         with the database.
       </para>
     </remarks>

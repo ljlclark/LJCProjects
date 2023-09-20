@@ -77,8 +77,6 @@
     <Compile Include="Data\Views.cs" />
     <Compile Include="Data\ViewTable.cs" />
     <Compile Include="Data\ViewTables.cs" />
-    <Compile Include="Manager\DbViewColumnManager.cs" />
-    <Compile Include="Manager\DbViewGridColumnManager.cs" />
     <Compile Include="Manager\ViewColumnManager.cs" />
     <Compile Include="Manager\ViewConditionManager.cs" />
     <Compile Include="Manager\ViewConditionSetManager.cs" />
