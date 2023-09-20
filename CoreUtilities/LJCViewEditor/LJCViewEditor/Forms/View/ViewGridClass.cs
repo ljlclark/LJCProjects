@@ -273,13 +273,9 @@ namespace LJCViewEditor
           Parent.DataGrid.Columns.Clear();
 
           // Setup grid columns.
-          //ResultGridData resultGridData = new ResultGridData();
-          //resultGridData.SetGridColumns(dbResult.Columns);
+          Parent.DataGrid.LJCAddColumns(dbResult.Columns);
 
           // Set Grid data.
-          //Parent.DataGrid.LJCAddColumns(resultGridData.GridColumns);
-          //resultGridData.LoadRows(dbResult);
-          Parent.DataGrid.LJCAddColumns(dbResult.Columns);
           foreach (DbRow dbRow in dbResult.Rows)
           {
             var gridRow = Parent.DataGrid.LJCRowAdd();
