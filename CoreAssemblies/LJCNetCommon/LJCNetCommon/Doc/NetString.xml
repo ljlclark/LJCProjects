@@ -63,8 +63,36 @@
       or an empty string when trimmed.
     </returns>
   </InitString>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginIndex">The begin index.</param>
+    <param name="endIndex">The end index.</param>
+    <returns>The resulting text value.</returns>
+  </RemoveSection>
+  <Truncate>
+    <summary>
+      Truncates a text string to the specified length.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="length">The maximum length.</param>
+    <returns>The truncated string.</returns>
+  </Truncate>
 
   <!-- Parsing Delimited String Values -->
+  <FindTag>
+    <summary>
+      Finds a tag in a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="tagName">The tag name.</param>
+    <param name="beginIndex">The tag begin index.</param>
+    <param name="endIndex">The tag end index.</param>
+    <param name="startIndex">The find start index.</param>
+    <returns>The tag value.</returns>
+  </FindTag>
   <GetDelimitedAndIndexes>
     <summary>
       Get the delimited string begin and end index.
@@ -229,6 +257,13 @@
       </code>
     </example>
   </GetStringWithDelimiters>
+  <RemoveTags>
+    <summary>
+      Removes tags from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The text without tags.</returns>
+  </RemoveTags>
 
   <!-- Soundex Functions -->
    <CreateLSoundex>
@@ -298,4 +333,20 @@
       </para>
     </remarks>
   </Phonetic>
+  
+  <!-- Other Functions -->
+  <AddMissingArgument>
+    <summary>
+      Adds the missing argument name to the message.
+    </summary>
+    <param name="message">The message text.</param>
+    <param name="argument">The argument value.</param>
+  </AddMissingArgument>
+  <ThrowInvalidArgument>
+    <summary>
+      Throws the invalid argument exception if message has a value.
+    </summary>
+    <param name="message">The message text.</param>
+    <exception cref="ArgumentException"></exception>
+  </ThrowInvalidArgument>
 </items>

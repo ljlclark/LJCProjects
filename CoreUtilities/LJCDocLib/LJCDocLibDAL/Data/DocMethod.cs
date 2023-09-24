@@ -63,7 +63,6 @@ namespace LJCDocLibDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      // $"{mSequence}){mName}:{mID}-{mValue}";
       return $"{mSequence}){mName}";
     }
     #endregion
@@ -123,14 +122,13 @@ namespace LJCDocLibDAL
         if (value != null
           && null == OverloadName)
         {
-          ChangedOverload = true;
-          OverloadName = value;
-          // *** Begin *** Add - 7/9/23
-          if (OverloadName.StartsWith("#"))
+          // *** Begin *** Add - 9/25/23
+          if (value.StartsWith("#"))
           {
-            OverloadName = OverloadName.Substring(1);
+            OverloadName = value.Substring(1);
+            ChangedOverload = true;
           }
-          // *** End   *** Add - 7/9/23
+          // *** End   *** Add
         }
         mName = ChangedNames.Add(ColumnName, mName, value);
       }

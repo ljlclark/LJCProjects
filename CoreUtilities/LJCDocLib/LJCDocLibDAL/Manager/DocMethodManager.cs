@@ -159,12 +159,25 @@ namespace LJCDocLibDAL
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
-    public DocMethod RetrieveWithUnique(short classID, string overloadName
+    public DocMethod RetrieveWithName(short classID, string name
       , List<string> propertyNames = null)
     {
       DocMethod retValue;
 
-      var keyColumns = GetUniqueKey(classID, overloadName);
+      var keyColumns = GetNameKey(classID, name);
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      retValue = ResultConverter.CreateData(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a record with the supplied unique values.
+    /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
+    public DocMethod RetrieveWithOverload(short classID, string overloadName
+      , List<string> propertyNames = null)
+    {
+      DocMethod retValue;
+
+      var keyColumns = GetOverloadKey(classID, overloadName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -213,13 +226,25 @@ namespace LJCDocLibDAL
 
     // Gets the ID key columns.
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
-    public DbColumns GetUniqueKey(short classID, string overloadName)
+    public DbColumns GetNameKey(short classID, string overloadName)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocMethod.ColumnDocClassID, classID },
-        // *** Next Statement *** Change - 7/9/23
+        { DocMethod.ColumnName, (object)overloadName }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
+    /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
+    public DbColumns GetOverloadKey(short classID, string overloadName)
+    {
+      // Needs cast for string to select the correct Add overload.
+      var retValue = new DbColumns()
+      {
+        { DocMethod.ColumnDocClassID, classID },
         { DocMethod.ColumnOverloadName, (object)overloadName }
       };
       return retValue;

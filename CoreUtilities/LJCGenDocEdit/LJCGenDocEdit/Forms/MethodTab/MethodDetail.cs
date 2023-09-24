@@ -112,10 +112,6 @@ namespace LJCGenDocEdit
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
         OverloadText.Text = dataRecord.OverloadName;
-        if (false == NetString.HasValue(dataRecord.OverloadName))
-        {
-          OverloadText.Text = dataRecord.Name;
-        }
         SequenceText.Text = dataRecord.Sequence.ToString();
         ActiveCheckbox.Checked = dataRecord.ActiveFlag;
       }
@@ -159,9 +155,19 @@ namespace LJCGenDocEdit
       LJCRecord = SetRecordValues();
 
       var manager = Managers.DocMethodManager;
-      // *** Next Statement *** Change - 7/9/23
-      var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocClassID
-        , LJCRecord.OverloadName);
+      // *** Begin *** Change - 9/25/23
+      DocMethod lookupRecord;
+      if (NetString.HasValue(LJCRecord.OverloadName))
+      {
+        lookupRecord = manager.RetrieveWithOverload(LJCRecord.DocClassID
+          , LJCRecord.OverloadName);
+      }
+      else
+      {
+        lookupRecord = manager.RetrieveWithName(LJCRecord.DocClassID
+          , LJCRecord.Name);
+      }
+      // *** End   *** Change
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
@@ -467,7 +473,6 @@ namespace LJCGenDocEdit
       {
         var dataMethod = list.LJCSelectedRecord;
         NameText.Text = dataMethod.Name;
-        // *** Next Statement *** Add- 7/9/23
         OverloadText.Text = dataMethod.OverloadName;
         if (false == NetString.HasValue(dataMethod.Summary))
         {
@@ -476,15 +481,6 @@ namespace LJCGenDocEdit
         var description = NetString.RemoveTags(dataMethod.Summary);
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);
-      }
-    }
-
-    // Ensures OverloadText has a value.
-    private void OverloadText_Leave(object sender, EventArgs e)
-    {
-      if (false == NetString.HasValue(OverloadText.Text))
-      {
-        OverloadText.Text = NameText.Text;
       }
     }
 

@@ -272,18 +272,16 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
-          var sourceName = DocMethodName(DocMethodID(sourceRow));
-          var manager = Managers.DocMethodManager;
-          var sourceGroup = manager.RetrieveWithUnique(docClassID, sourceName);
+          var sourceMethod = DocMethodWithID(DocMethodID(sourceRow));
 
           // Get target group.
           var targetRow = mMethodGrid.Rows[targetIndex] as LJCGridRow;
-          var targetName = DocMethodName(DocMethodID(targetRow));
-          var targetGroup = manager.RetrieveWithUnique(docClassID, targetName);
+          var targetMethod = DocMethodWithID(DocMethodID(targetRow));
 
-          var sourceSequence = sourceGroup.Sequence;
-          var targetSequence = targetGroup.Sequence;
-          manager.MethodGroupID = sourceGroup.DocMethodGroupID;
+          var sourceSequence = sourceMethod.Sequence;
+          var targetSequence = targetMethod.Sequence;
+          var manager = Managers.DocMethodManager;
+          manager.MethodGroupID = sourceMethod.DocMethodGroupID;
           manager.ChangeSequence(sourceSequence, targetSequence);
           DoRefresh();
         }
@@ -312,6 +310,9 @@ namespace LJCGenDocEdit
         mMethodGrid.LJCDragDataName = "DocMethod";
       }
     }
+    #endregion
+
+    #region Get Data Methods
 
     // Retrieves the current row item ID.
     private short DocClassID(LJCGridRow docClassRow = null)
@@ -357,19 +358,6 @@ namespace LJCGenDocEdit
       if (methodGroupRow != null)
       {
         retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
-      }
-      return retValue;
-    }
-
-    // Retrieves the DocMethod name.
-    private string DocMethodName(short docMethodID)
-    {
-      string retValue = null;
-
-      var docMethod = DocMethodWithID(docMethodID);
-      if (docMethod != null)
-      {
-        retValue = docMethod.Name;
       }
       return retValue;
     }

@@ -123,34 +123,25 @@ namespace LJCNetCommon
       return retVal;
     }
 
-  /// <summary>
-  /// 
-  /// </summary>
-  /// <param name="text"></param>
-  /// <param name="beginIndex"></param>
-  /// <param name="endIndex"></param>
-  /// <returns></returns>
-  public static string RemoveSection(string text, int beginIndex, int endIndex)
-  {
-    string retValue = text;
-
-    if (beginIndex >= 0
-      && endIndex >= beginIndex)
+    // Removes a section from a text value.
+    /// <include path='items/RemoveSection/*' file='Doc/NetString.xml'/>
+    public static string RemoveSection(string text, int beginIndex, int endIndex)
     {
-      var value = retValue.Substring(0, beginIndex);
-      value += retValue.Substring(endIndex + 1);
-      retValue = value;
-    }
-    return retValue;
-  }
+      string retValue = text;
 
-  /// <summary>
-  /// Truncates a text string to the specified length.
-  /// </summary>
-  /// <param name="text">The text value.</param>
-  /// <param name="length">The maximum length.</param>
-  /// <returns>The truncated string.</returns>
-  public static string Truncate(string text, int length)
+      if (beginIndex >= 0
+        && endIndex >= beginIndex)
+      {
+        var value = retValue.Substring(0, beginIndex);
+        value += retValue.Substring(endIndex + 1);
+        retValue = value;
+      }
+      return retValue;
+    }
+
+    // Truncates a text string to the specified length.
+    /// <include path='items/Truncate/*' file='Doc/NetString.xml'/>
+    public static string Truncate(string text, int length)
     {
       var retValue = text;
 
@@ -164,19 +155,12 @@ namespace LJCNetCommon
 
     #region Parsing Delimited String
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="text"></param>
-    /// <param name="tagName"></param>
-    /// <param name="beginIndex"></param>
-    /// <param name="endIndex"></param>
-    /// <param name="startIndex"></param>
-    /// <returns></returns>
+    // Finds a tag in a text value.
+    /// <include path='items/FindTag/*' file='Doc/NetString.xml'/>
     public static string FindTag(string text, ref string tagName, out int beginIndex
       , out int endIndex, ref int startIndex)
     {
-      string retValue = null;
+      string retValue;
 
       var findValue = "<";
       if (false == NetString.HasValue(tagName))
@@ -310,16 +294,13 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns></returns>
+    // Removes tags from a text value.
+    /// <include path='items/RemoveTags/*' file='Doc/NetString.xml'/>
     public static string RemoveTags(string text)
     {
       string retValue = text;
 
-      string tag = null;
+      string tag;
       do
       {
         string tagName = null;
@@ -478,11 +459,7 @@ namespace LJCNetCommon
     #region Other Functions
 
     // Adds the missing argument name to the message.
-    /// <summary>
-    /// Adds the missing argument name to the message.
-    /// </summary>
-    /// <param name="message">The message text.</param>
-    /// <param name="argument">The argument value.</param>
+    /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
     public static void AddMissingArgument(string message, string argument)
     {
       if (false == NetString.HasValue(argument))
@@ -492,10 +469,7 @@ namespace LJCNetCommon
     }
 
     // Throws the invalid argument exception if message has a value.
-    /// <summary>
-    /// Throws the invalid argument exception if message has a value.
-    /// </summary>
-    /// <param name="message">The message text.</param>
+    /// <include path='items/ThrowInvalidArgument/*' file='Doc/NetString.xml'/>
     public static void ThrowInvalidArgument(string message)
     {
       if (NetString.HasValue(message))
