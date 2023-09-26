@@ -158,6 +158,7 @@ namespace LJCDocLibDAL
     }
 
     // Retrieves a record with the supplied unique values.
+    // *** New Method *** 9/25/23 #Overload
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
     public DocMethod RetrieveWithName(short classID, string name
       , List<string> propertyNames = null)
@@ -171,6 +172,7 @@ namespace LJCDocLibDAL
     }
 
     // Retrieves a record with the supplied unique values.
+    // *** New Method *** 9/25/23 #Overload
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
     public DocMethod RetrieveWithOverload(short classID, string overloadName
       , List<string> propertyNames = null)
@@ -225,6 +227,7 @@ namespace LJCDocLibDAL
     }
 
     // Gets the ID key columns.
+    // *** New Method *** 9/25/23 #Overload
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
     public DbColumns GetNameKey(short classID, string overloadName)
     {
@@ -238,6 +241,7 @@ namespace LJCDocLibDAL
     }
 
     // Gets the ID key columns.
+    // *** New Method *** 9/25/23 #Overload
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
     public DbColumns GetOverloadKey(short classID, string overloadName)
     {

@@ -80,7 +80,7 @@ namespace LJCGenDocEdit
         mMethodSelect.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mMethodGrid.Rows)
         {
-          // *** Next Statement *** Change - 7/9/23
+          // *** Next Statement *** Change - 7/9/23 #Overload
           if (DocMethodOverload(row) == dataRecord.OverloadName)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -119,10 +119,11 @@ namespace LJCGenDocEdit
       if (mMethodGrid.CurrentRow is LJCGridRow _)
       {
         mMethodSelect.Cursor = Cursors.WaitCursor;
-        // *** Begin *** Change - 7/9/23
+        // *** Begin *** Change - 7/9/23 #Overload
         var overloadName = DocMethodOverload();
         var dataRecord = mDataMethods.Find(x => x.OverloadName == overloadName);
-        // *** End   *** Change - 7/9/23
+
+        // *** End   *** Change - 7/9/23 #Overload
         if (dataRecord != null)
         {
           mMethodSelect.LJCSelectedRecord = dataRecord;

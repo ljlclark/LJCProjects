@@ -37,51 +37,40 @@ namespace LJCDocObjLib
     #region Methods
 
     // Returns the unique name for an overload method.
+    // *** Change Method *** 9/26/23 #Overload
     /// <include path='items/GetOverloadName/*' file='Doc/DataMethods.xml'/>
     public string GetOverloadName(string docMethodName)
     {
-      string retValue = docMethodName;
+      string retValue = null;
 
-      if (retValue.StartsWith("#"))
+      var methodName = docMethodName;
+      if (methodName.StartsWith("#"))
       {
-        retValue = docMethodName.Substring(1);
+        retValue = methodName.Substring(1);
+        methodName = retValue;
       }
 
+      DataMethod dataMethod;
+      if (retValue != null)
+      {
+        dataMethod = Find(x => x.OverloadName == retValue);
+      }
+      else
+      {
+        dataMethod = Find(x => x.Name == methodName);
+      }
+
+      // Name already exists.
       int index = 0;
-      DataMethod dataMethod = SearchOverloadName(retValue);
       while (dataMethod != null)
       {
         index++;
-        string searchValue = $"{retValue}{index}";
-        dataMethod = SearchOverloadName(searchValue);
+        string searchValue = $"{methodName}{index}";
+        dataMethod = Find(x => x.OverloadName == searchValue);
         if (null == dataMethod)
         {
           retValue = searchValue;
         }
-      }
-      return retValue;
-    }
-
-    // Returns the element with the name matching the supplied value.
-    /// <include path='items/SearchOverloadName/*' file='Doc/DataMethods.xml'/>
-    public DataMethod SearchOverloadName(string overloadName)
-    {
-      DataMethod retValue = null;
-
-      if (Count != mPrevCount)
-      {
-        mPrevCount = Count;
-        Sort();
-      }
-
-      DataMethod dataMethod = new DataMethod()
-      {
-        OverloadName = overloadName
-      };
-      int index = BinarySearch(dataMethod);
-      if (index > -1)
-      {
-        retValue = this[index];
       }
       return retValue;
     }

@@ -272,6 +272,7 @@ namespace LJCGenDocEdit
         if (targetIndex >= 0)
         {
           // Get source group.
+          // *** Begin *** Change - 9/25/23 #Overload
           var sourceMethod = DocMethodWithID(DocMethodID(sourceRow));
 
           // Get target group.
@@ -283,6 +284,7 @@ namespace LJCGenDocEdit
           var manager = Managers.DocMethodManager;
           manager.MethodGroupID = sourceMethod.DocMethodGroupID;
           manager.ChangeSequence(sourceSequence, targetSequence);
+          // *** End   *** Change - 9/25/23 #Overload
           DoRefresh();
         }
       }

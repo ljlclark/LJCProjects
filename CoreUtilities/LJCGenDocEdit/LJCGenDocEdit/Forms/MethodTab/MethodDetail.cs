@@ -77,12 +77,12 @@ namespace LJCGenDocEdit
         Text += " - Edit";
         LJCIsUpdate = true;
         mOriginalRecord = DocMethodWithID(LJCMethodID);
-        // *** Begin *** Add - 7/9/23
+        // *** Begin *** Add - 7/9/23 #Overload
         if (mOriginalRecord.ChangedOverload)
         {
           mOriginalRecord.ChangedNames.Add(DocMethod.ColumnOverloadName);
         }
-        // *** End   *** Add - 7/9/23
+        // *** End   *** Add - 7/9/23 #Overloads
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -155,7 +155,7 @@ namespace LJCGenDocEdit
       LJCRecord = SetRecordValues();
 
       var manager = Managers.DocMethodManager;
-      // *** Begin *** Change - 9/25/23
+      // *** Begin *** Change - 9/25/23 #Overload
       DocMethod lookupRecord;
       if (NetString.HasValue(LJCRecord.OverloadName))
       {
@@ -167,7 +167,7 @@ namespace LJCGenDocEdit
         lookupRecord = manager.RetrieveWithName(LJCRecord.DocClassID
           , LJCRecord.Name);
       }
-      // *** End   *** Change
+      // *** End   *** Change - 9/25/23 #Overload
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
