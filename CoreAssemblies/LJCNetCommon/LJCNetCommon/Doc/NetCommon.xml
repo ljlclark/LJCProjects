@@ -521,205 +521,6 @@
     </example>
   </XmlEncode>
 
-  <!-- Object Data Functions -->
-  <GetBoolean>
-    <summary>
-      Gets a boolean value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The boolean value or false if the object is null.
-      Also returns false if the object is not type "bool".
-    </returns>
-  </GetBoolean>
-  <GetByte>
-    <summary>
-      Gets a byte value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The byte value or the byte default if the object is null.
-      Also returns false if the object is not type "byte".
-    </returns>
-  </GetByte>
-  <GetChar>
-    <summary>
-      Gets a byte value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The char value or the char default if the object is null.
-      Also returns false if the object is not type "char".
-    </returns>
-  </GetChar>
-  <GetDateTime>
-    <summary>
-      Gets a DateTime value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The DateTime value or null if the object is null.
-      Also returns null if the object is not type "DateTime".
-    </returns>
-  </GetDateTime>
-  <GetDecimal>
-    <summary>
-      Gets a decimal value from an object. (E)
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The decimal value or zero if the object is null.
-      Also returns zero if the object is not type "decimal", "long", "int"
-      or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a decimal value from an object.
-        private static void GetDecimal()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          decimal setup = 3.14m;
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          decimal value = NetCommon.GetDecimal(obj);
-        }
-      </code>
-    </example>
-  </GetDecimal>
-  <GetDouble>
-    <summary>
-      Gets a double value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The double value or zero if the object is null.
-      Also returns zero if the object is not type "double", "decimal", "long"
-      , "int" or "short".
-    </returns>
-  </GetDouble>
-  <GetInt16>
-    <summary>
-      Gets a short value from an object. (E)
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Gets a short value from an object.
-        private static void GetInt16()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          short setup = 3;
-          object obj = setup;
-
-          // Gets a short value from an object.
-          short value = NetCommon.GetInt16(obj);
-        }
-      </code>
-    </example>
-  </GetInt16>
-  <GetInt32>
-    <summary>
-      Gets an integer value from an object. (E)
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The integer value or zero if the object is null.
-      Also returns zero if the object is not type "int" or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets an int value from an object.
-        private static void GetInt32()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          int setup = 3;
-          object obj = setup;
-
-          // Gets an int value from an object.
-          int value = NetCommon.GetInt32(obj);
-        }
-      </code>
-    </example>
-  </GetInt32>
-  <GetInt64>
-    <summary>
-      Gets a long value from an object. (E)
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "long", "int" or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a long value from an object.
-        private static void GetInt64()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          long setup = 3;
-          object obj = setup;
-
-          // Gets a long value from an object.
-          long value = NetCommon.GetInt64(obj);
-        }
-      </code>
-    </example>
-  </GetInt64>
-  <GetObject>
-    <summary>
-      Gets an instantiated object value.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>The instantiated object.</returns>
-  </GetObject>
-  <GetSingle>
-    <summary>
-      Gets a float value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The single value or zero if the object is null.
-      Also returns zero if the object is not type "single", "long", "int"
-      or "short".
-    </returns>
-  </GetSingle>
-  <GetString>
-    <summary>
-      Gets a trimmed string value from an object. (E)
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>The trimmed string value or null if the object is null.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a trimmed string value from an object.
-        private static void GetString()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "3";
-          object obj = setup;
-
-          // Gets a string value from an object.
-          string value = NetCommon.GetString(obj);
-        }
-      </code>
-    </example>
-  </GetString>
-
   <!-- Serialization Functions -->
   <XmlDeserialize>
     <summary>
@@ -989,4 +790,203 @@
       </code>
     </example>
   </ConfigString>
+
+  <!-- Object Data Functions -->
+  <GetBoolean>
+    <summary>
+      Gets a boolean value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The boolean value or false if the object is null.
+      Also returns false if the object is not type "bool".
+    </returns>
+  </GetBoolean>
+  <GetByte>
+    <summary>
+      Gets a byte value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The byte value or the byte default if the object is null.
+      Also returns false if the object is not type "byte".
+    </returns>
+  </GetByte>
+  <GetChar>
+    <summary>
+      Gets a byte value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The char value or the char default if the object is null.
+      Also returns false if the object is not type "char".
+    </returns>
+  </GetChar>
+  <GetDateTime>
+    <summary>
+      Gets a DateTime value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The DateTime value or null if the object is null.
+      Also returns null if the object is not type "DateTime".
+    </returns>
+  </GetDateTime>
+  <GetDecimal>
+    <summary>
+      Gets a decimal value from an object. (E)
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The decimal value or zero if the object is null.
+      Also returns zero if the object is not type "decimal", "long", "int"
+      or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a decimal value from an object.
+        private static void GetDecimal()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          decimal setup = 3.14m;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          decimal value = NetCommon.GetDecimal(obj);
+        }
+      </code>
+    </example>
+  </GetDecimal>
+  <GetDouble>
+    <summary>
+      Gets a double value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The double value or zero if the object is null.
+      Also returns zero if the object is not type "double", "decimal", "long"
+      , "int" or "short".
+    </returns>
+  </GetDouble>
+  <GetInt16>
+    <summary>
+      Gets a short value from an object. (E)
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a short value from an object.
+        private static void GetInt16()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          short setup = 3;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          short value = NetCommon.GetInt16(obj);
+        }
+      </code>
+    </example>
+  </GetInt16>
+  <GetInt32>
+    <summary>
+      Gets an integer value from an object. (E)
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The integer value or zero if the object is null.
+      Also returns zero if the object is not type "int" or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets an int value from an object.
+        private static void GetInt32()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          int setup = 3;
+          object obj = setup;
+
+          // Gets an int value from an object.
+          int value = NetCommon.GetInt32(obj);
+        }
+      </code>
+    </example>
+  </GetInt32>
+  <GetInt64>
+    <summary>
+      Gets a long value from an object. (E)
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "long", "int" or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a long value from an object.
+        private static void GetInt64()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          long setup = 3;
+          object obj = setup;
+
+          // Gets a long value from an object.
+          long value = NetCommon.GetInt64(obj);
+        }
+      </code>
+    </example>
+  </GetInt64>
+  <GetObject>
+    <summary>
+      Gets an instantiated object value.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>The instantiated object.</returns>
+  </GetObject>
+  <GetSingle>
+    <summary>
+      Gets a float value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The single value or zero if the object is null.
+      Also returns zero if the object is not type "single", "long", "int"
+      or "short".
+    </returns>
+  </GetSingle>
+  <GetString>
+    <summary>
+      Gets a trimmed string value from an object. (E)
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>The trimmed string value or null if the object is null.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a trimmed string value from an object.
+        private static void GetString()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "3";
+          object obj = setup;
+
+          // Gets a string value from an object.
+          string value = NetCommon.GetString(obj);
+        }
+      </code>
+    </example>
+  </GetString>
 </items>
