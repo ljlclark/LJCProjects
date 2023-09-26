@@ -347,6 +347,6 @@
       Throws the invalid argument exception if message has a value.
     </summary>
     <param name="message">The message text.</param>
-    <exception cref="ArgumentException"></exception>
+    <!--exception cref="ArgumentException"></exception-->
   </ThrowInvalidArgument>
 </items>

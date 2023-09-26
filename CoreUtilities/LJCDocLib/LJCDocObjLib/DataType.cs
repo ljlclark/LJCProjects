@@ -35,7 +35,7 @@ namespace LJCDocObjLib
       Doc.TypeName= TypeName;
       AssemblyReflect.SetTypeReference(TypeName);
       // Testing
-      //if ("DbColumns" == Name)
+      //if ("NetCommon" == Name)
       //{
       //  int i = 0;
       //}

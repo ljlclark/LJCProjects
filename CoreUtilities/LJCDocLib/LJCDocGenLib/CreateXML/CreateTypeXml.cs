@@ -97,7 +97,7 @@ namespace LJCDocGenLib
       string methodListPreface = "";
       mOtherMethods = new DataMethods(DataType.DataMethods);
       // Testing
-      //if ("DbColumns" == DataType.Name)
+      //if ("NetCommon" == DataType.Name)
       //{
       //  int i = 0;
       //}
@@ -252,12 +252,23 @@ namespace LJCDocGenLib
 
                 repeatItem.Subsection = new Section("Subsection");
                 var subRepeatItems = repeatItem.Subsection.RepeatItems;
+                DataMethod dataMethod = null;
                 foreach (var docMethod in docMethods)
                 {
                   var methodName = docMethod.Name;
                   var overloadName = docMethod.OverloadName;
-                  var dataMethod
-                    = mOtherMethods.Find(x => x.OverloadName == overloadName);
+                  // *** Begin *** Change - 9/26/23 #Overload
+                  if (NetString.HasValue(overloadName))
+                  {
+                    dataMethod
+                      = mOtherMethods.Find(x => x.OverloadName == overloadName);
+                  }
+                  else
+                  {
+                    dataMethod
+                      = mOtherMethods.Find(x => x.Name == methodName);
+                  }
+                  // *** End   *** Change - 9/26/23 #Overload
                   if (dataMethod != null)
                   {
                     // Create relative path.

@@ -44,10 +44,11 @@ namespace LJCDocGen
 
         File.WriteAllText("Missing.txt", null);
 
-        // Creates the DataRoot.DataAssemblies collection with the deserialized
-        // "Doc" XML converted to the "Data" XML format.
+        // Creates the LJCDocObjLib.DataRoot.DataAssemblies collection with
+        // the deserialized "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
 
+        // LJCDocGenLib.GenRoot
         GenRoot genRoot = new GenRoot(dataRoot, outputPath);
         genRoot.GenRootPage();
 

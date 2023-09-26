@@ -96,8 +96,7 @@ namespace LJCDocGenLib
       else
       {
         // Testing
-        //if ("NetCommon" == DataType.Name
-        //  || "NetString" == DataType.Name)
+        //if ("NetCommon" == DataType.Name)
         //{
         //  NetFile.CreateFolder("XMLFiles");
         //  File.WriteAllText(dataFileSpec, dataXml);
