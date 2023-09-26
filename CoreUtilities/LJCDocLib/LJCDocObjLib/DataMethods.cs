@@ -16,14 +16,12 @@ namespace LJCDocObjLib
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataMethods()
     {
-      mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public DataMethods(DataMethods items)
     {
-      mPrevCount = -1;
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
@@ -74,12 +72,6 @@ namespace LJCDocObjLib
       }
       return retValue;
     }
-    #endregion
-
-    #region Class Data
-
-    // The previous count value.
-    private int mPrevCount;
     #endregion
   }
 }

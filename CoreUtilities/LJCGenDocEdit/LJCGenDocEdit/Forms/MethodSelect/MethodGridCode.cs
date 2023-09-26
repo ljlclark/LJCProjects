@@ -80,14 +80,28 @@ namespace LJCGenDocEdit
         mMethodSelect.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mMethodGrid.Rows)
         {
-          // *** Next Statement *** Change - 7/9/23 #Overload
-          if (DocMethodOverload(row) == dataRecord.OverloadName)
+          // *** Begin *** Change - 7/9/23 #Overload
+          if (dataRecord.OverloadName != null)
           {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            mMethodGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
+            if (DocMethodOverload(row) == dataRecord.OverloadName)
+            {
+              // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+              mMethodGrid.LJCSetCurrentRow(row, true);
+              retValue = true;
+              break;
+            }
           }
+          else
+          {
+            if (DocMethodName(row) == dataRecord.Name)
+            {
+              // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+              mMethodGrid.LJCSetCurrentRow(row, true);
+              retValue = true;
+              break;
+            }
+          }
+          // *** End   *** Change - 7/9/23 #Overload
         }
         mMethodSelect.Cursor = Cursors.Default;
       }
@@ -106,6 +120,7 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataMethod dataRecord)
     {
+      row.LJCSetString("Name", dataRecord.Name);
       row.LJCSetString("OverloadName", dataRecord.OverloadName);
     }
     #endregion
@@ -120,13 +135,22 @@ namespace LJCGenDocEdit
       {
         mMethodSelect.Cursor = Cursors.WaitCursor;
         // *** Begin *** Change - 7/9/23 #Overload
+        DataMethod dataObject = null;
         var overloadName = DocMethodOverload();
-        var dataRecord = mDataMethods.Find(x => x.OverloadName == overloadName);
+        if (overloadName != null)
+        {
+          dataObject = mDataMethods.Find(x => x.OverloadName == overloadName);
+        }
+        else
+        {
+          var name = DocMethodName();
+          dataObject = mDataMethods.Find(x => x.Name == name);
+        }
 
         // *** End   *** Change - 7/9/23 #Overload
-        if (dataRecord != null)
+        if (dataObject != null)
         {
-          mMethodSelect.LJCSelectedRecord = dataRecord;
+          mMethodSelect.LJCSelectedRecord = dataObject;
         }
         mMethodSelect.Cursor = Cursors.Default;
       }
@@ -194,6 +218,23 @@ namespace LJCGenDocEdit
         // Setup the grid columns.
         mMethodGrid.LJCAddColumns(GridColumns);
       }
+    }
+
+    // Retrieves the current row item Name.
+    // *** New Method *** 9/26/23 #Overload
+    private string DocMethodName(LJCGridRow docMethodRow = null)
+    {
+      string retValue = null;
+
+      if (null == docMethodRow)
+      {
+        docMethodRow = mMethodGrid.CurrentRow as LJCGridRow;
+      }
+      if (docMethodRow != null)
+      {
+        retValue = docMethodRow.LJCGetString("Name");
+      }
+      return retValue;
     }
 
     // Retrieves the current row item Name.

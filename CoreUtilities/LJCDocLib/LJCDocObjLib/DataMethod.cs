@@ -11,7 +11,7 @@ namespace LJCDocObjLib
 {
   // Represents the Method documentation data.
   /// <include path='items/DataMethod/*' file='Doc/DataMethod.xml'/>
-  public class DataMethod : IComparable<DataMethod>
+  public class DataMethod
   {
     #region Constructors
 
@@ -72,24 +72,6 @@ namespace LJCDocObjLib
       string retValue;
 
       retValue = $"{AssemblyName}.{TypeName}.{Name}";
-      return retValue;
-    }
-
-    // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DataMethod other)
-    {
-      int retValue;
-
-      if (null == other)
-      {
-        retValue = 1;
-      }
-      else
-      {
-        // Case sensitive.
-        retValue = OverloadName.CompareTo(other.OverloadName);
-      }
       return retValue;
     }
 
