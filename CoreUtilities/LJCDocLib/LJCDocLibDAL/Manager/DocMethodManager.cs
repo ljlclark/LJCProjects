@@ -229,13 +229,14 @@ namespace LJCDocLibDAL
     // Gets the ID key columns.
     // *** New Method *** 9/25/23 #Overload
     /// <include path='items/RetrieveWithUnique/*' file='../Doc/DocClassManager.xml'/>
-    public DbColumns GetNameKey(short classID, string overloadName)
+    public DbColumns GetNameKey(short classID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DocMethod.ColumnDocClassID, classID },
-        { DocMethod.ColumnName, (object)overloadName }
+        { DocMethod.ColumnName, (object)name },
+        { DocMethod.ColumnOverloadName, (object)"-null" }
       };
       return retValue;
     }

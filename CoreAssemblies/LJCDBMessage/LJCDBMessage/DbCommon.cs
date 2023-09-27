@@ -170,6 +170,7 @@ namespace LJCDBMessage
         retValue = GetKeyColumn(baseDefinition, keyColumn);
         if (retValue != null)
         {
+          // Column is found so do not look in joins.
           process = false;
         }
       }
@@ -362,9 +363,9 @@ namespace LJCDBMessage
       if (retValue)
       {
         // Exclude AutoIncrement column with value of zero.
-        if (true == dataColumn.AutoIncrement)
-        //&& false == includeAutoIncrement
-        //&& "0" == dataColumn.Value.ToString())
+        if (true == dataColumn.AutoIncrement
+          && false == includeAutoIncrement
+          && "0" == dataColumn.Value.ToString())
         {
           retValue = false;
         }
