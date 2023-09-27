@@ -103,8 +103,14 @@ namespace LJCDocGenLib
         if (value != null)
         {
           mDataMethod = value;
-          OverrideName = mDataMethod.OverloadName;
-          HTMLFileName = $"{DataType.Name}.{OverrideName}.html";
+          // *** Begin *** Change - 9/27/23 #Overload
+          var name = mDataMethod.OverloadName;
+          if (null == name)
+          {
+            name = mDataMethod.Name;
+          }
+          HTMLFileName = $"{DataType.Name}.{name}.html";
+          // *** End   *** Change - 9/27/23 #Overload
           HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
         }
       }
@@ -131,14 +137,6 @@ namespace LJCDocGenLib
 
     /// <summary>Gets or sets the public flag.</summary>
     public bool IsPublic { get; set; }
-
-    /// <summary>The overriden method unique name if required.</summary>
-    public string OverrideName
-    {
-      get { return mOverrideName; }
-      set { mOverrideName = NetString.InitString(value); }
-    }
-    private string mOverrideName;
     #endregion
   }
 }
