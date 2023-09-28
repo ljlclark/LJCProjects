@@ -110,6 +110,58 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Formats the column value for the SQL string.
+    /// <include path='items/FormatValue/*' file='Doc/NetString.xml'/>
+    public static string FormatValue(object value, string dataTypeName)
+    {
+      string retValue;
+
+      if (null == value)
+      {
+        retValue = "null";
+      }
+      else
+      {
+        retValue = value.ToString();
+      }
+
+      switch (dataTypeName)
+      {
+        case NetCommon.TypeBoolean:
+          if ("true" == retValue.ToLower())
+          {
+            retValue = "1";
+          }
+          if ("false" == retValue.ToLower())
+          {
+            retValue = "0";
+          }
+          break;
+
+        case NetCommon.TypeDateTime:
+          DateTime dateTime = Convert.ToDateTime(retValue);
+          if (NetCommon.IsDbMinDate(dateTime))
+          {
+            retValue = "null";
+          }
+          else
+          {
+            retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+          }
+          break;
+
+        case NetCommon.TypeString:
+          if (retValue != null
+            && retValue != "null")
+          {
+            retValue = retValue.Replace("'", "''");
+            retValue = $"'{retValue}'";
+          }
+          break;
+      }
+      return retValue;
+    }
+
     // Initializes a string to the trimmed value or null.
     /// <include path='items/InitString/*' file='Doc/NetString.xml'/>
     public static string InitString(string value)

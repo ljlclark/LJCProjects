@@ -383,7 +383,7 @@ namespace LJCDBMessage
           {
             builder.AppendLine(",");
           }
-          builder.Append($" {dbColumn.SQLFormatValue()}");
+          builder.Append($" {dbColumn.FormatValue()}");
         }
         builder.AppendLine();
 
@@ -442,7 +442,7 @@ namespace LJCDBMessage
             continue;
           }
 
-          string value = dbColumn.SQLFormatValue();
+          string value = dbColumn.FormatValue();
           bool isZero = "0" == dbColumn.Value.ToString();
 
           // Do not include AutoIncrement if the value is "0".
@@ -603,7 +603,7 @@ namespace LJCDBMessage
           {
             builder.AppendLine(",");
           }
-          builder.Append($" {dbColumn.ColumnName} = {dbColumn.SQLFormatValue()}");
+          builder.Append($" {dbColumn.ColumnName} = {dbColumn.FormatValue()}");
         }
         builder.AppendLine();
         retValue = builder.ToString();

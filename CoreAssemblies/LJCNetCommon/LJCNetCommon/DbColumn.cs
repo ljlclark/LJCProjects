@@ -90,54 +90,10 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string. (D)
-    /// <include path='items/SQLFormatValue/*' file='Doc/DbColumn.xml'/>
-    public string SQLFormatValue()
+    /// <include path='items/FormatValue/*' file='Doc/DbColumn.xml'/>
+    public string FormatValue()
     {
-      string retValue;
-
-      if (null == Value)
-      {
-        retValue = "null";
-      }
-      else
-      {
-        retValue = Value.ToString();
-      }
-
-      switch (DataTypeName)
-      {
-        case NetCommon.TypeBoolean:
-          if ("true" == retValue.ToLower())
-          {
-            retValue = "1";
-          }
-          if ("false" == retValue.ToLower())
-          {
-            retValue = "0";
-          }
-          break;
-
-        case NetCommon.TypeDateTime:
-          DateTime dateTime = Convert.ToDateTime(retValue);
-          if (IsDbMinDate(dateTime))
-          {
-            retValue = "null";
-          }
-          else
-          {
-            retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
-          }
-          break;
-
-        case NetCommon.TypeString:
-          if (retValue != null
-            && retValue != "null")
-          {
-            retValue = retValue.Replace("'", "''");
-            retValue = $"'{retValue}'";
-          }
-          break;
-      }
+      string retValue = NetString.FormatValue(Value, DataTypeName);
       return retValue;
     }
 
@@ -180,26 +136,6 @@ namespace LJCNetCommon
           PropertyName = dbColumn.PropertyName,
           Value = dbColumn.Value
         };
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Private Methods
-
-    // Check for DB Minimum date or less.
-    private bool IsDbMinDate(DateTime dateTime)
-    {
-      bool retValue = false;
-      if (dateTime.Year < 1753)
-      {
-        retValue = true;
-      }
-      if (1753 == dateTime.Year
-        && 1 == dateTime.Month
-        && 1 == dateTime.Day)
-      {
-        retValue = true;
       }
       return retValue;
     }

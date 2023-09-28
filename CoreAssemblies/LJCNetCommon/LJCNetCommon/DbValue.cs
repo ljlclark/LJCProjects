@@ -69,62 +69,11 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Formats the column value for the SQL string.
-    /// <include path='items/FormatValue/*' file='Doc/DbValue.xml'/>
+    // Formats the column value for the SQL string. (D)
+    /// <include path='items/FormatValue/*' file='Doc/DbColumn.xml'/>
     public string FormatValue()
     {
-      string retValue;
-
-      //string retValue = Value.ToString();
-      if (null == Value)
-      {
-        retValue = "null";
-      }
-      else
-      {
-        retValue = Value.ToString();
-      }
-
-      switch (DataTypeName)
-      {
-        case NetCommon.TypeBoolean:
-          //retValue = retValue == "True" ? "1" : "0";
-          if ("true" == retValue.ToLower())
-          {
-            retValue = "1";
-          }
-          if ("false" == retValue.ToLower())
-          {
-            retValue = "0";
-          }
-          break;
-
-        case NetCommon.TypeDateTime:
-          DateTime dateTime = Convert.ToDateTime(retValue);
-          //retValue = $"'{value}'";
-          //if (value <= SqlDateTime.MinValue)
-          //{
-          //  retValue = "null";
-          //}
-          if (IsDbMinDate(dateTime))
-          {
-            retValue = "null";
-          }
-          else
-          {
-            retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
-          }
-          break;
-
-        case NetCommon.TypeString:
-          if (retValue != null
-            && retValue != "null")
-          {
-            retValue = retValue.Replace("'", "''");
-            retValue = $"'{retValue}'";
-          }
-          break;
-      }
+      string retValue = NetString.FormatValue(Value, DataTypeName);
       return retValue;
     }
 
@@ -167,26 +116,6 @@ namespace LJCNetCommon
       if (retValue.MaxLength < 5)
       {
         retValue.MaxLength += 3;
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Private Methods
-
-    // Check for DB Minimum date or less.
-    private bool IsDbMinDate(DateTime dateTime)
-    {
-      bool retValue = false;
-      if (dateTime.Year < 1753)
-      {
-        retValue = true;
-      }
-      if (1753 == dateTime.Year
-        && 1 == dateTime.Month
-        && 1 == dateTime.Day)
-      {
-        retValue = true;
       }
       return retValue;
     }

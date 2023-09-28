@@ -124,7 +124,17 @@
       objects are built-in system types.
     </remarks>
   </IsEqual>
-  
+  <IsDbMinDate>
+    <summary>
+      Checks for DB Minimum date or less.
+    </summary>
+    <param name="dateTime">
+      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value.
+    </param>
+    <returns>True if minimum otherwise false.</returns>
+  </IsDbMinDate>
+
   <!-- Text Transform Functions -->
   <Base64BytesToText>
     <summary>

@@ -144,13 +144,4 @@
     <param name="dateTime">The date/time value.</param>
     <returns>The time string or null if not > MinValue.</returns>
   </GetUITimeString>
-  <IsDbMinDate>
-    <summary>
-      Checks for DB Minimum date or less.
-    </summary>
-    <param name="dateTime">
-      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
-      value.</param>
-    <returns>True if minimum otherwise false.</returns>
-  </IsDbMinDate>
 </items>

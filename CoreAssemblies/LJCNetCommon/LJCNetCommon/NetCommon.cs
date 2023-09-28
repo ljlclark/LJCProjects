@@ -247,6 +247,28 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Check for DB Minimum date or less.
+    /// <include path='items/IsDbMinDate/*' file='Doc/NetCommon.xml'/>
+    public static bool IsDbMinDate(DateTime? dateTime)
+    {
+      bool retValue = false;
+      if (dateTime != null)
+      {
+        DateTime tempDateTime = (DateTime)dateTime;
+        if (tempDateTime.Year < 1753)
+        {
+          retValue = true;
+        }
+        if (1753 == tempDateTime.Year
+          && 1 == tempDateTime.Month
+          && 1 == tempDateTime.Day)
+        {
+          retValue = true;
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Text Transform Functions

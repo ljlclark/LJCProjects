@@ -55,9 +55,9 @@
     <param name="assignedKey">The assigned key indicator.</param>
     <param name="renameValue">The RenameAs value.</param>
   </DbColumnC>
-
+  
   <!-- Data Methods -->
-  <SQLFormatValue>
+  <FormatValue>
     <summary>
       Formats the column value for the SQL string. (D)
     </summary>
@@ -84,7 +84,7 @@
         var dbColumnString = new DbColumn("TestString", "string");
       </code>
     </example>
-  </SQLFormatValue>
+  </FormatValue>
 
   <!-- Conversions -->
   <DbValue>

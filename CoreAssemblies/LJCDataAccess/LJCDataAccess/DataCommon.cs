@@ -225,7 +225,7 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (dateTime != null && false == IsDbMinDate(dateTime))
+      if (dateTime != null && false == NetCommon.IsDbMinDate(dateTime))
       {
         DateTime tempDateTime = (DateTime)dateTime;
         retValue = tempDateTime.ToString("MM/dd/yyyy");
@@ -239,7 +239,7 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (false == IsDbMinDate(dateTime))
+      if (false == NetCommon.IsDbMinDate(dateTime))
       {
         retValue = dateTime.ToString("MM/dd/yyyy HH:mm:ss");
       }
@@ -252,34 +252,12 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (false == IsDbMinDate(dateTime))
+      if (false == NetCommon.IsDbMinDate(dateTime))
       {
         retValue = dateTime.ToShortTimeString();
         if (7 == retValue.Length)
         {
           retValue = "0" + retValue;
-        }
-      }
-      return retValue;
-    }
-
-    // Check for DB Minimum date or less.
-    /// <include path='items/IsDbMinDate/*' file='Doc/DataCommon.xml'/>
-    public static bool IsDbMinDate(DateTime? dateTime)
-    {
-      bool retValue = false;
-      if (dateTime != null)
-      {
-        DateTime tempDateTime = (DateTime)dateTime;
-        if (tempDateTime.Year < 1753)
-        {
-          retValue = true;
-        }
-        if (1753 == tempDateTime.Year
-          && 1 == tempDateTime.Month
-          && 1 == tempDateTime.Day)
-        {
-          retValue = true;
         }
       }
       return retValue;
