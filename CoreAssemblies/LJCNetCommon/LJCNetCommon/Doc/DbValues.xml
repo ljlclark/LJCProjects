@@ -25,7 +25,12 @@
     <returns>A reference to the added item.</returns>
   </Add>
 
-  <!-- Conversions -->
+  <!-- Item Methods -->
+  <LJCClearChanged>
+    <summary>
+      Sets the IsChanged value to false for all elements in the collection.
+    </summary>
+  </LJCClearChanged>
   <LJCCreateColumns>
     <summary>
       Creates combined
@@ -39,13 +44,6 @@
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
     </returns>
   </LJCCreateColumns>
-
-  <!-- Other Methods -->
-  <LJCClearChanged>
-    <summary>
-      Sets the IsChanged value to false for all elements in the collection.
-    </summary>
-  </LJCClearChanged>
   <LJCGetChanged>
     <summary>
       Gets a collection of changed columns.

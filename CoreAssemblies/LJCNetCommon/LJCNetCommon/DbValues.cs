@@ -106,7 +106,17 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Conversion Methods
+    #region Item Methods
+
+    // Sets the IsChanged value to false for all elements in the collection.
+    /// <include path='items/LJCClearChanged/*' file='Doc/DbValues.xml'/>
+    public void LJCClearChanged()
+    {
+      foreach (DbValue dbValue in this)
+      {
+        dbValue.IsChanged = false;
+      }
+    }
 
     // Creates combined DbColumns from DbColumns and DbValues.
     /// <include path='items/LJCCreateColumns/*' file='Doc/DbValues.xml'/>
@@ -127,19 +137,6 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-    #endregion
-
-    #region Other Methods
-
-    // Sets the IsChanged value to false for all elements in the collection.
-    /// <include path='items/LJCClearChanged/*' file='Doc/DbValues.xml'/>
-    public void LJCClearChanged()
-    {
-      foreach (DbValue dbValue in this)
-      {
-        dbValue.IsChanged = false;
-      }
-    }
 
     // Gets a collection of changed columns.
     /// <include path='items/LJCGetChanged/*' file='Doc/DbValues.xml'/>
@@ -154,13 +151,6 @@ namespace LJCNetCommon
         retValue.Add(dbValue.Clone());
       }
       return retValue;
-    }
-
-    // Get the minimum date value.
-    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
-    public static string LJCGetMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
     }
     #endregion
 
@@ -324,6 +314,13 @@ namespace LJCNetCommon
         retValue = Convert.ToInt64(value);
       }
       return retValue;
+    }
+
+    // Get the minimum date value.
+    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
+    public static string LJCGetMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
     }
 
     // Gets the column object value as a single.

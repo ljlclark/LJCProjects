@@ -6,6 +6,7 @@ using LJCDocLibDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -23,8 +24,7 @@ namespace LJCGenDocEdit
       SetupGridCode();
       InitialControlValues();
       SetupGrids();
-      MethodGridCode.DataRetrieve();
-      RestoreControlValues();
+      StartChangeProcessing();
       Cursor = Cursors.Default;
     }
 
@@ -111,6 +111,62 @@ namespace LJCGenDocEdit
 
     // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }
+    #endregion
+    #endregion
+
+    #region Item Change Processing
+
+    // Execute the list and related item functions.
+    internal void DoChange(Change change)
+    {
+      Cursor = Cursors.WaitCursor;
+      switch (change)
+      {
+        case Change.Startup:
+          RestoreControlValues();
+
+          // Load first control.
+          MethodGridCode.DataRetrieve();
+          break;
+      }
+      //SetControlState();
+      Cursor = Cursors.Default;
+    }
+
+    // The ChangeType values.
+    internal enum Change
+    {
+      Startup,
+    }
+
+    #region Item Change Support
+
+    // Start the Change processing.
+    private void StartChangeProcessing()
+    {
+      ChangeTimer = new ChangeTimer();
+      ChangeTimer.ItemChange += ChangeTimer_ItemChange;
+      TimedChange(Change.Startup);
+    }
+
+    // Change Event Handler
+    private void ChangeTimer_ItemChange(object sender, EventArgs e)
+    {
+      Change changeType;
+
+      changeType = (Change)Enum.Parse(typeof(Change)
+        , ChangeTimer.ChangeName);
+      DoChange(changeType);
+    }
+
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
+    // Gets or sets the ChangeTimer object.
+    private ChangeTimer ChangeTimer { get; set; }
     #endregion
     #endregion
 
