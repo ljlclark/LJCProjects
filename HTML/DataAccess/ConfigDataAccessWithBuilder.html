@@ -25,14 +25,13 @@
     <div id='Header'>
       <div id='Title'>How to Configure DataAccess with Connection Builder</div>
     </div>
-    <br />
     <div class='Text'>
-      The LJCDataAccess.DataAccess class is capable of connecting using the SQL
-      Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
-    </div>
-    <div class='Text'>
+      <p>
+        The LJCDataAccess.DataAccess class is capable of connecting using the SQL
+        Server data provider, OLEDB driver, ODBC driver or MySQL data provider.
+      </p>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>SQL Server</h4>
       <pre class="code">
 <span class='keyWord'>using</span> LJCDataAccess;
@@ -47,8 +46,8 @@
     { <span class='text'>"Data Source"</span>, <span class='text'>"DataServerName"</span> },
     { <span class='text'>"Initial Catalog"</span>, <span class='text'>"DatabaseName"</span> },
     { <span class='text'>"Integrated Security"</span>, <span class='text'>"True"</span> }
-    <span class='comment'>// { "User Id", "UserID" },</span>
-    <span class='comment'>// { "Password", "Password" }</span>
+      <span class='comment'>// { "User Id", "UserID" },</span>
+      <span class='comment'>// { "Password", "Password" }</span>
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
   <span class='commonType'>var</span> providerName = <span class='text'>"System.Data.SqlClient"</span>;
@@ -58,7 +57,7 @@
   <span class='keyWord'>return</span> retValue;
 }</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>MySQL</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -75,7 +74,7 @@
         The following are possible <a href="https://www.connectionstrings.com/sql-server/">Connection Strings</a>. See your provider documentation for the latest information.
       </h4>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>OLEDB</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -83,13 +82,13 @@
     { "Provider", "SQLOLEDB" },
     { "Data Source", "DataServerName" },
     { "Initial Catalog", "DatabaseName" },
-    <span class='comment'>// { "User Id", "UserID" },</span>
-    <span class='comment'>// { "Password", "Password" }</span>
+      <span class='comment'>// { "User Id", "UserID" },</span>
+      <span class='comment'>// { "Password", "Password" }</span>
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
   <span class='commonType'>var</span> providerName = "SQLOLEDB";</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>ODBC</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -103,7 +102,7 @@
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
   <span class='commonType'>var</span> providerName = "MSDASQL.1";</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>Microsoft Access</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -116,7 +115,7 @@
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;
   <span class='commonType'>var</span> providerName = "Microsoft.Jet.OLEDB.4.0";</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>Excel 12</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -127,7 +126,7 @@
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>Excel 8</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -138,19 +137,19 @@
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>Oracle</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
   {
     { "Data Source", "ORCL" },
     { "Integrated Security", "yes" }
-    <span class='comment'>// { "User Id", "UserID" },</span>
-    <span class='comment'>// { "Password", "Password" }</span>
+      <span class='comment'>// { "User Id", "UserID" },</span>
+      <span class='comment'>// { "Password", "Password" }</span>
   };
   <span class='commonType'>var</span> connectionString = connectionBuilder.ConnectionString;</pre>
 
-      <!-- *********** -->
+      <!-- ********** -->
       <h4>Text</h4>
       <pre class="code">
   <span class='commonType'>var</span> connectionBuilder = <span class='keyWord'>new</span> <span class='userType'>DbConnectionStringBuilder</span>()
@@ -162,14 +161,19 @@
     { "FMT", "Delimited" }
   };</pre>
     </div>
+    <!-- End Text -->
     <div class="PathText">
       / <a href="../../index.html">Home</a>
       / <a href="../Tutorials.html#DataAccess">HowTo</a>
       / ConnectionStringBuilder
     </div>
     <br />
-    <div class='SmallText'>Copyright &copy; Lester J. Clark  and Contributors.</div>
-    <div class='SmallText'>Licensed under the MIT License.</div>
+    <div class='SmallText'>
+      Copyright &copy; Lester J. Clark  and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+    
   </div>
+  <!-- End page -->
 </body>
 </html>
