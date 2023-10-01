@@ -36,6 +36,10 @@ namespace LJCDocXMLObjLib
     [XmlElement("example")]
     public DocExample Example { get; set; }
 
+    /// <summary>Gets or sets the member remarks node.</summary>
+    [XmlElement("exception")]
+    public DocExceptions Exceptions { get; set; }
+
     /// <summary>Gets or sets the member name.</summary>
     [XmlAttribute("name")]
     public string Name { get; set; }

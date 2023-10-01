@@ -1,28 +1,28 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DocLink.cs
+// DocException.cs
 using System.Xml.Serialization;
 
 namespace LJCDocXMLObjLib
 {
-  // The deserialied XML documentation "link" node.
-  /// <include path='items/DocLink/*' file='Doc/DocLink.xml'/>
-  [XmlType("link")]
-  public class DocLink
+  // The deserialied XML documentation "exception" node.
+  /// <include path='items/DocException/*' file='Doc/DocException.xml'/>
+  [XmlType("exception")]
+  public class DocException
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocLink()
+    public DocException()
     {
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DocLinkC/*' file='Doc/DocLink.xml'/>
-    public DocLink(string fileName, string text)
+    /// <include path='items/DocExceptionC/*' file='Doc/DocException.xml'/>
+    public DocException(string cref, string text)
     {
-      FileName = fileName;
+      CRef = cref;
       Text = text;
     }
     #endregion
@@ -30,8 +30,8 @@ namespace LJCDocXMLObjLib
     #region Properties
 
     /// <summary>The doc element name.</summary>
-    [XmlAttribute("file")]
-    public string FileName { get; set; }
+    [XmlAttribute("cref")]
+    public string CRef { get; set; }
 
     /// <summary>Gets or sets the XML element text value.</summary>
     [XmlText()]

@@ -1,23 +1,18 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataLinks.cs
+// DocLinks.cs
 using System.Collections.Generic;
 
 namespace LJCDocXMLObjLib
 {
   // The deserialized XML documentation "param" nodes.
-  /// <include path='items/DocParams/*' file='Doc/DocParams.xml'/>
+  /// <include path='items/DocLinks/*' file='Doc/DocLinks.xml'/>
   public class DocLinks : List<DocLink>
   {
     #region Methods
 
     // Creates an element from the supplied values and adds it to the list.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="fileName"></param>
-    /// <param name="text"></param>
-    /// <returns></returns>
+    /// <include path='items/Add/*' file='Doc/DocLinks.xml'/>
     public DocLink Add(string fileName, string text)
     {
       DocLink retValue;

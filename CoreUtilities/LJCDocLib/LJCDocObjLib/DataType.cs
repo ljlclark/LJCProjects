@@ -28,6 +28,7 @@ namespace LJCDocObjLib
       Remark = DataCommon.GetDataRemark(DocTypeMember.Remarks);
       Example = DataCommon.GetDataExample(DocTypeMember.Example);
       DataLinks = DataCommon.GetDataLinks(DocTypeMember.Links);
+      DataExceptions = DataCommon.GetDataExceptions(DocTypeMember.Exceptions);
 
       NamespaceValue = Doc.GetNamespace(DocTypeMember.Name);
       Name = Doc.GetMemberName(DocTypeMember.Name);
@@ -131,6 +132,9 @@ namespace LJCDocObjLib
 
     /// <summary>Gets or sets the Remarks value.</summary>
     public DataExample Example { get; set; }
+
+    /// <summary>Gets or sets the DataExceptions list.</summary>
+    public DataExceptions DataExceptions { get; set; }
 
     /// <summary>Gets or sets the DataLinks list.</summary>
     public DataLinks DataLinks { get; set; }

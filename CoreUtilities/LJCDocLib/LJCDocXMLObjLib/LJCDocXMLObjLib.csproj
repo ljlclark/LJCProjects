@@ -45,6 +45,8 @@
     <Compile Include="Doc.cs" />
     <Compile Include="DocAssembly.cs" />
     <Compile Include="DocExample.cs" />
+    <Compile Include="DocException.cs" />
+    <Compile Include="DocExceptions.cs" />
     <Compile Include="DocLinks.cs" />
     <Compile Include="DocMember.cs" />
     <Compile Include="DocMembers.cs" />
@@ -63,6 +65,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\DocAssembly.xml" />
+    <Content Include="Doc\DocException.xml" />
+    <Content Include="Doc\DocExceptions.xml" />
+    <Content Include="Doc\DocLink.xml" />
+    <Content Include="Doc\DocLinks.xml" />
     <Content Include="Doc\DocMembers.xml" />
     <Content Include="Doc\DocPara.xml" />
     <Content Include="Doc\DocParam.xml" />

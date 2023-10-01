@@ -1,14 +1,14 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataLink.cs
+// DataException.cs
 
 namespace LJCDocObjLib
 {
-  /// <summary>Represents the Link documentation object.</summary>
-  public class DataLink
+  /// <summary>Represents the Exception documentation object.</summary>
+  public class DataException
   {
-    /// <summary>Gets or sets the File name value.</summary>
-    public string FileName { get; set; }
+    /// <summary>Gets or sets the CRef value.</summary>
+    public string CRef { get; set; }
 
     /// <summary>Gets or sets the Text value.</summary>
     public string Text { get; set; }

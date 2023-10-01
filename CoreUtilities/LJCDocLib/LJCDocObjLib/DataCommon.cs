@@ -40,6 +40,28 @@ namespace LJCDocObjLib
       return retValue;
     }
 
+    // Creates and returns the DataExceptions from the DocExceptions object.
+    /// <include path='items/GetDataExceptions/*' file='Doc/DataCommon.xml'/>
+    public static DataExceptions GetDataExceptions(DocExceptions docExceptions)
+    {
+      DataExceptions retValue = null;
+
+      if (NetCommon.HasItems(docExceptions))
+      {
+        retValue = new DataExceptions();
+        foreach (DocException docException in docExceptions)
+        {
+          DataException dataException = new DataException()
+          {
+            CRef = docException.CRef,
+            Text = docException.Text
+          };
+          retValue.Add(dataException);
+        }
+      }
+      return retValue;
+    }
+
     // Creates and returns the DataLinks from the DocLinks object.
     /// <include path='items/GetDataLinks/*' file='Doc/DataCommon.xml'/>
     public static DataLinks GetDataLinks(DocLinks docLinks)

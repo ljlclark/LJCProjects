@@ -52,6 +52,8 @@
     <Compile Include="DataAssemblies.cs" />
     <Compile Include="DataAssembly.cs" />
     <Compile Include="DataExample.cs" />
+    <Compile Include="DataException.cs" />
+    <Compile Include="DataExceptions.cs" />
     <Compile Include="DataField.cs" />
     <Compile Include="DataLink.cs" />
     <Compile Include="DataMethod.cs" />

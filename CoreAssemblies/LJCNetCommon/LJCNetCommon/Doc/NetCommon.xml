@@ -21,10 +21,10 @@
       Check for missing argument of type: string with no value, null,
       integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
     </summary>
-    <!--typeparam name="T">The argument type.</typeparam-->
+    <typeparam name="T">The argument type.</typeparam>
     <param name="argument">The argument value.</param>
-    <!--exception cref="ArgumentNullException">Argument Null Exception</exception-->
-    <!--exception cref="ArgumentException">Argument Exception</exception-->
+    <exception cref="ArgumentNullException">Argument Null Exception</exception>
+    <exception cref="ArgumentException">Argument Exception</exception>
   </CheckArgument>
   <CompareNull>
     <summary>

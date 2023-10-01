@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DocLink.xml -->
+<items>
+  <DocLink>
+    <summary>
+      The deserialied XML documentation "link" node.
+    </summary>
+  </DocLink>
+  <DocLinkC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="fileName">The link file name.</param>
+    <param name="text">The XML element text value.</param>
+  </DocLinkC>
+</items>
