@@ -56,6 +56,8 @@ namespace LJCDocObjLib
       //  int i = 0;
       //}
       Params = DataCommon.GetDataParams(methodMember.Params);
+      Exceptions = DataCommon.GetDataExceptions(methodMember.Exceptions);
+      TypeParams = DataCommon.GetDataTypeParams(methodMember.TypeParams);
       Summary = methodMember.Summary;
       Returns = methodMember.Returns;
       Remark = DataCommon.GetDataRemark(methodMember.Remarks);
@@ -127,6 +129,11 @@ namespace LJCDocObjLib
     /// <summary>Gets or sets the Remarks value.</summary>
     public DataExample Example { get; set; }
 
+    /// <summary>
+    /// Gets or sets the deserialized Exceptions XML data list.
+    /// </summary>
+    public DataExceptions Exceptions { get; set; }
+
     /// <summary>Gets or sets the public flag.</summary>
     public bool IsPublic { get; set; }
 
@@ -164,6 +171,11 @@ namespace LJCDocObjLib
 
     /// <summary>Gets or sets the Summary value.</summary>
     public string Summary { get; set; }
+
+    /// <summary>
+    /// Gets or sets the deserialized TypeParams XML data list.
+    /// </summary>
+    public DataTypeParams TypeParams { get; set; }
     #endregion
 
     #region Class Properties

@@ -69,6 +69,8 @@
     <Compile Include="DataCommon.cs" />
     <Compile Include="DataPara.cs" />
     <Compile Include="DataLinks.cs" />
+    <Compile Include="DataTypeParam.cs" />
+    <Compile Include="DataTypeParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

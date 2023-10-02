@@ -1,26 +1,26 @@
-// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DocParam.cs
+// DocTypeParam.cs
 using System.Xml.Serialization;
 
 namespace LJCDocXMLObjLib
 {
   // The deserialized XML documentation "param" nodes.
   /// <include path='items/DocParam/*' file='Doc/DocParam.xml'/>
-  [XmlType("param")]
-  public class DocParam
+  [XmlType("typeparam")]
+  public class DocTypeParam
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DocParam()
+    public DocTypeParam()
     {
     }
 
     // Initializes an object instance with the supplied values.
     /// <include path='items/DocParamC/*' file='Doc/DocParam.xml'/>
-    public DocParam(string name, string text)
+    public DocTypeParam(string name, string text)
     {
       Name = name;
       Text = text;

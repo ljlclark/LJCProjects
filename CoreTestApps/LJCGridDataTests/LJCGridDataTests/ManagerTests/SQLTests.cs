@@ -291,6 +291,9 @@ namespace LJCGridDataTests
         },
         JoinOns = new DbJoinOns()
         {
+          // By default the fromColumnName is qualified with the base table name
+          // and the toColumnName is qualified with the join table name.
+          // To override this behavior, simple include your own qualifier.
           { "RegionID", "ID" }
         }
       };

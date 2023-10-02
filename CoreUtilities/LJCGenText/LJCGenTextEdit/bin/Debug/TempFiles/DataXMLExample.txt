@@ -1,0 +1,80 @@
+_ab_ "Attribute Begin" = "<span class='attrib'>"
+_nb_ "Name Begin"      = "<span class='name'><span class='ltgt'><</span>"
+_ne_ "Name End"        = "</span><span class='ltgt'>></span>"
+_se_ "Span End"        = "<span>"
+
+<?xml version="1.0"?>
+<Sections xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  _nb_Section_ne_
+	_nb_Name_ne_Fields_nb_/Name_ne_
+	_nb_RepeatItems_ne_
+	  _nb_RepeatItem_ne_
+		_nb_Name_ne_TypeBoolean_nb_/Name_ne_
+		_nb_Replacements_ne_
+		  _nb_Replacement_ne_
+			_nb_Name_ne__FileName__nb_/Name_ne_
+			_nb_Value_ne_Fields\NetCommon.TypeBoolean.html_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+			  _nb_Name_ne__FieldName__nb_/Name_ne_
+			  _nb_Value_ne_TypeBoolean_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+			_nb_Name_ne__FieldSummary__nb_/Name_ne_
+			_nb_Value_ne_The Boolean type name._nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		_nb_/Replacements_ne_
+	  _nb_/RepeatItem_ne_
+	  _nb_RepeatItem_ne_
+		_nb_Name_ne_TypeByte_nb_/Name_ne_
+		_nb_Replacements_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__FileName__nb_/Name_ne_
+				_nb_Value_ne_Fields\NetCommon.TypeByte.html_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__FieldName__nb_/Name_ne_
+				_nb_Value_ne_TypeByte_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__FieldSummary__nb_/Name_ne_
+				_nb_Value_ne_The Byte type name._nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		_nb_/Replacements_ne_
+	  _nb_/RepeatItem_ne_
+	_nb_/RepeatItems_ne_
+	_nb_EndProcessing_ne_false_nb_/EndProcessing_ne_
+  _nb_/Section_ne_
+  _nb_Section_ne_
+	_nb_Name_ne_Main_nb_/Name_ne_
+	_nb_RepeatItems_ne_
+	  _nb_RepeatItem_ne_
+		_nb_Name_ne_Main_nb_/Name_ne_
+		_nb_Replacements_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__AssemblyName__nb_/Name_ne_
+				_nb_Value_ne_LJCNetCommon_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__AssemblyHtm__nb_/Name_ne_
+				_nb_Value_ne_LJCNetCommon.html_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__Namespace__nb_/Name_ne_
+				_nb_Value_ne_LJCNetCommon_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__HasRemarks__nb_/Name_ne_
+				_nb_Value_ne_True_nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		  _nb_Replacement_ne_
+				_nb_Name_ne__Syntax__nb_/Name_ne_
+				_nb_Value_ne_public class NetCommon _nb_/Value_ne_
+		  _nb_/Replacement_ne_
+		_nb_/Replacements_ne_
+	  _nb_/RepeatItem_ne_
+	_nb_/RepeatItems_ne_
+	_nb_EndProcessing_ne_false_nb_/EndProcessing_ne_
+  _nb_/Section_ne_
+_nb_/Sections_ne_

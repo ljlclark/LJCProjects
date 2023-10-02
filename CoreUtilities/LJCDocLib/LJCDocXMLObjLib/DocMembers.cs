@@ -1,6 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataMembers.cs
+// DocMembers.cs
 using System.Collections.Generic;
 
 namespace LJCDocXMLObjLib

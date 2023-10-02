@@ -56,7 +56,9 @@
     <Compile Include="DocParas.cs" />
     <Compile Include="DocRemarks.cs" />
     <Compile Include="DocLink.cs" />
+    <Compile Include="DocTypeParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DocTypeParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Diagrams\DocXML.html" />

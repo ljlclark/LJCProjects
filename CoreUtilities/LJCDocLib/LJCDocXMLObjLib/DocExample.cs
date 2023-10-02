@@ -1,6 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataExample.cs
+// DocExample.cs
 using System.Xml.Serialization;
 
 namespace LJCDocXMLObjLib

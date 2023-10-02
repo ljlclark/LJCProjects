@@ -1,6 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataMember.cs
+// DocMember.cs
 using System;
 using System.Xml.Serialization;
 
@@ -63,6 +63,10 @@ namespace LJCDocXMLObjLib
     /// <summary>Gets or sets the member summary value.</summary>
     [XmlElement("summary")]
     public string Summary { get; set; }
+
+    /// <summary>Gets or sets the member remarks node.</summary>
+    [XmlElement("typeparam")]
+    public DocTypeParams TypeParams { get; set; }
     #endregion
   }
 }

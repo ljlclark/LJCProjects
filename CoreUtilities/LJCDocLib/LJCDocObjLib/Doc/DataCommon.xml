@@ -36,6 +36,13 @@
     <param name="docRemarks">The DocRemarks object.</param>
     <returns>The DataRemark object.</returns>
   </GetDataRemark>
+  <GetDataTypeParams>
+    <summary>
+      Creates and returns the DataTypeParams from the DocParams object.
+    </summary>
+    <param name="docTypeParams">The DocTypeParams object.</param>
+    <returns>The DataTypeParams object.</returns>
+  </GetDataTypeParams>
   <GetSyntax>
     <summary>
       Retrieves and returns the Syntax value.

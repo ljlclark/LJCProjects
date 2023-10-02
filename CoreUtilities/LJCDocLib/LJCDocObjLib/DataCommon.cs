@@ -139,6 +139,28 @@ namespace LJCDocObjLib
       return retValue;
     }
 
+    // Creates and returns the DataParams from the DocParams object.
+    /// <include path='items/GetDataTypeParams/*' file='Doc/DataCommon.xml'/>
+    public static DataTypeParams GetDataTypeParams(DocTypeParams docTypeParams)
+    {
+      DataTypeParams retValue = null;
+
+      if (NetCommon.HasItems(docTypeParams))
+      {
+        retValue = new DataTypeParams();
+        foreach (DocTypeParam docParam in docTypeParams)
+        {
+          DataTypeParam dataTypeParam = new DataTypeParam()
+          {
+            Name = docParam.Name,
+            Text = docParam.Text
+          };
+          retValue.Add(dataTypeParam);
+        }
+      }
+      return retValue;
+    }
+
     // Retrieves and returns the Syntax value.
     /// <include path='items/GetSyntax/*' file='Doc/DataCommon.xml'/>
     public static string GetSyntax(DataRemark remark, out bool hasSyntax)
