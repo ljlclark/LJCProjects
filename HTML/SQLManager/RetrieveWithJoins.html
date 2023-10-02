@@ -92,6 +92,9 @@ See the Technical Documentation for more information.</pre>
     },
     JoinOns = new <span class="userType">DbJoinOns</span>()
     {
+      <span class="comment">// By default the fromColumnName is qualified with the base table name</span>
+      <span class="comment">// and the toColumnName is qualified with the join table name.</span>
+      <span class="comment">// To override this behavior, simple include your own qualifier.</span>
       { <span class='text'>"RegionID"</span>, <span class='text'>"ID"</span> }
     }
   };
