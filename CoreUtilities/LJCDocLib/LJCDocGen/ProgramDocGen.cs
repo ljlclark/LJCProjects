@@ -47,6 +47,12 @@ namespace LJCDocGen
         // Creates the LJCDocObjLib.DataRoot.DataAssemblies collection with
         // the deserialized "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
+        // * Create XML Data from "Doc" XML data
+        // LJCDocObjLib.DataType.DataType();
+        // LJCDocObjLib.DataType.CreateMethodsData();
+        // LJCDocObjLib.DataMethod.DataMethod();
+        // * Set Is Public
+        // LJCDocObjLib.DataType.CeateMethodsData();
 
         // LJCDocGenLib.GenRoot
         GenRoot genRoot = new GenRoot(dataRoot, outputPath);
@@ -54,6 +60,9 @@ namespace LJCDocGen
 
         // Generate each assembly page.
         genRoot.GenAssemblyPages();
+        // LJCDocGenLib.GenAssembly.GenAssemblyPage();
+        // LJCDocGenLib.CreateAssemblyXML.GetXMLData();
+        // LJCDocGenLib.CreateTypeXML.GetXMLData();
         var pageCount = ValuesDocGen.Instance.GenPageCount.ToString();
         File.WriteAllText("HTMLPageCount.txt", pageCount); ;
       }

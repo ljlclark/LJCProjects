@@ -89,7 +89,7 @@ namespace LJCDocObjLib
           AssemblyReflect = AssemblyReflect
         };
         // Testing
-        //if ("OnColumnWidthChanged" == docMethodName)
+        //if (docMethodName.StartsWith("CheckArgument"))
         //{
         //  int i = 0;
         //}
