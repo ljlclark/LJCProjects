@@ -6,7 +6,7 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDe
 rem *************
 rem CoreUtilities
 rem *************
-set /a counter=1
+set /a counter+=1
 echo on
 echo ----------------- %counter% - LJCBackupCommonLib ---------- > Build.txt
 echo LJCBackupCommonLib >> Build.txt

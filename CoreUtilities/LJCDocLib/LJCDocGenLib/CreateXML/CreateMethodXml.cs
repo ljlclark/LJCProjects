@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using Section = LJCGenTextLib.Section;
+using System.Xml.Linq;
 
 namespace LJCDocGenLib
 {
@@ -69,6 +70,16 @@ namespace LJCDocGenLib
       {
         replacements.Add("_Returns_", DataMethod.Returns);
       }
+
+      // Testing
+      //if ("LJCCommon" == DataType.Name)
+      //{
+      //  int i = 0;
+      //}
+      //if (DataMethod.Name.StartsWith("CheckArgument"))
+      //{
+      //  int i = 0;
+      //}
 
       // Syntax and Summary
       AddSyntax(replacements);

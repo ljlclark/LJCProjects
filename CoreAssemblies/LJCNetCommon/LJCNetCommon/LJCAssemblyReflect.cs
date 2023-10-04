@@ -193,6 +193,16 @@ namespace LJCNetCommon
 
       ConstructorInfo = null;
       MethodName = methodName;
+      // *** Begin *** Add - 10/4/23
+      if (MethodName.Contains("`"))
+      {
+        var startIndex = 0;
+        MethodName = NetString.GetStringWithDelimiters(MethodName
+          , MethodName[0].ToString(), ref startIndex, "`");
+        MethodName = MethodName.Substring(0, MethodName.Length - 1);
+      }
+      // *** End   *** Add - 10/4/23
+
       MethodInfo = null;
       if (TypeReference != null
         && NetString.HasValue(MethodName))
@@ -204,14 +214,14 @@ namespace LJCNetCommon
           || (parameterNames != null && 0 == parameterNames.Length))
         {
           // Get method with no parameters.
-          MethodInfo = TypeReference.GetMethod(methodName, bindingFlags
+          MethodInfo = TypeReference.GetMethod(MethodName, bindingFlags
             , null, Type.EmptyTypes, null);
         }
         else
         {
           // Get method with matching parameters.
           MethodInfo[] methodInfos = TypeReference.GetMethods(bindingFlags).Where
-            (x => x.Name.Equals(methodName)).ToArray();
+            (x => x.Name.Equals(MethodName)).ToArray();
           foreach (MethodInfo methodInfo in methodInfos)
           {
             try

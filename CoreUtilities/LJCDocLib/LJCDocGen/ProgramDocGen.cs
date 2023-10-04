@@ -1,8 +1,6 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ProgramDocGen.cs
-using LJCDBClientLib;
-using LJCDBDataAccess;
 using LJCDocGenLib;
 using LJCDocLibDAL;
 using LJCDocObjLib;
@@ -53,8 +51,6 @@ namespace LJCDocGen
         // LJCDocObjLib.DataMethod.DataMethod();
         // * Set Is Public
         // LJCDocObjLib.DataType.CeateMethodsData();
-
-        // LJCDocGenLib.GenRoot
         GenRoot genRoot = new GenRoot(dataRoot, outputPath);
         genRoot.GenRootPage();
 
@@ -62,7 +58,11 @@ namespace LJCDocGen
         genRoot.GenAssemblyPages();
         // LJCDocGenLib.GenAssembly.GenAssemblyPage();
         // LJCDocGenLib.CreateAssemblyXML.GetXMLData();
+        // LJCDocGenLib.GenType.GetTypePage();
         // LJCDocGenLib.CreateTypeXML.GetXMLData();
+        // LJCDocGenLib.GenMethod.GenMethodPage();
+        // LJCDocGenLib.CrerateMethodXML.GetXMLData();
+        // LJCGenTextLib.GenerateText.GenRepeatItem();
         var pageCount = ValuesDocGen.Instance.GenPageCount.ToString();
         File.WriteAllText("HTMLPageCount.txt", pageCount); ;
       }

@@ -6,7 +6,6 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LJCDocObjLib
 {
@@ -119,16 +118,7 @@ namespace LJCDocObjLib
         }
         else
         {
-          var tempName = Name;
-          //AssemblyReflect.SetMethodInfo(Name, parameterNames);
-          if (Name.Contains("`"))
-          {
-            var startIndex = 0;
-            tempName = NetString.GetStringWithDelimiters(Name, Name[0].ToString()
-              , ref startIndex,"`");
-            tempName = tempName.Substring(0, tempName.Length - 1);
-          }
-          AssemblyReflect.SetMethodInfo(tempName, parameterNames);
+          AssemblyReflect.SetMethodInfo(Name, parameterNames);
         }
       }
     }

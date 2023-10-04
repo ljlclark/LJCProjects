@@ -6,7 +6,7 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDe
 rem ************
 rem CoreTestApps
 rem ************
-set /a counter=1
+set /a counter+=1
 echo on
 echo ----------------- %counter% - LJCDataAccessTest ----------- > Build.txt
 echo LJCDataAccessTest >> Build.txt
