@@ -188,7 +188,7 @@ namespace LJCGenTextEdit
       string fullSpec = Path.GetFullPath(fileSpec);
       filePaths.DataXMLPath = NetFile.GetRelativePath(fromPath, fullSpec);
       mParent.DataXMLTextbox.Text = manager.FileName;
-      mParent.mSectionGridCode.DataRetrieveSection();
+      mParent.mSectionGridCode.DataRetrieve();
     }
 
     // Show the About dialog.

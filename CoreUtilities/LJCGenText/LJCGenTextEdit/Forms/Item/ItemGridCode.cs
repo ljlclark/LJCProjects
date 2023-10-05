@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ItemGridCode.cs
-using LJCDBMessage;
 using LJCGenTextLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -99,7 +98,7 @@ namespace LJCGenTextEdit
     #region Action Methods
 
     // Displays a detail dialog for a new record.
-    internal void DoNewItem()
+    internal void DoNew()
     {
       ItemDetail detail;
 
@@ -122,7 +121,7 @@ namespace LJCGenTextEdit
     }
 
     // Displays a detail dialog to edit an existing record.
-    internal void DoEditItem()
+    internal void DoEdit()
     {
       ItemDetail detail;
 
@@ -148,7 +147,7 @@ namespace LJCGenTextEdit
     }
 
     // Deletes the selected row.
-    internal void DoDeleteItem()
+    internal void DoDelete()
     {
       string title;
       string message;
@@ -175,7 +174,7 @@ namespace LJCGenTextEdit
     }
 
     // Refreshes the list.
-    internal void DoRefreshItem()
+    internal void DoRefresh()
     {
       RepeatItem dataRecord;
       string name = null;

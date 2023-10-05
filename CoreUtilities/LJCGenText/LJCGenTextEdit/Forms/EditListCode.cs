@@ -34,7 +34,7 @@ namespace LJCGenTextEdit
           ReplacementGrid.LJCRestoreColumnValues(ControlValues);
 
           // Load first list.
-          mSectionGridCode.DataRetrieveSection();
+          mSectionGridCode.DataRetrieve();
           break;
 
         case Change.Section:
@@ -44,7 +44,7 @@ namespace LJCGenTextEdit
 
         case Change.Item:
           ItemGrid.LJCSetCounter(ItemCounter);
-          mReplacementGridCode.DataRetrieveReplacement();
+          mReplacementGridCode.DataRetrieve();
           break;
 
         case Change.Replacement:

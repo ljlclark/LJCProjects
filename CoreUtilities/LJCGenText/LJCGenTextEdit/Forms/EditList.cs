@@ -126,43 +126,43 @@ namespace LJCGenTextEdit
     // Calls the New method.
     private void SectionToolNew_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoNewSection();
+      mSectionGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void SectionToolEdit_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoEditSection();
+      mSectionGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void SectionToolDelete_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoDeleteSection();
+      mSectionGridCode.DoDelete();
     }
 
     // Calls the New method.
     private void SectionMenuNew_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoNewSection();
+      mSectionGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void SectionMenuEdit_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoEditSection();
+      mSectionGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void SectionMenuDelete_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoDeleteSection();
+      mSectionGridCode.DoDelete();
     }
 
     // Calls the Refresh method.
     private void SectionMenuRefresh_Click(object sender, EventArgs e)
     {
-      mSectionGridCode.DoRefreshSection();
+      mSectionGridCode.DoRefresh();
     }
 
     // Creates the XML data.
@@ -208,43 +208,43 @@ namespace LJCGenTextEdit
     // <summary>Calls the New method.</summary>
     private void ItemToolNew_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoNewItem();
+      mItemGridCode.DoNew();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ItemToolEdit_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoEditItem();
+      mItemGridCode.DoEdit();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ItemToolDelete_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoDeleteItem();
+      mItemGridCode.DoDelete();
     }
 
     // <summary>Calls the New method.</summary>
     private void ItemMenuNew_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoNewItem();
+      mItemGridCode.DoNew();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ItemMenuEdit_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoEditItem();
+      mItemGridCode.DoEdit();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ItemMenuDelete_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoDeleteItem();
+      mItemGridCode.DoDelete();
     }
 
     // <summary>Calls the Refresh method.</summary>
     private void ItemMenuRefresh_Click(object sender, EventArgs e)
     {
-      mItemGridCode.DoRefreshItem();
+      mItemGridCode.DoRefresh();
     }
 
     // <summary>Performs the Generate Output function.</summary>
@@ -278,43 +278,43 @@ namespace LJCGenTextEdit
     // <summary>Calls the New method.</summary>
     private void ReplacementToolNew_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoNewReplacement();
+      mReplacementGridCode.DoNew();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ReplacementToolEdit_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoEditReplacement();
+      mReplacementGridCode.DoEdit();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ReplacementToolDelete_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoDeleteReplacement();
+      mReplacementGridCode.DoDelete();
     }
 
     // <summary>Calls the New method.</summary>
     private void ReplacementMenuNew_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoNewReplacement();
+      mReplacementGridCode.DoNew();
     }
 
     // <summary>Calls the Edit method.</summary>
     private void ReplacementMenuEdit_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoEditReplacement();
+      mReplacementGridCode.DoEdit();
     }
 
     // <summary>Calls the Delete method.</summary>
     private void ReplacementMenuDelete_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoDeleteReplacement();
+      mReplacementGridCode.DoDelete();
     }
 
     // <summary>Calls the Refresh method.</summary>
     private void ReplacementMenuRefresh_Click(object sender, EventArgs e)
     {
-      mReplacementGridCode.DoRefreshReplacement();
+      mReplacementGridCode.DoRefresh();
     }
 
     // <summary>Performs the Generate Output function.</summary>
@@ -541,7 +541,7 @@ namespace LJCGenTextEdit
           break;
 
         case Keys.F5:
-          mSectionGridCode.DoRefreshSection();
+          mSectionGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -612,7 +612,7 @@ namespace LJCGenTextEdit
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          mItemGridCode.DoEditItem();
+          mItemGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -623,7 +623,7 @@ namespace LJCGenTextEdit
           break;
 
         case Keys.F5:
-          mItemGridCode.DoRefreshItem();
+          mItemGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -657,7 +657,7 @@ namespace LJCGenTextEdit
     {
       if (ItemGrid.LJCGetMouseRow(e) != null)
       {
-        mItemGridCode.DoEditItem();
+        mItemGridCode.DoEdit();
       }
     }
 
@@ -694,7 +694,7 @@ namespace LJCGenTextEdit
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          mReplacementGridCode.DoEditReplacement();
+          mReplacementGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -705,7 +705,7 @@ namespace LJCGenTextEdit
           break;
 
         case Keys.F5:
-          mReplacementGridCode.DoRefreshReplacement();
+          mReplacementGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -739,7 +739,7 @@ namespace LJCGenTextEdit
     {
       if (ReplacementGrid.LJCGetMouseRow(e) != null)
       {
-        mReplacementGridCode.DoEditReplacement();
+        mReplacementGridCode.DoEdit();
       }
     }
 

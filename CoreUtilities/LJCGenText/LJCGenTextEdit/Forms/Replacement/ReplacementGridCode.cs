@@ -30,7 +30,7 @@ namespace LJCGenTextEdit
 
     // Retrieves the list rows.
     /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
-    internal void DataRetrieveReplacement()
+    internal void DataRetrieve()
     {
       Replacements records;
 
@@ -48,7 +48,7 @@ namespace LJCGenTextEdit
         {
           foreach (Replacement record in records)
           {
-            RowAddReplacement(record);
+            RowAdd(record);
           }
         }
       }
@@ -56,7 +56,7 @@ namespace LJCGenTextEdit
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAddReplacement(Replacement dataRecord)
+    private LJCGridRow RowAdd(Replacement dataRecord)
     {
       LJCGridRow retValue;
 
@@ -68,7 +68,7 @@ namespace LJCGenTextEdit
     }
 
     // Updates the current row with the record values.
-    private void RowUpdateReplacement(Replacement dataRecord)
+    private void RowUpdate(Replacement dataRecord)
     {
       if (mReplacementGrid.CurrentRow is LJCGridRow gridRow)
       {
@@ -77,7 +77,7 @@ namespace LJCGenTextEdit
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelectReplacement(Replacement dataRecord)
+    private bool RowSelect(Replacement dataRecord)
     {
       string name;
       bool retValue = false;
@@ -102,7 +102,7 @@ namespace LJCGenTextEdit
     #region Action Methods
 
     // Displays a detail dialog for a new record.
-    internal void DoNewReplacement()
+    internal void DoNew()
     {
       ReplacementDetail detail;
 
@@ -128,7 +128,7 @@ namespace LJCGenTextEdit
     }
 
     // Displays a detail dialog to edit an existing record.
-    internal void DoEditReplacement()
+    internal void DoEdit()
     {
       ReplacementDetail detail;
 
@@ -157,7 +157,7 @@ namespace LJCGenTextEdit
     }
 
     // Deletes the selected row.
-    internal void DoDeleteReplacement()
+    internal void DoDelete()
     {
       string title;
       string message;
@@ -186,7 +186,7 @@ namespace LJCGenTextEdit
     }
 
     // Refreshes the list.
-    internal void DoRefreshReplacement()
+    internal void DoRefresh()
     {
       Replacement dataRecord;
       string name = null;
@@ -196,7 +196,7 @@ namespace LJCGenTextEdit
       {
         name = row.LJCGetCellText("Name");
       }
-      DataRetrieveReplacement();
+      DataRetrieve();
 
       // Select the original row.
       if (NetString.HasValue(name))
@@ -205,7 +205,7 @@ namespace LJCGenTextEdit
         {
           Name = name
         };
-        RowSelectReplacement(dataRecord);
+        RowSelect(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
     }
@@ -221,11 +221,11 @@ namespace LJCGenTextEdit
       dataRecord = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateReplacement(dataRecord);
+        RowUpdate(dataRecord);
       }
       else
       {
-        row = RowAddReplacement(dataRecord);
+        row = RowAdd(dataRecord);
         mReplacementGrid.LJCSetCurrentRow(row, true);
         mParent.TimedChange(EditList.Change.Replacement);
       }

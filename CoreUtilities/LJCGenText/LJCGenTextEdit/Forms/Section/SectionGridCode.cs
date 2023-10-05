@@ -30,7 +30,7 @@ namespace LJCGenTextEdit
 
     // Retrieves the list rows.
     /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
-    internal void DataRetrieveSection()
+    internal void DataRetrieve()
     {
       Sections dataRecords;
       GenDataManager manager = mParent.GenDataManager;
@@ -48,7 +48,7 @@ namespace LJCGenTextEdit
           {
             if (record != null)
             {
-              RowAddSection(record);
+              RowAdd(record);
             }
           }
         }
@@ -58,7 +58,7 @@ namespace LJCGenTextEdit
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAddSection(Section dataRecord)
+    private LJCGridRow RowAdd(Section dataRecord)
     {
       LJCGridRow retValue;
 
@@ -70,7 +70,7 @@ namespace LJCGenTextEdit
     }
 
     // Updates the current row with the record values.
-    private void RowUpdateSection(Section dataRecord)
+    private void RowUpdate(Section dataRecord)
     {
       if (mSectionGrid.CurrentRow is LJCGridRow gridRow)
       {
@@ -79,7 +79,7 @@ namespace LJCGenTextEdit
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelectSection(Section dataRecord)
+    private bool RowSelect(Section dataRecord)
     {
       string name;
       bool retValue = false;
@@ -138,18 +138,18 @@ namespace LJCGenTextEdit
             , manager.FileSpec);
           mParent.DataXMLTextbox.Text = manager.FileName;
         }
-        DataRetrieveSection();
+        DataRetrieve();
       }
     }
 
     // Performs the default list action.
     internal void DoDefault()
     {
-      DoEditSection();
+      DoEdit();
     }
 
     // Displays a detail dialog for a new record.
-    internal void DoNewSection()
+    internal void DoNew()
     {
       SectionDetail detail;
 
@@ -165,7 +165,7 @@ namespace LJCGenTextEdit
     }
 
     // Displays a detail dialog to edit an existing record.
-    internal void DoEditSection()
+    internal void DoEdit()
     {
       SectionDetail detail;
 
@@ -188,7 +188,7 @@ namespace LJCGenTextEdit
     }
 
     // Deletes the selected row.
-    internal void DoDeleteSection()
+    internal void DoDelete()
     {
       string title;
       string message;
@@ -214,7 +214,7 @@ namespace LJCGenTextEdit
     }
 
     // Refreshes the list.
-    internal void DoRefreshSection()
+    internal void DoRefresh()
     {
       Section dataRecord;
       string name = null;
@@ -224,7 +224,7 @@ namespace LJCGenTextEdit
       {
         name = row.LJCGetCellText("Name");
       }
-      DataRetrieveSection();
+      DataRetrieve();
 
       // Select the original row.
       if (NetString.HasValue(name))
@@ -233,7 +233,7 @@ namespace LJCGenTextEdit
         {
           Name = name
         };
-        RowSelectSection(dataRecord);
+        RowSelect(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
     }
@@ -249,11 +249,11 @@ namespace LJCGenTextEdit
       dataRecord = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateSection(dataRecord);
+        RowUpdate(dataRecord);
       }
       else
       {
-        row = RowAddSection(dataRecord);
+        row = RowAdd(dataRecord);
         mSectionGrid.LJCSetCurrentRow(row, true);
         mParent.TimedChange(EditList.Change.Section);
       }
@@ -288,7 +288,7 @@ namespace LJCGenTextEdit
             , fullSpec);
           mParent.DataXMLTextbox.Text = manager.FileName;
         }
-        DataRetrieveSection();
+        DataRetrieve();
       }
     }
 
