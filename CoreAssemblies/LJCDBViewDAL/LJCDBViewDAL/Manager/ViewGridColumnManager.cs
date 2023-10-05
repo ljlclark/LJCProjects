@@ -47,6 +47,19 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
+    // Retrieves the DbResult set of data rows.
+    /// <include path='items/ResultWithViewIDBySequence/*' file='Doc/ViewGridColumnManager.xml'/>
+    public DbResult ResultWithViewID(int viewDataID)
+    {
+      DbResult retValue;
+
+      var keyColumns = GetViewDataIDKey(viewDataID);
+      DbJoins dbJoins = GetLoadJoins();
+      SetOrderBySequence();
+      retValue = DataManager.Load(keyColumns, joins: dbJoins);
+      return retValue;
+    }
+
     // Retrieves a data record with the supplied value.
     /// <include path='items/RetrieveWithIDs/*' file='Doc/ViewGridColumnManager.xml'/>
     public ViewGridColumn RetrieveWithIDs(int viewDataID, int viewColumnID)

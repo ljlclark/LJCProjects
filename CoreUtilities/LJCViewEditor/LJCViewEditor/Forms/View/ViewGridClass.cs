@@ -37,7 +37,7 @@ namespace LJCViewEditor
     #region Data Methods
 
     // Retrieves the list rows.
-    internal void DataRetrieveViewData(bool doRelated = true)
+    internal void DataRetrieve(bool doRelated = true)
     {
       string tableName = Parent.TableCombo.Text;
 
@@ -62,14 +62,26 @@ namespace LJCViewEditor
       }
 
       ConfigureViewGrid();
-      Views dataRecords = mViewDataManager.LoadWithParentID(viewTable.ID);
-      if (dataRecords != null && dataRecords.Count > 0)
+
+      // *** Begin *** Change- 10/5/23
+      //Views dataRecords = mViewDataManager.LoadWithParentID(viewTable.ID);
+      //if (dataRecords != null && dataRecords.Count > 0)
+      //{
+      //  foreach (ViewData dataRecord in dataRecords)
+      //  {
+      //    RowAddViewData(dataRecord);
+      //  }
+      //}
+      var manager = mViewDataManager;
+      DbResult result = manager.ResultWithParentID(viewTable.ID);
+      if (DbResult.HasRows(result))
       {
-        foreach (ViewData dataRecord in dataRecords)
+        foreach (DbRow dbRow in result.Rows)
         {
-          RowAddViewData(dataRecord);
+          RowAddValues(dbRow.Values);
         }
       }
+      // *** End   *** Change- 10/5/23
       Parent.Cursor = Cursors.Default;
       if (doRelated)
       {
@@ -78,38 +90,56 @@ namespace LJCViewEditor
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAddViewData(ViewData dataRecord)
+    private LJCGridRow RowAdd(ViewData dataRecord)
     {
       LJCGridRow retValue;
 
       retValue = Parent.ViewGrid.LJCRowAdd();
-      SetStoredValuesViewData(retValue, dataRecord);
+      SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(Parent.ViewGrid, dataRecord);
       return retValue;
     }
 
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var ljcGrid = Parent.ViewGrid;
+      var retValue = ljcGrid.LJCRowAdd();
+
+      var columnName = ViewData.ColumnID;
+      var id = dbValues.LJCGetInt32(columnName);
+      retValue.LJCSetInt32(columnName, id);
+
+      columnName = ViewData.ColumnName;
+      var name = dbValues.LJCGetValue(columnName);
+      retValue.LJCSetString(columnName, name);
+
+      retValue.LJCSetValues(ljcGrid, dbValues);
+      return retValue;
+    }
+
     // Updates the current row with the record values.
-    private void RowUpdateViewData(ViewData dataRecord)
+    private void RowUpdate(ViewData dataRecord)
     {
       LJCGridRow row;
 
       row = Parent.ViewGrid.CurrentRow as LJCGridRow;
       if (row != null)
       {
-        SetStoredValuesViewData(row, dataRecord);
+        SetStoredValues(row, dataRecord);
         row.LJCSetValues(Parent.ViewGrid, dataRecord);
       }
     }
 
     // Sets the row stored values.
-    private void SetStoredValuesViewData(LJCGridRow row, ViewData dataRecord)
+    private void SetStoredValues(LJCGridRow row, ViewData dataRecord)
     {
       row.LJCSetInt32(ViewData.ColumnID, dataRecord.ID);
       row.LJCSetString(ViewData.ColumnName, dataRecord.Name);
     }
 
     // Selects a row based on the key record values.
-    internal void RowSelectViewData(ViewData record)
+    internal void RowSelect(ViewData record)
     {
       int rowID;
 
@@ -130,7 +160,7 @@ namespace LJCViewEditor
 
     // Displays a detail dialog for a new record.
     /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
-    internal void DoNewViewData()
+    internal void DoNew()
     {
       ViewDataDetail detail;
 
@@ -153,7 +183,7 @@ namespace LJCViewEditor
     }
 
     // Displays a detail dialog to edit an existing record.
-    internal void DoEditViewData()
+    internal void DoEdit()
     {
       ViewDataDetail detail;
 
@@ -178,7 +208,7 @@ namespace LJCViewEditor
     }
 
     // Deletes the selected row.
-    internal void DoDeleteViewData()
+    internal void DoDelete()
     {
       string title;
       string message;
@@ -211,7 +241,7 @@ namespace LJCViewEditor
     }
 
     // Refreshes the list.
-    internal void DoRefreshViewData()
+    internal void DoRefresh()
     {
       ViewData record;
       int id = 0;
@@ -222,7 +252,7 @@ namespace LJCViewEditor
       }
 
       Parent.ViewGrid.Rows.Clear();
-      DataRetrieveViewData(false);
+      DataRetrieve(false);
 
       // Select the originally selected row.
       if (id > 0)
@@ -231,7 +261,7 @@ namespace LJCViewEditor
         {
           ID = id
         };
-        RowSelectViewData(record);
+        RowSelect(record);
       }
     }
 
@@ -246,12 +276,12 @@ namespace LJCViewEditor
       record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateViewData(record);
+        RowUpdate(record);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddViewData(record);
+        row = RowAdd(record);
         Parent.ViewGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.View);
       }

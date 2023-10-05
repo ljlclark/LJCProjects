@@ -50,8 +50,7 @@ namespace LJCDocObjLib
       OverloadName = overloadName;
 
       // Testing
-      //if ("DbColumns" == TypeName
-      //  && "LJCSortName" == Name)
+      //if (Name.StartsWith("CheckArgument"))
       //{
       //  int i = 0;
       //}

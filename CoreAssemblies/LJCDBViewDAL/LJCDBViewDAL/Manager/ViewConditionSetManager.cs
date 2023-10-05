@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ViewConditionSetManager.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCDBViewDAL
@@ -43,6 +44,17 @@ namespace LJCDBViewDAL
 
       var keyColumns = GetParentKey(filterID);
       retValue = Load(keyColumns);
+      return retValue;
+    }
+
+    // Retrieves the DbResult set of data rows.
+    /// <include path='items/ResultWithParentID/*' file='Doc/ViewConditionSetManager.xml'/>
+    public DbResult ResultWithParentID(int filterID)
+    {
+      DbResult retValue;
+
+      var keyColumns = GetParentKey(filterID);
+      retValue = DataManager.Load(keyColumns);
       return retValue;
     }
 

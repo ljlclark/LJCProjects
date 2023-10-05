@@ -98,6 +98,17 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
+    // Retrieves the DbResult set of data rows.
+    /// <include path='items/ResultWithParentID/*' file='Doc/ViewColumnManager.xml'/>
+    public DbResult ResultWithParentID(int viewDataID)
+    {
+      DbResult retValue;
+
+      var keyColumns = GetParentKey(viewDataID);
+      retValue = DataManager.Load(keyColumns);
+      return retValue;
+    }
+
     // Retrieve the record with ID.
     /// <include path='items/RetrieveWithID/*' file='Doc/ViewColumnManager.xml'/>
     public ViewColumn RetrieveWithID(int id)

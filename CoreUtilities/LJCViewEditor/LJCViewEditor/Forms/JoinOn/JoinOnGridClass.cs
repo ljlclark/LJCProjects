@@ -8,6 +8,7 @@ using LJCDBViewDAL;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using LJCDBMessage;
 
 namespace LJCViewEditor
 {
@@ -35,7 +36,7 @@ namespace LJCViewEditor
 		// Retrieves the list rows.
 		internal void DataRetrieve()
 		{
-			ViewJoinOns dataRecords;
+			//ViewJoinOns dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.JoinOnGrid.Rows.Clear();
@@ -46,16 +47,27 @@ namespace LJCViewEditor
 				// Data from items.
 				int viewJoinID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
-				dataRecords = mViewJoinOnManager.LoadWithParentID(viewJoinID);
-				if (NetCommon.HasItems(dataRecords))
-				{
-					foreach (ViewJoinOn dataRecord in dataRecords)
-					{
-						RowAdd(dataRecord);
-					}
-				}
-			}
-			Parent.Cursor = Cursors.Default;
+        // *** Begin *** Change- 10/5/23
+        //    dataRecords = mViewJoinOnManager.LoadWithParentID(viewJoinID);
+        //if (NetCommon.HasItems(dataRecords))
+        //{
+        //	foreach (ViewJoinOn dataRecord in dataRecords)
+        //	{
+        //		RowAdd(dataRecord);
+        //	}
+        //}
+        var manager = mViewJoinOnManager;
+        DbResult result = manager.ResultWithParentID(viewJoinID);
+        if (DbResult.HasRows(result))
+        {
+          foreach (DbRow dbRow in result.Rows)
+          {
+            RowAddValues(dbRow.Values);
+          }
+        }
+        // *** End   *** Change- 10/5/23
+      }
+      Parent.Cursor = Cursors.Default;
 			Parent.DoChange(ViewEditorList.Change.JoinOn);
 		}
 
@@ -72,8 +84,22 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Updates the current row with the record values.
-		private void RowUpdate(ViewJoinOn dataRecord)
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var ljcGrid = Parent.JoinOnGrid;
+      var retValue = ljcGrid.LJCRowAdd();
+
+      var columnName = ViewJoinOn.ColumnID;
+      var id = dbValues.LJCGetInt32(columnName);
+      retValue.LJCSetInt32(columnName, id);
+
+      retValue.LJCSetValues(ljcGrid, dbValues);
+      return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(ViewJoinOn dataRecord)
 		{
 			if (Parent.JoinOnGrid.CurrentRow is LJCGridRow row)
 			{

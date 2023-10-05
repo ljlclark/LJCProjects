@@ -31,6 +31,13 @@
     <param name="parentID">The parent ID.</param>
     <returns>The data object record collection.</returns>
   </LoadWithParentId>
+  <ResultWithParentID>
+    <summary>
+      Retrieves the DbResult set of data rows.
+    </summary>
+    <param name="parentID">The parent ID.</param>
+    <returns>The DbResult rows.</returns>
+  </ResultWithParentID>
   <SaveData>
     <summary>
       Updates the record if it exists, otherwise creates it.

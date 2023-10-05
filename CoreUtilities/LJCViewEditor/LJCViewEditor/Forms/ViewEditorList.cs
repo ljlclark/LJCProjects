@@ -179,7 +179,7 @@ namespace LJCViewEditor
           break;
 
         case Change.Table:
-          ViewGridClass.DataRetrieveViewData();
+          ViewGridClass.DataRetrieve();
 
           if (StartupViewDataID > 0)
           {
@@ -187,7 +187,7 @@ namespace LJCViewEditor
             {
               ID = StartupViewDataID
             };
-            ViewGridClass.RowSelectViewData(viewData);
+            ViewGridClass.RowSelect(viewData);
           }
           break;
 
@@ -675,25 +675,25 @@ namespace LJCViewEditor
     // Calls the New method.
     private void ViewMenuNew_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoNewViewData();
+      ViewGridClass.DoNew();
     }
 
     // Calls the Edit method.
     private void ViewMenuEdit_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoEditViewData();
+      ViewGridClass.DoEdit();
     }
 
     // Calls the Delete method.
     private void ViewMenuDelete_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoDeleteViewData();
+      ViewGridClass.DoDelete();
     }
 
     // Calls the Refresh method.
     private void ViewMenuRefresh_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoRefreshViewData();
+      ViewGridClass.DoRefresh();
     }
 
     // Allows for display and edit of a file.
@@ -1039,7 +1039,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ViewGridClass.DoEditViewData();
+          ViewGridClass.DoEdit();
           e.Handled = true;
           break;
 
@@ -1050,7 +1050,7 @@ namespace LJCViewEditor
           break;
 
         case Keys.F5:
-          ViewGridClass.DoRefreshViewData();
+          ViewGridClass.DoRefresh();
           e.Handled = true;
           break;
 
@@ -1084,7 +1084,7 @@ namespace LJCViewEditor
     {
       if (ViewGrid.LJCGetMouseRow(e) != null)
       {
-        ViewGridClass.DoEditViewData();
+        ViewGridClass.DoEdit();
       }
     }
 

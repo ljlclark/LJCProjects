@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ViewJoinManager.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCDBViewDAL
@@ -51,6 +52,17 @@ namespace LJCDBViewDAL
 
       var keyColumns = GetParentKey(viewDataID);
       retValue = Load(keyColumns);
+      return retValue;
+    }
+
+    // Retrieves the DbResult set of data rows.
+    /// <include path='items/ResultWithParentID/*' file='Doc/ViewJoinManager.xml'/>
+    public DbResult ResultWithParentID(int viewDataID)
+    {
+      DbResult retValue;
+
+      var keyColumns = GetParentKey(viewDataID);
+      retValue = DataManager.Load(keyColumns);
       return retValue;
     }
 

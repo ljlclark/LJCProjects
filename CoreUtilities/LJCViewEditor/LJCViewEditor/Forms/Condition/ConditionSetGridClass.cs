@@ -8,6 +8,7 @@ using LJCDBViewDAL;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using LJCDBMessage;
 
 namespace LJCViewEditor
 {
@@ -36,7 +37,7 @@ namespace LJCViewEditor
 		/// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
 		internal void DataRetrieve()
 		{
-			ViewConditionSets dataRecords;
+			//ViewConditionSets dataRecords;
 
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.ConditionSetGrid.Rows.Clear();
@@ -47,16 +48,27 @@ namespace LJCViewEditor
 				// Data from items.
 				int viewFilterID = parentRow.LJCGetInt32(ViewFilter.ColumnID);
 
-				dataRecords = mViewConditionSetManager.LoadWithParentID(viewFilterID);
-				if (NetCommon.HasItems(dataRecords))
-				{
-					foreach (ViewConditionSet dataRecord in dataRecords)
-					{
-						RowAdd(dataRecord);
-					}
-				}
-			}
-			Parent.Cursor = Cursors.Default;
+        // *** Begin *** Change- 10/5/23
+        //dataRecords = mViewConditionSetManager.LoadWithParentID(viewFilterID);
+        //if (NetCommon.HasItems(dataRecords))
+        //{
+        //	foreach (ViewConditionSet dataRecord in dataRecords)
+        //	{
+        //		RowAdd(dataRecord);
+        //	}
+        //}
+        var manager = mViewConditionSetManager;
+        DbResult result = manager.ResultWithParentID(viewFilterID);
+        if (DbResult.HasRows(result))
+        {
+          foreach (DbRow dbRow in result.Rows)
+          {
+            RowAddValues(dbRow.Values);
+          }
+        }
+        // *** End   *** Change- 10/5/23
+      }
+      Parent.Cursor = Cursors.Default;
 			Parent.DoChange(ViewEditorList.Change.ConditionSet);
 		}
 
@@ -73,8 +85,26 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Updates the current row with the record values.
-		private void RowUpdate(ViewConditionSet dataRecord)
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow RowAddValues(DbValues dbValues)
+    {
+      var ljcGrid = Parent.ConditionSetGrid;
+      var retValue = ljcGrid.LJCRowAdd();
+
+      var columnName = ViewConditionSet.ColumnID;
+      var id = dbValues.LJCGetInt32(columnName);
+      retValue.LJCSetInt32(columnName, id);
+
+      columnName = ViewConditionSet.ColumnBooleanOperator;
+      var name = dbValues.LJCGetValue(columnName);
+      retValue.LJCSetString(columnName, name);
+
+      retValue.LJCSetValues(ljcGrid, dbValues);
+      return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(ViewConditionSet dataRecord)
 		{
 			if (Parent.ConditionSetGrid.CurrentRow is LJCGridRow row)
 			{
@@ -88,7 +118,8 @@ namespace LJCViewEditor
 			, ViewConditionSet dataRecord)
 		{
 			row.LJCSetInt32(ViewConditionSet.ColumnID, dataRecord.ID);
-			row.LJCSetString(ViewConditionSet.ColumnBooleanOperator, dataRecord.BooleanOperator);
+			row.LJCSetString(ViewConditionSet.ColumnBooleanOperator
+        , dataRecord.BooleanOperator);
 		}
 
 		// Selects a row based on the key record values.

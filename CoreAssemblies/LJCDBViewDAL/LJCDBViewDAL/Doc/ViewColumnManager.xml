@@ -34,6 +34,13 @@
     <param name="viewDataID">The parent ID.</param>
     <returns>The data object record collection.</returns>
   </LoadWithParentID>
+  <ResultWithParentID>
+    <summary>
+      Retrieves the DbResult set of data rows.
+    </summary>
+    <param name="viewDataID">The parent ID.</param>
+    <returns>The DbResult rows.</returns>
+  </ResultWithParentID>
   <RetrieveWithID>
     <summary>
       Retrieve the record with ID.

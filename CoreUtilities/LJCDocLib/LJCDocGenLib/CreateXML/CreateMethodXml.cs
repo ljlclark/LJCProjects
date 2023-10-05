@@ -7,7 +7,6 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using Section = LJCGenTextLib.Section;
-using System.Xml.Linq;
 
 namespace LJCDocGenLib
 {

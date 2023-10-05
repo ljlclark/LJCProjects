@@ -31,6 +31,13 @@
     <param name="viewJoinID">The parent ID.</param>
     <returns>The data object record collection.</returns>
   </LoadWithParentID>
+  <ResultWithParentID>
+    <summary>
+      Retrieves the DbResult set of data rows.
+    </summary>
+    <param name="viewJoinID">The parent ID.</param>
+    <returns>The DbResult rows.</returns>
+  </ResultWithParentID>
   <LoadDbColumnsWithParentID>
     <summary>
       Retrieves a DbColumns collection for the specified parent ID.

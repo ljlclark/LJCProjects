@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ViewDataManager.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 
@@ -45,6 +46,18 @@ namespace LJCDBViewDAL
 
       var keyColumns = GetParentKey(parentID);
       retValue = Load(keyColumns, propertyNames);
+      return retValue;
+    }
+
+    // Retrieves the DbResult set of data rows.
+    /// <include path='items/ResultWithParentID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    public DbResult ResultWithParentID(int parentID
+      , List<string> propertyNames = null)
+    {
+      DbResult retValue;
+
+      var keyColumns = GetParentKey(parentID);
+      retValue = DataManager.Load(keyColumns, propertyNames);
       return retValue;
     }
 
