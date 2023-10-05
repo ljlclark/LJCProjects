@@ -36,8 +36,6 @@ namespace LJCViewEditor
 		// Retrieves the list rows.
 		internal void DataRetrieve()
 		{
-			//ViewConditions dataRecords;
-
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.ConditionGrid.Rows.Clear();
 
@@ -48,16 +46,8 @@ namespace LJCViewEditor
 				int viewConditionSetID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
 
         // *** Begin *** Change- 10/5/23
-        //    dataRecords = mViewConditionManager.LoadWithParentID(viewConditionSetID);
-        //if (NetCommon.HasItems(dataRecords))
-        //{
-        //	foreach (ViewCondition dataRecord in dataRecords)
-        //	{
-        //		RowAdd(dataRecord);
-        //	}
-        //}
         var manager = mViewConditionManager;
-        DbResult result = manager.ResultWithParentID(viewConditionSetID);
+        var result = manager.ResultWithParentID(viewConditionSetID);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)

@@ -39,7 +39,7 @@ namespace LJCGenTextEdit
 
         case Change.Section:
           SectionGrid.LJCSetCounter(SectionCounter);
-          mItemGridCode.DataRetrieveItem();
+          mItemGridCode.DataRetrieve();
           break;
 
         case Change.Item:

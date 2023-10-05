@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenItemManager.cs
+using LJCDBMessage;
 using LJCGenTextLib;
 using LJCNetCommon;
 using System;

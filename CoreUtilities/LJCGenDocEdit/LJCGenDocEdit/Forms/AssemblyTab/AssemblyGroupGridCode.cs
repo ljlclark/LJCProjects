@@ -95,6 +95,7 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
       var retValue = mAssemblyGroupGrid.LJCRowAdd();
+
       var columnName = DocAssemblyGroup.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt16(columnName));
 

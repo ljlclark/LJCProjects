@@ -36,8 +36,6 @@ namespace LJCViewEditor
 		// Retrieves the list rows.
 		internal void DataRetrieve()
 		{
-			//ViewOrderBys dataRecords;
-
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.OrderByGrid.Rows.Clear();
 
@@ -48,16 +46,8 @@ namespace LJCViewEditor
 				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
         // *** Begin *** Change- 10/5/23
-        //    dataRecords = mViewOrderByManager.LoadWithParentID(viewDataID);
-        //if (NetCommon.HasItems(dataRecords))
-        //{
-        //	foreach (ViewOrderBy dataRecord in dataRecords)
-        //	{
-        //		RowAdd(dataRecord);
-        //	}
-        //}
         var manager = mViewOrderByManager;
-        DbResult result = manager.ResultWithParentID(viewDataID);
+        var result = manager.ResultWithParentID(viewDataID);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)

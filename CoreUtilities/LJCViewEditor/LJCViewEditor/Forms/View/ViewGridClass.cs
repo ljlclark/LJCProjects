@@ -64,16 +64,8 @@ namespace LJCViewEditor
       ConfigureViewGrid();
 
       // *** Begin *** Change- 10/5/23
-      //Views dataRecords = mViewDataManager.LoadWithParentID(viewTable.ID);
-      //if (dataRecords != null && dataRecords.Count > 0)
-      //{
-      //  foreach (ViewData dataRecord in dataRecords)
-      //  {
-      //    RowAddViewData(dataRecord);
-      //  }
-      //}
       var manager = mViewDataManager;
-      DbResult result = manager.ResultWithParentID(viewTable.ID);
+      var result = manager.ResultWithParentID(viewTable.ID);
       if (DbResult.HasRows(result))
       {
         foreach (DbRow dbRow in result.Rows)

@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ItemGridCode.cs
+using LJCDBMessage;
 using LJCGenTextLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -29,7 +30,7 @@ namespace LJCGenTextEdit
 
     // Retrieves the list rows.
     /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
-    internal void DataRetrieveItem()
+    internal void DataRetrieve()
     {
       RepeatItems records;
       GenDataManager manager = mParent.GenDataManager;
@@ -40,12 +41,11 @@ namespace LJCGenTextEdit
       {
         string sectionName = parentRow.LJCGetCellText("Name");
         records = manager.LoadRepeatItems(sectionName);
-
         if (records != null && records.Count > 0)
         {
           foreach (RepeatItem record in records)
           {
-            RowAddItem(record);
+            RowAdd(record);
           }
         }
       }
@@ -53,7 +53,7 @@ namespace LJCGenTextEdit
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAddItem(RepeatItem dataRecord)
+    private LJCGridRow RowAdd(RepeatItem dataRecord)
     {
       LJCGridRow retValue;
 
@@ -65,7 +65,7 @@ namespace LJCGenTextEdit
     }
 
     // Updates the current row with the record values.
-    private void RowUpdateItem(RepeatItem dataRecord)
+    private void RowUpdate(RepeatItem dataRecord)
     {
       if (mItemGrid.CurrentRow is LJCGridRow gridRow)
       {
@@ -74,7 +74,7 @@ namespace LJCGenTextEdit
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelectItem(RepeatItem dataRecord)
+    private bool RowSelect(RepeatItem dataRecord)
     {
       string name;
       bool retValue = false;
@@ -185,7 +185,7 @@ namespace LJCGenTextEdit
       {
         name = row.LJCGetCellText("Name");
       }
-      DataRetrieveItem();
+      DataRetrieve();
 
       // Select the original row.
       if (NetString.HasValue(name))
@@ -194,7 +194,7 @@ namespace LJCGenTextEdit
         {
           Name = name
         };
-        RowSelectItem(dataRecord);
+        RowSelect(dataRecord);
       }
       mParent.Cursor = Cursors.Default;
     }
@@ -210,12 +210,12 @@ namespace LJCGenTextEdit
       dataRecord = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
-        RowUpdateItem(dataRecord);
+        RowUpdate(dataRecord);
       }
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAddItem(dataRecord);
+        row = RowAdd(dataRecord);
         mItemGrid.LJCSetCurrentRow(row, true);
         mParent.TimedChange(EditList.Change.Item);
       }

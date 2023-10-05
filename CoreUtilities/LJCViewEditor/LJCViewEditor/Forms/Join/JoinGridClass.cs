@@ -36,8 +36,6 @@ namespace LJCViewEditor
 		// Retrieves the list rows.
 		internal void DataRetrieve()
 		{
-			//ViewJoins dataRecords;
-
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.JoinGrid.Rows.Clear();
 			Parent.JoinOnGrid.Rows.Clear();
@@ -50,16 +48,8 @@ namespace LJCViewEditor
 				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
         // *** Begin *** Change- 10/5/23
-        //dataRecords = mViewJoinManager.LoadWithParentID(viewDataID);
-        //if (NetCommon.HasItems(dataRecords))
-        //{
-        //	foreach (ViewJoin dataRecord in dataRecords)
-        //	{
-        //		RowAdd(dataRecord);
-        //	}
-        //}
         var manager = mViewJoinManager;
-        DbResult result = manager.ResultWithParentID(viewDataID);
+        var result = manager.ResultWithParentID(viewDataID);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)

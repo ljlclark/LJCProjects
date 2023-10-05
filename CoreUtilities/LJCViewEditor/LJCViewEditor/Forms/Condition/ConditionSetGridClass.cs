@@ -37,8 +37,6 @@ namespace LJCViewEditor
 		/// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
 		internal void DataRetrieve()
 		{
-			//ViewConditionSets dataRecords;
-
 			Parent.Cursor = Cursors.WaitCursor;
 			Parent.ConditionSetGrid.Rows.Clear();
 
@@ -49,16 +47,8 @@ namespace LJCViewEditor
 				int viewFilterID = parentRow.LJCGetInt32(ViewFilter.ColumnID);
 
         // *** Begin *** Change- 10/5/23
-        //dataRecords = mViewConditionSetManager.LoadWithParentID(viewFilterID);
-        //if (NetCommon.HasItems(dataRecords))
-        //{
-        //	foreach (ViewConditionSet dataRecord in dataRecords)
-        //	{
-        //		RowAdd(dataRecord);
-        //	}
-        //}
         var manager = mViewConditionSetManager;
-        DbResult result = manager.ResultWithParentID(viewFilterID);
+        var result = manager.ResultWithParentID(viewFilterID);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)
