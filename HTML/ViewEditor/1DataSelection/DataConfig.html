@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataConfig.cs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Config Dropdown</title>
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel="stylesheet" type="text/css" href="../XML.css" />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../ViewEdit.html">View Editor</a>
+      / DataConfig
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>Data Config Dropdown</div>
+    </div>
+    <div class='Text'>
+  <p>
+    The Data Config Dropdown contains the available Data Config item names. The
+    names are retrieved from the DataConfigs.xml file.
+  </p>
+  <p>
+    The Table Dropdown list is populated with the Data Source Table names when
+    the Data Config name is selected from the Data Config Dropdown list
+  </p>
+  <p>
+    The DataConfig.xml file definitions are used to connect to the available
+    Data Sources. It uses the following layout.
+  </p>
+  <pre>
+<span class="ltgt">&lt;</span>?<span class="name">xml</span> <span class="attrib">version</span>="<span class="data">1.0</span>" <span class="attrib">encoding</span>="<span class="data">utf-8</span>" ?<span class="ltgt">&gt;</span>
+<span class="ltgt">&lt;</span><span class="name">DataConfigs</span> xmlns:xsi="<span class="data">http://www.w3.org/2001/XMLSchema-instance</span>"
+   xmlns:xsd="<span class="data">http://www.w3.org/2001/XMLSchema</span>"<span class="ltgt">&gt;</span>
+  <span class="ltgt">&lt;</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">Name</span><span class="ltgt">&gt;</span>ConfigName<span class="ltgt">&lt;/</span><span class="name">Name</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>DBServer\Instance<span class="ltgt">&lt;/</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">Database</span><span class="ltgt">&gt;</span>DatabaseName<span class="ltgt">&lt;/</span><span class="name">Database</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>SqlServer<span class="ltgt">&lt;/</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>
+  <span class="ltgt">&lt;/</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+  <span class="ltgt">&lt;</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">Name</span><span class="ltgt">&gt;</span>MySQLConfigName<span class="ltgt">&lt;/</span><span class="name">Name</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>LocalHost<span class="ltgt">&lt;/</span><span class="name">DbServer</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">Database</span><span class="ltgt">&gt;</span>DatabaseName<span class="ltgt">&lt;/</span><span class="name">Database</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>MySql<span class="ltgt">&lt;/</span><span class="name">ConnectionTypeName</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">UserID</span><span class="ltgt">&gt;</span>root<span class="ltgt">&lt;/</span><span class="name">UserID</span><span class="ltgt">&gt;</span>
+    <span class="ltgt">&lt;</span><span class="name">Pswd</span><span class="ltgt">&gt;</span>Password<span class="ltgt">&lt;/</span><span class="name">Pswd</span><span class="ltgt">&gt;</span>
+  <span class="ltgt">&lt;/</span><span class="name">DataConfig</span><span class="ltgt">&gt;</span>
+<span class="ltgt">&lt;/</span><span class="name">DataConfigs</span><span class="ltgt">&gt;</span></pre>
+
+      <!-- ********** -->
+      <div class="Heading2">Context Menu</div>
+      <p>
+        The Context Menu can be displayed by clicking the right mouse button on the
+        Combobox control.
+      </p>
+      <h4>Help</h4>
+      <p>
+        Displays the context sensitive Help Page.
+      </p>
+    </div>
+    <!--  End Text -->
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html">HowTo</a>
+      / <a href="../ViewEdit.html">View Editor</a>
+      / DataConfig
+    </div>
+    <br />
+    <!-- End page -->
+    <div class="SmallText">
+      Copyright &copy; Lester J Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>
