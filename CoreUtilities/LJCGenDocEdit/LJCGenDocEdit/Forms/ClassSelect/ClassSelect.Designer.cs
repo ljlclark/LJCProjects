@@ -31,7 +31,6 @@
       this.components = new System.ComponentModel.Container();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.ClassMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassSelectItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -50,7 +49,6 @@
       // 
       this.ClassMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.ClassMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator3,
             this.ClassHeading,
             this.ClassSelectItem,
             this.toolStripSeparator1,
@@ -61,13 +59,8 @@
             this.toolStripSeparator4,
             this.ClassHelp});
       this.ClassMenu.Name = "AssemblyMenu";
-      this.ClassMenu.Size = new System.Drawing.Size(226, 220);
+      this.ClassMenu.Size = new System.Drawing.Size(226, 214);
       this.ClassMenu.Text = "Assembly Group Menu";
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(222, 6);
       // 
       // ClassHeading
       // 
@@ -185,7 +178,6 @@
 
     private System.Windows.Forms.ContextMenuStrip ClassMenu;
     private System.Windows.Forms.ToolStripMenuItem ClassHeading;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     private System.Windows.Forms.ToolStripMenuItem ClassSelectItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem ClassText;

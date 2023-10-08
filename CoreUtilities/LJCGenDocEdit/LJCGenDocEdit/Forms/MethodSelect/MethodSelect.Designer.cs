@@ -32,7 +32,6 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.MethodGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.MethodSelectItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -88,7 +87,6 @@
       // 
       this.MethodMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.MethodMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator3,
             this.ClassHeading,
             this.MethodSelectItem,
             this.toolStripSeparator1,
@@ -99,13 +97,8 @@
             this.toolStripSeparator4,
             this.MethodHelp});
       this.MethodMenu.Name = "AssemblyMenu";
-      this.MethodMenu.Size = new System.Drawing.Size(249, 220);
+      this.MethodMenu.Size = new System.Drawing.Size(249, 214);
       this.MethodMenu.Text = "Assembly Group Menu";
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(245, 6);
       // 
       // ClassHeading
       // 
@@ -185,7 +178,6 @@
 
     internal LJCWinFormControls.LJCDataGrid MethodGrid;
     private System.Windows.Forms.ContextMenuStrip MethodMenu;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     private System.Windows.Forms.ToolStripMenuItem ClassHeading;
     private System.Windows.Forms.ToolStripMenuItem MethodSelectItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
