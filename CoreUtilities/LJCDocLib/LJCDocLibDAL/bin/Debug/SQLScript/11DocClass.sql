@@ -6,9 +6,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /*
-select
-  ID, DocAssemblyID, DocClassGroupID, Name, Description, Sequence
-from DocClass;
+select DocAssembly.Name, DocClassGroup.HeadingName, DocClassGroupID, DocClass.Name, DocClass.Description, DocClass.Sequence
+from DocClass
+left join DocAssembly on DocAssemblyID = DocAssembly.ID
+left join DocClassGroup on DocClassGroupID = DocClassGroup.ID
+order by DocAssembly.Name, HeadingName;
 */
 
 declare @assemblyName nvarchar(60);
@@ -48,22 +50,22 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'Represents a filter which is part of a where clause.', 4;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbFilters'
-  , 'Represents a collection of DbFilter objects. (E)', 4;
+  , 'Represents a collection of DbFilter objects. (E)', 5;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbJoin'
-  , 'Represents a database table join.', 5;
+  , 'Represents a database table join.', 6;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbJoinOn'
-  , 'Represents a Join On definition.', 6;
+  , 'Represents a Join On definition.', 7;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbJoinOns'
-  , 'Represents a collection of join on definitions.', 7;
+  , 'Represents a collection of join on definitions.', 8;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbJoins'
-  , 'Represents a collection of table joins. (E)', 8;
+  , 'Represents a collection of table joins. (E)', 9;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbRequest'
-  , 'Represents a database request. (E)', 9;
+  , 'Represents a database request. (E)', 10;
 
 set @assemblyName = 'LJCDBMessage';
 set @headingName = 'Result';
@@ -76,6 +78,16 @@ exec sp_DCAddUnique @assemblyName, @headingName
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbRows'
   , 'Represents a collection of LJCNetCommon.DbValues.', 3;
+
+/* ------------------------------ */
+set @assemblyName = 'LJCGridDataLib';
+set @headingName = 'DataGrid';
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'ResultGridData'
+  , 'Provides DbResult helpers for an LJCDataGrid control.', 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'TableGridData'
+  , 'Provides DataTable helpers for an LJCDataGrid control.', 2;
 
 /* ------------------------------ */
 set @assemblyName = 'LJCNetCommon';
@@ -193,14 +205,11 @@ exec sp_DCAddUnique @assemblyName, @headingName
 set @assemblyName = 'LJCWinFormControls';
 set @headingName = 'DataGrid';
 exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LJCHelper'
-  , 'Provides methods for setting a complex list control when AutoScaleMode.Font is used.', 1;
-exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCDataGrid'
-  , 'Provides custom functionality for a DataGridView control. (D)', 2;
+  , 'Provides custom functionality for a DataGridView control. (D)', 1;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCGridRow'
-  , 'Provides custom functionality for a DataGridViewRow control.', 3;
+  , 'Provides custom functionality for a DataGridViewRow control.', 2;
 
 set @assemblyName = 'LJCWinFormControls';
 set @headingName = 'Tab';

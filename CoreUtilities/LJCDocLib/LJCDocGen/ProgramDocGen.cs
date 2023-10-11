@@ -18,7 +18,7 @@ namespace LJCDocGen
     private static void Main(string[] args)
     {
       bool success = true;
-      if (args.Length < 0 || args.Length > 2)
+      if (args.Length < 0 || args.Length > 1)
       {
         success = false;
         Console.WriteLine("\r\nSyntax: LJCDocGen.exe [outputPath]");

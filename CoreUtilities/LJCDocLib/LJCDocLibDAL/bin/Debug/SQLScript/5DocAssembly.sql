@@ -130,29 +130,29 @@ exec sp_DAAddUnique @groupName, 'LJCDocGen'
   , 'A program to generate code documentation.'
   , 'LJCDocGen.xml'
   , null, 1;
-exec sp_DAAddUnique @groupName, 'LJCGenPageGen'
-  , 'Genealogy Page Generation.'
-  , '..\..\..\..\..\SampleApps\Genealogy\LJCGenPageGen\bin\Debug\LJCGenPageGen.xml'
-  , null, 2;
 exec sp_DAAddUnique @groupName, 'LJCDocGenLib'
   , 'The Code HTML Documentation Generator library.'
   , 'LJCDocGenLib.xml'
-  , null, 3;
+  , null, 2;
 exec sp_DAAddUnique @groupName, 'LJCDocLibDAL'
   , 'The Code Documentation Generator Data Access Layer library. (DO)'
   , '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCDocLibDAL\bin\Debug\LJCDocLibDAL.xml'
-  , null, 4;
+  , null, 3;
 exec sp_DAAddUnique @groupName, 'LJCDocObjLib'
   , 'The Code Documentation data object library. (DOG)'
   , '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCDocObjLib\bin\Debug\LJCDocObjLib.xml'
-  , 'DocLibDataGraph.jpg', 5;
+  , 'DocLibDataGraph.jpg', 4;
 exec sp_DAAddUnique @groupName, 'LJCDocXmlObjLib'
   , 'The Code Documentation XML object library. (DOG)'
   , '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCDocXmlObjLib\bin\Debug\LJCDocXmlObjLib.xml'
-  , 'DocLibXMLGraph.jpg', 6;
-exec sp_DAAddUnique @groupName, 'LJCDocGroupEditor'
-  , 'The Documentation Group Manager.'
+  , 'DocLibXMLGraph.jpg', 5;
+exec sp_DAAddUnique @groupName, 'LJCGenDocEdit'
+  , 'The GenDoc Group Editor'
   , '..\..\..\..\..\CoreUtilities\LJCDocGroupEditor\LJCDocGroupEditor\bin\Debug\LJCDocGroupEditor.xml'
+  , null, 6;
+exec sp_DAAddUnique @groupName, 'LJCGenPageGen'
+  , 'Genealogy Page Generation.'
+  , '..\..\..\..\..\SampleApps\Genealogy\LJCGenPageGen\bin\Debug\LJCGenPageGen.xml'
   , null, 7;
 
 set @groupName = 'DataTransform';
