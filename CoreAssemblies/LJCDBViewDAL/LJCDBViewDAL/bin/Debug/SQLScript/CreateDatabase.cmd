@@ -1,0 +1,2 @@
+LJCExecuteScripts ..\SQLScript TestData
+pause
