@@ -8,7 +8,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_CreateUnitMeasure', 'P' ) IS NOT NULL   
   DROP PROCEDURE dbo.sp_CreateUnitMeasure;  
-GO  
+GO
 
 CREATE PROCEDURE [dbo].[sp_CreateUnitMeasure]
   @UnitCategoryCode varchar(5),

@@ -8,7 +8,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_CreateUnitConversion', 'P' ) IS NOT NULL   
     DROP PROCEDURE dbo.sp_CreateUnitConversion;  
-GO  
+GO
 
 CREATE PROCEDURE [dbo].[sp_CreateUnitConversion]
   @FromUnitCode varchar(5),
