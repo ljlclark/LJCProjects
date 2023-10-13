@@ -8,7 +8,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_DocAssemblyShow', 'P' ) IS NOT NULL   
   DROP PROCEDURE dbo.sp_DocAssemblyShow;  
-GO  
+GO
 CREATE PROCEDURE dbo.sp_DocAssemblyShow
   @assemblyID smallint
 AS

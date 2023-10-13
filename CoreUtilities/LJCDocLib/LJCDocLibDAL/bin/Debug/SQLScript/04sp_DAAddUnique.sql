@@ -9,7 +9,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_DAAddUnique', 'P' ) IS NOT NULL   
   DROP PROCEDURE dbo.sp_DAAddUnique;  
-GO  
+GO
 CREATE PROCEDURE dbo.sp_DAAddUnique
   @groupName nvarchar(60),
   @name nvarchar(60),

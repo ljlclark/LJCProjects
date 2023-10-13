@@ -8,7 +8,7 @@ go
 
 if object_id ( 'dbo.sp_ChangeSequence', 'P' ) is not null
   drop procedure dbo.sp_ChangeSequence;  
-go  
+go
 create procedure dbo.sp_ChangeSequence
   @table varchar(100),
   @column varchar(100),

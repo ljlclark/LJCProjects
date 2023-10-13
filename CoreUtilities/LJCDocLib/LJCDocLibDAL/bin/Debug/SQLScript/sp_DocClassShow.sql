@@ -8,7 +8,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_DocClassShow', 'P' ) IS NOT NULL   
   DROP PROCEDURE dbo.sp_DocClassShow;  
-GO  
+GO
 CREATE PROCEDURE dbo.sp_DocClassShow
   @classID smallint
 AS

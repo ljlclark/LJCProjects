@@ -9,6 +9,8 @@ using System.IO;
 using LJCNetCommon;
 using LJCDataAccessConfig;
 using System.Text;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace LJCDataAccess
 {
@@ -163,15 +165,22 @@ namespace LJCDataAccess
       string[] separators = new string[] { "GO\r\n", "go\r\n", "GO\n", "go\n" };
       string[] commands = scriptText.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
+      var first = true;
       foreach (string command in commands)
       {
-        if (IsMySql(mProviderName))
+        ScriptSQL = command;
+        var sql = ScriptSQL;
+        if (GetUse(ref first, ref sql))
         {
-          mMySqlDataAccess.ExecuteNonQuery(command);
-        }
-        else
-        {
-          ExecuteNonQuery(command);
+          ScriptSQL = sql;
+          if (IsMySql(mProviderName))
+          {
+            mMySqlDataAccess.ExecuteNonQuery(ScriptSQL);
+          }
+          else
+          {
+            ExecuteNonQuery(ScriptSQL);
+          }
         }
       }
     }
@@ -360,6 +369,20 @@ namespace LJCDataAccess
       retValue = GetDataTable(sql);
       return retValue;
     }
+
+    /// <summary>Checks for the "use" command.</summary>
+    public bool IsUseCommand(string sql)
+    {
+      var retValue = false;
+
+      var ignoreCase = StringComparison.InvariantCultureIgnoreCase;
+      var index = sql.IndexOf("use", ignoreCase);
+      if (index >= 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
     #endregion
 
     #region Private Methods
@@ -380,6 +403,29 @@ namespace LJCDataAccess
 
       string connectionTypeName = ConnectionType.SqlServer.ToString();
       retValue = DataConfig.GetProviderName(connectionTypeName);
+      return retValue;
+    }
+
+    // Gets the "use" command and returns true if valid.
+    private bool GetUse(ref bool first, ref string sql)
+    {
+      bool retValue = true;
+
+      if (first)
+      {
+        if (IsUseCommand(sql))
+        {
+          if (NetString.HasValue(TableName))
+          {
+            sql = $"use {TableName}";
+          }
+          else
+          {
+            retValue = false;
+          }
+        }
+      }
+      first = false;
       return retValue;
     }
 
@@ -498,6 +544,22 @@ namespace LJCDataAccess
       }
     }
     private string mProviderName;
+
+    /// <summary>Gets the ScriptSQL value.</summary>
+    public string ScriptSQL
+    {
+      get { return mScriptSQL; }
+      set { mScriptSQL = NetString.InitString(value); }
+    }
+    private string mScriptSQL;
+
+    /// <summary>Gets the TableName value.</summary>
+    public string TableName
+    {
+      get { return mTableName; }
+      set { mTableName = NetString.InitString(value); }
+    }
+    private string mTableName;
     #endregion
 
     #region Class Data

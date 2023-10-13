@@ -9,7 +9,7 @@ GO
 
 IF OBJECT_ID ( 'dbo.sp_DMGHAddUnique', 'P' ) IS NOT NULL   
   DROP PROCEDURE dbo.sp_DMGHAddUnique;  
-GO  
+GO
 CREATE PROCEDURE dbo.sp_DMGHAddUnique
   @name nvarchar(60),
   @heading nvarchar(100),

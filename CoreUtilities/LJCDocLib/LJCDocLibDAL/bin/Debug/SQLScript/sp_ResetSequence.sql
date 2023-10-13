@@ -8,7 +8,7 @@ go
 
 if object_id ( 'dbo.sp_ResetSequence', 'P' ) is not null
   drop procedure dbo.sp_ResetSequence;  
-go  
+go
 create procedure dbo.sp_ResetSequence
   @table varchar(100),
   @idColumn varchar(100),

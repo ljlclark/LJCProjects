@@ -180,7 +180,7 @@ CREATE TABLE [dbo].[DocMethod](
 	[Name] [nvarchar](60) NOT NULL,
 	[Description] [nvarchar](100) NOT NULL,
 	[Sequence] [smallint] NOT NULL,
-	[OverloadName] [nvarchar](60) NOT NULL,
+	[OverloadName] [nvarchar](60) NULL,
 	[ActiveFlag] [bit] NOT NULL default(1),
 	CONSTRAINT [PK_DocMethod]
 	PRIMARY KEY CLUSTERED (
