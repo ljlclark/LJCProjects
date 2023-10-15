@@ -16,7 +16,8 @@ CREATE PROCEDURE dbo.sp_DMAddUnique
   @name nvarchar(60),
   @description nvarchar(100),
   @sequence smallint,
-  @activeFlag bit = 1
+  @activeFlag bit = 1,
+  @overloadName nvarchar(60) = null
 AS
 BEGIN
 declare @docClassID smallint
@@ -28,8 +29,8 @@ IF NOT EXISTS (select ID from DocMethod
 where DocMethodGroupID = @docMethodGroupID
   and Name = @name)
   insert into DocMethod (DocClassID, DocMethodGroupID, Name, Description
-    , Sequence, ActiveFlag)
+    , Sequence, ActiveFlag, OverloadName)
     values (@docClassID, @docMethodGroupID, @name, @description
-    , @sequence, @activeFlag);
+    , @sequence, @activeFlag, @overloadName);
 END
 GO
