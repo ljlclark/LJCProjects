@@ -46,6 +46,13 @@
     <param name="name">The column name.</param>
     <returns>The Pascal case property name.</returns>
   </GetPropertyName>
+  <GetSearchName>
+    <summary>
+      Gets the Search Property name.
+    </summary>
+    <param name="columnName">The potentially qualified column name.</param>
+    <returns>The unqualified column name.</returns>
+  </GetSearchName>
   <ExceptionString>
     <summary>
       Creates an exception string with outer and inner exception.

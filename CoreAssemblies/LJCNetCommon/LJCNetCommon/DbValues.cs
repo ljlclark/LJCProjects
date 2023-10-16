@@ -63,6 +63,8 @@ namespace LJCNetCommon
       {
         DataTypeName = dataTypeName,
         PropertyName = propertyName,
+        // *** Next Statement *** Add 10/15/23
+        //RenameAs = renameAs,
         Value = value,
       };
       Add(retValue);

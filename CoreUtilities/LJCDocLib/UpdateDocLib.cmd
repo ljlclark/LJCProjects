@@ -29,7 +29,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ---------------------------
-set to=%toRoot%LJCDocGen\%bin%
+set to=%toRoot%GenDocScript\%bin%
 
 set src=LJCDBMessage\CipherLib\%bin%
 copy %assmRoot%%src%\CipherLib.dll %to%
@@ -37,9 +37,32 @@ copy %assmRoot%%src%\CipherLib.dll %to%
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
-set src=LJCDataAccessConfig\LJCDataAccessConfig
-copy %assmRoot%%src%\DataConfigs.xml %to%
-copy %assmRoot%%src%\ConnectionTemplates.xml %to%
+set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
+
+set src=LJCDBClientLib\LJCDBClientLib\%bin%
+copy %assmRoot%%src%\LJCDBClientLib.dll %to%
+
+set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
+copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
+
+set src=LJCDBMessage\LJCDBMessage\%bin%
+copy %assmRoot%%src%\LJCDBMessage.dll %to%
+
+set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
+copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
+
+set src=LJCDocLib\LJCDocLibDAL\%bin%
+copy %utilRoot%%src%\LJCDocLibDAL.dll %to%
+
+rem ---------------------------
+set to=%toRoot%LJCDocGen\%bin%
+
+set src=LJCDBMessage\CipherLib\%bin%
+copy %assmRoot%%src%\CipherLib.dll %to%
+
+set src=LJCDataAccess\LJCDataAccess\%bin%
+copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
 copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%

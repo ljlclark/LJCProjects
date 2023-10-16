@@ -25,6 +25,8 @@ namespace LJCNetCommon
       DataTypeName = item.DataTypeName;
       IsChanged = item.IsChanged;
       PropertyName = item.PropertyName;
+      // *** Next Statement *** Add 10/15/23
+      //RenameAs = item.RenameAs;
       Value = item.Value;
     }
 
@@ -36,6 +38,8 @@ namespace LJCNetCommon
       DataTypeName = dataTypeName;
       IsChanged = false;
       PropertyName = propertyName;
+      // *** Next Statement *** Add 10/15/23
+      //RenameAs = renameAs;
       Value = value;
     }
     #endregion
@@ -107,6 +111,8 @@ namespace LJCNetCommon
         IsChanged = definitionColumn.IsChanged,
         MaxLength = definitionColumn.MaxLength,
         PropertyName = definitionColumn.PropertyName,
+        // *** Next Statement *** Add 10/15/23
+        //RenameAs = definitionColumn.RenameAs,
         Value = Value
       };
       if (0 == retValue.MaxLength)
@@ -141,6 +147,16 @@ namespace LJCNetCommon
       set { mPropertyName = NetString.InitString(value); }
     }
     private string mPropertyName;
+
+    //// Gets or sets the RenameAs value.
+    ///// <include path='items/RenameAs/*' file='Doc/DbColumn.xml'/>
+    //// *** New Property *** Add 10/15/23
+    //public string RenameAs
+    //{
+    //  get { return mRenameAs; }
+    //  set { mRenameAs = NetString.InitString(value); }
+    //}
+    //private string mRenameAs;
 
     /// <summary>Gets or sets the Value object.</summary>
     public object Value

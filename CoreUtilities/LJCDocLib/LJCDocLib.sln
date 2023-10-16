@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDocGenLib", "LJCDocGenLib\LJCDocGenLib.csproj", "{F946C945-9A9B-4521-AD32-696C84F52D7A}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDocXMLObjLib", "LJCDocXMLObjLib\LJCDocXMLObjLib.csproj", "{2037180D-F3FD-4559-AD78-37E7F018BD33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDocObjLib", "LJCDocObjLib\LJCDocObjLib.csproj", "{5D43C94F-C0CE-416F-B842-3A0289F8A93B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenDocScript", "GenDocScript\GenDocScript.csproj", "{AD484467-7659-4897-BF32-8EE523E589D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5D43C94F-C0CE-416F-B842-3A0289F8A93B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D43C94F-C0CE-416F-B842-3A0289F8A93B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D43C94F-C0CE-416F-B842-3A0289F8A93B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD484467-7659-4897-BF32-8EE523E589D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD484467-7659-4897-BF32-8EE523E589D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD484467-7659-4897-BF32-8EE523E589D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD484467-7659-4897-BF32-8EE523E589D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

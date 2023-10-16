@@ -61,41 +61,6 @@ namespace LJCNetCommon
     #endregion
 
     #region Formatting a String
-
-    // Gets a column name with underscores converted to Pascal case.
-    /// <include path='items/GetPropertyName/*' file='Doc/NetString.xml'/>
-    public static string GetPropertyName(string name)
-    {
-      StringBuilder builder;
-      bool makeUpper = false;
-      string retVal;
-
-      builder = new StringBuilder(64);
-      foreach (char ch in name)
-      {
-        if (builder.Length == 0
-          || makeUpper)
-        {
-          makeUpper = false;
-          builder.Append(char.ToUpper(ch));
-        }
-        else
-        {
-          makeUpper = false;
-          if (ch == '_')
-          {
-            makeUpper = true;
-          }
-          else
-          {
-            builder.Append(ch);
-          }
-        }
-      }
-      retVal = builder.ToString();
-      return retVal;
-    }
-
     // Creates an exception string with outer and inner exception.
     /// <include path='items/ExceptionString/*' file='Doc/NetString.xml'/>
     public static string ExceptionString(Exception e)
@@ -158,6 +123,55 @@ namespace LJCNetCommon
             retValue = $"'{retValue}'";
           }
           break;
+      }
+      return retValue;
+    }
+
+    // Gets a column name with underscores converted to Pascal case.
+    /// <include path='items/GetPropertyName/*' file='Doc/NetString.xml'/>
+    public static string GetPropertyName(string name)
+    {
+      StringBuilder builder;
+      bool makeUpper = false;
+      string retVal;
+
+      builder = new StringBuilder(64);
+      foreach (char ch in name)
+      {
+        if (builder.Length == 0
+          || makeUpper)
+        {
+          makeUpper = false;
+          builder.Append(char.ToUpper(ch));
+        }
+        else
+        {
+          makeUpper = false;
+          if (ch == '_')
+          {
+            makeUpper = true;
+          }
+          else
+          {
+            builder.Append(ch);
+          }
+        }
+      }
+      retVal = builder.ToString();
+      return retVal;
+    }
+
+    // Gets the Search Property name.
+    /// <include path='items/GetSearchName/*' file='Doc/NetString.xml'/>
+    public static string GetSearchName(string columnName)
+    {
+      var retValue = columnName;
+
+      var index = columnName.IndexOf(".");
+      if (index > -1)
+      {
+        // Get property name from qualified name.
+        retValue = columnName.Substring(index + 1);
       }
       return retValue;
     }

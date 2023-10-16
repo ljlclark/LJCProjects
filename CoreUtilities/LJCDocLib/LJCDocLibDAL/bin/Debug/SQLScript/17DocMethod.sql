@@ -1,5 +1,4 @@
-﻿/* 17DM_NetCommon.sql */
-/* DocMethod */
+﻿/* 17DocMethod.sql */
 USE [LJCData]
 GO
 SET ANSI_NULLS ON

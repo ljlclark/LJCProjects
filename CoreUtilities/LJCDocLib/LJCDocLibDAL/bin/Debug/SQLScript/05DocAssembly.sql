@@ -1,4 +1,6 @@
-﻿/* 4DocAssembly.sql */
+﻿/* Copyright(c) Lester J.Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* 05DocAssembly.sql */
 USE [LJCData]
 GO
 SET ANSI_NULLS ON
@@ -6,9 +8,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /*
-select
-  ID, DocAssemblyGroupID, Sequence, Name, Description, FileSpec, MainImage
-from DocAssembly;
+select DocAssembly.ID 'DocAssembly' , DocAssembly.Name 'Assembly Name',
+  dag.Heading, Description, FileSpec, MainImage
+from DocAssembly
+left join DocAssemblyGroup as dag on DocAssemblyGroupID = dag.ID
+order by dag.Sequence, DocAssembly.Sequence
 */
 
 declare @groupName nvarchar(60) = 'CommonLibraries';

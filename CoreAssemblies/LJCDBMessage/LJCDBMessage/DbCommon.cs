@@ -152,6 +152,25 @@ namespace LJCDBMessage
       return retValue;
     }
 
+    //// Gets the Search Property name.
+    ///// <summary>
+    ///// Gets the Search Property name.
+    ///// </summary>
+    ///// <param name="columnName">The potentially qualified column name.</param>
+    ///// <returns>The unqualified column name.</returns>
+    //public static string GetSearchName(string columnName)
+    //{
+    //  var retValue = columnName;
+
+    //  var index = columnName.IndexOf(".");
+    //  if (index > -1)
+    //  {
+    //    // Get property name from qualified name.
+    //    retValue = columnName.Substring(index + 1);
+    //  }
+    //  return retValue;
+    //}
+
     // Creates the key DbColumn object.
     private static DbColumn CreateKeyColumn(DbColumn keyColumn
       , DbColumns baseDefinition, DbJoins dbJoins = null)
@@ -192,7 +211,7 @@ namespace LJCDBMessage
       var columnName = keyColumn.ColumnName;
 
       // Get column definition by column name.
-      var searchName = GetSearchName(keyColumn.ColumnName);
+      var searchName = NetString.GetSearchName(keyColumn.ColumnName);
       retValue = dataColumns.LJCSearchColumnName(searchName);
       if (retValue != null)
       {
@@ -232,20 +251,6 @@ namespace LJCDBMessage
             break;
           }
         }
-      }
-      return retValue;
-    }
-
-    // Gets the Search Property name.
-    private static string GetSearchName(string columnName)
-    {
-      var retValue = columnName;
-
-      var index = columnName.IndexOf(".");
-      if (index > -1)
-      {
-        // Get property name from qualified name.
-        retValue = columnName.Substring(index + 1);
       }
       return retValue;
     }

@@ -287,11 +287,10 @@ namespace LJCNetCommon
         retValue = new DbColumns();
         foreach (string propertyName in propertyNames)
         {
-          searchColumn = LJCSearchPropertyName(propertyName);
-          //if (null == searchColumn)
-          //{
-          //  throw new ArgumentException($"Property {propertyName} was not found.");
-          //}
+          // *** Begin *** Change - 10/16/23
+          var searchName = NetString.GetSearchName(propertyName);
+          searchColumn = LJCSearchPropertyName(searchName);
+          // *** End   *** Change - 10/16/23
           if (searchColumn != null)
           {
             retValue.Add(new DbColumn(searchColumn));

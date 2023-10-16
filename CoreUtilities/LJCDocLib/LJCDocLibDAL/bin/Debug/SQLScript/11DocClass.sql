@@ -1,16 +1,18 @@
-/* 11DCLJCDBMessage.sql */
+/* 11DocClass.sql */
 USE [LJCData]
 GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 /*
-select DocAssembly.Name, DocClassGroup.HeadingName, DocClassGroupID, DocClass.Name, DocClass.Description, DocClass.Sequence
-from DocClass
-left join DocAssembly on DocAssemblyID = DocAssembly.ID
-left join DocClassGroup on DocClassGroupID = DocClassGroup.ID
-order by DocAssembly.Name, HeadingName;
+select dc.ID 'DocClass', da.Name 'Assembly Name', dcg.HeadingName, dc.Name,
+  dc.Description, dc.Sequence
+from DocClass as dc
+left join DocAssembly as da on DocAssemblyID = da.ID
+left join DocClassGroup as dcg on DocClassGroupID = dcg.ID
+order by da.Name, DocClass.Name, HeadingName;
 */
 
 declare @assemblyName nvarchar(60);

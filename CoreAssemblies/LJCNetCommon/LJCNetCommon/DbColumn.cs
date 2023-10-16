@@ -134,6 +134,8 @@ namespace LJCNetCommon
           DataTypeName = dbColumn.DataTypeName,
           IsChanged = dbColumn.IsChanged,
           PropertyName = dbColumn.PropertyName,
+          // *** Next Statement *** Add 10/15/23
+          //RenameAs = dbColumn.RenameAs,
           Value = dbColumn.Value
         };
       }
