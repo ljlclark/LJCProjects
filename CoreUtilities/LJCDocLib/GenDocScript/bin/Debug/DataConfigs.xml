@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataConfigs.xml -->
+<DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataConfig>
+    <Name>LJCData</Name>
+		<ConnectionTypeName>SQLServer</ConnectionTypeName>
+		<DbServer>DESKTOP-PDPBE34</DbServer>
+    <Database>LJCData</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>TestData</Name>
+    <ConnectionTypeName>SQLServer</ConnectionTypeName>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
+    <Database>TestData</Database>
+  </DataConfig>
+</DataConfigs>

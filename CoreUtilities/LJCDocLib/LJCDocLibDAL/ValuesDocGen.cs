@@ -15,7 +15,7 @@ namespace LJCDocLibDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public ValuesDocGen()
     {
-      var dataConfigName = "LJCData";
+      var dataConfigName = "TestData";
       var dbServiceRef = new DbServiceRef()
       {
         DbDataAccess = new DbDataAccess(dataConfigName)

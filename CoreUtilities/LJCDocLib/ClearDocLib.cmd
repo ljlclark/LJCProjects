@@ -31,6 +31,11 @@ del %Solution%\%Project%\%bin%\LJCDocObjLib.log
 del %Solution%\%Project%\%bin%\LJCDocObjLib.xml
 del %Solution%\%Project%\%bin%\LJCDocXMLObjLib.xml
 
+set Project=GenDocScript
+set File=GenDocScript
+call %ClearBuild%
+del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
+
 set Project=LJCDocGenLib
 set File=LJCDocGenLib
 call %ClearBuild%
