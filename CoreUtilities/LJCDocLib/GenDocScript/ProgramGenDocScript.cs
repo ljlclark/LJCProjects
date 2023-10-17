@@ -7,10 +7,10 @@ namespace GenDocScript
     {
       var assemblyScript = new AssemblyScript();
       assemblyScript.Gen();
-      //var classScript = new ClassScript();
-      //classScript.Gen();
-      //var methodScript = new MethodScript();
-      //methodScript.Gen();
+      var classScript = new ClassScript();
+      classScript.Gen();
+      var methodScript = new MethodScript();
+      methodScript.Gen();
     }
   }
 }
