@@ -9,12 +9,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /*
-select dc.ID 'DocClass' da.Name 'Assembly Name', dcg.HeadingName, dc.Name,
+select dc.ID 'DocClass', da.Name 'Assembly Name', dcg.HeadingName, dc.Name,
   dc.Description, dc.Sequence
 from DocClass as dc
 left join DocAssembly as da on DocAssemblyID = da.ID
 left join DocClassGroup as dcg on DocClassGroupID = dcg.ID
-order by da.Name, DocClass.Name, HeadingName, Sequence
+order by da.Name, HeadingName, Sequence;
 */
 
 declare @assemblyName nvarchar(60);
@@ -148,28 +148,7 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'CodeTokenizer'
   , 'A C# Code Tokenizer class. (RE)'
   , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Syntax';
-set @seq = 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'CommonDataTypes'
-  , 'Represents a collection of Common Data Types.'
-  , @seq;
 set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'CommonKeywords'
-  , 'Represents a collection of Common Key Words.'
-  , @seq;
-set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'CommonModifiers'
-  , 'Represents a collection of Common Modifiers.'
-  , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = '';
-set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'Cryptography_Type'
   , 'The encryption types.'
@@ -179,6 +158,11 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'DataTypes'
   , 'Represents a collection of Data Types.'
   , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'LJCCryptography'
+  , 'Provides methods to encrypt and decrypt data in memory.'
+  , @seq;
 
 set @assemblyName = 'LJCNetCommon';
 set @headingName = 'Collection';
@@ -187,28 +171,7 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbColumn'
   , 'Represents a Data Column definition. (D)'
   , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Comparer';
-set @seq = 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'DbColumnNameComparer'
-  , 'Sort and search on column name.'
-  , @seq;
 set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'DbColumnPropertyComparer'
-  , 'Sort and search on PropertyName.'
-  , @seq;
-set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'DbColumnRenameAsComparer'
-  , 'Sort and search on RenameAs value.'
-  , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Collection';
-set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'DbColumns'
   , 'Represents a collection of DbColumn objects.'
@@ -235,16 +198,21 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , @seq;
 
 set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Syntax';
+set @headingName = 'Comparer';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName
-  , 'Keywords'
-  , 'Represents a collection of Keywords.'
+  , 'DbColumnNameComparer'
+  , 'Sort and search on column name.'
   , @seq;
 set @seq += 1;
 exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LibTypes'
-  , 'Represents a collection of Library Types.'
+  , 'DbColumnPropertyComparer'
+  , 'Sort and search on PropertyName.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'DbColumnRenameAsComparer'
+  , 'Sort and search on RenameAs value.'
   , @seq;
 
 set @assemblyName = 'LJCNetCommon';
@@ -254,29 +222,10 @@ exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCAssemblyReflect'
   , 'Provides Assembly Reflection methods. (DE)'
   , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = '';
-set @seq = 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LJCCryptography'
-  , 'Provides methods to encrypt and decrypt data in memory.'
-  , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Reflection';
-set @seq = 1;
+set @seq += 1;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCReflect'
   , 'Provides object property reflection capabilities. (DE)'
-  , @seq;
-
-set @assemblyName = 'LJCNetCommon';
-set @headingName = 'Syntax';
-set @seq = 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'Modifiers'
-  , 'Represents a collection of Modifiers.'
   , @seq;
 
 set @assemblyName = 'LJCNetCommon';
@@ -301,6 +250,36 @@ set @assemblyName = 'LJCNetCommon';
 set @headingName = 'Syntax';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName
+  , 'CommonDataTypes'
+  , 'Represents a collection of Common Data Types.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'CommonKeywords'
+  , 'Represents a collection of Common Key Words.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'CommonModifiers'
+  , 'Represents a collection of Common Modifiers.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'Keywords'
+  , 'Represents a collection of Keywords.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'LibTypes'
+  , 'Represents a collection of Library Types.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'Modifiers'
+  , 'Represents a collection of Modifiers.'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
   , 'PropertyDelegate'
   , 'Represents a PropertyDelegate definition.'
   , @seq;
@@ -318,19 +297,6 @@ exec sp_DCAddUnique @assemblyName, @headingName
 /* LJCWinFormControls */
 /* ------------------------------ */
 set @assemblyName = 'LJCWinFormControls';
-set @headingName = 'DataGrid';
-set @seq = 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LJCDataGrid'
-  , 'Provides custom functionality for a DataGridView control. (D)'
-  , @seq;
-set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName
-  , 'LJCGridRow'
-  , 'Provides custom functionality for a DataGridViewRow control.'
-  , @seq;
-
-set @assemblyName = 'LJCWinFormControls';
 set @headingName = 'Combobox';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName
@@ -341,6 +307,19 @@ set @seq += 1;
 exec sp_DCAddUnique @assemblyName, @headingName
   , 'LJCItemCombo'
   , 'Provides custom functionality for a ComboBox control. (R)'
+  , @seq;
+
+set @assemblyName = 'LJCWinFormControls';
+set @headingName = 'DataGrid';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'LJCDataGrid'
+  , 'Provides custom functionality for a DataGridView control. (D)'
+  , @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName
+  , 'LJCGridRow'
+  , 'Provides custom functionality for a DataGridViewRow control.'
   , @seq;
 
 set @assemblyName = 'LJCWinFormControls';

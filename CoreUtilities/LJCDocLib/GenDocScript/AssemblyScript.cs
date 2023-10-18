@@ -4,6 +4,7 @@
 using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -29,6 +30,8 @@ namespace GenDocScript
       var result = mAssemblyManager.Manager.Load(null, propertyNames, null
         , assemblyJoins);
 
+      Console.WriteLine();
+      Console.WriteLine("*** DocAssembly ***");
       var fileName = "05DocAssembly.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevGroupName = "Nothing";
@@ -39,8 +42,10 @@ namespace GenDocScript
         StringBuilder builder = new StringBuilder(256);
         builder.Append(GroupHeader());
         mPrevGroupName = mAssemblyValues.GroupName;
+        var assemblyName = mAssemblyValues.Name;
+        Console.WriteLine($"Assembly: {assemblyName}");
 
-        builder.AppendLine($"exec sp_DAAddUnique @heading, '{mAssemblyValues.Name}'");
+        builder.AppendLine($"exec sp_DAAddUnique @groupName, '{assemblyName}'");
         builder.AppendLine($"  , '{mAssemblyValues.Description}'");
         builder.AppendLine($"  , '{mAssemblyValues.FileSpec}'");
         builder.AppendLine($"  , '{mAssemblyValues.MainImage}', @seq;");
@@ -124,10 +129,13 @@ namespace GenDocScript
 
       // Assembly Group has changed.
       StringBuilder builder = new StringBuilder(256);
-      if (mAssemblyValues.GroupName != mPrevGroupName)
+      var groupName = mAssemblyValues.GroupName;
+      if (groupName != mPrevGroupName)
       {
+        Console.WriteLine();
+        Console.WriteLine($"Group: {groupName}");
         builder.AppendLine();
-        builder.AppendLine($"set @groupName = '{mAssemblyValues.GroupName}';");
+        builder.AppendLine($"set @groupName = '{groupName}';");
         builder.AppendLine("set @seq = 1;");
       }
       else
@@ -158,7 +166,7 @@ namespace GenDocScript
       builder.AppendLine("  dag.Name as GroupName, Description, FileSpec, MainImage");
       builder.AppendLine("from DocAssembly");
       builder.AppendLine("left join DocAssemblyGroup as dag on DocAssemblyGroupID = dag.ID");
-      builder.AppendLine("order by dag.Sequence, DocAssembly.Sequence");
+      builder.AppendLine("order by dag.Sequence, DocAssembly.Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
       builder.AppendLine("declare @groupName nvarchar(60);");

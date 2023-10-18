@@ -1,2 +1,2 @@
-LJCExecuteScripts ..\LJCDocLib\LJCDocLibDAL\bin\Debug\SQLScript TestData
+LJCExecuteScripts ..\LJCDocLib\LJCDocLibDAL\bin\Debug\SQLScript LJCData
 pause

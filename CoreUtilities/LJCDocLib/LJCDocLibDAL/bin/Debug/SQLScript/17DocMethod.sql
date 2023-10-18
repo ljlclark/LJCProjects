@@ -1,5 +1,7 @@
-﻿/* 17DocMethod.sql */
-USE [LJCData]
+/* Copyright(c) Lester J.Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* 17DocMethod.sql */
+USE[LJCData]
 GO
 SET ANSI_NULLS ON
 GO
@@ -7,22 +9,225 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /*
-select dm.ID 'DocMethod', da.Name, dm.DocClassID, dc.Name 'Class Name',
+select dm.ID 'DocMethod', da.Name 'Assembly Name', dm.DocClassID, dc.Name,
   DocMethodGroupID, dmg.HeadingName 'Group Heading Name', dm.Name,
   dm.Description, dm.Sequence, OverloadName
 from DocMethod as dm
 left join DocClass as dc on DocClassID = dc.ID
 left join DocAssembly as da on dc.DocAssemblyID = da.ID
 left join DocMethodGroup as dmg on DocMethodGroupID = dmg.ID
-order by da.Name, dc.Name, dmg.HeadingName;
+order by da.Name, dc.Name, dmg.HeadingName, Sequence;
 */
 
 declare @docClassName nvarchar(60);
 declare @headingName nvarchar(60);
-declare @seq int = 1;
+declare @seq int
 
 /* LJCDataAccess */
 /* ------------------------------ */
+set @docClassName = 'DataAccess';
+set @headingName = '';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+
 set @docClassName = 'DataAccess';
 set @headingName = 'Constructor';
 set @seq = 1;
@@ -49,71 +254,6 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Checks a data table and returns true if it contains any rows. (E)'
   , @seq;
 
-set @docClassName = 'DataAccess';
-set @headingName = 'Nonquery';
-set @seq = 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'ExecuteNonQuery'
-  , 'Executes an Insert, Update or Delete statement. (E)'
-  , @seq;
-
-set @docClassName = 'DataAccess';
-set @headingName = 'Nonquery';
-set @seq = 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'ExecuteScript'
-  , 'Executes a DB script file. (E)'
-  , @seq;
-
-set @docClassName = 'DataAccess';
-set @headingName = 'Script';
-set @seq = 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'ExecuteScriptText'
-  , 'Executes a DB script text string. (E)'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'FillDataTable'
-  , 'Executes a Select statement and fills the specified DataTable. (E)'
-  , @seq;
-
-set @docClassName = 'DataAccess';
-set @headingName = 'Select';
-set @seq = 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'FillDataTable'
-  , 'Executes a DB script file. (E)'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetDataReader'
-  , 'Executes a DB script text string. (E)'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetDataSet'
-  , 'Executes a DB script text string. (E)'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetDataTable'
-  , 'Executes a Select statement and fills the specified DataTable. (E)'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetSchemaOnly'
-  , 'Retrieves the DataTable object with schema only. (E)'
-  , @seq;
-
-set @docClassName = 'DataAccess';
-set @headingName = 'StoredProcedure';
-set @seq = 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetProcedureDataTable'
-  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
-  , @seq;
-
 set @docClassName = 'ProcedureParameters';
 set @headingName = 'Collection';
 set @seq = 1;
@@ -121,11 +261,6 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Creates and adds the object from the provided values.'
   , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'Add'
-  , 'Creates and adds the object from the provided values.'
-  , @seq, 1, 'Add1';
 
 set @docClassName = 'ProcedureParameters';
 set @headingName = 'Constructor';
@@ -134,11 +269,6 @@ exec sp_DMAddUnique @docClassName, @headingName
   , '#ctor'
   , 'Initializes an object instance.'
   , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , '#ctor'
-  , 'Initializes an object instance with the provided values.'
-  , @seq, 1, 'ctor1';
 
 set @docClassName = 'ProcedureParameters';
 set @headingName = 'SearchSort';
@@ -148,29 +278,31 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieve the collection element with name.'
   , @seq;
 
-/* LJCClientLib */
+/* LJCDBClientLib */
 /* ------------------------------ */
 set @docClassName = 'DataManager';
-set @headingName = 'Constructor';
+set @headingName = '';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , '#ctor'
-  , 'Initializes an object instance.'
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , '#ctor'
-  , 'Initializes an object instance.'
-  , @seq, 1, 'ctor1';
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'Reset'
-  , 'Resets the data access configuration.       (R)'
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
   , @seq;
-
-set @docClassName = 'DataManager';
-set @headingName = 'CreateData';
-set @seq = 1;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'CreateSchemaColumnsResult'
   , 'Takes a result object and transforms it into a result of column names.'
@@ -180,13 +312,20 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'CreateSchemaColumnsResult'
   , 'Retrieves the schema result for the specified table and transforms it into a result of column'
   , @seq;
-
-set @docClassName = 'DataManager';
-set @headingName = 'DataAccess';
-set @seq = 1;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'CreateLoadRequest'
   , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -200,6 +339,26 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteClientSql'
   , 'Executes a non-query client SQL statement.'
   , @seq;
@@ -207,6 +366,26 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteRequest'
   , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -220,6 +399,26 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'LoadProcedure'
   , 'Retrieves a collection of data records.'
   , @seq;
@@ -230,8 +429,111 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Update'
   , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+
+set @docClassName = 'DataManager';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Reset'
+  , 'Resets the data access configuration.       (R)'
   , @seq;
 
 set @docClassName = 'DataManager';
@@ -257,166 +559,133 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'Adds the lookup column names.'
   , @seq;
 
-/* LJCDBMessage */
-/* ------------------------------ */
-set @docClassName = 'DbCondition';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbConditions';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'DbConditionSet';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbFilter';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbFilters';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'DbJoin';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbJoinOn';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbJoinOns';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbJoins';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'DbRequest';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbResult';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'DbRow';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbRows';
-set @headingName = 'Collection';
-set @seq = 1;
-
-/* LJCGridDataLib */
-/* ------------------------------ */
-set @docClassName = 'TableGridData';
-set @headingName = 'Config';
-set @seq = 1;
-
 /* LJCNetCommon */
 /* ------------------------------ */
 set @docClassName = 'AppSettings';
-set @headingName = 'Constructor';
+set @headingName = '';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , '#ctor'
   , 'Initializes an object instance.'
   , @seq;
-
-set @docClassName = 'CodeTokenizer';
-set @headingName = 'Check';
-set @seq = 1;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , '#ctor'
   , 'Initializes an object instance.'
   , @seq;
-
-set @docClassName = 'CommonDataTypes';
-set @headingName = 'Collection';
-set @seq = 1;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Adds the specified object.'
   , @seq;
-
-set @docClassName = 'CommonKeywords';
-set @headingName = 'Collection';
-set @seq = 1;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Adds the specified object.'
   , @seq;
-
-set @docClassName = 'CommonModifiers';
-set @headingName = 'Collection';
-set @seq = 1;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Adds the specified object.'
   , @seq;
-
-set @docClassName = 'DataTypes';
-set @headingName = 'Collection';
-set @seq = 1;
+set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Adds the specified object.'
   , @seq;
-
-set @docClassName = 'DbColumn';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbColumns';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'DbValue';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'DbValues';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'KeyItem';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'KeyItems';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'Keywords';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'LibTypes';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'LJCAssemblyReflect';
-set @headingName = 'CheckType';
-set @seq = 1;
-
-set @docClassName = 'LJCCryptography';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'LJCReflect';
-set @headingName = 'Check';
-set @seq = 1;
-
-set @docClassName = 'Modifiers';
-set @headingName = 'Collection';
-set @seq = 1;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
 
 set @docClassName = 'NetCommon';
-set @HeadingName = 'Config';
+set @headingName = 'Config';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'ConfigBool'
@@ -573,7 +842,7 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 
 set @docClassName = 'NetCommon';
-set @HeadingName = 'Value';
+set @headingName = 'Value';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'GetBoolean'
@@ -634,46 +903,3 @@ exec sp_DMAddUnique @docClassName, @headingName
   , 'GetString'
   , 'Gets a trimmed string value from an object. (E)'
   , @seq;
-set @seq += 1;
-
-set @docClassName = 'NetString';
-set @headingName = 'Check';
-set @seq = 1;
-
-set @docClassName = 'PropertyDelegates';
-set @headingName = 'Collection';
-set @seq = 1;
-
-set @docClassName = 'RefTypes';
-set @headingName = 'Collection';
-set @seq = 1;
-
-/* LJCWinFormControls */
-/* ------------------------------ */
-set @docClassName = 'LJCDataGrid';
-set @headingName = 'ColumnData';
-set @seq = 1;
-
-set @docClassName = 'LJCGridRow';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'LJCItem';
-set @headingName = 'Data';
-set @seq = 1;
-
-set @docClassName = 'LJCItemCombo';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'LJCTabControl';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'LJCTabPanel';
-set @headingName = 'Constructor';
-set @seq = 1;
-
-set @docClassName = 'PanelControlsAdjust';
-set @headingName = 'Constructor';
-set @seq = 1;

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace GenDocScript
 {
   internal class ProgramGenDocScript
@@ -11,6 +13,9 @@ namespace GenDocScript
       classScript.Gen();
       var methodScript = new MethodScript();
       methodScript.Gen();
+
+      Console.WriteLine("Press any key to continue ...");
+      Console.ReadKey();
     }
   }
 }

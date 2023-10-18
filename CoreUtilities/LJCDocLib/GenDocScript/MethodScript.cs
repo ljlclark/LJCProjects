@@ -4,8 +4,10 @@
 using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace GenDocScript
@@ -32,6 +34,7 @@ namespace GenDocScript
       var fileName = "17DocMethod.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevAssemblyName = "Nothing";
+      mPrevClassName = "Nothing";
       mPrevHeadingName = "Nothing";
       foreach (var row in result.Rows)
       {
@@ -41,10 +44,13 @@ namespace GenDocScript
         builder.Append(AssemblyHeader());
         builder.Append(GroupHeader());
         mPrevAssemblyName = mMethodValues.AssemblyName;
+        mPrevClassName = mMethodValues.ClassName;
         mPrevHeadingName = mMethodValues.HeadingName;
+        var methodName = mMethodValues.MethodName;
+        Console.WriteLine($"Method: {methodName}");
 
         builder.AppendLine($"exec sp_DMAddUnique @docClassName, @headingName");
-        builder.AppendLine($"  , '{mMethodValues.MethodName}'");
+        builder.AppendLine($"  , '{methodName}'");
         builder.AppendLine($"  , '{mMethodValues.Description}'");
         builder.Append($"  , @seq");
         if (NetString.HasValue(mMethodValues.OverloadName))
@@ -65,12 +71,15 @@ namespace GenDocScript
       string retValue = null;
 
       // Assembly has changed.
-      if (mMethodValues.AssemblyName != mPrevAssemblyName)
+      var assemblyName = mMethodValues.AssemblyName;
+      if (assemblyName != mPrevAssemblyName)
       {
+        Console.WriteLine();
+        Console.WriteLine($"Assembly: {assemblyName}");
         mPrevHeadingName = "Nothing";
         StringBuilder builder = new StringBuilder(256);
         builder.AppendLine();
-        builder.AppendLine($"/* {mMethodValues.AssemblyName} */");
+        builder.AppendLine($"/* {assemblyName} */");
         builder.AppendLine("/* ------------------------------ */");
         retValue = builder.ToString();
       }
@@ -101,15 +110,21 @@ namespace GenDocScript
 
       // Method Group has changed.
       StringBuilder builder = new StringBuilder(256);
-      if (mMethodValues.HeadingName != mPrevHeadingName)
+      var assemblyName = mMethodValues.AssemblyName;
+      var className = mMethodValues.ClassName;
+      var headingName = mMethodValues.HeadingName;
+      if (headingName != mPrevHeadingName)
       {
         // Assembly has not changed.
-        if (mMethodValues.AssemblyName == mPrevAssemblyName)
+        if (assemblyName == mPrevAssemblyName)
         {
           builder.AppendLine();
         }
-        builder.AppendLine($"set @docClassName = '{mMethodValues.ClassName}';");
-        builder.AppendLine($"set @headingName = '{mMethodValues.HeadingName}';");
+        Console.WriteLine();
+        Console.WriteLine($"Class: {className}");
+        Console.WriteLine($"Group: {headingName}");
+        builder.AppendLine($"set @docClassName = '{className}';");
+        builder.AppendLine($"set @headingName = '{headingName}';");
         builder.AppendLine("set @seq = 1;");
       }
       else
@@ -223,7 +238,7 @@ namespace GenDocScript
       builder.AppendLine("left join DocClass as dc on DocClassID = dc.ID");
       builder.AppendLine("left join DocAssembly as da on dc.DocAssemblyID = da.ID");
       builder.AppendLine("left join DocMethodGroup as dmg on DocMethodGroupID = dmg.ID");
-      builder.AppendLine("order by da.Name, dc.Name, dmg.HeadingName, Sequence");
+      builder.AppendLine("order by da.Name, dc.Name, dmg.HeadingName, Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
       builder.AppendLine("declare @docClassName nvarchar(60);");
@@ -239,6 +254,7 @@ namespace GenDocScript
     private readonly DocMethodManager mMethodManager;
     private MethodValues mMethodValues;
     private string mPrevAssemblyName;
+    private string mPrevClassName;
     private string mPrevHeadingName;
     #endregion
   }

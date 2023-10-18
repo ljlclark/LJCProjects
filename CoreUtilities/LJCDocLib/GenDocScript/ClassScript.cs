@@ -4,6 +4,7 @@
 using LJCDBMessage;
 using LJCDocLibDAL;
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -29,6 +30,8 @@ namespace GenDocScript
       var result = mClassManager.Manager.Load(null, propertyNames, null
         , classJoins);
 
+      Console.WriteLine();
+      Console.WriteLine("*** DocClass ***");
       var fileName = "11DocClass.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevAssemblyName = "Nothing";
@@ -42,9 +45,11 @@ namespace GenDocScript
         builder.Append(GroupHeader());
         mPrevAssemblyName = mClassValues.AssemblyName;
         mPrevHeadingName = mClassValues.HeadingName;
+        var className = mClassValues.Name;
+        Console.WriteLine($"Class: {className}");
 
         builder.AppendLine($"exec sp_DCAddUnique @assemblyName, @headingName");
-        builder.AppendLine($"  , '{mClassValues.Name}'");
+        builder.AppendLine($"  , '{className}'");
         builder.AppendLine($"  , '{mClassValues.Description}'");
         builder.AppendLine($"  , @seq;");
         var text = builder.ToString();
@@ -60,8 +65,11 @@ namespace GenDocScript
       string retValue = null;
 
       // Assembly has changed.
-      if (mClassValues.AssemblyName != mPrevAssemblyName)
+      var assemblyName = mClassValues.AssemblyName;
+      if (assemblyName != mPrevAssemblyName)
       {
+        Console.WriteLine();
+        Console.WriteLine($"Assembly: {assemblyName}");
         mPrevHeadingName = "Nothing";
         StringBuilder builder = new StringBuilder(256);
         builder.AppendLine();
@@ -116,7 +124,7 @@ namespace GenDocScript
       var retValue = new List<string>()
       {
         $"da.{DocAssembly.ColumnName}",
-        $"DocClass.{DocClass.ColumnName}",
+        //$"DocClass.{DocClass.ColumnName}",
         DocClassGroup.ColumnHeadingName,
         DocClass.ColumnSequence
       };
@@ -160,15 +168,19 @@ namespace GenDocScript
 
       // Class Group has changed.
       StringBuilder builder = new StringBuilder(256);
-      if (mClassValues.HeadingName != mPrevHeadingName)
+      var assemblyName = mClassValues.AssemblyName;
+      var headingName = mClassValues.HeadingName;
+      if (headingName != mPrevHeadingName)
       {
         // Assembly has not changed.
-        if (mClassValues.AssemblyName == mPrevAssemblyName)
+        if (assemblyName == mPrevAssemblyName)
         {
+          Console.WriteLine();
           builder.AppendLine();
         }
-        builder.AppendLine($"set @assemblyName = '{mClassValues.AssemblyName}';");
-        builder.AppendLine($"set @headingName = '{mClassValues.HeadingName}';");
+        Console.WriteLine($"Group: {headingName}");
+        builder.AppendLine($"set @assemblyName = '{assemblyName}';");
+        builder.AppendLine($"set @headingName = '{headingName}';");
         builder.AppendLine("set @seq = 1;");
       }
       else
@@ -195,12 +207,12 @@ namespace GenDocScript
       builder.AppendLine("GO");
       builder.AppendLine();
       builder.AppendLine("/*");
-      builder.AppendLine("select dc.ID 'DocClass' da.Name 'Assembly Name', dcg.HeadingName, dc.Name,");
+      builder.AppendLine("select dc.ID 'DocClass', da.Name 'Assembly Name', dcg.HeadingName, dc.Name,");
       builder.AppendLine("  dc.Description, dc.Sequence");
       builder.AppendLine("from DocClass as dc");
       builder.AppendLine("left join DocAssembly as da on DocAssemblyID = da.ID");
       builder.AppendLine("left join DocClassGroup as dcg on DocClassGroupID = dcg.ID");
-      builder.AppendLine("order by da.Name, DocClass.Name, HeadingName, Sequence");
+      builder.AppendLine("order by da.Name, HeadingName, Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
 
