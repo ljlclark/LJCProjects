@@ -197,6 +197,133 @@ exec sp_DAAddUnique @groupName, 'LJCGenPageGen'
   , '..\..\..\..\..\SampleApps\Genealogy\LJCGenPageGen\bin\Debug\LJCGenPageGen.xml'
   , '', @seq;
 
+set @groupName = 'DBViewDAL';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCDBViewDAL'
+  , 'The Data View library.'
+  , '..\..\..\..\..\CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.xml'
+  , '', @seq;
+
+set @groupName = 'ViewBuilder';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCViewBuilder'
+  , 'A program to create and edit Views. (D)'
+  , '..\..\..\..\..\CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.xml'
+  , '', @seq;
+
+set @groupName = 'ViewEditor';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCViewEditor'
+  , 'A program to maintain View data. (D)'
+  , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCViewEditorDAL'
+  , 'The LJCViewEditor Data Access Library.'
+  , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.xml'
+  , '', @seq;
+
+set @groupName = 'LJCPagination';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCDataPageList'
+  , 'Database Pagination'
+  , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug\LJCDataPageList.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'Text File Pagination'
+  , 'A typing tudor game.'
+  , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug\LJCTextPageList.xml'
+  , '', @seq;
+
+set @groupName = 'CodeLine';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCCodeLineCounter'
+  , 'The Code Line Counter console application.'
+  , '..\..\..\..\..\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml'
+  , '', @seq;
+
+set @groupName = 'RegionManager';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCRegionManager'
+  , 'A program to manage Region data. (DO)'
+  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCRegionDAL'
+  , 'The Region Data Access Layer library.'
+  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCRegionForm'
+  , 'The Region Manager Test program.'
+  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.xml'
+  , '', @seq;
+
+set @groupName = 'LJCUnitMeasure';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCUnitMeasure'
+  , 'The Unit Measure program. (D)'
+  , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasure\bin\Debug\LJCUnitMeasure.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCUnitMeasureDAL'
+  , 'The Unit Measure Data Access Layer library.'
+  , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasureDAL\bin\Debug\LJCUnitMeasureDAL.xml'
+  , '', @seq;
+
+set @groupName = 'CVRManager';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'CVRManager'
+  , 'The Contact Visit Record Manager.'
+  , '..\..\..\..\..\SampleApps\CVRManager\CVRManager\bin\Debug\CVRManager.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'CVRDAL'
+  , 'The CVR Data Access Layer library. (D)'
+  , '..\..\..\..\..\SampleApps\CVRManager\CVRDAL\bin\Debug\CVRDAL.xml'
+  , '', @seq;
+
+set @groupName = 'FacilityManager';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCFacilityManager'
+  , 'A program to manage facility assets such as buildings, rooms, fixtures and equipment. (D)'
+  , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug\LJCFacilityManager.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCFacilityManagerDAL'
+  , 'The LJCFacilityManager Data Access Layer library.'
+  , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManagerDAL\bin\Debug\LJCFacilityManagerDAL.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'FacilityForm'
+  , 'The Facility Test program.'
+  , '..\..\..\..\..\SampleApps\LJCFacilityManager\FacilityForm\bin\Debug\LJCFacilityForm.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'ModuleHost'
+  , 'The FacilityManager Module Test program.'
+  , '..\..\..\..\..\SampleApps\LJCFacilityManager\ModuleHost\bin\Debug\ModuleHost.xml'
+  , '', @seq;
+
+set @groupName = 'DocAppManager';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCDocAppManager'
+  , 'A program to manage Document images. (O)'
+  , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug\LJCDocAppManager.xml'
+  , '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCDocAppManagerDAL'
+  , 'The DocApp Manager Data Access Layer library.'
+  , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\bin\Debug\LJCDocAppManagerDAL.xml'
+  , '', @seq;
+
+set @groupName = 'TextInvasion';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCTextInvasion'
+  , 'A typing tudor game.'
+  , '..\..\..\..\..\SampleApps\LJCTextInvasion\LJCTextInvasion\bin\Debug\LJCTextInvasion.xml'
+  , '', @seq;
+
 set @groupName = 'DataTransform';
 set @seq = 1;
 exec sp_DAAddUnique @groupName, 'LJCTransformManager'
@@ -224,88 +351,6 @@ exec sp_DAAddUnique @groupName, 'TransformServiceTest'
   , '..\..\..\..\..\SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug\TransformServiceTest.xml'
   , '', @seq;
 
-set @groupName = 'CVRManager';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'CVRManager'
-  , 'The Contact Visit Record Manager.'
-  , '..\..\..\..\..\SampleApps\CVRManager\CVRManager\bin\Debug\CVRManager.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'CVRDAL'
-  , 'The CVR Data Access Layer library. (D)'
-  , '..\..\..\..\..\SampleApps\CVRManager\CVRDAL\bin\Debug\CVRDAL.xml'
-  , '', @seq;
-
-set @groupName = 'LJCSales';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCSalesManager'
-  , 'The Sales Manager program. (DO)'
-  , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesManager\bin\Debug\LJCSalesManager.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCSalesDAL'
-  , 'The Sales Data Access Layer library.'
-  , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesDAL\bin\Debug\LJCSalesDAL.xml'
-  , '', @seq;
-
-set @groupName = 'LJCUnitMeasure';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCUnitMeasure'
-  , 'The Unit Measure program. (D)'
-  , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasure\bin\Debug\LJCUnitMeasure.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCUnitMeasureDAL'
-  , 'The Unit Measure Data Access Layer library.'
-  , '..\..\..\..\..\SampleApps\LJCUnitMeasure\LJCUnitMeasureDAL\bin\Debug\LJCUnitMeasureDAL.xml'
-  , '', @seq;
-
-set @groupName = 'FacilityManager';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCFacilityManager'
-  , 'A program to manage facility assets such as buildings, rooms, fixtures and equipment. (D)'
-  , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug\LJCFacilityManager.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCFacilityManagerDAL'
-  , 'The LJCFacilityManager Data Access Layer library.'
-  , '..\..\..\..\..\SampleApps\LJCFacilityManager\LJCFacilityManagerDAL\bin\Debug\LJCFacilityManagerDAL.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'FacilityForm'
-  , 'The Facility Test program.'
-  , '..\..\..\..\..\SampleApps\LJCFacilityManager\FacilityForm\bin\Debug\LJCFacilityForm.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'ModuleHost'
-  , 'The FacilityManager Module Test program.'
-  , '..\..\..\..\..\SampleApps\LJCFacilityManager\ModuleHost\bin\Debug\ModuleHost.xml'
-  , '', @seq;
-
-set @groupName = 'FacilityManagerSetup';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCFacilityManagerSetup'
-  , 'The Facility Manager Setup program.'
-  , '..\..\..\..\..\SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug\LJCFacilityManagerSetup.xml'
-  , '', @seq;
-
-set @groupName = 'RegionManager';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCRegionManager'
-  , 'A program to manage Region data. (DO)'
-  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCRegionDAL'
-  , 'The Region Data Access Layer library.'
-  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCRegionForm'
-  , 'The Region Manager Test program.'
-  , '..\..\..\..\..\SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.xml'
-  , '', @seq;
-
 set @groupName = 'AppManager';
 set @seq = 1;
 exec sp_DAAddUnique @groupName, 'LJCAppManager'
@@ -318,66 +363,21 @@ exec sp_DAAddUnique @groupName, 'LJCAppManagerDAL'
   , '..\..\..\..\..\SampleApps\LJCAppManager\LJCAppManagerDAL\bin\Debug\LJCAppManagerDAL.xml'
   , '', @seq;
 
-set @groupName = 'DocAppManager';
+set @groupName = 'FacilityManagerSetup';
 set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCDocAppManager'
-  , 'A program to manage Document images. (O)'
-  , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug\LJCDocAppManager.xml'
+exec sp_DAAddUnique @groupName, 'LJCFacilityManagerSetup'
+  , 'The Facility Manager Setup program.'
+  , '..\..\..\..\..\SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug\LJCFacilityManagerSetup.xml'
+  , '', @seq;
+
+set @groupName = 'LJCSales';
+set @seq = 1;
+exec sp_DAAddUnique @groupName, 'LJCSalesManager'
+  , 'The Sales Manager program. (DO)'
+  , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesManager\bin\Debug\LJCSalesManager.xml'
   , '', @seq;
 set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCDocAppManagerDAL'
-  , 'The DocApp Manager Data Access Layer library.'
-  , '..\..\..\..\..\SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\bin\Debug\LJCDocAppManagerDAL.xml'
-  , '', @seq;
-
-set @groupName = 'DBViewDAL';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCDBViewDAL'
-  , 'The Data View library.'
-  , '..\..\..\..\..\CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.xml'
-  , '', @seq;
-
-set @groupName = 'ViewBuilder';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCViewBuilder'
-  , 'A program to create and edit Views. (D)'
-  , '..\..\..\..\..\CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.xml'
-  , '', @seq;
-
-set @groupName = 'ViewEditor';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCViewEditor'
-  , 'A program to maintain View data. (D)'
-  , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCViewEditorDAL'
-  , 'The LJCViewEditor Data Access Library.'
-  , '..\..\..\..\..\CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.xml'
-  , '', @seq;
-
-set @groupName = 'CodeLine';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCCodeLineCounter'
-  , 'The Code Line Counter console application.'
-  , '..\..\..\..\..\CoreUtilities\LJCCodeLineCounter\LJCCodeLineCounter\bin\Debug\LJCCodeLineCounter.xml'
-  , '', @seq;
-
-set @groupName = 'TextInvasion';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCTextInvasion'
-  , 'A typing tudor game.'
-  , '..\..\..\..\..\SampleApps\LJCTextInvasion\LJCTextInvasion\bin\Debug\LJCTextInvasion.xml'
-  , '', @seq;
-
-set @groupName = 'LJCPagination';
-set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCDataPageList'
-  , 'Database Pagination'
-  , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug\LJCDataPageList.xml'
-  , '', @seq;
-set @seq += 1;
-exec sp_DAAddUnique @groupName, 'Text File Pagination'
-  , 'A typing tudor game.'
-  , '..\..\..\..\..\CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug\LJCTextPageList.xml'
+exec sp_DAAddUnique @groupName, 'LJCSalesDAL'
+  , 'The Sales Data Access Layer library.'
+  , '..\..\..\..\..\SampleApps\LJCSales\LJCSalesDAL\bin\Debug\LJCSalesDAL.xml'
   , '', @seq;

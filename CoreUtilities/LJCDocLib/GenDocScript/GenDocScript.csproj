@@ -59,8 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyGroupScript.cs" />
+    <Compile Include="AssemblyGroupValues.cs" />
     <Compile Include="AssemblyScript.cs" />
     <Compile Include="AssemblyValues.cs" />
+    <Compile Include="ClassGroupHeadingScript.cs" />
+    <Compile Include="ClassGroupHeadingValues.cs" />
     <Compile Include="ClassScript.cs" />
     <Compile Include="ClassValues.cs" />
     <Compile Include="MethodScript.cs" />

@@ -34,7 +34,7 @@ namespace GenDocScript
       var fileName = "17DocMethod.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevAssemblyName = "Nothing";
-      mPrevClassName = "Nothing";
+      //mPrevClassName = "Nothing";
       mPrevHeadingName = "Nothing";
       foreach (var row in result.Rows)
       {
@@ -44,7 +44,7 @@ namespace GenDocScript
         builder.Append(AssemblyHeader());
         builder.Append(GroupHeader());
         mPrevAssemblyName = mMethodValues.AssemblyName;
-        mPrevClassName = mMethodValues.ClassName;
+        //mPrevClassName = mMethodValues.ClassName;
         mPrevHeadingName = mMethodValues.HeadingName;
         var methodName = mMethodValues.MethodName;
         Console.WriteLine($"Method: {methodName}");
@@ -254,7 +254,7 @@ namespace GenDocScript
     private readonly DocMethodManager mMethodManager;
     private MethodValues mMethodValues;
     private string mPrevAssemblyName;
-    private string mPrevClassName;
+    //private string mPrevClassName;
     private string mPrevHeadingName;
     #endregion
   }

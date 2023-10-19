@@ -34,6 +34,26 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteScript'
   , 'Executes a DB script file. (E)'
   , @seq;
@@ -44,8 +64,38 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'FillDataTable'
   , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -64,6 +114,31 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteScript'
   , 'Executes a DB script file. (E)'
   , @seq;
@@ -79,8 +154,48 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'GetProcedureDataTable'
   , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -94,13 +209,28 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteScript'
   , 'Executes a DB script file. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'GetDataReader'
-  , 'Executes a DB script text string. (E)'
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -114,8 +244,23 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'ExecuteScriptText'
+  , 'GetDataReader'
   , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -129,8 +274,23 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'FillDataTable'
-  , 'Executes a DB script file. (E)'
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -144,8 +304,73 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'GetProcedureDataTable'
   , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -159,8 +384,23 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteNonQuery'
+  , 'Executes an Insert, Update or Delete statement. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteScript'
   , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScript'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteScriptText'
+  , 'Executes a DB script text string. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -174,6 +414,16 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a DB script file. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetProcedureDataTable'
+  , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'GetProcedureDataTable'
   , 'Executes a Stored Procedure and retrieves the DataTable object. (E)'
   , @seq;
@@ -184,8 +434,23 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'FillDataTable'
   , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataReader'
+  , 'Executes a DB script text string. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -199,6 +464,21 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'FillDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataSet'
+  , 'Executes a DB script text string. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'GetDataSet'
   , 'Executes a DB script text string. (E)'
   , @seq;
@@ -216,6 +496,26 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'GetDataTable'
   , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetDataTable'
+  , 'Executes a Select statement and fills the specified DataTable. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the DataTable object with schema only. (E)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -299,6 +599,36 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'CreateSchemaColumnsResult'
   , 'Takes a result object and transforms it into a result of column names.'
   , @seq;
@@ -306,6 +636,46 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'CreateSchemaColumnsResult'
   , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -324,6 +694,31 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateLoadRequest'
+  , 'Creates and returns the Load DbRequest object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'GetTableNames'
   , 'Retrieves the table names for the data configuration database.'
   , @seq;
@@ -339,23 +734,28 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Delete'
   , 'Deletes the records with the specified key values. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'CreateSchemaColumnsResult'
-  , 'Takes a result object and transforms it into a result of column names.'
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'CreateSchemaColumnsResult'
-  , 'Takes a result object and transforms it into a result of column names.'
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'ExecuteClientSql'
-  , 'Executes a non-query client SQL statement.'
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -369,23 +769,53 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Takes a result object and transforms it into a result of column names.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteRequest'
   , 'Executes the supplied request.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
-  , 'CreateSchemaColumnsResult'
-  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
-  , 'CreateSchemaColumnsResult'
-  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
-  , @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName
   , 'GetSchemaOnly'
   , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -399,8 +829,128 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Load'
   , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'CreateSchemaColumnsResult'
+  , 'Retrieves the schema result for the specified table and transforms it into a result of column'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetTableNames'
+  , 'Retrieves the table names for the data configuration database.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -424,6 +974,16 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieve'
   , 'Retrieves a record from the database. (DE)'
   , @seq;
@@ -431,6 +991,26 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieve'
   , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Delete'
+  , 'Deletes the records with the specified key values. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -454,6 +1034,16 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteClientSql'
   , 'Executes a non-query client SQL statement.'
   , @seq;
@@ -461,6 +1051,26 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'ExecuteClientSql'
   , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteClientSql'
+  , 'Executes a non-query client SQL statement.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'ExecuteRequest'
+  , 'Executes the supplied request.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -484,6 +1094,26 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'GetSchemaOnly'
+  , 'Retrieves the column names for the specified table.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Load'
+  , 'Retrieves a collection of data records. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Load'
   , 'Retrieves a collection of data records. (DE)'
   , @seq;
@@ -504,6 +1134,16 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'LoadProcedure'
+  , 'Retrieves a collection of data records.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieve'
   , 'Retrieves a record from the database. (DE)'
   , @seq;
@@ -511,6 +1151,26 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , 'Retrieve'
   , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Retrieve'
+  , 'Retrieves a record from the database. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Update'
+  , 'Updates the record. (DE)'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
@@ -595,6 +1255,136 @@ exec sp_DMAddUnique @docClassName, @headingName
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
   , 'Add'
   , 'Adds the specified object.'
   , @seq;
@@ -642,6 +1432,56 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
   , '#ctor'
   , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , '#ctor'
+  , 'Initializes an object instance.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
+  , @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName
+  , 'Add'
+  , 'Adds the specified object.'
   , @seq;
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName
