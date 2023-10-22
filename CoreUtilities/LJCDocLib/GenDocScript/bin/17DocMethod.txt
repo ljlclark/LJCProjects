@@ -1,0 +1,101 @@
+
+*****************
+*** DocMethod ***
+*****************
+
+Assembly: LJCDataAccess
+
+Class: DataAccess
+Group: Constructor
+Method: CompareNull
+Method: #ctor
+Method: #ctor
+
+Class: DataAccess
+Group: Data
+Method: HasData
+
+Class: ProcedureParameters
+Group: Collection
+Method: Add
+
+Class: ProcedureParameters
+Group: Constructor
+Method: #ctor
+
+Class: ProcedureParameters
+Group: SearchSort
+Method: LJCSearchName
+
+Assembly: LJCDBClientLib
+
+Class: DataManager
+Group: Constructor
+Method: #ctor
+Method: #ctor
+Method: Reset
+
+Class: DataManager
+Group: OtherData
+Method: GetPropertyNames
+Method: MapNames
+Method: SetDbAssignedColumns
+Method: SetLookupColumns
+
+Assembly: LJCNetCommon
+
+Class: NetCommon
+Group: Config
+Method: ConfigBool
+Method: ConfigColor
+Method: ConfigString
+
+Class: NetCommon
+Group: Serialize
+Method: XmlDeserialize
+Method: XmlDeserializeMessage
+Method: XmlSerialize
+Method: XmlSerializeToString
+
+Class: NetCommon
+Group: Static
+Method: CheckArgument``1
+Method: CompareNull
+Method: HasColumns
+Method: HasData
+Method: HasItems
+Method: IsEqual
+
+Class: NetCommon
+Group: TextTransform
+Method: Base64BytesToText
+Method: TextToBase64Bytes
+Method: Base64BytesToTextBytes
+Method: TextBytesToBase64Bytes
+Method: Base64ToText
+Method: TextToBase64
+Method: Base64ToTextBytes
+Method: TextBytesToBase64
+Method: BytesToText
+Method: TextToBytes
+Method: MemStreamToBytes
+Method: BytesToMemStream
+Method: MemStreamToString
+Method: StringToMemStream
+Method: XmlDecode
+Method: XmlEncode
+
+Class: NetCommon
+Group: Value
+Method: GetBoolean
+Method: GetByte
+Method: GetChar
+Method: GetDateTime
+Method: GetDecimal
+Method: GetDouble
+Method: GetInt16
+Method: GetInt32
+Method: GetInt64
+Method: GetObject
+Method: GetSingle
+Method: GetString

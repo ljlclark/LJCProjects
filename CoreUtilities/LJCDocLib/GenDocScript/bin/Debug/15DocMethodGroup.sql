@@ -16,44 +16,38 @@ left join DocClass on DocClassID = DocClass.ID
 order by DocClassID, DocMethodGroup.Sequence;
 */
 
-
 declare @className nvarchar(60);
 
+set @className= 'DataAccess';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
 
-/* DataAccess */
-/* ------------------------------ */
-exec sp_DMGAddUnique 'DataAccess', 'Constructor'
- ''  , 1
-exec sp_DMGAddUnique 'DataAccess', 'Data'
- ''  , 2
+set @className= 'ProcedureParameters';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  2
 
-/* ProcedureParameters */
-/* ------------------------------ */
-exec sp_DMGAddUnique 'ProcedureParameters', 'Constructor'
- ''  , 1
-exec sp_DMGAddUnique 'ProcedureParameters', 'Collection'
- ''  , 2
-exec sp_DMGAddUnique 'ProcedureParameters', 'SearchSort'
- ''  , 2
+set @className= 'DataManager';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+exec sp_DMGAddUnique @className, 'OtherData',
+ '',  3
 
-/* DataManager */
-/* ------------------------------ */
-exec sp_DMGAddUnique 'DataManager', 'Constructor'
- ''  , 1
-exec sp_DMGAddUnique 'DataManager', 'Data'
- ''  , 2
-exec sp_DMGAddUnique 'DataManager', 'OtherData'
- ''  , 3
-
-/* NetCommon */
-/* ------------------------------ */
-exec sp_DMGAddUnique 'NetCommon', 'Static'
- ''  , 1
-exec sp_DMGAddUnique 'NetCommon', 'TextTransform'
- 'Text Transform Functions'  , 2
-exec sp_DMGAddUnique 'NetCommon', 'Serialize'
- 'Serialization Functions'  , 3
-exec sp_DMGAddUnique 'NetCommon', 'Config'
- 'Program Config Value Functions'  , 4
-exec sp_DMGAddUnique 'NetCommon', 'Value'
- ''  , 5
+set @className= 'NetCommon';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'TextTransform',
+ 'Text Transform Functions',  2
+exec sp_DMGAddUnique @className, 'Serialize',
+ 'Serialization Functions',  3
+exec sp_DMGAddUnique @className, 'Config',
+ 'Program Config Value Functions',  4
+exec sp_DMGAddUnique @className, 'Value',
+ '',  5

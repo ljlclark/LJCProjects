@@ -44,9 +44,8 @@ namespace GenDocScript
         var headingName = mGroupValues.HeadingName;
         Console.WriteLine($"Heading: {headingName}");
 
-        //builder.Append($"exec sp_DMGAddUnique '{name}',");
         builder.Append($"exec sp_DMGAddUnique @className,");
-        builder.AppendLine($" '{headingName},'");
+        builder.AppendLine($" '{headingName}',");
         builder.Append($" '{mGroupValues.HeadingTextCustom}',");
         builder.AppendLine($"  {mGroupValues.Sequence}");
         var text = builder.ToString();
@@ -70,7 +69,6 @@ namespace GenDocScript
         StringBuilder builder = new StringBuilder(256);
         builder.AppendLine();
         builder.AppendLine($"set @className= '{className}';");
-        builder.AppendLine("/* ------------------------------ */");
         retValue = builder.ToString();
       }
       return retValue;
@@ -157,8 +155,7 @@ namespace GenDocScript
       builder.AppendLine("order by DocClassID, DocMethodGroup.Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
-      builder.AppendLine("\r\ndeclare @className nvarchar(60);");
-      builder.AppendLine();
+      builder.AppendLine("declare @className nvarchar(60);");
       var retValue = builder.ToString();
       return retValue;
     }

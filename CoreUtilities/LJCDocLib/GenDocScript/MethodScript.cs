@@ -84,7 +84,6 @@ namespace GenDocScript
         StringBuilder builder = new StringBuilder(256);
         builder.AppendLine();
         builder.AppendLine($"/* {assemblyName} */");
-        builder.AppendLine("/* ------------------------------ */");
         retValue = builder.ToString();
       }
       return retValue;

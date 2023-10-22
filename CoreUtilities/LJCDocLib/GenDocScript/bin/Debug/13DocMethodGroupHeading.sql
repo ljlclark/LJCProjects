@@ -15,10 +15,10 @@ order by Sequence;
 */
 
 exec sp_DMGHAddUnique 'Static', 'Static Functions'  , 1
-exec sp_DMGHAddUnique 'Collection', 'Collection Methods'  , 1
-exec sp_DMGHAddUnique 'Data', 'Data Methods'  , 1
-exec sp_DMGHAddUnique 'DataProperties', 'Data Properties'  , 2
-exec sp_DMGHAddUnique 'SearchSort', 'Search and Sort Methods'  , 2
 exec sp_DMGHAddUnique 'Constructor', 'Constructors'  , 2
-exec sp_DMGHAddUnique 'Value', 'Value Methods'  , 3
-exec sp_DMGHAddUnique 'OtherData', 'Other Data Methods'  , 3
+exec sp_DMGHAddUnique 'Collection', 'Collection Methods'  , 3
+exec sp_DMGHAddUnique 'SearchSort', 'Search and Sort Methods'  , 4
+exec sp_DMGHAddUnique 'Value', 'Value Methods'  , 5
+exec sp_DMGHAddUnique 'Data', 'Data Methods'  , 6
+exec sp_DMGHAddUnique 'DataProperties', 'Data Properties'  , 7
+exec sp_DMGHAddUnique 'OtherData', 'Other Data Methods'  , 8

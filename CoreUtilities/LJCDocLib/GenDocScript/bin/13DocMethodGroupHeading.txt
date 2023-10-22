@@ -1,0 +1,13 @@
+
+*****************************
+*** DocMethodGroupHeading ***
+*****************************
+
+Heading: Static
+Heading: Collection
+Heading: Data
+Heading: DataProperties
+Heading: SearchSort
+Heading: Constructor
+Heading: Value
+Heading: OtherData
