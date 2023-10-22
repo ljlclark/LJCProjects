@@ -15,13 +15,11 @@ namespace LJCDocLibDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public ValuesDocGen()
     {
-      var dataConfigName = "LJCData";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName)
-      };
+      StandardSettings = new StandardUISettings();
+      StandardSettings.SetProperties("GenDocScript.exe.config");
       Managers = new ManagersDocGen();
-      Managers.SetDBProperties(dbServiceRef, dataConfigName);
+      Managers.SetDBProperties(StandardSettings.DbServiceRef
+        , StandardSettings.DataConfigName);
     }
     #endregion
 
@@ -43,7 +41,10 @@ namespace LJCDocLibDAL
     #region Class Data
 
     /// <summary>Initialize Singleton.</summary>
-    public static readonly ValuesDocGen mInstance = new ValuesDocGen();
+    internal static readonly ValuesDocGen mInstance = new ValuesDocGen();
+
+    // Gets or sets the StandardSettings value.
+    internal StandardUISettings StandardSettings { get; set; }
     #endregion
   }
 }

@@ -7,10 +7,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /*
-select
-  ID, DocClassID, DocMethodGroupHeadingID, HeadingName, HeadingTextCustom
-    , Sequence
-from DocMethodGroup;
+select DocMethodGroup.ID 'DocMethodGroup', Name 'Class Name', HeadingName,
+  HeadingTextCustom, DocMethodGroup.Sequence, DocMethodGroup.ActiveFlag
+from DocMethodGroup
+left join DocClass on DocClassID = DocClass.ID
+order by DocClassID, DocMethodGroup.Sequence;
 */
 
 declare @className nvarchar(60);

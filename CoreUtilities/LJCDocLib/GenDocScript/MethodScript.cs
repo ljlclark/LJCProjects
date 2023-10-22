@@ -7,6 +7,7 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 
@@ -25,34 +26,37 @@ namespace GenDocScript
     // Generates the script.
     internal void Gen()
     {
-      var propertyNames = MethodPropertyNames();
-      DbJoins methodJoins = MethodJoins();
-      mMethodManager.SetOrderBy(MethodOrderByNames());
-      var result = mMethodManager.Manager.Load(null, propertyNames, null
-        , methodJoins);
+      var propertyNames = PropertyNames();
+      DbFilters filters = Filters();
+      DbJoins joins = Joins();
+      mMethodManager.SetOrderBy(OrderByNames());
+      var result = mMethodManager.Manager.Load(null, propertyNames, filters
+        , joins);
 
+      Console.WriteLine();
+      Console.WriteLine("*****************");
+      Console.WriteLine("*** DocMethod ***");
+      Console.WriteLine("*****************");
       var fileName = "17DocMethod.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevAssemblyName = "Nothing";
-      //mPrevClassName = "Nothing";
       mPrevHeadingName = "Nothing";
       foreach (var row in result.Rows)
       {
-        mMethodValues = GetMethodValues(row);
+        mMethodValues = GetValues(row);
 
         StringBuilder builder = new StringBuilder(256);
         builder.Append(AssemblyHeader());
         builder.Append(GroupHeader());
         mPrevAssemblyName = mMethodValues.AssemblyName;
-        //mPrevClassName = mMethodValues.ClassName;
         mPrevHeadingName = mMethodValues.HeadingName;
         var methodName = mMethodValues.MethodName;
         Console.WriteLine($"Method: {methodName}");
 
-        builder.AppendLine($"exec sp_DMAddUnique @docClassName, @headingName");
-        builder.AppendLine($"  , '{methodName}'");
-        builder.AppendLine($"  , '{mMethodValues.Description}'");
-        builder.Append($"  , @seq");
+        builder.AppendLine($"exec sp_DMAddUnique @docClassName, @headingName,");
+        builder.AppendLine($"  '{methodName}',");
+        builder.AppendLine($"  '{mMethodValues.Description}',");
+        builder.Append($"  @seq");
         if (NetString.HasValue(mMethodValues.OverloadName))
         {
           builder.Append($", 1, '{mMethodValues.OverloadName}'");
@@ -86,8 +90,25 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method values.
-    private MethodValues GetMethodValues(DbRow row)
+    // Creates and returns the filters.
+    private DbFilters Filters()
+    {
+      DbFilters retValue = new DbFilters();
+      DbFilter dbFilter = new DbFilter();
+      dbFilter.ConditionSet = new DbConditionSet()
+      {
+        Conditions = new DbConditions()
+        {
+          // firstValue, secondValue, comparisonOperator = "="
+          { DocMethod.ColumnDocMethodGroupID, "null", "is not" }
+        }
+      };
+      retValue.Add(dbFilter);
+      return retValue;
+    }
+
+    // Gets the values.
+    private MethodValues GetValues(DbRow row)
     {
       var retValue = new MethodValues();
 
@@ -103,7 +124,7 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Creates and returns the script method header.
+    // Creates and returns the script group header.
     private string GroupHeader()
     {
       string retValue;
@@ -137,7 +158,7 @@ namespace GenDocScript
     }
 
     // Creates and return the joins definition.
-    private DbJoins MethodJoins()
+    private DbJoins Joins()
     {
       var retValue = new DbJoins();
       DbJoin join = new DbJoin()
@@ -190,8 +211,8 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method order by names.
-    private List<string> MethodOrderByNames()
+    // Gets the order by names.
+    private List<string> OrderByNames()
     {
       var retValue = new List<string>()
       {
@@ -203,8 +224,8 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method property names.
-    private List<string> MethodPropertyNames()
+    // Gets the property names.
+    private List<string> PropertyNames()
     {
       var retValue = new List<string>()
       {
@@ -254,7 +275,6 @@ namespace GenDocScript
     private readonly DocMethodManager mMethodManager;
     private MethodValues mMethodValues;
     private string mPrevAssemblyName;
-    //private string mPrevClassName;
     private string mPrevHeadingName;
     #endregion
   }

@@ -1,0 +1,24 @@
+
+************************
+*** DocAssemblyGroup ***
+************************
+
+Assembly: CommonLibraries
+Assembly: DataLibraries
+Assembly: CodeGen
+Assembly: DocGen
+Assembly: DBViewDAL
+Assembly: ViewBuilder
+Assembly: ViewEditor
+Assembly: LJCPagination
+Assembly: CodeLine
+Assembly: RegionManager
+Assembly: LJCUnitMeasure
+Assembly: CVRManager
+Assembly: FacilityManager
+Assembly: DocAppManager
+Assembly: TextInvasion
+Assembly: DataTransform
+Assembly: AppManager
+Assembly: FacilityManagerSetup
+Assembly: LJCSales

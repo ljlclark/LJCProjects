@@ -1,7 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
-// Licensed under the MIT License.
-// AssemblyGroupScript.cs
-using LJCDBMessage;
+﻿using LJCDBMessage;
 using LJCDocLibDAL;
 using System;
 using System.Collections.Generic;
@@ -10,40 +7,40 @@ using System.Text;
 
 namespace GenDocScript
 {
-  // Represents the DocAssemblyGroup script.
-  internal class AssemblyGroupScript
+  // Represents the DocMethodGroupHeading script.
+  internal class MethodGroupHeadingScript
   {
     // Initializes an object instance.
-    internal AssemblyGroupScript()
+    internal MethodGroupHeadingScript()
     {
       var managers = ValuesDocGen.Instance.Managers;
-      mGroupManager = managers.DocAssemblyGroupManager;
+      mHeadingManager = managers.DocMethodGroupHeadingManager;
     }
 
     // Generates the script.
     internal void Gen()
     {
       var propertyNames = PropertyNames();
-      mGroupManager.SetOrderBy(OrderByNames());
-      var result = mGroupManager.Manager.Load(null, propertyNames);
+      mHeadingManager.SetOrderBy(OrderByNames());
+      var result = mHeadingManager.Manager.Load(null, propertyNames);
 
       Console.WriteLine();
-      Console.WriteLine("************************");
-      Console.WriteLine("*** DocAssemblyGroup ***");
-      Console.WriteLine("************************");
+      Console.WriteLine("*****************************");
+      Console.WriteLine("*** DocMethodGroupHeading ***");
+      Console.WriteLine("*****************************");
       Console.WriteLine();
-      var fileName = "03DocAssemblyGroup.sql";
+      var fileName = "13DocMethodGroupHeading.sql";
       File.WriteAllText(fileName, ScriptHeader());
       foreach (var row in result.Rows)
       {
-        mGroupValues = GetValues(row);
+        mHeadingValues = GetValues(row);
         StringBuilder builder = new StringBuilder(256);
-        var name = mGroupValues.Name;
-        Console.WriteLine($"Assembly: {name}");
+        var name = mHeadingValues.Name;
+        Console.WriteLine($"Heading: {name}");
 
-        builder.Append($"exec sp_DAGAddUnique '{name}',");
-        builder.Append($" '{mGroupValues.Heading}'");
-        builder.AppendLine($"  , {mGroupValues.Sequence}");
+        builder.Append($"exec sp_DMGHAddUnique '{name}',");
+        builder.Append($" '{mHeadingValues.Heading}'");
+        builder.AppendLine($"  , {mHeadingValues.Sequence}");
         var text = builder.ToString();
         File.AppendAllText(fileName, text);
       }
@@ -51,16 +48,15 @@ namespace GenDocScript
 
     #region Private Methods
 
-    // Gets the values.
-    private AssemblyGroupValues GetValues(DbRow row)
+    // Gets the method values.
+    private MethodGroupHeadingValues GetValues(DbRow row)
     {
-      var retValue = new AssemblyGroupValues();
+      var retValue = new MethodGroupHeadingValues();
 
       var values = row.Values;
-      retValue.ActiveFlag = values.LJCGetBoolean("ActiveFlag");
       retValue.Heading = values.LJCGetValue("Heading");
       retValue.Name = values.LJCGetValue("Name");
-      retValue.Sequence = values.LJCGetInt32("Sequence");
+      retValue.Sequence = values.LJCGetInt16("Sequence");
       return retValue;
     }
 
@@ -69,7 +65,7 @@ namespace GenDocScript
     {
       var retValue = new List<string>()
       {
-        DocAssemblyGroup.ColumnSequence
+        DocMethodGroupHeading.ColumnSequence
       };
       return retValue;
     }
@@ -79,10 +75,9 @@ namespace GenDocScript
     {
       var retValue = new List<string>()
       {
-        { DocAssemblyGroup.ColumnName },
-        { DocAssemblyGroup.ColumnHeading },
-        { DocAssemblyGroup.ColumnSequence },
-        { DocAssemblyGroup.ColumnActiveFlag }
+        { DocMethodGroupHeading.ColumnName },
+        { DocMethodGroupHeading.ColumnHeading },
+        { DocMethodGroupHeading.ColumnSequence }
       };
       return retValue;
     }
@@ -93,7 +88,7 @@ namespace GenDocScript
       StringBuilder builder = new StringBuilder(256);
       builder.AppendLine("/* Copyright(c) Lester J.Clark and Contributors. */");
       builder.AppendLine("/* Licensed under the MIT License. */");
-      builder.AppendLine("/* 03DocAssemblyGroup.sql */");
+      builder.AppendLine("/* 13DocMethodGroupHeading.sql */");
       builder.AppendLine("USE[LJCData]");
       builder.AppendLine("GO");
       builder.AppendLine("SET ANSI_NULLS ON");
@@ -102,8 +97,9 @@ namespace GenDocScript
       builder.AppendLine("GO");
       builder.AppendLine();
       builder.AppendLine("/*");
-      builder.AppendLine("select ID 'DocAssemblyGroup', Name, Heading, Sequence, ActiveFlag");
-      builder.AppendLine("from DocAssemblyGroup");
+      builder.Append("select ID 'DocMethodGroupHeading', Name, Heading,");
+      builder.AppendLine(" Sequence, ActiveFlag");
+      builder.AppendLine("from DocMethodGroupHeading");
       builder.AppendLine("order by Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
@@ -114,8 +110,8 @@ namespace GenDocScript
 
     #region Class Data
 
-    private readonly DocAssemblyGroupManager mGroupManager;
-    private AssemblyGroupValues mGroupValues;
+    private readonly DocMethodGroupHeadingManager mHeadingManager;
+    private MethodGroupHeadingValues mHeadingValues;
     #endregion
   }
 }

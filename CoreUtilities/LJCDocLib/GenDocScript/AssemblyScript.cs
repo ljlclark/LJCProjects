@@ -24,20 +24,22 @@ namespace GenDocScript
     // Generates the script.
     internal void Gen()
     {
-      var propertyNames = AssemblyPropertyNames();
-      DbJoins assemblyJoins = AssemblyJoins();
-      mAssemblyManager.SetOrderBy(AssemblyOrderByNames());
+      var propertyNames = PropertyNames();
+      DbJoins assemblyJoins = Joins();
+      mAssemblyManager.SetOrderBy(OrderByNames());
       var result = mAssemblyManager.Manager.Load(null, propertyNames, null
         , assemblyJoins);
 
       Console.WriteLine();
+      Console.WriteLine("*******************");
       Console.WriteLine("*** DocAssembly ***");
+      Console.WriteLine("*******************");
       var fileName = "05DocAssembly.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevGroupName = "Nothing";
       foreach (var row in result.Rows)
       {
-        mAssemblyValues = GetAssemblyValues(row);
+        mAssemblyValues = GetValues(row);
 
         StringBuilder builder = new StringBuilder(256);
         builder.Append(GroupHeader());
@@ -45,10 +47,10 @@ namespace GenDocScript
         var assemblyName = mAssemblyValues.Name;
         Console.WriteLine($"Assembly: {assemblyName}");
 
-        builder.AppendLine($"exec sp_DAAddUnique @groupName, '{assemblyName}'");
-        builder.AppendLine($"  , '{mAssemblyValues.Description}'");
-        builder.AppendLine($"  , '{mAssemblyValues.FileSpec}'");
-        builder.AppendLine($"  , '{mAssemblyValues.MainImage}', @seq;");
+        builder.AppendLine($"exec sp_DAAddUnique @groupName, '{assemblyName}',");
+        builder.AppendLine($"  '{mAssemblyValues.Description}',");
+        builder.AppendLine($"  '{mAssemblyValues.FileSpec}',");
+        builder.AppendLine($"  '{mAssemblyValues.MainImage}', @seq;");
         var text = builder.ToString();
         File.AppendAllText(fileName, text);
       }
@@ -56,55 +58,8 @@ namespace GenDocScript
 
     #region Private Methods
 
-    // Creates and return the joins definition.
-    private DbJoins AssemblyJoins()
-    {
-      var retValue = new DbJoins();
-      var join = new DbJoin()
-      {
-        TableAlias = "dag",
-        TableName = DocAssemblyGroup.TableName,
-        JoinOns = new DbJoinOns()
-        {
-          { DocAssembly.ColumnDocAssemblyGroupID, "ID" }
-        },
-        Columns = new DbColumns
-        {
-          // columnName, propertyName = null, renameAs = null, dataTypeName = "String", caption = null
-          { "Name", "GroupName", "GroupName" }
-        }
-      };
-      retValue.Add(join);
-      return retValue;
-    }
-
-    // Gets the method order by names.
-    private List<string> AssemblyOrderByNames()
-    {
-      var retValue = new List<string>()
-      {
-        $"dag.{DocAssemblyGroup.ColumnSequence}",
-        $"DocAssembly.{DocAssembly.ColumnSequence}"
-      };
-      return retValue;
-    }
-
-    // Gets the assembly property names.
-    private List<string> AssemblyPropertyNames()
-    {
-      var retValue = new List<string>()
-      {
-        { DocAssembly.ColumnName },
-        { DocAssembly.ColumnDescription },
-        { DocAssembly.ColumnFileSpec },
-        { DocAssembly.ColumnMainImage },
-        { DocAssembly.ColumnSequence },
-      };
-      return retValue;
-    }
-
-    // Gets the method values.
-    private AssemblyValues GetAssemblyValues(DbRow row)
+    // Gets the values.
+    private AssemblyValues GetValues(DbRow row)
     {
       var retValue = new AssemblyValues();
 
@@ -144,6 +99,53 @@ namespace GenDocScript
         builder.AppendLine("set @seq += 1;");
       }
       retValue = builder.ToString();
+      return retValue;
+    }
+
+    // Creates and return the joins definition.
+    private DbJoins Joins()
+    {
+      var retValue = new DbJoins();
+      var join = new DbJoin()
+      {
+        TableAlias = "dag",
+        TableName = DocAssemblyGroup.TableName,
+        JoinOns = new DbJoinOns()
+        {
+          { DocAssembly.ColumnDocAssemblyGroupID, "ID" }
+        },
+        Columns = new DbColumns
+        {
+          // columnName, propertyName = null, renameAs = null, dataTypeName = "String", caption = null
+          { "Name", "GroupName", "GroupName" }
+        }
+      };
+      retValue.Add(join);
+      return retValue;
+    }
+
+    // Gets the order by names.
+    private List<string> OrderByNames()
+    {
+      var retValue = new List<string>()
+      {
+        $"dag.{DocAssemblyGroup.ColumnSequence}",
+        $"DocAssembly.{DocAssembly.ColumnSequence}"
+      };
+      return retValue;
+    }
+
+    // Gets the property names.
+    private List<string> PropertyNames()
+    {
+      var retValue = new List<string>()
+      {
+        { DocAssembly.ColumnName },
+        { DocAssembly.ColumnDescription },
+        { DocAssembly.ColumnFileSpec },
+        { DocAssembly.ColumnMainImage },
+        { DocAssembly.ColumnSequence },
+      };
       return retValue;
     }
 

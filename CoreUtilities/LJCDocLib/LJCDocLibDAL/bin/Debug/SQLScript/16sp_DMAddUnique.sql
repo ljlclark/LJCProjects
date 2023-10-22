@@ -26,8 +26,13 @@ declare @docMethodGroupID smallint
   = (select ID from DocMethodGroup where DocClassID = @docClassID
      and HeadingName = @headingName);
 IF NOT EXISTS (select ID from DocMethod
-where DocMethodGroupID = @docMethodGroupID
+where DocClassID = @docClassID
+  and DocMethodGroupID = @docMethodGroupID
   and Name = @name)
+  IF NOT EXISTS (select ID from DocMethod
+  where DocClassID = @docClassID
+    and DocMethodGroupID is null
+    and Name = @name)
   insert into DocMethod (DocClassID, DocMethodGroupID, Name, Description
     , Sequence, ActiveFlag, OverloadName)
     values (@docClassID, @docMethodGroupID, @name, @description

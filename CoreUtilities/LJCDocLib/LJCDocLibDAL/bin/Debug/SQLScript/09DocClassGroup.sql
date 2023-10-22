@@ -6,7 +6,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /*
-select Name, DocAssemblyID, DocClassGroupHeadingID, HeadingName, HeadingTextCustom, DocClassGroup.Sequence
+select DocClassGroup.ID 'DocClassGroup', Name 'Assembly Name', HeadingName,
+  HeadingTextCustom, DocClassGroup.Sequence, DocClassGroup.ActiveFlag
 from DocClassGroup
 left join DocAssembly on DocAssemblyID = DocAssembly.ID
 order by DocAssemblyID, DocClassGroup.Sequence;

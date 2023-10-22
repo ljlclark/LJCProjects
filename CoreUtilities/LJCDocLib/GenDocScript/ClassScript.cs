@@ -24,21 +24,23 @@ namespace GenDocScript
     // Generates the script.
     internal void Gen()
     {
-      var propertyNames = ClassPropertyNames();
-      DbJoins classJoins = ClassJoins();
-      mClassManager.SetOrderBy(ClassOrderByNames());
+      var propertyNames = PropertyNames();
+      DbJoins classJoins = Joins();
+      mClassManager.SetOrderBy(OrderByNames());
       var result = mClassManager.Manager.Load(null, propertyNames, null
         , classJoins);
 
       Console.WriteLine();
+      Console.WriteLine("****************");
       Console.WriteLine("*** DocClass ***");
+      Console.WriteLine("****************");
       var fileName = "11DocClass.sql";
       File.WriteAllText(fileName, ScriptHeader());
       mPrevAssemblyName = "Nothing";
       mPrevHeadingName = "Nothing";
       foreach (var row in result.Rows)
       {
-        mClassValues = GetClassValues(row);
+        mClassValues = GetValues(row);
 
         StringBuilder builder = new StringBuilder(256);
         builder.Append(AssemblyHeader());
@@ -48,10 +50,10 @@ namespace GenDocScript
         var className = mClassValues.Name;
         Console.WriteLine($"Class: {className}");
 
-        builder.AppendLine($"exec sp_DCAddUnique @assemblyName, @headingName");
-        builder.AppendLine($"  , '{className}'");
-        builder.AppendLine($"  , '{mClassValues.Description}'");
-        builder.AppendLine($"  , @seq;");
+        builder.AppendLine($"exec sp_DCAddUnique @assemblyName, @headingName,");
+        builder.AppendLine($"  '{className}',");
+        builder.AppendLine($"  '{mClassValues.Description}',");
+        builder.AppendLine($"  @seq;");
         var text = builder.ToString();
         File.AppendAllText(fileName, text);
       }
@@ -74,14 +76,62 @@ namespace GenDocScript
         StringBuilder builder = new StringBuilder(256);
         builder.AppendLine();
         builder.AppendLine($"/* {mClassValues.AssemblyName} */");
-        builder.AppendLine("/* ------------------------------ */");
         retValue = builder.ToString();
       }
       return retValue;
     }
 
+    // Creates and returns the script group header.
+    private string GroupHeader()
+    {
+      string retValue;
+
+      // Class Group has changed.
+      StringBuilder builder = new StringBuilder(256);
+      var assemblyName = mClassValues.AssemblyName;
+      var headingName = mClassValues.HeadingName;
+      if (headingName != mPrevHeadingName)
+      {
+        // Assembly has not changed.
+        if (assemblyName == mPrevAssemblyName)
+        {
+          Console.WriteLine();
+          builder.AppendLine();
+        }
+        Console.WriteLine($"Group: {headingName}");
+        builder.AppendLine($"set @assemblyName = '{assemblyName}';");
+        builder.AppendLine($"set @headingName = '{headingName}';");
+        builder.AppendLine("set @seq = 1;");
+      }
+      else
+      {
+        // Class Group has not changed.
+        builder.AppendLine("set @seq += 1;");
+      }
+      retValue = builder.ToString();
+      return retValue;
+    }
+
+    // Gets the values.
+    private ClassValues GetValues(DbRow row)
+    {
+      var retValue = new ClassValues();
+
+      var values = row.Values;
+      retValue.AssemblyName = values.LJCGetValue("AssemblyName");
+      retValue.HeadingName = values.LJCGetValue("HeadingName");
+      var description = values.LJCGetValue("Description");
+      if (NetString.HasValue(description))
+      {
+        retValue.Description = description.Replace("\n", "");
+      }
+      retValue.Name = values.LJCGetValue("Name");
+      retValue.Sequence = values.LJCGetInt32("Sequence");
+      return retValue;
+    }
+
     // Creates and return the joins definition.
-    private DbJoins ClassJoins()
+    private DbJoins Joins()
     {
       var retValue = new DbJoins();
       var join = new DbJoin()
@@ -118,8 +168,8 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method order by names.
-    private List<string> ClassOrderByNames()
+    // Gets the order by names.
+    private List<string> OrderByNames()
     {
       var retValue = new List<string>()
       {
@@ -131,8 +181,8 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method property names.
-    private List<string> ClassPropertyNames()
+    // Gets the property names.
+    private List<string> PropertyNames()
     {
       var retValue = new List<string>()
       {
@@ -140,55 +190,6 @@ namespace GenDocScript
         { DocClass.ColumnDescription },
         { DocClass.ColumnSequence },
       };
-      return retValue;
-    }
-
-    // Gets the method values.
-    private ClassValues GetClassValues(DbRow row)
-    {
-      var retValue = new ClassValues();
-
-      var values = row.Values;
-      retValue.AssemblyName = values.LJCGetValue("AssemblyName");
-      retValue.HeadingName = values.LJCGetValue("HeadingName");
-      var description = values.LJCGetValue("Description");
-      if (NetString.HasValue(description))
-      {
-        retValue.Description = description.Replace("\n", "");
-      }
-      retValue.Name = values.LJCGetValue("Name");
-      retValue.Sequence = values.LJCGetInt32("Sequence");
-      return retValue;
-    }
-
-    // Creates and returns the script class header.
-    private string GroupHeader()
-    {
-      string retValue;
-
-      // Class Group has changed.
-      StringBuilder builder = new StringBuilder(256);
-      var assemblyName = mClassValues.AssemblyName;
-      var headingName = mClassValues.HeadingName;
-      if (headingName != mPrevHeadingName)
-      {
-        // Assembly has not changed.
-        if (assemblyName == mPrevAssemblyName)
-        {
-          Console.WriteLine();
-          builder.AppendLine();
-        }
-        Console.WriteLine($"Group: {headingName}");
-        builder.AppendLine($"set @assemblyName = '{assemblyName}';");
-        builder.AppendLine($"set @headingName = '{headingName}';");
-        builder.AppendLine("set @seq = 1;");
-      }
-      else
-      {
-        // Class Group has not changed.
-        builder.AppendLine("set @seq += 1;");
-      }
-      retValue = builder.ToString();
       return retValue;
     }
 

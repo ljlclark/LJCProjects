@@ -1,0 +1,107 @@
+
+*******************
+*** DocAssembly ***
+*******************
+
+Group: CommonLibraries
+Assembly: SystemBuild
+Assembly: LJCNetCommon
+Assembly: LJCExecuteScript
+Assembly: LJCAddressParserLib
+Assembly: LJCWinFormCommon
+Assembly: LJCWinFormControls
+Assembly: LJCGridDataLib
+Assembly: LJCTextDataReaderLib
+Assembly: DataDetail
+Assembly: LJCDataDetailLib
+Assembly: LJCDataDetailConsole
+
+Group: DataLibraries
+Assembly: DataOverview
+Assembly: LJCDataAccess
+Assembly: LJCDBDataAccessLib
+Assembly: LJCDataAccessConfig
+Assembly: LJCDBClientLib
+Assembly: LJCDBMessage
+Assembly: ForeignKeyManagerTest
+Assembly: LJCSQLUtilLib
+Assembly: LJCSQLUtilLibDAL
+Assembly: LJCDBServiceHost
+Assembly: LJCDBServiceConsoleHost
+Assembly: LJCDBServiceLib
+
+Group: CodeGen
+Assembly: LJCGenText
+Assembly: LJCGenTableCode
+Assembly: LJCGenTextLib
+Assembly: LJCGenTextEdit
+
+Group: DocGen
+Assembly: LJCDocGen
+Assembly: LJCDocGenLib
+Assembly: LJCDocLibDAL
+Assembly: LJCDocObjLib
+Assembly: LJCDocXmlObjLib
+Assembly: LJCGenDocEdit
+Assembly: LJCGenPageGen
+
+Group: DBViewDAL
+Assembly: LJCDBViewDAL
+
+Group: ViewBuilder
+Assembly: LJCViewBuilder
+
+Group: ViewEditor
+Assembly: LJCViewEditor
+Assembly: LJCViewEditorDAL
+
+Group: LJCPagination
+Assembly: LJCDataPageList
+Assembly: Text File Pagination
+
+Group: CodeLine
+Assembly: LJCCodeLineCounter
+
+Group: RegionManager
+Assembly: LJCRegionManager
+Assembly: LJCRegionDAL
+Assembly: LJCRegionForm
+
+Group: LJCUnitMeasure
+Assembly: LJCUnitMeasure
+Assembly: LJCUnitMeasureDAL
+
+Group: CVRManager
+Assembly: CVRManager
+Assembly: CVRDAL
+
+Group: FacilityManager
+Assembly: LJCFacilityManager
+Assembly: LJCFacilityManagerDAL
+Assembly: FacilityForm
+Assembly: ModuleHost
+
+Group: DocAppManager
+Assembly: LJCDocAppManager
+Assembly: LJCDocAppManagerDAL
+
+Group: TextInvasion
+Assembly: LJCTextInvasion
+
+Group: DataTransform
+Assembly: LJCTransformManager
+Assembly: LJCDataTransformProcess
+Assembly: CommonModuleLib
+Assembly: LJCDataTransformDAL
+Assembly: TransformServiceTest
+
+Group: AppManager
+Assembly: LJCAppManager
+Assembly: LJCAppManagerDAL
+
+Group: FacilityManagerSetup
+Assembly: LJCFacilityManagerSetup
+
+Group: LJCSales
+Assembly: LJCSalesManager
+Assembly: LJCSalesDAL

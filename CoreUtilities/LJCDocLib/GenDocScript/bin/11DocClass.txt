@@ -1,0 +1,92 @@
+
+
+****************
+*** DocClass ***
+****************
+
+Assembly: LJCDataAccess
+Group:
+Class: DataAccess
+Class: ProcedureParameters
+
+Assembly: LJCDBClientLib
+Group:
+Class: DataManager
+
+Assembly: LJCDBMessage
+Group: Request
+Class: DbCondition
+Class: DbConditions
+Class: DbConditionSet
+Class: DbFilter
+Class: DbFilters
+Class: DbJoin
+Class: DbJoinOn
+Class: DbJoinOns
+Class: DbJoins
+Class: DbRequest
+
+Group: Result
+Class: DbResult
+Class: DbRow
+Class: DbRows
+
+Assembly: LJCGridDataLib
+Group: DataGrid
+Class: ResultGridData
+Class: TableGridData
+
+Assembly: LJCNetCommon
+Group:
+Class: AppSettings
+Class: CodeTokenizer
+Class: Cryptography_Type
+Class: DataTypes
+Class: LJCCryptography
+
+Group: Collection
+Class: DbColumn
+Class: DbColumns
+Class: DbValue
+Class: DbValues
+Class: KeyItem
+Class: KeyItems
+
+Group: Comparer
+Class: DbColumnNameComparer
+Class: DbColumnPropertyComparer
+Class: DbColumnRenameAsComparer
+
+Group: Reflection
+Class: LJCAssemblyReflect
+Class: LJCReflect
+
+Group: Static
+Class: NetCommon
+Class: NetFile
+Class: NetString
+
+Group: Syntax
+Class: CommonDataTypes
+Class: CommonKeywords
+Class: CommonModifiers
+Class: Keywords
+Class: LibTypes
+Class: Modifiers
+Class: PropertyDelegate
+Class: PropertyDelegates
+Class: RefTypes
+
+Assembly: LJCWinFormControls
+Group: Combobox
+Class: LJCItem
+Class: LJCItemCombo
+
+Group: DataGrid
+Class: LJCDataGrid
+Class: LJCGridRow
+
+Group: Tab
+Class: LJCTabControl
+Class: LJCTabPanel
+Class: PanelControlsAdjust

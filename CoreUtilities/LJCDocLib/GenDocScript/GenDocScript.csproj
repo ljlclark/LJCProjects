@@ -65,8 +65,14 @@
     <Compile Include="AssemblyValues.cs" />
     <Compile Include="ClassGroupHeadingScript.cs" />
     <Compile Include="ClassGroupHeadingValues.cs" />
+    <Compile Include="ClassGroupScript.cs" />
+    <Compile Include="ClassGroupValues.cs" />
     <Compile Include="ClassScript.cs" />
     <Compile Include="ClassValues.cs" />
+    <Compile Include="MethodGroupHeadingScript.cs" />
+    <Compile Include="MethodGroupHeadingValues.cs" />
+    <Compile Include="MethodGroupScript.cs" />
+    <Compile Include="MethodGroupValues.cs" />
     <Compile Include="MethodScript.cs" />
     <Compile Include="MethodValues.cs" />
     <Compile Include="ProgramGenDocScript.cs" />
@@ -74,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\GenDocScript.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDocLibDAL\LJCDocLibDAL.csproj">

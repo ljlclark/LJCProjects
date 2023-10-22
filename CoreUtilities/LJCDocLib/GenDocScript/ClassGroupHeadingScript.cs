@@ -14,24 +14,26 @@ namespace GenDocScript
     internal ClassGroupHeadingScript()
     {
       var managers = ValuesDocGen.Instance.Managers;
-      mGroupManager = managers.DocClassGroupHeadingManager;
+      mHeadingManager = managers.DocClassGroupHeadingManager;
     }
 
     // Generates the script.
     internal void Gen()
     {
       var propertyNames = PropertyNames();
-      mGroupManager.SetOrderBy(OrderByNames());
-      var result = mGroupManager.Manager.Load(null, propertyNames);
+      mHeadingManager.SetOrderBy(OrderByNames());
+      var result = mHeadingManager.Manager.Load(null, propertyNames);
 
       Console.WriteLine();
+      Console.WriteLine("****************************");
       Console.WriteLine("*** DocClassGroupHeading ***");
+      Console.WriteLine("****************************");
       Console.WriteLine();
       var fileName = "07DocClassGroupHeading.sql";
       File.WriteAllText(fileName, ScriptHeader());
       foreach (var row in result.Rows)
       {
-        mHeadingValues = GetHeadingValues(row);
+        mHeadingValues = GetValues(row);
         StringBuilder builder = new StringBuilder(256);
         var name = mHeadingValues.Name;
         Console.WriteLine($"Heading: {name}");
@@ -46,8 +48,8 @@ namespace GenDocScript
 
     #region Private Methods
 
-    // Gets the method values.
-    private ClassGroupHeadingValues GetHeadingValues(DbRow row)
+    // Gets the values.
+    private ClassGroupHeadingValues GetValues(DbRow row)
     {
       var retValue = new ClassGroupHeadingValues();
 
@@ -58,7 +60,7 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the method order by names.
+    // Gets the order by names.
     private List<string> OrderByNames()
     {
       var retValue = new List<string>()
@@ -68,7 +70,7 @@ namespace GenDocScript
       return retValue;
     }
 
-    // Gets the assembly property names.
+    // Gets the property names.
     private List<string> PropertyNames()
     {
       var retValue = new List<string>()
@@ -108,7 +110,7 @@ namespace GenDocScript
 
     #region Class Data
 
-    private readonly DocClassGroupHeadingManager mGroupManager;
+    private readonly DocClassGroupHeadingManager mHeadingManager;
     private ClassGroupHeadingValues mHeadingValues;
     #endregion
   }
