@@ -59,24 +59,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyGroupScript.cs" />
-    <Compile Include="AssemblyGroupValues.cs" />
-    <Compile Include="AssemblyScript.cs" />
-    <Compile Include="AssemblyValues.cs" />
-    <Compile Include="ClassGroupHeadingScript.cs" />
-    <Compile Include="ClassGroupHeadingValues.cs" />
-    <Compile Include="ClassGroupScript.cs" />
-    <Compile Include="ClassGroupValues.cs" />
-    <Compile Include="ClassScript.cs" />
-    <Compile Include="ClassValues.cs" />
-    <Compile Include="MethodGroupHeadingScript.cs" />
-    <Compile Include="MethodGroupHeadingValues.cs" />
-    <Compile Include="MethodGroupScript.cs" />
-    <Compile Include="MethodGroupValues.cs" />
-    <Compile Include="MethodScript.cs" />
-    <Compile Include="MethodValues.cs" />
+    <Compile Include="Assembly\AssemblyGroupScript.cs" />
+    <Compile Include="Assembly\AssemblyGroupValues.cs" />
+    <Compile Include="Assembly\AssemblyScript.cs" />
+    <Compile Include="Assembly\AssemblyValues.cs" />
+    <Compile Include="Class\ClassGroupHeadingScript.cs" />
+    <Compile Include="Class\ClassGroupHeadingValues.cs" />
+    <Compile Include="Class\ClassGroupScript.cs" />
+    <Compile Include="Class\ClassGroupValues.cs" />
+    <Compile Include="Class\ClassScript.cs" />
+    <Compile Include="Class\ClassValues.cs" />
+    <Compile Include="Method\MethodGroupHeadingScript.cs" />
+    <Compile Include="Method\MethodGroupHeadingValues.cs" />
+    <Compile Include="Method\MethodGroupScript.cs" />
+    <Compile Include="Method\MethodGroupValues.cs" />
+    <Compile Include="Method\MethodScript.cs" />
+    <Compile Include="Method\MethodValues.cs" />
     <Compile Include="ProgramGenDocScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CommonGenDocScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -89,6 +90,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\03DocAssemblyGroup.sql" />
+    <Content Include="bin\Debug\05DocAssembly.sql" />
+    <Content Include="bin\Debug\07DocClassGroupHeading.sql" />
+    <Content Include="bin\Debug\09DocClassGroup.sql" />
+    <Content Include="bin\Debug\11DocClass.sql" />
+    <Content Include="bin\Debug\13DocMethodGroupHeading.sql" />
+    <Content Include="bin\Debug\15DocMethodGroup.sql" />
+    <Content Include="bin\Debug\17DocMethod.sql" />
     <Content Include="bin\Debug\DataConfigs.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

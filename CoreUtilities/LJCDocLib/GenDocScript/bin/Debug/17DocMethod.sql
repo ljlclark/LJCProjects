@@ -24,7 +24,6 @@ declare @headingName nvarchar(60);
 declare @seq int
 
 /* LJCDataAccess */
-/* ------------------------------ */
 set @docClassName = 'DataAccess';
 set @headingName = 'Constructor';
 set @seq = 1;
@@ -37,11 +36,6 @@ exec sp_DMAddUnique @docClassName, @headingName,
   '#ctor',
   'Initializes an object instance.',
   @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName,
-  '#ctor',
-  'Initializes an object instance with the provided values.',
-  @seq, 1, 'ctor1';
 
 set @docClassName = 'DataAccess';
 set @headingName = 'Data';
@@ -76,7 +70,6 @@ exec sp_DMAddUnique @docClassName, @headingName,
   @seq;
 
 /* LJCDBClientLib */
-/* ------------------------------ */
 set @docClassName = 'DataManager';
 set @headingName = 'Constructor';
 set @seq = 1;
@@ -84,11 +77,6 @@ exec sp_DMAddUnique @docClassName, @headingName,
   '#ctor',
   'Initializes an object instance.',
   @seq, 1, 'ctor';
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName,
-  '#ctor',
-  'Initializes an object instance.',
-  @seq, 1, 'ctor1';
 set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'Reset',
@@ -119,7 +107,6 @@ exec sp_DMAddUnique @docClassName, @headingName,
   @seq;
 
 /* LJCNetCommon */
-/* ------------------------------ */
 set @docClassName = 'NetCommon';
 set @headingName = 'Config';
 set @seq = 1;

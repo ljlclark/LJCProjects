@@ -36,7 +36,9 @@ namespace LJCDocGen
         }
         Console.WriteLine($"\r\nLJCDocGen.exe {outputPath}\r\n");
 
-        var managers = ValuesDocGen.Instance.Managers;
+        var configValues = ValuesDocGen.Instance;
+        configValues.SetConfigFile("LJCDocGen.exe.config");
+        var managers = configValues.Managers;
         var assemblyGroupManager = managers.DocAssemblyGroupManager;
         var assemblyGroups = assemblyGroupManager.Load();
 

@@ -7,14 +7,14 @@ using System.Text;
 
 namespace GenDocScript
 {
-  // Represents the DocMethodGroupHeading script.
-  internal class MethodGroupHeadingScript
+  // Represents the DocClassHeadingGroup script.
+  internal class ClassGroupHeadingScript
   {
     // Initializes an object instance.
-    internal MethodGroupHeadingScript()
+    internal ClassGroupHeadingScript()
     {
-      var managers = ValuesDocGen.Instance.Managers;
-      mHeadingManager = managers.DocMethodGroupHeadingManager;
+      var managers = CommonGenDocScript.GetManagers();
+      mHeadingManager = managers.DocClassGroupHeadingManager;
     }
 
     // Generates the script.
@@ -25,11 +25,11 @@ namespace GenDocScript
       var result = mHeadingManager.Manager.Load(null, propertyNames);
 
       Console.WriteLine();
-      Console.WriteLine("*****************************");
-      Console.WriteLine("*** DocMethodGroupHeading ***");
-      Console.WriteLine("*****************************");
+      Console.WriteLine("****************************");
+      Console.WriteLine("*** DocClassGroupHeading ***");
+      Console.WriteLine("****************************");
       Console.WriteLine();
-      var fileName = "13DocMethodGroupHeading.sql";
+      var fileName = "07DocClassGroupHeading.sql";
       File.WriteAllText(fileName, ScriptHeader());
       foreach (var row in result.Rows)
       {
@@ -38,7 +38,7 @@ namespace GenDocScript
         var name = mHeadingValues.Name;
         Console.WriteLine($"Heading: {name}");
 
-        builder.Append($"exec sp_DMGHAddUnique '{name}',");
+        builder.Append($"exec sp_DCGHAddUnique '{name}',");
         builder.Append($" '{mHeadingValues.Heading}'");
         builder.AppendLine($"  , {mHeadingValues.Sequence}");
         var text = builder.ToString();
@@ -48,10 +48,10 @@ namespace GenDocScript
 
     #region Private Methods
 
-    // Gets the method values.
-    private MethodGroupHeadingValues GetValues(DbRow row)
+    // Gets the values.
+    private ClassGroupHeadingValues GetValues(DbRow row)
     {
-      var retValue = new MethodGroupHeadingValues();
+      var retValue = new ClassGroupHeadingValues();
 
       var values = row.Values;
       retValue.Heading = values.LJCGetValue("Heading");
@@ -65,7 +65,7 @@ namespace GenDocScript
     {
       var retValue = new List<string>()
       {
-        DocMethodGroupHeading.ColumnSequence
+        DocClassGroupHeading.ColumnSequence
       };
       return retValue;
     }
@@ -75,9 +75,9 @@ namespace GenDocScript
     {
       var retValue = new List<string>()
       {
-        { DocMethodGroupHeading.ColumnName },
-        { DocMethodGroupHeading.ColumnHeading },
-        { DocMethodGroupHeading.ColumnSequence }
+        { DocClassGroupHeading.ColumnName },
+        { DocClassGroupHeading.ColumnHeading },
+        { DocClassGroupHeading.ColumnSequence }
       };
       return retValue;
     }
@@ -88,7 +88,7 @@ namespace GenDocScript
       StringBuilder builder = new StringBuilder(256);
       builder.AppendLine("/* Copyright(c) Lester J.Clark and Contributors. */");
       builder.AppendLine("/* Licensed under the MIT License. */");
-      builder.AppendLine("/* 13DocMethodGroupHeading.sql */");
+      builder.AppendLine("/* 07DocClassGroupHeading.sql */");
       builder.AppendLine("USE[LJCData]");
       builder.AppendLine("GO");
       builder.AppendLine("SET ANSI_NULLS ON");
@@ -97,9 +97,9 @@ namespace GenDocScript
       builder.AppendLine("GO");
       builder.AppendLine();
       builder.AppendLine("/*");
-      builder.Append("select ID 'DocMethodGroupHeading', Name, Heading,");
+      builder.Append("select ID 'DocClassGroupHeading', Name, Heading,");
       builder.AppendLine(" Sequence, ActiveFlag");
-      builder.AppendLine("from DocMethodGroupHeading");
+      builder.AppendLine("from DocClassGroupHeading");
       builder.AppendLine("order by Sequence;");
       builder.AppendLine("*/");
       builder.AppendLine();
@@ -110,8 +110,8 @@ namespace GenDocScript
 
     #region Class Data
 
-    private readonly DocMethodGroupHeadingManager mHeadingManager;
-    private MethodGroupHeadingValues mHeadingValues;
+    private readonly DocClassGroupHeadingManager mHeadingManager;
+    private ClassGroupHeadingValues mHeadingValues;
     #endregion
   }
 }

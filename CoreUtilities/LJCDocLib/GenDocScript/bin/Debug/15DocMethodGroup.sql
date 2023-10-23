@@ -51,3 +51,7 @@ exec sp_DMGAddUnique @className, 'Config',
  'Program Config Value Functions',  4
 exec sp_DMGAddUnique @className, 'Value',
  '',  5
+
+set @className= 'NetString';
+exec sp_DMGAddUnique @className, 'CheckValues',
+ 'Check Values',  1

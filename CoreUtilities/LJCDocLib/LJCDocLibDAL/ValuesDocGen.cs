@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ValuesDocLib.cs
 using LJCDBClientLib;
-using LJCDBDataAccess;
+using LJCNetCommon;
 
 namespace LJCDocLibDAL
 {
@@ -16,14 +16,34 @@ namespace LJCDocLibDAL
     public ValuesDocGen()
     {
       StandardSettings = new StandardUISettings();
-      StandardSettings.SetProperties("GenDocScript.exe.config");
-      Managers = new ManagersDocGen();
-      Managers.SetDBProperties(StandardSettings.DbServiceRef
-        , StandardSettings.DataConfigName);
+    }
+
+    /// <summary>
+    /// Configures the settings.
+    /// </summary>
+    /// <param name="fileName">The config file name.</param>
+    public void SetConfigFile(string fileName)
+    {
+      if (NetString.HasValue(fileName))
+      {
+        // No config file set or new file name.
+        if (false == NetString.HasValue(ConfigFileName)
+          || fileName.Trim().ToLower() != ConfigFileName.ToLower())
+        {
+          ConfigFileName = fileName.Trim();
+          StandardSettings.SetProperties(fileName);
+          Managers = new ManagersDocGen();
+          Managers.SetDBProperties(StandardSettings.DbServiceRef
+            , StandardSettings.DataConfigName);
+        }
+      }
     }
     #endregion
 
     #region Properties
+
+    /// <summary>Gets or sets the ConfigFile name.</summary>
+    public string ConfigFileName { get; private set; }
 
     /// <summary>Gets or sets the generated page count.</summary>
     public int GenPageCount { get; set; }
