@@ -23,13 +23,14 @@ namespace DataHelper
 		/// <include path='items/InitializeControls/*' file='../../LJCDocLib/Common/List.xml'/>
 		private void InitializeControls()
 		{
-			// Get singleton values.
 			Cursor = Cursors.WaitCursor;
-			var values = ValuesDataHelper.Instance;
-			mSettings = values.StandardSettings;
+      // Set DAL config before using anywhere in the program.
+      var configValues = ValuesDataHelper.Instance;
+			mSettings = configValues.StandardSettings;
+      Text += $" - {mSettings.DataConfigName}";
 
-			// Initialize Class Data.
-			Managers = new SQLUtilLibManagers(mSettings.DbServiceRef
+      // Initialize Class Data.
+      Managers = new SQLUtilLibManagers(mSettings.DbServiceRef
 				, mSettings.DataConfigName);
 			mTableGridCode = new TableGridCode(this);
 			mColumnGridCode = new ColumnGridCode(this);

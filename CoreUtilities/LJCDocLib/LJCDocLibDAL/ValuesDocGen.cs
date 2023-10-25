@@ -52,9 +52,6 @@ namespace LJCDocLibDAL
     /// <summary>Gets or sets the generated page count.</summary>
     public int GenPageCount { get; set; }
 
-    /// <summary>Gets the StandardSettings value.</summary>
-    public StandardUISettings StandardSettings { get; private set; }
-
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesDocGen Instance
     {
@@ -63,6 +60,9 @@ namespace LJCDocLibDAL
 
     /// <summary>Gets or sets the Managers class reference.</summary>
     public ManagersDocGen Managers { get; set; }
+
+    /// <summary>Gets the StandardSettings value.</summary>
+    public StandardUISettings StandardSettings { get; private set; }
     #endregion
 
     #region Class Data

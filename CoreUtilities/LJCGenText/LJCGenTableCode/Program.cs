@@ -4,6 +4,8 @@
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDBServiceLib;
+using LJCNetCommon;
+using System.Runtime;
 using static System.Console;
 
 namespace LJCGenTableCode
@@ -24,6 +26,7 @@ namespace LJCGenTableCode
       else
       {
         string dataConfigName = args[0];
+        NetCommon.ConsoleConfig(dataConfigName);
 
         DbServiceRef dbServiceRef = new DbServiceRef
         {

@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // ValuesDataHelper.cs
 using LJCDBClientLib;
+using LJCNetCommon;
+using System.IO;
 
 namespace DataHelper
 {
@@ -17,17 +19,50 @@ namespace DataHelper
 		public ValuesDataHelper()
 		{
 			StandardSettings = new StandardUISettings();
-			StandardSettings.SetProperties("DataHelper.exe.config");
-		}
-		#endregion
+      var fileName = "DataHelper.exe.config";
+      if (File.Exists(fileName))
+      {
+        SetConfigFile(fileName);
+      }
+    }
 
-		#region Properties
+    /// <summary>Configures the settings.</summary>
+    /// <param name="fileName">The config file name.</param>
+    public void SetConfigFile(string fileName)
+    {
+      if (NetString.HasValue(fileName))
+      {
+        // No config file set or new file name.
+        if (false == NetString.HasValue(ConfigFileName)
+          || fileName.Trim().ToLower() != ConfigFileName.ToLower())
+        {
+          ConfigFileName = fileName.Trim();
+          StandardSettings.SetProperties(fileName);
+        }
+      }
+    }
+    #endregion
 
-		// The singleton instance.
-		internal static ValuesDataHelper Instance { get; } = new ValuesDataHelper();
+    #region Properties
 
-		// Gets or sets the StandardSettings value.
-		internal StandardUISettings StandardSettings { get; set; }
-		#endregion
-	}
+    /// <summary>Gets the ConfigFile name.</summary>
+    public string ConfigFileName { get; private set; }
+
+    /// <summary>Gets the StandardSettings value.</summary>
+    public StandardUISettings StandardSettings { get; private set; }
+
+    /// <summary>Gets the singleton instance.</summary>
+    public static ValuesDataHelper Instance
+    {
+      get { return mInstance; }
+    }
+    #endregion
+
+    #region Class Data
+
+    // The singleton instance.
+    private static readonly ValuesDataHelper mInstance
+      = new ValuesDataHelper();
+    #endregion
+  }
 }

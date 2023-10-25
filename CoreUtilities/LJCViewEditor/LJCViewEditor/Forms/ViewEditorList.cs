@@ -374,6 +374,7 @@ namespace LJCViewEditor
     {
       var values = ValuesViewEditor.Instance;
       mSettings = values.StandardSettings;
+      Text += $" - {mSettings.DataConfigName}";
       BeginColor = mSettings.BeginColor;
       DataConfigName = mSettings.DataConfigName;
       DbServiceRef = mSettings.DbServiceRef;

@@ -28,7 +28,8 @@ namespace LJCGenDocEdit
       // Set DAL config before using anywhere in the program.
       var configValues = ValuesDocGen.Instance;
       configValues.SetConfigFile("LJCGenDocEdit.exe.config");
-      Text += $" - {configValues.StandardSettings.DataConfigName}";
+      var settings = configValues.StandardSettings;
+      Text += $" - {settings.DataConfigName}";
       Cursor = Cursors.Default;
     }
     #endregion

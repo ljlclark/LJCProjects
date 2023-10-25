@@ -40,8 +40,8 @@ namespace LJCDocGen
         Console.WriteLine($"LJCDocGen {outputPath}");
         Console.WriteLine();
 
+        // Set DAL config before using anywhere in the program.
         var configValues = ValuesDocGen.Instance;
-        configValues.SetConfigFile("LJCDocGen.exe.config");
         var settings = configValues.StandardSettings;
         NetCommon.ConsoleConfig(settings.DataConfigName);
 
