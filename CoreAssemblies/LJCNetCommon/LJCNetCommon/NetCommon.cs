@@ -686,6 +686,17 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    /// <summary>Accept or Select the DataConfig.</summary>
+    public static void ConsoleConfig(string dataConfigName)
+    {
+      Console.Write($"Continue with DataConfig - {dataConfigName}? (Y/N) ");
+      if (Console.ReadKey().Key != ConsoleKey.Y)
+      {
+        Environment.Exit(0);
+      }
+      Console.WriteLine();
+    }
     #endregion
 
     #region Value Functions

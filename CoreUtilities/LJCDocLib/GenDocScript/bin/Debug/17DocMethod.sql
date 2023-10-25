@@ -107,6 +107,55 @@ exec sp_DMAddUnique @docClassName, @headingName,
   @seq;
 
 /* LJCNetCommon */
+set @docClassName = 'DbColumn';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance with the supplied values.',
+  @seq, 1, 'ctor2';
+
+set @docClassName = 'DbColumn';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'FormatValue',
+  'Formats the column value for the SQL string. (D)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'DbColumn';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'op_Implicit',
+  'Creates a      DbValue      object from a      DbColumn      object. (E)',
+  @seq;
+
 set @docClassName = 'NetCommon';
 set @headingName = 'Config';
 set @seq = 1;
@@ -325,4 +374,106 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'GetString',
   'Gets a trimmed string value from an object. (E)',
+  @seq;
+
+set @docClassName = 'NetString';
+set @headingName = 'CheckValues';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasValue',
+  'Checks if a text value exists.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsDigits',
+  'Checks a string value for digits.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsEqual',
+  'Do an Ignore Case string compare.',
+  @seq;
+
+set @docClassName = 'NetString';
+set @headingName = 'Formatting';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ExceptionString',
+  'Creates an exception string with outer and inner exception.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyName',
+  'Gets a column name with underscores converted to Pascal case.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'InitString',
+  'Initializes a string to the trimmed value or null.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RemoveSection',
+  'Removes a section from a text value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Truncate',
+  'Truncates a text string to the specified length.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetSearchName',
+  'Gets the Search Property name.',
+  @seq;
+
+set @docClassName = 'NetString';
+set @headingName = 'Parsing';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'FindTag',
+  'Finds a tag in a text value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDelimitedAndIndexes',
+  'Get the delimited string begin and end index.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDelimitedString',
+  'Gets the string between the specified delimiters.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetStringWithDelimiters',
+  'Get the string including the specified delimiters.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RemoveTags',
+  'Removes tags from a text value.',
+  @seq;
+
+set @docClassName = 'NetString';
+set @headingName = 'Soundex';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateLSoundex',
+  'Creates a letter based soundex value. (D)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreatePSoundex',
+  'Creates a Phonetic based soundex value. (D)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsSoundexLetter',
+  'Checks if the letter is a soundex skipped letter. (R)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Phonetic',
+  'Creates a Phonetic character from the supplied text starting at the      supplied index. (D)',
   @seq;

@@ -203,8 +203,8 @@
       // TabsSplit.Panel2
       // 
       this.TabsSplit.Panel2.Controls.Add(this.TileTabs);
-      this.TabsSplit.Size = new System.Drawing.Size(800, 450);
-      this.TabsSplit.SplitterDistance = 647;
+      this.TabsSplit.Size = new System.Drawing.Size(711, 450);
+      this.TabsSplit.SplitterDistance = 575;
       this.TabsSplit.TabIndex = 0;
       // 
       // MainTabs
@@ -219,7 +219,7 @@
       this.MainTabs.Location = new System.Drawing.Point(0, 0);
       this.MainTabs.Name = "MainTabs";
       this.MainTabs.SelectedIndex = 0;
-      this.MainTabs.Size = new System.Drawing.Size(647, 450);
+      this.MainTabs.Size = new System.Drawing.Size(575, 450);
       this.MainTabs.TabIndex = 0;
       this.MainTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainTabs_MouseDown);
       // 
@@ -244,7 +244,7 @@
       this.AssemblyTab.Location = new System.Drawing.Point(4, 29);
       this.AssemblyTab.Name = "AssemblyTab";
       this.AssemblyTab.Padding = new System.Windows.Forms.Padding(3);
-      this.AssemblyTab.Size = new System.Drawing.Size(639, 417);
+      this.AssemblyTab.Size = new System.Drawing.Size(567, 417);
       this.AssemblyTab.TabIndex = 0;
       this.AssemblyTab.Text = "Assembly";
       this.AssemblyTab.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
       // 
       this.AssemblySplit.Panel2.Controls.Add(this.AssemblyItemGrid);
       this.AssemblySplit.Panel2.Controls.Add(this.AssemblyItemHeader);
-      this.AssemblySplit.Size = new System.Drawing.Size(633, 411);
+      this.AssemblySplit.Size = new System.Drawing.Size(561, 411);
       this.AssemblySplit.SplitterDistance = 104;
       this.AssemblySplit.TabIndex = 0;
       // 
@@ -303,7 +303,7 @@
       this.AssemblyGroupGrid.RowTemplate.Height = 28;
       this.AssemblyGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.AssemblyGroupGrid.ShowCellToolTips = false;
-      this.AssemblyGroupGrid.Size = new System.Drawing.Size(632, 73);
+      this.AssemblyGroupGrid.Size = new System.Drawing.Size(560, 73);
       this.AssemblyGroupGrid.TabIndex = 1;
       this.AssemblyGroupGrid.Text = "LJCDataGrid";
       this.AssemblyGroupGrid.SelectionChanged += new System.EventHandler(this.AssemblyGroupGrid_SelectionChanged);
@@ -443,7 +443,7 @@
       this.AssemblyGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyGroupHeader.Name = "AssemblyGroupHeader";
-      this.AssemblyGroupHeader.Size = new System.Drawing.Size(632, 31);
+      this.AssemblyGroupHeader.Size = new System.Drawing.Size(560, 31);
       this.AssemblyGroupHeader.TabIndex = 0;
       this.AssemblyGroupHeader.TabStop = false;
       this.AssemblyGroupHeader.Text = "Assembly Group";
@@ -482,7 +482,7 @@
       this.AssemblyItemGrid.RowTemplate.Height = 28;
       this.AssemblyItemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.AssemblyItemGrid.ShowCellToolTips = false;
-      this.AssemblyItemGrid.Size = new System.Drawing.Size(632, 270);
+      this.AssemblyItemGrid.Size = new System.Drawing.Size(560, 270);
       this.AssemblyItemGrid.TabIndex = 1;
       this.AssemblyItemGrid.Text = "LJCDataGrid";
       this.AssemblyItemGrid.SelectionChanged += new System.EventHandler(this.AssemblyItemGrid_SelectionChanged);
@@ -607,7 +607,7 @@
       this.AssemblyItemHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyItemHeader.Name = "AssemblyItemHeader";
-      this.AssemblyItemHeader.Size = new System.Drawing.Size(632, 31);
+      this.AssemblyItemHeader.Size = new System.Drawing.Size(560, 31);
       this.AssemblyItemHeader.TabIndex = 0;
       this.AssemblyItemHeader.TabStop = false;
       this.AssemblyItemHeader.Text = "Assembly Item";
@@ -1406,7 +1406,7 @@
       this.TileTabs.Location = new System.Drawing.Point(0, 0);
       this.TileTabs.Name = "TileTabs";
       this.TileTabs.SelectedIndex = 0;
-      this.TileTabs.Size = new System.Drawing.Size(149, 450);
+      this.TileTabs.Size = new System.Drawing.Size(132, 450);
       this.TileTabs.TabIndex = 0;
       this.TileTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TileTabs_MouseDown);
       // 
@@ -1429,7 +1429,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
+      this.ClientSize = new System.Drawing.Size(711, 450);
       this.Controls.Add(this.TabsSplit);
       this.Name = "LJCGenDocList";
       this.Text = "GenDoc Edit";

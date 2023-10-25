@@ -40,6 +40,14 @@ exec sp_DMGAddUnique @className, 'Data',
 exec sp_DMGAddUnique @className, 'OtherData',
  '',  3
 
+set @className= 'DbColumn';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Data',
+ '',  3
+
 set @className= 'NetCommon';
 exec sp_DMGAddUnique @className, 'Static',
  '',  1
@@ -55,3 +63,9 @@ exec sp_DMGAddUnique @className, 'Value',
 set @className= 'NetString';
 exec sp_DMGAddUnique @className, 'CheckValues',
  'Check Values',  1
+exec sp_DMGAddUnique @className, 'Formatting',
+ 'Formatting',  2
+exec sp_DMGAddUnique @className, 'Parsing',
+ 'Parsing',  3
+exec sp_DMGAddUnique @className, 'Soundex',
+ 'Soundex',  4

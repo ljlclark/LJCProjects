@@ -1,8 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ValuesDocLib.cs
+// ValuesDocGen.cs
 using LJCDBClientLib;
 using LJCNetCommon;
+using System.IO;
 
 namespace LJCDocLibDAL
 {
@@ -16,11 +17,14 @@ namespace LJCDocLibDAL
     public ValuesDocGen()
     {
       StandardSettings = new StandardUISettings();
+      var fileName = "LJCDocGen.exe.config";
+      if (File.Exists(fileName))
+      {
+        SetConfigFile(fileName);
+      }
     }
 
-    /// <summary>
-    /// Configures the settings.
-    /// </summary>
+    /// <summary>Configures the settings.</summary>
     /// <param name="fileName">The config file name.</param>
     public void SetConfigFile(string fileName)
     {
@@ -42,11 +46,14 @@ namespace LJCDocLibDAL
 
     #region Properties
 
-    /// <summary>Gets or sets the ConfigFile name.</summary>
+    /// <summary>Gets the ConfigFile name.</summary>
     public string ConfigFileName { get; private set; }
 
     /// <summary>Gets or sets the generated page count.</summary>
     public int GenPageCount { get; set; }
+
+    /// <summary>Gets the StandardSettings value.</summary>
+    public StandardUISettings StandardSettings { get; private set; }
 
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesDocGen Instance
@@ -61,10 +68,8 @@ namespace LJCDocLibDAL
     #region Class Data
 
     /// <summary>Initialize Singleton.</summary>
-    internal static readonly ValuesDocGen mInstance = new ValuesDocGen();
-
-    // Gets or sets the StandardSettings value.
-    internal StandardUISettings StandardSettings { get; set; }
+    private static readonly ValuesDocGen mInstance
+      = new ValuesDocGen();
     #endregion
   }
 }

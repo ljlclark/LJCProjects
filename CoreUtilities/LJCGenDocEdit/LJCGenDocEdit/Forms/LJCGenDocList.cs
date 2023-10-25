@@ -1,10 +1,10 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGenDocEdit.cs
+using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -25,6 +25,10 @@ namespace LJCGenDocEdit
       LJCHelpFile = "GenDocEdit.chm";
 
       // Set default class data.
+      // Set DAL config before using anywhere in the program.
+      var configValues = ValuesDocGen.Instance;
+      configValues.SetConfigFile("LJCGenDocEdit.exe.config");
+      Text += $" - {configValues.StandardSettings.DataConfigName}";
       Cursor = Cursors.Default;
     }
     #endregion

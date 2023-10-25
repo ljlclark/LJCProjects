@@ -13,7 +13,7 @@ namespace GenDocScript
     // Initializes an object instance.
     internal MethodGroupHeadingScript()
     {
-      var managers = CommonGenDocScript.GetManagers();
+      var managers = ValuesDocGen.Instance.Managers;
       mHeadingManager = managers.DocMethodGroupHeadingManager;
     }
 

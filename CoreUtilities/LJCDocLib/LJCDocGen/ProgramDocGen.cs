@@ -4,7 +4,9 @@
 using LJCDocGenLib;
 using LJCDocLibDAL;
 using LJCDocObjLib;
+using LJCNetCommon;
 using System;
+using System.ComponentModel.Design;
 using System.IO;
 
 namespace LJCDocGen
@@ -34,10 +36,15 @@ namespace LJCDocGen
         {
           outputPath = args[0];
         }
-        Console.WriteLine($"\r\nLJCDocGen.exe {outputPath}\r\n");
+        Console.WriteLine();
+        Console.WriteLine($"LJCDocGen {outputPath}");
+        Console.WriteLine();
 
         var configValues = ValuesDocGen.Instance;
         configValues.SetConfigFile("LJCDocGen.exe.config");
+        var settings = configValues.StandardSettings;
+        NetCommon.ConsoleConfig(settings.DataConfigName);
+
         var managers = configValues.Managers;
         var assemblyGroupManager = managers.DocAssemblyGroupManager;
         var assemblyGroups = assemblyGroupManager.Load();

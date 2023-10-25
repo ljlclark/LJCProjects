@@ -17,7 +17,7 @@ namespace GenDocScript
     // Initializes an object instance.
     internal ClassGroupScript()
     {
-      var managers = CommonGenDocScript.GetManagers();
+      var managers = ValuesDocGen.Instance.Managers;
       mGroupManager = managers.DocClassGroupManager;
     }
 

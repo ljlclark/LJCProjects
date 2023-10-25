@@ -1,12 +1,24 @@
 ﻿
+using LJCDocLibDAL;
+using LJCNetCommon;
 using System;
 
 namespace GenDocScript
 {
   internal class ProgramGenDocScript
   {
+
     static void Main()
     {
+      Console.WriteLine();
+      Console.WriteLine($"ProgramGenDocScript");
+      Console.WriteLine();
+
+      var configValues = ValuesDocGen.Instance;
+      configValues.SetConfigFile("GenDocScript.exe.config");
+      var settings = configValues.StandardSettings;
+      NetCommon.ConsoleConfig(settings.DataConfigName);
+
       var assemblyGroupScript = new AssemblyGroupScript();
       assemblyGroupScript.Gen();
       var assemblyScript = new AssemblyScript();
