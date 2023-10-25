@@ -69,3 +69,33 @@ exec sp_DMGAddUnique @className, 'Parsing',
  'Parsing',  3
 exec sp_DMGAddUnique @className, 'Soundex',
  'Soundex',  4
+
+set @className= 'LJCItem';
+exec sp_DMGAddUnique @className, 'Data',
+ '',  1
+
+set @className= 'LJCItemCombo';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'LJCDataGrid';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'RowData',
+ 'Row Data Methods',  2
+exec sp_DMGAddUnique @className, 'ColumnData',
+ 'Column Data Methods',  3
+exec sp_DMGAddUnique @className, 'RowSet',
+ 'Row Set Methods',  4
+exec sp_DMGAddUnique @className, 'RowSelection',
+ 'Row Selection Changed',  5
+exec sp_DMGAddUnique @className, 'GridConfig',
+ 'Grid Configuration',  6
+
+set @className= 'LJCGridRow';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Value',
+ '',  2

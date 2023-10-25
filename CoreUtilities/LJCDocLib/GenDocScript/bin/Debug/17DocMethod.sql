@@ -477,3 +477,247 @@ exec sp_DMAddUnique @docClassName, @headingName,
   'Phonetic',
   'Creates a Phonetic character from the supplied text starting at the      supplied index. (D)',
   @seq;
+
+/* LJCWinFormControls */
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'ColumnData';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetMouseColumn',
+  'Retrieves the column where the mouse was clicked.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetMouseColumnIndex',
+  'Retrieves the column index where the mouse was clicked.',
+  @seq;
+
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance and adds it to a container.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'GridConfig';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetPlain',
+  'Sets the grid to a simple read-only grid.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetLastColumnAutoSizeFill',
+  'Sets the last column AutoSizeMode to "Fill" if the columns width is less      than the grid width.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCAddColumn',
+  'Adds a column to the grid.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCAddColumn',
+  'Adds a grid column.',
+  @seq, 1, 'LJCAddColumn1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCAddCheckColumn',
+  'Adds a Checkbox column.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSaveColumnValues',
+  'Saves the grid column values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCRestoreColumnValues',
+  'Restores the grid column values.',
+  @seq;
+
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'RowData';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCRowAdd',
+  'Adds a GridRow control to the grid.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCRowInsert',
+  'Inserts a GridRow control into the grid.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCRowsClear',
+  'Clears the rows without allowing SelectionChange.',
+  @seq;
+
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'RowSelection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCIsDifferentRow',
+  'Compares the current row against the last selected row.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetLastRow',
+  'Saves the last selected row index.',
+  @seq;
+
+set @docClassName = 'LJCDataGrid';
+set @headingName = 'RowSet';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetCurrentRow',
+  'Sets the current row to the specified index.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetCurrentRow',
+  'Sets the current row.',
+  @seq, 1, 'LJCSetCurrentRow1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetCurrentRow',
+  'Sets the current row to the mouse row.',
+  @seq, 1, 'LJCSetCurrentRow2';
+
+set @docClassName = 'LJCGridRow';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'LJCGridRow';
+set @headingName = 'Value';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetCellText',
+  'Sets the cell value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt32',
+  'Gets the stored int value using an int key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt32',
+  'Gets the stored int value using a string key.',
+  @seq, 1, 'LJCGetInt321';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt64',
+  'Gets the stored long value using a long key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt64',
+  'Gets the stored long value using a string key.',
+  @seq, 1, 'LJCGetInt641';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetString',
+  'Gets the stored string value using an int key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetString',
+  'Gets the stored string value using a string key.',
+  @seq, 1, 'LJCGetString1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetCellText',
+  'Sets the cell value by index.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetCellText',
+  'Sets the cell value by name.',
+  @seq, 1, 'LJCSetCellText1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetInt32',
+  'Stores an int key and int value pair.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetInt32',
+  'Stores a string key and int value pair.',
+  @seq, 1, 'LJCSetInt321';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetInt64',
+  'Stores a long key and long value pair.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetInt64',
+  'Stores a string key and long value pair.',
+  @seq, 1, 'LJCSetInt641';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetString',
+  'Stores a int key and string value pair.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetString',
+  'Stores a string key and string value pair.',
+  @seq, 1, 'LJCSetString1';
+
+set @docClassName = 'LJCItem';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'LJCItemCombo';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'LJCItemCombo';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCAddItem',
+  'Adds an Item to the ComboBox.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCExportData',
+  'Exports the grid values to a data file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSelectedItemID',
+  'Gets the combo SelectedItem ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetByItemID',
+  'Sets the combo SelectedIndex to the item with the specified ID value.',
+  @seq;
