@@ -21,8 +21,14 @@ declare @className nvarchar(60);
 set @className= 'DataAccess';
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
-exec sp_DMGAddUnique @className, 'Data',
- '',  2
+exec sp_DMGAddUnique @className, 'NonQuery',
+ 'Insert Update and Delete',  2
+exec sp_DMGAddUnique @className, 'Select',
+ 'Select Methods',  3
+exec sp_DMGAddUnique @className, 'Script',
+ 'Script Methods',  4
+exec sp_DMGAddUnique @className, 'StoredProcedure',
+ 'Stored Procedure',  5
 
 set @className= 'ProcedureParameters';
 exec sp_DMGAddUnique @className, 'Constructor',
@@ -35,9 +41,95 @@ exec sp_DMGAddUnique @className, 'SearchSort',
 set @className= 'DataManager';
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
+exec sp_DMGAddUnique @className, 'DataAccess',
+ 'Data Access Methods',  2
+exec sp_DMGAddUnique @className, 'OtherData',
+ '',  3
+
+set @className= 'DbCondition';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
 exec sp_DMGAddUnique @className, 'Data',
  '',  2
-exec sp_DMGAddUnique @className, 'OtherData',
+
+set @className= 'DbConditions';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+
+set @className= 'DbConditionSet';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'DbFilter';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'DbFilters';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+
+set @className= 'DbJoin';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'DbJoinOn';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'DbJoinOns';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+
+set @className= 'DbJoins';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+
+set @className= 'DbRequest';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Data',
+ '',  3
+
+set @className= 'DbResult';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  7
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  8
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  9
+
+set @className= 'DbRow';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+
+set @className= 'DbRows';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
  '',  3
 
 set @className= 'DbColumn';
@@ -99,3 +191,19 @@ exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
 exec sp_DMGAddUnique @className, 'Value',
  '',  2
+
+set @className= 'LJCTabControl';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'LJCTabPanel';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'EventHandlers',
+ 'Event Handlers',  2
+
+set @className= 'PanelControlsAdjust';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1

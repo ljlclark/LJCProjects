@@ -121,11 +121,6 @@ set @assemblyName = 'LJCGridDataLib';
 set @headingName = 'DataGrid';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName,
-  'ResultGridData',
-  'Provides DbResult helpers for an LJCDataGrid control.',
-  @seq;
-set @seq += 1;
-exec sp_DCAddUnique @assemblyName, @headingName,
   'TableGridData',
   'Provides DataTable helpers for an LJCDataGrid control.',
   @seq;
