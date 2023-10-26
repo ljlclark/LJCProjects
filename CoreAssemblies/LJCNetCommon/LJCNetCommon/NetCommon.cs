@@ -693,6 +693,7 @@ namespace LJCNetCommon
       Console.Write($"Continue with DataConfig - {dataConfigName}? (Y/N) ");
       if (Console.ReadKey().Key != ConsoleKey.Y)
       {
+        Console.WriteLine();
         Environment.Exit(0);
       }
       Console.WriteLine();
