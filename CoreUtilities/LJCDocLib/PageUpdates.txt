@@ -1,0 +1,36 @@
+LJCNetCommon*
+  NetCommon
+  NetString
+  DbColumn
+
+LJCWinFormControls*
+  LJCItem
+  LJCItemCombo
+  LJCDataGrid
+  LJCGridRow
+  LJCTabControl
+  LJCTabPanel
+  PanelControlsAdjust
+
+LJCDataAccess
+  DataAccess
+  ProcedureParameters
+
+LJCDBClientLib
+  DataManager
+
+LJCDBMessage*
+  DbCondition
+  DbConditions
+  DbConditionSet
+  DbFilter
+  DbFilters
+  DbJoin
+  DbJoinOn
+  DbJoinOns
+  DbJoins
+  DbRequest
+
+  DbResult
+  DbRow
+  DbRows
