@@ -5,6 +5,7 @@ using LJCDocLibDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using LJCWinFormControls;
+using System;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -131,29 +132,29 @@ namespace LJCGenDocEdit
     internal void DoSelect()
     {
       mMethodSelect.LJCSelectedRecord = null;
-      if (mMethodGrid.CurrentRow is LJCGridRow _)
+      // *** Begin *** Change - MultiSelect 10/29/23
+      foreach (LJCGridRow row in mMethodGrid.SelectedRows)
       {
         mMethodSelect.Cursor = Cursors.WaitCursor;
-        // *** Begin *** Change - 7/9/23 #Overload
         DataMethod dataObject = null;
-        var overloadName = DocMethodOverload();
+        var overloadName = DocMethodOverload(row);
         if (overloadName != null)
         {
           dataObject = mDataMethods.Find(x => x.OverloadName == overloadName);
         }
         else
         {
-          var name = DocMethodName();
+          var name = DocMethodName(row);
           dataObject = mDataMethods.Find(x => x.Name == name);
         }
-
-        // *** End   *** Change - 7/9/23 #Overload
         if (dataObject != null)
         {
           mMethodSelect.LJCSelectedRecord = dataObject;
+          mMethodSelect.LJCOnChange();
         }
-        mMethodSelect.Cursor = Cursors.Default;
       }
+      mMethodSelect.Cursor = Cursors.Default;
+      // *** End   *** Change - MultiSelect 10/29/23
       mMethodSelect.DialogResult = DialogResult.OK;
     }
     #endregion
@@ -205,6 +206,9 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
+      // *** Next Statement *** Add - MultiSelect 10/29/23
+      mMethodGrid.MultiSelect = true;
+
       // Setup default grid columns if no columns are defined.
       if (0 == mMethodGrid.Columns.Count)
       {

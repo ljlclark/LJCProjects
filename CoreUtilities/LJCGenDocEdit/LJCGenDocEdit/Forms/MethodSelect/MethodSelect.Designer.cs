@@ -68,7 +68,6 @@
       this.MethodGrid.LJCLastRowIndex = -1;
       this.MethodGrid.LJCRowHeight = 0;
       this.MethodGrid.Location = new System.Drawing.Point(0, 0);
-      this.MethodGrid.MultiSelect = false;
       this.MethodGrid.Name = "MethodGrid";
       this.MethodGrid.RowHeadersVisible = false;
       this.MethodGrid.RowHeadersWidth = 62;
