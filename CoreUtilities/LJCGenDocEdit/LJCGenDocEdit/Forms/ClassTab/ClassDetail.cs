@@ -452,9 +452,40 @@ namespace LJCGenDocEdit
       {
         LJCAssemblyID = LJCAssemblyID
       };
+      // *** Next Statement *** Add MultiSelect 10/29/23
+      list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        var dataType = list.LJCSelectedRecord;
+        // *** Begin *** Change - MultiSelect 10/29/23
+        if (1 == list.ClassGrid.SelectedRows.Count)
+        {
+          SelectedChange(list);
+        }
+        // *** End   *** Change - MultiSelect 10/29/23
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void List_LJCChange(object sender, EventArgs e)
+    {
+      if (sender is ClassSelect list
+        && list.ClassGrid.SelectedRows.Count > 1)
+      {
+        SelectedChange(list);
+        if (IsValid()
+          && DataSave())
+        {
+          LJCOnChange();
+        }
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void SelectedChange(ClassSelect list)
+    {
+      var dataType = list.LJCSelectedRecord;
+      if (dataType != null)
+      {
         NameText.Text = dataType.Name;
         var description = NetString.RemoveTags(dataType.Summary);
         DescriptionText.Text = NetString.Truncate(description

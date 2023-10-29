@@ -230,7 +230,7 @@ namespace LJCGenDocEdit
       }
       DoResetSequence();
       selectList.Cursor = Cursors.Default;
-      // *** Begin *** Change - MultiSelect 10/29/23
+      // *** End *** Change - MultiSelect 10/29/23
       selectList.DialogResult = DialogResult.OK;
     }
 

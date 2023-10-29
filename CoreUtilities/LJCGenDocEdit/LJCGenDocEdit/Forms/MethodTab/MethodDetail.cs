@@ -473,25 +473,33 @@ namespace LJCGenDocEdit
       list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        // *** Begin *** Delete - MultiSelect 10/29/23
-        //var dataMethod = list.LJCSelectedRecord;
-        //NameText.Text = dataMethod.Name;
-        //OverloadText.Text = dataMethod.OverloadName;
-        //if (false == NetString.HasValue(dataMethod.Summary))
-        //{
-        //  dataMethod.Summary = "Missing Summary";
-        //}
-        //var description = NetString.RemoveTags(dataMethod.Summary);
-        //DescriptionText.Text = NetString.Truncate(description
-        //  , DocMethod.LengthDescription);
-        // *** End   *** Delete - MultiSelect 10/29/23
+        // *** Begin *** Change - MultiSelect 10/29/23
+        if (1 == list.MethodGrid.SelectedRows.Count)
+        {
+          SelectedChange(list);
+        }
+        // *** End   *** Change - MultiSelect 10/29/23
       }
     }
 
     // *** Add Method *** MultiSelect - 10/29/23
     private void List_LJCChange(object sender, EventArgs e)
     {
-      var list = sender as MethodSelect;
+      if (sender is MethodSelect list
+        && list.MethodGrid.SelectedRows.Count > 1)
+      {
+        SelectedChange(list);
+        if (IsValid()
+          && DataSave())
+        {
+          LJCOnChange();
+        }
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void SelectedChange(MethodSelect list)
+    {
       var dataMethod = list.LJCSelectedRecord;
       if (dataMethod != null)
       {
@@ -504,11 +512,6 @@ namespace LJCGenDocEdit
         var description = NetString.RemoveTags(dataMethod.Summary);
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);
-        if (IsValid()
-          && DataSave())
-        {
-          LJCOnChange();
-        }
       }
     }
 

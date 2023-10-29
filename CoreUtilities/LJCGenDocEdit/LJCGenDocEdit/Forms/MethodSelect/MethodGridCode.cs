@@ -138,8 +138,8 @@ namespace LJCGenDocEdit
       var startIndex = rows.Count - 1;
       for (var index = startIndex; index >= 0; index--)
       {
-        var row = rows[index] as LJCGridRow;
         selectList.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
         DataMethod dataObject = null;
         var overloadName = DocMethodOverload(row);
         if (overloadName != null)

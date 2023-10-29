@@ -171,10 +171,8 @@ namespace LJCGenDocEdit
       string message;
       bool success = false;
 
-      var classRow = mClassGrid.CurrentRow as LJCGridRow;
-      var methodGroupRow = mMethodGroupGrid.CurrentRow as LJCGridRow;
-      if (classRow != null
-        && methodGroupRow != null)
+      if (mClassGrid.CurrentRow is LJCGridRow _
+        && mMethodGroupGrid.CurrentRow is LJCGridRow _)
       {
         title = "Delete Confirmation";
         message = FormCommon.DeleteConfirm;
@@ -203,7 +201,8 @@ namespace LJCGenDocEdit
         }
       }
 
-      if (success)
+      if (success
+        && mMethodGroupGrid.CurrentRow is LJCGridRow methodGroupRow)
       {
         mMethodGroupGrid.Rows.Remove(methodGroupRow);
         mDocList.TimedChange(Change.MethodGroup);

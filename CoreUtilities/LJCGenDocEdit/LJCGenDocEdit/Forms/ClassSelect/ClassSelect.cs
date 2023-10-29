@@ -73,6 +73,14 @@ namespace LJCGenDocEdit
 
     #region Control Event Handlers
 
+    // Fires the Change event.
+    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // *** Add Method *** MultiSelect 10/29/23
+    internal void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
     // Handles the form keys.
     private void ClassGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -100,10 +108,14 @@ namespace LJCGenDocEdit
       {
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         ClassGrid.Select();
-        if (ClassGrid.LJCIsDifferentRow(e))
+        // *** Next Statement *** Add - MultiSelect 10/29/23 
+        if (1 == ClassGrid.SelectedRows.Count)
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          ClassGrid.LJCSetCurrentRow(e);
+          if (ClassGrid.LJCIsDifferentRow(e))
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ClassGrid.LJCSetCurrentRow(e);
+          }
         }
       }
     }
@@ -113,6 +125,13 @@ namespace LJCGenDocEdit
     {
       ClassGrid.LJCAllowSelectionChange = true;
     }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The Change event.</summary>
+    /// // *** Next Statement *** Add - MultiSelect 10/29/23
+    public event EventHandler<EventArgs> LJCChange;
     #endregion
   }
 }

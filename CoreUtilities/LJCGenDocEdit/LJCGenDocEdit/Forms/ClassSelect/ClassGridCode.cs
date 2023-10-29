@@ -85,19 +85,34 @@ namespace LJCGenDocEdit
     /// <summary>Sets the selected item and returns to the parent form.</summary>
     internal void DoSelect()
     {
+      var selectList = mClassSelect;
       mClassSelect.LJCSelectedRecord = null;
-      if (mClassGrid.CurrentRow is LJCGridRow _)
+      // *** Begin *** Change - MultiSelect 10/29/23
+      var rows = mClassGrid.SelectedRows;
+      var startIndex = rows.Count - 1;
+      for (var index = startIndex; index >= 0; index--)
       {
-        mClassSelect.Cursor = Cursors.WaitCursor;
+        selectList.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
         var name = ClassName();
-        var dataRecord = mDataTypes.Find(x => x.Name == name);
-        if (dataRecord != null)
+        var dataObject = mDataTypes.Find(x => x.Name == name);
+        if (dataObject != null)
         {
-          mClassSelect.LJCSelectedRecord = dataRecord;
+          selectList.LJCSelectedRecord = dataObject;
+          selectList.LJCOnChange();
         }
-        mClassSelect.Cursor = Cursors.Default;
       }
-      mClassSelect.DialogResult = DialogResult.OK;
+      DoResetSequence();
+      selectList.Cursor = Cursors.Default;
+      // *** End   *** Change - MultiSelect 10/29/23
+      selectList.DialogResult = DialogResult.OK;
+    }
+
+    /// <summary>Resets the Sequence column values.</summary>
+    internal void DoResetSequence()
+    {
+      var classManager = Managers.DocClassManager;
+      classManager.ResetSequence();
     }
     #endregion
 
@@ -152,6 +167,9 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
+      // *** Next Statement *** Add - MultiSelect 10/29/23
+      mClassGrid.MultiSelect = true;
+
       // Setup default grid columns if no columns are defined.
       if (0 == mClassGrid.Columns.Count)
       {
