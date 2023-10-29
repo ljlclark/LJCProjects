@@ -32,6 +32,14 @@ exec sp_DCGAddUnique @assemblyName,  'Reflection',
 exec sp_DCGAddUnique @assemblyName,  'Syntax',
  'Syntax Classes',  6
 
+set @assemblyName= 'LJCWinFormCommon';
+exec sp_DCGAddUnique @assemblyName,  'Static',
+ '',  1
+exec sp_DCGAddUnique @assemblyName,  'Collection',
+ '',  2
+exec sp_DCGAddUnique @assemblyName,  'Comparer',
+ '',  3
+
 set @assemblyName= 'LJCWinFormControls';
 exec sp_DCGAddUnique @assemblyName,  'Ungrouped',
  '',  1
@@ -48,6 +56,10 @@ exec sp_DCGAddUnique @assemblyName,  'DataGrid',
 
 set @assemblyName= 'LJCDataAccess';
 exec sp_DCGAddUnique @assemblyName,  'Ungrouped',
+ '',  1
+
+set @assemblyName= 'LJCDataAccessConfig';
+exec sp_DCGAddUnique @assemblyName,  'Collection',
  '',  1
 
 set @assemblyName= 'LJCDBClientLib';

@@ -35,6 +35,30 @@ exec sp_DCAddUnique @assemblyName, @headingName,
   '',
   @seq;
 
+/* LJCDataAccessConfig */
+set @assemblyName = 'LJCDataAccessConfig';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ConnectionTemplate',
+  'Represents a Connection String template.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ConnectionTemplates',
+  'Represents a collection of Connection string templates.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DataConfig',
+  'Represents a data location configuration.      (R)',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DataConfigs',
+  'Represents a collection of DataConfig objects.',
+  @seq;
+
 /* LJCDBClientLib */
 set @assemblyName = 'LJCDBClientLib';
 set @headingName = 'DataAccess';
@@ -330,6 +354,46 @@ set @seq += 1;
 exec sp_DCAddUnique @assemblyName, @headingName,
   'RefTypes',
   'Represents a collection of Reference Types.',
+  @seq;
+
+/* LJCWinFormCommon */
+set @assemblyName = 'LJCWinFormCommon';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlValue',
+  'Represents a control's position and size.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlValues',
+  'Represents a collection of ControlValue objects.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ModuleReference',
+  'Represents a module reference.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ModuleReferences',
+  'Represents a collection of ModuleReference objects.',
+  @seq;
+
+set @assemblyName = 'LJCWinFormCommon';
+set @headingName = 'Comparer';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ModuleNameComparer',
+  'Sort and search on file name and module name.',
+  @seq;
+
+set @assemblyName = 'LJCWinFormCommon';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'FormCommon',
+  'Provides common WinForms methods.',
   @seq;
 
 /* LJCWinFormControls */

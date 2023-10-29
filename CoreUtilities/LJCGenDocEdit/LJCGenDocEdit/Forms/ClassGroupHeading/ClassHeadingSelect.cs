@@ -103,6 +103,14 @@ namespace LJCGenDocEdit
 
     #region Control Event Handlers
 
+    // Fires the Change event.
+    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // *** Add Method *** MultiSelect 10/29/23
+    internal void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
     // Handles the DragDrop event.
     private void ClassHeadingGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -142,10 +150,14 @@ namespace LJCGenDocEdit
       {
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         ClassHeadingGrid.Select();
-        if (ClassHeadingGrid.LJCIsDifferentRow(e))
+        // *** Next Statement *** Add - MultiSelect 10/29/23 
+        if (1 == ClassHeadingGrid.SelectedRows.Count)
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          ClassHeadingGrid.LJCSetCurrentRow(e);
+          if (ClassHeadingGrid.LJCIsDifferentRow(e))
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ClassHeadingGrid.LJCSetCurrentRow(e);
+          }
         }
       }
     }
@@ -155,6 +167,18 @@ namespace LJCGenDocEdit
     {
       ClassHeadingGrid.LJCAllowSelectionChange = true;
     }
+    #endregion
+
+    #region Properties
+
+    public bool LastMultiSelect { get; set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The Change event.</summary>
+    /// // *** Next Statement *** Add - MultiSelect 10/29/23
+    public event EventHandler<EventArgs> LJCChange;
     #endregion
   }
 }

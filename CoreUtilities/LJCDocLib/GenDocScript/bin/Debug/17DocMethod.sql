@@ -1731,6 +1731,246 @@ exec sp_DMAddUnique @docClassName, @headingName,
   'Checks if the collection has items.',
   @seq;
 
+/* LJCWinFormCommon */
+set @docClassName = 'ControlValue';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates the ControlValue object from the supplied values and adds      the element to the collectio',
+  @seq;
+
+set @docClassName = 'ControlValues';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlValues';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'ActionState';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetMenuState',
+  'Sets the enable state for the menu items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetToolState',
+  'Sets the enable state for the tool items.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'Error';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShowError',
+  'Displays the error text if not null.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShowHasError',
+  'Displays "No records affected." if the affected count is less than 1.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'File';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SaveFile',
+  'Displays the Save dialog to select a file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SelectFile',
+  'Displays the Open dialog to select a file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShellFile',
+  'Execute a program with the selected file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShellProgram',
+  'Executes an external program.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'General';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateTablesPrompt',
+  'Verify create of missing tables.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RestoreSplitDistance',
+  'Restore the splitter distance.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetString',
+  'Sets the string to "-" if it is empty or blanks and to "" if it is "-".',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetLabelsBackColor',
+  'Sets the BackColor for the labels.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'Image';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateGradient',
+  'Draws a gradient in the specified rectangle.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CropImage',
+  'Crops an image.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ResizeImage',
+  'Resizes an image.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TransformCrop',
+  'Transforms the crop rectangle values of the sample image relative      to the values of the origina',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'KeyHandler';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HandleNumberOrEditKey',
+  'Checks the key character for a numeric or allowed control value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HandleSpace',
+  'Checks the key character for a space.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'StripBlanks',
+  'Strips blanks from the string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'StripNonDigits',
+  'Strips non-digits from a string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNoSpace_KeyPress',
+  'Does not allow spaces.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNoSpace_TextChanged',
+  'Strips blanks from the text value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNumeric_KeyPress',
+  'Only allows numbers or edit keys.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'ScreenPoint';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDialogScreenPoint',
+  'Gets the Grid target Dialog screen position.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetMenuScreenPoint',
+  'Get the control target menu screen position.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetScreenRectangle',
+  'Gets the Control screen rectangle.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetScreenPoint',
+  'Converts the Control point to Screen point.',
+  @seq;
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'GetReference';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetAssembly',
+  'Retrieves the Assembly reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetControlInstance',
+  'Retrieves the ConrolInstance reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetControlType',
+  'Retrieves the ControlType reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEventInfo',
+  'Retrieves the PageClose event info.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetInitMethodInfo',
+  'Retrieves the LJCInit() MethodInfo reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetTabControl',
+  'Retrieves the TabControl reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetTabsMethodInfo',
+  'Retrieves the LJCTabs() MethodInfo reference.',
+  @seq;
+
 /* LJCWinFormControls */
 set @docClassName = 'LJCDataGrid';
 set @headingName = 'ColumnData';

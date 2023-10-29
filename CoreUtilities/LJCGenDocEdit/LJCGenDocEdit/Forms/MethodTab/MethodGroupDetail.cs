@@ -483,6 +483,10 @@ namespace LJCGenDocEdit
           && DataSave())
         {
           LJCOnChange();
+          if (list.LastMultiSelect)
+          {
+            DialogResult = DialogResult.OK;
+          }
         }
       }
     }

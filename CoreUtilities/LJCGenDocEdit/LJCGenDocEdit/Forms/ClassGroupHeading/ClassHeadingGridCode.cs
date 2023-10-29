@@ -210,20 +210,33 @@ namespace LJCGenDocEdit
     /// <summary>Sets the selected item and returns to the parent form.</summary>
     internal void DoSelect()
     {
-      mClassHeadingSelect.LJCSelectedRecord = null;
-      if (mClassHeadingGrid.CurrentRow is LJCGridRow _)
+      var selectList = mClassHeadingSelect;
+      selectList.LJCSelectedRecord = null;
+      // *** Begin *** Change - MultiSelect 10/29/23
+      var rows = mClassHeadingGrid.SelectedRows;
+      var startIndex = rows.Count - 1;
+      for (var index = startIndex; index >= 0; index--)
       {
-        mClassHeadingSelect.Cursor = Cursors.WaitCursor;
+        selectList.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
         var manager = Managers.DocClassGroupHeadingManager;
-        var keyRecord = manager.GetIDKey(ClassHeadingID());
-        var dataRecord = manager.Retrieve(keyRecord);
-        if (dataRecord != null)
+        var keyRecord = manager.GetIDKey(ClassHeadingID(row));
+        var dataObject = manager.Retrieve(keyRecord);
+        if (dataObject != null)
         {
-          mClassHeadingSelect.LJCSelectedRecord = dataRecord;
+          selectList.LJCSelectedRecord = dataObject;
+          selectList.LastMultiSelect = false;
+          if (0 == index)
+          {
+            selectList.LastMultiSelect = true;
+          }
+          selectList.LJCOnChange();
         }
-        mClassHeadingSelect.Cursor = Cursors.Default;
       }
-      mClassHeadingSelect.DialogResult = DialogResult.OK;
+      DoResetSequence();
+      selectList.Cursor = Cursors.Default;
+      // *** End *** Change - MultiSelect 10/29/23
+      selectList.DialogResult = DialogResult.OK;
     }
 
     /// <summary>Resets the Sequence column values.</summary>
@@ -309,6 +322,9 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
+      // *** Next Statement *** Add - MultiSelect 10/29/23
+      mClassHeadingGrid.MultiSelect = true;
+
       // Setup default grid columns if no columns are defined.
       if (0 == mClassHeadingGrid.Columns.Count)
       {

@@ -127,7 +127,10 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    #region Properties
+
     public bool LastMultiSelect { get; set; }
+    #endregion
 
     #region Class Data
 

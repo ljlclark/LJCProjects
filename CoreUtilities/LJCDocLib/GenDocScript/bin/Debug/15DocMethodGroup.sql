@@ -303,3 +303,39 @@ exec sp_DMGAddUnique @className, 'EventHandlers',
 set @className= 'PanelControlsAdjust';
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
+
+set @className= 'ControlValue';
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+
+set @className= 'ControlValues';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  4
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  5
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  6
+
+set @className= 'ModuleReference';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  8
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  9
+exec sp_DMGAddUnique @className, 'GetReference',
+ 'Get Object Reference',  10
+
+set @className= 'FormCommon';
+exec sp_DMGAddUnique @className, 'General',
+ 'General Functions',  2
+exec sp_DMGAddUnique @className, 'ActionState',
+ 'Action State Functions',  2
+exec sp_DMGAddUnique @className, 'Error',
+ 'Error Functions',  3
+exec sp_DMGAddUnique @className, 'KeyHandler',
+ 'Key Handler Functions',  4
+exec sp_DMGAddUnique @className, 'File',
+ 'File Functions',  5
+exec sp_DMGAddUnique @className, 'Image',
+ 'Image Functions',  6
+exec sp_DMGAddUnique @className, 'ScreenPoint',
+ 'ScreenPoint Functions',  7

@@ -217,14 +217,19 @@ namespace LJCGenDocEdit
       var startIndex = rows.Count - 1;
       for (var index = startIndex; index >= 0; index--)
       {
-        var row = rows[index] as LJCGridRow;
         selectList.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
         var manager = Managers.DocMethodGroupHeadingManager;
         var keyRecord = manager.GetIDKey(MethodHeadingID(row));
-        var dataRecord = manager.Retrieve(keyRecord);
-        if (dataRecord != null)
+        var dataObject = manager.Retrieve(keyRecord);
+        if (dataObject != null)
         {
-          selectList.LJCSelectedRecord = dataRecord;
+          selectList.LJCSelectedRecord = dataObject;
+          selectList.LastMultiSelect = false;
+          if (0 == index)
+          {
+            selectList.LastMultiSelect = true;
+          }
           selectList.LJCOnChange();
         }
       }

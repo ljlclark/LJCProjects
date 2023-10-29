@@ -473,17 +473,50 @@ namespace LJCGenDocEdit
       {
         LJCIsSelect = true
       };
+      // *** Next Statement *** Add MultiSelect 10/29/23
+      list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        var groupHeading = list.LJCSelectedRecord;
-        if (groupHeading != null)
+        // *** Begin *** Change - MultiSelect 10/29/23
+        if (1 == list.ClassHeadingGrid.SelectedRows.Count)
         {
-          mDocClassGroupHeadingID = groupHeading.ID;
-          NameText.Text = groupHeading.Name;
-          NameText.ReadOnly = true;
-          HeadingText.Text = groupHeading.Heading;
-          HeadingText.ReadOnly = true;
+          SelectedChange(list);
         }
+        // *** End   *** Change - MultiSelect 10/29/23
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void List_LJCChange(object sender, EventArgs e)
+    {
+      // Save if more than one row is selected.
+      if (sender is ClassHeadingSelect list
+        && list.ClassHeadingGrid.SelectedRows.Count > 1)
+      {
+        SelectedChange(list);
+        if (IsValid()
+          && DataSave())
+        {
+          LJCOnChange();
+          if (list.LastMultiSelect)
+          {
+            DialogResult = DialogResult.OK;
+          }
+        }
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void SelectedChange(ClassHeadingSelect list)
+    {
+      var groupHeading = list.LJCSelectedRecord;
+      if (groupHeading != null)
+      {
+        mDocClassGroupHeadingID = groupHeading.ID;
+        NameText.Text = groupHeading.Name;
+        NameText.ReadOnly = true;
+        HeadingText.Text = groupHeading.Heading;
+        HeadingText.ReadOnly = true;
       }
     }
 
