@@ -157,9 +157,17 @@ namespace LJCGenDocEdit
           selectList.LJCOnChange();
         }
       }
+      DoResetSequence();
       selectList.Cursor = Cursors.Default;
       // *** End   *** Change - MultiSelect 10/29/23
       selectList.DialogResult = DialogResult.OK;
+    }
+
+    /// <summary>Resets the Sequence column values.</summary>
+    internal void DoResetSequence()
+    {
+      var methodManager = Managers.DocMethodGroupManager;
+      methodManager.ResetSequence();
     }
     #endregion
 

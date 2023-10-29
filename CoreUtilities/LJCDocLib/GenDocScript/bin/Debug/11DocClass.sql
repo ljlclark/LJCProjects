@@ -37,11 +37,59 @@ exec sp_DCAddUnique @assemblyName, @headingName,
 
 /* LJCDBClientLib */
 set @assemblyName = 'LJCDBClientLib';
-set @headingName = '';
+set @headingName = 'DataAccess';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DbServiceClient',
+  'The Proxy client object.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DbServiceRef',
+  'Contains the      DbDataAccess,      local DbService and      DbServiceClient      proxy referen',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'IDbService',
+  'The Proxy DbService contract.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'IDbServiceChannel',
+  'The Proxy ServiceChannel contract.',
+  @seq;
+
+set @assemblyName = 'LJCDBClientLib';
+set @headingName = 'DataManager';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName,
   'DataManager',
   '',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DbManager',
+  'Provides DbDataAccess data manipulation methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'IDataManager',
+  'Provides standard data manipulation.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ManagerCommon',
+  'Contains common static manager methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ObjectManager`2',
+  'Provides object specific data methods.      (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'SQLManager',
+  'Provides SQL data manipulation methods.',
   @seq;
 
 /* LJCDBMessage */

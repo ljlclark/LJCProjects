@@ -51,8 +51,10 @@ exec sp_DCGAddUnique @assemblyName,  'Ungrouped',
  '',  1
 
 set @assemblyName= 'LJCDBClientLib';
-exec sp_DCGAddUnique @assemblyName,  'Ungrouped',
- '',  1
+exec sp_DCGAddUnique @assemblyName,  'DataAccess',
+ 'Data Access',  2
+exec sp_DCGAddUnique @assemblyName,  'DataManager',
+ 'Data Manager',  3
 
 set @assemblyName= 'LJCDBMessage';
 exec sp_DCGAddUnique @assemblyName,  'Ungrouped',
