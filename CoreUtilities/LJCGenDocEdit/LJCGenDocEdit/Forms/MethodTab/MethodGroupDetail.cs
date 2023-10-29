@@ -458,16 +458,40 @@ namespace LJCGenDocEdit
       {
         LJCIsSelect = true
       };
+      // *** Next Statement *** Add MultiSelect 10/29/23
+      list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        var groupHeading = list.LJCSelectedRecord;
-        if (groupHeading != null)
+        // *** Begin *** Delete - MultiSelect 10/29/23
+        //var groupHeading = list.LJCSelectedRecord;
+        //if (groupHeading != null)
+        //{
+        //  mDocMethodGroupHeadingID = groupHeading.ID;
+        //  NameText.Text = groupHeading.Name;
+        //  NameText.ReadOnly = true;
+        //  HeadingText.Text = groupHeading.Heading;
+        //  HeadingText.ReadOnly = true;
+        //}
+        // *** End   *** Delete - MultiSelect 10/29/23
+      }
+    }
+
+    // *** Add Method *** MultiSelect - 10/29/23
+    private void List_LJCChange(object sender, EventArgs e)
+    {
+      var list = sender as MethodHeadingSelect;
+      var groupHeading = list.LJCSelectedRecord;
+      if (groupHeading != null)
+      {
+        mDocMethodGroupHeadingID = groupHeading.ID;
+        NameText.Text = groupHeading.Name;
+        NameText.ReadOnly = true;
+        HeadingText.Text = groupHeading.Heading;
+        HeadingText.ReadOnly = true;
+        if (IsValid()
+          && DataSave())
         {
-          mDocMethodGroupHeadingID = groupHeading.ID;
-          NameText.Text = groupHeading.Name;
-          NameText.ReadOnly = true;
-          HeadingText.Text = groupHeading.Heading;
-          HeadingText.ReadOnly = true;
+          LJCOnChange();
         }
       }
     }

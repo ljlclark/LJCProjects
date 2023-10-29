@@ -210,20 +210,27 @@ namespace LJCGenDocEdit
     /// <summary>Sets the selected item and returns to the parent form.</summary>
     internal void DoSelect()
     {
-      mMethodHeadingSelect.LJCSelectedRecord = null;
-      if (mMethodHeadingGrid.CurrentRow is LJCGridRow _)
+      var selectList = mMethodHeadingSelect;
+      selectList.LJCSelectedRecord = null;
+      // *** Begin *** Change - MultiSelect 10/29/23
+      var rows = mMethodHeadingGrid.SelectedRows;
+      var startIndex = rows.Count - 1;
+      for (var index = startIndex; index >= 0; index--)
       {
-        mMethodHeadingSelect.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
+        selectList.Cursor = Cursors.WaitCursor;
         var manager = Managers.DocMethodGroupHeadingManager;
-        var keyRecord = manager.GetIDKey(MethodHeadingID());
+        var keyRecord = manager.GetIDKey(MethodHeadingID(row));
         var dataRecord = manager.Retrieve(keyRecord);
         if (dataRecord != null)
         {
-          mMethodHeadingSelect.LJCSelectedRecord = dataRecord;
+          selectList.LJCSelectedRecord = dataRecord;
+          selectList.LJCOnChange();
         }
-        mMethodHeadingSelect.Cursor = Cursors.Default;
       }
-      mMethodHeadingSelect.DialogResult = DialogResult.OK;
+      selectList.Cursor = Cursors.Default;
+      // *** Begin *** Change - MultiSelect 10/29/23
+      selectList.DialogResult = DialogResult.OK;
     }
 
     /// <summary>Resets the Sequence column values.</summary>
@@ -309,6 +316,9 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
+      // *** Next Statement *** Add - MultiSelect 10/29/23
+      mMethodHeadingGrid.MultiSelect = true;
+
       // Setup default grid columns if no columns are defined.
       if (0 == mMethodHeadingGrid.Columns.Count)
       {

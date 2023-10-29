@@ -131,11 +131,15 @@ namespace LJCGenDocEdit
     /// <summary>Sets the selected item and returns to the parent form.</summary>
     internal void DoSelect()
     {
-      mMethodSelect.LJCSelectedRecord = null;
+      var selectList = mMethodSelect;
+      selectList.LJCSelectedRecord = null;
       // *** Begin *** Change - MultiSelect 10/29/23
-      foreach (LJCGridRow row in mMethodGrid.SelectedRows)
+      var rows = mMethodGrid.SelectedRows;
+      var startIndex = rows.Count - 1;
+      for (var index = startIndex; index >= 0; index--)
       {
-        mMethodSelect.Cursor = Cursors.WaitCursor;
+        var row = rows[index] as LJCGridRow;
+        selectList.Cursor = Cursors.WaitCursor;
         DataMethod dataObject = null;
         var overloadName = DocMethodOverload(row);
         if (overloadName != null)
@@ -149,13 +153,13 @@ namespace LJCGenDocEdit
         }
         if (dataObject != null)
         {
-          mMethodSelect.LJCSelectedRecord = dataObject;
-          mMethodSelect.LJCOnChange();
+          selectList.LJCSelectedRecord = dataObject;
+          selectList.LJCOnChange();
         }
       }
-      mMethodSelect.Cursor = Cursors.Default;
+      selectList.Cursor = Cursors.Default;
       // *** End   *** Change - MultiSelect 10/29/23
-      mMethodSelect.DialogResult = DialogResult.OK;
+      selectList.DialogResult = DialogResult.OK;
     }
     #endregion
 

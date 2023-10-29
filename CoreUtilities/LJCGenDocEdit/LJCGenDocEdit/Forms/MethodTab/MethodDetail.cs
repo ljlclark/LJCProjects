@@ -488,26 +488,27 @@ namespace LJCGenDocEdit
       }
     }
 
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     // *** Add Method *** MultiSelect - 10/29/23
     private void List_LJCChange(object sender, EventArgs e)
     {
       var list = sender as MethodSelect;
       var dataMethod = list.LJCSelectedRecord;
-      NameText.Text = dataMethod.Name;
-      OverloadText.Text = dataMethod.OverloadName;
-      if (false == NetString.HasValue(dataMethod.Summary))
+      if (dataMethod != null)
       {
-        dataMethod.Summary = "Missing Summary";
-      }
-      var description = NetString.RemoveTags(dataMethod.Summary);
-      DescriptionText.Text = NetString.Truncate(description
-        , DocMethod.LengthDescription);
-      if (IsValid()
-        && DataSave())
-      {
-        LJCOnChange();
+        NameText.Text = dataMethod.Name;
+        OverloadText.Text = dataMethod.OverloadName;
+        if (false == NetString.HasValue(dataMethod.Summary))
+        {
+          dataMethod.Summary = "Missing Summary";
+        }
+        var description = NetString.RemoveTags(dataMethod.Summary);
+        DescriptionText.Text = NetString.Truncate(description
+          , DocMethod.LengthDescription);
+        if (IsValid()
+          && DataSave())
+        {
+          LJCOnChange();
+        }
       }
     }
 

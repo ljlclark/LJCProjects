@@ -140,6 +140,26 @@ exec sp_DMGAddUnique @className, 'Constructor',
 exec sp_DMGAddUnique @className, 'Data',
  '',  3
 
+set @className= 'LJCAssemblyReflect';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'SetReflectionObjects',
+ 'Set Reflection Objects',  2
+exec sp_DMGAddUnique @className, 'GetSyntax',
+ 'Get Syntax Methods',  3
+exec sp_DMGAddUnique @className, 'BoolCheckMethods',
+ 'Bool Check Methods',  4
+
+set @className= 'LJCReflect';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2
+exec sp_DMGAddUnique @className, 'Value',
+ '',  3
+exec sp_DMGAddUnique @className, 'SetMethods',
+ 'Set Methods',  4
+
 set @className= 'NetCommon';
 exec sp_DMGAddUnique @className, 'Static',
  '',  1
@@ -161,6 +181,82 @@ exec sp_DMGAddUnique @className, 'Parsing',
  'Parsing',  3
 exec sp_DMGAddUnique @className, 'Soundex',
  'Soundex',  4
+
+set @className= 'CommonDataTypes';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'CommonKeywords';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'CommonModifiers';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'Keywords';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  5
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  6
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  7
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  8
+
+set @className= 'LibTypes';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  5
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  6
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  7
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  8
+
+set @className= 'Modifiers';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  5
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  6
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  7
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  8
+
+set @className= 'PropertyDelegates';
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  5
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  6
+
+set @className= 'RefTypes';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  2
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  3
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  4
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  5
 
 set @className= 'LJCItem';
 exec sp_DMGAddUnique @className, 'Data',

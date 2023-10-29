@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // MethodHeadingSelect.cs
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -105,6 +106,14 @@ namespace LJCGenDocEdit
 
     #region Control Event Handlers
 
+    // Fires the Change event.
+    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // *** Add Method *** MultiSelect 10/29/23
+    internal void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
     // Handles the DragDrop event.
     private void MethodHeadingGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -144,11 +153,15 @@ namespace LJCGenDocEdit
       {
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         MethodHeadingGrid.Select();
-        if (MethodHeadingGrid.LJCIsDifferentRow(e))
+        // *** Next Statement *** Add - MultiSelect 10/29/23 
+        if (1 == MethodHeadingGrid.SelectedRows.Count)
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          MethodHeadingGrid.LJCSetCurrentRow(e);
-          //TimedChange(Change._ClassName_);
+          if (MethodHeadingGrid.LJCIsDifferentRow(e))
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            MethodHeadingGrid.LJCSetCurrentRow(e);
+            //TimedChange(Change._ClassName_);
+          }
         }
       }
     }
@@ -162,6 +175,13 @@ namespace LJCGenDocEdit
       }
       MethodHeadingGrid.LJCAllowSelectionChange = true;
     }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The Change event.</summary>
+    /// // *** Next Statement *** Add - MultiSelect 10/29/23
+    public event EventHandler<EventArgs> LJCChange;
     #endregion
   }
 }
