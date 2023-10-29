@@ -94,11 +94,16 @@ namespace LJCGenDocEdit
       {
         selectList.Cursor = Cursors.WaitCursor;
         var row = rows[index] as LJCGridRow;
-        var name = ClassName();
+        var name = ClassName(row);
         var dataObject = mDataTypes.Find(x => x.Name == name);
         if (dataObject != null)
         {
           selectList.LJCSelectedRecord = dataObject;
+          selectList.LastMultiSelect = false;
+          if (0 == index)
+          {
+            selectList.LastMultiSelect = true;
+          }
           selectList.LJCOnChange();
         }
       }

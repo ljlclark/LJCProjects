@@ -154,6 +154,11 @@ namespace LJCGenDocEdit
         if (dataObject != null)
         {
           selectList.LJCSelectedRecord = dataObject;
+          selectList.LastMultiSelect = false;
+          if (0 == index)
+          {
+            selectList.LastMultiSelect = true;
+          }
           selectList.LJCOnChange();
         }
       }

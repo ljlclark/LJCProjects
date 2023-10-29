@@ -127,6 +127,8 @@ namespace LJCGenDocEdit
     }
     #endregion
 
+    public bool LastMultiSelect { get; set; }
+
     #region Class Data
 
     /// <summary>The Change event.</summary>

@@ -474,6 +474,7 @@ namespace LJCGenDocEdit
     // *** Add Method *** MultiSelect - 10/29/23
     private void List_LJCChange(object sender, EventArgs e)
     {
+      // Save if more than one row is selected.
       if (sender is MethodHeadingSelect list
         && list.MethodHeadingGrid.SelectedRows.Count > 1)
       {

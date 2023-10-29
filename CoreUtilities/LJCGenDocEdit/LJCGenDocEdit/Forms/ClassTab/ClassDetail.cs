@@ -468,6 +468,7 @@ namespace LJCGenDocEdit
     // *** Add Method *** MultiSelect - 10/29/23
     private void List_LJCChange(object sender, EventArgs e)
     {
+      // Save if more than one row is selected.
       if (sender is ClassSelect list
         && list.ClassGrid.SelectedRows.Count > 1)
       {
@@ -476,6 +477,10 @@ namespace LJCGenDocEdit
           && DataSave())
         {
           LJCOnChange();
+          if (list.LastMultiSelect)
+          {
+            DialogResult = DialogResult.OK; 
+          }
         }
       }
     }
