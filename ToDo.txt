@@ -1,3 +1,8 @@
+GenDocEdit
+1. After adding MethodGroup, cannot select another group with right
+mouse button until selecting the added item.
+2. ResetSequence() is not working after MultiSelect.
+
 Complete Backup Utility
 Update LJCAppManager?
 Update LJCDataTransform?

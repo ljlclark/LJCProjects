@@ -55,7 +55,11 @@ namespace LJCGenDocEdit
             mDataTypes = dataAssembly.DataTypes;
             foreach (var dataType in mDataTypes)
             {
-              dataType.Summary = dataType.Summary.Trim();
+              // *** Next Statement *** Add - 10/30/23
+              if (dataType.Summary != null)
+              {
+                dataType.Summary = dataType.Summary.Trim();
+              }
               RowAdd(dataType);
             }
           }

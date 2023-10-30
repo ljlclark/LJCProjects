@@ -55,14 +55,18 @@ namespace LJCGenDocEdit
           {
             var dataTypes = dataAssembly.DataTypes;
             var dataType = dataTypes.Find(x => x.Name == docClass.Name);
-            mDataMethods = dataType.DataMethods;
-            foreach (var dataMethod in mDataMethods)
+            // *** Next Statement *** Add - 10/30/23
+            if (dataType != null)
             {
-              if (NetString.HasValue(dataMethod.Summary))
+              mDataMethods = dataType.DataMethods;
+              foreach (var dataMethod in mDataMethods)
               {
-                dataMethod.Summary = dataMethod.Summary.Trim();
+                if (NetString.HasValue(dataMethod.Summary))
+                {
+                  dataMethod.Summary = dataMethod.Summary.Trim();
+                }
+                RowAdd(dataMethod);
               }
-              RowAdd(dataMethod);
             }
           }
         }

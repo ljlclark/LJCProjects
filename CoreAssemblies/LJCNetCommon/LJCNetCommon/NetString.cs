@@ -211,7 +211,9 @@ namespace LJCNetCommon
     {
       var retValue = text;
 
-      if (text.Length > length)
+      // *** Next Statement *** Change - 10/30/23
+      if (HasValue(text)
+        && text.Length > length)
       {
         retValue = text.Substring(0, length);
       }

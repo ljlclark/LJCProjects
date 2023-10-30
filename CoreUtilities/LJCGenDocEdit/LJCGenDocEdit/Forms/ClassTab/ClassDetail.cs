@@ -224,6 +224,13 @@ namespace LJCGenDocEdit
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
+      // *** Begin *** Add - 10/30/23
+      if (false == NetString.HasValue(DescriptionText.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {DescriptionLabel.Text}");
+      }
+      // *** End   *** Add - 10/30/23
       if (false == NetString.HasValue(SequenceText.Text))
       {
         retValue = false;
@@ -493,8 +500,12 @@ namespace LJCGenDocEdit
       {
         NameText.Text = dataType.Name;
         var description = NetString.RemoveTags(dataType.Summary);
-        DescriptionText.Text = NetString.Truncate(description
-          , DocClass.LengthDescription);
+        // *** Next Statement *** Add - 10/30/23
+        if (NetString.HasValue(description))
+        {
+          DescriptionText.Text = NetString.Truncate(description
+            , DocClass.LengthDescription);
+        }
       }
     }
 
