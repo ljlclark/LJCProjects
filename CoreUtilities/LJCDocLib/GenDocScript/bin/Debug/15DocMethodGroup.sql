@@ -263,10 +263,10 @@ exec sp_DMGAddUnique @className, 'Data',
  '',  1
 
 set @className= 'LJCItemCombo';
-exec sp_DMGAddUnique @className, 'Constructor',
- '',  1
 exec sp_DMGAddUnique @className, 'Data',
  '',  2
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  3
 
 set @className= 'LJCDataGrid';
 exec sp_DMGAddUnique @className, 'Constructor',
@@ -309,6 +309,8 @@ exec sp_DMGAddUnique @className, 'Collection',
  '',  2
 
 set @className= 'ControlValues';
+exec sp_DMGAddUnique @className, 'Value',
+ '',  4
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  4
 exec sp_DMGAddUnique @className, 'Collection',
@@ -339,3 +341,11 @@ exec sp_DMGAddUnique @className, 'Image',
  'Image Functions',  6
 exec sp_DMGAddUnique @className, 'ScreenPoint',
  'ScreenPoint Functions',  7
+
+set @className= 'ModuleNameComparer';
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  1
+
+set @className= 'TableData';
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  2

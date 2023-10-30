@@ -640,6 +640,50 @@ exec sp_DMAddUnique @docClassName, @headingName,
   'Deserializes from the specified XML file.',
   @seq;
 
+/* LJCGridDataLib */
+set @docClassName = 'TableData';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateDataColumns',
+  'Creates a new DataColumns object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'DataColumnClone',
+  'Clones a DataColumn object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'DataColumnsClone',
+  'Clones a DataColumn collection.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDataColumns',
+  'Returns a set of DataColumns that match the supplied list.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDbColumn',
+  'Creates a DbColumn object from a DataColumn object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDbColumns',
+  'Creates a DbColumns collection from a DataColumns collection.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetGridColumns',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyNames',
+  'Creates a PropertyNames list from a DataColumns collection.',
+  @seq;
+
 /* LJCNetCommon */
 set @docClassName = 'CommonDataTypes';
 set @headingName = 'Collection';
@@ -1915,6 +1959,14 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'GetScreenPoint',
   'Converts the Control point to Screen point.',
+  @seq;
+
+set @docClassName = 'ModuleNameComparer';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Compare',
+  'Compares two objects.',
   @seq;
 
 set @docClassName = 'ModuleReference';
