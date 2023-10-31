@@ -233,17 +233,25 @@ namespace LJCGenDocEdit
           selectList.LJCOnChange();
         }
       }
-      DoResetSequence();
+      DoResetParentSequence();
       selectList.Cursor = Cursors.Default;
       // *** End *** Change - MultiSelect 10/29/23
       selectList.DialogResult = DialogResult.OK;
     }
 
     /// <summary>Resets the Sequence column values.</summary>
+    internal void DoResetParentSequence()
+    {
+      var manager = Managers.DocMethodGroupManager;
+      manager.ClassID = mMethodHeadingSelect.LJClassID;
+      manager.ResetSequence();
+    }
+
+    /// <summary>Resets the Sequence column values.</summary>
     internal void DoResetSequence()
     {
-      var methodHeadingManager = Managers.DocMethodGroupHeadingManager;
-      methodHeadingManager.ResetSequence();
+      var manager = Managers.DocMethodGroupHeadingManager;
+      manager.ResetSequence();
     }
 
     // Adds new row or updates row with changes from the detail dialog.
@@ -322,7 +330,6 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // *** Next Statement *** Add - MultiSelect 10/29/23
       mMethodHeadingGrid.MultiSelect = true;
 
       // Setup default grid columns if no columns are defined.

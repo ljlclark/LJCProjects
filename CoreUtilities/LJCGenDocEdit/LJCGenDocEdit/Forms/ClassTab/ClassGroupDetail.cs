@@ -471,22 +471,20 @@ namespace LJCGenDocEdit
     {
       var list = new ClassHeadingSelect()
       {
-        LJCIsSelect = true
+        LJCIsSelect = true,
+        LJCAssemblyID = LJCAssemblyID
       };
-      // *** Next Statement *** Add MultiSelect 10/29/23
       list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        // *** Begin *** Change - MultiSelect 10/29/23
         if (1 == list.ClassHeadingGrid.SelectedRows.Count)
         {
           SelectedChange(list);
         }
-        // *** End   *** Change - MultiSelect 10/29/23
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Event handler from selection list.
     private void List_LJCChange(object sender, EventArgs e)
     {
       // Save if more than one row is selected.
@@ -506,7 +504,7 @@ namespace LJCGenDocEdit
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Set control values from selected item.
     private void SelectedChange(ClassHeadingSelect list)
     {
       var groupHeading = list.LJCSelectedRecord;

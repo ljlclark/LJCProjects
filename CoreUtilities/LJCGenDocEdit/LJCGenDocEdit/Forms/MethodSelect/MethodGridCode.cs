@@ -175,8 +175,9 @@ namespace LJCGenDocEdit
     /// <summary>Resets the Sequence column values.</summary>
     internal void DoResetSequence()
     {
-      var methodManager = Managers.DocMethodGroupManager;
-      methodManager.ResetSequence();
+      var manager = Managers.DocMethodManager;
+      manager.MethodGroupID = mMethodSelect.LJCGroupID;
+      manager.ResetSequence();
     }
     #endregion
 
@@ -227,7 +228,6 @@ namespace LJCGenDocEdit
     /// <summary>Setup the grid columns.</summary>
     internal void SetupGrid()
     {
-      // *** Next Statement *** Add - MultiSelect 10/29/23
       mMethodGrid.MultiSelect = true;
 
       // Setup default grid columns if no columns are defined.

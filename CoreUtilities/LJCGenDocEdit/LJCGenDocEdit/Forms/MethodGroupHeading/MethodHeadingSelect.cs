@@ -108,7 +108,6 @@ namespace LJCGenDocEdit
 
     // Fires the Change event.
     /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
-    // *** Add Method *** MultiSelect 10/29/23
     internal void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
@@ -153,7 +152,8 @@ namespace LJCGenDocEdit
       {
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         MethodHeadingGrid.Select();
-        // *** Next Statement *** Add - MultiSelect 10/29/23 
+
+        // If only one row is selected.
         if (1 == MethodHeadingGrid.SelectedRows.Count)
         {
           if (MethodHeadingGrid.LJCIsDifferentRow(e))
@@ -179,13 +179,16 @@ namespace LJCGenDocEdit
 
     #region Properties
 
+    /// <summary>Gets or sets the primary ID value.</summary>
+    internal short LJClassID { get; set; }
+
+    // Gets or sets the indicator for last multiselect row.
     public bool LastMultiSelect { get; set; }
     #endregion
 
     #region Class Data
 
     /// <summary>The Change event.</summary>
-    /// // *** Next Statement *** Add - MultiSelect 10/29/23
     public event EventHandler<EventArgs> LJCChange;
     #endregion
   }

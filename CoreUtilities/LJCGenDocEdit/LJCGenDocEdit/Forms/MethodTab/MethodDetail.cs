@@ -462,27 +462,25 @@ namespace LJCGenDocEdit
       LJCChange?.Invoke(this, new EventArgs());
     }
 
-    // Select the method.
+    // Displays the Method selection dialog.
     private void NameButton_Click(object sender, EventArgs e)
     {
       var list = new MethodSelect()
       {
-        LJCClassID = LJCClassID
+        LJCClassID = LJCClassID,
+        LJCGroupID = LJCGroupID
       };
-      // *** Next Statement *** Add MultiSelect 10/29/23
       list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        // *** Begin *** Change - MultiSelect 10/29/23
         if (1 == list.MethodGrid.SelectedRows.Count)
         {
           SelectedChange(list);
         }
-        // *** End   *** Change - MultiSelect 10/29/23
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Event handler from selection list.
     private void List_LJCChange(object sender, EventArgs e)
     {
       // Save if more than one row is selected.
@@ -502,7 +500,7 @@ namespace LJCGenDocEdit
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Set control values from selected item.
     private void SelectedChange(MethodSelect list)
     {
       var dataMethod = list.LJCSelectedRecord;

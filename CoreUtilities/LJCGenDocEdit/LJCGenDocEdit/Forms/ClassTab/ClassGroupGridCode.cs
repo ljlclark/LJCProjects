@@ -167,10 +167,9 @@ namespace LJCGenDocEdit
       string message;
       bool success = false;
 
-      var assemblyRow = mAssemblyGrid.CurrentRow as LJCGridRow;
       var classGroupRow = mClassGroupGrid.CurrentRow as LJCGridRow;
-      if (assemblyRow != null
-        && classGroupRow != null)
+      if (mAssemblyGrid.CurrentRow is LJCGridRow _
+        && classGroupRow !=null)
       {
         title = "Delete Confirmation";
         message = FormCommon.DeleteConfirm;
@@ -238,6 +237,7 @@ namespace LJCGenDocEdit
       }
       else
       {
+        // Example of using DataManager object.
         var dataManager = Managers.DocClassGroupManager.Manager;
         var assemblyID = DocAssemblyID();
         var where = $"where DocAssemblyID = {assemblyID}";

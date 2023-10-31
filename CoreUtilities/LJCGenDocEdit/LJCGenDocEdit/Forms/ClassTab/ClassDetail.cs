@@ -224,13 +224,11 @@ namespace LJCGenDocEdit
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
-      // *** Begin *** Add - 10/30/23
       if (false == NetString.HasValue(DescriptionText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {DescriptionLabel.Text}");
       }
-      // *** End   *** Add - 10/30/23
       if (false == NetString.HasValue(SequenceText.Text))
       {
         retValue = false;
@@ -452,27 +450,25 @@ namespace LJCGenDocEdit
       LJCChange?.Invoke(this, new EventArgs());
     }
 
-    // Select the class.
+    // Displays the Class selection dialog.
     private void NameButton_Click(object sender, EventArgs e)
     {
       var list = new ClassSelect()
       {
-        LJCAssemblyID = LJCAssemblyID
+        LJCAssemblyID = LJCAssemblyID,
+        LJCGroupID = LJCGroupID
       };
-      // *** Next Statement *** Add MultiSelect 10/29/23
       list.LJCChange += List_LJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
-        // *** Begin *** Change - MultiSelect 10/29/23
         if (1 == list.ClassGrid.SelectedRows.Count)
         {
           SelectedChange(list);
         }
-        // *** End   *** Change - MultiSelect 10/29/23
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Event handler from selection list.
     private void List_LJCChange(object sender, EventArgs e)
     {
       // Save if more than one row is selected.
@@ -492,7 +488,7 @@ namespace LJCGenDocEdit
       }
     }
 
-    // *** Add Method *** MultiSelect - 10/29/23
+    // Set control values from selected item.
     private void SelectedChange(ClassSelect list)
     {
       var dataType = list.LJCSelectedRecord;
@@ -500,7 +496,6 @@ namespace LJCGenDocEdit
       {
         NameText.Text = dataType.Name;
         var description = NetString.RemoveTags(dataType.Summary);
-        // *** Next Statement *** Add - 10/30/23
         if (NetString.HasValue(description))
         {
           DescriptionText.Text = NetString.Truncate(description
