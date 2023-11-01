@@ -259,9 +259,8 @@ namespace LJCGenDocEdit
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var row = RowAdd(dataRecord);
+          RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
-          mClassGrid.LJCSetCurrentRow(row, true);
           DoRefresh();
           mDocList.TimedChange(Change.AssemblyItem);
         }

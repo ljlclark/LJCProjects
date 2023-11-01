@@ -497,11 +497,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         AssemblyGroupGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (AssemblyGroupGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           AssemblyGroupGrid.LJCSetCurrentRow(e);
           TimedChange(Change.AssemblyGroup);
         }
@@ -581,11 +582,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         AssemblyItemGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (AssemblyItemGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           AssemblyItemGrid.LJCSetCurrentRow(e);
           TimedChange(Change.AssemblyItem);
         }
@@ -676,11 +678,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         ClassGroupGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (ClassGroupGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           ClassGroupGrid.LJCSetCurrentRow(e);
           TimedChange(Change.ClassGroup);
         }
@@ -762,11 +765,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         ClassItemGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (ClassItemGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           ClassItemGrid.LJCSetCurrentRow(e);
           TimedChange(Change.ClassItem);
         }
@@ -857,11 +861,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         MethodGroupGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (MethodGroupGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           MethodGroupGrid.LJCSetCurrentRow(e);
           TimedChange(Change.MethodGroup);
         }
@@ -943,11 +948,12 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         MethodItemGrid.Select();
+
+        // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
         if (MethodItemGrid.LJCIsDifferentRow(e))
         {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           MethodItemGrid.LJCSetCurrentRow(e);
           TimedChange(Change.MethodItem);
         }

@@ -34,11 +34,11 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the list rows.</summary>
     internal void DataRetrieve()
     {
+      mDocList.Cursor = Cursors.WaitCursor;
       mClassGroupGrid.LJCRowsClear();
 
       if (mDocList.AssemblyItemGrid.CurrentRow is LJCGridRow _)
       {
-        mDocList.Cursor = Cursors.WaitCursor;
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
         {
@@ -62,6 +62,7 @@ namespace LJCGenDocEdit
         mDocList.Cursor = Cursors.Default;
         mDocList.DoChange(Change.ClassGroup);
       }
+      mDocList.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.
@@ -261,9 +262,8 @@ namespace LJCGenDocEdit
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var row = RowAdd(dataRecord);
+          RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
-          mClassGroupGrid.LJCSetCurrentRow(row, true);
           DoRefresh();
           mDocList.TimedChange(Change.ClassGroup);
         }

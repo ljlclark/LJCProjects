@@ -35,11 +35,11 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the list rows.</summary>
     internal void DataRetrieve()
     {
+      mDocList.Cursor = Cursors.WaitCursor;
       mMethodGrid.LJCRowsClear();
 
       if (mDocList.MethodGroupGrid.CurrentRow is LJCGridRow _)
       {
-        mDocList.Cursor = Cursors.WaitCursor;
         var manager = Managers.DocMethodManager;
         var names = new List<string>()
         {
@@ -63,6 +63,7 @@ namespace LJCGenDocEdit
         mDocList.Cursor = Cursors.Default;
         mDocList.DoChange(Change.MethodItem);
       }
+      mDocList.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.
@@ -249,9 +250,8 @@ namespace LJCGenDocEdit
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var row = RowAdd(dataRecord);
+          RowAdd(dataRecord);
           CheckPreviousAndNext(detail);
-          mMethodGrid.LJCSetCurrentRow(row, true);
           mDocList.TimedChange(Change.MethodItem);
         }
       }
