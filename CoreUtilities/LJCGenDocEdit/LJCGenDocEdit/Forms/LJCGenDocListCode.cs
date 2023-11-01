@@ -363,27 +363,33 @@ namespace LJCGenDocEdit
       bool enableNew = true;
       bool enableEdit = AssemblyGroupGrid.CurrentRow != null;
       FormCommon.SetMenuState(AssemblyGroupMenu, enableNew, enableEdit);
+      AssemblyGroupHeading.Enabled = true;
 
       enableNew = AssemblyGroupGrid.CurrentRow != null;
       enableEdit = AssemblyItemGrid.CurrentRow != null;
       FormCommon.SetMenuState(AssemblyMenu, enableNew, enableEdit);
+      AssemblyHeading.Enabled = true;
 
       enableNew = AssemblyItemGrid.CurrentRow != null;
       enableEdit = ClassGroupGrid.CurrentRow != null;
       FormCommon.SetMenuState(ClassGroupMenu, enableNew, enableEdit);
+      ClassGroupHeading.Enabled = true;
 
       //enableNew = ClassGroupGrid.CurrentRow != null;
       enableNew = true;
       enableEdit = ClassItemGrid.CurrentRow != null;
       FormCommon.SetMenuState(ClassMenu, enableNew, enableEdit);
+      ClassHeading.Enabled = true;
 
       enableNew = ClassItemGrid.CurrentRow != null;
       enableEdit = MethodGroupGrid.CurrentRow != null;
       FormCommon.SetMenuState(MethodGroupMenu, enableNew, enableEdit);
+      MethodGroupHeading.Enabled = true;
 
       enableNew = MethodGroupGrid.CurrentRow != null;
       enableEdit = MethodItemGrid.CurrentRow != null;
       FormCommon.SetMenuState(MethodItemMenu, enableNew, enableEdit);
+      MethodItemHeading.Enabled = true;
     }
 
     // Sets the tab initial focus control.

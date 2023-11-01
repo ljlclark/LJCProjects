@@ -90,8 +90,7 @@ namespace LJCGenDocEdit
       }
       if (classComboIndex >= 0)
       {
-        var item = mClassCombo.Items[classComboIndex] as LJCItem;
-        if (item != null)
+        if (mClassCombo.Items[classComboIndex] is LJCItem item)
         {
           retValue = (short)item.ID;
         }

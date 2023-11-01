@@ -89,8 +89,7 @@ namespace LJCGenDocEdit
       }
       if (assemblyComboIndex >= 0)
       {
-        var item = mAssemblyCombo.Items[assemblyComboIndex] as LJCItem;
-        if (item != null)
+        if (mAssemblyCombo.Items[assemblyComboIndex] is LJCItem item)
         {
           retValue = (short)item.ID;
         }

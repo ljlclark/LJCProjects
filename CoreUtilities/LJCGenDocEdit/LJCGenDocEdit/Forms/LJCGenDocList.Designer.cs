@@ -61,7 +61,7 @@
       this.AssemblyGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.AssemblyItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyNew = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
@@ -99,7 +99,7 @@
       this.ClassGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.ClassItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassNew = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -495,7 +495,7 @@
       // 
       this.AssemblyMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.AssemblyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
+            this.AssemblyHeading,
             this.AssemblyNew,
             this.AssemblyEdit,
             this.toolStripSeparator11,
@@ -511,12 +511,12 @@
       this.AssemblyMenu.Name = "AssemblyMenu";
       this.AssemblyMenu.Size = new System.Drawing.Size(212, 316);
       // 
-      // toolStripMenuItem1
+      // AssemblyHeading
       // 
-      this.toolStripMenuItem1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-      this.toolStripMenuItem1.Size = new System.Drawing.Size(211, 32);
-      this.toolStripMenuItem1.Text = "Assembly Menu";
+      this.AssemblyHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.AssemblyHeading.Name = "AssemblyHeading";
+      this.AssemblyHeading.Size = new System.Drawing.Size(211, 32);
+      this.AssemblyHeading.Text = "Assembly Menu";
       // 
       // AssemblyNew
       // 
@@ -620,7 +620,7 @@
       this.ClassTab.Location = new System.Drawing.Point(4, 29);
       this.ClassTab.Name = "ClassTab";
       this.ClassTab.Padding = new System.Windows.Forms.Padding(3);
-      this.ClassTab.Size = new System.Drawing.Size(639, 417);
+      this.ClassTab.Size = new System.Drawing.Size(567, 417);
       this.ClassTab.TabIndex = 1;
       this.ClassTab.Text = "Class";
       this.ClassTab.UseVisualStyleBackColor = true;
@@ -659,7 +659,7 @@
       // 
       this.ClassSplit.Panel2.Controls.Add(this.ClassItemGrid);
       this.ClassSplit.Panel2.Controls.Add(this.ClassItemHeader);
-      this.ClassSplit.Size = new System.Drawing.Size(633, 375);
+      this.ClassSplit.Size = new System.Drawing.Size(561, 375);
       this.ClassSplit.SplitterDistance = 83;
       this.ClassSplit.TabIndex = 2;
       // 
@@ -697,7 +697,7 @@
       this.ClassGroupGrid.RowTemplate.Height = 28;
       this.ClassGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ClassGroupGrid.ShowCellToolTips = false;
-      this.ClassGroupGrid.Size = new System.Drawing.Size(632, 52);
+      this.ClassGroupGrid.Size = new System.Drawing.Size(560, 52);
       this.ClassGroupGrid.TabIndex = 1;
       this.ClassGroupGrid.Text = "LJCDataGrid";
       this.ClassGroupGrid.SelectionChanged += new System.EventHandler(this.ClassGrid_SelectionChanged);
@@ -836,7 +836,7 @@
       this.ClassGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassGroupHeader.Name = "ClassGroupHeader";
-      this.ClassGroupHeader.Size = new System.Drawing.Size(632, 31);
+      this.ClassGroupHeader.Size = new System.Drawing.Size(560, 31);
       this.ClassGroupHeader.TabIndex = 0;
       this.ClassGroupHeader.TabStop = false;
       this.ClassGroupHeader.Text = "Class Group";
@@ -875,7 +875,7 @@
       this.ClassItemGrid.RowTemplate.Height = 28;
       this.ClassItemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ClassItemGrid.ShowCellToolTips = false;
-      this.ClassItemGrid.Size = new System.Drawing.Size(632, 257);
+      this.ClassItemGrid.Size = new System.Drawing.Size(560, 257);
       this.ClassItemGrid.TabIndex = 1;
       this.ClassItemGrid.Text = "LJCDataGrid";
       this.ClassItemGrid.SelectionChanged += new System.EventHandler(this.ClassItemGrid_SelectionChanged);
@@ -888,7 +888,7 @@
       // 
       this.ClassMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.ClassMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
+            this.ClassHeading,
             this.ClassNew,
             this.ClassEdit,
             this.toolStripSeparator18,
@@ -904,12 +904,12 @@
       this.ClassMenu.Name = "ClassMenu";
       this.ClassMenu.Size = new System.Drawing.Size(208, 316);
       // 
-      // toolStripMenuItem2
+      // ClassHeading
       // 
-      this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(207, 32);
-      this.toolStripMenuItem2.Text = "Class Menu";
+      this.ClassHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.ClassHeading.Name = "ClassHeading";
+      this.ClassHeading.Size = new System.Drawing.Size(207, 32);
+      this.ClassHeading.Text = "Class Menu";
       // 
       // ClassNew
       // 
@@ -1000,7 +1000,7 @@
       this.ClassItemHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassItemHeader.Name = "ClassItemHeader";
-      this.ClassItemHeader.Size = new System.Drawing.Size(632, 31);
+      this.ClassItemHeader.Size = new System.Drawing.Size(560, 31);
       this.ClassItemHeader.TabIndex = 0;
       this.ClassItemHeader.TabStop = false;
       this.ClassItemHeader.Text = "Class Item";
@@ -1012,7 +1012,7 @@
       this.MethodTab.Controls.Add(this.MethodSplit);
       this.MethodTab.Location = new System.Drawing.Point(4, 29);
       this.MethodTab.Name = "MethodTab";
-      this.MethodTab.Size = new System.Drawing.Size(639, 417);
+      this.MethodTab.Size = new System.Drawing.Size(567, 417);
       this.MethodTab.TabIndex = 2;
       this.MethodTab.Text = "Method";
       this.MethodTab.UseVisualStyleBackColor = true;
@@ -1051,7 +1051,7 @@
       // 
       this.MethodSplit.Panel2.Controls.Add(this.MethodItemGrid);
       this.MethodSplit.Panel2.Controls.Add(this.MethodItemHeader);
-      this.MethodSplit.Size = new System.Drawing.Size(633, 375);
+      this.MethodSplit.Size = new System.Drawing.Size(561, 375);
       this.MethodSplit.SplitterDistance = 83;
       this.MethodSplit.TabIndex = 2;
       // 
@@ -1089,7 +1089,7 @@
       this.MethodGroupGrid.RowTemplate.Height = 28;
       this.MethodGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.MethodGroupGrid.ShowCellToolTips = false;
-      this.MethodGroupGrid.Size = new System.Drawing.Size(632, 52);
+      this.MethodGroupGrid.Size = new System.Drawing.Size(560, 52);
       this.MethodGroupGrid.TabIndex = 1;
       this.MethodGroupGrid.Text = "LJCDataGrid";
       this.MethodGroupGrid.SelectionChanged += new System.EventHandler(this.MethodGroupGrid_SelectionChanged);
@@ -1228,7 +1228,7 @@
       this.MethodGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodGroupHeader.Name = "MethodGroupHeader";
-      this.MethodGroupHeader.Size = new System.Drawing.Size(632, 31);
+      this.MethodGroupHeader.Size = new System.Drawing.Size(560, 31);
       this.MethodGroupHeader.TabIndex = 0;
       this.MethodGroupHeader.TabStop = false;
       this.MethodGroupHeader.Text = "Method Group";
@@ -1267,7 +1267,7 @@
       this.MethodItemGrid.RowTemplate.Height = 28;
       this.MethodItemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.MethodItemGrid.ShowCellToolTips = false;
-      this.MethodItemGrid.Size = new System.Drawing.Size(632, 257);
+      this.MethodItemGrid.Size = new System.Drawing.Size(560, 257);
       this.MethodItemGrid.TabIndex = 1;
       this.MethodItemGrid.Text = "LJCDataGrid";
       this.MethodItemGrid.SelectionChanged += new System.EventHandler(this.MethodItemGrid_SelectionChanged);
@@ -1392,7 +1392,7 @@
       this.MethodItemHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodItemHeader.Name = "MethodItemHeader";
-      this.MethodItemHeader.Size = new System.Drawing.Size(632, 31);
+      this.MethodItemHeader.Size = new System.Drawing.Size(560, 31);
       this.MethodItemHeader.TabIndex = 0;
       this.MethodItemHeader.TabStop = false;
       this.MethodItemHeader.Text = "Method Item";
@@ -1507,8 +1507,8 @@
     private System.Windows.Forms.ContextMenuStrip ClassMenu;
     private System.Windows.Forms.ToolStripMenuItem ClassText;
     private System.Windows.Forms.ToolStripMenuItem ClassCSV;
-    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+    private System.Windows.Forms.ToolStripMenuItem AssemblyHeading;
+    private System.Windows.Forms.ToolStripMenuItem ClassHeading;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem AssemblyGroupRefresh;

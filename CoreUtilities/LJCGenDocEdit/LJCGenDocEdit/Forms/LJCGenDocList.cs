@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// LJCGenDocEdit.cs
+// LJCGenDocList.cs
 using LJCDocLibDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;

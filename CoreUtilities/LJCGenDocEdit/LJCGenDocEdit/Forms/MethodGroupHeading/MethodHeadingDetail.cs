@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// AssemblyDetail.cs
+// MethodHeadingDetail.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDocLibDAL;
