@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectDocLibDAL.xml -->
+<items>
+  <DocGenAssemblies>
+    <summary>
+      Represents a collection of DocGenAssembly objects.
+    </summary>
+    <link file="DocAssemblyTables.html">--Doc Assembly Tables</link>
+    <link file="DocClassTables.html">--Doc Class Tables</link>
+    <link file="DocMethodTables.html">--Doc Method Tables</link>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJCDocGenLib library.
+      </para>
+      <para>
+        The LJCGenDocDAL library contains Data and Manager classes for
+        presenting an object oriented view of the DocGroup XML data.
+      </para>
+      <para>
+        The LJCGenDocDAL project is part of the LJC.DocLib solution.
+      </para>
+    </remarks>
+  </DocGenAssemblies>
+</items>

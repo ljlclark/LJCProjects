@@ -78,17 +78,17 @@ msbuild CoreUtilities\LJCGenText\LJCGenText.sln
 
 set /a counter+=1
 echo - >> Build.txt
-set marker=----------------- %counter% - LJCDocLib.sln ---------------
+set marker=----------------- %counter% - LJCGenDoc ---------------
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDocLib >> Build.txt
-call CoreUtilities\LJCDocLib\UpdateDocLib.cmd BuildAll >> Build.txt
-msbuild CoreUtilities\LJCDocLib\LJCDocLib.sln
+echo LJCGenDoc >> Build.txt
+call CoreUtilities\LJCGenDoc\UpdateGenDoc.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCGenDoc\LJCGenDoc.sln
 
 set /a counter+=1
 echo - >> Build.txt
-set marker=----------------- %counter% - LJCGenDocEdit.sln ---------------
+set marker=----------------- %counter% - LJCGenDocEdit ---------------
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt

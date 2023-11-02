@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DocMethodManager.xml -->
+<items>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied unique values.
+    </summary>
+    <param name="classID">The DocClass ID.</param>
+    <param name="overloadName">The Overload name.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The retrieved record object.</returns>
+  </RetrieveWithUnique>
+  <GetUniqueKey>
+    <summary>
+      Gets the ID key columns.
+    </summary>
+    <param name="classID">The DocClass ID.</param>
+    <param name="overloadName">The Overload name.</param>
+    <returns>The Unique keys object.</returns>
+  </GetUniqueKey>
+</items>

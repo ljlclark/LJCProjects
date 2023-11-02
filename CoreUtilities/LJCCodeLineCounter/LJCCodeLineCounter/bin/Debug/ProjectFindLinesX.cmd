@@ -1,4 +1,4 @@
-set Find="?."
+set Find="SelectedRows"
 
 if %1. == . goto default
 set folder=%1

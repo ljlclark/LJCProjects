@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DocClassManager.xml -->
+<items>
+  <LoadWithGroup>
+    <summary>
+      // Retrieves a collection of data records with the supplied values.
+    </summary>
+    <param name="groupID">The key value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadWithGroup>
+</items>
