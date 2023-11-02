@@ -13,13 +13,23 @@ set Solution=CoreUtilities\LJCGenDoc
 set ClearBuild=ClearBuildDetail.cmd
 
 :Clear
-set Project=DocGroupEditor
-set File=DocGroupEditor
+set Project=GenDocScript
+set File=GenDocScript
 call %ClearBuild%
-del %Solution%\%Project%\bin\Debug\LJCGenDocDAL.xml
+del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
 
-set Project=LJCDocGen
-set File=LJCDocGen
+set Project=LJCDocObjLib
+set File=LJCDocObjLib
+call %ClearBuild%
+del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
+del %Solution%\%Project%\%bin%\LJCDocXMLObjLib.xml
+
+set Project=LJCDocXMLObjLib
+set File=LJCDocXMLObjLib
+call %ClearBuild%
+
+set Project=LJCGenDoc
+set File=LJCGenDoc
 call %ClearBuild%
 del %Solution%\%Project%\%bin%\ControlValues\*.xml
 rmdir %Solution%\%Project%\%bin%\ControlValues
@@ -30,11 +40,6 @@ del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
 del %Solution%\%Project%\%bin%\LJCDocObjLib.log
 del %Solution%\%Project%\%bin%\LJCDocObjLib.xml
 del %Solution%\%Project%\%bin%\LJCDocXMLObjLib.xml
-
-set Project=GenDocScript
-set File=GenDocScript
-call %ClearBuild%
-del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
 
 set Project=LJCGenDocLib
 set File=LJCGenDocLib
@@ -47,16 +52,6 @@ del %Solution%\%Project%\%bin%\LJCGenTextLib.xml
 
 set Project=LJCGenDocDAL
 set File=LJCGenDocDAL
-call %ClearBuild%
-
-set Project=LJCDocObjLib
-set File=LJCDocObjLib
-call %ClearBuild%
-del %Solution%\%Project%\%bin%\LJCDocLibDAL.xml
-del %Solution%\%Project%\%bin%\LJCDocXMLObjLib.xml
-
-set Project=LJCDocXMLObjLib
-set File=LJCDocXMLObjLib
 call %ClearBuild%
 
 set Project=TestSyntaxConsole
