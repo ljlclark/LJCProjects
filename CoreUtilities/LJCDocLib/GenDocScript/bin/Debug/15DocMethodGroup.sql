@@ -349,3 +349,41 @@ exec sp_DMGAddUnique @className, 'SearchSort',
 set @className= 'TableData';
 exec sp_DMGAddUnique @className, 'Collection',
  '',  2
+
+set @className= 'Directionals';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'PrimaryRoads';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'RoadLookups';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'StateLookups';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+
+set @className= 'Suffixes';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2

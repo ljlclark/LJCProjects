@@ -116,9 +116,9 @@
       <Project>{5d43c94f-c0ce-416f-b842-3a0289f8a93b}</Project>
       <Name>LJCDocObjLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LJCDocLibDAL\LJCDocLibDAL.csproj">
+    <ProjectReference Include="..\LJCDocLibDAL\LJCGenDocDAL.csproj">
       <Project>{c3d5c785-74a8-473e-81b4-35e07be7832a}</Project>
-      <Name>LJCDocLibDAL</Name>
+      <Name>LJCGenDocDAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

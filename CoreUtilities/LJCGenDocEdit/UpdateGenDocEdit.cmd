@@ -28,10 +28,6 @@ set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
 echo copy %src%\LJCDBMessage.dll %to%
 copy %src%\LJCDBMessage.dll %to%
 
-set src=%utilRoot%LJCDocLib\LJCDocLibDAL\%bin%
-echo copy %src%\LJCDocLibDAL.dll %to%
-copy %src%\LJCDocLibDAL.dll %to%
-
 set src=%utilRoot%LJCDocLib\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
 copy %src%\LJCDocObjLib.dll %to%
@@ -39,6 +35,10 @@ copy %src%\LJCDocObjLib.dll %to%
 set src=%utilRoot%LJCDocLib\LJCDocXMLObjLib\%bin%
 echo copy %src%\LJCDocXMLObjLib.dll %to%
 copy %src%\LJCDocXMLObjLib.dll %to%
+
+set src=%utilRoot%LJCDocLib\LJCDocLibDAL\%bin%
+echo copy %src%\LJCGenDocDAL.dll %to%
+copy %src%\LJCGenDocDAL.dll %to%
 
 set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
 echo copy %src%\LJCNetCommon.dll %to%

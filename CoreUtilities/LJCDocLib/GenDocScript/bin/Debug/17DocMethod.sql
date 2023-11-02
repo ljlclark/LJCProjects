@@ -23,6 +23,127 @@ declare @docClassName nvarchar(60);
 declare @headingName nvarchar(60);
 declare @seq int
 
+/* LJCAddressParserLib */
+set @docClassName = 'Directionals';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'Directionals';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'Directionals';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchCode',
+  'Retrieve the collection element with code.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchSpanishName',
+  'Retrieve the collection element.',
+  @seq;
+
+set @docClassName = 'Directionals';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchCode',
+  'Retrieve the collection element.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGenerateSoundex',
+  'Generates the Soundex values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchLookupName',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchLSoundex',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchPSoundex',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
 /* LJCDataAccess */
 set @docClassName = 'DataAccess';
 set @headingName = 'Constructor';

@@ -32,6 +32,12 @@ exec sp_DCGAddUnique @assemblyName,  'Reflection',
 exec sp_DCGAddUnique @assemblyName,  'Syntax',
  'Syntax Classes',  6
 
+set @assemblyName= 'LJCAddressParserLib';
+exec sp_DCGAddUnique @assemblyName,  'Collection',
+ '',  1
+exec sp_DCGAddUnique @assemblyName,  'Comparer',
+ '',  2
+
 set @assemblyName= 'LJCWinFormCommon';
 exec sp_DCGAddUnique @assemblyName,  'Static',
  '',  1

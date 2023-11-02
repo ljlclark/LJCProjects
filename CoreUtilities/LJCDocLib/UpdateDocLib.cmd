@@ -69,8 +69,8 @@ echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
 set src=%utilRoot%LJCDocLib\LJCDocLibDAL\%bin%
-echo copy %src%\LJCDocLibDAL.dll %to%
-copy %src%\LJCDocLibDAL.dll %to%
+echo copy %src%\LJCGenDocDAL.dll %to%
+copy %src%\LJCGenDocDAL.dll %to%
 
 rem ---------------------------
 set to=%toRoot%LJCDocGen\%bin%
@@ -106,9 +106,9 @@ copy %src%\LJCDocGroupEditor.exe %to%
 echo copy %src%\LJCDocGroupEditor.exe.config %to%
 copy %src%\LJCDocGroupEditor.exe.config %to%
 
-set src=%utilRoot%LJCDocLib\LJCDocLibDAL\%bin%
-echo copy %src%\LJCDocLibDAL.dll %to%
-copy %src%\LJCDocLibDAL.dll %to%
+set src=%utilRoot%LJCDocLib\LJCDocGenLibDAL\%bin%
+echo copy %src%\LJCGenDocDAL.dll %to%
+copy %src%\LJCGenDocDAL.dll %to%
 
 set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
 echo copy %src%\LJCNetCommon.dll %to%

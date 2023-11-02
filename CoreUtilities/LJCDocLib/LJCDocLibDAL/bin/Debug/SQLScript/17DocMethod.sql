@@ -23,6 +23,127 @@ declare @docClassName nvarchar(60);
 declare @headingName nvarchar(60);
 declare @seq int
 
+/* LJCAddressParserLib */
+set @docClassName = 'Directionals';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'Directionals';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'Directionals';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchCode',
+  'Retrieve the collection element with code.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchSpanishName',
+  'Retrieve the collection element.',
+  @seq;
+
+set @docClassName = 'Directionals';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchCode',
+  'Retrieve the collection element.',
+  @seq;
+
+set @docClassName = 'PrimaryRoads';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGenerateSoundex',
+  'Generates the Soundex values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchLookupName',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchLSoundex',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchPSoundex',
+  'Finds and returns the object that contains the supplied values.',
+  @seq;
+
+set @docClassName = 'RoadLookups';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
 /* LJCDataAccess */
 set @docClassName = 'DataAccess';
 set @headingName = 'Constructor';
@@ -640,7 +761,252 @@ exec sp_DMAddUnique @docClassName, @headingName,
   'Deserializes from the specified XML file.',
   @seq;
 
+/* LJCGridDataLib */
+set @docClassName = 'TableData';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateDataColumns',
+  'Creates a new DataColumns object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'DataColumnClone',
+  'Clones a DataColumn object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'DataColumnsClone',
+  'Clones a DataColumn collection.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDataColumns',
+  'Returns a set of DataColumns that match the supplied list.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDbColumn',
+  'Creates a DbColumn object from a DataColumn object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDbColumns',
+  'Creates a DbColumns collection from a DataColumns collection.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetGridColumns',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyNames',
+  'Creates a PropertyNames list from a DataColumns collection.',
+  @seq;
+
 /* LJCNetCommon */
+set @docClassName = 'CommonDataTypes';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'CommonDataTypes';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'CommonDataTypes';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'CommonDataTypes';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
+set @docClassName = 'CommonKeywords';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'CommonKeywords';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'CommonKeywords';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'CommonKeywords';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
+set @docClassName = 'CommonModifiers';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'CommonModifiers';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'CommonModifiers';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'CommonModifiers';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
 set @docClassName = 'DbColumn';
 set @headingName = 'Constructor';
 set @seq = 1;
@@ -688,6 +1054,436 @@ set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'op_Implicit',
   'Creates a      DbValue      object from a      DbColumn      object. (E)',
+  @seq;
+
+set @docClassName = 'Keywords';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'Keywords';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'Keywords';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'Keywords';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
+set @docClassName = 'LibTypes';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'LibTypes';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'LibTypes';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'LibTypes';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
+set @docClassName = 'LJCAssemblyReflect';
+set @headingName = 'BoolCheckMethods';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsNotCommonClassification',
+  'Indicates if the Type is not a common type.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsNotCommonInterface',
+  'Indicates if the Interface is not a common type.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsNotProperty',
+  'Indicates if the Method is not a property getter or setter.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsOverride',
+  'Indicates if the method is "override".',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsPublic',
+  'Indicates if the method is "public".',
+  @seq;
+
+set @docClassName = 'LJCAssemblyReflect';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'LJCAssemblyReflect';
+set @headingName = 'GetSyntax';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetConstructorSyntax',
+  'Creates and returns the Constructor syntax. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetFieldSyntax',
+  'Creates and returns the Field syntax string. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetGenericTypeSyntax',
+  'Creates and returns the Generic Type syntax.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetMethodSyntax',
+  'Creates and returns the Method syntax. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertySyntax',
+  'Creates and returns the Property syntax string. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetTypeSyntax',
+  'Creates and returns the Type syntax. (E)',
+  @seq;
+
+set @docClassName = 'LJCAssemblyReflect';
+set @headingName = 'SetReflectionObjects';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetAssembly',
+  'Retrieves the Assembly reference. (R)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetConstructorInfo',
+  'Set the ConstructorInfo reference. (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetFieldInfo',
+  'Set the FieldInfo reference. (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetMethodInfo',
+  'Set the MethodInfo reference. (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetPropertyInfo',
+  'Set the PropertyInfo reference. (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetTypeReference',
+  'Set the Type reference. (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetIndexerInfo',
+  'Gets the Indexer Property info.',
+  @seq;
+
+set @docClassName = 'LJCReflect';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyInfo',
+  'Gets the cached PropertyInfo value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyNames',
+  'Gets a list of the property names.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetPropertyType',
+  'Get the property type.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasProperty',
+  'Missing Summary',
+  @seq;
+
+set @docClassName = 'LJCReflect';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Instantiates an instance of the class.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'LJCReflect';
+set @headingName = 'SetMethods';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetPropertyValue',
+  'Sets the property value based on value type. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetSource',
+  'Sets the source object and type values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetValue',
+  'Sets the property value.',
+  @seq;
+
+set @docClassName = 'LJCReflect';
+set @headingName = 'Value';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetBoolean',
+  'Gets the property value as a boolean.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetByte',
+  'Gets the property value as a byte.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetChar',
+  'Gets the property value as a char.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDateTime',
+  'Gets the property value as a DateTime value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDbDateString',
+  'Gets the property value as a DB date/time string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDecimal',
+  'Gets the property value as a decimal.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDouble',
+  'Gets the property value as a double.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetInt16',
+  'Gets the property value as a short.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetInt32',
+  'Gets the property value as an integer.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetInt64',
+  'Gets the property value as a long.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetSingle',
+  'Gets the property value as a float.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetString',
+  'Gets the property value as a string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetValue',
+  'Gets the property value as an object using a delegate. (E)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetValueReflect',
+  'Gets the property value as an object using reflection.',
+  @seq;
+
+set @docClassName = 'Modifiers';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'Modifiers';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'Modifiers';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'Modifiers';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
   @seq;
 
 set @docClassName = 'NetCommon';
@@ -1010,6 +1806,342 @@ set @seq += 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'Phonetic',
   'Creates a Phonetic character from the supplied text starting at the      supplied index. (D)',
+  @seq;
+
+set @docClassName = 'PropertyDelegates';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds a PropertyDelegate object to the collection. (R)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCCreateDelegate',
+  'Creates and returns the delegate for the named property.',
+  @seq;
+
+set @docClassName = 'PropertyDelegates';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchName',
+  'Returns the PropertyDelegate object if found in the list.',
+  @seq;
+
+set @docClassName = 'RefTypes';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds the specified object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEnumerator',
+  'Gets the Collection Enumerator.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq, 1, 'HasItems1';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Serialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'RefTypes';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'RefTypes';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SortName',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'RefTypes';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Deserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+
+/* LJCWinFormCommon */
+set @docClassName = 'ControlValue';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates the ControlValue object from the supplied values and adds      the element to the collectio',
+  @seq;
+
+set @docClassName = 'ControlValues';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlValues';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchName',
+  'Retrieve the collection element with name.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'ActionState';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetMenuState',
+  'Sets the enable state for the menu items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetToolState',
+  'Sets the enable state for the tool items.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'Error';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShowError',
+  'Displays the error text if not null.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShowHasError',
+  'Displays "No records affected." if the affected count is less than 1.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'File';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SaveFile',
+  'Displays the Save dialog to select a file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SelectFile',
+  'Displays the Open dialog to select a file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShellFile',
+  'Execute a program with the selected file.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ShellProgram',
+  'Executes an external program.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'General';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateTablesPrompt',
+  'Verify create of missing tables.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RestoreSplitDistance',
+  'Restore the splitter distance.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetString',
+  'Sets the string to "-" if it is empty or blanks and to "" if it is "-".',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetLabelsBackColor',
+  'Sets the BackColor for the labels.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'Image';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CreateGradient',
+  'Draws a gradient in the specified rectangle.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CropImage',
+  'Crops an image.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ResizeImage',
+  'Resizes an image.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TransformCrop',
+  'Transforms the crop rectangle values of the sample image relative      to the values of the origina',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'KeyHandler';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HandleNumberOrEditKey',
+  'Checks the key character for a numeric or allowed control value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HandleSpace',
+  'Checks the key character for a space.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'StripBlanks',
+  'Strips blanks from the string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'StripNonDigits',
+  'Strips non-digits from a string.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNoSpace_KeyPress',
+  'Does not allow spaces.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNoSpace_TextChanged',
+  'Strips blanks from the text value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'TextBoxNumeric_KeyPress',
+  'Only allows numbers or edit keys.',
+  @seq;
+
+set @docClassName = 'FormCommon';
+set @headingName = 'ScreenPoint';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetDialogScreenPoint',
+  'Gets the Grid target Dialog screen position.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetMenuScreenPoint',
+  'Get the control target menu screen position.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetScreenRectangle',
+  'Gets the Control screen rectangle.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetScreenPoint',
+  'Converts the Control point to Screen point.',
+  @seq;
+
+set @docClassName = 'ModuleNameComparer';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Compare',
+  'Compares two objects.',
+  @seq;
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ModuleReference';
+set @headingName = 'GetReference';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetAssembly',
+  'Retrieves the Assembly reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetControlInstance',
+  'Retrieves the ConrolInstance reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetControlType',
+  'Retrieves the ControlType reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetEventInfo',
+  'Retrieves the PageClose event info.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetInitMethodInfo',
+  'Retrieves the LJCInit() MethodInfo reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetTabControl',
+  'Retrieves the TabControl reference.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetTabsMethodInfo',
+  'Retrieves the LJCTabs() MethodInfo reference.',
   @seq;
 
 /* LJCWinFormControls */

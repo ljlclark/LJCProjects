@@ -42,14 +42,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDocLibDAL">
-      <HintPath>..\External\LJCDocLibDAL.dll</HintPath>
-    </Reference>
     <Reference Include="LJCDocObjLib">
       <HintPath>..\External\LJCDocObjLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDocXMLObjLib">
       <HintPath>..\External\LJCDocXMLObjLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCGenDocDAL">
+      <HintPath>..\External\LJCGenDocDAL.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
