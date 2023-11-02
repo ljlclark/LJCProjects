@@ -167,14 +167,14 @@ exec sp_DAAddUnique @groupName, 'LJCDocGen',
   'LJCDocGen.xml',
   '', @seq;
 set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCDocGenLib',
+exec sp_DAAddUnique @groupName, 'LJCGenDocLib',
   'The Code HTML Documentation Generator library.',
-  'LJCDocGenLib.xml',
+  'LJCGenDocLib.xml',
   '', @seq;
 set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCDocLibDAL',
+exec sp_DAAddUnique @groupName, 'LJCGenDocDAL',
   'The Code Documentation Generator Data Access Layer library. (DO)',
-  '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCDocLibDAL\bin\Debug\LJCDocLibDAL.xml',
+  '..\..\..\..\..\CoreUtilities\LJCDocLib\LJCGenDocDAL\bin\Debug\LJCGenDocDAL.xml',
   '', @seq;
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCDocObjLib',
