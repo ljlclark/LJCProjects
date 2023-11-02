@@ -1,7 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataAssemblies.cs
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using System.Collections.Generic;
 
 namespace LJCDocObjLib

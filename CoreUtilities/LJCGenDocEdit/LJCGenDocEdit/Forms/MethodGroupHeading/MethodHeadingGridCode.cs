@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // MethodHeadingGridCode.cs
 using LJCDBMessage;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;

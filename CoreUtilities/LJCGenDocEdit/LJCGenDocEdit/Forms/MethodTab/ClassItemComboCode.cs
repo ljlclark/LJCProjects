@@ -1,7 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ClassItemComboCode.cs
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System.Reflection;

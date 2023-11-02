@@ -1,5 +1,5 @@
 ﻿using LJCDBMessage;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

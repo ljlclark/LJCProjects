@@ -6,7 +6,7 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using System.IO;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using System.Collections.Generic;
 using Section = LJCGenTextLib.Section;
 

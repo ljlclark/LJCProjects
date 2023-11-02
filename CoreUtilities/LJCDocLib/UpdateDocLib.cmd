@@ -68,7 +68,7 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
-set src=%utilRoot%LJCDocLib\LJCDocLibDAL\%bin%
+set src=%utilRoot%LJCDocLib\LJCGenDocDAL\%bin%
 echo copy %src%\LJCGenDocDAL.dll %to%
 copy %src%\LJCGenDocDAL.dll %to%
 
@@ -100,13 +100,7 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
-set src=%utilRoot%LJCDocGroupEditor\LJCDocGroupEditor\%bin%
-echo copy %src%\LJCDocGroupEditor.exe %to%
-copy %src%\LJCDocGroupEditor.exe %to%
-echo copy %src%\LJCDocGroupEditor.exe.config %to%
-copy %src%\LJCDocGroupEditor.exe.config %to%
-
-set src=%utilRoot%LJCDocLib\LJCDocGenLibDAL\%bin%
+set src=%utilRoot%LJCDocLib\LJCGenDocDAL\%bin%
 echo copy %src%\LJCGenDocDAL.dll %to%
 copy %src%\LJCGenDocDAL.dll %to%
 

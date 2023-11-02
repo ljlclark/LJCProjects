@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // LJCGenDocListCode.cs
 using LJCDBClientLib;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;

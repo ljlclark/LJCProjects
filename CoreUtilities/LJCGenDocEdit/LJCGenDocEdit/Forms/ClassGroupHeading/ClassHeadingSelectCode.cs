@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ClassHeadingSelectCode.cs
 using LJCDBClientLib;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System.IO;

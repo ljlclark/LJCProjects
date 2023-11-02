@@ -4,7 +4,7 @@
 using System;
 using LJCNetCommon;
 using LJCGenTextLib;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 
 namespace LJCDocGenLib
 {

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // MethodSelectCode.cs
 using LJCDBClientLib;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using LJCWinFormCommon;

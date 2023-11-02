@@ -1,7 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGenDocList.cs
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;

@@ -3,7 +3,7 @@
 // ClassHeadingDetail.cs
 using LJCDBClientLib;
 using LJCDBMessage;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;

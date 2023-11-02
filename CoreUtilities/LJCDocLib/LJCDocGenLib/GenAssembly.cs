@@ -1,7 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenAssembly.cs
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCDocObjLib;
 using LJCGenTextLib;
 using LJCNetCommon;

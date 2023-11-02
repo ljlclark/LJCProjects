@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // AssemblyGroupScript.cs
 using LJCDBMessage;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using System;
 using System.Collections.Generic;
 using System.IO;

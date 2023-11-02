@@ -1,5 +1,5 @@
 ﻿
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using System;
 

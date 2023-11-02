@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ProgramDocGen.cs
 using LJCDocGenLib;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using System;

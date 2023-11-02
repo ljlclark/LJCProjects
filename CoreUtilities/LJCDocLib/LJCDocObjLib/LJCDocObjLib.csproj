@@ -74,7 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LJCDocLibDAL\LJCGenDocDAL.csproj">
+    <ProjectReference Include="..\LJCGenDocDAL\LJCGenDocDAL.csproj">
       <Project>{c3d5c785-74a8-473e-81b4-35e07be7832a}</Project>
       <Name>LJCGenDocDAL</Name>
       <Private>False</Private>

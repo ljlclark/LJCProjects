@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ClassItemGridCode.cs
 using LJCDBMessage;
-using LJCDocLibDAL;
+using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
@@ -41,7 +41,7 @@ namespace LJCGenDocEdit
       var manager = Managers.DocClassManager;
       var names = new List<string>()
       {
-        LJCDocLibDAL.DocClass.ColumnSequence
+        LJCGenDocDAL.DocClass.ColumnSequence
       };
       manager.SetOrderBy(names);
 
@@ -51,15 +51,15 @@ namespace LJCGenDocEdit
         // Get ungrouped classes.
         keyColumns = new DbColumns()
         {
-          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, (object)"'-null'" },
-          { LJCDocLibDAL.DocClass.ColumnDocAssemblyID, DocAssemblyID() }
+          { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, (object)"'-null'" },
+          { LJCGenDocDAL.DocClass.ColumnDocAssemblyID, DocAssemblyID() }
         };
       }
       else
       {
         keyColumns = new DbColumns()
         {
-          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() }
+          { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() }
         };
       }
       DbResult result = manager.LoadResult(keyColumns);
@@ -113,7 +113,7 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
       var retValue = mClassGrid.LJCRowAdd();
-      var columnName = LJCDocLibDAL.DocClass.ColumnID;
+      var columnName = LJCGenDocDAL.DocClass.ColumnID;
       retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
 
       retValue.LJCSetValues(mClassGrid, dbValues);
@@ -133,7 +133,7 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DocClass dataRecord)
     {
-      row.LJCSetInt32(LJCDocLibDAL.DocClass.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(LJCGenDocDAL.DocClass.ColumnID, dataRecord.ID);
     }
     #endregion
 
@@ -194,8 +194,8 @@ namespace LJCGenDocEdit
       {
         var keyRecord = new DbColumns()
         {
-          { LJCDocLibDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() },
-          { LJCDocLibDAL.DocClass.ColumnID, DocClassID() }
+          { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() },
+          { LJCGenDocDAL.DocClass.ColumnID, DocClassID() }
         };
         var manager = Managers.DocClassManager;
         manager.Delete(keyRecord);
@@ -325,8 +325,8 @@ namespace LJCGenDocEdit
       {
         List<string> propertyNames = new List<string>()
         {
-          LJCDocLibDAL.DocClass.ColumnName,
-          LJCDocLibDAL.DocClass.ColumnDescription
+          LJCGenDocDAL.DocClass.ColumnName,
+          LJCGenDocDAL.DocClass.ColumnDescription
         };
 
         // Get the grid columns from the manager Data Definition.
@@ -413,7 +413,7 @@ namespace LJCGenDocEdit
       }
       if (docClassRow != null)
       {
-        retValue = (short)docClassRow.LJCGetInt32(LJCDocLibDAL.DocClass.ColumnID);
+        retValue = (short)docClassRow.LJCGetInt32(LJCGenDocDAL.DocClass.ColumnID);
       }
       return retValue;
     }
