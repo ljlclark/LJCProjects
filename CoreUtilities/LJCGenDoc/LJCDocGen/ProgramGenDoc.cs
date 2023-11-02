@@ -1,19 +1,18 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ProgramDocGen.cs
-using LJCDocGenLib;
+using LJCGenDocLib;
 using LJCGenDocDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using System;
-using System.ComponentModel.Design;
 using System.IO;
 
-namespace LJCDocGen
+namespace LJCGenDoc
 {
   // The program entry point class.
   /// <include path='items/Program/*' file='Doc/ProjectDocGen.xml'/>
-  public class ProgramDocGen
+  public class ProgramGenDoc
   {
     // The program entry point function.
     /// <include path='items/MainArgs/*' file='../../LJCGenDoc/Common/Program.xml'/>
@@ -23,7 +22,7 @@ namespace LJCDocGen
       if (args.Length < 0 || args.Length > 1)
       {
         success = false;
-        Console.WriteLine("\r\nSyntax: LJCDocGen.exe [outputPath]");
+        Console.WriteLine("\r\nSyntax: LJCGenDoc.exe [outputPath]");
         Console.WriteLine(@"outputPath: defaults to 'CodeDocTest'");
         Console.Write("\r\nPress any key to continue...");
         Console.ReadKey();
@@ -37,7 +36,7 @@ namespace LJCDocGen
           outputPath = args[0];
         }
         Console.WriteLine();
-        Console.WriteLine($"LJCDocGen {outputPath}");
+        Console.WriteLine($"LJCGenDoc {outputPath}");
         Console.WriteLine();
 
         // Set DAL config before using anywhere in the program.

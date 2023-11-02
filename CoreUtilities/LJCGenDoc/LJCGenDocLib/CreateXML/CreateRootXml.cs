@@ -6,7 +6,7 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCGenDocDAL;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   /// <summary>Creates the Root Data values.</summary>
   public class CreateRootXml

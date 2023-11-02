@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Provides methods for HTML Syntax Highighting.
   /// <include path='items/SyntaxHighlight/*' file='Doc/SyntaxHighlight.xml'/>

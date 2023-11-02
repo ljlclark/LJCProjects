@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Root HTML page.
   /// <include path='items/GenRoot/*' file='Doc/GenRoot.xml'/>

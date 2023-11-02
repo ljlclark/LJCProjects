@@ -3,7 +3,7 @@
 // UserTypes.cs
 using System.Collections.Generic;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   /// <summary>Represents a collection of User Type names.</summary>
   public class UserTypes : List<string>

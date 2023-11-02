@@ -8,7 +8,7 @@ using LJCNetCommon;
 using System;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Property HTML pages.
   /// <include path='items/GenProperty/*' file='Doc/GenProperty.xml'/>

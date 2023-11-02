@@ -8,7 +8,7 @@ using LJCGenTextLib;
 using LJCDocObjLib;
 using Section = LJCGenTextLib.Section;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Creates the Method XML Data values.
   /// <include path='items/CreateMethodXml/*' file='Doc/CreateMethodXml.xml'/>

@@ -8,7 +8,7 @@ using LJCNetCommon;
 using System;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Assembly HTML pages.
   /// <include path='items/GenAssembly/*' file='Doc/ProjectDocGenLib.xml'/>

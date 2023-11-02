@@ -7,7 +7,7 @@ namespace LJCDocXMLObjLib
 {
   // The deserialized XML documentation assembly node.
   /// <include path='items/DocAssembly/*' file='Doc/DocAssembly.xml'/>
-  public class DocAssembly
+  public class DocXMLAssembly
   {
     #region Properties
 

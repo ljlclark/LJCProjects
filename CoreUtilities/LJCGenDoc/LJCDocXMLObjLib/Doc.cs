@@ -158,7 +158,7 @@ namespace LJCDocXMLObjLib
 
     /// <summary>The assembly information.</summary>
     [XmlElement("assembly")]
-    public DocAssembly DocAssembly { get; set; }
+    public DocXMLAssembly DocAssembly { get; set; }
 
     // The documentation members.
     /// <include path='items/DocMembers/*' file='Doc/Doc.xml'/>

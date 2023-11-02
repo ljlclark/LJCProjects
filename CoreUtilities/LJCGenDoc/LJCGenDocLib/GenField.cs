@@ -8,7 +8,7 @@ using LJCNetCommon;
 using System;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Field HTML pages.
   /// <include path='items/GenField/*' file='Doc/GenField.xml'/>

@@ -10,7 +10,7 @@ using LJCGenDocDAL;
 using Section = LJCGenTextLib.Section;
 using System.Collections.Generic;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Creates the Type XML Data values.
   /// <include path='items/CreateTypeXml/*' file='Doc/CreateTypeXml.xml'/>

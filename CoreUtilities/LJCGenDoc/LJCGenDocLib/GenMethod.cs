@@ -8,7 +8,7 @@ using LJCNetCommon;
 using System;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Method HTML pages.
   /// <include path='items/GenMethod/*' file='Doc/GenMethod.xml'/>

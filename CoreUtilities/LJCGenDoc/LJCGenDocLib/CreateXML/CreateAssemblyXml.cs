@@ -10,7 +10,7 @@ using LJCGenDocDAL;
 using System.Collections.Generic;
 using Section = LJCGenTextLib.Section;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Creates the Assembly XML Data values.
   /// <include path='items/CreateAssemblyXml/*' file='Doc/CreateAssemblyXml.xml'/>

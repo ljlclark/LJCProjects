@@ -7,7 +7,7 @@ using LJCGenTextLib;
 using LJCDocObjLib;
 using Section = LJCGenTextLib.Section;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Creates the Field XML Data values.
   /// <include path='items/CreateFieldXml/*' file='Doc/CreateFieldXml.xml'/>

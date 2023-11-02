@@ -8,7 +8,7 @@ using LJCNetCommon;
 using System;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Generates the Class/Type HTML pages.
   /// <include path='items/GenType/*' file='Doc/GenType.xml'/>

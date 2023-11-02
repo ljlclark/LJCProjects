@@ -7,7 +7,7 @@ using LJCGenTextLib;
 using LJCDocObjLib;
 using Section = LJCGenTextLib.Section;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   // Creates the Property XML Data values.
   /// <include path='items/CreatePropertyXml/*' file='Doc/CreatePropertyXml.xml'/>

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Doc.cs" />
-    <Compile Include="DocAssembly.cs" />
+    <Compile Include="DocXMLAssembly.cs" />
     <Compile Include="DocExample.cs" />
     <Compile Include="DocException.cs" />
     <Compile Include="DocExceptions.cs" />

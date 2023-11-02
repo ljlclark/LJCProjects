@@ -5,7 +5,7 @@ using LJCGenTextLib;
 using LJCNetCommon;
 using System.IO;
 
-namespace LJCDocGenLib
+namespace LJCGenDocLib
 {
   public partial class GenRoot
   {
