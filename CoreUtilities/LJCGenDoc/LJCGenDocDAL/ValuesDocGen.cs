@@ -18,11 +18,10 @@ namespace LJCGenDocDAL
     {
       StandardSettings = new StandardUISettings();
       var fileName = "LJCGenDoc.exe.config";
-      if (false == File.Exists(fileName))
+      if (File.Exists(fileName))
       {
-        throw new FileNotFoundException(fileName);
+        SetConfigFile(fileName);
       }
-      SetConfigFile(fileName);
     }
 
     /// <summary>Configures the settings.</summary>

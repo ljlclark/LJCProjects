@@ -138,7 +138,7 @@ exec sp_DAAddUnique @groupName, 'LJCDBServiceLib',
   '..\..\..\..\..\CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.xml',
   '', @seq;
 
-set @groupName = 'CodeGen';
+set @groupName = 'GenText';
 set @seq = 1;
 exec sp_DAAddUnique @groupName, 'LJCGenText',
   'The Gen Text console program. (RO)',
@@ -160,11 +160,11 @@ exec sp_DAAddUnique @groupName, 'LJCGenTextEdit',
   '..\..\..\..\..\CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug\LJCGenTextEdit.xml',
   '', @seq;
 
-set @groupName = 'DocGen';
+set @groupName = 'GenDoc';
 set @seq = 1;
-exec sp_DAAddUnique @groupName, 'LJCDocGen',
+exec sp_DAAddUnique @groupName, 'LJCGenDoc',
   'A program to generate code documentation.',
-  'LJCDocGen.xml',
+  'LJCGenDoc.xml',
   '', @seq;
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCGenDocLib',
@@ -189,7 +189,7 @@ exec sp_DAAddUnique @groupName, 'LJCDocXmlObjLib',
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCGenDocEdit',
   'The GenDoc Group Editor',
-  '..\..\..\..\..\CoreUtilities\LJCDocGroupEditor\LJCDocGroupEditor\bin\Debug\LJCDocGroupEditor.xml',
+  '..\..\..\..\..\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug\LJCGenDocEdit.xml',
   '', @seq;
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCGenPageGen',

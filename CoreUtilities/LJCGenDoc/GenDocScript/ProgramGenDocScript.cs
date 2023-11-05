@@ -7,7 +7,6 @@ namespace GenDocScript
 {
   internal class ProgramGenDocScript
   {
-
     static void Main()
     {
       Console.WriteLine();
