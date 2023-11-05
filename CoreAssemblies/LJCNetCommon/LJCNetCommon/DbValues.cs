@@ -15,7 +15,7 @@ namespace LJCNetCommon
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public static DbValues LJCDeserialize(string fileSpec = null)
     {
       DbValues retValue;
@@ -33,13 +33,13 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbValues()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public DbValues(DbValues items)
     {
       if (NetCommon.HasItems(items))
@@ -63,8 +63,6 @@ namespace LJCNetCommon
       {
         DataTypeName = dataTypeName,
         PropertyName = propertyName,
-        // *** Next Statement *** Add 10/15/23
-        //RenameAs = renameAs,
         Value = value,
       };
       Add(retValue);
@@ -72,7 +70,7 @@ namespace LJCNetCommon
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbValues Clone()
     {
       var retValue = new DbValues();
@@ -84,7 +82,7 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -97,7 +95,7 @@ namespace LJCNetCommon
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (false == NetString.HasValue(fileSpec))

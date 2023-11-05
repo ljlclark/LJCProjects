@@ -15,7 +15,7 @@ namespace LJCNetCommon
     #region Static Functions
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public static bool HasItems(KeyItems collectionObject)
     {
       bool retValue = false;
@@ -31,7 +31,7 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public KeyItems()
     {
       Items = new List<KeyItem>();
@@ -39,7 +39,7 @@ namespace LJCNetCommon
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public KeyItems(KeyItems items)
     {
       Items = new List<KeyItem>();
@@ -100,7 +100,7 @@ namespace LJCNetCommon
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public KeyItems Clone()
     {
       var retValue = new KeyItems();
@@ -129,7 +129,7 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -222,7 +222,7 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public KeyItems SearchPropertyName(string name)
     {
       List<KeyItem> items;
@@ -235,7 +235,7 @@ namespace LJCNetCommon
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public void SortPropertyName()
     {
       if (Count != mPrevCount)

@@ -7,7 +7,7 @@ using System.IO;
 namespace LJCCodeLineCounter
 {
   // The program entry point class.
-  /// <include path = 'items/Program/*' file='../../LJCDocLib/Common/Program.xml'/>
+  /// <include path = 'items/Program/*' file='../../LJCGenDoc/Common/Program.xml'/>
   public class Program
   {
     // The program entry point function.

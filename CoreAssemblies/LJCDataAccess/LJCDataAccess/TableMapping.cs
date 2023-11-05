@@ -13,7 +13,7 @@ namespace LJCDataAccess
     #region Constructors
 
     // Initializes an instance of the object.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public TableMapping()
     {
       TableMaps = new DataTableMappingCollection();

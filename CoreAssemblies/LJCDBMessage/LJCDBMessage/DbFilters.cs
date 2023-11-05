@@ -68,7 +68,7 @@ namespace LJCDBMessage
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public DbFilters(DbFilters items)
     {
       if (NetCommon.HasItems(items))
@@ -118,7 +118,7 @@ namespace LJCDBMessage
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbFilters Clone()
     {
       DbFilters retValue = new DbFilters();

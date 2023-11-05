@@ -7,11 +7,11 @@ using System.ServiceProcess;
 namespace LJCDBServiceHost
 {
   // The program entry point class.
-  /// <include path='items/Program/*' file='../../../CoreUtilities/LJCDocLib/Common/Program.xml'/>
+  /// <include path='items/Program/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
   public static class Program
   {
     // The program entry point function.
-    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCDocLib/Common/Program.xml'/>
+    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
     private static void Main()
     {
       ServiceBase[] ServicesToRun;

@@ -12,7 +12,7 @@ namespace CipherLib
     #region Static Functions
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public static bool HasItems(InsertItems collectionObject)
     {
       bool retValue = false;
@@ -28,14 +28,14 @@ namespace CipherLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public InsertItems()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public InsertItems(InsertItems items)
     {
       if (HasItems(items))
@@ -68,7 +68,7 @@ namespace CipherLib
     #region Sort and Search Methods
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public InsertItem LJCSearchName(string name)
     {
       InsertItemNameComparer comparer;

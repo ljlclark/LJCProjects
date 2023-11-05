@@ -13,7 +13,7 @@ namespace LJCDBServiceConsoleHost
   public class Program
   {
     // The main entry point method.
-    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCDocLib/Common/Program.xml'/>
+    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
     private static void Main()
     {
       using (ServiceHost serviceHost = new ServiceHost(

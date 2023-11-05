@@ -19,7 +19,7 @@ namespace LJCDBMessage
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbConditionSet(DbConditionSet item)
     {
       BooleanOperator = item.BooleanOperator;

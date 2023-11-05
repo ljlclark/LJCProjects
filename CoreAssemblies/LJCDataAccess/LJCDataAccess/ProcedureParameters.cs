@@ -15,13 +15,13 @@ namespace LJCDataAccess
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ProcedureParameters()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public ProcedureParameters(ProcedureParameters items)
     {
       if (NetCommon.HasItems(items))
@@ -71,7 +71,7 @@ namespace LJCDataAccess
     }
 
     // Retrieve the collection element by name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public ProcedureParameter LJCSearchName(string name)
     {
       ProcedureParameter retValue = null;

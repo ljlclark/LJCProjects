@@ -13,7 +13,7 @@ namespace LJCCodeLineCounter
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public CountProcessor()
     {
       TotalFiles = 0;

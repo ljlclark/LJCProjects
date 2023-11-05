@@ -14,7 +14,7 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbColumn()
     {
       DataTypeName = "String";
@@ -22,7 +22,7 @@ namespace LJCNetCommon
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbColumn(DbColumn item)
     {
       AllowDBNull = item.AllowDBNull;
@@ -63,7 +63,7 @@ namespace LJCNetCommon
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public DbColumn Clone()
     {
       DbColumn retValue = MemberwiseClone() as DbColumn;
@@ -71,7 +71,7 @@ namespace LJCNetCommon
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(DbColumn other)
     {
       int retValue;
@@ -98,7 +98,7 @@ namespace LJCNetCommon
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       string retValue = mColumnName;
@@ -307,7 +307,7 @@ namespace LJCNetCommon
   public class DbColumnNameComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;
@@ -331,7 +331,7 @@ namespace LJCNetCommon
   public class DbColumnPropertyComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;
@@ -355,7 +355,7 @@ namespace LJCNetCommon
   public class DbColumnRenameAsComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;

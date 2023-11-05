@@ -50,7 +50,7 @@
         public class NameComparer : IComparer&lt;ClassName&gt;
         {
           // Compares two objects.
-          /// &lt;include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/&gt;
+          /// &lt;include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/&gt;
           public int Compare(ClassName x, ClassName y)
           {
             int retValue;
