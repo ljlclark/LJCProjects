@@ -14,7 +14,7 @@ namespace LJCWinFormControls
     #region Constructor
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCItemCombo()
     {
       InitializeComponent();
@@ -112,7 +112,7 @@ namespace LJCWinFormControls
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCItem Clone()
     {
       LJCItem retValue = MemberwiseClone() as LJCItem;
@@ -120,7 +120,7 @@ namespace LJCWinFormControls
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return Text;

@@ -16,7 +16,7 @@ namespace LJCGenTableCode
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static GenFileSpecs LJCDeserialize(string fileSpec = null)
     {
       GenFileSpecs retValue;
@@ -58,7 +58,7 @@ namespace LJCGenTableCode
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public GenFileSpecs()
     {
     }
@@ -93,7 +93,7 @@ namespace LJCGenTableCode
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -106,7 +106,7 @@ namespace LJCGenTableCode
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (false == NetString.HasValue(fileSpec))

@@ -17,7 +17,7 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public CreateDataDetail()
     {
       InitializeComponent();
@@ -41,7 +41,7 @@ namespace LJCGenTextEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);

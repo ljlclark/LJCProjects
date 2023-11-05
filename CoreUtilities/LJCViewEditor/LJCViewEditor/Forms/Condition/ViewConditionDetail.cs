@@ -58,7 +58,7 @@ namespace LJCViewEditor
 		}
 
 		// Paint the form background.
-		/// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			base.OnPaintBackground(e);

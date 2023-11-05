@@ -37,7 +37,7 @@ namespace LJCDBViewDAL
     #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ViewTable RetrieveWithID(int id, List<string> propertyNames = null)
     {
       ViewTable retValue;

@@ -14,7 +14,7 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public Calendar()
     {
       InitializeComponent();
@@ -35,7 +35,7 @@ namespace LJCWinFormControls
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
-    /// <include path='items/InitializeControls/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/InitializeControls/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
     private void InitializeControls()
     {
       DateTime startDate;

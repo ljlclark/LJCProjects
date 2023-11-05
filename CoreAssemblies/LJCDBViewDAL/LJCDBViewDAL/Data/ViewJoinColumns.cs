@@ -8,13 +8,13 @@ using LJCNetCommon;
 namespace LJCDBViewDAL
 {
 	// <summary>Represents a collection of object items.</summary>
-	/// <include path='items/Collection/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+	/// <include path='items/Collection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 	public class ViewJoinColumns : List<ViewJoinColumn>
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ViewJoinColumns()
 		{
 			mPrevCount = -1;
@@ -24,7 +24,7 @@ namespace LJCDBViewDAL
 		#region Collection Methods
 
 		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewJoinColumn Add(int id, string name)
 		{
 			ViewJoinColumn retValue = null;
@@ -47,7 +47,7 @@ namespace LJCDBViewDAL
 		}
 
 		// Get custom collection from List<T>.
-		/// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewJoinColumns GetCollection(List<ViewJoinColumn> list)
 		{
 			ViewJoinColumns retValue = null;
@@ -67,7 +67,7 @@ namespace LJCDBViewDAL
 		#region Sort and Search Methods
 
 		// Sort on Name.
-		/// <include path='items/LJCSortName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public void LJCSortName()
 		{
 			if (Count != mPrevCount)
@@ -78,7 +78,7 @@ namespace LJCDBViewDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewJoinColumn LJCSearchName(string name)
 		{
 			ViewJoinColumn retValue = null;

@@ -12,7 +12,7 @@ namespace LJCWinFormCommon
     #region Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(ControlValue other)
     {
       int retValue;

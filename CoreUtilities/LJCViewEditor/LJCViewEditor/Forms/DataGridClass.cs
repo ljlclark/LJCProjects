@@ -51,14 +51,8 @@ namespace LJCViewEditor
         DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
         if (DbResult.HasData(dbResult))
         {
-          // Setup grid columns.
-          //ResultGridData resultGridData = new ResultGridData();
-          //resultGridData.SetGridColumns(dbRequest);
-
           // Get data.
-          //dataColumns = CreateDbColumnsFromDbValues(resultGridData.GridColumns
-          //  , dbResult.Rows[0].Values);
-          dataColumns = CreateDbColumnsFromDbValues(dbRequest.Columns
+          dataColumns = CreateDbValueColumns(dbRequest.Columns
             , dbResult.Rows[0].Values);
 
           // Create and show DataDetail dialog.
@@ -102,19 +96,17 @@ namespace LJCViewEditor
         }
       }
     }
-
     #endregion
 
     #region Private Methods
 
     // Creates combined DbColumns from DbColumns and DbValues.
-    private static DbColumns CreateDbColumnsFromDbValues(DbColumns dbColumns
+    private static DbColumns CreateDbValueColumns(DbColumns dbColumns
       , DbValues dbValues)
     {
       DbColumn findColumn;
       DbColumns retValue = null;
 
-      //if (dbColumns != null && dbValues != null)
       if (NetCommon.HasItems(dbColumns) && NetCommon.HasItems(dbValues))
       {
         retValue = new DbColumns();
@@ -123,10 +115,13 @@ namespace LJCViewEditor
           findColumn = dbColumns.LJCSearchPropertyName(dbValue.PropertyName);
           DbColumn dbColumn = new DbColumn()
           {
-            ColumnName = findColumn.ColumnName,
+            AllowDBNull = findColumn.AllowDBNull,
+            AutoIncrement = findColumn.AutoIncrement,
             Caption = findColumn.Caption,
+            ColumnName = findColumn.ColumnName,
             DataTypeName = findColumn.DataTypeName,
             MaxLength = findColumn.MaxLength,
+            PropertyName = findColumn.PropertyName,
             Value = dbValue.Value
           };
           if (0 == dbColumn.MaxLength)

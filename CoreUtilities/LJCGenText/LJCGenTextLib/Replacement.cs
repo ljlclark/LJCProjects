@@ -12,7 +12,7 @@ namespace LJCGenTextLib
     #region Constructors
 
     //Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Replacement()
     {
     }
@@ -29,7 +29,7 @@ namespace LJCGenTextLib
     #region Public Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Replacement Clone()
     {
       Replacement retValue = MemberwiseClone() as Replacement;
@@ -37,14 +37,14 @@ namespace LJCGenTextLib
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return Name;
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(Replacement other)
     {
       int retValue;

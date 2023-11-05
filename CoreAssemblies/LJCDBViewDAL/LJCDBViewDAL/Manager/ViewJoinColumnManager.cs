@@ -15,7 +15,7 @@ namespace LJCDBViewDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ViewJoinColumnManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "ViewJoinColumn")
       : base(dbServiceRef, dataConfigName, tableName)
@@ -78,7 +78,7 @@ namespace LJCDBViewDAL
     }
 
     // Retrieves a Data Record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ViewJoinColumn RetrieveWithID(int id, List<string> propertyNames = null)
     {
       ViewJoinColumn retValue;
@@ -111,7 +111,7 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
@@ -122,7 +122,7 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetParentIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetParentIDKey(int parentID)
     {
       var retValue = new DbColumns()
@@ -150,7 +150,7 @@ namespace LJCDBViewDAL
     }
 
     // Check for duplicate unique key.
-    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public bool IsDuplicate(ViewJoinColumn lookupRecord, ViewJoinColumn currentRecord
       , bool isUpdate = false)
     {

@@ -56,7 +56,7 @@ namespace LJCGenDocEdit
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal bool RowSelect(DocClassGroupHeading dataRecord)
     {
       bool retValue = false;
@@ -299,7 +299,7 @@ namespace LJCGenDocEdit
     }
 
     // The DragDrop method.
-    /// <include path='items/DoDragDrop/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoDragDrop/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal void DoDragDrop(DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;

@@ -51,7 +51,7 @@ namespace LJCGenDocEdit
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal bool RowSelect(DocAssembly dataRecord)
     {
       bool retValue = false;
@@ -115,7 +115,7 @@ namespace LJCGenDocEdit
     }
 
     // Retrieves the currently selecteditem.
-    /// <include path='items/CurrentItem/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/CurrentItem/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal DocAssembly CurrentAssembly()
     {
       DocAssembly retValue = null;

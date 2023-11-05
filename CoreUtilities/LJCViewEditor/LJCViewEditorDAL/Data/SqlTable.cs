@@ -11,7 +11,7 @@ namespace LJCViewEditorDAL
 		#region Data Methods
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return Name;

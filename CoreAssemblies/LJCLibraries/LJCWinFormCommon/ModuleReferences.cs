@@ -12,7 +12,7 @@ namespace LJCWinFormCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ModuleReferences()
     {
     }
@@ -107,7 +107,7 @@ namespace LJCWinFormCommon
   public class ModuleNameComparer : IComparer<ModuleReference>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(ModuleReference x, ModuleReference y)
     {
       int retValue;

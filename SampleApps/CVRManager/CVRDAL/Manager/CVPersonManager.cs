@@ -15,7 +15,7 @@ namespace CVRDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public CVPersonManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "CVPerson")
       : base(dbServiceRef, dataConfigName, tableName)
@@ -39,7 +39,7 @@ namespace CVRDAL
     #region Load/Retrieve Methods
 
     // Deletes a Data Record with the supplied value.
-    /// <include path='items/DeleteWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DeleteWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public void DeleteWithID(long id)
     {
       var keyColumns = GetIDKey(id);
@@ -47,7 +47,7 @@ namespace CVRDAL
     }
 
     // Retrieves a Data Record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public CVPerson RetrieveWithID(long id, List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
@@ -58,7 +58,7 @@ namespace CVRDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(long id)
     {
       DbColumns retValue = new DbColumns()
@@ -72,7 +72,7 @@ namespace CVRDAL
     #region KeyItem Methods
 
     // Creates the DataColumns object.
-    /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns DataColumns(long id)
     {
       DbColumns retValue = null;
@@ -102,7 +102,7 @@ namespace CVRDAL
     }
 
     // Creates the KeyItem object.
-    /// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public KeyItem GetKeyItem(string propertyName, long id)
     {
       KeyItem retValue = null;

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace LJCGenDocEdit
 {
   // The list form.
-  // <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+  // <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
   internal partial class LJCGenDocList : Form
   {
     #region Constructors

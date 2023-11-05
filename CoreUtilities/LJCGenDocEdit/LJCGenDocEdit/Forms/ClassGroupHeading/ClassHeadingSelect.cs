@@ -104,7 +104,7 @@ namespace LJCGenDocEdit
     #region Control Event Handlers
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/LJCOnChange/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     internal void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

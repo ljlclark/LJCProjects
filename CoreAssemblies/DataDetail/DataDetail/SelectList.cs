@@ -18,7 +18,7 @@ namespace DataDetail
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public SelectList()
     {
       InitializeComponent();
@@ -46,7 +46,7 @@ namespace DataDetail
     #region Data Methods
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
     private void DataRetrieve()
     {
       DbResult dbResult;

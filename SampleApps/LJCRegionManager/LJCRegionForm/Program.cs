@@ -11,7 +11,7 @@ namespace LJCRegionForm
   static class Program
   {
     // The main entry point for the application.
-    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCDocLib/Common/Program.xml'/>
+    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
     [STAThread]
     static void Main()
     {

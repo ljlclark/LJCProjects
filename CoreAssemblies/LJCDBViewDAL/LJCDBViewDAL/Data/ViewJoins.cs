@@ -25,7 +25,7 @@ namespace LJCDBViewDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewJoin LJCSearchName(string name)
 		{
 			ViewJoin retValue = null;

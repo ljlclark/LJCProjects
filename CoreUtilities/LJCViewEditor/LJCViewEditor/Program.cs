@@ -10,11 +10,11 @@ using System.Windows.Forms;
 namespace LJCViewEditor
 {
 	// The program entry point class.
-	/// <include path='items/Program/*' file='../../LJCDocLib/Common/Program.xml'/>
+	/// <include path='items/Program/*' file='../../LJCGenDoc/Common/Program.xml'/>
 	static class Program
 	{
 		// The program entry point function.
-		/// <include path='items/Main/*' file='../../LJCDocLib/Common/Program.xml'/>
+		/// <include path='items/Main/*' file='../../LJCGenDoc/Common/Program.xml'/>
 		[STAThread]
 		static void Main()
 		{

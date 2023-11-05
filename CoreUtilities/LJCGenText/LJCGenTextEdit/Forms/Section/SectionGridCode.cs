@@ -29,7 +29,7 @@ namespace LJCGenTextEdit
     #region Data Methods
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DataRetrieve()
     {
       Sections dataRecords;

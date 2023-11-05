@@ -13,7 +13,7 @@ namespace LJCDBViewDAL
 		#region Constructors
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ViewCondition()
 		{
 			ChangedNames = new ChangedNames();
@@ -23,7 +23,7 @@ namespace LJCDBViewDAL
 		#region Methods
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return $"{FirstValue} {ComparisonOperator} {SecondValue}";

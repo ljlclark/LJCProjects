@@ -10,14 +10,14 @@ namespace CVRManager
 		#region Data Methods
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return RangeName;
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(LogRange other)
 		{
 			int retValue;

@@ -18,7 +18,7 @@ namespace LJCUnitMeasureDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public UnitSystemManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "UnitSystem")
       : base(dbServiceRef, dataConfigName, tableName)
@@ -40,7 +40,7 @@ namespace LJCUnitMeasureDAL
     #region Load/Retrieve Methods
 
     // Loads a collection of data records ordered by Description.
-    /// <include path='items/LoadByDescription/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/LoadByDescription/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public UnitSystems LoadByDescription(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -49,7 +49,7 @@ namespace LJCUnitMeasureDAL
     }
 
     // Retrieves a Data Record with the Code value.
-    /// <include path='items/RetrieveWithCode/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithCode/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public UnitSystem RetrieveWithCode(string code, List<string> propertyNames = null)
     {
       var keyColumns = GetCodeKey(code);
@@ -57,7 +57,7 @@ namespace LJCUnitMeasureDAL
     }
 
     // Retrieves a Data Record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public UnitSystem RetrieveWithID(int id, List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
@@ -68,7 +68,7 @@ namespace LJCUnitMeasureDAL
     #region GetKey Methods
 
     // Gets the Code key record.
-    /// <include path='items/GetCodeKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetCodeKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetCodeKey(string code)
     {
       var retValue = new DbColumns()
@@ -79,7 +79,7 @@ namespace LJCUnitMeasureDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
@@ -93,7 +93,7 @@ namespace LJCUnitMeasureDAL
     #region Other Public Methods
 
     // Check for duplicate unique key.
-    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public bool IsDuplicate(UnitSystem lookupRecord, UnitSystem currentRecord
       , bool isUpdate = false)
     {

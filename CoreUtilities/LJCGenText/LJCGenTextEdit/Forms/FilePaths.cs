@@ -13,7 +13,7 @@ namespace LJCGenTextEdit
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static FilePaths Deserialize(string fileSpec = null)
     {
       FilePaths retValue;
@@ -39,7 +39,7 @@ namespace LJCGenTextEdit
     #region Methods
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void Serialize(string fileSpec = null)
     {
       if (false == NetString.HasValue(fileSpec))

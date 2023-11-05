@@ -15,7 +15,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public CVSex()
 		{
 			ChangedNames = new ChangedNames();
@@ -25,7 +25,7 @@ namespace CVRDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public CVSex Clone()
 		{
 			CVSex retValue = MemberwiseClone() as CVSex;
@@ -33,7 +33,7 @@ namespace CVRDAL
 		}
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			StringBuilder builder = new StringBuilder(64);
@@ -46,7 +46,7 @@ namespace CVRDAL
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(CVSex other)
 		{
 			int retValue;
@@ -149,7 +149,7 @@ namespace CVRDAL
 	public class CVSexCodeComparer : IComparer<CVSex>
 	{
 		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int Compare(CVSex x, CVSex y)
 		{
 			int retValue;
@@ -171,7 +171,7 @@ namespace CVRDAL
 	public class CVSexNameComparer : IComparer<CVSex>
 	{
 		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int Compare(CVSex x, CVSex y)
 		{
 			int retValue;

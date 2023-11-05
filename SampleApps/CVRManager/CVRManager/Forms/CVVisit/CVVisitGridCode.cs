@@ -219,7 +219,7 @@ namespace CVRManager
 		}
 
 		// Refreshes the list.
-		/// <include path='items/DoRefresh/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
+		/// <include path='items/DoRefresh/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
 		internal void DoRefreshCVVisit()
 		{
 			CVVisit dataRecord;

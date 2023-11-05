@@ -13,7 +13,7 @@ namespace LJCWinFormCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlValues()
     {
     }
@@ -38,7 +38,7 @@ namespace LJCWinFormCommon
     }
 
     // Retrieve the collection element by name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public ControlValue LJCSearchName(string name)
     {
       ControlValue retValue = null;

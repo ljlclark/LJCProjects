@@ -66,7 +66,7 @@ namespace LJCGenDocEdit
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/RowSelect/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal bool RowSelect(DocMethodGroup dataRecord)
     {
       bool retValue = false;

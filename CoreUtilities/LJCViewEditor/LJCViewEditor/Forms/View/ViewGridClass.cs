@@ -151,7 +151,7 @@ namespace LJCViewEditor
     #region Action Methods
 
     // Displays a detail dialog for a new record.
-    /// <include path='items/DoNew/*' file='../../LJCDocLib/Common/List.xml'/>
+    /// <include path='items/DoNew/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DoNew()
     {
       ViewDataDetail detail;

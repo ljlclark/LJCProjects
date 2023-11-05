@@ -16,14 +16,14 @@ namespace LJCDataDetailDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlRow()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlRow(ControlRow item)
     {
       ChangedNames = new ChangedNames();
@@ -39,7 +39,7 @@ namespace LJCDataDetailDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlRow Clone()
     {
       var retValue = MemberwiseClone() as ControlRow;
@@ -47,7 +47,7 @@ namespace LJCDataDetailDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(ControlRow other)
     {
       int retValue;
@@ -66,7 +66,7 @@ namespace LJCDataDetailDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return $"Column:{ControlColumnID}-DataValue:{DataValueName}";
@@ -207,7 +207,7 @@ namespace LJCDataDetailDAL
   public class ControlRowUniqueComparer : IComparer<ControlRow>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(ControlRow x, ControlRow y)
     {
       int retValue;

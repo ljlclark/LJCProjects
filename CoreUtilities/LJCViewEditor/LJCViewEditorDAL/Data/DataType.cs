@@ -13,7 +13,7 @@ namespace LJCViewEditorDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public DataType()
 		{
 			ChangedNames = new ChangedNames();
@@ -23,7 +23,7 @@ namespace LJCViewEditorDAL
 		#region Data Methods
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(DataType other)
 		{
 			int retValue;
@@ -44,7 +44,7 @@ namespace LJCViewEditorDAL
 		}
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return mName;

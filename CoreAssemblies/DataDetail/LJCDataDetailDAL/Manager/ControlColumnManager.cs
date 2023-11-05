@@ -12,7 +12,7 @@ namespace LJCDataDetailDAL
   public class ControlColumnManager
   {
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DataManagerC/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ControlColumnManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "ControlColumn", string schemaName = null)
     {
@@ -41,7 +41,7 @@ namespace LJCDataDetailDAL
     #region Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ControlColumn Add(ControlColumn dataObject, List<string> propertyNames = null)
     {
       ControlColumn retValue;
@@ -56,14 +56,14 @@ namespace LJCDataDetailDAL
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ControlColumns Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -76,7 +76,7 @@ namespace LJCDataDetailDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ControlColumn Retrieve(DbColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
@@ -88,7 +88,7 @@ namespace LJCDataDetailDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public void Update(ControlColumn dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -113,7 +113,7 @@ namespace LJCDataDetailDAL
     }
 
     // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ControlColumn RetrieveWithID(long id, List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
@@ -135,7 +135,7 @@ namespace LJCDataDetailDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -176,7 +176,7 @@ namespace LJCDataDetailDAL
     #region Other Public Methods
 
     // Check for duplicate unique key.
-    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public bool IsDuplicate(ControlColumn lookupRecord
       , ControlColumn currentRecord, bool isUpdate = false)
     {
@@ -205,7 +205,7 @@ namespace LJCDataDetailDAL
     #region Joins
 
     // Creates and returns the Load Joins object.
-    /// <include path='items/GetLoadJoins/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetLoadJoins/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbJoins GetJoins()
     {
       DbJoin dbJoin;

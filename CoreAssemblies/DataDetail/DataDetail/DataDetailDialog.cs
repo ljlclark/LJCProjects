@@ -69,7 +69,7 @@ namespace DataDetail
     #region Data Methods
 
     // Retrieves the initial control data.
-    // <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
+    // <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       CenterToScreen();
@@ -1181,7 +1181,7 @@ namespace DataDetail
     #region DataDetailDialog
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

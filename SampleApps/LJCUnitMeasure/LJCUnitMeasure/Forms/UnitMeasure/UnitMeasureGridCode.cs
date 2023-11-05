@@ -30,7 +30,7 @@ namespace LJCUnitMeasure
 		#region Data Methods
 
 		// Retrieves the list rows.
-		/// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
+		/// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
 		internal void DataRetrieve()
 		{
 			UnitMeasures dataRecords;

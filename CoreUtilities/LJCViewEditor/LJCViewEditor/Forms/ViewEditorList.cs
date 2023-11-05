@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace LJCViewEditor
 {
   // The View Editor form.
-  /// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+  /// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
   public partial class ViewEditorList : Form
   {
     #region Constructors

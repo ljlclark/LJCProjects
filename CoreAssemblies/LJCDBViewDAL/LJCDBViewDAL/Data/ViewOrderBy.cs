@@ -13,7 +13,7 @@ namespace LJCDBViewDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ViewOrderBy()
 		{
 			ChangedNames = new ChangedNames();
@@ -23,14 +23,14 @@ namespace LJCDBViewDAL
 		#region Public Methods
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return mColumnName;
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(ViewOrderBy other)
 		{
 			int retValue;

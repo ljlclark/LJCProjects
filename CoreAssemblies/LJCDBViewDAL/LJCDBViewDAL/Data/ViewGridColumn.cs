@@ -13,7 +13,7 @@ namespace LJCDBViewDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ViewGridColumn()
 		{
 			ChangedNames = new ChangedNames();
@@ -23,7 +23,7 @@ namespace LJCDBViewDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ViewGridColumn Clone()
 		{
 			ViewGridColumn retValue = MemberwiseClone() as ViewGridColumn;
@@ -31,7 +31,7 @@ namespace LJCDBViewDAL
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(ViewGridColumn other)
 		{
 			int retValue;

@@ -14,7 +14,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public Facility()
 		{
 			ChangedNames = new ChangedNames();
@@ -24,7 +24,7 @@ namespace CVRDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public Facility Clone()
 		{
 			Facility retValue = MemberwiseClone() as Facility;
@@ -32,14 +32,14 @@ namespace CVRDAL
 		}
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return mCode;
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(Facility other)
 		{
 			int retValue;
@@ -154,7 +154,7 @@ namespace CVRDAL
 	public class FacilityCodeComparer : IComparer<Facility>
 	{
 		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int Compare(Facility x, Facility y)
 		{
 			int retValue;

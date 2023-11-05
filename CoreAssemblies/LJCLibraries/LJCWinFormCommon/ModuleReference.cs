@@ -16,7 +16,7 @@ namespace LJCWinFormCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ModuleReference()
     {
     }
@@ -321,7 +321,7 @@ namespace LJCWinFormCommon
     #region IComparable Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(ModuleReference other)
     {
       int retValue;

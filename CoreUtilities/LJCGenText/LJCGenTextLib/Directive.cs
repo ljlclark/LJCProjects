@@ -174,7 +174,7 @@ namespace LJCGenTextLib
     #region Constructors
 
     //Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Directive()
     {
       CommentStart = "//";
@@ -194,7 +194,7 @@ namespace LJCGenTextLib
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Directive Clone()
     {
       Directive retValue = MemberwiseClone() as Directive;
@@ -202,7 +202,7 @@ namespace LJCGenTextLib
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return $"{ID},{Name}";

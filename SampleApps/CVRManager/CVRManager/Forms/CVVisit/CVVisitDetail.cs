@@ -64,7 +64,7 @@ namespace CVRManager
 		}
 
 		// Paint the form background.
-		/// <include path='items/OnPaintBackground/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/OnPaintBackground/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			base.OnPaintBackground(e);
@@ -399,7 +399,7 @@ namespace CVRManager
 		#region Control Event Handlers
 
 		// Fires the Change event.
-		/// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCDocLib/Common/Detail.xml'/>
+		/// <include path='items/LJCOnChange/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
 		protected void LJCOnChange()
 		{
 			LJCChange?.Invoke(this, new EventArgs());

@@ -8,7 +8,7 @@ using LJCWinFormCommon;
 namespace CVRManager
 {
 	// The list form.
-	/// <include path='items/ListFormDAW/*' file='../../../CoreUtilities/LJCDocLib/Common/List.xml'/>
+	/// <include path='items/ListFormDAW/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
 	internal partial class CVPersonList : Form
 	{
 		#region Constructors

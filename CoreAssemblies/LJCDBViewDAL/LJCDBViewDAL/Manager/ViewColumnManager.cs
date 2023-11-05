@@ -143,7 +143,7 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
@@ -154,7 +154,7 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetParentKey(int id)
     {
       var retValue = new DbColumns()
@@ -168,7 +168,7 @@ namespace LJCDBViewDAL
     #region Other Public Methods
 
     // Check for duplicate unique key.
-    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/IsDuplicate/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public bool IsDuplicate(ViewColumn lookupRecord, ViewColumn currentRecord
       , bool isUpdate = false)
     {

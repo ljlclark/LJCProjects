@@ -39,7 +39,7 @@ namespace LJCDBViewDAL
     #region Load/Retrieve Methods
 
     // Retrieves a collection of Data records for the specified parent ID.
-    /// <include path='items/LoadWithParentID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/LoadWithParentID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public Views LoadWithParentID(int parentID, List<string> propertyNames = null)
     {
       Views retValue;
@@ -50,7 +50,7 @@ namespace LJCDBViewDAL
     }
 
     // Retrieves the DbResult set of data rows.
-    /// <include path='items/ResultWithParentID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ResultWithParentID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbResult ResultWithParentID(int parentID
       , List<string> propertyNames = null)
     {
@@ -62,7 +62,7 @@ namespace LJCDBViewDAL
     }
 
     // Retrieve the record by ID.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ViewData RetrieveWithID(int id, List<string> propertyNames = null)
     {
       ViewData retValue;
@@ -95,7 +95,7 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
@@ -106,7 +106,7 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetParentKey(int id)
     {
       var retValue = new DbColumns()

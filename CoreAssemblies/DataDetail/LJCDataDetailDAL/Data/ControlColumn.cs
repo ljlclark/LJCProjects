@@ -14,7 +14,7 @@ namespace LJCDataDetailDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlColumn()
     {
       ChangedNames = new ChangedNames();
@@ -22,7 +22,7 @@ namespace LJCDataDetailDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlColumn(ControlColumn item)
     {
       ChangedNames = new ChangedNames();
@@ -43,7 +43,7 @@ namespace LJCDataDetailDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlColumn Clone()
     {
       var retValue = MemberwiseClone() as ControlColumn;
@@ -51,7 +51,7 @@ namespace LJCDataDetailDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(ControlColumn other)
     {
       int retValue;
@@ -70,7 +70,7 @@ namespace LJCDataDetailDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       return $"Tab:{ControlTabID}-Column:{ColumnIndex}";
@@ -200,7 +200,7 @@ namespace LJCDataDetailDAL
   public class ControlColumnUniqueComparer : IComparer<ControlColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(ControlColumn x, ControlColumn y)
     {
       int retValue;

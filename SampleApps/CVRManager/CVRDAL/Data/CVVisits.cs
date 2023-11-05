@@ -14,7 +14,7 @@ namespace CVRDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public CVVisits()
 		{
 			mPrevCount = -1;
@@ -36,7 +36,7 @@ namespace CVRDAL
 		}
 
 		// Retrieve the collection element.
-		/// <include path='items/LJCSearchID/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public CVVisit LJCSearchID(long id)
 		{
 			CVVisit retValue = null;

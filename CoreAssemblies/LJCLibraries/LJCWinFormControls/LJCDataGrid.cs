@@ -19,7 +19,7 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCDataGrid()
     {
       InitializeComponent();
@@ -284,64 +284,27 @@ namespace LJCWinFormControls
 
     #region Grid Configuration Methods
 
-    // Sets the grid to a simple read-only grid.
-    /// <include path='items/LJCSetPlain/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCSetPlain()
+    // Adds a Checkbox column.
+    /// <include path='items/LJCAddCheckColumn/*' file='Doc/LJCDataGrid.xml'/>
+    public DataGridViewColumn LJCAddCheckColumn(string name, string caption = null)
     {
-      AllowUserToAddRows = false;
-      AllowUserToDeleteRows = false;
-      AllowUserToResizeRows = false;
-      BackgroundColor = Color.White;
-      EditMode = DataGridViewEditMode.EditOnEnter;
-      MultiSelect = false;
-      ReadOnly = false;
-      RowHeadersVisible = false;
-      SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-      ShowCellToolTips = false;
-    }
+      DataGridViewColumn retValue;
 
-    // Adds grid columns.
-    /// <include path='items/LJCAddColumns/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCAddColumns(DbColumns columns)
-    {
-      if (columns != null)
+      DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn
       {
-        foreach (DbColumn column in columns)
-        {
-          LJCAddColumn(column);
-        }
-        LJCSetLastColumnAutoSizeFill();
-      }
-    }
-
-    // Sets the last column AutoSizeMode to "Fill" if the columns width is less
-    // than the grid width.
-    /// <include path='items/LJCSetLastColumnAutoSizeFill/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCSetLastColumnAutoSizeFill()
-    {
-      int columnsWidth = 0;
-
-      foreach (DataGridViewColumn gridColumn in Columns)
+        Name = name,
+        ValueType = typeof(bool),
+        ReadOnly = false,
+        Width = 30
+      };
+      int columnIndex = Columns.Add(checkColumn);
+      retValue = Columns[columnIndex];
+      retValue.HeaderText = null;
+      if (false == string.IsNullOrWhiteSpace(caption))
       {
-        gridColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-        columnsWidth += gridColumn.Width;
+        retValue.HeaderText = caption;
       }
-
-      if (Columns.Count > 0)
-      {
-        DataGridViewColumn lastColumn = Columns[Columns.Count - 1];
-        if (columnsWidth < Width)
-        {
-          lastColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
-        else
-        {
-          if (lastColumn.Width < 100)
-          {
-            lastColumn.Width = 100;
-          }
-        }
-      }
+      return retValue;
     }
 
     // Adds a column to the grid.
@@ -375,27 +338,18 @@ namespace LJCWinFormControls
       return retValue;
     }
 
-    // Adds a Checkbox column.
-    /// <include path='items/LJCAddCheckColumn/*' file='Doc/LJCDataGrid.xml'/>
-    public DataGridViewColumn LJCAddCheckColumn(string name, string caption = null)
+    // Adds grid columns.
+    /// <include path='items/LJCAddColumns/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCAddColumns(DbColumns columns)
     {
-      DataGridViewColumn retValue;
-
-      DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn
+      if (columns != null)
       {
-        Name = name,
-        ValueType = typeof(bool),
-        ReadOnly = false,
-        Width = 30
-      };
-      int columnIndex = Columns.Add(checkColumn);
-      retValue = Columns[columnIndex];
-      retValue.HeaderText = null;
-      if (false == string.IsNullOrWhiteSpace(caption))
-      {
-        retValue.HeaderText = caption;
+        foreach (DbColumn column in columns)
+        {
+          LJCAddColumn(column);
+        }
+        LJCSetLastColumnAutoSizeFill();
       }
-      return retValue;
     }
 
     // Restores the grid column values.
@@ -461,24 +415,55 @@ namespace LJCWinFormControls
       gridColumn.Width = ControlCommon.TextUnitWidth(grid, calcLength
         , capsCount);
     }
+
+    // Sets the last column AutoSizeMode to "Fill" if the columns width is less
+    // than the grid width.
+    /// <include path='items/LJCSetLastColumnAutoSizeFill/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCSetLastColumnAutoSizeFill()
+    {
+      int columnsWidth = 0;
+
+      foreach (DataGridViewColumn gridColumn in Columns)
+      {
+        gridColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+        columnsWidth += gridColumn.Width;
+      }
+
+      if (Columns.Count > 0)
+      {
+        DataGridViewColumn lastColumn = Columns[Columns.Count - 1];
+        if (columnsWidth < Width)
+        {
+          lastColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+        else
+        {
+          if (lastColumn.Width < 100)
+          {
+            lastColumn.Width = 100;
+          }
+        }
+      }
+    }
+
+    // Sets the grid to a simple read-only grid.
+    /// <include path='items/LJCSetPlain/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCSetPlain()
+    {
+      AllowUserToAddRows = false;
+      AllowUserToDeleteRows = false;
+      AllowUserToResizeRows = false;
+      BackgroundColor = Color.White;
+      EditMode = DataGridViewEditMode.EditOnEnter;
+      MultiSelect = false;
+      ReadOnly = false;
+      RowHeadersVisible = false;
+      SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+      ShowCellToolTips = false;
+    }
     #endregion
 
     #region Other Methods
-
-    // Sets the grid count in the counter label.
-    /// <include path='items/LJCSetCounter/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCSetCounter(Label counter)
-    {
-      int current = 0;
-      int count = 0;
-
-      if (CurrentRow != null)
-      {
-        current = CurrentRow.Index + 1;
-        count = RowCount;
-      }
-      counter.Text = $"Row {current} of {count}";
-    }
 
     // Exports the grid values to a data file.
     /// <include path='items/LJCExportData/*' file='Doc/LJCDataGrid.xml'/>
@@ -532,16 +517,24 @@ namespace LJCWinFormControls
 
       FormCommon.ShellProgram(null, fileName);
     }
+
+    // Sets the grid count in the counter label.
+    /// <include path='items/LJCSetCounter/*' file='Doc/LJCDataGrid.xml'/>
+    public void LJCSetCounter(Label counter)
+    {
+      int current = 0;
+      int count = 0;
+
+      if (CurrentRow != null)
+      {
+        current = CurrentRow.Index + 1;
+        count = RowCount;
+      }
+      counter.Text = $"Row {current} of {count}";
+    }
     #endregion
 
     #region Control Event Handlers
-
-    /// <summary>Sets the initial NoFocus colors.</summary>
-    protected override void OnCreateControl()
-    {
-      base.OnCreateControl();
-      SetNoFocus();
-    }
 
     // The OnColumnWidthChanged event method.
     /// <include path='items/OnColumnWidthChanged/*' file='Doc/LJCDataGrid.xml'/>
@@ -557,6 +550,13 @@ namespace LJCWinFormControls
         mTimer.Tick += Timer_Tick;
       }
       mTimer.Start();
+    }
+
+    /// <summary>Sets the initial NoFocus colors.</summary>
+    protected override void OnCreateControl()
+    {
+      base.OnCreateControl();
+      SetNoFocus();
     }
 
     // Sets the focus colors.
@@ -767,10 +767,8 @@ namespace LJCWinFormControls
 
     private Rectangle mDragStartBounds;
     private bool mIsDragStart;
-    //private DataGridViewRow mSourceRow;
-    //private DataGridViewRow mPrevRow;
-    private LJCGridRow mSourceRow;
     private LJCGridRow mPrevRow;
+    private LJCGridRow mSourceRow;
     #endregion
   }
 }

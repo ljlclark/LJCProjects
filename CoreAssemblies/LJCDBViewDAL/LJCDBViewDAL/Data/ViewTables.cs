@@ -11,7 +11,7 @@ namespace LJCDBViewDAL
 		#region Public Methods
 
 		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewTable Add(int id, string name)
 		{
 			ViewTable retValue = new ViewTable()
@@ -24,7 +24,7 @@ namespace LJCDBViewDAL
 		}
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public ViewTable LJCSearchName(string name)
 		{
 			ViewTable retValue = null;

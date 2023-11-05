@@ -12,7 +12,7 @@ namespace LJCViewEditorDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ObjectManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataTypeManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataType")
       : base(dbServiceRef, dataConfigName, tableName)

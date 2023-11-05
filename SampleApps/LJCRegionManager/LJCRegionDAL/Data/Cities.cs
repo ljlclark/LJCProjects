@@ -12,7 +12,7 @@ namespace LJCRegionDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public City Add(int id, string name)
     {
       City retValue = new City()
@@ -25,7 +25,7 @@ namespace LJCRegionDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public Cities Clone()
     {
       var retValue = MemberwiseClone() as Cities;
@@ -36,7 +36,7 @@ namespace LJCRegionDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public City LJCSearchName(string name)
     {
       City retValue = null;

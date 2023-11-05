@@ -14,7 +14,7 @@ namespace CVRDAL
 
 		// Initializes an object instance.
 		/// <include path='items/DefaultConstructor/*'
-		///   file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		///   file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public ValuesCVRDAL()
 		{
 		}

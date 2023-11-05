@@ -16,7 +16,7 @@ namespace LJCGenTextLib
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static Sections LJCDeserialize(string fileSpec = null)
     {
       Sections retValue;
@@ -42,7 +42,7 @@ namespace LJCGenTextLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Sections()
     {
       mPrevCount = -1;
@@ -70,7 +70,7 @@ namespace LJCGenTextLib
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public Section LJCSearchName(string name)
     {
       Section section;
@@ -93,7 +93,7 @@ namespace LJCGenTextLib
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (false == NetString.HasValue(fileSpec))

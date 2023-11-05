@@ -17,7 +17,7 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public SectionDetail()
     {
       InitializeComponent();
@@ -43,7 +43,7 @@ namespace LJCGenTextEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -56,7 +56,7 @@ namespace LJCGenTextEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -79,7 +79,7 @@ namespace LJCGenTextEdit
     }
 
     // Gets the record values and copies them to the controls.
-    /// <include path='items/GetRecordValues/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/GetRecordValues/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private void GetRecordValues(Section dataRecord)
     {
       if (dataRecord != null)
@@ -90,7 +90,7 @@ namespace LJCGenTextEdit
 
     // Creates and returns a record object with the data from
     // the controls.
-    /// <include path='items/SetRecordValues/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/SetRecordValues/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private Section SetRecordValues()
     {
       Section retValue = new Section()
@@ -101,7 +101,7 @@ namespace LJCGenTextEdit
     }
 
     // Saves the data.
-    /// <include path='items/DataSave/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/DataSave/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private bool DataSave()
     {
       Section lookupRecord;
@@ -176,7 +176,7 @@ namespace LJCGenTextEdit
     }
 
     // Validates the data.
-    /// <include path='items/IsValid/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/IsValid/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private bool IsValid()
     {
       StringBuilder builder;
@@ -206,7 +206,7 @@ namespace LJCGenTextEdit
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
-    /// <include path='items/InitializeControls/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    /// <include path='items/InitializeControls/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private void InitializeControls()
     {
       BeginColor = Color.AliceBlue;

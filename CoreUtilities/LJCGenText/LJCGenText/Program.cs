@@ -12,7 +12,7 @@ namespace LJCGenText
   public class Program
   {
     // The program entry point function.
-    /// <include path='items/Main/*' file='../../LJCDocLib/Common/Program.xml'/>
+    /// <include path='items/Main/*' file='../../LJCGenDoc/Common/Program.xml'/>
     private static void Main(string[] args)
     {
       if (args.Length < 2)

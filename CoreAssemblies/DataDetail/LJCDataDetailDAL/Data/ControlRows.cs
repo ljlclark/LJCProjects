@@ -17,7 +17,7 @@ namespace LJCDataDetailDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public static ControlRows LJCDeserialize(string fileSpec = null)
     {
       ControlRows retValue;
@@ -35,7 +35,7 @@ namespace LJCDataDetailDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlRows()
     {
       mPrevCount = -1;
@@ -90,7 +90,7 @@ namespace LJCDataDetailDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public ControlRows Clone()
     {
       var retValue = new ControlRows();
@@ -102,7 +102,7 @@ namespace LJCDataDetailDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public ControlRows GetCollection(List<ControlRow> list)
     {
       ControlRows retValue = null;
@@ -119,7 +119,7 @@ namespace LJCDataDetailDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -132,7 +132,7 @@ namespace LJCDataDetailDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (false == NetString.HasValue(fileSpec))

@@ -79,13 +79,13 @@ namespace LJCGridDataLib
 
       retValue = new DbColumn()
       {
-        ColumnName = dataColumn.ColumnName,
-        PropertyName = dataColumn.ColumnName,
+        AllowDBNull = dataColumn.AllowDBNull,
+        AutoIncrement = dataColumn.AutoIncrement,
         Caption = dataColumn.ColumnName,
+        ColumnName = dataColumn.ColumnName,
         DataTypeName = dataColumn.DataType.Name,
         MaxLength = dataColumn.MaxLength,
-        AutoIncrement = dataColumn.AutoIncrement,
-        AllowDBNull = dataColumn.AllowDBNull,
+        PropertyName = dataColumn.ColumnName,
         Unique = dataColumn.Unique
       };
       return retValue;

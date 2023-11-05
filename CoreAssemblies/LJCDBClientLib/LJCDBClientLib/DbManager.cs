@@ -40,7 +40,7 @@ namespace LJCDBClientLib
     #region DataManager related Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbResult Add(object dataObject, List<string> propertyNames = null)
     {
       DbResult retValue;
@@ -60,7 +60,7 @@ namespace LJCDBClientLib
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCDocLib/Common/DbManager.xml'/>
+    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       if ((keyColumns != null && keyColumns.Count > 0)
@@ -75,7 +75,7 @@ namespace LJCDBClientLib
     }
 
     // Executes the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='../../../CoreUtilities/LJCDocLib/Common/DbManager.xml'/>
+    /// <include path='items/ExecuteRequest/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public DbResult ExecuteRequest(DbRequest dbRequest)
     {
       DbResult retValue;
@@ -90,7 +90,7 @@ namespace LJCDBClientLib
     }
 
     // Loads a collection of data records.
-    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCDocLib/Common/DbManager.xml'/>
+    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public DbResult Load(DbColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
@@ -106,7 +106,7 @@ namespace LJCDBClientLib
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCDocLib/Common/DbManager.xml'/>
+    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public DbResult Retrieve(DbColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
@@ -122,7 +122,7 @@ namespace LJCDBClientLib
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCDocLib/Common/DbManager.xml'/>
+    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public void Update(object dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {

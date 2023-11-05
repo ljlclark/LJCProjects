@@ -14,7 +14,7 @@ namespace LJCUnitMeasureDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public UnitSystem()
 		{
 			ChangedNames = new ChangedNames();
@@ -24,7 +24,7 @@ namespace LJCUnitMeasureDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public UnitSystem Clone()
 		{
 			UnitSystem retValue = MemberwiseClone() as UnitSystem;
@@ -32,14 +32,14 @@ namespace LJCUnitMeasureDAL
 		}
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			return mName;
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(UnitSystem other)
 		{
 			int retValue;
@@ -154,7 +154,7 @@ namespace LJCUnitMeasureDAL
 	public class UnitSystemNameComparer : IComparer<UnitSystem>
 	{
 		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
 		public int Compare(UnitSystem x, UnitSystem y)
 		{
 			int retValue;

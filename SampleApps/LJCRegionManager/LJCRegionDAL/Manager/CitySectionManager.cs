@@ -14,7 +14,7 @@ namespace LJCRegionDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/ObjectManagerC/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public CitySectionManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "CitySection") : base(dbServiceRef, dataConfigName, tableName)
     {
@@ -36,7 +36,7 @@ namespace LJCRegionDAL
     #region Load/Retrieve Methods
 
     // Retrieves a Data Record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public CitySection RetrieveWithID(int id, List<string> propertyNames = null)
     {
       var keyColumns = GetIDKey(id);
@@ -47,7 +47,7 @@ namespace LJCRegionDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns GetIDKey(int id)
     {
       var retValue = new DbColumns()
@@ -61,7 +61,7 @@ namespace LJCRegionDAL
     #region KeyItem Methods
 
     // Creates the RecordColumns object.
-    /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public DbColumns DataColumns(long id)
     {
       DbColumns retValue = null;
@@ -77,7 +77,7 @@ namespace LJCRegionDAL
     }
 
     // Creates the KeyItem object.
-    /// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/GetKeyItem/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public KeyItem GetKeyItem(string propertyName, long id)
     {
       KeyItem retValue = null;

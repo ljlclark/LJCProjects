@@ -14,7 +14,7 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an instance of the class.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCTabControl()
     {
       InitializeComponent();

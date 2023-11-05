@@ -13,7 +13,7 @@ namespace LJCGenTextLib
     #region Constructors
 
     //Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Replacements()
     {
       mPrevCount = -1;
@@ -44,7 +44,7 @@ namespace LJCGenTextLib
     }
 
     // Retrieve the collection element with name.
-    /// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public Replacement LJCSearchName(string name)
     {
       Replacement replacement;
