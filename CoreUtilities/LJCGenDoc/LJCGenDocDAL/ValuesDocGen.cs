@@ -17,11 +17,12 @@ namespace LJCGenDocDAL
     public ValuesDocGen()
     {
       StandardSettings = new StandardUISettings();
-      var fileName = "LJCDocGen.exe.config";
-      if (File.Exists(fileName))
+      var fileName = "LJCGenDoc.exe.config";
+      if (false == File.Exists(fileName))
       {
-        SetConfigFile(fileName);
+        throw new FileNotFoundException(fileName);
       }
+      SetConfigFile(fileName);
     }
 
     /// <summary>Configures the settings.</summary>
