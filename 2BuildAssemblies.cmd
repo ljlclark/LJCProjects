@@ -135,3 +135,13 @@ echo %marker% >> Build.txt
 echo LJCDBViewDAL >> Build.txt
 call CoreAssemblies\LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
 msbuild CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL.sln
+
+set /a counter+=1
+echo - >> Build.txt
+set marker=----------------- %counter% - LJCDataDetail ---------------- >> Build.txt
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCDataDetail >> Build.txt
+call CoreAssemblies\LJCDataDetail\UpdateDataDetail.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDataDetail\LJCDataDetail.sln

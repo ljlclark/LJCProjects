@@ -1,4 +1,4 @@
-﻿namespace DataDetail
+﻿namespace LJCDataDetail
 {
 	partial class SelectList
 	{

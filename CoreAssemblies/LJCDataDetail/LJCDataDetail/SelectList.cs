@@ -10,7 +10,7 @@ using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 
-namespace DataDetail
+namespace LJCDataDetail
 {
   /// <summary>The Selection List window</summary>
   public partial class SelectList : Form

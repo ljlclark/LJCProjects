@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DataDetail
+namespace LJCDataDetail
 {
   // The DataDetail Dynamic Detail dialog.
   /// <include path='items/DataDetailDialog/*' file='Doc/ProjectDataDetailDialog.xml'/>

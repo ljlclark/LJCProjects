@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace DataDetail
+namespace LJCDataDetail
 {
   // The Tab detail dialog.
   internal partial class TabDetail : Form

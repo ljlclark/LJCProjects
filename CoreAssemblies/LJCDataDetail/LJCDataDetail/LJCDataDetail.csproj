@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA2F382C-44DC-4432-B540-D520BEA1BF0A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DataDetail</RootNamespace>
-    <AssemblyName>DataDetail</AssemblyName>
+    <RootNamespace>LJCDataDetail</RootNamespace>
+    <AssemblyName>LJCDataDetail</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\DataDetail.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\LJCDataDetail.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -87,7 +87,7 @@
     <Compile Include="DataDetailDialog.Designer.cs">
       <DependentUpon>DataDetailDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ProgramDataDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabDetail.cs">
       <SubType>Form</SubType>

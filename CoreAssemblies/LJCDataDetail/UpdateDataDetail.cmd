@@ -9,7 +9,7 @@ call %mainRoot%SetupFolder.cmd
 goto Process:
 :BuildAll
 call SetupUpdate.cmd %1%
-set toRoot=%assm%\DataDetail\
+set toRoot=%assm%\LJCDataDetail\
 call SetupFolder.cmd
 :Process
 
@@ -17,7 +17,7 @@ rem ***************************
 rem *** Referenced Binaries ***
 
 set src=CVRManager\CVRItem\%bin%
-copy %assmRoot%%src%\CVRItem.dll %to%
+copy %appsRoot%%src%\CVRItem.dll %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
@@ -50,7 +50,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ----------------------------
-set to=%toRoot%DataDetail\%bin%
+set to=%toRoot%LJCDataDetail\%bin%
 
 set src=LJCDBMessage\CipherLib\%bin%
 copy %assmRoot%%src%\CipherLib.dll %to%

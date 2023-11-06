@@ -5,11 +5,11 @@ using System;
 using System.Windows.Forms;
 using LJCNetCommon;
 
-namespace DataDetail
+namespace LJCDataDetail
 {
   // The program entry point class.
   /// <include path='items/Program/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
-  static class Program
+  static class ProgramDataDetail
   {
     // The program entry point function.
     /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
