@@ -208,7 +208,7 @@ namespace LJCDataDetailLib
     /// <include path='items/NewControlData/*' file='Doc/DataDetailCode.xml'/>
     public void NewControlData(DbColumns dataColumns, KeyItems keyItems)
     {
-      if (dataColumns != null && dataColumns.Count > 0)
+      if (NetCommon.HasItems(dataColumns))
       {
         int controlColumnsCount = CalculateColumnsCount(dataColumns.Count);
         NewControlColumns(controlColumnsCount, dataColumns);
@@ -337,11 +337,11 @@ namespace LJCDataDetailLib
         int startRowDataIndex = ControlDetail.ColumnRowsLimit * columnIndex;
         int endRowDataIndex = startRowDataIndex + (currentRowsCount - 1);
 
-        // *** Begin *** Add - 10/30/22
         tabPageIndex = GetTabPageIndex(columnIndex, tabPageIndex
           , startRowDataIndex);
         if (tabPageIndex != prevTabIndex)
         {
+          // New Tab
           currentColumnIndex = 0;
           controlTab = new ControlTab()
           {
@@ -356,7 +356,6 @@ namespace LJCDataDetailLib
           ControlDetail.ControlTabItems.Add(controlTab);
           prevTabIndex = tabPageIndex;
         }
-        // *** End   *** Add
 
         currentRowsCount = endRowDataIndex - startRowDataIndex + 1;
 
@@ -367,12 +366,10 @@ namespace LJCDataDetailLib
           int excessRowCount = endRowDataIndex - (dataColumns.Count - 1);
           currentRowsCount -= excessRowCount;
           endRowDataIndex = dataColumns.Count - 1;
-          // *** Begin *** Add - 11/02/22
           if (0 == tabPageIndex && 0 == currentColumnIndex)
           {
             ControlDetail.ColumnRowCount = currentRowsCount;
           }
-          // *** End   *** Add
         }
 
         // get the ControlColumn widths.
@@ -429,7 +426,7 @@ namespace LJCDataDetailLib
       // Local references.
       var config = ControlDetail;
 
-      if (dataColumns != null && dataColumns.Count > 0)
+      if (NetCommon.HasItems(dataColumns))
       {
         foreach (ControlTab controlTab in config.ControlTabItems)
         {

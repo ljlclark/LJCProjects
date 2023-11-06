@@ -46,14 +46,14 @@ namespace LJCDataDetailDAL
 
       if (null == retValue)
       {
-        retValue = CreateDefaultControlDetail();
+        retValue = DefaultControlDetail();
       }
       else
       {
         // Load ControlTabItems.
         var tabManager = Managers.ControlTabManager;
         var controlTabItems = tabManager.LoadWithParentID(retValue.ID);
-        if (controlTabItems != null && controlTabItems.Count > 0)
+        if (NetCommon.HasItems(controlTabItems))
         {
           retValue.ControlTabItems = controlTabItems;
           var columnManager = Managers.ControlColumnManager;
@@ -62,8 +62,7 @@ namespace LJCDataDetailDAL
           {
             // Load ControlColumns.
             var controlColumns = columnManager.LoadWithParentID(controlTab.ID);
-
-            if (controlColumns != null)
+            if (NetCommon.HasItems(controlColumns))
             {
               controlTab.ControlColumns = controlColumns;
               foreach (ControlColumn controlColumn in controlColumns)
@@ -101,7 +100,7 @@ namespace LJCDataDetailDAL
     }
 
     // Creates the Default ControlDetail data.
-    private ControlDetail CreateDefaultControlDetail()
+    private ControlDetail DefaultControlDetail()
     {
       ControlDetail retValue;
 
@@ -163,11 +162,7 @@ namespace LJCDataDetailDAL
       if (null == retValue)
       {
         retValue = dataObject;
-        var addedItem = manager.Add(dataObject);
-        if (addedItem != null)
-        {
-          retValue.ID = addedItem.ID;
-        }
+        AddControlTab(retValue);
       }
       return retValue;
     }
@@ -207,6 +202,23 @@ namespace LJCDataDetailDAL
       {
         dataObject.ID = addedItem.ID;
       }
+    }
+
+    // Gets the ControlColumn data object.
+    /// <include path='items/SetControlColumn/*' file='Doc/DataDetailData.xml'/>
+    public ControlColumn SetControlColumn(ControlColumn dataObject)
+    {
+      ControlColumn retValue;
+
+      var manager = Managers.ControlColumnManager;
+      retValue = manager.RetrieveWithUnique(dataObject.ControlTabID
+        , dataObject.ColumnIndex);
+      if (null == retValue)
+      {
+        retValue = dataObject;
+        AddControlColumn(retValue);
+      }
+      return retValue;
     }
 
     // Updates the ControlColumn data object.

@@ -202,7 +202,15 @@ namespace LJCDataAccess
           dbDataAdapter = ProviderFactory.CreateDataAdapter();
           DataCommon.SetTableMapping(dbDataAdapter, tableMapping);
           dbDataAdapter.SelectCommand = dbCommand;
-          dbDataAdapter.Fill(dataTable);
+          try
+          {
+            dbDataAdapter.Fill(dataTable);
+          }
+          catch (Exception e)
+          {
+            string message = NetString.ExceptionString(e);
+            throw new Exception(message);
+          }
         }
       }
     }
@@ -344,7 +352,15 @@ namespace LJCDataAccess
             DataCommon.SetTableMapping(dbDataAdapter, tableMapping);
             dbDataAdapter.SelectCommand = dbCommand;
             retValue = new DataTable();
-            dbDataAdapter.FillSchema(retValue, SchemaType.Mapped);
+            try
+            {
+              dbDataAdapter.FillSchema(retValue, SchemaType.Mapped);
+            }
+            catch (Exception e)
+            {
+              string message = NetString.ExceptionString(e);
+              throw new Exception(message);
+            }
             retValue.TableName = GetTableName(sql, retValue.TableName);
           }
         }

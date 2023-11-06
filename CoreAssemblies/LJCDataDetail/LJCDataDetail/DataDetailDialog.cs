@@ -354,7 +354,7 @@ namespace LJCDataDetail
       var config = ControlDetail;
 
       var controlTabItems = config.ControlTabItems;
-      if (null == controlTabItems || 0 == controlTabItems.Count)
+      if (false == NetCommon.HasItems(controlTabItems))
       {
         // Create new configuration.
         config.ControlRowHeight = ControlRowHeight(config.ControlRowHeight);
@@ -362,6 +362,7 @@ namespace LJCDataDetail
       }
 
       // *** Begin *** Add - 09/06/22
+      // Always calculate width and height?
       config.ContentWidth = mDataDetailCode.ContentWidth();
       config.ContentHeight
         = mDataDetailCode.ContentHeight(config.ColumnRowCount);
@@ -609,7 +610,7 @@ namespace LJCDataDetail
       // Local references.
       var config = ControlDetail;
 
-      if (LJCDataColumns != null && LJCDataColumns.Count > 0)
+      if (NetCommon.HasItems(LJCDataColumns))
       {
         // Create additional tabs.
         foreach (ControlTab controlTab in config.ControlTabItems)
@@ -617,6 +618,7 @@ namespace LJCDataDetail
           var caption = controlTab.Caption;
           if (0 == controlTab.TabIndex)
           {
+            // Initial tab already exists.
             var tabPage = MainTabs.TabPages[0];
             tabPage.Text = caption;
             tabPage.Name = caption;
@@ -624,6 +626,7 @@ namespace LJCDataDetail
           }
           else
           {
+            // Add additional tabs.
             MainTabs.TabPages.Add(caption);
             var tabPage = MainTabs.LJCGetTabPage(caption);
             tabPage.Name = caption;

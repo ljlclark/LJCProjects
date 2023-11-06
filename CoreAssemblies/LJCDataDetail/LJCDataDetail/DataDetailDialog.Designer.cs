@@ -170,6 +170,7 @@
       this.StatusLabel.Name = "StatusLabel";
       this.StatusLabel.Size = new System.Drawing.Size(514, 26);
       this.StatusLabel.TabIndex = 1;
+      this.StatusLabel.Visible = false;
       // 
       // DataDetailDialog
       // 

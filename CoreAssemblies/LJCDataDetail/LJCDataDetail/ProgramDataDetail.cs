@@ -25,7 +25,7 @@ namespace LJCDataDetail
 
       string userID = "-null";
       string dataConfigName = "LJCData";
-      string tableName = "PersonTest";
+      string tableName = "PersonDMTest";
 
       // *** Begin *** - Testing
       var dbServiceRef = new DbServiceRef()
@@ -35,10 +35,6 @@ namespace LJCDataDetail
       var managers = new DataDetailManagers();
       managers.SetDBProperties(dbServiceRef, dataConfigName);
       var dbDataAccess = dbServiceRef.DbDataAccess;
-
-      //var controlDetailManager = managers.ControlDetailManager;
-      //var controlDetail = controlDetailManager.RetrieveWithUniqueTable(userID, dataConfigName
-      // , tableName);
 
       //var rowManager = managers.ControlRowManager;
       //var keyColumns = new DbColumns()
@@ -57,6 +53,9 @@ namespace LJCDataDetail
       //  columnManager.Delete(keyColumns);
       //}
 
+      //var controlDetailManager = managers.ControlDetailManager;
+      //var controlDetail = controlDetailManager.RetrieveWithUniqueTable(userID, dataConfigName
+      // , tableName);
       //keyColumns = controlDetailManager.GetUniqueTableKey(userID, dataConfigName
       //  , tableName);
       //controlDetailManager.Delete(keyColumns);

@@ -59,6 +59,16 @@
     <param name="dataObject">The DataObject.</param>
     <param name="propertyNames">The incuded property names.</param>
   </AddControlColumn>
+  <SetControlColumn>
+    <summary>
+      Gets the ControlColumn data object.
+    </summary>
+    <param name="dataObject">The DataObject.</param>
+    <returns>The ControlColumn data object.</returns>
+    <remarks>
+      Creates the data if it does not already exist.
+    </remarks>
+  </SetControlColumn>
   <UpdateControlColumn>
     <summary>
       Updates the ControlColumn data object.
