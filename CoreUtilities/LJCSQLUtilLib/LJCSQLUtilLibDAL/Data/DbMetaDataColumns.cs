@@ -11,7 +11,7 @@ namespace LJCSQLUtilLibDAL
 		#region Collection Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public DbMetaDataColumns Clone()
 		{
 			DbMetaDataColumns retValue = new DbMetaDataColumns();
@@ -23,7 +23,7 @@ namespace LJCSQLUtilLibDAL
 		}
 
 		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
 		public DbMetaDataColumn Add(int id, string name)
 		{
 			DbMetaDataColumn retValue = new DbMetaDataColumn()

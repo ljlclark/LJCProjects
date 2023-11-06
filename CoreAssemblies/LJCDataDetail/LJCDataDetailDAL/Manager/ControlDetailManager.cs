@@ -119,8 +119,9 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record with the supplied name value.
     /// <include path='items/RetrieveWithUniqueTable/*' file='Doc/DetailConfigManager.xml'/>
-    public ControlDetail RetrieveWithUniqueTable(string userID, string dataConfigName
-      , string tableName, List<string> propertyNames = null)
+    public ControlDetail RetrieveWithUniqueTable(string userID
+      , string dataConfigName, string tableName
+      , List<string> propertyNames = null)
     {
       var keyColumns = GetUniqueTableKey(userID, dataConfigName, tableName);
       var retValue = Retrieve(keyColumns, propertyNames);

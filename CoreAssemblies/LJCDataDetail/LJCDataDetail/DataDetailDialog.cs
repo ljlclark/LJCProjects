@@ -1338,6 +1338,6 @@ namespace LJCDataDetail
 
     /// <summary>The Change event.</summary>
     public event EventHandler<EventArgs> LJCChange;
-        #endregion
-    }
+    #endregion
+  }
 }

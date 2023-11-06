@@ -20,7 +20,7 @@ namespace DataHelper
 		#region Setup Methods
 
 		// Configures the controls and loads the selection control data.
-		/// <include path='items/InitializeControls/*' file='../../LJCDocLib/Common/List.xml'/>
+		/// <include path='items/InitializeControls/*' file='../../LJCGenDoc/Common/List.xml'/>
 		private void InitializeControls()
 		{
 			Cursor = Cursors.WaitCursor;

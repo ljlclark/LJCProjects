@@ -9,8 +9,6 @@ using System.IO;
 using LJCNetCommon;
 using LJCDataAccessConfig;
 using System.Text;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 namespace LJCDataAccess
 {
@@ -346,7 +344,7 @@ namespace LJCDataAccess
             DataCommon.SetTableMapping(dbDataAdapter, tableMapping);
             dbDataAdapter.SelectCommand = dbCommand;
             retValue = new DataTable();
-            dbDataAdapter.FillSchema(retValue, SchemaType.Source);
+            dbDataAdapter.FillSchema(retValue, SchemaType.Mapped);
             retValue.TableName = GetTableName(sql, retValue.TableName);
           }
         }

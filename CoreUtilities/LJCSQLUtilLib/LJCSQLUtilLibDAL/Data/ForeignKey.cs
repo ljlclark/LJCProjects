@@ -11,7 +11,7 @@ namespace LJCSQLUtilLibDAL
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public ForeignKey()
 		{
 		}
@@ -20,7 +20,7 @@ namespace LJCSQLUtilLibDAL
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public ForeignKey Clone()
 		{
 			ForeignKey retValue = MemberwiseClone() as ForeignKey;
@@ -28,7 +28,7 @@ namespace LJCSQLUtilLibDAL
 		}
 
 		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public override string ToString()
 		{
 			string retValue;
@@ -38,7 +38,7 @@ namespace LJCSQLUtilLibDAL
 		}
 
 		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public int CompareTo(ForeignKey other)
 		{
 			int retValue;

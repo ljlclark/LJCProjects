@@ -9,13 +9,13 @@ using System.Text;
 namespace LJCSQLUtilLibDAL
 {
 	// <summary>Represents a collection of objects items.</summary>
-	/// <include path='items/Collection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+	/// <include path='items/Collection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
 	public class ForeignKeys : List<ForeignKey>
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public ForeignKeys()
 		{
 			mPrevCount = -1;
@@ -25,7 +25,7 @@ namespace LJCSQLUtilLibDAL
 		#region Collection Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public ForeignKeys Clone()
 		{
 			ForeignKeys retValue = new ForeignKeys();

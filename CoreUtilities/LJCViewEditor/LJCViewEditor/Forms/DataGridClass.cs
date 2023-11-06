@@ -4,7 +4,6 @@
 using DataDetail;
 using LJCDBClientLib;
 using LJCDBMessage;
-using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
@@ -52,8 +51,7 @@ namespace LJCViewEditor
         if (DbResult.HasData(dbResult))
         {
           // Get data.
-          dataColumns = CreateDbValueColumns(dbRequest.Columns
-            , dbResult.Rows[0].Values);
+          dataColumns = dbResult.CreateResultColumns(dbResult);
 
           // Create and show DataDetail dialog.
           var dialog = new DataDetailDialog(mUserID, Parent.DataConfigName
@@ -99,44 +97,6 @@ namespace LJCViewEditor
     #endregion
 
     #region Private Methods
-
-    // Creates combined DbColumns from DbColumns and DbValues.
-    private static DbColumns CreateDbValueColumns(DbColumns dbColumns
-      , DbValues dbValues)
-    {
-      DbColumn findColumn;
-      DbColumns retValue = null;
-
-      if (NetCommon.HasItems(dbColumns) && NetCommon.HasItems(dbValues))
-      {
-        retValue = new DbColumns();
-        foreach (DbValue dbValue in dbValues)
-        {
-          findColumn = dbColumns.LJCSearchPropertyName(dbValue.PropertyName);
-          DbColumn dbColumn = new DbColumn()
-          {
-            AllowDBNull = findColumn.AllowDBNull,
-            AutoIncrement = findColumn.AutoIncrement,
-            Caption = findColumn.Caption,
-            ColumnName = findColumn.ColumnName,
-            DataTypeName = findColumn.DataTypeName,
-            MaxLength = findColumn.MaxLength,
-            PropertyName = findColumn.PropertyName,
-            Value = dbValue.Value
-          };
-          if (0 == dbColumn.MaxLength)
-          {
-            dbColumn.MaxLength = 10;
-          }
-          if (dbColumn.MaxLength < 5)
-          {
-            dbColumn.MaxLength += 3;
-          }
-          retValue.Add(dbColumn);
-        }
-      }
-      return retValue;
-    }
 
     // Sets the DbRequest Key values.
     private void SetKeyValues(DbRequest dbRequest, DbColumns dataDefinition)

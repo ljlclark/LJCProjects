@@ -194,6 +194,50 @@ namespace LJCDBMessage
 
     #region Public Methods
 
+    // Creates combined DbColumns from DbColumns and DbValues.
+    /// <summary>
+    /// Creates combined DbColumns from result DbColumns and DbValues.
+    /// </summary>
+    /// <param name="dbResult">The DbResult object.</param>
+    /// <returns>The DbColumns collection.</returns>
+    public DbColumns CreateResultColumns(DbResult dbResult)
+    {
+      DbColumn findColumn;
+      DbColumns retValue = null;
+
+      var columns = dbResult.Columns;
+      var values = dbResult.Rows[0].Values;
+      if (NetCommon.HasItems(columns) && NetCommon.HasItems(values))
+      {
+        retValue = new DbColumns();
+        foreach (DbValue value in values)
+        {
+          findColumn = columns.LJCSearchPropertyName(value.PropertyName);
+          DbColumn dbColumn = new DbColumn()
+          {
+            AllowDBNull = findColumn.AllowDBNull,
+            AutoIncrement = findColumn.AutoIncrement,
+            Caption = findColumn.Caption,
+            ColumnName = findColumn.ColumnName,
+            DataTypeName = findColumn.DataTypeName,
+            MaxLength = findColumn.MaxLength,
+            PropertyName = findColumn.PropertyName,
+            Value = value.Value
+          };
+          if (0 == dbColumn.MaxLength)
+          {
+            dbColumn.MaxLength = 10;
+          }
+          if (dbColumn.MaxLength < 5)
+          {
+            dbColumn.MaxLength += 3;
+          }
+          retValue.Add(dbColumn);
+        }
+      }
+      return retValue;
+    }
+
     // Get DbColumns from result records.
     /// <include path='items/GetValueColumns/*' file='Doc/DbResult.xml'/>
     public DbColumns GetValueColumns(DbValues dataValues = null)

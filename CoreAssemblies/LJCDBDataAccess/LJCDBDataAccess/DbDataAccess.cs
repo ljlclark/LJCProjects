@@ -477,7 +477,7 @@ namespace LJCDBDataAccess
       }
       builder.AppendLine($"{dbRequest.TableName}");
       SqlStatement = builder.ToString();
-
+      
       retValue = mDataAccess.GetSchemaOnly(SqlStatement);
       return retValue;
     }

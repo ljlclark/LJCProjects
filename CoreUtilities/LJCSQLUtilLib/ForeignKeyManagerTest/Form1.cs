@@ -20,7 +20,7 @@ namespace ForeignKeyManagerTest
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public Form1()
 		{
 			InitializeComponent();
@@ -164,7 +164,7 @@ namespace ForeignKeyManagerTest
 		#region Setup Methods
 
 		// Configures the controls and loads the selection control data.
-		/// <include path='items/InitializeControls/*' file='../../LJCDocLib/Common/List.xml'/>
+		/// <include path='items/InitializeControls/*' file='../../LJCGenDoc/Common/List.xml'/>
 		private void InitializeControls()
 		{
 			mDbServiceRef = new DbServiceRef()

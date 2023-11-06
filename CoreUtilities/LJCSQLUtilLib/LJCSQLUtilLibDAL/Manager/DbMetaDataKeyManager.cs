@@ -83,7 +83,7 @@ namespace LJCSQLUtilLibDAL
 		}
 
 		// Retrieves a data record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
 		public DbMetaDataKey RetrieveWithID(int id, List<string> propertyNames = null)
 		{
 			DbJoins dbJoins = GetLoadJoins();
@@ -161,7 +161,7 @@ namespace LJCSQLUtilLibDAL
 		#region GetKey Methods
 
 		// Get the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
 		public DbColumns GetIDKey(int id)
 		{
 			var retValue = new DbColumns()
@@ -203,7 +203,7 @@ namespace LJCSQLUtilLibDAL
 		#region Joins
 
 		// Creates and returns the Load join object.
-		/// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
 		public DbJoins GetLoadJoins()
 		{
 			DbJoin dbJoin;

@@ -50,7 +50,7 @@ namespace LJCSQLUtilLibDAL
 		}
 
 		// Retrieves a data record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
 		public DbMetaDataKeyType RetrieveWithID(int id
 			, List<string> propertyNames = null)
 		{
@@ -62,7 +62,7 @@ namespace LJCSQLUtilLibDAL
 		#region GetKey Methods
 
 		// Get the ID key record.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+		/// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
 		public DbColumns GetIDKey(int id)
 		{
 			var retValue = new DbColumns()

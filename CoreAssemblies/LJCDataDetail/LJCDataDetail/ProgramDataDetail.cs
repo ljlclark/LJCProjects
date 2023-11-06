@@ -3,6 +3,10 @@
 // Program.cs
 using System;
 using System.Windows.Forms;
+using LJCDataDetailDAL;
+using LJCDBClientLib;
+using LJCDBDataAccess;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCDataDetail
@@ -24,15 +28,16 @@ namespace LJCDataDetail
       string tableName = "PersonTest";
 
       // *** Begin *** - Testing
-      //var dbServiceRef = new DbServiceRef()
-      //{
-      //  DbDataAccess = new DbDataAccess(dataConfigName)
-      //};
-      //var managers = new DataDetailManagers();
-      //managers.SetDBProperties(dbServiceRef, dataConfigName);
+      var dbServiceRef = new DbServiceRef()
+      {
+        DbDataAccess = new DbDataAccess(dataConfigName)
+      };
+      var managers = new DataDetailManagers();
+      managers.SetDBProperties(dbServiceRef, dataConfigName);
+      var dbDataAccess = dbServiceRef.DbDataAccess;
 
-      //var configManager = managers.DetailConfigManager;
-      //var detailConfig = configManager.RetrieveWithUniqueTable(userID, dataConfigName
+      //var controlDetailManager = managers.ControlDetailManager;
+      //var controlDetail = controlDetailManager.RetrieveWithUniqueTable(userID, dataConfigName
       // , tableName);
 
       //var rowManager = managers.ControlRowManager;
@@ -43,30 +48,35 @@ namespace LJCDataDetail
       //rowManager.Delete(keyColumns);
 
       //var columnManager = managers.ControlColumnManager;
-      //if (detailConfig != null)
+      //if (controlDetail != null)
       //{
       //  keyColumns = new DbColumns()
       //  {
-      //    { ControlColumn.ColumnDetailConfigID, detailConfig.ID }
+      //    { ControlColumn.ColumnID, controlDetail.ID }
       //  };
       //  columnManager.Delete(keyColumns);
       //}
 
-      //keyColumns = configManager.GetUniqueTableKey(userID, dataConfigName
+      //keyColumns = controlDetailManager.GetUniqueTableKey(userID, dataConfigName
       //  , tableName);
-      //configManager.Delete(keyColumns);
+      //controlDetailManager.Delete(keyColumns);
       // *** End   *** - Testing
 
+      var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
+        , tableName, null, dataConfigName, null);
+      var dbResult = dbDataAccess.Execute(dbRequest);
+      var dataColumns = dbResult.Columns;
+
       DataDetailDialog dialog = new DataDetailDialog(userID, dataConfigName
-        , tableName);
-      //{
-      //  LJCDataColumns = TestData.GetRecord(),
-      //  LJCKeyItems = TestData.GetKeyItems("FifthValue")
-      //};
+        , tableName)
+      {
+        LJCDataColumns = dataColumns
+        //LJCKeyItems = TestData.GetKeyItems("FifthValue")
+      };
 
       // Testing
-      //dialog.LJCDetailConfig.PageColumnsLimit = 1;
-      //dialog.LJCDetailConfig.ColumnRowsLimit = 12;
+      //controlDetail.PageColumnsLimit = 1;
+      //controlDetail.ColumnRowsLimit = 12;
 
       Application.Run(dialog);
       if (DialogResult.OK == dialog.DialogResult)

@@ -7,13 +7,13 @@ using System.Windows.Forms;
 namespace DataHelper
 {
 	// The list form.
-	/// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+	/// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
 	public partial class MainList : Form
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public MainList()
 		{
 			Cursor = Cursors.WaitCursor;

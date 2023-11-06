@@ -46,7 +46,7 @@ namespace LJCDataDetailDAL
 
       if (null == retValue)
       {
-        retValue = DefaultControlDetail();
+        retValue = CreateDefaultControlDetail();
       }
       else
       {
@@ -101,7 +101,7 @@ namespace LJCDataDetailDAL
     }
 
     // Creates the Default ControlDetail data.
-    private ControlDetail DefaultControlDetail()
+    private ControlDetail CreateDefaultControlDetail()
     {
       ControlDetail retValue;
 

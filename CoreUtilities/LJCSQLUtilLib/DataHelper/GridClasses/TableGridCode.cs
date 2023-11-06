@@ -249,7 +249,7 @@ namespace DataHelper
 		}
 
 		// Refreshes the list.
-		/// <include path='items/DoRefresh/*' file='../../LJCDocLib/Common/List.xml'/>
+		/// <include path='items/DoRefresh/*' file='../../LJCGenDoc/Common/List.xml'/>
 		internal void DoRefreshTable()
 		{
 			DbMetaDataTable record;

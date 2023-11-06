@@ -11,7 +11,7 @@ namespace LJCSQLUtilLibDAL
 		#region Collection Methods
 
 		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
 		public DbMetaDataKeyType Add(int id, string name)
 		{
 			DbMetaDataKeyType retValue = new DbMetaDataKeyType()
@@ -27,7 +27,7 @@ namespace LJCSQLUtilLibDAL
 		#region Sort and Search Methods
 
 		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../LJCDocLib/Common/Collection.xml'/>
+		/// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
 		public DbMetaDataKeyType LJCSearchName(string name)
 		{
 			DbMetaDataKeyType retValue = null;
