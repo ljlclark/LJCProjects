@@ -10,6 +10,7 @@ using System.Collections.Generic;
 namespace LJCDataDetailDAL
 {
   /// <summary>Contains methods for using DataDetail data.</summary>
+  /// <include path='items/DataDetailData/*' file='Doc/DataDetailData.xml'/>
   public class DataDetailData
   {
     #region Constructors
@@ -34,7 +35,7 @@ namespace LJCDataDetailDAL
 
     #region ControlDetail
 
-    // Gets the ControlDetail data.
+    // Gets the ControlDetail data object.
     /// <include path='items/GetControlDetail/*' file='Doc/DataDetailData.xml'/>
     public ControlDetail GetControlDetail()
     {

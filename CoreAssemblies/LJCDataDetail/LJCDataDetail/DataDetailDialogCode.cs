@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace LJCDataDetail
 {
-  // The DataDetail Dynamic Detail dialog.
   public partial class DataDetailDialog
   {
     #region Process Controls Methods

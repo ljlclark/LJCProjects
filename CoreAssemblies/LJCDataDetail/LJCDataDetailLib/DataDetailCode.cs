@@ -7,7 +7,10 @@ using LJCNetCommon;
 
 namespace LJCDataDetailLib
 {
-  /// <summary>Contains methods for using DataDetail data objects.</summary>
+  /// <summary>
+  /// Contains methods for creating DataDetail data objects based on
+  /// a DataColumns collection.
+  /// </summary>
   public class DataDetailCode
   {
     #region Constructors

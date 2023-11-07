@@ -3,6 +3,19 @@
 <!-- Licensed under the MIT License. -->
 <!-- DataDetailData.xml -->
 <item>
+  <DataDetailData>
+    <summary>Contains methods for using DataDetail data.</summary>
+    <remarks>
+      <para>
+        DataDetailData is a data helper class that uses manager classes to
+        access the configuration values for a DataDetailDialog form.
+      </para>
+      <para>
+        The configuration tables are: ControlDetail, ControlTab, ControlColumn
+        and ControlRow.
+      </para>
+    </remarks>
+  </DataDetailData>
   <DataDetailDataC>
     <summary>
       Initializes an object instance.
@@ -13,7 +26,7 @@
   <!-- ControlDetail -->
   <GetControlDetail>
     <summary>
-      Gets the ControlDetail data.
+      Gets the ControlDetail data object.
     </summary>
     <returns>The ControlDetail reference.</returns>
   </GetControlDetail>
@@ -59,16 +72,6 @@
     <param name="dataObject">The DataObject.</param>
     <param name="propertyNames">The incuded property names.</param>
   </AddControlColumn>
-  <SetControlColumn>
-    <summary>
-      Gets the ControlColumn data object.
-    </summary>
-    <param name="dataObject">The DataObject.</param>
-    <returns>The ControlColumn data object.</returns>
-    <remarks>
-      Creates the data if it does not already exist.
-    </remarks>
-  </SetControlColumn>
   <UpdateControlColumn>
     <summary>
       Updates the ControlColumn data object.
