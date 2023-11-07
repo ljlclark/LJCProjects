@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDetailDialogCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SelectList.cs">
       <SubType>Form</SubType>
     </Compile>

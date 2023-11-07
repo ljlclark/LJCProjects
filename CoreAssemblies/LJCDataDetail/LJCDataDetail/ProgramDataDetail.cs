@@ -1,9 +1,8 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Program.cs
+// ProgramDataDetail.cs
 using System;
 using System.Windows.Forms;
-using LJCDataDetailDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCDBMessage;
@@ -23,59 +22,28 @@ namespace LJCDataDetail
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      string userID = "-null";
+      // *** Begin *** Testing
       string dataConfigName = "LJCData";
-      string tableName = "PersonDMTest";
-
-      // *** Begin *** - Testing
       var dbServiceRef = new DbServiceRef()
       {
         DbDataAccess = new DbDataAccess(dataConfigName)
       };
-      var managers = new DataDetailManagers();
-      managers.SetDBProperties(dbServiceRef, dataConfigName);
       var dbDataAccess = dbServiceRef.DbDataAccess;
 
-      //var rowManager = managers.ControlRowManager;
-      //var keyColumns = new DbColumns()
-      //{
-      //  { ControlRow.ColumnAllowDisplay, 1 }
-      //};
-      //rowManager.Delete(keyColumns);
-
-      //var columnManager = managers.ControlColumnManager;
-      //if (controlDetail != null)
-      //{
-      //  keyColumns = new DbColumns()
-      //  {
-      //    { ControlColumn.ColumnID, controlDetail.ID }
-      //  };
-      //  columnManager.Delete(keyColumns);
-      //}
-
-      //var controlDetailManager = managers.ControlDetailManager;
-      //var controlDetail = controlDetailManager.RetrieveWithUniqueTable(userID, dataConfigName
-      // , tableName);
-      //keyColumns = controlDetailManager.GetUniqueTableKey(userID, dataConfigName
-      //  , tableName);
-      //controlDetailManager.Delete(keyColumns);
-      // *** End   *** - Testing
-
+      // Create test data columns.
+      string tableName = "PersonDMTest";
       var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
         , tableName, null, dataConfigName, null);
       var dbResult = dbDataAccess.Execute(dbRequest);
       var dataColumns = dbResult.Columns;
+      // *** End   *** Testing
 
+      string userID = "-null";
       DataDetailDialog dialog = new DataDetailDialog(userID, dataConfigName
         , tableName)
       {
         LJCDataColumns = dataColumns
-        //LJCKeyItems = TestData.GetKeyItems("FifthValue")
       };
-
-      // Testing
-      //controlDetail.PageColumnsLimit = 1;
-      //controlDetail.ColumnRowsLimit = 12;
 
       Application.Run(dialog);
       if (DialogResult.OK == dialog.DialogResult)

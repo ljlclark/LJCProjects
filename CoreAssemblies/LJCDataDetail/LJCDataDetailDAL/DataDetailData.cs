@@ -204,23 +204,6 @@ namespace LJCDataDetailDAL
       }
     }
 
-    // Gets the ControlColumn data object.
-    /// <include path='items/SetControlColumn/*' file='Doc/DataDetailData.xml'/>
-    public ControlColumn SetControlColumn(ControlColumn dataObject)
-    {
-      ControlColumn retValue;
-
-      var manager = Managers.ControlColumnManager;
-      retValue = manager.RetrieveWithUnique(dataObject.ControlTabID
-        , dataObject.ColumnIndex);
-      if (null == retValue)
-      {
-        retValue = dataObject;
-        AddControlColumn(retValue);
-      }
-      return retValue;
-    }
-
     // Updates the ControlColumn data object.
     /// <include path='items/UpdateControlColumn/*' file='Doc/DataDetailData.xml'/>
     public int UpdateControlColumn(ControlColumn dataObject
