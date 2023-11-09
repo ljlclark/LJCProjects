@@ -106,7 +106,7 @@ namespace LJCDataDetailLib
           // First column of controls for this page.
           if (0 == controlColumn.ColumnIndex % ControlDetail.PageColumnsLimit)
           {
-            // Start with border before each ControlColumn and border after last.
+            // Start with border left of each ControlColumn and border after last.
             currentWidth = ControlDetail.BorderHorizontal * (count + 1);
           }
 

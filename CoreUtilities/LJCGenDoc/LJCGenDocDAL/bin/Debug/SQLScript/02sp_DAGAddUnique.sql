@@ -1,4 +1,4 @@
-﻿/* sp_MoveSequenceDown.sql */
+﻿/* sp_DAGAddUnique.sql */
 USE [LJCData]
 GO
 SET ANSI_NULLS ON
