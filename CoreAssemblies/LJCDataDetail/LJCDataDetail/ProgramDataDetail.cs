@@ -59,15 +59,19 @@ namespace LJCDataDetail
       string results = "";
       foreach (DbColumn dbColumn in dbColumns)
       {
-        var item = controlItems.GetItem(dbColumn);
+        KeyItem item = null;
+        if (controlItems != null)
+        {
+          item = controlItems.GetItem(dbColumn);
+        }
         if (item != null)
         {
           results += $"{dbColumn.PropertyName}, {item.Description}" +
-            $", {dbColumn.Value}\r\n";
+            $", ({dbColumn.Value})\r\n";
         }
         else
         {
-          results += $"{dbColumn.PropertyName}, {dbColumn.Value}\r\n";
+          results += $"{dbColumn.PropertyName}, ({dbColumn.Value})\r\n";
         }
       }
       MessageBox.Show(results, "Data Values");

@@ -95,8 +95,8 @@ namespace LJCDataDetailLib
     /// <include path='items/ContentWidth/*' file='Doc/DataDetailCode.xml'/>
     public int ContentWidth()
     {
-      int currentWidth = 0;
-      int retValue = 0;
+      int currentWidth = MinLabelWidth + MinControlWidth;
+      int retValue = currentWidth;
 
       foreach (ControlTab controlTab in ControlDetail.ControlTabItems)
       {
@@ -283,10 +283,10 @@ namespace LJCDataDetailLib
       DbColumn dbColumn;
       int width;
 
-      labelsWidth = 100;
-      controlsWidth = 120;
+      labelsWidth = MinLabelWidth;
+      controlsWidth = MinControlWidth;
 
-      if (dataColumns != null && dataColumns.Count > 0)
+      if (NetCommon.HasItems(dataColumns))
       {
         // Only use data items for the current ControlColumn.
         for (int index = startIndex; index <= stopIndex; index++)
@@ -472,6 +472,11 @@ namespace LJCDataDetailLib
 
     /// <summary>Gets or sets DataDetailData.</summary>
     public DataDetailData DataDetailData { get; set; }
+    #endregion
+
+    #region Class Data
+    private const int MinLabelWidth = 60;
+    private const int MinControlWidth = 80;
     #endregion
   }
 }

@@ -25,6 +25,12 @@ copy %root%%src%\DataAccessConfig.html %to%
 copy %root%%src%\DataAccessConfig.jpg %to%
 
 rem ---------------
+set src=\CoreAssemblies\LJCDataDetail\LJCDataDetail\Diagrams
+set to=HTML\LJCDataDetail
+copy %root%%src%\LJCDataDetail.html %to%
+copy %root%%src%\LJCDataDetail.jpg %to%
+
+rem ---------------
 set src=\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\Diagrams
 set to=HTML\LJCDBClientLib
 copy %root%%src%\Configuration.html %to%
