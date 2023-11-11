@@ -543,8 +543,9 @@ namespace LJCGenDocEdit
     {
       if (sender is TextBox textBox)
       {
+        var prevStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = textBox.Text.Trim().Length;
+        textBox.SelectionStart = prevStart;
       }
     }
 
