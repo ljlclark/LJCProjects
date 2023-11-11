@@ -311,26 +311,32 @@ namespace LJCViewEditor
 		// Strips blanks from the text value.
 		private void FirstValueTextbox_TextChanged(object sender, EventArgs e)
 		{
-			FirstValueCombo.Text = FormCommon.StripBlanks(FirstValueCombo.Text);
-		}
+      var prevStart = FirstValueCombo.SelectionStart;
+      FirstValueCombo.Text = FormCommon.StripBlanks(FirstValueCombo.Text);
+      FirstValueCombo.SelectionStart = prevStart;
+    }
 
-		// Strips blanks from the text value.
-		private void SecondValueTextbox_TextChanged(object sender, EventArgs e)
+    // Strips blanks from the text value.
+    private void SecondValueTextbox_TextChanged(object sender, EventArgs e)
 		{
-			SecondValueTextbox.Text = FormCommon.StripBlanks(SecondValueTextbox.Text);
-		}
+      var prevStart = SecondValueTextbox.SelectionStart;
+      SecondValueTextbox.Text = FormCommon.StripBlanks(SecondValueTextbox.Text);
+      SecondValueTextbox.SelectionStart = prevStart;
+    }
 
-		// Strips blanks from the text value.
-		private void ComparisonTextbox_TextChanged(object sender, EventArgs e)
+    // Strips blanks from the text value.
+    private void ComparisonTextbox_TextChanged(object sender, EventArgs e)
 		{
-			ComparisonTextbox.Text = FormCommon.StripBlanks(ComparisonTextbox.Text);
-		}
-		#endregion
+      var prevStart = ComparisonTextbox.SelectionStart;
+      ComparisonTextbox.Text = FormCommon.StripBlanks(ComparisonTextbox.Text);
+      ComparisonTextbox.SelectionStart = prevStart;
+    }
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the ID value.
-		internal int LJCID { get; set; }
+    // Gets or sets the ID value.
+    internal int LJCID { get; set; }
 
 		// Gets the IsUpdate value.
 		internal bool LJCIsUpdate { get; private set; }

@@ -81,3 +81,9 @@ exec sp_DCGAddUnique @assemblyName,  'Request',
  '',  2
 exec sp_DCGAddUnique @assemblyName,  'Result',
  '',  3
+
+set @assemblyName= 'LJCDataDetailDAL';
+exec sp_DCGAddUnique @assemblyName,  'Collection',
+ '',  1
+exec sp_DCGAddUnique @assemblyName,  'Manager',
+ 'Manager',  2

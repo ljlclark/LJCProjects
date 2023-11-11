@@ -363,14 +363,16 @@ namespace LJCViewEditor
 		// Strips blanks from the text value.
 		private void TableNameTextbox_TextChanged(object sender, EventArgs e)
 		{
-			JoinTableCombo.Text = FormCommon.StripBlanks(JoinTableCombo.Text);
-		}
-		#endregion
+      var prevStart = JoinTableCombo.SelectionStart;
+      JoinTableCombo.Text = FormCommon.StripBlanks(JoinTableCombo.Text);
+      JoinTableCombo.SelectionStart = prevStart;
+    }
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the ID value.
-		internal int LJCID { get; set; }
+    // Gets or sets the ID value.
+    internal int LJCID { get; set; }
 
 		// Gets the IsUpdate value.
 		internal bool LJCIsUpdate { get; private set; }

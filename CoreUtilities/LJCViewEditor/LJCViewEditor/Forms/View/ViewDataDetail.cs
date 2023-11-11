@@ -291,7 +291,9 @@ namespace LJCViewEditor
     // Strips blanks from the text value.
     private void NameTextbox_TextChanged(object sender, EventArgs e)
     {
+      var prevStart = NameTextbox.SelectionStart;
       NameTextbox.Text = FormCommon.StripBlanks(NameTextbox.Text);
+      NameTextbox.SelectionStart = prevStart;
     }
     #endregion
 

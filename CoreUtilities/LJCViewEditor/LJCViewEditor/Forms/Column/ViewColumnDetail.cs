@@ -10,6 +10,7 @@ using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
 using LJCViewEditorDAL;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LJCViewEditor
 {
@@ -379,26 +380,32 @@ namespace LJCViewEditor
 		// Strips blanks from the text value.
 		private void ColumnNameTextbox_TextChanged(object sender, EventArgs e)
 		{
-			ColumnNameTextbox.Text = FormCommon.StripBlanks(ColumnNameTextbox.Text);
-		}
+      var prevStart = ColumnNameTextbox.SelectionStart;
+      ColumnNameTextbox.Text = FormCommon.StripBlanks(ColumnNameTextbox.Text);
+      ColumnNameTextbox.SelectionStart = prevStart;
+    }
 
-		// Strips blanks from the text value.
-		private void PropertyTextbox_TextChanged(object sender, EventArgs e)
+    // Strips blanks from the text value.
+    private void PropertyTextbox_TextChanged(object sender, EventArgs e)
 		{
-			PropertyTextbox.Text = FormCommon.StripBlanks(PropertyTextbox.Text);
-		}
+      var prevStart = PropertyTextbox.SelectionStart;
+      PropertyTextbox.Text = FormCommon.StripBlanks(PropertyTextbox.Text);
+      PropertyTextbox.SelectionStart = prevStart;
+    }
 
-		// Strips blanks from the text value.
-		private void RenameTextbox_TextChanged(object sender, EventArgs e)
+    // Strips blanks from the text value.
+    private void RenameTextbox_TextChanged(object sender, EventArgs e)
 		{
-			RenameTextbox.Text = FormCommon.StripBlanks(RenameTextbox.Text);
-		}
-		#endregion
+      var prevStart = RenameTextbox.SelectionStart;
+      RenameTextbox.Text = FormCommon.StripBlanks(RenameTextbox.Text);
+      RenameTextbox.SelectionStart = prevStart;
+    }
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the ID value.
-		internal int LJCID { get; set; }
+    // Gets or sets the ID value.
+    internal int LJCID { get; set; }
 
 		// Gets the IsUpdate value.
 		internal bool LJCIsUpdate { get; private set; }
