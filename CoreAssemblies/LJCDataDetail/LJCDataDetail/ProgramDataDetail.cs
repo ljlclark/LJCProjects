@@ -3,6 +3,7 @@
 // ProgramDataDetail.cs
 using System;
 using System.Windows.Forms;
+using LJCDataDetailDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCDBMessage;
@@ -23,12 +24,10 @@ namespace LJCDataDetail
       Application.SetCompatibleTextRenderingDefault(false);
 
       // *** Begin *** Testing
-      string dataConfigName = "LJCData";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName)
-      };
-      var dbDataAccess = dbServiceRef.DbDataAccess;
+      var configValues = ValuesDataDetail.Instance;
+      var settings = configValues.StandardSettings;
+      var dataConfigName = settings.DataConfigName;
+      var dbDataAccess = settings.DbServiceRef.DbDataAccess;
 
       // Create test data columns.
       string tableName = "PersonDMTest";
@@ -39,8 +38,7 @@ namespace LJCDataDetail
       // *** End   *** Testing
 
       string userID = "-null";
-      DataDetailDialog dialog = new DataDetailDialog(userID, dataConfigName
-        , tableName)
+      DataDetailDialog dialog = new DataDetailDialog(userID, tableName)
       {
         LJCDataColumns = dataColumns
       };

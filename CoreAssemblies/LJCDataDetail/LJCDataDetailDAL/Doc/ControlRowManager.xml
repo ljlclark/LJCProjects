@@ -8,7 +8,7 @@
     <summary>
       Loads the parent records.
     </summary>
-    <param name="detailConfigID">The DetailConfig parent ID.</param>
+    <param name="controlColumnID">The ControlRow parent ID.</param>
     <returns>The ControlColumns related to the parent.</returns>
   </LoadWithParentID>
   <RetrieveWithUnique>

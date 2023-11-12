@@ -61,9 +61,14 @@ exec sp_DAAddUnique @groupName, 'LJCTextDataReaderLib',
   '..\..\..\..\..\CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.xml',
   '', @seq;
 set @seq += 1;
-exec sp_DAAddUnique @groupName, 'DataDetail',
+exec sp_DAAddUnique @groupName, 'LJCDataDetail',
   'The DataDetail Dynamic Detail dialog. (D)',
-  '..\..\..\..\..\CoreAssemblies\DataDetail\DataDetail\bin\Debug\DataDetail.xml',
+  '..\..\..\..\..\CoreAssemblies\LJCDataDetail\LJCDataDetail\bin\Debug\LJCDataDetail.xml',
+  '', @seq;
+set @seq += 1;
+exec sp_DAAddUnique @groupName, 'LJCDataDetailDAL',
+  'The DataDetail DAL',
+  '..\..\..\..\..\CoreAssemblies\LJCDataDetail\LJCDataDetailDAL\bin\Debug\LJCDataDetailDAL.xml',
   '', @seq;
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCDataDetailLib',

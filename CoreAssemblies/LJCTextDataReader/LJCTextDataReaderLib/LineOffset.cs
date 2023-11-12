@@ -13,7 +13,7 @@ namespace LJCTextDataReaderLib
     #region Data Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(LineOffset other)
     {
       int retValue;

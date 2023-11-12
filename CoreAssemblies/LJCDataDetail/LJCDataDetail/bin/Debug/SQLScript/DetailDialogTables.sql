@@ -37,6 +37,34 @@ create table dbo.ControlDetail(
 end
 
 if not exists (select * from INFORMATION_SCHEMA.TABLES
+ where TABLE_NAME = N'ControlData')
+begin
+create table dbo.ControlData(
+  ID bigint identity(1,1) not null,
+  ControlDetailID bigint not null,
+  AllowDBNull bit not null,
+  AutoIncrement bit not null,
+	Caption nvarchar(60) null,
+	ColumnName nvarchar(60) not null,
+	DataTypeName nvarchar(60) not null,
+	[MaxLength] int null,
+	Position int null,
+	PropertyName nvarchar(60) not null,
+	RenameAs nvarchar(60) null,
+	SQLTypeName nvarchar(60) not null,
+	[Value] nvarchar(60) null,
+  constraint PKControlData
+    primary key clustered (ID asc),
+  constraint UKControlData
+    unique (ControlDetailID, PropertyName),
+  constraint FKControlData
+    foreign key (ControlDetailID)
+    references ControlDetail (ID)
+    on delete no action on update no action
+)
+end
+
+if not exists (select * from INFORMATION_SCHEMA.TABLES
  where TABLE_NAME = N'ControlTab')
 begin
 create table dbo.ControlTab(

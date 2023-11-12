@@ -71,6 +71,7 @@
     <Compile Include="Manager\ControlTabManager.cs" />
     <Compile Include="Manager\ControlDetailManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesDataDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\ControlColumnManager.xml" />

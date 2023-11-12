@@ -249,6 +249,787 @@ exec sp_DMAddUnique @docClassName, @headingName,
   'Retrieve the collection element with name.',
   @seq;
 
+/* LJCDataDetailDAL */
+set @docClassName = 'ControlColumn';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlColumn';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'ControlColumnManager';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlColumnManager';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds a Data Record to the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Delete',
+  'Deletes a Data Record with the specified ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsDuplicate',
+  'Check for duplicate unique key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Load',
+  'Retrieves a collection of Data Records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LoadWithParentID',
+  'Loads the child records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Retrieve',
+  'Retrieves a Data Record from the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithID',
+  'Retrieves a Data Record with the supplied value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithUnique',
+  'Retrieves a record with the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Update',
+  'Updates the Data Record.',
+  @seq;
+
+set @docClassName = 'ControlColumnManager';
+set @headingName = 'Key';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetIDKey',
+  'Gets the ID key record.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetParentKey',
+  'Gets the Parent ID key columns.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetUniqueKey',
+  'Gets the unique key columns.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetJoins',
+  'Creates and returns the Load Joins object.',
+  @seq;
+
+set @docClassName = 'ControlColumns';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the provided values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetCollection',
+  'Get custom collection from List.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'ControlColumns';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlColumns';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchID',
+  'Retrieve the collection element.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchUnique',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortID',
+  'Sort on ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortUnique',
+  'Sort on Unique key.',
+  @seq;
+
+set @docClassName = 'ControlColumns';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'ControlDetail';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlDetail';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'ControlDetailManager';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlDetailManager';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds a Data Record to the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Delete',
+  'Deletes a Data Record with the specified ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Load',
+  'Retrieves a collection of Data Records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Retrieve',
+  'Retrieves a Data Record from the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithID',
+  'Retrieves a Data Record with the supplied value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithUnique',
+  'Retrieves a Data Record with the supplied name value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithUniqueTable',
+  'Retrieves a record with the supplied name value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Update',
+  'Updates the Data Record.',
+  @seq;
+
+set @docClassName = 'ControlDetailManager';
+set @headingName = 'Key';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetIDKey',
+  'Gets the ID key record.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetUniqueKey',
+  'Gets the Name keys record.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetUniqueTableKey',
+  'Gets the ID key columns.',
+  @seq;
+
+set @docClassName = 'ControlDetails';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the provided values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetCollection',
+  'Get custom collection from List.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'ControlDetails';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlDetails';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchID',
+  'Retrieve the collection element.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchUnique',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortID',
+  'Sort on Code.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortUnique',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'ControlDetails';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'ControlRow';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlRow';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'ControlRowManager';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlRowManager';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds a Data Record to the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Delete',
+  'Deletes a Data Record with the specified ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsDuplicate',
+  'Check for duplicate unique key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Load',
+  'Retrieves a collection of Data Records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LoadWithParentID',
+  'Loads the parent records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Retrieve',
+  'Retrieves a Data Record from the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithID',
+  'Retrieves a Data Record with the supplied value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithUnique',
+  'Retrieves a record with the supplied name value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Update',
+  'Updates the Data Record.',
+  @seq;
+
+set @docClassName = 'ControlRowManager';
+set @headingName = 'Key';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetIDKey',
+  'Gets the ID key record.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetParentKey',
+  'Gets the Parent ID key columns.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetUniqueKey',
+  'Gets the ID key columns.',
+  @seq;
+
+set @docClassName = 'ControlRows';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the provided values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetCollection',
+  'Get custom collection from List.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'ControlRows';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlRows';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchID',
+  'Retrieve the collection element.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchUnique',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortID',
+  'Sort on Code.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortUnique',
+  'Sort on Name.',
+  @seq;
+
+set @docClassName = 'ControlRows';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'ControlTab';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlTab';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'CompareTo',
+  'Provides the default Sort functionality.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'ToString',
+  'The object string identifier.',
+  @seq;
+
+set @docClassName = 'ControlTabItems';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates and adds the object from the provided values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetCollection',
+  'Get custom collection from List.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'ControlTabItems';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'ControlTabItems';
+set @headingName = 'SearchSort';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchID',
+  'Retrieve the collection element.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSearchUnique',
+  'Retrieve the collection element with name.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortID',
+  'Sort on ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSortUnique',
+  'Sort on Unique key.',
+  @seq;
+
+set @docClassName = 'ControlTabItems';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'ControlTabManager';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'ControlTabManager';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds a Data Record to the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Delete',
+  'Deletes a Data Record with the specified ID.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'IsDuplicate',
+  'Check for duplicate unique key.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Load',
+  'Retrieves a collection of Data Records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LoadWithParentID',
+  'Loads the child records.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Retrieve',
+  'Retrieves a Data Record from the database.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithID',
+  'Retrieves a Data Record with the supplied value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RetrieveWithUnique',
+  'Retrieves a record with the supplied values.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Update',
+  'Updates the Data Record.',
+  @seq;
+
+set @docClassName = 'ControlTabManager';
+set @headingName = 'Key';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetIDKey',
+  'Gets the ID key record.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetParentKey',
+  'Gets the Parent ID key columns.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetUniqueKey',
+  'Gets the unique key columns.',
+  @seq;
+
+set @docClassName = 'DataDetailData';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Missing Summary',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'DataDetailData';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'AddControlColumn',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'AddControlRow',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'AddControlTab',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'GetControlDetail',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetControlTab',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'UpdateControlColumn',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'UpdateControlDetail',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'UpdateControlRow',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'UpdateControlTab',
+  'Missing Summary',
+  @seq;
+
+set @docClassName = 'DataDetailManagers';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+
+set @docClassName = 'DataDetailManagers';
+set @headingName = 'Data';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'SetDBProperties',
+  'Sets the DB properties.',
+  @seq;
+
 /* LJCDBClientLib */
 set @docClassName = 'DataManager';
 set @headingName = 'Constructor';

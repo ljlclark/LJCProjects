@@ -101,9 +101,9 @@ namespace LJCDataDetailDAL
 
     // Loads the parent records.
     /// <include path='items/LoadWithParentID/*' file='Doc/ControlRowManager.xml'/>
-    public ControlRows LoadWithParentID(long detailConfigID)
+    public ControlRows LoadWithParentID(long controlColumnID)
     {
-      var keyColumns = GetParentKey(detailConfigID);
+      var keyColumns = GetParentKey(controlColumnID);
       var retValue = Load(keyColumns);
       return retValue;
     }

@@ -5,8 +5,8 @@ echo Licensed under the MIT License.
 rem CreateLJCDocLib.cmd
 echo.
 
-set scriptsPath=..\LJCDocLib\LJCDocLibDAL\bin\Debug\SQLScript
+set scriptsPath=..\LJCGenDoc\LJCGenDocDAL\bin\Debug\SQLScript
 set targetDatabase=LJCData
 
 LJCExecuteScripts %scriptsPath% %targetDatabase%
-pause
+

@@ -1,23 +1,22 @@
-// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ValuesDocGen.cs
+// ValuesDataDetail.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using System.IO;
 
-namespace LJCGenDocDAL
+namespace LJCDataDetailDAL
 {
-  /// <summary>The Application values singleton class.</summary>
-  public sealed class ValuesDocGen
+  /// <summary>Application config values singleton.</summary>
+  public sealed class ValuesDataDetail
   {
     #region Constructors
 
-    // Initializes an instance of the object.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public ValuesDocGen()
+    /// <summary>Initializes an object instance.</summary>
+    public ValuesDataDetail()
     {
       StandardSettings = new StandardUISettings();
-      var fileName = "LJCGenDoc.exe.config";
+      var fileName = "LJCDataDetail.exe.config";
       if (File.Exists(fileName))
       {
         SetConfigFile(fileName);
@@ -34,10 +33,10 @@ namespace LJCGenDocDAL
         if (false == NetString.HasValue(ConfigFileName)
           || fileName.Trim().ToLower() != ConfigFileName.ToLower())
         {
-          ConfigFileName = fileName.Trim();
-          StandardSettings.SetProperties(fileName);
+          ConfigFileName = fileName;
+          StandardSettings.SetProperties(ConfigFileName);
           var settings = StandardSettings;
-          Managers = new ManagersDocGen();
+          Managers = new DataDetailManagers();
           Managers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
         }
@@ -47,30 +46,27 @@ namespace LJCGenDocDAL
 
     #region Properties
 
-    /// <summary>Gets the ConfigFile name.</summary>
+    /// <summary>Gets or sets the ConfigFile name.</summary>
     public string ConfigFileName { get; private set; }
 
-    /// <summary>Gets or sets the generated page count.</summary>
-    public int GenPageCount { get; set; }
-
     /// <summary>Gets the singleton instance.</summary>
-    public static ValuesDocGen Instance
+    public static ValuesDataDetail Instance
     {
       get { return mInstance; }
     }
 
     /// <summary>Gets or sets the Managers class reference.</summary>
-    public ManagersDocGen Managers { get; set; }
+    public DataDetailManagers Managers { get; private set; }
 
-    /// <summary>Gets the StandardSettings value.</summary>
+    // Gets or sets the StandardSettings value.
     public StandardUISettings StandardSettings { get; private set; }
     #endregion
 
     #region Class Data
 
-    /// <summary>Initialize Singleton.</summary>
-    private static readonly ValuesDocGen mInstance
-      = new ValuesDocGen();
+    // The singleton instance.
+    private static readonly ValuesDataDetail mInstance
+      = new ValuesDataDetail();
     #endregion
   }
 }

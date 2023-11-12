@@ -387,3 +387,111 @@ exec sp_DMGAddUnique @className, 'Static',
  '',  1
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  2
+
+set @className= 'ControlColumn';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'ControlColumns';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'ControlRow';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'ControlRows';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'ControlTab';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'ControlTabItems';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  4
+
+set @className= 'ControlDetail';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  10
+exec sp_DMGAddUnique @className, 'Data',
+ '',  11
+
+set @className= 'ControlDetails';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  13
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  14
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  15
+exec sp_DMGAddUnique @className, 'SearchSort',
+ '',  16
+
+set @className= 'ControlColumnManager';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  6
+exec sp_DMGAddUnique @className, 'Data',
+ '',  7
+exec sp_DMGAddUnique @className, 'Key',
+ 'Key',  8
+
+set @className= 'ControlDetailManager';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  6
+exec sp_DMGAddUnique @className, 'Data',
+ '',  7
+exec sp_DMGAddUnique @className, 'Key',
+ 'Key',  8
+
+set @className= 'ControlRowManager';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+exec sp_DMGAddUnique @className, 'Key',
+ 'Key',  3
+
+set @className= 'ControlTabManager';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+exec sp_DMGAddUnique @className, 'Key',
+ 'Key',  3
+
+set @className= 'DataDetailManagers';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2
+
+set @className= 'DataDetailData';
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  1
+exec sp_DMGAddUnique @className, 'Data',
+ '',  2

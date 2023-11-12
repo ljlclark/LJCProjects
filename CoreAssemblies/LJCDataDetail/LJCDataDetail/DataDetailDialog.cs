@@ -6,7 +6,6 @@ using LJCDataDetailLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,13 +19,13 @@ namespace LJCDataDetail
 
     // Initializes an object instance.
     /// <include path='items/DataDetailDialogC/*' file='Doc/DataDetailDialog.xml'/>
-    public DataDetailDialog(string userID, string dataConfigName
-      , string tableName)
+    public DataDetailDialog(string userID, string tableName)
     {
+      Cursor = Cursors.WaitCursor;
       InitializeComponent();
 
       // Initialize property values.
-      mDataDetailData = new DataDetailData(dataConfigName, tableName, userID);
+      mDataDetailData = new DataDetailData(tableName, userID);
       ControlDetail = mDataDetailData.GetControlDetail();
       mDataDetailCode = new DataDetailCode()
       {
@@ -41,7 +40,12 @@ namespace LJCDataDetail
       SourceRowIndex = -1;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
+      // Set DAL config before using anywhere in the program.
+      var configValues = ValuesDataDetail.Instance;
+      var settings = configValues.StandardSettings;
+      Text += $" - {settings.DataConfigName}";
+      BeginColor = settings.BeginColor;
+      Cursor = Cursors.Default;
     }
     #endregion
 

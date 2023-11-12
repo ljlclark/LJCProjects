@@ -1,9 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataDetailData.cs
-using LJCDataDetailDAL;
 using LJCDBClientLib;
-using LJCDBDataAccess;
 using LJCNetCommon;
 using System.Collections.Generic;
 
@@ -17,17 +15,11 @@ namespace LJCDataDetailDAL
 
     // Initializes an object instance.
     /// <include path='items/DataDetailDataC/*' file='Doc/DataDetailData.xml'/>
-    public DataDetailData(string dataConfigName, string tableName
-      , string userID = null)
+    public DataDetailData(string tableName, string userID = null)
     {
-      // Initialize property values.
-      DataConfigName = dataConfigName;
-      DbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName)
-      };
-      Managers = new DataDetailManagers();
-      Managers.SetDBProperties(DbServiceRef, dataConfigName);
+      //// Initialize property values.
+      var configValues = ValuesDataDetail.Instance;
+      Managers = configValues.Managers;
       TableName = tableName;
       UserID = userID;
     }
@@ -59,8 +51,17 @@ namespace LJCDataDetailDAL
           retValue.ControlTabItems = controlTabItems;
           var columnManager = Managers.ControlColumnManager;
           var rowManager = Managers.ControlRowManager;
-          foreach (ControlTab controlTab in retValue.ControlTabItems)
+          // *** Next Statement *** Add - Missing Data
+          var tabIndex = 1;
+          foreach (ControlTab controlTab in controlTabItems)
           {
+            // *** Begin *** Add - Missing Data
+            if (controlTab.TabIndex != tabIndex)
+            {
+
+            }
+            // *** End   *** Add - Missing Data
+
             // Load ControlColumns.
             var controlColumns = columnManager.LoadWithParentID(controlTab.ID);
             if (NetCommon.HasItems(controlColumns))

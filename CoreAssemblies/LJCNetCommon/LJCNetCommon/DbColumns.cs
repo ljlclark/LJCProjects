@@ -3,6 +3,7 @@
 // DbColumns
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon
@@ -350,6 +351,34 @@ namespace LJCNetCommon
       }
       NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
     }
+
+    /// <summary>Add or Update.</summary>
+    /// <param name="dbColumn">The DbColumn object.</param>
+    public void LJCSetData(DbColumn dbColumn)
+    {
+      if (NetCommon.HasItems(this))
+      {
+        var dataColumn = LJCGetColumn(dbColumn.PropertyName);
+        if (dataColumn != null)
+        {
+          dataColumn.AllowDBNull = dbColumn.AllowDBNull;
+          dataColumn.AutoIncrement = dbColumn.AutoIncrement;
+          dataColumn.Caption = dbColumn.Caption;
+          dataColumn.ColumnName = dbColumn.ColumnName;
+          dataColumn.DataTypeName = dbColumn.DataTypeName;
+          dataColumn.MaxLength = dbColumn.MaxLength;
+          dataColumn.Position = dbColumn.Position;
+          dataColumn.PropertyName = dbColumn.PropertyName;
+          dataColumn.RenameAs = dbColumn.RenameAs;
+          dataColumn.SQLTypeName = dbColumn.SQLTypeName;
+          dataColumn.Value = dbColumn.Value;
+        }
+        else
+        {
+          Add(dbColumn);
+        }
+      }
+    }
     #endregion
 
     #region Data Methods
@@ -565,7 +594,7 @@ namespace LJCNetCommon
     {
       bool retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         try
@@ -586,7 +615,7 @@ namespace LJCNetCommon
     {
       byte retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToByte(value);
@@ -600,7 +629,7 @@ namespace LJCNetCommon
     {
       char retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToChar(value);
@@ -614,7 +643,7 @@ namespace LJCNetCommon
     {
       DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = DateTime.Parse(value);
@@ -628,7 +657,7 @@ namespace LJCNetCommon
     {
       decimal retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDecimal(value);
@@ -642,7 +671,7 @@ namespace LJCNetCommon
     {
       double retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDouble(value);
@@ -656,7 +685,7 @@ namespace LJCNetCommon
     {
       short retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt16(value);
@@ -670,7 +699,7 @@ namespace LJCNetCommon
     {
       int retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt32(value);
@@ -684,10 +713,25 @@ namespace LJCNetCommon
     {
       long retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt64(value);
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as an object.
+    /// <include path='items/LJCGetObject/*' file='Doc/DbColumns.xml'/>
+    public object LJCGetObject(string propertyName)
+    {
+      object retValue = default;
+
+      var dbColumn = LJCSearchPropertyName(propertyName);
+      if (dbColumn != null
+        && dbColumn.Value != null)
+      {
+        retValue = dbColumn.Value;
       }
       return retValue;
     }
@@ -698,7 +742,7 @@ namespace LJCNetCommon
     {
       float retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToSingle(value);
@@ -708,7 +752,7 @@ namespace LJCNetCommon
 
     // Gets the string value for the column with the specified name.
     /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
-    public string LJCGetValue(string propertyName)
+    public string LJCGetString(string propertyName)
     {
       string retValue = default;
 
@@ -720,6 +764,20 @@ namespace LJCNetCommon
         retValue = dbColumn.Value.ToString();
       }
       return retValue;
+    }
+
+    // Update column value.
+    /// <include path='items/LJCSetObjectValue/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetObjectValue(string propertyName, object value)
+    {
+      if (NetCommon.HasItems(this))
+      {
+        var dataColumn = LJCGetColumn(propertyName);
+        if (dataColumn != null)
+        {
+          dataColumn.Value = value;
+        }
+      }
     }
 
     // Sets the value for the column with the specified name.

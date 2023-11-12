@@ -226,6 +226,83 @@ exec sp_DCAddUnique @assemblyName, @headingName,
   'Represents a collection of DataConfig objects.',
   @seq;
 
+/* LJCDataDetailDAL */
+set @assemblyName = 'LJCDataDetailDAL';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlDetail',
+  'The DetailConfig table Data Object.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlDetails',
+  'Represents a collection of DetailDialog objects.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlTab',
+  'The ControlTab table Data Object.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlTabItems',
+  'Represents a collection of ControlTab objects.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlColumn',
+  'The ControlColumn table Data Object.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlColumns',
+  'Represents a collection of ControlColumn objects.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlRow',
+  'The ControlRow table Data Object.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlRows',
+  'Represents a collection of ControlRow objects.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DataDetailData',
+  'Contains methods for using DataDetail data.',
+  @seq;
+
+set @assemblyName = 'LJCDataDetailDAL';
+set @headingName = 'Manager';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlDetailManager',
+  'Provides table specific data methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlTabManager',
+  'Provides table specific data methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlColumnManager',
+  'Provides table specific data methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'ControlRowManager',
+  'Provides table specific data methods.',
+  @seq;
+set @seq += 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DataDetailManagers',
+  'Gets the Manager objects.',
+  @seq;
+
 /* LJCDBClientLib */
 set @assemblyName = 'LJCDBClientLib';
 set @headingName = 'DataAccess';

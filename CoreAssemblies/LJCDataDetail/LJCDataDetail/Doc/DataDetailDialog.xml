@@ -8,7 +8,6 @@
       Initializes an object instance.
     </summary>
     <param name="userID">The User ID.</param>
-    <param name="dataConfigName">The DataConfig name.</param>
     <param name="tableName">The Table name.</param>
     <remarks>
       <para>

@@ -320,6 +320,13 @@
       int value.
     </returns>
   </LJCGetInt64>
+  <LJCGetObject>
+    <summary>
+      Gets the column object value as an object.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object value.</returns>
+  </LJCGetObject>
   <LJCGetSingle>
     <summary>
       Gets the column object value as a single.
@@ -334,6 +341,13 @@
     <param name="propertyName">The property name.</param>
     <returns>The column value.</returns>
   </LJCGetValue>
+  <LJCSetObjectValue>
+    <summary>
+      Update column value.
+    </summary>
+    <param name="propertyName">The property name. </param>
+    <param name="value">The Value property value.</param>
+  </LJCSetObjectValue>
   <LJCSetValue>
     <summary>
       Sets the value for the column with the specified name.

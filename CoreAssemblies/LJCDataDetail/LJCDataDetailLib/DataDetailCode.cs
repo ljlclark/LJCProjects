@@ -475,8 +475,8 @@ namespace LJCDataDetailLib
     #endregion
 
     #region Class Data
-    private const int MinLabelWidth = 60;
-    private const int MinControlWidth = 80;
+    private const int MinLabelWidth = 80;
+    private const int MinControlWidth = 120;
     #endregion
   }
 }

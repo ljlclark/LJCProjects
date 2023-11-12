@@ -187,7 +187,7 @@
       this.MinimizeBox = false;
       this.Name = "DataDetailDialog";
       this.ShowInTaskbar = false;
-      this.Text = "Dynamic Detail Dialog";
+      this.Text = "Dynamic Dialog";
       this.Load += new System.EventHandler(this.DataDetailDialog_Load);
       this.MainTabs.ResumeLayout(false);
       this.DetailMenu.ResumeLayout(false);
