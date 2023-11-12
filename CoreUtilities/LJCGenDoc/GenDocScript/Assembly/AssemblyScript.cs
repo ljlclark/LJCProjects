@@ -64,15 +64,15 @@ namespace GenDocScript
       var retValue = new AssemblyValues();
 
       var values = row.Values;
-      var description = values.LJCGetValue("Description");
+      var description = values.LJCGetString("Description");
       if (NetString.HasValue(description))
       {
         retValue.Description = description.Replace("\n", "");
       }
-      retValue.FileSpec = values.LJCGetValue("FileSpec");
-      retValue.GroupName = values.LJCGetValue("GroupName");
-      retValue.MainImage = values.LJCGetValue("MainImage");
-      retValue.Name = values.LJCGetValue("Name");
+      retValue.FileSpec = values.LJCGetString("FileSpec");
+      retValue.GroupName = values.LJCGetString("GroupName");
+      retValue.MainImage = values.LJCGetString("MainImage");
+      retValue.Name = values.LJCGetString("Name");
       retValue.Sequence = values.LJCGetInt32("Sequence");
       return retValue;
     }

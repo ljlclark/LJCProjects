@@ -118,14 +118,14 @@ namespace GenDocScript
       var retValue = new ClassValues();
 
       var values = row.Values;
-      retValue.AssemblyName = values.LJCGetValue("AssemblyName");
-      retValue.HeadingName = values.LJCGetValue("HeadingName");
-      var description = values.LJCGetValue("Description");
+      retValue.AssemblyName = values.LJCGetString("AssemblyName");
+      retValue.HeadingName = values.LJCGetString("HeadingName");
+      var description = values.LJCGetString("Description");
       if (NetString.HasValue(description))
       {
         retValue.Description = description.Replace("\n", "");
       }
-      retValue.Name = values.LJCGetValue("Name");
+      retValue.Name = values.LJCGetString("Name");
       retValue.Sequence = values.LJCGetInt32("Sequence");
       return retValue;
     }

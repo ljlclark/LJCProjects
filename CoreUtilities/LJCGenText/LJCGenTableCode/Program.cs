@@ -52,7 +52,7 @@ namespace LJCGenTableCode
           {
             foreach (DbRow dbRow in dbResult.Rows)
             {
-              string tableName = dbRow.Values.LJCGetValue("TABLE_NAME");
+              string tableName = dbRow.Values.LJCGetString("TABLE_NAME");
               if (false == tableName.StartsWith("sys"))
               {
                 WriteLine($"Generating Table: {tableName}");

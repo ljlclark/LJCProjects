@@ -112,14 +112,14 @@ namespace GenDocScript
       var retValue = new MethodValues();
 
       var values = row.Values;
-      retValue.AssemblyName = values.LJCGetValue("AName");
-      retValue.ClassName = values.LJCGetValue("CName");
-      retValue.HeadingName = values.LJCGetValue("HeadingName");
-      retValue.MethodName = values.LJCGetValue("Name");
-      var description = values.LJCGetValue("Description");
+      retValue.AssemblyName = values.LJCGetString("AName");
+      retValue.ClassName = values.LJCGetString("CName");
+      retValue.HeadingName = values.LJCGetString("HeadingName");
+      retValue.MethodName = values.LJCGetString("Name");
+      var description = values.LJCGetString("Description");
       retValue.Description = description.Replace("\n", "");
       retValue.Sequence = values.LJCGetInt32("Sequence");
-      retValue.OverloadName = values.LJCGetValue("OverloadName");
+      retValue.OverloadName = values.LJCGetString("OverloadName");
       return retValue;
     }
 

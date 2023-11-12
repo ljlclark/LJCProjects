@@ -58,8 +58,8 @@ namespace GenDocScript
 
       var values = row.Values;
       retValue.ActiveFlag = values.LJCGetBoolean("ActiveFlag");
-      retValue.Heading = values.LJCGetValue("Heading");
-      retValue.Name = values.LJCGetValue("Name");
+      retValue.Heading = values.LJCGetString("Heading");
+      retValue.Name = values.LJCGetString("Name");
       retValue.Sequence = values.LJCGetInt32("Sequence");
       return retValue;
     }

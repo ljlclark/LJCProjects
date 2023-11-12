@@ -85,9 +85,9 @@ namespace GenDocScript
 
       var values = row.Values;
       retValue.ActiveFlag = values.LJCGetBoolean("ActiveFlag");
-      retValue.AssemblyName = values.LJCGetValue("AssemblyName");
-      retValue.HeadingName = values.LJCGetValue("HeadingName");
-      retValue.HeadingTextCustom = values.LJCGetValue("HeadingTextCustom");
+      retValue.AssemblyName = values.LJCGetString("AssemblyName");
+      retValue.HeadingName = values.LJCGetString("HeadingName");
+      retValue.HeadingTextCustom = values.LJCGetString("HeadingTextCustom");
       retValue.Sequence = values.LJCGetInt32("Sequence");
       return retValue;
     }

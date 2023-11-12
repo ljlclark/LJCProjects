@@ -40,7 +40,7 @@ namespace LJCWinFormControls
         List<object> listValues = new List<object>();
         foreach (DataGridViewColumn gridColumn in grid.Columns)
         {
-          listValues.Add(dbValues.LJCGetValue(gridColumn.Name));
+          listValues.Add(dbValues.LJCGetString(gridColumn.Name));
         }
         var values = listValues.ToArray();
         SetValues(values);

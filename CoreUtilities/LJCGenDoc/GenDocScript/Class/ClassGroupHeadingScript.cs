@@ -54,8 +54,8 @@ namespace GenDocScript
       var retValue = new ClassGroupHeadingValues();
 
       var values = row.Values;
-      retValue.Heading = values.LJCGetValue("Heading");
-      retValue.Name = values.LJCGetValue("Name");
+      retValue.Heading = values.LJCGetString("Heading");
+      retValue.Name = values.LJCGetString("Name");
       retValue.Sequence = values.LJCGetInt16("Sequence");
       return retValue;
     }

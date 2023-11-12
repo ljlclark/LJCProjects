@@ -751,26 +751,30 @@ namespace LJCNetCommon
     }
 
     // Gets the string value for the column with the specified name.
-    /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
+    /// <include path='items/LJCGetString/*' file='Doc/DbColumns.xml'/>
     public string LJCGetString(string propertyName)
     {
       string retValue = default;
 
-      var dbColumn = LJCSearchPropertyName(propertyName);
-      if (dbColumn != null
-        && dbColumn.Value != null
-        && NetString.HasValue(dbColumn.Value.ToString()))
+      if (NetString.HasValue(propertyName))
       {
-        retValue = dbColumn.Value.ToString();
+        var dbColumn = LJCSearchPropertyName(propertyName);
+        if (dbColumn != null
+          && dbColumn.Value != null
+          && NetString.HasValue(dbColumn.Value.ToString()))
+        {
+          retValue = dbColumn.Value.ToString();
+        }
       }
       return retValue;
     }
 
     // Update column value.
-    /// <include path='items/LJCSetObjectValue/*' file='Doc/DbColumns.xml'/>
-    public void LJCSetObjectValue(string propertyName, object value)
+    /// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
+    public void LJCSetValue(string propertyName, object value)
     {
-      if (NetCommon.HasItems(this))
+      if (NetCommon.HasItems(this)
+        && NetString.HasValue(propertyName))
       {
         var dataColumn = LJCGetColumn(propertyName);
         if (dataColumn != null)
@@ -780,23 +784,23 @@ namespace LJCNetCommon
       }
     }
 
-    // Sets the value for the column with the specified name.
-    /// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
-    public void LJCSetValue(string propertyName, object value)
-    {
-      if (value != null)
-      {
-        var dbColumn = LJCSearchPropertyName(propertyName);
-        if (null == dbColumn)
-        {
-          Add(propertyName, value);
-        }
-        else
-        {
-          dbColumn.Value = value;
-        }
-      }
-    }
+    //// Sets the value for the column with the specified name.
+    ///// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
+    //public void LJCSetValue(string propertyName, object value)
+    //{
+    //  if (value != null)
+    //  {
+    //    var dbColumn = LJCSearchPropertyName(propertyName);
+    //    if (null == dbColumn)
+    //    {
+    //      Add(propertyName, value);
+    //    }
+    //    else
+    //    {
+    //      dbColumn.Value = value;
+    //    }
+    //  }
+    //}
     #endregion
 
     #region Properties

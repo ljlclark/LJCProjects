@@ -103,7 +103,7 @@ namespace LJCViewEditor
       retValue.LJCSetInt32(columnName, id);
 
       columnName = ViewData.ColumnName;
-      var name = dbValues.LJCGetValue(columnName);
+      var name = dbValues.LJCGetString(columnName);
       retValue.LJCSetString(columnName, name);
 
       retValue.LJCSetValues(ljcGrid, dbValues);

@@ -189,7 +189,7 @@ namespace LJCNetCommon
     {
       bool retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         try
@@ -210,7 +210,7 @@ namespace LJCNetCommon
     {
       byte retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToByte(value);
@@ -224,7 +224,7 @@ namespace LJCNetCommon
     {
       char retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToChar(value);
@@ -238,7 +238,7 @@ namespace LJCNetCommon
     {
       DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = DateTime.Parse(value);
@@ -252,7 +252,7 @@ namespace LJCNetCommon
     {
       decimal retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDecimal(value);
@@ -266,7 +266,7 @@ namespace LJCNetCommon
     {
       double retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToDouble(value);
@@ -280,7 +280,7 @@ namespace LJCNetCommon
     {
       short retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt16(value);
@@ -294,7 +294,7 @@ namespace LJCNetCommon
     {
       int retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt32(value);
@@ -308,7 +308,7 @@ namespace LJCNetCommon
     {
       long retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToInt64(value);
@@ -323,13 +323,28 @@ namespace LJCNetCommon
       return "1753/01/01 00:00:00";
     }
 
+    // Gets the column object value as an object.
+    /// <include path='items/LJCGetObject/*' file='Doc/DbColumns.xml'/>
+    public object LJCGetObject(string propertyName)
+    {
+      object retValue = default;
+
+      var dbValue = LJCSearchPropertyName(propertyName);
+      if (dbValue != null
+        && dbValue.Value != null)
+      {
+        retValue = dbValue.Value;
+      }
+      return retValue;
+    }
+
     // Gets the column object value as a single.
     /// <include path='items/LJCGetSingle/*' file='Doc/DbColumns.xml'/>
     public float LJCGetSingle(string propertyName)
     {
       float retValue = 0;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCGetString(propertyName);
       if (value != null)
       {
         retValue = Convert.ToSingle(value);
@@ -338,8 +353,8 @@ namespace LJCNetCommon
     }
 
     // Gets the string value for the column with the specified name.
-    /// <include path='items/LJCGetValue/*' file='Doc/DbColumns.xml'/>
-    public string LJCGetValue(string propertyName)
+    /// <include path='items/LJCGetString/*' file='Doc/DbColumns.xml'/>
+    public string LJCGetString(string propertyName)
     {
       string retValue = null;
 
@@ -358,9 +373,10 @@ namespace LJCNetCommon
 
     // Sets the object value for the column with the specified name.
     /// <include path='items/LJCSetValue/*' file='Doc/DbValues.xml'/>
-    public void LJCSetValue(string propertyName, string value)
+    public void LJCSetValue(string propertyName, object value)
     {
-      if (NetString.HasValue(propertyName))
+      if (NetCommon.HasItems(this)
+        && NetString.HasValue(propertyName))
       {
         var dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null)
