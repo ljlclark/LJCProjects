@@ -18,35 +18,44 @@ namespace LJCDataDetail
     // The program entry point function.
     /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
     [STAThread]
-    private static void Main()
+    private static void Main(string[] args)
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
 
-      // *** Begin *** Testing
-      var configValues = ValuesDataDetail.Instance;
-      var settings = configValues.StandardSettings;
-      var dataConfigName = settings.DataConfigName;
-      var dbDataAccess = settings.DbServiceRef.DbDataAccess;
-
-      // Create test data columns.
-      string tableName = "PersonDMTest";
-      var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
-        , tableName, null, dataConfigName, null);
-      var dbResult = dbDataAccess.Execute(dbRequest);
-      var dataColumns = dbResult.Columns;
-      // *** End   *** Testing
-
-      string userID = "-null";
-      DataDetailDialog dialog = new DataDetailDialog(userID, tableName)
+      if (args.Length < 1)
       {
-        LJCDataColumns = dataColumns
-      };
-
-      Application.Run(dialog);
-      if (DialogResult.OK == dialog.DialogResult)
+        MessageBox.Show("Syntax: LJCDataDetail tableName"
+          , "Missing Argument", MessageBoxButtons.OK
+          , MessageBoxIcon.Error);
+      }
+      else
       {
-        ShowResult(dialog.LJCDataColumns, dialog.LJCKeyItems);
+        // *** Begin *** Testing
+        var configValues = ValuesDataDetail.Instance;
+        var settings = configValues.StandardSettings;
+        var dataConfigName = settings.DataConfigName;
+        var dbDataAccess = settings.DbServiceRef.DbDataAccess;
+
+        // Create test data columns.
+        string tableName = args[0];
+        var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
+          , tableName, null, dataConfigName, null);
+        var dbResult = dbDataAccess.Execute(dbRequest);
+        var dataColumns = dbResult.Columns;
+        // *** End   *** Testing
+
+        string userID = "-null";
+        DataDetailDialog dialog = new DataDetailDialog(userID, tableName)
+        {
+          LJCDataColumns = dataColumns
+        };
+
+        Application.Run(dialog);
+        if (DialogResult.OK == dialog.DialogResult)
+        {
+          ShowResult(dialog.LJCDataColumns, dialog.LJCKeyItems);
+        }
       }
     }
 

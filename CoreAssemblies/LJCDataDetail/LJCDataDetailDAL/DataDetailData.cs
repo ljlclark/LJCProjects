@@ -51,17 +51,8 @@ namespace LJCDataDetailDAL
           retValue.ControlTabItems = controlTabItems;
           var columnManager = Managers.ControlColumnManager;
           var rowManager = Managers.ControlRowManager;
-          // *** Next Statement *** Add - Missing Data
-          var tabIndex = 1;
           foreach (ControlTab controlTab in controlTabItems)
           {
-            // *** Begin *** Add - Missing Data
-            if (controlTab.TabIndex != tabIndex)
-            {
-
-            }
-            // *** End   *** Add - Missing Data
-
             // Load ControlColumns.
             var controlColumns = columnManager.LoadWithParentID(controlTab.ID);
             if (NetCommon.HasItems(controlColumns))

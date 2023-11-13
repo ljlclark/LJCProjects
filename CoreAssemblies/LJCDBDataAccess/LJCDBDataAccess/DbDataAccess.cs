@@ -303,7 +303,6 @@ namespace LJCDBDataAccess
       if (NetCommon.HasData(dataTable))
       {
         // Add TABLE_NAME if it is not already defined.
-        // *** Next Statement *** Change - 11/24/22
         var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
         if (null == dbColumn)
         {
@@ -376,7 +375,6 @@ namespace LJCDBDataAccess
       {
         foreach (DataColumn dataColumn in dataTable.Columns)
         {
-          // *** Next Statement *** Change - 11/24/22
           var dbColumn
             = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
           if (null == dbColumn)
@@ -442,7 +440,6 @@ namespace LJCDBDataAccess
       builder.AppendLine("select TABLE_NAME");
       builder.AppendLine($"from {dbName}.INFORMATION_SCHEMA.TABLES");
       builder.AppendLine("where TABLE_TYPE = 'BASE TABLE'");
-      // *** Next Statement *** Add- 9/9
       builder.AppendLine("order by TABLE_NAME");
       SqlStatement = builder.ToString();
 

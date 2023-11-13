@@ -246,6 +246,19 @@ namespace LJCDataDetail
       return retValue;
     }
 
+    // Gets the KeyItem Property text.
+    private string KeyPropertyText(string propertyName)
+    {
+      string retValue = null;
+
+      var items = LJCKeyItems.SearchPropertyName(propertyName);
+      if (items != null && 1 == items.Count)
+      {
+        retValue = items[0].Description.Trim();
+      }
+      return retValue;
+    }
+
     // Selects the Control if it is the first one.
     private void SelectControlIfFirst(int columnIndex, int rowIndex
       , Control control)

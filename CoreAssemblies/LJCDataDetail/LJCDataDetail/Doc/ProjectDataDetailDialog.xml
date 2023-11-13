@@ -5,13 +5,13 @@
 <items>
   <DataDetailDialog>
     <summary>
-      The DataDetail Dynamic Detail dialog.
+      The DataDetail Dynamic dialog.
     </summary>
     <remarks>
       <para>
-        The DataDetailDialog form is designed to dynamically create a Detail Dialog
-        to allow display and edit of Data Record values which are contained in the
-        LJCDataColumns (DbColumns) collection.
+        The DataDetailDialog form is designed to dynamically create a Detail
+        Dialog to allow display and edit of Data values which are contained
+        in the LJCDataColumns (DbColumns) collection.
       </para>
       <para>
         The Dialog contains one or more Tab pages. Each TabPage is represented
@@ -23,7 +23,14 @@
       <!-- Project Level Remarks -->
       <para>-- </para>
       <para>
-        The DataDetail project contains forms for dynamically displaying data.
+        The LJCDataDetail project creates the file LJCDataDetail.exe. This
+        program can be run directly and functions as a test program that
+        displays a sample DataDetailDialog form.
+      </para>
+      <para>
+        A program reference can be set to LJCDataDetail.exe which allows
+        programatic access to the DataDetailDialog form. This form is used
+        to create and display a DataDetail Dialog from within a program.
       </para>
       <para>
         The DataDetailDialog form dynamically displays a detail view of the

@@ -398,7 +398,7 @@ namespace LJCDataDetail
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      if (null == LJCDataColumns || 0 == LJCDataColumns.Count)
+      if (false == NetCommon.HasItems(LJCDataColumns))
       {
         throw new MissingMemberException(Name, "LJCDataColumns");
       }
@@ -513,19 +513,6 @@ namespace LJCDataDetail
       {
         string title = "Display SelectList Error";
         MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-      return retValue;
-    }
-
-    // Gets the KeyItem Property text.
-    private string KeyPropertyText(string propertyName)
-    {
-      string retValue = null;
-
-      var items = LJCKeyItems.SearchPropertyName(propertyName);
-      if (items != null && 1 == items.Count)
-      {
-        retValue = items[0].Description.Trim();
       }
       return retValue;
     }
