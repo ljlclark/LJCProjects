@@ -69,10 +69,8 @@ namespace LJCDataDetailDAL
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    // 
+    /// <include path='items/DbColumn/*' file='../Doc/ControlData.xml'/>
     public DbColumn DbColumn()
     {
       var retValue = new DbColumn()

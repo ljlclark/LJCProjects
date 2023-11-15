@@ -36,6 +36,12 @@ namespace LJCDataDetail
         DataDetailDialog dialog = new DataDetailDialog(userID, tableName);
 
         // Set data values.
+        var data = dialog.LJCDataColumns;
+        data.LJCSetValue("Id", 3);
+        data.LJCSetValue("FirstName", "First");
+        data.LJCSetValue("LastName", "Last");
+        data.LJCSetValue("CodeType_Id", 6);
+        data.LJCSetValue("PrincipleFlag", 1);
 
         Application.Run(dialog);
         if (DialogResult.OK == dialog.DialogResult)

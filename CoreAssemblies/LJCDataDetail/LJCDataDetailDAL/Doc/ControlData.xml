@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ControlData.xml -->
+<items>
+  <DbColumn>
+    <summary>
+    </summary>
+    <returns></returns>
+  </DbColumn>
+</items>

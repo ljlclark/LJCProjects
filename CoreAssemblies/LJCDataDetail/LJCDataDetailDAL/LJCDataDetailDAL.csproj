@@ -79,6 +79,7 @@
   <ItemGroup>
     <Content Include="Doc\ControlColumnManager.xml" />
     <Content Include="Doc\ControlColumns.xml" />
+    <Content Include="Doc\ControlData.xml" />
     <Content Include="Doc\ControlDataItems.xml" />
     <Content Include="Doc\ControlDataManager.xml" />
     <Content Include="Doc\ControlRowManager.xml" />

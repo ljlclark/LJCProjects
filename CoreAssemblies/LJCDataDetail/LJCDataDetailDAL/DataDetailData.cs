@@ -30,10 +30,8 @@ namespace LJCDataDetailDAL
 
     #region ControlDetail
 
-    /// <summary>
-    /// Loads or creates ControlData.
-    /// </summary>
-    /// <returns></returns>
+    // Loads or creates Data Columns.
+    /// <include path='items/DataColumns/*' file='Doc/DataDetailData.xml'/>
     public DbColumns DataColumns(long controlDetailID)
     {
       DbColumns retValue;

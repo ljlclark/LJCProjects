@@ -24,6 +24,12 @@
   </DataDetailDataC>
   
   <!-- ControlDetail -->
+  <DataColumns>
+    <summary>
+      Loads or creates Data Columns.
+    </summary>
+    <returns>The Data Columns object.</returns>
+  </DataColumns>
   <GetControlDetail>
     <summary>
       Gets the ControlDetail data object.
