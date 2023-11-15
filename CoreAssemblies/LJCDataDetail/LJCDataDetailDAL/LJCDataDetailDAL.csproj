@@ -59,6 +59,7 @@
     <Compile Include="DataDetailData.cs" />
     <Compile Include="DataDetailManagers.cs" />
     <Compile Include="Data\ControlColumn.cs" />
+    <Compile Include="Data\ControlDataItems.cs" />
     <Compile Include="Data\ControlRow.cs" />
     <Compile Include="Data\ControlRows.cs" />
     <Compile Include="Data\ControlTab.cs" />
@@ -66,7 +67,9 @@
     <Compile Include="Data\ControlTabItems.cs" />
     <Compile Include="Data\ControlDetails.cs" />
     <Compile Include="Data\ControlColumns.cs" />
+    <Compile Include="Data\ControlData.cs" />
     <Compile Include="Manager\ControlColumnManager.cs" />
+    <Compile Include="Manager\ControlDataManager.cs" />
     <Compile Include="Manager\ControlRowManager.cs" />
     <Compile Include="Manager\ControlTabManager.cs" />
     <Compile Include="Manager\ControlDetailManager.cs" />
@@ -76,6 +79,8 @@
   <ItemGroup>
     <Content Include="Doc\ControlColumnManager.xml" />
     <Content Include="Doc\ControlColumns.xml" />
+    <Content Include="Doc\ControlDataItems.xml" />
+    <Content Include="Doc\ControlDataManager.xml" />
     <Content Include="Doc\ControlRowManager.xml" />
     <Content Include="Doc\ControlRows.xml" />
     <Content Include="Doc\ControlTabManager.xml" />

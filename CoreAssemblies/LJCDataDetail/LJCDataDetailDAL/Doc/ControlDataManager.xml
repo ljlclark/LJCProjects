@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ControlDatManager.xml -->
+<items>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied values.
+    </summary>
+    <param name="controlDetailID"></param>
+    <param name="propertyName"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </RetrieveWithUnique>
+  <GetUniqueKey>
+    <summary>
+      Gets the unique key columns.
+    </summary>
+    <param name="controlDetailID"></param>
+    <param name="propertyName"></param>
+    <returns></returns>
+  </GetUniqueKey>
+</items>

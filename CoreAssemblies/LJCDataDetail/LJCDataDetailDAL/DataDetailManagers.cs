@@ -52,6 +52,29 @@ namespace LJCDataDetailDAL
     }
     private ControlDetailManager mControlDetailManager;
 
+    /// <summary>Gets the ControlDataManager object.</summary>
+    public ControlDataManager ControlDataManager
+    {
+      get
+      {
+        if (null == mControlDataManager)
+        {
+          ControlDataManager
+            = new ControlDataManager(mDbServiceRef, mDataConfigName);
+        }
+        return mControlDataManager;
+      }
+
+      private set
+      {
+        if (value != null)
+        {
+          mControlDataManager = value;
+        }
+      }
+    }
+    private ControlDataManager mControlDataManager;
+
     /// <summary>Gets the ControlTabManager object.</summary>
     public ControlTabManager ControlTabManager
     {

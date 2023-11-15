@@ -233,6 +233,7 @@ namespace LJCNetCommon
       get { return mValue; }
       set
       {
+        // Update if value is changed.
         if (false == NetCommon.IsEqual(mValue, value))
         {
           IsChanged = true;
@@ -300,6 +301,42 @@ namespace LJCNetCommon
 
     /// <summary></summary> 
     public int AddOrderIndex { get; set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The AllowDBNull column name.</summary>
+    public static string ColumnAllowDBNull = "AllowDBNull";
+
+    /// <summary>The AutoIncrement column name.</summary>
+    public static string ColumnAutoIncrement = "AutoIncrement";
+
+    /// <summary>The Caption column name.</summary>
+    public static string ColumnCaption = "Caption";
+
+    /// <summary>The ColumnName column name.</summary>
+    public static string ColumnColumnName = "ColumnName";
+
+    /// <summary>The DataTypeName column name.</summary>
+    public static string ColumnDataTypeName = "DataTypeName";
+
+    /// <summary>The MaxLength column name.</summary>
+    public static string ColumnMaxLength = "MaxLength";
+
+    /// <summary>The Position column name.</summary>
+    public static string ColumnPosition = "Position";
+
+    /// <summary>The PropertyName column name.</summary>
+    public static string ColumnPropertyName = "PropertyName";
+
+    /// <summary>The RenameAs column name.</summary>
+    public static string ColumnRenameAs = "RenameAs";
+
+    /// <summary>The SQLTypeName column name.</summary>
+    public static string ColumnSQLTypeName = "SQLTypeName";
+
+    /// <summary>The Value column name.</summary>
+    public static string ColumnValue = "Value";
     #endregion
   }
 

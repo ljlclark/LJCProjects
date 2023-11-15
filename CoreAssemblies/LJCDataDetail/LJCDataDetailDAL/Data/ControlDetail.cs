@@ -37,7 +37,6 @@ namespace LJCDataDetailDAL
       ControlRowSpacing = item.ControlRowSpacing;
       ControlRowHeight = item.ControlRowHeight;
       ContentHeight = item.ContentHeight;
-
       ControlTabItems = new ControlTabItems();
       foreach (ControlTab controlTab in item.ControlTabItems)
       {

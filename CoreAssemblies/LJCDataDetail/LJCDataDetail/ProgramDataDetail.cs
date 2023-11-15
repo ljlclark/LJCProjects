@@ -31,25 +31,11 @@ namespace LJCDataDetail
       }
       else
       {
-        // *** Begin *** Testing
-        var configValues = ValuesDataDetail.Instance;
-        var settings = configValues.StandardSettings;
-        var dataConfigName = settings.DataConfigName;
-        var dbDataAccess = settings.DbServiceRef.DbDataAccess;
-
-        // Create test data columns.
-        string tableName = args[0];
-        var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
-          , tableName, null, dataConfigName, null);
-        var dbResult = dbDataAccess.Execute(dbRequest);
-        var dataColumns = dbResult.Columns;
-        // *** End   *** Testing
-
         string userID = "-null";
-        DataDetailDialog dialog = new DataDetailDialog(userID, tableName)
-        {
-          LJCDataColumns = dataColumns
-        };
+        string tableName = args[0];
+        DataDetailDialog dialog = new DataDetailDialog(userID, tableName);
+
+        // Set data values.
 
         Application.Run(dialog);
         if (DialogResult.OK == dialog.DialogResult)

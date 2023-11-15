@@ -31,7 +31,6 @@ namespace LJCDataDetailDAL
       TabIndex = item.TabIndex;
       Caption = item.Caption;
       Description = item.Description;
-
       ControlColumns = new ControlColumns();
       foreach (ControlColumn controlColumn in item.ControlColumns)
       {

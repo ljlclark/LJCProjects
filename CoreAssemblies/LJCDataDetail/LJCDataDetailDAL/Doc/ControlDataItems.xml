@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ControlDataItems.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id"></param>
+    <param name="controlDetailID"></param>
+    <returns></returns>
+  </Add>
+</items>

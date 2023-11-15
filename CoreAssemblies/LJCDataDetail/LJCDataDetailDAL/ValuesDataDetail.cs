@@ -58,7 +58,7 @@ namespace LJCDataDetailDAL
     /// <summary>Gets or sets the Managers class reference.</summary>
     public DataDetailManagers Managers { get; private set; }
 
-    // Gets or sets the StandardSettings value.
+    /// <summary>Gets or sets the StandardSettings value.</summary>
     public StandardUISettings StandardSettings { get; private set; }
     #endregion
 

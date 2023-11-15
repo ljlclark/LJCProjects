@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 // DataDetailData.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Runtime;
 
 namespace LJCDataDetailDAL
 {
@@ -18,8 +20,9 @@ namespace LJCDataDetailDAL
     public DataDetailData(string tableName, string userID = null)
     {
       //// Initialize property values.
-      var configValues = ValuesDataDetail.Instance;
-      Managers = configValues.Managers;
+      ConfigValues = ValuesDataDetail.Instance;
+      ConfigSettings = ConfigValues.StandardSettings;
+      Managers = ConfigValues.Managers;
       TableName = tableName;
       UserID = userID;
     }
@@ -27,9 +30,35 @@ namespace LJCDataDetailDAL
 
     #region ControlDetail
 
+    /// <summary>
+    /// Loads or creates ControlData.
+    /// </summary>
+    /// <returns></returns>
+    public DbColumns DataColumns(long controlDetailID)
+    {
+      DbColumns retValue;
+
+      //var managers = configValues.Managers;
+      var manager = Managers.ControlDataManager;
+      var controlDataItems = manager.LoadWithParentID(controlDetailID);
+      if (NetCommon.HasItems(controlDataItems))
+      {
+        retValue = controlDataItems.DbColumns();
+      }
+      else
+      {
+        var dbDataAccess = ConfigSettings.DbServiceRef.DbDataAccess;
+        var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
+          , TableName, null, ConfigSettings.DataConfigName, null);
+        var dbResult = dbDataAccess.Execute(dbRequest);
+        retValue = dbResult.Columns;
+      }
+      return retValue;
+    }
+
     // Gets the ControlDetail data object.
     /// <include path='items/GetControlDetail/*' file='Doc/DataDetailData.xml'/>
-    public ControlDetail GetControlDetail()
+    public ControlDetail ControlDetail()
     {
       ControlDetail retValue;
 
@@ -267,11 +296,17 @@ namespace LJCDataDetailDAL
     /// <summary>Gets or sets DataDetailManagers.</summary>
     public DataDetailManagers Managers { get; set; }
 
+    /// <summary>Gets or sets the Config settings.</summary>
+    public StandardUISettings ConfigSettings { get; private set; }
+
     /// <summary>Gets or sets the Table Name.</summary>
     public string TableName { get; set; }
 
     /// <summary>Gets or sets the User ID.</summary>
     public string UserID { get; set; }
+
+    /// <summary>Gets or sets the Config values.</summary>
+    public ValuesDataDetail ConfigValues { get; private set; }
     #endregion
   }
 }

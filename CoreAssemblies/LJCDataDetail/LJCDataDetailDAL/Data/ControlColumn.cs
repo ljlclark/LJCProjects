@@ -31,7 +31,6 @@ namespace LJCDataDetailDAL
       ColumnIndex = item.ColumnIndex;
       LabelsWidth = item.LabelsWidth;
       ControlsWidth = item.ControlsWidth;
-
       ControlRows = new ControlRows();
       foreach (ControlRow controlRow in item.ControlRows)
       {
