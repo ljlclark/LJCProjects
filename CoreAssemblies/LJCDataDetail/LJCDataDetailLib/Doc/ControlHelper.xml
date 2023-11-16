@@ -40,6 +40,7 @@
     <param name="text">The text value.</param>
     <param name="location">The Location value.</param>
     <param name="width">The control width.</param>
+    <param name="value">The control value.</param>
     <returns>The CheckBox reference.</returns>
   </CreateCheckBox>
   <CreateButton>

@@ -45,11 +45,23 @@ namespace LJCDataDetailDAL
       }
       else
       {
+        // Get Schema columns.
         var dbDataAccess = ConfigSettings.DbServiceRef.DbDataAccess;
         var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly
           , TableName, null, ConfigSettings.DataConfigName, null);
         var dbResult = dbDataAccess.Execute(dbRequest);
         retValue = dbResult.Columns;
+
+        // Add columns to table.
+        foreach (DbColumn dbColumn in retValue)
+        {
+          var controlData = new ControlData()
+          {
+            ControlDetailID = controlDetailID
+          };
+          controlData.SetDbColumnValues(dbColumn);
+          manager.Add(controlData);
+        }
       }
       return retValue;
     }

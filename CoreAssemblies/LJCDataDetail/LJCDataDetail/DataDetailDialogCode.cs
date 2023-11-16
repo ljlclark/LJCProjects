@@ -483,8 +483,8 @@ namespace LJCDataDetail
       Button retValue;
 
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      // ToDo: Change to use PropertyName?
-      var name = ControlName(dataColumn.ColumnName, "Button");
+      // *** Next Statement *** Change
+      var name = ControlName(dataColumn.PropertyName, "Button");
       string text = dataColumn.Caption;
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
       //int width = mControlColumnsHelper.AdjustedWidth(dataColumn);
@@ -505,12 +505,13 @@ namespace LJCDataDetail
       CheckBox retValue;
 
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      // ToDo: Change to use PropertyName?
-      var name = ControlName(dataColumn.ColumnName, "CheckBox");
+      // *** Next Statement *** Change
+      var name = ControlName(dataColumn.PropertyName, "CheckBox");
       string text = dataColumn.Caption;
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
       width = mDataDetailCode.AdjustedWidth(dataColumn);
-      retValue = mControlCode.CreateCheckBox(name, text, location, width);
+      retValue = mControlCode.CreateCheckBox(name, text, location, width
+        , NetCommon.GetInt32(dataColumn.Value));
       retValue.TabIndex = tabIndex;
       SetControlHandlers(retValue);
       Controls.Add(retValue);
@@ -529,8 +530,8 @@ namespace LJCDataDetail
       ComboBox retValue;
 
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      // ToDo: Change to use PropertyName?
-      var name = ControlName(dataColumn.ColumnName, "ComboBox");
+      // *** Next Statement *** Change
+      var name = ControlName(dataColumn.PropertyName, "ComboBox");
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
       width = mDataDetailCode.AdjustedWidth(dataColumn);
       retValue = mControlCode.CreateComboBox(name, location, width);
@@ -551,8 +552,8 @@ namespace LJCDataDetail
       Label label;
 
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      // ToDo: Change to use PropertyName?
-      var name = ControlName(dataColumn.ColumnName, "Label");
+      // *** Next Statement *** Change
+      var name = ControlName(dataColumn.PropertyName, "Label");
       string text = dataColumn.Caption;
       Point location = LabelLocation(tabPageIndex, columnIndex, rowIndex);
       label = mControlCode.CreateLabel(name, text, location, width);
@@ -573,8 +574,8 @@ namespace LJCDataDetail
       TextBox retValue;
 
       TabPage currentTabPage = MainTabs.TabPages[tabPageIndex];
-      // ToDo: Change to use PropertyName?
-      var name = ControlName(dataColumn.ColumnName, "TextBox");
+      // *** Next Statement *** Change
+      var name = ControlName(dataColumn.PropertyName, "TextBox");
       Point location = ControlLocation(tabPageIndex, columnIndex, rowIndex);
       width = mDataDetailCode.AdjustedWidth(dataColumn);
       string value = null;

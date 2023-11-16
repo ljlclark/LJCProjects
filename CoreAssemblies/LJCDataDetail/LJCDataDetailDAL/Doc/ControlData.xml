@@ -5,7 +5,14 @@
 <items>
   <DbColumn>
     <summary>
+      Gets the DbColumn values.
     </summary>
-    <returns></returns>
+    <returns>The DbColumn object.</returns>
   </DbColumn>
+  <SetDbColumnValues>
+    <summary>
+      Sets the DbColumn values.
+    </summary>
+    <param name="dbColumn">The source DbColumn.</param>
+  </SetDbColumnValues>
 </items>

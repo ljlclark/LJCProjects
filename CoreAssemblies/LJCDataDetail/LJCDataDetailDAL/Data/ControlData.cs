@@ -69,7 +69,7 @@ namespace LJCDataDetailDAL
       return retValue;
     }
 
-    // 
+    // Gets the DbColumn values.
     /// <include path='items/DbColumn/*' file='../Doc/ControlData.xml'/>
     public DbColumn DbColumn()
     {
@@ -88,6 +88,26 @@ namespace LJCDataDetailDAL
         Value = Value
       };
       return retValue;
+    }
+
+    // Sets the DbColumn values.
+    /// <include path='items/DbColumn/*' file='../Doc/ControlData.xml'/>
+    public void SetDbColumnValues(DbColumn dbColumn)
+    {
+      if (dbColumn != null)
+      {
+        AllowDBNull = dbColumn.AllowDBNull;
+        AutoIncrement = dbColumn.AutoIncrement;
+        Caption = dbColumn.Caption;
+        ColumnName = dbColumn.ColumnName;
+        DataTypeName = dbColumn.DataTypeName;
+        MaxLength = dbColumn.MaxLength;
+        Position = dbColumn.Position;
+        PropertyName = dbColumn.PropertyName;
+        RenameAs = dbColumn.RenameAs;
+        SQLTypeName = dbColumn.SQLTypeName;
+        Value = dbColumn.Value;
+      }
     }
 
     // The object string identifier.

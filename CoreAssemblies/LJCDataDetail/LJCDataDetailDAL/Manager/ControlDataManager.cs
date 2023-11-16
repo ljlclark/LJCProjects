@@ -45,7 +45,7 @@ namespace LJCDataDetailDAL
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public ControlData Add(ControlDetail dataObject, List<string> propertyNames = null)
+    public ControlData Add(ControlData dataObject, List<string> propertyNames = null)
     {
       ControlData retValue;
 

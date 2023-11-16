@@ -48,7 +48,7 @@ namespace LJCDataDetailLib
     // Creates a new CheckBox control.
     /// <include path='items/CreateCheckBox/*' file='Doc/ControlHelper.xml'/>
     public CheckBox CreateCheckBox(string name, string text, Point location
-      , int width = 100)
+      , int width = 100, int value = 0)
     {
       CheckBox retValue;
 
@@ -59,6 +59,7 @@ namespace LJCDataDetailLib
         Size = new Size(width, DefaultCheckBoxHeight),
         TabIndex = 0,
         Text = text,
+        Checked = value == 1,
         AutoSize = true,
         UseVisualStyleBackColor = true,
       };
