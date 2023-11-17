@@ -70,8 +70,8 @@ namespace LJCDataDetailDAL
     }
 
     // Gets the DbColumn values.
-    /// <include path='items/DbColumn/*' file='../Doc/ControlData.xml'/>
-    public DbColumn DbColumn()
+    /// <include path='items/GetDbColumnValues/*' file='../Doc/ControlData.xml'/>
+    public DbColumn GetDbColumnValues()
     {
       var retValue = new DbColumn()
       {
@@ -91,7 +91,7 @@ namespace LJCDataDetailDAL
     }
 
     // Sets the DbColumn values.
-    /// <include path='items/DbColumn/*' file='../Doc/ControlData.xml'/>
+    /// <include path='items/SetDbColumnValues/*' file='../Doc/ControlData.xml'/>
     public void SetDbColumnValues(DbColumn dbColumn)
     {
       if (dbColumn != null)

@@ -87,7 +87,7 @@ namespace LJCDataDetailDAL
         retValue = new DbColumns();
         foreach (ControlData controlData in this)
         {
-          var dbColumn = controlData.DbColumn();
+          var dbColumn = controlData.GetDbColumnValues();
           retValue.Add(dbColumn);
         }
       }

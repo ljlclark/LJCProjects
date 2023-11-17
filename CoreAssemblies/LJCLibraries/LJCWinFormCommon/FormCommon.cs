@@ -57,6 +57,19 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
+    /// <summary>
+    /// Sets the grid columns to not sortable.
+    /// </summary>
+    /// <param name="grid">The DataGridView object.</param>
+    public static  void NotSortable(DataGridView grid)
+    {
+      var notSortable = DataGridViewColumnSortMode.NotSortable;
+      foreach (DataGridViewColumn column in grid.Columns)
+      {
+        column.SortMode = notSortable;
+      }
+    }
+
     // Restore the splitter distance.
     /// <include path='items/RestoreSplitDistance/*' file='Doc/FormCommon.xml'/>
     public static void RestoreSplitDistance(SplitContainer splitContainer
@@ -579,25 +592,6 @@ namespace LJCWinFormCommon
       }
       return retValue;
     }
-
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    ///// <param name="text"></param>
-    ///// <returns></returns>
-    //public static string ReSetString(string text)
-    //{
-    //	string retValue = text;
-
-    //	if (false == string.IsNullOrWhiteSpace(retValue))
-    //	{
-    //		if ("-" == text.Trim())
-    //		{
-    //			retValue = "";
-    //		}
-    //	}
-    //	return retValue;
-    //}
     #endregion
 
     #region Class Data

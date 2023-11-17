@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCWinFormControls;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
@@ -190,6 +191,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid columns.
         mClassGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(mClassGrid);
       }
     }
     #endregion

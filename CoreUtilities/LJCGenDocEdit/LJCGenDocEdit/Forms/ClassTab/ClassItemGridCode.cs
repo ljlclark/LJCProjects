@@ -335,6 +335,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid columns.
         mClassGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(mClassGrid);
         mClassGrid.LJCDragDataName = "DocClass";
       }
     }

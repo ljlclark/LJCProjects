@@ -347,6 +347,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid columns.
         mMethodHeadingGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(mMethodHeadingGrid);
         mMethodHeadingGrid.LJCDragDataName = "DocMethodGroupHeading";
       }
     }

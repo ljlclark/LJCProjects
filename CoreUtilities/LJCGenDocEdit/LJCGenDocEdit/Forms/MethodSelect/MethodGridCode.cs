@@ -5,8 +5,8 @@ using LJCGenDocDAL;
 using LJCDocObjLib;
 using LJCNetCommon;
 using LJCWinFormControls;
-using System;
 using System.Windows.Forms;
+using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
@@ -242,6 +242,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid columns.
         mMethodGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(mMethodGrid);
       }
     }
 

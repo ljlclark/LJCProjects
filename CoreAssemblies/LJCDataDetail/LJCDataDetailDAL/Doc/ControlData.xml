@@ -3,12 +3,12 @@
 <!-- Licensed under the MIT License. -->
 <!-- ControlData.xml -->
 <items>
-  <DbColumn>
+  <GetDbColumnValues>
     <summary>
       Gets the DbColumn values.
     </summary>
     <returns>The DbColumn object.</returns>
-  </DbColumn>
+  </GetDbColumnValues>
   <SetDbColumnValues>
     <summary>
       Sets the DbColumn values.

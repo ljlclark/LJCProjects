@@ -294,6 +294,7 @@ namespace LJCGenDocEdit
 
         // Setup the grid columns.
         mAssemblyGroupGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(mAssemblyGroupGrid);
         mAssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
       }
     }
