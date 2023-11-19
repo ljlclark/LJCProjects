@@ -262,8 +262,10 @@ namespace LJCViewEditor
 			BeginColor = mSettings.BeginColor;
 			EndColor = mSettings.EndColor;
 
-			// Initialize Class Data.
-			mViewHelper = new ViewHelper(LJCDbServiceRef, LJCDataConfigName);
+      // Initialize Class Data.
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(LJCDbServiceRef, LJCDataConfigName);
+			mDataDbView = new DataDbView(Managers);
 			mViewColumnManager = new ViewColumnManager(LJCDbServiceRef
 				, LJCDataConfigName);
 
@@ -349,7 +351,7 @@ namespace LJCViewEditor
 			if (mAllowTemplateGetValues)
 			{
 				DbColumn dbColumn = TemplateColumnCombo.SelectedItem as DbColumn;
-				ViewColumn viewColumn = mViewHelper.GetViewColumnFromDbColumn(dbColumn);
+				ViewColumn viewColumn = mDataDbView.GetViewColumnFromDbColumn(dbColumn);
 				GetRecordValues(viewColumn);
 			}
 			mAllowTemplateGetValues = true;
@@ -427,6 +429,8 @@ namespace LJCViewEditor
 		// Gets a reference to the record object.
 		internal ViewColumn LJCRecord { get; set; }
 
+    internal ManagersDbView Managers { get; set; }
+
 		// Gets or sets the BeginColor value.
 		private Color BeginColor { get; set; }
 
@@ -451,7 +455,7 @@ namespace LJCViewEditor
 		private StandardUISettings mSettings;
 		private DbColumns mTableColumns;
 		private ViewColumnManager mViewColumnManager;
-		private ViewHelper mViewHelper;
+		private DataDbView mDataDbView;
 
 		// The Change event.
 		internal event EventHandler<EventArgs> LJCChange;

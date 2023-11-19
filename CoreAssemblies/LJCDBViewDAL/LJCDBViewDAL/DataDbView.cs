@@ -1,6 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ViewHelper.cs
+// DataDbView.cs
 using System;
 using LJCNetCommon;
 using LJCDBMessage;
@@ -10,28 +10,15 @@ namespace LJCDBViewDAL
 {
   // Provides DB View data access and DbRequest methods.
   /// <include path='items/ViewHelper/*' file='Doc/ViewHelper.xml'/>
-  public partial class ViewHelper
+  public partial class DataDbView
   {
     #region Constructors
 
-    // Initializes an object instance.
-    /// <include path='items/ViewHelperC/*' file='Doc/ViewHelper.xml'/>
-    public ViewHelper(DbServiceRef dbServiceRef, string dataConfigName)
+    /// <summary>Initializes an object instance.</summary>
+    /// <param name="managers">The Managers object.</param>
+    public DataDbView(ManagersDbView managers)
     {
-      mDataConfigName = dataConfigName;
-      mDbServiceRef = dbServiceRef;
-
-      ViewDataManager = new ViewDataManager(mDbServiceRef, mDataConfigName);
-      ViewColumnManager = new ViewColumnManager(mDbServiceRef, mDataConfigName);
-      ViewConditionManager = new ViewConditionManager(mDbServiceRef, mDataConfigName);
-      ViewConditionSetManager = new ViewConditionSetManager(mDbServiceRef, mDataConfigName);
-      ViewFilterManager = new ViewFilterManager(mDbServiceRef, mDataConfigName);
-      ViewGridColumnManager = new ViewGridColumnManager(mDbServiceRef, mDataConfigName);
-      ViewJoinColumnManager = new ViewJoinColumnManager(mDbServiceRef, mDataConfigName);
-      ViewJoinManager = new ViewJoinManager(mDbServiceRef, mDataConfigName);
-      ViewJoinOnManager = new ViewJoinOnManager(mDbServiceRef, mDataConfigName);
-      ViewOrderByManager = new ViewOrderByManager(mDbServiceRef, mDataConfigName);
-      ViewTableManager = new ViewTableManager(mDbServiceRef, mDataConfigName);
+      Managers = managers;
     }
     #endregion
 
@@ -48,7 +35,10 @@ namespace LJCDBViewDAL
       if (dbRequest != null)
       {
         // Execute the Request.
-        DataManager dataManager = new DataManager(mDbServiceRef, mDataConfigName, tableName);
+        var dataConfigName = Managers.DataConfigName;
+        var dbServiceRef = Managers.DbServiceRef;
+        DataManager dataManager = new DataManager(dbServiceRef
+          , dataConfigName, tableName);
         DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
         retValue = dbResult;
       }
@@ -60,12 +50,14 @@ namespace LJCDBViewDAL
     public DbRequest GetViewRequest(string tableName, string viewName)
     {
       DbRequest retValue = null;
-      ViewData viewData;
 
-      ViewTable viewTable = ViewTableManager.RetrieveWithUniqueKey(tableName);
+      var viewTable
+        = Managers.ViewTableManager.RetrieveWithUniqueKey(tableName);
       if (viewTable != null)
       {
-        viewData = ViewDataManager.RetrieveWithUniqueKey(viewTable.ID, viewName);
+        var viewData
+          = Managers.ViewDataManager.RetrieveWithUniqueKey(viewTable.ID
+          , viewName);
         if (viewData != null)
         {
           retValue = GetViewRequest(tableName, viewData.ID);
@@ -78,13 +70,13 @@ namespace LJCDBViewDAL
     /// <include path='items/GetViewRequest2/*' file='Doc/ViewHelper.xml'/>
     public DbRequest GetViewRequest(string tableName, int viewDataID)
     {
-      ViewData viewData;
       DbRequest retValue = null;
 
-      viewData = ViewDataManager.RetrieveWithID(viewDataID);
+      var viewData = Managers.ViewDataManager.RetrieveWithID(viewDataID);
       if (viewData != null)
       {
-        retValue = new DbRequest(RequestType.Load, tableName, mDataConfigName);
+        var dataConfigName = Managers.DataConfigName;
+        retValue = new DbRequest(RequestType.Load, tableName, dataConfigName);
         GetViewColumns(viewData.ID, retValue);
         if (null == retValue.Columns || 0 == retValue.Columns.Count)
         {
@@ -104,33 +96,35 @@ namespace LJCDBViewDAL
     /// <include path='items/GetGridColumns/*' file='Doc/ViewHelper.xml'/>
     public DbColumns GetGridColumns(int viewDataID)
     {
-      return ViewGridColumnManager.GetGridColumns(viewDataID);
+      return Managers.ViewGridColumnManager.GetGridColumns(viewDataID);
     }
 
     // Creates the DbRequest Columns.
     private void GetViewColumns(int viewDataID, DbRequest dbRequest)
     {
       // Retrieve DbColumns directly.
-      dbRequest.Columns = ViewColumnManager.LoadDbColumnsWithParentID(viewDataID
+      dbRequest.Columns
+        = Managers.ViewColumnManager.LoadDbColumnsWithParentID(viewDataID
         , dbRequest.TableName);
     }
 
     // Creates the DbRequest Filters.
     private void GetViewFilters(int viewDataID, DbRequest dbRequest)
     {
-      ViewConditionSet viewConditionSet;
-      ViewConditions viewConditions = null;
-
-      ViewFilters viewFilters = ViewFilterManager.LoadWithParentID(viewDataID);
+      var viewFilters
+        = Managers.ViewFilterManager.LoadWithParentID(viewDataID);
       if (viewFilters != null && viewFilters.Count > 0)
       {
         dbRequest.Filters = new DbFilters();
         foreach (ViewFilter viewFilter in viewFilters)
         {
-          viewConditionSet = ViewConditionSetManager.RetrieveWithUniqueKey(viewFilter.ID);
+          var viewConditionSet
+            = Managers.ViewConditionSetManager.RetrieveWithUniqueKey(viewFilter.ID);
+          ViewConditions viewConditions = null;
           if (viewConditionSet != null)
           {
-            viewConditions = ViewConditionManager.LoadWithParentID(viewConditionSet.ID);
+            viewConditions
+              = Managers.ViewConditionManager.LoadWithParentID(viewConditionSet.ID);
           }
 
           // Create the Condition Set.
@@ -157,7 +151,7 @@ namespace LJCDBViewDAL
     // Creates the DbRequest Joins.
     private void GetViewJoins(int viewDataID, DbRequest dbRequest)
     {
-      ViewJoins viewJoins = ViewJoinManager.LoadWithParentID(viewDataID);
+      var viewJoins = Managers.ViewJoinManager.LoadWithParentID(viewDataID);
       if (viewJoins != null && viewJoins.Count > 0)
       {
         dbRequest.Joins = new DbJoins();
@@ -168,7 +162,8 @@ namespace LJCDBViewDAL
           dbJoin.TableAlias = viewJoin.TableAlias;
 
           // Add the Join On clauses.
-          ViewJoinOns ViewJoinOns = ViewJoinOnManager.LoadWithParentID(viewJoin.ID);
+          var ViewJoinOns
+            = Managers.ViewJoinOnManager.LoadWithParentID(viewJoin.ID);
           if (ViewJoinOns != null && ViewJoinOns.Count > 0)
           {
             dbJoin.JoinOns = new DbJoinOns();
@@ -181,7 +176,8 @@ namespace LJCDBViewDAL
 
           // Add join columns.
           // Note: Converts results to DbColumns with ResultCoverter().
-          dbJoin.Columns = ViewJoinColumnManager.LoadDbColumnsWithParentID(viewJoin.ID);
+          dbJoin.Columns
+            = Managers.ViewJoinColumnManager.LoadDbColumnsWithParentID(viewJoin.ID);
         }
       }
     }
@@ -189,7 +185,8 @@ namespace LJCDBViewDAL
     // Creates the DbRequest OrderBys.
     private void GetViewOrderBys(int viewDataID, DbRequest dbRequest)
     {
-      ViewOrderBys viewOrderBys = ViewOrderByManager.LoadWithParentID(viewDataID);
+      var viewOrderBys
+        = Managers.ViewOrderByManager.LoadWithParentID(viewDataID);
       if (viewOrderBys != null && viewOrderBys.Count > 0)
       {
         foreach (ViewOrderBy viewOrderBy in viewOrderBys)
@@ -225,7 +222,7 @@ namespace LJCDBViewDAL
         Name = tableName,
         Description = tableName
       };
-      ViewTable newRecord = ViewTableManager.Add(retValue);
+      var newRecord = Managers.ViewTableManager.Add(retValue);
       retValue.ID = newRecord.ID;
       return retValue;
     }
@@ -347,8 +344,6 @@ namespace LJCDBViewDAL
     public ViewGridColumns SaveRequestViewGridColumns(int viewDataID
       , DbRequest dbRequest)
     {
-      ViewColumn viewColumn;
-      ViewGridColumn viewGridColumn;
       ViewGridColumns retValue = null;
 
       // Next Statement - Change 1/6/21
@@ -360,7 +355,8 @@ namespace LJCDBViewDAL
         foreach (DbColumn dbColumn in dbRequest.Columns)
         {
           // Get referenced record.
-          viewColumn = ViewColumnManager.RetrieveWithUniqueKey(viewDataID
+          var viewColumn
+            = Managers.ViewColumnManager.RetrieveWithUniqueKey(viewDataID
             , dbColumn.ColumnName);
           if (null == viewColumn)
           {
@@ -368,14 +364,15 @@ namespace LJCDBViewDAL
             viewColumn = GetViewColumnFromDbColumn(dbColumn);
             // Next Statement - Add 1/6/21
             viewColumn.ViewDataID = viewDataID;
-            ViewColumnManager.SaveData(viewColumn);
+            Managers.ViewColumnManager.SaveData(viewColumn);
           }
           if (viewColumn != null)
           {
             sequence++;
 
             // Get Update record.
-            viewGridColumn = ViewGridColumnManager.RetrieveWithIDs(viewDataID
+            var viewGridColumn
+              = Managers.ViewGridColumnManager.RetrieveWithIDs(viewDataID
               , viewColumn.ID);
 
             if (null == viewGridColumn)
@@ -390,7 +387,7 @@ namespace LJCDBViewDAL
 
             // Set updatable values and save.
             viewGridColumn.Sequence = sequence;
-            ViewGridColumnManager.SaveData(viewGridColumn);
+            Managers.ViewGridColumnManager.SaveData(viewGridColumn);
             retValue.Add(viewGridColumn);
           }
         }
@@ -451,7 +448,8 @@ namespace LJCDBViewDAL
         retValue = new ViewGridColumns();
         foreach (DbJoin dbJoin in dbRequest.Joins)
         {
-          ViewJoin viewJoin = ViewJoinManager.RetrieveWithUniqueKey(viewDataID
+          var viewJoin
+            = Managers.ViewJoinManager.RetrieveWithUniqueKey(viewDataID
             , dbJoin.TableName);
           if (null == viewJoin)
           {
@@ -463,7 +461,7 @@ namespace LJCDBViewDAL
               JoinType = dbJoin.JoinType,
               TableAlias = dbJoin.TableAlias
             };
-            ViewJoinManager.SaveData(viewJoin);
+            Managers.ViewJoinManager.SaveData(viewJoin);
           }
           if (viewJoin != null)
           {
@@ -492,10 +490,9 @@ namespace LJCDBViewDAL
     /// <include path='items/SaveRequestView/*' file='Doc/ViewHelper.xml'/>
     public ViewData SaveRequestView(string viewName, string viewDescription, DbRequest dbRequest)
     {
-      ViewTable viewTable;
       ViewData retValue = null;
 
-      viewTable = SaveRequestTable(dbRequest);
+      var viewTable = SaveRequestTable(dbRequest);
       if (viewTable != null)
       {
         retValue = SaveRequestViewData(viewTable.ID, viewName, viewDescription);
@@ -512,7 +509,6 @@ namespace LJCDBViewDAL
     // Saves the ViewOrderBys from the specified DbRequest object.
     internal ViewOrderBys SaveRequestOrderBy(int viewDataID, DbRequest dbRequest)
     {
-      ViewOrderBy viewOrderBy;
       ViewOrderBys retValue = null;
 
       if (CheckOrderByParams(viewDataID, dbRequest))
@@ -520,7 +516,8 @@ namespace LJCDBViewDAL
         retValue = new ViewOrderBys();
         foreach (string columnName in dbRequest.OrderByNames)
         {
-          viewOrderBy = ViewOrderByManager.RetrieveWithUniqueKey(columnName);
+          var viewOrderBy
+            = Managers.ViewOrderByManager.RetrieveWithUniqueKey(columnName);
           if (null == viewOrderBy)
           {
             viewOrderBy = new ViewOrderBy()
@@ -531,7 +528,7 @@ namespace LJCDBViewDAL
           }
 
           // Set updatable values and save.
-          ViewOrderByManager.SaveData(viewOrderBy);
+          Managers.ViewOrderByManager.SaveData(viewOrderBy);
           retValue.Add(viewOrderBy);
         }
       }
@@ -541,7 +538,6 @@ namespace LJCDBViewDAL
     // Saves the ViewColumns from the specified DbRequest object.
     private ViewColumns SaveRequestColumns(int viewDataID, DbRequest dbRequest)
     {
-      ViewColumn viewColumn;
       ViewColumns retValue = null;
 
       if (CheckColumnParams(viewDataID, dbRequest)
@@ -551,7 +547,8 @@ namespace LJCDBViewDAL
         foreach (DbColumn dbColumn in dbRequest.Columns)
         {
           // Get Update record.
-          viewColumn = ViewColumnManager.RetrieveWithUniqueKey(viewDataID
+          var viewColumn
+            = Managers.ViewColumnManager.RetrieveWithUniqueKey(viewDataID
             , dbColumn.ColumnName);
           if (null == viewColumn)
           {
@@ -569,7 +566,7 @@ namespace LJCDBViewDAL
           viewColumn.Caption = dbColumn.Caption;
           viewColumn.DataTypeName = dbColumn.DataTypeName;
           viewColumn.Value = dbColumn.Value as string;
-          ViewColumnManager.SaveData(viewColumn);
+          Managers.ViewColumnManager.SaveData(viewColumn);
           retValue.Add(viewColumn);
         }
       }
@@ -579,7 +576,6 @@ namespace LJCDBViewDAL
     // Saves the ViewConditions from the specified DbJoin object.
     private ViewConditions SaveRequestConditions(int conditionSetID, DbConditionSet dbConditionSet)
     {
-      ViewCondition viewCondition;
       ViewConditions retValue = null;
 
       if (CheckConditionParams(conditionSetID, dbConditionSet))
@@ -588,7 +584,8 @@ namespace LJCDBViewDAL
         foreach (DbCondition dbCondition in dbConditionSet.Conditions)
         {
           // Get Update record.
-          viewCondition = ViewConditionManager.RetrieveWithUniqueKey(conditionSetID
+          var viewCondition
+            = Managers.ViewConditionManager.RetrieveWithUniqueKey(conditionSetID
             , dbCondition.FirstValue);
           if (null == viewCondition)
           {
@@ -603,7 +600,7 @@ namespace LJCDBViewDAL
           // Set updatable values and save.
           viewCondition.SecondValue = dbCondition.SecondValue;
           viewCondition.ComparisonOperator = dbCondition.ComparisonOperator;
-          ViewConditionManager.SaveData(viewCondition);
+          Managers.ViewConditionManager.SaveData(viewCondition);
           retValue.Add(viewCondition);
         }
       }
@@ -618,7 +615,8 @@ namespace LJCDBViewDAL
       if (CheckConditionSetParams(viewFilterID, dbFilter))
       {
         // Get Update record.
-        retValue = ViewConditionSetManager.RetrieveWithUniqueKey(viewFilterID);
+        retValue
+          = Managers.ViewConditionSetManager.RetrieveWithUniqueKey(viewFilterID);
         if (null == retValue)
         {
           // Get Create record.
@@ -636,7 +634,7 @@ namespace LJCDBViewDAL
           booleanOperator = dbFilter.ConditionSet.BooleanOperator;
         }
         retValue.BooleanOperator = booleanOperator;
-        ViewConditionSetManager.SaveData(retValue);
+        Managers.ViewConditionSetManager.SaveData(retValue);
       }
       return retValue;
     }
@@ -644,8 +642,6 @@ namespace LJCDBViewDAL
     // Saves the ViewFilters from the specified DbRequest object.
     private ViewFilters SaveRequestFilters(int viewDataID, DbRequest dbRequest)
     {
-      ViewFilter viewFilter;
-      ViewConditionSet conditionSet;
       ViewFilters retValue = null;
 
       CheckFilterParams(viewDataID, dbRequest);
@@ -655,7 +651,9 @@ namespace LJCDBViewDAL
         foreach (DbFilter dbFilter in dbRequest.Filters)
         {
           // Get Update record.
-          viewFilter = ViewFilterManager.RetrieveWithUniqueKey(viewDataID, dbFilter.Name);
+          var viewFilter
+            = Managers.ViewFilterManager.RetrieveWithUniqueKey(viewDataID
+            , dbFilter.Name);
           if (null == viewFilter)
           {
             // Get Create record.
@@ -666,11 +664,11 @@ namespace LJCDBViewDAL
               // Set updatable values.
               BooleanOperator = dbFilter.BooleanOperator
             };
-            ViewFilterManager.SaveData(viewFilter);
+            Managers.ViewFilterManager.SaveData(viewFilter);
             retValue.Add(viewFilter);
 
             // Save contained DbConditionSet and DbConditions.
-            conditionSet = SaveRequestConditionSet(viewFilter.ID, dbFilter);
+            var conditionSet = SaveRequestConditionSet(viewFilter.ID, dbFilter);
             SaveRequestConditions(conditionSet.ID, dbFilter.ConditionSet);
           }
         }
@@ -681,7 +679,6 @@ namespace LJCDBViewDAL
     // Saves the ViewJoinColumns from the specified DbJoin object.
     private ViewJoinColumns SaveRequestJoinColumns(ViewJoin viewJoin, DbJoin dbJoin)
     {
-      ViewJoinColumn viewJoinColumn;
       ViewJoinColumns retValue = null;
 
       CheckJoinColumnParams(viewJoin, dbJoin);
@@ -691,7 +688,8 @@ namespace LJCDBViewDAL
         foreach (DbColumn dbColumn in dbJoin.Columns)
         {
           // Get Update record.
-          viewJoinColumn = ViewJoinColumnManager.RetrieveWithUniqueKey(viewJoin, dbColumn);
+          var viewJoinColumn
+            = Managers.ViewJoinColumnManager.RetrieveWithUniqueKey(viewJoin, dbColumn);
           //viewColumn = ViewColumnManager.SaveJoinColumn(viewJoin, dbColumn
           //	, viewJoinColumn, sequence);
           if (null == viewJoinColumn)
@@ -706,7 +704,7 @@ namespace LJCDBViewDAL
               Caption = dbColumn.Caption,
               DataTypeName = dbColumn.DataTypeName
             };
-            ViewJoinColumnManager.SaveData(viewJoinColumn);
+            Managers.ViewJoinColumnManager.SaveData(viewJoinColumn);
             retValue.Add(viewJoinColumn);
           }
         }
@@ -717,7 +715,6 @@ namespace LJCDBViewDAL
     // Saves the ViewJoinOns from the specified DbJoin object.
     private ViewJoinOns SaveRequestJoinOns(int viewJoinID, DbJoin dbJoin)
     {
-      ViewJoinOn viewJoinOn;
       ViewJoinOns retValue = null;
 
       CheckJoinOnParams(viewJoinID, dbJoin);
@@ -727,7 +724,9 @@ namespace LJCDBViewDAL
         foreach (DbJoinOn dbJoinOn in dbJoin.JoinOns)
         {
           // Get Update record.
-          viewJoinOn = ViewJoinOnManager.RetrieveWithUniqueKey(viewJoinID, dbJoinOn.FromColumnName);
+          var viewJoinOn
+            = Managers.ViewJoinOnManager.RetrieveWithUniqueKey(viewJoinID
+            , dbJoinOn.FromColumnName);
           if (null == viewJoinOn)
           {
             // Get Create record.
@@ -739,7 +738,7 @@ namespace LJCDBViewDAL
               ToColumnName = dbJoinOn.ToColumnName,
               JoinOnOperator = dbJoinOn.JoinOnOperator
             };
-            ViewJoinOnManager.SaveData(viewJoinOn);
+            Managers.ViewJoinOnManager.SaveData(viewJoinOn);
             retValue.Add(viewJoinOn);
           }
         }
@@ -750,7 +749,6 @@ namespace LJCDBViewDAL
     // Saves the ViewJoins from the specified DbRequest object.
     private ViewJoins SaveRequestJoins(int viewDataID, DbRequest dbRequest)
     {
-      ViewJoin viewJoin;
       ViewJoins retValue = null;
 
       if (CheckJoinParams(viewDataID, dbRequest)
@@ -760,7 +758,9 @@ namespace LJCDBViewDAL
         foreach (DbJoin dbJoin in dbRequest.Joins)
         {
           // Get Update record.
-          viewJoin = ViewJoinManager.RetrieveWithUniqueKey(viewDataID, dbJoin.TableName);
+          var viewJoin
+            = Managers.ViewJoinManager.RetrieveWithUniqueKey(viewDataID
+            , dbJoin.TableName);
           if (null == viewJoin)
           {
             // Get Create record.
@@ -774,7 +774,7 @@ namespace LJCDBViewDAL
           // Set updatable values and save.
           viewJoin.JoinType = dbJoin.JoinType;
           viewJoin.TableAlias = dbJoin.TableAlias;
-          ViewJoinManager.SaveData(viewJoin);
+          Managers.ViewJoinManager.SaveData(viewJoin);
           retValue.Add(viewJoin);
 
           // Save contained DbJoinOns and DbColumns.
@@ -793,7 +793,8 @@ namespace LJCDBViewDAL
       if (CheckTableParams(dbRequest))
       {
         // Get Update record.
-        retValue = ViewTableManager.RetrieveWithUniqueKey(dbRequest.TableName);
+        retValue
+          = Managers.ViewTableManager.RetrieveWithUniqueKey(dbRequest.TableName);
         if (null == retValue)
         {
           // Get Create record.
@@ -805,7 +806,7 @@ namespace LJCDBViewDAL
         }
 
         // Set updatable values and save.
-        ViewTableManager.SaveData(retValue);
+        Managers.ViewTableManager.SaveData(retValue);
       }
       return retValue;
     }
@@ -817,7 +818,9 @@ namespace LJCDBViewDAL
       ViewData retValue;
 
       // Get Update record.
-      retValue = ViewDataManager.RetrieveWithUniqueKey(viewTableID, viewName);
+      retValue
+        = Managers.ViewDataManager.RetrieveWithUniqueKey(viewTableID
+        , viewName);
       if (null == retValue)
       {
         // Get Create record.
@@ -830,7 +833,7 @@ namespace LJCDBViewDAL
       }
 
       // Set updatable values and save.
-      ViewDataManager.SaveData(retValue);
+      Managers.ViewDataManager.SaveData(retValue);
       return retValue;
     }
     #endregion
@@ -1011,265 +1014,8 @@ namespace LJCDBViewDAL
 
     #region Properties
 
-    /// <summary>The ViewColumn manager.</summary>
-    public ViewColumnManager ViewColumnManager
-    {
-      get
-      {
-        if (null == mViewColumnManager)
-        {
-          ViewColumnManager
-            = new ViewColumnManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewColumnManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewColumnManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewCondition manager.</summary>
-    public ViewConditionManager ViewConditionManager
-    {
-      get
-      {
-        if (null == mViewConditionManager)
-        {
-          ViewConditionManager
-            = new ViewConditionManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewConditionManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewConditionManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewConditionSet manager.</summary>
-    public ViewConditionSetManager ViewConditionSetManager
-    {
-      get
-      {
-        if (null == mViewConditionSetManager)
-        {
-          ViewConditionSetManager
-            = new ViewConditionSetManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewConditionSetManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewConditionSetManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewData manager.</summary>
-    public ViewDataManager ViewDataManager
-    {
-      get
-      {
-        if (null == mViewDataManager)
-        {
-          ViewDataManager
-            = new ViewDataManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewDataManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewDataManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewFilter manager.</summary>
-    public ViewFilterManager ViewFilterManager
-    {
-      get
-      {
-        if (null == mViewFilterManager)
-        {
-          ViewFilterManager
-            = new ViewFilterManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewFilterManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewFilterManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewGridColumn manager.</summary>
-    public ViewGridColumnManager ViewGridColumnManager
-    {
-      get
-      {
-        if (null == mViewGridColumnManager)
-        {
-          ViewGridColumnManager
-            = new ViewGridColumnManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewGridColumnManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewGridColumnManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewJoinColumn manager.</summary>
-    public ViewJoinColumnManager ViewJoinColumnManager
-    {
-      get
-      {
-        if (null == mViewJoinColumnManager)
-        {
-          ViewJoinColumnManager
-            = new ViewJoinColumnManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewJoinColumnManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewJoinColumnManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewJoin manager.</summary>
-    public ViewJoinManager ViewJoinManager
-    {
-      get
-      {
-        if (null == mViewJoinManager)
-        {
-          ViewJoinManager
-            = new ViewJoinManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewJoinManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewJoinManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewJoinOn manager.</summary>
-    public ViewJoinOnManager ViewJoinOnManager
-    {
-      get
-      {
-        if (null == mViewJoinOnManager)
-        {
-          ViewJoinOnManager
-            = new ViewJoinOnManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewJoinOnManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewJoinOnManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewOrderBy manager.</summary>
-    public ViewOrderByManager ViewOrderByManager
-    {
-      get
-      {
-        if (null == mViewOrderByManager)
-        {
-          ViewOrderByManager
-            = new ViewOrderByManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewOrderByManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewOrderByManager = value;
-        }
-      }
-    }
-
-    /// <summary>The ViewTable manager.</summary>
-    public ViewTableManager ViewTableManager
-    {
-      get
-      {
-        if (null == mViewTableManager)
-        {
-          ViewTableManager
-            = new ViewTableManager(mDbServiceRef, mDataConfigName);
-        }
-        return mViewTableManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mViewTableManager = value;
-        }
-      }
-    }
-    #endregion
-
-    #region Class Data
-
-    private readonly string mDataConfigName;
-    private readonly DbServiceRef mDbServiceRef;
-
-    private ViewDataManager mViewDataManager;
-    private ViewColumnManager mViewColumnManager;
-    private ViewConditionManager mViewConditionManager;
-    private ViewConditionSetManager mViewConditionSetManager;
-    private ViewFilterManager mViewFilterManager;
-    private ViewGridColumnManager mViewGridColumnManager;
-    private ViewJoinColumnManager mViewJoinColumnManager;
-    private ViewJoinManager mViewJoinManager;
-    private ViewJoinOnManager mViewJoinOnManager;
-    private ViewOrderByManager mViewOrderByManager;
-    private ViewTableManager mViewTableManager;
+    /// <summary>Gets or sets the Managers object.</summary>
+    public ManagersDbView Managers { get; set; }
     #endregion
   }
 }

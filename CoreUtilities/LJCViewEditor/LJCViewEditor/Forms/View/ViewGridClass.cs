@@ -29,8 +29,11 @@ namespace LJCViewEditor
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
-      mViewTableManager = Parent.ViewHelper.ViewTableManager;
-      mViewDataManager = Parent.ViewHelper.ViewDataManager;
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(Parent.Managers.DbServiceRef
+        , Parent.Managers.DataConfigName);
+      mViewTableManager = Managers.ViewTableManager;
+      mViewDataManager = Managers.ViewDataManager;
     }
     #endregion
 
@@ -375,6 +378,11 @@ namespace LJCViewEditor
         Parent.ViewGrid.LJCAddColumns(viewGridColumns);
       }
     }
+    #endregion
+
+    #region Properties
+
+    internal ManagersDbView Managers { get; set; }
     #endregion
 
     #region Class Data

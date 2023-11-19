@@ -27,7 +27,8 @@ namespace LJCViewEditor
 		/// <summary>Resets the DataConfig dependent objects.</summary>
 		internal void ResetData()
 		{
-			mViewFilterManager = Parent.ViewHelper.ViewFilterManager;
+      Managers = Parent.DataDbView.Managers;
+      mViewFilterManager = Managers.ViewFilterManager;
 		}
 		#endregion
 
@@ -285,11 +286,13 @@ namespace LJCViewEditor
 				Parent.FilterGrid.LJCAddColumns(filterGridColumns);
 			}
 		}
-		#endregion
+    #endregion
 
-		#region Class Data
+    internal ManagersDbView Managers { get; set; }
 
-		private ViewFilterManager mViewFilterManager;
+    #region Class Data
+
+    private ViewFilterManager mViewFilterManager;
     private readonly ViewEditorList Parent;
     #endregion
   }

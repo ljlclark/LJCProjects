@@ -225,10 +225,12 @@ namespace LJCViewEditor
 
 			mSettings = values.StandardSettings;
 
-			// Initialize Class Data.
-			mViewHelper = new ViewHelper(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
-			mViewConditionManager = mViewHelper.ViewConditionManager;
+      // Initialize Class Data.
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(mSettings.DbServiceRef
+        , mSettings.DataConfigName);
+      //mDataDbView = new DataDbView(Managers);
+			mViewConditionManager = Managers.ViewConditionManager;
 
 			// Set control values.
 			ParentLabel.BackColor = mSettings.BeginColor;
@@ -358,8 +360,10 @@ namespace LJCViewEditor
 		// Gets a reference to the record object.
 		internal ViewCondition LJCRecord { get; private set; }
 
-		// Gets or sets the Begin Color.
-		private Color BeginColor { get; set; }
+    internal ManagersDbView Managers { get; set; }
+
+    // Gets or sets the Begin Color.
+    private Color BeginColor { get; set; }
 
 		// Gets or sets the End Color.
 		private Color EndColor { get; set; }
@@ -376,7 +380,7 @@ namespace LJCViewEditor
 		// Singleton values.
 		private DbColumns mFirstValueColumns;
 		private StandardUISettings mSettings;
-		private ViewHelper mViewHelper;
+		//private DataDbView mDataDbView;
 		private ViewConditionManager mViewConditionManager;
 
 		// The Change event.

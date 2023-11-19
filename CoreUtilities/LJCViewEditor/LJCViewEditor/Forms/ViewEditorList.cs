@@ -102,12 +102,12 @@ namespace LJCViewEditor
 
         try
         {
-          ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+          DataDbView = new DataDbView(Managers);
         }
         catch (SystemException e)
         {
           ViewEditorCommon.CreateTables(e, DataConfigName);
-          ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+          DataDbView = new DataDbView(Managers);
         }
 
         ViewGridClass.ResetData();
@@ -138,7 +138,7 @@ namespace LJCViewEditor
         string tableName = TableCombo.Text;
         string viewDataName = gridRow.LJCGetString(ViewData.ColumnName);
 
-        retValue = ViewHelper.GetViewRequest(tableName, viewDataName);
+        retValue = DataDbView.GetViewRequest(tableName, viewDataName);
       }
       return retValue;
     }
@@ -379,15 +379,17 @@ namespace LJCViewEditor
       DataConfigName = mSettings.DataConfigName;
       DbServiceRef = mSettings.DbServiceRef;
       mPrevConfigName = DataConfigName;
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(DbServiceRef, DataConfigName);
 
       try
       {
-        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+        DataDbView = new DataDbView(Managers);
       }
       catch (SystemException e)
       {
         ViewEditorCommon.CreateTables(e, DataConfigName);
-        ViewHelper = new ViewHelper(DbServiceRef, DataConfigName);
+        DataDbView = new DataDbView(Managers);
       }
     }
 
@@ -1856,7 +1858,12 @@ namespace LJCViewEditor
     private string mHelpFile;
 
     // Gets or sets the ViewHelper value.
-    internal ViewHelper ViewHelper { get; set; }
+    internal DataDbView DataDbView { get; set; }
+    #endregion
+
+    #region Properties
+
+    internal ManagersDbView Managers { get; set; }
     #endregion
 
     #region Private Properties

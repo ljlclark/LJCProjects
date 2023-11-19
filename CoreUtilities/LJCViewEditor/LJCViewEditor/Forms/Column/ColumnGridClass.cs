@@ -32,7 +32,9 @@ namespace LJCViewEditor
 		{
 			mDataConfigName = Parent.DataConfigName;
 			mDbServiceRef = Parent.DbServiceRef;
-			mViewColumnManager = Parent.ViewHelper.ViewColumnManager;
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(mDbServiceRef, mDataConfigName);
+			mViewColumnManager = Managers.ViewColumnManager;
 		}
 		#endregion
 
@@ -141,12 +143,13 @@ namespace LJCViewEditor
 				// Data from list items.
 				int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-				ViewHelper viewHelper = new ViewHelper(mDbServiceRef, mDataConfigName);
-				DataHelper dataHelper = new DataHelper(mDbServiceRef, mDataConfigName);
+				DataDbView dataDbView = new DataDbView(Managers);
+        var dataHelper = new DataHelper(Managers.DbServiceRef
+          , Managers.DataConfigName);
 				var tableColumns = dataHelper.GetTableColumns(tableName);
 				foreach (DbColumn dbColumn in tableColumns)
 				{
-					ViewColumn viewColumn = viewHelper.GetViewColumnFromDbColumn(dbColumn);
+					ViewColumn viewColumn = dataDbView.GetViewColumnFromDbColumn(dbColumn);
 					viewColumn.ViewDataID = parentID;
 
 					var keyColumns = new DbColumns()
@@ -257,7 +260,7 @@ namespace LJCViewEditor
 					parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
 					ViewGridColumnManager gridColumnManager
-						= Parent.ViewHelper.ViewGridColumnManager;
+						= Managers.ViewGridColumnManager;
 					var keyGridColumns = new DbColumns()
 					{
 						{ ViewGridColumn.ColumnViewDataID, parentID },
@@ -359,11 +362,15 @@ namespace LJCViewEditor
 				Parent.ColumnGrid.LJCAddColumns(gridColumns);
 			}
 		}
-		#endregion
+    #endregion
 
-		#region Class Data
+    #region Properties
+    internal ManagersDbView Managers { get; set; }
+    #endregion
 
-		private string mDataConfigName;
+    #region Class Data
+
+    private string mDataConfigName;
 		private DbServiceRef mDbServiceRef;
 		private ViewColumnManager mViewColumnManager;
     private readonly ViewEditorList Parent;

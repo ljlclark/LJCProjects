@@ -27,7 +27,8 @@ namespace LJCViewEditor
 		// Resets the DataConfig dependent objects.
 		internal void ResetData()
 		{
-			mViewOrderByManager = Parent.ViewHelper.ViewOrderByManager;
+      Managers = Parent.DataDbView.Managers;
+			mViewOrderByManager = Managers.ViewOrderByManager;
 		}
 		#endregion
 
@@ -281,11 +282,13 @@ namespace LJCViewEditor
 				Parent.OrderByGrid.LJCAddColumns(orderByGridColumns);
 			}
 		}
-		#endregion
+    #endregion
 
-		#region Class Data
+    internal ManagersDbView Managers { get; set; }
 
-		private ViewOrderByManager mViewOrderByManager;
+    #region Class Data
+
+    private ViewOrderByManager mViewOrderByManager;
     private readonly ViewEditorList Parent;
     #endregion
   }

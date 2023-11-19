@@ -239,10 +239,12 @@ namespace LJCViewEditor
 
 			mSettings = values.StandardSettings;
 
-			// Initialize Class Data.
-			mViewHelper = new ViewHelper(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
-			mViewJoinOnManager = mViewHelper.ViewJoinOnManager;
+      // Initialize Class Data.
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(mSettings.DbServiceRef
+        , mSettings.DataConfigName);
+      //mDataDbView = new DataDbView(Managers);
+			mViewJoinOnManager = Managers.ViewJoinOnManager;
 			//mViewJoinManager = mViewHelper.ViewJoinManager;
 			//mViewDataManager = mViewHelper.ViewDataManager;
 			//mViewTableManager = mViewHelper.ViewTableManager;
@@ -382,20 +384,22 @@ namespace LJCViewEditor
 		// Gets a reference to the record object.
 		internal ViewJoinOn LJCRecord { get; private set; }
 
-		// Gets or sets the BeginColor value.
-		private Color BeginColor { get; set; }
+    internal ManagersDbView Managers { get; set; }
+
+    // Gets or sets the BeginColor value.
+    private Color BeginColor { get; set; }
 
 		// Gets or sets the Parent ID value.
 		private Color EndColor { get; set; }
-		#endregion
+    #endregion
 
-		#region Class Data
+    #region Class Data
 
-		private DbColumns mJoinOnTableColumns;
+    private DbColumns mJoinOnTableColumns;
 		private DbColumns mJoinTableColumns;
 		private StandardUISettings mSettings;
 		//private ViewDataManager mViewDataManager;
-		private ViewHelper mViewHelper;
+		//private DataDbView mDataDbView;
 		//private ViewJoinManager mViewJoinManager;
 		private ViewJoinOnManager mViewJoinOnManager;
 		//private ViewTableManager mViewTableManager;

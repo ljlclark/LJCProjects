@@ -19,6 +19,8 @@ namespace LJCViewEditorDAL
 			mDbServiceRef = dbServiceRef;
 			mDataConfigName = dataConfigName;
 			mDataManager = new DataManager(mDbServiceRef, mDataConfigName, null);
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(mDbServiceRef, mDataConfigName);
 		}
 
 		// Retrieves the table columns.
@@ -45,13 +47,13 @@ namespace LJCViewEditorDAL
 			ViewTable viewTable;
 			DbColumns retValue = null;
 
-			if (null == mViewHelper)
-			{
-				mViewHelper = new ViewHelper(mDbServiceRef, mDataConfigName);
-			}
-			viewTableManager = mViewHelper.ViewTableManager;
-			viewDataManager = mViewHelper.ViewDataManager;
-			viewJoinManager = mViewHelper.ViewJoinManager;
+			//if (null == mDataDbView)
+			//{
+			//	mDataDbView = new DataDbView(Managers);
+			//}
+			viewTableManager = Managers.ViewTableManager;
+			viewDataManager = Managers.ViewDataManager;
+			viewJoinManager = Managers.ViewJoinManager;
 
 			viewJoin = viewJoinManager.RetrieveWithID(joinID);
 			if (viewJoin != null)
@@ -77,11 +79,11 @@ namespace LJCViewEditorDAL
 			ViewJoin viewJoin;
 			DbColumns retValue;
 
-			if (null == mViewHelper)
-			{
-				mViewHelper = new ViewHelper(mDbServiceRef, mDataConfigName);
-			}
-			viewJoinManager = mViewHelper.ViewJoinManager;
+			//if (null == mDataDbView)
+			//{
+			//	mDataDbView = new DataDbView(Managers);
+			//}
+			viewJoinManager = Managers.ViewJoinManager;
 
 			// Get join record.
 			viewJoin = viewJoinManager.RetrieveWithID(joinID);
@@ -93,12 +95,16 @@ namespace LJCViewEditorDAL
 			return retValue;
 		}
 
-		#region Class Data
+    #region Properties
+    private ManagersDbView Managers { get; set; }
+    #endregion
 
-		private readonly DbServiceRef mDbServiceRef;
+    #region Class Data
+
+    private readonly DbServiceRef mDbServiceRef;
 		private readonly string mDataConfigName;
 		private readonly DataManager mDataManager;
-		private ViewHelper mViewHelper;
+		//private DataDbView mDataDbView;
 		#endregion
 	}
 }
