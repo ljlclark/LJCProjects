@@ -45,14 +45,14 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the ConfigFile name.</summary>
     public string ConfigFileName { get; private set; }
 
-    // Gets or sets the StandardSettings value.
-    public StandardUISettings StandardSettings { get; private set; }
-
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesGenDocEdit Instance
     {
       get { return mInstance; }
     }
+
+    // Gets or sets the StandardSettings value.
+    public StandardUISettings StandardSettings { get; private set; }
     #endregion
 
     #region Class Data

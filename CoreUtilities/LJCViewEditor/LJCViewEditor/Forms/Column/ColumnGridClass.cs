@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using LJCDBMessage;
-using System.Data;
 
 namespace LJCViewEditor
 {
@@ -24,7 +23,9 @@ namespace LJCViewEditor
 		internal ColumnGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
-			ResetData();
+      ColumnGrid = Parent.ColumnGrid;
+      ViewGrid = Parent.ViewGrid;
+      ResetData();
 		}
 
 		// Resets the DataConfig dependent objects.
@@ -32,9 +33,8 @@ namespace LJCViewEditor
 		{
 			mDataConfigName = Parent.DataConfigName;
 			mDbServiceRef = Parent.DbServiceRef;
-      Managers = new ManagersDbView();
-      Managers.SetDbProperties(mDbServiceRef, mDataConfigName);
-			mViewColumnManager = Managers.ViewColumnManager;
+      Managers = Parent.Managers;
+			mColumnManager = Managers.ViewColumnManager;
 		}
 		#endregion
 
@@ -44,25 +44,22 @@ namespace LJCViewEditor
 		internal void DataRetrieve()
 		{
 			Parent.Cursor = Cursors.WaitCursor;
-			Parent.ColumnGrid.Rows.Clear();
+			ColumnGrid.Rows.Clear();
 
 			SetupGridColumn();
-			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow)
+			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-        // *** Begin *** Change- 10/5/23
-        var manager = mViewColumnManager;
-        var result = manager.ResultWithParentID(viewDataID);
+        var result = mColumnManager.ResultWithParentID(viewDataID);
         if (DbResult.HasRows(result))
         {
-          foreach (DbRow dbRow in result.Rows)
+          foreach (var dbRow in result.Rows)
           {
             RowAddValues(dbRow.Values);
           }
         }
-        // *** End   *** Change- 10/5/23
       }
       Parent.Cursor = Cursors.Default;
 			Parent.DoChange(ViewEditorList.Change.Column);
@@ -71,20 +68,16 @@ namespace LJCViewEditor
 		// Adds a grid row and updates it with the record values.
 		private LJCGridRow RowAdd(ViewColumn dataRecord)
 		{
-			LJCGridRow retValue;
-
-			retValue = Parent.ColumnGrid.LJCRowAdd();
+			var retValue = ColumnGrid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
-
-      // Sets the row values from a data object.
-      retValue.LJCSetValues(Parent.ColumnGrid, dataRecord);
+      retValue.LJCSetValues(ColumnGrid, dataRecord);
 			return retValue;
 		}
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var ljcGrid = Parent.ColumnGrid;
+      var ljcGrid = ColumnGrid;
       var retValue = ljcGrid.LJCRowAdd();
 
       var columnName = ViewColumn.ColumnID;
@@ -98,10 +91,10 @@ namespace LJCViewEditor
     // Updates the current row with the record values.
     private void RowUpdate(ViewColumn dataRecord)
 		{
-			if (Parent.ColumnGrid.CurrentRow is LJCGridRow row)
+			if (ColumnGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValues(row, dataRecord);
-				row.LJCSetValues(Parent.ColumnGrid, dataRecord);
+				row.LJCSetValues(ColumnGrid, dataRecord);
 			}
 		}
 
@@ -114,17 +107,16 @@ namespace LJCViewEditor
 		// Selects a row based on the key record values.
 		private void RowSelect(ViewColumn dataRecord)
 		{
-			int rowID;
-
 			if (dataRecord != null)
 			{
 				Parent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in Parent.ColumnGrid.Rows)
+				foreach (LJCGridRow row in ColumnGrid.Rows)
 				{
-					rowID = row.LJCGetInt32(ViewColumn.ColumnID);
+					var rowID = row.LJCGetInt32(ViewColumn.ColumnID);
 					if (rowID == dataRecord.ID)
 					{
-						Parent.ColumnGrid.LJCSetCurrentRow(row, true);
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ColumnGrid.LJCSetCurrentRow(row, true);
 						break;
 					}
 				}
@@ -138,18 +130,18 @@ namespace LJCViewEditor
 		// Adds all missing columns.
 		internal void DoAddAll(string tableName)
 		{
-			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow)
+			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from list items.
 				int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-				DataDbView dataDbView = new DataDbView(Managers);
+				var dataDbView = new DataDbView(Managers);
         var dataHelper = new DataHelper(Managers.DbServiceRef
           , Managers.DataConfigName);
 				var tableColumns = dataHelper.GetTableColumns(tableName);
-				foreach (DbColumn dbColumn in tableColumns)
+				foreach (var dbColumn in tableColumns)
 				{
-					ViewColumn viewColumn = dataDbView.GetViewColumnFromDbColumn(dbColumn);
+					var viewColumn = dataDbView.GetViewColumnFromDbColumn(dbColumn);
 					viewColumn.ViewDataID = parentID;
 
 					var keyColumns = new DbColumns()
@@ -157,15 +149,15 @@ namespace LJCViewEditor
 						{ ViewColumn.ColumnViewDataID, viewColumn.ViewDataID },
 						{ ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
 					};
-					var lookupRecord = mViewColumnManager.Retrieve(keyColumns);
-					if (false == mViewColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
+					var lookupRecord = mColumnManager.Retrieve(keyColumns);
+					if (false == mColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
 					{
-						var addedRecord = mViewColumnManager.AddWithFlags(viewColumn);
+						var addedRecord = mColumnManager.AddWithFlags(viewColumn);
 						if (addedRecord != null)
 						{
 							viewColumn.ID = addedRecord.ID;
 							var row = RowAdd(viewColumn);
-							Parent.ColumnGrid.LJCSetCurrentRow(row, true);
+							ColumnGrid.LJCSetCurrentRow(row, true);
 						}
 					}
 				}
@@ -175,17 +167,14 @@ namespace LJCViewEditor
 		// Displays a detail dialog for a new record.
 		internal void DoNew()
 		{
-			ViewColumnDetail detail;
-
-			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow)
+			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from list items.
 				int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-				var grid = Parent.ColumnGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				detail = new ViewColumnDetail
+				var location = FormCommon.GetDialogScreenPoint(ColumnGrid);
+				var detail = new ViewColumnDetail
 				{
 					LJCDataConfigName = mDataConfigName,
 					LJCDbServiceRef = mDbServiceRef,
@@ -204,19 +193,16 @@ namespace LJCViewEditor
 		// Displays a detail dialog to edit an existing record.
 		internal void DoEdit()
 		{
-			ViewColumnDetail detail;
-
-			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow
-				&& Parent.ColumnGrid.CurrentRow is LJCGridRow row)
+			if (ViewGrid.CurrentRow is LJCGridRow parentRow
+				&& ColumnGrid.CurrentRow is LJCGridRow row)
 			{
 				// Data from list items.
 				int id = row.LJCGetInt32(ViewColumn.ColumnID);
 				int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-				var grid = Parent.ColumnGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				detail = new ViewColumnDetail()
+				var location = FormCommon.GetDialogScreenPoint(ColumnGrid);
+				var detail = new ViewColumnDetail()
 				{
 					LJCDataConfigName = mDataConfigName,
 					LJCDbServiceRef = mDbServiceRef,
@@ -236,31 +222,26 @@ namespace LJCViewEditor
 		// Deletes the selected row.
 		internal void DoDelete()
 		{
-			string title;
-			string message;
-			int parentID;
-			int id = 0;
-			bool success = false;
-
-			if (Parent.ViewGrid.CurrentRow is LJCGridRow parentRow
-				&& Parent.ColumnGrid.CurrentRow is LJCGridRow row)
+			if (ViewGrid.CurrentRow is LJCGridRow parentRow
+				&& ColumnGrid.CurrentRow is LJCGridRow row)
 			{
-				title = "Delete Confirmation";
-				message = FormCommon.DeleteConfirm;
+        bool success = false;
+        var title = "Delete Confirmation";
+				var message = FormCommon.DeleteConfirm;
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
 					success = true;
 				}
 
+        int id = 0;
 				if (success)
 				{
 					// Data from items.
 					id = row.LJCGetInt32(ViewColumn.ColumnID);
-					parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
+					var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-					ViewGridColumnManager gridColumnManager
-						= Managers.ViewGridColumnManager;
+					var gridColumnManager	= Managers.ViewGridColumnManager;
 					var keyGridColumns = new DbColumns()
 					{
 						{ ViewGridColumn.ColumnViewDataID, parentID },
@@ -275,8 +256,8 @@ namespace LJCViewEditor
 					{
 						{ ViewColumn.ColumnID, id }
 					};
-					mViewColumnManager.Delete(keyColumns);
-					if (mViewColumnManager.AffectedCount < 1)
+					mColumnManager.Delete(keyColumns);
+					if (mColumnManager.AffectedCount < 1)
 					{
 						success = false;
 						message = FormCommon.DeleteError;
@@ -287,7 +268,7 @@ namespace LJCViewEditor
 
 				if (success)
 				{
-					Parent.ColumnGrid.Rows.Remove(row);
+					ColumnGrid.Rows.Remove(row);
 					Parent.TimedChange(ViewEditorList.Change.Column);
 				}
 			}
@@ -296,10 +277,8 @@ namespace LJCViewEditor
 		// Refreshes the list.
 		internal void DoRefresh()
 		{
-			ViewColumn record;
 			int id = 0;
-
-			if (Parent.ColumnGrid.CurrentRow is LJCGridRow row)
+			if (ColumnGrid.CurrentRow is LJCGridRow row)
 			{
 				id = row.LJCGetInt32(ViewColumn.ColumnID);
 			}
@@ -308,7 +287,7 @@ namespace LJCViewEditor
 			// Select the original row.
 			if (id > 0)
 			{
-				record = new ViewColumn()
+				var record = new ViewColumn()
 				{
 					ID = id
 				};
@@ -319,12 +298,8 @@ namespace LJCViewEditor
     // Adds new row or updates existing row with changes from the detail dialog.
     private void ColumnDetail_Change(object sender, EventArgs e)
     {
-      ViewColumnDetail detail;
-      ViewColumn record;
-      LJCGridRow row;
-
-      detail = sender as ViewColumnDetail;
-      record = detail.LJCRecord;
+      var detail = sender as ViewColumnDetail;
+      var record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
         RowUpdate(record);
@@ -332,8 +307,8 @@ namespace LJCViewEditor
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAdd(record);
-        Parent.ColumnGrid.LJCSetCurrentRow(row, true);
+        var row = RowAdd(record);
+        ColumnGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.Column);
       }
     }
@@ -344,7 +319,7 @@ namespace LJCViewEditor
     // Configures the View Column Grid.
     private void SetupGridColumn()
 		{
-			if (0 == Parent.ColumnGrid.Columns.Count)
+			if (0 == ColumnGrid.Columns.Count)
 			{
 				List<string> propertyNames = new List<string> {
 					ViewColumn.ColumnCaption,
@@ -356,23 +331,28 @@ namespace LJCViewEditor
 
 				// Get the grid columns from the manager Data Definition.
 				DbColumns gridColumns
-					= mViewColumnManager.GetColumns(propertyNames);
+					= mColumnManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				Parent.ColumnGrid.LJCAddColumns(gridColumns);
+				ColumnGrid.LJCAddColumns(gridColumns);
 			}
 		}
     #endregion
 
     #region Properties
+
     internal ManagersDbView Managers { get; set; }
+
+    private LJCDataGrid ColumnGrid { get; set; }
+
+    private LJCDataGrid ViewGrid { get; set; }
     #endregion
 
     #region Class Data
 
+    private ViewColumnManager mColumnManager;
     private string mDataConfigName;
 		private DbServiceRef mDbServiceRef;
-		private ViewColumnManager mViewColumnManager;
     private readonly ViewEditorList Parent;
     #endregion
   }

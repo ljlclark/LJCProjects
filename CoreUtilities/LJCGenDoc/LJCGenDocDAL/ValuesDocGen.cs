@@ -36,6 +36,7 @@ namespace LJCGenDocDAL
         {
           ConfigFileName = fileName.Trim();
           StandardSettings.SetProperties(fileName);
+
           var settings = StandardSettings;
           Managers = new ManagersDocGen();
           Managers.SetDBProperties(settings.DbServiceRef

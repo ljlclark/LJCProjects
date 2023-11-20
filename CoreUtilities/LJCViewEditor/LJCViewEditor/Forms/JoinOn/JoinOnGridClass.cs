@@ -21,13 +21,15 @@ namespace LJCViewEditor
 		internal JoinOnGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
+      JoinGrid = JoinGrid;
+      JoinOnGrid = JoinOnGrid;
 			ResetData();
 		}
 
 		// Resets the DataConfig dependent objects.
 		internal void ResetData()
 		{
-      Managers = Parent.DataDbView.Managers;
+      Managers = Parent.Managers;
 			mViewJoinOnManager = Managers.ViewJoinOnManager;
 		}
 		#endregion
@@ -38,15 +40,14 @@ namespace LJCViewEditor
 		internal void DataRetrieve()
 		{
 			Parent.Cursor = Cursors.WaitCursor;
-			Parent.JoinOnGrid.Rows.Clear();
+			JoinOnGrid.Rows.Clear();
 
 			SetupGridJoinOn();
-			if (Parent.JoinGrid.CurrentRow is LJCGridRow parentRow)
+			if (JoinGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
 				int viewJoinID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
-        // *** Begin *** Change- 10/5/23
         var manager = mViewJoinOnManager;
         var result = manager.ResultWithParentID(viewJoinID);
         if (DbResult.HasRows(result))
@@ -56,7 +57,6 @@ namespace LJCViewEditor
             RowAddValues(dbRow.Values);
           }
         }
-        // *** End   *** Change- 10/5/23
       }
       Parent.Cursor = Cursors.Default;
 			Parent.DoChange(ViewEditorList.Change.JoinOn);
@@ -65,20 +65,18 @@ namespace LJCViewEditor
 		// Adds a grid row and updates it with the record values.
 		private LJCGridRow RowAdd(ViewJoinOn dataRecord)
 		{
-			LJCGridRow retValue;
-
-			retValue = Parent.JoinOnGrid.LJCRowAdd();
+			var retValue = JoinOnGrid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(Parent.JoinOnGrid, dataRecord);
+			retValue.LJCSetValues(JoinOnGrid, dataRecord);
 			return retValue;
 		}
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var ljcGrid = Parent.JoinOnGrid;
+      var ljcGrid = JoinOnGrid;
       var retValue = ljcGrid.LJCRowAdd();
 
       var columnName = ViewJoinOn.ColumnID;
@@ -92,10 +90,10 @@ namespace LJCViewEditor
     // Updates the current row with the record values.
     private void RowUpdate(ViewJoinOn dataRecord)
 		{
-			if (Parent.JoinOnGrid.CurrentRow is LJCGridRow row)
+			if (JoinOnGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValues(row, dataRecord);
-				row.LJCSetValues(Parent.JoinOnGrid, dataRecord);
+				row.LJCSetValues(JoinOnGrid, dataRecord);
 			}
 		}
 
@@ -108,17 +106,15 @@ namespace LJCViewEditor
 		// Selects a row based on the key record values.
 		private void RowSelect(ViewJoinOn dataRecord)
 		{
-			int rowID;
-
 			if (dataRecord != null)
 			{
 				Parent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in Parent.JoinOnGrid.Rows)
+				foreach (LJCGridRow row in JoinOnGrid.Rows)
 				{
-					rowID = row.LJCGetInt32(ViewJoinOn.ColumnID);
+					var rowID = row.LJCGetInt32(ViewJoinOn.ColumnID);
 					if (rowID == dataRecord.ID)
 					{
-						Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
+						JoinOnGrid.LJCSetCurrentRow(row, true);
 						break;
 					}
 				}
@@ -132,16 +128,14 @@ namespace LJCViewEditor
 		// Displays a detail dialog for a new record.
 		internal void DoNew()
 		{
-			ViewJoinOnDetail detail;
-
-			if (Parent.JoinGrid.CurrentRow is LJCGridRow parentRow)
+			if (JoinGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				int parentID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewJoin.ColumnTableName);
 
-				var grid = Parent.JoinOnGrid;
+				var grid = JoinOnGrid;
 				var location = FormCommon.GetDialogScreenPoint(grid);
-				detail = new ViewJoinOnDetail
+				var detail = new ViewJoinOnDetail
 				{
 					LJCParentID = parentID,
 					LJCParentName = parentName,
@@ -155,18 +149,16 @@ namespace LJCViewEditor
 		// Displays a detail dialog to edit an existing record.
 		internal void DoEdit()
 		{
-			ViewJoinOnDetail detail;
-
-			if (Parent.JoinGrid.CurrentRow is LJCGridRow parentRow
-				&& Parent.JoinOnGrid.CurrentRow is LJCGridRow row)
+			if (JoinGrid.CurrentRow is LJCGridRow parentRow
+				&& JoinOnGrid.CurrentRow is LJCGridRow row)
 			{
 				int id = row.LJCGetInt32(ViewJoinOn.ColumnID);
 				int parentID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 				string parentName = parentRow.LJCGetString(ViewJoin.ColumnTableName);
 
-				var grid = Parent.JoinOnGrid;
+				var grid = JoinOnGrid;
 				var location = FormCommon.GetDialogScreenPoint(grid);
-				detail = new ViewJoinOnDetail()
+				var detail = new ViewJoinOnDetail()
 				{
 					LJCID = id,
 					LJCParentID = parentID,
@@ -181,45 +173,38 @@ namespace LJCViewEditor
 		// Deletes the selected row.
 		internal void DoDelete()
 		{
-			LJCGridRow row;
-			string title;
-			string message;
-
-			row = Parent.JoinOnGrid.CurrentRow as LJCGridRow;
-			if (row != null)
-			{
-				title = "Delete Confirmation";
-				message = FormCommon.DeleteConfirm;
-				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-					, MessageBoxIcon.Question) == DialogResult.Yes)
-				{
-					var keyColumns = new DbColumns()
-					{
-						{ ViewJoinOn.ColumnID, row.LJCGetInt32(ViewJoinOn.ColumnID) }
-					};
-					mViewJoinOnManager.Delete(keyColumns);
-					if (mViewJoinOnManager.AffectedCount < 1)
-					{
-						message = FormCommon.DeleteError;
-						MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-							, MessageBoxIcon.Exclamation);
-					}
-					else
-					{
-						Parent.JoinOnGrid.Rows.Remove(row);
-						Parent.TimedChange(ViewEditorList.Change.JoinOn);
-					}
-				}
-			}
-		}
+      if (JoinOnGrid.CurrentRow is LJCGridRow row)
+      {
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          var keyColumns = new DbColumns()
+          {
+            { ViewJoinOn.ColumnID, row.LJCGetInt32(ViewJoinOn.ColumnID) }
+          };
+          mViewJoinOnManager.Delete(keyColumns);
+          if (mViewJoinOnManager.AffectedCount < 1)
+          {
+            message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+          }
+          else
+          {
+            JoinOnGrid.Rows.Remove(row);
+            Parent.TimedChange(ViewEditorList.Change.JoinOn);
+          }
+        }
+      }
+    }
 
 		// Refreshes the list.
 		internal void DoRefresh()
 		{
-			ViewJoinOn record;
 			int id = 0;
-
-			if (Parent.JoinOnGrid.CurrentRow is LJCGridRow row)
+			if (JoinOnGrid.CurrentRow is LJCGridRow row)
 			{
 				id = row.LJCGetInt32(ViewJoinOn.ColumnID);
 			}
@@ -228,7 +213,7 @@ namespace LJCViewEditor
 			// Select the original row.
 			if (id > 0)
 			{
-				record = new ViewJoinOn()
+				var record = new ViewJoinOn()
 				{
 					ID = id
 				};
@@ -239,12 +224,8 @@ namespace LJCViewEditor
     // Adds new row or updates existing row with changes from the detail dialog.
     private void JoinOnDetail_Change(object sender, EventArgs e)
     {
-      ViewJoinOnDetail detail;
-      ViewJoinOn record;
-      LJCGridRow row;
-
-      detail = sender as ViewJoinOnDetail;
-      record = detail.LJCRecord;
+      var detail = sender as ViewJoinOnDetail;
+      var record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
         RowUpdate(record);
@@ -252,8 +233,8 @@ namespace LJCViewEditor
       else
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        row = RowAdd(record);
-        Parent.JoinOnGrid.LJCSetCurrentRow(row, true);
+        var row = RowAdd(record);
+        JoinOnGrid.LJCSetCurrentRow(row, true);
         Parent.TimedChange(ViewEditorList.Change.JoinOn);
       }
     }
@@ -264,7 +245,7 @@ namespace LJCViewEditor
     // Configures the View JoinOn Grid.
     private void SetupGridJoinOn()
 		{
-			if (0 == Parent.JoinOnGrid.Columns.Count)
+			if (0 == JoinOnGrid.Columns.Count)
 			{
 				List<string> propertyNames = new List<string> {
 					ViewJoinOn.ColumnFromColumnName,
@@ -277,12 +258,19 @@ namespace LJCViewEditor
 					= mViewJoinOnManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
-				Parent.JoinOnGrid.LJCAddColumns(joinOnGridColumns);
+				JoinOnGrid.LJCAddColumns(joinOnGridColumns);
 			}
 		}
     #endregion
 
+    #region Properties
+
     internal ManagersDbView Managers { get; set; }
+
+    private LJCDataGrid JoinGrid { get; set; }
+
+    private LJCDataGrid JoinOnGrid { get; set; }
+    #endregion
 
     #region Class Data
 

@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 // ValuesViewEditor.cs
 using LJCDBClientLib;
+using LJCDBViewDAL;
 using LJCNetCommon;
-using System;
 using System.IO;
 
 namespace LJCViewEditor
@@ -36,6 +36,11 @@ namespace LJCViewEditor
         {
           ConfigFileName = fileName.Trim();
           StandardSettings.SetProperties(fileName);
+
+          var settings = StandardSettings;
+          Managers = new ManagersDbView();
+          Managers.SetDbProperties(settings.DbServiceRef
+            , settings.DataConfigName);
         }
       }
     }
@@ -51,6 +56,9 @@ namespace LJCViewEditor
     {
       get { return mInstance; }
     }
+
+    /// <summary>Gets or sets the Managers class reference.</summary>
+    public ManagersDbView Managers { get; set; }
 
     // Gets or sets the StandardSettings value.
     public StandardUISettings StandardSettings { get; private set; }

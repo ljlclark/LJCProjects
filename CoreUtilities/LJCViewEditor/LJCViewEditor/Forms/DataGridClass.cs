@@ -20,6 +20,7 @@ namespace LJCViewEditor
     internal DataGridClass(ViewEditorList parent)
     {
       Parent = parent;
+      DataGrid = Parent.DataGrid;
 
       mUserID = "-null";
       TableName = null;
@@ -36,8 +37,6 @@ namespace LJCViewEditor
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      DbColumns dataColumns;
-
       DbRequest dbRequest = Parent.DoGetViewRequest();
       if (dbRequest != null)
       {
@@ -51,7 +50,7 @@ namespace LJCViewEditor
         if (DbResult.HasData(dbResult))
         {
           // Get data.
-          dataColumns = dbResult.CreateResultColumns(dbResult);
+          var dataColumns = dbResult.CreateResultColumns(dbResult);
 
           // Create and show DataDetail dialog.
           var dialog = new DataDetailDialog(mUserID, Parent.DataConfigName
@@ -70,13 +69,10 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      string title;
-      string message;
-
-      if (Parent.DataGrid.CurrentRow is LJCGridRow row)
+      if (DataGrid.CurrentRow is LJCGridRow row)
       {
-        title = "Delete Confirmation";
-        message = FormCommon.DeleteConfirm;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
@@ -89,7 +85,7 @@ namespace LJCViewEditor
             SetKeyValues(dbRequest, dataManager.DataDefinition);
             //DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
 
-            Parent.DataGrid.Rows.Remove(row);
+            DataGrid.Rows.Remove(row);
           }
         }
       }
@@ -101,7 +97,7 @@ namespace LJCViewEditor
     // Sets the DbRequest Key values.
     private void SetKeyValues(DbRequest dbRequest, DbColumns dataDefinition)
     {
-      if (Parent.DataGrid.CurrentRow is LJCGridRow row)
+      if (DataGrid.CurrentRow is LJCGridRow row)
       {
         foreach (DbColumn dbColumn in dataDefinition)
         {
@@ -137,6 +133,8 @@ namespace LJCViewEditor
 
     // Gets or sets the Table name.
     public string TableName { get; set; }
+
+    private LJCDataGrid DataGrid { get; set; }
     #endregion
 
     #region Class Data
