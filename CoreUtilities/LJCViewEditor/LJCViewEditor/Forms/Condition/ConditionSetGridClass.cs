@@ -1,55 +1,60 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConditionSetGridClass.cs
+using LJCDBMessage;
+using LJCDBViewDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBViewDAL;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
-using LJCDBMessage;
+using static LJCViewEditor.ViewEditorList;
 
 namespace LJCViewEditor
 {
-	// Provides ConditionSetGrid methods for the ViewEditorList window.
-	internal class ConditionSetGridClass
-	{
-		#region Constructors
+  // Provides ConditionSetGrid methods for the ViewEditorList window.
+  internal class ConditionSetGridClass
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal ConditionSetGridClass(ViewEditorList parent)
-		{
-			Parent = parent;
-      ConditionSetGrid = Parent.ConditionSetGrid;
+    // Initializes an object instance.
+    internal ConditionSetGridClass(ViewEditorList parentList)
+    {
+      parentList.Cursor = Cursors.WaitCursor;
+      EditList = parentList;
+      ConditionSetGrid = EditList.ConditionSetGrid;
       ResetData();
-		}
+      FilterGrid = EditList.FilterGrid;
+      EditList.Cursor = Cursors.Default;
+    }
 
-		// Resets the DataConfig dependent objects.
-		internal void ResetData()
-		{
-      Managers = Parent.Managers;
+    // Resets the DataConfig dependent objects.
+    internal void ResetData()
+    {
+      Managers = EditList.Managers;
       mViewConditionSetManager = Managers.ViewConditionSetManager;
-		}
-		#endregion
+    }
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Retrieves the list rows.
-		/// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/List.xml'/>
-		internal void DataRetrieve()
-		{
-			Parent.Cursor = Cursors.WaitCursor;
-			ConditionSetGrid.Rows.Clear();
+    // Retrieves the list rows.
+    /// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/List.xml'/>
+    internal void DataRetrieve()
+    {
+      EditList.Cursor = Cursors.WaitCursor;
+      ConditionSetGrid.Rows.Clear();
 
-			SetupGridConditionSet();
-			if (Parent.FilterGrid.CurrentRow is LJCGridRow parentRow)
-			{
-				// Data from items.
-				int viewFilterID = parentRow.LJCGetInt32(ViewFilter.ColumnID);
+      SetupGrid();
+      if (FilterGrid.CurrentRow is LJCGridRow EditListRow)
+      {
+        // Data from items.
+        int parentID = EditListRow.LJCGetInt32(ViewFilter.ColumnID);
 
         var manager = mViewConditionSetManager;
-        var result = manager.ResultWithParentID(viewFilterID);
+        var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)
@@ -58,18 +63,18 @@ namespace LJCViewEditor
           }
         }
       }
-      Parent.Cursor = Cursors.Default;
-			Parent.DoChange(ViewEditorList.Change.ConditionSet);
-		}
+      EditList.Cursor = Cursors.Default;
+      EditList.DoChange(Change.ConditionSet);
+    }
 
-		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAdd(ViewConditionSet dataRecord)
-		{
-			var retValue = ConditionSetGrid.LJCRowAdd();
-			SetStoredValues(retValue, dataRecord);
-			retValue.LJCSetValues(ConditionSetGrid, dataRecord);
-			return retValue;
-		}
+    // Adds a grid row and updates it with the record values.
+    private LJCGridRow RowAdd(ViewConditionSet dataRecord)
+    {
+      var retValue = ConditionSetGrid.LJCRowAdd();
+      SetStoredValues(retValue, dataRecord);
+      retValue.LJCSetValues(ConditionSetGrid, dataRecord);
+      return retValue;
+    }
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
@@ -91,143 +96,159 @@ namespace LJCViewEditor
 
     // Updates the current row with the record values.
     private void RowUpdate(ViewConditionSet dataRecord)
-		{
-			if (ConditionSetGrid.CurrentRow is LJCGridRow row)
-			{
-				SetStoredValues(row, dataRecord);
-				row.LJCSetValues(ConditionSetGrid, dataRecord);
-			}
-		}
+    {
+      if (ConditionSetGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(ConditionSetGrid, dataRecord);
+      }
+    }
 
-		// Sets the row stored values.
-		private void SetStoredValues(LJCGridRow row
-			, ViewConditionSet dataRecord)
-		{
-			row.LJCSetInt32(ViewConditionSet.ColumnID, dataRecord.ID);
-			row.LJCSetString(ViewConditionSet.ColumnBooleanOperator
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row
+      , ViewConditionSet dataRecord)
+    {
+      row.LJCSetInt32(ViewConditionSet.ColumnID, dataRecord.ID);
+      row.LJCSetString(ViewConditionSet.ColumnBooleanOperator
         , dataRecord.BooleanOperator);
-		}
+    }
 
-		// Selects a row based on the key record values.
-		private void RowSelect(ViewConditionSet dataRecord)
-		{
-			if (dataRecord != null)
-			{
-				Parent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in ConditionSetGrid.Rows)
-				{
-					var rowID = row.LJCGetInt32(ViewConditionSet.ColumnID);
-					if (rowID == dataRecord.ID)
-					{
+    // Selects a row based on the key record values.
+    private bool RowSelect(ViewConditionSet dataRecord)
+    {
+      bool retValue = false;
+      if (dataRecord != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in ConditionSetGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewConditionSet.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ConditionSetGrid.LJCSetCurrentRow(row, true);
-						break;
-					}
-				}
-				Parent.Cursor = Cursors.Default;
-			}
-		}
-		#endregion
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+    #endregion
 
-		#region Action Methods
+    #region Action Methods
 
-		// Displays a detail dialog for a new record.
-		internal void DoNew()
-		{
-			if (Parent.FilterGrid.CurrentRow is LJCGridRow parentRow)
-			{
-				int parentID = parentRow.LJCGetInt32(ViewFilter.ColumnID);
-				string parentName = parentRow.LJCGetString(ViewFilter.ColumnName);
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (EditList.FilterGrid.CurrentRow is LJCGridRow EditListRow)
+      {
+        int parentID = EditListRow.LJCGetInt32(ViewFilter.ColumnID);
+        string parentName = EditListRow.LJCGetString(ViewFilter.ColumnName);
 
-				var grid = ConditionSetGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				var detail = new ViewConditionSetDetail
-				{
-					LJCParentID = parentID,
-					LJCParentName = parentName,
-					LJCLocation = location
-				};
-				detail.LJCChange += ConditionSetDetail_Change;
-				detail.ShowDialog();
-			}
-		}
+        var grid = ConditionSetGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewConditionSetDetail
+        {
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+          LJCLocation = location
+        };
+        detail.LJCChange += ConditionSetDetail_Change;
+        detail.ShowDialog();
+      }
+    }
 
-		// Displays a detail dialog to edit an existing record.
-		internal void DoEdit()
-		{
-			if (Parent.FilterGrid.CurrentRow is LJCGridRow parentRow
-				&& ConditionSetGrid.CurrentRow is LJCGridRow row)
-			{
-				// Data from list items.
-				int id = row.LJCGetInt32(ViewConditionSet.ColumnID);
-				int parentID = parentRow.LJCGetInt32(ViewFilter.ColumnID);
-				string parentName = parentRow.LJCGetString(ViewFilter.ColumnName);
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (FilterGrid.CurrentRow is LJCGridRow EditListRow
+        && ConditionSetGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from list items.
+        int id = row.LJCGetInt32(ViewConditionSet.ColumnID);
+        int parentID = EditListRow.LJCGetInt32(ViewFilter.ColumnID);
+        string parentName = EditListRow.LJCGetString(ViewFilter.ColumnName);
 
-				var grid = ConditionSetGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				var detail = new ViewConditionSetDetail()
-				{
-					LJCID = id,
-					LJCParentID = parentID,
-					LJCParentName = parentName,
-					LJCLocation = location
-				};
-				detail.LJCChange += ConditionSetDetail_Change;
-				detail.ShowDialog();
-			}
-		}
+        var grid = ConditionSetGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewConditionSetDetail()
+        {
+          LJCID = id,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+          LJCLocation = location
+        };
+        detail.LJCChange += ConditionSetDetail_Change;
+        detail.ShowDialog();
+      }
+    }
 
-		// Deletes the selected row.
-		internal void DoDelete()
-		{
-			if (ConditionSetGrid.CurrentRow is LJCGridRow row)
-			{
-				var title = "Delete Confirmation";
-				var message = FormCommon.DeleteConfirm;
-				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-					, MessageBoxIcon.Question) == DialogResult.Yes)
-				{
-					var keyColumns = new DbColumns()
-					{
-						{ ViewConditionSet.ColumnID, row.LJCGetInt32(ViewConditionSet.ColumnID) }
-					};
-					mViewConditionSetManager.Delete(keyColumns);
-					if (mViewConditionSetManager.AffectedCount < 1)
-					{
-						message = FormCommon.DeleteError;
-						MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-							, MessageBoxIcon.Exclamation);
-					}
-					else
-					{
-						ConditionSetGrid.Rows.Remove(row);
-						Parent.TimedChange(ViewEditorList.Change.ConditionSet);
-					}
-				}
-			}
-		}
+    // Deletes the selected row.
+    internal void DoDelete()
+    {
+      if (ConditionSetGrid.CurrentRow is LJCGridRow row)
+      {
+        bool success = false;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
 
-		// Refreshes the list.
-		internal void DoRefresh()
-		{
-			ViewConditionSet record;
-			int id = 0;
-			if (ConditionSetGrid.CurrentRow is LJCGridRow row)
-			{
-				id = row.LJCGetInt32(ViewConditionSet.ColumnID);
-			}
-			DataRetrieve();
+        if (success)
+        {
+          // Data from items.
+          var id = row.LJCGetInt32(ViewConditionSet.ColumnID);
 
-			// Select the original row.
-			if (id > 0)
-			{
-				record = new ViewConditionSet()
-				{
-					ID = id
-				};
-				RowSelect(record);
-			}
-		}
+          var keyColumns = new DbColumns()
+          {
+            { ViewConditionSet.ColumnID, id }
+          };
+          mViewConditionSetManager.Delete(keyColumns);
+          if (mViewConditionSetManager.AffectedCount < 1)
+          {
+            success = false;
+            message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+          }
+        }
+
+        if (success)
+        {
+          ConditionSetGrid.Rows.Remove(row);
+          EditList.TimedChange(Change.ConditionSet);
+        }
+      }
+    }
+
+    // Refreshes the list.
+    internal void DoRefresh()
+    {
+      EditList.Cursor = Cursors.WaitCursor;
+      int id = 0;
+      if (ConditionSetGrid.CurrentRow is LJCGridRow row)
+      {
+        // Save the original row.
+        id = row.LJCGetInt32(ViewConditionSet.ColumnID);
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (id > 0)
+      {
+        var record = new ViewConditionSet()
+        {
+          ID = id
+        };
+        RowSelect(record);
+      }
+      EditList.Cursor = Cursors.Default;
+    }
 
     // Adds new row or updates existing row with changes from the detail dialog.
     private void ConditionSetDetail_Change(object sender, EventArgs e)
@@ -243,43 +264,51 @@ namespace LJCViewEditor
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
         var row = RowAdd(record);
         ConditionSetGrid.LJCSetCurrentRow(row, true);
-        Parent.TimedChange(ViewEditorList.Change.ConditionSet);
+        EditList.TimedChange(Change.ConditionSet);
       }
     }
     #endregion
 
     #region Setup Methods
 
-    // Configures the View ConditionSet Grid.
-    private void SetupGridConditionSet()
-		{
-			if (0 == ConditionSetGrid.Columns.Count)
-			{
-				List<string> propertyNames = new List<string> {
-					ViewConditionSet.ColumnBooleanOperator
-				};
+    // Configures the ViewConditionSet Grid.
+    private void SetupGrid()
+    {
+      if (0 == ConditionSetGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string>
+        {
+          ViewConditionSet.ColumnBooleanOperator
+        };
 
-				// Get the grid columns from the manager Data Definition.
-				DbColumns conditionSetGridColumns
-					= mViewConditionSetManager.GetColumns(propertyNames);
+        // Get the grid columns from the manager Data Definition.
+        DbColumns conditionSetGridColumns
+          = mViewConditionSetManager.GetColumns(propertyNames);
 
-				// Setup the grid columns.
-				ConditionSetGrid.LJCAddColumns(conditionSetGridColumns);
-			}
-		}
+        // Setup the grid columns.
+        ConditionSetGrid.LJCAddColumns(conditionSetGridColumns);
+      }
+    }
     #endregion
 
     #region Properties
 
+    // Gets or sets the Managers reference.
     internal ManagersDbView Managers { get; set; }
 
+    // Gets or sets the ConditionSetGrid reference.
     private LJCDataGrid ConditionSetGrid { get; set; }
+
+    // Gets or sets the EditList List reference.
+    private ViewEditorList EditList { get; set; }
+
+    // Gets or sets the FilterGrid reference.
+    private LJCDataGrid FilterGrid { get; set; }
     #endregion
 
     #region Class Data
 
-    private readonly ViewEditorList Parent;
-		private ViewConditionSetManager mViewConditionSetManager;
-		#endregion
-	}
+    private ViewConditionSetManager mViewConditionSetManager;
+    #endregion
+  }
 }

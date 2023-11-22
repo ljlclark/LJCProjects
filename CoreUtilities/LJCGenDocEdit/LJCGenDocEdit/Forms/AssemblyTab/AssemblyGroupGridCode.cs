@@ -174,7 +174,7 @@ namespace LJCGenDocEdit
         if (0 == manager.Manager.AffectedCount)
         {
           success = false;
-          message = FormCommon.DeleteError;
+          var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
         }
