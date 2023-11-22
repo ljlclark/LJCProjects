@@ -1,39 +1,40 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnGridClass.cs
+using LJCDBClientLib;
+using LJCDBMessage;
+using LJCDBViewDAL;
 using LJCNetCommon;
+using LJCViewEditorDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBViewDAL;
-using LJCViewEditorDAL;
-using LJCDBClientLib;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using LJCDBMessage;
+using static LJCViewEditor.ViewEditorList;
 
 namespace LJCViewEditor
 {
-	// Provides ColumnGrid methods for the ViewEditorList window.
-	internal class ColumnGridClass
+  // Provides ColumnGrid methods for the ViewEditorList window.
+  internal class ColumnGridClass
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		internal ColumnGridClass(ViewEditorList parent)
+		internal ColumnGridClass(ViewEditorList parentList)
 		{
-			Parent = parent;
-      ColumnGrid = Parent.ColumnGrid;
-      ViewGrid = Parent.ViewGrid;
+			EditList = parentList;
+      ColumnGrid = EditList.ColumnGrid;
+      ViewGrid = EditList.ViewGrid;
       ResetData();
 		}
 
 		// Resets the DataConfig dependent objects.
 		internal void ResetData()
 		{
-			mDataConfigName = Parent.DataConfigName;
-			mDbServiceRef = Parent.DbServiceRef;
-      Managers = Parent.Managers;
+			mDataConfigName = EditList.DataConfigName;
+			mDbServiceRef = EditList.DbServiceRef;
+      Managers = EditList.Managers;
 			mColumnManager = Managers.ViewColumnManager;
 		}
 		#endregion
@@ -43,10 +44,10 @@ namespace LJCViewEditor
 		// Retrieves the list rows.
 		internal void DataRetrieve()
 		{
-			Parent.Cursor = Cursors.WaitCursor;
-			ColumnGrid.Rows.Clear();
+			EditList.Cursor = Cursors.WaitCursor;
+      ColumnGrid.LJCRowsClear();
 
-			SetupGridColumn();
+      SetupGrid();
 			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
@@ -61,8 +62,8 @@ namespace LJCViewEditor
           }
         }
       }
-      Parent.Cursor = Cursors.Default;
-			Parent.DoChange(ViewEditorList.Change.Column);
+      EditList.Cursor = Cursors.Default;
+			EditList.DoChange(Change.Column);
 		}
 
 		// Adds a grid row and updates it with the record values.
@@ -105,11 +106,12 @@ namespace LJCViewEditor
 		}
 
 		// Selects a row based on the key record values.
-		private void RowSelect(ViewColumn dataRecord)
+		private bool RowSelect(ViewColumn dataRecord)
 		{
-			if (dataRecord != null)
+      bool retValue = false;
+      if (dataRecord != null)
 			{
-				Parent.Cursor = Cursors.WaitCursor;
+				EditList.Cursor = Cursors.WaitCursor;
 				foreach (LJCGridRow row in ColumnGrid.Rows)
 				{
 					var rowID = row.LJCGetInt32(ViewColumn.ColumnID);
@@ -117,11 +119,13 @@ namespace LJCViewEditor
 					{
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ColumnGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
 						break;
 					}
 				}
-				Parent.Cursor = Cursors.Default;
+				EditList.Cursor = Cursors.Default;
 			}
+      return retValue;
 		}
 		#endregion
 
@@ -178,14 +182,14 @@ namespace LJCViewEditor
 				{
 					LJCDataConfigName = mDataConfigName,
 					LJCDbServiceRef = mDbServiceRef,
-					LJCParentID = parentID,
+          LJCLocation = location,
+          LJCParentID = parentID,
 					LJCParentName = parentName,
-					LJCLocation = location,
 
 					// Use table name to get table columns.
-					LJCTableName = Parent.TableCombo.Text,
+					LJCTableName = EditList.TableCombo.Text,
 				};
-				detail.LJCChange += ColumnDetail_Change;
+				detail.LJCChange += Detail_Change;
 				detail.ShowDialog();
 			}
 		}
@@ -207,14 +211,14 @@ namespace LJCViewEditor
 					LJCDataConfigName = mDataConfigName,
 					LJCDbServiceRef = mDbServiceRef,
 					LJCID = id,
-					LJCParentID = parentID,
+          LJCLocation = location,
+          LJCParentID = parentID,
 					LJCParentName = parentName,
-					LJCLocation = location,
 
 					// Use table name to get table columns.
-					LJCTableName = Parent.TableCombo.Text,
+					LJCTableName = EditList.TableCombo.Text,
 				};
-				detail.LJCChange += ColumnDetail_Change;
+				detail.LJCChange += Detail_Change;
 				detail.ShowDialog();
 			}
 		}
@@ -269,7 +273,7 @@ namespace LJCViewEditor
 				if (success)
 				{
 					ColumnGrid.Rows.Remove(row);
-					Parent.TimedChange(ViewEditorList.Change.Column);
+					EditList.TimedChange(Change.Column);
 				}
 			}
 		}
@@ -277,10 +281,12 @@ namespace LJCViewEditor
 		// Refreshes the list.
 		internal void DoRefresh()
 		{
-			int id = 0;
+      EditList.Cursor = Cursors.WaitCursor;
+      int id = 0;
 			if (ColumnGrid.CurrentRow is LJCGridRow row)
 			{
-				id = row.LJCGetInt32(ViewColumn.ColumnID);
+        // Save the original row.
+        id = row.LJCGetInt32(ViewColumn.ColumnID);
 			}
 			DataRetrieve();
 
@@ -293,10 +299,11 @@ namespace LJCViewEditor
 				};
 				RowSelect(record);
 			}
-		}
+      EditList.Cursor = Cursors.Default;
+    }
 
-    // Adds new row or updates existing row with changes from the detail dialog.
-    private void ColumnDetail_Change(object sender, EventArgs e)
+    // Adds new row or updates row with changes from the detail dialog.
+    private void Detail_Change(object sender, EventArgs e)
     {
       var detail = sender as ViewColumnDetail;
       var record = detail.LJCRecord;
@@ -309,7 +316,7 @@ namespace LJCViewEditor
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
         var row = RowAdd(record);
         ColumnGrid.LJCSetCurrentRow(row, true);
-        Parent.TimedChange(ViewEditorList.Change.Column);
+        EditList.TimedChange(Change.Column);
       }
     }
     #endregion
@@ -317,7 +324,7 @@ namespace LJCViewEditor
     #region Setup Methods
 
     // Configures the View Column Grid.
-    private void SetupGridColumn()
+    private void SetupGrid()
 		{
 			if (0 == ColumnGrid.Columns.Count)
 			{
@@ -341,10 +348,16 @@ namespace LJCViewEditor
 
     #region Properties
 
+    // Gets or sets the Managers reference.
     internal ManagersDbView Managers { get; set; }
 
+    // Gets or sets the ColumnGrid reference.
     private LJCDataGrid ColumnGrid { get; set; }
 
+    // Gets or sets the Parent List reference.
+    private ViewEditorList EditList { get; set; }
+
+    // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
     #endregion
 
@@ -353,7 +366,6 @@ namespace LJCViewEditor
     private ViewColumnManager mColumnManager;
     private string mDataConfigName;
 		private DbServiceRef mDbServiceRef;
-    private readonly ViewEditorList Parent;
     #endregion
   }
 }

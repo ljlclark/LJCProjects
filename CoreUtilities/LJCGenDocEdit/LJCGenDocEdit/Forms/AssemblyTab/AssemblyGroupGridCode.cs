@@ -23,9 +23,9 @@ namespace LJCGenDocEdit
     internal AssemblyGroupGridCode(LJCGenDocList parentList)
     {
       // Initialize property values.
-      mDocList = parentList;
-      mAssemblyGroupGrid = mDocList.AssemblyGroupGrid;
-      Managers = mDocList.Managers;
+      DocList = parentList;
+      mAssemblyGroupGrid = DocList.AssemblyGroupGrid;
+      Managers = DocList.Managers;
       DocAssemblyGroupManager = Managers.DocAssemblyGroupManager;
     }
     #endregion
@@ -35,7 +35,7 @@ namespace LJCGenDocEdit
     /// <summary>Retrieves the list rows.</summary>
     internal void DataRetrieve()
     {
-      mDocList.Cursor = Cursors.WaitCursor;
+      DocList.Cursor = Cursors.WaitCursor;
       mAssemblyGroupGrid.LJCRowsClear();
 
       var manager = DocAssemblyGroupManager;
@@ -46,7 +46,6 @@ namespace LJCGenDocEdit
       manager.SetOrderBy(names);
 
       DbResult result = manager.LoadResult();
-
       if (DbResult.HasRows(result))
       {
         foreach (DbRow dbRow in result.Rows)
@@ -54,8 +53,8 @@ namespace LJCGenDocEdit
           RowAddValues(dbRow.Values);
         }
       }
-      mDocList.Cursor = Cursors.Default;
-      mDocList.DoChange(Change.AssemblyGroup);
+      DocList.Cursor = Cursors.Default;
+      DocList.DoChange(Change.AssemblyGroup);
     }
 
     // Selects a row based on the key record values.
@@ -63,10 +62,9 @@ namespace LJCGenDocEdit
     internal bool RowSelect(DocAssemblyGroup dataRecord)
     {
       bool retValue = false;
-
       if (dataRecord != null)
       {
-        mDocList.Cursor = Cursors.WaitCursor;
+        DocList.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in mAssemblyGroupGrid.Rows)
         {
           if (AssemblyGroupID(row) == dataRecord.ID)
@@ -77,7 +75,7 @@ namespace LJCGenDocEdit
             break;
           }
         }
-        mDocList.Cursor = Cursors.Default;
+        DocList.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -152,15 +150,12 @@ namespace LJCGenDocEdit
     /// <summary>Deletes the selected row.</summary>
     internal void DoDelete()
     {
-      string title;
-      string message;
       bool success = false;
-
       var groupRow = mAssemblyGroupGrid.CurrentRow as LJCGridRow;
       if (groupRow != null)
       {
-        title = "Delete Confirmation";
-        message = FormCommon.DeleteConfirm;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
@@ -188,19 +183,20 @@ namespace LJCGenDocEdit
       if (success)
       {
         mAssemblyGroupGrid.Rows.Remove(groupRow);
-        mDocList.TimedChange(Change.AssemblyGroup);
+        DocList.TimedChange(Change.AssemblyGroup);
       }
     }
 
     /// <summary>Refreshes the list.</summary> 
     internal void DoRefresh()
     {
-      mDocList.Cursor = Cursors.WaitCursor;
+      DocList.Cursor = Cursors.WaitCursor;
 
       // Save the original row.
       var assemblyGroupID = AssemblyGroupID();
-
       DataRetrieve();
+
+      // Select the original row.
       if (assemblyGroupID > 0)
       {
         var dataRecord = new DocAssemblyGroup()
@@ -209,7 +205,7 @@ namespace LJCGenDocEdit
         };
         RowSelect(dataRecord);
       }
-      mDocList.Cursor = Cursors.Default;
+      DocList.Cursor = Cursors.Default;
     }
 
     /// <summary>Resets the Sequence column values.</summary>
@@ -238,7 +234,7 @@ namespace LJCGenDocEdit
           CheckPreviousAndNext(detail);
           mAssemblyGroupGrid.LJCSetCurrentRow(row, true);
           DoRefresh();
-          mDocList.TimedChange(Change.AssemblyGroup);
+          DocList.TimedChange(Change.AssemblyGroup);
         }
       }
     }
@@ -395,20 +391,22 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the GridColumns value.</summary>
-    internal DbColumns GridColumns { get; set; }
-
-    /// <summary>Gets or sets the Manager value.</summary>
+    /// <summary>Gets or sets the Manager reference.</summary>
     internal DocAssemblyGroupManager DocAssemblyGroupManager { get; set; }
 
-    // The Managers object.
+    /// <summary>Gets or sets the GridColumns reference.</summary>
+    internal DbColumns GridColumns { get; set; }
+
+    // Gets or sets the Managers reference.
     internal ManagersDocGen Managers { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private LJCGenDocList DocList { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCDataGrid mAssemblyGroupGrid;
-    private readonly LJCGenDocList mDocList;
     #endregion
   }
 }
