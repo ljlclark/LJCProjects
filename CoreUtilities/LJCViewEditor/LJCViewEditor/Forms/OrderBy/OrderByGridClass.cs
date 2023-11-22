@@ -21,6 +21,8 @@ namespace LJCViewEditor
 		internal OrderByGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
+      OrderByGrid = Parent.OrderByGrid;
+      ViewGrid = Parent.ViewGrid;
 			ResetData();
 		}
 

@@ -21,8 +21,8 @@ namespace LJCViewEditor
 		internal FilterGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
-      FilterGrid = FilterGrid;
-      ViewGrid = ViewGrid;
+      FilterGrid = Parent.FilterGrid;
+      ViewGrid = Parent.ViewGrid;
 			ResetData();
 		}
 

@@ -81,7 +81,7 @@ namespace LJCDBViewDAL
     {
       get
       {
-        if (null == mViewColumnManager)
+        if (null == mViewConditionManager)
         {
           ViewConditionManager = new ViewConditionManager(DbServiceRef
             , DataConfigName);

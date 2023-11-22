@@ -21,8 +21,8 @@ namespace LJCViewEditor
 		internal JoinOnGridClass(ViewEditorList parent)
 		{
 			Parent = parent;
-      JoinGrid = JoinGrid;
-      JoinOnGrid = JoinOnGrid;
+      JoinGrid = Parent.JoinGrid;
+      JoinOnGrid = Parent.JoinOnGrid;
 			ResetData();
 		}
 
