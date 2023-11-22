@@ -12,12 +12,12 @@ using System.Windows.Forms;
 namespace LJCViewEditor
 {
   /// <summary>Provides DataGrid methods for the ViewEditorList window.</summary>
-  internal class DataGridClass
+  internal class DataGridCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal DataGridClass(ViewEditorList parentList)
+    internal DataGridCode(ViewEditorList parentList)
     {
       parentList.Cursor = Cursors.WaitCursor;
       EditList = parentList;

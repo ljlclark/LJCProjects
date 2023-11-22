@@ -110,15 +110,15 @@ namespace LJCViewEditor
           DataDbView = new DataDbView(Managers);
         }
 
-        ViewGridClass.ResetData();
-        ColumnGridClass.ResetData();
-        JoinGridClass.ResetData();
-        JoinOnGridClass.ResetData();
-        JoinColumnGridClass.ResetData();
-        FilterGridClass.ResetData();
-        ConditionSetGridClass.ResetData();
-        ConditionGridClass.ResetData();
-        OrderByGridClass.ResetData();
+        ViewGridCode.ResetData();
+        ColumnGridCode.ResetData();
+        JoinGridCode.ResetData();
+        JoinOnGridCode.ResetData();
+        JoinColumnGridCode.ResetData();
+        FilterGridCode.ResetData();
+        ConditionSetGridCode.ResetData();
+        ConditionGridCode.ResetData();
+        OrderByGridCode.ResetData();
       }
     }
     #endregion
@@ -179,7 +179,7 @@ namespace LJCViewEditor
           break;
 
         case Change.Table:
-          ViewGridClass.DataRetrieve();
+          ViewGridCode.DataRetrieve();
 
           if (StartupViewDataID > 0)
           {
@@ -187,15 +187,15 @@ namespace LJCViewEditor
             {
               ID = StartupViewDataID
             };
-            ViewGridClass.RowSelect(viewData);
+            ViewGridCode.RowSelect(viewData);
           }
           break;
 
         case Change.View:
-          ColumnGridClass.DataRetrieve();
-          JoinGridClass.DataRetrieve();
-          FilterGridClass.DataRetrieve();
-          OrderByGridClass.DataRetrieve();
+          ColumnGridCode.DataRetrieve();
+          JoinGridCode.DataRetrieve();
+          FilterGridCode.DataRetrieve();
+          OrderByGridCode.DataRetrieve();
           ViewGrid.LJCSetLastRow();
           break;
 
@@ -204,8 +204,8 @@ namespace LJCViewEditor
           break;
 
         case Change.Join:
-          JoinOnGridClass.DataRetrieve();
-          JoinColumnGridClass.DataRetrieve();
+          JoinOnGridCode.DataRetrieve();
+          JoinColumnGridCode.DataRetrieve();
           JoinGrid.LJCSetLastRow();
           break;
 
@@ -218,8 +218,8 @@ namespace LJCViewEditor
           break;
 
         case Change.Filter:
-          ConditionSetGridClass.DataRetrieve();
-          ConditionGridClass.DataRetrieve();
+          ConditionSetGridCode.DataRetrieve();
+          ConditionGridCode.DataRetrieve();
           FilterGrid.LJCSetLastRow();
           break;
 
@@ -482,16 +482,16 @@ namespace LJCViewEditor
     // Setup the grid code references.
     private void SetupGridCode()
     {
-      ColumnGridClass = new ColumnGridClass(this);
-      ConditionGridClass = new ConditionGridClass(this);
-      ConditionSetGridClass = new ConditionSetGridClass(this);
-      DataGridClass = new DataGridClass(this);
-      FilterGridClass = new FilterGridClass(this);
-      JoinColumnGridClass = new JoinColumnGridClass(this);
-      JoinGridClass = new JoinGridClass(this);
-      JoinOnGridClass = new JoinOnGridClass(this);
-      OrderByGridClass = new OrderByGridClass(this);
-      ViewGridClass = new ViewGridClass(this);
+      ColumnGridCode = new ColumnGridCode(this);
+      ConditionGridCode = new ConditionGridCode(this);
+      ConditionSetGridCode = new ConditionSetGridCode(this);
+      DataGridCode = new DataGridCode(this);
+      FilterGridCode = new FilterGridCode(this);
+      JoinColumnGridCode = new JoinColumnGridCode(this);
+      JoinGridCode = new JoinGridCode(this);
+      JoinOnGridCode = new JoinOnGridCode(this);
+      OrderByGridCode = new OrderByGridCode(this);
+      ViewGridCode = new ViewGridCode(this);
     }
 
     // Splitter is in a TabPage so Set values on first display.
@@ -679,25 +679,25 @@ namespace LJCViewEditor
     // Calls the New method.
     private void ViewMenuNew_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoNew();
+      ViewGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void ViewMenuEdit_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoEdit();
+      ViewGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void ViewMenuDelete_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoDelete();
+      ViewGridCode.DoDelete();
     }
 
     // Calls the Refresh method.
     private void ViewMenuRefresh_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoRefresh();
+      ViewGridCode.DoRefresh();
     }
 
     // Allows for display and edit of a file.
@@ -709,19 +709,19 @@ namespace LJCViewEditor
     // Shows the Data.
     private void ViewMenuShowData_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoShowData();
+      ViewGridCode.DoShowData();
     }
 
     // Shows the SQL statement.
     private void ViewMenuShowSQL_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoShowSQL();
+      ViewGridCode.DoShowSQL();
     }
 
     // Show the DbRequest code.
     private void ViewMenuShowCode_Click(object sender, EventArgs e)
     {
-      ViewGridClass.ShowCode();
+      ViewGridCode.ShowCode();
     }
 
     // Performs the Close function.
@@ -751,31 +751,31 @@ namespace LJCViewEditor
     // Calls the AddAll method.
     private void ColumnMenuAdd_Click(object sender, EventArgs e)
     {
-      ColumnGridClass.DoAddAll(TableCombo.Text.Trim());
+      ColumnGridCode.DoAddAll(TableCombo.Text.Trim());
     }
 
     // Calls the New method.
     private void ColumnMenuNew_Click(object sender, EventArgs e)
     {
-      ColumnGridClass.DoNew();
+      ColumnGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void ColumnMenuEdit_Click(object sender, EventArgs e)
     {
-      ColumnGridClass.DoEdit();
+      ColumnGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void ColumnMenuDelete_Click(object sender, EventArgs e)
     {
-      ColumnGridClass.DoDelete();
+      ColumnGridCode.DoDelete();
     }
 
     // Calls the Refresh method.
     private void ColumnMenuRefresh_Click(object sender, EventArgs e)
     {
-      ColumnGridClass.DoRefresh();
+      ColumnGridCode.DoRefresh();
     }
 
     // Shows the Help page.
@@ -791,19 +791,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void JoinMenuNew_Click(object sender, EventArgs e)
     {
-      JoinGridClass.DoNew();
+      JoinGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void JoinMenuEdit_Click(object sender, EventArgs e)
     {
-      JoinGridClass.DoEdit();
+      JoinGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void JoinMenuDelete_Click(object sender, EventArgs e)
     {
-      JoinGridClass.DoDelete();
+      JoinGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -819,19 +819,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void JoinOnMenuNew_Click(object sender, EventArgs e)
     {
-      JoinOnGridClass.DoNew();
+      JoinOnGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void JoinOnMenuEdit_Click(object sender, EventArgs e)
     {
-      JoinOnGridClass.DoEdit();
+      JoinOnGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void JoinOnMenuDelete_Click(object sender, EventArgs e)
     {
-      JoinOnGridClass.DoDelete();
+      JoinOnGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -847,19 +847,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void JoinColumnNew_Click(object sender, EventArgs e)
     {
-      JoinColumnGridClass.DoNew();
+      JoinColumnGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void JoinColumnEdit_Click(object sender, EventArgs e)
     {
-      JoinColumnGridClass.DoEdit();
+      JoinColumnGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void JoinColumnDelete_Click(object sender, EventArgs e)
     {
-      JoinColumnGridClass.DoDelete();
+      JoinColumnGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -875,19 +875,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void FilterMenuNew_Click(object sender, EventArgs e)
     {
-      FilterGridClass.DoNew();
+      FilterGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void FilterMenuEdit_Click(object sender, EventArgs e)
     {
-      FilterGridClass.DoEdit();
+      FilterGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void FilterMenuDelete_Click(object sender, EventArgs e)
     {
-      FilterGridClass.DoDelete();
+      FilterGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -903,19 +903,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void ConditionSetNew_Click(object sender, EventArgs e)
     {
-      ConditionSetGridClass.DoNew();
+      ConditionSetGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void ConditionSetEdit_Click(object sender, EventArgs e)
     {
-      ConditionSetGridClass.DoEdit();
+      ConditionSetGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void ConditionSetDelete_Click(object sender, EventArgs e)
     {
-      ConditionSetGridClass.DoDelete();
+      ConditionSetGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -931,19 +931,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void ConditionMenuNew_Click(object sender, EventArgs e)
     {
-      ConditionGridClass.DoNew();
+      ConditionGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void ConditionMenuEdit_Click(object sender, EventArgs e)
     {
-      ConditionGridClass.DoEdit();
+      ConditionGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void ConditionMenuDelete_Click(object sender, EventArgs e)
     {
-      ConditionGridClass.DoDelete();
+      ConditionGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -959,19 +959,19 @@ namespace LJCViewEditor
     // Calls the New method.
     private void OrderByMenuNew_Click(object sender, EventArgs e)
     {
-      OrderByGridClass.DoNew();
+      OrderByGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void OrderByMenuEdit_Click(object sender, EventArgs e)
     {
-      OrderByGridClass.DoEdit();
+      OrderByGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void OrderByMenuDelete_Click(object sender, EventArgs e)
     {
-      OrderByGridClass.DoDelete();
+      OrderByGridCode.DoDelete();
     }
 
     // Shows the Help page.
@@ -987,26 +987,26 @@ namespace LJCViewEditor
     // Calls the New method.
     private void DataMenuNew_Click(object sender, EventArgs e)
     {
-      DataGridClass.DoNew();
+      DataGridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void DataMenuEdit_Click(object sender, EventArgs e)
     {
-      DataGridClass.TableName = TableCombo.Text.Trim();
-      DataGridClass.DoEdit();
+      DataGridCode.TableName = TableCombo.Text.Trim();
+      DataGridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void DataMenuDelete_Click(object sender, EventArgs e)
     {
-      DataGridClass.DoDelete();
+      DataGridCode.DoDelete();
     }
 
     // Calls the Refresh method.
     private void DataMenuRefresh_Click(object sender, EventArgs e)
     {
-      ViewGridClass.DoShowData();
+      ViewGridCode.DoShowData();
     }
 
     // Performs the Close function.
@@ -1043,7 +1043,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ViewGridClass.DoEdit();
+          ViewGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1054,7 +1054,7 @@ namespace LJCViewEditor
           break;
 
         case Keys.F5:
-          ViewGridClass.DoRefresh();
+          ViewGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -1088,7 +1088,7 @@ namespace LJCViewEditor
     {
       if (ViewGrid.LJCGetMouseRow(e) != null)
       {
-        ViewGridClass.DoEdit();
+        ViewGridCode.DoEdit();
       }
     }
 
@@ -1135,7 +1135,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ColumnGridClass.DoEdit();
+          ColumnGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1146,7 +1146,7 @@ namespace LJCViewEditor
           break;
 
         case Keys.F5:
-          ColumnGridClass.DoRefresh();
+          ColumnGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -1180,7 +1180,7 @@ namespace LJCViewEditor
     {
       if (ColumnGrid.LJCGetMouseRow(e) != null)
       {
-        ColumnGridClass.DoEdit();
+        ColumnGridCode.DoEdit();
       }
     }
 
@@ -1217,7 +1217,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          JoinGridClass.DoEdit();
+          JoinGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1257,7 +1257,7 @@ namespace LJCViewEditor
     {
       if (JoinGrid.LJCGetMouseRow(e) != null)
       {
-        JoinGridClass.DoEdit();
+        JoinGridCode.DoEdit();
       }
     }
 
@@ -1304,7 +1304,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          JoinOnGridClass.DoEdit();
+          JoinOnGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1344,7 +1344,7 @@ namespace LJCViewEditor
     {
       if (JoinOnGrid.LJCGetMouseRow(e) != null)
       {
-        JoinOnGridClass.DoEdit();
+        JoinOnGridCode.DoEdit();
       }
     }
 
@@ -1381,7 +1381,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          JoinColumnGridClass.DoEdit();
+          JoinColumnGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1421,7 +1421,7 @@ namespace LJCViewEditor
     {
       if (JoinColumnGrid.LJCGetMouseRow(e) != null)
       {
-        JoinColumnGridClass.DoEdit();
+        JoinColumnGridCode.DoEdit();
       }
     }
 
@@ -1458,7 +1458,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          FilterGridClass.DoEdit();
+          FilterGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1498,7 +1498,7 @@ namespace LJCViewEditor
     {
       if (FilterGrid.LJCGetMouseRow(e) != null)
       {
-        FilterGridClass.DoEdit();
+        FilterGridCode.DoEdit();
       }
     }
 
@@ -1545,7 +1545,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ConditionSetGridClass.DoEdit();
+          ConditionSetGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1585,7 +1585,7 @@ namespace LJCViewEditor
     {
       if (ConditionSetGrid.LJCGetMouseRow(e) != null)
       {
-        ConditionSetGridClass.DoEdit();
+        ConditionSetGridCode.DoEdit();
       }
     }
 
@@ -1622,7 +1622,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          ConditionGridClass.DoEdit();
+          ConditionGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1662,7 +1662,7 @@ namespace LJCViewEditor
     {
       if (ConditionGrid.LJCGetMouseRow(e) != null)
       {
-        ConditionGridClass.DoEdit();
+        ConditionGridCode.DoEdit();
       }
     }
 
@@ -1699,7 +1699,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          OrderByGridClass.DoEdit();
+          OrderByGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1739,7 +1739,7 @@ namespace LJCViewEditor
     {
       if (OrderByGrid.LJCGetMouseRow(e) != null)
       {
-        OrderByGridClass.DoEdit();
+        OrderByGridCode.DoEdit();
       }
     }
 
@@ -1776,7 +1776,7 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          DataGridClass.DoEdit();
+          DataGridCode.DoEdit();
           e.Handled = true;
           break;
 
@@ -1799,8 +1799,8 @@ namespace LJCViewEditor
     {
       if (DataGrid.LJCGetMouseRow(e) != null)
       {
-        DataGridClass.TableName = TableCombo.Text.Trim();
-        DataGridClass.DoEdit();
+        DataGridCode.TableName = TableCombo.Text.Trim();
+        DataGridCode.DoEdit();
       }
     }
 
@@ -1872,35 +1872,35 @@ namespace LJCViewEditor
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
-    // Gets or sets the ViewColumnClass value.
-    private ColumnGridClass ColumnGridClass { get; set; }
+    // Gets or sets the ViewColumnCode value.
+    private ColumnGridCode ColumnGridCode { get; set; }
 
-    // Gets or sets the ConditionGridClass value.
-    private ConditionGridClass ConditionGridClass { get; set; }
+    // Gets or sets the ConditionGridCode value.
+    private ConditionGridCode ConditionGridCode { get; set; }
 
-    // Gets or sets the ConditionSetGridClass value.
-    private ConditionSetGridClass ConditionSetGridClass { get; set; }
+    // Gets or sets the ConditionSetGridCode value.
+    private ConditionSetGridCode ConditionSetGridCode { get; set; }
 
-    // Gets or sets the DataGridClass value.
-    private DataGridClass DataGridClass { get; set; }
+    // Gets or sets the DataGridCode value.
+    private DataGridCode DataGridCode { get; set; }
 
-    // Gets or sets the JoinGridClass value.
-    private FilterGridClass FilterGridClass { get; set; }
+    // Gets or sets the JoinGridCode value.
+    private FilterGridCode FilterGridCode { get; set; }
 
-    // Gets or sets the JoinColumnGridClass value.
-    private JoinColumnGridClass JoinColumnGridClass { get; set; }
+    // Gets or sets the JoinColumnGridCode value.
+    private JoinColumnGridCode JoinColumnGridCode { get; set; }
 
-    // Gets or sets the JoinGridClass value.
-    private JoinGridClass JoinGridClass { get; set; }
+    // Gets or sets the JoinGridCode value.
+    private JoinGridCode JoinGridCode { get; set; }
 
-    // Gets or sets the JoinGridClass value.
-    private JoinOnGridClass JoinOnGridClass { get; set; }
+    // Gets or sets the JoinGridCode value.
+    private JoinOnGridCode JoinOnGridCode { get; set; }
 
-    // Gets or sets the OrderByGridClass value.
-    private OrderByGridClass OrderByGridClass { get; set; }
+    // Gets or sets the OrderByGridCode value.
+    private OrderByGridCode OrderByGridCode { get; set; }
 
-    // Gets or sets the ViewGridClass value.
-    private ViewGridClass ViewGridClass { get; set; }
+    // Gets or sets the ViewGridCode value.
+    private ViewGridCode ViewGridCode { get; set; }
     #endregion
 
     #region Class Data

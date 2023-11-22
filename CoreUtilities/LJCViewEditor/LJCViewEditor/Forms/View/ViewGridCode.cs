@@ -14,12 +14,12 @@ using System.Windows.Forms;
 namespace LJCViewEditor
 {
   // Provides ViewData methods for the ViewEditorList window.
-  internal class ViewGridClass
+  internal class ViewGridCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal ViewGridClass(ViewEditorList parent)
+    internal ViewGridCode(ViewEditorList parent)
     {
       Parent = parent;
       DataGrid = Parent.DataGrid;

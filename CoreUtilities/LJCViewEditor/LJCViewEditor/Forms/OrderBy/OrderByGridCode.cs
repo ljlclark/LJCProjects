@@ -1,30 +1,29 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ColumnGridClass.cs
-using LJCDBMessage;
-using LJCDBViewDAL;
+//OrderByGridClass.cs
 using LJCNetCommon;
-using LJCViewEditorDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJCDBViewDAL;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using LJCDBMessage;
 using static LJCViewEditor.ViewEditorList;
 
 namespace LJCViewEditor
 {
-  // Provides ColumnGrid methods for the ViewEditorList window.
-  internal class ColumnGridClass
+  // Provides OrderByGrid methods for the ViewEditorList window.
+  internal class OrderByGridCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal ColumnGridClass(ViewEditorList parentList)
+    internal OrderByGridCode(ViewEditorList parentList)
     {
       parentList.Cursor = Cursors.WaitCursor;
       EditList = parentList;
-      ColumnGrid = EditList.ColumnGrid;
+      OrderByGrid = EditList.OrderByGrid;
       ViewGrid = EditList.ViewGrid;
       ResetData();
       EditList.Cursor = Cursors.Default;
@@ -33,8 +32,8 @@ namespace LJCViewEditor
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
-      Managers = EditList.Managers;
-      mColumnManager = Managers.ViewColumnManager;
+      Managers = EditList.DataDbView.Managers;
+      mViewOrderByManager = Managers.ViewOrderByManager;
     }
     #endregion
 
@@ -44,7 +43,7 @@ namespace LJCViewEditor
     internal void DataRetrieve()
     {
       EditList.Cursor = Cursors.WaitCursor;
-      ColumnGrid.LJCRowsClear();
+      OrderByGrid.Rows.Clear();
 
       SetupGrid();
       if (ViewGrid.CurrentRow is LJCGridRow parentRow)
@@ -52,7 +51,8 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-        var result = mColumnManager.ResultWithParentID(parentID);
+        var manager = mViewOrderByManager;
+        var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (var dbRow in result.Rows)
@@ -62,25 +62,24 @@ namespace LJCViewEditor
         }
       }
       EditList.Cursor = Cursors.Default;
-      EditList.DoChange(Change.Column);
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(ViewColumn dataRecord)
+    private LJCGridRow RowAdd(ViewOrderBy dataRecord)
     {
-      var retValue = ColumnGrid.LJCRowAdd();
+      var retValue = OrderByGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ColumnGrid, dataRecord);
+      retValue.LJCSetValues(OrderByGrid, dataRecord);
       return retValue;
     }
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var ljcGrid = ColumnGrid;
+      var ljcGrid = OrderByGrid;
       var retValue = ljcGrid.LJCRowAdd();
 
-      var columnName = ViewColumn.ColumnID;
+      var columnName = ViewOrderBy.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
@@ -89,35 +88,35 @@ namespace LJCViewEditor
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(ViewColumn dataRecord)
+    private void RowUpdate(ViewOrderBy dataRecord)
     {
-      if (ColumnGrid.CurrentRow is LJCGridRow row)
+      if (OrderByGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ColumnGrid, dataRecord);
+        row.LJCSetValues(OrderByGrid, dataRecord);
       }
     }
 
     // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, ViewColumn dataRecord)
+    private void SetStoredValues(LJCGridRow row, ViewOrderBy dataRecord)
     {
-      row.LJCSetInt32(ViewColumn.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(ViewOrderBy.ColumnID, dataRecord.ID);
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(ViewColumn dataRecord)
+    private bool RowSelect(ViewOrderBy record)
     {
       bool retValue = false;
-      if (dataRecord != null)
+      if (record != null)
       {
         EditList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ColumnGrid.Rows)
+        foreach (LJCGridRow row in OrderByGrid.Rows)
         {
-          var rowID = row.LJCGetInt32(ViewColumn.ColumnID);
-          if (rowID == dataRecord.ID)
+          var rowID = row.LJCGetInt32(ViewOrderBy.ColumnID);
+          if (rowID == record.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ColumnGrid.LJCSetCurrentRow(row, true);
+            OrderByGrid.LJCSetCurrentRow(row, true);
             retValue = true;
             break;
           }
@@ -130,43 +129,6 @@ namespace LJCViewEditor
 
     #region Action Methods
 
-    // Adds all missing columns.
-    internal void DoAddAll(string tableName)
-    {
-      if (ViewGrid.CurrentRow is LJCGridRow parentRow)
-      {
-        // Data from list items.
-        int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
-
-        var dataDbView = new DataDbView(Managers);
-        var dataHelper = new DataHelper(Managers.DbServiceRef
-          , Managers.DataConfigName);
-        var tableColumns = dataHelper.GetTableColumns(tableName);
-        foreach (var dbColumn in tableColumns)
-        {
-          var viewColumn = dataDbView.GetViewColumnFromDbColumn(dbColumn);
-          viewColumn.ViewDataID = parentID;
-
-          var keyColumns = new DbColumns()
-          {
-            { ViewColumn.ColumnViewDataID, viewColumn.ViewDataID },
-            { ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
-          };
-          var lookupRecord = mColumnManager.Retrieve(keyColumns);
-          if (false == mColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
-          {
-            var addedRecord = mColumnManager.AddWithFlags(viewColumn);
-            if (addedRecord != null)
-            {
-              viewColumn.ID = addedRecord.ID;
-              var row = RowAdd(viewColumn);
-              ColumnGrid.LJCSetCurrentRow(row, true);
-            }
-          }
-        }
-      }
-    }
-
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
@@ -176,14 +138,13 @@ namespace LJCViewEditor
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
         string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-        var location = FormCommon.GetDialogScreenPoint(ColumnGrid);
-        var detail = new ViewColumnDetail
+        var grid = OrderByGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewOrderByDetail
         {
           LJCLocation = location,
           LJCParentID = parentID,
           LJCParentName = parentName,
-
-          // Use table name to get table columns.
           LJCTableName = EditList.TableCombo.Text,
         };
         detail.LJCChange += Detail_Change;
@@ -195,22 +156,21 @@ namespace LJCViewEditor
     internal void DoEdit()
     {
       if (ViewGrid.CurrentRow is LJCGridRow parentRow
-        && ColumnGrid.CurrentRow is LJCGridRow row)
+        && OrderByGrid.CurrentRow is LJCGridRow row)
       {
         // Data from list items.
-        int id = row.LJCGetInt32(ViewColumn.ColumnID);
+        int id = row.LJCGetInt32(ViewOrderBy.ColumnID);
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
         string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-        var location = FormCommon.GetDialogScreenPoint(ColumnGrid);
-        var detail = new ViewColumnDetail()
+        var grid = OrderByGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewOrderByDetail()
         {
           LJCID = id,
           LJCLocation = location,
           LJCParentID = parentID,
           LJCParentName = parentName,
-
-          // Use table name to get table columns.
           LJCTableName = EditList.TableCombo.Text,
         };
         detail.LJCChange += Detail_Change;
@@ -221,8 +181,7 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (ViewGrid.CurrentRow is LJCGridRow parentRow
-        && ColumnGrid.CurrentRow is LJCGridRow row)
+      if (OrderByGrid.CurrentRow is LJCGridRow row)
       {
         bool success = false;
         var title = "Delete Confirmation";
@@ -233,30 +192,14 @@ namespace LJCViewEditor
           success = true;
         }
 
-        int id = 0;
-        if (success)
-        {
-          // Data from items.
-          id = row.LJCGetInt32(ViewColumn.ColumnID);
-          var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
-
-          var gridColumnManager	= Managers.ViewGridColumnManager;
-          var keyGridColumns = new DbColumns()
-          {
-            { ViewGridColumn.ColumnViewDataID, parentID },
-            { ViewGridColumn.ColumnViewColumnID, id }
-          };
-          gridColumnManager.Delete(keyGridColumns);
-        }
-
         if (success)
         {
           var keyColumns = new DbColumns()
           {
-            { ViewColumn.ColumnID, id }
+            { ViewOrderBy.ColumnID, row.LJCGetInt32(ViewOrderBy.ColumnID) }
           };
-          mColumnManager.Delete(keyColumns);
-          if (mColumnManager.AffectedCount < 1)
+          mViewOrderByManager.Delete(keyColumns);
+          if (mViewOrderByManager.AffectedCount < 1)
           {
             success = false;
             message = FormCommon.DeleteError;
@@ -267,8 +210,8 @@ namespace LJCViewEditor
 
         if (success)
         {
-          ColumnGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.Column);
+          OrderByGrid.Rows.Remove(row);
+          EditList.TimedChange(Change.OrderBy);
         }
       }
     }
@@ -278,17 +221,16 @@ namespace LJCViewEditor
     {
       EditList.Cursor = Cursors.WaitCursor;
       int id = 0;
-      if (ColumnGrid.CurrentRow is LJCGridRow row)
+      if (OrderByGrid.CurrentRow is LJCGridRow row)
       {
-        // Save the original row.
-        id = row.LJCGetInt32(ViewColumn.ColumnID);
+        id = row.LJCGetInt32(ViewOrderBy.ColumnID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        var record = new ViewColumn()
+        var record = new ViewOrderBy()
         {
           ID = id
         };
@@ -297,10 +239,10 @@ namespace LJCViewEditor
       EditList.Cursor = Cursors.Default;
     }
 
-    // Adds new row or updates row with changes from the detail dialog.
+    // Adds new row or updates existing row with changes from the detail dialog.
     private void Detail_Change(object sender, EventArgs e)
     {
-      var detail = sender as ViewColumnDetail;
+      var detail = sender as ViewOrderByDetail;
       var record = detail.LJCRecord;
       if (detail.LJCIsUpdate)
       {
@@ -310,33 +252,29 @@ namespace LJCViewEditor
       {
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
         var row = RowAdd(record);
-        ColumnGrid.LJCSetCurrentRow(row, true);
-        EditList.TimedChange(Change.Column);
+        OrderByGrid.LJCSetCurrentRow(row, true);
+        EditList.TimedChange(Change.OrderBy);
       }
     }
     #endregion
 
     #region Setup Methods
 
-    // Configures the View Column Grid.
+    // Configures the View OrderBy Grid.
     private void SetupGrid()
     {
-      if (0 == ColumnGrid.Columns.Count)
+      if (0 == OrderByGrid.Columns.Count)
       {
         List<string> propertyNames = new List<string> {
-          ViewColumn.ColumnCaption,
-          ViewColumn.ColumnColumnName,
-          ViewColumn.ColumnPropertyName,
-          ViewColumn.ColumnRenameAs,
-          ViewColumn.ColumnDataTypeName
+          ViewOrderBy.ColumnColumnName
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = mColumnManager.GetColumns(propertyNames);
+        DbColumns orderByGridColumns
+          = mViewOrderByManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        ColumnGrid.LJCAddColumns(gridColumns);
+        OrderByGrid.LJCAddColumns(orderByGridColumns);
       }
     }
     #endregion
@@ -346,11 +284,11 @@ namespace LJCViewEditor
     // Gets or sets the Managers reference.
     internal ManagersDbView Managers { get; set; }
 
-    // Gets or sets the ColumnGrid reference.
-    private LJCDataGrid ColumnGrid { get; set; }
-
     // Gets or sets the Parent List reference.
     private ViewEditorList EditList { get; set; }
+
+    // Gets or sets the OrderByGrid reference.
+    private LJCDataGrid OrderByGrid { get; set; }
 
     // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
@@ -358,7 +296,7 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    private ViewColumnManager mColumnManager;
+    private ViewOrderByManager mViewOrderByManager;
     #endregion
   }
 }

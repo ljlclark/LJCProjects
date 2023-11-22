@@ -121,7 +121,7 @@
     <Compile Include="Forms\Filter\ViewFilterDetail.Designer.cs">
       <DependentUpon>ViewFilterDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Column\ColumnGridClass.cs" />
+    <Compile Include="Forms\Column\ColumnGridCode.cs" />
     <Compile Include="Forms\Column\ViewColumnDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,14 +134,14 @@
     <Compile Include="Forms\View\ViewDataDetail.Designer.cs">
       <DependentUpon>ViewDataDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Condition\ConditionGridClass.cs" />
-    <Compile Include="Forms\Condition\ConditionSetGridClass.cs" />
-    <Compile Include="Forms\DataGridClass.cs" />
-    <Compile Include="Forms\Filter\FilterGridClass.cs" />
-    <Compile Include="Forms\JoinColumn\JoinColumnGridClass.cs" />
-    <Compile Include="Forms\Join\JoinGridClass.cs" />
-    <Compile Include="Forms\JoinOn\JoinOnGridClass.cs" />
-    <Compile Include="Forms\OrderBy\OrderByGridClass.cs" />
+    <Compile Include="Forms\Condition\ConditionGridCode.cs" />
+    <Compile Include="Forms\Condition\ConditionSetGridCode.cs" />
+    <Compile Include="Forms\DataGridCode.cs" />
+    <Compile Include="Forms\Filter\FilterGridCode.cs" />
+    <Compile Include="Forms\JoinColumn\JoinColumnGridCode.cs" />
+    <Compile Include="Forms\Join\JoinGridCode.cs" />
+    <Compile Include="Forms\JoinOn\JoinOnGridCode.cs" />
+    <Compile Include="Forms\OrderBy\OrderByGridCode.cs" />
     <Compile Include="Forms\ViewEditorList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,7 +151,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesViewEditor.cs" />
-    <Compile Include="Forms\View\ViewGridClass.cs" />
+    <Compile Include="Forms\View\ViewGridCode.cs" />
     <Compile Include="Forms\JoinColumn\ViewJoinColumnDetail.cs">
       <SubType>Form</SubType>
     </Compile>
