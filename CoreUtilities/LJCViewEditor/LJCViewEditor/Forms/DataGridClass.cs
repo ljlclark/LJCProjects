@@ -17,13 +17,14 @@ namespace LJCViewEditor
     #region Constructors
 
     // Initializes an object instance.
-    internal DataGridClass(ViewEditorList parent)
+    internal DataGridClass(ViewEditorList parentList)
     {
-      Parent = parent;
-      DataGrid = Parent.DataGrid;
-
+      parentList.Cursor = Cursors.WaitCursor;
+      EditList = parentList;
+      DataGrid = EditList.DataGrid;
       mUserID = "-null";
       TableName = null;
+      EditList.Cursor = Cursors.Default;
     }
     #endregion
 
@@ -37,11 +38,11 @@ namespace LJCViewEditor
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      DbRequest dbRequest = Parent.DoGetViewRequest();
+      DbRequest dbRequest = EditList.DoGetViewRequest();
       if (dbRequest != null)
       {
-        DataManager dataManager = new DataManager(Parent.DbServiceRef
-          , Parent.DataConfigName, dbRequest.TableName);
+        DataManager dataManager = new DataManager(EditList.DbServiceRef
+          , EditList.DataConfigName, dbRequest.TableName);
 
         SetKeyValues(dbRequest, dataManager.DataDefinition);
 
@@ -53,7 +54,7 @@ namespace LJCViewEditor
           var dataColumns = dbResult.CreateResultColumns(dbResult);
 
           // Create and show DataDetail dialog.
-          var dialog = new DataDetailDialog(mUserID, Parent.DataConfigName
+          var dialog = new DataDetailDialog(mUserID, EditList.DataConfigName
             , TableName)
           {
             LJCDataColumns = dataColumns
@@ -71,17 +72,23 @@ namespace LJCViewEditor
     {
       if (DataGrid.CurrentRow is LJCGridRow row)
       {
+        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
-          DbRequest dbRequest = Parent.DoGetViewRequest();
+          success = true;
+        }
+
+        if (success)
+        {
+          DbRequest dbRequest = EditList.DoGetViewRequest();
           if (dbRequest != null)
           {
             dbRequest.RequestTypeName = "Delete";
-            DataManager dataManager = new DataManager(Parent.DbServiceRef
-            , Parent.DataConfigName, dbRequest.TableName);
+            DataManager dataManager = new DataManager(EditList.DbServiceRef
+            , EditList.DataConfigName, dbRequest.TableName);
             SetKeyValues(dbRequest, dataManager.DataDefinition);
             //DbResult dbResult = dataManager.ExecuteRequest(dbRequest);
 
@@ -131,16 +138,19 @@ namespace LJCViewEditor
 
     #region Properties
 
+    // Gets or sets the DataGrid reference.
+    private LJCDataGrid DataGrid { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private ViewEditorList EditList { get; set; }
+
     // Gets or sets the Table name.
     public string TableName { get; set; }
-
-    private LJCDataGrid DataGrid { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly string mUserID;
-    private readonly ViewEditorList Parent;
     #endregion
   }
 }

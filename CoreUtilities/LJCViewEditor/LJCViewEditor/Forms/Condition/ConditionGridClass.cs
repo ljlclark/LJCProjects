@@ -208,12 +208,12 @@ namespace LJCViewEditor
             MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
               , MessageBoxIcon.Exclamation);
           }
+        }
 
-          if (success)
-          {
-            ConditionGrid.Rows.Remove(row);
-            EditList.TimedChange(Change.Condition);
-          }
+        if (success)
+        {
+          ConditionGrid.Rows.Remove(row);
+          EditList.TimedChange(Change.Condition);
         }
       }
     }
@@ -275,11 +275,11 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        var conditionGridColumns
+        var gridColumns
           = mConditionManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        ConditionGrid.LJCAddColumns(conditionGridColumns);
+        ConditionGrid.LJCAddColumns(gridColumns);
       }
     }
     #endregion

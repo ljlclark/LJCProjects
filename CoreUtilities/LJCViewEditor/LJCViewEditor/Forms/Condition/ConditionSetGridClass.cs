@@ -8,7 +8,6 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
 using static LJCViewEditor.ViewEditorList;
 
@@ -282,11 +281,11 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns conditionSetGridColumns
+        DbColumns gridColumns
           = mViewConditionSetManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        ConditionSetGrid.LJCAddColumns(conditionSetGridColumns);
+        ConditionSetGrid.LJCAddColumns(gridColumns);
       }
     }
     #endregion

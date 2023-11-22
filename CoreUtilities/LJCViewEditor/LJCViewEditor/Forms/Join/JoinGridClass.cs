@@ -9,49 +9,52 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using LJCDBMessage;
+using static LJCViewEditor.ViewEditorList;
 
 namespace LJCViewEditor
 {
-	// Provides JoinGrid methods for the ViewEditorList window.
-	internal class JoinGridClass
-	{
-		#region Constructors
+  // Provides JoinGrid methods for the ViewEditorList window.
+  internal class JoinGridClass
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal JoinGridClass(ViewEditorList parent)
-		{
-			Parent = parent;
-      JoinGrid = Parent.JoinGrid;
-      ViewGrid = Parent.ViewGrid;
+    // Initializes an object instance.
+    internal JoinGridClass(ViewEditorList parentList)
+    {
+      parentList.Cursor = Cursors.WaitCursor;
+      EditList = parentList;
+      JoinGrid = EditList.JoinGrid;
+      ViewGrid = EditList.ViewGrid;
       ResetData();
-		}
+      EditList.Cursor = Cursors.Default;
+    }
 
-		// Resets the DataConfig dependent objects.
-		internal void ResetData()
-		{
-      Managers = Parent.Managers;
+    // Resets the DataConfig dependent objects.
+    internal void ResetData()
+    {
+      Managers = EditList.Managers;
       mViewJoinManager = Managers.ViewJoinManager;
-		}
-		#endregion
+    }
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Retrieves the list rows.
-		internal void DataRetrieve()
-		{
-			Parent.Cursor = Cursors.WaitCursor;
-			JoinGrid.Rows.Clear();
-			Parent.JoinOnGrid.Rows.Clear();
-			Parent.JoinColumnGrid.Rows.Clear();
+    // Retrieves the list rows.
+    internal void DataRetrieve()
+    {
+      EditList.Cursor = Cursors.WaitCursor;
+      JoinGrid.Rows.Clear();
+      EditList.JoinOnGrid.Rows.Clear();
+      EditList.JoinColumnGrid.Rows.Clear();
 
-			SetupGridJoin();
-			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
-			{
-				// Data from items.
-				int viewDataID = parentRow.LJCGetInt32(ViewData.ColumnID);
+      SetupGrid();
+      if (ViewGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
         var manager = mViewJoinManager;
-        var result = manager.ResultWithParentID(viewDataID);
+        var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (var dbRow in result.Rows)
@@ -60,18 +63,18 @@ namespace LJCViewEditor
           }
         }
       }
-      Parent.Cursor = Cursors.Default;
-			Parent.DoChange(ViewEditorList.Change.Join);
-		}
+      EditList.Cursor = Cursors.Default;
+      EditList.DoChange(Change.Join);
+    }
 
-		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAdd(ViewJoin dataRecord)
-		{
-			var retValue = JoinGrid.LJCRowAdd();
-			SetStoredValues(retValue, dataRecord);
-			retValue.LJCSetValues(JoinGrid, dataRecord);
-			return retValue;
-		}
+    // Adds a grid row and updates it with the record values.
+    private LJCGridRow RowAdd(ViewJoin dataRecord)
+    {
+      var retValue = JoinGrid.LJCRowAdd();
+      SetStoredValues(retValue, dataRecord);
+      retValue.LJCSetValues(JoinGrid, dataRecord);
+      return retValue;
+    }
 
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
@@ -93,143 +96,161 @@ namespace LJCViewEditor
 
     // Updates the current row with the record values.
     private void RowUpdate(ViewJoin dataRecord)
-		{
-			if (JoinGrid.CurrentRow is LJCGridRow row)
-			{
-				SetStoredValues(row, dataRecord);
-				row.LJCSetValues(JoinGrid, dataRecord);
-			}
-		}
+    {
+      if (JoinGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(JoinGrid, dataRecord);
+      }
+    }
 
-		// Sets the row stored values.
-		private void SetStoredValues(LJCGridRow row, ViewJoin dataRecord)
-		{
-			row.LJCSetInt32(ViewJoin.ColumnID, dataRecord.ID);
-			row.LJCSetString(ViewJoin.ColumnTableName, dataRecord.JoinTableName);
-		}
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row, ViewJoin dataRecord)
+    {
+      row.LJCSetInt32(ViewJoin.ColumnID, dataRecord.ID);
+      row.LJCSetString(ViewJoin.ColumnTableName, dataRecord.JoinTableName);
+    }
 
-		// Selects a row based on the key record values.
-		private void RowSelect(ViewJoin record)
-		{
-			if (record != null)
-			{
-				Parent.Cursor = Cursors.WaitCursor;
-				foreach (LJCGridRow row in JoinGrid.Rows)
-				{
-					var rowID = row.LJCGetInt32(ViewJoin.ColumnID);
-					if (rowID == record.ID)
-					{
-						JoinGrid.LJCSetCurrentRow(row, true);
-						break;
-					}
-				}
-				Parent.Cursor = Cursors.Default;
-			}
-		}
-		#endregion
+    // Selects a row based on the key record values.
+    private bool RowSelect(ViewJoin record)
+    {
+      bool retValue = false;
+      if (record != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in JoinGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewJoin.ColumnID);
+          if (rowID == record.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            JoinGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+    #endregion
 
-		#region Action Methods
+    #region Action Methods
 
-		// Displays a detail dialog for a new record.
-		internal void DoNew()
-		{
-			if (ViewGrid.CurrentRow is LJCGridRow parentRow)
-			{
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (ViewGrid.CurrentRow is LJCGridRow parentRow)
+      {
         // Data from list items.
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
-				string parentName = parentRow.LJCGetString(ViewData.ColumnName);
+        string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-				var grid = JoinGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				var detail = new ViewJoinDetail
-				{
-					LJCParentID = parentID,
-					LJCParentName = parentName,
-					LJCLocation = location
-				};
-				detail.LJCChange += JoinDetail_Change;
-				detail.ShowDialog();
-			}
-		}
+        var grid = JoinGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewJoinDetail
+        {
+          LJCLocation = location,
+          LJCParentID = parentID,
+          LJCParentName = parentName
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
 
-		// Displays a detail dialog to edit an existing record.
-		internal void DoEdit()
-		{
-			if (ViewGrid.CurrentRow is LJCGridRow parentRow
-				&& JoinGrid.CurrentRow is LJCGridRow row)
-			{
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (ViewGrid.CurrentRow is LJCGridRow parentRow
+        && JoinGrid.CurrentRow is LJCGridRow row)
+      {
         // Data from list items.
         int id = row.LJCGetInt32(ViewJoin.ColumnID);
-				int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
-				string parentName = parentRow.LJCGetString(ViewData.ColumnName);
+        int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
+        string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
-				var grid = JoinGrid;
-				var location = FormCommon.GetDialogScreenPoint(grid);
-				var detail = new ViewJoinDetail()
-				{
-					LJCID = id,
-					LJCParentID = parentID,
-					LJCParentName = parentName,
-					LJCLocation = location
-				};
-				detail.LJCChange += JoinDetail_Change;
-				detail.ShowDialog();
-			}
-		}
+        var grid = JoinGrid;
+        var location = FormCommon.GetDialogScreenPoint(grid);
+        var detail = new ViewJoinDetail()
+        {
+          LJCLocation = location,
+          LJCID = id,
+          LJCParentID = parentID,
+          LJCParentName = parentName
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
 
-		// Deletes the selected row.
-		internal void DoDelete()
-		{
-			if (JoinGrid.CurrentRow is LJCGridRow row)
-			{
-				var title = "Delete Confirmation";
-				var message = FormCommon.DeleteConfirm;
-				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-					, MessageBoxIcon.Question) == DialogResult.Yes)
-				{
-					var keyColumns = new DbColumns()
-					{
-						{ ViewJoin.ColumnID, row.LJCGetInt32(ViewJoin.ColumnID) }
-					};
-					mViewJoinManager.Delete(keyColumns);
-					if (mViewJoinManager.AffectedCount < 1)
-					{
-						message = FormCommon.DeleteError;
-						MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-							, MessageBoxIcon.Exclamation);
-					}
-					else
-					{
-						JoinGrid.Rows.Remove(row);
-						Parent.TimedChange(ViewEditorList.Change.Join);
-					}
-				}
-			}
-		}
+    // Deletes the selected row.
+    internal void DoDelete()
+    {
+      if (JoinGrid.CurrentRow is LJCGridRow row)
+      {
+        bool success = false;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
 
-		// Refreshes the list.
-		internal void DoRefresh()
-		{
-			int id = 0;
-			if (JoinGrid.CurrentRow is LJCGridRow row)
-			{
-				id = row.LJCGetInt32(ViewJoin.ColumnID);
-			}
-			DataRetrieve();
+        if (success)
+        {
+          // Data from items.
+          var id = row.LJCGetInt32(ViewJoin.ColumnID);
 
-			// Select the original row.
-			if (id > 0)
-			{
-				var record = new ViewJoin()
-				{
-					ID = id
-				};
-				RowSelect(record);
-			}
-		}
+          var keyColumns = new DbColumns()
+          {
+            { ViewJoin.ColumnID, id }
+          };
+          mViewJoinManager.Delete(keyColumns);
+          if (mViewJoinManager.AffectedCount < 1)
+          {
+            success = false;
+            message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+          }
+        }
+
+        if (success)
+        {
+          JoinGrid.Rows.Remove(row);
+          EditList.TimedChange(Change.Join);
+        }
+      }
+    }
+
+    // Refreshes the list.
+    internal void DoRefresh()
+    {
+      EditList.Cursor = Cursors.WaitCursor;
+      int id = 0;
+      if (JoinGrid.CurrentRow is LJCGridRow row)
+      {
+        // Save the original row.
+        id = row.LJCGetInt32(ViewJoin.ColumnID);
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (id > 0)
+      {
+        var record = new ViewJoin()
+        {
+          ID = id
+        };
+        RowSelect(record);
+      }
+      EditList.Cursor = Cursors.Default;
+    }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    private void JoinDetail_Change(object sender, EventArgs e)
+    private void Detail_Change(object sender, EventArgs e)
     {
       var detail = sender as ViewJoinDetail;
       var record = detail.LJCRecord;
@@ -242,47 +263,52 @@ namespace LJCViewEditor
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
         var row = RowAdd(record);
         JoinGrid.LJCSetCurrentRow(row, true);
-        Parent.TimedChange(ViewEditorList.Change.Join);
+        EditList.TimedChange(Change.Join);
       }
     }
     #endregion
 
     #region Setup Methods
 
-    // Configures the View Join Grid.
-    private void SetupGridJoin()
-		{
-			if (0 == JoinGrid.Columns.Count)
-			{
-				List<string> propertyNames = new List<string> {
-					ViewJoin.PropertyTableName,
-					ViewJoin.ColumnJoinType,
-					ViewJoin.ColumnTableAlias
-				};
+    // Configures the ViewJoin Grid.
+    private void SetupGrid()
+    {
+      if (0 == JoinGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string> {
+          ViewJoin.PropertyTableName,
+          ViewJoin.ColumnJoinType,
+          ViewJoin.ColumnTableAlias
+        };
 
-				// Get the grid columns from the manager Data Definition.
-				var joinGridColumns
-					= mViewJoinManager.GetColumns(propertyNames);
+        // Get the grid columns from the manager Data Definition.
+        var gridColumns
+          = mViewJoinManager.GetColumns(propertyNames);
 
-				// Setup the grid columns.
-				JoinGrid.LJCAddColumns(joinGridColumns);
-			}
-		}
+        // Setup the grid columns.
+        JoinGrid.LJCAddColumns(gridColumns);
+      }
+    }
     #endregion
 
     #region Properties
 
-    internal ManagersDbView Managers { get; set; }
+    // Gets or sets the Parent List reference.
+    private ViewEditorList EditList { get; set; }
 
+    // Gets or sets the JoinGrid reference.
     private LJCDataGrid JoinGrid { get; set; }
 
+    // Gets or sets the Managers reference.
+    internal ManagersDbView Managers { get; set; }
+
+    // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
     #endregion
 
     #region Class Data
 
     private ViewJoinManager mViewJoinManager;
-    private readonly ViewEditorList Parent;
     #endregion
   }
 }
