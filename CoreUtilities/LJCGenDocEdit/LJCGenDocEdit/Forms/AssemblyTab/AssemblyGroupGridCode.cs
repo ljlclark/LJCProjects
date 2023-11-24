@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The AssemblyGroup grid code.</summary>
+  // Provides AssemblyGroupGrid methods for the DocLibDALList window.
   internal class AssemblyGroupGridCode
   {
     #region Constructors
@@ -23,10 +23,12 @@ namespace LJCGenDocEdit
     internal AssemblyGroupGridCode(LJCGenDocList parentList)
     {
       // Initialize property values.
+      parentList.Cursor = Cursors.WaitCursor;
       DocList = parentList;
       mAssemblyGroupGrid = DocList.AssemblyGroupGrid;
       Managers = DocList.Managers;
       DocAssemblyGroupManager = Managers.DocAssemblyGroupManager;
+      DocList.Cursor = Cursors.Default;
     }
     #endregion
 
@@ -165,12 +167,12 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyColumns = new DbColumns()
         {
           { DocAssemblyGroup.ColumnID, AssemblyGroupID() }
         };
         var manager = DocAssemblyGroupManager;
-        manager.Delete(keyRecord);
+        manager.Delete(keyColumns);
         if (0 == manager.Manager.AffectedCount)
         {
           success = false;
@@ -193,15 +195,15 @@ namespace LJCGenDocEdit
       DocList.Cursor = Cursors.WaitCursor;
 
       // Save the original row.
-      var assemblyGroupID = AssemblyGroupID();
+      var id = AssemblyGroupID();
       DataRetrieve();
 
       // Select the original row.
-      if (assemblyGroupID > 0)
+      if (id > 0)
       {
         var dataRecord = new DocAssemblyGroup()
         {
-          ID = assemblyGroupID
+          ID = id
         };
         RowSelect(dataRecord);
       }
