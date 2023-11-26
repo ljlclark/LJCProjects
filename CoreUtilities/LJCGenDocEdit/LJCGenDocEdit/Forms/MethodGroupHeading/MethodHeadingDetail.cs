@@ -129,7 +129,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.DocMethodGroupHeadingManager;
+      var manager = LJCManagers.DocMethodGroupHeadingManager;
       //var lookupRecord = manager.RetrieveWithUnique(LJCRecord.Name);
       //if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       //{
@@ -228,7 +228,7 @@ namespace LJCGenDocEdit
 
       if (id > 0)
       {
-        var manager = Managers.DocMethodGroupHeadingManager;
+        var manager = LJCManagers.DocMethodGroupHeadingManager;
         retValue = manager.RetrieveWithID(id);
       }
       return retValue;
@@ -415,7 +415,7 @@ namespace LJCGenDocEdit
     internal DocMethodGroupHeading LJCRecord { get; private set; }
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersDocGen LJCManagers { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
