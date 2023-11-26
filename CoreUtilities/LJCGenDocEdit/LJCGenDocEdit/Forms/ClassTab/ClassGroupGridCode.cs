@@ -19,25 +19,25 @@ namespace LJCGenDocEdit
   {
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
+    // Initializes an object instance.
     internal ClassGroupGridCode(LJCGenDocList parentList)
     {
-      mDocList = parentList;
-      AssemblyGrid = mDocList.AssemblyItemGrid;
-      ClassGroupGrid = mDocList.ClassGroupGrid;
-      Managers = mDocList.Managers;
+      DocList = parentList;
+      AssemblyGrid = DocList.AssemblyItemGrid;
+      ClassGroupGrid = DocList.ClassGroupGrid;
+      Managers = DocList.Managers;
     }
     #endregion
 
     #region Data Methods
 
-    /// <summary>Retrieves the list rows.</summary>
+    // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      mDocList.Cursor = Cursors.WaitCursor;
+      DocList.Cursor = Cursors.WaitCursor;
       ClassGroupGrid.LJCRowsClear();
 
-      if (mDocList.AssemblyItemGrid.CurrentRow is LJCGridRow _)
+      if (DocList.AssemblyItemGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
@@ -58,34 +58,9 @@ namespace LJCGenDocEdit
             RowAddValues(dbRow.Values);
           }
         }
-        mDocList.Cursor = Cursors.Default;
-        mDocList.DoChange(Change.ClassGroup);
       }
-      mDocList.Cursor = Cursors.Default;
-    }
-
-    // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../../../LJCGenDoc/Common/List.xml'/>
-    internal bool RowSelect(DocClassGroup dataRecord)
-    {
-      bool retValue = false;
-
-      if (dataRecord != null)
-      {
-        mDocList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ClassGroupGrid.Rows)
-        {
-          if (ClassGroupID(row) == dataRecord.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ClassGroupGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-        mDocList.Cursor = Cursors.Default;
-      }
-      return retValue;
+      DocList.Cursor = Cursors.Default;
+      DocList.DoChange(Change.ClassGroup);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -101,10 +76,35 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
       var retValue = ClassGroupGrid.LJCRowAdd();
+
       var columnName = DocClassGroup.ColumnID;
-      retValue.LJCSetInt32(columnName, dbValues.LJCGetInt32(columnName));
+      var id = dbValues.LJCGetInt32(columnName);
+      retValue.LJCSetInt32(columnName, id);
 
       retValue.LJCSetValues(ClassGroupGrid, dbValues);
+      return retValue;
+    }
+
+    // Selects a row based on the key record values.
+    private bool RowSelect(DocClassGroup dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        DocList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in ClassGroupGrid.Rows)
+        {
+          if (ClassGroupID(row) == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ClassGroupGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        DocList.Cursor = Cursors.Default;
+      }
       return retValue;
     }
 
@@ -127,7 +127,7 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    /// <summary>Displays a detail dialog for a new record.</summary>
+    // Displays a detail dialog for a new record.
     internal void DoNew()
     {
       if (AssemblyGrid.CurrentRow is LJCGridRow _)
@@ -135,15 +135,15 @@ namespace LJCGenDocEdit
         var detail = new ClassGroupDetail()
         {
           LJCAssemblyID = DocAssemblyID(),
-          Managers = Managers,
-          Sequence = ClassGroupGrid.Rows.Count + 1
+          LJCManagers = Managers,
+          LJCSequence = ClassGroupGrid.Rows.Count + 1
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
 
-    /// <summary>Displays a detail dialog to edit an existing record.</summary>
+    // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
       if (AssemblyGrid.CurrentRow is LJCGridRow _
@@ -153,14 +153,14 @@ namespace LJCGenDocEdit
         {
           LJCAssemblyID = DocAssemblyID(),
           LJCGroupID = ClassGroupID(),
-          Managers = Managers
+          LJCManagers = Managers
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
 
-    /// <summary>Deletes the selected row.</summary>
+    // Deletes the selected row.
     internal void DoDelete()
     {
       bool success = false;
@@ -198,14 +198,14 @@ namespace LJCGenDocEdit
       if (success)
       {
         ClassGroupGrid.Rows.Remove(classGroupRow);
-        mDocList.TimedChange(Change.ClassGroup);
+        DocList.TimedChange(Change.ClassGroup);
       }
     }
 
-    /// <summary>Refreshes the list.</summary> 
+    // Refreshes the list. 
     internal void DoRefresh()
     {
-      mDocList.Cursor = Cursors.WaitCursor;
+      DocList.Cursor = Cursors.WaitCursor;
 
       // Save the original row.
       var id = ClassGroupID();
@@ -220,10 +220,10 @@ namespace LJCGenDocEdit
         };
         RowSelect(dataRecord);
       }
-      mDocList.Cursor = Cursors.Default;
+      DocList.Cursor = Cursors.Default;
     }
 
-    /// <summary>Resets the Sequence column values.</summary>
+    // Resets the Sequence column values.
     internal void DoResetSequence()
     {
       var procedure = true;
@@ -259,10 +259,11 @@ namespace LJCGenDocEdit
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          RowAdd(dataRecord);
+          var row = RowAdd(dataRecord);
+          ClassGroupGrid.LJCSetCurrentRow(row, true);
           CheckPreviousAndNext(detail);
           DoRefresh();
-          mDocList.TimedChange(Change.ClassGroup);
+          DocList.TimedChange(Change.ClassGroup);
         }
       }
     }
@@ -271,7 +272,6 @@ namespace LJCGenDocEdit
     #region Other Methods
 
     // The DragDrop method.
-    /// <include path='items/DoDragDrop/*' file='../../Doc/ClassGroupGridCode.xml'/>
     internal void DoDragDrop(short assemblyID, DragEventArgs e)
     {
       var sourceRow = e.Data.GetData(typeof(LJCGridRow)) as LJCGridRow;
@@ -299,8 +299,11 @@ namespace LJCGenDocEdit
         }
       }
     }
+    #endregion
 
-    /// <summary>Setup the grid columns.</summary>
+    #region Setup Methods
+
+    // Setup the grid columns.
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -322,6 +325,9 @@ namespace LJCGenDocEdit
         ClassGroupGrid.LJCDragDataName = "DocClassGroup";
       }
     }
+    #endregion
+
+    #region Get Data Methods
 
     // Retrieves the AssemblyItem name.
     private string ClassGroupHeadingName(short classGroupID)
@@ -436,7 +442,7 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the GridColumns value.</summary>
+    // Gets or sets the GridColumns value.
     internal DbColumns GridColumns { get; set; }
 
     // Gets or sets the Assembly Grid reference.
@@ -445,13 +451,11 @@ namespace LJCGenDocEdit
     // Gets or sets the ClassGroup Grid reference.
     private LJCDataGrid ClassGroupGrid { get; set; }
 
+    // Gets or sets the Parent List reference.
+    private LJCGenDocList DocList { get; set; }
+
     // The Managers object.
     private ManagersDocGen Managers { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private readonly LJCGenDocList mDocList;
     #endregion
   }
 }

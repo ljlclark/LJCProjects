@@ -91,9 +91,9 @@ namespace LJCGenDocEdit
         // Set default values.
         LJCRecord = new DocClass();
         SequenceText.Text = "1";
-        if (Sequence > 0)
+        if (LJCSequence > 0)
         {
-          SequenceText.Text = Sequence.ToString();
+          SequenceText.Text = LJCSequence.ToString();
         }
         ActiveCheckbox.Checked = true;
       }
@@ -150,7 +150,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.DocClassManager;
+      var manager = LJCManagers.DocClassManager;
       var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocAssemblyID
         , LJCRecord.Name);
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
@@ -268,7 +268,7 @@ namespace LJCGenDocEdit
 
       if (classGroupID > 0)
       {
-        var manager = Managers.DocClassGroupManager;
+        var manager = LJCManagers.DocClassGroupManager;
         retValue = manager.RetrieveWithID(classGroupID);
       }
       return retValue;
@@ -294,7 +294,7 @@ namespace LJCGenDocEdit
 
       if (docAssemblyID > 0)
       {
-        var manager = Managers.DocAssemblyManager;
+        var manager = LJCManagers.DocAssemblyManager;
         retValue = manager.RetrieveWithID(docAssemblyID);
       }
       return retValue;
@@ -307,7 +307,7 @@ namespace LJCGenDocEdit
 
       if (docClassID > 0)
       {
-        var manager = Managers.DocClassManager;
+        var manager = LJCManagers.DocClassManager;
         retValue = manager.RetrieveWithID(docClassID);
       }
       return retValue;
@@ -566,10 +566,10 @@ namespace LJCGenDocEdit
     internal DocClass LJCRecord { get; private set; }
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersDocGen LJCManagers { get; set; }
 
     /// <summary>Gets or sets the next sequence value.</summary>
-    internal int Sequence { get; set; }
+    internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }

@@ -10,33 +10,41 @@ using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The Method grid code.</summary>
+  // Provides Method Grid methods for the MethodSelect window.
   internal class MethodGridCode
   {
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
+    // Initializes an object instance.
     internal MethodGridCode(MethodSelect parentList)
     {
-      mMethodSelect = parentList;
-      mMethodGrid = mMethodSelect.MethodGrid;
-      Managers = mMethodSelect.Managers;
+      MethodSelect = parentList;
+      MethodGrid = MethodSelect.MethodGrid;
+      Managers = MethodSelect.Managers;
     }
     #endregion
 
     #region Data Methods
 
-    /// <summary>Retrieves the list rows.</summary>
+    // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      mMethodSelect.Cursor = Cursors.WaitCursor;
-      mMethodGrid.LJCRowsClear();
+      MethodSelect.Cursor = Cursors.WaitCursor;
+      MethodGrid.LJCRowsClear();
 
+      var success = true;
       var docClass = GetClass(LJCClassID);
       var docAssembly = GetAssembly(docClass.DocAssemblyID);
       var assemblyGroup
         = GetAssemblyGroup(docAssembly.DocAssemblyGroupID);
-      if (assemblyGroup != null)
+      if (null == assemblyGroup
+        || null == docAssembly)
+      {
+        success = false;
+      }
+
+      DataAssembly dataAssembly = null;
+      if (success)
       {
         var assemblyGroups = new DocAssemblyGroups
         {
@@ -47,51 +55,56 @@ namespace LJCGenDocEdit
         // "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
 
-        if (docAssembly != null)
+        var dataAssemblies = dataRoot.DataAssemblies;
+        dataAssembly = dataAssemblies.LJCSearchUnique(docAssembly.Name);
+        if (null == dataAssembly)
         {
-          var dataAssemblies = dataRoot.DataAssemblies;
-          var dataAssembly = dataAssemblies.LJCSearchUnique(docAssembly.Name);
-          if (dataAssembly != null)
-          {
-            var dataTypes = dataAssembly.DataTypes;
-            var dataType = dataTypes.Find(x => x.Name == docClass.Name);
-            // *** Next Statement *** Add - 10/30/23
-            if (dataType != null)
-            {
-              mDataMethods = dataType.DataMethods;
-              foreach (var dataMethod in mDataMethods)
-              {
-                if (NetString.HasValue(dataMethod.Summary))
-                {
-                  dataMethod.Summary = dataMethod.Summary.Trim();
-                }
-                RowAdd(dataMethod);
-              }
-            }
-          }
+          success = false;
         }
       }
-      mMethodSelect.Cursor = Cursors.Default;
+
+      DataType dataType = null;
+      if (success)
+      {
+        var dataTypes = dataAssembly.DataTypes;
+        dataType = dataTypes.Find(x => x.Name == docClass.Name);
+        if (null == dataType)
+        {
+          success = false;
+        }
+      }
+
+      if (success)
+      {
+        mDataMethods = dataType.DataMethods;
+        foreach (var dataMethod in mDataMethods)
+        {
+          if (NetString.HasValue(dataMethod.Summary))
+          {
+            dataMethod.Summary = dataMethod.Summary.Trim();
+          }
+          RowAdd(dataMethod);
+        }
+      }
+      MethodSelect.Cursor = Cursors.Default;
     }
 
     // Selects a row based on the key record values.
-    /// <include path='items/RowSelect/*' file='../../../../LJCGenDoc/Common/List.xml'/>
     internal bool RowSelect(DataMethod dataRecord)
     {
       bool retValue = false;
 
       if (dataRecord != null)
       {
-        mMethodSelect.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in mMethodGrid.Rows)
+        MethodSelect.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in MethodGrid.Rows)
         {
-          // *** Begin *** Change - 7/9/23 #Overload
           if (dataRecord.OverloadName != null)
           {
             if (DocMethodOverload(row) == dataRecord.OverloadName)
             {
               // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-              mMethodGrid.LJCSetCurrentRow(row, true);
+              MethodGrid.LJCSetCurrentRow(row, true);
               retValue = true;
               break;
             }
@@ -101,14 +114,13 @@ namespace LJCGenDocEdit
             if (DocMethodName(row) == dataRecord.Name)
             {
               // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-              mMethodGrid.LJCSetCurrentRow(row, true);
+              MethodGrid.LJCSetCurrentRow(row, true);
               retValue = true;
               break;
             }
           }
-          // *** End   *** Change - 7/9/23 #Overload
         }
-        mMethodSelect.Cursor = Cursors.Default;
+        MethodSelect.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -116,9 +128,9 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DataMethod dataRecord)
     {
-      var retValue = mMethodGrid.LJCRowAdd();
+      var retValue = MethodGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(mMethodGrid, dataRecord);
+      retValue.LJCSetValues(MethodGrid, dataRecord);
       return retValue;
     }
 
@@ -132,13 +144,12 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    /// <summary>Sets the selected item and returns to the parent form.</summary>
+    // Sets the selected item and returns to the parent form.
     internal void DoSelect()
     {
-      var selectList = mMethodSelect;
+      var selectList = MethodSelect;
       selectList.LJCSelectedRecord = null;
-      // *** Begin *** Change - MultiSelect 10/29/23
-      var rows = mMethodGrid.SelectedRows;
+      var rows = MethodGrid.SelectedRows;
       var startIndex = rows.Count - 1;
       for (var index = startIndex; index >= 0; index--)
       {
@@ -168,20 +179,75 @@ namespace LJCGenDocEdit
       }
       DoResetSequence();
       selectList.Cursor = Cursors.Default;
-      // *** End   *** Change - MultiSelect 10/29/23
       selectList.DialogResult = DialogResult.OK;
     }
 
-    /// <summary>Resets the Sequence column values.</summary>
+    // Resets the Sequence column values.
     internal void DoResetSequence()
     {
       var manager = Managers.DocMethodManager;
-      manager.MethodGroupID = mMethodSelect.LJCGroupID;
+      manager.MethodGroupID = MethodSelect.LJCGroupID;
       manager.ResetSequence();
     }
     #endregion
 
+    #region Setup Methods
+
+    // Setup the grid columns.
+    internal void SetupGrid()
+    {
+      MethodGrid.MultiSelect = true;
+
+      // Setup default grid columns if no columns are defined.
+      if (0 == MethodGrid.Columns.Count)
+      {
+        GridColumns = new DbColumns()
+        {
+          { "Name" },
+          { "OverloadName" },
+          { "Summary" }
+        };
+
+        // Setup the grid columns.
+        MethodGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(MethodGrid);
+      }
+    }
+    #endregion
+
     #region Get Data Methods
+
+    // Retrieves the current row item Name.
+    private string DocMethodName(LJCGridRow docMethodRow = null)
+    {
+      string retValue = null;
+
+      if (null == docMethodRow)
+      {
+        docMethodRow = MethodGrid.CurrentRow as LJCGridRow;
+      }
+      if (docMethodRow != null)
+      {
+        retValue = docMethodRow.LJCGetString("Name");
+      }
+      return retValue;
+    }
+
+    // Retrieves the current row item Name.
+    private string DocMethodOverload(LJCGridRow docMethodRow = null)
+    {
+      string retValue = null;
+
+      if (null == docMethodRow)
+      {
+        docMethodRow = MethodGrid.CurrentRow as LJCGridRow;
+      }
+      if (docMethodRow != null)
+      {
+        retValue = docMethodRow.LJCGetString("OverloadName");
+      }
+      return retValue;
+    }
 
     // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetAssembly(short assemblyID)
@@ -223,79 +289,26 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Other Methods
-
-    /// <summary>Setup the grid columns.</summary>
-    internal void SetupGrid()
-    {
-      mMethodGrid.MultiSelect = true;
-
-      // Setup default grid columns if no columns are defined.
-      if (0 == mMethodGrid.Columns.Count)
-      {
-        GridColumns = new DbColumns()
-        {
-          { "Name" },
-          { "OverloadName" },
-          { "Summary" }
-        };
-
-        // Setup the grid columns.
-        mMethodGrid.LJCAddColumns(GridColumns);
-        FormCommon.NotSortable(mMethodGrid);
-      }
-    }
-
-    // Retrieves the current row item Name.
-    // *** New Method *** 9/26/23 #Overload
-    private string DocMethodName(LJCGridRow docMethodRow = null)
-    {
-      string retValue = null;
-
-      if (null == docMethodRow)
-      {
-        docMethodRow = mMethodGrid.CurrentRow as LJCGridRow;
-      }
-      if (docMethodRow != null)
-      {
-        retValue = docMethodRow.LJCGetString("Name");
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item Name.
-    private string DocMethodOverload(LJCGridRow docMethodRow = null)
-    {
-      string retValue = null;
-
-      if (null == docMethodRow)
-      {
-        docMethodRow = mMethodGrid.CurrentRow as LJCGridRow;
-      }
-      if (docMethodRow != null)
-      {
-        retValue = docMethodRow.LJCGetString("OverloadName");
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Properties
 
-    /// <summary>Gets or sets the Class ID value.</summary>
+    // Gets or sets the Class ID value.
     internal short LJCClassID { get; set; }
 
-    /// <summary>Gets or sets the GridColumns value.</summary>
+    // Gets or sets the GridColumns value.
     internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }
+
+    // Gets or sets the Method Grid reference.
+    private LJCDataGrid MethodGrid { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private MethodSelect MethodSelect { get; set; }
     #endregion
 
     #region Class Data
 
-    private readonly LJCDataGrid mMethodGrid;
-    private readonly MethodSelect mMethodSelect;
     private DataMethods mDataMethods;
     #endregion
   }

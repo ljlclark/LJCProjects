@@ -11,32 +11,40 @@ using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The Class grid code.</summary>
+  // Provides Class Grid methods for the ClassSelect window.
   internal class ClassGridCode
   {
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
+    // Initializes an object instance.
     internal ClassGridCode(ClassSelect parentList)
     {
-      mClassSelect = parentList;
-      mClassGrid = mClassSelect.ClassGrid;
-      Managers = mClassSelect.Managers;
+      ClassSelect = parentList;
+      ClassGrid = ClassSelect.ClassGrid;
+      Managers = ClassSelect.Managers;
     }
     #endregion
 
     #region Data Methods
 
-    /// <summary>Retrieves the list rows.</summary>
+    // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      mClassSelect.Cursor = Cursors.WaitCursor;
-      mClassGrid.LJCRowsClear();
+      ClassSelect.Cursor = Cursors.WaitCursor;
+      ClassGrid.LJCRowsClear();
 
+      var success = true;
       var docAssembly = GetAssembly(LJCAssemblyID);
       var assemblyGroup
         = GetAssemblyGroup(docAssembly.DocAssemblyGroupID);
-      if (assemblyGroup != null)
+      if (null == assemblyGroup
+        || null == docAssembly)
+      {
+        success = false;
+      }
+
+      DataAssembly dataAssembly = null;
+      if (success)
       {
         var assemblyGroups = new DocAssemblyGroups
         {
@@ -47,34 +55,35 @@ namespace LJCGenDocEdit
         // "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
 
-        if (docAssembly != null)
+        var dataAssemblies = dataRoot.DataAssemblies;
+        dataAssembly = dataAssemblies.LJCSearchUnique(docAssembly.Name);
+        if (null == dataAssembly)
         {
-          var dataAssemblies = dataRoot.DataAssemblies;
-          var dataAssembly = dataAssemblies.LJCSearchUnique(docAssembly.Name);
-          if (dataAssembly != null)
-          {
-            mDataTypes = dataAssembly.DataTypes;
-            foreach (var dataType in mDataTypes)
-            {
-              // *** Next Statement *** Add - 10/30/23
-              if (dataType.Summary != null)
-              {
-                dataType.Summary = dataType.Summary.Trim();
-              }
-              RowAdd(dataType);
-            }
-          }
+          success = false;
         }
       }
-      mClassSelect.Cursor = Cursors.Default;
+
+      if (success)
+      {
+        mDataTypes = dataAssembly.DataTypes;
+        foreach (var dataType in mDataTypes)
+        {
+          if (dataType.Summary != null)
+          {
+            dataType.Summary = dataType.Summary.Trim();
+          }
+          RowAdd(dataType);
+        }
+      }
+      ClassSelect.Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DataType dataRecord)
     {
-      var retValue = mClassGrid.LJCRowAdd();
+      var retValue = ClassGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(mClassGrid, dataRecord);
+      retValue.LJCSetValues(ClassGrid, dataRecord);
       return retValue;
     }
 
@@ -87,13 +96,12 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    /// <summary>Sets the selected item and returns to the parent form.</summary>
+    // Sets the selected item and returns to the parent form.
     internal void DoSelect()
     {
-      var selectList = mClassSelect;
-      mClassSelect.LJCSelectedRecord = null;
-      // *** Begin *** Change - MultiSelect 10/29/23
-      var rows = mClassGrid.SelectedRows;
+      var selectList = ClassSelect;
+      ClassSelect.LJCSelectedRecord = null;
+      var rows = ClassGrid.SelectedRows;
       var startIndex = rows.Count - 1;
       for (var index = startIndex; index >= 0; index--)
       {
@@ -114,20 +122,58 @@ namespace LJCGenDocEdit
       }
       DoResetSequence();
       selectList.Cursor = Cursors.Default;
-      // *** End   *** Change - MultiSelect 10/29/23
       selectList.DialogResult = DialogResult.OK;
     }
 
-    /// <summary>Resets the Sequence column values.</summary>
+    // Resets the Sequence column values.
     internal void DoResetSequence()
     {
       var manager = Managers.DocClassManager;
-      manager.ClassGroupID = mClassSelect.LJCGroupID;
+      manager.ClassGroupID = ClassSelect.LJCGroupID;
       manager.ResetSequence();
     }
     #endregion
 
+    #region Setup Methods
+
+    // Setup the grid columns.
+    internal void SetupGrid()
+    {
+      ClassGrid.MultiSelect = true;
+
+      // Setup default grid columns if no columns are defined.
+      if (0 == ClassGrid.Columns.Count)
+      {
+        GridColumns = new DbColumns()
+        {
+          { "Name" },
+          { "Summary" }
+        };
+
+        // Setup the grid columns.
+        ClassGrid.LJCAddColumns(GridColumns);
+        FormCommon.NotSortable(ClassGrid);
+      }
+    }
+    #endregion
+
     #region Get Data Methods
+
+    // Retrieves the current row item Name.
+    internal string ClassName(LJCGridRow classRow = null)
+    {
+      string retValue = null;
+
+      if (null == classRow)
+      {
+        classRow = ClassGrid.CurrentRow as LJCGridRow;
+      }
+      if (classRow != null)
+      {
+        retValue = classRow.LJCGetString("Name");
+      }
+      return retValue;
+    }
 
     // Retrieves the AssemblyItem with the ID value.
     private DocAssembly GetAssembly(short docAssemblyID)
@@ -156,53 +202,19 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Other Methods
-
-    // Retrieves the current row item Name.
-    /// <include path='items/ClassName/*' file='../../Doc/ClassGridCode.xml'/>
-    internal string ClassName(LJCGridRow classRow = null)
-    {
-      string retValue = null;
-
-      if (null == classRow)
-      {
-        classRow = mClassGrid.CurrentRow as LJCGridRow;
-      }
-      if (classRow != null)
-      {
-        retValue = classRow.LJCGetString("Name");
-      }
-      return retValue;
-    }
-
-    /// <summary>Setup the grid columns.</summary>
-    internal void SetupGrid()
-    {
-      mClassGrid.MultiSelect = true;
-
-      // Setup default grid columns if no columns are defined.
-      if (0 == mClassGrid.Columns.Count)
-      {
-        GridColumns = new DbColumns()
-        {
-          { "Name" },
-          { "Summary" }
-        };
-
-        // Setup the grid columns.
-        mClassGrid.LJCAddColumns(GridColumns);
-        FormCommon.NotSortable(mClassGrid);
-      }
-    }
-    #endregion
-
     #region Properties
 
-    /// <summary>Gets or sets the Assembly ID value.</summary>
+    // Gets or sets the Assembly ID value.
     internal short LJCAssemblyID { get; set; }
 
-    /// <summary>Gets or sets the GridColumns value.</summary>
-    internal DbColumns GridColumns { get; set; }
+    // Gets or sets the GridColumns value.
+    private DbColumns GridColumns { get; set; }
+
+    // Gets or sets the Class Grid reference.
+    private LJCDataGrid ClassGrid { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private ClassSelect ClassSelect { get; set; }
 
     // The Managers object.
     private ManagersDocGen Managers { get; set; }
@@ -210,8 +222,6 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    private readonly LJCDataGrid mClassGrid;
-    private readonly ClassSelect mClassSelect;
     private List<DataType> mDataTypes;
     #endregion
   }

@@ -245,9 +245,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\ConnectionTemplates.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
-    <Content Include="Doc\AssemblyGroupGridCode.xml" />
     <Content Include="Doc\AssemblyItemComboCode.xml" />
-    <Content Include="Doc\AssemblyItemGridCode.xml" />
     <Content Include="Doc\ClassGridCode.xml" />
     <Content Include="Doc\ClassGroupGridCode.xml" />
     <Content Include="Doc\ClassHeadingGridCode.xml" />

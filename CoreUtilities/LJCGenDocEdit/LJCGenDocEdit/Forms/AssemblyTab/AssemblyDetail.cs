@@ -86,9 +86,9 @@ namespace LJCGenDocEdit
         // Set default values.
         LJCRecord = new DocAssembly();
         SequenceText.Text = "1";
-        if (Sequence > 0)
+        if (LJCSequence > 0)
         {
-          SequenceText.Text = Sequence.ToString();
+          SequenceText.Text = LJCSequence.ToString();
         }
         ActiveCheckbox.Checked = true;
       }
@@ -153,7 +153,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.DocAssemblyManager;
+      var manager = LJCManagers.DocAssemblyManager;
       var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocAssemblyGroupID
         , LJCRecord.Name);
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
@@ -278,7 +278,7 @@ namespace LJCGenDocEdit
 
       if (assemblyID > 0)
       {
-        var manager = Managers.DocAssemblyManager;
+        var manager = LJCManagers.DocAssemblyManager;
         retValue = manager.RetrieveWithID(LJCAssemblyID);
       }
       return retValue;
@@ -291,7 +291,7 @@ namespace LJCGenDocEdit
 
       if (assemblyGroupID > 0)
       {
-        var manager = Managers.DocAssemblyGroupManager;
+        var manager = LJCManagers.DocAssemblyGroupManager;
         retValue = manager.RetrieveWithID(assemblyGroupID);
       }
       return retValue;
@@ -523,6 +523,9 @@ namespace LJCGenDocEdit
     /// <summary>Gets the LJCIsUpdate value.</summary>
     internal bool LJCIsUpdate { get; private set; }
 
+    /// <summary>The Managers object.</summary>
+    internal ManagersDocGen LJCManagers { get; set; }
+
     /// <summary>Gets or sets the Next flag.</summary>
     internal bool LJCNext { get; set; }
 
@@ -532,11 +535,8 @@ namespace LJCGenDocEdit
     /// <summary>Gets a reference to the record object.</summary>
     internal DocAssembly LJCRecord { get; private set; }
 
-    /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
-
     /// <summary>Gets or sets the next sequence value.</summary>
-    internal int Sequence { get; set; }
+    internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }

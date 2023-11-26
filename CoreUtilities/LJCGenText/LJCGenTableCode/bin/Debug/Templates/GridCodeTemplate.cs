@@ -44,7 +44,7 @@ namespace _Namespace_
     internal void ResetData()
     {
       Managers = _AppName_List.Managers;
-      m_ClassName_Manager = Managers._ClassName_Manager;
+      ClassName_Manager = Managers._ClassName_Manager;
     }
     #endregion
 
@@ -62,7 +62,7 @@ namespace _Namespace_
         // Data from items.
         int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
 
-        var result = m_ClassName_Manager.ResultWithParentID(parentID);
+        var result = ClassName_Manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (var dbRow in result.Rows)
@@ -98,22 +98,6 @@ namespace _Namespace_
       return retValue;
     }
 
-    // Updates the current row with the record values.
-    private void RowUpdate(_ClassName_ dataRecord)
-    {
-      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(_ClassName_Grid, dataRecord);
-      }
-    }
-
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
-    {
-      row.LJCSetInt32(_ClassName_.ColumnID, dataRecord.ID);
-    }
-
     // Selects a row based on the key record values.
     private bool RowSelect(_ClassName_ dataRecord)
     {
@@ -137,6 +121,22 @@ namespace _Namespace_
       }
       return retValue;
     }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(_ClassName_ dataRecord)
+    {
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(_ClassName_Grid, dataRecord);
+      }
+    }
+
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
+    {
+      row.LJCSetInt32(_ClassName_.ColumnID, dataRecord.ID);
+    }
     #endregion
 
     #region Action Methods
@@ -156,6 +156,7 @@ namespace _Namespace_
           LJCHelpFileName = LJCHelpFile,
           LJCHelpPageName = LJCHelpPageDetail,
           LJCLocation = location,
+          LJCManagers = Managers,
           LJCParentID = parentID,
           LJCParentName = parentName,
         };
@@ -182,6 +183,7 @@ namespace _Namespace_
           LJCHelpPageName = LJCHelpPageDetail,
           LJCID = id,
           LJCLocation = location,
+          LJCManagers = Managers,
           LJCParentID = parentID,
           LJCParentName = parentName,
         };
@@ -208,18 +210,15 @@ namespace _Namespace_
 
       if (success)
       {
-        // Data from items.
-        var id = row.LJCGetInt32(_ClassName_.ColumnID);
-
         var keyColumns = new DbColumns()
         {
-          { _ClassName_.ColumnID, id }
+          { _ClassName_.ColumnID, _ClassName_ID }
         };
-        m_ClassName_Manager.Delete(keyColumns);
-        if (0 == m_ClassName_Manager.AffectedCount)
+        ClassName_Manager.Delete(keyColumns);
+        if (0 == ClassName_Manager.AffectedCount)
         {
           success = false;
-          message = FormCommon.DeleteError;
+          var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
         }
@@ -256,26 +255,28 @@ namespace _Namespace_
       _AppName_List.Cursor = Cursors.Default;
     }
 
-    // Adds new row or updates row with changes from the detail dialog.
+    // Adds new row or updates row with
     private void Detail_Change(object sender, EventArgs e)
     {
       var detail = sender as _ClassName_Detail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-        //CheckPreviousAndNext(detail);
-        //DoRefresh();
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        // Delete next statement if Previous and Next is used.
-        _ClassName_Grid.LJCSetCurrentRow(row, true);
-        //CheckPreviousAndNext(detail);
-        //DoRefresh();
-        _AppName_List.TimedChange(Change._ClassName_);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+          //CheckPreviousAndNext(detail);
+          //DoRefresh();
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          _ClassName_Grid.LJCSetCurrentRow(row, true);
+          //CheckPreviousAndNext(detail);
+          //DoRefresh();
+          _AppName_List.TimedChange(Change._ClassName_);
+        }
       }
     }
     #endregion
@@ -285,6 +286,7 @@ namespace _Namespace_
     // Configures the _ClassName_ Grid.
     private void SetupGrid()
     {
+      // Setup default grid columns if no columns are defined.
       if (0 == _ClassName_Grid.Columns.Count)
       {
         List<string> propertyNames = new List<string>()
@@ -294,8 +296,8 @@ namespace _Namespace_
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = m_ClassName_Manager.GetColumns(propertyNames);
+        var manager = ClassName_Manager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         _ClassName_Grid.LJCAddColumns(gridColumns);
@@ -377,9 +379,6 @@ namespace _Namespace_
 
     #region Properties
 
-    // Gets or sets the Managers reference.
-    internal Managers_AppName_ Managers { get; set; }
-
     // Gets or sets the Parent List reference.
     private _AppName_List _AppName_List { get; set; }
 
@@ -410,13 +409,14 @@ namespace _Namespace_
     }
     private string mHelpPageDetail;
 
+    // Gets or sets the Manager reference.
+    private _ClassName_Manager ClassName_Manager { get; set; }
+
+    // Gets or sets the Managers reference.
+    private Managers_AppName_ Managers { get; set; }
+
     // Gets or sets the _ParentName_ Grid reference.
     private LJCDataGrid _ParentName_Grid { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private _ClassName_Manager m_ClassName_Manager;
     #endregion
   }
 }

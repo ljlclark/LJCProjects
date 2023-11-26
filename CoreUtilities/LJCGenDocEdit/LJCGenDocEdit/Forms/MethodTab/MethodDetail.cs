@@ -93,9 +93,9 @@ namespace LJCGenDocEdit
         // Set default values.
         LJCRecord = new DocMethod();
         SequenceText.Text = "1";
-        if (Sequence > 0)
+        if (LJCSequence > 0)
         {
-          SequenceText.Text = Sequence.ToString();
+          SequenceText.Text = LJCSequence.ToString();
         }
         ActiveCheckbox.Checked = true;
       }
@@ -154,7 +154,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.DocMethodManager;
+      var manager = LJCManagers.DocMethodManager;
       // *** Begin *** Change - 9/25/23 #Overload
       DocMethod lookupRecord;
       if (NetString.HasValue(LJCRecord.OverloadName))
@@ -278,7 +278,7 @@ namespace LJCGenDocEdit
 
       if (docClassID > 0)
       {
-        var manager = Managers.DocClassManager;
+        var manager = LJCManagers.DocClassManager;
         retValue = manager.RetrieveWithID(docClassID);
       }
       return retValue;
@@ -291,7 +291,7 @@ namespace LJCGenDocEdit
 
       if (docMethodID > 0)
       {
-        var manager = Managers.DocMethodManager;
+        var manager = LJCManagers.DocMethodManager;
         retValue = manager.RetrieveWithID(LJCMethodID);
       }
       return retValue;
@@ -317,7 +317,7 @@ namespace LJCGenDocEdit
 
       if (methodGroupID > 0)
       {
-        var manager = Managers.DocMethodGroupManager;
+        var manager = LJCManagers.DocMethodGroupManager;
         retValue = manager.RetrieveWithID(LJCGroupID);
       }
       return retValue;
@@ -580,10 +580,10 @@ namespace LJCGenDocEdit
     internal DocMethod LJCRecord { get; private set; }
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersDocGen LJCManagers { get; set; }
 
     /// <summary>Gets or sets the next sequence value.</summary>
-    internal int Sequence { get; set; }
+    internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }

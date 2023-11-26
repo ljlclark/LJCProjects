@@ -89,9 +89,9 @@ namespace LJCGenDocEdit
         // Set default values.
         LJCRecord = new DocClassGroup();
         SequenceText.Text = "1";
-        if (Sequence > 0)
+        if (LJCSequence > 0)
         {
-          SequenceText.Text = Sequence.ToString();
+          SequenceText.Text = LJCSequence.ToString();
         }
         ActiveCheckbox.Checked = true;
         NameText.Select();
@@ -185,7 +185,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var manager = Managers.DocClassGroupManager;
+      var manager = LJCManagers.DocClassGroupManager;
       var lookupRecord = manager.RetrieveWithUnique(LJCRecord.DocAssemblyID
         , LJCRecord.HeadingName);
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
@@ -297,7 +297,7 @@ namespace LJCGenDocEdit
 
       if (groupID > 0)
       {
-        var manager = Managers.DocClassGroupManager;
+        var manager = LJCManagers.DocClassGroupManager;
         retValue = manager.RetrieveWithID(groupID);
       }
       return retValue;
@@ -323,7 +323,7 @@ namespace LJCGenDocEdit
 
       if (assemblyID > 0)
       {
-        var manager = Managers.DocAssemblyManager;
+        var manager = LJCManagers.DocAssemblyManager;
         retValue = manager.RetrieveWithID(assemblyID);
       }
       return retValue;
@@ -577,10 +577,10 @@ namespace LJCGenDocEdit
     internal DocClassGroup LJCRecord { get; private set; }
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersDocGen LJCManagers { get; set; }
 
     /// <summary>Gets or sets the next sequence value.</summary>
-    internal int Sequence { get; set; }
+    internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
