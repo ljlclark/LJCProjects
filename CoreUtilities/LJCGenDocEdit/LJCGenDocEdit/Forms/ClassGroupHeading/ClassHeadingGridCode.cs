@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  // The ClassHeading grid code.
+  // Provides ClassHeadingGrid methods for the ClassHeadingSelect window.
   internal class ClassHeadingGridCode
   {
     #region Constructors
@@ -149,8 +149,8 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
-      var classHeadingRow = ClassHeadingGrid.CurrentRow as LJCGridRow;
-      if (classHeadingRow != null)
+      var row = ClassHeadingGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -180,7 +180,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        ClassHeadingGrid.Rows.Remove(classHeadingRow);
+        ClassHeadingGrid.Rows.Remove(row);
       }
     }
 
@@ -188,11 +188,15 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       ClassHeadingSelect.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = ClassHeadingID();
+      short id = 0;
+      if (ClassHeadingGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = ClassHeadingID();
+      }
       DataRetrieve();
 
+      // Select the original row.
       if (id > 0)
       {
         var dataRecord = new DocClassGroupHeading()
@@ -303,9 +307,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

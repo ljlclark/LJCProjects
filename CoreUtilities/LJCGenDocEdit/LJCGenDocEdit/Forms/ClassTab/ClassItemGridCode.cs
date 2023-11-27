@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  // Provides ClassItemGrid methods for the GenDocList window.
+  // Provides ClassItemGrid methods for the LJCGenDocList window.
   internal class ClassItemGridCode
   {
     #region Constructors
@@ -38,7 +38,7 @@ namespace LJCGenDocEdit
       DocList.Cursor = Cursors.WaitCursor;
       ClassGrid.LJCRowsClear();
 
-      if (DocList.ClassGroupGrid.CurrentRow is LJCGridRow _)
+      if (ClassGroupGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocClassManager;
         var names = new List<string>()
@@ -147,21 +147,26 @@ namespace LJCGenDocEdit
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
-      var detail = new ClassDetail()
+      // Class has to belong to an Assembly.
+      if (AssemblyGrid.CurrentRow is LJCGridRow _)
       {
-        LJCAssemblyID = DocAssemblyID(),
-        LJCGroupID = ClassGroupID(),
-        LJCManagers = Managers,
-        LJCSequence = ClassGrid.Rows.Count + 1
-      };
-      detail.LJCChange += Detail_Change;
-      detail.ShowDialog();
+        var detail = new ClassDetail()
+        {
+          LJCAssemblyID = DocAssemblyID(),
+          LJCGroupID = ClassGroupID(),
+          LJCManagers = Managers,
+          LJCSequence = ClassGrid.Rows.Count + 1
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      if (ClassGrid.CurrentRow is LJCGridRow _)
+      if (AssemblyGrid.CurrentRow is LJCGridRow _
+        && ClassGrid.CurrentRow is LJCGridRow _)
       {
         var detail = new ClassDetail()
         {
@@ -179,9 +184,9 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
-      var classRow = ClassGrid.CurrentRow as LJCGridRow;
+      var row = ClassGrid.CurrentRow as LJCGridRow;
       if (ClassGroupGrid.CurrentRow is LJCGridRow _
-        && classRow != null)
+        && row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -212,7 +217,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        ClassGrid.Rows.Remove(classRow);
+        ClassGrid.Rows.Remove(row);
         DocList.TimedChange(Change.ClassItem);
       }
     }
@@ -221,17 +226,20 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       DocList.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var classID = DocClassID();
+      short id = 0;
+      if (ClassGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = DocClassID();
+      }
       DataRetrieve();
 
       // Select the original row.
-      if (classID > 0)
+      if (id > 0)
       {
         var dataRecord = new DocClass()
         {
-          ID = classID
+          ID = id
         };
         RowSelect(dataRecord);
       }
@@ -303,9 +311,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

@@ -15,6 +15,7 @@ using System.Windows.Forms;
 namespace LJCGenDocEdit
 {
   // The MethodGroup grid code.
+  // Provides MethodGroupGrid methods for the LJCDocList window.
   internal class MethodGroupGridCode
   {
     #region Constructors
@@ -37,6 +38,7 @@ namespace LJCGenDocEdit
       DocList.Cursor = Cursors.WaitCursor;
       MethodGroupGrid.LJCRowsClear();
 
+      // Use Class as parent.
       if (ClassGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocMethodGroupManager;
@@ -130,6 +132,7 @@ namespace LJCGenDocEdit
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
+      // Use Class as parent.
       if (ClassGrid.CurrentRow is LJCGridRow _)
       {
         var detail = new MethodGroupDetail()
@@ -146,6 +149,7 @@ namespace LJCGenDocEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
+      // Use Class as parent.
       if (ClassGrid.CurrentRow is LJCGridRow _
         && MethodGroupGrid.CurrentRow is LJCGridRow _)
       {
@@ -164,8 +168,9 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
+      var row = MethodGroupGrid.CurrentRow;
       if (ClassGrid.CurrentRow is LJCGridRow _
-        && MethodGroupGrid.CurrentRow is LJCGridRow _)
+        && row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -194,10 +199,9 @@ namespace LJCGenDocEdit
         }
       }
 
-      if (success
-        && MethodGroupGrid.CurrentRow is LJCGridRow methodGroupRow)
+      if (success)
       {
-        MethodGroupGrid.Rows.Remove(methodGroupRow);
+        MethodGroupGrid.Rows.Remove(row);
         DocList.TimedChange(Change.MethodGroup);
       }
     }
@@ -206,9 +210,12 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       DocList.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = MethodGroupID();
+      short id = 0;
+      if (MethodGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = MethodGroupID();
+      }
       DataRetrieve();
 
       // Select the original row.
@@ -287,9 +294,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

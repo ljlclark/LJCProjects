@@ -134,14 +134,13 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Setup the grid columns.
     internal void SetupGrid()
     {
-      ClassGrid.MultiSelect = true;
-
       // Setup default grid columns if no columns are defined.
+      ClassGrid.MultiSelect = true;
       if (0 == ClassGrid.Columns.Count)
       {
         GridColumns = new DbColumns()

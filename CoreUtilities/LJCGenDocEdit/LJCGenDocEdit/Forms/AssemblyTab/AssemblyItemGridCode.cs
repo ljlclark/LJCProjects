@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  // Provides AssemblyItemGrid methods for the GenDocEditList window.
+  // Provides AssemblyItemGrid methods for the LJCGenDocList window.
   internal class AssemblyItemGridCode
   {
     #region Constructors
@@ -22,6 +22,7 @@ namespace LJCGenDocEdit
     // Initializes an object instance.
     internal AssemblyItemGridCode(LJCGenDocList parentList)
     {
+      // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
       DocList = parentList;
       AssemblyGrid = DocList.AssemblyItemGrid;
@@ -168,9 +169,9 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
-      var assemblyRow = AssemblyGrid.CurrentRow as LJCGridRow;
+      var row = AssemblyGrid.CurrentRow as LJCGridRow;
       if (AssemblyGroupGrid.CurrentRow is LJCGridRow _
-        && assemblyRow != null)
+        && row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -201,7 +202,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        AssemblyGrid.Rows.Remove(assemblyRow);
+        AssemblyGrid.Rows.Remove(row);
         DocList.TimedChange(Change.AssemblyItem);
       }
     }
@@ -210,11 +211,15 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       DocList.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = AssemblyID();
-
+      short id = 0;
+      if (AssemblyGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = AssemblyID();
+      }
       DataRetrieve();
+
+      // Select the original row.
       if (id > 0)
       {
         var dataRecord = new DocAssembly()
@@ -262,23 +267,6 @@ namespace LJCGenDocEdit
 
     #region Other Methods
 
-    // Retrieves the current row item.
-    internal DocAssembly CurrentAssembly()
-    {
-      DocAssembly retValue = null;
-
-      if (AssemblyGrid.CurrentRow is LJCGridRow _)
-      {
-        var assemblyID = AssemblyID();
-        if (assemblyID > 0)
-        {
-          var manager = DocAssemblyManager;
-          retValue = manager.RetrieveWithID(assemblyID);
-        }
-      }
-      return retValue;
-    }
-
     // The DragDrop method.
     internal void DoDragDrop(DragEventArgs e)
     {
@@ -307,9 +295,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()
@@ -336,6 +321,23 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Get Data Methods
+
+    // Retrieves the current row item.
+    internal DocAssembly CurrentAssembly()
+    {
+      DocAssembly retValue = null;
+
+      if (AssemblyGrid.CurrentRow is LJCGridRow _)
+      {
+        var assemblyID = AssemblyID();
+        if (assemblyID > 0)
+        {
+          var manager = DocAssemblyManager;
+          retValue = manager.RetrieveWithID(assemblyID);
+        }
+      }
+      return retValue;
+    }
 
     // Retrieves the current row item ID.
     private short AssemblyGroupID(LJCGridRow assemblyGroupRow = null)

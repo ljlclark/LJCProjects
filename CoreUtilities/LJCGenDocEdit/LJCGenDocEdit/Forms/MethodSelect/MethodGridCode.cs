@@ -10,7 +10,7 @@ using LJCWinFormCommon;
 
 namespace LJCGenDocEdit
 {
-  // Provides Method Grid methods for the MethodSelect window.
+  // Provides MethodGrid methods for the MethodSelect window.
   internal class MethodGridCode
   {
     #region Constructors
@@ -191,7 +191,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

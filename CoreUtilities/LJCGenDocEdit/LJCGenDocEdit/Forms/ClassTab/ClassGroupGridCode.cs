@@ -37,7 +37,8 @@ namespace LJCGenDocEdit
       DocList.Cursor = Cursors.WaitCursor;
       ClassGroupGrid.LJCRowsClear();
 
-      if (DocList.AssemblyItemGrid.CurrentRow is LJCGridRow _)
+      // Use Assembly as parent.
+      if (AssemblyGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocClassGroupManager;
         var names = new List<string>()
@@ -130,6 +131,7 @@ namespace LJCGenDocEdit
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
+      // Use Assembly as parent.
       if (AssemblyGrid.CurrentRow is LJCGridRow _)
       {
         var detail = new ClassGroupDetail()
@@ -146,6 +148,7 @@ namespace LJCGenDocEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
+      // Use Assembly as parent.
       if (AssemblyGrid.CurrentRow is LJCGridRow _
         && ClassGroupGrid.CurrentRow is LJCGridRow _)
       {
@@ -206,9 +209,12 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       DocList.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = ClassGroupID();
+      short id = 0;
+      if (ClassGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = ClassGroupID();
+      }
       DataRetrieve();
 
       // Select the original row.
@@ -299,9 +305,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

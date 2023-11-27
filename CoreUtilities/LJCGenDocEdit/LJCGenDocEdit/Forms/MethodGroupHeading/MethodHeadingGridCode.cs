@@ -14,6 +14,7 @@ using System.Windows.Forms;
 namespace LJCGenDocEdit
 {
   // The MethodHeading grid code.
+  // Provides MethodheadingGrid methods for the MethodheadingSelect window.
   internal class MethodHeadingGridCode
   {
     #region Constructors
@@ -43,7 +44,6 @@ namespace LJCGenDocEdit
       manager.SetOrderBy(names);
 
       DbResult result = manager.LoadResult();
-
       if (DbResult.HasRows(result))
       {
         foreach (DbRow dbRow in result.Rows)
@@ -150,8 +150,8 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
-      var methodHeadingRow = MethodHeadingGrid.CurrentRow as LJCGridRow;
-      if (methodHeadingRow != null)
+      var row = MethodHeadingGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -181,7 +181,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        MethodHeadingGrid.Rows.Remove(methodHeadingRow);
+        MethodHeadingGrid.Rows.Remove(row);
       }
     }
 
@@ -189,9 +189,12 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       MethodHeadingSelect.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = MethodHeadingID();
+      short id = 0;
+      if (MethodHeadingGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = MethodHeadingID();
+      }
       DataRetrieve();
 
       if (id > 0)
@@ -304,9 +307,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

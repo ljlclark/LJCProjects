@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  // Provides AssemblyGroupGrid methods for the GenDocList window.
+  // Provides AssemblyGroupGrid methods for the LJCGenDocList window.
   internal class AssemblyGroupGridCode
   {
     #region Constructors
@@ -81,16 +81,6 @@ namespace LJCGenDocEdit
       return retValue;
     }
 
-    // Updates the current row with the record values.
-    private void RowUpdate(DocAssemblyGroup dataRecord)
-    {
-      if (AssemblyGroupGrid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(AssemblyGroupGrid, dataRecord);
-      }
-    }
-
     // Selects a row based on the key record values.
     private bool RowSelect(DocAssemblyGroup dataRecord)
     {
@@ -112,6 +102,16 @@ namespace LJCGenDocEdit
         DocList.Cursor = Cursors.Default;
       }
       return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(DocAssemblyGroup dataRecord)
+    {
+      if (AssemblyGroupGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(AssemblyGroupGrid, dataRecord);
+      }
     }
 
     // Sets the row stored record values.
@@ -154,8 +154,8 @@ namespace LJCGenDocEdit
     internal void DoDelete()
     {
       bool success = false;
-      var groupRow = AssemblyGroupGrid.CurrentRow as LJCGridRow;
-      if (groupRow != null)
+      var row = AssemblyGroupGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -185,7 +185,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        AssemblyGroupGrid.Rows.Remove(groupRow);
+        AssemblyGroupGrid.Rows.Remove(row);
         DocList.TimedChange(Change.AssemblyGroup);
       }
     }
@@ -194,9 +194,12 @@ namespace LJCGenDocEdit
     internal void DoRefresh()
     {
       DocList.Cursor = Cursors.WaitCursor;
-
-      // Save the original row.
-      var id = AssemblyGroupID();
+      short id = 0;
+      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        // Save the original row.
+        id = AssemblyGroupID();
+      }
       DataRetrieve();
 
       // Select the original row.
@@ -272,9 +275,6 @@ namespace LJCGenDocEdit
         }
       }
     }
-    #endregion
-
-    #region Setup Methods
 
     // Setup the grid columns.
     internal void SetupGrid()

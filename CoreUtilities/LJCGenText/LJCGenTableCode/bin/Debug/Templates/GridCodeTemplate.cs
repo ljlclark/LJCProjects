@@ -29,6 +29,7 @@ namespace _Namespace_
     // Initializes an object instance.
     internal _ClassName_GridCode(_AppName_List parentList)
     {
+      // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
       _AppName_List = parentList;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
@@ -196,8 +197,9 @@ namespace _Namespace_
     internal void DoDelete()
     {
       bool success = false;
+      var row = _ClassName_Grid.CurrentRow;
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
-        && _ClassName_Grid.CurrentRow is LJCGridRow row)
+        && row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -236,7 +238,7 @@ namespace _Namespace_
     {
       _AppName_List.Cursor = Cursors.WaitCursor;
       int id = 0;
-      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      if (_ClassName_Grid.CurrentRow is LJCGridRow _)
       {
         // Save the original row.
         id = row.LJCGetInt32(_ClassName_.ColumnID);
@@ -281,7 +283,7 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the _ClassName_ Grid.
     private void SetupGrid()
