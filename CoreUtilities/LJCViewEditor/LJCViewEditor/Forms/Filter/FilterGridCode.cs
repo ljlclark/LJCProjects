@@ -33,7 +33,7 @@ namespace LJCViewEditor
     internal void ResetData()
     {
       Managers = EditList.Managers;
-      mViewFilterManager = Managers.ViewFilterManager;
+      ViewFilterManager = Managers.ViewFilterManager;
     }
     #endregion
 
@@ -47,13 +47,13 @@ namespace LJCViewEditor
       EditList.ConditionSetGrid.Rows.Clear();
       EditList.ConditionGrid.Rows.Clear();
 
-      SetupGridFilter();
+      SetupGrid();
       if (ViewGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-        var manager = mViewFilterManager;
+        var manager = ViewFilterManager;
         var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
@@ -94,23 +94,6 @@ namespace LJCViewEditor
       return retValue;
     }
 
-    // Updates the current row with the record values.
-    private void RowUpdate(ViewFilter dataRecord)
-    {
-      if (FilterGrid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(FilterGrid, dataRecord);
-      }
-    }
-
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, ViewFilter dataRecord)
-    {
-      row.LJCSetInt32(ViewFilter.ColumnID, dataRecord.ID);
-      row.LJCSetString(ViewFilter.ColumnName, dataRecord.Name);
-    }
-
     // Selects a row based on the key record values.
     private bool RowSelect(ViewFilter dataRecord)
     {
@@ -133,6 +116,23 @@ namespace LJCViewEditor
       }
       return retValue;
     }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(ViewFilter dataRecord)
+    {
+      if (FilterGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(FilterGrid, dataRecord);
+      }
+    }
+
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row, ViewFilter dataRecord)
+    {
+      row.LJCSetInt32(ViewFilter.ColumnID, dataRecord.ID);
+      row.LJCSetString(ViewFilter.ColumnName, dataRecord.Name);
+    }
     #endregion
 
     #region Action Methods
@@ -150,10 +150,10 @@ namespace LJCViewEditor
         var location = FormCommon.GetDialogScreenPoint(grid);
         var detail = new ViewFilterDetail
         {
+          LJCDefaultName = defaultName,
           LJCLocation = location,
           LJCParentID = parentID,
-          LJCParentName = parentName,
-          LJCDefaultName = defaultName
+          LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -174,8 +174,8 @@ namespace LJCViewEditor
         var location = FormCommon.GetDialogScreenPoint(grid);
         var detail = new ViewFilterDetail()
         {
-          LJCLocation = location,
           LJCID = id,
+          LJCLocation = location,
           LJCParentID = parentID,
           LJCParentName = parentName
         };
@@ -187,9 +187,10 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (FilterGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = FilterGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
-        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
@@ -197,28 +198,31 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        if (success)
-        {
-          var keyColumns = new DbColumns()
-          {
-            { ViewFilter.ColumnID, row.LJCGetInt32(ViewFilter.ColumnID) }
-          };
-          mViewFilterManager.Delete(keyColumns);
-          if (mViewFilterManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
-        }
+      if (success)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(ViewFilter.ColumnID);
 
-        if (success)
+        var keyColumns = new DbColumns()
         {
-          FilterGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.Filter);
+          { ViewFilter.ColumnID, id }
+        };
+        ViewFilterManager.Delete(keyColumns);
+        if (0 == ViewFilterManager.AffectedCount)
+        {
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
+
+      if (success)
+      {
+        FilterGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.Filter);
       }
     }
 
@@ -251,24 +255,27 @@ namespace LJCViewEditor
     {
       var detail = sender as ViewFilterDetail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        FilterGrid.LJCSetCurrentRow(row, true);
-        EditList.TimedChange(Change.Filter);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          FilterGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.Filter);
+        }
       }
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the View Filter Grid.
-    private void SetupGridFilter()
+    private void SetupGrid()
     {
       if (0 == FilterGrid.Columns.Count)
       {
@@ -278,8 +285,8 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = mViewFilterManager.GetColumns(propertyNames);
+        var manager = ViewFilterManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         FilterGrid.LJCAddColumns(gridColumns);
@@ -298,13 +305,11 @@ namespace LJCViewEditor
     // Gets or sets the FilterGrid reference.
     private LJCDataGrid FilterGrid { get; set; }
 
+    // Gets or sets the Managers reference.
+    private ViewFilterManager ViewFilterManager { get; set; }
+
     // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private ViewFilterManager mViewFilterManager;
     #endregion
   }
 }

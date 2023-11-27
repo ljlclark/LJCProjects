@@ -34,7 +34,7 @@ namespace LJCViewEditor
     internal void ResetData()
     {
       Managers = EditList.Managers;
-      mColumnManager = Managers.ViewColumnManager;
+      ColumnManager = Managers.ViewColumnManager;
     }
     #endregion
 
@@ -52,7 +52,7 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-        var result = mColumnManager.ResultWithParentID(parentID);
+        var result = ColumnManager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (var dbRow in result.Rows)
@@ -88,22 +88,6 @@ namespace LJCViewEditor
       return retValue;
     }
 
-    // Updates the current row with the record values.
-    private void RowUpdate(ViewColumn dataRecord)
-    {
-      if (ColumnGrid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ColumnGrid, dataRecord);
-      }
-    }
-
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, ViewColumn dataRecord)
-    {
-      row.LJCSetInt32(ViewColumn.ColumnID, dataRecord.ID);
-    }
-
     // Selects a row based on the key record values.
     private bool RowSelect(ViewColumn dataRecord)
     {
@@ -125,6 +109,22 @@ namespace LJCViewEditor
         EditList.Cursor = Cursors.Default;
       }
       return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(ViewColumn dataRecord)
+    {
+      if (ColumnGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(ColumnGrid, dataRecord);
+      }
+    }
+
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row, ViewColumn dataRecord)
+    {
+      row.LJCSetInt32(ViewColumn.ColumnID, dataRecord.ID);
     }
     #endregion
 
@@ -152,10 +152,10 @@ namespace LJCViewEditor
             { ViewColumn.ColumnViewDataID, viewColumn.ViewDataID },
             { ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
           };
-          var lookupRecord = mColumnManager.Retrieve(keyColumns);
-          if (false == mColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
+          var lookupRecord = ColumnManager.Retrieve(keyColumns);
+          if (false == ColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
           {
-            var addedRecord = mColumnManager.AddWithFlags(viewColumn);
+            var addedRecord = ColumnManager.AddWithFlags(viewColumn);
             if (addedRecord != null)
             {
               viewColumn.ID = addedRecord.ID;
@@ -221,10 +221,12 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (ViewGrid.CurrentRow is LJCGridRow parentRow
-        && ColumnGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var parentRow = ViewGrid.CurrentRow as LJCGridRow;
+      var row = ColumnGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
       {
-        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
@@ -232,44 +234,44 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        int id = 0;
-        if (success)
-        {
-          // Data from items.
-          id = row.LJCGetInt32(ViewColumn.ColumnID);
-          var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
+      int id = 0;
+      if (success)
+      {
+        // Data from items.
+        id = row.LJCGetInt32(ViewColumn.ColumnID);
+        var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-          var gridColumnManager	= Managers.ViewGridColumnManager;
-          var keyGridColumns = new DbColumns()
+        var gridColumnManager = Managers.ViewGridColumnManager;
+        var keyGridColumns = new DbColumns()
           {
             { ViewGridColumn.ColumnViewDataID, parentID },
             { ViewGridColumn.ColumnViewColumnID, id }
           };
-          gridColumnManager.Delete(keyGridColumns);
-        }
+        gridColumnManager.Delete(keyGridColumns);
+      }
 
-        if (success)
+      if (success)
+      {
+        var keyColumns = new DbColumns()
         {
-          var keyColumns = new DbColumns()
-          {
-            { ViewColumn.ColumnID, id }
-          };
-          mColumnManager.Delete(keyColumns);
-          if (mColumnManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
+          { ViewColumn.ColumnID, id }
+        };
+        ColumnManager.Delete(keyColumns);
+        if (0 == ColumnManager.AffectedCount)
+        {
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
 
-        if (success)
-        {
-          ColumnGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.Column);
-        }
+      if (success)
+      {
+        ColumnGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.Column);
       }
     }
 
@@ -316,7 +318,7 @@ namespace LJCViewEditor
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the View Column Grid.
     private void SetupGrid()
@@ -332,8 +334,8 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = mColumnManager.GetColumns(propertyNames);
+        var manager = ColumnManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         ColumnGrid.LJCAddColumns(gridColumns);
@@ -349,16 +351,14 @@ namespace LJCViewEditor
     // Gets or sets the ColumnGrid reference.
     private LJCDataGrid ColumnGrid { get; set; }
 
+    // Gets or sets the Manager reference.
+    private ViewColumnManager ColumnManager { get; set; }
+
     // Gets or sets the Parent List reference.
     private ViewEditorList EditList { get; set; }
 
     // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private ViewColumnManager mColumnManager;
     #endregion
   }
 }

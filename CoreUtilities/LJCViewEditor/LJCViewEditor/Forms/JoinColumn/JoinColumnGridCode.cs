@@ -33,7 +33,7 @@ namespace LJCViewEditor
     internal void ResetData()
     {
       Managers = EditList.Managers;
-      mViewJoinColumnManager = Managers.ViewJoinColumnManager;
+      ViewJoinColumnManager = Managers.ViewJoinColumnManager;
     }
     #endregion
 
@@ -51,7 +51,7 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
-        var manager = mViewJoinColumnManager;
+        var manager = ViewJoinColumnManager;
         var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
@@ -68,9 +68,7 @@ namespace LJCViewEditor
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(ViewJoinColumn dataRecord)
     {
-      LJCGridRow retValue;
-
-      retValue = JoinColumnGrid.LJCRowAdd();
+      var retValue = JoinColumnGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(JoinColumnGrid, dataRecord);
       return retValue;
@@ -90,6 +88,30 @@ namespace LJCViewEditor
       return retValue;
     }
 
+    // Selects a row based on the key record values.
+    private bool RowSelect(ViewJoinColumn dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in JoinColumnGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewJoinColumn.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            JoinColumnGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+
     // Updates the current row with the record values.
     private void RowUpdate(ViewJoinColumn dataRecord)
     {
@@ -105,29 +127,6 @@ namespace LJCViewEditor
       , ViewJoinColumn dataRecord)
     {
       row.LJCSetInt32(ViewJoinColumn.ColumnID, dataRecord.ID);
-    }
-
-    // Selects a row based on the key record values.
-    private bool RowSelect(ViewJoinColumn record)
-    {
-      bool retValue = false;
-      if (record != null)
-      {
-        EditList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in JoinColumnGrid.Rows)
-        {
-          var rowID = row.LJCGetInt32(ViewJoinColumn.ColumnID);
-          if (rowID == record.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            JoinColumnGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-        EditList.Cursor = Cursors.Default;
-      }
-      return retValue;
     }
     #endregion
 
@@ -170,8 +169,8 @@ namespace LJCViewEditor
         var location = FormCommon.GetDialogScreenPoint(grid);
         var detail = new ViewJoinColumnDetail()
         {
-          LJCLocation = location,
           LJCID = id,
+          LJCLocation = location,
           LJCParentID = parentID,
           LJCParentName = parentName
         };
@@ -183,9 +182,10 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (JoinColumnGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = JoinColumnGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
-        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
@@ -193,31 +193,31 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        if (success)
+      if (success)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(ViewJoinColumn.ColumnID);
+
+        var keyColumns = new DbColumns()
         {
-          // Data from items.
-          var id = row.LJCGetInt32(ViewJoinColumn.ColumnID);
-
-          var keyColumns = new DbColumns()
-          {
-            { ViewJoinColumn.ColumnID, id }
-          };
-          mViewJoinColumnManager.Delete(keyColumns);
-          if (mViewJoinColumnManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
-        }
-
-        if (success)
+          { ViewJoinColumn.ColumnID, id }
+        };
+        ViewJoinColumnManager.Delete(keyColumns);
+        if (ViewJoinColumnManager.AffectedCount < 1)
         {
-          JoinColumnGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.JoinColumn);
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
+
+      if (success)
+      {
+        JoinColumnGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.JoinColumn);
       }
     }
 
@@ -264,7 +264,7 @@ namespace LJCViewEditor
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the ViewJoinColumn Grid.
     private void SetupGrid()
@@ -278,8 +278,8 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = mViewJoinColumnManager.GetColumns(propertyNames);
+        var manager = ViewJoinColumnManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         JoinColumnGrid.LJCAddColumns(gridColumns);
@@ -299,11 +299,9 @@ namespace LJCViewEditor
 
     // Gets or sets the JoinGrid reference.
     private LJCDataGrid JoinGrid { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private ViewJoinColumnManager mViewJoinColumnManager;
+    // Gets or sets the Manager reference.
+    private ViewJoinColumnManager ViewJoinColumnManager { get; set; }
     #endregion
   }
 }

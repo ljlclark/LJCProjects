@@ -33,7 +33,7 @@ namespace LJCViewEditor
     internal void ResetData()
     {
       Managers = EditList.DataDbView.Managers;
-      mViewOrderByManager = Managers.ViewOrderByManager;
+      ViewOrderByManager = Managers.ViewOrderByManager;
     }
     #endregion
 
@@ -51,7 +51,7 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
-        var manager = mViewOrderByManager;
+        var manager = ViewOrderByManager;
         var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
@@ -87,6 +87,30 @@ namespace LJCViewEditor
       return retValue;
     }
 
+    // Selects a row based on the key record values.
+    private bool RowSelect(ViewOrderBy dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in OrderByGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewOrderBy.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            OrderByGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+
     // Updates the current row with the record values.
     private void RowUpdate(ViewOrderBy dataRecord)
     {
@@ -101,29 +125,6 @@ namespace LJCViewEditor
     private void SetStoredValues(LJCGridRow row, ViewOrderBy dataRecord)
     {
       row.LJCSetInt32(ViewOrderBy.ColumnID, dataRecord.ID);
-    }
-
-    // Selects a row based on the key record values.
-    private bool RowSelect(ViewOrderBy record)
-    {
-      bool retValue = false;
-      if (record != null)
-      {
-        EditList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in OrderByGrid.Rows)
-        {
-          var rowID = row.LJCGetInt32(ViewOrderBy.ColumnID);
-          if (rowID == record.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            OrderByGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-        EditList.Cursor = Cursors.Default;
-      }
-      return retValue;
     }
     #endregion
 
@@ -181,9 +182,10 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (OrderByGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = OrderByGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
-        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
@@ -191,28 +193,31 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        if (success)
-        {
-          var keyColumns = new DbColumns()
-          {
-            { ViewOrderBy.ColumnID, row.LJCGetInt32(ViewOrderBy.ColumnID) }
-          };
-          mViewOrderByManager.Delete(keyColumns);
-          if (mViewOrderByManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
-        }
+      if (success)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(ViewOrderBy.ColumnID);
 
-        if (success)
+        var keyColumns = new DbColumns()
         {
-          OrderByGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.OrderBy);
+          { ViewOrderBy.ColumnID, id }
+        };
+        ViewOrderByManager.Delete(keyColumns);
+        if (0 == ViewOrderByManager.AffectedCount)
+        {
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
+
+      if (success)
+      {
+        OrderByGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.OrderBy);
       }
     }
 
@@ -244,34 +249,38 @@ namespace LJCViewEditor
     {
       var detail = sender as ViewOrderByDetail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        OrderByGrid.LJCSetCurrentRow(row, true);
-        EditList.TimedChange(Change.OrderBy);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          OrderByGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.OrderBy);
+        }
       }
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the View OrderBy Grid.
     private void SetupGrid()
     {
       if (0 == OrderByGrid.Columns.Count)
       {
-        List<string> propertyNames = new List<string> {
+        List<string> propertyNames = new List<string>
+        {
           ViewOrderBy.ColumnColumnName
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns orderByGridColumns
-          = mViewOrderByManager.GetColumns(propertyNames);
+        var manager = ViewOrderByManager;
+        var orderByGridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         OrderByGrid.LJCAddColumns(orderByGridColumns);
@@ -292,11 +301,9 @@ namespace LJCViewEditor
 
     // Gets or sets the ViewGrid reference.
     private LJCDataGrid ViewGrid { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private ViewOrderByManager mViewOrderByManager;
+    // Gets or sets the Manager reference.
+    private ViewOrderByManager ViewOrderByManager;
     #endregion
   }
 }

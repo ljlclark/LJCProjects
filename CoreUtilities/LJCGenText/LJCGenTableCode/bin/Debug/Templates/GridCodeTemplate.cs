@@ -197,7 +197,7 @@ namespace _Namespace_
     internal void DoDelete()
     {
       bool success = false;
-      var row = _ClassName_Grid.CurrentRow;
+      var row = _ClassName_Grid.CurrentRow as LJCGridRow;
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
         && row != null)
       {
@@ -210,13 +210,17 @@ namespace _Namespace_
         }
       }
 
+      //int id = 0;
       if (success)
       {
+        // Data from items.
+        var id = row.LJCGetInt32(_ClassName_.ColumnID);
+
         var keyColumns = new DbColumns()
         {
-          { _ClassName_.ColumnID, _ClassName_ID }
+          { _ClassName_.ColumnID, id }
         };
-        ClassName_Manager.Delete(keyColumns);
+        _ClassName_Manager.Delete(keyColumns);
         if (0 == ClassName_Manager.AffectedCount)
         {
           success = false;
@@ -298,7 +302,7 @@ namespace _Namespace_
         };
 
         // Get the grid columns from the manager Data Definition.
-        var manager = ClassName_Manager;
+        var manager = _ClassName_Manager;
         var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.

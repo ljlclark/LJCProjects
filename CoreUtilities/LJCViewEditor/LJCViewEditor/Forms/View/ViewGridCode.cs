@@ -19,21 +19,24 @@ namespace LJCViewEditor
     #region Constructors
 
     // Initializes an object instance.
-    internal ViewGridCode(ViewEditorList parent)
+    internal ViewGridCode(ViewEditorList parentList)
     {
-      Parent = parent;
-      DataGrid = Parent.DataGrid;
-      mInfoWindow = Parent.mInfoWindow;
-      ViewGrid = Parent.ViewGrid;
+      // Initialize property values.
+      parentList.Cursor = Cursors.WaitCursor;
+      ViewEditorList = parentList;
+      DataGrid = ViewEditorList.DataGrid;
+      mInfoWindow = ViewEditorList.mInfoWindow;
+      ViewGrid = ViewEditorList.ViewGrid;
       ResetData();
+      parentList.Cursor = Cursors.Default;
     }
 
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
-      Managers = Parent.Managers;
-      mTableManager = Managers.ViewTableManager;
-      mViewManager = Managers.ViewDataManager;
+      Managers = ViewEditorList.Managers;
+      TableManager = Managers.ViewTableManager;
+      ViewManager = Managers.ViewDataManager;
     }
     #endregion
 
@@ -42,14 +45,14 @@ namespace LJCViewEditor
     // Retrieves the list rows.
     internal void DataRetrieve(bool doRelated = true)
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ViewEditorList.Cursor = Cursors.WaitCursor;
       ViewGrid.Rows.Clear();
       DataGrid.Rows.Clear();
       DataGrid.Columns.Clear();
 
       // Check for existing ViewTable and write a new one if not found.
-      string tableName = Parent.TableCombo.Text;
-      var viewTable = mTableManager.RetrieveWithUniqueKey(tableName);
+      string tableName = ViewEditorList.TableCombo.Text;
+      var viewTable = TableManager.RetrieveWithUniqueKey(tableName);
       if (null == viewTable)
       {
         var dataRecord = new ViewTable()
@@ -57,11 +60,11 @@ namespace LJCViewEditor
           Name = tableName,
           Description = $"The {tableName} table."
         };
-        viewTable = mTableManager.AddData(dataRecord);
+        viewTable = TableManager.AddData(dataRecord);
       }
 
-      ConfigureViewGrid();
-      var viewResult = mViewManager.ResultWithParentID(viewTable.ID);
+      SetupGrid();
+      var viewResult = ViewManager.ResultWithParentID(viewTable.ID);
       if (DbResult.HasRows(viewResult))
       {
         foreach (var dbRow in viewResult.Rows)
@@ -69,10 +72,10 @@ namespace LJCViewEditor
           RowAddValues(dbRow.Values);
         }
       }
-      Parent.Cursor = Cursors.Default;
+      ViewEditorList.Cursor = Cursors.Default;
       if (doRelated)
       {
-        Parent.DoChange(ViewEditorList.Change.View);
+        ViewEditorList.DoChange(ViewEditorList.Change.View);
       }
     }
 
@@ -103,6 +106,30 @@ namespace LJCViewEditor
       return retValue;
     }
 
+    // Selects a row based on the key record values.
+    internal bool RowSelect(ViewData dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        ViewEditorList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in ViewGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewData.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ViewGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        ViewEditorList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+
     // Updates the current row with the record values.
     private void RowUpdate(ViewData dataRecord)
     {
@@ -119,21 +146,6 @@ namespace LJCViewEditor
       row.LJCSetInt32(ViewData.ColumnID, dataRecord.ID);
       row.LJCSetString(ViewData.ColumnName, dataRecord.Name);
     }
-
-    // Selects a row based on the key record values.
-    internal void RowSelect(ViewData record)
-    {
-      foreach (LJCGridRow row in ViewGrid.Rows)
-      {
-        var rowID = row.LJCGetInt32(ViewData.ColumnID);
-        if (rowID == record.ID)
-        {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          ViewGrid.LJCSetCurrentRow(row, true);
-          break;
-        }
-      }
-    }
     #endregion
 
     #region Action Methods
@@ -142,18 +154,18 @@ namespace LJCViewEditor
     /// <include path='items/DoNew/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DoNew()
     {
-      if (true == NetString.HasValue(Parent.TableCombo.Text))
+      if (true == NetString.HasValue(ViewEditorList.TableCombo.Text))
       {
         // Data from list items.
-        string tableName = Parent.TableCombo.Text;
+        string tableName = ViewEditorList.TableCombo.Text;
 
-        var viewTable = mTableManager.RetrieveWithUniqueKey(tableName);
+        var viewTable = TableManager.RetrieveWithUniqueKey(tableName);
         var location = FormCommon.GetDialogScreenPoint(ViewGrid);
         var detail = new ViewDataDetail
         {
+          LJCLocation = location,
           LJCParentID = viewTable.ID,
-          LJCParentName = tableName,
-          LJCLocation = location
+          LJCParentName = tableName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -165,17 +177,18 @@ namespace LJCViewEditor
     {
       if (ViewGrid.CurrentRow is LJCGridRow row)
       {
+        // Data from list items.
         int id = row.LJCGetInt32(ViewData.ColumnID);
-        string tableName = Parent.TableCombo.Text;
-        var viewTable = mTableManager.RetrieveWithUniqueKey(tableName);
+        string tableName = ViewEditorList.TableCombo.Text;
+        var viewTable = TableManager.RetrieveWithUniqueKey(tableName);
 
         var location = FormCommon.GetDialogScreenPoint(ViewGrid);
         var detail = new ViewDataDetail()
         {
           LJCID = id,
+          LJCLocation = location,
           LJCParentID = viewTable.ID,
-          LJCParentName = tableName,
-          LJCLocation = location
+          LJCParentName = tableName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -185,42 +198,53 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (ViewGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = ViewGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
-          var keyColumns = new DbColumns()
-          {
-            { ViewData.ColumnID, row.LJCGetInt32(ViewData.ColumnID) }
-          };
-          mViewManager.Delete(keyColumns);
-          if (mViewManager.AffectedCount < 1)
-          {
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
-          else
-          {
-            ViewGrid.Rows.Remove(row);
-            Parent.TimedChange(ViewEditorList.Change.View);
-          }
+          success = true;
         }
+      }
+
+      //int id = 0;
+      if (success)
+      {
+        var keyColumns = new DbColumns()
+        {
+          { ViewData.ColumnID, row.LJCGetInt32(ViewData.ColumnID) }
+        };
+        ViewManager.Delete(keyColumns);
+        if (0 == ViewManager.AffectedCount)
+        {
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+        }
+      }
+
+      if (success)
+      {
+        ViewGrid.Rows.Remove(row);
+        ViewEditorList.TimedChange(ViewEditorList.Change.View);
       }
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
+      ViewEditorList.Cursor = Cursors.WaitCursor;
       int id = 0;
       if (ViewGrid.CurrentRow is LJCGridRow row)
       {
+        // Save the original row.
         id = row.LJCGetInt32(ViewData.ColumnID);
       }
-
       ViewGrid.Rows.Clear();
       DataRetrieve(false);
 
@@ -233,6 +257,7 @@ namespace LJCViewEditor
         };
         RowSelect(record);
       }
+      ViewEditorList.Cursor = Cursors.Default;
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
@@ -240,27 +265,30 @@ namespace LJCViewEditor
     {
       var detail = sender as ViewDataDetail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        ViewGrid.LJCSetCurrentRow(row, true);
-        Parent.TimedChange(ViewEditorList.Change.View);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          ViewGrid.LJCSetCurrentRow(row, true);
+          ViewEditorList.TimedChange(ViewEditorList.Change.View);
+        }
       }
     }
 
     // Shows the Data.
     internal void DoShowData()
     {
-      var dbRequest = Parent.DoGetViewRequest();
+      var dbRequest = ViewEditorList.DoGetViewRequest();
       if (dbRequest != null)
       {
-        var dataManager = new DataManager(Parent.DbServiceRef
-          , Parent.DataConfigName, dbRequest.TableName);
+        var dataManager = new DataManager(ViewEditorList.DbServiceRef
+          , ViewEditorList.DataConfigName, dbRequest.TableName);
 
         // Execute the dbRequest directly since it was retrieved.
         var dbResult = dataManager.ExecuteRequest(dbRequest);
@@ -284,7 +312,7 @@ namespace LJCViewEditor
     // Shows the SQL statement.
     internal void DoShowSQL()
     {
-      var dbRequest = Parent.DoGetViewRequest();
+      var dbRequest = ViewEditorList.DoGetViewRequest();
       if (dbRequest != null)
       {
         var dbSqlBuilder = new DbSqlBuilder(dbRequest);
@@ -295,8 +323,8 @@ namespace LJCViewEditor
           {
             LJCInfoData = sql
           };
-          mInfoWindow.LJCCloseEvent += Parent.InfoWindow_CloseEvent;
-          mInfoWindow.Show(Parent);
+          mInfoWindow.LJCCloseEvent += ViewEditorList.InfoWindow_CloseEvent;
+          mInfoWindow.Show(ViewEditorList);
         }
         else
         {
@@ -309,7 +337,7 @@ namespace LJCViewEditor
     // Show the DbRequest code.
     internal void ShowCode()
     {
-      var dbRequest = Parent.DoGetViewRequest();
+      var dbRequest = ViewEditorList.DoGetViewRequest();
       if (dbRequest != null)
       {
         string code = GenRequest.RequestCode(dbRequest);
@@ -319,8 +347,8 @@ namespace LJCViewEditor
           {
             LJCInfoData = code
           };
-          mInfoWindow.LJCCloseEvent += Parent.InfoWindow_CloseEvent;
-          mInfoWindow.Show(Parent);
+          mInfoWindow.LJCCloseEvent += ViewEditorList.InfoWindow_CloseEvent;
+          mInfoWindow.Show(ViewEditorList);
         }
         else
         {
@@ -330,10 +358,10 @@ namespace LJCViewEditor
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the ViewData Grid.
-    private void ConfigureViewGrid()
+    private void SetupGrid()
     {
       if (0 == ViewGrid.Columns.Count)
       {
@@ -344,7 +372,7 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        var viewGridColumns = mViewManager.GetColumns(propertyNames);
+        var viewGridColumns = ViewManager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         ViewGrid.LJCAddColumns(viewGridColumns);
@@ -358,15 +386,21 @@ namespace LJCViewEditor
 
     private LJCDataGrid DataGrid { get; set; }
 
+    private ViewTableManager TableManager { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private ViewEditorList ViewEditorList { get; set; }
+
+    // Gets or sets the ViewData Grid reference.
     private LJCDataGrid ViewGrid { get; set; }
+
+    // Gets or sets the Manager reference.
+    private ViewDataManager ViewManager { get; set; }
     #endregion
 
     #region Class Data
 
     private InfoWindow mInfoWindow;
-    private readonly ViewEditorList Parent;
-    private ViewDataManager mViewManager;
-    private ViewTableManager mTableManager;
     #endregion
   }
 }

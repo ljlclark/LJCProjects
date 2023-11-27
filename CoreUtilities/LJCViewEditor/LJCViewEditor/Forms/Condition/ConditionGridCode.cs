@@ -26,13 +26,14 @@ namespace LJCViewEditor
       ConditionGrid = EditList.ConditionGrid;
       ConditionSetGrid = EditList.ConditionSetGrid;
       ResetData();
+      parentList.Cursor = Cursors.Default;
     }
 
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
       Managers = EditList.Managers;
-      mConditionManager = Managers.ViewConditionManager;
+      ConditionManager = Managers.ViewConditionManager;
     }
     #endregion
 
@@ -50,7 +51,7 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
 
-        var result = mConditionManager.ResultWithParentID(parentID);
+        var result = ConditionManager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
           foreach (var dbRow in result.Rows)
@@ -86,6 +87,30 @@ namespace LJCViewEditor
       return retValue;
     }
 
+    // Selects a row based on the key record values.
+    private bool RowSelect(ViewCondition dataRecord)
+    {
+      bool retValue = false;
+
+      if (dataRecord != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in ConditionGrid.Rows)
+        {
+          var rowID = row.LJCGetInt32(ViewCondition.ColumnID);
+          if (rowID == dataRecord.ID)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ConditionGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
+      return retValue;
+    }
+
     // Updates the current row with the record values.
     private void RowUpdate(ViewCondition dataRecord)
     {
@@ -101,26 +126,6 @@ namespace LJCViewEditor
       , ViewCondition dataRecord)
     {
       row.LJCSetInt32(ViewCondition.ColumnID, dataRecord.ID);
-    }
-
-    // Selects a row based on the key record values.
-    private void RowSelect(ViewCondition record)
-    {
-      if (record != null)
-      {
-        EditList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ConditionGrid.Rows)
-        {
-          var rowID = row.LJCGetInt32(ViewCondition.ColumnID);
-          if (rowID == record.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ConditionGrid.LJCSetCurrentRow(row, true);
-            break;
-          }
-        }
-        EditList.Cursor = Cursors.Default;
-      }
     }
     #endregion
 
@@ -145,7 +150,7 @@ namespace LJCViewEditor
           // Use table name to get table columns.
           LJCTableName = EditList.TableCombo.Text,
         };
-        detail.LJCChange += ConditionDetail_Change;
+        detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
@@ -156,6 +161,7 @@ namespace LJCViewEditor
       if (ConditionSetGrid.CurrentRow is LJCGridRow parentRow
         && ConditionGrid.CurrentRow is LJCGridRow row)
       {
+        // Data from list items.
         int id = row.LJCGetInt32(ViewCondition.ColumnID);
         int parentID = parentRow.LJCGetInt32(ViewConditionSet.ColumnID);
         string parentName = parentRow.LJCGetString(ViewConditionSet.ColumnBooleanOperator);
@@ -172,7 +178,7 @@ namespace LJCViewEditor
           // Use table name to get table columns.
           LJCTableName = EditList.TableCombo.Text,
         };
-        detail.LJCChange += ConditionDetail_Change;
+        detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
@@ -181,7 +187,8 @@ namespace LJCViewEditor
     internal void DoDelete()
     {
       bool success = false;
-      if (ConditionGrid.CurrentRow is LJCGridRow row)
+      var row = ConditionGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -190,31 +197,31 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        if (success)
-        {
-          // Data from items.
-          var id = row.LJCGetInt32(ViewCondition.ColumnID);
+      if (success)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(ViewCondition.ColumnID);
 
-          var keyColumns = new DbColumns()
+        var keyColumns = new DbColumns()
           {
             { ViewCondition.ColumnID, id }
           };
-          mConditionManager.Delete(keyColumns);
-          if (mConditionManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
-        }
-
-        if (success)
+        ConditionManager.Delete(keyColumns);
+        if (ConditionManager.AffectedCount < 1)
         {
-          ConditionGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.Condition);
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
+
+      if (success)
+      {
+        ConditionGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.Condition);
       }
     }
 
@@ -243,40 +250,44 @@ namespace LJCViewEditor
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    private void ConditionDetail_Change(object sender, EventArgs e)
+    private void Detail_Change(object sender, EventArgs e)
     {
       var detail = sender as ViewConditionDetail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        ConditionGrid.LJCSetCurrentRow(row, true);
-        EditList.TimedChange(Change.ConditionSet);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          ConditionGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.ConditionSet);
+        }
       }
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the ViewCondition Grid.
     private void SetupGrid()
     {
       if (0 == ConditionGrid.Columns.Count)
       {
-        List<string> propertyNames = new List<string> {
+        List<string> propertyNames = new List<string>
+        {
           ViewCondition.ColumnFirstValue,
           ViewCondition.ColumnComparisonOperator,
           ViewCondition.ColumnSecondValue
         };
 
         // Get the grid columns from the manager Data Definition.
-        var gridColumns
-          = mConditionManager.GetColumns(propertyNames);
+        var manager = ConditionManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         ConditionGrid.LJCAddColumns(gridColumns);
@@ -292,16 +303,14 @@ namespace LJCViewEditor
     // Gets or sets the ConditionGrid reference.
     private LJCDataGrid ConditionGrid { get; set; }
 
+    // Gets or sets the Manager reference.
+    private ViewConditionManager ConditionManager { get; set; }
+
     // Gets or sets the ConditionSetGrid reference.
     private LJCDataGrid ConditionSetGrid { get; set; }
 
     // Gets or sets the Parent List reference.
     private ViewEditorList EditList { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private ViewConditionManager mConditionManager;
     #endregion
   }
 }

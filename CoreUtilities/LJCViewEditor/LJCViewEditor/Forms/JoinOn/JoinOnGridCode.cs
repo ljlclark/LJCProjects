@@ -33,7 +33,7 @@ namespace LJCViewEditor
     internal void ResetData()
     {
       Managers = EditList.Managers;
-      mViewJoinOnManager = Managers.ViewJoinOnManager;
+      ViewJoinOnManager = Managers.ViewJoinOnManager;
     }
     #endregion
 
@@ -51,7 +51,7 @@ namespace LJCViewEditor
         // Data from items.
         int parentID = parentRow.LJCGetInt32(ViewJoin.ColumnID);
 
-        var manager = mViewJoinOnManager;
+        var manager = ViewJoinOnManager;
         var result = manager.ResultWithParentID(parentID);
         if (DbResult.HasRows(result))
         {
@@ -88,26 +88,11 @@ namespace LJCViewEditor
       return retValue;
     }
 
-    // Updates the current row with the record values.
-    private void RowUpdate(ViewJoinOn dataRecord)
-    {
-      if (JoinOnGrid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(JoinOnGrid, dataRecord);
-      }
-    }
-
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, ViewJoinOn dataRecord)
-    {
-      row.LJCSetInt32(ViewJoinOn.ColumnID, dataRecord.ID);
-    }
-
     // Selects a row based on the key record values.
     private bool RowSelect(ViewJoinOn dataRecord)
     {
       bool retValue = false;
+
       if (dataRecord != null)
       {
         EditList.Cursor = Cursors.WaitCursor;
@@ -124,6 +109,22 @@ namespace LJCViewEditor
         EditList.Cursor = Cursors.Default;
       }
       return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(ViewJoinOn dataRecord)
+    {
+      if (JoinOnGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(JoinOnGrid, dataRecord);
+      }
+    }
+
+    // Sets the row stored values.
+    private void SetStoredValues(LJCGridRow row, ViewJoinOn dataRecord)
+    {
+      row.LJCSetInt32(ViewJoinOn.ColumnID, dataRecord.ID);
     }
     #endregion
 
@@ -166,8 +167,8 @@ namespace LJCViewEditor
         var location = FormCommon.GetDialogScreenPoint(grid);
         var detail = new ViewJoinOnDetail()
         {
-          LJCLocation = location,
           LJCID = id,
+          LJCLocation = location,
           LJCParentID = parentID,
           LJCParentName = parentName
         };
@@ -179,9 +180,10 @@ namespace LJCViewEditor
     // Deletes the selected row.
     internal void DoDelete()
     {
-      if (JoinOnGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = JoinOnGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
-        bool success = false;
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
@@ -189,28 +191,28 @@ namespace LJCViewEditor
         {
           success = true;
         }
+      }
 
-        if (success)
+      if (success)
+      {
+        var keyColumns = new DbColumns()
         {
-          var keyColumns = new DbColumns()
-          {
-            { ViewJoinOn.ColumnID, row.LJCGetInt32(ViewJoinOn.ColumnID) }
-          };
-          mViewJoinOnManager.Delete(keyColumns);
-          if (mViewJoinOnManager.AffectedCount < 1)
-          {
-            success = false;
-            message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-          }
+          { ViewJoinOn.ColumnID, row.LJCGetInt32(ViewJoinOn.ColumnID) }
+        };
+        ViewJoinOnManager.Delete(keyColumns);
+        if (0 == ViewJoinOnManager.AffectedCount)
+        {
+          success = false;
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
         }
+      }
 
-        if (success)
-        {
-          JoinOnGrid.Rows.Remove(row);
-          EditList.TimedChange(Change.JoinOn);
-        }
+      if (success)
+      {
+        JoinOnGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.JoinOn);
       }
     }
 
@@ -243,21 +245,24 @@ namespace LJCViewEditor
     {
       var detail = sender as ViewJoinOnDetail;
       var record = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      if (record != null)
       {
-        RowUpdate(record);
-      }
-      else
-      {
-        // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-        var row = RowAdd(record);
-        JoinOnGrid.LJCSetCurrentRow(row, true);
-        EditList.TimedChange(Change.JoinOn);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          JoinOnGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.JoinOn);
+        }
       }
     }
     #endregion
 
-    #region Setup Methods
+    #region Other Methods
 
     // Configures the View JoinOn Grid.
     private void SetupGrid()
@@ -271,8 +276,8 @@ namespace LJCViewEditor
         };
 
         // Get the grid columns from the manager Data Definition.
-        DbColumns gridColumns
-          = mViewJoinOnManager.GetColumns(propertyNames);
+        var manager = ViewJoinOnManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         JoinOnGrid.LJCAddColumns(gridColumns);
@@ -292,11 +297,9 @@ namespace LJCViewEditor
 
     // Gets or sets the JoinOnGrid reference.
     private LJCDataGrid JoinOnGrid { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private ViewJoinOnManager mViewJoinOnManager;
+    // Gets or sets the Manager reference.
+    private ViewJoinOnManager ViewJoinOnManager { get; set; }
     #endregion
   }
 }
