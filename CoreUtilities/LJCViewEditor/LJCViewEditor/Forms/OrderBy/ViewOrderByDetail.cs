@@ -1,15 +1,15 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderByDetail.cs
-using System;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
 using LJCViewEditorDAL;
+using System;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -25,8 +25,8 @@ namespace LJCViewEditor
 
 			// Initialize property values.
 			LJCID = 0;
-			LJCRecord = null;
-			LJCIsUpdate = false;
+      LJCIsUpdate = false;
+      LJCRecord = null;
 			BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
@@ -78,11 +78,8 @@ namespace LJCViewEditor
 			{
 				Text += " - Edit";
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
-				{
-					{ ViewOrderBy.ColumnID, LJCID }
-				};
-				var dataRecord = mViewOrderByManager.Retrieve(keyColumns);
+        var manager = Managers.ViewOrderByManager;
+				var dataRecord = manager.RetrieveWithID(LJCID);
 				GetRecordValues(dataRecord);
 			}
 			else
@@ -99,11 +96,13 @@ namespace LJCViewEditor
 		{
 			if (dataRecord != null)
 			{
-				LJCParentID = dataRecord.ViewDataID;
 				ParentTextbox.Text = LJCParentName;
 				ColumnNameTextbox.Text = dataRecord.ColumnName;
-			}
-		}
+
+        // Reference key values.
+        LJCParentID = dataRecord.ViewDataID;
+      }
+    }
 
 		// Creates and returns a record object with the data from
 		private ViewOrderBy SetRecordValues()
@@ -111,9 +110,11 @@ namespace LJCViewEditor
 			ViewOrderBy retValue = new ViewOrderBy()
 			{
 				ID = LJCID,
-				ViewDataID = LJCParentID,
-				ColumnName = ViewEditorCommon.TruncateAtHyphen(ColumnNameTextbox.Text)
-			};
+				ColumnName = ViewEditorCommon.TruncateAtHyphen(ColumnNameTextbox.Text),
+
+        // Get Reference key values.
+        ViewDataID = LJCParentID,
+      };
 			return retValue;
 		}
 
@@ -128,20 +129,19 @@ namespace LJCViewEditor
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
-			{
-				{ ViewOrderBy.ColumnViewDataID, LJCRecord.ViewDataID },
-				{ ViewOrderBy.ColumnColumnName, (object)LJCRecord.ColumnName }
-			};
-			lookupRecord = mViewOrderByManager.Retrieve(keyColumns);
-			if (lookupRecord != null
+      var manager = Managers.ViewOrderByManager;
+			//lookupRecord = mViewOrderByManager.RetrieveWithUniqueKey(LJCRecord.ViewDataID
+   //     , LJCRecord.ColumnName);
+      lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ColumnName);
+      if (lookupRecord != null
 				&& (false == LJCIsUpdate
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
 				title = "Data Entry Error";
 				message = "The record already exists.";
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
 			if (retValue)
@@ -154,13 +154,13 @@ namespace LJCViewEditor
 					};
 
 					LJCRecord.ID = 0;
-					mViewOrderByManager.Update(LJCRecord, updateKeyColumns);
+					manager.Update(LJCRecord, updateKeyColumns);
 					LJCRecord.ID = LJCID;
 				}
 				else
 				{
 					LJCRecord.ID = 0;
-					ViewOrderBy viewOrderBy = mViewOrderByManager.Add(LJCRecord);
+					ViewOrderBy viewOrderBy = manager.Add(LJCRecord);
 					if (viewOrderBy != null)
 					{
 						LJCRecord.ID = viewOrderBy.ID;
@@ -171,8 +171,21 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Validates the data.
-		private bool IsValid()
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Validates the data.
+    private bool IsValid()
 		{
 			StringBuilder builder;
 			string title;
@@ -205,15 +218,15 @@ namespace LJCViewEditor
 		{
 			DataHelper dataHelper;
 
-			// Get singleton values.
-			ValuesViewEditor values = ValuesViewEditor.Instance;
-
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      ValuesViewEditor values = ValuesViewEditor.Instance;
+      Managers = values.Managers;
 			mSettings = values.StandardSettings;
 
 			// Initialize Class Data.
-			mViewOrderByManager = new ViewOrderByManager(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
-
+			//mViewOrderByManager = new ViewOrderByManager(mSettings.DbServiceRef
+			//	, mSettings.DataConfigName);
 			dataHelper = new DataHelper(mSettings.DbServiceRef
 				, mSettings.DataConfigName);
 
@@ -256,8 +269,7 @@ namespace LJCViewEditor
 		// Saves the data and closes the form.
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (IsValid()
-				&& DataSave())
+			if (IsDataSaved())
 			{
 				LJCOnChange();
 				DialogResult = DialogResult.OK;
@@ -301,19 +313,21 @@ namespace LJCViewEditor
 
 		// Gets or sets the Parent ID value.
 		private Color EndColor { get; set; }
-		#endregion
 
-		#region Custom Properties
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
+    #endregion
 
-		// Gets or sets the TableName value.
-		internal string LJCTableName { get; set; }
+    #region Custom Properties
+
+    // Gets or sets the TableName value.
+    internal string LJCTableName { get; set; }
 		#endregion
 
 		#region Class Data
 
 		// Singleton values.
 		private StandardUISettings mSettings;
-		private ViewOrderByManager mViewOrderByManager;
 		private DbColumns mTableColumns;
 
 		// The Change event.

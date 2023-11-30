@@ -14,22 +14,21 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The DocAssembly detail dialog.</summary>
-  public partial class ClassGroupDetail : Form
+  // The DocAssembly detail dialog.
+  internal partial class ClassGroupDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Detail.xml'/>
-    public ClassGroupDetail()
+    internal ClassGroupDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
-      LJCGroupID = 0;
       LJCAssemblyID = 0;
-      LJCRecord = null;
+      LJCGroupID = 0;
       LJCIsUpdate = false;
+      LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -50,7 +49,6 @@ namespace LJCGenDocEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -157,13 +155,11 @@ namespace LJCGenDocEdit
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
-      // Get Parent key values.
+      // Get Reference key values.
       retValue.DocAssemblyID = LJCAssemblyID;
-
-      // Foreign key values.
       retValue.DocClassGroupHeadingID = mDocClassGroupHeadingID;
 
-      // Join values.
+      // Get control join display values.
       retValue.Heading = HeadingText.Text.Trim();
       return retValue;
     }
@@ -178,11 +174,11 @@ namespace LJCGenDocEdit
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
+      string title;
+      string message;
       LJCRecord = SetRecordValues();
 
       var manager = LJCManagers.DocClassGroupManager;
@@ -215,6 +211,7 @@ namespace LJCGenDocEdit
             {
               title = "Update Error";
               message = "The Record was not updated.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -231,6 +228,7 @@ namespace LJCGenDocEdit
             {
               title = "Add Error";
               message = "The Record was not added.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -436,7 +434,6 @@ namespace LJCGenDocEdit
       SetNoSpace(NameText);
       SetNumericOnly(SequenceText);
 
-      //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
       ConfigureControls();
       Cursor = Cursors.Default;
     }
@@ -460,7 +457,6 @@ namespace LJCGenDocEdit
     #region Control Event Handlers
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
@@ -521,8 +517,7 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -558,28 +553,28 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the parent Assembly ID value.</summary>
-    public short LJCAssemblyID { get; set; }
+    // Gets or sets the parent Assembly ID value.
+    internal short LJCAssemblyID { get; set; }
 
-    /// <summary>Gets or sets the primary ID value.</summary>
+    // Gets or sets the primary ID value.
     internal short LJCGroupID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
+    // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>Gets or sets the Next flag.</summary>
+    // Gets or sets the Next flag.
     internal bool LJCNext { get; set; }
 
-    /// <summary>Gets or sets the Previous flag.</summary>
-    internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets a reference to the record object.</summary>
-    internal DocClassGroup LJCRecord { get; private set; }
-
-    /// <summary>The Managers object.</summary>
+    // The Managers object.
     internal ManagersDocGen LJCManagers { get; set; }
 
-    /// <summary>Gets or sets the next sequence value.</summary>
+    // Gets or sets the Previous flag.
+    internal bool LJCPrevious { get; set; }
+
+    // Gets a reference to the record object.
+    internal DocClassGroup LJCRecord { get; private set; }
+
+    // Gets or sets the next sequence value.
     internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
@@ -591,7 +586,7 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    /// <summary>The Change event.</summary>
+    // The Change event.
     public event EventHandler<EventArgs> LJCChange;
 
     // Foreign Keys

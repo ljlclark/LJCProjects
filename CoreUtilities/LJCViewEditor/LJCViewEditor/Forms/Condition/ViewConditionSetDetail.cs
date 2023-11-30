@@ -1,14 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewConditionSetDetail.cs
-using System;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using System;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -24,9 +24,11 @@ namespace LJCViewEditor
 
 			// Initialize property values.
 			LJCID = 0;
-			LJCRecord = null;
-			LJCIsUpdate = false;
-			BeginColor = Color.AliceBlue;
+      LJCIsUpdate = false;
+      LJCRecord = null;
+
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
 		#endregion
@@ -77,11 +79,8 @@ namespace LJCViewEditor
 			{
 				Text += " - Edit";
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
-				{
-					{ ViewConditionSet.ColumnID, LJCID }
-				};
-				var dataRecord = mViewConditionSetManager.Retrieve(keyColumns);
+        var manager = Managers.ViewConditionSetManager;
+				var dataRecord = manager.RetrieveWithID(LJCID);
 				GetRecordValues(dataRecord);
 			}
 			else
@@ -99,15 +98,16 @@ namespace LJCViewEditor
 		{
 			if (dataRecord != null)
 			{
-				LJCParentID = dataRecord.ViewFilterID;
 				ParentTextbox.Text = LJCParentName;
-
 				if ("or" == dataRecord.BooleanOperator.ToLower())
 				{
 					OperatorCombo.SelectedIndex = 1;
 				}
-			}
-		}
+
+        // Reference key values.
+        LJCParentID = dataRecord.ViewFilterID;
+      }
+    }
 
 		// Creates and returns a record object with the data from
 		private ViewConditionSet SetRecordValues()
@@ -115,56 +115,49 @@ namespace LJCViewEditor
 			ViewConditionSet retValue = new ViewConditionSet()
 			{
 				ID = LJCID,
-				ViewFilterID = LJCParentID,
 				BooleanOperator = OperatorCombo.Text,
-			};
+
+        // Get Reference key values.
+        ViewFilterID = LJCParentID
+      };
 			return retValue;
 		}
 
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewConditionSet lookupRecord;
-			string title;
-			string message;
 			bool retValue = true;
 
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
-			{
-				// Only one ViewConditionSet per ViewFilter?
-				{ ViewConditionSet.ColumnViewFilterID, LJCRecord.ViewFilterID }
-			};
-			lookupRecord = mViewConditionSetManager.Retrieve(keyColumns);
+      var manager = Managers.ViewConditionSetManager;
+      // Only one ViewConditionSet per ViewFilter?
+      var lookupRecord = manager.RetrieveWithParentID(LJCRecord.ViewFilterID);
 			if (lookupRecord != null
 				&& (false == LJCIsUpdate
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				title = "Data Entry Error";
-				message = "The record already exists.";
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				var title = "Data Entry Error";
+				var message = "The record already exists.";
+        Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
 			if (retValue)
 			{
 				if (LJCIsUpdate)
 				{
-					var updateKeyColumns = new DbColumns()
-					{
-						{ ViewConditionSet.ColumnID, LJCRecord.ID }
-					};
-
+          var keyColumns = manager.IDKey(LJCID);
 					LJCRecord.ID = 0;
-					mViewConditionSetManager.Update(LJCRecord, updateKeyColumns);
+					manager.Update(LJCRecord, keyColumns);
 					LJCRecord.ID = LJCID;
 				}
 				else
 				{
 					LJCRecord.ID = 0;
-					ViewConditionSet viewConditionSet = mViewConditionSetManager.Add(LJCRecord);
+					var viewConditionSet = manager.Add(LJCRecord);
 					if (viewConditionSet != null)
 					{
 						LJCRecord.ID = viewConditionSet.ID;
@@ -175,15 +168,25 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Validates the data.
-		private bool IsValid()
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Validates the data.
+    private bool IsValid()
 		{
-			StringBuilder builder;
-			string title;
-			string message;
 			bool retVal = true;
 
-			builder = new StringBuilder(64);
+			var builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
 			if (false == NetString.HasValue(OperatorCombo.Text))
@@ -194,9 +197,9 @@ namespace LJCViewEditor
 
 			if (retVal == false)
 			{
-				title = "Data Entry Error";
-				message = builder.ToString();
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				var title = "Data Entry Error";
+				var message = builder.ToString();
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 			return retVal;
 		}
@@ -207,33 +210,33 @@ namespace LJCViewEditor
 		// Configures the controls and loads the selection control data.
 		private void InitializeControls()
 		{
-			// Get singleton values.
-			ValuesViewEditor values = ValuesViewEditor.Instance;
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      ValuesViewEditor values = ValuesViewEditor.Instance;
+      mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
-			mSettings = values.StandardSettings;
 
-			// Initialize Class Data.
-			mViewConditionSetManager
-				= new ViewConditionSetManager(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
+      // Initialize Class Data.
 
-			// Set control values.
-			ParentLabel.BackColor = mSettings.BeginColor;
-			OperatorLabel.BackColor = mSettings.BeginColor;
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
-			OperatorCombo.MaxLength = ViewConditionSet.LengthBooleanOperator;
+      OperatorCombo.MaxLength = ViewConditionSet.LengthBooleanOperator;
 
 			// Load control data.
 			OperatorCombo.Items.Add("And");
 			OperatorCombo.Items.Add("Or");
 			OperatorCombo.SelectedIndex = 0;
-		}
-		#endregion
+      Cursor = Cursors.Default;
+    }
+    #endregion
 
-		#region Action Event Handlers
+    #region Action Event Handlers
 
-		// Shows the Help page.
-		private void ConditionSetHelp_Click(object sender, EventArgs e)
+    // Shows the Help page.
+    private void ConditionSetHelp_Click(object sender, EventArgs e)
 		{
 			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
 				, @"Filter\ConditionSetDetail.html");
@@ -251,8 +254,7 @@ namespace LJCViewEditor
 		// Saves the data and closes the form.
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (IsValid()
-				&& DataSave())
+			if (IsDataSaved())
 			{
 				LJCOnChange();
 				DialogResult = DialogResult.OK;
@@ -296,16 +298,20 @@ namespace LJCViewEditor
 
 		// Gets or sets the Parent ID value.
 		private Color EndColor { get; set; }
-		#endregion
 
-		#region Class Data
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
+    #endregion
 
-		// Singleton values.
-		StandardUISettings mSettings;
-		private ViewConditionSetManager mViewConditionSetManager;
+    #region Class Data
+
+    // Singleton values.
 
 		// The Change event.
 		internal event EventHandler<EventArgs> LJCChange;
-		#endregion
-	}
+
+    private StandardUISettings mSettings;
+    //private ItemTypeComboCode mItemTypeComboCode;
+    #endregion
+  }
 }

@@ -115,11 +115,11 @@ namespace LJCDBViewDAL
         = Managers.ViewFilterManager.LoadWithParentID(viewDataID);
       if (viewFilters != null && viewFilters.Count > 0)
       {
+        var manager = Managers.ViewConditionSetManager;
         dbRequest.Filters = new DbFilters();
         foreach (ViewFilter viewFilter in viewFilters)
         {
-          var viewConditionSet
-            = Managers.ViewConditionSetManager.RetrieveWithUniqueKey(viewFilter.ID);
+          var viewConditionSet = manager.RetrieveWithParentID(viewFilter.ID);
           ViewConditions viewConditions = null;
           if (viewConditionSet != null)
           {
@@ -615,8 +615,8 @@ namespace LJCDBViewDAL
       if (CheckConditionSetParams(viewFilterID, dbFilter))
       {
         // Get Update record.
-        retValue
-          = Managers.ViewConditionSetManager.RetrieveWithUniqueKey(viewFilterID);
+        var manager = Managers.ViewConditionSetManager;
+        retValue = manager.RetrieveWithParentID(viewFilterID);
         if (null == retValue)
         {
           // Get Create record.
@@ -688,8 +688,9 @@ namespace LJCDBViewDAL
         foreach (DbColumn dbColumn in dbJoin.Columns)
         {
           // Get Update record.
-          var viewJoinColumn
-            = Managers.ViewJoinColumnManager.RetrieveWithUniqueKey(viewJoin, dbColumn);
+          var manager = Managers.ViewJoinColumnManager;
+          var viewJoinColumn = manager.RetrieveWithUnique(viewJoin.ID
+            , dbColumn.PropertyName, dbColumn.RenameAs);
           //viewColumn = ViewColumnManager.SaveJoinColumn(viewJoin, dbColumn
           //	, viewJoinColumn, sequence);
           if (null == viewJoinColumn)

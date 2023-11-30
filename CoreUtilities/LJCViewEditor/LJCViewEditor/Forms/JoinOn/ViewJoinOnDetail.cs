@@ -1,15 +1,15 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinOnDetail.cs
-using System;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
 using LJCViewEditorDAL;
+using System;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -25,8 +25,8 @@ namespace LJCViewEditor
 
 			// Initialize property values.
 			LJCID = 0;
-			LJCRecord = null;
-			LJCIsUpdate = false;
+      LJCIsUpdate = false;
+      LJCRecord = null;
 			BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
@@ -78,11 +78,8 @@ namespace LJCViewEditor
 			{
 				Text += " - Edit";
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
-				{
-					{ ViewJoinOn.ColumnID, LJCID }
-				};
-				var dataRecord = mViewJoinOnManager.Retrieve(keyColumns);
+        var manager = Managers.ViewJoinOnManager;
+				var dataRecord = manager.RetrieveWithID(LJCID);
 				GetRecordValues(dataRecord);
 			}
 			else
@@ -101,7 +98,6 @@ namespace LJCViewEditor
 		{
 			if (dataRecord != null)
 			{
-				LJCParentID = dataRecord.ViewJoinID;
 				ParentTextbox.Text = LJCParentName;
 
 				FromColumnCombo.Text = dataRecord.FromColumnName;
@@ -121,47 +117,46 @@ namespace LJCViewEditor
 				}
 
 				OperatorTextbox.Text = dataRecord.JoinOnOperator;
-			}
-		}
+
+        // Reference key values.
+        LJCParentID = dataRecord.ViewJoinID;
+      }
+    }
 
 		// Creates and returns a record object with the data from
 		private ViewJoinOn SetRecordValues()
 		{
-			ViewJoinOn retValue = new ViewJoinOn()
-			{
-				ID = LJCID,
-				ViewJoinID = LJCParentID,
-				FromColumnName = ViewEditorCommon.TruncateAtHyphen(FromColumnCombo.Text),
-				ToColumnName = ViewEditorCommon.TruncateAtHyphen(ToColumnCombo.Text),
-				JoinOnOperator = OperatorTextbox.Text
-			};
+      ViewJoinOn retValue = new ViewJoinOn()
+      {
+        FromColumnName = ViewEditorCommon.TruncateAtHyphen(FromColumnCombo.Text),
+        ToColumnName = ViewEditorCommon.TruncateAtHyphen(ToColumnCombo.Text),
+        JoinOnOperator = OperatorTextbox.Text,
+
+        // Get Reference key values.
+        ID = LJCID,
+        ViewJoinID = LJCParentID,
+      };
 			return retValue;
 		}
 
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewJoinOn lookupRecord;
-			string title;
-			string message;
 			bool retValue = true;
 
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
-			{
-				{ ViewJoinOn.ColumnViewJoinID, LJCRecord.ViewJoinID },
-				{ ViewJoinOn.ColumnFromColumnName, (object)LJCRecord.FromColumnName }
-			};
-			lookupRecord = mViewJoinOnManager.Retrieve(keyColumns);
+      var manager = Managers.ViewJoinOnManager;
+			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewJoinID
+        , LJCRecord.FromColumnName);
 			if (lookupRecord != null
 				&& (false == LJCIsUpdate
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				title = "Data Entry Error";
-				message = "The record already exists.";
+				var title = "Data Entry Error";
+				var message = "The record already exists.";
 				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
@@ -169,19 +164,15 @@ namespace LJCViewEditor
 			{
 				if (LJCIsUpdate)
 				{
-					var updateKeyColumns = new DbColumns()
-					{
-						{ ViewJoinOn.ColumnID, LJCRecord.ID }
-					};
-
+          var keyColumns = manager.GetIDKey(LJCRecord.ID);
 					LJCRecord.ID = 0;
-					mViewJoinOnManager.Update(LJCRecord, updateKeyColumns);
+					manager.Update(LJCRecord, keyColumns);
 					LJCRecord.ID = LJCID;
 				}
 				else
 				{
 					LJCRecord.ID = 0;
-					ViewJoinOn viewJoinOn = mViewJoinOnManager.Add(LJCRecord);
+					ViewJoinOn viewJoinOn = manager.Add(LJCRecord);
 					if (viewJoinOn != null)
 					{
 						LJCRecord.ID = viewJoinOn.ID;
@@ -192,8 +183,21 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Validates the data.
-		private bool IsValid()
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Validates the data.
+    private bool IsValid()
 		{
 			StringBuilder builder;
 			string title;
@@ -236,26 +240,15 @@ namespace LJCViewEditor
 		{
 			// Get singleton values.
 			ValuesViewEditor values = ValuesViewEditor.Instance;
-
+      Managers = values.Managers;
 			mSettings = values.StandardSettings;
 
       // Initialize Class Data.
-      Managers = new ManagersDbView();
-      Managers.SetDbProperties(mSettings.DbServiceRef
-        , mSettings.DataConfigName);
-      //mDataDbView = new DataDbView(Managers);
-			mViewJoinOnManager = Managers.ViewJoinOnManager;
-			//mViewJoinManager = mViewHelper.ViewJoinManager;
-			//mViewDataManager = mViewHelper.ViewDataManager;
-			//mViewTableManager = mViewHelper.ViewTableManager;
 
-			// Set control values.
-			ParentLabel.BackColor = mSettings.BeginColor;
-			FromColumnLabel.BackColor = mSettings.BeginColor;
-			ToColumnLabel.BackColor = mSettings.BeginColor;
-			OperatorLabel.BackColor = mSettings.BeginColor;
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
-			FromColumnCombo.MaxLength = ViewJoinOn.LengthFromColumnName;
+      FromColumnCombo.MaxLength = ViewJoinOn.LengthFromColumnName;
 			ToColumnCombo.MaxLength = ViewJoinOn.LengthToColumnName;
 			OperatorTextbox.MaxLength = ViewJoinOn.LengthJoinOperator;
 
@@ -299,8 +292,7 @@ namespace LJCViewEditor
 		// Saves the data and closes the form.
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (IsValid()
-				&& DataSave())
+			if (IsDataSaved())
 			{
 				LJCOnChange();
 				DialogResult = DialogResult.OK;
@@ -384,25 +376,21 @@ namespace LJCViewEditor
 		// Gets a reference to the record object.
 		internal ViewJoinOn LJCRecord { get; private set; }
 
-    internal ManagersDbView Managers { get; set; }
-
     // Gets or sets the BeginColor value.
     private Color BeginColor { get; set; }
 
 		// Gets or sets the Parent ID value.
 		private Color EndColor { get; set; }
+
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
     #endregion
 
     #region Class Data
 
     private DbColumns mJoinOnTableColumns;
-		private DbColumns mJoinTableColumns;
+    private DbColumns mJoinTableColumns;
 		private StandardUISettings mSettings;
-		//private ViewDataManager mViewDataManager;
-		//private DataDbView mDataDbView;
-		//private ViewJoinManager mViewJoinManager;
-		private ViewJoinOnManager mViewJoinOnManager;
-		//private ViewTableManager mViewTableManager;
 
 		// The Change event.
 		internal event EventHandler<EventArgs> LJCChange;

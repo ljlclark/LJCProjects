@@ -1,14 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewDataDetail.cs
-using System;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using System;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -24,8 +24,8 @@ namespace LJCViewEditor
 
       // Initialize property values.
       LJCID = 0;
-      LJCRecord = null;
       LJCIsUpdate = false;
+      LJCRecord = null;
       BeginColor = Color.AliceBlue;
       EndColor = Color.LightSkyBlue;
     }
@@ -71,19 +71,14 @@ namespace LJCViewEditor
     // Retrieves the initial control data.
     private void DataRetrieve()
     {
-      ViewData dataRecord;
-
       Cursor = Cursors.WaitCursor;
+      var manager = Managers.ViewDataManager;
       Text = "ViewData Detail";
       if (LJCID > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var keyColumns = new DbColumns()
-        {
-          { ViewData.ColumnID, LJCID }
-        };
-        dataRecord = mViewDataManager.Retrieve(keyColumns);
+        var dataRecord = manager.RetrieveWithID(LJCID);
         GetRecordValues(dataRecord);
       }
       else
@@ -100,7 +95,7 @@ namespace LJCViewEditor
           { ViewData.ColumnName, (object)name }
         };
 
-        dataRecord = mViewDataManager.Retrieve(keyRecord);
+        var dataRecord = manager.Retrieve(keyRecord);
         if (null == dataRecord)
         {
           NameTextbox.Text = name;
@@ -115,10 +110,12 @@ namespace LJCViewEditor
     {
       if (dataRecord != null)
       {
-        LJCParentID = dataRecord.ViewTableID;
         ParentTextbox.Text = LJCParentName;
         NameTextbox.Text = dataRecord.Name;
         DescriptionTextbox.Text = dataRecord.Description;
+
+        // Reference key values.
+        LJCParentID = dataRecord.ViewTableID;
       }
     }
 
@@ -128,9 +125,11 @@ namespace LJCViewEditor
       ViewData retVal = new ViewData()
       {
         ID = LJCID,
-        ViewTableID = LJCParentID,
         Name = NameTextbox.Text,
-        Description = DescriptionTextbox.Text
+        Description = DescriptionTextbox.Text,
+
+        // Get Reference key values.
+        ViewTableID = LJCParentID,
       };
       return retVal;
     }
@@ -146,12 +145,9 @@ namespace LJCViewEditor
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      var keyColumns = new DbColumns()
-      {
-        { ViewData.ColumnViewTableID, LJCRecord.ViewTableID },
-        { ViewData.ColumnName, (object)LJCRecord.Name }
-      };
-      lookupRecord = mViewDataManager.Retrieve(keyColumns);
+      var manager = Managers.ViewDataManager;
+      lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewTableID
+        , LJCRecord.Name);
       if (lookupRecord != null
         && (false == LJCIsUpdate
         || (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
@@ -159,6 +155,7 @@ namespace LJCViewEditor
         retValue = false;
         title = "Data Entry Error";
         message = "The record already exists.";
+        Cursor = Cursors.Default;
         MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       }
 
@@ -171,13 +168,13 @@ namespace LJCViewEditor
             { ViewData.ColumnID, LJCRecord.ID }
           };
           LJCRecord.ID = 0;
-          mViewDataManager.Update(LJCRecord, updateKeyColumns);
+          manager.Update(LJCRecord, updateKeyColumns);
           LJCRecord.ID = LJCID;
         }
         else
         {
           LJCRecord.ID = 0;
-          ViewData viewData = mViewDataManager.Add(LJCRecord);
+          ViewData viewData = manager.Add(LJCRecord);
           if (viewData != null)
           {
             LJCRecord.ID = viewData.ID;
@@ -185,6 +182,19 @@ namespace LJCViewEditor
         }
       }
       Cursor = Cursors.Default;
+      return retValue;
+    }
+
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
       return retValue;
     }
 
@@ -227,17 +237,17 @@ namespace LJCViewEditor
     {
       // Get singleton values.
       ValuesViewEditor values = ValuesViewEditor.Instance;
-
+      Managers = values.Managers;
       mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
       // Initialize Class Data.
-      mViewDataManager = new ViewDataManager(mSettings.DbServiceRef
-        , mSettings.DataConfigName);
+      //mViewDataManager = new ViewDataManager(mSettings.DbServiceRef
+      //  , mSettings.DataConfigName);
 
       // Set control values.
-      ParentLabel.BackColor = mSettings.BeginColor;
-      NameLabel.BackColor = mSettings.BeginColor;
-      DescriptionLabel.BackColor = mSettings.BeginColor;
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
       NameTextbox.MaxLength = ViewData.LengthName;
       DescriptionTextbox.MaxLength = ViewData.LengthDescription;
@@ -265,8 +275,7 @@ namespace LJCViewEditor
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -327,13 +336,15 @@ namespace LJCViewEditor
 
     // Gets or sets the Parent ID value.
     private Color EndColor { get; set; }
+
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
     #endregion
 
     #region Class Data
 
     // Singleton values.
     private StandardUISettings mSettings;
-    private ViewDataManager mViewDataManager;
 
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;

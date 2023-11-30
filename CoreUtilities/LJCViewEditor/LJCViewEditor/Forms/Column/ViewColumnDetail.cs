@@ -1,16 +1,15 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewColumnDetail.cs
+using LJCDBClientLib;
+using LJCDBViewDAL;
+using LJCNetCommon;
+using LJCViewEditorDAL;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LJCNetCommon;
-using LJCWinFormCommon;
-using LJCDBClientLib;
-using LJCDBViewDAL;
-using LJCViewEditorDAL;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LJCViewEditor
 {
@@ -25,14 +24,17 @@ namespace LJCViewEditor
       InitializeComponent();
 
       // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"Column\ColumnDetail.html";
       LJCID = 0;
+      LJCIsUpdate = false;
       LJCParentID = 0;
       LJCParentName = null;
       LJCRecord = null;
-      LJCIsUpdate = false;
+
+      // Set default class data.
       BeginColor = Color.AliceBlue;
       EndColor = Color.LightSkyBlue;
-
       mAllowTemplateGetValues = true;
     }
     #endregion
@@ -45,8 +47,8 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.F1:
-          Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-            , @"Column\ColumnDetail.html");
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
           break;
       }
     }
@@ -66,7 +68,6 @@ namespace LJCViewEditor
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
-
       FormCommon.CreateGradient(e.Graphics, ClientRectangle
         , BeginColor, EndColor);
     }
@@ -83,7 +84,8 @@ namespace LJCViewEditor
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var dataRecord = mViewColumnManager.RetrieveWithID(LJCID);
+        var manager = Managers.ViewColumnManager;
+        var dataRecord = manager.RetrieveWithID(LJCID);
         GetRecordValues(dataRecord);
 
         // Do not allow column change on update.
@@ -105,11 +107,7 @@ namespace LJCViewEditor
       // Also called from TemplateCombo_SelectedIndexChanged.
       if (dataRecord != null)
       {
-        // Do not update parent values on TemplateCombo changed.
-        if (dataRecord.ViewDataID > 0)
-        {
-          LJCParentID = dataRecord.ViewDataID;
-        }
+        // In control order.
         ParentTextbox.Text = LJCParentName;
 
         // Only select a column if currently empty.
@@ -132,6 +130,13 @@ namespace LJCViewEditor
         DataTypeCombo.SelectedIndex = DataTypeCombo.FindStringExact(dataRecord.DataTypeName);
         ValueTextbox.Text = dataRecord.Value;
         PrimaryKeyCheckBox.Checked = dataRecord.IsPrimaryKey;
+
+        // Reference key values.
+        // Do not update parent values on TemplateCombo changed.
+        if (dataRecord.ViewDataID > 0)
+        {
+          LJCParentID = dataRecord.ViewDataID;
+        }
       }
     }
 
@@ -140,15 +145,18 @@ namespace LJCViewEditor
     {
       ViewColumn retValue = new ViewColumn()
       {
-        ID = LJCID,
-        ViewDataID = LJCParentID,
+        // In control order.
         ColumnName = ColumnNameTextbox.Text.Trim(),
         PropertyName = FormCommon.SetString(PropertyTextbox.Text.Trim()),
         RenameAs = FormCommon.SetString(RenameTextbox.Text.Trim()),
         Caption = FormCommon.SetString(CaptionTextbox.Text.Trim()),
         DataTypeName = DataTypeCombo.Text.Trim(),
         Value = FormCommon.SetString(ValueTextbox.Text.Trim()),
-        IsPrimaryKey = PrimaryKeyCheckBox.Checked
+        IsPrimaryKey = PrimaryKeyCheckBox.Checked,
+
+        // Get Reference key values.
+        ID = LJCID,
+        ViewDataID = LJCParentID
       };
       return retValue;
     }
@@ -165,25 +173,18 @@ namespace LJCViewEditor
     // Saves the data.
     private bool DataSave()
     {
-      ViewColumn lookupRecord;
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
-
-      var keyColumns = new DbColumns()
-      {
-        { ViewColumn.ColumnViewDataID, LJCRecord.ViewDataID },
-        { ViewColumn.ColumnColumnName, (object)LJCRecord.ColumnName }
-      };
-      lookupRecord = mViewColumnManager.Retrieve(keyColumns);
-      if (mViewColumnManager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+      var manager = Managers.ViewColumnManager;
+      var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewDataID
+        , LJCRecord.ColumnName);
+      if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
+        var title = "Data Entry Error";
+        var message = "The record already exists.";
         Cursor = Cursors.Default;
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
@@ -193,21 +194,38 @@ namespace LJCViewEditor
       {
         if (LJCIsUpdate)
         {
-          var updateKeyColumns = new DbColumns()
-          {
-            { ViewColumn.ColumnID, LJCRecord.ID }
-          };
+          var keyColumns = manager.IDKey(LJCID);
           LJCRecord.ID = 0;
-          mViewColumnManager.Update(LJCRecord, updateKeyColumns);
+          manager.Update(LJCRecord, keyColumns);
           LJCRecord.ID = LJCID;
           ResetRecordValues(LJCRecord);
+          if (0 == manager.AffectedCount)
+          {
+            retValue = false;
+            var title = "Update Error";
+            var message = "The Record was not updated.";
+            Cursor = Cursors.Default;
+            MessageBox.Show(message, title, MessageBoxButtons.OK
+              , MessageBoxIcon.Information);
+          }
         }
         else
         {
           LJCRecord.ID = 0;
-          ViewColumn addedRecord = mViewColumnManager.AddWithFlags(LJCRecord);
+          ViewColumn addedRecord = manager.AddWithFlags(LJCRecord);
           ResetRecordValues(LJCRecord);
-          if (addedRecord != null)
+          if (null == addedRecord)
+          {
+            if (manager.AffectedCount < 1)
+            {
+              var title = "Add Error";
+              var message = "The Record was not added.";
+              Cursor = Cursors.Default;
+              MessageBox.Show(message, title, MessageBoxButtons.OK
+                , MessageBoxIcon.Information);
+            }
+          }
+          else
           {
             LJCRecord.ID = addedRecord.ID;
           }
@@ -217,15 +235,25 @@ namespace LJCViewEditor
       return retValue;
     }
 
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Validates the data.
     private bool IsValid()
     {
-      StringBuilder builder;
-      string title;
-      string message;
       bool retVal = true;
 
-      builder = new StringBuilder(64);
+      var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
       if (false == NetString.HasValue(ColumnNameTextbox.Text))
@@ -241,8 +269,8 @@ namespace LJCViewEditor
 
       if (retVal == false)
       {
-        title = "Data Entry Error";
-        message = builder.ToString();
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       }
       return retVal;
@@ -254,31 +282,22 @@ namespace LJCViewEditor
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      DataTypeManager dataTypeManager;
-
       // Get singleton values.
-      ValuesViewEditor values = ValuesViewEditor.Instance;
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesViewEditor.Instance;
+      Managers = values.Managers;
       mSettings = values.StandardSettings;
       BeginColor = mSettings.BeginColor;
       EndColor = mSettings.EndColor;
+      mDbServiceRef = mSettings.DbServiceRef;
+      mDataConfigName = mSettings.DataConfigName;
 
       // Initialize Class Data.
-      Managers = new ManagersDbView();
-      mDbServiceRef = Managers.DbServiceRef;
-      mDataConfigName = Managers.DataConfigName;
-      Managers.SetDbProperties(mDbServiceRef, mDataConfigName);
       mDataDbView = new DataDbView(Managers);
-      mViewColumnManager = new ViewColumnManager(mDbServiceRef
-        , mDataConfigName);
 
       // Set control values.
-      ParentLabel.BackColor = BeginColor;
-      ColumnNameLabel.BackColor = BeginColor;
-      PropertyLabel.BackColor = BeginColor;
-      CaptionLabel.BackColor = BeginColor;
-      DataTypeLabel.BackColor = BeginColor;
-      ValueLabel.BackColor = BeginColor;
-      RenameLabel.BackColor = BeginColor;
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      SetNoSpace();
 
       ColumnNameTextbox.MaxLength = ViewColumn.LengthColumnName;
       PropertyTextbox.MaxLength = ViewColumn.LengthPropertyName;
@@ -286,6 +305,7 @@ namespace LJCViewEditor
       ValueTextbox.MaxLength = ViewColumn.LengthValue;
       RenameTextbox.MaxLength = ViewColumn.LengthRenameAs;
 
+      // Load control data.
       // Template Columns Combo
       DataHelper dataHelper = new DataHelper(mDbServiceRef, mDataConfigName);
       mTableColumns = dataHelper.GetTableColumns(LJCTableName);
@@ -295,6 +315,7 @@ namespace LJCViewEditor
       }
 
       // Data Types Combo
+      DataTypeManager dataTypeManager;
       try
       {
         dataTypeManager = new DataTypeManager(mDbServiceRef, mDataConfigName);
@@ -310,6 +331,17 @@ namespace LJCViewEditor
         DataTypeCombo.Items.Add(dataType);
       }
     }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      ColumnNameTextbox.KeyPress += TextboxNoSpace_KeyPress;
+      PropertyTextbox.KeyPress += TextboxNoSpace_KeyPress;
+      RenameTextbox.KeyPress += TextboxNoSpace_KeyPress;
+      ColumnNameTextbox.TextChanged += TextboxNoSpace_TextChanged;
+      PropertyTextbox.TextChanged += TextboxNoSpace_TextChanged;
+      RenameTextbox.TextChanged += TextboxNoSpace_TextChanged;
+    }
     #endregion
 
     #region Action Event Handlers
@@ -317,8 +349,8 @@ namespace LJCViewEditor
     // Shows the Help page.
     private void ViewColumnHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-        , @"Column\ColumnDetail.html");
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
     }
     #endregion
 
@@ -333,8 +365,7 @@ namespace LJCViewEditor
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -364,49 +395,40 @@ namespace LJCViewEditor
     #region KeyEdit Event Handlers
 
     // Does not allow spaces.
-    private void ColumnNameTextbox_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Does not allow spaces.
-    private void PropertyTextbox_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Does not allow spaces.
-    private void RenameTextbox_KeyPress(object sender, KeyPressEventArgs e)
+    private void TextboxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
       e.Handled = FormCommon.HandleSpace(e.KeyChar);
     }
 
     // Strips blanks from the text value.
-    private void ColumnNameTextbox_TextChanged(object sender, EventArgs e)
+    private void TextboxNoSpace_TextChanged(object sender, EventArgs e)
     {
-      var prevStart = ColumnNameTextbox.SelectionStart;
-      ColumnNameTextbox.Text = FormCommon.StripBlanks(ColumnNameTextbox.Text);
-      ColumnNameTextbox.SelectionStart = prevStart;
-    }
-
-    // Strips blanks from the text value.
-    private void PropertyTextbox_TextChanged(object sender, EventArgs e)
-    {
-      var prevStart = PropertyTextbox.SelectionStart;
-      PropertyTextbox.Text = FormCommon.StripBlanks(PropertyTextbox.Text);
-      PropertyTextbox.SelectionStart = prevStart;
-    }
-
-    // Strips blanks from the text value.
-    private void RenameTextbox_TextChanged(object sender, EventArgs e)
-    {
-      var prevStart = RenameTextbox.SelectionStart;
-      RenameTextbox.Text = FormCommon.StripBlanks(RenameTextbox.Text);
-      RenameTextbox.SelectionStart = prevStart;
+      if (sender is TextBox textbox)
+      {
+        var prevStart = textbox.SelectionStart;
+        textbox.Text = FormCommon.StripBlanks(ColumnNameTextbox.Text);
+        textbox.SelectionStart = prevStart;
+      }
     }
     #endregion
 
     #region Properties
+
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
 
     // Gets or sets the ID value.
     internal int LJCID { get; set; }
@@ -454,11 +476,10 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    private string mDataConfigName;
-    private DbServiceRef mDbServiceRef;
     private StandardUISettings mSettings;
+    private DbServiceRef mDbServiceRef;
+    private string mDataConfigName;
     private DbColumns mTableColumns;
-    private ViewColumnManager mViewColumnManager;
     private DataDbView mDataDbView;
 
     // The Change event.

@@ -58,7 +58,7 @@ namespace LJCDBViewDAL
       DbColumns retValue;
 
       // Load from DataManager to get DbColumns result.
-      var keyColumns = GetParentKey(viewDataID);
+      var keyColumns = ParentIDKey(viewDataID);
       viewColumnResult = DataManager.Load(keyColumns);
 
       // Copies ViewColumn properties to DbColumn objects.
@@ -91,10 +91,8 @@ namespace LJCDBViewDAL
     /// <include path='items/LoadWithParentID/*' file='Doc/ViewColumnManager.xml'/>
     public ViewColumns LoadWithParentID(int viewDataID)
     {
-      ViewColumns retValue;
-
-      var keyColumns = GetParentKey(viewDataID);
-      retValue = Load(keyColumns);
+      var keyColumns = ParentIDKey(viewDataID);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -102,10 +100,8 @@ namespace LJCDBViewDAL
     /// <include path='items/ResultWithParentID/*' file='Doc/ViewColumnManager.xml'/>
     public DbResult ResultWithParentID(int viewDataID)
     {
-      DbResult retValue;
-
-      var keyColumns = GetParentKey(viewDataID);
-      retValue = DataManager.Load(keyColumns);
+      var keyColumns = ParentIDKey(viewDataID);
+      var retValue = DataManager.Load(keyColumns);
       return retValue;
     }
 
@@ -113,10 +109,8 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithID/*' file='Doc/ViewColumnManager.xml'/>
     public ViewColumn RetrieveWithID(int id)
     {
-      ViewColumn retValue;
-
-      var keyColumns = GetIDKey(id);
-      retValue = Retrieve(keyColumns);
+      var keyColumns = IDKey(id);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
 
@@ -124,18 +118,8 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithUniqueKey/*' file='Doc/ViewColumnManager.xml'/>
     public ViewColumn RetrieveWithUniqueKey(int viewDataID, string columnName)
     {
-      ViewColumn retValue;
-
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
-      // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
-      {
-        { ViewColumn.ColumnViewDataID, viewDataID },
-        { ViewColumn.ColumnColumnName, (object)columnName }
-      };
-
-      retValue = Retrieve(keyColumns);
+      var keyColumns = UniqueKey(viewDataID, columnName);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
     #endregion
@@ -143,8 +127,8 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns IDKey(int id)
     {
       var retValue = new DbColumns()
       {
@@ -154,12 +138,24 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns ParentIDKey(int parentID)
     {
       var retValue = new DbColumns()
       {
-        { ViewColumn.ColumnViewDataID, id }
+        { ViewColumn.ColumnViewDataID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns UniqueKey(int parentID, string name)
+    {
+      var retValue = new DbColumns()
+      {
+        { ViewColumn.ColumnViewDataID, parentID },
+        { ViewColumn.ColumnColumnName, (object)name }
       };
       return retValue;
     }
@@ -238,7 +234,7 @@ namespace LJCDBViewDAL
           // Note: Changed to update only changed columns.
           if (viewColumn.ChangedNames.Count > 0)
           {
-            var keyColumns = GetIDKey(retrieveData.ID);
+            var keyColumns = IDKey(retrieveData.ID);
             Update(viewColumn, keyColumns, viewColumn.ChangedNames);
           }
         }

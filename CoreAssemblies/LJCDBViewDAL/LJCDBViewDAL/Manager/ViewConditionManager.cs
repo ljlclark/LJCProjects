@@ -41,10 +41,8 @@ namespace LJCDBViewDAL
     /// <include path='items/LoadWithParentID/*' file='Doc/ViewConditionManager.xml'/>
     public ViewConditions LoadWithParentID(int conditionSetID)
     {
-      ViewConditions retValue;
-
-      var keyColumns = GetParentKey(conditionSetID);
-      retValue = Load(keyColumns);
+      var keyColumns = ParentIDKey(conditionSetID);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -52,10 +50,17 @@ namespace LJCDBViewDAL
     /// <include path='items/ResultWithParentID/*' file='Doc/ViewConditionManager.xml'/>
     public DbResult ResultWithParentID(int conditionSetID)
     {
-      DbResult retValue;
+      var keyColumns = ParentIDKey(conditionSetID);
+      var retValue = DataManager.Load(keyColumns);
+      return retValue;
+    }
 
-      var keyColumns = GetParentKey(conditionSetID);
-      retValue = DataManager.Load(keyColumns);
+    // Retrieve the record with ID.
+    /// <include path='items/RetrieveWithID/*' file='Doc/ViewColumnManager.xml'/>
+    public ViewCondition RetrieveWithID(int id)
+    {
+      var keyColumns = IDKey(id);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
 
@@ -63,17 +68,17 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithUniqueKey/*' file='Doc/ViewConditionManager.xml'/>
     public ViewCondition RetrieveWithUniqueKey(int viewConditionSetID, string firstValue)
     {
-      ViewCondition retValue;
+      var keyColumns = UniqueKey(viewConditionSetID, firstValue);
+      var retValue = Retrieve(keyColumns);
+      return retValue;
+    }
 
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
-      // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
-      {
-        { ViewCondition.ColumnViewConditionSetID, viewConditionSetID },
-        { ViewCondition.ColumnFirstValue, (object)firstValue }
-      };
-      retValue = Retrieve(keyColumns);
+    // Retrieve the record with ID.
+    /// <include path='items/RetrieveWithParentID/*' file='Doc/ViewColumnManager.xml'/>
+    public ViewCondition RetrieveWithParentID(int conditionSetID)
+    {
+      var keyColumns = ParentIDKey(conditionSetID);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
     #endregion
@@ -81,12 +86,35 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns IDKey(int id)
     {
       var retValue = new DbColumns()
       {
-        { ViewCondition.ColumnViewConditionSetID, id }
+        { ViewColumn.ColumnID, id }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns ParentIDKey(int parentID)
+    {
+      var retValue = new DbColumns()
+      {
+        { ViewCondition.ColumnViewConditionSetID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns UniqueKey(int parentID, string name)
+    {
+      var retValue = new DbColumns()
+      {
+        { ViewCondition.ColumnViewConditionSetID, parentID },
+        { ViewCondition.ColumnFirstValue, (object)name }
       };
       return retValue;
     }

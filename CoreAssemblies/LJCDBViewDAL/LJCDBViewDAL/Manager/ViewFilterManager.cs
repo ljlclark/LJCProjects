@@ -41,10 +41,8 @@ namespace LJCDBViewDAL
     /// <include path='items/LoadWithParentID/*' file='Doc/ViewFilterManager.xml'/>
     public ViewFilters LoadWithParentID(int viewDataID)
     {
-      ViewFilters retValue;
-
-      var keyColumns = GetParentKey(viewDataID);
-      retValue = Load(keyColumns);
+      var keyColumns = ParentIDKey(viewDataID);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -52,10 +50,8 @@ namespace LJCDBViewDAL
     /// <include path='items/ResultWithParentID/*' file='Doc/ViewFilterManager.xml'/>
     public DbResult ResultWithParentID(int viewDataID)
     {
-      DbResult retValue;
-
-      var keyColumns = GetParentKey(viewDataID);
-      retValue = DataManager.Load(keyColumns);
+      var keyColumns = ParentIDKey(viewDataID);
+      var retValue = DataManager.Load(keyColumns);
       return retValue;
     }
 
@@ -63,10 +59,8 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithID/*' file='Doc/ViewFilterManager.xml'/>
     public ViewFilter RetrieveWithID(int id)
     {
-      ViewFilter retValue;
-
-      var keyColumns = GetIDKey(id);
-      retValue = Retrieve(keyColumns);
+      var keyColumns = IDKey(id);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
 
@@ -74,17 +68,8 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithUniqueKey/*' file='Doc/ViewFilterManager.xml'/>
     public ViewFilter RetrieveWithUniqueKey(int viewDataID, string name)
     {
-      ViewFilter retValue;
-
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
-      // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
-      {
-        { ViewFilter.ColumnViewDataID, viewDataID },
-        { ViewFilter.ColumnName, (object)name }
-      };
-      retValue = Retrieve(keyColumns);
+      var keyColumns = UniqueKey(viewDataID, name);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
     #endregion
@@ -92,8 +77,8 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns IDKey(int id)
     {
       var retValue = new DbColumns()
       {
@@ -103,12 +88,24 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns ParentIDKey(int parentID)
     {
       var retValue = new DbColumns()
       {
-        { ViewFilter.ColumnViewDataID, id }
+        { ViewFilter.ColumnViewDataID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns UniqueKey(int parentID, string name)
+    {
+      var retValue = new DbColumns()
+      {
+        { ViewFilter.ColumnViewDataID, parentID },
+        { ViewFilter.ColumnName, (object)name }
       };
       return retValue;
     }
@@ -158,7 +155,7 @@ namespace LJCDBViewDAL
           // Note: Changed to update only changed columns.
           if (viewFilter.ChangedNames.Count > 0)
           {
-            var keyColumns = GetIDKey(retrieveData.ID);
+            var keyColumns = IDKey(retrieveData.ID);
             Update(viewFilter, keyColumns, viewFilter.ChangedNames);
           }
         }

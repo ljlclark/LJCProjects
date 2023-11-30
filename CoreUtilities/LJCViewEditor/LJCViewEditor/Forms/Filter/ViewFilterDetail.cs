@@ -1,14 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewFilterDetail.cs
-using System;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using System;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
@@ -24,8 +24,8 @@ namespace LJCViewEditor
 
 			// Initialize property values.
 			LJCID = 0;
-			LJCRecord = null;
-			LJCIsUpdate = false;
+      LJCIsUpdate = false;
+      LJCRecord = null;
 			BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
@@ -77,11 +77,8 @@ namespace LJCViewEditor
 			{
 				Text += " - Edit";
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
-				{
-					{ ViewFilter.ColumnID, LJCID }
-				};
-				var dataRecord = mViewFilterManager.Retrieve(keyColumns);
+        var manager = Managers.ViewFilterManager;
+        var dataRecord = manager.RetrieveWithID(LJCID);
 				GetRecordValues(dataRecord);
 			}
 			else
@@ -90,7 +87,6 @@ namespace LJCViewEditor
 				LJCIsUpdate = false;
 				LJCRecord = new ViewFilter();
 				ParentTextbox.Text = LJCParentName;
-
 				NameTextbox.Text = LJCDefaultName;
 			}
 			Cursor = Cursors.Default;
@@ -104,7 +100,6 @@ namespace LJCViewEditor
 				LJCParentID = dataRecord.ViewDataID;
 				ParentTextbox.Text = LJCParentName;
 				NameTextbox.Text = dataRecord.Name;
-
 				if ("or" == dataRecord.BooleanOperator.ToLower())
 				{
 					OperatorCombo.SelectedIndex = 1;
@@ -128,46 +123,41 @@ namespace LJCViewEditor
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewFilter lookupRecord;
-			string title;
-			string message;
 			bool retValue = true;
 
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
-			{
-				{ ViewFilter.ColumnViewDataID, LJCRecord.ViewDataID },
-				{ ViewFilter.ColumnName, (object)LJCRecord.Name }
-			};
-			lookupRecord = mViewFilterManager.Retrieve(keyColumns);
+      var manager = Managers.ViewFilterManager;
+			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewDataID
+        , LJCRecord.Name);
 			if (lookupRecord != null
 				&& (false == LJCIsUpdate
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				title = "Data Entry Error";
-				message = "The record already exists.";
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				var title = "Data Entry Error";
+        var message = "The record already exists.";
+        Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
 			if (retValue)
 			{
 				if (LJCIsUpdate)
 				{
-					var updateKeyColumns = new DbColumns()
+					var keyColumns = new DbColumns()
 					{
 						{ ViewFilter.ColumnID, LJCRecord.ID }
 					};
 					LJCRecord.ID = 0;
-					mViewFilterManager.Update(LJCRecord, updateKeyColumns);
+					manager.Update(LJCRecord, keyColumns);
 					LJCRecord.ID = LJCID;
 				}
 				else
 				{
 					LJCRecord.ID = 0;
-					ViewFilter viewFilter = mViewFilterManager.Add(LJCRecord);
+					var viewFilter = manager.Add(LJCRecord);
 					if (viewFilter != null)
 					{
 						LJCRecord.ID = viewFilter.ID;
@@ -178,15 +168,25 @@ namespace LJCViewEditor
 			return retValue;
 		}
 
-		// Validates the data.
-		private bool IsValid()
-		{
-			StringBuilder builder;
-			string title;
-			string message;
-			bool retVal = true;
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
 
-			builder = new StringBuilder(64);
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Validates the data.
+    private bool IsValid()
+		{
+			bool retVal = true; 
+
+			var builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
 			if (false == NetString.HasValue(NameTextbox.Text))
@@ -197,8 +197,8 @@ namespace LJCViewEditor
 
 			if (retVal == false)
 			{
-				title = "Data Entry Error";
-				message = builder.ToString();
+				var title = "Data Entry Error";
+				var message = builder.ToString();
 				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 			return retVal;
@@ -210,17 +210,15 @@ namespace LJCViewEditor
 		// Configures the controls and loads the selection control data.
 		private void InitializeControls()
 		{
-			// Get singleton values.
-			ValuesViewEditor values = ValuesViewEditor.Instance;
-
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      ValuesViewEditor values = ValuesViewEditor.Instance;
+      Managers = values.Managers;
 			mSettings = values.StandardSettings;
-
 			BeginColor = mSettings.BeginColor;
 			EndColor = mSettings.EndColor;
 
 			// Initialize Class Data.
-			mViewFilterManager = new ViewFilterManager(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
 
 			// Load control data.
 			OperatorCombo.Items.Add("And");
@@ -250,8 +248,7 @@ namespace LJCViewEditor
 		// Saves the data and closes the form.
 		private void OKButton_Click(object sender, EventArgs e)
 		{
-			if (IsValid()
-				&& DataSave())
+			if (IsDataSaved())
 			{
 				LJCOnChange();
 				DialogResult = DialogResult.OK;
@@ -295,19 +292,21 @@ namespace LJCViewEditor
 
 		// Gets or sets the Parent ID value.
 		private Color EndColor { get; set; }
-		#endregion
 
-		#region Custom Properties
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
+    #endregion
 
-		// Gets or sets the default FilterName value.
-		internal string LJCDefaultName { get; set; }
+    #region Custom Properties
+
+    // Gets or sets the default FilterName value.
+    internal string LJCDefaultName { get; set; }
 		#endregion
 
 		#region Class Data
 
 		// Singleton values.
 		private StandardUISettings mSettings;
-		private ViewFilterManager mViewFilterManager;
 
 		// The Change event.
 		internal event EventHandler<EventArgs> LJCChange;

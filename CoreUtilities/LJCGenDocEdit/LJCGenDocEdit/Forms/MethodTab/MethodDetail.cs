@@ -14,22 +14,21 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The DocMethod detail dialog.</summary>
-  public partial class MethodDetail : Form
+  // The DocMethod detail dialog.
+  internal partial class MethodDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Detail.xml'/>
-    public MethodDetail()
+    internal MethodDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
       LJCMethodID = 0;
       LJCClassID = 0;
-      LJCRecord = null;
       LJCIsUpdate = false;
+      LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -50,7 +49,6 @@ namespace LJCGenDocEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -77,12 +75,10 @@ namespace LJCGenDocEdit
         Text += " - Edit";
         LJCIsUpdate = true;
         mOriginalRecord = DocMethodWithID(LJCMethodID);
-        // *** Begin *** Add - 7/9/23 #Overload
         if (mOriginalRecord.ChangedOverload)
         {
           mOriginalRecord.ChangedNames.Add(DocMethod.ColumnOverloadName);
         }
-        // *** End   *** Add - 7/9/23 #Overloads
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -138,7 +134,7 @@ namespace LJCGenDocEdit
       retValue.Sequence = value;
       retValue.ActiveFlag = ActiveCheckbox.Checked;
 
-      // Get Parent key values.
+      // Get Reference key values.
       retValue.DocMethodGroupID = LJCGroupID;
       retValue.DocClassID = LJCClassID;
       return retValue;
@@ -147,15 +143,14 @@ namespace LJCGenDocEdit
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
+      string title;
+      string message;
       LJCRecord = SetRecordValues();
 
       var manager = LJCManagers.DocMethodManager;
-      // *** Begin *** Change - 9/25/23 #Overload
       DocMethod lookupRecord;
       if (NetString.HasValue(LJCRecord.OverloadName))
       {
@@ -167,7 +162,6 @@ namespace LJCGenDocEdit
         lookupRecord = manager.RetrieveWithName(LJCRecord.DocClassID
           , LJCRecord.Name);
       }
-      // *** End   *** Change - 9/25/23 #Overload
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
@@ -194,6 +188,7 @@ namespace LJCGenDocEdit
             {
               title = "Update Error";
               message = "The Record was not updated.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -209,6 +204,7 @@ namespace LJCGenDocEdit
             {
               title = "Add Error";
               message = "The Record was not added.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -226,12 +222,9 @@ namespace LJCGenDocEdit
     // Validates the data.
     private bool IsValid()
     {
-      StringBuilder builder;
-      string title;
-      string message;
       bool retValue = true;
 
-      builder = new StringBuilder(64);
+      var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
       if (false == NetString.HasValue(NameText.Text))
@@ -247,8 +240,8 @@ namespace LJCGenDocEdit
 
       if (retValue == false)
       {
-        title = "Data Entry Error";
-        message = builder.ToString();
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
       }
@@ -521,8 +514,7 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -558,31 +550,31 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the Class ID value.</summary>
+    // Gets or sets the Class ID value.
     public short LJCClassID { get; set; }
 
-    /// <summary>Gets or sets the foreign ID value.</summary>
+    // Gets or sets the foreign ID value.
     public short LJCGroupID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
+    // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCMethodID { get; set; }
-
-    /// <summary>Gets or sets the Next flag.</summary>
-    internal bool LJCNext { get; set; }
-
-    /// <summary>Gets or sets the Previous flag.</summary>
-    internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets a reference to the record object.</summary>
-    internal DocMethod LJCRecord { get; private set; }
-
-    /// <summary>The Managers object.</summary>
+    // The Managers object.
     internal ManagersDocGen LJCManagers { get; set; }
 
-    /// <summary>Gets or sets the next sequence value.</summary>
+    // Gets or sets the primary ID value.
+    internal short LJCMethodID { get; set; }
+
+    // Gets or sets the Next flag.
+    internal bool LJCNext { get; set; }
+
+    // Gets or sets the Previous flag.
+    internal bool LJCPrevious { get; set; }
+
+    // Gets a reference to the record object.
+    internal DocMethod LJCRecord { get; private set; }
+
+    // Gets or sets the next sequence value.
     internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
@@ -594,7 +586,7 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    /// <summary>The Change event.</summary>
+    // The Change event.
     public event EventHandler<EventArgs> LJCChange;
 
     // Record with the original values.

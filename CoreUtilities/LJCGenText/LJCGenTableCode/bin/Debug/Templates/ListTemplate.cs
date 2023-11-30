@@ -863,10 +863,7 @@ namespace _Namespace_
     #endregion
     #endregion
 
-    #region Public Properties
-    #endregion
-
-    #region Internal Properties
+    #region Properties
 
     // Gets or sets the parent ID value.
     internal int LJCParentID { get; set; }
@@ -911,9 +908,6 @@ namespace _Namespace_
 
     // The Managers object.
     internal Managers_ClassName_ Managers { get; set; }
-    #endregion
-
-    #region Private Properties
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }

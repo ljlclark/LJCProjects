@@ -16,21 +16,21 @@ using System.Windows.Forms;
 namespace LJCGenDocEdit
 {
   /// <summary>The DocAssembly detail dialog.</summary>
-  public partial class AssemblyDetail : Form
+  internal partial class AssemblyDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Detail.xml'/>
-    public AssemblyDetail()
+    internal AssemblyDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
       LJCAssemblyID = 0;
       LJCGroupID = 0;
-      LJCRecord = null;
       LJCIsUpdate = false;
+      LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -146,11 +146,11 @@ namespace LJCGenDocEdit
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
+      string title;
+      string message;
       LJCRecord = SetRecordValues();
 
       var manager = LJCManagers.DocAssemblyManager;
@@ -216,12 +216,9 @@ namespace LJCGenDocEdit
     // Validates the data.
     private bool IsValid()
     {
-      StringBuilder builder;
-      string title;
-      string message;
       bool retValue = true;
 
-      builder = new StringBuilder(64);
+      var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
       if (false == NetString.HasValue(NameText.Text))
@@ -247,8 +244,8 @@ namespace LJCGenDocEdit
 
       if (retValue == false)
       {
-        title = "Data Entry Error";
-        message = builder.ToString();
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
       }
@@ -439,8 +436,7 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -514,28 +510,28 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    internal short LJCAssemblyID { get; set; }
-
     /// <summary>Gets or sets the Parent Group ID value.</summary>
     public short LJCGroupID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
+    // Gets or sets the primary ID value.
+    internal short LJCAssemblyID { get; set; }
+
+    // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>The Managers object.</summary>
+    // The Managers object.
     internal ManagersDocGen LJCManagers { get; set; }
 
-    /// <summary>Gets or sets the Next flag.</summary>
+    // Gets or sets the Next flag.
     internal bool LJCNext { get; set; }
 
-    /// <summary>Gets or sets the Previous flag.</summary>
+    // Gets or sets the Previous flag.
     internal bool LJCPrevious { get; set; }
 
-    /// <summary>Gets a reference to the record object.</summary>
+    // Gets a reference to the record object.
     internal DocAssembly LJCRecord { get; private set; }
 
-    /// <summary>Gets or sets the next sequence value.</summary>
+    // Gets or sets the next sequence value.
     internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.

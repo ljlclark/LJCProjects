@@ -14,22 +14,21 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-  /// <summary>The DocAssembly detail dialog.</summary>
-  public partial class MethodGroupDetail : Form
+  // The DocAssembly detail dialog.
+  internal partial class MethodGroupDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Detail.xml'/>
-    public MethodGroupDetail()
+    internal MethodGroupDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
       LJCGroupID = 0;
       LJCClassID = 0;
-      LJCRecord = null;
       LJCIsUpdate = false;
+      LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -50,7 +49,6 @@ namespace LJCGenDocEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -62,7 +60,6 @@ namespace LJCGenDocEdit
     #region Data Methods
 
     // Retrieves the initial control data.
-    // <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -173,11 +170,11 @@ namespace LJCGenDocEdit
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
+      string title;
+      string message;
       LJCRecord = SetRecordValues();
 
       var manager = LJCManagers.DocMethodGroupManager;
@@ -210,6 +207,7 @@ namespace LJCGenDocEdit
             {
               title = "Update Error";
               message = "The Record was not updated.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -226,6 +224,7 @@ namespace LJCGenDocEdit
             {
               title = "Add Error";
               message = "The Record was not added.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -243,12 +242,9 @@ namespace LJCGenDocEdit
     // Validates the data.
     private bool IsValid()
     {
-      StringBuilder builder;
-      string title;
-      string message;
       bool retValue = true;
 
-      builder = new StringBuilder(64);
+      var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
       if (false == NetString.HasValue(NameText.Text))
@@ -264,8 +260,8 @@ namespace LJCGenDocEdit
 
       if (retValue == false)
       {
-        title = "Data Entry Error";
-        message = builder.ToString();
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
       }
@@ -421,7 +417,6 @@ namespace LJCGenDocEdit
       SetNoSpace(NameText);
       SetNumericOnly(SequenceText);
 
-      //HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
       ConfigureControls();
       Cursor = Cursors.Default;
     }
@@ -445,7 +440,6 @@ namespace LJCGenDocEdit
     #region Control Event Handlers
 
     // Fires the Change event.
-    /// <include path='items/LJCOnChange/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
@@ -506,8 +500,7 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -543,28 +536,28 @@ namespace LJCGenDocEdit
 
     #region Properties
 
-    /// <summary>Gets or sets the parent Class ID value.</summary>
-    public short LJCClassID { get; set; }
+    // Gets or sets the parent Class ID value.
+    internal short LJCClassID { get; set; }
 
-    /// <summary>Gets or sets the primary ID value.</summary>
+    // Gets or sets the primary ID value.
     internal short LJCGroupID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
+    // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
-    /// <summary>Gets or sets the Next flag.</summary>
-    internal bool LJCNext { get; set; }
-
-    /// <summary>Gets or sets the Previous flag.</summary>
-    internal bool LJCPrevious { get; set; }
-
-    /// <summary>Gets a reference to the record object.</summary>
-    internal DocMethodGroup LJCRecord { get; private set; }
-
-    /// <summary>The Managers object.</summary>
+    // The Managers object.
     internal ManagersDocGen LJCManagers { get; set; }
 
-    /// <summary>Gets or sets the next sequence value.</summary>
+    // Gets or sets the Next flag.
+    internal bool LJCNext { get; set; }
+
+    // Gets or sets the Previous flag.
+    internal bool LJCPrevious { get; set; }
+
+    // Gets a reference to the record object.
+    internal DocMethodGroup LJCRecord { get; private set; }
+
+    // Gets or sets the next sequence value.
     internal int LJCSequence { get; set; }
 
     // Gets or sets the Begin Color.
@@ -576,8 +569,8 @@ namespace LJCGenDocEdit
 
     #region Class Data
 
-    /// <summary>The Change event.</summary>
-    public event EventHandler<EventArgs> LJCChange;
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
 
     // Foreign Keys
     private short mDocMethodGroupHeadingID;

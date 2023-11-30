@@ -42,16 +42,13 @@ namespace LJCDBViewDAL
     /// <include path='items/LoadDbColumnsWithParentID/*' file='Doc/ViewJoinColumnManager.xml'/>
     public DbColumns LoadDbColumnsWithParentID(int viewJoinID)
     {
-      DbResult dbResult;
-      DbColumns retValue;
-
       // Load from DataManager to get DbColumns result.
-      var keyColumns = GetParentIDKey(viewJoinID);
-      dbResult = DataManager.Load(keyColumns);
+      var keyColumns = ParentIDKey(viewJoinID);
+      var dbResult = DataManager.Load(keyColumns);
       SQLStatement = DataManager.SQLStatement;
       ResultConverter<DbColumn, DbColumns> resultConverter
         = new ResultConverter<DbColumn, DbColumns>();
-      retValue = resultConverter.CreateCollection(dbResult);
+      var retValue = resultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
@@ -59,10 +56,8 @@ namespace LJCDBViewDAL
     /// <include path='items/LoadWithParentID/*' file='Doc/ViewJoinColumnManager.xml'/>
     public ViewJoinColumns LoadWithParentID(int viewJoinID)
     {
-      ViewJoinColumns retValue;
-
-      var keyColumns = GetParentIDKey(viewJoinID);
-      retValue = Load(keyColumns);
+      var keyColumns = ParentIDKey(viewJoinID);
+      var retValue = Load(keyColumns);
       return retValue;
     }
 
@@ -70,10 +65,8 @@ namespace LJCDBViewDAL
     /// <include path='items/ResultWithParentID/*' file='Doc/ViewJoinColumnManager.xml'/>
     public DbResult ResultWithParentID(int viewJoinID)
     {
-      DbResult retValue;
-
-      var keyColumns = GetParentIDKey(viewJoinID);
-      retValue = DataManager.Load(keyColumns);
+      var keyColumns = ParentIDKey(viewJoinID);
+      var retValue = DataManager.Load(keyColumns);
       return retValue;
     }
 
@@ -81,29 +74,24 @@ namespace LJCDBViewDAL
     /// <include path='items/RetrieveWithID/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public ViewJoinColumn RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      ViewJoinColumn retValue;
-
-      var keyColumns = GetIDKey(id);
-      retValue = Retrieve(keyColumns, propertyNames);
+      var keyColumns = IDKey(id);
+      var retValue = Retrieve(keyColumns, propertyNames);
       return retValue;
     }
 
     // Retrieves the record by the unique key.
-    /// <include path='items/RetrieveWithUniqueKey/*' file='Doc/ViewJoinColumnManager.xml'/>
-    public ViewJoinColumn RetrieveWithUniqueKey(ViewJoin viewJoin, DbColumn dbColumn)
+    /// <summary>
+    /// Retrieves the record by the unique key.
+    /// </summary>
+    /// <param name="viewJoinID">The parent ID.</param>
+    /// <param name="propertyName">The Property name.</param>
+    /// <param name="renameAs">The RenameAs value.</param>
+    /// <returns>The ViewJoinColumn object.</returns>
+    public ViewJoinColumn RetrieveWithUnique(int viewJoinID
+      , string propertyName, string renameAs)
     {
-      ViewJoinColumn retValue;
-
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
-      // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
-      {
-        { ViewJoinColumn.ColumnViewJoinID, viewJoin.ID },
-        { ViewJoinColumn.ColumnColumnName, (object)dbColumn.ColumnName },
-        { ViewJoinColumn.ColumnRenameAs, (object)dbColumn.RenameAs }
-      };
-      retValue = Retrieve(keyColumns);
+      var keyColumns = UniqueKey(viewJoinID, propertyName, renameAs);
+      var retValue = Retrieve(keyColumns);
       return retValue;
     }
     #endregion
@@ -111,8 +99,8 @@ namespace LJCDBViewDAL
     #region GetKey Methods
 
     // Gets the ID key record.
-    /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns IDKey(int id)
     {
       var retValue = new DbColumns()
       {
@@ -122,12 +110,26 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ID key record.
-    /// <include path='items/GetParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentIDKey(int parentID)
+    /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns ParentIDKey(int parentID)
     {
       var retValue = new DbColumns()
       {
         { ViewJoinColumn.ColumnViewJoinID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key record.
+    /// <include path='items/GetUniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns UniqueKey(int parentID, string propertyName
+      , string renameAs)
+    {
+      var retValue = new DbColumns()
+      {
+        { ViewJoinColumn.ColumnViewJoinID, parentID },
+        { ViewJoinColumn.ColumnPropertyName, propertyName },
+        { ViewJoinColumn.ColumnRenameAs, renameAs }
       };
       return retValue;
     }
@@ -203,7 +205,7 @@ namespace LJCDBViewDAL
           // Note: Changed to update only changed columns.
           if (viewJoinColumn.ChangedNames.Count > 0)
           {
-            var keyColumns = GetIDKey(retrieveData.ID);
+            var keyColumns = IDKey(retrieveData.ID);
             Update(viewJoinColumn, keyColumns, viewJoinColumn.ChangedNames);
           }
         }

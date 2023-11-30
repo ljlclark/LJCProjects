@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
 
       // Initialize property values.
       LJCGroupID = 0;
-      LJCRecord = null;
       LJCIsUpdate = false;
+      LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -49,7 +49,6 @@ namespace LJCGenDocEdit
     }
 
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCGenDoc/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -107,6 +106,7 @@ namespace LJCGenDocEdit
     private DocAssemblyGroup SetRecordValues()
     {
       DocAssemblyGroup retValue = null;
+
       if (mOriginalRecord != null)
       {
         retValue = mOriginalRecord.Clone();
@@ -132,11 +132,11 @@ namespace LJCGenDocEdit
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
+      string title;
+      string message;
       LJCRecord = SetRecordValues();
 
       var manager = LJCManagers.DocAssemblyGroupManager;
@@ -357,6 +357,7 @@ namespace LJCGenDocEdit
       SetNumericOnly(SequenceText);
 
       HeadingText.MaxLength = DocAssemblyGroup.LengthHeading;
+
       ConfigureControls();
       Cursor = Cursors.Default;
     }
@@ -389,8 +390,7 @@ namespace LJCGenDocEdit
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;

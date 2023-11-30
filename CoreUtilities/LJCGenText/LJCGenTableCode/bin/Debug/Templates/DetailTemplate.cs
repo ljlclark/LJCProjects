@@ -1,13 +1,13 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DetailTemplate.cs
+using LJCDBClientLib;
+using LJCNetCommon;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LJCDBClientLib;
-using LJCNetCommon;
-using LJCWinFormCommon;
 // #SectionBegin Class
 // #Value _NameSpace_
 // #Value _ClassName_
@@ -16,7 +16,7 @@ using _FullAppName_DAL;
 
 namespace _Namespace_
 {
-  /// <summary>The _ClassName_ detail dialog.</summary>
+  // The _ClassName_ detail dialog.
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
@@ -25,19 +25,18 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Detail.xml'/>
     internal _ClassName_Detail()
     {
       InitializeComponent();
 
       // Initialize property values.
+      LJCHelpFileName = "_AppName_.chm";
+      LJCHelpPageName = "_ClassName_Detail.htm";
       LJCID = 0;
+      LJCIsUpdate = false;
       LJCParentID = 0;
       LJCParentName = null;
       LJCRecord = null;
-      LJCIsUpdate = false;
-      LJCHelpFileName = "_AppName_.chm";
-      LJCHelpPageName = "_ClassName_Detail.htm";
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -46,6 +45,18 @@ namespace _Namespace_
     #endregion
 
     #region Form Event Handlers
+
+    // Handles the form keys.
+    private void _ClassName_Detail_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.F1:
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
+      }
+    }
 
     // Configures the form and loads the initial control data.
     private void _ClassName_Detail_Load(object sender, EventArgs e)
@@ -57,19 +68,7 @@ namespace _Namespace_
       CenterToParent();
     }
 
-    // Handles the form keys.
-    private void _ClassName_Detail_KeyDown(object sender, KeyEventArgs e)
-    {
-      switch (e.KeyCode)
-      {
-        case Keys.F1:
-          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic, LJCHelpPageName);
-          break;
-      }
-    }
-
     // Paint the form background.
-    /// <include path='items/OnPaintBackground/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -81,7 +80,6 @@ namespace _Namespace_
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include path='items/DataRetrieve/*' file='../../LJCDocLib/Common/Detail.xml'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -90,20 +88,21 @@ namespace _Namespace_
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalRecord = GetWithID(LJCID);
+        var manager = Managers.ViewConditionManager;
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
       else
       {
         Text += " - New";
         LJCIsUpdate = false;
+        LJCRecord = new _ClassName_();
         //ParentNameText.Text = LJCParentName;
 
         // Set Type combos.
         //ItemTypeCombo.LJCSetByItemID(LJCItemTypeID);
 
         // Set default values.
-        LJCRecord = new _ClassName_();
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -113,18 +112,16 @@ namespace _Namespace_
     // Gets the record values and copies them to the controls.
     private void GetRecordValues(_ClassName_ dataRecord)
     {
-      //	_ClassName_ lookupRecord;
-
       if (dataRecord != null)
       {
-        //LJCParentID = record.ParentId;
+        // In control order.
         //ParentNameText.Text = LJCParentName;
-
-        // Set Type combos.
-        //ItemTypeCombo.LJCSetByItemID(LJCItemTypeID);
-
         NameText.Text = dataRecord.Name;
         DescriptionText.Text = dataRecord.Description;
+        //ItemTypeCombo.LJCSetByItemID(LJCItemTypeID);
+
+        // Reference key values.
+        //LJCParentID = record.ParentId;
 
         // Get foreign key values.
         var item = GetItemWithID(dataRecord.ForeignKeyID);
@@ -139,23 +136,30 @@ namespace _Namespace_
     // Creates and returns a record object with the data from
     private _ClassName_ SetRecordValues()
     {
-      var retValue = mOriginalRecord;
+      DocAssembly retValue = null;
+
+      if (mOriginalRecord != null)
+      {
+        var retValue = mOriginalRecord.Clone;
+      }
       if (null == retValue)
       {
         retValue = new DocMethod();
       }
-      retValue.ID = LJCID;
-      //retValue.ParentID = LJCParentID;
       //retValue.ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
-      //ForeignKeyID = mForeignKeyID,
       retValue.Name = FormCommon.SetString(NameText.Text);
       retValue.Description = FormCommon.SetString(DescriptionText.Text);
+      //int.TryParse(IntegerText.Text, out int value);
+      //retValue.Value = value;
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      //retValue.ParentID = LJCParentID;
+      //ForeignKeyID = mForeignKeyID,
 
       // Get control join display values.
       //TypeDescription = TypeCombo.Text.Trim()
 
-      //int.TryParse(IntegerText.Text, out int value);
-      //retValue.Value = value;
       return retValue;
     }
 
@@ -168,21 +172,17 @@ namespace _Namespace_
     // Saves the data.
     private bool DataSave()
     {
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
-
       var manager = Managers._ClassName_Manager;
-      var keyRecord = manager.GetNameKey(LJCRecord.Name);
-      var lookupRecord = manager.Retrieve(keyRecord);
+      var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.Name);
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
+        var title = "Data Entry Error";
+        var title = "The record already exists.";
         Cursor = Cursors.Default;
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
@@ -192,19 +192,24 @@ namespace _Namespace_
       {
         if (LJCIsUpdate)
         {
-          var keyRecord = manager.GetIDKey(LJCRecord.ID);
-          manager.Update(LJCRecord, keyRecord);
+          var keyColumns = manager.IDKey(LJCID);
+          LJCRecord.ID = 0;
+          manager.Update(LJCRecord, keyColumns);
           ResetRecordValues(LJCRecord);
-          if (0 == manager.Manager.AffectedCount)
+          LJCRecord.ID = LJCID;
+          if (0 == manager.AffectedCount)
           {
+            retValue = false;
             title = "Update Error";
             message = "The Record was not updated.";
+            Cursor = Cursors.Default;
             MessageBox.Show(message, title, MessageBoxButtons.OK
               , MessageBoxIcon.Information);
           }
         }
         else
         {
+          LJCRecord.ID = 0;
           var addedRecord = manager.Add(LJCRecord);
           ResetRecordValues(LJCRecord);
           if (null == addedRecord)
@@ -213,6 +218,7 @@ namespace _Namespace_
             {
               title = "Add Error";
               message = "The Record was not added.";
+              Cursor = Cursors.Default;
               MessageBox.Show(message, title, MessageBoxButtons.OK
                 , MessageBoxIcon.Information);
             }
@@ -223,22 +229,29 @@ namespace _Namespace_
           }
         }
       }
-
-      // Get join display values.
-
       Cursor = Cursors.Default;
+      return retValue;
+    }
+
+    // Check for saved data.
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
       return retValue;
     }
 
     // Validates the data.
     private bool IsValid()
     {
-      StringBuilder builder;
-      string title;
-      string message;
       bool retValue = true;
 
-      builder = new StringBuilder(64);
+      var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
       if (false == NetString.HasValue(NameText.Text))
@@ -249,8 +262,8 @@ namespace _Namespace_
 
       if (retValue == false)
       {
-        title = "Data Entry Error";
-        message = builder.ToString();
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Exclamation);
       }
@@ -258,43 +271,15 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Get Data Methods
-
-    // Retrieves the Product with the ID value.
-    private _ClassName_ GetWithID(long id)
-    {
-      _ClassName_ retValue = null;
-
-      if (id > 0)
-      {
-        var manager = Managers._ClassName_Manager;
-        var keyRecord = manager.GetIDKey(LJCID);
-        retValue = manager.Retrieve(keyRecord);
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Action Methods
-
-    // Save and setup for a new record.
-    private void DialogNew_Click(object sender, EventArgs e)
-    {
-      FormCancelButton.Select();
-      if (IsValid() && DataSave())
-      {
-        LJCOnChange();
-
-        // Initialize property values.
-        LJCID = 0;
-        NameText.Text = "";
-
-        DataRetrieve();
-      }
-    }
-    #endregion
-
     #region Setup Methods
+
+    // Configure the initial control settings.
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Font)
+      {
+      }
+    }
 
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
@@ -302,6 +287,7 @@ namespace _Namespace_
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = Values_AppName_.Instance;
+      Managers = values.Managers;
       mSettings = values.StandardSettings;
       BeginColor = mSettings.BeginColor;
       EndColor = mSettings.EndColor;
@@ -314,7 +300,7 @@ namespace _Namespace_
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-      SetNoSpace(NameText);
+      SetNoSpace();
 
       DescriptionText.MaxLength = _ClassName_.LengthDescription;
 
@@ -328,26 +314,84 @@ namespace _Namespace_
       //	ParentNameText.Visible = false;
       //	Height -= ParentNameText.Height;
       //}
+
+      ConfigureControls();
       Cursor = Cursors.Default;
     }
 
     // Sets the NoSpace events.
-    private void SetNumericOnly(TextBox textBox)
+    private void SetNoSpace()
     {
-      textBox.KeyPress += TextBoxNumeric_KeyPress;
       textBox.KeyPress += TextBoxNoSpace_KeyPress;
       textBox.TextChanged += TextBoxNoSpace_TextChanged;
     }
 
     // Sets the NoSpace events.
-    private void SetNoSpace(TextBox textBox)
+    private void SetNumericOnly()
     {
+      textBox.KeyPress += TextBoxNumeric_KeyPress;
       textBox.KeyPress += TextBoxNoSpace_KeyPress;
       textBox.TextChanged += TextBoxNoSpace_TextChanged;
     }
     #endregion
 
     #region Action Event Handlers
+
+    // Save and setup for a new record.
+    private void DialogNew_Click(object sender, EventArgs e)
+    {
+      FormCancelButton.Select();
+      if (IsDataSaved())
+      {
+        LJCPrevious = false;
+        LJCNext = false;
+        LJCOnChange();
+
+        // Initialize property values.
+        LJCID = 0;
+        NameText.Text = "";
+
+        DataRetrieve();
+      }
+    }
+
+    // Save and move to the Next record.
+    private void DialogNext_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCNext = true;
+        LJCOnChange();
+        if (LJCNext)
+        {
+          LJCNext = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
+    }
+
+    // Save and move to the Previous record.
+    private void DialogPrevious_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCPrevious = true;
+        LJCOnChange();
+        if (LJCPrevious)
+        {
+          LJCPrevious = false;
+          DataRetrieve();
+        }
+        else
+        {
+          Close();
+        }
+      }
+    }
 
     // Shows the help page.
     private void DialogMenuHelp_Click(object sender, EventArgs e)
@@ -369,8 +413,7 @@ namespace _Namespace_
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
-      if (IsValid()
-        && DataSave())
+      if (IsDataSaved())
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
@@ -379,12 +422,6 @@ namespace _Namespace_
     #endregion
 
     #region KeyEdit Event Handlers
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
-    }
 
     // Does not allow spaces.
     private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
@@ -395,54 +432,67 @@ namespace _Namespace_
     // Strips blanks from the text value.
     private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
-      if (sender is TextBox textBox)
+      if (sender is TextBox textbox)
       {
+        var prevStart = textbox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = textBox.Text.Trim().Length;
+        textBox.SelectionStart = prevStart;
       }
+    }
+
+    // Only allows numbers or edit keys.
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
     }
     #endregion
 
     #region Properties
 
-    /// <summary>Gets or sets the LJCHelpFileName value.</summary>
-    public string LJCHelpFileName
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
     {
       get { return mHelpFileName; }
-      set { mHelpFileName = NetCommon.InitString(value); }
+      set { mHelpFileName = NetString.InitString(value); }
     }
     private string mHelpFileName;
 
-    /// <summary>Gets or sets the LJCHelpPageName value.</summary>
-    public string LJCHelpPageName
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
     {
       get { return mHelpPageName; }
-      set { mHelpPageName = NetCommon.InitString(value); }
+      set { mHelpPageName = NetString.InitString(value); }
     }
     private string mHelpPageName;
 
-    /// <summary>Gets or sets the primary ID value.</summary>
-    public int LJCID { get; set; }
+    // Gets or sets the primary ID value.
+    internal int LJCID { get; set; }
 
-    /// <summary>Gets the LJCIsUpdate value.</summary>
-    public bool LJCIsUpdate { get; private set; }
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
 
-    ///// <summary>Gets or sets the ItemType ID value.</summary>
-    //public int LJCItemTypeID { get; set; }
+    //// Gets or sets the ItemType ID value.
+    //internal int LJCItemTypeID { get; set; }
 
-    /// <summary>Gets or sets the Parent ID value.</summary>
-    public int LJCParentID { get; set; }
+    /// <summary>Gets or sets the Next flag.
+    internal bool LJCNext { get; set; }
 
-    /// <summary>Gets or sets the LJCParentName value.</summary>
-    public string LJCParentName
+    // Gets or sets the Previous flag.
+    internal bool LJCPrevious { get; set; }
+
+    // Gets or sets the Parent ID value.
+    internal int LJCParentID { get; set; }
+
+    // Gets or sets the LJCParentName value.
+    internal string LJCParentName
     {
       get { return mParentName; }
       set { mParentName = NetString.InitString(value); }
     }
     private string mParentName;
 
-    /// <summary>Gets a reference to the record object.</summary>
-    public _ClassName_ LJCRecord { get; private set; }
+    // Gets a reference to the record object.
+    internal _ClassName_ LJCRecord { get; private set; }
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
@@ -451,18 +501,18 @@ namespace _Namespace_
     private Color EndColor { get; set; }
 
     // The Managers object.
-    private _ClassName_Managers Managers { get; set; }
+    private Managers_AppName_ Managers { get; set; }
     #endregion
 
     #region Class Data
 
-    /// <summary>The Change event.</summary>
-    public event EventHandler<EventArgs> LJCChange;
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
 
     // Foreign Keys
     private int mForeignKeyId;
 
-    // 
+    // Record with the original values.
     private DataRecord mOriginalRecord;
 
     private StandardUISettings mSettings;
