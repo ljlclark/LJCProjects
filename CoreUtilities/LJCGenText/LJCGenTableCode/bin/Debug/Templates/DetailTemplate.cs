@@ -1,6 +1,10 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DetailTemplate.cs
+// #SectionBegin Class
+// #Value _NameSpace_
+// #Value _ClassName_
+// #Value _AppName_
+// _ClassName_Detail.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -8,10 +12,6 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-// #SectionBegin Class
-// #Value _NameSpace_
-// #Value _ClassName_
-// #Value _AppName_
 using _FullAppName_DAL;
 
 namespace _Namespace_
@@ -31,7 +31,7 @@ namespace _Namespace_
 
       // Initialize property values.
       LJCHelpFileName = "_AppName_.chm";
-      LJCHelpPageName = "_ClassName_Detail.htm";
+      LJCHelpPageName = "_ClassName_Detail.html";
       LJCID = 0;
       LJCIsUpdate = false;
       LJCParentID = 0;
@@ -88,7 +88,7 @@ namespace _Namespace_
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.ViewConditionManager;
+        var manager = Managers._ClassName_Manager;
         mOriginalRecord = manager.RetrieveWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
@@ -136,16 +136,18 @@ namespace _Namespace_
     // Creates and returns a record object with the data from
     private _ClassName_ SetRecordValues()
     {
-      DocAssembly retValue = null;
+      _ClassName_ retValue = null;
 
       if (mOriginalRecord != null)
       {
-        var retValue = mOriginalRecord.Clone;
+        retValue = mOriginalRecord.Clone();
       }
       if (null == retValue)
       {
-        retValue = new DocMethod();
+        retValue = new _ClassName_();
       }
+
+      // In control order.
       //retValue.ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
       retValue.Name = FormCommon.SetString(NameText.Text);
       retValue.Description = FormCommon.SetString(DescriptionText.Text);
@@ -159,13 +161,13 @@ namespace _Namespace_
 
       // Get control join display values.
       //TypeDescription = TypeCombo.Text.Trim()
-
       return retValue;
     }
 
     // Resets the empty record values.
     private void ResetRecordValues(_ClassName_ dataRecord)
     {
+      // In control order.
       dataRecord.Description = FormCommon.SetString(dataRecord.Description);
     }
 
@@ -181,11 +183,7 @@ namespace _Namespace_
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
-        var title = "Data Entry Error";
-        var title = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK
-          , MessageBoxIcon.Exclamation);
+        FormCommon.DataError(this);
       }
 
       if (retValue)
@@ -197,36 +195,18 @@ namespace _Namespace_
           manager.Update(LJCRecord, keyColumns);
           ResetRecordValues(LJCRecord);
           LJCRecord.ID = LJCID;
-          if (0 == manager.AffectedCount)
-          {
-            retValue = false;
-            title = "Update Error";
-            message = "The Record was not updated.";
-            Cursor = Cursors.Default;
-            MessageBox.Show(message, title, MessageBoxButtons.OK
-              , MessageBoxIcon.Information);
-          }
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
           LJCRecord.ID = 0;
           var addedRecord = manager.Add(LJCRecord);
           ResetRecordValues(LJCRecord);
-          if (null == addedRecord)
-          {
-            if (manager.AffectedCount < 1)
-            {
-              title = "Add Error";
-              message = "The Record was not added.";
-              Cursor = Cursors.Default;
-              MessageBox.Show(message, title, MessageBoxButtons.OK
-                , MessageBoxIcon.Information);
-            }
-          }
-          else
+          if (addedRecord != null)
           {
             LJCRecord.ID = addedRecord.ID;
           }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }
       }
       Cursor = Cursors.Default;
@@ -301,7 +281,6 @@ namespace _Namespace_
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
-
       DescriptionText.MaxLength = _ClassName_.LengthDescription;
 
       // Load control data.
@@ -509,14 +488,10 @@ namespace _Namespace_
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
 
-    // Foreign Keys
     private int mForeignKeyId;
-
-    // Record with the original values.
-    private DataRecord mOriginalRecord;
-
-    private StandardUISettings mSettings;
     //private ItemTypeComboCode mItemTypeComboCode;
+    private _ClassName_ mOriginalRecord;
+    private StandardUISettings mSettings;
     #endregion
   }
 }

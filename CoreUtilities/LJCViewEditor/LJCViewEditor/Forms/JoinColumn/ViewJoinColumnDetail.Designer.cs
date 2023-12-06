@@ -86,8 +86,6 @@
 			this.RenameTextbox.Name = "RenameTextbox";
 			this.RenameTextbox.Size = new System.Drawing.Size(433, 26);
 			this.RenameTextbox.TabIndex = 9;
-			this.RenameTextbox.TextChanged += new System.EventHandler(this.RenameTextbox_TextChanged);
-			this.RenameTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RenameTextbox_KeyPress);
 			// 
 			// RenameLabel
 			// 
@@ -105,8 +103,6 @@
 			this.PropertyTextbox.Name = "PropertyTextbox";
 			this.PropertyTextbox.Size = new System.Drawing.Size(433, 26);
 			this.PropertyTextbox.TabIndex = 7;
-			this.PropertyTextbox.TextChanged += new System.EventHandler(this.PropertyTextbox_TextChanged);
-			this.PropertyTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertyTextbox_KeyPress);
 			// 
 			// PropertyLabel
 			// 
@@ -150,8 +146,6 @@
 			this.ColumnNameTextbox.Name = "ColumnNameTextbox";
 			this.ColumnNameTextbox.Size = new System.Drawing.Size(433, 26);
 			this.ColumnNameTextbox.TabIndex = 5;
-			this.ColumnNameTextbox.TextChanged += new System.EventHandler(this.ColumnNameTextbox_TextChanged);
-			this.ColumnNameTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ColumnNameTextbox_KeyPress);
 			// 
 			// ColumnNameLabel
 			// 

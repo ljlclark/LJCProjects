@@ -75,8 +75,6 @@
 			this.SecondValueTextbox.Name = "SecondValueTextbox";
 			this.SecondValueTextbox.Size = new System.Drawing.Size(433, 26);
 			this.SecondValueTextbox.TabIndex = 5;
-			this.SecondValueTextbox.TextChanged += new System.EventHandler(this.SecondValueTextbox_TextChanged);
-			this.SecondValueTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SecondValueTextbox_KeyPress);
 			// 
 			// SecondValueLabel
 			// 
@@ -94,8 +92,6 @@
 			this.FirstValueCombo.Name = "FirstValueCombo";
 			this.FirstValueCombo.Size = new System.Drawing.Size(433, 28);
 			this.FirstValueCombo.TabIndex = 3;
-			this.FirstValueCombo.TextChanged += new System.EventHandler(this.FirstValueTextbox_TextChanged);
-			this.FirstValueCombo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FirstValueTextbox_KeyPress);
 			// 
 			// FirstValueLabel
 			// 
@@ -132,8 +128,6 @@
 			this.ComparisonTextbox.Name = "ComparisonTextbox";
 			this.ComparisonTextbox.Size = new System.Drawing.Size(433, 26);
 			this.ComparisonTextbox.TabIndex = 7;
-			this.ComparisonTextbox.TextChanged += new System.EventHandler(this.ComparisonTextbox_TextChanged);
-			this.ComparisonTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComparisonTextbox_KeyPress);
 			// 
 			// ComparisonLabel
 			// 

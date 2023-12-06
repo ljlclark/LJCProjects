@@ -1,13 +1,13 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
-using LJCWinFormControls;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
 using LJCSQLUtilLib;
 using LJCSQLUtilLibDAL;
+using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Drawing;
 using System.Text;
@@ -25,11 +25,15 @@ namespace LJCViewEditor
 		{
 			InitializeComponent();
 
-			// Initialize property values.
-			LJCID = 0;
+      // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"Join\JoinDetail.html";
+      LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
-			BeginColor = Color.AliceBlue;
+
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
 		#endregion
@@ -42,9 +46,9 @@ namespace LJCViewEditor
 			switch (e.KeyCode)
 			{
 				case Keys.F1:
-					Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-						, @"Join\JoinDetail.html");
-					break;
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
 			}
 		}
 
@@ -55,7 +59,6 @@ namespace LJCViewEditor
 			CancelButton = FormCancelButton;
 			InitializeControls();
 			DataRetrieve();
-			//CenterToParent();
 			Location = LJCLocation;
 		}
 
@@ -81,8 +84,8 @@ namespace LJCViewEditor
 				Text += " - Edit";
 				LJCIsUpdate = true;
         var manager = Managers.ViewJoinManager;
-				var dataRecord = manager.RetrieveWithID(LJCID);
-				GetRecordValues(dataRecord);
+				mOriginalRecord = manager.RetrieveWithID(LJCID);
+				GetRecordValues(mOriginalRecord);
 			}
 			else
 			{
@@ -90,7 +93,9 @@ namespace LJCViewEditor
 				LJCIsUpdate = false;
 				LJCRecord = new ViewJoin();
 				ParentTextbox.Text = LJCParentName;
-				JoinTypeTextbox.Text = "Left";
+
+        // Set default values.
+        JoinTypeTextbox.Text = "Left";
 			}
 			Cursor = Cursors.Default;
 		}
@@ -100,11 +105,10 @@ namespace LJCViewEditor
 		{
 			if (dataRecord != null)
 			{
-				LJCParentID = dataRecord.ViewDataID;
-				ParentTextbox.Text = LJCParentName;
+        // In control order.
+        ParentTextbox.Text = LJCParentName;
 
-				//JoinTableCombo.Text = record.JoinTableName;
-				if (NetString.HasValue(dataRecord.JoinTableName))
+        if (NetString.HasValue(dataRecord.JoinTableName))
 				{
 					foreach (LJCItem item in JoinTableCombo.Items)
 					{
@@ -126,21 +130,35 @@ namespace LJCViewEditor
 
 				JoinTypeTextbox.Text = dataRecord.JoinType;
 				AliasTextbox.Text = dataRecord.TableAlias;
-			}
-		}
+
+        // Reference key values.
+        LJCParentID = dataRecord.ViewDataID;
+      }
+    }
 
 		// Creates and returns a record object with the data from
 		private ViewJoin SetRecordValues()
 		{
-			ViewJoin retValue = new ViewJoin()
-			{
-				ID = LJCID,
-				ViewDataID = LJCParentID,
-				JoinTableName = GetJoinTableName(JoinTableCombo.Text),
-				JoinType = JoinTypeTextbox.Text,
-				TableAlias = AliasTextbox.Text
-			};
-			return retValue;
+      ViewJoin retValue = null;
+
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewJoin();
+      }
+
+      // In control order.
+      retValue.ViewDataID = LJCParentID;
+      retValue.JoinTableName = GetJoinTableName(JoinTableCombo.Text);
+      retValue.JoinType = JoinTypeTextbox.Text;
+      retValue.TableAlias = AliasTextbox.Text;
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      return retValue;
 		}
 
 		// Saves the data.
@@ -150,7 +168,6 @@ namespace LJCViewEditor
 
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
-
       var manager = Managers.ViewJoinManager;
 			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewDataID
         , LJCRecord.JoinTableName);
@@ -159,13 +176,10 @@ namespace LJCViewEditor
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				var title = "Data Entry Error";
-				var message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+        FormCommon.DataError(this);
+      }
 
-			if (retValue)
+      if (retValue)
 			{
 				if (LJCIsUpdate)
 				{
@@ -173,17 +187,19 @@ namespace LJCViewEditor
 					LJCRecord.ID = 0;
 					manager.Update(LJCRecord, keyColumns);
 					LJCRecord.ID = LJCID;
-				}
-				else
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
 				{
 					LJCRecord.ID = 0;
-					var viewJoin = manager.Add(LJCRecord);
-					if (viewJoin != null)
+					var addedRecor = manager.Add(LJCRecord);
+					if (addedRecor != null)
 					{
-						LJCRecord.ID = viewJoin.ID;
+						LJCRecord.ID = addedRecor.ID;
 					}
-				}
-			}
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
 			Cursor = Cursors.Default;
 			return retValue;
 		}
@@ -257,32 +273,33 @@ namespace LJCViewEditor
       var values = ValuesViewEditor.Instance;
       Managers = values.Managers;
       mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
-      // Initialize Class Data.
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      JoinTableCombo.MaxLength = ViewColumn.LengthColumnName;
+      JoinTypeTextbox.MaxLength = ViewColumn.LengthDataTypeName;
+
+      // Load control data.
       var dataManager = Managers.ViewDataManager;
-			var viewData = dataManager.RetrieveWithID(LJCParentID);
+      var viewData = dataManager.RetrieveWithID(LJCParentID);
       var tableManager = Managers.ViewTableManager;
-			var viewTable = tableManager.RetrieveWithID(viewData.ViewTableID);
+      var viewTable = tableManager.RetrieveWithID(viewData.ViewTableID);
 			if (viewTable != null)
 			{
 				LJCMetadata metaData = new LJCMetadata(mSettings.DbServiceRef
 					, mSettings.DataConfigName);
 				var foreignKeys = metaData.LoadSchemaForeignKeys(viewTable.Name);
 
-				// Load control data.
 				// Join Table Combo
 				PopulateTableCombo(foreignKeys, viewTable.Name);
 			}
+      Cursor = Cursors.Default;
+    }
 
-      // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
-
-      JoinTableCombo.MaxLength = ViewColumn.LengthColumnName;
-			JoinTypeTextbox.MaxLength = ViewColumn.LengthDataTypeName;
-		}
-
-		// Populates the join table combo.
-		private void PopulateTableCombo(ForeignKeys foreignKeys, string targetTableName)
+    // Populates the join table combo.
+    private void PopulateTableCombo(ForeignKeys foreignKeys, string targetTableName)
 		{
 			if (foreignKeys != null && foreignKeys.Count > 0)
 			{
@@ -310,15 +327,15 @@ namespace LJCViewEditor
 		// Shows the Help page.
 		private void JoinHelp_Click(object sender, EventArgs e)
 		{
-			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-				, @"Join\JoinDetail.html");
-		}
-		#endregion
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
+    }
+    #endregion
 
-		#region Control Event Handlers
+    #region Control Event Handlers
 
-		// Fires the Change event.
-		protected void LJCOnChange()
+    // Fires the Change event.
+    protected void LJCOnChange()
 		{
 			LJCChange?.Invoke(this, new EventArgs());
 		}
@@ -359,6 +376,22 @@ namespace LJCViewEditor
 
     #region Properties
 
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
+
     // Gets or sets the ID value.
     internal int LJCID { get; set; }
 
@@ -394,11 +427,12 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    // Singleton values.
-    private StandardUISettings mSettings;
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
 
-		// The Change event.
-		internal event EventHandler<EventArgs> LJCChange;
+    // Singleton values.
+    private ViewJoin mOriginalRecord;
+    private StandardUISettings mSettings;
 		#endregion
 	}
 }

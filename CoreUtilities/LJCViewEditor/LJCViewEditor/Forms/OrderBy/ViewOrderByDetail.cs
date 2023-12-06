@@ -1,11 +1,11 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderByDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
 using LJCViewEditorDAL;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
@@ -23,11 +23,15 @@ namespace LJCViewEditor
 		{
 			InitializeComponent();
 
-			// Initialize property values.
-			LJCID = 0;
+      // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"OrderBy\OrderByDetail.html";
+      LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
-			BeginColor = Color.AliceBlue;
+
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
 			EndColor = Color.LightSkyBlue;
 		}
 		#endregion
@@ -40,9 +44,9 @@ namespace LJCViewEditor
 			switch (e.KeyCode)
 			{
 				case Keys.F1:
-					Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-						, @"OrderBy\OrderByDetail.html");
-					break;
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
 			}
 		}
 
@@ -53,7 +57,6 @@ namespace LJCViewEditor
 			CancelButton = FormCancelButton;
 			InitializeControls();
 			DataRetrieve();
-			//CenterToParent();
 			Location = LJCLocation;
 		}
 
@@ -79,8 +82,8 @@ namespace LJCViewEditor
 				Text += " - Edit";
 				LJCIsUpdate = true;
         var manager = Managers.ViewOrderByManager;
-				var dataRecord = manager.RetrieveWithID(LJCID);
-				GetRecordValues(dataRecord);
+				mOriginalRecord = manager.RetrieveWithID(LJCID);
+				GetRecordValues(mOriginalRecord);
 			}
 			else
 			{
@@ -96,7 +99,8 @@ namespace LJCViewEditor
 		{
 			if (dataRecord != null)
 			{
-				ParentTextbox.Text = LJCParentName;
+        // In control order.
+        ParentTextbox.Text = LJCParentName;
 				ColumnNameTextbox.Text = dataRecord.ColumnName;
 
         // Reference key values.
@@ -107,23 +111,29 @@ namespace LJCViewEditor
 		// Creates and returns a record object with the data from
 		private ViewOrderBy SetRecordValues()
 		{
-			ViewOrderBy retValue = new ViewOrderBy()
-			{
-				ID = LJCID,
-				ColumnName = ViewEditorCommon.TruncateAtHyphen(ColumnNameTextbox.Text),
+      ViewOrderBy retValue = null;
 
-        // Get Reference key values.
-        ViewDataID = LJCParentID,
-      };
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewOrderBy();
+      }
+
+      // In control order.
+      retValue.ColumnName = ViewEditorCommon.TruncateAtHyphen(ColumnNameTextbox.Text);
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewDataID = LJCParentID;
 			return retValue;
 		}
 
 		// Saves the data.
 		private bool DataSave()
 		{
-			ViewOrderBy lookupRecord;
-			string title;
-			string message;
 			bool retValue = true;
 
 			Cursor = Cursors.WaitCursor;
@@ -132,19 +142,16 @@ namespace LJCViewEditor
       var manager = Managers.ViewOrderByManager;
 			//lookupRecord = mViewOrderByManager.RetrieveWithUniqueKey(LJCRecord.ViewDataID
    //     , LJCRecord.ColumnName);
-      lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ColumnName);
+      var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ColumnName);
       if (lookupRecord != null
 				&& (false == LJCIsUpdate
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				title = "Data Entry Error";
-				message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+        FormCommon.DataError(this);
+      }
 
-			if (retValue)
+      if (retValue)
 			{
 				if (LJCIsUpdate)
 				{
@@ -156,17 +163,19 @@ namespace LJCViewEditor
 					LJCRecord.ID = 0;
 					manager.Update(LJCRecord, updateKeyColumns);
 					LJCRecord.ID = LJCID;
-				}
-				else
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
 				{
 					LJCRecord.ID = 0;
-					ViewOrderBy viewOrderBy = manager.Add(LJCRecord);
-					if (viewOrderBy != null)
-					{
-						LJCRecord.ID = viewOrderBy.ID;
-					}
-				}
-			}
+					var addedRecord = manager.Add(LJCRecord);
+          if (addedRecord != null)
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
 			Cursor = Cursors.Default;
 			return retValue;
 		}
@@ -223,18 +232,18 @@ namespace LJCViewEditor
       ValuesViewEditor values = ValuesViewEditor.Instance;
       Managers = values.Managers;
 			mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
-			// Initialize Class Data.
-			//mViewOrderByManager = new ViewOrderByManager(mSettings.DbServiceRef
-			//	, mSettings.DataConfigName);
-			dataHelper = new DataHelper(mSettings.DbServiceRef
+      // Initialize Class Data.
+      //mViewOrderByManager = new ViewOrderByManager(mSettings.DbServiceRef
+      //	, mSettings.DataConfigName);
+      dataHelper = new DataHelper(mSettings.DbServiceRef
 				, mSettings.DataConfigName);
 
-			// Set control values.
-			ParentLabel.BackColor = mSettings.BeginColor;
-			ColumnNameLabel.BackColor = mSettings.BeginColor;
-
-			ColumnNameTextbox.MaxLength = ViewOrderBy.LengthColumnName;
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      ColumnNameTextbox.MaxLength = ViewOrderBy.LengthColumnName;
 
 			// Load control data.
 			if (dataHelper != null)
@@ -245,23 +254,24 @@ namespace LJCViewEditor
 					ColumnNameTextbox.Items.Add(dbColumn);
 				}
 			}
-		}
-		#endregion
+      Cursor = Cursors.Default;
+    }
+    #endregion
 
-		#region Action Event Handlers
+    #region Action Event Handlers
 
-		// Shows the Help page.
-		private void OrderByHelp_Click(object sender, EventArgs e)
+    // Shows the Help page.
+    private void OrderByHelp_Click(object sender, EventArgs e)
 		{
-			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-				, @"OrderBy\OrderByDetail.html");
-		}
-		#endregion
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
+    }
+    #endregion
 
-		#region Control Event Handlers
+    #region Control Event Handlers
 
-		// Fires the Change event.
-		protected void LJCOnChange()
+    // Fires the Change event.
+    protected void LJCOnChange()
 		{
 			LJCChange?.Invoke(this, new EventArgs());
 		}
@@ -281,12 +291,28 @@ namespace LJCViewEditor
 		{
 			Close();
 		}
-		#endregion
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the ID value.
-		internal int LJCID { get; set; }
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
+
+    // Gets or sets the ID value.
+    internal int LJCID { get; set; }
 
 		// Gets the IsUpdate value.
 		internal bool LJCIsUpdate { get; private set; }
@@ -322,16 +348,17 @@ namespace LJCViewEditor
 
     // Gets or sets the TableName value.
     internal string LJCTableName { get; set; }
-		#endregion
+    #endregion
 
-		#region Class Data
+    #region Class Data
 
-		// Singleton values.
-		private StandardUISettings mSettings;
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
+
+    // Singleton values.
+    private ViewOrderBy mOriginalRecord;
+    private StandardUISettings mSettings;
 		private DbColumns mTableColumns;
-
-		// The Change event.
-		internal event EventHandler<EventArgs> LJCChange;
 		#endregion
 	}
 }

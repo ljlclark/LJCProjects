@@ -149,6 +149,32 @@ namespace LJCWinFormCommon
 
     #region Error Functions
 
+    //  
+    public static bool AddError(Form form, int affectedCount)
+    {
+      bool retValue = false;
+
+      if (0 == affectedCount)
+      {
+        retValue = true;
+        var title = "Add Error";
+        var message = "The Record was not added.";
+        form.Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Information);
+      }
+      return retValue;
+    }
+
+    // 
+    public static void DataError(Form form)
+    {
+      var title = "Data Entry Error";
+      var message = "The record already exists.";
+      form.Cursor = Cursors.Default;
+      MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+    }
+
     // Displays the error text if it is not null.
     /// <include path='items/ShowError/*' file='Doc/FormCommon.xml'/>
     public static bool ShowError(string errorText, string caption = null)
@@ -181,6 +207,23 @@ namespace LJCWinFormCommon
           errorText = "No records affected.";
           FormCommon.ShowError(errorText, caption);
         }
+      }
+      return retValue;
+    }
+
+    // 
+    public static bool UpdateError(Form form, int affectedCount)
+    {
+      bool retValue = false;
+
+      if (0 == affectedCount)
+      {
+        retValue = true;
+        var title = "Update Error";
+        var message = "The Record was not updated.";
+        form.Cursor = Cursors.Default;
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Information);
       }
       return retValue;
     }

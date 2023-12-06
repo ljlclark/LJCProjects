@@ -1,10 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewConditionSetDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
@@ -12,161 +12,171 @@ using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
-	// The ViewFilter detail dialog.
-	internal partial class ViewConditionSetDetail : Form
-	{
-		#region Constructors
+  // The ViewFilter detail dialog.
+  internal partial class ViewConditionSetDetail : Form
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal ViewConditionSetDetail()
-		{
-			InitializeComponent();
+    // Initializes an object instance.
+    internal ViewConditionSetDetail()
+    {
+      InitializeComponent();
 
-			// Initialize property values.
-			LJCID = 0;
+      // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"Filter\ConditionSetDetail.html";
+      LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
-			EndColor = Color.LightSkyBlue;
-		}
-		#endregion
+      EndColor = Color.LightSkyBlue;
+    }
+    #endregion
 
-		#region Form Event Handlers
+    #region Form Event Handlers
 
-		// Handles the control keys.
-		private void ViewConditionSetDetail_KeyDown(object sender, KeyEventArgs e)
-		{
-			switch (e.KeyCode)
-			{
-				case Keys.F1:
-					Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-						, @"Filter\ConditionSetDetail.html");
-					break;
-			}
-		}
+    // Handles the control keys.
+    private void ViewConditionSetDetail_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.F1:
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
+      }
+    }
 
-		// Configures the form and loads the initial control data.
-		private void ViewColumnSetDetail_Load(object sender, EventArgs e)
-		{
-			AcceptButton = OKButton;
-			CancelButton = FormCancelButton;
-			InitializeControls();
-			DataRetrieve();
-			//CenterToParent();
-			Location = LJCLocation;
-		}
+    // Configures the form and loads the initial control data.
+    private void ViewColumnSetDetail_Load(object sender, EventArgs e)
+    {
+      AcceptButton = OKButton;
+      CancelButton = FormCancelButton;
+      InitializeControls();
+      DataRetrieve();
+      Location = LJCLocation;
+    }
 
-		// Paint the form background.
-		protected override void OnPaintBackground(PaintEventArgs e)
-		{
-			base.OnPaintBackground(e);
+    // Paint the form background.
+    protected override void OnPaintBackground(PaintEventArgs e)
+    {
+      base.OnPaintBackground(e);
 
-			FormCommon.CreateGradient(e.Graphics, ClientRectangle
-				, BeginColor, EndColor);
-		}
-		#endregion
+      FormCommon.CreateGradient(e.Graphics, ClientRectangle
+        , BeginColor, EndColor);
+    }
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Retrieves the initial control data.
-		private void DataRetrieve()
-		{
-			Cursor = Cursors.WaitCursor;
-			Text = "ViewConditionSet Detail";
-			if (LJCID > 0)
-			{
-				Text += " - Edit";
-				LJCIsUpdate = true;
+    // Retrieves the initial control data.
+    private void DataRetrieve()
+    {
+      Cursor = Cursors.WaitCursor;
+      Text = "ViewConditionSet Detail";
+      if (LJCID > 0)
+      {
+        Text += " - Edit";
+        LJCIsUpdate = true;
         var manager = Managers.ViewConditionSetManager;
-				var dataRecord = manager.RetrieveWithID(LJCID);
-				GetRecordValues(dataRecord);
-			}
-			else
-			{
-				Text += " - New";
-				LJCIsUpdate = false;
-				LJCRecord = new ViewConditionSet();
-				ParentTextbox.Text = LJCParentName;
-			}
-			Cursor = Cursors.Default;
-		}
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
+      }
+      else
+      {
+        Text += " - New";
+        LJCIsUpdate = false;
+        LJCRecord = new ViewConditionSet();
+        ParentTextbox.Text = LJCParentName;
+      }
+      Cursor = Cursors.Default;
+    }
 
-		// Gets the record values and copies them to the controls.
-		private void GetRecordValues(ViewConditionSet dataRecord)
-		{
-			if (dataRecord != null)
-			{
-				ParentTextbox.Text = LJCParentName;
-				if ("or" == dataRecord.BooleanOperator.ToLower())
-				{
-					OperatorCombo.SelectedIndex = 1;
-				}
+    // Gets the record values and copies them to the controls.
+    private void GetRecordValues(ViewConditionSet dataRecord)
+    {
+      if (dataRecord != null)
+      {
+        // In control order.
+        ParentTextbox.Text = LJCParentName;
+        if ("or" == dataRecord.BooleanOperator.ToLower())
+        {
+          OperatorCombo.SelectedIndex = 1;
+        }
 
         // Reference key values.
         LJCParentID = dataRecord.ViewFilterID;
       }
     }
 
-		// Creates and returns a record object with the data from
-		private ViewConditionSet SetRecordValues()
-		{
-			ViewConditionSet retValue = new ViewConditionSet()
-			{
-				ID = LJCID,
-				BooleanOperator = OperatorCombo.Text,
+    // Creates and returns a record object with the data from
+    private ViewConditionSet SetRecordValues()
+    {
+      ViewConditionSet retValue = null;
 
-        // Get Reference key values.
-        ViewFilterID = LJCParentID
-      };
-			return retValue;
-		}
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewConditionSet();
+      }
 
-		// Saves the data.
-		private bool DataSave()
-		{
-			bool retValue = true;
+      // In control order.
+      retValue.BooleanOperator = OperatorCombo.Text;
 
-			Cursor = Cursors.WaitCursor;
-			LJCRecord = SetRecordValues();
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewFilterID = LJCParentID;
 
+      return retValue;
+    }
+
+    // Saves the data.
+    private bool DataSave()
+    {
+      bool retValue = true;
+
+      Cursor = Cursors.WaitCursor;
+      LJCRecord = SetRecordValues();
       var manager = Managers.ViewConditionSetManager;
       // Only one ViewConditionSet per ViewFilter?
       var lookupRecord = manager.RetrieveWithParentID(LJCRecord.ViewFilterID);
-			if (lookupRecord != null
-				&& (false == LJCIsUpdate
-				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
-			{
-				retValue = false;
-				var title = "Data Entry Error";
-				var message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+      if (lookupRecord != null
+        && (false == LJCIsUpdate
+        || (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
+      {
+        retValue = false;
+        FormCommon.DataError(this);
+      }
 
-			if (retValue)
-			{
-				if (LJCIsUpdate)
-				{
+      if (retValue)
+      {
+        if (LJCIsUpdate)
+        {
           var keyColumns = manager.IDKey(LJCID);
-					LJCRecord.ID = 0;
-					manager.Update(LJCRecord, keyColumns);
-					LJCRecord.ID = LJCID;
-				}
-				else
-				{
-					LJCRecord.ID = 0;
-					var viewConditionSet = manager.Add(LJCRecord);
-					if (viewConditionSet != null)
-					{
-						LJCRecord.ID = viewConditionSet.ID;
-					}
-				}
-			}
-			Cursor = Cursors.Default;
-			return retValue;
-		}
+          LJCRecord.ID = 0;
+          manager.Update(LJCRecord, keyColumns);
+          LJCRecord.ID = LJCID;
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
+        {
+          LJCRecord.ID = 0;
+          var addedRecord = manager.Add(LJCRecord);
+          if (addedRecord != null)
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
+      Cursor = Cursors.Default;
+      return retValue;
+    }
 
     // Check for saved data.
     private bool IsDataSaved()
@@ -183,52 +193,49 @@ namespace LJCViewEditor
 
     // Validates the data.
     private bool IsValid()
-		{
-			bool retVal = true;
+    {
+      bool retVal = true;
 
-			var builder = new StringBuilder(64);
-			builder.AppendLine("Invalid or Missing Data:");
+      var builder = new StringBuilder(64);
+      builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(OperatorCombo.Text))
-			{
-				retVal = false;
-				builder.AppendLine($"  {OperatorLabel.Text}");
-			}
+      if (false == NetString.HasValue(OperatorCombo.Text))
+      {
+        retVal = false;
+        builder.AppendLine($"  {OperatorLabel.Text}");
+      }
 
-			if (retVal == false)
-			{
-				var title = "Data Entry Error";
-				var message = builder.ToString();
+      if (retVal == false)
+      {
+        var title = "Data Entry Error";
+        var message = builder.ToString();
         MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
-			return retVal;
-		}
-		#endregion
+      }
+      return retVal;
+    }
+    #endregion
 
-		#region Setup Methods
+    #region Setup Methods
 
-		// Configures the controls and loads the selection control data.
-		private void InitializeControls()
-		{
+    // Configures the controls and loads the selection control data.
+    private void InitializeControls()
+    {
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
-      ValuesViewEditor values = ValuesViewEditor.Instance;
+      var values = ValuesViewEditor.Instance;
+      Managers = values.Managers;
       mSettings = values.StandardSettings;
       BeginColor = mSettings.BeginColor;
       EndColor = mSettings.EndColor;
 
-
-      // Initialize Class Data.
-
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-
       OperatorCombo.MaxLength = ViewConditionSet.LengthBooleanOperator;
 
-			// Load control data.
-			OperatorCombo.Items.Add("And");
-			OperatorCombo.Items.Add("Or");
-			OperatorCombo.SelectedIndex = 0;
+      // Load control data.
+      OperatorCombo.Items.Add("And");
+      OperatorCombo.Items.Add("Or");
+      OperatorCombo.SelectedIndex = 0;
       Cursor = Cursors.Default;
     }
     #endregion
@@ -237,67 +244,83 @@ namespace LJCViewEditor
 
     // Shows the Help page.
     private void ConditionSetHelp_Click(object sender, EventArgs e)
-		{
-			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-				, @"Filter\ConditionSetDetail.html");
-		}
-		#endregion
+    {
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
+    }
+    #endregion
 
-		#region Control Event Handlers
+    #region Control Event Handlers
 
-		// Fires the Change event.
-		protected void LJCOnChange()
-		{
-			LJCChange?.Invoke(this, new EventArgs());
-		}
+    // Fires the Change event.
+    protected void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
 
-		// Saves the data and closes the form.
-		private void OKButton_Click(object sender, EventArgs e)
-		{
-			if (IsDataSaved())
-			{
-				LJCOnChange();
-				DialogResult = DialogResult.OK;
-			}
-		}
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
+      }
+    }
 
-		// Closes the form without saving the data.
-		private void FormCancelButton_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-		#endregion
+    // Closes the form without saving the data.
+    private void FormCancelButton_Click(object sender, EventArgs e)
+    {
+      Close();
+    }
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the ID value.
-		internal int LJCID { get; set; }
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
 
-		// Gets the IsUpdate value.
-		internal bool LJCIsUpdate { get; private set; }
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
 
-		// The form position.
-		internal Point LJCLocation { get; set; }
+    // Gets or sets the ID value.
+    internal int LJCID { get; set; }
 
-		// Gets or sets the Parent ID value.
-		internal int LJCParentID { get; set; }
+    // Gets the IsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
 
-		// Gets or sets the Parent name value.
-		internal string LJCParentName
-		{
-			get { return mParentName; }
-			set { mParentName = NetString.InitString(value); }
-		}
-		private string mParentName;
+    // The form position.
+    internal Point LJCLocation { get; set; }
 
-		// Gets a reference to the record object.
-		internal ViewConditionSet LJCRecord { get; private set; }
+    // Gets or sets the Parent ID value.
+    internal int LJCParentID { get; set; }
 
-		// Gets or sets the BeginColor value.
-		private Color BeginColor { get; set; }
+    // Gets or sets the Parent name value.
+    internal string LJCParentName
+    {
+      get { return mParentName; }
+      set { mParentName = NetString.InitString(value); }
+    }
+    private string mParentName;
 
-		// Gets or sets the Parent ID value.
-		private Color EndColor { get; set; }
+    // Gets a reference to the record object.
+    internal ViewConditionSet LJCRecord { get; private set; }
+
+    // Gets or sets the BeginColor value.
+    private Color BeginColor { get; set; }
+
+    // Gets or sets the Parent ID value.
+    private Color EndColor { get; set; }
 
     // The Managers object.
     private ManagersDbView Managers { get; set; }
@@ -305,13 +328,11 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    // Singleton values.
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
 
-		// The Change event.
-		internal event EventHandler<EventArgs> LJCChange;
-
+    private ViewConditionSet mOriginalRecord;
     private StandardUISettings mSettings;
-    //private ItemTypeComboCode mItemTypeComboCode;
     #endregion
   }
 }

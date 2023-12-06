@@ -10,21 +10,29 @@ namespace LJCDBViewDAL
 	/// <summary>The ViewCondition table Data Record.</summary>
 	public class ViewCondition
 	{
-		#region Constructors
+    #region Constructors
 
-		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewCondition()
+    // Initializes an object instance.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public ViewCondition()
 		{
 			ChangedNames = new ChangedNames();
 		}
-		#endregion
+    #endregion
 
-		#region Methods
+    #region Data Methods
 
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public override string ToString()
+    // Creates and returns a clone of this object.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public ViewCondition Clone()
+    {
+      var retValue = MemberwiseClone() as ViewCondition;
+      return retValue;
+    }
+
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public override string ToString()
 		{
 			return $"{FirstValue} {ComparisonOperator} {SecondValue}";
 		}

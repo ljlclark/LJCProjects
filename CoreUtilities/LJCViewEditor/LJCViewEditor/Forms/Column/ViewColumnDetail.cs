@@ -60,7 +60,6 @@ namespace LJCViewEditor
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      //CenterToParent();
       Location = LJCLocation;
     }
 
@@ -85,8 +84,8 @@ namespace LJCViewEditor
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = Managers.ViewColumnManager;
-        var dataRecord = manager.RetrieveWithID(LJCID);
-        GetRecordValues(dataRecord);
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
 
         // Do not allow column change on update.
         TemplateColumnCombo.Enabled = false;
@@ -143,30 +142,39 @@ namespace LJCViewEditor
     // Creates and returns a record object with the data from
     private ViewColumn SetRecordValues()
     {
-      ViewColumn retValue = new ViewColumn()
-      {
-        // In control order.
-        ColumnName = ColumnNameTextbox.Text.Trim(),
-        PropertyName = FormCommon.SetString(PropertyTextbox.Text.Trim()),
-        RenameAs = FormCommon.SetString(RenameTextbox.Text.Trim()),
-        Caption = FormCommon.SetString(CaptionTextbox.Text.Trim()),
-        DataTypeName = DataTypeCombo.Text.Trim(),
-        Value = FormCommon.SetString(ValueTextbox.Text.Trim()),
-        IsPrimaryKey = PrimaryKeyCheckBox.Checked,
+      ViewColumn retValue = null;
 
-        // Get Reference key values.
-        ID = LJCID,
-        ViewDataID = LJCParentID
-      };
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewColumn();
+      }
+
+      // In control order.
+      retValue.ColumnName = ColumnNameTextbox.Text.Trim();
+      retValue.PropertyName = FormCommon.SetString(PropertyTextbox.Text.Trim());
+      retValue.RenameAs = FormCommon.SetString(RenameTextbox.Text.Trim());
+      retValue.Caption = FormCommon.SetString(CaptionTextbox.Text.Trim());
+      retValue.DataTypeName = DataTypeCombo.Text.Trim();
+      retValue.Value = FormCommon.SetString(ValueTextbox.Text.Trim());
+      retValue.IsPrimaryKey = PrimaryKeyCheckBox.Checked;
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewDataID = LJCParentID;
       return retValue;
     }
 
     // Resets the empty record values.
     private void ResetRecordValues(ViewColumn record)
     {
+      // In control order.
       record.PropertyName = FormCommon.SetString(record.PropertyName);
-      record.Caption = FormCommon.SetString(record.Caption);
       record.RenameAs = FormCommon.SetString(record.RenameAs);
+      record.Caption = FormCommon.SetString(record.Caption);
       record.Value = FormCommon.SetString(record.Value);
     }
 
@@ -183,11 +191,7 @@ namespace LJCViewEditor
       if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
         retValue = false;
-        var title = "Data Entry Error";
-        var message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK
-          , MessageBoxIcon.Exclamation);
+        FormCommon.DataError(this);
       }
 
       if (retValue)
@@ -197,38 +201,20 @@ namespace LJCViewEditor
           var keyColumns = manager.IDKey(LJCID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
-          LJCRecord.ID = LJCID;
           ResetRecordValues(LJCRecord);
-          if (0 == manager.AffectedCount)
-          {
-            retValue = false;
-            var title = "Update Error";
-            var message = "The Record was not updated.";
-            Cursor = Cursors.Default;
-            MessageBox.Show(message, title, MessageBoxButtons.OK
-              , MessageBoxIcon.Information);
-          }
+          LJCRecord.ID = LJCID;
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
           LJCRecord.ID = 0;
-          ViewColumn addedRecord = manager.AddWithFlags(LJCRecord);
+          var addedRecord = manager.AddWithFlags(LJCRecord);
           ResetRecordValues(LJCRecord);
-          if (null == addedRecord)
-          {
-            if (manager.AffectedCount < 1)
-            {
-              var title = "Add Error";
-              var message = "The Record was not added.";
-              Cursor = Cursors.Default;
-              MessageBox.Show(message, title, MessageBoxButtons.OK
-                , MessageBoxIcon.Information);
-            }
-          }
-          else
+          if (addedRecord != null)
           {
             LJCRecord.ID = addedRecord.ID;
           }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }
       }
       Cursor = Cursors.Default;
@@ -298,7 +284,6 @@ namespace LJCViewEditor
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
-
       ColumnNameTextbox.MaxLength = ViewColumn.LengthColumnName;
       PropertyTextbox.MaxLength = ViewColumn.LengthPropertyName;
       CaptionTextbox.MaxLength = ViewColumn.LengthCaption;
@@ -330,6 +315,8 @@ namespace LJCViewEditor
       {
         DataTypeCombo.Items.Add(dataType);
       }
+
+      Cursor = Cursors.Default;
     }
 
     // Sets the NoSpace events.
@@ -453,13 +440,14 @@ namespace LJCViewEditor
     // Gets a reference to the record object.
     internal ViewColumn LJCRecord { get; set; }
 
-    internal ManagersDbView Managers { get; set; }
-
     // Gets or sets the BeginColor value.
     private Color BeginColor { get; set; }
 
     // Gets or sets the Parent ID value.
     private Color EndColor { get; set; }
+
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
     #endregion
 
     #region Custom Properties
@@ -476,14 +464,15 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    private StandardUISettings mSettings;
-    private DbServiceRef mDbServiceRef;
-    private string mDataConfigName;
-    private DbColumns mTableColumns;
-    private DataDbView mDataDbView;
-
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
+
+    private string mDataConfigName;
+    private DataDbView mDataDbView;
+    private DbServiceRef mDbServiceRef;
+    private ViewColumn mOriginalRecord;
+    private StandardUISettings mSettings;
+    private DbColumns mTableColumns;
     #endregion
   }
 }

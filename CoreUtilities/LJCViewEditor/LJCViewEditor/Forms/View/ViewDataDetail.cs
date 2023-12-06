@@ -1,10 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewDataDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
@@ -23,9 +23,13 @@ namespace LJCViewEditor
       InitializeComponent();
 
       // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"View\ViewDetail.html";
       LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
+
+      // Set default class data.
       BeginColor = Color.AliceBlue;
       EndColor = Color.LightSkyBlue;
     }
@@ -39,8 +43,8 @@ namespace LJCViewEditor
       switch (e.KeyCode)
       {
         case Keys.F1:
-          Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-            , @"View\ViewDetail.html");
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
           break;
       }
     }
@@ -52,7 +56,6 @@ namespace LJCViewEditor
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      //CenterToParent();
       Location = LJCLocation;
     }
 
@@ -78,8 +81,8 @@ namespace LJCViewEditor
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var dataRecord = manager.RetrieveWithID(LJCID);
-        GetRecordValues(dataRecord);
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
       }
       else
       {
@@ -88,7 +91,7 @@ namespace LJCViewEditor
         LJCRecord = new ViewData();
         ParentTextbox.Text = LJCParentName;
 
-        // Get default values.
+        // Set default values.
         var name = $"{LJCParentName}Standard";
         var keyRecord = new DbColumns()
         {
@@ -110,6 +113,7 @@ namespace LJCViewEditor
     {
       if (dataRecord != null)
       {
+        // In control order.
         ParentTextbox.Text = LJCParentName;
         NameTextbox.Text = dataRecord.Name;
         DescriptionTextbox.Text = dataRecord.Description;
@@ -122,41 +126,43 @@ namespace LJCViewEditor
     // Creates and returns a record object with the data from
     private ViewData SetRecordValues()
     {
-      ViewData retVal = new ViewData()
-      {
-        ID = LJCID,
-        Name = NameTextbox.Text,
-        Description = DescriptionTextbox.Text,
+      ViewData retValue = null;
 
-        // Get Reference key values.
-        ViewTableID = LJCParentID,
-      };
-      return retVal;
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewData();
+      }
+
+      // In control order.
+      retValue.Name = NameTextbox.Text;
+      retValue.Description = DescriptionTextbox.Text;
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewTableID = LJCParentID;
+      return retValue;
     }
 
     // Saves the data.
     private bool DataSave()
     {
-      ViewData lookupRecord;
-      string title;
-      string message;
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
-
       var manager = Managers.ViewDataManager;
-      lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewTableID
+      var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewTableID
         , LJCRecord.Name);
       if (lookupRecord != null
         && (false == LJCIsUpdate
         || (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
       {
         retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        FormCommon.DataError(this);
       }
 
       if (retValue)
@@ -170,15 +176,17 @@ namespace LJCViewEditor
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, updateKeyColumns);
           LJCRecord.ID = LJCID;
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
           LJCRecord.ID = 0;
-          ViewData viewData = manager.Add(LJCRecord);
-          if (viewData != null)
+          var addedRecord = manager.Add(LJCRecord);
+          if (addedRecord != null)
           {
-            LJCRecord.ID = viewData.ID;
+            LJCRecord.ID = addedRecord.ID;
           }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }
       }
       Cursor = Cursors.Default;
@@ -236,7 +244,8 @@ namespace LJCViewEditor
     private void InitializeControls()
     {
       // Get singleton values.
-      ValuesViewEditor values = ValuesViewEditor.Instance;
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesViewEditor.Instance;
       Managers = values.Managers;
       mSettings = values.StandardSettings;
       BeginColor = mSettings.BeginColor;
@@ -248,7 +257,6 @@ namespace LJCViewEditor
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-
       NameTextbox.MaxLength = ViewData.LengthName;
       DescriptionTextbox.MaxLength = ViewData.LengthDescription;
     }
@@ -259,8 +267,8 @@ namespace LJCViewEditor
     // Shows the Help page.
     private void ViewDetailHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-        , @"View\ViewDetail.html");
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
     }
     #endregion
 
@@ -308,6 +316,22 @@ namespace LJCViewEditor
 
     #region Properties
 
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
+
     // Gets or sets the ID value.
     internal int LJCID { get; set; }
 
@@ -343,11 +367,12 @@ namespace LJCViewEditor
 
     #region Class Data
 
-    // Singleton values.
-    private StandardUISettings mSettings;
-
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
+
+    // Singleton values.
+    private ViewData mOriginalRecord;
+    private StandardUISettings mSettings;
     #endregion
   }
 }

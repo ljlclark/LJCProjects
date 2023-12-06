@@ -18,13 +18,21 @@ namespace LJCDBViewDAL
 		{
 			ChangedNames = new ChangedNames();
 		}
-		#endregion
+    #endregion
 
-		#region Methods
+    #region Data Methods
 
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public override string ToString()
+    // Creates and returns a clone of this object.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public ViewData Clone()
+    {
+      var retValue = MemberwiseClone() as ViewData;
+      return retValue;
+    }
+
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public override string ToString()
 		{
 			return mName;
 		}

@@ -75,8 +75,6 @@
 			this.ToColumnCombo.Name = "ToColumnCombo";
 			this.ToColumnCombo.Size = new System.Drawing.Size(433, 28);
 			this.ToColumnCombo.TabIndex = 5;
-			this.ToColumnCombo.TextChanged += new System.EventHandler(this.ToColumnTextbox_TextChanged);
-			this.ToColumnCombo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ToColumnTextbox_KeyPress);
 			// 
 			// ToColumnLabel
 			// 
@@ -94,8 +92,6 @@
 			this.FromColumnCombo.Name = "FromColumnCombo";
 			this.FromColumnCombo.Size = new System.Drawing.Size(433, 28);
 			this.FromColumnCombo.TabIndex = 3;
-			this.FromColumnCombo.TextChanged += new System.EventHandler(this.FromColumnTextbox_TextChanged);
-			this.FromColumnCombo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FromColumnTextbox_KeyPress);
 			// 
 			// FromColumnLabel
 			// 
@@ -132,8 +128,6 @@
 			this.OperatorTextbox.Name = "OperatorTextbox";
 			this.OperatorTextbox.Size = new System.Drawing.Size(433, 26);
 			this.OperatorTextbox.TabIndex = 7;
-			this.OperatorTextbox.TextChanged += new System.EventHandler(this.OperatorTextbox_TextChanged);
-			this.OperatorTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OperatorTextbox_KeyPress);
 			// 
 			// OperatorLabel
 			// 

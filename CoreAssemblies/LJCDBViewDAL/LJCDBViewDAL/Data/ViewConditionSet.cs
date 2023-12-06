@@ -18,17 +18,28 @@ namespace LJCDBViewDAL
 		{
 			ChangedNames = new ChangedNames();
 		}
-		#endregion
+    #endregion
 
-		#region Data Properties
+    #region Data Methods
 
-		// Update ChangedNames.Add() statements to "Property" constant
-		// if property was renamed.
+    // Creates and returns a clone of this object.
+    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    public ViewConditionSet Clone()
+    {
+      ViewConditionSet retValue = MemberwiseClone() as ViewConditionSet;
+      return retValue;
+    }
+    #endregion
 
-		/// <summary>Gets or sets the ID value.</summary>
-		//[Required]
-		//[Column("ID", TypeName="int")]
-		public Int32 ID
+    #region Data Properties
+
+    // Update ChangedNames.Add() statements to "Property" constant
+    // if property was renamed.
+
+    /// <summary>Gets or sets the ID value.</summary>
+    //[Required]
+    //[Column("ID", TypeName="int")]
+    public Int32 ID
 		{
 			get { return mID; }
 			set
@@ -64,9 +75,6 @@ namespace LJCDBViewDAL
 			}
 		}
 		private String mBooleanOperator;
-		#endregion
-
-		#region Calculated and Join Data Properties
 		#endregion
 
 		#region Class Properties

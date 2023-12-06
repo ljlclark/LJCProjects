@@ -1,11 +1,11 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinOnDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
 using LJCViewEditorDAL;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
@@ -13,175 +13,189 @@ using System.Windows.Forms;
 
 namespace LJCViewEditor
 {
-	// The ViewJoinOn detail dialog.
-	internal partial class ViewJoinOnDetail : Form
-	{
-		#region Constructors
+  // The ViewJoinOn detail dialog.
+  internal partial class ViewJoinOnDetail : Form
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal ViewJoinOnDetail()
-		{
-			InitializeComponent();
+    // Initializes an object instance.
+    internal ViewJoinOnDetail()
+    {
+      InitializeComponent();
 
-			// Initialize property values.
-			LJCID = 0;
+      // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"Join\JoinOnDetail.html";
+      LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
-			BeginColor = Color.AliceBlue;
-			EndColor = Color.LightSkyBlue;
-		}
-		#endregion
 
-		#region Form Event Handlers
+      // Set default class data.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.LightSkyBlue;
+    }
+    #endregion
 
-		// Handles the control keys.
-		private void ViewJoinOnDetail_KeyDown(object sender, KeyEventArgs e)
-		{
-			switch (e.KeyCode)
-			{
-				case Keys.F1:
-					Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-						, @"Join\JoinOnDetail.html");
-					break;
-			}
-		}
+    #region Form Event Handlers
 
-		// Configures the form and loads the initial control data.
-		private void ViewJoinOnDetail_Load(object sender, EventArgs e)
-		{
-			AcceptButton = OKButton;
-			CancelButton = FormCancelButton;
-			InitializeControls();
-			DataRetrieve();
-			//CenterToParent();
-			Location = LJCLocation;
-		}
+    // Handles the control keys.
+    private void ViewJoinOnDetail_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.F1:
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
+      }
+    }
 
-		// Paint the form background.
-		protected override void OnPaintBackground(PaintEventArgs e)
-		{
-			base.OnPaintBackground(e);
+    // Configures the form and loads the initial control data.
+    private void ViewJoinOnDetail_Load(object sender, EventArgs e)
+    {
+      AcceptButton = OKButton;
+      CancelButton = FormCancelButton;
+      InitializeControls();
+      DataRetrieve();
+      Location = LJCLocation;
+    }
 
-			FormCommon.CreateGradient(e.Graphics, ClientRectangle
-				, BeginColor, EndColor);
-		}
-		#endregion
+    // Paint the form background.
+    protected override void OnPaintBackground(PaintEventArgs e)
+    {
+      base.OnPaintBackground(e);
 
-		#region Data Methods
+      FormCommon.CreateGradient(e.Graphics, ClientRectangle
+        , BeginColor, EndColor);
+    }
+    #endregion
 
-		// Retrieves the initial control data.
-		private void DataRetrieve()
-		{
-			Cursor = Cursors.WaitCursor;
-			Text = "ViewJoinOn Detail";
-			if (LJCID > 0)
-			{
-				Text += " - Edit";
-				LJCIsUpdate = true;
+    #region Data Methods
+
+    // Retrieves the initial control data.
+    private void DataRetrieve()
+    {
+      Cursor = Cursors.WaitCursor;
+      Text = "ViewJoinOn Detail";
+      if (LJCID > 0)
+      {
+        Text += " - Edit";
+        LJCIsUpdate = true;
         var manager = Managers.ViewJoinOnManager;
-				var dataRecord = manager.RetrieveWithID(LJCID);
-				GetRecordValues(dataRecord);
-			}
-			else
-			{
-				Text += " - New";
-				LJCIsUpdate = false;
-				LJCRecord = new ViewJoinOn();
-				ParentTextbox.Text = LJCParentName;
-				OperatorTextbox.Text = "=";
-			}
-			Cursor = Cursors.Default;
-		}
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
+      }
+      else
+      {
+        Text += " - New";
+        LJCIsUpdate = false;
+        LJCRecord = new ViewJoinOn();
+        ParentTextbox.Text = LJCParentName;
 
-		// Gets the record values and copies them to the controls.
-		private void GetRecordValues(ViewJoinOn dataRecord)
-		{
-			if (dataRecord != null)
-			{
-				ParentTextbox.Text = LJCParentName;
+        // Set default values.
+        OperatorTextbox.Text = "=";
+      }
+      Cursor = Cursors.Default;
+    }
 
-				FromColumnCombo.Text = dataRecord.FromColumnName;
-				var dbColumn
-					= mJoinTableColumns.LJCSearchPropertyName(dataRecord.FromColumnName);
-				if (dbColumn != null)
-				{
-					FromColumnCombo.SelectedItem = dbColumn;
-				}
+    // Gets the record values and copies them to the controls.
+    private void GetRecordValues(ViewJoinOn dataRecord)
+    {
+      if (dataRecord != null)
+      {
+        // In control order.
+        ParentTextbox.Text = LJCParentName;
 
-				ToColumnCombo.Text = dataRecord.ToColumnName;
-				dbColumn
-					= mJoinOnTableColumns.LJCSearchPropertyName(dataRecord.ToColumnName);
-				if (dbColumn != null)
-				{
-					ToColumnCombo.SelectedItem = dbColumn;
-				}
+        FromColumnCombo.Text = dataRecord.FromColumnName;
+        var dbColumn
+          = mJoinTableColumns.LJCSearchPropertyName(dataRecord.FromColumnName);
+        if (dbColumn != null)
+        {
+          FromColumnCombo.SelectedItem = dbColumn;
+        }
 
-				OperatorTextbox.Text = dataRecord.JoinOnOperator;
+        ToColumnCombo.Text = dataRecord.ToColumnName;
+        dbColumn
+          = mJoinOnTableColumns.LJCSearchPropertyName(dataRecord.ToColumnName);
+        if (dbColumn != null)
+        {
+          ToColumnCombo.SelectedItem = dbColumn;
+        }
+
+        OperatorTextbox.Text = dataRecord.JoinOnOperator;
 
         // Reference key values.
         LJCParentID = dataRecord.ViewJoinID;
       }
     }
 
-		// Creates and returns a record object with the data from
-		private ViewJoinOn SetRecordValues()
-		{
-      ViewJoinOn retValue = new ViewJoinOn()
+    // Creates and returns a record object with the data from
+    private ViewJoinOn SetRecordValues()
+    {
+      ViewJoinOn retValue = null;
+
+      if (mOriginalRecord != null)
       {
-        FromColumnName = ViewEditorCommon.TruncateAtHyphen(FromColumnCombo.Text),
-        ToColumnName = ViewEditorCommon.TruncateAtHyphen(ToColumnCombo.Text),
-        JoinOnOperator = OperatorTextbox.Text,
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewJoinOn();
+      }
 
-        // Get Reference key values.
-        ID = LJCID,
-        ViewJoinID = LJCParentID,
-      };
-			return retValue;
-		}
+      // In control order.
+      retValue.FromColumnName = ViewEditorCommon.TruncateAtHyphen(FromColumnCombo.Text);
+      retValue.ToColumnName = ViewEditorCommon.TruncateAtHyphen(ToColumnCombo.Text);
+      retValue.JoinOnOperator = OperatorTextbox.Text;
 
-		// Saves the data.
-		private bool DataSave()
-		{
-			bool retValue = true;
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewJoinID = LJCParentID;
+      return retValue;
+    }
 
-			Cursor = Cursors.WaitCursor;
-			LJCRecord = SetRecordValues();
+    // Saves the data.
+    private bool DataSave()
+    {
+      bool retValue = true;
 
+      Cursor = Cursors.WaitCursor;
+      LJCRecord = SetRecordValues();
       var manager = Managers.ViewJoinOnManager;
-			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewJoinID
+      var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewJoinID
         , LJCRecord.FromColumnName);
-			if (lookupRecord != null
-				&& (false == LJCIsUpdate
-				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
-			{
-				retValue = false;
-				var title = "Data Entry Error";
-				var message = "The record already exists.";
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+      if (lookupRecord != null
+        && (false == LJCIsUpdate
+        || (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
+      {
+        retValue = false;
+        FormCommon.DataError(this);
+      }
 
-			if (retValue)
-			{
-				if (LJCIsUpdate)
-				{
+      if (retValue)
+      {
+        if (LJCIsUpdate)
+        {
           var keyColumns = manager.GetIDKey(LJCRecord.ID);
-					LJCRecord.ID = 0;
-					manager.Update(LJCRecord, keyColumns);
-					LJCRecord.ID = LJCID;
-				}
-				else
-				{
-					LJCRecord.ID = 0;
-					ViewJoinOn viewJoinOn = manager.Add(LJCRecord);
-					if (viewJoinOn != null)
-					{
-						LJCRecord.ID = viewJoinOn.ID;
-					}
-				}
-			}
-			Cursor = Cursors.Default;
-			return retValue;
-		}
+          LJCRecord.ID = 0;
+          manager.Update(LJCRecord, keyColumns);
+          LJCRecord.ID = LJCID;
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
+        {
+          LJCRecord.ID = 0;
+          var addedRecord = manager.Add(LJCRecord);
+          if (addedRecord != null)
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
+      Cursor = Cursors.Default;
+      return retValue;
+    }
 
     // Check for saved data.
     private bool IsDataSaved()
@@ -198,189 +212,199 @@ namespace LJCViewEditor
 
     // Validates the data.
     private bool IsValid()
-		{
-			StringBuilder builder;
-			string title;
-			string message;
-			bool retVal = true;
+    {
+      StringBuilder builder;
+      string title;
+      string message;
+      bool retVal = true;
 
-			builder = new StringBuilder(64);
-			builder.AppendLine("Invalid or Missing Data:");
+      builder = new StringBuilder(64);
+      builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(FromColumnCombo.Text))
-			{
-				retVal = false;
-				builder.AppendLine($"  {FromColumnLabel.Text}");
-			}
-			if (false == NetString.HasValue(ToColumnCombo.Text))
-			{
-				retVal = false;
-				builder.AppendLine($"  {ToColumnLabel.Text}");
-			}
-			if (false == NetString.HasValue(OperatorTextbox.Text))
-			{
-				retVal = false;
-				builder.AppendLine($"  {OperatorLabel.Text}");
-			}
+      if (false == NetString.HasValue(FromColumnCombo.Text))
+      {
+        retVal = false;
+        builder.AppendLine($"  {FromColumnLabel.Text}");
+      }
+      if (false == NetString.HasValue(ToColumnCombo.Text))
+      {
+        retVal = false;
+        builder.AppendLine($"  {ToColumnLabel.Text}");
+      }
+      if (false == NetString.HasValue(OperatorTextbox.Text))
+      {
+        retVal = false;
+        builder.AppendLine($"  {OperatorLabel.Text}");
+      }
 
-			if (retVal == false)
-			{
-				title = "Data Entry Error";
-				message = builder.ToString();
-				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
-			return retVal;
-		}
-		#endregion
+      if (retVal == false)
+      {
+        title = "Data Entry Error";
+        message = builder.ToString();
+        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+      }
+      return retVal;
+    }
+    #endregion
 
-		#region Setup Methods
+    #region Setup Methods
 
-		// Configures the controls and loads the selection control data.
-		private void InitializeControls()
-		{
-			// Get singleton values.
-			ValuesViewEditor values = ValuesViewEditor.Instance;
+    // Configures the controls and loads the selection control data.
+    private void InitializeControls()
+    {
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesViewEditor.Instance;
       Managers = values.Managers;
-			mSettings = values.StandardSettings;
-
-      // Initialize Class Data.
+      mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-
+      SetNoSpace();
       FromColumnCombo.MaxLength = ViewJoinOn.LengthFromColumnName;
-			ToColumnCombo.MaxLength = ViewJoinOn.LengthToColumnName;
-			OperatorTextbox.MaxLength = ViewJoinOn.LengthJoinOperator;
+      ToColumnCombo.MaxLength = ViewJoinOn.LengthToColumnName;
+      OperatorTextbox.MaxLength = ViewJoinOn.LengthJoinOperator;
 
-			// Load control data.
-			// From Columns Combo
-			DataHelper dataHelper = new DataHelper(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
-			mJoinTableColumns = dataHelper.GetJoinFromColumns(LJCParentID);
-			foreach (DbColumn dbColumn in mJoinTableColumns)
-			{
-				FromColumnCombo.Items.Add(dbColumn);
-			}
+      // Load control data.
+      // From Columns Combo
+      DataHelper dataHelper = new DataHelper(mSettings.DbServiceRef
+        , mSettings.DataConfigName);
+      mJoinTableColumns = dataHelper.GetJoinFromColumns(LJCParentID);
+      foreach (DbColumn dbColumn in mJoinTableColumns)
+      {
+        FromColumnCombo.Items.Add(dbColumn);
+      }
 
-			// To Columns Combo
-			mJoinOnTableColumns = dataHelper.GetJoinToColumns(LJCParentID);
-			foreach (DbColumn dbColumn in mJoinOnTableColumns)
-			{
-				ToColumnCombo.Items.Add(dbColumn);
-			}
-		}
-		#endregion
+      // To Columns Combo
+      mJoinOnTableColumns = dataHelper.GetJoinToColumns(LJCParentID);
+      foreach (DbColumn dbColumn in mJoinOnTableColumns)
+      {
+        ToColumnCombo.Items.Add(dbColumn);
+      }
+      Cursor = Cursors.Default;
+    }
 
-		#region Action Event Handlers
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      FromColumnCombo.KeyPress += TextBoxNoSpace_KeyPress;
+      ToColumnCombo.KeyPress += TextBoxNoSpace_KeyPress;
+      OperatorTextbox.KeyPress += TextBoxNoSpace_KeyPress;
+      FromColumnCombo.TextChanged += TextBoxNoSpace_TextChanged;
+      ToColumnCombo.TextChanged += TextBoxNoSpace_TextChanged;
+      OperatorTextbox.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+    #endregion
 
-		// Shows the Help page.
-		private void JoinOnHelp_Click(object sender, EventArgs e)
-		{
-			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-				, @"Join\JoinOnDetail.html");
-		}
-		#endregion
+    #region Action Event Handlers
 
-		#region Control Event Handlers
+    // Shows the Help page.
+    private void JoinOnHelp_Click(object sender, EventArgs e)
+    {
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
+    }
+    #endregion
 
-		// Fires the Change event.
-		protected void LJCOnChange()
-		{
-			LJCChange?.Invoke(this, new EventArgs());
-		}
+    #region Control Event Handlers
 
-		// Saves the data and closes the form.
-		private void OKButton_Click(object sender, EventArgs e)
-		{
-			if (IsDataSaved())
-			{
-				LJCOnChange();
-				DialogResult = DialogResult.OK;
-			}
-		}
+    // Fires the Change event.
+    protected void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
 
-		// Closes the form without saving the data.
-		private void FormCancelButton_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-		#endregion
+    // Saves the data and closes the form.
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
+      }
+    }
 
-		#region KeyEdit Event Handlers
+    // Closes the form without saving the data.
+    private void FormCancelButton_Click(object sender, EventArgs e)
+    {
+      Close();
+    }
+    #endregion
 
-		// Does not allow spaces.
-		private void FromColumnTextbox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			e.Handled = FormCommon.HandleSpace(e.KeyChar);
-		}
+    #region KeyEdit Event Handlers
 
-		// Does not allow spaces.
-		private void ToColumnTextbox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			e.Handled = FormCommon.HandleSpace(e.KeyChar);
-		}
-
-		// Does not allow spaces.
-		private void OperatorTextbox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			e.Handled = FormCommon.HandleSpace(e.KeyChar);
-		}
-
-		// Strips blanks from the text value.
-		private void FromColumnTextbox_TextChanged(object sender, EventArgs e)
-		{
-      var prevStart = FromColumnCombo.SelectionStart;
-      FromColumnCombo.Text = FormCommon.StripBlanks(FromColumnCombo.Text);
-      FromColumnCombo.SelectionStart = prevStart;
+    // Does not allow spaces.
+    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleSpace(e.KeyChar);
     }
 
     // Strips blanks from the text value.
-    private void ToColumnTextbox_TextChanged(object sender, EventArgs e)
-		{
-      var prevStart = ToColumnCombo.SelectionStart;
-      ToColumnCombo.Text = FormCommon.StripBlanks(ToColumnCombo.Text);
-      ToColumnCombo.SelectionStart = prevStart;
-    }
-
-    // Strips blanks from the text value.
-    private void OperatorTextbox_TextChanged(object sender, EventArgs e)
-		{
-      var prevStart = OperatorTextbox.SelectionStart;
-      OperatorTextbox.Text = FormCommon.StripBlanks(OperatorTextbox.Text);
-      OperatorTextbox.SelectionStart = prevStart;
+    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textbox)
+      {
+        var prevStart = textbox.SelectionStart;
+        textbox.Text = FormCommon.StripBlanks(textbox.Text);
+        textbox.SelectionStart = prevStart;
+      }
+      if (sender is ComboBox combobox)
+      {
+        var prevStart = combobox.SelectionStart;
+        combobox.Text = FormCommon.StripBlanks(combobox.Text);
+        combobox.SelectionStart = prevStart;
+      }
     }
     #endregion
 
     #region Properties
 
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
+
     // Gets or sets the ID value.
     internal int LJCID { get; set; }
 
-		// Gets the IsUpdate value.
-		internal bool LJCIsUpdate { get; private set; }
+    // Gets the IsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
 
-		// The form position.
-		internal Point LJCLocation { get; set; }
+    // The form position.
+    internal Point LJCLocation { get; set; }
 
-		// Gets or sets the Parent ID value.
-		internal int LJCParentID { get; set; }
+    // Gets or sets the Parent ID value.
+    internal int LJCParentID { get; set; }
 
-		// Gets or sets the Parent name value.
-		internal string LJCParentName
-		{
-			get { return mParentName; }
-			set { mParentName = NetString.InitString(value); }
-		}
-		private string mParentName;
+    // Gets or sets the Parent name value.
+    internal string LJCParentName
+    {
+      get { return mParentName; }
+      set { mParentName = NetString.InitString(value); }
+    }
+    private string mParentName;
 
-		// Gets a reference to the record object.
-		internal ViewJoinOn LJCRecord { get; private set; }
+    // Gets a reference to the record object.
+    internal ViewJoinOn LJCRecord { get; private set; }
 
     // Gets or sets the BeginColor value.
     private Color BeginColor { get; set; }
 
-		// Gets or sets the Parent ID value.
-		private Color EndColor { get; set; }
+    // Gets or sets the Parent ID value.
+    private Color EndColor { get; set; }
 
     // The Managers object.
     private ManagersDbView Managers { get; set; }
@@ -388,12 +412,13 @@ namespace LJCViewEditor
 
     #region Class Data
 
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
+
     private DbColumns mJoinOnTableColumns;
     private DbColumns mJoinTableColumns;
-		private StandardUISettings mSettings;
-
-		// The Change event.
-		internal event EventHandler<EventArgs> LJCChange;
-		#endregion
-	}
+    private ViewJoinOn mOriginalRecord;
+    private StandardUISettings mSettings;
+    #endregion
+  }
 }

@@ -1,11 +1,11 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewConditionDetail.cs
-using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCDBClientLib;
 using LJCDBViewDAL;
+using LJCNetCommon;
 using LJCViewEditorDAL;
+using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Text;
@@ -23,8 +23,10 @@ namespace LJCViewEditor
 		{
 			InitializeComponent();
 
-			// Initialize property values.
-			LJCID = 0;
+      // Initialize property values.
+      LJCHelpFileName = "ViewEditor.chm";
+      LJCHelpPageName = @"Filter\ConditionDetail.html";
+      LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
 
@@ -42,9 +44,9 @@ namespace LJCViewEditor
 			switch (e.KeyCode)
 			{
 				case Keys.F1:
-					Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-						, @"Filter\ConditionDetail.html");
-					break;
+          Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+            , LJCHelpPageName);
+          break;
 			}
 		}
 
@@ -55,7 +57,6 @@ namespace LJCViewEditor
 			CancelButton = FormCancelButton;
 			InitializeControls();
 			DataRetrieve();
-			//CenterToParent();
 			Location = LJCLocation;
 		}
 
@@ -82,17 +83,18 @@ namespace LJCViewEditor
 				Text += " - Edit";
 				LJCIsUpdate = true;
         var manager = Managers.ViewConditionManager;
-				var dataRecord = manager.RetrieveWithID(LJCID);
-				GetRecordValues(dataRecord);
-			}
-			else
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
+      }
+      else
 			{
 				Text += " - New";
 				LJCIsUpdate = false;
 				LJCRecord = new ViewCondition();
 				ParentTextbox.Text = LJCParentName;
 
-				ComparisonTextbox.Text = "=";
+        // Set default values.
+        ComparisonTextbox.Text = "=";
 			}
 			Cursor = Cursors.Default;
 		}
@@ -116,16 +118,25 @@ namespace LJCViewEditor
 		// Creates and returns a record object with the data from
 		private ViewCondition SetRecordValues()
 		{
-			ViewCondition retValue = new ViewCondition()
-			{
-				FirstValue = ViewEditorCommon.TruncateAtHyphen(FirstValueCombo.Text),
-				SecondValue = SecondValueTextbox.Text,
-				ComparisonOperator = ComparisonTextbox.Text,
+      ViewCondition retValue = null;
 
-        // Get Reference key values.
-        ID = LJCID,
-        ViewConditionSetID = LJCParentID
-      };
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new ViewCondition();
+      }
+
+      // In control order.
+      retValue.FirstValue = ViewEditorCommon.TruncateAtHyphen(FirstValueCombo.Text);
+      retValue.SecondValue = SecondValueTextbox.Text;
+      retValue.ComparisonOperator = ComparisonTextbox.Text;
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.ViewConditionSetID = LJCParentID;
 			return retValue;
 		}
 
@@ -136,7 +147,6 @@ namespace LJCViewEditor
 
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
-
       var manager = Managers.ViewConditionManager;
 			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewConditionSetID
         , LJCRecord.FirstValue);
@@ -145,13 +155,10 @@ namespace LJCViewEditor
 				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
-				var title = "Data Entry Error";
-				var message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
+        FormCommon.DataError(this);
+      }
 
-			if (retValue)
+      if (retValue)
 			{
 				if (LJCIsUpdate)
 				{
@@ -159,17 +166,19 @@ namespace LJCViewEditor
 					LJCRecord.ID = 0;
 					manager.Update(LJCRecord, keyColumns);
 					LJCRecord.ID = LJCID;
-				}
-				else
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
 				{
 					LJCRecord.ID = 0;
-					ViewCondition addedRecord = manager.Add(LJCRecord);
-					if (addedRecord != null)
-					{
-						LJCRecord.ID = addedRecord.ID;
-					}
-				}
-			}
+					var addedRecord = manager.Add(LJCRecord);
+          if (addedRecord != null)
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
 			Cursor = Cursors.Default;
 			return retValue;
 		}
@@ -229,17 +238,19 @@ namespace LJCViewEditor
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       ValuesViewEditor values = ValuesViewEditor.Instance;
-			mSettings = values.StandardSettings;
+      Managers = values.Managers;
+      mSettings = values.StandardSettings;
+      BeginColor = mSettings.BeginColor;
+      EndColor = mSettings.EndColor;
 
       // Initialize Class Data.
       Managers = new ManagersDbView();
       Managers.SetDbProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
-      //mDataDbView = new DataDbView(Managers);
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-
+      SetNoSpace();
       FirstValueCombo.MaxLength = ViewCondition.LengthFirstValue;
 			SecondValueTextbox.MaxLength = ViewCondition.LengthSecondValue;
 			ComparisonTextbox.MaxLength = ViewCondition.LengthComparisonOperator;
@@ -253,23 +264,36 @@ namespace LJCViewEditor
 			{
 				FirstValueCombo.Items.Add(dbColumn);
 			}
-		}
-		#endregion
 
-		#region Action Event Handlers
+      Cursor = Cursors.Default;
+    }
 
-		// Shows the Help page.
-		private void ConditionHelp_Click(object sender, EventArgs e)
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      FirstValueCombo.KeyPress += TextBoxNoSpace_KeyPress;
+      SecondValueTextbox.KeyPress += TextBoxNoSpace_KeyPress;
+      ComparisonTextbox.KeyPress += TextBoxNoSpace_KeyPress;
+      FirstValueCombo.TextChanged += TextBoxNoSpace_TextChanged;
+      SecondValueTextbox.TextChanged += TextBoxNoSpace_TextChanged;
+      ComparisonTextbox.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+    #endregion
+
+    #region Action Event Handlers
+
+    // Shows the Help page.
+    private void ConditionHelp_Click(object sender, EventArgs e)
 		{
-			Help.ShowHelp(this, "ViewEditor.chm", HelpNavigator.Topic
-				, @"Filter\ConditionDetail.html");
-		}
-		#endregion
+      Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
+        , LJCHelpPageName);
+    }
+    #endregion
 
-		#region Control Event Handlers
+    #region Control Event Handlers
 
-		// Fires the Change event.
-		protected void LJCOnChange()
+    // Fires the Change event.
+    protected void LJCOnChange()
 		{
 			LJCChange?.Invoke(this, new EventArgs());
 		}
@@ -294,49 +318,46 @@ namespace LJCViewEditor
 		#region KeyEdit Event Handlers
 
 		// Does not allow spaces.
-		private void FirstValueTextbox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			e.Handled = FormCommon.HandleSpace(e.KeyChar);
-		}
-
-		// Does not allow spaces.
-		private void SecondValueTextbox_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			e.Handled = FormCommon.HandleSpace(e.KeyChar);
-		}
-
-		// Does not allow spaces.
-		private void ComparisonTextbox_KeyPress(object sender, KeyPressEventArgs e)
+		private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			e.Handled = FormCommon.HandleSpace(e.KeyChar);
 		}
 
 		// Strips blanks from the text value.
-		private void FirstValueTextbox_TextChanged(object sender, EventArgs e)
+		private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
 		{
-      var prevStart = FirstValueCombo.SelectionStart;
-      FirstValueCombo.Text = FormCommon.StripBlanks(FirstValueCombo.Text);
-      FirstValueCombo.SelectionStart = prevStart;
-    }
-
-    // Strips blanks from the text value.
-    private void SecondValueTextbox_TextChanged(object sender, EventArgs e)
-		{
-      var prevStart = SecondValueTextbox.SelectionStart;
-      SecondValueTextbox.Text = FormCommon.StripBlanks(SecondValueTextbox.Text);
-      SecondValueTextbox.SelectionStart = prevStart;
-    }
-
-    // Strips blanks from the text value.
-    private void ComparisonTextbox_TextChanged(object sender, EventArgs e)
-		{
-      var prevStart = ComparisonTextbox.SelectionStart;
-      ComparisonTextbox.Text = FormCommon.StripBlanks(ComparisonTextbox.Text);
-      ComparisonTextbox.SelectionStart = prevStart;
+      if (sender is TextBox textbox)
+      {
+        var prevStart = textbox.SelectionStart;
+        textbox.Text = FormCommon.StripBlanks(FirstValueCombo.Text);
+        textbox.SelectionStart = prevStart;
+      }
+      if (sender is ComboBox combobox)
+      {
+        var prevStart = combobox.SelectionStart;
+        combobox.Text = FormCommon.StripBlanks(FirstValueCombo.Text);
+        combobox.SelectionStart = prevStart;
+      }
     }
     #endregion
 
     #region Properties
+
+    // Gets or sets the LJCHelpFileName value.
+    internal string LJCHelpFileName
+    {
+      get { return mHelpFileName; }
+      set { mHelpFileName = NetString.InitString(value); }
+    }
+    private string mHelpFileName;
+
+    // Gets or sets the LJCHelpPageName value.
+    internal string LJCHelpPageName
+    {
+      get { return mHelpPageName; }
+      set { mHelpPageName = NetString.InitString(value); }
+    }
+    private string mHelpPageName;
 
     // Gets or sets the ID value.
     internal int LJCID { get; set; }
@@ -361,20 +382,20 @@ namespace LJCViewEditor
 		// Gets a reference to the record object.
 		internal ViewCondition LJCRecord { get; private set; }
 
-    // The Managers object.
-    internal ManagersDbView Managers { get; set; }
-
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
 		// Gets or sets the End Color.
 		private Color EndColor { get; set; }
-		#endregion
 
-		#region Custom Properties
+    // The Managers object.
+    private ManagersDbView Managers { get; set; }
+    #endregion
 
-		// Gets or sets the TableName value.
-		internal string LJCTableName { get; set; }
+    #region Custom Properties
+
+    // Gets or sets the TableName value.
+    internal string LJCTableName { get; set; }
     #endregion
 
     #region Class Data
@@ -384,8 +405,8 @@ namespace LJCViewEditor
 
     // Singleton values.
     private DbColumns mFirstValueColumns;
-		private StandardUISettings mSettings;
-		//private DataDbView mDataDbView;
+    private ViewCondition mOriginalRecord;
+    private StandardUISettings mSettings;
 		#endregion
 	}
 }
