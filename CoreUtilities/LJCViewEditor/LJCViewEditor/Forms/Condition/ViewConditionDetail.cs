@@ -151,8 +151,8 @@ namespace LJCViewEditor
 			var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ViewConditionSetID
         , LJCRecord.FirstValue);
 			if (lookupRecord != null
-				&& (false == LJCIsUpdate
-				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
+				&& (!LJCIsUpdate
+				|| (LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
         FormCommon.DataError(this);
@@ -204,17 +204,17 @@ namespace LJCViewEditor
 			var builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(FirstValueCombo.Text))
+			if (!NetString.HasValue(FirstValueCombo.Text))
 			{
 				retVal = false;
 				builder.AppendLine($"  {FirstValueLabel.Text}");
 			}
-			if (false == NetString.HasValue(SecondValueTextbox.Text))
+			if (!NetString.HasValue(SecondValueTextbox.Text))
 			{
 				retVal = false;
 				builder.AppendLine($"  {SecondValueLabel.Text}");
 			}
-			if (false == NetString.HasValue(ComparisonTextbox.Text))
+			if (!NetString.HasValue(ComparisonTextbox.Text))
 			{
 				retVal = false;
 				builder.AppendLine($"  {ComparisonLabel.Text}");

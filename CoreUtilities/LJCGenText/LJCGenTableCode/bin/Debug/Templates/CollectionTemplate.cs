@@ -28,11 +28,11 @@ namespace _Namespace_
     {
       _CollectionName_ retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         string errorText = $"File '{fileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -140,7 +140,7 @@ namespace _Namespace_
     /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

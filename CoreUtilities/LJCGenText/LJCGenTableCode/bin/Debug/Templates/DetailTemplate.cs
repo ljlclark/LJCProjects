@@ -234,13 +234,13 @@ namespace _Namespace_
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameText.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
 
-      if (retValue == false)
+      if (!retValue)
       {
         var title = "Data Entry Error";
         var message = builder.ToString();

@@ -8,40 +8,51 @@ using System.IO;
 
 namespace LJCViewEditor
 {
-	//  Application config values singleton.
-	internal sealed class ValuesViewEditor
-	{
-		#region Constructors
+  //  Application config values singleton.
+  internal sealed class ValuesViewEditor
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		internal ValuesViewEditor()
-		{
-			StandardSettings = new StandardUISettings();
-      var fileName = "LJCViewEditor.exe.config";
-      if (File.Exists(fileName))
-      {
-        SetConfigFile(fileName);
-      }
+    // Initializes an object instance.
+    internal ValuesViewEditor()
+    {
+      StandardSettings = new StandardUISettings();
+      SetConfigFile("LJCViewEditor.exe.config");
     }
 
     /// <summary>Configures the settings.</summary>
     /// <param name="fileName">The config file name.</param>
     public void SetConfigFile(string fileName)
     {
-      if (NetString.HasValue(fileName))
+      bool success = true;
+      if (!NetString.HasValue(fileName))
       {
-        // No config file set or new file name.
-        if (false == NetString.HasValue(ConfigFileName)
-          || fileName.Trim().ToLower() != ConfigFileName.ToLower())
-        {
-          ConfigFileName = fileName.Trim();
-          StandardSettings.SetProperties(fileName);
+        // Do not continue if no fileName.
+        success = false;
+      }
 
-          var settings = StandardSettings;
-          Managers = new ManagersDbView();
-          Managers.SetDbProperties(settings.DbServiceRef
-            , settings.DataConfigName);
+      if (success)
+      {
+        fileName = fileName.Trim();
+        if (NetString.HasValue(ConfigFileName)
+          && !NetString.IsEqual(fileName, ConfigFileName))
+        {
+          // Do not continue if fileName equals ConfigFileName.
+          success = false;
         }
+      }
+
+      if (success
+        && File.Exists(fileName))
+      {
+        // Process if changed fileName exists.
+        ConfigFileName = fileName;
+        StandardSettings.SetProperties(fileName);
+
+        var settings = StandardSettings;
+        Managers = new ManagersDbView();
+        Managers.SetDbProperties(settings.DbServiceRef
+          , settings.DataConfigName);
       }
     }
     #endregion

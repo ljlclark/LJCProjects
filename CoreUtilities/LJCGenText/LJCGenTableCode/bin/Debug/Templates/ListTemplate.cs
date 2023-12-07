@@ -657,7 +657,7 @@ namespace _Namespace_
     //{
     //	if (ControlValues != null)
     //	{
-    //		if (false == mIsSplitSet)
+    //		if (!mIsSplitSet)
     //		{
     //			FormCommon.RestoreSplitDistance(Split, ControlValues);
     //		}

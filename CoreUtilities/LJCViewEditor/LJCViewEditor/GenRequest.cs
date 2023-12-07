@@ -73,7 +73,7 @@ namespace LJCViewEditor
 				bool hasCaption = NetString.HasValue(dbColumn.Caption)
 					&& dbColumn.Caption != dbColumn.ColumnName;
 
-				if (false == isFirst)
+				if (!isFirst)
 				{
 					builder.AppendLine(",");
 				}
@@ -151,12 +151,12 @@ namespace LJCViewEditor
 			bool isFirst = true;
 			foreach (DbCondition dbCondition in dbFilter.ConditionSet.Conditions)
 			{
-				if (false == isFirst)
+				if (!isFirst)
 				{
 					builder.AppendLine(",");
 				}
 				isFirst = false;
-				if (false == NetString.IsEqual(dbCondition.ComparisonOperator.Trim(), "="))
+				if (!NetString.IsEqual(dbCondition.ComparisonOperator.Trim(), "="))
 				{
 					// Add comparison that is not "=".
 					builder.Append(Line(conditions, 4, indent, dbCondition.FirstValue
@@ -243,7 +243,7 @@ namespace LJCViewEditor
 				bool first = true;
 				foreach (DbJoinOn dbJoinOn in dbJoin.JoinOns)
 				{
-					if (false == first)
+					if (!first)
 					{
 						builder.AppendLine(",");
 					}
@@ -353,7 +353,7 @@ namespace LJCViewEditor
 				bool isFirst = true;
 				foreach (string columnName in orderByNames)
 				{
-					if (false == isFirst)
+					if (!isFirst)
 					{
 						builder.AppendLine(",");
 					}

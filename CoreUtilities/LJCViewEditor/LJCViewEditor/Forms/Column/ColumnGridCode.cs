@@ -153,7 +153,7 @@ namespace LJCViewEditor
             { ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
           };
           var lookupRecord = ColumnManager.Retrieve(keyColumns);
-          if (false == ColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
+          if (!ColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
           {
             var addedRecord = ColumnManager.AddWithFlags(viewColumn);
             if (addedRecord != null)

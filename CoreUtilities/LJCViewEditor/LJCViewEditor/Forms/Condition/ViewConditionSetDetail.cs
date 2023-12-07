@@ -146,8 +146,8 @@ namespace LJCViewEditor
       // Only one ViewConditionSet per ViewFilter?
       var lookupRecord = manager.RetrieveWithParentID(LJCRecord.ViewFilterID);
       if (lookupRecord != null
-        && (false == LJCIsUpdate
-        || (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
+        && (!LJCIsUpdate
+        || (LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
       {
         retValue = false;
         FormCommon.DataError(this);
@@ -199,7 +199,7 @@ namespace LJCViewEditor
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(OperatorCombo.Text))
+      if (!NetString.HasValue(OperatorCombo.Text))
       {
         retVal = false;
         builder.AppendLine($"  {OperatorLabel.Text}");

@@ -499,7 +499,7 @@ namespace LJCViewEditor
     {
       if (ControlValues != null)
       {
-        if (false == mIsJoinSplitSet)
+        if (!mIsJoinSplitSet)
         {
           FormCommon.RestoreSplitDistance(JoinSplit, ControlValues);
         }
@@ -513,7 +513,7 @@ namespace LJCViewEditor
     {
       if (ControlValues != null)
       {
-        if (false == mIsFilterSplitSet)
+        if (!mIsFilterSplitSet)
         {
           FormCommon.RestoreSplitDistance(FilterSplit, ControlValues);
         }

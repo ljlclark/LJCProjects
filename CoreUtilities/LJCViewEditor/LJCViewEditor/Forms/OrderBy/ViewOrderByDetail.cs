@@ -144,8 +144,8 @@ namespace LJCViewEditor
    //     , LJCRecord.ColumnName);
       var lookupRecord = manager.RetrieveWithUniqueKey(LJCRecord.ColumnName);
       if (lookupRecord != null
-				&& (false == LJCIsUpdate
-				|| (true == LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
+				&& (!LJCIsUpdate
+				|| (LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
 			{
 				retValue = false;
         FormCommon.DataError(this);
@@ -204,7 +204,7 @@ namespace LJCViewEditor
 			builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(ColumnNameTextbox.Text))
+			if (!NetString.HasValue(ColumnNameTextbox.Text))
 			{
 				retVal = false;
 				builder.AppendLine($"  {ColumnNameLabel.Text}");

@@ -235,7 +235,7 @@ namespace LJCViewEditor
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(ColumnNameTextbox.Text))
+      if (!NetString.HasValue(ColumnNameTextbox.Text))
       {
         retValue = false;
         builder.AppendLine($"  {ColumnNameLabel.Text}");
