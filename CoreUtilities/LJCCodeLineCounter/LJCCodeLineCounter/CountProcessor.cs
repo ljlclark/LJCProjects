@@ -116,14 +116,14 @@ namespace LJCCodeLineCounter
       {
         // Count statements.
         lineNumber++;
-        if (false == line.Trim().StartsWith("/")
-          && false == line.Trim().StartsWith(",")
-          && false == line.Trim().StartsWith("&")
-          && false == line.Trim().StartsWith("|")
-          && false == line.Trim().StartsWith("=")
-          && false == line.Trim().StartsWith("*")
-          && false == line.Trim().StartsWith("+")
-          && false == line.Trim().StartsWith("-"))
+        if (!line.Trim().StartsWith("/")
+          && !line.Trim().StartsWith(",")
+          && !line.Trim().StartsWith("&")
+          && !line.Trim().StartsWith("|")
+          && !line.Trim().StartsWith("=")
+          && !line.Trim().StartsWith("*")
+          && !line.Trim().StartsWith("+")
+          && !line.Trim().StartsWith("-"))
         {
           ncStatementCount++;
         }

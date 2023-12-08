@@ -223,7 +223,7 @@ namespace DataHelper
 		{
 			if (ControlValues != null)
 			{
-				if (false == mIsDataSplitSet)
+				if (!mIsDataSplitSet)
 				{
 					FormCommon.RestoreSplitDistance(DataSplit, ControlValues);
 				}

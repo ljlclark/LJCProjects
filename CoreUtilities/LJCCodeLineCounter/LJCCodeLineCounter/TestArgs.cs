@@ -15,7 +15,7 @@ namespace LJCCodeLineCounter
     {
       string[] retValue;
 
-      if (false == isHtml)
+      if (!isHtml)
       {
         retValue = new string[3];
         //args[0] = @"..\..\..\..\LJC.AppManager";

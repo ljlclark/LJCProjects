@@ -8,14 +8,14 @@
       Checks for a valid source folder.
     </summary>
     <param name="folderName">The folder name.</param>
-    <returns>True if valid, otherwise false.</returns>
+    <returns>true if valid; otherwise, false.</returns>
   </IsValidFolder>
   <IsValidFile>
     <summary>
       Checks for a valid file.
     </summary>
     <param name="fileSpec">The File specification.</param>
-    <returns>True if valid, otherwise false.</returns>
+    <returns>true if valid; otherwise, false.</returns>
   </IsValidFile>
   <CreateBackup>
     <summary>

@@ -44,9 +44,9 @@ namespace LJCBackupWatcherConsoleHost
       {
         multiFilter = args[2];
       }
-      if (false == NetString.HasValue(watchPath)
-        || false == NetString.HasValue(changeFile)
-        || false == NetString.HasValue(multiFilter))
+      if (!NetString.HasValue(watchPath)
+        || !NetString.HasValue(changeFile)
+        || !NetString.HasValue(multiFilter))
       {
         retValue = false;
         var syntax = "Syntax: ProgramBackupWatcher \"watchPath\"";

@@ -51,7 +51,7 @@ namespace LJCBackupWatcherLib
       for (int index = 0; index < retValue.Length; index++)
       {
         var ext = retValue[index].Trim();
-        if (false == ext.StartsWith("-"))
+        if (!ext.StartsWith("-"))
         {
           ext = Path.GetExtension(ext);
         }
@@ -69,7 +69,7 @@ namespace LJCBackupWatcherLib
         retValue = true;
       }
       if (NetString.HasValue(change.ToFileSpec)
-        && false == IsWatched(change.ToFileSpec))
+        && !IsWatched(change.ToFileSpec))
       {
         retValue = false;
       }

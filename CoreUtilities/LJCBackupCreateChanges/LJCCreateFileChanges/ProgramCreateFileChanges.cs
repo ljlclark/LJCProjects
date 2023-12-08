@@ -18,7 +18,7 @@ namespace LJCCreateFileChanges
       GetDefaults(out string sourcePath, out string targetPath
         , out string changeFileSpec, out string multiFilter
         , out string skipFiles);
-      if (false == GetArgs(args, ref sourcePath, ref targetPath
+      if (!GetArgs(args, ref sourcePath, ref targetPath
         , ref changeFileSpec, ref multiFilter, ref skipFiles))
       {
         return;
@@ -60,7 +60,7 @@ namespace LJCCreateFileChanges
           Console.WriteLine("The drive letter must be a single character.");
         }
       }
-      if (false == hasDrive)
+      if (!hasDrive)
       {
         targetPath = $"{driveLetter}:{targetPath}";
       }
@@ -92,10 +92,10 @@ namespace LJCCreateFileChanges
       {
         skipFiles = args[4];
       }
-      if (false == NetString.HasValue(sourcePath)
-        || false == NetString.HasValue(targetPath)
-        || false == NetString.HasValue(changeFileSpec)
-        || false == NetString.HasValue(multiFilter))
+      if (!NetString.HasValue(sourcePath)
+        || !NetString.HasValue(targetPath)
+        || !NetString.HasValue(changeFileSpec)
+        || !NetString.HasValue(multiFilter))
       {
         retValue = false;
         var syntax = "Syntax: LJCCreateFileChanges \"sourcePath\"";
@@ -161,7 +161,7 @@ namespace LJCCreateFileChanges
     private static bool HasTarget(string targetPath)
     {
       bool retValue = true;
-      if (false == Directory.Exists(targetPath))
+      if (!Directory.Exists(targetPath))
       {
         retValue = false;
         Console.WriteLine($"Target {targetPath} does not exist.");

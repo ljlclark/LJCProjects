@@ -59,7 +59,7 @@ namespace LJCCreateFileChangesLib
     {
       bool retValue = true;
 
-      if (false == HasLine(mChangeFileSpec, fileChange.Text()))
+      if (!HasLine(mChangeFileSpec, fileChange.Text()))
       {
         File.AppendAllText(mChangeFileSpec, $"{fileChange.Text()}\r\n");
       }
@@ -77,12 +77,12 @@ namespace LJCCreateFileChangesLib
       {
         copy = true;
       }
-      if (false == copy)
+      if (!copy)
       {
         for (int index = 0; index < sourceLines.Length; index++)
         {
           if (sourceLines[index] != targetLines[index]
-            && false == sourceLines[index].StartsWith("<!-- Generated"))
+            && !sourceLines[index].StartsWith("<!-- Generated"))
           {
             copy = true;
             break;
@@ -111,7 +111,7 @@ namespace LJCCreateFileChangesLib
       {
         // File spec does not end with the filter path.
         if (NetString.HasValue(filterPath)
-          && false == HasFilterPath(sourceSpec, filterPath))
+          && !HasFilterPath(sourceSpec, filterPath))
         {
           continue;
         }
@@ -120,11 +120,11 @@ namespace LJCCreateFileChangesLib
         var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder
           , out string codePath);
         var filePath = Path.GetDirectoryName(targetSpec);
-        if (false == Directory.Exists(filePath))
+        if (!Directory.Exists(filePath))
         {
           if (NetString.HasValue(codePath))
           {
-            if (false == HasLine(missingFolders, codePath))
+            if (!HasLine(missingFolders, codePath))
             {
               File.AppendAllText(missingFolders, $"{codePath}\r\n");
             }
@@ -163,14 +163,14 @@ namespace LJCCreateFileChangesLib
       {
         // File spec does not end with the filter path.
         if (NetString.HasValue(filterPath)
-          && false == HasFilterPath(targetSpec, filterPath))
+          && !HasFilterPath(targetSpec, filterPath))
         {
           continue;
         }
 
         var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetStartFolder
           , out string _);
-        if (false == File.Exists(sourceSpec))
+        if (!File.Exists(sourceSpec))
         {
           // Target file is not found in source path.
           FileChange fileChange = new FileChange("Delete", targetSpec);

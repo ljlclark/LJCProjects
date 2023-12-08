@@ -126,7 +126,7 @@ namespace LJCSQLUtilLib
 					{
 						builder.Append($"({mdColumn.MaxLength})");
 					}
-					if (false == mdColumn.AllowDBNull)
+					if (!mdColumn.AllowDBNull)
 					{
 						builder.Append(" NOT");
 					}
@@ -201,7 +201,7 @@ namespace LJCSQLUtilLib
 				bool first = true;
 				foreach (DbMetaDataKey mdKey in mdKeys)
 				{
-					if (false == first)
+					if (!first)
 					{
 						builder.Append(",\r\n");
 					}
@@ -234,7 +234,7 @@ namespace LJCSQLUtilLib
 					bool first = true;
 					foreach (DbMetaDataKey mdKey in mdKeys)
 					{
-						if (false == first)
+						if (!first)
 						{
 							builder.Append(",\r\n");
 						}
@@ -315,7 +315,7 @@ namespace LJCSQLUtilLib
 			bool first = true;
 			foreach (DbMetaDataColumn toMdColumn in toMdColumns)
 			{
-				if (false == first)
+				if (!first)
 				{
 					builder.Append(", ");
 				}
@@ -331,7 +331,7 @@ namespace LJCSQLUtilLib
 			first = true;
 			foreach (DbMetaDataColumn toMdColumn in toMdColumns)
 			{
-				if (false == first)
+				if (!first)
 				{
 					builder.Append(", ");
 				}
@@ -649,7 +649,7 @@ namespace LJCSQLUtilLib
 			{
 				if (FormCommon.CreateTablesPrompt(e.Message, fileSpecs))
 				{
-					if (false == ManagerCommon.CreateTables(dataConfigName, fileSpecs))
+					if (!ManagerCommon.CreateTables(dataConfigName, fileSpecs))
 					{
 						throw new SystemException(e.Message);
 					}
