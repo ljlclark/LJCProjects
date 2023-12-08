@@ -118,7 +118,7 @@
     </summary>
     <param name="oldValue"> The previous value.</param>
     <param name="newValue"> The new value.</param>
-    <returns>True if equal, otherwise false.</returns>
+    <returns>true if equal; otherwise, false.</returns>
     <remarks>
       Performs a strongly-typed value check of two objects where those
       objects are built-in system types.
@@ -132,7 +132,7 @@
       The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
       value.
     </param>
-    <returns>True if minimum otherwise false.</returns>
+    <returns>true if minimum; otherwise, false.</returns>
   </IsDbMinDate>
 
   <!-- Text Transform Functions -->

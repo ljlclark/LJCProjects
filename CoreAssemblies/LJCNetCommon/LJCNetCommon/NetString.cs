@@ -16,7 +16,7 @@ namespace LJCNetCommon
     /// <include path='items/HasValue/*' file='Doc/NetString.xml'/>
     public static bool HasValue(string text)
     {
-      return !string.IsNullOrWhiteSpace(text);
+      return HasValue(text);
     }
 
     // Checks a string value for digits.
@@ -235,7 +235,7 @@ namespace LJCNetCommon
       {
         findValue += tagName;
       }
-      retValue = NetString.GetDelimitedAndIndexes(text, findValue
+      retValue = GetDelimitedAndIndexes(text, findValue
         , out beginIndex, out endIndex, ref startIndex, ">");
       var name = retValue;
 
@@ -278,7 +278,7 @@ namespace LJCNetCommon
       }
 
       if (startIndex > -1
-        && NetString.HasValue(text)
+        && HasValue(text)
         && startIndex < text.Length - 1
         && text.Contains(beginDelimiter))
       {
@@ -530,7 +530,7 @@ namespace LJCNetCommon
     /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
     public static void AddMissingArgument(string message, string argument)
     {
-      if (!NetString.HasValue(argument))
+      if (!HasValue(argument))
       {
         message += $"{argument} is missing.\r\n";
         throw new ArgumentException(message);
@@ -541,7 +541,7 @@ namespace LJCNetCommon
     /// <include path='items/ThrowInvalidArgument/*' file='Doc/NetString.xml'/>
     public static void ThrowInvalidArgument(string message)
     {
-      if (NetString.HasValue(message))
+      if (HasValue(message))
       {
         var argMessage = $"Missing or invalid argument:\r\n{message}";
         throw new ArgumentException(argMessage);

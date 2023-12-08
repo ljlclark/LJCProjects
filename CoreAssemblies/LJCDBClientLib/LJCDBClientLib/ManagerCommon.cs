@@ -40,7 +40,7 @@ namespace LJCDBClientLib
     {
       bool retValue;
 
-      if (string.IsNullOrWhiteSpace(dataConfigName))
+      if (!NetString.HasValue(dataConfigName))
       {
         throw new ArgumentException("message", nameof(dataConfigName));
       }

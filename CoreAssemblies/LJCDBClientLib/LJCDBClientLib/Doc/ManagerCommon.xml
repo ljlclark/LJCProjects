@@ -23,7 +23,7 @@
     </summary>
     <param name="dataConfigName">The DataConfig name.</param>
     <param name="fileSpecs">The File specification array.</param>
-    <returns>True if the tables were created, otherwise false.</returns>
+    <returns>true if the tables were created; otherwise, false.</returns>
   </CreateTables>
   <GetConfigValues>
     <summary>

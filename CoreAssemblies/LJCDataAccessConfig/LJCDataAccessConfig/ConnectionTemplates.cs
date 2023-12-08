@@ -34,7 +34,7 @@ namespace LJCDataAccessConfig
     /// <include path='items/LJCLoadData/*' file='Doc/ConnectionTemplatesDoc.xml'/>
     public void LJCLoadData()
     {
-      if (false == File.Exists(LJCTemplateFileSpec))
+      if (!File.Exists(LJCTemplateFileSpec))
       {
         WriteDefaultData();
       }

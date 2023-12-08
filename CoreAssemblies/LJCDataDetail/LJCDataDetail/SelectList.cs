@@ -207,7 +207,7 @@ namespace LJCDataDetail
     {
       string retValue = null;
 
-      if (false == NetString.HasValue(LJCDataConfigName))
+      if (!NetString.HasValue(LJCDataConfigName))
       {
         retValue += "Missing the DataConfigName value.\r\n";
       }
@@ -217,12 +217,12 @@ namespace LJCDataDetail
         retValue += "Missing the DbServiceRef value.\r\n";
       }
 
-      if (false == NetString.HasValue(LJCPrimaryKeyName))
+      if (!NetString.HasValue(LJCPrimaryKeyName))
       {
         retValue += "Missing the PrimaryKeyName value.\r\n";
       }
 
-      if (false == NetString.HasValue(LJCTableName))
+      if (!NetString.HasValue(LJCTableName))
       {
         retValue += "Missing the TableName value.\r\n";
       }

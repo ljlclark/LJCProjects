@@ -92,7 +92,7 @@
       Returns true if the key size is valid otherwise returns false.
     </summary>
     <param name="sizeValue">The size value.</param>
-    <returns>True if valid, otherwise false.</returns>
+    <returns>true if valid; otherwise, false.</returns>
   </IsValidKeySize>
 
   <!-- Properties -->

@@ -98,7 +98,7 @@ namespace LJCDBMessage
       {
         // Exclude AutoIncrement column with value of zero.
         if (true == dbColumn.AutoIncrement
-          && false == includeAutoIncrement
+          && !includeAutoIncrement
           && "0" == dbColumn.Value.ToString())
         {
           retValue = false;
@@ -108,7 +108,7 @@ namespace LJCDBMessage
       // Exclude invalid DateTime value.
       if (retValue && "DateTime" == dbColumn.DataTypeName)
       {
-        if (false == DateTime.TryParse(dbColumn.Value.ToString()
+        if (!DateTime.TryParse(dbColumn.Value.ToString()
           , out DateTime dateTime))
         {
           retValue = false;

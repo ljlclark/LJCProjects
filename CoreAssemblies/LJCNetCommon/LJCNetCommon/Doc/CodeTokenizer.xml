@@ -189,7 +189,7 @@
       Check if a XML comment. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if an XML comment, otherwise false.</returns>
+    <returns>true if an XML comment; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -207,7 +207,7 @@
       Check if a code comment. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a comment, otherwise false.</returns>
+    <returns>true if a comment; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -226,7 +226,7 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a data type, otherwise false.</returns>
+    <returns>true if a data type; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -247,7 +247,7 @@
       Check if the text is a Data value. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a data value, otherwise false.</returns>
+    <returns>true if a data value; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -268,7 +268,7 @@
       Check if the text contains a common delimiter. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a common delimiter, otherwise false.</returns>
+    <returns>true if a common delimiter; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -289,7 +289,7 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a keyword, otherwise false.</returns>
+    <returns>true if a keyword; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -310,7 +310,7 @@
       Check if the text is a LibType. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a library type, otherwise false.</returns>
+    <returns>true if a library type; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -332,7 +332,7 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a modifier, otherwise false.</returns>
+    <returns>true if a modifier; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -353,7 +353,7 @@
       Check if the text is a param comment. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a param item, otherwise false.</returns>
+    <returns>true if a param item; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 
@@ -373,7 +373,7 @@
       Check if the text is a RefType. (E)
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a reference type, otherwise false.</returns>
+    <returns>true if a reference type; otherwise, false.</returns>
     <example>
       <code>        using LJCNetCommon;
 

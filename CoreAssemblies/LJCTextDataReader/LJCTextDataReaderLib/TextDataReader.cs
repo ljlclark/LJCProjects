@@ -220,7 +220,7 @@ namespace LJCTextDataReaderLib
       bool retValue;
 
       string text = GetString(i);
-      retValue = (false == NetString.HasValue(text));
+      retValue = (!NetString.HasValue(text));
       return retValue;
     }
 
@@ -267,7 +267,7 @@ namespace LJCTextDataReaderLib
           break;
         }
 
-        if (false == retValue)
+        if (!retValue)
         {
           Close();
           break;
@@ -710,7 +710,7 @@ namespace LJCTextDataReaderLib
       }
 
       IsClosed = true;
-      if (false == File.Exists(fileName))
+      if (!File.Exists(fileName))
       {
         string errorText = $"File: '{fileName}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -907,7 +907,7 @@ namespace LJCTextDataReaderLib
 
         // Skip empty line.
         if (1 == values.Length
-          && false == NetString.HasValue(values[0]))
+          && !NetString.HasValue(values[0]))
         {
           isError = false;
         }

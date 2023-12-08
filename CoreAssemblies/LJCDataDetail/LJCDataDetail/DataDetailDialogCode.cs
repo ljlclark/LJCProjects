@@ -327,7 +327,7 @@ namespace LJCDataDetail
 
       if (retValue)
       {
-        if (false == NetString.HasValue(ControlDetail.DataConfigName))
+        if (!NetString.HasValue(ControlDetail.DataConfigName))
         {
           retValue = false;
           message = "Missing Data Config Name.";
@@ -353,13 +353,13 @@ namespace LJCDataDetail
           keyItem = keyItems[0];
 
           message = "";
-          if (false == NetString.HasValue(keyItem.TableName))
+          if (!NetString.HasValue(keyItem.TableName))
           {
             retValue = false;
             message += "Conrol Item is missing TableName.\r\n";
           }
 
-          if (false == NetString.HasValue(keyItem.PrimaryKeyName))
+          if (!NetString.HasValue(keyItem.PrimaryKeyName))
           {
             retValue = false;
             message += "Conrol Item is missing PrimaryKeyName.\r\n";

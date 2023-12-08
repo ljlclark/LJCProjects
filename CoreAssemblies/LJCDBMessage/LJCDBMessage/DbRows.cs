@@ -21,7 +21,7 @@ namespace LJCDBMessage
     {
       DbRows retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -101,7 +101,7 @@ namespace LJCDBMessage
     /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
     public void Serialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

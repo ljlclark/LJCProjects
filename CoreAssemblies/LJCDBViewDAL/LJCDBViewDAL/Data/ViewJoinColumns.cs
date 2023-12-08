@@ -110,13 +110,13 @@ namespace LJCDBViewDAL
 		/// <summary>Returns true if there is an ErrorText value.</summary>
 		public bool LJCIsError
 		{
-			get { return !string.IsNullOrWhiteSpace(LJCErrorText); }
+			get { return NetString.HasValue(LJCErrorText); }
 		}
 
 		/// <summary>Returns true if there is no ErrorText.</summary>
 		public bool LJCIsSuccess
 		{
-			get { return string.IsNullOrWhiteSpace(LJCErrorText); }
+			get { return !NetString.HasValue(LJCErrorText); }
 		}
 		#endregion
 

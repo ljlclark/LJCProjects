@@ -79,7 +79,7 @@ namespace LJCDataAccess
     {
       DbConnection retValue = null;
 
-      if (false == NetString.HasValue(ConnectionString))
+      if (!NetString.HasValue(ConnectionString))
       {
         string errorText = "The ProviderFactory.ConnectionString value"
           + " is not set.";
@@ -119,7 +119,7 @@ namespace LJCDataAccess
     {
       StringBuilder builder;
 
-      if (false == NetString.HasValue(ProviderName))
+      if (!NetString.HasValue(ProviderName))
       {
         builder = new StringBuilder(64);
         builder.AppendLine("The Provider name is missing or the");

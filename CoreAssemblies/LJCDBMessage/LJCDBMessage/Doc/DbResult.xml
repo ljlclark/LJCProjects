@@ -39,21 +39,21 @@
       Checks if the result has Columns.
     </summary>
     <param name="dbResult">The DbResult object.</param>
-    <returns>True if there are columns, otherwise false.</returns>
+    <returns>true if there are columns; otherwise, false.</returns>
   </HasColumns1>
   <HasData>
     <summary>
       Checks if the result has Columns and Rows.
     </summary>
     <param name="dbResult">The DbResult object.</param>
-    <returns>True if there are columns and rows, otherwise false.</returns>
+    <returns>true if there are columns and rows; otherwise, false.</returns>
   </HasData>
   <HasRows1>
     <summary>
       Checks if the result has Rows.
     </summary>
     <param name="dbResult">The DbResult object.</param>
-    <returns>True if there are rows, otherwise false.</returns>
+    <returns>true if there are rows; otherwise, false.</returns>
   </HasRows1>
   <DbResultC1>
     <summary>
@@ -102,13 +102,13 @@
     <summary>
       Checks if the result has Columns.
     </summary>
-    <returns>True if there are columns, otherwise false.</returns>
+    <returns>true if there are columns; otherwise, false.</returns>
   </HasColumns2>
   <HasRows2>
     <summary>
       Checks if the result has Rows.
     </summary>
-    <returns>True if there are rows, otherwise false.</returns>
+    <returns>true if there are rows; otherwise, false.</returns>
   </HasRows2>
   <SetColumns>
     <summary>

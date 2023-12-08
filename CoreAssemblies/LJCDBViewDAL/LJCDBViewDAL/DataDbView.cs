@@ -1004,7 +1004,7 @@ namespace LJCDBViewDAL
         errorText = "ViewHelper.SaveRequestTable - dbRequest is null.";
         throw new ArgumentException(errorText);
       }
-      if (false == NetString.HasValue(dbRequest.TableName))
+      if (!NetString.HasValue(dbRequest.TableName))
       {
         errorText = "ViewHelper.SaveRequestTable - dbRequest table name is missing.";
         throw new ArgumentException(errorText);

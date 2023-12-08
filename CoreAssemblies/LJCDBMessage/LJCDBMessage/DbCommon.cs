@@ -369,7 +369,7 @@ namespace LJCDBMessage
       {
         // Exclude AutoIncrement column with value of zero.
         if (true == dataColumn.AutoIncrement
-          && false == includeAutoIncrement
+          && !includeAutoIncrement
           && "0" == dataColumn.Value.ToString())
         {
           retValue = false;
@@ -379,7 +379,7 @@ namespace LJCDBMessage
       // Exclude invalid DateTime value.
       if (retValue && "DateTime" == dataColumn.DataTypeName)
       {
-        if (false == DateTime.TryParse(dataColumn.Value.ToString()
+        if (!DateTime.TryParse(dataColumn.Value.ToString()
           , out DateTime dateTime))
         {
           retValue = false;

@@ -213,20 +213,20 @@
       Indicates if the field value is null or whitespace.
     </summary>
     <param name="i">The data field index.</param>
-    <returns>True if the field value is null, otherwise false.</returns>
+    <returns>true if the field value is null; otherwise, false.</returns>
   </IsDBNull>
   <NextResult>
     <summary>
       Sets to the next result. Currently returns false.
     </summary>
-    <returns>True if the next result was found, otherwise false.</returns>
+    <returns>true if the next result was found; otherwise, false.</returns>
   </NextResult>
   <Read>
     <summary>
       Reads the next line of the text file.
       (DE)
     </summary>
-    <returns>True if read successfully, otherwise false.</returns>
+    <returns>true if read successfully; otherwise, false.</returns>
     <remarks>
       This is a minimum required method.
     </remarks>
@@ -271,7 +271,7 @@
       Reads the next line from the line string array.
       (DE)
     </summary>
-    <returns>True if read successfully, otherwise false.</returns>
+    <returns>true if read successfully; otherwise, false.</returns>
     <remarks>
       This is used to read a line from the string array that was loaded
       with the LJCSetLines() method.
@@ -778,7 +778,7 @@
       Sets the starting record index.
     </summary>
     <param name="recordIndex">The record index.</param>
-    <returns>True if successful, otherwise false.</returns>
+    <returns>true if successful; otherwise, false.</returns>
   </LJCSetStartIndex>
   <LJCSetValues1>
     <summary>

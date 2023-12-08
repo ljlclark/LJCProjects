@@ -44,7 +44,7 @@ namespace LJCDBMessage
         {
           if (0 == builder.Length)
           {
-            if (false == listOnly)
+            if (!listOnly)
             {
               builder.AppendLine("(");
             }
@@ -86,7 +86,7 @@ namespace LJCDBMessage
         }
         builder.AppendLine(" ");
 
-        if (false == listOnly)
+        if (!listOnly)
         {
           builder.AppendLine(")");
         }
@@ -204,7 +204,7 @@ namespace LJCDBMessage
         foreach (DbFilter filter in dbFilters)
         {
           // Begin the filter grouping
-          if (first && false == recursive)
+          if (first && !recursive)
           {
             builder.Append("where ");
           }
@@ -220,7 +220,7 @@ namespace LJCDBMessage
             builder.Append($" {filter.BooleanOperator} ");
           }
           first = false;
-          if (false == recursive)
+          if (!recursive)
           {
             // Begin the filter group.
             builder.Append("(");
@@ -271,7 +271,7 @@ namespace LJCDBMessage
           }
 
           // End the filter grouping.
-          if (false == recursive)
+          if (!recursive)
           {
             builder.AppendLine(")");
           }
@@ -292,18 +292,18 @@ namespace LJCDBMessage
       foreach (DbJoinOn dbJoinOn in dbJoinOns)
       {
         // Begin the Join grouping.
-        if (first && false == recursive)
+        if (first && !recursive)
         {
           builder.Append("(");
         }
         else
         {
-          if (false == recursive)
+          if (!recursive)
           {
             builder.Append(")");
           }
           builder.Append($"\r\n {dbJoinOn.BooleanOperator} ");
-          if (false == recursive)
+          if (!recursive)
           {
             builder.Append("(");
           }
@@ -331,7 +331,7 @@ namespace LJCDBMessage
       }
 
       // End the Join grouping.
-      if (false == recursive)
+      if (!recursive)
       {
         builder.Append(")");
       }
@@ -374,7 +374,7 @@ namespace LJCDBMessage
         {
           if (0 == builder.Length)
           {
-            if (false == listOnly)
+            if (!listOnly)
             {
               builder.AppendLine("values(");
             }
@@ -387,7 +387,7 @@ namespace LJCDBMessage
         }
         builder.AppendLine();
 
-        if (false == listOnly)
+        if (!listOnly)
         {
           builder.Append(")");
         }
@@ -437,7 +437,7 @@ namespace LJCDBMessage
         {
           // Do not include null or empty values.
           if (null == dbColumn.Value
-            || false == NetString.HasValue(dbColumn.Value.ToString()))
+            || !NetString.HasValue(dbColumn.Value.ToString()))
           {
             continue;
           }
@@ -517,7 +517,7 @@ namespace LJCDBMessage
         bool first = true;
         foreach (string name in mDbRequest.OrderByNames)
         {
-          if (false == first)
+          if (!first)
           {
             builder.Append(", ");
           }

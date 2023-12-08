@@ -144,7 +144,7 @@ namespace LJCDataAccess
     /// <include path='items/ExecuteScript/*' file='Doc/DataAccess.xml'/>
     public void ExecuteScript(string scriptFileSpec)
     {
-      if (false == File.Exists(scriptFileSpec))
+      if (!File.Exists(scriptFileSpec))
       {
         var errorText = $"File '{scriptFileSpec}' was not found.\r\n";
         throw new ArgumentException(errorText);
@@ -466,11 +466,11 @@ namespace LJCDataAccess
         retValue = false;
         errorText += "The LJCDataAccess.ProviderFactory value is not set.\r\n";
       }
-      if (false == NetString.HasValue(ConnectionString))
+      if (!NetString.HasValue(ConnectionString))
       {
         errorText += "The LJCDataAccess.ConnectionString value is not set.\r\n";
       }
-      if (false == NetString.HasValue(ProviderName))
+      if (!NetString.HasValue(ProviderName))
       {
         errorText += "The LJCDataAccess.ProviderName value is not set.\r\n";
       }
@@ -512,7 +512,7 @@ namespace LJCDataAccess
       set
       {
         mConnectionString = value;
-        if (false == NetString.HasValue(mProviderName))
+        if (!NetString.HasValue(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }
@@ -540,7 +540,7 @@ namespace LJCDataAccess
       set
       {
         mProviderName = value;
-        if (false == NetString.HasValue(mProviderName))
+        if (!NetString.HasValue(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }

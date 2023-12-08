@@ -199,17 +199,17 @@ namespace LJCDataDetail
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(TabIndexText.Text))
+      if (!NetString.HasValue(TabIndexText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {TabIndexLabel.Text}");
       }
-      if (false == NetString.HasValue(TabTextText.Text))
+      if (!NetString.HasValue(TabTextText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {TabTextLabel.Text}");
       }
-      if (false == NetString.HasValue(DescriptionText.Text))
+      if (!NetString.HasValue(DescriptionText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {DescriptionLabel.Text}");

@@ -25,6 +25,6 @@
       Decrypts the user information.
     </summary>
     <param name="value">The encrypted string.</param>
-    <returns>True if successful, otherwise false.</returns>
+    <returns>true if successful; otherwise, false.</returns>
   </Decrypt>
 </items>

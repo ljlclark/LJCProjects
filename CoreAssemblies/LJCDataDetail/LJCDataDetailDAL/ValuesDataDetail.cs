@@ -30,7 +30,7 @@ namespace LJCDataDetailDAL
       if (NetString.HasValue(fileName))
       {
         // No config file set or new file name.
-        if (false == NetString.HasValue(ConfigFileName)
+        if (!NetString.HasValue(ConfigFileName)
           || fileName.Trim().ToLower() != ConfigFileName.ToLower())
         {
           ConfigFileName = fileName;

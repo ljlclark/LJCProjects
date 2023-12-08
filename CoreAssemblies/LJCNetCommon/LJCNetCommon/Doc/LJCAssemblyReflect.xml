@@ -354,34 +354,34 @@
       Indicates if the Type is not a common type.
     </summary>
     <param name="type">The Type object.</param>
-    <returns>True if not a common type, otherwise false.</returns>
+    <returns>true if not a common type; otherwise, false.</returns>
   </IsNotCommonClassification>
   <IsNotCommonInterface>
     <summary>
       Indicates if the Interface is not a common type.
     </summary>
     <param name="type">The Type object.</param>
-    <returns>True if not a common interface, otherwise false.</returns>
+    <returns>true if not a common interface; otherwise, false.</returns>
   </IsNotCommonInterface>
   <IsNotProperty>
     <summary>
       Indicates if the Method is not a property getter or setter.
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
-    <returns>True if not a Property, otherwise false.</returns>
+    <returns>true if not a Property; otherwise, false.</returns>
   </IsNotProperty>
   <IsOverride>
     <summary>
       Indicates if the method is "override".
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
-    <returns>True if "override", otherwise false.</returns>
+    <returns>true if "override"; otherwise, false.</returns>
   </IsOverride>
   <IsPublic>
     <summary>
       Indicates if the method is "public".
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
-    <returns>True if "public", otherwise false.</returns>
+    <returns>true if "public"; otherwise, false.</returns>
   </IsPublic>
 </items>

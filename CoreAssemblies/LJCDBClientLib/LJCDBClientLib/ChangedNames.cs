@@ -17,7 +17,7 @@ namespace LJCDBClientLib
     {
       T retValue = newValue;
 
-      if (false == NetCommon.IsEqual(oldValue, newValue))
+      if (!NetCommon.IsEqual(oldValue, newValue))
       {
         // Add value if not already added.
         if (null == FindName(propertyName))

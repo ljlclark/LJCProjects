@@ -120,7 +120,7 @@ namespace LJCDataDetail
           }
         }
 
-        if (false == isCombo)
+        if (!isCombo)
         {
           switch (dbColumn.DataTypeName.ToLower())
           {
@@ -364,7 +364,7 @@ namespace LJCDataDetail
     {
       var config = ControlDetail;
       var controlTabItems = config.ControlTabItems;
-      if (false == NetCommon.HasItems(controlTabItems))
+      if (!NetCommon.HasItems(controlTabItems))
       {
         // Create new configuration.
         config.ControlRowHeight = ControlRowHeight(config.ControlRowHeight);
@@ -406,7 +406,7 @@ namespace LJCDataDetail
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      if (false == NetCommon.HasItems(LJCDataColumns))
+      if (!NetCommon.HasItems(LJCDataColumns))
       {
         throw new MissingMemberException(Name, "LJCDataColumns");
       }

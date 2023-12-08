@@ -32,7 +32,7 @@ namespace LJCDataAccess
       MySqlCommand command;
       int retValue = 0;
 
-      if (false == NetString.HasValue(ConnectionString))
+      if (!NetString.HasValue(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";
@@ -85,7 +85,7 @@ namespace LJCDataAccess
       MySqlCommand command;
       MySqlDataReader retValue;
 
-      if (false == NetString.HasValue(ConnectionString))
+      if (!NetString.HasValue(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";
@@ -268,7 +268,7 @@ namespace LJCDataAccess
       DataSet dataSet;
       DataTable retValue = null;
 
-      if (false == NetString.HasValue(ConnectionString))
+      if (!NetString.HasValue(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";

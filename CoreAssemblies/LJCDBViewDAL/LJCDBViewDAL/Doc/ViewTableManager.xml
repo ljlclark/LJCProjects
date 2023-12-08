@@ -28,7 +28,7 @@
       Updates the record if it exists, otherwise creates it.
     </summary>
     <param name="viewTable">The data record.</param>
-    <returns>True if successful otherwise false.</returns>
+    <returns>true if successful; otherwise, false.</returns>
   </SaveData>
   <AddData>
     <summary>

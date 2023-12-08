@@ -21,14 +21,14 @@
       Checks if a text value exists.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if there is a text value, otherwise false.</returns>
+    <returns>true if there is a text value; otherwise, false.</returns>
   </HasValue>
   <IsDigits>
     <summary>
       Checks a string value for digits.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if all digits, otherwise false.</returns>
+    <returns>true if all digits; otherwise, false.</returns>
   </IsDigits>
   <IsEqual>
     <summary>
@@ -341,7 +341,7 @@
     </summary>
     <param name="letter">The text letter.</param>
     <param name="prevLetter">The text previous letter.</param>
-    <returns>True if the letter should be skipped, otherwise false.</returns>
+    <returns>true if the letter should be skipped; otherwise, false.</returns>
     <remarks>
       True if the letter is the first letter or not a vowel and not the same as
       the previous letter.
@@ -355,7 +355,7 @@
     <param name="text">The text value.</param>
     <param name="index">The start index.</param>
     <param name="letter">The Phonetic letter.</param>
-    <returns>True if a Phonetic was created, otherwise false.</returns>
+    <returns>true if a Phonetic was created; otherwise, false.</returns>
     <remarks>
       <para>
         Sets the letter parameter to:&lt;br /&gt;  -
