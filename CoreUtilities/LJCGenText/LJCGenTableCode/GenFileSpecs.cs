@@ -21,7 +21,7 @@ namespace LJCGenTableCode
     {
       GenFileSpecs retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -109,7 +109,7 @@ namespace LJCGenTableCode
     /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

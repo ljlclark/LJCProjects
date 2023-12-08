@@ -21,7 +21,7 @@ namespace LJCGenTextLib
       }
       else
       {
-        if (false == File.Exists(templateFileSpec))
+        if (!File.Exists(templateFileSpec))
         {
           errorText += $"Template file '{templateFileSpec}' is not found.\r\n";
         }

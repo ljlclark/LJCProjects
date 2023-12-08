@@ -18,11 +18,11 @@ namespace LJCGenTextEdit
     {
       FilePaths retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = DefaultFileName;
       }
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         string errorText = $"File '{fileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -42,7 +42,7 @@ namespace LJCGenTextEdit
     /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void Serialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = DefaultFileName;
       }

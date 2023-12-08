@@ -69,7 +69,7 @@ namespace LJCGenTextLib
       OutFileSpec = GetOutFileSpec(dataFileName, outputFileSpec);
 
       // Begin generating the output file.
-      if (false == overwrite
+      if (!overwrite
         && File.Exists(OutFileSpec))
       {
         errorText += $"File'{OutFileSpec}' already exists.";
@@ -81,11 +81,11 @@ namespace LJCGenTextLib
         {
           OutLines.Clear();
           GenSectionNone();
-          if (false == string.IsNullOrWhiteSpace(OutFileSpec))
+          if (!string.IsNullOrWhiteSpace(OutFileSpec))
           {
             string folderPath = Path.GetDirectoryName(OutFileSpec);
             if (NetString.HasValue(folderPath)
-              && false == Directory.Exists(folderPath))
+              && !Directory.Exists(folderPath))
             {
               Directory.CreateDirectory(folderPath);
             }
@@ -144,7 +144,7 @@ namespace LJCGenTextLib
           }
 
           if (section != null
-            && false == IsSectionDirective)
+            && !IsSectionDirective)
           {
             if (Directive.IsValue(directive))
             {
@@ -273,19 +273,19 @@ namespace LJCGenTextLib
 
         // Sets line to null if a Section directive.
         // May change lineIndex to end of section or template.
-        if (false == SectionDirective(currentSection, directive, ref line
+        if (!SectionDirective(currentSection, directive, ref line
           , ref lineIndex))
         {
           if (line != null
             && currentSection.HasData())
           {
             // Sets line to null if other directive.
-            if (false == OtherDirective(currentSection, directive, ref line
+            if (!OtherDirective(currentSection, directive, ref line
               , ref lineIndex))
             {
               line = ReplaceValues(line);
               if (currentSection.IsList
-                && false == currentSection.EndProcessing)
+                && !currentSection.EndProcessing)
               {
                 line += ",";
               }
@@ -341,7 +341,7 @@ namespace LJCGenTextLib
         }
 
         if (line != null
-          && false == line.Trim().StartsWith("<!--X-"))
+          && !line.Trim().StartsWith("<!--X-"))
         {
           OutLines.Add(line);
         }
@@ -497,7 +497,7 @@ namespace LJCGenTextLib
           if (mProcessLines && isValid)
           {
             line = ReplaceValues(line);
-            if (section.IsList && false == section.EndProcessing)
+            if (section.IsList && !section.EndProcessing)
             {
               string trimLine = line.Trim();
               if (trimLine[trimLine.Length - 1] != ',')
@@ -524,7 +524,7 @@ namespace LJCGenTextLib
       }
       else
       {
-        if (false == File.Exists(dataFileSpec))
+        if (!File.Exists(dataFileSpec))
         {
           errorText += $"Data file '{dataFileSpec}' was not found.\r\n";
           throw new FileNotFoundException(errorText);
@@ -548,7 +548,7 @@ namespace LJCGenTextLib
     {
       string retValue = null;
 
-      if (false == string.IsNullOrWhiteSpace(outputFileSpec))
+      if (!string.IsNullOrWhiteSpace(outputFileSpec))
       {
         outputFileSpec = outputFileSpec.Trim();
         if (outputFileSpec.Contains("*."))
@@ -572,7 +572,7 @@ namespace LJCGenTextLib
       var index = ActiveSections.Count - 1;
       var currentSection = ActiveSections[index];
       if (Directive.IsSubsection(directive)
-        && false == currentSection.HasData())
+        && !currentSection.HasData())
       {
         retValue = true;
       }
@@ -691,7 +691,7 @@ namespace LJCGenTextLib
               doNextLevel = true;
             }
           }
-          if (false == doNextLevel)
+          if (!doNextLevel)
           {
             break;
           }

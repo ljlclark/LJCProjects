@@ -227,12 +227,12 @@ namespace LJCGenDocEdit
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameText.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
-      if (false == NetString.HasValue(SequenceText.Text))
+      if (!NetString.HasValue(SequenceText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {SequenceLabel.Text}");
@@ -501,7 +501,7 @@ namespace LJCGenDocEdit
       {
         NameText.Text = dataMethod.Name;
         OverloadText.Text = dataMethod.OverloadName;
-        if (false == NetString.HasValue(dataMethod.Summary))
+        if (!NetString.HasValue(dataMethod.Summary))
         {
           dataMethod.Summary = "Missing Summary";
         }

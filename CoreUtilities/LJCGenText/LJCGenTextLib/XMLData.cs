@@ -105,7 +105,7 @@ namespace LJCGenTextLib
     {
       DefaultValues retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = "DefaultValues.xml";
       }

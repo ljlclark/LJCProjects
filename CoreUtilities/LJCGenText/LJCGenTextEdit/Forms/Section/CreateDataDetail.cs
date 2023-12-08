@@ -116,7 +116,7 @@ namespace LJCGenTextEdit
         foreach (DbRow dbRow in dbResult.Rows)
         {
           string tableName = dbRow.Values.LJCGetString("TABLE_NAME");
-          if (false == tableName.StartsWith("sys"))
+          if (!tableName.StartsWith("sys"))
           {
             TableNameCombo.Items.Add(tableName);
           }

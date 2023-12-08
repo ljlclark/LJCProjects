@@ -7,6 +7,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
+using static LJCGenTextEdit.EditList;
 
 namespace LJCGenTextEdit
 {
@@ -16,34 +17,36 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    internal ReplacementGridCode(EditList parent)
+    internal ReplacementGridCode(EditList parentList)
     {
-      // Set default class data.
-      mParent = parent;
-      mSectionGrid = mParent.SectionGrid;
-      mItemGrid = mParent.ItemGrid;
-      mReplacementGrid = mParent.ReplacementGrid;
+      // Initialize property values.
+      EditList = parentList;
+      EditList.Cursor = Cursors.WaitCursor;
+      GenDataManager = EditList.GenDataManager;
+      ItemGrid = EditList.ItemGrid;
+      ReplacementGrid = EditList.ReplacementGrid;
+      SectionGrid = EditList.SectionGrid;
+      EditList.Cursor = Cursors.Default;
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DataRetrieve()
     {
-      Replacements records;
+      EditList.Cursor = Cursors.WaitCursor;
+      ReplacementGrid.LJCRowsClear();
 
-      mReplacementGrid.LJCRowsClear();
-      GenDataManager manager = mParent.GenDataManager;
-
-      if (mSectionGrid.CurrentRow is LJCGridRow parentRow
-        && mItemGrid.CurrentRow is LJCGridRow row)
+      if (SectionGrid.CurrentRow is LJCGridRow parentRow
+        && ItemGrid.CurrentRow is LJCGridRow row
+        && GenDataManager!= null)
       {
+        // Data from items.
         string sectionName = parentRow.LJCGetCellText("Name");
         string repeatItemName = row.LJCGetCellText("Name");
-        records = manager.LoadReplacements(sectionName, repeatItemName);
 
+        var records = GenDataManager.LoadReplacements(sectionName, repeatItemName);
         if (records != null && records.Count > 0)
         {
           foreach (Replacement record in records)
@@ -52,50 +55,47 @@ namespace LJCGenTextEdit
           }
         }
       }
-      mParent.DoChange(EditList.Change.Replacement);
+      EditList.Cursor = Cursors.Default;
+      EditList.DoChange(Change.Replacement);
     }
 
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Replacement dataRecord)
     {
-      LJCGridRow retValue;
-
-      retValue = mReplacementGrid.LJCRowAdd();
-
-      // Sets the row values from a data object.
-      retValue.LJCSetValues(mReplacementGrid, dataRecord);
+      var retValue = ReplacementGrid.LJCRowAdd();
+      retValue.LJCSetValues(ReplacementGrid, dataRecord);
       return retValue;
-    }
-
-    // Updates the current row with the record values.
-    private void RowUpdate(Replacement dataRecord)
-    {
-      if (mReplacementGrid.CurrentRow is LJCGridRow gridRow)
-      {
-        gridRow.LJCSetValues(mReplacementGrid, dataRecord);
-      }
     }
 
     // Selects a row based on the key record values.
     private bool RowSelect(Replacement dataRecord)
     {
-      string name;
       bool retValue = false;
 
       if (dataRecord != null)
       {
-        foreach (LJCGridRow row in mReplacementGrid.Rows)
+        foreach (LJCGridRow row in ReplacementGrid.Rows)
         {
-          name = row.LJCGetCellText("Name");
+          var name = row.LJCGetCellText("Name");
           if (name == dataRecord.Name)
           {
-            mReplacementGrid.LJCSetCurrentRow(row, true);
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            ReplacementGrid.LJCSetCurrentRow(row, true);
             retValue = true;
             break;
           }
         }
       }
       return retValue;
+    }
+
+    // Updates the current row with the record values.
+    private void RowUpdate(Replacement dataRecord)
+    {
+      if (ReplacementGrid.CurrentRow is LJCGridRow gridRow)
+      {
+        gridRow.LJCSetValues(ReplacementGrid, dataRecord);
+      }
     }
     #endregion
 
@@ -106,21 +106,20 @@ namespace LJCGenTextEdit
     {
       ReplacementDetail detail;
 
-      if (mSectionGrid.CurrentRow is LJCGridRow sectionRow
-        && mItemGrid.CurrentRow is LJCGridRow parentRow)
+      if (SectionGrid.CurrentRow is LJCGridRow sectionRow
+        && ItemGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
         string sectionName = sectionRow.LJCGetCellText("Name");
         string parentName = parentRow.LJCGetCellText("Name");
 
-        var grid = mReplacementGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormCommon.GetDialogScreenPoint(ReplacementGrid);
         detail = new ReplacementDetail()
         {
-          LJCSectionName = sectionName,
+          LJCGenDataManager = GenDataManager,
+          LJCLocation = location,
           LJCParentName = parentName,
-          LJCGenDataManager = mParent.GenDataManager,
-          LJCLocation = location
+          LJCSectionName = sectionName
         };
         detail.LJCChange += ReplacementDetail_Change;
         detail.ShowDialog();
@@ -130,26 +129,23 @@ namespace LJCGenTextEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      ReplacementDetail detail;
-
-      if (mSectionGrid.CurrentRow is LJCGridRow sectionRow
-        && mItemGrid.CurrentRow is LJCGridRow parentRow
-        && mReplacementGrid.CurrentRow is LJCGridRow row)
+      if (SectionGrid.CurrentRow is LJCGridRow sectionRow
+        && ItemGrid.CurrentRow is LJCGridRow parentRow
+        && ReplacementGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         string sectionName = sectionRow.LJCGetCellText("Name");
         string parentName = parentRow.LJCGetCellText("Name");
         string name = row.LJCGetCellText("Name");
 
-        var grid = mReplacementGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
-        detail = new ReplacementDetail()
+        var location = FormCommon.GetDialogScreenPoint(ReplacementGrid);
+        var detail = new ReplacementDetail()
         {
-          LJCSectionName = sectionName,
+          LJCGenDataManager = EditList.GenDataManager,
+          LJCLocation = location,
           LJCParentName = parentName,
           LJCReplacementName = name,
-          LJCGenDataManager = mParent.GenDataManager,
-          LJCLocation = location
+          LJCSectionName = sectionName
         };
         detail.LJCChange += ReplacementDetail_Change;
         detail.ShowDialog();
@@ -159,41 +155,53 @@ namespace LJCGenTextEdit
     // Deletes the selected row.
     internal void DoDelete()
     {
-      string title;
-      string message;
-      GenDataManager manager = mParent.GenDataManager;
-
-      if (mSectionGrid.CurrentRow is LJCGridRow sectionRow
-        && mItemGrid.CurrentRow is LJCGridRow parentRow
-        && mReplacementGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var sectionRow = SectionGrid.CurrentRow as LJCGridRow; ;
+      var parentRow = ItemGrid.CurrentRow as LJCGridRow; ;
+      var row = ReplacementGrid.CurrentRow as LJCGridRow; ;
+      if (sectionRow != null
+        && parentRow != null
+        && row != null)
       {
-        title = "Delete Confirmation";
-        message = FormCommon.DeleteConfirm;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
-          // Data from items.
-          string sectionName = sectionRow.LJCGetCellText("Name");
-          string parentName = parentRow.LJCGetCellText("Name");
-          string name = row.LJCGetCellText("Name");
-
-          manager.DeleteReplacement(sectionName, parentName, name);
-          manager.Save();
-          mReplacementGrid.Rows.Remove(row);
-          mParent.TimedChange(EditList.Change.Replacement);
+          success = true;
         }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        string sectionName = sectionRow.LJCGetCellText("Name");
+        string parentName = parentRow.LJCGetCellText("Name");
+        string name = row.LJCGetCellText("Name");
+
+        success = GenDataManager.DeleteReplacement(sectionName, parentName, name);
+      }
+
+      if (success)
+      {
+        success = GenDataManager.Save();
+      }
+
+      if (success)
+      {
+        ReplacementGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.Replacement);
       }
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
-      Replacement dataRecord;
+      EditList.Cursor = Cursors.WaitCursor;
       string name = null;
-
-      mParent.Cursor = Cursors.WaitCursor;
-      if (mReplacementGrid.CurrentRow is LJCGridRow row)
+      if (ReplacementGrid.CurrentRow is LJCGridRow row)
       {
+        // Save the original row.
         name = row.LJCGetCellText("Name");
       }
       DataRetrieve();
@@ -201,43 +209,52 @@ namespace LJCGenTextEdit
       // Select the original row.
       if (NetString.HasValue(name))
       {
-        dataRecord = new Replacement()
+        var record = new Replacement()
         {
           Name = name
         };
-        RowSelect(dataRecord);
+        RowSelect(record);
       }
-      mParent.Cursor = Cursors.Default;
+      EditList.Cursor = Cursors.Default;
     }
 
     // Adds new row or updates row with changes from the detail dialog.
     private void ReplacementDetail_Change(object sender, EventArgs e)
     {
-      ReplacementDetail detail;
-      Replacement dataRecord;
-      LJCGridRow row;
-
-      detail = sender as ReplacementDetail;
-      dataRecord = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      var detail = sender as ReplacementDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
       {
-        RowUpdate(dataRecord);
-      }
-      else
-      {
-        row = RowAdd(dataRecord);
-        mReplacementGrid.LJCSetCurrentRow(row, true);
-        mParent.TimedChange(EditList.Change.Replacement);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          var row = RowAdd(record);
+          ReplacementGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.Replacement);
+        }
       }
     }
     #endregion
 
-    #region Class Data
+    #region Properties
 
-    private readonly EditList mParent;
-    private readonly LJCDataGrid mSectionGrid;
-    private readonly LJCDataGrid mItemGrid;
-    private readonly LJCDataGrid mReplacementGrid;
+    // Gets or sets the Parent List reference.
+    private EditList EditList { get; set; }
+
+    // Gets or sets the Manager reference.
+    private GenDataManager GenDataManager { get; set; }
+
+    // Gets or sets the Item Grid reference.
+    private LJCDataGrid ItemGrid { get; set; }
+
+    // Gets or sets the Replacement Grid reference.
+    private LJCDataGrid ReplacementGrid { get; set; }
+
+    // Gets or sets the Section Grid reference.
+    private LJCDataGrid SectionGrid { get; set; }
     #endregion
   }
 }

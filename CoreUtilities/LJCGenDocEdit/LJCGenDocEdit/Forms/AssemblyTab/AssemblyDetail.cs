@@ -221,22 +221,22 @@ namespace LJCGenDocEdit
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameText.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
-      if (false == NetString.HasValue(DescriptionText.Text))
+      if (!NetString.HasValue(DescriptionText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {DescriptionLabel.Text}");
       }
-      if (false == NetString.HasValue(FileText.Text))
+      if (!NetString.HasValue(FileText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {FileLabel.Text}");
       }
-      if (false == NetString.HasValue(SequenceText.Text))
+      if (!NetString.HasValue(SequenceText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {SequenceLabel.Text}");

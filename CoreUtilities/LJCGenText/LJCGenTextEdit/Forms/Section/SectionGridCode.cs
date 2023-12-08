@@ -9,6 +9,7 @@ using LJCWinFormControls;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using static LJCGenTextEdit.EditList;
 
 namespace LJCGenTextEdit
 {
@@ -18,33 +19,31 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    internal SectionGridCode(EditList parent)
+    internal SectionGridCode(EditList parentList)
     {
-      // Set default class data.
-      mParent = parent;
-      mSectionGrid = mParent.SectionGrid;
+      // Initialize property values.
+      EditList = parentList;
+      EditList.Cursor = Cursors.WaitCursor;
+      GenDataManager = EditList.GenDataManager;
+      SectionGrid = EditList.SectionGrid;
+      EditList.Cursor = Cursors.Default;
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DataRetrieve()
     {
-      Sections dataRecords;
-      GenDataManager manager = mParent.GenDataManager;
+      EditList.Cursor = Cursors.WaitCursor;
+      SectionGrid.LJCRowsClear();
 
-      mParent.Cursor = Cursors.WaitCursor;
-      mSectionGrid.LJCRowsClear();
-
-      if (manager != null)
+      if (GenDataManager != null)
       {
-        dataRecords = manager.LoadSections();
-
-        if (dataRecords != null && dataRecords.Count > 0)
+        var records = GenDataManager.LoadSections();
+        if (records != null && records.Count > 0)
         {
-          foreach (Section record in dataRecords)
+          foreach (Section record in records)
           {
             if (record != null)
             {
@@ -53,52 +52,49 @@ namespace LJCGenTextEdit
           }
         }
       }
-      mParent.Cursor = Cursors.Default;
-      mParent.DoChange(EditList.Change.Section);
+      EditList.Cursor = Cursors.Default;
+      EditList.DoChange(Change.Section);
     }
 
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Section dataRecord)
     {
-      LJCGridRow retValue;
+      var retValue = SectionGrid.LJCRowAdd();
+      retValue.LJCSetValues(SectionGrid, dataRecord);
+      return retValue;
+    }
 
-      retValue = mSectionGrid.LJCRowAdd();
+    // Selects a row based on the key record values.
+    private bool RowSelect(Section dataRecord)
+    {
+      bool retValue = false;
 
-      // Sets the row values from a data object.
-      retValue.LJCSetValues(mSectionGrid, dataRecord);
+      if (dataRecord != null)
+      {
+        EditList.Cursor = Cursors.WaitCursor;
+        foreach (LJCGridRow row in SectionGrid.Rows)
+        {
+          var name = row.LJCGetCellText("Name");
+          if (name == dataRecord.Name)
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            SectionGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
+          }
+        }
+        EditList.Cursor = Cursors.Default;
+      }
       return retValue;
     }
 
     // Updates the current row with the record values.
     private void RowUpdate(Section dataRecord)
     {
-      if (mSectionGrid.CurrentRow is LJCGridRow gridRow)
+      if (SectionGrid.CurrentRow is LJCGridRow gridRow)
       {
-        gridRow.LJCSetValues(mSectionGrid, dataRecord);
+        gridRow.LJCSetValues(SectionGrid, dataRecord);
       }
-    }
-
-    // Selects a row based on the key record values.
-    private bool RowSelect(Section dataRecord)
-    {
-      string name;
-      bool retValue = false;
-
-      if (dataRecord != null)
-      {
-        foreach (LJCGridRow row in mSectionGrid.Rows)
-        {
-          name = row.LJCGetCellText("Name");
-          if (name == dataRecord.Name)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            mSectionGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-      }
-      return retValue;
     }
     #endregion
 
@@ -107,7 +103,7 @@ namespace LJCGenTextEdit
     // Load the DataXML file.
     internal void DoDataXMLLoad()
     {
-      FilePaths filePaths = mParent.mFilePaths;
+      FilePaths filePaths = EditList.mFilePaths;
 
       string dataXMLPath = filePaths.DataXMLPath;
       string initialFolder = Directory.GetCurrentDirectory();
@@ -129,14 +125,14 @@ namespace LJCGenTextEdit
       string fileSpec = FormCommon.SelectFile(filter, initialFolder, "*.xml");
       if (fileSpec != null)
       {
-        mParent.GenDataManager = new GenDataManager(fileSpec);
-        GenDataManager manager = mParent.GenDataManager;
+        EditList.GenDataManager = new GenDataManager(fileSpec);
+        GenDataManager manager = EditList.GenDataManager;
         if (manager != null)
         {
           string fromPath = Directory.GetCurrentDirectory();
-          mParent.mFilePaths.DataXMLPath = NetFile.GetRelativePath(fromPath
+          EditList.mFilePaths.DataXMLPath = NetFile.GetRelativePath(fromPath
             , manager.FileSpec);
-          mParent.DataXMLTextbox.Text = manager.FileName;
+          EditList.DataXMLTextbox.Text = manager.FileName;
         }
         DataRetrieve();
       }
@@ -151,13 +147,10 @@ namespace LJCGenTextEdit
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
-      SectionDetail detail;
-
-      var grid = mSectionGrid;
-      var location = FormCommon.GetDialogScreenPoint(grid);
-      detail = new SectionDetail()
+      var location = FormCommon.GetDialogScreenPoint(SectionGrid);
+      var detail = new SectionDetail()
       {
-        LJCGenDataManager = mParent.GenDataManager,
+        LJCGenDataManager = EditList.GenDataManager,
         LJCLocation = location
       };
       detail.LJCChange += SectionDetail_Change;
@@ -167,20 +160,17 @@ namespace LJCGenTextEdit
     // Displays a detail dialog to edit an existing record.
     internal void DoEdit()
     {
-      SectionDetail detail;
-
-      if (mSectionGrid.CurrentRow is LJCGridRow row)
+      if (SectionGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         string name = row.LJCGetCellText("Name");
 
-        var grid = mSectionGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
-        detail = new SectionDetail()
+        var location = FormCommon.GetDialogScreenPoint(SectionGrid);
+        var detail = new SectionDetail()
         {
-          LJCSectionName = name,
-          LJCGenDataManager = mParent.GenDataManager,
-          LJCLocation = location
+          LJCGenDataManager = EditList.GenDataManager,
+          LJCLocation = location,
+          LJCSectionName = name
         };
         detail.LJCChange += SectionDetail_Change;
         detail.ShowDialog();
@@ -190,38 +180,47 @@ namespace LJCGenTextEdit
     // Deletes the selected row.
     internal void DoDelete()
     {
-      string title;
-      string message;
-
-      if (mSectionGrid.CurrentRow is LJCGridRow row)
+      bool success = false;
+      var row = SectionGrid.CurrentRow as LJCGridRow;
+      if (row != null)
       {
-        GenDataManager manager = mParent.GenDataManager;
-
-        title = "Delete Confirmation";
-        message = FormCommon.DeleteConfirm;
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
         if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
           , MessageBoxIcon.Question) == DialogResult.Yes)
         {
-          // Data from items.
-          string name = row.LJCGetCellText("Name");
-
-          manager.DeleteSection(name);
-          manager.Save();
-          mSectionGrid.Rows.Remove(row);
-          mParent.TimedChange(EditList.Change.Section);
+          success = true;
         }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        string name = row.LJCGetCellText("Name");
+
+        success = GenDataManager.DeleteSection(name);
+      }
+
+      if (success)
+      {
+        success = GenDataManager.Save();
+      }
+
+      if (success)
+      {
+        SectionGrid.Rows.Remove(row);
+        EditList.TimedChange(Change.Section);
       }
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
-      Section dataRecord;
+      EditList.Cursor = Cursors.WaitCursor;
       string name = null;
-
-      mParent.Cursor = Cursors.WaitCursor;
-      if (mSectionGrid.CurrentRow is LJCGridRow row)
+      if (SectionGrid.CurrentRow is LJCGridRow row)
       {
+        // Save the original row.
         name = row.LJCGetCellText("Name");
       }
       DataRetrieve();
@@ -229,33 +228,32 @@ namespace LJCGenTextEdit
       // Select the original row.
       if (NetString.HasValue(name))
       {
-        dataRecord = new Section()
+        var record = new Section()
         {
           Name = name
         };
-        RowSelect(dataRecord);
+        RowSelect(record);
       }
-      mParent.Cursor = Cursors.Default;
+      EditList.Cursor = Cursors.Default;
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
     internal void SectionDetail_Change(object sender, EventArgs e)
     {
-      SectionDetail detail;
-      Section dataRecord;
-      LJCGridRow row;
-
-      detail = sender as SectionDetail;
-      dataRecord = detail.LJCRecord;
-      if (detail.LJCIsUpdate)
+      var detail = sender as SectionDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
       {
-        RowUpdate(dataRecord);
-      }
-      else
-      {
-        row = RowAdd(dataRecord);
-        mSectionGrid.LJCSetCurrentRow(row, true);
-        mParent.TimedChange(EditList.Change.Section);
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          var row = RowAdd(record);
+          SectionGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(Change.Section);
+        }
       }
     }
 
@@ -278,15 +276,15 @@ namespace LJCGenTextEdit
         string fileSpec = @"DataXML\GenData.xml";
         File.WriteAllText(fileSpec, data);
 
-        mParent.GenDataManager = new GenDataManager(fileSpec);
-        GenDataManager manager = mParent.GenDataManager;
+        EditList.GenDataManager = new GenDataManager(fileSpec);
+        GenDataManager manager = EditList.GenDataManager;
         if (manager != null)
         {
           string fromPath = Environment.CurrentDirectory;
           string fullSpec = Path.GetFullPath(fileSpec);
-          mParent.mFilePaths.DataXMLPath = NetFile.GetRelativePath(fromPath
+          EditList.mFilePaths.DataXMLPath = NetFile.GetRelativePath(fromPath
             , fullSpec);
-          mParent.DataXMLTextbox.Text = manager.FileName;
+          EditList.DataXMLTextbox.Text = manager.FileName;
         }
         DataRetrieve();
       }
@@ -297,16 +295,16 @@ namespace LJCGenTextEdit
     {
       string targetFileSpec;
 
-      GenDataManager manager = mParent.GenDataManager;
+      GenDataManager manager = EditList.GenDataManager;
 
       if (manager != null)
       {
-        targetFileSpec = mParent.mFilePaths.DataXMLPath;
+        targetFileSpec = EditList.mFilePaths.DataXMLPath;
         string sourceFileName = Path.GetFileName(targetFileSpec);
-        string targetFileName = mParent.DataXMLTextbox.Text.Trim();
+        string targetFileName = EditList.DataXMLTextbox.Text.Trim();
 
         string sourcefolder = Path.GetDirectoryName(targetFileSpec);
-        if (false == sourcefolder.StartsWith(".."))
+        if (!sourcefolder.StartsWith(".."))
         {
           sourcefolder = Path.Combine(Directory.GetCurrentDirectory(), sourcefolder);
         }
@@ -330,17 +328,23 @@ namespace LJCGenTextEdit
           {
             manager.FileSpec = targetFileSpec;
             manager.Save();
-            mParent.mFilePaths.DataXMLPath = targetFileSpec;
+            EditList.mFilePaths.DataXMLPath = targetFileSpec;
           }
         }
       }
     }
     #endregion
 
-    #region Class Data
+    #region Properties
 
-    private readonly EditList mParent;
-    private readonly LJCDataGrid mSectionGrid;
+    // Gets or sets the Parent List reference.
+    private EditList EditList { get; set; }
+
+    // Gets or sets the Manager reference.
+    private GenDataManager GenDataManager { get; set; }
+
+    // Gets or sets the Section Grid reference.
+    private LJCDataGrid SectionGrid { get; set; }
     #endregion
   }
 }

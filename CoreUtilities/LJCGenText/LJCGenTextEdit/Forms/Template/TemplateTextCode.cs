@@ -1,14 +1,14 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TemplateTextCode.cs
+using LJCGenTextLib;
+using LJCNetCommon;
+using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using LJCWinFormCommon;
-using LJCWinFormControls;
-using LJCNetCommon;
-using LJCGenTextLib;
 
 namespace LJCGenTextEdit
 {
@@ -17,13 +17,14 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    internal TemplateTextCode(EditList parent)
+    internal TemplateTextCode(EditList parentList)
     {
-      // Set default class data.
-      mParent = parent;
-      //mOutputTextBox = parent.OutputTextbox;
-      mTemplateRtControl = parent.TemplateRichText;
-      mOutputRtControl = parent.OutputRichText;
+      // Initialize property values.
+      EditList = parentList;
+      EditList.Cursor = Cursors.WaitCursor;
+      mOutputRtControl = EditList.OutputRichText;
+      mTemplateRtControl = EditList.TemplateRichText;
+      EditList.Cursor = Cursors.Default;
     }
     #endregion
 
@@ -32,7 +33,7 @@ namespace LJCGenTextEdit
     // Load the Template file.
     internal void DoTemplateLoad()
     {
-      string targetFileSpec = mParent.mFilePaths.TemplatePath;
+      string targetFileSpec = EditList.mFilePaths.TemplatePath;
       string prevTargetPath = Path.GetDirectoryName(targetFileSpec);
 
       string sourceFolder = Environment.CurrentDirectory;
@@ -54,7 +55,7 @@ namespace LJCGenTextEdit
       targetFileSpec = FormCommon.SelectFile(filter, sourceFolder, "*.cs");
       if (targetFileSpec != null)
       {
-        mParent.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
+        EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
 
         mTemplateRtControl.Font = new Font("Courier New", 9.0f);
         mTemplateRtControl.WordWrap = false;
@@ -71,25 +72,25 @@ namespace LJCGenTextEdit
           if (DialogResult.Yes == MessageBox.Show(message, "Save Confirmation"
             , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            mParent.mFilePaths.TemplatePath = targetFileSpec;
+            EditList.mFilePaths.TemplatePath = targetFileSpec;
           }
         }
 
-        mParent.CreateColorSettings(mTemplateRtControl);
-        mParent.SetTextColor(mTemplateRtControl);
+        EditList.CreateColorSettings(mTemplateRtControl);
+        EditList.SetTextColor(mTemplateRtControl);
       }
     }
 
     /// <summary>Generates the Output code.</summary>
     internal void DoGenerate()
     {
-      FilePaths filePaths = mParent.mFilePaths;
+      FilePaths filePaths = EditList.mFilePaths;
 
       NetFile.CreateFolder("TempFiles");
       string tempPath = @"TempFiles\GenFile.cs";
 
       string templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
-      string templateFile = mParent.TemplateTextbox.Text.Trim();
+      string templateFile = EditList.TemplateTextbox.Text.Trim();
       string templateFileSpec = Path.Combine(templatePath, templateFile);
 
       GenerateText genText = new GenerateText();
@@ -100,20 +101,20 @@ namespace LJCGenTextEdit
       mOutputRtControl.WordWrap = false;
       mOutputRtControl.LJCLoadFromFile(tempPath);
 
-      mParent.CreateColorSettings(mOutputRtControl);
-      mParent.SetTextColor(mOutputRtControl);
+      EditList.CreateColorSettings(mOutputRtControl);
+      EditList.SetTextColor(mOutputRtControl);
     }
 
     // Save the Template file.
     internal void DoTemplateSave()
     {
-      string targetFileSpec = mParent.mFilePaths.TemplatePath;
+      string targetFileSpec = EditList.mFilePaths.TemplatePath;
       string prevTargetPath = Path.GetDirectoryName(targetFileSpec);
       string sourceFileName = Path.GetFileName(targetFileSpec);
-      string targetFileName = mParent.TemplateTextbox.Text.Trim();
+      string targetFileName = EditList.TemplateTextbox.Text.Trim();
 
       string sourcefolder = Path.GetDirectoryName(targetFileSpec);
-      if (false == sourcefolder.StartsWith(".."))
+      if (!sourcefolder.StartsWith(".."))
       {
         sourcefolder = Path.Combine(Directory.GetCurrentDirectory(), sourcefolder);
       }
@@ -145,7 +146,7 @@ namespace LJCGenTextEdit
           {
             count++;
             if (count >= mTemplateRtControl.Lines.Length
-              && false == NetString.HasValue(line))
+              && !NetString.HasValue(line))
             {
               break;
             }
@@ -162,7 +163,7 @@ namespace LJCGenTextEdit
             if (DialogResult.Yes == MessageBox.Show(message, "Save Confirmation"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-              mParent.mFilePaths.TemplatePath = targetFileSpec;
+              EditList.mFilePaths.TemplatePath = targetFileSpec;
             }
           }
         }
@@ -172,7 +173,7 @@ namespace LJCGenTextEdit
     // Generates the Sections data from the template.
     internal void DoCreateDataFromTemplate()
     {
-      FilePaths filePaths = mParent.mFilePaths;
+      FilePaths filePaths = EditList.mFilePaths;
 
       GenerateText genText = new GenerateText();
       string[] lines = mTemplateRtControl.Lines;
@@ -182,13 +183,13 @@ namespace LJCGenTextEdit
       string fileSpec = @"DataXML\GenSections.xml";
       sections.LJCSerialize(fileSpec);
 
-      mParent.GenDataManager = new GenDataManager(fileSpec);
-      GenDataManager manager = mParent.GenDataManager;
+      EditList.GenDataManager = new GenDataManager(fileSpec);
+      GenDataManager manager = EditList.GenDataManager;
       string fromPath = Environment.CurrentDirectory;
       string fullSpec = Path.GetFullPath(fileSpec);
       filePaths.DataXMLPath = NetFile.GetRelativePath(fromPath, fullSpec);
-      mParent.DataXMLTextbox.Text = manager.FileName;
-      mParent.mSectionGridCode.DataRetrieve();
+      EditList.DataXMLTextbox.Text = manager.FileName;
+      EditList.mSectionGridCode.DataRetrieve();
     }
 
     // Show the About dialog.
@@ -201,16 +202,16 @@ namespace LJCGenTextEdit
     // Closes the application.
     internal void DoClose()
     {
-      mParent.mFilePaths.Serialize();
-      mParent.SaveControlValues();
-      mParent.Close();
+      EditList.mFilePaths.Serialize();
+      EditList.SaveControlValues();
+      EditList.Close();
     }
 
     // Set ColorSettings for the current line.
     internal void DoSetLineColors(Keys keyCode, LJCRtControl rtControl
       , CodeTokenizer tokens)
     {
-      if (false == IsControlKey(keyCode))
+      if (!IsControlKey(keyCode))
       {
         int lineIndex = rtControl.LJCGetCurrentLineIndex();
         string lineText = rtControl.LJCGetCurrentLine();
@@ -219,9 +220,9 @@ namespace LJCGenTextEdit
           // Reset the line to Black.
           rtControl.LJCSetTextColor(lineIndex, 0, lineText.Length, Color.Black);
 
-          mParent.mSyntaxColors.ColorSettings = new ColorSettings();
-          mParent.mSyntaxColors.CreateLineColorSettings(tokens, lineText, lineIndex);
-          mParent.SetTextColor(rtControl);
+          EditList.mSyntaxColors.ColorSettings = new ColorSettings();
+          EditList.mSyntaxColors.CreateLineColorSettings(tokens, lineText, lineIndex);
+          EditList.SetTextColor(rtControl);
         }
       }
     }
@@ -242,10 +243,14 @@ namespace LJCGenTextEdit
     }
     #endregion
 
+    #region Properties
+
+    // Gets or sets the Parent List reference.
+    private EditList EditList { get; set; }
+    #endregion
+
     #region Class Data
 
-    private readonly EditList mParent;
-    //private readonly TextBox mOutputTextBox;
     private readonly LJCRtControl mTemplateRtControl;
     private readonly LJCRtControl mOutputRtControl;
     #endregion

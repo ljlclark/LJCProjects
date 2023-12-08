@@ -158,7 +158,7 @@ namespace LJCGenTextEdit
 
       if (lookupRecord != null)
       {
-        if (false == LJCIsUpdate)
+        if (!LJCIsUpdate)
         {
           // Duplicate for "New" record that already exists.
           retValue = true;
@@ -187,7 +187,7 @@ namespace LJCGenTextEdit
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameTextbox.Text))
+      if (!NetString.HasValue(NameTextbox.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");

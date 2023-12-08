@@ -30,8 +30,8 @@ namespace _Namespace_
     internal _ClassName_GridCode(_AppName_List parentList)
     {
       // Initialize property values.
-      parentList.Cursor = Cursors.WaitCursor;
       _AppName_List = parentList;
+      _AppName_List.Cursor = Cursors.WaitCursor;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
       LJCHelpFile = "_AppName_.chm";
       LJCHelpPageList = "_ClassName_List.html";
@@ -159,7 +159,7 @@ namespace _Namespace_
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentName = parentName,
+          LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();

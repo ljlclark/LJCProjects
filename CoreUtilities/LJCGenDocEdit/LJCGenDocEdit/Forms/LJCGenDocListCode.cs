@@ -199,7 +199,7 @@ namespace LJCGenDocEdit
     {
       if (ControlValues != null)
       {
-        if (false == mIsClassSplitSet)
+        if (!mIsClassSplitSet)
         {
           FormCommon.RestoreSplitDistance(ClassSplit, ControlValues);
         }

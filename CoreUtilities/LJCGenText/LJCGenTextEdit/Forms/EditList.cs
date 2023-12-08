@@ -362,7 +362,7 @@ namespace LJCGenTextEdit
     {
       var text = OutputRichText.Text;
 
-      if (false == string.IsNullOrWhiteSpace(text))
+      if (!string.IsNullOrWhiteSpace(text))
       {
         text = Decode(text);
         text = text.Replace("_ab_", "<span class=\"attrib\">");
@@ -378,7 +378,7 @@ namespace LJCGenTextEdit
     {
       var text = OutputRichText.Text;
 
-      if (false == string.IsNullOrWhiteSpace(text))
+      if (!string.IsNullOrWhiteSpace(text))
       {
         text = Encode(text);
         text = text.Replace("<span class=\"attrib\">", "_ab_");
@@ -509,7 +509,7 @@ namespace LJCGenTextEdit
     // Set ColorSettings for the current line.
     private void TemplateRichText_KeyUp(object sender, KeyEventArgs e)
     {
-      if (false == e.Control)
+      if (!e.Control)
       {
         mTemplateTextCode.DoSetLineColors(e.KeyCode, TemplateRichText, mTokenizer);
       }
@@ -803,7 +803,7 @@ namespace LJCGenTextEdit
     // Set ColorSettings for the current line.
     private void OutputRichText_KeyUp(object sender, KeyEventArgs e)
     {
-      if (false == e.Control)
+      if (!e.Control)
       {
         mTemplateTextCode.DoSetLineColors(e.KeyCode, OutputRichText, mTokenizer);
       }

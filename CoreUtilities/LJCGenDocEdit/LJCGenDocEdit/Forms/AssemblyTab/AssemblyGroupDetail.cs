@@ -209,17 +209,17 @@ namespace LJCGenDocEdit
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameText.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
       }
-      if (false == NetString.HasValue(HeadingText.Text))
+      if (!NetString.HasValue(HeadingText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {HeadingLabel.Text}");
       }
-      if (false == NetString.HasValue(SequenceText.Text))
+      if (!NetString.HasValue(SequenceText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {SequenceLabel.Text}");

@@ -20,7 +20,7 @@ namespace LJCGenTextEdit
     {
       Sections = null;
       FileSpec = fileSpec;
-      if (false == File.Exists(FileSpec))
+      if (!File.Exists(FileSpec))
       {
         string errorText = $"File '{FileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -129,7 +129,7 @@ namespace LJCGenTextEdit
       }
       else
       {
-        if (false == NetString.HasValue(FileSpec))
+        if (!NetString.HasValue(FileSpec))
         {
           errorText = "Missing FileSpec property value.";
           throw new MissingMemberException(errorText);

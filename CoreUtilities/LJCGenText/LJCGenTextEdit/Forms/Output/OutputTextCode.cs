@@ -16,12 +16,12 @@ namespace LJCGenTextEdit
     #region Constructors
 
     // Initializes an object instance.
-    internal OutputTextCode(EditList parent)
+    internal OutputTextCode(EditList parentList)
     {
       // Set default class data.
-      mParent = parent;
-      mOutputTextBox = mParent.OutputTextbox;
-      mOutputText = parent.OutputRichText;
+      EditList = parentList;
+      mOutputTextBox = EditList.OutputTextbox;
+      mOutputText = parentList.OutputRichText;
     }
     #endregion
 
@@ -30,7 +30,7 @@ namespace LJCGenTextEdit
     // Load the Output file.
     internal void DoOutputLoad()
     {
-      string targetFileSpec = mParent.mFilePaths.OutputPath;
+      string targetFileSpec = EditList.mFilePaths.OutputPath;
       string prevTargetPath = Path.GetDirectoryName(targetFileSpec);
 
       string sourceFolder = Directory.GetCurrentDirectory();
@@ -47,7 +47,7 @@ namespace LJCGenTextEdit
           , Path.GetDirectoryName(targetFileSpec));
         }
       }
-      if (false == Directory.Exists(sourceFolder))
+      if (!Directory.Exists(sourceFolder))
       {
         NetFile.CreateFolder($@"{sourceFolder}\");
       }
@@ -56,7 +56,7 @@ namespace LJCGenTextEdit
       targetFileSpec = FormCommon.SelectFile(filter, sourceFolder, "*.cs");
       if (targetFileSpec != null)
       {
-        mParent.OutputTextbox.Text = Path.GetFileName(targetFileSpec);
+        EditList.OutputTextbox.Text = Path.GetFileName(targetFileSpec);
 
         mOutputText.Font = new Font("Courier New", 9.0f);
         mOutputText.WordWrap = false;
@@ -73,12 +73,12 @@ namespace LJCGenTextEdit
           if (DialogResult.Yes == MessageBox.Show(message, "Save Confirmation"
             , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            mParent.mFilePaths.OutputPath = targetFileSpec;
+            EditList.mFilePaths.OutputPath = targetFileSpec;
           }
         }
 
-        mParent.CreateColorSettings(mOutputText);
-        mParent.SetTextColor(mOutputText);
+        EditList.CreateColorSettings(mOutputText);
+        EditList.SetTextColor(mOutputText);
 
         // Save for Comparison/Testing
         //LJCRtfSyntaxHighlight syntaxHighlight
@@ -90,13 +90,13 @@ namespace LJCGenTextEdit
     // Save the Output file.
     internal void DoOutputSave()
     {
-      string targetFileSpec = mParent.mFilePaths.OutputPath;
+      string targetFileSpec = EditList.mFilePaths.OutputPath;
       string prevTargetPath = Path.GetDirectoryName(targetFileSpec);
       string sourceFileName = Path.GetFileName(targetFileSpec);
       string targetFileName = mOutputTextBox.Text.Trim();
 
       string sourcefolder = Path.GetDirectoryName(targetFileSpec);
-      if (false == sourcefolder.StartsWith(".."))
+      if (!sourcefolder.StartsWith(".."))
       {
         sourcefolder = Path.Combine(Directory.GetCurrentDirectory(), sourcefolder);
       }
@@ -128,7 +128,7 @@ namespace LJCGenTextEdit
           {
             count++;
             if (count >= mOutputText.Lines.Length
-              && false == NetString.HasValue(line))
+              && !NetString.HasValue(line))
             {
               break;
             }
@@ -145,7 +145,7 @@ namespace LJCGenTextEdit
             if (DialogResult.Yes == MessageBox.Show(message, "Save Confirmation"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-              mParent.mFilePaths.OutputPath = targetFileSpec;
+              EditList.mFilePaths.OutputPath = targetFileSpec;
             }
           }
         }
@@ -155,7 +155,7 @@ namespace LJCGenTextEdit
 
     #region Class Data
 
-    private readonly EditList mParent;
+    private readonly EditList EditList;
     private readonly TextBox mOutputTextBox;
     private readonly LJCRtControl mOutputText;
     #endregion

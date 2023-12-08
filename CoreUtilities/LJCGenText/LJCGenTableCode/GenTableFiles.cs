@@ -23,7 +23,7 @@ namespace LJCGenTableCode
       string xmlData = GetDataXml(dataManager);
       WriteDataXml(genFileSpecs, dataManager.TableName, xmlData, out hasError);
 
-      if (false == hasError)
+      if (!hasError)
       {
         GenerateText genText = new GenerateText();
         foreach (GenFileSpec genFileSpec in genFileSpecs)
@@ -149,7 +149,7 @@ namespace LJCGenTableCode
     {
       DefaultValues retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = "DefaultValues.xml";
       }
