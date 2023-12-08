@@ -22,7 +22,7 @@ namespace LJCNetCommon
       }
       // Next Statement - Change - 1/22
       if (-1 == path.IndexOf(".")
-        && false == Directory.Exists(path))
+        && !Directory.Exists(path))
       {
         Directory.CreateDirectory(path);
       }
@@ -35,7 +35,7 @@ namespace LJCNetCommon
       string retValue;
 
       // Folders must end in a slash
-      if (false == fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+      if (!fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
       {
         fromPath += Path.DirectorySeparatorChar;
       }
@@ -55,14 +55,14 @@ namespace LJCNetCommon
       string errorText;
       string[] retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         errorText = "Missing file specification.\r\n";
         throw new ArgumentException(errorText);
       }
       else
       {
-        if (false == File.Exists(fileSpec))
+        if (!File.Exists(fileSpec))
         {
           errorText = $"File '{fileSpec}' was not found.\r\n";
           throw new FileNotFoundException(errorText);

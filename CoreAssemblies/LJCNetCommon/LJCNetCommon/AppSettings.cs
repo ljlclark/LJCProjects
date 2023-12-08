@@ -24,7 +24,7 @@ namespace LJCNetCommon
       string errorText;
 
       FileSpec = fileSpec;
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         string value = Directory.GetCurrentDirectory();
         errorText = $"File '{FileSpec}' was not found.";
@@ -61,7 +61,7 @@ namespace LJCNetCommon
       string keyValue = GetKeyValue(keyName);
       if (NetString.HasValue(keyValue))
       {
-        retValue = true;
+        //retValue = true;
         bool.TryParse(keyValue, out retValue);
       }
       return retValue;
@@ -100,7 +100,7 @@ namespace LJCNetCommon
       Color retValue;
 
       // Check for comma.
-      if (false == rgbText.Contains(","))
+      if (!rgbText.Contains(","))
       {
         errorText = "'rgbText' does not contain commas.";
         throw new ArgumentException(errorText);
@@ -131,7 +131,7 @@ namespace LJCNetCommon
       string errorText;
       int retValue;
 
-      if (false == NetString.IsDigits(text))
+      if (!NetString.IsDigits(text))
       {
         errorText = "Color value does not contain only digits.";
         throw new ArgumentException(errorText);
@@ -161,7 +161,7 @@ namespace LJCNetCommon
       {
         if (0 == settings.Count())
         {
-          if (false == allowMissingValue)
+          if (!allowMissingValue)
           {
             errorText = $"AppSetting 'key={keyName}' not found.";
             throw new MissingMemberException(errorText);
@@ -192,7 +192,7 @@ namespace LJCNetCommon
     private string GetKeyValue(string keyName)
     {
       string retValue = GetString(keyName);
-      if (false == NetString.HasValue(retValue))
+      if (!NetString.HasValue(retValue))
       {
         string errorText = $"AppSetting 'key={keyName}' not found.";
         throw new MissingMemberException(errorText);

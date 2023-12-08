@@ -150,7 +150,7 @@ namespace LJCNetCommon
       get { return mValue; }
       set
       {
-        if (false == NetCommon.IsEqual(mValue, value))
+        if (!NetCommon.IsEqual(mValue, value))
         {
           IsChanged = true;
           mValue = value;

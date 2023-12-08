@@ -171,7 +171,7 @@ namespace LJCNetCommon
 
         // Set empty property name the same as the column name.
         if (NetString.HasValue(mColumnName)
-          && false == NetString.HasValue(mPropertyName))
+          && !NetString.HasValue(mPropertyName))
         {
           PropertyName = ColumnName;
         }
@@ -234,7 +234,7 @@ namespace LJCNetCommon
       set
       {
         // Update if value is changed.
-        if (false == NetCommon.IsEqual(mValue, value))
+        if (!NetCommon.IsEqual(mValue, value))
         {
           IsChanged = true;
           mValue = value;

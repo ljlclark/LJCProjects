@@ -37,7 +37,7 @@ namespace LJCNetCommon
       TypeReference = null;
       MethodName = null;
       MethodInfo = null;
-      if (false == string.IsNullOrWhiteSpace(FileSpec)
+      if (NetString.HasValue(FileSpec)
         && File.Exists(FileSpec))
       {
         Assembly = Assembly.LoadFrom(FileSpec);
@@ -111,7 +111,7 @@ namespace LJCNetCommon
           parameterInfos = selectedConstructorInfo.GetParameters();
           foreach (ParameterInfo parameterInfo in parameterInfos)
           {
-            if (false == first)
+            if (!first)
             {
               builder.Append(", ");
             }
@@ -144,7 +144,7 @@ namespace LJCNetCommon
 
       FieldInfo = null;
       if (TypeReference != null
-        && false == string.IsNullOrWhiteSpace(FieldName))
+        && NetString.HasValue(FieldName))
       {
         FieldInfo = TypeReference.GetField(FieldName);
       }
@@ -268,7 +268,7 @@ namespace LJCNetCommon
           parameterInfos = selectedMethodInfo.GetParameters();
           foreach (ParameterInfo parameterInfo in parameterInfos)
           {
-            if (false == first)
+            if (!first)
             {
               builder.Append(", ");
             }
@@ -303,7 +303,7 @@ namespace LJCNetCommon
 
       PropertyInfo = null;
       if (TypeReference != null
-        && false == string.IsNullOrWhiteSpace(PropertyName))
+        && NetString.HasValue(PropertyName))
       {
         if ("Item" == PropertyName)
         {
@@ -327,7 +327,7 @@ namespace LJCNetCommon
       MethodName = null;
       MethodInfo = null;
       if (Assembly != null
-        && false == string.IsNullOrWhiteSpace(TypeName))
+        && NetString.HasValue(TypeName))
       {
         TypeReference = Assembly.GetType(TypeName);
       }
@@ -375,7 +375,7 @@ namespace LJCNetCommon
         bool isFirst = true;
         foreach (ParameterInfo parameterInfo in parameterInfos)
         {
-          if (false == isFirst)
+          if (!isFirst)
           {
             builder.Append(", ");
           }
@@ -494,7 +494,7 @@ namespace LJCNetCommon
 
         foreach (Type typeArgument in genericValues)
         {
-          if (false == isFirst)
+          if (!isFirst)
           {
             builder.Append(", ");
           }
@@ -557,7 +557,7 @@ namespace LJCNetCommon
         bool isFirst = true;
         foreach (ParameterInfo parameterInfo in parameterInfos)
         {
-          if (false == isFirst)
+          if (!isFirst)
           {
             builder.Append(", ");
           }
@@ -700,7 +700,7 @@ namespace LJCNetCommon
         {
           builder.Append("interface ");
         }
-        if (type.IsValueType && false == type.IsEnum)
+        if (type.IsValueType && !type.IsEnum)
         {
           builder.Append("struct ");
         }
@@ -750,7 +750,7 @@ namespace LJCNetCommon
           {
             if (IsNotCommonInterface(implementedType))
             {
-              if (false == hasQualifiers)
+              if (!hasQualifiers)
               {
                 builder.Append(": ");
               }
@@ -830,8 +830,8 @@ namespace LJCNetCommon
       bool retValue = false;
 
       if (methodInfo != null
-        && false == methodInfo.Name.StartsWith("get_")
-        && false == methodInfo.Name.StartsWith("set_"))
+        && !methodInfo.Name.StartsWith("get_")
+        && !methodInfo.Name.StartsWith("set_"))
       {
         retValue = true;
       }

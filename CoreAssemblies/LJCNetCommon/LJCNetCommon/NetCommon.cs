@@ -25,7 +25,7 @@ namespace LJCNetCommon
     {
       if (typeof(string) == argument.GetType())
       {
-        if (false == NetString.HasValue(NetCommon.GetString(argument)))
+        if (!NetString.HasValue(GetString(argument)))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -455,7 +455,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (false == string.IsNullOrWhiteSpace(text))
+      if (NetString.HasValue(text))
       {
         retValue = text.Replace("&lt;", "<");
         retValue = retValue.Replace("&gt;", ">");
@@ -472,7 +472,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (false == string.IsNullOrWhiteSpace(text))
+      if (NetString.HasValue(text))
       {
         retValue = text.Replace("&", "&amp;");
         retValue = retValue.Replace("<", "&lt;");
@@ -494,7 +494,7 @@ namespace LJCNetCommon
       string errorText;
       object retValue = null;
 
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         errorText = $"File '{fileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -562,7 +562,7 @@ namespace LJCNetCommon
       FileStream fileStream;
       string errorText;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         errorText = "Missing file specification.";
         throw new ArgumentException(errorText);
@@ -570,7 +570,7 @@ namespace LJCNetCommon
 
       string folder = Path.GetDirectoryName(fileSpec);
       if (NetString.HasValue(folder)
-        && false == Directory.Exists(folder))
+        && !Directory.Exists(folder))
       {
         Directory.CreateDirectory(folder);
       }
@@ -921,7 +921,7 @@ namespace LJCNetCommon
       string retValue = default;
 
       if (value != null
-        && false == string.IsNullOrWhiteSpace(value.ToString()))
+        && NetString.HasValue(value.ToString()))
       {
         retValue = value.ToString().Trim();
       }

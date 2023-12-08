@@ -20,7 +20,7 @@ namespace LJCNetCommon
     {
       List<string> retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = DefaultFileName;
       }
@@ -129,7 +129,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public void Serialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = DefaultFileName;
       }

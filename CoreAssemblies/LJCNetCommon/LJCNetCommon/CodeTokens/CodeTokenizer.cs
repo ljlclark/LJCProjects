@@ -170,7 +170,7 @@ namespace LJCNetCommon
     {
       bool retValue = false;
 
-      if (false == IsCodeXmlComment(text)
+      if (!IsCodeXmlComment(text)
         && text.Trim().StartsWith("//"))
       {
         retValue = true;
@@ -193,7 +193,7 @@ namespace LJCNetCommon
         }
         else
         {
-          if (false == firstPass)
+          if (!firstPass)
           {
             keyword = DataTypes.SearchName(text);
             if (NetString.HasValue(keyword))
@@ -222,11 +222,11 @@ namespace LJCNetCommon
       {
         isException = true;
       }
-      if (false == isException)
+      if (!isException)
       {
         retValue = true;
       }
-      if (false == retValue)
+      if (!retValue)
       {
         if (text.Contains("\"")
           || text.Contains("'"))
@@ -264,7 +264,7 @@ namespace LJCNetCommon
         }
         else
         {
-          if (false == firstPass)
+          if (!firstPass)
           {
             keyword = Keywords.SearchName(text);
             if (NetString.HasValue(keyword))
@@ -308,7 +308,7 @@ namespace LJCNetCommon
         }
         else
         {
-          if (false == firstPass)
+          if (!firstPass)
           {
             keyword = Modifiers.SearchName(text);
             if (NetString.HasValue(keyword))

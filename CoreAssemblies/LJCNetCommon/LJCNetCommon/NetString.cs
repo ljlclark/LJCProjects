@@ -26,7 +26,7 @@ namespace LJCNetCommon
       string workString;
       bool retValue = true;
 
-      if (false == HasValue(text))
+      if (!HasValue(text))
       {
         retValue = false;
       }
@@ -35,7 +35,7 @@ namespace LJCNetCommon
         workString = text.Trim();
         foreach (char digit in workString)
         {
-          if (false == char.IsDigit(digit))
+          if (!char.IsDigit(digit))
           {
             retValue = false;
             break;
@@ -231,7 +231,7 @@ namespace LJCNetCommon
       string retValue;
 
       var findValue = "<";
-      if (false == NetString.HasValue(tagName))
+      if (!HasValue(tagName))
       {
         findValue += tagName;
       }
@@ -241,12 +241,12 @@ namespace LJCNetCommon
 
       // Eliminate attributes.
       if (name != null
-        && false == findValue.Contains("/"))
+        && !findValue.Contains("/"))
       {
         var index = 0;
-        name = NetString.GetStringWithDelimiters(retValue
+        name = GetStringWithDelimiters(retValue
           , retValue[0].ToString(), ref index, " ");
-        if (NetString.HasValue(name))
+        if (HasValue(name))
         {
           name = name.Substring(0, name.Length - 1);
         }
@@ -530,9 +530,10 @@ namespace LJCNetCommon
     /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
     public static void AddMissingArgument(string message, string argument)
     {
-      if (false == NetString.HasValue(argument))
+      if (!NetString.HasValue(argument))
       {
         message += $"{argument} is missing.\r\n";
+        throw new ArgumentException(message);
       }
     }
 

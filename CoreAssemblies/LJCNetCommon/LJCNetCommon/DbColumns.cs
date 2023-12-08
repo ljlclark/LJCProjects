@@ -70,7 +70,7 @@ namespace LJCNetCommon
     {
       DbColumns retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -250,7 +250,7 @@ namespace LJCNetCommon
         RenameAs = renameAs
       };
 
-      if (false == NetString.HasValue(renameAs))
+      if (!NetString.HasValue(renameAs))
       {
         retValue.RenameAs = retValue.PropertyName;
       }
@@ -345,7 +345,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
