@@ -34,7 +34,7 @@ namespace LJCWinFormControls
     {
       using (StreamReader streamReader = File.OpenText(fileSpec))
       {
-        while (false == streamReader.EndOfStream)
+        while (!streamReader.EndOfStream)
         {
           Lines.Add(streamReader.ReadLine());
         }
@@ -145,7 +145,7 @@ namespace LJCWinFormControls
 
           // Stop processing line if a data value.
           if (tokens.IsDataValue(stripToken)
-            && false == token.Contains("("))
+            && !token.Contains("("))
           {
             tokens.EndTokens(ref tokenIndex);
             break;
@@ -202,7 +202,7 @@ namespace LJCWinFormControls
       else
       {
         // XML Comment processing has not started.
-        if (false == IsInProcess(isSummary))
+        if (!IsInProcess(isSummary))
         {
           if (tokens.HasBeginDelimiter(lineText, beginTag))
           {
@@ -258,7 +258,7 @@ namespace LJCWinFormControls
       bool retValue = false;
 
       if ((isSummary && IsSummaryInProcess)
-        || (false == isSummary && IsReturnsInProcess))
+        || (!isSummary && IsReturnsInProcess))
       {
         retValue = true;
       }

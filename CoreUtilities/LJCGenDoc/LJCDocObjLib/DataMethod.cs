@@ -81,7 +81,7 @@ namespace LJCDocObjLib
     {
       // Get Remarks IsPublic.
       IsPublic = DataCommon.IsPublic(Remark, out bool hasSyntax);
-      if (false == hasSyntax)
+      if (!hasSyntax)
       {
         // Get reflection IsPublic.
         SetMethodInfo();
@@ -143,7 +143,7 @@ namespace LJCDocObjLib
       set
       {
         mName = NetString.InitString(value);
-        if (false == NetString.HasValue(mOverloadName))
+        if (!NetString.HasValue(mOverloadName))
         {
           mOverloadName = mName;
         }

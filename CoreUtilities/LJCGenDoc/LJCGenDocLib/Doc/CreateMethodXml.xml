@@ -42,7 +42,7 @@
       The Example Remarks elements.
     </summary>
     <param name="section">The Section object.</param>
-    <returns>True if remarks exist, otherwise false.</returns>
+    <returns>true if remarks exist; otherwise, false.</returns>
   </SetExampleRemarks>
   <SetMethodInfo>
     <summary>
@@ -54,6 +54,6 @@
       Sets the Object Remarks elements.
     </summary>
     <param name="section">The Section object.</param>
-    <returns>True if remarks exist, otherwise false.</returns>
+    <returns>true if remarks exist; otherwise, false.</returns>
   </SetMethodRemarks>
 </items>

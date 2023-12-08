@@ -35,6 +35,6 @@
     <param name="sectionName">The Section name.</param>
     <param name="repeatItemName">The RepeatItem name.</param>
     <param name="replacementName">The Replacement name.</param>
-    <returns>True if successful, otherwise false.</returns>
+    <returns>true if successful; otherwise, false.</returns>
   </DeleteReplacement>
 </items>

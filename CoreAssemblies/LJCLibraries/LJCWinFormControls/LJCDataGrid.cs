@@ -300,7 +300,7 @@ namespace LJCWinFormControls
       int columnIndex = Columns.Add(checkColumn);
       retValue = Columns[columnIndex];
       retValue.HeaderText = null;
-      if (false == string.IsNullOrWhiteSpace(caption))
+      if (NetString.HasValue(caption))
       {
         retValue.HeaderText = caption;
       }

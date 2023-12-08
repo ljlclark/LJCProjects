@@ -81,7 +81,7 @@ namespace LJCGenTextLib
         {
           OutLines.Clear();
           GenSectionNone();
-          if (!string.IsNullOrWhiteSpace(OutFileSpec))
+          if (NetString.HasValue(OutFileSpec))
           {
             string folderPath = Path.GetDirectoryName(OutFileSpec);
             if (NetString.HasValue(folderPath)
@@ -517,7 +517,7 @@ namespace LJCGenTextLib
       string errorText = null;
       Sections retValue;
 
-      if (string.IsNullOrWhiteSpace(dataFileSpec))
+      if (!NetString.HasValue(dataFileSpec))
       {
         errorText += "Missing Data file specification.\r\n";
         throw new ArgumentException(errorText);
@@ -548,7 +548,7 @@ namespace LJCGenTextLib
     {
       string retValue = null;
 
-      if (!string.IsNullOrWhiteSpace(outputFileSpec))
+      if (NetString.HasValue(outputFileSpec))
       {
         outputFileSpec = outputFileSpec.Trim();
         if (outputFileSpec.Contains("*."))

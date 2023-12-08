@@ -117,7 +117,7 @@
       Compares the current row against the last selected row.
     </summary>
     <param name="e">The event arguments.</param>
-    <returns>True if the row has changed otherwise false.</returns>
+    <returns>true if the row has changed; otherwise, false.</returns>
   </LJCIsDifferentRow>
   <LJCSetLastRow>
     <summary>

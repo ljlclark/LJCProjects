@@ -82,7 +82,7 @@ namespace LJCGenDocLib
 
       // Syntax and Summary
       AddSyntax(replacements);
-      if (false == NetString.HasValue(DataMethod.Summary))
+      if (!NetString.HasValue(DataMethod.Summary))
       {
         string text = $"{DataType.NamespaceValue}.{DataType.Name}";
         GenRoot.LogMissing("Method Summary", text, DataMethod.Name);
@@ -156,7 +156,7 @@ namespace LJCGenDocLib
       string syntax = DataCommon.GetSyntax(DataMethod.Remark
         , out bool hasSyntax);
       bool isConstructor = false;
-      if (false == hasSyntax
+      if (!hasSyntax
        && AssemblyReflect != null)
       {
         SetMethodInfo();
@@ -172,7 +172,7 @@ namespace LJCGenDocLib
       }
       if (isConstructor || AssemblyReflect.IsNotProperty(AssemblyReflect.MethodInfo))
       {
-        if (false == NetString.HasValue(syntax))
+        if (!NetString.HasValue(syntax))
         {
           string text = $"{DataType.NamespaceValue}.{DataType.Name}";
           GenRoot.LogMissing("Method Syntax", text, DataMethod.Name);
@@ -201,7 +201,7 @@ namespace LJCGenDocLib
           var repeatItem = section.RepeatItems.Add(name);
           var replacements = repeatItem.Replacements;
           replacements.Add("_ParameterName_", name);
-          if (false == NetString.HasValue(text))
+          if (!NetString.HasValue(text))
           {
             var errorText
               = $"{DataType.NamespaceValue}.{DataType.Name}.{DataMethod.Name}";
@@ -301,7 +301,7 @@ namespace LJCGenDocLib
           if (showGroups)
           {
             // This line is different from Type.
-            if (false == para.Text.Trim().StartsWith("Syntax:")
+            if (!para.Text.Trim().StartsWith("Syntax:")
               && NetString.HasValue(para.Text))
             {
               retValue = true;

@@ -44,6 +44,6 @@
     <param name="lineIndex">The line index value.</param>
     <param name="beginTag">The begin delimiter value.</param>
     <param name="endTag">The end delimiter value.</param>
-    <param name="isSummary">True if a Summary comment, otherwise false.</param>
+    <param name="isSummary">true if a Summary comment; otherwise, false.</param>
   </ProcessXmlComment>
 </items>

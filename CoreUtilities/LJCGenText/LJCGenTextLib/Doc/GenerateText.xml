@@ -116,6 +116,6 @@
       Checks for a valid SectionBegin or SectionEnd directive.
     </summary>
     <param name="directive">The directive object.</param>
-    <returns>True if a valid SectionBegin or SectionEnd directive otherwise false.</returns>
+    <returns>true if a valid SectionBegin or SectionEnd directive; otherwise, false.</returns>
   </IsSectionDirective>
 </items>

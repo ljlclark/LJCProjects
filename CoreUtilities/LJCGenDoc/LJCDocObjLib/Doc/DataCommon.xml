@@ -57,6 +57,6 @@
     </summary>
     <param name="remark">The remarks object.</param>
     <param name="hasSyntax">Indicates if the Syntax string exists.</param>
-    <returns>True if public, otherwise false.</returns>
+    <returns>true if public; otherwise, false.</returns>
   </IsPublic>
 </items>

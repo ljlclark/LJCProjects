@@ -47,7 +47,7 @@ namespace LJCGenDocLib
           = new CreateAssemblyXml(dataAssembly);
         string dataFileSpec = $"XMLFiles\\{dataAssembly.Name}.xml";
         string dataXml = createAssemblyXml.GetXmlData();
-        if (false == NetString.HasValue(dataXml))
+        if (!NetString.HasValue(dataXml))
         {
           Console.WriteLine("Missing Assembly XML Data.");
         }

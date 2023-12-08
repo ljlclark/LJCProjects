@@ -51,7 +51,7 @@ namespace LJCGenDocLib
         , DataAssembly, DataType, DataField, assemblyReflect);
       string dataFileSpec = $"XMLFiles\\{DataField.Name}.xml";
       string dataXml = createFieldXml.GetXmlData();
-      if (false == NetString.HasValue(dataXml))
+      if (!NetString.HasValue(dataXml))
       {
         Console.WriteLine("Missing Field XML Data.");
       }

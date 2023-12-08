@@ -89,7 +89,7 @@ namespace LJCGenDocLib
         , DataAssembly, DataType, AssemblyReflect);
       string dataFileSpec = $"XMLFiles\\{DataType.Name}.xml";
       string dataXml = createTypeXml.GetXmlData();
-      if (false == NetString.HasValue(dataXml))
+      if (!NetString.HasValue(dataXml))
       {
         Console.WriteLine("Missing Type/Class XML Data.");
       }

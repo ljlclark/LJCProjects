@@ -25,7 +25,7 @@
       Creates the Class Groups
     </summary>
     <param name="sections">The Sections collection.</param>
-    <returns>True if groups were added, otherwise false.</returns>
+    <returns>true if groups were added; otherwise, false.</returns>
   </AddClassGroups>
   <AddClassList>
     <summary>
@@ -45,6 +45,6 @@
       Sets the Assembly Remarks elements.
     </summary>
     <param name="section">The Section object.</param>
-    <returns>True if successful, otherwise false.</returns>
+    <returns>true if successful; otherwise, false.</returns>
   </SetAssemblyRemarks>
 </items>

@@ -40,7 +40,7 @@ namespace LJCGenDocLib
       string logName = "Missing.txt";
       string text;
 
-      if (false == File.Exists(logName))
+      if (!File.Exists(logName))
       {
         File.WriteAllText(logName, "");
       }
@@ -120,7 +120,7 @@ namespace LJCGenDocLib
         GenAssembly dataAssemblyGen = new GenAssembly(this, dataAssembly);
         string assemblyPageName = $"{dataAssembly.Name}.html";
         string assemblyPageSpec;
-        if (false == NetString.HasValue(dataAssemblyGen.HTMLFileName))
+        if (!NetString.HasValue(dataAssemblyGen.HTMLFileName))
         {
           assemblyPageSpec = assemblyPageName;
         }
@@ -264,7 +264,7 @@ namespace LJCGenDocLib
     // Write the file.
     private void WriteFile(string htmlText)
     {
-      if (false == Directory.Exists(HTMLFolderName))
+      if (!Directory.Exists(HTMLFolderName))
       {
         Directory.CreateDirectory(HTMLFolderName);
       }

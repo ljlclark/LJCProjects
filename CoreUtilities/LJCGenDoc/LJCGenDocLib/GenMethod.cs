@@ -59,7 +59,7 @@ namespace LJCGenDocLib
           , DataAssembly, DataType, DataMethod, assemblyReflect);
         string dataFileSpec = $"XMLFiles\\{DataMethod.Name}.xml";
         string dataXml = createMethodXml.GetXmlData();
-        if (false == NetString.HasValue(dataXml))
+        if (!NetString.HasValue(dataXml))
         {
           Console.WriteLine("Missing Method XML Data.");
         }

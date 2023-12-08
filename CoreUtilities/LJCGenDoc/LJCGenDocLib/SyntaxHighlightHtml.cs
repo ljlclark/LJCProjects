@@ -105,7 +105,7 @@ namespace LJCGenDocLib
 
           // Stop processing line if a data value.
           if (IsDataValue(token)
-            && false == token.Contains("("))
+            && !token.Contains("("))
           {
             EndTokens(tokens, ref tokenIndex);
             break;
@@ -208,7 +208,7 @@ namespace LJCGenDocLib
     {
       UserTypes = new UserTypes();
       dataTypeName = dataTypeName.Replace(".", null);
-      if (false == Directory.Exists("UserTypeFiles"))
+      if (!Directory.Exists("UserTypeFiles"))
       {
         Directory.CreateDirectory("UserTypeFiles");
       }
@@ -265,7 +265,7 @@ namespace LJCGenDocLib
 
           // Stop processing line if a data value.
           if (IsDataValue(token)
-            && false == token.Contains("("))
+            && !token.Contains("("))
           {
             EndTokens(tokens, ref tokenIndex);
             break;
@@ -287,7 +287,7 @@ namespace LJCGenDocLib
           {
             if ((nextToken = GetNextToken(tokens, ref tokenIndex)) != null)
             {
-              if (false == IsAnyKeyValue(nextToken))
+              if (!IsAnyKeyValue(nextToken))
               {
                 AddMissingUserType(nextToken);
                 ProcessGenericToken(ref nextToken, true);
@@ -306,7 +306,7 @@ namespace LJCGenDocLib
             isUsing = true;
           }
 
-          if (false == isUsing)
+          if (!isUsing)
           {
             // Process static class method.
             if ((dotIndex = token.IndexOf(".")) != -1)
@@ -372,7 +372,7 @@ namespace LJCGenDocLib
           {
             if (IsLibType(genericToken))
             {
-              if (false == getTypesOnly)
+              if (!getTypesOnly)
               {
                 AddLibTypeSpan(ref genericTokens[genericIndex]);
               }
@@ -381,7 +381,7 @@ namespace LJCGenDocLib
 
             if (IsDataType(genericToken))
             {
-              if (false == getTypesOnly)
+              if (!getTypesOnly)
               {
                 AddCommonTypeSpan(ref genericTokens[genericIndex]);
               }
@@ -390,7 +390,7 @@ namespace LJCGenDocLib
 
             if (IsUserType(genericToken))
             {
-              if (false == getTypesOnly)
+              if (!getTypesOnly)
               {
                 AddUserTypeSpan(ref genericTokens[genericIndex]);
               }
@@ -398,7 +398,7 @@ namespace LJCGenDocLib
             }
 
             AddMissingUserType(genericToken);
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddUserTypeSpan(ref genericTokens[genericIndex]);
             }
@@ -407,7 +407,7 @@ namespace LJCGenDocLib
         }
 
         // Rebuild token.
-        if (false == getTypesOnly)
+        if (!getTypesOnly)
         {
           bool first = true;
           StringBuilder builder = new StringBuilder(64);
@@ -415,9 +415,9 @@ namespace LJCGenDocLib
           builder.Append("&lt;");
           foreach (string genericToken in genericTokens)
           {
-            if (false == genericToken.Contains(")"))
+            if (!genericToken.Contains(")"))
             {
-              if (false == first)
+              if (!first)
               {
                 builder.Append(", ");
               }
@@ -445,7 +445,7 @@ namespace LJCGenDocLib
 
         // If there are arguments.
         if (newTokens.Length > 1
-          && false == newTokens[1].StartsWith(")"))
+          && !newTokens[1].StartsWith(")"))
         {
           // If not last argument token.
           if (-1 == newTokens[1].IndexOf(")"))
@@ -519,7 +519,7 @@ namespace LJCGenDocLib
     private void ProcessModifierTokens(string[] tokens, ref short tokenIndex
       , bool getTypesOnly = false)
     {
-      if (false == getTypesOnly)
+      if (!getTypesOnly)
       {
         AddModifierSpan(ref tokens[tokenIndex]);
       }
@@ -533,7 +533,7 @@ namespace LJCGenDocLib
         {
           if (IsModifier(token))
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddModifierSpan(ref tokens[tokenIndex]);
             }
@@ -544,9 +544,9 @@ namespace LJCGenDocLib
             , getTypesOnly);
 
           // Treat as UserType or other RefType.
-          if (false == isCommonType)
+          if (!isCommonType)
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               // *** Next Statement *** Add - 11/29/22
               if (tokenIndex < tokens.Length - 1)
@@ -567,7 +567,7 @@ namespace LJCGenDocLib
     private void ProcessRefTypeTokens(string[] tokens, ref short tokenIndex
       , bool getTypesOnly = false)
     {
-      if (false == getTypesOnly)
+      if (!getTypesOnly)
       {
         AddRefTypeSpan(ref tokens[tokenIndex]);
       }
@@ -575,7 +575,7 @@ namespace LJCGenDocLib
       string token = GetToken(tokens, tokenIndex);
       if (token != null)
       {
-        if (false == getTypesOnly)
+        if (!getTypesOnly)
         {
           AddUserTypeSpan(ref tokens[tokenIndex]);
         }
@@ -592,7 +592,7 @@ namespace LJCGenDocLib
       }
       else
       {
-        if (false == IsReturnsInProcess)
+        if (!IsReturnsInProcess)
         {
           if (IsBeginReturns(text))
           {
@@ -621,7 +621,7 @@ namespace LJCGenDocLib
       }
       else
       {
-        if (false == IsSummaryInProcess)
+        if (!IsSummaryInProcess)
         {
           if (IsBeginSummary(text))
           {
@@ -647,12 +647,12 @@ namespace LJCGenDocLib
       bool retValue = false;
 
       // Look for two unknown keys together.
-      if (false == IsAnyKeyValue(token))
+      if (!IsAnyKeyValue(token))
       {
         // Processes the next token here so increments tokenIndex.
         if ((nextToken = GetNextToken(tokens, ref tokenIndex)) != null)
         {
-          if (false == IsAnyKeyValue(nextToken))
+          if (!IsAnyKeyValue(nextToken))
           {
             AddMissingUserType(token);
 
@@ -693,7 +693,7 @@ namespace LJCGenDocLib
 
           if (IsKeyword(token))
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddKeyWordSpan(ref tokens[tokenIndex]);
             }
@@ -702,7 +702,7 @@ namespace LJCGenDocLib
 
           if (IsDataType(token))
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddCommonTypeSpan(ref tokens[index]);
             }
@@ -723,7 +723,7 @@ namespace LJCGenDocLib
 
           if (IsLibType(token))
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddLibTypeSpan(ref tokens[index]);
             }
@@ -736,7 +736,7 @@ namespace LJCGenDocLib
 
           if (IsUserType(token))
           {
-            if (false == getTypesOnly)
+            if (!getTypesOnly)
             {
               AddUserTypeSpan(ref tokens[index]);
             }
@@ -754,7 +754,7 @@ namespace LJCGenDocLib
             string tail = token.Substring(tailIndex + 1);
             if (IsUserType(tail))
             {
-              if (false == getTypesOnly)
+              if (!getTypesOnly)
               {
                 AddUserTypeSpan(ref tail);
               }
@@ -986,7 +986,7 @@ namespace LJCGenDocLib
     {
       bool retValue = false;
 
-      if (false == IsCodeXmlComment(text)
+      if (!IsCodeXmlComment(text)
         && text.Trim().StartsWith("//"))
       {
         retValue = true;
@@ -1023,7 +1023,7 @@ namespace LJCGenDocLib
           retValue = true;
         }
 
-        if (false == retValue)
+        if (!retValue)
         {
           retValue = IsUncommonDataType(stripText);
         }
@@ -1048,11 +1048,11 @@ namespace LJCGenDocLib
       {
         isException = true;
       }
-      if (false == isException)
+      if (!isException)
       {
         retValue = true;
       }
-      if (false == retValue)
+      if (!retValue)
       {
         if (text.Contains("\"")
           || text.Contains("'"))
@@ -1139,7 +1139,7 @@ namespace LJCGenDocLib
           retValue = true;
         }
 
-        if (false == retValue)
+        if (!retValue)
         {
           retValue = IsUncommonKeyword(stripText);
         }
@@ -1176,7 +1176,7 @@ namespace LJCGenDocLib
           retValue = true;
         }
 
-        if (false == retValue)
+        if (!retValue)
         {
           retValue = IsOtherModifier(text);
         }

@@ -174,7 +174,7 @@ namespace LJCGenDocLib
 
       foreach (DataType dataType in mOtherTypes)
       {
-        if (false == NetString.HasValue(dataType.Summary)
+        if (!NetString.HasValue(dataType.Summary)
           || (dataType.Summary != null
           && dataType.Summary.ToLower() != "nogen"))
         {
@@ -221,7 +221,7 @@ namespace LJCGenDocLib
               var repeatItem = section.RepeatItems.Add(fileName);
               var replacements = repeatItem.Replacements;
               replacements.Add("_LinkFile_", fileSpec);
-              if (false == NetString.HasValue(text))
+              if (!NetString.HasValue(text))
               {
                 var errorText = $"{dataType.NamespaceValue}.{dataType.Name}";
                 GenRoot.LogMissing("Link FileName", errorText, fileSpec);

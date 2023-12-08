@@ -38,7 +38,7 @@
       Create the Method Groups
     </summary>
     <param name="sections">The Sections collection.</param>
-    <returns>True if groups were added, otherwise false.</returns>
+    <returns>true if groups were added; otherwise, false.</returns>
   </AddMethodGroups>
   <AddMethods>
     <summary>
@@ -90,13 +90,13 @@
       The Example Remarks elements.
     </summary>
     <param name="section">The Section object.</param>
-    <returns>True if remarks exist, otherwise false.</returns>
+    <returns>true if remarks exist; otherwise, false.</returns>
   </SetExampleRemarks>
   <SetTypeRemarks>
     <summary>
       Sets the Object Remarks elements.
     </summary>
     <param name="section">The Section object.</param>
-    <returns>True if remarks exist, otherwise false.</returns>
+    <returns>true if remarks exist; otherwise, false.</returns>
   </SetTypeRemarks>
 </items>

@@ -51,7 +51,7 @@ namespace LJCGenDocLib
         , DataAssembly, DataType, DataProperty, assemblyReflect);
       string dataFileSpec = $"XMLFiles\\{DataProperty.Name}.xml";
       string dataXml = createPropertyXml.GetXmlData();
-      if (false == NetString.HasValue(dataXml))
+      if (!NetString.HasValue(dataXml))
       {
         Console.WriteLine("Missing Property XML Data.");
       }

@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenCommon.cs
+using LJCNetCommon;
 using System;
 using System.IO;
 
@@ -15,7 +16,7 @@ namespace LJCGenTextLib
       string[] retValue = null;
 
       errorText = null;
-      if (string.IsNullOrWhiteSpace(templateFileSpec))
+      if (!NetString.HasValue(templateFileSpec))
       {
         errorText += "Missing Template file specification.\r\n";
       }

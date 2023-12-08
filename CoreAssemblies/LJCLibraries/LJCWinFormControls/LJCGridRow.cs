@@ -99,7 +99,7 @@ namespace LJCWinFormControls
     {
       string retVal = null;
 
-      if (false == IsDbMinDate(dateTime))
+      if (!IsDbMinDate(dateTime))
       {
         retVal = dateTime.ToString("MM/dd/yyyy");
       }

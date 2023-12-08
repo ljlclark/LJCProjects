@@ -57,7 +57,7 @@ namespace LJCGenDocLib
 
       // Syntax
       AddSyntax(replacements);
-      if (false == NetString.HasValue(DataField.Summary))
+      if (!NetString.HasValue(DataField.Summary))
       {
         string text = $"{DataType.NamespaceValue}.{DataType.Name}";
         GenRoot.LogMissing("Field Summary", text, DataField.Name);
@@ -106,13 +106,13 @@ namespace LJCGenDocLib
       if (DataField.Name != "components")
       {
         syntax = DataCommon.GetSyntax(DataField.Remark, out bool hasSyntax);
-        if (false == hasSyntax
+        if (!hasSyntax
          && AssemblyReflect != null)
         {
           SetFieldInfo();
           syntax = AssemblyReflect.GetFieldSyntax();
         }
-        if (false == NetString.HasValue(syntax))
+        if (!NetString.HasValue(syntax))
         {
           string text = $"{DataType.NamespaceValue}.{DataType.Name}";
           GenRoot.LogMissing("Field Syntax", text, DataField.Name);
@@ -160,7 +160,7 @@ namespace LJCGenDocLib
           if (showGroups)
           {
             // This line is different from Type.
-            if (false == para.Text.Trim().StartsWith("Syntax:")
+            if (!para.Text.Trim().StartsWith("Syntax:")
               && NetString.HasValue(para.Text))
             {
               retValue = true;

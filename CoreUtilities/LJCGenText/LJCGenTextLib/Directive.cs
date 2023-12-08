@@ -216,7 +216,7 @@ namespace LJCGenTextLib
     /// </summary>
     /// <param name="name">The Name value.</param>
     /// <param name="caseInsensitive">Use insensitive compare.</param>
-    /// <returns>True if equal, otherwise false.</returns>
+    /// <returns>true if equal; otherwise, false.</returns>
     public bool IsName(string name, bool caseInsensitive = true)
     {
       bool retValue = false;

@@ -49,7 +49,7 @@ namespace LJCGenDocDAL
     {
       DocGenGroups retValue;
 
-      if (false == string.IsNullOrWhiteSpace(xmlFileName))
+      if (NetString.HasValue(xmlFileName))
       {
         FileName = xmlFileName;
       }
@@ -157,7 +157,7 @@ namespace LJCGenDocDAL
       bool retValue = true;
 
       fileName = xmlFileName;
-      if (string.IsNullOrWhiteSpace(fileName))
+      if (!NetString.HasValue(fileName))
       {
         fileName = FileName;
       }

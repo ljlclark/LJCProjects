@@ -362,7 +362,7 @@ namespace LJCGenTextEdit
     {
       var text = OutputRichText.Text;
 
-      if (!string.IsNullOrWhiteSpace(text))
+      if (NetString.HasValue(text))
       {
         text = Decode(text);
         text = text.Replace("_ab_", "<span class=\"attrib\">");
@@ -378,7 +378,7 @@ namespace LJCGenTextEdit
     {
       var text = OutputRichText.Text;
 
-      if (!string.IsNullOrWhiteSpace(text))
+      if (NetString.HasValue(text))
       {
         text = Encode(text);
         text = text.Replace("<span class=\"attrib\">", "_ab_");

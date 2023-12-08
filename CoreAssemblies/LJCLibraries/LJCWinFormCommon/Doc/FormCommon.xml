@@ -52,13 +52,27 @@
   </SetToolState>
 
   <!-- Error Functions -->
+  <AddError>
+    <summary>
+      Standard Add error message.
+    </summary>
+    <param name="form">The parent form.</param>
+    <param name="affectedCount">The manager affected count.</param>
+    <returns>true if the affected count > 0; otherwise, false.</returns>
+  </AddError>
+  <DataError>
+    <summary>
+      Standard Duplicate error message.
+    </summary>
+    <param name="form">The parent form.</param>
+  </DataError>
   <ShowError>
     <summary>
       Displays the error text if not null.
     </summary>
     <param name="errorText">The error text.</param>
     <param name="caption">The message caption.</param>
-    <returns>True if there is an error, otherwise false.</returns>
+    <returns>true if there is an error; otherwise, false.</returns>
   </ShowError>
   <ShowHasError>
     <summary>
@@ -67,8 +81,16 @@
     <param name="errorText">The error text.</param>
     <param name="affectedCount">The affected records count.</param>
     <param name="caption">The message caption.</param>
-    <returns>True if there is an error, otherwise false.</returns>
+    <returns>true if there is an error; otherwise, false.</returns>
   </ShowHasError>
+  <UpdateError>
+    <summary>
+      Standard Update error message.
+    </summary>
+    <param name="form">The parent form.</param>
+    <param name="affectedCount">The manager affected count.</param>
+    <returns>true if the affected count > 0; otherwise, false.</returns>
+  </UpdateError>
 
   <!-- Field Key Handler Functions -->
   <HandleNumberOrEditKey>
@@ -76,14 +98,14 @@
       Checks the key character for a numeric or allowed control value.
     </summary>
     <param name="keyChar">The key character.</param>
-    <returns>True if number or control key, otherwise false.</returns>
+    <returns>true if number or control key; otherwise, false.</returns>
   </HandleNumberOrEditKey>
   <HandleSpace>
     <summary>
       Checks the key character for a space.
     </summary>
     <param name="keyChar">The key character.</param>
-    <returns>True if it is a space, otherwise false.</returns>
+    <returns>true if it is a space; otherwise, false.</returns>
   </HandleSpace>
   <StripBlanks>
     <summary>

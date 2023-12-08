@@ -21,7 +21,7 @@ namespace LJCWinFormControls
     {
       string line;
 
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         FormCommon.ShowError($"File '{fileSpec}' does not exist.");
       }
@@ -160,7 +160,7 @@ namespace LJCWinFormControls
     {
       string line;
 
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         FormCommon.ShowError($"File '{fileSpec}' does not exist.");
       }

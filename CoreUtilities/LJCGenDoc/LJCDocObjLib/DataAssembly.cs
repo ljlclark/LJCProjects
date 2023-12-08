@@ -29,7 +29,7 @@ namespace LJCDocObjLib
       bool success = true;
 
       DataRoot = dataRoot;
-      if (false == NetString.HasValue(xmlFileName))
+      if (!NetString.HasValue(xmlFileName))
       {
         success = false;
       }
@@ -38,10 +38,10 @@ namespace LJCDocObjLib
       {
         // Check if assembly file is HTML.
         isHtml = ".html" == Path.GetExtension(xmlFileName).ToLower();
-        if (false == isHtml)
+        if (!isHtml)
         {
           // Check if assembly XML file exists.
-          if (false == File.Exists(xmlFileName))
+          if (!File.Exists(xmlFileName))
           {
             success = false;
             string errorText = $"{DateTime.Now} - File '{xmlFileName}'"
@@ -53,7 +53,7 @@ namespace LJCDocObjLib
 
       if (success)
       {
-        if (false == isHtml)
+        if (!isHtml)
         {
           // Create the AssemblyReflect reference.
           XmlFileSpec = xmlFileName;
@@ -72,7 +72,7 @@ namespace LJCDocObjLib
           }
           Description = description;
           MainImage = mainImage;
-          if (false == isHtml)
+          if (!isHtml)
           {
             CreateTypesData();
           }
@@ -132,7 +132,7 @@ namespace LJCDocObjLib
       string fileSpecRoot;
       LJCAssemblyReflect retValue = null;
 
-      if (false == xmlFileSpec.Contains(@"\"))
+      if (!xmlFileSpec.Contains(@"\"))
       {
         fileSpecFolder = null;
       }
@@ -150,7 +150,7 @@ namespace LJCDocObjLib
         fileSpecRoot = fileName;
       }
       assemblyFileSpec = $"{fileSpecRoot}.exe";
-      if (false == File.Exists(assemblyFileSpec))
+      if (!File.Exists(assemblyFileSpec))
       {
         assemblyFileSpec = $"{fileSpecRoot}.dll";
       }

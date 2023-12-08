@@ -182,7 +182,7 @@ namespace LJCWinFormCommon
 
       if (null == Assembly)
       {
-        if (string.IsNullOrWhiteSpace(FileName))
+        if (!NetString.HasValue(FileName))
         {
           //retValue = false;
           errorText = "The ModuleReference.FileName value is not set.";
@@ -197,7 +197,7 @@ namespace LJCWinFormCommon
           }
           else
           {
-            if (false == File.Exists(FileName))
+            if (!File.Exists(FileName))
             {
               //retValue = false;
               errorText = $"The file '{FileName}' was not found.";
@@ -221,7 +221,7 @@ namespace LJCWinFormCommon
 
       if (null == ControlType)
       {
-        if (string.IsNullOrWhiteSpace(ModuleName))
+        if (!NetString.HasValue(ModuleName))
         {
           //retValue = false;
           errorText = "The ModuleReference.ModuleName value is not set.";

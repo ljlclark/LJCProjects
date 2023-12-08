@@ -57,7 +57,7 @@ namespace LJCGenDocLib
 
       // Syntax
       AddSyntax(replacements);
-      if (false == NetString.HasValue(DataProperty.Summary))
+      if (!NetString.HasValue(DataProperty.Summary))
       {
         string text = $"{DataType.NamespaceValue}.{DataType.Name}";
         GenRoot.LogMissing("Property Summary", text, DataProperty.Name);
@@ -105,13 +105,13 @@ namespace LJCGenDocLib
       {
         string syntax = DataCommon.GetSyntax(DataProperty.Remark
           , out bool hasSyntax);
-        if (false == hasSyntax
+        if (!hasSyntax
          && AssemblyReflect != null)
         {
           SetPropertyInfo();
           syntax = AssemblyReflect.GetPropertySyntax();
         }
-        if (false == NetString.HasValue(syntax))
+        if (!NetString.HasValue(syntax))
         {
           string text = $"{DataType.NamespaceValue}.{DataType.Name}";
           GenRoot.LogMissing("Property Syntax", text, DataProperty.Name);
@@ -160,7 +160,7 @@ namespace LJCGenDocLib
           if (showGroups)
           {
             // This line is different from Type.
-            if (false == para.Text.Trim().StartsWith("Syntax:")
+            if (!para.Text.Trim().StartsWith("Syntax:")
               && NetString.HasValue(para.Text))
             {
               retValue = true;

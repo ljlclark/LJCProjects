@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InfoWindow.cs
+using LJCNetCommon;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -54,7 +55,7 @@ namespace LJCWinFormControls
     public string LJCText
     {
       get { return Text; }
-      set { Text = string.IsNullOrWhiteSpace(value) ? Text : value.Trim(); }
+      set { Text = !NetString.HasValue((value)) ? Text : value.Trim(); }
     }
 
     /// <summary>Gets or sets the Info data.</summary>

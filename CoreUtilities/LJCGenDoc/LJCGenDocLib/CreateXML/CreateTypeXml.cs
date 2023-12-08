@@ -83,7 +83,7 @@ namespace LJCGenDocLib
       }
       mainReplacements.Add("_Namespace_", DataType.NamespaceValue);
 
-      if (false == NetString.HasValue(DataType.Summary))
+      if (!NetString.HasValue(DataType.Summary))
       {
         GenRoot.LogMissing("Type Summary", DataType.NamespaceValue, DataType.Name);
       }
@@ -339,7 +339,7 @@ namespace LJCGenDocLib
         {
           var fileSpec = dataLink.FileName;
           var text = dataLink.Text;
-          if (false == text.StartsWith("--"))
+          if (!text.StartsWith("--"))
           {
             if (null == section)
             {
@@ -351,7 +351,7 @@ namespace LJCGenDocLib
             var repeatItem = section.RepeatItems.Add(fileName);
             var replacements = repeatItem.Replacements;
             replacements.Add("_LinkFile_", fileSpec);
-            if (false == NetString.HasValue(text))
+            if (!NetString.HasValue(text))
             {
               var errorText = $"{DataType.NamespaceValue}.{DataType.Name}";
               GenRoot.LogMissing("Link FileName", errorText, fileSpec);
@@ -389,7 +389,7 @@ namespace LJCGenDocLib
     {
       string syntax = DataCommon.GetSyntax(DataType.Remark
         , out bool hasSyntax);
-      if (false == hasSyntax && AssemblyReflect != null)
+      if (!hasSyntax && AssemblyReflect != null)
       {
         string fullName = $"{DataType.NamespaceValue}.{DataType.Name}";
         //if (DataType.Name.Contains("Delegate"))
@@ -410,7 +410,7 @@ namespace LJCGenDocLib
           syntax = AssemblyReflect.GetTypeSyntax();
         }
       }
-      if (false == NetString.HasValue(syntax))
+      if (!NetString.HasValue(syntax))
       {
         GenRoot.LogMissing("Type Syntax", DataType.NamespaceValue, DataType.Name);
       }

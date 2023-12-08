@@ -24,7 +24,7 @@ namespace LJCWinFormCommon
     {
       bool retValue = false;
 
-      if (string.IsNullOrWhiteSpace(exceptionMessage))
+      if (!NetString.HasValue(exceptionMessage))
       {
         throw new ArgumentException("message", nameof(exceptionMessage));
       }
@@ -38,7 +38,7 @@ namespace LJCWinFormCommon
       bool isFirst = true;
       foreach (string fileSpec in fileSpecs)
       {
-        if (false == isFirst)
+        if (!isFirst)
         {
           builder.Append("\r\n");
         }
@@ -120,8 +120,8 @@ namespace LJCWinFormCommon
         }
         else
         {
-          if (false == menuItem.Name.EndsWith("Exit")
-            && false == menuItem.Name.EndsWith("Close"))
+          if (!menuItem.Name.EndsWith("Exit")
+            && !menuItem.Name.EndsWith("Close"))
           {
             menuItem.Enabled = enableEdit;
           }
@@ -149,7 +149,8 @@ namespace LJCWinFormCommon
 
     #region Error Functions
 
-    //  
+    // Standard Add error message.
+    /// <include path='items/AddError/*' file='Doc/FormCommon.xml'/>
     public static bool AddError(Form form, int affectedCount)
     {
       bool retValue = false;
@@ -166,7 +167,8 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
-    // 
+    // Standard Duplicate error message.
+    /// <include path='items/DataError/*' file='Doc/FormCommon.xml'/>
     public static void DataError(Form form)
     {
       var title = "Data Entry Error";
@@ -181,7 +183,6 @@ namespace LJCWinFormCommon
     {
       bool retValue = false;
 
-      //if (false == string.IsNullOrWhiteSpace(errorText))
       if (NetString.HasValue(errorText))
       {
         retValue = true;
@@ -202,7 +203,7 @@ namespace LJCWinFormCommon
       if (affectedCount < 1)
       {
         retValue = true;
-        if (string.IsNullOrWhiteSpace(errorText))
+        if (!NetString.HasValue(errorText))
         {
           errorText = "No records affected.";
           FormCommon.ShowError(errorText, caption);
@@ -211,7 +212,8 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
-    // 
+    // Standard Update error message.
+    /// <include path='items/UpdateError/*' file='Doc/FormCommon.xml'/>
     public static bool UpdateError(Form form, int affectedCount)
     {
       bool retValue = false;
@@ -277,7 +279,7 @@ namespace LJCWinFormCommon
 
       foreach (char character in text)
       {
-        if (false == char.IsDigit(character))
+        if (!char.IsDigit(character))
         {
           retValue = retValue.Replace(character.ToString(), "");
         }
@@ -289,7 +291,7 @@ namespace LJCWinFormCommon
     /// <include path='items/TextBoxNumeric_KeyPress/*' file='Doc/FormCommon.xml'/>
     public static void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
-      if (false == e.Handled)
+      if (!e.Handled)
       {
         e.Handled = HandleNumberOrEditKey(e.KeyChar);
       }
@@ -299,7 +301,7 @@ namespace LJCWinFormCommon
     /// <include path='items/TextBoxNoSpace_KeyPress/*' file='Doc/FormCommon.xml'/>
     public static void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
-      if (false == e.Handled)
+      if (!e.Handled)
       {
         e.Handled = HandleSpace(e.KeyChar);
       }
@@ -370,7 +372,7 @@ namespace LJCWinFormCommon
       // file specification.
       if (null == programName)
       {
-        if (false == File.Exists(arguments))
+        if (!File.Exists(arguments))
         {
           success = false;
           string message = $"The File '{arguments}'\r\n was not found.";
@@ -603,7 +605,7 @@ namespace LJCWinFormCommon
     {
       Point retValue = mousePosition;
       Rectangle rectangle = GetScreenRectangle(control);
-      if (false == rectangle.Contains(mousePosition))
+      if (!rectangle.Contains(mousePosition))
       {
         Point point = new Point((control.Left + control.Right) / 4
           , (control.Top + control.Bottom) / 4);
@@ -621,7 +623,7 @@ namespace LJCWinFormCommon
     {
       string retValue = text;
 
-      if (string.IsNullOrWhiteSpace(retValue))
+      if (!NetString.HasValue(retValue))
       {
         retValue = "-";
       }

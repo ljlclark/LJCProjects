@@ -23,11 +23,11 @@ namespace LJCGenDocDAL
     {
       DocClasses retValue;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         string errorText = $"File '{fileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
@@ -139,7 +139,7 @@ namespace LJCGenDocDAL
     /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

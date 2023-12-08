@@ -27,7 +27,7 @@ namespace TestSyntaxConsole
         Assembly assembly = assemblyReflect.Assembly;
         foreach (Type type in assembly.DefinedTypes)
         {
-          if (false == type.Name.StartsWith("<>"))
+          if (!type.Name.StartsWith("<>"))
           {
             Console.WriteLine();
             Console.WriteLine("*******************************");

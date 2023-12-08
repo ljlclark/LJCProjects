@@ -42,7 +42,7 @@
       Saves the updated XML file.
     </summary>
     <param name="xmlFileName">The XML file name.</param>
-    <returns>True if the file saved successfully, otherwise false.</returns>
+    <returns>true if the file saved successfully; otherwise, false.</returns>
   </Save>
   <DeleteGroup>
     <summary>

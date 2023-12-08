@@ -54,7 +54,7 @@
       Check if a XML comment.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if an XML comment, otherwise false.</returns>
+    <returns>true if an XML comment; otherwise, false.</returns>
   </IsCodeXmlComment>
   <IsParam>
     <summary>
@@ -62,14 +62,14 @@
     </summary>
     <param name="text">The text value.</param>
 
-    <returns>True if a param item, otherwise false.</returns>
+    <returns>true if a param item; otherwise, false.</returns>
   </IsParam>
   <IsComment>
     <summary>
       Check if a code comment.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a comment, otherwise false.</returns>
+    <returns>true if a comment; otherwise, false.</returns>
   </IsComment>
   <HasBothDelimiters>
     <summary>
@@ -101,7 +101,7 @@
       Check if the text contains a common delimiter.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a common delimiter, otherwise false.</returns>
+    <returns>true if a common delimiter; otherwise, false.</returns>
   </IsDelimiters>
   <IsModifier>
     <summary>
@@ -109,14 +109,14 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a modifier, otherwise false.</returns>
+    <returns>true if a modifier; otherwise, false.</returns>
   </IsModifier>
   <IsDataValue>
     <summary>
       Check if the text is a Data value.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a data value, otherwise false.</returns>
+    <returns>true if a data value; otherwise, false.</returns>
   </IsDataValue>
   <IsKeyword>
     <summary>
@@ -124,7 +124,7 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a keyword, otherwise false.</returns>
+    <returns>true if a keyword; otherwise, false.</returns>
   </IsKeyword>
   <IsDataType>
     <summary>
@@ -132,20 +132,20 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="firstPass">The first pass for common values.</param>
-    <returns>True if a data type, otherwise false.</returns>
+    <returns>true if a data type; otherwise, false.</returns>
   </IsDataType>
   <IsRefType>
     <summary>
       Check if the text is a RefType.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a reference type, otherwise false.</returns>
+    <returns>true if a reference type; otherwise, false.</returns>
   </IsRefType>
   <IsLibType>
     <summary>
       Check if the text is a LibType.
     </summary>
     <param name="text">The text value.</param>
-    <returns>True if a library type, otherwise false.</returns>
+    <returns>true if a library type; otherwise, false.</returns>
   </IsLibType>
 </items>
