@@ -16,7 +16,7 @@ namespace LJCNetCommon
     /// <include path='items/HasValue/*' file='Doc/NetString.xml'/>
     public static bool HasValue(string text)
     {
-      return HasValue(text);
+      return !string.IsNullOrWhiteSpace(text);
     }
 
     // Checks a string value for digits.
