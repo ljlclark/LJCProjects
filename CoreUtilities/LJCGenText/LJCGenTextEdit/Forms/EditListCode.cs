@@ -398,7 +398,21 @@ namespace LJCGenTextEdit
     #region Properties
 
     // Gets the GenDataManager reference.
-    internal GenDataManager GenDataManager { get; set; }
+    internal GenDataManager GenDataManager
+    {
+      get { return mGenDataManager; }
+      set
+      {
+        if (value != null)
+        {
+          mGenDataManager = value;
+          mSectionGridCode.GenDataManager = mGenDataManager;
+          mItemGridCode.GenDataManager = mGenDataManager;
+          mReplacementGridCode.GenDataManager = mGenDataManager;
+        }
+      }
+    }
+    private GenDataManager mGenDataManager;
     #endregion
 
     #region Class Data

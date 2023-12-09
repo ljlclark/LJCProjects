@@ -27,8 +27,8 @@ namespace LJCGenDocEdit
       DocList = parentList;
       AssemblyGrid = DocList.AssemblyItemGrid;
       AssemblyGroupGrid = DocList.AssemblyGroupGrid;
-      DocAssemblyManager = Managers.DocAssemblyManager;
       Managers = DocList.Managers;
+      DocAssemblyManager = Managers.DocAssemblyManager;
       DocList.Cursor = Cursors.Default;
     }
     #endregion

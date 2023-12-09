@@ -337,11 +337,11 @@ namespace LJCGenTextEdit
 
     #region Properties
 
+    // Gets or sets the Manager reference.
+    internal GenDataManager GenDataManager { get; set; }
+
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
-
-    // Gets or sets the Manager reference.
-    private GenDataManager GenDataManager { get; set; }
 
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
