@@ -57,7 +57,6 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
-      LoadControlData();
       ControlSetup();
       InitialControlValues();
       SetupGrids();
@@ -96,16 +95,6 @@ namespace LJCGenDocEdit
       Managers = new ManagersDocGen();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
-    }
-
-    // Loads the initial Control data.
-    private void LoadControlData()
-    {
-      //ComboItems comboItems = ComboManager.Load();
-      //foreach (ComboItem comboItem in comboItems)
-      //{
-      //	Combo.Items.Add(comboItem);
-      //}
     }
 
     // Restores the control values.

@@ -51,6 +51,30 @@ namespace _Namespace_
 
     #region Data Methods
 
+    // Retrieves the combo items.
+    internal void DataRetrieveCombo()
+    {
+      //ComboRecords dataRecords;
+
+      //Cursor = Cursors.WaitCursor;
+      //Combo.Items.Clear();
+
+      //dataRecords = mComboManager.Load();
+
+      //if (dataRecords != null && records.Count > 0)
+      //{
+      //	foreach (ComboRecord dataRecord in dataRecords)
+      //	{
+      //		Combo.Items.Add(dataRecord);
+      //	}
+      //	if (Combo.Items.Count > 0)
+      //	{
+      //		Combo.SelectedIndex = 0;
+      //	}
+      //}
+      //Cursor = Cursors.Default;
+    }
+
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
@@ -142,54 +166,16 @@ namespace _Namespace_
 
     #region Action Methods
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
+    // Performs the default list action.
+    internal void DoDefault_ClassName_()
     {
-      if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
+      if (LJCIsSelect)
       {
-        // Data from list items.
-        int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
-        string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
-
-        var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
-        var detail = new _ClassName_Detail
-        {
-          LJCHelpFileName = LJCHelpFile,
-          LJCHelpPageName = LJCHelpPageDetail,
-          LJCLocation = location,
-          LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentName = parentName
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
+        DoSelect();
       }
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
-        && _ClassName_Grid.CurrentRow is LJCGridRow row)
+      else
       {
-        // Data from list items.
-        int id = row.LJCGetInt32(_ClassName_.ColumnID);
-        int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
-        string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
-
-        var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
-        var detail = new _ClassName_Detail()
-        {
-          LJCHelpFileName = LJCHelpFile,
-          LJCHelpPageName = LJCHelpPageDetail,
-          LJCID = id,
-          LJCLocation = location,
-          LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentName = parentName,
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
+        DoEdit();
       }
     }
 
@@ -237,6 +223,57 @@ namespace _Namespace_
       }
     }
 
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
+        && _ClassName_Grid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        int id = row.LJCGetInt32(_ClassName_.ColumnID);
+        int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
+        string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
+        var detail = new _ClassName_Detail()
+        {
+          LJCHelpFileName = LJCHelpFile,
+          LJCHelpPageName = LJCHelpPageDetail,
+          LJCID = id,
+          LJCLocation = location,
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from list items.
+        int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
+        string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
+        var detail = new _ClassName_Detail
+        {
+          LJCHelpFileName = LJCHelpFile,
+          LJCHelpPageName = LJCHelpPageDetail,
+          LJCLocation = location,
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
     // Refreshes the list.
     internal void DoRefresh()
     {
@@ -259,6 +296,27 @@ namespace _Namespace_
         RowSelect(record);
       }
       _AppName_List.Cursor = Cursors.Default;
+    }
+
+    // Sets the selected item and returns to the parent form.
+    private void DoSelect()
+    {
+      LJCSelectedRecord = null;
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      {
+        Cursor = Cursors.WaitCursor;
+        var id = row.LJCGetInt32(_ClassName_.ColumnID);
+
+        var manager = mManagers._ClassName_Manager;
+        var keyRecord = manager.GetIDKey(id);
+        dataRecord = manager.Retrieve(keyRecord);
+        if (dataRecord != null)
+        {
+          LJCSelectedRecord = dataRecord;
+        }
+        Cursor = Cursors.Default;
+      }
+      DialogResult = DialogResult.OK;
     }
 
     // Adds new row or updates row with
@@ -287,7 +345,7 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Other Methods
+    #region Setup and Other Methods
 
     // Configures the _ClassName_ Grid.
     private void SetupGrid()
@@ -313,6 +371,23 @@ namespace _Namespace_
     #endregion
 
     #region Get Data Methods
+
+    // Retrieves the row item.
+    private _ClassName_ Get_ClassName_(LJCGridRow row = null)
+    {
+      _ClassName_ retValue = null;
+
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
+      {
+        var id = _ClassName_ID(row);
+        if (id > 0)
+        {
+          var manager = Managers._ClassName_Manager;
+          retValue = manager.RetrieveWithID(id);
+        }
+      }
+      return retValue;
+    }
 
     // Retrieves the current row item ID.
     private long _ClassName_ID(LJCGridRow row = null)
