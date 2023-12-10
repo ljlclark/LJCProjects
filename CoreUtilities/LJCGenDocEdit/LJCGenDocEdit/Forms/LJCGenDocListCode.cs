@@ -7,7 +7,6 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 

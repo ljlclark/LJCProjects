@@ -33,9 +33,6 @@ namespace _Namespace_
       _AppName_List = parentList;
       _AppName_List.Cursor = Cursors.WaitCursor;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
-      LJCHelpFile = "_AppName_.chm";
-      LJCHelpPageList = "_ClassName_List.html";
-      LJCHelpPageDetail = "_ClassName_Detail.html";
       _ParentName_Grid = _AppName_List._ParentName_Grid;
       ResetData();
       _AppName_List.Cursor = Cursors.Default;
@@ -237,8 +234,6 @@ namespace _Namespace_
         var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
         var detail = new _ClassName_Detail()
         {
-          LJCHelpFileName = LJCHelpFile,
-          LJCHelpPageName = LJCHelpPageDetail,
           LJCID = id,
           LJCLocation = location,
           LJCManagers = Managers,
@@ -269,8 +264,6 @@ namespace _Namespace_
         var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
         var detail = new _ClassName_Detail
         {
-          LJCHelpFileName = LJCHelpFile,
-          LJCHelpPageName = LJCHelpPageDetail,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
@@ -472,30 +465,6 @@ namespace _Namespace_
 
     // Gets or sets the _ClassName_ Grid reference.
     private LJCDataGrid _ClassName_Grid { get; set; }
-
-    // The help file name.
-    private string LJCHelpFile
-    {
-      get { return mHelpFile; }
-      set { mHelpFile = NetString.InitString(value); }
-    }
-    private string mHelpFile;
-
-    // The List help page name.
-    private string LJCHelpPageList
-    {
-      get { return mHelpPageList; }
-      set { mHelpPageList = NetString.InitString(value); }
-    }
-    private string mHelpPageList;
-
-    // The Detail help page name.
-    private string LJCHelpPageDetail
-    {
-      get { return mHelpPageDetail; }
-      set { mHelpPageDetail = NetString.InitString(value); }
-    }
-    private string mHelpPageDetail;
 
     // Gets or sets the Manager reference.
     private _ClassName_Manager ClassName_Manager { get; set; }

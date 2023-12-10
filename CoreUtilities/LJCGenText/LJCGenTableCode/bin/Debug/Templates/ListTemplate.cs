@@ -55,6 +55,7 @@ namespace _Namespace_
     #endregion
 
     #region Action Event Handlers
+
     #region Tabs
 
     // Performs a Move of the selected Main Tab to the TileTabs control.

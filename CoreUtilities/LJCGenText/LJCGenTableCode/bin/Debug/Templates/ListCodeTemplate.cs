@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace _Namespace_
 {
-  // The list form.
+  // The list form code.
   /// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
   internal partial class _ClassName_List : Form
   {

@@ -141,7 +141,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Internal Properties
+    #region Properties
 
     /// <summary>Gets or sets the LJCIsSelect value.</summary>
     internal bool LJCIsSelect { get; set; }
@@ -151,9 +151,6 @@ namespace LJCGenDocEdit
 
     /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }
-    #endregion
-
-    #region Private Properties
 
     // Gets or sets the ClassHeadingGridCode value.
     private ClassHeadingGridCode ClassHeadingGridCode { get; set; }
