@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // LJCGenDocList.cs
 using LJCGenDocDAL;
-using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Windows.Forms;
@@ -20,9 +19,6 @@ namespace LJCGenDocEdit
     {
       Cursor = Cursors.WaitCursor;
       InitializeComponent();
-
-      // Initialize property values.
-      LJCHelpFile = "GenDocEdit.chm";
 
       // Set default class data.
       // Set DAL config before using anywhere in the program.
@@ -129,8 +125,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void AssemblyGroupHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Assembly\AssemblyGroupList.html");
+      mAssemblyGroupGridCode.DoHelp();
     }
     #endregion
 
@@ -184,8 +179,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void AssemblyHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Assembly\AssemblyItemList.html");
+      mAssemblyItemGridCode.DoHelp();
     }
     #endregion
 
@@ -239,8 +233,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void ClassGroupHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Class\ClassGroupList.html");
+      mClassGroupGridCode.DoHelp();
     }
     #endregion
 
@@ -294,8 +287,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void ClassHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Class\ClassItemList.html");
+      mClassItemGridCode.DoHelp();
     }
     #endregion
 
@@ -349,8 +341,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void MethodGroupHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Method\MethodGroupList.html");
+      mMethodGroupGridCode.DoHelp();
     }
     #endregion
 
@@ -404,8 +395,7 @@ namespace LJCGenDocEdit
     // Shows the help page.
     private void MethodItemHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Method\MethodItemList.html");
+      mMethodItemGridCode.DoHelp();
     }
     #endregion
     #endregion
@@ -450,6 +440,11 @@ namespace LJCGenDocEdit
       {
         case Keys.Enter:
           mAssemblyGroupGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F1:
+          mAssemblyGroupGridCode.DoHelp();
           e.Handled = true;
           break;
 
@@ -534,12 +529,17 @@ namespace LJCGenDocEdit
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          mAssemblyGroupGridCode.DoEdit();
+          mAssemblyItemGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F1:
+          mAssemblyItemGridCode.DoHelp();
           e.Handled = true;
           break;
 
         case Keys.F5:
-          mAssemblyGroupGridCode.DoRefresh();
+          mAssemblyItemGridCode.DoRefresh();
           e.Handled = true;
           break;
 
@@ -634,6 +634,11 @@ namespace LJCGenDocEdit
           e.Handled = true;
           break;
 
+        case Keys.F1:
+          mClassGroupGridCode.DoHelp();
+          e.Handled = true;
+          break;
+
         case Keys.F5:
           mClassGroupGridCode.DoRefresh();
           e.Handled = true;
@@ -718,6 +723,11 @@ namespace LJCGenDocEdit
       {
         case Keys.Enter:
           mClassItemGridCode.DoEdit();
+          e.Handled = true;
+          break;
+
+        case Keys.F1:
+          mClassItemGridCode.DoHelp();
           e.Handled = true;
           break;
 
@@ -817,6 +827,11 @@ namespace LJCGenDocEdit
           e.Handled = true;
           break;
 
+        case Keys.F1:
+          mMethodGroupGridCode.DoHelp();
+          e.Handled = true;
+          break;
+
         case Keys.F5:
           mMethodGroupGridCode.DoRefresh();
           e.Handled = true;
@@ -904,6 +919,11 @@ namespace LJCGenDocEdit
           e.Handled = true;
           break;
 
+        case Keys.F1:
+          mMethodItemGridCode.DoHelp();
+          e.Handled = true;
+          break;
+
         case Keys.F5:
           mMethodItemGridCode.DoRefresh();
           e.Handled = true;
@@ -970,17 +990,6 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
-    #endregion
-
-    #region Internal Properties
-
-    // The help file name.
-    internal string LJCHelpFile
-    {
-      get { return mHelpFile; }
-      set { mHelpFile = NetString.InitString(value); }
-    }
-    private string mHelpFile;
     #endregion
   }
 }

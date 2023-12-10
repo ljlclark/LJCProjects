@@ -167,8 +167,6 @@ namespace _Namespace_
     {
       var values = Values_AppName_.Instance;
       mSettings = values.StandardSettings;
-      BeginColor = mSettings.BeginColor;
-      EndColor = mSettings.EndColor;
 
       Managers = new Managers();
       Managers.SetDBProperties(mSettings.DbServiceRef
@@ -298,15 +296,27 @@ namespace _Namespace_
       FormCommon.SetToolState(_ClassName_Tool, enableNew, enableEdit);
       FormCommon.SetMenuState(_ClassName_Menu, enableNew, enableEdit);
     }
+
+    // Sets the tab initial focus control.
+    private void SetFocusTab(MouseEventArgs e)
+    {
+      var tabPage = MainTabs.LJCGetTabPage(e);
+      switch (tabPage.Name)
+      {
+        case "_ClassName_Tab":
+          _ClassName_Grid.Select();
+          break;
+      }
+    }
     #endregion
 
     #region Properties
 
-    // Gets or sets the Begin Color.
-    private Color BeginColor { get; set; }
+    // Gets or sets the LJCIsSelect value.
+    internal bool LJCIsSelect { get; set; }
 
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
+    // Gets a reference to the selected record.
+    internal _ClassName_ LJCSelectedRecord { get; private set; }
 
     // Gets or sets the _ClassName_GridCode value.
     private _ClassName_GridCode _ClassName_GridCode { get; set; }

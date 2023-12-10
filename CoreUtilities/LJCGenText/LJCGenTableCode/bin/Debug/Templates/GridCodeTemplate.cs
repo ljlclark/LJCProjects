@@ -81,7 +81,7 @@ namespace _Namespace_
       _AppName_List.Cursor = Cursors.WaitCursor;
       _ClassName_Grid.LJCRowsClear();
 
-      SetupGrid();
+      //SetupGrid();
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
@@ -248,6 +248,13 @@ namespace _Namespace_
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
+    }
+
+    // Shows the help page
+    internal void DoHelp()
+    {
+      Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+        , "_ClassName_List.html");
     }
 
     // Displays a detail dialog for a new record.

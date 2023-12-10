@@ -123,33 +123,6 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
-    {
-      var detail = new AssemblyGroupDetail()
-      {
-        LJCManagers = Managers,
-        LJCSequence = AssemblyGroupGrid.Rows.Count + 1
-      };
-      detail.LJCChange += Detail_Change;
-      detail.ShowDialog();
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new AssemblyGroupDetail()
-        {
-          LJCGroupID = AssemblyGroupID(),
-          LJCManagers = Managers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDelete()
     {
@@ -188,6 +161,40 @@ namespace LJCGenDocEdit
         AssemblyGroupGrid.Rows.Remove(row);
         DocList.TimedChange(Change.AssemblyGroup);
       }
+    }
+
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new AssemblyGroupDetail()
+        {
+          LJCGroupID = AssemblyGroupID(),
+          LJCManagers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Shows the help page.
+    internal void DoHelp()
+    {
+      Help.ShowHelp(DocList, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Assembly\AssemblyGroupList.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      var detail = new AssemblyGroupDetail()
+      {
+        LJCManagers = Managers,
+        LJCSequence = AssemblyGroupGrid.Rows.Count + 1
+      };
+      detail.LJCChange += Detail_Change;
+      detail.ShowDialog();
     }
 
     // Refreshes the list. 

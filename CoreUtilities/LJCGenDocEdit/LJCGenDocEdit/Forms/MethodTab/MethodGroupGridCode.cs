@@ -129,41 +129,6 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
-    {
-      // Use Class as parent.
-      if (ClassGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new MethodGroupDetail()
-        {
-          LJCClassID = DocClassID(),
-          LJCManagers = Managers,
-          LJCSequence = MethodGroupGrid.Rows.Count + 1
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      // Use Class as parent.
-      if (ClassGrid.CurrentRow is LJCGridRow _
-        && MethodGroupGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new MethodGroupDetail()
-        {
-          LJCGroupID = MethodGroupID(),
-          LJCClassID = DocClassID(),
-          LJCManagers = Managers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDelete()
     {
@@ -203,6 +168,48 @@ namespace LJCGenDocEdit
       {
         MethodGroupGrid.Rows.Remove(row);
         DocList.TimedChange(Change.MethodGroup);
+      }
+    }
+
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      // Use Class as parent.
+      if (ClassGrid.CurrentRow is LJCGridRow _
+        && MethodGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new MethodGroupDetail()
+        {
+          LJCGroupID = MethodGroupID(),
+          LJCClassID = DocClassID(),
+          LJCManagers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Shows the help page.
+    internal void DoHelp()
+    {
+      Help.ShowHelp(DocList, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Method\MethodGroupList.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      // Use Class as parent.
+      if (ClassGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new MethodGroupDetail()
+        {
+          LJCClassID = DocClassID(),
+          LJCManagers = Managers,
+          LJCSequence = MethodGroupGrid.Rows.Count + 1
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
       }
     }
 

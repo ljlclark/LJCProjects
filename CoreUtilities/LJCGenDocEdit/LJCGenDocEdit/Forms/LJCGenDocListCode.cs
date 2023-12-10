@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -14,6 +15,108 @@ namespace LJCGenDocEdit
 {
   internal partial class LJCGenDocList : Form
   {
+    #region Item Change Processing
+
+    // Execute the list and related item functions.
+    internal void DoChange(Change change)
+    {
+      Cursor = Cursors.WaitCursor;
+      switch (change)
+      {
+        case Change.Startup:
+          ConfigureControls();
+          RestoreControlValues();
+
+          // Load first control.
+          mAssemblyGroupGridCode.DataRetrieve();
+          break;
+
+        case Change.AssemblyGroup:
+          mAssemblyItemGridCode.DataRetrieve();
+          AssemblyGroupGrid.Select();
+          break;
+
+        case Change.AssemblyItem:
+          mClassGroupGridCode.DataRetrieve();
+          mAssemblyItemComboCode.DataRetrieve();
+          AssemblyComboSelect();
+          break;
+
+        case Change.AssemblyCombo:
+          AssemblyItemSelect();
+          break;
+
+        case Change.ClassGroup:
+          mClassItemGridCode.DataRetrieve();
+          break;
+
+        case Change.ClassItem:
+          mMethodGroupGridCode.DataRetrieve();
+          mClassItemComboCode.DataRetrieve();
+          ClassComboSelect();
+          break;
+
+        case Change.ClassCombo:
+          ClassItemSelect();
+          break;
+
+        case Change.MethodGroup:
+          mMethodItemGridCode.DataRetrieve();
+          break;
+
+        case Change.MethodItem:
+          MethodItemGrid.LJCSetLastRow();
+          break;
+      }
+      SetControlState();
+      Cursor = Cursors.Default;
+    }
+
+    // The ChangeType values.
+    internal enum Change
+    {
+      Startup,
+      AssemblyGroup,
+      AssemblyItem,
+      AssemblyCombo,
+      ClassGroup,
+      ClassItem,
+      ClassCombo,
+      MethodGroup,
+      MethodItem
+    }
+
+    #region Item Change Support
+
+    // Start the Change processing.
+    private void StartChangeProcessing()
+    {
+      ChangeTimer = new ChangeTimer();
+      ChangeTimer.ItemChange += ChangeTimer_ItemChange;
+      TimedChange(Change.Startup);
+    }
+
+    // Change Event Handler
+    private void ChangeTimer_ItemChange(object sender, EventArgs e)
+    {
+      Change changeType;
+
+      changeType = (Change)Enum.Parse(typeof(Change)
+        , ChangeTimer.ChangeName);
+      DoChange(changeType);
+    }
+
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
+    // Gets or sets the ChangeTimer object.
+    private ChangeTimer ChangeTimer { get; set; }
+    #endregion
+    #endregion
+
     #region Setup Methods
 
     // Configure the initial control settings.
@@ -202,108 +305,6 @@ namespace LJCGenDocEdit
     #endregion
     #endregion
 
-    #region Item Change Processing
-
-    // Execute the list and related item functions.
-    internal void DoChange(Change change)
-    {
-      Cursor = Cursors.WaitCursor;
-      switch (change)
-      {
-        case Change.Startup:
-          ConfigureControls();
-          RestoreControlValues();
-
-          // Load first control.
-          mAssemblyGroupGridCode.DataRetrieve();
-          break;
-
-        case Change.AssemblyGroup:
-          mAssemblyItemGridCode.DataRetrieve();
-          AssemblyGroupGrid.Select();
-          break;
-
-        case Change.AssemblyItem:
-          mClassGroupGridCode.DataRetrieve();
-          mAssemblyItemComboCode.DataRetrieve();
-          AssemblyComboSelect();
-          break;
-
-        case Change.AssemblyCombo:
-          AssemblyItemSelect();
-          break;
-
-        case Change.ClassGroup:
-          mClassItemGridCode.DataRetrieve();
-          break;
-
-        case Change.ClassItem:
-          mMethodGroupGridCode.DataRetrieve();
-          mClassItemComboCode.DataRetrieve();
-          ClassComboSelect();
-          break;
-
-        case Change.ClassCombo:
-          ClassItemSelect();
-          break;
-
-        case Change.MethodGroup:
-          mMethodItemGridCode.DataRetrieve();
-          break;
-
-        case Change.MethodItem:
-          MethodItemGrid.LJCSetLastRow();
-          break;
-      }
-      SetControlState();
-      Cursor = Cursors.Default;
-    }
-
-    // The ChangeType values.
-    internal enum Change
-    {
-      Startup,
-      AssemblyGroup,
-      AssemblyItem,
-      AssemblyCombo,
-      ClassGroup,
-      ClassItem,
-      ClassCombo,
-      MethodGroup,
-      MethodItem
-    }
-
-    #region Item Change Support
-
-    // Start the Change processing.
-    private void StartChangeProcessing()
-    {
-      ChangeTimer = new ChangeTimer();
-      ChangeTimer.ItemChange += ChangeTimer_ItemChange;
-      TimedChange(Change.Startup);
-    }
-
-    // Change Event Handler
-    private void ChangeTimer_ItemChange(object sender, EventArgs e)
-    {
-      Change changeType;
-
-      changeType = (Change)Enum.Parse(typeof(Change)
-        , ChangeTimer.ChangeName);
-      DoChange(changeType);
-    }
-
-    // Starts the Timer with the Change value.
-    internal void TimedChange(Change change)
-    {
-      ChangeTimer.DoChange(change.ToString());
-    }
-
-    // Gets or sets the ChangeTimer object.
-    private ChangeTimer ChangeTimer { get; set; }
-    #endregion
-    #endregion
-
     #region Private Methods
 
     // Selects the AssemblyCombo item with the current AssemblyItem.
@@ -402,7 +403,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Internal Properties
+    #region Properties
 
     /// <summary>The Managers object.</summary>
     internal ManagersDocGen Managers { get; set; }

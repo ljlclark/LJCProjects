@@ -23,8 +23,8 @@ namespace LJCGenDocEdit
     internal AssemblyItemGridCode(LJCGenDocList parentList)
     {
       // Initialize property values.
-      parentList.Cursor = Cursors.WaitCursor;
       DocList = parentList;
+      DocList.Cursor = Cursors.WaitCursor;
       AssemblyGrid = DocList.AssemblyItemGrid;
       AssemblyGroupGrid = DocList.AssemblyGroupGrid;
       Managers = DocList.Managers;
@@ -132,39 +132,6 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
-    {
-      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new AssemblyDetail()
-        {
-          LJCGroupID = AssemblyGroupID(),
-          LJCManagers = Managers,
-          LJCSequence = AssemblyGrid.Rows.Count + 1
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _
-        && AssemblyGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new AssemblyDetail()
-        {
-          LJCAssemblyID = AssemblyID(),
-          LJCGroupID = AssemblyGroupID(),
-          LJCManagers = Managers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDelete()
     {
@@ -204,6 +171,46 @@ namespace LJCGenDocEdit
       {
         AssemblyGrid.Rows.Remove(row);
         DocList.TimedChange(Change.AssemblyItem);
+      }
+    }
+
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _
+        && AssemblyGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new AssemblyDetail()
+        {
+          LJCAssemblyID = AssemblyID(),
+          LJCGroupID = AssemblyGroupID(),
+          LJCManagers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Shows the help page.
+    internal void DoHelp()
+    {
+      Help.ShowHelp(DocList, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Assembly\AssemblyItemList.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      if (AssemblyGroupGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new AssemblyDetail()
+        {
+          LJCGroupID = AssemblyGroupID(),
+          LJCManagers = Managers,
+          LJCSequence = AssemblyGrid.Rows.Count + 1
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
       }
     }
 

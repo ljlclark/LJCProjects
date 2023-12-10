@@ -144,42 +144,6 @@ namespace LJCGenDocEdit
 
     #region Action Methods
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
-    {
-      // Class has to belong to an Assembly.
-      if (AssemblyGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new ClassDetail()
-        {
-          LJCAssemblyID = DocAssemblyID(),
-          LJCGroupID = ClassGroupID(),
-          LJCManagers = Managers,
-          LJCSequence = ClassGrid.Rows.Count + 1
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (AssemblyGrid.CurrentRow is LJCGridRow _
-        && ClassGrid.CurrentRow is LJCGridRow _)
-      {
-        var detail = new ClassDetail()
-        {
-          LJCAssemblyID = DocAssemblyID(),
-          LJCClassID = DocClassID(),
-          LJCGroupID = ClassGroupID(),
-          LJCManagers = Managers
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
-
     // Deletes the selected row.
     internal void DoDelete()
     {
@@ -219,6 +183,49 @@ namespace LJCGenDocEdit
       {
         ClassGrid.Rows.Remove(row);
         DocList.TimedChange(Change.ClassItem);
+      }
+    }
+
+    // Displays a detail dialog to edit an existing record.
+    internal void DoEdit()
+    {
+      if (AssemblyGrid.CurrentRow is LJCGridRow _
+        && ClassGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new ClassDetail()
+        {
+          LJCAssemblyID = DocAssemblyID(),
+          LJCClassID = DocClassID(),
+          LJCGroupID = ClassGroupID(),
+          LJCManagers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
+    // Shows the help page.
+    internal void DoHelp()
+    {
+      Help.ShowHelp(DocList, "GenDocEdit.chm", HelpNavigator.Topic
+        , @"Class\ClassItemList.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    internal void DoNew()
+    {
+      // Class has to belong to an Assembly.
+      if (AssemblyGrid.CurrentRow is LJCGridRow _)
+      {
+        var detail = new ClassDetail()
+        {
+          LJCAssemblyID = DocAssemblyID(),
+          LJCGroupID = ClassGroupID(),
+          LJCManagers = Managers,
+          LJCSequence = ClassGrid.Rows.Count + 1
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
       }
     }
 

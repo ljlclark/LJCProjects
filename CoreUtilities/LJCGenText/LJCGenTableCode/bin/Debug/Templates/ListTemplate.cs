@@ -32,15 +32,14 @@ namespace _Namespace_
       InitializeComponent();
 
       // Initialize property values.
-      LJCHelpFile = "_AppName_.chm";
-      LJCHelpPageList = "_ClassName_List.html";
-      LJCHelpPageDetail = "_ClassName_Detail.html";
       LJCIsSelect = false;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
-      mViewTableName = _ClassName_.TableName;
+      // Set DAL config before using anywhere in the program.
+      var configValues = Values_AppName_.Instance;
+      configValues.SetConfigFile("_FullAppName_.exe.config");
+      var settings = configValues.StandardSettings;
+      Text += $" - {settings.DataConfigName}";
       Cursor = Cursors.Default;
     }
     #endregion
@@ -56,53 +55,67 @@ namespace _Namespace_
     #endregion
 
     #region Action Event Handlers
+    #region Tabs
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void MainTabsMove_Click(object sender, EventArgs e)
+    {
+      MainTabs.LJCMoveTabPageRight(TileTabs, TabsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void TileTabsMove_Click(object sender, EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(MainTabs, TabsSplit);
+    }
+    #endregion
 
     #region _ClassName_
 
     // Calls the New method.
     private void _ClassName_ToolNew_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoNew();
+      m_ClassName_GridCode.DoNew();
     }
 
     // Calls the Edit method.
     private void _ClassName_ToolEdit_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoEdit();
+      m_ClassName_GridCode.DoEdit();
     }
 
     // Calls the Delete method.
     private void _ClassName_ToolDelete_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoDelete();
+      m_ClassName_GridCode.DoDelete();
     }
 
     // Calls the New method.
-    private void _ClassName_MenuNew_Click(object sender, EventArgs e)
+    private void _ClassName_New_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoNew();
+      m_ClassName_GridCode.DoNew();
     }
 
     // Calls the Edit method.
-    private void _ClassName_MenuEdit_Click(object sender, EventArgs e)
+    private void _ClassName_Edit_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoEdit();
+      m_ClassName_GridCode.DoEdit();
     }
 
     // Calls the Delete method.
-    private void _ClassName_MenuDelete_Click(object sender, EventArgs e)
+    private void _ClassName_Delete_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoDelete();
+      m_ClassName_GridCode.DoDelete();
     }
 
     // Calls the Refresh method.
-    private void _ClassName_MenuRefresh_Click(object sender, EventArgs e)
+    private void _ClassName_Refresh_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoRefresh();
+      m_ClassName_GridCode.DoRefresh();
     }
 
     // Export a text file.
-    private void MainMenuExportText_Click(object sender, EventArgs e)
+    private void _ClassName_Text_Click(object sender, EventArgs e)
     {
       string extension = mSettings.ExportTextExtension;
       string fileSpec = $@"ExportFiles\_ClassName_.{extension}";
@@ -110,20 +123,20 @@ namespace _Namespace_
     }
 
     // Export a CSV file.
-    private void MainMenuExportCSV_Click(object sender, EventArgs e)
+    private void _ClassName_CSV_Click(object sender, EventArgs e)
     {
       string fileSpec = $@"ExportFiles\_ClassName_.csv";
       _ClassName_Grid.LJCExportData(fileSpec);
     }
 
     // Calls the Select method.
-    private void _ClassName_MenuSelect_Click(object sender, EventArgs e)
+    private void _ClassName_Select_Click(object sender, EventArgs e)
     {
-      _ClassName_GridCode.DoSelect();
+      m_ClassName_GridCode.DoSelect();
     }
 
     // Performs the Close function.
-    private void _ClassName_MenuClose_Click(object sender, EventArgs e)
+    private void _ClassName_Close_Click(object sender, EventArgs e)
     {
       SaveControlValues();
       Close();
@@ -132,13 +145,35 @@ namespace _Namespace_
     // Shows the help page.
     private void _ClassName_MenuHelp_Click(object sender, EventArgs e)
     {
-      Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , LJCHelpPageList);
+      m_ClassName_GridCode.DoHelp();
     }
     #endregion
     #endregion
 
     #region Control Event Handlers
+
+    #region Tabs
+
+    // Handles the MouseDown event.
+    private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        MainTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
+    }
+
+    // Handles the MouseDown event.
+    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        TileTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
+    }
+    #endregion
 
     #region Combo
 
@@ -162,8 +197,7 @@ namespace _Namespace_
           break;
 
         case Keys.F1:
-          Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-            , LJCHelpPageList);
+          m_ClassName_GridCode.DoHelp();
           e.Handled = true;
           break;
 
@@ -200,10 +234,9 @@ namespace _Namespace_
     // Handles the MouseDoubleClick event.
     private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      //if (_ClassName_Grid.LJCGetMouseRowIndex(e) > -1)
       if (_ClassName_Grid.LJCGetMouseRow(e) != null)
       {
-        DoDefault_ClassName_();
+        m_ClassName_GridCode.DoDefault();
       }
     }
 
@@ -233,70 +266,6 @@ namespace _Namespace_
       _ClassName_Grid.LJCAllowSelectionChange = true;
     }
     #endregion
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the parent ID value.
-    internal int LJCParentID { get; set; }
-
-    // Gets or sets the LJCParentName value.
-    internal string LJCParentName
-    {
-      get { return mParentName; }
-      set { mParentName = NetString.InitString(value); }
-    }
-    private string mParentName;
-
-    // Gets or sets the LJCIsSelect value.
-    internal bool LJCIsSelect { get; set; }
-
-    // Gets a reference to the selected record.
-    internal _ClassName_ LJCSelectedRecord { get; private set; }
-
-    // The help file name.
-    internal string LJCHelpFile
-    {
-      get { return mHelpFile; }
-      set { mHelpFile = NetString.InitString(value); }
-    }
-    private string mHelpFile;
-
-    // The List help page name.
-    internal string LJCHelpPageList
-    {
-      get { return mHelpPageList; }
-      set { mHelpPageList = NetString.InitString(value); }
-    }
-    private string mHelpPageList;
-
-    // The Detail help page name.
-    internal string LJCHelpPageDetail
-    {
-      get { return mHelpPageDetail; }
-      set { mHelpPageDetail = NetString.InitString(value); }
-    }
-    private string mHelpPageDetail;
-
-    // The Managers object.
-    internal Managers_ClassName_ Managers { get; set; }
-
-    // Gets or sets the Begin Color.
-    private Color BeginColor { get; set; }
-
-    // Gets or sets the End Color.
-    private Color EndColor { get; set; }
-
-    // Gets or sets the _ClassName_GridClass value.
-    private _ClassName_GridClass _ClassName_GridClass { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private string mControlValuesFileName;
-    private StandardUISettings mSettings;
-
-    // Foreign Keys
     #endregion
   }
 }
