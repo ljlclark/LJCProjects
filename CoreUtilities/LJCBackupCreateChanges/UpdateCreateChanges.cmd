@@ -5,15 +5,16 @@ echo Licensed under the MIT License.
 rem UpdateCreateChanges.cmd
 
 echo.
+if %1%. == BuildAll. goto BuildAll
 set mainRoot=..\..\
-if %1%. == BuildAll. (
-  call SubFolders.cmd %1%
-  set toRoot=%util%\LJCBackupCreateChanges\
-  call TargetFolders.cmd
-) else (
-  call %mainRoot%SubFolders.cmd %1%
-  call %mainRoot%TargetFolders.cmd
-)
+call %mainRoot%SubFolders.cmd %1%
+call %mainRoot%TargetFolders.cmd
+goto Process
+:BuildAll
+call SubFolders.cmd %1%
+set toRoot=%util%\LJCBackupCreateChanges\
+call TargetFolders.cmd
+:Process
 
 rem ***************************
 rem *** Referenced Binaries ***

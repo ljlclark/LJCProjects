@@ -65,6 +65,7 @@ namespace LJCDBClientLib
       }
       else
       {
+        // Default data access object.
         DbServiceRef = new DbServiceRef()
         {
           DbDataAccess = new DbDataAccess(dataConfigName)
@@ -107,26 +108,6 @@ namespace LJCDBClientLib
       return retValue;
     }
 
-    // Creates the Load DbRequest object.
-    /// <include path='items/CreateLoadRequest/*' file='Doc/DataManager.xml'/>
-    public DbRequest CreateLoadRequest(DbColumns keyColumns = null
-      , List<string> propertyNames = null, DbFilters filters = null
-      , DbJoins joins = null)
-    {
-      DbRequest retValue;
-
-      var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
-      var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
-
-      retValue = ManagerCommon.CreateRequest(RequestType.Load, TableName
-        , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
-        , joins);
-      retValue.OrderByNames = OrderByNames;
-      retValue.PageSize = PageSize;
-      retValue.PageStartIndex = PageStartIndex;
-      return retValue;
-    }
-
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='Doc/DataManager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
@@ -162,130 +143,6 @@ namespace LJCDBClientLib
       Request = ManagerCommon.CreateRequest(requestType, TableName
         , requestColumns, DataConfigName, SchemaName);
       Request.ClientSql = sql;
-      retValue = ExecuteRequest(Request);
-      return retValue;
-    }
-
-    // Executes the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='Doc/DataManager.xml'/>
-    public DbResult ExecuteRequest(DbRequest dbRequest)
-    {
-      string result;
-      DbResult retValue = null;
-
-      // Retrieve the result.
-      if (DbServiceRef.DbDataAccess != null)
-      {
-        // Use DbDataAccess.
-        retValue = DbServiceRef.DbDataAccess.Execute(dbRequest);
-        Result = retValue.Clone();
-      }
-      else
-      {
-        // Use DbService.
-        string request = dbRequest.Serialize();
-        if (request != null)
-        {
-          if (UseEncryption)
-          {
-            byte[] requestCipher = GetOutgoingCipher(request);
-            var tempRequest = Convert.ToBase64String(requestCipher);
-
-            // Test decrypt.
-            //byte[] responseSendCipher = Convert.FromBase64String(tempRequest);
-            //var resultText = GetIncommingText(responseSendCipher);
-
-            request = tempRequest;
-          }
-          else
-          {
-            request = NetCommon.TextToBase64(request);
-          }
-
-          if (DbServiceRef.DbService != null)
-          {
-            result = DbServiceRef.DbService.Execute(request);
-          }
-          else
-          {
-            result = DbServiceRef.DbServiceClient.Execute(request);
-          }
-
-          if (NetString.HasValue(result))
-          {
-            string resultText;
-            if (UseEncryption)
-            {
-              byte[] responseSendCipher = Convert.FromBase64String(result);
-              resultText = GetIncommingText(responseSendCipher);
-            }
-            else
-            {
-              resultText = NetCommon.Base64ToText(result);
-            }
-            retValue = DbResult.DeserializeMessage(resultText);
-            Result = retValue.Clone();
-          }
-        }
-      }
-
-      if (retValue != null)
-      {
-        AffectedCount = retValue.AffectedRecords;
-        SQLStatement = retValue.ExecutedSql;
-      }
-
-      OrderByNames?.Clear();
-      return retValue;
-    }
-
-    // Retrieves the column names for the specified table.
-    /// <include path='items/GetSchemaOnly/*' file='Doc/DataManager.xml'/>
-    public DbResult GetSchemaOnly(string dataConfigName = null
-      , string tableName = null)
-    {
-      DbResult retValue;
-
-      if (null == dataConfigName)
-      {
-        dataConfigName = DataConfigName;
-      }
-      if (null == tableName)
-      {
-        tableName = TableName;
-      }
-
-      var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly, tableName
-        , null, dataConfigName, SchemaName);
-      retValue = ExecuteRequest(dbRequest);
-      return retValue;
-    }
-
-    // Retrieves the table names for the data configuration database.
-    /// <include path='items/GetTableNames/*' file='Doc/DataManager.xml'/>
-    public DbResult GetTableNames()
-    {
-      DbColumns includedColumns;
-      DbResult retValue;
-
-      // ToDo: Why is this needed when DbDataAccess.TableNames also adds it?
-      if (null == DataDefinition)
-      {
-        DataDefinition = new DbColumns()
-        {
-          // *** Next Statement *** Change - 2/6/23
-          new DbColumn("TABLE_NAME", propertyName: "Name")
-        };
-      }
-
-      Request = ManagerCommon.CreateRequest(RequestType.TableNames, TableName
-        , null, DataConfigName, SchemaName);
-      if (DataDefinition != null)
-      {
-        List<string> propertyNames = new List<string>() { "Name" };
-        includedColumns = DataDefinition.LJCGetColumns(propertyNames);
-        Request.Columns = includedColumns.Clone();
-      }
       retValue = ExecuteRequest(Request);
       return retValue;
     }
@@ -372,6 +229,99 @@ namespace LJCDBClientLib
 
     #region Other Public Methods
 
+    // Creates the Load DbRequest object.
+    /// <include path='items/CreateLoadRequest/*' file='Doc/DataManager.xml'/>
+    public DbRequest CreateLoadRequest(DbColumns keyColumns = null
+      , List<string> propertyNames = null, DbFilters filters = null
+      , DbJoins joins = null)
+    {
+      DbRequest retValue;
+
+      var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
+      var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+
+      retValue = ManagerCommon.CreateRequest(RequestType.Load, TableName
+        , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
+        , joins);
+      retValue.OrderByNames = OrderByNames;
+      retValue.PageSize = PageSize;
+      retValue.PageStartIndex = PageStartIndex;
+      return retValue;
+    }
+
+    // Executes the supplied request.
+    /// <include path='items/ExecuteRequest/*' file='Doc/DataManager.xml'/>
+    public DbResult ExecuteRequest(DbRequest dbRequest)
+    {
+      string result;
+      DbResult retValue = null;
+
+      // Retrieve the result.
+      if (DbServiceRef.DbDataAccess != null)
+      {
+        // Use DbDataAccess.
+        retValue = DbServiceRef.DbDataAccess.Execute(dbRequest);
+        Result = retValue.Clone();
+      }
+      else
+      {
+        // Use DbService.
+        string request = dbRequest.Serialize();
+        if (request != null)
+        {
+          if (UseEncryption)
+          {
+            byte[] requestCipher = GetOutgoingCipher(request);
+            var tempRequest = Convert.ToBase64String(requestCipher);
+
+            // Test decrypt.
+            //byte[] responseSendCipher = Convert.FromBase64String(tempRequest);
+            //var resultText = GetIncommingText(responseSendCipher);
+
+            request = tempRequest;
+          }
+          else
+          {
+            request = NetCommon.TextToBase64(request);
+          }
+
+          if (DbServiceRef.DbService != null)
+          {
+            result = DbServiceRef.DbService.Execute(request);
+          }
+          else
+          {
+            result = DbServiceRef.DbServiceClient.Execute(request);
+          }
+
+          if (NetString.HasValue(result))
+          {
+            string resultText;
+            if (UseEncryption)
+            {
+              byte[] responseSendCipher = Convert.FromBase64String(result);
+              resultText = GetIncommingText(responseSendCipher);
+            }
+            else
+            {
+              resultText = NetCommon.Base64ToText(result);
+            }
+            retValue = DbResult.DeserializeMessage(resultText);
+            Result = retValue.Clone();
+          }
+        }
+      }
+
+      if (retValue != null)
+      {
+        AffectedCount = retValue.AffectedRecords;
+        SQLStatement = retValue.ExecutedSql;
+      }
+
+      OrderByNames?.Clear();
+      return retValue;
+    }
+
     /// <summary>
     /// Creates a PropertyNames list from the data definition.
     /// </summary>
@@ -384,6 +334,57 @@ namespace LJCDBClientLib
       {
         retValue.Add(dbColumn.PropertyName);
       }
+      return retValue;
+    }
+
+    // Retrieves the column names for the specified table.
+    /// <include path='items/GetSchemaOnly/*' file='Doc/DataManager.xml'/>
+    public DbResult GetSchemaOnly(string dataConfigName = null
+      , string tableName = null)
+    {
+      DbResult retValue;
+
+      if (null == dataConfigName)
+      {
+        dataConfigName = DataConfigName;
+      }
+      if (null == tableName)
+      {
+        tableName = TableName;
+      }
+
+      var dbRequest = ManagerCommon.CreateRequest(RequestType.SchemaOnly, tableName
+        , null, dataConfigName, SchemaName);
+      retValue = ExecuteRequest(dbRequest);
+      return retValue;
+    }
+
+    // Retrieves the table names for the data configuration database.
+    /// <include path='items/GetTableNames/*' file='Doc/DataManager.xml'/>
+    public DbResult GetTableNames()
+    {
+      DbColumns includedColumns;
+      DbResult retValue;
+
+      // ToDo: Why is this needed when DbDataAccess.TableNames also adds it?
+      if (null == DataDefinition)
+      {
+        DataDefinition = new DbColumns()
+        {
+          // *** Next Statement *** Change - 2/6/23
+          new DbColumn("TABLE_NAME", propertyName: "Name")
+        };
+      }
+
+      Request = ManagerCommon.CreateRequest(RequestType.TableNames, TableName
+        , null, DataConfigName, SchemaName);
+      if (DataDefinition != null)
+      {
+        List<string> propertyNames = new List<string>() { "Name" };
+        includedColumns = DataDefinition.LJCGetColumns(propertyNames);
+        Request.Columns = includedColumns.Clone();
+      }
+      retValue = ExecuteRequest(Request);
       return retValue;
     }
 

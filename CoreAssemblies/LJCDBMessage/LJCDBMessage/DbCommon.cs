@@ -11,7 +11,6 @@ namespace LJCDBMessage
   /// <summary>Common data message methods.</summary>
   public partial class DbCommon
   {
-
     // Gets Request columns from the baseDefinition using the propertyNames.
     /// <include path='items/RequestColumns/*' file='Doc/DbCommon.xml'/>
     public static DbColumns RequestColumns(DbColumns baseDefinition
@@ -20,7 +19,8 @@ namespace LJCDBMessage
       DbColumns requestColumns;
       DbColumns retValue;
 
-      if (null == propertyNames || 0 == propertyNames.Count)
+      //if (null == propertyNames || 0 == propertyNames.Count)
+      if (false == NetCommon.HasItems(propertyNames))
       {
         // Default to all Data Definition columns.
         requestColumns = baseDefinition;
