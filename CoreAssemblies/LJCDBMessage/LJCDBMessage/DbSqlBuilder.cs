@@ -487,8 +487,7 @@ namespace LJCDBMessage
               isNull = true;
             }
           }
-          if ("'-null'" == value
-            || "'-'" == value)
+          if ("'-null'" == value)
           {
             isNull = true;
           }

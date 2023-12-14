@@ -73,39 +73,10 @@
         A Data Column is excluded if it is an AutoIncrement column.
       </para>
       <para>
-        The value is set to "null" if the original value is "-null" or "-".
+        The value is set to "null" if the original value is "-null".
       </para>
     </remarks>
   </RequestDataColumns>
-  <RequestDataKeys>
-    <summary>
-      Get Request Key columns from the baseDefinition using the keyColumns.
-    </summary>
-    <param name="keyColumns">The Key record object.</param>
-    <param name="baseDefinition">The Base DataDefinition columns.</param>
-    <returns>
-      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
-      object.
-    </returns>
-    <remarks>
-      <para>
-        Generally used in the Update() manager method to define the update key
-        columns and values.
-      </para>
-      <para>
-        Creates a DbColumns collection of data definitions from the
-        baseDefinition parameter whose PropertyName values match the names in
-        the keyColumns parameter.
-      </para>
-      <para>
-        The DbColumn definitions include the Key Column ColumnName and Value.
-      </para>
-      <para>
-        A Key Column is not created if it is an AutoIncrement column, the
-        value equals "0" or it is an invalid DateTime.
-      </para>
-    </remarks>
-  </RequestDataKeys>
   <RequestKeys>
     <summary>
       Gets Request Key columns from the baseDefinition using the keyColumns and dbJoins.
@@ -146,6 +117,35 @@
       </para>
     </remarks>
   </RequestKeys>
+  <RequestDataKeys>
+    <summary>
+      Get Request Key columns from the baseDefinition using the keyColumns.
+    </summary>
+    <param name="keyColumns">The Key record object.</param>
+    <param name="baseDefinition">The Base DataDefinition columns.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns>
+    <remarks>
+      <para>
+        Generally used in the Update() manager method to define the update key
+        columns and values.
+      </para>
+      <para>
+        Creates a DbColumns collection of data definitions from the
+        baseDefinition parameter whose PropertyName values match the names in
+        the keyColumns parameter.
+      </para>
+      <para>
+        The DbColumn definitions include the Key Column ColumnName and Value.
+      </para>
+      <para>
+        A Key Column is not created if it is an AutoIncrement column, the
+        value equals "0" or it is an invalid DateTime.
+      </para>
+    </remarks>
+  </RequestDataKeys>
   <RequestLookupKeys>
     <summary>
       Get Request Value Key columns from data properties for the specified column

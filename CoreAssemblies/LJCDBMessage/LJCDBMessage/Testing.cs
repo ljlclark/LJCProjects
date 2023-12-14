@@ -97,7 +97,7 @@ namespace LJCDBMessage
       if (retValue)
       {
         // Exclude AutoIncrement column with value of zero.
-        if (true == dbColumn.AutoIncrement
+        if (dbColumn.AutoIncrement
           && !includeAutoIncrement
           && "0" == dbColumn.Value.ToString())
         {

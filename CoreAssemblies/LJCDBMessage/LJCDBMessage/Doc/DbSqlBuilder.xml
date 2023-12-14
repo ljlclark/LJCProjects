@@ -141,7 +141,7 @@
       </para>
       <para>
         The Key Column where clause will check for "is null" if the value equals
-        "-null" or "-".
+        "-null".
       </para>
     </remarks>
   </KeyWhereClause>

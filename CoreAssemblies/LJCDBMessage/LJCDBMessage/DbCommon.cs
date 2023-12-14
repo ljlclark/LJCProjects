@@ -19,8 +19,7 @@ namespace LJCDBMessage
       DbColumns requestColumns;
       DbColumns retValue;
 
-      //if (null == propertyNames || 0 == propertyNames.Count)
-      if (false == NetCommon.HasItems(propertyNames))
+      if (!NetCommon.HasItems(propertyNames))
       {
         // Default to all Data Definition columns.
         requestColumns = baseDefinition;
@@ -30,7 +29,6 @@ namespace LJCDBMessage
         requestColumns = baseDefinition.LJCGetColumns(propertyNames);
       }
 
-      //retValue = requestColumns.Clone();
       retValue = new DbColumns(requestColumns);
       return retValue;
     }
@@ -101,7 +99,7 @@ namespace LJCDBMessage
       if (include)
       {
         // Do not include AutoIncrement columns for "Insert" or "Update".
-        if (true == dataColumn.AutoIncrement)
+        if (dataColumn.AutoIncrement)
         {
           include = false;
         }
@@ -110,8 +108,7 @@ namespace LJCDBMessage
       if (include)
       {
         // Set value to null if null specifier is present.
-        if ("-null" == value.ToString()
-          || "-" == value.ToString())
+        if ("-null" == value.ToString())
         {
           value = "null";
         }
@@ -151,25 +148,6 @@ namespace LJCDBMessage
       }
       return retValue;
     }
-
-    //// Gets the Search Property name.
-    ///// <summary>
-    ///// Gets the Search Property name.
-    ///// </summary>
-    ///// <param name="columnName">The potentially qualified column name.</param>
-    ///// <returns>The unqualified column name.</returns>
-    //public static string GetSearchName(string columnName)
-    //{
-    //  var retValue = columnName;
-
-    //  var index = columnName.IndexOf(".");
-    //  if (index > -1)
-    //  {
-    //    // Get property name from qualified name.
-    //    retValue = columnName.Substring(index + 1);
-    //  }
-    //  return retValue;
-    //}
 
     // Creates the key DbColumn object.
     private static DbColumn CreateKeyColumn(DbColumn keyColumn
@@ -368,7 +346,7 @@ namespace LJCDBMessage
       if (retValue)
       {
         // Exclude AutoIncrement column with value of zero.
-        if (true == dataColumn.AutoIncrement
+        if (dataColumn.AutoIncrement
           && !includeAutoIncrement
           && "0" == dataColumn.Value.ToString())
         {
@@ -461,7 +439,6 @@ namespace LJCDBMessage
       }
     }
 
-
     /// <summary>
     /// 
     /// </summary>
@@ -472,7 +449,7 @@ namespace LJCDBMessage
     {
       bool retValue = false;
 
-      propertyNames = DbCommon.GetChangedNames(dataObject);
+      propertyNames = GetChangedNames(dataObject);
       if (propertyNames != null)
       {
         if (propertyNames.Count > 0)
