@@ -89,7 +89,6 @@
     <Content Include="Diagrams\DbRequestJoin.html" />
     <Content Include="Diagrams\DbRequestJoin.jpg" />
     <Content Include="Diagrams\DbResult.jpg" />
-    <Content Include="Doc\DataManagerDoc.html" />
     <Content Include="Doc\DbCommon.xml">
       <SubType>Designer</SubType>
     </Content>

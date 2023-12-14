@@ -191,6 +191,13 @@
   </RequestLookupKeys>
 
   <!-- Other Public Methods -->
+  <AddChangedName>
+    <summary>
+      Adds a changed property name.
+    </summary>
+    <param name="dataObject">The data object.</param>
+    <param name="propertyName">The property name.</param>
+  </AddChangedName>
   <ClearChanged>
     <summary>
       Clears the changed names.
@@ -209,8 +216,16 @@
       Gets the ChangedNames if available and propertyNames is null.
     </summary>
     <param name="dataObject">The data object.</param>
-    <param name="propertyNames">The column names.</param>
+    <param name="propertyNames">The property names.</param>
   </GetDefaultPropertyNames>
+  <IsChanged>
+    <summary>
+      Checks if there are changed property names and outputs the names.
+    </summary>
+    <param name="dataObject">The data object.</param>
+    <param name="propertyNames">The output property names.</param>
+    <returns>true if there are names; otherwise, false.</returns>
+  </IsChanged>
   <SetObjectValues1>
     <summary>
       Sets the Data Object property values from the

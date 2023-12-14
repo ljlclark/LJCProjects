@@ -376,11 +376,8 @@ namespace LJCDBMessage
 
     #region Other Public Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="dataObject"></param>
-    /// <param name="propertyName"></param>
+    // Adds a changed property name.
+    /// <include path='items/AddChangedName/*' file='Doc/DbCommon.xml'/>
     public static void AddChangedName(object dataObject, string propertyName)
     {
       List<string> changedNames = GetChangedNames(dataObject);
@@ -439,12 +436,8 @@ namespace LJCDBMessage
       }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="dataObject"></param>
-    /// <param name="propertyNames"></param>
-    /// <returns></returns>
+    // Checks if there are changed property names and outputs the names.
+    /// <include path='items/IsChanged/*' file='Doc/DbCommon.xml'/>
     public static bool IsChanged(object dataObject, out List<string> propertyNames)
     {
       bool retValue = false;
