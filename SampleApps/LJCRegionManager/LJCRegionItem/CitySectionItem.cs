@@ -40,7 +40,7 @@ namespace LJCRegionItem
     /// </summary>
     /// <param name="dataColumns">The Parent DataColumns.</param>
     /// <param name="propertyName">The Parent DataColumn PropertyName.</param>
-    /// <param name="staticKey">True if a StaticKey, otherwise false.</param>
+    /// <param name="staticKey">true if a StaticKey; otherwise, false.</param>
     /// <returns>The KeyItem object.</returns>
     public KeyItem KeyItem(DbColumns dataColumns, string propertyName
       , bool staticKey = false)
