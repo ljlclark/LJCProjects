@@ -400,7 +400,7 @@ namespace LJCNetCommon
       List<DbColumn> columns;
       DbColumns retValue = new DbColumns();
 
-      columns = FindAll(x => true == x.IsChanged);
+      columns = FindAll(x => x.IsChanged);
       foreach (DbColumn dbColumn in columns)
       {
         retValue.Add(dbColumn.Clone());

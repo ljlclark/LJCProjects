@@ -35,7 +35,7 @@ namespace LJCRegionForm
       // Add the tab pages the first time it is requested.
       foreach (TabPage tabPage in moduleTabs.TabPages)
       {
-        if (false == FormTabs.Contains(tabPage))
+        if (!FormTabs.Contains(tabPage))
         {
           tabPage.Parent = FormTabs;
         }

@@ -53,7 +53,7 @@ namespace LJCGenDocLib
       {
         gen = false;
       }
-      if (true == gen)
+      if (gen)
       {
         CreateMethodXml createMethodXml = new CreateMethodXml(GenAssembly
           , DataAssembly, DataType, DataMethod, assemblyReflect);

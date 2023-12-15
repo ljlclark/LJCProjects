@@ -9,7 +9,7 @@ if %1%. == BuildAll. goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd %1%
 call %mainRoot%TargetFolders.cmd
-goto Process:
+goto Process
 :BuildAll
 call SubFolders.cmd %1%
 set toRoot=%util%\LJCCodeLineCounter\

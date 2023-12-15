@@ -196,12 +196,12 @@ namespace LJCUnitMeasure
 			builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(CodeText.Text))
+			if (!NetString.HasValue(CodeText.Text))
 			{
 				retValue = false;
 				builder.AppendLine($"  {CodeLabel.Text}");
 			}
-			if (false == NetString.HasValue(NameText.Text))
+			if (!NetString.HasValue(NameText.Text))
 			{
 				retValue = false;
 				builder.AppendLine("  {NameLabel.Text}");

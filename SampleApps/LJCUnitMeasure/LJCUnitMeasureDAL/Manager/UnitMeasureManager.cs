@@ -176,7 +176,7 @@ namespace LJCUnitMeasureDAL
 
       if (lookupRecord != null)
       {
-        if (false == isUpdate)
+        if (!isUpdate)
         {
           // Duplicate for "New" record that already exists.
           retValue = true;

@@ -32,7 +32,7 @@ namespace LJCRegionManager
       Cursor = Cursors.WaitCursor;
       InitializeComponent();
       string errorText = CheckDependencies();
-      if (false == string.IsNullOrWhiteSpace(errorText))
+      if (!string.IsNullOrWhiteSpace(errorText))
       {
         MessageBox.Show(errorText);
       }
@@ -50,7 +50,7 @@ namespace LJCRegionManager
       string fileTypeName = "Dependency";
 
       string fileSpec = "LJCNetCommon.dll";
-      if (false == File.Exists(fileSpec))
+      if (!File.Exists(fileSpec))
       {
         retValue += $"{fileTypeName} '{fileSpec}' is not found.";
       }
@@ -63,13 +63,13 @@ namespace LJCRegionManager
     {
       string retValue = null;
 
-      if (false == NetString.HasValue(fileSpec))
+      if (!NetString.HasValue(fileSpec))
       {
         retValue = $"{fileTypeName} name is missing.";
       }
       else
       {
-        if (false == File.Exists(fileSpec))
+        if (!File.Exists(fileSpec))
         {
           retValue = $"{fileTypeName} '{fileSpec}' is not found.";
         }
@@ -101,7 +101,7 @@ namespace LJCRegionManager
         {
           RegionCombo.Items.Add(regionData);
         }
-        if (LJCRegionID < 1 && false == NetString.HasValue(LJCRegionName))
+        if (LJCRegionID < 1 && !NetString.HasValue(LJCRegionName))
         {
           RegionCombo.SelectedIndex = RegionCombo.Items.Count - 1;
         }
@@ -1228,7 +1228,7 @@ namespace LJCRegionManager
       {
         if (FormCommon.CreateTablesPrompt(e.Message, fileSpecs))
         {
-          if (false == ManagerCommon.CreateTables(dataConfigName, fileSpecs))
+          if (!ManagerCommon.CreateTables(dataConfigName, fileSpecs))
           {
             throw new SystemException(e.Message);
           }

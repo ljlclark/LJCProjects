@@ -123,7 +123,7 @@ namespace CVRManager
 
 				// Set missing Temperature values from Base Temperature.
 				string temperature = dataRecord.Temperature;
-				if (false == NetString.HasValue(dataRecord.Temperature))
+				if (!NetString.HasValue(dataRecord.Temperature))
 				{
 					temperature = mBaseTemperature;
 				}

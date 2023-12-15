@@ -307,7 +307,7 @@ namespace LJCGenDocLib
           gen = false;
         }
         if (usePublic == dataMethod.IsPublic
-          && true == gen)
+          && gen)
         {
           repeatItem = section.RepeatItems.Add(dataMethod.Name);
           replacements = repeatItem.Replacements;

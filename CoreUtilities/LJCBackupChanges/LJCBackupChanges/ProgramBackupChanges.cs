@@ -16,8 +16,7 @@ namespace LJCBackupChanges
     {
       GetDefaults(out string targetPath, out string changeFileSpec
         , out string startFolder);
-      if (false == GetArgs(args, ref targetPath, ref changeFileSpec
-        , ref startFolder))
+      if (!GetArgs(args, ref targetPath, ref changeFileSpec, ref startFolder))
       {
         return;
       }
@@ -55,7 +54,7 @@ namespace LJCBackupChanges
           Console.WriteLine("The drive letter must be a single character.");
         }
       }
-      if (false == hasDrive)
+      if (!hasDrive)
       {
         targetPath = $"{driveLetter}:{targetPath}";
       }
@@ -78,9 +77,9 @@ namespace LJCBackupChanges
       {
         startFolder = args[2];
       }
-      if (false == NetString.HasValue(targetPath)
-        || false == NetString.HasValue(changeFileSpec)
-        || false == NetString.HasValue(startFolder))
+      if (!NetString.HasValue(targetPath)
+        || !NetString.HasValue(changeFileSpec)
+        || !NetString.HasValue(startFolder))
       {
         retValue = false;
         var syntax = "Syntax: ProgramBackupChanges \"targetPath\"";
@@ -135,7 +134,7 @@ namespace LJCBackupChanges
     private static bool HasTarget(string targetPath)
     {
       bool retValue = true;
-      if (false == Directory.Exists(targetPath))
+      if (!Directory.Exists(targetPath))
       {
         retValue = false;
         Console.WriteLine($"Target {targetPath} does not exist.");

@@ -70,7 +70,7 @@ namespace LJCRegionItem
       set
       {
         mDataConfigName = NetString.InitString(value);
-        if (false == NetString.HasValue(mDataConfigName))
+        if (!NetString.HasValue(mDataConfigName))
         {
           throw new NullReferenceException("DataConfigName is null.");
         }

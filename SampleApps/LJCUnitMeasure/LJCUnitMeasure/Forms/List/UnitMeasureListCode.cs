@@ -101,7 +101,7 @@ namespace LJCUnitMeasure
 			{
 				if (FormCommon.CreateTablesPrompt(e.Message, fileSpecs))
 				{
-					if (false == ManagerCommon.CreateTables(dataConfigName, fileSpecs))
+					if (!ManagerCommon.CreateTables(dataConfigName, fileSpecs))
 					{
 						throw new SystemException(e.Message);
 					}

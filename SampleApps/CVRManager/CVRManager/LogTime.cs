@@ -24,7 +24,7 @@ namespace CVRManager
 			mLogRanges = new LogRanges();
 			FileSpec = fileSpec;
 			mCurrentProcess = Process.GetCurrentProcess();
-			if (false == useExisting)
+			if (!useExisting)
 			{
 				File.WriteAllText(FileSpec, "");
 			}

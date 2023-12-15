@@ -157,7 +157,7 @@ namespace LJCRegionManager
       };
       lookupRecord = mCitySectionManager.Retrieve(keyColumns);
       if (lookupRecord != null
-        && (false == LJCIsUpdate
+        && (!LJCIsUpdate
         || (LJCIsUpdate && lookupRecord.ID != LJCRecord.ID)))
       {
         retValue = false;
@@ -202,7 +202,7 @@ namespace LJCRegionManager
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (false == NetString.HasValue(NameTextbox.Text))
+      if (!NetString.HasValue(NameTextbox.Text))
       {
         retVal = false;
         builder.AppendLine($"  {NameLabel.Text}");

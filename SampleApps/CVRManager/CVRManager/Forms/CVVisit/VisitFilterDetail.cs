@@ -88,14 +88,14 @@ namespace CVRManager
 			string dateString;
 
 			BeginDate = DataCommon.GetMinDateTime();
-			if (false == BeginDateMask.LJCIsEmpty())
+			if (!BeginDateMask.LJCIsEmpty())
 			{
 				dateString = BeginDateMask.Text;
 				BeginDate = DateTime.Parse(dateString);
 			}
 
 			EndDate = DataCommon.GetMinDateTime();
-			if (false == EndDateMask.LJCIsEmpty())
+			if (!EndDateMask.LJCIsEmpty())
 			{
 				dateString = EndDateMask.Text;
 				EndDate = DateTime.Parse(dateString);

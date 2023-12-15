@@ -145,7 +145,7 @@ namespace LJCNetCommon
       List<DbValue> values;
       DbValues retValue = new DbValues();
 
-      values = FindAll(x => true == x.IsChanged);
+      values = FindAll(x => x.IsChanged);
       foreach (DbValue dbValue in values)
       {
         retValue.Add(dbValue.Clone());

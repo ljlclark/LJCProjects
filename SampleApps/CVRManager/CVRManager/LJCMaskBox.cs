@@ -31,7 +31,7 @@ namespace CVRManager
 		{
 			base.OnEnter(e);
 
-			if (false == NetString.HasValue(Mask))
+			if (!NetString.HasValue(Mask))
 			{
 				Mask = LJCMaskValue;
 			}
@@ -61,7 +61,7 @@ namespace CVRManager
 
 			if (LJCTimeMaskValue == LJCMaskValue)
 			{
-				if (false == IsAMPM(ref e))
+				if (!IsAMPM(ref e))
 				{
 					e.Handled = true;
 					e.KeyChar = 'A';
@@ -79,7 +79,7 @@ namespace CVRManager
 			bool retValue = false;
 
 			if (LJCTextCheckString == Text.Trim()
-				|| false == NetString.HasValue(Text))
+				|| !NetString.HasValue(Text))
 			{
 				retValue = true;
 			}
@@ -112,7 +112,7 @@ namespace CVRManager
 			get { return Text; }
 			set
 			{
-				if (false == NetString.HasValue(value))
+				if (!NetString.HasValue(value))
 				{
 					Mask = "";
 				}

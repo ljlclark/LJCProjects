@@ -24,7 +24,7 @@ namespace LJCUnitMeasureDAL
 		{
 			UnitMeasures retValue;
 
-			if (false == NetString.HasValue(fileSpec))
+			if (!NetString.HasValue(fileSpec))
 			{
 				fileSpec = LJCDefaultFileName;
 			}
@@ -106,7 +106,7 @@ namespace LJCUnitMeasureDAL
 		/// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 		public void LJCSerialize(string fileSpec = null)
 		{
-			if (false == NetString.HasValue(fileSpec))
+			if (!NetString.HasValue(fileSpec))
 			{
 				fileSpec = LJCDefaultFileName;
 			}

@@ -154,7 +154,7 @@ namespace LJCViewEditor
     /// <include path='items/DoNew/*' file='../../LJCGenDoc/Common/List.xml'/>
     internal void DoNew()
     {
-      if (true == NetString.HasValue(ViewEditorList.TableCombo.Text))
+      if (NetString.HasValue(ViewEditorList.TableCombo.Text))
       {
         // Data from list items.
         string tableName = ViewEditorList.TableCombo.Text;

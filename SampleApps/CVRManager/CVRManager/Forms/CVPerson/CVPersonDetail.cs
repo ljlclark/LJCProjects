@@ -189,17 +189,17 @@ namespace CVRManager
 			builder = new StringBuilder(64);
 			builder.AppendLine("Invalid or Missing Data:");
 
-			if (false == NetString.HasValue(FirstNameTextbox.Text))
+			if (!NetString.HasValue(FirstNameTextbox.Text))
 			{
 				retValue = false;
 				builder.AppendLine($"  {FirstNameLabel.Text}");
 			}
-			if (false == NetString.HasValue(MiddleNameTextbox.Text))
+			if (!NetString.HasValue(MiddleNameTextbox.Text))
 			{
 				retValue = false;
 				builder.AppendLine($"  {MiddleNameLabel.Text}");
 			}
-			if (false == NetString.HasValue(LastNameTextbox.Text))
+			if (!NetString.HasValue(LastNameTextbox.Text))
 			{
 				retValue = false;
 				builder.AppendLine($"  {LastNameLabel.Text}");
