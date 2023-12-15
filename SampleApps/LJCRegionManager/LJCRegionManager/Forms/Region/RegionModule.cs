@@ -32,7 +32,7 @@ namespace LJCRegionManager
       Cursor = Cursors.WaitCursor;
       InitializeComponent();
       string errorText = CheckDependencies();
-      if (!string.IsNullOrWhiteSpace(errorText))
+      if (NetString.HasValue(errorText))
       {
         MessageBox.Show(errorText);
       }
