@@ -74,7 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultConverter.cs" />
     <Compile Include="ClassInfo\InfoDataTable.cs" />
-    <Compile Include="Testing.cs" />
+    <Compile Include="DbCommonSBS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\DbRequestJoin.cd" />

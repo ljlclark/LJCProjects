@@ -1,6 +1,6 @@
-// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DbCommon.cs
+// Testing.cs
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -8,8 +8,7 @@ using LJCNetCommon;
 
 namespace LJCDBMessage
 {
-  /// <summary>Common data message methods.</summary>
-  public partial class DbCommon
+  class DbCommonSBS
   {
     // Gets Request columns from the baseDefinition using the propertyNames.
     /// <include path='items/RequestColumns/*' file='Doc/DbCommon.xml'/>
@@ -52,7 +51,7 @@ namespace LJCDBMessage
     }
 
     // Creates DbColumns values from data properties for supplied column list.
-    // Similar to RequestKeys(), DataKeys() and LookupKeys()
+    // Similar to RequestKeys() and LookupKeys()
     private static DbColumns DataColumns(object dataObject
       , DbColumns requestColumns)
     {
@@ -122,6 +121,7 @@ namespace LJCDBMessage
 
     // Gets Request Key columns from baseDefinition using keyColumns and dbJoins.
     /// <include path='items/RequestKeys/*' file='Doc/DbCommon.xml'/>
+    // Similar to DataColumns() and LookupKeys()
     public static DbColumns RequestKeys(DbColumns keyColumns
       , DbColumns baseDefinition, DbJoins dbJoins = null)
     {
@@ -134,7 +134,6 @@ namespace LJCDBMessage
         {
           // Fill out the remainder of the column definition.
           var dbColumn = CreateKeyColumn(keyColumn, baseDefinition, dbJoins);
-
           if (dbColumn != null)
           {
             retValue.Add(dbColumn);
@@ -261,7 +260,6 @@ namespace LJCDBMessage
           {
             // Add DbColumn and value from keyColumns.
             var dbValueColumn = dbColumn.Clone();
-
             if (IsKeyColumn(dbValueColumn, true))
             {
               retValue.Add(dbValueColumn);
@@ -371,30 +369,6 @@ namespace LJCDBMessage
 
     #region Other Public Methods
 
-    // Adds a changed property name.
-    /// <include path='items/AddChangedName/*' file='Doc/DbCommon.xml'/>
-    public static void AddChangedName(object dataObject, string propertyName)
-    {
-      List<string> changedNames = GetChangedNames(dataObject);
-      if (changedNames != null)
-      {
-        var name
-          = changedNames.Find(x => 0 == string.Compare(x, propertyName, true));
-        if (null == name)
-        {
-          changedNames.Add(propertyName);
-        }
-      }
-    }
-
-    // Clears the changed names.
-    /// <include path='items/ClearChanged/*' file='Doc/DbCommon.xml'/>
-    public static void ClearChanged(object dataObject)
-    {
-      List<string> changedNames = GetChangedNames(dataObject);
-      changedNames?.Clear();
-    }
-
     // Gets the names of the changed properties.
     /// <include path='items/GetChangedNames/*' file='Doc/DbCommon.xml'/>
     public static List<string> GetChangedNames(object dataObject)
@@ -428,56 +402,6 @@ namespace LJCDBMessage
         {
           propertyNames = changedNames;
         }
-      }
-    }
-
-    // Checks if there are changed property names and outputs the names.
-    /// <include path='items/IsChanged/*' file='Doc/DbCommon.xml'/>
-    public static bool IsChanged(object dataObject, out List<string> propertyNames)
-    {
-      bool retValue = false;
-
-      propertyNames = GetChangedNames(dataObject);
-      if (propertyNames != null)
-      {
-        if (propertyNames.Count > 0)
-        {
-          retValue = true;
-        }
-      }
-      else
-      {
-        retValue = true;
-        propertyNames = DbColumns.LJCGetPropertyNames(dataObject);
-      }
-      return retValue;
-    }
-
-    // Sets the Data Object property values from the data columns object.
-    /// <include path='items/SetObjectValues1/*' file='Doc/DbCommon.xml'/>
-    public static void SetObjectValues(DbColumns dataColumns, object dataObject)
-    {
-      LJCReflect reflect;
-
-      reflect = new LJCReflect(dataObject);
-      foreach (DbColumn dbColumn in dataColumns)
-      {
-        // Similar logic in ResultConverter.CreateDataFromTable().
-        reflect.SetPropertyValue(dbColumn.PropertyName, dbColumn.Value);
-      }
-    }
-
-    // Sets the Data Object property values from the DbValues object.
-    /// <include path='items/SetObjectValues2/*' file='Doc/DbCommon.xml'/>
-    public static void SetObjectValues(DbValues dataValues, object dataObject)
-    {
-      LJCReflect reflect;
-
-      reflect = new LJCReflect(dataObject);
-      foreach (DbValue dbValue in dataValues)
-      {
-        // Similar logic in ResultConverter.CreateDataFromTable().
-        reflect.SetPropertyValue(dbValue.PropertyName, dbValue.Value);
       }
     }
     #endregion
