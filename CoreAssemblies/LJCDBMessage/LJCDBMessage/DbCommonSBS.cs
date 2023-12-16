@@ -69,7 +69,7 @@ namespace LJCDBMessage
           if (value != null)
           {
             var dbValueColumn = CreateDataColumn(dbColumn, value);
-            if (dbValueColumn != null)
+            if (IsDataColumn(dbValueColumn))
             {
               retValue.Add(dbValueColumn);
             }
@@ -84,23 +84,8 @@ namespace LJCDBMessage
     {
       DbColumn retValue = null;
 
-      bool include = true;
-      if (null == dataColumn
-        || null == value)
-      {
-        include = false;
-      }
-
-      if (include)
-      {
-        // Do not include AutoIncrement columns for "Insert" or "Update".
-        if (dataColumn.AutoIncrement)
-        {
-          include = false;
-        }
-      }
-
-      if (include)
+      if (dataColumn != null
+        || value != null)
       {
         // Set value to null if null specifier is present.
         if ("-null" == value.ToString())
@@ -112,6 +97,19 @@ namespace LJCDBMessage
         {
           Value = value
         };
+      }
+      return retValue;
+    }
+
+    // Checks if the Data column should be included.
+    private static bool IsDataColumn(DbColumn dataColumn)
+    {
+      bool retValue = false;
+
+      if (dataColumn != null
+        && !dataColumn.AutoIncrement)
+      {
+        retValue = true;
       }
       return retValue;
     }
@@ -188,7 +186,6 @@ namespace LJCDBMessage
       if (retValue != null)
       {
         // Create key column with original name.
-        //retValue = retValue.Clone();
         retValue = new DbColumn(retValue)
         {
           ColumnName = columnName,
@@ -258,7 +255,7 @@ namespace LJCDBMessage
         {
           if (dbColumn.Value != null)
           {
-            // Add DbColumn and value from keyColumns.
+            // Create the Data Key column.
             var dbValueColumn = dbColumn.Clone();
             if (IsKeyColumn(dbValueColumn, true))
             {
@@ -309,6 +306,7 @@ namespace LJCDBMessage
           object value = reflect.GetValue(dbColumn.PropertyName);
           if (value != null)
           {
+            // Create the Lookup Key column.
             var dbValueColumn = new DbColumn(dbColumn)
             {
               Value = value

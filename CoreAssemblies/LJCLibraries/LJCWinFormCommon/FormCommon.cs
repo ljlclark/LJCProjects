@@ -617,7 +617,7 @@ namespace LJCWinFormCommon
 
     #region String Value Functions
 
-    // Sets the string to "-" if it is empty or blanks. and to "" if it is "-".
+    // Sets the string to "-null" if empty or blanks. and to "" if "-null".
     /// <include path='items/SetString/*' file='Doc/FormCommon.xml'/>
     public static string SetString(string text)
     {
@@ -625,12 +625,12 @@ namespace LJCWinFormCommon
 
       if (!NetString.HasValue(retValue))
       {
-        retValue = "-";
+        retValue = "-null";
       }
       else
       {
         retValue = text.Trim();
-        if ("-" == retValue)
+        if ("-null" == retValue)
         {
           retValue = "";
         }

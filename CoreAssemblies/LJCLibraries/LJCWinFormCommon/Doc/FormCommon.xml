@@ -265,7 +265,7 @@
   <!-- String Value Functions -->
   <SetString>
     <summary>
-      Sets the string to "-" if it is empty or blanks and to "" if it is "-".
+      Sets the string to "-null" if empty or blanks and to "" if "-null".
     </summary>
     <param name="text">The string text.</param>
     <returns>The modified string.</returns>
