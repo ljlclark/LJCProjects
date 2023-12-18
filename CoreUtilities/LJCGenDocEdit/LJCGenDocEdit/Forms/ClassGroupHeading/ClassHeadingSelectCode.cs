@@ -65,7 +65,7 @@ namespace LJCGenDocEdit
       var values = ValuesGenDocEdit.Instance;
       mSettings = values.StandardSettings;
 
-      Managers = new ManagersDocGen();
+      Managers = new ManagersGenDoc();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
     }
@@ -150,7 +150,7 @@ namespace LJCGenDocEdit
     internal DocClassGroupHeading LJCSelectedRecord { get; set; }
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersGenDoc Managers { get; set; }
 
     // Gets or sets the ClassHeadingGridCode value.
     private ClassHeadingGridCode ClassHeadingGridCode { get; set; }

@@ -93,7 +93,7 @@ namespace LJCGenDocLib
     private DocAssemblyGroups AssemblyGroups { get; }
 
     /// <summary>Gets or sets the Managers object.</summary>
-    public ManagersDocGen Managers { get; set; }
+    public ManagersGenDoc Managers { get; set; }
     #endregion
   }
 }

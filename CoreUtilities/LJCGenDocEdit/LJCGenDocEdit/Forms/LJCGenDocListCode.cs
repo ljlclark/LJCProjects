@@ -194,7 +194,7 @@ namespace LJCGenDocEdit
       var values = ValuesGenDocEdit.Instance;
       mSettings = values.StandardSettings;
 
-      Managers = new ManagersDocGen();
+      Managers = new ManagersGenDoc();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
     }
@@ -405,7 +405,7 @@ namespace LJCGenDocEdit
     #region Properties
 
     /// <summary>The Managers object.</summary>
-    internal ManagersDocGen Managers { get; set; }
+    internal ManagersGenDoc Managers { get; set; }
     #endregion
 
     #region Class Data

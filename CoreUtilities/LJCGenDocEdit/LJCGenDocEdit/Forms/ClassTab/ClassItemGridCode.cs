@@ -523,7 +523,7 @@ namespace LJCGenDocEdit
     private LJCDataGrid ClassGrid { get; set; }
 
     // The Managers object.
-    private ManagersDocGen Managers { get; set; }
+    private ManagersGenDoc Managers { get; set; }
     #endregion
   }
 }

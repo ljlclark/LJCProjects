@@ -419,7 +419,7 @@ namespace LJCGenDocEdit
     private DbColumns GridColumns { get; set; }
 
     // Gets or sets the Managers reference.
-    private ManagersDocGen Managers { get; set; }
+    private ManagersGenDoc Managers { get; set; }
     #endregion
   }
 }

@@ -8,16 +8,14 @@
 // #Value _Namespace_
 // #Value _ParentName_
 // _ClassName_GridCode.cs
-using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
-using LJCViewEditorDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static _FullAppName_._AppName_List;
+using static _FullAppName_._FullAppName_List;
 
 namespace _Namespace_
 {
@@ -27,11 +25,11 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    internal _ClassName_GridCode(_AppName_List parentList)
+    internal _ClassName_GridCode(_FullAppName_List parentList)
     {
       // Initialize property values.
+      parentList.Cursor = Cursors.WaitCursor;
       _AppName_List = parentList;
-      _AppName_List.Cursor = Cursors.WaitCursor;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
       _ParentName_Grid = _AppName_List._ParentName_Grid;
       ResetData();
@@ -42,7 +40,7 @@ namespace _Namespace_
     internal void ResetData()
     {
       Managers = _AppName_List.Managers;
-      ClassName_Manager = Managers._ClassName_Manager;
+      _ClassName_Manager = Managers._ClassName_Manager;
     }
     #endregion
 
@@ -109,14 +107,13 @@ namespace _Namespace_
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var ljcGrid = _ClassName_Grid;
-      var retValue = ljcGrid.LJCRowAdd();
+      var retValue = _ClassName_Grid.LJCRowAdd();
 
       var columnName = _ClassName_.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
-      retValue.LJCSetValues(ljcGrid, dbValues);
+      retValue.LJCSetValues(_ClassName_Grid, dbValues);
       return retValue;
     }
 
@@ -279,7 +276,7 @@ namespace _Namespace_
     {
       _AppName_List.Cursor = Cursors.WaitCursor;
       int id = 0;
-      if (_ClassName_Grid.CurrentRow is LJCGridRow _)
+      if (_ClassName_Grid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
         id = row.LJCGetInt32(_ClassName_.ColumnID);
@@ -304,19 +301,19 @@ namespace _Namespace_
       LJCSelectedRecord = null;
       if (_ClassName_Grid.CurrentRow is LJCGridRow row)
       {
-        Cursor = Cursors.WaitCursor;
+        _AppName_List.Cursor = Cursors.WaitCursor;
         var id = row.LJCGetInt32(_ClassName_.ColumnID);
 
-        var manager = mManagers._ClassName_Manager;
+        var manager = Managers._ClassName_Manager;
         var keyRecord = manager.GetIDKey(id);
-        dataRecord = manager.Retrieve(keyRecord);
+        var dataRecord = manager.Retrieve(keyRecord);
         if (dataRecord != null)
         {
           LJCSelectedRecord = dataRecord;
         }
-        Cursor = Cursors.Default;
+        _AppName_.Cursor = Cursors.Default;
       }
-      DialogResult = DialogResult.OK;
+      _AppName_.DialogResult = DialogResult.OK;
     }
 
     // Adds new row or updates row with

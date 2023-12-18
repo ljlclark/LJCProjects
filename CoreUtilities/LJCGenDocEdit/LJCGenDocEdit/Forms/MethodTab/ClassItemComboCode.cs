@@ -139,7 +139,7 @@ namespace LJCGenDocEdit
     private readonly LJCItemCombo mClassCombo;
     private readonly LJCDataGrid mClassGroupGrid;
     private readonly LJCGenDocList mDocList;
-    private readonly ManagersDocGen mManagers;
+    private readonly ManagersGenDoc mManagers;
     #endregion
   }
 }

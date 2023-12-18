@@ -38,7 +38,7 @@ namespace LJCGenDocDAL
           StandardSettings.SetProperties(fileName);
 
           var settings = StandardSettings;
-          Managers = new ManagersDocGen();
+          Managers = new ManagersGenDoc();
           Managers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
         }
@@ -61,7 +61,7 @@ namespace LJCGenDocDAL
     }
 
     /// <summary>Gets or sets the Managers class reference.</summary>
-    public ManagersDocGen Managers { get; set; }
+    public ManagersGenDoc Managers { get; set; }
 
     /// <summary>Gets the StandardSettings value.</summary>
     public StandardUISettings StandardSettings { get; private set; }

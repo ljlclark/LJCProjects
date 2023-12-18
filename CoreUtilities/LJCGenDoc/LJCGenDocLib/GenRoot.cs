@@ -288,7 +288,7 @@ namespace LJCGenDocLib
     public string HTMLFolderName { get; set; }
 
     /// <summary></summary>
-    public ManagersDocGen Managers { get; set; }
+    public ManagersGenDoc Managers { get; set; }
     #endregion
 
     #region Class Data

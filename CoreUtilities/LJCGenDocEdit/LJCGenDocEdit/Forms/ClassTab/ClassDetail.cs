@@ -552,7 +552,7 @@ namespace LJCGenDocEdit
     internal bool LJCIsUpdate { get; private set; }
 
     // The Managers object.
-    internal ManagersDocGen LJCManagers { get; set; }
+    internal ManagersGenDoc LJCManagers { get; set; }
 
     // Gets or sets the Next flag.
     internal bool LJCNext { get; set; }

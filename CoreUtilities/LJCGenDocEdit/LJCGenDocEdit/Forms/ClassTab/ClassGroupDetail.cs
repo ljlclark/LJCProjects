@@ -566,7 +566,7 @@ namespace LJCGenDocEdit
     internal bool LJCNext { get; set; }
 
     // The Managers object.
-    internal ManagersDocGen LJCManagers { get; set; }
+    internal ManagersGenDoc LJCManagers { get; set; }
 
     // Gets or sets the Previous flag.
     internal bool LJCPrevious { get; set; }

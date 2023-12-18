@@ -216,7 +216,7 @@ namespace LJCGenDocEdit
     private ClassSelect ClassSelect { get; set; }
 
     // The Managers object.
-    private ManagersDocGen Managers { get; set; }
+    private ManagersGenDoc Managers { get; set; }
     #endregion
 
     #region Class Data

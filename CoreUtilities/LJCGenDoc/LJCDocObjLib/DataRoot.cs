@@ -86,7 +86,7 @@ namespace LJCDocObjLib
     public DocAssemblyGroups AssemblyGroups { get; set; }
 
     /// <summary></summary>
-    public ManagersDocGen Managers { get; set; }
+    public ManagersGenDoc Managers { get; set; }
     #endregion
   }
 }

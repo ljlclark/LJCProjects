@@ -456,7 +456,7 @@ namespace LJCGenDocEdit
     internal DbColumns GridColumns { get; set; }
 
     // The Managers object.
-    private ManagersDocGen Managers { get; set; }
+    private ManagersGenDoc Managers { get; set; }
 
     // Gets or sets the Method Grid reference.
     private LJCDataGrid MethodGrid { get; set; }

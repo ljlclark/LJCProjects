@@ -7,7 +7,7 @@
 // #Value _FullAppName_
 // #Value _NameSpace_
 // #Value _VarClassName_
-// _FullAppName_.cs
+// _FullAppName_ListCode.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -20,7 +20,7 @@ using System.Windows.Forms;
 namespace _Namespace_
 {
   // The list form code.
-  /// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+  /// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
   internal partial class _ClassName_List : Form
   {
     #region Item Change Processing
@@ -36,11 +36,11 @@ namespace _Namespace_
           RestoreControlValues();
 
           // Load first control.
-          DataRetrieveCombo();
+          m_ClassName_ComboCode.DatRetrieve();
           break;
 
         case Change.Combo:
-          DataRetrieve_ClassName_();
+          m_ClassName_GridCode.DataRetrieve();
           break;
 
         case Change._ClassName_:
@@ -168,7 +168,7 @@ namespace _Namespace_
       var values = Values_AppName_.Instance;
       mSettings = values.StandardSettings;
 
-      Managers = new Managers();
+      Managers = new Managers_AppName_();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
     }
@@ -258,7 +258,7 @@ namespace _Namespace_
     // Setup the grid code references.
     private void SetupGridCode()
     {
-      //	m_ClassName_GridCode = new _ClassName_GridCode(this);
+      //m_ClassName_GridCode = new _ClassName_GridCode(this);
     }
 
     // Setup the data grids.

@@ -84,7 +84,7 @@
     <Compile Include="Data\DocMethodGroupHeadings.cs" />
     <Compile Include="Data\DocMethodGroups.cs" />
     <Compile Include="Data\DocMethods.cs" />
-    <Compile Include="ManagersDocGen.cs" />
+    <Compile Include="ManagersGenDoc.cs" />
     <Compile Include="Manager\DocAssemblyGroupManager.cs" />
     <Compile Include="Manager\DocAssemblyManager.cs" />
     <Compile Include="Manager\DocClassGroupHeadingManager.cs" />
