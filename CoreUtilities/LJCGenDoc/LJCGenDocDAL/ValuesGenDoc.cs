@@ -1,6 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ValuesDocGen.cs
+// ValuesGenDoc.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using System.IO;
@@ -8,13 +8,13 @@ using System.IO;
 namespace LJCGenDocDAL
 {
   /// <summary>The Application values singleton class.</summary>
-  public sealed class ValuesDocGen
+  public sealed class ValuesGenDoc
   {
     #region Constructors
 
     // Initializes an instance of the object.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public ValuesDocGen()
+    public ValuesGenDoc()
     {
       StandardSettings = new StandardUISettings();
       var fileName = "LJCGenDoc.exe.config";
@@ -55,7 +55,7 @@ namespace LJCGenDocDAL
     public int GenPageCount { get; set; }
 
     /// <summary>Gets the singleton instance.</summary>
-    public static ValuesDocGen Instance
+    public static ValuesGenDoc Instance
     {
       get { return mInstance; }
     }
@@ -70,8 +70,8 @@ namespace LJCGenDocDAL
     #region Class Data
 
     /// <summary>Initialize Singleton.</summary>
-    private static readonly ValuesDocGen mInstance
-      = new ValuesDocGen();
+    private static readonly ValuesGenDoc mInstance
+      = new ValuesGenDoc();
     #endregion
   }
 }

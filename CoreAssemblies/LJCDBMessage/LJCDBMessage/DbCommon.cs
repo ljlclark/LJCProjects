@@ -11,6 +11,8 @@ namespace LJCDBMessage
   /// <summary>Common data message methods.</summary>
   public partial class DbCommon
   {
+    #region Create Request Columns
+
     // Gets Request columns from the baseDefinition using the propertyNames.
     /// <include path='items/RequestColumns/*' file='Doc/DbCommon.xml'/>
     public static DbColumns RequestColumns(DbColumns baseDefinition
@@ -365,8 +367,9 @@ namespace LJCDBMessage
       }
       return retValue;
     }
+    #endregion
 
-    #region Other Public Methods
+    #region ChangedNames Methods
 
     // Adds a changed property name.
     /// <include path='items/AddChangedName/*' file='Doc/DbCommon.xml'/>
@@ -449,6 +452,9 @@ namespace LJCDBMessage
       }
       return retValue;
     }
+    #endregion
+
+    #region Set Object Value Methods
 
     // Sets the Data Object property values from the data columns object.
     /// <include path='items/SetObjectValues1/*' file='Doc/DbCommon.xml'/>

@@ -26,7 +26,7 @@ namespace LJCGenDocLib
       HTMLFolderName = targetPath;
       HTMLFileName = "CodeDoc.html";
       HTMLFileSpec = Path.Combine(HTMLFolderName, HTMLFileName);
-      Managers = ValuesDocGen.Instance.Managers;
+      Managers = ValuesGenDoc.Instance.Managers;
     }
     #endregion
 

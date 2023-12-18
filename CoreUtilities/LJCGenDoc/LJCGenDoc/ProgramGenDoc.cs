@@ -40,7 +40,7 @@ namespace LJCGenDoc
         Console.WriteLine();
 
         // Set DAL config before using anywhere in the program.
-        var configValues = ValuesDocGen.Instance;
+        var configValues = ValuesGenDoc.Instance;
         var settings = configValues.StandardSettings;
         NetCommon.ConsoleConfig(settings.DataConfigName);
 
@@ -71,7 +71,7 @@ namespace LJCGenDoc
         // LJCDocGenLib.GenMethod.GenMethodPage();
         // LJCDocGenLib.CrerateMethodXML.GetXMLData();
         // LJCGenTextLib.GenerateText.GenRepeatItem();
-        var pageCount = ValuesDocGen.Instance.GenPageCount.ToString();
+        var pageCount = ValuesGenDoc.Instance.GenPageCount.ToString();
         File.WriteAllText("HTMLPageCount.txt", pageCount); ;
       }
     }

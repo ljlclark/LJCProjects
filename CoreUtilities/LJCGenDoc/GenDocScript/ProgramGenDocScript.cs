@@ -14,7 +14,7 @@ namespace GenDocScript
       Console.WriteLine();
 
       // Set DAL config before using anywhere in the program.
-      var configValues = ValuesDocGen.Instance;
+      var configValues = ValuesGenDoc.Instance;
       configValues.SetConfigFile("GenDocScript.exe.config");
       var settings = configValues.StandardSettings;
       NetCommon.ConsoleConfig(settings.DataConfigName);

@@ -36,7 +36,7 @@ set src=%utilRoot%LJCDocLib\LJCDocXMLObjLib\%bin%
 echo copy %src%\LJCDocXMLObjLib.dll %to%
 copy %src%\LJCDocXMLObjLib.dll %to%
 
-set src=%utilRoot%LJCDocLib\LJCGenDocDAL\%bin%
+set src=%utilRoot%LJCGenDoc\LJCGenDocDAL\%bin%
 echo copy %src%\LJCGenDocDAL.dll %to%
 copy %src%\LJCGenDocDAL.dll %to%
 

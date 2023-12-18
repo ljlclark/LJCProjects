@@ -22,7 +22,7 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       // Set DAL config before using anywhere in the program.
-      var configValues = ValuesDocGen.Instance;
+      var configValues = ValuesGenDoc.Instance;
       configValues.SetConfigFile("LJCGenDocEdit.exe.config");
       var settings = configValues.StandardSettings;
       Text += $" - {settings.DataConfigName}";
@@ -492,9 +492,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        AssemblyGroupGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        AssemblyGroupGrid.Select();
         if (AssemblyGroupGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
@@ -582,9 +581,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        AssemblyItemGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        AssemblyItemGrid.Select();
         if (AssemblyItemGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
@@ -683,9 +681,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        ClassGroupGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        ClassGroupGrid.Select();
         if (ClassGroupGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
@@ -775,9 +772,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        ClassItemGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        ClassItemGrid.Select();
         if (ClassItemGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
@@ -876,9 +872,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        MethodGroupGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        MethodGroupGrid.Select();
         if (MethodGroupGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
@@ -968,9 +963,8 @@ namespace LJCGenDocEdit
     {
       if (e.Button == MouseButtons.Right)
       {
-        MethodItemGrid.Select();
-
         // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
+        MethodItemGrid.Select();
         if (MethodItemGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.

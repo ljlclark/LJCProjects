@@ -100,7 +100,7 @@ namespace LJCGenDocLib
     {
       bool retValue = false;
 
-      var managers = ValuesDocGen.Instance.Managers;
+      var managers = ValuesGenDoc.Instance.Managers;
 
       var docAssemblyManager = managers.DocAssemblyManager;
       var docAssembly = docAssemblyManager.RetrieveWithName(DataAssembly.Name);

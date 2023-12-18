@@ -19,7 +19,7 @@ namespace LJCDocObjLib
     public DataRoot(DocAssemblyGroups assemblyGroups)
     {
       AssemblyGroups = assemblyGroups;
-      Managers = ValuesDocGen.Instance.Managers;
+      Managers = ValuesGenDoc.Instance.Managers;
       File.WriteAllText("LJCDocObjLib.log", "");
       CreateAssembliesData();
     }

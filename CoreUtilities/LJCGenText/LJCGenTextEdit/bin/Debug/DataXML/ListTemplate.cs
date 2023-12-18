@@ -20,13 +20,13 @@ using System.Windows.Forms;
 namespace _Namespace_
 {
 	// The list form.
-	/// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
-	internal partial class _FullAppName_List : Form
+	/// <include path='items/ListFormDAW/*' file='../../LJCDocLib/Common/List.xml'/>
+	internal partial class _ClassName_List : Form
 	{
 		#region Constructors
 
 		// Initializes an object instance.
-		internal _FullAppName_List()
+		internal _ClassName_List()
 		{
 			Cursor = Cursors.WaitCursor;
 			InitializeComponent();
@@ -203,7 +203,7 @@ namespace _Namespace_
 					break;
 
 				case Keys.F5:
-          m_ClassName_GridCode.DoRefresh();
+					DoRefresh_ClassName_();
 					e.Handled = true;
 					break;
 

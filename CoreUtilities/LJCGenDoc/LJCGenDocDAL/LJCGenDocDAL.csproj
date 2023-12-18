@@ -95,7 +95,7 @@
     <Compile Include="Manager\DocMethodGroupManager.cs" />
     <Compile Include="Manager\DocMethodManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValuesDocGen.cs" />
+    <Compile Include="ValuesGenDoc.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\SQLScript\01DocGenTables.sql" />

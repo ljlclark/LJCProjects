@@ -18,7 +18,7 @@ namespace LJCGenDocLib
     public CreateRootXml(DocAssemblyGroups docGenGroups)
     {
       AssemblyGroups = docGenGroups;
-      Managers = ValuesDocGen.Instance.Managers;
+      Managers = ValuesGenDoc.Instance.Managers;
     }
     #endregion
 

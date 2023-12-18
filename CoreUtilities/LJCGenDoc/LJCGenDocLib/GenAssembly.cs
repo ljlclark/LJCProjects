@@ -65,7 +65,7 @@ namespace LJCGenDocLib
           GenerateText generateText = new GenerateText("<!--");
           generateText.Generate(templateLines, sections, dataFileSpec
             , HTMLFileSpec, true);
-          ValuesDocGen.Instance.GenPageCount++;
+          ValuesGenDoc.Instance.GenPageCount++;
         }
       }
     }
