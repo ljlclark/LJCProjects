@@ -121,7 +121,7 @@ namespace LJCDBClientLib
         if (null == filters
           && !NetCommon.HasItems(requestKeyColumns))
         {
-          throw new ArgumentNullException("keyColumns or filters");
+          throw new ArgumentException("keyColumns or filters");
         }
         //*** End    *** Add - 12/19/23
 
@@ -205,7 +205,7 @@ namespace LJCDBClientLib
         if (null == filters
           && !NetCommon.HasItems(requestKeyColumns))
         {
-          throw new ArgumentNullException("keyColumns or filters");
+          throw new ArgumentException("keyColumns or filters");
         }
         //*** End    *** Add - 12/19/23
 
@@ -240,7 +240,7 @@ namespace LJCDBClientLib
           if (null == filters
             && !NetCommon.HasItems(requestKeyColumns))
           {
-            throw new ArgumentNullException("keyColumns or filters");
+            throw new ArgumentException("keyColumns or filters");
           }
           //*** End    *** Add - 12/19/23
 
@@ -269,13 +269,6 @@ namespace LJCDBClientLib
 
       var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
       var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
-      //*** Begin *** Add - 12/19/23
-      if (null == filters
-        && !NetCommon.HasItems(requestKeyColumns))
-      {
-        throw new ArgumentNullException("keyColumns or filters");
-      }
-      //*** End    *** Add - 12/19/23
 
       retValue = ManagerCommon.CreateRequest(RequestType.Load, TableName
         , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
@@ -359,10 +352,8 @@ namespace LJCDBClientLib
       return retValue;
     }
 
-    /// <summary>
-    /// Creates a PropertyNames list from the data definition.
-    /// </summary>
-    /// <returns>The full PropertyNames list.</returns>
+    // Creates a PropertyNames list from the data definition.
+    /// <include path='items/GetPropertyNames/*' file='Doc/DataManager.xml'/>
     public List<string> GetPropertyNames()
     {
       List<string> retValue = new List<string>();
@@ -434,12 +425,8 @@ namespace LJCDBClientLib
       BaseDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="idName"></param>
-    /// <param name="sequenceName"></param>
-    /// <param name="whereClause"></param>
+    // Resequence the sequence column values.
+    /// <include path='items/Resequence/*' file='Doc/DataManager.xml'/>
     public void Resequence(string idName, string sequenceName
       , string whereClause)
     {
@@ -592,7 +579,8 @@ namespace LJCDBClientLib
     }
     private string mDataConfigName;
 
-    /// <summary>Gets the data definition columns collection.</summary>
+    // Gets or sets a reference to the Data Definition columns collection.
+    /// <include path='items/DataDefinition/*' file='Doc/DataManager.xml'/>
     public DbColumns DataDefinition { get; set; }
 
     /// <summary>Gets or sets the Database assigned columns.</summary>

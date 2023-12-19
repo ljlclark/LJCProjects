@@ -93,7 +93,6 @@
     <Content Include="Diagrams\DataMethods.html" />
     <Content Include="Diagrams\DataMethods.jpg" />
     <Content Include="Doc\ChangedNames.xml" />
-    <Content Include="Doc\DataDoc.txt" />
     <Content Include="Doc\DataManager.xml">
       <SubType>Designer</SubType>
     </Content>

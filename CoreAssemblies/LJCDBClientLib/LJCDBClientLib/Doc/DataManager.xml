@@ -285,21 +285,6 @@
       </code>
     </example>
   </Add>
-  <CreateLoadRequest>
-    <summary>
-      Creates and returns the Load
-      &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-      object.
-    </summary>
-    <param name="keyColumns">The record containing the key field values.</param>
-    <param name="propertyNames">The incuded column property names.</param>
-    <param name="filters">The filter values.</param>
-    <param name="joins">The join values.</param>
-    <returns>
-      The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-      object.
-    </returns>
-  </CreateLoadRequest>
   <Delete>
     <summary>
       Deletes the records with the specified key values.
@@ -371,76 +356,6 @@
     <param name="requestColumns">The request columns.</param>
     <returns>The result object.</returns>
   </ExecuteClientSql>
-  <ExecuteRequest>
-    <summary>
-      Executes the supplied request.
-    </summary>
-    <param name="dbRequest">The request object.</param>
-    <returns>The result object.</returns>
-    <remarks>
-      <para>
-        The DataManager can communicate with one of three different Data Access
-        objects.
-      </para>
-      <para>
-        It first checks the
-        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbDataAccess
-        property for an instance of the
-        &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt; object.
-        If the DbDataAccess property is set, it uses this reference for data
-        access.
-      </para>
-      <para>
-        If the DbDataAccess property is null, then it checks the
-        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbService
-        property for an instance of the
-        &lt;span class="userType"&gt;DbService&lt;/span&gt; object.
-        If the DbService property is set, it uses this reference for data
-        access.
-      </para>
-      <para>
-        If the DbDataAccess and DbService properties are null, then it
-        checks the
-        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbServiceClient
-        property for an instance of the
-        &lt;span class="userType"&gt;DbServiceClient&lt;/span&gt; object.
-        If the DbServiceClient property is set, it uses this reference for data
-        access.
-      </para>
-    </remarks>
-  </ExecuteRequest>
-  <GetSchemaOnly>
-    <summary>
-      Retrieves the column names for the specified table.
-    </summary>
-    <param name="dataConfigName">The data configuration name.</param>
-    <param name="tableName">The table name.</param>
-    <returns>The result with the column names.</returns>
-    <remarks>
-      <para>
-        Creates a "SchemaOnly"
-        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-        object, which is available in the Request property. The request object is
-        passed to the
-        &lt;span class="commonType"&gt;ExecuteRequest()&lt;/span&gt;
-        method.
-      </para>
-    </remarks>
-  </GetSchemaOnly>
-  <GetTableNames>
-    <summary>
-      Retrieves the table names for the data configuration database.
-    </summary>
-    <returns>The result with the table names.</returns>
-    <remarks>
-      Creates a "TableNames"
-      &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-      object, which is available in the Request property. The request object is
-      passed to the
-      &lt;span class="commonType"&gt;ExecuteRequest()&lt;/span&gt;
-      method.
-    </remarks>
-  </GetTableNames>
   <Load>
     <summary>
       Retrieves a collection of data records.
@@ -513,49 +428,49 @@
         // This is an example of the Person Manager code that would access the
         // DataManager Load() method. The supporting class code is listed at the
         // DataManager class level.
-          
+
         using LJCNetCommon;
         using LJCDBMessage;
-          
+
         /// &lt;summary&gt;Provides Person specific data manipulation methods.&lt;/summary&gt;
         public class PersonManager
         {
-          /// &lt;summary&gt;Retrieves a collection of Person records from the database.&lt;/summary&gt;
-          /// &lt;param name="keyObject"&gt;The key record object.&lt;/param&gt;
-          /// &lt;param name="propertyNames"&gt;The included column property names.&lt;/param&gt;
-          /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
-          /// &lt;param name="dbJoins"&gt;The join values.&lt;/param&gt;
-          /// &lt;returns&gt;The Persons collection.&lt;/returns&gt;
-          public Persons Load(Person keyObject = null, List&lt;string&gt; propertyNames = null
-            , DbFilters filters = null, DbJoins dbJoins = null)
-          {
-            Persons retValue = null;
-          
-            DbResult dbResult = mDataManager.Load(keyObject, propertyNames, filters, dbJoins);
-            SQLStatement = mDataManager.SQLStatement;
-            if (dbResult != null &amp;&amp; dbResult.DbRecords.Count &gt; 0)
-            {
-              // Populate a collection with the result records.
-              retValue = CreateCollection(dbResult);
-            }
-            return retValue;
-          }
-          
-          /// &lt;summary&gt;Creates a collection from the result object.&lt;/summary&gt;
-          /// &lt;param name="dbResult"&gt;The result object.&lt;/param&gt;
-          /// &lt;returns&gt;The collection.&lt;/returns&gt;
-          private Persons CreateCollection(DbResult dbResult)
-          {
-            Persons retValue = new Persons();
-          
-            foreach (DbColumns dbColumns in dbResult.DbRecords)
-            {
-              Person person = new Person();
-              DbCommon.SetObjectValues(dbColumns, person);
-              retValue.Add(person);
-            }
-            return retValue;
-          }
+        /// &lt;summary&gt;Retrieves a collection of Person records from the database.&lt;/summary&gt;
+        /// &lt;param name="keyObject"&gt;The key record object.&lt;/param&gt;
+        /// &lt;param name="propertyNames"&gt;The included column property names.&lt;/param&gt;
+        /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
+        /// &lt;param name="dbJoins"&gt;The join values.&lt;/param&gt;
+        /// &lt;returns&gt;The Persons collection.&lt;/returns&gt;
+        public Persons Load(Person keyObject = null, List&lt;string&gt; propertyNames = null
+        , DbFilters filters = null, DbJoins dbJoins = null)
+        {
+        Persons retValue = null;
+
+        DbResult dbResult = mDataManager.Load(keyObject, propertyNames, filters, dbJoins);
+        SQLStatement = mDataManager.SQLStatement;
+        if (dbResult != null &amp;&amp; dbResult.DbRecords.Count &gt; 0)
+        {
+        // Populate a collection with the result records.
+        retValue = CreateCollection(dbResult);
+        }
+        return retValue;
+        }
+
+        /// &lt;summary&gt;Creates a collection from the result object.&lt;/summary&gt;
+        /// &lt;param name="dbResult"&gt;The result object.&lt;/param&gt;
+        /// &lt;returns&gt;The collection.&lt;/returns&gt;
+        private Persons CreateCollection(DbResult dbResult)
+        {
+        Persons retValue = new Persons();
+
+        foreach (DbColumns dbColumns in dbResult.DbRecords)
+        {
+        Person person = new Person();
+        DbCommon.SetObjectValues(dbColumns, person);
+        retValue.Add(person);
+        }
+        return retValue;
+        }
         }
       </code>
     </example>
@@ -651,7 +566,7 @@
         PersonManager personManager = new PersonManager();
         Person personKey = new Person()
         {
-          PersonId = 1
+        PersonId = 1
         };
         Person person = personManager.Retrieve(personKey);
 
@@ -665,27 +580,27 @@
         /// &lt;summary&gt;Provides Person specific data manipulation methods.&lt;/summary&gt;
         public class PersonManager
         {
-          /// &lt;summary&gt;Retrieves a person record from the database.&lt;/summary&gt;
-          /// &lt;param name="keyObject"&gt;The record containing the key field values.&lt;/param&gt;
-          /// &lt;param name="propertyNames"&gt;The incuded column property names.&lt;/param&gt;
-          /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
-          /// &lt;param name="dbJoins"&gt;The join values.&lt;/param&gt;
-          /// &lt;returns&gt;A person object.&lt;/returns&gt;
-          public Person Retrieve(Person keyObject, List&lt;string&gt; propertyNames = null
-            , DbFilters filters = null, DbJoins dbJoins = null)
-          {
-            Person retValue = null;
-          
-            DbResult dbResult = mDataManager.Retrieve(keyObject, propertyNames, filters, dbJoins);
-            SQLStatement = mDataManager.SQLStatement;
-            if (dbResult != null &amp;&amp; dbResult.DbRecords.Count &gt; 0)
-            {
-              // Populate a data object with the result values.
-              retValue = new Person();
-              DbCommon.SetObjectValues(dbResult.DbRecords[0], retValue);
-            }
-            return retValue;
-          }
+        /// &lt;summary&gt;Retrieves a person record from the database.&lt;/summary&gt;
+        /// &lt;param name="keyObject"&gt;The record containing the key field values.&lt;/param&gt;
+        /// &lt;param name="propertyNames"&gt;The incuded column property names.&lt;/param&gt;
+        /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
+        /// &lt;param name="dbJoins"&gt;The join values.&lt;/param&gt;
+        /// &lt;returns&gt;A person object.&lt;/returns&gt;
+        public Person Retrieve(Person keyObject, List&lt;string&gt; propertyNames = null
+        , DbFilters filters = null, DbJoins dbJoins = null)
+        {
+        Person retValue = null;
+
+        DbResult dbResult = mDataManager.Retrieve(keyObject, propertyNames, filters, dbJoins);
+        SQLStatement = mDataManager.SQLStatement;
+        if (dbResult != null &amp;&amp; dbResult.DbRecords.Count &gt; 0)
+        {
+        // Populate a data object with the result values.
+        retValue = new Person();
+        DbCommon.SetObjectValues(dbResult.DbRecords[0], retValue);
+        }
+        return retValue;
+        }
         }
       </code>
     </example>
@@ -747,31 +662,153 @@
         // This is an example of the Person Manager code that would access the
         // DataManager Update() method. The supporting class code is listed at
         // the DataManager class level.
-          
+
         using LJCNetCommon;
         using LJCDBMessage;
-          
+
         /// &lt;summary&gt;Provides Person specific data manipulation methods.&lt;/summary&gt;
         public class PersonManager
         {
-          /// &lt;summary&gt;Updates a record in the database.&lt;/summary&gt;
-          /// &lt;param name="dataObject"&gt;The data record.&lt;/param&gt;
-          /// &lt;param name="keyObject"&gt;The record containing the key field values.&lt;/param&gt;
-          /// &lt;param name="propertyNames"&gt;The incuded column property names.&lt;/param&gt;
-          /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
-          public void Update(Person dataObject, Person keyObject, List&lt;string&gt; propertyNames = null
-            , DbFilters filters = null)
-          {
-            mDataManager.Update(dataObject, keyObject, propertyNames, filters);
-            AffectedCount = mDataManager.AffectedCount;
-            SQLStatement = mDataManager.SQLStatement;
-          }
+        /// &lt;summary&gt;Updates a record in the database.&lt;/summary&gt;
+        /// &lt;param name="dataObject"&gt;The data record.&lt;/param&gt;
+        /// &lt;param name="keyObject"&gt;The record containing the key field values.&lt;/param&gt;
+        /// &lt;param name="propertyNames"&gt;The incuded column property names.&lt;/param&gt;
+        /// &lt;param name="filters"&gt;The filter values.&lt;/param&gt;
+        public void Update(Person dataObject, Person keyObject, List&lt;string&gt; propertyNames = null
+        , DbFilters filters = null)
+        {
+        mDataManager.Update(dataObject, keyObject, propertyNames, filters);
+        AffectedCount = mDataManager.AffectedCount;
+        SQLStatement = mDataManager.SQLStatement;
+        }
         }
       </code>
     </example>
   </Update>
 
   <!-- Other Public Methods -->
+  <CreateLoadRequest>
+    <summary>
+      Creates and returns the Load
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object.
+    </summary>
+    <param name="keyColumns">The record containing the key field values.</param>
+    <param name="propertyNames">The incuded column property names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object.
+    </returns>
+  </CreateLoadRequest>
+  <ExecuteRequest>
+    <summary>
+      Executes the supplied request.
+    </summary>
+    <param name="dbRequest">The request object.</param>
+    <returns>The result object.</returns>
+    <remarks>
+      <para>
+        The DataManager can communicate with one of three different Data Access
+        objects.
+      </para>
+      <para>
+        It first checks the
+        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbDataAccess
+        property for an instance of the
+        &lt;span class="userType"&gt;DbDataAccess&lt;/span&gt; object.
+        If the DbDataAccess property is set, it uses this reference for data
+        access.
+      </para>
+      <para>
+        If the DbDataAccess property is null, then it checks the
+        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbService
+        property for an instance of the
+        &lt;span class="userType"&gt;DbService&lt;/span&gt; object.
+        If the DbService property is set, it uses this reference for data
+        access.
+      </para>
+      <para>
+        If the DbDataAccess and DbService properties are null, then it
+        checks the
+        &lt;span class="userType"&gt;DbServiceRef&lt;/span&gt;.DbServiceClient
+        property for an instance of the
+        &lt;span class="userType"&gt;DbServiceClient&lt;/span&gt; object.
+        If the DbServiceClient property is set, it uses this reference for data
+        access.
+      </para>
+    </remarks>
+  </ExecuteRequest>
+  <GetPropertyNames>
+    <summary>
+      Creates a PropertyNames list from the data definition.
+    </summary>
+    <returns>The full PropertyNames list.</returns>
+  </GetPropertyNames>
+  <GetSchemaOnly>
+    <summary>
+      Retrieves the column names for the specified table.
+    </summary>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <returns>The result with the column names.</returns>
+    <remarks>
+      <para>
+        Creates a "SchemaOnly"
+        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        object, which is available in the Request property. The request object is
+        passed to the
+        &lt;span class="commonType"&gt;ExecuteRequest()&lt;/span&gt;
+        method.
+      </para>
+    </remarks>
+  </GetSchemaOnly>
+  <GetTableNames>
+    <summary>
+      Retrieves the table names for the data configuration database.
+    </summary>
+    <returns>The result with the table names.</returns>
+    <remarks>
+      Creates a "TableNames"
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object, which is available in the Request property. The request object is
+      passed to the
+      &lt;span class="commonType"&gt;ExecuteRequest()&lt;/span&gt;
+      method.
+    </remarks>
+  </GetTableNames>
+  <MapNames>
+    <summary>
+      Maps the column property and rename values.
+    </summary>
+    <param name="columnName">The database column name.</param>
+    <param name="propertyName">The Data Record property name.</param>
+    <param name="renameAs">The SQL query rename value.</param>
+    <param name="caption">The column caption.</param>
+  </MapNames>
+  <Resequence>
+    <summary>
+      Resequence the sequence column values.
+    </summary>
+    <param name="idName">The table ID column name.</param>
+    <param name="sequenceName">The sequence column name.</param>
+    <param name="whereClause">The where clause.</param>
+  </Resequence>
+  <SetDbAssignedColumns>
+    <summary>
+      Sets the database assigned value columns.
+    </summary>
+    <param name="propertyNames">The property names.</param>
+  </SetDbAssignedColumns>
+  <SetLookupColumns>
+    <summary>
+      Adds the lookup column names.
+    </summary>
+    <param name="propertyNames">The property names.</param>
+  </SetLookupColumns>
+
+  <!-- Create Data Methods -->
   <CreateSchemaColumnsResult>
     <summary>
       Retrieves the schema result for the specified table and transforms
@@ -793,27 +830,6 @@
       Gets or sets a reference to the Data Definition columns collection.
     </summary>
   </DataDefinition>
-  <MapNames>
-    <summary>
-      Maps the column property and rename values.
-    </summary>
-    <param name="columnName">The database column name.</param>
-    <param name="propertyName">The Data Record property name.</param>
-    <param name="renameAs">The SQL query rename value.</param>
-    <param name="caption">The column caption.</param>
-  </MapNames>
-  <SetDbAssignedColumns>
-    <summary>
-      Sets the database assigned value columns.
-    </summary>
-    <param name="propertyNames">The property names.</param>
-  </SetDbAssignedColumns>
-  <SetLookupColumns>
-    <summary>
-      Adds the lookup column names.
-    </summary>
-    <param name="propertyNames">The property names.</param>
-  </SetLookupColumns>
   
   <!-- Request -->
   <Request>
