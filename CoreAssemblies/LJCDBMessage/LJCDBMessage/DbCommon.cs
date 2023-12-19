@@ -356,7 +356,8 @@ namespace LJCDBMessage
         {
           retValue = false;
         }
-        else
+
+        if (retValue)
         {
           DateTime minValue = DateTime.Parse(SqlDateTime.MinValue.ToString());
           if (dateTime <= minValue)

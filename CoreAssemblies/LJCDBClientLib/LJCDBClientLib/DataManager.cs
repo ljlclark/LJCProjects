@@ -113,10 +113,17 @@ namespace LJCDBClientLib
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       // Make sure delete is restricted.
-      if ((keyColumns != null && keyColumns.Count > 0)
-        || (filters != null && filters.Count > 0))
+      if (NetCommon.HasItems(keyColumns)
+        || NetCommon.HasItems(filters))
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
+        //*** Begin *** Add - 12/19/23
+        if (null == filters
+          && !NetCommon.HasItems(requestKeyColumns))
+        {
+          throw new ArgumentNullException("keyColumns or filters");
+        }
+        //*** End    *** Add - 12/19/23
 
         Request = ManagerCommon.CreateRequest(RequestType.Delete, TableName
           , null, DataConfigName, SchemaName, requestKeyColumns, filters);
@@ -188,13 +195,29 @@ namespace LJCDBClientLib
     {
       DbResult retValue;
 
-      var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
-      var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+      // Make sure select is restricted.
+      if (NetCommon.HasItems(keyColumns)
+        || NetCommon.HasItems(filters))
+      {
+        var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
+        var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+        //*** Begin *** Add - 12/19/23
+        if (null == filters
+          && !NetCommon.HasItems(requestKeyColumns))
+        {
+          throw new ArgumentNullException("keyColumns or filters");
+        }
+        //*** End    *** Add - 12/19/23
 
-      Request = ManagerCommon.CreateRequest(RequestType.Select, TableName
-        , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
-        , joins);
-      retValue = ExecuteRequest(Request);
+        Request = ManagerCommon.CreateRequest(RequestType.Select, TableName
+          , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
+          , joins);
+        retValue = ExecuteRequest(Request);
+      }
+      else
+      {
+        throw new ArgumentNullException("keyColumns or filters");
+      }
       return retValue;
     }
 
@@ -213,6 +236,13 @@ namespace LJCDBClientLib
         {
           var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
             , BaseDefinition);
+          //*** Begin *** Add - 12/19/23
+          if (null == filters
+            && !NetCommon.HasItems(requestKeyColumns))
+          {
+            throw new ArgumentNullException("keyColumns or filters");
+          }
+          //*** End    *** Add - 12/19/23
 
           Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
             , dataColumns, DataConfigName, SchemaName, requestKeyColumns
@@ -239,6 +269,13 @@ namespace LJCDBClientLib
 
       var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
       var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
+      //*** Begin *** Add - 12/19/23
+      if (null == filters
+        && !NetCommon.HasItems(requestKeyColumns))
+      {
+        throw new ArgumentNullException("keyColumns or filters");
+      }
+      //*** End    *** Add - 12/19/23
 
       retValue = ManagerCommon.CreateRequest(RequestType.Load, TableName
         , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters

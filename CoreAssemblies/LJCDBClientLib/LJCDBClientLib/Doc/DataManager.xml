@@ -19,10 +19,14 @@
         method.
       </para>
       <para>
-        When the Data Manager object is first created, it initializes the
-        DataDefinition property with the definitions for the primary table
-        columns. The DataDefinition property is an
-        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+        The DataManager object creates the contained BaseDefinition collection
+        when the DataManager is created. The BaseDefinition contains the column
+        definitions for the base table. These column definitions are retrieved
+        from the database.
+      </para>
+      <para>
+        The BaseDefinition property
+        is an &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
         object. Each element
         &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
         contains the table ColumnName, PropertyName, Caption, DataTypeName
