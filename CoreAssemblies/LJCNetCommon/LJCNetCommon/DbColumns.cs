@@ -783,24 +783,6 @@ namespace LJCNetCommon
         }
       }
     }
-
-    //// Sets the value for the column with the specified name.
-    ///// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
-    //public void LJCSetValue(string propertyName, object value)
-    //{
-    //  if (value != null)
-    //  {
-    //    var dbColumn = LJCSearchPropertyName(propertyName);
-    //    if (null == dbColumn)
-    //    {
-    //      Add(propertyName, value);
-    //    }
-    //    else
-    //    {
-    //      dbColumn.Value = value;
-    //    }
-    //  }
-    //}
     #endregion
 
     #region Properties

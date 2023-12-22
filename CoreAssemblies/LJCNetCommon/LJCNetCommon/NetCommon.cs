@@ -109,12 +109,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks a data table for columns definitions.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="dataColumns"></param>
-    /// <returns></returns>
+    // Checks a DataColumns collection for items.
+    /// <include path='items/HasColumns/*' file='Doc/NetCommon.xml'/>
     public static bool HasColumns(DataColumnCollection dataColumns)
     {
       bool retValue = true;
@@ -128,7 +124,7 @@ namespace LJCNetCommon
     }
 
     // Checks a data table for columns definitions.
-    /// <include path='items/HasColumns/*' file='Doc/NetCommon.xml'/>
+    /// <include path='items/HasColumns1/*' file='Doc/NetCommon.xml'/>
     public static bool HasColumns(DataTable dataTable)
     {
       bool retValue = true;
@@ -168,12 +164,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks an IList collection for items.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="dataSet"></param>
-    /// <returns></returns>
+    // Checks a DataSet for tables.
+    /// <include path='items/HasTables/*' file='Doc/NetCommon.xml'/>
     public static bool HasTables(DataSet dataSet)
     {
       bool retValue = false;

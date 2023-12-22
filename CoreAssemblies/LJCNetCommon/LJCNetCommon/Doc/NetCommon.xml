@@ -76,17 +76,24 @@
   </CompareNull>
   <HasColumns>
     <summary>
+      Checks a DataColumns collection for items.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <returns>true if the collection has items; otherwise, false.</returns>
+  </HasColumns>
+  <HasColumns1>
+    <summary>
       Checks a data table for columns definitions.
     </summary>
     <param name="dataTable">The data table object.</param>
-    <returns>True if the data table contains Columns.</returns>
-  </HasColumns>
+    <returns>true if the data table contains Columns; otherwise, false.</returns>
+  </HasColumns1>
   <HasData>
     <summary>
       Checks a data table for rows. (E)
     </summary>
     <param name="dataTable">The data table object.</param>
-    <returns>True if the data table contains rows.</returns>
+    <returns>true if the data table contains rows; otherwise, false.</returns>
     <remarks>
       This allows a single if statement where the DataTable value may be null.
     </remarks>
@@ -110,8 +117,15 @@
       Checks an IList collection for items.
     </summary>
     <param name="list">The IList interface.</param>
-    <returns>True if the collection contains items.</returns>
+    <returns>true if the collection contains items; otherwise; false.</returns>
   </HasItems>
+  <HasTables>
+    <summary>
+      Checks a DataSet for tables.
+    </summary>
+    <param name="dataSet">The DataSet object.</param>
+    <returns>true if the DataSet has tables; otherwise, false.</returns>
+  </HasTables>
   <IsEqual>
     <summary>
       Checks if two values are equal.
