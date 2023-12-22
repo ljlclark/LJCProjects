@@ -95,7 +95,7 @@ namespace LJCRegionManager
       regionManager.SetOrderByName();
       records = regionManager.Load();
 
-      if (records != null && records.Count > 0)
+      if (NetCommon.HasItems(records))
       {
         foreach (RegionData regionData in records)
         {
@@ -156,7 +156,7 @@ namespace LJCRegionManager
         provinceManager.SetOrderByName();
         Provinces records = provinceManager.Load(keyColumns);
 
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           SetupGridProvince(records[0]);  // Region
           foreach (Province province in records)
@@ -281,7 +281,7 @@ namespace LJCRegionManager
         cityManager.SetOrderByName();
         Cities cities = cityManager.Load(keyColumns);
 
-        if (cities != null && cities.Count > 0)
+        if (NetCommon.HasItems(cities))
         {
           SetupGridCity(cities[0]);  // Region
           foreach (City city in cities)
@@ -406,7 +406,7 @@ namespace LJCRegionManager
         citySectionManager.SetOrderByName();
         CitySections list = citySectionManager.Load(keyColumns);
 
-        if (list != null && list.Count > 0)
+        if (NetCommon.HasItems(list))
         {
           SetupGridCitySection(list[0]);  // Region
           foreach (CitySection city in list)

@@ -43,7 +43,7 @@ namespace LJCGenTextEdit
         string sectionName = parentRow.LJCGetCellText("Name");
 
         var records = GenDataManager.LoadRepeatItems(sectionName);
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           foreach (RepeatItem record in records)
           {

@@ -383,8 +383,7 @@ namespace LJCGenTextEdit
         MessageBox.Show("mSyntaxColors is null");
       }
 
-      if (mSyntaxColors.ColorSettings != null
-        && mSyntaxColors.ColorSettings.Count > 0)
+      if (NetCommon.HasItems(mSyntaxColors.ColorSettings))
       {
         foreach (ColorSetting setting in mSyntaxColors.ColorSettings)
         {

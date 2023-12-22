@@ -51,7 +51,7 @@ namespace LJCUnitMeasure
 			var unitSystemManager = mManagers.UnitSystemManager;
 			var dataRecords = unitSystemManager.Load();
 
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (UnitSystem dataRecord in dataRecords)
 				{

@@ -121,7 +121,7 @@ namespace LJCGenDocDAL
     {
       DocClassGroups retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocClassGroups();
         foreach (DocClassGroup item in list)

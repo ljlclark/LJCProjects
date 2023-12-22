@@ -138,8 +138,6 @@ namespace _Namespace_
       // Use common data definitions.
       _ClassName_ keyRecord = GetIDKey((int)id);
       var dbResult = DataManager.Retrieve(keyRecord);
-      //if (dbResult != null && dbResult.DbRecords != null
-      //	&& dbResult.DbRecords.Count > 0)
       if (DbResult.HasRows(dbResult))
       {
         retValue = dbResult.GetDbColumns(dbResult.DbRecords[0]);

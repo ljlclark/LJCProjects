@@ -32,7 +32,7 @@ namespace CVRManager
 			mParent.Cursor = Cursors.WaitCursor;
 			mCVPersonGrid.LJCRowsClear();
 
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (CVPerson record in dataRecords)
 				{

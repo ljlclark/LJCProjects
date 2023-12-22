@@ -133,7 +133,7 @@ namespace LJCDataDetailLib
       if (keyItems != null)
       {
         items = keyItems.SearchPropertyName(dataColumn.PropertyName);
-        if (items != null && items.Count > 0)
+        if (KeyItems.HasItems(items))
         {
           isNext = false;
           if (1 == items.Count)

@@ -25,7 +25,7 @@ namespace LJCDocObjLib
           Paras = new DataParas(),
           Code = docExample.Code
         };
-        if (docExample.Paras != null && docExample.Paras.Count > 0)
+        if (NetCommon.HasItems(docExample.Paras))
         {
           foreach (DocPara docPara in docExample.Paras)
           {
@@ -114,7 +114,7 @@ namespace LJCDocObjLib
 
       if (docRemarks != null
         && (NetString.HasValue(docRemarks.Text)
-        || (docRemarks.Paras != null && docRemarks.Paras.Count > 0)))
+        || NetCommon.HasItems(docRemarks.Paras)))
       {
         retValue = new DataRemark()
         {
@@ -124,7 +124,7 @@ namespace LJCDocObjLib
         {
           retValue.Text = docRemarks.Text;
         }
-        if (docRemarks.Paras != null && docRemarks.Paras.Count > 0)
+        if (NetCommon.HasItems(docRemarks.Paras))
         {
           foreach (DocPara docPara in docRemarks.Paras)
           {
@@ -170,18 +170,14 @@ namespace LJCDocObjLib
       hasSyntax = false;
 
       if (remark != null
-        // && (LJCNetString.HasValue(remark.Text)
-        && remark.Paras != null && remark.Paras.Count > 0)
+        && NetCommon.HasItems(remark.Paras))
       {
-        if (remark.Paras != null && remark.Paras.Count > 0)
+        foreach (DataPara dataPara in remark.Paras)
         {
-          foreach (DataPara dataPara in remark.Paras)
+          if (dataPara.Text != null && dataPara.Text.Trim().StartsWith("Syntax:"))
           {
-            if (dataPara.Text != null && dataPara.Text.Trim().StartsWith("Syntax:"))
-            {
-              hasSyntax = true;
-              retValue = dataPara.Text.Trim().Substring("Syntax:".Length);
-            }
+            hasSyntax = true;
+            retValue = dataPara.Text.Trim().Substring("Syntax:".Length);
           }
         }
       }

@@ -111,7 +111,7 @@ namespace LJCGenDocDAL
     {
       DocClassGroupHeadings retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocClassGroupHeadings();
         foreach (DocClassGroupHeading item in list)

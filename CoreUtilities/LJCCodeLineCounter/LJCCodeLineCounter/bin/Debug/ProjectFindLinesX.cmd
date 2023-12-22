@@ -1,4 +1,4 @@
-set Find="true == "
+set Find=".Count > 0"
 
 if %1. == . goto default
 set folder=%1

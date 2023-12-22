@@ -156,7 +156,7 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (viewJoinOn.ChangedNames.Count > 0)
+          if (NetCommon.HasItems(viewJoinOn.ChangedNames))
           {
             var keyColumns = GetIDKey(retrieveData.ID);
             Update(viewJoinOn, keyColumns, viewJoinOn.ChangedNames);

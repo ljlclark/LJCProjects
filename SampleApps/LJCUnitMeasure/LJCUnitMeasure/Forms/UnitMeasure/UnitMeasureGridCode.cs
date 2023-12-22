@@ -59,7 +59,7 @@ namespace LJCUnitMeasure
 			};
 			dataRecords = unitMeasureManager.LoadBySequence(keyColumns);
 
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (UnitMeasure dataRecord in dataRecords)
 				{

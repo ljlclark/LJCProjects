@@ -41,7 +41,7 @@ namespace LJCGenTextEdit
       if (GenDataManager != null)
       {
         var records = GenDataManager.LoadSections();
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           foreach (Section record in records)
           {

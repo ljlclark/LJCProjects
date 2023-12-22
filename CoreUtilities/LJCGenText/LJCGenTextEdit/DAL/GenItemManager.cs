@@ -87,8 +87,7 @@ namespace LJCGenTextEdit
         {
           // Check for child items.
           Replacements replacements = searchRepeatItem.Replacements;
-          if (replacements != null
-            && replacements.Count > 0)
+          if (NetCommon.HasItems(replacements))
           {
             string errorText = "The RepeatItem cannot be deleted becauses it has child items.";
             throw new InvalidOperationException(errorText);

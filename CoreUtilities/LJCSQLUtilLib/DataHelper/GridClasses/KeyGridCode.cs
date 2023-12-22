@@ -61,7 +61,7 @@ namespace DataHelper
           }
         }
 
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           foreach (DbMetaDataKey record in records)
           {

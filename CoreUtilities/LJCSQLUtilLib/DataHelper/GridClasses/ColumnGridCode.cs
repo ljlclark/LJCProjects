@@ -55,7 +55,7 @@ namespace DataHelper
         };
         records = dataColumnManager.Load(keyColumns);
 
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           foreach (DbMetaDataColumn record in records)
           {

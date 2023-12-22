@@ -429,7 +429,7 @@ namespace LJCGenTextLib
     {
       RepeatItems retValue = new RepeatItems();
 
-      if (ActiveSections != null && ActiveSections.Count > 0)
+      if (NetCommon.HasItems(ActiveSections))
       {
         for (int index = ActiveSections.Count - 1; index >= 0; index--)
         {
@@ -648,7 +648,7 @@ namespace LJCGenTextLib
     // <include path='items/PopSection/*' file='Doc/GenerateText.xml'/>
     private void RemoveActiveSection()
     {
-      if (ActiveSections != null && ActiveSections.Count > 0)
+      if (NetCommon.HasItems(ActiveSections))
       {
         ActiveSections.RemoveAt(ActiveSections.Count - 1);
       }

@@ -91,7 +91,7 @@ namespace LJCUnitMeasureDAL
 		{
 			UnitTypes retValue = null;
 
-			if (list != null && list.Count > 0)
+			if (NetCommon.HasItems(list))
 			{
 				retValue = new UnitTypes();
 				foreach (UnitType item in list)

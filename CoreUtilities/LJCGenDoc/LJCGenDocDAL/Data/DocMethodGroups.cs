@@ -119,7 +119,7 @@ namespace LJCGenDocDAL
     {
       DocMethodGroups retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocMethodGroups();
         foreach (DocMethodGroup item in list)

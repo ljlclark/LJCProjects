@@ -689,7 +689,7 @@ namespace LJCDataDetail
       if (LJCKeyItems != null)
       {
         propertyItems = LJCKeyItems.Items.FindAll(x => x.PropertyName == propertyName);
-        if (propertyItems != null && propertyItems.Count > 0)
+        if (NetCommon.HasItems(propertyItems))
         {
           foreach (KeyItem keyItem in propertyItems)
           {

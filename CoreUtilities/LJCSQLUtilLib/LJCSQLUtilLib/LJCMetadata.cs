@@ -106,7 +106,7 @@ namespace LJCSQLUtilLib
 			StringBuilder builder;
 			string retValue = null;
 
-			if (mdColumns != null && mdColumns.Count > 0)
+			if (NetCommon.HasItems(mdColumns))
 			{
 				builder = new StringBuilder(128);
 				foreach (DbMetaDataColumn mdColumn in mdColumns)
@@ -189,7 +189,7 @@ namespace LJCSQLUtilLib
 			string retValue = null;
 
 			DbMetaDataKeys mdKeys = MdKeyManager.LoadPrimaryKeys();
-			if (mdKeys != null && mdKeys.Count > 0)
+			if (NetCommon.HasItems(mdKeys))
 			{
 				if (null == builder)
 				{
@@ -224,7 +224,7 @@ namespace LJCSQLUtilLib
 			foreach (DbMetaDataColumn mdColumn in mdColumns)
 			{
 				DbMetaDataKeys mdKeys = MdKeyManager.LoadForeignKey(mdColumn.ID);
-				if (mdKeys != null && mdKeys.Count > 0)
+				if (NetCommon.HasItems(mdKeys))
 				{
 					if (null == builder)
 					{
@@ -269,7 +269,7 @@ namespace LJCSQLUtilLib
 
 			builder.AppendLine("-- Drop table FK constraints. ");
 			foreignKeys = LoadSchemaForeignKeys(tableName);
-			if (null != foreignKeys && foreignKeys.Count > 0)
+			if (NetCommon.HasItems(foreignKeys))
 			{
 				foreach (ForeignKey foreignKey in foreignKeys)
 				{
@@ -283,7 +283,7 @@ namespace LJCSQLUtilLib
 
 			builder.AppendLine("-- Drop table PK constraints. ");
 			primaryKeys = LoadSchemaPrimaryKeys(tableName);
-			if (null != primaryKeys && primaryKeys.Count > 0)
+			if (NetCommon.HasItems(primaryKeys))
 			{
 				foreach (ForeignKey foreignKey in primaryKeys)
 				{
@@ -356,7 +356,7 @@ namespace LJCSQLUtilLib
 			builder.AppendLine();
 
 			builder.Append("-- Create new table FK constraints. ");
-			if (null != foreignKeys && foreignKeys.Count > 0)
+			if (NetCommon.HasItems(foreignKeys))
 			{
 				foreach (ForeignKey foreignKey in foreignKeys)
 				{

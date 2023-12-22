@@ -197,7 +197,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (dbFilters != null && dbFilters.Count > 0)
+      if (NetCommon.HasItems(dbFilters))
       {
         StringBuilder builder = new StringBuilder(64);
         bool first = true;
@@ -229,7 +229,7 @@ namespace LJCDBMessage
           // Add conditions.
           DbConditionSet conditionSet = filter.ConditionSet;
           var conditions = filter.ConditionSet.Conditions;
-          if (conditions != null && conditions.Count > 0)
+          if (NetCommon.HasItems(conditions))
           {
             // Begin the conditions group.
             builder.Append("(");
@@ -265,7 +265,7 @@ namespace LJCDBMessage
           }
 
           // Recursive filters.
-          if (filter.Filters != null && filter.Filters.Count > 0)
+          if (NetCommon.HasItems(filter.Filters))
           {
             builder.Append(FilterWhereClause(filter.Filters, true));
           }
@@ -324,7 +324,7 @@ namespace LJCDBMessage
         builder.Append(")");
 
         // Recursive JoinOns.
-        if (dbJoinOn.JoinOns.Count > 0)
+        if (NetCommon.HasItems(dbJoinOn.JoinOns))
         {
           builder.Append(GetJoinOns(dbJoin, dbJoinOn.JoinOns, true));
         }
@@ -367,7 +367,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (mDbRequest.Columns != null && mDbRequest.Columns.Count > 0)
+      if (NetCommon.HasItems(mDbRequest.Columns))
       {
         StringBuilder builder = new StringBuilder(64);
         foreach (DbColumn dbColumn in mDbRequest.Columns)
@@ -402,7 +402,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (dbJoins != null && dbJoins.Count > 0)
+      if (NetCommon.HasItems(dbJoins))
       {
         StringBuilder builder = new StringBuilder(64);
         foreach (DbJoin dbJoin in dbJoins)
@@ -430,7 +430,7 @@ namespace LJCDBMessage
       string retValue = null;
 
       DbColumns keyColumns = mDbRequest.KeyColumns;
-      if (keyColumns != null && keyColumns.Count > 0)
+      if (NetCommon.HasItems(keyColumns))
       {
         StringBuilder builder = new StringBuilder(64);
         foreach (DbColumn dbColumn in keyColumns)
@@ -509,7 +509,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (mDbRequest.OrderByNames.Count > 0)
+      if (NetCommon.HasItems(mDbRequest.OrderByNames))
       {
         StringBuilder builder = new StringBuilder(64);
         builder.Append("order by ");
@@ -535,7 +535,8 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (mDbRequest.OrderByNames.Count > 0 && mDbRequest.PageSize > 0)
+      if (NetCommon.HasItems(mDbRequest.OrderByNames)
+        && mDbRequest.PageSize > 0)
       {
         StringBuilder builder = new StringBuilder(64);
         builder.Append($"offset {mDbRequest.PageStartIndex} rows\r\n");
@@ -593,7 +594,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (mDbRequest.Columns != null && mDbRequest.Columns.Count > 0)
+      if (NetCommon.HasItems(mDbRequest.Columns))
       {
         StringBuilder builder = new StringBuilder(64);
         foreach (DbColumn dbColumn in mDbRequest.Columns)

@@ -131,7 +131,8 @@ namespace LJCDBClientSQLLib
       string retValue = null;
 
       // Must have a KeyColumns definition.
-      if (keyColumns != null && keyColumns.Count > 0)
+      if (NetCommon.HasItems(keyColumns)
+        || NetCommon.HasItems(filters))
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 

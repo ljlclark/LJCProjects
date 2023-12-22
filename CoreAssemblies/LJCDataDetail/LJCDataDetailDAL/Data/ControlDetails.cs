@@ -107,7 +107,7 @@ namespace LJCDataDetailDAL
     {
       ControlDetails retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new ControlDetails();
         foreach (ControlDetail item in list)

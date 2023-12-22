@@ -112,7 +112,7 @@ namespace _Namespace_
     {
       _CollectionName_ retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new _CollectionName_();
         foreach (_ClassName_ item in list)

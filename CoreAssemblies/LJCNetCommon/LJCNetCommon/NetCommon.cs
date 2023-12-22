@@ -110,13 +110,30 @@ namespace LJCNetCommon
     }
 
     // Checks a data table for columns definitions.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataColumns"></param>
+    /// <returns></returns>
+    public static bool HasColumns(DataColumnCollection dataColumns)
+    {
+      bool retValue = true;
+
+      if (dataColumns != null
+        && dataColumns.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks a data table for columns definitions.
     /// <include path='items/HasColumns/*' file='Doc/NetCommon.xml'/>
     public static bool HasColumns(DataTable dataTable)
     {
       bool retValue = true;
 
-      if (dataTable.Columns != null
-        && dataTable.Columns.Count > 0)
+      if (HasColumns(dataTable.Columns))
       {
         retValue = true;
       }
@@ -127,12 +144,13 @@ namespace LJCNetCommon
     /// <include path='items/HasData/*' file='Doc/NetCommon.xml'/>
     public static bool HasData(DataTable dataTable)
     {
-      bool retValue = true;
+      bool retValue = false;
 
-      if (dataTable == null || dataTable.Rows == null
-        || dataTable.Rows.Count == 0)
+      if (dataTable != null
+        && dataTable.Rows != null
+        && dataTable.Rows.Count > 0)
       {
-        retValue = false;
+        retValue = true;
       }
       return retValue;
     }
@@ -144,6 +162,25 @@ namespace LJCNetCommon
       bool retValue = false;
 
       if (list != null && list.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks an IList collection for items.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataSet"></param>
+    /// <returns></returns>
+    public static bool HasTables(DataSet dataSet)
+    {
+      bool retValue = false;
+
+      if (dataSet != null
+        && dataSet.Tables != null
+        && dataSet.Tables.Count > 0)
       {
         retValue = true;
       }

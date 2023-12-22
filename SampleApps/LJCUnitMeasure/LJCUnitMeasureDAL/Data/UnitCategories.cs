@@ -88,7 +88,7 @@ namespace LJCUnitMeasureDAL
 		{
 			UnitCategories retValue = null;
 
-			if (list != null && list.Count > 0)
+			if (NetCommon.HasItems(list))
 			{
 				retValue = new UnitCategories();
 				foreach (UnitCategory item in list)

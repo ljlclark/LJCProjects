@@ -111,8 +111,7 @@ namespace LJCDBDataAccess
       retValue.AffectedRecords = AffectedCount;
       retValue.ExecutedSql = SqlStatement;
 
-      if (DbRequest.DbAssignedColumns != null
-        && DbRequest.DbAssignedColumns.Count > 0)
+      if (NetCommon.HasItems(DbRequest.DbAssignedColumns))
       {
         string saveSql = SqlStatement;
 

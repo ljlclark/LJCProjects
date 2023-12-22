@@ -39,8 +39,8 @@ namespace LJCDBMessage
     {
       bool retValue = false;
 
-      if (dbResult != null && dbResult.Columns != null
-        && dbResult.Columns.Count > 0)
+      if (dbResult != null
+        && NetCommon.HasItems(dbResult.Columns))
       {
         retValue = true;
       }
@@ -67,8 +67,8 @@ namespace LJCDBMessage
     {
       bool retValue = false;
 
-      if (dbResult != null && dbResult.Rows != null
-        && dbResult.Rows.Count > 0)
+      if (dbResult != null
+        && NetCommon.HasItems(dbResult.Rows))
       {
         retValue = true;
       }
@@ -136,7 +136,7 @@ namespace LJCDBMessage
     {
       bool retValue = false;
 
-      if (Rows != null && Rows.Count > 0)
+      if (NetCommon.HasItems(Rows))
       {
         retValue = true;
       }
@@ -163,7 +163,7 @@ namespace LJCDBMessage
     {
       bool retValue = false;
 
-      if (Rows != null && Rows.Count > 0)
+      if (NetCommon.HasItems(Rows))
       {
         retValue = true;
       }
@@ -261,11 +261,11 @@ namespace LJCDBMessage
     public void SetColumns(DbColumns dataColumns, DbJoins dbJoins = null)
     {
       Columns = dataColumns.Clone();
-      if (dbJoins != null && dbJoins.Count > 0)
+      if (NetCommon.HasItems(dbJoins))
       {
         foreach (DbJoin dbJoin in dbJoins)
         {
-          if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+          if (NetCommon.HasItems(dbJoin.Columns))
           {
             foreach (DbColumn dbColumn in dbJoin.Columns)
             {
@@ -354,11 +354,11 @@ namespace LJCDBMessage
     private void AddJoinRowValues(DbValues dbValues, DataRow dataRow
       , DbJoins dbJoins)
     {
-      if (dbJoins != null && dbJoins.Count > 0)
+      if (NetCommon.HasItems(dbJoins))
       {
         foreach (DbJoin dbJoin in dbJoins)
         {
-          if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+          if (NetCommon.HasItems(dbJoin.Columns))
           {
             DbValues joinValues = GetRowValues(dbJoin.Columns, dataRow);
             foreach (DbValue dbValue in joinValues)

@@ -46,7 +46,7 @@ namespace DataHelper
 			var dataTableManager = mManagers.DbMetaDataTableManager;
 			records = dataTableManager.Load();
 
-			if (records != null && records.Count > 0)
+			if (NetCommon.HasItems(records))
 			{
 				foreach (DbMetaDataTable record in records)
 				{

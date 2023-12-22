@@ -113,7 +113,7 @@ namespace LJCDBViewDAL
     {
       var viewFilters
         = Managers.ViewFilterManager.LoadWithParentID(viewDataID);
-      if (viewFilters != null && viewFilters.Count > 0)
+      if (NetCommon.HasItems(viewFilters))
       {
         var manager = Managers.ViewConditionSetManager;
         dbRequest.Filters = new DbFilters();
@@ -128,7 +128,7 @@ namespace LJCDBViewDAL
           }
 
           // Create the Condition Set.
-          if (viewConditions != null && viewConditions.Count > 0)
+          if (NetCommon.HasItems(viewConditions))
           {
             DbConditionSet dbConditionSet = new DbConditionSet()
             {
@@ -152,7 +152,7 @@ namespace LJCDBViewDAL
     private void GetViewJoins(int viewDataID, DbRequest dbRequest)
     {
       var viewJoins = Managers.ViewJoinManager.LoadWithParentID(viewDataID);
-      if (viewJoins != null && viewJoins.Count > 0)
+      if (NetCommon.HasItems(viewJoins))
       {
         dbRequest.Joins = new DbJoins();
         foreach (ViewJoin viewJoin in viewJoins)
@@ -164,7 +164,7 @@ namespace LJCDBViewDAL
           // Add the Join On clauses.
           var ViewJoinOns
             = Managers.ViewJoinOnManager.LoadWithParentID(viewJoin.ID);
-          if (ViewJoinOns != null && ViewJoinOns.Count > 0)
+          if (NetCommon.HasItems(ViewJoinOns))
           {
             dbJoin.JoinOns = new DbJoinOns();
             foreach (ViewJoinOn ViewJoinOn in ViewJoinOns)
@@ -187,7 +187,7 @@ namespace LJCDBViewDAL
     {
       var viewOrderBys
         = Managers.ViewOrderByManager.LoadWithParentID(viewDataID);
-      if (viewOrderBys != null && viewOrderBys.Count > 0)
+      if (NetCommon.HasItems(viewOrderBys))
       {
         foreach (ViewOrderBy viewOrderBy in viewOrderBys)
         {
@@ -347,8 +347,8 @@ namespace LJCDBViewDAL
       ViewGridColumns retValue = null;
 
       // Next Statement - Change 1/6/21
-      if (viewDataID > 0 && dbRequest.Columns != null
-        && dbRequest.Columns.Count > 0)
+      if (viewDataID > 0
+        && NetCommon.HasItems(dbRequest.Columns))
       {
         retValue = new ViewGridColumns();
         int sequence = 0;
@@ -443,7 +443,7 @@ namespace LJCDBViewDAL
       //ViewGridColumn viewGridColumn;
       ViewGridColumns retValue = null;
 
-      if (dbRequest.Joins != null && dbRequest.Joins.Count > 0)
+      if (NetCommon.HasItems(dbRequest.Joins))
       {
         retValue = new ViewGridColumns();
         foreach (DbJoin dbJoin in dbRequest.Joins)
@@ -465,7 +465,7 @@ namespace LJCDBViewDAL
           }
           if (viewJoin != null)
           {
-            if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+            if (NetCommon.HasItems(dbJoin.Columns))
             {
               foreach (DbColumn dbColumn in dbJoin.Columns)
               {
@@ -541,7 +541,7 @@ namespace LJCDBViewDAL
       ViewColumns retValue = null;
 
       if (CheckColumnParams(viewDataID, dbRequest)
-        && dbRequest.Columns != null && dbRequest.Columns.Count > 0)
+        && NetCommon.HasItems(dbRequest.Columns))
       {
         retValue = new ViewColumns();
         foreach (DbColumn dbColumn in dbRequest.Columns)
@@ -645,7 +645,7 @@ namespace LJCDBViewDAL
       ViewFilters retValue = null;
 
       CheckFilterParams(viewDataID, dbRequest);
-      if (dbRequest.Filters != null && dbRequest.Filters.Count > 0)
+      if (NetCommon.HasItems(dbRequest.Filters))
       {
         retValue = new ViewFilters();
         foreach (DbFilter dbFilter in dbRequest.Filters)
@@ -682,7 +682,7 @@ namespace LJCDBViewDAL
       ViewJoinColumns retValue = null;
 
       CheckJoinColumnParams(viewJoin, dbJoin);
-      if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+      if (NetCommon.HasItems(dbJoin.Columns))
       {
         retValue = new ViewJoinColumns();
         foreach (DbColumn dbColumn in dbJoin.Columns)
@@ -719,7 +719,7 @@ namespace LJCDBViewDAL
       ViewJoinOns retValue = null;
 
       CheckJoinOnParams(viewJoinID, dbJoin);
-      if (dbJoin.JoinOns != null && dbJoin.JoinOns.Count > 0)
+      if (NetCommon.HasItems(dbJoin.JoinOns))
       {
         retValue = new ViewJoinOns();
         foreach (DbJoinOn dbJoinOn in dbJoin.JoinOns)
@@ -753,7 +753,7 @@ namespace LJCDBViewDAL
       ViewJoins retValue = null;
 
       if (CheckJoinParams(viewDataID, dbRequest)
-        && dbRequest.Joins != null && dbRequest.Joins.Count > 0)
+        && NetCommon.HasItems(dbRequest.Joins))
       {
         retValue = new ViewJoins();
         foreach (DbJoin dbJoin in dbRequest.Joins)

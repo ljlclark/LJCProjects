@@ -113,7 +113,7 @@ namespace LJCGenDocDAL
     {
       DocMethods retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocMethods();
         foreach (DocMethod item in list)

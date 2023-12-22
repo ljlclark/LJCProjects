@@ -85,8 +85,7 @@ namespace LJCGenTextEdit
       {
         // Check for child items.
         RepeatItems repeatItems = searchSection.RepeatItems;
-        if (repeatItems != null
-          && repeatItems.Count > 0)
+        if (NetCommon.HasItems(repeatItems))
         {
           var errorText = "The Section cannot be deleted becauses it has child items.";
           throw new InvalidOperationException(errorText);

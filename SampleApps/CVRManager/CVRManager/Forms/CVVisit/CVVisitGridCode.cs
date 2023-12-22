@@ -36,7 +36,7 @@ namespace CVRManager
 			LogTime logTime = new LogTime("CVRManager.log", region, true);
 			mCVVisitGrid.LJCRowsClear();
 
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (CVVisit dataRecord in dataRecords)
 				{

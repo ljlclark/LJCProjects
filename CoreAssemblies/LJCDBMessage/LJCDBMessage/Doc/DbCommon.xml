@@ -211,13 +211,13 @@
     <param name="dataObject">The data object.</param>
     <returns>The changed names list.</returns>
   </GetChangedNames>
-  <GetDefaultPropertyNames>
+  <DefaultToChangedNames>
     <summary>
       Gets the ChangedNames if available and propertyNames is null.
     </summary>
     <param name="dataObject">The data object.</param>
     <param name="propertyNames">The property names.</param>
-  </GetDefaultPropertyNames>
+  </DefaultToChangedNames>
   <IsChanged>
     <summary>
       Checks if there are changed property names and outputs the names.

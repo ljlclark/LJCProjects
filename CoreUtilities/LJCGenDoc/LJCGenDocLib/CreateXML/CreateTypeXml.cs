@@ -458,8 +458,7 @@ namespace LJCGenDocLib
     {
       int retValue = 0;
 
-      if (dataMethods != null
-        && dataMethods.Count > 0)
+      if (NetCommon.HasItems(dataMethods))
       {
         foreach (DataMethod dataMethod in dataMethods)
         {
@@ -496,7 +495,7 @@ namespace LJCGenDocLib
       DataExample example = DataType.Example;
 
       if (example != null
-        && (example.Paras != null && example.Paras.Count > 0))
+        && NetCommon.HasItems(example.Paras))
       {
         foreach (DataPara para in example.Paras)
         {

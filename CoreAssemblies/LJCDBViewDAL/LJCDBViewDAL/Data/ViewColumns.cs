@@ -52,7 +52,7 @@ namespace LJCDBViewDAL
 		{
 			ViewColumns retValue = null;
 
-			if (list != null && list.Count > 0)
+			if (NetCommon.HasItems(list))
 			{
 				retValue = new ViewColumns();
 				foreach (ViewColumn item in list)

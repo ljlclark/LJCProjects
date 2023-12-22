@@ -111,7 +111,7 @@ namespace LJCGenDocDAL
     {
       DocAssemblyGroups retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocAssemblyGroups();
         foreach (DocAssemblyGroup item in list)

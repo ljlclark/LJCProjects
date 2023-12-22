@@ -232,7 +232,7 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (viewColumn.ChangedNames.Count > 0)
+          if (NetCommon.HasItems(viewColumn.ChangedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
             Update(viewColumn, keyColumns, viewColumn.ChangedNames);

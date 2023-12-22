@@ -107,7 +107,7 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (viewTable.ChangedNames.Count > 0)
+          if (NetCommon.HasItems(viewTable.ChangedNames))
           {
             var keyColumns = new DbColumns()
             {

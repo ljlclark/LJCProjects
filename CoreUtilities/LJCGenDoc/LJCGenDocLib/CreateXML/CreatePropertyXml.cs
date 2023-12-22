@@ -145,7 +145,7 @@ namespace LJCGenDocLib
       DataRemark remark = DataProperty.Remark;
 
       if (remark != null
-        && (remark.Paras != null && remark.Paras.Count > 0))
+        && NetCommon.HasItems(remark.Paras))
       {
         bool showGroups = true;
         foreach (DataPara para in remark.Paras)

@@ -12,11 +12,11 @@ namespace LJCDBMessage
 
     // Checks if the collection has items.
     /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-    public static bool HasItems(DbRow collectionObject)
+    public static bool HasItems(DbRow collection)
     {
       bool retValue = false;
 
-      if (collectionObject != null && collectionObject.Values.Count > 0)
+      if (collection != null && collection.Values.Count > 0)
       {
         retValue = true;
       }

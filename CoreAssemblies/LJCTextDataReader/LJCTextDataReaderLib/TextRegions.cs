@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextRegions.cs
+using LJCNetCommon;
 using System.Collections.Generic;
 
 namespace LJCTextDataReaderLib
@@ -112,7 +113,7 @@ namespace LJCTextDataReaderLib
       string[] retValue = null;
 
       int beginIndex = -1;
-      if (line != null && line.Length > 0)
+      if (NetString.HasValue(line))
       {
         beginIndex = 0;
       }

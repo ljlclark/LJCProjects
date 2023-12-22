@@ -63,8 +63,8 @@ namespace LJCDBClientLib
     /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
-      if ((keyColumns != null && keyColumns.Count > 0)
-        || (filters != null && filters.Count > 0))
+      if (NetCommon.HasItems(keyColumns)
+        || NetCommon.HasItems(filters))
       {
         var requestKeys = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 

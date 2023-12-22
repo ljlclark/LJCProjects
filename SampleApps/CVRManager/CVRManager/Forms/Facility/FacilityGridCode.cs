@@ -4,6 +4,7 @@
 using System;
 using System.Windows.Forms;
 using CVRDAL;
+using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 
@@ -36,7 +37,7 @@ namespace CVRManager
 			dataRecords = mManagers.FacilityManager.Load();
 
 			//FacilityManager facilityManager = mManagers.FacilityManager;
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (Facility dataRecord in dataRecords)
 				{

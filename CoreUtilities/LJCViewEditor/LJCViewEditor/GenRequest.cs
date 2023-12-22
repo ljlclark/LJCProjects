@@ -192,7 +192,7 @@ namespace LJCViewEditor
 				"8 {0}dbFilters.Add(dbFilter);\r\n"
 			};
 
-			if (dbRequest.Filters != null && dbRequest.Filters.Count > 0)
+			if (NetCommon.HasItems(dbRequest.Filters))
 			{
 				StringBuilder builder = new StringBuilder(128);
 				builder.AppendLine();
@@ -234,7 +234,7 @@ namespace LJCViewEditor
 				"3 {0}}},\r\n"
 			};
 
-			if (dbJoin.JoinOns != null && dbJoin.JoinOns.Count > 0)
+			if (NetCommon.HasItems(dbJoin.JoinOns))
 			{
 				indent += "  ";
 				StringBuilder builder = new StringBuilder(128);
@@ -279,7 +279,7 @@ namespace LJCViewEditor
 				"9 {0}dbRequest.Joins = dbJoins;\r\n"
 			};
 
-			if (dbRequest.Joins != null && dbRequest.Joins.Count > 0)
+			if (NetCommon.HasItems(dbRequest.Joins))
 			{
 				StringBuilder builder = new StringBuilder(128);
 				builder.AppendLine();
@@ -302,7 +302,7 @@ namespace LJCViewEditor
 					builder.Append(JoinOnsCode(dbJoin, indent));
 
 					// Join Columns
-					if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+					if (NetCommon.HasItems(dbJoin.Columns))
 					{
 						builder.Append(ColumnsCode(dbJoin.Columns, indent));
 					}
@@ -343,7 +343,7 @@ namespace LJCViewEditor
 				"3 {0}}};\r\n",
 			};
 
-			if (orderByNames != null && orderByNames.Count > 0)
+			if (NetCommon.HasItems(orderByNames))
 			{
 				StringBuilder builder = new StringBuilder(128);
 				builder.AppendLine();

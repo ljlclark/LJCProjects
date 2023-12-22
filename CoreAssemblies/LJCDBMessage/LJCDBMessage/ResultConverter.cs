@@ -44,7 +44,7 @@ namespace LJCDBMessage
       // Testing in LJCDBServiceLib.TestDbDataAccess.
       TList retValue = null;
 
-      if (dataTable.Columns != null && dataTable.Columns.Count > 0
+      if (NetCommon.HasColumns(dataTable)
         && NetCommon.HasData(dataTable))
       {
         retValue = new TList();
@@ -117,7 +117,7 @@ namespace LJCDBMessage
       string propertyName;
       TData retValue = null;
 
-      if (dataTable.Columns != null && dataTable.Columns.Count > 0
+      if (NetCommon.HasColumns(dataTable)
         && NetCommon.HasData(dataTable))
       {
         retValue = new TData();

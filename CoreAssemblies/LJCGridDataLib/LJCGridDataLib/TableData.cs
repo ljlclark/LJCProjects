@@ -59,7 +59,7 @@ namespace LJCGridDataLib
 
       ArgumentDataTable(dataTable);
 
-      if (dataTable.Columns != null && dataTable.Columns.Count > 0)
+      if (NetCommon.HasColumns(dataTable))
       {
         retValue = CreateDataColumns();
         foreach (DataColumn dataColumn in dataTable.Columns)
@@ -101,7 +101,7 @@ namespace LJCGridDataLib
     {
       DbColumns retValue = null;
 
-      if (dataColumns != null && dataColumns.Count > 0)
+      if (HasColumns(dataColumns))
       {
         retValue = new DbColumns();
         foreach (DataColumn dataColumn in dataColumns)
@@ -121,8 +121,8 @@ namespace LJCGridDataLib
       DataColumn dataColumnClone;
       DataColumnCollection retValue = null;
 
-      if (dataColumns != null && dataColumns.Count > 0
-        && columnNames != null && columnNames.Count > 0)
+      if (HasColumns(dataColumns)
+        && NetCommon.HasItems(columnNames))
       {
         // Create columns from names.
         DataTable workTable = new DataTable();
@@ -175,13 +175,28 @@ namespace LJCGridDataLib
     {
       List<string> retValue = null;
 
-      if (dataColumns != null && dataColumns.Count > 0)
+      if (HasColumns(dataColumns))
       {
         retValue = new List<string>();
         foreach (DataColumn dataColumn in dataColumns)
         {
           retValue.Add(dataColumn.ColumnName);
         }
+      }
+      return retValue;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataColumns"></param>
+    public static bool HasColumns(DataColumnCollection dataColumns)
+    {
+      bool retValue = false;
+
+      if (HasColumns(dataColumns))
+      {
+        retValue = true;
       }
       return retValue;
     }

@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ForeignKeys.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace LJCSQLUtilLibDAL
 		{
 			ForeignKeys retValue = null;
 
-			if (list != null && list.Count > 0)
+			if (NetCommon.HasItems(list))
 			{
 				retValue = new ForeignKeys();
 				foreach (ForeignKey item in list)

@@ -227,12 +227,12 @@ namespace LJCDBClientLib
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       // Make sure update is restricted.
-      if ((keyColumns != null && keyColumns.Count > 0)
-        || (filters != null && filters.Count > 0))
+      if (NetCommon.HasItems(keyColumns)
+        || NetCommon.HasItems(filters))
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
         , propertyNames);
-        if (dataColumns.Count > 0)
+        if (NetCommon.HasItems(dataColumns))
         {
           var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
             , BaseDefinition);

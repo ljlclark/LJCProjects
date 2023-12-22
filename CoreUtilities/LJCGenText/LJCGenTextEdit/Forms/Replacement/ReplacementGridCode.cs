@@ -47,7 +47,7 @@ namespace LJCGenTextEdit
         string repeatItemName = row.LJCGetCellText("Name");
 
         var records = GenDataManager.LoadReplacements(sectionName, repeatItemName);
-        if (records != null && records.Count > 0)
+        if (NetCommon.HasItems(records))
         {
           foreach (Replacement record in records)
           {

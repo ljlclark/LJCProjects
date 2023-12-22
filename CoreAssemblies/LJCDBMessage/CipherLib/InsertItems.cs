@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InsertItems.cs
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 
@@ -13,11 +14,11 @@ namespace CipherLib
 
     // Checks if the collection has items.
     /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-    public static bool HasItems(InsertItems collectionObject)
+    public static bool HasItems(InsertItems collection)
     {
       bool retValue = false;
 
-      if (collectionObject != null && collectionObject.Count > 0)
+      if (NetCommon.HasItems(collection))
       {
         retValue = true;
       }

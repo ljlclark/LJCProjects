@@ -112,7 +112,7 @@ namespace LJCGenDocDAL
     {
       DocAssemblies retValue = null;
 
-      if (list != null && list.Count > 0)
+      if (NetCommon.HasItems(list))
       {
         retValue = new DocAssemblies();
         foreach (DocAssembly item in list)

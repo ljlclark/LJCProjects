@@ -3,6 +3,7 @@
 // UnitTypeComboCode.cs
 using System;
 using System.Windows.Forms;
+using LJCNetCommon;
 using LJCUnitMeasureDAL;
 using LJCWinFormControls;
 
@@ -48,7 +49,7 @@ namespace LJCUnitMeasure
 			var unitTypeManager = mManagers.UnitTypeManager;
 			var dataRecords = unitTypeManager.Load();
 
-			if (dataRecords != null && dataRecords.Count > 0)
+			if (NetCommon.HasItems(dataRecords))
 			{
 				foreach (UnitType dataRecord in dataRecords)
 				{

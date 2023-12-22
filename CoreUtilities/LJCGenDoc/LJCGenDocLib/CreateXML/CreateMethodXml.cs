@@ -224,7 +224,7 @@ namespace LJCGenDocLib
       DataExample example = DataMethod.Example;
 
       if (example != null
-        && (example.Paras != null && example.Paras.Count > 0))
+        && NetCommon.HasItems(example.Paras))
       {
         foreach (DataPara para in example.Paras)
         {
@@ -286,7 +286,7 @@ namespace LJCGenDocLib
       DataRemark remark = DataMethod.Remark;
 
       if (remark != null
-        && (remark.Paras != null && remark.Paras.Count > 0))
+        && NetCommon.HasItems(remark.Paras))
       {
         bool showGroups = true;
         foreach (DataPara para in remark.Paras)

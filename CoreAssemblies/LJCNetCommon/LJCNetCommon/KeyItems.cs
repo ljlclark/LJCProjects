@@ -16,11 +16,11 @@ namespace LJCNetCommon
 
     // Checks if the collection has items.
     /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-    public static bool HasItems(KeyItems collectionObject)
+    public static bool HasItems(KeyItems collection)
     {
       bool retValue = false;
 
-      if (collectionObject != null && collectionObject.Count > 0)
+      if (collection != null && collection.Count > 0)
       {
         retValue = true;
       }
@@ -90,7 +90,7 @@ namespace LJCNetCommon
     /// <include path='items/Append/*' file='Doc/KeyItems.xml'/>
     public void Append(KeyItems items)
     {
-      if (items != null && items.Count > 0)
+      if (HasItems(items))
       {
         foreach (KeyItem item in items)
         {
@@ -117,7 +117,7 @@ namespace LJCNetCommon
     {
       KeyItems retValue = null;
 
-      if (items != null && items.Count > 0)
+      if (NetCommon.HasItems(items))
       {
         retValue = new KeyItems();
         foreach (KeyItem item in items)

@@ -28,7 +28,6 @@ namespace LJCDBMessage
       {
         requestColumns = baseDefinition.LJCGetColumns(propertyNames);
       }
-
       var retValue = new DbColumns(requestColumns);
       return retValue;
     }
@@ -45,8 +44,7 @@ namespace LJCDBMessage
 
       if (dataObject != null)
       {
-        GetDefaultPropertyNames(dataObject, ref propertyNames);
-
+        DefaultToChangedNames(dataObject, ref propertyNames);
         var requestColumns = RequestColumns(baseDefinition, propertyNames);
         retValue = DataColumns(dataObject, requestColumns);
       }
@@ -61,7 +59,7 @@ namespace LJCDBMessage
       DbColumns retValue = null;
 
       if (dataObject != null
-        && requestColumns != null)
+        && NetCommon.HasItems(requestColumns))
       {
         retValue = new DbColumns();
         LJCReflect reflect = new LJCReflect(dataObject);
@@ -128,7 +126,7 @@ namespace LJCDBMessage
     {
       DbColumns retValue = null;
 
-      if (keyColumns != null)
+      if (NetCommon.HasItems(keyColumns))
       {
         retValue = new DbColumns();
         foreach (DbColumn keyColumn in keyColumns)
@@ -206,7 +204,7 @@ namespace LJCDBMessage
 
       foreach (DbJoin dbJoin in dbJoins)
       {
-        if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+        if (NetCommon.HasItems(dbJoin.Columns))
         {
           retValue = GetKeyColumn(dbJoin.Columns, keyColumn);
           if (retValue != null)
@@ -238,7 +236,7 @@ namespace LJCDBMessage
     {
       DbColumns retValue = null;
 
-      if (keyColumns != null)
+      if (NetCommon.HasItems(keyColumns))
       {
         var requestColumns = RequestKeys(keyColumns, baseDefinition);
         retValue = DataKeys(requestColumns);
@@ -251,7 +249,7 @@ namespace LJCDBMessage
     {
       DbColumns retValue = null;
 
-      if (keyColumns != null)
+      if (NetCommon.HasItems(keyColumns))
       {
         retValue = new DbColumns();
         foreach (DbColumn dbColumn in keyColumns)
@@ -284,8 +282,7 @@ namespace LJCDBMessage
 
       if (dataObject != null)
       {
-        GetDefaultPropertyNames(dataObject, ref propertyNames);
-
+        DefaultToChangedNames(dataObject, ref propertyNames);
         var keyDataColumns = RequestColumns(baseDefinition, propertyNames);
         retValue = LookupKeys(dataObject, keyDataColumns);
       }
@@ -299,7 +296,7 @@ namespace LJCDBMessage
       DbColumns retValue = null;
 
       if (dataObject != null
-        && requestColumns != null)
+        && NetCommon.HasItems(requestColumns))
       {
         retValue = new DbColumns();
         LJCReflect reflect = new LJCReflect(dataObject);
@@ -418,7 +415,7 @@ namespace LJCDBMessage
 
     // Gets the ChangedNames if available and propertyNames is null.
     /// <include path='items/GetDefaultPropertyNames/*' file='Doc/DbCommon.xml'/>
-    public static void GetDefaultPropertyNames(object dataObject
+    public static void DefaultToChangedNames(object dataObject
       , ref List<string> propertyNames)
     {
       if (null == propertyNames)

@@ -201,7 +201,7 @@ namespace LJCDBViewDAL
       DbColumns retValue = null;
 
       ViewGridColumns viewGridColumns = LoadWithViewIDBySequence(viewDataID);
-      if (viewGridColumns != null && viewGridColumns.Count > 0)
+      if (NetCommon.HasItems(viewGridColumns))
       {
         retValue = new DbColumns();
         foreach (ViewGridColumn viewGridColumn in viewGridColumns)
@@ -241,7 +241,7 @@ namespace LJCDBViewDAL
         {
           // Update record.
           // Note: Changed to update only changed columns.
-          if (viewGridColumn.ChangedNames.Count > 0)
+          if (NetCommon.HasItems(viewGridColumn.ChangedNames))
           {
             var keyColumns = GetIDsKey(retrieveData.ViewDataID
               , retrieveData.ViewColumnID);

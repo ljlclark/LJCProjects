@@ -203,7 +203,7 @@ namespace LJCDBMessage
 
       foreach (DbJoin dbJoin in dbJoins)
       {
-        if (dbJoin.Columns != null && dbJoin.Columns.Count > 0)
+        if (NetCommon.HasItems(dbJoin.Columns))
         {
           retValue = GetKeyColumn(dbJoin.Columns, keyColumn);
           if (retValue != null)

@@ -301,7 +301,7 @@ namespace LJCViewEditor
     // Populates the join table combo.
     private void PopulateTableCombo(ForeignKeys foreignKeys, string targetTableName)
 		{
-			if (foreignKeys != null && foreignKeys.Count > 0)
+			if (NetCommon.HasItems(foreignKeys))
 			{
 				int index = 0;
 				foreach (ForeignKey foreignKey in foreignKeys)

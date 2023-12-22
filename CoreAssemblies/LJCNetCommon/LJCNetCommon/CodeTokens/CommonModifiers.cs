@@ -48,11 +48,11 @@ namespace LJCNetCommon
 
     // Checks if the collection has items.
     /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-    public static bool HasItems(CommonModifiers collectionObject)
+    public static bool HasItems(CommonModifiers collection)
     {
       bool retValue = false;
 
-      if (collectionObject != null && collectionObject.Count > 0)
+      if (collection != null && collection.Count > 0)
       {
         retValue = true;
       }

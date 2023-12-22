@@ -283,7 +283,7 @@ namespace LJCNetCommon
       DbColumn searchColumn;
       DbColumns retValue = null;
 
-      if (propertyNames != null && propertyNames.Count > 0)
+      if (NetCommon.HasItems(propertyNames))
       {
         retValue = new DbColumns();
         foreach (string propertyName in propertyNames)
