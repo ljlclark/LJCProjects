@@ -14,7 +14,6 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using _FullAppName_DAL;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace _Namespace_
@@ -76,43 +75,43 @@ namespace _Namespace_
 		// Calls the New method.
 		private void _ClassName_ToolNew_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoNew();
+			_ClassName_GridCode.DoNew();
 		}
 
 		// Calls the Edit method.
 		private void _ClassName_ToolEdit_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoEdit();
+			_ClassName_GridCode.DoEdit();
 		}
 
 		// Calls the Delete method.
 		private void _ClassName_ToolDelete_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoDelete();
+			_ClassName_GridCode.DoDelete();
 		}
 
 		// Calls the New method.
 		private void _ClassName_New_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoNew();
+			_ClassName_GridCode.DoNew();
 		}
 
 		// Calls the Edit method.
 		private void _ClassName_Edit_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoEdit();
+			_ClassName_GridCode.DoEdit();
 		}
 
 		// Calls the Delete method.
 		private void _ClassName_Delete_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoDelete();
+			_ClassName_GridCode.DoDelete();
 		}
 
 		// Calls the Refresh method.
 		private void _ClassName_Refresh_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoRefresh();
+			_ClassName_GridCode.DoRefresh();
 		}
 
 		// Export a text file.
@@ -133,7 +132,7 @@ namespace _Namespace_
 		// Calls the Select method.
 		private void _ClassName_Select_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoSelect();
+			_ClassName_GridCode.DoSelect();
 		}
 
 		// Performs the Close function.
@@ -146,7 +145,7 @@ namespace _Namespace_
 		// Shows the help page.
 		private void _ClassName_MenuHelp_Click(object sender, EventArgs e)
 		{
-			m_ClassName_GridCode.DoHelp();
+			_ClassName_GridCode.DoHelp();
 		}
 		#endregion
 		#endregion
@@ -193,17 +192,17 @@ namespace _Namespace_
 			switch (e.KeyCode)
 			{
 				case Keys.Enter:
-					DoDefault_ClassName_();
+					_ClassName_GridCode.DoDefault();
 					e.Handled = true;
 					break;
 
 				case Keys.F1:
-					m_ClassName_GridCode.DoHelp();
+					_ClassName_GridCode.DoHelp();
 					e.Handled = true;
 					break;
 
 				case Keys.F5:
-          m_ClassName_GridCode.DoRefresh();
+					_ClassName_GridCode.DoRefresh();
 					e.Handled = true;
 					break;
 
@@ -237,7 +236,7 @@ namespace _Namespace_
 		{
 			if (_ClassName_Grid.LJCGetMouseRow(e) != null)
 			{
-				m_ClassName_GridCode.DoDefault();
+				_ClassName_GridCode.DoDefault();
 			}
 		}
 
