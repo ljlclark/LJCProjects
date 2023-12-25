@@ -31,6 +31,10 @@ namespace LJCGenTextLib
     /// <summary>Gets or sets the default Namespace value.</summary>
     public string Namespace { get; set; }
 
+    /// <summary>Gets or sets the default ParentName value.</summary>
+    // *** New Property *** 12/25/23
+    public string ParentName { get; set; }
+
     /// <summary>Gets or sets the default TableName value.</summary>
     public string TableName { get; set; }
 

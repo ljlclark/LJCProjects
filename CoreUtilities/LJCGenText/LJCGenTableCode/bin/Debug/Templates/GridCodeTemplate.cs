@@ -12,10 +12,10 @@ using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using static _FullAppName_._FullAppName_List;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static _FullAppName_._FullAppName_List;
 
 namespace _Namespace_
 {
@@ -82,7 +82,7 @@ namespace _Namespace_
 				// Data from items.
 				int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
 
-				var result = ClassName_Manager.ResultWithParentID(parentID);
+				var result = _ClassName_Manager.ResultWithParentID(parentID);
 				if (DbResult.HasRows(result))
 				{
 					foreach (var dbRow in result.Rows)
@@ -201,7 +201,7 @@ namespace _Namespace_
 					{ _ClassName_.ColumnID, id }
 				};
 				_ClassName_Manager.Delete(keyColumns);
-				if (0 == ClassName_Manager.AffectedCount)
+				if (0 == _ClassName_Manager.AffectedCount)
 				{
 					success = false;
 					var message = FormCommon.DeleteError;
@@ -311,9 +311,9 @@ namespace _Namespace_
 				{
 					LJCSelectedRecord = dataRecord;
 				}
-				_AppName_.Cursor = Cursors.Default;
+				_AppName_List.Cursor = Cursors.Default;
 			}
-			_AppName_.DialogResult = DialogResult.OK;
+			_AppName_List.DialogResult = DialogResult.OK;
 		}
 
 		// Adds new row or updates row with
@@ -417,7 +417,7 @@ namespace _Namespace_
 		{
 			if (detail.LJCNext)
 			{
-				LJCDataGrid grid = m_ClassName_Grid;
+				LJCDataGrid grid = _ClassName_Grid;
 				int currentIndex = grid.CurrentRow.Index;
 				detail.LJCNext = false;
 				if (currentIndex < grid.Rows.Count - 1)
@@ -438,7 +438,7 @@ namespace _Namespace_
 		{
 			if (detail.LJCPrevious)
 			{
-				LJCDataGrid grid = m_ClassName_Grid;
+				LJCDataGrid grid = _ClassName_Grid;
 				int currentIndex = grid.CurrentRow.Index;
 				detail.LJCPrevious = false;
 				if (currentIndex > 0)
@@ -469,9 +469,12 @@ namespace _Namespace_
 		// Gets or sets the Managers reference.
 		private Managers_AppName_ Managers { get; set; }
 
-		// Gets or sets the _ParentName_ Grid reference.
-		private LJCDataGrid _ParentName_Grid { get; set; }
-		#endregion
-	}
+    // Gets or sets the _ParentName_ Grid reference.
+    private LJCDataGrid _ParentName_Grid { get; set; }
+
+    // Gets or sets the Selected Record reference.
+    private _ClassName_ LJCSelectedRecord { get; set; }
+    #endregion
+  }
 }
 // #SectionEnd Class
