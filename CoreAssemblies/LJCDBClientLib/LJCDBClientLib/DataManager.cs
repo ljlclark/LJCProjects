@@ -74,7 +74,7 @@ namespace LJCDBClientLib
       if (DbServiceRef != null
         && NetString.HasValue(TableName))
       {
-        DataDefinition = CreateDataDefinition();
+        DataDefinition = CreateBaseDefinition();
         LookupColumnNames = new List<string>();
         OrderByNames = new List<string>();
       }
@@ -97,7 +97,6 @@ namespace LJCDBClientLib
 
       Request = ManagerCommon.CreateRequest(RequestType.Insert, TableName
         , dataColumns, DataConfigName, SchemaName, keyColumns);
-
       if (DbAssignedColumns != null)
       {
         Request.DbAssignedColumns = DbAssignedColumns.Clone();
@@ -117,13 +116,11 @@ namespace LJCDBClientLib
         || NetCommon.HasItems(filters))
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
-        //*** Begin *** Add - 12/19/23
         if (null == filters
           && !NetCommon.HasItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
-        //*** End    *** Add - 12/19/23
 
         Request = ManagerCommon.CreateRequest(RequestType.Delete, TableName
           , null, DataConfigName, SchemaName, requestKeyColumns, filters);
@@ -144,7 +141,9 @@ namespace LJCDBClientLib
 
       if (null == requestColumns)
       {
-        requestColumns = DataDefinition;
+        // *** Next Statement *** change - 12/26/23
+        //requestColumns = DataDefinition;
+        requestColumns = BaseDefinition;
       }
 
       Request = ManagerCommon.CreateRequest(requestType, TableName
@@ -201,13 +200,11 @@ namespace LJCDBClientLib
       {
         var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
-        //*** Begin *** Add - 12/19/23
         if (null == filters
           && !NetCommon.HasItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
-        //*** End    *** Add - 12/19/23
 
         Request = ManagerCommon.CreateRequest(RequestType.Select, TableName
           , requestColumns, DataConfigName, SchemaName, requestKeyColumns, filters
@@ -236,13 +233,11 @@ namespace LJCDBClientLib
         {
           var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
             , BaseDefinition);
-          //*** Begin *** Add - 12/19/23
           if (null == filters
             && !NetCommon.HasItems(requestKeyColumns))
           {
             throw new ArgumentException("keyColumns or filters");
           }
-          //*** End    *** Add - 12/19/23
 
           Request = ManagerCommon.CreateRequest(RequestType.Update, TableName
             , dataColumns, DataConfigName, SchemaName, requestKeyColumns
@@ -358,7 +353,9 @@ namespace LJCDBClientLib
     {
       List<string> retValue = new List<string>();
 
-      foreach (DbColumn dbColumn in DataDefinition)
+      // *** Next Statement *** - 12/26/23
+      //foreach (DbColumn dbColumn in DataDefinition)
+      foreach (DbColumn dbColumn in BaseDefinition)
       {
         retValue.Add(dbColumn.PropertyName);
       }
@@ -421,8 +418,8 @@ namespace LJCDBClientLib
     public void MapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
-      DataDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
       BaseDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
+      DataDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
     }
 
     // Resequence the sequence column values.
@@ -461,7 +458,9 @@ namespace LJCDBClientLib
       DbAssignedColumns = new DbColumns();
       foreach (string propertyName in propertyNames)
       {
-        DbColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
+        // *** Next Statement *** Change - 12/26/23
+        //DbColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
+        DbColumn dbColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
         if (null == dbColumn)
         {
           throw new MissingMemberException($"Column '{propertyName}' was not found.");
@@ -528,7 +527,7 @@ namespace LJCDBClientLib
     #region Private Methods
 
     // Creates a DataDefinition value.
-    private DbColumns CreateDataDefinition()
+    private DbColumns CreateBaseDefinition()
     {
       DbColumns retValue = null;
 

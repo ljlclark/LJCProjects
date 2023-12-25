@@ -11,46 +11,57 @@
     <remarks>
       <para>
         The Data Manager is the client code that creates a table specific
-        &lt;span class="userType"&gt;LJCDBMessage.DbRequest&lt;/span&gt;
+        &lt;span class="userType">LJCDBMessage.DbRequest&lt;/span>
         object. It then serializes the
-        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+        &lt;span class="userType">DbRequest&lt;/span>
         object into a Request XML message to pass to the
-        &lt;span class="commonType"&gt;DbService.Execute()&lt;/span&gt;
+        &lt;span class="userType">LJCDBServiceLib.DbService.Execute()&lt;/span>
+        method or directly to the
+        &lt;span class="commonType">LJCDBDataAccess.DbDataAccess.Execute()&lt;/span>
         method.
       </para>
       <para>
         The DataManager object creates the contained BaseDefinition collection
-        when the DataManager is created. The BaseDefinition contains the column
-        definitions for the base table. These column definitions are retrieved
-        from the database.
+        when the DataManager is created. The BaseDefinition is an
+        &lt;span class="commonType">LJCNetCommon.DbColumns&lt;/span>
+        collection which contains the column definitions for the base table. Each
+        element
+        &lt;span class="userType">DbColumn&lt;/span>
+        contains the table ColumnName, PropertyName, Caption, DataTypeName and
+        MaxLength. These column definitions are retrieved from the database.
       </para>
       <para>
-        The BaseDefinition property
-        is an &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
-        object. Each element
-        &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-        contains the table ColumnName, PropertyName, Caption, DataTypeName
-        and MaxLength.
+        The contained DataDefinition collection is also created at this time. This
+        enables adding Calculated and Join columns to a grid columns configuration.
       </para>
       <para>
-        The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-        Caption is initially set to the same value as the ColumnName
-        as that is how it is returned from ADO.NET. The PropertyName is initially
-        set to the same value as the ColumnName which is what the
-        &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-        object does if it is initialized with a blank PropertyName value. These
-        values can be modified later as required.
+        The
+        &lt;span class="commonType">DbColumn.Caption&lt;/span>
+        is initially set to the same value as the ColumnName as that is how it is
+        returned from ADO.NET. The PropertyName is initially set to the same value
+        as the ColumnName if the
+        &lt;span class="userType">DbColumn&lt;/span>
+        is initialized with a blank PropertyName value. These values can be modified
+        later as required.
       </para>
       <para>
-        The DataDefinition is used to create the
-        &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+        The BaseDefinition is used to create the
+        &lt;span class="userType">DbColumn&lt;/span>
         objects that are defined in a
-        &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-        object. These objects are then used to create the SQL Statements that
-        are executed to perform the requested data operation.
+        &lt;span class="userType">DbRequest&lt;/span>
+        object. These objects are then used to create the SQL Statements that are
+        executed to perform the requested data operation.
       </para>
       <para>
-        The test code is found in project LJCDataManagerTest\PersonDALTest.
+        The Data methods are Add(), Delete(), ExecuteClientSql(), Load,
+        LoadProcedure(), Retrieve() and Update().
+      </para>
+      <para>
+        The Data methods create a
+        &lt;span class="userType">DbRequest&lt;/span>
+        object and pass it to the
+        &lt;span class="commonType">ExecuteRequest()&lt;/span>
+        method.
       </para>
     </remarks>
     <example>
@@ -195,13 +206,28 @@
       <para>
         Creates an "Insert"
         &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
-        object, which is available in the Request property. The request object is
-        passed to the
-        &lt;span class="commonType"&gt;ExecuteRequest()&lt;/span&gt;
-        method.
+        object. The
+        &lt;span class="userType"&gt;DbRequest.Columns&lt;/span&gt;
+        object includes the definitions for the columns to be updated in the base
+        table.
       </para>
       <para>
-        The Key Columns are assigned from the LookupColumnNames property.
+        The DbRequest.Columns include all columns from the BaseDefinition by default;
+        except it does not include AutoIncrement columns or columns with null
+        values. To include a null column value, set the column value to "-null". It
+        only includes the columns contained in the optional propertyNames parameter
+        if provided. It uses the columns in the ChangedNames object if it exists and
+        the propertyNames parameter is null.
+      </para>
+      <para>
+        The DbRequest.Columns do not include AutoIncrement columns or columns with
+        null values. To include a null column value, set the column value to
+        "-null".
+      </para>
+      <para>
+        The Key Columns are assigned from the LookupColumnNames property. The
+        keyColumn.ColumnName must be available in the BaseDefinition object to
+        be included.
       </para>
       <para>
         The Key Columns are those columns whose value will be used to find the
@@ -209,15 +235,19 @@
         calling program.
       </para>
       <para>
-        The Key Columns must include the DB Assigned columns for the assigned
+        The keyColumns do not use keys with null values or invalid dates. To include
+        a null column value, set the column value to "'-null'".
+      </para>
+      <para>
+        Verify: The Key Columns must include the DB Assigned columns for the assigned
         values to be returned to the calling program. The value must be set to
         zero to prevent including it as a key value?
       </para>
       <para>
-        The Lookup Retrieve call will not include keys with a value of "0".
+        Verify: The Lookup Retrieve call will not include keys with a value of "0".
       </para>
       <para>
-        The Add Data Object property names must be the same as the Request Column
+        Verify: The Add Data Object property names must be the same as the Request Column
         property names to map the values into the Key Columns.
       </para>
       <para>&lt;b&gt;Method Graph&lt;/b&gt;</para>

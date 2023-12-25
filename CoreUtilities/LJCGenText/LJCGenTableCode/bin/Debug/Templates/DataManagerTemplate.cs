@@ -24,6 +24,11 @@ namespace _Namespace_
       , string tableName = "_ClassName_", string schemaName = null)
       : base(dbServiceRef, dataConfigName, tableName, schemaName)
     {
+      // Add Calculated and Join columns.
+      // Enables adding Calculated and Join columns to a grid configuration.
+      //DataDefinition.Add(_ClassName_.ColumnJoinDescription
+      // , caption: "Join Description");
+
       // Map table names with property names or captions
       // that differ from the column names.
       MapNames(_ClassName_.ColumnID, _ClassName_.PropertyID, caption: "_ClassName_ ID");
