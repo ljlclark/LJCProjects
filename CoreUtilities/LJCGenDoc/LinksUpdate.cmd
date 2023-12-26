@@ -1,6 +1,6 @@
 echo Copyright (c) Lester J. Clark and Contributors.
 echo Licensed under the MIT License.
-rem UpdateLinks.cmd
+rem LinksUpdate.cmd
 
 set root=..\..\..\LJCProjectsDev
 
@@ -37,6 +37,18 @@ copy %root%%src%\Configuration.html %to%
 copy %root%%src%\Configuration.jpg %to%
 copy %root%%src%\DataMethods.html %to%
 copy %root%%src%\DataMethods.jpg %to%
+
+rem ---------------
+set src=\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\Links
+set to=HTML\LJCDBClientLib
+copy %root%%src%\DataManagerDoc.html %to%
+set to=HTML\LJCDBClientLib\Methods
+copy %root%%src%\DataManagerAddDoc.html %to%
+copy %root%%src%\DataManagerDeleteDoc.html %to%
+copy %root%%src%\DataManagerLoadDoc.html %to%
+copy %root%%src%\DataManagerLoadProcedureDoc.html %to%
+copy %root%%src%\DataManagerRetrieveDoc.html %to%
+copy %root%%src%\DataManagerUpdateDoc.html %to%
 
 rem ---------------
 set src=\CoreAssemblies\LJCDBMessage\LJCDBMessage\Diagrams
