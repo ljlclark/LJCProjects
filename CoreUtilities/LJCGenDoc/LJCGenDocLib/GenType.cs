@@ -96,7 +96,8 @@ namespace LJCGenDocLib
       else
       {
         // Testing
-        //if ("NetCommon" == DataType.Name)
+        //if ("DataAccess" == DataType.Name
+        //  || "DataManager" == DataType.Name)
         //{
         //  NetFile.CreateFolder("XMLFiles");
         //  File.WriteAllText(dataFileSpec, dataXml);

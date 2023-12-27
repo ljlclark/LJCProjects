@@ -96,7 +96,6 @@
     <Content Include="Doc\DataManager.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Doc\DataManagerDoc.html" />
     <Content Include="Doc\DbManager.xml" />
     <Content Include="Doc\DbServiceProxy.xml" />
     <Content Include="Doc\DbServiceRef.xml">

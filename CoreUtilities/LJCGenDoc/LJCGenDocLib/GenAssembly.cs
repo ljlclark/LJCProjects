@@ -54,7 +54,7 @@ namespace LJCGenDocLib
         else
         {
           // Testing
-          //if ("LJCNetCommon" == dataAssembly.Name)
+          //if ("LJCDBClientLib" == dataAssembly.Name)
           //{
           //  NetFile.CreateFolder("XMLFiles");
           //  File.WriteAllText(dataFileSpec, dataXml);

@@ -8,60 +8,11 @@
       Provides standard message data manipulation methods.
       (DE)
     </summary>
+    <link file="DataManagerDoc.html">Overview</link>
     <remarks>
-      <para>
-        The Data Manager is the client code that creates a table specific
-        &lt;span class="userType">LJCDBMessage.DbRequest&lt;/span>
-        object. It then serializes the
-        &lt;span class="userType">DbRequest&lt;/span>
-        object into a Request XML message to pass to the
-        &lt;span class="userType">LJCDBServiceLib.DbService.Execute()&lt;/span>
-        method or directly to the
-        &lt;span class="commonType">LJCDBDataAccess.DbDataAccess.Execute()&lt;/span>
-        method.
-      </para>
-      <para>
-        The DataManager object creates the contained BaseDefinition collection
-        when the DataManager is created. The BaseDefinition is an
-        &lt;span class="commonType">LJCNetCommon.DbColumns&lt;/span>
-        collection which contains the column definitions for the base table. Each
-        element
-        &lt;span class="userType">DbColumn&lt;/span>
-        contains the table ColumnName, PropertyName, Caption, DataTypeName and
-        MaxLength. These column definitions are retrieved from the database.
-      </para>
-      <para>
-        The contained DataDefinition collection is also created at this time. This
-        enables adding Calculated and Join columns to a grid columns configuration.
-      </para>
-      <para>
-        The
-        &lt;span class="commonType">DbColumn.Caption&lt;/span>
-        is initially set to the same value as the ColumnName as that is how it is
-        returned from ADO.NET. The PropertyName is initially set to the same value
-        as the ColumnName if the
-        &lt;span class="userType">DbColumn&lt;/span>
-        is initialized with a blank PropertyName value. These values can be modified
-        later as required.
-      </para>
-      <para>
-        The BaseDefinition is used to create the
-        &lt;span class="userType">DbColumn&lt;/span>
-        objects that are defined in a
-        &lt;span class="userType">DbRequest&lt;/span>
-        object. These objects are then used to create the SQL Statements that are
-        executed to perform the requested data operation.
-      </para>
       <para>
         The Data methods are Add(), Delete(), ExecuteClientSql(), Load,
         LoadProcedure(), Retrieve() and Update().
-      </para>
-      <para>
-        The Data methods create a
-        &lt;span class="userType">DbRequest&lt;/span>
-        object and pass it to the
-        &lt;span class="commonType">ExecuteRequest()&lt;/span>
-        method.
       </para>
     </remarks>
     <example>

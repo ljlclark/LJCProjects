@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\LJCCodeDoc.cmd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDocObjLib\LJCDocObjLib.csproj">
@@ -104,7 +103,6 @@
     <Content Include="bin\Debug\CodeDoc.css" />
     <Content Include="bin\Debug\ConnectionTemplates.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
-    <Content Include="bin\Debug\LJCCodeDoc.xml" />
     <Content Include="bin\Debug\RootHead.html" />
     <Content Include="bin\Debug\Templates\AssemblyTemplate.html" />
     <Content Include="bin\Debug\Templates\FieldTemplate.html" />
