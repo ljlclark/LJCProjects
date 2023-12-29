@@ -113,13 +113,6 @@ div#Header {
   width: 100%;
 }
 
-.Heading2 {
-  font-family: Verdana, Tahoma, Arial, Sans-Serif;
-  font-size: 9pt;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
 div#Title {
   color: #003399;
   font-family: Verdana, Tahoma, Arial, Sans-Serif;
@@ -130,6 +123,10 @@ div#Title {
 }
 
 /* Class Selectors */
+.links {
+  margin-left:5px;
+}
+
 .page {
   margin-left: 18px;
   margin-right: 20px;
