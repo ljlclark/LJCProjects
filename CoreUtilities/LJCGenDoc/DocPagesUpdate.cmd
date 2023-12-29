@@ -7,40 +7,35 @@ set root=..\..\..\LJCProjectsDev
 rem **********************
 rem *** CoreAssemblies ***
 rem ---------------
-set src=\CoreAssemblies\LJCAppManager\LJCAppManager\LinkPages
-set to=HTML\LJCAppManager
-copy %root%%src%\AppManagerTables.html %to%
-copy %root%%src%\AppManagerTables.jpg %to%
-
-rem ---------------
-set src=\CoreAssemblies\LJCDataAccess\LJCDataAccess\Diagrams
+set src=\CoreAssemblies\LJCDataAccess\LJCDataAccess\DocPages
 set to=HTML\LJCDataAccess
+copy %root%%src%\DataAccessLink.cd %to%
 copy %root%%src%\DataAccessLink.html %to%
 copy %root%%src%\DataAccessLink.jpg %to%
 
 rem ---------------
-set src=\CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\Diagrams
+set src=\CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\DocPages
+
 set to=HTML\LJCDataAccessConfig
+copy %root%%src%\DataAccessConfig.cd %to%
 copy %root%%src%\DataAccessConfig.html %to%
 copy %root%%src%\DataAccessConfig.jpg %to%
 
 rem ---------------
-set src=\CoreAssemblies\LJCDataDetail\LJCDataDetail\Diagrams
+set src=\CoreAssemblies\LJCDataDetail\LJCDataDetail\DocPages
 set to=HTML\LJCDataDetail
 copy %root%%src%\LJCDataDetail.html %to%
 copy %root%%src%\LJCDataDetail.jpg %to%
 
 rem ---------------
-set src=\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\Diagrams
+set src=\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\DocPages
 set to=HTML\LJCDBClientLib
+copy %root%%src%\Configuration.cd %to%
 copy %root%%src%\Configuration.html %to%
 copy %root%%src%\Configuration.jpg %to%
 copy %root%%src%\DataMethods.html %to%
+copy %root%%src%\DataMethods.cd %to%
 copy %root%%src%\DataMethods.jpg %to%
-
-rem ---------------
-set src=\CoreAssemblies\LJCDBClientLib\LJCDBClientLib\DocPages
-set to=HTML\LJCDBClientLib
 copy %root%%src%\DataManagerClass.html %to%
 copy %root%%src%\DataManagerCode.html %to%
 set to=HTML\LJCDBClientLib\Methods
@@ -52,41 +47,44 @@ copy %root%%src%\DataManagerRetrieve.html %to%
 copy %root%%src%\DataManagerUpdate.html %to%
 
 rem ---------------
-set src=\CoreAssemblies\LJCDBMessage\LJCDBMessage\Diagrams
-set to=HTML\LJCDBMessage
-copy %root%%src%\DbRequestColumn.html %to%
-copy %root%%src%\DbRequestColumn.jpg %to%
-copy %root%%src%\DbRequestJoin.html %to%
-copy %root%%src%\DbRequestJoin.jpg %to%
-copy %root%%src%\DbRequestResult.html %to%
-copy %root%%src%\DbResult.jpg %to%
-
-set src=\CoreAssemblies\LJCDBMessage\LJCDBMessage
-copy %root%%src%\DbMessageGraph.jpg %to%
-
-rem ---------------
-set src=\CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\Diagrams
+set src=\CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\DocPages
 set to=HTML\LJCDBDataAccess
 copy %root%%src%\DbAccessConfig.html %to%
 copy %root%%src%\DbAccessConfig.jpg %to%
 copy %root%%src%\DbAccessData.html %to%
 copy %root%%src%\DbAccessData.jpg %to%
 
+rem ---------------
+set src=\CoreAssemblies\LJCDBMessage\LJCDBMessage\DocPages
+set to=HTML\LJCDBMessage
+copy %root%%src%\DbRequestColumn.cd %to%
+copy %root%%src%\DbRequestColumn.html %to%
+copy %root%%src%\DbRequestColumn.jpg %to%
+copy %root%%src%\DbRequestJoin.cd %to%
+copy %root%%src%\DbRequestJoin.html %to%
+copy %root%%src%\DbRequestJoin.jpg %to%
+copy %root%%src%\DbResult.cd %to%
+copy %root%%src%\DbRequestResult.html %to%
+copy %root%%src%\DbResult.jpg %to%
+
+set src=\CoreAssemblies\LJCDBMessage\LJCDBMessage
+copy %root%%src%\DbMessageGraph.jpg %to%
+
 rem *********************
 rem *** CoreUtilities ***
-set src=\CoreUtilities\LJCGenDoc\LJCDocObjLib\Diagrams
+set src=\CoreUtilities\LJCGenDoc\LJCDocObjLib\DocPages
 set to=HTML\LJCDocObjLib
 copy %root%%src%\DataRootToMethod.html %to%
 copy %root%%src%\DataRootToMethod.jpg %to%
 copy %root%%src%\DataPropertyToExample.html %to%
 copy %root%%src%\DataPropertyToExample.jpg %to%
 
-set src=\CoreUtilities\LJCGenDoc\LJCDocXMLObjLib\Diagrams
+set src=\CoreUtilities\LJCGenDoc\LJCDocXMLObjLib\DocPages
 set to=HTML\LJCDocXMLObjLib
 copy %root%%src%\DocXML.html %to%
 copy %root%%src%\DocXML.jpg %to%
 
-set src=\CoreUtilities\LJCGenDoc\LJCGenDocDAL\LinkPages
+set src=\CoreUtilities\LJCGenDoc\LJCGenDocDAL\DocPages
 set to=HTML\LJCGenDocDAL
 copy %root%%src%\DocAssemblyTables.html %to%
 copy %root%%src%\DocAssemblyTables.jpg %to%
@@ -96,7 +94,7 @@ copy %root%%src%\DocMethodTables.html %to%
 copy %root%%src%\DocMethodTables.jpg %to%
 
 rem ---------------
-set src=\CoreUtilities\LJCGenDoc\LJCGenDocLib\Diagrams
+set src=\CoreUtilities\LJCGenDoc\LJCGenDocLib\DocPages
 set to=HTML\LJCGenDocLib
 copy %root%%src%\GenRootToMethod.html %to%
 copy %root%%src%\GenRootToMethod.jpg %to%
@@ -110,13 +108,20 @@ set src=\CoreUtilities\LJCGenDoc\LJCGenDocLib\CreateXML
 copy %root%%src%\DocLibXMLGraph.jpg %to%
 
 rem ---------------
-set src=\CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\LinkPages
+set src=\CoreUtilities\LJCGenText\LJCGenTextLib\DocPages
+set to=HTML\LJCGenTextLib
+copy %root%%src%\GenTextLib.cd %to%
+copy %root%%src%\GenTextLib.html %to%
+copy %root%%src%\GenTextLib.jpg %to%
+
+rem ---------------
+set src=\CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\DocPages
 set to=HTML\LJCSQLUtilLib
 copy %root%%src%\MetaDataTables.html %to%
 copy %root%%src%\MetaDataTables.jpg %to%
 
 rem ---------------
-set src=\CoreUtilities\LJCViewEditor\LJCViewEditor\LinkPages
+set src=\CoreUtilities\LJCViewEditor\LJCViewEditor\DocPages
 set to=HTML\LJCViewEditor
 copy %root%%src%\ViewDataTables.html %to%
 copy %root%%src%\ViewDataTables.jpg %to%
@@ -127,6 +132,12 @@ copy %root%%src%\ViewJoin.jpg %to%
 
 rem ******************
 rem *** SampleApps ***
+rem ---------------
+set src=\CoreAssemblies\LJCAppManager\LJCAppManager\LinkPages
+set to=HTML\LJCAppManager
+copy %root%%src%\AppManagerTables.html %to%
+copy %root%%src%\AppManagerTables.jpg %to%
+
 rem ---------------
 set src=\SampleApps\LJCDocAppManager\LJCDocAppManager\LinkPages
 set to=HTML\LJCDocAppManager

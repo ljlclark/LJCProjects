@@ -1,472 +1,264 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DocAssemblyGridCode.cs
+// LJCGenDocEdit.cs
 using LJCDBClientLib;
-using LJCDBMessage;
 using LJCNetCommon;
-using LJCViewEditorDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJCGenDocEditDAL;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using static LJCGenDocEdit.GenDocEditList;
 
 namespace LJCGenDocEdit
 {
-  // Provides DocAssemblyGrid methods for the GenDocEditList window.
-  internal class DocAssemblyGridCode
-  {
-    #region Constructors
+	// The list form.
+	/// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
+	internal partial class LJCGenDocEditList : Form
+	{
+		#region Constructors
 
-    // Initializes an object instance.
-    internal DocAssemblyGridCode(GenDocEditList parentList)
-    {
-      // Initialize property values.
-      GenDocEditList = parentList;
-      GenDocEditList.Cursor = Cursors.WaitCursor;
-      DocAssemblyGrid = GenDocEditList.DocAssemblyGrid;
-      DocAssemblyGroupGrid = GenDocEditList.DocAssemblyGroupGrid;
-      ResetData();
-      GenDocEditList.Cursor = Cursors.Default;
-    }
+		// Initializes an object instance.
+		internal LJCGenDocEditList()
+		{
+			Cursor = Cursors.WaitCursor;
+			InitializeComponent();
 
-    // Resets the DataConfig dependent objects.
-    internal void ResetData()
-    {
-      Managers = GenDocEditList.Managers;
-      ClassName_Manager = Managers.DocAssemblyManager;
-    }
-    #endregion
+			// Initialize property values.
+			LJCIsSelect = false;
 
-    #region Data Methods
+			// Set default class data.
+			// Set DAL config before using anywhere in the program.
+			var configValues = ValuesGenDocEdit.Instance;
+			configValues.SetConfigFile("LJCGenDocEdit.exe.config");
+			var settings = configValues.StandardSettings;
+			Text += $" - {settings.DataConfigName}";
+			Cursor = Cursors.Default;
+		}
+		#endregion
 
-    // Retrieves the combo items.
-    internal void DataRetrieveCombo()
-    {
-      //ComboRecords dataRecords;
+		#region Form Event Handlers
 
-      //Cursor = Cursors.WaitCursor;
-      //Combo.Items.Clear();
+		// Configures the form and loads the initial control data.
+		private void DocAssemblyGroupList_Load(object sender, EventArgs e)
+		{
+			InitializeControls();
+			CenterToParent();
+		}
+		#endregion
 
-      //dataRecords = mComboManager.Load();
+		#region Action Event Handlers
 
-      //if (dataRecords != null && records.Count > 0)
-      //{
-      //	foreach (ComboRecord dataRecord in dataRecords)
-      //	{
-      //		Combo.Items.Add(dataRecord);
-      //	}
-      //	if (Combo.Items.Count > 0)
-      //	{
-      //		Combo.SelectedIndex = 0;
-      //	}
-      //}
-      //Cursor = Cursors.Default;
-    }
+		#region Tabs
 
-    // Retrieves the list rows.
-    internal void DataRetrieve()
-    {
-      GenDocEditList.Cursor = Cursors.WaitCursor;
-      DocAssemblyGrid.LJCRowsClear();
+		// Performs a Move of the selected Main Tab to the TileTabs control.
+		private void MainTabsMove_Click(object sender, EventArgs e)
+		{
+			MainTabs.LJCMoveTabPageRight(TileTabs, TabsSplit);
+		}
 
-      //SetupGrid();
-      if (DocAssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
-      {
-        // Data from items.
-        int parentID = parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+		// Performs a Move of the selected Tile Tab to the MainTabs control.
+		private void TileTabsMove_Click(object sender, EventArgs e)
+		{
+			TileTabs.LJCMoveTabPageLeft(MainTabs, TabsSplit);
+		}
+		#endregion
 
-        var result = ClassName_Manager.ResultWithParentID(parentID);
-        if (DbResult.HasRows(result))
-        {
-          foreach (var dbRow in result.Rows)
-          {
-            RowAddValues(dbRow.Values);
-          }
-        }
-      }
-      GenDocEditList.Cursor = Cursors.Default;
-      GenDocEditList.DoChange(Change.DocAssembly);
-    }
+		#region DocAssemblyGroup
 
-    // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DocAssembly dataRecord)
-    {
-      var retValue = DocAssemblyGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(DocAssemblyGrid, dataRecord);
-      return retValue;
-    }
+		// Calls the New method.
+		private void DocAssemblyGroupToolNew_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoNew();
+		}
 
-    // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
-    {
-      var ljcGrid = DocAssemblyGrid;
-      var retValue = ljcGrid.LJCRowAdd();
+		// Calls the Edit method.
+		private void DocAssemblyGroupToolEdit_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoEdit();
+		}
 
-      var columnName = DocAssembly.ColumnID;
-      var id = dbValues.LJCGetInt32(columnName);
-      retValue.LJCSetInt32(columnName, id);
+		// Calls the Delete method.
+		private void DocAssemblyGroupToolDelete_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoDelete();
+		}
 
-      retValue.LJCSetValues(ljcGrid, dbValues);
-      return retValue;
-    }
+		// Calls the New method.
+		private void DocAssemblyGroupNew_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoNew();
+		}
 
-    // Selects a row based on the key record values.
-    private bool RowSelect(DocAssembly dataRecord)
-    {
-      bool retValue = false;
+		// Calls the Edit method.
+		private void DocAssemblyGroupEdit_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoEdit();
+		}
 
-      if (dataRecord != null)
-      {
-        GenDocEditList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in DocAssemblyGrid.Rows)
-        {
-          var rowID = row.LJCGetInt32(DocAssembly.ColumnID);
-          if (rowID == dataRecord.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            DocAssemblyGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
-        }
-        GenDocEditList.Cursor = Cursors.Default;
-      }
-      return retValue;
-    }
+		// Calls the Delete method.
+		private void DocAssemblyGroupDelete_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoDelete();
+		}
 
-    // Updates the current row with the record values.
-    private void RowUpdate(DocAssembly dataRecord)
-    {
-      if (DocAssemblyGrid.CurrentRow is LJCGridRow row)
-      {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(DocAssemblyGrid, dataRecord);
-      }
-    }
+		// Calls the Refresh method.
+		private void DocAssemblyGroupRefresh_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoRefresh();
+		}
 
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DocAssembly dataRecord)
-    {
-      row.LJCSetInt32(DocAssembly.ColumnID, dataRecord.ID);
-    }
-    #endregion
+		// Export a text file.
+		private void DocAssemblyGroupText_Click(object sender, EventArgs e)
+		{
+			string extension = mSettings.ExportTextExtension;
+			string fileSpec = $@"ExportFiles\DocAssemblyGroup.{extension}";
+			DocAssemblyGroupGrid.LJCExportData(fileSpec);
+		}
 
-    #region Action Methods
+		// Export a CSV file.
+		private void DocAssemblyGroupCSV_Click(object sender, EventArgs e)
+		{
+			string fileSpec = $@"ExportFiles\DocAssemblyGroup.csv";
+			DocAssemblyGroupGrid.LJCExportData(fileSpec);
+		}
 
-    // Performs the default list action.
-    internal void DoDefaultDocAssembly()
-    {
-      if (LJCIsSelect)
-      {
-        DoSelect();
-      }
-      else
-      {
-        DoEdit();
-      }
-    }
+		// Calls the Select method.
+		private void DocAssemblyGroupSelect_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoSelect();
+		}
 
-    // Deletes the selected row.
-    internal void DoDelete()
-    {
-      bool success = false;
-      var row = DocAssemblyGrid.CurrentRow as LJCGridRow;
-      if (DocAssemblyGroupGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
-      {
-        var title = "Delete Confirmation";
-        var message = FormCommon.DeleteConfirm;
-        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-          , MessageBoxIcon.Question) == DialogResult.Yes)
-        {
-          success = true;
-        }
-      }
+		// Performs the Close function.
+		private void DocAssemblyGroupClose_Click(object sender, EventArgs e)
+		{
+			SaveControlValues();
+			Close();
+		}
 
-      //int id = 0;
-      if (success)
-      {
-        // Data from items.
-        var id = row.LJCGetInt32(DocAssembly.ColumnID);
+		// Shows the help page.
+		private void DocAssemblyGroupMenuHelp_Click(object sender, EventArgs e)
+		{
+			DocAssemblyGroupGridCode.DoHelp();
+		}
+		#endregion
+		#endregion
 
-        var keyColumns = new DbColumns()
-        {
-          { DocAssembly.ColumnID, id }
-        };
-        DocAssemblyManager.Delete(keyColumns);
-        if (0 == ClassName_Manager.AffectedCount)
-        {
-          success = false;
-          var message = FormCommon.DeleteError;
-          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-            , MessageBoxIcon.Exclamation);
-        }
-      }
+		#region Control Event Handlers
 
-      if (success)
-      {
-        DocAssemblyGrid.Rows.Remove(row);
-        GenDocEditList.TimedChange(Change.DocAssembly);
-      }
-    }
+		#region Tabs
 
-    // Displays a detail dialog to edit an existing record.
-    internal void DoEdit()
-    {
-      if (DocAssemblyGroupGrid.CurrentRow is LJCGridRow parentRow
-        && DocAssemblyGrid.CurrentRow is LJCGridRow row)
-      {
-        // Data from items.
-        int id = row.LJCGetInt32(DocAssembly.ColumnID);
-        int parentID = parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-        string parentName = parentRow.LJCGetString(DocAssemblyGroup.ColumnName);
+		// Handles the MouseDown event.
+		private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				MainTabs.LJCSetCurrentTabPage(e);
+			}
+			SetFocusTab(e);
+		}
 
-        var location = FormCommon.GetDialogScreenPoint(DocAssemblyGrid);
-        var detail = new DocAssemblyDetail()
-        {
-          LJCID = id,
-          LJCLocation = location,
-          LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentName = parentName,
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
+		// Handles the MouseDown event.
+		private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				TileTabs.LJCSetCurrentTabPage(e);
+			}
+			SetFocusTab(e);
+		}
+		#endregion
 
-    // Shows the help page
-    internal void DoHelp()
-    {
-      Help.ShowHelp(DocList, "GenDocEdit.chm", HelpNavigator.Topic
-        , "DocAssemblyList.html");
-    }
+		#region Combo
 
-    // Displays a detail dialog for a new record.
-    internal void DoNew()
-    {
-      if (DocAssemblyGroupGrid.CurrentRow is LJCGridRow parentRow)
-      {
-        // Data from list items.
-        int parentID = parentRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
-        string parentName = parentRow.LJCGetString(DocAssemblyGroup.ColumnName);
+		//// Handles the SelectedIndexChanged event.
+		//private void Combo_SelectedIndexChanged(object sender, EventArgs e)
+		//{
+		//	ChangeTimer.DoChange(Change.Startup.ToString());
+		//}
+		#endregion
 
-        var location = FormCommon.GetDialogScreenPoint(DocAssemblyGrid);
-        var detail = new DocAssemblyDetail
-        {
-          LJCLocation = location,
-          LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentName = parentName
-        };
-        detail.LJCChange += Detail_Change;
-        detail.ShowDialog();
-      }
-    }
+		#region DocAssemblyGroup
 
-    // Refreshes the list.
-    internal void DoRefresh()
-    {
-      GenDocEditList.Cursor = Cursors.WaitCursor;
-      int id = 0;
-      if (DocAssemblyGrid.CurrentRow is LJCGridRow _)
-      {
-        // Save the original row.
-        id = row.LJCGetInt32(DocAssembly.ColumnID);
-      }
-      DataRetrieve();
+		// Handles the form keys.
+		private void DocAssemblyGroupGrid_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.Enter:
+					DoDefaultDocAssemblyGroup();
+					e.Handled = true;
+					break;
 
-      // Select the original row.
-      if (id > 0)
-      {
-        var record = new DocAssembly()
-        {
-          ID = id
-        };
-        RowSelect(record);
-      }
-      GenDocEditList.Cursor = Cursors.Default;
-    }
+				case Keys.F1:
+					DocAssemblyGroupGridCode.DoHelp();
+					e.Handled = true;
+					break;
 
-    // Sets the selected item and returns to the parent form.
-    private void DoSelect()
-    {
-      LJCSelectedRecord = null;
-      if (DocAssemblyGrid.CurrentRow is LJCGridRow row)
-      {
-        Cursor = Cursors.WaitCursor;
-        var id = row.LJCGetInt32(DocAssembly.ColumnID);
+				case Keys.F5:
+					DocAssemblyGroupGridCode.DoRefresh();
+					e.Handled = true;
+					break;
 
-        var manager = mManagers.DocAssemblyManager;
-        var keyRecord = manager.GetIDKey(id);
-        dataRecord = manager.Retrieve(keyRecord);
-        if (dataRecord != null)
-        {
-          LJCSelectedRecord = dataRecord;
-        }
-        Cursor = Cursors.Default;
-      }
-      DialogResult = DialogResult.OK;
-    }
+				case Keys.M:
+					if (e.Control)
+					{
+						var position = FormCommon.GetMenuScreenPoint(DocAssemblyGroupGrid
+							, MousePosition);
+						DocAssemblyGroupMenu.Show(position);
+						DocAssemblyGroupMenu.Select();
+						e.Handled = true;
+					}
+					break;
 
-    // Adds new row or updates row with
-    private void Detail_Change(object sender, EventArgs e)
-    {
-      var detail = sender as DocAssemblyDetail;
-      var record = detail.LJCRecord;
-      if (record != null)
-      {
-        if (detail.LJCIsUpdate)
-        {
-          RowUpdate(record);
-          //CheckPreviousAndNext(detail);
-          //DoRefresh();
-        }
-        else
-        {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var row = RowAdd(record);
-          DocAssemblyGrid.LJCSetCurrentRow(row, true);
-          //CheckPreviousAndNext(detail);
-          //DoRefresh();
-          GenDocEditList.TimedChange(Change.DocAssembly);
-        }
-      }
-    }
-    #endregion
+				case Keys.Tab:
+					if (e.Shift)
+					{
+						//Combo.Select();
+					}
+					else
+					{
+						//Combo.Select();
+					}
+					e.Handled = true;
+					break;
+			}
+		}
 
-    #region Setup and Other Methods
+		// Handles the MouseDoubleClick event.
+		private void DocAssemblyGroupGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (DocAssemblyGroupGrid.LJCGetMouseRow(e) != null)
+			{
+				DocAssemblyGroupGridCode.DoDefault();
+			}
+		}
 
-    // Configures the DocAssembly Grid.
-    private void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == DocAssemblyGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DocAssembly.ColumnName,
-          DocAssembly.ColumnDescription
-        };
+		// Handles the MouseDown event.
+		private void DocAssemblyGroupGrid_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				// LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+				DocAssemblyGroupGrid.Select();
+				if (DocAssemblyGroupGrid.LJCIsDifferentRow(e))
+				{
+					// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+					DocAssemblyGroupGrid.LJCSetCurrentRow(e);
+					TimedChange(Change.DocAssemblyGroup);
+				}
+			}
+		}
 
-        // Get the grid columns from the manager Data Definition.
-        var manager = DocAssemblyManager;
-        var gridColumns = manager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        DocAssemblyGrid.LJCAddColumns(gridColumns);
-        //mDocAssemblyGrid.LJCDragDataName = "DocAssembly";
-      }
-    }
-    #endregion
-
-    #region Get Data Methods
-
-    // Retrieves the row item.
-    private DocAssembly GetDocAssembly(LJCGridRow row = null)
-    {
-      DocAssembly retValue = null;
-
-      if (DocAssemblyGrid.CurrentRow is LJCGridRow row)
-      {
-        var id = DocAssemblyID(row);
-        if (id > 0)
-        {
-          var manager = Managers.DocAssemblyManager;
-          retValue = manager.RetrieveWithID(id);
-        }
-      }
-      return retValue;
-    }
-
-    // Retrieves the current row item ID.
-    private long DocAssemblyID(LJCGridRow row = null)
-    {
-      long retValue = 0;
-
-      if (null == row)
-      {
-        row = DocAssemblyGrid.CurrentRow as LJCGridRow;
-      }
-      if (row != null)
-      {
-        retValue = row.LJCGetInt64(DocAssembly.ColumnID);
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Private Methods
-
-    // Checks for Previous and Next items.
-    private void CheckPreviousAndNext(DocAssemblyDetail detail)
-    {
-      PreviousItem(detail);
-      NextItem(detail);
-    }
-
-    // Checks for Next item.
-    private void NextItem(DocAssemblyDetail detail)
-    {
-      if (detail.LJCNext)
-      {
-        LJCDataGrid grid = mDocAssemblyGrid;
-        int currentIndex = grid.CurrentRow.Index;
-        detail.LJCNext = false;
-        if (currentIndex < grid.Rows.Count - 1)
-        {
-          grid.LJCSetCurrentRow(currentIndex + 1, true);
-          var id = DocAssemblyID();
-          if (id > 0)
-          {
-            detail.ID = id;
-            detail.LJCNext = true;
-          }
-        }
-      }
-    }
-
-    // Checks for Previous item.
-    private void PreviousItem(DocAssemblyDetail detail)
-    {
-      if (detail.LJCPrevious)
-      {
-        LJCDataGrid grid = mDocAssemblyGrid;
-        int currentIndex = grid.CurrentRow.Index;
-        detail.LJCPrevious = false;
-        if (currentIndex > 0)
-        {
-          grid.LJCSetCurrentRow(currentIndex - 1, true);
-          var id = DocAssemblyID();
-          if (id > 0)
-          {
-            detail.ID = id;
-            detail.LJCPrevious = true;
-          }
-        }
-      }
-    }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the Parent List reference.
-    private GenDocEditList GenDocEditList { get; set; }
-
-    // Gets or sets the DocAssembly Grid reference.
-    private LJCDataGrid DocAssemblyGrid { get; set; }
-
-    // Gets or sets the Manager reference.
-    private DocAssemblyManager ClassName_Manager { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersGenDocEdit Managers { get; set; }
-
-    // Gets or sets the DocAssemblyGroup Grid reference.
-    private LJCDataGrid DocAssemblyGroupGrid { get; set; }
-    #endregion
-  }
+		// Handles the SelectionChanged event.
+		private void DocAssemblyGroupGrid_SelectionChanged(object sender, EventArgs e)
+		{
+			if (DocAssemblyGroupGrid.LJCAllowSelectionChange)
+			{
+				TimedChange(Change.DocAssemblyGroup);
+			}
+			DocAssemblyGroupGrid.LJCAllowSelectionChange = true;
+		}
+		#endregion
+		#endregion
+	}
 }
