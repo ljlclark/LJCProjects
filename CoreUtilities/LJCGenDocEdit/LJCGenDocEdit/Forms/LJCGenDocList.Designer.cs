@@ -41,6 +41,7 @@
       this.MainTabsMove = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyTab = new System.Windows.Forms.TabPage();
       this.AssemblySplit = new System.Windows.Forms.SplitContainer();
+      this.AssemblyGroupViewCombo = new LJCDBViewControls.ViewCombo();
       this.AssemblyGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AssemblyGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +60,7 @@
       this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
       this.AssemblyGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyGroupHeader = new LJCWinFormControls.LJCHeaderBox();
+      this.AssemblyViewCombo = new LJCDBViewControls.ViewCombo();
       this.AssemblyItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AssemblyHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +81,7 @@
       this.AssemblyCombo = new LJCWinFormControls.LJCItemCombo();
       this.AssemblyLabel = new System.Windows.Forms.Label();
       this.ClassSplit = new System.Windows.Forms.SplitContainer();
+      this.ClassGroupViewCombo = new LJCDBViewControls.ViewCombo();
       this.ClassGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ClassGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,6 +100,7 @@
       this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
       this.ClassGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassGroupHeader = new LJCWinFormControls.LJCHeaderBox();
+      this.ClassViewCombo = new LJCDBViewControls.ViewCombo();
       this.ClassItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ClassHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,6 +121,7 @@
       this.ClassCombo = new LJCWinFormControls.LJCItemCombo();
       this.ClassLabel = new System.Windows.Forms.Label();
       this.MethodSplit = new System.Windows.Forms.SplitContainer();
+      this.MethodGroupViewCombo = new LJCDBViewControls.ViewCombo();
       this.MethodGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,6 +140,7 @@
       this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
       this.MethodGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.MethodGroupHeader = new LJCWinFormControls.LJCHeaderBox();
+      this.MethodViewCombo = new LJCDBViewControls.ViewCombo();
       this.MethodItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodItemHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -258,16 +264,26 @@
       // 
       // AssemblySplit.Panel1
       // 
+      this.AssemblySplit.Panel1.Controls.Add(this.AssemblyGroupViewCombo);
       this.AssemblySplit.Panel1.Controls.Add(this.AssemblyGroupGrid);
       this.AssemblySplit.Panel1.Controls.Add(this.AssemblyGroupHeader);
       // 
       // AssemblySplit.Panel2
       // 
+      this.AssemblySplit.Panel2.Controls.Add(this.AssemblyViewCombo);
       this.AssemblySplit.Panel2.Controls.Add(this.AssemblyItemGrid);
       this.AssemblySplit.Panel2.Controls.Add(this.AssemblyItemHeader);
       this.AssemblySplit.Size = new System.Drawing.Size(561, 411);
       this.AssemblySplit.SplitterDistance = 104;
       this.AssemblySplit.TabIndex = 0;
+      // 
+      // AssemblyGroupViewCombo
+      // 
+      this.AssemblyGroupViewCombo.FormattingEnabled = true;
+      this.AssemblyGroupViewCombo.Location = new System.Drawing.Point(200, 3);
+      this.AssemblyGroupViewCombo.Name = "AssemblyGroupViewCombo";
+      this.AssemblyGroupViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.AssemblyGroupViewCombo.TabIndex = 2;
       // 
       // AssemblyGroupGrid
       // 
@@ -295,7 +311,7 @@
       this.AssemblyGroupGrid.LJCDragDataName = null;
       this.AssemblyGroupGrid.LJCLastRowIndex = -1;
       this.AssemblyGroupGrid.LJCRowHeight = 0;
-      this.AssemblyGroupGrid.Location = new System.Drawing.Point(0, 31);
+      this.AssemblyGroupGrid.Location = new System.Drawing.Point(0, 32);
       this.AssemblyGroupGrid.MultiSelect = false;
       this.AssemblyGroupGrid.Name = "AssemblyGroupGrid";
       this.AssemblyGroupGrid.RowHeadersVisible = false;
@@ -443,10 +459,18 @@
       this.AssemblyGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyGroupHeader.Name = "AssemblyGroupHeader";
-      this.AssemblyGroupHeader.Size = new System.Drawing.Size(560, 31);
+      this.AssemblyGroupHeader.Size = new System.Drawing.Size(560, 32);
       this.AssemblyGroupHeader.TabIndex = 0;
       this.AssemblyGroupHeader.TabStop = false;
       this.AssemblyGroupHeader.Text = "Assembly Group";
+      // 
+      // AssemblyViewCombo
+      // 
+      this.AssemblyViewCombo.FormattingEnabled = true;
+      this.AssemblyViewCombo.Location = new System.Drawing.Point(200, 3);
+      this.AssemblyViewCombo.Name = "AssemblyViewCombo";
+      this.AssemblyViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.AssemblyViewCombo.TabIndex = 3;
       // 
       // AssemblyItemGrid
       // 
@@ -474,7 +498,7 @@
       this.AssemblyItemGrid.LJCDragDataName = null;
       this.AssemblyItemGrid.LJCLastRowIndex = -1;
       this.AssemblyItemGrid.LJCRowHeight = 0;
-      this.AssemblyItemGrid.Location = new System.Drawing.Point(0, 31);
+      this.AssemblyItemGrid.Location = new System.Drawing.Point(0, 32);
       this.AssemblyItemGrid.MultiSelect = false;
       this.AssemblyItemGrid.Name = "AssemblyItemGrid";
       this.AssemblyItemGrid.RowHeadersVisible = false;
@@ -607,7 +631,7 @@
       this.AssemblyItemHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyItemHeader.Name = "AssemblyItemHeader";
-      this.AssemblyItemHeader.Size = new System.Drawing.Size(560, 31);
+      this.AssemblyItemHeader.Size = new System.Drawing.Size(560, 33);
       this.AssemblyItemHeader.TabIndex = 0;
       this.AssemblyItemHeader.TabStop = false;
       this.AssemblyItemHeader.Text = "Assembly Item";
@@ -652,16 +676,26 @@
       // 
       // ClassSplit.Panel1
       // 
+      this.ClassSplit.Panel1.Controls.Add(this.ClassGroupViewCombo);
       this.ClassSplit.Panel1.Controls.Add(this.ClassGroupGrid);
       this.ClassSplit.Panel1.Controls.Add(this.ClassGroupHeader);
       // 
       // ClassSplit.Panel2
       // 
+      this.ClassSplit.Panel2.Controls.Add(this.ClassViewCombo);
       this.ClassSplit.Panel2.Controls.Add(this.ClassItemGrid);
       this.ClassSplit.Panel2.Controls.Add(this.ClassItemHeader);
       this.ClassSplit.Size = new System.Drawing.Size(561, 375);
       this.ClassSplit.SplitterDistance = 83;
       this.ClassSplit.TabIndex = 2;
+      // 
+      // ClassGroupViewCombo
+      // 
+      this.ClassGroupViewCombo.FormattingEnabled = true;
+      this.ClassGroupViewCombo.Location = new System.Drawing.Point(200, 2);
+      this.ClassGroupViewCombo.Name = "ClassGroupViewCombo";
+      this.ClassGroupViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.ClassGroupViewCombo.TabIndex = 3;
       // 
       // ClassGroupGrid
       // 
@@ -689,7 +723,7 @@
       this.ClassGroupGrid.LJCDragDataName = null;
       this.ClassGroupGrid.LJCLastRowIndex = -1;
       this.ClassGroupGrid.LJCRowHeight = 0;
-      this.ClassGroupGrid.Location = new System.Drawing.Point(0, 31);
+      this.ClassGroupGrid.Location = new System.Drawing.Point(0, 32);
       this.ClassGroupGrid.MultiSelect = false;
       this.ClassGroupGrid.Name = "ClassGroupGrid";
       this.ClassGroupGrid.RowHeadersVisible = false;
@@ -836,10 +870,18 @@
       this.ClassGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassGroupHeader.Name = "ClassGroupHeader";
-      this.ClassGroupHeader.Size = new System.Drawing.Size(560, 31);
+      this.ClassGroupHeader.Size = new System.Drawing.Size(560, 32);
       this.ClassGroupHeader.TabIndex = 0;
       this.ClassGroupHeader.TabStop = false;
       this.ClassGroupHeader.Text = "Class Group";
+      // 
+      // ClassViewCombo
+      // 
+      this.ClassViewCombo.FormattingEnabled = true;
+      this.ClassViewCombo.Location = new System.Drawing.Point(200, 2);
+      this.ClassViewCombo.Name = "ClassViewCombo";
+      this.ClassViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.ClassViewCombo.TabIndex = 3;
       // 
       // ClassItemGrid
       // 
@@ -867,7 +909,7 @@
       this.ClassItemGrid.LJCDragDataName = null;
       this.ClassItemGrid.LJCLastRowIndex = -1;
       this.ClassItemGrid.LJCRowHeight = 0;
-      this.ClassItemGrid.Location = new System.Drawing.Point(0, 31);
+      this.ClassItemGrid.Location = new System.Drawing.Point(0, 32);
       this.ClassItemGrid.MultiSelect = false;
       this.ClassItemGrid.Name = "ClassItemGrid";
       this.ClassItemGrid.RowHeadersVisible = false;
@@ -1000,7 +1042,7 @@
       this.ClassItemHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassItemHeader.Name = "ClassItemHeader";
-      this.ClassItemHeader.Size = new System.Drawing.Size(560, 31);
+      this.ClassItemHeader.Size = new System.Drawing.Size(560, 32);
       this.ClassItemHeader.TabIndex = 0;
       this.ClassItemHeader.TabStop = false;
       this.ClassItemHeader.Text = "Class Item";
@@ -1044,16 +1086,26 @@
       // 
       // MethodSplit.Panel1
       // 
+      this.MethodSplit.Panel1.Controls.Add(this.MethodGroupViewCombo);
       this.MethodSplit.Panel1.Controls.Add(this.MethodGroupGrid);
       this.MethodSplit.Panel1.Controls.Add(this.MethodGroupHeader);
       // 
       // MethodSplit.Panel2
       // 
+      this.MethodSplit.Panel2.Controls.Add(this.MethodViewCombo);
       this.MethodSplit.Panel2.Controls.Add(this.MethodItemGrid);
       this.MethodSplit.Panel2.Controls.Add(this.MethodItemHeader);
       this.MethodSplit.Size = new System.Drawing.Size(561, 375);
       this.MethodSplit.SplitterDistance = 83;
       this.MethodSplit.TabIndex = 2;
+      // 
+      // MethodGroupViewCombo
+      // 
+      this.MethodGroupViewCombo.FormattingEnabled = true;
+      this.MethodGroupViewCombo.Location = new System.Drawing.Point(200, 2);
+      this.MethodGroupViewCombo.Name = "MethodGroupViewCombo";
+      this.MethodGroupViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.MethodGroupViewCombo.TabIndex = 3;
       // 
       // MethodGroupGrid
       // 
@@ -1081,7 +1133,7 @@
       this.MethodGroupGrid.LJCDragDataName = null;
       this.MethodGroupGrid.LJCLastRowIndex = -1;
       this.MethodGroupGrid.LJCRowHeight = 0;
-      this.MethodGroupGrid.Location = new System.Drawing.Point(0, 31);
+      this.MethodGroupGrid.Location = new System.Drawing.Point(0, 32);
       this.MethodGroupGrid.MultiSelect = false;
       this.MethodGroupGrid.Name = "MethodGroupGrid";
       this.MethodGroupGrid.RowHeadersVisible = false;
@@ -1228,10 +1280,18 @@
       this.MethodGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodGroupHeader.Name = "MethodGroupHeader";
-      this.MethodGroupHeader.Size = new System.Drawing.Size(560, 31);
+      this.MethodGroupHeader.Size = new System.Drawing.Size(560, 32);
       this.MethodGroupHeader.TabIndex = 0;
       this.MethodGroupHeader.TabStop = false;
       this.MethodGroupHeader.Text = "Method Group";
+      // 
+      // MethodViewCombo
+      // 
+      this.MethodViewCombo.FormattingEnabled = true;
+      this.MethodViewCombo.Location = new System.Drawing.Point(200, 2);
+      this.MethodViewCombo.Name = "MethodViewCombo";
+      this.MethodViewCombo.Size = new System.Drawing.Size(300, 28);
+      this.MethodViewCombo.TabIndex = 3;
       // 
       // MethodItemGrid
       // 
@@ -1259,7 +1319,7 @@
       this.MethodItemGrid.LJCDragDataName = null;
       this.MethodItemGrid.LJCLastRowIndex = -1;
       this.MethodItemGrid.LJCRowHeight = 0;
-      this.MethodItemGrid.Location = new System.Drawing.Point(0, 31);
+      this.MethodItemGrid.Location = new System.Drawing.Point(0, 32);
       this.MethodItemGrid.MultiSelect = false;
       this.MethodItemGrid.Name = "MethodItemGrid";
       this.MethodItemGrid.RowHeadersVisible = false;
@@ -1392,7 +1452,7 @@
       this.MethodItemHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodItemHeader.Name = "MethodItemHeader";
-      this.MethodItemHeader.Size = new System.Drawing.Size(560, 31);
+      this.MethodItemHeader.Size = new System.Drawing.Size(560, 32);
       this.MethodItemHeader.TabIndex = 0;
       this.MethodItemHeader.TabStop = false;
       this.MethodItemHeader.Text = "Method Item";
@@ -1593,6 +1653,12 @@
     private System.Windows.Forms.ToolStripMenuItem MethodGroupHelp;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
     private System.Windows.Forms.ToolStripMenuItem MethodItemHelp;
+    internal LJCDBViewControls.ViewCombo AssemblyGroupViewCombo;
+    private LJCDBViewControls.ViewCombo AssemblyViewCombo;
+    private LJCDBViewControls.ViewCombo ClassGroupViewCombo;
+    private LJCDBViewControls.ViewCombo ClassViewCombo;
+    private LJCDBViewControls.ViewCombo MethodGroupViewCombo;
+    private LJCDBViewControls.ViewCombo MethodViewCombo;
   }
 }
 

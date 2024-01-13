@@ -20,6 +20,10 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
 set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
 echo copy %src%\LJCDBClientLib.dll %to%
 copy %src%\LJCDBClientLib.dll %to%
@@ -27,6 +31,10 @@ copy %src%\LJCDBClientLib.dll %to%
 set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
 echo copy %src%\LJCDBMessage.dll %to%
 copy %src%\LJCDBMessage.dll %to%
+
+set src=%assmRoot%LJCDBViewControls\LJCDBViewControls\%bin%
+echo copy %src%\LJCDBViewControls.dll %to%
+copy %src%\LJCDBViewControls.dll %to%
 
 set src=%utilRoot%LJCGenDoc\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
@@ -76,6 +84,10 @@ set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
 echo copy %src%\LJCDBClientLib.dll %to%
 copy %src%\LJCDBClientLib.dll %to%
 
+set src=%assmRoot%LJCDBViewDAL\LJCDBViewDAL\%bin%
+echo copy %src%\LJCDBViewDAL.dll %to%
+copy %src%\LJCDBViewDAL.dll %to%
+
 set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
 echo copy %src%\LJCDBDataAccess.dll %to%
 copy %src%\LJCDBDataAccess.dll %to%
@@ -83,6 +95,10 @@ copy %src%\LJCDBDataAccess.dll %to%
 set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
+
+set src=%utilRoot%LJCViewEditor\LJCViewEditor\%bin%
+echo copy %src%\LJCViewEditor.exe %to%
+copy %src%\LJCViewEditor.exe %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

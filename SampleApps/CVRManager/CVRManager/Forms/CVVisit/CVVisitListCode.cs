@@ -27,7 +27,7 @@ namespace CVRManager
 			Settings = values.StandardSettings;
 
 			// Initialize Class Data.
-			ValuesCVRDAL.Instance.SetProperties("CVRManager.exe.config");
+			ValuesCVRDAL.Instance.SetConfigFile("CVRManager.exe.config");
 			Managers = ValuesCVRDAL.Instance.Managers;
 
 			// Initialize Grid Code.

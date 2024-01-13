@@ -7,38 +7,50 @@ using System.IO;
 
 namespace DataHelper
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public sealed class ValuesDataHelper
-	{
-		#region Constructors
+  /// <summary>
+  /// 
+  /// </summary>
+  public sealed class ValuesDataHelper
+  {
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
-		public ValuesDataHelper()
-		{
-			StandardSettings = new StandardUISettings();
+    // Initializes an object instance.
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public ValuesDataHelper()
+    {
+      StandardSettings = new StandardUISettings();
       var fileName = "DataHelper.exe.config";
-      if (File.Exists(fileName))
-      {
-        SetConfigFile(fileName);
-      }
+      SetConfigFile(fileName);
     }
 
     /// <summary>Configures the settings.</summary>
     /// <param name="fileName">The config file name.</param>
     public void SetConfigFile(string fileName)
     {
-      if (NetString.HasValue(fileName))
+      bool success = true;
+      if (!NetString.HasValue(fileName))
       {
-        // No config file set or new file name.
-        if (!NetString.HasValue(ConfigFileName)
-          || fileName.Trim().ToLower() != ConfigFileName.ToLower())
+        // Do not continue if no fileName.
+        success = false;
+      }
+
+      if (success)
+      {
+        fileName = fileName.Trim();
+        if (NetString.HasValue(ConfigFileName)
+          && !NetString.IsEqual(fileName, ConfigFileName))
         {
-          ConfigFileName = fileName.Trim();
-          StandardSettings.SetProperties(fileName);
+          // Do not continue if fileName equals ConfigFileName.
+          success = false;
         }
+      }
+
+      if (success
+        && File.Exists(fileName))
+      {
+        // Process if changed fileName exists.
+        ConfigFileName = fileName.Trim();
+          StandardSettings.SetProperties(fileName);
       }
     }
     #endregion

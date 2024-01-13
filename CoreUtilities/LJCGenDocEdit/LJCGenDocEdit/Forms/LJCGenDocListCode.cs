@@ -2,8 +2,11 @@
 // Licensed under the MIT License.
 // LJCGenDocListCode.cs
 using LJCDBClientLib;
+// *** Next Statement *** Add - Data Views
+using LJCDBViewControls;
 using LJCGenDocDAL;
 using LJCNetCommon;
+using LJCViewEditor;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
@@ -129,6 +132,27 @@ namespace LJCGenDocEdit
         TabsSplit.SplitterWidth = 4;
         MethodSplit.Top += 5;
 
+        // *** Begin *** Add - Data Views
+        AssemblyGroupHeader.Height += 4;
+        AssemblyItemHeader.Height += 4;
+        ClassGroupHeader.Height += 4;
+        ClassItemHeader.Height += 4;
+        MethodGroupHeader.Height += 4;
+        MethodItemHeader.Height += 4;
+
+        ClassGroupViewCombo.Top += 1;
+        ClassViewCombo.Top += 1;
+        MethodGroupViewCombo.Top += 1;
+        MethodViewCombo.Top += 1;
+
+        AssemblyGroupGrid.Top += 6;
+        AssemblyItemGrid.Top += 6;
+        ClassGroupGrid.Top += 6;
+        ClassItemGrid.Top += 6;
+        MethodGroupGrid.Top += 6;
+        MethodItemGrid.Top += 6;
+        // *** End   *** Add - Data Views
+
         ListHelper.SetPanelControls(AssemblySplit.Panel1, AssemblyGroupHeader
           , null, AssemblyGroupGrid);
         ListHelper.SetPanelControls(AssemblySplit.Panel2, AssemblyItemHeader
@@ -159,6 +183,7 @@ namespace LJCGenDocEdit
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
+      LoadControlData();
       ControlSetup();
       InitialControlValues();
       SetupGrids();
@@ -197,6 +222,24 @@ namespace LJCGenDocEdit
       Managers = new ManagersGenDoc();
       Managers.SetDBProperties(mSettings.DbServiceRef
         , mSettings.DataConfigName);
+      var dbServiceRef = mSettings.DbServiceRef;
+      var dataConfigName = mSettings.DataConfigName;
+
+      // *** Begin *** - Data Views
+      AssemblyGroupViewCombo.LJCInit(DocAssemblyGroup.TableName, dbServiceRef
+        , dataConfigName);
+      AssemblyGroupViewInfo = new ViewInfo()
+      {
+        TableName = DocAssemblyGroup.TableName
+      };
+      // *** End   *** - Data Views
+    }
+
+    // Loads the initial Control data.
+    private void LoadControlData()
+    {
+      // *** Next Statement *** Add - Data Views
+      LoadComboAssemblyGroup();
     }
 
     // Restores the control values.
@@ -277,7 +320,10 @@ namespace LJCGenDocEdit
     // Setup the data grids.
     private void SetupGrids()
     {
-      mAssemblyGroupGridCode.SetupGrid();
+      // *** Begin *** Change - Data Views
+      AssemblyGroupViewInfo.DataID = AssemblyGroupViewCombo.LJCSelectedItemID();
+      mAssemblyGroupGridCode.SetupGrid(AssemblyGroupViewInfo);
+      // *** End   *** Change - Data Views
       mAssemblyItemGridCode.SetupGrid();
       mClassGroupGridCode.SetupGrid();
       mClassItemGridCode.SetupGrid();
@@ -303,6 +349,28 @@ namespace LJCGenDocEdit
     private ControlValues ControlValues { get; set; }
     #endregion
     #endregion
+
+    // Load the Person View Combo.
+    // *** New Method *** - Data Views
+    private void LoadComboAssemblyGroup()
+    {
+      if (!AssemblyGroupViewCombo.LJCLoad())
+      {
+        // Did not load any Views.
+        var viewCombo = AssemblyGroupViewCombo;
+        var dataID = viewCombo.LJCSelectedItemID();
+        AssemblyGroupViewInfo.DataID = dataID;
+        ViewCommon.DoViewEdit(AssemblyGroupViewInfo);
+
+        string title = "Reload Confirmation";
+        string message = "Reload Asesembly Group View Combo?";
+        if (DialogResult.Yes == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          AssemblyGroupViewCombo.LJCLoad();
+        }
+      }
+    }
 
     #region Private Methods
 
@@ -406,12 +474,16 @@ namespace LJCGenDocEdit
 
     /// <summary>The Managers object.</summary>
     internal ManagersGenDoc Managers { get; set; }
+
+    // *** Next Statement *** Add - Data Views
+    private ViewInfo AssemblyGroupViewInfo { get; set; }
     #endregion
 
     #region Class Data
 
+    internal StandardUISettings mSettings;
+
     private string mControlValuesFileName;
-    private StandardUISettings mSettings;
     private AssemblyGroupGridCode mAssemblyGroupGridCode;
     private AssemblyItemComboCode mAssemblyItemComboCode;
     private AssemblyItemGridCode mAssemblyItemGridCode;

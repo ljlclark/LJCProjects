@@ -4,73 +4,106 @@
 using System;
 using LJCNetCommon;
 using LJCDBClientLib;
+using System.IO;
 
 namespace CVRManager
 {
 	/// <summary>Application values singleton class.</summary>
 	internal sealed class ValuesCVRManager
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		internal ValuesCVRManager()
-		{
-			StandardSettings = new StandardUISettings();
-			StandardSettings.SetProperties("CVRManager.exe.config");
+    internal ValuesCVRManager()
+    {
+      StandardSettings = new StandardUISettings();
+      var fileName = "CVRManager.exe.config";
+      SetConfigFile(fileName);
+    }
 
-			string value;
-			AppSettings appSettings = StandardSettings.AppSettings;
+    /// <summary>Configures the settings.</summary>
+    /// <param name="fileName">The config file name.</param>
+    public void SetConfigFile(string fileName)
+    {
+      bool success = true;
+      if (!NetString.HasValue(fileName))
+      {
+        // Do not continue if no fileName.
+        success = false;
+      }
 
-			TemperatureUnitCode = appSettings.GetString("TemperatureUnitCode");
-			if (null == TemperatureUnitCode
-				|| "dCdF".IndexOf(TemperatureUnitCode) < 0)
-			{
-				TemperatureUnitCode = "dF";
-			}
+      if (success)
+      {
+        fileName = fileName.Trim();
+        if (NetString.HasValue(ConfigFileName)
+          && !NetString.IsEqual(fileName, ConfigFileName))
+        {
+          // Do not continue if fileName equals ConfigFileName.
+          success = false;
+        }
+      }
 
-			value = appSettings.GetString("TemperatureHighValue");
-			decimal.TryParse(value, out decimal decimalHighValue);
+      if (success
+        && File.Exists(fileName))
+      {
+        // Process if changed fileName exists.
+        ConfigFileName = fileName;
+        StandardSettings.SetProperties(ConfigFileName);
 
-			value = appSettings.GetString("TemperatureLowValue");
-			decimal.TryParse(value, out decimal decimalLowValue);
+        var appSettings = StandardSettings.AppSettings;
+        TemperatureUnitCode = appSettings.GetString("TemperatureUnitCode");
+        if (null == TemperatureUnitCode
+          || "dCdF".IndexOf(TemperatureUnitCode) < 0)
+        {
+          TemperatureUnitCode = "dF";
+        }
 
-			switch (TemperatureUnitCode)
-			{
-				case "dC":
-					if (decimalHighValue < 37.1m)
-					{
-						decimalHighValue = 38m;
-					}
-					TemperatureHighValue = decimalHighValue;
+        string value = appSettings.GetString("TemperatureHighValue");
+        decimal.TryParse(value, out decimal decimalHighValue);
 
-					if (decimalLowValue < 35m)
-					{
-						decimalLowValue = 35m;
-					}
-					TemperatureLowValue = decimalLowValue;
-					break;
+        value = appSettings.GetString("TemperatureLowValue");
+        decimal.TryParse(value, out decimal decimalLowValue);
 
-				case "dF":
-					if (decimalHighValue < 98.8m)
-					{
-						decimalHighValue = 100.4m;
-					}
-					TemperatureHighValue = decimalHighValue;
+        switch (TemperatureUnitCode)
+        {
+          case "dC":
+            if (decimalHighValue < 37.1m)
+            {
+              decimalHighValue = 38m;
+            }
+            TemperatureHighValue = decimalHighValue;
 
-					if (decimalLowValue < 95m)
-					{
-						decimalLowValue = 95m;
-					}
-					TemperatureLowValue = decimalLowValue;
-					break;
-			}
-		}
-		#endregion
+            if (decimalLowValue < 35m)
+            {
+              decimalLowValue = 35m;
+            }
+            TemperatureLowValue = decimalLowValue;
+            break;
 
-		#region Properties
+          case "dF":
+            if (decimalHighValue < 98.8m)
+            {
+              decimalHighValue = 100.4m;
+            }
+            TemperatureHighValue = decimalHighValue;
 
-		// The singleton instance.
-		internal static ValuesCVRManager Instance { get; }
+            if (decimalLowValue < 95m)
+            {
+              decimalLowValue = 95m;
+            }
+            TemperatureLowValue = decimalLowValue;
+            break;
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Gets or sets the ConfigFile name.</summary>
+    public string ConfigFileName { get; private set; }
+
+    // The singleton instance.
+    internal static ValuesCVRManager Instance { get; }
 			= new ValuesCVRManager();
 
 		// Gets or sets the StandardUISettings value.

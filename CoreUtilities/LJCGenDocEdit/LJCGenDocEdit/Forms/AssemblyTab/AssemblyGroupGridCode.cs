@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 // AssemblyGroupGridCode.cs
 using LJCDBMessage;
+// *** Begin *** Add - Data Views
+using LJCDBViewControls;
+using LJCDBViewDAL;
+// *** End   *** Add - Data Views
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -11,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJCViewEditor;
 
 namespace LJCGenDocEdit
 {
@@ -27,6 +32,13 @@ namespace LJCGenDocEdit
       DocList = parentList;
       AssemblyGroupGrid = DocList.AssemblyGroupGrid;
       Managers = DocList.Managers;
+      // *** Begin *** Add - Data Views
+      var dbManagers = new ManagersDbView();
+      var settings = DocList.mSettings;
+      dbManagers.SetDbProperties(settings.DbServiceRef
+        , settings.DataConfigName);
+      mDataDbView = new DataDbView(dbManagers);
+      // *** End   *** Add - Data Views
       DocAssemblyGroupManager = Managers.DocAssemblyGroupManager;
       DocList.Cursor = Cursors.Default;
     }
@@ -284,27 +296,59 @@ namespace LJCGenDocEdit
     }
 
     // Setup the grid columns.
-    internal void SetupGrid()
+    internal void SetupGrid(ViewInfo viewInfo)
     {
-      // Setup default grid columns if no columns are defined.
-      if (0 == AssemblyGroupGrid.Columns.Count)
+      //// Setup default grid columns if no columns are defined.
+      //if (0 == AssemblyGroupGrid.Columns.Count)
+      //{
+      //  List<string> propertyNames = new List<string>()
+      //  {
+      //    DocAssemblyGroup.ColumnName,
+      //    DocAssemblyGroup.ColumnHeading,
+      //    DocAssemblyGroup.ColumnSequence
+      //  };
+
+      //  // Get the grid columns from the manager Data Definition.
+      //  var manager = DocAssemblyGroupManager;
+      //  GridColumns = manager.GetColumns(propertyNames);
+
+      //  // Setup the grid columns.
+      //  AssemblyGroupGrid.LJCAddColumns(GridColumns);
+      //  FormCommon.NotSortable(AssemblyGroupGrid);
+      //  AssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
+      //}
+      // *** Begin *** Change - Data Views
+      // Clear previous grid columns definition as view may have changed.
+      AssemblyGroupGrid.Columns.Clear();
+
+      // Get the view grid columns
+      var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+      if (null == gridColumns)
       {
-        List<string> propertyNames = new List<string>()
+        // Did not load any Grid Columns.
+        var viewCombo = DocList.AssemblyGroupViewCombo;
+        var dataID = viewCombo.LJCSelectedItemID();
+        viewInfo.DataID = dataID;
+        ViewCommon.DoViewEdit(viewInfo);
+
+        string title = "Reload Confirmation";
+        string message = "Reload View Combo?";
+        if (DialogResult.Yes == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          DocAssemblyGroup.ColumnName,
-          DocAssemblyGroup.ColumnHeading,
-          DocAssemblyGroup.ColumnSequence
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var manager = DocAssemblyGroupManager;
-        GridColumns = manager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        AssemblyGroupGrid.LJCAddColumns(GridColumns);
-        FormCommon.NotSortable(AssemblyGroupGrid);
-        AssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
+          viewCombo.Items.Clear();
+          viewCombo.LJCLoad();
+        }
       }
+      else
+      {
+        // Setup the grid columns.
+        AssemblyGroupGrid.LJCAddColumns(gridColumns);
+        //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
+      }
+      // *** End   *** Change - Data Views
+      FormCommon.NotSortable(AssemblyGroupGrid);
+      AssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
     }
     #endregion
 
@@ -420,6 +464,9 @@ namespace LJCGenDocEdit
 
     // Gets or sets the Managers reference.
     private ManagersGenDoc Managers { get; set; }
+
+    // *** Next Statement *** Add - View
+    private DataDbView mDataDbView;
     #endregion
   }
 }

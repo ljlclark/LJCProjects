@@ -248,9 +248,9 @@ namespace LJCViewEditor
       DataConfigName = mSettings.DataConfigName;
       DbServiceRef = mSettings.DbServiceRef;
       mPrevConfigName = DataConfigName;
-      //Managers = new ManagersDbView();
-      //Managers.SetDbProperties(DbServiceRef, DataConfigName);
-      Managers = values.Managers;
+      Managers = new ManagersDbView();
+      Managers.SetDbProperties(DbServiceRef, DataConfigName);
+      //Managers = values.Managers;
 
       try
       {
