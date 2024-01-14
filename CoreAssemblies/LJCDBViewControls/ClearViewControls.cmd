@@ -16,5 +16,5 @@ set ClearBuild=ClearBuildDetail.cmd
 set Project=LJCDBViewControls
 set File=LJCDBViewControls
 call %ClearBuild%
-del %Solution%\%Project%\%bin%\ViewEditor.exe
+del %Solution%\%Project%\%bin%\LJCViewEditor.exe
 
