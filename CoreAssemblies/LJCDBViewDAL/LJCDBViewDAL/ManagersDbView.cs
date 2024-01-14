@@ -144,7 +144,7 @@ namespace LJCDBViewDAL
     {
       get
       {
-        if (null == mViewDataManager)
+        if (null == mViewGridColumnManager)
         {
           ViewGridColumnManager = new ViewGridColumnManager(DbServiceRef
             , DataConfigName);
@@ -159,6 +159,7 @@ namespace LJCDBViewDAL
         }
       }
     }
+    private ViewGridColumnManager mViewGridColumnManager;
 
     /// <summary>Gets the ViewJoinColumnManager object.</summary>
     public ViewJoinColumnManager ViewJoinColumnManager
@@ -273,7 +274,6 @@ namespace LJCDBViewDAL
     private ViewConditionManager mViewConditionManager;
     private ViewConditionSetManager mViewConditionSetManager;
     private ViewFilterManager mViewFilterManager;
-    private ViewGridColumnManager mViewGridColumnManager;
     private ViewJoinColumnManager mViewJoinColumnManager;
     private ViewJoinManager mViewJoinManager;
     private ViewJoinOnManager mViewJoinOnManager;

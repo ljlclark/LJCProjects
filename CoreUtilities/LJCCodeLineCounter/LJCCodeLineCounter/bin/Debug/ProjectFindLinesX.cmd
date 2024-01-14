@@ -1,4 +1,4 @@
-set Find="DataDefinition"
+set Find="Settings.SetProperties"
 
 if %1. == . goto default
 set folder=%1

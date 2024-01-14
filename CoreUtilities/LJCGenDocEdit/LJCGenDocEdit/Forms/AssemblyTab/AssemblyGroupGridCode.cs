@@ -33,7 +33,7 @@ namespace LJCGenDocEdit
       Managers = DocList.Managers;
       // *** Begin *** Add - Data Views
       var dbManagers = new ManagersDbView();
-      var settings = DocList.mSettings;
+      var settings = DocList.Settings;
       dbManagers.SetDbProperties(settings.DbServiceRef
         , settings.DataConfigName);
       mDataDbView = new DataDbView(dbManagers);
@@ -264,7 +264,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Setup and sOther Methods
+    #region Setup and Other Methods
 
     // The DragDrop method.
     internal void DoDragDrop(DragEventArgs e)
@@ -306,7 +306,9 @@ namespace LJCGenDocEdit
       if (gridColumns != null)
       {
         // Setup the grid columns.
-        AssemblyGroupGrid.LJCAddColumns(gridColumns);
+        var columns = gridColumns.Clone();
+        columns.LJCRemoveColumn(DocAssemblyGroup.ColumnID);
+        AssemblyGroupGrid.LJCAddColumns(columns);
         AssemblyGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
       else

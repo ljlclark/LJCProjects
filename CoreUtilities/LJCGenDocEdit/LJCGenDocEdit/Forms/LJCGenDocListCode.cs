@@ -189,6 +189,7 @@ namespace LJCGenDocEdit
       StartChangeProcessing();
       Cursor = Cursors.Default;
     }
+    #endregion
 
     #region Setup Support
 
@@ -209,22 +210,21 @@ namespace LJCGenDocEdit
       // Splitter is not in the first TabPage.
       ClassSplit.Resize += ClassSplit_Resize;
 
-      BackColor = mSettings.BeginColor;
+      BackColor = Settings.BeginColor;
     }
 
     // Initialize the Class Data.
     private void InitializeClassData()
     {
       var values = ValuesGenDocEdit.Instance;
-      mSettings = values.StandardSettings;
-      //*** Next Statement *** External Config
+      Settings = values.StandardSettings;
       ConfigFileName = values.ConfigFileName;
 
       Managers = new ManagersGenDoc();
-      Managers.SetDBProperties(mSettings.DbServiceRef
-        , mSettings.DataConfigName);
-      var dbServiceRef = mSettings.DbServiceRef;
-      var dataConfigName = mSettings.DataConfigName;
+      Managers.SetDBProperties(Settings.DbServiceRef
+        , Settings.DataConfigName);
+      var dbServiceRef = Settings.DbServiceRef;
+      var dataConfigName = Settings.DataConfigName;
 
       // *** Begin *** - Data Views
       AssemblyGroupViewCombo.LJCInit(DocAssemblyGroup.TableName, dbServiceRef
@@ -322,7 +322,8 @@ namespace LJCGenDocEdit
     private void SetupGrids()
     {
       // *** Begin *** Change - Data Views
-      AssemblyGroupViewInfo.DataID = AssemblyGroupViewCombo.LJCSelectedItemID();
+      var dataID = (short)AssemblyGroupViewCombo.LJCSelectedItemID();
+      AssemblyGroupViewInfo.DataID = dataID;
       mAssemblyGroupGridCode.SetupGrid(AssemblyGroupViewInfo);
       // *** End   *** Change - Data Views
       mAssemblyItemGridCode.SetupGrid();
@@ -349,7 +350,6 @@ namespace LJCGenDocEdit
     /// <summary>Gets or sets the ControlValues item.</summary>
     internal ControlValues ControlValues { get; set; }
     #endregion
-    #endregion
 
     // Load the Person View Combo.
     // *** New Method *** - Data Views
@@ -361,7 +361,6 @@ namespace LJCGenDocEdit
         var viewCombo = AssemblyGroupViewCombo;
         var dataID = viewCombo.LJCSelectedItemID();
         AssemblyGroupViewInfo.DataID = dataID;
-        //*** Next Statement *** External Config
         ViewCommon.DoViewEdit(AssemblyGroupViewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -475,19 +474,20 @@ namespace LJCGenDocEdit
     #region Properties
 
     /// <summary>The ConfigFile name.</summary>
-    //*** New Property *** External Config
     public string ConfigFileName { get; set; }
 
-    /// <summary>The Managers object.</summary>
+    // The Managers object.
     internal ManagersGenDoc Managers { get; set; }
 
+    // The Configuration Settings.
+    internal StandardUISettings Settings { get; set; }
+
     // *** Next Statement *** Add - Data Views
+    // The AssemblyGroup View Info.
     private ViewInfo AssemblyGroupViewInfo { get; set; }
     #endregion
 
     #region Class Data
-
-    internal StandardUISettings mSettings;
 
     private string mControlValuesFileName;
     private AssemblyGroupGridCode mAssemblyGroupGridCode;

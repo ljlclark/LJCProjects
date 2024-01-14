@@ -245,10 +245,10 @@ namespace LJCViewEditor
 
         var gridColumnManager = Managers.ViewGridColumnManager;
         var keyGridColumns = new DbColumns()
-          {
-            { ViewGridColumn.ColumnViewDataID, parentID },
-            { ViewGridColumn.ColumnViewColumnID, id }
-          };
+        {
+          { ViewGridColumn.ColumnViewDataID, parentID },
+          { ViewGridColumn.ColumnViewColumnID, id }
+        };
         gridColumnManager.Delete(keyGridColumns);
       }
 
@@ -313,6 +313,28 @@ namespace LJCViewEditor
         // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
         var row = RowAdd(record);
         ColumnGrid.LJCSetCurrentRow(row, true);
+
+        // *** Begin *** Add - 1/14/24
+        if (ViewGrid.CurrentRow is LJCGridRow parentRow
+          && row != null)
+        {
+          // Data from items.
+          var id = row.LJCGetInt32(ViewColumn.ColumnID);
+          var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
+
+          var gridColumn = new ViewGridColumn()
+          {
+            ViewDataID = parentID,
+            ViewColumnID = id,
+            Caption = record.Caption,
+            Sequence = record.Sequence,
+            Width = record.Width
+          };
+          var gridColumnManager = Managers.ViewGridColumnManager;
+          gridColumnManager.Add(gridColumn);
+        }
+        // *** End   *** Add - 1/14/24
+
         EditList.TimedChange(Change.Column);
       }
     }
