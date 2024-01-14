@@ -242,6 +242,12 @@ namespace LJCViewEditor
     private void InitializeClassData()
     {
       var values = ValuesViewEditor.Instance;
+      //*** Begin *** External Config
+      if (NetString.HasValue(ConfigFileName))
+      {
+        values.SetConfigFile(ConfigFileName);
+      }
+      //*** Begin *** External Config
       mSettings = values.StandardSettings;
       Text += $" - {mSettings.DataConfigName}";
       BeginColor = mSettings.BeginColor;
@@ -519,6 +525,10 @@ namespace LJCViewEditor
     #endregion
 
     #region Properties
+
+    /// <summary>The ConfigFile name.</summary>
+    //*** New Property *** External Config
+    public string ConfigFileName { get; set; }
 
     // The Managers object.
     internal ManagersDbView Managers { get; set; }

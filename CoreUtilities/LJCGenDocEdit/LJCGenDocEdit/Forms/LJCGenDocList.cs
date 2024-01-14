@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGenDocList.cs
+using LJCDBViewControls;
 using LJCGenDocDAL;
 using LJCWinFormCommon;
 using System;
@@ -69,6 +70,11 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Assembly Group
+
+    private void AssemblyGroupComboEdit_Click(object sender, EventArgs e)
+    {
+      ViewCommon.DoViewEdit(AssemblyGroupViewInfo, ConfigFileName);
+    }
 
     // Displays a detail dialog for a new record.
     private void AssemblyGroupNew_Click(object sender, EventArgs e)
@@ -984,6 +990,7 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
+
     #endregion
   }
 }

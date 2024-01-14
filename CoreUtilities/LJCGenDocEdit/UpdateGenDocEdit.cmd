@@ -36,6 +36,10 @@ set src=%assmRoot%LJCDBViewControls\LJCDBViewControls\%bin%
 echo copy %src%\LJCDBViewControls.dll %to%
 copy %src%\LJCDBViewControls.dll %to%
 
+set src=%assmRoot%LJCDBViewDAL\LJCDBViewDAL\%bin%
+echo copy %src%\LJCDBViewDAL.dll %to%
+copy %src%\LJCDBViewDAL.dll %to%
+
 set src=%utilRoot%LJCGenDoc\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
 copy %src%\LJCDocObjLib.dll %to%
@@ -99,6 +103,10 @@ copy %src%\LJCDBServiceLib.dll %to%
 set src=%utilRoot%LJCViewEditor\LJCViewEditor\%bin%
 echo copy %src%\LJCViewEditor.exe %to%
 copy %src%\LJCViewEditor.exe %to%
+
+set src=%utilRoot%LJCViewEditor\LJCViewEditorDAL\%bin%
+echo copy %src%\LJCViewEditorDAL.dll %to%
+copy %src%\LJCViewEditorDAL.dll %to%
 
 if %1%. == BuildAll. goto End
 if %1%. == nopause. goto End

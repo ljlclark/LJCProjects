@@ -29,12 +29,12 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       this.TabsSplit = new System.Windows.Forms.SplitContainer();
       this.MainTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.MainTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -160,6 +160,13 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyGroupComboMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyGroupComboEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -194,6 +201,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.MethodItemGrid)).BeginInit();
       this.MethodItemMenu.SuspendLayout();
       this.TileTabsMenu.SuspendLayout();
+      this.AssemblyGroupComboMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // TabsSplit
@@ -279,7 +287,10 @@
       // 
       // AssemblyGroupViewCombo
       // 
+      this.AssemblyGroupViewCombo.ContextMenuStrip = this.AssemblyGroupComboMenu;
       this.AssemblyGroupViewCombo.FormattingEnabled = true;
+      this.AssemblyGroupViewCombo.LJCDataConfigName = null;
+      this.AssemblyGroupViewCombo.LJCTableName = null;
       this.AssemblyGroupViewCombo.Location = new System.Drawing.Point(200, 3);
       this.AssemblyGroupViewCombo.Name = "AssemblyGroupViewCombo";
       this.AssemblyGroupViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -297,14 +308,14 @@
       this.AssemblyGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.AssemblyGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.AssemblyGroupGrid.ContextMenuStrip = this.AssemblyGroupMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.AssemblyGroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.AssemblyGroupGrid.DefaultCellStyle = dataGridViewCellStyle7;
       this.AssemblyGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.AssemblyGroupGrid.LJCAllowDrag = true;
       this.AssemblyGroupGrid.LJCAllowSelectionChange = false;
@@ -467,6 +478,8 @@
       // AssemblyViewCombo
       // 
       this.AssemblyViewCombo.FormattingEnabled = true;
+      this.AssemblyViewCombo.LJCDataConfigName = null;
+      this.AssemblyViewCombo.LJCTableName = null;
       this.AssemblyViewCombo.Location = new System.Drawing.Point(200, 3);
       this.AssemblyViewCombo.Name = "AssemblyViewCombo";
       this.AssemblyViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -484,14 +497,14 @@
       this.AssemblyItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.AssemblyItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.AssemblyItemGrid.ContextMenuStrip = this.AssemblyMenu;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.AssemblyItemGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.AssemblyItemGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.AssemblyItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.AssemblyItemGrid.LJCAllowDrag = true;
       this.AssemblyItemGrid.LJCAllowSelectionChange = false;
@@ -692,6 +705,8 @@
       // ClassGroupViewCombo
       // 
       this.ClassGroupViewCombo.FormattingEnabled = true;
+      this.ClassGroupViewCombo.LJCDataConfigName = null;
+      this.ClassGroupViewCombo.LJCTableName = null;
       this.ClassGroupViewCombo.Location = new System.Drawing.Point(200, 2);
       this.ClassGroupViewCombo.Name = "ClassGroupViewCombo";
       this.ClassGroupViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -709,14 +724,14 @@
       this.ClassGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ClassGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ClassGroupGrid.ContextMenuStrip = this.ClassGroupMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ClassGroupGrid.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ClassGroupGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.ClassGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ClassGroupGrid.LJCAllowDrag = true;
       this.ClassGroupGrid.LJCAllowSelectionChange = false;
@@ -878,6 +893,8 @@
       // ClassViewCombo
       // 
       this.ClassViewCombo.FormattingEnabled = true;
+      this.ClassViewCombo.LJCDataConfigName = null;
+      this.ClassViewCombo.LJCTableName = null;
       this.ClassViewCombo.Location = new System.Drawing.Point(200, 2);
       this.ClassViewCombo.Name = "ClassViewCombo";
       this.ClassViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -895,14 +912,14 @@
       this.ClassItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ClassItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ClassItemGrid.ContextMenuStrip = this.ClassMenu;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ClassItemGrid.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ClassItemGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.ClassItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ClassItemGrid.LJCAllowDrag = true;
       this.ClassItemGrid.LJCAllowSelectionChange = false;
@@ -1102,6 +1119,8 @@
       // MethodGroupViewCombo
       // 
       this.MethodGroupViewCombo.FormattingEnabled = true;
+      this.MethodGroupViewCombo.LJCDataConfigName = null;
+      this.MethodGroupViewCombo.LJCTableName = null;
       this.MethodGroupViewCombo.Location = new System.Drawing.Point(200, 2);
       this.MethodGroupViewCombo.Name = "MethodGroupViewCombo";
       this.MethodGroupViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -1119,14 +1138,14 @@
       this.MethodGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.MethodGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.MethodGroupGrid.ContextMenuStrip = this.MethodGroupMenu;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.MethodGroupGrid.DefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.MethodGroupGrid.DefaultCellStyle = dataGridViewCellStyle4;
       this.MethodGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.MethodGroupGrid.LJCAllowDrag = true;
       this.MethodGroupGrid.LJCAllowSelectionChange = false;
@@ -1288,6 +1307,8 @@
       // MethodViewCombo
       // 
       this.MethodViewCombo.FormattingEnabled = true;
+      this.MethodViewCombo.LJCDataConfigName = null;
+      this.MethodViewCombo.LJCTableName = null;
       this.MethodViewCombo.Location = new System.Drawing.Point(200, 2);
       this.MethodViewCombo.Name = "MethodViewCombo";
       this.MethodViewCombo.Size = new System.Drawing.Size(300, 28);
@@ -1305,14 +1326,14 @@
       this.MethodItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.MethodItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.MethodItemGrid.ContextMenuStrip = this.MethodItemMenu;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.MethodItemGrid.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.MethodItemGrid.DefaultCellStyle = dataGridViewCellStyle5;
       this.MethodItemGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.MethodItemGrid.LJCAllowDrag = true;
       this.MethodItemGrid.LJCAllowSelectionChange = false;
@@ -1485,6 +1506,54 @@
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
       // 
+      // AssemblyGroupComboMenu
+      // 
+      this.AssemblyGroupComboMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.AssemblyGroupComboMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.AssemblyGroupComboEdit,
+            this.toolStripSeparator28,
+            this.toolStripSeparator29,
+            this.toolStripSeparator30,
+            this.toolStripSeparator31});
+      this.AssemblyGroupComboMenu.Name = "AssemblyMenu";
+      this.AssemblyGroupComboMenu.Size = new System.Drawing.Size(332, 92);
+      // 
+      // toolStripMenuItem1
+      // 
+      this.toolStripMenuItem1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+      this.toolStripMenuItem1.Size = new System.Drawing.Size(331, 32);
+      this.toolStripMenuItem1.Text = "Assembly Group Combo Menu";
+      // 
+      // AssemblyGroupComboEdit
+      // 
+      this.AssemblyGroupComboEdit.Name = "AssemblyGroupComboEdit";
+      this.AssemblyGroupComboEdit.ShortcutKeyDisplayString = "ENTER";
+      this.AssemblyGroupComboEdit.Size = new System.Drawing.Size(331, 32);
+      this.AssemblyGroupComboEdit.Text = "&Edit";
+      this.AssemblyGroupComboEdit.Click += new System.EventHandler(this.AssemblyGroupComboEdit_Click);
+      // 
+      // toolStripSeparator28
+      // 
+      this.toolStripSeparator28.Name = "toolStripSeparator28";
+      this.toolStripSeparator28.Size = new System.Drawing.Size(328, 6);
+      // 
+      // toolStripSeparator29
+      // 
+      this.toolStripSeparator29.Name = "toolStripSeparator29";
+      this.toolStripSeparator29.Size = new System.Drawing.Size(328, 6);
+      // 
+      // toolStripSeparator30
+      // 
+      this.toolStripSeparator30.Name = "toolStripSeparator30";
+      this.toolStripSeparator30.Size = new System.Drawing.Size(328, 6);
+      // 
+      // toolStripSeparator31
+      // 
+      this.toolStripSeparator31.Name = "toolStripSeparator31";
+      this.toolStripSeparator31.Size = new System.Drawing.Size(328, 6);
+      // 
       // LJCGenDocList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1528,6 +1597,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.MethodItemGrid)).EndInit();
       this.MethodItemMenu.ResumeLayout(false);
       this.TileTabsMenu.ResumeLayout(false);
+      this.AssemblyGroupComboMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1659,6 +1729,13 @@
     private LJCDBViewControls.ViewCombo ClassViewCombo;
     private LJCDBViewControls.ViewCombo MethodGroupViewCombo;
     private LJCDBViewControls.ViewCombo MethodViewCombo;
+    private System.Windows.Forms.ContextMenuStrip AssemblyGroupComboMenu;
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem AssemblyGroupComboEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator31;
   }
 }
 

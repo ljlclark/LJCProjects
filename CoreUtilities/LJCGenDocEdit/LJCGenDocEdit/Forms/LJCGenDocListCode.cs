@@ -6,7 +6,6 @@ using LJCDBClientLib;
 using LJCDBViewControls;
 using LJCGenDocDAL;
 using LJCNetCommon;
-using LJCViewEditor;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
@@ -218,6 +217,8 @@ namespace LJCGenDocEdit
     {
       var values = ValuesGenDocEdit.Instance;
       mSettings = values.StandardSettings;
+      //*** Next Statement *** External Config
+      ConfigFileName = values.ConfigFileName;
 
       Managers = new ManagersGenDoc();
       Managers.SetDBProperties(mSettings.DbServiceRef
@@ -360,7 +361,8 @@ namespace LJCGenDocEdit
         var viewCombo = AssemblyGroupViewCombo;
         var dataID = viewCombo.LJCSelectedItemID();
         AssemblyGroupViewInfo.DataID = dataID;
-        ViewCommon.DoViewEdit(AssemblyGroupViewInfo);
+        //*** Next Statement *** External Config
+        ViewCommon.DoViewEdit(AssemblyGroupViewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
         string message = "Reload Asesembly Group View Combo?";
@@ -471,6 +473,10 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Properties
+
+    /// <summary>The ConfigFile name.</summary>
+    //*** New Property *** External Config
+    public string ConfigFileName { get; set; }
 
     /// <summary>The Managers object.</summary>
     internal ManagersGenDoc Managers { get; set; }

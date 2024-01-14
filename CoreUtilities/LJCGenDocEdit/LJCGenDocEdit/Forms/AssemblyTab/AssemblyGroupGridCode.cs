@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using LJCViewEditor;
 
 namespace LJCGenDocEdit
 {
@@ -323,28 +322,31 @@ namespace LJCGenDocEdit
 
       // Get the view grid columns
       var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
-      if (null == gridColumns)
+      if (gridColumns != null)
+      {
+        // Setup the grid columns.
+        AssemblyGroupGrid.LJCAddColumns(gridColumns);
+        //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
+      }
+      else
       {
         // Did not load any Grid Columns.
         var viewCombo = DocList.AssemblyGroupViewCombo;
         var dataID = viewCombo.LJCSelectedItemID();
         viewInfo.DataID = dataID;
-        ViewCommon.DoViewEdit(viewInfo);
+        ViewCommon.DoViewEdit(viewInfo, DocList.ConfigFileName);
 
         string title = "Reload Confirmation";
         string message = "Reload View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
+          gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+          AssemblyGroupGrid.LJCAddColumns(gridColumns);
+          //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
           viewCombo.Items.Clear();
           viewCombo.LJCLoad();
         }
-      }
-      else
-      {
-        // Setup the grid columns.
-        AssemblyGroupGrid.LJCAddColumns(gridColumns);
-        //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
       }
       // *** End   *** Change - Data Views
       FormCommon.NotSortable(AssemblyGroupGrid);

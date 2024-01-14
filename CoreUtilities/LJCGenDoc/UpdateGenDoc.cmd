@@ -32,6 +32,10 @@ set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
 echo copy %src%\LJCNetCommon.dll %to%
 copy %src%\LJCNetCommon.dll %to%
 
+set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
+echo copy %src%\LJCNetCommon.dll %to%
+copy %src%\LJCNetCommon.dll %to%
+
 rem *****************************
 rem *** Runtime-only Binaries ***
 
@@ -68,9 +72,17 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
+set src=%assmRoot%LJCDBViewControls\LJCDBViewControls\%bin%
+echo copy %src%\LJCDBViewControls.dll %to%
+copy %src%\LJCDBViewControls.dll %to%
+
 set src=%utilRoot%LJCGenDoc\LJCGenDocDAL\%bin%
 echo copy %src%\LJCGenDocDAL.dll %to%
 copy %src%\LJCGenDocDAL.dll %to%
+
+set src=LJCViewEditor\LJCViewEditor\%bin%
+echo copy %utilRoot%%src%\LJCViewEditor.exe %to%
+copy %utilRoot%%src%\LJCViewEditor.exe %to%
 
 rem ---------------------------
 set to=%toRoot%LJCGenDocLib\%bin%
@@ -86,6 +98,7 @@ echo copy %src%\LJCDataAccess.dll %to%
 copy %src%\LJCDataAccess.dll %to%
 
 set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%%
 copy %src%\LJCDataAccessConfig.dll %to%
 
 set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
@@ -93,6 +106,7 @@ echo copy %src%\LJCDBClientLib.dll %to%
 copy %src%\LJCDBClientLib.dll %to%
 
 set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
+echo copy %src%\LJCDBMessage.dll %to%
 echo copy %src%\LJCDBMessage.dll %to%
 copy %src%\LJCDBMessage.dll %to%
 
