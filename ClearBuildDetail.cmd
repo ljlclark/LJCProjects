@@ -4,6 +4,7 @@ rem ClearBuildDetail.cmd
 
 rmdir %Solution%\.vs /s /q
 del %Solution%\External\*.* /q
+rmdir %Solution%\External
 del %Solution%\%Project%\*.user
 del %Solution%\%Project%\bin\Debug\%File%.exe
 del %Solution%\%Project%\bin\Debug\*.dll
