@@ -347,7 +347,7 @@ namespace LJCGenDocEdit
     private bool mIsClassSplitSet;
 
     /// <summary>Gets or sets the ControlValues item.</summary>
-    private ControlValues ControlValues { get; set; }
+    internal ControlValues ControlValues { get; set; }
     #endregion
     #endregion
 

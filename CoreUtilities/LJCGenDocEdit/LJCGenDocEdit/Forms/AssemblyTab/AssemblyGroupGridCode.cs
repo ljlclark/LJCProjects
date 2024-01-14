@@ -264,7 +264,7 @@ namespace LJCGenDocEdit
     }
     #endregion
 
-    #region Other Methods
+    #region Setup and sOther Methods
 
     // The DragDrop method.
     internal void DoDragDrop(DragEventArgs e)
@@ -297,25 +297,6 @@ namespace LJCGenDocEdit
     // Setup the grid columns.
     internal void SetupGrid(ViewInfo viewInfo)
     {
-      //// Setup default grid columns if no columns are defined.
-      //if (0 == AssemblyGroupGrid.Columns.Count)
-      //{
-      //  List<string> propertyNames = new List<string>()
-      //  {
-      //    DocAssemblyGroup.ColumnName,
-      //    DocAssemblyGroup.ColumnHeading,
-      //    DocAssemblyGroup.ColumnSequence
-      //  };
-
-      //  // Get the grid columns from the manager Data Definition.
-      //  var manager = DocAssemblyGroupManager;
-      //  GridColumns = manager.GetColumns(propertyNames);
-
-      //  // Setup the grid columns.
-      //  AssemblyGroupGrid.LJCAddColumns(GridColumns);
-      //  FormCommon.NotSortable(AssemblyGroupGrid);
-      //  AssemblyGroupGrid.LJCDragDataName = "DocAssemblyGroup";
-      //}
       // *** Begin *** Change - Data Views
       // Clear previous grid columns definition as view may have changed.
       AssemblyGroupGrid.Columns.Clear();
@@ -326,7 +307,7 @@ namespace LJCGenDocEdit
       {
         // Setup the grid columns.
         AssemblyGroupGrid.LJCAddColumns(gridColumns);
-        //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
+        AssemblyGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
       else
       {
@@ -343,7 +324,7 @@ namespace LJCGenDocEdit
         {
           gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
           AssemblyGroupGrid.LJCAddColumns(gridColumns);
-          //AssemblyGroupGrid.LJCRestoreColumnValues(ControlValues);
+          AssemblyGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
           viewCombo.Items.Clear();
           viewCombo.LJCLoad();
         }

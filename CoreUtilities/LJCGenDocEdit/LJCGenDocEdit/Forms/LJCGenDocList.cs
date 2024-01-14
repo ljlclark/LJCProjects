@@ -71,6 +71,8 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Display the ViewEditor.
+    // *** New Method *** - Data Views
     private void AssemblyGroupComboEdit_Click(object sender, EventArgs e)
     {
       ViewCommon.DoViewEdit(AssemblyGroupViewInfo, ConfigFileName);
