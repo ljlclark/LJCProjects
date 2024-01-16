@@ -20,11 +20,11 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-set src=%assmRoot%DataDetail\DataDetail\%bin%
-echo copy %src%\DataDetail.exe %to%
-copy %src%\DataDetail.exe %to%
+set src=%assmRoot%LJCDataDetail\LJCDataDetail\%bin%
+echo copy %src%\LJCDataDetail.exe %to%
+copy %src%\LJCDataDetail.exe %to%
 
-set src=%assmRoot%DataDetail\LJCDataDetailDAL\%bin%
+set src=%assmRoot%LJCDataDetail\LJCDataDetailDAL\%bin%
 echo copy %src%\LJCDataDetailDAL.dll %to%
 copy %src%\LJCDataDetailDAL.dll %to%
 
@@ -36,7 +36,7 @@ set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
 echo copy %src%\LJCDataAccessConfig.dll %to%
 copy %src%\LJCDataAccessConfig.dll %to%
 
-set src=%assmRoot%DataDetail\LJCDataDetailLib\%bin%
+set src=%assmRoot%LJCDataDetail\LJCDataDetailLib\%bin%
 echo copy %src%\LJCDataDetailLib.dll %to%
 copy %src%\LJCDataDetailLib.dll %to%
 
@@ -73,8 +73,8 @@ echo copy %src%\LJCWinFormCommon.dll %to%
 copy %src%\LJCWinFormCommon.dll %to%
 
 set src=%assmRoot%LJCLibraries\LJCWinFormControls\%bin%
-echo copy %src%\LJCWinFormCommon.dll %to%
-copy %src%\LJCWinFormCommon.dll %to%
+echo copy %src%\LJCWinFormControls.dll %to%
+copy %src%\LJCWinFormControls.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

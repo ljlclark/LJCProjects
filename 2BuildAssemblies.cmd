@@ -8,7 +8,7 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDe
 rem ***************
 rem Core Assemblies
 rem ***************
-set /a counter=+1
+set /a counter+=1
 set marker=----------------- %counter% - LJCNetCommon --------------- > Build.txt
 echo.
 echo                                         %marker%
@@ -123,9 +123,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBClientLib >> Build.txt
-call CoreAssemblies\LJCDBClientSQLLib\UpdateDBClientSQLLib.cmd BuildAll >> Build.txt
-msbuild CoreAssemblies\LJCDBClientSQLLib\LJCDBClientSQLLib.sln
-
+call CoreAssemblies\L
 set /a counter+=1
 echo - >> Build.txt
 set marker=----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt
@@ -135,6 +133,18 @@ echo %marker% >> Build.txt
 echo LJCDBViewDAL >> Build.txt
 call CoreAssemblies\LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
 msbuild CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL.sln
+JCDBClientSQLLib\UpdateDBClientSQLLib.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBClientSQLLib\LJCDBClientSQLLib.sln
+
+set /a counter+=1
+echo - >> Build.txt
+set marker=----------------- %counter% - LJCDBViewControls ---------------- >> Build.txt
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCDBViewControls >> Build.txt
+call CoreAssemblies\LJCDBViewControls\UpdateViewControls.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBViewControls\LJCDBViewControls.sln
 
 set /a counter+=1
 echo - >> Build.txt

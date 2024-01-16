@@ -38,10 +38,6 @@
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDBServiceLib">
-      <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>

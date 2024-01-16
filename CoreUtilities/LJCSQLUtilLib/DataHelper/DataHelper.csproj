@@ -35,13 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataDetail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\DataDetail.exe</HintPath>
-    </Reference>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDataDetail">
+      <HintPath>..\External\LJCDataDetail.exe</HintPath>
     </Reference>
     <Reference Include="LJCDataDetailDAL">
       <HintPath>..\External\LJCDataDetailDAL.dll</HintPath>

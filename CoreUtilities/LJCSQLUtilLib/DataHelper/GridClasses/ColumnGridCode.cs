@@ -1,7 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnGridCode.cs
-using DataDetail;
+using LJCDataDetail;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -24,10 +24,6 @@ namespace DataHelper
       // Set default class data.
       mParent = parent;
       mManagers = mParent.Managers;
-      // ToDo: Convert to new DataDetailDialog.
-      //mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
-      mDataConfigName = mManagers.DbMetaDataColumnManager.DataConfigName;
-
       mUserID = "Les";
       mTableName = "ColumnGrid";
     }
@@ -131,8 +127,7 @@ namespace DataHelper
       DbColumns dataColumns
        = mManagers.DbMetaDataColumnManager.DataDefinition;
 
-      DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
-        , mTableName)
+      var detail = new DataDetailDialog(mUserID, mTableName)
       {
         LJCDataColumns = dataColumns,
         LJCIsUpdate = false
@@ -169,7 +164,7 @@ namespace DataHelper
           DbColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
-          var detail = new DataDetailDialog(mUserID, mDataConfigName, mTableName)
+          var detail = new DataDetailDialog(mUserID, mTableName)
           {
             //LJCConfigRows = mConfigRows,
             LJCDataColumns = dataColumns,
@@ -280,27 +275,10 @@ namespace DataHelper
         RowSelectColumn(record);
       }
     }
-
-    // Performs the Close function.
-    internal void DoCloseColumn()
-    {
-      //ToDo: Convert to new DataDetailDAL.
-      //if (mConfigRows != null)
-      //{
-      //  //RowOrderComparer comparer = new RowOrderComparer();
-      //  //mConfigRows.SortRowOrder(comparer);
-      //  ControlRowUniqueComparer comparer = new ControlRowUniqueComparer();
-      //  mConfigRows.LJCSortUnique(comparer);
-      //  //mConfigRows.Serialize(ConfigRowFileName);
-      //}
-    }
     #endregion
 
     #region Class Data
 
-    //private readonly string ConfigRowFileName = @"DetailConfigs/ColumnDetailConfig.xml";
-    //private ControlRows mConfigRows;
-    private readonly string mDataConfigName;
     private readonly MainList mParent;
     private readonly SQLUtilLibManagers mManagers;
 

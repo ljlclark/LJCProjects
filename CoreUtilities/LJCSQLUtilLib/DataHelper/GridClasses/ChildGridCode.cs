@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 // ChildGridCode.cs
 using System;
-using LJCWinFormControls;
-using LJCSQLUtilLibDAL;
 
 namespace DataHelper
 {

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // ManagersDbView.cs
 using LJCDBClientLib;
-using System.Dynamic;
 
 namespace LJCDBViewDAL
 {

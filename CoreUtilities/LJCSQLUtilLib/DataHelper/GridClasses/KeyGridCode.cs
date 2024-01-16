@@ -1,14 +1,13 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // KeyGridCode.cs
-//using LJCDataDetailLib;
+using LJCDataDetail;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using DataDetail;
 using System;
 using System.Windows.Forms;
 
@@ -25,10 +24,6 @@ namespace DataHelper
       // Set default class data.
       mParent = parent;
       mManagers = mParent.Managers;
-      // ToDo: Convert to new DataDetailDialog.
-      //mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
-      mDataConfigName = mManagers.DbMetaDataKeyManager.DataConfigName;
-
       mUserID = "Les";
       mTableName = "ColumnGrid";
     }
@@ -136,7 +131,7 @@ namespace DataHelper
       DbColumns dataColumns = mManagers.DbMetaDataKeyManager.DataDefinition;
 
       // ToDo: Convert to new DataDetailDialog.
-      var detail = new DataDetailDialog(mUserID, mDataConfigName, mTableName)
+      var detail = new DataDetailDialog(mUserID, mTableName)
       {
         //LJCConfigRows = mConfigRows,
         LJCDataColumns = dataColumns,
@@ -172,7 +167,7 @@ namespace DataHelper
           DbColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
-          var detail = new DataDetailDialog(mUserID, mDataConfigName, mTableName)
+          var detail = new DataDetailDialog(mUserID, mTableName)
           {
             //LJCConfigRows = mConfigRows,
             LJCDataColumns = dataColumns,
@@ -284,27 +279,10 @@ namespace DataHelper
         RowSelectKey(record);
       }
     }
-
-    // Performs the Close function.
-    internal void DoCloseKey()
-    {
-      //if (mConfigRows != null)
-      //{
-      //  // ToDo: Convert to new DataDetailDialog.
-      //  //RowOrderComparer comparer = new RowOrderComparer();
-      //	//mConfigRows.SortRowOrder(comparer);
-      //  ControlRowUniqueComparer comparer = new ControlRowUniqueComparer();
-      //  mConfigRows.LJCSortUnique(comparer);
-      //	//mConfigRows.Serialize(ConfigRowFileName);
-      //}
-    }
     #endregion
 
     #region Class Data
 
-    //private readonly string ConfigRowFileName = @"DetailConfigs/KeyDetailConfig.xml";
-    //private ControlRows mConfigRows;
-    private readonly string mDataConfigName;
     private readonly MainList mParent;
     private readonly SQLUtilLibManagers mManagers;
 

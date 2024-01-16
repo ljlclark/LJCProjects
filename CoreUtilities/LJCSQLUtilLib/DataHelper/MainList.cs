@@ -126,9 +126,6 @@ namespace DataHelper
 		// Performs the Close function.
 		private void TableMenuExit_Click(object sender, EventArgs e)
 		{
-			mTableGridCode.DoCloseTable();
-			mColumnGridCode.DoCloseColumn();
-			mKeyGridCode.DoCloseKey();
 			SaveControlValues();
 			Close();
 		}
@@ -177,9 +174,6 @@ namespace DataHelper
 		// Performs the Close function.
 		private void ColumnMenuExit_Click(object sender, EventArgs e)
 		{
-			mTableGridCode.DoCloseTable();
-			mColumnGridCode.DoCloseColumn();
-			mKeyGridCode.DoCloseKey();
 			SaveControlValues();
 			Close();
 		}
@@ -228,9 +222,6 @@ namespace DataHelper
 		// Performs the Close function.
 		private void KeyMenuExit_Click(object sender, EventArgs e)
 		{
-			mTableGridCode.DoCloseTable();
-			mColumnGridCode.DoCloseColumn();
-			mKeyGridCode.DoCloseKey();
 			SaveControlValues();
 			Close();
 		}
@@ -279,9 +270,6 @@ namespace DataHelper
 		// Performs the Close function.
 		private void DataMenuExit_Click(object sender, EventArgs e)
 		{
-			mTableGridCode.DoCloseTable();
-			mColumnGridCode.DoCloseColumn();
-			mKeyGridCode.DoCloseKey();
 			SaveControlValues();
 			Close();
 		}
@@ -330,9 +318,6 @@ namespace DataHelper
 		// Performs the Close function.
 		private void ChildMenuExit_Click(object sender, EventArgs e)
 		{
-			mTableGridCode.DoCloseTable();
-			mColumnGridCode.DoCloseColumn();
-			mKeyGridCode.DoCloseKey();
 			SaveControlValues();
 			Close();
 		}

@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using LJCDataDetail;
+using LJCDBClientLib;
 using LJCNetCommon;
+using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCSQLUtilLibDAL;
-using LJCDBClientLib;
-using DataDetail;
 
 namespace DataHelper
 {

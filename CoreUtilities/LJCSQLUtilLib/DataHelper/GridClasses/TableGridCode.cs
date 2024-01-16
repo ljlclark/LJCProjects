@@ -1,15 +1,15 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TableGridCode.cs
-using System;
-using System.Windows.Forms;
+using LJCDataDetail;
+using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
+using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBMessage;
-using LJCDBClientLib;
-using DataDetail;
-using LJCSQLUtilLibDAL;
+using System;
+using System.Windows.Forms;
 
 namespace DataHelper
 {
@@ -24,10 +24,6 @@ namespace DataHelper
 			// Set default class data.
 			mParent = parent;
 			mManagers = mParent.Managers;
-      // ToDo: Convert to new DataDetailDialog.
-      //mConfigRows = ControlRows.Deserialize(ConfigRowFileName);
-			mDataConfigName = mManagers.DbMetaDataTableManager.DataConfigName;
-
       mUserID = "Les";
       mTableName = "ColumnGrid";
     }
@@ -121,8 +117,7 @@ namespace DataHelper
 				= mManagers.DbMetaDataTableManager.DataDefinition;
 
       // ToDo: Convert to new DataDetailDialog.
-      DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
-				, mTableName)
+      var detail = new DataDetailDialog(mUserID, mTableName)
 			{
 				//LJCConfigRows = mConfigRows,
 				LJCDataColumns = dataColumns,
@@ -158,8 +153,7 @@ namespace DataHelper
 					DbColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
-          DataDetailDialog detail = new DataDetailDialog(mUserID, mDataConfigName
-						, mTableName)
+          var detail = new DataDetailDialog(mUserID, mTableName)
 					{
 						//LJCConfigRows = mConfigRows,
 						LJCDataColumns = dataColumns,
@@ -271,27 +265,10 @@ namespace DataHelper
 				RowSelectTable(record);
 			}
 		}
-
-		// Performs the Close function.
-		internal void DoCloseTable()
-		{
-      //ToDo: Convert to new DataDetailDAL.
-      //   if (mConfigRows != null)
-      //{
-      //	//RowOrderComparer comparer = new RowOrderComparer();
-      //	//mConfigRows.SortRowOrder(comparer);
-      //  ControlRowUniqueComparer comparer = new ControlRowUniqueComparer();
-      //  mConfigRows.LJCSortUnique(comparer);
-      //	mConfigRows.Serialize(ConfigRowFileName);
-      //}
-    }
     #endregion
 
     #region Class Data
 
-    //private readonly string ConfigRowFileName = @"DetailConfigs/TableDetailConfig.xml";
-    //private ControlRows mConfigRows;
-    private readonly string mDataConfigName;
 		private readonly SQLUtilLibManagers mManagers;
 		private readonly MainList mParent;
 

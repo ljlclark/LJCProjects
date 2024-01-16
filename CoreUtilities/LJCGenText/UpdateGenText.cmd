@@ -56,6 +56,10 @@ set src=%assmRoot%LJCLibraries\LJCWinFormControls\%bin%
 echo copy %src%\LJCWinFormControls.dll %to%
 copy %src%\LJCWinFormControls.dll %to%
 
+set src=%utilRoot%LJCGenDoc\LJCGenDocLib\%bin%
+echo copy %src%\LJCGenDocLib.dll %to%
+copy %src%\LJCGenDocLib.dll %to%
+
 rem *****************************
 rem *** Runtime-only Binaries ***
 

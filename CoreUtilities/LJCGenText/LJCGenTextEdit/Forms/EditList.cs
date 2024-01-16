@@ -1,7 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // EditList.cs
-using LJCDocGenLib;
+using LJCGenDocLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
