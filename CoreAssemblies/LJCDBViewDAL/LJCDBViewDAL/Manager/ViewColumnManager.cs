@@ -92,6 +92,7 @@ namespace LJCDBViewDAL
     public ViewColumns LoadWithParentID(int viewDataID)
     {
       var keyColumns = ParentIDKey(viewDataID);
+      SetOrderBySequence();
       var retValue = Load(keyColumns);
       return retValue;
     }
@@ -101,6 +102,7 @@ namespace LJCDBViewDAL
     public DbResult ResultWithParentID(int viewDataID)
     {
       var keyColumns = ParentIDKey(viewDataID);
+      SetOrderBySequence();
       var retValue = DataManager.Load(keyColumns);
       return retValue;
     }
@@ -159,6 +161,16 @@ namespace LJCDBViewDAL
       };
       return retValue;
     }
+    #endregion
+
+    #region OrderBys
+
+    // Sets the current OrderBy names.
+    /// <include path='items/SetOrderBySequence/*' file='Doc/ViewGridColumnManager.xml'/>
+    public void SetOrderBySequence() => DataManager.OrderByNames = new List<string>()
+    {
+      ViewColumn.ColumnSequence
+    };
     #endregion
 
     #region Other Public Methods

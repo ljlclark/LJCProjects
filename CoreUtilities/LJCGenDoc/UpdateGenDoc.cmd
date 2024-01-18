@@ -24,6 +24,10 @@ set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
 echo copy %src%\LJCDataAccess.dll %to%
 copy %src%\LJCDataAccess.dll %to%
 
+set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
+echo copy %src%\LJCDBDataAccess.dll %to%
+copy %src%\LJCDBDataAccess.dll %to%
+
 set src=%utilRoot%LJCGenDoc\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
 copy %src%\LJCDocObjLib.dll %to%
@@ -87,6 +91,27 @@ copy %src%\LJCGenDocDAL.dll %to%
 set src=LJCViewEditor\LJCViewEditor\%bin%
 echo copy %utilRoot%%src%\LJCViewEditor.exe %to%
 copy %utilRoot%%src%\LJCViewEditor.exe %to%
+
+rem ---------------------------
+set to=%toRoot%LJCGenDoc\%bin%
+echo.
+echo *** %to% ***
+
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
+set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%%
+copy %src%\LJCDataAccessConfig.dll %to%
+
+set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
+echo copy %src%\LJCDBClientLib.dll %to%
+copy %src%\LJCDBClientLib.dll %to%
+
+set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
+echo copy %src%\LJCDBServiceLib.dll %to%
+copy %src%\LJCDBServiceLib.dll %to%
 
 rem ---------------------------
 set to=%toRoot%LJCGenDocLib\%bin%

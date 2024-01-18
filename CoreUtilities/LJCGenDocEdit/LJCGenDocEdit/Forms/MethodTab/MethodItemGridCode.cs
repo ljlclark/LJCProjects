@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 // MethodItemGridCode.cs
 using LJCDBMessage;
+// *** Begin *** Add - Data Views
+using LJCDBViewControls;
+using LJCDBViewDAL;
+// *** End   *** Add - Data Views
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -11,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJCDocXMLObjLib;
 
 namespace LJCGenDocEdit
 {
@@ -27,6 +32,13 @@ namespace LJCGenDocEdit
       DocList = parentList;
       ClassGrid = DocList.ClassItemGrid;
       Managers = DocList.Managers;
+      // *** Begin *** Add - Data Views
+      var dbManagers = new ManagersDbView();
+      var settings = DocList.Settings;
+      dbManagers.SetDbProperties(settings.DbServiceRef
+        , settings.DataConfigName);
+      mDataDbView = new DataDbView(dbManagers);
+      // *** End   *** Add - Data Views
       MethodGrid = DocList.MethodItemGrid;
       MethodGroupGrid = DocList.MethodGroupGrid;
       parentList.Cursor = Cursors.Default;
@@ -304,27 +316,45 @@ namespace LJCGenDocEdit
     }
 
     // Setup the grid columns.
-    internal void SetupGrid()
+    internal void SetupGrid(ViewInfo viewInfo)
     {
-      // Setup default grid columns if no columns are defined.
-      if (0 == MethodGrid.Columns.Count)
+      // *** Begin *** Change - Data Views
+      // Clear previous grid columns definition as view may have changed.
+      MethodGrid.Columns.Clear();
+
+      // Get the view grid columns
+      var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+      if (gridColumns != null)
       {
-        List<string> propertyNames = new List<string>()
-        {
-          DocMethod.ColumnName,
-          DocMethod.ColumnOverloadName,
-          DocMethod.ColumnDescription
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var methodManager = Managers.DocMethodManager;
-        GridColumns = methodManager.GetColumns(propertyNames);
-
         // Setup the grid columns.
-        MethodGrid.LJCAddColumns(GridColumns);
-        FormCommon.NotSortable(MethodGrid);
-        MethodGrid.LJCDragDataName = "DocMethod";
+        var columns = gridColumns.Clone();
+        columns.LJCRemoveColumn(DocMethod.ColumnID);
+        MethodGrid.LJCAddColumns(columns);
+        MethodGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
+      else
+      {
+        // Did not load any Grid Columns.
+        var viewCombo = DocList.MethodViewCombo;
+        var dataID = viewCombo.LJCSelectedItemID();
+        viewInfo.DataID = dataID;
+        ViewCommon.DoViewEdit(viewInfo, DocList.ConfigFileName);
+
+        string title = "Reload Confirmation";
+        string message = "Reload View Combo?";
+        if (DialogResult.Yes == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+          MethodGrid.LJCAddColumns(gridColumns);
+          MethodGrid.LJCRestoreColumnValues(DocList.ControlValues);
+          viewCombo.Items.Clear();
+          viewCombo.LJCLoad();
+        }
+      }
+      // *** End   *** Change - Data Views
+      FormCommon.NotSortable(MethodGrid);
+      MethodGrid.LJCDragDataName = "DocMethod";
     }
     #endregion
 
@@ -464,5 +494,8 @@ namespace LJCGenDocEdit
     // Gets or sets the MethodGroup Grid reference.
     private LJCDataGrid MethodGroupGrid { get; set; }
     #endregion
+
+    // *** Next Statement *** Add - Data View
+    private readonly DataDbView mDataDbView;
   }
 }

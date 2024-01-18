@@ -32,8 +32,8 @@ namespace LJCGenDocEdit
       AssemblyGroupGrid = DocList.AssemblyGroupGrid;
       Managers = DocList.Managers;
       // *** Begin *** Add - Data Views
-      var dbManagers = new ManagersDbView();
       var settings = DocList.Settings;
+      var dbManagers = new ManagersDbView();
       dbManagers.SetDbProperties(settings.DbServiceRef
         , settings.DataConfigName);
       mDataDbView = new DataDbView(dbManagers);
@@ -445,13 +445,13 @@ namespace LJCGenDocEdit
     private LJCGenDocList DocList { get; set; }
 
     // Gets or sets the GridColumns reference.
-    private DbColumns GridColumns { get; set; }
+    //private DbColumns GridColumns { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersGenDoc Managers { get; set; }
-
-    // *** Next Statement *** Add - View
-    private DataDbView mDataDbView;
     #endregion
+
+    // *** Next Statement *** Add - Data View
+    private readonly DataDbView mDataDbView;
   }
 }

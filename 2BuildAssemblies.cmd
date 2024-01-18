@@ -138,16 +138,6 @@ msbuild CoreAssemblies\LJCDBClientSQLLib\LJCDBClientSQLLib.sln
 
 set /a counter+=1
 echo - >> Build.txt
-set marker=----------------- %counter% - LJCDBViewControls ---------------- >> Build.txt
-echo.
-echo                                         %marker%
-echo %marker% >> Build.txt
-echo LJCDBViewControls >> Build.txt
-call CoreAssemblies\LJCDBViewControls\UpdateViewControls.cmd BuildAll >> Build.txt
-msbuild CoreAssemblies\LJCDBViewControls\LJCDBViewControls.sln
-
-set /a counter+=1
-echo - >> Build.txt
 set marker=----------------- %counter% - LJCDataDetail ---------------- >> Build.txt
 echo.
 echo                                         %marker%

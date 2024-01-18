@@ -56,7 +56,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
-      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

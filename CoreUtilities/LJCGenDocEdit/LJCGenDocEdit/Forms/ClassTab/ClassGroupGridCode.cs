@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 // ClassGroupGridCode.cs
 using LJCDBMessage;
+// *** Begin *** Add - Data Views
+using LJCDBViewControls;
+using LJCDBViewDAL;
+// *** End   *** Add - Data Views
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -14,7 +18,7 @@ using System.Windows.Forms;
 
 namespace LJCGenDocEdit
 {
-	// Provides ClassGroupGrid methods for the GenDocList window.
+  // Provides ClassGroupGrid methods for the GenDocList window.
   internal class ClassGroupGridCode
   {
     #region Constructors
@@ -26,6 +30,13 @@ namespace LJCGenDocEdit
       AssemblyGrid = DocList.AssemblyItemGrid;
       ClassGroupGrid = DocList.ClassGroupGrid;
       Managers = DocList.Managers;
+      // *** Begin *** Add - Data Views
+      var dbManagers = new ManagersDbView();
+      var settings = DocList.Settings;
+      dbManagers.SetDbProperties(settings.DbServiceRef
+        , settings.DataConfigName);
+      mDataDbView = new DataDbView(dbManagers);
+      // *** End   *** Add - Data Views
     }
     #endregion
 
@@ -314,26 +325,46 @@ namespace LJCGenDocEdit
     }
 
     // Setup the grid columns.
-    internal void SetupGrid()
+    internal void SetupGrid(ViewInfo viewInfo)
     {
       // Setup default grid columns if no columns are defined.
-      if (0 == ClassGroupGrid.Columns.Count)
+      // *** Begin *** Change - Data Views
+      // Clear previous grid columns definition as view may have changed.
+      ClassGroupGrid.Columns.Clear();
+
+      // Get the view grid columns
+      var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+      if (gridColumns != null)
       {
-        List<string> propertyNames = new List<string>()
-        {
-          DocClassGroup.ColumnHeadingName,
-          DocClassGroup.ColumnHeadingTextCustom
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var classManager = Managers.DocClassGroupManager;
-        GridColumns = classManager.GetColumns(propertyNames);
-
         // Setup the grid columns.
-        ClassGroupGrid.LJCAddColumns(GridColumns);
-        FormCommon.NotSortable(ClassGroupGrid);
-        ClassGroupGrid.LJCDragDataName = "DocClassGroup";
+        var columns = gridColumns.Clone();
+        columns.LJCRemoveColumn(DocClassGroup.ColumnID);
+        ClassGroupGrid.LJCAddColumns(columns);
+        ClassGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
+      else
+      {
+        // Did not load any Grid Columns.
+        var viewCombo = DocList.ClassGroupViewCombo;
+        var dataID = viewCombo.LJCSelectedItemID();
+        viewInfo.DataID = dataID;
+        ViewCommon.DoViewEdit(viewInfo, DocList.ConfigFileName);
+
+        string title = "Reload Confirmation";
+        string message = "Reload View Combo?";
+        if (DialogResult.Yes == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+          ClassGroupGrid.LJCAddColumns(gridColumns);
+          ClassGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
+          viewCombo.Items.Clear();
+          viewCombo.LJCLoad();
+        }
+      }
+      // *** End   *** Change - Data Views
+      FormCommon.NotSortable(ClassGroupGrid);
+      ClassGroupGrid.LJCDragDataName = "DocClassGroup";
     }
     #endregion
 
@@ -467,5 +498,8 @@ namespace LJCGenDocEdit
     // The Managers object.
     private ManagersGenDoc Managers { get; set; }
     #endregion
+
+    // *** Next Statement *** Add - Data View
+    private readonly DataDbView mDataDbView;
   }
 }

@@ -88,16 +88,6 @@ msbuild CoreUtilities\LJCGenDoc\LJCGenDoc.sln
 
 set /a counter+=1
 echo - >> Build.txt
-set marker=----------------- %counter% - LJCGenDocEdit ---------------
-echo.
-echo                                         %marker%
-echo %marker% >> Build.txt
-echo LJCDocLib >> Build.txt
-call CoreUtilities\LJCGenDocEdit\UpdateGenDocEdit.cmd BuildAll >> Build.txt
-msbuild CoreUtilities\LJCGenDocEdit\LJCGenDocEdit.sln
-
-set /a counter+=1
-echo - >> Build.txt
 set marker=----------------- %counter% - LJCSQLUtilLib ---------------
 echo.
 echo                                         %marker%
@@ -125,3 +115,23 @@ echo %marker% >> Build.txt
 echo LJCViewEditor >> Build.txt
 call CoreUtilities\LJCViewEditor\UpdateViewEditor.cmd BuildAll >> Build.txt
 msbuild CoreUtilities\LJCViewEditor\LJCViewEditor.sln
+
+set /a counter+=1
+echo - >> Build.txt
+set marker=----------------- %counter% - LJCDBViewControls ---------------- >> Build.txt
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCDBViewControls >> Build.txt
+call CoreAssemblies\LJCDBViewControls\UpdateViewControls.cmd BuildAll >> Build.txt
+msbuild CoreAssemblies\LJCDBViewControls\LJCDBViewControls.sln
+
+set /a counter+=1
+echo - >> Build.txt
+set marker=----------------- %counter% - LJCGenDocEdit ---------------
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCDocLib >> Build.txt
+call CoreUtilities\LJCGenDocEdit\UpdateGenDocEdit.cmd BuildAll >> Build.txt
+msbuild CoreUtilities\LJCGenDocEdit\LJCGenDocEdit.sln

@@ -56,18 +56,23 @@ namespace LJCDBViewControls
 						{
 							retValue = true;
 							LJCSetByItemID(tableID);
-							if (SelectedIndex < 0)
-							{
-								SelectedIndex = 0;
-							}
-						}
+              if (SelectedIndex < 0)
+              {
+                LJCAllowSelectionChanged = false;
+                SelectedIndex = 0;
+                LJCAllowSelectionChanged = true;
+              }
+            }
 					}
 				}
 			}
 			return retValue;
 		}
 
-		#region Properties
+    #region Properties
+
+    /// <summary>Gets or sets the AllowSelectionChanged value.</summary>
+    public bool LJCAllowSelectionChanged { get; set; }
 
 		/// <summary>Gets or sets the TableName value.</summary>
 		public string LJCTableName

@@ -75,7 +75,7 @@ namespace LJCGenDocEdit
     // *** New Method *** - Data Views
     private void AssemblyGroupComboEdit_Click(object sender, EventArgs e)
     {
-      ViewCommon.DoViewEdit(AssemblyGroupViewInfo, ConfigFileName);
+      ViewCommon.DoViewEdit(ViewAssemblyGroup, ConfigFileName);
     }
 
     // Displays a detail dialog for a new record.
@@ -435,6 +435,19 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
+    // Handles the Combo SelectedIndexChanged event.
+    private void AssemblyGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (AssemblyGroupViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = AssemblyGroupViewCombo.LJCSelectedItemID();
+        ViewAssemblyGroup.DataID = dataID;
+        mAssemblyGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mAssemblyGroupGridCode.DataRetrieve();
+      }
+      AssemblyGroupViewCombo.LJCAllowSelectionChanged = true;
+    }
+
     // Handles the DragDrop event.
     private void AssemblyGroupGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -523,6 +536,19 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Assembly Item
+
+    // Handles the Combo SelectedIndexChanged event.
+    private void AssemblyViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (AssemblyViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = AssemblyViewCombo.LJCSelectedItemID();
+        ViewAssembly.DataID = dataID;
+        mAssemblyItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mAssemblyItemGridCode.DataRetrieve();
+      }
+      AssemblyViewCombo.LJCAllowSelectionChanged = true;
+    }
 
     // Handles the DragDrop event.
     private void AssemblyItemGrid_DragDrop(object sender, DragEventArgs e)
@@ -622,6 +648,19 @@ namespace LJCGenDocEdit
 
     #region Class Group
 
+    // Handles the Combo SelectedIndexChanged event.
+    private void ClassGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (ClassGroupViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = ClassGroupViewCombo.LJCSelectedItemID();
+        ViewClassGroup.DataID = dataID;
+        mClassGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mClassGroupGridCode.DataRetrieve();
+      }
+      ClassGroupViewCombo.LJCAllowSelectionChanged = true;
+    }
+
     // Handles the DragDrop event.
     private void ClassGroupGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -712,6 +751,19 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Class Item
+
+    // Handles the Combo SelectedIndexChanged event.
+    private void ClassViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (ClassViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = ClassViewCombo.LJCSelectedItemID();
+        ViewClass.DataID = dataID;
+        mClassItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mClassItemGridCode.DataRetrieve();
+      }
+      ClassViewCombo.LJCAllowSelectionChanged = true;
+    }
 
     // Handles the DragDrop event.
     private void ClassItemGrid_DragDrop(object sender, DragEventArgs e)
@@ -813,6 +865,19 @@ namespace LJCGenDocEdit
 
     #region Method Group
 
+    // Handles the Combo SelectedIndexChanged event.
+    private void MethodGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (MethodGroupViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = MethodGroupViewCombo.LJCSelectedItemID();
+        ViewMethodGroup.DataID = dataID;
+        mMethodGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mMethodGroupGridCode.DataRetrieve();
+      }
+      MethodGroupViewCombo.LJCAllowSelectionChanged = true;
+    }
+
     // Handles the DragDrop event.
     private void MethodGroupGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -904,6 +969,19 @@ namespace LJCGenDocEdit
 
     #region Method Item
 
+    // Handles the Combo SelectedIndexChanged event.
+    private void MethodViewCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (MethodViewCombo.LJCAllowSelectionChanged)
+      {
+        var dataID = MethodGroupViewCombo.LJCSelectedItemID();
+        ViewMethodGroup.DataID = dataID;
+        mMethodItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mMethodItemGridCode.DataRetrieve();
+      }
+      MethodViewCombo.LJCAllowSelectionChanged = true;
+    }
+
     // Handles the DragDrop event.
     private void MethodItemGrid_DragDrop(object sender, DragEventArgs e)
     {
@@ -992,7 +1070,6 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
-
     #endregion
   }
 }

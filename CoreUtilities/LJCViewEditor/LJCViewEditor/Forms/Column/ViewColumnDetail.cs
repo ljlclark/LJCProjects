@@ -126,8 +126,10 @@ namespace LJCViewEditor
         PropertyTextbox.Text = dataRecord.PropertyName;
         RenameTextbox.Text = dataRecord.RenameAs;
         CaptionTextbox.Text = dataRecord.Caption;
-        DataTypeCombo.SelectedIndex = DataTypeCombo.FindStringExact(dataRecord.DataTypeName);
+        DataTypeCombo.SelectedIndex
+          = DataTypeCombo.FindStringExact(dataRecord.DataTypeName);
         ValueTextbox.Text = dataRecord.Value;
+        SequenceText.Text = dataRecord.Sequence.ToString();
         PrimaryKeyCheckBox.Checked = dataRecord.IsPrimaryKey;
 
         // Reference key values.
@@ -155,11 +157,14 @@ namespace LJCViewEditor
 
       // In control order.
       retValue.ColumnName = ColumnNameTextbox.Text.Trim();
-      retValue.PropertyName = FormCommon.SetString(PropertyTextbox.Text.Trim());
+      retValue.PropertyName
+        = FormCommon.SetString(PropertyTextbox.Text.Trim());
       retValue.RenameAs = FormCommon.SetString(RenameTextbox.Text.Trim());
       retValue.Caption = FormCommon.SetString(CaptionTextbox.Text.Trim());
       retValue.DataTypeName = DataTypeCombo.Text.Trim();
       retValue.Value = FormCommon.SetString(ValueTextbox.Text.Trim());
+      int.TryParse(SequenceText.Text, out int intValue);
+      retValue.Sequence = intValue;
       retValue.IsPrimaryKey = PrimaryKeyCheckBox.Checked;
 
       // Get Reference key values.

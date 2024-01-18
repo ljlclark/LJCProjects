@@ -153,15 +153,19 @@ namespace LJCViewEditor
             { ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
           };
           var lookupRecord = ColumnManager.Retrieve(keyColumns);
-          if (!ColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
+          if (ColumnManager.IsDuplicate(lookupRecord, viewColumn, false))
           {
-            var addedRecord = ColumnManager.AddWithFlags(viewColumn);
-            if (addedRecord != null)
-            {
-              viewColumn.ID = addedRecord.ID;
-              var row = RowAdd(viewColumn);
-              ColumnGrid.LJCSetCurrentRow(row, true);
-            }
+            continue;
+          }
+          var addedRecord = ColumnManager.AddWithFlags(viewColumn);
+          if (addedRecord != null)
+          {
+            viewColumn.ID = addedRecord.ID;
+            var row = RowAdd(viewColumn);
+            ColumnGrid.LJCSetCurrentRow(row, true);
+
+            // *** Next Statement *** Add - 1/17/24
+            RowSaveGridColumn(row, viewColumn);
           }
         }
       }
@@ -314,33 +318,38 @@ namespace LJCViewEditor
         var row = RowAdd(record);
         ColumnGrid.LJCSetCurrentRow(row, true);
 
-        // *** Begin *** Add - 1/14/24
-        if (ViewGrid.CurrentRow is LJCGridRow parentRow
-          && row != null)
-        {
-          // Data from items.
-          var id = row.LJCGetInt32(ViewColumn.ColumnID);
-          var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
-
-          var gridColumn = new ViewGridColumn()
-          {
-            ViewDataID = parentID,
-            ViewColumnID = id,
-            Caption = record.Caption,
-            Sequence = record.Sequence,
-            Width = record.Width
-          };
-          var gridColumnManager = Managers.ViewGridColumnManager;
-          gridColumnManager.Add(gridColumn);
-        }
-        // *** End   *** Add - 1/14/24
+        // *** Next Statement *** Add - 1/17/24
+        RowSaveGridColumn(row, record);
 
         EditList.TimedChange(Change.Column);
       }
     }
+
+    // *** New Method *** 1/17/24
+    private void RowSaveGridColumn(LJCGridRow row, ViewColumn record)
+    {
+      if (ViewGrid.CurrentRow is LJCGridRow parentRow
+        && row != null)
+      {
+        // Data from items.
+        var id = row.LJCGetInt32(ViewColumn.ColumnID);
+        var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
+
+        var gridColumn = new ViewGridColumn()
+        {
+          ViewDataID = parentID,
+          ViewColumnID = id,
+          Caption = record.Caption,
+          Sequence = record.Sequence,
+          Width = record.Width
+        };
+        var gridColumnManager = Managers.ViewGridColumnManager;
+        gridColumnManager.Add(gridColumn);
+      }
+    }
     #endregion
 
-    #region Other Methods
+    #region Setup and Other Methods
 
     // Configures the View Column Grid.
     private void SetupGrid()
@@ -348,6 +357,7 @@ namespace LJCViewEditor
       if (0 == ColumnGrid.Columns.Count)
       {
         List<string> propertyNames = new List<string> {
+          ViewColumn.ColumnSequence,
           ViewColumn.ColumnCaption,
           ViewColumn.ColumnColumnName,
           ViewColumn.ColumnPropertyName,
