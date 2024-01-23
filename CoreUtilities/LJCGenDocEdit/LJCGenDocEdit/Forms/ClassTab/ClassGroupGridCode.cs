@@ -325,7 +325,7 @@ namespace LJCGenDocEdit
     }
 
     // Setup the grid columns.
-    internal void SetupGrid(ViewInfo viewInfo)
+    internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
       // *** Begin *** Change - Data Views
@@ -333,6 +333,7 @@ namespace LJCGenDocEdit
       ClassGroupGrid.Columns.Clear();
 
       // Get the view grid columns
+      var viewInfo = DocList.ClassGroupInfo();
       var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
       if (gridColumns != null)
       {
@@ -345,9 +346,6 @@ namespace LJCGenDocEdit
       else
       {
         // Did not load any Grid Columns.
-        var viewCombo = DocList.ClassGroupViewCombo;
-        var dataID = viewCombo.LJCSelectedItemID();
-        viewInfo.DataID = dataID;
         ViewCommon.DoViewEdit(viewInfo, DocList.ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -355,9 +353,7 @@ namespace LJCGenDocEdit
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
-          ClassGroupGrid.LJCAddColumns(gridColumns);
-          ClassGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
+          var viewCombo = DocList.ClassGroupViewCombo;
           viewCombo.Items.Clear();
           viewCombo.LJCLoad();
         }

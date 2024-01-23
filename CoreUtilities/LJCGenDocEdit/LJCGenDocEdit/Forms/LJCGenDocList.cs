@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJCGenDocList.cs
 using LJCDBViewControls;
+using LJCDocXMLObjLib;
 using LJCGenDocDAL;
 using LJCWinFormCommon;
 using System;
@@ -75,7 +76,8 @@ namespace LJCGenDocEdit
     // *** New Method *** - Data Views
     private void AssemblyGroupComboEdit_Click(object sender, EventArgs e)
     {
-      ViewCommon.DoViewEdit(ViewAssemblyGroup, ConfigFileName);
+      var viewInfo = AssemblyGroupInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
     }
 
     // Displays a detail dialog for a new record.
@@ -440,9 +442,7 @@ namespace LJCGenDocEdit
     {
       if (AssemblyGroupViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = AssemblyGroupViewCombo.LJCSelectedItemID();
-        ViewAssemblyGroup.DataID = dataID;
-        mAssemblyGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mAssemblyGroupGridCode.SetupGrid();
         mAssemblyGroupGridCode.DataRetrieve();
       }
       AssemblyGroupViewCombo.LJCAllowSelectionChanged = true;
@@ -542,9 +542,7 @@ namespace LJCGenDocEdit
     {
       if (AssemblyViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = AssemblyViewCombo.LJCSelectedItemID();
-        ViewAssembly.DataID = dataID;
-        mAssemblyItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mAssemblyItemGridCode.SetupGrid();
         mAssemblyItemGridCode.DataRetrieve();
       }
       AssemblyViewCombo.LJCAllowSelectionChanged = true;
@@ -653,9 +651,7 @@ namespace LJCGenDocEdit
     {
       if (ClassGroupViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = ClassGroupViewCombo.LJCSelectedItemID();
-        ViewClassGroup.DataID = dataID;
-        mClassGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mClassGroupGridCode.SetupGrid();
         mClassGroupGridCode.DataRetrieve();
       }
       ClassGroupViewCombo.LJCAllowSelectionChanged = true;
@@ -757,9 +753,7 @@ namespace LJCGenDocEdit
     {
       if (ClassViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = ClassViewCombo.LJCSelectedItemID();
-        ViewClass.DataID = dataID;
-        mClassItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mClassItemGridCode.SetupGrid();
         mClassItemGridCode.DataRetrieve();
       }
       ClassViewCombo.LJCAllowSelectionChanged = true;
@@ -870,9 +864,7 @@ namespace LJCGenDocEdit
     {
       if (MethodGroupViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = MethodGroupViewCombo.LJCSelectedItemID();
-        ViewMethodGroup.DataID = dataID;
-        mMethodGroupGridCode.SetupGrid(ViewAssemblyGroup);
+        mMethodGroupGridCode.SetupGrid();
         mMethodGroupGridCode.DataRetrieve();
       }
       MethodGroupViewCombo.LJCAllowSelectionChanged = true;
@@ -974,9 +966,7 @@ namespace LJCGenDocEdit
     {
       if (MethodViewCombo.LJCAllowSelectionChanged)
       {
-        var dataID = MethodGroupViewCombo.LJCSelectedItemID();
-        ViewMethodGroup.DataID = dataID;
-        mMethodItemGridCode.SetupGrid(ViewAssemblyGroup);
+        mMethodItemGridCode.SetupGrid();
         mMethodItemGridCode.DataRetrieve();
       }
       MethodViewCombo.LJCAllowSelectionChanged = true;
