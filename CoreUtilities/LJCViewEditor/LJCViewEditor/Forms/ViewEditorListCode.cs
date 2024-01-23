@@ -31,7 +31,11 @@ namespace LJCViewEditor
           {
             ConfigCombo.SelectedIndex = comboIndex;
           }
+          break;
 
+        case Change.Config:
+          DataConfigName = ConfigCombo.Text;
+          DataRetrieveTable();
           if (NetString.HasValue(mStartupTableName))
           {
             comboIndex = TableCombo.FindString(mStartupTableName);
@@ -40,11 +44,6 @@ namespace LJCViewEditor
               TableCombo.SelectedIndex = comboIndex;
             }
           }
-          break;
-
-        case Change.Config:
-          DataConfigName = ConfigCombo.Text;
-          DataRetrieveTable();
           break;
 
         case Change.Table:
