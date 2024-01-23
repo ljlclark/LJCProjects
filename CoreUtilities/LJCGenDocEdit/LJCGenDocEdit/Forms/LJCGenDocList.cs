@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // LJCGenDocList.cs
 using LJCDBViewControls;
-using LJCDocXMLObjLib;
 using LJCGenDocDAL;
 using LJCWinFormCommon;
 using System;
@@ -438,6 +437,7 @@ namespace LJCGenDocEdit
     #region Assembly Group
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void AssemblyGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (AssemblyGroupViewCombo.LJCAllowSelectionChanged)
@@ -538,6 +538,7 @@ namespace LJCGenDocEdit
     #region Assembly Item
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void AssemblyViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (AssemblyViewCombo.LJCAllowSelectionChanged)
@@ -647,6 +648,7 @@ namespace LJCGenDocEdit
     #region Class Group
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void ClassGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (ClassGroupViewCombo.LJCAllowSelectionChanged)
@@ -749,6 +751,7 @@ namespace LJCGenDocEdit
     #region Class Item
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void ClassViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (ClassViewCombo.LJCAllowSelectionChanged)
@@ -860,6 +863,7 @@ namespace LJCGenDocEdit
     #region Method Group
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void MethodGroupViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (MethodGroupViewCombo.LJCAllowSelectionChanged)
@@ -962,6 +966,7 @@ namespace LJCGenDocEdit
     #region Method Item
 
     // Handles the Combo SelectedIndexChanged event.
+    // *** New Method *** - Data Views
     private void MethodViewCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (MethodViewCombo.LJCAllowSelectionChanged)

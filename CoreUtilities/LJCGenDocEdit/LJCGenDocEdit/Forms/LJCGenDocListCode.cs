@@ -244,13 +244,14 @@ namespace LJCGenDocEdit
     // Loads the initial Control data.
     private void LoadControlData()
     {
-      // *** Next Statement *** Add - Data Views
+      // *** Begin *** Add - Data Views
       LoadComboAssemblyGroup();
       LoadComboAssembly();
       LoadComboClassGroup();
       LoadComboClass();
       LoadComboMethodGroup();
       LoadComboMethod();
+      // *** End   *** Add - Data Views
     }
 
     // Restores the control values.
@@ -286,6 +287,7 @@ namespace LJCGenDocEdit
           MethodGroupGrid.LJCRestoreColumnValues(ControlValues);
           MethodItemGrid.LJCRestoreColumnValues(ControlValues);
 
+          // *** Begin *** Add - Data Views
           SetViewComboItem(AssemblyGroupViewCombo, "ViewAssemblyGroup"
             , AssemblyGroupInfo());
           SetViewComboItem(AssemblyViewCombo, "ViewAssembly"
@@ -298,6 +300,7 @@ namespace LJCGenDocEdit
           SetViewComboItem(MethodGroupViewCombo, "ViewMethodGroup"
             , MethodGroupInfo());
           SetViewComboItem(MethodViewCombo, "ViewMethod", MethodInfo());
+          // *** End   *** Add - Data Views
         }
       }
     }
@@ -327,6 +330,7 @@ namespace LJCGenDocEdit
       controlValues.Add(this.Name, Left, Top, Width, Height);
 
       // Save other values.
+      // *** Begin *** Add - Data Views
       var dataID = AssemblyGroupInfo().DataID;
       controlValues.Add("ViewAssemblyGroup", dataID, 0, 0, 0);
       dataID = AssemblyInfo().DataID;
@@ -341,6 +345,7 @@ namespace LJCGenDocEdit
       controlValues.Add("ViewMethodGroup", dataID, 0, 0, 0);
       dataID = MethodInfo().DataID;
       controlValues.Add("ViewMethod", dataID, 0, 0, 0);
+      // *** End   *** Add - Data Views
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , mControlValuesFileName);
@@ -373,6 +378,7 @@ namespace LJCGenDocEdit
     }
 
     // Sets the ViewCombo item.
+    // *** New Method *** Data Views
     private void SetViewComboItem(ViewCombo viewCombo, string viewName
       , ViewInfo viewInfo)
     {
@@ -502,6 +508,7 @@ namespace LJCGenDocEdit
     }
 
     // Load the Assembly View Combo.
+    // *** New Method *** - Data Views
     private void LoadComboAssembly()
     {
       if (!AssemblyViewCombo.LJCLoad())
@@ -521,6 +528,7 @@ namespace LJCGenDocEdit
     }
 
     // Load the ClassGroup View Combo.
+    // *** New Method *** - Data Views
     private void LoadComboClassGroup()
     {
       if (!ClassGroupViewCombo.LJCLoad())
@@ -540,6 +548,7 @@ namespace LJCGenDocEdit
     }
 
     // Load the Class View Combo.
+    // *** New Method *** - Data Views
     private void LoadComboClass()
     {
       if (!ClassViewCombo.LJCLoad())
@@ -559,6 +568,7 @@ namespace LJCGenDocEdit
     }
 
     // Load the MethodGroup View Combo.
+    // *** New Method *** - Data Views
     private void LoadComboMethodGroup()
     {
       if (!MethodGroupViewCombo.LJCLoad())
@@ -578,6 +588,7 @@ namespace LJCGenDocEdit
     }
 
     // Load the Class View Combo.
+    // *** New Method *** - Data Views
     private void LoadComboMethod()
     {
       if (!MethodViewCombo.LJCLoad())
