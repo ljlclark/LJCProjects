@@ -71,14 +71,6 @@ namespace LJCGenDocEdit
 
     #region Assembly Group
 
-    // Display the ViewEditor.
-    // *** New Method *** - Data Views
-    private void AssemblyGroupComboEdit_Click(object sender, EventArgs e)
-    {
-      var viewInfo = AssemblyGroupInfo();
-      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
-    }
-
     // Displays a detail dialog for a new record.
     private void AssemblyGroupNew_Click(object sender, EventArgs e)
     {
@@ -405,6 +397,52 @@ namespace LJCGenDocEdit
     private void MethodItemHelp_Click(object sender, EventArgs e)
     {
       mMethodItemGridCode.DoHelp();
+    }
+    #endregion
+
+    // *** New Methods *** - Data Views
+    #region View Menu Events
+
+    // Display the ViewEditor.
+    private void AssemblyGroupViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = AssemblyGroupViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
+    }
+
+    // Display the ViewEditor.
+    private void AssemblyViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = AssemblyViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
+    }
+
+    // Display the ViewEditor.
+    private void ClassGroupViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = ClassGroupViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
+    }
+
+    // Display the ViewEditor.
+    private void ClassViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = ClassViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
+    }
+
+    // Display the ViewEditor.
+    private void MethodGroupViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = MethodGroupViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
+    }
+
+    // Display the ViewEditor.
+    private void MethodViewEdit_Click(object sender, EventArgs e)
+    {
+      var viewInfo = MethodViewCombo.GetInfo();
+      ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
     }
     #endregion
     #endregion
@@ -1065,6 +1103,7 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCAllowSelectionChange = true;
     }
     #endregion
+
     #endregion
   }
 }

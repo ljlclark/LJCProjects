@@ -323,7 +323,8 @@ namespace LJCGenDocEdit
       MethodGrid.Columns.Clear();
 
       // Get the view grid columns
-      var viewInfo = DocList.MethodInfo();
+      var viewCombo = DocList.MethodViewCombo;
+      var viewInfo = viewCombo.GetInfo();
       var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
       if (gridColumns != null)
       {
@@ -343,7 +344,7 @@ namespace LJCGenDocEdit
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          var viewCombo = DocList.MethodViewCombo;
+          viewCombo = DocList.MethodViewCombo;
           viewCombo.Items.Clear();
           viewCombo.LJCLoad();
         }

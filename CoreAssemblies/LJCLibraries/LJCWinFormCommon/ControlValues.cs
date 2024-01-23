@@ -24,7 +24,8 @@ namespace LJCWinFormCommon
     // Creates the ControlValue object from the supplied values and adds the
     // element to the collection list.
     /// <include path='items/Add/*' file='Doc/ControlValues.xml'/>
-    public void Add(string controlName, int left, int top, int width, int height)
+    public void Add(string controlName, int left = 0, int top = 0
+      , int width = 0, int height = 0)
     {
       ControlValue controlValue = new ControlValue()
       {

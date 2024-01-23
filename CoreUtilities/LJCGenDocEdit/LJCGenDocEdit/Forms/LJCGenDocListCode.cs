@@ -197,6 +197,21 @@ namespace LJCGenDocEdit
       var _ = new LJCPanelManager(TabsSplit, MainTabs, TileTabs);
     }
 
+    // Gets the saved View DataID.
+    // *** New Method *** Data Views
+    private long ControlValueDataID(string name)
+    {
+      long retValue = 0;
+
+      var controlValue = ControlValues.LJCSearchName(name);
+      if (controlValue != null
+        && controlValue.Left > 0)
+      {
+        retValue = controlValue.Left;
+      }
+      return retValue;
+    }
+
     // Set initial Control values.
     private void InitialControlValues()
     {
@@ -288,18 +303,14 @@ namespace LJCGenDocEdit
           MethodItemGrid.LJCRestoreColumnValues(ControlValues);
 
           // *** Begin *** Add - Data Views
-          SetViewComboItem(AssemblyGroupViewCombo, "ViewAssemblyGroup"
-            , AssemblyGroupInfo());
-          SetViewComboItem(AssemblyViewCombo, "ViewAssembly"
-            , AssemblyInfo());
+          SetViewComboItem(AssemblyGroupViewCombo, "ViewAssemblyGroup");
+          SetViewComboItem(AssemblyViewCombo, "ViewAssembly");
 
-          SetViewComboItem(ClassGroupViewCombo, "ViewClassGroup"
-            , ClassGroupInfo());
-          SetViewComboItem(ClassViewCombo, "ViewClass", ClassInfo());
+          SetViewComboItem(ClassGroupViewCombo, "ViewClassGroup");
+          SetViewComboItem(ClassViewCombo, "ViewClass");
 
-          SetViewComboItem(MethodGroupViewCombo, "ViewMethodGroup"
-            , MethodGroupInfo());
-          SetViewComboItem(MethodViewCombo, "ViewMethod", MethodInfo());
+          SetViewComboItem(MethodGroupViewCombo, "ViewMethodGroup");
+          SetViewComboItem(MethodViewCombo, "ViewMethod");
           // *** End   *** Add - Data Views
         }
       }
@@ -331,20 +342,20 @@ namespace LJCGenDocEdit
 
       // Save other values.
       // *** Begin *** Add - Data Views
-      var dataID = AssemblyGroupInfo().DataID;
-      controlValues.Add("ViewAssemblyGroup", dataID, 0, 0, 0);
-      dataID = AssemblyInfo().DataID;
-      controlValues.Add("ViewAssembly", dataID, 0, 0, 0);
+      var viewInfo = AssemblyGroupViewCombo.GetInfo();
+      controlValues.Add("ViewAssemblyGroup", left: viewInfo.DataID);
+      viewInfo = AssemblyViewCombo.GetInfo();
+      controlValues.Add("ViewAssembly", left: viewInfo.DataID);
 
-      dataID = ClassGroupInfo().DataID;
-      controlValues.Add("ViewClassGroup", dataID, 0, 0, 0);
-      dataID = ClassInfo().DataID;
-      controlValues.Add("ViewClass", dataID, 0, 0, 0);
+      viewInfo = ClassGroupViewCombo.GetInfo();
+      controlValues.Add("ViewClassGroup", left: viewInfo.DataID);
+      viewInfo = ClassViewCombo.GetInfo();
+      controlValues.Add("ViewClass", left: viewInfo.DataID);
 
-      dataID = MethodGroupInfo().DataID;
-      controlValues.Add("ViewMethodGroup", dataID, 0, 0, 0);
-      dataID = MethodInfo().DataID;
-      controlValues.Add("ViewMethod", dataID, 0, 0, 0);
+      viewInfo = MethodGroupViewCombo.GetInfo();
+      controlValues.Add("ViewMethodGroup", left: viewInfo.DataID);
+      viewInfo = MethodViewCombo.GetInfo();
+      controlValues.Add("ViewMethod", left: viewInfo.DataID);
       // *** End   *** Add - Data Views
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
@@ -379,15 +390,11 @@ namespace LJCGenDocEdit
 
     // Sets the ViewCombo item.
     // *** New Method *** Data Views
-    private void SetViewComboItem(ViewCombo viewCombo, string viewName
-      , ViewInfo viewInfo)
+    private void SetViewComboItem(ViewCombo viewCombo, string viewName)
     {
-      var controlValue = ControlValues.LJCSearchName(viewName);
-      if (controlValue != null
-        && controlValue.Left > 0)
+      var dataID = (int)ControlValueDataID(viewName);
+      if (dataID > 0)
       {
-        var dataID = controlValue.Left;
-        viewInfo.DataID = dataID;
         viewCombo.LJCSetByItemID(dataID);
       }
     }
@@ -410,81 +417,6 @@ namespace LJCGenDocEdit
     internal ControlValues ControlValues { get; set; }
     #endregion
 
-    #region Get ViewInfo
-
-    // Get DocAssemblyGroup ViewIfno object.
-    internal ViewInfo AssemblyGroupInfo()
-    {
-      var viewCombo = AssemblyGroupViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocAssemblyGroup.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-
-    // Get DocAssembly ViewIfno object.
-    internal ViewInfo AssemblyInfo()
-    {
-      var viewCombo = AssemblyViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocAssembly.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-
-    // Get DocClassGroup ViewIfno object.
-    internal ViewInfo ClassGroupInfo()
-    {
-      var viewCombo = ClassGroupViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocClassGroup.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-
-    // Get DocClass ViewIfno object.
-    internal ViewInfo ClassInfo()
-    {
-      var viewCombo = ClassViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocClass.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-
-    // Get DocMethodGroup ViewIfno object.
-    internal ViewInfo MethodGroupInfo()
-    {
-      var viewCombo = MethodGroupViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocMethodGroup.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-
-    // Get DocMethod ViewIfno object.
-    internal ViewInfo MethodInfo()
-    {
-      var viewCombo = MethodViewCombo;
-      var retValue = new ViewInfo()
-      {
-        TableName = DocMethod.TableName,
-        DataID = viewCombo.LJCSelectedItemID()
-      };
-      return retValue;
-    }
-    #endregion
-
     #region Load View Combos
 
     // Load the AssemblyGroup View Combo.
@@ -494,7 +426,7 @@ namespace LJCGenDocEdit
       if (!AssemblyGroupViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = AssemblyGroupInfo();
+        var viewInfo = AssemblyGroupViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -514,7 +446,7 @@ namespace LJCGenDocEdit
       if (!AssemblyViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = AssemblyInfo();
+        var viewInfo = AssemblyViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -534,7 +466,7 @@ namespace LJCGenDocEdit
       if (!ClassGroupViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = ClassGroupInfo();
+        var viewInfo = ClassGroupViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -554,7 +486,7 @@ namespace LJCGenDocEdit
       if (!ClassViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = ClassInfo();
+        var viewInfo = ClassViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -574,7 +506,7 @@ namespace LJCGenDocEdit
       if (!MethodGroupViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = MethodGroupInfo();
+        var viewInfo = MethodGroupViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
@@ -594,7 +526,7 @@ namespace LJCGenDocEdit
       if (!MethodViewCombo.LJCLoad())
       {
         // Did not load any Views.
-        var viewInfo = MethodInfo();
+        var viewInfo = MethodViewCombo.GetInfo();
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";

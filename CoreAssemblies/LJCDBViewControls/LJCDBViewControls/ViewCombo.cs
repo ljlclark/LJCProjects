@@ -33,9 +33,11 @@ namespace LJCDBViewControls
       LJCDataConfigName = dataConfigName;
 		}
 
-		// Loads the object data after it has been initialized with LJCInit().
-		/// <include path='items/LJCLoad/*' file='../../../CoreUtilities/LJCGenDoc/Common/Control.xml'/>
-		public bool LJCLoad()
+    #region Methods
+
+    // Loads the object data after it has been initialized with LJCInit().
+    /// <include path='items/LJCLoad/*' file='../../../CoreUtilities/LJCGenDoc/Common/Control.xml'/>
+    public bool LJCLoad()
 		{
 			bool retValue = false;
 
@@ -68,6 +70,19 @@ namespace LJCDBViewControls
 			}
 			return retValue;
 		}
+
+    /// <summary>Gets the selected item info.</summary>
+    public ViewInfo GetInfo()
+    {
+      var retValue = new ViewInfo()
+      {
+        TableName = LJCTableName,
+        DataID = LJCSelectedItemID()
+      };
+      return retValue;
+    }
+
+    #endregion
 
     #region Properties
 
