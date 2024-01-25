@@ -52,6 +52,7 @@ namespace LJCGenDocEdit
       if (ClassGroupGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocClassManager;
+        var propertyNames = mGridColumns.LJCGetPropertyNames();
         var names = new List<string>()
         {
           LJCGenDocDAL.DocClass.ColumnSequence
@@ -75,7 +76,8 @@ namespace LJCGenDocEdit
             { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() }
           };
         }
-        DbResult result = manager.LoadResult(keyColumns);
+        DbResult result = manager.LoadResult(keyColumns
+          , propertyNames: propertyNames);
 
         // Duplicate in ResultGridData.LoadRows()?
         if (DbResult.HasRows(result))
@@ -131,7 +133,6 @@ namespace LJCGenDocEdit
       var columnName = LJCGenDocDAL.DocClass.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
-
       retValue.LJCSetValues(ClassGrid, dbValues);
       return retValue;
     }
@@ -340,11 +341,11 @@ namespace LJCGenDocEdit
       // Get the view grid columns
       var viewCombo = DocList.ClassViewCombo;
       var viewInfo = viewCombo.GetInfo();
-      var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
-      if (gridColumns != null)
+      mGridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+      if (mGridColumns != null)
       {
         // Setup the grid columns.
-        var columns = gridColumns.Clone();
+        var columns = mGridColumns.Clone();
         columns.LJCRemoveColumn(LJCGenDocDAL.DocClass.ColumnID);
         ClassGrid.LJCAddColumns(columns);
         ClassGrid.LJCRestoreColumnValues(DocList.ControlValues);
@@ -553,7 +554,13 @@ namespace LJCGenDocEdit
     private ManagersGenDoc Managers { get; set; }
     #endregion
 
+    #region Class Data
+
+    // The grid column definitions.
+    private DbColumns mGridColumns;
+
     // *** Next Statement *** Add - Data View
     private readonly DataDbView mDataDbView;
+    #endregion
   }
 }

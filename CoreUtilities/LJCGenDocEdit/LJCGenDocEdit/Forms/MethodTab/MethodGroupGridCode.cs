@@ -54,6 +54,7 @@ namespace LJCGenDocEdit
       if (ClassGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocMethodGroupManager;
+        var propertyNames = mGridColumns.LJCGetPropertyNames();
         var names = new List<string>()
         {
           DocMethodGroup.ColumnSequence
@@ -64,7 +65,8 @@ namespace LJCGenDocEdit
         {
           { DocMethodGroup.ColumnDocClassID, DocClassID() }
         };
-        DbResult result = manager.LoadResult(keyColumns);
+        DbResult result = manager.LoadResult(keyColumns
+          , propertyNames: propertyNames);
         if (DbResult.HasRows(result))
         {
           foreach (DbRow dbRow in result.Rows)
@@ -324,11 +326,11 @@ namespace LJCGenDocEdit
       // Get the view grid columns
       var viewCombo = DocList.MethodGroupViewCombo;
       var viewInfo = viewCombo.GetInfo();
-      var gridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
-      if (gridColumns != null)
+      mGridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
+      if (mGridColumns != null)
       {
         // Setup the grid columns.
-        var columns = gridColumns.Clone();
+        var columns = mGridColumns.Clone();
         columns.LJCRemoveColumn(DocMethodGroup.ColumnID);
         MethodGroupGrid.LJCAddColumns(columns);
         MethodGroupGrid.LJCRestoreColumnValues(DocList.ControlValues);
@@ -485,7 +487,13 @@ namespace LJCGenDocEdit
     private LJCDataGrid MethodGroupGrid { get; set; }
     #endregion
 
+    #region Class Data
+
+    // The grid column definitions.
+    private DbColumns mGridColumns;
+
     // *** Next Statement *** Add - Data View
     private readonly DataDbView mDataDbView;
+    #endregion
   }
 }

@@ -332,13 +332,13 @@ namespace LJCGenDocEdit
       MethodItemGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
-      controlValues.Add("AssemblySplit.SplitterDistance", 0, 0, 0
-        , AssemblySplit.SplitterDistance);
-      controlValues.Add("ClassSplit.SplitterDistance", 0, 0, 0
-        , ClassSplit.SplitterDistance);
+      controlValues.Add("AssemblySplit.SplitterDistance"
+        , height: AssemblySplit.SplitterDistance);
+      controlValues.Add("ClassSplit.SplitterDistance"
+        , height: ClassSplit.SplitterDistance);
 
       // Save Window values.
-      controlValues.Add(this.Name, Left, Top, Width, Height);
+      controlValues.Add(Name, Left, Top, Width, Height);
 
       // Save other values.
       // *** Begin *** Add - Data Views
@@ -417,10 +417,10 @@ namespace LJCGenDocEdit
     internal ControlValues ControlValues { get; set; }
     #endregion
 
+    // *** New Methods *** - Data Views
     #region Load View Combos
 
     // Load the AssemblyGroup View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboAssemblyGroup()
     {
       if (!AssemblyGroupViewCombo.LJCLoad())
@@ -430,7 +430,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Assembly Group View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -440,7 +440,6 @@ namespace LJCGenDocEdit
     }
 
     // Load the Assembly View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboAssembly()
     {
       if (!AssemblyViewCombo.LJCLoad())
@@ -450,7 +449,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Assembly View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -460,7 +459,6 @@ namespace LJCGenDocEdit
     }
 
     // Load the ClassGroup View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboClassGroup()
     {
       if (!ClassGroupViewCombo.LJCLoad())
@@ -470,7 +468,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Class Group View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -480,7 +478,6 @@ namespace LJCGenDocEdit
     }
 
     // Load the Class View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboClass()
     {
       if (!ClassViewCombo.LJCLoad())
@@ -490,7 +487,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Class View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -500,7 +497,6 @@ namespace LJCGenDocEdit
     }
 
     // Load the MethodGroup View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboMethodGroup()
     {
       if (!MethodGroupViewCombo.LJCLoad())
@@ -510,7 +506,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Methods Group View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -520,7 +516,6 @@ namespace LJCGenDocEdit
     }
 
     // Load the Class View Combo.
-    // *** New Method *** - Data Views
     private void LoadComboMethod()
     {
       if (!MethodViewCombo.LJCLoad())
@@ -530,7 +525,7 @@ namespace LJCGenDocEdit
         ViewCommon.DoViewEdit(viewInfo, ConfigFileName);
 
         string title = "Reload Confirmation";
-        string message = "Reload Asesembly Group View Combo?";
+        string message = "Reload Method View Combo?";
         if (DialogResult.Yes == MessageBox.Show(message, title
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
