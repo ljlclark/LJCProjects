@@ -5,6 +5,7 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace LJCGenDocLib
@@ -67,6 +68,8 @@ namespace LJCGenDocLib
     {
       string text;
       string token;
+      // *** Next Statement *** Add - 2/5/24
+      string leadingWhiteSpace = SaveLeadingWhiteSpace(line);
       string[] tokens = GetTokens(line);
 
       short tokenIndex = -1;
@@ -85,6 +88,11 @@ namespace LJCGenDocLib
               IsSummaryInProcess = false;
               tokens[tokenIndex] = SetParamSpan(text);
             }
+            // *** Begin *** Add - 2/5/24
+            text = text.Replace("<", "&lt;");
+            text = text.Replace(">", "&gt;");
+            //text = $"{leadingWhiteSpace}{text}";
+            // *** End   *** Add
             ProcessSummary(text, ref tokens, tokenIndex);
             ProcessReturns(text, ref tokens, tokenIndex);
             break;
@@ -155,12 +163,15 @@ namespace LJCGenDocLib
 
       // Rebuild line from tokens.
       line = CombineTokens(tokens, 0);
+      // *** Next Statement *** Add - 2/5/24
+      line = $"{leadingWhiteSpace}{line}";
       return line;
     }
 
     // Strips the defined leading white spaces and applies Syntax Highlighting.
     /// <include path='items/FormatCode/*' file='Doc/SyntaxHighlight.xml'/>
-    public string FormatCode(string dataTypeName, string dataMemberName, string code)
+    public string FormatCode(string dataTypeName, string dataMemberName
+      , string code, bool stripLeadingSpaces = true)
     {
       string retValue;
 
@@ -179,21 +190,24 @@ namespace LJCGenDocLib
       {
         string saveWhiteSpace;
         string line = lines[lineIndex];
-        // *** Next Statement *** Add - 5/25
-        int length = line.Replace("\t", "  ").Length;
-        if (length > stripLength)
+        if (stripLeadingSpaces)
         {
-          // Remove and save the leading spaces.
-          line = StripExtraLeadingWhiteSpace(line, stripLength);
-          saveWhiteSpace = SaveLeadingWhiteSpace(line);
-
-          if (NetString.HasValue(line))
+          // *** Next Statement *** Add - 5/25
+          int length = line.Replace("\t", "  ").Length;
+          if (length > stripLength)
           {
-            line = AddSyntaxHighlight(line);
-          }
+            // Remove and save the leading spaces.
+            line = StripExtraLeadingWhiteSpace(line, stripLength);
+            saveWhiteSpace = SaveLeadingWhiteSpace(line);
 
-          // Add the leading white space back in.
-          line = $"{saveWhiteSpace}{line}";
+            if (NetString.HasValue(line))
+            {
+              line = AddSyntaxHighlight(line);
+            }
+
+            // Add the leading white space back in.
+            line = $"{saveWhiteSpace}{line}";
+          }
         }
         builder.AppendLine(line);
       }
@@ -974,7 +988,10 @@ namespace LJCGenDocLib
     {
       bool retValue = false;
 
-      if (text.Trim().StartsWith("///"))
+      var trimText = text.Trim();
+      if (trimText.StartsWith("///")
+        || "#region" == trimText
+        || "#endregion" == trimText)
       {
         retValue = true;
       }

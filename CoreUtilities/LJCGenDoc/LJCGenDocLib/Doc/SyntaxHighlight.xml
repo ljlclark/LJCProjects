@@ -38,6 +38,7 @@
     <param name="dataTypeName">The data type name.</param>
     <param name="dataMemberName">The data member name.</param>
     <param name="code">The HTML code string.</param>
+    <param name="stripLeadingSpaces">Indicates if the leading white space should be stripped.</param>
     <returns>The formatted code string.</returns>
   </FormatCode>
   <SetUserTypes>
