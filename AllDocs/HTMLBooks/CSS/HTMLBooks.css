@@ -1,0 +1,15 @@
+/* Copyright (c) Lester J. Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* test.css */
+
+.book {
+  margin: 0;
+  padding: 0;
+  text-align: justify;
+  text-indent: 25px;
+}
+
+.columns {
+  column-count: 2;
+  column-width: 250px;
+}

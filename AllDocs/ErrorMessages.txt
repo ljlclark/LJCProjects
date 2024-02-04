@@ -1,0 +1,18 @@
+Missing file specification. - ArgumentException
+File '{FileSpec}' was not found. - FileNotFoundException
+No data found in file '{FileSpec}'. - Exception
+{ClassName.MethodName} - {Argument} is null. - ArgumentException.
+
+The {ClassName.ValueName} value is not set. - MissingMemberException
+The {FieldType} value is not set. - MissingFieldException
+
+The Provider name is missing
+or the App.config '{ConfigProvider}' key is empty or missing. - MissingMemberException
+The Provider name may be invalid
+or the App.config '{ConfigProvider}' key may be invalid. - InvalidOperationException
+
+Error execute the {SQLStatementType} statement. - Exception
+Error executing the SQL statement. - Exception
+
+The connection object state is '{0}'. It must be 'Closed'. - InvalidOperationException
+Unable to connect to the data source. - InvalidOperationException

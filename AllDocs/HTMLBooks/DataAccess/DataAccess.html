@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataAccess.html -->
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <div id="columns" class="columns">
+    <p class="book">
+      This is an abbreviated tutorial showing how to use the LJCDataAccess
+      library and DataAccess class to retrieve data from a database and display
+      it in a DataGridView control.
+    </p>
+    <h2>The Data Access Library</h2>
+    <p class="book">
+      The Data Access library (LJCDataAccess.dll) contains classes that provide
+      common functionality for program access to database tables.
+    </p>
+    <h3>DataAccess Class</h3>
+    <p class="book">
+      This class implements an ADO.NET SQL Data Access Control layer.
+    </p>
+    <p class="book">
+      The Data Access class encapsulates the repetitive code required to
+      perform common database functions using ADO.NET. This reduces the amount
+      of application code required to access this functionality and provides a
+      standard location for implementing common best practices.
+    </p>
+    <p class="book">
+      This class is capable of connecting using the SQL Server data provider,
+      OLEDB driver, ODBC driver or MySQL data provider.
+    </p>
+    <p class="book">
+      The following examples use the SQL Server table created with this TSQL script.
+    </p>
+  </div>
+  <pre>
+  IF NOT EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
+  WHERE TABLE_NAME = N'Person')
+  BEGIN
+  CREATE TABLE[dbo].[Person]
+  (
+    [ID][int] IDENTITY(1,1) NOT NULL,
+    [Name] [nvarchar] (60) NULL,
+    [PrincipleFlag] [bit] NOT NULL,
+    CONSTRAINT[PK_Person]
+    PRIMARY KEY CLUSTERED(
+    [ID] ASC),
+  )
+  END
+  GO
+  insert into Person
+    (Name, PrincipleFlag)
+  values
+    ('John Doe', 1),
+    ('Jane Doe', 0);
+  GO</pre>
+  <div class="columns">
+    <ul>
+      <li>
+        Create a new Solution named “DataAccessTest” and a .NET Framework WinForms project named “PersonApp”.
+      </li>
+      <li>
+        Add a new .NET Framework Class Library Project named “PersonDAL” to the DataAccessTest solution.
+      </li>
+      <li>
+        Create a folder named “External” under the project folder.
+      </li>
+      <li>
+        Copy the files LJCDataAccess.dll and LJCNetCommon.dll to the “External” folder.
+      </li>
+      <li>
+        Copy the file LJCNetCommon.dll to the PersonDAL\bin\Debug folder.
+      </li>
+      <li>
+        Add a reference to the External\LJCDataAccess.dll file for the PersonDAL project and set the reference “Copy Local” property to “False”.
+        Creating the Custom DataManager Class
+        Create a Folder named “Manager” in the PersonDAL project.
+      </li>
+      <li>
+        Add a Class named “PersonManager” in the Manager folder. This class is customized for the “Person” result set.
+      </li>
+    </ul>
+    <h3>GetDataTable() Method</h3>
+    </p>
+    <p class="book">
+      This is one of the most commonly used DataAccess methods.
+    </p>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System.Data;
+<span class='keyWord'>using</span> System.Text;
+<span class='keyWord'>using</span> LJCDataAccess;
+
+<span class='keyWord'>namespace</span> PersonDAL
+{
+  <span class='xmlComment'>/// &lt;summary&gt;Provides Table specific data manipulation methods.&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
+  {
+    <span class='xmlComment'>#region</span> Constructors
+
+    <span class='xmlComment'>/// &lt;summary&gt;Initializes an object instance.&lt;/summary&gt;</span>
+    <span class='modifier'>public</span> PersonManager()
+    {
+      <span class='commonType'>var</span> dataSource = <span class='text'>"DESKTOP-PDPBE34"</span>;
+      <span class='commonType'>var</span> database = <span class='text'>"LJCData"</span>;
+      <span class='userType'>DataAccess</span> = <span class='userType'>DataCommon</span>.GetDataAccess(dataSource, database);
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Public Methods
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span>
+    <span class='xmlComment'>/// Get a DataColumn collection from the specified ColumnName values.</span>
+    <span class='xmlComment'>/// &lt;/summary&gt;</span>
+    <span class='xmlComment'>/// &lt;param name="columnNames"&gt;The Column Name array.&lt;/param&gt;</span>
+    <span class='xmlComment'>/// &lt;returns&gt;The DataColumn collection.&lt;/returns&gt;</span>
+    <span class='modifier'>public</span> <span class='userType'>DataColumnCollection</span> GetColumns(string[] columnNames = null)
+    {
+      <span class='userType'>DataColumnCollection</span> retValue;
+
+      <span class='userType'>DataTable</span> dataTable = GetSchemaOnly();
+      <span class='keyWord'>if</span> <span class='keyWord'>null</span>l == columnNames)
+      {
+        retValue = dataTable.Columns;
+      }
+      <span class='keyWord'>else</span>
+      {
+        retValue = <span class='userType'>DataCommon</span>.GetColumns(dataTable, columnNames);
+      }
+      <span class='keyWord'>return</span> retValue;
+    }
+
+    <span class='xmlComment'>/// &lt;summary&gt;Executes the Select statement and retrieves the DataTable object.&lt;/summary&gt;</span>
+    <span class='modifier'>public</span> <span class='userType'>DataTable</span> GetDataTable()
+    {
+      <span class='userType'>DataTable</span> retValue;
+
+      <span class='commonType'>string</span> sql = GetSql();
+
+      <span class='comment'>// The DataColumn names are the same as the Data Source</span>
+      <span class='comment'>// Table Column Names or the SQL rename 'AS' name.</span>
+      retValue = <span class='userType'>DataAccess</span>.GetDataTable(sql);
+      <span class='keyWord'>return</span> retValue;
+    }
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span>
+    <span class='xmlComment'>///</span>
+    <span class='xmlComment'>/// &lt;/summary&gt;</span>
+    <span class='xmlComment'>/// &lt;returns&gt;&lt;/returns&gt;</span>
+    <span class='modifier'>public</span> <span class='userType'>DataTable</span> GetSchemaOnly()
+    {
+      <span class='userType'>DataTable</span> retValue;
+
+      <span class='commonType'>var</span> sql = GetSql();
+      retValue = <span class='userType'>DataAccess</span>.GetSchemaOnly(sql);
+      <span class='keyWord'>return</span> retValue;
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Private Methods
+
+    <span class='comment'>// Get the SQL string.</span>
+    <span class='modifier'>private</span> <span class='commonType'>string</span> GetSql()
+    {
+      <span class='userType'>StringBuilder</span> builder;
+      <span class='commonType'>string</span> retValue;
+
+      builder = <span class='keyWord'>new</span> <span class='userType'>StringBuilder</span>(128);
+      builder.AppendLine(<span class='text'>"select "</span>);
+      builder.AppendLine(<span class='text'>" ID, "</span>);
+      builder.AppendLine(<span class='text'>" Name, "</span>);
+      builder.AppendLine(<span class='text'>" PrincipleFlag "</span>);
+      builder.AppendLine(<span class='text'>"from Person;"</span>);
+      retValue = builder.ToString();
+      <span class='keyWord'>return</span> retValue;
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Properties
+
+    <span class='comment'>// Gets or sets the DataAccess object.</span>
+    <span class='modifier'>private</span> <span class='userType'>DataAccess</span> DataAccess { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+    <span class='xmlComment'>#endregion</span>
+  }
+}
+</pre>
+  <div class="columns">
+    <h3>Adding Data to a DataGridView</h3>
+    <ul>
+      <li>
+        Add a new WinForms Project named “PersonApp” to the DataAccessTest solution.
+      </li>
+      <li>
+        Add a reference to the PersonDAL project for the PersonApp project.
+      </li>
+      <li>
+        Add a Form named “PersonList” to the PersonApp project.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Data;
+<span class='keyWord'>using</span> System.Linq;
+<span class='keyWord'>using</span> System.Windows.Forms;
+<span class='keyWord'>using</span> PersonDAL;
+
+<span class='keyWord'>namespace</span> PersonApp
+{
+  <span class='modifier'>public</span> <span class='keyWord'>partial</span> <span class='keyWord'>class</span> <span class='userType'>PersonList</span> : Form
+  {
+    <span class='xmlComment'>#region</span> Constructors
+
+    <span class='xmlComment'>/// &lt;summary&lt;Initializes an object instance.&lt;/summary&lt;</span>
+    <span class='modifier'>public</span> <span class='userType'>PersonList</span>()
+    {
+      InitializeComponent();
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Form Event Handlers
+
+    <span class='comment'>// Configures the form and loads the initial control data.</span>
+    <span class='modifier'>private</span> <span class='commonType'>void</span> PersonList_Load(<span class='keyWord'>object</span> sender, EventArgs e)
+    {
+      InitializeControls();
+      DataRetrieve();
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Data Methods
+
+    <span class='comment'>// Retrieves the list rows into a DataGridView Grid.</span>
+    <span class='modifier'>private</span> <span class='commonType'>void</span> DataRetrieve()
+    {
+      <span class='comment'>// Get the data.</span>
+      <span class='userType'>DataTable</span> dataTable = mPersonManager.GetDataTable();
+
+      <span class='comment'>// Add the grid rows.</span>
+      <span class='keyWord'>foreach</span> (<span class='userType'>DataRow</span> dataRow in dataTable.Rows)
+      {
+        <span class='comment'>// Add a new Grid Row.</span>
+        <span class='commonType'>int</span> index = PersonGrid.Rows.Add();
+        <span class='userType'>DataGridViewRow</span> gridRow = PersonGrid.Rows[index];
+        gridRow.Height = 18;
+
+        <span class='comment'>// Add the Data Values to the Grid Row.</span>
+        <span class='keyWord'>foreach</span> (<span class='userType'>DataColumn</span> dataColumn in dataTable.Columns)
+        {
+          <span class='commonType'>string</span> columnName = dataColumn.ColumnName;
+
+          <span class='comment'>// Get the Data Value and create the Cell value.</span>
+          <span class='commonType'>object</span> cellValue = <span class='text'>""</span>;
+          <span class='commonType'>object</span> dataValue = dataRow[columnName];
+          <span class='keyWord'>if</span> (dataValue != null)
+          {
+            cellValue = dataValue.ToString();
+          }
+
+          <span class='comment'>// The DataColumn name must be the same as the Grid Column name.</span>
+          <span class='keyWord'>if</span> (mPersonDisplayNames.Contains(columnName))
+          {
+            <span class='comment'>// Set the Cell value.</span>
+            <span class='userType'>DataGridViewCell</span> cell = gridRow.Cells[columnName];
+            cell.Value = cellValue.ToString();
+          }
+        }
+      }
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Setup Methods
+
+    <span class='comment'>// Configures the controls and loads the selection control data.</span>
+    <span class='modifier'>private</span> <span class='commonType'>void</span> InitializeControls()
+    {
+      <span class='comment'>// Initialize Class Data.</span>
+      mPersonManager = <span class='keyWord'>new</span> <span class='userType'>PersonManager</span>();
+
+      <span class='comment'>// Set initial control values.</span>
+      SetupGridPerson();
+    }
+
+    <span class='comment'>// Setup the grid display columns.</span>
+    <span class='modifier'>private</span> void SetupGridPerson()
+    {
+      <span class='userType'>DataColumnCollection</span> columns;
+
+      <span class='comment'>// Specify the Grid Display Column names.</span>
+      mPersonDisplayNames = new <span class='commonType'>string</span>[]
+      {
+        <span class='text'>"Name"</span>,
+        <span class='text'>"PrincipleFlag"</span>
+      };
+      columns = mPersonManager.GetColumns(mPersonDisplayNames);
+
+      PersonGrid.RowHeadersVisible = false;
+      <span class='keyWord'>foreach</span> (DataColumn dataColumn in columns)
+      {
+        <span class='comment'>// Set Grid Column name the same as the DataColumn name.</span>
+        <span class='commonType'>string</span> name = dataColumn.ColumnName;
+        <span class='commonType'>int</span> index = PersonGrid.Columns.Add(name, name);
+        <span class='userType'>DataGridViewColumn</span> gridColumn = PersonGrid.Columns[index];
+        gridColumn.Width = 150;
+        <span class='keyWord'>if</span> (gridColumn.Name.Equals("PrincipleFlag"
+          , <span class='userType'>StringComparison</span>.CurrentCultureIgnoreCase))
+        {
+          gridColumn.AutoSizeMode = <span class='userType'>DataGridViewAutoSizeColumnMode</span>.Fill;
+        }
+      }
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region</span> Class Data
+
+    <span class='modifier'>private</span> <span class='userType'>PersonManager</span> mPersonManager;
+    <span class='modifier'>private</span> <span class='commonType'>string</span>[] mPersonDisplayNames;
+    #endregion
+  }
+}</pre>
+</body>
+</html>
