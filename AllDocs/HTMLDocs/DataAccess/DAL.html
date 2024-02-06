@@ -205,7 +205,7 @@ GO</pre>
 
 <span class='keyWord'>namespace</span> DataTestDAL
 {
-  &lt;span class='xmlComment'&gt;/// &lt;summary&gt;</span><span class='comment'>Provides object specific data manipulation methods.</span><span class='xmlComment'>&lt;/summary&gt;&lt;/span&gt;
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Provides object specific data manipulation methods.</span><span class='xmlComment'>&lt;/summary&gt;</span>
   <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
     : ObjectManager<Person, Persons>
   {
@@ -215,6 +215,21 @@ GO</pre>
       , <span class='commonType'>string</span> tableName = "Person")
       : <span class='keyWord'>base</span>(dbServiceRef, dataConfigName, tableName)
     {
+      <span class='comment'>// Create the list of database assigned columns.</span>
+      <span class='comment'>// And make sure the AutoIncrement value is set.</span>
+      DbAssignedColumnNames = <span class='keyWord'>new</span> <span class='commonType'>string</span>[]
+      {
+        Person.ColumnID
+      };
+
+      <span class='comment'>// Create the list of lookup column names.</span>
+      <span class='comment'>// This list must include the database assigned columns</span>
+      <span class='comment'>// to contain the returned DB assigned values.</span>
+      LookupColumnNames = <span class='keyWord'>new</span> <span class='commonType'>string</span>[]
+      {
+        Person.ColumnID,
+        Person.ColumnName
+      }
     }
   }
 }</pre>
