@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DAL.html -->
+<html>
+<head>
+  <title>Data Access Layer</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <h2 class="mediumVMargin">The Data Access Layer</h2>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      A Data Access Layer (DAL) is useful for simplifying data access
+      functionality and reuse. It separates the data access code from the
+      calling programs. It also provides a strongly typed, object oriented view
+      of the data.
+    </p>
+    <p class="book">
+      A DAL library usually provides classes for a group of related database
+      tables. These are often classes for a specific application, module or
+      common application function.
+    </p>
+    <p class="book">
+      Since the DAL pattern is used extensively in the LJC Code, the following
+      examples will follow this structure. The sample code will also attempt to
+      use the common LJC structure, formatting and naming conventions.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Create a new Solution named “DataTest”
+      </li>
+      <li>
+        Add a new .NET Framework Library Project named “DataTestDAL” to the
+        DataTest solution.
+      </li>
+      <li>
+        Add a Folder named “Data” to the DataTestDAL project.
+      </li>
+      <li>
+        Add a Folder named “Manager” to the DataTestDAL project.
+      </li>
+    </ul>
+    <p class="book">
+      The following examples use the table created with this script.
+    </p>
+  </div>
+  <pre class="code">
+IF NOT EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
+ WHERE TABLE_NAME = N'Person')
+BEGIN
+CREATE TABLE[dbo].[Person]
+(
+  [ID][bigint] IDENTITY(1,1) NOT NULL,
+  [Name] [nvarchar] (60) NULL,
+  [PrincipleFlag] [bit] NOT NULL,
+  CONSTRAINT[PK_Person]
+  PRIMARY KEY CLUSTERED(
+  [ID] ASC),
+)
+END
+GO</pre>
+  <h3 class="mediumVMargin">The Data Object</h3>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      A Data Object contains public properties for each data value in a data
+      row. It is a strongly typed, object oriented representation of the data
+      row for use in code. A data row is sometimes referred to as a “record”. A
+      data value is sometimes referred to as a “column”.
+    </p>
+    <p class="book">
+      A Data Object usually has the same name as the base table that contains
+      the data columns it represents. It may contain methods for cloning,
+      sorting and displaying an object string identifier.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add a Class named “Person” to the Data folder.
+      </li>
+      <li>
+        If Visual Studio creates the namespace as DataTestDAL.Data, then remove
+        the “.Data” suffix.
+      </li>
+    </ul>
+  </div>
+<pre class="code">
+<span class='keyWord'>using</span> System;
+
+<span class='keyWord'>namespace</span> DataTestDAL
+{
+  <span class='comment'>// The Person table Data Object.</summary></span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Person</span>
+  {
+    <span class='xmlComment'>#region Constructors</span>
+
+    <span class='comment'>// Initializes an object instance.</span>
+    <span class='modifier'>public</span> Person()
+    {
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region Data Methods</span>
+
+    <span class='comment'>// The object string identifier.</span>
+    <span class='modifier'>public</span> <span class='modifier'>override</span> <span class='commonType'>string</span> ToString()
+    {
+      <span class='keyWord'>return</span> Name;
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region Data Properties</span>
+
+    <span class='comment'>// Gets or sets the ID value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>int</span> ID { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+    <span class='comment'>// Gets or sets the Name value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>string</span> Name { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+    <span class='comment'>// Gets or sets the PrincipleFlag value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>bool</span> PrincipleFlag { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region Class Data</span>
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>The table name.</span><span class='xmlComment'></summary></span>
+    <span class='modifier'>public</span> <span class='modifier'>static</span> <span class='commonType'>string</span> TableName = "Person";
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>The ID column name.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+    <span class='modifier'>public</span> <span class='modifier'>static</span> <span class='commonType'>string</span> ColumnID = "ID";
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>The ID column name.</span><span class='xmlComment'>&lt;/summary>&gt;</span>
+    <span class='modifier'>public</span> <span class='modifier'>static</span> <span class='commonType'>string</span> ColumnName = "Name";
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>The ID column name.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+    <span class='modifier'>public</span> <span class='modifier'>static</span> <span class='commonType'>string</span> ColumnPrincipleFlag = "PrincipleFlag";
+
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>The Name maximum length.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+    <span class='modifier'>public</span> <span class='modifier'>static</span> <span class='commonType'>int</span> LengthName = 60;
+    <span class='xmlComment'>#endregion</span>
+  }
+}</pre>
+  <h2 class="mediumVMargin">The Data Object Collection</h2>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      A Data Object Collection can contain multiple Data Object elements. It is
+      a strongly typed, object oriented representation of a set of related data
+      records.
+    </p>
+    <p class="book">
+      A Data Object Collection usually has the plural name of the base table
+      that it represents. It may contain methods for sorting, searching and
+      adding new data records.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add a Class named “Persons” to the Data folder.
+      </li>
+      <li>
+        If Visual Studio creates the namespace as DataTestDAL.Data, then remove
+        the “.Data” suffix.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+
+<span class='keyWord'>namespace</span> DataTestDAL
+{
+  <span class='comment'>// Represents a collection of Person objects.</span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span><Person>
+  {
+  }
+}</pre>
+  <h3 class="mediumVMargin">The Manager Class</h3>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      A Data Manager class contains methods for accessing table data. It is a
+      strongly typed, object oriented class containing standard data access
+      methods for a specific base table and related data columns.
+    </p>
+    <p class="book">
+      A Data Manager usually has the same name as the base table followed with
+      the text “Manager”.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add a Class named “PersonManager” to the Manager folder.
+      </li>
+      <li>
+        If Visual Studio creates the namespace as DataTestDAL.Manager, then
+        remove the “.Manager” suffix.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+<span class='keyWord'>using</span> LJCDBClientLib;
+
+<span class='keyWord'>namespace</span> DataTestDAL
+{
+  &lt;span class='xmlComment'&gt;/// &lt;summary&gt;</span><span class='comment'>Provides object specific data manipulation methods.</span><span class='xmlComment'>&lt;/summary&gt;&lt;/span&gt;
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
+    : ObjectManager<Person, Persons>
+  {
+    <span class='comment'>// Initializes an object instance.</span>
+    <span class='xmlComment'>/// <include path='items/ObjectManagerC/*' file='../../CommonManager.xml' /></span>
+    <span class='modifier'>public</span> PersonManager(DbServiceRef dbServiceRef, <span class='commonType'>string</span> dataConfigName
+      , <span class='commonType'>string</span> tableName = "Person")
+      : <span class='keyWord'>base</span>(dbServiceRef, dataConfigName, tableName)
+    {
+    }
+  }
+}</pre>
+</body>
+</html>

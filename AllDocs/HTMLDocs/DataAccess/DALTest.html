@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DAL.html -->
+<html>
+<head>
+  <title>Data Access Layer</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <h2 class="mediumVMargin">The Test DAL Program</h2>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      For the following examples we will concentrate on the
+      LJCDBDataAccessLib.DbDataAccess class.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add a new Console Project named “DataTestDAL” to the DataTest solution.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCDBClientLib;
+<span class='keyWord'>using</span> LJCDBDataAccessLib;
+<span class='keyWord'>using</span> PersonDAL;
+
+<span class='keyWord'>namespace</span> PersonDALTest
+{
+  <span class='comment'>// The program entry point class.</span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Program</span>
+  {
+    <span class='comment'>// The program entry point function.</span>
+    <span class='modifier'>static</span> <span class='commonType'>void</span> Main(string[] args)
+    {
+      PersonManager personManager = <span class='keyWord'>null</span>;
+      <span class='commonType'>bool</span> success = <span class='keyWord'>true</span>;
+
+      <span class='commonType'>string</span> dataConfigName = "PersonTest";
+      DbServiceRef dbServiceRef = CreateServiceRef(dataConfigName);
+      <span class='keyWord'>if</span> (<span class='keyWord'>null</span> == dbServiceRef || <span class='keyWord'>null</span> == dbServiceRef.DbDataAccess
+        || dbServiceRef.DbDataAccess.IsError)
+      {
+        success = <span class='keyWord'>false</span>;
+      }
+    }
+
+    <span class='xmlComment'>#region Helper Methods</span>
+
+    <span class='comment'>// Creates the DbServiceRef object.</span>
+    <span class='modifier'>private</span> <span class='modifier'>static</span> DbServiceRef CreateServiceRef(string dataConfigName)
+    {
+      DbServiceRef retValue = <span class='keyWord'>new</span> <span class='userType'>DbServiceRef</span>()
+      {
+        DbDataAccess = <span class='keyWord'>new</span> <span class='userType'>DbDataAccess</span>(dataConfigName)
+      };
+      <span class='keyWord'>return</span> retValue;
+    }
+    <span class='xmlComment'>#endregion</span>
+  }
+}</pre>
+  <h3 class="mediumVMargin">The DbServiceRef Class</h3>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The constructor for an ObjectManager derived class takes an
+      LJCDBClientLib.DbServiceRef parameter.
+    </p>
+    <p>
+      The DbServiceRef class contains three properties:
+      <ul class="smallVMargin">
+        <li>
+          DbDataAccess – This is a reference to the Message Data Access object.
+        </li>
+        <li>
+          DbService – This is a reference to the local Data Service object.
+        </li>
+        <li>
+          DbServiceClient – This is a reference to the remote Data Service
+          Proxy class.
+        </li>
+      </ul>
+    </p>
+    <p class="book">
+      The Manager class checks these references in the previous order and uses
+      the first one that is not null.
+    </p>
+    <p class="book">
+      The program starts by create a reference to the DbServiceRef object. It
+      does this by calling the CreateServiceRef() method.
+    </p>
+    <p class="book">
+      The DbServiceRef.DbDataAccess property is initialized with the DataConfig
+      name. This name refers to a DataConfig entry in the DataConfigs.xml file.
+      This file must be available in the same folder as the calling program. The
+      program folder must also contain the LJCDataConfig.dll library.
+    </p>
+  </div>
+  <pre class="code">
+&lt;?xml version="1.0" ?&gt;
+&lt;DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;DataConfig&gt;
+  &lt;Name&gt;PersonTest&lt;/Name&gt;
+  &lt;DbServer&gt;DDbServiceName&lt;/DbServer&gt;
+  &lt;Database&gt;DatabaseName&lt;/Database&gt;
+  &lt;ConnectionType&gt;SQLServer&lt;/ConnectionType&gt;
+  &lt;/DataConfig&gt;
+&lt;/DataConfigs&gt;</pre>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The program folder must also contain the ConnectionTemplate.xml file.
+    </p>
+    <p class="book">
+      The ConnectionType value in the DataConfig.xml file refers to the Name
+      value in the ConnectionTemplate.xml file. The ConnectionTemplate is used
+      to create the Connection String for the program data access. It changes
+      the replaceable parameters in braces with the associated DataConfig
+      values.
+    </p>
+  </div>
+  <pre class="code">
+&lt;?xml version="1.0" ?&gt;
+&lt;ConnectionTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionTemplate&gt;
+  &lt;Name&gt;SQLServer&lt;/Name&gt;
+  &lt;Template&gt;Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True&lt;/Template&gt;
+  &lt;/ConnectionTemplate&gt;
+&lt;/ConnectionTemplates&gt;</pre>
+  <h3 class="mediumVMargin">The ObjectManager Derived Class</h3>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add a function to the Program class to create the PersonManager object.
+      </li>
+      <li>
+        Add the CreatePersonManager() function to the Program class, after the
+        CreateServiceRef() function.
+      </li>
+    </ul>
+  </div>
+  <pre>
+<span class='comment'>// Creates the PersonManager object.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> PersonManager CreatePersonManager(DbServiceRef dbServiceRef
+  , <span class='commonType'>string</span> dataConfigName)
+{
+  PersonManager retValue = <span class='keyWord'>new</span> <span class='userType'>PersonManager</span>(dbServiceRef, dataConfigName);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      In the Program class, Main() function, add the code to create the
+      PersonManager object immediately after the code that creates the
+      DbServiceRef object.
+    </p>
+  </div>
+  <pre class="code">
+<span class='keyWord'>if</span> (success)
+{
+  personManager = CreatePersonManager(dbServiceRef, dataConfigName);
+  <span class='keyWord'>if</span> (<span class='keyWord'>null</span> == personManager)
+  {
+    success = <span class='keyWord'>false</span>;
+  }
+}</pre>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The Manager class inherits data access methods from the ObjectManager base class. The most commonly used of these methods are: Add(), Delete(), Load(), Retrieve() and Update(). We will create test methods for each of these common manager methods.
+    </p>
+    <h3>The Load() Method</h3>
+    <ul class="smallVMargin">
+      <li>
+        The inherited PersonManager.Load() method retrieves multiple records
+        from the configured table. If there are no specified parameters, it
+        retrieves all available records.
+      </li>
+      <li>
+        Add the WriteRowString() function to the Program class, “Helper
+        Functions” region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='comment'>// Write the record string.</span>
+
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>string</span> WriteRowString(Person person)
+{
+  <span class='commonType'>string</span> retValue = <span class='keyWord'>null</span>;
+  <span class='keyWord'>if</span> (person != null)
+  {
+    retValue = <span class='commonType'>string</span>.Format("{0}, {1}, {2}", person.ID
+      , person.Name, person.PrincipleFlag);
+    Console.WriteLine(retValue);
+  }
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add the “Test Functions” region to the Program class after the Main()
+        function.
+      </li>
+      <li>
+        Add the TestLoad() function to the Program class.
+      </li>
+    </ul>
+  </div>
+  <pre class="code>">
+<span class='xmlComment'>#region Test Methods</span>
+
+<span class='comment'>// Test the Load function.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> TestLoad(PersonManager personManager)
+{
+  Console.WriteLine();
+  Console.WriteLine("TestLoad");
+
+  Persons persons = personManager.Load();
+  <span class='keyWord'>if</span> (persons != <span class='keyWord'>null</span> && persons.Count > 0)
+  {
+    <span class='keyWord'>foreach</span> (Person person <span class='keyWord'>in</span> persons)
+    {
+      WriteRowString(person);
+    }
+  }
+}
+<span class='xmlComment'>#endregion</span></pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add the test function call section to the Program class, Main()
+        function. This code must be added after the call to
+        CreatePersonManager().
+      </li>
+    </ul>
+  </div>
+  <pre class="code>">
+<span class='keyWord'>if</span> (success)
+{
+  <span class='comment'>// Test function calls.</span>
+  TestLoad(personManager);
+
+  Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
+  Console.ReadKey();
+}</pre>
+  <h3 class="mediumVMargin">The Add() Method</h3>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      The inherited PersonManager.Add() method adds a new record to the
+      configured table.
+    </p>
+    <h4 class="mediumVMargin">Database Assigned Values</h4>
+    <p class="book">
+      The Add() method has some unique functionality to handle database assigned
+      values. These are values that are assigned by the database when a column
+      is defined as AutoIncrement or by a database trigger.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add the following code in the manager constructor to identify the database
+        assigned keys and the added record lookup value.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+// Create the list of database assigned columns.
+// And make sure the AutoIncrement value is set.
+DbAssignedColumnNames = new string[]
+{
+  Person.ColumnID
+};
+
+// Create the list of lookup column names.
+// This list must include the database assigned columns
+// to contain the returned DB assigned values.
+LookupColumnNames = new string[]
+{
+  Person.ColumnID,
+  Person.ColumnName
+};</pre>
+  <div class="columnsAuto"">
+    <ul class="smallVMargin">
+      <li>
+        Add the “GetKey Methods” region to the PersonManager class.
+      </li>
+      <li>
+        Add the SetExcludeKeys() method to the PersonManager class, “GetKey
+        Methods” region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+#region GetKey Methods
+
+// Sets the temporary exclude keys.
+/// <include path='items/SetExcludeKeys/*' file='../../CommonManager.xml'/>
+public void SetExcludeKeys()
+{
+  string[] excludeNames = new string[]
+  {
+    Person.ColumnPrincipleFlag
+  };
+  SetExcludeKeyValues(excludeNames);
+}
+#endregion</pre>
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add the TestAdd() function to the Program class, “TestFunctions” region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+// Test the Add function.
+private static void TestAdd(PersonManager personManager)
+{
+  Console.WriteLine();
+  Console.WriteLine("TestAdd");
+
+  // Delete existing "Added" record to allow for new Add.
+  Person keyRecord = new Person()
+  {
+    Name = "Added"
+  };
+  personManager.SetExcludeKeys();
+  Person lookupRecord = personManager.Retrieve(keyRecord);
+  if (lookupRecord != null)
+  {
+    personManager.SetExcludeKeys();
+    personManager.Delete(keyRecord);
+  }
+
+  // Add record
+  Person dataRecord = new Person()
+  {
+    Name = "Added",
+    PrincipleFlag = false
+  };
+  Person addedRecord = personManager.Add(dataRecord);
+  if (addedRecord != null)
+  {
+    dataRecord.ID = addedRecord.ID;
+    WriteRowString(dataRecord);
+  }
+}</pre>
+  <div class="columns">
+    <ul class="smallVMargin">
+      <li>
+        Add the TestAdd(personManager) function call to the Program class, “Test function calls.” section.
+        The Key Record Object
+      </li>
+    </ul>
+    <p class="book">
+      The key record data object is used to modify a data method to restrict it
+      to those records that match the key record initialized properties.
+    </p>
+    <p class="book">
+      There are some properties that are automatically initialized in a data
+      object. These are properties such as numeric and DateTime. Numeric
+      properties are automatically initialized to zero.
+    </p>
+    <p class="book">
+      If we create a Person key record and set the Name property, the
+      PrincipleFlag property is automatically initialized to zero. This causes
+      the personManager.Retrieve(keyRecord) method to internally create the
+      following SQL statement.
+    </p>
+  </div>
+  <pre class="code">
+select ID, Name, PrincipleFlag
+from Person
+where Name = ‘Added’ and PrincipleFlag = ‘0’.</pre>
+  <div class="columns">
+    <p class="book">
+      To prevent the PrincipleFlag value from being included in the SQL
+      statement, we first call the SetExcludeKeys() method.
+    </p>
+    <p class="book">
+      The SetExcludeKeys() manager method is used to temporarily exclude
+      specific fields from the SQL statement created from the KeyRecord object.
+      The manager exclude keys are cleared after a call to any data access
+      method.
+    </p>
+  </div>
+</body>
+</html>
