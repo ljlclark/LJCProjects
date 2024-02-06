@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DAL.html -->
+<html>
+<head>
+  <title>Data Access Layer</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <h2 class="mediumVMargin">The Test DAL Program</h2>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      For the following examples we will concentrate on the
+      LJCDBDataAccessLib.DbDataAccess class.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add a new Console Project named “DataTestDAL” to the DataTest solution.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCDBClientLib;
+<span class='keyWord'>using</span> LJCDBDataAccessLib;
+<span class='keyWord'>using</span> PersonDAL;
+
+<span class='keyWord'>namespace</span> PersonDALTest
+{
+  <span class='comment'>// The program entry point class.</span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Program</span>
+  {
+    <span class='comment'>// The program entry point function.</span>
+    <span class='modifier'>static</span> <span class='commonType'>void</span> Main(string[] args)
+    {
+      PersonManager personManager = <span class='keyWord'>null</span>;
+      <span class='commonType'>bool</span> success = <span class='keyWord'>true</span>;
+
+      <span class='commonType'>string</span> dataConfigName = "PersonTest";
+      DbServiceRef dbServiceRef = CreateServiceRef(dataConfigName);
+      <span class='keyWord'>if</span> (<span class='keyWord'>null</span> == dbServiceRef || <span class='keyWord'>null</span> == dbServiceRef.DbDataAccess
+        || dbServiceRef.DbDataAccess.IsError)
+      {
+        success = <span class='keyWord'>false</span>;
+      }
+    }
+
+    <span class='xmlComment'>#region Helper Methods</span>
+
+    <span class='comment'>// Creates the DbServiceRef object.</span>
+    <span class='modifier'>private</span> <span class='modifier'>static</span> DbServiceRef CreateServiceRef(string dataConfigName)
+    {
+      DbServiceRef retValue = <span class='keyWord'>new</span> <span class='userType'>DbServiceRef</span>()
+      {
+        DbDataAccess = <span class='keyWord'>new</span> <span class='userType'>DbDataAccess</span>(dataConfigName)
+      };
+      <span class='keyWord'>return</span> retValue;
+    }
+    <span class='xmlComment'>#endregion</span>
+  }
+}</pre>
+  <h3 class="mediumVMargin">The DbServiceRef Class</h3>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The constructor for an ObjectManager derived class takes an
+      LJCDBClientLib.DbServiceRef parameter.
+    </p>
+    <p class="smallVMargin">
+      The DbServiceRef class contains three properties:
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        DbDataAccess – This is a reference to the Message Data Access object.
+      </li>
+      <li>
+        DbService – This is a reference to the local Data Service object.
+      </li>
+      <li>
+        DbServiceClient – This is a reference to the remote Data Service
+        Proxy class.
+      </li>
+    </ul>
+    <p class="book">
+      The Manager class checks these references in the previous order and uses
+      the first one that is not null.
+    </p>
+    <p class="book">
+      The program starts by create a reference to the DbServiceRef object. It
+      does this by calling the CreateServiceRef() method.
+    </p>
+    <p class="book">
+      The DbServiceRef.DbDataAccess property is initialized with the DataConfig
+      name. This name refers to a DataConfig entry in the DataConfigs.xml file.
+      This file must be available in the same folder as the calling program. The
+      program folder must also contain the LJCDataConfig.dll library.
+    </p>
+  </div>
+  <pre class="code">
+&lt;?xml version="1.0" ?&gt;
+&lt;DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;DataConfig&gt;
+  &lt;Name&gt;PersonTest&lt;/Name&gt;
+  &lt;DbServer&gt;DDbServiceName&lt;/DbServer&gt;
+  &lt;Database&gt;DatabaseName&lt;/Database&gt;
+  &lt;ConnectionType&gt;SQLServer&lt;/ConnectionType&gt;
+  &lt;/DataConfig&gt;
+&lt;/DataConfigs&gt;</pre>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The program folder must also contain the ConnectionTemplate.xml file.
+    </p>
+    <p class="book">
+      The ConnectionType value in the DataConfig.xml file refers to the Name
+      value in the ConnectionTemplate.xml file. The ConnectionTemplate is used
+      to create the Connection String for the program data access. It changes
+      the replaceable parameters in braces with the associated DataConfig
+      values.
+    </p>
+  </div>
+  <pre class="code">
+&lt;?xml version="1.0" ?&gt;
+&lt;ConnectionTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionTemplate&gt;
+  &lt;Name&gt;SQLServer&lt;/Name&gt;
+  &lt;Template&gt;Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True&lt;/Template&gt;
+  &lt;/ConnectionTemplate&gt;
+&lt;/ConnectionTemplates&gt;</pre>
+  <h3 class="mediumVMargin">The ObjectManager Derived Class</h3>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add a function to the Program class to create the PersonManager object.
+      </li>
+      <li>
+        Add the CreatePersonManager() function to the Program class, after the
+        CreateServiceRef() function.
+      </li>
+    </ul>
+  </div>
+  <pre>
+<span class='comment'>// Creates the PersonManager object.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> PersonManager CreatePersonManager(DbServiceRef dbServiceRef
+  , <span class='commonType'>string</span> dataConfigName)
+{
+  PersonManager retValue = <span class='keyWord'>new</span> <span class='userType'>PersonManager</span>(dbServiceRef, dataConfigName);
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      In the Program class, Main() function, add the code to create the
+      PersonManager object immediately after the code that creates the
+      DbServiceRef object.
+    </p>
+  </div>
+  <pre class="code">
+<span class='keyWord'>if</span> (success)
+{
+  personManager = CreatePersonManager(dbServiceRef, dataConfigName);
+  <span class='keyWord'>if</span> (<span class='keyWord'>null</span> == personManager)
+  {
+    success = <span class='keyWord'>false</span>;
+  }
+}</pre>
+  <!-- ******************************* -->
+  <div class="columns">
+    <p class="book">
+      The Manager class inherits data access methods from the ObjectManager base
+      class. The most commonly used of these methods are: Add(), Delete(),
+      Load(), Retrieve() and Update(). We will create test methods for each of
+      these common manager methods.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add the WriteRowString() function to the Program class, “Helper
+        Functions” region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='comment'>// Write the record string.</span>
+
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>string</span> WriteRowString(Person person)
+{
+  <span class='commonType'>string</span> retValue = <span class='keyWord'>null</span>;
+  <span class='keyWord'>if</span> (person != null)
+  {
+    retValue = <span class='commonType'>string</span>.Format("{0}, {1}, {2}", person.ID
+      , person.Name, person.PrincipleFlag);
+    Console.WriteLine(retValue);
+  }
+  <span class='keyWord'>return</span> retValue;
+}</pre>
+  <a href="DALTestLoad.html">The DALTest Load() method.</a>
+</body>
+</html>
