@@ -13,3 +13,19 @@
   column-count: 2;
   column-width: 250px;
 }
+
+.columnsAuto {
+  column-count: 2;
+  column-fill: auto;
+  column-width: 250px;
+}
+
+.mediumVMargin {
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+
+.smallVMargin {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}

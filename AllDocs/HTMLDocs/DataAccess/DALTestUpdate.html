@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DALTestUpdate.html -->
+<html>
+<head>
+  <title>DALTest Update</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <h4 class="mediumVMargin">The Update() Method</h4>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      The inherited PersonManager.Update() method updates the specified
+      dataRecord that matches the key specified by the keyRecord parameter.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add the TestUpdate() function to the Program class, “TestFunctions”
+        region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='comment'>// Test the Update function.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> TestUpdate(PersonManager personManager)
+{
+  Console.WriteLine();
+  Console.WriteLine("TestUpdate");
+
+  <span class='comment'>// Toggle "Updated" value to allow for update.</span>
+  Person keyRecord = <span class='keyWord'>new</span> <span class='userType'>Person</span>();
+  <span class='userType'>Person</span> dataRecord = GetWithName("AddedUpdated", personManager);
+  <span class='keyWord'>if</span> (dataRecord != null)
+  {
+    keyRecord.Name = "AddedUpdated";
+    dataRecord.Name = "Added";
+  }
+  <span class='keyWord'>else</span>
+  {
+    dataRecord = GetWithName("Added", personManager);
+    <span class='keyWord'>if</span> (dataRecord != null)
+    {
+      keyRecord.Name = "Added";
+      dataRecord.Name = "AddedUpdated";
+    }
+  }
+
+  <span class='comment'>// Update the record.</span>
+  List<string> columnNames = <span class='keyWord'>new</span> <span class='userType'>List</span><string>()
+  {
+    <span class='userType'>Person</span>.ColumnName
+  };
+  personManager.SetExcludeKeys();
+  personManager.Update(dataRecord, keyRecord, columnNames);
+}</pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add the TestUpdate(personManager) function call to the Program class,
+        “Test function calls.” section.
+      </li>
+    </ul>
+  </div>
+  <br />
+</body>
+</html>
