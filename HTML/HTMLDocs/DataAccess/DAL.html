@@ -91,7 +91,7 @@ GO</pre>
 
 <span class='keyWord'>namespace</span> DataTestDAL
 {
-  <span class='comment'>// The Person table Data Object.</summary></span>
+  <span class='comment'>// The Person table Data Object.</span>
   <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Person</span>
   {
     <span class='xmlComment'>#region Constructors</span>
@@ -196,6 +196,10 @@ GO</pre>
         If Visual Studio creates the namespace as DataTestDAL.Manager, then
         remove the &quot;.Manager&quot; suffix.
       </li>
+      <li>
+        The PersonManager class inherits from the generic class
+        LJCDBClientLib.ObjectManager.
+      </li>
     </ul>
   </div>
   <pre class="code">
@@ -233,5 +237,7 @@ GO</pre>
     }
   }
 }</pre>
+  <br />
+  <a href="DALTest.html">The DAL Test Program</a>
 </body>
 </html>
