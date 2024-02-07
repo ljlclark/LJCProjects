@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DALTestDelete.html -->
+<html>
+<head>
+  <title>DAL Test Delete</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <a href="DALTestUpdate.html">The DAL Test Update() Method</a>
+  <br />
+  <h4 class="mediumVMargin">The Delete() Method</h4>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <p class="book">
+      The inherited PersonManager.Delete() method deletes the records that
+      matches the key specified by the keyRecord parameter.
+    </p>
+    <ul class="smallVMargin">
+      <li>
+        Add the TestDelete() function to the Program class, "TestFunctions"
+        region.
+      </li>
+    </ul>
+  </div>
+  <pre class="code">
+<span class='comment'>// Test the Delete function.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> TestDelete(string name, PersonManager personManager)
+{
+  Console.WriteLine();
+  Console.WriteLine("TestDelete");
+
+  <span class='keyWord'>if</span> (NetString.HasValue(name))
+  {
+    Person keyRecord = <span class='keyWord'>new</span> <span class='userType'>Person</span>()
+    {
+      Name = name
+    };
+    personManager.SetExcludeKeys();
+    personManager.Delete(keyRecord);
+  }
+}</pre>
+  <!-- ******************************* -->
+  <div class="columnsAuto">
+    <ul class="smallVMargin">
+      <li>
+        Add the TestDelete(personManager) function call to the Program class,
+        "Test function calls." section.
+      </li>
+    </ul>
+  </div>
+  <br />
+</body>
+</html>
