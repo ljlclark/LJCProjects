@@ -20,12 +20,13 @@
   column-width: 250px;
 }
 
-.mediumVMargin {
+.headingMargin {
   margin-bottom: 5px;
   margin-top: 6px;
 }
 
-.smallVMargin {
+.listMargin {
   margin-bottom: 4px;
   margin-top: 4px;
+  padding-left: 25px;
 }

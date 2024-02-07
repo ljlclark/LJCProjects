@@ -5,93 +5,102 @@
 <html>
 <head>
   <title>DataAccess Tutorial</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/CodeDoc.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
   <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
 </head>
 <body>
-  <div class="columns">
-    <p class="book">
-      This is an abbreviated tutorial showing how to use the LJCDataAccess
-      library and DataAccess class to retrieve data from a database and display
-      it in a DataGridView control.
-    </p>
-    <h2>The Data Access Library</h2>
-    <p class="book">
-      The Data Access library (LJCDataAccess.dll) contains classes that provide
-      common functionality for program access to database tables.
-    </p>
-    <h3>DataAccess Class</h3>
-    <p class="book">
-      This class implements an ADO.NET SQL Data Access Control layer.
-    </p>
-    <p class="book">
-      The Data Access class encapsulates the repetitive code required to
-      perform common database functions using ADO.NET. This reduces the amount
-      of application code required to access this functionality and provides a
-      standard location for implementing common best practices.
-    </p>
-    <p class="book">
-      This class is capable of connecting using the SQL Server data provider,
-      OLEDB driver, ODBC driver or MySQL data provider.
-    </p>
-    <p class="book">
-      The following examples use the SQL Server table created with this TSQL script.
-    </p>
-  </div>
-  <pre>
-  IF NOT EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
-  WHERE TABLE_NAME = N'Person')
-  BEGIN
-  CREATE TABLE[dbo].[Person]
-  (
-    [ID][int] IDENTITY(1,1) NOT NULL,
-    [Name] [nvarchar] (60) NULL,
-    [PrincipleFlag] [bit] NOT NULL,
-    CONSTRAINT[PK_Person]
-    PRIMARY KEY CLUSTERED(
-    [ID] ASC),
-  )
-  END
-  GO
-  insert into Person
-    (Name, PrincipleFlag)
-  values
-    ('John Doe', 1),
-    ('Jane Doe', 0);
-  GO</pre>
-  <div class="columns">
-    <ul>
-      <li>
-        Create a new Solution named “DataAccessTest” and a .NET Framework WinForms project named “PersonApp”.
-      </li>
-      <li>
-        Add a new .NET Framework Class Library Project named “PersonDAL” to the DataAccessTest solution.
-      </li>
-      <li>
-        Create a folder named “External” under the project folder.
-      </li>
-      <li>
-        Copy the files LJCDataAccess.dll and LJCNetCommon.dll to the “External” folder.
-      </li>
-      <li>
-        Copy the file LJCNetCommon.dll to the PersonDAL\bin\Debug folder.
-      </li>
-      <li>
-        Add a reference to the External\LJCDataAccess.dll file for the PersonDAL project and set the reference “Copy Local” property to “False”.
-        Creating the Custom DataManager Class
-        Create a Folder named “Manager” in the PersonDAL project.
-      </li>
-      <li>
-        Add a Class named “PersonManager” in the Manager folder. This class is customized for the “Person” result set.
-      </li>
-    </ul>
-    <h3>GetDataTable() Method</h3>
-    </p>
-    <p class="book">
-      This is one of the most commonly used DataAccess methods.
-    </p>
-  </div>
-  <pre class="code">
+  <div class="page">
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <p class="book">
+        This is an abbreviated tutorial showing how to use the LJCDataAccess
+        library and DataAccess class to retrieve data from a database and display
+        it in a DataGridView control.
+      </p>
+      </div>
+      <h2 class="headingMargin">The Data Access Library</h2>
+    <!-- ****************************** -->
+    <div class="columns">
+      <p class="book">
+        The Data Access library (LJCDataAccess.dll) contains classes that provide
+        common functionality for program access to database tables.
+      </p>
+      <h3 class="headingMargin">DataAccess Class</h3>
+      <p class="book">
+        This class implements an ADO.NET SQL Data Access Control layer.
+      </p>
+      <p class="book">
+        The Data Access class encapsulates the repetitive code required to
+        perform common database functions using ADO.NET. This reduces the amount
+        of application code required to access this functionality and provides a
+        standard location for implementing common best practices.
+      </p>
+      <p class="book">
+        This class is capable of connecting using the SQL Server data provider,
+        OLEDB driver, ODBC driver or MySQL data provider.
+      </p>
+      <p class="book">
+        The following examples use the SQL Server table created with this TSQL script.
+      </p>
+    </div>
+    <pre class="code">
+IF NOT EXISTS(SELECT* FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = N'Person')
+BEGIN
+CREATE TABLE[dbo].[Person]
+(
+  [ID][int] IDENTITY(1,1) NOT NULL,
+  [Name] [nvarchar] (60) NULL,
+  [PrincipleFlag] [bit] NOT NULL,
+  CONSTRAINT[PK_Person]
+  PRIMARY KEY CLUSTERED(
+  [ID] ASC),
+)
+END
+GO
+insert into Person
+  (Name, PrincipleFlag)
+values
+  ('John Doe', 1),
+  ('Jane Doe', 0);
+GO</pre>
+    <!-- ****************************** -->
+    <div class="columns">
+      <ul class="listMargin">
+        <li>
+          Create a new Solution named “DataAccessTest” and a .NET Framework WinForms project named “PersonApp”.
+        </li>
+        <li>
+          Add a new .NET Framework Class Library Project named “PersonDAL” to the DataAccessTest solution.
+        </li>
+        <li>
+          Create a folder named “External” under the project folder.
+        </li>
+        <li>
+          Copy the files LJCDataAccess.dll and LJCNetCommon.dll to the “External” folder.
+        </li>
+        <li>
+          Copy the file LJCNetCommon.dll to the PersonDAL\bin\Debug folder.
+        </li>
+        <li>
+          Add a reference to the External\LJCDataAccess.dll file for the PersonDAL project and set the reference “Copy Local” property to “False”.
+          Creating the Custom DataManager Class
+          Create a Folder named “Manager” in the PersonDAL project.
+        </li>
+        <li>
+          Add a Class named “PersonManager” in the Manager folder. This class is customized for the “Person” result set.
+        </li>
+      </ul>
+    </div>
+    <h3 class="headingMargin">GetDataTable() Method</h3>
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <p class="book">
+        This is one of the most commonly used DataAccess methods.
+      </p>
+    </div>
+    <pre class="code">
 <span class='keyWord'>using</span> System.Data;
 <span class='keyWord'>using</span> System.Text;
 <span class='keyWord'>using</span> LJCDataAccess;
@@ -187,23 +196,23 @@
     <span class='modifier'>private</span> <span class='userType'>DataAccess</span> DataAccess { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
     <span class='xmlComment'>#endregion</span>
   }
-}
-</pre>
-  <div class="columns">
-    <h3>Adding Data to a DataGridView</h3>
-    <ul>
-      <li>
-        Add a new WinForms Project named “PersonApp” to the DataAccessTest solution.
-      </li>
-      <li>
-        Add a reference to the PersonDAL project for the PersonApp project.
-      </li>
-      <li>
-        Add a Form named “PersonList” to the PersonApp project.
-      </li>
-    </ul>
-  </div>
-  <pre class="code">
+}</pre>
+    <h3 class="headingMargin">Adding Data to a DataGridView</h3>
+    <!-- ****************************** -->
+    <div class="columns">
+      <ul class="listMargin">
+        <li>
+          Add a new WinForms Project named “PersonApp” to the DataAccessTest solution.
+        </li>
+        <li>
+          Add a reference to the PersonDAL project for the PersonApp project.
+        </li>
+        <li>
+          Add a Form named “PersonList” to the PersonApp project.
+        </li>
+      </ul>
+    </div>
+    <pre class="code">
 <span class='keyWord'>using</span> System;
 <span class='keyWord'>using</span> System.Data;
 <span class='keyWord'>using</span> System.Linq;
@@ -323,5 +332,6 @@
     #endregion
   }
 }</pre>
+  </div>
 </body>
 </html>
