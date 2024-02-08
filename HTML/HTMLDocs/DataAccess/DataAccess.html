@@ -85,7 +85,11 @@ GO</pre>
         </li>
         <li>
           Add a reference to the External\LJCDataAccess.dll file for the PersonDAL project and set the reference “Copy Local” property to “False”.
-          Creating the Custom DataManager Class
+        </li>
+      </ul>
+      <h4 class="headingMargin">Creating the Custom DataManager Class</h4>
+      <ul class="listMargin">
+        <li>
           Create a Folder named “Manager” in the PersonDAL project.
         </li>
         <li>
@@ -107,12 +111,12 @@ GO</pre>
 
 <span class='keyWord'>namespace</span> PersonDAL
 {
-  <span class='xmlComment'>/// &lt;summary&gt;Provides Table specific data manipulation methods.&lt;/summary&gt;</span>
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class="comment">Provides Table specific data manipulation methods.</span><span class="xmlComment">&lt;/summary&gt;</span>
   <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
   {
     <span class='xmlComment'>#region</span> Constructors
 
-    <span class='xmlComment'>/// &lt;summary&gt;Initializes an object instance.&lt;/summary&gt;</span>
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class="comment">Initializes an object instance.</span><span class="xmlComment">&lt;/summary&gt;</span>
     <span class='modifier'>public</span> PersonManager()
     {
       <span class='commonType'>var</span> dataSource = <span class='text'>"DESKTOP-PDPBE34"</span>;
@@ -124,10 +128,10 @@ GO</pre>
     <span class='xmlComment'>#region</span> Public Methods
 
     <span class='xmlComment'>/// &lt;summary&gt;</span>
-    <span class='xmlComment'>/// Get a DataColumn collection from the specified ColumnName values.</span>
+    <span class='xmlComment'>/// </span> <span class="comment">Get a DataColumn collection from the specified ColumnName values.</span>
     <span class='xmlComment'>/// &lt;/summary&gt;</span>
-    <span class='xmlComment'>/// &lt;param name="columnNames"&gt;The Column Name array.&lt;/param&gt;</span>
-    <span class='xmlComment'>/// &lt;returns&gt;The DataColumn collection.&lt;/returns&gt;</span>
+    <span class='xmlComment'>/// &lt;param name="</span>columnNames<span class="xmlComment">"&gt;</span><span class="comment">The Column Name array.</span><span class="xmlComment">&lt;/param&gt;</span>
+    <span class='xmlComment'>/// &lt;returns&gt;</span><span class="comment">The DataColumn collection.</span><span class="xmlComment">&lt;/returns&gt;</span>
     <span class='modifier'>public</span> <span class='userType'>DataColumnCollection</span> GetColumns(string[] columnNames = null)
     {
       <span class='userType'>DataColumnCollection</span> retValue;
@@ -144,7 +148,7 @@ GO</pre>
       <span class='keyWord'>return</span> retValue;
     }
 
-    <span class='xmlComment'>/// &lt;summary&gt;Executes the Select statement and retrieves the DataTable object.&lt;/summary&gt;</span>
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class="comment">Executes the Select statement and retrieves the DataTable object.</span><span class="xmlComment">&lt;/summary&gt;</span>
     <span class='modifier'>public</span> <span class='userType'>DataTable</span> GetDataTable()
     {
       <span class='userType'>DataTable</span> retValue;
@@ -225,7 +229,7 @@ GO</pre>
   {
     <span class='xmlComment'>#region</span> Constructors
 
-    <span class='xmlComment'>/// &lt;summary&lt;Initializes an object instance.&lt;/summary&lt;</span>
+    <span class='xmlComment'>/// &lt;summary&gt;</span><span class="comment">Initializes an object instance.</span><span class="cmlComment">&lt;/summary&lt;</span>
     <span class='modifier'>public</span> <span class='userType'>PersonList</span>()
     {
       InitializeComponent();
