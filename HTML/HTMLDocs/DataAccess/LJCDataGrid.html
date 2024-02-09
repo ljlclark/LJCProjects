@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDataGrid.html -->
+<html>
+<head>
+  <title>LJCDataGrid</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/CodeDoc.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/HTMLBooks.css" />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <p class="book">
+        This example uses the <a href="DataAccess.html">DataAccess</a> code.
+      </p>
+    </div>
+    <br />
+    <h2 class="headingMargin">Adding Data to an LJCDataGrid</h2>
+    <pre class="code">
+<span class='comment'>// Retrieves the list rows into a LJCDataGrid Grid.</span>
+<span class='modifier'>private</span> <span class='commonType'>void</span> DataRetrieveDataGrid()
+{
+  <span class='comment'>// Get the data.</span>
+  DataTable dataTable = mPersonManager.GetDataTable();
+
+  <span class='comment'>// Add the grid rows.</span>
+  <span class='keyWord'>foreach</span> (DataRow dataRow <span class='keyWord'>in</span> dataTable.Rows)
+  {
+    <span class='comment'>// Add a new LJCGridRow object.</span>
+    LJCGridRow gridRow = PersonGrid.LJCRowAdd();
+
+    <span class='comment'>// Add the Data Values to the Grid Row.</span>
+    <span class='keyWord'>foreach</span> (DataColumn dataColumn <span class='keyWord'>in</span> dataTable.Columns)
+    {
+      <span class='comment'>// Set the Cell value.</span>
+      <span class='comment'>// The DataColumn name is the same as the Grid Column name.</span>
+      <span class='commonType'>string</span> columnName = dataColumn.ColumnName;
+      gridRow.LJCSetCellText(columnName, dataRow[columnName]);
+    }
+  }
+}</pre>
+    <h4 class="headingMargin">Using Data Object Mapping</h4>
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <ul class="listMargin">
+        <li>
+          Add a Folder named “Data” to the PersonDAL project.
+        </li>
+        <li>
+          Add a Class named “Person” to the Data folder.
+        </li>
+      </ul>
+    </div>
+    <pre class="code">
+<span class='keyWord'>using</span> System;
+
+<span class='keyWord'>namespace</span> PersonDAL
+{
+  <span class='comment'>// The Person table Data Object.</summary></span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Person</span>
+  {
+    <span class='xmlComment'>#region Data Methods</span>
+
+    <span class='modifier'>public</span> <span class='modifier'>override</span> <span class='commonType'>string</span> ToString()
+    {
+      <span class='keyWord'>return</span> <span class='commonType'>string</span>.Format("{0}-{1}", ID, Name);
+    }
+    <span class='xmlComment'>#endregion</span>
+
+    <span class='xmlComment'>#region Data Properties</span>
+
+    <span class='comment'>// Gets or sets the ID value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>int</span> ID { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+    <span class='comment'>// Gets or sets the Name value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>string</span> Name { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+    <span class='comment'>// Gets or sets the PrincipleFlag value.</span>
+    <span class='modifier'>public</span> <span class='commonType'>bool</span> PrincipleFlag { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+    <span class='xmlComment'>#endregion</span>
+  }
+}</pre>
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <ul class="listMargin">
+        <li>
+          Add a Class named “Persons” to the Data folder.
+        </li>
+      </ul>
+    </div>
+    <pre class="code">
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+
+<span class='keyWord'>namespace</span> PersonDAL
+{
+  <span class='comment'>// Represents a collection of Person objects.</span>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span><Person>
+  {
+  }
+}</pre>
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <ul class="listMargin">
+        <li>
+          Add the “Retrieve/Load Methods region to the PersonManager class after
+          the Constructors region.
+        </li>
+        <li>
+          Add the Load() method to the Retrieve/Load Methods region.
+        </li>
+      </ul>
+    </div>
+    <pre class="code">
+<span class='xmlComment'>#region Retrieve/Load Methods</span>
+
+<span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Loads a collection of data records.</span><span class='xmlComment'>&lt;/summary&gt;</span>;
+<span class='modifier'>public</span> Person Load()
+{
+  PersonTests retValue = <span class='keyWord'>null</span>;
+
+  DataTable dataTable = GetDataTable();
+  retValue = CreatePersons(dataTable);
+  <span class='keyWord'>return</span> retValue;
+}
+<span class='xmlComment'>#endregion</span></pre>
+    <!-- ****************************** -->
+    <div class="columnsAuto">
+      <ul class="listMargin">
+        <li>
+          Add the DataRetrievePerson() method to the PersonList form in region
+          Data Methods.
+        </li>
+      </ul>
+    </div>
+    <pre class="code">
+<span class='comment'>// Retrieves the list rows into an LJCDataGrid using a Data Object.</span>
+<span class='modifier'>private</span> <span class='commonType'>void</span> DataRetrievePerson()
+{
+  <span class='comment'>// Get the Data Object Collection.</span>
+  Persons persons = mPersonManager.Load();
+
+  <span class='keyWord'>foreach</span> (Person person <span class='keyWord'>in</span> persons)
+  {
+    <span class='comment'>// Add a new LJCGridRow object.</span>
+    LJCGridRow gridRow = PersonGrid.LJCRowAdd();
+
+    <span class='comment'>// Add the Data Values to the Grid Row.</span>
+    <span class='comment'>// The DataObject Property name is used as the Grid Column name.</span>
+    PersonGrid.LJCRowSetValues(gridRow, person);
+
+    <span class='comment'>// Set hidden row values.</span>
+    gridRow.LJCSetInt("ID", person.ID);
+  }
+}</pre>
+  </div>
+</body>
+</html>
