@@ -26,23 +26,27 @@
         common application function.
       </p>
       <p class="book">
+        A DAL library usually has the name of the group of tables it represents
+        followed with the text "DAL".
+      </p>
+      <p class="book">
         Since the DAL pattern is used extensively in the LJC Code, the following
         examples will follow this structure. The sample code will also attempt to
         use the common LJC structure, formatting and naming conventions.
       </p>
       <ul class="listMargin">
         <li>
-          Create a new Solution named &quot;DataTest&quot;
+          Create a new Solution named "DataTest".
         </li>
         <li>
-          Add a new .NET Framework Library Project named &quot;DataTestDAL&quot; to the
+          Add a new .NET Framework Library Project named "DataTestDAL" to the
           DataTest solution.
         </li>
         <li>
-          Add a Folder named &quot;Data&quot; to the DataTestDAL project.
+          Add a Folder named "Data" to the DataTestDAL project.
         </li>
         <li>
-          Add a Folder named &quot;Manager&quot; to the DataTestDAL project.
+          Add a Folder named "Manager" to the DataTestDAL project.
         </li>
       </ul>
     </div>
@@ -73,21 +77,27 @@ GO</pre>
       <p class="book">
         A Data Object contains public properties for each data value in a data
         row. It is a strongly typed, object oriented representation of the data
-        row for use in code. A data row is sometimes referred to as a &quot;record&quot;. A
-        data value is sometimes referred to as a &quot;column&quot;.
+        row for use in code. A data row is sometimes referred to as a "record". A
+        data value is sometimes referred to as a "column".
       </p>
       <p class="book">
         A Data Object usually has the same name as the base table that contains
         the data columns it represents. It may contain methods for cloning,
         sorting and displaying an object string identifier.
       </p>
+      <p class="book">
+        A Data Object in this context refers to a basic DAL object type. It does
+        not refer to the System.Windows.Forms.DataObject class. A "record" in
+        this context is a basic concept and does not refer to the C# (record)
+        built-in reference type.
+      </p>
       <ul class="listMargin">
         <li>
-          Add a Class named &quot;Person&quot; to the Data folder.
+          Add a Class named "Person" to the Data folder.
         </li>
         <li>
           If Visual Studio creates the namespace as DataTestDAL.Data, then remove
-          the &quot;.Data&quot; suffix.
+          the ".Data" suffix.
         </li>
       </ul>
     </div>
@@ -162,11 +172,11 @@ GO</pre>
       </p>
       <ul class="listMargin">
         <li>
-          Add a Class named &quot;Persons&quot; to the Data folder.
+          Add a Class named "Persons" to the Data folder.
         </li>
         <li>
           If Visual Studio creates the namespace as DataTestDAL.Data, then remove
-          the &quot;.Data&quot; suffix.
+          the ".Data" suffix.
         </li>
       </ul>
     </div>
@@ -191,15 +201,19 @@ GO</pre>
       </p>
       <p class="book">
         A Data Manager usually has the same name as the base table followed with
-        the text &quot;Manager&quot;.
+        the text "Manager".
+      </p>
+      <p class="book">
+        A Data Manager usually inherits from or contains a Standard Manager
+        class from the Data Service Client Library.
       </p>
       <ul class="listMargin">
         <li>
-          Add a Class named &quot;PersonManager&quot; to the Manager folder.
+          Add a Class named "PersonManager" to the Manager folder.
         </li>
         <li>
           If Visual Studio creates the namespace as DataTestDAL.Manager, then
-          remove the &quot;.Manager&quot; suffix.
+          remove the ".Manager" suffix.
         </li>
         <li>
           The PersonManager class inherits from the generic class
