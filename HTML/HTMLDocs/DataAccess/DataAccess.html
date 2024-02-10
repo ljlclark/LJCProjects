@@ -122,8 +122,8 @@ GO</pre>
     <span class='xmlComment'>/// &lt;summary&gt;</span><span class="comment">Initializes an object instance.</span><span class="xmlComment">&lt;/summary&gt;</span>
     <span class='modifier'>public</span> PersonManager()
     {
-      <span class='commonType'>var</span> dataSource = <span class='text'>"DESKTOP-PDPBE34"</span>;
-      <span class='commonType'>var</span> database = <span class='text'>"LJCData"</span>;
+      <span class='commonType'>var</span> dataSource = <span class='text'>"DBServiceName"</span>;
+      <span class='commonType'>var</span> database = <span class='text'>"DBName"</span>;
       <span class='userType'>DataAccess</span> = <span class='userType'>DataCommon</span>.GetDataAccess(dataSource, database);
     }
     <span class='xmlComment'>#endregion</span>
