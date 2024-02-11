@@ -65,6 +65,19 @@ private static void TestAdd(PersonManager personManager)
   Console.WriteLine();
   Console.WriteLine("TestAdd");
 
+  // Delete existing "Added" record to allow for new Add.
+  Person keyRecord = new Person()
+  {
+    Name = "Added"
+  };
+  personManager.SetExcludeKeys();
+  Person lookupRecord = personManager.Retrieve(keyRecord);
+  if (lookupRecord != null)
+  {
+    personManager.SetExcludeKeys();
+    personManager.Delete(keyRecord);
+  }
+
   // Add record
   Person dataRecord = new Person()
   {
