@@ -11,22 +11,29 @@
 </head>
 <body>
   <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / DAL
+    </div>
+    <br />
     <a href="DALTestLoad.html">The DAL Test Add() Method</a>
     <br />
-    <h3 class="headingMargin">The Add() Method</h3>
+    <h3 class="headingMargins">The Add() Method</h3>
     <!-- ******************************* -->
     <div class="columns">
       <p class="book">
         The inherited PersonManager.Add() method adds a new record to the
         configured table.
       </p>
-      <h4 class="headingMargin">Database Assigned Values</h4>
+      <h4 class="headingMargins">Database Assigned Values</h4>
       <p class="book">
         The Add() method has some unique functionality to handle database assigned
         values. These are values that are assigned by the database when a column
         is defined as AutoIncrement or by a database trigger.
       </p>
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the &quot;GetKey Methods&quot; region to the PersonManager class.
         </li>
@@ -37,42 +44,42 @@
       </ul>
     </div>
     <pre class="code">
-#region GetKey Methods
+<span class='xmlComment'>#region GetKey Methods</span>
 
-// Sets the temporary exclude keys.
-/// <include path='items/SetExcludeKeys/*' file='../../CommonManager.xml' />
-public void SetExcludeKeys()
+<span class='comment'>// Sets the temporary exclude keys.</span>
+<span class='xmlComment'>///</span>
+<span class='modifier'>public</span> <span class='commonType'>void</span> SetExcludeKeys()
 {
-  string[] excludeNames = new string[]
+  <span class='commonType'>string</span>[] excludeNames = <span class='keyWord'>new</span> <span class='commonType'>string</span>[]
   {
     Person.ColumnPrincipleFlag
   };
   SetExcludeKeyValues(excludeNames);
 }
-#endregion</pre>
+<span class='xmlComment'>#endregion</span></pre>
     <!-- ******************************* -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the TestAdd() function to the Program class, &quot;TestFunctions&quot; region.
         </li>
       </ul>
     </div>
     <pre class="code">
-// Test the Add function.
-private static void TestAdd(PersonManager personManager)
+<span class='comment'>// Test the Add function.</span>
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> TestAdd(PersonManager personManager)
 {
   Console.WriteLine();
   Console.WriteLine("TestAdd");
 
-  // Add record
-  Person dataRecord = new Person()
+  <span class='comment'>// Add record</span>
+  Person dataRecord = <span class='keyWord'>new</span> <span class='userType'>Person</span>()
   {
     Name = "Added",
-    PrincipleFlag = false
+    PrincipleFlag = <span class='keyWord'>false</span>
   };
-  Person addedRecord = personManager.Add(dataRecord);
-  if (addedRecord != null)
+  <span class='userType'>Person</span> addedRecord = personManager.Add(dataRecord);
+  <span class='keyWord'>if</span> (addedRecord != null)
   {
     dataRecord.ID = addedRecord.ID;
     WriteRowString(dataRecord);
@@ -80,13 +87,13 @@ private static void TestAdd(PersonManager personManager)
 }</pre>
     <!-- ******************************* -->
     <div class="columns">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the TestAdd(personManager) function call to the Program class, &quot;Test function calls.&quot; section.
         </li>
       </ul>
     </div>
-    <h4 class="headingMargin">The Key Record Object</h4>
+    <h4 class="headingMargins">The Key Record Object</h4>
     <!-- ******************************* -->
     <div class="columns">
       <p class="book">
@@ -123,6 +130,17 @@ where Name = &apos;Added&apos; and PrincipleFlag = &apos;0&apos;.</pre>
     </div>
     <br />
     <a href="DALTestRetrieve.html">The DAL Test Retrieve() Method</a>
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / DAL
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy; Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
   </div>
 </body>
 </html>

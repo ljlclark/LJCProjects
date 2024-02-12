@@ -11,16 +11,23 @@
 </head>
 <body>
   <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / DAL
+    </div>
+    <br />
     <a href="DAL.html">The Data Access Layer</a>
     <br />
-    <h2 class="headingMargin">The Test DAL Program</h2>
+    <h2 class="headingMargins">The Test DAL Program</h2>
     <!-- ******************************* -->
     <div class="columnsAuto">
       <p class="book">
         For the following examples we will concentrate on the
         LJCDBDataAccessLib.DbDataAccess class.
       </p>
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add a new Console Project named "DataTestDAL" to the DataTest solution.
         </li>
@@ -68,17 +75,17 @@
     <span class='xmlComment'>#endregion</span>
   }
 }</pre>
-    <h3 class="headingMargin">The DbServiceRef Class</h3>
+    <h3 class="headingMargins">The DbServiceRef Class</h3>
     <!-- ******************************* -->
     <div class="columns">
       <p class="book">
         The constructor for an ObjectManager derived class takes an
         LJCDBClientLib.DbServiceRef parameter.
       </p>
-      <p class="listMargin">
+      <p class="listMargins">
         The DbServiceRef class contains three properties:
       </p>
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           DbDataAccess &hyphen; This is a reference to the Message Data Access object.
         </li>
@@ -136,10 +143,10 @@
   &lt;Template&gt;Data Source={DbServer}; Initial Catalog={Database}; Integrated Security=True&lt;/Template&gt;
   &lt;/ConnectionTemplate&gt;
 &lt;/ConnectionTemplates&gt;</pre>
-    <h3 class="headingMargin">The ObjectManager Derived Class</h3>
+    <h3 class="headingMargins">The ObjectManager Derived Class</h3>
     <!-- ******************************* -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add a function to the Program class to create the PersonManager object.
         </li>
@@ -182,7 +189,7 @@
         Load(), Retrieve() and Update(). We will create test methods for each of
         these common manager methods.
       </p>
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the WriteRowString() function to the Program class, ";Helper
           Functions"; region.
@@ -204,6 +211,17 @@
   <span class='keyWord'>return</span> retValue;
 }</pre>
     <a href="DALTestLoad.html">The DAL Test Load() Method</a>
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / DAL
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy; Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
   </div>
 </body>
 </html>

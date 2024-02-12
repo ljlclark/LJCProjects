@@ -12,6 +12,12 @@
 <body>
   <div class="page">
     <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / LJCDataGrid
+    </div>
+    <br />
     <!-- ****************************** -->
     <div class="columnsAuto">
       <p class="book">
@@ -19,7 +25,7 @@
       </p>
     </div>
     <br />
-    <h2 class="headingMargin">Adding Data to an LJCDataGrid</h2>
+    <h2 class="headingMargins">Adding Data to an LJCDataGrid</h2>
     <pre class="code">
 <span class='comment'>// Retrieves the list rows into a LJCDataGrid Grid.</span>
 <span class='modifier'>private</span> <span class='commonType'>void</span> DataRetrieveDataGrid()
@@ -43,10 +49,10 @@
     }
   }
 }</pre>
-    <h4 class="headingMargin">Using Data Object Mapping</h4>
+    <h4 class="headingMargins">Using Data Object Mapping</h4>
     <!-- ****************************** -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add a Folder named “Data” to the PersonDAL project.
         </li>
@@ -86,7 +92,7 @@
 }</pre>
     <!-- ****************************** -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add a Class named “Persons” to the Data folder.
         </li>
@@ -105,7 +111,7 @@
 }</pre>
     <!-- ****************************** -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the “Retrieve/Load Methods region to the PersonManager class after
           the Constructors region.
@@ -130,7 +136,7 @@
 <span class='xmlComment'>#endregion</span></pre>
     <!-- ****************************** -->
     <div class="columnsAuto">
-      <ul class="listMargin">
+      <ul class="listMargins">
         <li>
           Add the DataRetrievePerson() method to the PersonList form in region
           Data Methods.
@@ -157,6 +163,17 @@
     gridRow.LJCSetInt("ID", person.ID);
   }
 }</pre>
+    <br />
+    <div class="PathText">
+      / <a href="../../../index.html">Home</a>
+      / <a href="../../Tutorials.html#Testing">HowTo</a>
+      / LJCDataGrid
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy; Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
   </div>
 </body>
 </html>
