@@ -63,12 +63,12 @@
     <pre class="code">
 <span class='keyWord'>if</span> (success)
 {
-    <span class='comment'>// Test function calls.</span>
+  <span class='comment'>// Test function calls.</span>
   TestLoad(personManager);
   TestAdd(personManager);
   TestRetrieve(personManager);
   TestUpdate(personManager);
-  TestDelete(personManager);
+  <b>TestDelete(personManager);</b>
 
   Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
   Console.ReadKey();

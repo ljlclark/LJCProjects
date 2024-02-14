@@ -76,6 +76,19 @@
         </li>
       </ul>
     </div>
+    <pre class="code">
+<span class='keyWord'>if</span> (success)
+{
+  <span class='comment'>// Test function calls.</span>
+  TestLoad(personManager);
+  TestAdd(personManager);
+  TestRetrieve(personManager);
+  <b>TestUpdate(personManager);</b>
+
+  Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
+  Console.ReadKey();
+}</pre>
+    <br />
     <a href="DALTestDelete.html">The DAL Test Delete() Method</a>
     <br />
     <div class="PathText">

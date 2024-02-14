@@ -90,7 +90,7 @@ where Name = &apos;Added&apos; and PrincipleFlag = &apos;0&apos;.</pre>
       <ul class="listMargins">
         <li>
           Add the TestRetrieve() function to the Program class, test function
-          &quot;TestFunctions&quot; region.
+          "TestFunctions" region.
         </li>
       </ul>
     </div>
@@ -117,10 +117,21 @@ where Name = &apos;Added&apos; and PrincipleFlag = &apos;0&apos;.</pre>
       <ul class="listMargins">
         <li>
           Add the TestRetrieve(personManager) function call to the Program class,
-          &quot;Test function calls.&quot; section.
+          "Test function calls" section.
         </li>
       </ul>
     </div>
+    <pre class="code">
+<span class='keyWord'>if</span> (success)
+{
+  <span class='comment'>// Test function calls.</span>
+  TestLoad(personManager);
+  TestAdd(personManager);
+  <b>TestRetrieve(personManager);</b>
+
+  Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
+  Console.ReadKey();
+}</pre>
     <br />
     <a href="DALTestUpdate.html"">The DAL Test Update() Method</a>
     <br />

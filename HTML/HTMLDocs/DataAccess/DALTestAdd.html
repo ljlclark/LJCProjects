@@ -35,6 +35,28 @@
       </p>
       <ul class="listMargins">
         <li>
+          Set the DBAssignedColumnNames and LookupColumnNames in the
+          PersonManager constructor.
+        </li>
+      </ul>
+      <pre>
+  <span class='comment'>// Create the list of database assigned columns.</span>
+  <span class='comment'>// And make sure the AutoIncrement value is set.</span>
+  DbAssignedColumnNames = <span class='keyWord'>new</span> <span class='commonType'>string</span>[]
+  {
+    Person.ColumnID
+  };
+
+  <span class='comment'>// Create the list of lookup column names.</span>
+  <span class='comment'>// This list must include the database assigned columns</span>
+  <span class='comment'>// to contain the returned DB assigned values.</span>
+  LookupColumnNames = <span class='keyWord'>new</span> <span class='commonType'>string</span>[]
+  {
+    Person.ColumnID,
+    Person.ColumnName
+  }</pre>
+      <ul class="listMargins">
+        <li>
           Add the TestAdd() function to the Program class, &quot;TestFunctions&quot; region.
         </li>
       </ul>
@@ -63,10 +85,21 @@
     <div class="columns">
       <ul class="listMargins">
         <li>
-          Add the TestAdd(personManager) function call to the Program class, &quot;Test function calls.&quot; section.
+          Add the TestAdd(personManager) function call to the Program class,
+          "Test function calls." section.
         </li>
       </ul>
     </div>
+    <pre class="code">
+<span class='keyWord'>if</span> (success)
+{
+    <span class='comment'>// Test function calls.</span>
+  TestLoad(personManager);
+  <b>TestAdd(personManager);</b>
+
+  Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
+  Console.ReadKey();
+}</pre>
     <br />
     <a href="DALTestRetrieve.html">The DAL Test Retrieve() Method</a>
     <br />
