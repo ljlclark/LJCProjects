@@ -13,8 +13,7 @@ set marker=----------------- %counter% - LJCDataAccessTest ----------- > Build.t
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDataAccessTest >> Build.txt
-call CoreTestApps\LJCDataAccessTest\UpdateDataAccessTest.cmd BuildAll >> Build.txt
+call CoreTestApps\LJCDataAccessTest\UpdateDataAccessTest.cmd >> Build.txt
 msbuild CoreTestApps\LJCDataAccessTest\LJCDataAccessTest.sln
 
 set /a counter+=1
@@ -23,8 +22,7 @@ set marker=----------------- %counter% - LJCDataManagerTest ------------ >> Buil
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDataManagerTest >> Build.txt
-call CoreTestApps\LJCDataManagerTest\UpdateDataManagerTest.cmd BuildAll >> Build.txt
+call CoreTestApps\LJCDataManagerTest\UpdateDataManagerTest.cmd >> Build.txt
 msbuild CoreTestApps\LJCDataManagerTest\LJCDataManagerTest.sln
 
 set /a counter+=1

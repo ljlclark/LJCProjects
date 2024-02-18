@@ -1,3 +1,7 @@
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
+rem SubFolders.cmd
+
 set bin=bin\Debug
 set assm=CoreAssemblies
 set test=CoreTestApps
