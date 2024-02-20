@@ -1,8 +1,9 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateDataDetail.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd %1%
 call %mainRoot%TargetFolders.cmd
@@ -15,6 +16,7 @@ call TargetFolders.cmd
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
 set src=CVRManager\CVRItem\%bin%
 copy %appsRoot%%src%\CVRItem.dll %to%
@@ -51,6 +53,8 @@ rem *** Runtime-only Binaries ***
 
 rem ----------------------------
 set to=%toRoot%LJCDataDetail\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDBMessage\CipherLib\%bin%
 copy %assmRoot%%src%\CipherLib.dll %to%
@@ -67,7 +71,7 @@ copy %assmRoot%%src%\LJCDBClientLib.dll %to%
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

@@ -1,20 +1,22 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateUnitMeasure.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
-call %mainRoot%SetupUpdate.cmd %1%
-call %mainRoot%SetupFolder.cmd
+call %mainRoot%SubFolders.cmd %1%
+call %mainRoot%TargetFolders.cmd
 goto Process:
 :BuildAll
-call SetupUpdate.cmd %1%
+call SubFolders.cmd %1%
 set toRoot=%apps%\LJCUnitMeasure\
-call SetupFolder.cmd
+call TargetFolders.cmd
 :Process
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
 copy %assmRoot%%src%\LJCDBClientLib.dll %to%
@@ -36,6 +38,8 @@ rem *** Runtime-only Binaries ***
 
 rem ----------------------------------
 set to=%toRoot%LJCUnitMeasure\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDBClientLib\LJCDBClientLib\%bin%
 copy %assmRoot%%src%\LJCDBClientLib.dll %to%
@@ -59,7 +63,7 @@ copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

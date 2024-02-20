@@ -1,8 +1,9 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateDBServiceHosts.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd
 call %mainRoot%TargetFolders.cmd
@@ -15,6 +16,7 @@ call TargetFolders.cmd
 
 rem *** Referenced Binaries ***
 rem ***************************
+echo *** %to% ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
@@ -42,6 +44,8 @@ rem *** Runtime-only Binaries ***
 
 rem -----------------------------------------
 set to=%toRoot%LJCDBServiceConsoleHost\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDataAccessConfig\LJCDataAccessConfig
 copy %assmRoot%%src%\DataConfigs.xml %to%
@@ -49,11 +53,13 @@ copy %assmRoot%%src%\ConnectionTemplates.xml %to%
 
 rem ----------------------------------
 set to=%toRoot%LJCDBServiceHost\%bin%
+echo.
+echo *** %to% ***
 
 copy %assmRoot%%src%\DataConfigs.xml %to%
 copy %assmRoot%%src%\ConnectionTemplates.xml %to%
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

@@ -1,20 +1,22 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateRegionManager.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
-call %mainRoot%SetupUpdate.cmd %1%
-call %mainRoot%SetupFolder.cmd
+call %mainRoot%SubFolders.cmd %1%
+call %mainRoot%TargetFolders.cmd
 goto Process:
 :BuildAll
-call SetupUpdate.cmd %1%
+call SubFolders.cmd %1%
 set toRoot=%apps%\LJCRegionManager\
-call SetupFolder.cmd
+call TargetFolders.cmd
 :Process
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
@@ -48,12 +50,16 @@ rem *** Runtime-only Binaries ***
 
 rem ----------------------------------
 set to=%toRoot%LJCRegionManager\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
 rem -------------------------------
 set to=%toRoot%LJCRegionForm\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
@@ -91,7 +97,7 @@ copy %appsRoot%%src%\LJCRegionManager.exe %to%
 set src=LJCRegionManager\LJCRegionManager\%bin%
 copy %appsRoot%%src%\LJCRegionManager.exe.config %to%
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

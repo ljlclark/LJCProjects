@@ -1,8 +1,9 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateDBClientSQLLib.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd
 call %mainRoot%TargetFolders.cmd
@@ -15,6 +16,7 @@ call TargetFolders.cmd
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
 rem set src=LJCDBMessage\CipherLib\%bin%
 rem copy %assmRoot%%src%\CipherLib.dll %to%
@@ -51,11 +53,13 @@ rem *** Runtime-only Binaries ***
 
 rem -----------------------------------
 set to=%toRoot%LJCDBClientSQLLib\%bin%
+echo.
+echo *** %to% ***
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 copy %assmRoot%%src%\LJCDataAccess.dll %to%
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

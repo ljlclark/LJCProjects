@@ -1,5 +1,6 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateGridDataLib.cmd
 
 if %1%. == BuildAll. goto BuildAll
@@ -15,6 +16,7 @@ call TargetFolders.cmd
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
 set src=LJCDBMessage\LJCDBMessage\%bin%
 copy %assmRoot%%src%\LJCDBMessage.dll %to%
@@ -30,8 +32,10 @@ rem *** Runtime-only Binaries ***
 
 rem --------------------------------
 set to=%toRoot%LJCGridDataLib\%bin%
+rem echo.
+rem echo *** %to% ***
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End
