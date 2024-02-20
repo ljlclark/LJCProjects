@@ -32,7 +32,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCNetCommonTest >> Build.txt
-call CoreTestApps\LJCNetCommonTest\UpdateNetCommonTest.cmd BuildAll >> Build.txt
+call CoreTestApps\LJCNetCommonTest\UpdateNetCommonTest.cmd >> Build.txt
 msbuild CoreTestApps\LJCNetCommonTest\LJCNetCommonTest.sln
 
 set /a counter+=1
@@ -42,6 +42,6 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCNetCommonTest >> Build.txt
-call CoreTestApps\UsingDataAccess\UpdateUsingDataAccess.cmd BuildAll >> Build.txt
+call CoreTestApps\UsingDataAccess\UpdateUsingDataAccess.cmd >> Build.txt
 msbuild CoreTestApps\UsingDataAccess\UsingDataAccess.sln
-call CoreTestApps\UsingDataAccess\UpdateUsingDataAccessPost.cmd BuildAll >> Build.txt
+call CoreTestApps\UsingDataAccess\UpdateUsingDataAccessPost.cmd >> Build.txt

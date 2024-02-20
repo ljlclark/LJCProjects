@@ -1,11 +1,9 @@
 echo off
-echo.
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateCodeLineCounter.cmd
 
-echo.
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd %1%
 call %mainRoot%TargetFolders.cmd
@@ -32,7 +30,7 @@ set to=%toRoot%LJCCodeLineCounter\%bin%
 rem echo.
 rem echo *** %to% ***
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

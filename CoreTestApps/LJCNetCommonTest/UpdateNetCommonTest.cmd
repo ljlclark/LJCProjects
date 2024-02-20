@@ -1,31 +1,36 @@
-echo Copyright (c) Lester J. Clark and Contributors.
-echo Licensed under the MIT License.
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
 rem UpdateNetCommonTest.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
-call %mainRoot%SetupUpdate.cmd %1%
-call %mainRoot%SetupFolder.cmd
+call %mainRoot%SubFolders.cmd
+call %mainRoot%TargetFolders.cmd
 goto Process:
 :BuildAll
-call SetupUpdate.cmd %1%
+call SubFolders.cmd BuildAll
 set toRoot=%test%\LJCNetCommonTest\
-call SetupFolder.cmd
+call TargetFolders.cmd
 :Process
 
 rem ***************************
 rem *** Referenced Binaries ***
+echo *** %to% ***
 
-set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %assmRoot%%src%\LJCNetCommon.dll %to%
+set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
+echo copy %src%\LJCNetCommon.dll %to%
+copy %src%\LJCNetCommon.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ------------------------------------
 set to=%toRoot%LJCNetCommonTest\%bin%
+echo.
+echo *** %to% ***
 
-if %1%. == BuildAll. goto End
+if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause
 :End

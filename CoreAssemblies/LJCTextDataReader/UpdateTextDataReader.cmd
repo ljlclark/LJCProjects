@@ -4,13 +4,13 @@ rem UpdateTextDataReader.cmd
 
 if %1%. == BuildAll. goto BuildAll
 set mainRoot=..\..\
-call %mainRoot%SetupUpdate.cmd %1%
-call %mainRoot%SetupFolder.cmd
+call %mainRoot%SubFolders.cmd
+call %mainRoot%TargetFolders.cmd
 goto Process:
 :BuildAll
-call SetupUpdate.cmd %1%
+call SubFolders.cmd BuildAll
 set toRoot=%assm%\LJCTextDataReader\
-call SetupFolder.cmd
+call TrgetFolders.cmd
 :Process
 
 rem ***************************
