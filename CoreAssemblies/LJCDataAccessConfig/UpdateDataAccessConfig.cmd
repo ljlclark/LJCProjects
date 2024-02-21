@@ -18,8 +18,9 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %assmRoot%%src%\LJCNetCommon.dll %to%
+set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
+echo copy %src%\LJCNetCommon.dll %to%
+copy %src%\LJCNetCommon.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***

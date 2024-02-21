@@ -18,35 +18,45 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-rem set src=LJCDBMessage\CipherLib\%bin%
-rem copy %assmRoot%%src%\CipherLib.dll %to%
+rem set src=%assmRoot%LJCDBMessage\CipherLib\%bin%
+rem echo copy %src%\CipherLib.dll %to%
+rem copy %src%\CipherLib.dll %to%
 
-set src=LJCDBClientLib\LJCDBClientLib\%bin%
-copy %assmRoot%%src%\LJCDBClientLib.dll %to%
+set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
+echo copy %src%\LJCDBClientLib.dll %to%
+copy %src%\LJCDBClientLib.dll %to%
 
-set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %assmRoot%%src%\LJCDataAccess.dll %to%
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
 
-set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
+set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%
+copy %src%\LJCDataAccessConfig.dll %to%
 
-rem set src=LJCDBDataAccess\LJCDBDataAccess\%bin%
-rem copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
+rem set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
+rem echo copy %src%\LJCDBDataAccess.dll %to%
+rem copy %src%\LJCDBDataAccess.dll %to%
 
-set src=LJCDBMessage\LJCDBMessage\%bin%
-copy %assmRoot%%src%\LJCDBMessage.dll %to%
+set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
+echo copy %src%\LJCDBMessage.dll %to%
+copy %src%\LJCDBMessage.dll %to%
 
-rem set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
-rem copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
+rem set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
+rem echo copy %src%\LJCDBServiceLib.dll %to%
+rem copy %src%\LJCDBServiceLib.dll %to%
 
-set src=LJCGridDataLib\LJCGridDataLib\%bin%
-copy %assmRoot%%src%\LJCGridDataLib.dll %to%
+set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
+echo copy %src%\LJCGridDataLib.dll %to%
+copy %src%\LJCGridDataLib.dll %to%
 
-set src=LJCNetCommon\LJCNetCommon\%bin%
-copy %assmRoot%%src%\LJCNetCommon.dll %to%
+set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
+echo copy %src%\LJCNetCommon.dll %to%
+copy %src%\LJCNetCommon.dll %to%
 
-rem set src=LJCTextDataReader\LJCTextDataReaderLib\%bin%
-rem copy %assmRoot%%src%\LJCTextDataReaderLib.dll %to%
+rem set src=%assmRoot%LJCTextDataReader\LJCTextDataReaderLib\%bin%
+rem echo copy %src%\LJCTextDataReaderLib.dll %to%
+rem copy %src%\LJCTextDataReaderLib.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
@@ -56,8 +66,9 @@ set to=%toRoot%LJCDBClientSQLLib\%bin%
 echo.
 echo *** %to% ***
 
-set src=LJCDataAccess\LJCDataAccess\%bin%
-copy %assmRoot%%src%\LJCDataAccess.dll %to%
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
 
 if %mainRoot%. == . goto End
 if %1%. == nopause. goto End

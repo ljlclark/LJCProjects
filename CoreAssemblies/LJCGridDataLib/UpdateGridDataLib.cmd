@@ -3,7 +3,7 @@ rem Copyright (c) Lester J. Clark and Contributors.
 rem Licensed under the MIT License.
 rem UpdateGridDataLib.cmd
 
-if %1%. == BuildAll. goto BuildAll
+if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
 call %mainRoot%SubFolders.cmd
 call %mainRoot%TargetFolders.cmd

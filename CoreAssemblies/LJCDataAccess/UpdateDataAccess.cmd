@@ -18,12 +18,15 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
-copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
+set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%
+copy %src%\LJCDataAccessConfig.dll %to%
 
-set src=LJCNetCommon\LJCNetCommon
-copy %assmRoot%%src%\%bin%\LJCNetCommon.dll %to%
+set src=%assmRoot%LJCNetCommon\LJCNetCommon
+echo copy %src%\%bin%\LJCNetCommon.dll %to%
+copy %src%\%bin%\LJCNetCommon.dll %to%
 
+echo copy %mainRoot%MySql.Data.dll %to%
 copy %mainRoot%MySql.Data.dll %to%
 
 rem *****************************

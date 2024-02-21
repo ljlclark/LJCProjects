@@ -1,0 +1,3 @@
+﻿Name, PrincipleFlag
+Les Clark, true
+Test One, false

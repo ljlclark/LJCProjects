@@ -23,7 +23,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDataAccessConfig >> Build.txt
-call CoreAssemblies\LJCDataAccessConfig\UpdateDataAccessConfig.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDataAccessConfig\UpdateDataAccessConfig.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig.sln
 
 set /a counter+=1
@@ -33,7 +33,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDataAccess >> Build.txt
-call CoreAssemblies\LJCDataAccess\UpdateDataAccess.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDataAccess\UpdateDataAccess.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDataAccess\LJCDataAccess.sln
 
 set /a counter+=1
@@ -43,7 +43,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBMessage >> Build.txt
-call CoreAssemblies\LJCDBMessage\UpdateDBMessage.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBMessage\UpdateDBMessage.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBMessage\LJCDBMessage.sln
 
 set /a counter+=1
@@ -53,7 +53,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBDataAccess >> Build.txt
-call CoreAssemblies\LJCDBDataAccess\UpdateDBDataAccess.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBDataAccess\UpdateDBDataAccess.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess.sln
 
 set /a counter+=1
@@ -63,7 +63,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCLibraries >> Build.txt
-call CoreAssemblies\LJCLibraries\UpdateLibraries.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCLibraries\UpdateLibraries.cmd >> Build.txt
 msbuild CoreAssemblies\LJCLibraries\LJCLibraries.sln
 
 set /a counter+=1
@@ -73,7 +73,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCGridDataLib >> Build.txt
-call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd >> Build.txt
 msbuild CoreAssemblies\LJCGridDataLib\LJCGridDataLib.sln
 
 set /a counter+=1
@@ -83,7 +83,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBServiceLib >> Build.txt
-call CoreAssemblies\LJCDBServiceLib\UpdateDBServiceLib.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBServiceLib\UpdateDBServiceLib.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib.sln
 
 set /a counter+=1
@@ -93,7 +93,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBServiceHosts >> Build.txt
-call CoreAssemblies\LJCDBServiceHosts\UpdateDBServiceHosts.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBServiceHosts\UpdateDBServiceHosts.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBServiceHosts\LJCDBServiceHosts.sln
 
 set /a counter+=1
@@ -103,7 +103,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCTextDataReader >> Build.txt
-call CoreAssemblies\LJCTextDataReader\UpdateTextDataReader.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCTextDataReader\UpdateTextDataReader.cmd >> Build.txt
 msbuild CoreAssemblies\LJCTextDataReader\LJCTextDataReader.sln
 
 set /a counter+=1
@@ -113,7 +113,7 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBClientLib >> Build.txt
-call CoreAssemblies\LJCDBClientLib\UpdateDBClientLib.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBClientLib\UpdateDBClientLib.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBClientLib\LJCDBClientLib.sln
 
 set /a counter+=1
@@ -131,9 +131,9 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDBViewDAL >> Build.txt
-call CoreAssemblies\LJCDBViewDAL\UpdateDBViewDAL.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDBViewDAL\UpdateDBViewDAL.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL.sln
-JCDBClientSQLLib\UpdateDBClientSQLLib.cmd BuildAll >> Build.txt
+JCDBClientSQLLib\UpdateDBClientSQLLib.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDBClientSQLLib\LJCDBClientSQLLib.sln
 
 set /a counter+=1
@@ -143,5 +143,5 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDataDetail >> Build.txt
-call CoreAssemblies\LJCDataDetail\UpdateDataDetail.cmd BuildAll >> Build.txt
+call CoreAssemblies\LJCDataDetail\UpdateDataDetail.cmd >> Build.txt
 msbuild CoreAssemblies\LJCDataDetail\LJCDataDetail.sln
