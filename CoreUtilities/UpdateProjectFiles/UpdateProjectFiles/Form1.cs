@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace UpdateProjectFiles
 {
@@ -19,17 +20,17 @@ namespace UpdateProjectFiles
       InitializeComponent();
 
       var manager = new CodeLineManager();
-      var codeLine = manager.Retrieve("LJCProjectsDev");
+      manager.Retrieve("LJCProjectsDev");
       ShowPath(manager, "Retrieve");
+
+      var codeLine = manager.Add("NewCodeLine", "NewPath");
+      ShowPath(manager, "Add");
       if (codeLine != null)
       {
         codeLine.Path = $"{codeLine.Path}Updated";
         manager.Update(codeLine);
         ShowPath(manager, "Update");
       }
-
-      manager.Add("NewCodeLine", "NewPath");
-      ShowPath(manager, "Add");
 
       manager.Delete("NewCodeLine");
     }

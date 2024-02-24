@@ -51,7 +51,7 @@ namespace ProjectFilesDAL
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeLine));
         Reader.LJCSetFile(FileName);
-        Retrieve(current.Name);
+        retValue = Retrieve(name);
       }
       return retValue;
     }
