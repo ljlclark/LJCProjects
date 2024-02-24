@@ -709,15 +709,16 @@ namespace LJCTextDataReaderLib
         LJCDataFields = new DbColumns();
       }
 
-      IsClosed = true;
+      //IsClosed = true;
       if (!File.Exists(fileName))
       {
         string errorText = $"File: '{fileName}' was not found.";
         throw new FileNotFoundException(errorText);
       }
 
-      IsClosed = false;
+      Close();
       LJCStreamReader = new StreamReader(fileName, Encoding.UTF8, true, 4096);
+      IsClosed = false;
 
       // #Pagination Next Statement - Add
       LJCLineOffsets = new LineOffsets(LJCStream);

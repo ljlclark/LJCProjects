@@ -20,7 +20,7 @@ namespace LJCNetCommon
     /// <include path='items/AppSettingsC/*' file='Doc/AppSettings.xml'/>
     public AppSettings(string fileSpec)
     {
-      XElement AppSettings;
+      XElement appSettings;
       string errorText;
 
       FileSpec = fileSpec;
@@ -33,15 +33,15 @@ namespace LJCNetCommon
       }
 
       mRootElement = XElement.Load(FileSpec);
-      AppSettings = mRootElement.Element("appSettings");
+      appSettings = mRootElement.Element("appSettings");
 
-      if (null == AppSettings)
+      if (null == appSettings)
       {
         errorText = $"File '{FileSpec}' 'AppSettings' Element not found.";
         throw new MissingMemberException(errorText);
       }
 
-      mSettings = AppSettings.Elements("add");
+      mSettings = appSettings.Elements("add");
       if (0 == mSettings.Count())
       {
         errorText = $"File '{FileSpec}' AppSettings 'add' Elements not found.";

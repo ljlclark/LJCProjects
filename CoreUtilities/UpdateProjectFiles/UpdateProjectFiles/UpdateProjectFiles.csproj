@@ -79,6 +79,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\CodeGroup.txt" />
     <Content Include="bin\Debug\CodeLine.txt" />
+    <Content Include="bin\Debug\CodeLineBackup.txt" />
     <Content Include="bin\Debug\Project.txt" />
     <Content Include="bin\Debug\ProjectFile.txt" />
     <Content Include="bin\Debug\Solution.txt" />

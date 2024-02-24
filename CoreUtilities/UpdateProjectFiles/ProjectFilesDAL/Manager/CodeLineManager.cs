@@ -24,7 +24,7 @@ namespace ProjectFilesDAL
     {
       FileName = fileName;
       Reader = new TextDataReader();
-      Reader.LJCSetFile(FileName);
+      //Reader.LJCSetFile(FileName);
     }
     #endregion
 
@@ -47,7 +47,9 @@ namespace ProjectFilesDAL
           Name = name,
           Path = path
         };
+        Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeLine));
+        Reader.LJCSetFile(FileName);
       }
       return retValue;
     }
@@ -178,14 +180,33 @@ namespace ProjectFilesDAL
         {
           WriteFileWithBackup(codeLines);
         }
+        if (Reader != null)
+        {
+          Reader.Close();
+        }
         var text = CreateRecord(codeLine);
         File.AppendAllText(FileName, text);
+        Reader.LJCSetFile(FileName);
       }
       return retValue;
     }
     #endregion
 
     #region Public Methods
+
+    /// <summary>
+    /// Write the text file from a CodeLines collection.
+    /// </summary>
+    /// <param name="codeLines">The CodeLines collection</param>
+    public void CreateFile(string fileName, CodeLines codeLines)
+    {
+      File.WriteAllText(fileName, "Name, Path\r\n");
+      foreach (CodeLine codeLine in codeLines)
+      {
+        var text = CreateRecord(codeLine);
+        File.AppendAllText(fileName, text);
+      }
+    }
 
     /// <summary>
     /// Creates a record string.
@@ -198,7 +219,7 @@ namespace ProjectFilesDAL
 
       if (codeLine != null && NetString.HasValue(codeLine.Name))
       {
-        retValue = $"{codeLine.Name}, {codeLine.Path}";
+        retValue = $"{codeLine.Name}, {codeLine.Path}\r\n";
       }
       return retValue;
     }
@@ -215,32 +236,24 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Write the text file from a CodeLines collection.
-    /// </summary>
-    /// <param name="codeLines">The CodeLines collection</param>
-    public void WriteFile(string fileName, CodeLines codeLines)
-    {
-      File.WriteAllText(fileName, "Name, Path");
-      foreach (CodeLine codeLine in codeLines)
-      {
-        var text = CreateRecord(codeLine);
-        File.AppendAllText(fileName, text);
-      }
-    }
-
-    /// <summary>
     /// Write the text file from a CodeLines collection and create a backup.
     /// </summary>
     /// <param name="codeLines">The CodeLines collection</param>
     public void WriteFileWithBackup(CodeLines codeLines)
     {
-      var backupFile = $"{FileName}Backup.txt";
-      WriteFile(backupFile, codeLines);
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
+      if (Reader != null)
+      {
+        Reader.Close();
+      }
       if (File.Exists(FileName))
       {
         File.Delete(FileName);
       }
-      File.Copy(backupFile, FileName);
+      CreateFile(FileName, codeLines);
+      Reader.LJCSetFile(FileName);
     }
     #endregion
 

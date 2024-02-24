@@ -1,4 +1,4 @@
-set Find="SetupUpdate"
+set Find="Trg"
 
 if %1. == . goto default
 set folder=%1

@@ -23,7 +23,12 @@ namespace UpdateProjectFiles
       if (codeLine != null)
       {
         MessageBox.Show(codeLine.Path);
+        codeLine.Path = $"{codeLine.Path}Updated";
+        manager.Update(codeLine);
       }
+
+      manager.Add("NewCodeLine", "NewPath");
+      manager.Delete("NewCodeLine");
     }
   }
 }

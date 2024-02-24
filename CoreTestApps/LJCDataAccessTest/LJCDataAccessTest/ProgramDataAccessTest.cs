@@ -38,17 +38,6 @@ namespace LJCDataAccessTest
       var connectionString = dataConfig.GetConnectionString();
       var providerName = dataConfig.GetProviderName();
 
-      var connectionBuilder = new DbConnectionStringBuilder()
-      {
-        { "Provider", "Microsoft.ACE.OLEDB.12.0" },
-        { "Data Source", "Names.txt" },
-        { "Extended Properties", "text" },
-        { "HDR", "yes" },
-        { "FMT", "Delimited" }
-      };
-      connectionString = connectionBuilder.ToString();
-      providerName = "Microsoft.ACE.OLEDB.12.0";
-
       var dataAccess = new DataAccess(connectionString, providerName);
 
       DataAccessTest test = new DataAccessTest(dataAccess);
