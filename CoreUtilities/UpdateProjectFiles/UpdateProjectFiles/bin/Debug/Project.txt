@@ -1,0 +1,3 @@
+﻿Solution, Name,  Path
+LJCNetCommon, LJCNetCommon, LJCNetCommon
+LJCDataAccessConfig, LJCDataAccessConfig, LJCDataAccessConfig 

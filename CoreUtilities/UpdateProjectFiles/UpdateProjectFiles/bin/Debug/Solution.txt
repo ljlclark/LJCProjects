@@ -1,0 +1,3 @@
+﻿CodeGroup, Name, Sequence, Path
+CoreAssemblies, LJCNetCommon, 1, LJCNetCommon
+CoreAssemblies, LJCDataAccessConfig, 2, LJCDataAccessConfig
