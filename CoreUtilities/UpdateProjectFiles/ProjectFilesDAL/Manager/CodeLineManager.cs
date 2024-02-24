@@ -47,9 +47,11 @@ namespace ProjectFilesDAL
           Name = name,
           Path = path
         };
+        var current = DataObject();
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeLine));
         Reader.LJCSetFile(FileName);
+        Retrieve(current.Name);
       }
       return retValue;
     }
@@ -62,10 +64,15 @@ namespace ProjectFilesDAL
     {
       if (NetString.HasValue(name))
       {
+        var current = DataObject();
         var codeLines = LoadAllExcept(name);
         if (codeLines != null)
         {
           WriteFileWithBackup(codeLines);
+        }
+        if (current != null)
+        {
+          Retrieve(current.Name);
         }
       }
     }
@@ -175,6 +182,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(codeLine.Name))
       {
+        var current = DataObject();
         var codeLines = LoadAllExcept(codeLine.Name);
         if (codeLines != null)
         {
@@ -187,6 +195,7 @@ namespace ProjectFilesDAL
         var text = CreateRecord(codeLine);
         File.AppendAllText(FileName, text);
         Reader.LJCSetFile(FileName);
+        Retrieve(current.Name);
       }
       return retValue;
     }

@@ -20,15 +20,27 @@ namespace UpdateProjectFiles
 
       var manager = new CodeLineManager();
       var codeLine = manager.Retrieve("LJCProjectsDev");
+      ShowPath(manager, "Retrieve");
       if (codeLine != null)
       {
-        MessageBox.Show(codeLine.Path);
         codeLine.Path = $"{codeLine.Path}Updated";
         manager.Update(codeLine);
+        ShowPath(manager, "Update");
       }
 
       manager.Add("NewCodeLine", "NewPath");
+      ShowPath(manager, "Add");
+
       manager.Delete("NewCodeLine");
+    }
+
+    public void ShowPath(CodeLineManager manager, string text)
+    {
+      var codeLine = manager.DataObject();
+      if (codeLine != null)
+      {
+        MessageBox.Show($"{text}\r\n{codeLine.Path}");
+      }
     }
   }
 }
