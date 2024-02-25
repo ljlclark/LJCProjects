@@ -19,17 +19,24 @@ namespace UpdateProjectFiles
     {
       InitializeComponent();
 
+      TestCodeLine();
+    }
+
+    public void TestCodeLine()
+    {
       var manager = new CodeLineManager();
       manager.Retrieve("LJCProjectsDev");
       ShowPath(manager, "Retrieve");
 
-      var codeLine = manager.Add("NewCodeLine", "NewPath");
+      var codeLine = manager.Add("ANewCodeLine", "NewPath");
       ShowPath(manager, "Add");
+      manager.SortFile();
       if (codeLine != null)
       {
         codeLine.Path = $"{codeLine.Path}Updated";
         manager.Update(codeLine);
         ShowPath(manager, "Update");
+        manager.SortFile();
       }
 
       manager.Delete("NewCodeLine");

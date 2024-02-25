@@ -7,6 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateProjectFiles", "Updat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectFilesDAL", "ProjectFilesDAL\ProjectFilesDAL.csproj", "{7BDAE96D-E3C8-458F-BB4A-8EB46B12D22B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{3024A28D-DFA8-4A8E-B08A-4CE21E50A03B}"
+	ProjectSection(SolutionItems) = preProject
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagersTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagersTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

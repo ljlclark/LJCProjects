@@ -1,18 +1,17 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CodeLines.cs
+// ProjectFiles.cs
 using System.Collections.Generic;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>Represents a collection of CodeLine Data Objects.</summary>
-  public class CodeLines : List<Solution>
+  public class ProjectFiles : List<ProjectFile>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public CodeLines()
+    public ProjectFiles()
     {
       mPrevCount = -1;
     }
@@ -24,16 +23,21 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieve the collection element with unique values.
     /// </summary>
-    /// <param name="name">The item name.</param>
+    /// <param name="targetSolution">The Target Solution name.</param>
+    /// <param name="targetProject">The Target Project name.</param>
+    /// <param name="sourceFileName">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public Solution LJCSearchUnique(string name)
+    public ProjectFile LJCSearchUnique(string targetSolution
+      , string targetProject, string sourceFileName)
     {
-      Solution retValue = null;
+      ProjectFile retValue = null;
 
       LJCSortUnique();
-      Solution searchItem = new Solution()
+      ProjectFile searchItem = new ProjectFile()
       {
-        Name = name
+        TargetSolution = targetSolution,
+        TargetProject = targetProject,
+        SourceFileName = sourceFileName
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -44,6 +48,7 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>Sort on Unique values.</summary>
+    /// <param name="comparer">The Comparer object.</param>
     public void LJCSortUnique()
     {
       if (Count != mPrevCount)

@@ -687,6 +687,38 @@ namespace LJCTextDataReaderLib
       return retValue;
     }
 
+    /// <summary>Opens with the existing file settings.</summary>
+    public void LJCOpen()
+    {
+      Close();
+      LJCStreamReader = new StreamReader(LJCFileName, Encoding.UTF8
+        , true, 4096);
+      IsClosed = false;
+
+      // #Pagination Next Statement - Add
+      LJCLineOffsets = new LineOffsets(LJCStream);
+
+
+      if (LJCHasHeadingLine)
+      {
+        var line = LJCStreamReader.ReadLine();
+
+        // #Pagination Next Statement - Add
+        LJCLineOffsets.LJCSetNextLineOffset(line);
+
+        // Get Headings and set FieldCount;
+        LJCSetNames(line);
+      }
+
+      for (int count = 0; count < LJCSkipHeaderLines; count++)
+      {
+        var line = LJCStreamReader.ReadLine();
+
+        // #Pagination Next Statement - Add
+        LJCLineOffsets.LJCSetNextLineOffset(line);
+      }
+    }
+
     // Sets the data field definitions from an XML file.
     /// <include path='items/LJCSetFields/*' file='Doc/TextDataReader.xml'/>
     public void LJCSetFields(string layoutFileName)
@@ -700,8 +732,6 @@ namespace LJCTextDataReaderLib
     /// <include path='items/LJCSetFile/*' file='Doc/TextDataReader.xml'/>
     public void LJCSetFile(string fileName, char fieldDelimiter = ',')
     {
-      string line;
-
       LJCFileName = fileName;
       LJCFieldDelimiter = fieldDelimiter;
       if (null == LJCDataFields)
@@ -709,38 +739,13 @@ namespace LJCTextDataReaderLib
         LJCDataFields = new DbColumns();
       }
 
-      //IsClosed = true;
       if (!File.Exists(fileName))
       {
         string errorText = $"File: '{fileName}' was not found.";
         throw new FileNotFoundException(errorText);
       }
 
-      Close();
-      LJCStreamReader = new StreamReader(fileName, Encoding.UTF8, true, 4096);
-      IsClosed = false;
-
-      // #Pagination Next Statement - Add
-      LJCLineOffsets = new LineOffsets(LJCStream);
-
-      if (LJCHasHeadingLine)
-      {
-        line = LJCStreamReader.ReadLine();
-
-        // #Pagination Next Statement - Add
-        LJCLineOffsets.LJCSetNextLineOffset(line);
-
-        // Get Headings and set FieldCount;
-        LJCSetNames(line);
-      }
-
-      for (int count = 0; count < LJCSkipHeaderLines; count++)
-      {
-        line = LJCStreamReader.ReadLine();
-
-        // #Pagination Next Statement - Add
-        LJCLineOffsets.LJCSetNextLineOffset(line);
-      }
+      LJCOpen();
     }
 
     // Sets the line field values.

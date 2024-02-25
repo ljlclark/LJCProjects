@@ -1,13 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// Solution.cs
+using System;
 
 namespace ProjectFilesDAL
 {
-  public class Solution
+  public class Solution : IComparable<Solution>
   {
+    #region Data Methods
+
+    // Provides the default Sort functionality.
+    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int CompareTo(Solution other)
+    {
+      int retValue;
+
+      if (null == other)
+      {
+        // This value is greater than null.
+        retValue = 1;
+      }
+      else
+      {
+        // Case sensitive.
+        retValue = CodeGroup.CompareTo(other.CodeGroup);
+        if (0 == retValue)
+        {
+          retValue = Name.CompareTo(other.Name);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Data Properties
+
     /// <summary>Gets or sets the CodeGroup name.</summary>
     public string CodeGroup { get; set; }
 
@@ -19,5 +46,6 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the path.</summary>
     public string Path { get; set; }
+    #endregion
   }
 }

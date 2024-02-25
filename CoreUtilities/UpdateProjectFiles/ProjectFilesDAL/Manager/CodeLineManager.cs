@@ -24,7 +24,7 @@ namespace ProjectFilesDAL
     {
       FileName = fileName;
       Reader = new TextDataReader();
-      //Reader.LJCSetFile(FileName);
+      Reader.LJCSetFile(FileName);
     }
     #endregion
 
@@ -36,21 +36,21 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added CodeLine data object.</returns>
-    public CodeLine Add(string name, string path)
+    public Solution Add(string name, string path)
     {
-      CodeLine retValue = null;
+      Solution retValue = null;
 
       if (NetString.HasValue(name))
       {
-        var codeLine = new CodeLine()
+        var codeLine = new Solution()
         {
           Name = name,
           Path = path
         };
-        var current = DataObject();
+        //var current = DataObject();
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeLine));
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
         retValue = Retrieve(name);
       }
       return retValue;
@@ -86,7 +86,7 @@ namespace ProjectFilesDAL
     {
       CodeLines retValue = null;
 
-      Reader.LJCSetFile(FileName);
+      Reader.LJCOpen();
       if (Reader.Read())
       {
         retValue = new CodeLines();
@@ -106,7 +106,7 @@ namespace ProjectFilesDAL
             }
           }
         } while (Reader.Read());
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
       }
       return retValue;
     }
@@ -121,7 +121,7 @@ namespace ProjectFilesDAL
     {
       CodeLines retValue = null;
 
-      Reader.LJCSetFile(FileName);
+      Reader.LJCOpen();
       if (Reader.Read())
       {
         retValue = new CodeLines();
@@ -134,7 +134,7 @@ namespace ProjectFilesDAL
             retValue.Add(codeLine);
           }
         } while (Reader.Read());
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
       }
       return retValue;
     }
@@ -144,9 +144,9 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLine Data Object if found; otherwise null.</returns>
-    public CodeLine Retrieve(string name = null)
+    public Solution Retrieve(string name = null)
     {
-      CodeLine retValue = null;
+      Solution retValue = null;
 
       if (!NetString.HasValue(name))
       {
@@ -157,7 +157,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
         while (Reader.Read())
         {
           var value = Reader.GetString("Name");
@@ -167,7 +167,7 @@ namespace ProjectFilesDAL
             break;
           }
         }
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
       }
       return retValue;
     }
@@ -176,9 +176,9 @@ namespace ProjectFilesDAL
     /// Updates a CodeLine file record.
     /// </summary>
     /// <param name="codeLine">The CodeLine Data Object.</param>
-    public CodeLine Update(CodeLine codeLine)
+    public Solution Update(Solution codeLine)
     {
-      CodeLine retValue = null;
+      Solution retValue = null;
 
       if (NetString.HasValue(codeLine.Name))
       {
@@ -188,13 +188,10 @@ namespace ProjectFilesDAL
         {
           WriteFileWithBackup(codeLines);
         }
-        if (Reader != null)
-        {
-          Reader.Close();
-        }
+        Reader.Close();
         var text = CreateRecord(codeLine);
         File.AppendAllText(FileName, text);
-        Reader.LJCSetFile(FileName);
+        Reader.LJCOpen();
         Retrieve(current.Name);
       }
       return retValue;
@@ -210,7 +207,7 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, CodeLines codeLines)
     {
       File.WriteAllText(fileName, "Name, Path\r\n");
-      foreach (CodeLine codeLine in codeLines)
+      foreach (Solution codeLine in codeLines)
       {
         var text = CreateRecord(codeLine);
         File.AppendAllText(fileName, text);
@@ -222,7 +219,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="codeLine">The CodeLine Data Object.</param>
     /// <returns>The record string.</returns>
-    public string CreateRecord(CodeLine codeLine)
+    public string CreateRecord(Solution codeLine)
     {
       string retValue = null;
 
@@ -234,14 +231,22 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>Creates a Data Object from the current values.</summary>
-    public CodeLine DataObject()
+    public Solution DataObject()
     {
-      var retValue = new CodeLine()
+      var retValue = new Solution()
       {
         Name = Reader.GetString("Name"),
         Path = Reader.GetString("Path")
       };
       return retValue;
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var codeLines = Load();
+      codeLines.LJCSortUnique();
+      WriteFileWithBackup(codeLines);
     }
 
     /// <summary>
@@ -253,16 +258,13 @@ namespace ProjectFilesDAL
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
-      if (Reader != null)
-      {
-        Reader.Close();
-      }
+      Reader.Close();
       if (File.Exists(FileName))
       {
         File.Delete(FileName);
       }
       CreateFile(FileName, codeLines);
-      Reader.LJCSetFile(FileName);
+      Reader.LJCOpen();
     }
     #endregion
 

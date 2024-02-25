@@ -1,18 +1,17 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CodeLines.cs
+// Solutions.cs
 using System.Collections.Generic;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>Represents a collection of CodeLine Data Objects.</summary>
-  public class CodeLines : List<Solution>
+  public class Solutions : List<Solution>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public CodeLines()
+    public Solutions()
     {
       mPrevCount = -1;
     }
@@ -24,15 +23,17 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieve the collection element with unique values.
     /// </summary>
+    /// <param name="codeGroup">The CodeGroup name.</param>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public Solution LJCSearchUnique(string name)
+    public Solution LJCSearchUnique(string codeGroup, string name)
     {
       Solution retValue = null;
 
       LJCSortUnique();
       Solution searchItem = new Solution()
       {
+        CodeGroup = codeGroup,
         Name = name
       };
       int index = BinarySearch(searchItem);
@@ -44,6 +45,7 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>Sort on Unique values.</summary>
+    /// <param name="comparer">The Comparer object.</param>
     public void LJCSortUnique()
     {
       if (Count != mPrevCount)
