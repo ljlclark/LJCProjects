@@ -144,27 +144,26 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      if (!NetString.HasValue(name))
+      Reader.LJCOpen();
+      while (Reader.Read())
       {
-        if (Reader.Read())
+        var nameValue = Reader.GetString("Name");
+        nameValue = nameValue?.Trim();
+        if (NetString.HasValue(name))
         {
-          retValue = DataObject();
-        }
-      }
-      else
-      {
-        Reader.LJCOpen();
-        while (Reader.Read())
-        {
-          var value = Reader.GetString("Name");
-          if (value == name)
+          if (nameValue == name)
           {
             retValue = DataObject();
             break;
           }
         }
-        Reader.LJCOpen();
+        else
+        {
+          retValue = DataObject();
+          break;
+        }
       }
+      Reader.LJCOpen();
       return retValue;
     }
 

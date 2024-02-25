@@ -29,26 +29,27 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Adds a CodeLine file record
     /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
+    /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added CodeLine data object.</returns>
-    public CodeGroup Add(string codeLine, string name, string path)
+    public CodeGroup Add(string codeLineName, string name, string path)
     {
       CodeGroup retValue = null;
 
-      if (NetString.HasValue(name))
+      if (NetString.HasValue(codeLineName)
+        && NetString.HasValue(name))
       {
         var codeGroup = new CodeGroup()
         {
-          CodeLine = codeLine,
+          CodeLine = codeLineName,
           Name = name,
           Path = path
         };
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeGroup));
         Reader.LJCOpen();
-        retValue = Retrieve(codeLine, name);
+        retValue = Retrieve(codeLineName, name);
       }
       return retValue;
     }
@@ -57,12 +58,12 @@ namespace ProjectFilesDAL
     /// Deletes a CodeLine record.
     /// </summary>
     /// <param name="name">The Name value.</param>
-    public void Delete(string name)
+    public void Delete(string codeLineName, string name)
     {
       if (NetString.HasValue(name))
       {
         var current = DataObject();
-        var codeLines = LoadAllExcept(name);
+        var codeLines = LoadAllExcept(codeLineName, name);
         if (codeLines != null)
         {
           WriteFileWithBackup(codeLines);
@@ -114,7 +115,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLines collection if available; otherwise null.</returns>
-    public CodeGroups LoadAllExcept(string name)
+    public CodeGroups LoadAllExcept(string codeLineName, string name)
     {
       CodeGroups retValue = null;
 
@@ -124,11 +125,15 @@ namespace ProjectFilesDAL
         retValue = new CodeGroups();
         do
         {
-          var value = Reader.GetString("Name");
-          if (value != name)
+          var codeLineValue = Reader.GetString("CodeLine");
+          codeLineValue = codeLineValue?.Trim();
+          var nameValue = Reader.GetString("Name");
+          nameValue = nameValue.Trim();
+          if (codeLineValue != codeLineName
+            && nameValue != name)
           {
-            var codeLine = DataObject();
-            retValue.Add(codeLine);
+            var codeGroup = DataObject();
+            retValue.Add(codeGroup);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -139,32 +144,37 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a CodeLine record.
     /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
+    /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLine Data Object if found; otherwise null.</returns>
-    public CodeGroup Retrieve(string codeLine, string name = null)
+    public CodeGroup Retrieve(string codeLineName, string name = null)
     {
       CodeGroup retValue = null;
 
-      if (!NetString.HasValue(name))
-      {
-        if (Reader.Read())
-        {
-          retValue = DataObject();
-        }
-      }
-      else
+      if (NetString.HasValue(codeLineName))
       {
         Reader.LJCOpen();
         while (Reader.Read())
         {
           var codeLineValue = Reader.GetString("CodeLine");
+          codeLineValue = codeLineValue?.Trim();
           var nameValue = Reader.GetString("Name");
-          if ( codeLineValue == codeLine
-            && nameValue == name)
+          nameValue = nameValue?.Trim();
+          if (codeLineValue == codeLineName)
           {
-            retValue = DataObject();
-            break;
+            if (NetString.HasValue(name))
+            {
+              if (nameValue == name)
+              {
+                retValue = DataObject();
+                break;
+              }
+            }
+            else
+            {
+              retValue = DataObject();
+              break;
+            }
           }
         }
         Reader.LJCOpen();
@@ -183,7 +193,7 @@ namespace ProjectFilesDAL
       if (NetString.HasValue(codeGroup.Name))
       {
         var current = DataObject();
-        var codeLines = LoadAllExcept(codeGroup.Name);
+        var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
         if (codeLines != null)
         {
           WriteFileWithBackup(codeLines);

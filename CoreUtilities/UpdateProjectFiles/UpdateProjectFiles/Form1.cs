@@ -27,7 +27,6 @@ namespace UpdateProjectFiles
         codeLine.Path = $"{codeLine.Path}Updated";
         manager.Update(codeLine);
         ShowCodeLine(manager, "Update");
-        manager.SortFile();
       }
 
       manager.Delete("ANewCodeLine");
@@ -47,10 +46,9 @@ namespace UpdateProjectFiles
         codeGroup.Path = $"{codeGroup.Path}Updated";
         manager.Update(codeGroup);
         ShowCodeGroup(manager, "Update");
-        manager.SortFile();
       }
 
-      manager.Delete("ANewCodeGroup");
+      manager.Delete("LJCProjectsDev", "ANewCodeGroup");
     }
 
     public void ShowCodeLine(CodeLineManager manager, string text)
