@@ -5,6 +5,7 @@ using System;
 
 namespace ProjectFilesDAL
 {
+  /// <summary>The CodeGroup Data Object.</summary>
   public class CodeGroup : IComparable<CodeGroup> 
   {
     #region Data Methods

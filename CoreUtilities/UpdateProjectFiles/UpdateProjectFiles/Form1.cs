@@ -1,15 +1,5 @@
 ﻿using ProjectFilesDAL;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace UpdateProjectFiles
 {
@@ -19,35 +9,65 @@ namespace UpdateProjectFiles
     {
       InitializeComponent();
 
-      TestCodeLine();
+      //TestCodeLine();
+      TestCodeGroup();
     }
 
     public void TestCodeLine()
     {
       var manager = new CodeLineManager();
       manager.Retrieve("LJCProjectsDev");
-      ShowPath(manager, "Retrieve");
+      ShowCodeLine(manager, "Retrieve");
 
       var codeLine = manager.Add("ANewCodeLine", "NewPath");
-      ShowPath(manager, "Add");
+      ShowCodeLine(manager, "Add");
       manager.SortFile();
       if (codeLine != null)
       {
         codeLine.Path = $"{codeLine.Path}Updated";
         manager.Update(codeLine);
-        ShowPath(manager, "Update");
+        ShowCodeLine(manager, "Update");
         manager.SortFile();
       }
 
-      manager.Delete("NewCodeLine");
+      manager.Delete("ANewCodeLine");
     }
 
-    public void ShowPath(CodeLineManager manager, string text)
+    public void TestCodeGroup()
+    {
+      var manager = new CodeGroupManager();
+      manager.Retrieve("LJCProjectsDev", "CoreAssemblies");
+      ShowCodeGroup(manager, "Retrieve");
+
+      var codeGroup = manager.Add("LJCProjectsDev", "ANewCodeGroup", "NewPath");
+      ShowCodeGroup(manager, "Add");
+      manager.SortFile();
+      if (codeGroup != null)
+      {
+        codeGroup.Path = $"{codeGroup.Path}Updated";
+        manager.Update(codeGroup);
+        ShowCodeGroup(manager, "Update");
+        manager.SortFile();
+      }
+
+      manager.Delete("ANewCodeGroup");
+    }
+
+    public void ShowCodeLine(CodeLineManager manager, string text)
     {
       var codeLine = manager.DataObject();
       if (codeLine != null)
       {
         MessageBox.Show($"{text}\r\n{codeLine.Path}");
+      }
+    }
+
+    public void ShowCodeGroup(CodeGroupManager manager, string text)
+    {
+      var codeGroup = manager.DataObject();
+      if (codeGroup != null)
+      {
+        MessageBox.Show($"{text}\r\n{codeGroup.Path}");
       }
     }
   }

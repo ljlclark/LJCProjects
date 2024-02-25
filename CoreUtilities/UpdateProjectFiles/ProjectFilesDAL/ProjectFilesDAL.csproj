@@ -58,6 +58,7 @@
     <Compile Include="Data\Projects.cs" />
     <Compile Include="Data\Solution.cs" />
     <Compile Include="Data\Solutions.cs" />
+    <Compile Include="Manager\CodeGroupManager.cs" />
     <Compile Include="Manager\CodeLineManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ProjectFilesDAL
 {
   /// <summary>Represents a collection of CodeLine Data Objects.</summary>
-  public class CodeLines : List<Solution>
+  public class CodeLines : List<CodeLine>
   {
     #region Constructors
 
@@ -26,12 +26,12 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public Solution LJCSearchUnique(string name)
+    public CodeLine LJCSearchUnique(string name)
     {
-      Solution retValue = null;
+      CodeLine retValue = null;
 
       LJCSortUnique();
-      Solution searchItem = new Solution()
+      CodeLine searchItem = new CodeLine()
       {
         Name = name
       };

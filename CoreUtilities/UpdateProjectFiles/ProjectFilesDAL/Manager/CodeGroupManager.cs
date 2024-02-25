@@ -1,14 +1,14 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CodeLineManager.cs
+// CodeGroupManager.cs
 using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>The CodeLine data manager.</summary>
-  public class CodeLineManager
+  /// <summary>The CodeGroup data manager.</summary>
+  public class CodeGroupManager
   {
     #region Constructors
 
@@ -16,7 +16,7 @@ namespace ProjectFilesDAL
     /// Initializes an object instance.
     /// </summary>
     /// <param name="fileName">The data file name.</param>
-    public CodeLineManager(string fileName = "CodeLine.txt")
+    public CodeGroupManager(string fileName = "CodeGroup.txt")
     {
       FileName = fileName;
       Reader = new TextDataReader();
@@ -29,25 +29,26 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Adds a CodeLine file record
     /// </summary>
+    /// <param name="codeLine">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added CodeLine data object.</returns>
-    public CodeLine Add(string name, string path)
+    public CodeGroup Add(string codeLine, string name, string path)
     {
-      CodeLine retValue = null;
+      CodeGroup retValue = null;
 
       if (NetString.HasValue(name))
       {
-        var codeLine = new CodeLine()
+        var codeGroup = new CodeGroup()
         {
+          CodeLine = codeLine,
           Name = name,
           Path = path
         };
-        //var current = DataObject();
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(codeLine));
+        File.AppendAllText(FileName, CreateRecord(codeGroup));
         Reader.LJCOpen();
-        retValue = Retrieve(name);
+        retValue = Retrieve(codeLine, name);
       }
       return retValue;
     }
@@ -77,15 +78,15 @@ namespace ProjectFilesDAL
     /// Retrieves a collection of CodeLine records.
     /// </summary>
     /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLines collection if available; otherwise null.</returns>
-    public CodeLines Load(string name = null)
+    /// <returns>The CodeGroups collection if available; otherwise null.</returns>
+    public CodeGroups Load(string name = null)
     {
-      CodeLines retValue = null;
+      CodeGroups retValue = null;
 
       Reader.LJCOpen();
       if (Reader.Read())
       {
-        retValue = new CodeLines();
+        retValue = new CodeGroups();
         do
         {
           if (!NetString.HasValue(name))
@@ -113,14 +114,14 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLines collection if available; otherwise null.</returns>
-    public CodeLines LoadAllExcept(string name)
+    public CodeGroups LoadAllExcept(string name)
     {
-      CodeLines retValue = null;
+      CodeGroups retValue = null;
 
       Reader.LJCOpen();
       if (Reader.Read())
       {
-        retValue = new CodeLines();
+        retValue = new CodeGroups();
         do
         {
           var value = Reader.GetString("Name");
@@ -138,11 +139,12 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a CodeLine record.
     /// </summary>
+    /// <param name="codeLine">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLine Data Object if found; otherwise null.</returns>
-    public CodeLine Retrieve(string name = null)
+    public CodeGroup Retrieve(string codeLine, string name = null)
     {
-      CodeLine retValue = null;
+      CodeGroup retValue = null;
 
       if (!NetString.HasValue(name))
       {
@@ -156,8 +158,10 @@ namespace ProjectFilesDAL
         Reader.LJCOpen();
         while (Reader.Read())
         {
-          var value = Reader.GetString("Name");
-          if (value == name)
+          var codeLineValue = Reader.GetString("CodeLine");
+          var nameValue = Reader.GetString("Name");
+          if ( codeLineValue == codeLine
+            && nameValue == name)
           {
             retValue = DataObject();
             break;
@@ -172,20 +176,20 @@ namespace ProjectFilesDAL
     /// Updates a CodeLine file record.
     /// </summary>
     /// <param name="codeLine">The CodeLine Data Object.</param>
-    public CodeLine Update(CodeLine codeLine)
+    public CodeGroup Update(CodeGroup codeGroup)
     {
-      CodeLine retValue = null;
+      CodeGroup retValue = null;
 
-      if (NetString.HasValue(codeLine.Name))
+      if (NetString.HasValue(codeGroup.Name))
       {
         var current = DataObject();
-        var codeLines = LoadAllExcept(codeLine.Name);
+        var codeLines = LoadAllExcept(codeGroup.Name);
         if (codeLines != null)
         {
           WriteFileWithBackup(codeLines);
         }
         Reader.Close();
-        var text = CreateRecord(codeLine);
+        var text = CreateRecord(codeGroup);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
         Retrieve(current.Name);
@@ -197,16 +201,16 @@ namespace ProjectFilesDAL
     #region Public Methods
 
     /// <summary>
-    /// Write the text file from a CodeLines collection.
+    /// Write the text file from a CodeGroups collection.
     /// </summary>
     /// <param name="fileName">The File name.</param>
-    /// <param name="codeLines">The CodeLines collection</param>
-    public void CreateFile(string fileName, CodeLines codeLines)
+    /// <param name="codeGroups">The CodeGroups collection</param>
+    public void CreateFile(string fileName, CodeGroups codeGroups)
     {
-      File.WriteAllText(fileName, "Name, Path\r\n");
-      foreach (CodeLine codeLine in codeLines)
+      File.WriteAllText(fileName, "CodeLine, Name, Path\r\n");
+      foreach (CodeGroup codeGroup in codeGroups)
       {
-        var text = CreateRecord(codeLine);
+        var text = CreateRecord(codeGroup);
         File.AppendAllText(fileName, text);
       }
     }
@@ -214,24 +218,26 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Creates a record string.
     /// </summary>
-    /// <param name="codeLine">The CodeLine Data Object.</param>
+    /// <param name="codeGroup">The CodeLine Data Object.</param>
     /// <returns>The record string.</returns>
-    public string CreateRecord(CodeLine codeLine)
+    public string CreateRecord(CodeGroup codeGroup)
     {
       string retValue = null;
 
-      if (codeLine != null && NetString.HasValue(codeLine.Name))
+      if (codeGroup != null && NetString.HasValue(codeGroup.Name))
       {
-        retValue = $"{codeLine.Name}, {codeLine.Path}\r\n";
+        retValue = $"{codeGroup.CodeLine}, {codeGroup.Name}"
+          + $", {codeGroup.Path}\r\n";
       }
       return retValue;
     }
 
     /// <summary>Creates a Data Object from the current values.</summary>
-    public CodeLine DataObject()
+    public CodeGroup DataObject()
     {
-      var retValue = new CodeLine()
+      var retValue = new CodeGroup()
       {
+        CodeLine = Reader.GetString("CodeLine"),
         Name = Reader.GetString("Name"),
         Path = Reader.GetString("Path")
       };
@@ -241,16 +247,16 @@ namespace ProjectFilesDAL
     /// <summary>Sorts the file on unique values.</summary>
     public void SortFile()
     {
-      var codeLines = Load();
-      codeLines.LJCSortUnique();
-      WriteFileWithBackup(codeLines);
+      var codeGroups = Load();
+      codeGroups.LJCSortUnique();
+      WriteFileWithBackup(codeGroups);
     }
 
     /// <summary>
     /// Write the text file from a CodeLines collection and create a backup.
     /// </summary>
-    /// <param name="codeLines">The CodeLines collection</param>
-    public void WriteFileWithBackup(CodeLines codeLines)
+    /// <param name="codeGroups">The CodeGroups collection</param>
+    public void WriteFileWithBackup(CodeGroups codeGroups)
     {
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
@@ -260,7 +266,7 @@ namespace ProjectFilesDAL
       {
         File.Delete(FileName);
       }
-      CreateFile(FileName, codeLines);
+      CreateFile(FileName, codeGroups);
       Reader.LJCOpen();
     }
     #endregion

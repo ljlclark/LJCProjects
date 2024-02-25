@@ -5,6 +5,7 @@ using System;
 
 namespace ProjectFilesDAL
 {
+  /// <summary>The Solution Data Object.</summary>
   public class Solution : IComparable<Solution>
   {
     #region Data Methods

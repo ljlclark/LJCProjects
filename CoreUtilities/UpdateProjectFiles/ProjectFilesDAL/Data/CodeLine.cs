@@ -5,13 +5,14 @@ using System;
 
 namespace ProjectFilesDAL
 {
-  public class CodeLline : IComparable<Solution>
+  /// <summary>The CodeLine Data Object.</summary>
+  public class CodeLine : IComparable<CodeLine>
   {
     #region Data Methods
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(Solution other)
+    public int CompareTo(CodeLine other)
     {
       int retValue;
 
