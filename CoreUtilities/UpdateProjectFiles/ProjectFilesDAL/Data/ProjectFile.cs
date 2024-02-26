@@ -24,13 +24,21 @@ namespace ProjectFilesDAL
       else
       {
         // Case sensitive.
-        retValue = TargetSolution.CompareTo(other.TargetSolution);
+        retValue = TargetCodeLine.CompareTo(other.TargetCodeLine);
         if (0 == retValue)
         {
-          retValue = TargetProject.CompareTo(other.TargetProject);
+          retValue = TargetCodeGroup.CompareTo(other.TargetCodeGroup);
           if (0 == retValue)
           {
-            retValue = SourceFileName.CompareTo(other.SourceFileName);
+            retValue = TargetSolution.CompareTo(other.TargetSolution);
+            if (0 == retValue)
+            {
+              retValue = TargetProject.CompareTo(other.TargetProject);
+              if (0 == retValue)
+              {
+                retValue = SourceFileName.CompareTo(other.SourceFileName);
+              }
+            }
           }
         }
       }
@@ -39,6 +47,12 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Data Properties
+
+    /// <summary>Gets or sets the Target CodeLine name.</summary>
+    public string TargetCodeLine { get; set; }
+
+    /// <summary>Gets or sets the Target CodeGroup name.</summary>
+    public string TargetCodeGroup { get; set; }
 
     /// <summary>Gets or sets the Target Solution name.</summary>
     public string TargetSolution { get; set; }
@@ -49,6 +63,15 @@ namespace ProjectFilesDAL
     /// <summary>Gets or sets the Source file name.</summary>
     public string SourceFileName { get; set; }
 
+    /// <summary>Gets or sets the Source CodeLine name.</summary>
+    public string SourceCodeLine { get; set; }
+
+    /// <summary>Gets or sets the Source CodeGroup name.</summary>
+    public string SourceCodeGroup { get; set; }
+
+    /// <summary>Gets or sets the Source Solution name.</summary>
+    public string SourceSolution { get; set; }
+
     /// <summary>Gets or sets the Source Project name.</summary>
     public string SourceProject { get; set; }
 
@@ -58,5 +81,24 @@ namespace ProjectFilesDAL
     /// <summary>Gets or sets the Target file spec.</summary>
     public string TargetFileSpec { get; set; }
     #endregion
+  }
+
+  /// <summary></summary>
+  public class ProjectFileKey
+  {
+    /// <summary>Gets or sets the Target CodeLine name.</summary>
+    public string CodeLine { get; set; }
+
+    /// <summary>Gets or sets the Target CodeGroup name.</summary>
+    public string CodeGroup { get; set; }
+
+    /// <summary>Gets or sets the Target Solution name.</summary>
+    public string Solution { get; set; }
+
+    /// <summary>Gets or sets the Target Project name.</summary>
+    public string Project { get; set; }
+
+    /// <summary>Gets or sets the Source file name.</summary>
+    public string SourceFileName { get; set; }
   }
 }

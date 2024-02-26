@@ -30,28 +30,22 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Adds a Project file record
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <param name="solutionName">The Solution name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Project data object.</returns>
-    public Project Add(string codeLineName, string codeGroupName
-      , string solutionName, string name, string path)
+    public Project Add(ProjectParentKey parentKey, string name, string path)
     {
       Project retValue = null;
 
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(codeGroupName)
-        && NetString.HasValue(solutionName)
+      if (HasParentKey(parentKey)
         && NetString.HasValue(name))
       {
-        var project = CreateDataObject(codeLineName, codeGroupName, solutionName
-          , name, path);
+        var project = CreateDataObject(parentKey, name, path);
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(project));
         Reader.LJCOpen();
-        retValue = Retrieve(codeLineName, codeGroupName, solutionName, name);
+        retValue = Retrieve(parentKey, name);
       }
       return retValue;
     }
@@ -59,26 +53,22 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Deletes a Project record.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <param name="solutionName">The Solution name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    public void Delete(string codeLineName, string codeGroupName
-      , string solutionName, string name)
+    public void Delete(ProjectParentKey parentKey, string name)
     {
-      if (NetString.HasValue(name))
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(name))
       {
         var current = CurrentDataObject();
-        var projects = LoadAllExcept(codeLineName, codeGroupName, solutionName
-          , name);
+        var projects = LoadAllExcept(parentKey, name);
         if (projects != null)
         {
           WriteFileWithBackup(projects);
         }
         if (current != null)
         {
-          Retrieve(current.CodeLine, current.CodeGroup, current.Solution
-            , current.Name);
+          Retrieve(parentKey, current.Name);
         }
       }
     }
@@ -86,19 +76,14 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a collection of Project records.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <param name="solutionName">The Solution name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Projects Load(string codeLineName = null
-      , string codeGroupName = null, string solutionName = null
-      , string name = null)
+    public Projects Load(ProjectParentKey parentKey = null, string name = null)
     {
       Projects retValue = null;
 
-      var project = CreateDataObject(codeLineName, codeGroupName,solutionName
-        , name, null);
+      var project = CreateDataObject(parentKey, name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -119,13 +104,10 @@ namespace ProjectFilesDAL
     /// Retrieves a collection of records that do NOT match the supplied Name
     /// value.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <param name="solutionName">The Soluton name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Projects LoadAllExcept(string codeLineName, string codeGroupName
-      , string solutionName, string name)
+    public Projects LoadAllExcept(ProjectParentKey parentKey, string name)
     {
       Projects retValue = null;
 
@@ -136,9 +118,9 @@ namespace ProjectFilesDAL
         do
         {
           var project = CurrentDataObject();
-          if (project.CodeLine != codeLineName
-            && project.CodeGroup != codeGroupName
-            && project.Solution != solutionName
+          if (project.CodeLine != parentKey.CodeLine
+            && project.CodeGroup != parentKey.CodeGroup
+            && project.Solution != parentKey.Solution
             && project.Name != name)
           {
             retValue.Add(project);
@@ -152,27 +134,22 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a Project record.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The Solution name.</param>
-    /// <param name="solutionName">The Solution name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public Project Retrieve(string codeLineName, string codeGroupName
-      , string solutionName = null, string name = null)
+    public Project Retrieve(ProjectParentKey parentKey, string name = null)
     {
       Project retValue = null;
 
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(codeGroupName)
-        && NetString.HasValue(solutionName))
+      if (HasParentKey(parentKey))
       {
         Reader.LJCOpen();
         while (Reader.Read())
         {
           var project = CurrentDataObject();
-          if (project.CodeLine == codeLineName
-            && project.CodeGroup == codeGroupName
-            && project.Solution == solutionName)
+          if (project.CodeLine == parentKey.CodeLine
+            && project.CodeGroup == parentKey.CodeGroup
+            && project.Solution == parentKey.Solution)
           {
             if (NetString.HasValue(name))
             {
@@ -202,11 +179,12 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      if (NetString.HasValue(project.Name))
+      var parentKey = CreateParentKey(project);
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(project.Name))
       {
         var current = CurrentDataObject();
-        var projects = LoadAllExcept(project.CodeLine, project.CodeGroup
-          , project.Solution, project.Name);
+        var projects = LoadAllExcept(parentKey, project.Name);
         if (projects != null)
         {
           WriteFileWithBackup(projects);
@@ -215,8 +193,7 @@ namespace ProjectFilesDAL
         var text = CreateRecord(project);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
-        Retrieve(current.CodeLine, current.CodeGroup, current.Solution
-          , current.Name);
+        Retrieve(parentKey, current.Name);
       }
       return retValue;
     }
@@ -241,6 +218,17 @@ namespace ProjectFilesDAL
       }
     }
 
+    public ProjectParentKey CreateParentKey(Project project)
+    {
+      var retValue = new ProjectParentKey()
+      {
+        CodeLine = project.CodeLine,
+        CodeGroup = project.CodeGroup,
+        Solution = project.Solution
+      };
+      return retValue;
+    }
+
     /// <summary>
     /// Creates a record string.
     /// </summary>
@@ -250,7 +238,8 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      if (project != null && NetString.HasValue(project.Name))
+      if (project != null
+        && NetString.HasValue(project.Name))
       {
         var builder = new StringBuilder(1024);
         builder.Append($"{project.CodeLine}, {project.CodeGroup}");
@@ -304,17 +293,29 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
-    private Project CreateDataObject(string codeLineName, string codeGroupName
-      , string solutionName, string name, string pathName)
+    private Project CreateDataObject(ProjectParentKey parentKey, string name
+      , string pathName)
     {
       var retValue = new Project()
       {
-        CodeLine = codeLineName,
-        CodeGroup = codeGroupName,
-        Solution = solutionName,
+        CodeLine = parentKey.CodeLine,
+        CodeGroup = parentKey.CodeGroup,
+        Solution = parentKey.Solution,
         Name = name,
         Path = pathName
       };
+      return retValue;
+    }
+
+    private bool HasParentKey(ProjectParentKey parentKey)
+    {
+      var retValue = true;
+      if (NetString.HasValue(parentKey.CodeLine)
+        && NetString.HasValue(parentKey.CodeGroup)
+        && NetString.HasValue(parentKey.Solution))
+      {
+        retValue = true;
+      }
       return retValue;
     }
 

@@ -1,19 +1,21 @@
 ﻿using ProjectFilesDAL;
+using System.Text;
 using System.Windows.Forms;
 
 namespace UpdateProjectFiles
 {
-  public partial class Form1 : Form
+  internal partial class Form1 : Form
   {
-    public Form1()
+    internal Form1()
     {
       InitializeComponent();
 
       //TestCodeLine();
-      TestCodeGroup();
+      //TestCodeGroup();
+      TestSolution();
     }
 
-    public void TestCodeLine()
+    internal void TestCodeLine()
     {
       var manager = new CodeLineManager();
       manager.Retrieve("LJCProjectsDev");
@@ -32,7 +34,7 @@ namespace UpdateProjectFiles
       manager.Delete("ANewCodeLine");
     }
 
-    public void TestCodeGroup()
+    internal void TestCodeGroup()
     {
       var manager = new CodeGroupManager();
       manager.Retrieve("LJCProjectsDev", "CoreAssemblies");
@@ -51,21 +53,57 @@ namespace UpdateProjectFiles
       manager.Delete("LJCProjectsDev", "ANewCodeGroup");
     }
 
-    public void ShowCodeLine(CodeLineManager manager, string text)
+    internal void TestSolution()
     {
-      var codeLine = manager.CurrentDataObject();
-      if (codeLine != null)
+      var manager = new SolutionManager();
+      var solutionParentKey = new SolutionParentKey()
       {
-        MessageBox.Show($"{text}\r\n{codeLine.Path}");
-      }
+        CodeLine = "LJCProjectsDev",
+        CodeGroup = "CoreAssemblies"
+      };
+      manager.Retrieve(solutionParentKey, "LJCNetCommon");
+      ShowSolution(manager, "Retrieve");
     }
 
-    public void ShowCodeGroup(CodeGroupManager manager, string text)
+    private void ShowCodeGroup(CodeGroupManager manager, string text)
     {
       var codeGroup = manager.CurrentDataObject();
       if (codeGroup != null)
       {
-        MessageBox.Show($"{text}\r\n{codeGroup.Path}");
+        var builder = new StringBuilder(256);
+        builder.AppendLine(text);
+        builder.AppendLine(codeGroup.Name);
+        builder.AppendLine(codeGroup.Path);
+        var message = builder.ToString();
+        MessageBox.Show(message);
+      }
+    }
+
+    private void ShowCodeLine(CodeLineManager manager, string text)
+    {
+      var codeLine = manager.CurrentDataObject();
+      if (codeLine != null)
+      {
+        var builder = new StringBuilder(256);
+        builder.AppendLine(text);
+        builder.AppendLine(codeLine.Name);
+        builder.AppendLine(codeLine.Path);
+        var message = builder.ToString();
+        MessageBox.Show(message);
+      }
+    }
+
+    private void ShowSolution(SolutionManager manager, string text)
+    {
+      var solution = manager.CurrentDataObject();
+      if (solution != null)
+      {
+        var builder = new StringBuilder(256);
+        builder.AppendLine(text);
+        builder.AppendLine(solution.Name);
+        builder.Append(solution.Path);
+        var message = builder.ToString();
+        MessageBox.Show(message);
       }
     }
   }

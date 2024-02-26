@@ -52,4 +52,16 @@ namespace ProjectFilesDAL
     public string Path { get; set; }
     #endregion
   }
+
+  public class ProjectParentKey
+  {
+    /// <summary>Gets or sets the CodeLine name.</summary>
+    public string CodeLine { get; set; }
+
+    /// <summary>Gets or sets the CodeGroup name.</summary>
+    public string CodeGroup { get; set; }
+
+    /// <summary>Gets or sets the Solution name.</summary>
+    public string Solution { get; set; }
+  }
 }

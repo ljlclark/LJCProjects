@@ -29,26 +29,22 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Adds a Solution file record
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Solution data object.</returns>
-    public Solution Add(string codeLineName, string codeGroupName, string name
-      , string path)
+    public Solution Add(SolutionParentKey parentKey, string name, string path)
     {
       Solution retValue = null;
 
-      if ( NetString.HasValue(codeLineName)
-        && NetString.HasValue(codeGroupName)
+      if (HasParentKey(parentKey)
         && NetString.HasValue(name))
       {
-        var solution = CreateDataObject(codeLineName, codeGroupName, name
-          , path);
+        var solution = CreateDataObject(parentKey, name, path);
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(solution));
         Reader.LJCOpen();
-        retValue = Retrieve(codeGroupName, name);
+        retValue = Retrieve(parentKey, name);
       }
       return retValue;
     }
@@ -56,22 +52,22 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Deletes a Solution record.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    public void Delete(string codeLineName, string codeGroupName, string name)
+    public void Delete(SolutionParentKey parentKey, string name)
     {
-      if (NetString.HasValue(name))
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(name))
       {
         var current = CurrentDataObject();
-        var solutions = LoadAllExcept(codeLineName, codeGroupName, name);
+        var solutions = LoadAllExcept(parentKey, name);
         if (solutions != null)
         {
           WriteFileWithBackup(solutions);
         }
         if (current != null)
         {
-          Retrieve(current.CodeLine, current.CodeGroup, current.Name);
+          Retrieve(parentKey, current.Name);
         }
       }
     }
@@ -79,16 +75,14 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a collection of Solution records.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions Load(string codeLineName = null
-      , string codeGroupName = null, string name = null)
+    public Solutions Load(SolutionParentKey parentKey = null, string name = null)
     {
       Solutions retValue = null;
 
-      var solution = CreateDataObject(codeLineName, codeGroupName, name, null);
+      var solution = CreateDataObject(parentKey, name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -109,12 +103,10 @@ namespace ProjectFilesDAL
     /// Retrieves a collection of records that do NOT match the supplied Name
     /// value.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions LoadAllExcept(string codeLineName,string codeGroupName
-      , string name)
+    public Solutions LoadAllExcept(SolutionParentKey parentKey, string name)
     {
       Solutions retValue = null;
 
@@ -125,8 +117,8 @@ namespace ProjectFilesDAL
         do
         {
           var solution = CurrentDataObject();
-          if (solution.CodeLine != codeLineName
-            && solution.CodeGroup != codeGroupName
+          if (solution.CodeLine != parentKey.CodeLine
+            && solution.CodeGroup != parentKey.CodeGroup
             && solution.Name != name)
           {
             retValue.Add(solution);
@@ -140,23 +132,21 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a Solution record.
     /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The Solution name.</param>
+    /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public Solution Retrieve(string codeLineName, string codeGroupName
-      , string name = null)
+    public Solution Retrieve(SolutionParentKey parentKey, string name = null)
     {
       Solution retValue = null;
 
-      if (NetString.HasValue(codeGroupName))
+      if (HasParentKey(parentKey))
       {
         Reader.LJCOpen();
         while (Reader.Read())
         {
           var solution = CurrentDataObject();
-          if (solution.CodeLine == codeLineName
-            && solution.CodeGroup == codeGroupName)
+          if (solution.CodeLine == parentKey.CodeLine
+            && solution.CodeGroup == parentKey.CodeGroup)
           {
             if (NetString.HasValue(name))
             {
@@ -181,25 +171,26 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Updates a Solution file record.
     /// </summary>
-    /// <param name="Solution">The Solution Data Object.</param>
-    public Solution Update(Solution Solution)
+    /// <param name="solution">The Solution Data Object.</param>
+    public Solution Update(Solution solution)
     {
       Solution retValue = null;
 
-      if (NetString.HasValue(Solution.Name))
+      var parentKey = CreateParentKey(solution);
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(solution.Name))
       {
         var current = CurrentDataObject();
-        var Solutions = LoadAllExcept(Solution.CodeLine,Solution.CodeGroup
-          , Solution.Name);
+        var Solutions = LoadAllExcept(parentKey, solution.Name);
         if (Solutions != null)
         {
           WriteFileWithBackup(Solutions);
         }
         Reader.Close();
-        var text = CreateRecord(Solution);
+        var text = CreateRecord(solution);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
-        Retrieve(current.CodeLine, current.CodeGroup, current.Name);
+        Retrieve(parentKey, current.Name);
       }
       return retValue;
     }
@@ -220,6 +211,16 @@ namespace ProjectFilesDAL
         var text = CreateRecord(solution);
         File.AppendAllText(fileName, text);
       }
+    }
+
+    public SolutionParentKey CreateParentKey(Solution solution)
+    {
+      var retValue = new SolutionParentKey()
+      {
+        CodeLine = solution.CodeLine,
+        CodeGroup = solution.CodeGroup
+      };
+      return retValue;
     }
 
     /// <summary>
@@ -281,16 +282,27 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
-    private Solution CreateDataObject(string codeLineName, string codeGroupName
-      , string name, string pathName)
+    private Solution CreateDataObject(SolutionParentKey parentKey, string name
+      , string pathName)
     {
       var retValue = new Solution()
       {
-        CodeLine = codeLineName,
-        CodeGroup = codeGroupName,
+        CodeLine = parentKey.CodeLine,
+        CodeGroup = parentKey.CodeGroup,
         Name = name,
         Path = pathName
       };
+      return retValue;
+    }
+
+    private bool HasParentKey(SolutionParentKey parentKey)
+    {
+      var retValue = true;
+      if (NetString.HasValue(parentKey.CodeLine)
+        && NetString.HasValue(parentKey.CodeGroup))
+      {
+        retValue = true;
+      }
       return retValue;
     }
 
