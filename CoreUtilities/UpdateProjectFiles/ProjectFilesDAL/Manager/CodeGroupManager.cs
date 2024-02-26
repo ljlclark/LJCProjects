@@ -40,12 +40,7 @@ namespace ProjectFilesDAL
       if (NetString.HasValue(codeLineName)
         && NetString.HasValue(name))
       {
-        var codeGroup = new CodeGroup()
-        {
-          CodeLine = codeLineName,
-          Name = name,
-          Path = path
-        };
+        var codeGroup = CreateDataObject(codeLineName, name, path);
         Reader.Close();
         File.AppendAllText(FileName, CreateRecord(codeGroup));
         Reader.LJCOpen();
@@ -62,7 +57,7 @@ namespace ProjectFilesDAL
     {
       if (NetString.HasValue(name))
       {
-        var current = DataObject();
+        var current = CurrentDataObject();
         var codeLines = LoadAllExcept(codeLineName, name);
         if (codeLines != null)
         {
@@ -84,7 +79,7 @@ namespace ProjectFilesDAL
     {
       CodeGroups retValue = null;
 
-      var codeGroup = CreateObject(codeLineName, name, null);
+      var codeGroup = CreateDataObject(codeLineName, name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -93,7 +88,7 @@ namespace ProjectFilesDAL
         {
           if (IsMatch(codeGroup))
           {
-            retValue.Add(DataObject());
+            retValue.Add(CurrentDataObject());
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -117,15 +112,11 @@ namespace ProjectFilesDAL
         retValue = new CodeGroups();
         do
         {
-          var codeLineValue = Reader.GetString("CodeLine");
-          codeLineValue = codeLineValue?.Trim();
-          var nameValue = Reader.GetString("Name");
-          nameValue = nameValue.Trim();
-          if (codeLineValue != codeLineName
-            && nameValue != name)
+          var codeLine = CurrentDataObject();
+          if (codeLine.CodeLine != codeLineName
+            && codeLine.Name != name)
           {
-            var codeGroup = DataObject();
-            retValue.Add(codeGroup);
+            retValue.Add(codeLine);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -148,23 +139,20 @@ namespace ProjectFilesDAL
         Reader.LJCOpen();
         while (Reader.Read())
         {
-          var codeLineValue = Reader.GetString("CodeLine");
-          codeLineValue = codeLineValue?.Trim();
-          var nameValue = Reader.GetString("Name");
-          nameValue = nameValue?.Trim();
-          if (codeLineValue == codeLineName)
+          var codeGroup = CurrentDataObject();
+          if (codeGroup.CodeLine == codeLineName)
           {
             if (NetString.HasValue(name))
             {
-              if (nameValue == name)
+              if (codeGroup.Name == name)
               {
-                retValue = DataObject();
+                retValue = codeGroup;
                 break;
               }
             }
             else
             {
-              retValue = DataObject();
+              retValue = codeGroup;
               break;
             }
           }
@@ -184,7 +172,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(codeGroup.Name))
       {
-        var current = DataObject();
+        var current = CurrentDataObject();
         var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
         if (codeLines != null)
         {
@@ -228,20 +216,20 @@ namespace ProjectFilesDAL
 
       if (codeGroup != null && NetString.HasValue(codeGroup.Name))
       {
-        retValue = $"{codeGroup.CodeLine}, {codeGroup.Name}"
-          + $", {codeGroup.Path}\r\n";
+        retValue = $"{codeGroup.CodeLine}, {codeGroup.Name}";
+        retValue += $", {codeGroup.Path}\r\n";
       }
       return retValue;
     }
 
     /// <summary>Creates a Data Object from the current values.</summary>
-    public CodeGroup DataObject()
+    public CodeGroup CurrentDataObject()
     {
       var retValue = new CodeGroup()
       {
-        CodeLine = Reader.GetString("CodeLine"),
-        Name = Reader.GetString("Name"),
-        Path = Reader.GetString("Path")
+        CodeLine = Reader.GetTrimValue("CodeLine"),
+        Name = Reader.GetTrimValue("Name"),
+        Path = Reader.GetTrimValue("Path")
       };
       return retValue;
     }
@@ -275,7 +263,7 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
-    private CodeGroup CreateObject(string codeLineName, string name
+    private CodeGroup CreateDataObject(string codeLineName, string name
       , string pathName)
     {
       var retValue = new CodeGroup()
@@ -291,10 +279,9 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      var codeLineValue = Reader.GetTrimValue("CodeLine");
-      var nameValue = Reader.GetTrimValue("Name");
-      if (codeLineValue == codeGroup.CodeLine
-        && nameValue == codeGroup.Name)
+      var current = CurrentDataObject();
+      if (current.CodeLine == codeGroup.CodeLine
+        && current.Name == codeGroup.Name)
       {
         retValue = true;
       }

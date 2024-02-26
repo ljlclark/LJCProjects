@@ -53,7 +53,7 @@ namespace UpdateProjectFiles
 
     public void ShowCodeLine(CodeLineManager manager, string text)
     {
-      var codeLine = manager.DataObject();
+      var codeLine = manager.CurrentDataObject();
       if (codeLine != null)
       {
         MessageBox.Show($"{text}\r\n{codeLine.Path}");
@@ -62,7 +62,7 @@ namespace UpdateProjectFiles
 
     public void ShowCodeGroup(CodeGroupManager manager, string text)
     {
-      var codeGroup = manager.DataObject();
+      var codeGroup = manager.CurrentDataObject();
       if (codeGroup != null)
       {
         MessageBox.Show($"{text}\r\n{codeGroup.Path}");

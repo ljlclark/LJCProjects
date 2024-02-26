@@ -1,14 +1,15 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// SolutionManager.cs
+// ProjectManager.cs
 using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
+using System.Text;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>The Solution data manager.</summary>
-  public class SolutionManager
+  /// <summary>The Project data manager.</summary>
+  public class ProjectManager
   {
     #region Constructors
 
@@ -16,7 +17,7 @@ namespace ProjectFilesDAL
     /// Initializes an object instance.
     /// </summary>
     /// <param name="fileName">The data file name.</param>
-    public SolutionManager(string fileName = "Solution.txt")
+    public ProjectManager(string fileName = "Project.txt")
     {
       FileName = fileName;
       Reader = new TextDataReader();
@@ -27,75 +28,84 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     /// <summary>
-    /// Adds a Solution file record
+    /// Adds a Project file record
     /// </summary>
     /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="solutionName">The Solution name.</param>
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
-    /// <returns>The added Solution data object.</returns>
-    public Solution Add(string codeLineName, string codeGroupName, string name
-      , string path)
+    /// <returns>The added Project data object.</returns>
+    public Project Add(string codeLineName, string codeGroupName
+      , string solutionName, string name, string path)
     {
-      Solution retValue = null;
+      Project retValue = null;
 
-      if ( NetString.HasValue(codeLineName)
+      if (NetString.HasValue(codeLineName)
         && NetString.HasValue(codeGroupName)
+        && NetString.HasValue(solutionName)
         && NetString.HasValue(name))
       {
-        var solution = CreateDataObject(codeLineName, codeGroupName, name
-          , path);
+        var project = CreateDataObject(codeLineName, codeGroupName, solutionName
+          , name, path);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(solution));
+        File.AppendAllText(FileName, CreateRecord(project));
         Reader.LJCOpen();
-        retValue = Retrieve(codeGroupName, name);
+        retValue = Retrieve(codeLineName, codeGroupName, solutionName, name);
       }
       return retValue;
     }
 
     /// <summary>
-    /// Deletes a Solution record.
+    /// Deletes a Project record.
     /// </summary>
     /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="solutionName">The Solution name.</param>
     /// <param name="name">The Name value.</param>
-    public void Delete(string codeLineName, string codeGroupName, string name)
+    public void Delete(string codeLineName, string codeGroupName
+      , string solutionName, string name)
     {
       if (NetString.HasValue(name))
       {
         var current = CurrentDataObject();
-        var solutions = LoadAllExcept(codeLineName, codeGroupName, name);
-        if (solutions != null)
+        var projects = LoadAllExcept(codeLineName, codeGroupName, solutionName
+          , name);
+        if (projects != null)
         {
-          WriteFileWithBackup(solutions);
+          WriteFileWithBackup(projects);
         }
         if (current != null)
         {
-          Retrieve(current.CodeLine, current.CodeGroup, current.Name);
+          Retrieve(current.CodeLine, current.CodeGroup, current.Solution
+            , current.Name);
         }
       }
     }
 
     /// <summary>
-    /// Retrieves a collection of Solution records.
+    /// Retrieves a collection of Project records.
     /// </summary>
     /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="solutionName">The Solution name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions Load(string codeLineName = null
-      , string codeGroupName = null, string name = null)
+    public Projects Load(string codeLineName = null
+      , string codeGroupName = null, string solutionName = null
+      , string name = null)
     {
-      Solutions retValue = null;
+      Projects retValue = null;
 
-      var solution = CreateDataObject(codeLineName, codeGroupName, name, null);
+      var project = CreateDataObject(codeLineName, codeGroupName,solutionName
+        , name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
-        retValue = new Solutions();
+        retValue = new Projects();
         do
         {
-          if (IsMatch(solution))
+          if (IsMatch(project))
           {
             retValue.Add(CurrentDataObject());
           }
@@ -111,25 +121,27 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="codeGroupName">The CodeGroup name.</param>
+    /// <param name="solutionName">The Soluton name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions LoadAllExcept(string codeLineName,string codeGroupName
-      , string name)
+    public Projects LoadAllExcept(string codeLineName, string codeGroupName
+      , string solutionName, string name)
     {
-      Solutions retValue = null;
+      Projects retValue = null;
 
       Reader.LJCOpen();
       if (Reader.Read())
       {
-        retValue = new Solutions();
+        retValue = new Projects();
         do
         {
-          var solution = CurrentDataObject();
-          if (solution.CodeLine != codeLineName
-            && solution.CodeGroup != codeGroupName
-            && solution.Name != name)
+          var project = CurrentDataObject();
+          if (project.CodeLine != codeLineName
+            && project.CodeGroup != codeGroupName
+            && project.Solution != solutionName
+            && project.Name != name)
           {
-            retValue.Add(solution);
+            retValue.Add(project);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -138,37 +150,41 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Retrieves a Solution record.
+    /// Retrieves a Project record.
     /// </summary>
     /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="codeGroupName">The Solution name.</param>
+    /// <param name="solutionName">The Solution name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public Solution Retrieve(string codeLineName, string codeGroupName
-      , string name = null)
+    public Project Retrieve(string codeLineName, string codeGroupName
+      , string solutionName = null, string name = null)
     {
-      Solution retValue = null;
+      Project retValue = null;
 
-      if (NetString.HasValue(codeGroupName))
+      if (NetString.HasValue(codeLineName)
+        && NetString.HasValue(codeGroupName)
+        && NetString.HasValue(solutionName))
       {
         Reader.LJCOpen();
         while (Reader.Read())
         {
-          var solution = CurrentDataObject();
-          if (solution.CodeLine == codeLineName
-            && solution.CodeGroup == codeGroupName)
+          var project = CurrentDataObject();
+          if (project.CodeLine == codeLineName
+            && project.CodeGroup == codeGroupName
+            && project.Solution == solutionName)
           {
             if (NetString.HasValue(name))
             {
-              if (solution.Name == name)
+              if (project.Name == name)
               {
-                retValue = solution;
+                retValue = project;
                 break;
               }
             }
             else
             {
-              retValue = solution;
+              retValue = project;
               break;
             }
           }
@@ -179,27 +195,28 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a Solution file record.
+    /// Updates a Project file record.
     /// </summary>
-    /// <param name="Solution">The Solution Data Object.</param>
-    public Solution Update(Solution Solution)
+    /// <param name="project">The Project Data Object.</param>
+    public Project Update(Project project)
     {
-      Solution retValue = null;
+      Project retValue = null;
 
-      if (NetString.HasValue(Solution.Name))
+      if (NetString.HasValue(project.Name))
       {
         var current = CurrentDataObject();
-        var Solutions = LoadAllExcept(Solution.CodeLine,Solution.CodeGroup
-          , Solution.Name);
-        if (Solutions != null)
+        var projects = LoadAllExcept(project.CodeLine, project.CodeGroup
+          , project.Solution, project.Name);
+        if (projects != null)
         {
-          WriteFileWithBackup(Solutions);
+          WriteFileWithBackup(projects);
         }
         Reader.Close();
-        var text = CreateRecord(Solution);
+        var text = CreateRecord(project);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
-        Retrieve(current.CodeLine, current.CodeGroup, current.Name);
+        Retrieve(current.CodeLine, current.CodeGroup, current.Solution
+          , current.Name);
       }
       return retValue;
     }
@@ -211,13 +228,15 @@ namespace ProjectFilesDAL
     /// Write the text file from a Solutions collection.
     /// </summary>
     /// <param name="fileName">The File name.</param>
-    /// <param name="Solutions">The Solutions collection</param>
-    public void CreateFile(string fileName, Solutions Solutions)
+    /// <param name="projects">The Projects collection</param>
+    public void CreateFile(string fileName, Projects projects)
     {
-      File.WriteAllText(fileName, "CodeLine, CodeGroup, Name, Path\r\n");
-      foreach (Solution solution in Solutions)
+      var header = "CodeLine, CodeGroup, Solution, Name";
+      header += ", Path\r\n";
+      File.WriteAllText(fileName, header);
+      foreach (Project project in projects)
       {
-        var text = CreateRecord(solution);
+        var text = CreateRecord(project);
         File.AppendAllText(fileName, text);
       }
     }
@@ -225,27 +244,31 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Creates a record string.
     /// </summary>
-    /// <param name="Solution">The Solution Data Object.</param>
+    /// <param name="project">The Project Data Object.</param>
     /// <returns>The record string.</returns>
-    public string CreateRecord(Solution Solution)
+    public string CreateRecord(Project project)
     {
       string retValue = null;
 
-      if (Solution != null && NetString.HasValue(Solution.Name))
+      if (project != null && NetString.HasValue(project.Name))
       {
-        retValue = $"{Solution.CodeLine}, {Solution.CodeGroup}";
-        retValue += $", {Solution.Name}, {Solution.Path}\r\n";
+        var builder = new StringBuilder(1024);
+        builder.Append($"{project.CodeLine}, {project.CodeGroup}");
+        builder.Append($"{project.Solution}, {project.Name}");
+        builder.AppendLine($", {project.Path}");
+        retValue = builder.ToString();
       }
       return retValue;
     }
 
     /// <summary>Creates a Data Object from the current values.</summary>
-    public Solution CurrentDataObject()
+    public Project CurrentDataObject()
     {
-      var retValue = new Solution()
+      var retValue = new Project()
       {
         CodeLine = Reader.GetTrimValue("CodeLine"),
         CodeGroup = Reader.GetTrimValue("CodeGroup"),
+        Solution = Reader.GetTrimValue("Solution"),
         Name = Reader.GetTrimValue("Name"),
         Path = Reader.GetTrimValue("Path")
       };
@@ -255,16 +278,16 @@ namespace ProjectFilesDAL
     /// <summary>Sorts the file on unique values.</summary>
     public void SortFile()
     {
-      var solutions = Load();
-      solutions.LJCSortUnique();
-      WriteFileWithBackup(solutions);
+      var projects = Load();
+      projects.LJCSortUnique();
+      WriteFileWithBackup(projects);
     }
 
     /// <summary>
     /// Write the text file from a Solutions collection and create a backup.
     /// </summary>
-    /// <param name="Solutions">The Solutions collection</param>
-    public void WriteFileWithBackup(Solutions Solutions)
+    /// <param name="projects">The Projects collection</param>
+    public void WriteFileWithBackup(Projects projects)
     {
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
@@ -274,34 +297,36 @@ namespace ProjectFilesDAL
       {
         File.Delete(FileName);
       }
-      CreateFile(FileName, Solutions);
+      CreateFile(FileName, projects);
       Reader.LJCOpen();
     }
     #endregion
 
     #region Private Methods
 
-    private Solution CreateDataObject(string codeLineName, string codeGroupName
-      , string name, string pathName)
+    private Project CreateDataObject(string codeLineName, string codeGroupName
+      , string solutionName, string name, string pathName)
     {
-      var retValue = new Solution()
+      var retValue = new Project()
       {
         CodeLine = codeLineName,
         CodeGroup = codeGroupName,
+        Solution = solutionName,
         Name = name,
         Path = pathName
       };
       return retValue;
     }
 
-    private bool IsMatch(Solution solution)
+    private bool IsMatch(Project project)
     {
       var retValue = false;
 
       var current = CurrentDataObject();
-      if (current.CodeLine == solution.CodeLine
-        && current.CodeGroup == solution.CodeGroup
-        && current.Name == solution.Name)
+      if (current.CodeLine == project.CodeLine
+        && current.CodeGroup == project.CodeGroup
+        && current.Solution == project.Solution
+        && current.Name == project.Name)
       {
         retValue = true;
       }
