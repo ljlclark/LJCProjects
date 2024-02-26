@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
+using System.Security.Policy;
 
 namespace ProjectFilesDAL
 {
@@ -82,24 +83,16 @@ namespace ProjectFilesDAL
     {
       CodeLines retValue = null;
 
+      var codeLine = CreateObject(name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
         retValue = new CodeLines();
         do
         {
-          if (!NetString.HasValue(name))
+          if (IsMatch(codeLine))
           {
             retValue.Add(DataObject());
-          }
-          else
-          {
-            var value = Reader.GetString("Name");
-            if (value == name)
-            {
-              retValue.Add(DataObject());
-              break;
-            }
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -261,6 +254,31 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, codeLines);
       Reader.LJCOpen();
+    }
+    #endregion
+
+    #region Private Methods
+
+    private CodeLine CreateObject(string name, string pathName)
+    {
+      var retValue = new CodeLine()
+      {
+        Name = name,
+        Path = pathName
+      };
+      return retValue;
+    }
+
+    private bool IsMatch(CodeLine codeLine)
+    {
+      var retValue = false;
+
+      var nameValue = Reader.GetTrimValue("Name");
+      if (nameValue == codeLine.Name)
+      {
+        retValue = true;
+      }
+      return retValue;
     }
     #endregion
 

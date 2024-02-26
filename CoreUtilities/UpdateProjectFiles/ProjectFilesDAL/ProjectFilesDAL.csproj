@@ -60,6 +60,7 @@
     <Compile Include="Data\Solutions.cs" />
     <Compile Include="Manager\CodeGroupManager.cs" />
     <Compile Include="Manager\CodeLineManager.cs" />
+    <Compile Include="Manager\SolutionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

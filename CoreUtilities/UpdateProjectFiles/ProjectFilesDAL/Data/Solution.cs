@@ -24,10 +24,14 @@ namespace ProjectFilesDAL
       else
       {
         // Case sensitive.
-        retValue = CodeGroup.CompareTo(other.CodeGroup);
+        retValue = CodeLine.CompareTo(other.CodeLine);
         if (0 == retValue)
         {
-          retValue = Name.CompareTo(other.Name);
+          retValue = CodeGroup.CompareTo(other.CodeGroup);
+          if (0 == retValue)
+          {
+            retValue = Name.CompareTo(other.Name);
+          }
         }
       }
       return retValue;
@@ -35,6 +39,9 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Data Properties
+
+    /// <summary>Gets or sets the CodeLine name.</summary>
+    public string CodeLine { get; set; }
 
     /// <summary>Gets or sets the CodeGroup name.</summary>
     public string CodeGroup { get; set; }

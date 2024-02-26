@@ -469,6 +469,14 @@ namespace LJCTextDataReaderLib
       return retValue;
     }
 
+    /// <summary>Gets the trimmed string value.</summary>
+    public string GetTrimValue(int i)
+    {
+      string retValue = GetString(i);
+      retValue?.Trim();
+      return retValue;
+    }
+
     // Returns the object value of the data field at the specified index.
     // This is a minimum required method.
     /// <include path='items/GetValue/*' file='Doc/TextDataReader.xml'/>
@@ -604,6 +612,14 @@ namespace LJCTextDataReaderLib
       {
         retValue = value.ToString();
       }
+      return retValue;
+    }
+
+    /// <summary>Gets the trimmed string value.</summary>
+    public string GetTrimValue(string name)
+    {
+      var retValue = GetString(name);
+      retValue = retValue.Trim();
       return retValue;
     }
     #endregion

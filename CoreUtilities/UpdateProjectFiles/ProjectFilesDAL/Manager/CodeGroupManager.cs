@@ -80,28 +80,20 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeGroups collection if available; otherwise null.</returns>
-    public CodeGroups Load(string name = null)
+    public CodeGroups Load(string codeLineName = null, string name = null)
     {
       CodeGroups retValue = null;
 
+      var codeGroup = CreateObject(codeLineName, name, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
         retValue = new CodeGroups();
         do
         {
-          if (!NetString.HasValue(name))
+          if (IsMatch(codeGroup))
           {
             retValue.Add(DataObject());
-          }
-          else
-          {
-            var value = Reader.GetString("Name");
-            if (value == name)
-            {
-              retValue.Add(DataObject());
-              break;
-            }
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -278,6 +270,35 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, codeGroups);
       Reader.LJCOpen();
+    }
+    #endregion
+
+    #region Private Methods
+
+    private CodeGroup CreateObject(string codeLineName, string name
+      , string pathName)
+    {
+      var retValue = new CodeGroup()
+      {
+        CodeLine = codeLineName,
+        Name = name,
+        Path = pathName
+      };
+      return retValue;
+    }
+
+    private bool IsMatch(CodeGroup codeGroup)
+    {
+      var retValue = false;
+
+      var codeLineValue = Reader.GetTrimValue("CodeLine");
+      var nameValue = Reader.GetTrimValue("Name");
+      if (codeLineValue == codeGroup.CodeLine
+        && nameValue == codeGroup.Name)
+      {
+        retValue = true;
+      }
+      return retValue;
     }
     #endregion
 
