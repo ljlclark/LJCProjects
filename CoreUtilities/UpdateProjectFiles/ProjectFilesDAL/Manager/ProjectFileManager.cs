@@ -5,6 +5,7 @@ using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 
 namespace ProjectFilesDAL
 {
@@ -156,8 +157,12 @@ namespace ProjectFilesDAL
 
       if (HasParentKey(parentKey))
       {
-        Reader.LJCOpen();
-        while (Reader.Read())
+        if (NetString.HasValue(sourceFileName))
+        {
+          Reader.LJCOpen();
+        }
+        bool success;
+        while (success = Reader.Read())
         {
           var projectFile = CurrentDataObject();
           if (projectFile.TargetCodeLine == parentKey.CodeLine
@@ -174,12 +179,21 @@ namespace ProjectFilesDAL
             }
             else
             {
+              // Get next item in Parent key.
               retValue = projectFile;
               break;
             }
           }
+          else
+          {
+            success = false;
+            break;
+          }
         }
-        Reader.LJCOpen();
+        if (!success)
+        {
+          Reader.LJCOpen();
+        }
       }
       return retValue;
     }
@@ -372,7 +386,8 @@ namespace ProjectFilesDAL
     private bool HasParentKey(ProjectFileKey parentKey)
     {
       var retValue = true;
-      if (NetString.HasValue(parentKey.CodeLine)
+      if (parentKey != null
+        && NetString.HasValue(parentKey.CodeLine)
         && NetString.HasValue(parentKey.CodeGroup)
         && NetString.HasValue(parentKey.Solution)
         && NetString.HasValue(parentKey.Project))

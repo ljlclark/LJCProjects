@@ -136,8 +136,12 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(codeLineName))
       {
-        Reader.LJCOpen();
-        while (Reader.Read())
+        if (NetString.HasValue(name))
+        {
+          Reader.LJCOpen();
+        }
+        bool success;
+        while (success = Reader.Read())
         {
           var codeGroup = CurrentDataObject();
           if (codeGroup.CodeLine == codeLineName)
@@ -152,12 +156,21 @@ namespace ProjectFilesDAL
             }
             else
             {
+              // Get next item in Parent key.
               retValue = codeGroup;
               break;
             }
           }
+          else
+          {
+            success = false;
+            break;
+          }
         }
-        Reader.LJCOpen();
+        if (!success)
+        {
+          Reader.LJCOpen();
+        }
       }
       return retValue;
     }

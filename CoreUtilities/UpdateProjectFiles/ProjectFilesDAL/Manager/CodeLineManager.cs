@@ -130,8 +130,12 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      Reader.LJCOpen();
-      while (Reader.Read())
+      if (NetString.HasValue(name))
+      {
+        Reader.LJCOpen();
+      }
+      bool success;
+      while (success = Reader.Read())
       {
         var codeLine = CurrentDataObject();
         if (NetString.HasValue(name))
@@ -144,11 +148,15 @@ namespace ProjectFilesDAL
         }
         else
         {
+          // Get next item.
           retValue = codeLine;
           break;
         }
       }
-      Reader.LJCOpen();
+      if (!success)
+      {
+        Reader.LJCOpen();
+      }
       return retValue;
     }
 

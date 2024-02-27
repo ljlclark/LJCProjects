@@ -141,8 +141,12 @@ namespace ProjectFilesDAL
 
       if (HasParentKey(parentKey))
       {
-        Reader.LJCOpen();
-        while (Reader.Read())
+        if (NetString.HasValue(name))
+        {
+          Reader.LJCOpen();
+        }
+        bool success;
+        while (success = Reader.Read())
         {
           var solution = CurrentDataObject();
           if (solution.CodeLine == parentKey.CodeLine
@@ -158,12 +162,21 @@ namespace ProjectFilesDAL
             }
             else
             {
+              // Get next item in Parent key.
               retValue = solution;
               break;
             }
           }
+          else
+          {
+            success = false;
+            break;
+          }
         }
-        Reader.LJCOpen();
+        if (!success)
+        {
+          Reader.LJCOpen();
+        }
       }
       return retValue;
     }
@@ -298,7 +311,9 @@ namespace ProjectFilesDAL
     private bool HasParentKey(SolutionParentKey parentKey)
     {
       var retValue = true;
-      if (NetString.HasValue(parentKey.CodeLine)
+
+      if (parentKey != null
+        && NetString.HasValue(parentKey.CodeLine)
         && NetString.HasValue(parentKey.CodeGroup))
       {
         retValue = true;

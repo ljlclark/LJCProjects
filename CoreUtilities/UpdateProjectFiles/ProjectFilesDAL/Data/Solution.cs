@@ -30,7 +30,8 @@ namespace ProjectFilesDAL
           retValue = CodeGroup.CompareTo(other.CodeGroup);
           if (0 == retValue)
           {
-            retValue = Name.CompareTo(other.Name);
+            // Not case sensitive.
+            retValue = Sequence.CompareTo(other.Sequence);
           }
         }
       }
