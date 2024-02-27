@@ -94,20 +94,20 @@ namespace LJCTextDataReaderLib
     /// <summary>
     /// Gets the offset for the next line.
     /// </summary>
-    /// <param name="line">The current line.</param>
+    /// <param name="currentLine">The current line.</param>
     /// <returns>The line offset value.</returns>
-    public long LJCGetNextLineOffset(string line)
+    public long LJCGetNextLineOffset(string currentLine)
     {
-      byte[] buffer = new byte[2];
       long retValue = LJCCurrentOffset;
 
-      if (line != null)
+      if (currentLine != null)
       {
-        retValue += line.Length;
+        retValue += currentLine.Length;
       }
 
       long prevPosition = LJCStream.Position;
       LJCStream.Position = retValue;
+      byte[] buffer = new byte[2];
       LJCStream.Read(buffer, 0, 2);
       for (int index = 0; index < 2; index++)
       {

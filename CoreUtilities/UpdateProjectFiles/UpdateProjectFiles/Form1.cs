@@ -37,12 +37,19 @@ namespace UpdateProjectFiles
     internal void TestCodeGroup()
     {
       var manager = new CodeGroupManager();
+
+      // Retrieve
       manager.Retrieve("LJCProjectsDev", "CoreAssemblies");
       ShowCodeGroup(manager, "Retrieve");
 
+      // Add
       var codeGroup = manager.Add("LJCProjectsDev", "ANewCodeGroup", "NewPath");
       ShowCodeGroup(manager, "Add");
+
+      // Load and Sort
       manager.SortFile();
+
+      // Update
       if (codeGroup != null)
       {
         codeGroup.Path = $"{codeGroup.Path}Updated";
@@ -50,19 +57,31 @@ namespace UpdateProjectFiles
         ShowCodeGroup(manager, "Update");
       }
 
+      // Delete
       manager.Delete("LJCProjectsDev", "ANewCodeGroup");
     }
 
     internal void TestSolution()
     {
       var manager = new SolutionManager();
-      var solutionParentKey = new SolutionParentKey()
+
+      // Retrieve
+      var parentKey = new SolutionParentKey()
       {
         CodeLine = "LJCProjectsDev",
         CodeGroup = "CoreAssemblies"
       };
-      manager.Retrieve(solutionParentKey, "LJCNetCommon");
+      manager.Retrieve(parentKey, "LJCNetCommon");
       ShowSolution(manager, "Retrieve");
+
+      // Add
+      int sequence = 3;
+      var solution = manager.Add(parentKey, "ANewSolution", sequence
+        , "NewPath");
+      ShowSolution(manager, "Add");
+
+      // Load and Sort
+      //manager.SortFile();
     }
 
     private void ShowCodeGroup(CodeGroupManager manager, string text)

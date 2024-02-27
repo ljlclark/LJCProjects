@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
+using System.Text;
 
 namespace ProjectFilesDAL
 {
@@ -33,16 +34,23 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Solution data object.</returns>
-    public Solution Add(SolutionParentKey parentKey, string name, string path)
+    public Solution Add(SolutionParentKey parentKey, string name, int sequence
+      , string path)
     {
       Solution retValue = null;
 
       if (HasParentKey(parentKey)
         && NetString.HasValue(name))
       {
-        var solution = CreateDataObject(parentKey, name, path);
+        var solution = CreateDataObject(parentKey, name, sequence, path);
+        string newRecord = "";
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          newRecord = "\r\n";
+        }
+        newRecord += CreateRecord(solution);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(solution));
+        File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
         retValue = Retrieve(parentKey, name);
       }
@@ -82,7 +90,7 @@ namespace ProjectFilesDAL
     {
       Solutions retValue = null;
 
-      var solution = CreateDataObject(parentKey, name, null);
+      var solution = CreateDataObject(parentKey, name, 0, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -245,10 +253,16 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      if (Solution != null && NetString.HasValue(Solution.Name))
+      if (Solution != null
+        && NetString.HasValue(Solution.Name))
       {
-        retValue = $"{Solution.CodeLine}, {Solution.CodeGroup}";
-        retValue += $", {Solution.Name}, {Solution.Path}\r\n";
+        var builder = new StringBuilder(256);
+        builder.Append($"{Solution.CodeLine}");
+        builder.Append($", {Solution.CodeGroup}");
+        builder.Append($", {Solution.Name}");
+        builder.Append($", {Solution.Sequence}");
+        builder.AppendLine($", {Solution.Path}");
+        retValue = builder.ToString();
       }
       return retValue;
     }
@@ -261,6 +275,7 @@ namespace ProjectFilesDAL
         CodeLine = Reader.GetTrimValue("CodeLine"),
         CodeGroup = Reader.GetTrimValue("CodeGroup"),
         Name = Reader.GetTrimValue("Name"),
+        Sequence = Reader.GetInt32("Sequence"),
         Path = Reader.GetTrimValue("Path")
       };
       return retValue;
@@ -296,13 +311,14 @@ namespace ProjectFilesDAL
     #region Private Methods
 
     private Solution CreateDataObject(SolutionParentKey parentKey, string name
-      , string pathName)
+      , int sequence, string pathName)
     {
       var retValue = new Solution()
       {
         CodeLine = parentKey.CodeLine,
         CodeGroup = parentKey.CodeGroup,
         Name = name,
+        Sequence = sequence,
         Path = pathName
       };
       return retValue;

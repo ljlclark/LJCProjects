@@ -1,3 +1,4 @@
 Name, Path
-ANewCodeLine,      NewPathUpdatedUpdated
-LJCProjectsDev,                           C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
+ANewCodeLine, NewPathUpdatedUpdated
+LJCProjectsDev, C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
+

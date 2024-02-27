@@ -619,7 +619,7 @@ namespace LJCTextDataReaderLib
     public string GetTrimValue(string name)
     {
       var retValue = GetString(name);
-      retValue = retValue.Trim();
+      retValue = retValue?.Trim();
       return retValue;
     }
     #endregion
@@ -690,6 +690,25 @@ namespace LJCTextDataReaderLib
     #endregion
 
     #region Public Custom Methods
+
+    /// <summary>Checks for NewLine at end of file.</summary>
+    public bool LJCEndsWithNewLine()
+    {
+      var retValue = false;
+
+      if (!IsClosed)
+      {
+        long prevPosition = LJCStream.Position;
+        LJCStream.Seek(-1, SeekOrigin.End);
+        int value = LJCStream.ReadByte();
+        if (10 == value)
+        {
+          retValue = true;
+        }
+        LJCStream.Position = prevPosition;
+      }
+      return retValue;
+    }
 
     // Returns the field names.
     /// <include path='items/LJCGetFieldNames/*' file='Doc/TextDataReader.xml'/>
