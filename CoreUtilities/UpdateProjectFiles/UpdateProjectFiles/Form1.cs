@@ -1,4 +1,5 @@
 ﻿using ProjectFilesDAL;
+using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
 
@@ -81,7 +82,18 @@ namespace UpdateProjectFiles
       ShowSolution(manager, "Add");
 
       // Load and Sort
-      //manager.SortFile();
+      manager.SortFile();
+
+      // Update
+      if (solution != null)
+      {
+        solution.Path = $"{solution.Path}Updated";
+        manager.Update(solution);
+        ShowSolution(manager, "Update");
+      }
+
+      // Delete
+      manager.Delete(parentKey, "ANewSolution");
     }
 
     private void ShowCodeGroup(CodeGroupManager manager, string text)

@@ -42,8 +42,9 @@ namespace ProjectFilesDAL
         && NetString.HasValue(name))
       {
         var project = CreateDataObject(parentKey, name, path);
+        var newRecord = CreateRecord(project);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(project));
+        File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
         retValue = Retrieve(parentKey, name);
       }
@@ -90,9 +91,11 @@ namespace ProjectFilesDAL
         retValue = new Projects();
         do
         {
-          if (IsMatch(project))
+          if (null == project
+            || IsMatch(project))
           {
-            retValue.Add(CurrentDataObject());
+            var currentObject = CurrentDataObject();
+            retValue.Add(currentObject);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -106,7 +109,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    /// <returns>The Solutions collection if available; otherwise null.</returns>
+    /// <returns>The Projects collection if available; otherwise null.</returns>
     public Projects LoadAllExcept(ProjectParentKey parentKey, string name)
     {
       Projects retValue = null;
@@ -136,7 +139,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    /// <returns>The Solution Data Object if found; otherwise null.</returns>
+    /// <returns>The Project Data Object if found; otherwise null.</returns>
     public Project Retrieve(ProjectParentKey parentKey, string name = null)
     {
       Project retValue = null;
@@ -185,9 +188,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a Project file record.
+    /// Updates a record from the DataObject.
     /// </summary>
-    /// <param name="project">The Project Data Object.</param>
+    /// <param name="project">The DataObject value.</param>
     public Project Update(Project project)
     {
       Project retValue = null;
@@ -215,14 +218,17 @@ namespace ProjectFilesDAL
     #region Public Methods
 
     /// <summary>
-    /// Write the text file from a Solutions collection.
+    /// Write the text file from a Projects collection.
     /// </summary>
     /// <param name="fileName">The File name.</param>
     /// <param name="projects">The Projects collection</param>
     public void CreateFile(string fileName, Projects projects)
     {
-      var header = "CodeLine, CodeGroup, Solution, Name";
-      header += ", Path\r\n";
+      var builder = new StringBuilder(128);
+      builder.Append("CodeLine, CodeGroup");
+      builder.Append(", Solution, Name");
+      builder.AppendLine(", Path");
+      var header = builder.ToString();
       File.WriteAllText(fileName, header);
       foreach (Project project in projects)
       {
@@ -231,6 +237,7 @@ namespace ProjectFilesDAL
       }
     }
 
+    // <summary>Creates a ParentKey from the supplied DataObject.</summary>
     public ProjectParentKey CreateParentKey(Project project)
     {
       var retValue = new ProjectParentKey()
@@ -255,8 +262,14 @@ namespace ProjectFilesDAL
         && NetString.HasValue(project.Name))
       {
         var builder = new StringBuilder(1024);
-        builder.Append($"{project.CodeLine}, {project.CodeGroup}");
-        builder.Append($"{project.Solution}, {project.Name}");
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          builder.AppendLine();
+        }
+        builder.Append($"{project.CodeLine}");
+        builder.Append($", {project.CodeGroup}");
+        builder.Append($", {project.Solution}");
+        builder.Append($", {project.Name}");
         builder.AppendLine($", {project.Path}");
         retValue = builder.ToString();
       }
@@ -306,20 +319,28 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
+    // Creates a DataObject from the supplied values.
     private Project CreateDataObject(ProjectParentKey parentKey, string name
-      , string pathName)
+      , string pathName = null)
     {
-      var retValue = new Project()
+      Project retValue = null;
+
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(name))
       {
-        CodeLine = parentKey.CodeLine,
-        CodeGroup = parentKey.CodeGroup,
-        Solution = parentKey.Solution,
-        Name = name,
-        Path = pathName
-      };
+        retValue = new Project()
+        {
+          CodeLine = parentKey.CodeLine,
+          CodeGroup = parentKey.CodeGroup,
+          Solution = parentKey.Solution,
+          Name = name,
+          Path = pathName
+        };
+      }
       return retValue;
     }
 
+    // Checks for the existance of the ParentKey values.
     private bool HasParentKey(ProjectParentKey parentKey)
     {
       var retValue = true;
@@ -333,6 +354,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Checks if the DataObject keys match the current values.
     private bool IsMatch(Project project)
     {
       var retValue = false;

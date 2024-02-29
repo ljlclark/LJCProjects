@@ -88,6 +88,7 @@
     <Content Include="bin\Debug\Project.txt" />
     <Content Include="bin\Debug\ProjectFile.txt" />
     <Content Include="bin\Debug\Solution.txt" />
+    <Content Include="bin\Debug\SolutionBackup.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProjectFilesDAL\ProjectFilesDAL.csproj">

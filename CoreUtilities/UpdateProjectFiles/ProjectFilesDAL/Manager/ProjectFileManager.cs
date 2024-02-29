@@ -50,8 +50,9 @@ namespace ProjectFilesDAL
       {
         var projectFile = CreateDataObject(parentKey, sourceKey
           , sourceFileSpec, targetFileSpec);
+        var newRecord = CreateRecord(projectFile);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(projectFile));
+        File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
         retValue = Retrieve(parentKey, sourceFileName);
       }
@@ -87,22 +88,23 @@ namespace ProjectFilesDAL
     /// Retrieves a collection of ProjectFile records.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
+    /// <param name="sourceFileName">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
     public ProjectFiles Load(ProjectFileKey parentKey = null
-      , string name = null)
+      , string sourceFileName = null)
     {
       ProjectFiles retValue = null;
 
       var sourceKey = CurrentSourceKey();
-      var project = CreateDataObject(parentKey, sourceKey, name, null);
+      var project = CreateDataObject(parentKey, sourceKey, sourceFileName, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
         retValue = new ProjectFiles();
         do
         {
-          if (IsMatch(project))
+          if (null == project
+            || IsMatch(project))
           {
             retValue.Add(CurrentDataObject());
           }
@@ -199,9 +201,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a Project file record.
+    /// Updates a record from the DataObject.
     /// </summary>
-    /// <param name="projectFile">The ProjectFile Data Object.</param>
+    /// <param name="projectFile">The DataObject value.</param>
     public Project Update(ProjectFile projectFile)
     {
       Project retValue = null;
@@ -236,10 +238,16 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, ProjectFiles projectFiles)
     {
       var builder = new StringBuilder(256);
-      builder.Append("TargetCodeLine, TargetCodeGroup");
-      builder.Append(", TargetSolution, SourceFileName");
-      builder.Append(", SourceCodeLine, SourceCodeGroup");
-      builder.Append(", SourceSolution, SourceFileSpec");
+      builder.Append("TargetCodeLine");
+      builder.Append(", TargetCodeGroup");
+      builder.Append(", TargetSolution");
+      builder.Append(", TargetProject");
+      builder.Append(", SourceFileName");
+      builder.Append(", SourceCodeLine");
+      builder.Append(", SourceCodeGroup");
+      builder.Append(", SourceSolution");
+      builder.Append(", SourceProject");
+      builder.Append(", SourceFileSpec");
       builder.AppendLine(", TargetFileSpec");
       var header = builder.ToString();
       File.WriteAllText(fileName, header);
@@ -250,13 +258,15 @@ namespace ProjectFilesDAL
       }
     }
 
+    // <summary>Creates a ParentKey from the supplied DataObject.</summary>
     public ProjectFileKey CreateParentKey(ProjectFile projectFile)
     {
       var retValue = new ProjectFileKey()
       {
         CodeLine = projectFile.TargetCodeLine,
         CodeGroup = projectFile.TargetCodeGroup,
-        Solution = projectFile.TargetSolution
+        Solution = projectFile.TargetSolution,
+        Project = projectFile.TargetProject
       };
       return retValue;
     }
@@ -274,6 +284,10 @@ namespace ProjectFilesDAL
         && NetString.HasValue(projectFile.SourceFileName))
       {
         var builder = new StringBuilder(256);
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          builder.AppendLine();
+        }
         builder.Append($"{projectFile.TargetCodeLine}");
         builder.Append($", {projectFile.TargetCodeGroup}");
         builder.Append($", {projectFile.TargetSolution}");
@@ -310,6 +324,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    /// <summary>Creates a ParentKey from the current values.</summary>
     public ProjectFileKey CurrentParentKey()
     {
       var retValue = new ProjectFileKey()
@@ -322,6 +337,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    /// <summary>Creates a source key from the current values.</summary>
     public ProjectFileKey CurrentSourceKey()
     {
       var retValue = new ProjectFileKey()
@@ -363,26 +379,35 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
+    // Creates a DataObject from the supplied values.
     private ProjectFile CreateDataObject(ProjectFileKey targetKey
       , ProjectFileKey sourceKey, string sourceFileSpec, string targetFileSpec)
     {
-      var retValue = new ProjectFile()
+      ProjectFile retValue = null;
+
+      if (HasParentKey(targetKey)
+        && HasParentKey(sourceKey)
+        && NetString.HasValue(sourceFileSpec))
       {
-        TargetCodeLine = targetKey.CodeLine,
-        TargetCodeGroup = targetKey.CodeGroup,
-        TargetSolution = targetKey.Solution,
-        TargetProject = targetKey.Project,
-        SourceFileName = targetKey.SourceFileName,
-        SourceCodeLine = sourceKey.CodeLine,
-        SourceCodeGroup = sourceKey.CodeGroup,
-        SourceSolution = sourceKey.Solution,
-        SourceProject = sourceKey.Project,
-        SourceFileSpec = sourceFileSpec,
-        TargetFileSpec = targetFileSpec,
-      };
+        retValue = new ProjectFile()
+        {
+          TargetCodeLine = targetKey.CodeLine,
+          TargetCodeGroup = targetKey.CodeGroup,
+          TargetSolution = targetKey.Solution,
+          TargetProject = targetKey.Project,
+          SourceFileName = targetKey.SourceFileName,
+          SourceCodeLine = sourceKey.CodeLine,
+          SourceCodeGroup = sourceKey.CodeGroup,
+          SourceSolution = sourceKey.Solution,
+          SourceProject = sourceKey.Project,
+          SourceFileSpec = sourceFileSpec,
+          TargetFileSpec = targetFileSpec,
+        };
+      }
       return retValue;
     }
 
+    // Checks for the existance of the ParentKey values.
     private bool HasParentKey(ProjectFileKey parentKey)
     {
       var retValue = true;
@@ -397,6 +422,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Checks if the DataObject keys match the current values.
     private bool IsMatch(ProjectFile projectFile)
     {
       var retValue = false;

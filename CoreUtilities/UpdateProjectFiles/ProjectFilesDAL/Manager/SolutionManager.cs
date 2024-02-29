@@ -43,12 +43,7 @@ namespace ProjectFilesDAL
         && NetString.HasValue(name))
       {
         var solution = CreateDataObject(parentKey, name, sequence, path);
-        string newRecord = "";
-        if (!Reader.LJCEndsWithNewLine())
-        {
-          newRecord = "\r\n";
-        }
-        newRecord += CreateRecord(solution);
+        var newRecord = CreateRecord(solution);
         Reader.Close();
         File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
@@ -97,9 +92,11 @@ namespace ProjectFilesDAL
         retValue = new Solutions();
         do
         {
-          if (IsMatch(solution))
+          if (null == solution
+            || IsMatch(solution))
           {
-            retValue.Add(CurrentDataObject());
+            var currentObject = CurrentDataObject();
+            retValue.Add(currentObject);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -190,9 +187,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a Solution file record.
+    /// Updates a record from the DataObject.
     /// </summary>
-    /// <param name="solution">The Solution Data Object.</param>
+    /// <param name="solution">The DataObject value.</param>
     public Solution Update(Solution solution)
     {
       Solution retValue = null;
@@ -226,7 +223,12 @@ namespace ProjectFilesDAL
     /// <param name="Solutions">The Solutions collection</param>
     public void CreateFile(string fileName, Solutions Solutions)
     {
-      File.WriteAllText(fileName, "CodeLine, CodeGroup, Name, Path\r\n");
+      var builder = new StringBuilder(128);
+      builder.Append("CodeLine, CodeGroup");
+      builder.Append(", Name, Sequence");
+      builder.AppendLine(", Sequence, Path");
+      var header = builder.ToString();
+      File.WriteAllText(fileName, header);
       foreach (Solution solution in Solutions)
       {
         var text = CreateRecord(solution);
@@ -234,6 +236,7 @@ namespace ProjectFilesDAL
       }
     }
 
+    // <summary>Creates a ParentKey from the supplied DataObject.</summary>
     public SolutionParentKey CreateParentKey(Solution solution)
     {
       var retValue = new SolutionParentKey()
@@ -256,7 +259,11 @@ namespace ProjectFilesDAL
       if (Solution != null
         && NetString.HasValue(Solution.Name))
       {
-        var builder = new StringBuilder(256);
+        var builder = new StringBuilder(128);
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          builder.AppendLine();
+        }
         builder.Append($"{Solution.CodeLine}");
         builder.Append($", {Solution.CodeGroup}");
         builder.Append($", {Solution.Name}");
@@ -310,20 +317,28 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
+    // Creates a DataObject from the supplied values.
     private Solution CreateDataObject(SolutionParentKey parentKey, string name
-      , int sequence, string pathName)
+      , int sequence = 0, string pathName = null)
     {
-      var retValue = new Solution()
+      Solution retValue = null;
+
+      if (HasParentKey(parentKey)
+        && NetString.HasValue(name))
       {
-        CodeLine = parentKey.CodeLine,
-        CodeGroup = parentKey.CodeGroup,
-        Name = name,
-        Sequence = sequence,
-        Path = pathName
-      };
+        retValue = new Solution()
+        {
+          CodeLine = parentKey.CodeLine,
+          CodeGroup = parentKey.CodeGroup,
+          Name = name,
+          Sequence = sequence,
+          Path = pathName
+        };
+      }
       return retValue;
     }
 
+    // Checks for the existance of the ParentKey values.
     private bool HasParentKey(SolutionParentKey parentKey)
     {
       var retValue = true;
@@ -337,6 +352,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Checks if the DataObject keys match the current values.
     private bool IsMatch(Solution solution)
     {
       var retValue = false;

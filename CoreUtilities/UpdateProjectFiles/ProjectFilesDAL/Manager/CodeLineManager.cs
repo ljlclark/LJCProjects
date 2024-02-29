@@ -39,8 +39,9 @@ namespace ProjectFilesDAL
       if (NetString.HasValue(name))
       {
         var codeLine = CreateDataObject(name, path);
+        var newRecord = CreateRecord(codeLine);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(codeLine));
+        File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
         retValue = Retrieve(name);
       }
@@ -86,7 +87,8 @@ namespace ProjectFilesDAL
         {
           if (IsMatch(codeLine))
           {
-            retValue.Add(CurrentDataObject());
+            var currentObject = CurrentDataObject();
+            retValue.Add(currentObject);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -161,9 +163,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a CodeLine file record.
+    /// Updates a record from the DataObject.
     /// </summary>
-    /// <param name="codeLine">The CodeLine Data Object.</param>
+    /// <param name="codeLine">The DataObject value.</param>
     public CodeLine Update(CodeLine codeLine)
     {
       CodeLine retValue = null;
@@ -212,9 +214,15 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      if (codeLine != null && NetString.HasValue(codeLine.Name))
+      if (codeLine != null
+        && NetString.HasValue(codeLine.Name))
       {
-        retValue = $"{codeLine.Name}, {codeLine.Path}\r\n";
+        retValue = "";
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          retValue = "\r\n";
+        }
+        retValue += $"{codeLine.Name}, {codeLine.Path}\r\n";
       }
       return retValue;
     }
@@ -259,16 +267,23 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
-    private CodeLine CreateDataObject(string name, string pathName)
+    // Creates a DataObject from the supplied values.
+    private CodeLine CreateDataObject(string name, string pathName = null)
     {
-      var retValue = new CodeLine()
+      CodeLine retValue = null;
+
+      if (NetString.HasValue(name))
       {
-        Name = name,
-        Path = pathName
-      };
+        retValue = new CodeLine()
+        {
+          Name = name,
+          Path = pathName
+        };
+      }
       return retValue;
     }
 
+    // Checks if the DataObject keys match the current values.
     private bool IsMatch(CodeLine codeLine)
     {
       var retValue = false;

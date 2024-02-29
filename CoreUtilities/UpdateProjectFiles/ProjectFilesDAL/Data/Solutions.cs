@@ -23,17 +23,18 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieve the collection element with unique values.
     /// </summary>
-    /// <param name="codeGroup">The CodeGroup name.</param>
+    /// <param name="parentKey">The ParentKey object.</param>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public Solution LJCSearchUnique(string codeGroup, string name)
+    public Solution LJCSearchUnique(SolutionParentKey parentKey, string name)
     {
       Solution retValue = null;
 
       LJCSortUnique();
       Solution searchItem = new Solution()
       {
-        CodeGroup = codeGroup,
+        CodeLine = parentKey.CodeLine,
+        CodeGroup = parentKey.CodeGroup,
         Name = name
       };
       int index = BinarySearch(searchItem);

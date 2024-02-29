@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using LJCTextDataReaderLib;
 using System.IO;
+using System.Text;
 
 namespace ProjectFilesDAL
 {
@@ -41,8 +42,9 @@ namespace ProjectFilesDAL
         && NetString.HasValue(name))
       {
         var codeGroup = CreateDataObject(codeLineName, name, path);
+        var newRecord = CreateRecord(codeGroup);
         Reader.Close();
-        File.AppendAllText(FileName, CreateRecord(codeGroup));
+        File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
         retValue = Retrieve(codeLineName, name);
       }
@@ -55,7 +57,8 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     public void Delete(string codeLineName, string name)
     {
-      if (NetString.HasValue(name))
+      if (NetString.HasValue(codeLineName)
+        && NetString.HasValue(name))
       {
         var current = CurrentDataObject();
         var codeLines = LoadAllExcept(codeLineName, name);
@@ -65,7 +68,7 @@ namespace ProjectFilesDAL
         }
         if (current != null)
         {
-          Retrieve(current.Name);
+          Retrieve(codeLineName, current.Name);
         }
       }
     }
@@ -73,6 +76,7 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Retrieves a collection of CodeLine records.
     /// </summary>
+    /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeGroups collection if available; otherwise null.</returns>
     public CodeGroups Load(string codeLineName = null, string name = null)
@@ -86,9 +90,11 @@ namespace ProjectFilesDAL
         retValue = new CodeGroups();
         do
         {
-          if (IsMatch(codeGroup))
+          if (null == codeGroup
+            || IsMatch(codeGroup))
           {
-            retValue.Add(CurrentDataObject());
+            var currentObject = CurrentDataObject();
+            retValue.Add(currentObject);
           }
         } while (Reader.Read());
         Reader.LJCOpen();
@@ -100,6 +106,7 @@ namespace ProjectFilesDAL
     /// Retrieves a collection of records that do NOT match the supplied Name
     /// value.
     /// </summary>
+    /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The CodeLines collection if available; otherwise null.</returns>
     public CodeGroups LoadAllExcept(string codeLineName, string name)
@@ -176,14 +183,15 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>
-    /// Updates a CodeLine file record.
+    /// Updates a record from the DataObject.
     /// </summary>
-    /// <param name="codeLine">The CodeLine Data Object.</param>
+    /// <param name="codeGroup">The DataObject value.</param>
     public CodeGroup Update(CodeGroup codeGroup)
     {
       CodeGroup retValue = null;
 
-      if (NetString.HasValue(codeGroup.Name))
+      if (NetString.HasValue(codeGroup.CodeLine)
+        && NetString.HasValue(codeGroup.Name))
       {
         var current = CurrentDataObject();
         var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
@@ -195,7 +203,7 @@ namespace ProjectFilesDAL
         var text = CreateRecord(codeGroup);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
-        Retrieve(current.Name);
+        Retrieve(codeGroup.CodeLine, current.Name);
       }
       return retValue;
     }
@@ -210,7 +218,11 @@ namespace ProjectFilesDAL
     /// <param name="codeGroups">The CodeGroups collection</param>
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
-      File.WriteAllText(fileName, "CodeLine, Name, Path\r\n");
+      var builder = new StringBuilder(128);
+      builder.Append("CodeLine, Name");
+      builder.AppendLine(", Path");
+      var header = builder.ToString();
+      File.WriteAllText(fileName, header);
       foreach (CodeGroup codeGroup in codeGroups)
       {
         var text = CreateRecord(codeGroup);
@@ -227,10 +239,18 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      if (codeGroup != null && NetString.HasValue(codeGroup.Name))
+      if (codeGroup != null
+        && NetString.HasValue(codeGroup.Name))
       {
-        retValue = $"{codeGroup.CodeLine}, {codeGroup.Name}";
-        retValue += $", {codeGroup.Path}\r\n";
+        var builder = new StringBuilder(128);
+        if (!Reader.LJCEndsWithNewLine())
+        {
+          builder.AppendLine();
+        }
+        builder.Append($"{codeGroup.CodeLine}");
+        builder.Append($", {codeGroup.Name}");
+        builder.AppendLine($", {codeGroup.Path}");
+        retValue = builder.ToString();
       }
       return retValue;
     }
@@ -276,18 +296,26 @@ namespace ProjectFilesDAL
 
     #region Private Methods
 
+    // Creates a DataObject from the supplied values.
     private CodeGroup CreateDataObject(string codeLineName, string name
-      , string pathName)
+      , string pathName = null)
     {
-      var retValue = new CodeGroup()
+      CodeGroup retValue = null;
+
+      if (NetString.HasValue(codeLineName)
+        && NetString.HasValue(name))
       {
-        CodeLine = codeLineName,
-        Name = name,
-        Path = pathName
-      };
+        retValue = new CodeGroup()
+        {
+          CodeLine = codeLineName,
+          Name = name,
+          Path = pathName
+        };
+      }
       return retValue;
     }
 
+    // Checks if the DataObject keys match the current values.
     private bool IsMatch(CodeGroup codeGroup)
     {
       var retValue = false;
