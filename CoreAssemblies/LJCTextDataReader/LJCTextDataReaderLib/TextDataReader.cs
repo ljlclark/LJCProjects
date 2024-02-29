@@ -696,16 +696,25 @@ namespace LJCTextDataReaderLib
     {
       var retValue = false;
 
-      if (!IsClosed)
+      var doClose = false;
+      if (IsClosed)
       {
-        long prevPosition = LJCStream.Position;
-        LJCStream.Seek(-1, SeekOrigin.End);
-        int value = LJCStream.ReadByte();
-        if (10 == value)
-        {
-          retValue = true;
-        }
-        LJCStream.Position = prevPosition;
+        LJCOpen();
+        doClose = true;
+      }
+
+      long prevPosition = LJCStream.Position;
+      LJCStream.Seek(-1, SeekOrigin.End);
+      int value = LJCStream.ReadByte();
+      if (10 == value)
+      {
+        retValue = true;
+      }
+      LJCStream.Position = prevPosition;
+
+      if (doClose)
+      {
+        Close();
       }
       return retValue;
     }

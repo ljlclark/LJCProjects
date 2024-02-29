@@ -123,8 +123,8 @@ namespace ProjectFilesDAL
         {
           var solution = CurrentDataObject();
           if (solution.CodeLine != parentKey.CodeLine
-            && solution.CodeGroup != parentKey.CodeGroup
-            && solution.Name != name)
+            || solution.CodeGroup != parentKey.CodeGroup
+            || solution.Name != name)
           {
             retValue.Add(solution);
           }
@@ -226,7 +226,7 @@ namespace ProjectFilesDAL
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
       builder.Append(", Name, Sequence");
-      builder.AppendLine(", Sequence, Path");
+      builder.AppendLine(", Path");
       var header = builder.ToString();
       File.WriteAllText(fileName, header);
       foreach (Solution solution in Solutions)
@@ -299,8 +299,8 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Write the text file from a Solutions collection and create a backup.
     /// </summary>
-    /// <param name="Solutions">The Solutions collection</param>
-    public void WriteFileWithBackup(Solutions Solutions)
+    /// <param name="solutions">The Solutions collection</param>
+    public void WriteFileWithBackup(Solutions solutions)
     {
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
@@ -310,7 +310,7 @@ namespace ProjectFilesDAL
       {
         File.Delete(FileName);
       }
-      CreateFile(FileName, Solutions);
+      CreateFile(FileName, solutions);
       Reader.LJCOpen();
     }
     #endregion

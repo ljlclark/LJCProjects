@@ -134,10 +134,10 @@ namespace ProjectFilesDAL
         {
           var projectFile = CurrentDataObject();
           if (projectFile.TargetCodeLine != parentKey.CodeLine
-            && projectFile.TargetCodeGroup != parentKey.CodeGroup
-            && projectFile.TargetSolution != parentKey.Solution
-            && projectFile.TargetProject != parentKey.Project
-            && projectFile.SourceFileName != sourceFileName)
+            || projectFile.TargetCodeGroup != parentKey.CodeGroup
+            || projectFile.TargetSolution != parentKey.Solution
+            || projectFile.TargetProject != parentKey.Project
+            || projectFile.SourceFileName != sourceFileName)
           {
             retValue.Add(projectFile);
           }

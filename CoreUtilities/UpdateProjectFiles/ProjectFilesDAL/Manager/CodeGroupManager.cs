@@ -121,7 +121,7 @@ namespace ProjectFilesDAL
         {
           var codeLine = CurrentDataObject();
           if (codeLine.CodeLine != codeLineName
-            && codeLine.Name != name)
+            || codeLine.Name != name)
           {
             retValue.Add(codeLine);
           }

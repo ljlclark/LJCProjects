@@ -122,9 +122,9 @@ namespace ProjectFilesDAL
         {
           var project = CurrentDataObject();
           if (project.CodeLine != parentKey.CodeLine
-            && project.CodeGroup != parentKey.CodeGroup
-            && project.Solution != parentKey.Solution
-            && project.Name != name)
+            || project.CodeGroup != parentKey.CodeGroup
+            || project.Solution != parentKey.Solution
+            || project.Name != name)
           {
             retValue.Add(project);
           }

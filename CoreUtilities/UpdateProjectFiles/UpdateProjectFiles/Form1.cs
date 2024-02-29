@@ -12,19 +12,24 @@ namespace UpdateProjectFiles
       InitializeComponent();
 
       //TestCodeLine();
-      //TestCodeGroup();
+      TestCodeGroup();
       TestSolution();
     }
 
+    // 
     internal void TestCodeLine()
     {
       var manager = new CodeLineManager();
-      manager.Retrieve("LJCProjectsDev");
-      ShowCodeLine(manager, "Retrieve");
 
-      var codeLine = manager.Add("ANewCodeLine", "NewPath");
+      // Add
+      var newCodeLineName = "LJCProjects";
+      var codeLine = manager.Add(newCodeLineName, "NewPath");
       ShowCodeLine(manager, "Add");
+
+      // Load and Sort
       manager.SortFile();
+
+      // Update
       if (codeLine != null)
       {
         codeLine.Path = $"{codeLine.Path}Updated";
@@ -32,19 +37,23 @@ namespace UpdateProjectFiles
         ShowCodeLine(manager, "Update");
       }
 
-      manager.Delete("ANewCodeLine");
+      // Delete
+      manager.Delete(newCodeLineName);
     }
 
+    // 
     internal void TestCodeGroup()
     {
       var manager = new CodeGroupManager();
 
       // Retrieve
-      manager.Retrieve("LJCProjectsDev", "CoreAssemblies");
+      var parentKey = "LJCProjectsDev";
+      manager.Retrieve(parentKey, "CoreAssemblies");
       ShowCodeGroup(manager, "Retrieve");
 
       // Add
-      var codeGroup = manager.Add("LJCProjectsDev", "ANewCodeGroup", "NewPath");
+      var newCodeGroupName = "ANewCodeGroup";
+      var codeGroup = manager.Add(parentKey, newCodeGroupName, "NewPath");
       ShowCodeGroup(manager, "Add");
 
       // Load and Sort
@@ -59,9 +68,10 @@ namespace UpdateProjectFiles
       }
 
       // Delete
-      manager.Delete("LJCProjectsDev", "ANewCodeGroup");
+      manager.Delete(parentKey, newCodeGroupName);
     }
 
+    // 
     internal void TestSolution()
     {
       var manager = new SolutionManager();
@@ -76,8 +86,9 @@ namespace UpdateProjectFiles
       ShowSolution(manager, "Retrieve");
 
       // Add
+      var newSolutionName = "ANewSolution";
       int sequence = 3;
-      var solution = manager.Add(parentKey, "ANewSolution", sequence
+      var solution = manager.Add(parentKey, newSolutionName, sequence
         , "NewPath");
       ShowSolution(manager, "Add");
 
@@ -93,7 +104,7 @@ namespace UpdateProjectFiles
       }
 
       // Delete
-      manager.Delete(parentKey, "ANewSolution");
+      manager.Delete(parentKey, newSolutionName);
     }
 
     private void ShowCodeGroup(CodeGroupManager manager, string text)

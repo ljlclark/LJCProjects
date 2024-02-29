@@ -24,10 +24,18 @@ namespace ProjectFilesDAL
       else
       {
         // Case sensitive.
-        retValue = Solution.CompareTo(other.Solution);
+        retValue = CodeLine.CompareTo(other.CodeLine);
         if (0 == retValue)
         {
-          retValue = Name.CompareTo(other.Name);
+          retValue = CodeGroup.CompareTo(other.CodeGroup);
+          if (0 == retValue)
+          {
+            retValue = Solution.CompareTo(other.Solution);
+            if (0 == retValue)
+            {
+              retValue = Name.CompareTo(other.Name);
+            }
+          }
         }
       }
       return retValue;
