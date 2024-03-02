@@ -17,7 +17,7 @@ namespace ProjectFilesDAL
     /// Initializes an object instance.
     /// </summary>
     /// <param name="fileName">The data file name.</param>
-    public SolutionManager(string fileName = "Solution.txt")
+    public SolutionManager(string fileName = @"DataFiles\Solution.txt")
     {
       FileName = fileName;
       Reader = new TextDataReader();

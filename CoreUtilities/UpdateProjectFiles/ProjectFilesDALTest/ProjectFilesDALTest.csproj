@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1B1D0AB7-D2F5-4549-9A87-DEC493983AB9}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>UpdateProjectFiles</RootNamespace>
-    <AssemblyName>UpdateProjectFiles</AssemblyName>
+    <ProjectGuid>{3BD0E0E0-40EB-46C3-99E7-F4FC0F2BD528}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ProjectFilesDALTest</RootNamespace>
+    <AssemblyName>ProjectFilesDALTest</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,62 +33,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LJCNetCommon, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\LJCNetCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="LJCTextDataReaderLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\LJCTextDataReaderLib.dll</HintPath>
-    </Reference>
-    <Reference Include="LJCWinFormControls">
-      <HintPath>..\..\..\CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeManagerList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CodeManagerList.Designer.cs">
-      <DependentUpon>CodeManagerList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProgramProjectFiles.cs" />
+    <Compile Include="ProgramProjectFilesDALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CodeManagerList.resx">
-      <DependentUpon>CodeManagerList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectFilesDAL\ProjectFilesDAL.csproj">
+      <Project>{7bdae96d-e3c8-458f-bb4a-8eb46b12d22b}</Project>
+      <Name>ProjectFilesDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\DataFiles\CodeGroup.txt" />
@@ -96,12 +61,11 @@
     <Content Include="bin\Debug\DataFiles\Project.txt" />
     <Content Include="bin\Debug\DataFiles\ProjectFile.txt" />
     <Content Include="bin\Debug\DataFiles\Solution.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectFilesDAL\ProjectFilesDAL.csproj">
-      <Project>{7BDAE96D-E3C8-458F-BB4A-8EB46B12D22B}</Project>
-      <Name>ProjectFilesDAL</Name>
-    </ProjectReference>
+    <Content Include="DataFiles\CodeGroup.txt" />
+    <Content Include="DataFiles\CodeLine.txt" />
+    <Content Include="DataFiles\Project.txt" />
+    <Content Include="DataFiles\ProjectFile.txt" />
+    <Content Include="DataFiles\Solution.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

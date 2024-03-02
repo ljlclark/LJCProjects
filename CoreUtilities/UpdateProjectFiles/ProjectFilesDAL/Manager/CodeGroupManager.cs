@@ -17,7 +17,7 @@ namespace ProjectFilesDAL
     /// Initializes an object instance.
     /// </summary>
     /// <param name="fileName">The data file name.</param>
-    public CodeGroupManager(string fileName = "CodeGroup.txt")
+    public CodeGroupManager(string fileName = @"DataFiles\CodeGroup.txt")
     {
       FileName = fileName;
       Reader = new TextDataReader();

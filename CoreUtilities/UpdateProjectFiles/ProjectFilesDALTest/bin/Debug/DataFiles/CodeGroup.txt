@@ -1,2 +1,2 @@
-﻿CodeLine, Name, Path
+CodeLine, Name, Path
 LJCProjectsDev, CoreAssemblies, CoreAssemblies

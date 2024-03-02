@@ -1,0 +1,2 @@
+﻿TargetSolution, TargetProject, SourceFileName, SourceProject, SourceFileSpec, TargetFileSpec
+LJCDataAccessConfig, LJCDataAccessConfig, LJCNetCommon.dll, LJCNetCommon, bin\Debug, External\LJCNetCommon.dll
