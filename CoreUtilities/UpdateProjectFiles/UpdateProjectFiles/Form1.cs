@@ -12,11 +12,12 @@ namespace UpdateProjectFiles
       InitializeComponent();
 
       //TestCodeLine();
-      TestCodeGroup();
-      TestSolution();
+      //TestCodeGroup();
+      //TestSolution();
+      //TestProject();
     }
 
-    // 
+    // Test the CodeLine data managermethods.
     internal void TestCodeLine()
     {
       var manager = new CodeLineManager();
@@ -41,14 +42,15 @@ namespace UpdateProjectFiles
       manager.Delete(newCodeLineName);
     }
 
-    // 
+    // Test the CodeGroup data managermethods.
     internal void TestCodeGroup()
     {
       var manager = new CodeGroupManager();
 
       // Retrieve
       var parentKey = "LJCProjectsDev";
-      manager.Retrieve(parentKey, "CoreAssemblies");
+      var codeGroupName = "CoreAssemblies";
+      manager.Retrieve(parentKey, codeGroupName);
       ShowCodeGroup(manager, "Retrieve");
 
       // Add
@@ -71,7 +73,7 @@ namespace UpdateProjectFiles
       manager.Delete(parentKey, newCodeGroupName);
     }
 
-    // 
+    // Test the Solution data managermethods.
     internal void TestSolution()
     {
       var manager = new SolutionManager();
@@ -82,7 +84,8 @@ namespace UpdateProjectFiles
         CodeLine = "LJCProjectsDev",
         CodeGroup = "CoreAssemblies"
       };
-      manager.Retrieve(parentKey, "LJCNetCommon");
+      var solutionName = "LJCNetCommon";
+      manager.Retrieve(parentKey, solutionName);
       ShowSolution(manager, "Retrieve");
 
       // Add
@@ -107,15 +110,52 @@ namespace UpdateProjectFiles
       manager.Delete(parentKey, newSolutionName);
     }
 
+    // Test the Project data managermethods.
+    internal void TestProject()
+    {
+      var manager = new ProjectManager();
+
+      // Retrieve
+      var parentKey = new ProjectParentKey()
+      {
+        CodeLine = "LJCProjectsDev",
+        CodeGroup = "CoreAssemblies",
+        Solution = "LJCNetCommon"
+      };
+      var projectName = "LJCNetCommon";
+      manager.Retrieve(parentKey, projectName);
+      ShowProject(manager, "Retrieve");
+
+      // Add
+      var newProjectName = "ANewProject";
+      var project = manager.Add(parentKey, newProjectName, "NewPath");
+      ShowProject(manager, "Add");
+
+      // Load and Sort
+      manager.SortFile();
+
+      // Update
+      if (project != null)
+      {
+        project.Path = $"{project.Path}Updated";
+        manager.Update(project);
+        ShowProject(manager, "Update");
+      }
+
+      // Delete
+      manager.Delete(parentKey, newProjectName);
+    }
+
     private void ShowCodeGroup(CodeGroupManager manager, string text)
     {
       var codeGroup = manager.CurrentDataObject();
       if (codeGroup != null)
       {
         var builder = new StringBuilder(256);
-        builder.AppendLine(text);
-        builder.AppendLine(codeGroup.Name);
-        builder.AppendLine(codeGroup.Path);
+        builder.AppendLine($"CodeGroup {text}");
+        builder.AppendLine($"CodeLine: {codeGroup.CodeLine}");
+        builder.AppendLine($"Name: {codeGroup.Name}");
+        builder.AppendLine($"Path: {codeGroup.Path}");
         var message = builder.ToString();
         MessageBox.Show(message);
       }
@@ -127,9 +167,9 @@ namespace UpdateProjectFiles
       if (codeLine != null)
       {
         var builder = new StringBuilder(256);
-        builder.AppendLine(text);
-        builder.AppendLine(codeLine.Name);
-        builder.AppendLine(codeLine.Path);
+        builder.AppendLine($"CodeLine {text}");
+        builder.AppendLine($"Name: {codeLine.Name}");
+        builder.AppendLine($"Path: {codeLine.Path}");
         var message = builder.ToString();
         MessageBox.Show(message);
       }
@@ -141,9 +181,28 @@ namespace UpdateProjectFiles
       if (solution != null)
       {
         var builder = new StringBuilder(256);
-        builder.AppendLine(text);
-        builder.AppendLine(solution.Name);
-        builder.Append(solution.Path);
+        builder.AppendLine($"Solution {text}");
+        builder.AppendLine($"CodeLine: {solution.CodeLine}");
+        builder.AppendLine($"CodeGroup: {solution.CodeGroup}");
+        builder.AppendLine($"Name: {solution.Name}");
+        builder.AppendLine($"Path: {solution.Path}");
+        var message = builder.ToString();
+        MessageBox.Show(message);
+      }
+    }
+
+    private void ShowProject(ProjectManager manager, string text)
+    {
+      var project = manager.CurrentDataObject();
+      if (project != null)
+      {
+        var builder = new StringBuilder(256);
+        builder.AppendLine($"Project {text}");
+        builder.AppendLine($"CodeLine: {project.CodeLine}");
+        builder.AppendLine($"CodeGroup: {project.CodeGroup}");
+        builder.AppendLine($"Solution: {project.Solution}");
+        builder.AppendLine($"Name: {project.Name}");
+        builder.AppendLine($"Path: {project.Path}");
         var message = builder.ToString();
         MessageBox.Show(message);
       }

@@ -85,7 +85,8 @@ namespace ProjectFilesDAL
         retValue = new CodeLines();
         do
         {
-          if (IsMatch(codeLine))
+          if (null == codeLine
+            || IsMatch(codeLine))
           {
             var currentObject = CurrentDataObject();
             retValue.Add(currentObject);

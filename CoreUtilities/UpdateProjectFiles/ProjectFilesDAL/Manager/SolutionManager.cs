@@ -220,8 +220,8 @@ namespace ProjectFilesDAL
     /// Write the text file from a Solutions collection.
     /// </summary>
     /// <param name="fileName">The File name.</param>
-    /// <param name="Solutions">The Solutions collection</param>
-    public void CreateFile(string fileName, Solutions Solutions)
+    /// <param name="solutions">The Solutions collection</param>
+    public void CreateFile(string fileName, Solutions solutions)
     {
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
@@ -229,7 +229,7 @@ namespace ProjectFilesDAL
       builder.AppendLine(", Path");
       var header = builder.ToString();
       File.WriteAllText(fileName, header);
-      foreach (Solution solution in Solutions)
+      foreach (Solution solution in solutions)
       {
         var text = CreateRecord(solution);
         File.AppendAllText(fileName, text);
@@ -250,25 +250,25 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Creates a record string.
     /// </summary>
-    /// <param name="Solution">The Solution Data Object.</param>
+    /// <param name="solution">The Solution Data Object.</param>
     /// <returns>The record string.</returns>
-    public string CreateRecord(Solution Solution)
+    public string CreateRecord(Solution solution)
     {
       string retValue = null;
 
-      if (Solution != null
-        && NetString.HasValue(Solution.Name))
+      if (solution != null
+        && NetString.HasValue(solution.Name))
       {
         var builder = new StringBuilder(128);
         if (!Reader.LJCEndsWithNewLine())
         {
           builder.AppendLine();
         }
-        builder.Append($"{Solution.CodeLine}");
-        builder.Append($", {Solution.CodeGroup}");
-        builder.Append($", {Solution.Name}");
-        builder.Append($", {Solution.Sequence}");
-        builder.AppendLine($", {Solution.Path}");
+        builder.Append($"{solution.CodeLine}");
+        builder.Append($", {solution.CodeGroup}");
+        builder.Append($", {solution.Name}");
+        builder.Append($", {solution.Sequence}");
+        builder.AppendLine($", {solution.Path}");
         retValue = builder.ToString();
       }
       return retValue;
