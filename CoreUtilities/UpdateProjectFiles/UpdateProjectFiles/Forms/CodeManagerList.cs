@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // CodeManagerList.cs
 using LJCWinFormCommon;
+using ProjectFilesDAL;
 using System.Windows.Forms;
 
 namespace UpdateProjectFiles
@@ -28,7 +29,7 @@ namespace UpdateProjectFiles
     // Configures the form and loads the initial control data.
     private void CodeManagerList_Load(object sender, System.EventArgs e)
     {
-      //InitializeControls();
+      InitializeControls();
       SolutionExit.Click += CodeLineExit_Click;
       ProjectFileExit.Click += CodeLineExit_Click;
       CenterToParent();

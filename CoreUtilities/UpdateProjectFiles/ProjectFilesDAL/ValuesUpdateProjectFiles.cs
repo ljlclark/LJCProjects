@@ -1,18 +1,17 @@
 ﻿using LJCNetCommon;
-using ProjectFilesDAL;
 using System.Drawing;
 using System.IO;
 
 namespace ProjectFilesDAL
 {
-  internal sealed class ValuesUpdateProjectFiles
+  public sealed class ValuesUpdateProjectFiles
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal ValuesUpdateProjectFiles()
+    public ValuesUpdateProjectFiles()
     {
-      SetProperties("UpdateProjectFiles.exe.config");
+      SetConfigFileSpec("UpdateProjectFiles.exe.config");
     }
     #endregion
 
@@ -62,26 +61,26 @@ namespace ProjectFilesDAL
 
     #region Properties
 
-    /// <summary>Gets or sets the AppSettings value..</summary>
-    internal AppSettings AppSettings { get; set; }
-
     /// <summary>The begin gradient color.</summary>
-    internal Color BeginColor { get; private set; }
+    public Color BeginColor { get; private set; }
 
     /// <summary>Gets or sets the config FileSpec.</summary>
     public string FileSpec { get; private set; }
 
     /// <summary>The end gradient color.</summary>
-    internal Color EndColor { get; private set; }
+    public Color EndColor { get; private set; }
+
+    // Gets the singleton instance.
+    public static ValuesUpdateProjectFiles Instance
+    {
+      get { return mInstance; }
+    }
 
     /// <summary>Gets or sets the Managers class reference.</summary>
     public ManagersProjectFiles Managers { get; set; }
 
-    /// <summary>Gets the singleton instance.</summary>
-    internal static ValuesUpdateProjectFiles Instance
-    {
-      get { return mInstance; }
-    }
+    // Gets or sets the AppSettings value.
+    internal AppSettings AppSettings { get; set; }
     #endregion
 
     #region Class Data

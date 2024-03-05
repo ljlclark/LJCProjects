@@ -77,7 +77,6 @@
     <Compile Include="Forms\Solution\SolutionGridCode.cs" />
     <Compile Include="ProgramProjectFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValuesUpdateProjectFiles.cs" />
     <EmbeddedResource Include="Forms\CodeManagerList.resx">
       <DependentUpon>CodeManagerList.cs</DependentUpon>
     </EmbeddedResource>
