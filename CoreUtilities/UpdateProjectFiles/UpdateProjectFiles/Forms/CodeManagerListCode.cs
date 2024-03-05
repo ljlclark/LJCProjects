@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // CodeManagerListCode.cs
 using LJCWinFormCommon;
+using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace UpdateProjectFiles
       switch (change)
       {
         case Change.Startup:
-          //ConfigureControls();
+          ConfigureControls();
           //RestoreControlValues();
 
           // Load first control.
@@ -91,12 +92,21 @@ namespace UpdateProjectFiles
 
     #region Setup Methods
 
+    // Configure the initial control settings.
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Font)
+      {
+      }
+    }
+
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
+      SetupGrids();
       StartChangeProcessing();
       Cursor = Cursors.Default;
     }
@@ -118,6 +128,12 @@ namespace UpdateProjectFiles
       mSolutionGridCode = new SolutionGridCode(this);
       mProjectGridCode = new ProjectGridCode(this);
       mProjectFileGridCode = new ProjectFileGridCode(this);
+    }
+
+    // Setup the data grids.
+    private void SetupGrids()
+    {
+      mCodeLineGridCode.SetupGrid();
     }
     #endregion
     #endregion

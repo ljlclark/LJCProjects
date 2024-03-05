@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -125,6 +126,24 @@ namespace UpdateProjectFiles
     // Refreshes the list.
     internal void DoRefresh()
     {
+    }
+    #endregion
+
+    #region Setup and Other Methods
+
+    // Configures the CodeLine Grid.
+    internal void SetupGrid()
+    {
+      // Setup default grid columns if no columns are defined.
+      if (0 == CodeLineGrid.Columns.Count)
+      {
+        // Get the grid columns from the manager Data Definition.
+        var manager = CodeLineManager;
+        var gridColumns = manager.GetColumns();
+
+        // Setup the grid columns.
+        CodeLineGrid.LJCAddColumns(gridColumns);
+      }
     }
     #endregion
 

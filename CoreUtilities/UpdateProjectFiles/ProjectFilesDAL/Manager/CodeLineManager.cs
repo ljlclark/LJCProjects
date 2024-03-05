@@ -3,6 +3,7 @@
 // CodeLineManager.cs
 using LJCNetCommon;
 using LJCTextDataReaderLib;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ProjectFilesDAL
@@ -18,6 +19,7 @@ namespace ProjectFilesDAL
     /// <param name="fileName">The data file name.</param>
     public CodeLineManager(string fileName = @"DataFiles\CodeLine.txt")
     {
+      CreateBaseColumns();
       FileName = fileName;
       Reader = new TextDataReader();
       Reader.LJCSetFile(FileName);
@@ -239,6 +241,27 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    /// <summary>Creates a DbColumns object from propertyNames.</summary>
+    /// <param name="propertyNames">The list of property names.</param>
+    /// <returns>A DbColumns collection.</returns>
+    public DbColumns GetColumns(List<string> propertyNames = null)
+    {
+      DbColumns retValue = BaseColumns;
+
+      if (NetCommon.HasItems(propertyNames))
+      {
+        retValue = BaseColumns?.LJCGetColumns(propertyNames);
+      }
+      return retValue;
+    }
+
+    /// <summary>Creates a list of property names.</summary>
+    public List<string> GetPropertyNames()
+    {
+      var retValue = BaseColumns?.LJCGetPropertyNames();
+      return retValue;
+    }
+
     /// <summary>Sorts the file on unique values.</summary>
     public void SortFile()
     {
@@ -267,6 +290,16 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Private Methods
+
+    // Creates the Base column definitions.
+    private void CreateBaseColumns()
+    {
+      BaseColumns = new DbColumns()
+      {
+        { "Name" },
+        { "Path" }
+      };
+    }
 
     // Creates a DataObject from the supplied values.
     private CodeLine CreateDataObject(string name, string pathName = null)
@@ -299,6 +332,9 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Public Properties
+
+    /// <summary>Gets the base data definition columns collection.</summary>
+    public DbColumns BaseColumns { get; set; }
 
     /// <summary>Gets or sets the TextDataReader.</summary>
     public TextDataReader Reader { get; private set; }
