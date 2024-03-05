@@ -39,6 +39,17 @@
       this.CodeLineTab = new System.Windows.Forms.TabPage();
       this.AssemblySplit = new System.Windows.Forms.SplitContainer();
       this.CodeLineGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.CodeLineMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.CodeLineHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeLineNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeLineEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeLineDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeLineRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeLineExit = new System.Windows.Forms.ToolStripMenuItem();
       this.CodeGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyItemHeader = new LJCWinFormControls.LJCHeaderBox();
       this.SolutionTab = new System.Windows.Forms.TabPage();
@@ -46,13 +57,49 @@
       this.GroupLabel = new System.Windows.Forms.Label();
       this.ClassSplit = new System.Windows.Forms.SplitContainer();
       this.SolutionGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.SolutionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.SolutionHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.SolutionNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.SolutionEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.SolutionDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.SolutionRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+      this.SolutionExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.ProjectMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.ProjectHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassItemHeader = new LJCWinFormControls.LJCHeaderBox();
       this.FileTab = new System.Windows.Forms.TabPage();
       this.FileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.ProjectFileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.ProjectFileHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectFileNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectFileEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectFileDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectFileExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectCombo = new LJCWinFormControls.LJCItemCombo();
       this.ProjectLabel = new System.Windows.Forms.Label();
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
+      this.CodeGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.CodeGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeGroupNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeGroupDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.TabSplit)).BeginInit();
       this.TabSplit.Panel1.SuspendLayout();
       this.TabSplit.Panel2.SuspendLayout();
@@ -64,6 +111,7 @@
       this.AssemblySplit.Panel2.SuspendLayout();
       this.AssemblySplit.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.CodeLineGrid)).BeginInit();
+      this.CodeLineMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.CodeGroupGrid)).BeginInit();
       this.SolutionTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ClassSplit)).BeginInit();
@@ -71,9 +119,13 @@
       this.ClassSplit.Panel2.SuspendLayout();
       this.ClassSplit.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.SolutionGrid)).BeginInit();
+      this.SolutionMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ProjectGrid)).BeginInit();
+      this.ProjectMenu.SuspendLayout();
       this.FileTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).BeginInit();
+      this.ProjectFileMenu.SuspendLayout();
+      this.CodeGroupMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // TabSplit
@@ -145,6 +197,7 @@
       this.CodeLineGrid.AllowUserToResizeRows = false;
       this.CodeLineGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.CodeLineGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.CodeLineGrid.ContextMenuStrip = this.CodeLineMenu;
       dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -171,6 +224,94 @@
       this.CodeLineGrid.Size = new System.Drawing.Size(610, 104);
       this.CodeLineGrid.TabIndex = 1;
       this.CodeLineGrid.Text = "LJCDataGrid";
+      this.CodeLineGrid.SelectionChanged += new System.EventHandler(this.CodeLineGrid_SelectionChanged);
+      this.CodeLineGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CodeLineGrid_KeyDown);
+      this.CodeLineGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CodeLineGrid_MouseDoubleClick);
+      this.CodeLineGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CodeLineGrid_MouseDown);
+      // 
+      // CodeLineMenu
+      // 
+      this.CodeLineMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.CodeLineMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CodeLineHeading,
+            this.CodeLineNew,
+            this.CodeLineEdit,
+            this.toolStripSeparator10,
+            this.CodeLineDelete,
+            this.toolStripSeparator15,
+            this.CodeLineRefresh,
+            this.toolStripSeparator3,
+            this.toolStripSeparator1,
+            this.CodeLineExit});
+      this.CodeLineMenu.Name = "AssemblyMenu";
+      this.CodeLineMenu.Size = new System.Drawing.Size(213, 220);
+      this.CodeLineMenu.Text = "Assembly Group Menu";
+      // 
+      // CodeLineHeading
+      // 
+      this.CodeLineHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.CodeLineHeading.Name = "CodeLineHeading";
+      this.CodeLineHeading.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineHeading.Text = "Code Line Menu";
+      // 
+      // CodeLineNew
+      // 
+      this.CodeLineNew.Name = "CodeLineNew";
+      this.CodeLineNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.CodeLineNew.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineNew.Text = "&New";
+      this.CodeLineNew.Click += new System.EventHandler(this.CodeLineNew_Click);
+      // 
+      // CodeLineEdit
+      // 
+      this.CodeLineEdit.Name = "CodeLineEdit";
+      this.CodeLineEdit.ShortcutKeyDisplayString = "ENTER";
+      this.CodeLineEdit.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineEdit.Text = "&Edit";
+      this.CodeLineEdit.Click += new System.EventHandler(this.CodeLineEdit_Click);
+      // 
+      // toolStripSeparator10
+      // 
+      this.toolStripSeparator10.Name = "toolStripSeparator10";
+      this.toolStripSeparator10.Size = new System.Drawing.Size(209, 6);
+      // 
+      // CodeLineDelete
+      // 
+      this.CodeLineDelete.Name = "CodeLineDelete";
+      this.CodeLineDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.CodeLineDelete.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineDelete.Text = "&Delete";
+      this.CodeLineDelete.Click += new System.EventHandler(this.CodeLineDelete_Click);
+      // 
+      // toolStripSeparator15
+      // 
+      this.toolStripSeparator15.Name = "toolStripSeparator15";
+      this.toolStripSeparator15.Size = new System.Drawing.Size(209, 6);
+      // 
+      // CodeLineRefresh
+      // 
+      this.CodeLineRefresh.Name = "CodeLineRefresh";
+      this.CodeLineRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.CodeLineRefresh.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineRefresh.Text = "&Refresh";
+      this.CodeLineRefresh.Click += new System.EventHandler(this.CodeLineRefresh_Click);
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(209, 6);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
+      // 
+      // CodeLineExit
+      // 
+      this.CodeLineExit.Name = "CodeLineExit";
+      this.CodeLineExit.Size = new System.Drawing.Size(212, 32);
+      this.CodeLineExit.Text = "E&xit";
+      this.CodeLineExit.Click += new System.EventHandler(this.CodeLineExit_Click);
       // 
       // CodeGroupGrid
       // 
@@ -183,6 +324,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.CodeGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.CodeGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.CodeGroupGrid.ContextMenuStrip = this.CodeGroupMenu;
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -208,6 +350,10 @@
       this.CodeGroupGrid.Size = new System.Drawing.Size(609, 270);
       this.CodeGroupGrid.TabIndex = 1;
       this.CodeGroupGrid.Text = "LJCDataGrid";
+      this.CodeGroupGrid.SelectionChanged += new System.EventHandler(this.CodeGroupGrid_SelectionChanged);
+      this.CodeGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CodeGroupGrid_KeyDown);
+      this.CodeGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CodeGroupGrid_MouseDoubleClick);
+      this.CodeGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CodeGroupGrid_MouseDown);
       // 
       // AssemblyItemHeader
       // 
@@ -280,6 +426,7 @@
       this.SolutionGrid.AllowUserToResizeRows = false;
       this.SolutionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.SolutionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.SolutionGrid.ContextMenuStrip = this.SolutionMenu;
       dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -306,6 +453,87 @@
       this.SolutionGrid.Size = new System.Drawing.Size(610, 83);
       this.SolutionGrid.TabIndex = 1;
       this.SolutionGrid.Text = "LJCDataGrid";
+      this.SolutionGrid.SelectionChanged += new System.EventHandler(this.SolutionGrid_SelectionChanged);
+      this.SolutionGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SolutionGrid_KeyDown);
+      this.SolutionGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SolutionGrid_MouseDoubleClick);
+      this.SolutionGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SolutionGrid_MouseDown);
+      // 
+      // SolutionMenu
+      // 
+      this.SolutionMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.SolutionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SolutionHeading,
+            this.SolutionNew,
+            this.SolutionEdit,
+            this.toolStripSeparator2,
+            this.SolutionDelete,
+            this.toolStripSeparator4,
+            this.SolutionRefresh,
+            this.toolStripSeparator5,
+            this.SolutionExit});
+      this.SolutionMenu.Name = "AssemblyMenu";
+      this.SolutionMenu.Size = new System.Drawing.Size(201, 214);
+      this.SolutionMenu.Text = "Assembly Group Menu";
+      // 
+      // SolutionHeading
+      // 
+      this.SolutionHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.SolutionHeading.Name = "SolutionHeading";
+      this.SolutionHeading.Size = new System.Drawing.Size(200, 32);
+      this.SolutionHeading.Text = "Solution Menu";
+      // 
+      // SolutionNew
+      // 
+      this.SolutionNew.Name = "SolutionNew";
+      this.SolutionNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.SolutionNew.Size = new System.Drawing.Size(200, 32);
+      this.SolutionNew.Text = "&New";
+      this.SolutionNew.Click += new System.EventHandler(this.SolutionNew_Click);
+      // 
+      // SolutionEdit
+      // 
+      this.SolutionEdit.Name = "SolutionEdit";
+      this.SolutionEdit.ShortcutKeyDisplayString = "ENTER";
+      this.SolutionEdit.Size = new System.Drawing.Size(200, 32);
+      this.SolutionEdit.Text = "&Edit";
+      this.SolutionEdit.Click += new System.EventHandler(this.SolutionEdit_Click);
+      // 
+      // toolStripSeparator2
+      // 
+      this.toolStripSeparator2.Name = "toolStripSeparator2";
+      this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+      // 
+      // SolutionDelete
+      // 
+      this.SolutionDelete.Name = "SolutionDelete";
+      this.SolutionDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.SolutionDelete.Size = new System.Drawing.Size(200, 32);
+      this.SolutionDelete.Text = "&Delete";
+      this.SolutionDelete.Click += new System.EventHandler(this.SolutionDelete_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
+      // 
+      // SolutionRefresh
+      // 
+      this.SolutionRefresh.Name = "SolutionRefresh";
+      this.SolutionRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.SolutionRefresh.Size = new System.Drawing.Size(200, 32);
+      this.SolutionRefresh.Text = "&Refresh";
+      this.SolutionRefresh.Click += new System.EventHandler(this.SolutionRefresh_Click);
+      // 
+      // toolStripSeparator5
+      // 
+      this.toolStripSeparator5.Name = "toolStripSeparator5";
+      this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+      // 
+      // SolutionExit
+      // 
+      this.SolutionExit.Name = "SolutionExit";
+      this.SolutionExit.Size = new System.Drawing.Size(200, 32);
+      this.SolutionExit.Text = "E&xit";
       // 
       // ProjectGrid
       // 
@@ -318,6 +546,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ProjectGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ProjectGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.ProjectGrid.ContextMenuStrip = this.ProjectMenu;
       dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -343,6 +572,74 @@
       this.ProjectGrid.Size = new System.Drawing.Size(609, 257);
       this.ProjectGrid.TabIndex = 1;
       this.ProjectGrid.Text = "LJCDataGrid";
+      this.ProjectGrid.SelectionChanged += new System.EventHandler(this.ProjectGrid_SelectionChanged);
+      this.ProjectGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProjectGrid_KeyDown);
+      this.ProjectGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ProjectGrid_MouseDoubleClick);
+      this.ProjectGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProjectGrid_MouseDown);
+      // 
+      // ProjectMenu
+      // 
+      this.ProjectMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.ProjectMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProjectHeading,
+            this.ProjectNew,
+            this.ProjectEdit,
+            this.toolStripSeparator12,
+            this.ProjectDelete,
+            this.toolStripSeparator13,
+            this.ProjectRefresh});
+      this.ProjectMenu.Name = "AssemblyMenu";
+      this.ProjectMenu.Size = new System.Drawing.Size(189, 176);
+      this.ProjectMenu.Text = "Assembly Group Menu";
+      // 
+      // ProjectHeading
+      // 
+      this.ProjectHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.ProjectHeading.Name = "ProjectHeading";
+      this.ProjectHeading.Size = new System.Drawing.Size(188, 32);
+      this.ProjectHeading.Text = "Project Menu";
+      // 
+      // ProjectNew
+      // 
+      this.ProjectNew.Name = "ProjectNew";
+      this.ProjectNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.ProjectNew.Size = new System.Drawing.Size(188, 32);
+      this.ProjectNew.Text = "&New";
+      this.ProjectNew.Click += new System.EventHandler(this.ProjectNew_Click);
+      // 
+      // ProjectEdit
+      // 
+      this.ProjectEdit.Name = "ProjectEdit";
+      this.ProjectEdit.ShortcutKeyDisplayString = "ENTER";
+      this.ProjectEdit.Size = new System.Drawing.Size(188, 32);
+      this.ProjectEdit.Text = "&Edit";
+      this.ProjectEdit.Click += new System.EventHandler(this.ProjectEdit_Click);
+      // 
+      // toolStripSeparator12
+      // 
+      this.toolStripSeparator12.Name = "toolStripSeparator12";
+      this.toolStripSeparator12.Size = new System.Drawing.Size(185, 6);
+      // 
+      // ProjectDelete
+      // 
+      this.ProjectDelete.Name = "ProjectDelete";
+      this.ProjectDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.ProjectDelete.Size = new System.Drawing.Size(188, 32);
+      this.ProjectDelete.Text = "&Delete";
+      this.ProjectDelete.Click += new System.EventHandler(this.ProjectDelete_Click);
+      // 
+      // toolStripSeparator13
+      // 
+      this.toolStripSeparator13.Name = "toolStripSeparator13";
+      this.toolStripSeparator13.Size = new System.Drawing.Size(185, 6);
+      // 
+      // ProjectRefresh
+      // 
+      this.ProjectRefresh.Name = "ProjectRefresh";
+      this.ProjectRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.ProjectRefresh.Size = new System.Drawing.Size(188, 32);
+      this.ProjectRefresh.Text = "&Refresh";
+      this.ProjectRefresh.Click += new System.EventHandler(this.ProjectRefresh_Click);
       // 
       // ClassItemHeader
       // 
@@ -378,6 +675,7 @@
       this.FileGrid.AllowUserToResizeRows = false;
       this.FileGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.FileGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.FileGrid.ContextMenuStrip = this.ProjectFileMenu;
       dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -403,6 +701,87 @@
       this.FileGrid.Size = new System.Drawing.Size(616, 379);
       this.FileGrid.TabIndex = 3;
       this.FileGrid.Text = "LJCDataGrid";
+      this.FileGrid.SelectionChanged += new System.EventHandler(this.FileGrid_SelectionChanged);
+      this.FileGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileGrid_KeyDown);
+      this.FileGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDoubleClick);
+      this.FileGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDown);
+      // 
+      // ProjectFileMenu
+      // 
+      this.ProjectFileMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.ProjectFileMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProjectFileHeading,
+            this.ProjectFileNew,
+            this.ProjectFileEdit,
+            this.toolStripSeparator6,
+            this.ProjectFileDelete,
+            this.toolStripSeparator7,
+            this.ProjectFileRefresh,
+            this.toolStripSeparator8,
+            this.ProjectFileExit});
+      this.ProjectFileMenu.Name = "AssemblyMenu";
+      this.ProjectFileMenu.Size = new System.Drawing.Size(201, 214);
+      this.ProjectFileMenu.Text = "Assembly Group Menu";
+      // 
+      // ProjectFileHeading
+      // 
+      this.ProjectFileHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.ProjectFileHeading.Name = "ProjectFileHeading";
+      this.ProjectFileHeading.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileHeading.Text = "Solution Menu";
+      // 
+      // ProjectFileNew
+      // 
+      this.ProjectFileNew.Name = "ProjectFileNew";
+      this.ProjectFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.ProjectFileNew.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileNew.Text = "&New";
+      this.ProjectFileNew.Click += new System.EventHandler(this.ProjectFileNew_Click);
+      // 
+      // ProjectFileEdit
+      // 
+      this.ProjectFileEdit.Name = "ProjectFileEdit";
+      this.ProjectFileEdit.ShortcutKeyDisplayString = "ENTER";
+      this.ProjectFileEdit.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileEdit.Text = "&Edit";
+      this.ProjectFileEdit.Click += new System.EventHandler(this.ProjectFileEdit_Click);
+      // 
+      // toolStripSeparator6
+      // 
+      this.toolStripSeparator6.Name = "toolStripSeparator6";
+      this.toolStripSeparator6.Size = new System.Drawing.Size(197, 6);
+      // 
+      // ProjectFileDelete
+      // 
+      this.ProjectFileDelete.Name = "ProjectFileDelete";
+      this.ProjectFileDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.ProjectFileDelete.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileDelete.Text = "&Delete";
+      this.ProjectFileDelete.Click += new System.EventHandler(this.ProjectFileDelete_Click);
+      // 
+      // toolStripSeparator7
+      // 
+      this.toolStripSeparator7.Name = "toolStripSeparator7";
+      this.toolStripSeparator7.Size = new System.Drawing.Size(197, 6);
+      // 
+      // ProjectFileRefresh
+      // 
+      this.ProjectFileRefresh.Name = "ProjectFileRefresh";
+      this.ProjectFileRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.ProjectFileRefresh.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileRefresh.Text = "&Refresh";
+      this.ProjectFileRefresh.Click += new System.EventHandler(this.ProjectFileRefresh_Click);
+      // 
+      // toolStripSeparator8
+      // 
+      this.toolStripSeparator8.Name = "toolStripSeparator8";
+      this.toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
+      // 
+      // ProjectFileExit
+      // 
+      this.ProjectFileExit.Name = "ProjectFileExit";
+      this.ProjectFileExit.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileExit.Text = "E&xit";
       // 
       // ProjectCombo
       // 
@@ -428,6 +807,70 @@
       this.TileTabs.Size = new System.Drawing.Size(172, 450);
       this.TileTabs.TabIndex = 0;
       // 
+      // CodeGroupMenu
+      // 
+      this.CodeGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.CodeGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CodeGroupHeading,
+            this.CodeGroupNew,
+            this.CodeGroupEdit,
+            this.toolStripSeparator9,
+            this.CodeGroupDelete,
+            this.toolStripSeparator11,
+            this.CodeGroupRefresh});
+      this.CodeGroupMenu.Name = "AssemblyMenu";
+      this.CodeGroupMenu.Size = new System.Drawing.Size(232, 176);
+      this.CodeGroupMenu.Text = "Assembly Group Menu";
+      // 
+      // CodeGroupHeading
+      // 
+      this.CodeGroupHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.CodeGroupHeading.Name = "CodeGroupHeading";
+      this.CodeGroupHeading.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupHeading.Text = "Code Group Menu";
+      // 
+      // CodeGroupNew
+      // 
+      this.CodeGroupNew.Name = "CodeGroupNew";
+      this.CodeGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.CodeGroupNew.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupNew.Text = "&New";
+      this.CodeGroupNew.Click += new System.EventHandler(this.CodeGroupNew_Click);
+      // 
+      // CodeGroupEdit
+      // 
+      this.CodeGroupEdit.Name = "CodeGroupEdit";
+      this.CodeGroupEdit.ShortcutKeyDisplayString = "ENTER";
+      this.CodeGroupEdit.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupEdit.Text = "&Edit";
+      this.CodeGroupEdit.Click += new System.EventHandler(this.CodeGroupEdit_Click);
+      // 
+      // toolStripSeparator9
+      // 
+      this.toolStripSeparator9.Name = "toolStripSeparator9";
+      this.toolStripSeparator9.Size = new System.Drawing.Size(228, 6);
+      // 
+      // CodeGroupDelete
+      // 
+      this.CodeGroupDelete.Name = "CodeGroupDelete";
+      this.CodeGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.CodeGroupDelete.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupDelete.Text = "&Delete";
+      this.CodeGroupDelete.Click += new System.EventHandler(this.CodeGroupDelete_Click);
+      // 
+      // toolStripSeparator11
+      // 
+      this.toolStripSeparator11.Name = "toolStripSeparator11";
+      this.toolStripSeparator11.Size = new System.Drawing.Size(228, 6);
+      // 
+      // CodeGroupRefresh
+      // 
+      this.CodeGroupRefresh.Name = "CodeGroupRefresh";
+      this.CodeGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.CodeGroupRefresh.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupRefresh.Text = "&Refresh";
+      this.CodeGroupRefresh.Click += new System.EventHandler(this.CodeGroupRefresh_Click);
+      // 
       // CodeManagerList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -436,6 +879,7 @@
       this.Controls.Add(this.TabSplit);
       this.Name = "CodeManagerList";
       this.Text = "Code Manager";
+      this.Load += new System.EventHandler(this.CodeManagerList_Load);
       this.TabSplit.Panel1.ResumeLayout(false);
       this.TabSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.TabSplit)).EndInit();
@@ -447,6 +891,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.AssemblySplit)).EndInit();
       this.AssemblySplit.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.CodeLineGrid)).EndInit();
+      this.CodeLineMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.CodeGroupGrid)).EndInit();
       this.SolutionTab.ResumeLayout(false);
       this.ClassSplit.Panel1.ResumeLayout(false);
@@ -454,9 +899,13 @@
       ((System.ComponentModel.ISupportInitialize)(this.ClassSplit)).EndInit();
       this.ClassSplit.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SolutionGrid)).EndInit();
+      this.SolutionMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ProjectGrid)).EndInit();
+      this.ProjectMenu.ResumeLayout(false);
       this.FileTab.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).EndInit();
+      this.ProjectFileMenu.ResumeLayout(false);
+      this.CodeGroupMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -482,6 +931,53 @@
     internal LJCWinFormControls.LJCItemCombo ProjectCombo;
     private System.Windows.Forms.Label ProjectLabel;
     internal LJCWinFormControls.LJCDataGrid FileGrid;
+    private System.Windows.Forms.ContextMenuStrip CodeLineMenu;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineHeading;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineNew;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineRefresh;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem CodeLineExit;
+    private System.Windows.Forms.ContextMenuStrip SolutionMenu;
+    private System.Windows.Forms.ToolStripMenuItem SolutionHeading;
+    private System.Windows.Forms.ToolStripMenuItem SolutionNew;
+    private System.Windows.Forms.ToolStripMenuItem SolutionEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripMenuItem SolutionDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripMenuItem SolutionRefresh;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+    private System.Windows.Forms.ToolStripMenuItem SolutionExit;
+    private System.Windows.Forms.ContextMenuStrip ProjectFileMenu;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileHeading;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileNew;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileRefresh;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+    private System.Windows.Forms.ToolStripMenuItem ProjectFileExit;
+    private System.Windows.Forms.ContextMenuStrip CodeGroupMenu;
+    private System.Windows.Forms.ToolStripMenuItem CodeGroupHeading;
+    private System.Windows.Forms.ToolStripMenuItem CodeGroupNew;
+    private System.Windows.Forms.ToolStripMenuItem CodeGroupEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.ToolStripMenuItem CodeGroupDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+    private System.Windows.Forms.ToolStripMenuItem CodeGroupRefresh;
+    private System.Windows.Forms.ContextMenuStrip ProjectMenu;
+    private System.Windows.Forms.ToolStripMenuItem ProjectHeading;
+    private System.Windows.Forms.ToolStripMenuItem ProjectNew;
+    private System.Windows.Forms.ToolStripMenuItem ProjectEdit;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+    private System.Windows.Forms.ToolStripMenuItem ProjectDelete;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+    private System.Windows.Forms.ToolStripMenuItem ProjectRefresh;
   }
 }
 

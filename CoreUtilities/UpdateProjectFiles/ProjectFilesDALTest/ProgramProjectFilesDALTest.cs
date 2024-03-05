@@ -12,7 +12,7 @@ namespace ProjectFilesDALTest
       TestCodeGroup();
       TestSolution();
       TestProject();
-      Console.WriteLine("Press any key to contine ...");
+      Console.Write("Press any key to contine ...");
       Console.ReadKey();
     }
 

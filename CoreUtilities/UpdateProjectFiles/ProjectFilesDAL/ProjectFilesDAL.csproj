@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,12 +59,14 @@
     <Compile Include="Data\Projects.cs" />
     <Compile Include="Data\Solution.cs" />
     <Compile Include="Data\Solutions.cs" />
+    <Compile Include="ManagersProjectFiles.cs" />
     <Compile Include="Manager\ProjectFileManager.cs" />
     <Compile Include="Manager\CodeGroupManager.cs" />
     <Compile Include="Manager\CodeLineManager.cs" />
     <Compile Include="Manager\ProjectManager.cs" />
     <Compile Include="Manager\SolutionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValuesUpdateProjectFiles.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

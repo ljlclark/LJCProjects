@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\LJCTextDataReaderLib.dll</HintPath>
     </Reference>
+    <Reference Include="LJCWinFormCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
+    </Reference>
     <Reference Include="LJCWinFormControls">
       <HintPath>..\..\..\CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll</HintPath>
     </Reference>
@@ -57,15 +61,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeManagerList.cs">
+    <Compile Include="Forms\CodeGroup\CodeGroupGridCode.cs" />
+    <Compile Include="Forms\CodeLline\CodeLineGridCode.cs" />
+    <Compile Include="Forms\CodeManagerList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeManagerList.Designer.cs">
+    <Compile Include="Forms\CodeManagerList.Designer.cs">
       <DependentUpon>CodeManagerList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CodeManagerListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectFile\ProjectFileGridCode.cs" />
+    <Compile Include="Forms\Project\ProjectGridCode.cs" />
+    <Compile Include="Forms\Solution\SolutionGridCode.cs" />
     <Compile Include="ProgramProjectFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CodeManagerList.resx">
+    <Compile Include="ValuesUpdateProjectFiles.cs" />
+    <EmbeddedResource Include="Forms\CodeManagerList.resx">
       <DependentUpon>CodeManagerList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -103,5 +116,6 @@
       <Name>ProjectFilesDAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

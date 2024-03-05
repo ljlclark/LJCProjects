@@ -492,7 +492,7 @@ namespace LJCGenDocEdit
       mAssemblyGroupGridCode.DoDragDrop(e);
     }
 
-    // Handles the form keys.
+    // Handles the grid keys.
     private void AssemblyGroupGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)

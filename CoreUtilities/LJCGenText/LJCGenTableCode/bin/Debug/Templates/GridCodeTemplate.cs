@@ -217,7 +217,7 @@ namespace _Namespace_
 			}
 		}
 
-		// Displays a detail dialog to edit an existing record.
+		// Displays a detail dialog to edit a record.
 		internal void DoEdit()
 		{
 			if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
