@@ -38,6 +38,21 @@ namespace UpdateProjectFiles
 
     #region Action Event Handlers
 
+    #region Tabs
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void MainTabsMove_Click(object sender, System.EventArgs e)
+    {
+      MainTabs.LJCMoveTabPageRight(TileTabs, TabsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void TileTabsMove_Click(object sender, System.EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(MainTabs, TabsSplit);
+    }
+    #endregion
+
     #region CodeLine
 
     // Displays a detail dialog for a new record.
@@ -182,6 +197,29 @@ namespace UpdateProjectFiles
     #endregion
 
     #region Control Event Handlers
+
+    #region Tabs
+
+    // Handles the MouseDown event.
+    private void MainTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        MainTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
+    }
+
+    // Handles the MouseDown event.
+    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        TileTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
+    }
+    #endregion
 
     #region CodeLine
 
@@ -560,6 +598,7 @@ namespace UpdateProjectFiles
       FileGrid.LJCAllowSelectionChange = true;
     }
     #endregion
+
     #endregion
   }
 }

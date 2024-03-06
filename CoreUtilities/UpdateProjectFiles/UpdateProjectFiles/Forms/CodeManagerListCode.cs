@@ -50,7 +50,7 @@ namespace UpdateProjectFiles
           FileGrid.LJCSetLastRow();
           break;
       }
-      //SetControlState();
+      SetControlState();
       Cursor = Cursors.Default;
     }
 
@@ -140,7 +140,7 @@ namespace UpdateProjectFiles
       mValuesFileSpec = @"ControlValues\GenDocList.xml";
 
       // Splitter is not in the first TabPage.
-      //ClassSplit.Resize += ClassSplit_Resize;
+      SolutionSplit.Resize += SolutionSplit_Resize;
 
       BackColor = Values.BeginColor;
     }
@@ -168,8 +168,8 @@ namespace UpdateProjectFiles
           }
 
           // Restore Splitter, Grid and other values.
-          //FormCommon.RestoreSplitDistance(AssemblySplit, ControlValues);
-          //FormCommon.RestoreSplitDistance(ClassSplit, ControlValues);
+          FormCommon.RestoreSplitDistance(CodeLineSplit, ControlValues);
+          FormCommon.RestoreSplitDistance(SolutionSplit, ControlValues);
 
           CodeLineGrid.LJCRestoreColumnValues(ControlValues);
           CodeGroupGrid.LJCRestoreColumnValues(ControlValues);
@@ -195,10 +195,10 @@ namespace UpdateProjectFiles
       FileGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
-      //controlValues.Add("AssemblySplit.SplitterDistance"
-      //  , height: AssemblySplit.SplitterDistance);
-      //controlValues.Add("ClassSplit.SplitterDistance"
-      //  , height: ClassSplit.SplitterDistance);
+      controlValues.Add("CodeLineSplit.SplitterDistance"
+        , height: CodeLineSplit.SplitterDistance);
+      controlValues.Add("SolutionSplit.SplitterDistance"
+        , height: SolutionSplit.SplitterDistance);
 
       // Save Window values.
       controlValues.Add(Name, Left, Top, Width, Height);
@@ -227,9 +227,70 @@ namespace UpdateProjectFiles
       mProjectFileGridCode.SetupGrid();
     }
 
+    // Splitter is not in the first TabPage so Set values on first display.
+    private void SolutionSplit_Resize(object sender, EventArgs e)
+    {
+      if (ControlValues != null)
+      {
+        if (!mIsSolutionSplitSet)
+        {
+          FormCommon.RestoreSplitDistance(SolutionSplit, ControlValues);
+        }
+        mIsSolutionSplitSet = true;
+      }
+    }
+    private bool mIsSolutionSplitSet;
+
     /// <summary>Gets or sets the ControlValues item.</summary>
     internal ControlValues ControlValues { get; set; }
     #endregion
+    #endregion
+
+    #region Private Methods
+
+    // Sets the control states based on the current control values.
+    private void SetControlState()
+    {
+      bool enableNew = true;
+      bool enableEdit = CodeLineGrid.CurrentRow != null;
+      FormCommon.SetMenuState(CodeLineMenu, enableNew, enableEdit);
+      
+      enableNew = CodeLineGrid.CurrentRow != null;
+      enableEdit = CodeGroupGrid.CurrentRow != null;
+      FormCommon.SetMenuState(CodeGroupMenu, enableNew, enableEdit);
+
+      enableNew = CodeGroupGrid.CurrentRow != null;
+      enableEdit = SolutionGrid.CurrentRow != null;
+      FormCommon.SetMenuState(SolutionMenu, enableNew, enableEdit);
+
+      enableNew = SolutionGrid.CurrentRow != null;
+      enableEdit = ProjectGrid.CurrentRow != null;
+      FormCommon.SetMenuState(ProjectMenu, enableNew, enableEdit);
+
+      enableNew = ProjectGrid.CurrentRow != null;
+      enableEdit = FileGrid.CurrentRow != null;
+      FormCommon.SetMenuState(ProjectFileMenu, enableNew, enableEdit);
+    }
+
+    // Sets the tab initial focus control.
+    private void SetFocusTab(MouseEventArgs e)
+    {
+      var tabPage = MainTabs.LJCGetTabPage(e);
+      switch (tabPage.Name)
+      {
+        case "CodeLineTab":
+          CodeLineGrid.Select();
+          break;
+
+        case "SolutionTab":
+          SolutionGrid.Select();
+          break;
+
+        case "FileTab":
+          FileGrid.Select();
+          break;
+      }
+    }
     #endregion
 
     #region Properties
