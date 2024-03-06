@@ -1,11 +1,14 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // CodeManagerListCode.cs
+using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
+using System.IO;
 using System.Windows.Forms;
+using UpdateProjectFiles.Properties;
 
 namespace UpdateProjectFiles
 {
@@ -21,22 +24,22 @@ namespace UpdateProjectFiles
       {
         case Change.Startup:
           ConfigureControls();
-          //RestoreControlValues();
+          RestoreControlValues();
 
           // Load first control.
           mCodeLineGridCode.DataRetrieve();
           break;
 
         case Change.CodeLine:
-          //mCodeGroupGridCode.DataRetrieve();
+          mCodeGroupGridCode.DataRetrieve();
           break;
 
         case Change.CodeGroup:
-          //mSolutionGridCode.DataRetrieve();
+          mSolutionGridCode.DataRetrieve();
           break;
 
         case Change.Solution:
-          //mProjectGridCode.DataRetrieve();
+          mProjectGridCode.DataRetrieve();
           break;
 
         case Change.Project:
@@ -106,6 +109,7 @@ namespace UpdateProjectFiles
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
+      InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
       Cursor = Cursors.Default;
@@ -116,8 +120,83 @@ namespace UpdateProjectFiles
     // Initialize the Class Data.
     private void InitializeClassData()
     {
-      var values = ValuesUpdateProjectFiles.Instance;
-      Managers = values.Managers;
+      Values = ValuesUpdateProjectFiles.Instance;
+      Managers = Values.Managers;
+    }
+
+    // Set initial Control values.
+    private void InitialControlValues()
+    {
+      NetFile.CreateFolder("ExportFiles");
+      NetFile.CreateFolder("ControlValues");
+      mValuesFileSpec = @"ControlValues\GenDocList.xml";
+
+      // Splitter is not in the first TabPage.
+      //ClassSplit.Resize += ClassSplit_Resize;
+
+      BackColor = Values.BeginColor;
+    }
+
+    // Restores the control values.
+    private void RestoreControlValues()
+    {
+      ControlValue controlValue;
+
+      if (File.Exists(mValuesFileSpec))
+      {
+        ControlValues = NetCommon.XmlDeserialize(typeof(ControlValues)
+          , mValuesFileSpec) as ControlValues;
+
+        if (ControlValues != null)
+        {
+          // Restore Window values.
+          controlValue = ControlValues.LJCSearchName(Name);
+          if (controlValue != null)
+          {
+            Left = controlValue.Left;
+            Top = controlValue.Top;
+            Width = controlValue.Width;
+            Height = controlValue.Height;
+          }
+
+          // Restore Splitter, Grid and other values.
+          //FormCommon.RestoreSplitDistance(AssemblySplit, ControlValues);
+          //FormCommon.RestoreSplitDistance(ClassSplit, ControlValues);
+
+          CodeLineGrid.LJCRestoreColumnValues(ControlValues);
+          CodeGroupGrid.LJCRestoreColumnValues(ControlValues);
+          SolutionGrid.LJCRestoreColumnValues(ControlValues);
+          ProjectGrid.LJCRestoreColumnValues(ControlValues);
+          FileGrid.LJCRestoreColumnValues(ControlValues);
+        }
+      }
+    }
+
+    // Saves the control values. 
+    private void SaveControlValues()
+    {
+      ControlValues controlValues = new ControlValues();
+
+      // Save Grid Column values.
+      CodeLineGrid.LJCSaveColumnValues(controlValues);
+      CodeGroupGrid.LJCSaveColumnValues(controlValues);
+
+      SolutionGrid.LJCSaveColumnValues(controlValues);
+      ProjectGrid.LJCSaveColumnValues(controlValues);
+
+      FileGrid.LJCSaveColumnValues(controlValues);
+
+      // Save Splitter values.
+      //controlValues.Add("AssemblySplit.SplitterDistance"
+      //  , height: AssemblySplit.SplitterDistance);
+      //controlValues.Add("ClassSplit.SplitterDistance"
+      //  , height: ClassSplit.SplitterDistance);
+
+      // Save Window values.
+      controlValues.Add(Name, Left, Top, Width, Height);
+
+      NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
+        , mValuesFileSpec);
     }
 
     // Setup the grid code references.
@@ -134,7 +213,13 @@ namespace UpdateProjectFiles
     private void SetupGrids()
     {
       mCodeLineGridCode.SetupGrid();
+      mCodeGroupGridCode.SetupGrid();
+      mSolutionGridCode.SetupGrid();
+      mProjectGridCode.SetupGrid();
     }
+
+    /// <summary>Gets or sets the ControlValues item.</summary>
+    internal ControlValues ControlValues { get; set; }
     #endregion
     #endregion
 
@@ -142,10 +227,14 @@ namespace UpdateProjectFiles
 
     // The Managers object.
     internal ManagersProjectFiles Managers { get; set; }
+
+    // The Configuration Settings.
+    private ValuesUpdateProjectFiles Values { get; set; }
     #endregion
 
     #region Class Data
 
+    private string mValuesFileSpec;
     private CodeLineGridCode mCodeLineGridCode;
     private CodeGroupGridCode mCodeGroupGridCode;
     private SolutionGridCode mSolutionGridCode;

@@ -4,7 +4,6 @@
 using LJCNetCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -42,10 +41,10 @@ namespace UpdateProjectFiles
       CodeLineGrid.LJCRowsClear();
 
       //SetupGrid();
-      var result = CodeLineManager.Load();
-      if (NetCommon.HasItems(result))
+      var codeLines = CodeLineManager.Load();
+      if (NetCommon.HasItems(codeLines))
       {
-        foreach (var codeLine in result)
+        foreach (var codeLine in codeLines)
         {
           RowAdd(codeLine);
         }
@@ -73,8 +72,7 @@ namespace UpdateProjectFiles
         CodeList.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in CodeLineGrid.Rows)
         {
-          //var rowID = row.LJCGetString(_ClassName_.ColumnID);
-          var rowID = row.LJCGetString("CodeLine");
+          var rowID = row.LJCGetString("Name");
           if (rowID == dataRecord.Name)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -102,7 +100,7 @@ namespace UpdateProjectFiles
     private void SetStoredValues(LJCGridRow row, CodeLine dataRecord)
     {
       //row.LJCSetString(CodeLine.ColumnID, dataRecord.ID);
-      row.LJCSetString("CodeLine", dataRecord.Name);
+      row.LJCSetString("Name", dataRecord.Name);
     }
     #endregion
 

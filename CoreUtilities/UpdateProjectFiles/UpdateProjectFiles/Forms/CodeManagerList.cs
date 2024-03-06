@@ -67,7 +67,7 @@ namespace UpdateProjectFiles
     // Performs the Exit function
     private void CodeLineExit_Click(object sender, System.EventArgs e)
     {
-      //SaveControlValues();
+      SaveControlValues();
       Close();
     }
     #endregion
