@@ -35,13 +35,13 @@ namespace UpdateProjectFiles
     #region Data Methods
 
     // Retrieves the list rows.
-    internal void DataRetrieve()
+    internal void DataRetrieve(string parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
       CodeGroupGrid.LJCRowsClear();
 
       //SetupGrid();
-      var codeGroups = CodeGroupManager.Load();
+      var codeGroups = CodeGroupManager.Load(parentKey);
       if (NetCommon.HasItems(codeGroups))
       {
         foreach (var codeGroup in codeGroups)

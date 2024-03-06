@@ -43,7 +43,7 @@ namespace UpdateProjectFiles
           break;
 
         case Change.Project:
-          //mProjectFileGridCode.DataRetrieve();
+          mProjectFileGridCode.DataRetrieve();
           break;
 
         case Change.ProjectFile:
@@ -109,6 +109,7 @@ namespace UpdateProjectFiles
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
       SetupGridCode();
+      ControlSetup();
       InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
@@ -116,6 +117,13 @@ namespace UpdateProjectFiles
     }
 
     #region Setup Support
+
+    // Initial Control setup.
+    private void ControlSetup()
+    {
+      // Provides additional Drag features between split LJCTabControls.
+      var _ = new LJCPanelManager(TabsSplit, MainTabs, TileTabs);
+    }
 
     // Initialize the Class Data.
     private void InitializeClassData()
@@ -216,6 +224,7 @@ namespace UpdateProjectFiles
       mCodeGroupGridCode.SetupGrid();
       mSolutionGridCode.SetupGrid();
       mProjectGridCode.SetupGrid();
+      mProjectFileGridCode.SetupGrid();
     }
 
     /// <summary>Gets or sets the ControlValues item.</summary>

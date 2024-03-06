@@ -35,13 +35,13 @@ namespace UpdateProjectFiles
     #region Data Methods
 
     // Retrieves the list rows.
-    internal void DataRetrieve()
+    internal void DataRetrieve(SolutionParentKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
       SolutionGrid.LJCRowsClear();
 
       //SetupGrid();
-      var solutions = SolutionManager.Load();
+      var solutions = SolutionManager.Load(parentKey);
       if (NetCommon.HasItems(solutions))
       {
         foreach (var solution in solutions)

@@ -34,7 +34,7 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      this.TabSplit = new System.Windows.Forms.SplitContainer();
+      this.TabsSplit = new System.Windows.Forms.SplitContainer();
       this.MainTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.CodeLineTab = new System.Windows.Forms.TabPage();
       this.AssemblySplit = new System.Windows.Forms.SplitContainer();
@@ -51,6 +51,14 @@
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.CodeLineExit = new System.Windows.Forms.ToolStripMenuItem();
       this.CodeGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.CodeGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.CodeGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeGroupNew = new System.Windows.Forms.ToolStripMenuItem();
+      this.CodeGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeGroupDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+      this.CodeGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyItemHeader = new LJCWinFormControls.LJCHeaderBox();
       this.SolutionTab = new System.Windows.Forms.TabPage();
       this.GroupCombo = new LJCWinFormControls.LJCItemCombo();
@@ -92,18 +100,10 @@
       this.ProjectCombo = new LJCWinFormControls.LJCItemCombo();
       this.ProjectLabel = new System.Windows.Forms.Label();
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
-      this.CodeGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.CodeGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
-      this.CodeGroupNew = new System.Windows.Forms.ToolStripMenuItem();
-      this.CodeGroupEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-      this.CodeGroupDelete = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-      this.CodeGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      ((System.ComponentModel.ISupportInitialize)(this.TabSplit)).BeginInit();
-      this.TabSplit.Panel1.SuspendLayout();
-      this.TabSplit.Panel2.SuspendLayout();
-      this.TabSplit.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
+      this.TabsSplit.Panel1.SuspendLayout();
+      this.TabsSplit.Panel2.SuspendLayout();
+      this.TabsSplit.SuspendLayout();
       this.MainTabs.SuspendLayout();
       this.CodeLineTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.AssemblySplit)).BeginInit();
@@ -113,6 +113,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.CodeLineGrid)).BeginInit();
       this.CodeLineMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.CodeGroupGrid)).BeginInit();
+      this.CodeGroupMenu.SuspendLayout();
       this.SolutionTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ClassSplit)).BeginInit();
       this.ClassSplit.Panel1.SuspendLayout();
@@ -125,25 +126,24 @@
       this.FileTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).BeginInit();
       this.ProjectFileMenu.SuspendLayout();
-      this.CodeGroupMenu.SuspendLayout();
       this.SuspendLayout();
       // 
-      // TabSplit
+      // TabsSplit
       // 
-      this.TabSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TabSplit.Location = new System.Drawing.Point(0, 0);
-      this.TabSplit.Name = "TabSplit";
+      this.TabsSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.TabsSplit.Location = new System.Drawing.Point(0, 0);
+      this.TabsSplit.Name = "TabsSplit";
       // 
-      // TabSplit.Panel1
+      // TabsSplit.Panel1
       // 
-      this.TabSplit.Panel1.Controls.Add(this.MainTabs);
+      this.TabsSplit.Panel1.Controls.Add(this.MainTabs);
       // 
-      // TabSplit.Panel2
+      // TabsSplit.Panel2
       // 
-      this.TabSplit.Panel2.Controls.Add(this.TileTabs);
-      this.TabSplit.Size = new System.Drawing.Size(800, 450);
-      this.TabSplit.SplitterDistance = 624;
-      this.TabSplit.TabIndex = 0;
+      this.TabsSplit.Panel2.Controls.Add(this.TileTabs);
+      this.TabsSplit.Size = new System.Drawing.Size(800, 450);
+      this.TabsSplit.SplitterDistance = 695;
+      this.TabsSplit.TabIndex = 0;
       // 
       // MainTabs
       // 
@@ -156,7 +156,7 @@
       this.MainTabs.Location = new System.Drawing.Point(0, 0);
       this.MainTabs.Name = "MainTabs";
       this.MainTabs.SelectedIndex = 0;
-      this.MainTabs.Size = new System.Drawing.Size(624, 450);
+      this.MainTabs.Size = new System.Drawing.Size(695, 450);
       this.MainTabs.TabIndex = 1;
       // 
       // CodeLineTab
@@ -165,7 +165,7 @@
       this.CodeLineTab.Location = new System.Drawing.Point(4, 29);
       this.CodeLineTab.Name = "CodeLineTab";
       this.CodeLineTab.Padding = new System.Windows.Forms.Padding(3);
-      this.CodeLineTab.Size = new System.Drawing.Size(616, 417);
+      this.CodeLineTab.Size = new System.Drawing.Size(687, 417);
       this.CodeLineTab.TabIndex = 0;
       this.CodeLineTab.Text = "Code Line";
       this.CodeLineTab.UseVisualStyleBackColor = true;
@@ -185,7 +185,7 @@
       // 
       this.AssemblySplit.Panel2.Controls.Add(this.CodeGroupGrid);
       this.AssemblySplit.Panel2.Controls.Add(this.AssemblyItemHeader);
-      this.AssemblySplit.Size = new System.Drawing.Size(610, 411);
+      this.AssemblySplit.Size = new System.Drawing.Size(681, 411);
       this.AssemblySplit.SplitterDistance = 104;
       this.AssemblySplit.TabIndex = 0;
       // 
@@ -202,8 +202,8 @@
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
       dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.CodeLineGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.CodeLineGrid.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -221,7 +221,7 @@
       this.CodeLineGrid.RowTemplate.Height = 28;
       this.CodeLineGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.CodeLineGrid.ShowCellToolTips = false;
-      this.CodeLineGrid.Size = new System.Drawing.Size(610, 104);
+      this.CodeLineGrid.Size = new System.Drawing.Size(681, 104);
       this.CodeLineGrid.TabIndex = 1;
       this.CodeLineGrid.Text = "LJCDataGrid";
       this.CodeLineGrid.SelectionChanged += new System.EventHandler(this.CodeLineGrid_SelectionChanged);
@@ -347,13 +347,77 @@
       this.CodeGroupGrid.RowTemplate.Height = 28;
       this.CodeGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.CodeGroupGrid.ShowCellToolTips = false;
-      this.CodeGroupGrid.Size = new System.Drawing.Size(609, 270);
+      this.CodeGroupGrid.Size = new System.Drawing.Size(680, 270);
       this.CodeGroupGrid.TabIndex = 1;
       this.CodeGroupGrid.Text = "LJCDataGrid";
       this.CodeGroupGrid.SelectionChanged += new System.EventHandler(this.CodeGroupGrid_SelectionChanged);
       this.CodeGroupGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CodeGroupGrid_KeyDown);
       this.CodeGroupGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CodeGroupGrid_MouseDoubleClick);
       this.CodeGroupGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CodeGroupGrid_MouseDown);
+      // 
+      // CodeGroupMenu
+      // 
+      this.CodeGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.CodeGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CodeGroupHeading,
+            this.CodeGroupNew,
+            this.CodeGroupEdit,
+            this.toolStripSeparator9,
+            this.CodeGroupDelete,
+            this.toolStripSeparator11,
+            this.CodeGroupRefresh});
+      this.CodeGroupMenu.Name = "AssemblyMenu";
+      this.CodeGroupMenu.Size = new System.Drawing.Size(232, 176);
+      this.CodeGroupMenu.Text = "Assembly Group Menu";
+      // 
+      // CodeGroupHeading
+      // 
+      this.CodeGroupHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.CodeGroupHeading.Name = "CodeGroupHeading";
+      this.CodeGroupHeading.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupHeading.Text = "Code Group Menu";
+      // 
+      // CodeGroupNew
+      // 
+      this.CodeGroupNew.Name = "CodeGroupNew";
+      this.CodeGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.CodeGroupNew.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupNew.Text = "&New";
+      this.CodeGroupNew.Click += new System.EventHandler(this.CodeGroupNew_Click);
+      // 
+      // CodeGroupEdit
+      // 
+      this.CodeGroupEdit.Name = "CodeGroupEdit";
+      this.CodeGroupEdit.ShortcutKeyDisplayString = "ENTER";
+      this.CodeGroupEdit.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupEdit.Text = "&Edit";
+      this.CodeGroupEdit.Click += new System.EventHandler(this.CodeGroupEdit_Click);
+      // 
+      // toolStripSeparator9
+      // 
+      this.toolStripSeparator9.Name = "toolStripSeparator9";
+      this.toolStripSeparator9.Size = new System.Drawing.Size(228, 6);
+      // 
+      // CodeGroupDelete
+      // 
+      this.CodeGroupDelete.Name = "CodeGroupDelete";
+      this.CodeGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.CodeGroupDelete.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupDelete.Text = "&Delete";
+      this.CodeGroupDelete.Click += new System.EventHandler(this.CodeGroupDelete_Click);
+      // 
+      // toolStripSeparator11
+      // 
+      this.toolStripSeparator11.Name = "toolStripSeparator11";
+      this.toolStripSeparator11.Size = new System.Drawing.Size(228, 6);
+      // 
+      // CodeGroupRefresh
+      // 
+      this.CodeGroupRefresh.Name = "CodeGroupRefresh";
+      this.CodeGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.CodeGroupRefresh.Size = new System.Drawing.Size(231, 32);
+      this.CodeGroupRefresh.Text = "&Refresh";
+      this.CodeGroupRefresh.Click += new System.EventHandler(this.CodeGroupRefresh_Click);
       // 
       // AssemblyItemHeader
       // 
@@ -364,7 +428,7 @@
       this.AssemblyItemHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyItemHeader.Name = "AssemblyItemHeader";
-      this.AssemblyItemHeader.Size = new System.Drawing.Size(609, 33);
+      this.AssemblyItemHeader.Size = new System.Drawing.Size(680, 33);
       this.AssemblyItemHeader.TabIndex = 0;
       this.AssemblyItemHeader.TabStop = false;
       this.AssemblyItemHeader.Text = "Code Group";
@@ -377,7 +441,7 @@
       this.SolutionTab.Location = new System.Drawing.Point(4, 29);
       this.SolutionTab.Name = "SolutionTab";
       this.SolutionTab.Padding = new System.Windows.Forms.Padding(3);
-      this.SolutionTab.Size = new System.Drawing.Size(616, 417);
+      this.SolutionTab.Size = new System.Drawing.Size(687, 417);
       this.SolutionTab.TabIndex = 1;
       this.SolutionTab.Text = "Solution";
       this.SolutionTab.UseVisualStyleBackColor = true;
@@ -414,7 +478,7 @@
       // 
       this.ClassSplit.Panel2.Controls.Add(this.ProjectGrid);
       this.ClassSplit.Panel2.Controls.Add(this.ClassItemHeader);
-      this.ClassSplit.Size = new System.Drawing.Size(610, 375);
+      this.ClassSplit.Size = new System.Drawing.Size(681, 375);
       this.ClassSplit.SplitterDistance = 83;
       this.ClassSplit.TabIndex = 2;
       // 
@@ -450,7 +514,7 @@
       this.SolutionGrid.RowTemplate.Height = 28;
       this.SolutionGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.SolutionGrid.ShowCellToolTips = false;
-      this.SolutionGrid.Size = new System.Drawing.Size(610, 83);
+      this.SolutionGrid.Size = new System.Drawing.Size(681, 83);
       this.SolutionGrid.TabIndex = 1;
       this.SolutionGrid.Text = "LJCDataGrid";
       this.SolutionGrid.SelectionChanged += new System.EventHandler(this.SolutionGrid_SelectionChanged);
@@ -569,7 +633,7 @@
       this.ProjectGrid.RowTemplate.Height = 28;
       this.ProjectGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ProjectGrid.ShowCellToolTips = false;
-      this.ProjectGrid.Size = new System.Drawing.Size(609, 257);
+      this.ProjectGrid.Size = new System.Drawing.Size(680, 257);
       this.ProjectGrid.TabIndex = 1;
       this.ProjectGrid.Text = "LJCDataGrid";
       this.ProjectGrid.SelectionChanged += new System.EventHandler(this.ProjectGrid_SelectionChanged);
@@ -650,7 +714,7 @@
       this.ClassItemHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassItemHeader.Name = "ClassItemHeader";
-      this.ClassItemHeader.Size = new System.Drawing.Size(609, 32);
+      this.ClassItemHeader.Size = new System.Drawing.Size(680, 32);
       this.ClassItemHeader.TabIndex = 0;
       this.ClassItemHeader.TabStop = false;
       this.ClassItemHeader.Text = "Project";
@@ -662,7 +726,7 @@
       this.FileTab.Controls.Add(this.ProjectLabel);
       this.FileTab.Location = new System.Drawing.Point(4, 29);
       this.FileTab.Name = "FileTab";
-      this.FileTab.Size = new System.Drawing.Size(616, 417);
+      this.FileTab.Size = new System.Drawing.Size(687, 417);
       this.FileTab.TabIndex = 2;
       this.FileTab.Text = "File";
       this.FileTab.UseVisualStyleBackColor = true;
@@ -673,6 +737,9 @@
       this.FileGrid.AllowUserToAddRows = false;
       this.FileGrid.AllowUserToDeleteRows = false;
       this.FileGrid.AllowUserToResizeRows = false;
+      this.FileGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.FileGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.FileGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.FileGrid.ContextMenuStrip = this.ProjectFileMenu;
@@ -698,7 +765,7 @@
       this.FileGrid.RowTemplate.Height = 28;
       this.FileGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.FileGrid.ShowCellToolTips = false;
-      this.FileGrid.Size = new System.Drawing.Size(616, 379);
+      this.FileGrid.Size = new System.Drawing.Size(687, 379);
       this.FileGrid.TabIndex = 3;
       this.FileGrid.Text = "LJCDataGrid";
       this.FileGrid.SelectionChanged += new System.EventHandler(this.FileGrid_SelectionChanged);
@@ -804,86 +871,22 @@
       this.TileTabs.Location = new System.Drawing.Point(0, 0);
       this.TileTabs.Name = "TileTabs";
       this.TileTabs.SelectedIndex = 0;
-      this.TileTabs.Size = new System.Drawing.Size(172, 450);
+      this.TileTabs.Size = new System.Drawing.Size(101, 450);
       this.TileTabs.TabIndex = 0;
-      // 
-      // CodeGroupMenu
-      // 
-      this.CodeGroupMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.CodeGroupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CodeGroupHeading,
-            this.CodeGroupNew,
-            this.CodeGroupEdit,
-            this.toolStripSeparator9,
-            this.CodeGroupDelete,
-            this.toolStripSeparator11,
-            this.CodeGroupRefresh});
-      this.CodeGroupMenu.Name = "AssemblyMenu";
-      this.CodeGroupMenu.Size = new System.Drawing.Size(232, 176);
-      this.CodeGroupMenu.Text = "Assembly Group Menu";
-      // 
-      // CodeGroupHeading
-      // 
-      this.CodeGroupHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.CodeGroupHeading.Name = "CodeGroupHeading";
-      this.CodeGroupHeading.Size = new System.Drawing.Size(231, 32);
-      this.CodeGroupHeading.Text = "Code Group Menu";
-      // 
-      // CodeGroupNew
-      // 
-      this.CodeGroupNew.Name = "CodeGroupNew";
-      this.CodeGroupNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.CodeGroupNew.Size = new System.Drawing.Size(231, 32);
-      this.CodeGroupNew.Text = "&New";
-      this.CodeGroupNew.Click += new System.EventHandler(this.CodeGroupNew_Click);
-      // 
-      // CodeGroupEdit
-      // 
-      this.CodeGroupEdit.Name = "CodeGroupEdit";
-      this.CodeGroupEdit.ShortcutKeyDisplayString = "ENTER";
-      this.CodeGroupEdit.Size = new System.Drawing.Size(231, 32);
-      this.CodeGroupEdit.Text = "&Edit";
-      this.CodeGroupEdit.Click += new System.EventHandler(this.CodeGroupEdit_Click);
-      // 
-      // toolStripSeparator9
-      // 
-      this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(228, 6);
-      // 
-      // CodeGroupDelete
-      // 
-      this.CodeGroupDelete.Name = "CodeGroupDelete";
-      this.CodeGroupDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.CodeGroupDelete.Size = new System.Drawing.Size(231, 32);
-      this.CodeGroupDelete.Text = "&Delete";
-      this.CodeGroupDelete.Click += new System.EventHandler(this.CodeGroupDelete_Click);
-      // 
-      // toolStripSeparator11
-      // 
-      this.toolStripSeparator11.Name = "toolStripSeparator11";
-      this.toolStripSeparator11.Size = new System.Drawing.Size(228, 6);
-      // 
-      // CodeGroupRefresh
-      // 
-      this.CodeGroupRefresh.Name = "CodeGroupRefresh";
-      this.CodeGroupRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.CodeGroupRefresh.Size = new System.Drawing.Size(231, 32);
-      this.CodeGroupRefresh.Text = "&Refresh";
-      this.CodeGroupRefresh.Click += new System.EventHandler(this.CodeGroupRefresh_Click);
       // 
       // CodeManagerList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(800, 450);
-      this.Controls.Add(this.TabSplit);
+      this.Controls.Add(this.TabsSplit);
       this.Name = "CodeManagerList";
       this.Text = "Code Manager";
       this.Load += new System.EventHandler(this.CodeManagerList_Load);
-      this.TabSplit.Panel1.ResumeLayout(false);
-      this.TabSplit.Panel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.TabSplit)).EndInit();
-      this.TabSplit.ResumeLayout(false);
+      this.TabsSplit.Panel1.ResumeLayout(false);
+      this.TabsSplit.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).EndInit();
+      this.TabsSplit.ResumeLayout(false);
       this.MainTabs.ResumeLayout(false);
       this.CodeLineTab.ResumeLayout(false);
       this.AssemblySplit.Panel1.ResumeLayout(false);
@@ -893,6 +896,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.CodeLineGrid)).EndInit();
       this.CodeLineMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.CodeGroupGrid)).EndInit();
+      this.CodeGroupMenu.ResumeLayout(false);
       this.SolutionTab.ResumeLayout(false);
       this.ClassSplit.Panel1.ResumeLayout(false);
       this.ClassSplit.Panel2.ResumeLayout(false);
@@ -905,14 +909,13 @@
       this.FileTab.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).EndInit();
       this.ProjectFileMenu.ResumeLayout(false);
-      this.CodeGroupMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
 
     #endregion
 
-    private System.Windows.Forms.SplitContainer TabSplit;
+    private System.Windows.Forms.SplitContainer TabsSplit;
     private LJCWinFormControls.LJCTabControl TileTabs;
     private LJCWinFormControls.LJCTabControl MainTabs;
     private System.Windows.Forms.TabPage CodeLineTab;

@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -35,13 +36,12 @@ namespace UpdateProjectFiles
     #region Data Methods
 
     // Retrieves the list rows.
-    internal void DataRetrieve()
+    internal void DataRetrieve(ProjectParentKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectGrid.LJCRowsClear();
 
-      //SetupGrid();
-      var projects = ProjectManager.Load();
+      var projects = ProjectManager.Load(parentKey);
       if (NetCommon.HasItems(projects))
       {
         foreach (var project in projects)
@@ -73,13 +73,13 @@ namespace UpdateProjectFiles
         foreach (LJCGridRow row in ProjectGrid.Rows)
         {
           var codeLine = row.LJCGetString("CodeLine");
-          var codeGroup = row.LJCGetString("          if (rowID == dataRecord.Name)\r\n          if (rowID == dataRecord.Name)\r\n          if (rowID == dataRecord.Name)\r\n");
+          var codeGroup = row.LJCGetString("CodeGroup");
           var solution = row.LJCGetString("Solution");
-          var rowID = row.LJCGetString("Name");
+          var name = row.LJCGetString("Name");
           if (codeLine == dataRecord.CodeLine
             && codeGroup == dataRecord.CodeGroup
             && solution == dataRecord.Solution
-            && rowID == dataRecord.Name)
+            && name == dataRecord.Name)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ProjectGrid.LJCSetCurrentRow(row, true);
@@ -105,7 +105,6 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Project dataRecord)
     {
-      //row.LJCSetString(CodeLine.ColumnID, dataRecord.ID);
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
       row.LJCSetString("CodeGroup", dataRecord.CodeGroup);
       row.LJCSetString("Solution", dataRecord.Solution);
@@ -146,7 +145,14 @@ namespace UpdateProjectFiles
       {
         // Get the grid columns from the manager Data Definition.
         var manager = ProjectManager;
-        var gridColumns = manager.GetColumns();
+        List<string> propertyNames = new List<string>()
+        {
+          "CodeLine",
+          "CodeGroup",
+          "Solution",
+          "Name",
+        };
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         ProjectGrid.LJCAddColumns(gridColumns);
@@ -162,7 +168,7 @@ namespace UpdateProjectFiles
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }
 
-    // Gets or sets the _ClassName_ Grid reference.
+    // Gets or sets the Grid reference.
     private LJCDataGrid ProjectGrid { get; set; }
 
     // Gets or sets the Manager reference.
