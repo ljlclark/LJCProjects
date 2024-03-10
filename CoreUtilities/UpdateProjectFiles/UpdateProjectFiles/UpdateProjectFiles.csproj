@@ -62,6 +62,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\CodeGroup\CodeGroupGridCode.cs" />
+    <Compile Include="Forms\CodeGroup\CodeGroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeGroup\CodeGroupDetail.Designer.cs">
+      <DependentUpon>CodeGroupDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CodeLline\CodeLineDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeLline\CodeLineDetail.Designer.cs">
+      <DependentUpon>CodeLineDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CodeLline\CodeLineGridCode.cs" />
     <Compile Include="Forms\CodeManagerList.cs">
       <SubType>Form</SubType>
@@ -72,13 +84,46 @@
     <Compile Include="Forms\CodeManagerListCode.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ProjectFile\ProjectFileDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectFile\ProjectFileDetail.Designer.cs">
+      <DependentUpon>ProjectFileDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProjectFile\ProjectFileGridCode.cs" />
+    <Compile Include="Forms\Project\ProjectDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Project\ProjectDetail.Designer.cs">
+      <DependentUpon>ProjectDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Project\ProjectGridCode.cs" />
+    <Compile Include="Forms\Solution\SolutionDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Solution\SolutionDetail.Designer.cs">
+      <DependentUpon>SolutionDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Solution\SolutionGridCode.cs" />
     <Compile Include="ProgramProjectFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CodeGroup\CodeGroupDetail.resx">
+      <DependentUpon>CodeGroupDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CodeLline\CodeLineDetail.resx">
+      <DependentUpon>CodeLineDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CodeManagerList.resx">
       <DependentUpon>CodeManagerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectFile\ProjectFileDetail.resx">
+      <DependentUpon>ProjectFileDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Project\ProjectDetail.resx">
+      <DependentUpon>ProjectDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Solution\SolutionDetail.resx">
+      <DependentUpon>SolutionDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

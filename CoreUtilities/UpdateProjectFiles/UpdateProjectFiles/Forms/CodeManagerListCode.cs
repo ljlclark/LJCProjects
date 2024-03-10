@@ -8,10 +8,10 @@ using ProjectFilesDAL;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using UpdateProjectFiles.Properties;
 
 namespace UpdateProjectFiles
 {
+  // The list form code.
   internal partial class CodeManagerList : Form
   {
     #region Item Change Processing
@@ -100,6 +100,13 @@ namespace UpdateProjectFiles
     {
       if (AutoScaleMode == AutoScaleMode.Font)
       {
+        CodeLineSplit.SplitterWidth = 4;
+        SolutionSplit.SplitterWidth = 4;
+
+        ListHelper.SetPanelControls(CodeLineSplit.Panel2, CodeGroupHeader
+          , null, CodeGroupGrid);
+        ListHelper.SetPanelControls(SolutionSplit.Panel2, ProjectHeader
+          , null, ProjectGrid);
       }
     }
 
@@ -128,8 +135,8 @@ namespace UpdateProjectFiles
     // Initialize the Class Data.
     private void InitializeClassData()
     {
-      Values = ValuesUpdateProjectFiles.Instance;
-      Managers = Values.Managers;
+      ConfigValues = ValuesUpdateProjectFiles.Instance;
+      Managers = ConfigValues.Managers;
     }
 
     // Set initial Control values.
@@ -137,12 +144,12 @@ namespace UpdateProjectFiles
     {
       NetFile.CreateFolder("ExportFiles");
       NetFile.CreateFolder("ControlValues");
-      mValuesFileSpec = @"ControlValues\GenDocList.xml";
+      mValuesFileSpec = @"ControlValues\CodeManagerList.xml";
 
       // Splitter is not in the first TabPage.
       SolutionSplit.Resize += SolutionSplit_Resize;
 
-      BackColor = Values.BeginColor;
+      BackColor = ConfigValues.BeginColor;
     }
 
     // Restores the control values.
@@ -188,10 +195,8 @@ namespace UpdateProjectFiles
       // Save Grid Column values.
       CodeLineGrid.LJCSaveColumnValues(controlValues);
       CodeGroupGrid.LJCSaveColumnValues(controlValues);
-
       SolutionGrid.LJCSaveColumnValues(controlValues);
       ProjectGrid.LJCSaveColumnValues(controlValues);
-
       FileGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
@@ -254,7 +259,7 @@ namespace UpdateProjectFiles
       bool enableNew = true;
       bool enableEdit = CodeLineGrid.CurrentRow != null;
       FormCommon.SetMenuState(CodeLineMenu, enableNew, enableEdit);
-      
+
       enableNew = CodeLineGrid.CurrentRow != null;
       enableEdit = CodeGroupGrid.CurrentRow != null;
       FormCommon.SetMenuState(CodeGroupMenu, enableNew, enableEdit);
@@ -299,7 +304,7 @@ namespace UpdateProjectFiles
     internal ManagersProjectFiles Managers { get; set; }
 
     // The Configuration Settings.
-    private ValuesUpdateProjectFiles Values { get; set; }
+    private ValuesUpdateProjectFiles ConfigValues { get; set; }
     #endregion
 
     #region Class Data

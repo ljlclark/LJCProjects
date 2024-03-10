@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 // SolutionGridCode.cs
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
+using System;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -19,6 +21,7 @@ namespace UpdateProjectFiles
       // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
       CodeList = parentList;
+      CodeGroupGrid = CodeList.CodeGroupGrid;
       SolutionGrid = CodeList.SolutionGrid;
       ResetData();
       CodeList.Cursor = Cursors.Default;
@@ -114,21 +117,128 @@ namespace UpdateProjectFiles
     // Deletes the selected row.
     internal void DoDelete()
     {
+      bool success = false;
+      var parentRow = CodeGroupGrid.CurrentRow as LJCGridRow;
+      var row = SolutionGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
+      {
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        var name = row.LJCGetString("Name");
+        var parentKey = new SolutionParentKey()
+        {
+          CodeLine = parentRow.LJCGetString("CodeLine"),
+          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+        };
+
+        SolutionManager.Delete(parentKey, name);
+      }
     }
 
     // Displays a detail dialog to edit a record.
     internal void DoEdit()
     {
+      var parentRow = CodeGroupGrid.CurrentRow as LJCGridRow;
+      var row = SolutionGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
+      {
+        // Data from items.
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var name = row.LJCGetString("Name");
+
+        var location = FormCommon.GetDialogScreenPoint(SolutionGrid);
+        var detail = new SolutionDetail()
+        {
+          LJCCodeLine = codeLineName,
+          LJCCodeGroup = codeGroupName,
+          LJCName = name,
+          Managers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
+      var parentRow = CodeGroupGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null)
+      {
+        // Data from items.
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+
+        var location = FormCommon.GetDialogScreenPoint(SolutionGrid);
+        var detail = new SolutionDetail()
+        {
+          LJCCodeLine = codeLineName,
+          LJCCodeGroup = codeGroupName,
+          Managers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
+      CodeList.Cursor = Cursors.WaitCursor;
+      Solution record = null;
+      if (CodeGroupGrid.CurrentRow is LJCGridRow parentRow
+        && SolutionGrid.CurrentRow is LJCGridRow row)
+      {
+        // Save the original row.
+        record = new Solution()
+        {
+          CodeLine = parentRow.LJCGetString("CodeLine"),
+          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+          Name = row.LJCGetString("Name"),
+        };
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (record != null)
+      {
+        RowSelect(record);
+      }
+      CodeList.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with record values.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as SolutionDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          SolutionGrid.LJCSetCurrentRow(row, true);
+          CodeList.TimedChange(Change.Solution);
+        }
+      }
     }
     #endregion
 
@@ -151,6 +261,9 @@ namespace UpdateProjectFiles
     #endregion
 
     #region Properties
+
+    // Gets or sets the Solution Grid reference.
+    private LJCDataGrid CodeGroupGrid { get; set; }
 
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }

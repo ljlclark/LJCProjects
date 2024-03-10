@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 // CodeLineGridCode.cs
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
+using System;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -99,7 +101,6 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, CodeLine dataRecord)
     {
-      //row.LJCSetString(CodeLine.ColumnID, dataRecord.ID);
       row.LJCSetString("Name", dataRecord.Name);
     }
     #endregion
@@ -109,21 +110,108 @@ namespace UpdateProjectFiles
     // Deletes the selected row.
     internal void DoDelete()
     {
+      bool success = false;
+      var row = CodeLineGrid.CurrentRow as LJCGridRow;
+      if (row != null)
+      {
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        var name = row.LJCGetString("Name");
+
+        CodeLineManager.Delete(name);
+      }
+
+      if (success)
+      {
+        CodeLineGrid.Rows.Remove(row);
+        CodeList.TimedChange(Change.CodeLine);
+      }
     }
 
     // Displays a detail dialog to edit a record.
     internal void DoEdit()
     {
+      var row = CodeLineGrid.CurrentRow as LJCGridRow;
+      if (row != null)
+      {
+        // Data from items.
+        var name = row.LJCGetString("Name");
+
+        var location = FormCommon.GetDialogScreenPoint(CodeLineGrid);
+        var detail = new CodeLineDetail()
+        {
+          LJCName = name,
+          Managers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
+      var location = FormCommon.GetDialogScreenPoint(CodeLineGrid);
+      var detail = new CodeLineDetail()
+      {
+        Managers = Managers
+      };
+      detail.LJCChange += Detail_Change;
+      detail.ShowDialog();
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
+      CodeList.Cursor = Cursors.WaitCursor;
+      CodeLine record = null;
+      if (CodeLineGrid.CurrentRow is LJCGridRow row)
+      {
+        // Save the original row.
+        record = new CodeLine()
+        {
+          Name = row.LJCGetString("Name"),
+        };
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (record != null)
+      {
+        RowSelect(record);
+      }
+      CodeList.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with record values.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as CodeLineDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          CodeLineGrid.LJCSetCurrentRow(row, true);
+          CodeList.TimedChange(Change.CodeLine);
+        }
+      }
     }
     #endregion
 

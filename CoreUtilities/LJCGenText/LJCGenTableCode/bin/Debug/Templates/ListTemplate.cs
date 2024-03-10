@@ -186,7 +186,7 @@ namespace _Namespace_
 
 		#region _ClassName_
 
-		// Handles the form keys.
+		// Handles the grid keys.
 		private void _ClassName_Grid_KeyDown(object sender, KeyEventArgs e)
 		{
 			switch (e.KeyCode)

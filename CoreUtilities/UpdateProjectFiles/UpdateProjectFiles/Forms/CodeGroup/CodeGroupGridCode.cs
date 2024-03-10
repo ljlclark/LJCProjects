@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 // CodeGroupGridCode.cs
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
+using System;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -19,6 +21,7 @@ namespace UpdateProjectFiles
       // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
       CodeList = parentList;
+      CodeLineGrid = CodeList.CodeLineGrid;
       CodeGroupGrid = CodeList.CodeGroupGrid;
       ResetData();
       CodeList.Cursor = Cursors.Default;
@@ -111,21 +114,125 @@ namespace UpdateProjectFiles
     // Deletes the selected row.
     internal void DoDelete()
     {
+      bool success = false;
+      var parentRow = CodeLineGrid.CurrentRow as LJCGridRow;
+      var row = CodeGroupGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
+      {
+        var title = "Delete Confirmation";
+        var message = FormCommon.DeleteConfirm;
+        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
+          , MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          success = true;
+        }
+      }
+
+      if (success)
+      {
+        // Data from items.
+        var codeLineName = parentRow.LJCGetString("Name");
+        var name = row.LJCGetString("Name");
+
+        CodeGroupManager.Delete(codeLineName, name);
+      }
+
+      if (success)
+      {
+        CodeGroupGrid.Rows.Remove(row);
+        CodeList.TimedChange(Change.CodeGroup);
+      }
     }
 
     // Displays a detail dialog to edit a record.
     internal void DoEdit()
     {
+      var parentRow = CodeLineGrid.CurrentRow as LJCGridRow;
+      var row = CodeGroupGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null
+        && row != null)
+      {
+        // Data from items.
+        var codeLineName = parentRow.LJCGetString("Name");
+        var name = row.LJCGetString("Name");
+
+        var location = FormCommon.GetDialogScreenPoint(CodeGroupGrid);
+        var detail = new CodeGroupDetail()
+        {
+          LJCCodeLine = codeLineName,
+          LJCName = name,
+          Managers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
+      var parentRow = CodeLineGrid.CurrentRow as LJCGridRow;
+      if (parentRow != null)
+      {
+        // Data from items.
+        var codeLineName = parentRow.LJCGetString("Name");
+
+        var location = FormCommon.GetDialogScreenPoint(CodeGroupGrid);
+        var detail = new CodeGroupDetail()
+        {
+          LJCCodeLine = codeLineName,
+          Managers = Managers
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Refreshes the list.
     internal void DoRefresh()
     {
+      CodeList.Cursor = Cursors.WaitCursor;
+      CodeGroup record = null;
+      if (CodeLineGrid.CurrentRow is LJCGridRow parentRow
+        && CodeGroupGrid.CurrentRow is LJCGridRow row)
+      {
+        // Save the original row.
+        record = new CodeGroup()
+        {
+          CodeLine = parentRow.LJCGetString("Name"),
+          Name = row.LJCGetString("Name"),
+        };
+      }
+      DataRetrieve();
+
+      // Select the original row.
+      if (record != null)
+      {
+        RowSelect(record);
+      }
+      CodeList.Cursor = Cursors.Default;
+    }
+
+    // Adds new row or updates row with record values.
+    private void Detail_Change(object sender, EventArgs e)
+    {
+      var detail = sender as CodeGroupDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          CodeGroupGrid.LJCSetCurrentRow(row, true);
+          CodeList.TimedChange(Change.CodeGroup);
+        }
+      }
     }
     #endregion
 
@@ -151,6 +258,9 @@ namespace UpdateProjectFiles
 
     // Gets or sets the CodeGroup Grid reference.
     private LJCDataGrid CodeGroupGrid { get; set; }
+
+    // Gets or sets the CodeLines Grid reference.
+    private LJCDataGrid CodeLineGrid { get; set; }
 
     // Gets or sets the Manager reference.
     private CodeGroupManager CodeGroupManager { get; set; }

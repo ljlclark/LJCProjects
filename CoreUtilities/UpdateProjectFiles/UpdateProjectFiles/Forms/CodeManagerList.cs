@@ -119,7 +119,7 @@ namespace UpdateProjectFiles
     // Displays a detail dialog for a new record.
     private void SolutionNew_Click(object sender, System.EventArgs e)
     {
-      mSolutionGridCode.DoRefresh();
+      mSolutionGridCode.DoNew();
     }
 
     // Displays a detail dialog to edit a record.
@@ -283,7 +283,7 @@ namespace UpdateProjectFiles
         {
           // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
           CodeLineGrid.LJCSetCurrentRow(e);
-          //TimedChange(Change.CodeLine);
+          TimedChange(Change.CodeLine);
         }
       }
     }
@@ -293,7 +293,7 @@ namespace UpdateProjectFiles
     {
       if (CodeLineGrid.LJCAllowSelectionChange)
       {
-        //TimedChange(Change.CodeLine);
+        TimedChange(Change.CodeLine);
       }
       CodeLineGrid.LJCAllowSelectionChange = true;
     }
@@ -359,7 +359,7 @@ namespace UpdateProjectFiles
       {
         // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
         CodeGroupGrid.LJCSetCurrentRow(e);
-        //TimedChange(Change.CodeGroup);
+        TimedChange(Change.CodeGroup);
       }
     }
 
@@ -368,7 +368,7 @@ namespace UpdateProjectFiles
     {
       if (CodeGroupGrid.LJCAllowSelectionChange)
       {
-        //TimedChange(Change.CodeGroup);
+        TimedChange(Change.CodeGroup);
       }
       CodeGroupGrid.LJCAllowSelectionChange = true;
     }
@@ -434,7 +434,7 @@ namespace UpdateProjectFiles
       {
         // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
         SolutionGrid.LJCSetCurrentRow(e);
-        //TimedChange(Change.Solution);
+        TimedChange(Change.Solution);
       }
     }
 
@@ -443,7 +443,7 @@ namespace UpdateProjectFiles
     {
       if (SolutionGrid.LJCAllowSelectionChange)
       {
-        //TimedChange(Change.Solution);
+        TimedChange(Change.Solution);
       }
       SolutionGrid.LJCAllowSelectionChange = true;
     }
@@ -509,7 +509,7 @@ namespace UpdateProjectFiles
       {
         // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
         ProjectGrid.LJCSetCurrentRow(e);
-        //TimedChange(Change.Project);
+        TimedChange(Change.Project);
       }
     }
 
@@ -518,7 +518,7 @@ namespace UpdateProjectFiles
     {
       if (ProjectGrid.LJCAllowSelectionChange)
       {
-        //TimedChange(Change.Project);
+        TimedChange(Change.Project);
       }
       ProjectGrid.LJCAllowSelectionChange = true;
     }
@@ -584,7 +584,7 @@ namespace UpdateProjectFiles
       {
         // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
         FileGrid.LJCSetCurrentRow(e);
-        //TimedChange(Change.ProjectFile);
+        TimedChange(Change.ProjectFile);
       }
     }
 
@@ -593,12 +593,11 @@ namespace UpdateProjectFiles
     {
       if (FileGrid.LJCAllowSelectionChange)
       {
-        //TimedChange(Change.ProjectFile);
+        TimedChange(Change.ProjectFile);
       }
       FileGrid.LJCAllowSelectionChange = true;
     }
     #endregion
-
     #endregion
   }
 }

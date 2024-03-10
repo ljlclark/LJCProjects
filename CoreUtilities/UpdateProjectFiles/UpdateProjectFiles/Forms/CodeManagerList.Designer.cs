@@ -29,13 +29,15 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       this.TabsSplit = new System.Windows.Forms.SplitContainer();
       this.MainTabs = new LJCWinFormControls.LJCTabControl(this.components);
+      this.MainTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.MainTabsMove = new System.Windows.Forms.ToolStripMenuItem();
       this.CodeLineTab = new System.Windows.Forms.TabPage();
       this.CodeLineSplit = new System.Windows.Forms.SplitContainer();
       this.CodeLineGrid = new LJCWinFormControls.LJCDataGrid(this.components);
@@ -48,7 +50,6 @@
       this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
       this.CodeLineRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.CodeLineExit = new System.Windows.Forms.ToolStripMenuItem();
       this.CodeGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.CodeGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -59,7 +60,7 @@
       this.CodeGroupDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
       this.CodeGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.AssemblyItemHeader = new LJCWinFormControls.LJCHeaderBox();
+      this.CodeGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.SolutionTab = new System.Windows.Forms.TabPage();
       this.GroupCombo = new LJCWinFormControls.LJCItemCombo();
       this.GroupLabel = new System.Windows.Forms.Label();
@@ -84,7 +85,7 @@
       this.ProjectDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.ProjectRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassItemHeader = new LJCWinFormControls.LJCHeaderBox();
+      this.ProjectHeader = new LJCWinFormControls.LJCHeaderBox();
       this.FileTab = new System.Windows.Forms.TabPage();
       this.FileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ProjectFileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -100,8 +101,6 @@
       this.ProjectCombo = new LJCWinFormControls.LJCItemCombo();
       this.ProjectLabel = new System.Windows.Forms.Label();
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
-      this.MainTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.MainTabsMove = new System.Windows.Forms.ToolStripMenuItem();
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
@@ -109,6 +108,7 @@
       this.TabsSplit.Panel2.SuspendLayout();
       this.TabsSplit.SuspendLayout();
       this.MainTabs.SuspendLayout();
+      this.MainTabsMenu.SuspendLayout();
       this.CodeLineTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.CodeLineSplit)).BeginInit();
       this.CodeLineSplit.Panel1.SuspendLayout();
@@ -130,7 +130,6 @@
       this.FileTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).BeginInit();
       this.ProjectFileMenu.SuspendLayout();
-      this.MainTabsMenu.SuspendLayout();
       this.TileTabsMenu.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -167,6 +166,21 @@
       this.MainTabs.TabIndex = 1;
       this.MainTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainTabs_MouseDown);
       // 
+      // MainTabsMenu
+      // 
+      this.MainTabsMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.MainTabsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainTabsMove});
+      this.MainTabsMenu.Name = "MainTabMenu";
+      this.MainTabsMenu.Size = new System.Drawing.Size(177, 36);
+      // 
+      // MainTabsMove
+      // 
+      this.MainTabsMove.Name = "MainTabsMove";
+      this.MainTabsMove.Size = new System.Drawing.Size(176, 32);
+      this.MainTabsMove.Text = "Move Right";
+      this.MainTabsMove.Click += new System.EventHandler(this.MainTabsMove_Click);
+      // 
       // CodeLineTab
       // 
       this.CodeLineTab.Controls.Add(this.CodeLineSplit);
@@ -192,7 +206,7 @@
       // CodeLineSplit.Panel2
       // 
       this.CodeLineSplit.Panel2.Controls.Add(this.CodeGroupGrid);
-      this.CodeLineSplit.Panel2.Controls.Add(this.AssemblyItemHeader);
+      this.CodeLineSplit.Panel2.Controls.Add(this.CodeGroupHeader);
       this.CodeLineSplit.Size = new System.Drawing.Size(681, 411);
       this.CodeLineSplit.SplitterDistance = 104;
       this.CodeLineSplit.TabIndex = 0;
@@ -206,14 +220,14 @@
       this.CodeLineGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.CodeLineGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.CodeLineGrid.ContextMenuStrip = this.CodeLineMenu;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.CodeLineGrid.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.CodeLineGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.CodeLineGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.CodeLineGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.CodeLineGrid.LJCAllowDrag = true;
@@ -249,10 +263,9 @@
             this.toolStripSeparator15,
             this.CodeLineRefresh,
             this.toolStripSeparator3,
-            this.toolStripSeparator1,
             this.CodeLineExit});
       this.CodeLineMenu.Name = "AssemblyMenu";
-      this.CodeLineMenu.Size = new System.Drawing.Size(213, 220);
+      this.CodeLineMenu.Size = new System.Drawing.Size(213, 214);
       this.CodeLineMenu.Text = "Assembly Group Menu";
       // 
       // CodeLineHeading
@@ -309,11 +322,6 @@
       this.toolStripSeparator3.Name = "toolStripSeparator3";
       this.toolStripSeparator3.Size = new System.Drawing.Size(209, 6);
       // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
-      // 
       // CodeLineExit
       // 
       this.CodeLineExit.Name = "CodeLineExit";
@@ -333,14 +341,14 @@
       this.CodeGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.CodeGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.CodeGroupGrid.ContextMenuStrip = this.CodeGroupMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.CodeGroupGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.CodeGroupGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.CodeGroupGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.CodeGroupGrid.LJCAllowDrag = true;
       this.CodeGroupGrid.LJCAllowSelectionChange = false;
@@ -427,19 +435,19 @@
       this.CodeGroupRefresh.Text = "&Refresh";
       this.CodeGroupRefresh.Click += new System.EventHandler(this.CodeGroupRefresh_Click);
       // 
-      // AssemblyItemHeader
+      // CodeGroupHeader
       // 
-      this.AssemblyItemHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.CodeGroupHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.AssemblyItemHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.AssemblyItemHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
-      this.AssemblyItemHeader.Location = new System.Drawing.Point(0, 0);
-      this.AssemblyItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.AssemblyItemHeader.Name = "AssemblyItemHeader";
-      this.AssemblyItemHeader.Size = new System.Drawing.Size(680, 33);
-      this.AssemblyItemHeader.TabIndex = 0;
-      this.AssemblyItemHeader.TabStop = false;
-      this.AssemblyItemHeader.Text = "Code Group";
+      this.CodeGroupHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.CodeGroupHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.CodeGroupHeader.Location = new System.Drawing.Point(0, 0);
+      this.CodeGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.CodeGroupHeader.Name = "CodeGroupHeader";
+      this.CodeGroupHeader.Size = new System.Drawing.Size(680, 33);
+      this.CodeGroupHeader.TabIndex = 0;
+      this.CodeGroupHeader.TabStop = false;
+      this.CodeGroupHeader.Text = "Code Group";
       // 
       // SolutionTab
       // 
@@ -485,7 +493,7 @@
       // SolutionSplit.Panel2
       // 
       this.SolutionSplit.Panel2.Controls.Add(this.ProjectGrid);
-      this.SolutionSplit.Panel2.Controls.Add(this.ClassItemHeader);
+      this.SolutionSplit.Panel2.Controls.Add(this.ProjectHeader);
       this.SolutionSplit.Size = new System.Drawing.Size(681, 375);
       this.SolutionSplit.SplitterDistance = 83;
       this.SolutionSplit.TabIndex = 2;
@@ -499,14 +507,14 @@
       this.SolutionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.SolutionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.SolutionGrid.ContextMenuStrip = this.SolutionMenu;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.SolutionGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.SolutionGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.SolutionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.SolutionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.SolutionGrid.LJCAllowDrag = true;
@@ -619,14 +627,14 @@
       this.ProjectGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ProjectGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ProjectGrid.ContextMenuStrip = this.ProjectMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ProjectGrid.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ProjectGrid.DefaultCellStyle = dataGridViewCellStyle4;
       this.ProjectGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ProjectGrid.LJCAllowDrag = true;
       this.ProjectGrid.LJCAllowSelectionChange = false;
@@ -713,19 +721,19 @@
       this.ProjectRefresh.Text = "&Refresh";
       this.ProjectRefresh.Click += new System.EventHandler(this.ProjectRefresh_Click);
       // 
-      // ClassItemHeader
+      // ProjectHeader
       // 
-      this.ClassItemHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.ProjectHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.ClassItemHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ClassItemHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
-      this.ClassItemHeader.Location = new System.Drawing.Point(0, 0);
-      this.ClassItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ClassItemHeader.Name = "ClassItemHeader";
-      this.ClassItemHeader.Size = new System.Drawing.Size(680, 32);
-      this.ClassItemHeader.TabIndex = 0;
-      this.ClassItemHeader.TabStop = false;
-      this.ClassItemHeader.Text = "Project";
+      this.ProjectHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.ProjectHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ProjectHeader.Location = new System.Drawing.Point(0, 0);
+      this.ProjectHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ProjectHeader.Name = "ProjectHeader";
+      this.ProjectHeader.Size = new System.Drawing.Size(680, 32);
+      this.ProjectHeader.TabIndex = 0;
+      this.ProjectHeader.TabStop = false;
+      this.ProjectHeader.Text = "Project";
       // 
       // FileTab
       // 
@@ -751,14 +759,14 @@
       this.FileGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.FileGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.FileGrid.ContextMenuStrip = this.ProjectFileMenu;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FileGrid.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.FileGrid.DefaultCellStyle = dataGridViewCellStyle5;
       this.FileGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.FileGrid.LJCAllowDrag = true;
       this.FileGrid.LJCAllowSelectionChange = false;
@@ -886,33 +894,18 @@
       this.TileTabs.TabIndex = 0;
       this.TileTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TileTabs_MouseDown);
       // 
-      // MainTabsMenu
-      // 
-      this.MainTabsMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.MainTabsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MainTabsMove});
-      this.MainTabsMenu.Name = "MainTabMenu";
-      this.MainTabsMenu.Size = new System.Drawing.Size(177, 36);
-      // 
-      // MainTabsMove
-      // 
-      this.MainTabsMove.Name = "MainTabsMove";
-      this.MainTabsMove.Size = new System.Drawing.Size(240, 32);
-      this.MainTabsMove.Text = "Move Right";
-      this.MainTabsMove.Click += new System.EventHandler(this.MainTabsMove_Click);
-      // 
       // TileTabsMenu
       // 
       this.TileTabsMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.TileTabsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TileTabsMove});
       this.TileTabsMenu.Name = "TileTabsMenu";
-      this.TileTabsMenu.Size = new System.Drawing.Size(241, 69);
+      this.TileTabsMenu.Size = new System.Drawing.Size(164, 36);
       // 
       // TileTabsMove
       // 
       this.TileTabsMove.Name = "TileTabsMove";
-      this.TileTabsMove.Size = new System.Drawing.Size(240, 32);
+      this.TileTabsMove.Size = new System.Drawing.Size(163, 32);
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
       // 
@@ -930,6 +923,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).EndInit();
       this.TabsSplit.ResumeLayout(false);
       this.MainTabs.ResumeLayout(false);
+      this.MainTabsMenu.ResumeLayout(false);
       this.CodeLineTab.ResumeLayout(false);
       this.CodeLineSplit.Panel1.ResumeLayout(false);
       this.CodeLineSplit.Panel2.ResumeLayout(false);
@@ -951,7 +945,6 @@
       this.FileTab.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).EndInit();
       this.ProjectFileMenu.ResumeLayout(false);
-      this.MainTabsMenu.ResumeLayout(false);
       this.TileTabsMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -966,14 +959,14 @@
     private System.Windows.Forms.SplitContainer CodeLineSplit;
     internal LJCWinFormControls.LJCDataGrid CodeLineGrid;
     internal LJCWinFormControls.LJCDataGrid CodeGroupGrid;
-    private LJCWinFormControls.LJCHeaderBox AssemblyItemHeader;
+    private LJCWinFormControls.LJCHeaderBox CodeGroupHeader;
     private System.Windows.Forms.TabPage SolutionTab;
     internal LJCWinFormControls.LJCItemCombo GroupCombo;
     private System.Windows.Forms.Label GroupLabel;
     private System.Windows.Forms.SplitContainer SolutionSplit;
     internal LJCWinFormControls.LJCDataGrid SolutionGrid;
     internal LJCWinFormControls.LJCDataGrid ProjectGrid;
-    private LJCWinFormControls.LJCHeaderBox ClassItemHeader;
+    private LJCWinFormControls.LJCHeaderBox ProjectHeader;
     private System.Windows.Forms.TabPage FileTab;
     internal LJCWinFormControls.LJCItemCombo ProjectCombo;
     private System.Windows.Forms.Label ProjectLabel;
@@ -987,7 +980,6 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
     private System.Windows.Forms.ToolStripMenuItem CodeLineRefresh;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem CodeLineExit;
     private System.Windows.Forms.ContextMenuStrip SolutionMenu;
     private System.Windows.Forms.ToolStripMenuItem SolutionHeading;

@@ -61,10 +61,16 @@ namespace _Namespace_
 			_ClassName_
 		}
 
-		#region Item Change Support
+    #region Item Change Support
 
-		// Start the Change processing.
-		private void StartChangeProcessing()
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
+    // Start the Change processing.
+    private void StartChangeProcessing()
 		{
 			ChangeTimer = new ChangeTimer();
 			ChangeTimer.ItemChange += ChangeTimer_ItemChange;
@@ -79,12 +85,6 @@ namespace _Namespace_
 			changeType = (Change)Enum.Parse(typeof(Change)
 				, ChangeTimer.ChangeName);
 			DoChange(changeType);
-		}
-
-		// Starts the Timer with the Change value.
-		internal void TimedChange(Change change)
-		{
-			ChangeTimer.DoChange(change.ToString());
 		}
 
 		// Gets or sets the ChangeTimer object.
@@ -148,8 +148,19 @@ namespace _Namespace_
 			//var _ = new LJCPanelManager(TabsSplit, MainTabs, TileTabs);
 		}
 
-		// Set initial Control values.
-		private void InitialControlValues()
+    // Initialize the Class Data.
+    private void InitializeClassData()
+    {
+      var values = Values_AppName_.Instance;
+      mSettings = values.StandardSettings;
+
+      Managers = new Managers_AppName_();
+      Managers.SetDBProperties(mSettings.DbServiceRef
+        , mSettings.DataConfigName);
+    }
+
+    // Set initial Control values.
+    private void InitialControlValues()
 		{
 			NetFile.CreateFolder("ExportFiles");
 			NetFile.CreateFolder("ControlValues");
@@ -160,17 +171,6 @@ namespace _Namespace_
 
 			BackColor = mSettings.BeginColor;
 			//MainTools.BackColor = mSettings.BeginColor;
-		}
-
-		// Initialize the Class Data.
-		private void InitializeClassData()
-		{
-			var values = Values_AppName_.Instance;
-			mSettings = values.StandardSettings;
-
-			Managers = new Managers_AppName_();
-			Managers.SetDBProperties(mSettings.DbServiceRef
-				, mSettings.DataConfigName);
 		}
 
 		// Loads the initial Control data.

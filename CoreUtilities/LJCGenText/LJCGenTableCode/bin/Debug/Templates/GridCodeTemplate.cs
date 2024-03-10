@@ -316,7 +316,7 @@ namespace _Namespace_
 			_AppName_List.DialogResult = DialogResult.OK;
 		}
 
-		// Adds new row or updates row with
+		// Adds new row or updates row with control values.
 		private void Detail_Change(object sender, EventArgs e)
 		{
 			var detail = sender as _ClassName_Detail;
