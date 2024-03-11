@@ -10,6 +10,14 @@ namespace ProjectFilesDAL
   {
     #region Data Methods
 
+    // Creates and returns a clone of this object.
+    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public ProjectFile Clone()
+    {
+      var retValue = MemberwiseClone() as ProjectFile;
+      return retValue;
+    }
+
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
     public int CompareTo(ProjectFile other)

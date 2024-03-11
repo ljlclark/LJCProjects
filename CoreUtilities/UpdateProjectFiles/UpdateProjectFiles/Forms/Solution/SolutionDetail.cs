@@ -40,6 +40,7 @@ namespace UpdateProjectFiles
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
+      InitializeControls();
       DataRetrieve();
       CenterToParent();
     }
@@ -203,6 +204,42 @@ namespace UpdateProjectFiles
     }
     #endregion
 
+    #region Setup Methods
+
+    // Configure the initial control settings.
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Font)
+      {
+      }
+    }
+
+    // Configures the controls and loads the selection control data.
+    private void InitializeControls()
+    {
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesUpdateProjectFiles.Instance;
+      Managers = values.Managers;
+      BeginColor = values.BeginColor;
+      EndColor = values.EndColor;
+
+      // Set control values.
+      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      SetNoSpace();
+
+      ConfigureControls();
+      Cursor = Cursors.Default;
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      NameText.KeyPress += TextBoxNoSpace_KeyPress;
+      NameText.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+    #endregion
+
     #region Control Event Handlers
 
     // Fires the Change event.
@@ -219,6 +256,26 @@ namespace UpdateProjectFiles
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+      }
+    }
+    #endregion
+
+    #region KeyEdit Event Handlers
+
+    // Does not allow spaces.
+    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleSpace(e.KeyChar);
+    }
+
+    // Strips blanks from the text value.
+    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        var prevStart = textBox.SelectionStart;
+        textBox.Text = FormCommon.StripBlanks(textBox.Text);
+        textBox.SelectionStart = prevStart;
       }
     }
     #endregion
@@ -240,14 +297,14 @@ namespace UpdateProjectFiles
     // Gets or sets the primary ID value.
     internal string LJCName { get; set; }
 
-    // The Managers object.
-    internal ManagersProjectFiles Managers { get; set; }
-
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
+
+    // The Managers object.
+    private ManagersProjectFiles Managers { get; set; }
     #endregion
 
     #region Class Data

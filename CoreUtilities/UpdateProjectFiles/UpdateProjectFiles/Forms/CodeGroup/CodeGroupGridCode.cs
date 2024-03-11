@@ -148,10 +148,8 @@ namespace UpdateProjectFiles
     // Displays a detail dialog to edit a record.
     internal void DoEdit()
     {
-      var parentRow = CodeLineGrid.CurrentRow as LJCGridRow;
-      var row = CodeGroupGrid.CurrentRow as LJCGridRow;
-      if (parentRow != null
-        && row != null)
+      if (CodeLineGrid.CurrentRow is LJCGridRow parentRow
+        && CodeGroupGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("Name");
@@ -161,8 +159,7 @@ namespace UpdateProjectFiles
         var detail = new CodeGroupDetail()
         {
           LJCCodeLine = codeLineName,
-          LJCName = name,
-          Managers = Managers
+          LJCName = name
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -172,8 +169,7 @@ namespace UpdateProjectFiles
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
-      var parentRow = CodeLineGrid.CurrentRow as LJCGridRow;
-      if (parentRow != null)
+      if (CodeLineGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("Name");
@@ -181,8 +177,7 @@ namespace UpdateProjectFiles
         var location = FormCommon.GetDialogScreenPoint(CodeGroupGrid);
         var detail = new CodeGroupDetail()
         {
-          LJCCodeLine = codeLineName,
-          Managers = Managers
+          LJCCodeLine = codeLineName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();

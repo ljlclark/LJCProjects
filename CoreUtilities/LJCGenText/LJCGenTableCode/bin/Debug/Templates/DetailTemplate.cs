@@ -411,9 +411,9 @@ namespace _Namespace_
     // Strips blanks from the text value.
     private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
-      if (sender is TextBox textbox)
+      if (sender is TextBox textBox)
       {
-        var prevStart = textbox.SelectionStart;
+        var prevStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
         textBox.SelectionStart = prevStart;
       }

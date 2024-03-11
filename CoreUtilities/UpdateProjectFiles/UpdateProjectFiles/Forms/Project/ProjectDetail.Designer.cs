@@ -28,8 +28,8 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.GroupText = new System.Windows.Forms.TextBox();
-      this.GroupLabel = new System.Windows.Forms.Label();
+      this.CodeGroupText = new System.Windows.Forms.TextBox();
+      this.CodeGroupLabel = new System.Windows.Forms.Label();
       this.PathText = new System.Windows.Forms.TextBox();
       this.PathLabel = new System.Windows.Forms.Label();
       this.CodeLineText = new System.Windows.Forms.TextBox();
@@ -42,27 +42,27 @@
       this.SolutionLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
-      // GroupText
+      // CodeGroupText
       // 
-      this.GroupText.Location = new System.Drawing.Point(151, 49);
-      this.GroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.GroupText.Name = "GroupText";
-      this.GroupText.ReadOnly = true;
-      this.GroupText.Size = new System.Drawing.Size(413, 26);
-      this.GroupText.TabIndex = 3;
+      this.CodeGroupText.Location = new System.Drawing.Point(151, 50);
+      this.CodeGroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.CodeGroupText.Name = "CodeGroupText";
+      this.CodeGroupText.ReadOnly = true;
+      this.CodeGroupText.Size = new System.Drawing.Size(413, 26);
+      this.CodeGroupText.TabIndex = 3;
       // 
-      // GroupLabel
+      // CodeGroupLabel
       // 
-      this.GroupLabel.Location = new System.Drawing.Point(18, 53);
-      this.GroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.GroupLabel.Name = "GroupLabel";
-      this.GroupLabel.Size = new System.Drawing.Size(130, 20);
-      this.GroupLabel.TabIndex = 2;
-      this.GroupLabel.Text = "Code Group";
+      this.CodeGroupLabel.Location = new System.Drawing.Point(18, 54);
+      this.CodeGroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.CodeGroupLabel.Name = "CodeGroupLabel";
+      this.CodeGroupLabel.Size = new System.Drawing.Size(130, 20);
+      this.CodeGroupLabel.TabIndex = 2;
+      this.CodeGroupLabel.Text = "Code Group";
       // 
       // PathText
       // 
-      this.PathText.Location = new System.Drawing.Point(151, 157);
+      this.PathText.Location = new System.Drawing.Point(151, 158);
       this.PathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.PathText.Name = "PathText";
       this.PathText.Size = new System.Drawing.Size(413, 26);
@@ -70,7 +70,7 @@
       // 
       // PathLabel
       // 
-      this.PathLabel.Location = new System.Drawing.Point(18, 161);
+      this.PathLabel.Location = new System.Drawing.Point(18, 162);
       this.PathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.PathLabel.Name = "PathLabel";
       this.PathLabel.Size = new System.Drawing.Size(130, 20);
@@ -79,7 +79,7 @@
       // 
       // CodeLineText
       // 
-      this.CodeLineText.Location = new System.Drawing.Point(151, 13);
+      this.CodeLineText.Location = new System.Drawing.Point(151, 14);
       this.CodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.CodeLineText.Name = "CodeLineText";
       this.CodeLineText.ReadOnly = true;
@@ -88,7 +88,7 @@
       // 
       // CodeLineLabel
       // 
-      this.CodeLineLabel.Location = new System.Drawing.Point(18, 17);
+      this.CodeLineLabel.Location = new System.Drawing.Point(18, 18);
       this.CodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.CodeLineLabel.Name = "CodeLineLabel";
       this.CodeLineLabel.Size = new System.Drawing.Size(130, 20);
@@ -98,7 +98,7 @@
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(454, 197);
+      this.FormCancelButton.Location = new System.Drawing.Point(454, 198);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
@@ -109,7 +109,7 @@
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(332, 197);
+      this.OKButton.Location = new System.Drawing.Point(332, 198);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
@@ -120,7 +120,7 @@
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(151, 121);
+      this.NameText.Location = new System.Drawing.Point(151, 122);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
       this.NameText.Size = new System.Drawing.Size(413, 26);
@@ -128,7 +128,7 @@
       // 
       // NameLabel
       // 
-      this.NameLabel.Location = new System.Drawing.Point(18, 125);
+      this.NameLabel.Location = new System.Drawing.Point(18, 126);
       this.NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(130, 20);
@@ -137,7 +137,7 @@
       // 
       // SolutionText
       // 
-      this.SolutionText.Location = new System.Drawing.Point(151, 85);
+      this.SolutionText.Location = new System.Drawing.Point(151, 86);
       this.SolutionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SolutionText.Name = "SolutionText";
       this.SolutionText.ReadOnly = true;
@@ -146,7 +146,7 @@
       // 
       // SolutionLabel
       // 
-      this.SolutionLabel.Location = new System.Drawing.Point(18, 89);
+      this.SolutionLabel.Location = new System.Drawing.Point(18, 90);
       this.SolutionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SolutionLabel.Name = "SolutionLabel";
       this.SolutionLabel.Size = new System.Drawing.Size(130, 20);
@@ -160,8 +160,8 @@
       this.ClientSize = new System.Drawing.Size(584, 245);
       this.Controls.Add(this.SolutionText);
       this.Controls.Add(this.SolutionLabel);
-      this.Controls.Add(this.GroupText);
-      this.Controls.Add(this.GroupLabel);
+      this.Controls.Add(this.CodeGroupText);
+      this.Controls.Add(this.CodeGroupLabel);
       this.Controls.Add(this.PathText);
       this.Controls.Add(this.PathLabel);
       this.Controls.Add(this.CodeLineText);
@@ -180,8 +180,8 @@
 
     #endregion
 
-    private System.Windows.Forms.TextBox GroupText;
-    private System.Windows.Forms.Label GroupLabel;
+    private System.Windows.Forms.TextBox CodeGroupText;
+    private System.Windows.Forms.Label CodeGroupLabel;
     private System.Windows.Forms.TextBox PathText;
     private System.Windows.Forms.Label PathLabel;
     private System.Windows.Forms.TextBox CodeLineText;

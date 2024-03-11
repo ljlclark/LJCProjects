@@ -162,10 +162,8 @@ namespace UpdateProjectFiles
     // Displays a detail dialog to edit a record.
     internal void DoEdit()
     {
-      var parentRow = ProjectGrid.CurrentRow as LJCGridRow;
-      var row = FileGrid.CurrentRow as LJCGridRow;
-      if (parentRow != null
-        && row != null)
+      if (ProjectGrid.CurrentRow is LJCGridRow parentRow
+        && FileGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("CodeLineName");
@@ -177,12 +175,11 @@ namespace UpdateProjectFiles
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectFileDetail()
         {
-          LJCCodeLine = codeLineName,
-          LJCCodeGroup = codeGroupName,
-          LJCSolution = solutionName,
-          LJCProject = projectName,
-          LJCName = name,
-          Managers = Managers
+          LJCTargetLine = codeLineName,
+          LJCTargetGroup = codeGroupName,
+          LJCTargetSolution = solutionName,
+          LJCTargetProject = projectName,
+          LJCSourceFileName = name
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -192,8 +189,7 @@ namespace UpdateProjectFiles
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
-      var parentRow = ProjectGrid.CurrentRow as LJCGridRow;
-      if (parentRow != null)
+      if (ProjectGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("CodeLineName");
@@ -204,11 +200,10 @@ namespace UpdateProjectFiles
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectFileDetail()
         {
-          LJCCodeLine = codeLineName,
-          LJCCodeGroup = codeGroupName,
-          LJCSolution = solutionName,
-          LJCProject = projectName,
-          Managers = Managers
+          LJCTargetLine = codeLineName,
+          LJCTargetGroup = codeGroupName,
+          LJCTargetSolution = solutionName,
+          LJCTargetProject = projectName
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
