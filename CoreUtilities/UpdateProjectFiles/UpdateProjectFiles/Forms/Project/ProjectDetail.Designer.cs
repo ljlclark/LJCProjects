@@ -109,7 +109,7 @@
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(332, 198);
+      this.OKButton.Location = new System.Drawing.Point(332, 197);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
@@ -157,7 +157,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(584, 245);
+      this.ClientSize = new System.Drawing.Size(584, 246);
       this.Controls.Add(this.SolutionText);
       this.Controls.Add(this.SolutionLabel);
       this.Controls.Add(this.CodeGroupText);

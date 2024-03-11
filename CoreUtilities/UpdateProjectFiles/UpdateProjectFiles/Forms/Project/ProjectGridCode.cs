@@ -141,9 +141,9 @@ namespace UpdateProjectFiles
         var name = row.LJCGetString("Name");
         var parentKey = new ProjectParentKey()
         {
-          CodeLine = parentRow.LJCGetString("CodeLineName"),
-          CodeGroup = parentRow.LJCGetString("CodeGroupName"),
-          Solution = parentRow.LJCGetString("SolutionName")
+          CodeLine = parentRow.LJCGetString("CodeLine"),
+          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+          Solution = parentRow.LJCGetString("Name")
         };
 
         ProjectManager.Delete(parentKey, name);
@@ -163,9 +163,9 @@ namespace UpdateProjectFiles
         && ProjectGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        var codeLineName = parentRow.LJCGetString("CodeLineName");
-        var codeGroupName = parentRow.LJCGetString("CodeGroupName");
-        var solutionName = parentRow.LJCGetString("SolutionName");
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var solutionName = parentRow.LJCGetString("Name");
         var name = row.LJCGetString("Name");
 
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
@@ -187,9 +187,9 @@ namespace UpdateProjectFiles
       if (SolutionGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
-        var codeLineName = parentRow.LJCGetString("CodeLineName");
-        var codeGroupName = parentRow.LJCGetString("CodeGroupName");
-        var solutionName = parentRow.LJCGetString("SolutionName");
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var solutionName = parentRow.LJCGetString("Name");
 
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectDetail()
@@ -216,7 +216,7 @@ namespace UpdateProjectFiles
         {
           CodeLine = parentRow.LJCGetString("CodeLine"),
           CodeGroup = parentRow.LJCGetString("CodeGroup"),
-          Solution = parentRow.LJCGetString("Solution"),
+          Solution = parentRow.LJCGetString("Name"),
           Name = row.LJCGetString("Name"),
         };
       }

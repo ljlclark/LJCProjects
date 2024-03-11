@@ -427,9 +427,9 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
+      // *** Next Statement *** Change - 3/11/24
       if (HasParentKey(targetKey)
-        && HasParentKey(sourceKey)
-        && NetString.HasValue(sourceFileSpec))
+        && HasParentKey(sourceKey))
       {
         retValue = new ProjectFile()
         {
@@ -452,7 +452,8 @@ namespace ProjectFilesDAL
     // Checks for the existance of the ParentKey values.
     private bool HasParentKey(ProjectFileKey parentKey)
     {
-      var retValue = true;
+      var retValue = false;
+
       if (parentKey != null
         && NetString.HasValue(parentKey.CodeLine)
         && NetString.HasValue(parentKey.CodeGroup)
@@ -475,7 +476,12 @@ namespace ProjectFilesDAL
         && current.TargetSolution == projectFile.TargetSolution
         && current.SourceFileName == projectFile.SourceFileName)
       {
-        retValue = true;
+        // *** Next Statement *** Add - 3/11/24
+        if (null == projectFile.SourceFileName
+          || current.SourceFileName == projectFile.SourceFileName)
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }

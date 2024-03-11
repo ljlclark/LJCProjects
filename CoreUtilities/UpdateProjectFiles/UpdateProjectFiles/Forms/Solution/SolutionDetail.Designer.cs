@@ -137,7 +137,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(584, 209);
+      this.ClientSize = new System.Drawing.Size(584, 210);
       this.Controls.Add(this.GroupText);
       this.Controls.Add(this.GroupLabel);
       this.Controls.Add(this.PathText);

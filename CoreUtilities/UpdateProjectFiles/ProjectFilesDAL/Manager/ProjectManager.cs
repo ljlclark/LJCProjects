@@ -175,11 +175,11 @@ namespace ProjectFilesDAL
               break;
             }
           }
-          else
-          {
-            success = false;
-            break;
-          }
+          //else
+          //{
+          //  success = false;
+          //  break;
+          //}
         }
         if (!success)
         {
@@ -361,8 +361,8 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(name))
+      // *** Next Statement *** Change - 3/11/24
+      if (HasParentKey(parentKey))
       {
         retValue = new Project()
         {
@@ -379,7 +379,8 @@ namespace ProjectFilesDAL
     // Checks for the existance of the ParentKey values.
     private bool HasParentKey(ProjectParentKey parentKey)
     {
-      var retValue = true;
+      var retValue = false;
+
       if (parentKey != null
         && NetString.HasValue(parentKey.CodeLine)
         && NetString.HasValue(parentKey.CodeGroup)
@@ -398,10 +399,14 @@ namespace ProjectFilesDAL
       var current = CurrentDataObject();
       if (current.CodeLine == project.CodeLine
         && current.CodeGroup == project.CodeGroup
-        && current.Solution == project.Solution
-        && current.Name == project.Name)
+        && current.Solution == project.Solution)
       {
-        retValue = true;
+        // *** Next Statement *** Add - 3/11/24
+        if (null == project.Name
+          || current.Name == project.Name)
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }

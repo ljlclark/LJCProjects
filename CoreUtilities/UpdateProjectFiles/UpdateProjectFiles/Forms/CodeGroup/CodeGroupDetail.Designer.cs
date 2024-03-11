@@ -32,19 +32,19 @@
       this.FileButton = new System.Windows.Forms.Button();
       this.PathText = new System.Windows.Forms.TextBox();
       this.PathLabel = new System.Windows.Forms.Label();
-      this.CodeLineText = new System.Windows.Forms.TextBox();
-      this.CodeLineLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
+      this.CodeLineText = new System.Windows.Forms.TextBox();
+      this.CodeLineLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // ImageButton
       // 
       this.ImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ImageButton.ImageKey = "Ellipse.bmp";
-      this.ImageButton.Location = new System.Drawing.Point(539, -121);
+      this.ImageButton.Location = new System.Drawing.Point(539, -120);
       this.ImageButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ImageButton.Name = "ImageButton";
       this.ImageButton.Size = new System.Drawing.Size(28, 28);
@@ -55,7 +55,7 @@
       // 
       this.FileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.FileButton.ImageKey = "Ellipse.bmp";
-      this.FileButton.Location = new System.Drawing.Point(539, -157);
+      this.FileButton.Location = new System.Drawing.Point(539, -156);
       this.FileButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FileButton.Name = "FileButton";
       this.FileButton.Size = new System.Drawing.Size(28, 28);
@@ -78,24 +78,6 @@
       this.PathLabel.Size = new System.Drawing.Size(130, 20);
       this.PathLabel.TabIndex = 4;
       this.PathLabel.Text = "Path";
-      // 
-      // CodeLineText
-      // 
-      this.CodeLineText.Location = new System.Drawing.Point(151, 14);
-      this.CodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.CodeLineText.Name = "CodeLineText";
-      this.CodeLineText.ReadOnly = true;
-      this.CodeLineText.Size = new System.Drawing.Size(413, 26);
-      this.CodeLineText.TabIndex = 1;
-      // 
-      // CodeLineLabel
-      // 
-      this.CodeLineLabel.Location = new System.Drawing.Point(18, 18);
-      this.CodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.CodeLineLabel.Name = "CodeLineLabel";
-      this.CodeLineLabel.Size = new System.Drawing.Size(130, 20);
-      this.CodeLineLabel.TabIndex = 0;
-      this.CodeLineLabel.Text = "CodeL Line";
       // 
       // FormCancelButton
       // 
@@ -137,17 +119,35 @@
       this.NameLabel.TabIndex = 2;
       this.NameLabel.Text = "Name";
       // 
+      // CodeLineText
+      // 
+      this.CodeLineText.Location = new System.Drawing.Point(151, 14);
+      this.CodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.CodeLineText.Name = "CodeLineText";
+      this.CodeLineText.ReadOnly = true;
+      this.CodeLineText.Size = new System.Drawing.Size(413, 26);
+      this.CodeLineText.TabIndex = 1;
+      // 
+      // CodeLineLabel
+      // 
+      this.CodeLineLabel.Location = new System.Drawing.Point(18, 18);
+      this.CodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.CodeLineLabel.Name = "CodeLineLabel";
+      this.CodeLineLabel.Size = new System.Drawing.Size(130, 20);
+      this.CodeLineLabel.TabIndex = 0;
+      this.CodeLineLabel.Text = "CodeL Line";
+      // 
       // CodeGroupDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(584, 173);
+      this.ClientSize = new System.Drawing.Size(584, 174);
+      this.Controls.Add(this.CodeLineText);
+      this.Controls.Add(this.CodeLineLabel);
       this.Controls.Add(this.ImageButton);
       this.Controls.Add(this.FileButton);
       this.Controls.Add(this.PathText);
       this.Controls.Add(this.PathLabel);
-      this.Controls.Add(this.CodeLineText);
-      this.Controls.Add(this.CodeLineLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
       this.Controls.Add(this.NameText);
@@ -166,11 +166,11 @@
     private System.Windows.Forms.Button FileButton;
     private System.Windows.Forms.TextBox PathText;
     private System.Windows.Forms.Label PathLabel;
-    private System.Windows.Forms.TextBox CodeLineText;
-    private System.Windows.Forms.Label CodeLineLabel;
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
+    private System.Windows.Forms.TextBox CodeLineText;
+    private System.Windows.Forms.Label CodeLineLabel;
   }
 }

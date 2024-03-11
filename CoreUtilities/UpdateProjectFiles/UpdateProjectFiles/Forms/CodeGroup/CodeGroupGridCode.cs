@@ -43,7 +43,6 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       CodeGroupGrid.LJCRowsClear();
 
-      //SetupGrid();
       var codeGroups = CodeGroupManager.Load(parentKey);
       if (NetCommon.HasItems(codeGroups))
       {

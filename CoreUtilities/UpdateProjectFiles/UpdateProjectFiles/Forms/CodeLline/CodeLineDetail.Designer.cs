@@ -30,8 +30,6 @@
     {
       this.PathText = new System.Windows.Forms.TextBox();
       this.PathLabel = new System.Windows.Forms.Label();
-      this.CodeLineText = new System.Windows.Forms.TextBox();
-      this.CodeLineLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
       this.NameText = new System.Windows.Forms.TextBox();
@@ -40,88 +38,68 @@
       // 
       // PathText
       // 
-      this.PathText.Location = new System.Drawing.Point(151, 85);
+      this.PathText.Location = new System.Drawing.Point(151, 50);
       this.PathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.PathText.Name = "PathText";
       this.PathText.Size = new System.Drawing.Size(413, 26);
-      this.PathText.TabIndex = 5;
+      this.PathText.TabIndex = 3;
       // 
       // PathLabel
       // 
-      this.PathLabel.Location = new System.Drawing.Point(18, 89);
+      this.PathLabel.Location = new System.Drawing.Point(18, 54);
       this.PathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.PathLabel.Name = "PathLabel";
       this.PathLabel.Size = new System.Drawing.Size(124, 20);
-      this.PathLabel.TabIndex = 4;
+      this.PathLabel.TabIndex = 2;
       this.PathLabel.Text = "Path";
-      // 
-      // CodeLineText
-      // 
-      this.CodeLineText.Location = new System.Drawing.Point(151, 13);
-      this.CodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.CodeLineText.Name = "CodeLineText";
-      this.CodeLineText.ReadOnly = true;
-      this.CodeLineText.Size = new System.Drawing.Size(413, 26);
-      this.CodeLineText.TabIndex = 1;
-      // 
-      // CodeLineLabel
-      // 
-      this.CodeLineLabel.Location = new System.Drawing.Point(18, 17);
-      this.CodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.CodeLineLabel.Name = "CodeLineLabel";
-      this.CodeLineLabel.Size = new System.Drawing.Size(130, 20);
-      this.CodeLineLabel.TabIndex = 0;
-      this.CodeLineLabel.Text = "CodeL Line";
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(454, 125);
+      this.FormCancelButton.Location = new System.Drawing.Point(454, 90);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 7;
+      this.FormCancelButton.TabIndex = 5;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(332, 125);
+      this.OKButton.Location = new System.Drawing.Point(332, 90);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 6;
+      this.OKButton.TabIndex = 4;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(151, 49);
+      this.NameText.Location = new System.Drawing.Point(151, 14);
       this.NameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.NameText.Name = "NameText";
       this.NameText.Size = new System.Drawing.Size(413, 26);
-      this.NameText.TabIndex = 3;
+      this.NameText.TabIndex = 1;
       // 
       // NameLabel
       // 
-      this.NameLabel.Location = new System.Drawing.Point(18, 53);
+      this.NameLabel.Location = new System.Drawing.Point(18, 18);
       this.NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(124, 20);
-      this.NameLabel.TabIndex = 2;
+      this.NameLabel.TabIndex = 0;
       this.NameLabel.Text = "Name";
       // 
       // CodeLineDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(584, 173);
+      this.ClientSize = new System.Drawing.Size(584, 138);
       this.Controls.Add(this.PathText);
       this.Controls.Add(this.PathLabel);
-      this.Controls.Add(this.CodeLineText);
-      this.Controls.Add(this.CodeLineLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
       this.Controls.Add(this.NameText);
@@ -138,8 +116,6 @@
 
     private System.Windows.Forms.TextBox PathText;
     private System.Windows.Forms.Label PathLabel;
-    private System.Windows.Forms.TextBox CodeLineText;
-    private System.Windows.Forms.Label CodeLineLabel;
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox NameText;

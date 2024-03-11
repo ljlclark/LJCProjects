@@ -31,15 +31,18 @@ namespace UpdateProjectFiles
           break;
 
         case Change.CodeLine:
-          mCodeGroupGridCode.DataRetrieve();
+          var codeGroupParentKey = GetCodeGroupParentKey();
+          mCodeGroupGridCode.DataRetrieve(codeGroupParentKey);
           break;
 
         case Change.CodeGroup:
-          mSolutionGridCode.DataRetrieve();
+          var solutionParentKey = GetSolutionParentKey();
+          mSolutionGridCode.DataRetrieve(solutionParentKey);
           break;
 
         case Change.Solution:
-          mProjectGridCode.DataRetrieve();
+          var projectParentKey = GetProjectParentKey();
+          mProjectGridCode.DataRetrieve(projectParentKey);
           break;
 
         case Change.Project:
@@ -252,6 +255,51 @@ namespace UpdateProjectFiles
     #endregion
 
     #region Private Methods
+
+    // Creates the CodeGroup parent key.
+    private string GetCodeGroupParentKey()
+    {
+      string retValue = null;
+
+      if (CodeLineGrid.CurrentRow is LJCGridRow row)
+      {
+        retValue = row.LJCGetString("Name");
+      }
+      return retValue;
+    }
+
+    // Creates the Solution parent key.
+    private SolutionParentKey GetSolutionParentKey()
+    {
+      SolutionParentKey retValue = null;
+
+      if (CodeGroupGrid.CurrentRow is LJCGridRow row)
+      {
+        retValue = new SolutionParentKey()
+        {
+          CodeLine = row.LJCGetString("CodeLine"),
+          CodeGroup = row.LJCGetString("CodeGroup")
+        };
+      }
+      return retValue;
+    }
+
+    // Creates the Solution parent key.
+    private ProjectParentKey GetProjectParentKey()
+    {
+      ProjectParentKey retValue = null;
+
+      if (SolutionGrid.CurrentRow is LJCGridRow row)
+      {
+        retValue = new ProjectParentKey()
+        {
+          CodeLine = row.LJCGetString("CodeLine"),
+          CodeGroup = row.LJCGetString("CodeGroup"),
+          Solution = row.LJCGetString("Name")
+        };
+      }
+      return retValue;
+    }
 
     // Sets the control states based on the current control values.
     private void SetControlState()

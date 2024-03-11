@@ -139,7 +139,7 @@ namespace UpdateProjectFiles
         var parentKey = new SolutionParentKey()
         {
           CodeLine = parentRow.LJCGetString("CodeLine"),
-          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+          CodeGroup = parentRow.LJCGetString("Name"),
         };
 
         SolutionManager.Delete(parentKey, name);
@@ -154,7 +154,7 @@ namespace UpdateProjectFiles
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("CodeLine");
-        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var codeGroupName = parentRow.LJCGetString("Name");
         var name = row.LJCGetString("Name");
 
         var location = FormCommon.GetDialogScreenPoint(SolutionGrid);
@@ -176,7 +176,7 @@ namespace UpdateProjectFiles
       {
         // Data from items.
         var codeLineName = parentRow.LJCGetString("CodeLine");
-        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var codeGroupName = parentRow.LJCGetString("Name");
 
         var location = FormCommon.GetDialogScreenPoint(SolutionGrid);
         var detail = new SolutionDetail()
@@ -201,7 +201,7 @@ namespace UpdateProjectFiles
         record = new Solution()
         {
           CodeLine = parentRow.LJCGetString("CodeLine"),
-          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+          CodeGroup = parentRow.LJCGetString("Name"),
           Name = row.LJCGetString("Name"),
         };
       }

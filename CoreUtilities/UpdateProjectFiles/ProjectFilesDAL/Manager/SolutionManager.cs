@@ -358,8 +358,8 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(name))
+      // *** Next Statement *** Change - 3/11/24
+      if (HasParentKey(parentKey))
       {
         retValue = new Solution()
         {
@@ -376,7 +376,7 @@ namespace ProjectFilesDAL
     // Checks for the existance of the ParentKey values.
     private bool HasParentKey(SolutionParentKey parentKey)
     {
-      var retValue = true;
+      var retValue = false;
 
       if (parentKey != null
         && NetString.HasValue(parentKey.CodeLine)
@@ -394,10 +394,14 @@ namespace ProjectFilesDAL
 
       var current = CurrentDataObject();
       if (current.CodeLine == solution.CodeLine
-        && current.CodeGroup == solution.CodeGroup
-        && current.Name == solution.Name)
+        && current.CodeGroup == solution.CodeGroup)
       {
-        retValue = true;
+        // *** Next Statement *** Add - 3/11/24
+        if (null == solution.Name
+          || current.Name == solution.Name)
+        {
+          retValue = true;
+        }
       }
       return retValue;
     }

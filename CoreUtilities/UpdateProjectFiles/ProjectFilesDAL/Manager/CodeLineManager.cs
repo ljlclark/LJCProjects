@@ -304,16 +304,11 @@ namespace ProjectFilesDAL
     // Creates a DataObject from the supplied values.
     private CodeLine CreateDataObject(string name, string pathName = null)
     {
-      CodeLine retValue = null;
-
-      if (NetString.HasValue(name))
+      var retValue = new CodeLine()
       {
-        retValue = new CodeLine()
-        {
-          Name = name,
-          Path = pathName
-        };
-      }
+        Name = name,
+        Path = pathName
+      };
       return retValue;
     }
 
@@ -323,7 +318,9 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       var current = CurrentDataObject();
-      if (current.Name == codeLine.Name)
+      // *** Next Statement *** Add - 3/11/24
+      if (null == codeLine.Name
+        || current.Name == codeLine.Name)
       {
         retValue = true;
       }
