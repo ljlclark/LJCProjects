@@ -21,12 +21,12 @@ namespace UpdateProjectFiles
       InitializeComponent();
 
       // Initialize property values.
-      LJCCodeLine = null;
       LJCCodeGroup = null;
-      LJCSolution = null;
-      LJCName = null;
+      LJCCodeLine = null;
       LJCIsUpdate = false;
+      LJCName = null;
       LJCRecord = null;
+      LJCSolution = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;

@@ -36,22 +36,22 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The Target Key values.</param>
     /// <param name="sourceKey">The Source Key values.</param>
     /// <param name="sourceFileName">The Source File name.</param>
-    /// <param name="sourceFileSpec">The Source FileSpec.</param>
-    /// <param name="targetFileSpec">The Target FileSpec.</param>
+    /// <param name="sourceFilePath">The Source FileSpec.</param>
+    /// <param name="targetFilePath">The Target FileSpec.</param>
     /// <returns>The added Project data object.</returns>
     public ProjectFile Add(ProjectFileKey parentKey, ProjectFileKey sourceKey
-      , string sourceFileName, string sourceFileSpec, string targetFileSpec)
+      , string sourceFileName, string sourceFilePath, string targetFilePath)
     {
       ProjectFile retValue = null;
 
       if (HasParentKey(parentKey)
         && HasParentKey(sourceKey)
         && NetString.HasValue(sourceFileName)
-        && NetString.HasValue(sourceFileSpec)
-        && NetString.HasValue(targetFileSpec))
+        && NetString.HasValue(sourceFilePath)
+        && NetString.HasValue(targetFilePath))
       {
         var projectFile = CreateDataObject(parentKey, sourceKey
-          , sourceFileSpec, targetFileSpec);
+          , sourceFilePath, targetFilePath);
         var newRecord = CreateRecord(projectFile);
         Reader.Close();
         File.AppendAllText(FileName, newRecord);
@@ -249,8 +249,8 @@ namespace ProjectFilesDAL
       builder.Append(", SourceCodeGroup");
       builder.Append(", SourceSolution");
       builder.Append(", SourceProject");
-      builder.Append(", SourceFileSpec");
-      builder.AppendLine(", TargetFileSpec");
+      builder.Append(", sourceFilePath");
+      builder.AppendLine(", targetFilePath");
       var header = builder.ToString();
       File.WriteAllText(fileName, header);
       foreach (ProjectFile projectFile in projectFiles)
@@ -299,8 +299,8 @@ namespace ProjectFilesDAL
         builder.Append($", {projectFile.SourceCodeGroup}");
         builder.Append($", {projectFile.SourceSolution}");
         builder.Append($", {projectFile.SourceProject}");
-        builder.Append($", {projectFile.SourceFileSpec}");
-        builder.AppendLine($", {projectFile.TargetFileSpec}");
+        builder.Append($", {projectFile.SourceFilePath}");
+        builder.AppendLine($", {projectFile.TargetFilePath}");
         retValue = builder.ToString();
       }
       return retValue;
@@ -320,8 +320,8 @@ namespace ProjectFilesDAL
         SourceCodeGroup = Reader.GetTrimValue("SourceCodeGroup"),
         SourceSolution = Reader.GetTrimValue("SourceSolution"),
         SourceProject = Reader.GetTrimValue("SourceProject"),
-        SourceFileSpec = Reader.GetTrimValue("SourceFileSpec"),
-        TargetFileSpec = Reader.GetTrimValue("TargetFileSpec"),
+        SourceFilePath = Reader.GetTrimValue("SourceFilePath"),
+        TargetFilePath = Reader.GetTrimValue("TargetFilePath"),
       };
       return retValue;
     }
@@ -416,14 +416,14 @@ namespace ProjectFilesDAL
         { "SourceCodeGroup" },
         { "SourceSolution" },
         { "SourceProject" },
-        { "SourceFileSpec" },
-        { "TargetFileSpec" }
+        { "sourceFilePath" },
+        { "targetFilePath" }
       };
     }
 
     // Creates a DataObject from the supplied values.
     private ProjectFile CreateDataObject(ProjectFileKey targetKey
-      , ProjectFileKey sourceKey, string sourceFileSpec, string targetFileSpec)
+      , ProjectFileKey sourceKey, string sourceFilePath, string targetFilePath)
     {
       ProjectFile retValue = null;
 
@@ -442,8 +442,8 @@ namespace ProjectFilesDAL
           SourceCodeGroup = sourceKey.CodeGroup,
           SourceSolution = sourceKey.Solution,
           SourceProject = sourceKey.Project,
-          SourceFileSpec = sourceFileSpec,
-          TargetFileSpec = targetFileSpec,
+          SourceFilePath = sourceFilePath,
+          TargetFilePath = targetFilePath,
         };
       }
       return retValue;

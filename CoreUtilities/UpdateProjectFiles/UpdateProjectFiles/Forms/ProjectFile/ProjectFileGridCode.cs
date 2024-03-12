@@ -22,7 +22,7 @@ namespace UpdateProjectFiles
       // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
       CodeList = parentList;
-      FileGrid = CodeList.FileGrid;
+      ProjectFileGrid = CodeList.ProjectFileGrid;
       ProjectGrid = CodeList.ProjectGrid;
       ResetData();
       CodeList.Cursor = Cursors.Default;
@@ -42,7 +42,7 @@ namespace UpdateProjectFiles
     internal void DataRetrieve(ProjectFileKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
-      FileGrid.LJCRowsClear();
+      ProjectFileGrid.LJCRowsClear();
 
       var projectFiles = FileManager.Load(parentKey);
       if (NetCommon.HasItems(projectFiles))
@@ -59,9 +59,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(ProjectFile dataRecord)
     {
-      var retValue = FileGrid.LJCRowAdd();
+      var retValue = ProjectFileGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(FileGrid, dataRecord);
+      retValue.LJCSetValues(ProjectFileGrid, dataRecord);
       return retValue;
     }
 
@@ -73,7 +73,7 @@ namespace UpdateProjectFiles
       if (dataRecord != null)
       {
         CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in FileGrid.Rows)
+        foreach (LJCGridRow row in ProjectFileGrid.Rows)
         {
           var codeLine = row.LJCGetString("SourceCodeLine");
           var codeGroup = row.LJCGetString("SourceCodeGrouop");
@@ -84,10 +84,10 @@ namespace UpdateProjectFiles
             && codeGroup == dataRecord.SourceCodeGroup
             && solution == dataRecord.SourceSolution
             && project == dataRecord.SourceProject
-            && fileSpec == dataRecord.SourceFileSpec)
+            && fileSpec == dataRecord.SourceFilePath)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            FileGrid.LJCSetCurrentRow(row, true);
+            ProjectFileGrid.LJCSetCurrentRow(row, true);
             retValue = true;
             break;
           }
@@ -100,10 +100,10 @@ namespace UpdateProjectFiles
     // Updates the current row with the record values.
     private void RowUpdate(ProjectFile dataRecord)
     {
-      if (FileGrid.CurrentRow is LJCGridRow row)
+      if (ProjectFileGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(FileGrid, dataRecord);
+        row.LJCSetValues(ProjectFileGrid, dataRecord);
       }
     }
 
@@ -114,7 +114,7 @@ namespace UpdateProjectFiles
       row.LJCSetString("SourceCodeGroup", dataRecord.SourceCodeGroup);
       row.LJCSetString("SourceSolution", dataRecord.SourceSolution);
       row.LJCSetString("SourceProject", dataRecord.SourceProject);
-      row.LJCSetString("SourceFileSpec", dataRecord.SourceFileSpec);
+      row.LJCSetString("SourceFileName", dataRecord.SourceFileName);
     }
     #endregion
 
@@ -125,7 +125,7 @@ namespace UpdateProjectFiles
     {
       bool success = false;
       var parentRow = ProjectGrid.CurrentRow as LJCGridRow;
-      var row = FileGrid.CurrentRow as LJCGridRow;
+      var row = ProjectFileGrid.CurrentRow as LJCGridRow;
       if (parentRow != null
         && row != null)
       {
@@ -154,7 +154,7 @@ namespace UpdateProjectFiles
 
       if (success)
       {
-        FileGrid.Rows.Remove(row);
+        ProjectFileGrid.Rows.Remove(row);
         CodeList.TimedChange(Change.ProjectFile);
       }
     }
@@ -163,14 +163,14 @@ namespace UpdateProjectFiles
     internal void DoEdit()
     {
       if (ProjectGrid.CurrentRow is LJCGridRow parentRow
-        && FileGrid.CurrentRow is LJCGridRow row)
+        && ProjectFileGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        var codeLineName = parentRow.LJCGetString("CodeLineName");
-        var codeGroupName = parentRow.LJCGetString("CodeGroupName");
-        var solutionName = parentRow.LJCGetString("SolutionName");
-        var projectName = parentRow.LJCGetString("projectsName");
-        var name = row.LJCGetString("Name");
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var solutionName = parentRow.LJCGetString("Solution");
+        var projectName = parentRow.LJCGetString("Name");
+        var name = row.LJCGetString("SourceFileName");
 
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectFileDetail()
@@ -216,7 +216,7 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectFile record = null;
       if (ProjectGrid.CurrentRow is LJCGridRow parentRow
-        && FileGrid.CurrentRow is LJCGridRow row)
+        && ProjectFileGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
         record = new ProjectFile()
@@ -253,7 +253,7 @@ namespace UpdateProjectFiles
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(record);
-          FileGrid.LJCSetCurrentRow(row, true);
+          ProjectFileGrid.LJCSetCurrentRow(row, true);
           CodeList.TimedChange(Change.ProjectFile);
         }
       }
@@ -266,7 +266,7 @@ namespace UpdateProjectFiles
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
-      if (0 == FileGrid.Columns.Count)
+      if (0 == ProjectFileGrid.Columns.Count)
       {
         // Get the grid columns from the manager Data Definition.
         var manager = FileManager;
@@ -276,12 +276,12 @@ namespace UpdateProjectFiles
           "SourceCodeGroup",
           "SourceSolution",
           "SourceProject",
-          "SourceFileSpec",
+          "SourceFileName",
         };
         var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
-        FileGrid.LJCAddColumns(gridColumns);
+        ProjectFileGrid.LJCAddColumns(gridColumns);
       }
     }
     #endregion
@@ -295,7 +295,7 @@ namespace UpdateProjectFiles
     private ManagersProjectFiles Managers { get; set; }
 
     // Gets or sets the Grid reference.
-    private LJCDataGrid FileGrid { get; set; }
+    private LJCDataGrid ProjectFileGrid { get; set; }
 
     // Gets or sets the Manager reference.
     private ProjectFileManager FileManager { get; set; }

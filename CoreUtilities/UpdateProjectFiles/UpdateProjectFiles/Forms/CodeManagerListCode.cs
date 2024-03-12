@@ -50,7 +50,7 @@ namespace UpdateProjectFiles
           break;
 
         case Change.ProjectFile:
-          FileGrid.LJCSetLastRow();
+          ProjectFileGrid.LJCSetLastRow();
           break;
       }
       SetControlState();
@@ -185,7 +185,7 @@ namespace UpdateProjectFiles
           CodeGroupGrid.LJCRestoreColumnValues(ControlValues);
           SolutionGrid.LJCRestoreColumnValues(ControlValues);
           ProjectGrid.LJCRestoreColumnValues(ControlValues);
-          FileGrid.LJCRestoreColumnValues(ControlValues);
+          ProjectFileGrid.LJCRestoreColumnValues(ControlValues);
         }
       }
     }
@@ -200,7 +200,7 @@ namespace UpdateProjectFiles
       CodeGroupGrid.LJCSaveColumnValues(controlValues);
       SolutionGrid.LJCSaveColumnValues(controlValues);
       ProjectGrid.LJCSaveColumnValues(controlValues);
-      FileGrid.LJCSaveColumnValues(controlValues);
+      ProjectFileGrid.LJCSaveColumnValues(controlValues);
 
       // Save Splitter values.
       controlValues.Add("CodeLineSplit.SplitterDistance"
@@ -321,7 +321,7 @@ namespace UpdateProjectFiles
       FormCommon.SetMenuState(ProjectMenu, enableNew, enableEdit);
 
       enableNew = ProjectGrid.CurrentRow != null;
-      enableEdit = FileGrid.CurrentRow != null;
+      enableEdit = ProjectFileGrid.CurrentRow != null;
       FormCommon.SetMenuState(ProjectFileMenu, enableNew, enableEdit);
     }
 
@@ -340,7 +340,7 @@ namespace UpdateProjectFiles
           break;
 
         case "FileTab":
-          FileGrid.Select();
+          ProjectFileGrid.Select();
           break;
       }
     }

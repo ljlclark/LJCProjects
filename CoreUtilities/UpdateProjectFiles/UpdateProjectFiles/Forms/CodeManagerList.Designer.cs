@@ -87,7 +87,7 @@
       this.ProjectRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectHeader = new LJCWinFormControls.LJCHeaderBox();
       this.FileTab = new System.Windows.Forms.TabPage();
-      this.FileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.ProjectFileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ProjectFileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ProjectFileHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectFileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +128,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.ProjectGrid)).BeginInit();
       this.ProjectMenu.SuspendLayout();
       this.FileTab.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.ProjectFileGrid)).BeginInit();
       this.ProjectFileMenu.SuspendLayout();
       this.TileTabsMenu.SuspendLayout();
       this.SuspendLayout();
@@ -737,7 +737,7 @@
       // 
       // FileTab
       // 
-      this.FileTab.Controls.Add(this.FileGrid);
+      this.FileTab.Controls.Add(this.ProjectFileGrid);
       this.FileTab.Controls.Add(this.ProjectCombo);
       this.FileTab.Controls.Add(this.ProjectLabel);
       this.FileTab.Location = new System.Drawing.Point(4, 29);
@@ -747,18 +747,18 @@
       this.FileTab.Text = "File";
       this.FileTab.UseVisualStyleBackColor = true;
       // 
-      // FileGrid
+      // ProjectFileGrid
       // 
-      this.FileGrid.AllowDrop = true;
-      this.FileGrid.AllowUserToAddRows = false;
-      this.FileGrid.AllowUserToDeleteRows = false;
-      this.FileGrid.AllowUserToResizeRows = false;
-      this.FileGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.ProjectFileGrid.AllowDrop = true;
+      this.ProjectFileGrid.AllowUserToAddRows = false;
+      this.ProjectFileGrid.AllowUserToDeleteRows = false;
+      this.ProjectFileGrid.AllowUserToResizeRows = false;
+      this.ProjectFileGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.FileGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
-      this.FileGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.FileGrid.ContextMenuStrip = this.ProjectFileMenu;
+      this.ProjectFileGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.ProjectFileGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.ProjectFileGrid.ContextMenuStrip = this.ProjectFileMenu;
       dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -766,28 +766,28 @@
       dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
       dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
       dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FileGrid.DefaultCellStyle = dataGridViewCellStyle5;
-      this.FileGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-      this.FileGrid.LJCAllowDrag = true;
-      this.FileGrid.LJCAllowSelectionChange = false;
-      this.FileGrid.LJCDragDataName = null;
-      this.FileGrid.LJCLastRowIndex = -1;
-      this.FileGrid.LJCRowHeight = 0;
-      this.FileGrid.Location = new System.Drawing.Point(0, 38);
-      this.FileGrid.MultiSelect = false;
-      this.FileGrid.Name = "FileGrid";
-      this.FileGrid.RowHeadersVisible = false;
-      this.FileGrid.RowHeadersWidth = 62;
-      this.FileGrid.RowTemplate.Height = 28;
-      this.FileGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.FileGrid.ShowCellToolTips = false;
-      this.FileGrid.Size = new System.Drawing.Size(687, 379);
-      this.FileGrid.TabIndex = 3;
-      this.FileGrid.Text = "LJCDataGrid";
-      this.FileGrid.SelectionChanged += new System.EventHandler(this.FileGrid_SelectionChanged);
-      this.FileGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileGrid_KeyDown);
-      this.FileGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDoubleClick);
-      this.FileGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDown);
+      this.ProjectFileGrid.DefaultCellStyle = dataGridViewCellStyle5;
+      this.ProjectFileGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.ProjectFileGrid.LJCAllowDrag = true;
+      this.ProjectFileGrid.LJCAllowSelectionChange = false;
+      this.ProjectFileGrid.LJCDragDataName = null;
+      this.ProjectFileGrid.LJCLastRowIndex = -1;
+      this.ProjectFileGrid.LJCRowHeight = 0;
+      this.ProjectFileGrid.Location = new System.Drawing.Point(0, 38);
+      this.ProjectFileGrid.MultiSelect = false;
+      this.ProjectFileGrid.Name = "ProjectFileGrid";
+      this.ProjectFileGrid.RowHeadersVisible = false;
+      this.ProjectFileGrid.RowHeadersWidth = 62;
+      this.ProjectFileGrid.RowTemplate.Height = 28;
+      this.ProjectFileGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.ProjectFileGrid.ShowCellToolTips = false;
+      this.ProjectFileGrid.Size = new System.Drawing.Size(687, 379);
+      this.ProjectFileGrid.TabIndex = 3;
+      this.ProjectFileGrid.Text = "LJCDataGrid";
+      this.ProjectFileGrid.SelectionChanged += new System.EventHandler(this.FileGrid_SelectionChanged);
+      this.ProjectFileGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileGrid_KeyDown);
+      this.ProjectFileGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDoubleClick);
+      this.ProjectFileGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FileGrid_MouseDown);
       // 
       // ProjectFileMenu
       // 
@@ -943,7 +943,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.ProjectGrid)).EndInit();
       this.ProjectMenu.ResumeLayout(false);
       this.FileTab.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.FileGrid)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.ProjectFileGrid)).EndInit();
       this.ProjectFileMenu.ResumeLayout(false);
       this.TileTabsMenu.ResumeLayout(false);
       this.ResumeLayout(false);
@@ -970,7 +970,7 @@
     private System.Windows.Forms.TabPage FileTab;
     internal LJCWinFormControls.LJCItemCombo ProjectCombo;
     private System.Windows.Forms.Label ProjectLabel;
-    internal LJCWinFormControls.LJCDataGrid FileGrid;
+    internal LJCWinFormControls.LJCDataGrid ProjectFileGrid;
     private System.Windows.Forms.ContextMenuStrip CodeLineMenu;
     private System.Windows.Forms.ToolStripMenuItem CodeLineHeading;
     private System.Windows.Forms.ToolStripMenuItem CodeLineNew;

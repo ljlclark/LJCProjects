@@ -8,7 +8,6 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace UpdateProjectFiles
 {
@@ -25,10 +24,10 @@ namespace UpdateProjectFiles
       LJCIsUpdate = false;
       LJCRecord = null;
       LJCSourceFileName = null;
-      LJCTargetLine = null;
       LJCTargetGroup = null;
-      LJCTargetSolution = null;
+      LJCTargetLine = null;
       LJCTargetProject = null;
+      LJCTargetSolution = null;
 
       // Set default class data.
       BeginColor = Color.AliceBlue;
@@ -99,12 +98,12 @@ namespace UpdateProjectFiles
         TargetSolutionText.Text = dataRecord.TargetSolution;
         TargetProjectText.Text = dataRecord.TargetProject;
         SourceFileNameText.Text = dataRecord.SourceFileName;
-        TargetFileSpecText.Text = dataRecord.TargetFileSpec;
+        TargetFilePathText.Text = dataRecord.TargetFilePath;
         SourceCodeLineText.Text = dataRecord.SourceCodeLine;
         SourceCodeGroupText.Text = dataRecord.SourceCodeGroup;
         SourceSolutionText.Text = dataRecord.SourceSolution;
         SourceProjectText.Text = dataRecord.SourceProject;
-        SourceFileSpecText.Text = dataRecord.SourceFileSpec;
+        SourceFilePathText.Text = dataRecord.SourceFilePath;
       }
     }
 
@@ -158,7 +157,7 @@ namespace UpdateProjectFiles
           var parentKey = GetParentKey();
           var sourceKey = GetSourceKey();
           manager.Add(parentKey, sourceKey, LJCRecord.SourceFileName
-            , LJCRecord.SourceFileSpec, LJCRecord.TargetFileSpec);
+            , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
         }
       }
       Cursor = Cursors.Default;

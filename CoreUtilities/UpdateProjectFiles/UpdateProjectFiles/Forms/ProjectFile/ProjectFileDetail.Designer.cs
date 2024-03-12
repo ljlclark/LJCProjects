@@ -32,8 +32,8 @@
       this.TargetSolutionLabel = new System.Windows.Forms.Label();
       this.TargetCodeGroupText = new System.Windows.Forms.TextBox();
       this.TargetCodeGroupLabel = new System.Windows.Forms.Label();
-      this.TargetFileSpecText = new System.Windows.Forms.TextBox();
-      this.TargetFileSpecLabel = new System.Windows.Forms.Label();
+      this.TargetFilePathText = new System.Windows.Forms.TextBox();
+      this.TargetFilePathLabel = new System.Windows.Forms.Label();
       this.TargetCodeLineText = new System.Windows.Forms.TextBox();
       this.TargetCodeLineLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
@@ -50,8 +50,8 @@
       this.SourceCodeGroupLabel = new System.Windows.Forms.Label();
       this.SourceCodeLineText = new System.Windows.Forms.TextBox();
       this.SourceCodeLineLabel = new System.Windows.Forms.Label();
-      this.SourceFileSpecText = new System.Windows.Forms.TextBox();
-      this.SourceFileSpecLabel = new System.Windows.Forms.Label();
+      this.SourceFilePathText = new System.Windows.Forms.TextBox();
+      this.SourceFilePathLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // TargetSolutionText
@@ -90,22 +90,22 @@
       this.TargetCodeGroupLabel.TabIndex = 2;
       this.TargetCodeGroupLabel.Text = "Target Code Group";
       // 
-      // TargetFileSpecText
+      // TargetFilePathText
       // 
-      this.TargetFileSpecText.Location = new System.Drawing.Point(174, 194);
-      this.TargetFileSpecText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.TargetFileSpecText.Name = "TargetFileSpecText";
-      this.TargetFileSpecText.Size = new System.Drawing.Size(295, 26);
-      this.TargetFileSpecText.TabIndex = 11;
+      this.TargetFilePathText.Location = new System.Drawing.Point(174, 194);
+      this.TargetFilePathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.TargetFilePathText.Name = "TargetFilePathText";
+      this.TargetFilePathText.Size = new System.Drawing.Size(295, 26);
+      this.TargetFilePathText.TabIndex = 11;
       // 
-      // TargetFileSpecLabel
+      // TargetFilePathLabel
       // 
-      this.TargetFileSpecLabel.Location = new System.Drawing.Point(18, 198);
-      this.TargetFileSpecLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.TargetFileSpecLabel.Name = "TargetFileSpecLabel";
-      this.TargetFileSpecLabel.Size = new System.Drawing.Size(153, 20);
-      this.TargetFileSpecLabel.TabIndex = 10;
-      this.TargetFileSpecLabel.Text = "Target File Spec";
+      this.TargetFilePathLabel.Location = new System.Drawing.Point(18, 198);
+      this.TargetFilePathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.TargetFilePathLabel.Name = "TargetFilePathLabel";
+      this.TargetFilePathLabel.Size = new System.Drawing.Size(153, 20);
+      this.TargetFilePathLabel.TabIndex = 10;
+      this.TargetFilePathLabel.Text = "Target File Path";
       // 
       // TargetCodeLineText
       // 
@@ -255,22 +255,22 @@
       this.SourceCodeLineLabel.TabIndex = 12;
       this.SourceCodeLineLabel.Text = "Source CodeL Line";
       // 
-      // SourceFileSpecText
+      // SourceFilePathText
       // 
-      this.SourceFileSpecText.Location = new System.Drawing.Point(643, 156);
-      this.SourceFileSpecText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.SourceFileSpecText.Name = "SourceFileSpecText";
-      this.SourceFileSpecText.Size = new System.Drawing.Size(295, 26);
-      this.SourceFileSpecText.TabIndex = 21;
+      this.SourceFilePathText.Location = new System.Drawing.Point(643, 156);
+      this.SourceFilePathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.SourceFilePathText.Name = "SourceFilePathText";
+      this.SourceFilePathText.Size = new System.Drawing.Size(295, 26);
+      this.SourceFilePathText.TabIndex = 21;
       // 
-      // SourceFileSpecLabel
+      // SourceFilePathLabel
       // 
-      this.SourceFileSpecLabel.Location = new System.Drawing.Point(487, 160);
-      this.SourceFileSpecLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.SourceFileSpecLabel.Name = "SourceFileSpecLabel";
-      this.SourceFileSpecLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceFileSpecLabel.TabIndex = 20;
-      this.SourceFileSpecLabel.Text = "Source File Spec";
+      this.SourceFilePathLabel.Location = new System.Drawing.Point(487, 160);
+      this.SourceFilePathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.SourceFilePathLabel.Name = "SourceFilePathLabel";
+      this.SourceFilePathLabel.Size = new System.Drawing.Size(153, 20);
+      this.SourceFilePathLabel.TabIndex = 20;
+      this.SourceFilePathLabel.Text = "Source File Path";
       // 
       // ProjectFileDetail
       // 
@@ -285,16 +285,16 @@
       this.Controls.Add(this.SourceCodeGroupLabel);
       this.Controls.Add(this.SourceCodeLineText);
       this.Controls.Add(this.SourceCodeLineLabel);
-      this.Controls.Add(this.SourceFileSpecText);
-      this.Controls.Add(this.SourceFileSpecLabel);
+      this.Controls.Add(this.SourceFilePathText);
+      this.Controls.Add(this.SourceFilePathLabel);
       this.Controls.Add(this.TargetProjectText);
       this.Controls.Add(this.TargetProjectLabel);
       this.Controls.Add(this.TargetSolutionText);
       this.Controls.Add(this.TargetSolutionLabel);
       this.Controls.Add(this.TargetCodeGroupText);
       this.Controls.Add(this.TargetCodeGroupLabel);
-      this.Controls.Add(this.TargetFileSpecText);
-      this.Controls.Add(this.TargetFileSpecLabel);
+      this.Controls.Add(this.TargetFilePathText);
+      this.Controls.Add(this.TargetFilePathLabel);
       this.Controls.Add(this.TargetCodeLineText);
       this.Controls.Add(this.TargetCodeLineLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -315,8 +315,8 @@
     private System.Windows.Forms.Label TargetSolutionLabel;
     private System.Windows.Forms.TextBox TargetCodeGroupText;
     private System.Windows.Forms.Label TargetCodeGroupLabel;
-    private System.Windows.Forms.TextBox TargetFileSpecText;
-    private System.Windows.Forms.Label TargetFileSpecLabel;
+    private System.Windows.Forms.TextBox TargetFilePathText;
+    private System.Windows.Forms.Label TargetFilePathLabel;
     private System.Windows.Forms.TextBox TargetCodeLineText;
     private System.Windows.Forms.Label TargetCodeLineLabel;
     private System.Windows.Forms.Button FormCancelButton;
@@ -333,7 +333,7 @@
     private System.Windows.Forms.Label SourceCodeGroupLabel;
     private System.Windows.Forms.TextBox SourceCodeLineText;
     private System.Windows.Forms.Label SourceCodeLineLabel;
-    private System.Windows.Forms.TextBox SourceFileSpecText;
-    private System.Windows.Forms.Label SourceFileSpecLabel;
+    private System.Windows.Forms.TextBox SourceFilePathText;
+    private System.Windows.Forms.Label SourceFilePathLabel;
   }
 }

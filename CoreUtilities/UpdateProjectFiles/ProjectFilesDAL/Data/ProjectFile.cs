@@ -83,11 +83,11 @@ namespace ProjectFilesDAL
     /// <summary>Gets or sets the Source Project name.</summary>
     public string SourceProject { get; set; }
 
-    /// <summary>Gets or sets the Source file spec.</summary>
-    public string SourceFileSpec { get; set; }
+    /// <summary>Gets or sets the Source file path.</summary>
+    public string SourceFilePath { get; set; }
 
-    /// <summary>Gets or sets the Target file spec.</summary>
-    public string TargetFileSpec { get; set; }
+    /// <summary>Gets or sets the Target file path.</summary>
+    public string TargetFilePath { get; set; }
     #endregion
   }
 

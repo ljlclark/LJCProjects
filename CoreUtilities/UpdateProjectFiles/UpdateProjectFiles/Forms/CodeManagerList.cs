@@ -544,7 +544,7 @@ namespace UpdateProjectFiles
         case Keys.M:
           if (e.Control)
           {
-            var position = FormCommon.GetMenuScreenPoint(FileGrid
+            var position = FormCommon.GetMenuScreenPoint(ProjectFileGrid
               , MousePosition);
             ProjectFileMenu.Show(position);
             ProjectFileMenu.Select();
@@ -569,7 +569,7 @@ namespace UpdateProjectFiles
     // Handles the MouseDoubleClick event.
     private void FileGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      if (FileGrid.LJCGetMouseRow(e) != null)
+      if (ProjectFileGrid.LJCGetMouseRow(e) != null)
       {
         mProjectFileGridCode.DoEdit();
       }
@@ -579,11 +579,11 @@ namespace UpdateProjectFiles
     private void FileGrid_MouseDown(object sender, MouseEventArgs e)
     {
       // LJCIsDifferentRow() sets LJCLastRowIndex for new row.
-      FileGrid.Select();
-      if (FileGrid.LJCIsDifferentRow(e))
+      ProjectFileGrid.Select();
+      if (ProjectFileGrid.LJCIsDifferentRow(e))
       {
         // LJCSetCurrentRow() sets LJCAllowSelectionChange to true.
-        FileGrid.LJCSetCurrentRow(e);
+        ProjectFileGrid.LJCSetCurrentRow(e);
         TimedChange(Change.ProjectFile);
       }
     }
@@ -591,11 +591,11 @@ namespace UpdateProjectFiles
     // Handles the SelectionChanged event.
     private void FileGrid_SelectionChanged(object sender, System.EventArgs e)
     {
-      if (FileGrid.LJCAllowSelectionChange)
+      if (ProjectFileGrid.LJCAllowSelectionChange)
       {
         TimedChange(Change.ProjectFile);
       }
-      FileGrid.LJCAllowSelectionChange = true;
+      ProjectFileGrid.LJCAllowSelectionChange = true;
     }
     #endregion
     #endregion
