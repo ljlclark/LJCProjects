@@ -165,9 +165,9 @@ namespace UpdateProjectFiles
     }
 
     // Creates the parent key.
-    private ProjectFileKey GetParentKey()
+    private ProjectFileParentKey GetParentKey()
     {
-      var retValue = new ProjectFileKey()
+      var retValue = new ProjectFileParentKey()
       {
         CodeLine = LJCTargetLine,
         CodeGroup = LJCTargetGroup,
@@ -178,9 +178,9 @@ namespace UpdateProjectFiles
     }
 
     // Creates the source key.
-    private ProjectFileKey GetSourceKey()
+    private ProjectFileParentKey GetSourceKey()
     {
-      var retValue = new ProjectFileKey()
+      var retValue = new ProjectFileParentKey()
       {
         CodeLine = SourceCodeLineText.Text.Trim(),
         CodeGroup = SourceCodeGroupText.Text.Trim(),

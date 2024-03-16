@@ -39,7 +39,7 @@ namespace UpdateProjectFiles
     #region Data Methods
 
     // Retrieves the list rows.
-    internal void DataRetrieve(ProjectFileKey parentKey = null)
+    internal void DataRetrieve(ProjectFileParentKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectFileGrid.LJCRowsClear();
@@ -142,7 +142,7 @@ namespace UpdateProjectFiles
       {
         // Data from items.
         var name = row.LJCGetString("Name");
-        var parentKey = new ProjectFileKey()
+        var parentKey = new ProjectFileParentKey()
         {
           CodeLine = parentRow.LJCGetString("CodeLineName"),
           CodeGroup = parentRow.LJCGetString("CodeGroupName"),

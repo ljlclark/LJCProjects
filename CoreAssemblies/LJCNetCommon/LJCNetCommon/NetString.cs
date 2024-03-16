@@ -528,12 +528,29 @@ namespace LJCNetCommon
 
     // Adds the missing argument name to the message.
     /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
-    public static void AddMissingArgument(string message, string argument)
+    public static void AddMissingArgument(string message, object argument)
     {
-      if (!HasValue(argument))
+      var missing = false;
+
+      if (typeof(String) == argument.GetType())
+      {
+        if (!NetString.HasValue(argument.ToString()))
+        {
+          missing = true;
+        }
+      }
+      else
+      {
+        if (null == argument)
+        {
+          missing = true;
+        }
+      }
+
+      if (missing)
       {
         message += $"{argument} is missing.\r\n";
-        throw new ArgumentException(message);
+        //throw new ArgumentException(message);
       }
     }
 

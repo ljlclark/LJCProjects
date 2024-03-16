@@ -39,7 +39,7 @@ namespace ProjectFilesDAL
     /// <param name="sourceFilePath">The Source FileSpec.</param>
     /// <param name="targetFilePath">The Target FileSpec.</param>
     /// <returns>The added Project data object.</returns>
-    public ProjectFile Add(ProjectFileKey parentKey, ProjectFileKey sourceKey
+    public ProjectFile Add(ProjectFileParentKey parentKey, ProjectFileParentKey sourceKey
       , string sourceFileName, string sourceFilePath, string targetFilePath)
     {
       ProjectFile retValue = null;
@@ -66,7 +66,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The Target Key values.</param>
     /// <param name="sourceFileName">The Name value.</param>
-    public void Delete(ProjectFileKey parentKey, string sourceFileName)
+    public void Delete(ProjectFileParentKey parentKey, string sourceFileName)
     {
       if (HasParentKey(parentKey)
         && NetString.HasValue(sourceFileName))
@@ -92,7 +92,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="sourceFileName">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public ProjectFiles Load(ProjectFileKey parentKey = null
+    public ProjectFiles Load(ProjectFileParentKey parentKey = null
       , string sourceFileName = null)
     {
       ProjectFiles retValue = null;
@@ -123,7 +123,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="sourceFileName">The Name value.</param>
     /// <returns>The ProjectFiles collection if available; otherwise null.</returns>
-    public ProjectFiles LoadAllExcept(ProjectFileKey parentKey
+    public ProjectFiles LoadAllExcept(ProjectFileParentKey parentKey
       , string sourceFileName)
     {
       ProjectFiles retValue = null;
@@ -155,7 +155,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="sourceFileName">The SourceFileName value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public ProjectFile Retrieve(ProjectFileKey parentKey, string sourceFileName)
+    public ProjectFile Retrieve(ProjectFileParentKey parentKey, string sourceFileName)
     {
       ProjectFile retValue = null;
 
@@ -261,9 +261,9 @@ namespace ProjectFilesDAL
     }
 
     // <summary>Creates a ParentKey from the supplied DataObject.</summary>
-    public ProjectFileKey CreateParentKey(ProjectFile projectFile)
+    public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
-      var retValue = new ProjectFileKey()
+      var retValue = new ProjectFileParentKey()
       {
         CodeLine = projectFile.TargetCodeLine,
         CodeGroup = projectFile.TargetCodeGroup,
@@ -327,9 +327,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>Creates a ParentKey from the current values.</summary>
-    public ProjectFileKey CurrentParentKey()
+    public ProjectFileParentKey CurrentParentKey()
     {
-      var retValue = new ProjectFileKey()
+      var retValue = new ProjectFileParentKey()
       {
         CodeLine = Reader.GetTrimValue("TargetCodeLine"),
         CodeGroup = Reader.GetTrimValue("TargetCodeGroup"),
@@ -340,9 +340,9 @@ namespace ProjectFilesDAL
     }
 
     /// <summary>Creates a source key from the current values.</summary>
-    public ProjectFileKey CurrentSourceKey()
+    public ProjectFileParentKey CurrentSourceKey()
     {
-      var retValue = new ProjectFileKey()
+      var retValue = new ProjectFileParentKey()
       {
         CodeLine = Reader.GetTrimValue("SourceCodeLine"),
         CodeGroup = Reader.GetTrimValue("SourceCodeGroup"),
@@ -422,8 +422,8 @@ namespace ProjectFilesDAL
     }
 
     // Creates a DataObject from the supplied values.
-    private ProjectFile CreateDataObject(ProjectFileKey targetKey
-      , ProjectFileKey sourceKey, string sourceFilePath, string targetFilePath)
+    private ProjectFile CreateDataObject(ProjectFileParentKey targetKey
+      , ProjectFileParentKey sourceKey, string sourceFilePath, string targetFilePath)
     {
       ProjectFile retValue = null;
 
@@ -450,7 +450,7 @@ namespace ProjectFilesDAL
     }
 
     // Checks for the existance of the ParentKey values.
-    private bool HasParentKey(ProjectFileKey parentKey)
+    private bool HasParentKey(ProjectFileParentKey parentKey)
     {
       var retValue = false;
 

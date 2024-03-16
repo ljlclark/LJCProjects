@@ -136,6 +136,20 @@ namespace _Namespace_
       return retValue;
     }
 
+    // Removes an item by name.
+    /// <summary>
+    /// Removes an item by name.
+    /// </summary>
+    /// <param name="name">The item unique Name value.</param>
+    public void LJCRemove(string name)
+    {
+      _ClassName_ item = Find(x => x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+
     // Serializes the collection to a file.
     /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
@@ -228,6 +242,13 @@ namespace _Namespace_
     public static string LJCDefaultFileName
     {
       get { return "_CollectionName_.xml"; }
+    }
+
+    // The item for the specified name.
+    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    public _ClassName_ this[string name]
+    {
+      get { return LJCSearchUnique(name); }
     }
     #endregion
 

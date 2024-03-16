@@ -92,7 +92,7 @@ namespace ProjectFilesDAL
   }
 
   /// <summary></summary>
-  public class ProjectFileKey
+  public class ProjectFileParentKey
   {
     /// <summary>Gets or sets the Target CodeLine name.</summary>
     public string CodeLine { get; set; }
