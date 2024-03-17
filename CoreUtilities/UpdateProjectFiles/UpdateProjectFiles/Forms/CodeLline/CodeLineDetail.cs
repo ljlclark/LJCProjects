@@ -67,7 +67,7 @@ namespace UpdateProjectFiles
         // *** Begin *** Change - Data
         //var manager = Managers.CodeLineManager;
         //mOriginalRecord = manager.Retrieve(LJCName);
-        mOriginalRecord = CodeLines.LJCRetrieve(Name);
+        mOriginalRecord = CodeLines.LJCRetrieve(LJCName);
         // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }

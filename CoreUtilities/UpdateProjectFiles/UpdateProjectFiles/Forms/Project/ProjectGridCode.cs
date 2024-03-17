@@ -268,6 +268,7 @@ namespace UpdateProjectFiles
           "CodeGroup",
           "Solution",
           "Name",
+          "Path"
         };
         var gridColumns = manager.GetColumns(propertyNames);
 
