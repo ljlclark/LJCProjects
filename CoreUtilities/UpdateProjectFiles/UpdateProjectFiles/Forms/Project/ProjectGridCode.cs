@@ -285,6 +285,10 @@ namespace UpdateProjectFiles
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }
 
+    // Gets or sets the Data object.
+    // *** Next Line *** Add - Data
+    private Data Data { get; set; }
+
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }
 
@@ -293,6 +297,10 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Manager reference.
     private ProjectManager ProjectManager { get; set; }
+
+    // Gets or sets the Projects collection.
+    // *** Next Line *** Add - Data
+    private Projects Projects { get; set; }
 
     // Gets or sets the SolutionGrid reference.
     private LJCDataGrid SolutionGrid { get; set; }

@@ -89,6 +89,19 @@ namespace ProjectFilesDAL
       }
     }
 
+    // Retrieves a collection that match the supplied values.
+    /// <summary>
+    /// Retrieves items that match the supplied values.
+    /// </summary>
+    /// <param name="codeLine">The CodeLine name.</param>
+    /// <returns>The collection object.</returns>
+    public CodeGroups LJCLoad(string codeLine)
+    {
+      var items = FindAll(x => x.CodeLine == codeLine);
+      var retValue = GetCollection(items);
+      return retValue;
+    }
+
     // Retrieve the collection element with unique values.
     /// <summary>
     /// Retrieve the collection element with unique values.

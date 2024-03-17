@@ -30,6 +30,10 @@ namespace UpdateProjectFiles
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
+      // *** Begin *** Add - Data
+      Data = CodeList.Data;
+      CodeGroups = Data.CodeGroups;
+      // *** End   *** Add - Data
       Managers = CodeList.Managers;
       CodeGroupManager = Managers.CodeGroupManager;
     }
@@ -43,7 +47,10 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       CodeGroupGrid.LJCRowsClear();
 
-      var codeGroups = CodeGroupManager.Load(parentKey);
+      // *** Begin *** Change - Datas
+      //var codeGroups = CodeGroupManager.Load(parentKey);
+      var codeGroups = CodeGroups.LJCLoad(parentKey);
+      // *** End   *** Change - Datas
       if (NetCommon.HasItems(codeGroups))
       {
         foreach (var codeGroup in codeGroups)
@@ -134,7 +141,12 @@ namespace UpdateProjectFiles
         var codeLineName = parentRow.LJCGetString("Name");
         var name = row.LJCGetString("Name");
 
-        CodeGroupManager.Delete(codeLineName, name);
+        // *** Begin *** Change - Datas
+        //CodeGroupManager.Delete(codeLineName, name);
+        CodeGroups.LJCDelete(codeLineName, name);
+        CodeGroupManager.WriteBackup();
+        CodeGroupManager.RecreateFile(CodeGroups);
+        // *** End   *** Change - Datas
       }
 
       if (success)
@@ -253,6 +265,10 @@ namespace UpdateProjectFiles
     // Gets or sets the CodeGroup Grid reference.
     private LJCDataGrid CodeGroupGrid { get; set; }
 
+    // Gets or sets the CodeGroups collection.
+    // *** Next Line *** Add - Data
+    private CodeGroups CodeGroups { get; set; }
+
     // Gets or sets the CodeLines Grid reference.
     private LJCDataGrid CodeLineGrid { get; set; }
 
@@ -261,6 +277,10 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }
+
+    // Gets or sets the Data object.
+    // *** Next Line *** Add - Data
+    private Data Data { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }

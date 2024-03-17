@@ -62,7 +62,8 @@ namespace ProjectFilesDAL
         var codeLines = LoadAllExcept(name);
         if (codeLines != null)
         {
-          WriteFileWithBackup(codeLines);
+          WriteBackup();
+          RecreateFile(codeLines);
         }
         if (current != null)
         {
@@ -179,7 +180,8 @@ namespace ProjectFilesDAL
         var codeLines = LoadAllExcept(codeLine.Name);
         if (codeLines != null)
         {
-          WriteFileWithBackup(codeLines);
+          WriteBackup();
+          RecreateFile(codeLines);
         }
         Reader.Close();
         var text = CreateRecord(codeLine);
@@ -262,23 +264,13 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Sorts the file on unique values.</summary>
-    public void SortFile()
-    {
-      var codeLines = Load();
-      codeLines.LJCSortUnique();
-      WriteFileWithBackup(codeLines);
-    }
-
+    // Recreates a file.
     /// <summary>
-    /// Write the text file from a CodeLines collection and create a backup.
+    /// Recreates a file.
     /// </summary>
     /// <param name="codeLines">The CodeLines collection</param>
-    public void WriteFileWithBackup(CodeLines codeLines)
+    public void RecreateFile(CodeLines codeLines)
     {
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
-      var backupFile = $"{fileName}Backup.txt";
-      CreateFile(backupFile, Load());
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -286,6 +278,23 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, codeLines);
       Reader.LJCOpen();
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var codeLines = Load();
+      codeLines.LJCSortUnique();
+      WriteBackup();
+      RecreateFile(codeLines);
+    }
+
+    /// <summary>Writes a backup file.</summary>
+    public void WriteBackup()
+    {
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
     }
     #endregion
 

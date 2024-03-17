@@ -139,6 +139,7 @@ namespace UpdateProjectFiles
     private void InitializeClassData()
     {
       ConfigValues = ValuesUpdateProjectFiles.Instance;
+      Data = ConfigValues.Data;
       Managers = ConfigValues.Managers;
     }
 
@@ -347,6 +348,9 @@ namespace UpdateProjectFiles
     #endregion
 
     #region Properties
+
+    // Gets or sets the Data object.
+    internal Data Data { get; set; }
 
     // The Managers object.
     internal ManagersProjectFiles Managers { get; set; }

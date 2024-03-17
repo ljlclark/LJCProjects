@@ -56,7 +56,7 @@ namespace ProjectFilesDAL
     {
       Solution retValue;
 
-      string message= "";
+      string message = "";
       NetString.AddMissingArgument(message, parentKey);
       AddMissingValues(message, parentKey);
       NetString.AddMissingArgument(message, name);
@@ -90,6 +90,21 @@ namespace ProjectFilesDAL
       {
         Remove(item);
       }
+    }
+
+    // Retrieves a collection that match the supplied values.
+    /// <summary>
+    /// Retrieves a collection that match the supplied values.
+    /// </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <returns>The collection object.</returns>
+    public Solutions LJCLoad(SolutionParentKey parentKey)
+    {
+      var items = FindAll(x =>
+        x.CodeLine == parentKey.CodeLine
+        && x.CodeGroup == parentKey.CodeGroup);
+      var retValue = GetCollection(items);
+      return retValue;
     }
 
     // Retrieves the collection element with unique values.

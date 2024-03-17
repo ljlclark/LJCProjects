@@ -99,6 +99,23 @@ namespace ProjectFilesDAL
       }
     }
 
+    // Retrieves items that match the supplied values.
+    /// <summary>
+    /// Retrieves a collection that match the supplied values.
+    /// </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <returns>The collection object.</returns>
+    public ProjectFiles LJCLoad(ProjectFileParentKey parentKey)
+    {
+      var items = FindAll(x =>
+        x.TargetCodeLine == parentKey.CodeLine
+        && x.TargetCodeGroup == parentKey.CodeGroup
+        && x.TargetSolution == parentKey.Solution
+        && x.TargetProject == parentKey.Project);
+      var retValue = GetCollection(items);
+      return retValue;
+    }
+
     // Retrieves the collection element with unique values.
     /// <summary>
     /// Retrieves the collection element with unique values.

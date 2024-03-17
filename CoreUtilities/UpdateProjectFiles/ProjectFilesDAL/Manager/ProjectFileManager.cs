@@ -76,7 +76,8 @@ namespace ProjectFilesDAL
         var projectFiles = LoadAllExcept(parentKey, sourceFileName);
         if (projectFiles != null)
         {
-          WriteFileWithBackup(projectFiles);
+          WriteBackup();
+          RecreateFile(projectFiles);
         }
         if (current != null)
         {
@@ -218,7 +219,8 @@ namespace ProjectFilesDAL
         var projectFiles = LoadAllExcept(parentKey, projectFile.SourceFileName);
         if (projectFiles != null)
         {
-          WriteFileWithBackup(projectFiles);
+          WriteBackup();
+          RecreateFile(projectFiles);
         }
         Reader.Close();
         var text = CreateRecord(projectFile);
@@ -373,23 +375,13 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Sorts the file on unique values.</summary>
-    public void SortFile()
-    {
-      var projectFiles = Load();
-      projectFiles.LJCSortUnique();
-      WriteFileWithBackup(projectFiles);
-    }
-
+    // Recreates a file.
     /// <summary>
-    /// Write the text file from a Solutions collection and create a backup.
+    /// Recreates a file.
     /// </summary>
-    /// <param name="projectFiles">The Projects collection</param>
-    public void WriteFileWithBackup(ProjectFiles projectFiles)
+    /// <param name="projectFiles">The ProjectFiles collection</param>
+    public void RecreateFile(ProjectFiles projectFiles)
     {
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
-      var backupFile = $"{fileName}Backup.txt";
-      CreateFile(backupFile, Load());
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -397,6 +389,26 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, projectFiles);
       Reader.LJCOpen();
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var projectFiles = Load();
+      projectFiles.LJCSortUnique();
+      WriteBackup();
+      RecreateFile(projectFiles);
+    }
+
+    /// <summary>
+    /// Write a backup file.
+    /// </summary>
+    /// <param name="projectFiles">The Projects collection</param>
+    public void WriteBackup()
+    {
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
     }
     #endregion
 

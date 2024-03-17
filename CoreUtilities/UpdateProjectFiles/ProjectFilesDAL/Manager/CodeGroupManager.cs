@@ -66,7 +66,8 @@ namespace ProjectFilesDAL
         var codeLines = LoadAllExcept(codeLineName, name);
         if (codeLines != null)
         {
-          WriteFileWithBackup(codeLines);
+          WriteBackup();
+          RecreateFile(codeLines);
         }
         if (current != null)
         {
@@ -199,7 +200,8 @@ namespace ProjectFilesDAL
         var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
         if (codeLines != null)
         {
-          WriteFileWithBackup(codeLines);
+          WriteBackup();
+          RecreateFile(codeLines);
         }
         Reader.Close();
         var text = CreateRecord(codeGroup);
@@ -290,23 +292,13 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Sorts the file on unique values.</summary>
-    public void SortFile()
-    {
-      var codeGroups = Load();
-      codeGroups.LJCSortUnique();
-      WriteFileWithBackup(codeGroups);
-    }
-
+    // Recreates a file.
     /// <summary>
-    /// Write the text file from a CodeLines collection and create a backup.
+    /// Recreates a file.
     /// </summary>
     /// <param name="codeGroups">The CodeGroups collection</param>
-    public void WriteFileWithBackup(CodeGroups codeGroups)
+    public void RecreateFile(CodeGroups codeGroups)
     {
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
-      var backupFile = $"{fileName}Backup.txt";
-      CreateFile(backupFile, Load());
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -314,6 +306,23 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, codeGroups);
       Reader.LJCOpen();
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var codeGroups = Load();
+      codeGroups.LJCSortUnique();
+      WriteBackup();
+      RecreateFile(codeGroups);
+    }
+
+    /// <summary>Write a backup file.</summary>
+    public void WriteBackup()
+    {
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
     }
     #endregion
 

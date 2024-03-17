@@ -67,7 +67,8 @@ namespace ProjectFilesDAL
         var projects = LoadAllExcept(parentKey, name);
         if (projects != null)
         {
-          WriteFileWithBackup(projects);
+          WriteBackup();
+          RecreateFile(projects);
         }
         if (current != null)
         {
@@ -205,7 +206,8 @@ namespace ProjectFilesDAL
         var projects = LoadAllExcept(parentKey, project.Name);
         if (projects != null)
         {
-          WriteFileWithBackup(projects);
+          WriteBackup();
+          RecreateFile(projects);
         }
         Reader.Close();
         var text = CreateRecord(project);
@@ -313,23 +315,13 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Sorts the file on unique values.</summary>
-    public void SortFile()
-    {
-      var projects = Load();
-      projects.LJCSortUnique();
-      WriteFileWithBackup(projects);
-    }
-
+    // Recreates a file.
     /// <summary>
-    /// Write the text file from a Solutions collection and create a backup.
+    /// Recreates a file.
     /// </summary>
     /// <param name="projects">The Projects collection</param>
-    public void WriteFileWithBackup(Projects projects)
+    public void RecreateFile(Projects projects)
     {
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
-      var backupFile = $"{fileName}Backup.txt";
-      CreateFile(backupFile, Load());
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -337,6 +329,23 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, projects);
       Reader.LJCOpen();
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var projects = Load();
+      projects.LJCSortUnique();
+      WriteBackup();
+      RecreateFile(projects);
+    }
+
+    /// <summary>Writes a backup file.</summary>
+    public void WriteBackup()
+    {
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
     }
     #endregion
 

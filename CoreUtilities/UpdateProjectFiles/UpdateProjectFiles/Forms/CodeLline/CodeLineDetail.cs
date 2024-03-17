@@ -64,8 +64,11 @@ namespace UpdateProjectFiles
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.CodeLineManager;
-        mOriginalRecord = manager.Retrieve(LJCName);
+        // *** Begin *** Change - Data
+        //var manager = Managers.CodeLineManager;
+        //mOriginalRecord = manager.Retrieve(LJCName);
+        mOriginalRecord = CodeLines.LJCRetrieve(Name);
+        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -130,12 +133,22 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          manager.Update(LJCRecord);
+          // *** Begin *** Change - Data
+          //manager.Update(LJCRecord);
+          CodeLines.LJCUpdate(LJCRecord);
+          manager.WriteBackup();
+          manager.RecreateFile(CodeLines);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
-          manager.Add(LJCRecord.Name, LJCRecord.Path);
+          // *** Begin *** Change - Data
+          //manager.Add(LJCRecord.Name, LJCRecord.Path);
+          CodeLines.Add(LJCRecord.Name, LJCRecord.Path);
+          manager.WriteBackup();
+          manager.RecreateFile(CodeLines);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -197,6 +210,10 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesUpdateProjectFiles.Instance;
+      // *** Begin *** Add - Data
+      Data = values.Data;
+      CodeLines = Data.CodeLines;
+      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -271,10 +288,18 @@ namespace UpdateProjectFiles
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
+    // Gets or sets the CodeLines object.
+    // *** Next Statement *** Add - Data
+    private CodeLines CodeLines { get; set; }
+
+    // Gets or sets the Data object.
+    // *** Next Statement *** Add - Data
+    private Data Data { get; set; }
+
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
 
-    // The Managers object.
+    // Gets or sets the Managers object.
     private ManagersProjectFiles Managers { get; set; }
     #endregion
 
@@ -284,7 +309,6 @@ namespace UpdateProjectFiles
     internal event EventHandler<EventArgs> LJCChange;
 
     private CodeLine mOriginalRecord;
-    //private readonly ValuesUpdateProjectFiles mValues;
     #endregion
   }
 }

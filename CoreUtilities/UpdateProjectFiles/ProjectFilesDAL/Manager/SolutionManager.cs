@@ -68,7 +68,8 @@ namespace ProjectFilesDAL
         var solutions = LoadAllExcept(parentKey, name);
         if (solutions != null)
         {
-          WriteFileWithBackup(solutions);
+          WriteBackup();
+          RecreateFile(solutions);
         }
         if (current != null)
         {
@@ -201,10 +202,11 @@ namespace ProjectFilesDAL
         && NetString.HasValue(solution.Name))
       {
         var current = CurrentDataObject();
-        var Solutions = LoadAllExcept(parentKey, solution.Name);
-        if (Solutions != null)
+        var solutions = LoadAllExcept(parentKey, solution.Name);
+        if (solutions != null)
         {
-          WriteFileWithBackup(Solutions);
+          WriteBackup();
+          RecreateFile(solutions);
         }
         Reader.Close();
         var text = CreateRecord(solution);
@@ -311,23 +313,13 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Sorts the file on unique values.</summary>
-    public void SortFile()
-    {
-      var solutions = Load();
-      solutions.LJCSortUnique();
-      WriteFileWithBackup(solutions);
-    }
-
+    // Recreates a file.
     /// <summary>
-    /// Write the text file from a Solutions collection and create a backup.
+    /// Recreates a file.
     /// </summary>
     /// <param name="solutions">The Solutions collection</param>
-    public void WriteFileWithBackup(Solutions solutions)
+    public void RecreateFile(Solutions solutions)
     {
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
-      var backupFile = $"{fileName}Backup.txt";
-      CreateFile(backupFile, Load());
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -335,6 +327,23 @@ namespace ProjectFilesDAL
       }
       CreateFile(FileName, solutions);
       Reader.LJCOpen();
+    }
+
+    /// <summary>Sorts the file on unique values.</summary>
+    public void SortFile()
+    {
+      var solutions = Load();
+      solutions.LJCSortUnique();
+      WriteBackup();
+      RecreateFile(solutions);
+    }
+
+    /// <summary>Write the text file from a Solutions collection and create a backup.</summary>
+    public void WriteBackup()
+    {
+      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var backupFile = $"{fileName}Backup.txt";
+      CreateFile(backupFile, Load());
     }
     #endregion
 
