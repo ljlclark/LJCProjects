@@ -67,9 +67,12 @@ namespace UpdateProjectFiles
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.ProjectFileManager;
         var parentKey = GetParentKey();
-        mOriginalRecord = manager.Retrieve(parentKey, LJCSourceFileName);
+        // *** Begin *** Change - Data
+        //var manager = Managers.ProjectFileManager;
+        //mOriginalRecord = manager.Retrieve(parentKey, LJCSourceFileName);
+        mOriginalRecord = ProjectFiles.LJCRetrieve(parentKey);
+        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -150,14 +153,25 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          manager.Update(LJCRecord);
+          // *** Begin *** Change - Data
+          //manager.Update(LJCRecord);
+          ProjectFiles.LJCUpdate(LJCRecord);
+          //manager.WriteBackup();
+          manager.RecreateFile(ProjectFiles);
+          // *** End   *** Change - Data
         }
         else
         {
           var parentKey = GetParentKey();
           var sourceKey = GetSourceKey();
-          manager.Add(parentKey, sourceKey, LJCRecord.SourceFileName
-            , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
+          // *** Begin *** Change - Data
+          //manager.Add(parentKey, sourceKey, LJCRecord.SourceFileName
+          //  , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
+          ProjectFiles.Add(parentKey, sourceKey, LJCRecord.TargetFilePath
+            , LJCRecord.SourceFilePath);
+          //manager.WriteBackup();
+          manager.RecreateFile(ProjectFiles);
+          // *** End   *** Change - Data
         }
       }
       Cursor = Cursors.Default;
@@ -244,6 +258,10 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesUpdateProjectFiles.Instance;
+      // *** Begin *** Add - Data
+      Data = values.Data;
+      ProjectFiles = Data.ProjectFiles;
+      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -338,11 +356,19 @@ namespace UpdateProjectFiles
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
+    // Gets or sets the Data object.
+    // *** Next Statement *** Add - Data
+    private Data Data { get; set; }
+
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
 
     // The Managers object.
     private ManagersProjectFiles Managers { get; set; }
+
+    // Gets or sets the ProjectFiles object.
+    // *** Next Statement *** Add - Data
+    private ProjectFiles ProjectFiles { get; set; }
     #endregion
 
     #region Class Data

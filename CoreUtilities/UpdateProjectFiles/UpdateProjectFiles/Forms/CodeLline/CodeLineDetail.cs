@@ -136,7 +136,7 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           CodeLines.LJCUpdate(LJCRecord);
-          manager.WriteBackup();
+          //manager.WriteBackup();
           manager.RecreateFile(CodeLines);
           // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
@@ -146,7 +146,7 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Add(LJCRecord.Name, LJCRecord.Path);
           CodeLines.Add(LJCRecord.Name, LJCRecord.Path);
-          manager.WriteBackup();
+          //manager.WriteBackup();
           manager.RecreateFile(CodeLines);
           // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);

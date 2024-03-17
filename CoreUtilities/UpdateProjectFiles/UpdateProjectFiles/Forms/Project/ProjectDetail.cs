@@ -66,9 +66,12 @@ namespace UpdateProjectFiles
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.ProjectManager;
         var parentKey = GetParentKey();
-        mOriginalRecord = manager.Retrieve(parentKey, LJCName);
+        // *** Begin *** Change - Data
+        //var manager = Managers.ProjectManager;
+        //mOriginalRecord = manager.Retrieve(parentKey, LJCName);
+        mOriginalRecord = Projects.LJCRetrieve(parentKey, LJCName);
+        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -144,13 +147,23 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          manager.Update(LJCRecord);
+          // *** Begin *** Change - Data
+          //manager.Update(LJCRecord);
+          Projects.LJCUpdate(LJCRecord);
+          //manager.WriteBackup();
+          manager.RecreateFile(Projects);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
           var parentKey = GetParentKey();
-          manager.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
+          // *** Begin *** Change - Data
+          //manager.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
+          Projects.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
+          //manager.WriteBackup();
+          manager.RecreateFile(Projects);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -224,6 +237,10 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesUpdateProjectFiles.Instance;
+      // *** Begin *** Add - Data
+      Data = values.Data;
+      Projects = Data.Projects;
+      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -307,11 +324,19 @@ namespace UpdateProjectFiles
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
 
+    // Gets or sets the Data object.
+    // *** Next Statement *** Add - Data
+    private Data Data { get; set; }
+
     // Gets or sets the End Color.
     private Color EndColor { get; set; }
 
     // The Managers object.
     private ManagersProjectFiles Managers { get; set; }
+
+    // Gets or sets the Projects object.
+    // *** Next Statement *** Add - Data
+    private Projects Projects { get; set; }
     #endregion
 
     #region Class Data

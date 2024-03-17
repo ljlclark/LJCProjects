@@ -1,3 +1,2 @@
 CodeLine, Name, Path
 LJCProjectsDev, CoreAssemblies, CoreAssemblies
-LJCProjectsDev, ANewCodeGroup, NewPathUpdated

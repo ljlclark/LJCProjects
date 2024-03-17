@@ -51,7 +51,7 @@ namespace ProjectFilesDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public Solution Add(SolutionParentKey parentKey, string name
+    public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
       Solution retValue;
@@ -70,6 +70,7 @@ namespace ProjectFilesDAL
           CodeLine = parentKey.CodeLine,
           CodeGroup = parentKey.CodeGroup,
           Name = name,
+          Sequence = sequence,
           Path = path
         };
         Add(retValue);

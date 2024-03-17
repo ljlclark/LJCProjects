@@ -153,6 +153,11 @@
     <Content Include="bin\Debug\DataFiles\Project.txt" />
     <Content Include="bin\Debug\DataFiles\ProjectFile.txt" />
     <Content Include="bin\Debug\DataFiles\Solution.txt" />
+    <Content Include="bin\Debug\InitialData\CodeGroup.txt" />
+    <Content Include="bin\Debug\InitialData\CodeLine.txt" />
+    <Content Include="bin\Debug\InitialData\Project.txt" />
+    <Content Include="bin\Debug\InitialData\ProjectFile.txt" />
+    <Content Include="bin\Debug\InitialData\Solution.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProjectFilesDAL\ProjectFilesDAL.csproj">

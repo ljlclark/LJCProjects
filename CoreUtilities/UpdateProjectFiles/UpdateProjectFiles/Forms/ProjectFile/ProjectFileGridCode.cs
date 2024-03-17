@@ -31,8 +31,12 @@ namespace UpdateProjectFiles
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
+      // *** Begin *** Add - Data
+      Data = CodeList.Data;
+      ProjectFiles = Data.ProjectFiles;
+      // *** End   *** Add - Data
       Managers = CodeList.Managers;
-      FileManager = Managers.ProjectFileManager;
+      ProjectFileManager = Managers.ProjectFileManager;
     }
     #endregion
 
@@ -44,7 +48,10 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectFileGrid.LJCRowsClear();
 
-      var projectFiles = FileManager.Load(parentKey);
+      // *** Begin *** Change - Datas
+      //var projectFiles = ProjectFileManager.Load(parentKey);
+      var projectFiles = ProjectFiles.LJCLoad(parentKey);
+      // *** End   *** Change - Datas
       if (NetCommon.HasItems(projectFiles))
       {
         foreach (var projectFile in projectFiles)
@@ -141,7 +148,7 @@ namespace UpdateProjectFiles
       if (success)
       {
         // Data from items.
-        var name = row.LJCGetString("Name");
+        //var name = row.LJCGetString("Name");
         var parentKey = new ProjectFileParentKey()
         {
           CodeLine = parentRow.LJCGetString("CodeLineName"),
@@ -149,7 +156,12 @@ namespace UpdateProjectFiles
           Solution = parentRow.LJCGetString("SolutionName")
         };
 
-        FileManager.Delete(parentKey, name);
+        // *** Begin *** Change - Datas
+        //ProjectFileManager.Delete(parentKey, name);
+        ProjectFiles.LJCDelete(parentKey);
+        //ProjectFileManager.WriteBackup();
+        ProjectFileManager.RecreateFile(ProjectFiles);
+        // *** End   *** Change - Datas
       }
 
       if (success)
@@ -269,7 +281,7 @@ namespace UpdateProjectFiles
       if (0 == ProjectFileGrid.Columns.Count)
       {
         // Get the grid columns from the manager Data Definition.
-        var manager = FileManager;
+        var manager = ProjectFileManager;
         List<string> propertyNames = new List<string>()
         {
           "SourceCodeLine",
@@ -291,14 +303,22 @@ namespace UpdateProjectFiles
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }
 
+    // Gets or sets the Data object.
+    // *** Next Line *** Add - Data
+    private Data Data { get; set; }
+
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ProjectFileGrid { get; set; }
 
+    // Gets or sets the ProjectFiles collection.
+    // *** Next Line *** Add - Data
+    private ProjectFiles ProjectFiles { get; set; }
+
     // Gets or sets the Manager reference.
-    private ProjectFileManager FileManager { get; set; }
+    private ProjectFileManager ProjectFileManager { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ProjectGrid { get; set; }

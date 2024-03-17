@@ -141,10 +141,10 @@ namespace UpdateProjectFiles
         var codeLineName = parentRow.LJCGetString("Name");
         var name = row.LJCGetString("Name");
 
-        // *** Begin *** Change - Datas
+        // *** Begin *** Change - Data
         //CodeGroupManager.Delete(codeLineName, name);
         CodeGroups.LJCDelete(codeLineName, name);
-        CodeGroupManager.WriteBackup();
+        //CodeGroupManager.WriteBackup();
         CodeGroupManager.RecreateFile(CodeGroups);
         // *** End   *** Change - Datas
       }
@@ -269,7 +269,7 @@ namespace UpdateProjectFiles
     // *** Next Line *** Add - Data
     private CodeGroups CodeGroups { get; set; }
 
-    // Gets or sets the CodeLines Grid reference.
+    // Gets or sets the CodeLine Grid reference.
     private LJCDataGrid CodeLineGrid { get; set; }
 
     // Gets or sets the Manager reference.

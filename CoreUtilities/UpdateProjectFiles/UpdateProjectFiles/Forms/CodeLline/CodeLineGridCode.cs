@@ -137,7 +137,7 @@ namespace UpdateProjectFiles
         // *** Next Line *** Change - Datas
         //CodeLineManager.Delete(name);
         CodeLines.LJCDelete(name);
-        CodeLineManager.WriteBackup();
+        //CodeLineManager.WriteBackup();
         CodeLineManager.RecreateFile(CodeLines);
       }
 

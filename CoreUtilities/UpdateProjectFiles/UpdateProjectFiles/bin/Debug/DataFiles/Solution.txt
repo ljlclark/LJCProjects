@@ -1,3 +1,4 @@
 CodeLine, CodeGroup, Name, Sequence, Path
-LJCProjectsDev, CoreAssemblies, LJCNetCommon, 1, LJCNetCommon
 LJCProjectsDev, CoreAssemblies, LJCDataAccessConfig, 2, LJCDataAccessConfig
+LJCProjectsDev, CoreAssemblies, LJCNetCommonX, 1, LJCNetCommonX
+LJCProjectsDev, CoreAssemblies, LJCNetCommon, 1, LJCNetCommon

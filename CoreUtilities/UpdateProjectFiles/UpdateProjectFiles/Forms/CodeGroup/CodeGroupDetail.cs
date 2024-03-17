@@ -64,8 +64,11 @@ namespace UpdateProjectFiles
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.CodeGroupManager;
-        mOriginalRecord = manager.Retrieve(LJCCodeLine, LJCName);
+        // *** Begin *** Change - Data
+        //var manager = Managers.CodeGroupManager;
+        //mOriginalRecord = manager.Retrieve(LJCCodeLine, LJCName);
+        mOriginalRecord = CodeGroups.LJCRetrieve(LJCCodeLine, LJCName);
+        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }
       else
@@ -135,12 +138,22 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          manager.Update(LJCRecord);
+          // *** Begin *** Change - Data
+          //manager.Update(LJCRecord);
+          CodeGroups.LJCUpdate(LJCRecord);
+          //manager.WriteBackup();
+          manager.RecreateFile(CodeGroups);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
-          manager.Add(LJCRecord.CodeLine, LJCRecord.Name, LJCRecord.Path);
+          // *** Begin *** Change - Data
+          //manager.Add(LJCRecord.CodeLine, LJCRecord.Name, LJCRecord.Path);
+          CodeGroups.Add(LJCRecord.CodeLine, LJCRecord.Name, LJCRecord.Path);
+          //manager.WriteBackup();
+          manager.RecreateFile(CodeGroups);
+          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -202,6 +215,10 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesUpdateProjectFiles.Instance;
+      // *** Begin *** Add - Data
+      Data = values.Data;
+      CodeGroups = Data.CodeGroups;
+      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -278,6 +295,14 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
+
+    // Gets or sets the CodeGroups object.
+    // *** Next Statement *** Add - Data
+    private CodeGroups CodeGroups { get; set; }
+
+    // Gets or sets the Data object.
+    // *** Next Statement *** Add - Data
+    private Data Data { get; set; }
 
     // Gets or sets the End Color.
     private Color EndColor { get; set; }

@@ -1,2 +1,2 @@
-﻿TargetCodeLine, TargetCodeGroup, TargetSolution, TargetProject, SourceFileName, SourceCodeLine, SourceCodeGroup, SourceSolution, SourceProject, SourceFilePath, TargetFilePath
-LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, LJCNetCommon.dll, LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, bin\Debug, External
+TargetCodeLine, TargetCodeGroup, TargetSolution, TargetProject, SourceFileName, SourceCodeLine, SourceCodeGroup, SourceSolution, SourceProject, sourceFilePath, targetFilePath
+LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, LJCNetCommon.dll, LJCProjectsDev, CoreAssemblies, LJCProjectsDev, LJCNetCommon, bin\Debug, External
