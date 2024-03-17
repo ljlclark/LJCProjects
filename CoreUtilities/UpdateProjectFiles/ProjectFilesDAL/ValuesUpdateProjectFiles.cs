@@ -1,4 +1,7 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// ValuesUpdateProjectFiles.cs
+using LJCNetCommon;
 using System.Drawing;
 using System.IO;
 
@@ -56,6 +59,7 @@ namespace ProjectFilesDAL
       BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
       EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
       Managers = new ManagersProjectFiles();
+      Data = new Data();
     }
     #endregion
 
@@ -64,7 +68,10 @@ namespace ProjectFilesDAL
     /// <summary>The begin gradient color.</summary>
     public Color BeginColor { get; private set; }
 
-    /// <summary>Gets or sets the config FileSpec.</summary>
+    /// <summary>Gets the Data class reference.</summary>
+    public Data Data { get; private set; }
+
+    /// <summary>Gets the config FileSpec.</summary>
     public string FileSpec { get; private set; }
 
     /// <summary>The end gradient color.</summary>
@@ -76,11 +83,11 @@ namespace ProjectFilesDAL
       get { return mInstance; }
     }
 
-    /// <summary>Gets or sets the Managers class reference.</summary>
-    public ManagersProjectFiles Managers { get; set; }
+    /// <summary>Gets the Managers class reference.</summary>
+    public ManagersProjectFiles Managers { get; private set; }
 
     // Gets or sets the AppSettings value.
-    internal AppSettings AppSettings { get; set; }
+    internal AppSettings AppSettings { get; private set; }
     #endregion
 
     #region Class Data

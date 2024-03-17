@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data.cs" />
     <Compile Include="Data\CodeGroup.cs" />
     <Compile Include="Data\CodeGroups.cs" />
     <Compile Include="Data\CodeLine.cs" />
