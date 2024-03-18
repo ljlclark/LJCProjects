@@ -46,7 +46,8 @@ namespace UpdateProjectFiles
           break;
 
         case Change.Project:
-          mProjectFileGridCode.DataRetrieve();
+          var projectFileParentKey = GetProjectFileParentKey();
+          mProjectFileGridCode.DataRetrieve(projectFileParentKey);
           break;
 
         case Change.ProjectFile:
@@ -269,23 +270,25 @@ namespace UpdateProjectFiles
       return retValue;
     }
 
-    // Creates the Solution parent key.
-    private SolutionParentKey GetSolutionParentKey()
+    // Creates the ProjectFile parent key.
+    private ProjectFileParentKey GetProjectFileParentKey()
     {
-      SolutionParentKey retValue = null;
+      ProjectFileParentKey retValue = null;
 
-      if (CodeGroupGrid.CurrentRow is LJCGridRow row)
+      if (ProjectGrid.CurrentRow is LJCGridRow row)
       {
-        retValue = new SolutionParentKey()
+        retValue = new ProjectFileParentKey()
         {
           CodeLine = row.LJCGetString("CodeLine"),
-          CodeGroup = row.LJCGetString("CodeGroup")
+          CodeGroup = row.LJCGetString("CodeGroup"),
+          Solution = row.LJCGetString("Solution"),
+          Project = row.LJCGetString("Name")
         };
       }
       return retValue;
     }
 
-    // Creates the Solution parent key.
+    // Creates the Project parent key.
     private ProjectParentKey GetProjectParentKey()
     {
       ProjectParentKey retValue = null;
@@ -297,6 +300,22 @@ namespace UpdateProjectFiles
           CodeLine = row.LJCGetString("CodeLine"),
           CodeGroup = row.LJCGetString("CodeGroup"),
           Solution = row.LJCGetString("Name")
+        };
+      }
+      return retValue;
+    }
+
+    // Creates the Solution parent key.
+    private SolutionParentKey GetSolutionParentKey()
+    {
+      SolutionParentKey retValue = null;
+
+      if (CodeGroupGrid.CurrentRow is LJCGridRow row)
+      {
+        retValue = new SolutionParentKey()
+        {
+          CodeLine = row.LJCGetString("CodeLine"),
+          CodeGroup = row.LJCGetString("Name")
         };
       }
       return retValue;

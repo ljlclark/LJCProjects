@@ -232,6 +232,7 @@ namespace UpdateProjectFiles
           Name = row.LJCGetString("Name"),
         };
       }
+      // ToDo: Include ParentKey.
       DataRetrieve();
 
       // Select the original row.
