@@ -52,8 +52,8 @@ namespace ProjectFilesDAL
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public ProjectFile Add(ProjectFileParentKey parentKey
-      , ProjectFileParentKey sourceKey, string targetFilePath
-      , string sourceFilePath)
+      , ProjectFileParentKey sourceKey, string sourceFileName
+      , string targetFilePath, string sourceFilePath)
     {
       ProjectFile retValue;
 
@@ -63,7 +63,7 @@ namespace ProjectFilesDAL
       NetString.AddMissingArgument(message, sourceKey);
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCRetrieve(parentKey);
+      retValue = LJCRetrieve(parentKey, sourceFileName);
       if (null == retValue)
       {
         retValue = new ProjectFile()
@@ -90,9 +90,9 @@ namespace ProjectFilesDAL
     /// Removes an item by unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
-    public void LJCDelete(ProjectFileParentKey parentKey)
+    public void LJCDelete(ProjectFileParentKey parentKey, string sourceFileName)
     {
-      ProjectFile item = LJCRetrieve(parentKey);
+      ProjectFile item = LJCRetrieve(parentKey, sourceFileName);
       if (item != null)
       {
         Remove(item);
@@ -121,8 +121,9 @@ namespace ProjectFilesDAL
     /// Retrieves the collection element with unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="sourceFileName">The SourceFile name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public ProjectFile LJCRetrieve(ProjectFileParentKey parentKey)
+    public ProjectFile LJCRetrieve(ProjectFileParentKey parentKey, string sourceFileName)
     {
       ProjectFile retValue = null;
 
@@ -133,7 +134,7 @@ namespace ProjectFilesDAL
         TargetCodeGroup = parentKey.CodeGroup,
         TargetSolution = parentKey.Solution,
         TargetProject = parentKey.Project,
-        SourceFileName = parentKey.SourceFileName
+        SourceFileName = sourceFileName
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -153,7 +154,7 @@ namespace ProjectFilesDAL
       if (NetCommon.HasItems(this))
       {
         var parentKey = GetParentKey(projectFile);
-        var item = LJCRetrieve(parentKey);
+        var item = LJCRetrieve(parentKey, projectFile.SourceFileName);
         if (item != null)
         {
           item.SourceCodeLine = projectFile.SourceCodeLine;

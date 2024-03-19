@@ -71,7 +71,8 @@ namespace UpdateProjectFiles
         // *** Begin *** Change - Data
         //var manager = Managers.ProjectFileManager;
         //mOriginalRecord = manager.Retrieve(parentKey, LJCSourceFileName);
-        mOriginalRecord = ProjectFiles.LJCRetrieve(parentKey);
+        mOriginalRecord = ProjectFiles.LJCRetrieve(parentKey
+          , LJCSourceFileName);
         // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
       }
@@ -167,8 +168,8 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Add(parentKey, sourceKey, LJCRecord.SourceFileName
           //  , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
-          ProjectFiles.Add(parentKey, sourceKey, LJCRecord.TargetFilePath
-            , LJCRecord.SourceFilePath);
+          ProjectFiles.Add(parentKey, sourceKey, LJCSourceFileName
+            , LJCRecord.TargetFilePath, LJCRecord.SourceFilePath);
           //manager.WriteBackup();
           manager.RecreateFile(ProjectFiles);
           // *** End   *** Change - Data

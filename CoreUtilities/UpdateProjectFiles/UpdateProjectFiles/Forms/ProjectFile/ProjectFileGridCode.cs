@@ -148,7 +148,7 @@ namespace UpdateProjectFiles
       if (success)
       {
         // Data from items.
-        //var name = row.LJCGetString("Name");
+        var name = row.LJCGetString("Name");
         var parentKey = new ProjectFileParentKey()
         {
           CodeLine = parentRow.LJCGetString("CodeLineName"),
@@ -158,7 +158,7 @@ namespace UpdateProjectFiles
 
         // *** Begin *** Change - Datas
         //ProjectFileManager.Delete(parentKey, name);
-        ProjectFiles.LJCDelete(parentKey);
+        ProjectFiles.LJCDelete(parentKey, name);
         //ProjectFileManager.WriteBackup();
         ProjectFileManager.RecreateFile(ProjectFiles);
         // *** End   *** Change - Datas
