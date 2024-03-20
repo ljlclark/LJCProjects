@@ -227,20 +227,21 @@ namespace UpdateProjectFiles
     {
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectFile record = null;
-      if (ProjectGrid.CurrentRow is LJCGridRow parentRow
+      if (ProjectGrid.CurrentRow is LJCGridRow _
         && ProjectFileGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
+        var parentKey = CodeList.GetProjectFileParentKey();
         record = new ProjectFile()
         {
-          TargetCodeLine = parentRow.LJCGetString("TargetCodeLine"),
-          TargetCodeGroup = parentRow.LJCGetString("TargetCodeGroup"),
-          TargetSolution = parentRow.LJCGetString("TargetSolution"),
-          TargetProject = parentRow.LJCGetString("TargetProject"),
+          TargetCodeLine = parentKey.CodeLine,
+          TargetCodeGroup = parentKey.CodeGroup,
+          TargetSolution = parentKey.Solution,
+          TargetProject = parentKey.Project,
           SourceFileName = row.LJCGetString("SourceFileName"),
         };
+        DataRetrieve(parentKey);
       }
-      DataRetrieve();
 
       // Select the original row.
       if (record != null)

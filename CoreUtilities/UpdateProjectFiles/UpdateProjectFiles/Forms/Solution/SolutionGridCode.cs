@@ -151,9 +151,14 @@ namespace UpdateProjectFiles
         // *** Begin *** Change - Data
         //SolutionManager.Delete(parentKey, name);
         Solutions.LJCDelete(parentKey, name);
-        //SolutionManager.WriteBackup();
         SolutionManager.RecreateFile(Solutions);
         // *** End   *** Change - Datas
+      }
+
+      if (success)
+      {
+        SolutionGrid.Rows.Remove(row);
+        CodeList.TimedChange(Change.Solution);
       }
     }
 
@@ -205,18 +210,19 @@ namespace UpdateProjectFiles
     {
       CodeList.Cursor = Cursors.WaitCursor;
       Solution record = null;
-      if (CodeGroupGrid.CurrentRow is LJCGridRow parentRow
+      if (CodeGroupGrid.CurrentRow is LJCGridRow _
         && SolutionGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
+        var parentKey = CodeList.GetSolutionParentKey();
         record = new Solution()
         {
-          CodeLine = parentRow.LJCGetString("CodeLine"),
-          CodeGroup = parentRow.LJCGetString("Name"),
+          CodeLine = parentKey.CodeLine,
+          CodeGroup = parentKey.CodeGroup,
           Name = row.LJCGetString("Name"),
         };
+        DataRetrieve(parentKey);
       }
-      DataRetrieve();
 
       // Select the original row.
       if (record != null)

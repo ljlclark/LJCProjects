@@ -101,11 +101,16 @@ namespace ProjectFilesDAL
     /// <returns>The collection object.</returns>
     public Projects LJCLoad(ProjectParentKey parentKey)
     {
-      var items = FindAll(x =>
-        x.CodeLine == parentKey.CodeLine
-        && x.CodeGroup == parentKey.CodeGroup
-        && x.Solution == parentKey.Solution);
-      var retValue = GetCollection(items);
+      Projects retValue = null;
+
+      if (parentKey != null)
+      {
+        var items = FindAll(x =>
+          x.CodeLine == parentKey.CodeLine
+          && x.CodeGroup == parentKey.CodeGroup
+          && x.Solution == parentKey.Solution);
+        retValue = GetCollection(items);
+      }
       return retValue;
     }
 

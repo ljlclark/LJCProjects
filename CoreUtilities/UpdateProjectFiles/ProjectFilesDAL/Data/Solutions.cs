@@ -101,10 +101,15 @@ namespace ProjectFilesDAL
     /// <returns>The collection object.</returns>
     public Solutions LJCLoad(SolutionParentKey parentKey)
     {
-      var items = FindAll(x =>
-        x.CodeLine == parentKey.CodeLine
-        && x.CodeGroup == parentKey.CodeGroup);
-      var retValue = GetCollection(items);
+      Solutions retValue = null;
+
+      if (parentKey != null)
+      {
+        var items = FindAll(x =>
+          x.CodeLine == parentKey.CodeLine
+          && x.CodeGroup == parentKey.CodeGroup);
+        retValue = GetCollection(items);
+      }
       return retValue;
     }
 
@@ -190,13 +195,28 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    /// <summary>Sorts on Sequence.</summary>
+    /// <param name="comparer">The Comparer object.</param>
+    public void LJCSortSequence(SolutionSequence comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.Sequence) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.Sequence;
+      }
+    }
+
     /// <summary>Sorts on Unique values.</summary>
     public void LJCSortUnique()
     {
-      if (Count != mPrevCount)
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.Unique) != 0)
       {
         mPrevCount = Count;
         Sort();
+        mSortType = SortType.Unique;
       }
     }
     #endregion
@@ -204,6 +224,13 @@ namespace ProjectFilesDAL
     #region Class Data
 
     private int mPrevCount;
+    private SortType mSortType;
+
+    private enum SortType
+    {
+      Unique,
+      Sequence
+    }
     #endregion
   }
 }

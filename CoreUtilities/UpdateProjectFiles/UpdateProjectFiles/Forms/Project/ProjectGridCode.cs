@@ -220,20 +220,20 @@ namespace UpdateProjectFiles
     {
       CodeList.Cursor = Cursors.WaitCursor;
       Project record = null;
-      if (SolutionGrid.CurrentRow is LJCGridRow parentRow
+      if (SolutionGrid.CurrentRow is LJCGridRow _
         && ProjectGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
+        var parentKey = CodeList.GetProjectParentKey();
         record = new Project()
         {
-          CodeLine = parentRow.LJCGetString("CodeLine"),
-          CodeGroup = parentRow.LJCGetString("CodeGroup"),
-          Solution = parentRow.LJCGetString("Name"),
+          CodeLine = parentKey.CodeLine,
+          CodeGroup = parentKey.CodeGroup,
+          Solution = parentKey.Solution,
           Name = row.LJCGetString("Name"),
         };
+        DataRetrieve(parentKey);
       }
-      // ToDo: Include ParentKey.
-      DataRetrieve();
 
       // Select the original row.
       if (record != null)

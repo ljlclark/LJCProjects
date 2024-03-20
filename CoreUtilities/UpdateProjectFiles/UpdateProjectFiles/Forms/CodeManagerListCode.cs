@@ -256,10 +256,10 @@ namespace UpdateProjectFiles
     #endregion
     #endregion
 
-    #region Private Methods
+    #region Methods
 
     // Creates the CodeGroup parent key.
-    private string GetCodeGroupParentKey()
+    internal string GetCodeGroupParentKey()
     {
       string retValue = null;
 
@@ -271,7 +271,7 @@ namespace UpdateProjectFiles
     }
 
     // Creates the ProjectFile parent key.
-    private ProjectFileParentKey GetProjectFileParentKey()
+    internal ProjectFileParentKey GetProjectFileParentKey()
     {
       ProjectFileParentKey retValue = null;
 
@@ -289,7 +289,7 @@ namespace UpdateProjectFiles
     }
 
     // Creates the Project parent key.
-    private ProjectParentKey GetProjectParentKey()
+    internal ProjectParentKey GetProjectParentKey()
     {
       ProjectParentKey retValue = null;
 
@@ -306,7 +306,7 @@ namespace UpdateProjectFiles
     }
 
     // Creates the Solution parent key.
-    private SolutionParentKey GetSolutionParentKey()
+    internal SolutionParentKey GetSolutionParentKey()
     {
       SolutionParentKey retValue = null;
 

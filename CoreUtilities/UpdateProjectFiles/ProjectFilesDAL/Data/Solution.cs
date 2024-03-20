@@ -1,7 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Solution.cs
+using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectFilesDAL
 {
@@ -38,8 +40,7 @@ namespace ProjectFilesDAL
           retValue = CodeGroup.CompareTo(other.CodeGroup);
           if (0 == retValue)
           {
-            // Not case sensitive.
-            retValue = Sequence.CompareTo(other.Sequence);
+            retValue = Name.CompareTo(other.Name);
           }
         }
       }
@@ -73,5 +74,33 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the CodeGroup name.</summary>
     public string CodeGroup { get; set; }
+  }
+
+  /// <summary>Sort and search on Name value.</summary>
+  public class SolutionSequence : IComparer<Solution>
+  {
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int Compare(Solution x, Solution y)
+    {
+      int retValue;
+
+      retValue = NetCommon.CompareNull(x, y);
+      if (-2 == retValue)
+      {
+        // Case sensitive.
+        retValue = x.CodeLine.CompareTo(y.CodeLine);
+        if (0 == retValue)
+        {
+          retValue = x.CodeGroup.CompareTo(y.CodeGroup);
+          if (0 == retValue)
+          {
+            // Not case sensitive.
+            retValue = x.Sequence.CompareTo(y.Sequence);
+          }
+        }
+      }
+      return retValue;
+    }
   }
 }

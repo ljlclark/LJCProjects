@@ -107,12 +107,17 @@ namespace ProjectFilesDAL
     /// <returns>The collection object.</returns>
     public ProjectFiles LJCLoad(ProjectFileParentKey parentKey)
     {
-      var items = FindAll(x =>
-        x.TargetCodeLine == parentKey.CodeLine
-        && x.TargetCodeGroup == parentKey.CodeGroup
-        && x.TargetSolution == parentKey.Solution
-        && x.TargetProject == parentKey.Project);
-      var retValue = GetCollection(items);
+      ProjectFiles retValue = null;
+
+      if (parentKey != null)
+      {
+        var items = FindAll(x =>
+          x.TargetCodeLine == parentKey.CodeLine
+          && x.TargetCodeGroup == parentKey.CodeGroup
+          && x.TargetSolution == parentKey.Solution
+          && x.TargetProject == parentKey.Project);
+        retValue = GetCollection(items);
+      }
       return retValue;
     }
 

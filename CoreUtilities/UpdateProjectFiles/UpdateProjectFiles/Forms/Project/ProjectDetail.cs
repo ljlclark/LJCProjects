@@ -73,6 +73,10 @@ namespace UpdateProjectFiles
         mOriginalRecord = Projects.LJCRetrieve(parentKey, LJCName);
         // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
+
+        NameText.ReadOnly = true;
+        PathText.Select();
+        PathText.Select(0, 0);
       }
       else
       {
@@ -82,9 +86,10 @@ namespace UpdateProjectFiles
         CodeLineText.Text = LJCCodeLine;
         CodeGroupText.Text = LJCCodeGroup;
         SolutionText.Text = LJCSolution;
+
+        NameText.Select();
+        NameText.Select(0, 0);
       }
-      NameText.Select();
-      NameText.Select(0, 0);
       Cursor = Cursors.Default;
     }
 
@@ -117,7 +122,10 @@ namespace UpdateProjectFiles
       }
 
       // In control order.
-      retValue.Name = NameText.Text.Trim();
+      if (!LJCIsUpdate)
+      {
+        retValue.Name = NameText.Text.Trim();
+      }
       retValue.Path = FormCommon.SetString(PathText.Text);
 
       // Get Reference key values.
@@ -150,7 +158,6 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           Projects.LJCUpdate(LJCRecord);
-          //manager.WriteBackup();
           manager.RecreateFile(Projects);
           // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
@@ -161,7 +168,6 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
           Projects.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
-          //manager.WriteBackup();
           manager.RecreateFile(Projects);
           // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);

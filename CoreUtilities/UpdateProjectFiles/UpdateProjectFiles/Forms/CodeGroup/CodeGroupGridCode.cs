@@ -200,17 +200,18 @@ namespace UpdateProjectFiles
     {
       CodeList.Cursor = Cursors.WaitCursor;
       CodeGroup record = null;
-      if (CodeLineGrid.CurrentRow is LJCGridRow parentRow
+      if (CodeLineGrid.CurrentRow is LJCGridRow _
         && CodeGroupGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
+        var parentKey = CodeList.GetCodeGroupParentKey();
         record = new CodeGroup()
         {
-          CodeLine = parentRow.LJCGetString("Name"),
+          CodeLine = parentKey,
           Name = row.LJCGetString("Name"),
         };
+        DataRetrieve(parentKey);
       }
-      DataRetrieve();
 
       // Select the original row.
       if (record != null)

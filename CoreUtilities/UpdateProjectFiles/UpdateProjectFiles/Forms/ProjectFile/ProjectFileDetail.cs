@@ -75,6 +75,10 @@ namespace UpdateProjectFiles
           , LJCSourceFileName);
         // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
+
+        SourceFileNameText.ReadOnly = true;
+        SourceCodeLineText.Select();
+        SourceCodeLineText.Select(0, 0);
       }
       else
       {
@@ -85,9 +89,10 @@ namespace UpdateProjectFiles
         TargetCodeGroupText.Text = LJCTargetGroup;
         TargetSolutionText.Text = LJCTargetSolution;
         TargetProjectText.Text = LJCTargetProject;
+
+        SourceFileNameText.Select();
+        SourceFileNameText.Select(0, 0);
       }
-      SourceFileNameText.Select();
-      SourceFileNameText.Select(0, 0);
       Cursor = Cursors.Default;
     }
 
@@ -126,11 +131,16 @@ namespace UpdateProjectFiles
       }
 
       // In control order.
-      retValue.SourceFileName = SourceFileNameText.Text.Trim();
+      if (!LJCIsUpdate)
+      {
+        retValue.SourceFileName = SourceFileNameText.Text.Trim();
+      }
       retValue.SourceCodeLine = SourceCodeLineText.Text.Trim();
       retValue.SourceCodeGroup = SourceCodeGroupText.Text.Trim();
       retValue.SourceSolution = SourceCodeLineText.Text.Trim();
       retValue.SourceProject = SourceProjectText.Text.Trim();
+      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
+      retValue.SourceFilePath = SourceFilePathText.Text.Trim();
 
       // Get Reference key values.
       retValue.TargetCodeLine = LJCTargetLine;
@@ -157,7 +167,6 @@ namespace UpdateProjectFiles
           // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           ProjectFiles.LJCUpdate(LJCRecord);
-          //manager.WriteBackup();
           manager.RecreateFile(ProjectFiles);
           // *** End   *** Change - Data
         }
@@ -170,7 +179,6 @@ namespace UpdateProjectFiles
           //  , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
           ProjectFiles.Add(parentKey, sourceKey, LJCSourceFileName
             , LJCRecord.TargetFilePath, LJCRecord.SourceFilePath);
-          //manager.WriteBackup();
           manager.RecreateFile(ProjectFiles);
           // *** End   *** Change - Data
         }

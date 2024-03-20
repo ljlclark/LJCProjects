@@ -97,8 +97,13 @@ namespace ProjectFilesDAL
     /// <returns>The collection object.</returns>
     public CodeGroups LJCLoad(string codeLine)
     {
-      var items = FindAll(x => x.CodeLine == codeLine);
-      var retValue = GetCollection(items);
+      CodeGroups retValue = null;
+
+      if (NetString.HasValue(codeLine))
+      {
+        var items = FindAll(x => x.CodeLine == codeLine);
+        retValue = GetCollection(items);
+      }
       return retValue;
     }
 
