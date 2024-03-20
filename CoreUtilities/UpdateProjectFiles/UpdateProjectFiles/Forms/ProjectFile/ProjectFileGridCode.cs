@@ -204,10 +204,10 @@ namespace UpdateProjectFiles
       if (ProjectGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
-        var codeLineName = parentRow.LJCGetString("CodeLineName");
-        var codeGroupName = parentRow.LJCGetString("CodeGroupName");
-        var solutionName = parentRow.LJCGetString("SolutionName");
-        var projectName = parentRow.LJCGetString("projectsName");
+        var codeLineName = parentRow.LJCGetString("CodeLine");
+        var codeGroupName = parentRow.LJCGetString("CodeGroup");
+        var solutionName = parentRow.LJCGetString("Solution");
+        var projectName = parentRow.LJCGetString("Name");
 
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectFileDetail()
