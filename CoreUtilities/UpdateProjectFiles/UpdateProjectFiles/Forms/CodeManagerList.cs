@@ -139,6 +139,18 @@ namespace UpdateProjectFiles
     {
       mSolutionGridCode.DoRefresh();
     }
+
+    // Clears the solution dependencies
+    private void SolutionClear_Click(object sender, System.EventArgs e)
+    {
+      mSolutionGridCode.ClearDependencies();
+    }
+
+    // Updates the solution dependencies.
+    private void SolutionUpdate_Click(object sender, System.EventArgs e)
+    {
+      mSolutionGridCode.UpdateDependencies();
+    }
     #endregion
 
     #region Project
@@ -165,6 +177,18 @@ namespace UpdateProjectFiles
     private void ProjectRefresh_Click(object sender, System.EventArgs e)
     {
       mProjectGridCode.DoRefresh();
+    }
+
+    // Clears the project dependencies
+    private void ProjectClear_Click(object sender, System.EventArgs e)
+    {
+      mProjectGridCode.ClearDependencies();
+    }
+
+    // Updates the project dependencies.
+    private void ProjectUpdate_Click(object sender, System.EventArgs e)
+    {
+      mProjectGridCode.UpdateDependencies();
     }
     #endregion
 
@@ -598,6 +622,7 @@ namespace UpdateProjectFiles
       ProjectFileGrid.LJCAllowSelectionChange = true;
     }
     #endregion
+
     #endregion
   }
 }

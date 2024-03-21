@@ -300,7 +300,7 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Data object.
     // *** Next Statement *** Add - Data
-    private Data Data { get; set; }
+    private ProjectFilesData Data { get; set; }
 
     // Gets or sets the End Color.
     private Color EndColor { get; set; }

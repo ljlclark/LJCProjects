@@ -75,6 +75,9 @@
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.SolutionRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+      this.SolutionClear = new System.Windows.Forms.ToolStripMenuItem();
+      this.SolutionUpdate = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.SolutionExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ProjectMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -103,6 +106,9 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectClear = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectUpdate = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -550,23 +556,26 @@
             this.toolStripSeparator4,
             this.SolutionRefresh,
             this.toolStripSeparator5,
+            this.SolutionClear,
+            this.SolutionUpdate,
+            this.toolStripSeparator1,
             this.SolutionExit});
       this.SolutionMenu.Name = "AssemblyMenu";
-      this.SolutionMenu.Size = new System.Drawing.Size(201, 214);
+      this.SolutionMenu.Size = new System.Drawing.Size(259, 284);
       this.SolutionMenu.Text = "Assembly Group Menu";
       // 
       // SolutionHeading
       // 
       this.SolutionHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.SolutionHeading.Name = "SolutionHeading";
-      this.SolutionHeading.Size = new System.Drawing.Size(200, 32);
+      this.SolutionHeading.Size = new System.Drawing.Size(258, 32);
       this.SolutionHeading.Text = "Solution Menu";
       // 
       // SolutionNew
       // 
       this.SolutionNew.Name = "SolutionNew";
       this.SolutionNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.SolutionNew.Size = new System.Drawing.Size(200, 32);
+      this.SolutionNew.Size = new System.Drawing.Size(258, 32);
       this.SolutionNew.Text = "&New";
       this.SolutionNew.Click += new System.EventHandler(this.SolutionNew_Click);
       // 
@@ -574,45 +583,64 @@
       // 
       this.SolutionEdit.Name = "SolutionEdit";
       this.SolutionEdit.ShortcutKeyDisplayString = "ENTER";
-      this.SolutionEdit.Size = new System.Drawing.Size(200, 32);
+      this.SolutionEdit.Size = new System.Drawing.Size(258, 32);
       this.SolutionEdit.Text = "&Edit";
       this.SolutionEdit.Click += new System.EventHandler(this.SolutionEdit_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(255, 6);
       // 
       // SolutionDelete
       // 
       this.SolutionDelete.Name = "SolutionDelete";
       this.SolutionDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.SolutionDelete.Size = new System.Drawing.Size(200, 32);
+      this.SolutionDelete.Size = new System.Drawing.Size(258, 32);
       this.SolutionDelete.Text = "&Delete";
       this.SolutionDelete.Click += new System.EventHandler(this.SolutionDelete_Click);
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(255, 6);
       // 
       // SolutionRefresh
       // 
       this.SolutionRefresh.Name = "SolutionRefresh";
       this.SolutionRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.SolutionRefresh.Size = new System.Drawing.Size(200, 32);
+      this.SolutionRefresh.Size = new System.Drawing.Size(258, 32);
       this.SolutionRefresh.Text = "&Refresh";
       this.SolutionRefresh.Click += new System.EventHandler(this.SolutionRefresh_Click);
       // 
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator5.Size = new System.Drawing.Size(255, 6);
+      // 
+      // SolutionClear
+      // 
+      this.SolutionClear.Name = "SolutionClear";
+      this.SolutionClear.Size = new System.Drawing.Size(258, 32);
+      this.SolutionClear.Text = "Clear Dependencies";
+      this.SolutionClear.Click += new System.EventHandler(this.SolutionClear_Click);
+      // 
+      // SolutionUpdate
+      // 
+      this.SolutionUpdate.Name = "SolutionUpdate";
+      this.SolutionUpdate.Size = new System.Drawing.Size(258, 32);
+      this.SolutionUpdate.Text = "Update Dependencies";
+      this.SolutionUpdate.Click += new System.EventHandler(this.SolutionUpdate_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(255, 6);
       // 
       // SolutionExit
       // 
       this.SolutionExit.Name = "SolutionExit";
-      this.SolutionExit.Size = new System.Drawing.Size(200, 32);
+      this.SolutionExit.Size = new System.Drawing.Size(258, 32);
       this.SolutionExit.Text = "E&xit";
       // 
       // ProjectGrid
@@ -667,23 +695,26 @@
             this.toolStripSeparator12,
             this.ProjectDelete,
             this.toolStripSeparator13,
-            this.ProjectRefresh});
+            this.ProjectRefresh,
+            this.toolStripSeparator14,
+            this.ProjectClear,
+            this.ProjectUpdate});
       this.ProjectMenu.Name = "AssemblyMenu";
-      this.ProjectMenu.Size = new System.Drawing.Size(189, 176);
+      this.ProjectMenu.Size = new System.Drawing.Size(259, 279);
       this.ProjectMenu.Text = "Assembly Group Menu";
       // 
       // ProjectHeading
       // 
       this.ProjectHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.ProjectHeading.Name = "ProjectHeading";
-      this.ProjectHeading.Size = new System.Drawing.Size(188, 32);
+      this.ProjectHeading.Size = new System.Drawing.Size(258, 32);
       this.ProjectHeading.Text = "Project Menu";
       // 
       // ProjectNew
       // 
       this.ProjectNew.Name = "ProjectNew";
       this.ProjectNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.ProjectNew.Size = new System.Drawing.Size(188, 32);
+      this.ProjectNew.Size = new System.Drawing.Size(258, 32);
       this.ProjectNew.Text = "&New";
       this.ProjectNew.Click += new System.EventHandler(this.ProjectNew_Click);
       // 
@@ -691,33 +722,33 @@
       // 
       this.ProjectEdit.Name = "ProjectEdit";
       this.ProjectEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ProjectEdit.Size = new System.Drawing.Size(188, 32);
+      this.ProjectEdit.Size = new System.Drawing.Size(258, 32);
       this.ProjectEdit.Text = "&Edit";
       this.ProjectEdit.Click += new System.EventHandler(this.ProjectEdit_Click);
       // 
       // toolStripSeparator12
       // 
       this.toolStripSeparator12.Name = "toolStripSeparator12";
-      this.toolStripSeparator12.Size = new System.Drawing.Size(185, 6);
+      this.toolStripSeparator12.Size = new System.Drawing.Size(255, 6);
       // 
       // ProjectDelete
       // 
       this.ProjectDelete.Name = "ProjectDelete";
       this.ProjectDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.ProjectDelete.Size = new System.Drawing.Size(188, 32);
+      this.ProjectDelete.Size = new System.Drawing.Size(258, 32);
       this.ProjectDelete.Text = "&Delete";
       this.ProjectDelete.Click += new System.EventHandler(this.ProjectDelete_Click);
       // 
       // toolStripSeparator13
       // 
       this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(185, 6);
+      this.toolStripSeparator13.Size = new System.Drawing.Size(255, 6);
       // 
       // ProjectRefresh
       // 
       this.ProjectRefresh.Name = "ProjectRefresh";
       this.ProjectRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.ProjectRefresh.Size = new System.Drawing.Size(188, 32);
+      this.ProjectRefresh.Size = new System.Drawing.Size(258, 32);
       this.ProjectRefresh.Text = "&Refresh";
       this.ProjectRefresh.Click += new System.EventHandler(this.ProjectRefresh_Click);
       // 
@@ -909,6 +940,25 @@
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
       // 
+      // ProjectClear
+      // 
+      this.ProjectClear.Name = "ProjectClear";
+      this.ProjectClear.Size = new System.Drawing.Size(258, 32);
+      this.ProjectClear.Text = "Clear Dependencies";
+      this.ProjectClear.Click += new System.EventHandler(this.ProjectClear_Click);
+      // 
+      // ProjectUpdate
+      // 
+      this.ProjectUpdate.Name = "ProjectUpdate";
+      this.ProjectUpdate.Size = new System.Drawing.Size(258, 32);
+      this.ProjectUpdate.Text = "Update Dependencies";
+      this.ProjectUpdate.Click += new System.EventHandler(this.ProjectUpdate_Click);
+      // 
+      // toolStripSeparator14
+      // 
+      this.toolStripSeparator14.Name = "toolStripSeparator14";
+      this.toolStripSeparator14.Size = new System.Drawing.Size(255, 6);
+      // 
       // CodeManagerList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1021,6 +1071,12 @@
     private System.Windows.Forms.ToolStripMenuItem MainTabsMove;
     private System.Windows.Forms.ContextMenuStrip TileTabsMenu;
     private System.Windows.Forms.ToolStripMenuItem TileTabsMove;
+    private System.Windows.Forms.ToolStripMenuItem SolutionClear;
+    private System.Windows.Forms.ToolStripMenuItem SolutionUpdate;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem ProjectClear;
+    private System.Windows.Forms.ToolStripMenuItem ProjectUpdate;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
   }
 }
 

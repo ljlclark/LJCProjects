@@ -373,7 +373,7 @@ namespace UpdateProjectFiles
     #region Properties
 
     // Gets or sets the Data object.
-    internal Data Data { get; set; }
+    internal ProjectFilesData Data { get; set; }
 
     // The Managers object.
     internal ManagersProjectFiles Managers { get; set; }

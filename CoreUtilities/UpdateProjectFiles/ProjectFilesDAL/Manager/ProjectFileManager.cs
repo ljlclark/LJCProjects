@@ -251,8 +251,8 @@ namespace ProjectFilesDAL
       builder.Append(", SourceCodeGroup");
       builder.Append(", SourceSolution");
       builder.Append(", SourceProject");
-      builder.Append(", sourceFilePath");
-      builder.AppendLine(", targetFilePath");
+      builder.Append(", SourceFilePath");
+      builder.AppendLine(", TargetFilePath");
       var header = builder.ToString();
       File.WriteAllText(fileName, header);
       foreach (ProjectFile projectFile in projectFiles)

@@ -5,7 +5,7 @@
 namespace ProjectFilesDAL
 {
   /// <summary>Gets the Data collections.</summary>
-  public class Data
+  public class ProjectFilesData
   {
     /// <summary>Gets the CodeGroups collection.</summary>
     public CodeGroups CodeGroups

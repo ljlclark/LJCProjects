@@ -36,7 +36,7 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Solution data object.</returns>
-    public Solution Add(SolutionParentKey parentKey, string name, int sequence
+    public Solution Add(ProjectParentKey parentKey, string name, int sequence
       , string path)
     {
       Solution retValue = null;
@@ -59,7 +59,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    public void Delete(SolutionParentKey parentKey, string name)
+    public void Delete(ProjectParentKey parentKey, string name)
     {
       if (HasParentKey(parentKey)
         && NetString.HasValue(name))
@@ -84,7 +84,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions Load(SolutionParentKey parentKey = null, string name = null)
+    public Solutions Load(ProjectParentKey parentKey = null, string name = null)
     {
       Solutions retValue = null;
 
@@ -114,7 +114,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions LoadAllExcept(SolutionParentKey parentKey, string name)
+    public Solutions LoadAllExcept(ProjectParentKey parentKey, string name)
     {
       Solutions retValue = null;
 
@@ -143,7 +143,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public Solution Retrieve(SolutionParentKey parentKey, string name = null)
+    public Solution Retrieve(ProjectParentKey parentKey, string name = null)
     {
       Solution retValue = null;
 
@@ -241,9 +241,9 @@ namespace ProjectFilesDAL
     }
 
     // <summary>Creates a ParentKey from the supplied DataObject.</summary>
-    public SolutionParentKey CreateParentKey(Solution solution)
+    public ProjectParentKey CreateParentKey(Solution solution)
     {
-      var retValue = new SolutionParentKey()
+      var retValue = new ProjectParentKey()
       {
         CodeLine = solution.CodeLine,
         CodeGroup = solution.CodeGroup
@@ -362,7 +362,7 @@ namespace ProjectFilesDAL
     }
 
     // Creates a DataObject from the supplied values.
-    private Solution CreateDataObject(SolutionParentKey parentKey, string name
+    private Solution CreateDataObject(ProjectParentKey parentKey, string name
       , int sequence = 0, string pathName = null)
     {
       Solution retValue = null;
@@ -383,7 +383,7 @@ namespace ProjectFilesDAL
     }
 
     // Checks for the existance of the ParentKey values.
-    private bool HasParentKey(SolutionParentKey parentKey)
+    private bool HasParentKey(ProjectParentKey parentKey)
     {
       var retValue = false;
 

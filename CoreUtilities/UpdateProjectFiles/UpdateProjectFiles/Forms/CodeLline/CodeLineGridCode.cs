@@ -257,7 +257,7 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Data object.
     // *** Next Line *** Add - Data
-    private Data Data { get; set; }
+    private ProjectFilesData Data { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }

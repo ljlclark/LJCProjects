@@ -7,6 +7,8 @@ using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -34,6 +36,7 @@ namespace UpdateProjectFiles
       // *** Begin *** Add - Data
       Data = CodeList.Data;
       Projects = Data.Projects;
+      DataHelper = new DataProjectFiles(Data);
       // *** End   *** Add - Data
       Managers = CodeList.Managers;
       ProjectManager = Managers.ProjectManager;
@@ -243,6 +246,52 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.Default;
     }
 
+    // Clears the solution dependencies
+    internal void ClearDependencies()
+    {
+    }
+
+    // Updates the solution dependencies.
+    internal void UpdateDependencies()
+    {
+      if (SolutionGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from items.
+        var parentKey = CodeList.GetProjectFileParentKey();
+
+        var projectFiles = Data.ProjectFiles;
+        var files = projectFiles.LJCLoad(parentKey);
+        if (NetCommon.HasItems(files))
+        {
+          foreach (var projectFile in files)
+          {
+            // Get the Source fileSpec.
+            var codeLineName = projectFile.SourceCodeLine;
+            var sourceFileSpec = DataHelper.CodeLinePath(codeLineName);
+
+            var sourceGroupName = projectFile.SourceCodeGroup;
+            var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
+              , sourceGroupName);
+            sourceFileSpec = Path.Combine(sourceFileSpec, codeGroupPath);
+
+            var solutionName = projectFile.SourceSolution;
+            var solutionParentKey = CodeList.GetSolutionParentKey();
+            var solutionPath = DataHelper.SolutionPath(solutionParentKey
+              , solutionName);
+            sourceFileSpec = Path.Combine(sourceFileSpec, solutionPath);
+
+            var fileName = projectFile.SourceFileName;
+            var projectFileParentKey = CodeList.GetProjectFileParentKey();
+            var projectSourceFilePath
+              = DataHelper.ProjectFileSourcePath(projectFileParentKey
+              , fileName);
+            sourceFileSpec = Path.Combine(sourceFileSpec, projectSourceFilePath);
+            sourceFileSpec = Path.Combine(sourceFileSpec, fileName);
+          }
+        }
+      }
+    }
+
     // Adds new row or updates row with record values.
     private void Detail_Change(object sender, EventArgs e)
     {
@@ -293,12 +342,16 @@ namespace UpdateProjectFiles
 
     #region Properties
 
+    // Gets or sets the Data object.
+    // *** Next Line *** Add - Data
+    private DataProjectFiles DataHelper { get; set; }
+
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }
 
     // Gets or sets the Data object.
     // *** Next Line *** Add - Data
-    private Data Data { get; set; }
+    private ProjectFilesData Data { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }

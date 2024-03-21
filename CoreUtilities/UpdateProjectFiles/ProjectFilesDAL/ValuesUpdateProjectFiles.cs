@@ -59,7 +59,7 @@ namespace ProjectFilesDAL
       BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
       EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
       Managers = new ManagersProjectFiles();
-      Data = new Data();
+      Data = new ProjectFilesData();
     }
     #endregion
 
@@ -69,7 +69,7 @@ namespace ProjectFilesDAL
     public Color BeginColor { get; private set; }
 
     /// <summary>Gets the Data class reference.</summary>
-    public Data Data { get; private set; }
+    public ProjectFilesData Data { get; private set; }
 
     /// <summary>Gets the config FileSpec.</summary>
     public string FileSpec { get; private set; }

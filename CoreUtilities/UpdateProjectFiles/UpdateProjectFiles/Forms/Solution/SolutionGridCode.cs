@@ -232,6 +232,16 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.Default;
     }
 
+    // Clears the solution dependencies
+    internal void ClearDependencies()
+    {
+    }
+
+    // Updates the solution dependencies.
+    internal void UpdateDependencies()
+    {
+    }
+
     // Adds new row or updates row with record values.
     private void Detail_Change(object sender, EventArgs e)
     {
@@ -282,7 +292,7 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Data object.
     // *** Next Line *** Add - Data
-    private Data Data { get; set; }
+    private ProjectFilesData Data { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }
