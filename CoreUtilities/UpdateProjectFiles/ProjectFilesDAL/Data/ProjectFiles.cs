@@ -72,12 +72,12 @@ namespace ProjectFilesDAL
           TargetCodeGroup = parentKey.CodeGroup,
           TargetSolution = parentKey.Solution,
           TargetProject = parentKey.Project,
-          SourceFileName = parentKey.SourceFileName,
+          SourceFileName = sourceFileName,
+          TargetFilePath = targetFilePath,
           SourceCodeLine = sourceKey.CodeLine,
           SourceCodeGroup = sourceKey.CodeGroup,
           SourceSolution = sourceKey.Solution,
           SourceProject = sourceKey.Project,
-          TargetFilePath = targetFilePath,
           SourceFilePath = sourceFilePath
         };
         Add(retValue);

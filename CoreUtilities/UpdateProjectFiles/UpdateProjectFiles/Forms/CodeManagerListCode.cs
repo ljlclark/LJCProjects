@@ -349,6 +349,10 @@ namespace UpdateProjectFiles
     private void SetFocusTab(MouseEventArgs e)
     {
       var tabPage = MainTabs.LJCGetTabPage(e);
+      if (null == tabPage)
+      {
+        tabPage = TileTabs.LJCGetTabPage(e);
+      }
       switch (tabPage.Name)
       {
         case "CodeLineTab":

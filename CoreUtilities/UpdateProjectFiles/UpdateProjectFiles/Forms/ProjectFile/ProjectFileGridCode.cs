@@ -148,12 +148,13 @@ namespace UpdateProjectFiles
       if (success)
       {
         // Data from items.
-        var name = row.LJCGetString("Name");
+        var name = row.LJCGetString("SourceFileName");
         var parentKey = new ProjectFileParentKey()
         {
-          CodeLine = parentRow.LJCGetString("CodeLineName"),
-          CodeGroup = parentRow.LJCGetString("CodeGroupName"),
-          Solution = parentRow.LJCGetString("SolutionName")
+          CodeLine = parentRow.LJCGetString("CodeLine"),
+          CodeGroup = parentRow.LJCGetString("CodeGroup"),
+          Solution = parentRow.LJCGetString("Solution"),
+          Project = parentRow.LJCGetString("Name")
         };
 
         // *** Begin *** Change - Datas

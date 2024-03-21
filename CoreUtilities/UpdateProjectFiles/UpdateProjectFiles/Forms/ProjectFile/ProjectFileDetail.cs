@@ -85,6 +85,8 @@ namespace UpdateProjectFiles
         Text += " - New";
         LJCIsUpdate = false;
         LJCRecord = new ProjectFile();
+
+        // Set parent values.
         TargetCodeLineText.Text = LJCTargetLine;
         TargetCodeGroupText.Text = LJCTargetGroup;
         TargetSolutionText.Text = LJCTargetSolution;
@@ -139,7 +141,6 @@ namespace UpdateProjectFiles
       retValue.SourceCodeGroup = SourceCodeGroupText.Text.Trim();
       retValue.SourceSolution = SourceCodeLineText.Text.Trim();
       retValue.SourceProject = SourceProjectText.Text.Trim();
-      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
       retValue.SourceFilePath = SourceFilePathText.Text.Trim();
 
       // Get Reference key values.
@@ -147,7 +148,7 @@ namespace UpdateProjectFiles
       retValue.TargetCodeGroup = LJCTargetGroup;
       retValue.TargetSolution = LJCTargetSolution;
       retValue.TargetProject = LJCTargetProject;
-      retValue.SourceFileName = LJCSourceFileName;
+      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
       return retValue;
     }
 
@@ -175,9 +176,7 @@ namespace UpdateProjectFiles
           var parentKey = GetParentKey();
           var sourceKey = GetSourceKey();
           // *** Begin *** Change - Data
-          //manager.Add(parentKey, sourceKey, LJCRecord.SourceFileName
-          //  , LJCRecord.SourceFilePath, LJCRecord.TargetFilePath);
-          ProjectFiles.Add(parentKey, sourceKey, LJCSourceFileName
+          ProjectFiles.Add(parentKey, sourceKey, LJCRecord.SourceFileName
             , LJCRecord.TargetFilePath, LJCRecord.SourceFilePath);
           manager.RecreateFile(ProjectFiles);
           // *** End   *** Change - Data
