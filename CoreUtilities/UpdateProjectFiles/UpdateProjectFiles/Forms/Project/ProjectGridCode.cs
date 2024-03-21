@@ -254,7 +254,7 @@ namespace UpdateProjectFiles
     // Updates the solution dependencies.
     internal void UpdateDependencies()
     {
-      if (SolutionGrid.CurrentRow is LJCGridRow parentRow)
+      if (SolutionGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
         var parentKey = CodeList.GetProjectFileParentKey();
@@ -265,29 +265,18 @@ namespace UpdateProjectFiles
         {
           foreach (var projectFile in files)
           {
-            // Get the Source fileSpec.
-            var codeLineName = projectFile.SourceCodeLine;
-            var sourceFileSpec = DataHelper.CodeLinePath(codeLineName);
-
-            var sourceGroupName = projectFile.SourceCodeGroup;
-            var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
-              , sourceGroupName);
-            sourceFileSpec = Path.Combine(sourceFileSpec, codeGroupPath);
-
-            var solutionName = projectFile.SourceSolution;
-            var solutionParentKey = CodeList.GetSolutionParentKey();
-            var solutionPath = DataHelper.SolutionPath(solutionParentKey
-              , solutionName);
-            sourceFileSpec = Path.Combine(sourceFileSpec, solutionPath);
-
-            var fileName = projectFile.SourceFileName;
-            var projectFileParentKey = CodeList.GetProjectFileParentKey();
-            var projectSourceFilePath
-              = DataHelper.ProjectFileSourcePath(projectFileParentKey
-              , fileName);
-            sourceFileSpec = Path.Combine(sourceFileSpec, projectSourceFilePath);
-            sourceFileSpec = Path.Combine(sourceFileSpec, fileName);
+            var sourceFileSpec = SourceFileSpec(projectFile);
+            var targetFileSpec = TargetFileSpec(projectFile);
+            if (NetString.HasValue(sourceFileSpec)
+              && NetString.HasValue(targetFileSpec))
+            {
+              File.Copy(sourceFileSpec, targetFileSpec, true);
+            }
           }
+          var title = "Solution Update";
+          var message = "Solution Dependencies Update is Completed";
+          MessageBox.Show(message, title, MessageBoxButtons.OK
+            , MessageBoxIcon.Information);
         }
       }
     }
@@ -337,6 +326,74 @@ namespace UpdateProjectFiles
         // Setup the grid columns.
         ProjectGrid.LJCAddColumns(gridColumns);
       }
+    }
+
+    // Get the ProjectFile Source File Spec.
+    internal string SourceFileSpec(ProjectFile projectFile)
+    {
+      string retValue = null;
+
+      if (NetString.HasValue(projectFile.SourceCodeLine)
+        && NetString.HasValue(projectFile.SourceCodeGroup)
+        && NetString.HasValue(projectFile.SourceSolution)
+        && NetString.HasValue(projectFile.SourceFilePath)
+        && NetString.HasValue(projectFile.SourceFileName))
+      {
+        var codeLineName = projectFile.SourceCodeLine;
+        retValue = DataHelper.CodeLinePath(codeLineName);
+
+        var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
+          , projectFile.SourceCodeGroup);
+        retValue = Path.Combine(retValue, codeGroupPath);
+
+        var solutionParentKey = CodeList.GetSolutionParentKey();
+        var solutionPath = DataHelper.SolutionPath(solutionParentKey
+          , projectFile.SourceSolution);
+        retValue = Path.Combine(retValue, solutionPath);
+
+        var projectParentKey = CodeList.GetProjectParentKey();
+        var projectPath = DataHelper.ProjectPath(projectParentKey
+          , projectFile.SourceProject);
+        retValue = Path.Combine(retValue, projectPath);
+
+        retValue = Path.Combine(retValue, projectFile.SourceFilePath);
+        retValue = Path.Combine(retValue, projectFile.SourceFileName);
+      }
+      return retValue;
+    }
+
+    // Get the ProjectFile Target File Spec.
+    internal string TargetFileSpec(ProjectFile projectFile)
+    {
+      string retValue = null;
+
+      if (NetString.HasValue(projectFile.TargetCodeLine)
+        && NetString.HasValue(projectFile.TargetCodeGroup)
+        && NetString.HasValue(projectFile.TargetSolution)
+        && NetString.HasValue(projectFile.TargetFilePath)
+        && NetString.HasValue(projectFile.SourceFileName))
+      {
+        var codeLineName = projectFile.TargetCodeLine;
+        retValue = DataHelper.CodeLinePath(codeLineName);
+
+        var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
+          , projectFile.TargetCodeGroup);
+        retValue = Path.Combine(retValue, codeGroupPath);
+
+        var solutionParentKey = CodeList.GetSolutionParentKey();
+        var solutionPath = DataHelper.SolutionPath(solutionParentKey
+          , projectFile.TargetSolution);
+        retValue = Path.Combine(retValue, solutionPath);
+
+        var projectParentKey = CodeList.GetProjectParentKey();
+        var projectPath = DataHelper.ProjectPath(projectParentKey
+          , projectFile.TargetProject);
+        retValue = Path.Combine(retValue, projectPath);
+
+        retValue = Path.Combine(retValue, projectFile.TargetFilePath);
+        retValue = Path.Combine(retValue, projectFile.SourceFileName);
+      }
+      return retValue;
     }
     #endregion
 

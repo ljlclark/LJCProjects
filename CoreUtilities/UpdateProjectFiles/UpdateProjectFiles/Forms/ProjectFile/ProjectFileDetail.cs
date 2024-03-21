@@ -139,7 +139,7 @@ namespace UpdateProjectFiles
       }
       retValue.SourceCodeLine = SourceCodeLineText.Text.Trim();
       retValue.SourceCodeGroup = SourceCodeGroupText.Text.Trim();
-      retValue.SourceSolution = SourceCodeLineText.Text.Trim();
+      retValue.SourceSolution = SourceSolutionText.Text.Trim();
       retValue.SourceProject = SourceProjectText.Text.Trim();
       retValue.SourceFilePath = SourceFilePathText.Text.Trim();
 
