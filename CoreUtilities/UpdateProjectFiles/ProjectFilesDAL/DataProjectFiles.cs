@@ -2,15 +2,13 @@
 // Licensed under the MIT License.
 // DataProjectFiles.cs
 using LJCNetCommon;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectFilesDAL
 {
+  /// <summary>
+  /// Provides ProjectFile data helper methods.
+  /// </summary>
   public class DataProjectFiles
   {
     // Initializes an object instance.
@@ -24,6 +22,53 @@ namespace ProjectFilesDAL
     }
 
     #region Data Methods
+
+    // Create a File Spec.
+    public string GetFileSpec(string codeLineName, string codeGroupName
+      , string solutionName, string projectName, string filePath
+      , string fileName = null)
+    {
+      string retValue = null;
+
+      if (NetString.HasValue(codeLineName)
+        && NetString.HasValue(solutionName))
+      {
+        retValue = CodeLinePath(codeLineName);
+
+        if (NetString.HasValue(codeGroupName))
+        {
+          var codeGroupPath = CodeGroupPath(codeLineName
+            , codeGroupName);
+          retValue = Path.Combine(retValue, codeGroupPath);
+        }
+
+        var solutionParentKey = new SolutionParentKey()
+        {
+          CodeLine = codeLineName,
+          CodeGroup = codeGroupName
+        };
+        var solutionPath = SolutionPath(solutionParentKey
+          , solutionName);
+        retValue = Path.Combine(retValue, solutionPath);
+
+        var projectParentKey = new ProjectParentKey()
+        {
+          CodeLine = codeLineName,
+          CodeGroup = codeGroupName,
+          Solution = solutionName
+        };
+        var projectPath = ProjectPath(projectParentKey
+          , projectName);
+        retValue = Path.Combine(retValue, projectPath);
+
+        retValue = Path.Combine(retValue, filePath);
+        if (NetString.HasValue(fileName))
+        {
+          retValue = Path.Combine(retValue, fileName);
+        }
+      }
+      return retValue;
+    }
 
     // Gets the CodeGroup object.
     /// <summary>

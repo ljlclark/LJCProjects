@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.TargetSolutionText = new System.Windows.Forms.TextBox();
       this.TargetSolutionLabel = new System.Windows.Forms.Label();
       this.TargetCodeGroupText = new System.Windows.Forms.TextBox();
@@ -52,6 +53,9 @@
       this.SourceCodeLineLabel = new System.Windows.Forms.Label();
       this.SourceFilePathText = new System.Windows.Forms.TextBox();
       this.SourceFilePathLabel = new System.Windows.Forms.Label();
+      this.DetailMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.DetailSource = new System.Windows.Forms.ToolStripMenuItem();
+      this.DetailMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // TargetSolutionText
@@ -188,7 +192,6 @@
       this.SourceProjectText.Location = new System.Drawing.Point(643, 120);
       this.SourceProjectText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceProjectText.Name = "SourceProjectText";
-      this.SourceProjectText.ReadOnly = true;
       this.SourceProjectText.Size = new System.Drawing.Size(295, 26);
       this.SourceProjectText.TabIndex = 19;
       // 
@@ -206,7 +209,6 @@
       this.SourceSolutionText.Location = new System.Drawing.Point(643, 84);
       this.SourceSolutionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceSolutionText.Name = "SourceSolutionText";
-      this.SourceSolutionText.ReadOnly = true;
       this.SourceSolutionText.Size = new System.Drawing.Size(295, 26);
       this.SourceSolutionText.TabIndex = 17;
       // 
@@ -224,7 +226,6 @@
       this.SourceCodeGroupText.Location = new System.Drawing.Point(643, 48);
       this.SourceCodeGroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceCodeGroupText.Name = "SourceCodeGroupText";
-      this.SourceCodeGroupText.ReadOnly = true;
       this.SourceCodeGroupText.Size = new System.Drawing.Size(295, 26);
       this.SourceCodeGroupText.TabIndex = 15;
       // 
@@ -242,7 +243,6 @@
       this.SourceCodeLineText.Location = new System.Drawing.Point(643, 12);
       this.SourceCodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceCodeLineText.Name = "SourceCodeLineText";
-      this.SourceCodeLineText.ReadOnly = true;
       this.SourceCodeLineText.Size = new System.Drawing.Size(295, 26);
       this.SourceCodeLineText.TabIndex = 13;
       // 
@@ -272,11 +272,27 @@
       this.SourceFilePathLabel.TabIndex = 20;
       this.SourceFilePathLabel.Text = "Source File Path";
       // 
+      // DetailMenu
+      // 
+      this.DetailMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.DetailMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DetailSource});
+      this.DetailMenu.Name = "DetailMenu";
+      this.DetailMenu.Size = new System.Drawing.Size(221, 36);
+      // 
+      // DetailSource
+      // 
+      this.DetailSource.Name = "DetailSource";
+      this.DetailSource.Size = new System.Drawing.Size(220, 32);
+      this.DetailSource.Text = "Select Source File";
+      this.DetailSource.Click += new System.EventHandler(this.DetailSource_Click);
+      // 
       // ProjectFileDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(954, 282);
+      this.ContextMenuStrip = this.DetailMenu;
       this.Controls.Add(this.SourceProjectText);
       this.Controls.Add(this.SourceProjectLabel);
       this.Controls.Add(this.SourceSolutionText);
@@ -304,6 +320,7 @@
       this.Name = "ProjectFileDetail";
       this.Text = "Project File Detail";
       this.Load += new System.EventHandler(this.ProjectFileDetail_Load);
+      this.DetailMenu.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -335,5 +352,7 @@
     private System.Windows.Forms.Label SourceCodeLineLabel;
     private System.Windows.Forms.TextBox SourceFilePathText;
     private System.Windows.Forms.Label SourceFilePathLabel;
+    private System.Windows.Forms.ContextMenuStrip DetailMenu;
+    private System.Windows.Forms.ToolStripMenuItem DetailSource;
   }
 }

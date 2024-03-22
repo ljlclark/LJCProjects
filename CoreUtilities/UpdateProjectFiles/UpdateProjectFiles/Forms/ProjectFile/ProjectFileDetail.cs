@@ -6,6 +6,7 @@ using LJCWinFormCommon;
 using ProjectFilesDAL;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -135,13 +136,13 @@ namespace UpdateProjectFiles
       // In control order.
       if (!LJCIsUpdate)
       {
-        retValue.SourceFileName = SourceFileNameText.Text.Trim();
+        retValue.SourceFileName = Trim(SourceFileNameText);
       }
-      retValue.SourceCodeLine = SourceCodeLineText.Text.Trim();
-      retValue.SourceCodeGroup = SourceCodeGroupText.Text.Trim();
-      retValue.SourceSolution = SourceSolutionText.Text.Trim();
-      retValue.SourceProject = SourceProjectText.Text.Trim();
-      retValue.SourceFilePath = SourceFilePathText.Text.Trim();
+      retValue.SourceCodeLine = Trim(SourceCodeLineText);
+      retValue.SourceCodeGroup = Trim(SourceCodeGroupText);
+      retValue.SourceSolution = Trim(SourceSolutionText);
+      retValue.SourceProject = Trim(SourceProjectText);
+      retValue.SourceFilePath = Trim(SourceFilePathText);
 
       // Get Reference key values.
       retValue.TargetCodeLine = LJCTargetLine;
@@ -204,10 +205,10 @@ namespace UpdateProjectFiles
     {
       var retValue = new ProjectFileParentKey()
       {
-        CodeLine = SourceCodeLineText.Text.Trim(),
-        CodeGroup = SourceCodeGroupText.Text.Trim(),
-        Solution = SourceSolutionText.Text.Trim(),
-        Project = SourceProjectText.Text.Trim()
+        CodeLine = Trim(SourceCodeLineText),
+        CodeGroup = Trim(SourceCodeGroupText),
+        Solution = Trim(SourceSolutionText),
+        Project = Trim(SourceProjectText)
       };
       return retValue;
     }
@@ -247,6 +248,57 @@ namespace UpdateProjectFiles
           , MessageBoxIcon.Exclamation);
       }
       return retValue;
+    }
+    #endregion
+
+    #region Action Event Handlers
+
+    // Selects the Source File info.
+    private void DetailSource_Click(object sender, EventArgs e)
+    {
+      var dataHelper = new DataProjectFiles(Data);
+      var codeLineName = Trim(TargetCodeLineText);
+      var codeGroupName = Trim(TargetCodeGroupText);
+      var solutionName = Trim(TargetSolutionText);
+      var projectName = Trim(TargetProjectText);
+      var targetPath = Trim(TargetFilePathText);
+      var folder = dataHelper.GetFileSpec(codeLineName, codeGroupName
+        , solutionName, projectName, targetPath);
+
+      var filter = "DLLs(*.dll)|*.dll|All files(*.*)|*.*";
+      var fileName = Trim(SourceFileNameText);
+      var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
+      if (fileSpec != null)
+      {
+        var name = Path.GetFileName(fileSpec);
+        SourceFileNameText.Text = name;
+        if (!NetString.HasValue(TargetFilePathText.Text))
+        {
+          TargetFilePathText.Text = "External";
+        }
+
+        var path = Path.GetDirectoryName(fileSpec);
+        var folders = path.Split('\\');
+        var index = folders.Length - 1;
+        if (0 == string.Compare(folders[index], "debug", true))
+        {
+          SourceFilePathText.Text = $@"{folders[index]}\{folders[index - 1]}";
+          index--;
+        }
+        index--;
+        SourceProjectText.Text = folders[index];
+        index--;
+        SourceSolutionText.Text = folders[index];
+        index--;
+        SourceCodeGroupText.Text = folders[index];
+        index--;
+        SourceCodeLineText.Text = folders[index];
+      }
+    }
+
+    private string Trim(TextBox textBox)
+    {
+      return textBox.Text.Trim();
     }
     #endregion
 

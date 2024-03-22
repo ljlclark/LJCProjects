@@ -257,10 +257,10 @@ namespace UpdateProjectFiles
       if (SolutionGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
-        var parentKey = CodeList.GetProjectFileParentKey();
+        var projectFileParentKey = CodeList.GetProjectFileParentKey();
 
         var projectFiles = Data.ProjectFiles;
-        var files = projectFiles.LJCLoad(parentKey);
+        var files = projectFiles.LJCLoad(projectFileParentKey);
         if (NetCommon.HasItems(files))
         {
           foreach (var projectFile in files)
@@ -274,7 +274,7 @@ namespace UpdateProjectFiles
             }
           }
           var title = "Solution Update";
-          var message = "Solution Dependencies Update is Completed";
+          var message = "Solution Dependencies Update is Complete";
           MessageBox.Show(message, title, MessageBoxButtons.OK
             , MessageBoxIcon.Information);
         }
@@ -328,7 +328,7 @@ namespace UpdateProjectFiles
       }
     }
 
-    // Get the ProjectFile Source File Spec.
+    // Create the ProjectFile Source File Spec.
     internal string SourceFileSpec(ProjectFile projectFile)
     {
       string retValue = null;
@@ -336,33 +336,19 @@ namespace UpdateProjectFiles
       if (NetString.HasValue(projectFile.SourceCodeLine)
         && NetString.HasValue(projectFile.SourceCodeGroup)
         && NetString.HasValue(projectFile.SourceSolution)
+        && NetString.HasValue(projectFile.SourceProject)
         && NetString.HasValue(projectFile.SourceFilePath)
         && NetString.HasValue(projectFile.SourceFileName))
       {
-        var codeLineName = projectFile.SourceCodeLine;
-        retValue = DataHelper.CodeLinePath(codeLineName);
-
-        var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
-          , projectFile.SourceCodeGroup);
-        retValue = Path.Combine(retValue, codeGroupPath);
-
-        var solutionParentKey = CodeList.GetSolutionParentKey();
-        var solutionPath = DataHelper.SolutionPath(solutionParentKey
-          , projectFile.SourceSolution);
-        retValue = Path.Combine(retValue, solutionPath);
-
-        var projectParentKey = CodeList.GetProjectParentKey();
-        var projectPath = DataHelper.ProjectPath(projectParentKey
-          , projectFile.SourceProject);
-        retValue = Path.Combine(retValue, projectPath);
-
-        retValue = Path.Combine(retValue, projectFile.SourceFilePath);
-        retValue = Path.Combine(retValue, projectFile.SourceFileName);
+        retValue = DataHelper.GetFileSpec(projectFile.SourceCodeLine
+          , projectFile.SourceCodeGroup, projectFile.SourceSolution
+          , projectFile.SourceProject, projectFile.SourceFilePath
+          , projectFile.SourceFileName);
       }
       return retValue;
     }
 
-    // Get the ProjectFile Target File Spec.
+    // Create the ProjectFile Target File Spec.
     internal string TargetFileSpec(ProjectFile projectFile)
     {
       string retValue = null;
