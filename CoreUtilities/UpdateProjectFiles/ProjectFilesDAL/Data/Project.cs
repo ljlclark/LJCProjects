@@ -13,7 +13,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Project Clone()
     {
       var retValue = MemberwiseClone() as Project;
@@ -21,7 +21,7 @@ namespace ProjectFilesDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(Project other)
     {
       int retValue;
@@ -71,6 +71,9 @@ namespace ProjectFilesDAL
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class ProjectParentKey
   {
     /// <summary>Gets or sets the CodeLine name.</summary>
@@ -87,7 +90,7 @@ namespace ProjectFilesDAL
   public class ProjectPath : IComparer<Project>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(Project x, Project y)
     {
       int retValue;

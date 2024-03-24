@@ -34,6 +34,7 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
+    /// <param name="sequence">The Sequence value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Solution data object.</returns>
     public Solution Add(ProjectParentKey parentKey, string name, int sequence
@@ -240,7 +241,9 @@ namespace ProjectFilesDAL
       }
     }
 
-    // <summary>Creates a ParentKey from the supplied DataObject.</summary>
+    /// <summary>Creates a ParentKey from the supplied DataObject.</summary>
+    /// <param name="solution"></param>
+    /// <returns></returns>
     public ProjectParentKey CreateParentKey(Solution solution)
     {
       var retValue = new ProjectParentKey()

@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AssemblyItemComboCode.xml -->
+<items>
+  <DataProjectFilesC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="data"></param>
+  </DataProjectFilesC>
+  <!-- Public Methods -->
+  <GetFileSpec>
+    <summary>
+      Create a File Spec from ProjectFile data.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="codeGroupName">The CodeGroup name.</param>
+    <param name="solutionName">The Solution name.</param>
+    <param name="projectName">The Project name.</param>
+    <param name="projectFilePath">The ProjectFile path.</param>
+    <param name="fileName">The File name.</param>
+    <returns>The FileSpec value.</returns>
+  </GetFileSpec>
+  <GetProjectFileValues>
+    <summary>
+      Get the ProjectFile valus from a filespec.
+    </summary>
+    <param name="fileSpec">The file specifiation.</param>
+    <param name="targetFilePath">The Target flile path.</param>"
+    <returns>A ProjectFile ojbect.</returns>
+  </GetProjectFileValues>
+  <!-- Retrieve Object Methods -->
+  <CodeGroup>
+    <summary>
+      Gets the CodeGroup object with name.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The name value.</param>
+    <returns>The CodeGroup object.</returns>
+  </CodeGroup>
+  <CodeGroupWithPath>
+    <summary>
+      Gets the CodeGroup object with path.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="path">The path value.</param>
+    <returns>The CodeGroup object.</returns>
+  </CodeGroupWithPath>
+  <CodeLine>
+    <summary>
+      Gets the CodeLine object.
+    </summary>
+    <param name="name">The name value.</param>
+    <returns>The CodeLine object.</returns>
+  </CodeLine>
+  <CodeLineWithPath>
+    <summary>
+      Gets the CodeLine object.
+    </summary>
+    <param name="path">The path value.</param>
+    <returns>The CodeLine object.</returns>
+  </CodeLineWithPath>
+  <Project>
+    <summary>
+      Gets the Project object.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The Solution object.</returns>
+  </Project>
+  <ProjectWithPath>
+    <summary>
+      Gets the Project object with path.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="path">The path value.</param>
+    <returns>The Solution object.</returns>
+  </ProjectWithPath>
+  <ProjectFile>
+    <summary>
+      Gets the ProjectFile object.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The Solution object.</returns>
+  </ProjectFile>
+  <Solution>
+    <summary>
+      Gets the Solution object.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The Solution object.</returns>
+  </Solution>
+  <SolutionWithPath>
+    <summary>
+      Gets the Solution object.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="path">The path value.</param>
+    <returns>The Solution object.</returns>
+  </SolutionWithPath>
+  <!-- Retrieve Object Value Methods -->
+  <CodeGroupPath>
+    <summary>
+      Gets the CodeGroup path value.
+    </summary>
+    <param name="codeLine">The CodeLine name.</param>
+    <param name="name">The name value.</param>
+    <returns>The CodeGroup path value.</returns>
+  </CodeGroupPath>
+  <CodeLineName>
+    <summary>
+      Gets the CodeLine path value.
+    </summary>
+    <param name="path">The name value.</param>
+    <param name="defautName">The default name value.</param>
+    <returns>The CodeLine path value.</returns>
+  </CodeLineName>
+  <CodeLinePath>
+    <summary>
+      Gets the CodeLine path value.
+    </summary>
+    <param name="name">The name value.</param>
+    <returns>The CodeLine path value.</returns>
+  </CodeLinePath>
+  <ProjectFileSourcePath>
+    <summary>
+      Gets the ProjectFile source path value.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The ProjectFile path value.</returns>
+  </ProjectFileSourcePath>
+  <ProjectName>
+    <summary>
+      Gets the Project Name value.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="path">The path value.</param>
+    <param name="defaultprojectName">The default name value.</param>
+    <returns>The Project path value.</returns>
+  </ProjectName>
+  <ProjectPath>
+    <summary>
+      Gets the Project path value.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The Project path value.</returns>
+  </ProjectPath>
+  <SolutionName>
+    <summary>
+      Gets the Solution Name value.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="path">The path value.</param>
+    <returns>The Solution Name value.</returns>
+  </SolutionName>
+  <SolutionPath>
+    <summary>
+      Gets the CodeLine path value.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <param name="name">The name value.</param>
+    <returns>The Solution path value.</returns>
+  </SolutionPath>
+  <!-- Create Parent Keys -->
+  <ProjectParentKey>
+    <summary>
+      Create Project parent key
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="codeGroupName">The CodeGroup name.</param>
+    <param name="solutionName">The Solution name.</param>
+    <returns>The Projectparent key.</returns>
+  </ProjectParentKey>
+  <SolutionParentKey>
+    <summary>
+      Create Solution parent key
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="codeGroupName">The CodeGroup name.</param>
+    <returns>The Solution parent key.</returns>
+  </SolutionParentKey>
+</items>

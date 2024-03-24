@@ -12,7 +12,7 @@ namespace ProjectFilesDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Projects()
     {
       mPrevCount = -1;
@@ -22,7 +22,7 @@ namespace ProjectFilesDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Projects Clone()
     {
       var retValue = MemberwiseClone() as Projects;
@@ -30,7 +30,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets a custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public Projects GetCollection(List<Project> list)
     {
       Projects retValue = null;
@@ -50,7 +50,13 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentKey"></param>
+    /// <param name="name"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public Project Add(ProjectParentKey parentKey, string name
       , string path = null)
     {

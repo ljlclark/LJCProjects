@@ -242,6 +242,11 @@ namespace ProjectFilesDAL
     }
 
     // <summary>Creates a ParentKey from the supplied DataObject.</summary>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="project"></param>
+    /// <returns></returns>
     public ProjectParentKey CreateParentKey(Project project)
     {
       var retValue = new ProjectParentKey()

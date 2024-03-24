@@ -56,6 +56,7 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Deletes a CodeLine record.
     /// </summary>
+    /// <param name="codeLineName">The CodeLine name.</param>
     /// <param name="name">The Name value.</param>
     public void Delete(string codeLineName, string name)
     {

@@ -12,7 +12,7 @@ namespace ProjectFilesDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Solutions()
     {
       mPrevCount = -1;
@@ -22,7 +22,7 @@ namespace ProjectFilesDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Solutions Clone()
     {
       var retValue = MemberwiseClone() as Solutions;
@@ -30,7 +30,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets a custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public Solutions GetCollection(List<Solution> list)
     {
       Solutions retValue = null;
@@ -50,7 +50,14 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentKey"></param>
+    /// <param name="name"></param>
+    /// <param name="sequence"></param>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
@@ -142,7 +149,7 @@ namespace ProjectFilesDAL
     /// Retrieves the collection element with unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The item name.</param>
+    /// <param name="path">The Path value.</param>
     /// <returns>A reference to the matching item.</returns>
     public Solution LJCRetrieveWithPath(SolutionParentKey parentKey
       , string path)

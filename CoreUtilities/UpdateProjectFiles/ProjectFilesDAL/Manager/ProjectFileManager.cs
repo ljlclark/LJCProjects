@@ -263,6 +263,11 @@ namespace ProjectFilesDAL
     }
 
     // <summary>Creates a ParentKey from the supplied DataObject.</summary>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="projectFile"></param>
+    /// <returns></returns>
     public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
       var retValue = new ProjectFileParentKey()
@@ -403,7 +408,6 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Write a backup file.
     /// </summary>
-    /// <param name="projectFiles">The Projects collection</param>
     public void WriteBackup()
     {
       var fileName = Path.GetFileNameWithoutExtension(FileName);

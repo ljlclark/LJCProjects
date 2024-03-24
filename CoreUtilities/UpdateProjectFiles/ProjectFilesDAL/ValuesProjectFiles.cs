@@ -7,11 +7,16 @@ using System.IO;
 
 namespace ProjectFilesDAL
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public sealed class ValuesProjectFiles
   {
     #region Constructors
 
-    // Initializes an object instance.
+    /// <summary>
+    /// Initializes an object instance.
+    /// </summary>
     public ValuesProjectFiles()
     {
       SetConfigFileSpec("UpdateProjectFiles.exe.config");
@@ -20,6 +25,10 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="fileSpec"></param>
     public void SetConfigFileSpec(string fileSpec)
     {
       bool success = true;
@@ -53,6 +62,10 @@ namespace ProjectFilesDAL
     #region Private Methods
 
     // Sets the Settings properties.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="fileSpec"></param>
     public void SetProperties(string fileSpec)
     {
       AppSettings = new AppSettings(fileSpec);
@@ -78,6 +91,9 @@ namespace ProjectFilesDAL
     public Color EndColor { get; private set; }
 
     // Gets the singleton instance.
+    /// <summary>
+    /// 
+    /// </summary>
     public static ValuesProjectFiles Instance
     {
       get { return mInstance; }

@@ -13,7 +13,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public CodeGroup Clone()
     {
       var retValue = MemberwiseClone() as CodeGroup;
@@ -21,7 +21,7 @@ namespace ProjectFilesDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(CodeGroup other)
     {
       int retValue;
@@ -63,7 +63,7 @@ namespace ProjectFilesDAL
   public class CodeGroupPathComparer : IComparer<CodeGroup>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(CodeGroup x, CodeGroup y)
     {
       int retValue;

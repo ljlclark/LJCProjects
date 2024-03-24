@@ -13,7 +13,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Solution Clone()
     {
       var retValue = MemberwiseClone() as Solution;
@@ -21,7 +21,7 @@ namespace ProjectFilesDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(Solution other)
     {
       int retValue;
@@ -67,6 +67,9 @@ namespace ProjectFilesDAL
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class SolutionParentKey
   {
     /// <summary>Gets or sets the CodeLine name.</summary>
@@ -82,7 +85,7 @@ namespace ProjectFilesDAL
   public class SolutionPath : IComparer<Solution>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(Solution x, Solution y)
     {
       int retValue;
@@ -109,7 +112,7 @@ namespace ProjectFilesDAL
   public class SolutionSequence : IComparer<Solution>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(Solution x, Solution y)
     {
       int retValue;

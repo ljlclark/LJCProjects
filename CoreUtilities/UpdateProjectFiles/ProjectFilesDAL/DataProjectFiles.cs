@@ -6,26 +6,25 @@ using System.IO;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>
-  /// Provides ProjectFile data helper methods.
-  /// </summary>
+  /// <summary>Provides ProjectFile data helper methods.</summary>
   public class DataProjectFiles
   {
+    #region Constructors
+
     // Initializes an object instance.
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="data"></param>
+    /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
     public DataProjectFiles(ProjectFilesData data)
     {
       Data = data;
     }
+    #endregion
 
     #region Public Methods
 
-    // Create a File Spec.
+    // Create a File Spec from project file data.
+    /// <include path='items/GetFileSpec/*' file='Doc/DataProjectFiles.xml'/>
     public string GetFileSpec(string codeLineName, string codeGroupName
-      , string solutionName, string projectName, string filePath
+      , string solutionName, string projectName, string projectFilePath
       , string fileName = null)
     {
       string retValue = null;
@@ -58,7 +57,7 @@ namespace ProjectFilesDAL
         retValue = Path.Combine(retValue, projectPath);
 
         // Add ProjectFile path and file name.
-        retValue = Path.Combine(retValue, filePath);
+        retValue = Path.Combine(retValue, projectFilePath);
         if (NetString.HasValue(fileName))
         {
           retValue = Path.Combine(retValue, fileName);
@@ -68,11 +67,7 @@ namespace ProjectFilesDAL
     }
 
     // Get the ProjectFile valus from a filespec.
-    /// <summary>
-    /// Get the ProjectFile valus from a filespec.
-    /// </summary>
-    /// <param name="fileSpec">The file specifiation.</param>
-    /// <returns>A ProjectFile ojbect.</returns>
+    /// <include path='items/GetProjectFileValues/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectFile GetProjectFileValues(string fileSpec
       , string targetFilePath = null)
     {
@@ -143,6 +138,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Combines elements from Folder array.
     private string CombineFolders(string[] folders, int startIndex
       , int stopIndex, out string lastFolderName)
     {
@@ -168,12 +164,7 @@ namespace ProjectFilesDAL
     #region Retrieve Object Methods
 
     // Gets the CodeGroup object with name.
-    /// <summary>
-    /// Gets the CodeGroup object with name.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The CodeGroup object.</returns>
+    /// <include path='items/CodeGroup/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroup(string codeLineName, string name)
     {
       CodeGroup retValue = null;
@@ -187,12 +178,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeGroup object with path.
-    /// <summary>
-    /// Gets the CodeGroup object with path.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="path">The path value.</param>
-    /// <returns></returns>
+    /// <include path='items/CodeGroupWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroupWithPath(string codeLineName, string path)
     {
       CodeGroup retValue = null;
@@ -207,11 +193,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeLine object.
-    /// <summary>
-    /// Gets the CodeLine object.
-    /// </summary>
-    /// <param name="name">The name value.</param>
-    /// <returns>The CodeLine object.</returns>
+    /// <include path='items/CodeLline/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLine(string name)
     {
       CodeLine retValue = null;
@@ -225,11 +207,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeLine object.
-    /// <summary>
-    /// Gets the CodeLine object.
-    /// </summary>
-    /// <param name="path">The path value.</param>
-    /// <returns>The CodeLine object.</returns>
+    /// <include path='items/CodeLineWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLineWithPath(string path)
     {
       CodeLine retValue = null;
@@ -243,12 +221,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Project object.
-    /// <summary>
-    /// Gets the Project object.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The Solution object.</returns>
+    /// <include path='items/Project/*' file='Doc/DataProjectFiles.xml'/>
     public Project Project(ProjectParentKey parentKey, string name)
     {
       Project retValue = null;
@@ -262,12 +235,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Project object with path.
-    /// <summary>
-    /// Gets the Project object with path.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="path">The path value.</param>
-    /// <returns>The Solution object.</returns>
+    /// <include path='items/ProjectWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Project ProjectWithPath(ProjectParentKey parentKey, string path)
     {
       Project retValue = null;
@@ -282,12 +250,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the ProjectFiles object.
-    /// <summary>
-    /// Gets the ProjectFile object.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The Solution object.</returns>
+    /// <include path='items/ProjectFile/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectFile ProjectFile(ProjectFileParentKey parentKey, string name)
     {
       ProjectFile retValue = null;
@@ -301,12 +264,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Solution object.
-    /// <summary>
-    /// Gets the Solution object.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The Solution object.</returns>
+    /// <include path='items/Solution/*' file='Doc/DataProjectFiles.xml'/>
     public Solution Solution(SolutionParentKey parentKey, string name)
     {
       Solution retValue = null;
@@ -320,12 +278,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Solution object.
-    /// <summary>
-    /// Gets the Solution object.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="path">The path value.</param>
-    /// <returns>The Solution object.</returns>
+    /// <include path='items/SolutionWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Solution SolutionWithPath(SolutionParentKey parentKey, string path)
     {
       Solution retValue = null;
@@ -342,12 +295,7 @@ namespace ProjectFilesDAL
     #region Retrieve Object Value Methods
 
     // Gets the CodeGroup path value.
-    /// <summary>
-    /// Gets the CodeGroup path value.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The CodeGroup path value.</returns>
+    /// <include path='items/CodeGroupPath/*' file='Doc/DataProjectFiles.xml'/>
     public string CodeGroupPath(string codeLine, string name)
     {
       string retValue = null;
@@ -361,12 +309,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeLine path value.
-    /// <summary>
-    /// Gets the CodeLine path value.
-    /// </summary>
-    /// <param name="path">The name value.</param>
-    /// <param name="defautName">The default name value.</param>
-    /// <returns>The CodeLine path value.</returns>
+    /// <include path='items/CodeLineName/*' file='Doc/DataProjectFiles.xml'/>
     public string CodeLineName(string path, string defautName = null)
     {
       var retValue = defautName;
@@ -380,11 +323,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeLine path value.
-    /// <summary>
-    /// Gets the CodeLine path value.
-    /// </summary>
-    /// <param name="name">The name value.</param>
-    /// <returns>The CodeLine path value.</returns>
+    /// <include path='items/CodeLinePath/*' file='Doc/DataProjectFiles.xml'/>
     public string CodeLinePath(string name)
     {
       string retValue = null;
@@ -398,12 +337,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the ProjectFile source Path value.
-    /// <summary>
-    /// Gets the ProjectFile source path value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The ProjectFile path value.</returns>
+    /// <include path='items/ProjectFileSourcePath/*' file='Doc/DataProjectFiles.xml'/>
     public string ProjectFileSourcePath(ProjectFileParentKey parentKey
       , string name)
     {
@@ -418,13 +352,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Project Name value.
-    /// <summary>
-    /// Gets the Project Name value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="path">The path value.</param>
-    /// <param name="defaultprojectName">The default name value.</param>
-    /// <returns>The Project path value.</returns>
+    /// <include path='items/ProjectName/*' file='Doc/DataProjectFiles.xml'/>
     public string ProjectName(ProjectParentKey parentKey, string path
       , string defaultprojectName = null)
     {
@@ -439,12 +367,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Project path value.
-    /// <summary>
-    /// Gets the Project path value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The Project path value.</returns>
+    /// <include path='items/ProjectPath/*' file='Doc/DataProjectFiles.xml'/>
     public string ProjectPath(ProjectParentKey parentKey
       , string name)
     {
@@ -459,12 +382,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the Solution Name value.
-    /// <summary>
-    /// Gets the Solution Name value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="path">The path value.</param>
-    /// <returns>The Solution Name value.</returns>
+    /// <include path='items/SolutionName/*' file='Doc/DataProjectFiles.xml'/>
     public string SolutionName(SolutionParentKey parentKey, string path)
     {
       string retValue = null;
@@ -478,12 +396,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets the CodeLine path value.
-    /// <summary>
-    /// Gets the CodeLine path value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey object.</param>
-    /// <param name="name">The name value.</param>
-    /// <returns>The Solution path value.</returns>
+    /// <include path='items/SolutionPath/*' file='Doc/DataProjectFiles.xml'/>
     public string SolutionPath(SolutionParentKey parentKey
       , string name)
     {
@@ -501,13 +414,7 @@ namespace ProjectFilesDAL
     #region Create Parent Keys
 
     // Create Project parent key
-    /// <summary>
-    /// Create Project parent key
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <param name="solutionName">The Solution name.</param>
-    /// <returns></returns>
+    /// <include path='items/ProjectParentKey/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectParentKey ProjectParentKey(string codeLineName
       , string codeGroupName, string solutionName)
     {
@@ -527,12 +434,7 @@ namespace ProjectFilesDAL
     }
 
     // Create Solution parent key
-    /// <summary>
-    /// Create Solution parent key
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="codeGroupName">The CodeGroup name.</param>
-    /// <returns></returns>
+    /// <include path='items/SolutionParentKey/*' file='Doc/DataProjectFiles.xml'/>
     public SolutionParentKey SolutionParentKey(string codeLineName
       , string codeGroupName)
     {

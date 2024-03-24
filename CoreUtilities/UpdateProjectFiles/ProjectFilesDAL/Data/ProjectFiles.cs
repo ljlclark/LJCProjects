@@ -12,7 +12,7 @@ namespace ProjectFilesDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ProjectFiles()
     {
       mPrevCount = -1;
@@ -22,7 +22,7 @@ namespace ProjectFilesDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ProjectFiles Clone()
     {
       var retValue = MemberwiseClone() as ProjectFiles;
@@ -30,7 +30,7 @@ namespace ProjectFilesDAL
     }
 
     // Gets a custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public ProjectFiles GetCollection(List<ProjectFile> list)
     {
       ProjectFiles retValue = null;
@@ -50,7 +50,15 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="parentKey"></param>
+    /// <param name="sourceKey"></param>
+    /// <param name="sourceFileName"></param>
+    /// <param name="targetFilePath"></param>
+    /// <param name="sourceFilePath"></param>
+    /// <returns></returns>
     public ProjectFile Add(ProjectFileParentKey parentKey
       , ProjectFileParentKey sourceKey, string sourceFileName
       , string targetFilePath, string sourceFilePath)
@@ -90,6 +98,7 @@ namespace ProjectFilesDAL
     /// Removes an item by unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="sourceFileName"></param>
     public void LJCDelete(ProjectFileParentKey parentKey, string sourceFileName)
     {
       ProjectFile item = LJCRetrieve(parentKey, sourceFileName);
@@ -153,7 +162,7 @@ namespace ProjectFilesDAL
     /// <summary>
     /// Finds and updates the collection item.
     /// </summary>
-    /// <param name="codeGroup">The ProjectFile object.</param>
+    /// <param name="projectFile">The ProjectFile object.</param>
     public void LJCUpdate(ProjectFile projectFile)
     {
       if (NetCommon.HasItems(this))
@@ -206,7 +215,7 @@ namespace ProjectFilesDAL
 
     // Retrieves the ParentKey from the object.
     /// <summary>Retrieves the ParentKey from the object.</summary>
-    /// <param name="project">The ProjectFile object.</param>
+    /// <param name="projectFile">The ProjectFile object.</param>
     /// <returns>The ParentKey object.</returns>
     public ProjectFileParentKey GetParentKey(ProjectFile projectFile)
     {
