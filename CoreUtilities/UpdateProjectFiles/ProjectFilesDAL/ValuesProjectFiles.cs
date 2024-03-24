@@ -7,12 +7,12 @@ using System.IO;
 
 namespace ProjectFilesDAL
 {
-  public sealed class ValuesUpdateProjectFiles
+  public sealed class ValuesProjectFiles
   {
     #region Constructors
 
     // Initializes an object instance.
-    public ValuesUpdateProjectFiles()
+    public ValuesProjectFiles()
     {
       SetConfigFileSpec("UpdateProjectFiles.exe.config");
     }
@@ -78,7 +78,7 @@ namespace ProjectFilesDAL
     public Color EndColor { get; private set; }
 
     // Gets the singleton instance.
-    public static ValuesUpdateProjectFiles Instance
+    public static ValuesProjectFiles Instance
     {
       get { return mInstance; }
     }
@@ -93,8 +93,8 @@ namespace ProjectFilesDAL
     #region Class Data
 
     // The singleton instance.
-    private static readonly ValuesUpdateProjectFiles mInstance
-      = new ValuesUpdateProjectFiles();
+    private static readonly ValuesProjectFiles mInstance
+      = new ValuesProjectFiles();
     #endregion
   }
 }

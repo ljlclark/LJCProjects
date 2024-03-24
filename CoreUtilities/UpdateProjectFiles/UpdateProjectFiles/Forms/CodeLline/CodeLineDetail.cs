@@ -215,7 +215,7 @@ namespace UpdateProjectFiles
     {
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
-      var values = ValuesUpdateProjectFiles.Instance;
+      var values = ValuesProjectFiles.Instance;
       // *** Begin *** Add - Data
       Data = values.Data;
       CodeLines = Data.CodeLines;

@@ -54,15 +54,13 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
-      Solution retValue;
-
       string message = "";
       NetString.AddMissingArgument(message, parentKey);
       AddMissingValues(message, parentKey);
       NetString.AddMissingArgument(message, name);
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCRetrieve(parentKey, name);
+      var retValue = LJCRetrieve(parentKey, name);
       if (null == retValue)
       {
         retValue = new Solution()

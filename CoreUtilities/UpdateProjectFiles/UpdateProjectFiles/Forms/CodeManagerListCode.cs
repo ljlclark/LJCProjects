@@ -139,7 +139,7 @@ namespace UpdateProjectFiles
     // Initialize the Class Data.
     private void InitializeClassData()
     {
-      ConfigValues = ValuesUpdateProjectFiles.Instance;
+      ConfigValues = ValuesProjectFiles.Instance;
       Data = ConfigValues.Data;
       Managers = ConfigValues.Managers;
     }
@@ -379,7 +379,7 @@ namespace UpdateProjectFiles
     internal ManagersProjectFiles Managers { get; set; }
 
     // The Configuration Settings.
-    private ValuesUpdateProjectFiles ConfigValues { get; set; }
+    private ValuesProjectFiles ConfigValues { get; set; }
     #endregion
 
     #region Class Data

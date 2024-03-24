@@ -132,7 +132,7 @@ namespace ProjectFilesDAL
     {
       if (null == mManagers)
       {
-        var values = ValuesUpdateProjectFiles.Instance;
+        var values = ValuesProjectFiles.Instance;
         mManagers = values.Managers;
       }
     }

@@ -45,22 +45,14 @@ namespace ProjectFilesDAL
         }
 
         // Get Solution path.
-        var solutionParentKey = new SolutionParentKey()
-        {
-          CodeLine = codeLineName,
-          CodeGroup = codeGroupName
-        };
+        var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
         var solutionPath = SolutionPath(solutionParentKey
           , solutionName);
         retValue = Path.Combine(retValue, solutionPath);
 
         // Get Project path.
-        var projectParentKey = new ProjectParentKey()
-        {
-          CodeLine = codeLineName,
-          CodeGroup = codeGroupName,
-          Solution = solutionName
-        };
+        var projectParentKey = ProjectParentKey(codeLineName, codeGroupName
+          , solutionName);
         var projectPath = ProjectPath(projectParentKey
           , projectName);
         retValue = Path.Combine(retValue, projectPath);
@@ -519,9 +511,13 @@ namespace ProjectFilesDAL
     public ProjectParentKey ProjectParentKey(string codeLineName
       , string codeGroupName, string solutionName)
     {
-      ProjectParentKey retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, codeGroupName);
+      NetString.AddMissingArgument(message, solutionName);
+      NetString.ThrowInvalidArgument(message);
 
-      retValue = new ProjectParentKey()
+      var retValue = new ProjectParentKey()
       {
         CodeLine = codeLineName,
         CodeGroup = codeGroupName,
@@ -540,9 +536,12 @@ namespace ProjectFilesDAL
     public SolutionParentKey SolutionParentKey(string codeLineName
       , string codeGroupName)
     {
-      SolutionParentKey retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, codeGroupName);
+      NetString.ThrowInvalidArgument(message);
 
-      retValue = new SolutionParentKey()
+      var retValue = new SolutionParentKey()
       {
         CodeLine = codeLineName,
         CodeGroup = codeGroupName

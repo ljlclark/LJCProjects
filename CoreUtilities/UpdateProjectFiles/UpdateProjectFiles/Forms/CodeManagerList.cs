@@ -18,7 +18,7 @@ namespace UpdateProjectFiles
       InitializeComponent();
 
       // Set default class data.
-      var configValues = ValuesUpdateProjectFiles.Instance;
+      var configValues = ValuesProjectFiles.Instance;
       Text += $" - {configValues.FileSpec}";
       Cursor = Cursors.Default;
     }

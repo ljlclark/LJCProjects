@@ -68,7 +68,7 @@
     <Compile Include="Manager\ProjectManager.cs" />
     <Compile Include="Manager\SolutionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValuesUpdateProjectFiles.cs" />
+    <Compile Include="ValuesProjectFiles.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
