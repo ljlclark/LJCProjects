@@ -109,6 +109,30 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Retrieve the collection element with Path.
+    /// <summary>
+    /// Retrieve the collection element with Path.
+    /// </summary>
+    /// <param name="path">The item path.</param>
+    /// <returns>A reference to the matching item.</returns>
+    public CodeLine LJCRetrieveWithPath(string path)
+    {
+      CodeLine retValue = null;
+
+      var comparer = new CodeLinePathComparer();
+      LJCSortPath(comparer);
+      CodeLine searchItem = new CodeLine()
+      {
+        Path = path
+      };
+      int index = BinarySearch(searchItem, comparer);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+
     // Finds and updates the collection item.
     /// <summary>
     /// Finds and updates the collection item.
@@ -129,6 +153,18 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
+    /// <summary>Sorts on Path.</summary>
+    public void LJCSortPath(CodeLinePathComparer comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.Path) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.Path;
+      }
+    }
+
     /// <summary>Sorts on Unique values.</summary>
     public void LJCSortUnique()
     {
@@ -143,6 +179,13 @@ namespace ProjectFilesDAL
     #region Class Data
 
     private int mPrevCount;
+    private SortType mSortType;
+
+    private enum SortType
+    {
+      Unique,
+      Path
+    }
     #endregion
   }
 }

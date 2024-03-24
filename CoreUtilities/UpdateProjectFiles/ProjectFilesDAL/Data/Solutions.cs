@@ -139,6 +139,34 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    // Retrieves the collection element with unique values.
+    /// <summary>
+    /// Retrieves the collection element with unique values.
+    /// </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The item name.</param>
+    /// <returns>A reference to the matching item.</returns>
+    public Solution LJCRetrieveWithPath(SolutionParentKey parentKey
+      , string path)
+    {
+      Solution retValue = null;
+
+      var comparer = new SolutionPath();
+      LJCSortPath(comparer);
+      var searchItem = new Solution()
+      {
+        CodeLine = parentKey.CodeLine,
+        CodeGroup = parentKey.CodeGroup,
+        Path = path
+      };
+      int index = BinarySearch(searchItem, comparer);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+
     // Finds and updates the collection item.
     /// <summary>
     /// Finds and updates the collection item.
@@ -195,6 +223,19 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
+    /// <summary>Sorts on Path.</summary>
+    /// <param name="comparer">The Comparer object.</param>
+    public void LJCSortPath(SolutionPath comparer)
+    {
+      if (Count != mPrevCount
+        || mSortType.CompareTo(SortType.Path) != 0)
+      {
+        mPrevCount = Count;
+        Sort(comparer);
+        mSortType = SortType.Path;
+      }
+    }
+
     /// <summary>Sorts on Sequence.</summary>
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortSequence(SolutionSequence comparer)
@@ -229,6 +270,7 @@ namespace ProjectFilesDAL
     private enum SortType
     {
       Unique,
+      Path,
       Sequence
     }
     #endregion

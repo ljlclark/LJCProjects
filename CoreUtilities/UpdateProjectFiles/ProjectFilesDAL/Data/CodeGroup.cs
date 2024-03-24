@@ -1,7 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CodeGroup.cs
+using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectFilesDAL
 {
@@ -33,7 +35,7 @@ namespace ProjectFilesDAL
       {
         // Case sensitive.
         retValue = CodeLine.CompareTo(other.CodeLine);
-        if (0 == retValue)
+        if (NetString.CompareEqual == retValue)
         {
           retValue = Name.CompareTo(other.Name);
         }
@@ -54,4 +56,34 @@ namespace ProjectFilesDAL
     public string Path { get; set; }
     #endregion
   }
+
+  #region Comparers
+
+  /// <summary>Sort and search on Name value.</summary>
+  public class CodeGroupPathComparer : IComparer<CodeGroup>
+  {
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int Compare(CodeGroup x, CodeGroup y)
+    {
+      int retValue;
+
+      retValue = NetCommon.CompareNull(x, y);
+      if (NetString.CompareNotNullOrEqual == retValue)
+      {
+        retValue = NetCommon.CompareNull(x.Path, y.Path);
+        if (NetString.CompareNotNullOrEqual == retValue)
+        {
+          // Case sensitive.
+          retValue = x.CodeLine.CompareTo(y.CodeLine);
+          if (NetString.CompareEqual == retValue)
+          {
+            retValue = x.Path.CompareTo(y.Path);
+          }
+        }
+      }
+      return retValue;
+    }
+  }
+  #endregion
 }

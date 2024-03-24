@@ -1,7 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Project.cs
+using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectFilesDAL
 {
@@ -27,19 +29,19 @@ namespace ProjectFilesDAL
       if (null == other)
       {
         // This value is greater than null.
-        retValue = 1;
+        retValue = NetString.CompareGreater;
       }
       else
       {
         // Case sensitive.
         retValue = CodeLine.CompareTo(other.CodeLine);
-        if (0 == retValue)
+        if (NetString.CompareEqual == retValue)
         {
           retValue = CodeGroup.CompareTo(other.CodeGroup);
-          if (0 == retValue)
+          if (NetString.CompareEqual == retValue)
           {
             retValue = Solution.CompareTo(other.Solution);
-            if (0 == retValue)
+            if (NetString.CompareEqual == retValue)
             {
               retValue = Name.CompareTo(other.Name);
             }
@@ -79,5 +81,40 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the Solution name.</summary>
     public string Solution { get; set; }
+  }
+
+  /// <summary>Sort and search on Name value.</summary>
+  public class ProjectPath : IComparer<Project>
+  {
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int Compare(Project x, Project y)
+    {
+      int retValue;
+
+      retValue = NetCommon.CompareNull(x, y);
+      if (NetString.CompareNotNullOrEqual == retValue)
+      {
+        retValue = NetCommon.CompareNull(x.Path, y.Path);
+        if (NetString.CompareNotNullOrEqual == retValue)
+        {
+          // Case sensitive.
+          retValue = x.CodeLine.CompareTo(y.CodeLine);
+          if (NetString.CompareEqual == retValue)
+          {
+            retValue = x.CodeGroup.CompareTo(y.CodeGroup);
+            if (NetString.CompareEqual == retValue)
+            {
+              retValue = x.Solution.CompareTo(y.Solution);
+              if (NetString.CompareEqual == retValue)
+              {
+                retValue = x.Path.CompareTo(y.Path);
+              }
+            }
+          }
+        }
+      }
+      return retValue;
+    }
   }
 }

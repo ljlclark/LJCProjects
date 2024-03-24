@@ -565,5 +565,23 @@ namespace LJCNetCommon
       }
     }
     #endregion
+
+    /// <summary>The compare object is equal to the compareto ojbect..</summary>
+    public const int CompareEqual = 0;
+
+    /// <summary>
+    /// The compare pbkect is greater than the compareto object.
+    /// </summary>
+    public const int CompareGreater = 1;
+
+    /// <summary>
+    /// The compare object  is less than the compareto object.
+    /// </summary>
+    public const int CompareLess = -1;
+
+    /// <summary>
+    /// The compare object is notnull or equal is equal to the compareto object.
+    /// </summary>
+    public const int CompareNotNullOrEqual = -2;
   }
 }

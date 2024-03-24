@@ -6,7 +6,6 @@ using LJCWinFormCommon;
 using ProjectFilesDAL;
 using System;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -270,32 +269,24 @@ namespace UpdateProjectFiles
       var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
       if (fileSpec != null)
       {
-        var name = Path.GetFileName(fileSpec);
-        SourceFileNameText.Text = name;
-        if (!NetString.HasValue(TargetFilePathText.Text))
+        var projectFile = dataHelper.GetProjectFileValues(fileSpec, targetPath);
+        if (projectFile != null)
         {
-          TargetFilePathText.Text = "External";
+          SourceFileNameText.Text = projectFile.SourceFileName;
+          if (!NetString.HasValue(Trim(TargetFilePathText)))
+          {
+            TargetFilePathText.Text = projectFile.TargetFilePath;
+          }
+          SourceCodeLineText.Text = projectFile.SourceCodeLine;
+          SourceCodeGroupText.Text = projectFile.SourceCodeGroup;
+          SourceSolutionText.Text = projectFile.SourceSolution;
+          SourceProjectText.Text = projectFile.SourceProject;
+          SourceFilePathText.Text = projectFile.SourceFilePath;
         }
-
-        var path = Path.GetDirectoryName(fileSpec);
-        var folders = path.Split('\\');
-        var index = folders.Length - 1;
-        if (0 == string.Compare(folders[index], "debug", true))
-        {
-          SourceFilePathText.Text = $@"{folders[index]}\{folders[index - 1]}";
-          index--;
-        }
-        index--;
-        SourceProjectText.Text = folders[index];
-        index--;
-        SourceSolutionText.Text = folders[index];
-        index--;
-        SourceCodeGroupText.Text = folders[index];
-        index--;
-        SourceCodeLineText.Text = folders[index];
       }
     }
 
+    // Gets the trimmed textbox value.
     private string Trim(TextBox textBox)
     {
       return textBox.Text.Trim();

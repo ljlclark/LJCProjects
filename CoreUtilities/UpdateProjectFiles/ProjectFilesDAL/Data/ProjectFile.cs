@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CodeLine.cs
+using LJCNetCommon;
 using System;
 
 namespace ProjectFilesDAL
@@ -27,22 +28,22 @@ namespace ProjectFilesDAL
       if (null == other)
       {
         // This value is greater than null.
-        retValue = 1;
+        retValue = NetString.CompareGreater;
       }
       else
       {
         // Case sensitive.
         retValue = TargetCodeLine.CompareTo(other.TargetCodeLine);
-        if (0 == retValue)
+        if (NetString.CompareEqual == retValue)
         {
           retValue = TargetCodeGroup.CompareTo(other.TargetCodeGroup);
-          if (0 == retValue)
+          if (NetString.CompareEqual == retValue)
           {
             retValue = TargetSolution.CompareTo(other.TargetSolution);
-            if (0 == retValue)
+            if (NetString.CompareEqual == retValue)
             {
               retValue = TargetProject.CompareTo(other.TargetProject);
-              if (0 == retValue)
+              if (NetString.CompareEqual == retValue)
               {
                 retValue = SourceFileName.CompareTo(other.SourceFileName);
               }

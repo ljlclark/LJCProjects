@@ -76,6 +76,35 @@ namespace ProjectFilesDAL
     public string CodeGroup { get; set; }
   }
 
+  #region Comparers
+
+  /// <summary>Sort and search on Name value.</summary>
+  public class SolutionPath : IComparer<Solution>
+  {
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    public int Compare(Solution x, Solution y)
+    {
+      int retValue;
+
+      retValue = NetCommon.CompareNull(x, y);
+      if (NetString.CompareNotNullOrEqual == retValue)
+      {
+        retValue = NetCommon.CompareNull(x.Path, y.Path);
+        if (NetString.CompareNotNullOrEqual == retValue)
+        {
+          // Case sensitive.
+          retValue = x.CodeLine.CompareTo(y.CodeLine);
+          if (NetString.CompareEqual == retValue)
+          {
+            retValue = x.Path.CompareTo(y.Path);
+          }
+        }
+      }
+      return retValue;
+    }
+  }
+
   /// <summary>Sort and search on Name value.</summary>
   public class SolutionSequence : IComparer<Solution>
   {
@@ -86,14 +115,14 @@ namespace ProjectFilesDAL
       int retValue;
 
       retValue = NetCommon.CompareNull(x, y);
-      if (-2 == retValue)
+      if (NetString.CompareNotNullOrEqual == retValue)
       {
         // Case sensitive.
         retValue = x.CodeLine.CompareTo(y.CodeLine);
-        if (0 == retValue)
+        if (NetString.CompareEqual == retValue)
         {
           retValue = x.CodeGroup.CompareTo(y.CodeGroup);
-          if (0 == retValue)
+          if (NetString.CompareEqual == retValue)
           {
             // Not case sensitive.
             retValue = x.Sequence.CompareTo(y.Sequence);
@@ -103,4 +132,5 @@ namespace ProjectFilesDAL
       return retValue;
     }
   }
+  #endregion
 }
