@@ -354,27 +354,32 @@ namespace UpdateProjectFiles
       string retValue = null;
 
       if (NetString.HasValue(projectFile.TargetCodeLine)
-        && NetString.HasValue(projectFile.TargetCodeGroup)
-        && NetString.HasValue(projectFile.TargetSolution)
+        && NetString.HasValue(projectFile.TargetPathSolution)
         && NetString.HasValue(projectFile.TargetFilePath)
         && NetString.HasValue(projectFile.SourceFileName))
       {
         var codeLineName = projectFile.TargetCodeLine;
         retValue = DataHelper.CodeLinePath(codeLineName);
 
-        var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
-          , projectFile.TargetCodeGroup);
-        retValue = Path.Combine(retValue, codeGroupPath);
+        if (projectFile.TargetPathCodeGroup != null)
+        {
+          var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
+            , projectFile.TargetPathCodeGroup);
+          retValue = Path.Combine(retValue, codeGroupPath);
+        }
 
         var solutionParentKey = CodeList.GetSolutionParentKey();
         var solutionPath = DataHelper.SolutionPath(solutionParentKey
-          , projectFile.TargetSolution);
+          , projectFile.TargetPathSolution);
         retValue = Path.Combine(retValue, solutionPath);
 
-        var projectParentKey = CodeList.GetProjectParentKey();
-        var projectPath = DataHelper.ProjectPath(projectParentKey
-          , projectFile.TargetProject);
-        retValue = Path.Combine(retValue, projectPath);
+        if (projectFile.TargetPathProject != null)
+        {
+          var projectParentKey = CodeList.GetProjectParentKey();
+          var projectPath = DataHelper.ProjectPath(projectParentKey
+            , projectFile.TargetPathProject);
+          retValue = Path.Combine(retValue, projectPath);
+        }
 
         retValue = Path.Combine(retValue, projectFile.TargetFilePath);
         retValue = Path.Combine(retValue, projectFile.SourceFileName);
