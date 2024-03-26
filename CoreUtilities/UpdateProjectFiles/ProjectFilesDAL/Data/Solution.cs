@@ -29,16 +29,16 @@ namespace ProjectFilesDAL
       if (null == other)
       {
         // This value is greater than null.
-        retValue = 1;
+        retValue = NetString.CompareGreater;
       }
       else
       {
         // Case sensitive.
         retValue = CodeLine.CompareTo(other.CodeLine);
-        if (0 == retValue)
+        if (NetString.CompareEqual == retValue)
         {
           retValue = CodeGroup.CompareTo(other.CodeGroup);
-          if (0 == retValue)
+          if (NetString.CompareEqual == retValue)
           {
             retValue = Name.CompareTo(other.Name);
           }

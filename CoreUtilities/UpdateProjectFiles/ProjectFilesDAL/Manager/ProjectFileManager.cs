@@ -6,7 +6,6 @@ using LJCTextDataReaderLib;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml.Linq;
 
 namespace ProjectFilesDAL
 {
@@ -15,10 +14,8 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="fileName">The data file name.</param>
+    // Initializes an object instance.
+    /// <include path='items/ProjectFileManagerC/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFileManager(string fileName = @"DataFiles\ProjectFile.txt")
     {
       CreateBaseColumns();
@@ -30,15 +27,8 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    /// <summary>
-    /// Adds a ProjectFile record
-    /// </summary>
-    /// <param name="parentKey">The Target Key values.</param>
-    /// <param name="sourceKey">The Source Key values.</param>
-    /// <param name="sourceFileName">The Source File name.</param>
-    /// <param name="sourceFilePath">The Source FileSpec.</param>
-    /// <param name="targetFilePath">The Target FileSpec.</param>
-    /// <returns>The added Project data object.</returns>
+    // Adds a ProjectFile record
+    /// <include path='items/Add/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFile Add(ProjectFileParentKey parentKey, ProjectFileParentKey sourceKey
       , string sourceFileName, string sourceFilePath, string targetFilePath)
     {
@@ -61,11 +51,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Deletes a ProjectFile record.
-    /// </summary>
-    /// <param name="parentKey">The Target Key values.</param>
-    /// <param name="sourceFileName">The Name value.</param>
+    // Deletes a ProjectFile record.
+    /// <include path='items/Delete/*' file='Doc/ProjectFileManager.xml'/>
     public void Delete(ProjectFileParentKey parentKey, string sourceFileName)
     {
       if (HasParentKey(parentKey)
@@ -87,12 +74,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Retrieves a collection of ProjectFile records.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="sourceFileName">The Name value.</param>
-    /// <returns>The Solutions collection if available; otherwise null.</returns>
+    // Retrieves a collection of ProjectFile records.
+    /// <include path='items/Load/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles Load(ProjectFileParentKey parentKey = null
       , string sourceFileName = null)
     {
@@ -117,13 +100,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a collection of records that do NOT match the supplied Name
-    /// value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="sourceFileName">The Name value.</param>
-    /// <returns>The ProjectFiles collection if available; otherwise null.</returns>
+    // Retrieves a collection of records that do NOT match the supplied Name
+    /// <include path='items/LoadAllExcept/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles LoadAllExcept(ProjectFileParentKey parentKey
       , string sourceFileName)
     {
@@ -150,12 +128,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a ProjectFile record.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="sourceFileName">The SourceFileName value.</param>
-    /// <returns>The Solution Data Object if found; otherwise null.</returns>
+    // Retrieves a ProjectFile record.
+    /// <include path='items/Retrieve/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFile Retrieve(ProjectFileParentKey parentKey, string sourceFileName)
     {
       ProjectFile retValue = null;
@@ -203,10 +177,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Updates a record from the DataObject.
-    /// </summary>
-    /// <param name="projectFile">The DataObject value.</param>
+    // Updates a record from the DataObject.
+    /// <include path='items/Update/*' file='Doc/ProjectFileManager.xml'/>
     public Project Update(ProjectFile projectFile)
     {
       Project retValue = null;
@@ -234,11 +206,8 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// Write the text file from a Solutions collection.
-    /// </summary>
-    /// <param name="fileName">The File name.</param>
-    /// <param name="projectFiles">The ProjectFiles collection</param>
+    // Write the text file from a Solutions collection.
+    /// <include path='items/CreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void CreateFile(string fileName, ProjectFiles projectFiles)
     {
       var builder = new StringBuilder(256);
@@ -246,6 +215,9 @@ namespace ProjectFilesDAL
       builder.Append(", TargetCodeGroup");
       builder.Append(", TargetSolution");
       builder.Append(", TargetProject");
+      builder.Append(", TargetPathCodeGroup");
+      builder.Append(", TargetPathSolution");
+      builder.Append(", TargetPathProject");
       builder.Append(", SourceFileName");
       builder.Append(", SourceCodeLine");
       builder.Append(", SourceCodeGroup");
@@ -263,11 +235,7 @@ namespace ProjectFilesDAL
     }
 
     // <summary>Creates a ParentKey from the supplied DataObject.</summary>
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="projectFile"></param>
-    /// <returns></returns>
+    /// <include path='items/CreateParentKey/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
       var retValue = new ProjectFileParentKey()
@@ -280,11 +248,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Creates a record string.
-    /// </summary>
-    /// <param name="projectFile">The ProjectFile Data Object.</param>
-    /// <returns>The record string.</returns>
+    // Creates a record string.
+    /// <include path='items/CreateRecord/*' file='Doc/ProjectFileManager.xml'/>
     public string CreateRecord(ProjectFile projectFile)
     {
       string retValue = null;
@@ -301,6 +266,9 @@ namespace ProjectFilesDAL
         builder.Append($", {projectFile.TargetCodeGroup}");
         builder.Append($", {projectFile.TargetSolution}");
         builder.Append($", {projectFile.TargetProject}");
+        builder.Append($", {projectFile.TargetPathCodeGroup}");
+        builder.Append($", {projectFile.TargetPathSolution}");
+        builder.Append($", {projectFile.TargetPathProject}");
         builder.Append($", {projectFile.SourceFileName}");
         builder.Append($", {projectFile.SourceCodeLine}");
         builder.Append($", {projectFile.SourceCodeGroup}");
@@ -322,6 +290,9 @@ namespace ProjectFilesDAL
         TargetCodeGroup = Reader.GetTrimValue("TargetCodeGroup"),
         TargetSolution = Reader.GetTrimValue("TargetSolution"),
         TargetProject = Reader.GetTrimValue("TargetProject"),
+        TargetPathCodeGroup = Reader.GetTrimValue("TargetPathCodeGroup"),
+        TargetPathSolution = Reader.GetTrimValue("TargetPathSolution"),
+        TargetPathProject = Reader.GetTrimValue("TargetPathProject"),
         SourceFileName = Reader.GetTrimValue("SourceFileName"),
         SourceCodeLine = Reader.GetTrimValue("SourceCodeLine"),
         SourceCodeGroup = Reader.GetTrimValue("SourceCodeGroup"),
@@ -359,9 +330,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Creates a DbColumns object from propertyNames.</summary>
-    /// <param name="propertyNames">The list of property names.</param>
-    /// <returns>A DbColumns collection.</returns>
+    // Creates a DbColumns object from propertyNames.
+    /// <include path='items/GetColumns/*' file='Doc/ProjectFileManager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames = null)
     {
       DbColumns retValue = BaseColumns;
@@ -381,10 +351,7 @@ namespace ProjectFilesDAL
     }
 
     // Recreates a file.
-    /// <summary>
-    /// Recreates a file.
-    /// </summary>
-    /// <param name="projectFiles">The ProjectFiles collection</param>
+    /// <include path='items/RecreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void RecreateFile(ProjectFiles projectFiles)
     {
       Reader.Close();
@@ -405,9 +372,7 @@ namespace ProjectFilesDAL
       RecreateFile(projectFiles);
     }
 
-    /// <summary>
-    /// Write a backup file.
-    /// </summary>
+    /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -427,6 +392,9 @@ namespace ProjectFilesDAL
         { "TargetCodeGroup" },
         { "TargetSolution" },
         { "TargetProject" },
+        { "TargetPathCodeGroup" },
+        { "TargetPathSolution" },
+        { "TargetPathProject" },
         { "SourceFileName" },
         { "SourceCodeLine" },
         { "SourceCodeGroup" },

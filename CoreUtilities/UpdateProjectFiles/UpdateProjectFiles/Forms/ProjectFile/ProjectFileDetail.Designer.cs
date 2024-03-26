@@ -55,12 +55,18 @@
       this.SourceFilePathLabel = new System.Windows.Forms.Label();
       this.DetailMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.DetailSource = new System.Windows.Forms.ToolStripMenuItem();
+      this.TargetPathCodeGroupText = new System.Windows.Forms.TextBox();
+      this.TargetPathCodeGroupLabel = new System.Windows.Forms.Label();
+      this.TargetPathSolutionText = new System.Windows.Forms.TextBox();
+      this.TargetPathSolutionLabel = new System.Windows.Forms.Label();
+      this.TargetPathProjectText = new System.Windows.Forms.TextBox();
+      this.TargetPathProjectLabel = new System.Windows.Forms.Label();
       this.DetailMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // TargetSolutionText
       // 
-      this.TargetSolutionText.Location = new System.Drawing.Point(174, 86);
+      this.TargetSolutionText.Location = new System.Drawing.Point(209, 86);
       this.TargetSolutionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.TargetSolutionText.Name = "TargetSolutionText";
       this.TargetSolutionText.ReadOnly = true;
@@ -72,13 +78,13 @@
       this.TargetSolutionLabel.Location = new System.Drawing.Point(18, 90);
       this.TargetSolutionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.TargetSolutionLabel.Name = "TargetSolutionLabel";
-      this.TargetSolutionLabel.Size = new System.Drawing.Size(153, 20);
+      this.TargetSolutionLabel.Size = new System.Drawing.Size(188, 20);
       this.TargetSolutionLabel.TabIndex = 4;
       this.TargetSolutionLabel.Text = "Target Solution";
       // 
       // TargetCodeGroupText
       // 
-      this.TargetCodeGroupText.Location = new System.Drawing.Point(174, 50);
+      this.TargetCodeGroupText.Location = new System.Drawing.Point(209, 50);
       this.TargetCodeGroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.TargetCodeGroupText.Name = "TargetCodeGroupText";
       this.TargetCodeGroupText.ReadOnly = true;
@@ -90,30 +96,30 @@
       this.TargetCodeGroupLabel.Location = new System.Drawing.Point(18, 54);
       this.TargetCodeGroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.TargetCodeGroupLabel.Name = "TargetCodeGroupLabel";
-      this.TargetCodeGroupLabel.Size = new System.Drawing.Size(153, 20);
+      this.TargetCodeGroupLabel.Size = new System.Drawing.Size(188, 20);
       this.TargetCodeGroupLabel.TabIndex = 2;
       this.TargetCodeGroupLabel.Text = "Target Code Group";
       // 
       // TargetFilePathText
       // 
-      this.TargetFilePathText.Location = new System.Drawing.Point(174, 194);
+      this.TargetFilePathText.Location = new System.Drawing.Point(678, 194);
       this.TargetFilePathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.TargetFilePathText.Name = "TargetFilePathText";
       this.TargetFilePathText.Size = new System.Drawing.Size(295, 26);
-      this.TargetFilePathText.TabIndex = 11;
+      this.TargetFilePathText.TabIndex = 27;
       // 
       // TargetFilePathLabel
       // 
-      this.TargetFilePathLabel.Location = new System.Drawing.Point(18, 198);
+      this.TargetFilePathLabel.Location = new System.Drawing.Point(522, 198);
       this.TargetFilePathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.TargetFilePathLabel.Name = "TargetFilePathLabel";
       this.TargetFilePathLabel.Size = new System.Drawing.Size(153, 20);
-      this.TargetFilePathLabel.TabIndex = 10;
+      this.TargetFilePathLabel.TabIndex = 26;
       this.TargetFilePathLabel.Text = "Target File Path";
       // 
       // TargetCodeLineText
       // 
-      this.TargetCodeLineText.Location = new System.Drawing.Point(174, 14);
+      this.TargetCodeLineText.Location = new System.Drawing.Point(209, 14);
       this.TargetCodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.TargetCodeLineText.Name = "TargetCodeLineText";
       this.TargetCodeLineText.ReadOnly = true;
@@ -125,36 +131,36 @@
       this.TargetCodeLineLabel.Location = new System.Drawing.Point(18, 18);
       this.TargetCodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.TargetCodeLineLabel.Name = "TargetCodeLineLabel";
-      this.TargetCodeLineLabel.Size = new System.Drawing.Size(153, 20);
+      this.TargetCodeLineLabel.Size = new System.Drawing.Size(188, 20);
       this.TargetCodeLineLabel.TabIndex = 0;
       this.TargetCodeLineLabel.Text = "Target CodeL Line";
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(824, 234);
+      this.FormCancelButton.Location = new System.Drawing.Point(859, 270);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
-      this.FormCancelButton.TabIndex = 23;
+      this.FormCancelButton.TabIndex = 29;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(702, 234);
+      this.OKButton.Location = new System.Drawing.Point(737, 270);
       this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(112, 35);
-      this.OKButton.TabIndex = 22;
+      this.OKButton.TabIndex = 28;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
       // SourceFileNameText
       // 
-      this.SourceFileNameText.Location = new System.Drawing.Point(174, 158);
+      this.SourceFileNameText.Location = new System.Drawing.Point(209, 158);
       this.SourceFileNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceFileNameText.Name = "SourceFileNameText";
       this.SourceFileNameText.Size = new System.Drawing.Size(295, 26);
@@ -165,13 +171,13 @@
       this.SourceFileNameLabel.Location = new System.Drawing.Point(18, 162);
       this.SourceFileNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceFileNameLabel.Name = "SourceFileNameLabel";
-      this.SourceFileNameLabel.Size = new System.Drawing.Size(153, 20);
+      this.SourceFileNameLabel.Size = new System.Drawing.Size(188, 20);
       this.SourceFileNameLabel.TabIndex = 8;
       this.SourceFileNameLabel.Text = "Source File Name";
       // 
       // TargetProjectText
       // 
-      this.TargetProjectText.Location = new System.Drawing.Point(174, 122);
+      this.TargetProjectText.Location = new System.Drawing.Point(209, 122);
       this.TargetProjectText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.TargetProjectText.Name = "TargetProjectText";
       this.TargetProjectText.ReadOnly = true;
@@ -183,93 +189,93 @@
       this.TargetProjectLabel.Location = new System.Drawing.Point(18, 126);
       this.TargetProjectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.TargetProjectLabel.Name = "TargetProjectLabel";
-      this.TargetProjectLabel.Size = new System.Drawing.Size(153, 20);
+      this.TargetProjectLabel.Size = new System.Drawing.Size(188, 20);
       this.TargetProjectLabel.TabIndex = 6;
       this.TargetProjectLabel.Text = "Target Project";
       // 
       // SourceProjectText
       // 
-      this.SourceProjectText.Location = new System.Drawing.Point(643, 120);
+      this.SourceProjectText.Location = new System.Drawing.Point(678, 122);
       this.SourceProjectText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceProjectText.Name = "SourceProjectText";
       this.SourceProjectText.Size = new System.Drawing.Size(295, 26);
-      this.SourceProjectText.TabIndex = 19;
+      this.SourceProjectText.TabIndex = 23;
       // 
       // SourceProjectLabel
       // 
-      this.SourceProjectLabel.Location = new System.Drawing.Point(487, 124);
+      this.SourceProjectLabel.Location = new System.Drawing.Point(522, 126);
       this.SourceProjectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceProjectLabel.Name = "SourceProjectLabel";
       this.SourceProjectLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceProjectLabel.TabIndex = 18;
+      this.SourceProjectLabel.TabIndex = 22;
       this.SourceProjectLabel.Text = "Source Project";
       // 
       // SourceSolutionText
       // 
-      this.SourceSolutionText.Location = new System.Drawing.Point(643, 84);
+      this.SourceSolutionText.Location = new System.Drawing.Point(678, 86);
       this.SourceSolutionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceSolutionText.Name = "SourceSolutionText";
       this.SourceSolutionText.Size = new System.Drawing.Size(295, 26);
-      this.SourceSolutionText.TabIndex = 17;
+      this.SourceSolutionText.TabIndex = 21;
       // 
       // SourceSolutionLabel
       // 
-      this.SourceSolutionLabel.Location = new System.Drawing.Point(487, 88);
+      this.SourceSolutionLabel.Location = new System.Drawing.Point(522, 90);
       this.SourceSolutionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceSolutionLabel.Name = "SourceSolutionLabel";
       this.SourceSolutionLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceSolutionLabel.TabIndex = 16;
+      this.SourceSolutionLabel.TabIndex = 20;
       this.SourceSolutionLabel.Text = "Source Solution";
       // 
       // SourceCodeGroupText
       // 
-      this.SourceCodeGroupText.Location = new System.Drawing.Point(643, 48);
+      this.SourceCodeGroupText.Location = new System.Drawing.Point(678, 50);
       this.SourceCodeGroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceCodeGroupText.Name = "SourceCodeGroupText";
       this.SourceCodeGroupText.Size = new System.Drawing.Size(295, 26);
-      this.SourceCodeGroupText.TabIndex = 15;
+      this.SourceCodeGroupText.TabIndex = 19;
       // 
       // SourceCodeGroupLabel
       // 
-      this.SourceCodeGroupLabel.Location = new System.Drawing.Point(487, 52);
+      this.SourceCodeGroupLabel.Location = new System.Drawing.Point(522, 54);
       this.SourceCodeGroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceCodeGroupLabel.Name = "SourceCodeGroupLabel";
       this.SourceCodeGroupLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceCodeGroupLabel.TabIndex = 14;
+      this.SourceCodeGroupLabel.TabIndex = 18;
       this.SourceCodeGroupLabel.Text = "Source Code Group";
       // 
       // SourceCodeLineText
       // 
-      this.SourceCodeLineText.Location = new System.Drawing.Point(643, 12);
+      this.SourceCodeLineText.Location = new System.Drawing.Point(678, 14);
       this.SourceCodeLineText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceCodeLineText.Name = "SourceCodeLineText";
       this.SourceCodeLineText.Size = new System.Drawing.Size(295, 26);
-      this.SourceCodeLineText.TabIndex = 13;
+      this.SourceCodeLineText.TabIndex = 17;
       // 
       // SourceCodeLineLabel
       // 
-      this.SourceCodeLineLabel.Location = new System.Drawing.Point(487, 16);
+      this.SourceCodeLineLabel.Location = new System.Drawing.Point(522, 18);
       this.SourceCodeLineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceCodeLineLabel.Name = "SourceCodeLineLabel";
       this.SourceCodeLineLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceCodeLineLabel.TabIndex = 12;
+      this.SourceCodeLineLabel.TabIndex = 16;
       this.SourceCodeLineLabel.Text = "Source CodeL Line";
       // 
       // SourceFilePathText
       // 
-      this.SourceFilePathText.Location = new System.Drawing.Point(643, 156);
+      this.SourceFilePathText.Location = new System.Drawing.Point(678, 158);
       this.SourceFilePathText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SourceFilePathText.Name = "SourceFilePathText";
       this.SourceFilePathText.Size = new System.Drawing.Size(295, 26);
-      this.SourceFilePathText.TabIndex = 21;
+      this.SourceFilePathText.TabIndex = 25;
       // 
       // SourceFilePathLabel
       // 
-      this.SourceFilePathLabel.Location = new System.Drawing.Point(487, 160);
+      this.SourceFilePathLabel.Location = new System.Drawing.Point(522, 162);
       this.SourceFilePathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.SourceFilePathLabel.Name = "SourceFilePathLabel";
       this.SourceFilePathLabel.Size = new System.Drawing.Size(153, 20);
-      this.SourceFilePathLabel.TabIndex = 20;
+      this.SourceFilePathLabel.TabIndex = 24;
       this.SourceFilePathLabel.Text = "Source File Path";
       // 
       // DetailMenu
@@ -287,12 +293,69 @@
       this.DetailSource.Text = "Select Source File";
       this.DetailSource.Click += new System.EventHandler(this.DetailSource_Click);
       // 
+      // TargetPathCodeGroupText
+      // 
+      this.TargetPathCodeGroupText.Location = new System.Drawing.Point(209, 194);
+      this.TargetPathCodeGroupText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.TargetPathCodeGroupText.Name = "TargetPathCodeGroupText";
+      this.TargetPathCodeGroupText.Size = new System.Drawing.Size(295, 26);
+      this.TargetPathCodeGroupText.TabIndex = 11;
+      // 
+      // TargetPathCodeGroupLabel
+      // 
+      this.TargetPathCodeGroupLabel.Location = new System.Drawing.Point(18, 198);
+      this.TargetPathCodeGroupLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.TargetPathCodeGroupLabel.Name = "TargetPathCodeGroupLabel";
+      this.TargetPathCodeGroupLabel.Size = new System.Drawing.Size(188, 20);
+      this.TargetPathCodeGroupLabel.TabIndex = 10;
+      this.TargetPathCodeGroupLabel.Text = "Target Path Code Group";
+      // 
+      // TargetPathSolutionText
+      // 
+      this.TargetPathSolutionText.Location = new System.Drawing.Point(209, 230);
+      this.TargetPathSolutionText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.TargetPathSolutionText.Name = "TargetPathSolutionText";
+      this.TargetPathSolutionText.Size = new System.Drawing.Size(295, 26);
+      this.TargetPathSolutionText.TabIndex = 13;
+      // 
+      // TargetPathSolutionLabel
+      // 
+      this.TargetPathSolutionLabel.Location = new System.Drawing.Point(18, 234);
+      this.TargetPathSolutionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.TargetPathSolutionLabel.Name = "TargetPathSolutionLabel";
+      this.TargetPathSolutionLabel.Size = new System.Drawing.Size(188, 20);
+      this.TargetPathSolutionLabel.TabIndex = 12;
+      this.TargetPathSolutionLabel.Text = "Target Path Solution";
+      // 
+      // TargetPathProjectText
+      // 
+      this.TargetPathProjectText.Location = new System.Drawing.Point(209, 266);
+      this.TargetPathProjectText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.TargetPathProjectText.Name = "TargetPathProjectText";
+      this.TargetPathProjectText.Size = new System.Drawing.Size(295, 26);
+      this.TargetPathProjectText.TabIndex = 15;
+      // 
+      // TargetPathProjectLabel
+      // 
+      this.TargetPathProjectLabel.Location = new System.Drawing.Point(18, 270);
+      this.TargetPathProjectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.TargetPathProjectLabel.Name = "TargetPathProjectLabel";
+      this.TargetPathProjectLabel.Size = new System.Drawing.Size(188, 20);
+      this.TargetPathProjectLabel.TabIndex = 14;
+      this.TargetPathProjectLabel.Text = "Target Path Project";
+      // 
       // ProjectFileDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(954, 282);
+      this.ClientSize = new System.Drawing.Size(989, 318);
       this.ContextMenuStrip = this.DetailMenu;
+      this.Controls.Add(this.TargetPathProjectText);
+      this.Controls.Add(this.TargetPathProjectLabel);
+      this.Controls.Add(this.TargetPathSolutionText);
+      this.Controls.Add(this.TargetPathSolutionLabel);
+      this.Controls.Add(this.TargetPathCodeGroupText);
+      this.Controls.Add(this.TargetPathCodeGroupLabel);
       this.Controls.Add(this.SourceProjectText);
       this.Controls.Add(this.SourceProjectLabel);
       this.Controls.Add(this.SourceSolutionText);
@@ -354,5 +417,11 @@
     private System.Windows.Forms.Label SourceFilePathLabel;
     private System.Windows.Forms.ContextMenuStrip DetailMenu;
     private System.Windows.Forms.ToolStripMenuItem DetailSource;
+    private System.Windows.Forms.TextBox TargetPathCodeGroupText;
+    private System.Windows.Forms.Label TargetPathCodeGroupLabel;
+    private System.Windows.Forms.TextBox TargetPathSolutionText;
+    private System.Windows.Forms.Label TargetPathSolutionLabel;
+    private System.Windows.Forms.TextBox TargetPathProjectText;
+    private System.Windows.Forms.Label TargetPathProjectLabel;
   }
 }

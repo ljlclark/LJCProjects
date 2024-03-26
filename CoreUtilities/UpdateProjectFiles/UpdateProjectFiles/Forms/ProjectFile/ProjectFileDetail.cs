@@ -91,6 +91,9 @@ namespace UpdateProjectFiles
         TargetCodeGroupText.Text = LJCTargetGroup;
         TargetSolutionText.Text = LJCTargetSolution;
         TargetProjectText.Text = LJCTargetProject;
+        TargetPathCodeGroupText.Text = LJCTargetGroup;
+        TargetPathSolutionText.Text = LJCTargetSolution;
+        TargetPathProjectText.Text = LJCTargetProject;
 
         SourceFileNameText.Select();
         SourceFileNameText.Select(0, 0);
@@ -109,12 +112,15 @@ namespace UpdateProjectFiles
         TargetSolutionText.Text = dataRecord.TargetSolution;
         TargetProjectText.Text = dataRecord.TargetProject;
         SourceFileNameText.Text = dataRecord.SourceFileName;
-        TargetFilePathText.Text = dataRecord.TargetFilePath;
+        TargetPathCodeGroupText.Text = dataRecord.TargetPathCodeGroup;
+        TargetPathSolutionText.Text = dataRecord.TargetPathSolution;
+        TargetPathProjectText.Text = dataRecord.TargetPathProject;
         SourceCodeLineText.Text = dataRecord.SourceCodeLine;
         SourceCodeGroupText.Text = dataRecord.SourceCodeGroup;
         SourceSolutionText.Text = dataRecord.SourceSolution;
         SourceProjectText.Text = dataRecord.SourceProject;
         SourceFilePathText.Text = dataRecord.SourceFilePath;
+        TargetFilePathText.Text = dataRecord.TargetFilePath;
       }
     }
 
@@ -137,18 +143,21 @@ namespace UpdateProjectFiles
       {
         retValue.SourceFileName = Trim(SourceFileNameText);
       }
+      retValue.TargetPathCodeGroup = Trim(TargetPathCodeGroupText);
+      retValue.TargetPathSolution = Trim(TargetPathSolutionText);
+      retValue.TargetPathProject = Trim(TargetPathProjectText);
       retValue.SourceCodeLine = Trim(SourceCodeLineText);
       retValue.SourceCodeGroup = Trim(SourceCodeGroupText);
       retValue.SourceSolution = Trim(SourceSolutionText);
       retValue.SourceProject = Trim(SourceProjectText);
       retValue.SourceFilePath = Trim(SourceFilePathText);
+      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
 
       // Get Reference key values.
       retValue.TargetCodeLine = LJCTargetLine;
       retValue.TargetCodeGroup = LJCTargetGroup;
       retValue.TargetSolution = LJCTargetSolution;
       retValue.TargetProject = LJCTargetProject;
-      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
       return retValue;
     }
 

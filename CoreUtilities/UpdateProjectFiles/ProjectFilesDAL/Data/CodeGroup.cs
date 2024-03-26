@@ -29,7 +29,7 @@ namespace ProjectFilesDAL
       if (null == other)
       {
         // This value is greater than null.
-        retValue = 1;
+        retValue = NetString.CompareGreater;
       }
       else
       {

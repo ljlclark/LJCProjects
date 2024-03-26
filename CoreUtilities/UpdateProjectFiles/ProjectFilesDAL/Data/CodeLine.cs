@@ -62,10 +62,10 @@ namespace ProjectFilesDAL
       int retValue;
 
       retValue = NetCommon.CompareNull(x, y);
-      if (NotNullOrEqual == retValue)
+      if (NetString.CompareNotNullOrEqual == retValue)
       {
         retValue = NetCommon.CompareNull(x.Path, y.Path);
-        if (NotNullOrEqual == retValue)
+        if (NetString.CompareNotNullOrEqual == retValue)
         {
           // Case sensitive.
           retValue = x.Path.CompareTo(y.Path);
@@ -73,8 +73,6 @@ namespace ProjectFilesDAL
       }
       return retValue;
     }
-
-    private const int NotNullOrEqual = -2;
   }
   #endregion
 }

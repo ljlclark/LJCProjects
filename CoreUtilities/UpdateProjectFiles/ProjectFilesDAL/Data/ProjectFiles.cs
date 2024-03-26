@@ -171,6 +171,14 @@ namespace ProjectFilesDAL
         var item = LJCRetrieve(parentKey, projectFile.SourceFileName);
         if (item != null)
         {
+          //if (NetString.CompareEqual
+          //  == string.Compare(projectFile.TargetFilePath, "External", true))
+          //{
+          //  item.TargetPathProject = null;
+          //};
+          item.TargetPathCodeGroup = projectFile.TargetPathCodeGroup;
+          item.TargetPathSolution = projectFile.TargetPathSolution;
+          item.TargetPathProject = projectFile.TargetPathProject;
           item.SourceCodeLine = projectFile.SourceCodeLine;
           item.SourceCodeGroup = projectFile.SourceCodeGroup;
           item.SourceSolution = projectFile.SourceSolution;
