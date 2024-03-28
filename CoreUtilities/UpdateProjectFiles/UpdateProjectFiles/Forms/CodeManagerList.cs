@@ -4,6 +4,7 @@
 using LJCWinFormCommon;
 using ProjectFilesDAL;
 using System.Windows.Forms;
+using static UpdateProjectFiles.ProjectGridCode;
 
 namespace UpdateProjectFiles
 {
@@ -182,13 +183,13 @@ namespace UpdateProjectFiles
     // Clears the project dependencies
     private void ProjectClear_Click(object sender, System.EventArgs e)
     {
-      mProjectGridCode.ClearDependencies();
+      mProjectGridCode.DoDependencies(DependencyAction.Delete);
     }
 
     // Updates the project dependencies.
     private void ProjectUpdate_Click(object sender, System.EventArgs e)
     {
-      mProjectGridCode.UpdateDependencies();
+      mProjectGridCode.DoDependencies(DependencyAction.Copy);
     }
     #endregion
 

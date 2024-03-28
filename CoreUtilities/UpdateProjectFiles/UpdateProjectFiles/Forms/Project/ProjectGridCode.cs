@@ -8,6 +8,7 @@ using ProjectFilesDAL;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
@@ -246,23 +247,18 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.Default;
     }
 
-    // Clears the solution dependencies
-    internal void ClearDependencies()
-    {
-    }
-
     // Updates the solution dependencies.
-    internal void UpdateDependencies()
+    internal void DoDependencies(DependencyAction action)
     {
       if (SolutionGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
         var projectFileParentKey = CodeList.GetProjectFileParentKey();
 
-        var projectFiles = Data.ProjectFiles;
-        var files = projectFiles.LJCLoad(projectFileParentKey);
+        var files = Dependencies(projectFileParentKey);
         if (NetCommon.HasItems(files))
         {
+          string actionTitle= null;
           foreach (var projectFile in files)
           {
             var sourceFileSpec = SourceFileSpec(projectFile);
@@ -270,15 +266,35 @@ namespace UpdateProjectFiles
             if (NetString.HasValue(sourceFileSpec)
               && NetString.HasValue(targetFileSpec))
             {
-              File.Copy(sourceFileSpec, targetFileSpec, true);
+              switch (action)
+              {
+                case DependencyAction.Delete:
+                  actionTitle = "Clear";
+                  File.Delete(targetFileSpec);
+                  break;
+
+                case DependencyAction.Copy:
+                  actionTitle = "Update";
+                  File.Copy(sourceFileSpec, targetFileSpec, true);
+                  break;
+              }
             }
           }
-          var title = "Solution Update";
-          var message = "Solution Dependencies Update is Complete";
+
+          var title = $"Solution {actionTitle}";
+          var message = $"Solution Dependencies {actionTitle} is Complete";
           MessageBox.Show(message, title, MessageBoxButtons.OK
             , MessageBoxIcon.Information);
         }
       }
+    }
+
+    // Gets the Project dependencies.
+    internal ProjectFiles Dependencies(ProjectFileParentKey parentKey)
+    {
+      var projectFiles = Data.ProjectFiles;
+      var retValue = projectFiles.LJCLoad(parentKey);
+      return retValue;
     }
 
     // Adds new row or updates row with record values.
@@ -417,5 +433,11 @@ namespace UpdateProjectFiles
     // Gets or sets the SolutionGrid reference.
     private LJCDataGrid SolutionGrid { get; set; }
     #endregion
+
+    internal enum DependencyAction
+    {
+      Delete,
+      Copy
+    }
   }
 }
