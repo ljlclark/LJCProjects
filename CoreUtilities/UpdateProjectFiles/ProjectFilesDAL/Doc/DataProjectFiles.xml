@@ -7,7 +7,7 @@
     <summary>
       Initializes an object instance.
     </summary>
-    <param name="data"></param>
+    <param name="dataHelper"></param>
   </DataProjectFilesC>
   <!-- Public Methods -->
   <GetFileSpec>

@@ -67,11 +67,9 @@ namespace UpdateProjectFiles
         Text += " - Edit";
         LJCIsUpdate = true;
         var parentKey = GetParentKey();
-        // *** Begin *** Change - Data
         //var manager = Managers.ProjectManager;
         //mOriginalRecord = manager.Retrieve(parentKey, LJCName);
         mOriginalRecord = Projects.LJCRetrieve(parentKey, LJCName);
-        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
 
         NameText.ReadOnly = true;
@@ -155,21 +153,17 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           Projects.LJCUpdate(LJCRecord);
           manager.RecreateFile(Projects);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
           var parentKey = GetParentKey();
-          // *** Begin *** Change - Data
           //manager.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
           Projects.Add(parentKey, LJCRecord.Name, LJCRecord.Path);
           manager.RecreateFile(Projects);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -243,10 +237,8 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesProjectFiles.Instance;
-      // *** Begin *** Add - Data
       Data = values.Data;
       Projects = Data.Projects;
-      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -331,7 +323,6 @@ namespace UpdateProjectFiles
     private Color BeginColor { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Statement *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the End Color.
@@ -341,7 +332,6 @@ namespace UpdateProjectFiles
     private ManagersProjectFiles Managers { get; set; }
 
     // Gets or sets the Projects object.
-    // *** Next Statement *** Add - Data
     private Projects Projects { get; set; }
     #endregion
 

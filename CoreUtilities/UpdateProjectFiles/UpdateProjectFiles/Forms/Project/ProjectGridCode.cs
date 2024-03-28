@@ -34,11 +34,9 @@ namespace UpdateProjectFiles
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
-      // *** Begin *** Add - Data
       Data = CodeList.Data;
       Projects = Data.Projects;
       DataHelper = new DataProjectFiles(Data);
-      // *** End   *** Add - Data
       Managers = CodeList.Managers;
       ProjectManager = Managers.ProjectManager;
     }
@@ -52,10 +50,8 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       ProjectGrid.LJCRowsClear();
 
-      // *** Begin *** Change - Datas
       //var projects = ProjectManager.Load(parentKey);
       var projects = Projects.LJCLoad(parentKey);
-      // *** End   *** Change - Datas
       if (NetCommon.HasItems(projects))
       {
         foreach (var project in projects)
@@ -157,12 +153,9 @@ namespace UpdateProjectFiles
           Solution = parentRow.LJCGetString("Name")
         };
 
-        // *** Begin *** Change - Datas
         //ProjectManager.Delete(parentKey, name);
         Projects.LJCDelete(parentKey, name);
-        //ProjectManager.WriteBackup();
         ProjectManager.RecreateFile(Projects);
-        // *** End   *** Change - Datas
       }
 
       if (success)
@@ -407,14 +400,12 @@ namespace UpdateProjectFiles
     #region Properties
 
     // Gets or sets the Data object.
-    // *** Next Line *** Add - Data
     private DataProjectFiles DataHelper { get; set; }
 
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Line *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the Managers reference.
@@ -427,7 +418,6 @@ namespace UpdateProjectFiles
     private ProjectManager ProjectManager { get; set; }
 
     // Gets or sets the Projects collection.
-    // *** Next Line *** Add - Data
     private Projects Projects { get; set; }
 
     // Gets or sets the SolutionGrid reference.

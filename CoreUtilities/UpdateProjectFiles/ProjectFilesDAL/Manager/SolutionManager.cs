@@ -14,9 +14,7 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
+    /// <summary>Initializes an object instance.</summary>
     /// <param name="fileName">The data file name.</param>
     public SolutionManager(string fileName = @"DataFiles\Solution.txt")
     {
@@ -370,7 +368,6 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      // *** Next Statement *** Change - 3/11/24
       if (HasParentKey(parentKey))
       {
         retValue = new Solution()
@@ -408,7 +405,6 @@ namespace ProjectFilesDAL
       if (current.CodeLine == solution.CodeLine
         && current.CodeGroup == solution.CodeGroup)
       {
-        // *** Next Statement *** Add - 3/11/24
         if (null == solution.Name
           || current.Name == solution.Name)
         {

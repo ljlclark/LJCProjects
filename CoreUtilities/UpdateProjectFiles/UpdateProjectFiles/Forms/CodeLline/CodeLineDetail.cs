@@ -64,11 +64,9 @@ namespace UpdateProjectFiles
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        // *** Begin *** Change - Data
         //var manager = Managers.CodeLineManager;
         //mOriginalRecord = manager.Retrieve(LJCName);
         mOriginalRecord = CodeLines.LJCRetrieve(LJCName);
-        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
 
         NameText.ReadOnly = true;
@@ -141,20 +139,16 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           CodeLines.LJCUpdate(LJCRecord);
           manager.RecreateFile(CodeLines);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
-          // *** Begin *** Change - Data
           //manager.Add(LJCRecord.Name, LJCRecord.Path);
           CodeLines.Add(LJCRecord.Name, LJCRecord.Path);
           manager.RecreateFile(CodeLines);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -216,10 +210,8 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesProjectFiles.Instance;
-      // *** Begin *** Add - Data
       Data = values.Data;
       CodeLines = Data.CodeLines;
-      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -295,11 +287,9 @@ namespace UpdateProjectFiles
     private Color BeginColor { get; set; }
 
     // Gets or sets the CodeLines object.
-    // *** Next Statement *** Add - Data
     private CodeLines CodeLines { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Statement *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the End Color.

@@ -66,11 +66,9 @@ namespace UpdateProjectFiles
         Text += " - Edit";
         LJCIsUpdate = true;
         var parentKey = GetParentKey();
-        // *** Begin *** Change - Data
         //var manager = Managers.SolutionManager;
         //mOriginalRecord = manager.Retrieve(parentKey, LJCName);
         mOriginalRecord = Solutions.LJCRetrieve(parentKey, LJCName);
-        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
 
         NameText.ReadOnly = true;
@@ -151,22 +149,18 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           Solutions.LJCUpdate(LJCRecord);
           manager.RecreateFile(Solutions);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
         else
         {
           var parentKey = GetParentKey();
           var sequence = 1;
-          // *** Begin *** Change - Data
           //manager.Add(parentKey, LJCRecord.Name, sequence, LJCRecord.Path);
           Solutions.Add(parentKey, LJCRecord.Name, sequence, LJCRecord.Path);
           manager.RecreateFile(Solutions);
-          // *** End   *** Change - Data
           ResetRecordValues(LJCRecord);
         }
       }
@@ -239,10 +233,8 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesProjectFiles.Instance;
-      // *** Begin *** Add - Data
       Data = values.Data;
       Solutions = Data.Solutions;
-      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -324,7 +316,6 @@ namespace UpdateProjectFiles
     private Color BeginColor { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Statement *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the End Color.
@@ -334,7 +325,6 @@ namespace UpdateProjectFiles
     private ManagersProjectFiles Managers { get; set; }
 
     // Gets or sets the Solutions object.
-    // *** Next Statement *** Add - Data
     private Solutions Solutions { get; set; }
     #endregion
 

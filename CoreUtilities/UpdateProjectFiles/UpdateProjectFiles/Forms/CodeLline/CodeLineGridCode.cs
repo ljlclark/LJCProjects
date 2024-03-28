@@ -29,10 +29,8 @@ namespace UpdateProjectFiles
     // Resets the DataConfig dependent objects.
     internal void ResetData()
     {
-      // *** Begin *** Add - Data
       Data = CodeList.Data;
       CodeLines = Data.CodeLines;
-      // *** End   *** Add - Data
       Managers = CodeList.Managers;
       CodeLineManager = Managers.CodeLineManager;
     }
@@ -46,10 +44,8 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       CodeLineGrid.LJCRowsClear();
 
-      // *** Begin *** Change - Data
       //var codeLines = CodeLineManager.Load();
       var codeLines = CodeLines;
-      // *** End   *** Change - Data
       if (NetCommon.HasItems(codeLines))
       {
         foreach (var codeLine in codeLines)
@@ -134,10 +130,8 @@ namespace UpdateProjectFiles
         // Data from items.
         var name = row.LJCGetString("Name");
 
-        // *** Next Line *** Change - Datas
         //CodeLineManager.Delete(name);
         CodeLines.LJCDelete(name);
-        //CodeLineManager.WriteBackup();
         CodeLineManager.RecreateFile(CodeLines);
       }
 
@@ -252,11 +246,9 @@ namespace UpdateProjectFiles
     private CodeLineManager CodeLineManager { get; set; }
 
     // Gets or sets the CodeLines collection.
-    // *** Next Line *** Add - Data
     private CodeLines CodeLines { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Line *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the Managers reference.

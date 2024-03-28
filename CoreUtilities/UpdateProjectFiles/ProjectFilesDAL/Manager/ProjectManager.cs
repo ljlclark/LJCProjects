@@ -375,7 +375,6 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      // *** Next Statement *** Change - 3/11/24
       if (HasParentKey(parentKey))
       {
         retValue = new Project()
@@ -415,7 +414,6 @@ namespace ProjectFilesDAL
         && current.CodeGroup == project.CodeGroup
         && current.Solution == project.Solution)
       {
-        // *** Next Statement *** Add - 3/11/24
         if (null == project.Name
           || current.Name == project.Name)
         {

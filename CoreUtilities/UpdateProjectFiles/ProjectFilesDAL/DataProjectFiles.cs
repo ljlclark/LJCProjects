@@ -13,9 +13,9 @@ namespace ProjectFilesDAL
 
     // Initializes an object instance.
     /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
-    public DataProjectFiles(ProjectFilesData data)
+    public DataProjectFiles(ProjectFilesData dataHelper)
     {
-      Data = data;
+      DataHelper = dataHelper;
     }
     #endregion
 
@@ -80,7 +80,6 @@ namespace ProjectFilesDAL
         if (!NetString.HasValue(targetFilePath))
         {
           retValue.TargetFilePath = "External";
-          // *** Next Statement *** Add - 3/28/24
           retValue.TargetPathProject = null;
         }
 
@@ -91,7 +90,6 @@ namespace ProjectFilesDAL
         retValue.SourceFilePath = folders[index];
         if (0 == string.Compare(folders[index], "debug", true))
         {
-          // *** Next Statement *** Change- 3/28/24
           retValue.SourceFilePath = $@"{folders[index - 1]}\{folders[index]}";
           index--;
         }
@@ -174,7 +172,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(name))
       {
-        var codeGroups = Data.CodeGroups;
+        var codeGroups = DataHelper.CodeGroups;
         retValue = codeGroups.LJCRetrieve(codeLineName, name);
       }
       return retValue;
@@ -189,7 +187,7 @@ namespace ProjectFilesDAL
       if (NetString.HasValue(codeLineName)
         && NetString.HasValue(path))
       {
-        var codeGroups = Data.CodeGroups;
+        var codeGroups = DataHelper.CodeGroups;
         retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
       }
       return retValue;
@@ -203,7 +201,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(name))
       {
-        var codeLines = Data.CodeLines;
+        var codeLines = DataHelper.CodeLines;
         retValue = codeLines.LJCRetrieve(name);
       }
       return retValue;
@@ -217,7 +215,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(path))
       {
-        var codeLines = Data.CodeLines;
+        var codeLines = DataHelper.CodeLines;
         retValue = codeLines.LJCRetrieveWithPath(path);
       }
       return retValue;
@@ -231,7 +229,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(name))
       {
-        var projects = Data.Projects;
+        var projects = DataHelper.Projects;
         retValue = projects.LJCRetrieve(parentKey, name);
       }
       return retValue;
@@ -246,7 +244,7 @@ namespace ProjectFilesDAL
       if (parentKey != null
         && NetString.HasValue(path))
       {
-        var projects = Data.Projects;
+        var projects = DataHelper.Projects;
         retValue = projects.LJCRetrieveWithPath(parentKey, path);
       }
       return retValue;
@@ -260,7 +258,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(name))
       {
-        var projectFiles = Data.ProjectFiles;
+        var projectFiles = DataHelper.ProjectFiles;
         retValue = projectFiles.LJCRetrieve(parentKey, name);
       }
       return retValue;
@@ -274,7 +272,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(name))
       {
-        var solutions = Data.Solutions;
+        var solutions = DataHelper.Solutions;
         retValue = solutions.LJCRetrieve(parentKey, name);
       }
       return retValue;
@@ -288,7 +286,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(path))
       {
-        var solutions = Data.Solutions;
+        var solutions = DataHelper.Solutions;
         retValue = solutions.LJCRetrieveWithPath(parentKey, path);
       }
       return retValue;
@@ -458,7 +456,7 @@ namespace ProjectFilesDAL
     #region Properties
 
     /// <summary>Gets or sets the Data object.</summary>
-    public ProjectFilesData Data { get; set; }
+    public ProjectFilesData DataHelper { get; set; }
     #endregion
   }
 }

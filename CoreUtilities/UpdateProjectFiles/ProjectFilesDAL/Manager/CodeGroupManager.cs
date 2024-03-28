@@ -346,7 +346,6 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      // *** Next Statement *** Change - 3/11/24
       if (NetString.HasValue(codeLineName))
       {
         retValue = new CodeGroup()
@@ -367,7 +366,6 @@ namespace ProjectFilesDAL
       var current = CurrentDataObject();
       if (current.CodeLine == codeGroup.CodeLine)
       {
-        // *** Next Statement *** Add - 3/11/24
         if (null == codeGroup.Name
           || current.Name == codeGroup.Name)
         {

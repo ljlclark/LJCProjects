@@ -327,7 +327,6 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       var current = CurrentDataObject();
-      // *** Next Statement *** Add - 3/11/24
       if (null == codeLine.Name
         || current.Name == codeLine.Name)
       {

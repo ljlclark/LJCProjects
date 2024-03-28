@@ -68,12 +68,10 @@ namespace UpdateProjectFiles
         Text += " - Edit";
         LJCIsUpdate = true;
         var parentKey = GetParentKey();
-        // *** Begin *** Change - Data
         //var manager = Managers.ProjectFileManager;
         //mOriginalRecord = manager.Retrieve(parentKey, LJCFileName);
         mOriginalRecord = ProjectFiles.LJCRetrieve(parentKey
           , LJCFileName);
-        // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
 
         FileNameText.ReadOnly = true;
@@ -148,7 +146,7 @@ namespace UpdateProjectFiles
       retValue.SourceSolution = Trim(SourceSolutionText);
       retValue.SourceProject = Trim(SourceProjectText);
       retValue.SourceFilePath = Trim(SourceFilePathText);
-      retValue.TargetFilePath = TargetFilePathText.Text.Trim();
+      retValue.TargetFilePath = Trim(TargetFilePathText);
 
       // Get Reference key values.
       retValue.TargetCodeLine = LJCTargetLine;
@@ -171,17 +169,14 @@ namespace UpdateProjectFiles
       {
         if (LJCIsUpdate)
         {
-          // *** Begin *** Change - Data
           //manager.Update(LJCRecord);
           ProjectFiles.LJCUpdate(LJCRecord);
           manager.RecreateFile(ProjectFiles);
-          // *** End   *** Change - Data
         }
         else
         {
           var parentKey = GetParentKey();
           var sourceKey = GetSourceKey();
-          // *** Begin *** Change - Data
           var projectFile = ProjectFiles.Add(parentKey, sourceKey
             , LJCRecord.FileName, LJCRecord.TargetFilePath
             , LJCRecord.SourceFilePath);
@@ -189,7 +184,6 @@ namespace UpdateProjectFiles
           projectFile.TargetPathSolution = LJCRecord.TargetPathSolution;
           projectFile.TargetPathProject = LJCRecord.TargetPathProject;
           manager.RecreateFile(ProjectFiles);
-          // *** End   *** Change - Data
         }
       }
       Cursor = Cursors.Default;
@@ -258,6 +252,12 @@ namespace UpdateProjectFiles
       }
       return retValue;
     }
+
+    // Gets the trimmed textbox value.
+    private string Trim(TextBox textBox)
+    {
+      return textBox.Text.Trim();
+    }
     #endregion
 
     #region Action Event Handlers
@@ -270,20 +270,19 @@ namespace UpdateProjectFiles
       var codeGroupName = Trim(TargetCodeGroupText);
       var solutionName = Trim(TargetSolutionText);
       var projectName = Trim(TargetProjectText);
-      var targetPath = Trim(TargetFilePathText);
+      var targetFilePath = Trim(TargetFilePathText);
       var folder = dataHelper.GetFileSpec(codeLineName, codeGroupName
-        , solutionName, projectName, targetPath);
+        , solutionName, projectName, targetFilePath);
 
       var filter = "DLLs(*.dll)|*.dll|All files(*.*)|*.*";
       var fileName = Trim(FileNameText);
       var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
       if (fileSpec != null)
       {
-        var projectFile = dataHelper.GetProjectFileValues(fileSpec, targetPath);
+        var projectFile = dataHelper.GetProjectFileValues(fileSpec, targetFilePath);
         if (projectFile != null)
         {
           FileNameText.Text = projectFile.FileName;
-          // *** Next Statement *** Add - 3/28/24
           TargetPathProjectText.Text = projectFile.TargetPathProject;
           if (!NetString.HasValue(Trim(TargetFilePathText)))
           {
@@ -296,12 +295,6 @@ namespace UpdateProjectFiles
           SourceFilePathText.Text = projectFile.SourceFilePath;
         }
       }
-    }
-
-    // Gets the trimmed textbox value.
-    private string Trim(TextBox textBox)
-    {
-      return textBox.Text.Trim();
     }
     #endregion
 
@@ -321,10 +314,8 @@ namespace UpdateProjectFiles
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesProjectFiles.Instance;
-      // *** Begin *** Add - Data
       Data = values.Data;
       ProjectFiles = Data.ProjectFiles;
-      // *** End   *** Add - Data
       Managers = values.Managers;
       BeginColor = values.BeginColor;
       EndColor = values.EndColor;
@@ -420,7 +411,6 @@ namespace UpdateProjectFiles
     private Color BeginColor { get; set; }
 
     // Gets or sets the Data object.
-    // *** Next Statement *** Add - Data
     private ProjectFilesData Data { get; set; }
 
     // Gets or sets the End Color.
@@ -430,7 +420,6 @@ namespace UpdateProjectFiles
     private ManagersProjectFiles Managers { get; set; }
 
     // Gets or sets the ProjectFiles object.
-    // *** Next Statement *** Add - Data
     private ProjectFiles ProjectFiles { get; set; }
     #endregion
 

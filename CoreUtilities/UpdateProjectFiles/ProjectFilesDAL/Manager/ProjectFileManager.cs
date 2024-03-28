@@ -409,7 +409,6 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      // *** Next Statement *** Change - 3/11/24
       if (HasParentKey(targetKey)
         && HasParentKey(sourceKey))
       {
@@ -458,7 +457,6 @@ namespace ProjectFilesDAL
         && current.TargetSolution == projectFile.TargetSolution
         && current.FileName == projectFile.FileName)
       {
-        // *** Next Statement *** Add - 3/11/24
         if (null == projectFile.FileName
           || current.FileName == projectFile.FileName)
         {
