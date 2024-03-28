@@ -30,13 +30,13 @@ namespace ProjectFilesDAL
     // Adds a ProjectFile record
     /// <include path='items/Add/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFile Add(ProjectFileParentKey parentKey, ProjectFileParentKey sourceKey
-      , string sourceFileName, string sourceFilePath, string targetFilePath)
+      , string fileName, string sourceFilePath, string targetFilePath)
     {
       ProjectFile retValue = null;
 
       if (HasParentKey(parentKey)
         && HasParentKey(sourceKey)
-        && NetString.HasValue(sourceFileName)
+        && NetString.HasValue(fileName)
         && NetString.HasValue(sourceFilePath)
         && NetString.HasValue(targetFilePath))
       {
@@ -46,21 +46,20 @@ namespace ProjectFilesDAL
         Reader.Close();
         File.AppendAllText(FileName, newRecord);
         Reader.LJCOpen();
-        retValue = Retrieve(parentKey, sourceFileName);
+        retValue = Retrieve(parentKey, fileName);
       }
       return retValue;
     }
 
     // Deletes a ProjectFile record.
     /// <include path='items/Delete/*' file='Doc/ProjectFileManager.xml'/>
-    public void Delete(ProjectFileParentKey parentKey, string sourceFileName)
+    public void Delete(ProjectFileParentKey parentKey, string fileName)
     {
       if (HasParentKey(parentKey)
-        && NetString.HasValue(sourceFileName))
+        && NetString.HasValue(fileName))
       {
         var current = CurrentDataObject();
-        //var projectFiles = LoadAllExcept(CurrentParentKey(), sourceFileName);
-        var projectFiles = LoadAllExcept(parentKey, sourceFileName);
+        var projectFiles = LoadAllExcept(parentKey, fileName);
         if (projectFiles != null)
         {
           WriteBackup();
@@ -68,8 +67,7 @@ namespace ProjectFilesDAL
         }
         if (current != null)
         {
-          //Retrieve(CurrentParentKey(), sourceFileName);
-          Retrieve(parentKey, current.SourceFileName);
+          Retrieve(parentKey, current.FileName);
         }
       }
     }
@@ -77,12 +75,12 @@ namespace ProjectFilesDAL
     // Retrieves a collection of ProjectFile records.
     /// <include path='items/Load/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles Load(ProjectFileParentKey parentKey = null
-      , string sourceFileName = null)
+      , string fileName = null)
     {
       ProjectFiles retValue = null;
 
       var sourceKey = CurrentSourceKey();
-      var project = CreateDataObject(parentKey, sourceKey, sourceFileName, null);
+      var project = CreateDataObject(parentKey, sourceKey, fileName, null);
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -103,7 +101,7 @@ namespace ProjectFilesDAL
     // Retrieves a collection of records that do NOT match the supplied Name
     /// <include path='items/LoadAllExcept/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles LoadAllExcept(ProjectFileParentKey parentKey
-      , string sourceFileName)
+      , string fileName)
     {
       ProjectFiles retValue = null;
 
@@ -118,7 +116,7 @@ namespace ProjectFilesDAL
             || projectFile.TargetCodeGroup != parentKey.CodeGroup
             || projectFile.TargetSolution != parentKey.Solution
             || projectFile.TargetProject != parentKey.Project
-            || projectFile.SourceFileName != sourceFileName)
+            || projectFile.FileName != fileName)
           {
             retValue.Add(projectFile);
           }
@@ -130,13 +128,13 @@ namespace ProjectFilesDAL
 
     // Retrieves a ProjectFile record.
     /// <include path='items/Retrieve/*' file='Doc/ProjectFileManager.xml'/>
-    public ProjectFile Retrieve(ProjectFileParentKey parentKey, string sourceFileName)
+    public ProjectFile Retrieve(ProjectFileParentKey parentKey, string fileName)
     {
       ProjectFile retValue = null;
 
       if (HasParentKey(parentKey))
       {
-        if (NetString.HasValue(sourceFileName))
+        if (NetString.HasValue(fileName))
         {
           Reader.LJCOpen();
         }
@@ -148,9 +146,9 @@ namespace ProjectFilesDAL
             && projectFile.TargetCodeGroup == parentKey.CodeGroup
             && projectFile.TargetSolution == parentKey.Solution)
           {
-            if (NetString.HasValue(sourceFileName))
+            if (NetString.HasValue(fileName))
             {
-              if (projectFile.SourceFileName == sourceFileName)
+              if (projectFile.FileName == fileName)
               {
                 retValue = projectFile;
                 break;
@@ -185,10 +183,10 @@ namespace ProjectFilesDAL
 
       var parentKey = CreateParentKey(projectFile);
       if (HasParentKey(parentKey)
-        && NetString.HasValue(projectFile.SourceFileName))
+        && NetString.HasValue(projectFile.FileName))
       {
         var current = CurrentDataObject();
-        var projectFiles = LoadAllExcept(parentKey, projectFile.SourceFileName);
+        var projectFiles = LoadAllExcept(parentKey, projectFile.FileName);
         if (projectFiles != null)
         {
           WriteBackup();
@@ -198,7 +196,7 @@ namespace ProjectFilesDAL
         var text = CreateRecord(projectFile);
         File.AppendAllText(FileName, text);
         Reader.LJCOpen();
-        Retrieve(parentKey, current.SourceFileName);
+        Retrieve(parentKey, current.FileName);
       }
       return retValue;
     }
@@ -218,7 +216,7 @@ namespace ProjectFilesDAL
       builder.Append(", TargetPathCodeGroup");
       builder.Append(", TargetPathSolution");
       builder.Append(", TargetPathProject");
-      builder.Append(", SourceFileName");
+      builder.Append(", FileName");
       builder.Append(", SourceCodeLine");
       builder.Append(", SourceCodeGroup");
       builder.Append(", SourceSolution");
@@ -255,7 +253,7 @@ namespace ProjectFilesDAL
       string retValue = null;
 
       if (projectFile != null
-        && NetString.HasValue(projectFile.SourceFileName))
+        && NetString.HasValue(projectFile.FileName))
       {
         var builder = new StringBuilder(256);
         if (!Reader.LJCEndsWithNewLine())
@@ -269,7 +267,7 @@ namespace ProjectFilesDAL
         builder.Append($", {projectFile.TargetPathCodeGroup}");
         builder.Append($", {projectFile.TargetPathSolution}");
         builder.Append($", {projectFile.TargetPathProject}");
-        builder.Append($", {projectFile.SourceFileName}");
+        builder.Append($", {projectFile.FileName}");
         builder.Append($", {projectFile.SourceCodeLine}");
         builder.Append($", {projectFile.SourceCodeGroup}");
         builder.Append($", {projectFile.SourceSolution}");
@@ -293,7 +291,7 @@ namespace ProjectFilesDAL
         TargetPathCodeGroup = Reader.GetTrimValue("TargetPathCodeGroup"),
         TargetPathSolution = Reader.GetTrimValue("TargetPathSolution"),
         TargetPathProject = Reader.GetTrimValue("TargetPathProject"),
-        SourceFileName = Reader.GetTrimValue("SourceFileName"),
+        FileName = Reader.GetTrimValue("FileName"),
         SourceCodeLine = Reader.GetTrimValue("SourceCodeLine"),
         SourceCodeGroup = Reader.GetTrimValue("SourceCodeGroup"),
         SourceSolution = Reader.GetTrimValue("SourceSolution"),
@@ -395,7 +393,7 @@ namespace ProjectFilesDAL
         { "TargetPathCodeGroup" },
         { "TargetPathSolution" },
         { "TargetPathProject" },
-        { "SourceFileName" },
+        { "FileName" },
         { "SourceCodeLine" },
         { "SourceCodeGroup" },
         { "SourceSolution" },
@@ -421,7 +419,7 @@ namespace ProjectFilesDAL
           TargetCodeGroup = targetKey.CodeGroup,
           TargetSolution = targetKey.Solution,
           TargetProject = targetKey.Project,
-          SourceFileName = targetKey.SourceFileName,
+          FileName = targetKey.FileName,
           SourceCodeLine = sourceKey.CodeLine,
           SourceCodeGroup = sourceKey.CodeGroup,
           SourceSolution = sourceKey.Solution,
@@ -458,11 +456,11 @@ namespace ProjectFilesDAL
       if (current.TargetCodeLine == projectFile.TargetCodeLine
         && current.TargetCodeGroup == projectFile.TargetCodeGroup
         && current.TargetSolution == projectFile.TargetSolution
-        && current.SourceFileName == projectFile.SourceFileName)
+        && current.FileName == projectFile.FileName)
       {
         // *** Next Statement *** Add - 3/11/24
-        if (null == projectFile.SourceFileName
-          || current.SourceFileName == projectFile.SourceFileName)
+        if (null == projectFile.FileName
+          || current.FileName == projectFile.FileName)
         {
           retValue = true;
         }

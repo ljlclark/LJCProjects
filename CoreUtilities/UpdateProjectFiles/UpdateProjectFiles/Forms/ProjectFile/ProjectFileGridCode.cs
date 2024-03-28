@@ -121,7 +121,7 @@ namespace UpdateProjectFiles
       row.LJCSetString("SourceCodeGroup", dataRecord.SourceCodeGroup);
       row.LJCSetString("SourceSolution", dataRecord.SourceSolution);
       row.LJCSetString("SourceProject", dataRecord.SourceProject);
-      row.LJCSetString("SourceFileName", dataRecord.SourceFileName);
+      row.LJCSetString("FileName", dataRecord.FileName);
     }
     #endregion
 
@@ -148,7 +148,7 @@ namespace UpdateProjectFiles
       if (success)
       {
         // Data from items.
-        var name = row.LJCGetString("SourceFileName");
+        var name = row.LJCGetString("FileName");
         var parentKey = new ProjectFileParentKey()
         {
           CodeLine = parentRow.LJCGetString("CodeLine"),
@@ -183,7 +183,7 @@ namespace UpdateProjectFiles
         var codeGroupName = parentRow.LJCGetString("CodeGroup");
         var solutionName = parentRow.LJCGetString("Solution");
         var projectName = parentRow.LJCGetString("Name");
-        var name = row.LJCGetString("SourceFileName");
+        var name = row.LJCGetString("FileName");
 
         var location = FormCommon.GetDialogScreenPoint(ProjectGrid);
         var detail = new ProjectFileDetail()
@@ -192,7 +192,7 @@ namespace UpdateProjectFiles
           LJCTargetGroup = codeGroupName,
           LJCTargetSolution = solutionName,
           LJCTargetProject = projectName,
-          LJCSourceFileName = name
+          LJCFileName = name
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -239,7 +239,7 @@ namespace UpdateProjectFiles
           TargetCodeGroup = parentKey.CodeGroup,
           TargetSolution = parentKey.Solution,
           TargetProject = parentKey.Project,
-          SourceFileName = row.LJCGetString("SourceFileName"),
+          FileName = row.LJCGetString("FileName"),
         };
         DataRetrieve(parentKey);
       }
@@ -290,7 +290,7 @@ namespace UpdateProjectFiles
           "SourceCodeGroup",
           "SourceSolution",
           "SourceProject",
-          "SourceFileName",
+          "FileName",
         };
         var gridColumns = manager.GetColumns(propertyNames);
 

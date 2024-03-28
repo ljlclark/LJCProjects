@@ -17,7 +17,7 @@
     </summary>
     <param name="parentKey">The Target Key values.</param>
     <param name="sourceKey">The Source Key values.</param>
-    <param name="sourceFileName">The Source File name.</param>
+    <param name="fileName">The File name.</param>
     <param name="sourceFilePath">The Source FileSpec.</param>
     <param name="targetFilePath">The Target FileSpec.</param>
     <returns>The added Project data object.</returns>
@@ -27,14 +27,14 @@
       Deletes a ProjectFile record.
     </summary>
     <param name="parentKey">The Target Key values.</param>
-    <param name="sourceFileName">The Name value.</param>
+    <param name="fileName">The File name.</param>
   </Delete>
   <Load>
     <summary>
       Retrieves a collection of ProjectFile records.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="sourceFileName">The Name value.</param>
+    <param name="fileName">The File name.</param>
     <returns>The Solutions collection if available; otherwise null.</returns>
   </Load>
   <LoadAllExcept>
@@ -43,7 +43,7 @@
       value.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="sourceFileName">The Name value.</param>
+    <param name="fileName">The File name.</param>
     <returns>The ProjectFiles collection if available; otherwise null.</returns>
   </LoadAllExcept>
   <Retrieve>
@@ -51,7 +51,7 @@
       Retrieves a ProjectFile record.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="sourceFileName">The SourceFileName value.</param>
+    <param name="fileName">The File name.</param>
     <returns>The Solution Data Object if found; otherwise null.</returns>
   </Retrieve>
   <Update>

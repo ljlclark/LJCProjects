@@ -1,2 +1,4 @@
-TargetCodeLine, TargetCodeGroup, TargetSolution, TargetProject, TargetPathCodeGroup, TargetPathSolution, TargetPathProject, SourceFileName, SourceCodeLine, SourceCodeGroup, SourceSolution, SourceProject, SourceFilePath, TargetFilePath
+TargetCodeLine, TargetCodeGroup, TargetSolution, TargetProject, TargetPathCodeGroup, TargetPathSolution, TargetPathProject, FileName, SourceCodeLine, SourceCodeGroup, SourceSolution, SourceProject, SourceFilePath, TargetFilePath
+LJCProjectsDev, CoreAssemblies, LJCDataAccess, LJCDataAccess, CoreAssemblies, LJCDataAccess, , LJCDataAccessConfig.dll, LJCProjectsDev, CoreAssemblies, LJCDataAccessConfig, LJCDataAccessConfig, bin\Debug, External
+LJCProjectsDev, CoreAssemblies, LJCDataAccess, LJCDataAccess, CoreAssemblies, LJCDataAccess, , LJCNetCommon.dll, LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, bin\Debug, External
 LJCProjectsDev, CoreAssemblies, LJCDataAccessConfig, LJCDataAccessConfig, CoreAssemblies, LJCDataAccessConfig, , LJCNetCommon.dll, LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, bin\Debug, External

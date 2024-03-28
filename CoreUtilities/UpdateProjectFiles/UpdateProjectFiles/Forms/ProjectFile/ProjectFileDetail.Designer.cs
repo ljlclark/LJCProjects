@@ -39,8 +39,8 @@
       this.TargetCodeLineLabel = new System.Windows.Forms.Label();
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.SourceFileNameText = new System.Windows.Forms.TextBox();
-      this.SourceFileNameLabel = new System.Windows.Forms.Label();
+      this.FileNameText = new System.Windows.Forms.TextBox();
+      this.FileNameLabel = new System.Windows.Forms.Label();
       this.TargetProjectText = new System.Windows.Forms.TextBox();
       this.TargetProjectLabel = new System.Windows.Forms.Label();
       this.SourceProjectText = new System.Windows.Forms.TextBox();
@@ -158,22 +158,22 @@
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // SourceFileNameText
+      // FileNameText
       // 
-      this.SourceFileNameText.Location = new System.Drawing.Point(209, 158);
-      this.SourceFileNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.SourceFileNameText.Name = "SourceFileNameText";
-      this.SourceFileNameText.Size = new System.Drawing.Size(295, 26);
-      this.SourceFileNameText.TabIndex = 9;
+      this.FileNameText.Location = new System.Drawing.Point(209, 158);
+      this.FileNameText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.FileNameText.Name = "FileNameText";
+      this.FileNameText.Size = new System.Drawing.Size(295, 26);
+      this.FileNameText.TabIndex = 9;
       // 
-      // SourceFileNameLabel
+      // FileNameLabel
       // 
-      this.SourceFileNameLabel.Location = new System.Drawing.Point(18, 162);
-      this.SourceFileNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.SourceFileNameLabel.Name = "SourceFileNameLabel";
-      this.SourceFileNameLabel.Size = new System.Drawing.Size(188, 20);
-      this.SourceFileNameLabel.TabIndex = 8;
-      this.SourceFileNameLabel.Text = "Source File Name";
+      this.FileNameLabel.Location = new System.Drawing.Point(18, 162);
+      this.FileNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.FileNameLabel.Name = "FileNameLabel";
+      this.FileNameLabel.Size = new System.Drawing.Size(188, 20);
+      this.FileNameLabel.TabIndex = 8;
+      this.FileNameLabel.Text = "File Name";
       // 
       // TargetProjectText
       // 
@@ -378,8 +378,8 @@
       this.Controls.Add(this.TargetCodeLineLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
-      this.Controls.Add(this.SourceFileNameText);
-      this.Controls.Add(this.SourceFileNameLabel);
+      this.Controls.Add(this.FileNameText);
+      this.Controls.Add(this.FileNameLabel);
       this.Name = "ProjectFileDetail";
       this.Text = "Project File Detail";
       this.Load += new System.EventHandler(this.ProjectFileDetail_Load);
@@ -401,8 +401,8 @@
     private System.Windows.Forms.Label TargetCodeLineLabel;
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
-    private System.Windows.Forms.TextBox SourceFileNameText;
-    private System.Windows.Forms.Label SourceFileNameLabel;
+    private System.Windows.Forms.TextBox FileNameText;
+    private System.Windows.Forms.Label FileNameLabel;
     private System.Windows.Forms.TextBox TargetProjectText;
     private System.Windows.Forms.Label TargetProjectLabel;
     private System.Windows.Forms.TextBox SourceProjectText;

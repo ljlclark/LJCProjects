@@ -55,12 +55,12 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey"></param>
     /// <param name="sourceKey"></param>
-    /// <param name="sourceFileName"></param>
+    /// <param name="fileName"></param>
     /// <param name="targetFilePath"></param>
     /// <param name="sourceFilePath"></param>
     /// <returns></returns>
     public ProjectFile Add(ProjectFileParentKey parentKey
-      , ProjectFileParentKey sourceKey, string sourceFileName
+      , ProjectFileParentKey sourceKey, string fileName
       , string targetFilePath, string sourceFilePath)
     {
       ProjectFile retValue;
@@ -71,7 +71,7 @@ namespace ProjectFilesDAL
       NetString.AddMissingArgument(message, sourceKey);
       NetString.ThrowInvalidArgument(message);
 
-      retValue = LJCRetrieve(parentKey, sourceFileName);
+      retValue = LJCRetrieve(parentKey, fileName);
       if (null == retValue)
       {
         retValue = new ProjectFile()
@@ -80,7 +80,7 @@ namespace ProjectFilesDAL
           TargetCodeGroup = parentKey.CodeGroup,
           TargetSolution = parentKey.Solution,
           TargetProject = parentKey.Project,
-          SourceFileName = sourceFileName,
+          FileName = fileName,
           TargetFilePath = targetFilePath,
           SourceCodeLine = sourceKey.CodeLine,
           SourceCodeGroup = sourceKey.CodeGroup,
@@ -98,10 +98,10 @@ namespace ProjectFilesDAL
     /// Removes an item by unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="sourceFileName"></param>
-    public void LJCDelete(ProjectFileParentKey parentKey, string sourceFileName)
+    /// <param name="fileName"></param>
+    public void LJCDelete(ProjectFileParentKey parentKey, string fileName)
     {
-      ProjectFile item = LJCRetrieve(parentKey, sourceFileName);
+      ProjectFile item = LJCRetrieve(parentKey, fileName);
       if (item != null)
       {
         Remove(item);
@@ -135,9 +135,9 @@ namespace ProjectFilesDAL
     /// Retrieves the collection element with unique values.
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="sourceFileName">The SourceFile name.</param>
+    /// <param name="fileName">The SourceFile name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public ProjectFile LJCRetrieve(ProjectFileParentKey parentKey, string sourceFileName)
+    public ProjectFile LJCRetrieve(ProjectFileParentKey parentKey, string fileName)
     {
       ProjectFile retValue = null;
 
@@ -148,7 +148,7 @@ namespace ProjectFilesDAL
         TargetCodeGroup = parentKey.CodeGroup,
         TargetSolution = parentKey.Solution,
         TargetProject = parentKey.Project,
-        SourceFileName = sourceFileName
+        FileName = fileName
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -168,14 +168,9 @@ namespace ProjectFilesDAL
       if (NetCommon.HasItems(this))
       {
         var parentKey = GetParentKey(projectFile);
-        var item = LJCRetrieve(parentKey, projectFile.SourceFileName);
+        var item = LJCRetrieve(parentKey, projectFile.FileName);
         if (item != null)
         {
-          //if (NetString.CompareEqual
-          //  == string.Compare(projectFile.TargetFilePath, "External", true))
-          //{
-          //  item.TargetPathProject = null;
-          //};
           item.TargetPathCodeGroup = projectFile.TargetPathCodeGroup;
           item.TargetPathSolution = projectFile.TargetPathSolution;
           item.TargetPathProject = projectFile.TargetPathProject;

@@ -47,7 +47,7 @@ namespace ProjectFilesDAL
                 retValue = TargetProject.CompareTo(other.TargetProject);
                 if (NetString.CompareEqual == retValue)
                 {
-                  retValue = SourceFileName.CompareTo(other.SourceFileName);
+                  retValue = FileName.CompareTo(other.FileName);
                 }
               }
             }
@@ -81,8 +81,8 @@ namespace ProjectFilesDAL
     /// <summary>Gets or sets the TargetPath Project name.</summary>
     public string TargetPathProject { get; set; }
 
-    /// <summary>Gets or sets the Source file name.</summary>
-    public string SourceFileName { get; set; }
+    /// <summary>Gets or sets the file name.</summary>
+    public string FileName { get; set; }
 
     /// <summary>Gets or sets the Source CodeLine name.</summary>
     public string SourceCodeLine { get; set; }
@@ -120,6 +120,6 @@ namespace ProjectFilesDAL
     public string Project { get; set; }
 
     /// <summary>Gets or sets the Source file name.</summary>
-    public string SourceFileName { get; set; }
+    public string FileName { get; set; }
   }
 }

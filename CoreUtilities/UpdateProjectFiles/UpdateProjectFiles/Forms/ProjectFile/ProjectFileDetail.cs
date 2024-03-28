@@ -23,7 +23,7 @@ namespace UpdateProjectFiles
       // Initialize property values.
       LJCIsUpdate = false;
       LJCRecord = null;
-      LJCSourceFileName = null;
+      LJCFileName = null;
       LJCTargetGroup = null;
       LJCTargetLine = null;
       LJCTargetProject = null;
@@ -63,20 +63,20 @@ namespace UpdateProjectFiles
     {
       Cursor = Cursors.WaitCursor;
       Text = "Project File Detail";
-      if (NetString.HasValue(LJCSourceFileName))
+      if (NetString.HasValue(LJCFileName))
       {
         Text += " - Edit";
         LJCIsUpdate = true;
         var parentKey = GetParentKey();
         // *** Begin *** Change - Data
         //var manager = Managers.ProjectFileManager;
-        //mOriginalRecord = manager.Retrieve(parentKey, LJCSourceFileName);
+        //mOriginalRecord = manager.Retrieve(parentKey, LJCFileName);
         mOriginalRecord = ProjectFiles.LJCRetrieve(parentKey
-          , LJCSourceFileName);
+          , LJCFileName);
         // *** End   *** Change - Data
         GetRecordValues(mOriginalRecord);
 
-        SourceFileNameText.ReadOnly = true;
+        FileNameText.ReadOnly = true;
         SourceCodeLineText.Select();
         SourceCodeLineText.Select(0, 0);
       }
@@ -95,8 +95,8 @@ namespace UpdateProjectFiles
         TargetPathSolutionText.Text = LJCTargetSolution;
         TargetPathProjectText.Text = LJCTargetProject;
 
-        SourceFileNameText.Select();
-        SourceFileNameText.Select(0, 0);
+        FileNameText.Select();
+        FileNameText.Select(0, 0);
       }
       Cursor = Cursors.Default;
     }
@@ -111,7 +111,7 @@ namespace UpdateProjectFiles
         TargetCodeGroupText.Text = dataRecord.TargetCodeGroup;
         TargetSolutionText.Text = dataRecord.TargetSolution;
         TargetProjectText.Text = dataRecord.TargetProject;
-        SourceFileNameText.Text = dataRecord.SourceFileName;
+        FileNameText.Text = dataRecord.FileName;
         TargetPathCodeGroupText.Text = dataRecord.TargetPathCodeGroup;
         TargetPathSolutionText.Text = dataRecord.TargetPathSolution;
         TargetPathProjectText.Text = dataRecord.TargetPathProject;
@@ -139,10 +139,7 @@ namespace UpdateProjectFiles
       }
 
       // In control order.
-      if (!LJCIsUpdate)
-      {
-        retValue.SourceFileName = Trim(SourceFileNameText);
-      }
+      retValue.FileName = Trim(FileNameText);
       retValue.TargetPathCodeGroup = Trim(TargetPathCodeGroupText);
       retValue.TargetPathSolution = Trim(TargetPathSolutionText);
       retValue.TargetPathProject = Trim(TargetPathProjectText);
@@ -185,8 +182,12 @@ namespace UpdateProjectFiles
           var parentKey = GetParentKey();
           var sourceKey = GetSourceKey();
           // *** Begin *** Change - Data
-          ProjectFiles.Add(parentKey, sourceKey, LJCRecord.SourceFileName
-            , LJCRecord.TargetFilePath, LJCRecord.SourceFilePath);
+          var projectFile = ProjectFiles.Add(parentKey, sourceKey
+            , LJCRecord.FileName, LJCRecord.TargetFilePath
+            , LJCRecord.SourceFilePath);
+          projectFile.TargetPathCodeGroup = LJCRecord.TargetPathCodeGroup;
+          projectFile.TargetPathSolution = LJCRecord.TargetPathSolution;
+          projectFile.TargetPathProject = LJCRecord.TargetPathProject;
           manager.RecreateFile(ProjectFiles);
           // *** End   *** Change - Data
         }
@@ -242,10 +243,10 @@ namespace UpdateProjectFiles
       var builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (!NetString.HasValue(SourceFileNameText.Text))
+      if (!NetString.HasValue(FileNameText.Text))
       {
         retValue = false;
-        builder.AppendLine($"  {SourceFileNameLabel.Text}");
+        builder.AppendLine($"  {FileNameLabel.Text}");
       }
 
       if (!retValue)
@@ -274,14 +275,16 @@ namespace UpdateProjectFiles
         , solutionName, projectName, targetPath);
 
       var filter = "DLLs(*.dll)|*.dll|All files(*.*)|*.*";
-      var fileName = Trim(SourceFileNameText);
+      var fileName = Trim(FileNameText);
       var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
       if (fileSpec != null)
       {
         var projectFile = dataHelper.GetProjectFileValues(fileSpec, targetPath);
         if (projectFile != null)
         {
-          SourceFileNameText.Text = projectFile.SourceFileName;
+          FileNameText.Text = projectFile.FileName;
+          // *** Next Statement *** Add - 3/28/24
+          TargetPathProjectText.Text = projectFile.TargetPathProject;
           if (!NetString.HasValue(Trim(TargetFilePathText)))
           {
             TargetFilePathText.Text = projectFile.TargetFilePath;
@@ -337,8 +340,8 @@ namespace UpdateProjectFiles
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      SourceFileNameText.KeyPress += TextBoxNoSpace_KeyPress;
-      SourceFileNameText.TextChanged += TextBoxNoSpace_TextChanged;
+      FileNameText.KeyPress += TextBoxNoSpace_KeyPress;
+      FileNameText.TextChanged += TextBoxNoSpace_TextChanged;
       SourceCodeLineText.KeyPress += TextBoxNoSpace_KeyPress;
       SourceCodeLineText.TextChanged += TextBoxNoSpace_TextChanged;
       SourceCodeGroupText.KeyPress += TextBoxNoSpace_KeyPress;
@@ -399,7 +402,7 @@ namespace UpdateProjectFiles
     internal ProjectFile LJCRecord { get; private set; }
 
     // Gets or sets the Source File ID value.
-    internal string LJCSourceFileName { get; set; }
+    internal string LJCFileName { get; set; }
 
     // Gets or sets the Target CodeGroup ID value.
     internal string LJCTargetGroup { get; set; }

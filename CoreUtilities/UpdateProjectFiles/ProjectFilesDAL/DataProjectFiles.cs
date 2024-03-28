@@ -76,10 +76,12 @@ namespace ProjectFilesDAL
       if (NetString.HasValue(fileSpec))
       {
         retValue = new ProjectFile();
-        retValue.SourceFileName = Path.GetFileName(fileSpec);
+        retValue.FileName = Path.GetFileName(fileSpec);
         if (!NetString.HasValue(targetFilePath))
         {
           retValue.TargetFilePath = "External";
+          // *** Next Statement *** Add - 3/28/24
+          retValue.TargetPathProject = null;
         }
 
         var path = Path.GetDirectoryName(fileSpec);
@@ -89,7 +91,8 @@ namespace ProjectFilesDAL
         retValue.SourceFilePath = folders[index];
         if (0 == string.Compare(folders[index], "debug", true))
         {
-          retValue.SourceFilePath = $@"{folders[index]}\{folders[index - 1]}";
+          // *** Next Statement *** Change- 3/28/24
+          retValue.SourceFilePath = $@"{folders[index - 1]}\{folders[index]}";
           index--;
         }
         index -= 4;
@@ -317,7 +320,7 @@ namespace ProjectFilesDAL
       var codeLine = CodeLineWithPath(path);
       if (codeLine != null)
       {
-        retValue = codeLine.Path;
+        retValue = codeLine.Name;
       }
       return retValue;
     }

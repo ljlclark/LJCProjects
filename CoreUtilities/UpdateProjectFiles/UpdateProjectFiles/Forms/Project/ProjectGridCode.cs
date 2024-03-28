@@ -338,12 +338,12 @@ namespace UpdateProjectFiles
         && NetString.HasValue(projectFile.SourceSolution)
         && NetString.HasValue(projectFile.SourceProject)
         && NetString.HasValue(projectFile.SourceFilePath)
-        && NetString.HasValue(projectFile.SourceFileName))
+        && NetString.HasValue(projectFile.FileName))
       {
         retValue = DataHelper.GetFileSpec(projectFile.SourceCodeLine
           , projectFile.SourceCodeGroup, projectFile.SourceSolution
           , projectFile.SourceProject, projectFile.SourceFilePath
-          , projectFile.SourceFileName);
+          , projectFile.FileName);
       }
       return retValue;
     }
@@ -356,7 +356,7 @@ namespace UpdateProjectFiles
       if (NetString.HasValue(projectFile.TargetCodeLine)
         && NetString.HasValue(projectFile.TargetPathSolution)
         && NetString.HasValue(projectFile.TargetFilePath)
-        && NetString.HasValue(projectFile.SourceFileName))
+        && NetString.HasValue(projectFile.FileName))
       {
         var codeLineName = projectFile.TargetCodeLine;
         retValue = DataHelper.CodeLinePath(codeLineName);
@@ -373,7 +373,7 @@ namespace UpdateProjectFiles
           , projectFile.TargetPathSolution);
         retValue = Path.Combine(retValue, solutionPath);
 
-        if (projectFile.TargetPathProject != null)
+        if (NetString.HasValue(projectFile.TargetPathProject))
         {
           var projectParentKey = CodeList.GetProjectParentKey();
           var projectPath = DataHelper.ProjectPath(projectParentKey
@@ -382,7 +382,7 @@ namespace UpdateProjectFiles
         }
 
         retValue = Path.Combine(retValue, projectFile.TargetFilePath);
-        retValue = Path.Combine(retValue, projectFile.SourceFileName);
+        retValue = Path.Combine(retValue, projectFile.FileName);
       }
       return retValue;
     }
