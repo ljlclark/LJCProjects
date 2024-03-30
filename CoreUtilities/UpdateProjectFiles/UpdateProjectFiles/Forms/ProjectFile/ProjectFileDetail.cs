@@ -279,7 +279,7 @@ namespace UpdateProjectFiles
       var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
       if (fileSpec != null)
       {
-        var projectFile = dataHelper.GetProjectFileValues(fileSpec, targetFilePath);
+        var projectFile = dataHelper.ProjectFileValues(fileSpec, targetFilePath);
         if (projectFile != null)
         {
           FileNameText.Text = projectFile.FileName;

@@ -246,48 +246,13 @@ namespace UpdateProjectFiles
       if (SolutionGrid.CurrentRow is LJCGridRow _)
       {
         // Data from items.
-        var projectFileParentKey = CodeList.GetProjectFileParentKey();
-
-        var files = Dependencies(projectFileParentKey);
-        if (NetCommon.HasItems(files))
-        {
-          string actionTitle= null;
-          foreach (var projectFile in files)
-          {
-            var sourceFileSpec = SourceFileSpec(projectFile);
-            var targetFileSpec = TargetFileSpec(projectFile);
-            if (NetString.HasValue(sourceFileSpec)
-              && NetString.HasValue(targetFileSpec))
-            {
-              switch (action)
-              {
-                case DependencyAction.Delete:
-                  actionTitle = "Clear";
-                  File.Delete(targetFileSpec);
-                  break;
-
-                case DependencyAction.Copy:
-                  actionTitle = "Update";
-                  File.Copy(sourceFileSpec, targetFileSpec, true);
-                  break;
-              }
-            }
-          }
-
-          var title = $"Solution {actionTitle}";
-          var message = $"Solution Dependencies {actionTitle} is Complete";
-          MessageBox.Show(message, title, MessageBoxButtons.OK
-            , MessageBoxIcon.Information);
-        }
+        var parentKey = CodeList.GetProjectFileParentKey();
+        DataHelper.ManageDependencies(parentKey, action.ToString());
+        var title = $"Project {action}";
+        var message = $"Project Dependencies {action} is Complete";
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Information);
       }
-    }
-
-    // Gets the Project dependencies.
-    internal ProjectFiles Dependencies(ProjectFileParentKey parentKey)
-    {
-      var projectFiles = Data.ProjectFiles;
-      var retValue = projectFiles.LJCLoad(parentKey);
-      return retValue;
     }
 
     // Adds new row or updates row with record values.
@@ -336,65 +301,6 @@ namespace UpdateProjectFiles
         ProjectGrid.LJCAddColumns(gridColumns);
       }
     }
-
-    // Create the ProjectFile Source File Spec.
-    internal string SourceFileSpec(ProjectFile projectFile)
-    {
-      string retValue = null;
-
-      if (NetString.HasValue(projectFile.SourceCodeLine)
-        && NetString.HasValue(projectFile.SourceCodeGroup)
-        && NetString.HasValue(projectFile.SourceSolution)
-        && NetString.HasValue(projectFile.SourceProject)
-        && NetString.HasValue(projectFile.SourceFilePath)
-        && NetString.HasValue(projectFile.FileName))
-      {
-        retValue = DataHelper.GetFileSpec(projectFile.SourceCodeLine
-          , projectFile.SourceCodeGroup, projectFile.SourceSolution
-          , projectFile.SourceProject, projectFile.SourceFilePath
-          , projectFile.FileName);
-      }
-      return retValue;
-    }
-
-    // Create the ProjectFile Target File Spec.
-    internal string TargetFileSpec(ProjectFile projectFile)
-    {
-      string retValue = null;
-
-      if (NetString.HasValue(projectFile.TargetCodeLine)
-        && NetString.HasValue(projectFile.TargetPathSolution)
-        && NetString.HasValue(projectFile.TargetFilePath)
-        && NetString.HasValue(projectFile.FileName))
-      {
-        var codeLineName = projectFile.TargetCodeLine;
-        retValue = DataHelper.CodeLinePath(codeLineName);
-
-        if (projectFile.TargetPathCodeGroup != null)
-        {
-          var codeGroupPath = DataHelper.CodeGroupPath(codeLineName
-            , projectFile.TargetPathCodeGroup);
-          retValue = Path.Combine(retValue, codeGroupPath);
-        }
-
-        var solutionParentKey = CodeList.GetSolutionParentKey();
-        var solutionPath = DataHelper.SolutionPath(solutionParentKey
-          , projectFile.TargetPathSolution);
-        retValue = Path.Combine(retValue, solutionPath);
-
-        if (NetString.HasValue(projectFile.TargetPathProject))
-        {
-          var projectParentKey = CodeList.GetProjectParentKey();
-          var projectPath = DataHelper.ProjectPath(projectParentKey
-            , projectFile.TargetPathProject);
-          retValue = Path.Combine(retValue, projectPath);
-        }
-
-        retValue = Path.Combine(retValue, projectFile.TargetFilePath);
-        retValue = Path.Combine(retValue, projectFile.FileName);
-      }
-      return retValue;
-    }
     #endregion
 
     #region Properties
@@ -423,11 +329,10 @@ namespace UpdateProjectFiles
     // Gets or sets the SolutionGrid reference.
     private LJCDataGrid SolutionGrid { get; set; }
     #endregion
-
-    internal enum DependencyAction
-    {
-      Delete,
-      Copy
-    }
+  }
+  public enum DependencyAction
+  {
+    Delete,
+    Copy
   }
 }

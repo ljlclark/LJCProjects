@@ -22,14 +22,75 @@
     <param name="fileName">The File name.</param>
     <returns>The FileSpec value.</returns>
   </GetFileSpec>
+  <ManageDependencies>
+    <summary>
+      Clears or Updates the project dependencies.
+    </summary>
+    <param name="parentKey">The ProjectFile parent key.</param>
+    <param name="action">The action text.</param>
+  </ManageDependencies>
   <GetProjectFileValues>
     <summary>
       Get the ProjectFile valus from a filespec.
     </summary>
     <param name="fileSpec">The file specifiation.</param>
-    <param name="targetFilePath">The Target flile path.</param>"
+    <param name="targetFilePath">The Target file path.</param>"
     <returns>A ProjectFile ojbect.</returns>
   </GetProjectFileValues>
+  <SourceFileSpec>
+     <summary>
+      Create the ProjectFile Source File Spec.
+    </summary>
+    <param name="projectFile">The ProjectFile object.</param>
+    <returns>The source file spec.</returns>
+  </SourceFileSpec>
+  <TargetFileSpec>
+    <summary>
+       Create the ProjectFile Target File Spec.
+    </summary>
+    <param name="projectFile">The ProjectFile object.</param>
+    <returns>The target file spec.</returns>
+  </TargetFileSpec>
+  <!-- Check Object Required Properties -->
+  <HasProjectFileParentValues>
+    <summary>
+      Checks the ProjectFile ParentKey for required poperties.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <returns>true if it has the required proerties; otherwise false.</returns>
+  </HasProjectFileParentValues>
+  <HasProjectParentValues>
+    <summary>
+      Checks the Project ParentKey for required poperties.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <returns>true if it has the required proerties; otherwise false.</returns>
+  </HasProjectParentValues>
+  <HasSolutionParentValues>
+    <summary>
+      Checks the Solution ParentKey for required poperties.
+    </summary>
+    <param name="parentKey">The ParentKey object.</param>
+    <returns>true if it has the required proerties; otherwise false.</returns>
+  </HasSolutionParentValues>
+  <HasSourceValues>
+     <summary>
+      Checks the ProjectFile object for required Source properties.
+    </summary>
+    <param name="projectFile">The ProjectFile ojbect.</param>
+    <returns>
+      true if the required properties exist; otherwise false.
+    </returns>
+  </HasSourceValues>
+  <HasTargetValues>
+    <summary>
+      Checks the ProjectFile object for required Target path properties.
+    </summary>
+    <param name="projectFile">The ProjectFile ojbect.</param>
+    <returns>
+      true if the required properties exist; otherwise false.
+    </returns>
+  </HasTargetValues>
   <!-- Retrieve Object Methods -->
   <CodeGroup>
     <summary>
@@ -81,10 +142,17 @@
     <summary>
       Gets the ProjectFile object.
     </summary>
-    <param name="parentKey">The ParentKey object.</param>
+    <param name="parentKey">The ProjectFile ParentKey object.</param>
     <param name="name">The name value.</param>
     <returns>The Solution object.</returns>
   </ProjectFile>
+  <ProjectFiles>
+    <summary>
+      Gets the Project dependencies.
+    </summary>
+    <param name="parentKey">The ProjectFile ParentKey object.</param>
+    <returns>The project files assocciated with a project.</returns>
+  </ProjectFiles>
   <Solution>
     <summary>
       Gets the Solution object.
@@ -106,7 +174,7 @@
     <summary>
       Gets the CodeGroup path value.
     </summary>
-    <param name="codeLine">The CodeLine name.</param>
+    <param name="codeLineName">The CodeLine name.</param>
     <param name="name">The name value.</param>
     <returns>The CodeGroup path value.</returns>
   </CodeGroupPath>

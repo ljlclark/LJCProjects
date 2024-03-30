@@ -15,6 +15,10 @@ namespace ProjectFilesDAL
     /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
     public DataProjectFiles(ProjectFilesData dataHelper)
     {
+      string message = "";
+      NetString.AddMissingArgument(message, dataHelper);
+      NetString.ThrowInvalidArgument(message);
+
       DataHelper = dataHelper;
     }
     #endregion
@@ -27,114 +31,218 @@ namespace ProjectFilesDAL
       , string solutionName, string projectName, string projectFilePath
       , string fileName = null)
     {
-      string retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, solutionName);
+      NetString.AddMissingArgument(message, projectFilePath);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(solutionName))
+      // Get CodeLine path.
+      var retValue = CodeLinePath(codeLineName);
+
+      // Get CodeGroup path.
+      if (NetString.HasValue(codeGroupName))
       {
-        // Get CodeLine path.
-        retValue = CodeLinePath(codeLineName);
+        var codeGroupPath = CodeGroupPath(codeLineName
+          , codeGroupName);
+        retValue = Path.Combine(retValue, codeGroupPath);
+      }
 
-        // Get CodeGroup path.
-        if (NetString.HasValue(codeGroupName))
-        {
-          var codeGroupPath = CodeGroupPath(codeLineName
-            , codeGroupName);
-          retValue = Path.Combine(retValue, codeGroupPath);
-        }
+      // Get Solution path.
+      var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
+      var solutionPath = SolutionPath(solutionParentKey
+        , solutionName);
+      retValue = Path.Combine(retValue, solutionPath);
 
-        // Get Solution path.
-        var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
-        var solutionPath = SolutionPath(solutionParentKey
-          , solutionName);
-        retValue = Path.Combine(retValue, solutionPath);
+      // Get Project path.
+      var projectParentKey = ProjectParentKey(codeLineName, codeGroupName
+        , solutionName);
+      var projectPath = ProjectPath(projectParentKey
+        , projectName);
+      retValue = Path.Combine(retValue, projectPath);
 
-        // Get Project path.
-        var projectParentKey = ProjectParentKey(codeLineName, codeGroupName
-          , solutionName);
-        var projectPath = ProjectPath(projectParentKey
-          , projectName);
-        retValue = Path.Combine(retValue, projectPath);
-
-        // Add ProjectFile path and file name.
-        retValue = Path.Combine(retValue, projectFilePath);
-        if (NetString.HasValue(fileName))
-        {
-          retValue = Path.Combine(retValue, fileName);
-        }
+      // Add ProjectFile path and file name.
+      retValue = Path.Combine(retValue, projectFilePath);
+      if (NetString.HasValue(fileName))
+      {
+        retValue = Path.Combine(retValue, fileName);
       }
       return retValue;
     }
 
+    // Clears or Updates the project dependencies.
+    /// <include path='items/ManageDependencies/*' file='Doc/DataProjectFiles.xml'/>
+    public void ManageDependencies(ProjectFileParentKey parentKey
+      , string action = null)
+    {
+      string message = "";
+      if (!HasProjectFileParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.ThrowInvalidArgument(message);
+
+      var projectFiles = ProjectFiles(parentKey);
+      if (NetCommon.HasItems(projectFiles))
+      {
+        foreach (var projectFile in projectFiles)
+        {
+          var sourceFileSpec = SourceFileSpec(projectFile);
+          var targetFileSpec = TargetFileSpec(projectFile);
+          if (NetString.HasValue(sourceFileSpec)
+            && NetString.HasValue(targetFileSpec))
+          {
+            switch (action)
+            {
+              case "Delete":
+                File.Delete(targetFileSpec);
+                break;
+
+              default:
+                File.Copy(sourceFileSpec, targetFileSpec, true);
+                break;
+            }
+          }
+        }
+      }
+    }
+
     // Get the ProjectFile valus from a filespec.
     /// <include path='items/GetProjectFileValues/*' file='Doc/DataProjectFiles.xml'/>
-    public ProjectFile GetProjectFileValues(string fileSpec
+    public ProjectFile ProjectFileValues(string fileSpec
       , string targetFilePath = null)
     {
-      ProjectFile retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, fileSpec);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(fileSpec))
+      var retValue = new ProjectFile();
+      retValue.FileName = Path.GetFileName(fileSpec);
+      if (!NetString.HasValue(targetFilePath))
       {
-        retValue = new ProjectFile();
-        retValue.FileName = Path.GetFileName(fileSpec);
-        if (!NetString.HasValue(targetFilePath))
+        retValue.TargetFilePath = "External";
+        retValue.TargetPathProject = null;
+      }
+
+      var path = Path.GetDirectoryName(fileSpec);
+      var folders = path.Split('\\');
+      var index = folders.Length - 1;
+
+      retValue.SourceFilePath = folders[index];
+      if (0 == string.Compare(folders[index], "debug", true))
+      {
+        retValue.SourceFilePath = $@"{folders[index - 1]}\{folders[index]}";
+        index--;
+      }
+      index -= 4;
+
+      // Get CodeLine name.
+      var codeLinePath = CombineFolders(folders, 0, index
+        , out string codeLineName);
+      retValue.SourceCodeLine = CodeLineName(codeLinePath, codeLineName);
+      index++;
+
+      // Get CodeGroup name.
+      var codeGroupPath = folders[index];
+      var codeGroup = CodeGroupWithPath(codeLineName, codeGroupPath);
+      var codeGroupName = codeGroupPath;
+      if (codeGroup != null)
+      {
+        codeGroupName = codeGroup.Name;
+      }
+      retValue.SourceCodeGroup = codeGroupName;
+      index++;
+
+      // Get Solution name.
+      var solutionPath = folders[index];
+      var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
+      var solution = SolutionWithPath(solutionParentKey, solutionPath);
+      var solutionName = solutionPath;
+      if (solution != null)
+      {
+        solutionName = solution.Name;
+      }
+      retValue.SourceSolution = solutionName;
+      index++;
+
+      // Get Project name.
+      var projectPath = folders[index];
+      var projectParentKey = ProjectParentKey(codeLineName, codeGroupName
+        , solutionName);
+      var project = ProjectWithPath(projectParentKey, projectPath);
+      var projectName = projectPath;
+      if (project != null)
+      {
+        projectName = project.Name;
+      }
+      retValue.SourceProject = projectName;
+      return retValue;
+    }
+
+    // Create the ProjectFile Source File Spec.
+    /// <include path='items/SourceFileSpec/*' file='Doc/DataProjectFiles.xml'/>
+    public string SourceFileSpec(ProjectFile projectFile)
+    {
+      string retValue = null;
+
+      string message = "";
+      NetString.AddMissingArgument(message, projectFile);
+      NetString.ThrowInvalidArgument(message);
+
+      if (HasSourceValues(projectFile))
+      {
+        retValue = GetFileSpec(projectFile.SourceCodeLine
+          , projectFile.SourceCodeGroup, projectFile.SourceSolution
+          , projectFile.SourceProject, projectFile.SourceFilePath
+          , projectFile.FileName);
+      }
+      return retValue;
+    }
+
+    // Create the ProjectFile Target File Spec.
+    /// <include path='items/TargetFileSpec/*' file='Doc/DataProjectFiles.xml'/>
+    public string TargetFileSpec(ProjectFile projectFile)
+    {
+      string retValue = null;
+
+      string message = "";
+      NetString.AddMissingArgument(message, projectFile);
+      NetString.ThrowInvalidArgument(message);
+
+      if (HasTargetValues(projectFile))
+      {
+        var codeLineName = projectFile.TargetCodeLine;
+        retValue = CodeLinePath(codeLineName);
+
+        // May not have a Target CodeGroup path.
+        CodeGroup codeGroup = null;
+        string codeGroupName = null;
+        var targetPathCodeGroup = projectFile.TargetPathCodeGroup;
+        if (targetPathCodeGroup != null)
         {
-          retValue.TargetFilePath = "External";
-          retValue.TargetPathProject = null;
-        }
-
-        var path = Path.GetDirectoryName(fileSpec);
-        var folders = path.Split('\\');
-        var index = folders.Length - 1;
-
-        retValue.SourceFilePath = folders[index];
-        if (0 == string.Compare(folders[index], "debug", true))
-        {
-          retValue.SourceFilePath = $@"{folders[index - 1]}\{folders[index]}";
-          index--;
-        }
-        index -= 4;
-
-        // Get CodeLine name.
-        var codeLinePath = CombineFolders(folders, 0, index
-          , out string codeLineName);
-        retValue.SourceCodeLine = CodeLineName(codeLinePath, codeLineName);
-        index++;
-
-        // Get CodeGroup name.
-        var codeGroupPath = folders[index];
-        var codeGroup = CodeGroupWithPath(codeLineName, codeGroupPath);
-        var codeGroupName = codeGroupPath;
-        if (codeGroup != null)
-        {
+          codeGroup = CodeGroup(codeLineName, targetPathCodeGroup);
           codeGroupName = codeGroup.Name;
+          retValue = Path.Combine(retValue, codeGroup.Path);
         }
-        retValue.SourceCodeGroup = codeGroupName;
-        index++;
 
-        // Get Solution name.
-        var solutionPath = folders[index];
         var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
-        var solution = SolutionWithPath(solutionParentKey, solutionPath);
-        var solutionName = solutionPath;
-        if (solution != null)
-        {
-          solutionName = solution.Name;
-        }
-        retValue.SourceSolution = solutionName;
-        index++;
+        var targetPathSolution = projectFile.TargetPathSolution;
+        var solution = Solution(solutionParentKey, targetPathSolution);
+        retValue = Path.Combine(retValue, solution.Path);
 
-        // Get Project name.
-        var projectPath = folders[index];
-        var projectParentKey = ProjectParentKey(codeLineName, codeGroupName
-          , solutionName);
-        var project = ProjectWithPath(projectParentKey, projectPath);
-        var projectName = projectPath;
-        if (project != null)
+        // May not have a Target Project path.
+        var targetPathProject = projectFile.TargetPathProject;
+        if (NetString.HasValue(targetPathProject))
         {
-          projectName = project.Name;
+          var projectParentKey = ProjectParentKey(codeLineName, codeGroup.Name
+            , solution.Name);
+          var projectPath = ProjectPath(projectParentKey
+            , targetPathProject);
+          retValue = Path.Combine(retValue, projectPath);
         }
-        retValue.SourceProject = projectName;
+
+        retValue = Path.Combine(retValue, projectFile.TargetFilePath);
+        retValue = Path.Combine(retValue, projectFile.FileName);
       }
       return retValue;
     }
@@ -144,6 +252,12 @@ namespace ProjectFilesDAL
       , int stopIndex, out string lastFolderName)
     {
       string retValue = "";
+
+      string message = "";
+      NetString.AddMissingArgument(message, folders);
+      NetString.AddMissingArgument(message, startIndex);
+      NetString.AddMissingArgument(message, stopIndex);
+      NetString.ThrowInvalidArgument(message);
 
       lastFolderName = null;
       for (int pathIndex = startIndex; pathIndex <= stopIndex; pathIndex++)
@@ -162,19 +276,105 @@ namespace ProjectFilesDAL
     }
     #endregion
 
+    #region Check Object Required Properties
+
+    // Checks the ProjectFile ParentKey for required poperties.
+    /// <include path='items/HasProjectFileParentValues/*' file='Doc/DataProjectFiles.xml'/>
+    public bool HasProjectFileParentValues(ProjectFileParentKey parentKey)
+    {
+      bool retValue = true;
+
+      if (parentKey != null
+        && NetString.HasValue(parentKey.CodeLine)
+        && NetString.HasValue(parentKey.CodeGroup)
+        && NetString.HasValue(parentKey.Solution)
+        && NetString.HasValue(parentKey.Project))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks the Project ParentKey for required poperties.
+    /// <include path='items/HasProjectParentValues/*' file='Doc/DataProjectFiles.xml'/>
+    public bool HasProjectParentValues(ProjectParentKey parentKey)
+    {
+      bool retValue = true;
+
+      if (parentKey != null
+        && NetString.HasValue(parentKey.CodeLine)
+        && NetString.HasValue(parentKey.CodeGroup)
+        && NetString.HasValue(parentKey.Solution))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks the Solution ParentKey for required poperties.
+    /// <include path='items/HasSolutionParentValues/*' file='Doc/DataProjectFiles.xml'/>
+    public bool HasSolutionParentValues(SolutionParentKey parentKey)
+    {
+      bool retValue = true;
+
+      if (parentKey != null
+        && NetString.HasValue(parentKey.CodeLine)
+        && NetString.HasValue(parentKey.CodeGroup))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks the ProjectFile object for required Source properties.
+    /// <include path='items/HasSourceValues/*' file='Doc/DataProjectFiles.xml'/>
+    public bool HasSourceValues(ProjectFile projectFile)
+    {
+      bool retValue = true;
+
+      if (projectFile != null
+        && NetString.HasValue(projectFile.SourceCodeLine)
+        && NetString.HasValue(projectFile.SourceCodeGroup)
+        && NetString.HasValue(projectFile.SourceSolution)
+        && NetString.HasValue(projectFile.SourceProject)
+        && NetString.HasValue(projectFile.SourceFilePath)
+        && NetString.HasValue(projectFile.FileName))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks the ProjectFile object for required Target path properties.
+    /// <include path='items/HasTargetValues/*' file='Doc/DataProjectFiles.xml'/>
+    public bool HasTargetValues(ProjectFile projectFile)
+    {
+      bool retValue = true;
+
+      if (projectFile != null
+        && NetString.HasValue(projectFile.TargetPathSolution)
+        && NetString.HasValue(projectFile.TargetFilePath)
+        && NetString.HasValue(projectFile.FileName))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Retrieve Object Methods
 
     // Gets the CodeGroup object with name.
     /// <include path='items/CodeGroup/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroup(string codeLineName, string name)
     {
-      CodeGroup retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(name))
-      {
-        var codeGroups = DataHelper.CodeGroups;
-        retValue = codeGroups.LJCRetrieve(codeLineName, name);
-      }
+      var codeGroups = DataHelper.CodeGroups;
+      var retValue = codeGroups.LJCRetrieve(codeLineName, name);
       return retValue;
     }
 
@@ -182,14 +382,13 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroupWithPath(string codeLineName, string path)
     {
-      CodeGroup retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(path))
-      {
-        var codeGroups = DataHelper.CodeGroups;
-        retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
-      }
+      var codeGroups = DataHelper.CodeGroups;
+      var retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
       return retValue;
     }
 
@@ -197,13 +396,12 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLline/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLine(string name)
     {
-      CodeLine retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(name))
-      {
-        var codeLines = DataHelper.CodeLines;
-        retValue = codeLines.LJCRetrieve(name);
-      }
+      var codeLines = DataHelper.CodeLines;
+      var retValue = codeLines.LJCRetrieve(name);
       return retValue;
     }
 
@@ -211,13 +409,12 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLineWithPath(string path)
     {
-      CodeLine retValue = null;
+      string message = "";
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
 
-      if (NetString.HasValue(path))
-      {
-        var codeLines = DataHelper.CodeLines;
-        retValue = codeLines.LJCRetrieveWithPath(path);
-      }
+      var codeLines = DataHelper.CodeLines;
+      var retValue = codeLines.LJCRetrieveWithPath(path);
       return retValue;
     }
 
@@ -225,13 +422,16 @@ namespace ProjectFilesDAL
     /// <include path='items/Project/*' file='Doc/DataProjectFiles.xml'/>
     public Project Project(ProjectParentKey parentKey, string name)
     {
-      Project retValue = null;
-
-      if (NetString.HasValue(name))
+      string message = "";
+      if (!HasProjectParentValues(parentKey))
       {
-        var projects = DataHelper.Projects;
-        retValue = projects.LJCRetrieve(parentKey, name);
+        NetString.AddMissingArgument(message, parentKey, true);
       }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
+      var projects = DataHelper.Projects;
+      var retValue = projects.LJCRetrieve(parentKey, name);
       return retValue;
     }
 
@@ -239,28 +439,50 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Project ProjectWithPath(ProjectParentKey parentKey, string path)
     {
-      Project retValue = null;
-
-      if (parentKey != null
-        && NetString.HasValue(path))
+      string message = "";
+      if (!HasProjectParentValues(parentKey))
       {
-        var projects = DataHelper.Projects;
-        retValue = projects.LJCRetrieveWithPath(parentKey, path);
+        NetString.AddMissingArgument(message, parentKey, true);
       }
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
+
+      var projects = DataHelper.Projects;
+      var retValue = projects.LJCRetrieveWithPath(parentKey, path);
       return retValue;
     }
 
     // Gets the ProjectFiles object.
     /// <include path='items/ProjectFile/*' file='Doc/DataProjectFiles.xml'/>
-    public ProjectFile ProjectFile(ProjectFileParentKey parentKey, string name)
+    public ProjectFile ProjectFile(ProjectFileParentKey parentKey
+      , string name)
     {
-      ProjectFile retValue = null;
-
-      if (NetString.HasValue(name))
+      string message = "";
+      if (!HasProjectFileParentValues(parentKey))
       {
-        var projectFiles = DataHelper.ProjectFiles;
-        retValue = projectFiles.LJCRetrieve(parentKey, name);
+        NetString.AddMissingArgument(message, parentKey, true);
       }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
+      var projectFiles = DataHelper.ProjectFiles;
+      var retValue = projectFiles.LJCRetrieve(parentKey, name);
+      return retValue;
+    }
+
+    // Gets the Project dependencies.
+    /// <include path='items/ProjectFiles/*' file='Doc/DataProjectFiles.xml'/>
+    public ProjectFiles ProjectFiles(ProjectFileParentKey parentKey)
+    {
+      string message = "";
+      if (!HasProjectFileParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.ThrowInvalidArgument(message);
+
+      var projectFiles = DataHelper.ProjectFiles;
+      var retValue = projectFiles.LJCLoad(parentKey);
       return retValue;
     }
 
@@ -268,13 +490,16 @@ namespace ProjectFilesDAL
     /// <include path='items/Solution/*' file='Doc/DataProjectFiles.xml'/>
     public Solution Solution(SolutionParentKey parentKey, string name)
     {
-      Solution retValue = null;
-
-      if (NetString.HasValue(name))
+      string message = "";
+      if (!HasSolutionParentValues(parentKey))
       {
-        var solutions = DataHelper.Solutions;
-        retValue = solutions.LJCRetrieve(parentKey, name);
+        NetString.AddMissingArgument(message, parentKey, true);
       }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
+      var solutions = DataHelper.Solutions;
+      var retValue = solutions.LJCRetrieve(parentKey, name);
       return retValue;
     }
 
@@ -282,13 +507,16 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Solution SolutionWithPath(SolutionParentKey parentKey, string path)
     {
-      Solution retValue = null;
-
-      if (NetString.HasValue(path))
+      string message = "";
+      if (!HasSolutionParentValues(parentKey))
       {
-        var solutions = DataHelper.Solutions;
-        retValue = solutions.LJCRetrieveWithPath(parentKey, path);
+        NetString.AddMissingArgument(message, parentKey, true);
       }
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
+
+      var solutions = DataHelper.Solutions;
+      var retValue = solutions.LJCRetrieveWithPath(parentKey, path);
       return retValue;
     }
     #endregion
@@ -297,11 +525,16 @@ namespace ProjectFilesDAL
 
     // Gets the CodeGroup path value.
     /// <include path='items/CodeGroupPath/*' file='Doc/DataProjectFiles.xml'/>
-    public string CodeGroupPath(string codeLine, string name)
+    public string CodeGroupPath(string codeLineName, string name)
     {
       string retValue = null;
 
-      var codeGroup = CodeGroup(codeLine, name);
+      string message = "";
+      NetString.AddMissingArgument(message, codeLineName);
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
+      var codeGroup = CodeGroup(codeLineName, name);
       if (codeGroup != null)
       {
         retValue = codeGroup.Path;
@@ -314,6 +547,10 @@ namespace ProjectFilesDAL
     public string CodeLineName(string path, string defautName = null)
     {
       var retValue = defautName;
+
+      string message = "";
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
 
       var codeLine = CodeLineWithPath(path);
       if (codeLine != null)
@@ -328,6 +565,10 @@ namespace ProjectFilesDAL
     public string CodeLinePath(string name)
     {
       string retValue = null;
+
+      string message = "";
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
 
       var codeLine = CodeLine(name);
       if (codeLine != null)
@@ -344,6 +585,14 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
+      string message = "";
+      if (!HasProjectFileParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
       var projectFile = ProjectFile(parentKey, name);
       if (projectFile != null)
       {
@@ -358,6 +607,14 @@ namespace ProjectFilesDAL
       , string defaultprojectName = null)
     {
       string retValue = defaultprojectName;
+
+      string message = "";
+      if (!HasProjectParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
 
       var project = ProjectWithPath(parentKey, path);
       if (project != null)
@@ -374,6 +631,14 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
+      string message = "";
+      if (!HasProjectParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
+
       var project = Project(parentKey, name);
       if (project != null)
       {
@@ -387,6 +652,14 @@ namespace ProjectFilesDAL
     public string SolutionName(SolutionParentKey parentKey, string path)
     {
       string retValue = null;
+
+      string message = "";
+      if (!HasSolutionParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.AddMissingArgument(message, path);
+      NetString.ThrowInvalidArgument(message);
 
       var solution = SolutionWithPath(parentKey, path);
       if (solution != null)
@@ -402,6 +675,14 @@ namespace ProjectFilesDAL
       , string name)
     {
       string retValue = null;
+
+      string message = "";
+      if (!HasSolutionParentValues(parentKey))
+      {
+        NetString.AddMissingArgument(message, parentKey, true);
+      }
+      NetString.AddMissingArgument(message, name);
+      NetString.ThrowInvalidArgument(message);
 
       var solution = Solution(parentKey, name);
       if (solution != null)

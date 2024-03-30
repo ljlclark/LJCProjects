@@ -378,6 +378,7 @@
     </summary>
     <param name="message">The message text.</param>
     <param name="argument">The argument value.</param>
+    <param name="forceError">Optionally force error for an object.</param>
   </AddMissingArgument>
   <ThrowInvalidArgument>
     <summary>

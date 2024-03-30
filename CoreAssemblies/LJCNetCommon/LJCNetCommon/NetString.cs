@@ -528,7 +528,8 @@ namespace LJCNetCommon
 
     // Adds the missing argument name to the message.
     /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
-    public static void AddMissingArgument(string message, object argument)
+    public static void AddMissingArgument(string message, object argument
+      , bool forceError = false)
     {
       var missing = false;
 
@@ -541,7 +542,8 @@ namespace LJCNetCommon
       }
       else
       {
-        if (null == argument)
+        if (null == argument
+          || forceError)
         {
           missing = true;
         }
@@ -550,7 +552,6 @@ namespace LJCNetCommon
       if (missing)
       {
         message += $"{argument} is missing.\r\n";
-        //throw new ArgumentException(message);
       }
     }
 
@@ -565,6 +566,8 @@ namespace LJCNetCommon
       }
     }
     #endregion
+
+    #region Constants
 
     /// <summary>The compare object is equal to the compareto ojbect..</summary>
     public const int CompareEqual = 0;
@@ -583,5 +586,6 @@ namespace LJCNetCommon
     /// The compare object is notnull or equal is equal to the compareto object.
     /// </summary>
     public const int CompareNotNullOrEqual = -2;
+    #endregion
   }
 }
