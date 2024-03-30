@@ -7,16 +7,12 @@ using System.IO;
 
 namespace ProjectFilesDAL
 {
-  /// <summary>
-  /// 
-  /// </summary>
+  /// <summary></summary>
   public sealed class ValuesProjectFiles
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
+    /// <summary>Initializes an object instance</summary>
     public ValuesProjectFiles()
     {
       SetConfigFileSpec("UpdateProjectFiles.exe.config");
@@ -31,35 +27,22 @@ namespace ProjectFilesDAL
     /// <param name="fileSpec"></param>
     public void SetConfigFileSpec(string fileSpec)
     {
-      bool success = true;
-      if (!NetString.HasValue(fileSpec))
+      string message = "";
+      NetString.AddMissingArgument(message, fileSpec);
+      if (!File.Exists(fileSpec))
       {
-        // Do not continue if no fileSpec.
-        success = false;
+        message += $"File {fileSpec} was notfound.";
       }
+      NetString.ThrowInvalidArgument(message);
 
-      if (success)
+      // Update for chnaged file name.
+      fileSpec = fileSpec.Trim();
+      if (!NetString.IsEqual(fileSpec, FileSpec))
       {
-        fileSpec = fileSpec.Trim();
-        if (NetString.HasValue(FileSpec)
-          && !NetString.IsEqual(fileSpec, FileSpec))
-        {
-          // Do not continue if fileSpec equals FileSpec.
-          success = false;
-        }
-      }
-
-      if (success
-        && File.Exists(fileSpec))
-      {
-        // Process if changed fileName exists.
         FileSpec = fileSpec;
         SetProperties(FileSpec);
       }
     }
-    #endregion
-
-    #region Private Methods
 
     // Sets the Settings properties.
     /// <summary>
@@ -90,10 +73,7 @@ namespace ProjectFilesDAL
     /// <summary>The end gradient color.</summary>
     public Color EndColor { get; private set; }
 
-    // Gets the singleton instance.
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary>Gets the singleton instance.</summary>
     public static ValuesProjectFiles Instance
     {
       get { return mInstance; }
