@@ -38,18 +38,15 @@ namespace ProjectFilesDAL
     /// <returns>The added CodeLine data object.</returns>
     public CodeGroup Add(string codeLineName, string name, string path)
     {
-      CodeGroup retValue = null;
+      var message = NetString.ArgError(null, codeLineName, name);
+      NetString.ThrowArgError(message);
 
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(name))
-      {
-        var codeGroup = CreateDataObject(codeLineName, name, path);
-        var newRecord = CreateRecord(codeGroup);
-        Reader.Close();
-        File.AppendAllText(FileName, newRecord);
-        Reader.LJCOpen();
-        retValue = Retrieve(codeLineName, name);
-      }
+      var codeGroup = CreateDataObject(codeLineName, name, path);
+      var newRecord = CreateRecord(codeGroup);
+      Reader.Close();
+      File.AppendAllText(FileName, newRecord);
+      Reader.LJCOpen();
+      var retValue = Retrieve(codeLineName, name);
       return retValue;
     }
 
@@ -60,20 +57,19 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     public void Delete(string codeLineName, string name)
     {
-      if (NetString.HasValue(codeLineName)
-        && NetString.HasValue(name))
+      var message = NetString.ArgError(null, codeLineName, name);
+      NetString.ThrowArgError(message);
+
+      var current = CurrentDataObject();
+      var codeLines = LoadAllExcept(codeLineName, name);
+      if (codeLines != null)
       {
-        var current = CurrentDataObject();
-        var codeLines = LoadAllExcept(codeLineName, name);
-        if (codeLines != null)
-        {
-          WriteBackup();
-          RecreateFile(codeLines);
-        }
-        if (current != null)
-        {
-          Retrieve(codeLineName, current.Name);
-        }
+        WriteBackup();
+        RecreateFile(codeLines);
+      }
+      if (current != null)
+      {
+        Retrieve(codeLineName, current.Name);
       }
     }
 
@@ -145,43 +141,43 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      if (NetString.HasValue(codeLineName))
+      var message = NetString.ArgError(null, codeLineName);
+      NetString.ThrowArgError(message);
+
+      if (NetString.HasValue(name))
       {
-        if (NetString.HasValue(name))
+        Reader.LJCOpen();
+      }
+      bool success;
+      while (success = Reader.Read())
+      {
+        var codeGroup = CurrentDataObject();
+        if (codeGroup.CodeLine == codeLineName)
         {
-          Reader.LJCOpen();
-        }
-        bool success;
-        while (success = Reader.Read())
-        {
-          var codeGroup = CurrentDataObject();
-          if (codeGroup.CodeLine == codeLineName)
+          if (NetString.HasValue(name))
           {
-            if (NetString.HasValue(name))
+            if (codeGroup.Name == name)
             {
-              if (codeGroup.Name == name)
-              {
-                retValue = codeGroup;
-                break;
-              }
-            }
-            else
-            {
-              // Get next item in Parent key.
               retValue = codeGroup;
               break;
             }
           }
           else
           {
-            success = false;
+            // Get next item in Parent key.
+            retValue = codeGroup;
             break;
           }
         }
-        if (!success)
+        else
         {
-          Reader.LJCOpen();
+          success = false;
+          break;
         }
+      }
+      if (!success)
+      {
+        Reader.LJCOpen();
       }
       return retValue;
     }
@@ -192,24 +188,22 @@ namespace ProjectFilesDAL
     /// <param name="codeGroup">The DataObject value.</param>
     public CodeGroup Update(CodeGroup codeGroup)
     {
-      CodeGroup retValue = null;
+      var message = NetString.ArgError(null, codeGroup);
+      CodeGroup.ItemValues(ref message, codeGroup);
+      NetString.ThrowArgError(message);
 
-      if (NetString.HasValue(codeGroup.CodeLine)
-        && NetString.HasValue(codeGroup.Name))
+      var current = CurrentDataObject();
+      var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
+      if (codeLines != null)
       {
-        var current = CurrentDataObject();
-        var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
-        if (codeLines != null)
-        {
-          WriteBackup();
-          RecreateFile(codeLines);
-        }
-        Reader.Close();
-        var text = CreateRecord(codeGroup);
-        File.AppendAllText(FileName, text);
-        Reader.LJCOpen();
-        Retrieve(codeGroup.CodeLine, current.Name);
+        WriteBackup();
+        RecreateFile(codeLines);
       }
+      Reader.Close();
+      var text = CreateRecord(codeGroup);
+      File.AppendAllText(FileName, text);
+      Reader.LJCOpen();
+      var retValue = Retrieve(codeGroup.CodeLine, current.Name);
       return retValue;
     }
     #endregion
@@ -242,21 +236,19 @@ namespace ProjectFilesDAL
     /// <returns>The record string.</returns>
     public string CreateRecord(CodeGroup codeGroup)
     {
-      string retValue = null;
+      var message = NetString.ArgError(null, codeGroup);
+      CodeGroup.ItemParentValues(ref message, codeGroup);
+      NetString.ThrowArgError(message);
 
-      if (codeGroup != null
-        && NetString.HasValue(codeGroup.Name))
+      var builder = new StringBuilder(128);
+      if (!Reader.LJCEndsWithNewLine())
       {
-        var builder = new StringBuilder(128);
-        if (!Reader.LJCEndsWithNewLine())
-        {
-          builder.AppendLine();
-        }
-        builder.Append($"{codeGroup.CodeLine}");
-        builder.Append($", {codeGroup.Name}");
-        builder.AppendLine($", {codeGroup.Path}");
-        retValue = builder.ToString();
+        builder.AppendLine();
       }
+      builder.Append($"{codeGroup.CodeLine}");
+      builder.Append($", {codeGroup.Name}");
+      builder.AppendLine($", {codeGroup.Path}");
+      var retValue = builder.ToString();
       return retValue;
     }
 
@@ -362,6 +354,10 @@ namespace ProjectFilesDAL
     private bool IsMatch(CodeGroup codeGroup)
     {
       var retValue = false;
+
+      var message = NetString.ArgError(null, codeGroup);
+      CodeGroup.ItemParentValues(ref message, codeGroup);
+      NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
       if (current.CodeLine == codeGroup.CodeLine)

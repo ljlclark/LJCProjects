@@ -61,10 +61,8 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue;
 
-      string message = "";
-      NetString.AddMissingArgument(message, codeLine);
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLine, name);
+      NetString.ThrowArgError(message);
 
       retValue = LJCRetrieve(codeLine, name);
       if (null == retValue)

@@ -35,21 +35,19 @@ namespace ProjectFilesDAL
     /// <param name="sequence">The Sequence value.</param>
     /// <param name="path">The Path value.</param>
     /// <returns>The added Solution data object.</returns>
-    public Solution Add(ProjectParentKey parentKey, string name, int sequence
+    public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path)
     {
-      Solution retValue = null;
+      var message = NetString.ArgError(null, parentKey, name);
+      Solution.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
 
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(name))
-      {
-        var solution = CreateDataObject(parentKey, name, sequence, path);
-        var newRecord = CreateRecord(solution);
-        Reader.Close();
-        File.AppendAllText(FileName, newRecord);
-        Reader.LJCOpen();
-        retValue = Retrieve(parentKey, name);
-      }
+      var solution = CreateDataObject(parentKey, name, sequence, path);
+      var newRecord = CreateRecord(solution);
+      Reader.Close();
+      File.AppendAllText(FileName, newRecord);
+      Reader.LJCOpen();
+      var retValue = Retrieve(parentKey, name);
       return retValue;
     }
 
@@ -58,22 +56,22 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
-    public void Delete(ProjectParentKey parentKey, string name)
+    public void Delete(SolutionParentKey parentKey, string name)
     {
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(name))
+      var message = NetString.ArgError(null, parentKey, name);
+      Solution.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
+      var current = CurrentDataObject();
+      var solutions = LoadAllExcept(parentKey, name);
+      if (solutions != null)
       {
-        var current = CurrentDataObject();
-        var solutions = LoadAllExcept(parentKey, name);
-        if (solutions != null)
-        {
-          WriteBackup();
-          RecreateFile(solutions);
-        }
-        if (current != null)
-        {
-          Retrieve(parentKey, current.Name);
-        }
+        WriteBackup();
+        RecreateFile(solutions);
+      }
+      if (current != null)
+      {
+        Retrieve(parentKey, current.Name);
       }
     }
 
@@ -83,7 +81,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions Load(ProjectParentKey parentKey = null, string name = null)
+    public Solutions Load(SolutionParentKey parentKey = null, string name = null)
     {
       Solutions retValue = null;
 
@@ -113,7 +111,7 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solutions collection if available; otherwise null.</returns>
-    public Solutions LoadAllExcept(ProjectParentKey parentKey, string name)
+    public Solutions LoadAllExcept(SolutionParentKey parentKey, string name)
     {
       Solutions retValue = null;
 
@@ -142,48 +140,49 @@ namespace ProjectFilesDAL
     /// <param name="parentKey">The ParentKey value.</param>
     /// <param name="name">The Name value.</param>
     /// <returns>The Solution Data Object if found; otherwise null.</returns>
-    public Solution Retrieve(ProjectParentKey parentKey, string name = null)
+    public Solution Retrieve(SolutionParentKey parentKey, string name = null)
     {
       Solution retValue = null;
 
-      if (HasParentKey(parentKey))
+      var message = NetString.ArgError(null, parentKey);
+      Solution.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
+      if (NetString.HasValue(name))
       {
-        if (NetString.HasValue(name))
+        Reader.LJCOpen();
+      }
+      bool success;
+      while (success = Reader.Read())
+      {
+        var solution = CurrentDataObject();
+        if (solution.CodeLine == parentKey.CodeLine
+          && solution.CodeGroup == parentKey.CodeGroup)
         {
-          Reader.LJCOpen();
-        }
-        bool success;
-        while (success = Reader.Read())
-        {
-          var solution = CurrentDataObject();
-          if (solution.CodeLine == parentKey.CodeLine
-            && solution.CodeGroup == parentKey.CodeGroup)
+          if (NetString.HasValue(name))
           {
-            if (NetString.HasValue(name))
+            if (solution.Name == name)
             {
-              if (solution.Name == name)
-              {
-                retValue = solution;
-                break;
-              }
-            }
-            else
-            {
-              // Get next item in Parent key.
               retValue = solution;
               break;
             }
           }
           else
           {
-            success = false;
+            // Get next item in Parent key.
+            retValue = solution;
             break;
           }
         }
-        if (!success)
+        else
         {
-          Reader.LJCOpen();
+          success = false;
+          break;
         }
+      }
+      if (!success)
+      {
+        Reader.LJCOpen();
       }
       return retValue;
     }
@@ -194,25 +193,23 @@ namespace ProjectFilesDAL
     /// <param name="solution">The DataObject value.</param>
     public Solution Update(Solution solution)
     {
-      Solution retValue = null;
+      var message = NetString.ArgError(null, solution);
+      Solution.ItemValues(ref message, solution, solution.Name);
+      NetString.ThrowArgError(message);
 
       var parentKey = CreateParentKey(solution);
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(solution.Name))
+      var current = CurrentDataObject();
+      var solutions = LoadAllExcept(parentKey, solution.Name);
+      if (solutions != null)
       {
-        var current = CurrentDataObject();
-        var solutions = LoadAllExcept(parentKey, solution.Name);
-        if (solutions != null)
-        {
-          WriteBackup();
-          RecreateFile(solutions);
-        }
-        Reader.Close();
-        var text = CreateRecord(solution);
-        File.AppendAllText(FileName, text);
-        Reader.LJCOpen();
-        Retrieve(parentKey, current.Name);
+        WriteBackup();
+        RecreateFile(solutions);
       }
+      Reader.Close();
+      var text = CreateRecord(solution);
+      File.AppendAllText(FileName, text);
+      Reader.LJCOpen();
+      var retValue = Retrieve(parentKey, current.Name);
       return retValue;
     }
     #endregion
@@ -242,9 +239,9 @@ namespace ProjectFilesDAL
     /// <summary>Creates a ParentKey from the supplied DataObject.</summary>
     /// <param name="solution"></param>
     /// <returns></returns>
-    public ProjectParentKey CreateParentKey(Solution solution)
+    public SolutionParentKey CreateParentKey(Solution solution)
     {
-      var retValue = new ProjectParentKey()
+      var retValue = new SolutionParentKey()
       {
         CodeLine = solution.CodeLine,
         CodeGroup = solution.CodeGroup
@@ -259,23 +256,21 @@ namespace ProjectFilesDAL
     /// <returns>The record string.</returns>
     public string CreateRecord(Solution solution)
     {
-      string retValue = null;
+      var message = NetString.ArgError(null, solution);
+      Solution.ItemValues(ref message, solution, solution.Name);
+      NetString.ThrowArgError(message);
 
-      if (solution != null
-        && NetString.HasValue(solution.Name))
+      var builder = new StringBuilder(128);
+      if (!Reader.LJCEndsWithNewLine())
       {
-        var builder = new StringBuilder(128);
-        if (!Reader.LJCEndsWithNewLine())
-        {
-          builder.AppendLine();
-        }
-        builder.Append($"{solution.CodeLine}");
-        builder.Append($", {solution.CodeGroup}");
-        builder.Append($", {solution.Name}");
-        builder.Append($", {solution.Sequence}");
-        builder.AppendLine($", {solution.Path}");
-        retValue = builder.ToString();
+        builder.AppendLine();
       }
+      builder.Append($"{solution.CodeLine}");
+      builder.Append($", {solution.CodeGroup}");
+      builder.Append($", {solution.Name}");
+      builder.Append($", {solution.Sequence}");
+      builder.AppendLine($", {solution.Path}");
+      var retValue = builder.ToString();
       return retValue;
     }
 
@@ -363,12 +358,12 @@ namespace ProjectFilesDAL
     }
 
     // Creates a DataObject from the supplied values.
-    private Solution CreateDataObject(ProjectParentKey parentKey, string name
+    private Solution CreateDataObject(SolutionParentKey parentKey, string name
       , int sequence = 0, string pathName = null)
     {
       Solution retValue = null;
 
-      if (HasParentKey(parentKey))
+      if (parentKey != null)
       {
         retValue = new Solution()
         {
@@ -382,24 +377,14 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    // Checks for the existance of the ParentKey values.
-    private bool HasParentKey(ProjectParentKey parentKey)
-    {
-      var retValue = false;
-
-      if (parentKey != null
-        && NetString.HasValue(parentKey.CodeLine)
-        && NetString.HasValue(parentKey.CodeGroup))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Checks if the DataObject keys match the current values.
     private bool IsMatch(Solution solution)
     {
       var retValue = false;
+
+      var message = NetString.ArgError(null, solution);
+      Solution.ItemParentValues(ref message, solution);
+      NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
       if (current.CodeLine == solution.CodeLine

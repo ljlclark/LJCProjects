@@ -27,15 +27,14 @@ namespace ProjectFilesDAL
     /// <param name="fileSpec"></param>
     public void SetConfigFileSpec(string fileSpec)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, fileSpec);
+      var message = NetString.ArgError(null, fileSpec);
       if (!File.Exists(fileSpec))
       {
-        message += $"File {fileSpec} was notfound.";
+        message += $"File {fileSpec} was not found.";
       }
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
-      // Update for chnaged file name.
+      // Update for changed file name.
       fileSpec = fileSpec.Trim();
       if (!NetString.IsEqual(fileSpec, FileSpec))
       {

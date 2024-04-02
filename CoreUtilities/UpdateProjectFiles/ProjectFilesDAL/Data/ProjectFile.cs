@@ -9,6 +9,40 @@ namespace ProjectFilesDAL
   /// <summary>The ProjectFile Data Object.</summary>
   public class ProjectFile : IComparable<ProjectFile>
   {
+    #region Static Methods
+
+
+    // Checks the ParentKey for values.
+    /// <summary>
+    /// Checks the ParentKey for values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="parentKey">The ParentKey object.</param>
+    public static void ParentKeyValues(ref string message
+      , ProjectFileParentKey parentKey)
+    {
+      if (parentKey != null)
+      {
+        if (!NetString.HasValue(parentKey.CodeLine))
+        {
+          message += $"{parentKey.CodeLine} is missing.";
+        }
+        if (!NetString.HasValue(parentKey.CodeGroup))
+        {
+          message += $"{parentKey.CodeGroup} is missing.";
+        }
+        if (!NetString.HasValue(parentKey.Solution))
+        {
+          message += $"{parentKey.Solution} is missing.";
+        }
+        if (!NetString.HasValue(parentKey.Project))
+        {
+          message += $"{parentKey.Project} is missing.";
+        }
+      }
+    }
+    #endregion
+
     #region Data Methods
 
     // Creates and returns a clone of this object.

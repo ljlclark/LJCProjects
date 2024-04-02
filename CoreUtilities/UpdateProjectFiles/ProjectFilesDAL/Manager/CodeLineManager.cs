@@ -36,17 +36,15 @@ namespace ProjectFilesDAL
     /// <returns>The added CodeLine data object.</returns>
     public CodeLine Add(string name, string path)
     {
-      CodeLine retValue = null;
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
 
-      if (NetString.HasValue(name))
-      {
-        var codeLine = CreateDataObject(name, path);
-        var newRecord = CreateRecord(codeLine);
-        Reader.Close();
-        File.AppendAllText(FileName, newRecord);
-        Reader.LJCOpen();
-        retValue = Retrieve(name);
-      }
+      var codeLine = CreateDataObject(name, path);
+      var newRecord = CreateRecord(codeLine);
+      Reader.Close();
+      File.AppendAllText(FileName, newRecord);
+      Reader.LJCOpen();
+      var retValue = Retrieve(name);
       return retValue;
     }
 
@@ -56,19 +54,19 @@ namespace ProjectFilesDAL
     /// <param name="name">The Name value.</param>
     public void Delete(string name)
     {
-      if (NetString.HasValue(name))
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
+
+      var current = CurrentDataObject();
+      var codeLines = LoadAllExcept(name);
+      if (codeLines != null)
       {
-        var current = CurrentDataObject();
-        var codeLines = LoadAllExcept(name);
-        if (codeLines != null)
-        {
-          WriteBackup();
-          RecreateFile(codeLines);
-        }
-        if (current != null)
-        {
-          Retrieve(current.Name);
-        }
+        WriteBackup();
+        RecreateFile(codeLines);
+      }
+      if (current != null)
+      {
+        Retrieve(current.Name);
       }
     }
 
@@ -172,23 +170,22 @@ namespace ProjectFilesDAL
     /// <param name="codeLine">The DataObject value.</param>
     public CodeLine Update(CodeLine codeLine)
     {
-      CodeLine retValue = null;
+      var message = NetString.ArgError(null, codeLine);
+      CodeLine.ItemValues(ref message, codeLine);
+      NetString.ThrowArgError(message);
 
-      if (NetString.HasValue(codeLine.Name))
+      var current = CurrentDataObject();
+      var codeLines = LoadAllExcept(codeLine.Name);
+      if (codeLines != null)
       {
-        var current = CurrentDataObject();
-        var codeLines = LoadAllExcept(codeLine.Name);
-        if (codeLines != null)
-        {
-          WriteBackup();
-          RecreateFile(codeLines);
-        }
-        Reader.Close();
-        var text = CreateRecord(codeLine);
-        File.AppendAllText(FileName, text);
-        Reader.LJCOpen();
-        Retrieve(current.Name);
+        WriteBackup();
+        RecreateFile(codeLines);
       }
+      Reader.Close();
+      var text = CreateRecord(codeLine);
+      File.AppendAllText(FileName, text);
+      Reader.LJCOpen();
+      var retValue = Retrieve(current.Name);
       return retValue;
     }
     #endregion
@@ -217,18 +214,16 @@ namespace ProjectFilesDAL
     /// <returns>The record string.</returns>
     public string CreateRecord(CodeLine codeLine)
     {
-      string retValue = null;
+      var message = NetString.ArgError(null, codeLine);
+      CodeLine.ItemValues(ref message, codeLine);
+      NetString.ThrowArgError(message);
 
-      if (codeLine != null
-        && NetString.HasValue(codeLine.Name))
+      var retValue = "";
+      if (!Reader.LJCEndsWithNewLine())
       {
-        retValue = "";
-        if (!Reader.LJCEndsWithNewLine())
-        {
-          retValue = "\r\n";
-        }
-        retValue += $"{codeLine.Name}, {codeLine.Path}\r\n";
+        retValue = "\r\n";
       }
+      retValue += $"{codeLine.Name}, {codeLine.Path}\r\n";
       return retValue;
     }
 
@@ -325,6 +320,9 @@ namespace ProjectFilesDAL
     private bool IsMatch(CodeLine codeLine)
     {
       var retValue = false;
+
+      var message = NetString.ArgError(null, codeLine);
+      NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
       if (null == codeLine.Name

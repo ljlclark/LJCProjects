@@ -1,7 +1,10 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // NetString.xml
+using Microsoft.Win32;
 using System;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace LJCNetCommon
@@ -61,6 +64,7 @@ namespace LJCNetCommon
     #endregion
 
     #region Formatting a String
+
     // Creates an exception string with outer and inner exception.
     /// <include path='items/ExceptionString/*' file='Doc/NetString.xml'/>
     public static string ExceptionString(Exception e)
@@ -526,8 +530,66 @@ namespace LJCNetCommon
 
     #region Other Functions
 
+    // Adds the missing argument names to the message.
+    /// <summary>
+    /// Adds the missing argument names to the message.
+    /// </summary>
+    /// <param name="message">The current error message.</param>
+    /// <param name="args">The "params" arguments.</param>
+    /// <returns>The argument error string.</returns>
+    public static string ArgError(string message, params object[] args)
+    {
+      var retValue = message;
+
+      if (null == retValue)
+      {
+        retValue = "";
+      }
+
+      bool missing = false;
+      foreach (object arg in args)
+      {
+        if (typeof(String) == arg.GetType())
+        {
+          if (!NetString.HasValue(arg.ToString()))
+          {
+            missing = true;
+          }
+        }
+        else
+        {
+          if (null == arg)
+          {
+            missing = true;
+          }
+        }
+
+        if (missing)
+        {
+          retValue += $"{arg} is missing.\r\n";
+        }
+      }
+      return retValue;
+    }
+
+    // Throws an ArgumentException if the provided message has a value.
+    /// <summary>
+    /// Throws an ArgumentException if the provided message has a value.
+    /// </summary>
+    /// <param name="message">The error message.</param>
+    /// <exception cref="ArgumentException">The exception object.</exception>
+    public static void ThrowArgError(string message)
+    {
+      if (HasValue(message))
+      {
+        var argMessage = $"Missing or invalid arguments:\r\n{message}";
+        throw new ArgumentException(argMessage);
+      }
+    }
+
     // Adds the missing argument name to the message.
     /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use ArgError().")]
     public static void AddMissingArgument(string message, object argument
       , bool forceError = false)
     {
@@ -557,11 +619,12 @@ namespace LJCNetCommon
 
     // Throws the invalid argument exception if message has a value.
     /// <include path='items/ThrowInvalidArgument/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use ThrowArgError()")]
     public static void ThrowInvalidArgument(string message)
     {
       if (HasValue(message))
       {
-        var argMessage = $"Missing or invalid argument:\r\n{message}";
+        var argMessage = $"Missing or invalid arguments:\r\n{message}";
         throw new ArgumentException(argMessage);
       }
     }

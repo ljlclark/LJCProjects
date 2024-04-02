@@ -60,9 +60,8 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue;
 
-      string message = "";
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
 
       retValue = LJCRetrieve(name);
       if (null == retValue)

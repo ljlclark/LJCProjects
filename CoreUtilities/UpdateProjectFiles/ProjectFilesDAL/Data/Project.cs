@@ -10,6 +10,80 @@ namespace ProjectFilesDAL
   /// <summary>The Project Data Object.</summary>
   public class Project : IComparable<Project>
   {
+    #region Static Methods
+
+    // Checks for the required object values.
+    /// <summary>
+    /// Checks for the required object values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="project">The Project objct.</param>
+    /// <param name="name">The name value.</param>
+    public static void ItemValues(ref string message, Project project
+      , string name)
+    {
+      if (project != null)
+      {
+        ItemParentValues(ref message, project);
+        if (!NetString.HasValue(name))
+        {
+          message += $"{name}";
+        }
+      }
+    }
+
+    // Checks for the required ParentKey values.
+    /// <summary>
+    /// Checks for the required ParentKey values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="project">The Project objct.</param>
+    public static void ItemParentValues(ref string message, Project project)
+    {
+      if (project != null)
+      {
+        if (!NetString.HasValue(project.CodeLine))
+        {
+          message += $"{project.CodeLine}";
+        }
+        if (!NetString.HasValue(project.CodeGroup))
+        {
+          message += $"{project.CodeGroup}";
+        }
+        if (!NetString.HasValue(project.Solution))
+        {
+          message += $"{project.Solution}";
+        }
+      }
+    }
+
+    // Checks the ParentKey for values.
+    /// <summary>
+    /// Checks the ParentKey for values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="parentKey">The ParentKey object.</param>
+    public static void ParentKeyValues(ref string message
+      , ProjectParentKey parentKey)
+    {
+      if (parentKey != null)
+      {
+        if (!NetString.HasValue(parentKey.CodeLine))
+        {
+          message += $"{parentKey.CodeLine}";
+        }
+        if (!NetString.HasValue(parentKey.CodeGroup))
+        {
+          message += $"{parentKey.CodeGroup}";
+        }
+        if (!NetString.HasValue(parentKey.Solution))
+        {
+          message += $"{parentKey.Solution}";
+        }
+      }
+    }
+    #endregion
+
     #region Data Methods
 
     // Creates and returns a clone of this object.

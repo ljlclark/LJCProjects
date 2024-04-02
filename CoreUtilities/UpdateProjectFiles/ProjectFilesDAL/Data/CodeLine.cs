@@ -10,6 +10,26 @@ namespace ProjectFilesDAL
   /// <summary>The CodeLine Data Object.</summary>
   public class CodeLine : IComparable<CodeLine>
   {
+    #region Static Methods
+
+    // Checks for the required object values.
+    /// <summary>
+    /// Checks for the required object values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="codeLine">The CodeLine value.</param>
+    public static void ItemValues(ref string message, CodeLine codeLine)
+    {
+      if (codeLine != null)
+      {
+        if (!NetString.HasValue(codeLine.Name))
+        {
+          message += $"{codeLine.Name}";
+        }
+      }
+    }
+    #endregion
+
     #region Data Methods
 
     // Creates and returns a clone of this object.

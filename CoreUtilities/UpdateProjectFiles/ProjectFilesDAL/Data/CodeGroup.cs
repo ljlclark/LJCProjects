@@ -8,8 +8,46 @@ using System.Collections.Generic;
 namespace ProjectFilesDAL
 {
   /// <summary>The CodeGroup Data Object.</summary>
-  public class CodeGroup : IComparable<CodeGroup> 
+  public class CodeGroup : IComparable<CodeGroup>
   {
+    #region Static Methods
+
+    // Checks for the required object values.
+    /// <summary>
+    /// Checks for the required object values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="codeGroup">The CodeGroup objct.</param>
+    public static void ItemValues(ref string message, CodeGroup codeGroup)
+    {
+      if (codeGroup != null)
+      {
+        ItemParentValues(ref message, codeGroup);
+        if (!NetString.HasValue(codeGroup.Name))
+        {
+          message += $"{codeGroup.Name}";
+        }
+      }
+    }
+
+    // Checks for the required object values.
+    /// <summary>
+    /// Checks for the required object values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="codeGroup">The CodeGroup objct.</param>
+    public static void ItemParentValues(ref string message, CodeGroup codeGroup)
+    {
+      if (codeGroup != null)
+      {
+        if (!NetString.HasValue(codeGroup.CodeLine))
+        {
+          message += $"{codeGroup.CodeLine}";
+        }
+      }
+    }
+    #endregion
+
     #region Data Methods
 
     // Creates and returns a clone of this object.

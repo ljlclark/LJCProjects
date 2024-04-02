@@ -65,11 +65,9 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue;
 
-      string message = "";
-      NetString.AddMissingArgument(message, parentKey);
-      AddMissingValues(message, parentKey);
-      NetString.AddMissingArgument(message, sourceKey);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, parentKey, sourceKey);
+      ProjectFile.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
 
       retValue = LJCRetrieve(parentKey, fileName);
       if (null == retValue)
@@ -186,35 +184,6 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Public Methods
-
-    // Adds the missing ParentKey values messages.
-    /// <summary>
-    /// Adds the missing ParentKey values messages.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="parentKey">The ParentKey object.</param>
-    public void AddMissingValues(string message, ProjectFileParentKey parentKey)
-    {
-      if (parentKey != null)
-      {
-        if (!NetString.HasValue(parentKey.CodeLine))
-        {
-          message += $"{parentKey.CodeLine} is missing.";
-        }
-        if (!NetString.HasValue(parentKey.CodeGroup))
-        {
-          message += $"{parentKey.CodeGroup} is missing.";
-        }
-        if (!NetString.HasValue(parentKey.Solution))
-        {
-          message += $"{parentKey.Solution} is missing.";
-        }
-        if (!NetString.HasValue(parentKey.Project))
-        {
-          message += $"{parentKey.Project} is missing.";
-        }
-      }
-    }
 
     // Retrieves the ParentKey from the object.
     /// <summary>Retrieves the ParentKey from the object.</summary>

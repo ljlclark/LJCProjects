@@ -116,7 +116,7 @@ namespace ProjectFilesDALTest
       var manager = new SolutionManager();
 
       // Retrieve
-      var parentKey = new ProjectParentKey()
+      var parentKey = new SolutionParentKey()
       {
         CodeLine = "LJCProjectsDev",
         CodeGroup = "CoreAssemblies"

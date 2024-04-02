@@ -15,9 +15,8 @@ namespace ProjectFilesDAL
     /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
     public DataProjectFiles(ProjectFilesData dataHelper)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, dataHelper);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, dataHelper);
+      NetString.ThrowArgError(message);
 
       DataHelper = dataHelper;
     }
@@ -31,11 +30,9 @@ namespace ProjectFilesDAL
       , string solutionName, string projectName, string projectFilePath
       , string fileName = null)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, solutionName);
-      NetString.AddMissingArgument(message, projectFilePath);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, solutionName
+        , projectFilePath);
+      NetString.ThrowArgError(message);
 
       // Get CodeLine path.
       var retValue = CodeLinePath(codeLineName);
@@ -78,9 +75,9 @@ namespace ProjectFilesDAL
       string message = "";
       if (!HasProjectFileParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projectFiles = ProjectFiles(parentKey);
       if (NetCommon.HasItems(projectFiles))
@@ -112,9 +109,8 @@ namespace ProjectFilesDAL
     public ProjectFile ProjectFileValues(string fileSpec
       , string targetFilePath = null)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, fileSpec);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, fileSpec);
+      NetString.ThrowArgError(message);
 
       var retValue = new ProjectFile();
       retValue.FileName = Path.GetFileName(fileSpec);
@@ -185,9 +181,8 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      NetString.AddMissingArgument(message, projectFile);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, projectFile);
+      NetString.ThrowArgError(message);
 
       if (HasSourceValues(projectFile))
       {
@@ -205,9 +200,8 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      NetString.AddMissingArgument(message, projectFile);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, projectFile);
+      NetString.ThrowArgError(message);
 
       if (HasTargetValues(projectFile))
       {
@@ -253,11 +247,8 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      string message = "";
-      NetString.AddMissingArgument(message, folders);
-      NetString.AddMissingArgument(message, startIndex);
-      NetString.AddMissingArgument(message, stopIndex);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, folders, startIndex, stopIndex);
+      NetString.ThrowArgError(message);
 
       lastFolderName = null;
       for (int pathIndex = startIndex; pathIndex <= stopIndex; pathIndex++)
@@ -368,10 +359,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroup/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroup(string codeLineName, string name)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, name);
+      NetString.ThrowArgError(message);
 
       var codeGroups = DataHelper.CodeGroups;
       var retValue = codeGroups.LJCRetrieve(codeLineName, name);
@@ -382,10 +371,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroupWithPath(string codeLineName, string path)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, path);
+      NetString.ThrowArgError(message);
 
       var codeGroups = DataHelper.CodeGroups;
       var retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
@@ -396,9 +383,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLline/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLine(string name)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
 
       var codeLines = DataHelper.CodeLines;
       var retValue = codeLines.LJCRetrieve(name);
@@ -409,9 +395,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLineWithPath(string path)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, path);
+      NetString.ThrowArgError(message);
 
       var codeLines = DataHelper.CodeLines;
       var retValue = codeLines.LJCRetrieveWithPath(path);
@@ -422,13 +407,12 @@ namespace ProjectFilesDAL
     /// <include path='items/Project/*' file='Doc/DataProjectFiles.xml'/>
     public Project Project(ProjectParentKey parentKey, string name)
     {
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasProjectParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projects = DataHelper.Projects;
       var retValue = projects.LJCRetrieve(parentKey, name);
@@ -439,13 +423,12 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Project ProjectWithPath(ProjectParentKey parentKey, string path)
     {
-      string message = "";
+      var message = NetString.ArgError(null, path);
       if (!HasProjectParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projects = DataHelper.Projects;
       var retValue = projects.LJCRetrieveWithPath(parentKey, path);
@@ -457,13 +440,12 @@ namespace ProjectFilesDAL
     public ProjectFile ProjectFile(ProjectFileParentKey parentKey
       , string name)
     {
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasProjectFileParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projectFiles = DataHelper.ProjectFiles;
       var retValue = projectFiles.LJCRetrieve(parentKey, name);
@@ -477,9 +459,9 @@ namespace ProjectFilesDAL
       string message = "";
       if (!HasProjectFileParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projectFiles = DataHelper.ProjectFiles;
       var retValue = projectFiles.LJCLoad(parentKey);
@@ -490,13 +472,12 @@ namespace ProjectFilesDAL
     /// <include path='items/Solution/*' file='Doc/DataProjectFiles.xml'/>
     public Solution Solution(SolutionParentKey parentKey, string name)
     {
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasSolutionParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var solutions = DataHelper.Solutions;
       var retValue = solutions.LJCRetrieve(parentKey, name);
@@ -507,13 +488,12 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Solution SolutionWithPath(SolutionParentKey parentKey, string path)
     {
-      string message = "";
+      var message = NetString.ArgError(null, path);
       if (!HasSolutionParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var solutions = DataHelper.Solutions;
       var retValue = solutions.LJCRetrieveWithPath(parentKey, path);
@@ -529,10 +509,8 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, name);
+      NetString.ThrowArgError(message);
 
       var codeGroup = CodeGroup(codeLineName, name);
       if (codeGroup != null)
@@ -548,9 +526,8 @@ namespace ProjectFilesDAL
     {
       var retValue = defautName;
 
-      string message = "";
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, path);
+      NetString.ThrowArgError(message);
 
       var codeLine = CodeLineWithPath(path);
       if (codeLine != null)
@@ -566,9 +543,8 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
 
       var codeLine = CodeLine(name);
       if (codeLine != null)
@@ -585,13 +561,12 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasProjectFileParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var projectFile = ProjectFile(parentKey, name);
       if (projectFile != null)
@@ -608,13 +583,12 @@ namespace ProjectFilesDAL
     {
       string retValue = defaultprojectName;
 
-      string message = "";
+      var message = NetString.ArgError(null, path);
       if (!HasProjectParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var project = ProjectWithPath(parentKey, path);
       if (project != null)
@@ -631,13 +605,12 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasProjectParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var project = Project(parentKey, name);
       if (project != null)
@@ -653,13 +626,12 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
+      var message = NetString.ArgError(null, path);
       if (!HasSolutionParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, path);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var solution = SolutionWithPath(parentKey, path);
       if (solution != null)
@@ -676,13 +648,12 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
+      var message = NetString.ArgError(null, name);
       if (!HasSolutionParentValues(parentKey))
       {
-        NetString.AddMissingArgument(message, parentKey, true);
+        message = NetString.ArgError(message, parentKey, true);
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(message);
 
       var solution = Solution(parentKey, name);
       if (solution != null)
@@ -700,11 +671,9 @@ namespace ProjectFilesDAL
     public ProjectParentKey ProjectParentKey(string codeLineName
       , string codeGroupName, string solutionName)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, codeGroupName);
-      NetString.AddMissingArgument(message, solutionName);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, codeGroupName
+        , solutionName);
+      NetString.ThrowArgError(message);
 
       var retValue = new ProjectParentKey()
       {
@@ -720,10 +689,8 @@ namespace ProjectFilesDAL
     public SolutionParentKey SolutionParentKey(string codeLineName
       , string codeGroupName)
     {
-      string message = "";
-      NetString.AddMissingArgument(message, codeLineName);
-      NetString.AddMissingArgument(message, codeGroupName);
-      NetString.ThrowInvalidArgument(message);
+      var message = NetString.ArgError(null, codeLineName, codeGroupName);
+      NetString.ThrowArgError(message);
 
       var retValue = new SolutionParentKey()
       {

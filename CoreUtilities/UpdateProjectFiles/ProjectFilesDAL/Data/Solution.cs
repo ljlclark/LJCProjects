@@ -10,6 +10,72 @@ namespace ProjectFilesDAL
   /// <summary>The Solution Data Object.</summary>
   public class Solution : IComparable<Solution>
   {
+    #region Static Methods
+
+    // Checks for the required item values.
+    /// <summary>
+    /// Checks for the required item values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="solution">The Solution objct.</param>
+    /// <param name="name">The name value.</param>
+    public static void ItemValues(ref string message, Solution solution
+      , string name)
+    {
+      if (solution != null)
+      {
+        ItemParentValues(ref message, solution);
+        if (!NetString.HasValue(name))
+        {
+          message += $"{name}";
+        }
+      }
+    }
+
+    // Checks for the required ParentKey values.
+    /// <summary>
+    /// Checks for the required ParentKey values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="solution">The Solution objct.</param>
+    public static void ItemParentValues(ref string message, Solution solution)
+    {
+      if (solution != null)
+      {
+        if (!NetString.HasValue(solution.CodeLine))
+        {
+          message += $"{solution.CodeLine}";
+        }
+        if (!NetString.HasValue(solution.CodeGroup))
+        {
+          message += $"{solution.CodeGroup}";
+        }
+      }
+    }
+
+    // Checks the ParentKey for values.
+    /// <summary>
+    /// Checks the ParentKey for values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="parentKey">The ParentKey object.</param>
+    public static void ParentKeyValues(ref string message
+      , SolutionParentKey parentKey)
+    {
+      if (parentKey != null)
+      {
+        if (!NetString.HasValue(parentKey.CodeLine))
+        {
+          message += $"{parentKey.CodeLine}";
+        }
+        if (!NetString.HasValue(parentKey.CodeGroup))
+        {
+          message += $"{parentKey.CodeGroup}";
+        }
+      }
+    }
+    #endregion
+
     #region Data Methods
 
     // Creates and returns a clone of this object.
