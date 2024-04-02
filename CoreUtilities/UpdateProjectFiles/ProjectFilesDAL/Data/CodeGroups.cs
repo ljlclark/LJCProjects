@@ -49,14 +49,14 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object with the provided values.
     /// <summary>
-    /// 
+    /// Creates and adds the object with the provided values.
     /// </summary>
-    /// <param name="codeLine"></param>
-    /// <param name="name"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
+    /// <param name="codeLine">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <param name="path">The Path value.</param>
+    /// <returns>A reference to the added item.s</returns>
     public CodeGroup Add(string codeLine, string name, string path = null)
     {
       CodeGroup retValue;
@@ -122,6 +122,9 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
+      var message = NetString.ArgError(null, codeLine, name);
+      NetString.ThrowArgError(message);
+
       LJCSortUnique();
       CodeGroup searchItem = new CodeGroup()
       {
@@ -147,6 +150,9 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
+      var message = NetString.ArgError(null, codeLine, path);
+      NetString.ThrowArgError(message);
+
       var comparer = new CodeGroupPathComparer();
       LJCSortPath(comparer);
       CodeGroup searchItem = new CodeGroup()
@@ -169,6 +175,10 @@ namespace ProjectFilesDAL
     /// <param name="codeGroup">The CodeGroup object.</param>
     public void LJCUpdate(CodeGroup codeGroup)
     {
+      var message = NetString.ArgError(null, codeGroup);
+      CodeGroup.ItemValues(ref message, codeGroup);
+      NetString.ThrowArgError(message);
+
       if (NetCommon.HasItems(this))
       {
         var item = LJCRetrieve(codeGroup.CodeLine, codeGroup.Name);
@@ -185,6 +195,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Parent and Path values.</summary>
     public void LJCSortPath(CodeGroupPathComparer comparer)
     {
+      var message = NetString.ArgError(null, comparer);
+      NetString.ThrowArgError(message);
+
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
       {

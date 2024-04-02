@@ -49,14 +49,14 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object with the provided values.
     /// <summary>
-    /// 
+    /// Creates and adds the object with the provided values.
     /// </summary>
-    /// <param name="parentKey"></param>
-    /// <param name="name"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <param name="path">The Path value.</param>
+    /// <returns>A reference to the added item.s</returns>
     public Project Add(ProjectParentKey parentKey, string name
       , string path = null)
     {
@@ -129,6 +129,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
+      var message = NetString.ArgError(null, parentKey, name);
+      Project.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
       LJCSortUnique();
       Project searchItem = new Project()
       {
@@ -156,6 +160,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
+      var message = NetString.ArgError(null, parentKey, path);
+      Project.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
       var comparer = new ProjectPath();
       LJCSortPath(comparer);
       Project searchItem = new Project()
@@ -182,6 +190,10 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
+        var message = NetString.ArgError(null, project);
+        Project.ItemValues(ref message, project);
+        NetString.ThrowArgError(message);
+
         var parentKey = GetParentKey(project);
         var item = LJCRetrieve(parentKey, project.Name);
         if (item != null)
@@ -200,6 +212,10 @@ namespace ProjectFilesDAL
     /// <returns>The ParentKey object.</returns>
     public ProjectParentKey GetParentKey(Project project)
     {
+      var message = NetString.ArgError(null, project);
+      Project.ItemParentValues(ref message, project);
+      NetString.ThrowArgError(message);
+
       var retValue = new ProjectParentKey()
       {
         CodeLine = project.CodeLine,
@@ -212,6 +228,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path values.</summary>
     public void LJCSortPath(ProjectPath comparer)
     {
+      var message = NetString.ArgError(null, comparer);
+      NetString.ThrowArgError(message);
+
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
       {

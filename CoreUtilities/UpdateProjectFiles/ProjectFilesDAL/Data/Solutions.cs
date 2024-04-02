@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // Solutions.cs
 using LJCNetCommon;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ProjectFilesDAL
@@ -49,15 +50,15 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object with the provided values.
     /// <summary>
-    /// 
+    /// Creates and adds the object with the provided values.
     /// </summary>
-    /// <param name="parentKey"></param>
-    /// <param name="name"></param>
-    /// <param name="sequence"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <param name="sequence">The sequence value.</param>
+    /// <param name="path">The Path value.</param>
+    /// <returns>A reference to the added item.s</returns>
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
@@ -126,6 +127,10 @@ namespace ProjectFilesDAL
     public Solution LJCRetrieve(SolutionParentKey parentKey, string name)
     {
       Solution retValue = null;
+      
+      var message = NetString.ArgError(null, parentKey, name);
+      Solution.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
 
       LJCSortUnique();
       var searchItem = new Solution()
@@ -154,6 +159,10 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
+      var message = NetString.ArgError(null, parentKey, path);
+      Solution.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
       var comparer = new SolutionPath();
       LJCSortPath(comparer);
       var searchItem = new Solution()
@@ -179,6 +188,10 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
+        var message = NetString.ArgError(null, solution);
+        Solution.ItemValues(ref message, solution);
+        NetString.ThrowArgError(message);
+
         var parentKey = LJCGetParentKey(solution);
         var item = LJCRetrieve(parentKey, solution.Name);
         if (item != null)
@@ -197,6 +210,10 @@ namespace ProjectFilesDAL
     /// <returns>The ParentKey object.</returns>
     public SolutionParentKey LJCGetParentKey(Solution solution)
     {
+      var message = NetString.ArgError(null, solution);
+      Solution.ItemParentValues(ref message, solution);
+      NetString.ThrowArgError(message);
+
       var retValue = new SolutionParentKey()
       {
         CodeLine = solution.CodeLine,
@@ -209,6 +226,9 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortPath(SolutionPath comparer)
     {
+      var message = NetString.ArgError(null, comparer);
+      NetString.ThrowArgError(message);
+
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
       {
@@ -222,6 +242,9 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortSequence(SolutionSequence comparer)
     {
+      var message = NetString.ArgError(null, comparer);
+      NetString.ThrowArgError(message);
+
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Sequence) != 0)
       {

@@ -49,13 +49,13 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object with the provided values.
     /// <summary>
-    /// 
+    /// Creates and adds the object with the provided values.
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="path"></param>
-    /// <returns></returns>
+    /// <param name="name">The Name value.</param>
+    /// <param name="path">The Path value.</param>
+    /// <returns>A reference to the added item.s</returns>
     public CodeLine Add(string name, string path = null)
     {
       CodeLine retValue;
@@ -100,6 +100,9 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
+      var message = NetString.ArgError(null, name);
+      NetString.ThrowArgError(message);
+
       LJCSortUnique();
       CodeLine searchItem = new CodeLine()
       {
@@ -122,6 +125,9 @@ namespace ProjectFilesDAL
     public CodeLine LJCRetrieveWithPath(string path)
     {
       CodeLine retValue = null;
+
+      var message = NetString.ArgError(null, path);
+      NetString.ThrowArgError(message);
 
       var comparer = new CodeLinePathComparer();
       LJCSortPath(comparer);
@@ -146,6 +152,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
+        var message = NetString.ArgError(null, codeLine);
+        NetString.ThrowArgError(message);
+
         var item = LJCRetrieve(codeLine.Name);
         if (item != null)
         {
@@ -160,6 +169,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path.</summary>
     public void LJCSortPath(CodeLinePathComparer comparer)
     {
+      var message = NetString.ArgError(null, comparer);
+      NetString.ThrowArgError(message);
+
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
       {

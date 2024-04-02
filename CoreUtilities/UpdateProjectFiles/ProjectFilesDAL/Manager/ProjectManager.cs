@@ -191,7 +191,7 @@ namespace ProjectFilesDAL
     public Project Update(Project project)
     {
       var message = NetString.ArgError(null, project);
-      Project.ItemValues(ref message, project, project.Name);
+      Project.ItemValues(ref message, project);
       NetString.ThrowArgError(message);
 
       var parentKey = CreateParentKey(project);
@@ -258,7 +258,7 @@ namespace ProjectFilesDAL
     public string CreateRecord(Project project)
     {
       var message = NetString.ArgError(null, project);
-      Project.ItemValues(ref message, project, project.Name);
+      Project.ItemValues(ref message, project);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(1024);

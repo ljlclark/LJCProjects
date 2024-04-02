@@ -49,16 +49,16 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object with the provided values.
     /// <summary>
-    /// 
+    /// Creates and adds the object with the provided values.
     /// </summary>
-    /// <param name="parentKey"></param>
-    /// <param name="sourceKey"></param>
-    /// <param name="fileName"></param>
-    /// <param name="targetFilePath"></param>
-    /// <param name="sourceFilePath"></param>
-    /// <returns></returns>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="sourceKey">The source ParentKey value.</param>
+    /// <param name="fileName">The file name.</param>
+    /// <param name="targetFilePath">The target file path.</param>
+    /// <param name="sourceFilePath">The source file path</param>
+    /// <returns>A reference to the added item.s</returns>
     public ProjectFile Add(ProjectFileParentKey parentKey
       , ProjectFileParentKey sourceKey, string fileName
       , string targetFilePath, string sourceFilePath)
@@ -139,6 +139,10 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
+      var message = NetString.ArgError(null, parentKey, fileName);
+      ProjectFile.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
       LJCSortUnique();
       ProjectFile searchItem = new ProjectFile()
       {
@@ -165,6 +169,10 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
+        var message = NetString.ArgError(null, projectFile);
+        ProjectFile.ItemValues(ref message, projectFile);
+        NetString.ThrowArgError(message);
+
         var parentKey = GetParentKey(projectFile);
         var item = LJCRetrieve(parentKey, projectFile.FileName);
         if (item != null)
@@ -191,6 +199,10 @@ namespace ProjectFilesDAL
     /// <returns>The ParentKey object.</returns>
     public ProjectFileParentKey GetParentKey(ProjectFile projectFile)
     {
+      var message = NetString.ArgError(null, projectFile);
+      ProjectFile.ItemParentValues(ref message, projectFile);
+      NetString.ThrowArgError(message);
+
       var retValue = new ProjectFileParentKey()
       {
         CodeLine = projectFile.TargetCodeLine,

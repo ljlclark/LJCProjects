@@ -11,6 +11,52 @@ namespace ProjectFilesDAL
   {
     #region Static Methods
 
+    // Checks for the required item values.
+    /// <summary>
+    /// Checks for the required item values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="projectFile">The Solution objct.</param>
+    public static void ItemValues(ref string message, ProjectFile projectFile)
+    {
+      if (projectFile != null)
+      {
+        ItemParentValues(ref message, projectFile);
+        if (!NetString.HasValue(projectFile.FileName))
+        {
+          message += $"{projectFile.FileName}";
+        }
+      }
+    }
+
+    // Checks for the required ParentKey values.
+    /// <summary>
+    /// Checks for the required ParentKey values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="projectFile">The Solution objct.</param>
+    public static void ItemParentValues(ref string message, ProjectFile projectFile)
+    {
+      if (projectFile != null)
+      {
+        if (!NetString.HasValue(projectFile.TargetCodeLine))
+        {
+          message += $"{projectFile.TargetCodeLine}";
+        }
+        if (!NetString.HasValue(projectFile.TargetCodeGroup))
+        {
+          message += $"{projectFile.TargetCodeGroup}";
+        }
+        if (!NetString.HasValue(projectFile.TargetSolution))
+        {
+          message += $"{projectFile.TargetSolution}";
+        }
+        if (!NetString.HasValue(projectFile.TargetProject))
+        {
+          message += $"{projectFile.TargetProject}";
+        }
+      }
+    }
 
     // Checks the ParentKey for values.
     /// <summary>

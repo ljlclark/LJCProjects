@@ -18,16 +18,14 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="message">The message value.</param>
     /// <param name="solution">The Solution objct.</param>
-    /// <param name="name">The name value.</param>
-    public static void ItemValues(ref string message, Solution solution
-      , string name)
+    public static void ItemValues(ref string message, Solution solution)
     {
       if (solution != null)
       {
         ItemParentValues(ref message, solution);
-        if (!NetString.HasValue(name))
+        if (!NetString.HasValue(solution.Name))
         {
-          message += $"{name}";
+          message += $"{solution.Name}";
         }
       }
     }

@@ -18,16 +18,14 @@ namespace ProjectFilesDAL
     /// </summary>
     /// <param name="message">The message value.</param>
     /// <param name="project">The Project objct.</param>
-    /// <param name="name">The name value.</param>
-    public static void ItemValues(ref string message, Project project
-      , string name)
+    public static void ItemValues(ref string message, Project project)
     {
       if (project != null)
       {
         ItemParentValues(ref message, project);
-        if (!NetString.HasValue(name))
+        if (!NetString.HasValue(project.Name))
         {
-          message += $"{name}";
+          message += $"{project.Name}";
         }
       }
     }
@@ -160,6 +158,8 @@ namespace ProjectFilesDAL
     public string Solution { get; set; }
   }
 
+  #region Comparers
+
   /// <summary>Sort and search on Name value.</summary>
   public class ProjectPath : IComparer<Project>
   {
@@ -194,4 +194,5 @@ namespace ProjectFilesDAL
       return retValue;
     }
   }
+  #endregion
 }

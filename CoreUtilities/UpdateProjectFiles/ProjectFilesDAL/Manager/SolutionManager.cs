@@ -194,7 +194,7 @@ namespace ProjectFilesDAL
     public Solution Update(Solution solution)
     {
       var message = NetString.ArgError(null, solution);
-      Solution.ItemValues(ref message, solution, solution.Name);
+      Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
       var parentKey = CreateParentKey(solution);
@@ -257,7 +257,7 @@ namespace ProjectFilesDAL
     public string CreateRecord(Solution solution)
     {
       var message = NetString.ArgError(null, solution);
-      Solution.ItemValues(ref message, solution, solution.Name);
+      Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(128);
