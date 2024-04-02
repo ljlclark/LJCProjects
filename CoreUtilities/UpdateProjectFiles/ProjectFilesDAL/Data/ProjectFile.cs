@@ -58,6 +58,40 @@ namespace ProjectFilesDAL
       }
     }
 
+    // Checks for the required ParentKey values.
+    /// <summary>
+    /// Checks for the required ParentKey values.
+    /// </summary>
+    /// <param name="message">The message value.</param>
+    /// <param name="projectFile">The Solution objct.</param>
+    public static void ItemSourceValues(ref string message
+      , ProjectFile projectFile)
+    {
+      if (projectFile != null)
+      {
+        if (!NetString.HasValue(projectFile.SourceCodeLine))
+        {
+          message += $"{projectFile.SourceCodeLine}";
+        }
+        if (!NetString.HasValue(projectFile.SourceCodeGroup))
+        {
+          message += $"{projectFile.SourceCodeGroup}";
+        }
+        if (!NetString.HasValue(projectFile.SourceSolution))
+        {
+          message += $"{projectFile.SourceSolution}";
+        }
+        if (!NetString.HasValue(projectFile.SourceFilePath))
+        {
+          message += $"{projectFile.SourceFilePath}";
+        }
+        if (!NetString.HasValue(projectFile.FileName))
+        {
+          message += $"{projectFile.FileName}";
+        }
+      }
+    }
+
     // Checks the ParentKey for values.
     /// <summary>
     /// Checks the ParentKey for values.

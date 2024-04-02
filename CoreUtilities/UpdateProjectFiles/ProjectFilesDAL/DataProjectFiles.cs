@@ -72,11 +72,8 @@ namespace ProjectFilesDAL
     public void ManageDependencies(ProjectFileParentKey parentKey
       , string action = null)
     {
-      string message = "";
-      if (!HasProjectFileParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      var message = NetString.ArgError(null, parentKey);
+      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projectFiles = ProjectFiles(parentKey);
@@ -112,8 +109,10 @@ namespace ProjectFilesDAL
       var message = NetString.ArgError(null, fileSpec);
       NetString.ThrowArgError(message);
 
-      var retValue = new ProjectFile();
-      retValue.FileName = Path.GetFileName(fileSpec);
+      var retValue = new ProjectFile
+      {
+        FileName = Path.GetFileName(fileSpec)
+      };
       if (!NetString.HasValue(targetFilePath))
       {
         retValue.TargetFilePath = "External";
@@ -179,18 +178,14 @@ namespace ProjectFilesDAL
     /// <include path='items/SourceFileSpec/*' file='Doc/DataProjectFiles.xml'/>
     public string SourceFileSpec(ProjectFile projectFile)
     {
-      string retValue = null;
-
       var message = NetString.ArgError(null, projectFile);
+      ProjectFilesDAL.ProjectFile.ItemSourceValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
-      if (HasSourceValues(projectFile))
-      {
-        retValue = GetFileSpec(projectFile.SourceCodeLine
-          , projectFile.SourceCodeGroup, projectFile.SourceSolution
-          , projectFile.SourceProject, projectFile.SourceFilePath
-          , projectFile.FileName);
-      }
+      var retValue = GetFileSpec(projectFile.SourceCodeLine
+        , projectFile.SourceCodeGroup, projectFile.SourceSolution
+        , projectFile.SourceProject, projectFile.SourceFilePath
+        , projectFile.FileName);
       return retValue;
     }
 
@@ -198,46 +193,42 @@ namespace ProjectFilesDAL
     /// <include path='items/TargetFileSpec/*' file='Doc/DataProjectFiles.xml'/>
     public string TargetFileSpec(ProjectFile projectFile)
     {
-      string retValue = null;
-
       var message = NetString.ArgError(null, projectFile);
+      ProjectFilesDAL.ProjectFile.ItemValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
-      if (HasTargetValues(projectFile))
+      var codeLineName = projectFile.TargetCodeLine;
+      var retValue = CodeLinePath(codeLineName);
+
+      // May not have a Target CodeGroup path.
+      CodeGroup codeGroup = null;
+      string codeGroupName = null;
+      var targetPathCodeGroup = projectFile.TargetPathCodeGroup;
+      if (targetPathCodeGroup != null)
       {
-        var codeLineName = projectFile.TargetCodeLine;
-        retValue = CodeLinePath(codeLineName);
-
-        // May not have a Target CodeGroup path.
-        CodeGroup codeGroup = null;
-        string codeGroupName = null;
-        var targetPathCodeGroup = projectFile.TargetPathCodeGroup;
-        if (targetPathCodeGroup != null)
-        {
-          codeGroup = CodeGroup(codeLineName, targetPathCodeGroup);
-          codeGroupName = codeGroup.Name;
-          retValue = Path.Combine(retValue, codeGroup.Path);
-        }
-
-        var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
-        var targetPathSolution = projectFile.TargetPathSolution;
-        var solution = Solution(solutionParentKey, targetPathSolution);
-        retValue = Path.Combine(retValue, solution.Path);
-
-        // May not have a Target Project path.
-        var targetPathProject = projectFile.TargetPathProject;
-        if (NetString.HasValue(targetPathProject))
-        {
-          var projectParentKey = ProjectParentKey(codeLineName, codeGroup.Name
-            , solution.Name);
-          var projectPath = ProjectPath(projectParentKey
-            , targetPathProject);
-          retValue = Path.Combine(retValue, projectPath);
-        }
-
-        retValue = Path.Combine(retValue, projectFile.TargetFilePath);
-        retValue = Path.Combine(retValue, projectFile.FileName);
+        codeGroup = CodeGroup(codeLineName, targetPathCodeGroup);
+        codeGroupName = codeGroup.Name;
+        retValue = Path.Combine(retValue, codeGroup.Path);
       }
+
+      var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
+      var targetPathSolution = projectFile.TargetPathSolution;
+      var solution = Solution(solutionParentKey, targetPathSolution);
+      retValue = Path.Combine(retValue, solution.Path);
+
+      // May not have a Target Project path.
+      var targetPathProject = projectFile.TargetPathProject;
+      if (NetString.HasValue(targetPathProject))
+      {
+        var projectParentKey = ProjectParentKey(codeLineName, codeGroup.Name
+          , solution.Name);
+        var projectPath = ProjectPath(projectParentKey
+          , targetPathProject);
+        retValue = Path.Combine(retValue, projectPath);
+      }
+
+      retValue = Path.Combine(retValue, projectFile.TargetFilePath);
+      retValue = Path.Combine(retValue, projectFile.FileName);
       return retValue;
     }
 
@@ -262,92 +253,6 @@ namespace ProjectFilesDAL
         {
           lastFolderName = folders[pathIndex];
         }
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Check Object Required Properties
-
-    // Checks the ProjectFile ParentKey for required poperties.
-    /// <include path='items/HasProjectFileParentValues/*' file='Doc/DataProjectFiles.xml'/>
-    public bool HasProjectFileParentValues(ProjectFileParentKey parentKey)
-    {
-      bool retValue = true;
-
-      if (parentKey != null
-        && NetString.HasValue(parentKey.CodeLine)
-        && NetString.HasValue(parentKey.CodeGroup)
-        && NetString.HasValue(parentKey.Solution)
-        && NetString.HasValue(parentKey.Project))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks the Project ParentKey for required poperties.
-    /// <include path='items/HasProjectParentValues/*' file='Doc/DataProjectFiles.xml'/>
-    public bool HasProjectParentValues(ProjectParentKey parentKey)
-    {
-      bool retValue = true;
-
-      if (parentKey != null
-        && NetString.HasValue(parentKey.CodeLine)
-        && NetString.HasValue(parentKey.CodeGroup)
-        && NetString.HasValue(parentKey.Solution))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks the Solution ParentKey for required poperties.
-    /// <include path='items/HasSolutionParentValues/*' file='Doc/DataProjectFiles.xml'/>
-    public bool HasSolutionParentValues(SolutionParentKey parentKey)
-    {
-      bool retValue = true;
-
-      if (parentKey != null
-        && NetString.HasValue(parentKey.CodeLine)
-        && NetString.HasValue(parentKey.CodeGroup))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks the ProjectFile object for required Source properties.
-    /// <include path='items/HasSourceValues/*' file='Doc/DataProjectFiles.xml'/>
-    public bool HasSourceValues(ProjectFile projectFile)
-    {
-      bool retValue = true;
-
-      if (projectFile != null
-        && NetString.HasValue(projectFile.SourceCodeLine)
-        && NetString.HasValue(projectFile.SourceCodeGroup)
-        && NetString.HasValue(projectFile.SourceSolution)
-        && NetString.HasValue(projectFile.SourceProject)
-        && NetString.HasValue(projectFile.SourceFilePath)
-        && NetString.HasValue(projectFile.FileName))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks the ProjectFile object for required Target path properties.
-    /// <include path='items/HasTargetValues/*' file='Doc/DataProjectFiles.xml'/>
-    public bool HasTargetValues(ProjectFile projectFile)
-    {
-      bool retValue = true;
-
-      if (projectFile != null
-        && NetString.HasValue(projectFile.TargetPathSolution)
-        && NetString.HasValue(projectFile.TargetFilePath)
-        && NetString.HasValue(projectFile.FileName))
-      {
-        retValue = true;
       }
       return retValue;
     }
@@ -408,10 +313,7 @@ namespace ProjectFilesDAL
     public Project Project(ProjectParentKey parentKey, string name)
     {
       var message = NetString.ArgError(null, name);
-      if (!HasProjectParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projects = DataHelper.Projects;
@@ -424,10 +326,7 @@ namespace ProjectFilesDAL
     public Project ProjectWithPath(ProjectParentKey parentKey, string path)
     {
       var message = NetString.ArgError(null, path);
-      if (!HasProjectParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projects = DataHelper.Projects;
@@ -441,10 +340,7 @@ namespace ProjectFilesDAL
       , string name)
     {
       var message = NetString.ArgError(null, name);
-      if (!HasProjectFileParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projectFiles = DataHelper.ProjectFiles;
@@ -456,11 +352,8 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectFiles/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectFiles ProjectFiles(ProjectFileParentKey parentKey)
     {
-      string message = "";
-      if (!HasProjectFileParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      var message = NetString.ArgError(null, parentKey); ;
+      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projectFiles = DataHelper.ProjectFiles;
@@ -473,10 +366,7 @@ namespace ProjectFilesDAL
     public Solution Solution(SolutionParentKey parentKey, string name)
     {
       var message = NetString.ArgError(null, name);
-      if (!HasSolutionParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var solutions = DataHelper.Solutions;
@@ -489,10 +379,7 @@ namespace ProjectFilesDAL
     public Solution SolutionWithPath(SolutionParentKey parentKey, string path)
     {
       var message = NetString.ArgError(null, path);
-      if (!HasSolutionParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var solutions = DataHelper.Solutions;
@@ -562,10 +449,7 @@ namespace ProjectFilesDAL
       string retValue = null;
 
       var message = NetString.ArgError(null, name);
-      if (!HasProjectFileParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var projectFile = ProjectFile(parentKey, name);
@@ -584,10 +468,7 @@ namespace ProjectFilesDAL
       string retValue = defaultprojectName;
 
       var message = NetString.ArgError(null, path);
-      if (!HasProjectParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var project = ProjectWithPath(parentKey, path);
@@ -606,10 +487,7 @@ namespace ProjectFilesDAL
       string retValue = null;
 
       var message = NetString.ArgError(null, name);
-      if (!HasProjectParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var project = Project(parentKey, name);
@@ -627,10 +505,7 @@ namespace ProjectFilesDAL
       string retValue = null;
 
       var message = NetString.ArgError(null, path);
-      if (!HasSolutionParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var solution = SolutionWithPath(parentKey, path);
@@ -649,10 +524,7 @@ namespace ProjectFilesDAL
       string retValue = null;
 
       var message = NetString.ArgError(null, name);
-      if (!HasSolutionParentValues(parentKey))
-      {
-        message = NetString.ArgError(message, parentKey, true);
-      }
+      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
       var solution = Solution(parentKey, name);
