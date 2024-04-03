@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- SolutionManager.xml -->
+<items>
+  <!-- Constructors -->
+  <SolutionManagerC>
+    /// <summary>
+      /// Initializes an object instance.
+      ///
+    </summary>
+    /// <param name="fileName">The data file name.</param>
+  </SolutionManagerC>
+  <!-- Data Methods -->
+  <Add>
+    /// <summary>
+      /// Adds a Solution file record
+      ///
+    </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <param name="sequence">The Sequence value.</param>
+    /// <param name="path">The Path value.</param>
+    /// <returns>The added Solution data object.</returns>
+  </Add>
+  <Delete>
+    /// <summary>
+      /// Deletes a Solution record.
+      ///
+    </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+  </Delete>
+  <Load>
+    /// <summary>
+      /// Loads a collection of Solution records.
+      ///
+    </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <returns>The Solutions collection if available; otherwise null.</returns>
+  </Load>
+  <LoadAllExcept>
+    /// <summary>
+      /// Loads a collection of records that do NOT match the supplied Name
+      /// value.
+      ///
+    </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <returns>The Solutions collection if available; otherwise null.</returns>
+  </LoadAllExcept>
+  <Retrieve>
+    /// <summary>
+      /// Retrieves a Solution record.
+      ///
+    </summary>
+    /// <param name="parentKey">The ParentKey value.</param>
+    /// <param name="name">The Name value.</param>
+    /// <returns>The Solution Data Object if found; otherwise null.</returns>
+  </Retrieve>
+  <Update>
+    /// <summary>
+      /// Updates a record from the DataObject.
+      ///
+    </summary>
+    /// <param name="solution">The DataObject value.</param>
+  </Update>
+  <!-- Public Methods -->
+  <CreateFile>
+    /// <summary>
+      /// Write the text file from a Solutions collection.
+      ///
+    </summary>
+    /// <param name="fileName">The File name.</param>
+    /// <param name="solutions">The Solutions collection</param>
+  </CreateFile>
+  <CrreateParentKey>
+    /// <summary>
+      /// Creates a ParentKey from the supplied DataObject.
+      ///
+    </summary>
+    /// <param name="solution">The Solution object.</param>
+    /// <returns>The ParentKey value.</returns>
+  </CrreateParentKey>
+  <CreateRecord>
+    /// <summary>
+      /// Creates a record string.
+      ///
+    </summary>
+    /// <param name="solution">The Solution Data Object.</param>
+    /// <returns>The record string.</returns>
+  </CreateRecord>
+  <GetColumns>
+    /// <summary>
+      /// Creates a DbColumns object from propertyNames.
+      ///
+    </summary>
+    /// <param name="propertyNames">The list of property names.</param>
+    /// <returns>A DbColumns collection.</returns>
+  </GetColumns>
+  <RecreateFile>
+    /// <summary>
+      /// Recreates a file.
+      ///
+    </summary>
+    /// <param name="solutions">The Solutions collection</param>
+  </RecreateFile>
+</items>

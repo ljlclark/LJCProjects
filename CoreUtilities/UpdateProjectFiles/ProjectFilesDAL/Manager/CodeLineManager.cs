@@ -13,14 +13,12 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="fileName">The data file name.</param>
+    // Initializes an object instance.
+    /// <include path='items/CodeLineManagerC/*' file='Doc/CodeLineManager.xml'/>
     public CodeLineManager(string fileName = @"DataFiles\CodeLine.txt")
     {
-      CreateBaseColumns();
       FileName = fileName;
+      CreateBaseColumns();
       Reader = new TextDataReader();
       Reader.LJCSetFile(FileName);
     }
@@ -28,12 +26,8 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    /// <summary>
-    /// Adds a CodeLine file record
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>The added CodeLine data object.</returns>
+    // Adds a CodeLine file record
+    /// <include path='items/Add/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Add(string name, string path)
     {
       var message = NetString.ArgError(null, name);
@@ -48,10 +42,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Deletes a CodeLine record.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
+    // Deletes a CodeLine record.
+    /// <include path='items/Delete/*' file='Doc/CodeLineManager.xml'/>
     public void Delete(string name)
     {
       var message = NetString.ArgError(null, name);
@@ -70,11 +62,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Retrieves a collection of CodeLine records.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLines collection if available; otherwise null.</returns>
+    // Loads a collection of CodeLine records.
+    /// <include path='items/Load/*' file='Doc/CodeLineManager.xml'/>
     public CodeLines Load(string name = null)
     {
       CodeLines retValue = null;
@@ -98,12 +87,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a collection of records that do NOT match the supplied Name
-    /// value.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLines collection if available; otherwise null.</returns>
+    // Loads a collection of records that do NOT match the supplied Name
+    /// <include path='items/LoadAllExcept/*' file='Doc/CodeLineManager.xml'/>
     public CodeLines LoadAllExcept(string name)
     {
       CodeLines retValue = null;
@@ -125,11 +110,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a CodeLine record.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLine Data Object if found; otherwise null.</returns>
+    // Retrieves a CodeLine record.
+    /// <include path='items/Retrieve/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Retrieve(string name = null)
     {
       CodeLine retValue = null;
@@ -164,10 +146,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Updates a record from the DataObject.
-    /// </summary>
-    /// <param name="codeLine">The DataObject value.</param>
+    // Updates a record from the DataObject.
+    /// <include path='items/Update/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Update(CodeLine codeLine)
     {
       var message = NetString.ArgError(null, codeLine);
@@ -192,13 +172,13 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// Write the text file from a CodeLines collection.
-    /// </summary>
-    /// <param name="fileName">The File name.</param>
-    /// <param name="codeLines">The CodeLines collection</param>
+    // Write the text file from a CodeLines collection.
+    /// <include path='items/CreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void CreateFile(string fileName, CodeLines codeLines)
     {
+      var message = NetString.ArgError(null, fileName);
+      NetString.ThrowArgError(message);
+
       File.WriteAllText(fileName, "Name, Path\r\n");
       foreach (CodeLine codeLine in codeLines)
       {
@@ -207,11 +187,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Creates a record string.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine Data Object.</param>
-    /// <returns>The record string.</returns>
+    // Creates a record string.
+    /// <include path='items/CreateRecord/*' file='Doc/CodeLineManager.xml'/>
     public string CreateRecord(CodeLine codeLine)
     {
       var message = NetString.ArgError(null, codeLine);
@@ -238,9 +215,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Creates a DbColumns object from propertyNames.</summary>
-    /// <param name="propertyNames">The list of property names.</param>
-    /// <returns>A DbColumns collection.</returns>
+    // Creates a DbColumns object 
+    /// <include path='items/GetColumns/*' file='Doc/CodeLineManager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames = null)
     {
       DbColumns retValue = BaseColumns;
@@ -260,12 +236,12 @@ namespace ProjectFilesDAL
     }
 
     // Recreates a file.
-    /// <summary>
-    /// Recreates a file.
-    /// </summary>
-    /// <param name="codeLines">The CodeLines collection</param>
+    /// <include path='items/RecreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void RecreateFile(CodeLines codeLines)
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -287,6 +263,9 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());

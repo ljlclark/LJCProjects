@@ -18,8 +18,8 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectFileManagerC/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFileManager(string fileName = @"DataFiles\ProjectFile.txt")
     {
-      CreateBaseColumns();
       FileName = fileName;
+      CreateBaseColumns();
       Reader = new TextDataReader();
       Reader.LJCSetFile(FileName);
     }
@@ -32,22 +32,19 @@ namespace ProjectFilesDAL
     public ProjectFile Add(ProjectFileParentKey parentKey, ProjectFileParentKey sourceKey
       , string fileName, string sourceFilePath, string targetFilePath)
     {
-      ProjectFile retValue = null;
+      var message = NetString.ArgError(null, parentKey, sourceKey, fileName
+        , sourceFilePath, targetFilePath);
+      ProjectFile.ParentKeyValues(ref message, parentKey);
+      ProjectFile.ParentKeyValues(ref message, sourceKey);
+      NetString.ThrowArgError(message);
 
-      if (HasParentKey(parentKey)
-        && HasParentKey(sourceKey)
-        && NetString.HasValue(fileName)
-        && NetString.HasValue(sourceFilePath)
-        && NetString.HasValue(targetFilePath))
-      {
-        var projectFile = CreateDataObject(parentKey, sourceKey
-          , sourceFilePath, targetFilePath);
-        var newRecord = CreateRecord(projectFile);
-        Reader.Close();
-        File.AppendAllText(FileName, newRecord);
-        Reader.LJCOpen();
-        retValue = Retrieve(parentKey, fileName);
-      }
+      var projectFile = CreateDataObject(parentKey, sourceKey
+        , sourceFilePath, targetFilePath);
+      var newRecord = CreateRecord(projectFile);
+      Reader.Close();
+      File.AppendAllText(FileName, newRecord);
+      Reader.LJCOpen();
+      var retValue = Retrieve(parentKey, fileName);
       return retValue;
     }
 
@@ -55,24 +52,24 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/ProjectFileManager.xml'/>
     public void Delete(ProjectFileParentKey parentKey, string fileName)
     {
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(fileName))
+      var message = NetString.ArgError(null, parentKey, fileName);
+      ProjectFile.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
+      var current = CurrentDataObject();
+      var projectFiles = LoadAllExcept(parentKey, fileName);
+      if (projectFiles != null)
       {
-        var current = CurrentDataObject();
-        var projectFiles = LoadAllExcept(parentKey, fileName);
-        if (projectFiles != null)
-        {
-          WriteBackup();
-          RecreateFile(projectFiles);
-        }
-        if (current != null)
-        {
-          Retrieve(parentKey, current.FileName);
-        }
+        WriteBackup();
+        RecreateFile(projectFiles);
+      }
+      if (current != null)
+      {
+        Retrieve(parentKey, current.FileName);
       }
     }
 
-    // Retrieves a collection of ProjectFile records.
+    // Loads a collection of ProjectFile records.
     /// <include path='items/Load/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles Load(ProjectFileParentKey parentKey = null
       , string fileName = null)
@@ -98,7 +95,7 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    // Retrieves a collection of records that do NOT match the supplied Name
+    // Loads a collection of records that do NOT match the supplied Name
     /// <include path='items/LoadAllExcept/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFiles LoadAllExcept(ProjectFileParentKey parentKey
       , string fileName)
@@ -132,72 +129,71 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      if (HasParentKey(parentKey))
+      var message = NetString.ArgError(null, parentKey);
+      ProjectFile.ParentKeyValues(ref message, parentKey);
+      NetString.ThrowArgError(message);
+
+      if (NetString.HasValue(fileName))
       {
-        if (NetString.HasValue(fileName))
+        Reader.LJCOpen();
+      }
+      bool success;
+      while (success = Reader.Read())
+      {
+        var projectFile = CurrentDataObject();
+        if (projectFile.TargetCodeLine == parentKey.CodeLine
+          && projectFile.TargetCodeGroup == parentKey.CodeGroup
+          && projectFile.TargetSolution == parentKey.Solution)
         {
-          Reader.LJCOpen();
-        }
-        bool success;
-        while (success = Reader.Read())
-        {
-          var projectFile = CurrentDataObject();
-          if (projectFile.TargetCodeLine == parentKey.CodeLine
-            && projectFile.TargetCodeGroup == parentKey.CodeGroup
-            && projectFile.TargetSolution == parentKey.Solution)
+          if (NetString.HasValue(fileName))
           {
-            if (NetString.HasValue(fileName))
+            if (projectFile.FileName == fileName)
             {
-              if (projectFile.FileName == fileName)
-              {
-                retValue = projectFile;
-                break;
-              }
-            }
-            else
-            {
-              // Get next item in Parent key.
               retValue = projectFile;
               break;
             }
           }
           else
           {
-            success = false;
+            // Get next item in Parent key.
+            retValue = projectFile;
             break;
           }
         }
-        if (!success)
+        else
         {
-          Reader.LJCOpen();
+          success = false;
+          break;
         }
+      }
+      if (!success)
+      {
+        Reader.LJCOpen();
       }
       return retValue;
     }
 
     // Updates a record from the DataObject.
     /// <include path='items/Update/*' file='Doc/ProjectFileManager.xml'/>
-    public Project Update(ProjectFile projectFile)
+    public ProjectFile Update(ProjectFile projectFile)
     {
-      Project retValue = null;
+      var message = NetString.ArgError(null, projectFile);
+      ProjectFile.ItemValues(ref message, projectFile);
+      NetString.ThrowArgError(message);
 
       var parentKey = CreateParentKey(projectFile);
-      if (HasParentKey(parentKey)
-        && NetString.HasValue(projectFile.FileName))
+      var current = CurrentDataObject();
+      var projectFiles = LoadAllExcept(parentKey, projectFile.FileName);
+      if (projectFiles != null)
       {
-        var current = CurrentDataObject();
-        var projectFiles = LoadAllExcept(parentKey, projectFile.FileName);
-        if (projectFiles != null)
-        {
-          WriteBackup();
-          RecreateFile(projectFiles);
-        }
-        Reader.Close();
-        var text = CreateRecord(projectFile);
-        File.AppendAllText(FileName, text);
-        Reader.LJCOpen();
-        Retrieve(parentKey, current.FileName);
+        WriteBackup();
+        RecreateFile(projectFiles);
       }
+      Reader.Close();
+      var text = CreateRecord(projectFile);
+      File.AppendAllText(FileName, text);
+      Reader.LJCOpen();
+      var retValue = Retrieve(parentKey, current.FileName);
       return retValue;
     }
     #endregion
@@ -208,6 +204,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void CreateFile(string fileName, ProjectFiles projectFiles)
     {
+      var message = NetString.ArgError(null, fileName);
+      NetString.ThrowArgError(message);
+
       var builder = new StringBuilder(256);
       builder.Append("TargetCodeLine");
       builder.Append(", TargetCodeGroup");
@@ -236,6 +235,10 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
+      var message = NetString.ArgError(null, projectFile);
+      ProjectFile.ItemParentValues(ref message, projectFile);
+      NetString.ThrowArgError(message);
+
       var retValue = new ProjectFileParentKey()
       {
         CodeLine = projectFile.TargetCodeLine,
@@ -250,32 +253,30 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/ProjectFileManager.xml'/>
     public string CreateRecord(ProjectFile projectFile)
     {
-      string retValue = null;
+      var message = NetString.ArgError(null, projectFile);
+      ProjectFile.ItemValues(ref message, projectFile);
+      NetString.ThrowArgError(message);
 
-      if (projectFile != null
-        && NetString.HasValue(projectFile.FileName))
+      var builder = new StringBuilder(256);
+      if (!Reader.LJCEndsWithNewLine())
       {
-        var builder = new StringBuilder(256);
-        if (!Reader.LJCEndsWithNewLine())
-        {
-          builder.AppendLine();
-        }
-        builder.Append($"{projectFile.TargetCodeLine}");
-        builder.Append($", {projectFile.TargetCodeGroup}");
-        builder.Append($", {projectFile.TargetSolution}");
-        builder.Append($", {projectFile.TargetProject}");
-        builder.Append($", {projectFile.TargetPathCodeGroup}");
-        builder.Append($", {projectFile.TargetPathSolution}");
-        builder.Append($", {projectFile.TargetPathProject}");
-        builder.Append($", {projectFile.FileName}");
-        builder.Append($", {projectFile.SourceCodeLine}");
-        builder.Append($", {projectFile.SourceCodeGroup}");
-        builder.Append($", {projectFile.SourceSolution}");
-        builder.Append($", {projectFile.SourceProject}");
-        builder.Append($", {projectFile.SourceFilePath}");
-        builder.AppendLine($", {projectFile.TargetFilePath}");
-        retValue = builder.ToString();
+        builder.AppendLine();
       }
+      builder.Append($"{projectFile.TargetCodeLine}");
+      builder.Append($", {projectFile.TargetCodeGroup}");
+      builder.Append($", {projectFile.TargetSolution}");
+      builder.Append($", {projectFile.TargetProject}");
+      builder.Append($", {projectFile.TargetPathCodeGroup}");
+      builder.Append($", {projectFile.TargetPathSolution}");
+      builder.Append($", {projectFile.TargetPathProject}");
+      builder.Append($", {projectFile.FileName}");
+      builder.Append($", {projectFile.SourceCodeLine}");
+      builder.Append($", {projectFile.SourceCodeGroup}");
+      builder.Append($", {projectFile.SourceSolution}");
+      builder.Append($", {projectFile.SourceProject}");
+      builder.Append($", {projectFile.SourceFilePath}");
+      builder.AppendLine($", {projectFile.TargetFilePath}");
+      var retValue = builder.ToString();
       return retValue;
     }
 
@@ -352,6 +353,9 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void RecreateFile(ProjectFiles projectFiles)
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -373,6 +377,9 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
@@ -409,8 +416,9 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      if (HasParentKey(targetKey)
-        && HasParentKey(sourceKey))
+      // A null return value is allowed.
+      if (targetKey != null
+        && sourceKey != null)
       {
         retValue = new ProjectFile()
         {
@@ -430,26 +438,14 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    // Checks for the existance of the ParentKey values.
-    private bool HasParentKey(ProjectFileParentKey parentKey)
-    {
-      var retValue = false;
-
-      if (parentKey != null
-        && NetString.HasValue(parentKey.CodeLine)
-        && NetString.HasValue(parentKey.CodeGroup)
-        && NetString.HasValue(parentKey.Solution)
-        && NetString.HasValue(parentKey.Project))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Checks if the DataObject keys match the current values.
     private bool IsMatch(ProjectFile projectFile)
     {
       var retValue = false;
+
+      var message = NetString.ArgError(null, projectFile);
+      ProjectFile.ItemParentValues(ref message, projectFile);
+      NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
       if (current.TargetCodeLine == projectFile.TargetCodeLine

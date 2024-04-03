@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeGroupManager.xml -->
+<items>
+  <!-- Constructors -->
+  <CodeGroupManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="fileName">The data file name.</param>
+  </CodeGroupManagerC>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Adds a CodeLine file record
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
+    <returns>The added CodeLine data object.</returns>
+  </Add>
+  <Delete>
+    <summary>
+      Deletes a CodeLine record.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The Name value.</param>
+  </Delete>
+  <Load>
+    <summary>
+      Loads a collection of CodeLine records.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The Name value.</param>
+    <returns>The CodeGroups collection if available; otherwise null.</returns>
+  </Load>
+  <LoadAllExcept>
+    <summary>
+      Loads a collection of records that do NOT match the supplied Name
+      value.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The Name value.</param>
+    <returns>The CodeLines collection if available; otherwise null.</returns>
+  </LoadAllExcept>
+  <Retrieve>
+    <summary>
+      Retrieves a CodeLine record.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="name">The Name value.</param>
+    <returns>The CodeLine Data Object if found; otherwise null.</returns>
+  </Retrieve>
+  <Update>
+    <summary>
+      Updates a record from the DataObject.
+    </summary>
+    <param name="codeGroup">The DataObject value.</param>
+  </Update>
+  <!-- Public Methods -->
+  <CreateFile>
+    <summary>
+      Write the text file from a CodeGroups collection.
+    </summary>
+    <param name="fileName">The File name.</param>
+    <param name="codeGroups">The CodeGroups collection</param>
+  </CreateFile>
+  <CreateRecord>
+    <summary>
+      Creates a record string.
+    </summary>
+    <param name="codeGroup">The CodeLine Data Object.</param>
+    <returns>The record string.</returns>
+  </CreateRecord>
+  <GetColumns>
+    <summary>
+      Creates a DbColumns object from propertyNames.
+    </summary>
+    <param name="propertyNames">The list of property names.</param>
+    <returns>A DbColumns collection.</returns>
+  </GetColumns>
+  <RecreateFile>
+    <summary>
+      Recreates a file.
+    </summary>
+    <param name="codeGroups">The CodeGroups collection</param>
+  </RecreateFile>
+</items>

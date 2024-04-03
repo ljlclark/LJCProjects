@@ -72,8 +72,12 @@
     <Compile Include="ValuesProjectFiles.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Doc\CodeGroupManager.xml" />
+    <Content Include="Doc\CodeLineManager.xml" />
     <Content Include="Doc\DataProjectFiles.xml" />
+    <Content Include="Doc\ProjectManager.xml" />
     <Content Include="Doc\ProjectFileManager.xml" />
+    <Content Include="Doc\SolutionManager.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

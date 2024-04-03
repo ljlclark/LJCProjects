@@ -14,10 +14,8 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="fileName">The data file name.</param>
+    // Initializes an object instance.
+    /// <include path='items/CodeGroupManagerC/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroupManager(string fileName = @"DataFiles\CodeGroup.txt")
     {
       FileName = fileName;
@@ -29,13 +27,8 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    /// <summary>
-    /// Adds a CodeLine file record
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>The added CodeLine data object.</returns>
+    // Adds a CodeLine file record
+    /// <include path='items/Add/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Add(string codeLineName, string name, string path)
     {
       var message = NetString.ArgError(null, codeLineName, name);
@@ -50,11 +43,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Deletes a CodeLine record.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The Name value.</param>
+    // Deletes a CodeLine record.
+    /// <include path='items/Delete/*' file='Doc/CodeGroupManager.xml'/>
     public void Delete(string codeLineName, string name)
     {
       var message = NetString.ArgError(null, codeLineName, name);
@@ -73,12 +63,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Retrieves a collection of CodeLine records.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeGroups collection if available; otherwise null.</returns>
+    // Loads a collection of CodeLine records.
+    /// <include path='items/Load/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroups Load(string codeLineName = null, string name = null)
     {
       CodeGroups retValue = null;
@@ -102,13 +88,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a collection of records that do NOT match the supplied Name
-    /// value.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLines collection if available; otherwise null.</returns>
+    // Loads a collection of records that do NOT match the supplied Name
+    /// <include path='items/LoadAllExcept/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroups LoadAllExcept(string codeLineName, string name)
     {
       CodeGroups retValue = null;
@@ -131,12 +112,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a CodeLine record.
-    /// </summary>
-    /// <param name="codeLineName">The CodeLine name.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The CodeLine Data Object if found; otherwise null.</returns>
+    // Retrieves a CodeLine record.
+    /// <include path='items/LoadAllExcept/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Retrieve(string codeLineName, string name = null)
     {
       CodeGroup retValue = null;
@@ -182,10 +159,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Updates a record from the DataObject.
-    /// </summary>
-    /// <param name="codeGroup">The DataObject value.</param>
+    // Updates a record from the DataObject.
+    /// <include path='items/Update/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Update(CodeGroup codeGroup)
     {
       var message = NetString.ArgError(null, codeGroup);
@@ -210,13 +185,13 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// Write the text file from a CodeGroups collection.
-    /// </summary>
-    /// <param name="fileName">The File name.</param>
-    /// <param name="codeGroups">The CodeGroups collection</param>
+    // Write the text file from a CodeGroups collection.
+    /// <include path='items/CreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
+      var message = NetString.ArgError(null, fileName);
+      NetString.ThrowArgError(message);
+
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, Name");
       builder.AppendLine(", Path");
@@ -229,11 +204,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Creates a record string.
-    /// </summary>
-    /// <param name="codeGroup">The CodeLine Data Object.</param>
-    /// <returns>The record string.</returns>
+    // Creates a record string.
+    /// <include path='items/CreateRecord/*' file='Doc/CodeGroupManager.xml'/>
     public string CreateRecord(CodeGroup codeGroup)
     {
       var message = NetString.ArgError(null, codeGroup);
@@ -264,9 +236,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Creates a DbColumns object from propertyNames.</summary>
-    /// <param name="propertyNames">The list of property names.</param>
-    /// <returns>A DbColumns collection.</returns>
+    // Creates a DbColumns object from propertyNames.
+    /// <include path='items/GetColumns/*' file='Doc/CodeGroupManager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames = null)
     {
       DbColumns retValue = BaseColumns;
@@ -286,12 +257,12 @@ namespace ProjectFilesDAL
     }
 
     // Recreates a file.
-    /// <summary>
-    /// Recreates a file.
-    /// </summary>
-    /// <param name="codeGroups">The CodeGroups collection</param>
+    /// <include path='items/RecreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void RecreateFile(CodeGroups codeGroups)
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -313,6 +284,9 @@ namespace ProjectFilesDAL
     /// <summary>Write a backup file.</summary>
     public void WriteBackup()
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
@@ -338,7 +312,8 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      if (NetString.HasValue(codeLineName))
+      // A null return value is allowed.
+      if (codeLineName != null)
       {
         retValue = new CodeGroup()
         {

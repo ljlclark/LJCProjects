@@ -1,40 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- ProjectFileManager.xml -->
+<!-- CodeGroupManager.xml -->
 <items>
   <!-- Constructors -->
-  <ProjectFileManagerC>
-    <summary>
-      Initializes an object instance.
+  <ProjectManagerC>
+     <summary>
+       Initializes an object instance.
     </summary>
     <param name="fileName">The data file name.</param>
-  </ProjectFileManagerC>
-  <!-- DataMethods -->
+  </ProjectManagerC>
+  <!-- Data Methods -->
   <Add>
     <summary>
-      Adds a ProjectFile record
+      Adds a Project file record
     </summary>
-    <param name="parentKey">The Target Key values.</param>
-    <param name="sourceKey">The Source Key values.</param>
-    <param name="fileName">The File name.</param>
-    <param name="sourceFilePath">The Source FileSpec.</param>
-    <param name="targetFilePath">The Target FileSpec.</param>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
     <returns>The added Project data object.</returns>
   </Add>
   <Delete>
     <summary>
-      Deletes a ProjectFile record.
+      Deletes a Project record.
     </summary>
-    <param name="parentKey">The Target Key values.</param>
-    <param name="fileName">The File name.</param>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="name">The Name value.</param>
   </Delete>
   <Load>
     <summary>
-      Loads a collection of ProjectFile records.
+      Loads a collection of Project records.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="fileName">The File name.</param>
+    <param name="name">The Name value.</param>
     <returns>The Solutions collection if available; otherwise null.</returns>
   </Load>
   <LoadAllExcept>
@@ -43,43 +41,43 @@
       value.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="fileName">The File name.</param>
-    <returns>The ProjectFiles collection if available; otherwise null.</returns>
+    <param name="name">The Name value.</param>
+    <returns>The Projects collection if available; otherwise null.</returns>
   </LoadAllExcept>
   <Retrieve>
     <summary>
-      Retrieves a ProjectFile record.
+      Retrieves a Project record.
     </summary>
     <param name="parentKey">The ParentKey value.</param>
-    <param name="fileName">The File name.</param>
-    <returns>The Solution Data Object if found; otherwise null.</returns>
+    <param name="name">The Name value.</param>
+    <returns>The Project Data Object if found; otherwise null.</returns>
   </Retrieve>
   <Update>
     <summary>
       Updates a record from the DataObject.
     </summary>
-    <param name="projectFile">The DataObject value.</param>
+    <param name="project">The DataObject value.</param>
   </Update>
   <!-- Public Methods -->
   <CreateFile>
     <summary>
-      Write the text file from a Solutions collection.
+      Write the text file from a Projects collection.
     </summary>
     <param name="fileName">The File name.</param>
-    <param name="projectFiles">The ProjectFiles collection</param>
+    <param name="projects">The Projects collection</param>
   </CreateFile>
   <CreateParentKey>
     <summary>
       Creates a ParentKey from the supplied DataObject.
     </summary>
-    <param name="projectFile"></param>
-    <returns></returns>
+    <param name="project">The Project object.</param>
+    <returns>The ParentKey value.</returns>
   </CreateParentKey>
   <CreateRecord>
     <summary>
       Creates a record string.
     </summary>
-    <param name="projectFile">The ProjectFile Data Object.</param>
+    <param name="project">The Project Data Object.</param>
     <returns>The record string.</returns>
   </CreateRecord>
   <GetColumns>
@@ -93,6 +91,6 @@
     <summary>
       Recreates a file.
     </summary>
-    <param name="projectFiles">The ProjectFiles collection</param>
+    <param name="projects">The Projects collection</param>
   </RecreateFile>
 </items>

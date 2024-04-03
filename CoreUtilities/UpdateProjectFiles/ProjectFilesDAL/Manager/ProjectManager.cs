@@ -14,14 +14,12 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="fileName">The data file name.</param>
+    // Initializes an object instance.
+    /// <include path='items/ProjectManagerC/*' file='Doc/ProjectManager.xml'/>
     public ProjectManager(string fileName = @"DataFiles\Project.txt")
     {
-      CreateBaseColumns();
       FileName = fileName;
+      CreateBaseColumns();
       Reader = new TextDataReader();
       Reader.LJCSetFile(FileName);
     }
@@ -29,13 +27,8 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    /// <summary>
-    /// Adds a Project file record
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>The added Project data object.</returns>
+    // Adds a Project file record
+    /// <include path='items/Add/*' file='Doc/ProjectManager.xml'/>
     public Project Add(ProjectParentKey parentKey, string name, string path)
     {
       var message = NetString.ArgError(null, parentKey, name);
@@ -51,11 +44,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Deletes a Project record.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
+    // Deletes a Project record.
+    /// <include path='items/Delete/*' file='Doc/ProjectManager.xml'/>
     public void Delete(ProjectParentKey parentKey, string name)
     {
       var message = NetString.ArgError(null, parentKey, name);
@@ -75,12 +65,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Retrieves a collection of Project records.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Solutions collection if available; otherwise null.</returns>
+    // Loads a collection of Project records.
+    /// <include path='items/Load/*' file='Doc/ProjectManager.xml'/>
     public Projects Load(ProjectParentKey parentKey = null, string name = null)
     {
       Projects retValue = null;
@@ -104,13 +90,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a collection of records that do NOT match the supplied Name
-    /// value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Projects collection if available; otherwise null.</returns>
+    // Loads a collection of records that do NOT match the supplied Name
+    /// <include path='items/LoadAllExcept/*' file='Doc/ProjectManager.xml'/>
     public Projects LoadAllExcept(ProjectParentKey parentKey, string name)
     {
       Projects retValue = null;
@@ -135,12 +116,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a Project record.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Project Data Object if found; otherwise null.</returns>
+    // Retrieves a Project record.
+    /// <include path='items/Retrieve/*' file='Doc/ProjectManager.xml'/>
     public Project Retrieve(ProjectParentKey parentKey, string name = null)
     {
       Project retValue = null;
@@ -184,10 +161,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Updates a record from the DataObject.
-    /// </summary>
-    /// <param name="project">The DataObject value.</param>
+    // Updates a record from the DataObject.
+    /// <include path='items/Update/*' file='Doc/ProjectManager.xml'/>
     public Project Update(Project project)
     {
       var message = NetString.ArgError(null, project);
@@ -213,13 +188,13 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// Write the text file from a Projects collection.
-    /// </summary>
-    /// <param name="fileName">The File name.</param>
-    /// <param name="projects">The Projects collection</param>
+    // Write the text file from a Projects collection.
+    /// <include path='items/CreateFile/*' file='Doc/ProjectManager.xml'/>
     public void CreateFile(string fileName, Projects projects)
     {
+      var message = NetString.ArgError(null, fileName);
+      NetString.ThrowArgError(message);
+
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
       builder.Append(", Solution, Name");
@@ -233,14 +208,14 @@ namespace ProjectFilesDAL
       }
     }
 
-    // <summary>Creates a ParentKey from the supplied DataObject.</summary>
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="project"></param>
-    /// <returns></returns>
+    // Creates a ParentKey from the supplied DataObject.
+    /// <include path='items/CreateParentKey/*' file='Doc/ProjectManager.xml'/>
     public ProjectParentKey CreateParentKey(Project project)
     {
+      var message = NetString.ArgError(null, project);
+      Project.ItemParentValues(ref message, project);
+      NetString.ThrowArgError(message);
+
       var retValue = new ProjectParentKey()
       {
         CodeLine = project.CodeLine,
@@ -250,11 +225,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Creates a record string.
-    /// </summary>
-    /// <param name="project">The Project Data Object.</param>
-    /// <returns>The record string.</returns>
+    // Creates a record string.
+    /// <include path='items/CreateRecord/*' file='Doc/ProjectManager.xml'/>
     public string CreateRecord(Project project)
     {
       var message = NetString.ArgError(null, project);
@@ -289,9 +261,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Creates a DbColumns object from propertyNames.</summary>
-    /// <param name="propertyNames">The list of property names.</param>
-    /// <returns>A DbColumns collection.</returns>
+    // Creates a DbColumns object from propertyNames.
+    /// <include path='items/GetColumns/*' file='Doc/ProjectManager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames = null)
     {
       DbColumns retValue = BaseColumns;
@@ -311,12 +282,12 @@ namespace ProjectFilesDAL
     }
 
     // Recreates a file.
-    /// <summary>
-    /// Recreates a file.
-    /// </summary>
-    /// <param name="projects">The Projects collection</param>
+    /// <include path='items/RecreateFile/*' file='Doc/ProjectManager.xml'/>
     public void RecreateFile(Projects projects)
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -338,6 +309,9 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
@@ -365,6 +339,7 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
+      // A null return value is allowed.
       if (parentKey != null)
       {
         retValue = new Project()

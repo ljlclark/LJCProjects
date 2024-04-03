@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeLineManager.xml -->
+<items>
+  <!-- Constructors -->
+  <CodeLineManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="fileName">The data file name.</param>
+  </CodeLineManagerC>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Adds a CodeLine file record
+    </summary>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
+    <returns>The added CodeLine data object.</returns>
+  </Add>
+  <Delete>
+    <summary>
+      Deletes a CodeLine record.
+    </summary>
+    <param name="name">The Name value.</param>
+  </Delete>
+  <Load>
+    <summary>
+      Loads a collection of CodeLine records.
+    </summary>
+    <param name="name">The Name value.</param>
+    <returns>The CodeLines collection if available; otherwise null.</returns>
+  </Load>
+  <LoadAllExcept>
+    <summary>
+      Loads a collection of records that do NOT match the supplied Name
+      value.
+    </summary>
+    <param name="name">The Name value.</param>
+    <returns>The CodeLines collection if available; otherwise null.</returns>
+  </LoadAllExcept>
+  <Retrieve>
+    <summary>
+      Retrieves a CodeLine record.
+    </summary>
+    <param name="name">The Name value.</param>
+    <returns>The CodeLine Data Object if found; otherwise null.</returns>
+  </Retrieve>
+  <Update>
+    <summary>
+      Updates a record from the DataObject.
+    </summary>
+    <param name="codeLine">The DataObject value.</param>
+  </Update>
+  <!-- Public Methods -->
+  <CreateFile>
+    <summary>
+      Write the text file from a CodeLines collection.
+    </summary>
+    <param name="fileName">The File name.</param>
+    <param name="codeLines">The CodeLines collection</param>
+  </CreateFile>
+  <CreateRecord>
+    <summary>
+      Creates a record string.
+    </summary>
+    <param name="codeLine">The CodeLine Data Object.</param>
+    <returns>The record string.</returns>
+  </CreateRecord>
+  <GetColumns>
+    <summary>
+      Creates a DbColumns object from propertyNames.
+    </summary>
+    <param name="propertyNames">The list of property names.</param>
+    <returns>A DbColumns collection.</returns>
+  </GetColumns>
+  <RecreateFile>
+    <summary>
+      Recreates a file.
+    </summary>
+    <param name="codeLines">The CodeLines collection</param>
+  </RecreateFile>
+</items>

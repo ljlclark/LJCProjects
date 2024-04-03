@@ -14,12 +14,12 @@ namespace ProjectFilesDAL
   {
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
-    /// <param name="fileName">The data file name.</param>
+    // Initializes an object instance.
+    /// <include path='items/SolutionManagerC/*' file='Doc/SolutionManager.xml'/>
     public SolutionManager(string fileName = @"DataFiles\Solution.txt")
     {
-      CreateBaseColumns();
       FileName = fileName;
+      CreateBaseColumns();
       Reader = new TextDataReader();
       Reader.LJCSetFile(FileName);
     }
@@ -27,14 +27,8 @@ namespace ProjectFilesDAL
 
     #region Data Methods
 
-    /// <summary>
-    /// Adds a Solution file record
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <param name="sequence">The Sequence value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>The added Solution data object.</returns>
+    // Adds a Solution file record
+    /// <include path='items/Add/*' file='Doc/SolutionManager.xml'/>
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path)
     {
@@ -51,11 +45,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Deletes a Solution record.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
+    // Deletes a Solution record.
+    /// <include path='items/Delete/*' file='Doc/SolutionManager.xml'/>
     public void Delete(SolutionParentKey parentKey, string name)
     {
       var message = NetString.ArgError(null, parentKey, name);
@@ -75,12 +66,8 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>
-    /// Retrieves a collection of Solution records.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Solutions collection if available; otherwise null.</returns>
+    // Loads a collection of Solution records.
+    /// <include path='items/Load/*' file='Doc/SolutionManager.xml'/>
     public Solutions Load(SolutionParentKey parentKey = null, string name = null)
     {
       Solutions retValue = null;
@@ -104,13 +91,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a collection of records that do NOT match the supplied Name
-    /// value.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Solutions collection if available; otherwise null.</returns>
+    // Loads a collection of records that do NOT match the supplied Name
+    /// <include path='items/LoadAllExcept/*' file='Doc/SolutionManager.xml'/>
     public Solutions LoadAllExcept(SolutionParentKey parentKey, string name)
     {
       Solutions retValue = null;
@@ -134,12 +116,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Retrieves a Solution record.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <returns>The Solution Data Object if found; otherwise null.</returns>
+    // Retrieves a Solution record.
+    /// <include path='items/Retrieve/*' file='Doc/SolutionManager.xml'/>
     public Solution Retrieve(SolutionParentKey parentKey, string name = null)
     {
       Solution retValue = null;
@@ -187,10 +165,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Updates a record from the DataObject.
-    /// </summary>
-    /// <param name="solution">The DataObject value.</param>
+    // Updates a record from the DataObject.
+    /// <include path='items/Update/*' file='Doc/SolutionManager.xml'/>
     public Solution Update(Solution solution)
     {
       var message = NetString.ArgError(null, solution);
@@ -216,13 +192,13 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// Write the text file from a Solutions collection.
-    /// </summary>
-    /// <param name="fileName">The File name.</param>
-    /// <param name="solutions">The Solutions collection</param>
+    // Write the text file from a Solutions collection.
+    /// <include path='items/CreateFile/*' file='Doc/SolutionManager.xml'/>
     public void CreateFile(string fileName, Solutions solutions)
     {
+      var message = NetString.ArgError(null, fileName);
+      NetString.ThrowArgError(message);
+
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
       builder.Append(", Name, Sequence");
@@ -236,11 +212,14 @@ namespace ProjectFilesDAL
       }
     }
 
-    /// <summary>Creates a ParentKey from the supplied DataObject.</summary>
-    /// <param name="solution"></param>
-    /// <returns></returns>
+    // Creates a ParentKey from the supplied DataObject.
+    /// <include path='items/CreateParentKey/*' file='Doc/SolutionManager.xml'/>
     public SolutionParentKey CreateParentKey(Solution solution)
     {
+      var message = NetString.ArgError(null, solution);
+      Solution.ItemParentValues(ref message, solution);
+      NetString.ThrowArgError(message);
+
       var retValue = new SolutionParentKey()
       {
         CodeLine = solution.CodeLine,
@@ -249,11 +228,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>
-    /// Creates a record string.
-    /// </summary>
-    /// <param name="solution">The Solution Data Object.</param>
-    /// <returns>The record string.</returns>
+    // Creates a record string.
+    /// <include path='items/CreateRecord/*' file='Doc/SolutionManager.xml'/>
     public string CreateRecord(Solution solution)
     {
       var message = NetString.ArgError(null, solution);
@@ -288,9 +264,8 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    /// <summary>Creates a DbColumns object from propertyNames.</summary>
-    /// <param name="propertyNames">The list of property names.</param>
-    /// <returns>A DbColumns collection.</returns>
+    // Creates a DbColumns object from propertyNames.
+    /// <include path='items/GetColumns/*' file='Doc/SolutionManager.xml'/>
     public DbColumns GetColumns(List<string> propertyNames = null)
     {
       DbColumns retValue = BaseColumns;
@@ -310,12 +285,12 @@ namespace ProjectFilesDAL
     }
 
     // Recreates a file.
-    /// <summary>
-    /// Recreates a file.
-    /// </summary>
-    /// <param name="solutions">The Solutions collection</param>
+    /// <include path='items/RecreateFile/*' file='Doc/SolutionManager.xml'/>
     public void RecreateFile(Solutions solutions)
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       Reader.Close();
       if (File.Exists(FileName))
       {
@@ -337,6 +312,9 @@ namespace ProjectFilesDAL
     /// <summary>Write the text file from a Solutions collection and create a backup.</summary>
     public void WriteBackup()
     {
+      var message = NetString.ArgError(null, FileName);
+      NetString.ThrowArgError(message);
+
       var fileName = Path.GetFileNameWithoutExtension(FileName);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
@@ -363,6 +341,7 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
+      // A null return value is allowed.
       if (parentKey != null)
       {
         retValue = new Solution()
