@@ -107,8 +107,12 @@ namespace UpdateProjectFiles
         CodeLineSplit.SplitterWidth = 4;
         SolutionSplit.SplitterWidth = 4;
 
+        ListHelper.SetPanelControls(CodeLineSplit.Panel1, null
+          , null, CodeLineGrid);
         ListHelper.SetPanelControls(CodeLineSplit.Panel2, CodeGroupHeader
           , null, CodeGroupGrid);
+        ListHelper.SetPanelControls(SolutionSplit.Panel1, SolutionHeader
+          , null, SolutionGrid);
         ListHelper.SetPanelControls(SolutionSplit.Panel2, ProjectHeader
           , null, ProjectGrid);
       }

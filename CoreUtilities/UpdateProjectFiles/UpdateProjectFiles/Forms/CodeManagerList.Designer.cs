@@ -65,6 +65,7 @@
       this.GroupCombo = new LJCWinFormControls.LJCItemCombo();
       this.GroupLabel = new System.Windows.Forms.Label();
       this.SolutionSplit = new System.Windows.Forms.SplitContainer();
+      this.SolutionHeader = new LJCWinFormControls.LJCHeaderBox();
       this.SolutionGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.SolutionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.SolutionHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +89,9 @@
       this.ProjectDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
       this.ProjectRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+      this.ProjectClear = new System.Windows.Forms.ToolStripMenuItem();
+      this.ProjectUpdate = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectHeader = new LJCWinFormControls.LJCHeaderBox();
       this.FileTab = new System.Windows.Forms.TabPage();
       this.ProjectFileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
@@ -106,9 +110,7 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
-      this.ProjectClear = new System.Windows.Forms.ToolStripMenuItem();
-      this.ProjectUpdate = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+      this.ljcHeaderBox1 = new LJCWinFormControls.LJCHeaderBox();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -369,7 +371,7 @@
       this.CodeGroupGrid.RowTemplate.Height = 28;
       this.CodeGroupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.CodeGroupGrid.ShowCellToolTips = false;
-      this.CodeGroupGrid.Size = new System.Drawing.Size(680, 270);
+      this.CodeGroupGrid.Size = new System.Drawing.Size(680, 271);
       this.CodeGroupGrid.TabIndex = 1;
       this.CodeGroupGrid.Text = "LJCDataGrid";
       this.CodeGroupGrid.SelectionChanged += new System.EventHandler(this.CodeGroupGrid_SelectionChanged);
@@ -488,12 +490,13 @@
       this.SolutionSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.SolutionSplit.Location = new System.Drawing.Point(3, 37);
+      this.SolutionSplit.Location = new System.Drawing.Point(3, 41);
       this.SolutionSplit.Name = "SolutionSplit";
       this.SolutionSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
       // SolutionSplit.Panel1
       // 
+      this.SolutionSplit.Panel1.Controls.Add(this.SolutionHeader);
       this.SolutionSplit.Panel1.Controls.Add(this.SolutionGrid);
       // 
       // SolutionSplit.Panel2
@@ -501,8 +504,22 @@
       this.SolutionSplit.Panel2.Controls.Add(this.ProjectGrid);
       this.SolutionSplit.Panel2.Controls.Add(this.ProjectHeader);
       this.SolutionSplit.Size = new System.Drawing.Size(681, 375);
-      this.SolutionSplit.SplitterDistance = 83;
+      this.SolutionSplit.SplitterDistance = 123;
       this.SolutionSplit.TabIndex = 2;
+      // 
+      // SolutionHeader
+      // 
+      this.SolutionHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.SolutionHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.SolutionHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.SolutionHeader.Location = new System.Drawing.Point(0, 0);
+      this.SolutionHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.SolutionHeader.Name = "SolutionHeader";
+      this.SolutionHeader.Size = new System.Drawing.Size(680, 32);
+      this.SolutionHeader.TabIndex = 2;
+      this.SolutionHeader.TabStop = false;
+      this.SolutionHeader.Text = "Solution";
       // 
       // SolutionGrid
       // 
@@ -510,6 +527,9 @@
       this.SolutionGrid.AllowUserToAddRows = false;
       this.SolutionGrid.AllowUserToDeleteRows = false;
       this.SolutionGrid.AllowUserToResizeRows = false;
+      this.SolutionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.SolutionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.SolutionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.SolutionGrid.ContextMenuStrip = this.SolutionMenu;
@@ -521,14 +541,13 @@
       dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
       dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.SolutionGrid.DefaultCellStyle = dataGridViewCellStyle3;
-      this.SolutionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.SolutionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.SolutionGrid.LJCAllowDrag = true;
       this.SolutionGrid.LJCAllowSelectionChange = false;
       this.SolutionGrid.LJCDragDataName = null;
       this.SolutionGrid.LJCLastRowIndex = -1;
       this.SolutionGrid.LJCRowHeight = 0;
-      this.SolutionGrid.Location = new System.Drawing.Point(0, 0);
+      this.SolutionGrid.Location = new System.Drawing.Point(0, 31);
       this.SolutionGrid.MultiSelect = false;
       this.SolutionGrid.Name = "SolutionGrid";
       this.SolutionGrid.RowHeadersVisible = false;
@@ -536,7 +555,7 @@
       this.SolutionGrid.RowTemplate.Height = 28;
       this.SolutionGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.SolutionGrid.ShowCellToolTips = false;
-      this.SolutionGrid.Size = new System.Drawing.Size(681, 83);
+      this.SolutionGrid.Size = new System.Drawing.Size(681, 91);
       this.SolutionGrid.TabIndex = 1;
       this.SolutionGrid.Text = "LJCDataGrid";
       this.SolutionGrid.SelectionChanged += new System.EventHandler(this.SolutionGrid_SelectionChanged);
@@ -669,7 +688,7 @@
       this.ProjectGrid.LJCDragDataName = null;
       this.ProjectGrid.LJCLastRowIndex = -1;
       this.ProjectGrid.LJCRowHeight = 0;
-      this.ProjectGrid.Location = new System.Drawing.Point(0, 32);
+      this.ProjectGrid.Location = new System.Drawing.Point(0, 31);
       this.ProjectGrid.MultiSelect = false;
       this.ProjectGrid.Name = "ProjectGrid";
       this.ProjectGrid.RowHeadersVisible = false;
@@ -677,7 +696,7 @@
       this.ProjectGrid.RowTemplate.Height = 28;
       this.ProjectGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ProjectGrid.ShowCellToolTips = false;
-      this.ProjectGrid.Size = new System.Drawing.Size(680, 257);
+      this.ProjectGrid.Size = new System.Drawing.Size(680, 216);
       this.ProjectGrid.TabIndex = 1;
       this.ProjectGrid.Text = "LJCDataGrid";
       this.ProjectGrid.SelectionChanged += new System.EventHandler(this.ProjectGrid_SelectionChanged);
@@ -700,7 +719,7 @@
             this.ProjectClear,
             this.ProjectUpdate});
       this.ProjectMenu.Name = "AssemblyMenu";
-      this.ProjectMenu.Size = new System.Drawing.Size(259, 279);
+      this.ProjectMenu.Size = new System.Drawing.Size(259, 246);
       this.ProjectMenu.Text = "Assembly Group Menu";
       // 
       // ProjectHeading
@@ -752,6 +771,25 @@
       this.ProjectRefresh.Text = "&Refresh";
       this.ProjectRefresh.Click += new System.EventHandler(this.ProjectRefresh_Click);
       // 
+      // toolStripSeparator14
+      // 
+      this.toolStripSeparator14.Name = "toolStripSeparator14";
+      this.toolStripSeparator14.Size = new System.Drawing.Size(255, 6);
+      // 
+      // ProjectClear
+      // 
+      this.ProjectClear.Name = "ProjectClear";
+      this.ProjectClear.Size = new System.Drawing.Size(258, 32);
+      this.ProjectClear.Text = "Clear Dependencies";
+      this.ProjectClear.Click += new System.EventHandler(this.ProjectClear_Click);
+      // 
+      // ProjectUpdate
+      // 
+      this.ProjectUpdate.Name = "ProjectUpdate";
+      this.ProjectUpdate.Size = new System.Drawing.Size(258, 32);
+      this.ProjectUpdate.Text = "Update Dependencies";
+      this.ProjectUpdate.Click += new System.EventHandler(this.ProjectUpdate_Click);
+      // 
       // ProjectHeader
       // 
       this.ProjectHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -768,6 +806,7 @@
       // 
       // FileTab
       // 
+      this.FileTab.Controls.Add(this.ljcHeaderBox1);
       this.FileTab.Controls.Add(this.ProjectFileGrid);
       this.FileTab.Controls.Add(this.ProjectCombo);
       this.FileTab.Controls.Add(this.ProjectLabel);
@@ -804,7 +843,7 @@
       this.ProjectFileGrid.LJCDragDataName = null;
       this.ProjectFileGrid.LJCLastRowIndex = -1;
       this.ProjectFileGrid.LJCRowHeight = 0;
-      this.ProjectFileGrid.Location = new System.Drawing.Point(0, 38);
+      this.ProjectFileGrid.Location = new System.Drawing.Point(0, 72);
       this.ProjectFileGrid.MultiSelect = false;
       this.ProjectFileGrid.Name = "ProjectFileGrid";
       this.ProjectFileGrid.RowHeadersVisible = false;
@@ -812,7 +851,7 @@
       this.ProjectFileGrid.RowTemplate.Height = 28;
       this.ProjectFileGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ProjectFileGrid.ShowCellToolTips = false;
-      this.ProjectFileGrid.Size = new System.Drawing.Size(687, 379);
+      this.ProjectFileGrid.Size = new System.Drawing.Size(687, 345);
       this.ProjectFileGrid.TabIndex = 3;
       this.ProjectFileGrid.Text = "LJCDataGrid";
       this.ProjectFileGrid.SelectionChanged += new System.EventHandler(this.FileGrid_SelectionChanged);
@@ -940,24 +979,19 @@
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
       // 
-      // ProjectClear
+      // ljcHeaderBox1
       // 
-      this.ProjectClear.Name = "ProjectClear";
-      this.ProjectClear.Size = new System.Drawing.Size(258, 32);
-      this.ProjectClear.Text = "Clear Dependencies";
-      this.ProjectClear.Click += new System.EventHandler(this.ProjectClear_Click);
-      // 
-      // ProjectUpdate
-      // 
-      this.ProjectUpdate.Name = "ProjectUpdate";
-      this.ProjectUpdate.Size = new System.Drawing.Size(258, 32);
-      this.ProjectUpdate.Text = "Update Dependencies";
-      this.ProjectUpdate.Click += new System.EventHandler(this.ProjectUpdate_Click);
-      // 
-      // toolStripSeparator14
-      // 
-      this.toolStripSeparator14.Name = "toolStripSeparator14";
-      this.toolStripSeparator14.Size = new System.Drawing.Size(255, 6);
+      this.ljcHeaderBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ljcHeaderBox1.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.ljcHeaderBox1.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ljcHeaderBox1.Location = new System.Drawing.Point(0, 41);
+      this.ljcHeaderBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ljcHeaderBox1.Name = "ljcHeaderBox1";
+      this.ljcHeaderBox1.Size = new System.Drawing.Size(680, 32);
+      this.ljcHeaderBox1.TabIndex = 4;
+      this.ljcHeaderBox1.TabStop = false;
+      this.ljcHeaderBox1.Text = "ProjectFile";
       // 
       // CodeManagerList
       // 
@@ -1077,6 +1111,8 @@
     private System.Windows.Forms.ToolStripMenuItem ProjectClear;
     private System.Windows.Forms.ToolStripMenuItem ProjectUpdate;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+    private LJCWinFormControls.LJCHeaderBox SolutionHeader;
+    private LJCWinFormControls.LJCHeaderBox ljcHeaderBox1;
   }
 }
 
