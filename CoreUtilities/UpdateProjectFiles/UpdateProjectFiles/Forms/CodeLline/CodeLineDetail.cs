@@ -12,12 +12,12 @@ using System.Windows.Forms;
 namespace UpdateProjectFiles
 {
   // Initializes an object instance.
-  public partial class CodeLineDetail : Form
+  internal partial class CodeLineDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    public CodeLineDetail()
+    internal CodeLineDetail()
     {
       InitializeComponent();
 

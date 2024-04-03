@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace UpdateProjectFiles
 {
-  public partial class SolutionDetail : Form
+  internal partial class SolutionDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    public SolutionDetail()
+    internal SolutionDetail()
     {
       InitializeComponent();
 
