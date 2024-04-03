@@ -15,6 +15,7 @@ namespace ProjectFilesDAL
     /// <summary>Initializes an object instance</summary>
     public ValuesProjectFiles()
     {
+      Errors = "";
       SetConfigFileSpec("UpdateProjectFiles.exe.config");
     }
     #endregion
@@ -31,15 +32,17 @@ namespace ProjectFilesDAL
       if (!File.Exists(fileSpec))
       {
         message += $"File {fileSpec} was not found.";
+        Errors += message;
       }
-      NetString.ThrowArgError(message);
-
-      // Update for changed file name.
-      fileSpec = fileSpec.Trim();
-      if (!NetString.IsEqual(fileSpec, FileSpec))
+      else
       {
-        FileSpec = fileSpec;
-        SetProperties(FileSpec);
+        // Update for changed file name.
+        fileSpec = fileSpec.Trim();
+        if (!NetString.IsEqual(fileSpec, FileSpec))
+        {
+          FileSpec = fileSpec;
+          SetProperties(FileSpec);
+        }
       }
     }
 
@@ -65,6 +68,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets the Data class reference.</summary>
     public ProjectFilesData Data { get; private set; }
+
+    /// <summary>Gets the Error message</summary>
+    public string Errors { get; private set; }
 
     /// <summary>Gets the config FileSpec.</summary>
     public string FileSpec { get; private set; }

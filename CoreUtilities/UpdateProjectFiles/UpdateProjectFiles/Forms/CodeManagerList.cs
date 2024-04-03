@@ -1,8 +1,10 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // CodeManagerList.cs
+using LJCNetCommon;
 using LJCWinFormCommon;
 using ProjectFilesDAL;
+using System.Net.Configuration;
 using System.Windows.Forms;
 using static UpdateProjectFiles.ProjectGridCode;
 
@@ -20,9 +22,12 @@ namespace UpdateProjectFiles
 
       // Set default class data.
       var configValues = ValuesProjectFiles.Instance;
+      mErrors = configValues.Errors;
+
       Text += $" - {configValues.FileSpec}";
       Cursor = Cursors.Default;
     }
+    private string mErrors;
     #endregion
 
     #region Form Event Handlers
@@ -30,6 +35,7 @@ namespace UpdateProjectFiles
     // Configures the form and loads the initial control data.
     private void CodeManagerList_Load(object sender, System.EventArgs e)
     {
+      NetString.ThrowArgError(mErrors);
       InitializeControls();
       SolutionExit.Click += CodeLineExit_Click;
       ProjectFileExit.Click += CodeLineExit_Click;
