@@ -50,12 +50,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object with the provided values.
-    /// <summary>
-    /// Creates and adds the object with the provided values.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>A reference to the added item.s</returns>
+    /// <include path='items/Add/*' file='Doc/CodeLines.xml'/>
     public CodeLine Add(string name, string path = null)
     {
       CodeLine retValue;
@@ -77,10 +72,7 @@ namespace ProjectFilesDAL
     }
 
     // Removes an item by unique values.
-    /// <summary>
-    /// Removes an item by unique values.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
+    /// <include path='items/LJCDelete/*' file='Doc/CodeLines.xml'/>
     public void LJCDelete(string name)
     {
       CodeLine item = LJCRetrieve(name);
@@ -91,11 +83,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieves the collection element with unique values.
-    /// <summary>
-    /// Retrieves the collection element with unique values.
-    /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieve/*' file='Doc/CodeLines.xml'/>
     public CodeLine LJCRetrieve(string name)
     {
       CodeLine retValue = null;
@@ -117,11 +105,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieve the collection element with Path.
-    /// <summary>
-    /// Retrieve the collection element with Path.
-    /// </summary>
-    /// <param name="path">The item path.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieveWithPath/*' file='Doc/CodeLines.xml'/>
     public CodeLine LJCRetrieveWithPath(string path)
     {
       CodeLine retValue = null;
@@ -144,10 +128,7 @@ namespace ProjectFilesDAL
     }
 
     // Finds and updates the collection item.
-    /// <summary>
-    /// Finds and updates the collection item.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine object.</param>
+    /// <include path='items/LJCUpdate/*' file='Doc/CodeLines.xml'/>
     public void LJCUpdate(CodeLine codeLine)
     {
       if (NetCommon.HasItems(this))

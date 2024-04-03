@@ -10,14 +10,10 @@ namespace ProjectFilesDAL
   /// <summary>The Solution Data Object.</summary>
   public class Solution : IComparable<Solution>
   {
-    #region Static Methods
+    #region Static Functions
 
     // Checks for the required item values.
-    /// <summary>
-    /// Checks for the required item values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="solution">The Solution objct.</param>
+    /// <include path='items/ItemValues/*' file='Doc/Solution.xml'/>
     public static void ItemValues(ref string message, Solution solution)
     {
       if (solution != null)
@@ -31,11 +27,7 @@ namespace ProjectFilesDAL
     }
 
     // Checks for the required ParentKey values.
-    /// <summary>
-    /// Checks for the required ParentKey values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="solution">The Solution objct.</param>
+    /// <include path='items/ItemParentValues/*' file='Doc/Solution.xml'/>
     public static void ItemParentValues(ref string message, Solution solution)
     {
       if (solution != null)
@@ -52,11 +44,7 @@ namespace ProjectFilesDAL
     }
 
     // Checks the ParentKey for values.
-    /// <summary>
-    /// Checks the ParentKey for values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="parentKey">The ParentKey object.</param>
+    /// <include path='items/ParentKeyValues/*' file='Doc/Solution.xml'/>
     public static void ParentKeyValues(ref string message
       , SolutionParentKey parentKey)
     {

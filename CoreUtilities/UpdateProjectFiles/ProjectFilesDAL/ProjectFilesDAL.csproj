@@ -72,12 +72,22 @@
     <Compile Include="ValuesProjectFiles.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Doc\CodeGroup.xml" />
     <Content Include="Doc\CodeGroupManager.xml" />
+    <Content Include="Doc\CodeGroups.xml" />
+    <Content Include="Doc\CodeLine.xml" />
     <Content Include="Doc\CodeLineManager.xml" />
+    <Content Include="Doc\CodeLines.xml" />
     <Content Include="Doc\DataProjectFiles.xml" />
+    <Content Include="Doc\Project.xml" />
+    <Content Include="Doc\ProjectFile.xml" />
+    <Content Include="Doc\ProjectFiles.xml" />
     <Content Include="Doc\ProjectManager.xml" />
     <Content Include="Doc\ProjectFileManager.xml" />
+    <Content Include="Doc\Projects.xml" />
+    <Content Include="Doc\Solution.xml" />
     <Content Include="Doc\SolutionManager.xml" />
+    <Content Include="Doc\Solutions.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

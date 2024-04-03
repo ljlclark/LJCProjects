@@ -50,13 +50,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object with the provided values.
-    /// <summary>
-    /// Creates and adds the object with the provided values.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>A reference to the added item.s</returns>
+    /// <include path='items/Add/*' file='Doc/Project.xml'/>
     public Project Add(ProjectParentKey parentKey, string name
       , string path = null)
     {
@@ -83,11 +77,7 @@ namespace ProjectFilesDAL
     }
 
     // Removes an item by unique values.
-    /// <summary>
-    /// Removes an item by unique values.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
+    /// <include path='items/LJCDelete/*' file='Doc/Project.xml'/>
     public void LJCDelete(ProjectParentKey parentKey, string name)
     {
       var item = LJCRetrieve(parentKey, name);
@@ -98,11 +88,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieves items that match the supplied values.
-    /// <summary>
-    /// Retrieves a collection that match the supplied values.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <returns>The collection object.</returns>
+    /// <include path='items/LJCLoad/*' file='Doc/Project.xml'/>
     public Projects LJCLoad(ProjectParentKey parentKey)
     {
       Projects retValue = null;
@@ -119,12 +105,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieves the collection element with unique values.
-    /// <summary>
-    /// Retrieves the collection element with unique values.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieve/*' file='Doc/Project.xml'/>
     public Project LJCRetrieve(ProjectParentKey parentKey, string name)
     {
       Project retValue = null;
@@ -150,12 +131,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieves the collection element with path.
-    /// <summary>
-    /// Retrieves the collection element with path.
-    /// </summary>
-    /// <param name="parentKey">The ParentKey value.</param>
-    /// <param name="path">The path value.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieveWithPath/*' file='Doc/Project.xml'/>
     public Project LJCRetrieveWithPath(ProjectParentKey parentKey, string path)
     {
       Project retValue = null;
@@ -182,10 +158,7 @@ namespace ProjectFilesDAL
     }
 
     // Finds and updates the collection item.
-    /// <summary>
-    /// Finds and updates the collection item.
-    /// </summary>
-    /// <param name="project">The Project object.</param>
+    /// <include path='items/LJCUpdate/*' file='Doc/Project.xml'/>
     public void LJCUpdate(Project project)
     {
       if (NetCommon.HasItems(this))
@@ -207,9 +180,7 @@ namespace ProjectFilesDAL
     #region Public Methods
 
     // Retrieves the ParentKey from the object</summary>
-    /// <summary>Retrieves the ParentKey from the object</summary>
-    /// <param name="project">The Project object.</param>
-    /// <returns>The ParentKey object.</returns>
+    /// <include path='items/GetParentKey/*' file='Doc/Project.xml'/>
     public ProjectParentKey GetParentKey(Project project)
     {
       var message = NetString.ArgError(null, project);

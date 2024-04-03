@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeLines.xml -->
+<item>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object with the provided values.
+    </summary>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
+    <returns>A reference to the added item.s</returns>
+  </Add>
+  <LJCDelete>
+    <summary>
+      Removes an item by unique values.
+    </summary>
+    <param name="name">The Name value.</param>
+  </LJCDelete>
+  <LJCRetrieve>
+    <summary>
+      Retrieves the collection element with unique values.
+    </summary>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieve>
+  <LJCRetrieveWithPath>
+    <summary>
+      Retrieve the collection element with Path.
+    </summary>
+    <param name="path">The item path.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieveWithPath>
+  <LJCUpdate>
+    <summary>
+      Finds and updates the collection item.
+    </summary>
+    <param name="codeLine">The CodeLine object.</param>
+  </LJCUpdate>
+</item>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectFiles.xml -->
+<item>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object with the provided values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="sourceKey">The source ParentKey value.</param>
+    <param name="fileName">The file name.</param>
+    <param name="targetFilePath">The target file path.</param>
+    <param name="sourceFilePath">The source file path</param>
+    <returns>A reference to the added item.s</returns>
+  </Add>
+  <LJCDelete>
+    <summary>
+      Removes an item by unique values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="fileName"></param>
+  </LJCDelete>
+  <LJCLoad>
+    <summary>
+      Retrieves a collection that match the supplied values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <returns>The collection object.</returns>
+  </LJCLoad>
+  <LJCRetrieve>
+    <summary>
+      Retrieves the collection element with unique values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="fileName">The SourceFile name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieve>
+  <LJCUpdate>
+    <summary>
+      Finds and updates the collection item.
+    </summary>
+    <param name="projectFile">The ProjectFile object.</param>
+  </LJCUpdate>
+  <!-- Public Methods -->
+  <GetParentKey>
+    <summary>
+      Retrieves the ParentKey from the object.
+    </summary>
+    <param name="projectFile">The ProjectFile object.</param>
+    <returns>The ParentKey object.</returns>
+  </GetParentKey>
+</item>

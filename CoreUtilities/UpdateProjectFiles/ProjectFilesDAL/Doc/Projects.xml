@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Projects.xml -->
+<item>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object with the provided values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
+    <returns>A reference to the added item.s</returns>
+  </Add>
+  <LJCDelete>
+    <summary>
+      Removes an item by unique values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="name">The Name value.</param>
+  </LJCDelete>
+  <LJCLoad>
+    <summary>
+      Retrieves a collection that match the supplied values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <returns>The collection object.</returns>
+  </LJCLoad>
+  <LJCRetrieve>
+    <summary>
+      Retrieves the collection element with unique values.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieve>
+  <LJCRetrieveWithPath>
+    <summary>
+      Retrieves the collection element with path.
+    </summary>
+    <param name="parentKey">The ParentKey value.</param>
+    <param name="path">The path value.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieveWithPath>
+  <LJCUpdate>
+    <summary>
+      Finds and updates the collection item.
+    </summary>
+    <param name="project">The Project object.</param>
+  </LJCUpdate>
+  <!-- Public Methods -->
+  <GetParentKey>
+    <summary>
+      Retrieves the ParentKey from the object
+    </summary>
+    <param name="project">The Project object.</param>
+    <returns>The ParentKey object.</returns>
+  </GetParentKey>
+</item>

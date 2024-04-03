@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectFile.xml -->
+<items>
+  <!-- Static Funcions -->
+  <ItemValues>
+    <summary>
+      Checks for the required item values.
+    </summary>
+    <param name="message">The message value.</param>
+    <param name="projectFile">The Solution objct.</param>
+  </ItemValues>
+  <ItemParentValues>
+    <summary>
+      Checks for the required ParentKey values.
+    </summary>
+    <param name="message">The message value.</param>
+    <param name="projectFile">The Solution objct.</param>
+  </ItemParentValues>
+  <ItemSourceValues>
+    <summary>
+      Checks for the required ParentKey values.
+    </summary>
+    <param name="message">The message value.</param>
+    <param name="projectFile">The Solution objct.</param>
+  </ItemSourceValues>
+  <ParentKeyValues>
+    <summary>
+      Checks the ParentKey for values.
+    </summary>
+    <param name="message">The message value.</param>
+    <param name="parentKey">The ParentKey object.</param>
+  </ParentKeyValues>
+</items>

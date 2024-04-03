@@ -10,14 +10,10 @@ namespace ProjectFilesDAL
   /// <summary>The CodeLine Data Object.</summary>
   public class CodeLine : IComparable<CodeLine>
   {
-    #region Static Methods
+    #region Static Functions
 
     // Checks for the required object values.
-    /// <summary>
-    /// Checks for the required object values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="codeLine">The CodeLine value.</param>
+    /// <include path='items/ItemValues/*' file='Doc/CodeLine.xml'/>
     public static void ItemValues(ref string message, CodeLine codeLine)
     {
       if (codeLine != null)

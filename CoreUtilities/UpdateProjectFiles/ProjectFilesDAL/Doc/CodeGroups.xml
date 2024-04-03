@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeGroups.xml -->
+<item>
+  <!-- Data Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object with the provided values.
+    </summary>
+    <param name="codeLine">The ParentKey value.</param>
+    <param name="name">The Name value.</param>
+    <param name="path">The Path value.</param>
+    <returns>A reference to the added item.s</returns>
+  </Add>
+  <LJCDelete>
+    <summary>
+      Removes an item by unique values.
+    </summary>
+    <param name="codeLine">The CodeLine value.</param>
+    <param name="name">The Name value.</param>
+  </LJCDelete>
+  <LJCLoad>
+    <summary>
+      Retrieves items that match the supplied values.
+    </summary>
+    <param name="codeLine">The CodeLine name.</param>
+    <returns>The collection object.</returns>
+  </LJCLoad>
+  <LJCRetrieve>
+    <summary>
+      Retrieve the collection element with unique values.
+    </summary>
+    <param name="codeLine">The CodeLine name.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieve>
+  <LJCRetrieveWithPath>
+    <summary>
+      Retrieve the collection element with Path.
+    </summary>
+    <param name="codeLine">The CodeLine name.</param>
+    <param name="path">The item path.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCRetrieveWithPath>
+  <LJCUpdate>
+    <summary>
+      Finds and updates the collection item.
+    </summary>
+    <param name="codeGroup">The CodeGroup object.</param>
+  </LJCUpdate>
+</item>

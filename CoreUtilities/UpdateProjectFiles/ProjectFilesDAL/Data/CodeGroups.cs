@@ -50,13 +50,7 @@ namespace ProjectFilesDAL
     #region Data Methods
 
     // Creates and adds the object with the provided values.
-    /// <summary>
-    /// Creates and adds the object with the provided values.
-    /// </summary>
-    /// <param name="codeLine">The ParentKey value.</param>
-    /// <param name="name">The Name value.</param>
-    /// <param name="path">The Path value.</param>
-    /// <returns>A reference to the added item.s</returns>
+    /// <include path='items/Add/*' file='Doc/CodeGroups.xml'/>
     public CodeGroup Add(string codeLine, string name, string path = null)
     {
       CodeGroup retValue;
@@ -79,11 +73,7 @@ namespace ProjectFilesDAL
     }
 
     // Removes an item by unique values.
-    /// <summary>
-    /// Removes an item by unique values.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine value.</param>
-    /// <param name="name">The Name value.</param>
+    /// <include path='items/LJCDelete/*' file='Doc/CodeGroups.xml'/>
     public void LJCDelete(string codeLine, string name)
     {
       var item = LJCRetrieve(codeLine, name);
@@ -94,11 +84,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieves a collection that match the supplied values.
-    /// <summary>
-    /// Retrieves items that match the supplied values.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
-    /// <returns>The collection object.</returns>
+    /// <include path='items/LJCLoad/*' file='Doc/CodeGroups.xml'/>
     public CodeGroups LJCLoad(string codeLine)
     {
       CodeGroups retValue = null;
@@ -112,12 +98,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieve/*' file='Doc/CodeGroups.xml'/>
     public CodeGroup LJCRetrieve(string codeLine, string name)
     {
       CodeGroup retValue = null;
@@ -140,12 +121,7 @@ namespace ProjectFilesDAL
     }
 
     // Retrieve the collection element with Path.
-    /// <summary>
-    /// Retrieve the collection element with Path.
-    /// </summary>
-    /// <param name="codeLine">The CodeLine name.</param>
-    /// <param name="path">The item path.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCRetrieveWithPath/*' file='Doc/CodeGroups.xml'/>
     public CodeGroup LJCRetrieveWithPath(string codeLine, string path)
     {
       CodeGroup retValue = null;
@@ -169,10 +145,7 @@ namespace ProjectFilesDAL
     }
 
     // Finds and updates the collection item.
-    /// <summary>
-    /// Finds and updates the collection item.
-    /// </summary>
-    /// <param name="codeGroup">The CodeGroup object.</param>
+    /// <include path='items/LJCUpdate/*' file='Doc/CodeGroups.xml'/>
     public void LJCUpdate(CodeGroup codeGroup)
     {
       var message = NetString.ArgError(null, codeGroup);

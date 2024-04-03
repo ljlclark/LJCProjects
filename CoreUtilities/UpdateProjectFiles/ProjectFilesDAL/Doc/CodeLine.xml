@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeLine.xml -->
+<items>
+  <!-- Static Funcions -->
+  <ItemValues>
+    <summary>
+      Checks for the required object values.
+    </summary>
+    <param name="message">The message value.</param>
+    <param name="codeLine">The CodeLine value.</param>
+  </ItemValues>
+</items>

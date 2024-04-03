@@ -10,14 +10,10 @@ namespace ProjectFilesDAL
   /// <summary>The CodeGroup Data Object.</summary>
   public class CodeGroup : IComparable<CodeGroup>
   {
-    #region Static Methods
+    #region Static Functions
 
     // Checks for the required object values.
-    /// <summary>
-    /// Checks for the required object values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="codeGroup">The CodeGroup objct.</param>
+    /// <include path='items/ItemValues/*' file='Doc/CodeGroup.xml'/>
     public static void ItemValues(ref string message, CodeGroup codeGroup)
     {
       if (codeGroup != null)
@@ -31,11 +27,7 @@ namespace ProjectFilesDAL
     }
 
     // Checks for the required object values.
-    /// <summary>
-    /// Checks for the required object values.
-    /// </summary>
-    /// <param name="message">The message value.</param>
-    /// <param name="codeGroup">The CodeGroup objct.</param>
+    /// <include path='items/ItemParentValues/*' file='Doc/CodeGroup.xml'/>
     public static void ItemParentValues(ref string message, CodeGroup codeGroup)
     {
       if (codeGroup != null)
@@ -97,7 +89,7 @@ namespace ProjectFilesDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  /// <summary>Sort and search on Path value.</summary>
   public class CodeGroupPathComparer : IComparer<CodeGroup>
   {
     // Compares two objects.
