@@ -13,97 +13,133 @@ namespace ProjectFilesDAL
 
     // Checks for the required item values.
     /// <include path='items/ItemValues/*' file='Doc/ProjectFile.xml'/>
-    public static void ItemValues(ref string message, ProjectFile projectFile)
+    public static bool ItemValues(ref string message, ProjectFile projectFile)
     {
-      if (projectFile != null)
+      var retValue = ItemParentValues(ref message, projectFile);
+      if (retValue)
       {
-        ItemParentValues(ref message, projectFile);
         if (!NetString.HasValue(projectFile.FileName))
         {
+          retValue = false;
           message += $"{projectFile.FileName}";
         }
       }
+      return retValue;
     }
 
     // Checks for the required ParentKey values.
     /// <include path='items/ItemParentValues/*' file='Doc/ProjectFile.xml'/>
-    public static void ItemParentValues(ref string message, ProjectFile projectFile)
+    public static bool ItemParentValues(ref string message, ProjectFile projectFile)
     {
-      if (projectFile != null)
+      bool retValue = true;
+
+      if (null == projectFile)
+      {
+        retValue = false;
+      }
+      else
       {
         if (!NetString.HasValue(projectFile.TargetCodeLine))
         {
+          retValue = false;
           message += $"{projectFile.TargetCodeLine}";
         }
         if (!NetString.HasValue(projectFile.TargetCodeGroup))
         {
+          retValue = false;
           message += $"{projectFile.TargetCodeGroup}";
         }
         if (!NetString.HasValue(projectFile.TargetSolution))
         {
+          retValue = false;
           message += $"{projectFile.TargetSolution}";
         }
         if (!NetString.HasValue(projectFile.TargetProject))
         {
+          retValue = false;
           message += $"{projectFile.TargetProject}";
         }
       }
+      return retValue;
     }
 
     // Checks for the required ParentKey values.
     /// <include path='items/ItemSourceValues/*' file='Doc/ProjectFile.xml'/>
-    public static void ItemSourceValues(ref string message
+    public static bool ItemSourceValues(ref string message
       , ProjectFile projectFile)
     {
-      if (projectFile != null)
+      bool retValue = true;
+
+      if (null == projectFile)
+      {
+        retValue = false;
+      }
+      else
       {
         if (!NetString.HasValue(projectFile.SourceCodeLine))
         {
+          retValue = false;
           message += $"{projectFile.SourceCodeLine}";
         }
         if (!NetString.HasValue(projectFile.SourceCodeGroup))
         {
+          retValue = false;
           message += $"{projectFile.SourceCodeGroup}";
         }
         if (!NetString.HasValue(projectFile.SourceSolution))
         {
+          retValue = false;
           message += $"{projectFile.SourceSolution}";
         }
         if (!NetString.HasValue(projectFile.SourceFilePath))
         {
+          retValue = false;
           message += $"{projectFile.SourceFilePath}";
         }
         if (!NetString.HasValue(projectFile.FileName))
         {
+          retValue = false;
           message += $"{projectFile.FileName}";
         }
       }
+      return retValue;
     }
 
     // Checks the ParentKey for values.
     /// <include path='items/ParentKeyValues/*' file='Doc/ProjectFile.xml'/>
-    public static void ParentKeyValues(ref string message
+    public static bool ParentKeyValues(ref string message
       , ProjectFileParentKey parentKey)
     {
-      if (parentKey != null)
+      bool retValue = true;
+
+      if (null == parentKey)
+      {
+        retValue = false;
+      }
+      else
       {
         if (!NetString.HasValue(parentKey.CodeLine))
         {
+          retValue = false;
           message += $"{parentKey.CodeLine} is missing.";
         }
         if (!NetString.HasValue(parentKey.CodeGroup))
         {
+          retValue = false;
           message += $"{parentKey.CodeGroup} is missing.";
         }
         if (!NetString.HasValue(parentKey.Solution))
         {
+          retValue = false;
           message += $"{parentKey.Solution} is missing.";
         }
         if (!NetString.HasValue(parentKey.Project))
         {
+          retValue = false;
           message += $"{parentKey.Project} is missing.";
         }
       }
+      return retValue;
     }
     #endregion
 

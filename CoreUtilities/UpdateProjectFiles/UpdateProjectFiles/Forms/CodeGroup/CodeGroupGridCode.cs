@@ -61,6 +61,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(CodeGroup dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       var retValue = CodeGroupGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(CodeGroupGrid, dataRecord);
@@ -72,21 +75,21 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
+      CodeList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in CodeGroupGrid.Rows)
       {
-        CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in CodeGroupGrid.Rows)
+        var codeLine = row.LJCGetString("CodeLine");
+        var name = row.LJCGetString("Name");
+        if (codeLine == dataRecord.CodeLine
+          && name == dataRecord.Name)
         {
-          var codeLine = row.LJCGetString("CodeLine");
-          var name = row.LJCGetString("Name");
-          if (codeLine == dataRecord.CodeLine
-            && name == dataRecord.Name)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            CodeGroupGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          CodeGroupGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
         CodeList.Cursor = Cursors.Default;
       }
@@ -106,6 +109,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, CodeGroup dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
       row.LJCSetString("Name", dataRecord.Name);
     }

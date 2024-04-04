@@ -61,6 +61,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Solution dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       var retValue = SolutionGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(SolutionGrid, dataRecord);
@@ -72,23 +75,23 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
+      CodeList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in SolutionGrid.Rows)
       {
-        CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in SolutionGrid.Rows)
+        var codeLine = row.LJCGetString("CodeLine");
+        var codeGroup = row.LJCGetString("CodeGroup");
+        var name = row.LJCGetString("Name");
+        if (codeLine == dataRecord.CodeLine
+          && codeGroup == dataRecord.CodeGroup
+          && name == dataRecord.Name)
         {
-          var codeLine = row.LJCGetString("CodeLine");
-          var codeGroup = row.LJCGetString("CodeGroup");
-          var name = row.LJCGetString("Name");
-          if (codeLine == dataRecord.CodeLine
-            && codeGroup == dataRecord.CodeGroup
-            && name == dataRecord.Name)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            SolutionGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          SolutionGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
         CodeList.Cursor = Cursors.Default;
       }
@@ -108,6 +111,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Solution dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
       row.LJCSetString("CodeGroup", dataRecord.CodeGroup);
       row.LJCSetString("Name", dataRecord.Name);

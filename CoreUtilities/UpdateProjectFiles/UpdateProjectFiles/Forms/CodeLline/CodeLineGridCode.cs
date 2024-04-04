@@ -44,7 +44,6 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.WaitCursor;
       CodeLineGrid.LJCRowsClear();
 
-      //var codeLines = CodeLineManager.Load();
       var codeLines = CodeLines;
       if (NetCommon.HasItems(codeLines))
       {
@@ -60,6 +59,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(CodeLine dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       var retValue = CodeLineGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(CodeLineGrid, dataRecord);
@@ -71,19 +73,19 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
+      CodeList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in CodeLineGrid.Rows)
       {
-        CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in CodeLineGrid.Rows)
+        var rowID = row.LJCGetString("Name");
+        if (rowID == dataRecord.Name)
         {
-          var rowID = row.LJCGetString("Name");
-          if (rowID == dataRecord.Name)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            CodeLineGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          CodeLineGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
         CodeList.Cursor = Cursors.Default;
       }
@@ -103,6 +105,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, CodeLine dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       row.LJCSetString("Name", dataRecord.Name);
     }
     #endregion

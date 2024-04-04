@@ -4,9 +4,7 @@
 using LJCNetCommon;
 using LJCWinFormCommon;
 using ProjectFilesDAL;
-using System.Net.Configuration;
 using System.Windows.Forms;
-using static UpdateProjectFiles.ProjectGridCode;
 
 namespace UpdateProjectFiles
 {

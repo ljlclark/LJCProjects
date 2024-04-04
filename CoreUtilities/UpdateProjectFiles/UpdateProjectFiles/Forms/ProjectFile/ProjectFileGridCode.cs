@@ -62,6 +62,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(ProjectFile dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       var retValue = ProjectFileGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(ProjectFileGrid, dataRecord);
@@ -73,27 +76,27 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
+      CodeList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in ProjectFileGrid.Rows)
       {
-        CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ProjectFileGrid.Rows)
+        var codeLine = row.LJCGetString("SourceCodeLine");
+        var codeGroup = row.LJCGetString("SourceCodeGrouop");
+        var solution = row.LJCGetString("SourceSolution");
+        var project = row.LJCGetString("SourceProject");
+        var fileSpec = row.LJCGetString("SourceFileSpec");
+        if (codeLine == dataRecord.SourceCodeLine
+          && codeGroup == dataRecord.SourceCodeGroup
+          && solution == dataRecord.SourceSolution
+          && project == dataRecord.SourceProject
+          && fileSpec == dataRecord.SourceFilePath)
         {
-          var codeLine = row.LJCGetString("SourceCodeLine");
-          var codeGroup = row.LJCGetString("SourceCodeGrouop");
-          var solution = row.LJCGetString("SourceSolution");
-          var project = row.LJCGetString("SourceProject");
-          var fileSpec = row.LJCGetString("SourceFileSpec");
-          if (codeLine == dataRecord.SourceCodeLine
-            && codeGroup == dataRecord.SourceCodeGroup
-            && solution == dataRecord.SourceSolution
-            && project == dataRecord.SourceProject
-            && fileSpec == dataRecord.SourceFilePath)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ProjectFileGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ProjectFileGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
         CodeList.Cursor = Cursors.Default;
       }
@@ -113,6 +116,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, ProjectFile dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       row.LJCSetString("SourceCodeLine", dataRecord.SourceCodeLine);
       row.LJCSetString("SourceCodeGroup", dataRecord.SourceCodeGroup);
       row.LJCSetString("SourceSolution", dataRecord.SourceSolution);

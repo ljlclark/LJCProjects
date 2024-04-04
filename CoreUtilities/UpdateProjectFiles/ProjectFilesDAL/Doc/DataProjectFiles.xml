@@ -7,7 +7,7 @@
     <summary>
       Initializes an object instance.
     </summary>
-    <param name="dataHelper"></param>
+    <param name="data"></param>
   </DataProjectFilesC>
   <!-- Public Methods -->
   <GetFileSpec>
@@ -22,13 +22,19 @@
     <param name="fileName">The File name.</param>
     <returns>The FileSpec value.</returns>
   </GetFileSpec>
-  <ManageDependencies>
+  <ManageSolutionDependencies>
     <summary>
-      Clears or Updates the project dependencies.
+      Clears or Updates the Solution dependencies.
+    </summary>
+    <param name="solution"></param>
+  </ManageSolutionDependencies>
+  <ManageProjectDependencies>
+    <summary>
+      Clears or Updates the Project dependencies.
     </summary>
     <param name="parentKey">The ProjectFile parent key.</param>
     <param name="action">The action text.</param>
-  </ManageDependencies>
+  </ManageProjectDependencies>
   <GetProjectFileValues>
     <summary>
       Get the ProjectFile valus from a filespec.
@@ -51,46 +57,6 @@
     <param name="projectFile">The ProjectFile object.</param>
     <returns>The target file spec.</returns>
   </TargetFileSpec>
-  <!-- Check Object Required Properties -->
-  <HasProjectFileParentValues>
-    <summary>
-      Checks the ProjectFile ParentKey for required poperties.
-    </summary>
-    <param name="parentKey">The ParentKey object.</param>
-    <returns>true if it has the required proerties; otherwise false.</returns>
-  </HasProjectFileParentValues>
-  <HasProjectParentValues>
-    <summary>
-      Checks the Project ParentKey for required poperties.
-    </summary>
-    <param name="parentKey">The ParentKey object.</param>
-    <returns>true if it has the required proerties; otherwise false.</returns>
-  </HasProjectParentValues>
-  <HasSolutionParentValues>
-    <summary>
-      Checks the Solution ParentKey for required poperties.
-    </summary>
-    <param name="parentKey">The ParentKey object.</param>
-    <returns>true if it has the required proerties; otherwise false.</returns>
-  </HasSolutionParentValues>
-  <HasSourceValues>
-     <summary>
-      Checks the ProjectFile object for required Source properties.
-    </summary>
-    <param name="projectFile">The ProjectFile ojbect.</param>
-    <returns>
-      true if the required properties exist; otherwise false.
-    </returns>
-  </HasSourceValues>
-  <HasTargetValues>
-    <summary>
-      Checks the ProjectFile object for required Target path properties.
-    </summary>
-    <param name="projectFile">The ProjectFile ojbect.</param>
-    <returns>
-      true if the required properties exist; otherwise false.
-    </returns>
-  </HasTargetValues>
   <!-- Retrieve Object Methods -->
   <CodeGroup>
     <summary>
@@ -235,21 +201,52 @@
     <returns>The Solution path value.</returns>
   </SolutionPath>
   <!-- Create Parent Keys -->
-  <ProjectParentKey>
+  <ProjectFileParentKey>
     <summary>
-      Create Project parent key
+      Create ProjectFile parent key.
+    </summary>
+    <param name="project">The Project object.</param>
+    <returns>The ProjectFile parent key.</returns>
+  </ProjectFileParentKey>
+  <ProjectFileParentKey1>
+    <summary>
+      Create ProjectFile parent key.
     </summary>
     <param name="codeLineName">The CodeLine name.</param>
     <param name="codeGroupName">The CodeGroup name.</param>
     <param name="solutionName">The Solution name.</param>
-    <returns>The Projectparent key.</returns>
+    <param name="projectName">The Project name.</param>
+    <returns>The ProjectFile parent key.</returns>
+  </ProjectFileParentKey1>
+  <ProjectParentKey>
+    <summary>
+      Create Project parent key.
+    </summary>
+    <param name="solution">The CodeLine name.</param>
+    <returns>The Project ParentKey.</returns>
   </ProjectParentKey>
+  <ProjectParentKey1>
+    <summary>
+      Create Project parent key.
+    </summary>
+    <param name="codeLineName">The CodeLine name.</param>
+    <param name="codeGroupName">The CodeGroup name.</param>
+    <param name="solutionName">The Solution name.</param>
+    <returns>The Project ParentKey.</returns>
+  </ProjectParentKey1>
   <SolutionParentKey>
     <summary>
-      Create Solution parent key
+      Create Solution parent key.
+    </summary>
+    <param name="codeGroup">The CodeGroup object.</param>
+    <returns>The Solution parent key.</returns>
+  </SolutionParentKey>
+  <SolutionParentKey1>
+    <summary>
+      Create Solution parent key.
     </summary>
     <param name="codeLineName">The CodeLine name.</param>
     <param name="codeGroupName">The CodeGroup name.</param>
     <returns>The Solution parent key.</returns>
-  </SolutionParentKey>
+  </SolutionParentKey1>
 </items>

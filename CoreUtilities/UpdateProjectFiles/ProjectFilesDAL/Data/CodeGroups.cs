@@ -55,9 +55,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue;
 
-      var message = NetString.ArgError(null, codeLine, name);
-      NetString.ThrowArgError(message);
-
+      // Do not add duplicate of existing item.
       retValue = LJCRetrieve(codeLine, name);
       if (null == retValue)
       {
@@ -89,7 +87,11 @@ namespace ProjectFilesDAL
     {
       CodeGroups retValue = null;
 
-      if (NetString.HasValue(codeLine))
+      if (!NetString.HasValue(codeLine))
+      {
+        retValue = Clone();
+      }
+      else
       {
         var items = FindAll(x => x.CodeLine == codeLine);
         retValue = GetCollection(items);

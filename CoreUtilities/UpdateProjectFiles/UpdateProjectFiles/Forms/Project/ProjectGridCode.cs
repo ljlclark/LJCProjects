@@ -7,9 +7,6 @@ using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -66,6 +63,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Project dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       var retValue = ProjectGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(ProjectGrid, dataRecord);
@@ -77,28 +77,28 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
+      CodeList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in ProjectGrid.Rows)
       {
-        CodeList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ProjectGrid.Rows)
+        var codeLine = row.LJCGetString("CodeLine");
+        var codeGroup = row.LJCGetString("CodeGroup");
+        var solution = row.LJCGetString("Solution");
+        var name = row.LJCGetString("Name");
+        if (codeLine == dataRecord.CodeLine
+          && codeGroup == dataRecord.CodeGroup
+          && solution == dataRecord.Solution
+          && name == dataRecord.Name)
         {
-          var codeLine = row.LJCGetString("CodeLine");
-          var codeGroup = row.LJCGetString("CodeGroup");
-          var solution = row.LJCGetString("Solution");
-          var name = row.LJCGetString("Name");
-          if (codeLine == dataRecord.CodeLine
-            && codeGroup == dataRecord.CodeGroup
-            && solution == dataRecord.Solution
-            && name == dataRecord.Name)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ProjectGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ProjectGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
-        CodeList.Cursor = Cursors.Default;
       }
+      CodeList.Cursor = Cursors.Default;
       return retValue;
     }
 
@@ -115,6 +115,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Project dataRecord)
     {
+      var message = NetString.ArgError(null, dataRecord);
+      NetString.ThrowArgError(message);
+
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
       row.LJCSetString("CodeGroup", dataRecord.CodeGroup);
       row.LJCSetString("Solution", dataRecord.Solution);
@@ -247,7 +250,7 @@ namespace UpdateProjectFiles
       {
         // Data from items.
         var parentKey = CodeList.GetProjectFileParentKey();
-        DataHelper.ManageDependencies(parentKey, action.ToString());
+        DataHelper.ManageProjectDependencies(parentKey, action.ToString());
         var title = $"Project {action}";
         var message = $"Project Dependencies {action} is Complete";
         MessageBox.Show(message, title, MessageBoxButtons.OK

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // Solutions.cs
 using LJCNetCommon;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace ProjectFilesDAL
@@ -55,10 +54,7 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
-      var message = NetString.ArgError(null, parentKey, name);
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
-
+      // Do not add duplicate of existing item.
       var retValue = LJCRetrieve(parentKey, name);
       if (null == retValue)
       {
@@ -88,12 +84,20 @@ namespace ProjectFilesDAL
 
     // Retrieves a collection that match the supplied values.
     /// <include path='items/LJCLoad/*' file='../Doc/Solutions.xml'/>
-    public Solutions LJCLoad(SolutionParentKey parentKey)
+    public Solutions LJCLoad(SolutionParentKey parentKey = null)
     {
       Solutions retValue = null;
 
-      if (parentKey != null)
+      if (null == parentKey)
       {
+        retValue = Clone();
+      }
+      else
+      {
+        string message = "";
+        Solution.ParentKeyValues(ref message, parentKey);
+        NetString.ThrowArgError(message);
+
         var items = FindAll(x =>
           x.CodeLine == parentKey.CodeLine
           && x.CodeGroup == parentKey.CodeGroup);

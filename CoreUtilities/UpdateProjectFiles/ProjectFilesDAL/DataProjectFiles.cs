@@ -13,12 +13,12 @@ namespace ProjectFilesDAL
 
     // Initializes an object instance.
     /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
-    public DataProjectFiles(ProjectFilesData dataHelper)
+    public DataProjectFiles(ProjectFilesData data)
     {
-      var message = NetString.ArgError(null, dataHelper);
+      var message = NetString.ArgError(null, data);
       NetString.ThrowArgError(message);
 
-      DataHelper = dataHelper;
+      Data = data;
     }
     #endregion
 
@@ -67,9 +67,27 @@ namespace ProjectFilesDAL
       return retValue;
     }
 
-    // Clears or Updates the project dependencies.
-    /// <include path='items/ManageDependencies/*' file='Doc/DataProjectFiles.xml'/>
-    public void ManageDependencies(ProjectFileParentKey parentKey
+    // Clears or Updates the Solution dependencies.
+    /// <include path='items/ManageSolutionDependencies/*' file='Doc/DataProjectFiles.xml'/>
+    public void ManageSolutionDependencies(Solution solution)
+    {
+      var message = NetString.ArgError(null, solution);
+      ProjectFilesDAL.Solution.ItemValues(ref message, solution);
+      NetString.ThrowArgError(message);
+
+      var items = Data.Projects;
+      var itemParentKey = ProjectParentKey(solution);
+      var projects = items.LJCLoad(itemParentKey);
+      foreach (Project project in projects)
+      {
+        var projectFileParentKey = ProjectFileParentKey(project);
+        ManageProjectDependencies(projectFileParentKey);
+      }
+    }
+
+    // Clears or Updates the Project dependencies.
+    /// <include path='items/ManageProjectDependencies1/*' file='Doc/DataProjectFiles.xml'/>
+    public void ManageProjectDependencies(ProjectFileParentKey parentKey
       , string action = null)
     {
       var message = NetString.ArgError(null, parentKey);
@@ -267,7 +285,7 @@ namespace ProjectFilesDAL
       var message = NetString.ArgError(null, codeLineName, name);
       NetString.ThrowArgError(message);
 
-      var codeGroups = DataHelper.CodeGroups;
+      var codeGroups = Data.CodeGroups;
       var retValue = codeGroups.LJCRetrieve(codeLineName, name);
       return retValue;
     }
@@ -279,7 +297,7 @@ namespace ProjectFilesDAL
       var message = NetString.ArgError(null, codeLineName, path);
       NetString.ThrowArgError(message);
 
-      var codeGroups = DataHelper.CodeGroups;
+      var codeGroups = Data.CodeGroups;
       var retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
       return retValue;
     }
@@ -291,7 +309,7 @@ namespace ProjectFilesDAL
       var message = NetString.ArgError(null, name);
       NetString.ThrowArgError(message);
 
-      var codeLines = DataHelper.CodeLines;
+      var codeLines = Data.CodeLines;
       var retValue = codeLines.LJCRetrieve(name);
       return retValue;
     }
@@ -303,7 +321,7 @@ namespace ProjectFilesDAL
       var message = NetString.ArgError(null, path);
       NetString.ThrowArgError(message);
 
-      var codeLines = DataHelper.CodeLines;
+      var codeLines = Data.CodeLines;
       var retValue = codeLines.LJCRetrieveWithPath(path);
       return retValue;
     }
@@ -316,7 +334,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var projects = DataHelper.Projects;
+      var projects = Data.Projects;
       var retValue = projects.LJCRetrieve(parentKey, name);
       return retValue;
     }
@@ -329,7 +347,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var projects = DataHelper.Projects;
+      var projects = Data.Projects;
       var retValue = projects.LJCRetrieveWithPath(parentKey, path);
       return retValue;
     }
@@ -343,7 +361,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var projectFiles = DataHelper.ProjectFiles;
+      var projectFiles = Data.ProjectFiles;
       var retValue = projectFiles.LJCRetrieve(parentKey, name);
       return retValue;
     }
@@ -356,7 +374,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var projectFiles = DataHelper.ProjectFiles;
+      var projectFiles = Data.ProjectFiles;
       var retValue = projectFiles.LJCLoad(parentKey);
       return retValue;
     }
@@ -369,7 +387,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var solutions = DataHelper.Solutions;
+      var solutions = Data.Solutions;
       var retValue = solutions.LJCRetrieve(parentKey, name);
       return retValue;
     }
@@ -382,7 +400,7 @@ namespace ProjectFilesDAL
       ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
-      var solutions = DataHelper.Solutions;
+      var solutions = Data.Solutions;
       var retValue = solutions.LJCRetrieveWithPath(parentKey, path);
       return retValue;
     }
@@ -538,8 +556,51 @@ namespace ProjectFilesDAL
 
     #region Create Parent Keys
 
+    // Create ProjectFile parent key.
+    /// <include path='items/ProjectFileParentKey/*' file='Doc/DataProjectFiles.xml'/>
+    public ProjectFileParentKey ProjectFileParentKey(Project project)
+    {
+      var message = NetString.ArgError(null, project);
+      NetString.ThrowArgError(message);
+
+      var retValue = ProjectFileParentKey(project.CodeLine, project.CodeGroup
+        , project.Solution, project.Name);
+      return retValue;
+    }
+
+    // Create ProjectFile parent key.
+    /// <include path='items/ProjectFileParentKey1/*' file='Doc/DataProjectFiles.xml'/>
+    public ProjectFileParentKey ProjectFileParentKey(string codeLineName
+      , string codeGroupName, string solutionName, string projectName)
+    {
+      var message = NetString.ArgError(null, codeLineName, codeGroupName
+        , solutionName, projectName);
+      NetString.ThrowArgError(message);
+
+      var retValue = new ProjectFileParentKey()
+      {
+        CodeLine = codeLineName,
+        CodeGroup = codeGroupName,
+        Solution = solutionName,
+        Project = projectName
+      };
+      return retValue;
+    }
+
     // Create Project parent key
     /// <include path='items/ProjectParentKey/*' file='Doc/DataProjectFiles.xml'/>
+    public ProjectParentKey ProjectParentKey(Solution solution)
+    {
+      var message = NetString.ArgError(null, solution);
+      NetString.ThrowArgError(message);
+
+      var retValue = ProjectParentKey(solution.CodeLine, solution.CodeGroup
+        , solution.Name);
+      return retValue;
+    }
+
+    // Create Project parent key
+    /// <include path='items/ProjectParentKey1/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectParentKey ProjectParentKey(string codeLineName
       , string codeGroupName, string solutionName)
     {
@@ -558,6 +619,17 @@ namespace ProjectFilesDAL
 
     // Create Solution parent key
     /// <include path='items/SolutionParentKey/*' file='Doc/DataProjectFiles.xml'/>
+    public SolutionParentKey SolutionParentKey(CodeGroup codeGroup)
+    {
+      var message = NetString.ArgError(null, codeGroup);
+      NetString.ThrowArgError(message);
+
+      var retValue = SolutionParentKey(codeGroup.CodeLine, codeGroup.Name);
+      return retValue;
+    }
+
+    // Create Solution parent key
+    /// <include path='items/SolutionParentKey1/*' file='Doc/DataProjectFiles.xml'/>
     public SolutionParentKey SolutionParentKey(string codeLineName
       , string codeGroupName)
     {
@@ -576,7 +648,7 @@ namespace ProjectFilesDAL
     #region Properties
 
     /// <summary>Gets or sets the Data object.</summary>
-    public ProjectFilesData DataHelper { get; set; }
+    public ProjectFilesData Data { get; set; }
     #endregion
   }
 }

@@ -162,9 +162,6 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Public Methods
-    #endregion
-
     #region Search and Sort Methods
 
     // Retrieve the collection element.

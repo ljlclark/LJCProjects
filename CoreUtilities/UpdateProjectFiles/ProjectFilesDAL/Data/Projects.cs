@@ -56,10 +56,7 @@ namespace ProjectFilesDAL
     {
       Project retValue;
 
-      var message = NetString.ArgError(null, parentKey, name);
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
-
+      // Do not add duplicate of existing item.
       retValue = LJCRetrieve(parentKey, name);
       if (null == retValue)
       {
@@ -89,12 +86,20 @@ namespace ProjectFilesDAL
 
     // Retrieves items that match the supplied values.
     /// <include path='items/LJCLoad/*' file='Doc/Project.xml'/>
-    public Projects LJCLoad(ProjectParentKey parentKey)
+    public Projects LJCLoad(ProjectParentKey parentKey = null)
     {
       Projects retValue = null;
 
-      if (parentKey != null)
+      if (null == parentKey)
       {
+        retValue = Clone();
+      }
+      else
+      {
+        string message = "";
+        Project.ParentKeyValues(ref message, parentKey);
+        NetString.ThrowArgError(message);
+
         var items = FindAll(x =>
           x.CodeLine == parentKey.CodeLine
           && x.CodeGroup == parentKey.CodeGroup

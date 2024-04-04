@@ -55,9 +55,7 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue;
 
-      var message = NetString.ArgError(null, name);
-      NetString.ThrowArgError(message);
-
+      // Do not add duplicate of existing item.
       retValue = LJCRetrieve(name);
       if (null == retValue)
       {
