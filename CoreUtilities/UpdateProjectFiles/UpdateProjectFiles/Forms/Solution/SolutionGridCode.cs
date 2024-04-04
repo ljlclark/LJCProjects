@@ -43,6 +43,11 @@ namespace UpdateProjectFiles
     internal void DataRetrieve(SolutionParentKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
+      if (CodeGroupGrid.CurrentRow is LJCGridRow row)
+      {
+        var codeGroupName = row.LJCGetString("Name");
+        CodeList.GroupCombo.Text = codeGroupName;
+      }
       SolutionGrid.LJCRowsClear();
 
       //var solutions = SolutionManager.Load(parentKey);
@@ -232,14 +237,24 @@ namespace UpdateProjectFiles
       CodeList.Cursor = Cursors.Default;
     }
 
-    // Clears the solution dependencies
-    internal void ClearDependencies()
-    {
-    }
-
     // Updates the solution dependencies.
-    internal void UpdateDependencies()
+    internal void DoDependencies(DependencyAction action)
     {
+      if (SolutionGrid.CurrentRow is LJCGridRow _)
+      {
+        var dataLib = new DataProjectFiles(Data);
+        var projectParentKey = CodeList.GetProjectParentKey();
+        var projects = Data.Projects.LJCLoad(projectParentKey);
+        foreach (Project project in projects)
+        {
+          var fileParentKey = dataLib.ProjectFileParentKey(project);
+          dataLib.ManageProjectDependencies(fileParentKey, action.ToString());
+        }
+        var title = $"Solution Projects {action}";
+        var message = $"Solution Project Dependencies {action} is Complete";
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Information);
+      }
     }
 
     // Adds new row or updates row with record values.

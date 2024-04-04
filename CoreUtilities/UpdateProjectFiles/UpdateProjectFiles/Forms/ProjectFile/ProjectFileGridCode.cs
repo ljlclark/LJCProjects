@@ -44,6 +44,11 @@ namespace UpdateProjectFiles
     internal void DataRetrieve(ProjectFileParentKey parentKey = null)
     {
       CodeList.Cursor = Cursors.WaitCursor;
+      if (ProjectGrid.CurrentRow is LJCGridRow row)
+      {
+        var projectName = row.LJCGetString("Name");
+        CodeList.ProjectCombo.Text = projectName;
+      }
       ProjectFileGrid.LJCRowsClear();
 
       //var projectFiles = ProjectFileManager.Load(parentKey);

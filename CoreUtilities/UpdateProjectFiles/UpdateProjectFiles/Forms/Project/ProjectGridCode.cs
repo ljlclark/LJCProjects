@@ -248,7 +248,6 @@ namespace UpdateProjectFiles
     {
       if (SolutionGrid.CurrentRow is LJCGridRow _)
       {
-        // Data from items.
         var parentKey = CodeList.GetProjectFileParentKey();
         DataHelper.ManageProjectDependencies(parentKey, action.ToString());
         var title = $"Project {action}";

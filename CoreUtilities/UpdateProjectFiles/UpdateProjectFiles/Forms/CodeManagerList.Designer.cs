@@ -94,6 +94,7 @@
       this.ProjectUpdate = new System.Windows.Forms.ToolStripMenuItem();
       this.ProjectHeader = new LJCWinFormControls.LJCHeaderBox();
       this.FileTab = new System.Windows.Forms.TabPage();
+      this.ljcHeaderBox1 = new LJCWinFormControls.LJCHeaderBox();
       this.ProjectFileGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ProjectFileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ProjectFileHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,7 +111,6 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
-      this.ljcHeaderBox1 = new LJCWinFormControls.LJCHeaderBox();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -817,6 +817,20 @@
       this.FileTab.Text = "File";
       this.FileTab.UseVisualStyleBackColor = true;
       // 
+      // ljcHeaderBox1
+      // 
+      this.ljcHeaderBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ljcHeaderBox1.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.ljcHeaderBox1.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ljcHeaderBox1.Location = new System.Drawing.Point(0, 41);
+      this.ljcHeaderBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ljcHeaderBox1.Name = "ljcHeaderBox1";
+      this.ljcHeaderBox1.Size = new System.Drawing.Size(680, 32);
+      this.ljcHeaderBox1.TabIndex = 4;
+      this.ljcHeaderBox1.TabStop = false;
+      this.ljcHeaderBox1.Text = "ProjectFile";
+      // 
       // ProjectFileGrid
       // 
       this.ProjectFileGrid.AllowDrop = true;
@@ -978,20 +992,6 @@
       this.TileTabsMove.Size = new System.Drawing.Size(163, 32);
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
-      // 
-      // ljcHeaderBox1
-      // 
-      this.ljcHeaderBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.ljcHeaderBox1.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ljcHeaderBox1.LJCEndColor = System.Drawing.Color.LightSkyBlue;
-      this.ljcHeaderBox1.Location = new System.Drawing.Point(0, 41);
-      this.ljcHeaderBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ljcHeaderBox1.Name = "ljcHeaderBox1";
-      this.ljcHeaderBox1.Size = new System.Drawing.Size(680, 32);
-      this.ljcHeaderBox1.TabIndex = 4;
-      this.ljcHeaderBox1.TabStop = false;
-      this.ljcHeaderBox1.Text = "ProjectFile";
       // 
       // CodeManagerList
       // 

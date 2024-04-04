@@ -148,13 +148,13 @@ namespace UpdateProjectFiles
     // Clears the solution dependencies
     private void SolutionClear_Click(object sender, System.EventArgs e)
     {
-      mSolutionGridCode.ClearDependencies();
+      mSolutionGridCode.DoDependencies(DependencyAction.Delete);
     }
 
     // Updates the solution dependencies.
     private void SolutionUpdate_Click(object sender, System.EventArgs e)
     {
-      mSolutionGridCode.UpdateDependencies();
+      mSolutionGridCode.DoDependencies(DependencyAction.Copy);
     }
     #endregion
 
