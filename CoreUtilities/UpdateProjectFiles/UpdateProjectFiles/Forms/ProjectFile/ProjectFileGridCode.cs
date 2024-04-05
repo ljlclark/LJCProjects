@@ -68,7 +68,8 @@ namespace UpdateProjectFiles
     private LJCGridRow RowAdd(ProjectFile dataRecord)
     {
       string message = "";
-      NetString.ArgError(ref message, dataRecord);
+      string context = ClassContext + "RowAdd()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       var retValue = ProjectFileGrid.LJCRowAdd();
@@ -83,7 +84,8 @@ namespace UpdateProjectFiles
       bool retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, dataRecord);
+      string context = ClassContext + "RowSelect()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -124,7 +126,8 @@ namespace UpdateProjectFiles
     private void SetStoredValues(LJCGridRow row, ProjectFile dataRecord)
     {
       string message = "";
-      NetString.ArgError(ref message, dataRecord);
+      string context = ClassContext + "SetStoredValues()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("SourceCodeLine", dataRecord.SourceCodeLine);
@@ -329,6 +332,11 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ProjectGrid { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "UpdateProjectFiles.CodeFileGridCode.";
     #endregion
   }
 }

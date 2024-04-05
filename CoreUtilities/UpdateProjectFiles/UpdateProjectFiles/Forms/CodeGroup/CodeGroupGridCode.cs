@@ -6,7 +6,6 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -63,8 +62,8 @@ namespace UpdateProjectFiles
     private LJCGridRow RowAdd(CodeGroup dataRecord)
     {
       string message = "";
-      NetString.ArgError(ref message, dataRecord
-        , "CodeGroupGridCode.RowAdd() dataRecord");
+      string context = ClassContext + "RowAdd()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       var retValue = CodeGroupGrid.LJCRowAdd();
@@ -79,8 +78,8 @@ namespace UpdateProjectFiles
       bool retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, dataRecord
-        , "CodeGroupGridCode.RowSelect() dataRecord");
+      string context = ClassContext + "RowSelect()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -115,7 +114,8 @@ namespace UpdateProjectFiles
     private void SetStoredValues(LJCGridRow row, CodeGroup dataRecord)
     {
       string message = "";
-      NetString.ArgError(ref message, dataRecord);
+      string context = ClassContext + "SetStoredValues()";
+      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
@@ -288,6 +288,11 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Managers reference.
     private ManagersProjectFiles Managers { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "UpdateProjectFiles.CodeGroupGridCode.";
     #endregion
   }
 }
