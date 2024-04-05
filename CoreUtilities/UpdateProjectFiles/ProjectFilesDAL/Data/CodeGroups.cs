@@ -105,7 +105,10 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      var message = NetString.ArgError(null, codeLine, name);
+      string message = "";
+      string context = ClassContext + "LJCRetrieve()";
+      NetString.ArgError(ref message, codeLine, context);
+      NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
       LJCSortUnique();
@@ -128,7 +131,10 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      var message = NetString.ArgError(null, codeLine, path);
+      string message = "";
+      string context = ClassContext + "LJCRetrieveWithPath()";
+      NetString.ArgError(ref message, codeLine,context);
+      NetString.ArgError(ref message, path);
       NetString.ThrowArgError(message);
 
       var comparer = new CodeGroupPathComparer();
@@ -150,7 +156,9 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCUpdate/*' file='Doc/CodeGroups.xml'/>
     public void LJCUpdate(CodeGroup codeGroup)
     {
-      var message = NetString.ArgError(null, codeGroup);
+      string message = "";
+      string context = ClassContext + "LJCUpdate()";
+      NetString.ArgError(ref message, codeGroup, context);
       CodeGroup.ItemValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -170,7 +178,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Parent and Path values.</summary>
     public void LJCSortPath(CodeGroupPathComparer comparer)
     {
-      var message = NetString.ArgError(null, comparer);
+      string message = "";
+      string context = ClassContext + "LJCSortPath()";
+      NetString.ArgError(ref message, comparer, context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount
@@ -205,6 +215,7 @@ namespace ProjectFilesDAL
       Unique,
       Path
     }
+    private const string ClassContext = "ProjectFilesDAL.CodeGroups.";
     #endregion
   }
 }

@@ -2,11 +2,42 @@
 // Licensed under the MIT License.
 // Data.cs
 
+using LJCNetCommon;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+
 namespace ProjectFilesDAL
 {
   /// <summary>Gets the Data collections.</summary>
   public class ProjectFilesData
   {
+
+    #region Private Methods
+
+    // Sets the Managers object.
+    private void SetManagers()
+    {
+      if (null == mManagers)
+      {
+        var values = ValuesProjectFiles.Instance;
+        if (NetString.HasValue(values.Errors))
+        {
+          NetString.ThrowArgError(values.Errors);
+        }
+        mManagers = values.Managers;
+      }
+      if (null == mManagers)
+      {
+        string message = "";
+        string context = ClassContext + "SetManagers()";
+        NetString.ArgError(ref message, mManagers, "mManagers", context);
+        NetString.ThrowArgError(message);
+      }
+    }
+    #endregion
+
+    #region Properties
+
     /// <summary>Gets the CodeGroups collection.</summary>
     public CodeGroups CodeGroups
     {
@@ -126,16 +157,12 @@ namespace ProjectFilesDAL
       }
     }
     private Solutions mSolutions;
+    #endregion
 
-    // Sets the Managers object.
-    private void SetManagers()
-    {
-      if (null == mManagers)
-      {
-        var values = ValuesProjectFiles.Instance;
-        mManagers = values.Managers;
-      }
-    }
+    #region Class Data
+
     private ManagersProjectFiles mManagers;
+    private const string ClassContext = "ProjectFilesDAL.ProjectFilesData.";
+    #endregion
   }
 }

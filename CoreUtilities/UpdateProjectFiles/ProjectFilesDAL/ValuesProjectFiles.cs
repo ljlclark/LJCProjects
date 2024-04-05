@@ -22,16 +22,15 @@ namespace ProjectFilesDAL
 
     #region Public Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="fileSpec"></param>
+    /// <summary>Configures the settings.</summary>
+    /// <param name="fileSpec">The config FileSpec.</param>
     public void SetConfigFileSpec(string fileSpec)
     {
-      var message = NetString.ArgError(null, fileSpec);
+      Errors = null;
       if (!File.Exists(fileSpec))
       {
-        message += $"File {fileSpec} was not found.";
+        string context = ClassContext + "SetConfigFileSpec()";
+        var message = $"{context}\r\nFile {fileSpec} was not found.\r\n";
         Errors += message;
       }
       else
@@ -96,6 +95,8 @@ namespace ProjectFilesDAL
     // The singleton instance.
     private static readonly ValuesProjectFiles mInstance
       = new ValuesProjectFiles();
+
+    private const string ClassContext = "ProjectFilesDAL.ValuesProjectFiles.";
     #endregion
   }
 }

@@ -31,7 +31,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Add(string codeLineName, string name, string path)
     {
-      var message = NetString.ArgError(null, codeLineName, name);
+      string message = "";
+      NetString.ArgError(ref message, codeLineName);
+      NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
       var codeGroup = CreateDataObject(codeLineName, name, path);
@@ -47,7 +49,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeGroupManager.xml'/>
     public void Delete(string codeLineName, string name)
     {
-      var message = NetString.ArgError(null, codeLineName, name);
+      string message = "";
+      NetString.ArgError(ref message, codeLineName);
+      NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
@@ -118,7 +122,8 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      var message = NetString.ArgError(null, codeLineName);
+      string message = "";
+      NetString.ArgError(ref message, codeLineName);
       NetString.ThrowArgError(message);
 
       if (NetString.HasValue(name))
@@ -163,7 +168,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Update(CodeGroup codeGroup)
     {
-      var message = NetString.ArgError(null, codeGroup);
+      string message = "";
+      NetString.ArgError(ref message, codeGroup);
       CodeGroup.ItemValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -189,7 +195,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
-      var message = NetString.ArgError(null, fileName);
+      string message = "";
+      NetString.ArgError(ref message, fileName);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(128);
@@ -208,7 +215,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeGroupManager.xml'/>
     public string CreateRecord(CodeGroup codeGroup)
     {
-      var message = NetString.ArgError(null, codeGroup);
+      string message = "";
+      NetString.ArgError(ref message, codeGroup);
       CodeGroup.ItemParentValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -260,7 +268,8 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void RecreateFile(CodeGroups codeGroups)
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -284,7 +293,8 @@ namespace ProjectFilesDAL
     /// <summary>Write a backup file.</summary>
     public void WriteBackup()
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -330,7 +340,8 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      var message = NetString.ArgError(null, codeGroup);
+      string message = "";
+      NetString.ArgError(ref message, codeGroup);
       CodeGroup.ItemParentValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 

@@ -265,13 +265,13 @@ namespace UpdateProjectFiles
     // Selects the Source File info.
     private void DetailSource_Click(object sender, EventArgs e)
     {
-      var dataHelper = new DataProjectFiles(Data);
+      var dataLib = new DataProjectFiles(Data);
       var codeLineName = Trim(TargetCodeLineText);
       var codeGroupName = Trim(TargetCodeGroupText);
       var solutionName = Trim(TargetSolutionText);
       var projectName = Trim(TargetProjectText);
       var targetFilePath = Trim(TargetFilePathText);
-      var folder = dataHelper.GetFileSpec(codeLineName, codeGroupName
+      var folder = dataLib.GetFileSpec(codeLineName, codeGroupName
         , solutionName, projectName, targetFilePath);
 
       var filter = "DLLs(*.dll)|*.dll|All files(*.*)|*.*";
@@ -279,7 +279,7 @@ namespace UpdateProjectFiles
       var fileSpec = FormCommon.SelectFile(filter, folder, fileName);
       if (fileSpec != null)
       {
-        var projectFile = dataHelper.ProjectFileValues(fileSpec, targetFilePath);
+        var projectFile = dataLib.ProjectFileValues(fileSpec, targetFilePath);
         if (projectFile != null)
         {
           FileNameText.Text = projectFile.FileName;

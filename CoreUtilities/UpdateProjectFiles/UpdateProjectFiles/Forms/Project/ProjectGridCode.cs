@@ -33,7 +33,7 @@ namespace UpdateProjectFiles
     {
       Data = CodeList.Data;
       Projects = Data.Projects;
-      DataHelper = new DataProjectFiles(Data);
+      DataLib = new DataProjectFiles(Data);
       Managers = CodeList.Managers;
       ProjectManager = Managers.ProjectManager;
     }
@@ -63,7 +63,8 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Project dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       var retValue = ProjectGrid.LJCRowAdd();
@@ -77,7 +78,8 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -115,7 +117,8 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Project dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
@@ -246,10 +249,10 @@ namespace UpdateProjectFiles
     // Updates the solution dependencies.
     internal void DoDependencies(DependencyAction action)
     {
-      if (SolutionGrid.CurrentRow is LJCGridRow _)
+      if (ProjectGrid.CurrentRow is LJCGridRow _)
       {
-        var parentKey = CodeList.GetProjectFileParentKey();
-        DataHelper.ManageProjectDependencies(parentKey, action.ToString());
+        var fileParentKey = CodeList.GetProjectFileParentKey();
+        DataLib.ProjectDependencies(fileParentKey, action.ToString());
         var title = $"Project {action}";
         var message = $"Project Dependencies {action} is Complete";
         MessageBox.Show(message, title, MessageBoxButtons.OK
@@ -308,7 +311,7 @@ namespace UpdateProjectFiles
     #region Properties
 
     // Gets or sets the Data object.
-    private DataProjectFiles DataHelper { get; set; }
+    private DataProjectFiles DataLib { get; set; }
 
     // Gets or sets the Parent List reference.
     private CodeManagerList CodeList { get; set; }

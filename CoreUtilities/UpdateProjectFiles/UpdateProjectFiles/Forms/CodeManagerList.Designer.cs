@@ -1,4 +1,6 @@
-﻿namespace UpdateProjectFiles
+﻿using System.Security.Principal;
+
+namespace UpdateProjectFiles
 {
   partial class CodeManagerList
   {
@@ -62,7 +64,7 @@
       this.CodeGroupRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.CodeGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.SolutionTab = new System.Windows.Forms.TabPage();
-      this.GroupCombo = new LJCWinFormControls.LJCItemCombo();
+      this.GroupText = new System.Windows.Forms.TextBox();
       this.GroupLabel = new System.Windows.Forms.Label();
       this.SolutionSplit = new System.Windows.Forms.SplitContainer();
       this.SolutionHeader = new LJCWinFormControls.LJCHeaderBox();
@@ -106,7 +108,7 @@
       this.ProjectFileRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
       this.ProjectFileExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.ProjectCombo = new LJCWinFormControls.LJCItemCombo();
+      this.ProjectText = new System.Windows.Forms.TextBox();
       this.ProjectLabel = new System.Windows.Forms.Label();
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -459,7 +461,7 @@
       // 
       // SolutionTab
       // 
-      this.SolutionTab.Controls.Add(this.GroupCombo);
+      this.SolutionTab.Controls.Add(this.GroupText);
       this.SolutionTab.Controls.Add(this.GroupLabel);
       this.SolutionTab.Controls.Add(this.SolutionSplit);
       this.SolutionTab.Location = new System.Drawing.Point(4, 29);
@@ -470,12 +472,12 @@
       this.SolutionTab.Text = "Solution";
       this.SolutionTab.UseVisualStyleBackColor = true;
       // 
-      // GroupCombo
+      // GroupText
       // 
-      this.GroupCombo.Location = new System.Drawing.Point(107, 6);
-      this.GroupCombo.Name = "GroupCombo";
-      this.GroupCombo.Size = new System.Drawing.Size(500, 28);
-      this.GroupCombo.TabIndex = 1;
+      this.GroupText.Location = new System.Drawing.Point(107, 6);
+      this.GroupText.Name = "GroupText";
+      this.GroupText.Size = new System.Drawing.Size(500, 26);
+      this.GroupText.TabIndex = 1;
       // 
       // GroupLabel
       // 
@@ -808,7 +810,7 @@
       // 
       this.FileTab.Controls.Add(this.ljcHeaderBox1);
       this.FileTab.Controls.Add(this.ProjectFileGrid);
-      this.FileTab.Controls.Add(this.ProjectCombo);
+      this.FileTab.Controls.Add(this.ProjectText);
       this.FileTab.Controls.Add(this.ProjectLabel);
       this.FileTab.Location = new System.Drawing.Point(4, 29);
       this.FileTab.Name = "FileTab";
@@ -950,12 +952,12 @@
       this.ProjectFileExit.Size = new System.Drawing.Size(200, 32);
       this.ProjectFileExit.Text = "E&xit";
       // 
-      // ProjectCombo
+      // ProjectText
       // 
-      this.ProjectCombo.Location = new System.Drawing.Point(107, 6);
-      this.ProjectCombo.Name = "ProjectCombo";
-      this.ProjectCombo.Size = new System.Drawing.Size(500, 28);
-      this.ProjectCombo.TabIndex = 1;
+      this.ProjectText.Location = new System.Drawing.Point(107, 6);
+      this.ProjectText.Name = "ProjectText";
+      this.ProjectText.Size = new System.Drawing.Size(500, 26);
+      this.ProjectText.TabIndex = 1;
       // 
       // ProjectLabel
       // 
@@ -1018,6 +1020,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.CodeGroupGrid)).EndInit();
       this.CodeGroupMenu.ResumeLayout(false);
       this.SolutionTab.ResumeLayout(false);
+      this.SolutionTab.PerformLayout();
       this.SolutionSplit.Panel1.ResumeLayout(false);
       this.SolutionSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SolutionSplit)).EndInit();
@@ -1027,6 +1030,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.ProjectGrid)).EndInit();
       this.ProjectMenu.ResumeLayout(false);
       this.FileTab.ResumeLayout(false);
+      this.FileTab.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ProjectFileGrid)).EndInit();
       this.ProjectFileMenu.ResumeLayout(false);
       this.TileTabsMenu.ResumeLayout(false);
@@ -1045,14 +1049,14 @@
     internal LJCWinFormControls.LJCDataGrid CodeGroupGrid;
     private LJCWinFormControls.LJCHeaderBox CodeGroupHeader;
     private System.Windows.Forms.TabPage SolutionTab;
-    internal LJCWinFormControls.LJCItemCombo GroupCombo;
+    internal System.Windows.Forms.TextBox GroupText;
     private System.Windows.Forms.Label GroupLabel;
     private System.Windows.Forms.SplitContainer SolutionSplit;
     internal LJCWinFormControls.LJCDataGrid SolutionGrid;
     internal LJCWinFormControls.LJCDataGrid ProjectGrid;
     private LJCWinFormControls.LJCHeaderBox ProjectHeader;
     private System.Windows.Forms.TabPage FileTab;
-    internal LJCWinFormControls.LJCItemCombo ProjectCombo;
+    internal System.Windows.Forms.TextBox ProjectText;
     private System.Windows.Forms.Label ProjectLabel;
     internal LJCWinFormControls.LJCDataGrid ProjectFileGrid;
     private System.Windows.Forms.ContextMenuStrip CodeLineMenu;

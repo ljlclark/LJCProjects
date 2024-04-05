@@ -6,6 +6,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using ProjectFilesDAL;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using static UpdateProjectFiles.CodeManagerList;
 
@@ -61,7 +62,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(CodeGroup dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord
+        , "CodeGroupGridCode.RowAdd() dataRecord");
       NetString.ThrowArgError(message);
 
       var retValue = CodeGroupGrid.LJCRowAdd();
@@ -75,7 +78,9 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord
+        , "CodeGroupGridCode.RowSelect() dataRecord");
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -109,7 +114,8 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, CodeGroup dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("CodeLine", dataRecord.CodeLine);

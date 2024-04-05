@@ -32,8 +32,12 @@ namespace ProjectFilesDAL
     public ProjectFile Add(ProjectFileParentKey parentKey, ProjectFileParentKey sourceKey
       , string fileName, string sourceFilePath, string targetFilePath)
     {
-      var message = NetString.ArgError(null, parentKey, sourceKey, fileName
-        , sourceFilePath, targetFilePath);
+      string message = "";
+      NetString.ArgError(ref message, parentKey);
+      NetString.ArgError(ref message, sourceKey);
+      NetString.ArgError(ref message, fileName);
+      NetString.ArgError(ref message, sourceFilePath);
+      NetString.ArgError(ref message, targetFilePath);
       ProjectFile.ParentKeyValues(ref message, parentKey);
       ProjectFile.ParentKeyValues(ref message, sourceKey);
       NetString.ThrowArgError(message);
@@ -52,7 +56,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/ProjectFileManager.xml'/>
     public void Delete(ProjectFileParentKey parentKey, string fileName)
     {
-      var message = NetString.ArgError(null, parentKey, fileName);
+      string message = "";
+      NetString.ArgError(ref message, parentKey);
+      NetString.ArgError(ref message, fileName);
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -129,7 +135,8 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      var message = NetString.ArgError(null, parentKey);
+      string message = "";
+      NetString.ArgError(ref message, parentKey);
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -177,7 +184,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFile Update(ProjectFile projectFile)
     {
-      var message = NetString.ArgError(null, projectFile);
+      string message = "";
+      NetString.ArgError(ref message, projectFile);
       ProjectFile.ItemValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -204,7 +212,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void CreateFile(string fileName, ProjectFiles projectFiles)
     {
-      var message = NetString.ArgError(null, fileName);
+      string message = "";
+      NetString.ArgError(ref message, fileName);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(256);
@@ -235,7 +244,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/ProjectFileManager.xml'/>
     public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
-      var message = NetString.ArgError(null, projectFile);
+      string message = "";
+      NetString.ArgError(ref message, projectFile);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -253,7 +263,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/ProjectFileManager.xml'/>
     public string CreateRecord(ProjectFile projectFile)
     {
-      var message = NetString.ArgError(null, projectFile);
+      string message = "";
+      NetString.ArgError(ref message, projectFile);
       ProjectFile.ItemValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -353,7 +364,8 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/ProjectFileManager.xml'/>
     public void RecreateFile(ProjectFiles projectFiles)
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -377,7 +389,8 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -443,7 +456,8 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      var message = NetString.ArgError(null, projectFile);
+      string message = "";
+      NetString.ArgError(ref message, projectFile);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 

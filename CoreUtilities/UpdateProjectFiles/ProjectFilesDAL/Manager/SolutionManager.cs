@@ -32,7 +32,9 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path)
     {
-      var message = NetString.ArgError(null, parentKey, name);
+      string message = "";
+      NetString.ArgError(ref message, parentKey, "parentKey");
+      NetString.ArgError(ref message, name, "name");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -49,7 +51,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/SolutionManager.xml'/>
     public void Delete(SolutionParentKey parentKey, string name)
     {
-      var message = NetString.ArgError(null, parentKey, name);
+      string message = "";
+      NetString.ArgError(ref message, parentKey, "parentKey");
+      NetString.ArgError(ref message, name, "name");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -122,7 +126,8 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      var message = NetString.ArgError(null, parentKey);
+      string message = "";
+      NetString.ArgError(ref message, parentKey);
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -169,7 +174,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/SolutionManager.xml'/>
     public Solution Update(Solution solution)
     {
-      var message = NetString.ArgError(null, solution);
+      string message = "";
+      NetString.ArgError(ref message, solution);
       Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -196,7 +202,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/SolutionManager.xml'/>
     public void CreateFile(string fileName, Solutions solutions)
     {
-      var message = NetString.ArgError(null, fileName);
+      string message = "";
+      NetString.ArgError(ref message, fileName);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(128);
@@ -216,7 +223,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/SolutionManager.xml'/>
     public SolutionParentKey CreateParentKey(Solution solution)
     {
-      var message = NetString.ArgError(null, solution);
+      string message = "";
+      NetString.ArgError(ref message, solution);
       Solution.ItemParentValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -232,7 +240,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/SolutionManager.xml'/>
     public string CreateRecord(Solution solution)
     {
-      var message = NetString.ArgError(null, solution);
+      string message = "";
+      NetString.ArgError(ref message, solution);
       Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -288,7 +297,8 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/SolutionManager.xml'/>
     public void RecreateFile(Solutions solutions)
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -312,7 +322,8 @@ namespace ProjectFilesDAL
     /// <summary>Write the text file from a Solutions collection and create a backup.</summary>
     public void WriteBackup()
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -361,7 +372,8 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      var message = NetString.ArgError(null, solution);
+      string message = "";
+      NetString.ArgError(ref message, solution, "solution");
       Solution.ItemParentValues(ref message, solution);
       NetString.ThrowArgError(message);
 

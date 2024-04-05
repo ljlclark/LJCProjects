@@ -115,7 +115,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      var message = NetString.ArgError(null, parentKey, name);
+      string message = "";
+      string context = ClassContext + "LJCRetrieve()";
+      NetString.ArgError(ref message, parentKey, context);
+      NetString.ArgError(ref message, name);
       Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -141,7 +144,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      var message = NetString.ArgError(null, parentKey, path);
+      string message = "";
+      string context = ClassContext + "LJCRetrieveWithPath()";
+      NetString.ArgError(ref message, parentKey, context);
+      NetString.ArgError(ref message, path);
       Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -168,7 +174,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        var message = NetString.ArgError(null, project);
+        string message = "";
+        string context = ClassContext + "LJCUpdate()";
+        NetString.ArgError(ref message, project, context);
         Project.ItemValues(ref message, project);
         NetString.ThrowArgError(message);
 
@@ -188,7 +196,9 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/Project.xml'/>
     public ProjectParentKey GetParentKey(Project project)
     {
-      var message = NetString.ArgError(null, project);
+      string message = "";
+      string context = ClassContext + "GetParentKey()";
+      NetString.ArgError(ref message, project, context);
       Project.ItemParentValues(ref message, project);
       NetString.ThrowArgError(message);
 
@@ -204,7 +214,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path values.</summary>
     public void LJCSortPath(ProjectPath comparer)
     {
-      var message = NetString.ArgError(null, comparer);
+      string message = "";
+      string context = ClassContext + "LJCSortPath()";
+      NetString.ArgError(ref message, comparer, context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount
@@ -239,6 +251,7 @@ namespace ProjectFilesDAL
       Unique,
       Path
     }
+    private const string ClassContext = "ProjectFilesDAL.Projects.";
     #endregion
   }
 }

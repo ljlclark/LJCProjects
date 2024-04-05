@@ -123,7 +123,10 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      var message = NetString.ArgError(null, parentKey, fileName);
+      string message = "";
+      string context = ClassContext + "LJCRetrieve()";
+      NetString.ArgError(ref message, parentKey, context);
+      NetString.ArgError(ref message, fileName);
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -150,7 +153,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        var message = NetString.ArgError(null, projectFile);
+        string message = "";
+        string context = ClassContext + "LJCUpdate()";
+        NetString.ArgError(ref message, projectFile, context);
         ProjectFile.ItemValues(ref message, projectFile);
         NetString.ThrowArgError(message);
 
@@ -178,7 +183,9 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/ProjectFiles.xml'/>
     public ProjectFileParentKey GetParentKey(ProjectFile projectFile)
     {
-      var message = NetString.ArgError(null, projectFile);
+      string message = "";
+      string context = ClassContext + "GetParentKey()";
+      NetString.ArgError(ref message, projectFile, context);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -206,6 +213,7 @@ namespace ProjectFilesDAL
     #region Class Data
 
     private int mPrevCount;
+    private const string ClassContext = "ProjectFilesDAL.ProjectFiles.";
     #endregion
   }
 }

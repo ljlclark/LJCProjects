@@ -47,7 +47,7 @@ namespace UpdateProjectFiles
       if (ProjectGrid.CurrentRow is LJCGridRow row)
       {
         var projectName = row.LJCGetString("Name");
-        CodeList.ProjectCombo.Text = projectName;
+        CodeList.ProjectText.Text = projectName;
       }
       ProjectFileGrid.LJCRowsClear();
 
@@ -67,7 +67,8 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(ProjectFile dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       var retValue = ProjectFileGrid.LJCRowAdd();
@@ -81,7 +82,8 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -121,7 +123,8 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, ProjectFile dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("SourceCodeLine", dataRecord.SourceCodeLine);

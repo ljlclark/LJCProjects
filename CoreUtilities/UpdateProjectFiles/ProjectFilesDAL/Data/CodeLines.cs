@@ -86,7 +86,9 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      var message = NetString.ArgError(null, name);
+      string message = "";
+      string context = ClassContext + "LJCRetrieve()";
+      NetString.ArgError(ref message, name, context);
       NetString.ThrowArgError(message);
 
       LJCSortUnique();
@@ -108,7 +110,9 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      var message = NetString.ArgError(null, path);
+      string message = "";
+      string context = ClassContext + "LJCRetrieveWithPath()";
+      NetString.ArgError(ref message, path,context);
       NetString.ThrowArgError(message);
 
       var comparer = new CodeLinePathComparer();
@@ -131,7 +135,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        var message = NetString.ArgError(null, codeLine);
+        string message = "";
+        string context = ClassContext + "LJCUpdate()";
+        NetString.ArgError(ref message, codeLine, context);
         NetString.ThrowArgError(message);
 
         var item = LJCRetrieve(codeLine.Name);
@@ -148,7 +154,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path.</summary>
     public void LJCSortPath(CodeLinePathComparer comparer)
     {
-      var message = NetString.ArgError(null, comparer);
+      string message = "";
+      string context = ClassContext + "LJCSortPath()";
+      NetString.ArgError(ref message, comparer, context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount
@@ -181,6 +189,7 @@ namespace ProjectFilesDAL
       Unique,
       Path
     }
+    private const string ClassContext = "ProjectFilesDAL.CodeLines.";
     #endregion
   }
 }

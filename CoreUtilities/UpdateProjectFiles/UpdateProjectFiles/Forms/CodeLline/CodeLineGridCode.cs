@@ -59,7 +59,8 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(CodeLine dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       var retValue = CodeLineGrid.LJCRowAdd();
@@ -73,7 +74,8 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -105,7 +107,8 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, CodeLine dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("Name", dataRecord.Name);

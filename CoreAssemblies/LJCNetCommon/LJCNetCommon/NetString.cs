@@ -4,6 +4,7 @@
 using Microsoft.Win32;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 
@@ -530,46 +531,19 @@ namespace LJCNetCommon
 
     #region Other Functions
 
-    // Adds the missing argument names to the message.
-    /// <summary>
-    /// Adds the missing argument names to the message.
-    /// </summary>
-    /// <param name="message">The current error message.</param>
-    /// <param name="args">The "params" arguments.</param>
-    /// <returns>The argument error string.</returns>
-    public static string ArgError(string message, params object[] args)
+    // Adds the missing argument name to the message.
+    /// <include path='items/ArgError/*' file='Doc/NetString.xml'/>
+    public static void ArgError(ref string message, object argument
+      , string name = null, string errorContext = null)
     {
-      var retValue = message;
-
-      if (null == retValue)
+      if (null == argument)
       {
-        retValue = "";
+        if (NetString.HasValue(errorContext))
+        {
+          message += $"{errorContext}\r\n";
+        }
+        message += $"{name} is missing.\r\n";
       }
-
-      bool missing = false;
-      foreach (object arg in args)
-      {
-        if (typeof(String) == arg.GetType())
-        {
-          if (!NetString.HasValue(arg.ToString()))
-          {
-            missing = true;
-          }
-        }
-        else
-        {
-          if (null == arg)
-          {
-            missing = true;
-          }
-        }
-
-        if (missing)
-        {
-          retValue += $"{arg} is missing.\r\n";
-        }
-      }
-      return retValue;
     }
 
     // Throws an ArgumentException if the provided message has a value.
@@ -579,48 +553,6 @@ namespace LJCNetCommon
     /// <param name="message">The error message.</param>
     /// <exception cref="ArgumentException">The exception object.</exception>
     public static void ThrowArgError(string message)
-    {
-      if (HasValue(message))
-      {
-        var argMessage = $"Missing or invalid arguments:\r\n{message}";
-        throw new ArgumentException(argMessage);
-      }
-    }
-
-    // Adds the missing argument name to the message.
-    /// <include path='items/AddMissingArgument/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use ArgError().")]
-    public static void AddMissingArgument(string message, object argument
-      , bool forceError = false)
-    {
-      var missing = false;
-
-      if (typeof(String) == argument.GetType())
-      {
-        if (!NetString.HasValue(argument.ToString()))
-        {
-          missing = true;
-        }
-      }
-      else
-      {
-        if (null == argument
-          || forceError)
-        {
-          missing = true;
-        }
-      }
-
-      if (missing)
-      {
-        message += $"{argument} is missing.\r\n";
-      }
-    }
-
-    // Throws the invalid argument exception if message has a value.
-    /// <include path='items/ThrowInvalidArgument/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use ThrowArgError()")]
-    public static void ThrowInvalidArgument(string message)
     {
       if (HasValue(message))
       {

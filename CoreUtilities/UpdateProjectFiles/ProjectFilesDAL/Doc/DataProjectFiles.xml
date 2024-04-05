@@ -22,19 +22,13 @@
     <param name="fileName">The File name.</param>
     <returns>The FileSpec value.</returns>
   </GetFileSpec>
-  <ManageSolutionDependencies>
-    <summary>
-      Clears or Updates the Solution dependencies.
-    </summary>
-    <param name="solution"></param>
-  </ManageSolutionDependencies>
-  <ManageProjectDependencies>
+  <ProjectDependencies>
     <summary>
       Clears or Updates the Project dependencies.
     </summary>
     <param name="parentKey">The ProjectFile parent key.</param>
     <param name="action">The action text.</param>
-  </ManageProjectDependencies>
+  </ProjectDependencies>
   <GetProjectFileValues>
     <summary>
       Get the ProjectFile valus from a filespec.
@@ -43,6 +37,13 @@
     <param name="targetFilePath">The Target file path.</param>"
     <returns>A ProjectFile ojbect.</returns>
   </GetProjectFileValues>
+  <SolutionDependencies>
+    <summary>
+      Clears or Updates the Solution dependencies.
+    </summary>
+    <param name="parentKey">The Project parent key.</param>
+    <param name="action">The action text.</param>
+  </SolutionDependencies>
   <SourceFileSpec>
      <summary>
       Create the ProjectFile Source File Spec.

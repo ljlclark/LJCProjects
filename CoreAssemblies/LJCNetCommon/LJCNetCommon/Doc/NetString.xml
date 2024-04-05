@@ -372,14 +372,15 @@
   </Phonetic>
   
   <!-- Other Functions -->
-  <AddMissingArgument>
+  <ArgError>
     <summary>
       Adds the missing argument name to the message.
     </summary>
     <param name="message">The message text.</param>
     <param name="argument">The argument value.</param>
-    <param name="forceError">Optionally force error for an object.</param>
-  </AddMissingArgument>
+    <param name="name">The argument name.</param>
+    <param name="errorContext">The error message context.</param>
+  </ArgError>
   <ThrowInvalidArgument>
     <summary>
       Throws the invalid argument exception if message has a value.

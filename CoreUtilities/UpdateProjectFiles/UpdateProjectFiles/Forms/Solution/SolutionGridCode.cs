@@ -46,7 +46,7 @@ namespace UpdateProjectFiles
       if (CodeGroupGrid.CurrentRow is LJCGridRow row)
       {
         var codeGroupName = row.LJCGetString("Name");
-        CodeList.GroupCombo.Text = codeGroupName;
+        CodeList.GroupText.Text = codeGroupName;
       }
       SolutionGrid.LJCRowsClear();
 
@@ -66,7 +66,8 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Solution dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       var retValue = SolutionGrid.LJCRowAdd();
@@ -80,7 +81,8 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       CodeList.Cursor = Cursors.WaitCursor;
@@ -116,7 +118,8 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Solution dataRecord)
     {
-      var message = NetString.ArgError(null, dataRecord);
+      string message = "";
+      NetString.ArgError(ref message, dataRecord);
       NetString.ThrowArgError(message);
 
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
@@ -244,14 +247,9 @@ namespace UpdateProjectFiles
       {
         var dataLib = new DataProjectFiles(Data);
         var projectParentKey = CodeList.GetProjectParentKey();
-        var projects = Data.Projects.LJCLoad(projectParentKey);
-        foreach (Project project in projects)
-        {
-          var fileParentKey = dataLib.ProjectFileParentKey(project);
-          dataLib.ManageProjectDependencies(fileParentKey, action.ToString());
-        }
+        dataLib.SolutionDependencies(projectParentKey, action.ToString());
         var title = $"Solution Projects {action}";
-        var message = $"Solution Project Dependencies {action} is Complete";
+        var message = $"Solution Project Dependencies \"{action}\" is Complete";
         MessageBox.Show(message, title, MessageBoxButtons.OK
           , MessageBoxIcon.Information);
       }

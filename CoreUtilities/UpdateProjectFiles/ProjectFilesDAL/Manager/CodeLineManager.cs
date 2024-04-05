@@ -30,7 +30,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Add(string name, string path)
     {
-      var message = NetString.ArgError(null, name);
+      string message = "";
+      NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
       var codeLine = CreateDataObject(name, path);
@@ -46,7 +47,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeLineManager.xml'/>
     public void Delete(string name)
     {
-      var message = NetString.ArgError(null, name);
+      string message = "";
+      NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
@@ -150,7 +152,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Update(CodeLine codeLine)
     {
-      var message = NetString.ArgError(null, codeLine);
+      string message = "";
+      NetString.ArgError(ref message, codeLine);
       CodeLine.ItemValues(ref message, codeLine);
       NetString.ThrowArgError(message);
 
@@ -176,7 +179,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void CreateFile(string fileName, CodeLines codeLines)
     {
-      var message = NetString.ArgError(null, fileName);
+      string message = "";
+      NetString.ArgError(ref message, fileName);
       NetString.ThrowArgError(message);
 
       File.WriteAllText(fileName, "Name, Path\r\n");
@@ -191,7 +195,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeLineManager.xml'/>
     public string CreateRecord(CodeLine codeLine)
     {
-      var message = NetString.ArgError(null, codeLine);
+      string message = "";
+      NetString.ArgError(ref message, codeLine);
       CodeLine.ItemValues(ref message, codeLine);
       NetString.ThrowArgError(message);
 
@@ -239,7 +244,8 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void RecreateFile(CodeLines codeLines)
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -263,7 +269,8 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
-      var message = NetString.ArgError(null, FileName);
+      string message = "";
+      NetString.ArgError(ref message, FileName);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -300,7 +307,8 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      var message = NetString.ArgError(null, codeLine);
+      string message = "";
+      NetString.ArgError(ref message, codeLine);
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
