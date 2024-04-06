@@ -9,7 +9,7 @@
       /// Initializes an object instance.
       ///
     </summary>
-    /// <param name="fileName">The data file name.</param>
+    /// <param name="fileSpec">The data FileSpec.</param>
   </SolutionManagerC>
   <!-- Data Methods -->
   <Add>

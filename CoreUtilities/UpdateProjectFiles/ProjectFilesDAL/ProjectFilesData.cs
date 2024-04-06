@@ -11,7 +11,6 @@ namespace ProjectFilesDAL
   /// <summary>Gets the Data collections.</summary>
   public class ProjectFilesData
   {
-
     #region Private Methods
 
     // Sets the Managers object.

@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 // ManagersProjectFiles.cs
 
+using LJCNetCommon;
+using System.IO;
+using System.Xml.Linq;
+
 namespace ProjectFilesDAL
 {
   /// <summary>Gets the Manager objects.</summary>
@@ -11,34 +15,18 @@ namespace ProjectFilesDAL
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public ManagersProjectFiles()
+    public ManagersProjectFiles(string filePath)
     {
+      string message = "";
+      string context = ClassContext + "ManagerProjectFiles()";
+      NetString.ArgError(ref message, filePath, "filePath", context);
+      NetString.ThrowArgError(message);
+
+      FilePath = filePath;
     }
     #endregion
 
-    #region Properties
-
-    /// <summary>Gets the CodeLineManager object.</summary>
-    public CodeLineManager CodeLineManager
-    {
-      get
-      {
-        if (null == mCodeLineManager)
-        {
-          CodeLineManager = new CodeLineManager();
-        }
-        return mCodeLineManager;
-      }
-
-      private set
-      {
-        if (value != null)
-        {
-          mCodeLineManager = value;
-        }
-      }
-    }
-    private CodeLineManager mCodeLineManager;
+    #region Manager Properties
 
     /// <summary>Gets the CodeGroupManager object.</summary>
     public CodeGroupManager CodeGroupManager
@@ -47,7 +35,8 @@ namespace ProjectFilesDAL
       {
         if (null == mCodeGroupManager)
         {
-          CodeGroupManager = new CodeGroupManager();
+          string fileSpec = Path.Combine(FilePath, "CodeGroup.txt");
+          CodeGroupManager = new CodeGroupManager(fileSpec);
         }
         return mCodeGroupManager;
       }
@@ -62,27 +51,28 @@ namespace ProjectFilesDAL
     }
     private CodeGroupManager mCodeGroupManager;
 
-    /// <summary>Gets the SolutionManager object.</summary>
-    public SolutionManager SolutionManager
+    /// <summary>Gets the CodeLineManager object.</summary>
+    public CodeLineManager CodeLineManager
     {
       get
       {
-        if (null == mSolutionManager)
+        if (null == mCodeLineManager)
         {
-          SolutionManager = new SolutionManager();
+          string fileSpec = Path.Combine(FilePath, "CodeLine.txt"); 
+          CodeLineManager = new CodeLineManager(fileSpec);
         }
-        return mSolutionManager;
+        return mCodeLineManager;
       }
 
       private set
       {
         if (value != null)
         {
-          mSolutionManager = value;
+          mCodeLineManager = value;
         }
       }
     }
-    private SolutionManager mSolutionManager;
+    private CodeLineManager mCodeLineManager;
 
     /// <summary>Gets the ProjectManager object.</summary>
     public ProjectManager ProjectManager
@@ -91,7 +81,8 @@ namespace ProjectFilesDAL
       {
         if (null == mProjectManager)
         {
-          ProjectManager = new ProjectManager();
+          string fileSpec = Path.Combine(FilePath, "Project.txt");
+          ProjectManager = new ProjectManager(fileSpec);
         }
         return mProjectManager;
       }
@@ -113,7 +104,8 @@ namespace ProjectFilesDAL
       {
         if (null == mProjectFileManager)
         {
-          ProjectFileManager = new ProjectFileManager();
+          string fileSpec = Path.Combine(FilePath, "ProjectFile.txt");
+          ProjectFileManager = new ProjectFileManager(fileSpec);
         }
         return mProjectFileManager;
       }
@@ -127,6 +119,38 @@ namespace ProjectFilesDAL
       }
     }
     private ProjectFileManager mProjectFileManager;
+
+    /// <summary>Gets the SolutionManager object.</summary>
+    public SolutionManager SolutionManager
+    {
+      get
+      {
+        if (null == mSolutionManager)
+        {
+          string fileSpec = Path.Combine(FilePath, "Solution.txt");
+          SolutionManager = new SolutionManager(fileSpec);
+        }
+        return mSolutionManager;
+      }
+
+      private set
+      {
+        if (value != null)
+        {
+          mSolutionManager = value;
+        }
+      }
+    }
+    private SolutionManager mSolutionManager;
+    #endregion
+
+    #region Class Properties
+    private string FilePath { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "DataProjectFilesDAL.ManagersProjectFiles.";
     #endregion
   }
 }

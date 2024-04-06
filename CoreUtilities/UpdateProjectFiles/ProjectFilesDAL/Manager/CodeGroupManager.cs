@@ -16,12 +16,17 @@ namespace ProjectFilesDAL
 
     // Initializes an object instance.
     /// <include path='items/CodeGroupManagerC/*' file='Doc/CodeGroupManager.xml'/>
-    public CodeGroupManager(string fileName = @"DataFiles\CodeGroup.txt")
+    public CodeGroupManager(string fileSpec = "CodeGroup.txt")
     {
-      FileName = fileName;
+      string message = "";
+      string context = ClassContext + "CodeGroupManager()";
+      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
+      NetString.ThrowArgError(message);
+
+      FileSpec = fileSpec;
       CreateBaseColumns();
       Reader = new TextDataReader();
-      Reader.LJCSetFile(FileName);
+      Reader.LJCSetFile(FileSpec);
     }
     #endregion
 
@@ -40,7 +45,7 @@ namespace ProjectFilesDAL
       var codeGroup = CreateDataObject(codeLineName, name, path);
       var newRecord = CreateRecord(codeGroup);
       Reader.Close();
-      File.AppendAllText(FileName, newRecord);
+      File.AppendAllText(FileSpec, newRecord);
       Reader.LJCOpen();
       var retValue = Retrieve(codeLineName, name);
       return retValue;
@@ -191,7 +196,7 @@ namespace ProjectFilesDAL
       }
       Reader.Close();
       var text = CreateRecord(codeGroup);
-      File.AppendAllText(FileName, text);
+      File.AppendAllText(FileSpec, text);
       Reader.LJCOpen();
       var retValue = Retrieve(codeGroup.CodeLine, current.Name);
       return retValue;
@@ -281,15 +286,15 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "RecreateFile()";
-      NetString.ArgError(ref message, FileName, "FileName", context);
+      NetString.ArgError(ref message, FileSpec, "FileName", context);
       NetString.ThrowArgError(message);
 
       Reader.Close();
-      if (File.Exists(FileName))
+      if (File.Exists(FileSpec))
       {
-        File.Delete(FileName);
+        File.Delete(FileSpec);
       }
-      CreateFile(FileName, codeGroups);
+      CreateFile(FileSpec, codeGroups);
       Reader.LJCOpen();
     }
 
@@ -307,10 +312,10 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, FileName, "FileName", context);
+      NetString.ArgError(ref message, FileSpec, "FileName", context);
       NetString.ThrowArgError(message);
 
-      var fileName = Path.GetFileNameWithoutExtension(FileName);
+      var fileName = Path.GetFileNameWithoutExtension(FileSpec);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
     }
@@ -381,7 +386,7 @@ namespace ProjectFilesDAL
     public TextDataReader Reader { get; private set; }
 
     /// <summary>Gets or sets the File name.</summary>
-    public string FileName { get; set; }
+    public string FileSpec { get; set; }
     #endregion
 
     #region Class Data
