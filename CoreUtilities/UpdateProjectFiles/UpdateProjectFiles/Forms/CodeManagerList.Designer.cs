@@ -889,21 +889,21 @@ namespace UpdateProjectFiles
             this.toolStripSeparator8,
             this.ProjectFileExit});
       this.ProjectFileMenu.Name = "AssemblyMenu";
-      this.ProjectFileMenu.Size = new System.Drawing.Size(201, 214);
+      this.ProjectFileMenu.Size = new System.Drawing.Size(220, 214);
       this.ProjectFileMenu.Text = "Assembly Group Menu";
       // 
       // ProjectFileHeading
       // 
       this.ProjectFileHeading.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
       this.ProjectFileHeading.Name = "ProjectFileHeading";
-      this.ProjectFileHeading.Size = new System.Drawing.Size(200, 32);
-      this.ProjectFileHeading.Text = "Solution Menu";
+      this.ProjectFileHeading.Size = new System.Drawing.Size(219, 32);
+      this.ProjectFileHeading.Text = "Project File Menu";
       // 
       // ProjectFileNew
       // 
       this.ProjectFileNew.Name = "ProjectFileNew";
       this.ProjectFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.ProjectFileNew.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileNew.Size = new System.Drawing.Size(219, 32);
       this.ProjectFileNew.Text = "&New";
       this.ProjectFileNew.Click += new System.EventHandler(this.ProjectFileNew_Click);
       // 
@@ -911,45 +911,45 @@ namespace UpdateProjectFiles
       // 
       this.ProjectFileEdit.Name = "ProjectFileEdit";
       this.ProjectFileEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ProjectFileEdit.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileEdit.Size = new System.Drawing.Size(219, 32);
       this.ProjectFileEdit.Text = "&Edit";
       this.ProjectFileEdit.Click += new System.EventHandler(this.ProjectFileEdit_Click);
       // 
       // toolStripSeparator6
       // 
       this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator6.Size = new System.Drawing.Size(216, 6);
       // 
       // ProjectFileDelete
       // 
       this.ProjectFileDelete.Name = "ProjectFileDelete";
       this.ProjectFileDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.ProjectFileDelete.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileDelete.Size = new System.Drawing.Size(219, 32);
       this.ProjectFileDelete.Text = "&Delete";
       this.ProjectFileDelete.Click += new System.EventHandler(this.ProjectFileDelete_Click);
       // 
       // toolStripSeparator7
       // 
       this.toolStripSeparator7.Name = "toolStripSeparator7";
-      this.toolStripSeparator7.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator7.Size = new System.Drawing.Size(216, 6);
       // 
       // ProjectFileRefresh
       // 
       this.ProjectFileRefresh.Name = "ProjectFileRefresh";
       this.ProjectFileRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.ProjectFileRefresh.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileRefresh.Size = new System.Drawing.Size(219, 32);
       this.ProjectFileRefresh.Text = "&Refresh";
       this.ProjectFileRefresh.Click += new System.EventHandler(this.ProjectFileRefresh_Click);
       // 
       // toolStripSeparator8
       // 
       this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator8.Size = new System.Drawing.Size(216, 6);
       // 
       // ProjectFileExit
       // 
       this.ProjectFileExit.Name = "ProjectFileExit";
-      this.ProjectFileExit.Size = new System.Drawing.Size(200, 32);
+      this.ProjectFileExit.Size = new System.Drawing.Size(219, 32);
       this.ProjectFileExit.Text = "E&xit";
       // 
       // ProjectText

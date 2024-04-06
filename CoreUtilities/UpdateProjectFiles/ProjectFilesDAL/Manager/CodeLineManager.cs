@@ -31,7 +31,8 @@ namespace ProjectFilesDAL
     public CodeLine Add(string name, string path)
     {
       string message = "";
-      NetString.ArgError(ref message, name);
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, name, "name", context);
       NetString.ThrowArgError(message);
 
       var codeLine = CreateDataObject(name, path);
@@ -48,7 +49,8 @@ namespace ProjectFilesDAL
     public void Delete(string name)
     {
       string message = "";
-      NetString.ArgError(ref message, name);
+      string context = ClassContext + "Delete()";
+      NetString.ArgError(ref message, name, "name", context);
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
@@ -94,6 +96,11 @@ namespace ProjectFilesDAL
     public CodeLines LoadAllExcept(string name)
     {
       CodeLines retValue = null;
+
+      string message = "";
+      string context = ClassContext + "LoadAllExcept()";
+      NetString.ArgError(ref message, name, "name", context);
+      NetString.ThrowArgError(message);
 
       Reader.LJCOpen();
       if (Reader.Read())
@@ -153,7 +160,8 @@ namespace ProjectFilesDAL
     public CodeLine Update(CodeLine codeLine)
     {
       string message = "";
-      NetString.ArgError(ref message, codeLine);
+      string context = ClassContext + "Update()";
+      NetString.ArgError(ref message, codeLine, "codeLine", context);
       CodeLine.ItemValues(ref message, codeLine);
       NetString.ThrowArgError(message);
 
@@ -180,7 +188,8 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, CodeLines codeLines)
     {
       string message = "";
-      NetString.ArgError(ref message, fileName);
+      string context = ClassContext + "CreateFile()";
+      NetString.ArgError(ref message, fileName, "fileName", context);
       NetString.ThrowArgError(message);
 
       File.WriteAllText(fileName, "Name, Path\r\n");
@@ -196,7 +205,8 @@ namespace ProjectFilesDAL
     public string CreateRecord(CodeLine codeLine)
     {
       string message = "";
-      NetString.ArgError(ref message, codeLine);
+      string context = ClassContext + "CreateRecord()";
+      NetString.ArgError(ref message, codeLine, "codeLine", context);
       CodeLine.ItemValues(ref message, codeLine);
       NetString.ThrowArgError(message);
 
@@ -245,7 +255,8 @@ namespace ProjectFilesDAL
     public void RecreateFile(CodeLines codeLines)
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "RecreateFile()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -270,7 +281,8 @@ namespace ProjectFilesDAL
     public void WriteBackup()
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "WriteBackup()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -308,7 +320,8 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, codeLine);
+      string context = ClassContext + "IsMatch()";
+      NetString.ArgError(ref message, codeLine, "codeLine", context);
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
@@ -331,6 +344,11 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileName { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "DataProjectFilesDAL.CodeLineManager.";
     #endregion
   }
 }

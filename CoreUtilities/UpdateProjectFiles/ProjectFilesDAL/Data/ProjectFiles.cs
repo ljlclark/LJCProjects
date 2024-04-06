@@ -125,8 +125,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, context);
-      NetString.ArgError(ref message, fileName);
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, fileName, "fileName");
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -155,7 +155,7 @@ namespace ProjectFilesDAL
       {
         string message = "";
         string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, projectFile, context);
+        NetString.ArgError(ref message, projectFile, "projectFile", context);
         ProjectFile.ItemValues(ref message, projectFile);
         NetString.ThrowArgError(message);
 
@@ -185,7 +185,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "GetParentKey()";
-      NetString.ArgError(ref message, projectFile, context);
+      NetString.ArgError(ref message, projectFile, "projectFile", context);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 

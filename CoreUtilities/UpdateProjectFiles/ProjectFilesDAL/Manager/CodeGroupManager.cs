@@ -32,8 +32,9 @@ namespace ProjectFilesDAL
     public CodeGroup Add(string codeLineName, string name, string path)
     {
       string message = "";
-      NetString.ArgError(ref message, codeLineName);
-      NetString.ArgError(ref message, name);
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
+      NetString.ArgError(ref message, name, "name");
       NetString.ThrowArgError(message);
 
       var codeGroup = CreateDataObject(codeLineName, name, path);
@@ -50,8 +51,9 @@ namespace ProjectFilesDAL
     public void Delete(string codeLineName, string name)
     {
       string message = "";
-      NetString.ArgError(ref message, codeLineName);
-      NetString.ArgError(ref message, name);
+      string context = ClassContext + "Delete()";
+      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
+      NetString.ArgError(ref message, name, "name");
       NetString.ThrowArgError(message);
 
       var current = CurrentDataObject();
@@ -98,6 +100,11 @@ namespace ProjectFilesDAL
     {
       CodeGroups retValue = null;
 
+      string message = "";
+      string context = ClassContext + "LoadAllExcept()";
+      NetString.ArgError(ref message, name, "name", context);
+      NetString.ThrowArgError(message);
+
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -123,7 +130,8 @@ namespace ProjectFilesDAL
       CodeGroup retValue = null;
 
       string message = "";
-      NetString.ArgError(ref message, codeLineName);
+      string context = ClassContext + "Retrieve()";
+      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
       NetString.ThrowArgError(message);
 
       if (NetString.HasValue(name))
@@ -169,7 +177,8 @@ namespace ProjectFilesDAL
     public CodeGroup Update(CodeGroup codeGroup)
     {
       string message = "";
-      NetString.ArgError(ref message, codeGroup);
+      string context = ClassContext + "Update()";
+      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
       CodeGroup.ItemValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -196,7 +205,8 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
       string message = "";
-      NetString.ArgError(ref message, fileName);
+      string context = ClassContext + "CreateFile()";
+      NetString.ArgError(ref message, fileName, "fileName", context);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(128);
@@ -216,7 +226,8 @@ namespace ProjectFilesDAL
     public string CreateRecord(CodeGroup codeGroup)
     {
       string message = "";
-      NetString.ArgError(ref message, codeGroup);
+      string context = ClassContext + "CreateRecord()";
+      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
       CodeGroup.ItemParentValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -269,7 +280,8 @@ namespace ProjectFilesDAL
     public void RecreateFile(CodeGroups codeGroups)
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "RecreateFile()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -294,7 +306,8 @@ namespace ProjectFilesDAL
     public void WriteBackup()
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -341,7 +354,8 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, codeGroup);
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
       CodeGroup.ItemParentValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -368,6 +382,11 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileName { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "DataProjectFilesDAL.CodeGroupManager.";
     #endregion
   }
 }

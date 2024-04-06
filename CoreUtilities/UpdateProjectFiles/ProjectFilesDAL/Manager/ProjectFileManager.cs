@@ -6,6 +6,7 @@ using LJCTextDataReaderLib;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 
 namespace ProjectFilesDAL
 {
@@ -33,11 +34,12 @@ namespace ProjectFilesDAL
       , string fileName, string sourceFilePath, string targetFilePath)
     {
       string message = "";
-      NetString.ArgError(ref message, parentKey);
-      NetString.ArgError(ref message, sourceKey);
-      NetString.ArgError(ref message, fileName);
-      NetString.ArgError(ref message, sourceFilePath);
-      NetString.ArgError(ref message, targetFilePath);
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, sourceKey, "sourceKey");
+      NetString.ArgError(ref message, fileName, "fileName");
+      NetString.ArgError(ref message, sourceFilePath, "sourceFilePath");
+      NetString.ArgError(ref message, targetFilePath, "targetFilePath");
       ProjectFile.ParentKeyValues(ref message, parentKey);
       ProjectFile.ParentKeyValues(ref message, sourceKey);
       NetString.ThrowArgError(message);
@@ -57,8 +59,9 @@ namespace ProjectFilesDAL
     public void Delete(ProjectFileParentKey parentKey, string fileName)
     {
       string message = "";
-      NetString.ArgError(ref message, parentKey);
-      NetString.ArgError(ref message, fileName);
+      string context = ClassContext + "Delete()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, fileName, "fileName");
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -108,6 +111,11 @@ namespace ProjectFilesDAL
     {
       ProjectFiles retValue = null;
 
+      string message = "";
+      string context = ClassContext + "LoadAllExcept()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ThrowArgError(message);
+
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -136,7 +144,8 @@ namespace ProjectFilesDAL
       ProjectFile retValue = null;
 
       string message = "";
-      NetString.ArgError(ref message, parentKey);
+      string context = ClassContext + "Retrieve()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
       ProjectFile.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -185,7 +194,8 @@ namespace ProjectFilesDAL
     public ProjectFile Update(ProjectFile projectFile)
     {
       string message = "";
-      NetString.ArgError(ref message, projectFile);
+      string context = ClassContext + "Update()";
+      NetString.ArgError(ref message, projectFile, "projectFile", context);
       ProjectFile.ItemValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -213,7 +223,8 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, ProjectFiles projectFiles)
     {
       string message = "";
-      NetString.ArgError(ref message, fileName);
+      string context = ClassContext + "CreateFile()";
+      NetString.ArgError(ref message, fileName, "fileName", context);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(256);
@@ -245,7 +256,8 @@ namespace ProjectFilesDAL
     public ProjectFileParentKey CreateParentKey(ProjectFile projectFile)
     {
       string message = "";
-      NetString.ArgError(ref message, projectFile);
+      string context = ClassContext + "CreateParentKey()";
+      NetString.ArgError(ref message, projectFile, "projectFile", context);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -264,7 +276,8 @@ namespace ProjectFilesDAL
     public string CreateRecord(ProjectFile projectFile)
     {
       string message = "";
-      NetString.ArgError(ref message, projectFile);
+      string context = ClassContext + "CreateRecord()";
+      NetString.ArgError(ref message, projectFile, "projectFile", context);
       ProjectFile.ItemValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -365,7 +378,8 @@ namespace ProjectFilesDAL
     public void RecreateFile(ProjectFiles projectFiles)
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "RecreateFile()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -390,7 +404,8 @@ namespace ProjectFilesDAL
     public void WriteBackup()
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "WriteBackup()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -457,7 +472,8 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, projectFile);
+      string context = ClassContext + "IsMatch()";
+      NetString.ArgError(ref message, projectFile, "projectFile", context);
       ProjectFile.ItemParentValues(ref message, projectFile);
       NetString.ThrowArgError(message);
 
@@ -487,6 +503,11 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileName { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "DataProjectFilesDAL.ProjectFileManager.";
     #endregion
   }
 }

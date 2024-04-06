@@ -536,11 +536,31 @@ namespace LJCNetCommon
     public static void ArgError(ref string message, object argument
       , string name = null, string errorContext = null)
     {
+      bool missing = false;
       if (null == argument)
+      {
+        missing = true;
+      }
+      else
+      {
+        if (typeof(string) == argument.GetType())
+        {
+          if (!NetString.HasValue(argument.ToString()))
+          {
+            missing = true;
+          }
+        }
+      }
+
+      if (missing)
       {
         if (NetString.HasValue(errorContext))
         {
           message += $"{errorContext}\r\n";
+        }
+        if (!NetString.HasValue(name))
+        {
+          name = "argument";
         }
         message += $"{name} is missing.\r\n";
       }

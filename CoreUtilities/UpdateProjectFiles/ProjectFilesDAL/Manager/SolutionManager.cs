@@ -33,7 +33,8 @@ namespace ProjectFilesDAL
       , string path)
     {
       string message = "";
-      NetString.ArgError(ref message, parentKey, "parentKey");
+      string context = ClassContext + "Add()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
       NetString.ArgError(ref message, name, "name");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
@@ -52,7 +53,8 @@ namespace ProjectFilesDAL
     public void Delete(SolutionParentKey parentKey, string name)
     {
       string message = "";
-      NetString.ArgError(ref message, parentKey, "parentKey");
+      string context = ClassContext + "Delete()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
       NetString.ArgError(ref message, name, "name");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
@@ -101,6 +103,11 @@ namespace ProjectFilesDAL
     {
       Solutions retValue = null;
 
+      string message = "";
+      string context = ClassContext + "LoadAllExcept()";
+      NetString.ArgError(ref message, name, "name", context);
+      NetString.ThrowArgError(message);
+
       Reader.LJCOpen();
       if (Reader.Read())
       {
@@ -127,7 +134,8 @@ namespace ProjectFilesDAL
       Solution retValue = null;
 
       string message = "";
-      NetString.ArgError(ref message, parentKey);
+      string context = ClassContext + "Retrieve()";
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -175,7 +183,8 @@ namespace ProjectFilesDAL
     public Solution Update(Solution solution)
     {
       string message = "";
-      NetString.ArgError(ref message, solution);
+      string context = ClassContext + "Update()";
+      NetString.ArgError(ref message, solution, "solution", context);
       Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -203,7 +212,8 @@ namespace ProjectFilesDAL
     public void CreateFile(string fileName, Solutions solutions)
     {
       string message = "";
-      NetString.ArgError(ref message, fileName);
+      string context = ClassContext + "CreateFile()";
+      NetString.ArgError(ref message, fileName, "fileName", context);
       NetString.ThrowArgError(message);
 
       var builder = new StringBuilder(128);
@@ -224,7 +234,8 @@ namespace ProjectFilesDAL
     public SolutionParentKey CreateParentKey(Solution solution)
     {
       string message = "";
-      NetString.ArgError(ref message, solution);
+      string context = ClassContext + "CreateParentKey()";
+      NetString.ArgError(ref message, solution, "solution", context);
       Solution.ItemParentValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -241,7 +252,8 @@ namespace ProjectFilesDAL
     public string CreateRecord(Solution solution)
     {
       string message = "";
-      NetString.ArgError(ref message, solution);
+      string context = ClassContext + "CreateRecord()";
+      NetString.ArgError(ref message, solution, "solution", context);
       Solution.ItemValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -298,7 +310,8 @@ namespace ProjectFilesDAL
     public void RecreateFile(Solutions solutions)
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "RecreateFile()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       Reader.Close();
@@ -323,7 +336,8 @@ namespace ProjectFilesDAL
     public void WriteBackup()
     {
       string message = "";
-      NetString.ArgError(ref message, FileName);
+      string context = ClassContext + "WriteBackup()";
+      NetString.ArgError(ref message, FileName, "FileName", context);
       NetString.ThrowArgError(message);
 
       var fileName = Path.GetFileNameWithoutExtension(FileName);
@@ -373,7 +387,8 @@ namespace ProjectFilesDAL
       var retValue = false;
 
       string message = "";
-      NetString.ArgError(ref message, solution, "solution");
+      string context = ClassContext + "IsMatch()";
+      NetString.ArgError(ref message, solution, "solution", context);
       Solution.ItemParentValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -401,6 +416,11 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileName { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private const string ClassContext = "DataProjectFilesDAL.SolutionManager.";
     #endregion
   }
 }

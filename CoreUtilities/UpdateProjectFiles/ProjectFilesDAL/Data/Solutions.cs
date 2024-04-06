@@ -114,8 +114,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, context);
-      NetString.ArgError(ref message, name);
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, name, "name");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -143,8 +143,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, parentKey, context);
-      NetString.ArgError(ref message, path);
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, path, "path");
       Solution.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -172,7 +172,7 @@ namespace ProjectFilesDAL
       {
         string message = "";
         string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, solution, context);
+        NetString.ArgError(ref message, solution, "solution", context);
         Solution.ItemValues(ref message, solution);
         NetString.ThrowArgError(message);
 
@@ -194,7 +194,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCGetParentKey()";
-      NetString.ArgError(ref message, solution, context);
+      NetString.ArgError(ref message, solution, "solution", context);
       Solution.ItemParentValues(ref message, solution);
       NetString.ThrowArgError(message);
 
@@ -212,7 +212,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, context);
+      NetString.ArgError(ref message, comparer, "comparer", context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount
@@ -230,7 +230,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCSortSequence()";
-      NetString.ArgError(ref message, comparer, context);
+      NetString.ArgError(ref message, comparer, "comparer", context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount

@@ -117,8 +117,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, context);
-      NetString.ArgError(ref message, name);
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, name, "name");
       Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -146,8 +146,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, parentKey, context);
-      NetString.ArgError(ref message, path);
+      NetString.ArgError(ref message, parentKey, "parentKey", context);
+      NetString.ArgError(ref message, path, "path");
       Project.ParentKeyValues(ref message, parentKey);
       NetString.ThrowArgError(message);
 
@@ -176,7 +176,7 @@ namespace ProjectFilesDAL
       {
         string message = "";
         string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, project, context);
+        NetString.ArgError(ref message, project, "project", context);
         Project.ItemValues(ref message, project);
         NetString.ThrowArgError(message);
 
@@ -198,7 +198,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "GetParentKey()";
-      NetString.ArgError(ref message, project, context);
+      NetString.ArgError(ref message, project, "project", context);
       Project.ItemParentValues(ref message, project);
       NetString.ThrowArgError(message);
 
@@ -216,7 +216,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, context);
+      NetString.ArgError(ref message, comparer, "comparer", context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount

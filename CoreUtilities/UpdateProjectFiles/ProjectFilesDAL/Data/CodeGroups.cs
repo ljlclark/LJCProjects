@@ -107,7 +107,7 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, codeLine, context);
+      NetString.ArgError(ref message, codeLine, "codeLine", context);
       NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
@@ -133,8 +133,8 @@ namespace ProjectFilesDAL
 
       string message = "";
       string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, codeLine,context);
-      NetString.ArgError(ref message, path);
+      NetString.ArgError(ref message, codeLine, "codeLine", context);
+      NetString.ArgError(ref message, path, "path");
       NetString.ThrowArgError(message);
 
       var comparer = new CodeGroupPathComparer();
@@ -158,7 +158,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCUpdate()";
-      NetString.ArgError(ref message, codeGroup, context);
+      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
       CodeGroup.ItemValues(ref message, codeGroup);
       NetString.ThrowArgError(message);
 
@@ -180,7 +180,7 @@ namespace ProjectFilesDAL
     {
       string message = "";
       string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, context);
+      NetString.ArgError(ref message, comparer, "comparer", context);
       NetString.ThrowArgError(message);
 
       if (Count != mPrevCount
