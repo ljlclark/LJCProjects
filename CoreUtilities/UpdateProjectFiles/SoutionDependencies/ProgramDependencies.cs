@@ -15,10 +15,15 @@ namespace SolutionDependencies
     {
       var action = GetAction(args);
 
+      var fileName = "SolutionDependencies.exe.config";
+      var settings = new AppSettings(fileName);
+      var actionPath = settings.GetString("DependencyActionPath");
+
       // Get the ProjectFile object for the current folder..
-      var currentSpec = $"\"{Environment.CurrentDirectory}\"";
-      var arguments = $"{currentSpec} {action}";
-      var error = NetFile.ShellProgram("DependencyAction.exe", arguments);
+      var currentFolder = $"\"{Environment.CurrentDirectory}\"";
+      var arguments = $"{currentFolder} {action}";
+      var actionFileSpec = Path.Combine(actionPath, "DependencyAction.exe");
+      var error = NetFile.ShellProgram(actionFileSpec, arguments);
       if (NetString.HasValue(error))
       {
         Console.WriteLine(error);
