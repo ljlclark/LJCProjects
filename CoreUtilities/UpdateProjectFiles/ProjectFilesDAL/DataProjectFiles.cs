@@ -36,7 +36,8 @@ namespace ProjectFilesDAL
       string context = ClassContext + "GetFileSpec()";
       NetString.ArgError(ref message, codeLineName, "codeLineName", context);
       NetString.ArgError(ref message, solutionName, "solutionName");
-      NetString.ArgError(ref message, projectFilePath, "projectFilePath");
+      // *** Next Statement *** Delete - 4/8/24
+      //NetString.ArgError(ref message, projectFilePath, "projectFilePath");
       NetString.ThrowArgError(message);
 
       // Get CodeLine path.
@@ -52,8 +53,7 @@ namespace ProjectFilesDAL
 
       // Get Solution path.
       var solutionParentKey = SolutionParentKey(codeLineName, codeGroupName);
-      var solutionPath = SolutionPath(solutionParentKey
-        , solutionName);
+      var solutionPath = SolutionPath(solutionParentKey, solutionName);
       retValue = Path.Combine(retValue, solutionPath);
 
       // Get Project path.
@@ -456,7 +456,8 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupPath/*' file='Doc/DataProjectFiles.xml'/>
     public string CodeGroupPath(string codeLineName, string name)
     {
-      string retValue = null;
+      // *** Next Statement *** Change - 4/8/24
+      string retValue = name;
 
       string message = "";
       string context = ClassContext + "CodeGroupPath()";
@@ -557,7 +558,8 @@ namespace ProjectFilesDAL
     public string ProjectPath(ProjectParentKey parentKey
       , string name)
     {
-      string retValue = null;
+      // *** Next Statement *** Change - 4/8/24
+      string retValue = name;
 
       string message = "";
       string context = ClassContext + "ProjectPath()";
@@ -598,7 +600,8 @@ namespace ProjectFilesDAL
     public string SolutionPath(SolutionParentKey parentKey
       , string name)
     {
-      string retValue = null;
+      // *** Next Statement *** Change - 4/8/24
+      string retValue = name;
 
       string message = "";
       string context = ClassContext + "SolutionPath()";
