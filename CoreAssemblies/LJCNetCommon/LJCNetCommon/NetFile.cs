@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // NetFile.cs
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace LJCNetCommon
@@ -76,6 +77,67 @@ namespace LJCNetCommon
             throw new Exception(errorText);
           }
         }
+      }
+      return retValue;
+    }
+
+    // Executes an external program.
+    /// <summary>
+    /// Executes an external program.
+    /// </summary>
+    /// <param name="programFileSpec">The program name.</param>
+    /// <param name="arguments">The program arguments.</param>
+    public static string ShellProgram(string programFileSpec
+      , string arguments = null)
+    {
+      string retValue = null;
+
+      bool success = true;
+      if (NetString.HasValue(programFileSpec))
+      {
+        if (!File.Exists(programFileSpec))
+        {
+          success = false;
+          retValue = $"The File '{programFileSpec}'\r\n was not found.";
+        }
+      }
+
+      ProcessStartInfo startInfo = null;
+      if (success)
+      {
+        startInfo = new ProcessStartInfo()
+        {
+          Arguments = arguments,
+          FileName = programFileSpec,
+          UseShellExecute = true
+        };
+
+        // If no programFileSpec, then arguments must contain only a
+        // file specification.
+        if (null == programFileSpec)
+        {
+          if (!File.Exists(arguments))
+          {
+            success = false;
+            retValue = $"The File '{arguments}'\r\n was not found.";
+          }
+          else
+          {
+            string filePath = Path.GetDirectoryName(arguments);
+            string fileName = Path.GetFileName(arguments);
+            startInfo = new ProcessStartInfo()
+            {
+              FileName = fileName,
+              UseShellExecute = true,
+              WorkingDirectory = filePath
+            };
+          }
+        }
+      }
+
+      if (success)
+      {
+        Process.Start(startInfo);
       }
       return retValue;
     }

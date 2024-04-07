@@ -55,7 +55,7 @@ namespace ProjectFilesDAL
       AppSettings = new AppSettings(fileSpec);
       BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
       EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
-      string filePath = "DataFiles";
+      var filePath = AppSettings.GetString("DataFilePath");
       Managers = new ManagersProjectFiles(filePath);
       Data = new ProjectFilesData();
     }

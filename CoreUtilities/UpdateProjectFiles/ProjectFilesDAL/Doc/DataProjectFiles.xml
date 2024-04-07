@@ -33,7 +33,7 @@
     <summary>
       Get the ProjectFile valus from a filespec.
     </summary>
-    <param name="fileSpec">The file specifiation.</param>
+    <param name="currentSpec">The file specifiation.</param>
     <param name="targetFilePath">The Target file path.</param>"
     <returns>A ProjectFile ojbect.</returns>
   </GetProjectFileValues>

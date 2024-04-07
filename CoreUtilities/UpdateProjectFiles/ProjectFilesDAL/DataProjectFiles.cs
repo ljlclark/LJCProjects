@@ -110,17 +110,17 @@ namespace ProjectFilesDAL
 
     // Get the ProjectFile valus from a filespec.
     /// <include path='items/GetProjectFileValues/*' file='Doc/DataProjectFiles.xml'/>
-    public ProjectFile ProjectFileValues(string fileSpec
+    public ProjectFile ProjectFileValues(string currentSpec
       , string targetFilePath = null)
     {
       string message = "";
       string context = ClassContext + "ProjectFileValues()";
-      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
+      NetString.ArgError(ref message, currentSpec, "currentSpec", context);
       NetString.ThrowArgError(message);
 
       var retValue = new ProjectFile
       {
-        FileName = Path.GetFileName(fileSpec)
+        FileName = Path.GetFileName(currentSpec)
       };
       if (!NetString.HasValue(targetFilePath))
       {
@@ -128,7 +128,7 @@ namespace ProjectFilesDAL
         retValue.TargetPathProject = null;
       }
 
-      var path = Path.GetDirectoryName(fileSpec);
+      var path = Path.GetDirectoryName(currentSpec);
       var folders = path.Split('\\');
       var index = folders.Length - 1;
 
