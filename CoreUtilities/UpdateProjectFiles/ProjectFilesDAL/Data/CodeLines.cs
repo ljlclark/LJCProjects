@@ -15,6 +15,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public CodeLines()
     {
+      ArgError = new ArgError("DataProjectFiles.ProjectFilesDAL.CodeLines");
       mPrevCount = -1;
     }
     #endregion
@@ -86,10 +87,9 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       LJCSortUnique();
       CodeLine searchItem = new CodeLine()
@@ -110,10 +110,9 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, path, "path", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var comparer = new CodeLinePathComparer();
       LJCSortPath(comparer);
@@ -135,10 +134,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        string message = "";
-        string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, codeLine, "codeLine", context);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCUpdate()";
+        ArgError.Add(codeLine, "codeLine");
+        NetString.ThrowArgError(ArgError.ToString());
 
         var item = LJCRetrieve(codeLine.Name);
         if (item != null)
@@ -154,10 +152,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path.</summary>
     public void LJCSortPath(CodeLinePathComparer comparer)
     {
-      string message = "";
-      string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, "comparer", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCSortPath()";
+      ArgError.Add(comparer, "comparer");
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
@@ -179,6 +176,12 @@ namespace ProjectFilesDAL
     }
     #endregion
 
+    #region Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+    #endregion
+
     #region Class Data
 
     private int mPrevCount;
@@ -189,7 +192,6 @@ namespace ProjectFilesDAL
       Unique,
       Path
     }
-    private const string ClassContext = "ProjectFilesDAL.CodeLines.";
     #endregion
   }
 }

@@ -18,10 +18,12 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionManagerC/*' file='Doc/SolutionManager.xml'/>
     public SolutionManager(string fileSpec = "Solution.txt")
     {
-      string message = "";
-      string context = ClassContext + "SolutionManager()";
-      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
-      NetString.ThrowArgError(message);
+      ArgError = new ArgError("\"ProjectFilesDAL.SolutionManager\"\r\n")
+      {
+        MethodName = "SolutionManager()"
+      };
+      ArgError.Add(fileSpec, "fileSpec");
+      NetString.ThrowArgError(ArgError.ToString());
 
       FileSpec = fileSpec;
       CreateBaseColumns();
@@ -37,12 +39,10 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path)
     {
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Add()";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var solution = CreateDataObject(parentKey, name, sequence, path);
       var newRecord = CreateRecord(solution);
@@ -57,12 +57,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/SolutionManager.xml'/>
     public void Delete(SolutionParentKey parentKey, string name)
     {
-      string message = "";
-      string context = ClassContext + "Delete()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Delete()";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var solutions = LoadAllExcept(parentKey, name);
@@ -108,10 +106,9 @@ namespace ProjectFilesDAL
     {
       Solutions retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LoadAllExcept()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.LJCOpen();
       if (Reader.Read())
@@ -138,11 +135,9 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      string message = "";
-      string context = ClassContext + "Retrieve()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Retrieve()";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (NetString.HasValue(name))
       {
@@ -187,11 +182,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/SolutionManager.xml'/>
     public Solution Update(Solution solution)
     {
-      string message = "";
-      string context = ClassContext + "Update()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      Solution.ItemValues(ref message, solution);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Update()";
+      ArgError.Add(Solution.ItemValues(solution));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var parentKey = CreateParentKey(solution);
       var current = CurrentDataObject();
@@ -216,10 +209,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/SolutionManager.xml'/>
     public void CreateFile(string fileName, Solutions solutions)
     {
-      string message = "";
-      string context = ClassContext + "CreateFile()";
-      NetString.ArgError(ref message, fileName, "fileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateFile()";
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
@@ -238,11 +230,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/SolutionManager.xml'/>
     public SolutionParentKey CreateParentKey(Solution solution)
     {
-      string message = "";
-      string context = ClassContext + "CreateParentKey()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      Solution.ItemParentValues(ref message, solution);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateParentKey()";
+      ArgError.Add(Solution.ItemParentValues(solution));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new SolutionParentKey()
       {
@@ -256,11 +246,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/SolutionManager.xml'/>
     public string CreateRecord(Solution solution)
     {
-      string message = "";
-      string context = ClassContext + "CreateRecord()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      Solution.ItemValues(ref message, solution);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateRecord()";
+      ArgError.Add(Solution.ItemValues(solution));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(128);
       if (!Reader.LJCEndsWithNewLine())
@@ -314,10 +302,9 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/SolutionManager.xml'/>
     public void RecreateFile(Solutions solutions)
     {
-      string message = "";
-      string context = ClassContext + "RecreateFile()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RecreateFile()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.Close();
       if (File.Exists(FileSpec))
@@ -340,10 +327,9 @@ namespace ProjectFilesDAL
     /// <summary>Write the text file from a Solutions collection and create a backup.</summary>
     public void WriteBackup()
     {
-      string message = "";
-      string context = ClassContext + "WriteBackup()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "WriteBackup()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var fileName = Path.GetFileNameWithoutExtension(FileSpec);
       var backupFile = $"{fileName}Backup.txt";
@@ -391,11 +377,9 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      string message = "";
-      string context = ClassContext + "IsMatch()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      Solution.ItemParentValues(ref message, solution);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "IsMatch()";
+      ArgError.Add(Solution.ItemParentValues(solution));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       if (current.CodeLine == solution.CodeLine
@@ -411,7 +395,7 @@ namespace ProjectFilesDAL
     }
     #endregion
 
-    #region Public Properties
+    #region Properties
 
     /// <summary>Gets the base data definition columns collection.</summary>
     public DbColumns BaseColumns { get; set; }
@@ -421,11 +405,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileSpec { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.SolutionManager.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

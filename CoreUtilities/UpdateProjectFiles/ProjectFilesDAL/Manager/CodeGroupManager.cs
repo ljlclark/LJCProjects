@@ -18,10 +18,12 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupManagerC/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroupManager(string fileSpec = "CodeGroup.txt")
     {
-      string message = "";
-      string context = ClassContext + "CodeGroupManager()";
-      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
-      NetString.ThrowArgError(message);
+      ArgError = new ArgError("ProjectFilesDAL.CodeGroupManager")
+      {
+        MethodName = "CodeGroupManager()"
+      };
+      ArgError.Add(fileSpec, "fileSpec");
+      NetString.ThrowArgError(ArgError.ToString());
 
       FileSpec = fileSpec;
       CreateBaseColumns();
@@ -36,11 +38,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Add(string codeLineName, string name, string path)
     {
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, name, "name");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Add()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeGroup = CreateDataObject(codeLineName, name, path);
       var newRecord = CreateRecord(codeGroup);
@@ -55,11 +56,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeGroupManager.xml'/>
     public void Delete(string codeLineName, string name)
     {
-      string message = "";
-      string context = ClassContext + "Delete()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, name, "name");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Delete()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var codeLines = LoadAllExcept(codeLineName, name);
@@ -105,10 +105,9 @@ namespace ProjectFilesDAL
     {
       CodeGroups retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LoadAllExcept()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.LJCOpen();
       if (Reader.Read())
@@ -134,10 +133,9 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      string message = "";
-      string context = ClassContext + "Retrieve()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Retrieve()";
+      ArgError.Add(codeLineName, "codeLineName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (NetString.HasValue(name))
       {
@@ -181,11 +179,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Update(CodeGroup codeGroup)
     {
-      string message = "";
-      string context = ClassContext + "Update()";
-      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
-      CodeGroup.ItemValues(ref message, codeGroup);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Update()";
+      ArgError.Add(codeGroup, "codeGroup");
+      ArgError.Add(CodeGroup.ItemValues(codeGroup));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var codeLines = LoadAllExcept(codeGroup.CodeLine, codeGroup.Name);
@@ -209,10 +206,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
-      string message = "";
-      string context = ClassContext + "CreateFile()";
-      NetString.ArgError(ref message, fileName, "fileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateFile()";
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, Name");
@@ -230,11 +226,10 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeGroupManager.xml'/>
     public string CreateRecord(CodeGroup codeGroup)
     {
-      string message = "";
-      string context = ClassContext + "CreateRecord()";
-      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
-      CodeGroup.ItemParentValues(ref message, codeGroup);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateRecord()";
+      ArgError.Add(codeGroup, "codeGroup");
+      ArgError.Add(CodeGroup.ItemParentValues(codeGroup));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(128);
       if (!Reader.LJCEndsWithNewLine())
@@ -284,10 +279,9 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void RecreateFile(CodeGroups codeGroups)
     {
-      string message = "";
-      string context = ClassContext + "RecreateFile()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RecreateFile()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.Close();
       if (File.Exists(FileSpec))
@@ -310,11 +304,6 @@ namespace ProjectFilesDAL
     /// <summary>Write a backup file.</summary>
     public void WriteBackup()
     {
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
-
       var fileName = Path.GetFileNameWithoutExtension(FileSpec);
       var backupFile = $"{fileName}Backup.txt";
       CreateFile(backupFile, Load());
@@ -358,11 +347,10 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
-      CodeGroup.ItemParentValues(ref message, codeGroup);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "IsMatch()";
+      ArgError.Add(codeGroup, "codeGroup");
+      ArgError.Add(CodeGroup.ItemParentValues(codeGroup));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       if (current.CodeLine == codeGroup.CodeLine)
@@ -377,7 +365,7 @@ namespace ProjectFilesDAL
     }
     #endregion
 
-    #region Public Properties
+    #region Properties
 
     /// <summary>Gets the base data definition columns collection.</summary>
     public DbColumns BaseColumns { get; set; }
@@ -387,11 +375,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileSpec { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.CodeGroupManager.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

@@ -15,6 +15,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ProjectFiles()
     {
+      ArgError = new ArgError("ProjectFilesDAL.ProjectFiles");
       mPrevCount = -1;
     }
     #endregion
@@ -103,9 +104,9 @@ namespace ProjectFilesDAL
       }
       else
       {
-        string message = "";
-        ProjectFile.ParentKeyValues(ref message, parentKey);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "DataProjectFiles()";
+        ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var items = FindAll(x =>
         x.TargetCodeLine == parentKey.CodeLine
@@ -123,12 +124,10 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, fileName, "fileName");
-      ProjectFile.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       LJCSortUnique();
       ProjectFile searchItem = new ProjectFile()
@@ -153,11 +152,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        string message = "";
-        string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, projectFile, "projectFile", context);
-        ProjectFile.ItemValues(ref message, projectFile);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCUpdate()";
+        ArgError.Add(ProjectFile.ItemValues(projectFile));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var parentKey = GetParentKey(projectFile);
         var item = LJCRetrieve(parentKey, projectFile.FileName);
@@ -183,11 +180,9 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/ProjectFiles.xml'/>
     public ProjectFileParentKey GetParentKey(ProjectFile projectFile)
     {
-      string message = "";
-      string context = ClassContext + "GetParentKey()";
-      NetString.ArgError(ref message, projectFile, "projectFile", context);
-      ProjectFile.ItemParentValues(ref message, projectFile);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "GetParentKey()";
+      ArgError.Add(ProjectFile.ItemParentValues(projectFile));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectFileParentKey()
       {
@@ -210,10 +205,15 @@ namespace ProjectFilesDAL
     }
     #endregion
 
+    #region Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+    #endregion
+
     #region Class Data
 
     private int mPrevCount;
-    private const string ClassContext = "ProjectFilesDAL.ProjectFiles.";
     #endregion
   }
 }

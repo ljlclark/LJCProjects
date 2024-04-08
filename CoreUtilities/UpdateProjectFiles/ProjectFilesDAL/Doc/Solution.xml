@@ -8,21 +8,18 @@
     <summary>
       Checks for the required item values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="solution">The Solution objct.</param>
   </ItemValues>
-  <ItemPrrentValues>
+  <ItemParentValues>
     <summary>
       Checks for the required ParentKey values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="solution">The Solution objct.</param>
-  </ItemPrrentValues>
+  </ItemParentValues>
   <ParentKeyValues>
     <summary>
       Checks the ParentKey for values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="parentKey">The ParentKey object.</param>
   </ParentKeyValues>
 </items>

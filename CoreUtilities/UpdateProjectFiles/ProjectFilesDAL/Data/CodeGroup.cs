@@ -14,33 +14,27 @@ namespace ProjectFilesDAL
 
     // Checks for the required object values.
     /// <include path='items/ItemValues/*' file='Doc/CodeGroup.xml'/>
-    public static bool ItemValues(ref string message, CodeGroup codeGroup)
+    public static string ItemValues(CodeGroup codeGroup)
     {
-      var retValue = ItemParentValues(ref message, codeGroup);
+      var retValue = ItemParentValues(codeGroup);
       if (!NetString.HasValue(codeGroup.Name))
       {
-        retValue = false;
-        message += $"{codeGroup.Name}";
+        retValue += $"{codeGroup.Name}";
       }
       return retValue;
     }
 
     // Checks for the required object values.
     /// <include path='items/ItemParentValues/*' file='Doc/CodeGroup.xml'/>
-    public static bool ItemParentValues(ref string message, CodeGroup codeGroup)
+    public static string ItemParentValues(CodeGroup codeGroup)
     {
-      bool retValue = true;
+      string retValue = "";
 
-      if (null == codeGroup)
-      {
-        retValue = false;
-      }
-      else
+      if (codeGroup != null)
       {
         if (!NetString.HasValue(codeGroup.CodeLine))
         {
-          retValue = false;
-          message += $"{codeGroup.CodeLine}";
+          retValue += $"{codeGroup.CodeLine}";
         }
       }
       return retValue;

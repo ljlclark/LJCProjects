@@ -14,15 +14,14 @@ namespace ProjectFilesDAL
 
     // Checks for the required item values.
     /// <include path='items/ItemValues/*' file='Doc/Solution.xml'/>
-    public static bool ItemValues(ref string message, Solution solution)
+    public static string ItemValues(Solution solution)
     {
-      var retValue = ItemParentValues(ref message, solution);
-      if (retValue)
+      var retValue = ItemParentValues(solution);
+      if (NetString.HasValue(retValue))
       {
         if (!NetString.HasValue(solution.Name))
         {
-          retValue = false;
-          message += $"{solution.Name}";
+          retValue += $"{solution.Name}";
         }
       }
       return retValue;
@@ -30,25 +29,19 @@ namespace ProjectFilesDAL
 
     // Checks for the required ParentKey values.
     /// <include path='items/ItemParentValues/*' file='Doc/Solution.xml'/>
-    public static bool ItemParentValues(ref string message, Solution solution)
+    public static string ItemParentValues(Solution solution)
     {
-      bool retValue = true;
+      string retValue = "";
 
-      if (null == solution)
-      {
-        retValue = false;
-      }
-      else
+      if (solution != null)
       {
         if (!NetString.HasValue(solution.CodeLine))
         {
-          retValue = false;
-          message += $"{solution.CodeLine}";
+          retValue += $"{solution.CodeLine}";
         }
         if (!NetString.HasValue(solution.CodeGroup))
         {
-          retValue = false;
-          message += $"{solution.CodeGroup}";
+          retValue += $"{solution.CodeGroup}";
         }
       }
       return retValue;
@@ -56,26 +49,19 @@ namespace ProjectFilesDAL
 
     // Checks the ParentKey for values.
     /// <include path='items/ParentKeyValues/*' file='Doc/Solution.xml'/>
-    public static bool ParentKeyValues(ref string message
-      , SolutionParentKey parentKey)
+    public static string ParentKeyValues(SolutionParentKey parentKey)
     {
-      bool retValue = true;
+      string retValue = "";
 
-      if (null == parentKey)
-      {
-        retValue = false;
-      }
-      else
+      if (parentKey != null)
       {
         if (!NetString.HasValue(parentKey.CodeLine))
         {
-          retValue = false;
-          message += $"{parentKey.CodeLine}";
+          retValue += $"{parentKey.CodeLine}";
         }
         if (!NetString.HasValue(parentKey.CodeGroup))
         {
-          retValue = false;
-          message += $"{parentKey.CodeGroup}";
+          retValue += $"{parentKey.CodeGroup}";
         }
       }
       return retValue;

@@ -17,10 +17,12 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ManagersProjectFiles(string filePath)
     {
-      string message = "";
-      string context = ClassContext + "ManagerProjectFiles()";
-      NetString.ArgError(ref message, filePath, "filePath", context);
-      NetString.ThrowArgError(message);
+      ArgError = new ArgError("ProjectFilesDAL.ManagersProjectFiles")
+      {
+        MethodName = "ManagersProjectFiles()"
+      };
+      ArgError.Add(filePath, "filePath");
+      NetString.ThrowArgError(ArgError.ToString());
 
       FilePath = filePath;
     }
@@ -145,12 +147,11 @@ namespace ProjectFilesDAL
     #endregion
 
     #region Class Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+
     private string FilePath { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.ManagersProjectFiles.";
     #endregion
   }
 }

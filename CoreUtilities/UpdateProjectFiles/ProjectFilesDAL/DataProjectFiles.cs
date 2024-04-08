@@ -15,10 +15,12 @@ namespace ProjectFilesDAL
     /// <include path='items/DataProjectFilesC/*' file='Doc/DataProjectFiles.xml'/>
     public DataProjectFiles(ProjectFilesData data)
     {
-      string message = "";
-      string context = ClassContext + "DataProjectFiles()";
-      NetString.ArgError(ref message, data, "data", context);
-      NetString.ThrowArgError(message);
+      ArgError = new ArgError("ProjectFilesDAL.DataProjectFiles")
+      {
+        MethodName = "DataProjectFiles()"
+      };
+      ArgError.Add(data, "data");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Data = data;
     }
@@ -32,13 +34,12 @@ namespace ProjectFilesDAL
       , string solutionName, string projectName, string projectFilePath
       , string fileName = null)
     {
-      string message = "";
-      string context = ClassContext + "GetFileSpec()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, solutionName, "solutionName");
+      ArgError.MethodName = "GetFileSpec";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(solutionName, "solutionName");
       // *** Next Statement *** Delete - 4/8/24
-      //NetString.ArgError(ref message, projectFilePath, "projectFilePath");
-      NetString.ThrowArgError(message);
+      //ArgError.Add(projectFilePath, "projectFilePath");
+      NetString.ThrowArgError(ArgError.ToString());
 
       // Get CodeLine path.
       var retValue = CodeLinePath(codeLineName);
@@ -77,11 +78,9 @@ namespace ProjectFilesDAL
     public void ProjectDependencies(ProjectFileParentKey parentKey
       , string action = null)
     {
-      string message = "";
-      string context = ClassContext + "ProjectDependencies()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectDependencies";
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projectFiles = ProjectFiles(parentKey);
       if (NetCommon.HasItems(projectFiles))
@@ -113,10 +112,9 @@ namespace ProjectFilesDAL
     public ProjectFile ProjectFileValues(string currentSpec
       , string targetFilePath = null)
     {
-      string message = "";
-      string context = ClassContext + "ProjectFileValues()";
-      NetString.ArgError(ref message, currentSpec, "currentSpec", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFileValues()";
+      ArgError.Add(currentSpec, "currentSpec");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectFile
       {
@@ -188,11 +186,9 @@ namespace ProjectFilesDAL
     public void SolutionDependencies(ProjectParentKey parentKey
       , string action = null)
     {
-      string message = "";
-      string context = ClassContext + "SolutionDependencies()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionDependencies()";
+      ArgError.Add(ProjectFilesDAL.Project.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var items = Data.Projects;
       var projects = items.LJCLoad(parentKey);
@@ -210,11 +206,9 @@ namespace ProjectFilesDAL
     /// <include path='items/SourceFileSpec/*' file='Doc/DataProjectFiles.xml'/>
     public string SourceFileSpec(ProjectFile projectFile)
     {
-      string message = "";
-      string context = ClassContext + "SourceFileSpec()";
-      NetString.ArgError(ref message, projectFile, "projectFile", context);
-      ProjectFilesDAL.ProjectFile.ItemSourceValues(ref message, projectFile);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SourceFileSpec()";
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ItemSourceValues(projectFile));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = GetFileSpec(projectFile.SourceCodeLine
         , projectFile.SourceCodeGroup, projectFile.SourceSolution
@@ -227,11 +221,9 @@ namespace ProjectFilesDAL
     /// <include path='items/TargetFileSpec/*' file='Doc/DataProjectFiles.xml'/>
     public string TargetFileSpec(ProjectFile projectFile)
     {
-      string message = "";
-      string context = ClassContext + "TargetFileSpec()";
-      NetString.ArgError(ref message, projectFile, "projectFile", context);
-      ProjectFilesDAL.ProjectFile.ItemValues(ref message, projectFile);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "TargetFileSpec()";
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ItemValues(projectFile));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLineName = projectFile.TargetCodeLine;
       var retValue = CodeLinePath(codeLineName);
@@ -274,12 +266,11 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      string message = "";
-      string context = ClassContext + "CombineFolders()";
-      NetString.ArgError(ref message, folders, "folders");
-      NetString.ArgError(ref message, startIndex, "startIndex", context);
-      NetString.ArgError(ref message, stopIndex, "stopIndex");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CombineFolders()";
+      ArgError.Add(folders, "folders");
+      ArgError.Add(startIndex, "startIndex");
+      ArgError.Add(stopIndex, "stopIndex");
+      NetString.ThrowArgError(ArgError.ToString());
 
       lastFolderName = null;
       for (int pathIndex = startIndex; pathIndex <= stopIndex; pathIndex++)
@@ -304,11 +295,10 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroup/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroup(string codeLineName, string name)
     {
-      string message = "";
-      string context = ClassContext + "CodeGroup()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, name, "name");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeGroup()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeGroups = Data.CodeGroups;
       var retValue = codeGroups.LJCRetrieve(codeLineName, name);
@@ -319,11 +309,10 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeGroup CodeGroupWithPath(string codeLineName, string path)
     {
-      string message = "";
-      string context = ClassContext + "CodeGroupWithPath()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, path, "path");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeGroupWithPath()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeGroups = Data.CodeGroups;
       var retValue = codeGroups.LJCRetrieveWithPath(codeLineName, path);
@@ -334,10 +323,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLline/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLine(string name)
     {
-      string message = "";
-      string context = ClassContext + "CodeLines()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeLine()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLines = Data.CodeLines;
       var retValue = codeLines.LJCRetrieve(name);
@@ -348,10 +336,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public CodeLine CodeLineWithPath(string path)
     {
-      string message = "";
-      string context = ClassContext + "CodeLineWithPath()";
-      NetString.ArgError(ref message, path, "path", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeLineWithPath()";
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLines = Data.CodeLines;
       var retValue = codeLines.LJCRetrieveWithPath(path);
@@ -362,11 +349,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Project/*' file='Doc/DataProjectFiles.xml'/>
     public Project Project(ProjectParentKey parentKey, string name)
     {
-      string message = "";
-      string context = ClassContext + "Project()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Project()";
+      ArgError.Add(ProjectFilesDAL.Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projects = Data.Projects;
       var retValue = projects.LJCRetrieve(parentKey, name);
@@ -377,11 +363,10 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Project ProjectWithPath(ProjectParentKey parentKey, string path)
     {
-      string message = "";
-      string context = ClassContext + "ProjectWithPath()";
-      NetString.ArgError(ref message, path, "path", context);
-      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectWithPath()";
+      ArgError.Add(ProjectFilesDAL.Project.ParentKeyValues(parentKey));
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projects = Data.Projects;
       var retValue = projects.LJCRetrieveWithPath(parentKey, path);
@@ -393,11 +378,10 @@ namespace ProjectFilesDAL
     public ProjectFile ProjectFile(ProjectFileParentKey parentKey
       , string name)
     {
-      string message = "";
-      string context = ClassContext + "ProjectFile()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFile()";
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projectFiles = Data.ProjectFiles;
       var retValue = projectFiles.LJCRetrieve(parentKey, name);
@@ -408,11 +392,9 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectFiles/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectFiles ProjectFiles(ProjectFileParentKey parentKey)
     {
-      string message = "";
-      string context = ClassContext + "ProjectFiles()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context); ;
-      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFiles()";
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projectFiles = Data.ProjectFiles;
       var retValue = projectFiles.LJCLoad(parentKey);
@@ -423,11 +405,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Solution/*' file='Doc/DataProjectFiles.xml'/>
     public Solution Solution(SolutionParentKey parentKey, string name)
     {
-      string message = "";
-      string context = ClassContext + "Solution()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Solution()";
+      ArgError.Add(ProjectFilesDAL.Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var solutions = Data.Solutions;
       var retValue = solutions.LJCRetrieve(parentKey, name);
@@ -438,11 +419,10 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionWithPath/*' file='Doc/DataProjectFiles.xml'/>
     public Solution SolutionWithPath(SolutionParentKey parentKey, string path)
     {
-      string message = "";
-      string context = ClassContext + "SolutionWithPath()";
-      NetString.ArgError(ref message, path, "path", context);
-      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionWithPath()";
+      ArgError.Add(ProjectFilesDAL.Solution.ParentKeyValues(parentKey));
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var solutions = Data.Solutions;
       var retValue = solutions.LJCRetrieveWithPath(parentKey, path);
@@ -459,11 +439,10 @@ namespace ProjectFilesDAL
       // *** Next Statement *** Change - 4/8/24
       string retValue = name;
 
-      string message = "";
-      string context = ClassContext + "CodeGroupPath()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, name, "name");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeGroupPath()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeGroup = CodeGroup(codeLineName, name);
       if (codeGroup != null)
@@ -479,10 +458,9 @@ namespace ProjectFilesDAL
     {
       var retValue = defautName;
 
-      string message = "";
-      string context = ClassContext + "CodeLlineName()";
-      NetString.ArgError(ref message, path, "path", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeLineName()";
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLine = CodeLineWithPath(path);
       if (codeLine != null)
@@ -498,10 +476,9 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      string context = ClassContext + "CodeLinePath()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CodeLinePath()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLine = CodeLine(name);
       if (codeLine != null)
@@ -518,11 +495,10 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      string context = ClassContext + "ProjectFileSourcePath()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.ProjectFile.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFileSourcePath()";
+      ArgError.Add(name, "name");
+      ArgError.Add(ProjectFilesDAL.ProjectFile.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var projectFile = ProjectFile(parentKey, name);
       if (projectFile != null)
@@ -539,11 +515,10 @@ namespace ProjectFilesDAL
     {
       string retValue = defaultprojectName;
 
-      string message = "";
-      string context = ClassContext + "ProjectName()";
-      NetString.ArgError(ref message, path, "path", context);
-      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectName()";
+      ArgError.Add(path, "path");
+      ArgError.Add(ProjectFilesDAL.Project.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var project = ProjectWithPath(parentKey, path);
       if (project != null)
@@ -561,11 +536,10 @@ namespace ProjectFilesDAL
       // *** Next Statement *** Change - 4/8/24
       string retValue = name;
 
-      string message = "";
-      string context = ClassContext + "ProjectPath()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectPath()";
+      ArgError.Add(name, "name");
+      ArgError.Add(ProjectFilesDAL.Project.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var project = Project(parentKey, name);
       if (project != null)
@@ -581,11 +555,10 @@ namespace ProjectFilesDAL
     {
       string retValue = null;
 
-      string message = "";
-      string context = ClassContext + "SolutionName()";
-      NetString.ArgError(ref message, path, "path", context);
-      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionName()";
+      ArgError.Add(path, "path");
+      ArgError.Add(ProjectFilesDAL.Solution.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var solution = SolutionWithPath(parentKey, path);
       if (solution != null)
@@ -603,11 +576,10 @@ namespace ProjectFilesDAL
       // *** Next Statement *** Change - 4/8/24
       string retValue = name;
 
-      string message = "";
-      string context = ClassContext + "SolutionPath()";
-      NetString.ArgError(ref message, name, "name", context);
-      ProjectFilesDAL.Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionPath()";
+      ArgError.Add(name, "name");
+      ArgError.Add(ProjectFilesDAL.Solution.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var solution = Solution(parentKey, name);
       if (solution != null)
@@ -624,10 +596,9 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectFileParentKey/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectFileParentKey ProjectFileParentKey(Project project)
     {
-      string message = "";
-      string context = ClassContext + "ProjectFileParentnKey()";
-      NetString.ArgError(ref message, project, "project", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFileParentnKey()";
+      ArgError.Add(project, "project");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = ProjectFileParentKey(project.CodeLine, project.CodeGroup
         , project.Solution, project.Name);
@@ -639,13 +610,12 @@ namespace ProjectFilesDAL
     public ProjectFileParentKey ProjectFileParentKey(string codeLineName
       , string codeGroupName, string solutionName, string projectName)
     {
-      string message = "";
-      string context = ClassContext + "ProjectFileParentKey()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, codeGroupName, "codeGroupName");
-      NetString.ArgError(ref message, solutionName,"SolutionName");
-      NetString.ArgError(ref message, projectName, "projectName");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectFileParentKey()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(codeGroupName, "codeGroupName");
+      ArgError.Add(solutionName, "SolutionName");
+      ArgError.Add(projectName, "projectName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectFileParentKey()
       {
@@ -661,10 +631,9 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectParentKey/*' file='Doc/DataProjectFiles.xml'/>
     public ProjectParentKey ProjectParentKey(Solution solution)
     {
-      string message = "";
-      string context = ClassContext + "ProjectParentKey()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectParentKey()";
+      ArgError.Add(solution, "solution");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = ProjectParentKey(solution.CodeLine, solution.CodeGroup
         , solution.Name);
@@ -676,12 +645,11 @@ namespace ProjectFilesDAL
     public ProjectParentKey ProjectParentKey(string codeLineName
       , string codeGroupName, string solutionName)
     {
-      string message = "";
-      string context = ClassContext + "ProjectParentKey()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, codeGroupName, "codeGroupName");
-      NetString.ArgError(ref message, solutionName, "solutionName");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectParentKey()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(codeGroupName, "codeGroupName");
+      ArgError.Add(solutionName, "solutionName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectParentKey()
       {
@@ -696,10 +664,9 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionParentKey/*' file='Doc/DataProjectFiles.xml'/>
     public SolutionParentKey SolutionParentKey(CodeGroup codeGroup)
     {
-      string message = "";
-      string context = ClassContext + "SolutionParentKey()";
-      NetString.ArgError(ref message, codeGroup, "codeGroup", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionParentKey()";
+      ArgError.Add(codeGroup, "codeGroup");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = SolutionParentKey(codeGroup.CodeLine, codeGroup.Name);
       return retValue;
@@ -710,11 +677,10 @@ namespace ProjectFilesDAL
     public SolutionParentKey SolutionParentKey(string codeLineName
       , string codeGroupName)
     {
-      string message = "";
-      string context = ClassContext + "SolutionParentKey()";
-      NetString.ArgError(ref message, codeLineName, "codeLineName", context);
-      NetString.ArgError(ref message, codeGroupName, "codeGroupName");
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SolutionParentKey()";
+      ArgError.Add(codeLineName, "codeLineName");
+      ArgError.Add(codeGroupName, "codeGroupName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new SolutionParentKey()
       {
@@ -729,11 +695,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the Data object.</summary>
     public ProjectFilesData Data { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.ProjectFiles.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

@@ -17,10 +17,12 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineManagerC/*' file='Doc/CodeLineManager.xml'/>
     public CodeLineManager(string fileSpec = "CodeLine.txt")
     {
-      string message = "";
-      string context = ClassContext + "CodeLineManager()";
-      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
-      NetString.ThrowArgError(message);
+      ArgError = new ArgError("DataProjectFiles.ProjectFilesDAL.CodeLineManager")
+      {
+        MethodName = "CodeLineManager()"
+      };
+      ArgError.Add(fileSpec, "fileSpec");
+      NetString.ThrowArgError(ArgError.ToString());
 
       FileSpec = fileSpec;
       CreateBaseColumns();
@@ -35,10 +37,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Add(string name, string path)
     {
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Add()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var codeLine = CreateDataObject(name, path);
       var newRecord = CreateRecord(codeLine);
@@ -53,10 +54,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeLineManager.xml'/>
     public void Delete(string name)
     {
-      string message = "";
-      string context = ClassContext + "Delete()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Delete()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var codeLines = LoadAllExcept(name);
@@ -102,10 +102,9 @@ namespace ProjectFilesDAL
     {
       CodeLines retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LoadAllExcept()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.LJCOpen();
       if (Reader.Read())
@@ -164,11 +163,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Update(CodeLine codeLine)
     {
-      string message = "";
-      string context = ClassContext + "Update()";
-      NetString.ArgError(ref message, codeLine, "codeLine", context);
-      CodeLine.ItemValues(ref message, codeLine);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Update()";
+      ArgError.Add(codeLine, "codeLine");
+      ArgError.Add(CodeLine.ItemValues(codeLine));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var codeLines = LoadAllExcept(codeLine.Name);
@@ -192,10 +190,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void CreateFile(string fileName, CodeLines codeLines)
     {
-      string message = "";
-      string context = ClassContext + "CreateFile()";
-      NetString.ArgError(ref message, fileName, "fileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateFile()";
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       File.WriteAllText(fileName, "Name, Path\r\n");
       foreach (CodeLine codeLine in codeLines)
@@ -209,11 +206,10 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeLineManager.xml'/>
     public string CreateRecord(CodeLine codeLine)
     {
-      string message = "";
-      string context = ClassContext + "CreateRecord()";
-      NetString.ArgError(ref message, codeLine, "codeLine", context);
-      CodeLine.ItemValues(ref message, codeLine);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateRecord()";
+      ArgError.Add(codeLine, "codeLine");
+      ArgError.Add(CodeLine.ItemValues(codeLine));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = "";
       if (!Reader.LJCEndsWithNewLine())
@@ -259,10 +255,9 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void RecreateFile(CodeLines codeLines)
     {
-      string message = "";
-      string context = ClassContext + "RecreateFile()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RecreateFile()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.Close();
       if (File.Exists(FileSpec))
@@ -285,10 +280,9 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
-      string message = "";
-      string context = ClassContext + "WriteBackup()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "WriteBackup()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var fileName = Path.GetFileNameWithoutExtension(FileSpec);
       var backupFile = $"{fileName}Backup.txt";
@@ -324,10 +318,9 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      string message = "";
-      string context = ClassContext + "IsMatch()";
-      NetString.ArgError(ref message, codeLine, "codeLine", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "IsMatch()";
+      ArgError.Add(codeLine, "codeLine");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       if (null == codeLine.Name
@@ -339,7 +332,7 @@ namespace ProjectFilesDAL
     }
     #endregion
 
-    #region Public Properties
+    #region Properties
 
     /// <summary>Gets the base data definition columns collection.</summary>
     public DbColumns BaseColumns { get; set; }
@@ -349,11 +342,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileSpec { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.CodeLineManager.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

@@ -15,6 +15,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Solutions()
     {
+      ArgError = new ArgError("ProjectFilesDAL.Solutions\r\n");
       mPrevCount = -1;
     }
     #endregion
@@ -94,8 +95,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        string message = "";
-        Solution.ParentKeyValues(ref message, parentKey);
+        var message = Solution.ParentKeyValues(parentKey);
         NetString.ThrowArgError(message);
 
         var items = FindAll(x =>
@@ -112,12 +112,10 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       LJCSortUnique();
       var searchItem = new Solution()
@@ -141,12 +139,10 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, path, "path");
-      Solution.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var comparer = new SolutionPath();
       LJCSortPath(comparer);
@@ -170,11 +166,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        string message = "";
-        string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, solution, "solution", context);
-        Solution.ItemValues(ref message, solution);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCUpdate()";
+        ArgError.Add(Solution.ItemValues(solution));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var parentKey = LJCGetParentKey(solution);
         var item = LJCRetrieve(parentKey, solution.Name);
@@ -192,11 +186,9 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCGetParentKey/*' file='../Doc/Solutions.xml'/>
     public SolutionParentKey LJCGetParentKey(Solution solution)
     {
-      string message = "";
-      string context = ClassContext + "LJCGetParentKey()";
-      NetString.ArgError(ref message, solution, "solution", context);
-      Solution.ItemParentValues(ref message, solution);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCGetParentKey()";
+      ArgError.Add(Solution.ItemParentValues(solution));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new SolutionParentKey()
       {
@@ -210,10 +202,9 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortPath(SolutionPath comparer)
     {
-      string message = "";
-      string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, "comparer", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCSortPath()";
+      ArgError.Add(comparer, "comparer");
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
@@ -228,10 +219,9 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortSequence(SolutionSequence comparer)
     {
-      string message = "";
-      string context = ClassContext + "LJCSortSequence()";
-      NetString.ArgError(ref message, comparer, "comparer", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCSortSequence()";
+      ArgError.Add(comparer, "comparer");
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Sequence) != 0)
@@ -255,6 +245,12 @@ namespace ProjectFilesDAL
     }
     #endregion
 
+    #region Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+    #endregion
+
     #region Class Data
 
     private int mPrevCount;
@@ -266,7 +262,6 @@ namespace ProjectFilesDAL
       Path,
       Sequence
     }
-    private const string ClassContext = "ProjectFilesDAL.Solutions.";
     #endregion
   }
 }

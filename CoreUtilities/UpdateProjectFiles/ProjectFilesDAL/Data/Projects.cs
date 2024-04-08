@@ -3,6 +3,7 @@
 // Projects.cs
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ProjectFilesDAL
 {
@@ -15,6 +16,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Projects()
     {
+      ArgError = new ArgError("ProjectFilesDAL.Projects\r\n");
       mPrevCount = -1;
     }
     #endregion
@@ -96,9 +98,9 @@ namespace ProjectFilesDAL
       }
       else
       {
-        string message = "";
-        Project.ParentKeyValues(ref message, parentKey);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCLoad()";
+        ArgError.Add(Project.ParentKeyValues(parentKey));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var items = FindAll(x =>
           x.CodeLine == parentKey.CodeLine
@@ -115,12 +117,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieve()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       LJCSortUnique();
       Project searchItem = new Project()
@@ -144,12 +144,10 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LJCRetrieveWithPath()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, path, "path");
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(path, "path");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var comparer = new ProjectPath();
       LJCSortPath(comparer);
@@ -174,11 +172,9 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        string message = "";
-        string context = ClassContext + "LJCUpdate()";
-        NetString.ArgError(ref message, project, "project", context);
-        Project.ItemValues(ref message, project);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCUpdate()";
+        ArgError.Add(Project.ItemValues(project));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var parentKey = GetParentKey(project);
         var item = LJCRetrieve(parentKey, project.Name);
@@ -196,11 +192,9 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/Project.xml'/>
     public ProjectParentKey GetParentKey(Project project)
     {
-      string message = "";
-      string context = ClassContext + "GetParentKey()";
-      NetString.ArgError(ref message, project, "project", context);
-      Project.ItemParentValues(ref message, project);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "GetParentKey()";
+      ArgError.Add(Project.ItemParentValues(project));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectParentKey()
       {
@@ -214,10 +208,9 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path values.</summary>
     public void LJCSortPath(ProjectPath comparer)
     {
-      string message = "";
-      string context = ClassContext + "LJCSortPath()";
-      NetString.ArgError(ref message, comparer, "comparer", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LJCSortPath()";
+      ArgError.Add(comparer, "comparer");
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Path) != 0)
@@ -241,6 +234,12 @@ namespace ProjectFilesDAL
     }
     #endregion
 
+    #region Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+    #endregion
+ 
     #region Class Data
 
     private int mPrevCount;
@@ -251,7 +250,6 @@ namespace ProjectFilesDAL
       Unique,
       Path
     }
-    private const string ClassContext = "ProjectFilesDAL.Projects.";
     #endregion
   }
 }

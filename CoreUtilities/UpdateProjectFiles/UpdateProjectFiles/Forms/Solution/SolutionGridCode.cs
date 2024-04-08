@@ -20,6 +20,7 @@ namespace UpdateProjectFiles
     {
       // Initialize property values.
       parentList.Cursor = Cursors.WaitCursor;
+      ArgError = new ArgError("UpdateProjectFiles.SolutionGridCode");
       CodeList = parentList;
       CodeGroupGrid = CodeList.CodeGroupGrid;
       SolutionGrid = CodeList.SolutionGrid;
@@ -66,10 +67,9 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Solution dataRecord)
     {
-      string message = "";
-      string context = ClassContext + "RowAdd()";
-      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RowAdd()";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = SolutionGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
@@ -82,10 +82,9 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      string message = "";
-      string context = ClassContext + "RowSelect()";
-      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RowSelect()";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
 
       CodeList.Cursor = Cursors.WaitCursor;
       foreach (LJCGridRow row in SolutionGrid.Rows)
@@ -120,10 +119,9 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Solution dataRecord)
     {
-      string message = "";
-      string context = ClassContext + "SetStoredValues()";
-      NetString.ArgError(ref message, dataRecord, "dataRecord", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "SetStoredValues()";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
 
       row.LJCSetString("CodeLine", dataRecord.CodeLine);
       row.LJCSetString("CodeGroup", dataRecord.CodeGroup);
@@ -300,6 +298,9 @@ namespace UpdateProjectFiles
 
     #region Properties
 
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
+
     // Gets or sets the Solution Grid reference.
     private LJCDataGrid CodeGroupGrid { get; set; }
 
@@ -320,11 +321,6 @@ namespace UpdateProjectFiles
 
     // Gets or sets the Solutions collection.
     private Solutions Solutions { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private const string ClassContext = "UpdateProjectFiles.SolutionGridCode.";
     #endregion
   }
 }

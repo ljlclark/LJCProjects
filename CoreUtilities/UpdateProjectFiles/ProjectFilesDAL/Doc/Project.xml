@@ -8,21 +8,18 @@
     <summary>
       Checks for the required object values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="project">The Project objct.</param>
   </ItemValues>
   <ItemParentValues>
     <summary>
       Checks for the required ParentKey values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="project">The Project objct.</param>
   </ItemParentValues>
   <ParentKeyValues>
     <summary>
       Checks the ParentKey for values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="parentKey">The ParentKey object.</param>
   </ParentKeyValues>
 </items>

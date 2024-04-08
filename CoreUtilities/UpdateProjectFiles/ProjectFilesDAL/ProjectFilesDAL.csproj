@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgError.cs" />
     <Compile Include="ProjectFilesData.cs" />
     <Compile Include="DataProjectFiles.cs" />
     <Compile Include="Data\CodeGroup.cs" />

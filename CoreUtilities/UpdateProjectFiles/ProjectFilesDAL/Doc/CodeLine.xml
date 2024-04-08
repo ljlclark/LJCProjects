@@ -8,7 +8,6 @@
     <summary>
       Checks for the required object values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="codeLine">The CodeLine value.</param>
   </ItemValues>
 </items>

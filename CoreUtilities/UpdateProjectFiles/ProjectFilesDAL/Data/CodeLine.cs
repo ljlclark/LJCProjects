@@ -14,14 +14,13 @@ namespace ProjectFilesDAL
 
     // Checks for the required object values.
     /// <include path='items/ItemValues/*' file='Doc/CodeLine.xml'/>
-    public static bool ItemValues(ref string message, CodeLine codeLine)
+    public static string ItemValues(CodeLine codeLine)
     {
-      bool retValue = true;
+      string retValue = "";
 
       if (!NetString.HasValue(codeLine.Name))
       {
-        retValue = false;
-        message += $"{codeLine.Name}";
+        retValue += $"{codeLine.Name}";
       }
       return retValue;
     }

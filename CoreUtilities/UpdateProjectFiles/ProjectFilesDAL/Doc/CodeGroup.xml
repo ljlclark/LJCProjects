@@ -8,14 +8,12 @@
     <summary>
       Checks for the required object values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="codeGroup">The CodeGroup objct.</param>
   </ItemValues>
-  <ItemPrrentValues>
+  <ItemParentValues>
     <summary>
       Checks for the required object values.
     </summary>
-    <param name="message">The message value.</param>
     <param name="codeGroup">The CodeGroup objct.</param>
-  </ItemPrrentValues>
+  </ItemParentValues>
 </items>

@@ -11,6 +11,14 @@ namespace ProjectFilesDAL
   /// <summary>Gets the Data collections.</summary>
   public class ProjectFilesData
   {
+    #region Constructors
+    /// <summary>Initializes an object instance.</summary>
+    public ProjectFilesData()
+    {
+      ArgError = new ArgError("ProjectFilesDAL.ProjectFilesData\r\n");
+    }
+    #endregion
+
     #region Private Methods
 
     // Sets the Managers object.
@@ -27,10 +35,9 @@ namespace ProjectFilesDAL
       }
       if (null == mManagers)
       {
-        string message = "";
-        string context = ClassContext + "SetManagers()";
-        NetString.ArgError(ref message, mManagers, "mManagers", context);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "SetManagers()";
+        ArgError.Add(mManagers, "mManagers");
+        NetString.ThrowArgError(ArgError.ToString());
       }
     }
     #endregion
@@ -161,7 +168,9 @@ namespace ProjectFilesDAL
     #region Class Data
 
     private ManagersProjectFiles mManagers;
-    private const string ClassContext = "ProjectFilesDAL.ProjectFilesData.";
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

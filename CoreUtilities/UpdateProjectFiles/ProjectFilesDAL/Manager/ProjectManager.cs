@@ -18,10 +18,9 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectManagerC/*' file='Doc/ProjectManager.xml'/>
     public ProjectManager(string fileSpec = "Project.txt")
     {
-      string message = "";
-      string context = ClassContext + "ProjectManager()";
-      NetString.ArgError(ref message, fileSpec, "fileSpec", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "ProjectManager()";
+      ArgError.Add(fileSpec, "fileSpec");
+      NetString.ThrowArgError(ArgError.ToString());
 
       FileSpec = fileSpec;
       CreateBaseColumns();
@@ -36,12 +35,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/ProjectManager.xml'/>
     public Project Add(ProjectParentKey parentKey, string name, string path)
     {
-      string message = "";
-      string context = ClassContext + "Add()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Add()";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var project = CreateDataObject(parentKey, name, path);
       var newRecord = CreateRecord(project);
@@ -56,12 +53,10 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/ProjectManager.xml'/>
     public void Delete(ProjectParentKey parentKey, string name)
     {
-      string message = "";
-      string context = ClassContext + "Delete()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      NetString.ArgError(ref message, name, "name");
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Delete()";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       var projects = LoadAllExcept(parentKey, name);
@@ -107,10 +102,9 @@ namespace ProjectFilesDAL
     {
       Projects retValue = null;
 
-      string message = "";
-      string context = ClassContext + "LoadAllExcept()";
-      NetString.ArgError(ref message, name, "name", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.LJCOpen();
       if (Reader.Read())
@@ -138,11 +132,9 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      string message = "";
-      string context = ClassContext + "Retrieve()";
-      NetString.ArgError(ref message, parentKey, "parentKey", context);
-      Project.ParentKeyValues(ref message, parentKey);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Retrieve()";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      NetString.ThrowArgError(ArgError.ToString());
 
       if (NetString.HasValue(name))
       {
@@ -183,11 +175,9 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/ProjectManager.xml'/>
     public Project Update(Project project)
     {
-      string message = "";
-      string context = ClassContext + "Update()";
-      NetString.ArgError(ref message, project, "project", context);
-      Project.ItemValues(ref message, project);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "Update()";
+      ArgError.Add(Project.ItemValues(project));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var parentKey = CreateParentKey(project);
       var current = CurrentDataObject();
@@ -212,10 +202,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/ProjectManager.xml'/>
     public void CreateFile(string fileName, Projects projects)
     {
-      string message = "";
-      string context = ClassContext + "CreateFile()";
-      NetString.ArgError(ref message, fileName, "fileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateFile()";
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(128);
       builder.Append("CodeLine, CodeGroup");
@@ -234,11 +223,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/ProjectManager.xml'/>
     public ProjectParentKey CreateParentKey(Project project)
     {
-      string message = "";
-      string context = ClassContext + "CreateParentKey()";
-      NetString.ArgError(ref message, project, "project", context);
-      Project.ItemParentValues(ref message, project);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateParentKey()";
+      ArgError.Add(Project.ItemParentValues(project));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var retValue = new ProjectParentKey()
       {
@@ -253,11 +240,9 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/ProjectManager.xml'/>
     public string CreateRecord(Project project)
     {
-      string message = "";
-      string context = ClassContext + "CreateRecord()";
-      NetString.ArgError(ref message, project, "project", context);
-      Project.ItemValues(ref message, project);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "CreateRecord()";
+      ArgError.Add(Project.ItemValues(project));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var builder = new StringBuilder(1024);
       if (!Reader.LJCEndsWithNewLine())
@@ -311,10 +296,9 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/ProjectManager.xml'/>
     public void RecreateFile(Projects projects)
     {
-      string message = "";
-      string context = ClassContext + "RecreateFile()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "RecreateFile()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       Reader.Close();
       if (File.Exists(FileSpec))
@@ -337,10 +321,9 @@ namespace ProjectFilesDAL
     /// <summary>Writes a backup file.</summary>
     public void WriteBackup()
     {
-      string message = "";
-      string context = ClassContext + "WriteBackup()";
-      NetString.ArgError(ref message, FileSpec, "FileName", context);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "WriteBackup()";
+      ArgError.Add(FileSpec, "FileName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var fileName = Path.GetFileNameWithoutExtension(FileSpec);
       var backupFile = $"{fileName}Backup.txt";
@@ -389,15 +372,9 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      string message = "";
-      string context = ClassContext + "IsMatch()";
-      NetString.ArgError(ref message, project, "project", context);
-      NetString.ArgError(ref message, project, "project");
-      NetString.ArgError(ref message, project, "project");
-      NetString.ArgError(ref message, project, "project");
-      NetString.ArgError(ref message, project, "project");
-      Project.ItemParentValues(ref message, project);
-      NetString.ThrowArgError(message);
+      ArgError.MethodName = "IsMatch()";
+      ArgError.Add(Project.ItemParentValues(project));
+      NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
       if (current.CodeLine == project.CodeLine
@@ -414,7 +391,7 @@ namespace ProjectFilesDAL
     }
     #endregion
 
-    #region Public Properties
+    #region Properties
 
     /// <summary>Gets the base data definition columns collection.</summary>
     public DbColumns BaseColumns { get; set; }
@@ -424,11 +401,9 @@ namespace ProjectFilesDAL
 
     /// <summary>Gets or sets the File name.</summary>
     public string FileSpec { get; set; }
-    #endregion
 
-    #region Class Data
-
-    private const string ClassContext = "DataProjectFilesDAL.ProjectManager.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }
