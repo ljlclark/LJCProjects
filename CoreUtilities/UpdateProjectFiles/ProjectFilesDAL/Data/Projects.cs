@@ -16,7 +16,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Projects()
     {
-      ArgError = new ArgError("ProjectFilesDAL.Projects\r\n");
+      ArgError = new ArgError("ProjectFilesDAL.Projects");
       mPrevCount = -1;
     }
     #endregion
@@ -98,7 +98,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        ArgError.MethodName = "LJCLoad()";
+        ArgError.MethodName = "LJCLoad(ProjectParentKey parentKey)";
         ArgError.Add(Project.ParentKeyValues(parentKey));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -117,7 +117,8 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.MethodName = "LJCRetrieve(ProjectParentKey parentKey"
+        + ", string name)";
       ArgError.Add(Project.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -144,7 +145,8 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.MethodName = "LJCRetrieveWithPath(ProjectParentKey parentKey"
+        + ", string path)";
       ArgError.Add(Project.ParentKeyValues(parentKey));
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
@@ -172,7 +174,7 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        ArgError.MethodName = "LJCUpdate()";
+        ArgError.MethodName = "LJCUpdate(Project project)";
         ArgError.Add(Project.ItemValues(project));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -192,7 +194,7 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/Project.xml'/>
     public ProjectParentKey GetParentKey(Project project)
     {
-      ArgError.MethodName = "GetParentKey()";
+      ArgError.MethodName = "GetParentKey(Project project)";
       ArgError.Add(Project.ItemParentValues(project));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -208,7 +210,7 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path values.</summary>
     public void LJCSortPath(ProjectPath comparer)
     {
-      ArgError.MethodName = "LJCSortPath()";
+      ArgError.MethodName = "LJCSortPath(ProjectPath comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

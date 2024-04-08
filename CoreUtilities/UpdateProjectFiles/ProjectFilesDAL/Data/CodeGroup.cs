@@ -19,7 +19,7 @@ namespace ProjectFilesDAL
       var retValue = ItemParentValues(codeGroup);
       if (!NetString.HasValue(codeGroup.Name))
       {
-        retValue += $"{codeGroup.Name}";
+        retValue += "codeGroup.Name\r\n";
       }
       return retValue;
     }
@@ -30,11 +30,15 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (codeGroup != null)
+      if (null == codeGroup)
+      {
+        retValue += "codeGroup\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(codeGroup.CodeLine))
         {
-          retValue += $"{codeGroup.CodeLine}";
+          retValue += "codeGroup.CodeLine\r\n";
         }
       }
       return retValue;

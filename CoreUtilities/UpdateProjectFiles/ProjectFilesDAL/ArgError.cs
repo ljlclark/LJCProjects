@@ -31,7 +31,7 @@ namespace ProjectFilesDAL
 
       if (NetString.HasValue(mMessage))
       {
-        retValue = $"{ClassName}.{MethodName}\r\n";
+        retValue = $"{ClassName}\r\n{MethodName}\r\n";
         retValue += mMessage;
       }
       return retValue;

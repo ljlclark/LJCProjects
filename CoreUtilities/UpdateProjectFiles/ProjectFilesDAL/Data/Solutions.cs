@@ -15,7 +15,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public Solutions()
     {
-      ArgError = new ArgError("ProjectFilesDAL.Solutions\r\n");
+      ArgError = new ArgError("ProjectFilesDAL.Solutions");
       mPrevCount = -1;
     }
     #endregion
@@ -95,8 +95,9 @@ namespace ProjectFilesDAL
       }
       else
       {
-        var message = Solution.ParentKeyValues(parentKey);
-        NetString.ThrowArgError(message);
+        ArgError.MethodName = "LJCLoad(SolutionParentKey parentKey)";
+        ArgError.Add(Solution.ParentKeyValues(parentKey));
+        NetString.ThrowArgError(ArgError.ToString());
 
         var items = FindAll(x =>
           x.CodeLine == parentKey.CodeLine
@@ -112,7 +113,8 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.MethodName = "LJCRetrieve(SolutionParentKey parentKey"
+         + ", string name)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -139,7 +141,8 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.MethodName = "LJCRetrieveWithPath(SolutionParentKey parentKey"
+        + ", string path)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
@@ -166,7 +169,7 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        ArgError.MethodName = "LJCUpdate()";
+        ArgError.MethodName = "LJCUpdate(Solution solution)";
         ArgError.Add(Solution.ItemValues(solution));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -186,7 +189,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCGetParentKey/*' file='../Doc/Solutions.xml'/>
     public SolutionParentKey LJCGetParentKey(Solution solution)
     {
-      ArgError.MethodName = "LJCGetParentKey()";
+      ArgError.MethodName = "LJCGetParentKey(Solution solution)";
       ArgError.Add(Solution.ItemParentValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -202,7 +205,7 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortPath(SolutionPath comparer)
     {
-      ArgError.MethodName = "LJCSortPath()";
+      ArgError.MethodName = "LJCSortPath(SolutionPath comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -219,7 +222,7 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortSequence(SolutionSequence comparer)
     {
-      ArgError.MethodName = "LJCSortSequence()";
+      ArgError.MethodName = "LJCSortSequence(SolutionSequence comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

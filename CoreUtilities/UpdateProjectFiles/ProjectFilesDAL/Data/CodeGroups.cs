@@ -15,6 +15,7 @@ namespace ProjectFilesDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public CodeGroups()
     {
+      ArgError = new ArgError("ProjectFilesDAL.CodeGroups");
       mPrevCount = -1;
     }
     #endregion
@@ -105,7 +106,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve()";
+      ArgError.MethodName = "LJCRetrieve(string codeLine, string name)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -130,7 +131,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath()";
+      ArgError.MethodName = "LJCRetrieveWithPath(string codeLine, string name)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
@@ -154,7 +155,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCUpdate/*' file='Doc/CodeGroups.xml'/>
     public void LJCUpdate(CodeGroup codeGroup)
     {
-      ArgError.MethodName = "LJCUpdate()";
+      ArgError.MethodName = "LJCUpdate(CodeGroup codeGroup)";
       ArgError.Add(codeGroup, "codeGroup");
       ArgError.Add(CodeGroup.ItemValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
@@ -175,7 +176,7 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Parent and Path values.</summary>
     public void LJCSortPath(CodeGroupPathComparer comparer)
     {
-      ArgError.MethodName = "LJCSortPath()";
+      ArgError.MethodName = "LJCSortPath(CodeGroupPathComparer comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

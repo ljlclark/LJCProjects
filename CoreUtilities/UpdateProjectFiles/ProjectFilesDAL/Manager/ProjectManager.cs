@@ -18,7 +18,10 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectManagerC/*' file='Doc/ProjectManager.xml'/>
     public ProjectManager(string fileSpec = "Project.txt")
     {
-      ArgError.MethodName = "ProjectManager()";
+      ArgError = new ArgError("ProjectFilesDAL.ProjectManager")
+      {
+        MethodName = "ProjectManager(string fileSpec)"
+      };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -35,7 +38,8 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/ProjectManager.xml'/>
     public Project Add(ProjectParentKey parentKey, string name, string path)
     {
-      ArgError.MethodName = "Add()";
+      ArgError.MethodName = "Add(ProjectParentKey parentKey, string name"
+        + ", string path)";
       ArgError.Add(Project.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -53,7 +57,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/ProjectManager.xml'/>
     public void Delete(ProjectParentKey parentKey, string name)
     {
-      ArgError.MethodName = "Delete()";
+      ArgError.MethodName = "Delete(ProjectParentKey parentKey, string name)";
       ArgError.Add(Project.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -102,7 +106,8 @@ namespace ProjectFilesDAL
     {
       Projects retValue = null;
 
-      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.MethodName = "LoadAllExcept(ProjectParentKey parentKey"
+        + ", string name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -132,7 +137,7 @@ namespace ProjectFilesDAL
     {
       Project retValue = null;
 
-      ArgError.MethodName = "Retrieve()";
+      ArgError.MethodName = "Retrieve(ProjectParentKey parentKey, string name)";
       ArgError.Add(Project.ParentKeyValues(parentKey));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -175,7 +180,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/ProjectManager.xml'/>
     public Project Update(Project project)
     {
-      ArgError.MethodName = "Update()";
+      ArgError.MethodName = "Update(Project project)";
       ArgError.Add(Project.ItemValues(project));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -202,7 +207,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/ProjectManager.xml'/>
     public void CreateFile(string fileName, Projects projects)
     {
-      ArgError.MethodName = "CreateFile()";
+      ArgError.MethodName = "CreateFile(string fileName, Projects projects)";
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -223,7 +228,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/ProjectManager.xml'/>
     public ProjectParentKey CreateParentKey(Project project)
     {
-      ArgError.MethodName = "CreateParentKey()";
+      ArgError.MethodName = "CreateParentKey(Project project)";
       ArgError.Add(Project.ItemParentValues(project));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -240,7 +245,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/ProjectManager.xml'/>
     public string CreateRecord(Project project)
     {
-      ArgError.MethodName = "CreateRecord()";
+      ArgError.MethodName = "CreateRecord(Project project)";
       ArgError.Add(Project.ItemValues(project));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -296,7 +301,7 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/ProjectManager.xml'/>
     public void RecreateFile(Projects projects)
     {
-      ArgError.MethodName = "RecreateFile()";
+      ArgError.MethodName = "RecreateFile(Projects projects)";
       ArgError.Add(FileSpec, "FileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -372,7 +377,7 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      ArgError.MethodName = "IsMatch()";
+      ArgError.MethodName = "IsMatch(Project project)";
       ArgError.Add(Project.ItemParentValues(project));
       NetString.ThrowArgError(ArgError.ToString());
 

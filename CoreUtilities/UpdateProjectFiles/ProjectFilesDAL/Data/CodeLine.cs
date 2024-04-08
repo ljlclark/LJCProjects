@@ -18,9 +18,16 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (!NetString.HasValue(codeLine.Name))
+      if (null == codeLine)
       {
-        retValue += $"{codeLine.Name}";
+        retValue += "codeLine\r\n";
+      }
+      else
+      {
+        if (!NetString.HasValue(codeLine.Name))
+        {
+          retValue += "codeLine.Name\r\n";
+        }
       }
       return retValue;
     }

@@ -576,6 +576,7 @@ namespace LJCNetCommon
     {
       if (HasValue(message))
       {
+        message = message.Trim();
         var argMessage = $"Missing or invalid arguments:\r\n{message}";
         throw new ArgumentException(argMessage);
       }

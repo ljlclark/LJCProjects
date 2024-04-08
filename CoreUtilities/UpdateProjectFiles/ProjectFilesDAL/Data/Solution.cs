@@ -21,7 +21,7 @@ namespace ProjectFilesDAL
       {
         if (!NetString.HasValue(solution.Name))
         {
-          retValue += $"{solution.Name}";
+          retValue += "solution.Name\r\n";
         }
       }
       return retValue;
@@ -33,15 +33,19 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (solution != null)
+      if (null == solution)
+      {
+        retValue += "solution\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(solution.CodeLine))
         {
-          retValue += $"{solution.CodeLine}";
+          retValue += "solution.CodeLine\r\n";
         }
         if (!NetString.HasValue(solution.CodeGroup))
         {
-          retValue += $"{solution.CodeGroup}";
+          retValue += "solution.CodeGroup\r\n";
         }
       }
       return retValue;
@@ -53,15 +57,19 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (parentKey != null)
+      if (null == parentKey)
+      {
+        retValue += "parentKey\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(parentKey.CodeLine))
         {
-          retValue += $"{parentKey.CodeLine}";
+          retValue += "parentKey.CodeLine\r\n";
         }
         if (!NetString.HasValue(parentKey.CodeGroup))
         {
-          retValue += $"{parentKey.CodeGroup}";
+          retValue += "parentKey.CodeGroup\r\n";
         }
       }
       return retValue;

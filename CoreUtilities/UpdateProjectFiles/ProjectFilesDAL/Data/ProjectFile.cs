@@ -18,7 +18,7 @@ namespace ProjectFilesDAL
       var retValue = ItemParentValues(projectFile);
       if (!NetString.HasValue(projectFile.FileName))
       {
-        retValue += $"{projectFile.FileName}";
+        retValue += "projectFile.FileName\r\n";
       }
       return retValue;
     }
@@ -29,23 +29,27 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (projectFile != null)
+      if (null == projectFile)
+      {
+        retValue += "projectFile\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(projectFile.TargetCodeLine))
         {
-          retValue += $"{projectFile.TargetCodeLine}";
+          retValue += "projectFile.TargetCodeLine\r\n";
         }
         if (!NetString.HasValue(projectFile.TargetCodeGroup))
         {
-          retValue += $"{projectFile.TargetCodeGroup}";
+          retValue += "projectFile.TargetCodeGroup\r\n";
         }
         if (!NetString.HasValue(projectFile.TargetSolution))
         {
-          retValue += $"{projectFile.TargetSolution}";
+          retValue += "projectFile.TargetSolution\r\n";
         }
         if (!NetString.HasValue(projectFile.TargetProject))
         {
-          retValue += $"{projectFile.TargetProject}";
+          retValue += "projectFile.TargetProject\r\n";
         }
       }
       return retValue;
@@ -57,27 +61,31 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (projectFile != null)
+      if (null == projectFile)
+      {
+        retValue += "projectFile\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(projectFile.SourceCodeLine))
         {
-          retValue += $"{projectFile.SourceCodeLine}";
+          retValue += "projectFile.SourceCodeLine\r\n";
         }
         if (!NetString.HasValue(projectFile.SourceCodeGroup))
         {
-          retValue += $"{projectFile.SourceCodeGroup}";
+          retValue += "projectFile.SourceCodeGroup\r\n";
         }
         if (!NetString.HasValue(projectFile.SourceSolution))
         {
-          retValue += $"{projectFile.SourceSolution}";
+          retValue += "projectFile.SourceSolution\r\n";
         }
         if (!NetString.HasValue(projectFile.SourceFilePath))
         {
-          retValue += $"{projectFile.SourceFilePath}";
+          retValue += "projectFile.SourceFilePath\r\n";
         }
         if (!NetString.HasValue(projectFile.FileName))
         {
-          retValue += $"{projectFile.FileName}";
+          retValue += "projectFile.FileName\r\n";
         }
       }
       return retValue;
@@ -89,23 +97,27 @@ namespace ProjectFilesDAL
     {
       string retValue = "";
 
-      if (parentKey != null)
+      if (null == parentKey)
+      {
+        retValue += "parentKey\r\n";
+      }
+      else
       {
         if (!NetString.HasValue(parentKey.CodeLine))
         {
-          retValue += $"{parentKey.CodeLine} is missing.";
+          retValue += "parentKey.CodeLine\r\n";
         }
         if (!NetString.HasValue(parentKey.CodeGroup))
         {
-          retValue += $"{parentKey.CodeGroup} is missing.";
+          retValue += "parentKey.CodeGroup\r\n";
         }
         if (!NetString.HasValue(parentKey.Solution))
         {
-          retValue += $"{parentKey.Solution} is missing.";
+          retValue += "parentKey.Solution\r\n";
         }
         if (!NetString.HasValue(parentKey.Project))
         {
-          retValue += $"{parentKey.Project} is missing.";
+          retValue += "parentKey.Project\r\n";
         }
       }
       return retValue;

@@ -17,7 +17,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineManagerC/*' file='Doc/CodeLineManager.xml'/>
     public CodeLineManager(string fileSpec = "CodeLine.txt")
     {
-      ArgError = new ArgError("DataProjectFiles.ProjectFilesDAL.CodeLineManager")
+      ArgError = new ArgError("ProjectFilesDAL.CodeLineManager")
       {
         MethodName = "CodeLineManager()"
       };
@@ -37,7 +37,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Add(string name, string path)
     {
-      ArgError.MethodName = "Add()";
+      ArgError.MethodName = "Add(string name, string path)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -54,7 +54,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeLineManager.xml'/>
     public void Delete(string name)
     {
-      ArgError.MethodName = "Delete()";
+      ArgError.MethodName = "Delete(string name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -102,7 +102,7 @@ namespace ProjectFilesDAL
     {
       CodeLines retValue = null;
 
-      ArgError.MethodName = "LoadAllExcept()";
+      ArgError.MethodName = "LoadAllExcept(string name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -163,8 +163,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeLineManager.xml'/>
     public CodeLine Update(CodeLine codeLine)
     {
-      ArgError.MethodName = "Update()";
-      ArgError.Add(codeLine, "codeLine");
+      ArgError.MethodName = "Update(CodeLine codeLine)";
       ArgError.Add(CodeLine.ItemValues(codeLine));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -190,7 +189,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void CreateFile(string fileName, CodeLines codeLines)
     {
-      ArgError.MethodName = "CreateFile()";
+      ArgError.MethodName = "CreateFile(string fileName, CodeLines codeLines)";
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -206,8 +205,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeLineManager.xml'/>
     public string CreateRecord(CodeLine codeLine)
     {
-      ArgError.MethodName = "CreateRecord()";
-      ArgError.Add(codeLine, "codeLine");
+      ArgError.MethodName = "CreateRecord(CodeLine codeLine)";
       ArgError.Add(CodeLine.ItemValues(codeLine));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -255,7 +253,7 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeLineManager.xml'/>
     public void RecreateFile(CodeLines codeLines)
     {
-      ArgError.MethodName = "RecreateFile()";
+      ArgError.MethodName = "RecreateFile(CodeLines codeLines)";
       ArgError.Add(FileSpec, "FileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -318,8 +316,8 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      ArgError.MethodName = "IsMatch()";
-      ArgError.Add(codeLine, "codeLine");
+      ArgError.MethodName = "IsMatch(CodeLine codeLine)";
+      ArgError.Add(CodeLine.ItemValues(codeLine));
       NetString.ThrowArgError(ArgError.ToString());
 
       var current = CurrentDataObject();
