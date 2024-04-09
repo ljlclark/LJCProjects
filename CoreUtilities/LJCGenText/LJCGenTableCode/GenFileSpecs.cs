@@ -61,6 +61,7 @@ namespace LJCGenTableCode
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public GenFileSpecs()
     {
+      ArgError = new ArgError("LJCGenTableCode.GenFileSpecs");
     }
     #endregion
 
@@ -73,12 +74,13 @@ namespace LJCGenTableCode
     {
       GenFileSpec retValue;
 
-      string message = "";
-      NetString.AddMissingArgument(message, fileTypeName);
-      NetString.AddMissingArgument(message, templateFileSpec);
-      NetString.AddMissingArgument(message, outputFileSpec);
-      NetString.AddMissingArgument(message, xmlFormat);
-      NetString.ThrowInvalidArgument(message);
+      ArgError.MethodName = "Add(string fileTypeName, string templateFileSpec"
+        + ", string outputFileSpec, string xmlFormat, bool isPlural";
+      ArgError.Add(fileTypeName, "fileTypeName");
+      ArgError.Add(templateFileSpec, "templateFileSpec");
+      ArgError.Add(outputFileSpec, "outputFileSpec");
+      ArgError.Add(xmlFormat, "xmlFormat");
+      NetString.ThrowArgError(ArgError.ToString());
 
       retValue = new GenFileSpec
       {
@@ -127,6 +129,9 @@ namespace LJCGenTableCode
     {
       get { return "GenFileSpecs.xml"; }
     }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

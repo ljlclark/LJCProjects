@@ -47,6 +47,7 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocMethodGroupHeadings()
     {
+      ArgError = new ArgError("LJCGenDocDAL.DocMethodGroupHeadings");
       mPrevCount = -1;
     }
 
@@ -72,13 +73,16 @@ namespace LJCGenDocDAL
     {
       DocMethodGroupHeading retValue;
 
+      ArgError.MethodName = "Add(short id, string name)";
       string message = "";
       if (id <= 0)
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      ArgError.Add(name, "name");
+      var errMessage = ArgError.ToString();
+      errMessage += message;
+      NetString.ThrowArgError(errMessage);
 
       retValue = LJCSearchUnique(name);
       if (null == retValue)
@@ -195,6 +199,9 @@ namespace LJCGenDocDAL
     {
       get { return "DocMethodGroupHeadings.xml"; }
     }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

@@ -47,6 +47,7 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocAssemblyGroups()
     {
+      ArgError = new ArgError("LJCGenDocDAL.DocAssemblyGroups");
       mPrevCount = -1;
     }
 
@@ -72,13 +73,15 @@ namespace LJCGenDocDAL
     {
       DocAssemblyGroup retValue;
 
+      ArgError.MethodName = "Add(short id, string name)";
       string message = "";
       if (id <= 0)
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      ArgError.Add(name, "name");
+      message += ArgError.ToString();
+      NetString.ThrowArgError(message);
 
       retValue = LJCSearchUnique(name);
       if (null == retValue)
@@ -195,6 +198,9 @@ namespace LJCGenDocDAL
     {
       get { return "DocAssemblyGroups.xml"; }
     }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data
