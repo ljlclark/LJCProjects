@@ -107,6 +107,7 @@ namespace ProjectFilesDAL
       CodeGroups retValue = null;
 
       ArgError.MethodName = "LoadAllExcept(string codeLineName, string name)";
+      ArgError.Add(codeLineName, "codeLineName");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 

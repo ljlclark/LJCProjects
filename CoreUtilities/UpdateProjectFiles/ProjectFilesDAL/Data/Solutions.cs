@@ -55,6 +55,12 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
+      ArgError.MethodName = "Add(SolutionParentKey parentKey"
+         + ", string name, int sequence, string path)";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       // Do not add duplicate of existing item.
       var retValue = LJCRetrieve(parentKey, name);
       if (null == retValue)
@@ -76,6 +82,12 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='../Doc/Solutions.xml'/>
     public void LJCDelete(SolutionParentKey parentKey, string name)
     {
+      ArgError.MethodName = "LJCDelete(SolutionParentKey parentKey"
+         + ", string name)";
+      ArgError.Add(Solution.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var item = LJCRetrieve(parentKey, name);
       if (item != null)
       {

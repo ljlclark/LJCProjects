@@ -19,7 +19,7 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.CodeLineManager")
       {
-        MethodName = "CodeLineManager()"
+        MethodName = "CodeLineManager(string fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());

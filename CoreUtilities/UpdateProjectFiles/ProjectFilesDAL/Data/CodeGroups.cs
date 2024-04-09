@@ -56,6 +56,11 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue;
 
+      ArgError.MethodName = "Add(string codeLine, string name, string path)";
+      ArgError.Add(codeLine, "codeLine");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       // Do not add duplicate of existing item.
       retValue = LJCRetrieve(codeLine, name);
       if (null == retValue)
@@ -75,6 +80,11 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/CodeGroups.xml'/>
     public void LJCDelete(string codeLine, string name)
     {
+      ArgError.MethodName = "LJCDelete(string codeLine, string name)";
+      ArgError.Add(codeLine, "codeLine");
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var item = LJCRetrieve(codeLine, name);
       if (item != null)
       {
@@ -84,7 +94,7 @@ namespace ProjectFilesDAL
 
     // Retrieves a collection that match the supplied values.
     /// <include path='items/LJCLoad/*' file='Doc/CodeGroups.xml'/>
-    public CodeGroups LJCLoad(string codeLine)
+    public CodeGroups LJCLoad(string codeLine = null)
     {
       CodeGroups retValue = null;
 
@@ -156,7 +166,6 @@ namespace ProjectFilesDAL
     public void LJCUpdate(CodeGroup codeGroup)
     {
       ArgError.MethodName = "LJCUpdate(CodeGroup codeGroup)";
-      ArgError.Add(codeGroup, "codeGroup");
       ArgError.Add(CodeGroup.ItemValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
 

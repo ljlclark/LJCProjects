@@ -58,6 +58,13 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue;
 
+      ArgError.MethodName = "Add(ProjectFileParentKey parentKey"
+        + ", ProjectFileParentKey sourceKey, string fileName"
+        + ", string targetFilePath, string sourceFilePath)";
+      ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
+
       // Do not add duplicate of existing item.
       retValue = LJCRetrieve(parentKey, fileName);
       if (null == retValue)
@@ -85,6 +92,13 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/ProjectFiles.xml'/>
     public void LJCDelete(ProjectFileParentKey parentKey, string fileName)
     {
+
+      ArgError.MethodName = "LJCDelete(ProjectFileParentKey parentKey"
+        + ", string fileName)";
+      ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
+      ArgError.Add(fileName, "fileName");
+      NetString.ThrowArgError(ArgError.ToString());
+
       ProjectFile item = LJCRetrieve(parentKey, fileName);
       if (item != null)
       {
@@ -104,8 +118,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        ArgError.MethodName = "DataProjectFiles(ProjectFileParentKey"
-          + " parentKey)";
+        ArgError.MethodName = "LJCLoad(ProjectFileParentKey parentKey)";
         ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
         NetString.ThrowArgError(ArgError.ToString());
 

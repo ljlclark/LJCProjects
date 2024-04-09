@@ -56,6 +56,10 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue;
 
+      ArgError.MethodName = "Add(string name, string paths)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       // Do not add duplicate of existing item.
       retValue = LJCRetrieve(name);
       if (null == retValue)
@@ -74,6 +78,10 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/CodeLines.xml'/>
     public void LJCDelete(string name)
     {
+      ArgError.MethodName = "LJCDelete(string name)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       CodeLine item = LJCRetrieve(name);
       if (item != null)
       {

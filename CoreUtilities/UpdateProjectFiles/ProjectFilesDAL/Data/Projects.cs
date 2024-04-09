@@ -3,7 +3,6 @@
 // Projects.cs
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace ProjectFilesDAL
 {
@@ -58,6 +57,12 @@ namespace ProjectFilesDAL
     {
       Project retValue;
 
+      ArgError.MethodName = "Add(ProjectParentKey parentKey, string name"
+        + ", string path)";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       // Do not add duplicate of existing item.
       retValue = LJCRetrieve(parentKey, name);
       if (null == retValue)
@@ -79,6 +84,12 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/Project.xml'/>
     public void LJCDelete(ProjectParentKey parentKey, string name)
     {
+      ArgError.MethodName = "LJCDelete(ProjectParentKey parentKey"
+        + ", string name)";
+      ArgError.Add(Project.ParentKeyValues(parentKey));
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var item = LJCRetrieve(parentKey, name);
       if (item != null)
       {
