@@ -56,7 +56,7 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue;
 
-      ArgError.MethodName = "Add(string name, string paths)";
+      ArgError.MethodName = "Add(name, paths)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -78,7 +78,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/CodeLines.xml'/>
     public void LJCDelete(string name)
     {
-      ArgError.MethodName = "LJCDelete(string name)";
+      ArgError.MethodName = "LJCDelete(name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -95,7 +95,7 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve(string name)";
+      ArgError.MethodName = "LJCRetrieve(name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -118,7 +118,7 @@ namespace ProjectFilesDAL
     {
       CodeLine retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath(string path)";
+      ArgError.MethodName = "LJCRetrieveWithPath(path)";
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -142,7 +142,7 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        ArgError.MethodName = "LJCUpdate(CodeLine codeLine)";
+        ArgError.MethodName = "LJCUpdate(codeLine)";
         ArgError.Add(CodeLine.ItemValues(codeLine));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -160,7 +160,7 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Path.</summary>
     public void LJCSortPath(CodeLinePathComparer comparer)
     {
-      ArgError.MethodName = "LJCSortPath(CodeLinePathComparer comparer)";
+      ArgError.MethodName = "LJCSortPath(comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

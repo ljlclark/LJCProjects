@@ -58,9 +58,8 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue;
 
-      ArgError.MethodName = "Add(ProjectFileParentKey parentKey"
-        + ", ProjectFileParentKey sourceKey, string fileName"
-        + ", string targetFilePath, string sourceFilePath)";
+      ArgError.MethodName = "Add(parentKey, sourceKey, fileName\r\n"
+        + ", targetFilePath, sourceFilePath)";
       ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
@@ -93,8 +92,7 @@ namespace ProjectFilesDAL
     public void LJCDelete(ProjectFileParentKey parentKey, string fileName)
     {
 
-      ArgError.MethodName = "LJCDelete(ProjectFileParentKey parentKey"
-        + ", string fileName)";
+      ArgError.MethodName = "LJCDelete(parentKey, fileName)";
       ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
@@ -118,7 +116,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        ArgError.MethodName = "LJCLoad(ProjectFileParentKey parentKey)";
+        ArgError.MethodName = "LJCLoad(parentKey)";
         ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -138,8 +136,7 @@ namespace ProjectFilesDAL
     {
       ProjectFile retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve(ProjectFileParentKey parentKey"
-        + ", string fileName)";
+      ArgError.MethodName = "LJCRetrieve(parentKey, fileName)";
       ArgError.Add(ProjectFile.ParentKeyValues(parentKey));
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
@@ -167,7 +164,7 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        ArgError.MethodName = "LJCUpdate(ProjectFile projectFile)";
+        ArgError.MethodName = "LJCUpdate(projectFile)";
         ArgError.Add(ProjectFile.ItemValues(projectFile));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -195,7 +192,7 @@ namespace ProjectFilesDAL
     /// <include path='items/GetParentKey/*' file='Doc/ProjectFiles.xml'/>
     public ProjectFileParentKey GetParentKey(ProjectFile projectFile)
     {
-      ArgError.MethodName = "GetParentKey(ProjectFile projectFile)";
+      ArgError.MethodName = "GetParentKey(projectFile)";
       ArgError.Add(ProjectFile.ItemParentValues(projectFile));
       NetString.ThrowArgError(ArgError.ToString());
 

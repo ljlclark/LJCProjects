@@ -56,7 +56,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue;
 
-      ArgError.MethodName = "Add(string codeLine, string name, string path)";
+      ArgError.MethodName = "Add(codeLine, name, path)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -80,7 +80,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='Doc/CodeGroups.xml'/>
     public void LJCDelete(string codeLine, string name)
     {
-      ArgError.MethodName = "LJCDelete(string codeLine, string name)";
+      ArgError.MethodName = "LJCDelete(codeLine, name)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -116,7 +116,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve(string codeLine, string name)";
+      ArgError.MethodName = "LJCRetrieve(codeLine, name)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -141,7 +141,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath(string codeLine, string name)";
+      ArgError.MethodName = "LJCRetrieveWithPath(codeLine, name)";
       ArgError.Add(codeLine, "codeLine");
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
@@ -165,7 +165,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCUpdate/*' file='Doc/CodeGroups.xml'/>
     public void LJCUpdate(CodeGroup codeGroup)
     {
-      ArgError.MethodName = "LJCUpdate(CodeGroup codeGroup)";
+      ArgError.MethodName = "LJCUpdate(codeGroup)";
       ArgError.Add(CodeGroup.ItemValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -185,7 +185,7 @@ namespace ProjectFilesDAL
     /// <summary>Sorts on Parent and Path values.</summary>
     public void LJCSortPath(CodeGroupPathComparer comparer)
     {
-      ArgError.MethodName = "LJCSortPath(CodeGroupPathComparer comparer)";
+      ArgError.MethodName = "LJCSortPath(comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

@@ -55,8 +55,7 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path = null)
     {
-      ArgError.MethodName = "Add(SolutionParentKey parentKey"
-         + ", string name, int sequence, string path)";
+      ArgError.MethodName = "Add(parentKey, name, sequence, path)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -82,8 +81,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCDelete/*' file='../Doc/Solutions.xml'/>
     public void LJCDelete(SolutionParentKey parentKey, string name)
     {
-      ArgError.MethodName = "LJCDelete(SolutionParentKey parentKey"
-         + ", string name)";
+      ArgError.MethodName = "LJCDelete(parentKey, name)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -107,7 +105,7 @@ namespace ProjectFilesDAL
       }
       else
       {
-        ArgError.MethodName = "LJCLoad(SolutionParentKey parentKey)";
+        ArgError.MethodName = "LJCLoad(parentKey)";
         ArgError.Add(Solution.ParentKeyValues(parentKey));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -125,8 +123,7 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      ArgError.MethodName = "LJCRetrieve(SolutionParentKey parentKey"
-         + ", string name)";
+      ArgError.MethodName = "LJCRetrieve(parentKey, name)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -153,8 +150,7 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      ArgError.MethodName = "LJCRetrieveWithPath(SolutionParentKey parentKey"
-        + ", string path)";
+      ArgError.MethodName = "LJCRetrieveWithPath(parentKey, path)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(path, "path");
       NetString.ThrowArgError(ArgError.ToString());
@@ -181,7 +177,7 @@ namespace ProjectFilesDAL
     {
       if (NetCommon.HasItems(this))
       {
-        ArgError.MethodName = "LJCUpdate(Solution solution)";
+        ArgError.MethodName = "LJCUpdate(solution)";
         ArgError.Add(Solution.ItemValues(solution));
         NetString.ThrowArgError(ArgError.ToString());
 
@@ -201,7 +197,7 @@ namespace ProjectFilesDAL
     /// <include path='items/LJCGetParentKey/*' file='../Doc/Solutions.xml'/>
     public SolutionParentKey LJCGetParentKey(Solution solution)
     {
-      ArgError.MethodName = "LJCGetParentKey(Solution solution)";
+      ArgError.MethodName = "LJCGetParentKey(solution)";
       ArgError.Add(Solution.ItemParentValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -217,7 +213,7 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortPath(SolutionPath comparer)
     {
-      ArgError.MethodName = "LJCSortPath(SolutionPath comparer)";
+      ArgError.MethodName = "LJCSortPath(comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -234,7 +230,7 @@ namespace ProjectFilesDAL
     /// <param name="comparer">The Comparer object.</param>
     public void LJCSortSequence(SolutionSequence comparer)
     {
-      ArgError.MethodName = "LJCSortSequence(SolutionSequence comparer)";
+      ArgError.MethodName = "LJCSortSequence(comparer)";
       ArgError.Add(comparer, "comparer");
       NetString.ThrowArgError(ArgError.ToString());
 

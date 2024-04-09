@@ -20,7 +20,7 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.CodeGroupManager")
       {
-        MethodName = "CodeGroupManager(string fileSpec)"
+        MethodName = "CodeGroupManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
@@ -38,8 +38,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Add/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Add(string codeLineName, string name, string path)
     {
-      ArgError.MethodName = "Add(string codeLineName, string name"
-        + ", string path)";
+      ArgError.MethodName = "Add(codeLineName, name, path)";
       ArgError.Add(codeLineName, "codeLineName");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -57,7 +56,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/CodeGroupManager.xml'/>
     public void Delete(string codeLineName, string name)
     {
-      ArgError.MethodName = "Delete(string codeLineName, string name)";
+      ArgError.MethodName = "Delete(codeLineName, name)";
       ArgError.Add(codeLineName, "codeLineName");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -106,7 +105,7 @@ namespace ProjectFilesDAL
     {
       CodeGroups retValue = null;
 
-      ArgError.MethodName = "LoadAllExcept(string codeLineName, string name)";
+      ArgError.MethodName = "LoadAllExcept(codeLineName, name)";
       ArgError.Add(codeLineName, "codeLineName");
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -135,7 +134,7 @@ namespace ProjectFilesDAL
     {
       CodeGroup retValue = null;
 
-      ArgError.MethodName = "Retrieve(string codeLineName, string name)";
+      ArgError.MethodName = "Retrieve(codeLineName, name)";
       ArgError.Add(codeLineName, "codeLineName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -181,7 +180,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroup Update(CodeGroup codeGroup)
     {
-      ArgError.MethodName = "Update(CodeGroup codeGroup)";
+      ArgError.MethodName = "Update(codeGroup)";
       ArgError.Add(CodeGroup.ItemValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -207,8 +206,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void CreateFile(string fileName, CodeGroups codeGroups)
     {
-      ArgError.MethodName = "CreateFile(string fileName"
-        +", CodeGroups codeGroups)";
+      ArgError.MethodName = "CreateFile(fileName, codeGroups)";
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -228,7 +226,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/CodeGroupManager.xml'/>
     public string CreateRecord(CodeGroup codeGroup)
     {
-      ArgError.MethodName = "CreateRecord(CodeGroup codeGroup)";
+      ArgError.MethodName = "CreateRecord(codeGroup)";
       ArgError.Add(CodeGroup.ItemParentValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -280,7 +278,7 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/CodeGroupManager.xml'/>
     public void RecreateFile(CodeGroups codeGroups)
     {
-      ArgError.MethodName = "RecreateFile(CodeGroups codeGroups)";
+      ArgError.MethodName = "RecreateFile(codeGroups)";
       ArgError.Add(FileSpec, "FileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -348,7 +346,7 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      ArgError.MethodName = "IsMatch(CodeGroup codeGroup)";
+      ArgError.MethodName = "IsMatch(codeGroup)";
       ArgError.Add(CodeGroup.ItemParentValues(codeGroup));
       NetString.ThrowArgError(ArgError.ToString());
 

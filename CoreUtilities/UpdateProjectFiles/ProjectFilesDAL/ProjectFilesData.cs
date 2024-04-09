@@ -15,7 +15,7 @@ namespace ProjectFilesDAL
     /// <summary>Initializes an object instance.</summary>
     public ProjectFilesData()
     {
-      ArgError = new ArgError("ProjectFilesDAL.ProjectFilesData\r\n");
+      ArgError = new ArgError("ProjectFilesDAL.ProjectFilesData");
     }
     #endregion
 

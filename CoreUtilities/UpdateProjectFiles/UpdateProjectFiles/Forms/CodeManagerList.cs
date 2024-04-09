@@ -26,7 +26,7 @@ namespace UpdateProjectFiles
       Text += $" - {configValues.FileSpec}";
       Cursor = Cursors.Default;
     }
-    private string mErrors;
+    private readonly string mErrors;
     #endregion
 
     #region Form Event Handlers

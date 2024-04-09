@@ -4,7 +4,6 @@
 
 using LJCNetCommon;
 using System.IO;
-using System.Xml.Linq;
 
 namespace ProjectFilesDAL
 {
@@ -19,7 +18,7 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.ManagersProjectFiles")
       {
-        MethodName = "ManagersProjectFiles()"
+        MethodName = "ManagersProjectFiles(filePath)"
       };
       ArgError.Add(filePath, "filePath");
       NetString.ThrowArgError(ArgError.ToString());

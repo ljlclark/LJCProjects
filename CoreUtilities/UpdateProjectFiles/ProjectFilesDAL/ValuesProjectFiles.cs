@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Remoting.Contexts;
 
 namespace ProjectFilesDAL
 {
@@ -15,6 +16,7 @@ namespace ProjectFilesDAL
     /// <summary>Initializes an object instance</summary>
     public ValuesProjectFiles()
     {
+      ArgError = new ArgError("ProjectFilesDAL.ValuesProjectFiles");
       Errors = "";
       SetConfigFileSpec("UpdateProjectFiles.exe.config");
     }
@@ -29,8 +31,9 @@ namespace ProjectFilesDAL
       Errors = null;
       if (!File.Exists(fileSpec))
       {
-        string context = ClassContext + "SetConfigFileSpec()";
-        var message = $"{context}\r\nFile {fileSpec} was not found.\r\n";
+        ArgError.MethodName = "SetConfigFileSpec(fileSpec)";
+        var message = ArgError.ToString();
+        message += $"File {fileSpec} was not found.\r\n";
         Errors += message;
       }
       else
@@ -97,7 +100,8 @@ namespace ProjectFilesDAL
     private static readonly ValuesProjectFiles mInstance
       = new ValuesProjectFiles();
 
-    private const string ClassContext = "ProjectFilesDAL.ValuesProjectFiles.";
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

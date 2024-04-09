@@ -20,7 +20,7 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.SolutionManager")
       {
-        MethodName = "SolutionManager(string fileSpec)"
+        MethodName = "SolutionManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
@@ -39,8 +39,7 @@ namespace ProjectFilesDAL
     public Solution Add(SolutionParentKey parentKey, string name, int sequence
       , string path)
     {
-      ArgError.MethodName = "Add(SolutionParentKey parentKey, string name"
-        + ", int sequence, string path)";
+      ArgError.MethodName = "Add(parentKey, name, sequence, path)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -58,7 +57,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Delete/*' file='Doc/SolutionManager.xml'/>
     public void Delete(SolutionParentKey parentKey, string name)
     {
-      ArgError.MethodName = "Delete(SolutionParentKey parentKey, string name)";
+      ArgError.MethodName = "Delete(parentKey, name)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
@@ -107,8 +106,7 @@ namespace ProjectFilesDAL
     {
       Solutions retValue = null;
 
-      ArgError.MethodName = "LoadAllExcept(SolutionParentKey parentKey"
-        + ", string name)";
+      ArgError.MethodName = "LoadAllExcept(parentKey, name)";
       ArgError.Add(name, "name");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -137,8 +135,7 @@ namespace ProjectFilesDAL
     {
       Solution retValue = null;
 
-      ArgError.MethodName = "Retrieve(SolutionParentKey parentKey"
-        +", string name)";
+      ArgError.MethodName = "Retrieve(parentKey, name)";
       ArgError.Add(Solution.ParentKeyValues(parentKey));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -185,7 +182,7 @@ namespace ProjectFilesDAL
     /// <include path='items/Update/*' file='Doc/SolutionManager.xml'/>
     public Solution Update(Solution solution)
     {
-      ArgError.MethodName = "Update(Solution solution)";
+      ArgError.MethodName = "Update(solution)";
       ArgError.Add(Solution.ItemValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -212,7 +209,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateFile/*' file='Doc/SolutionManager.xml'/>
     public void CreateFile(string fileName, Solutions solutions)
     {
-      ArgError.MethodName = "CreateFile(string fileName, Solutions solutions)";
+      ArgError.MethodName = "CreateFile(fileName, solutions)";
       ArgError.Add(fileName, "fileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -233,7 +230,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateParentKey/*' file='Doc/SolutionManager.xml'/>
     public SolutionParentKey CreateParentKey(Solution solution)
     {
-      ArgError.MethodName = "CreateParentKey(Solution solution)";
+      ArgError.MethodName = "CreateParentKey(solution)";
       ArgError.Add(Solution.ItemParentValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -249,7 +246,7 @@ namespace ProjectFilesDAL
     /// <include path='items/CreateRecord/*' file='Doc/SolutionManager.xml'/>
     public string CreateRecord(Solution solution)
     {
-      ArgError.MethodName = "CreateRecord(Solution solution)";
+      ArgError.MethodName = "CreateRecord(solution)";
       ArgError.Add(Solution.ItemValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -305,7 +302,7 @@ namespace ProjectFilesDAL
     /// <include path='items/RecreateFile/*' file='Doc/SolutionManager.xml'/>
     public void RecreateFile(Solutions solutions)
     {
-      ArgError.MethodName = "RecreateFile(Solutions solutions)";
+      ArgError.MethodName = "RecreateFile(solutions)";
       ArgError.Add(FileSpec, "FileName");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -380,7 +377,7 @@ namespace ProjectFilesDAL
     {
       var retValue = false;
 
-      ArgError.MethodName = "IsMatch(Solution solution)";
+      ArgError.MethodName = "IsMatch(solution)";
       ArgError.Add(Solution.ItemParentValues(solution));
       NetString.ThrowArgError(ArgError.ToString());
 

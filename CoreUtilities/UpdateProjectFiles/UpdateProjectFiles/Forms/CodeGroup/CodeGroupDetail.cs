@@ -313,7 +313,6 @@ namespace UpdateProjectFiles
     internal event EventHandler<EventArgs> LJCChange;
 
     private CodeGroup mOriginalRecord;
-    //private readonly ValuesUpdateProjectFiles mValues;
     #endregion
   }
 }

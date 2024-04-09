@@ -67,7 +67,7 @@ namespace UpdateProjectFiles
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(Solution dataRecord)
     {
-      ArgError.MethodName = "RowAdd()";
+      ArgError.MethodName = "RowAdd(dataRecord)";
       ArgError.Add(dataRecord, "dataRecord");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -82,7 +82,7 @@ namespace UpdateProjectFiles
     {
       bool retValue = false;
 
-      ArgError.MethodName = "RowSelect()";
+      ArgError.MethodName = "RowSelect(dataRecord)";
       ArgError.Add(dataRecord, "dataRecord");
       NetString.ThrowArgError(ArgError.ToString());
 
@@ -119,7 +119,7 @@ namespace UpdateProjectFiles
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, Solution dataRecord)
     {
-      ArgError.MethodName = "SetStoredValues()";
+      ArgError.MethodName = "SetStoredValues(row, dataRecord)";
       ArgError.Add(dataRecord, "dataRecord");
       NetString.ThrowArgError(ArgError.ToString());
 
