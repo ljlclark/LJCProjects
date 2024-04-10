@@ -78,7 +78,7 @@ namespace LJCGenDocDAL
     {
       DocMethodGroup retValue;
 
-      ArgError.MethodName = "Add(short id, short docClassID)";
+      ArgError.MethodName = "Add(id, docClassID)";
       string message = "";
       if (id <= 0)
       {

@@ -74,7 +74,7 @@ namespace LJCGenDocDAL
     {
       DocAssembly retValue;
 
-      ArgError.MethodName = "Add(short id, string name)";
+      ArgError.MethodName = "Add(id, name)";
       string message = "";
       if (id <= 0)
       {
