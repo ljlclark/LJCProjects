@@ -70,7 +70,7 @@ namespace UpdateProjectFiles
     // Displays a detail dialog to edit a record.
     private void CodeLineEdit_Click(object sender, System.EventArgs e)
     {
-      mCodeLineGridCode.DoDelete();
+      mCodeLineGridCode.DoEdit();
     }
 
     // Deletes the selected row.

@@ -29,6 +29,7 @@ namespace LJCGenDocEdit
       // Initialize property values.
       DocList = parentList;
       DocList.Cursor = Cursors.WaitCursor;
+      ArgError = new ArgError("LJCGenDocEdit.AssemblyItemGridCode");
       AssemblyGrid = DocList.AssemblyItemGrid;
       AssemblyGroupGrid = DocList.AssemblyGroupGrid;
       Managers = DocList.Managers;
@@ -85,27 +86,32 @@ namespace LJCGenDocEdit
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      ArgError.MethodName = "RowSelect(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
+      DocList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in AssemblyGrid.Rows)
       {
-        DocList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in AssemblyGrid.Rows)
+        if (AssemblyID(row) == dataRecord.ID)
         {
-          if (AssemblyID(row) == dataRecord.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            AssemblyGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          AssemblyGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
-        DocList.Cursor = Cursors.Default;
       }
+      DocList.Cursor = Cursors.Default;
       return retValue;
     }
 
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DocAssembly dataRecord)
     {
+      ArgError.MethodName = "RowAdd(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = AssemblyGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(AssemblyGrid, dataRecord);
@@ -115,14 +121,17 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
-      var ljcGrid = AssemblyGrid;
-      var retValue = ljcGrid.LJCRowAdd();
+      ArgError.MethodName = "RowAddValues(dataRecord)";
+      ArgError.Add(dbValues, "dbValues");
+      NetString.ThrowArgError(ArgError.ToString());
+
+      var retValue = AssemblyGrid.LJCRowAdd();
 
       var columnName = DocAssembly.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
-      retValue.LJCSetValues(ljcGrid, dbValues);
+      retValue.LJCSetValues(AssemblyGrid, dbValues);
       return retValue;
     }
 
@@ -139,6 +148,10 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DocAssembly dataRecord)
     {
+      ArgError.MethodName = "SetStoredValues(row, dataRecod)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       row.LJCSetInt32(DocAssembly.ColumnID, dataRecord.ID);
     }
     #endregion
@@ -488,6 +501,9 @@ namespace LJCGenDocEdit
 
     // Gets or sets the GridColumns value.
     internal DbColumns GridColumns { get; set; }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
 
     // Gets or sets the AssemblyGrid reference.
     private LJCDataGrid AssemblyGrid { get; set; }

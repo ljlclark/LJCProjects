@@ -230,7 +230,7 @@ namespace LJCGenDocEdit
     {
       var values = ValuesGenDocEdit.Instance;
       Settings = values.StandardSettings;
-      ConfigFileName = values.ConfigFileName;
+      ConfigFileName = values.FileSpec;
 
       Managers = new ManagersGenDoc();
       Managers.SetDBProperties(Settings.DbServiceRef

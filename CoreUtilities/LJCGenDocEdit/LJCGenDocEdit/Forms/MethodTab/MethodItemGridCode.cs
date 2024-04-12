@@ -28,8 +28,9 @@ namespace LJCGenDocEdit
     internal MethodItemGridCode(LJCGenDocList parentList)
     {
       // Initialize property values.
-      parentList.Cursor = Cursors.WaitCursor;
       DocList = parentList;
+      DocList.Cursor = Cursors.WaitCursor;
+      ArgError = new ArgError("LJCGenDocEdit.AssemblyGroupGridCode");
       ClassGrid = DocList.ClassItemGrid;
       Managers = DocList.Managers;
       // *** Begin *** Add - Data Views
@@ -84,6 +85,10 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DocMethod dataRecord)
     {
+      ArgError.MethodName = "RowAdd(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = MethodGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(MethodGrid, dataRecord);
@@ -93,6 +98,10 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the result values.
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
+      ArgError.MethodName = "RowAddValues(dataRecord)";
+      ArgError.Add(dbValues, "dbValues");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = MethodGrid.LJCRowAdd();
 
       var columnName = DocMethod.ColumnID;
@@ -107,18 +116,19 @@ namespace LJCGenDocEdit
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      ArgError.MethodName = "RowSelect(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
+      DocList.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in MethodGrid.Rows)
       {
-        DocList.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in MethodGrid.Rows)
+        if (DocMethodID(row) == dataRecord.ID)
         {
-          if (DocMethodID(row) == dataRecord.ID)
-          {
-            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            MethodGrid.LJCSetCurrentRow(row, true);
-            retValue = true;
-            break;
-          }
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          MethodGrid.LJCSetCurrentRow(row, true);
+          retValue = true;
+          break;
         }
         DocList.Cursor = Cursors.Default;
       }
@@ -138,6 +148,10 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DocMethod dataRecord)
     {
+      ArgError.MethodName = "SetStoredValues(row, dataRecod)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       row.LJCSetInt32(DocMethod.ColumnID, dataRecord.ID);
     }
     #endregion
@@ -473,6 +487,9 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Properties
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
 
     // Gets or sets the Class Grid reference.
     private LJCDataGrid ClassGrid { get; set; }

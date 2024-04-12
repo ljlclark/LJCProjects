@@ -39,8 +39,9 @@ namespace LJCGenDoc
         Console.WriteLine($"LJCGenDoc {outputPath}");
         Console.WriteLine();
 
-        // Set DAL config before using anywhere in the program.
+        // Set DAL config before using anywhere else in the program.
         var configValues = ValuesGenDoc.Instance;
+        configValues.SetConfigFile();
         var settings = configValues.StandardSettings;
         NetCommon.ConsoleConfig(settings.DataConfigName);
 

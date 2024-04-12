@@ -13,49 +13,45 @@ namespace LJCGenDocEdit
     #region Constructors
 
     // Initializes an object instance.
-    internal ValuesGenDocEdit()
+    internal ValuesGenDocEdit(string fileSpec = "LJCGenDocEdit.ValuesGenDocEdit")
     {
+      ArgError = new ArgError("LJCGenDocEdit.exe.config");
+      Errors = "";
       StandardSettings = new StandardUISettings();
-      var fileName = "LJCGenDocEdit.exe.config";
-      SetConfigFile(fileName);
     }
 
     /// <summary>Configures the settings.</summary>
-    /// <param name="fileName">The config file name.</param>
-    public void SetConfigFile(string fileName)
+    /// <param name="fileSpec">The config file name.</param>
+    public void SetConfigFile(string fileSpec = "LJCGenDocEdit.exe.config")
     {
-      bool success = true;
-      if (!NetString.HasValue(fileName))
+      Errors = "";
+      if (!File.Exists(fileSpec))
       {
-        // Do not continue if no fileName.
-        success = false;
+        ArgError.MethodName = "SetConfigFile(fileSpec)";
+        var message = ArgError.ToString();
+        message += $"File {fileSpec} was not found.\r\n";
+        Errors += message;
       }
-
-      if (success)
+      else
       {
-        fileName = fileName.Trim();
-        if (NetString.HasValue(ConfigFileName)
-          && !NetString.IsEqual(fileName, ConfigFileName))
+        // Update for changed file name.
+        fileSpec = fileSpec.Trim();
+        if (!NetString.IsEqual(fileSpec, FileSpec))
         {
-          // Do not continue if fileName equals ConfigFileName.
-          success = false;
+          FileSpec = fileSpec;
+          StandardSettings.SetProperties(FileSpec);
         }
-      }
-
-      if (success
-        && File.Exists(fileName))
-      {
-        // Process if changed fileName exists.
-        ConfigFileName = fileName.Trim();
-        StandardSettings.SetProperties(fileName);
       }
     }
     #endregion
 
     #region Properties
 
-    /// <summary>Gets or sets the ConfigFile name.</summary>
-    public string ConfigFileName { get; private set; }
+    /// <summary>Gets the Error message</summary>
+    public string Errors { get; private set; }
+
+    /// <summary>Gets the config FileSpec.</summary>
+    public string FileSpec { get; private set; }
 
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesGenDocEdit Instance
@@ -65,6 +61,9 @@ namespace LJCGenDocEdit
 
     // Gets or sets the StandardSettings value.
     public StandardUISettings StandardSettings { get; private set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

@@ -16,26 +16,30 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ValuesGenDoc()
     {
+      ArgError = new ArgError("LJCGenDocDAL.ValuesGenDoc");
+      Errors = "";
       StandardSettings = new StandardUISettings();
-      var fileName = "LJCGenDoc.exe.config";
-      if (File.Exists(fileName))
-      {
-        SetConfigFile(fileName);
-      }
     }
 
     /// <summary>Configures the settings.</summary>
-    /// <param name="fileName">The config file name.</param>
-    public void SetConfigFile(string fileName)
+    /// <param name="fileSpec">The config file name.</param>
+    public void SetConfigFile(string fileSpec = "LJCGenDoc.exe.config")
     {
-      if (NetString.HasValue(fileName))
+      if (!File.Exists(fileSpec))
       {
-        // No config file set or new file name.
-        if (!NetString.HasValue(ConfigFileName)
-          || fileName.Trim().ToLower() != ConfigFileName.ToLower())
+        ArgError.MethodName = "SetConfigFile(fileSpec)";
+        var message = ArgError.ToString();
+        message += $"File {fileSpec} was not found.\r\n";
+        Errors += message;
+      }
+      else
+      {
+        // Update for changed file name.
+        fileSpec = fileSpec.Trim();
+        if (!NetString.IsEqual(fileSpec, FileSpec))
         {
-          ConfigFileName = fileName.Trim();
-          StandardSettings.SetProperties(fileName);
+          FileSpec = fileSpec;
+          StandardSettings.SetProperties(fileSpec);
 
           var settings = StandardSettings;
           Managers = new ManagersGenDoc();
@@ -48,8 +52,11 @@ namespace LJCGenDocDAL
 
     #region Properties
 
-    /// <summary>Gets the ConfigFile name.</summary>
-    public string ConfigFileName { get; private set; }
+    /// <summary>Gets the Error message</summary>
+    public string Errors { get; private set; }
+
+    /// <summary>Gets the config FileSpec.</summary>
+    public string FileSpec { get; private set; }
 
     /// <summary>Gets or sets the generated page count.</summary>
     public int GenPageCount { get; set; }
@@ -65,6 +72,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets the StandardSettings value.</summary>
     public StandardUISettings StandardSettings { get; private set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Contexts;
 
 namespace ProjectFilesDAL
 {
-  /// <summary></summary>
+  /// <summary>Application config values singleton.</summary>
   public sealed class ValuesProjectFiles
   {
     #region Constructors
@@ -18,7 +18,8 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.ValuesProjectFiles");
       Errors = "";
-      SetConfigFileSpec("UpdateProjectFiles.exe.config");
+
+      SetConfigFile("UpdateProjectFiles.exe.config");
     }
     #endregion
 
@@ -26,12 +27,12 @@ namespace ProjectFilesDAL
 
     /// <summary>Configures the settings.</summary>
     /// <param name="fileSpec">The config FileSpec.</param>
-    public void SetConfigFileSpec(string fileSpec)
+    public void SetConfigFile(string fileSpec)
     {
-      Errors = null;
+      Errors = "";
       if (!File.Exists(fileSpec))
       {
-        ArgError.MethodName = "SetConfigFileSpec(fileSpec)";
+        ArgError.MethodName = "SetConfigFile(fileSpec)";
         var message = ArgError.ToString();
         message += $"File {fileSpec} was not found.\r\n";
         Errors += message;
@@ -72,14 +73,14 @@ namespace ProjectFilesDAL
     /// <summary>Gets the Data class reference.</summary>
     public ProjectFilesData Data { get; private set; }
 
+    /// <summary>The end gradient color.</summary>
+    public Color EndColor { get; private set; }
+
     /// <summary>Gets the Error message</summary>
     public string Errors { get; private set; }
 
     /// <summary>Gets the config FileSpec.</summary>
     public string FileSpec { get; private set; }
-
-    /// <summary>The end gradient color.</summary>
-    public Color EndColor { get; private set; }
 
     /// <summary>Gets the singleton instance.</summary>
     public static ValuesProjectFiles Instance
@@ -96,12 +97,12 @@ namespace ProjectFilesDAL
 
     #region Class Data
 
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+
     // The singleton instance.
     private static readonly ValuesProjectFiles mInstance
       = new ValuesProjectFiles();
-
-    // Represents Argument errors.
-    private ArgError ArgError { get; set; }
     #endregion
   }
 }

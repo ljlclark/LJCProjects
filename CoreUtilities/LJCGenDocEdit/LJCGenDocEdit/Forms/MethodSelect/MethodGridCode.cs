@@ -19,6 +19,7 @@ namespace LJCGenDocEdit
     internal MethodGridCode(MethodSelect parentList)
     {
       MethodSelect = parentList;
+      ArgError = new ArgError("LJCGenDocEdit.MethodGridCode");
       MethodGrid = MethodSelect.MethodGrid;
       Managers = MethodSelect.Managers;
     }
@@ -94,30 +95,31 @@ namespace LJCGenDocEdit
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      ArgError.MethodName = "RowSelect(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
+      MethodSelect.Cursor = Cursors.WaitCursor;
+      foreach (LJCGridRow row in MethodGrid.Rows)
       {
-        MethodSelect.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in MethodGrid.Rows)
+        if (dataRecord.OverloadName != null)
         {
-          if (dataRecord.OverloadName != null)
+          if (DocMethodOverload(row) == dataRecord.OverloadName)
           {
-            if (DocMethodOverload(row) == dataRecord.OverloadName)
-            {
-              // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-              MethodGrid.LJCSetCurrentRow(row, true);
-              retValue = true;
-              break;
-            }
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            MethodGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
           }
-          else
+        }
+        else
+        {
+          if (DocMethodName(row) == dataRecord.Name)
           {
-            if (DocMethodName(row) == dataRecord.Name)
-            {
-              // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-              MethodGrid.LJCSetCurrentRow(row, true);
-              retValue = true;
-              break;
-            }
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            MethodGrid.LJCSetCurrentRow(row, true);
+            retValue = true;
+            break;
           }
         }
         MethodSelect.Cursor = Cursors.Default;
@@ -128,6 +130,10 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DataMethod dataRecord)
     {
+      ArgError.MethodName = "RowAdd(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = MethodGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(MethodGrid, dataRecord);
@@ -137,6 +143,10 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataMethod dataRecord)
     {
+      ArgError.MethodName = "SetStoredValues(row, dataRecod)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       row.LJCSetString("Name", dataRecord.Name);
       row.LJCSetString("OverloadName", dataRecord.OverloadName);
     }
@@ -296,6 +306,9 @@ namespace LJCGenDocEdit
 
     // Gets or sets the GridColumns value.
     internal DbColumns GridColumns { get; set; }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
 
     // The Managers object.
     private ManagersGenDoc Managers { get; set; }

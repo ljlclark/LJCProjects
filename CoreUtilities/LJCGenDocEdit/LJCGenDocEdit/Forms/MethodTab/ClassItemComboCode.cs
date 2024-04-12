@@ -18,6 +18,7 @@ namespace LJCGenDocEdit
     internal ClassItemComboCode(LJCGenDocList parent)
     {
       mDocList = parent;
+      ArgError = new ArgError("LJCGenDocEdit.ClassItemComboCode");
       mClassCombo = mDocList.ClassCombo;
       mClassGroupGrid = mDocList.ClassGroupGrid;
       mManagers = mDocList.Managers;
@@ -57,21 +58,22 @@ namespace LJCGenDocEdit
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      ArgError.MethodName = "RowSelect(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
+      mDocList.Cursor = Cursors.WaitCursor;
+      for (int index = 0; index < mClassCombo.Items.Count; index++)
       {
-        mDocList.Cursor = Cursors.WaitCursor;
-        for (int index = 0; index < mClassCombo.Items.Count; index++)
+        var classID = ClassComboID(index);
+        if (classID == dataRecord.ID)
         {
-          var classID = ClassComboID(index);
-          if (classID == dataRecord.ID)
-          {
-            mClassCombo.LJCSetByItemID(classID);
-            retValue = true;
-            break;
-          }
+          mClassCombo.LJCSetByItemID(classID);
+          retValue = true;
+          break;
         }
-        mDocList.Cursor = Cursors.Default;
       }
+      mDocList.Cursor = Cursors.Default;
       return retValue;
     }
     #endregion
@@ -132,6 +134,12 @@ namespace LJCGenDocEdit
       }
       return retValue;
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

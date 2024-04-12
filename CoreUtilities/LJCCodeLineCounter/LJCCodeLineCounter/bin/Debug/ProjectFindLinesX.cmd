@@ -1,4 +1,4 @@
-set Find="0 == retValue"
+set Find="Shell"
 
 if %1. == . goto default
 set folder=%1

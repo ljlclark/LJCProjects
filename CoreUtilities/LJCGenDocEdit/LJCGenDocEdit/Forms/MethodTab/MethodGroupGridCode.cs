@@ -29,6 +29,7 @@ namespace LJCGenDocEdit
     internal MethodGroupGridCode(LJCGenDocList parentList)
     {
       DocList = parentList;
+      ArgError = new ArgError("LJCGenDocEdit.MethodGroupGridCode");
       ClassGrid = DocList.ClassItemGrid;
       Managers = DocList.Managers;
       // *** Begin *** Add - Data Views
@@ -82,6 +83,10 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DocMethodGroup dataRecord)
     {
+      ArgError.MethodName = "RowAdd(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = MethodGroupGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(MethodGroupGrid, dataRecord);
@@ -92,6 +97,10 @@ namespace LJCGenDocEdit
     private LJCGridRow RowAddValues(DbValues dbValues)
     {
       var retValue = MethodGroupGrid.LJCRowAdd();
+
+      ArgError.MethodName = "RowAddValues(dataRecord)";
+      ArgError.Add(dbValues, "dbValues");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var columnName = DocMethodGroup.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
@@ -470,6 +479,9 @@ namespace LJCGenDocEdit
     #endregion
 
     #region Properties
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
 
     // Gets or sets the Class Grid reference.
     private LJCDataGrid ClassGrid { get; set; }

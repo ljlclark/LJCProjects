@@ -3,6 +3,7 @@
 // LJCGenDocList.cs
 using LJCDBViewControls;
 using LJCGenDocDAL;
+using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Windows.Forms;
@@ -22,13 +23,15 @@ namespace LJCGenDocEdit
       InitializeComponent();
 
       // Set default class data.
-      // Set DAL config before using anywhere in the program.
+      // Set DAL config before using anywhere else in the program.
       var configValues = ValuesGenDoc.Instance;
       configValues.SetConfigFile("LJCGenDocEdit.exe.config");
+      mErrors = configValues.Errors;
       var settings = configValues.StandardSettings;
       Text += $" - {settings.DataConfigName}";
       Cursor = Cursors.Default;
     }
+    private readonly string mErrors;
     #endregion
 
     #region Form Event Handlers
@@ -36,6 +39,7 @@ namespace LJCGenDocEdit
     // Configures the form and loads the initial control data.
     private void LJCGenDocEdit_Load(object sender, EventArgs e)
     {
+      NetString.ThrowArgError(mErrors);
       InitializeControls();
       ClassGroupExit.Click += MenuExit_Click;
       MethodGroupExit.Click += MenuExit_Click;

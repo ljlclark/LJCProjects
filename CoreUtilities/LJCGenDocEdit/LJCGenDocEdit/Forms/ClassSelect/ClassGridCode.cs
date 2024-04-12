@@ -20,6 +20,8 @@ namespace LJCGenDocEdit
     internal ClassGridCode(ClassSelect parentList)
     {
       ClassSelect = parentList;
+      ArgError = new ArgError("LJCGenDocEdit.ClassGridCode");
+
       ClassGrid = ClassSelect.ClassGrid;
       Managers = ClassSelect.Managers;
     }
@@ -81,6 +83,10 @@ namespace LJCGenDocEdit
     // Adds a grid row and updates it with the record values.
     private LJCGridRow RowAdd(DataType dataRecord)
     {
+      ArgError.MethodName = "RowAdd(dataRecord)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var retValue = ClassGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(ClassGrid, dataRecord);
@@ -90,6 +96,10 @@ namespace LJCGenDocEdit
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataType dataRecord)
     {
+      ArgError.MethodName = "SetStoredValues(row, dataRecod)";
+      ArgError.Add(dataRecord, "dataRecord");
+      NetString.ThrowArgError(ArgError.ToString());
+
       row.LJCSetString("Name", dataRecord.Name);
     }
     #endregion
@@ -205,6 +215,9 @@ namespace LJCGenDocEdit
 
     // Gets or sets the Assembly ID value.
     internal short LJCAssemblyID { get; set; }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
 
     // Gets or sets the GridColumns value.
     private DbColumns GridColumns { get; set; }
