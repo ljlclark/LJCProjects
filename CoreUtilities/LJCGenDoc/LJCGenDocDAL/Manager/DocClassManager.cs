@@ -10,6 +10,8 @@ using System.Data;
 
 namespace LJCGenDocDAL
 {
+  #region Constructors
+
   /// <summary>Provides table specific data methods.</summary>
   public class DocClassManager
   {
@@ -18,6 +20,8 @@ namespace LJCGenDocDAL
     public DocClassManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DocClass", string schemaName = null)
     {
+      InitArgError(dbServiceRef, dataConfigName);
+
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
       ResultConverter = new ResultConverter<DocClass, DocClasses>();
@@ -39,6 +43,19 @@ namespace LJCGenDocDAL
         DocClass.ColumnName
       });
     }
+
+    //  Initialize argument error handline.
+    private void InitArgError(DbServiceRef dbServiceRef, string dataConfigName)
+    {
+      ArgError = new ArgError("LJCGenDocDAL.DocClassManager")
+      {
+        MethodName = "DocClassManager(dbServiceRef, dataConfigName)"
+      };
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+    }
+    #endregion
 
     #region Data Methods
 
@@ -309,6 +326,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets or sets the TargetSequence value.</summary>
     public int TargetSequence { get; set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

@@ -7,18 +7,21 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using System.Text.RegularExpressions;
 
 namespace LJCGenDocDAL
 {
   /// <summary>Provides table specific data methods.</summary>
   public class DocClassGroupManager
   {
+    #region Constructors
+
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocClassGroupManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DocClassGroup", string schemaName = null)
     {
+      InitArgError(dbServiceRef, dataConfigName);
+
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
       ResultConverter = new ResultConverter<DocClassGroup, DocClassGroups>();
@@ -44,6 +47,19 @@ namespace LJCGenDocDAL
         DocClassGroup.ColumnHeadingName
       });
     }
+
+    //  Initialize argument error handline.
+    private void InitArgError(DbServiceRef dbServiceRef, string dataConfigName)
+    {
+      ArgError = new ArgError("LJCGenDocDAL.DocClassGroupManager")
+      {
+        MethodName = "DocClassGroupManager(dbServiceRef, dataConfigName)"
+      };
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+    }
+    #endregion
 
     #region Data Methods
 
@@ -335,6 +351,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets or sets the TargetSequence value.</summary>
     public int TargetSequence { get; set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

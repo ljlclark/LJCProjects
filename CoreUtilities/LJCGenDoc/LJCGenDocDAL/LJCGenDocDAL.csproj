@@ -37,8 +37,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBClientLib.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess">
       <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>

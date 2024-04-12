@@ -18,6 +18,14 @@ namespace LJCGenDocDAL
     public DocMethodManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DocMethod", string schemaName = null)
     {
+      ArgError = new ArgError("LJCGenDocDAL.DocMethodManager")
+      {
+        MethodName = "DocMethodManager(dbServiceRef, dataConfigName)"
+      };
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
       ResultConverter = new ResultConverter<DocMethod, DocMethods>();
@@ -344,6 +352,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets or sets the TargetSequence value.</summary>
     public int TargetSequence { get; set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }

@@ -13,11 +13,15 @@ namespace LJCGenDocDAL
   /// <summary>Provides table specific data methods.</summary>
   public class DocAssemblyGroupManager
   {
+    #region Constructors
+
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocAssemblyGroupManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DocAssemblyGroup", string schemaName = null)
     {
+      InitArgError(dbServiceRef, dataConfigName);
+
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
       ResultConverter = new ResultConverter<DocAssemblyGroup, DocAssemblyGroups>();
@@ -38,6 +42,19 @@ namespace LJCGenDocDAL
         DocAssemblyGroup.ColumnName
       });
     }
+
+    //  Initialize argument error handline.
+    private void InitArgError(DbServiceRef dbServiceRef, string dataConfigName)
+    {
+      ArgError = new ArgError("LJCGenDocDAL.DocAssemblyGroupManager")
+      {
+        MethodName = "DocAssemblyGroupManager(dbServiceRef, dataConfigName)"
+      };
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+    }
+    #endregion
 
     #region Data Methods
 
@@ -254,6 +271,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets or sets the TargetSequence value.</summary>
     public int TargetSequence { get; set; }
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
     #endregion
   }
 }
