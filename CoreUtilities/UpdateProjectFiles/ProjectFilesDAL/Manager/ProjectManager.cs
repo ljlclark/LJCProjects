@@ -18,17 +18,23 @@ namespace ProjectFilesDAL
     /// <include path='items/ProjectManagerC/*' file='Doc/ProjectManager.xml'/>
     public ProjectManager(string fileSpec = "Project.txt")
     {
+      InitArgError(fileSpec);
+
+      FileSpec = fileSpec;
+      CreateBaseColumns();
+      Reader = new TextDataReader();
+      Reader.LJCSetFile(FileSpec);
+    }
+
+    //  Initialize argument error handline.
+    private void InitArgError(string fileSpec)
+    {
       ArgError = new ArgError("ProjectFilesDAL.ProjectManager")
       {
         MethodName = "ProjectManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
-
-      FileSpec = fileSpec;
-      CreateBaseColumns();
-      Reader = new TextDataReader();
-      Reader.LJCSetFile(FileSpec);
     }
     #endregion
 

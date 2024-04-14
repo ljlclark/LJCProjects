@@ -18,17 +18,23 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeGroupManagerC/*' file='Doc/CodeGroupManager.xml'/>
     public CodeGroupManager(string fileSpec = "CodeGroup.txt")
     {
+      InitArgError(fileSpec);
+
+      FileSpec = fileSpec;
+      CreateBaseColumns();
+      Reader = new TextDataReader();
+      Reader.LJCSetFile(FileSpec);
+    }
+
+    //  Initialize argument error handline.
+    private void InitArgError(string fileSpec)
+    {
       ArgError = new ArgError("ProjectFilesDAL.CodeGroupManager")
       {
         MethodName = "CodeGroupManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
-
-      FileSpec = fileSpec;
-      CreateBaseColumns();
-      Reader = new TextDataReader();
-      Reader.LJCSetFile(FileSpec);
     }
     #endregion
 

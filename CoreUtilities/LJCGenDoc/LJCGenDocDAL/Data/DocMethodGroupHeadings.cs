@@ -71,20 +71,15 @@ namespace LJCGenDocDAL
     /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DocMethodGroupHeading Add(short id, string name)
     {
-      DocMethodGroupHeading retValue;
-
       ArgError.MethodName = "Add(id, name)";
-      string message = "";
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        ArgError.Add("id must be greater than zero.");
       }
       ArgError.Add(name, "name");
-      var errMessage = ArgError.ToString();
-      errMessage += message;
-      NetString.ThrowArgError(errMessage);
+      NetString.ThrowArgError(ArgError.ToString());
 
-      retValue = LJCSearchUnique(name);
+      var retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
         retValue = new DocMethodGroupHeading()
@@ -161,15 +156,17 @@ namespace LJCGenDocDAL
     /// <returns></returns>
     public DocMethodGroupHeading LJCSearchUnique(string name)
     {
-      DocMethodGroupHeadingUniqueComparer comparer;
-      DocMethodGroupHeading retValue = null;
+      ArgError.MethodName = "LJCSearchUnique(name)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
-      comparer = new DocMethodGroupHeadingUniqueComparer();
+      var comparer = new DocMethodGroupHeadingUniqueComparer();
       LJCSortUnique(comparer);
       DocMethodGroupHeading searchItem = new DocMethodGroupHeading()
       {
         Name = name
       };
+      DocMethodGroupHeading retValue = null;
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
       {

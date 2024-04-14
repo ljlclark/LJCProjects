@@ -18,17 +18,23 @@ namespace ProjectFilesDAL
     /// <include path='items/SolutionManagerC/*' file='Doc/SolutionManager.xml'/>
     public SolutionManager(string fileSpec = "Solution.txt")
     {
+      InitArgError(fileSpec);
+
+      FileSpec = fileSpec;
+      CreateBaseColumns();
+      Reader = new TextDataReader();
+      Reader.LJCSetFile(FileSpec);
+    }
+
+    //  Initialize argument error handline.
+    private void InitArgError(string fileSpec)
+    {
       ArgError = new ArgError("ProjectFilesDAL.SolutionManager")
       {
         MethodName = "SolutionManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
-
-      FileSpec = fileSpec;
-      CreateBaseColumns();
-      Reader = new TextDataReader();
-      Reader.LJCSetFile(FileSpec);
     }
     #endregion
 

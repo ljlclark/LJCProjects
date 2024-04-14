@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCGenDocDAL
@@ -77,23 +78,18 @@ namespace LJCGenDocDAL
     /// <returns></returns>
     public DocClassGroup Add(short id, short docAssemblyID, string headingName)
     {
-      DocClassGroup retValue;
-
       ArgError.MethodName = "Add(id, name)";
-      string message = "";
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        ArgError.Add("id must be greater than zero.");
       }
-      if (id <= 0)
+      if (docAssemblyID <= 0)
       {
-        message += "docAssemblyID must be greater than zero.\r\n";
+        ArgError.Add("docAssemblyID must be greater than zero.");
       }
-      var errMessage = ArgError.ToString();
-      errMessage += message;
-      NetString.ThrowArgError(errMessage);
+      NetString.ThrowArgError(ArgError.ToString());
 
-      retValue = LJCSearchUnique(docAssemblyID, headingName);
+      var retValue = LJCSearchUnique(docAssemblyID, headingName);
       if (null == retValue)
       {
         retValue = new DocClassGroup()
@@ -173,16 +169,22 @@ namespace LJCGenDocDAL
     public DocClassGroup LJCSearchUnique(short docAssemblyID
       , string headingName)
     {
-      DocClassGroupUniqueComparer comparer;
-      DocClassGroup retValue = null;
+      ArgError.MethodName = "LJCSearchUnique(docAssemblyID, headingName)";
+      if (docAssemblyID <= 0)
+      {
+        ArgError.Add("docAssemblyID must be greater than zero.");
+      }
+      ArgError.Add(headingName, "headingName");
+      NetString.ThrowArgError(ArgError.ToString());
 
-      comparer = new DocClassGroupUniqueComparer();
+      var comparer = new DocClassGroupUniqueComparer();
       LJCSortUnique(comparer);
       DocClassGroup searchItem = new DocClassGroup()
       {
         DocAssemblyID = docAssemblyID,
         HeadingName = headingName
       };
+      DocClassGroup retValue = null;
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
       {

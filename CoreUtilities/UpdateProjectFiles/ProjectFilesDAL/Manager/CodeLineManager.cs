@@ -17,17 +17,23 @@ namespace ProjectFilesDAL
     /// <include path='items/CodeLineManagerC/*' file='Doc/CodeLineManager.xml'/>
     public CodeLineManager(string fileSpec = "CodeLine.txt")
     {
+      InitArgError(fileSpec);
+
+      FileSpec = fileSpec;
+      CreateBaseColumns();
+      Reader = new TextDataReader();
+      Reader.LJCSetFile(FileSpec);
+    }
+
+    //  Initialize argument error handline.
+    private void InitArgError(string fileSpec)
+    {
       ArgError = new ArgError("ProjectFilesDAL.CodeLineManager")
       {
         MethodName = "CodeLineManager(fileSpec)"
       };
       ArgError.Add(fileSpec, "fileSpec");
       NetString.ThrowArgError(ArgError.ToString());
-
-      FileSpec = fileSpec;
-      CreateBaseColumns();
-      Reader = new TextDataReader();
-      Reader.LJCSetFile(FileSpec);
     }
     #endregion
 

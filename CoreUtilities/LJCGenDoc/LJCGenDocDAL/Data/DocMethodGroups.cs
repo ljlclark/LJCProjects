@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCGenDocDAL
@@ -76,23 +77,18 @@ namespace LJCGenDocDAL
     /// <returns></returns>
     public DocMethodGroup Add(short id, short docClassID)
     {
-      DocMethodGroup retValue;
-
       ArgError.MethodName = "Add(id, docClassID)";
-      string message = "";
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        ArgError.Add("id must be greater than zero.");
       }
       if (docClassID <= 0)
       {
-        message += "docClassID must be greater than zero.\r\n";
+        ArgError.Add("docClassID must be greater than zero.");
       }
-      var errMessage = ArgError.ToString();
-      errMessage += message;
-      NetString.ThrowArgError(errMessage);
+      NetString.ThrowArgError(ArgError.ToString());
 
-      retValue = LJCSearchUnique(id, docClassID);
+      var retValue = LJCSearchUnique(id, docClassID);
       if (null == retValue)
       {
         retValue = new DocMethodGroup()
@@ -170,16 +166,25 @@ namespace LJCGenDocDAL
     /// <returns></returns>
     public DocMethodGroup LJCSearchUnique(short id, short docClassID)
     {
-      DocMethodGroupUniqueComparer comparer;
-      DocMethodGroup retValue = null;
+      ArgError.MethodName = "LJCSearchUnique(id, docClassID)";
+      if (id <= 0)
+      {
+        ArgError.Add("id must be greater than zero.");
+      }
+      if (docClassID <= 0)
+      {
+        ArgError.Add("docClassID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
 
-      comparer = new DocMethodGroupUniqueComparer();
+      var comparer = new DocMethodGroupUniqueComparer();
       LJCSortUnique(comparer);
       DocMethodGroup searchItem = new DocMethodGroup()
       {
         ID = id,
         DocClassID = docClassID
       };
+      DocMethodGroup retValue = null;
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
       {

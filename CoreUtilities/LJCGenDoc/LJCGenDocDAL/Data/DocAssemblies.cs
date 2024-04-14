@@ -72,20 +72,15 @@ namespace LJCGenDocDAL
     /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DocAssembly Add(short id, string name)
     {
-      DocAssembly retValue;
-
       ArgError.MethodName = "Add(id, name)";
-      string message = "";
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        ArgError.Add("id must be greater than zero.");
       }
       ArgError.Add(name, "name");
-      var errMessage = ArgError.ToString();
-      errMessage += message;
-      NetString.ThrowArgError(errMessage);
+      NetString.ThrowArgError(ArgError.ToString());
 
-      retValue = LJCSearchUnique(name);
+      var retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
         retValue = new DocAssembly()
@@ -165,15 +160,17 @@ namespace LJCGenDocDAL
     /// <returns>A reference to the matching item.</returns>
     public DocAssembly LJCSearchUnique(string name)
     {
-      DocAssemblyUniqueComparer comparer;
-      DocAssembly retValue = null;
+      ArgError.MethodName = "LJCSearchUnique(name)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
-      comparer = new DocAssemblyUniqueComparer();
+      var comparer = new DocAssemblyUniqueComparer();
       LJCSortUnique(comparer);
       DocAssembly searchItem = new DocAssembly()
       {
         Name = name
       };
+      DocAssembly retValue = null;
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
       {

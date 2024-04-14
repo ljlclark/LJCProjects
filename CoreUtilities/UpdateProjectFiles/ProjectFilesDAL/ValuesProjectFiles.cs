@@ -18,8 +18,6 @@ namespace ProjectFilesDAL
     {
       ArgError = new ArgError("ProjectFilesDAL.ValuesProjectFiles");
       Errors = "";
-
-      SetConfigFile("UpdateProjectFiles.exe.config");
     }
     #endregion
 
@@ -27,7 +25,7 @@ namespace ProjectFilesDAL
 
     /// <summary>Configures the settings.</summary>
     /// <param name="fileSpec">The config FileSpec.</param>
-    public void SetConfigFile(string fileSpec)
+    public void SetConfigFile(string fileSpec = "UpdateProjectFiles.exe.config")
     {
       Errors = "";
       if (!File.Exists(fileSpec))

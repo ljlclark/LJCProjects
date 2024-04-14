@@ -7,24 +7,22 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace LJCGenDocDAL
 {
   /// <summary>Provides table specific data methods.</summary>
   public class DocMethodManager
   {
+    #region Constructors
+
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocMethodManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DocMethod", string schemaName = null)
     {
-      ArgError = new ArgError("LJCGenDocDAL.DocMethodManager")
-      {
-        MethodName = "DocMethodManager(dbServiceRef, dataConfigName)"
-      };
-      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
-      ArgError.Add(dataConfigName, "dataConfigName");
-      NetString.ThrowArgError(ArgError.ToString());
+      InitArgError(dbServiceRef, dataConfigName);
 
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
@@ -48,6 +46,19 @@ namespace LJCGenDocDAL
       });
     }
 
+    //  Initialize argument error handline.
+    private void InitArgError(DbServiceRef dbServiceRef, string dataConfigName)
+    {
+      ArgError = new ArgError("LJCGenDocDAL.DocMethodManager")
+      {
+        MethodName = "DocMethodManager(dbServiceRef, dataConfigName)"
+      };
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+    }
+    #endregion
+
     #region Data Methods
 
     // Adds a record to the database.
@@ -55,11 +66,13 @@ namespace LJCGenDocDAL
     public DocMethod Add(DocMethod dataObject
       , List<string> propertyNames = null)
     {
-      DocMethod retValue;
+      ArgError.MethodName = "Add(dataObject)";
+      ArgError.Add(dataObject, "dataObject");
+      NetString.ThrowArgError(ArgError.ToString());
 
       ChangeSequence(0, TargetSequence);
       var dbResult = Manager.Add(dataObject, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
@@ -71,6 +84,14 @@ namespace LJCGenDocDAL
     /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
+      ArgError.MethodName = "Delete(keyColumns, filters)";
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangeSequence(-1, TargetSequence);
       Manager.Delete(keyColumns, filters);
     }
@@ -88,10 +109,8 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DocMethods retValue;
-
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
@@ -101,9 +120,7 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DbResult retValue;
-
-      retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
+      var retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
       return retValue;
     }
 
@@ -113,10 +130,16 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DocMethod retValue;
+      ArgError.MethodName = "Retrieve(keyColumns, filters)";
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
 
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
@@ -125,6 +148,15 @@ namespace LJCGenDocDAL
     public void Update(DocMethod dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
+      ArgError.MethodName = "Update(dataObjecct, keyColumns, filters)";
+      ArgError.Add(dataObject, "dataObject");
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangeSequence(SourceSequence, TargetSequence);
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
     }
@@ -136,6 +168,13 @@ namespace LJCGenDocDAL
     /// <include path='items/LoadWithGroup/*' file='Doc/DocClassManager.xml'/>
     public DocMethods LoadWithGroup(short groupID)
     {
+      ArgError.MethodName = "LoadWithGroup(groupID)";
+      if (groupID <= 0)
+      {
+        ArgError.Add("groupID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetForeignKey(groupID);
       var dbResult = Manager.Load(keyColumns);
       var retValue = ResultConverter.CreateCollection(dbResult);
@@ -147,6 +186,13 @@ namespace LJCGenDocDAL
     public DocMethods LoadWithParentID(short parentID
       , List<string> propertyNames = null)
     {
+      ArgError.MethodName = "LoadWithGroup(groupID)";
+      if (parentID <= 0)
+      {
+        ArgError.Add("parentID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetForeignKey(parentID);
       var dbResult = Manager.Load(keyColumns, propertyNames);
       var retValue = ResultConverter.CreateCollection(dbResult);
@@ -157,11 +203,16 @@ namespace LJCGenDocDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocMethod RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      DocMethod retValue;
+      ArgError.MethodName = "RetrieveWithID(id)";
+      if (id <= 0)
+      {
+        ArgError.Add("id must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
 
       var keyColumns = GetIDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
@@ -171,11 +222,13 @@ namespace LJCGenDocDAL
     public DocMethod RetrieveWithName(short classID, string name
       , List<string> propertyNames = null)
     {
-      DocMethod retValue;
+      ArgError.MethodName = "RetrieveWithName(name)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var keyColumns = GetNameKey(classID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
@@ -185,11 +238,13 @@ namespace LJCGenDocDAL
     public DocMethod RetrieveWithOverload(short classID, string overloadName
       , List<string> propertyNames = null)
     {
-      DocMethod retValue;
+      ArgError.MethodName = "RetrieveWithOverload(overloadName)";
+      ArgError.Add(overloadName, "overloadName");
+      NetString.ThrowArgError(ArgError.ToString());
 
       var keyColumns = GetOverloadKey(classID, overloadName);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
     #endregion

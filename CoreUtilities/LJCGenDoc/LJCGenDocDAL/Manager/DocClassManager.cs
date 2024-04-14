@@ -64,11 +64,13 @@ namespace LJCGenDocDAL
     public DocClass Add(DocClass dataObject
       , List<string> propertyNames = null)
     {
-      DocClass retValue;
+      ArgError.MethodName = "Add(dataObject)";
+      ArgError.Add(dataObject, "dataObject");
+      NetString.ThrowArgError(ArgError.ToString());
 
       ChangeSequence(0, TargetSequence);
       var dbResult = Manager.Add(dataObject, propertyNames);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
@@ -80,6 +82,14 @@ namespace LJCGenDocDAL
     /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
+      ArgError.MethodName = "Delete(keyColumns, filters)";
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangeSequence(-1, TargetSequence);
       Manager.Delete(keyColumns, filters);
     }
@@ -97,10 +107,8 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DocClasses retValue;
-
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
@@ -110,9 +118,7 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DbResult retValue;
-
-      retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
+      var retValue = Manager.Load(keyColumns, propertyNames, filters, joins);
       return retValue;
     }
 
@@ -122,10 +128,16 @@ namespace LJCGenDocDAL
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DocClass retValue;
+      ArgError.MethodName = "Retrieve(keyColumns, filters)";
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
 
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
@@ -134,6 +146,15 @@ namespace LJCGenDocDAL
     public void Update(DocClass dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
+      ArgError.MethodName = "Update(dataObjecct, keyColumns, filters)";
+      ArgError.Add(dataObject, "dataObject");
+      if (null == keyColumns
+        && null == filters)
+      {
+        ArgError.Add("Must have keyColumns or filters.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangeSequence(SourceSequence, TargetSequence);
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
     }
@@ -145,6 +166,13 @@ namespace LJCGenDocDAL
     /// <include path='items/LoadWithGroup/*' file='Doc/DocClassManager.xml'/>
     public DocClasses LoadWithGroup(short groupID)
     {
+      ArgError.MethodName = "LoadWithGroup(groupID)";
+      if (groupID <= 0)
+      {
+        ArgError.Add("groupID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetForeignKey(groupID);
       var dbResult = Manager.Load(keyColumns);
       var retValue = ResultConverter.CreateCollection(dbResult);
@@ -156,6 +184,13 @@ namespace LJCGenDocDAL
     public DocClasses LoadWithParentID(short parentID
       , List<string> propertyNames = null)
     {
+      ArgError.MethodName = "LoadWithParentID(parentID)";
+      if (parentID <= 0)
+      {
+        ArgError.Add("parentID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetParentIDKey(parentID);
       var dbResult = Manager.Load(keyColumns, propertyNames: propertyNames);
       var retValue = ResultConverter.CreateCollection(dbResult);
@@ -166,6 +201,13 @@ namespace LJCGenDocDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocClass RetrieveWithID(int id, List<string> propertyNames = null)
     {
+      ArgError.MethodName = "RetrieveWithID(id)";
+      if (id <= 0)
+      {
+        ArgError.Add("id must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetIDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -177,6 +219,10 @@ namespace LJCGenDocDAL
     public DocClass RetrieveWithUnique(short parentID, string name
       , List<string> propertyNames = null)
     {
+      ArgError.MethodName = "RetrieveWithUnique(name)";
+      ArgError.Add(name, "name");
+      NetString.ThrowArgError(ArgError.ToString());
+
       var keyColumns = GetUniqueKey(parentID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       var retValue = ResultConverter.CreateData(dbResult);

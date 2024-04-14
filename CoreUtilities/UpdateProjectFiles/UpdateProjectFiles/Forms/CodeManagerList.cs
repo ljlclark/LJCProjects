@@ -20,7 +20,7 @@ namespace UpdateProjectFiles
 
       // Set default class data.
       var configValues = ValuesProjectFiles.Instance;
-      //configValues.SetConfigFileSpec("UpdateProjectFiles.exe.config");
+      configValues.SetConfigFile();
       mErrors = configValues.Errors;
 
       Text += $" - {configValues.FileSpec}";
