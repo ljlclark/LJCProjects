@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ManagersDocLib.cs
 using LJCDBClientLib;
+using LJCNetCommon;
 
 namespace LJCGenDocDAL
 {
@@ -14,6 +15,7 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ManagersGenDoc()
     {
+      ArgError = new ArgError("LJCGenDocDAL.ManagersGenDoc");
     }
 
     /// <summary>
@@ -24,12 +26,17 @@ namespace LJCGenDocDAL
     public void SetDBProperties(DbServiceRef dbServiceRef
       , string dataConfigName)
     {
+      ArgError.MethodName = "SetDBProperties(dbServiceRef, dataConfigName)";
+      ArgError.Add(DbServiceRef.ItemValues(dbServiceRef));
+      ArgError.Add(dataConfigName, "dataConfigName");
+      NetString.ThrowArgError(ArgError.ToString());
+
       mDbServiceRef = dbServiceRef;
       mDataConfigName = dataConfigName;
     }
     #endregion
 
-    #region Properties
+    #region Manager Properties
 
     /// <summary>Gets the DocAssemblyGroupManager object.</summary>
     public DocAssemblyGroupManager DocAssemblyGroupManager
@@ -52,6 +59,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocAssemblyGroupManager mDocAssemblyGroupManager;
 
     /// <summary>Gets the DocAssemblyManager object.</summary>
     public DocAssemblyManager DocAssemblyManager
@@ -74,6 +82,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocAssemblyManager mDocAssemblyManager;
 
     /// <summary>Gets the DocClassGroupHeadingManager object.</summary>
     public DocClassGroupHeadingManager DocClassGroupHeadingManager
@@ -96,6 +105,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocClassGroupHeadingManager mDocClassGroupHeadingManager;
 
     /// <summary>Gets the DocClassGroupManager object.</summary>
     public DocClassGroupManager DocClassGroupManager
@@ -118,6 +128,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocClassGroupManager mDocClassGroupManager;
 
     /// <summary>Gets the DocClassManager object.</summary>
     public DocClassManager DocClassManager
@@ -140,6 +151,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocClassManager mDocClassManager;
 
     /// <summary>Gets the DocMethodGroupHeadingManager object.</summary>
     public DocMethodGroupHeadingManager DocMethodGroupHeadingManager
@@ -162,6 +174,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocMethodGroupHeadingManager mDocMethodGroupHeadingManager;
 
     /// <summary>Gets the DocMethodGroupManager object.</summary>
     public DocMethodGroupManager DocMethodGroupManager
@@ -184,6 +197,7 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocMethodGroupManager mDocMethodGroupManager;
 
     /// <summary>Gets the DocMethodManager object.</summary>
     public DocMethodManager DocMethodManager
@@ -206,20 +220,21 @@ namespace LJCGenDocDAL
         }
       }
     }
+    private DocMethodManager mDocMethodManager;
+    #endregion
+
+    #region Class Properties
+
+    // Represents Argument errors.
+    private ArgError ArgError { get; set; }
+
+    private string FilePath { get; set; }
     #endregion
 
     #region Class Data
 
     private string mDataConfigName;
     private DbServiceRef mDbServiceRef;
-    private DocAssemblyGroupManager mDocAssemblyGroupManager;
-    private DocAssemblyManager mDocAssemblyManager;
-    private DocClassGroupHeadingManager mDocClassGroupHeadingManager;
-    private DocClassGroupManager mDocClassGroupManager;
-    private DocClassManager mDocClassManager;
-    private DocMethodGroupHeadingManager mDocMethodGroupHeadingManager;
-    private DocMethodGroupManager mDocMethodGroupManager;
-    private DocMethodManager mDocMethodManager;
     #endregion
   }
 }
