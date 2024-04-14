@@ -17,6 +17,7 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocMethod()
     {
+      ArgError = new ArgError("LJCGenDocDAL.DocMethod");
       ChangedNames = new ChangedNames();
       ChangedOverload = false;
     }
@@ -25,6 +26,14 @@ namespace LJCGenDocDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocMethod(DocMethod item)
     {
+      ArgError.MethodName = "DocMethod(item)";
+      if (item != null
+        && item.ID <= 0)
+      {
+        ArgError.Add("item.ID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangedNames = new ChangedNames();
       ID = item.ID;
     }
@@ -197,6 +206,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets or sets a flag for a changed OverloadName value.</summary>
     public bool ChangedOverload { get; set; }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

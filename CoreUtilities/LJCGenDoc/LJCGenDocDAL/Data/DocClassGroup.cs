@@ -17,6 +17,7 @@ namespace LJCGenDocDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocClassGroup()
     {
+      ArgError = new ArgError("LJCGenDocDAL.DocClassGroup");
       ChangedNames = new ChangedNames();
     }
 
@@ -24,6 +25,14 @@ namespace LJCGenDocDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DocClassGroup(DocClassGroup item)
     {
+      ArgError.MethodName = "DocClassGroup(item)";
+      if (item != null
+        && item.ID <= 0)
+      {
+        ArgError.Add("item.ID must be greater than zero.");
+      }
+      NetString.ThrowArgError(ArgError.ToString());
+
       ChangedNames = new ChangedNames();
       ID = item.ID;
     }
@@ -172,6 +181,9 @@ namespace LJCGenDocDAL
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
+
+    // Gets or sets the ArgError object.
+    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data

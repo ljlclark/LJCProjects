@@ -1,0 +1,58 @@
+DataTable				DbResult
+  Constructors				  Constructors
+    DataTable()				    DbResult()
+    DataTable(tableName)		    *DbResult(requestTypeName,tableName ...)
+  Methods			  	  Methods
+    Clone()			  	    Clone()
+    ToString()				    ToString()
+  Properties			  	  Properties
+    Columns			  	    Columns
+    Rows			  	    Rows
+    TableName			  	    TableName
+
+Columns
+  DataColumnCollection			DbColumns
+    DataColumn				  DbColumn
+
+Rows
+  DataRowCollection			DbRows
+    DataRow				  DbRow
+					    DbValues
+				  	      DbValue
+
+DataColumnCollection			DbColumns
+  Methods				  Methods
+    Add(column)				    Add(T)(List<>)
+    Add(columnName)			    *Add(columnName,(object)value ...)
+  Properties				  Properties
+    Item[index]				    Item[index](List<>)
+    Item[name]				    Item[name] *New
+
+DataRowCollection			DbRows
+  Methods				  Methods
+    Add(row)				    Add(T)(List<>)
+  Properties				  Properties
+    Item[index]				    Item[index](List<>)
+
+DataColumn				DbColumn
+  Constructors				  Constructors
+    DataColumn()			    DbColumn()
+    DataColumn(columnName)		    *DbColumn(columnName ...)
+    DataColumn(columnName, dataType)	    *DbColumn(columnName,value=null,dataTypeName="string" ...)?**
+  Methods				  Methods
+    ToString()				    ToString()
+  Properties			  	  Properties
+    AllowDbNull			  	    AllowDbNull
+    AutoIncrement		  	    AutoIncrement
+    Caption			  	    Caption
+    ColumnName			  	    ColumnName
+    DataType			  	    *DataTypeName
+    DefaultValue		  	    DefaultValue
+    MaxLength			  	    MaxLength
+    Unique			  	    Unique
+
+DataRow					DbRow
+  Properties				  Properties
+    Item[columnIndex]			    Item[columnIndex] *New
+    Item[columnName]			    Item[columnName] *New
+    ItemArray				    *Values
