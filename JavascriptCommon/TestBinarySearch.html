@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test BinarySearch()</title>
+  <meta name="description" content="Custom Javascript BinarySearch{} Method" />
+  <meta name="keywords" content="Javascript, BinarySearch()" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+
+  <script src="Common.js" type="text/javascript"></script>
+  <script src="ItemTemplate.js" type="text/javascript"></script>
+  <script src="ItemsTemplate.js" type="text/javascript"></script>
+  <script>
+    let items = new Items();
+    items.Add("C");
+    items.Add("B");
+    items.Add("D");
+    items.Sort();
+
+    let index = items.Search("A");
+    alert(`"A" = index: ${index}`);
+
+    index = items.Search("B");
+    alert(`"B" = index: ${index}`);
+
+    index = items.Search("C");
+    alert(`"C" = index: ${index}`);
+
+    index = items.Search("D");
+    alert(`"D" = index: ${index}`);
+
+    index = items.Search("E");
+    alert(`"E" = index: ${index}`);
+  </script>
+</head>
+<body>
+
+</body>
+</html>
