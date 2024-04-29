@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and contributors. -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Test HTML Form</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="Test HTMLForms" />
+  <meta name="keywords" content="HTML HTMLForm" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <script src="LJCCommon.js"></script>
+  <script>
+    function SetEvents()
+    {
+      let okButton = LJC.FormElement("TestForm", "OKButton");
+      //let okButton = LJC.Element("OKButton");
+      okButton.addEventListener("click", Validate);
+    }
+
+    function Validate()
+    {
+      let formElement = LJC.FormElement("TestForm", "TextValue");
+      alert(formElement.value);
+      formElement.value = "Hey!";
+    }
+  </script>
+</head>
+<body>
+  <form name="TestForm">
+    <label for="TextValue">Text Value </label>
+    <input type="text" name="TextValue" maxlength="20" />
+    <br />
+    <button type="button" name="OKButton">What?</button>
+  </form>
+  <!-- button type="button" id="OKButton">What?</button -->
+  <script>
+    SetEvents();
+  </script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Common.js
+// LJCCommon.js
 
-// this Functions
-class Common
+// Common Functions
+class LJC
 {
   // The Constructor function.
   constructor()
@@ -81,7 +81,7 @@ class Common
             {
               retValue = NotFound;
             }
-            index = upperIndex - this.MiddlePosition(nextCount);
+            index = upperIndex - Common.MiddlePosition(nextCount);
             break;
 
           // Set next index.
@@ -96,7 +96,7 @@ class Common
             // Get middle index of next items.
             lowerIndex = index;
             nextCount = upperIndex - lowerIndex;
-            index = lowerIndex + this.MiddlePosition(nextCount);
+            index = lowerIndex + Common.MiddlePosition(nextCount);
             break;
         }
       }

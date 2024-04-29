@@ -6,16 +6,16 @@
 class Items
 {
   // The case insensitive sort method.
-  static SortName(a, b)
+  static SortName(compare, compareTo)
   {
     let retValue = 0;
-    let compare = a.Name.toLowerCase();
-    let compareTo = b.Name.toLowerCase();
-    if (compare < compareTo)
+    let compareValue = compare.Name.toLowerCase();
+    let compareToValue = compareTo.Name.toLowerCase();
+    if (compareValue < compareToValue)
     {
       retValue = -1;
     }
-    if (compare > compareTo)
+    if (compareValue > compareToValue)
     {
       retValue = 1;
     }
@@ -37,18 +37,18 @@ class Items
   }
 
   // The Name compare method.
-  Compare(item, compareTo)
+  Compare(compareItem, compareToValue)
   {
-    let compareToItem = new Item(compareTo);
-    return Items.SortName(item, compareToItem);
+    let compareToItem = new Item(compareToValue);
+    return Items.SortName(compareItem, compareToItem);
   }
 
   // Delete the matching item.
-  Delete(compareTo)
+  Delete(compareToValue)
   {
     let retValue = null;
 
-    let index = this.Search(compareTo);
+    let index = this.Search(compareToValue);
     if (index >= 0)
     {
       retValue = this.ItemArray.splice(index, 1);
@@ -57,11 +57,11 @@ class Items
   }
 
   // Retrieve the matching item.
-  Retrieve(compareTo)
+  Retrieve(compareToValue)
   {
     let retValue = null;
 
-    let index = Common.BinarySearch(this.ItemArray, compareTo
+    let index = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     if (index >- 0)
     {
@@ -71,9 +71,9 @@ class Items
   }
 
   // Retrieve the matching item indexs.
-  Search(compareTo)
+  Search(compareToValue)
   {
-    let retValue = Common.BinarySearch(this.ItemArray, compareTo
+    let retValue = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
   }
