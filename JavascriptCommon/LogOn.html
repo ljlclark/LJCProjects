@@ -15,14 +15,16 @@
     function Validate(event)
     {
       let retValue = true;
-      let logOnForm = document.forms["LogOnForm"];
-      let ePassword = logOnForm["Password"];
+
+      let eForm = document.forms["LogOnForm"];
+      let ePassword = eForm["Password"];
       let password = ePassword.value;
       if (password.length < 8)
       {
         alert("Password must be at least 8 characters.");
         //alert(event.target.tagName);
         event.preventDefault();
+        ePassword.focus();
         retValue = false;
       }
       if (retValue)
@@ -43,8 +45,9 @@
       <label for="UserName"
              class="label">User Name</label>
       <!-- name attribute must be used to appear in "get" URL. -->
-      <!-- id must be used link from label for screen readers. -->
+      <!-- id must be used to link from label for screen readers. -->
       <input type="text" id="UserName" maxlength="15" required
+             autofocus
              class="input" /><br />
 
       <label for="Password"
@@ -62,9 +65,9 @@
     <br />
   </div>
   <script>
-    let logOnForm = document.forms["LogOnForm"];
-    //logOnForm.onsubmit = Validate;
-    logOnForm.addEventListener("submit", Validate);
+    let eForm = document.forms["LogOnForm"];
+    //eForm.onsubmit = Validate;
+    eForm.addEventListener("submit", Validate);
     //Submit.addEventListener("click", Validate);
   </script>
 </body>
