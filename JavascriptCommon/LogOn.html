@@ -43,6 +43,7 @@
       <label for="UserName"
              class="label">User Name</label>
       <!-- name attribute must be used to appear in "get" URL. -->
+      <!-- id must be used link from label for screen readers. -->
       <input type="text" id="UserName" maxlength="15" required
              class="input" /><br />
 
@@ -62,8 +63,8 @@
   </div>
   <script>
     let logOnForm = document.forms["LogOnForm"];
-    logOnForm.onsubmit = Validate;
-    //logOnForm.addEventListener("submit", Validate);
+    //logOnForm.onsubmit = Validate;
+    logOnForm.addEventListener("submit", Validate);
     //Submit.addEventListener("click", Validate);
   </script>
 </body>
