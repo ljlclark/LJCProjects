@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<!-- Copyright (c) Lester J. Clark and contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors -->
+<!-- Licenced under the MIT licence. -->
+<!-- TestHTMLForm.html -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>Test HTML Form</title>
@@ -13,26 +15,27 @@
     function SetEvents()
     {
       let okButton = LJC.FormElement("TestForm", "OKButton");
-      //let okButton = LJC.Element("OKButton");
       okButton.addEventListener("click", Validate);
     }
 
     function Validate()
     {
-      let formElement = LJC.FormElement("TestForm", "TextValue");
-      alert(formElement.value);
-      formElement.value = "Hey!";
+      let element = LJC.FormElement("TestForm", "TextValue");
+      alert(element.value);
+      element.value = "Hey!";
     }
   </script>
 </head>
 <body>
   <form name="TestForm">
-    <label for="TextValue">Text Value </label>
-    <input type="text" name="TextValue" maxlength="20" />
-    <br />
-    <button type="button" name="OKButton">What?</button>
+    <label for="TextValue">Text Value</label>
+    <input type="text" name="TextValue"
+           maxlength="25" />
+    <br /><br />
+    <button type="button" name="OKButton">
+      What?
+    </button>
   </form>
-  <!-- button type="button" id="OKButton">What?</button -->
   <script>
     SetEvents();
   </script>

@@ -2,67 +2,62 @@
 // Licensed under the MIT License.
 // Common.js
 
-// this Functions
+// Common Static Functions
 class Common
 {
-  // The Constructor function.
-  constructor()
-  {
-  }
-
   // Gets the HTMLElement.
   static Element(elementID)
   {
     return document.getElementById(elementID);
   }
 
-  // Get a form element.
-  static FormElement(formName, elementName)
+  // Check if an item has a value.
+  static HasValue(element)
   {
-    let form = window.document.forms[formName];
-    let retValue = form[elementName];
-    return retValue;
-  }
+    var retValue = false;
 
-  // Get a form element value.
-  static FormElementValue(formName, elementName)
-  {
-    let element = this.FormElement(formName, elementName);
-    let retValue = element.value;
+    if (element
+      && element != null)
+    {
+      retValue = true;
+    }
     return retValue;
-  }
-
-  // Gets HTMLElements by Tag.
-  static TagElements(parentElement, tag)
-  {
-    return parentElement.getElementsByTagName(tag);
   }
 
   // Returns the index of a search item in the array.
-  static BinarySearch(array, compareToValue, compareFunction)
+  static BinarySearch(array, sortFunction, compareFunction, showAlerts = false)
   {
-    const NotFound = -1;
-    const Searching = -2;
-    let retValue = NotFound;
+    var retValue = -1;
 
     if (array
       && Array.isArray(array))
     {
-      // Set initial bounds.
+      array.sort(sortFunction);
+
+      // Set initial bounds
       let lowerIndex = 0;
       let upperIndex = array.length - 1;
       let nextCount = upperIndex - lowerIndex + 1;
       let index = this.MiddlePosition(nextCount) - 1;
 
-      retValue = Searching;
-      while (Searching == retValue)
+      retValue = -2;
+      while (-2 == retValue)
       {
-        let result = compareFunction(array[index], compareToValue);
+        if (showAlerts)
+        {
+          alert(`Index: ${index}`);
+        }
+
+        let result = compareFunction(array[index]);
         switch (result)
         {
           // Item was found.
           case 0:
             retValue = index;
+            if (showAlerts)
+            {
+              alert(`Found: index: ${index}`);
+            }
             break;
 
           // Set previous index.
@@ -70,7 +65,7 @@ class Common
             if (1 == nextCount)
             {
               // There are no items left.
-              retValue = NotFound;
+              retValue = -1;
               break;
             }
 
@@ -89,7 +84,7 @@ class Common
             if (1 == nextCount)
             {
               // There are no items left.
-              retValue = NotFound;
+              retValue = -1;
               break;
             }
 
@@ -107,7 +102,7 @@ class Common
   // Returns the middle position of the count value.
   static MiddlePosition(count)
   {
-    let retValue = 0;
+    var retValue = 0;
     if (0 == count % 2)
     {
       // Even length.
@@ -120,64 +115,6 @@ class Common
       retValue = (count - remainder) / 2 + 1;
     }
     return retValue;
-  }
-
-  // Gets the element text.
-  static GetText(elementID)
-  {
-    let retValue = null;
-
-    let element = this.Element(elementID);
-    if (element != null)
-    {
-      retValue = element.innerText;
-    }
-    return retValue;
-  }
-
-  // Gets the element value.
-  static GetValue(elementID)
-  {
-    let retValue = null;
-
-    let element = this.Element(elementID);
-    if (element != null)
-    {
-      retValue = element.value;
-    }
-    return retValue;
-  }
-
-  // Check if an element has a value.
-  static HasValue(element)
-  {
-    let retValue = false;
-
-    if (element && element != null)
-    {
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // Sets the element text.
-  static SetText(elementID, text)
-  {
-    let element = this.Element(elementID);
-    if (element != null)
-    {
-      element.innerText = text;
-    }
-  }
-
-  // Sets the element value.
-  static SetValue(elementID, value)
-  {
-    let element = this.Element(elementID);
-    if (element != null)
-    {
-      element.value = value;
-    }
   }
 
   // Show the properties of an object.

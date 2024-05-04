@@ -5,11 +5,6 @@
 // Common Functions
 class LJC
 {
-  // The Constructor function.
-  constructor()
-  {
-  }
-
   // Gets the HTMLElement.
   static Element(elementID)
   {
@@ -19,7 +14,7 @@ class LJC
   // Get a form element.
   static FormElement(formName, elementName)
   {
-    let form = window.document.forms[formName];
+    let form = document.forms[formName];
     let retValue = form[elementName];
     return retValue;
   }
@@ -153,7 +148,8 @@ class LJC
   {
     let retValue = false;
 
-    if (element && element != null)
+    if (element
+      && element != null)
     {
       retValue = true;
     }

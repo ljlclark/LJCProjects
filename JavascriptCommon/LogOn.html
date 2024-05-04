@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Copyright Lester J. Clark and Contributors -->
+<!-- Licensed under the MIT license.  -->
+<!-- LogOn.html -->
+<html lang="en" xmlns="http:/www.w3.org/1999/xhtml">
+<header>
+  <title>Main Page</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="The Olinda Pics Main" />
+  <meta name="keywords" content="Olinda pictures main page" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="LogOn.css" />
+  <script>
+    function Validate(event)
+    {
+      let retValue = true;
+      let logOnForm = document.forms["LogOnForm"];
+      let ePassword = logOnForm["Password"];
+      let password = ePassword.value;
+      if (password.length < 8)
+      {
+        alert("Password must be at least 8 characters.");
+        //alert(event.target.tagName);
+        event.preventDefault();
+        retValue = false;
+      }
+      if (retValue)
+      {
+        localStorage.setItem("UserName", UserName.value);
+        localStorage.setItem("Password", ePassword.value);
+        UserName.value = "";
+        ePassword.value = "";
+      }
+      return retValue;
+    }
+  </script>
+</header>
+<body>
+  <div class="pageCenter">
+    <h2>Login</h2>
+    <form name="LogOnForm" action="LogOnAction.html" method="get">
+      <label for="UserName"
+             class="label">User Name</label>
+      <!-- name attribute must be used to appear in "get" URL. -->
+      <input type="text" id="UserName" maxlength="15" required
+             class="input" /><br />
+
+      <label for="Password"
+             class="label">Password</label>
+      <input type="password" id="Password" maxlength="12" required
+             class="input" /><br />
+
+      <input type="submit" value="Submit"
+             class="inputSubmit" />
+      <!--button id="Submit"
+          class="inputSubmit">
+    Submit
+  </button-->
+    </form>
+    <br />
+  </div>
+  <script>
+    let logOnForm = document.forms["LogOnForm"];
+    logOnForm.onsubmit = Validate;
+    //logOnForm.addEventListener("submit", Validate);
+    //Submit.addEventListener("click", Validate);
+  </script>
+</body>
+</html>

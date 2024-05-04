@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Copyright Lester J. Clark and Contributors -->
+<!-- Licensed under the MIT license.  -->
+<!-- LogOnAction.html -->
+<html lang="en" xmlns="http:/www.w3.org/1999/xhtml">
+<header>
+  <title>Logon Action Page</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="The Logon Action Page" />
+  <meta name="keywords" content="Local Logon Action Page" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="LogOn.css" />
+</header>
+<body>
+  <div class="pageCenter">
+    <h2>Login Action</h2>
+    <p id="UserName"></p>
+    <p id="Password"></p>
+  </div>
+  <script>
+    let userName = localStorage.getItem("UserName");
+    let password = localStorage.getItem("Password");
+    localStorage.setItem("UserName", "");
+    localStorage.setItem("Password", "");
+    UserName.innerText = userName;
+    Password.innerText = password;
+  </script>
+</body>
+</html>
