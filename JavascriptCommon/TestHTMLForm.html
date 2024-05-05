@@ -25,16 +25,51 @@
       element.value = "Hey!";
     }
   </script>
+  <style>
+    .table {
+      border: 1px solid black;
+      border-spacing: 4px;
+      display: table;
+    }
+
+    .row {
+      display: table-row;
+    }
+
+    .cell {
+      display: table-cell;
+    }
+  </style>
 </head>
 <body>
-  <form name="TestForm">
-    <label for="TextValue">Text Value</label>
-    <input type="text" name="TextValue"
-           maxlength="25" />
-    <br /><br />
-    <button type="button" name="OKButton">
-      What?
-    </button>
+  <form name="TestForm"
+        class="table">
+    <div class="row">
+      <div class="cell">
+        <label for="TextValue">Text Value</label>
+      </div>
+      <div class="cell">
+        <input type="text" name="TextValue"
+               maxlength="25" size="25 * 5" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <label for="TextValue">Another Value</label>
+      </div>
+      <div class="cell">
+        <input type="text" name="AnotherValue"
+               maxlength="18" size="18 * 5" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell"></div>
+      <div class="cell">
+        <button type="button" name="OKButton">
+          What?
+        </button>
+      </div>
+    </div>
   </form>
   <script>
     SetEvents();
