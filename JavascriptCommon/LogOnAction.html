@@ -13,19 +13,20 @@
   <link rel="stylesheet" type="text/css" href="LogOn.css" />
 </header>
 <body>
-  <div class="pageCenter">
+  <div class="page"
+       style="text-align: center">
     <h2>Login Action</h2>
     <p id="UserName"></p>
-    <p id="Password"></p>
+    <p id="AccessCode"></p>
     <br />
   </div>
   <script>
     let userName = localStorage.getItem("UserName");
-    let password = localStorage.getItem("Password");
+    let accessCode = localStorage.getItem("AccessCode");
     localStorage.setItem("UserName", "");
-    localStorage.setItem("Password", "");
+    localStorage.setItem("AccessCode", "");
     UserName.innerText = userName;
-    Password.innerText = password;
+    AccessCode.innerText = accessCode;
   </script>
 </body>
 </html>

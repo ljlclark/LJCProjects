@@ -18,30 +18,12 @@
   border: 1px solid black;
   border-radius: 8px;
   border-spacing: 6px;
-  width: 232px;
-}
-
-/* Needs Margin: auto to center. */
-.formCenter {
-  background-color: paleturquoise;
-  border: 1px solid black;
-  border-radius: 8px;
-  border-spacing: 6px;
-  margin: auto;
-  width: 232px;
 }
 
 .page {
   background-color: aliceblue;
   margin-left: 25px;
   margin-right: 25px;
-}
-
-.pageCenter {
-  background-color: aliceblue;
-  margin-left: 25px;
-  margin-right: 25px;
-  text-align: center;
 }
 
 .row {
