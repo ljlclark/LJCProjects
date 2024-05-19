@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// RepeatItems.js
+// Sections.js
 
 // Represents a collection of items.
-class RepeatItems
+class Sections
 {
   // The case insensitive sort method.
   static SortName(compare, compareTo)
@@ -31,7 +31,7 @@ class RepeatItems
   // Adds a new object.
   Add(name)
   {
-    let item = new RepeatItem(name);
+    let item = new Section(name);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
@@ -41,7 +41,7 @@ class RepeatItems
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let compareToItem = new RepeatItem(compareToValue);
+    let compareToItem = new Section(compareToValue);
     return Items.SortName(compareItem, compareToItem);
   }
 
@@ -91,3 +91,13 @@ class RepeatItems
   }
 }
 
+// Represents a data object.
+class Section
+{
+  // The Constructor method.
+  constructor(name = null)
+  {
+    this.Name = name;
+    this.RepeatItems = new RepeatItems();
+  }
+}

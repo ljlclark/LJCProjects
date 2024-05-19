@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Replacements.js
+// RepeatItems.js
 
 // Represents a collection of items.
-class Replacements
+class RepeatItems
 {
   // The case insensitive sort method.
   static SortName(compare, compareTo)
@@ -29,9 +29,9 @@ class Replacements
   }
 
   // Adds a new object.
-  Add(name, value)
+  Add(name)
   {
-    let item = new Replacement(name, value);
+    let item = new RepeatItem(name);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
@@ -41,7 +41,7 @@ class Replacements
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let compareToItem = new Replacement(compareToValue);
+    let compareToItem = new RepeatItem(compareToValue);
     return Items.SortName(compareItem, compareToItem);
   }
 
@@ -56,12 +56,6 @@ class Replacements
       retValue = this.ItemArray.splice(index, 1);
     }
     return retValue;
-  }
-
-  Items(index)
-  {
-    let item = this.ItemArray[index];
-    return item;
   }
 
   // Retrieve the matching item.
@@ -97,3 +91,13 @@ class Replacements
   }
 }
 
+// Represents a data object.
+class RepeatItem
+{
+  // The Constructor method.
+  constructor(name = null)
+  {
+    this.Name = name;
+    this.Replacements = new Replacements();
+  }
+}

@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Sections.js
+// Replacements.js
 
 // Represents a collection of items.
-class Sections
+class Replacements
 {
   // The case insensitive sort method.
   static SortName(compare, compareTo)
@@ -29,9 +29,9 @@ class Sections
   }
 
   // Adds a new object.
-  Add(name)
+  Add(name, value)
   {
-    let item = new Section(name);
+    let item = new Replacement(name, value);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
@@ -41,7 +41,7 @@ class Sections
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let compareToItem = new Section(compareToValue);
+    let compareToItem = new Replacement(compareToValue);
     return Items.SortName(compareItem, compareToItem);
   }
 
@@ -56,6 +56,12 @@ class Sections
       retValue = this.ItemArray.splice(index, 1);
     }
     return retValue;
+  }
+
+  Items(index)
+  {
+    let item = this.ItemArray[index];
+    return item;
   }
 
   // Retrieve the matching item.
@@ -91,3 +97,13 @@ class Sections
   }
 }
 
+// Represents a data object.
+class Replacement
+{
+  // The Constructor method.
+  constructor(name, value = null)
+  {
+    this.Name = name;
+    this.Value = value;
+  }
+}
