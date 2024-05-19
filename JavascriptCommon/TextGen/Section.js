@@ -1,13 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ItemTemplate.js
+// Section.js
 
 // Represents a data object.
-class _ClassName_
+class Section
 {
   // The Constructor method.
   constructor(name = null)
   {
     this.Name = name;
+    this.RepeatItems = new RepeatItems();
   }
 }

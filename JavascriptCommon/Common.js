@@ -5,27 +5,25 @@
 // Common Static Functions
 class Common
 {
+  // Get Elements
+
   // Gets the HTMLElement.
-  static Element(elementID)
+  static Element(id)
   {
-    return document.getElementById(elementID);
-  }
-
-  // Check if an item has a value.
-  static HasValue(element)
-  {
-    var retValue = false;
-
-    if (element
-      && element != null)
-    {
-      retValue = true;
-    }
+    let retValue = document.getElementById(id);
     return retValue;
   }
 
+  // Gets HTMLElements by Tag.
+  static TagElements(eParent, tag)
+  {
+    return eParent.getElementsByTagName(tag);
+  }
+
+  // Binary Search
+
   // Returns the index of a search item in the array.
-  static BinarySearch(array, sortFunction, compareFunction, showAlerts = false)
+  static BinarySearch(array, sortFunction, compareFunction)
   {
     var retValue = -1;
 
@@ -43,21 +41,12 @@ class Common
       retValue = -2;
       while (-2 == retValue)
       {
-        if (showAlerts)
-        {
-          alert(`Index: ${index}`);
-        }
-
         let result = compareFunction(array[index]);
         switch (result)
         {
           // Item was found.
           case 0:
             retValue = index;
-            if (showAlerts)
-            {
-              alert(`Found: index: ${index}`);
-            }
             break;
 
           // Set previous index.
@@ -117,17 +106,228 @@ class Common
     return retValue;
   }
 
-  // Show the properties of an object.
+  // Helper Methods
+
+  // Gets the element text.
+  static GetText(id)
+  {
+    let retValue = null;
+
+    let eSrc = this.Element(id);
+    if (eSrc != null)
+    {
+      retValue = eSrc.innerText;
+    }
+    return retValue;
+  }
+
+  // Gets the element value.
+  static GetValue(id)
+  {
+    let retValue = null;
+
+    let eSrc = this.Element(id);
+    if (eSrc != null)
+    {
+      retValue = eSrc.value;
+    }
+    return retValue;
+  }
+
+  // Check if an element has a value.
+  static HasValue(eSrc)
+  {
+    let retValue = false;
+
+    if (eSrc
+      && eSrc != null)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Sets the element text.
+  static SetText(id, text)
+  {
+    let eSrc = this.Element(id);
+    if (eSrc != null)
+    {
+      eSrc.innerText = text;
+    }
+  }
+
+  // Sets the textarea rows for newlines.
+  static SetTextRows(event)
+  {
+    let eSrc = event.target;
+    if ("textarea" == eSrc.localName)
+    {
+      let count = eSrc.rows;
+      let matches = eSrc.value.match(/\n/g);
+      if (Array.isArray(matches))
+      {
+        count = matches.length + 1;
+      }
+      else
+      {
+        count = 1;
+      }
+      eSrc.rows = count;
+    }
+  }
+
+  // Sets the element value.
+  static SetValue(id, value)
+  {
+    let eSrc = this.Element(id);
+    if (eSrc != null)
+    {
+      eSrc.value = value;
+    }
+  }
+
+  // Show Property Methods
+
+  // Show the properties of an object that are not null or "" and
+  // do not start with "on".
   static ShowProperties(location, item)
   {
     if (item)
     {
-      let value = `location: ${location}\r\n`;
-      for (let property in item)
+      let startText = `${location}: `;
+
+      let results = `${startText}\r\n`;
+      let page = 1;
+      let count = 1;
+      for (let propertyName in item)
       {
-        value += `Property: ${property} - ${item[property]}\r\n`;
+        if (false == propertyName.startsWith("on")
+          && item[propertyName] != null
+          && item[propertyName] != "")
+        {
+          if (count % 12 == 0)
+          {
+            alert(`Page: ${page} ${results}`);
+            results = `${startText}\r\n`;
+            page++;
+          }
+          count++;
+          results += this.AddPropertyOutput(item, propertyName);
+        }
       }
-      alert(value);
+      if (results != startText)
+      {
+        alert(`${page} ${results}`);
+      }
     }
+  }
+
+  // Show selected properties of an object.
+  static ShowSelectProperties(item, typeName, startText = null
+    , propertyNames = null)
+  {
+    if (item)
+    {
+      if (null == propertyNames)
+      {
+        propertyNames = this.GetPropertyNames(typeName);
+      }
+      startText = this.GetStartText(typeName, startText);
+
+      let results = `${startText}\r\n`;
+      let page = 1;
+      let count = 1;
+      let length = propertyNames.length;
+      for (let index = 0; index < length; index++)
+      {
+        let propertyName = propertyNames[index];
+        if (count % 12 == 0)
+        {
+          alert(`page: ${page} ${results}`);
+          results = `${startText}\r\n`;
+          page++;
+        }
+        count++;
+        results += this.AddPropertyOutput(item, propertyName);
+      }
+      if (results != startText)
+      {
+        alert(`page: ${page} ${results}`);
+      }
+    }
+  }
+
+  // Property Helper Methods
+
+  // Add property output to results.
+  static AddPropertyOutput(item, propertyName)
+  {
+    let retValue = "";
+
+    if (propertyName in item)
+    {
+      retValue = `${propertyName}=${item[propertyName]}\r\n`;
+    }
+    return retValue;
+  }
+
+  // Gets the default property names.
+  static GetPropertyNames(typeName)
+  {
+    let retValue = null;
+
+    switch (typeName.toLowerCase().trim())
+    {
+      case "window":
+        retValue = [
+          "parent", "document", "location", "frames", "length",
+          "addEventListener", "removeEventListener"
+        ];
+        break;
+
+      case "document":
+        retValue = [
+          "documentElement", "location", "baseURI", "body", "head",
+          "id", "name",
+          "nodeType", "nodeName", "hasChildNodes", "childNodes", "firstChild",
+          "getElementByID", "getElementsByName",
+          "getElementsByClassName", "getElementsByTagName",
+          "addEventListener", "removeEventListener"
+        ];
+        break;
+
+      case "element":
+        retValue = [
+          "id", "name",
+          "localName", "tagName",
+          "innerHTML", "outerHTML",
+          "nodeType", "nodeName", "firstChild"
+        ];
+        break;
+
+      default:
+        retValue = [
+          "addEventListener", "removeEventListener"
+        ];
+        break;
+    }
+    return retValue;
+  }
+
+  // Get the property list start text.
+  static GetStartText(typeName, startText = null)
+  {
+    let retValue = null;
+
+    if (null == startText)
+    {
+      retValue = `${typeName.toLowerCase().trim()}: `;
+    }
+    else
+    {
+      retValue = `${starText.trim()}: `;
+    }
+    return retValue;
   }
 }

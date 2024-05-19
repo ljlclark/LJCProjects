@@ -1,10 +1,9 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ItemsTemplate.js
-// HTML Requires: <script src="../Common.js"></script>
+// Replacements.js
 
 // Represents a collection of items.
-class _CollectionName_
+class Replacements
 {
   // The case insensitive sort method.
   static SortName(compare, compareTo)
@@ -30,9 +29,9 @@ class _CollectionName_
   }
 
   // Adds a new object.
-  Add(name)
+  Add(name, value)
   {
-    let item = new _ClassName_(name);
+    let item = new Replacement(name, value);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
@@ -42,7 +41,7 @@ class _CollectionName_
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let compareToItem = new _ClassName_(compareToValue);
+    let compareToItem = new Replacement(compareToValue);
     return Items.SortName(compareItem, compareToItem);
   }
 
@@ -59,6 +58,12 @@ class _CollectionName_
     return retValue;
   }
 
+  Items(index)
+  {
+    let item = this.ItemArray[index];
+    return item;
+  }
+
   // Retrieve the matching item.
   Retrieve(compareToValue)
   {
@@ -66,7 +71,7 @@ class _CollectionName_
 
     let index = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
-    if (index >- 0)
+    if (index > - 0)
     {
       retValue = this.ItemArray[index];
     }

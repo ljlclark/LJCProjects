@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Copyrignt (c) Lester J. Clark and Contributors -->
+<!-- Licensed under the MIT license. -->
+<!-- TestBinarySearch.html -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtl">
+<head>
+  <title>Test BinarySearch()</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="Custom Javascript BinarySearch{} Method" />
+  <meta name="keywords" content="Javascript, BinarySearch()" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <script src="LJCCommon.js" type="text/javascript"></script>
+  <script src="ItemTemplate.js" type="text/javascript"></script>
+  <script src="ItemsTemplate.js" type="text/javascript"></script>
+  <script>
+    let items = new Items();
+    items.Add("C");
+    items.Add("B");
+    items.Add("D");
+    items.Sort();
+
+    let index = items.Search("A");
+    alert(`"A" = index: ${index}`);
+
+    index = items.Search("B");
+    alert(`"B" = index: ${index}`);
+
+    index = items.Search("C");
+    alert(`"C" = index: ${index}`);
+
+    index = items.Search("D");
+    alert(`"D" = index: ${index}`);
+
+    index = items.Search("E");
+    alert(`"E" = index: ${index}`);
+  </script>
+</head>
+<body>
+
+</body>
+</html>

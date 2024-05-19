@@ -1,13 +1,14 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ItemTemplate.js
+// Replacement.js
 
 // Represents a data object.
-class _ClassName_
+class Replacement
 {
   // The Constructor method.
-  constructor(name = null)
+  constructor(name, value = null)
   {
     this.Name = name;
+    this.Value = value;
   }
 }

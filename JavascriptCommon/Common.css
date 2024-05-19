@@ -1,0 +1,10 @@
+/* Copyright(c) Lester J. Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* Common.css */
+
+/* For textarea elements. */
+.text {
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: scroll;
+}
