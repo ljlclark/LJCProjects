@@ -42,7 +42,19 @@ class Sections
   Compare(compareItem, compareToValue)
   {
     let compareToItem = new Section(compareToValue);
-    return Items.SortName(compareItem, compareToItem);
+    return Sections.SortName(compareItem, compareToItem);
+  }
+
+  // 
+  Count()
+  {
+    let retValue = 0;
+    if (this.ItemArray
+      && Array.isArray(this.ItemArray))
+    {
+      retValue = this.ItemArray.length;
+    }
+    return retValue;
   }
 
   // Delete the matching item.
@@ -58,14 +70,21 @@ class Sections
     return retValue;
   }
 
+  // Get an item by index.
+  Items(index)
+  {
+    let retValue = this.ItemArray[index];
+    return retValue;
+  }
+
   // Retrieve the matching item.
   Retrieve(compareToValue)
   {
     let retValue = null;
 
-    let index = Common.BinarySearch(this.ItemArray, compareToValue
+    let index = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
-    if (index > - 0)
+    if (index >= 0)
     {
       retValue = this.ItemArray[index];
     }
@@ -75,7 +94,7 @@ class Sections
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
-    let retValue = Common.BinarySearch(this.ItemArray, compareToValue
+    let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
   }
