@@ -2,73 +2,60 @@
 <!-- Copyright Lester J. Clark and Contributors -->
 <!-- Licensed under the MIT license.  -->
 <!-- LogOn.html -->
-<html lang="en" xmlns="http:/www.w3.org/1999/xhtml">
-<header>
-  <title>Main Page</title>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>LogOn Page</title>
   <meta charset="utf-8" />
-  <meta name="description" content="The Olinda Pics Main" />
-  <meta name="keywords" content="Olinda pictures main page" />
+  <meta name="description" content="The LogOn Page using a CSS Table." />
+  <meta name="keywords" content="LogOn CSS Table" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="LogOn.css" />
-  <script>
-    function Validate(event)
-    {
-      let retValue = true;
-
-      let eForm = document.forms["LogOnForm"];
-      let ePassword = eForm["Password"];
-      let password = ePassword.value;
-      if (password.length < 8)
-      {
-        alert("Password must be at least 8 characters.");
-        //alert(event.target.tagName);
-        event.preventDefault();
-        ePassword.focus();
-        retValue = false;
-      }
-      if (retValue)
-      {
-        localStorage.setItem("UserName", UserName.value);
-        localStorage.setItem("Password", ePassword.value);
-        UserName.value = "";
-        ePassword.value = "";
-      }
-      return retValue;
-    }
-  </script>
-</header>
+  <script src="Logon.js" type="text/javascript"></script>
+</head>
 <body>
-  <div class="pageCenter">
+  <div class="page"
+       style="text-align: center">
     <h2>Login</h2>
-    <form name="LogOnForm" action="LogOnAction.html" method="get">
-      <label for="UserName"
-             class="label">User Name</label>
-      <!-- name attribute must be used to appear in "get" URL. -->
-      <!-- id must be used to link from label for screen readers. -->
-      <input type="text" id="UserName" maxlength="15" required
-             autofocus
-             class="input" /><br />
-
-      <label for="Password"
-             class="label">Password</label>
-      <input type="password" id="Password" maxlength="12" required
-             class="input" /><br />
-
-      <input type="submit" value="Submit"
-             class="inputSubmit" />
-      <!--button id="Submit"
-          class="inputSubmit">
-    Submit
-  </button-->
+    <form name="LogOnForm" action="LogOnAction.html" method="get"
+          class="form"
+          style="margin: auto; width: 237px">
+      <div class="table">
+        <div class="row">
+          <div class="cellLeft">
+            <label for="UserName">User Name</label>
+          </div>
+          <!-- name attribute must be used to appear in "get" URL. -->
+          <!-- id must be used to link from label for screen readers. -->
+          <div class="cell">
+            <input type="text" id="UserName" autofocus required
+                   maxlength="15" size="15 * 5" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="cellLeft">
+            <label for="AccessCode">AccessCode</label>
+          </div>
+          <div class="cell">
+            <input type="password" id="AccessCode" required
+                   maxlength="12" size="12 * 6" ; />
+          </div>
+        </div>
+        <div class="row">
+          <div class="cellLeft">
+          </div>
+          <div class="cell">
+            <input type="submit" value="Submit" />
+          </div>
+        </div>
+      </div>
     </form>
+    <div id="message"></div>
     <br />
   </div>
   <script>
-    let eForm = document.forms["LogOnForm"];
-    //eForm.onsubmit = Validate;
-    eForm.addEventListener("submit", Validate);
-    //Submit.addEventListener("click", Validate);
+    let logOn = new LogOn();
+    logOn.AddEvents();
   </script>
 </body>
 </html>

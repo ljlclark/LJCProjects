@@ -2,14 +2,17 @@
 // Licensed under the MIT license.
 // LogOn.js
 
+// The Logon class.
 class LogOn
 {
+  // Add the LogOn events.
   AddEvents()
   {
     let eForm = document.forms["LogOnForm"];
     eForm.addEventListener("submit", this.Validate.bind(this));
   }
 
+  // Validate the form values.
   Validate(event)
   {
     let retValue = true;

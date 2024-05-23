@@ -8,6 +8,7 @@ class TextGen
   // The Constructor function.
   constructor()
   {
+    this.Err = new ArgError();
     this.Lines = [];
     this.Output = "";
     this.Sections = [];
@@ -18,34 +19,26 @@ class TextGen
   {
     let retValue = "";
 
-    if (!sections || null == sections)
-    {
-      alert("sections is not defined.")
-    }
-    if (!lines || null == lines || !Array.isArray(lines))
-    {
-      alert("lines is not defined.")
-    }
+    this.Err.SetContext("TextGen(sections, lines");
+    this.Err.IsCollection(sections, "sections");
+    this.Err.IsArray(lines, "lines");
 
     this.Sections = sections;
     this.Lines = lines;
 
-    if (Array.isArray(this.Lines))
+    let section = new Section("Empty");
+    let lineIndex = { Value: 0 };
+    for (lineIndex.Value = 0; lineIndex.Value < lines.length
+      ; lineIndex.Value++)
     {
-      let section = new Section("Empty");
-      let lineIndex = { Value: 0 };
-      for (lineIndex.Value = 0; lineIndex.Value < lines.length
-        ; lineIndex.Value++)
+      let line = this.Lines[lineIndex.Value];
+      let sectionItem = { Value: section };
+      if (this.IsSectionBegin(line, sectionItem))
       {
-        let line = this.Lines[lineIndex.Value];
-        let sectionItem = { Value: section };
-        if (this.IsSectionBegin(line, sectionItem))
-        {
-          this.ProcessItems(sectionItem.Value, lineIndex);
-          continue;
-        }
-        this.AddOutput(line);
+        this.ProcessItems(sectionItem.Value, lineIndex);
+        continue;
       }
+      this.AddOutput(line);
     }
     retValue = this.Output;
     return retValue;

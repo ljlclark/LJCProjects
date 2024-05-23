@@ -5,11 +5,18 @@
 <html lang="en">
 <head>
   <title>Test Text Generation</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="../Common.css" />
-  <script src="../Common.js"></script>
-  <script src="../GenLib/Sections.js"></script>
+  <script src="../LJCCommon.js"></script>
+  <script src="../ArgError.js"></script>
   <script src="../GenLib/RepeatItems.js"></script>
   <script src="../GenLib/Replacements.js"></script>
+  <script src="../GenLib/Sections.js"></script>
+  <script src="../GenLib/TextGen.js"></script>
 </head>
 <body>
   <form>
@@ -27,39 +34,24 @@
 
   <script>
     // Events
-    template.addEventListener("keyup", Common.EventTextRows);
+    template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", Process);
 
+    // Event handler to process the template and data.
     function Process()
     {
       let templateText = template.value;
-      let sections = GetSections();
-      let outputText = GenText(templateText, sections);
-      output.value = outputText;
-      Common.SetTextRows(output);
+      sections = GetSections();
+      let lines = templateText.split("\n");
+      let textGen = new TextGen();
+      textGen.TextGen(sections, lines);
+      output.value = textGen.Output;
+      LJC.SetTextRows(output);
     }
 
-    function GenText(template, sections)
-    {
-      let retValue = "";
-      let lines = template.split("\n");
-      if (Array.isArray(lines))
-      {
-        for (index = 0; index < lines.length; index++)
-        {
-          let line = lines[index];
-          if (line.includes("#SectionBegin"))
-          {
-            let tokens = line.split(" ");
-            let sectionName = tokens[2];
-            let section = sections.Retrieve(sectionName);
-          }
-          retValue += `${line}\n`;
-        }
-      }
-      return retValue;
-    }
+    outputText = "";
 
+    // Gets the Sections data.
     function GetSections()
     {
       // Create Data

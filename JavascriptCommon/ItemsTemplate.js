@@ -1,7 +1,13 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ItemsTemplate.js
-// HTML Requires: <script src="../Common.js"></script>
+// #SectionBegin Main
+// #Value _CollectionName_
+// #Value _ClassName_
+// _CollectionName_.js
+// HTML Requires: <script src="../LJCCommon.js"></script>
+// HTML Requires: <script src="../GenLib/Sections.js"></script>
+// HTML Requires: <script src="../GenLib/RepeatItems.js"></script>
+// HTML Requires: <script src="../GenLib/Replacements.js"></script>
 
 // Represents a collection of items.
 class _CollectionName_
@@ -43,7 +49,19 @@ class _CollectionName_
   Compare(compareItem, compareToValue)
   {
     let compareToItem = new _ClassName_(compareToValue);
-    return Items.SortName(compareItem, compareToItem);
+    return _CollectionName_.SortName(compareItem, compareToItem);
+  }
+
+  // 
+  Count()
+  {
+    let retValue = 0;
+    if (this.ItemArray
+      && Array.isArray(this.ItemArray))
+    {
+      retValue = this.ItemArray.length;
+    }
+    return retValue;
   }
 
   // Delete the matching item.
@@ -59,6 +77,13 @@ class _CollectionName_
     return retValue;
   }
 
+  // Get an item by index.
+  Items(index)
+  {
+    let retValue = this.ItemArray[index];
+    return retValue;
+  }
+
   // Retrieve the matching item.
   Retrieve(compareToValue)
   {
@@ -66,7 +91,7 @@ class _CollectionName_
 
     let index = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
-    if (index >- 0)
+    if (index >= 0)
     {
       retValue = this.ItemArray[index];
     }
@@ -90,5 +115,6 @@ class _CollectionName_
     }
     this.ItemArray.sort(sortMethod);
   }
+  // #SectionEnd Main
 }
 
