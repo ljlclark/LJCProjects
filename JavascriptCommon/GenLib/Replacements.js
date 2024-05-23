@@ -9,6 +9,12 @@ class Replacements
   static SortName(compare, compareTo)
   {
     let retValue = 0;
+
+    let Err = new ArgError();
+    Err.SetContext("Replacements.TextGen.TextGen(sections, lines)");
+    Err.IsValue(compare, "compare");
+    Err.IsValue(compareTo, "compareTo");
+
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
     if (compareValue < compareToValue)
@@ -25,12 +31,16 @@ class Replacements
   // The Constructor method.
   constructor()
   {
+    this.Err = new ArgError();
     this.ItemArray = [];
   }
 
   // Adds a new object.
   Add(name, value)
   {
+    this.Err.SetContext("Replacements.Add(name)");
+    this.Err.IsValue(name, "name");
+
     let item = new Replacement(name, value);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
@@ -41,6 +51,11 @@ class Replacements
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
+    let Err = new ArgError();
+    Err.SetContext("Replacements.Compare(compareItem, compareToValue)");
+    Err.IsValue(compareItem, "compareItem");
+    Err.IsValue(compareToValue, "compareToValue");
+
     let compareToItem = new Replacement(compareToValue);
     return Replacements.SortName(compareItem, compareToItem);
   }
@@ -62,6 +77,9 @@ class Replacements
   {
     let retValue = null;
 
+    this.Err.SetContext("Replacements.Delete(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
@@ -74,6 +92,10 @@ class Replacements
   Items(index)
   {
     let retValue = this.ItemArray[index];
+
+    this.Err.SetContext("Replacements.Items(index)");
+    this.Err.IsValue(index, "index");
+
     return retValue;
   }
 
@@ -81,6 +103,9 @@ class Replacements
   Retrieve(compareToValue)
   {
     let retValue = null;
+
+    this.Err.SetContext("Replacements.Retrieve(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
 
     let index = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
@@ -94,6 +119,9 @@ class Replacements
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
+    this.Err.SetContext("Replacements.Search(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;

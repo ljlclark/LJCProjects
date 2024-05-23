@@ -19,7 +19,7 @@ class TextGen
   {
     let retValue = "";
 
-    this.Err.SetContext("TextGen(sections, lines");
+    this.Err.SetContext("TextGen.TextGen(sections, lines)");
     this.Err.IsCollection(sections, "sections");
     this.Err.IsArray(lines, "lines");
 
@@ -47,6 +47,11 @@ class TextGen
   // Process the RepeatItems.
   ProcessItems(section, lineIndex)
   {
+    this.Err.SetContext("TextGen.ProcessItems(section, lineIndex)");
+    this.Err.IsValue(section, "section");
+    this.Err.IsCollection(section.RepeatItems, "section.RepeatItems");
+    this.Err.IsValue(lineIndex.Value, "lineIndex.Value");
+
     let items = section.RepeatItems;
     if (items != null)
     {
@@ -72,6 +77,11 @@ class TextGen
   // Perform the line replacements.
   DoReplacements(item, lineItem)
   {
+    this.Err.SetContext("TextGen.DoReplacements(item, lineItem)");
+    this.Err.IsValue(item, "item");
+    this.Err.IsCollection(item.Replacements, "item.Replacements");
+    this.Err.IsValue(lineItem.Value, "lineItem.Value");
+
     if (lineItem.Value.includes("_"))
     {
       let replacements = item.Replacements;
@@ -99,6 +109,9 @@ class TextGen
   // Add the line to the output.
   AddOutput(line)
   {
+    this.Err.SetContext("TextGen.AddOutput(line)");
+    this.Err.IsValue(line, "line");
+
     if (this.Output.length > 0)
     {
       this.Output += "\n";
@@ -110,6 +123,11 @@ class TextGen
   IsSectionBegin(line, sectionItem)
   {
     let retValue = false;
+
+    this.Err.SetContext("TextGen.IsSectionBegin(line, sectionItem)");
+    this.Err.IsValue(line, "line");
+    this.Err.IsValue(sectionItem.Value, "sectionItem.Value");
+
     if (line.includes("#SectionBegin"))
     {
       let tokens = line.split(" ");

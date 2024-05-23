@@ -9,6 +9,12 @@ class RepeatItems
   static SortName(compare, compareTo)
   {
     let retValue = 0;
+
+    let Err = new ArgError();
+    Err.SetContext("RepeatItems.TextGen.TextGen(sections, lines)");
+    Err.IsValue(compare, "compare");
+    Err.IsValue(compareTo, "compareTo");
+
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
     if (compareValue < compareToValue)
@@ -25,12 +31,16 @@ class RepeatItems
   // The Constructor method.
   constructor()
   {
+    this.Err = new ArgError();
     this.ItemArray = [];
   }
 
   // Adds a new object.
   Add(name)
   {
+    this.Err.SetContext("RepeatItems.Add(name)");
+    this.Err.IsValue(name, "name");
+
     let item = new RepeatItem(name);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
@@ -41,6 +51,11 @@ class RepeatItems
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
+    let Err = new ArgError();
+    Err.SetContext("RepeatItems.Compare(compareItem, compareToValue)");
+    Err.IsValue(compareItem, "compareItem");
+    Err.IsValue(compareToValue, "compareToValue");
+
     let compareToItem = new RepeatItem(compareToValue);
     return RepeatItems.SortName(compareItem, compareToItem);
   }
@@ -49,6 +64,7 @@ class RepeatItems
   Count()
   {
     let retValue = 0;
+
     if (this.ItemArray
       && Array.isArray(this.ItemArray))
     {
@@ -62,6 +78,9 @@ class RepeatItems
   {
     let retValue = null;
 
+    this.Err.SetContext("RepeatItems.Delete(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
@@ -74,6 +93,10 @@ class RepeatItems
   Items(index)
   {
     let retValue = this.ItemArray[index];
+
+    this.Err.SetContext("RepeatItems.Items(index)");
+    this.Err.IsValue(index, "index");
+
     return retValue;
   }
 
@@ -81,6 +104,9 @@ class RepeatItems
   Retrieve(compareToValue)
   {
     let retValue = null;
+
+    this.Err.SetContext("RepeatItems.Retrieve(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
 
     let index = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
@@ -94,6 +120,9 @@ class RepeatItems
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
+    this.Err.SetContext("RepeatItems.Search(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
