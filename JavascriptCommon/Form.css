@@ -1,0 +1,36 @@
+/* Copyright Lester J. Clark and Contributors */
+/* Licensed under the MIT license.*/
+/* Form.css */
+
+.cellLeft {
+  display: table-cell;
+  text-align: initial;
+}
+
+.cell {
+  display: table-cell;
+  padding-left: 6px;
+  text-align: initial;
+}
+
+.form {
+  background-color: lightblue;
+  border: 1px solid black;
+  border-radius: 8px;
+  border-spacing: 6px;
+}
+
+.page {
+  background-color: aliceblue;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.row {
+  display: table-row;
+}
+
+.table {
+  border-spacing: 4px;
+  display: table;
+}

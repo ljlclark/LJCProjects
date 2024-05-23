@@ -11,6 +11,7 @@
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="../Common.css" />
+  <link rel="stylesheet" type="text/css" href="../Form.css" />
   <script src="../LJCCommon.js"></script>
   <script src="../ArgError.js"></script>
   <script src="../GenLib/RepeatItems.js"></script>
@@ -19,18 +20,35 @@
   <script src="../GenLib/TextGen.js"></script>
 </head>
 <body>
-  <form>
-    <label for="text">Template</label><br />
-    <textarea id="template" name="template" rows="1" cols="80"
-              autofocus spellcheck="false"
-              class="text"></textarea><br />
-    <br />
-    <label for="output">Output</label><br />
-    <textarea id="output" name="output" rows="1" cols="80"
-              autofocus spellcheck="false"
-              class="text"></textarea>
-  </form>
-  <button id="ok" type="button">OK</button>
+  <div class="page"
+       style="text-align: center">
+    <form class="form">
+      <div class="table">
+        <div class="row">
+          <div class="cellLeft">
+            <label for="text">Template</label>
+          </div>
+          <div class="cell">
+            <label for="output">Output</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cellLeft">
+            <textarea id="template" name="template" rows="1" cols="68"
+                      autofocus spellcheck="false"
+                      class="text"></textarea>
+          </div>
+          <div class="cell"
+               style="vertical-align: top">
+            <textarea id="output" name="output" rows="1" cols="68"
+                      spellcheck="false"
+                      class="text"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button id="ok" type="button">OK</button>
+  </div>
 
   <script>
     // Events
