@@ -1,8 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RepeatItems.js
-// HTML: <script src="ArgErr.js"></script>
-// HTML: <script src="Common.js"></script>
+// <script src="ArgErr.js"></script>
+// <script src="Common.js"></script>
 
 // Represents a collection of items.
 class RepeatItems

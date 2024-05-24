@@ -1,7 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextGen.js
-// HTML: <script src="ArgErr.js"></script>
+// <script src="ArgErr.js"></script>
 
 // Generate output text from a template and data.
 class TextGen

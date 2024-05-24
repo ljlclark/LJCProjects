@@ -1,8 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Replacements.js
-// HTML Requires: <script src="ArgErr.js"></script>
-// HTML Requires: <script src="Common.js"></script>
+// <script src="ArgErr.js"></script>
+// <script src="Common.js"></script>
 
 // Represents a collection of items.
 class Replacements
