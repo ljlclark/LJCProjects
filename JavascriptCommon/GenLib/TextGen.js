@@ -16,21 +16,21 @@ class TextGen
   }
 
   // Generate the output text.
-  TextGen(sections, lines)
+  TextGen(sections, templateLines)
   {
     let retValue = "";
 
     this.Err.SetContext("TextGen.TextGen(sections, lines)");
     this.Err.IsCollection(sections, "sections");
-    this.Err.IsArray(lines, "lines");
+    this.Err.IsArray(templateLines, "templateLines");
     this.Err.ShowError();
 
     this.Sections = sections;
-    this.Lines = lines;
+    this.Lines = templateLines;
 
     let section = new Section("Empty");
     let lineIndex = { Value: 0 };
-    for (lineIndex.Value = 0; lineIndex.Value < lines.length
+    for (lineIndex.Value = 0; lineIndex.Value < templateLines.length
       ; lineIndex.Value++)
     {
       let line = this.Lines[lineIndex.Value];
@@ -56,25 +56,25 @@ class TextGen
     this.Err.ShowError();
 
     let items = section.RepeatItems;
-    if (items != null)
+    //if (items != null)
+    //{
+    for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
     {
-      for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
+      let item = items.Items(itemIndex);
+      let index = 0;
+      for (index = lineIndex.Value; index < this.Lines.length; index++)
       {
-        let item = items.Items(itemIndex);
-        let index = 0;
-        for (index = lineIndex.Value; index < this.Lines.length; index++)
+        let line = this.Lines[index];
+        if (!line.includes("#"))
         {
-          let line = this.Lines[index];
-          if (!line.includes("#"))
-          {
-            let lineItem = { Value: line };
-            this.DoReplacements(item, lineItem);
-            this.AddOutput(lineItem.Value);
-          }
+          let lineItem = { Value: line };
+          this.DoReplacements(item, lineItem);
+          this.AddOutput(lineItem.Value);
         }
-        lineIndex.Value = index;
       }
+      lineIndex.Value = index;
     }
+    //}
   }
 
   // Perform the line replacements.
