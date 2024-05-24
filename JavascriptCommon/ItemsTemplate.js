@@ -4,10 +4,8 @@
 // #Value _CollectionName_
 // #Value _ClassName_
 // _CollectionName_.js
-// HTML Requires: <script src="../LJCCommon.js"></script>
-// HTML Requires: <script src="../GenLib/Sections.js"></script>
-// HTML Requires: <script src="../GenLib/RepeatItems.js"></script>
-// HTML Requires: <script src="../GenLib/Replacements.js"></script>
+// <script src="ArgErr.js"></script>
+// <script src="Common.js"></script>
 
 // Represents a collection of items.
 class _CollectionName_
@@ -16,6 +14,13 @@ class _CollectionName_
   static SortName(compare, compareTo)
   {
     let retValue = 0;
+
+    let err = new ArgError();
+    err.SetContext("Sections.TextGen.TextGen(sections, lines)");
+    err.IsValue(compare, "compare");
+    err.IsValue(compareTo, "compareTo");
+    err.ShowError();
+
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
     if (compareValue < compareToValue)
@@ -38,6 +43,10 @@ class _CollectionName_
   // Adds a new object.
   Add(name)
   {
+    this.Err.SetContext("Sections.Add(name)");
+    this.Err.IsValue(name, "name");
+    this.Err.ShowError();
+
     let item = new _ClassName_(name);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
@@ -48,6 +57,12 @@ class _CollectionName_
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
+    let err = new ArgError();
+    err.SetContext("Sections.Compare(compareItem, compareToValue)");
+    err.IsValue(compareItem, "compareItem");
+    err.IsValue(compareToValue, "compareToValue");
+    err.ShowError();
+
     let compareToItem = new _ClassName_(compareToValue);
     return _CollectionName_.SortName(compareItem, compareToItem);
   }
@@ -56,6 +71,7 @@ class _CollectionName_
   Count()
   {
     let retValue = 0;
+
     if (this.ItemArray
       && Array.isArray(this.ItemArray))
     {
@@ -69,6 +85,10 @@ class _CollectionName_
   {
     let retValue = null;
 
+    this.Err.SetContext("Sections.Delete(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
+
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
@@ -80,6 +100,10 @@ class _CollectionName_
   // Get an item by index.
   Items(index)
   {
+    this.Err.SetContext("RepeatItems.Items(index)");
+    this.Err.IsValue(index, "index");
+    this.Err.ShowError();
+
     let retValue = this.ItemArray[index];
     return retValue;
   }
@@ -88,6 +112,10 @@ class _CollectionName_
   Retrieve(compareToValue)
   {
     let retValue = null;
+
+    this.Err.SetContext("Sections.Retrieve(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
 
     let index = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
@@ -101,6 +129,10 @@ class _CollectionName_
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
+    this.Err.SetContext("Sections.Search(compareToValue)");
+    this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
+
     let retValue = Common.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;

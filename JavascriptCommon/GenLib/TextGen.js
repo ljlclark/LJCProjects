@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextGen.js
+// HTML: <script src="ArgErr.js"></script>
 
 // Generate output text from a template and data.
 class TextGen
@@ -22,6 +23,7 @@ class TextGen
     this.Err.SetContext("TextGen.TextGen(sections, lines)");
     this.Err.IsCollection(sections, "sections");
     this.Err.IsArray(lines, "lines");
+    this.Err.ShowError();
 
     this.Sections = sections;
     this.Lines = lines;
@@ -51,6 +53,7 @@ class TextGen
     this.Err.IsValue(section, "section");
     this.Err.IsCollection(section.RepeatItems, "section.RepeatItems");
     this.Err.IsValue(lineIndex.Value, "lineIndex.Value");
+    this.Err.ShowError();
 
     let items = section.RepeatItems;
     if (items != null)
@@ -81,6 +84,7 @@ class TextGen
     this.Err.IsValue(item, "item");
     this.Err.IsCollection(item.Replacements, "item.Replacements");
     this.Err.IsValue(lineItem.Value, "lineItem.Value");
+    this.Err.ShowError();
 
     if (lineItem.Value.includes("_"))
     {
@@ -111,6 +115,7 @@ class TextGen
   {
     this.Err.SetContext("TextGen.AddOutput(line)");
     this.Err.IsValue(line, "line");
+    this.Err.ShowError();
 
     if (this.Output.length > 0)
     {
@@ -127,6 +132,7 @@ class TextGen
     this.Err.SetContext("TextGen.IsSectionBegin(line, sectionItem)");
     this.Err.IsValue(line, "line");
     this.Err.IsValue(sectionItem.Value, "sectionItem.Value");
+    this.Err.ShowError();
 
     if (line.includes("#SectionBegin"))
     {

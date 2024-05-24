@@ -16,6 +16,12 @@ class LJC
   // Get a form element.
   static FormElement(formName, eName)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.FormElement(formName, eName)");
+    err.IsValue(formName, "formName");
+    err.IsValue(eName, "eName");
+    err.ShowError();
+
     let form = document.forms[formName];
     let retValue = form[eName];
     return retValue;
@@ -24,6 +30,12 @@ class LJC
   // Get a form element value.
   static FormElementValue(formName, eName)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.FormElementValue(formName, eName)");
+    err.IsValue(formName, "formName");
+    err.IsValue(eName, "eName");
+    err.ShowError();
+
     let eItem = this.FormElement(formName, eName);
     let retValue = eItem.value;
     return retValue;
@@ -32,6 +44,12 @@ class LJC
   // Gets HTMLElements by Tag.
   static TagElements(eParent, tag)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.TagElements(eParent, tag)");
+    err.IsValue(eParent, "eParent");
+    err.IsValue(tag, "tag");
+    err.ShowError();
+
     return eParent.getElementsByTagName(tag);
   }
 
@@ -42,60 +60,63 @@ class LJC
     const Searching = -2;
     let retValue = NotFound;
 
-    if (array
-      && Array.isArray(array))
+    let err = new ArgError();
+    err.SetContext("LJCCommon.BinarySearch(array, compareToValue, compareFunction)");
+    err.IsArray(array, "array");
+    err.IsValue(compareToValue, "compareToValue");
+    err.IsValue(compareFunction, "compareFunction");
+    err.ShowError();
+
+    // Set initial bounds.
+    let lowerIndex = 0;
+    let upperIndex = array.length - 1;
+    let nextCount = upperIndex - lowerIndex + 1;
+    let index = this.MiddlePosition(nextCount) - 1;
+
+    retValue = Searching;
+    while (Searching == retValue)
     {
-      // Set initial bounds.
-      let lowerIndex = 0;
-      let upperIndex = array.length - 1;
-      let nextCount = upperIndex - lowerIndex + 1;
-      let index = this.MiddlePosition(nextCount) - 1;
-
-      retValue = Searching;
-      while (Searching == retValue)
+      let result = compareFunction(array[index], compareToValue);
+      switch (result)
       {
-        let result = compareFunction(array[index], compareToValue);
-        switch (result)
-        {
-          // Item was found.
-          case 0:
-            retValue = index;
+        // Item was found.
+        case 0:
+          retValue = index;
+          break;
+
+        // Set previous index.
+        case 1:
+          if (1 == nextCount)
+          {
+            // There are no items left.
+            retValue = NotFound;
             break;
+          }
 
-          // Set previous index.
-          case 1:
-            if (1 == nextCount)
-            {
-              // There are no items left.
-              retValue = NotFound;
-              break;
-            }
+          // Get middle index of previous items.
+          upperIndex = index;
+          nextCount = upperIndex - lowerIndex;
+          if (0 == nextCount)
+          {
+            retValue = NotFound;
+          }
+          index = upperIndex - LJC.MiddlePosition(nextCount);
+          break;
 
-            // Get middle index of previous items.
-            upperIndex = index;
-            nextCount = upperIndex - lowerIndex;
-            if (0 == nextCount)
-            {
-              retValue = NotFound;
-            }
-            index = upperIndex - LJC.MiddlePosition(nextCount);
+        // Set next index.
+        case -1:
+          if (1 == nextCount)
+          {
+            // There are no items left.
+            retValue = NotFound;
             break;
+          }
 
-          // Set next index.
-          case -1:
-            if (1 == nextCount)
-            {
-              // There are no items left.
-              retValue = NotFound;
-              break;
-            }
-
-            // Get middle index of next items.
-            lowerIndex = index;
-            nextCount = upperIndex - lowerIndex;
-            index = lowerIndex + LJC.MiddlePosition(nextCount);
-            break;
-        }
+          // Get middle index of next items.
+          lowerIndex = index;
+          nextCount = upperIndex - lowerIndex;
+          index = lowerIndex + LJC.MiddlePosition(nextCount);
+          break;
       }
     }
     return retValue;
@@ -105,6 +126,12 @@ class LJC
   static MiddlePosition(count)
   {
     let retValue = 0;
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.MiddlePosition(count)");
+    err.IsValue(count, "count");
+    err.ShowError();
+
     if (0 == count % 2)
     {
       // Even length.
@@ -123,6 +150,15 @@ class LJC
   static DelimitedString(text, beginDelimiter, endDelimiter, begin)
   {
     let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.IsValue(text, "text");
+    err.IsValue(beginDelimiter, "beginDelimiter");
+    err.IsValue(endDelimiter, "endDelimiter");
+    err.IsValue(begin, "begin");
+    err.ShowError();
+
     begin.Index = text.indexOf(beginDelimiter, begin.Index);
     if (begin.Index >= 0)
     {
@@ -143,6 +179,11 @@ class LJC
   {
     let retValue = null;
 
+    let err = new ArgError();
+    err.SetContext("LJCCommon.GetText(id)");
+    err.IsValue(id, "id");
+    err.ShowError();
+
     let eItem = this.Element(id);
     if (eItem != null)
     {
@@ -155,6 +196,11 @@ class LJC
   static GetValue(id)
   {
     let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.GetValue(id)");
+    err.IsValue(id, "id");
+    err.ShowError();
 
     let eItem = this.Element(elementID);
     if (eItem != null)
@@ -169,6 +215,11 @@ class LJC
   {
     let retValue = false;
 
+    let err = new ArgError();
+    err.SetContext("LJCCommon.HasValue(id)");
+    err.IsValue(eItem, "eItem");
+    err.ShowError();
+
     if (eItem
       && eItem != null)
     {
@@ -180,6 +231,12 @@ class LJC
   // Sets the element text.
   static SetText(elementID, text)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.SetText(elementID, text)");
+    err.IsValue(elementID, "elementID");
+    err.IsValue(text, "text");
+    err.ShowError();
+
     let eItem = this.Element(elementID);
     if (eItem != null)
     {
@@ -190,6 +247,11 @@ class LJC
   // Sets the textarea rows for newlines.
   static EventTextRows(event)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.EventTextRows(event)");
+    err.IsValue(event, "event");
+    err.ShowError();
+
     let eItem = event.target;
     if ("textarea" == eItem.localName)
     {
@@ -200,6 +262,11 @@ class LJC
   // Sets the textarea rows for newlines.
   static SetTextRows(eItem)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.SetTextRows(eItem)");
+    err.IsValue(eItem, "eItem");
+    err.ShowError();
+
     let count = eItem.rows;
     let matches = eItem.value.match(/\n/g);
     if (Array.isArray(matches))
@@ -216,6 +283,12 @@ class LJC
   // Sets the element value.
   static SetValue(elementID, value)
   {
+    let err = new ArgError();
+    err.SetContext("LJCCommon.SetValue(elementID, value)");
+    err.IsValue(elementID, "elementID");
+    err.IsValue(value, "value");
+    err.ShowError();
+
     let eItem = this.Element(elementID);
     if (eItem != null)
     {
@@ -229,33 +302,36 @@ class LJC
   // do not start with "on".
   static ShowProperties(location, item)
   {
-    if (item)
-    {
-      let startText = `${location}: `;
+    let err = new ArgError();
+    err.SetContext("LJCCommon.ShowProperties(location, item)");
+    err.IsValue(location, "location");
+    err.IsValue(item, "item");
+    err.ShowError();
 
-      let results = `${startText}\r\n`;
-      let page = 1;
-      let count = 1;
-      for (let propertyName in item)
+    let startText = `${location}: `;
+
+    let results = `${startText}\r\n`;
+    let page = 1;
+    let count = 1;
+    for (let propertyName in item)
+    {
+      if (false == propertyName.startsWith("on")
+        && item[propertyName] != null
+        && item[propertyName] != "")
       {
-        if (false == propertyName.startsWith("on")
-          && item[propertyName] != null
-          && item[propertyName] != "")
+        if (count % 12 == 0)
         {
-          if (count % 12 == 0)
-          {
-            alert(`Page: ${page} ${results}`);
-            results = `${startText}\r\n`;
-            page++;
-          }
-          count++;
-          results += this.AddPropertyOutput(item, propertyName);
+          alert(`Page: ${page} ${results}`);
+          results = `${startText}\r\n`;
+          page++;
         }
+        count++;
+        results += this.AddPropertyOutput(item, propertyName);
       }
-      if (results != startText)
-      {
-        alert(`${page} ${results}`);
-      }
+    }
+    if (results != startText)
+    {
+      alert(`${page} ${results}`);
     }
   }
 
@@ -263,34 +339,37 @@ class LJC
   static ShowSelectProperties(item, typeName, startText = null
     , propertyNames = null)
   {
-    if (item)
-    {
-      if (null == propertyNames)
-      {
-        propertyNames = this.GetPropertyNames(typeName);
-      }
-      startText = this.GetStartText(typeName, startText);
+    let err = new ArgError();
+    err.SetContext("LJCCommon.ShowSelectProperties(item, typeName)");
+    err.IsValue(item, "item");
+    err.IsValue(typeName, "typeName");
+    err.ShowError();
 
-      let results = `${startText}\r\n`;
-      let page = 1;
-      let count = 1;
-      let length = propertyNames.length;
-      for (let index = 0; index < length; index++)
-      {
-        let propertyName = propertyNames[index];
-        if (count % 12 == 0)
-        {
-          alert(`page: ${page} ${results}`);
-          results = `${startText}\r\n`;
-          page++;
-        }
-        count++;
-        results += this.AddPropertyOutput(item, propertyName);
-      }
-      if (results != startText)
+    if (null == propertyNames)
+    {
+      propertyNames = this.GetPropertyNames(typeName);
+    }
+    startText = this.GetStartText(typeName, startText);
+
+    let results = `${startText}\r\n`;
+    let page = 1;
+    let count = 1;
+    let length = propertyNames.length;
+    for (let index = 0; index < length; index++)
+    {
+      let propertyName = propertyNames[index];
+      if (count % 12 == 0)
       {
         alert(`page: ${page} ${results}`);
+        results = `${startText}\r\n`;
+        page++;
       }
+      count++;
+      results += this.AddPropertyOutput(item, propertyName);
+    }
+    if (results != startText)
+    {
+      alert(`page: ${page} ${results}`);
     }
   }
 
@@ -300,6 +379,12 @@ class LJC
   static AddPropertyOutput(item, propertyName)
   {
     let retValue = "";
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.ShowPropertyOutput(item, propertyName)");
+    err.IsValue(item, "item");
+    err.IsValue(propertyName, "propertyName");
+    err.ShowError();
 
     if (propertyName in item)
     {
@@ -312,6 +397,11 @@ class LJC
   static GetPropertyNames(typeName)
   {
     let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.GetPropertyNames(typeName)");
+    err.IsValue(typeName, "typeName");
+    err.ShowError();
 
     switch (typeName.toLowerCase().trim())
     {
@@ -355,6 +445,11 @@ class LJC
   static GetStartText(typeName, startText = null)
   {
     let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJCCommon.GetStartText(typeName)");
+    err.IsValue(typeName, "typeName");
+    err.ShowError();
 
     if (null == startText)
     {

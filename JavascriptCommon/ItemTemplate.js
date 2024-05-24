@@ -3,10 +3,10 @@
 // #SectionBegin Main
 // #Value _ClassName_
 // _ClassName_.js
-// HTML Requires: <script src="../LJCCommon.js"></script>
-// HTML Requires: <script src="../GenLib/Sections.js"></script>
-// HTML Requires: <script src="../GenLib/RepeatItems.js"></script>
-// HTML Requires: <script src="../GenLib/Replacements.js"></script>
+// <script src="LJCCommon.js"></script>
+// <script src="GenLib/Sections.js"></script>
+// <script src="GenLib/RepeatItems.js"></script>
+// <script src="GenLib/Replacements.js"></script>
 
 // Represents a data object.
 class _ClassName_

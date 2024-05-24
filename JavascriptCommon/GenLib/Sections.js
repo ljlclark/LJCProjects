@@ -1,6 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Sections.js
+// <script src="ArgErr.js"></script>
+// <script src="Common.js"></script>
 
 // Represents a collection of items.
 class Sections
@@ -10,10 +12,11 @@ class Sections
   {
     let retValue = 0;
 
-    let Err = new ArgError();
-    Err.SetContext("Sections.TextGen.TextGen(sections, lines)");
-    Err.IsValue(compare, "compare");
-    Err.IsValue(compareTo, "compareTo");
+    let err = new ArgError();
+    err.SetContext("Sections.TextGen.TextGen(sections, lines)");
+    err.IsValue(compare, "compare");
+    err.IsValue(compareTo, "compareTo");
+    err.ShowError();
 
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
@@ -40,6 +43,7 @@ class Sections
   {
     this.Err.SetContext("Sections.Add(name)");
     this.Err.IsValue(name, "name");
+    this.Err.ShowError();
 
     let item = new Section(name);
     this.ItemArray.push(item);
@@ -51,10 +55,11 @@ class Sections
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let Err = new ArgError();
-    Err.SetContext("Sections.Compare(compareItem, compareToValue)");
-    Err.IsValue(compareItem, "compareItem");
-    Err.IsValue(compareToValue, "compareToValue");
+    let err = new ArgError();
+    err.SetContext("Sections.Compare(compareItem, compareToValue)");
+    err.IsValue(compareItem, "compareItem");
+    err.IsValue(compareToValue, "compareToValue");
+    err.ShowError();
 
     let compareToItem = new Section(compareToValue);
     return Sections.SortName(compareItem, compareToItem);
@@ -79,6 +84,7 @@ class Sections
 
     this.Err.SetContext("Sections.Delete(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
 
     let index = this.Search(compareToValue);
     if (index >= 0)
@@ -91,9 +97,9 @@ class Sections
   // Get an item by index.
   Items(index)
   {
-
     this.Err.SetContext("RepeatItems.Items(index)");
     this.Err.IsValue(index, "index");
+    this.Err.ShowError();
 
     let retValue = this.ItemArray[index];
     return retValue;
@@ -106,6 +112,7 @@ class Sections
 
     this.Err.SetContext("Sections.Retrieve(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
 
     let index = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
@@ -121,6 +128,7 @@ class Sections
   {
     this.Err.SetContext("Sections.Search(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
+    this.Err.ShowError();
 
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);

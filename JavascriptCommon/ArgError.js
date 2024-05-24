@@ -9,6 +9,7 @@ class ArgError
   constructor()
   {
     this.Context = "";
+    this.Error = "";
   }
 
   // 
@@ -21,7 +22,7 @@ class ArgError
       && !Array.isArray(value))
     {
       retValue = true;
-      alert(`${this.Context}\r\n${name} is not an Array.`)
+      this.Error += `\r\n  ${this.Context}\r\n${name} is not an Array.`;
     }
     return retValue;
   }
@@ -36,7 +37,7 @@ class ArgError
       && !Array.isArray(value.ItemArray))
     {
       retValue = true;
-      alert(`${this.Context}\r\n${name} is not a Collection.`);
+      this.Error = `\r\n  ${this.Context}\r\n${name} is not a Collection.`;
     }
     return retValue;
   }
@@ -49,13 +50,13 @@ class ArgError
     if (undefined === value)
     {
       retValue = true;
-      alert(`${this.Context}\r\n${name} is not defined.`)
+      this.Error += `\r\n  ${this.Context}\r\n${name} is not defined.`;
     }
     if (!retValue
       && null == value)
     {
       retValue = true;
-      alert(`${this.Context}\r\n${name} is null.`)
+      this.Error += `\r\n  ${this.Context}\r\n${name} is null.`;
     }
     return retValue;
   }
@@ -63,6 +64,22 @@ class ArgError
   // 
   SetContext(context)
   {
+    this.Error = "";
     this.Context = context;
+  }
+
+  // 
+  ShowError()
+  {
+    let retValue = false;
+
+    if (this.Error.length > 0)
+    {
+      retValue = true;
+      let message = `${this.Context}\r\n`;
+      message += this.Error;
+      alert(message);
+    }
+    return retValue;
   }
 }
