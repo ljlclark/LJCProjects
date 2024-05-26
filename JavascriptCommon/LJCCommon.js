@@ -10,6 +10,11 @@ class LJC
   // Gets the HTMLElement.
   static Element(id)
   {
+    let err = new ArgError();
+    err.SetContext("LJC.Element(id)");
+    err.IsValue(id, "id");
+    err.ShowError();
+
     return document.getElementById(id);
   }
 
@@ -17,7 +22,7 @@ class LJC
   static FormElement(formName, eName)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.FormElement(formName, eName)");
+    err.SetContext("LJC.FormElement(formName, eName)");
     err.IsValue(formName, "formName");
     err.IsValue(eName, "eName");
     err.ShowError();
@@ -31,7 +36,7 @@ class LJC
   static FormElementValue(formName, eName)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.FormElementValue(formName, eName)");
+    err.SetContext("LJC.FormElementValue(formName, eName)");
     err.IsValue(formName, "formName");
     err.IsValue(eName, "eName");
     err.ShowError();
@@ -45,7 +50,7 @@ class LJC
   static TagElements(eParent, tag)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.TagElements(eParent, tag)");
+    err.SetContext("LJC.TagElements(eParent, tag)");
     err.IsValue(eParent, "eParent");
     err.IsValue(tag, "tag");
     err.ShowError();
@@ -61,7 +66,7 @@ class LJC
     let retValue = NotFound;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.BinarySearch(array, compareToValue, compareFunction)");
+    err.SetContext("LJC.BinarySearch(array, compareToValue, compareFunction)");
     err.IsArray(array, "array");
     err.IsValue(compareToValue, "compareToValue");
     err.IsValue(compareFunction, "compareFunction");
@@ -128,7 +133,7 @@ class LJC
     let retValue = 0;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.MiddlePosition(count)");
+    err.SetContext("LJC.MiddlePosition(count)");
     err.IsValue(count, "count");
     err.ShowError();
 
@@ -152,7 +157,7 @@ class LJC
     let retValue = null;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
     err.IsValue(text, "text");
     err.IsValue(beginDelimiter, "beginDelimiter");
     err.IsValue(endDelimiter, "endDelimiter");
@@ -180,7 +185,7 @@ class LJC
     let retValue = null;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.GetText(id)");
+    err.SetContext("LJC.GetText(id)");
     err.IsValue(id, "id");
     err.ShowError();
 
@@ -198,7 +203,7 @@ class LJC
     let retValue = null;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.GetValue(id)");
+    err.SetContext("LJC.GetValue(id)");
     err.IsValue(id, "id");
     err.ShowError();
 
@@ -216,7 +221,7 @@ class LJC
     let retValue = false;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.HasValue(id)");
+    err.SetContext("LJC.HasValue(id)");
     err.IsValue(eItem, "eItem");
     err.ShowError();
 
@@ -232,7 +237,7 @@ class LJC
   static SetText(elementID, text)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.SetText(elementID, text)");
+    err.SetContext("LJC.SetText(elementID, text)");
     err.IsValue(elementID, "elementID");
     err.IsValue(text, "text");
     err.ShowError();
@@ -248,7 +253,7 @@ class LJC
   static EventTextRows(event)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.EventTextRows(event)");
+    err.SetContext("LJC.EventTextRows(event)");
     err.IsValue(event, "event");
     err.ShowError();
 
@@ -259,11 +264,25 @@ class LJC
     }
   }
 
+  // Gets the textarea columns.
+  static GetTextCols(widthDivisor, fontDivisor)
+  {
+    let err = new ArgError();
+    err.SetContext("LJC.GetTextCols(widthDivisor, fontDivisor)");
+    err.IsValue(widthDivisor, "widthDivisor");
+    err.IsValue(fontDivisor, "fontDivisor");
+    err.ShowError();
+
+    let width = document.body.clientWidth;
+    let retValue = Math.floor((width / widthDivisor) / fontDivisor);
+    return retValue;
+  }
+
   // Sets the textarea rows for newlines.
   static SetTextRows(eItem)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.SetTextRows(eItem)");
+    err.SetContext("LJC.SetTextRows(eItem)");
     err.IsValue(eItem, "eItem");
     err.ShowError();
 
@@ -284,7 +303,7 @@ class LJC
   static SetValue(elementID, value)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.SetValue(elementID, value)");
+    err.SetContext("LJC.SetValue(elementID, value)");
     err.IsValue(elementID, "elementID");
     err.IsValue(value, "value");
     err.ShowError();
@@ -303,7 +322,7 @@ class LJC
   static ShowProperties(location, item)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.ShowProperties(location, item)");
+    err.SetContext("LJC.ShowProperties(location, item)");
     err.IsValue(location, "location");
     err.IsValue(item, "item");
     err.ShowError();
@@ -340,7 +359,7 @@ class LJC
     , propertyNames = null)
   {
     let err = new ArgError();
-    err.SetContext("LJCCommon.ShowSelectProperties(item, typeName)");
+    err.SetContext("LJC.ShowSelectProperties(item, typeName)");
     err.IsValue(item, "item");
     err.IsValue(typeName, "typeName");
     err.ShowError();
@@ -381,7 +400,7 @@ class LJC
     let retValue = "";
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.ShowPropertyOutput(item, propertyName)");
+    err.SetContext("LJC.ShowPropertyOutput(item, propertyName)");
     err.IsValue(item, "item");
     err.IsValue(propertyName, "propertyName");
     err.ShowError();
@@ -399,7 +418,7 @@ class LJC
     let retValue = null;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.GetPropertyNames(typeName)");
+    err.SetContext("LJC.GetPropertyNames(typeName)");
     err.IsValue(typeName, "typeName");
     err.ShowError();
 
@@ -447,7 +466,7 @@ class LJC
     let retValue = null;
 
     let err = new ArgError();
-    err.SetContext("LJCCommon.GetStartText(typeName)");
+    err.SetContext("LJC.GetStartText(typeName)");
     err.IsValue(typeName, "typeName");
     err.ShowError();
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- TextGen.html -->
+<html lang="en">
+<head>
+  <title>Test Text Generation</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="../Common.css" />
+  <link rel="stylesheet" type="text/css" href="../Form.css" />
+  <script src="../LJCCommon.js"></script>
+  <script src="../ArgError.js"></script>
+  <script src="../GenLib/RepeatItems.js"></script>
+  <script src="../GenLib/Replacements.js"></script>
+  <script src="../GenLib/Sections.js"></script>
+  <script src="../GenLib/TextGen.js"></script>
+  <script src="TestData.js"></script>
+</head>
+<body>
+  <div class="page"
+       style="text-align: center">
+    <div class="table">
+      <div class="row">
+        <div class="cellLeft">
+          <label for="text">Template</label>
+        </div>
+        <div class="cell">
+          <label for="output">Output</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cellLeft">
+          <textarea id="template" name="template" rows="1"
+                    autofocus spellcheck="false"
+                    class="text"></textarea>
+        </div>
+        <div class="cell"
+             style="vertical-align: top">
+          <textarea id="output" name="output" rows="1"
+                    spellcheck="false"
+                    class="text"></textarea>
+        </div>
+      </div>
+    </div>
+    <button id="ok" type="button">Generate</button>
+  </div>
+
+  <script>
+    // Events
+    addEventListener("resize", SetTextCols);
+    template.addEventListener("keyup", LJC.EventTextRows);
+    ok.addEventListener("click", Process);
+
+    function SetTextCols()
+    {
+      let cols = LJC.GetTextCols(2, 8.1);
+      template.cols = cols;
+      output.cols = cols;
+    }
+
+    // Event handler to process the template and data.
+    function Process()
+    {
+      let templateText = template.value;
+      sections = TestData.SectionsData();
+      let lines = templateText.split("\n");
+      let textGen = new TextGen();
+      textGen.TextGen(sections, lines);
+      output.value = textGen.Output;
+      LJC.SetTextRows(output);
+    }
+
+    SetTextCols();
+    outputText = "";
+  </script>
+</body>
+</html>
