@@ -5,7 +5,7 @@
 // Common Static Functions
 class LJC
 {
-  // Get Elements
+  // Element Helper Methods
 
   // Gets the HTMLElement.
   static Element(id)
@@ -41,7 +41,7 @@ class LJC
     err.IsValue(eName, "eName");
     err.ShowError();
 
-    let eItem = this.FormElement(formName, eName);
+    let eItem = LJC.FormElement(formName, eName);
     let retValue = eItem.value;
     return retValue;
   }
@@ -56,6 +56,140 @@ class LJC
     err.ShowError();
 
     return eParent.getElementsByTagName(tag);
+  }
+
+  // Gets the element text.
+  static GetText(id)
+  {
+    let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJC.GetText(id)");
+    err.IsValue(id, "id");
+    err.ShowError();
+
+    let eItem = LJC.Element(id);
+    if (eItem != null)
+    {
+      retValue = eItem.innerText;
+    }
+    return retValue;
+  }
+
+  // Gets the element value.
+  static GetValue(id)
+  {
+    let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJC.GetValue(id)");
+    err.IsValue(id, "id");
+    err.ShowError();
+
+    let eItem = LJC.Element(elementID);
+    if (eItem != null)
+    {
+      retValue = eItem.value;
+    }
+    return retValue;
+  }
+
+  // Check if an element has a value.
+  static HasValue(eItem)
+  {
+    let retValue = false;
+
+    let err = new ArgError();
+    err.SetContext("LJC.HasValue(id)");
+    err.IsValue(eItem, "eItem");
+    err.ShowError();
+
+    if (eItem
+      && eItem != null)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Sets the element text.
+  static SetText(id, text)
+  {
+    let err = new ArgError();
+    err.SetContext("LJC.SetText(elementID, text)");
+    err.IsValue(id, "id");
+    err.IsValue(text, "text");
+    err.ShowError();
+
+    let eItem = LJC.Element(id);
+    if (eItem != null)
+    {
+      eItem.innerText = text;
+    }
+  }
+
+  // Sets the element value.
+  static SetValue(id, value)
+  {
+    let err = new ArgError();
+    err.SetContext("LJC.SetValue(id, value)");
+    err.IsValue(id, "id");
+    err.IsValue(value, "value");
+    err.ShowError();
+
+    let eItem = LJC.Element(id);
+    if (eItem != null)
+    {
+      eItem.value = value;
+    }
+  }
+
+  // Common Methods
+
+  // Gets the ComputerStyle property.
+  static ComputedStyle(selector, property)
+  {
+    let textarea = document.querySelector(selector);
+    let css = window.getComputedStyle(textarea, null);
+    let retValue = css.getPropertyValue(property);
+    return retValue;
+  }
+
+  // Gets a delimited substring.
+  static DelimitedString(text, beginDelimiter, endDelimiter, begin)
+  {
+    let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.IsValue(text, "text");
+    err.IsValue(beginDelimiter, "beginDelimiter");
+    err.IsValue(endDelimiter, "endDelimiter");
+    err.IsValue(begin, "begin");
+    err.ShowError();
+
+    begin.Index = text.indexOf(beginDelimiter, begin.Index);
+    if (begin.Index >= 0)
+    {
+      let endIndex = text.indexOf(endDelimiter, begin.Index + 1);
+      if (endIndex > 0)
+      {
+        retValue = text.substr(begin.Index, (endIndex - begin.Index) + 1);
+        //begin.Index = endIndex + 1;
+      }
+    }
+    return retValue;
+  }
+
+  // Gets the text width.
+  static TextWidth(font, text)
+  {
+    let canvas = document.createElement("canvas");
+    let context = canvas.getContext("2d");
+    context.font = font;
+    let metric = context.measureText(text);
+    let retValue = metric.width;
+    return retValue;
   }
 
   // Returns the index of a search item in the array.
@@ -76,7 +210,7 @@ class LJC
     let lowerIndex = 0;
     let upperIndex = array.length - 1;
     let nextCount = upperIndex - lowerIndex + 1;
-    let index = this.MiddlePosition(nextCount) - 1;
+    let index = LJC.MiddlePosition(nextCount) - 1;
 
     retValue = Searching;
     while (Searching == retValue)
@@ -151,103 +285,7 @@ class LJC
     return retValue;
   }
 
-  // Gets a delimited substring.
-  static DelimitedString(text, beginDelimiter, endDelimiter, begin)
-  {
-    let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
-    err.IsValue(text, "text");
-    err.IsValue(beginDelimiter, "beginDelimiter");
-    err.IsValue(endDelimiter, "endDelimiter");
-    err.IsValue(begin, "begin");
-    err.ShowError();
-
-    begin.Index = text.indexOf(beginDelimiter, begin.Index);
-    if (begin.Index >= 0)
-    {
-      let endIndex = text.indexOf(endDelimiter, begin.Index + 1);
-      if (endIndex > 0)
-      {
-        retValue = text.substr(begin.Index, (endIndex - begin.Index) + 1);
-        //begin.Index = endIndex + 1;
-      }
-    }
-    return retValue;
-  }
-
-  // Helper Methods
-
-  // Gets the element text.
-  static GetText(id)
-  {
-    let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.GetText(id)");
-    err.IsValue(id, "id");
-    err.ShowError();
-
-    let eItem = this.Element(id);
-    if (eItem != null)
-    {
-      retValue = eItem.innerText;
-    }
-    return retValue;
-  }
-
-  // Gets the element value.
-  static GetValue(id)
-  {
-    let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.GetValue(id)");
-    err.IsValue(id, "id");
-    err.ShowError();
-
-    let eItem = this.Element(elementID);
-    if (eItem != null)
-    {
-      retValue = eItem.value;
-    }
-    return retValue;
-  }
-
-  // Check if an element has a value.
-  static HasValue(eItem)
-  {
-    let retValue = false;
-
-    let err = new ArgError();
-    err.SetContext("LJC.HasValue(id)");
-    err.IsValue(eItem, "eItem");
-    err.ShowError();
-
-    if (eItem
-      && eItem != null)
-    {
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // Sets the element text.
-  static SetText(elementID, text)
-  {
-    let err = new ArgError();
-    err.SetContext("LJC.SetText(elementID, text)");
-    err.IsValue(elementID, "elementID");
-    err.IsValue(text, "text");
-    err.ShowError();
-
-    let eItem = this.Element(elementID);
-    if (eItem != null)
-    {
-      eItem.innerText = text;
-    }
-  }
+  // textarea Methods
 
   // Sets the textarea rows for newlines.
   static EventTextRows(event)
@@ -264,17 +302,27 @@ class LJC
     }
   }
 
+  // Get the textarea columns.
+  static AverageCharWidth(selector, text)
+  {
+    let font = LJC.ComputedStyle(selector, "font");
+    let textWidth = LJC.TextWidth(font, text);
+    let averageWidth = textWidth / text.length;
+    let retValue = Math.floor(averageWidth * 100) / 100;
+    return retValue;
+  }
+
   // Gets the textarea columns.
-  static GetTextCols(widthDivisor, fontDivisor)
+  static GetTextCols(width, widthDivisor, fontDivisor)
   {
     let err = new ArgError();
     err.SetContext("LJC.GetTextCols(widthDivisor, fontDivisor)");
+    err.IsValue(width, "width");
     err.IsValue(widthDivisor, "widthDivisor");
     err.IsValue(fontDivisor, "fontDivisor");
     err.ShowError();
 
-    let width = document.body.clientWidth;
-    let retValue = Math.floor((width / widthDivisor) / fontDivisor);
+    let retValue = Math.ceil((width / widthDivisor) / fontDivisor);
     return retValue;
   }
 
@@ -297,22 +345,6 @@ class LJC
       count = 1;
     }
     eItem.rows = count;
-  }
-
-  // Sets the element value.
-  static SetValue(elementID, value)
-  {
-    let err = new ArgError();
-    err.SetContext("LJC.SetValue(elementID, value)");
-    err.IsValue(elementID, "elementID");
-    err.IsValue(value, "value");
-    err.ShowError();
-
-    let eItem = this.Element(elementID);
-    if (eItem != null)
-    {
-      eItem.value = value;
-    }
   }
 
   // Show Property Methods
@@ -345,7 +377,7 @@ class LJC
           page++;
         }
         count++;
-        results += this.AddPropertyOutput(item, propertyName);
+        results += LJC.AddPropertyOutput(item, propertyName);
       }
     }
     if (results != startText)
@@ -366,9 +398,9 @@ class LJC
 
     if (null == propertyNames)
     {
-      propertyNames = this.GetPropertyNames(typeName);
+      propertyNames = LJC.GetPropertyNames(typeName);
     }
-    startText = this.GetStartText(typeName, startText);
+    startText = LJC.GetStartText(typeName, startText);
 
     let results = `${startText}\r\n`;
     let page = 1;
@@ -384,7 +416,7 @@ class LJC
         page++;
       }
       count++;
-      results += this.AddPropertyOutput(item, propertyName);
+      results += LJC.AddPropertyOutput(item, propertyName);
     }
     if (results != startText)
     {
@@ -392,7 +424,7 @@ class LJC
     }
   }
 
-  // Property Helper Methods
+  // Property Helper methods
 
   // Add property output to results.
   static AddPropertyOutput(item, propertyName)

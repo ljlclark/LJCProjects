@@ -10,18 +10,20 @@
   <meta name="keywords" content="" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="../Common.css" />
-  <link rel="stylesheet" type="text/css" href="../Form.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
   <script src="../LJCCommon.js"></script>
   <script src="../ArgError.js"></script>
   <script src="../GenLib/RepeatItems.js"></script>
   <script src="../GenLib/Replacements.js"></script>
   <script src="../GenLib/Sections.js"></script>
   <script src="../GenLib/TextGen.js"></script>
+  <script src="TextGenHtml.js"></script>
   <script src="TestData.js"></script>
 </head>
 <body>
-  <div class="page"
+  <div id="page" class="page"
        style="text-align: center">
     <div class="table">
       <div class="row">
@@ -55,11 +57,16 @@
     template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", Process);
 
-    function SetTextCols()
+    // Set the textarea coluns.
+    function SetTextCols(event = null, width = null)
     {
-      let cols = LJC.GetTextCols(2, 8.1);
-      template.cols = cols;
-      output.cols = cols;
+      // Calculate available width for textarea elements.
+      if (null == width)
+      {
+        let padding = (4 * 2) + 6;
+        width = page.clientWidth - padding;
+      }
+      TextGenHtml.SetTextCols(null, width);
     }
 
     // Event handler to process the template and data.

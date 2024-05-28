@@ -18,11 +18,12 @@
   <script src="../GenLib/Replacements.js"></script>
   <script src="../GenLib/Sections.js"></script>
   <script src="../GenLib/TextGen.js"></script>
+  <script src="TestData.js"></script>
 </head>
 <body>
   <div class="page"
        style="text-align: center">
-    <form class="form">
+    <form id="form" class="form">
       <div class="table">
         <div class="row">
           <div class="cellLeft">
@@ -34,13 +35,13 @@
         </div>
         <div class="row">
           <div class="cellLeft">
-            <textarea id="template" name="template" rows="1" cols="68"
+            <textarea id="template" name="template" rows="1"
                       autofocus spellcheck="false"
                       class="text"></textarea>
           </div>
           <div class="cell"
                style="vertical-align: top">
-            <textarea id="output" name="output" rows="1" cols="68"
+            <textarea id="output" name="output" rows="1"
                       spellcheck="false"
                       class="text"></textarea>
           </div>
@@ -52,14 +53,27 @@
 
   <script>
     // Events
+    addEventListener("resize", SetTextCols);
     template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", Process);
+
+    function SetTextCols(event = null, width = null)
+    {
+      if (null == width)
+      {
+        width = form.clientWidth;
+      }
+
+      let cols = LJC.GetTextCols(width, 2, 8.1);
+      template.cols = cols;
+      output.cols = cols;
+    }
 
     // Event handler to process the template and data.
     function Process()
     {
       let templateText = template.value;
-      sections = GetSections();
+      sections = TestData.SectionsData();
       let lines = templateText.split("\n");
       let textGen = new TextGen();
       textGen.TextGen(sections, lines);
@@ -67,23 +81,8 @@
       LJC.SetTextRows(output);
     }
 
+    SetTextCols();
     outputText = "";
-
-    // Gets the Sections data.
-    function GetSections()
-    {
-      // Create Data
-      let retValue = new Sections();
-      let section = retValue.Add("Main");
-
-      let repeatItems = section.RepeatItems;
-      let repeatItem = repeatItems.Add("First");
-
-      let replacements = repeatItem.Replacements;
-      replacements.Add("_CollectionName_", "GenItems")
-      replacements.Add("_ClassName_", "GenItem")
-      return retValue;
-    }
   </script>
 </body>
 </html>

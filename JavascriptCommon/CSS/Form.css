@@ -1,0 +1,10 @@
+/* Copyright Lester J. Clark and Contributors */
+/* Licensed under the MIT license.*/
+/* Form.css */
+
+.form {
+  background-color: lightblue;
+  border: 1px solid black;
+  border-radius: 8px;
+  border-spacing: 6px;
+}
