@@ -4,7 +4,7 @@
 <!-- TextGen.html -->
 <html lang="en">
 <head>
-  <title>Text Generator</title>
+  <title>Test Text Generation</title>
   <meta charset="utf-8" />
   <meta name="description" content="A Text Generator HTML page." />
   <meta name="author" content="Lester J. Clark" />
@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/Form.css" />
   <script src="../ArgError.js"></script>
   <script src="../LJCCommon.js"></script>
   <script src="Script/RepeatItems.js"></script>
@@ -21,31 +22,33 @@
   <script src="Script/TestData.js"></script>
 </head>
 <body>
-  <div id="page" class="page"
+  <div class="page"
        style="text-align: center">
-    <div class="table">
-      <div class="row">
-        <div class="cellLeft">
-          <label for="text">Template</label>
+    <form id="form" class="form">
+      <div class="table">
+        <div class="row">
+          <div class="cellLeft">
+            <label for="text">Template</label>
+          </div>
+          <div class="cell">
+            <label for="output">Output</label>
+          </div>
         </div>
-        <div class="cell">
-          <label for="output">Output</label>
+        <div class="row">
+          <div class="cellLeft">
+            <textarea id="template" name="template" rows="1"
+                      autofocus spellcheck="false"
+                      class="text"></textarea>
+          </div>
+          <div class="cell"
+               style="vertical-align: top">
+            <textarea id="output" name="output" rows="1"
+                      spellcheck="false"
+                      class="text"></textarea>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="cellLeft">
-          <textarea id="template" name="template" rows="1"
-                    autofocus spellcheck="false"
-                    class="text"></textarea>
-        </div>
-        <div class="cell"
-             style="vertical-align: top">
-          <textarea id="output" name="output" rows="1"
-                    spellcheck="false"
-                    class="text"></textarea>
-        </div>
-      </div>
-    </div>
+    </form>
     <button id="ok" type="button">Generate</button>
   </div>
 
@@ -55,16 +58,14 @@
     template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", Process);
 
-    // Set the textarea coluns.
     function SetTextCols(event = null, width = null)
     {
-      // Calculate available width for textarea elements.
       if (null == width)
       {
         let tableBorderSpacing = 4;
         let cellPaddingLeft = 6;
         let padding = (tableBorderSpacing * 2) + cellPaddingLeft;
-        width = page.clientWidth - padding;
+        width = form.clientWidth - padding;
       }
       TextGen.SetTextCols(null, width);
     }
