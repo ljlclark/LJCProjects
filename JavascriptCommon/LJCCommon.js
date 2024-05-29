@@ -6,6 +6,7 @@
 class LJC
 {
   // Element Helper Methods
+  // ----------------------
 
   // Gets the HTMLElement.
   static Element(id)
@@ -145,50 +146,21 @@ class LJC
   }
 
   // Common Methods
+  // --------------
 
-  // Gets the ComputerStyle property.
-  static ComputedStyle(selector, property)
+  // Get the textarea columns.
+  static AverageCharWidth(selector, text)
   {
-    let textarea = document.querySelector(selector);
-    let css = window.getComputedStyle(textarea, null);
-    let retValue = css.getPropertyValue(property);
-    return retValue;
-  }
-
-  // Gets a delimited substring.
-  static DelimitedString(text, beginDelimiter, endDelimiter, begin)
-  {
-    let retValue = null;
-
     let err = new ArgError();
-    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.SetContext("LJC.AverageCharWidth(selector, text)");
+    err.IsValue(selector, "selector");
     err.IsValue(text, "text");
-    err.IsValue(beginDelimiter, "beginDelimiter");
-    err.IsValue(endDelimiter, "endDelimiter");
-    err.IsValue(begin, "begin");
     err.ShowError();
 
-    begin.Index = text.indexOf(beginDelimiter, begin.Index);
-    if (begin.Index >= 0)
-    {
-      let endIndex = text.indexOf(endDelimiter, begin.Index + 1);
-      if (endIndex > 0)
-      {
-        retValue = text.substr(begin.Index, (endIndex - begin.Index) + 1);
-        //begin.Index = endIndex + 1;
-      }
-    }
-    return retValue;
-  }
-
-  // Gets the text width.
-  static TextWidth(font, text)
-  {
-    let canvas = document.createElement("canvas");
-    let context = canvas.getContext("2d");
-    context.font = font;
-    let metric = context.measureText(text);
-    let retValue = metric.width;
+    let font = LJC.ComputedStyle(selector, "font");
+    let textWidth = LJC.TextWidth(font, text);
+    let averageWidth = textWidth / text.length;
+    let retValue = Math.floor(averageWidth * 100) / 100;
     return retValue;
   }
 
@@ -261,6 +233,47 @@ class LJC
     return retValue;
   }
 
+  // Gets the ComputerStyle property.
+  static ComputedStyle(selector, property)
+  {
+    let err = new ArgError();
+    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.IsValue(selector, "selector");
+    err.IsValue(property, "property");
+    err.ShowError();
+
+    let eItem = document.querySelector(selector);
+    let css = window.getComputedStyle(eItem, null);
+    let retValue = css.getPropertyValue(property);
+    return retValue;
+  }
+
+  // Gets a delimited substring.
+  static DelimitedString(text, beginDelimiter, endDelimiter, begin)
+  {
+    let retValue = null;
+
+    let err = new ArgError();
+    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
+    err.IsValue(text, "text");
+    err.IsValue(beginDelimiter, "beginDelimiter");
+    err.IsValue(endDelimiter, "endDelimiter");
+    err.IsValue(begin, "begin");
+    err.ShowError();
+
+    begin.Index = text.indexOf(beginDelimiter, begin.Index);
+    if (begin.Index >= 0)
+    {
+      let endIndex = text.indexOf(endDelimiter, begin.Index + 1);
+      if (endIndex > 0)
+      {
+        retValue = text.substr(begin.Index, (endIndex - begin.Index) + 1);
+        //begin.Index = endIndex + 1;
+      }
+    }
+    return retValue;
+  }
+
   // Returns the middle position of the count value.
   static MiddlePosition(count)
   {
@@ -285,7 +298,25 @@ class LJC
     return retValue;
   }
 
+  // Gets the text width.
+  static TextWidth(font, text)
+  {
+    let err = new ArgError();
+    err.SetContext("LJC.AverageCharWidth(selector, text)");
+    err.IsValue(font, "font");
+    err.IsValue(text, "text");
+    err.ShowError();
+
+    let canvas = document.createElement("canvas");
+    let context = canvas.getContext("2d");
+    context.font = font;
+    let metric = context.measureText(text);
+    let retValue = metric.width;
+    return retValue;
+  }
+
   // textarea Methods
+  // ----------------
 
   // Sets the textarea rows for newlines.
   static EventTextRows(event)
@@ -300,16 +331,6 @@ class LJC
     {
       LJC.SetTextRows(eItem);
     }
-  }
-
-  // Get the textarea columns.
-  static AverageCharWidth(selector, text)
-  {
-    let font = LJC.ComputedStyle(selector, "font");
-    let textWidth = LJC.TextWidth(font, text);
-    let averageWidth = textWidth / text.length;
-    let retValue = Math.floor(averageWidth * 100) / 100;
-    return retValue;
   }
 
   // Gets the textarea columns.
@@ -348,6 +369,7 @@ class LJC
   }
 
   // Show Property Methods
+  // ---------------------
 
   // Show the properties of an object that are not null or "" and
   // do not start with "on".
@@ -425,6 +447,7 @@ class LJC
   }
 
   // Property Helper methods
+  // -----------------------
 
   // Add property output to results.
   static AddPropertyOutput(item, propertyName)

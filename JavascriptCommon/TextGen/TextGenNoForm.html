@@ -13,8 +13,8 @@
   <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
-  <script src="../LJCCommon.js"></script>
   <script src="../ArgError.js"></script>
+  <script src="../LJCCommon.js"></script>
   <script src="../GenLib/RepeatItems.js"></script>
   <script src="../GenLib/Replacements.js"></script>
   <script src="../GenLib/Sections.js"></script>
@@ -63,7 +63,9 @@
       // Calculate available width for textarea elements.
       if (null == width)
       {
-        let padding = (4 * 2) + 6;
+        let tableBorderSpacing = 4;
+        let cellPaddingLeft = 6;
+        let padding = (tableBorderSpacing * 2) + cellPaddingLeft;
         width = page.clientWidth - padding;
       }
       TextGenHtml.SetTextCols(null, width);

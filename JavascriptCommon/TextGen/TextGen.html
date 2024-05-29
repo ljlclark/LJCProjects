@@ -10,14 +10,17 @@
   <meta name="keywords" content="" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="../Common.css" />
-  <link rel="stylesheet" type="text/css" href="../Form.css" />
-  <script src="../LJCCommon.js"></script>
+  <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
+  <link rel="stylesheet" type="text/css" href="../CSS/Form.css" />
   <script src="../ArgError.js"></script>
+  <script src="../LJCCommon.js"></script>
   <script src="../GenLib/RepeatItems.js"></script>
   <script src="../GenLib/Replacements.js"></script>
   <script src="../GenLib/Sections.js"></script>
   <script src="../GenLib/TextGen.js"></script>
+  <script src="TextGenHtml.js"></script>
   <script src="TestData.js"></script>
 </head>
 <body>
@@ -61,12 +64,12 @@
     {
       if (null == width)
       {
-        width = form.clientWidth;
+        let tableBorderSpacing = 4;
+        let cellPaddingLeft = 6;
+        let padding = (tableBorderSpacing * 2) + cellPaddingLeft;
+        width = form.clientWidth - padding;
       }
-
-      let cols = LJC.GetTextCols(width, 2, 8.1);
-      template.cols = cols;
-      output.cols = cols;
+      TextGenHtml.SetTextCols(null, width);
     }
 
     // Event handler to process the template and data.

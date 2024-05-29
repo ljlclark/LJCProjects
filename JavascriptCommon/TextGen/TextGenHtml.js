@@ -19,10 +19,4 @@ class TextGenHtml
     template.cols = cols;
     output.cols = cols;
   }
-
-  // The Constructor function.
-  constructor()
-  {
-    this.Err = new ArgError();
-  }
 }
