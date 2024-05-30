@@ -1,8 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Replacements.js
-// <script src="ArgErr.js"></script>
-// <script src="Common.js"></script>
+// <script src="../ArgErr.js"></script>
+// <script src="../LJCCommon.js"></script>
 
 // Represents a collection of items.
 class Replacements
@@ -65,10 +65,11 @@ class Replacements
     return Replacements.SortName(compareItem, compareToItem);
   }
 
-  // 
+  // Gets the element count.
   Count()
   {
     let retValue = 0;
+
     if (this.ItemArray
       && Array.isArray(this.ItemArray))
     {
@@ -97,12 +98,11 @@ class Replacements
   // Get an item by index.
   Items(index)
   {
-    let retValue = this.ItemArray[index];
-
     this.Err.SetContext("Replacements.Items(index)");
     this.Err.IsValue(index, "index");
     this.Err.ShowError();
 
+    let retValue = this.ItemArray[index];
     return retValue;
   }
 
@@ -115,8 +115,7 @@ class Replacements
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
-    let index = LJC.BinarySearch(this.ItemArray, compareToValue
-      , this.Compare);
+    let index = this.Search(compareToValue);
     if (index >= 0)
     {
       retValue = this.ItemArray[index];

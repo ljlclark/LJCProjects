@@ -13,7 +13,7 @@ class Items
     let retValue = 0;
 
     let err = new ArgError();
-    err.SetContext("Sections.TextGen.TextGen(sections, lines)");
+    err.SetContext("Items.SortName(compare, compareTo)");
     err.IsValue(compare, "compare");
     err.IsValue(compareTo, "compareTo");
     err.ShowError();
@@ -41,7 +41,7 @@ class Items
   // Adds a new object.
   Add(name)
   {
-    this.Err.SetContext("Sections.Add(name)");
+    this.Err.SetContext("Items.Add(name)");
     this.Err.IsValue(name, "name");
     this.Err.ShowError();
 
@@ -56,7 +56,7 @@ class Items
   Compare(compareItem, compareToValue)
   {
     let err = new ArgError();
-    err.SetContext("Sections.Compare(compareItem, compareToValue)");
+    err.SetContext("Items.Compare(compareItem, compareToValue)");
     err.IsValue(compareItem, "compareItem");
     err.IsValue(compareToValue, "compareToValue");
     err.ShowError();
@@ -65,7 +65,7 @@ class Items
     return Items.SortName(compareItem, compareToItem);
   }
 
-  // 
+  // Gets the element count.
   Count()
   {
     let retValue = 0;
@@ -83,7 +83,7 @@ class Items
   {
     let retValue = null;
 
-    this.Err.SetContext("Sections.Delete(compareToValue)");
+    this.Err.SetContext("Items.Delete(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
@@ -98,7 +98,7 @@ class Items
   // Get an item by index.
   Items(index)
   {
-    this.Err.SetContext("RepeatItems.Items(index)");
+    this.Err.SetContext("Items.Items(index)");
     this.Err.IsValue(index, "index");
     this.Err.ShowError();
 
@@ -111,12 +111,11 @@ class Items
   {
     let retValue = null;
 
-    this.Err.SetContext("Sections.Retrieve(compareToValue)");
+    this.Err.SetContext("Items.Retrieve(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
-    let index = LJC.BinarySearch(this.ItemArray, compareToValue
-      , this.Compare);
+    let index = this.Search(compareToValue);
     if (index >= 0)
     {
       retValue = this.ItemArray[index];
@@ -127,7 +126,7 @@ class Items
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
-    this.Err.SetContext("Sections.Search(compareToValue)");
+    this.Err.SetContext("Items.Search(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
@@ -141,7 +140,7 @@ class Items
   {
     if (null == sortMethod)
     {
-      sortMethod = this.SortName;
+      sortMethod = Items.SortName;
     }
     this.ItemArray.sort(sortMethod);
   }

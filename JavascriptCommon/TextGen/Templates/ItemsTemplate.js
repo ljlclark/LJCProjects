@@ -16,7 +16,7 @@ class _CollectionName_
     let retValue = 0;
 
     let err = new ArgError();
-    err.SetContext("Sections.TextGen.TextGen(sections, lines)");
+    err.SetContext("_CollectionName_.SortName(compare, compareTo)");
     err.IsValue(compare, "compare");
     err.IsValue(compareTo, "compareTo");
     err.ShowError();
@@ -37,13 +37,14 @@ class _CollectionName_
   // The Constructor method.
   constructor()
   {
+    this.Err = new ArgError();
     this.ItemArray = [];
   }
 
   // Adds a new object.
   Add(name)
   {
-    this.Err.SetContext("Sections.Add(name)");
+    this.Err.SetContext("_CollectionName_.Add(name)");
     this.Err.IsValue(name, "name");
     this.Err.ShowError();
 
@@ -58,7 +59,7 @@ class _CollectionName_
   Compare(compareItem, compareToValue)
   {
     let err = new ArgError();
-    err.SetContext("Sections.Compare(compareItem, compareToValue)");
+    err.SetContext("_CollectionName_.Compare(compareItem, compareToValue)");
     err.IsValue(compareItem, "compareItem");
     err.IsValue(compareToValue, "compareToValue");
     err.ShowError();
@@ -67,7 +68,7 @@ class _CollectionName_
     return _CollectionName_.SortName(compareItem, compareToItem);
   }
 
-  // 
+  // Gets the element count.
   Count()
   {
     let retValue = 0;
@@ -85,7 +86,7 @@ class _CollectionName_
   {
     let retValue = null;
 
-    this.Err.SetContext("Sections.Delete(compareToValue)");
+    this.Err.SetContext("_CollectionName_.Delete(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
@@ -100,7 +101,7 @@ class _CollectionName_
   // Get an item by index.
   Items(index)
   {
-    this.Err.SetContext("RepeatItems.Items(index)");
+    this.Err.SetContext("_CollectionName_.Items(index)");
     this.Err.IsValue(index, "index");
     this.Err.ShowError();
 
@@ -113,12 +114,11 @@ class _CollectionName_
   {
     let retValue = null;
 
-    this.Err.SetContext("Sections.Retrieve(compareToValue)");
+    this.Err.SetContext("_CollectionName_.Retrieve(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
-    let index = Common.BinarySearch(this.ItemArray, compareToValue
-      , this.Compare);
+    let index = this.Search(compareToValue);
     if (index >= 0)
     {
       retValue = this.ItemArray[index];
@@ -129,11 +129,11 @@ class _CollectionName_
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
-    this.Err.SetContext("Sections.Search(compareToValue)");
+    this.Err.SetContext("_CollectionName_.Search(compareToValue)");
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
-    let retValue = Common.BinarySearch(this.ItemArray, compareToValue
+    let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
   }
@@ -143,7 +143,7 @@ class _CollectionName_
   {
     if (null == sortMethod)
     {
-      sortMethod = this.SortName;
+      sortMethod = _CollectionName_.SortName;
     }
     this.ItemArray.sort(sortMethod);
   }

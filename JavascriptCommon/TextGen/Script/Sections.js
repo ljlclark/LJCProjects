@@ -1,8 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Sections.js
-// <script src="ArgErr.js"></script>
-// <script src="Common.js"></script>
+// <script src="../ArgErr.js"></script>
+// <script src="../LJCCommon.js"></script>
 
 // Represents a collection of items.
 class Sections
@@ -65,10 +65,11 @@ class Sections
     return Sections.SortName(compareItem, compareToItem);
   }
 
-  // 
+  // Gets the element count.
   Count()
   {
     let retValue = 0;
+
     if (this.ItemArray
       && Array.isArray(this.ItemArray))
     {
@@ -97,7 +98,7 @@ class Sections
   // Get an item by index.
   Items(index)
   {
-    this.Err.SetContext("RepeatItems.Items(index)");
+    this.Err.SetContext("Sections.Items(index)");
     this.Err.IsValue(index, "index");
     this.Err.ShowError();
 
@@ -114,8 +115,7 @@ class Sections
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
-    let index = LJC.BinarySearch(this.ItemArray, compareToValue
-      , this.Compare);
+    let index = this.Search(compareToValue);
     if (index >= 0)
     {
       retValue = this.ItemArray[index];
@@ -140,7 +140,7 @@ class Sections
   {
     if (null == sortMethod)
     {
-      sortMethod = this.SortName;
+      sortMethod = Sections.SortName;
     }
     this.ItemArray.sort(sortMethod);
   }
