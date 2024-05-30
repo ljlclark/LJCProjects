@@ -8,9 +8,14 @@
   text-align: initial;
 }
 
-.cellLeft {
+.cellFirst {
   display: table-cell;
   text-align: initial;
+}
+
+.cellRightAlign {
+  display: table-cell;
+  text-align: right;
 }
 
 .row {
