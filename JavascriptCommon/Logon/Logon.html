@@ -18,39 +18,41 @@
   <div class="page"
        style="text-align: center">
     <h2>Login</h2>
-    <form name="LogOnForm" action="LogOnAction.html" method="get"
-          class="form"
-          style="margin: auto; width: 237px">
-      <div class="table">
-        <div class="row">
-          <div class="cellFirst">
-            <label for="UserName">User Name</label>
+    <!-- Make form same size as layout table. -->
+    <div style="display: inline-block">
+      <form id="logonForm" name="LogonForm" action="LogOnAction.html"
+            method="get" class="form">
+        <div id="table" class="table">
+          <div class="row">
+            <div class="label">
+              <label for="UserName">User Name</label>
+            </div>
+            <!-- name attribute must be used to appear in "get" URL. -->
+            <!-- id must be used to link from label for screen readers. -->
+            <div class="cell">
+              <input type="text" id="UserName" autofocus required
+                     maxlength="15" size="15 * 5" />
+            </div>
           </div>
-          <!-- name attribute must be used to appear in "get" URL. -->
-          <!-- id must be used to link from label for screen readers. -->
-          <div class="cell">
-            <input type="text" id="UserName" autofocus required
-                   maxlength="15" size="15 * 5" />
+          <div class="row">
+            <div class="label">
+              <label for="AccessCode">AccessCode</label>
+            </div>
+            <div class="cell">
+              <input type="password" id="AccessCode" required
+                     maxlength="12" size="12 * 6" ; />
+            </div>
+          </div>
+          <div class="row">
+            <div class="label">
+            </div>
+            <div class="cell">
+              <input type="submit" value="Submit" />
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="cellFirst">
-            <label for="AccessCode">AccessCode</label>
-          </div>
-          <div class="cell">
-            <input type="password" id="AccessCode" required
-                   maxlength="12" size="12 * 6" ; />
-          </div>
-        </div>
-        <div class="row">
-          <div class="cellFirst">
-          </div>
-          <div class="cell">
-            <input type="submit" value="Submit" />
-          </div>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <div id="message"></div>
     <br />
   </div>

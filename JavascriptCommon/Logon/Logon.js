@@ -8,7 +8,7 @@ class LogOn
   // Add the LogOn events.
   AddEvents()
   {
-    let eForm = document.forms["LogOnForm"];
+    let eForm = document.forms["logonForm"];
     eForm.addEventListener("submit", this.Validate.bind(this));
   }
 
@@ -19,7 +19,7 @@ class LogOn
 
     //alert(event.target.tagName);
     message.innerText = "";
-    let eForm = document.forms["LogOnForm"];
+    let eForm = document.forms["logonForm"];
     let eAccessCode = eForm["AccessCode"];
     let accessCode = eAccessCode.value;
     if (accessCode.length < 8)

@@ -23,26 +23,28 @@
 <body>
   <div id="page" class="page"
        style="text-align: center">
-    <div class="table">
-      <div class="row">
-        <div class="cellFirst">
-          <label for="text">Template</label>
+    <div id="wrapper" style="display: inline-block">
+      <div class="table">
+        <div class="row">
+          <div class="label">
+            <label for="text">Template</label>
+          </div>
+          <div class="cell">
+            <label for="output">Output</label>
+          </div>
         </div>
-        <div class="cell">
-          <label for="output">Output</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="cellFirst">
-          <textarea id="template" name="template" rows="1"
-                    autofocus spellcheck="false"
-                    class="text"></textarea>
-        </div>
-        <div class="cell"
-             style="vertical-align: top">
-          <textarea id="output" name="output" rows="1"
-                    spellcheck="false"
-                    class="text"></textarea>
+        <div class="row">
+          <div class="label">
+            <textarea id="template" name="template" rows="1"
+                      autofocus spellcheck="false"
+                      class="text"></textarea>
+          </div>
+          <div class="cell"
+               style="vertical-align: top">
+            <textarea id="output" name="output" rows="1"
+                      spellcheck="false"
+                      class="text"></textarea>
+          </div>
         </div>
       </div>
     </div>
