@@ -160,7 +160,7 @@ class LJC
     let font = LJC.ComputedStyle(selector, "font");
     let textWidth = LJC.TextWidth(font, text);
     let averageWidth = textWidth / text.length;
-    let retValue = Math.floor(averageWidth * 100) / 100;
+    let retValue = LJC.Round(averageWidth, 100);
     return retValue;
   }
 
@@ -295,6 +295,15 @@ class LJC
       let remainder = count % 2;
       retValue = (count - remainder) / 2 + 1;
     }
+    return retValue;
+  }
+
+  // Rounds to provided place value.
+  static Round(value, placeValue)
+  {
+    let retValue = value * placeValue;
+    retValue = Math.round(retValue);
+    retValue = retValue / placeValue;
     return retValue;
   }
 

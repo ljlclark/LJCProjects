@@ -23,28 +23,26 @@
 <body>
   <div id="page" class="page"
        style="text-align: center">
-    <div id="wrapper" style="display: inline-block">
-      <div class="table">
-        <div class="row">
-          <div class="label">
-            <label for="text">Template</label>
-          </div>
-          <div class="cell">
-            <label for="output">Output</label>
-          </div>
+    <div id="table" class="table">
+      <div class="row">
+        <div class="label">
+          <label for="text">Template</label>
         </div>
-        <div class="row">
-          <div class="label">
-            <textarea id="template" name="template" rows="1"
-                      autofocus spellcheck="false"
-                      class="text"></textarea>
-          </div>
-          <div class="cell"
-               style="vertical-align: top">
-            <textarea id="output" name="output" rows="1"
-                      spellcheck="false"
-                      class="text"></textarea>
-          </div>
+        <div class="cell">
+          <label for="output">Output</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="label">
+          <textarea id="template" name="template" rows="1"
+                    autofocus spellcheck="false"
+                    class="text"></textarea>
+        </div>
+        <div class="cell"
+             style="vertical-align: top">
+          <textarea id="output" name="output" rows="1"
+                    spellcheck="false"
+                    class="text"></textarea>
         </div>
       </div>
     </div>
@@ -63,12 +61,53 @@
       // Calculate available width for textarea elements.
       if (null == width)
       {
-        let tableBorderSpacing = 4;
-        let cellPaddingLeft = 6;
-        let padding = (tableBorderSpacing * 2) + cellPaddingLeft;
-        width = page.clientWidth - padding;
+        let css = getComputedStyle(page, "width");
+        width = parseInt(css.width, 10);
       }
+      //ShowWidths(page);
+      //ShowWidths(table);
+      let cellPadding = 6;
+      width -= cellPadding;
       TextGen.SetTextCols(null, width);
+    }
+
+    function ShowWidths(eItem)
+    {
+      let text = `id: ${eItem.id}\r\n`;
+      let css = getComputedStyle(eItem, null);
+      let marginLeft = parseInt(css.marginLeft, 10);
+      let marginRight = parseInt(css.marginRight, 10);
+      let borderLeft = parseInt(css.borderLeft, 10);
+      let borderRight = parseInt(css.borderRight, 10);
+      let totalWidth = eItem.clientWidth + marginLeft + marginRight;
+      totalWidth += borderLeft + borderRight;
+      text += `TotalWidth: ${totalWidth}\r\n`;
+      text += "\r\n";
+
+      text += `clientWidth - style.marginLeft - style.marginRight\r\n`;
+      text += `clientWidth - style.borderLeft - style.borderRight\r\n`;
+      text += `clientWidth: ${eItem.clientWidth}\r\n`;
+      //text += `offsetWidth: ${eItem.offsetWidth}\r\n`;
+      //text += `scrollWidth: ${eItem.scrollWidth}\r\n`;
+
+      text += `style.marginLeft: ${css.marginLeft}\r\n`;
+      text += `style.marginRight: ${css.marginRight}\r\n`;
+      text += "\r\n";
+
+      text += `style.borderLeft: ${css.borderLeft}\r\n`;
+      text += `style.borderRight: ${css.borderRight}\r\n`;
+      text += "\r\n";
+
+      //text += `style.offset: ${css.offset}\r\n`;
+      text += `style.paddingLeft: ${css.paddingLeft}\r\n`;
+      text += `style.paddingRight: ${css.paddingRight}\r\n`;
+      text += "\r\n";
+
+      text += `clientWidth - style.paddingLeft - style.paddingRight\r\n`
+      let width = parseInt(css.width, 10);
+      width = Math.floor(width);
+      text += `style.width: ${width}\r\n`;
+      alert(text);
     }
 
     // Event handler to process the template and data.

@@ -62,9 +62,9 @@
     {
       if (null == width)
       {
-        let tableBorderSpacing = 4;
+        let tableBorderSpacing = 8 * 2;
         let cellPaddingLeft = 6;
-        let padding = (tableBorderSpacing * 2) + cellPaddingLeft;
+        let padding = tableBorderSpacing + cellPaddingLeft;
         width = form.clientWidth - padding;
       }
       TextGen.SetTextCols(null, width);
