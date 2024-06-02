@@ -1,0 +1,7 @@
+Section Name
+Main
+Item Name
+First
+Replacement Name, Value
+_CollectionName_, GenItems
+_ClassName_, GenItem

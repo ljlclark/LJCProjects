@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License.-->
-<!-- TextGen.html -->
+<!-- TextGenForm.html -->
 <html lang="en">
 <head>
   <title>Test Text Generation</title>
@@ -22,7 +22,7 @@
   <script src="Script/TestData.js"></script>
 </head>
 <body>
-  <div class="page"
+  <div id="page"class="page"
        style="text-align: center">
     <form id="form" class="form">
       <div class="table">
@@ -58,15 +58,17 @@
     template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", Process);
 
+    // Set the textarea coluns.
     function SetTextCols(event = null, width = null)
     {
+      // Calculate available width for textarea elements.
       if (null == width)
       {
-        let tableBorderSpacing = 8 * 2;
-        let cellPaddingLeft = 6;
-        let padding = tableBorderSpacing + cellPaddingLeft;
-        width = form.clientWidth - padding;
+        let css = getComputedStyle(form, "width");
+        width = parseInt(css.width, 10);
       }
+      let cellPadding = 6;
+      width -= cellPadding;
       TextGen.SetTextCols(null, width);
     }
 

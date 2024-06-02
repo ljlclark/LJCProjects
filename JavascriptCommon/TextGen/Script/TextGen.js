@@ -10,20 +10,6 @@
 // Generate output text from a template and data.
 class TextGen
 {
-  // Set the textarea coluns.
-  static SetTextCols(event = null, width = null)
-  {
-    // Calcualte the average character width.
-    let text = "abcdefghijklmnopqrstuvwxyz";
-    let averageWidth = LJC.AverageCharWidth("textarea", text);
-
-    // Calculate textarea columns.
-    let cols = LJC.GetTextCols(width, 2, averageWidth);
-    cols -= 4;  // Adjust?
-    template.cols = cols;
-    output.cols = cols;
-  }
-
   // The Constructor function.
   constructor()
   {
