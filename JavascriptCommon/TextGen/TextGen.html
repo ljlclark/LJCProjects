@@ -9,6 +9,7 @@
   <meta name="description" content="A Text Generator HTML page." />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../CSS/HMenu.css' />
   <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
@@ -19,12 +20,32 @@
   <script src="Script/Sections.js"></script>
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
-  <script src="Script/TextUtil.js"></script>
+  <script src="Script/TextGenPage.js"></script>
 </head>
 <body>
   <div id="page" class="page"
        style="text-align: center">
-    <div id="table" class="table">
+
+    <!-- Horizontal Menu -->
+    <div class="hMenu"
+         style="text-align:initial">
+      <span id="data" class="hItem"
+            onclick="TextGenPage.ShowItems(dataTable)">
+        Data
+      </span>
+      <span id="generate" class="hItem"
+            onclick="TextGenPage.ShowItems(genTable)">
+        Generate
+      </span>
+    </div>
+
+    <!-- Data -->
+    <div id="dataTable" class="table">
+      Here it is.
+    </div>
+
+    <!-- Generate -->
+    <div id="genTable" class="table">
       <div class="row">
         <div class="label">
           <label for="text">Template</label>
@@ -51,39 +72,10 @@
   </div>
 
   <script>
-    // Events
-    addEventListener("resize", SetTextCols);
-    template.addEventListener("keyup", LJC.EventTextRows);
-    ok.addEventListener("click", Process);
-
-    // Set the textarea coluns.
-    function SetTextCols(event = null, width = null)
-    {
-      // Calculate available width for textarea elements.
-      if (null == width)
-      {
-        let css = getComputedStyle(page, "width");
-        width = parseInt(css.width, 10);
-      }
-      let cellPadding = 6;
-      width -= cellPadding;
-      TextUtil.SetTextCols(null, width);
-    }
-
-    // Event handler to process the template and data.
-    function Process()
-    {
-      let templateText = template.value;
-      sections = TextData.SectionsData();
-      let lines = templateText.split("\n");
-      let textGen = new TextGen();
-      textGen.TextGen(sections, lines);
-      output.value = textGen.Output;
-      LJC.SetTextRows(output);
-    }
-
-    SetTextCols();
+    TextGenPage.SetEvents();
+    TextGenPage.PageTextCols();
     outputText = "";
+    TextGenPage.ShowItems(dataTable);
   </script>
 </body>
 </html>

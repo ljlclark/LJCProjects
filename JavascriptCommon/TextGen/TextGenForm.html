@@ -18,11 +18,12 @@
   <script src="Script/RepeatItems.js"></script>
   <script src="Script/Replacements.js"></script>
   <script src="Script/Sections.js"></script>
+  <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
-  <script src="Script/TestData.js"></script>
+  <script src="Script/TextGenPage.js"></script>
 </head>
 <body>
-  <div id="page"class="page"
+  <div id="page" class="page"
        style="text-align: center">
     <form id="form" class="form">
       <div class="table">
@@ -53,38 +54,8 @@
   </div>
 
   <script>
-    // Events
-    addEventListener("resize", SetTextCols);
-    template.addEventListener("keyup", LJC.EventTextRows);
-    ok.addEventListener("click", Process);
-
-    // Set the textarea coluns.
-    function SetTextCols(event = null, width = null)
-    {
-      // Calculate available width for textarea elements.
-      if (null == width)
-      {
-        let css = getComputedStyle(form, "width");
-        width = parseInt(css.width, 10);
-      }
-      let cellPadding = 6;
-      width -= cellPadding;
-      TextGen.SetTextCols(null, width);
-    }
-
-    // Event handler to process the template and data.
-    function Process()
-    {
-      let templateText = template.value;
-      sections = TestData.SectionsData();
-      let lines = templateText.split("\n");
-      let textGen = new TextGen();
-      textGen.TextGen(sections, lines);
-      output.value = textGen.Output;
-      LJC.SetTextRows(output);
-    }
-
-    SetTextCols();
+    TextGenPage.SetEvents();
+    TextGenPage.FormTextCols();
     outputText = "";
   </script>
 </body>
