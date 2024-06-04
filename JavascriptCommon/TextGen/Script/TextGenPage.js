@@ -50,8 +50,56 @@ class TextGenPage
   static SetEvents()
   {
     addEventListener("resize", TextGenPage.PageTextCols);
+    data.addEventListener("mouseover", TextGenPage.MouseOver)
+    data.addEventListener("mouseout", TextGenPage.MouseOut)
+    generate.addEventListener("mouseover", TextGenPage.MouseOver)
+    generate.addEventListener("mouseout", TextGenPage.MouseOut)
     template.addEventListener("keyup", LJC.EventTextRows);
     ok.addEventListener("click", TextGenPage.Process);
+  }
+
+  // 
+  static MouseOver(event)
+  {
+    let eItem = event.target;
+    if ("data" == eItem.id)
+    {
+      if ("none" == gDataDisplay)
+      {
+        eItem.style.backgroundColor = "aliceblue";
+      }
+    }
+
+    if ("generate" == eItem.id)
+    {
+      if ("none" == gGenDisplay)
+      {
+        eItem.style.backgroundColor = "aliceblue";
+      }
+    }
+  }
+
+  // 
+  static MouseOut(event)
+  {
+    let eItem = event.target;
+    if ("data" == eItem.id)
+    {
+      eItem.style.backgroundColor = "lightblue";
+      if ("none" == gDataDisplay)
+      {
+        eItem.style.backgroundColor = "lightsteelblue";
+      }
+    }
+
+    if ("generate" == eItem.id)
+    {
+      eItem.style.backgroundColor = "lightblue";
+      if ("none" == gGenDisplay)
+      {
+        eItem.style.backgroundColor = "lightsteelblue";
+      }
+    }
   }
 
   // Set the textarea coluns.
@@ -74,17 +122,21 @@ class TextGenPage
     if ("genTable" == eItem.id)
     {
       dataTable.style.display = "none";
+      gDataDisplay = "none";
       data.style.backgroundColor = "initial";
       generate.style.backgroundColor = "lightblue";
       genTable.style.display = "initial";
+      gGenDisplay = "initial";
       ok.style.display = "initial";
     }
     else
     {
       dataTable.style.display = "initial";
+      gDataDisplay = "initial";
       data.style.backgroundColor = "lightblue";
       generate.style.backgroundColor = "initial";
       genTable.style.display = "none";
+      gGenDisplay = "none";
       ok.style.display = "none";
     }
   }

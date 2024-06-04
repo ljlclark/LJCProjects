@@ -1,3 +1,5 @@
+/* Copyright Lester J. Clark and Contributors */
+/* Licensed under the MIT license.*/
 /* HMenu.css*/
 
 .hMenu {
@@ -10,6 +12,8 @@
   padding: 8px;
 }
 
+/*
   .hItem:hover {
     background-color: aliceblue;
   }
+*/
