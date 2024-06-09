@@ -22,6 +22,7 @@
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
   <script src="Script/TextGenPage.js"></script>
+  <script src="Script/StringBuilder.js"></script>
 </head>
 <body>
   <div id="page" class="page"
@@ -80,32 +81,6 @@
       <div class="row">
         <div class="firstCell">
           <div id="tableData">
-            <table border="1" cellspacing="0"
-                   style="background-color: aliceblue; width: 100%">
-              <tr>
-                <th colspan="2">Section</th>
-              </tr>
-              <tr>
-                <td>Main</td>
-              </tr>
-              <tr>
-                <th colspan="2">Item</th>
-              </tr>
-              <tr>
-                <td>Item1</td>
-              </tr>
-              <tr>
-                <th colspan="2">Replacement</th>
-              </tr>
-              <tr>
-                <td>_ClassName_</td>
-                <td>GenItem</td>
-              </tr>
-              <tr>
-                <td>_CollectionName_</td>
-                <td>GenItems</td>
-              </tr>
-            </table>
           </div>
         </div>
         <div class="cell"
@@ -122,7 +97,7 @@
     <!-- End Generate Table Layout -->
   </div>
 
-  <div id="templateMenu" class="divMenu" style="width:100px">
+  <div id="templateMenu" class="divMenu" style="width:120px">
     <div class="titleHighlight">Template Menu</div>
     <div><hr /></div>
     <div id="cColl">C# Collection</div>
@@ -131,23 +106,20 @@
     <div id="jsColl">JS Collection</div>
     <div id="jsDO">JS Data Object</div>
     <div><hr /></div>
-    <div id="phpColl">PHP Collection</div>
-    <div id="phpDO">PHP Data Object</div>
+    <div id="createData">Create Data</div>
   </div>
 
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
 
+    textData.value = TextGenPage.CreateData();
+    tableData.innerHTML = TextGenPage.CreateTable();
+
     TextGenPage.SetEvents();
     TextGenPage.PageTextCols();
     outputText = "";
     TextGenPage.ShowTabItems(dataLayout);
-
-    textData.value = "Section: Main\r\n"
-      + "Item: Item1\r\n"
-      + "_CollectionName_, GenItems\r\n"
-      + "_ClassName_, GenItem";
     LJC.SetTextRows(textData);
   </script>
 </body>
