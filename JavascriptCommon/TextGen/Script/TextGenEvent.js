@@ -193,6 +193,12 @@ class TextGenEvent
       case "createData":
         alert("Create Data");
         break;
+      case "data":
+        TextGenEvent.ShowTabItems(dataLayout);
+        break;
+      case "generate":
+        TextGenEvent.ShowTabItems(genLayout);
+        break;
       case "templateMenuShow":
         menu = LJC.Element("templateMenu");
         break;
