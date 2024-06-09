@@ -6,6 +6,88 @@
 // Generate output text utility functions.
 class TextGenPage
 {
+  // Sete Event handlers.
+  static SetEvents()
+  {
+    // window
+    window.addEventListener("resize", TextGenPage.PageTextCols);
+
+    addEventListener("contextmenu", TextGenPage.ContextMenu);
+    addEventListener("click", TextGenPage.DocumentClick);
+
+    // Horizontal Menu
+    addEventListener("mouseover", TextGenPage.MouseOver)
+    addEventListener("mouseout", TextGenPage.MouseOut)
+
+    // textarea elemnts
+    template.addEventListener("keyup", LJC.EventTextRows);
+    textData.addEventListener("keyup", LJC.EventTextRows);
+    output.addEventListener("keyup", LJC.EventTextRows);
+
+    ok.addEventListener("click", TextGenPage.Process);
+  }
+
+  // Menu Actions
+
+  //
+  static ContextMenu(event)
+  {
+    let eItem = event.target;
+
+    let menu = null;
+    switch (eItem.id)
+    {
+      case "templateMenuShow":
+        menu = LJC.Element("templateMenu");
+        break;
+    }
+
+    if (menu != null)
+    {
+      event.preventDefault();
+      menu.style.top = `${event.pageY}px`;
+      menu.style.left = `${event.pageX}px`;
+      templateMenu.style.visibility = "visible";
+    }
+  }
+
+
+  static DocumentClick(event)
+  {
+    let eItem = event.target;
+
+    templateMenu.style.visibility = "hidden";
+
+    const base = "https://github.com/ljlclark"
+    const cBase = "/LJCProjects/blob/main";
+    const js = "/JavascriptCommon/TextGen/Templates";
+
+    let url = null;
+    switch (eItem.id)
+    {
+      case "cColl":
+        break;
+      case "cDO":
+        break;
+      case "jsColl":
+        url = `${base}${cBase}${js}/ItemsTemplate.js`;
+        break;
+      case "jsDO":
+        url = `${base}${cBase}${js}/ItemTemplate.js`;
+        break;
+      case "phpColl":
+        break;
+      case "phpDO":
+        break;
+    }
+    if (url != null)
+    {
+      window.open(url);
+    }
+  }
+
+  // Other Functions
+
   // Set the Form textarea coluns.
   static FormTextCols(event = null, width = null)
   {
@@ -46,59 +128,62 @@ class TextGenPage
     LJC.SetTextRows(output);
   }
 
-  // Sete Event handlers.
-  static SetEvents()
-  {
-    addEventListener("resize", TextGenPage.PageTextCols);
-    data.addEventListener("mouseover", TextGenPage.MouseOver)
-    data.addEventListener("mouseout", TextGenPage.MouseOut)
-    generate.addEventListener("mouseover", TextGenPage.MouseOver)
-    generate.addEventListener("mouseout", TextGenPage.MouseOut)
-    template.addEventListener("keyup", LJC.EventTextRows);
-    ok.addEventListener("click", TextGenPage.Process);
-  }
-
   // 
   static MouseOver(event)
   {
-    let eItem = event.target;
-    if ("data" == eItem.id)
-    {
-      if ("none" == gDataDisplay)
-      {
-        eItem.style.backgroundColor = "aliceblue";
-      }
-    }
+    const overColor = "aliceblue";
 
-    if ("generate" == eItem.id)
+    let eItem = event.target;
+    switch (eItem.id)
     {
-      if ("none" == gGenDisplay)
-      {
+      case "data":
+        if ("none" == gDataDisplay)
+        {
+          eItem.style.backgroundColor = overColor;
+        }
+        break;
+
+      case "generate":
+        if ("none" == gGenDisplay)
+        {
+          eItem.style.backgroundColor = overColor;
+        }
+        break;
+
+      case "templateMenuShow":
         eItem.style.backgroundColor = "aliceblue";
-      }
+        break;
     }
   }
 
   // 
   static MouseOut(event)
   {
-    let eItem = event.target;
-    if ("data" == eItem.id)
-    {
-      eItem.style.backgroundColor = "lightblue";
-      if ("none" == gDataDisplay)
-      {
-        eItem.style.backgroundColor = "lightsteelblue";
-      }
-    }
+    const layoutColor = "lightblue";
+    const menuColor = "lightsteelblue";
 
-    if ("generate" == eItem.id)
+    let eItem = event.target;
+    switch (eItem.id)
     {
-      eItem.style.backgroundColor = "lightblue";
-      if ("none" == gGenDisplay)
-      {
-        eItem.style.backgroundColor = "lightsteelblue";
-      }
+      case "data":
+        eItem.style.backgroundColor = layoutColor;
+        if ("none" == gDataDisplay)
+        {
+          eItem.style.backgroundColor = menuColor;
+        }
+        break;
+
+      case "generate":
+        eItem.style.backgroundColor = layoutColor;
+        if ("none" == gGenDisplay)
+        {
+          eItem.style.backgroundColor = menuColor;
+        }
+        break;
+
+      case "templateMenuShow":
+        eItem.style.backgroundColor = layoutColor;
+        break;
     }
   }
 
@@ -112,30 +197,36 @@ class TextGenPage
     // Calculate textarea columns.
     let cols = LJC.GetTextCols(width, 2, averageWidth);
     cols -= 4;  // Adjust?
+
+    let cellWidth = (width / 2);
     template.cols = cols;
+    templateMenuShow.style.marginLeft = (cellWidth - 130) + "px";
+
+    textData.cols = cols;
+    tableData.style.width = cellWidth + "px";
     output.cols = cols;
   }
 
   // Shows tab items.
-  static ShowItems(eItem)
+  static ShowTabItems(eItem)
   {
-    if ("genTable" == eItem.id)
+    if ("genLayout" == eItem.id)
     {
-      dataTable.style.display = "none";
+      dataLayout.style.display = "none";
       gDataDisplay = "none";
       data.style.backgroundColor = "initial";
       generate.style.backgroundColor = "lightblue";
-      genTable.style.display = "initial";
+      genLayout.style.display = "initial";
       gGenDisplay = "initial";
       ok.style.display = "initial";
     }
     else
     {
-      dataTable.style.display = "initial";
+      dataLayout.style.display = "initial";
       gDataDisplay = "initial";
       data.style.backgroundColor = "lightblue";
       generate.style.backgroundColor = "initial";
-      genTable.style.display = "none";
+      genLayout.style.display = "none";
       gGenDisplay = "none";
       ok.style.display = "none";
     }

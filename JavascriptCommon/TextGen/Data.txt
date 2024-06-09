@@ -1,7 +1,4 @@
-Section Name
-Main
-Item Name
-First
-Replacement Name, Value
+Section: Main
+Item: Item1
 _CollectionName_, GenItems
 _ClassName_, GenItem

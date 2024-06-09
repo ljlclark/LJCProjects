@@ -13,6 +13,7 @@
   <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
+  <link rel="stylesheet" type="text/css" href="CSS/TextGen.css" />
   <script src="../ArgError.js"></script>
   <script src="../LJCCommon.js"></script>
   <script src="Script/RepeatItems.js"></script>
@@ -30,35 +31,82 @@
     <div class="hMenu"
          style="text-align:initial">
       <span id="data" class="hItem"
-            onclick="TextGenPage.ShowItems(dataTable)">
+            onclick="TextGenPage.ShowTabItems(dataLayout)">
         Data
       </span>
       <span id="generate" class="hItem"
-            onclick="TextGenPage.ShowItems(genTable)">
+            onclick="TextGenPage.ShowTabItems(genLayout)">
         Generate
       </span>
     </div>
 
-    <!-- Data -->
-    <div id="dataTable" class="table">
-      Here it is.
-    </div>
-
-    <!-- Generate -->
-    <div id="genTable" class="table">
+    <!-- Data Table Layout -->
+    <div id="dataLayout" class="table">
       <div class="row">
-        <div class="label">
-          <label for="text">Template</label>
+        <div class="firstCell">
+          <label for="template">Template</label>
+          <span id="templateMenuShow">Options</span>
+        </div>
+        <div class="cell">
+          <label for="textData">Data</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="firstCell">
+          <textarea id="template" name="template" rows="1"
+                    autofocus spellcheck="false"
+                    class="text"></textarea>
+        </div>
+        <div class="cell"
+             style="vertical-align: top">
+          <textarea id="textData" name="textData" rows="1"
+                    spellcheck="false"
+                    class="text"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- End Data Table Layout -->
+    <!-- Generate Table Layout -->
+    <div id="genLayout" class="table">
+      <div class="row">
+        <div class="firstCell">
+          <!-- label for="text">Table Data</label -->
+          Table Data
         </div>
         <div class="cell">
           <label for="output">Output</label>
         </div>
       </div>
       <div class="row">
-        <div class="label">
-          <textarea id="template" name="template" rows="1"
-                    autofocus spellcheck="false"
-                    class="text"></textarea>
+        <div class="firstCell">
+          <div id="tableData">
+            <table border="1" cellspacing="0"
+                   style="background-color: aliceblue; width: 100%">
+              <tr>
+                <th colspan="2">Section</th>
+              </tr>
+              <tr>
+                <td>Main</td>
+              </tr>
+              <tr>
+                <th colspan="2">Item</th>
+              </tr>
+              <tr>
+                <td>Item1</td>
+              </tr>
+              <tr>
+                <th colspan="2">Replacement</th>
+              </tr>
+              <tr>
+                <td>_ClassName_</td>
+                <td>GenItem</td>
+              </tr>
+              <tr>
+                <td>_CollectionName_</td>
+                <td>GenItems</td>
+              </tr>
+            </table>
+          </div>
         </div>
         <div class="cell"
              style="vertical-align: top">
@@ -67,17 +115,40 @@
                     class="text"></textarea>
         </div>
       </div>
+      <div class="row">
+        <button id="ok" type="button">Generate</button>
+      </div>
     </div>
-    <button id="ok" type="button">Generate</button>
+    <!-- End Generate Table Layout -->
+  </div>
+
+  <div id="templateMenu" class="divMenu" style="width:100px">
+    <div class="titleHighlight">Template Menu</div>
+    <div><hr /></div>
+    <div id="cColl">C# Collection</div>
+    <div id="cDO">C# Data Object</div>
+    <div><hr /></div>
+    <div id="jsColl">JS Collection</div>
+    <div id="jsDO">JS Data Object</div>
+    <div><hr /></div>
+    <div id="phpColl">PHP Collection</div>
+    <div id="phpDO">PHP Data Object</div>
   </div>
 
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
+
     TextGenPage.SetEvents();
     TextGenPage.PageTextCols();
     outputText = "";
-    TextGenPage.ShowItems(dataTable);
+    TextGenPage.ShowTabItems(dataLayout);
+
+    textData.value = "Section: Main\r\n"
+      + "Item: Item1\r\n"
+      + "_CollectionName_, GenItems\r\n"
+      + "_ClassName_, GenItem";
+    LJC.SetTextRows(textData);
   </script>
 </body>
 </html>

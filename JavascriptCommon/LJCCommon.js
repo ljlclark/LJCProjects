@@ -148,7 +148,7 @@ class LJC
   // Common Methods
   // --------------
 
-  // Get the textarea columns.
+  // Get the average character width.
   static AverageCharWidth(selector, text)
   {
     let err = new ArgError();
