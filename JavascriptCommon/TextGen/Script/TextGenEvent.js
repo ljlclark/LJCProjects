@@ -1,25 +1,56 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextGenEvents.js
-// <script src="StringBuilder.js"></script>
+// <script src="../LJCCommon.js"></script>
+// <script src="Script/RepeatItems.js"></script>
+// <script src="Script/Replacements.js"></script>
+// <script src="Script/Sections.js"></script>
+// <script src="Script/StringBuilder.js"></script>
+// <script src="Script/TextData.js"></script>
+// <script src="Script/TextGen.js"></script>
 
 // Generate output text utility functions.
 class TextGenEvent
 {
   // Functions
 
-  // 
-  static CreateData()
+  // Creates the text data from a template.
+  static CreateData(text)
   {
+    //let text = template.value;
+    let lines = text.split("\n");
     let b = new StringBuilder();
-    b.Line("Section: Main");
-    b.Line("Item: Item1");
-    b.Line("_CollectionName_, GenItems");
-    b.Line("_ClassName_, GenItem");
+    for (let index = 0; index < lines.length; index++)
+    {
+      let line = lines[index];
+      if (line.trim().startsWith("//"))
+      {
+        let tokens = line.split(" ");
+        if (tokens.length > 2
+          && tokens[1].startsWith("#"))
+        {
+          let token = tokens[1];
+          let name = tokens[2];
+          switch (token.toLowerCase())
+          {
+            case "#sectionbegin":
+              b.Line(`Section: ${name}`);
+              b.Line("Item: Item1");
+              break;
+
+            case "#value":
+              let begin = { Index: 0 }
+              let value = LJC.DelimitedString(name, "_", "_", begin);
+              b.Line(`${name}, ${value}`);
+              break;
+          }
+        }
+      }
+    }
     return b.ToString();
   }
 
-  // 
+  // Creates a table from the sections object.
   static CreateTable()
   {
     let b = new StringBuilder();
@@ -120,13 +151,12 @@ class TextGenEvent
   // Sets Event handlers.
   static SetEvents()
   {
-    // window
+    // window Event Handlers.
     window.addEventListener("resize", TextGenEvent.PageTextCols);
 
+    // document event handlers.
     //addEventListener("contextmenu", TextGenEvent.ContextMenu);
-    addEventListener("click", TextGenEvent.DocumentClick);
-
-    // Horizontal Menu
+    document.addEventListener("click", TextGenEvent.DocumentClick);
     addEventListener("mouseover", TextGenEvent.MouseOver)
     addEventListener("mouseout", TextGenEvent.MouseOut)
 
@@ -134,11 +164,12 @@ class TextGenEvent
     template.addEventListener("keyup", LJC.EventTextRows);
     textData.addEventListener("keyup", LJC.EventTextRows);
     output.addEventListener("keyup", LJC.EventTextRows);
+    template.addEventListener("change", TextGenEvent.PageTextCols);
 
     ok.addEventListener("click", TextGenEvent.Process);
   }
 
-  // Menu Actions
+  // Actions
 
   //
   static ContextMenu(event)
@@ -165,15 +196,13 @@ class TextGenEvent
   // 
   static DocumentClick(event)
   {
-    let eItem = event.target;
-
-    templateMenu.style.visibility = "hidden";
-
     const base = "https://github.com/ljlclark"
     const cBase = "/LJCProjects/blob/main";
     const c = "/CoreUtilities/LJCGenText/LJCGenTableCode/bin/Debug/Templates";
     const js = "/JavascriptCommon/TextGen/Templates";
 
+    let eItem = event.target;
+    templateMenu.style.visibility = "hidden";
     let menu = null;
     let url = null;
     switch (eItem.id)
@@ -181,24 +210,33 @@ class TextGenEvent
       case "cColl":
         url = `${base}${cBase}${c}/CollectionTemplate.cs`;
         break;
+
       case "cDO":
         url = `${base}${cBase}${c}/DataTemplate.cs`;
         break;
+
       case "jsColl":
         url = `${base}${cBase}${js}/ItemsTemplate.js`;
         break;
+
       case "jsDO":
         url = `${base}${cBase}${js}/ItemTemplate.js`;
         break;
+
       case "createData":
-        alert("Create Data");
+        textData.value = TextGenEvent.CreateData(template.value);
+        LJC.SetTextRows(textData);
+        TextGenEvent.PageTextCols();
         break;
+
       case "data":
         TextGenEvent.ShowTabItems(dataLayout);
         break;
+
       case "generate":
         TextGenEvent.ShowTabItems(genLayout);
         break;
+
       case "templateMenuShow":
         menu = LJC.Element("templateMenu");
         break;

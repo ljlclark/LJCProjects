@@ -19,10 +19,10 @@
   <script src="Script/RepeatItems.js"></script>
   <script src="Script/Replacements.js"></script>
   <script src="Script/Sections.js"></script>
+  <script src="Script/StringBuilder.js"></script>
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
   <script src="Script/TextGenEvent.js"></script>
-  <script src="Script/StringBuilder.js"></script>
 </head>
 <body>
   <div id="page" class="page"
@@ -114,14 +114,12 @@
     gDataDisplay = "none";
     gGenDisplay = "none";
 
-    textData.value = TextGenEvent.CreateData();
     tableData.innerHTML = TextGenEvent.CreateTable();
 
     TextGenEvent.SetEvents();
     TextGenEvent.PageTextCols();
     outputText = "";
     TextGenEvent.ShowTabItems(dataLayout);
-    LJC.SetTextRows(textData);
   </script>
 </body>
 </html>

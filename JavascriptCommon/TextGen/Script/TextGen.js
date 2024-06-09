@@ -100,6 +100,7 @@ class TextGen
         let name = LJC.DelimitedString(lineItem.Value, "_", "_", begin);
         if (name != null)
         {
+          name = `_${name}_`;
           let replacement = replacements.Retrieve(name);
           if (replacement != null)
           {

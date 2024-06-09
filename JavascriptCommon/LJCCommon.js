@@ -267,7 +267,8 @@ class LJC
       let endIndex = text.indexOf(endDelimiter, begin.Index + 1);
       if (endIndex > 0)
       {
-        retValue = text.substr(begin.Index, (endIndex - begin.Index) + 1);
+        begin.Index++;
+        retValue = text.substr(begin.Index, (endIndex - begin.Index));
         //begin.Index = endIndex + 1;
       }
     }
