@@ -21,7 +21,7 @@
   <script src="Script/Sections.js"></script>
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
-  <script src="Script/TextGenPage.js"></script>
+  <script src="Script/TextGenEvent.js"></script>
   <script src="Script/StringBuilder.js"></script>
 </head>
 <body>
@@ -67,6 +67,7 @@
       </div>
     </div>
     <!-- End Data Table Layout -->
+
     <!-- Generate Table Layout -->
     <div id="genLayout" class="table">
       <div class="row">
@@ -113,13 +114,13 @@
     gDataDisplay = "none";
     gGenDisplay = "none";
 
-    textData.value = TextGenPage.CreateData();
-    tableData.innerHTML = TextGenPage.CreateTable();
+    textData.value = TextGenEvent.CreateData();
+    tableData.innerHTML = TextGenEvent.CreateTable();
 
-    TextGenPage.SetEvents();
-    TextGenPage.PageTextCols();
+    TextGenEvent.SetEvents();
+    TextGenEvent.PageTextCols();
     outputText = "";
-    TextGenPage.ShowTabItems(dataLayout);
+    TextGenEvent.ShowTabItems(dataLayout);
     LJC.SetTextRows(textData);
   </script>
 </body>

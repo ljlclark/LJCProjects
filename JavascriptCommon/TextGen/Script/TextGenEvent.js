@@ -1,10 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TextGenPage.js
+// TextGenEvents.js
 // <script src="StringBuilder.js"></script>
 
 // Generate output text utility functions.
-class TextGenPage
+class TextGenEvent
 {
   // Functions
 
@@ -24,7 +24,7 @@ class TextGenPage
   {
     let b = new StringBuilder();
     b.Line("<table border='1' cellspacing='0'");
-    b.Line("  style='background - color: aliceblue; width: 100 % '>");
+    b.Line("  style='background - color: aliceblue; width: 100%'>");
     b.Line("  <tr>");
     b.Line("    <th colspan='2'>Section</th>");
     b.Line("  </tr>");
@@ -121,21 +121,21 @@ class TextGenPage
   static SetEvents()
   {
     // window
-    window.addEventListener("resize", TextGenPage.PageTextCols);
+    window.addEventListener("resize", TextGenEvent.PageTextCols);
 
-    addEventListener("contextmenu", TextGenPage.ContextMenu);
-    addEventListener("click", TextGenPage.DocumentClick);
+    //addEventListener("contextmenu", TextGenEvent.ContextMenu);
+    addEventListener("click", TextGenEvent.DocumentClick);
 
     // Horizontal Menu
-    addEventListener("mouseover", TextGenPage.MouseOver)
-    addEventListener("mouseout", TextGenPage.MouseOut)
+    addEventListener("mouseover", TextGenEvent.MouseOver)
+    addEventListener("mouseout", TextGenEvent.MouseOut)
 
     // textarea elemnts
     template.addEventListener("keyup", LJC.EventTextRows);
     textData.addEventListener("keyup", LJC.EventTextRows);
     output.addEventListener("keyup", LJC.EventTextRows);
 
-    ok.addEventListener("click", TextGenPage.Process);
+    ok.addEventListener("click", TextGenEvent.Process);
   }
 
   // Menu Actions
@@ -173,6 +173,8 @@ class TextGenPage
     const cBase = "/LJCProjects/blob/main";
     const c = "/CoreUtilities/LJCGenText/LJCGenTableCode/bin/Debug/Templates";
     const js = "/JavascriptCommon/TextGen/Templates";
+
+    let menu = null;
     let url = null;
     switch (eItem.id)
     {
@@ -191,6 +193,15 @@ class TextGenPage
       case "createData":
         alert("Create Data");
         break;
+      case "templateMenuShow":
+        menu = LJC.Element("templateMenu");
+        break;
+    }
+    if (menu != null)
+    {
+      menu.style.top = `${event.pageY}px`;
+      menu.style.left = `${event.pageX}px`;
+      templateMenu.style.visibility = "visible";
     }
     if (url != null)
     {
@@ -211,7 +222,7 @@ class TextGenPage
     }
     let cellPadding = 6;
     width -= cellPadding;
-    TextGenPage.SetTextCols(null, width);
+    TextGenEvent.SetTextCols(null, width);
   }
 
   // Set the Page textarea coluns.
@@ -225,7 +236,7 @@ class TextGenPage
     }
     let cellPadding = 6;
     width -= cellPadding;
-    TextGenPage.SetTextCols(null, width);
+    TextGenEvent.SetTextCols(null, width);
   }
 
   // Event handler to process the template and data.
