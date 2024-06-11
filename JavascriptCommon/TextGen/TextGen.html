@@ -23,31 +23,32 @@
   <script src="Script/StringBuilder.js"></script>
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
+  <script src="Script/TextGenCode.js"></script>
   <script src="Script/TextGenEvent.js"></script>
 </head>
 <body>
   <div id="page" class="page"
        style="text-align: center">
-
+    <!--  -->
     <!-- Horizontal Menu -->
     <div class="hMenu"
          style="text-align:initial">
-      <span id="data" class="hItem"
-            onclick="TextGenEvent.ShowTabItems(dataLayout)">
+      <span id="dataTab" class="hItem"
+            onclick="TextGenCode.ShowTabItems(dataLayout)">
         Data
       </span>
-      <span id="generate" class="hItem"
-            onclick="TextGenEvent.ShowTabItems(genLayout)">
+      <span id="generateTab" class="hItem"
+            onclick="TextGenCode.ShowTabItems(genLayout)">
         Generate
       </span>
     </div>
-
+    <!--  -->
     <!-- Data Table Layout -->
     <div id="dataLayout" class="table">
       <div class="row">
         <div class="firstCell">
           <label for="template">Template</label>
-          <span id="templateMenuShow">Options</span>
+          <span id="templateOptions">Options</span>
         </div>
         <div class="cell">
           <label for="textData">Data</label>
@@ -67,13 +68,14 @@
         </div>
       </div>
     </div>
-
+    <!--  -->
     <!-- Generate Table Layout -->
     <div id="genLayout" class="table">
       <div class="row">
         <div class="firstCell">
           <!-- label for="text">Table Data</label -->
           Table Data
+          <span id="generateOptions">Options</span>
         </div>
         <div class="cell">
           <label for="output">Output</label>
@@ -82,7 +84,13 @@
       <div class="row">
         <div class="firstCell">
           <div id="tableData">
-            <table id='sections' border='1' cellspacing='0'
+            <table id='section' border='1' cellspacing='0'
+                   style='background-color: aliceblue; width: 100%'>
+            </table>;
+            <table id='item' border='1' cellspacing='0'
+                   style='background-color: aliceblue; width: 100%'>
+            </table>;
+            <table id='replacement' border='1' cellspacing='0'
                    style='background-color: aliceblue; width: 100%'>
             </table>;
           </div>
@@ -94,13 +102,17 @@
                     class="text"></textarea>
         </div>
       </div>
-      <div class="row">
-        <button id="ok" type="button">Generate</button>
-      </div>
     </div>
     <!-- End Generate Table Layout -->
   </div>
-
+  <!-- End Page -->
+  <!--  -->
+  <!-- Menus -->
+  <div id="tableDataMenu" class="divMenu" style="width:120px">
+    <div class="titleHighlight">Table Data Menu</div>
+    <div><hr /></div>
+    <div id="genOutput">Generate Output</div>
+  </div>
   <div id="templateMenu" class="divMenu" style="width:120px">
     <div class="titleHighlight">Template Menu</div>
     <div><hr /></div>
@@ -116,13 +128,16 @@
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
-    sections.innerHTML = TextGenEvent.CreateSectionRows();
-    gSectionTable = new SelectTable(sections);
+    section.innerHTML = TextGenCode.CreateSectionRows();
+    item.innerHTML = TextGenCode.CreateItemRows();
+    replacement.innerHTML = TextGenCode.CreateReplacementRows();
+    gSectionTable = new SelectTable(section);
+    gItemTable = new SelectTable(item);
 
     TextGenEvent.SetEvents();
     TextGenEvent.PageTextCols();
     outputText = "";
-    TextGenEvent.ShowTabItems(dataLayout);
+    TextGenCode.ShowTabItems(dataLayout);
   </script>
 </body>
 </html>

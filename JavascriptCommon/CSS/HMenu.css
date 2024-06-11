@@ -12,6 +12,10 @@
   padding: 8px;
 }
 
+.titleHighlight {
+  background-color: lightsteelblue;
+}
+
 /*
   .hItem:hover {
     background-color: aliceblue;
