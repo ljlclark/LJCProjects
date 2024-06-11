@@ -67,7 +67,6 @@
         </div>
       </div>
     </div>
-    <!-- End Data Table Layout -->
 
     <!-- Generate Table Layout -->
     <div id="genLayout" class="table">
@@ -83,6 +82,9 @@
       <div class="row">
         <div class="firstCell">
           <div id="tableData">
+            <table id='sections' border='1' cellspacing='0'
+                   style='background-color: aliceblue; width: 100%'>
+            </table>;
           </div>
         </div>
         <div class="cell"
@@ -114,9 +116,8 @@
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
-    gSelectTable = new SelectTable();
-
-    tableData.innerHTML = TextGenEvent.CreateTable();
+    sections.innerHTML = TextGenEvent.CreateSectionRows();
+    gSectionTable = new SelectTable(sections);
 
     TextGenEvent.SetEvents();
     TextGenEvent.PageTextCols();

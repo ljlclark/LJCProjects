@@ -52,11 +52,11 @@ class TextGenEvent
   }
 
   // Creates a table from the sections object.
-  static CreateTable()
+  static CreateSectionRows()
   {
     let b = new StringBuilder();
-    b.Line("<table id='sections' border='1' cellspacing='0'");
-    b.Line("  style='background - color: aliceblue; width: 100%'>");
+    //b.Line("<table id='sections' border='1' cellspacing='0'");
+    //b.Line("  style='background - color: aliceblue; width: 100%'>");
     b.Line("  <tr>");
     b.Line("    <th colspan='2'>Section</th>");
     b.Line("  </tr>");
@@ -80,7 +80,7 @@ class TextGenEvent
     b.Line("    <td>_CollectionName_</td>");
     b.Line("    <td>GenItems</td>");
     b.Line("  </tr>");
-    b.Line("</table>");
+    //b.Line("</table>");
     return b.ToString();
   }
 
@@ -259,9 +259,10 @@ class TextGenEvent
 
     if (process)
     {
-      if (gSelectTable.IsTableData(eItem))
+      // Sets SelectedRow if gSectionTable.
+      if (gSectionTable.IsTableData(eItem))
       {
-        gSelectTable.SelectRow(gSelectTable.SelectedRow)
+        gSectionTable.SelectRow(gSectionTable.SelectedRow)
       }
     }
   }

@@ -6,52 +6,41 @@
 class SelectTable
 {
   // The Constructor function.
-  constructor()
+  constructor(eTable)
   {
+    this.Table = eTable;
+
     this.PreviousSelectedRow = null;
-    this.SelectedTable = null;
     this.SelectedRow = null;
     this.SelectedColor = "lightsteelblue";
     this.InitialColor = "";
   }
 
   // Checks if row belongs to the table.
-  // Used SelectedTAble IDif tableID is missing.
-  IsContainedRow(eTableRow, tableID = null)
+  IsContainedRow(eTableRow)
   {
     let retValue = false;
 
-    let process = true;
     eTableRow = this.DefaultRow(eTableRow);
-    if (eTableRow.tagName != "TR")
-    {
-      process = false;
-    }
+    let process = this.IsTRow(eTableRow);
 
     let tbody = null;
     if (process)
     {
       tbody = eTableRow.parentElement;
-      if (tbody.tagName != "TBODY")
-      {
-        process = false;
-      }
+      process = this.IsTBody(tbody);
     }
 
     let table = null;
     if (process)
     {
       table = tbody.parentElement;
-      if (table.tagName != "TABLE")
-      {
-        process = false;
-      }
+      process = this.IsTable(table);
     }
 
     if (process)
     {
-      tableID = this.DefaultTableID(tableID);
-      if (table.id == tableID)
+      if (table.id == this.Table.id)
       {
         retValue = true;
       }
@@ -64,57 +53,95 @@ class SelectTable
   {
     let retValue = false;
 
-    let tr = null;
-    let tbody = null;
-    let table = null;
-    let process = true;
-    if (element.tagName != "TD")
-    {
-      process = false;
-    }
+    let process = this.IsTData(element);
 
+    let tr = null;
     if (process)
     {
       // tr/td
       tr = element.parentElement;
-      if (tr.tagName != "TR")
-      {
-        process = false;
-      }
+      process = this.IsTRow(tr);
     }
 
+    let tbody = null;
+    let previousSelectedRow = this.SelectedRow;
+    let selectedRow = tr;
     if (process)
     {
       // table/tbody/tr
-      this.PreviousSelectedRow = this.SelectedRow;
-      this.SelectedRow = tr;
       tbody = tr.parentElement;
-      if (tbody.tagName != "TBODY")
-      {
-        process = false;
-      }
+      process = this.IsTBody(tbody);
     }
 
+    let table = null;
     if (process)
     {
       table = tbody.parentElement;
-      if (table.tagName != "TABLE")
-      {
-        process = false;
-      }
+      process = this.IsTable(table);
     }
 
     if (process)
     {
-      this.SelectedTable = table;
+      if (table.id == this.Table.id)
+      {
+        this.PreviousSelectedRow = previousSelectedRow;
+        this.SelectedRow = selectedRow;
+        retValue = true;
+      }
+    }
+    return retValue;
+  }
+
+  // 
+  IsTable(element)
+  {
+    let retValue = false;
+
+    if ("TABLE" == element.tagName)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // 
+  IsTRow(element)
+  {
+    let retValue = false;
+
+    if ("TR" == element.tagName)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // 
+  IsTBody(element)
+  {
+    let retValue = false;
+
+    if ("TBODY" == element.tagName)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // 
+  IsTData(element)
+  {
+    let retValue = false;
+
+    if ("TD" == element.tagName)
+    {
       retValue = true;
     }
     return retValue;
   }
 
   // Sets selected color.
-  // Used SelectedTAble IDif tableID is missing.
-  SelectRow(eTableRow = null, tableID = null)
+  SelectRow(eTableRow = null)
   {
     let process = true;
     eTableRow = this.DefaultRow(eTableRow);
@@ -125,8 +152,7 @@ class SelectTable
 
     if (process)
     {
-      tableID = this.DefaultTableID(tableID);
-      if (this.IsContainedRow(eTableRow, tableID))
+      if (this.IsContainedRow(eTableRow))
       {
         if (this.PreviousSelectedRow != null)
         {
@@ -145,21 +171,6 @@ class SelectTable
     if (null == tableRow)
     {
       retValue = this.SelectedRow;
-    }
-    return retValue;
-  }
-
-  // Gets current tableID if tableID is null and current ID is available.
-  DefaultTableID(tableID)
-  {
-    let retValue = tableID;
-
-    if (null == tableID)
-    {
-      if (this.SelectedTable != null)
-      {
-        retValue = this.SelectedTable.id;
-      }
     }
     return retValue;
   }
