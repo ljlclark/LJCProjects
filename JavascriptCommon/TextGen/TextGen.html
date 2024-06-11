@@ -19,6 +19,7 @@
   <script src="Script/RepeatItems.js"></script>
   <script src="Script/Replacements.js"></script>
   <script src="Script/Sections.js"></script>
+  <script src="Script/SelectTable.js"></script>
   <script src="Script/StringBuilder.js"></script>
   <script src="Script/TextData.js"></script>
   <script src="Script/TextGen.js"></script>
@@ -32,11 +33,11 @@
     <div class="hMenu"
          style="text-align:initial">
       <span id="data" class="hItem"
-            onclick="TextGenPage.ShowTabItems(dataLayout)">
+            onclick="TextGenEvent.ShowTabItems(dataLayout)">
         Data
       </span>
       <span id="generate" class="hItem"
-            onclick="TextGenPage.ShowTabItems(genLayout)">
+            onclick="TextGenEvent.ShowTabItems(genLayout)">
         Generate
       </span>
     </div>
@@ -113,6 +114,7 @@
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
+    gSelectTable = new SelectTable();
 
     tableData.innerHTML = TextGenEvent.CreateTable();
 

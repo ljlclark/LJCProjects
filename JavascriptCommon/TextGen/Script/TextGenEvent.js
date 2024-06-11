@@ -5,6 +5,7 @@
 // <script src="Script/RepeatItems.js"></script>
 // <script src="Script/Replacements.js"></script>
 // <script src="Script/Sections.js"></script>
+// <script src="Script/SelectTable.js"></script>
 // <script src="Script/StringBuilder.js"></script>
 // <script src="Script/TextData.js"></script>
 // <script src="Script/TextGen.js"></script>
@@ -54,7 +55,7 @@ class TextGenEvent
   static CreateTable()
   {
     let b = new StringBuilder();
-    b.Line("<table border='1' cellspacing='0'");
+    b.Line("<table id='sections' border='1' cellspacing='0'");
     b.Line("  style='background - color: aliceblue; width: 100%'>");
     b.Line("  <tr>");
     b.Line("    <th colspan='2'>Section</th>");
@@ -241,15 +242,27 @@ class TextGenEvent
         menu = LJC.Element("templateMenu");
         break;
     }
+
+    let process = true;
     if (menu != null)
     {
+      process = false;
       menu.style.top = `${event.pageY}px`;
       menu.style.left = `${event.pageX}px`;
       templateMenu.style.visibility = "visible";
     }
     if (url != null)
     {
+      process = false;
       window.open(url);
+    }
+
+    if (process)
+    {
+      if (gSelectTable.IsTableData(eItem))
+      {
+        gSelectTable.SelectRow(gSelectTable.SelectedRow)
+      }
     }
   }
 
@@ -280,7 +293,7 @@ class TextGenEvent
     }
     let cellPadding = 6;
     width -= cellPadding;
-    TextGenEvent.SetTextCols(null, width);
+    TextGenEvent.SetTextCols(event, width);
   }
 
   // Event handler to process the template and data.
