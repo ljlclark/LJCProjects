@@ -1,0 +1,33 @@
+/* Copyright(c) Lester J. Clark and Contributors.*/
+/* Licensed under the MIT License.*/
+/* SelectTable.css */
+
+/* <script src="Script/SelectTable.js"></script> */
+
+/* Class Selectors */
+
+.selectTable {
+  background-color: aliceblue;
+  border: 1px solid black;
+  border-collapse: collapse;
+  /* text-align: initial; */
+}
+
+.selectTD {
+  border: 1px solid black;
+  padding-left: 4px;
+}
+
+.selectTR {
+  border: 1px solid black;
+  padding-left: 4px;
+}
+
+.noSelectTR {
+  border: 1px solid black;
+  padding-left: 4px;
+}
+
+tr.selectTR:hover {
+  background-color: lightgray;
+}

@@ -35,7 +35,7 @@ class TextGenCode
               let begin = { Index: 0 }
               let value = LJC.DelimitedString(name, "_", "_", begin);
               b.Line();
-              b.Text(`${name}, ${value}`);
+              b.Text(`${name} ${value}`);
               break;
           }
         }
@@ -55,8 +55,8 @@ class TextGenCode
       {
         let item = items.Items(index);
         let b = new StringBuilder();
-        b.Line("  <tr>");
-        b.Line(`    <td>${item.Name}</td>`);
+        b.Line("  <tr class='selectTR'>");
+        b.Line(`    <td class='selectTD'>${item.Name}</td>`);
         b.Line("  </tr>");
         itemTable.innerHTML += b.ToString();
 
@@ -82,9 +82,9 @@ class TextGenCode
       {
         let replacement = replacements.Items(index);
         let b = new StringBuilder();
-        b.Line("  <tr>");
-        b.Line(`    <td>${replacement.Name}</td>`);
-        b.Line(`    <td>${replacement.Value}</td>`);
+        b.Line("  <tr class='noSelectTR'>");
+        b.Line(`    <td class='selectTD'>${replacement.Name}</td>`);
+        b.Line(`    <td class='selectTD'>${replacement.Value}</td>`);
         b.Line("  </tr>");
         replacementTable.innerHTML += b.ToString();
       }
@@ -108,8 +108,8 @@ class TextGenCode
       {
         let section = sections.Items(index);
         b = new StringBuilder();
-        b.Line("  <tr>");
-        b.Line(`    <td>${section.Name}</td>`);
+        b.Line("  <tr class='selectTR'>");
+        b.Line(`    <td class='selectTD'>${section.Name}</td>`);
         b.Line("  </tr>");
         sectionTable.innerHTML += b.ToString();
         

@@ -13,6 +13,7 @@
   <link rel="stylesheet" type="text/css" href="../CSS/Page.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TableLayout.css" />
   <link rel="stylesheet" type="text/css" href="../CSS/TextArea.css" />
+  <link rel="stylesheet" type="text/css" href="CSS/SelectTable.css" />
   <link rel="stylesheet" type="text/css" href="CSS/TextGen.css" />
   <script src="../ArgError.js"></script>
   <script src="../LJCCommon.js"></script>
@@ -43,7 +44,7 @@
       </span>
     </div>
     <!--  -->
-    <!-- Data Table Layout -->
+    <!-- Data Layout -->
     <div id="dataLayout" class="table">
       <div class="row">
         <div class="firstCell">
@@ -69,7 +70,7 @@
       </div>
     </div>
     <!--  -->
-    <!-- Generate Table Layout -->
+    <!-- Generate Layout -->
     <div id="genLayout" class="table">
       <div class="row">
         <div class="firstCell">
@@ -84,14 +85,17 @@
       <div class="row">
         <div class="firstCell">
           <div id="tableData">
-            <table id='sectionTable' border='1' cellspacing='0'
-                   style='background-color: aliceblue; width: 100%'>
+            <table id="sectionTable"
+                   class="selectTable"
+                   style="width: 100%">
             </table>;
-            <table id='itemTable' border='1' cellspacing='0'
-                   style='background-color: aliceblue; width: 100%'>
+            <table id='itemTable'
+                   class="selectTable"
+                   style="width: 100%">
             </table>;
-            <table id='replacementTable' border='1' cellspacing='0'
-                   style='background-color: aliceblue; width: 100%'>
+            <table id='replacementTable'
+                   class="selectTable"
+                   style="width: 100%">
             </table>;
           </div>
         </div>
