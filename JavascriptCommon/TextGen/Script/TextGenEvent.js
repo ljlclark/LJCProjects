@@ -113,7 +113,7 @@ class TextGenEvent
         itemClick = false;
         TextGenCode.ShowTabItems(genLayout);
         gSections = TextGenCode.CreateSections();
-        TextGenCode.CreateSectionTables();
+        TextGenCode.CreateSectionRows(gSections);
         break;
 
       case "genOutput":

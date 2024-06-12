@@ -8,8 +8,48 @@
 // <script src="Script/Sections.js"></script>
 
 // Generate output text from a template and data.
-class TextGen
+class TextGenLib
 {
+
+  // 
+  static HasItems(items)
+  {
+    let retValue = false;
+
+    if (items != null
+      && items.Count() > 0)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // 
+  static HasReplacements(replacements)
+  {
+    let retValue = false;
+
+    if (replacements != null
+      && replacements.Count() > 0)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // 
+  static HasSections(sections)
+  {
+    let retValue = false;
+
+    if (sections != null
+      && sections.Count() > 0)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
   // The Constructor function.
   constructor()
   {
@@ -24,7 +64,7 @@ class TextGen
   {
     let retValue = "";
 
-    this.Err.SetContext("TextGen.TextGen(sections, lines)");
+    this.Err.SetContext("TextGenLib.TextGen(sections, lines)");
     this.Err.IsCollection(sections, "sections");
     this.Err.IsArray(templateLines, "templateLines");
     this.Err.ShowError();
@@ -53,7 +93,7 @@ class TextGen
   // Process the RepeatItems.
   ProcessItems(section, lineIndex)
   {
-    this.Err.SetContext("TextGen.ProcessItems(section, lineIndex)");
+    this.Err.SetContext("TextGenLib.ProcessItems(section, lineIndex)");
     this.Err.IsValue(section, "section");
     this.Err.IsCollection(section.RepeatItems, "section.RepeatItems");
     this.Err.IsValue(lineIndex.Value, "lineIndex.Value");
@@ -84,7 +124,7 @@ class TextGen
   // Perform the line replacements.
   DoReplacements(item, lineItem)
   {
-    this.Err.SetContext("TextGen.DoReplacements(item, lineItem)");
+    this.Err.SetContext("TextGenLib.DoReplacements(item, lineItem)");
     this.Err.IsValue(item, "item");
     this.Err.IsCollection(item.Replacements, "item.Replacements");
     this.Err.IsValue(lineItem.Value, "lineItem.Value");
@@ -118,7 +158,7 @@ class TextGen
   // Add the line to the output.
   AddOutput(line)
   {
-    this.Err.SetContext("TextGen.AddOutput(line)");
+    this.Err.SetContext("TextGenLib.AddOutput(line)");
     this.Err.IsValue(line, "line");
     this.Err.ShowError();
 
@@ -134,7 +174,7 @@ class TextGen
   {
     let retValue = false;
 
-    this.Err.SetContext("TextGen.IsSectionBegin(line, sectionItem)");
+    this.Err.SetContext("TextGenLib.IsSectionBegin(line, sectionItem)");
     this.Err.IsValue(line, "line");
     this.Err.IsValue(sectionItem.Value, "sectionItem.Value");
     this.Err.ShowError();

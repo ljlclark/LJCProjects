@@ -45,58 +45,86 @@ class TextGenCode
   }
 
   // Creates a table from the RepeatItems object.
-  static CreateItemRows()
+  static CreateItemRows(section)
   {
-    let b = new StringBuilder();
-    b.Line("  <tr>");
-    b.Line("    <th colspan='2'>Item</th>");
-    b.Line("  </tr>");
-    b.Line("  <tr>");
-    b.Line("    <td>Item1</td>");
-    b.Line("  </tr>");
-    return b.ToString();
+    let items = section.RepeatItems;
+    if (TextGenLib.HasItems(items))
+    {
+      // Data Rows
+      for (let index = 0; index < items.Count(); index++)
+      {
+        let item = items.Items(index);
+        let b = new StringBuilder();
+        b.Line("  <tr>");
+        b.Line(`    <td>${item.Name}</td>`);
+        b.Line("  </tr>");
+        itemTable.innerHTML += b.ToString();
+
+        // Replacement Heading Row
+        b = new StringBuilder();
+        b.Line("  <tr>");
+        b.Line("    <th colspan='2'>Replacement</th>");
+        b.Line("  </tr>");
+        replacementTable.innerHTML = b.ToString();
+        TextGenCode.CreateReplacementRows(item);
+      }
+    }
   }
 
   // Creates a table from the Replacements object.
-  static CreateReplacementRows()
+  static CreateReplacementRows(item)
   {
-    let b = new StringBuilder();
-    b.Line("  <tr>");
-    b.Line("    <th colspan='2'>Replacement</th>");
-    b.Line("  </tr>");
-    b.Line("  <tr>");
-    b.Line("    <td>_ClassName_</td>");
-    b.Line("    <td>GenItem</td>");
-    b.Line("  </tr>");
-    b.Line("  <tr>");
-    b.Line("    <td>_CollectionName_</td>");
-    b.Line("    <td>GenItems</td>");
-    b.Line("  </tr>");
-    return b.ToString();
+    let replacements = item.Replacements;
+    if (TextGenLib.HasReplacements(replacements))
+    {
+      // Data Rows
+      for (let index = 0; index < replacements.Count(); index++)
+      {
+        let replacement = replacements.Items(index);
+        let b = new StringBuilder();
+        b.Line("  <tr>");
+        b.Line(`    <td>${replacement.Name}</td>`);
+        b.Line(`    <td>${replacement.Value}</td>`);
+        b.Line("  </tr>");
+        replacementTable.innerHTML += b.ToString();
+      }
+    }
   }
 
   // Creates a table from the Sections object.
-  static CreateSectionRows()
+  static CreateSectionRows(sections)
   {
-    let b = new StringBuilder();
-    b.Line("  <tr>");
-    b.Line("    <th colspan='2'>Section</th>");
-    b.Line("  </tr>");
-    b.Line("  <tr>");
-    b.Line("    <td>Main</td>");
-    b.Line("  </tr>");
-    return b.ToString();
+    if (TextGenLib.HasSections(sections))
+    {
+      // Heading Row
+      let b = new StringBuilder();
+      b.Line("  <tr>");
+      b.Line("    <th colspan='2'>Sections</th>");
+      b.Line("  </tr>");
+      sectionTable.innerHTML = b.ToString();
+
+      // Data Rows
+      for (let index = 0; index < sections.Count(); index++)
+      {
+        let section = sections.Items(index);
+        b = new StringBuilder();
+        b.Line("  <tr>");
+        b.Line(`    <td>${section.Name}</td>`);
+        b.Line("  </tr>");
+        sectionTable.innerHTML += b.ToString();
+        
+        // Item Heading Row
+        b = new StringBuilder();
+        b.Line("  <tr>");
+        b.Line("    <th colspan='2'>Item</th>");
+        b.Line("  </tr>");
+        itemTable.innerHTML = b.ToString();
+        TextGenCode.CreateItemRows(section);
+      }
+    }
   }
 
-  // 
-  static CreateSectionTables()
-  {
-    section.innerHTML = TextGenCode.CreateSectionRows();
-    item.innerHTML = TextGenCode.CreateItemRows();
-    replacement.innerHTML = TextGenCode.CreateReplacementRows();
-  }
-
-  // 
+  // Create Sections object from Text Data.
   static CreateSections()
   {
     let sections = null;
@@ -160,9 +188,9 @@ class TextGenCode
   {
     let templateText = template.value;
     let lines = templateText.split("\n");
-    let textGen = new TextGen();
-    textGen.TextGen(gSections, lines);
-    output.value = textGen.Output;
+    let textGenLib = new TextGenLib();
+    textGenLib.TextGen(gSections, lines);
+    output.value = textGenLib.Output;
     LJC.SetTextRows(output);
   }
 

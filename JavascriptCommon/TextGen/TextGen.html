@@ -84,13 +84,13 @@
       <div class="row">
         <div class="firstCell">
           <div id="tableData">
-            <table id='section' border='1' cellspacing='0'
+            <table id='sectionTable' border='1' cellspacing='0'
                    style='background-color: aliceblue; width: 100%'>
             </table>;
-            <table id='item' border='1' cellspacing='0'
+            <table id='itemTable' border='1' cellspacing='0'
                    style='background-color: aliceblue; width: 100%'>
             </table>;
-            <table id='replacement' border='1' cellspacing='0'
+            <table id='replacementTable' border='1' cellspacing='0'
                    style='background-color: aliceblue; width: 100%'>
             </table>;
           </div>
@@ -129,8 +129,8 @@
     gDataDisplay = "none";
     gGenDisplay = "none";
     gSections = null;
-    gSectionTable = new SelectTable(section);
-    gItemTable = new SelectTable(item);
+    gSectionTable = new SelectTable(sectionTable);
+    gItemTable = new SelectTable(itemTable);
 
     TextGenEvent.SetEvents();
     TextGenEvent.PageTextCols();
