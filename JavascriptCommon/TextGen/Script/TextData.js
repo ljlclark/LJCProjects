@@ -53,17 +53,17 @@ class TextData
   }
 
   // Creates the Sections Data
-  static SectionsData()
-  {
-    let retValue = new Sections();
-    let section = retValue.Add("Main");
+//  static SectionsData()
+//  {
+//    let retValue = new Sections();
+//    let section = retValue.Add("Main");
 
-    let repeatItems = section.RepeatItems;
-    let repeatItem = repeatItems.Add("First");
+//    let repeatItems = section.RepeatItems;
+//    let repeatItem = repeatItems.Add("First");
 
-    let replacements = repeatItem.Replacements;
-    replacements.Add("_CollectionName_", "GenItems")
-    replacements.Add("_ClassName_", "GenItem")
-    return retValue;
-  }
+//    let replacements = repeatItem.Replacements;
+//    replacements.Add("_CollectionName_", "GenItems")
+//    replacements.Add("_ClassName_", "GenItem")
+//    return retValue;
+//  }
 }

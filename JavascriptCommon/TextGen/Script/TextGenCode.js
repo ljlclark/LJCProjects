@@ -28,13 +28,14 @@ class TextGenCode
           {
             case "#sectionbegin":
               b.Line(`Section: ${name}`);
-              b.Line("Item: Item1");
+              b.Text("Item: Item1");
               break;
 
             case "#value":
               let begin = { Index: 0 }
               let value = LJC.DelimitedString(name, "_", "_", begin);
-              b.Line(`${name}, ${value}`);
+              b.Line();
+              b.Text(`${name}, ${value}`);
               break;
           }
         }
@@ -87,14 +88,80 @@ class TextGenCode
     return b.ToString();
   }
 
+  // 
+  static CreateSectionTables()
+  {
+    section.innerHTML = TextGenCode.CreateSectionRows();
+    item.innerHTML = TextGenCode.CreateItemRows();
+    replacement.innerHTML = TextGenCode.CreateReplacementRows();
+  }
+
+  // 
+  static CreateSections()
+  {
+    let sections = null;
+    let success = true;
+    let data = textData.value;
+    if (null == data)
+    {
+      success = false;
+    }
+
+    let lines = null;
+    if (success)
+    {
+      lines = data.split("\n");
+      if (null == lines)
+      {
+        success = false;
+      }
+    }
+
+    if (success)
+    {
+      sections = new Sections();
+      let section = null;
+      let item = null;
+      let name = null;
+
+      for (let index = 0; index < lines.length; index++)
+      {
+        let line = lines[index];
+        let tokens = line.split(" ");
+        if (tokens.length > 1)
+        {
+          let type = tokens[0];
+          switch (type.toLowerCase())
+          {
+            case "section:":
+              name = tokens[1];
+              section = sections.Add(name);
+              break;
+
+            case "item:":
+              name = tokens[1];
+              item = section.RepeatItems.Add(name)
+              break;
+
+            default:
+              let replacement = tokens[0];
+              let value = tokens[1];
+              item.Replacements.Add(replacement, value);
+              break;
+          }
+        }
+      }
+      return sections;
+    }
+  }
+
   // Event handler to process the template and data.
   static Process()
   {
     let templateText = template.value;
-    let sections = TextData.SectionsData();
     let lines = templateText.split("\n");
     let textGen = new TextGen();
-    textGen.TextGen(sections, lines);
+    textGen.TextGen(gSections, lines);
     output.value = textGen.Output;
     LJC.SetTextRows(output);
   }

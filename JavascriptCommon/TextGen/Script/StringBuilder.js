@@ -13,14 +13,22 @@ class StringBuilder
   // 
   Text(text)
   {
-    text = text.replaceAll("\'", "\"")
+    if (text != null)
+    {
+      text = text.replaceAll("\'", "\"")
+    }
     this.Output += text;
   }
 
   // 
   Line(text)
   {
-    this.Text(`${text}\r\n`);
+    if (null == text)
+    {
+      text = "";
+    }
+    text += "\r\n"
+    this.Text(`${text}`);
   }
 
   // 

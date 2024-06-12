@@ -19,10 +19,10 @@
   <script src="Script/RepeatItems.js"></script>
   <script src="Script/Replacements.js"></script>
   <script src="Script/Sections.js"></script>
+  <script src="Script/TextGenLib.js"></script>
   <script src="Script/SelectTable.js"></script>
   <script src="Script/StringBuilder.js"></script>
   <script src="Script/TextData.js"></script>
-  <script src="Script/TextGen.js"></script>
   <script src="Script/TextGenCode.js"></script>
   <script src="Script/TextGenEvent.js"></script>
 </head>
@@ -128,9 +128,7 @@
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
-    section.innerHTML = TextGenCode.CreateSectionRows();
-    item.innerHTML = TextGenCode.CreateItemRows();
-    replacement.innerHTML = TextGenCode.CreateReplacementRows();
+    gSections = null;
     gSectionTable = new SelectTable(section);
     gItemTable = new SelectTable(item);
 

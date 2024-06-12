@@ -112,6 +112,8 @@ class TextGenEvent
       case "generateTab":
         itemClick = false;
         TextGenCode.ShowTabItems(genLayout);
+        gSections = TextGenCode.CreateSections();
+        TextGenCode.CreateSectionTables();
         break;
 
       case "genOutput":
