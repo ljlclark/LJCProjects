@@ -23,7 +23,6 @@
   <script src="Script/TextGenLib.js"></script>
   <script src="Script/SelectTable.js"></script>
   <script src="Script/StringBuilder.js"></script>
-  <script src="Script/TextData.js"></script>
   <script src="Script/TextGenCode.js"></script>
   <script src="Script/TextGenEvent.js"></script>
 </head>
@@ -128,11 +127,12 @@
     <div><hr /></div>
     <div id="createData">Create Data</div>
   </div>
-
   <script>
     gDataDisplay = "none";
     gGenDisplay = "none";
     gSections = null;
+
+    // Placeholders
     gSectionTable = new SelectTable(sectionTable);
     gItemTable = new SelectTable(itemTable);
 

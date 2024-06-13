@@ -5,9 +5,7 @@
 // <script src="Script/RepeatItems.js"></script>
 // <script src="Script/Replacements.js"></script>
 // <script src="Script/Sections.js"></script>
-// <script src="Script/SelectTable.js"></script>
 // <script src="Script/StringBuilder.js"></script>
-// <script src="Script/TextData.js"></script>
 // <script src="Script/TextGen.js"></script>
 // <script src="Script/TextGenCode.js"></script>
 
@@ -25,9 +23,6 @@ class TextGenEvent
     addEventListener("click", TextGenEvent.DocumentClick);
     addEventListener("mouseover", TextGenEvent.MouseOver)
     addEventListener("mouseout", TextGenEvent.MouseOut)
-
-    //sectionTable.addEventListener("click", gSectionTable.Click.bind(gSectionTable));
-    //itemTable.addEventListener("click", gItemTable.Click.bind(gItemTable));
 
     // textarea elements
     template.addEventListener("keyup", LJC.EventTextRows);
@@ -71,96 +66,58 @@ class TextGenEvent
     let eItem = event.target;
     tableDataMenu.style.visibility = "hidden";
     templateMenu.style.visibility = "hidden";
-    //let itemClick = true;
     let menu = null;
     let url = null;
     switch (eItem.id)
     {
       case "cColl":
-        //itemClick = false;
         url = `${base}${cBase}${c}/CollectionTemplate.cs`;
         window.open(url);
         break;
 
       case "cDO":
-        //itemClick = false;
         url = `${base}${cBase}${c}/DataTemplate.cs`;
         window.open(url);
         break;
 
       case "jsColl":
-        //itemClick = false;
         url = `${base}${cBase}${js}/ItemsTemplate.js`;
         window.open(url);
         break;
 
       case "jsDO":
-        //itemClick = false;
         url = `${base}${cBase}${js}/ItemTemplate.js`;
         window.open(url);
         break;
 
       case "createData":
-        //itemClick = false;
         textData.value = TextGenCode.CreateData(template.value);
         LJC.SetTextRows(textData);
         TextGenEvent.PageTextCols();
         break;
 
       case "dataTab":
-        //itemClick = false;
         TextGenCode.ShowTabItems(dataLayout);
         break;
 
       case "generateTab":
-        //itemClick = false;
         TextGenCode.ShowTabItems(genLayout);
         gSections = TextGenCode.CreateSections();
         TextGenCode.CreateSectionRows(gSections);
         break;
 
       case "genOutput":
-        //itemClick = false;
         TextGenCode.Process();
         break;
 
       case "templateOptions":
-        //itemClick = false;
         menu = LJC.Element("templateMenu");
         TextGenEvent.ShowMenu(event, menu);
         break;
 
       case "generateOptions":
-        //itemClick = false;
         menu = LJC.Element("tableDataMenu");
         TextGenEvent.ShowMenu(event, menu);
-        break;
-    }
-
-  //  if (itemClick)
-  //  {
-  //    // Sets SelectedRow if gSectionTable.
-  //    if (!gSectionTable.TableClick(event))
-  //    {
-  //      // Sets SelectedRow if gItemTable.
-  //      gItemTable.TableClick(event);
-  //    }
-  //  }
-  }
-
-  // Handles the Table "click" event.
-  static TableClick(event)
-  {
-    let eTarget = event.target;
-    let table = SelectTable.GetTable(eTarget);
-    switch (table.id)
-    {
-      case "sectionTable":
-        gSectionTable.TableClick(eTarget);
-        break;
-
-      case "itemTable":
-        gItemTable.TableClick(eTarget);
         break;
     }
   }

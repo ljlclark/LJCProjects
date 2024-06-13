@@ -157,33 +157,8 @@ class SelectTable
     return retValue;
   }
 
-  // Checks if row belongs to the table.
-  IsContainedRow(eRow)
-  {
-    let retValue = false;
-
-    let process = SelectTable.IsTRow(eRow);
-    let table = null;
-    if (process)
-    {
-      table = SelectTable.GetRowTable(eRow);
-      if (null == table)
-      {
-        process = false;
-      }
-    }
-
-    if (process)
-    {
-      if (table.id == this.Table.id)
-      {
-        retValue = true;
-      }
-    }
-    return retValue;
-  }
-
-  // Selects the table row element if element is a table data element.
+  // Selects the table row element if element is a table data element
+  // and matches the contained Table element..
   IsTableData(eTarget)
   {
     let retValue = false;
@@ -211,12 +186,6 @@ class SelectTable
     let success = true;
     eRow = this.DefaultRow(eRow);
     if (eRow.tagName != "TR")
-    {
-      success = false;
-    }
-
-    if (success
-      && !this.IsContainedRow(eRow))
     {
       success = false;
     }
