@@ -5,7 +5,7 @@
 // Represents a select capable HTML table.
 class SelectTable
 {
-  // Gets the rows parent table.
+  // Gets the row parent table.
   static GetRowTable(eRow)
   {
     let retValue = null;
@@ -37,15 +37,10 @@ class SelectTable
   {
     let retValue = null;
 
-    let success = SelectTable.IsTData(eTarget);
-    let row = null;
-    if (success)
+    let row = SelectTable.GetTableRow(eTarget);
+    if (row != null)
     {
-      row = SelectTable.GetTableRow(eTarget);
-      if (row != null)
-      {
-        retValue = SelectTable.GetRowTable(row);
-      }
+      retValue = SelectTable.GetRowTable(row);
     }
     return retValue;
   }
@@ -120,7 +115,6 @@ class SelectTable
   constructor(eTable)
   {
     this.Table = eTable;
-
     this.PreviousSelectedRow = null;
     this.SelectedRow = null;
     this.SelectedColor = "lightsteelblue";
@@ -134,32 +128,13 @@ class SelectTable
   // Selects the clicked row.
   Click(event)
   {
-    let eTarget = event.target;
-
-    // Sets SelectedRow if row belongs to this table.
-    if (this.IsTableData(eTarget))
-    {
-      this.SetSelectColors();
-    }
+    this.SelectRow(event.target);
   }
 
   // Functions
 
-  // Gets current table row if tableRow is null and current row is available.
-  DefaultRow(tableRow = null)
-  {
-    let retValue = tableRow;
-
-    if (null == tableRow)
-    {
-      retValue = this.SelectedRow;
-    }
-    return retValue;
-  }
-
-  // Selects the table row element if element is a table data element
-  // and matches the contained Table element..
-  IsTableData(eTarget)
+  // Selects the row if in the contained Table element.
+  SelectRow(eTarget)
   {
     let retValue = false;
 
@@ -173,6 +148,7 @@ class SelectTable
         {
           this.PreviousSelectedRow = this.SelectedRow;
           this.SelectedRow = row;
+          this.SetSelectColors(this.SelectedRow);
         }
         retValue = true;
       }
@@ -181,11 +157,10 @@ class SelectTable
   }
 
   // Sets selected color.
-  SetSelectColors(eRow = null)
+  SetSelectColors(eRow)
   {
     let success = true;
-    eRow = this.DefaultRow(eRow);
-    if (eRow.tagName != "TR")
+    if (!SelectTable.IsTRow(eRow))
     {
       success = false;
     }

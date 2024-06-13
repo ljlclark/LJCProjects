@@ -19,10 +19,9 @@ class TextGenEvent
     window.addEventListener("resize", TextGenEvent.PageTextCols);
 
     // document event handlers.
-    //addEventListener("contextmenu", TextGenEvent.ContextMenu);
     addEventListener("click", TextGenEvent.DocumentClick);
-    addEventListener("mouseover", TextGenEvent.MouseOver)
-    addEventListener("mouseout", TextGenEvent.MouseOut)
+    addEventListener("mouseover", TextGenEvent.DocumentMouseOver)
+    addEventListener("mouseout", TextGenEvent.DocumentMouseOut)
 
     // textarea elements
     template.addEventListener("keyup", LJC.EventTextRows);
@@ -32,28 +31,6 @@ class TextGenEvent
   }
 
   // Actions
-
-  // Handles the Document "contextmenu" event.
-  static ContextMenu(event)
-  {
-    let eItem = event.target;
-
-    let menu = null;
-    switch (eItem.id)
-    {
-      case "templateMenuShow":
-        menu = LJC.Element("templateMenu");
-        break;
-    }
-
-    if (menu != null)
-    {
-      event.preventDefault();
-      menu.style.top = `${event.pageY}px`;
-      menu.style.left = `${event.pageX}px`;
-      templateMenu.style.visibility = "visible";
-    }
-  }
 
   // Handles the Document "click" event.
   static DocumentClick(event)
@@ -66,80 +43,85 @@ class TextGenEvent
     let eItem = event.target;
     tableDataMenu.style.visibility = "hidden";
     templateMenu.style.visibility = "hidden";
-    let menu = null;
-    let url = null;
+
+    // Tabs
+    let success = false;;
     switch (eItem.id)
     {
-      case "cColl":
-        url = `${base}${cBase}${c}/CollectionTemplate.cs`;
-        window.open(url);
-        break;
-
-      case "cDO":
-        url = `${base}${cBase}${c}/DataTemplate.cs`;
-        window.open(url);
-        break;
-
-      case "jsColl":
-        url = `${base}${cBase}${js}/ItemsTemplate.js`;
-        window.open(url);
-        break;
-
-      case "jsDO":
-        url = `${base}${cBase}${js}/ItemTemplate.js`;
-        window.open(url);
-        break;
-
-      case "createData":
-        textData.value = TextGenCode.CreateData(template.value);
-        LJC.SetTextRows(textData);
-        TextGenEvent.PageTextCols();
-        break;
-
       case "dataTab":
+        success = true;
         TextGenCode.ShowTabItems(dataLayout);
         break;
 
       case "generateTab":
+        success = true;
         TextGenCode.ShowTabItems(genLayout);
         gSections = TextGenCode.CreateSections();
         TextGenCode.CreateSectionRows(gSections);
         break;
+    }
 
-      case "genOutput":
-        TextGenCode.Process();
-        break;
+    // Show Menus
+    if (!success)
+    {
+      //let menu = null;
+      switch (eItem.id)
+      {
+        case "templateOptions":
+          success = true;
+          TextGenEvent.ShowMenu(event, templateMenu);
+          break;
 
-      case "templateOptions":
-        menu = LJC.Element("templateMenu");
-        TextGenEvent.ShowMenu(event, menu);
-        break;
+        case "generateOptions":
+          success = true;
+          TextGenEvent.ShowMenu(event, tableDataMenu);
+          break;
+      }
+    }
 
-      case "generateOptions":
-        menu = LJC.Element("tableDataMenu");
-        TextGenEvent.ShowMenu(event, menu);
-        break;
+    // Menu Items
+    if (!success)
+    {
+      let url = null;
+      switch (eItem.id)
+      {
+        case "cColl":
+          url = `${base}${cBase}${c}/CollectionTemplate.cs`;
+          window.open(url);
+          break;
+
+        case "cDO":
+          url = `${base}${cBase}${c}/DataTemplate.cs`;
+          window.open(url);
+          break;
+
+        case "jsColl":
+          url = `${base}${cBase}${js}/ItemsTemplate.js`;
+          window.open(url);
+          break;
+
+        case "jsDO":
+          url = `${base}${cBase}${js}/ItemTemplate.js`;
+          window.open(url);
+          break;
+
+        case "createData":
+          textData.value = TextGenCode.CreateData(template.value);
+          LJC.SetTextRows(textData);
+          TextGenEvent.PageTextCols();
+          break;
+
+        case "genOutput":
+          TextGenCode.Process();
+          break;
+      }
     }
   }
 
   // Other Events
 
-  // Set the Form textarea coluns.
-  static FormTextCols(event = null, width = null)
-  {
-    // Calculate available width for textarea elements.
-    if (null == width)
-    {
-      let css = getComputedStyle(form, "width");
-      width = parseInt(css.width, 10);
-    }
-    let cellPadding = 6;
-    width -= cellPadding;
-    TextGenEvent.SetTextCols(null, width);
-  }
-
   // Handles the Document "mouseout" event.
-  static MouseOut(event)
+  static DocumentMouseOut(event)
   {
     const layoutColor = "lightblue";
     const menuColor = "lightsteelblue";
@@ -174,14 +156,14 @@ class TextGenEvent
   }
 
   // Handles the Document "mouseover" event.
-  static MouseOver(event)
+  static DocumentMouseOver(event)
   {
     const overColor = "aliceblue";
 
     let eItem = event.target;
     switch (eItem.id)
     {
-      case "dataTabs":
+      case "dataTab":
         if ("none" == gDataDisplay)
         {
           eItem.style.backgroundColor = overColor;
@@ -203,6 +185,20 @@ class TextGenEvent
         eItem.style.backgroundColor = "aliceblue";
         break;
     }
+  }
+
+  // Set the Form textarea coluns.
+  static FormTextCols(event = null, width = null)
+  {
+    // Calculate available width for textarea elements.
+    if (null == width)
+    {
+      let css = getComputedStyle(form, "width");
+      width = parseInt(css.width, 10);
+    }
+    let cellPadding = 6;
+    width -= cellPadding;
+    TextGenEvent.SetTextCols(null, width);
   }
 
   // Set the Page textarea coluns.
