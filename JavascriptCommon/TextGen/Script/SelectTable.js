@@ -2,98 +2,74 @@
 // Licensed under the MIT License.
 // SelectTable.js
 
-// Contains CityList event handlers.
+// Represents a select capable HTML table.
 class SelectTable
 {
-  // The Constructor function.
-  constructor(eTable)
+  // Gets the rows parent table.
+  static GetRowTable(eRow)
   {
-    this.Table = eTable;
+    let retValue = null;
 
-    this.PreviousSelectedRow = null;
-    this.SelectedRow = null;
-    this.SelectedColor = "lightsteelblue";
-    this.InitialColor = "";
-  }
-
-  // Checks if row belongs to the table.
-  IsContainedRow(eTableRow)
-  {
-    let retValue = false;
-
-    eTableRow = this.DefaultRow(eTableRow);
-    let process = this.IsTRow(eTableRow);
-
+    let success = SelectTable.IsTRow(eRow);
     let tbody = null;
-    if (process)
-    {
-      tbody = eTableRow.parentElement;
-      process = this.IsTBody(tbody);
-    }
-
-    let table = null;
-    if (process)
-    {
-      table = tbody.parentElement;
-      process = this.IsTable(table);
-    }
-
-    if (process)
-    {
-      if (table.id == this.Table.id)
-      {
-        retValue = true;
-      }
-    }
-    return retValue;
-  }
-
-  // Gets the table row element if element is a table data element.
-  IsTableData(element)
-  {
-    let retValue = false;
-
-    let process = this.IsTData(element);
-
-    let tr = null;
-    if (process)
-    {
-      // tr/td
-      tr = element.parentElement;
-      process = this.IsTRow(tr);
-    }
-
-    let tbody = null;
-    let previousSelectedRow = this.SelectedRow;
-    let selectedRow = tr;
-    if (process)
+    if (success)
     {
       // table/tbody/tr
-      tbody = tr.parentElement;
-      process = this.IsTBody(tbody);
+      tbody = eRow.parentElement;
+      success = SelectTable.IsTBody(tbody);
     }
 
     let table = null;
-    if (process)
+    if (success)
     {
+      // table/tbody
       table = tbody.parentElement;
-      process = this.IsTable(table);
-    }
-
-    if (process)
-    {
-      if (table.id == this.Table.id)
+      if (SelectTable.IsTable(table))
       {
-        this.PreviousSelectedRow = previousSelectedRow;
-        this.SelectedRow = selectedRow;
-        retValue = true;
+        retValue = table;
       }
     }
     return retValue;
   }
 
-  // 
-  IsTable(element)
+  // Gets parent table if target is TD.
+  static GetTable(eTarget)
+  {
+    let retValue = null;
+
+    let success = SelectTable.IsTData(eTarget);
+    let row = null;
+    if (success)
+    {
+      row = SelectTable.GetTableRow(eTarget);
+      if (row != null)
+      {
+        retValue = SelectTable.GetRowTable(row);
+      }
+    }
+    return retValue;
+  }
+
+  // Gets parent row if target is TD.
+  static GetTableRow(eTarget)
+  {
+    let retValue = null;
+
+    let success = SelectTable.IsTData(eTarget);
+    if (success)
+    {
+      // tr/td
+      let row = eTarget.parentElement;
+      if (SelectTable.IsTRow(row))
+      {
+        retValue = row;
+      }
+    }
+    return retValue;
+  }
+
+  // Checks if element is a table element.
+  static IsTable(element)
   {
     let retValue = false;
 
@@ -104,20 +80,8 @@ class SelectTable
     return retValue;
   }
 
-  // 
-  IsTRow(element)
-  {
-    let retValue = false;
-
-    if ("TR" == element.tagName)
-    {
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // 
-  IsTBody(element)
+  // Checks if element is a table body element.
+  static IsTBody(element)
   {
     let retValue = false;
 
@@ -128,8 +92,8 @@ class SelectTable
     return retValue;
   }
 
-  // 
-  IsTData(element)
+  // Checks if element is a table data element.
+  static IsTData(element)
   {
     let retValue = false;
 
@@ -140,31 +104,49 @@ class SelectTable
     return retValue;
   }
 
-  // Sets selected color.
-  SelectRow(eTableRow = null)
+  // Checks if element is a table row element.
+  static IsTRow(element)
   {
-    let process = true;
-    eTableRow = this.DefaultRow(eTableRow);
-    if (eTableRow.tagName != "TR")
-    {
-      process = false;
-    }
+    let retValue = false;
 
-    if (process)
+    if ("TR" == element.tagName)
     {
-      if (this.IsContainedRow(eTableRow))
-      {
-        if (this.PreviousSelectedRow != null)
-        {
-          this.PreviousSelectedRow.style.backgroundColor = this.InitialColor;
-        }
-        eTableRow.style.backgroundColor = this.SelectedColor;
-      }
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // The Constructor function.
+  constructor(eTable)
+  {
+    this.Table = eTable;
+
+    this.PreviousSelectedRow = null;
+    this.SelectedRow = null;
+    this.SelectedColor = "lightsteelblue";
+    this.InitialColor = ""
+
+    this.Table.addEventListener("click", this.Click.bind(this));
+  }
+
+  // Event Handlers
+
+  // Selects the clicked row.
+  Click(event)
+  {
+    let eTarget = event.target;
+
+    // Sets SelectedRow if row belongs to this table.
+    if (this.IsTableData(eTarget))
+    {
+      this.SetSelectColors();
     }
   }
 
+  // Functions
+
   // Gets current table row if tableRow is null and current row is available.
-  DefaultRow(tableRow)
+  DefaultRow(tableRow = null)
   {
     let retValue = tableRow;
 
@@ -173,5 +155,79 @@ class SelectTable
       retValue = this.SelectedRow;
     }
     return retValue;
+  }
+
+  // Checks if row belongs to the table.
+  IsContainedRow(eRow)
+  {
+    let retValue = false;
+
+    let process = SelectTable.IsTRow(eRow);
+    let table = null;
+    if (process)
+    {
+      table = SelectTable.GetRowTable(eRow);
+      if (null == table)
+      {
+        process = false;
+      }
+    }
+
+    if (process)
+    {
+      if (table.id == this.Table.id)
+      {
+        retValue = true;
+      }
+    }
+    return retValue;
+  }
+
+  // Selects the table row element if element is a table data element.
+  IsTableData(eTarget)
+  {
+    let retValue = false;
+
+    let table = SelectTable.GetTable(eTarget);
+    if (table != null)
+    {
+      if (table.id == this.Table.id)
+      {
+        let row = SelectTable.GetTableRow(eTarget);
+        if (row != null)
+        {
+          this.PreviousSelectedRow = this.SelectedRow;
+          this.SelectedRow = row;
+        }
+        retValue = true;
+      }
+    }
+    return retValue;
+  }
+
+  // Sets selected color.
+  SetSelectColors(eRow = null)
+  {
+    let success = true;
+    eRow = this.DefaultRow(eRow);
+    if (eRow.tagName != "TR")
+    {
+      success = false;
+    }
+
+    if (success
+      && !this.IsContainedRow(eRow))
+    {
+      success = false;
+    }
+
+    if (success)
+    {
+      if (this.PreviousSelectedRow != null)
+      {
+        this.PreviousSelectedRow.style.backgroundColor = this.InitialColor;
+      }
+      eRow.style.backgroundColor = this.SelectedColor;
+    }
   }
 }

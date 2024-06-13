@@ -22,11 +22,14 @@ class TextGenEvent
 
     // document event handlers.
     //addEventListener("contextmenu", TextGenEvent.ContextMenu);
-    document.addEventListener("click", TextGenEvent.DocumentClick);
+    addEventListener("click", TextGenEvent.DocumentClick);
     addEventListener("mouseover", TextGenEvent.MouseOver)
     addEventListener("mouseout", TextGenEvent.MouseOut)
 
-    // textarea elemnts
+    //sectionTable.addEventListener("click", gSectionTable.Click.bind(gSectionTable));
+    //itemTable.addEventListener("click", gItemTable.Click.bind(gItemTable));
+
+    // textarea elements
     template.addEventListener("keyup", LJC.EventTextRows);
     textData.addEventListener("keyup", LJC.EventTextRows);
     output.addEventListener("keyup", LJC.EventTextRows);
@@ -35,7 +38,7 @@ class TextGenEvent
 
   // Actions
 
-  //
+  // Handles the Document "contextmenu" event.
   static ContextMenu(event)
   {
     let eItem = event.target;
@@ -57,7 +60,7 @@ class TextGenEvent
     }
   }
 
-  // 
+  // Handles the Document "click" event.
   static DocumentClick(event)
   {
     const base = "https://github.com/ljlclark"
@@ -68,99 +71,98 @@ class TextGenEvent
     let eItem = event.target;
     tableDataMenu.style.visibility = "hidden";
     templateMenu.style.visibility = "hidden";
-    let itemClick = true;
+    //let itemClick = true;
     let menu = null;
     let url = null;
     switch (eItem.id)
     {
       case "cColl":
-        itemClick = false;
+        //itemClick = false;
         url = `${base}${cBase}${c}/CollectionTemplate.cs`;
         window.open(url);
         break;
 
       case "cDO":
-        itemClick = false;
+        //itemClick = false;
         url = `${base}${cBase}${c}/DataTemplate.cs`;
         window.open(url);
         break;
 
       case "jsColl":
-        itemClick = false;
+        //itemClick = false;
         url = `${base}${cBase}${js}/ItemsTemplate.js`;
         window.open(url);
         break;
 
       case "jsDO":
-        itemClick = false;
+        //itemClick = false;
         url = `${base}${cBase}${js}/ItemTemplate.js`;
         window.open(url);
         break;
 
       case "createData":
-        itemClick = false;
+        //itemClick = false;
         textData.value = TextGenCode.CreateData(template.value);
         LJC.SetTextRows(textData);
         TextGenEvent.PageTextCols();
         break;
 
       case "dataTab":
-        itemClick = false;
+        //itemClick = false;
         TextGenCode.ShowTabItems(dataLayout);
         break;
 
       case "generateTab":
-        itemClick = false;
+        //itemClick = false;
         TextGenCode.ShowTabItems(genLayout);
         gSections = TextGenCode.CreateSections();
         TextGenCode.CreateSectionRows(gSections);
         break;
 
       case "genOutput":
-        itemClick = false;
+        //itemClick = false;
         TextGenCode.Process();
         break;
 
       case "templateOptions":
-        itemClick = false;
+        //itemClick = false;
         menu = LJC.Element("templateMenu");
         TextGenEvent.ShowMenu(event, menu);
         break;
 
       case "generateOptions":
-        itemClick = false;
+        //itemClick = false;
         menu = LJC.Element("tableDataMenu");
         TextGenEvent.ShowMenu(event, menu);
         break;
     }
 
-    if (itemClick)
-    {
-      // Sets SelectedRow if gSectionTable.
-      let success = false;
-      if (gSectionTable.IsTableData(eItem))
-      {
-        success = true;
-        gSectionTable.SelectRow(gSectionTable.SelectedRow)
-      }
-
-      if (!success)
-      {
-        // Sets SelectedRow if gItemTable.
-        if (gItemTable.IsTableData(eItem))
-        {
-          gItemTable.SelectRow(gItemTable.SelectedRow)
-        }
-      }
-    }
+  //  if (itemClick)
+  //  {
+  //    // Sets SelectedRow if gSectionTable.
+  //    if (!gSectionTable.TableClick(event))
+  //    {
+  //      // Sets SelectedRow if gItemTable.
+  //      gItemTable.TableClick(event);
+  //    }
+  //  }
   }
 
-  // 
-  static ShowMenu(event, menu)
+  // Handles the Table "click" event.
+  static TableClick(event)
   {
-    menu.style.top = `${event.pageY}px`;
-    menu.style.left = `${event.pageX}px`;
-    menu.style.visibility = "visible";
+    let eTarget = event.target;
+    let table = SelectTable.GetTable(eTarget);
+    switch (table.id)
+    {
+      case "sectionTable":
+        gSectionTable.TableClick(eTarget);
+        break;
+
+      case "itemTable":
+        gItemTable.TableClick(eTarget);
+        break;
+    }
   }
 
   // Other Events
@@ -179,7 +181,7 @@ class TextGenEvent
     TextGenEvent.SetTextCols(null, width);
   }
 
-  // 
+  // Handles the Document "mouseout" event.
   static MouseOut(event)
   {
     const layoutColor = "lightblue";
@@ -214,7 +216,7 @@ class TextGenEvent
     }
   }
 
-  // 
+  // Handles the Document "mouseover" event.
   static MouseOver(event)
   {
     const overColor = "aliceblue";
@@ -279,5 +281,13 @@ class TextGenEvent
     textData.cols = cols;
     tableData.style.width = cellWidth + "px";
     output.cols = cols;
+  }
+
+  //Shows the popup menu. 
+  static ShowMenu(event, menu)
+  {
+    menu.style.top = `${event.pageY}px`;
+    menu.style.left = `${event.pageX}px`;
+    menu.style.visibility = "visible";
   }
 }
