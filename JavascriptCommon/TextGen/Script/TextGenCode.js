@@ -66,8 +66,9 @@ class TextGenCode
         b.Line("    <th colspan='2'>Replacement</th>");
         b.Line("  </tr>");
         replacementTable.innerHTML = b.ToString();
-        TextGenCode.CreateReplacementRows(item);
       }
+      //let item = items.Items(0);
+      //TextGenCode.CreateReplacementRows(item);
     }
   }
 
@@ -119,8 +120,11 @@ class TextGenCode
         b.Line("    <th colspan='2'>Item</th>");
         b.Line("  </tr>");
         itemTable.innerHTML = b.ToString();
-        TextGenCode.CreateItemRows(section);
       }
+
+      // Select first data row first data.
+      let tData = gSectionTable.GetTData(1);
+      gSectionTable.SelectRow(tData);
     }
   }
 
@@ -183,7 +187,7 @@ class TextGenCode
     }
   }
 
-  // Event handler to process the template and data.
+  // Process the template and data.
   static Process()
   {
     let templateText = template.value;
@@ -192,6 +196,23 @@ class TextGenCode
     textGenLib.TextGen(gSections, lines);
     output.value = textGenLib.Output;
     LJC.SetTextRows(output);
+  }
+
+  static SectionAction(action, data)
+  {
+    switch (action.toLowerCase())
+    {
+      case "select":
+        if (SelectTable.IsTRow(data))
+        {
+          // First data row first data.
+          let name = gSectionTable.GetTDataText(1);
+          gSections.Sort();
+          let section = gSections.Retrieve(name);
+          TextGenCode.CreateItemRows(section);
+        }
+        break;
+    }
   }
 
   // Shows tab items.

@@ -6,24 +6,24 @@
 class SelectTable
 {
   // Gets the row parent table.
-  static GetRowTable(eRow)
+  static GetRowTable(eTRow)
   {
     let retValue = null;
 
-    let success = SelectTable.IsTRow(eRow);
-    let tbody = null;
+    let success = SelectTable.IsTRow(eTRow);
+    let tBody = null;
     if (success)
     {
       // table/tbody/tr
-      tbody = eRow.parentElement;
-      success = SelectTable.IsTBody(tbody);
+      tBody = eTRow.parentElement;
+      success = SelectTable.IsTBody(tBody);
     }
 
     let table = null;
     if (success)
     {
       // table/tbody
-      table = tbody.parentElement;
+      table = tBody.parentElement;
       if (SelectTable.IsTable(table))
       {
         retValue = table;
@@ -33,42 +33,41 @@ class SelectTable
   }
 
   // Gets parent table if target is TD.
-  static GetTable(eTarget)
+  static GetTable(eTData)
   {
     let retValue = null;
 
-    let row = SelectTable.GetTableRow(eTarget);
-    if (row != null)
+    let tRow = SelectTable.GetTableRow(eTData);
+    if (tRow != null)
     {
-      retValue = SelectTable.GetRowTable(row);
+      retValue = SelectTable.GetRowTable(tRow);
     }
     return retValue;
   }
 
   // Gets parent row if target is TD.
-  static GetTableRow(eTarget)
+  static GetTableRow(eTData)
   {
     let retValue = null;
 
-    let success = SelectTable.IsTData(eTarget);
-    if (success)
+    if (SelectTable.IsTData(eTData))
     {
       // tr/td
-      let row = eTarget.parentElement;
-      if (SelectTable.IsTRow(row))
+      let tRow = eTData.parentElement;
+      if (SelectTable.IsTRow(tRow))
       {
-        retValue = row;
+        retValue = tRow;
       }
     }
     return retValue;
   }
 
   // Checks if element is a table element.
-  static IsTable(element)
+  static IsTable(eTable)
   {
     let retValue = false;
 
-    if ("TABLE" == element.tagName)
+    if ("TABLE" == eTable.tagName)
     {
       retValue = true;
     }
@@ -76,11 +75,11 @@ class SelectTable
   }
 
   // Checks if element is a table body element.
-  static IsTBody(element)
+  static IsTBody(eTBody)
   {
     let retValue = false;
 
-    if ("TBODY" == element.tagName)
+    if ("TBODY" == eTBody.tagName)
     {
       retValue = true;
     }
@@ -88,11 +87,11 @@ class SelectTable
   }
 
   // Checks if element is a table data element.
-  static IsTData(element)
+  static IsTData(eTData)
   {
     let retValue = false;
 
-    if ("TD" == element.tagName)
+    if ("TD" == eTData.tagName)
     {
       retValue = true;
     }
@@ -100,11 +99,11 @@ class SelectTable
   }
 
   // Checks if element is a table row element.
-  static IsTRow(element)
+  static IsTRow(eTRow)
   {
     let retValue = false;
 
-    if ("TR" == element.tagName)
+    if ("TR" == eTRow.tagName)
     {
       retValue = true;
     }
@@ -112,9 +111,10 @@ class SelectTable
   }
 
   // The Constructor function.
-  constructor(eTable)
+  constructor(eTable, callback)
   {
     this.Table = eTable;
+    this.Callback = callback;
     this.PreviousSelectedRow = null;
     this.SelectedRow = null;
     this.SelectedColor = "lightsteelblue";
@@ -133,45 +133,72 @@ class SelectTable
 
   // Functions
 
-  // Selects the row if in the contained Table element.
-  SelectRow(eTarget)
+  // Gets the row data element.
+  GetTData(rowIndex = 0, dataIndex = 0)
   {
-    let retValue = false;
+    let retValue = null;
 
-    let table = SelectTable.GetTable(eTarget);
+    let tBody = this.Table.children[rowIndex];
+    let tRow = tBody.children[0];
+    retValue = this.GetRowTData(tRow, dataIndex);
+    return retValue;
+  }
+
+  // Gets the cell data.
+  GetTDataText(rowIndex = 0, dataIndex = 0)
+  {
+    let tData = this.GetTData(rowIndex, dataIndex);
+    let retValue = tData.innerText;
+    return retValue;
+
+  }
+
+  // Gets the row data element.
+  GetRowTData(tRow, dataIndex = 0)
+  {
+    let retValue = null;
+
+    if (SelectTable.IsTRow(tRow))
+    {
+      retValue = tRow.children[dataIndex];
+    }
+    return retValue;
+  }
+
+  // Selects the row if in the contained Table element.
+  SelectRow(eTData)
+  {
+    let retValue = null;
+
+    let table = SelectTable.GetTable(eTData);
     if (table != null)
     {
       if (table.id == this.Table.id)
       {
-        let row = SelectTable.GetTableRow(eTarget);
-        if (row != null)
+        let tRow = SelectTable.GetTableRow(eTData);
+        if (tRow != null)
         {
           this.PreviousSelectedRow = this.SelectedRow;
-          this.SelectedRow = row;
+          this.SelectedRow = tRow;
           this.SetSelectColors(this.SelectedRow);
+          this.Callback("Select", tRow);
+          retValue = tRow;
         }
-        retValue = true;
       }
     }
     return retValue;
   }
 
   // Sets selected color.
-  SetSelectColors(eRow)
+  SetSelectColors(eTRow)
   {
-    let success = true;
-    if (!SelectTable.IsTRow(eRow))
-    {
-      success = false;
-    }
-
-    if (success)
+    if (SelectTable.IsTRow(eTRow))
     {
       if (this.PreviousSelectedRow != null)
       {
         this.PreviousSelectedRow.style.backgroundColor = this.InitialColor;
       }
-      eRow.style.backgroundColor = this.SelectedColor;
+      eTRow.style.backgroundColor = this.SelectedColor;
     }
   }
 }
