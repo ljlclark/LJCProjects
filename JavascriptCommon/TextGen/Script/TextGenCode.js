@@ -47,6 +47,13 @@ class TextGenCode
   // Creates a table from the RepeatItems object.
   static CreateItemRows(section)
   {
+    // Item Heading Row
+    let b = new StringBuilder();
+    b.Line("  <tr>");
+    b.Line("    <th colspan='2'>Item</th>");
+    b.Line("  </tr>");
+    itemTable.innerHTML = b.ToString();
+
     let items = section.RepeatItems;
     if (TextGenLib.HasItems(items))
     {
@@ -54,27 +61,30 @@ class TextGenCode
       for (let index = 0; index < items.Count(); index++)
       {
         let item = items.Items(index);
-        let b = new StringBuilder();
+        b = new StringBuilder();
         b.Line("  <tr class='selectTR'>");
         b.Line(`    <td class='selectTD'>${item.Name}</td>`);
         b.Line("  </tr>");
         itemTable.innerHTML += b.ToString();
-
-        // Replacement Heading Row
-        b = new StringBuilder();
-        b.Line("  <tr>");
-        b.Line("    <th colspan='2'>Replacement</th>");
-        b.Line("  </tr>");
-        replacementTable.innerHTML = b.ToString();
       }
-      //let item = items.Items(0);
-      //TextGenCode.CreateReplacementRows(item);
+
+      // Select first data row first data.
+      let tData = gItemTable.GetTData(1);
+      gItemTable.SelectRow(tData);
     }
   }
 
   // Creates a table from the Replacements object.
   static CreateReplacementRows(item)
   {
+
+    // Replacement Heading Row
+    let b = new StringBuilder();
+    b.Line("  <tr>");
+    b.Line("    <th colspan='2'>Replacement</th>");
+    b.Line("  </tr>");
+    replacementTable.innerHTML = b.ToString();
+
     let replacements = item.Replacements;
     if (TextGenLib.HasReplacements(replacements))
     {
@@ -113,13 +123,6 @@ class TextGenCode
         b.Line(`    <td class='selectTD'>${section.Name}</td>`);
         b.Line("  </tr>");
         sectionTable.innerHTML += b.ToString();
-        
-        // Item Heading Row
-        b = new StringBuilder();
-        b.Line("  <tr>");
-        b.Line("    <th colspan='2'>Item</th>");
-        b.Line("  </tr>");
-        itemTable.innerHTML = b.ToString();
       }
 
       // Select first data row first data.
@@ -198,7 +201,8 @@ class TextGenCode
     LJC.SetTextRows(output);
   }
 
-  static SectionAction(action, data)
+  // Callback from selectTable.SelectRow();
+  static TableAction(selectTable, action, data)
   {
     switch (action.toLowerCase())
     {
@@ -206,10 +210,30 @@ class TextGenCode
         if (SelectTable.IsTRow(data))
         {
           // First data row first data.
-          let name = gSectionTable.GetTDataText(1);
-          gSections.Sort();
-          let section = gSections.Retrieve(name);
-          TextGenCode.CreateItemRows(section);
+          let name = selectTable.GetRowTDataText(data);
+
+          let section = null;
+          switch (selectTable.Table.id)
+          {
+            case "sectionTable":
+              // Get selected section and create item rows.
+              section = gSections.Retrieve(name);
+              TextGenCode.CreateItemRows(section);
+              break;
+
+            case "itemTable":
+              // Get selected section.
+              let sectionRow = gSectionTable.SelectedRow;
+              let sectionName = gSectionTable.GetRowTDataText(sectionRow);
+              section = gSections.Retrieve(sectionName);
+
+              // Get selected item and create replacement rows.
+              let items = section.RepeatItems;
+              let item = items.Retrieve(name);
+              TextGenCode.CreateReplacementRows(item);
+              break;
+          }
+
         }
         break;
     }

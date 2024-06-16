@@ -37,6 +37,7 @@ class RepeatItems
   {
     this.Err = new ArgError();
     this.ItemArray = [];
+    this.PreviousCount = 1;
   }
 
   // Adds a new object.
@@ -131,6 +132,7 @@ class RepeatItems
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
+    this.Sort();
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
@@ -139,11 +141,15 @@ class RepeatItems
   // Sort the internal array.
   Sort(sortMethod = null)
   {
-    if (null == sortMethod)
+    if (this.PreviousCount < this.Count())
     {
-      sortMethod = RepeatItems.SortName;
+      if (null == sortMethod)
+      {
+        sortMethod = RepeatItems.SortName;
+      }
+      this.ItemArray.sort(sortMethod);
+      this.PreviousCount = this.Count();
     }
-    this.ItemArray.sort(sortMethod);
   }
 }
 

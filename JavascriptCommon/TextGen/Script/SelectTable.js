@@ -165,7 +165,18 @@ class SelectTable
     return retValue;
   }
 
+  // Gets the row cell data.
+  GetRowTDataText(tRow, dataIndex = 0)
+  {
+    let tData = this.GetRowTData(tRow, dataIndex);
+    let retValue = tData.innerText;
+    return retValue;
+  }
+
   // Selects the row if in the contained Table element.
+  // TextGenCode.CrateItemRows();
+  // TextGenCode.CrateSectionsRows();
+  // this.Click();
   SelectRow(eTData)
   {
     let retValue = null;
@@ -181,7 +192,8 @@ class SelectTable
           this.PreviousSelectedRow = this.SelectedRow;
           this.SelectedRow = tRow;
           this.SetSelectColors(this.SelectedRow);
-          this.Callback("Select", tRow);
+
+          this.Callback(this, "Select", tRow);
           retValue = tRow;
         }
       }

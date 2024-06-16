@@ -36,6 +36,7 @@ class Sections
   {
     this.Err = new ArgError();
     this.ItemArray = [];
+    this.PreviousCount = 1;
   }
 
   // Adds a new object.
@@ -130,6 +131,7 @@ class Sections
     this.Err.IsValue(compareToValue, "compareToValue");
     this.Err.ShowError();
 
+    this.Sort();
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
     return retValue;
@@ -138,11 +140,15 @@ class Sections
   // Sort the internal array.
   Sort(sortMethod = null)
   {
-    if (null == sortMethod)
+    if (this.PreviousCount < this.Count())
     {
-      sortMethod = Sections.SortName;
+      if (null == sortMethod)
+      {
+        sortMethod = Sections.SortName;
+      }
+      this.ItemArray.sort(sortMethod);
+      this.PreviousCount = this.Count();
     }
-    this.ItemArray.sort(sortMethod);
   }
 }
 
