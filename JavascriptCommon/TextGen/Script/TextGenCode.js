@@ -77,7 +77,6 @@ class TextGenCode
   // Creates a table from the Replacements object.
   static CreateReplacementRows(item)
   {
-
     // Replacement Heading Row
     let b = new StringBuilder();
     b.Line("  <tr>");

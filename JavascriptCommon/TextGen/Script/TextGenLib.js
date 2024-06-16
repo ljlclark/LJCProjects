@@ -1,7 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextGenLib.js
-// <script src="../ArgErr.js"></script>
 // <script src="../LJCCommon.js"></script>
 // <script src="Script/RepeatItems.js"></script>
 // <script src="Script/Replacements.js"></script>
@@ -10,8 +9,7 @@
 // Generate output text from a template and data.
 class TextGenLib
 {
-
-  // 
+  // Checks if there are items.
   static HasItems(items)
   {
     let retValue = false;
@@ -24,7 +22,7 @@ class TextGenLib
     return retValue;
   }
 
-  // 
+  // Checks if there are replacements.
   static HasReplacements(replacements)
   {
     let retValue = false;
@@ -37,7 +35,7 @@ class TextGenLib
     return retValue;
   }
 
-  // 
+  // Checks if there are sections.
   static HasSections(sections)
   {
     let retValue = false;
@@ -51,9 +49,9 @@ class TextGenLib
   }
 
   // The Constructor function.
-  constructor()
+  constructor(commentChars = "//")
   {
-    this.Err = new ArgError();
+    this.CommentChars = commentChars;
     this.Lines = [];
     this.Output = "";
     this.Sections = [];
@@ -64,23 +62,19 @@ class TextGenLib
   {
     let retValue = "";
 
-    this.Err.SetContext("TextGenLib.TextGen(sections, lines)");
-    this.Err.IsCollection(sections, "sections");
-    this.Err.IsArray(templateLines, "templateLines");
-    this.Err.ShowError();
-
     this.Sections = sections;
     this.Lines = templateLines;
 
-    let section = new Section("Empty");
     let lineIndex = { Value: 0 };
     for (lineIndex.Value = 0; lineIndex.Value < templateLines.length
       ; lineIndex.Value++)
     {
       let line = this.Lines[lineIndex.Value];
-      let sectionItem = { Value: section };
+      //let section = new Section("Empty");
+      let sectionItem = { Value: null };
       if (this.IsSectionBegin(line, sectionItem))
       {
+        lineIndex.Value++;
         this.ProcessItems(sectionItem.Value, lineIndex);
         continue;
       }
@@ -90,18 +84,36 @@ class TextGenLib
     return retValue;
   }
 
+  // Checks if the line has a directive.
+  HasDirective(line)
+  {
+    let retValue = false;
+
+    if (line != null)
+    {
+      let lower = line.trim().toLowerCase();
+      if (lower.startsWith(this.CommentChars))
+      {
+        let tokens = lower.split(" ");
+        if (tokens.length > 1)
+        {
+          let token = tokens[1];
+          if (token == "#sectionbegin"
+            || token == "#sectionend"
+            || token == "#value")
+          {
+            retValue = true;
+          }
+        }
+      }
+    }
+    return retValue;
+  }
+
   // Process the RepeatItems.
   ProcessItems(section, lineIndex)
   {
-    this.Err.SetContext("TextGenLib.ProcessItems(section, lineIndex)");
-    this.Err.IsValue(section, "section");
-    this.Err.IsCollection(section.RepeatItems, "section.RepeatItems");
-    this.Err.IsValue(lineIndex.Value, "lineIndex.Value");
-    this.Err.ShowError();
-
     let items = section.RepeatItems;
-    //if (items != null)
-    //{
     for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
     {
       let item = items.Items(itemIndex);
@@ -109,27 +121,33 @@ class TextGenLib
       for (index = lineIndex.Value; index < this.Lines.length; index++)
       {
         let line = this.Lines[index];
-        if (!line.includes("#"))
+
+        let sectionItem = { Value: null }
+        if (this.IsSectionBegin(line, sectionItem))
+        {
+          line = null;
+          lineIndex.Value++;
+          this.ProcessItems(sectionItem.Value, lineIndex);
+        }
+
+        if (line != null
+          && !this.HasDirective(line))
         {
           let lineItem = { Value: line };
-          this.DoReplacements(item, lineItem);
+          if (line.trim().length > 0)
+          {
+            this.DoReplacements(item, lineItem);
+          }
           this.AddOutput(lineItem.Value);
         }
       }
       lineIndex.Value = index;
     }
-    //}
   }
 
   // Perform the line replacements.
   DoReplacements(item, lineItem)
   {
-    this.Err.SetContext("TextGenLib.DoReplacements(item, lineItem)");
-    this.Err.IsValue(item, "item");
-    this.Err.IsCollection(item.Replacements, "item.Replacements");
-    this.Err.IsValue(lineItem.Value, "lineItem.Value");
-    this.Err.ShowError();
-
     if (lineItem.Value.includes("_"))
     {
       let replacements = item.Replacements;
@@ -158,13 +176,9 @@ class TextGenLib
   // Add the line to the output.
   AddOutput(line)
   {
-    this.Err.SetContext("TextGenLib.AddOutput(line)");
-    this.Err.IsValue(line, "line");
-    this.Err.ShowError();
-
     if (this.Output.length > 0)
     {
-      this.Output += "\n";
+      this.Output += "\r\n";
     }
     this.Output += line;
   }
@@ -174,16 +188,13 @@ class TextGenLib
   {
     let retValue = false;
 
-    this.Err.SetContext("TextGenLib.IsSectionBegin(line, sectionItem)");
-    this.Err.IsValue(line, "line");
-    this.Err.IsValue(sectionItem.Value, "sectionItem.Value");
-    this.Err.ShowError();
-
-    if (line.includes("#SectionBegin"))
+    // Directive Layout = "// #SectionBegin Name"
+    if (line != null
+      && line.trim().startsWith(this.CommentChars))
     {
       let tokens = line.split(" ");
-      if (tokens
-        && tokens.length > 2)
+      if (tokens.length > 2
+        && tokens[1].toLowerCase() == "#sectionbegin")
       {
         let sectionName = tokens[2];
         sectionItem.Value = this.Sections.Retrieve(sectionName);
