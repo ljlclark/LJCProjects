@@ -160,6 +160,7 @@ class Section
   {
     this.Name = name;
     this.CurrentItemIndex = -1;
+    this.BeginLineIndex = -1;
     this.RepeatItems = new RepeatItems();
   }
 }

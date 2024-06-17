@@ -16,28 +16,26 @@ class TextGenCode
     for (let index = 0; index < lines.length; index++)
     {
       let line = lines[index];
-      if (line.trim().startsWith("//"))
+      let directive = TextGenLib.GetDirective(line);
+      if (directive != null)
       {
-        let tokens = line.split(" ");
-        if (tokens.length > 2
-          && tokens[1].startsWith("#"))
+        switch (directive.Name.toLowerCase())
         {
-          let token = tokens[1];
-          let name = tokens[2];
-          switch (token.toLowerCase())
-          {
-            case "#sectionbegin":
-              b.Line(`Section: ${name}`);
-              b.Text("Item: Item1");
-              break;
-
-            case "#value":
-              let begin = { Index: 0 }
-              let value = LJC.DelimitedString(name, "_", "_", begin);
+          case "#sectionbegin":
+            if (b.ToString().length > 0)
+            {
               b.Line();
-              b.Text(`${name} ${value}`);
-              break;
-          }
+            }
+            b.Line(`Section: ${directive.Value}`);
+            b.Text("Item: Item1");
+            break;
+
+          case "#value":
+            let begin = { Index: 0 }
+            let value = LJC.DelimitedString(directive.Value, "_", "_", begin);
+            b.Line();
+            b.Text(`${directive.Value} ${value}`);
+            break;
         }
       }
     }
@@ -161,25 +159,24 @@ class TextGenCode
       for (let index = 0; index < lines.length; index++)
       {
         let line = lines[index];
-        let tokens = line.split(" ");
-        if (tokens.length > 1)
+        let data = this.GetData(line);
+        if (data != null)
         {
-          let type = tokens[0];
-          switch (type.toLowerCase())
+          switch (data.Type.toLowerCase())
           {
             case "section:":
-              name = tokens[1];
+              name = data.Name;
               section = sections.Add(name);
               break;
 
             case "item:":
-              name = tokens[1];
+              name = data.Name;
               item = section.RepeatItems.Add(name)
               break;
 
             default:
-              let replacement = tokens[0];
-              let value = tokens[1];
+              let replacement = data.Type;
+              let value = data.Name;
               item.Replacements.Add(replacement, value);
               break;
           }
@@ -187,6 +184,20 @@ class TextGenCode
       }
       return sections;
     }
+  }
+
+  static GetData(line)
+  {
+    let retValue = null;
+
+    let tokens = line.split(" ");
+    if (tokens.length > 1)
+    {
+      let type = tokens[0];
+      let name = tokens[1];
+      retValue = { Type: type, Name: name }
+    }
+    return retValue;
   }
 
   // Process the template and data.

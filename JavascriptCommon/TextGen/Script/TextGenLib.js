@@ -9,6 +9,26 @@
 // Generate output text from a template and data.
 class TextGenLib
 {
+  // Returns directive if line is a directive.
+  static GetDirective(line)
+  {
+    let retValue = null;
+
+    if (line != null
+      && line.trim().startsWith("//"))
+    {
+      let tokens = line.trim().split(" ");
+      if (tokens.length > 2
+        && tokens[1].startsWith("#"))
+      {
+        let name = tokens[1];
+        let value = tokens[2];
+        retValue = { Name: name, Value: value };
+      }
+    }
+    return retValue;
+  }
+
   // Checks if there are items.
   static HasItems(items)
   {
@@ -57,92 +77,14 @@ class TextGenLib
     this.Sections = [];
   }
 
-  // Generate the output text.
-  TextGen(sections, templateLines)
+  // Add the line to the output.
+  AddOutput(line)
   {
-    let retValue = "";
-
-    this.Sections = sections;
-    this.Lines = templateLines;
-
-    let lineIndex = { Value: 0 };
-    for (lineIndex.Value = 0; lineIndex.Value < templateLines.length
-      ; lineIndex.Value++)
+    if (this.Output.length > 0)
     {
-      let line = this.Lines[lineIndex.Value];
-      //let section = new Section("Empty");
-      let sectionItem = { Value: null };
-      if (this.IsSectionBegin(line, sectionItem))
-      {
-        lineIndex.Value++;
-        this.ProcessItems(sectionItem.Value, lineIndex);
-        continue;
-      }
-      this.AddOutput(line);
+      this.Output += "\r\n";
     }
-    retValue = this.Output;
-    return retValue;
-  }
-
-  // Checks if the line has a directive.
-  HasDirective(line)
-  {
-    let retValue = false;
-
-    if (line != null)
-    {
-      let lower = line.trim().toLowerCase();
-      if (lower.startsWith(this.CommentChars))
-      {
-        let tokens = lower.split(" ");
-        if (tokens.length > 1)
-        {
-          let token = tokens[1];
-          if (token == "#sectionbegin"
-            || token == "#sectionend"
-            || token == "#value")
-          {
-            retValue = true;
-          }
-        }
-      }
-    }
-    return retValue;
-  }
-
-  // Process the RepeatItems.
-  ProcessItems(section, lineIndex)
-  {
-    let items = section.RepeatItems;
-    for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
-    {
-      let item = items.Items(itemIndex);
-      let index = 0;
-      for (index = lineIndex.Value; index < this.Lines.length; index++)
-      {
-        let line = this.Lines[index];
-
-        let sectionItem = { Value: null }
-        if (this.IsSectionBegin(line, sectionItem))
-        {
-          line = null;
-          lineIndex.Value++;
-          this.ProcessItems(sectionItem.Value, lineIndex);
-        }
-
-        if (line != null
-          && !this.HasDirective(line))
-        {
-          let lineItem = { Value: line };
-          if (line.trim().length > 0)
-          {
-            this.DoReplacements(item, lineItem);
-          }
-          this.AddOutput(lineItem.Value);
-        }
-      }
-      lineIndex.Value = index;
-    }
+    this.Output += line;
   }
 
   // Perform the line replacements.
@@ -173,14 +115,51 @@ class TextGenLib
     }
   }
 
-  // Add the line to the output.
-  AddOutput(line)
+  // Generate the output text.
+  TextGen(sections, templateLines)
   {
-    if (this.Output.length > 0)
+    let retValue = "";
+
+    this.Sections = sections;
+    this.Lines = templateLines;
+
+    let lineIndex = { Value: 0 };
+    for (lineIndex.Value = 0; lineIndex.Value < templateLines.length
+      ; lineIndex.Value++)
     {
-      this.Output += "\r\n";
+      let line = this.Lines[lineIndex.Value];
+      //let section = new Section("Empty");
+      let sectionItem = { Value: null };
+      if (this.IsSectionBegin(line, sectionItem))
+      {
+        lineIndex.Value++;
+        sectionItem.Value.BeginLineIndex = lineIndex.Value;
+        this.ProcessItems(sectionItem.Value, lineIndex);
+        continue;
+      }
+      this.AddOutput(line);
     }
-    this.Output += line;
+    retValue = this.Output;
+    return retValue;
+  }
+
+  // Checks if the line has a directive.
+  IsDirective(line)
+  {
+    let retValue = false;
+
+    let directive = TextGenLib.GetDirective(line);
+    if (directive != null)
+    {
+      let lowerName = directive.Name.toLowerCase();
+      if (lowerName == "#sectionbegin"
+        || lowerName == "#sectionend"
+        || lowerName == "#value")
+      {
+        retValue = true;
+      }
+    }
+    return retValue;
   }
 
   // Checks if the line is a SectionBegin.
@@ -189,18 +168,75 @@ class TextGenLib
     let retValue = false;
 
     // Directive Layout = "// #SectionBegin Name"
-    if (line != null
-      && line.trim().startsWith(this.CommentChars))
+    let directive = TextGenLib.GetDirective(line);
+    if (directive != null
+      && "#sectionbegin" == directive.Name.toLowerCase())
     {
-      let tokens = line.split(" ");
-      if (tokens.length > 2
-        && tokens[1].toLowerCase() == "#sectionbegin")
-      {
-        let sectionName = tokens[2];
-        sectionItem.Value = this.Sections.Retrieve(sectionName);
-        retValue = true;
-      }
+      sectionItem.Value = this.Sections.Retrieve(directive.Value);
+      retValue = true;
     }
     return retValue;
+  }
+
+  // Checks if the line is a SectionEnd.
+  IsSectionEnd(line)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionBegin Name"
+    let directive = TextGenLib.GetDirective(line);
+    if (directive != null
+      && "#sectionend" == directive.Name.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Process the RepeatItems.
+  ProcessItems(section, lineIndex)
+  {
+    let items = section.RepeatItems;
+    for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
+    {
+      let item = items.Items(itemIndex);
+      let index = 0;
+      for (index = lineIndex.Value; index < this.Lines.length; index++)
+      {
+        let line = this.Lines[index];
+
+        let sectionItem = { Value: null }
+        if (this.IsSectionBegin(line, sectionItem))
+        {
+          index++;
+          sectionItem.Value.BeginLineIndex = index;
+          lineIndex.Value = index;
+          this.ProcessItems(sectionItem.Value, lineIndex);
+          index = lineIndex.Value;
+        }
+
+        if (this.IsSectionEnd(line))
+        {
+          if (itemIndex < items.Count() - 1)
+          {
+            // Do section again for following items.
+            lineIndex.Value == section.BeginLineIndex;
+            break;
+          }
+          lineIndex.Value++;
+        }
+
+        if (!this.IsDirective(line))
+        {
+          let lineItem = { Value: line };
+          if (line.trim().length > 0)
+          {
+            this.DoReplacements(item, lineItem);
+          }
+          this.AddOutput(lineItem.Value);
+        }
+      }
+      lineIndex.Value = index;
+    }
   }
 }
