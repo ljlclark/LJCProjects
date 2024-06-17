@@ -204,6 +204,7 @@ class TextGenLib
       for (index = lineIndex.Value; index < this.Lines.length; index++)
       {
         let line = this.Lines[index];
+        lineIndex.Value = index;
 
         let sectionItem = { Value: null }
         if (this.IsSectionBegin(line, sectionItem))
@@ -220,7 +221,7 @@ class TextGenLib
           if (itemIndex < items.Count() - 1)
           {
             // Do section again for following items.
-            lineIndex.Value == section.BeginLineIndex;
+            lineIndex.Value = section.BeginLineIndex;
             break;
           }
           lineIndex.Value++;
@@ -236,7 +237,7 @@ class TextGenLib
           this.AddOutput(lineItem.Value);
         }
       }
-      lineIndex.Value = index;
+      //lineIndex.Value = index;
     }
   }
 }

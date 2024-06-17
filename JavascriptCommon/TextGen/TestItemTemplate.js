@@ -12,9 +12,9 @@ class _ClassName_
   {
     this.Name = name;
   }
+
   // #SectionBegin Properties
   // #Value _Name_
-
   _Name_ = value;
   // #SectionEnd Properties
   // #SectionEnd Main
