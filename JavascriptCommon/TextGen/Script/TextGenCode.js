@@ -190,7 +190,7 @@ class TextGenCode
   {
     let retValue = null;
 
-    let tokens = line.split(" ");
+    let tokens = line.split(/\s+/g);
     if (tokens.length > 1)
     {
       let type = tokens[0];

@@ -17,7 +17,7 @@ class TextGenLib
     if (line != null
       && line.trim().startsWith("//"))
     {
-      let tokens = line.trim().split(" ");
+      let tokens = line.trim().split(/\s+/g);
       if (tokens.length > 2
         && tokens[1].startsWith("#"))
       {
