@@ -209,9 +209,8 @@ class TextGenLib
         let sectionItem = { Value: null }
         if (this.IsSectionBegin(line, sectionItem))
         {
-          index++;
-          sectionItem.Value.BeginLineIndex = index;
-          lineIndex.Value = index;
+          sectionItem.Value.BeginLineIndex = index + 1;
+          lineIndex.Value++;
           this.ProcessItems(sectionItem.Value, lineIndex);
           index = lineIndex.Value;
         }
@@ -237,7 +236,6 @@ class TextGenLib
           this.AddOutput(lineItem.Value);
         }
       }
-      //lineIndex.Value = index;
     }
   }
 }
