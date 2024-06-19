@@ -7,6 +7,21 @@
 // Generate output text utility functions.
 class TextGenCode
 {
+  // Main static Process functions.
+
+  // Process the template and data.
+  static Process()
+  {
+    let templateText = template.value;
+    let lines = templateText.split("\n");
+    let textGenLib = new TextGenLib();
+    textGenLib.TextGen(gSections, lines);
+    output.value = textGenLib.Output;
+    LJC.SetTextRows(output);
+  }
+
+  // Other static functions.
+
   // Creates the text data from a template.
   static CreateData(templateText)
   {
@@ -186,6 +201,7 @@ class TextGenCode
     }
   }
 
+  // Gets a Data object from a data text line.
   static GetData(line)
   {
     let retValue = null;
@@ -198,17 +214,6 @@ class TextGenCode
       retValue = { Type: type, Name: name }
     }
     return retValue;
-  }
-
-  // Process the template and data.
-  static Process()
-  {
-    let templateText = template.value;
-    let lines = templateText.split("\n");
-    let textGenLib = new TextGenLib();
-    textGenLib.TextGen(gSections, lines);
-    output.value = textGenLib.Output;
-    LJC.SetTextRows(output);
   }
 
   // Callback from selectTable.SelectRow();

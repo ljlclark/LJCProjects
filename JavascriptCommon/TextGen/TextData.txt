@@ -1,0 +1,10 @@
+Section: Main
+Item: Item1
+_ClassName_ ClassName
+Section: Properties
+Item: Item1
+_PropertyName_ First
+_PropertyValue_ 0
+Item: Item2
+_PropertyName_ Second
+_PropertyValue_ null

@@ -9,7 +9,7 @@
 // <script src="Script/TextGen.js"></script>
 // <script src="Script/TextGenCode.js"></script>
 
-// Generate output text event handlers.
+// Generate text event handlers.
 class TextGenEvent
 {
   // Sets Event handlers.
@@ -187,7 +187,7 @@ class TextGenEvent
     }
   }
 
-  // Set the Form textarea coluns.
+  // Sets the Form textarea coluns.
   static FormTextCols(event = null, width = null)
   {
     // Calculate available width for textarea elements.
@@ -201,7 +201,7 @@ class TextGenEvent
     TextGenEvent.SetTextCols(null, width);
   }
 
-  // Set the Page textarea coluns.
+  // Sets the Page textarea coluns.
   static PageTextCols(event = null, width = null)
   {
     // Calculate available width for textarea elements.
@@ -215,7 +215,7 @@ class TextGenEvent
     TextGenEvent.SetTextCols(event, width);
   }
 
-  // Set the textarea coluns.
+  // Sets the textarea coluns.
   static SetTextCols(event = null, width = null)
   {
     // Calcualte the average character width.
@@ -236,7 +236,7 @@ class TextGenEvent
     output.cols = cols;
   }
 
-  //Shows the popup menu. 
+  // Shows the popup menu. 
   static ShowMenu(event, menu)
   {
     menu.style.top = `${event.pageY}px`;

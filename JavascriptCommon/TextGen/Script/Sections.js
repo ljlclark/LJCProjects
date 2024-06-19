@@ -79,7 +79,7 @@ class Sections
     return retValue;
   }
 
-  // Delete the matching item.
+  // Deletes the matching item.
   Delete(compareToValue)
   {
     let retValue = null;
@@ -96,7 +96,7 @@ class Sections
     return retValue;
   }
 
-  // Get an item by index.
+  // Gets an item by index.
   Items(index)
   {
     this.Err.SetContext("Sections.Items(index)");
@@ -107,7 +107,7 @@ class Sections
     return retValue;
   }
 
-  // Retrieve the matching item.
+  // Retrieves the matching item.
   Retrieve(compareToValue)
   {
     let retValue = null;
@@ -124,7 +124,7 @@ class Sections
     return retValue;
   }
 
-  // Retrieve the matching item indexs.
+  // Retrieves the matching item index.
   Search(compareToValue)
   {
     this.Err.SetContext("Sections.Search(compareToValue)");
@@ -137,7 +137,7 @@ class Sections
     return retValue;
   }
 
-  // Sort the internal array.
+  // Sorts the internal array.
   Sort(sortMethod = null)
   {
     if (this.PreviousCount < this.Count())

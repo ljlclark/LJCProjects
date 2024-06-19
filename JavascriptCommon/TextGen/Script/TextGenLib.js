@@ -9,13 +9,14 @@
 // Generate output text from a template and data.
 class TextGenLib
 {
+
   // Returns directive if line is a directive.
-  static GetDirective(line)
+  static GetDirective(line, commentChars = "//")
   {
     let retValue = null;
 
     if (line != null
-      && line.trim().startsWith("//"))
+      && line.trim().startsWith(commentChars))
     {
       let tokens = line.trim().split(/\s+/g);
       if (tokens.length > 2
@@ -77,43 +78,7 @@ class TextGenLib
     this.Sections = [];
   }
 
-  // Add the line to the output.
-  AddOutput(line)
-  {
-    if (this.Output.length > 0)
-    {
-      this.Output += "\r\n";
-    }
-    this.Output += line;
-  }
-
-  // Perform the line replacements.
-  DoReplacements(item, lineItem)
-  {
-    if (lineItem.Value.includes("_"))
-    {
-      let replacements = item.Replacements;
-      replacements.Sort();
-      let begin = { Index: 0 };
-      do
-      {
-        let name = LJC.DelimitedString(lineItem.Value, "_", "_", begin);
-        if (name != null)
-        {
-          name = `_${name}_`;
-          let replacement = replacements.Retrieve(name);
-          if (replacement != null)
-          {
-            lineItem.Value = lineItem.Value.replaceAll(name
-              , replacement.Value);
-          }
-          begin.Index += name.length;
-        }
-      }
-      while (begin.Index >= 0
-        && begin.Index < lineItem.Value.length);
-    }
-  }
+  // Main Processing Methods
 
   // Generate the output text.
   TextGen(sections, templateLines)
@@ -140,56 +105,6 @@ class TextGenLib
       this.AddOutput(line);
     }
     retValue = this.Output;
-    return retValue;
-  }
-
-  // Checks if the line has a directive.
-  IsDirective(line)
-  {
-    let retValue = false;
-
-    let directive = TextGenLib.GetDirective(line);
-    if (directive != null)
-    {
-      let lowerName = directive.Name.toLowerCase();
-      if (lowerName == "#sectionbegin"
-        || lowerName == "#sectionend"
-        || lowerName == "#value")
-      {
-        retValue = true;
-      }
-    }
-    return retValue;
-  }
-
-  // Checks if the line is a SectionBegin.
-  IsSectionBegin(line, sectionItem)
-  {
-    let retValue = false;
-
-    // Directive Layout = "// #SectionBegin Name"
-    let directive = TextGenLib.GetDirective(line);
-    if (directive != null
-      && "#sectionbegin" == directive.Name.toLowerCase())
-    {
-      sectionItem.Value = this.Sections.Retrieve(directive.Value);
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // Checks if the line is a SectionEnd.
-  IsSectionEnd(line)
-  {
-    let retValue = false;
-
-    // Directive Layout = "// #SectionBegin Name"
-    let directive = TextGenLib.GetDirective(line);
-    if (directive != null
-      && "#sectionend" == directive.Name.toLowerCase())
-    {
-      retValue = true;
-    }
     return retValue;
   }
 
@@ -237,5 +152,96 @@ class TextGenLib
         }
       }
     }
+  }
+
+  // Perform the line replacements.
+  DoReplacements(item, lineItem)
+  {
+    if (lineItem.Value.includes("_"))
+    {
+      let replacements = item.Replacements;
+      replacements.Sort();
+      let line = lineItem.Value;
+      let begin = { Index: 0 };
+      do
+      {
+        let name = LJC.DelimitedString(line, "_", "_", begin);
+        if (name != null)
+        {
+          name = `_${name}_`;
+          let replacement = replacements.Retrieve(name);
+          if (replacement != null)
+          {
+            lineItem.Value = lineItem.Value.replaceAll(name
+              , replacement.Value);
+          }
+          begin.Index += name.length - 1;
+        }
+      }
+      while (begin.Index >= 0
+        && begin.Index < line.length - 1);
+    }
+  }
+
+  // Other Methods
+
+  // Add the line to the output.
+  AddOutput(line)
+  {
+    if (this.Output.length > 0)
+    {
+      this.Output += "\r\n";
+    }
+    this.Output += line;
+  }
+
+  // Checks if the line has a directive.
+  IsDirective(line)
+  {
+    let retValue = false;
+
+    let directive = TextGenLib.GetDirective(line, this.CommentChars);
+    if (directive != null)
+    {
+      let lowerName = directive.Name.toLowerCase();
+      if (lowerName == "#sectionbegin"
+        || lowerName == "#sectionend"
+        || lowerName == "#value")
+      {
+        retValue = true;
+      }
+    }
+    return retValue;
+  }
+
+  // Checks if the line is a SectionBegin.
+  IsSectionBegin(line, sectionItem)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionBegin Name"
+    let directive = TextGenLib.GetDirective(line, this.CommentChars);
+    if (directive != null
+      && "#sectionbegin" == directive.Name.toLowerCase())
+    {
+      sectionItem.Value = this.Sections.Retrieve(directive.Value);
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if the line is a SectionEnd.  // 
+  IsSectionEnd(line)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionBegin Name"
+    let directive = TextGenLib.GetDirective(line, this.CommentChars);
+    if (directive != null
+      && "#sectionend" == directive.Name.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
   }
 }

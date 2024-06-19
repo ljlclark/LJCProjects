@@ -11,6 +11,12 @@ class _ClassName_
   constructor(name = null)
   {
     this.Name = name;
+
+    // #SectionBegin Properties
+    // #Value _PropertyName_
+    // #Value _PropertyValue_
+    this._PropertyName_ = _PropertyValue_;
+    // #SectionEnd Properties
   }
   // #SectionEnd Main
 }
