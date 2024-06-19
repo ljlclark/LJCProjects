@@ -162,24 +162,19 @@ class TextGenLib
       let replacements = item.Replacements;
       replacements.Sort();
       let line = lineItem.Value;
-      let begin = { Index: 0 };
-      do
+
+      //const matches = line.match(/(?<=_).+?(?=_)/g);
+      const matches = line.match(/_.+?_/g);
+      for (let index = 0; index < matches.length; index++)
       {
-        let name = LJC.DelimitedString(line, "_", "_", begin);
-        if (name != null)
+        let match = matches[index];
+        let replacement = replacements.Retrieve(match);
+        if (replacement != null)
         {
-          name = `_${name}_`;
-          let replacement = replacements.Retrieve(name);
-          if (replacement != null)
-          {
-            lineItem.Value = lineItem.Value.replaceAll(name
-              , replacement.Value);
-          }
-          begin.Index += name.length - 1;
+          lineItem.Value = lineItem.Value.replaceAll(match
+            , replacement.Value);
         }
       }
-      while (begin.Index >= 0
-        && begin.Index < line.length - 1);
     }
   }
 
