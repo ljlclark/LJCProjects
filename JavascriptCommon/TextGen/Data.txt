@@ -1,4 +1,0 @@
-Section: Main
-Item: Item1
-_CollectionName_, GenItems
-_ClassName_, GenItem
