@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // TextGenEvents.js
 // <script src="../LJCCommon.js"></script>
-// <script src="Script/RepeatItems.js"></script>
-// <script src="Script/Replacements.js"></script>
-// <script src="Script/Sections.js"></script>
-// <script src="Script/StringBuilder.js"></script>
+// <script src="../StringBuilder.js"></script>
+// <script src="../TextGenLib/RepeatItems.js"></script>
+// <script src="../TextGenLib/Replacements.js"></script>
+// <script src="../TextGenLib/Sections.js"></script>
 // <script src="Script/TextGen.js"></script>
 // <script src="Script/TextGenCode.js"></script>
 

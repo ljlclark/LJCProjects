@@ -2,7 +2,12 @@
 // Licensed under the MIT License.
 // TextGenCode.js
 // <script src="../LJCCommon.js"></script>
-// <script src="Script/StringBuilder.js"></script>
+// <script src="../StringBuilder.js"></script>
+// <script src="../TextGenLib/RepeatItems.js"></script>
+// <script src="../TextGenLib/Replacements.js"></script>
+// <script src="../TextGenLib/Sections.js"></script>
+// <script src="../TextGenLib/TextGenLib.js"></script>
+// <script src="Script/SelectTable.js"></script>
 
 // Generate output text utility functions.
 class TextGenCode
