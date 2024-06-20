@@ -11,23 +11,12 @@ class LJC
   // Gets the HTMLElement.
   static Element(id)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.Element(id)");
-    err.IsValue(id, "id");
-    err.ShowError();
-
     return document.getElementById(id);
   }
 
   // Get a form element.
   static FormElement(formName, eName)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.FormElement(formName, eName)");
-    err.IsValue(formName, "formName");
-    err.IsValue(eName, "eName");
-    err.ShowError();
-
     let form = document.forms[formName];
     let retValue = form[eName];
     return retValue;
@@ -36,12 +25,6 @@ class LJC
   // Get a form element value.
   static FormElementValue(formName, eName)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.FormElementValue(formName, eName)");
-    err.IsValue(formName, "formName");
-    err.IsValue(eName, "eName");
-    err.ShowError();
-
     let eItem = LJC.FormElement(formName, eName);
     let retValue = eItem.value;
     return retValue;
@@ -50,12 +33,6 @@ class LJC
   // Gets HTMLElements by Tag.
   static TagElements(eParent, tag)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.TagElements(eParent, tag)");
-    err.IsValue(eParent, "eParent");
-    err.IsValue(tag, "tag");
-    err.ShowError();
-
     return eParent.getElementsByTagName(tag);
   }
 
@@ -63,11 +40,6 @@ class LJC
   static GetText(id)
   {
     let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.GetText(id)");
-    err.IsValue(id, "id");
-    err.ShowError();
 
     let eItem = LJC.Element(id);
     if (eItem != null)
@@ -82,11 +54,6 @@ class LJC
   {
     let retValue = null;
 
-    let err = new ArgError();
-    err.SetContext("LJC.GetValue(id)");
-    err.IsValue(id, "id");
-    err.ShowError();
-
     let eItem = LJC.Element(elementID);
     if (eItem != null)
     {
@@ -100,11 +67,6 @@ class LJC
   {
     let retValue = false;
 
-    let err = new ArgError();
-    err.SetContext("LJC.HasValue(id)");
-    err.IsValue(eItem, "eItem");
-    err.ShowError();
-
     if (eItem
       && eItem != null)
     {
@@ -116,12 +78,6 @@ class LJC
   // Sets the element text.
   static SetText(id, text)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.SetText(elementID, text)");
-    err.IsValue(id, "id");
-    err.IsValue(text, "text");
-    err.ShowError();
-
     let eItem = LJC.Element(id);
     if (eItem != null)
     {
@@ -132,12 +88,6 @@ class LJC
   // Sets the element value.
   static SetValue(id, value)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.SetValue(id, value)");
-    err.IsValue(id, "id");
-    err.IsValue(value, "value");
-    err.ShowError();
-
     let eItem = LJC.Element(id);
     if (eItem != null)
     {
@@ -151,12 +101,6 @@ class LJC
   // Get the average character width.
   static AverageCharWidth(selector, text)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.AverageCharWidth(selector, text)");
-    err.IsValue(selector, "selector");
-    err.IsValue(text, "text");
-    err.ShowError();
-
     let font = LJC.ComputedStyle(selector, "font");
     let textWidth = LJC.TextWidth(font, text);
     let averageWidth = textWidth / text.length;
@@ -170,13 +114,6 @@ class LJC
     const NotFound = -1;
     const Searching = -2;
     let retValue = NotFound;
-
-    let err = new ArgError();
-    err.SetContext("LJC.BinarySearch(array, compareToValue, compareFunction)");
-    err.IsArray(array, "array");
-    err.IsValue(compareToValue, "compareToValue");
-    err.IsValue(compareFunction, "compareFunction");
-    err.ShowError();
 
     // Set initial bounds.
     let lowerIndex = 0;
@@ -236,12 +173,6 @@ class LJC
   // Gets the ComputerStyle property.
   static ComputedStyle(selector, property)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
-    err.IsValue(selector, "selector");
-    err.IsValue(property, "property");
-    err.ShowError();
-
     let eItem = document.querySelector(selector);
     let css = window.getComputedStyle(eItem, null);
     let retValue = css.getPropertyValue(property);
@@ -252,14 +183,6 @@ class LJC
   static DelimitedString(text, beginDelimiter, endDelimiter, begin)
   {
     let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.DelimitedString(text, beginDelimiter, endDelimiter, begin)");
-    err.IsValue(text, "text");
-    err.IsValue(beginDelimiter, "beginDelimiter");
-    err.IsValue(endDelimiter, "endDelimiter");
-    err.IsValue(begin, "begin");
-    err.ShowError();
 
     begin.Index = text.indexOf(beginDelimiter, begin.Index);
     if (begin.Index >= 0)
@@ -279,11 +202,6 @@ class LJC
   static MiddlePosition(count)
   {
     let retValue = 0;
-
-    let err = new ArgError();
-    err.SetContext("LJC.MiddlePosition(count)");
-    err.IsValue(count, "count");
-    err.ShowError();
 
     if (0 == count % 2)
     {
@@ -311,12 +229,6 @@ class LJC
   // Gets the text width.
   static TextWidth(font, text)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.AverageCharWidth(selector, text)");
-    err.IsValue(font, "font");
-    err.IsValue(text, "text");
-    err.ShowError();
-
     let canvas = document.createElement("canvas");
     let context = canvas.getContext("2d");
     context.font = font;
@@ -331,11 +243,6 @@ class LJC
   // Sets the textarea rows for newlines.
   static EventTextRows(event)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.EventTextRows(event)");
-    err.IsValue(event, "event");
-    err.ShowError();
-
     let eItem = event.target;
     if ("textarea" == eItem.localName)
     {
@@ -346,13 +253,6 @@ class LJC
   // Gets the textarea columns.
   static GetTextCols(width, widthDivisor, fontDivisor)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.GetTextCols(widthDivisor, fontDivisor)");
-    err.IsValue(width, "width");
-    err.IsValue(widthDivisor, "widthDivisor");
-    err.IsValue(fontDivisor, "fontDivisor");
-    err.ShowError();
-
     let retValue = Math.ceil((width / widthDivisor) / fontDivisor);
     return retValue;
   }
@@ -360,11 +260,6 @@ class LJC
   // Sets the textarea rows for newlines.
   static SetTextRows(eItem)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.SetTextRows(eItem)");
-    err.IsValue(eItem, "eItem");
-    err.ShowError();
-
     let count = eItem.rows;
     let matches = eItem.value.match(/\n/g);
     if (Array.isArray(matches))
@@ -385,12 +280,6 @@ class LJC
   // do not start with "on".
   static ShowProperties(location, item)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.ShowProperties(location, item)");
-    err.IsValue(location, "location");
-    err.IsValue(item, "item");
-    err.ShowError();
-
     let startText = `${location}: `;
 
     let results = `${startText}\r\n`;
@@ -422,12 +311,6 @@ class LJC
   static ShowSelectProperties(item, typeName, startText = null
     , propertyNames = null)
   {
-    let err = new ArgError();
-    err.SetContext("LJC.ShowSelectProperties(item, typeName)");
-    err.IsValue(item, "item");
-    err.IsValue(typeName, "typeName");
-    err.ShowError();
-
     if (null == propertyNames)
     {
       propertyNames = LJC.GetPropertyNames(typeName);
@@ -464,12 +347,6 @@ class LJC
   {
     let retValue = "";
 
-    let err = new ArgError();
-    err.SetContext("LJC.ShowPropertyOutput(item, propertyName)");
-    err.IsValue(item, "item");
-    err.IsValue(propertyName, "propertyName");
-    err.ShowError();
-
     if (propertyName in item)
     {
       retValue = `${propertyName}=${item[propertyName]}\r\n`;
@@ -481,11 +358,6 @@ class LJC
   static GetPropertyNames(typeName)
   {
     let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.GetPropertyNames(typeName)");
-    err.IsValue(typeName, "typeName");
-    err.ShowError();
 
     switch (typeName.toLowerCase().trim())
     {
@@ -529,11 +401,6 @@ class LJC
   static GetStartText(typeName, startText = null)
   {
     let retValue = null;
-
-    let err = new ArgError();
-    err.SetContext("LJC.GetStartText(typeName)");
-    err.IsValue(typeName, "typeName");
-    err.ShowError();
 
     if (null == startText)
     {

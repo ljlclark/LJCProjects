@@ -1,7 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Replacements.js
-// <script src="../ArgErr.js"></script>
 // <script src="../LJCCommon.js"></script>
 
 // Represents a collection of items.
@@ -11,12 +10,6 @@ class Replacements
   static SortName(compare, compareTo)
   {
     let retValue = 0;
-
-    let err = new ArgError();
-    err.SetContext("Replacements.TextGen.TextGen(sections, lines)");
-    err.IsValue(compare, "compare");
-    err.IsValue(compareTo, "compareTo");
-    err.ShowError();
 
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
@@ -34,7 +27,6 @@ class Replacements
   // The Constructor method.
   constructor()
   {
-    this.Err = new ArgError();
     this.ItemArray = [];
     this.PreviousCount = 1;
   }
@@ -42,10 +34,6 @@ class Replacements
   // Adds a new object.
   Add(name, value)
   {
-    this.Err.SetContext("Replacements.Add(name)");
-    this.Err.IsValue(name, "name");
-    this.Err.ShowError();
-
     let item = new Replacement(name, value);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
@@ -56,12 +44,6 @@ class Replacements
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let err = new ArgError();
-    err.SetContext("Replacements.Compare(compareItem, compareToValue)");
-    err.IsValue(compareItem, "compareItem");
-    err.IsValue(compareToValue, "compareToValue");
-    err.ShowError();
-
     let compareToItem = new Replacement(compareToValue);
     return Replacements.SortName(compareItem, compareToItem);
   }
@@ -84,10 +66,6 @@ class Replacements
   {
     let retValue = null;
 
-    this.Err.SetContext("Replacements.Delete(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
-
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
@@ -99,10 +77,6 @@ class Replacements
   // Get an item by index.
   Items(index)
   {
-    this.Err.SetContext("Replacements.Items(index)");
-    this.Err.IsValue(index, "index");
-    this.Err.ShowError();
-
     let retValue = this.ItemArray[index];
     return retValue;
   }
@@ -111,10 +85,6 @@ class Replacements
   Retrieve(compareToValue)
   {
     let retValue = null;
-
-    this.Err.SetContext("Replacements.Retrieve(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
 
     let index = this.Search(compareToValue);
     if (index >= 0)
@@ -127,10 +97,6 @@ class Replacements
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
-    this.Err.SetContext("Replacements.Search(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
-
     this.Sort();
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);

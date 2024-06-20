@@ -1,8 +1,6 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RepeatItems.js
-
-// <script src="../ArgErr.js"></script>
 // <script src="../LJCCommon.js"></script>
 
 // Represents a collection of items.
@@ -12,12 +10,6 @@ class RepeatItems
   static SortName(compare, compareTo)
   {
     let retValue = 0;
-
-    let err = new ArgError();
-    err.SetContext("RepeatItems.TextGen.TextGen(sections, lines)");
-    err.IsValue(compare, "compare");
-    err.IsValue(compareTo, "compareTo");
-    err.ShowError();
 
     let compareValue = compare.Name.toLowerCase();
     let compareToValue = compareTo.Name.toLowerCase();
@@ -35,7 +27,6 @@ class RepeatItems
   // The Constructor method.
   constructor()
   {
-    this.Err = new ArgError();
     this.ItemArray = [];
     this.PreviousCount = 1;
   }
@@ -43,10 +34,6 @@ class RepeatItems
   // Adds a new object.
   Add(name)
   {
-    this.Err.SetContext("RepeatItems.Add(name)");
-    this.Err.IsValue(name, "name");
-    this.Err.ShowError();
-
     let item = new RepeatItem(name);
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
@@ -57,12 +44,6 @@ class RepeatItems
   // The Name compare method.
   Compare(compareItem, compareToValue)
   {
-    let err = new ArgError();
-    err.SetContext("RepeatItems.Compare(compareItem, compareToValue)");
-    err.IsValue(compareItem, "compareItem");
-    err.IsValue(compareToValue, "compareToValue");
-    err.ShowError();
-
     let compareToItem = new RepeatItem(compareToValue);
     return RepeatItems.SortName(compareItem, compareToItem);
   }
@@ -85,10 +66,6 @@ class RepeatItems
   {
     let retValue = null;
 
-    this.Err.SetContext("RepeatItems.Delete(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
-
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
@@ -100,10 +77,6 @@ class RepeatItems
   // Get an item by index.
   Items(index)
   {
-    this.Err.SetContext("RepeatItems.Items(index)");
-    this.Err.IsValue(index, "index");
-    this.Err.ShowError();
-
     let retValue = this.ItemArray[index];
     return retValue;
   }
@@ -112,10 +85,6 @@ class RepeatItems
   Retrieve(compareToValue)
   {
     let retValue = null;
-
-    this.Err.SetContext("RepeatItems.Retrieve(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
 
     let index = this.Search(compareToValue);
     if (index >= 0)
@@ -128,10 +97,6 @@ class RepeatItems
   // Retrieve the matching item indexs.
   Search(compareToValue)
   {
-    this.Err.SetContext("RepeatItems.Search(compareToValue)");
-    this.Err.IsValue(compareToValue, "compareToValue");
-    this.Err.ShowError();
-
     this.Sort();
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
