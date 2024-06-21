@@ -38,7 +38,7 @@ class TextGenEvent
     const base = "https://github.com/ljlclark"
     const cBase = "/LJCProjects/blob/main";
     const c = "/CoreUtilities/LJCGenText/LJCGenTableCode/bin/Debug/Templates";
-    const js = "/JavascriptCommon/TextGen/Templates";
+    const js = "/JavascriptCommon/TextGenLib/Templates";
 
     let eItem = event.target;
     tableDataMenu.style.visibility = "hidden";
