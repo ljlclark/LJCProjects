@@ -44,6 +44,7 @@ class TextGenCode
         if ("#commentchars" == name)
         {
           commentChars = directive.Value;
+          continue;
         }
 
         switch (name)
