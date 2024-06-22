@@ -9,14 +9,14 @@
 // Generate output text from a template and data.
 class TextGenLib
 {
-
   // Returns directive if line is a directive.
   static GetDirective(line, commentChars = "//")
   {
     let retValue = null;
 
     if (line != null
-      && line.trim().startsWith(commentChars))
+      && (line.trim().startsWith(commentChars)
+      || line.toLowerCase().includes("#commentchars")))
     {
       let tokens = line.trim().split(/\s+/g);
       if (tokens.length > 2
@@ -73,6 +73,9 @@ class TextGenLib
   constructor(commentChars = "//")
   {
     this.CommentChars = commentChars;
+    this.PlaceholderBegin = "_";
+    this.PlaceholderEnd = "_";
+
     this.Lines = [];
     this.Output = "";
     this.Sections = [];
@@ -93,7 +96,11 @@ class TextGenLib
       ; lineIndex.Value++)
     {
       let line = this.Lines[lineIndex.Value];
-      //let section = new Section("Empty");
+      if (this.IsConfig(line))
+      {
+        continue;
+      }
+
       let sectionItem = { Value: null };
       if (this.IsSectionBegin(line, sectionItem))
       {
@@ -157,14 +164,17 @@ class TextGenLib
   // Perform the line replacements.
   DoReplacements(item, lineItem)
   {
-    if (lineItem.Value.includes("_"))
+    //if (lineItem.Value.includes("_"))
+    if (lineItem.Value.includes(this.DelimiterBegin))
     {
       let replacements = item.Replacements;
       replacements.Sort();
       let line = lineItem.Value;
 
       //const matches = line.match(/(?<=_).+?(?=_)/g);
-      const matches = line.match(/_.+?_/g);
+      let match = `${this.PlaceholderBegin}.+?${this.PlaceholderEnd}`;
+      let matchRegex = new RegExp(match, "g");
+      const matches = line.match(matchRegex);
       for (let index = 0; index < matches.length; index++)
       {
         let match = matches[index];
@@ -199,7 +209,10 @@ class TextGenLib
     if (directive != null)
     {
       let lowerName = directive.Name.toLowerCase();
-      if (lowerName == "#sectionbegin"
+      if (lowerName == "#commentchars"
+        || lowerName == "#placeholderbegin"
+        || lowerName == "#placeholderend"
+        || lowerName == "#sectionbegin"
         || lowerName == "#sectionend"
         || lowerName == "#value")
       {
@@ -236,6 +249,36 @@ class TextGenLib
       && "#sectionend" == directive.Name.toLowerCase())
     {
       retValue = true;
+    }
+    return retValue;
+  }
+
+  // Sets the configuration values.
+  IsConfig(line)
+  {
+    let retValue = false;
+
+    // Sets the configuration.
+    if (this.IsDirective(line))
+    {
+      let directive = TextGenLib.GetDirective(line);
+      switch (directive.Name.toLowerCase())
+      {
+        case "#commentchars":
+          retValue = true;
+          this.CommentChars = directive.Value;
+          break;
+
+        case "#placeholderbegin":
+          retValue = true;
+          this.PlaceholderBegin = directive.Value;
+          break;
+
+        case "#placeholderend":
+          retValue = true;
+          this.PlaceholderEnd = directive.Value;
+          break;
+      }
     }
     return retValue;
   }
