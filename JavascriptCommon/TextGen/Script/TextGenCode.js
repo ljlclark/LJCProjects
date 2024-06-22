@@ -31,15 +31,22 @@ class TextGenCode
   static CreateData(templateText)
   {
     //let text = template.value;
+    let commentChars = "//";
     let lines = templateText.split("\n");
     let b = new StringBuilder();
     for (let index = 0; index < lines.length; index++)
     {
       let line = lines[index];
-      let directive = TextGenLib.GetDirective(line);
+      let directive = TextGenLib.GetDirective(line, commentChars);
       if (directive != null)
       {
-        switch (directive.Name.toLowerCase())
+        let name = directive.Name.toLowerCase();
+        if ("#commentchars" == name)
+        {
+          commentChars = directive.Value;
+        }
+
+        switch (name)
         {
           case "#sectionbegin":
             if (b.ToString().length > 0)

@@ -70,9 +70,9 @@ class TextGenLib
   }
 
   // The Constructor function.
-  constructor(commentChars = "//")
+  constructor()
   {
-    this.CommentChars = commentChars;
+    this.CommentChars = "//";
     this.PlaceholderBegin = "_";
     this.PlaceholderEnd = "_";
 
@@ -165,7 +165,7 @@ class TextGenLib
   DoReplacements(item, lineItem)
   {
     //if (lineItem.Value.includes("_"))
-    if (lineItem.Value.includes(this.DelimiterBegin))
+    if (lineItem.Value.includes(this.PlaceholderBegin))
     {
       let replacements = item.Replacements;
       replacements.Sort();
@@ -243,7 +243,7 @@ class TextGenLib
   {
     let retValue = false;
 
-    // Directive Layout = "// #SectionBegin Name"
+    // Directive Layout = "// #SectionEnd Name"
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null
       && "#sectionend" == directive.Name.toLowerCase())
@@ -261,7 +261,7 @@ class TextGenLib
     // Sets the configuration.
     if (this.IsDirective(line))
     {
-      let directive = TextGenLib.GetDirective(line);
+      let directive = TextGenLib.GetDirective(line, this.CommentChars);
       switch (directive.Name.toLowerCase())
       {
         case "#commentchars":

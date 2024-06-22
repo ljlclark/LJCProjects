@@ -1,5 +1,8 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
 // #SectionBegin Main
 // #Value _CollectionName_
 // #Value _ClassName_
