@@ -125,7 +125,6 @@ class Section
   constructor(name = null)
   {
     this.Name = name;
-    this.CurrentItemIndex = -1;
     this.BeginLineIndex = -1;
     this.RepeatItems = new RepeatItems();
   }
