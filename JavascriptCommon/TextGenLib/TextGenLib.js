@@ -16,7 +16,7 @@ class TextGenLib
 
     if (line != null
       && (line.trim().startsWith(commentChars)
-      || line.toLowerCase().includes("#commentchars")))
+        || line.toLowerCase().includes("#commentchars")))
     {
       let tokens = line.trim().split(/\s+/g);
       if (tokens.length > 2
@@ -79,6 +79,7 @@ class TextGenLib
     this.Lines = [];
     this.Output = "";
     this.Sections = [];
+    this.ActiveReplacements = [];
   }
 
   // Main Processing Methods
@@ -131,9 +132,19 @@ class TextGenLib
         let sectionItem = { Value: null }
         if (this.IsSectionBegin(line, sectionItem))
         {
+          let hasActiveItem = false;
+          if (TextGenLib.HasReplacements(item.Replacements))
+          {
+            hasActiveItem = true;
+            this.ActiveReplacements.push(item.Replacements);
+          }
           sectionItem.Value.BeginLineIndex = index + 1;
           lineIndex.Value++;
           this.ProcessItems(sectionItem.Value, lineIndex);
+          if (hasActiveItem)
+          {
+            this.ActiveReplacements.pop();
+          }
           index = lineIndex.Value;
         }
 
@@ -183,6 +194,20 @@ class TextGenLib
         {
           lineItem.Value = lineItem.Value.replaceAll(match
             , replacement.Value);
+        }
+        else
+        {
+          let active = this.ActiveReplacements;
+          for (let index = active.length - 1; index >= 0; index--)
+          {
+            replacement = active[index].Retrieve(match);
+            if (replacement != null)
+            {
+              lineItem.Value = lineItem.Value.replaceAll(match
+                , replacement.Value);
+              break;
+            }
+          }
         }
       }
     }
