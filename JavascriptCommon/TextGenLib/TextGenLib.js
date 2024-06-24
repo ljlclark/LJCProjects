@@ -24,7 +24,16 @@ class TextGenLib
       {
         let name = tokens[1];
         let value = tokens[2];
-        retValue = { Name: name, Value: value };
+        let dataType = "string";
+        if (tokens.length > 3)
+        {
+          dataType = tokens[3];
+        }
+        retValue = {
+          Name: name,
+          Value: value,
+          DataType: dataType
+        };
       }
     }
     return retValue;
@@ -36,6 +45,7 @@ class TextGenLib
     let retValue = false;
 
     if (items != null
+      && "RepeatItems" == items.Name
       && items.Count() > 0)
     {
       retValue = true;
@@ -49,6 +59,7 @@ class TextGenLib
     let retValue = false;
 
     if (replacements != null
+      && "Replacements" == replacements.Name
       && replacements.Count() > 0)
     {
       retValue = true;
@@ -62,6 +73,7 @@ class TextGenLib
     let retValue = false;
 
     if (sections != null
+      && "Sections" == sections.Name
       && sections.Count() > 0)
     {
       retValue = true;

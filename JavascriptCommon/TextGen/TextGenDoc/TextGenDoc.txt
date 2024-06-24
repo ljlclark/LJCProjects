@@ -1,0 +1,24 @@
+
+What is a Text Generator
+                                                                            |
+There are times when a well designed and standardized text file can be
+reused by customizing certain values in the file. It could be a simple legal
+document, marketing mailer, routine negative for a radiology department or a
+software developer's code.
+                                                                            |
+In some cases we could use a simple form with blanks that are filled out
+manually when  needed. However, sometimes the document needs to look like it
+was done especially for the occasion or it needs to be in a text file
+format. In these cases a common approach is to create a template with the
+fixed text and placeholders that indicate where the custom data should be
+inserted. Then we want to replace those placeholders with the custom data
+and generate the customized text file.
+                                                                            |
+There are many tools available to do this on the computer. Some require the
+purchase or download of special software. Many have steep learning curves
+and some even require learning complex programming languages to generate the
+final text. Sometimes these can be useful; but, often they are overkill and
+what we really need is something much simpler.
+
+A Text Generator for the Rest of Us
+

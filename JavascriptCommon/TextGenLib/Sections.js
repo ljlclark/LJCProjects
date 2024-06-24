@@ -28,8 +28,11 @@ class Sections
   constructor()
   {
     this.ItemArray = [];
+    this.Name = "Sections";
     this.PreviousCount = 1;
   }
+
+  // Data Methods
 
   // Adds a new object.
   Add(name)
@@ -38,26 +41,6 @@ class Sections
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
-    return retValue;
-  }
-
-  // The Name compare method.
-  Compare(compareItem, compareToValue)
-  {
-    let compareToItem = new Section(compareToValue);
-    return Sections.SortName(compareItem, compareToItem);
-  }
-
-  // Gets the element count.
-  Count()
-  {
-    let retValue = 0;
-
-    if (this.ItemArray
-      && Array.isArray(this.ItemArray))
-    {
-      retValue = this.ItemArray.length;
-    }
     return retValue;
   }
 
@@ -71,13 +54,6 @@ class Sections
     {
       retValue = this.ItemArray.splice(index, 1);
     }
-    return retValue;
-  }
-
-  // Gets an item by index.
-  Items(index)
-  {
-    let retValue = this.ItemArray[index];
     return retValue;
   }
 
@@ -100,6 +76,35 @@ class Sections
     this.Sort();
     let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
       , this.Compare);
+    return retValue;
+  }
+
+  // Collection Methods
+
+  // The Name compare method.
+  Compare(compareItem, compareToValue)
+  {
+    let compareToItem = new Section(compareToValue);
+    return Sections.SortName(compareItem, compareToItem);
+  }
+
+  // Gets the element count.
+  Count()
+  {
+    let retValue = 0;
+
+    if (this.ItemArray
+      && Array.isArray(this.ItemArray))
+    {
+      retValue = this.ItemArray.length;
+    }
+    return retValue;
+  }
+
+  // Gets an item by index.
+  Items(index)
+  {
+    let retValue = this.ItemArray[index];
     return retValue;
   }
 

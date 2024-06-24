@@ -28,8 +28,11 @@ class Replacements
   constructor()
   {
     this.ItemArray = [];
+    this.Name = "Replacements";
     this.PreviousCount = 1;
   }
+
+  // Data Methods
 
   // Adds a new object.
   Add(name, value)
@@ -38,26 +41,6 @@ class Replacements
     this.ItemArray.push(item);
     let lastIndex = this.ItemArray.length - 1;
     let retValue = this.ItemArray[lastIndex];
-    return retValue;
-  }
-
-  // The Name compare method.
-  Compare(compareItem, compareToValue)
-  {
-    let compareToItem = new Replacement(compareToValue);
-    return Replacements.SortName(compareItem, compareToItem);
-  }
-
-  // Gets the element count.
-  Count()
-  {
-    let retValue = 0;
-
-    if (this.ItemArray
-      && Array.isArray(this.ItemArray))
-    {
-      retValue = this.ItemArray.length;
-    }
     return retValue;
   }
 
@@ -71,13 +54,6 @@ class Replacements
     {
       retValue = this.ItemArray.splice(index, 1);
     }
-    return retValue;
-  }
-
-  // Get an item by index.
-  Items(index)
-  {
-    let retValue = this.ItemArray[index];
     return retValue;
   }
 
@@ -103,6 +79,35 @@ class Replacements
     return retValue;
   }
 
+  // Collection Methods
+
+  // The Name compare method.
+  Compare(compareItem, compareToValue)
+  {
+    let compareToItem = new Replacement(compareToValue);
+    return Replacements.SortName(compareItem, compareToItem);
+  }
+
+  // Gets the element count.
+  Count()
+  {
+    let retValue = 0;
+
+    if (this.ItemArray
+      && Array.isArray(this.ItemArray))
+    {
+      retValue = this.ItemArray.length;
+    }
+    return retValue;
+  }
+
+  // Get an item by index.
+  Items(index)
+  {
+    let retValue = this.ItemArray[index];
+    return retValue;
+  }
+
   // Sort the internal array.
   Sort(sortMethod = null)
   {
@@ -122,9 +127,10 @@ class Replacements
 class Replacement
 {
   // The Constructor method.
-  constructor(name, value = null)
+  constructor(name, value = null, dataType = "string")
   {
     this.Name = name;
     this.Value = value;
+    this.DataType = dataType;
   }
 }
