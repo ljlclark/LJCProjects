@@ -14,6 +14,7 @@ class TextGenLib
   {
     let retValue = null;
 
+    // Directive Layout = "// #Directive Name [DataType]"
     if (line != null
       && (line.trim().startsWith(commentChars)
         || line.toLowerCase().includes("#commentchars")))
@@ -144,19 +145,27 @@ class TextGenLib
         let sectionItem = { Value: null }
         if (this.IsSectionBegin(line, sectionItem))
         {
+          // New Section is returned in sectionItem.Value.
+          // Add current replacements to Active array.
           let hasActiveItem = false;
           if (TextGenLib.HasReplacements(item.Replacements))
           {
             hasActiveItem = true;
             this.ActiveReplacements.push(item.Replacements);
           }
-          sectionItem.Value.BeginLineIndex = index + 1;
+
+          // RepeatItem processing starts with first line.
           lineIndex.Value++;
+          sectionItem.Value.BeginLineIndex = lineIndex.Value;
+
           this.ProcessItems(sectionItem.Value, lineIndex);
           if (hasActiveItem)
           {
+            // Remove Replacements that are no longer active.
             this.ActiveReplacements.pop();
           }
+
+          // Continue with returned line index after the processed section.
           index = lineIndex.Value;
         }
 
@@ -171,6 +180,7 @@ class TextGenLib
           lineIndex.Value++;
         }
 
+        // Important directives have been processed.
         if (!this.IsDirective(line))
         {
           let lineItem = { Value: line };
@@ -187,7 +197,6 @@ class TextGenLib
   // Perform the line replacements.
   DoReplacements(item, lineItem)
   {
-    //if (lineItem.Value.includes("_"))
     if (lineItem.Value.includes(this.PlaceholderBegin))
     {
       let replacements = item.Replacements;
@@ -209,6 +218,8 @@ class TextGenLib
         }
         else
         {
+          // Replacement not found in current collection.
+          // Check active replacements.
           let active = this.ActiveReplacements;
           for (let index = active.length - 1; index >= 0; index--)
           {
