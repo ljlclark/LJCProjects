@@ -82,34 +82,36 @@ class TextGenLib
     return retValue;
   }
 
+  // Private Properties
+
+  #ActiveReplacements = [];
+  #Lines = [];
+  #Output = "";
+  #Sections = [];
+
   // The Constructor function.
   constructor()
   {
     this.CommentChars = "//";
     this.PlaceholderBegin = "_";
     this.PlaceholderEnd = "_";
-
-    this.Lines = [];
-    this.Output = "";
-    this.Sections = [];
-    this.ActiveReplacements = [];
   }
 
   // Main Processing Methods
 
-  // Generate the output text.
+  // Generate the #Output text.
   TextGen(sections, templateLines)
   {
     let retValue = "";
 
-    this.Sections = sections;
-    this.Lines = templateLines;
+    this.#Sections = sections;
+    this.#Lines = templateLines;
 
     let lineIndex = { Value: 0 };
     for (lineIndex.Value = 0; lineIndex.Value < templateLines.length
       ; lineIndex.Value++)
     {
-      let line = this.Lines[lineIndex.Value];
+      let line = this.#Lines[lineIndex.Value];
       if (this.#IsConfig(line))
       {
         continue;
@@ -125,7 +127,7 @@ class TextGenLib
       }
       this.#AddOutput(line);
     }
-    retValue = this.Output;
+    retValue = this.#Output;
     return retValue;
   }
 
@@ -137,9 +139,9 @@ class TextGenLib
     {
       let item = items.Items(itemIndex);
       let index = 0;
-      for (index = lineIndex.Value; index < this.Lines.length; index++)
+      for (index = lineIndex.Value; index < this.#Lines.length; index++)
       {
-        let line = this.Lines[index];
+        let line = this.#Lines[index];
         lineIndex.Value = index;
 
         let sectionItem = { Value: null }
@@ -151,7 +153,7 @@ class TextGenLib
           if (TextGenLib.HasReplacements(item.Replacements))
           {
             hasActiveItem = true;
-            this.ActiveReplacements.push(item.Replacements);
+            this.#ActiveReplacements.push(item.Replacements);
           }
 
           // RepeatItem processing starts with first line.
@@ -162,7 +164,7 @@ class TextGenLib
           if (hasActiveItem)
           {
             // Remove Replacements that are no longer active.
-            this.ActiveReplacements.pop();
+            this.#ActiveReplacements.pop();
           }
 
           // Continue with returned line index after the processed section.
@@ -220,7 +222,7 @@ class TextGenLib
         {
           // Replacement not found in current collection.
           // Check active replacements.
-          let active = this.ActiveReplacements;
+          let active = this.#ActiveReplacements;
           for (let index = active.length - 1; index >= 0; index--)
           {
             replacement = active[index].Retrieve(match);
@@ -241,11 +243,11 @@ class TextGenLib
   // Add the line to the output.
   #AddOutput(line)
   {
-    if (this.Output.length > 0)
+    if (this.#Output.length > 0)
     {
-      this.Output += "\r\n";
+      this.#Output += "\r\n";
     }
-    this.Output += line;
+    this.#Output += line;
   }
 
   // Checks if the line has a directive.
@@ -280,7 +282,7 @@ class TextGenLib
     if (directive != null
       && "#sectionbegin" == directive.Name.toLowerCase())
     {
-      sectionItem.Value = this.Sections.Retrieve(directive.Value);
+      sectionItem.Value = this.#Sections.Retrieve(directive.Value);
       retValue = true;
     }
     return retValue;
