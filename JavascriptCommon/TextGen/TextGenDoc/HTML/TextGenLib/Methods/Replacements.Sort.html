@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!-- RepeatItems.Retrieve.html -->
+<!-- Replacements.Sort.html -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Retrieve</title>
+  <title>Sort</title>
   <meta charset="utf-8" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width" initial-scale=1 />
@@ -15,20 +15,20 @@
     <div class="PathText">
       / <a href="../../../index.html#TextGenLib">TextGen</a>
       / <a href="../TextGenLibClasses.html">TextGenLib</a>
-      / <a href="../RepeatItems.html">RepeatItems</a>
-      / Retrieve
+      / <a href="../Replacements.html">Replacements</a>
+      / Sort
     </div>
     <br />
     <div id='Header'>
-      <div id='Title'>Method Retrieve</div>
+      <div id='Title'>Method Sort</div>
     </div>
     <br />
     <div id='Title'>Parameters</div>
-    <div class='Text'>compareToValue - The key data value.</div>
+    <div class='Text'>sortMethod - The sort method reference.</div>
     <br />
-    <div class='Text'>Returns</div>
-    <br />
-    <div class='Text'>The matching collection item.</div>
+    <div class='Text'>
+      Sorts the collection.
+    </div>
     <br />
     <div class='Text'>Syntax</div>
     <br />
@@ -38,7 +38,7 @@
           <tr><th class='CodeTable'>JavaScript</th></tr>
           <tr class='CodeTable'>
             <td class='CodeTable'>
-              Retrieve(compareToValue)
+              Sort(sortMethod)
             </td>
           </tr>
         </tbody>
@@ -46,7 +46,8 @@
     </div>
     <br />
     <div class='Text'>
-      Retrieves an item with the supplied name.
+      Sorts the collection using the supplied sort function. Uses
+      Replacements.SortName() function if not supplied.
     </div>
     <br />
     <div class="SmallText">
@@ -55,5 +56,6 @@
     </div>
     <br />
   </div>
+  <!-- End "page"" -->
 </body>
 </html>
