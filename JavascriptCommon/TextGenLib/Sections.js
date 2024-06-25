@@ -24,14 +24,14 @@ class Sections
     return retValue;
   }
 
-  // Properties
-  Name = "Sections";
-  PreviousCount = -1;
+  // Private Properties
   #ItemArray = [];
 
   // The Constructor method.
   constructor()
   {
+    this.Name = "Sections";
+    this.PreviousCount = -1;
   }
 
   // Data Methods

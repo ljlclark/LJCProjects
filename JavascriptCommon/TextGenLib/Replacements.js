@@ -24,14 +24,14 @@ class Replacements
     return retValue;
   }
 
-  // Properties
-  Name = "Replacements";
-  PreviousCount = -1;
+  // Private Properties
   #ItemArray = [];
 
   // The Constructor method.
   constructor()
   {
+    this.Name = "Replacements";
+    this.PreviousCount = -1;
   }
 
   // Data Methods

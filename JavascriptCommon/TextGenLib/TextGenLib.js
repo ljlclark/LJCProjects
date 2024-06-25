@@ -110,27 +110,27 @@ class TextGenLib
       ; lineIndex.Value++)
     {
       let line = this.Lines[lineIndex.Value];
-      if (this.IsConfig(line))
+      if (this.#IsConfig(line))
       {
         continue;
       }
 
       let sectionItem = { Value: null };
-      if (this.IsSectionBegin(line, sectionItem))
+      if (this.#IsSectionBegin(line, sectionItem))
       {
         lineIndex.Value++;
         sectionItem.Value.BeginLineIndex = lineIndex.Value;
-        this.ProcessItems(sectionItem.Value, lineIndex);
+        this.#ProcessItems(sectionItem.Value, lineIndex);
         continue;
       }
-      this.AddOutput(line);
+      this.#AddOutput(line);
     }
     retValue = this.Output;
     return retValue;
   }
 
   // Process the RepeatItems.
-  ProcessItems(section, lineIndex)
+  #ProcessItems(section, lineIndex)
   {
     let items = section.RepeatItems;
     for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
@@ -143,7 +143,7 @@ class TextGenLib
         lineIndex.Value = index;
 
         let sectionItem = { Value: null }
-        if (this.IsSectionBegin(line, sectionItem))
+        if (this.#IsSectionBegin(line, sectionItem))
         {
           // New Section is returned in sectionItem.Value.
           // Add current replacements to Active array.
@@ -158,7 +158,7 @@ class TextGenLib
           lineIndex.Value++;
           sectionItem.Value.BeginLineIndex = lineIndex.Value;
 
-          this.ProcessItems(sectionItem.Value, lineIndex);
+          this.#ProcessItems(sectionItem.Value, lineIndex);
           if (hasActiveItem)
           {
             // Remove Replacements that are no longer active.
@@ -169,7 +169,7 @@ class TextGenLib
           index = lineIndex.Value;
         }
 
-        if (this.IsSectionEnd(line))
+        if (this.#IsSectionEnd(line))
         {
           if (itemIndex < items.Count() - 1)
           {
@@ -181,21 +181,21 @@ class TextGenLib
         }
 
         // Important directives have been processed.
-        if (!this.IsDirective(line))
+        if (!this.#IsDirective(line))
         {
           let lineItem = { Value: line };
           if (line.trim().length > 0)
           {
-            this.DoReplacements(item, lineItem);
+            this.#DoReplacements(item, lineItem);
           }
-          this.AddOutput(lineItem.Value);
+          this.#AddOutput(lineItem.Value);
         }
       }
     }
   }
 
   // Perform the line replacements.
-  DoReplacements(item, lineItem)
+  #DoReplacements(item, lineItem)
   {
     if (lineItem.Value.includes(this.PlaceholderBegin))
     {
@@ -239,7 +239,7 @@ class TextGenLib
   // Other Methods
 
   // Add the line to the output.
-  AddOutput(line)
+  #AddOutput(line)
   {
     if (this.Output.length > 0)
     {
@@ -249,7 +249,7 @@ class TextGenLib
   }
 
   // Checks if the line has a directive.
-  IsDirective(line)
+  #IsDirective(line)
   {
     let retValue = false;
 
@@ -271,7 +271,7 @@ class TextGenLib
   }
 
   // Checks if the line is a SectionBegin.
-  IsSectionBegin(line, sectionItem)
+  #IsSectionBegin(line, sectionItem)
   {
     let retValue = false;
 
@@ -287,7 +287,7 @@ class TextGenLib
   }
 
   // Checks if the line is a SectionEnd.  // 
-  IsSectionEnd(line)
+  #IsSectionEnd(line)
   {
     let retValue = false;
 
@@ -302,12 +302,12 @@ class TextGenLib
   }
 
   // Sets the configuration values.
-  IsConfig(line)
+  #IsConfig(line)
   {
     let retValue = false;
 
     // Sets the configuration.
-    if (this.IsDirective(line))
+    if (this.#IsDirective(line))
     {
       let directive = TextGenLib.GetDirective(line, this.CommentChars);
       switch (directive.Name.toLowerCase())

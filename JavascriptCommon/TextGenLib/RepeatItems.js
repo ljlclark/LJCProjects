@@ -24,14 +24,14 @@ class RepeatItems
     return retValue;
   }
 
-  // Properties
-  Name = "RepeatItems";
-  PreviousCount = -1;
+  // Private Properties
   #ItemArray = [];
 
   // The Constructor method.
   constructor()
   {
+    this.Name = "RepeatItems";
+    this.PreviousCount = -1;
   }
 
   // Data Methods
