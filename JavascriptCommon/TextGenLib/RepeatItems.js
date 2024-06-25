@@ -24,12 +24,14 @@ class RepeatItems
     return retValue;
   }
 
+  // Properties
+  Name = "RepeatItems";
+  PreviousCount = -1;
+  #ItemArray = [];
+
   // The Constructor method.
   constructor()
   {
-    this.ItemArray = [];
-    this.Name = "RepeatItems";
-    this.PreviousCount = 1;
   }
 
   // Data Methods
@@ -38,9 +40,9 @@ class RepeatItems
   Add(name)
   {
     let item = new RepeatItem(name);
-    this.ItemArray.push(item);
-    let lastIndex = this.ItemArray.length - 1;
-    let retValue = this.ItemArray[lastIndex];
+    this.#ItemArray.push(item);
+    let lastIndex = this.#ItemArray.length - 1;
+    let retValue = this.#ItemArray[lastIndex];
     return retValue;
   }
 
@@ -52,7 +54,7 @@ class RepeatItems
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
-      retValue = this.ItemArray.splice(index, 1);
+      retValue = this.#ItemArray.splice(index, 1);
     }
     return retValue;
   }
@@ -65,7 +67,7 @@ class RepeatItems
     let index = this.Search(compareToValue);
     if (index >= 0)
     {
-      retValue = this.ItemArray[index];
+      retValue = this.#ItemArray[index];
     }
     return retValue;
   }
@@ -74,7 +76,7 @@ class RepeatItems
   Search(compareToValue)
   {
     this.Sort();
-    let retValue = LJC.BinarySearch(this.ItemArray, compareToValue
+    let retValue = LJC.BinarySearch(this.#ItemArray, compareToValue
       , this.Compare);
     return retValue;
   }
@@ -93,10 +95,10 @@ class RepeatItems
   {
     let retValue = 0;
 
-    if (this.ItemArray
-      && Array.isArray(this.ItemArray))
+    if (this.#ItemArray
+      && Array.isArray(this.#ItemArray))
     {
-      retValue = this.ItemArray.length;
+      retValue = this.#ItemArray.length;
     }
     return retValue;
   }
@@ -104,7 +106,7 @@ class RepeatItems
   // Get an item by index.
   Items(index)
   {
-    let retValue = this.ItemArray[index];
+    let retValue = this.#ItemArray[index];
     return retValue;
   }
 
@@ -117,7 +119,7 @@ class RepeatItems
       {
         sortMethod = RepeatItems.SortName;
       }
-      this.ItemArray.sort(sortMethod);
+      this.#ItemArray.sort(sortMethod);
       this.PreviousCount = this.Count();
     }
   }
