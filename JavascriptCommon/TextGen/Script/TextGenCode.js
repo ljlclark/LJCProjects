@@ -24,54 +24,7 @@ class TextGenCode
     LJC.SetTextRows(output);
   }
 
-  // Other static functions.
-
-  // Creates the text data from a template.
-  static CreateData(templateText)
-  {
-    //let text = template.value;
-    let commentChars = "//";
-    let lines = templateText.split("\n");
-    let b = new StringBuilder();
-    for (let index = 0; index < lines.length; index++)
-    {
-      let line = lines[index];
-      let directive = TextGenLib.GetDirective(line, commentChars);
-      if (directive != null)
-      {
-        let directiveName = directive.Name.toLowerCase();
-        if ("#commentchars" == directiveName)
-        {
-          commentChars = directive.Value;
-          continue;
-        }
-
-        let name = null;
-        switch (directiveName)
-        {
-          case "#sectionbegin":
-            if (b.ToString().length > 0)
-            {
-              b.Line();
-            }
-            name = directive.Value;
-            b.Line(`Section: ${directive.Value}`);
-            b.Text("Item: Item1");
-            break;
-
-          case "#value":
-            let begin = { Index: 0 }
-            name = directive.Value;
-            let value = LJC.DelimitedString(directive.Value, "_", "_", begin);
-            let dataType = directive.DataType;
-            b.Line();
-            b.Text(`${name} ${value} ${dataType}`);
-            break;
-        }
-      }
-    }
-    return b.ToString();
-  }
+  // Static Create Data Object and Table Functions
 
   // Creates a table from the RepeatItems object.
   static CreateItemRows(section)
@@ -217,6 +170,55 @@ class TextGenCode
     }
   }
 
+  // Other static functions.
+
+  // Creates the text data from a template.
+  static CreateData(templateText)
+  {
+    //let text = template.value;
+    let commentChars = "//";
+    let lines = templateText.split("\n");
+    let b = new StringBuilder();
+    for (let index = 0; index < lines.length; index++)
+    {
+      let line = lines[index];
+      let directive = TextGenLib.GetDirective(line, commentChars);
+      if (directive != null)
+      {
+        let directiveName = directive.Name.toLowerCase();
+        if ("#commentchars" == directiveName)
+        {
+          commentChars = directive.Value;
+          continue;
+        }
+
+        let name = null;
+        switch (directiveName)
+        {
+          case "#sectionbegin":
+            if (b.ToString().length > 0)
+            {
+              b.Line();
+            }
+            name = directive.Value;
+            b.Line(`Section: ${directive.Value}`);
+            b.Text("Item: Item1");
+            break;
+
+          case "#value":
+            let begin = { Index: 0 }
+            name = directive.Value;
+            let value = LJC.DelimitedString(directive.Value, "_", "_", begin);
+            let dataType = directive.DataType;
+            b.Line();
+            b.Text(`${name} ${value} ${dataType}`);
+            break;
+        }
+      }
+    }
+    return b.ToString();
+  }
+
   // Gets a Data object from a data text line.
   static GetData(line)
   {
@@ -232,7 +234,7 @@ class TextGenCode
     return retValue;
   }
 
-  // Callback from selectTable.SelectRow();
+  // Callback from selectTable.SelectRow().
   static TableAction(selectTable, action, data)
   {
     switch (action.toLowerCase())
