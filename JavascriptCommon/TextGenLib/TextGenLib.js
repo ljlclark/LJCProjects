@@ -122,7 +122,16 @@ class TextGenLib
       {
         lineIndex.Value++;
         sectionItem.Value.BeginLineIndex = lineIndex.Value;
-        this.#ProcessItems(sectionItem.Value, lineIndex);
+
+        if (null == sectionItem.Value)
+        {
+          // No Section data.
+          this.#SkipSection(lineIndex.Value);
+        }
+        else
+        {
+          this.#ProcessItems(sectionItem.Value, lineIndex);
+        }
         continue;
       }
       this.#AddOutput(line);
@@ -147,6 +156,13 @@ class TextGenLib
         let sectionItem = { Value: null }
         if (this.#IsSectionBegin(line, sectionItem))
         {
+          if (null == sectionItem.Value)
+          {
+            // No Section data.
+            index = this.#SkipSection(lineIndex.Value);
+            continue;
+          }
+
           // New Section is returned in sectionItem.Value.
           // Add current replacements to Active array.
           let hasActiveItem = false;
@@ -183,16 +199,22 @@ class TextGenLib
         }
 
         // Important directives have been processed.
-        if (!this.#IsDirective(line))
-        {
-          let lineItem = { Value: line };
-          if (line.trim().length > 0)
-          {
-            this.#DoReplacements(item, lineItem);
-          }
-          this.#AddOutput(lineItem.Value);
-        }
+        this.#DoOutput(item, line);
       }
+    }
+  }
+
+  // If not directive, process replacements and add to output.
+  #DoOutput(item, line)
+  {
+    if (!this.#IsDirective(line))
+    {
+      let lineItem = { Value: line };
+      if (line.trim().length > 0)
+      {
+        this.#DoReplacements(item, lineItem);
+      }
+      this.#AddOutput(lineItem.Value);
     }
   }
 
@@ -236,6 +258,24 @@ class TextGenLib
         }
       }
     }
+  }
+
+  // 
+  #SkipSection(lineIndex)
+  {
+    let retValue = lineIndex;
+
+    // Skip to end of section.
+    for (let index = lineIndex; index < this.#Lines.length; index++)
+    {
+      let line = this.#Lines[index];
+      if (this.#IsSectionEnd(line))
+      {
+        retValue = index++;
+        break;
+      }
+    }
+    return retValue;
   }
 
   // Other Methods
