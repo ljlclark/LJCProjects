@@ -20,8 +20,7 @@ class TextGenCode
     let templateText = template.value;
     let lines = templateText.split("\n");
     let textGenLib = new TextGenLib();
-    textGenLib.TextGen(gSections, lines);
-    output.value = textGenLib.Output;
+    output.value = textGenLib.TextGen(gSections, lines);
     LJC.SetTextRows(output);
   }
 
