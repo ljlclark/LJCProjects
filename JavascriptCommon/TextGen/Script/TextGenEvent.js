@@ -12,7 +12,7 @@
 // Generate text event handlers.
 class TextGenEvent
 {
-  // Sets Event handlers.
+  // Sets the Event handlers.
   static SetEvents()
   {
     // window Event Handlers.
