@@ -15,6 +15,7 @@ class TextGenLib
     let retValue = null;
 
     // Directive Layout = "// #Directive Name [DataType]"
+    // Checks for $CommentChars as property may not be set.
     if (line != null
       && (line.trim().startsWith(commentChars)
         || line.toLowerCase().includes("#commentchars")))
@@ -119,9 +120,6 @@ class TextGenLib
       let sectionItem = { Value: null };
       if (this.#IsSectionBegin(line, sectionItem))
       {
-        lineIndex.Value++;
-        sectionItem.Value.BeginLineIndex = lineIndex.Value;
-
         if (null == sectionItem.Value)
         {
           // No Section data.
@@ -129,6 +127,8 @@ class TextGenLib
         }
         else
         {
+          lineIndex.Value++;
+          sectionItem.Value.BeginLineIndex = lineIndex.Value;
           this.#ProcessItems(sectionItem.Value, lineIndex);
         }
         continue;
@@ -210,8 +210,6 @@ class TextGenLib
 
           if (this.#IsSectionEnd(line))
           {
-            //lineIndex.Value++;
-
             // If not last item.
             if (itemIndex < items.Count() - 1)
             {
