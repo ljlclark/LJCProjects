@@ -143,63 +143,90 @@ class TextGenLib
   // Process the RepeatItems.
   #ProcessItems(section, lineIndex)
   {
+    let success = true;
     let items = section.RepeatItems;
-    for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
+    if (!TextGenLib.HasItems(items))
     {
-      let item = items.Items(itemIndex);
-      let index = 0;
-      for (index = lineIndex.Value; index < this.#Lines.length; index++)
+      // No Section data.
+      success = false;
+      lineIndex.Value = this.#SkipSection(lineIndex.Value);
+      lineIndex++;
+    }
+
+    if (success)
+    {
+      for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
       {
-        let line = this.#Lines[index];
-        lineIndex.Value = index;
-
-        let sectionItem = { Value: null }
-        if (this.#IsSectionBegin(line, sectionItem))
+        let item = items.Items(itemIndex);
+        if (!TextGenLib.HasReplacements(item.Replacements))
         {
-          if (null == sectionItem.Value)
-          {
-            // No Section data.
-            index = this.#SkipSection(lineIndex.Value);
-            continue;
-          }
+          lineIndex.Value = this.#SkipSection(lineIndex.Value);
+          //lineIndex.Value++;
 
-          // New Section is returned in sectionItem.Value.
-          // Add current replacements to Active array.
-          let hasActiveItem = false;
-          if (TextGenLib.HasReplacements(item.Replacements))
-          {
-            hasActiveItem = true;
-            this.#ActiveReplacements.push(item.Replacements);
-          }
-
-          // RepeatItem processing starts with first line.
-          lineIndex.Value++;
-          sectionItem.Value.BeginLineIndex = lineIndex.Value;
-
-          this.#ProcessItems(sectionItem.Value, lineIndex);
-          if (hasActiveItem)
-          {
-            // Remove Replacements that are no longer active.
-            this.#ActiveReplacements.pop();
-          }
-
-          // Continue with returned line index after the processed section.
-          index = lineIndex.Value;
-        }
-
-        if (this.#IsSectionEnd(line))
-        {
+          // If not last item.
           if (itemIndex < items.Count() - 1)
           {
             // Do section again for following items.
             lineIndex.Value = section.BeginLineIndex;
-            break;
           }
-          lineIndex.Value++;
+          continue;
         }
 
-        // Important directives have been processed.
-        this.#DoOutput(item, line);
+        let index = 0;
+        for (index = lineIndex.Value; index < this.#Lines.length; index++)
+        {
+          let line = this.#Lines[index];
+          lineIndex.Value = index;
+
+          let sectionItem = { Value: null }
+          if (this.#IsSectionBegin(line, sectionItem))
+          {
+            if (null == sectionItem.Value)
+            {
+              // No Section data.
+              index = this.#SkipSection(lineIndex.Value);
+              continue;
+            }
+
+            // New Section is returned in sectionItem.Value.
+            // Add current replacements to Active array.
+            let hasActiveItem = false;
+            if (TextGenLib.HasReplacements(item.Replacements))
+            {
+              hasActiveItem = true;
+              this.#ActiveReplacements.push(item.Replacements);
+            }
+
+            // RepeatItem processing starts with first line.
+            lineIndex.Value++;
+            sectionItem.Value.BeginLineIndex = lineIndex.Value;
+
+            this.#ProcessItems(sectionItem.Value, lineIndex);
+            if (hasActiveItem)
+            {
+              // Remove Replacements that are no longer active.
+              this.#ActiveReplacements.pop();
+            }
+
+            // Continue with returned line index after the processed section.
+            index = lineIndex.Value;
+          }
+
+          if (this.#IsSectionEnd(line))
+          {
+            // If not last item.
+            if (itemIndex < items.Count() - 1)
+            {
+              // Do section again for following items.
+              lineIndex.Value = section.BeginLineIndex;
+              break;
+            }
+            lineIndex.Value++;
+          }
+
+          // Important directives have been processed.
+          this.#DoOutput(item, line);
+        }
       }
     }
   }

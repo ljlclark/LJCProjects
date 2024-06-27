@@ -3,10 +3,13 @@
 // #CommentChars //
 // #PlaceholderBegin _
 // #PlaceholderEnd _
-// #SectionBegin Main
+// #SectionBegin Title
 // #Value _ClassName_
 // _ClassName_.js
+// #SectionEnd Title
 
+// #SectionBegin Main
+// #Value _ClassName_
 // Represents a data object.
 class _ClassName_
 {
@@ -19,7 +22,8 @@ class _ClassName_
     // #Value _PropertyName_
     // #Value _PropertyValue_
     this._PropertyName_ = _PropertyValue_;
+    // _CLassName_
     // #SectionEnd Properties
   }
-  // #SectionEnd Main
 }
+// #SectionEnd Main
