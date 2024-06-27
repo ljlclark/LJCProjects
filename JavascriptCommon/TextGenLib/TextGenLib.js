@@ -83,7 +83,6 @@ class TextGenLib
   }
 
   // Private Properties
-
   #ActiveReplacements = [];
   #Lines = [];
   #Output = "";
@@ -161,7 +160,6 @@ class TextGenLib
         if (!TextGenLib.HasReplacements(item.Replacements))
         {
           lineIndex.Value = this.#SkipSection(lineIndex.Value);
-          //lineIndex.Value++;
 
           // If not last item.
           if (itemIndex < items.Count() - 1)
@@ -188,19 +186,17 @@ class TextGenLib
               continue;
             }
 
-            // New Section is returned in sectionItem.Value.
-            // Add current replacements to Active array.
-            let hasActiveItem = false;
-            if (TextGenLib.HasReplacements(item.Replacements))
-            {
-              hasActiveItem = true;
-              this.#ActiveReplacements.push(item.Replacements);
-            }
-
             // RepeatItem processing starts with first line.
             lineIndex.Value++;
             sectionItem.Value.BeginLineIndex = lineIndex.Value;
 
+            let hasActiveItem = false;
+            if (TextGenLib.HasReplacements(item.Replacements))
+            {
+              // Add current replacements to Active array.
+              hasActiveItem = true;
+              this.#ActiveReplacements.push(item.Replacements);
+            }
             this.#ProcessItems(sectionItem.Value, lineIndex);
             if (hasActiveItem)
             {
@@ -214,6 +210,8 @@ class TextGenLib
 
           if (this.#IsSectionEnd(line))
           {
+            //lineIndex.Value++;
+
             // If not last item.
             if (itemIndex < items.Count() - 1)
             {
@@ -221,7 +219,6 @@ class TextGenLib
               lineIndex.Value = section.BeginLineIndex;
               break;
             }
-            lineIndex.Value++;
           }
 
           // Important directives have been processed.
