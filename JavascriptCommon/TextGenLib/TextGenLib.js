@@ -170,8 +170,7 @@ class TextGenLib
           continue;
         }
 
-        let index = 0;
-        for (index = lineIndex.Value; index < this.#Lines.length; index++)
+        for (let index = lineIndex.Value; index < this.#Lines.length; index++)
         {
           let line = this.#Lines[index];
           lineIndex.Value = index;
