@@ -144,9 +144,10 @@ class TextGenLib
   {
     let success = true;
     let items = section.RepeatItems;
+
+    // No Section data.
     if (!TextGenLib.HasItems(items))
     {
-      // No Section data.
       success = false;
       lineIndex.Value = this.#SkipSection(lineIndex.Value);
       lineIndex++;
@@ -157,6 +158,8 @@ class TextGenLib
       for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
       {
         let item = items.Items(itemIndex);
+
+        // No Replacement data.
         if (!TextGenLib.HasReplacements(item.Replacements))
         {
           lineIndex.Value = this.#SkipSection(lineIndex.Value);
@@ -218,33 +221,93 @@ class TextGenLib
             }
           }
 
-          // Important directives have been processed.
-          this.#DoOutput(item, line);
+          let process = this.#DoIf(item.Replacements, line, lineIndex);
+          index = lineIndex.Value;
+
+          if (process)
+          {
+            // Does not output directives.
+            this.#DoOutput(item.Replacements, line);
+          }
         }
       }
     }
   }
 
+  // 
+  #DoIf(replacements, line, lineIndex)
+  {
+    let retValue = true;
+
+    let success = true;
+    if (!this.#IsIfBegin(line))
+    {
+      success = false;
+    }
+
+    let directive = null;
+    let replacement = null;
+    if (success)
+    {
+      directive = TextGenLib.GetDirective(line);
+      replacement = replacements.Retrieve(directive.Value);
+      if (null == replacement)
+      {
+        success = false;
+      }
+    }
+
+    let process = false;
+    if (success)
+    {
+      retValue = false;
+      if (replacement.Value == directive.DataType)
+      {
+        process = true;
+      }
+    }
+
+    if (success)
+    {
+      // Process to IfEnd.
+      lineIndex.Value++;
+      for (let index = lineIndex.Value; index < this.#Lines.length; index++)
+      {
+        let line = this.#Lines[index];
+        if (process)
+        {
+          this.#DoOutput(replacements, line);
+        }
+        if (this.#IsIfEnd(line))
+        {
+          lineIndex.Value = index;
+          break;
+        }
+      }
+    }
+    return retValue;
+  }
+
   // If not directive, process replacements and add to output.
-  #DoOutput(item, line)
+  #DoOutput(replacements, line)
   {
     if (!this.#IsDirective(line))
     {
       let lineItem = { Value: line };
-      if (line.trim().length > 0)
+      if (line != null
+        && line.trim().length > 0)
       {
-        this.#DoReplacements(item, lineItem);
+        this.#DoReplacements(replacements, lineItem);
       }
       this.#AddOutput(lineItem.Value);
     }
   }
 
   // Perform the line replacements.
-  #DoReplacements(item, lineItem)
+  #DoReplacements(replacements, lineItem)
   {
     if (lineItem.Value.includes(this.PlaceholderBegin))
     {
-      let replacements = item.Replacements;
       replacements.Sort();
       let line = lineItem.Value;
 
@@ -281,13 +344,13 @@ class TextGenLib
     }
   }
 
-  // 
-  #SkipSection(lineIndex)
+  // Skips to the end of the current section.
+  #SkipSection(lineIndexValue)
   {
     let retValue = lineIndex;
 
     // Skip to end of section.
-    for (let index = lineIndex; index < this.#Lines.length; index++)
+    for (let index = lineIndexValue; index < this.#Lines.length; index++)
     {
       let line = this.#Lines[index];
       if (this.#IsSectionEnd(line))
@@ -325,10 +388,42 @@ class TextGenLib
         || lowerName == "#placeholderend"
         || lowerName == "#sectionbegin"
         || lowerName == "#sectionend"
-        || lowerName == "#value")
+        || lowerName == "#value"
+        || lowerName == "#ifbegin"
+        || lowerName == "#ifend")
       {
         retValue = true;
       }
+    }
+    return retValue;
+  }
+
+  // Checks if the line is a SectionEnd.  // 
+  #IsIfBegin(line)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionEnd Name"
+    let directive = TextGenLib.GetDirective(line, this.CommentChars);
+    if (directive != null
+      && "#ifbegin" == directive.Name.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if the line is a SectionEnd.  // 
+  #IsIfEnd(line)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionEnd Name"
+    let directive = TextGenLib.GetDirective(line, this.CommentChars);
+    if (directive != null
+      && "#ifend" == directive.Name.toLowerCase())
+    {
+      retValue = true;
     }
     return retValue;
   }

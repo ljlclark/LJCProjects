@@ -21,6 +21,9 @@ class _ClassName_
     // #SectionBegin Properties
     // #Value _PropertyName_
     // #Value _PropertyValue_
+    // #IfBegin _PropertyName_ ropertyName
+    // This is it.
+    // #IfEnd _PropertyName_ PropertyName
     this._PropertyName_ = _PropertyValue_;
     // _CLassName_
     // #SectionEnd Properties
