@@ -234,75 +234,6 @@ class TextGenLib
     }
   }
 
-  // 
-  #DoIf(replacements, line, lineIndex)
-  {
-    let retValue = true;
-
-    let success = true;
-    if (!this.#IsIfBegin(line))
-    {
-      success = false;
-    }
-
-    let directive = null;
-    let replacement = null;
-    if (success)
-    {
-      directive = TextGenLib.GetDirective(line);
-      replacement = replacements.Retrieve(directive.Value);
-      if (null == replacement)
-      {
-        success = false;
-      }
-    }
-
-    let process = false;
-    if (success)
-    {
-      retValue = false;
-      if (replacement.Value == directive.DataType)
-      {
-        process = true;
-      }
-    }
-
-    if (success)
-    {
-      // Process to IfEnd.
-      lineIndex.Value++;
-      for (let index = lineIndex.Value; index < this.#Lines.length; index++)
-      {
-        let line = this.#Lines[index];
-        if (process)
-        {
-          this.#DoOutput(replacements, line);
-        }
-        if (this.#IsIfEnd(line))
-        {
-          lineIndex.Value = index;
-          break;
-        }
-      }
-    }
-    return retValue;
-  }
-
-  // If not directive, process replacements and add to output.
-  #DoOutput(replacements, line)
-  {
-    if (!this.#IsDirective(line))
-    {
-      let lineItem = { Value: line };
-      if (line != null
-        && line.trim().length > 0)
-      {
-        this.#DoReplacements(replacements, lineItem);
-      }
-      this.#AddOutput(lineItem.Value);
-    }
-  }
-
   // Perform the line replacements.
   #DoReplacements(replacements, lineItem)
   {
@@ -341,6 +272,78 @@ class TextGenLib
           }
         }
       }
+    }
+  }
+
+  // Process the #IfBegin directive.
+  #DoIf(replacements, line, lineIndex)
+  {
+    let retValue = true;
+
+    // Check for #IfBegin.
+    let success = true;
+    if (!this.#IsIfBegin(line))
+    {
+      success = false;
+    }
+
+    //Get Replacement
+    let directive = null;
+    let replacement = null;
+    if (success)
+    {
+      directive = TextGenLib.GetDirective(line);
+      replacement = replacements.Retrieve(directive.Value);
+      if (null == replacement)
+      {
+        success = false;
+      }
+    }
+
+    // Check replacement value against directive value.
+    let isMatch = false;
+    if (success)
+    {
+      retValue = false;
+      if (replacement.Value == directive.DataType)
+      {
+        isMatch = true;
+      }
+    }
+
+    if (success)
+    {
+      // Process to IfEnd.
+      lineIndex.Value++;
+      for (let index = lineIndex.Value; index < this.#Lines.length; index++)
+      {
+        let line = this.#Lines[index];
+        if (isMatch)
+        {
+          this.#DoOutput(replacements, line);
+        }
+        if (this.#IsIfEnd(line))
+        {
+          lineIndex.Value = index;
+          break;
+        }
+      }
+    }
+    return retValue;
+  }
+
+  // If not directive, process replacements and add to output.
+  #DoOutput(replacements, line)
+  {
+    if (!this.#IsDirective(line))
+    {
+      let lineItem = { Value: line };
+      if (line != null
+        && line.trim().length > 0)
+      {
+        this.#DoReplacements(replacements, lineItem);
+      }
+      this.#AddOutput(lineItem.Value);
     }
   }
 
