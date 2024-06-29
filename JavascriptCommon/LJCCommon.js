@@ -62,13 +62,27 @@ class LJC
     return retValue;
   }
 
-  // Check if an element has a value.
-  static HasValue(eItem)
+  // Check if an text has a value.
+  static HasText(text)
   {
     let retValue = false;
 
-    if (eItem
-      && eItem != null)
+    if (text
+      && text != null
+      && text.trim().length > 0)
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Check if an item has a value.
+  static HasValue(item)
+  {
+    let retValue = false;
+
+    if (item
+      && item != null)
     {
       retValue = true;
     }

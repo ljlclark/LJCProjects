@@ -185,33 +185,32 @@ class TextGenCode
       let directive = TextGenLib.GetDirective(line, commentChars);
       if (directive != null)
       {
-        let directiveName = directive.Name.toLowerCase();
-        if ("#commentchars" == directiveName)
+        let directiveID = directive.ID.toLowerCase();
+        if ("#commentchars" == directiveID)
         {
-          commentChars = directive.Value;
+          commentChars = directive.Name;
           continue;
         }
 
         let name = null;
-        switch (directiveName)
+        switch (directiveID)
         {
           case "#sectionbegin":
             if (b.ToString().length > 0)
             {
               b.Line();
             }
-            name = directive.Value;
-            b.Line(`Section: ${directive.Value}`);
+            name = directive.Name;
+            b.Line(`Section: ${directive.Name}`);
             b.Text("Item: Item1");
             break;
 
           case "#value":
             let begin = { Index: 0 }
-            name = directive.Value;
-            let value = LJC.DelimitedString(directive.Value, "_", "_", begin);
-            let dataType = directive.DataType;
+            name = directive.Name;
+            let exampleValue = LJC.DelimitedString(directive.Name, "_", "_", begin);
             b.Line();
-            b.Text(`${name} ${value} ${dataType}`);
+            b.Text(`${name} ${exampleValue}`);
             break;
         }
       }

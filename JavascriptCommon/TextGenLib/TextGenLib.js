@@ -24,17 +24,17 @@ class TextGenLib
       if (tokens.length > 2
         && tokens[1].startsWith("#"))
       {
-        let name = tokens[1];
-        let value = tokens[2];
-        let dataType = "string";
+        let id = tokens[1];
+        let name = tokens[2];
+        let value = null;
         if (tokens.length > 3)
         {
-          dataType = tokens[3];
+          value = tokens[3];
         }
         retValue = {
+          ID: id,
           Name: name,
-          Value: value,
-          DataType: dataType
+          Value: value
         };
       }
     }
@@ -287,27 +287,30 @@ class TextGenLib
       success = false;
     }
 
-    //Get Replacement
-    let directive = null;
-    let replacement = null;
-    if (success)
-    {
-      directive = TextGenLib.GetDirective(line);
-      replacement = replacements.Retrieve(directive.Value);
-      if (null == replacement)
-      {
-        success = false;
-      }
-    }
-
     // Check replacement value against directive value.
     let isMatch = false;
     if (success)
     {
+      // Is #IfBegin so do not output.
       retValue = false;
-      if (replacement.Value == directive.DataType)
+
+      let directive = TextGenLib.GetDirective(line);
+      let replacement = replacements.Retrieve(directive.Name);
+      if ("hasvalue" == directive.Value.toLowerCase())
       {
-        isMatch = true;
+        if (replacement != null
+          && LJC.HasText(replacement.Value))
+        {
+          isMatch = true;
+        }
+      }
+      else
+      {
+        if (replacement != null
+          && replacement.Value == directive.Value)
+        {
+          isMatch = true;
+        }
       }
     }
 
@@ -385,7 +388,7 @@ class TextGenLib
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null)
     {
-      let lowerName = directive.Name.toLowerCase();
+      let lowerName = directive.ID.toLowerCase();
       if (lowerName == "#commentchars"
         || lowerName == "#placeholderbegin"
         || lowerName == "#placeholderend"
@@ -409,7 +412,7 @@ class TextGenLib
     // Directive Layout = "// #SectionEnd Name"
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null
-      && "#ifbegin" == directive.Name.toLowerCase())
+      && "#ifbegin" == directive.ID.toLowerCase())
     {
       retValue = true;
     }
@@ -424,7 +427,7 @@ class TextGenLib
     // Directive Layout = "// #SectionEnd Name"
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null
-      && "#ifend" == directive.Name.toLowerCase())
+      && "#ifend" == directive.ID.toLowerCase())
     {
       retValue = true;
     }
@@ -439,9 +442,9 @@ class TextGenLib
     // Directive Layout = "// #SectionBegin Name"
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null
-      && "#sectionbegin" == directive.Name.toLowerCase())
+      && "#sectionbegin" == directive.ID.toLowerCase())
     {
-      sectionItem.Value = this.#Sections.Retrieve(directive.Value);
+      sectionItem.Value = this.#Sections.Retrieve(directive.Name);
       retValue = true;
     }
     return retValue;
@@ -455,7 +458,7 @@ class TextGenLib
     // Directive Layout = "// #SectionEnd Name"
     let directive = TextGenLib.GetDirective(line, this.CommentChars);
     if (directive != null
-      && "#sectionend" == directive.Name.toLowerCase())
+      && "#sectionend" == directive.ID.toLowerCase())
     {
       retValue = true;
     }
@@ -471,21 +474,21 @@ class TextGenLib
     if (this.#IsDirective(line))
     {
       let directive = TextGenLib.GetDirective(line, this.CommentChars);
-      switch (directive.Name.toLowerCase())
+      switch (directive.ID.toLowerCase())
       {
         case "#commentchars":
           retValue = true;
-          this.CommentChars = directive.Value;
+          this.CommentChars = directive.Name;
           break;
 
         case "#placeholderbegin":
           retValue = true;
-          this.PlaceholderBegin = directive.Value;
+          this.PlaceholderBegin = directive.Name;
           break;
 
         case "#placeholderend":
           retValue = true;
-          this.PlaceholderEnd = directive.Value;
+          this.PlaceholderEnd = directive.Name;
           break;
       }
     }
