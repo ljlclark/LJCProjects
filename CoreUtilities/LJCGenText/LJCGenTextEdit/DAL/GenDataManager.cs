@@ -62,7 +62,7 @@ namespace LJCGenTextEdit
 
       if (NetString.HasValue(sectionName))
       {
-        retValue = Sections.LJCSearchName(sectionName);
+        retValue = Sections.Retrieve(sectionName);
       }
       return retValue;
     }

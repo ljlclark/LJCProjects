@@ -50,7 +50,7 @@ namespace LJCGenTextEdit
         Section section = GetSection(sectionName);
         if (section != null)
         {
-          retValue = section.RepeatItems.LJCSearchName(repeatItemName);
+          retValue = section.RepeatItems.Retrieve(repeatItemName);
         }
       }
       return retValue;

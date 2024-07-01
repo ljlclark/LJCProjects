@@ -43,7 +43,7 @@ namespace LJCGenTextLib
 
     // Retrieve the collection element with name.
     /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public RepeatItem LJCSearchName(string name)
+    public RepeatItem Retrieve(string name)
     {
       RepeatItem repeatItem;
       int index;

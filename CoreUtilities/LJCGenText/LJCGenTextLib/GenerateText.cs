@@ -5,7 +5,6 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace LJCGenTextLib
 {
@@ -15,7 +14,7 @@ namespace LJCGenTextLib
   {
     #region Constructors
 
-    //Initializes an object instance.
+    // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public GenerateText(string commentStart = "//")
     {
@@ -123,14 +122,14 @@ namespace LJCGenTextLib
 
         if (directive != null)
         {
-          if (Directive.IsSectionDirective(directive))
+          if (Directive.IsSectionDirective(line))
           {
             IsSectionDirective = true;
 
             switch (directive.ID.ToLower())
             {
               case Directive.SectionBegin:
-                section = retValue.LJCSearchName(directive.Name);
+                section = retValue.Retrieve(directive.Name);
                 if (null == section)
                 {
                   section = retValue.Add(directive.Name);
@@ -154,7 +153,7 @@ namespace LJCGenTextLib
               }
 
               replacements = section.RepeatItems[0].Replacements;
-              replacement = replacements.LJCSearchName(directive.Name);
+              replacement = replacements.Retrieve(directive.Name);
               if (null == replacement)
               {
                 string propertyValue = null;
@@ -177,11 +176,12 @@ namespace LJCGenTextLib
 
     // Adds the current Section object to the Active List.
     // <include path='items/PushSection/*' file='Doc/GenerateText.xml'/>
-    private Section AddActiveSection(Section currentSection, Directive directive
+    private Section AddActiveSection(Section currentSection, string line
       , int lineIndex)
     {
       // Get directive Section data.
-      Section retValue = Sections.LJCSearchName(directive.Name);
+      var directive = Directive.GetDirective(line);
+      Section retValue = Sections.Retrieve(directive.Name);
 
       // No Section data.
       if (null == retValue
@@ -226,17 +226,17 @@ namespace LJCGenTextLib
     }
 
     // Handle begin directive and do not generate line.
-    private bool BeginSection(Section currentSection, Directive directive
+    private bool BeginSection(Section currentSection, string line
       , ref int lineIndex)
     {
       bool retValue = false;
 
-      if (Directive.IsSectionBegin(directive))
+      if (Directive.IsSectionBegin(line))
       {
         retValue = true;
 
         // Add section to ActiveSections with the section starting index.
-        var addSection = AddActiveSection(currentSection, directive, lineIndex);
+        var addSection = AddActiveSection(currentSection, line, lineIndex);
         if (addSection.HasData())
         {
           GenSection(addSection);
@@ -328,15 +328,14 @@ namespace LJCGenTextLib
         lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line, CommentStart);
-
-        if (Directive.IsSectionBegin(directive))
+        if (Directive.IsSectionBegin(line))
         {
           line = null;
 
           // Calls GenSection() with section values.
           Section section = null;
-          BeginSection(section, directive, ref lineIndex);
+          //BeginSection(section, directive, ref lineIndex);
+          BeginSection(section, line, ref lineIndex);
           // Returns when no longer in a section.
         }
 
@@ -363,14 +362,14 @@ namespace LJCGenTextLib
       // Handle directive and do not generate line.
       if (line != null)
       {
-        retValue = BeginSection(currentSection, directive, ref lineIndex);
+        retValue = BeginSection(currentSection, line, ref lineIndex);
         if (retValue)
         {
           line = null;
         }
       }
 
-      if (Directive.IsSectionEnd(directive))
+      if (Directive.IsSectionEnd(line))
       {
         line = null;
         retValue = true;
@@ -414,7 +413,7 @@ namespace LJCGenTextLib
       RepeatItems repeatItems = ActiveSessionsRepeatItems();
       foreach (RepeatItem repeatItem in repeatItems)
       {
-        Replacement replacement = repeatItem.Replacements.LJCSearchName(replacementName);
+        Replacement replacement = repeatItem.Replacements.Retrieve(replacementName);
         if (replacement != null)
         {
           retValue = replacement.Value;
@@ -477,13 +476,13 @@ namespace LJCGenTextLib
         Directive ifDirective = Directive.GetDirective(line, CommentStart);
         if (ifDirective != null)
         {
-          if (Directive.IsIfEnd(ifDirective))
+          if (Directive.IsIfEnd(line))
           {
             isValid = false;
             lineIndex = ifIndex++;
             ifIndex = TemplateLines.Length;
           }
-          if (Directive.IsIfElse(ifDirective))
+          if (Directive.IsIfElse(line))
           {
             if (section.HasData())
             {
@@ -629,7 +628,7 @@ namespace LJCGenTextLib
           line = null;
         }
 
-        if (Directive.IsIfBegin(directive))
+        if (Directive.IsIfBegin(line))
         {
           // Debugging
           //if (directive.IsName("_PublicMethodCount_"))
@@ -681,7 +680,7 @@ namespace LJCGenTextLib
             //}
 
             // Replace values if the token has a replacement value.
-            Replacement replacement = replacements.LJCSearchName(token);
+            Replacement replacement = replacements.Retrieve(token);
             if (replacement != null)
             {
               retValue = retValue.Replace(token, replacement.Value);

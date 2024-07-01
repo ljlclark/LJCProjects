@@ -59,7 +59,7 @@ namespace LJCGenTextLib
 
       if (NetString.HasValue(name))
       {
-        retValue = LJCSearchName(name);
+        retValue = Retrieve(name);
         if (null == retValue)
         {
           retValue = new Section(name);
@@ -71,7 +71,7 @@ namespace LJCGenTextLib
 
     // Retrieve the collection element with name.
     /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public Section LJCSearchName(string name)
+    public Section Retrieve(string name)
     {
       Section section;
       int index;

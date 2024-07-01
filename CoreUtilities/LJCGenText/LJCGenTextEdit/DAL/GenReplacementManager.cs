@@ -57,7 +57,7 @@ namespace LJCGenTextEdit
         RepeatItem repeatItem = GetRepeatItem(sectionName, repeatItemName);
         if (repeatItem != null)
         {
-          retValue = repeatItem.Replacements.LJCSearchName(replacementName);
+          retValue = repeatItem.Replacements.Retrieve(replacementName);
         }
       }
       return retValue;

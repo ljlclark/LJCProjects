@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultValues.cs" />
+    <Compile Include="TextGen.cs" />
     <Compile Include="XMLData.cs" />
     <Compile Include="Directive.cs" />
     <Compile Include="GenerateText.cs" />

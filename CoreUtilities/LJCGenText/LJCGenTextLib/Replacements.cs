@@ -45,7 +45,7 @@ namespace LJCGenTextLib
 
     // Retrieve the collection element with name.
     /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public Replacement LJCSearchName(string name)
+    public Replacement Retrieve(string name)
     {
       Replacement replacement;
       int index;

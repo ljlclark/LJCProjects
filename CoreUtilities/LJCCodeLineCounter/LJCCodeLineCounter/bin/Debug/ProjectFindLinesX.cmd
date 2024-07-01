@@ -1,4 +1,4 @@
-set Find="Shell"
+set Find=".Split("
 
 if %1. == . goto default
 set folder=%1
