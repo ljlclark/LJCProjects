@@ -23,6 +23,8 @@ class _ClassName_
     // #Value _PropertyValue_
     // #IfBegin _PropertyName_ HasValue
     // PropertyName has a value.
+    // #IfElse
+    // PropertyName does not have a value.
     // #IfEnd _PropertyName_ First
     // #IfBegin _PropertyName_ First
     // This is the first propery.

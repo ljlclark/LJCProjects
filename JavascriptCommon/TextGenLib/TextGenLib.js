@@ -258,6 +258,7 @@ class TextGenLib
     }
 
     // Check replacement value against directive value.
+    let isIf = false;
     let isMatch = false;
     if (success)
     {
@@ -268,6 +269,7 @@ class TextGenLib
       let replacement = replacements.Retrieve(directive.Name);
       if ("hasvalue" == directive.Value.toLowerCase())
       {
+        isIf = true;
         if (replacement != null
           && LJC.HasText(replacement.Value))
         {
@@ -276,6 +278,7 @@ class TextGenLib
       }
       else
       {
+        isIf = true;
         if (replacement != null
           && replacement.Value == directive.Value)
         {
@@ -291,9 +294,15 @@ class TextGenLib
       for (let index = lineIndex.Value; index < this.#Lines.length; index++)
       {
         let line = this.#Lines[index];
-        if (isMatch)
+        if (isMatch
+          && !Directive.IsIfElse(line))
         {
           this.#DoOutput(replacements, line);
+        }
+        if (isIf
+          && Directive.IsIfElse(line))
+        {
+          isMatch = !isMatch;
         }
         if (Directive.IsIfEnd(line))
         {
@@ -397,11 +406,15 @@ class Directive
         || line.toLowerCase().includes("#commentchars")))
     {
       let tokens = line.trim().split(/\s+/g);
-      if (tokens.length > 2
+      if (tokens.length > 1
         && tokens[1].startsWith("#"))
       {
         let id = tokens[1];
-        let name = tokens[2];
+        let name = null;
+        if (tokens.length > 2)
+        {
+          name = tokens[2];
+        }
         let value = null;
         if (tokens.length > 3)
         {
@@ -446,6 +459,21 @@ class Directive
     let directive = Directive.GetDirective(line, this.CommentChars);
     if (directive != null
       && "#ifbegin" == directive.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if the line is a SectionEnd.  // 
+  static IsIfElse(line)
+  {
+    let retValue = false;
+
+    // Directive Layout = "// #SectionEnd Name"
+    let directive = Directive.GetDirective(line, this.CommentChars);
+    if (directive != null
+      && "#ifelse" == directive.ID.toLowerCase())
     {
       retValue = true;
     }
