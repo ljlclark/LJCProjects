@@ -152,7 +152,6 @@ class TextGenLib
             let directive = Directive.GetDirective(line, this.CommentChars);
             let sectionItem = this.#Sections.Retrieve(directive.Name);
             // *** End   *** - Add
-
             if (null == sectionItem)
             {
               // No Section data.
@@ -224,13 +223,12 @@ class TextGenLib
         let replacement = replacements.Retrieve(match);
         if (replacement != null)
         {
-          lineItem.Value = lineItem.Value.replaceAll(match
-            , replacement.Value);
+          lineItem.Value = lineItem.Value.replaceAll(match, replacement.Value);
         }
         else
         {
           // Replacement not found in current collection.
-          // Check active replacements.
+          // Search active replacements.
           let active = this.#ActiveReplacements;
           for (let index = active.length - 1; index >= 0; index--)
           {
@@ -310,7 +308,7 @@ class TextGenLib
   // If not directive, process replacements and add to output.
   #DoOutput(replacements, line)
   {
-    if (!Directive.IsDirective(line))
+    if (!Directive.IsDirective(line, this.CommentChars))
     {
       let lineItem = { Value: line };
       if (line != null
