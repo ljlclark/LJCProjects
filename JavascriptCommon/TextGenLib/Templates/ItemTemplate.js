@@ -21,6 +21,9 @@ class _ClassName_
     // #SectionBegin Properties
     // #Value _PropertyName_
     // #Value _PropertyValue_
+    // #IfBegin _PropertyName_ HasValue
+    // PropertyName has a value.
+    // #IfEnd _PropertyName_ First
     // #IfBegin _PropertyName_ First
     // This is the first propery.
     // #IfEnd _PropertyName_ First
