@@ -182,7 +182,7 @@ class TextGenCode
     for (let index = 0; index < lines.length; index++)
     {
       let line = lines[index];
-      let directive = TextGenLib.GetDirective(line, commentChars);
+      let directive = Directive.GetDirective(line, commentChars);
       if (directive != null)
       {
         let directiveID = directive.ID.toLowerCase();
