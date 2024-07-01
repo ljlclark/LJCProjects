@@ -89,7 +89,6 @@ class TextGenLib
         let directive = Directive.GetDirective(lines);
         let sectionItem = this.#Sections.Retrieve(directive.Name);
         // *** End   *** - Add
-
         if (null == sectionItem)
         {
           // No Section data.

@@ -1,7 +1,5 @@
 ﻿using LJCNetCommon;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace LJCGenTextLib
@@ -18,7 +16,7 @@ namespace LJCGenTextLib
     }
 
     /// <summary>
-    /// Generate the #Output text.
+    /// Generate the Output text.
     /// </summary>
     /// <param name="sections">The Sections object.</param>
     /// <param name="templateLines">The template lines.</param>
@@ -76,7 +74,7 @@ namespace LJCGenTextLib
 
       if (success)
       {
-        for (var itemIndex = 0; itemIndex < items.Count(); itemIndex++)
+        for (var itemIndex = 0; itemIndex < items.Count; itemIndex++)
         {
           var item = items[itemIndex];
 
@@ -86,7 +84,7 @@ namespace LJCGenTextLib
             lineIndex = SkipSection(lineIndex);
 
             // If not last item.
-            if (itemIndex < items.Count() - 1)
+            if (itemIndex < items.Count - 1)
             {
               // Do section again for following items.
               lineIndex = section.StartLineIndex;
@@ -137,7 +135,7 @@ namespace LJCGenTextLib
             if (Directive.IsSectionEnd(line))
             {
               // If not last item.
-              if (itemIndex < items.Count() - 1)
+              if (itemIndex < items.Count - 1)
               {
                 // Do section again for following items.
                 lineIndex = section.StartLineIndex;
@@ -181,7 +179,7 @@ namespace LJCGenTextLib
             // Replacement not found in current collection.
             // Search active replacements.
             var active = ActiveReplacements;
-            for (index = active.Count() - 1; index >= 0; index--)
+            for (index = active.Count - 1; index >= 0; index--)
             {
               replacement = active[index].Retrieve(match.Value);
               if (replacement != null)
