@@ -15,6 +15,8 @@ namespace LJCGenTextLib
       PlaceholderEnd = "_";
     }
 
+    #region Main Processing Methods
+
     /// <summary>
     /// Generate the Output text.
     /// </summary>
@@ -206,6 +208,7 @@ namespace LJCGenTextLib
       }
 
       // Check replacement value against directive value.
+      var isIf = false;
       var isMatch = false;
       if (success)
       {
@@ -216,6 +219,7 @@ namespace LJCGenTextLib
         var replacement = replacements.Retrieve(directive.Name);
         if ("hasvalue" == directive.Modifier.ToLower())
         {
+          isIf = true;
           if (replacement != null
             && NetString.HasValue(replacement.Value))
           {
@@ -224,6 +228,7 @@ namespace LJCGenTextLib
         }
         else
         {
+          isIf = true;
           if (replacement != null
             && replacement.Value == directive.Modifier)
           {
@@ -239,9 +244,15 @@ namespace LJCGenTextLib
         for (var index = lineIndex; index < Lines.Length; index++)
         {
           line = Lines[index];
-          if (isMatch)
+          if (isMatch
+            && !Directive.IsIfElse(line))
           {
             DoOutput(replacements, line);
+          }
+          if (isIf
+            && Directive.IsIfElse(line))
+          {
+            isMatch = !isMatch;
           }
           if (Directive.IsIfEnd(line))
           {
@@ -284,8 +295,9 @@ namespace LJCGenTextLib
       }
       return retValue;
     }
+    #endregion
 
-    // Other Methods
+    #region Other Methods
 
     // Add the line to the output.
     private void AddOutput(string line)
@@ -326,6 +338,7 @@ namespace LJCGenTextLib
       }
       return retValue;
     }
+    #endregion
 
     #region Properties
 
