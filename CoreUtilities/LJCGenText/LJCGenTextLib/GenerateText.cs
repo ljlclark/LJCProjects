@@ -26,7 +26,7 @@ namespace LJCGenTextLib
     public void Reset(string commentStart = "//")
     {
       ActiveSections = new Sections();
-      CommentStart = commentStart;
+      CommentChars = commentStart;
       OutLines = new List<string>();
     }
     #endregion
@@ -118,11 +118,11 @@ namespace LJCGenTextLib
       {
         IsSectionDirective = false;
         string line = templateLines[lineIndex];
-        directive = Directive.GetDirective(line, CommentStart);
+        directive = Directive.GetDirective(line, CommentChars);
 
         if (directive != null)
         {
-          if (Directive.IsSectionDirective(line))
+          if (Directive.IsSectionDirective(line, CommentChars))
           {
             IsSectionDirective = true;
 
@@ -180,7 +180,7 @@ namespace LJCGenTextLib
       , int lineIndex)
     {
       // Get directive Section data.
-      var directive = Directive.GetDirective(line);
+      var directive = Directive.GetDirective(line, CommentChars);
       Section retValue = Sections.Retrieve(directive.Name);
 
       // No Section data.
@@ -210,8 +210,8 @@ namespace LJCGenTextLib
       retValue.EndProcessing = true;
       if (retValue.HasData())
       {
-        if (directive.Modifier != null
-          && "list" == directive.Modifier.ToLower())
+        if (directive.Value != null
+          && "list" == directive.Value.ToLower())
         {
           retValue.IsList = true;
         }
@@ -220,7 +220,7 @@ namespace LJCGenTextLib
           retValue.EndProcessing = false;
         }
       }
-      retValue.StartLineIndex = lineIndex + 1;
+      retValue.BeginLineIndex = lineIndex + 1;
       ActiveSections.Add(retValue);
       return retValue;
     }
@@ -231,7 +231,7 @@ namespace LJCGenTextLib
     {
       bool retValue = false;
 
-      if (Directive.IsSectionBegin(line))
+      if (Directive.IsSectionBegin(line, CommentChars))
       {
         retValue = true;
 
@@ -257,12 +257,12 @@ namespace LJCGenTextLib
     private void GenRepeatItem(Section currentSection)
     {
       // Start at the beginning of the section.
-      var startLineIndex = currentSection.StartLineIndex;
+      var startLineIndex = currentSection.BeginLineIndex;
       for (int lineIndex = startLineIndex; lineIndex < TemplateLines.Length;
         lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-        var directive = Directive.GetDirective(line, CommentStart);
+        var directive = Directive.GetDirective(line, CommentChars);
 
         // Debugging
         //if (Directive.IsName(directive, "Subsection")
@@ -328,7 +328,7 @@ namespace LJCGenTextLib
         lineIndex++)
       {
         string line = TemplateLines[lineIndex];
-        if (Directive.IsSectionBegin(line))
+        if (Directive.IsSectionBegin(line, CommentChars))
         {
           line = null;
 
@@ -369,7 +369,7 @@ namespace LJCGenTextLib
         }
       }
 
-      if (Directive.IsSectionEnd(line))
+      if (Directive.IsSectionEnd(line, CommentChars))
       {
         line = null;
         retValue = true;
@@ -450,7 +450,7 @@ namespace LJCGenTextLib
       lineIndex++;
       bool isValid = false;
       string replacementValue = ActiveSessionReplacementValue(directive.Name);
-      switch (directive.Modifier.ToLower())
+      switch (directive.Value.ToLower())
       {
         case "notnull":
           if (NetString.HasValue(replacementValue))
@@ -462,7 +462,7 @@ namespace LJCGenTextLib
         default:
           if (NetString.HasValue(replacementValue))
           {
-            if (replacementValue.ToLower() == directive.Modifier.ToLower())
+            if (replacementValue.ToLower() == directive.Value.ToLower())
             {
               isValid = true;
             }
@@ -473,16 +473,16 @@ namespace LJCGenTextLib
       for (int ifIndex = lineIndex; ifIndex < TemplateLines.Length; ifIndex++)
       {
         string line = TemplateLines[ifIndex];
-        Directive ifDirective = Directive.GetDirective(line, CommentStart);
+        Directive ifDirective = Directive.GetDirective(line, CommentChars);
         if (ifDirective != null)
         {
-          if (Directive.IsIfEnd(line))
+          if (Directive.IsIfEnd(line, CommentChars))
           {
             isValid = false;
             lineIndex = ifIndex++;
             ifIndex = TemplateLines.Length;
           }
-          if (Directive.IsIfElse(line))
+          if (Directive.IsIfElse(line, CommentChars))
           {
             if (section.HasData())
             {
@@ -628,7 +628,7 @@ namespace LJCGenTextLib
           line = null;
         }
 
-        if (Directive.IsIfBegin(line))
+        if (Directive.IsIfBegin(line, CommentChars))
         {
           // Debugging
           //if (directive.IsName("_PublicMethodCount_"))
@@ -706,7 +706,7 @@ namespace LJCGenTextLib
     public Sections ActiveSections { get; private set; }
 
     /// <summary>Gets or sets the line comment start characters.</summary>
-    public string CommentStart { get; set; }
+    public string CommentChars { get; set; }
 
     /// <summary>Gets or sets the output file specification.</summary>
     public string OutFileSpec { get; set; }

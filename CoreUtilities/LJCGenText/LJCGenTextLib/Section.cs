@@ -184,7 +184,7 @@ namespace LJCGenTextLib
 
     /// <summary>Gets or sets the starting line index.</summary>
     [XmlIgnore()]
-    public int StartLineIndex { get; set; }
+    public int BeginLineIndex { get; set; }
     #endregion
   }
 }

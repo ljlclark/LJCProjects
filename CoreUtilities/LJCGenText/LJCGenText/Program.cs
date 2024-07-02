@@ -45,7 +45,7 @@ namespace LJCGenText
       if (".html" == ext
         || ".htm" == ext)
       {
-        genText.CommentStart = "<!--";
+        genText.CommentChars = "<!--";
       }
       genText.Generate(templateSpec, dataSpec, outputFile, overwrite);
     }

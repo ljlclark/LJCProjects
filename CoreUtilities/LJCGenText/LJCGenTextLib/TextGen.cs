@@ -36,7 +36,7 @@ namespace LJCGenTextLib
           continue;
         }
 
-        if (Directive.IsSectionBegin(line))
+        if (Directive.IsSectionBegin(line, CommentChars))
         {
           // *** Begin *** Add
           var directive = Directive.GetDirective(line, CommentChars);
@@ -50,7 +50,7 @@ namespace LJCGenTextLib
           else
           {
             lineIndex++;
-            section.StartLineIndex = lineIndex;
+            section.BeginLineIndex = lineIndex;
             ProcessItems(section, ref lineIndex);
           }
           continue;
@@ -89,7 +89,7 @@ namespace LJCGenTextLib
             if (itemIndex < items.Count - 1)
             {
               // Do section again for following items.
-              lineIndex = section.StartLineIndex;
+              lineIndex = section.BeginLineIndex;
             }
             continue;
           }
@@ -99,7 +99,7 @@ namespace LJCGenTextLib
             var line = Lines[index];
             lineIndex = index;
 
-            if (Directive.IsSectionBegin(line))
+            if (Directive.IsSectionBegin(line, CommentChars))
             {
               // *** Begin *** Add
               var directive = Directive.GetDirective(line, CommentChars);
@@ -114,7 +114,7 @@ namespace LJCGenTextLib
 
               // RepeatItem processing starts with first line.
               lineIndex++;
-              nextSection.StartLineIndex = lineIndex;
+              nextSection.BeginLineIndex = lineIndex;
 
               var hasActiveItem = false;
               if (NetCommon.HasItems(item.Replacements))
@@ -134,13 +134,13 @@ namespace LJCGenTextLib
               index = lineIndex;
             }
 
-            if (Directive.IsSectionEnd(line))
+            if (Directive.IsSectionEnd(line, CommentChars))
             {
               // If not last item.
               if (itemIndex < items.Count - 1)
               {
                 // Do section again for following items.
-                lineIndex = section.StartLineIndex;
+                lineIndex = section.BeginLineIndex;
                 break;
               }
             }
@@ -202,7 +202,7 @@ namespace LJCGenTextLib
 
       // Check for #IfBegin.
       var success = true;
-      if (Directive.IsIfBegin(line))
+      if (Directive.IsIfBegin(line, CommentChars))
       {
         success = false;
       }
@@ -217,7 +217,7 @@ namespace LJCGenTextLib
 
         var directive = Directive.GetDirective(line, CommentChars);
         var replacement = replacements.Retrieve(directive.Name);
-        if ("hasvalue" == directive.Modifier.ToLower())
+        if ("hasvalue" == directive.Value.ToLower())
         {
           isIf = true;
           if (replacement != null
@@ -230,7 +230,7 @@ namespace LJCGenTextLib
         {
           isIf = true;
           if (replacement != null
-            && replacement.Value == directive.Modifier)
+            && replacement.Value == directive.Value)
           {
             isMatch = true;
           }
@@ -245,16 +245,16 @@ namespace LJCGenTextLib
         {
           line = Lines[index];
           if (isMatch
-            && !Directive.IsIfElse(line))
+            && !Directive.IsIfElse(line, CommentChars))
           {
             DoOutput(replacements, line);
           }
           if (isIf
-            && Directive.IsIfElse(line))
+            && Directive.IsIfElse(line, CommentChars))
           {
             isMatch = !isMatch;
           }
-          if (Directive.IsIfEnd(line))
+          if (Directive.IsIfEnd(line, CommentChars))
           {
             lineIndex = index;
             break;
@@ -287,7 +287,7 @@ namespace LJCGenTextLib
       for (var index = lineIndex; index < Lines.Length; index++)
       {
         var line = Lines[index];
-        if (Directive.IsSectionEnd(line))
+        if (Directive.IsSectionEnd(line, CommentChars))
         {
           retValue = index++;
           break;

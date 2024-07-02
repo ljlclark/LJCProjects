@@ -15,36 +15,7 @@ class TextGenLib
     let retValue = false;
 
     if (items != null
-      && "RepeatItems" == items.Name
       && items.Count() > 0)
-    {
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // Checks if there are replacements.
-  static HasReplacements(replacements)
-  {
-    let retValue = false;
-
-    if (replacements != null
-      && "Replacements" == replacements.Name
-      && replacements.Count() > 0)
-    {
-      retValue = true;
-    }
-    return retValue;
-  }
-
-  // Checks if there are sections.
-  static HasSections(sections)
-  {
-    let retValue = false;
-
-    if (sections != null
-      && "Sections" == sections.Name
-      && sections.Count() > 0)
     {
       retValue = true;
     }
@@ -128,7 +99,7 @@ class TextGenLib
         let item = items.Items(itemIndex);
 
         // No Replacement data.
-        if (!TextGenLib.HasReplacements(item.Replacements))
+        if (!TextGenLib.HasItems(item.Replacements))
         {
           lineIndex.Value = this.#SkipSection(lineIndex.Value);
 
@@ -146,7 +117,7 @@ class TextGenLib
           let line = this.#Lines[index];
           lineIndex.Value = index;
 
-          if (Directive.IsSectionBegin(line))
+          if (Directive.IsSectionBegin(line, this.CommentChars))
           {
             // *** Begin *** - Add
             let directive = Directive.GetDirective(line, this.CommentChars);
@@ -164,7 +135,7 @@ class TextGenLib
             sectionItem.BeginLineIndex = lineIndex.Value;
 
             let hasActiveItem = false;
-            if (TextGenLib.HasReplacements(item.Replacements))
+            if (TextGenLib.HasItems(item.Replacements))
             {
               // Add current replacements to Active array.
               hasActiveItem = true;
@@ -181,7 +152,7 @@ class TextGenLib
             index = lineIndex.Value;
           }
 
-          if (Directive.IsSectionEnd(line))
+          if (Directive.IsSectionEnd(line, this.CommentChars))
           {
             // If not last item.
             if (itemIndex < items.Count() - 1)
@@ -252,7 +223,7 @@ class TextGenLib
 
     // Check for #IfBegin.
     let success = true;
-    if (!Directive.IsIfBegin(line))
+    if (!Directive.IsIfBegin(line, this.CommentChars))
     {
       success = false;
     }
@@ -295,16 +266,16 @@ class TextGenLib
       {
         let line = this.#Lines[index];
         if (isMatch
-          && !Directive.IsIfElse(line))
+          && !Directive.IsIfElse(line, this.CommentChars))
         {
           this.#DoOutput(replacements, line);
         }
         if (isIf
-          && Directive.IsIfElse(line))
+          && Directive.IsIfElse(line, this.CommentChars))
         {
           isMatch = !isMatch;
         }
-        if (Directive.IsIfEnd(line))
+        if (Directive.IsIfEnd(line, this.CommentChars))
         {
           lineIndex.Value = index;
           break;
@@ -338,7 +309,7 @@ class TextGenLib
     for (let index = lineIndexValue; index < this.#Lines.length; index++)
     {
       let line = this.#Lines[index];
-      if (Directive.IsSectionEnd(line))
+      if (Directive.IsSectionEnd(line, this.CommentChars))
       {
         retValue = index++;
         break;
@@ -365,7 +336,7 @@ class TextGenLib
     let retValue = false;
 
     // Sets the configuration.
-    if (Directive.IsDirective(line))
+    if (Directive.IsDirective(line, this.CommentChars))
     {
       let directive = Directive.GetDirective(line, this.CommentChars);
       switch (directive.ID.toLowerCase())
@@ -393,9 +364,11 @@ class TextGenLib
 // Represents a Directive object.
 class Directive
 {
+  // static check Line Functions
+
   // Checks line for directive and returns the directive object.
   // Returns directive if line is a directive.
-  static GetDirective(line, commentChars = "//")
+  static GetDirective(line, commentChars)
   {
     let retValue = null;
 
@@ -427,7 +400,7 @@ class Directive
   }
 
   // Checks if the line has a directive.
-  static IsDirective(line, commentChars = "//")
+  static IsDirective(line, commentChars)
   {
     let retValue = false;
 
@@ -451,12 +424,12 @@ class Directive
   }
 
   // Checks if the line is a SectionEnd.  // 
-  static IsIfBegin(line)
+  static IsIfBegin(line, commentChars)
   {
     let retValue = false;
 
     // Directive Layout = "// #SectionEnd Name"
-    let directive = Directive.GetDirective(line, this.CommentChars);
+    let directive = Directive.GetDirective(line, commentChars);
     if (directive != null
       && "#ifbegin" == directive.ID.toLowerCase())
     {
@@ -466,12 +439,12 @@ class Directive
   }
 
   // Checks if the line is a SectionEnd.  // 
-  static IsIfElse(line)
+  static IsIfElse(line, commentChars)
   {
     let retValue = false;
 
     // Directive Layout = "// #SectionEnd Name"
-    let directive = Directive.GetDirective(line, this.CommentChars);
+    let directive = Directive.GetDirective(line, commentChars);
     if (directive != null
       && "#ifelse" == directive.ID.toLowerCase())
     {
@@ -481,12 +454,12 @@ class Directive
   }
 
   // Checks if the line is a SectionEnd.  // 
-  static IsIfEnd(line)
+  static IsIfEnd(line, commentChars)
   {
     let retValue = false;
 
     // Directive Layout = "// #SectionEnd Name"
-    let directive = Directive.GetDirective(line, this.CommentChars);
+    let directive = Directive.GetDirective(line, commentChars);
     if (directive != null
       && "#ifend" == directive.ID.toLowerCase())
     {
@@ -511,12 +484,12 @@ class Directive
   }
 
   // Checks if the line is a SectionEnd.  // 
-  static IsSectionEnd(line)
+  static IsSectionEnd(line, commentChars)
   {
     let retValue = false;
 
     // Directive Layout = "// #SectionEnd Name"
-    let directive = Directive.GetDirective(line, this.CommentChars);
+    let directive = Directive.GetDirective(line, commentChars);
     if (directive != null
       && "#sectionend" == directive.ID.toLowerCase())
     {

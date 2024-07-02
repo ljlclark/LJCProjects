@@ -10,27 +10,27 @@ namespace LJCGenTextLib
   /// <include path='items/Directive/*' file='Doc/ProjectGenTextLib.xml'/>
   public class Directive
   {
-    #region static Functions
+    #region static check Line Functions
 
     /// <summary>
     /// Checks line for directive and returns the directive object.
     /// </summary>
     public static Directive GetDirective(string line
-      , string commentStart = "//")
+      , string commentChars)
     {
       string[] values;
       char[] separator = { ' ' };
       Directive retValue = null;
 
       // Templates directive is in a comment.
-      if (line.Trim().StartsWith(commentStart))
+      if (line.Trim().StartsWith(commentChars))
       {
         // Template directive starts with "#".
         int index = line.IndexOf('#');
         if (index > -1)
         {
           retValue = new Directive();
-          retValue.CommentChars = commentStart;
+          retValue.CommentChars = commentChars;
           values = line.Substring(index).Split(separator
             , StringSplitOptions.RemoveEmptyEntries);
           if (values.Length > 0)
@@ -44,7 +44,7 @@ namespace LJCGenTextLib
           }
           if (values.Length > 2)
           {
-            retValue.Modifier = values[2];
+            retValue.Value = values[2];
           }
         }
       }
@@ -52,11 +52,12 @@ namespace LJCGenTextLib
     }
 
     /// <summary>Checks if the line has a directive.</summary>
-    public static bool IsDirective(string line, string commentStart = "//")
+    public static bool IsDirective(string line
+      , string commentChars)
     {
       var retValue = false;
 
-      var directive = GetDirective(line, commentStart);
+      var directive = GetDirective(line, commentChars);
       if (directive != null)
       {
         var lowerName = directive.ID.ToLower();
@@ -76,11 +77,12 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfBegin directive.
-    internal static bool IsIfBegin(string line)
+    internal static bool IsIfBegin(string line
+      , string commentChars)
     {
       bool retValue = false;
 
-      var directive = GetDirective(line);
+      var directive = GetDirective(line, commentChars);
       if (directive != null
         && IfBegin == directive.ID.ToLower())
       {
@@ -90,11 +92,12 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfElse directive.
-    internal static bool IsIfElse(string line)
+    internal static bool IsIfElse(string line
+      , string commentChars)
     {
       bool retValue = false;
 
-      var directive = GetDirective(line);
+      var directive = GetDirective(line, commentChars);
       if (directive != null
         && IfElse == directive.ID.ToLower())
       {
@@ -104,11 +107,12 @@ namespace LJCGenTextLib
     }
 
     // Checks for a valid IfEnd directive.
-    internal static bool IsIfEnd(string line)
+    internal static bool IsIfEnd(string line
+      , string commentChars)
     {
       bool retValue = false;
 
-      var directive = GetDirective(line);
+      var directive = GetDirective(line, commentChars);
       if (directive != null
         && IfEnd == directive.ID.ToLower())
       {
@@ -116,6 +120,53 @@ namespace LJCGenTextLib
       }
       return retValue;
     }
+
+    /// <summary>Checks for Begin Section.</summary>
+    internal static bool IsSectionBegin(string line
+      , string commentChars)
+    {
+      bool retValue = false;
+
+      var directive = GetDirective(line, commentChars);
+      if (directive != null
+        && SectionBegin == directive.ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a valid SectionEnd directive.
+    internal static bool IsSectionEnd(string line
+      , string commentChars)
+    {
+      bool retValue = false;
+
+      var directive = GetDirective(line, commentChars);
+      if (directive != null
+        && SectionEnd == directive.ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a valid SectionBegin or SectionEnd directive.
+    internal static bool IsSectionDirective(string line
+      , string commentChars)
+    {
+      bool retValue = false;
+
+      if (IsSectionBegin(line, commentChars)
+        || IsSectionEnd(line, commentChars))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Static check Directive functions.
 
     // Checks the Name value.
     internal static bool IsName(Directive directive, string name
@@ -126,47 +177,6 @@ namespace LJCGenTextLib
       if (directive != null)
       {
         retValue = directive.IsName(name, caseInsensitive);
-      }
-      return retValue;
-    }
-
-    /// <summary>Checks for Begin Section.</summary>
-    public static bool IsSectionBegin(string line)
-    {
-      bool retValue = false;
-
-      var directive = GetDirective(line);
-      if (directive != null
-        && SectionBegin == directive.ID.ToLower())
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks for a valid SectionEnd directive.
-    internal static bool IsSectionEnd(string line)
-    {
-      bool retValue = false;
-
-      var directive = GetDirective(line);
-      if (directive != null
-        && SectionEnd == directive.ID.ToLower())
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Checks for a valid SectionBegin or SectionEnd directive.
-    internal static bool IsSectionDirective(string line)
-    {
-      bool retValue = false;
-
-      if (IsSectionBegin(line)
-        || IsSectionEnd(line))
-      {
-        retValue = true;
       }
       return retValue;
     }
@@ -213,7 +223,7 @@ namespace LJCGenTextLib
     {
       ID = id;
       Name = name;
-      Modifier = modifier;
+      Value = modifier;
       CommentChars = "//";
     }
     #endregion
@@ -268,17 +278,17 @@ namespace LJCGenTextLib
 
     #region Properties
 
-    /// <summary>Gets or sets the directive ID.</summary>
-    public string ID { get; set; }
-
     /// <summary>Gets or sets the line comment start characters.</summary>
     public string CommentChars { get; set; }
 
-    /// <summary>Gets or sets the name value.</summary>
+    /// <summary>Gets or sets the directive ID.</summary>
+    public string ID { get; set; }
+
+    /// <summary>Gets or sets the Name value.</summary>
     public string Name { get; set; }
 
-    /// <summary>Gets or sets the modifier value.</summary>
-    public string Modifier { get; set; }
+    /// <summary>Gets or sets the Value property.</summary>
+    public string Value { get; set; }
     #endregion
 
     #region Class Data
