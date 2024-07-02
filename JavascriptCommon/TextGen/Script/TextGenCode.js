@@ -67,7 +67,7 @@ class TextGenCode
     replacementTable.innerHTML = b.ToString();
 
     let replacements = item.Replacements;
-    if (TextGenLib.HasReplacements(replacements))
+    if (TextGenLib.HasItems(replacements))
     {
       // Data Rows
       for (let index = 0; index < replacements.Count(); index++)
@@ -86,7 +86,7 @@ class TextGenCode
   // Creates a table from the Sections object.
   static CreateSectionRows(sections)
   {
-    if (TextGenLib.HasSections(sections))
+    if (TextGenLib.HasItems(sections))
     {
       // Heading Row
       let b = new StringBuilder();
