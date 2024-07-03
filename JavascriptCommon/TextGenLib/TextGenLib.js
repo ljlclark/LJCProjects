@@ -201,9 +201,10 @@ class TextGenLib
           // Replacement not found in current collection.
           // Search active replacements.
           let active = this.#ActiveReplacements;
-          for (let index = active.length - 1; index >= 0; index--)
+          // *** Next Statement *** - Change
+          for (let activeIndex = active.length - 1; activeIndex >= 0; activeIndex--)
           {
-            replacement = active[index].Retrieve(match);
+            replacement = active[activeIndex].Retrieve(match);
             if (replacement != null)
             {
               lineItem.Value = lineItem.Value.replaceAll(match
@@ -229,6 +230,7 @@ class TextGenLib
     }
 
     // Check replacement value against directive value.
+    let directive = null;
     let isIf = false;
     let isMatch = false;
     if (success)
@@ -236,7 +238,18 @@ class TextGenLib
       // Is #IfBegin so do not output.
       retValue = false;
 
-      let directive = Directive.GetDirective(line, this.CommentChars);
+      directive = Directive.GetDirective(line, this.CommentChars);
+      // *** Begin *** Add
+      if (null == directive
+        || !LJC.HasText(directive.Value))
+      {
+        success = false;
+      }
+      // *** End   *** Add
+    }
+
+    if (success)
+    {
       let replacement = replacements.Retrieve(directive.Name);
       if ("hasvalue" == directive.Value.toLowerCase())
       {

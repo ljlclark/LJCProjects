@@ -13,6 +13,10 @@ namespace LJCGenTextLib
       CommentChars = "//";
       PlaceholderBegin = "_";
       PlaceholderEnd = "_";
+
+      // Private Properties
+      ActiveReplacements = new List<Replacements>();
+      Output = "";
     }
 
     #region Main Processing Methods
@@ -181,9 +185,10 @@ namespace LJCGenTextLib
             // Replacement not found in current collection.
             // Search active replacements.
             var active = ActiveReplacements;
-            for (index = active.Count - 1; index >= 0; index--)
+            // *** Next Statement *** - Change
+            for (var activeIndex = active.Count - 1; activeIndex >= 0; activeIndex--)
             {
-              replacement = active[index].Retrieve(match.Value);
+              replacement = active[activeIndex].Retrieve(match.Value);
               if (replacement != null)
               {
                 lineItem = lineItem.Replace(match.Value, replacement.Value);
@@ -202,12 +207,13 @@ namespace LJCGenTextLib
 
       // Check for #IfBegin.
       var success = true;
-      if (Directive.IsIfBegin(line, CommentChars))
+      if (!Directive.IsIfBegin(line, CommentChars))
       {
         success = false;
       }
 
       // Check replacement value against directive value.
+      Directive directive = null;
       var isIf = false;
       var isMatch = false;
       if (success)
@@ -215,7 +221,18 @@ namespace LJCGenTextLib
         // Is #IfBegin so do not output.
         retValue = false;
 
-        var directive = Directive.GetDirective(line, CommentChars);
+        directive = Directive.GetDirective(line, CommentChars);
+        // *** Begin *** Add
+        if (null == directive
+          || !NetString.HasValue(directive.Value))
+        {
+          success = false;
+        }
+        // *** End   *** Add
+      }
+
+      if (success)
+      {
         var replacement = replacements.Retrieve(directive.Name);
         if ("hasvalue" == directive.Value.ToLower())
         {
