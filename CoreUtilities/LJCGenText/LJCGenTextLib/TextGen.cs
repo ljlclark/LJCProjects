@@ -55,7 +55,7 @@ namespace LJCGenTextLib
           {
             lineIndex++;
             section.BeginLineIndex = lineIndex;
-            ProcessItems(section, ref lineIndex);
+            DoItems(section, ref lineIndex);
           }
           continue;
         }
@@ -64,8 +64,71 @@ namespace LJCGenTextLib
       return Output;
     }
 
+    // Process the #IfBegin directive.
+    private void DoIf(Directive directive, Replacements replacements, ref int lineIndex)
+    {
+      // Check replacement value against directive value.
+      var success = true;
+      var isIf = false;
+      var isMatch = false;
+      if (success)
+      {
+        if (!NetString.HasValue(directive.Value))
+        {
+          success = false;
+        }
+      }
+
+      if (success)
+      {
+        var replacement = replacements.Retrieve(directive.Name);
+        if ("hasvalue" == directive.Value.ToLower())
+        {
+          isIf = true;
+          if (replacement != null
+            && NetString.HasValue(replacement.Value))
+          {
+            isMatch = true;
+          }
+        }
+        else
+        {
+          isIf = true;
+          if (replacement.Value == directive.Value)
+          {
+            isMatch = true;
+          }
+        }
+      }
+
+      if (success)
+      {
+        // Process to IfEnd.
+        lineIndex++;
+        for (var index = lineIndex; index < Lines.Length; index++)
+        {
+          var line = Lines[index];
+          if (isMatch
+            && !Directive.IsIfElse(line, CommentChars))
+          {
+            DoOutput(replacements, line);
+          }
+          if (isIf
+            && Directive.IsIfElse(line, CommentChars))
+          {
+            isMatch = !isMatch;
+          }
+          if (Directive.IsIfEnd(line, CommentChars))
+          {
+            lineIndex = index;
+            break;
+          }
+        }
+      }
+    }
+
     // Process the RepeatItems.
-    private void ProcessItems(Section section, ref int lineIndex)
+    private void DoItems(Section section, ref int lineIndex)
     {
       var success = true;
       var items = section.RepeatItems;
@@ -103,54 +166,49 @@ namespace LJCGenTextLib
             var line = Lines[index];
             lineIndex = index;
 
-            if (Directive.IsSectionBegin(line, CommentChars))
+            var process = true;
+            var directive = Directive.GetDirective(line, CommentChars);
+            if (directive != null)
             {
-              // *** Begin *** Add
-              var directive = Directive.GetDirective(line, CommentChars);
-              var nextSection = Sections.Retrieve(directive.Name);
-              // *** End   *** Add
-              if (null == nextSection)
+              if (directive.IsSectionBegin())
               {
-                // No Section data.
-                index = SkipSection(lineIndex);
-                continue;
+                var nextSection = GetBeginSection(line);
+                if (null == nextSection)
+                {
+                  // No Section data.
+                  index = SkipSection(lineIndex);
+                  continue;
+                }
+
+                // RepeatItem processing starts with first line.
+                lineIndex++;
+                nextSection.BeginLineIndex = lineIndex;
+
+                AddActive(item);
+                DoItems(nextSection, ref lineIndex);
+                RemoveActive();
+
+                // Continue with returned line index after the processed section.
+                index = lineIndex;
               }
 
-              // RepeatItem processing starts with first line.
-              lineIndex++;
-              nextSection.BeginLineIndex = lineIndex;
-
-              var hasActiveItem = false;
-              if (NetCommon.HasItems(item.Replacements))
+              if (directive.IsSectionEnd())
               {
-                // Add current replacements to Active array.
-                hasActiveItem = true;
-                ActiveReplacements.Add(item.Replacements);
-              }
-              ProcessItems(nextSection, ref lineIndex);
-              if (hasActiveItem)
-              {
-                // Remove Replacements that are no longer active.
-                ActiveReplacements.RemoveAt(ActiveReplacements.Count - 1);
+                // If not last item.
+                if (itemIndex < items.Count - 1)
+                {
+                  // Do section again for following items.
+                  lineIndex = section.BeginLineIndex;
+                  break;
+                }
               }
 
-              // Continue with returned line index after the processed section.
+              if (directive.IsIfBegin())
+              {
+                DoIf(directive, item.Replacements, ref lineIndex);
+              }
               index = lineIndex;
             }
-
-            if (Directive.IsSectionEnd(line, CommentChars))
-            {
-              // If not last item.
-              if (itemIndex < items.Count - 1)
-              {
-                // Do section again for following items.
-                lineIndex = section.BeginLineIndex;
-                break;
-              }
-            }
-
-            var process = DoIf(item.Replacements, line, ref lineIndex);
-            index = lineIndex;
 
             if (process)
             {
@@ -159,6 +217,20 @@ namespace LJCGenTextLib
             }
           }
         }
+      }
+    }
+
+    // If not directive, process replacements and add to output.
+    private void DoOutput(Replacements replacements, string line)
+    {
+      if (!Directive.IsDirective(line, CommentChars))
+      {
+        if (line != null
+          && line.Trim().Length > 0)
+        {
+          DoReplacements(replacements, ref line);
+        }
+        AddOutput(line);
       }
     }
 
@@ -200,101 +272,6 @@ namespace LJCGenTextLib
       }
     }
 
-    // Process the #IfBegin directive.
-    private bool DoIf(Replacements replacements, string line, ref int lineIndex)
-    {
-      var retValue = true;
-
-      // Check for #IfBegin.
-      var success = true;
-      if (!Directive.IsIfBegin(line, CommentChars))
-      {
-        success = false;
-      }
-
-      // Check replacement value against directive value.
-      Directive directive = null;
-      var isIf = false;
-      var isMatch = false;
-      if (success)
-      {
-        // Is #IfBegin so do not output.
-        retValue = false;
-
-        directive = Directive.GetDirective(line, CommentChars);
-        // *** Begin *** Add
-        if (null == directive
-          || !NetString.HasValue(directive.Value))
-        {
-          success = false;
-        }
-        // *** End   *** Add
-      }
-
-      if (success)
-      {
-        var replacement = replacements.Retrieve(directive.Name);
-        if ("hasvalue" == directive.Value.ToLower())
-        {
-          isIf = true;
-          if (replacement != null
-            && NetString.HasValue(replacement.Value))
-          {
-            isMatch = true;
-          }
-        }
-        else
-        {
-          isIf = true;
-          if (replacement != null
-            && replacement.Value == directive.Value)
-          {
-            isMatch = true;
-          }
-        }
-      }
-
-      if (success)
-      {
-        // Process to IfEnd.
-        lineIndex++;
-        for (var index = lineIndex; index < Lines.Length; index++)
-        {
-          line = Lines[index];
-          if (isMatch
-            && !Directive.IsIfElse(line, CommentChars))
-          {
-            DoOutput(replacements, line);
-          }
-          if (isIf
-            && Directive.IsIfElse(line, CommentChars))
-          {
-            isMatch = !isMatch;
-          }
-          if (Directive.IsIfEnd(line, CommentChars))
-          {
-            lineIndex = index;
-            break;
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // If not directive, process replacements and add to output.
-    private void DoOutput(Replacements replacements, string line)
-    {
-      if (!Directive.IsDirective(line, CommentChars))
-      {
-        if (line != null
-          && line.Trim().Length > 0)
-        {
-          DoReplacements(replacements, ref line);
-        }
-        AddOutput(line);
-      }
-    }
-
     // Skips to the end of the current section.
     private int SkipSection(int lineIndex)
     {
@@ -316,6 +293,15 @@ namespace LJCGenTextLib
 
     #region Other Methods
 
+    // Add current replacements to Active array.
+    private void AddActive(RepeatItem item)
+    {
+      if (NetCommon.HasItems(item.Replacements))
+      {
+        ActiveReplacements.Add(item.Replacements);
+      }
+    }
+
     // Add the line to the output.
     private void AddOutput(string line)
     {
@@ -324,6 +310,14 @@ namespace LJCGenTextLib
         Output += "\r\n";
       }
       Output += line;
+    }
+
+    // Gets the begin section.
+    private Section GetBeginSection(string line)
+    {
+      var directive = Directive.GetDirective(line, CommentChars);
+      var retValue = Sections.Retrieve(directive.Name);
+      return retValue;
     }
 
     // Sets the configuration values.
@@ -354,6 +348,15 @@ namespace LJCGenTextLib
         }
       }
       return retValue;
+    }
+
+    // Remove Replacements that are no longer active.
+    private void RemoveActive()
+    {
+      if (NetCommon.HasItems(ActiveReplacements))
+      {
+        ActiveReplacements.RemoveAt(ActiveReplacements.Count - 1);
+      }
     }
     #endregion
 

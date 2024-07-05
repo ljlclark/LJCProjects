@@ -2,7 +2,10 @@
 // Licensed under the MIT License.
 // Directive.cs
 
+using LJCNetCommon;
 using System;
+using System.CodeDom;
+using System.Xml.Linq;
 
 namespace LJCGenTextLib
 {
@@ -248,6 +251,59 @@ namespace LJCGenTextLib
 
     #region Other Methods
 
+    /// <summary>Sets the Directive properties.</summary>
+    public Directive CreateDirective(string line, string commentChars)
+    {
+      Directive retValue = null;
+
+      var directive = GetDirective(line, commentChars);
+      if (IsDirective(line, commentChars))
+      {
+        CommentChars = commentChars;
+        ID = directive.ID;
+        Name = directive.Name;
+        Value = directive.Value;
+        retValue = directive;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks if directive ID = IfBegin.</summary>
+    public bool IsIfBegin()
+    {
+      bool retValue = false;
+
+      if (IfBegin == ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks if directive ID = IfElse.</summary>
+    public bool IsIfElse()
+    {
+      bool retValue = false;
+
+      if (IfElse == ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks if directive ID = IfEnd.</summary>
+    public bool IsIfEnd()
+    {
+      bool retValue = false;
+
+      if (IfEnd == ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     /// <summary>
     /// Checks the Name value.
     /// </summary>
@@ -271,6 +327,30 @@ namespace LJCGenTextLib
         {
           retValue = true;
         }
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks if directive ID = SectionBegin.</summary>
+    public bool IsSectionBegin()
+    {
+      bool retValue = false;
+
+      if (SectionBegin == ID.ToLower())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Checks if directive ID = SectionEnd.</summary>
+    public bool IsSectionEnd()
+    {
+      bool retValue = false;
+
+      if (SectionEnd == ID.ToLower())
+      {
+        retValue = true;
       }
       return retValue;
     }

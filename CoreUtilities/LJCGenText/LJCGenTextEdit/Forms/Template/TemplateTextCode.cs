@@ -95,14 +95,14 @@ namespace LJCGenTextEdit
       mOutputRtControl.Font = new Font("Courier New", 9.0f);
       mOutputRtControl.WordWrap = false;
 
-      var doPrevious = false;
-      if (doPrevious)
+      var doOld = false;
+      if (doOld)
       {
         GenerateText genText = new GenerateText();
         genText.Generate(templateFileSpec, filePaths.DataXMLPath
           , tempPath, true);
-
         mOutputRtControl.LJCLoadFromFile(tempPath);
+
         EditList.CreateColorSettings(mOutputRtControl);
         EditList.SetTextColor(mOutputRtControl);
       }
@@ -114,6 +114,9 @@ namespace LJCGenTextEdit
         GenerateText genText = new GenerateText();
         Sections sections = genText.CreateSections(templateLines);
         mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
+
+        EditList.CreateColorSettings(mOutputRtControl);
+        EditList.SetTextColor(mOutputRtControl);
       }
     }
 
