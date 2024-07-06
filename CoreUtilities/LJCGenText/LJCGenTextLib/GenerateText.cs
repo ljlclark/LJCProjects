@@ -31,7 +31,7 @@ namespace LJCGenTextLib
     }
     #endregion
 
-    #region Public Methods
+    #region Main Processing Methods
 
     // Generates a merged output file from the specified template and data file.
     /// <include path='items/Generate1/*' file='Doc/GenerateText.xml'/>
@@ -93,6 +93,9 @@ namespace LJCGenTextLib
         }
       }
     }
+    #endregion
+
+    #region Public Methods
 
     // Create Sections from template definition.
     /// <summary>
@@ -165,6 +168,38 @@ namespace LJCGenTextLib
                 replacements.Add(directive.Name, propertyValue);
               }
             }
+          }
+        }
+      }
+      return retValue;
+    }
+
+    /// <summary></summary>Get the Sections from the data file.
+    public Sections GetDataSections(string dataFileSpec)
+    {
+      string errorText = null;
+      Sections retValue;
+
+      if (!NetString.HasValue(dataFileSpec))
+      {
+        errorText += "Missing Data file specification.\r\n";
+        throw new ArgumentException(errorText);
+      }
+      else
+      {
+        if (!File.Exists(dataFileSpec))
+        {
+          errorText += $"Data file '{dataFileSpec}' was not found.\r\n";
+          throw new FileNotFoundException(errorText);
+        }
+        else
+        {
+          retValue = NetCommon.XmlDeserialize(typeof(Sections)
+            , dataFileSpec) as Sections;
+          if (null == retValue || 0 == retValue.Count)
+          {
+            errorText += "Unable to read replacement data or no 'Sections' are defined.\r\n";
+            throw new InvalidOperationException(errorText);
           }
         }
       }
@@ -508,38 +543,6 @@ namespace LJCGenTextLib
           }
         }
       }
-    }
-
-    // Get the Sections from the data file.
-    private Sections GetDataSections(string dataFileSpec)
-    {
-      string errorText = null;
-      Sections retValue;
-
-      if (!NetString.HasValue(dataFileSpec))
-      {
-        errorText += "Missing Data file specification.\r\n";
-        throw new ArgumentException(errorText);
-      }
-      else
-      {
-        if (!File.Exists(dataFileSpec))
-        {
-          errorText += $"Data file '{dataFileSpec}' was not found.\r\n";
-          throw new FileNotFoundException(errorText);
-        }
-        else
-        {
-          retValue = NetCommon.XmlDeserialize(typeof(Sections)
-            , dataFileSpec) as Sections;
-          if (null == retValue || 0 == retValue.Count)
-          {
-            errorText += "Unable to read replacement data or no 'Sections' are defined.\r\n";
-            throw new InvalidOperationException(errorText);
-          }
-        }
-      }
-      return retValue;
     }
 
     // Create the Out filespec from the dataFileSpec and outputFileSpec values.

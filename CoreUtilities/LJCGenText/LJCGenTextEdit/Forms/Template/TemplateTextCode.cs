@@ -112,7 +112,7 @@ namespace LJCGenTextEdit
         TextGenLib textGenLib = new TextGenLib();
         var templateLines = EditList.TemplateRichText.Lines;
         GenerateText genText = new GenerateText();
-        Sections sections = genText.CreateSections(templateLines);
+        Sections sections = genText.GetDataSections(filePaths.DataXMLPath);
         mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
 
         EditList.CreateColorSettings(mOutputRtControl);
