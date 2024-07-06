@@ -1,4 +1,7 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// TextGen.cs
+using LJCNetCommon;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -40,12 +43,11 @@ namespace LJCGenTextLib
           continue;
         }
 
-        if (Directive.IsSectionBegin(line, CommentChars))
+        var directive = Directive.GetDirective(line, CommentChars);
+        if (directive != null
+          && directive.IsSectionBegin())
         {
-          // *** Begin *** Add
-          var directive = Directive.GetDirective(line, CommentChars);
           var section = Sections.Retrieve(directive.Name);
-          // *** End   *** Add
           if (null == section)
           {
             // No Section data.
@@ -257,7 +259,6 @@ namespace LJCGenTextLib
             // Replacement not found in current collection.
             // Search active replacements.
             var active = ActiveReplacements;
-            // *** Next Statement *** - Change
             for (var activeIndex = active.Count - 1; activeIndex >= 0; activeIndex--)
             {
               replacement = active[activeIndex].Retrieve(match.Value);

@@ -1,11 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Directive.cs
-
-using LJCNetCommon;
 using System;
-using System.CodeDom;
-using System.Xml.Linq;
 
 namespace LJCGenTextLib
 {
@@ -251,22 +247,23 @@ namespace LJCGenTextLib
 
     #region Other Methods
 
-    /// <summary>Sets the Directive properties.</summary>
-    public Directive CreateDirective(string line, string commentChars)
-    {
-      Directive retValue = null;
+    ///// <summary>Sets the Directive properties.</summary>
+    //public Directive SetValues(string line, string commentChars)
+    //{
+    //  Directive retValue = null;
 
-      var directive = GetDirective(line, commentChars);
-      if (IsDirective(line, commentChars))
-      {
-        CommentChars = commentChars;
-        ID = directive.ID;
-        Name = directive.Name;
-        Value = directive.Value;
-        retValue = directive;
-      }
-      return retValue;
-    }
+    //  var directive = GetDirective(line, commentChars);
+    //  //if (IsDirective(line, commentChars))
+    //  if (directive != null)
+    //  {
+    //    CommentChars = commentChars;
+    //    ID = directive.ID;
+    //    Name = directive.Name;
+    //    Value = directive.Value;
+    //    retValue = directive;
+    //  }
+    //  return retValue;
+    //}
 
     /// <summary>Checks if directive ID = IfBegin.</summary>
     public bool IsIfBegin()
