@@ -73,14 +73,12 @@ namespace LJCGenTextLib
       var success = true;
       var isIf = false;
       var isMatch = false;
-      if (success)
+      if (!NetString.HasValue(directive.Value))
       {
-        if (!NetString.HasValue(directive.Value))
-        {
-          success = false;
-        }
+        success = false;
       }
 
+      // Check replacement value against directive value.
       if (success)
       {
         var replacement = replacements.Retrieve(directive.Name);
@@ -96,7 +94,8 @@ namespace LJCGenTextLib
         else
         {
           isIf = true;
-          if (replacement.Value == directive.Value)
+          if (replacement != null
+            && replacement.Value == directive.Value)
           {
             isMatch = true;
           }
@@ -168,7 +167,6 @@ namespace LJCGenTextLib
             var line = Lines[index];
             lineIndex = index;
 
-            var process = true;
             var directive = Directive.GetDirective(line, CommentChars);
             if (directive != null)
             {
@@ -212,11 +210,8 @@ namespace LJCGenTextLib
               index = lineIndex;
             }
 
-            if (process)
-            {
-              // Does not output directives.
-              DoOutput(item.Replacements, line);
-            }
+            // Does not output directives.
+            DoOutput(item.Replacements, line);
           }
         }
       }
