@@ -1,6 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataManagerTemplate.cs
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// _ClassName_Manager.cs
+// #SectionEnd Title
 using System;
 using LJCDBClientLib;
 using LJCDBMessage;
@@ -14,7 +20,7 @@ using LJCDBMessage;
 namespace _Namespace_
 {
   /// <summary>Provides _TableName_ DataManager data methods.</summary>
-  public class _ClassName_DataManager : DataManager
+  public class _ClassName_Manager : DataManager
   {
     #region Constructors
 

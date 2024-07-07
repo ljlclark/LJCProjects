@@ -51,7 +51,7 @@ namespace LJCGenTextLib
           if (null == section)
           {
             // No Section data.
-            SkipSection(lineIndex);
+            lineIndex = SkipSection(lineIndex);
           }
           else
           {
@@ -67,7 +67,8 @@ namespace LJCGenTextLib
     }
 
     // Process the #IfBegin directive.
-    private void DoIf(Directive directive, Replacements replacements, ref int lineIndex)
+    private void DoIf(Directive directive, Replacements replacements
+      , ref int lineIndex)
     {
       // Check replacement value against directive value.
       var success = true;
@@ -232,7 +233,8 @@ namespace LJCGenTextLib
     }
 
     // Perform the line replacements.
-    private void DoReplacements(Replacements replacements, ref string lineItem)
+    private void DoReplacements(Replacements replacements
+      , ref string lineItem)
     {
       if (lineItem.Contains(PlaceholderBegin))
       {

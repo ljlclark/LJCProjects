@@ -1,5 +1,17 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// _ClassName_.cs
+// #SectionEnd Title
+using LJCNetCommon;
+using LJCDBClientLib;
+using System;
+using System.Collections.Generic;
+
 // #SectionBegin Class
 // #Value _ClassName_
 // #Value _ComparerName_
@@ -7,12 +19,6 @@
 // #Value _Namespace_
 // #Value _TableName_
 // #Value _ToStringName_
-// _ClassName_.cs
-using LJCNetCommon;
-using LJCDBClientLib;
-using System;
-using System.Collections.Generic;
-
 namespace _Namespace_
 {
   /// <summary>The _TableName_ table Data Object.</summary>

@@ -1,13 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
-// #Value _AppName_
-// #Value _ClassName_
-// #Value _CollectionName_
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _FullAppName_
-// #Value _NameSpace_
-// #Value _VarClassName_
 // _FullAppName_.cs
+// #SectionEnd Title
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -16,6 +15,13 @@ using _FullAppName_DAL;
 using System;
 using System.Windows.Forms;
 
+// #SectionBegin Class
+// #Value _AppName_
+// #Value _ClassName_
+// #Value _CollectionName_
+// #Value _FullAppName_
+// #Value _NameSpace_
+// #Value _VarClassName_
 namespace _Namespace_
 {
 	// The list form.

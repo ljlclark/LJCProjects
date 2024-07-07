@@ -1,16 +1,22 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
-// #Value _ClassName_
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _CollectionName_
-// #Value _CompareToName_
-// #Value _Namespace_
 // _CollectionName_.cs
+// #SectionEnd Title
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
+// #SectionBegin Class
+// #Value _ClassName_
+// #Value _CollectionName_
+// #Value _CompareToName_
+// #Value _Namespace_
 namespace _Namespace_
 {
   /// <summary>Represents a collection of _ClassName_ objects.</summary>

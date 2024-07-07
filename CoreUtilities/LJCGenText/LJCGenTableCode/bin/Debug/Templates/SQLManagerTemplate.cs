@@ -1,18 +1,24 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _ClassName_
-// #Value _CollectionName_
-// #Value _JoinTable_
-// #Value _Namespace_
-// #Value _TableNames_
 // _ClassName_SQLManager.cs
+// #SectionEnd Title
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 
+// #SectionBegin Class
+// #Value _ClassName_
+// #Value _CollectionName_
+// #Value _JoinTable_
+// #Value _Namespace_
+// #Value _TableNames_
 namespace _Namespace_
 {
   /// <summary>Provides _TableName_ SQL data methods.</summary>

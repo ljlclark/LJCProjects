@@ -1,10 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
-// #Value _NameSpace_
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _ClassName_
-// #Value _AppName_
 // _ClassName_Detail.cs
+// #SectionEnd Title
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -14,6 +16,10 @@ using System.Text;
 using System.Windows.Forms;
 using _FullAppName_DAL;
 
+// #SectionBegin Class
+// #Value _NameSpace_
+// #Value _ClassName_
+// #Value _AppName_
 namespace _Namespace_
 {
   // The _ClassName_ detail dialog.

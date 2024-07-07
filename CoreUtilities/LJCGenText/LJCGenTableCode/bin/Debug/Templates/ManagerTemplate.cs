@@ -1,17 +1,23 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// _ClassName_Manager.cs
+// #SectionEnd Title
+using LJCDBClientLib;
+using LJCDBMessage;
+using LJCNetCommon;
+using System.Collections.Generic;
+
 // #SectionBegin Class
 // #Value _ClassName_
 // #Value _CollectionName_
 // #Value _JoinTableName_
 // #Value _Namespace_
 // #Value _TableName_
-// _ClassName_Manager.cs
-using LJCDBClientLib;
-using LJCDBMessage;
-using LJCNetCommon;
-using System.Collections.Generic;
-
 namespace _Namespace_
 {
 	/// <summary>Provides table specific data methods.</summary>

@@ -1,13 +1,12 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
-// #Value _AppName_
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _ClassName_
-// #Value _CollectionName_
-// #Value _FullAppName_
-// #Value _Namespace_
-// #Value _ParentName_
 // _ClassName_GridCode.cs
+// #SectionEnd Title
 using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -17,6 +16,13 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+// #SectionBegin Class
+// #Value _AppName_
+// #Value _ClassName_
+// #Value _CollectionName_
+// #Value _FullAppName_
+// #Value _Namespace_
+// #Value _ParentName_
 namespace _Namespace_
 {
 	// Provides _ClassName_Grid methods for the _AppName_List window.

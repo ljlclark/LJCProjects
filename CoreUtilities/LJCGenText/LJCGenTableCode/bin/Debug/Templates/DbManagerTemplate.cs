@@ -1,6 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DbManagerTemplate.cs
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// )ClassName_DbManager.cs
+// #SectionEnd Title
 using System;
 using System.Collections.Generic;
 using LJCDBClientLib;

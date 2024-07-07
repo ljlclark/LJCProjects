@@ -1,3 +1,11 @@
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// _ClassName_.js
+// #SectionEnd Title
+
 // #SectionBegin Class
 // #Value _/s_ </span>
 // #Value _ca_ class="attrib">
@@ -9,9 +17,9 @@
 // #Value _sn_ <span class="name">
 // #Value _sp1_ <span class="pad1"></span>
 // #Value _sp2_ <span class="pad2"></span>
-		// An example config file.<br />
-		// <?xml version="1.0" encoding="utf-8" ?><br />
-		<_sl_?_/s__sn_xml_/s__s_
+// An example config file.<br />
+// <?xml version="1.0" encoding="utf-8" ?><br />
+    < _sl_ ?_/s__sn_xml_/s__s_
 		_ca_ version_/s_="_sd_1.0_/s_"_s_
 		_ca_ encoding_/s_="_sd_utf-8_/s_"_s_
 		_cl_ ?_/s_><br />

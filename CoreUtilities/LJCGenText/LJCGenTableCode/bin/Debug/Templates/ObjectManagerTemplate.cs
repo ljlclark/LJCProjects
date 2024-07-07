@@ -1,6 +1,12 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// ObjectManagerTemplate.cs
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
+// #Value _ClassName_
+// _ClassName_ObjectManager.cs
+// #SectionEnd Title
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDBServiceLib;

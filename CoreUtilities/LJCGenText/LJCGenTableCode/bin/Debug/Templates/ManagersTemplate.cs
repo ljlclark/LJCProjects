@@ -1,13 +1,19 @@
 // Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// #SectionBegin Class
+// #CommentChars //
+// #PlaceholderBegin _
+// #PlaceholderEnd _
+// #SectionBegin Title
 // #Value _ClassName_
-// #Value _NameSpace_
 // Managers_ClassName_.cs
+// #SectionEnd Title
 using System;
 using LJCDBClientLib;
 using LJCNetCommon;
 
+// #SectionBegin Class
+// #Value _ClassName_
+// #Value _NameSpace_
 namespace _NameSpace_
 {
 	/// <summary>Gets the Manager objects.</summary>
