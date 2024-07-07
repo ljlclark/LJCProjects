@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TextGen.cs
+// TextGenLib.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
