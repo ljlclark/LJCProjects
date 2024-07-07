@@ -54,13 +54,12 @@ class TextGenLib
         continue;
       }
 
-      if (Directive.IsSectionBegin(line, this.CommentChars))
+      let directive = Directive.GetDirective(line, this.CommentChars);
+      if (directive != null
+        && directive.IsSectionBegin())
       {
-        // *** Begin *** - Add
-        let directive = Directive.GetDirective(line, this.CommentChars);
-        let sectionItem = this.#Sections.Retrieve(directive.Name);
-        // *** End   *** - Add
-        if (null == sectionItem)
+        let section = this.#Sections.Retrieve(directive.Name);
+        if (null == section)
         {
           // No Section data.
           this.#SkipSection(lineIndex.Value);
@@ -68,8 +67,8 @@ class TextGenLib
         else
         {
           lineIndex.Value++;
-          sectionItem.BeginLineIndex = lineIndex.Value;
-          this.#ProcessItems(sectionItem, lineIndex);
+          section.BeginLineIndex = lineIndex.Value;
+          this.#DoItems(section, lineIndex);
         }
         continue;
       }
@@ -78,176 +77,19 @@ class TextGenLib
     return this.#Output;
   }
 
-  // Process the RepeatItems.
-  #ProcessItems(section, lineIndex)
-  {
-    let success = true;
-    let items = section.RepeatItems;
-
-    // No Section data.
-    if (!TextGenLib.HasItems(items))
-    {
-      success = false;
-      lineIndex.Value = this.#SkipSection(lineIndex.Value);
-      lineIndex++;
-    }
-
-    if (success)
-    {
-      for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
-      {
-        let item = items.Items(itemIndex);
-
-        // No Replacement data.
-        if (!TextGenLib.HasItems(item.Replacements))
-        {
-          lineIndex.Value = this.#SkipSection(lineIndex.Value);
-
-          // If not last item.
-          if (itemIndex < items.Count() - 1)
-          {
-            // Do section again for following items.
-            lineIndex.Value = section.BeginLineIndex;
-          }
-          continue;
-        }
-
-        for (let index = lineIndex.Value; index < this.#Lines.length; index++)
-        {
-          let line = this.#Lines[index];
-          lineIndex.Value = index;
-
-          if (Directive.IsSectionBegin(line, this.CommentChars))
-          {
-            // *** Begin *** - Add
-            let directive = Directive.GetDirective(line, this.CommentChars);
-            let sectionItem = this.#Sections.Retrieve(directive.Name);
-            // *** End   *** - Add
-            if (null == sectionItem)
-            {
-              // No Section data.
-              index = this.#SkipSection(lineIndex.Value);
-              continue;
-            }
-
-            // RepeatItem processing starts with first line.
-            lineIndex.Value++;
-            sectionItem.BeginLineIndex = lineIndex.Value;
-
-            let hasActiveItem = false;
-            if (TextGenLib.HasItems(item.Replacements))
-            {
-              // Add current replacements to Active array.
-              hasActiveItem = true;
-              this.#ActiveReplacements.push(item.Replacements);
-            }
-            this.#ProcessItems(sectionItem, lineIndex);
-            if (hasActiveItem)
-            {
-              // Remove Replacements that are no longer active.
-              this.#ActiveReplacements.pop();
-            }
-
-            // Continue with returned line index after the processed section.
-            index = lineIndex.Value;
-          }
-
-          if (Directive.IsSectionEnd(line, this.CommentChars))
-          {
-            // If not last item.
-            if (itemIndex < items.Count() - 1)
-            {
-              // Do section again for following items.
-              lineIndex.Value = section.BeginLineIndex;
-              break;
-            }
-          }
-
-          let process = this.#DoIf(item.Replacements, line, lineIndex);
-          index = lineIndex.Value;
-
-          if (process)
-          {
-            // Does not output directives.
-            this.#DoOutput(item.Replacements, line);
-          }
-        }
-      }
-    }
-  }
-
-  // Perform the line replacements.
-  #DoReplacements(replacements, lineItem)
-  {
-    if (lineItem.Value.includes(this.PlaceholderBegin))
-    {
-      replacements.Sort();
-      let line = lineItem.Value;
-
-      //const matches = line.match(/(?<=_).+?(?=_)/g);
-      let pattern = `${this.PlaceholderBegin}.+?${this.PlaceholderEnd}`;
-      let matchRegex = new RegExp(pattern, "g");
-      const matches = line.match(matchRegex);
-      for (let index = 0; index < matches.length; index++)
-      {
-        let match = matches[index];
-        let replacement = replacements.Retrieve(match);
-        if (replacement != null)
-        {
-          lineItem.Value = lineItem.Value.replaceAll(match, replacement.Value);
-        }
-        else
-        {
-          // Replacement not found in current collection.
-          // Search active replacements.
-          let active = this.#ActiveReplacements;
-          // *** Next Statement *** - Change
-          for (let activeIndex = active.length - 1; activeIndex >= 0; activeIndex--)
-          {
-            replacement = active[activeIndex].Retrieve(match);
-            if (replacement != null)
-            {
-              lineItem.Value = lineItem.Value.replaceAll(match
-                , replacement.Value);
-              break;
-            }
-          }
-        }
-      }
-    }
-  }
-
   // Process the #IfBegin directive.
-  #DoIf(replacements, line, lineIndex)
+  #DoIf(directive, replacements, lineIndex)
   {
-    let retValue = true;
-
     // Check for #IfBegin.
     let success = true;
-    if (!Directive.IsIfBegin(line, this.CommentChars))
+    let isIf = false;
+    let isMatch = false;
+    if (!LJC.HasText(directive.Value))
     {
       success = false;
     }
 
     // Check replacement value against directive value.
-    let directive = null;
-    let isIf = false;
-    let isMatch = false;
-    if (success)
-    {
-      // Is #IfBegin so do not output.
-      retValue = false;
-
-      directive = Directive.GetDirective(line, this.CommentChars);
-      // *** Begin *** Add
-      if (null == directive
-        || !LJC.HasText(directive.Value))
-      {
-        success = false;
-      }
-      // *** End   *** Add
-    }
-
     if (success)
     {
       let replacement = replacements.Retrieve(directive.Name);
@@ -295,7 +137,99 @@ class TextGenLib
         }
       }
     }
-    return retValue;
+  }
+
+  // Process the RepeatItems.
+  #DoItems(section, lineIndex)
+  {
+    let success = true;
+    let items = section.RepeatItems;
+
+    // No Section data.
+    if (!TextGenLib.HasItems(items))
+    {
+      success = false;
+      lineIndex.Value = this.#SkipSection(lineIndex.Value);
+      lineIndex++;
+    }
+
+    if (success)
+    {
+      for (let itemIndex = 0; itemIndex < items.Count(); itemIndex++)
+      {
+        let item = items.Items(itemIndex);
+
+        // No Replacement data.
+        if (!TextGenLib.HasItems(item.Replacements))
+        {
+          lineIndex.Value = this.#SkipSection(lineIndex.Value);
+
+          // If not last item.
+          if (itemIndex < items.Count() - 1)
+          {
+            // Do section again for following items.
+            lineIndex.Value = section.BeginLineIndex;
+          }
+          continue;
+        }
+
+        for (let index = lineIndex.Value; index < this.#Lines.length; index++)
+        {
+          let line = this.#Lines[index];
+          lineIndex.Value = index;
+
+          let process = true;
+          let directive = Directive.GetDirective(line, this.CommentChars);
+          if (directive != null)
+          {
+            if (directive.IsSectionBegin())
+            {
+              let nextSection = this.#Sections.Retrieve(directive.Name);
+              if (null == nextSection)
+              {
+                // No Section data.
+                index = this.#SkipSection(lineIndex.Value);
+                continue;
+              }
+
+              // RepeatItem processing starts with first line.
+              lineIndex.Value++;
+              nextSection.BeginLineIndex = lineIndex.Value;
+
+              this.#AddActive(item);
+              this.#DoItems(nextSection, lineIndex);
+              this.#RemoveActive();
+
+              // Continue with returned line index after the processed section.
+              index = lineIndex.Value;
+            }
+
+            if (directive.IsSectionEnd())
+            {
+              // If not last item.
+              if (itemIndex < items.Count() - 1)
+              {
+                // Do section again for following items.
+                lineIndex.Value = section.BeginLineIndex;
+                break;
+              }
+            }
+
+            if (directive.IsIfBegin())
+            {
+              this.#DoIf(directive, item.Replacements, lineIndex);
+            }
+            index = lineIndex.Value;
+          }
+
+          if (process)
+          {
+            // Does not output directives.
+            this.#DoOutput(item.Replacements, line);
+          }
+        }
+      }
+    }
   }
 
   // If not directive, process replacements and add to output.
@@ -310,6 +244,46 @@ class TextGenLib
         this.#DoReplacements(replacements, lineItem);
       }
       this.#AddOutput(lineItem.Value);
+    }
+  }
+
+  // Perform the line replacements.
+  #DoReplacements(replacements, lineItem)
+  {
+    if (lineItem.Value.includes(this.PlaceholderBegin))
+    {
+      replacements.Sort();
+      let line = lineItem.Value;
+
+      //const matches = line.match(/(?<=_).+?(?=_)/g);
+      let pattern = `${this.PlaceholderBegin}.+?${this.PlaceholderEnd}`;
+      let matchRegex = new RegExp(pattern, "g");
+      const matches = line.match(matchRegex);
+      for (let index = 0; index < matches.length; index++)
+      {
+        let match = matches[index];
+        let replacement = replacements.Retrieve(match);
+        if (replacement != null)
+        {
+          lineItem.Value = lineItem.Value.replaceAll(match, replacement.Value);
+        }
+        else
+        {
+          // Replacement not found in current collection.
+          // Search active replacements.
+          let active = this.#ActiveReplacements;
+          for (let activeIndex = active.length - 1; activeIndex >= 0; activeIndex--)
+          {
+            replacement = active[activeIndex].Retrieve(match);
+            if (replacement != null)
+            {
+              lineItem.Value = lineItem.Value.replaceAll(match
+                , replacement.Value);
+              break;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -333,6 +307,15 @@ class TextGenLib
 
   // Other Methods
 
+  // Add current replacements to Active array.
+  #AddActive(item)
+  {
+    if (TextGenLib.HasItems(item.Replacements))
+    {
+      this.#ActiveReplacements.push(item.Replacements);
+    }
+  }
+
   // Add the line to the output.
   #AddOutput(line)
   {
@@ -351,7 +334,7 @@ class TextGenLib
     // Sets the configuration.
     if (Directive.IsDirective(line, this.CommentChars))
     {
-      let directive = Directive.GetDirective(line, this.CommentChars);
+      var directive = Directive.GetDirective(line, this.CommentChars);
       switch (directive.ID.toLowerCase())
       {
         case "#commentchars":
@@ -371,6 +354,15 @@ class TextGenLib
       }
     }
     return retValue;
+  }
+
+  // Remove Replacements that are no longer active.
+  #RemoveActive()
+  {
+    if (this.#ActiveReplacements.length > 0)
+    {
+      this.#ActiveReplacements.pop();
+    }
   }
 }
 
@@ -517,5 +509,67 @@ class Directive
     this.ID = id;
     this.Name = name;
     this.Value = value;
+  }
+
+  // Public Methods
+
+  // Checks if directive ID = IfBegin.
+  IsIfBegin()
+  {
+    let retValue = false;
+
+    if ("#ifbegin" == this.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if directive ID = IfElse.
+  IsIfElse()
+  {
+    let retValue = false;
+
+    if ("#ifelse" == this.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if directive ID = IfEnd.
+  IsIfEnd()
+  {
+    let retValue = false;
+
+    if ("#ifend" == this.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if directive ID = SectionBegin.
+  IsSectionBegin()
+  {
+    let retValue = false;
+
+    if ("#sectionbegin" == this.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
+  }
+
+  // Checks if directive ID = SectionEnd.
+  IsSectionEnd()
+  {
+    let retValue = false;
+
+    if ("#sectionend" == this.ID.toLowerCase())
+    {
+      retValue = true;
+    }
+    return retValue;
   }
 }

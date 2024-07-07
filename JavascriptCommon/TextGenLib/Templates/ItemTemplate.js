@@ -30,7 +30,7 @@ class _ClassName_
     // This is the first propery.
     // #IfEnd _PropertyName_ First
     this._PropertyName_ = _PropertyValue_;
-    // _CLassName_
+    // _ClassName_
     // #SectionEnd Properties
   }
 }
