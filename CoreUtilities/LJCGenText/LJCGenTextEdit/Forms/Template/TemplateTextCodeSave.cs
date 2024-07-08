@@ -86,21 +86,38 @@ namespace LJCGenTextEdit
     {
       FilePaths filePaths = EditList.mFilePaths;
 
+      NetFile.CreateFolder("TempFiles");
+      string tempPath = @"TempFiles\GenFile.cs";
+
       string templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
       string templateFile = EditList.TemplateTextbox.Text.Trim();
       string templateFileSpec = Path.Combine(templatePath, templateFile);
       mOutputRtControl.Font = new Font("Courier New", 9.0f);
       mOutputRtControl.WordWrap = false;
 
-      // New TextGenLib object.
-      TextGenLib textGenLib = new TextGenLib();
-      var templateLines = EditList.TemplateRichText.Lines;
-      GenerateText genText = new GenerateText();
-      Sections sections = genText.GetDataSections(filePaths.DataXMLPath);
-      mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
+      var doOld = false;
+      if (doOld)
+      {
+        GenerateText genText = new GenerateText();
+        genText.Generate(templateFileSpec, filePaths.DataXMLPath
+          , tempPath, true);
+        mOutputRtControl.LJCLoadFromFile(tempPath);
 
-      EditList.CreateColorSettings(mOutputRtControl);
-      EditList.SetTextColor(mOutputRtControl);
+        EditList.CreateColorSettings(mOutputRtControl);
+        EditList.SetTextColor(mOutputRtControl);
+      }
+      else
+      {
+        // New TextGenLib object.
+        TextGenLib textGenLib = new TextGenLib();
+        var templateLines = EditList.TemplateRichText.Lines;
+        GenerateText genText = new GenerateText();
+        Sections sections = genText.GetDataSections(filePaths.DataXMLPath);
+        mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
+
+        EditList.CreateColorSettings(mOutputRtControl);
+        EditList.SetTextColor(mOutputRtControl);
+      }
     }
 
     // Save the Template file.

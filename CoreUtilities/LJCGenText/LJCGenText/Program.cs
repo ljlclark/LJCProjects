@@ -39,7 +39,7 @@ namespace LJCGenText
     private static void Generate(string templateSpec, string dataSpec
       , string outputFile = "*.cs")
     {
-      bool overwrite = true;
+      //bool overwrite = true;
       GenerateText genText = new GenerateText();
       var ext = Path.GetExtension(templateSpec);
       if (".html" == ext
@@ -47,7 +47,7 @@ namespace LJCGenText
       {
         genText.CommentChars = "<!--";
       }
-      genText.Generate(templateSpec, dataSpec, outputFile, overwrite);
+      //genText.Generate(templateSpec, dataSpec, outputFile, overwrite);
     }
   }
 }
