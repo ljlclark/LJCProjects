@@ -86,13 +86,12 @@ namespace LJCGenTextEdit
     {
       FilePaths filePaths = EditList.mFilePaths;
 
-      string templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
-      string templateFile = EditList.TemplateTextbox.Text.Trim();
-      string templateFileSpec = Path.Combine(templatePath, templateFile);
+      //string templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
+      //string templateFile = EditList.TemplateTextbox.Text.Trim();
+      //string templateFileSpec = Path.Combine(templatePath, templateFile);
       mOutputRtControl.Font = new Font("Courier New", 9.0f);
       mOutputRtControl.WordWrap = false;
 
-      // New TextGenLib object.
       TextGenLib textGenLib = new TextGenLib();
       var templateLines = EditList.TemplateRichText.Lines;
       GenerateText genText = new GenerateText();

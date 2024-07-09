@@ -7,10 +7,11 @@ using System.IO;
 
 namespace LJCGenTextLib
 {
-  internal static class GenCommon
+  /// <summary></summary>
+  public static class GenCommon
   {
-    // Get the template lines from the template file.
-    internal static string[] GetTemplateLines(string templateFileSpec
+    /// <summary>Get the template lines from the template file.</summary>
+    public static string[] GetTemplateLines(string templateFileSpec
       , out string errorText)
     {
       string[] retValue = null;

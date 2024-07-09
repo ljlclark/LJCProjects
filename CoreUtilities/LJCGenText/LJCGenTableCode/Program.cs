@@ -5,7 +5,6 @@ using LJCDBClientLib;
 using LJCDBMessage;
 using LJCDBServiceLib;
 using LJCNetCommon;
-using System.Runtime;
 using static System.Console;
 
 namespace LJCGenTableCode

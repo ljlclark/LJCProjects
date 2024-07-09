@@ -122,6 +122,27 @@ namespace LJCGenTextLib
       }
       return retValue;
     }
+
+    /// <summary>Create the Out filespec from the dataFileSpec and outputFileSpec values.
+    public string GetOutFileSpec(string dataFileSpec, string outputFileSpec)
+    {
+      string retValue = null;
+
+      if (NetString.HasValue(outputFileSpec))
+      {
+        outputFileSpec = outputFileSpec.Trim();
+        if (outputFileSpec.Contains("*."))
+        {
+          string dataFileName = Path.GetFileNameWithoutExtension(dataFileSpec);
+          retValue = outputFileSpec.Replace("*", dataFileName);
+        }
+        else
+        {
+          retValue = outputFileSpec;
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Properties

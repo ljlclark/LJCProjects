@@ -19,7 +19,7 @@ namespace LJCGenTableCode
     public void GenFiles(GenFileSpecs genFileSpecs, DataManager dataManager
       , out bool hasError)
     {
-      //hasError = false;
+      hasError = false;
       string xmlData = GetDataXml(dataManager);
       WriteDataXml(genFileSpecs, dataManager.TableName, xmlData, out hasError);
 
@@ -30,8 +30,20 @@ namespace LJCGenTableCode
         {
           string xmlFileSpec = GetXmlSpec(genFileSpec.XMLFormat, dataManager.TableName
             , genFileSpec.IsPlural);
-          genText.Generate(genFileSpec.TemplateFileSpec, xmlFileSpec
-            , genFileSpec.OutputFileSpec);
+          //genText.Generate(genFileSpec.TemplateFileSpec, xmlFileSpec
+          //  , genFileSpec.OutputFileSpec);
+
+          Sections sections = genText.GetDataSections(xmlFileSpec);
+          var templateFileSpec = genFileSpec.TemplateFileSpec;
+          var templateLines = GenCommon.GetTemplateLines(templateFileSpec
+            , out string errorText);
+
+          TextGenLib textGenLib = new TextGenLib();
+          var outputText = textGenLib.TextGen(sections, templateLines);
+          var dataFileSpec = xmlFileSpec;
+          var outputFileSpec = genFileSpec.OutputFileSpec;
+          var outFileSpec = genText.GetOutFileSpec(dataFileSpec, outputFileSpec);
+          File.WriteAllText(outFileSpec, outputText);
         }
       }
     }
