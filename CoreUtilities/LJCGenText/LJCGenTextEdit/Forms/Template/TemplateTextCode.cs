@@ -86,16 +86,20 @@ namespace LJCGenTextEdit
     {
       FilePaths filePaths = EditList.mFilePaths;
 
-      //string templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
-      //string templateFile = EditList.TemplateTextbox.Text.Trim();
-      //string templateFileSpec = Path.Combine(templatePath, templateFile);
+      //var templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
+      //var templateFile = EditList.TemplateTextbox.Text.Trim();
+      //var templateFileSpec = Path.Combine(templatePath, templateFile);
       mOutputRtControl.Font = new Font("Courier New", 9.0f);
       mOutputRtControl.WordWrap = false;
 
-      TextGenLib textGenLib = new TextGenLib();
+      // Get data.
+      var dataXMLPath = filePaths.DataXMLPath;
+      var genText = new GenerateText();
+      var sections = genText.GetDataSections(dataXMLPath);
       var templateLines = EditList.TemplateRichText.Lines;
-      GenerateText genText = new GenerateText();
-      Sections sections = genText.GetDataSections(filePaths.DataXMLPath);
+
+      // Generate text.
+      var textGenLib = new TextGenLib();
       mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
 
       EditList.CreateColorSettings(mOutputRtControl);

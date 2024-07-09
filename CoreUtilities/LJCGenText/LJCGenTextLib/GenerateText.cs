@@ -123,7 +123,7 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Create the Out filespec from the dataFileSpec and outputFileSpec values.
+    /// <summary>Create the Out filespec from the dataFileSpec and outputFileSpec values.</summary>
     public string GetOutFileSpec(string dataFileSpec, string outputFileSpec)
     {
       string retValue = null;

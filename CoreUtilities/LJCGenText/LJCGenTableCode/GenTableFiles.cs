@@ -33,16 +33,18 @@ namespace LJCGenTableCode
           //genText.Generate(genFileSpec.TemplateFileSpec, xmlFileSpec
           //  , genFileSpec.OutputFileSpec);
 
-          Sections sections = genText.GetDataSections(xmlFileSpec);
+          // Get data.
+          var sections = genText.GetDataSections(xmlFileSpec);
           var templateFileSpec = genFileSpec.TemplateFileSpec;
           var templateLines = GenCommon.GetTemplateLines(templateFileSpec
             , out string errorText);
 
-          TextGenLib textGenLib = new TextGenLib();
+          // Generate text.
+          var textGenLib = new TextGenLib();
           var outputText = textGenLib.TextGen(sections, templateLines);
-          var dataFileSpec = xmlFileSpec;
+
           var outputFileSpec = genFileSpec.OutputFileSpec;
-          var outFileSpec = genText.GetOutFileSpec(dataFileSpec, outputFileSpec);
+          var outFileSpec = genText.GetOutFileSpec(xmlFileSpec, outputFileSpec);
           File.WriteAllText(outFileSpec, outputText);
         }
       }
