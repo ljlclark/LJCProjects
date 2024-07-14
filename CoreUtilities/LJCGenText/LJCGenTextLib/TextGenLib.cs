@@ -256,7 +256,8 @@ namespace LJCGenTextLib
             // Replacement not found in current collection.
             // Search active replacements.
             var active = ActiveReplacements;
-            for (var activeIndex = active.Count - 1; activeIndex >= 0; activeIndex--)
+            for (var activeIndex = active.Count - 1; activeIndex >= 0
+              ; activeIndex--)
             {
               replacement = active[activeIndex].Retrieve(match.Value);
               if (replacement != null)
