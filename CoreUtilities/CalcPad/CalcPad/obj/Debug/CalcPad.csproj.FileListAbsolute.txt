@@ -1,0 +1,10 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\bin\Debug\CalcPad.exe.config
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\bin\Debug\CalcPad.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\bin\Debug\CalcPad.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.Form1.resources
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.Properties.Resources.resources
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.csproj.GenerateResource.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\CalcPad\CalcPad\obj\Debug\CalcPad.pdb

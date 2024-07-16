@@ -1,0 +1,24 @@
+Person/Persons
+Family/Families
+Community/Communities
+Village/Villages
+
+Family is 5 Persons       (FormulaValue:4, FormulaName: Person)
+Community is 4 Families   (FormulaValue:4, FormulaName: Family)
+Village is 4 Communities  (FormulaValue:4, FormulaName: Community)
+
+Families = 10
+  (Name: Family, Value: 10
+   Total: 10)
+  (Find Family.FormulaName(Person)
+   Total: 10 * 5 (50))
+
+  (Find FormulaName(Family)) Community
+   Total: (10 / 4) 2.5)
+  (Find FormulaName(Comminity) Village
+   Total: (2.5 / 4) .625)
+Total: Persons             (50)
+Total: Families RoundUp    (10)
+Total: Communities RoundUp (3)
+Total: Villages RoundUp    (1)
+Total: Persons

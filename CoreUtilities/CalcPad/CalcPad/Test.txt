@@ -1,0 +1,15 @@
+Person/Persons
+Family/Families
+Community/Communities
+Village/Villages
+
+Family is 5 Persons
+Community is 4 Families
+Village is 4 Communities
+
+Families = 10
+
+Total: Families FoundUp
+Total: Communities RoundUp
+Total: Villages RoundUp
+Total: Persons
