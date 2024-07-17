@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace CalcPad
 {
@@ -9,50 +13,60 @@ namespace CalcPad
     public Form1()
     {
       InitializeComponent();
+
       IDs = new List<ID>();
     }
 
     #region Methods
 
     // Creates a Formula ID.
-    private ID CreateAssignmentID(string[] tokens, out IDType idType)
+    private ID CreateAssignmentID(string[] tokens, out LineType lineType)
     {
       ID retValue = null;
 
-      idType = IDType.None;
-      if ("=" == tokens[1].Trim().ToLower())
+      lineType = LineType.None;
+      if (tokens != null
+        && tokens.Length > 1
+        && ("=" == tokens[1].ToLower()))
       {
-        idType = IDType.Assignment;
+        lineType = LineType.Assignment;
 
         // Name is # Name
-        retValue = new ID();
-        retValue.Name = tokens[0];
+        retValue = new ID
+        {
+          Name = tokens[0]
+        };
+
         if (tokens.Length > 2)
         {
           if (double.TryParse(tokens[2], out double value))
           {
             retValue.Value = value;
-            retValue.Total = value;
           }
         }
-        retValue = SaveID(retValue, idType);
+        retValue = SaveID(retValue, lineType);
       }
       return retValue;
     }
 
     // Creates a Formula ID.
-    private ID CreateFormulaID(string[] tokens, out IDType idType)
+    private ID CreateFormulaID(string[] tokens, out LineType idType)
     {
       ID retValue = null;
 
-      idType = IDType.None;
-      if ("is" == tokens[1].Trim().ToLower())
+      idType = LineType.None;
+      if (tokens != null
+        && tokens.Length > 1
+        && "is" == tokens[1].ToLower())
       {
-        idType = IDType.Formula;
+        idType = LineType.Formula;
 
         // Name is # Name
-        retValue = new ID();
-        retValue.Name = tokens[0];
+        retValue = new ID
+        {
+          Name = tokens[0]
+        };
+
         if (tokens.Length > 2)
         {
           if (double.TryParse(tokens[2], out double value))
@@ -60,6 +74,7 @@ namespace CalcPad
             retValue.FormulaValue = value;
           }
         }
+
         if (tokens.Length > 3)
         {
           retValue.FormulaIDName = tokens[3];
@@ -69,28 +84,141 @@ namespace CalcPad
       return retValue;
     }
 
-    private ID CreateID(string line, out IDType idType)
+    private ID CreateID(string line, out LineType lineType)
     {
       ID retValue = null;
 
-      idType = IDType.None;
+      lineType = LineType.None;
       var tokens = SplitChars(" ", line);
       if (tokens.Length > 0)
       {
-        retValue = CreateNameID(tokens, out idType);
+        retValue = CreateNameID(tokens, out lineType);
         if (null == retValue)
         {
-          retValue = CreateFormulaID(tokens, out idType);
+          retValue = CreateFormulaID(tokens, out lineType);
         }
 
         if (null == retValue)
         {
-          retValue = CreateAssignmentID(tokens, out idType);
+          retValue = CreateAssignmentID(tokens, out lineType);
         }
 
         if (null == retValue)
         {
-          retValue = CreateTotalID(tokens, out idType);
+          retValue = CreateTotalID(tokens, out lineType);
+        }
+      }
+      return retValue;
+    }
+
+    // Creates a Name ID.
+    private ID CreateNameID(string[] tokens, out LineType lineType)
+    {
+      ID retValue = null;
+
+      lineType = LineType.None;
+      foreach (string token in tokens)
+      {
+        // Name/AltName
+        if (token.Contains("/"))
+        {
+          lineType = LineType.Name;
+
+          retValue = new ID();
+
+          // Remove extra spaces.
+          var text = String.Join("", tokens);
+          var names = SplitChars("/", text);
+
+          retValue.Name = names[0];
+          if (names.Length > 1)
+          {
+            retValue.AltName = names[1];
+          }
+          retValue = SaveID(retValue, lineType);
+          break;
+        }
+      }
+      return retValue;
+    }
+
+    // Creates a Total ID.
+    private ID CreateTotalID(string[] tokens, out LineType lineType)
+    {
+      ID retValue = null;
+
+      // Total: Name
+      lineType = LineType.None;
+      if (tokens != null
+        && tokens.Length > 1
+        && "total:" == tokens[0].ToLower())
+      {
+        lineType = LineType.Total;
+
+        retValue = new ID
+        {
+          Name = tokens[0],
+        };
+
+        if (tokens.Length > 1)
+        {
+          retValue.TotalIDName = tokens[1];
+        }
+
+        if (tokens.Length > 2)
+        {
+          ID findID = GetID(retValue.TotalIDName);
+          findID.Rounding = tokens[2];
+        }
+      }
+      return retValue;
+    }
+
+    // 
+    private void DoCalcs(ID lineIDRef)
+    {
+      // "FirstName" is # "SecondName"
+      var idRef = lineIDRef;
+
+      // Calculate SecondID total.
+      var formulaIDRef = GetID(idRef.FormulaIDName);
+      formulaIDRef.Value = idRef.Value * idRef.FormulaValue;
+
+      // Calculate formula "To" totals.
+      var prevIDRef = idRef;
+      var nextIDRef = GetFormulaID(idRef);
+      while (nextIDRef != null)
+      {
+        if (nextIDRef != null)
+        {
+          nextIDRef.Value = prevIDRef.Value / nextIDRef.FormulaValue;
+          prevIDRef = nextIDRef;
+          nextIDRef = GetFormulaID(nextIDRef);
+        }
+      }
+    }
+
+    // 
+    private double DoRound(ID id)
+    {
+      double retValue = id.Value;
+
+      if (id != null
+        && !string.IsNullOrWhiteSpace(id.Rounding))
+      {
+        switch (id.Rounding.ToLower())
+        {
+          case "ceiling":
+            retValue = Math.Ceiling(id.Value);
+            break;
+
+          case "round":
+            retValue = Math.Round(id.Value);
+            break;
+
+          case "floor":
+            retValue = Math.Floor(id.Value);
+            break;
         }
       }
       return retValue;
@@ -99,10 +227,15 @@ namespace CalcPad
     // Gets the Formula name by ID Name or AltNames
     private ID GetFormulaID(ID id)
     {
-      var retValue = IDs.Find(x => x.FormulaIDName == id.Name);
-      if (null == retValue)
+      ID retValue = null;
+
+      if (id != null)
       {
-        retValue = IDs.Find(x => x.FormulaIDName == id.AltName);
+        retValue = IDs.Find(x => x.FormulaIDName == id.Name);
+        if (null == retValue)
+        {
+          retValue = IDs.Find(x => x.FormulaIDName == id.AltName);
+        }
       }
       return retValue;
     }
@@ -110,15 +243,20 @@ namespace CalcPad
     // Gets the ID by Name or AltNames
     private ID GetID(string name)
     {
-      var retValue = IDs.Find(x => x.Name == name);
-      if (null == retValue)
+      ID retValue = null;
+
+      if (!string.IsNullOrWhiteSpace(name))
       {
-        retValue = IDs.Find(x => x.AltName == name);
+        retValue = IDs.Find(x => x.Name == name);
+        if (null == retValue)
+        {
+          retValue = IDs.Find(x => x.AltName == name);
+        }
       }
       return retValue;
     }
 
-    private ID SaveID(ID id, IDType idType)
+    private ID SaveID(ID id, LineType lineType)
     {
       var retValue = GetID(id.Name);
       if (null == retValue)
@@ -128,67 +266,26 @@ namespace CalcPad
       }
       else
       {
-        switch (idType)
+        // Update ID values.
+        switch (lineType)
         {
-          case IDType.Assignment:
+          case LineType.Assignment:
             retValue.Value = id.Value;
             break;
 
-          case IDType.Formula:
+          case LineType.Formula:
             retValue.FormulaValue = id.FormulaValue;
             retValue.FormulaIDName = id.FormulaIDName;
             break;
 
-          case IDType.Name:
+          case LineType.Name:
             retValue.AltName = id.AltName;
             break;
+
+          case LineType.Total:
+            retValue.Rounding = id.Rounding;
+            break;
         }
-      }
-      return retValue;
-    }
-
-    // Creates a Name ID.
-    private ID CreateNameID(string[] tokens, out IDType idType)
-    {
-      ID retValue = null;
-
-      idType = IDType.None;
-      foreach (string token in tokens)
-      {
-        // Name/AltName
-        if (token.Contains("/"))
-        {
-          idType = IDType.Name;
-
-          retValue = new ID();
-          var text = String.Join("", tokens);
-          var names = SplitChars("/", text);
-          retValue.Name = names[0];
-          if (names.Length > 1)
-          {
-            retValue.AltName = names[1];
-          }
-          retValue = SaveID(retValue, idType);
-          break;
-        }
-      }
-      return retValue;
-    }
-
-    // Creates a Total ID.
-    private ID CreateTotalID(string[] tokens, out IDType idType)
-    {
-      ID retValue = null;
-
-      // Total: Name
-      idType = IDType.None;
-      if ("total:" == tokens[0].Trim().ToLower())
-      {
-        idType = IDType.Total;
-
-        retValue = new ID();
-        retValue.Name = tokens[0];
-        retValue.FormulaIDName = tokens[1];
       }
       return retValue;
     }
@@ -201,45 +298,62 @@ namespace CalcPad
     }
     #endregion
 
+    #region RTB Methods
+
+    // 
+    private int GetCharIndex(RichTextBox rtb, int lineIndex)
+    {
+      var retValue = rtb.GetFirstCharIndexFromLine(lineIndex);
+      return retValue;
+    }
+
+    // 
+    private void ReplaceLine(RichTextBox rtb, int lineIndex, string text)
+    {
+      var beginIndex = GetCharIndex(rtb, lineIndex);
+
+      var endIndex = rtb.Text.Length;
+      if (lineIndex < rtb.Lines.Count())
+      {
+        lineIndex++;
+        endIndex = GetCharIndex(rtb, lineIndex) - 1;
+      }
+
+      var length = endIndex - beginIndex;
+      rtb.Select(beginIndex, length);
+      rtb.SelectedText = text;
+    }
+    #endregion
+
     #region Event handlers
 
     private void CalcRTB_DoubleClick(object sender, EventArgs e)
     {
-      foreach (string line in CalcsRTB.Lines)
+      for (int index = 0; index < CalcsRTB.Lines.Count(); index++)
       {
-        var success = true;
-        if (string.IsNullOrWhiteSpace(line))
+        var line = CalcsRTB.Lines[index];
+        if (!string.IsNullOrWhiteSpace(line))
         {
-          success = false;
-        }
-
-        ID lineIDRef = null;
-        if (success)
-        {
-          lineIDRef = CreateID(line, out IDType idType);
-          if (idType == IDType.Assignment)
+          var lineIDRef = CreateID(line, out LineType lineType);
+          switch (lineType)
           {
-            // "FirstName" is # "SecondName"
-            var firstIDRef = lineIDRef;
+            case LineType.Assignment:
+              DoCalcs(lineIDRef);
+              break;
 
-            // Calculate SecondID total.
-            var secondIDRef = GetID(firstIDRef.FormulaIDName);
-            secondIDRef.Total = firstIDRef.Value * firstIDRef.FormulaValue;
-
-            // Calculate formula "To" totals.
-            //var total = secondIDRef.Total;
-            var prevIDRef = firstIDRef;
-            var nextIDRef = GetFormulaID(firstIDRef);
-            while (nextIDRef != null)
-            {
-              if (nextIDRef != null)
+            case LineType.Total:
+              var text = line;
+              var valueIndex = text.IndexOf("(");
+              if (valueIndex > 0)
               {
-                nextIDRef.Value = prevIDRef.Value / nextIDRef.FormulaValue;
-                nextIDRef.Total = nextIDRef.Value;
-                prevIDRef = nextIDRef;
-                nextIDRef = GetFormulaID(nextIDRef);
+                text = text.Substring(0, valueIndex - 1);
               }
-            }
+
+              var idRef = GetID(lineIDRef.TotalIDName);
+              var value = DoRound(idRef);
+              text += $" ({value})";
+              ReplaceLine(CalcsRTB, index, text);
+              break;
           }
         }
       }
@@ -266,12 +380,15 @@ namespace CalcPad
     public ID(string name, double value)
     {
       Name = name;
-      ValueType = ValueType.Int;
       Value = value;
-      if (0 == value % 1)
-      {
-        ValueType = ValueType.Int;
-      }
+    }
+    #endregion
+
+    #region Data Methods
+
+    public override string ToString()
+    {
+      return $"{Name}: {Value}";
     }
     #endregion
 
@@ -294,36 +411,35 @@ namespace CalcPad
 
     #region Properties
 
+    // 
     public string AltName { get; set; }
 
-    public ValueType ValueType { get; set; }
-
+    // 
     public double FormulaValue { get; set; }
 
+    // 
     public string FormulaIDName { get; set; }
 
-    public IDType IDType { get; set; }
-
+    // 
     public string Name { get; set; }
 
-    public double Total { get; set; }
+    // 
+    public string Rounding { get; set; }
 
+    // 
+    public string TotalIDName { get; set; }
+
+    // 
     public double Value { get; set; }
     #endregion
   }
 
-  public enum IDType
+  public enum LineType
   {
     None,
     Name,
     Formula,
     Assignment,
     Total
-  }
-
-  public enum ValueType
-  {
-    Int,
-    Double
   }
 }

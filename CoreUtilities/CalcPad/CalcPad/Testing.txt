@@ -18,7 +18,7 @@ Families = 10
   (Find FormulaName(Comminity) Village
    Total: (2.5 / 4) .625)
 Total: Persons             (50)
-Total: Families RoundUp    (10)
-Total: Communities RoundUp (3)
-Total: Villages RoundUp    (1)
+Total: Families Ceiling    (10)
+Total: Communities Ceiling (3)
+Total: Villages Ceiling    (1)
 Total: Persons

@@ -9,7 +9,7 @@ Village is 4 Communities
 
 Families = 10
 
-Total: Families FoundUp
-Total: Communities RoundUp
-Total: Villages RoundUp
+Total: Families Ceiling
+Total: Communities Ceiling
+Total: Villages Ceiling
 Total: Persons
