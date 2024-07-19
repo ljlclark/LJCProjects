@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace CalcPad
 {
@@ -30,56 +27,183 @@ namespace CalcPad
         && ("=" == tokens[1].ToLower()))
       {
         lineType = LineType.Assignment;
+        var tokenCount = tokens.Length;
+        var line = string.Join(" ", tokens);
 
-        // Name is # Name
-        retValue = new ID
+        var success = true;
+        if (tokenCount < 3
+          || tokenCount > 5)
         {
-          Name = tokens[0]
-        };
+          success = false;
+          Errors.Syntax(line, Errors.SyntaxAssignment());
+        }
 
-        if (tokens.Length > 2)
+        if (success)
         {
-          if (double.TryParse(tokens[2], out double value))
+          // Name = name/value operator name/value.
+          retValue = new ID
           {
+            Name = tokens[0]
+          };
+
+          // Get first value.
+          ID findID;
+          string item;
+          var firstValue = 0.0;
+          if (tokenCount > 2)
+          {
+            item = tokens[2];
+            if (double.TryParse(item, out double value))
+            {
+              if (0 == value)
+              {
+                Errors.IDName("ID name must not start with number", line);
+              }
+              firstValue = value;
+            }
+            else
+            {
+              findID = GetID(item);
+              if (null == findID)
+              {
+                success = false;
+                Errors.IDNotFound(item, line);
+              }
+              if (success)
+              {
+                firstValue = findID.Value;
+              }
+            }
+          }
+
+          if (3 == tokenCount)
+          {
+            retValue.Value = firstValue;
+          }
+
+          // Get operation.
+          string operation = null;
+          if (tokenCount > 3)
+          {
+            item = tokens[3];
+            if ("+-*/".Contains(item))
+            {
+              operation = item;
+            }
+            else
+            {
+              success = false;
+              Errors.InvalidOperator(line);
+            }
+          }
+
+          // Get second value.
+          var secondValue = 0.0;
+          if (tokenCount > 4)
+          {
+            item = tokens[4];
+            if (double.TryParse(item, out double value))
+            {
+              if (0 == value)
+              {
+                Errors.IDName("ID name must not start with number", line);
+              }
+              secondValue = value;
+            }
+            else
+            {
+              findID = GetID(item);
+              if (null == findID)
+              {
+                success = false;
+                Errors.IDNotFound(item, line);
+              }
+              else
+              {
+                secondValue = findID.Value;
+              }
+            }
+          }
+
+          if (firstValue > 0
+            && secondValue > 0)
+          {
+            var value = retValue.Value;
+            switch (operation)
+            {
+              case "+":
+                value = firstValue + secondValue;
+                break;
+              case "-":
+                value = firstValue - secondValue;
+                break;
+              case "*":
+                value = firstValue * secondValue;
+                break;
+              case "/":
+                value = firstValue / secondValue;
+                break;
+            }
             retValue.Value = value;
           }
+          if (success)
+          {
+            retValue = SaveID(retValue, lineType);
+          }
         }
-        retValue = SaveID(retValue, lineType);
       }
       return retValue;
     }
 
     // Creates a Formula ID.
-    private ID CreateFormulaID(string[] tokens, out LineType idType)
+    private ID CreateFormulaID(string[] tokens, out LineType lineType)
     {
       ID retValue = null;
 
-      idType = LineType.None;
+      lineType = LineType.None;
       if (tokens != null
         && tokens.Length > 1
         && "is" == tokens[1].ToLower())
       {
-        idType = LineType.Formula;
+        lineType = LineType.Formula;
+        var tokenCount = tokens.Length;
+        var line = string.Join(" ", tokens);
+
+        var success = true;
+        if (tokenCount < 4
+          || tokenCount > 4)
+        {
+          success = false;
+          Errors.Syntax(line, Errors.SyntaxFormula());
+        }
 
         // Name is # Name
-        retValue = new ID
+        retValue = new ID()
         {
           Name = tokens[0]
         };
 
-        if (tokens.Length > 2)
+        if (tokenCount > 2)
         {
           if (double.TryParse(tokens[2], out double value))
           {
-            retValue.FormulaValue = value;
+            if (0 == value)
+            {
+              success = false;
+              Errors.Value(line);
+            }
+              retValue.FormulaValue = value;
           }
         }
 
-        if (tokens.Length > 3)
+        if (tokenCount > 3)
         {
           retValue.FormulaIDName = tokens[3];
         }
-        retValue = SaveID(retValue, idType);
+        if (success)
+        {
+          retValue = SaveID(retValue, lineType);
+        }
       }
       return retValue;
     }
@@ -117,25 +241,39 @@ namespace CalcPad
       ID retValue = null;
 
       lineType = LineType.None;
+
       foreach (string token in tokens)
       {
         // Name/AltName
-        if (token.Contains("/"))
+        if (token.Contains("|"))
         {
           lineType = LineType.Name;
+          var line = string.Join(" ", tokens);
 
-          retValue = new ID();
+          retValue = new ID()
+          {
+            Value = 0
+          };
 
           // Remove extra spaces.
+          var success = true;
           var text = String.Join("", tokens);
-          var names = SplitChars("/", text);
-
-          retValue.Name = names[0];
-          if (names.Length > 1)
+          var names = SplitChars("|", text);
+          if (0 == names.Length)
           {
-            retValue.AltName = names[1];
+            success = false;
+            Errors.Declarations(line);
           }
-          retValue = SaveID(retValue, lineType);
+
+          if (success)
+          {
+            retValue.Name = names[0];
+            if (names.Length > 1)
+            {
+              retValue.AltName = names[1];
+            }
+            retValue = SaveID(retValue, lineType);
+          }
           break;
         }
       }
@@ -154,18 +292,26 @@ namespace CalcPad
         && "total:" == tokens[0].ToLower())
       {
         lineType = LineType.Total;
+        var tokenCount = tokens.Length;
+        var line = string.Join(" ", tokens);
+
+        if (tokenCount < 2
+          || tokenCount > 3)
+        {
+          Errors.Syntax(line, Errors.SyntaxTotal());
+        }
 
         retValue = new ID
         {
           Name = tokens[0],
         };
 
-        if (tokens.Length > 1)
+        if (tokenCount > 1)
         {
           retValue.TotalIDName = tokens[1];
         }
 
-        if (tokens.Length > 2)
+        if (tokenCount > 2)
         {
           ID findID = GetID(retValue.TotalIDName);
           findID.Rounding = tokens[2];
@@ -174,31 +320,42 @@ namespace CalcPad
       return retValue;
     }
 
-    // 
+    // Performs the related conversion calculations.
     private void DoCalcs(ID lineIDRef)
     {
-      // "FirstName" is # "SecondName"
-      var idRef = lineIDRef;
+      // "LeftName" is # "RightNames"
+      // Calculate RightID total.
+      ID prevIDRef = lineIDRef;
+      ID nextIDRef = null;
+      if (!string.IsNullOrWhiteSpace(lineIDRef.FormulaIDName))
+      {
+        var formulaIDRef = GetID(lineIDRef.FormulaIDName);
+        if (formulaIDRef != null)
+        {
+          formulaIDRef.Value = lineIDRef.Value * lineIDRef.FormulaValue;
+          nextIDRef = GetIDWithFormula(lineIDRef);
+        }
+      }
 
-      // Calculate SecondID total.
-      var formulaIDRef = GetID(idRef.FormulaIDName);
-      formulaIDRef.Value = idRef.Value * idRef.FormulaValue;
+      if (null == nextIDRef)
+      {
+        // Look for related conversion.
+        nextIDRef = GetIDWithFormula(lineIDRef);
+      }
 
-      // Calculate formula "To" totals.
-      var prevIDRef = idRef;
-      var nextIDRef = GetFormulaID(idRef);
+      // Calculate related formula totals.
       while (nextIDRef != null)
       {
         if (nextIDRef != null)
         {
           nextIDRef.Value = prevIDRef.Value / nextIDRef.FormulaValue;
           prevIDRef = nextIDRef;
-          nextIDRef = GetFormulaID(nextIDRef);
+          nextIDRef = GetIDWithFormula(nextIDRef);
         }
       }
     }
 
-    // 
+    // Performs the rounding.
     private double DoRound(ID id)
     {
       double retValue = id.Value;
@@ -225,16 +382,22 @@ namespace CalcPad
     }
 
     // Gets the Formula name by ID Name or AltNames
-    private ID GetFormulaID(ID id)
+    private ID GetIDWithFormula(ID id)
     {
       ID retValue = null;
 
       if (id != null)
       {
-        retValue = IDs.Find(x => x.FormulaIDName == id.Name);
+        if (!string.IsNullOrWhiteSpace(id.Name))
+        {
+          retValue = IDs.Find(x => x.FormulaIDName == id.Name);
+        }
         if (null == retValue)
         {
-          retValue = IDs.Find(x => x.FormulaIDName == id.AltName);
+          if (!string.IsNullOrWhiteSpace(id.AltName))
+          {
+            retValue = IDs.Find(x => x.FormulaIDName == id.AltName);
+          }
         }
       }
       return retValue;
@@ -247,15 +410,22 @@ namespace CalcPad
 
       if (!string.IsNullOrWhiteSpace(name))
       {
-        retValue = IDs.Find(x => x.Name == name);
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+          retValue = IDs.Find(x => x.Name == name);
+        }
         if (null == retValue)
         {
-          retValue = IDs.Find(x => x.AltName == name);
+          if (!string.IsNullOrWhiteSpace(name))
+          {
+            retValue = IDs.Find(x => x.AltName == name);
+          }
         }
       }
       return retValue;
     }
 
+    // Saves or Updates the ID.
     private ID SaveID(ID id, LineType lineType)
     {
       var retValue = GetID(id.Name);
@@ -300,20 +470,20 @@ namespace CalcPad
 
     #region RTB Methods
 
-    // 
+    // Gets the RTB line first char index.
     private int GetCharIndex(RichTextBox rtb, int lineIndex)
     {
       var retValue = rtb.GetFirstCharIndexFromLine(lineIndex);
       return retValue;
     }
 
-    // 
+    // Replaces RTB line.
     private void ReplaceLine(RichTextBox rtb, int lineIndex, string text)
     {
       var beginIndex = GetCharIndex(rtb, lineIndex);
 
       var endIndex = rtb.Text.Length;
-      if (lineIndex < rtb.Lines.Count())
+      if (lineIndex < rtb.Lines.Count() - 1)
       {
         lineIndex++;
         endIndex = GetCharIndex(rtb, lineIndex) - 1;
@@ -327,12 +497,14 @@ namespace CalcPad
 
     #region Event handlers
 
+    // Performs the calculations on double mouse click.
     private void CalcRTB_DoubleClick(object sender, EventArgs e)
     {
       for (int index = 0; index < CalcsRTB.Lines.Count(); index++)
       {
         var line = CalcsRTB.Lines[index];
-        if (!string.IsNullOrWhiteSpace(line))
+        if (!string.IsNullOrWhiteSpace(line)
+          && !line.Trim().StartsWith("//"))
         {
           var lineIDRef = CreateID(line, out LineType lineType);
           switch (lineType)
@@ -362,11 +534,12 @@ namespace CalcPad
 
     #region Properties
 
+    // The defined IDs.
     private List<ID> IDs { get; set; }
     #endregion
   }
 
-  // Represents an Identifier.s
+  // Represents an Identifier.
   public class ID
   {
     #region Constructors
@@ -386,6 +559,7 @@ namespace CalcPad
 
     #region Data Methods
 
+    // The debug display value.
     public override string ToString()
     {
       return $"{Name}: {Value}";
@@ -411,29 +585,30 @@ namespace CalcPad
 
     #region Properties
 
-    // 
+    // The Altername name.
     public string AltName { get; set; }
 
-    // 
+    // The Formula value.
     public double FormulaValue { get; set; }
 
-    // 
+    // The Formula ID name.
     public string FormulaIDName { get; set; }
 
-    // 
+    // The ID name.
     public string Name { get; set; }
 
-    // 
+    // The Rounding value.
     public string Rounding { get; set; }
 
-    // 
+    // The Total ID name.
     public string TotalIDName { get; set; }
 
-    // 
+    // The ID value.
     public double Value { get; set; }
     #endregion
   }
 
+  // The line type values.
   public enum LineType
   {
     None,

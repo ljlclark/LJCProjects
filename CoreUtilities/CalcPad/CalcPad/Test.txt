@@ -1,14 +1,46 @@
-Person/Persons
-Family/Families
-Community/Communities
-Village/Villages
+|
+Person|Persons
+Kilometer is 1000
+Meters = 2000 x x x x x
+Families = 
+Taps = Persons / 125;
+Total: 
 
+Kilometer|Kilometers
+Meter|Meters
+Meter is 1000 Milimeters
+Kilometer is 1000 Meters
+Meters = 2000
+Total: Kilometers
+
+// 1. Declare Data Items.
+Person|Persons
+Family|Families
+Community|Communities
+Village|Villages
+
+// 2. Conversion formulas and start value.
 Family is 5 Persons
 Community is 4 Families
 Village is 4 Communities
-
 Families = 10
+Taps = Persons / 125
 
+// 4. Display the totals.
+Total: Families Ceiling
+Total: Communities Ceiling
+Total: Villages Ceiling
+Total: Persons
+Total: Taps Ceiling
+
+// ---------------------
+// Conversion formulas.
+Community is 16 Families
+
+// Start value.
+Families = 100
+
+// Totals.
 Total: Families Ceiling
 Total: Communities Ceiling
 Total: Villages Ceiling
