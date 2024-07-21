@@ -1,17 +1,15 @@
-|
 Person|Persons
-Kilometer is 1000
-Meters = 2000 x x x x x
-Families = 
-Taps = Persons / 125;
-Total: 
+persons = 500
+Taps = persons / 125
+Value: 
+value: taps
 
 Kilometer|Kilometers
 Meter|Meters
 Meter is 1000 Milimeters
 Kilometer is 1000 Meters
 Meters = 2000
-Total: Kilometers
+Value: Kilometers
 
 // 1. Declare Data Items.
 Person|Persons
@@ -27,11 +25,11 @@ Families = 10
 Taps = Persons / 125
 
 // 4. Display the totals.
-Total: Families Ceiling
-Total: Communities Ceiling
-Total: Villages Ceiling
-Total: Persons
-Total: Taps Ceiling
+Value: Families Ceiling
+Value: Communities Ceiling
+Value: Villages Ceiling
+Value: Persons
+Value: Taps Ceiling
 
 // ---------------------
 // Conversion formulas.
@@ -41,7 +39,7 @@ Community is 16 Families
 Families = 100
 
 // Totals.
-Total: Families Ceiling
-Total: Communities Ceiling
-Total: Villages Ceiling
-Total: Persons
+Value: Families Ceiling
+Value: Communities Ceiling
+Value: Villages Ceiling
+Value: Persons
