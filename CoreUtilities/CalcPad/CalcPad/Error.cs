@@ -26,10 +26,11 @@ namespace CalcPad
       return retValue;
     }
     #endregion
+
     #region Error messages.
 
     // 
-    internal static void Declarations(string line)
+    internal static void Declaration(string line)
     {
       var message = $"Line: {line}\r\n";
       message += "Missing Item name.";
@@ -48,18 +49,6 @@ namespace CalcPad
     }
 
     // 
-    internal static void NameFormat(string line, string itemName= null)
-    {
-      var message = $"Line: {line}\r\n";
-      if (!string.IsNullOrWhiteSpace(itemName))
-      {
-        message += $"ItemName: {itemName}";
-      }
-      message += "\r\n\r\n" + SyntaxNameFormat();
-      MessageBox.Show(message);
-    }
-
-    // 
     internal static void ItemNotFound(string line, string itemName = null
       , string syntax = null)
     {
@@ -73,6 +62,18 @@ namespace CalcPad
       {
         message += $"\r\n\r\n{syntax}";
       }
+      MessageBox.Show(message);
+    }
+
+    // 
+    internal static void NameFormat(string line, string itemName = null)
+    {
+      var message = $"Line: {line}\r\n";
+      if (!string.IsNullOrWhiteSpace(itemName))
+      {
+        message += $"ItemName: {itemName}";
+      }
+      message += "\r\n\r\n" + SyntaxNameFormat();
       MessageBox.Show(message);
     }
 

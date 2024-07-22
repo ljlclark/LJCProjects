@@ -16,6 +16,12 @@ namespace CalcPad
 
     #region Line Parse Methods
 
+    // Error.FormulaValue
+    // Error.ItemNotFound
+    // Error.NameFormat
+    // Error.Number
+    // Error.Operation
+    // Error.TokenCount
     public Item ParseItem(string line, out LineType lineType)
     {
       Item retValue = null;
@@ -44,6 +50,13 @@ namespace CalcPad
     }
 
     // Creates a Formula Item.
+    // Error.Declaration
+    // Error.FormulaValue
+    // Error.ItemNotFound
+    // Error.NameFormat
+    // Error.Number
+    // Error.Operation
+    // Error.TokenCount
     private Item ParseAssignment(string[] tokens, out LineType lineType)
     {
       Item retValue = null;
@@ -123,6 +136,9 @@ namespace CalcPad
     }
 
     // Creates a Formula Item.
+    // Error.FormulaValue
+    // Error.NameFormat
+    // Error.TokenCount
     private Item ParseFormula(string[] tokens, out LineType lineType)
     {
       Item retValue = null;
@@ -192,6 +208,7 @@ namespace CalcPad
     }
 
     // Creates a Name Item.
+    // Error.Declaration
     private Item ParseName(string[] tokens, out LineType lineType)
     {
       Item retValue = null;
@@ -220,7 +237,7 @@ namespace CalcPad
             {
               success = false;
               var line = string.Join(" ", tokens);
-              Error.Declarations(line);
+              Error.Declaration(line);
             }
 
             if (success)
@@ -240,6 +257,8 @@ namespace CalcPad
     }
 
     // Creates a Display Value Item.
+    // Error.ItemNotFound
+    // Error.TokenCount
     private Item ParseValue(string[] tokens, out LineType lineType)
     {
       Item retValue = null;
@@ -255,7 +274,7 @@ namespace CalcPad
 
         // Value: Name
         if (tokenCount < 2
-          || tokenCount > 3)
+          || tokenCount > 4)
         {
           Error.TokenCount(line, Error.SyntaxValue());
         }
@@ -280,21 +299,24 @@ namespace CalcPad
       return retValue;
     }
 
-    // Gets the item value.
-    private double GetItemValue(string line, string itemName, out bool success
+    // Gets the token or item value.
+    // Error.ItemNotFound
+    // Error.NameFormat
+    // Error.Number
+    private double GetItemValue(string line, string token, out bool success
       , string syntax = null)
     {
-      double retValue = -1.0;
+      //double retValue = -1.0;
 
-      if (success = IsItemOrNumber(line, itemName, out retValue))
+      if (success = IsItemOrNumber(line, token, out double retValue))
       {
         if (retValue < 0)
         {
-          Item findItem = GetItem(itemName);
+          Item findItem = GetItem(token);
           if (null == findItem)
           {
             success = false;
-            Error.ItemNotFound(line, itemName, syntax);
+            Error.ItemNotFound(line, token, syntax);
           }
           else
           {
@@ -306,6 +328,7 @@ namespace CalcPad
     }
 
     // Checs if tokenis an operation.
+    // Error.Operation
     private string GetOperation(string line, string token, out bool success)
     {
       string retValue = null;
@@ -324,29 +347,31 @@ namespace CalcPad
     }
 
     // Check if token is item name or number.
-    private bool IsItemOrNumber(string line, string itemName
+    // Error.NameFormat
+    // Error.Number
+    private bool IsItemOrNumber(string line, string token
       , out double value, string syntax = null)
     {
       var retValue = true;
 
-      if (!double.TryParse(itemName, out value))
+      if (!double.TryParse(token, out value))
       {
         value = -1.0;
 
         // Not a number and does not start with letter.
-        if (!Error.IsNumber(itemName)
-          && !char.IsLetter(itemName[0]))
+        if (!Error.IsNumber(token)
+          && !char.IsLetter(token[0]))
         {
           retValue = false;
-          Error.NameFormat(line, itemName);
+          Error.NameFormat(line, token);
         }
 
         if (retValue
-          && char.IsNumber(itemName[0])
-          && !Error.IsNumber(itemName))
+          && char.IsNumber(token[0])
+          && !Error.IsNumber(token))
         {
           retValue = false;
-          Error.Number(line, itemName, syntax);
+          Error.Number(line, token, syntax);
         }
       }
       return retValue;
@@ -418,30 +443,24 @@ namespace CalcPad
     }
 
     // Performs the rounding.
-    private double DoRound(Item item)
+    private double DoRound(string rounding, double value)
     {
-      double retValue = 0.0;
+      double retValue = value;
 
-      if (item != null)
+      if (!string.IsNullOrWhiteSpace(rounding))
       {
-        retValue = item.Value;
-      }
-
-      if (!string.IsNullOrWhiteSpace(item.Rounding))
-      {
-        retValue = item.Value;
-        switch (item.Rounding.ToLower())
+        switch (rounding.ToLower())
         {
           case "ceiling":
-            retValue = Math.Ceiling(item.Value);
+            retValue = Math.Ceiling(value);
             break;
 
           case "round":
-            retValue = Math.Round(item.Value);
+            retValue = Math.Round(value);
             break;
 
           case "floor":
-            retValue = Math.Floor(item.Value);
+            retValue = Math.Floor(value);
             break;
         }
       }
@@ -586,7 +605,7 @@ namespace CalcPad
               }
 
               var itemRef = GetItem(lineItemRef.ValueName);
-              var value = DoRound(itemRef);
+              var value = DoRound(lineItemRef.Rounding , itemRef.Value);
               text += $" ({value})";
               ReplaceLine(CalcsRTB, index, text);
               break;
@@ -675,10 +694,10 @@ namespace CalcPad
   // The line type values.
   public enum LineType
   {
-    None,
-    Name,
-    Formula,
     Assignment,
+    Formula,
+    Name,
+    None,
     Value
   }
 }
