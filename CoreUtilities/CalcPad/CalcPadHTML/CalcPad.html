@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- CalcPad.html -->
+<html lang="en">
+<head>
+  <title>CalcPad</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="A Calculation Pad page." />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <script src="Script/LJCCommon.js"></script>
+  <script src="Script/CalcPadCode.js"></script>
+  <script src="Script/CalcPadEvent.js"></script>
+</head>
+<body>
+  <div id="page" class="page"
+       style="text-align: center">
+    <!--  -->
+    <!-- Data Layout -->
+    <div id="dataLayout" class="table">
+      <div class="row">
+        <div class="firstCell">
+          <label for="calcPad">CalcPad</label>
+          <span id="options">Options</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="firstCell">
+          <textarea id="calcPad" name="template" rows="1"
+                    autofocus spellcheck="false"
+                    class="text"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- End Page -->
+    <!--  -->
+    <script>
+      CalcPadEvent.SetEvents();
+      CalcPadEvent.TextCols();
+    </script>
+</body>
+</html>
