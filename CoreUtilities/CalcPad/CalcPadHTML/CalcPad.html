@@ -9,6 +9,14 @@
   <meta name="description" content="A Calculation Pad page." />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
+  <!-- divMenu -->
+  <link rel="stylesheet" type="text/css" href="CSS/CalcPad.css" />
+  <!-- hMenu, hItem, titleHighlight -->
+  <link rel="stylesheet" type="text/css" href="CSS/HMenu.css" />
+  <!-- page -->
+  <link rel="stylesheet" type="text/css" href="CSS/Page.css" />
+  <!-- cell, firstCell, labelRight, row, table -->
+  <link rel="stylesheet" type="text/css" href="CSS/TableLayout.css" />
   <script src="Script/LJCCommon.js"></script>
   <script src="Script/CalcPadCode.js"></script>
   <script src="Script/CalcPadEvent.js"></script>
@@ -33,11 +41,20 @@
         </div>
       </div>
     </div>
-    <!-- End Page -->
-    <!--  -->
-    <script>
-      CalcPadEvent.SetEvents();
-      CalcPadEvent.TextCols();
-    </script>
+    <!-- End Data Layout -->
+  </div>
+  <!-- End Page -->
+  <!--  -->
+  <!-- Menus -->
+  <div id="calcPadMenu" class="divMenu" style="width:120px">
+    <div class="titleHighlight">CalcPad Menu</div>
+    <div><hr /></div>
+    <div id="doCalcs">Do Calculations</div>
+  </div>
+  <script>
+    CalcPadEvent.SetEvents();
+    CalcPadEvent.TextCols();
+    calcPadMenu.style.visibility = "hidden";
+  </script>
 </body>
 </html>

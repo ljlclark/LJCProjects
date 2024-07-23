@@ -115,7 +115,7 @@ class LJC
   // Get the average character width.
   static AverageCharWidth(selector, text)
   {
-    let font = LJC.ComputedStyle(selector, "font");
+    let font = LJC.SelectorStyle(selector, "font");
     let textWidth = LJC.TextWidth(font, text);
     let averageWidth = textWidth / text.length;
     let retValue = LJC.Round(averageWidth, 100);
@@ -184,15 +184,6 @@ class LJC
     return retValue;
   }
 
-  // Gets the ComputerStyle property.
-  static ComputedStyle(selector, property)
-  {
-    let eItem = document.querySelector(selector);
-    let css = window.getComputedStyle(eItem, null);
-    let retValue = css.getPropertyValue(property);
-    return retValue;
-  }
-
   // Gets a delimited substring.
   static DelimitedString(text, beginDelimiter, endDelimiter, begin)
   {
@@ -209,6 +200,22 @@ class LJC
         //begin.Index = endIndex + 1;
       }
     }
+    return retValue;
+  }
+
+  // Gets the element ComputerStyle property.
+  static ElementStyle(eItem, property)
+  {
+    let css = window.getComputedStyle(eItem, null);
+    let retValue = css.getPropertyValue(property);
+    return retValue;
+  }
+
+  // Gets the first matching selector ComputerStyle property.
+  static SelectorStyle(selector, property)
+  {
+    let eItem = document.querySelector(selector);
+    let retValue = LJC.ElementStyle(eItem, property);
     return retValue;
   }
 
