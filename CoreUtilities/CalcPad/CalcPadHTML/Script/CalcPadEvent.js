@@ -1,7 +1,8 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CalcPadEvent.js
-// <script src="../LJCCommon.js"></script>
+// <script src="Script/LJCCommon.js"></script>
+// <script src="Script/CalcPadCode.js"></script>
 
 // Generate event handlers.
 class CalcPadEvent
@@ -9,6 +10,8 @@ class CalcPadEvent
   // Sets the Event handlers.
   static SetEvents()
   {
+    calcPadMenu.style.visibility = "hidden";
+
     // window Event Handlers.
     window.addEventListener("resize", CalcPadEvent.TextCols);
 
@@ -51,7 +54,8 @@ class CalcPadEvent
       switch (eTarget.id)
       {
         case "doCalcs":
-          //CalcPadCode.Process();
+          let calcPadCode = new CalcPadCode();
+          calcPadCode.DoCalcs(calcPad.value);
           break;
       }
     }
@@ -114,7 +118,7 @@ class CalcPadEvent
     CalcPadEvent.SetTextCols(event, width);
   }
 
-  // Functions
+  // Event Functions
   // ---------------
 
   // Sets the textarea coluns.

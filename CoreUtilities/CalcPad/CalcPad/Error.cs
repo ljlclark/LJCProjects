@@ -36,7 +36,7 @@ namespace CalcPad
       message += "Missing Item name.";
       message += "\r\n\r\nDeclaration Syntax:\r\n";
       message += "  Name|AltName";
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Declaration");
     }
 
     // 
@@ -45,24 +45,24 @@ namespace CalcPad
       var message = $"Line: {line}\r\n";
       message += "Value must be a number.";
       message += "\r\n\r\n" + SyntaxFormula();
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Formula Value");
     }
 
     // 
     internal static void ItemNotFound(string line, string itemName = null
       , string syntax = null)
     {
-      var message = $"Line: {line}";
+      var message = $"Line: {line}\r\n";
       if (!string.IsNullOrWhiteSpace(itemName))
       {
-        message += $"\r\nItemName: {itemName}\r\n";
+        message += $"ItemName: {itemName}\r\n";
       }
       message += "Item name was not found.";
       if (syntax != null)
       {
         message += $"\r\n\r\n{syntax}";
       }
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Item Not Found");
     }
 
     // 
@@ -74,7 +74,7 @@ namespace CalcPad
         message += $"ItemName: {itemName}";
       }
       message += "\r\n\r\n" + SyntaxNameFormat();
-      MessageBox.Show(message);
+      MessageBox.Show(message, NameFormat Format");
     }
 
     // 
@@ -87,7 +87,7 @@ namespace CalcPad
       {
         message += "\r\n\r\n" + syntax;
       }
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Number");
     }
 
     // 
@@ -96,7 +96,7 @@ namespace CalcPad
       var message = $"Line: {line}\r\n";
       message += "Operator must be { + | - | * | / }.";
       message += "\r\n\r\n" + SyntaxAssignment();
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Operation");
     }
 
     // 
@@ -108,7 +108,7 @@ namespace CalcPad
       {
         message += "\r\n\r\n" + syntax;
       }
-      MessageBox.Show(message);
+      MessageBox.Show(message, "Token Count");
     }
     #endregion
 
