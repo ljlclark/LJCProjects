@@ -2,11 +2,15 @@
 // Licensed under the MIT License.
 // CalcPadCode.js
 // <script src="Script/LJCCommon.js"></script>
+// <script src="Script/TextAreaCode.js"></script>
 
 // CalcPad functions.
 class CalcPadCode
 {
-  // The Constructor function.
+  // The defined items.
+  #Items = [];
+
+  // Initializes an object instance.
   constructor()
   {
   }
@@ -43,52 +47,56 @@ class CalcPadCode
 
         // If blank line or comment.
         if (!LJC.HasValue(line)
-          && line.trim().StartsWith("//"))
+          && line.trim().startsWith("//"))
         {
           continue;
         }
 
-        let refLineType = new RefLineType("None");
-        var lineItemRef = this.#ParseItem(line, refLineType);
-        switch (refLineType)
+        let refLineType = new RefLineType("");
+        let lineItemRef = this.#ParseItem(line, refLineType);
+        switch (refLineType.Name.toLowerCase())
         {
-          case "Assignment":
+          case "assignment":
             this.#DoCalc(lineItemRef);
             break;
 
-          case "Value":
-            var text = line;
-            var valueIndex = text.IndexOf("(");
-            if (valueIndex > 0)
-            {
-              text = text.Substring(0, valueIndex - 1);
-            }
+          case "value":
+            text = this.#ClearValue(line);
+            let itemRef = this.#GetItem(lineItemRef.ValueName);
+            let value = this.#DoRound(lineItemRef.Rounding, itemRef.Value);
+            text += ` (${value})`;
 
-            var itemRef = this.#GetItem(lineItemRef.ValueName);
-            var value = this.#DoRound(lineItemRef.Rounding, itemRef.Value);
-            text += `(${value})`;
-            //this.#ReplaceLine(CalcsRTB, index, text);
+            lines[index] = text;
+            let calcCode = new TextAreaCode(calcPad);
+            calcCode.ReplaceLine(index, text);
             break;
         }
       }
     }
   }
 
+  // Clears the old value.
+  #ClearValue(line)
+  {
+    let retValue = line;
+    let valueIndex = retValue.indexOf("(");
+    if (valueIndex > 0)
+    {
+      retValue = retValue.Substring(0, valueIndex - 1);
+    }
+    return retValue;
+  }
+
   // Line Parse Methods
   // ---------------
 
-  // Error.FormulaValue
-  // Error.ItemNotFound
-  // Error.NameFormat
-  // Error.Number
-  // Error.Operation
-  // Error.TokenCount
+  // Parses a line int a line item.
   #ParseItem(line, refLineType)
   {
     let retValue = "";
     retValue = null;
 
-    refLineType = new RefLineType("None");
+    refLineType.Name = "None";
     let tokens = this.#SplitChars(" ", line);
     if (tokens.length > 0)
     {
@@ -111,14 +119,7 @@ class CalcPadCode
     return retValue;
   }
 
-  // Creates a Formula Item.
-  // Error.Declaration
-  // Error.FormulaValue
-  // Error.ItemNotFound
-  // Error.NameFormat
-  // Error.Number
-  // Error.Operation
-  // Error.TokenCount
+  // Creates a Formula line item.
   #ParseAssignment(tokens, refLineType)
   {
     let retValue = "";
@@ -126,12 +127,12 @@ class CalcPadCode
 
     refLineType.Name = "None";
     if (tokens != null
-      && tokens.Length > 1
-      && ("=" == tokens[1].ToLower()))
+      && tokens.length > 1
+      && ("=" == tokens[1].toLowerCase()))
     {
       refLineType.Name = "Assignment";
-      let tokenCount = tokens.Length;
-      let line = string.Join(" ", tokens);
+      let tokenCount = tokens.length;
+      let line = tokens.join(" ");
       let refSuccess = new RefSuccess(true);
 
       // Name = name/value operator name/value.
@@ -146,11 +147,9 @@ class CalcPadCode
       if (refSuccess.Value)
       {
         let token = tokens[0];
-        retValue = new Item()
-        {
-          Name = token
-        };
-        if (!char.IsLetter(token[0]))
+        retValue = new Item(token, 0);
+        // *** Next Statement *** Change
+        if (!"string" == typeof token[0])
         {
           success.Value = false;
           Error.NameFormat(line, token);
@@ -163,7 +162,7 @@ class CalcPadCode
         && tokenCount > 2)
       {
         let token = tokens[2];
-        firstValue = this.GetItemValue(line, token, refSuccess
+        firstValue = this.#GetItemValue(line, token, refSuccess
           , Error.SyntaxAssignment());
         if (3 == tokenCount)
         {
@@ -172,12 +171,12 @@ class CalcPadCode
       }
 
       // Get operation.
-      operation = null;
+      let operation = null;
       if (refSuccess.Value
         && tokenCount > 3)
       {
         let token = tokens[3];
-        operation = this.GetOperation(line, token, refSuccess);
+        operation = this.#GetOperation(line, token, refSuccess);
       }
 
       if (refSuccess.Value
@@ -185,23 +184,20 @@ class CalcPadCode
       {
         // Get second value.
         let token = tokens[4];
-        let secondValue = this.GetItemValue(line, token
+        let secondValue = this.#GetItemValue(line, token
           , refSuccess, Error.SyntaxAssignment());
-        retValue.Value = this.Calc(firstValue, operation, secondValue);
+        retValue.Value = this.#Calc(firstValue, operation, secondValue);
       }
 
       if (refSuccess.Value)
       {
-        retValue = this.SaveItem(retValue, lineType);
+        retValue = this.#SaveItem(retValue, refLineType);
       }
     }
     return retValue;
   }
 
-  // Creates a Formula Item.
-  // Error.FormulaValue
-  // Error.NameFormat
-  // Error.TokenCount
+  // Creates a Formula line item.
   #ParseFormula(tokens, refLineType)
   {
     let retValue = null;
@@ -209,11 +205,11 @@ class CalcPadCode
     refLineType.Name = "None";
     if (tokens != null
       && tokens.length > 1
-      && "is" == tokens[1].ToLower())
+      && "is" == tokens[1].toLowerCase())
     {
       refLineType.Name = "Formula";
       let tokenCount = tokens.length;
-      let line = string.Join(" ", tokens);
+      let line = tokens.join(" ");
       let success = true;
 
       // Name is # Name
@@ -224,17 +220,21 @@ class CalcPadCode
         Error.TokenCount(line, Error.SyntaxFormula());
       }
 
-      retValue = new Item()
-      {
-        Name = tokens[0]
-      };
+      retValue = new Item(tokens[0], 0);
 
+      let value = 0;
       if (tokenCount > 2)
       {
         let token = tokens[2];
-        if (!double.TryParse(token, value))
+        let pattern = /[0-9\-.]+/;
+        if (pattern.test(token))
         {
-          if (!char.IsLetter(token[0]))
+          value = Number(token);
+        }
+        else
+        {
+          // *** Next Statement *** Change
+          if (!"string" == typeof token[0])
           {
             success = false;
             Error.NameFormat(line, token);
@@ -257,6 +257,8 @@ class CalcPadCode
         retValue.FormulaValue = value;
       }
 
+      // *** Next Statement *** Add
+      retValue.FormulaName = "";
       if (tokenCount > 3)
       {
         retValue.FormulaName = tokens[3];
@@ -264,14 +266,13 @@ class CalcPadCode
 
       if (success)
       {
-        retValue = this.#SaveItem(retValue, lineType);
+        retValue = this.#SaveItem(retValue, refLineType);
       }
     }
     return retValue;
   }
 
-  // Creates a Name Item.
-  // Error.Declaration
+  // Creates a Name line item.
   #ParseName(tokens, refLineType)
   {
     let retValue = null;
@@ -288,33 +289,26 @@ class CalcPadCode
         if (token.includes("|"))
         {
           refLineType.Name = "Name";
-
-          retValue = new Item()
-          {
-            this.Value = 0
-          };
+          retValue = new Item(null, 0);
 
           // Remove extra spaces.
           let refSuccess = new RefSuccess(true);
-          //let text = String.Join("", tokens);
           let text = tokens.join("");
           let names = this.#SplitChars("|", text);
           if (0 == names.length)
           {
             refSuccess.Value = false;
-            let line = string.Join(" ", tokens);
+            let line = tokens.join(" ");
             Error.Declaration(line);
           }
 
           if (refSuccess.Value)
           {
             retValue.Name = names[0];
-            if (names.length > 1)
+            if (names.length > 1
+              && LJC.HasValue(names[1]))
             {
-              if (LJC.HasValue(names[1]))
-              {
-                retValue.AltName = names[1];
-              }
+              retValue.AltName = names[1];
             }
             retValue = this.#SaveItem(retValue, refLineType);
           }
@@ -325,9 +319,7 @@ class CalcPadCode
     return retValue;
   }
 
-  // Creates a Display Value Item.
-  // Error.ItemNotFound
-  // Error.TokenCount
+  // Creates a Display Value line item.
   #ParseValue(tokens, refLineType)
   {
     let retValue = null;
@@ -335,11 +327,11 @@ class CalcPadCode
     refLineType.Name = "None";
     if (tokens != null
       && tokens.length > 1
-      && "value:" == tokens[0].ToLower())
+      && "value:" == tokens[0].toLowerCase())
     {
       refLineType.Name = "Value";
       let tokenCount = tokens.length;
-      let line = string.Join(" ", tokens);
+      let line = tokens.join(" ");
 
       // Value: Name
       if (tokenCount < 2
@@ -348,7 +340,7 @@ class CalcPadCode
         Error.TokenCount(line, Error.SyntaxValue());
       }
 
-      retValue = new Item();
+      retValue = new Item(null, 0);
       if (tokenCount > 1)
       {
         let token = tokens[1];
@@ -368,17 +360,14 @@ class CalcPadCode
     return retValue;
   }
 
-  // Gets the token or item value.
-  // Error.ItemNotFound
-  // Error.NameFormat
-  // Error.Number
+  // Gets the token or data item value.
   #GetItemValue(line, token, refSuccess, syntax = null)
   {
-    refRetValue = new RefNumber(-1.0);
+    let refRetNumber = new RefNumber(-1.0);
 
-    if (refSuccess.Value = this.#IsItemOrNumber(line, token, refRetValue))
+    if (refSuccess.Value = this.#IsItemOrNumber(line, token, refRetNumber))
     {
-      if (refRetValue.Value < 0)
+      if (refRetNumber.Value < 0)
       {
         let findItem = this.#GetItem(token);
         if (null == findItem)
@@ -388,15 +377,14 @@ class CalcPadCode
         }
         else
         {
-          refRetValue.Value = findItem.Value;
+          refRetNumber.Value = findItem.Value;
         }
       }
     }
-    return refRetValue;
+    return refRetNumber;
   }
 
-  // Checs if tokenis an operation.
-  // Error.Operation
+  // Checs if token is an operation.
   #GetOperation(line, token, refSuccess)
   {
     let retValue = null;
@@ -415,27 +403,26 @@ class CalcPadCode
   }
 
   // Check if token is item name or number.
-  // Error.NameFormat
-  // Error.Number
   #IsItemOrNumber(line, token, refNumber, syntax = null)
   {
     let retValue = true;
 
-    if (!double.TryParse(token, refNumber))
+    if (Error.IsNumber(token))
+    {
+      refNumber.Value = Number(token);
+    }
+    else
     {
       refNumber.Value = -1.0;
 
       // Not a number and does not start with letter.
-      if (!Error.IsNumber(token)
-        && !char.IsLetter(token[0]))
+      if (typeof token[0] != "string")
       {
         retValue = false;
         Error.NameFormat(line, token);
       }
 
-      if (retValue
-        && char.IsNumber(token[0])
-        && !Error.IsNumber(token))
+      if (retValue)
       {
         retValue = false;
         Error.Number(line, token, syntax);
@@ -447,6 +434,7 @@ class CalcPadCode
   // Other Private Methods
   // ---------------
 
+  // Persorms an assignment calculation.
   #Calc(firstValue, operation, secondValue)
   {
     let retValue = 0.0;
@@ -476,11 +464,11 @@ class CalcPadCode
   // Performs the related conversion calculations.
   #DoCalc(lineItemRef)
   {
-    // "LeftName" is # "RightNames"
+    // "LeftName" is # "RightName"
     // Calculate RightItem total.
     let prevItemRef = lineItemRef;
     let nextItemRef = null;
-    if (!string.IsNullOrWhiteSpace(lineItemRef.FormulaName))
+    if (LJC.HasValue(lineItemRef.FormulaName))
     {
       var formulaItemRef = this.#GetItem(lineItemRef.FormulaName);
       if (formulaItemRef != null)
@@ -513,9 +501,9 @@ class CalcPadCode
   {
     let retValue = value;
 
-    if (!string.IsNullOrWhiteSpace(rounding))
+    if (LJC.HasValue(rounding))
     {
-      switch (rounding.ToLower())
+      switch (rounding.toLowerCase())
       {
         case "ceiling":
           retValue = Math.Ceiling(value);
@@ -541,16 +529,17 @@ class CalcPadCode
 
     if (LJC.HasValue(name))
     {
-      retValue = this.#Items.find(x => x.Name.equalsIgnoreCase(name));
+      name = name.toLowerCase();
+      retValue = this.#Items.find(x => x.Name.toLowerCase() == name);
       if (null == retValue)
       {
-        retValue = this.#Items.find(x => x.AltName.equalsIgnoreCase(name));
+        retValue = this.#Items.find(x => x.AltName.toLowerCase() == name);
       }
     }
     return retValue;
   }
 
-  // Gets the Formula name by Items Name or AltNames
+  // Gets the Formula name by Item's Name or AltNames
   #GetItemWithFormula(item)
   {
     let retValue = new Item();
@@ -558,54 +547,60 @@ class CalcPadCode
 
     if (item != null)
     {
-      if (!string.IsNullOrWhiteSpace(item.Name))
+      if (LJC.HasValue(item.Name))
       {
-        retValue = this.Items.Find(x => x.FormulaName == item.Name);
+        let name = item.Name.toLowerCase();
+        retValue = this.#Items.find(x => x.FormulaName.toLowerCase() == name);
       }
-      if (null == retValue)
+      if (null == retValue
+        && LJC.HasValue(item.AltName))
       {
-        if (!string.IsNullOrWhiteSpace(item.AltName))
-        {
-          retValue = this.Items.Find(x => x.FormulaName == item.AltName);
-        }
+        let altName = item.AltName.toLowerCase();
+        retValue = this.#Items.find(x => x.FormulaName.toLowerCase() == altName);
       }
     }
     return retValue;
   }
 
   // Saves or Updates the Item.
-  #SaveItem(item, RefLineType)
+  #SaveItem(lineItem, refLineType)
   {
-    var retValue = this.#GetItem(item.Name);
+    var retValue = this.#GetItem(lineItem.Name);
     if (null == retValue)
     {
-      retValue = item;
-      //this.#Items.Add(retValue);
+      retValue = lineItem;
       this.#Items.push(retValue);
     }
     else
     {
       // Update Item values.
-      switch (refLineType.Name)
+      switch (refLineType.Name.toLowerCase())
       {
-        case "Assignment":
-          retValue.Value = item.Value;
+        case "assignment":
+          retValue.Value = lineItem.Value;
           break;
 
-        case "Formula":
-          retValue.FormulaValue = item.FormulaValue;
-          retValue.FormulaName = item.FormulaName;
+        case "formula":
+          retValue.FormulaValue = lineItem.FormulaValue;
+          retValue.FormulaName = lineItem.FormulaName;
           break;
 
-        case "Name":
-          retValue.AltName = item.AltName;
+        case "name":
+          retValue.AltName = lineItem.AltName;
           break;
 
-        case "Value":
-          retValue.Rounding = item.Rounding;
+        case "value":
+          retValue.Rounding = lineItem.Rounding;
           break;
       }
     }
+
+    // *** Begin *** Add
+    if (!LJC.HasValue(retValue.FormulaName))
+    {
+      retValue.FormulaName = "";
+    }
+    // *** End   *** Add
     return retValue;
   }
 
@@ -624,27 +619,11 @@ class CalcPadCode
     let retValue = text.split(regex);
     return retValue;
   }
-
-  // Properties
-  // ---------------
-
-  // The defined items.
-  #Items = [];
-}
-
-class RefNumber
-{
-  // The Constructor function.
-  constructor(value)
-  {
-    this.Value = 0.0;
-    this.Value = value;
-  }
 }
 
 class RefLineType
 {
-  // The Constructor function.
+  // Initializes an object instance.
   constructor(name)
   {
     this.Name = "";
@@ -652,9 +631,19 @@ class RefLineType
   }
 }
 
+class RefNumber
+{
+  // Initializes an object instance.
+  constructor(value)
+  {
+    this.Value = 0.0;
+    this.Value = value;
+  }
+}
+
 class RefSuccess
 {
-  // The Constructor function.
+  // Initializes an object instance.
   constructor(value)
   {
     this.Value = false;
