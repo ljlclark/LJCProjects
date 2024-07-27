@@ -45,6 +45,10 @@ class CalcPadEvent
           success = true;
           CalcPadEvent.ShowMenu(event, calcPadMenu);
           break;
+
+        case "help":
+          window.location = "CalcPadHelp.html";
+          break;
       }
     }
 
@@ -82,6 +86,12 @@ class CalcPadEvent
         backColor = LJC.ElementStyle(parent, "background-color");
         eTarget.style.backgroundColor = backColor;
         break;
+
+      case "help":
+        parent = eTarget.parentElement;
+        backColor = LJC.ElementStyle(parent, "background-color");
+        eTarget.style.backgroundColor = backColor;
+        break;
     }
   }
 
@@ -99,6 +109,10 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
+        eTarget.style.backgroundColor = dropItemColor;
+        break;
+
+      case "help":
         eTarget.style.backgroundColor = dropItemColor;
         break;
     }
