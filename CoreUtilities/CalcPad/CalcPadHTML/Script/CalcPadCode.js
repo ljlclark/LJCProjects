@@ -90,30 +90,76 @@ class CalcPadCode
   // Line Parse Methods
   // ---------------
 
-  // Parses a line int a line item.
-  #ParseItem(line, refLineType)
+  // Gets the token or data item value.
+  #GetItemValue(line, token, refSuccess, syntax = null)
   {
-    let retValue = "";
-    retValue = null;
+    let retValue = -1.0;
 
-    refLineType.Name = "None";
-    let tokens = this.#SplitChars(" ", line);
-    if (tokens.length > 0)
+    let refRetNumber = new RefNumber(-1.0);
+    if (refSuccess.Value = this.#IsItemOrNumber(line, token, refRetNumber))
     {
-      retValue = this.#ParseName(tokens, refLineType);
-      if (null == retValue)
+      retValue = refRetNumber.Value;
+      if (refRetNumber.Value < 0)
       {
-        retValue = this.#ParseFormula(tokens, refLineType);
+        let findItem = this.#GetItem(token);
+        if (null == findItem)
+        {
+          success.Value = false;
+          Error.ItemNotFound(line, token, syntax);
+        }
+        else
+        {
+          //refRetNumber.Value = findItem.Value;
+          retValue = findItem.Value;
+        }
+      }
+    }
+    //return refRetNumber;
+    return retValue;
+  }
+
+  // Checs if token is an operation.
+  #GetOperation(line, token, refSuccess)
+  {
+    let retValue = null;
+
+    refSuccess.Value = true;
+    if ("+-*/".includes(token))
+    {
+      retValue = token;
+    }
+    else
+    {
+      refSuccess.Value = false;
+      Error.Operation(line);
+    }
+    return retValue;
+  }
+
+  // Check if token is item name or number.
+  #IsItemOrNumber(line, token, refNumber, syntax = null)
+  {
+    let retValue = true;
+
+    if (Error.IsNumber(token))
+    {
+      refNumber.Value = Number(token);
+    }
+    else
+    {
+      refNumber.Value = -1.0;
+
+      // Not a number and does not start with letter.
+      if (typeof token[0] != "string")
+      {
+        retValue = false;
+        Error.NameFormat(line, token);
       }
 
-      if (null == retValue)
+      if (retValue)
       {
-        retValue = this.#ParseAssignment(tokens, refLineType);
-      }
-
-      if (null == retValue)
-      {
-        retValue = this.#ParseValue(tokens, refLineType);
+        retValue = false;
+        Error.Number(line, token, syntax);
       }
     }
     return retValue;
@@ -272,6 +318,35 @@ class CalcPadCode
     return retValue;
   }
 
+  // Parses a line int a line item.
+  #ParseItem(line, refLineType)
+  {
+    let retValue = "";
+    retValue = null;
+
+    refLineType.Name = "None";
+    let tokens = this.#SplitChars(" ", line);
+    if (tokens.length > 0)
+    {
+      retValue = this.#ParseName(tokens, refLineType);
+      if (null == retValue)
+      {
+        retValue = this.#ParseFormula(tokens, refLineType);
+      }
+
+      if (null == retValue)
+      {
+        retValue = this.#ParseAssignment(tokens, refLineType);
+      }
+
+      if (null == retValue)
+      {
+        retValue = this.#ParseValue(tokens, refLineType);
+      }
+    }
+    return retValue;
+  }
+
   // Creates a Name line item.
   #ParseName(tokens, refLineType)
   {
@@ -360,77 +435,6 @@ class CalcPadCode
     return retValue;
   }
 
-  // Gets the token or data item value.
-  #GetItemValue(line, token, refSuccess, syntax = null)
-  {
-    let refRetNumber = new RefNumber(-1.0);
-
-    if (refSuccess.Value = this.#IsItemOrNumber(line, token, refRetNumber))
-    {
-      if (refRetNumber.Value < 0)
-      {
-        let findItem = this.#GetItem(token);
-        if (null == findItem)
-        {
-          success.Value = false;
-          Error.ItemNotFound(line, token, syntax);
-        }
-        else
-        {
-          refRetNumber.Value = findItem.Value;
-        }
-      }
-    }
-    return refRetNumber;
-  }
-
-  // Checs if token is an operation.
-  #GetOperation(line, token, refSuccess)
-  {
-    let retValue = null;
-
-    refSuccess.Value = true;
-    if ("+-*/".includes(token))
-    {
-      retValue = token;
-    }
-    else
-    {
-      refSuccess.Value = false;
-      Error.Operation(line);
-    }
-    return retValue;
-  }
-
-  // Check if token is item name or number.
-  #IsItemOrNumber(line, token, refNumber, syntax = null)
-  {
-    let retValue = true;
-
-    if (Error.IsNumber(token))
-    {
-      refNumber.Value = Number(token);
-    }
-    else
-    {
-      refNumber.Value = -1.0;
-
-      // Not a number and does not start with letter.
-      if (typeof token[0] != "string")
-      {
-        retValue = false;
-        Error.NameFormat(line, token);
-      }
-
-      if (retValue)
-      {
-        retValue = false;
-        Error.Number(line, token, syntax);
-      }
-    }
-    return retValue;
-  }
-
   // Other Private Methods
   // ---------------
 
@@ -473,7 +477,9 @@ class CalcPadCode
       var formulaItemRef = this.#GetItem(lineItemRef.FormulaName);
       if (formulaItemRef != null)
       {
-        formulaItemRef.Value = lineItemRef.Value * lineItemRef.FormulaValue;
+        let value = Number(lineItemRef.Value);
+        let formulaValue = Number(lineItemRef.FormulaValue);
+        formulaItemRef.Value = value * formulaValue;
         nextItemRef = this.#GetItemWithFormula(lineItemRef);
       }
     }
