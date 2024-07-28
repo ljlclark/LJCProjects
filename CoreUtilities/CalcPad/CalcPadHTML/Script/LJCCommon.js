@@ -5,7 +5,7 @@
 // Common Static Functions
 class LJC
 {
-  // Element Helper Methods
+  // Element Helper Functions
   // ----------------------
 
   // Gets the HTMLElement.
@@ -62,6 +62,28 @@ class LJC
     return retValue;
   }
 
+  // Sets the element text.
+  static SetText(id, text)
+  {
+    let eItem = LJC.Element(id);
+    if (eItem != null)
+    {
+      eItem.innerText = text;
+    }
+  }
+
+  // Sets the element value.
+  static SetValue(id, value)
+  {
+    let eItem = LJC.Element(id);
+    if (eItem != null)
+    {
+      eItem.value = value;
+    }
+  }
+
+  // Check Functions
+
   // Check if an text has a value.
   static HasText(text)
   {
@@ -89,27 +111,29 @@ class LJC
     return retValue;
   }
 
-  // Sets the element text.
-  static SetText(id, text)
+  // Checks if the text is a number.
+  static IsNumber(text)
   {
-    let eItem = LJC.Element(id);
-    if (eItem != null)
+    let retValue = true;
+
+    for (let index = 0; index < text.length; index++)
     {
-      eItem.innerText = text;
+      let ch = text.charAt(index);
+      //let result = /^\d+$/.test(ch);
+      let result = /^\d+/.test(ch);
+      if (!result)
+      {
+        if (!"+-.".includes(ch))
+        {
+          retValue = false;
+          break;
+        }
+      }
     }
+    return retValue;
   }
 
-  // Sets the element value.
-  static SetValue(id, value)
-  {
-    let eItem = LJC.Element(id);
-    if (eItem != null)
-    {
-      eItem.value = value;
-    }
-  }
-
-  // Common Methods
+  // Common Functions
   // --------------
 
   // Get the average character width.
@@ -258,7 +282,7 @@ class LJC
     return retValue;
   }
 
-  // textarea Methods
+  // textarea Functions
   // ----------------
 
   // Sets the textarea rows for newlines.
@@ -294,7 +318,7 @@ class LJC
     eItem.rows = count;
   }
 
-  // Show Property Methods
+  // Show Property Functions
   // ---------------------
 
   // Show the properties of an object that are not null or "" and
@@ -360,7 +384,7 @@ class LJC
     }
   }
 
-  // Property Helper methods
+  // Property Helper Functions
   // -----------------------
 
   // Add property output to results.

@@ -43,16 +43,16 @@ class CalcPadCode
     {
       for (let index = 0; index < lines.length; index++)
       {
-        let line = lines[index].trimEnd();
+        let line = lines[index].trim();
 
         // If blank line or comment.
         if (!LJC.HasValue(line)
-          && line.trim().startsWith("//"))
+          || line.trim().startsWith("//"))
         {
           continue;
         }
 
-        let refLineType = new RefLineType("");
+        let refLineType = new RefLineType();
         let lineItemRef = this.#ParseItem(line, refLineType);
         switch (refLineType.Name.toLowerCase())
         {
@@ -78,11 +78,16 @@ class CalcPadCode
   // Clears the old value.
   #ClearValue(line)
   {
-    let retValue = line;
-    let valueIndex = retValue.indexOf("(");
-    if (valueIndex > 0)
+    let retValue = "";
+
+    if ("string" == typeof line)
     {
-      retValue = retValue.Substring(0, valueIndex - 1);
+      retValue = line;
+      let valueIndex = retValue.indexOf("(");
+      if (valueIndex > 0)
+      {
+        retValue = retValue.substring(0, valueIndex - 1);
+      }
     }
     return retValue;
   }
@@ -99,7 +104,7 @@ class CalcPadCode
     if (refSuccess.Value = this.#IsItemOrNumber(line, token, refRetNumber))
     {
       retValue = refRetNumber.Value;
-      if (refRetNumber.Value < 0)
+      if (retValue < 0)
       {
         let findItem = this.#GetItem(token);
         if (null == findItem)
@@ -109,19 +114,17 @@ class CalcPadCode
         }
         else
         {
-          //refRetNumber.Value = findItem.Value;
           retValue = findItem.Value;
         }
       }
     }
-    //return refRetNumber;
     return retValue;
   }
 
   // Checs if token is an operation.
   #GetOperation(line, token, refSuccess)
   {
-    let retValue = null;
+    let retValue = "";
 
     refSuccess.Value = true;
     if ("+-*/".includes(token))
@@ -141,7 +144,7 @@ class CalcPadCode
   {
     let retValue = true;
 
-    if (Error.IsNumber(token))
+    if (LJC.IsNumber(token))
     {
       refNumber.Value = Number(token);
     }
@@ -156,11 +159,11 @@ class CalcPadCode
         Error.NameFormat(line, token);
       }
 
-      if (retValue)
-      {
-        retValue = false;
-        Error.Number(line, token, syntax);
-      }
+      //if (retValue)
+      //{
+      //  retValue = false;
+      //  Error.Number(line, token, syntax);
+      //}
     }
     return retValue;
   }
@@ -168,8 +171,7 @@ class CalcPadCode
   // Creates a Formula line item.
   #ParseAssignment(tokens, refLineType)
   {
-    let retValue = "";
-    retValue = null;
+    let retValue = null; // Item
 
     refLineType.Name = "None";
     if (tokens != null
@@ -246,7 +248,7 @@ class CalcPadCode
   // Creates a Formula line item.
   #ParseFormula(tokens, refLineType)
   {
-    let retValue = null;
+    let retValue = null;  // Item
 
     refLineType.Name = "None";
     if (tokens != null
@@ -321,10 +323,10 @@ class CalcPadCode
   // Parses a line int a line item.
   #ParseItem(line, refLineType)
   {
-    let retValue = "";
-    retValue = null;
+    let retValue = null;  // Item
 
     refLineType.Name = "None";
+
     let tokens = this.#SplitChars(" ", line);
     if (tokens.length > 0)
     {
@@ -350,7 +352,7 @@ class CalcPadCode
   // Creates a Name line item.
   #ParseName(tokens, refLineType)
   {
-    let retValue = null;
+    let retValue = null;  // Item
 
     refLineType.Name = "None";
     if (tokens != null
@@ -397,7 +399,7 @@ class CalcPadCode
   // Creates a Display Value line item.
   #ParseValue(tokens, refLineType)
   {
-    let retValue = null;
+    let retValue = null;Item
 
     refLineType.Name = "None";
     if (tokens != null
@@ -512,15 +514,15 @@ class CalcPadCode
       switch (rounding.toLowerCase())
       {
         case "ceiling":
-          retValue = Math.Ceiling(value);
+          retValue = Math.ceil(value);
           break;
 
         case "round":
-          retValue = Math.Round(value);
+          retValue = Math.round(value);
           break;
 
         case "floor":
-          retValue = Math.Floor(value);
+          retValue = Math.floor(value);
           break;
       }
     }
@@ -530,8 +532,7 @@ class CalcPadCode
   // Gets the Item by Name or AltName
   #GetItem(name)
   {
-    let retValue = new Item();
-    retValue = null;
+    let retValue = null;  // Item;
 
     if (LJC.HasValue(name))
     {
@@ -548,8 +549,7 @@ class CalcPadCode
   // Gets the Formula name by Item's Name or AltNames
   #GetItemWithFormula(item)
   {
-    let retValue = new Item();
-    retValue = null;
+    let retValue = null;  // Item
 
     if (item != null)
     {
@@ -630,30 +630,40 @@ class CalcPadCode
 class RefLineType
 {
   // Initializes an object instance.
-  constructor(name)
+  constructor(name = "None")
   {
-    this.Name = "";
-    this.Name = name;
+    if (LJC.HasValue(name))
+    {
+      this.Name = name;
+    }
   }
 }
 
+// Represents a Number that can be modified in a called method.
 class RefNumber
 {
   // Initializes an object instance.
   constructor(value)
   {
     this.Value = 0.0;
-    this.Value = value;
+    if (LJC.IsNumber(value))
+    {
+      this.Value = value;
+    }
   }
 }
 
+// Represents a boolean value that can be modified in a called method.
 class RefSuccess
 {
   // Initializes an object instance.
   constructor(value)
   {
     this.Value = false;
-    this.Value = value;
+    if ("boolean" == typeof value)
+    {
+      this.Value = value;
+    }
   }
 }
 
@@ -665,30 +675,32 @@ class Item
   {
     // The Item name.
     this.Name = "";
-    this.Name = name;
+    if (LJC.HasValue(name))
+    {
+      this.Name = name;
+    }
 
     // The Item value.
     this.Value = 0.0;
-    this.Value = value;
+    if (LJC.IsNumber(value))
+    {
+      this.Value = value;
+    }
 
     // The Altername name.
     this.AltName = "";
-    this.AltName = null;
 
     // The Formula value.
     this.FormulaValue = 0.0;
 
     // The Formula Item name.
     this.FormulaName = "";
-    this.FormulaName = null;
 
     // The Rounding value.
     this.Rounding = "";
-    this.Rounding = null;
 
     // The Value Item name.
     this.ValueName = "";
-    this.ValueName = null;
   }
 
   // Methods
