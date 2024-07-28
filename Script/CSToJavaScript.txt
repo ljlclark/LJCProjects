@@ -1,0 +1,21 @@
+1.  Class must have no scope modifier.
+2.  Methods cannot have a return type.
+3.  Private mmbers use a "#" name prefix as part of the name.
+4.  Method arguments cannot have a type.
+5.  Class members must be accessed with "this"".
+6.  var or type must be replaced with "let"".
+7.  ForEach can be replaces with "for".
+8.  [].Length = [].length
+9.  "".Trim(string) = "".trim()
+10. "".RTrim(string) = "".trimEnd()
+11. "".Split() = "".split()
+12. "".Contains() = "".includes()
+13. "".ToLower() = "".toLowerCase()
+14. "".StartsWith() = "".startsWith()
+15. "".Join(" ", []) = "" = [].join(" ")
+
+Person|Persons
+Family|Families
+Family is 5 Persons
+Families = 10
+Value: Persons

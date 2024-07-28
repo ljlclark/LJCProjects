@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- CalcPad.html -->
+<html lang="en">
+<head>
+  <title>CalcPad</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="A Calculation Pad page." />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <!-- divMenu -->
+  <link rel="stylesheet" type="text/css" href="CSS/CalcPad.css" />
+  <!-- hMenu, hItem, titleHighlight -->
+  <link rel="stylesheet" type="text/css" href="CSS/HMenu.css" />
+  <!-- page -->
+  <link rel="stylesheet" type="text/css" href="CSS/Page.css" />
+  <!-- cell, firstCell, labelRight, row, table -->
+  <link rel="stylesheet" type="text/css" href="CSS/TableLayout.css" />
+  <script src="Script/LJCCommon.js"></script>
+  <script src="Script/TextAreaCode.js"></script>
+  <script src="Script/CalcPadCode.js"></script>
+  <script src="Script/CalcPadError.js"></script>
+  <script src="Script/CalcPadEvent.js"></script>
+</head>
+<body>
+  <div id="page" class="page"
+       style="text-align: center">
+    <!--  -->
+    <!-- Data Layout -->
+    <div id="dataLayout" class="table">
+      <div class="row">
+        <div class="firstCell">
+          <label for="calcPad">CalcPad</label>
+          <span id="options">Options</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="firstCell">
+          <textarea id="calcPad" name="template" rows="1"
+                    autofocus spellcheck="false"
+                    class="text"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- End Data Layout -->
+  </div>
+  <!-- End Page -->
+  <!--  -->
+  <!-- Menus -->
+  <div id="calcPadMenu" class="divMenu" style="width:120px">
+    <div class="titleHighlight">Options Menu</div>
+    <div><hr /></div>
+    <div id="doCalcs">Do Calculations</div>
+    <div id="help">Help</div>
+  </div>
+  <script>
+    CalcPadEvent.SetEvents();
+    CalcPadEvent.TextCols();
+  </script>
+</body>
+</html>

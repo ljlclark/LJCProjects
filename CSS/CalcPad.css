@@ -1,0 +1,20 @@
+/* Copyright(c) Lester J. Clark and Contributors.*/
+/* Licensed under the MIT License.*/
+/* CalcPad.css */
+
+.divMenu {
+  position: absolute;
+  width: 130px;
+  padding: 5px 5px 5px 8px;
+  font-family: verdana;
+  font-size: 80%;
+  color: black;
+  background-color: white;
+  border-top: 1px #c8e8ff solid;
+  border-left: 1px #c8e8ff solid;
+  border-right: 1px #4480b8 solid;
+  border-bottom: 1px #4480b8 solid;
+  cursor: pointer;
+  text-align: initial;
+  visibility: hidden;
+}

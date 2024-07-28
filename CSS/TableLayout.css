@@ -1,0 +1,28 @@
+/* Copyright Lester J. Clark and Contributors */
+/* Licensed under the MIT license.*/
+/* TableLayout.css */
+
+.cell {
+  display: table-cell;
+  padding-left: 6px;
+  text-align: initial;
+}
+
+.firstCell {
+  display: table-cell;
+  text-align: initial;
+}
+
+.labelRight {
+  display: table-cell;
+  text-align: right;
+}
+
+.row {
+  display: table-row;
+}
+
+.table {
+  border-spacing: 8px;
+  display: table;
+}

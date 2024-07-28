@@ -1,0 +1,11 @@
+/* Copyright Lester J. Clark and Contributors */
+/* Licensed under the MIT license.*/
+/* Page.css */
+
+.page {
+  background-color: lightblue; /* aliceblue */
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-right: 20px;
+  border-left: 0px solid black;
+}
