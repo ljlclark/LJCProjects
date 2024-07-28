@@ -74,7 +74,7 @@ namespace CalcPad
         message += $"ItemName: {itemName}";
       }
       message += "\r\n\r\n" + SyntaxNameFormat();
-      MessageBox.Show(message, NameFormat Format");
+      MessageBox.Show(message, "Name Format");
     }
 
     // 
