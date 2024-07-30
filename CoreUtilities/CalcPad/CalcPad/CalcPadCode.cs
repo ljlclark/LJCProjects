@@ -372,6 +372,7 @@ namespace CalcPad
     {
       var retValue = true;
 
+      // Token is not a number.
       if (!double.TryParse(token, out value))
       {
         value = -1.0;
