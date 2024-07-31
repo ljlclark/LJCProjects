@@ -420,18 +420,12 @@ class CalcPadCode
     {
       refNumber.Value = -1.0;
 
-      // Not a number and does not start with letter.
+      // Does not start with letter.
       if (typeof token[0] != "string")
       {
         retValue = false;
         Error.NameFormat(line, token);
       }
-
-    //  if (retValue)
-    //  {
-    //    retValue = false;
-    //    Error.Number(line, token, syntax);
-    //  }
     }
     return retValue;
   }

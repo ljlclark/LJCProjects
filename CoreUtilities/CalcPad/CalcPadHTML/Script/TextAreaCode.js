@@ -14,7 +14,7 @@ class TextAreaCode
     this.ResetLines();
   }
 
-  //
+  // Parses Lines from Item.
   ResetLines()
   {
     if (LJC.HasValue(this.Item.value))
@@ -43,7 +43,12 @@ class TextAreaCode
     return retValue;
   }
 
-  // 
+  MoveText()
+  {
+
+  }
+
+  // Replaces a line by line index.
   ReplaceLine(lineIndex, text)
   {
     let selection = this.GetLineSelection(lineIndex);
