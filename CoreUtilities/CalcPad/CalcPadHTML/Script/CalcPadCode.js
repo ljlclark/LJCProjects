@@ -464,36 +464,25 @@ class CalcPadCode
   #DoCalc(lineItemRef)
   {
     // "LeftName" is # "RightName"
-    // Calculate RightItem total.
+
+    // Calculate smaller formula totals.
     let prevItemRef = lineItemRef;
-    let nextItemRef = null;
-    if (LJC.HasValue(lineItemRef.FormulaName))
-    {
-      var formulaItemRef = this.#GetItem(lineItemRef.FormulaName);
-      if (formulaItemRef != null)
-      {
-        let value = Number(lineItemRef.Value);
-        let formulaValue = Number(lineItemRef.FormulaValue);
-        formulaItemRef.Value = value * formulaValue;
-        nextItemRef = this.#GetItemWithFormula(lineItemRef);
-      }
-    }
-
-    if (null == nextItemRef)
-    {
-      // Look for related conversion.
-      nextItemRef = this.#GetItemWithFormula(lineItemRef);
-    }
-
-    // Calculate related formula totals.
+    let nextItemRef = this.#GetItem(prevItemRef.FormulaName);
     while (nextItemRef != null)
     {
-      if (nextItemRef != null)
-      {
-        nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
-        prevItemRef = nextItemRef;
-        nextItemRef = this.#GetItemWithFormula(nextItemRef);
-      }
+      nextItemRef.Value = prevItemRef.Value * prevItemRef.FormulaValue;
+      prevItemRef = nextItemRef;
+      nextItemRef = this.#GetItem(nextItemRef.FormulaName);
+    }
+
+    // Calculate larger formula totals.
+    prevItemRef = lineItemRef;
+    nextItemRef = this.#GetItemWithFormula(lineItemRef);
+    while (nextItemRef != null)
+    {
+      nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
+      prevItemRef = nextItemRef;
+      nextItemRef = this.#GetItemWithFormula(nextItemRef);
     }
   }
 
@@ -647,7 +636,7 @@ class RefNumber
 class RefSuccess
 {
   // Initializes an object instance.
-  constructor(value= true)
+  constructor(value = true)
   {
     if ("boolean" == typeof value)
     {

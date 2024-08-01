@@ -377,21 +377,12 @@ namespace CalcPad
       {
         value = -1.0;
 
-        // Not a number and does not start with letter.
-        if (!Error.IsNumber(token)
-          && !char.IsLetter(token[0]))
+        // Does not start with letter.
+        if (!char.IsLetter(token[0]))
         {
           retValue = false;
           Error.NameFormat(line, token);
         }
-
-        //if (retValue
-        //  && char.IsNumber(token[0])
-        //  && !Error.IsNumber(token))
-        //{
-        //  retValue = false;
-        //  Error.Number(line, token, syntax);
-        //}
       }
       return retValue;
     }
@@ -430,35 +421,26 @@ namespace CalcPad
     // Performs the related conversion calculations.
     private void DoCalc(Item lineItemRef)
     {
-      // "LeftName" is # "RightNames"
-      // Calculate RightItem total.
-      Item prevItemRef = lineItemRef;
-      Item nextItemRef = null;
-      if (NetString.HasValue(lineItemRef.FormulaName))
-      {
-        var formulaItemRef = GetItem(lineItemRef.FormulaName);
-        if (formulaItemRef != null)
-        {
-          formulaItemRef.Value = lineItemRef.Value * lineItemRef.FormulaValue;
-          nextItemRef = GetItemWithFormula(lineItemRef);
-        }
-      }
+      // "LargerName" is # "SmallerNames"
 
-      if (null == nextItemRef)
-      {
-        // Look for related conversion.
-        nextItemRef = GetItemWithFormula(lineItemRef);
-      }
-
-      // Calculate related formula totals.
+      // Calculate smaller formula totals.
+      var prevItemRef = lineItemRef;
+      var nextItemRef = GetItem(prevItemRef.FormulaName);
       while (nextItemRef != null)
       {
-        if (nextItemRef != null)
-        {
-          nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
-          prevItemRef = nextItemRef;
-          nextItemRef = GetItemWithFormula(nextItemRef);
-        }
+        nextItemRef.Value = prevItemRef.Value * prevItemRef.FormulaValue;
+        prevItemRef = nextItemRef;
+        nextItemRef = GetItem(nextItemRef.FormulaName);
+      }
+
+      // Calculate larger formula totals.
+      prevItemRef = lineItemRef;
+      nextItemRef = GetItemWithFormula(lineItemRef);
+      while (nextItemRef != null)
+      {
+        nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
+        prevItemRef = nextItemRef;
+        nextItemRef = GetItemWithFormula(nextItemRef);
       }
     }
 
@@ -514,13 +496,13 @@ namespace CalcPad
         if (NetString.HasValue(item.Name))
         {
           var name = item.Name.ToLower();
-          retValue = Items.Find(x => x.FormulaName == name);
+          retValue = Items.Find(x => 0 == string.Compare(x.FormulaName, name, true));
         }
         if (null == retValue
           && NetString.HasValue(item.AltName))
         {
           var altName = item.AltName.ToLower();
-          retValue = Items.Find(x => x.FormulaName == altName);
+          retValue = Items.Find(x => 0 == string.Compare(x.FormulaName, altName, true));
         }
       }
       return retValue;
@@ -613,6 +595,12 @@ namespace CalcPad
     // Initializes an object instance.
     public Item()
     {
+    }
+
+    public Item Clone()
+    {
+      var retValue = MemberwiseClone() as Item;
+      return retValue;
     }
 
     // Initializes an object instance.
