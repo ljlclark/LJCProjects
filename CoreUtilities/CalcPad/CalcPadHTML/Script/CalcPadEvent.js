@@ -48,6 +48,7 @@ class CalcPadEvent
 
         case "help":
           window.location = "CalcPadHelp.html";
+          //window.open("CalcPadHelp.html");
           break;
       }
     }
@@ -74,6 +75,7 @@ class CalcPadEvent
   {
     let eTarget = event.target;
     let backColor = null;
+    let parent = null;
     switch (eTarget.id)
     {
       case "options":
@@ -82,7 +84,7 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
-        let parent = eTarget.parentElement;
+        parent = eTarget.parentElement;
         backColor = LJC.ElementStyle(parent, "background-color");
         eTarget.style.backgroundColor = backColor;
         break;
