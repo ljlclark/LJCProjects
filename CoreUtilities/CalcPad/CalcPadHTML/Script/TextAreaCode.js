@@ -103,7 +103,10 @@ class TextAreaCode
       this.ReplaceSelection(line);
       if (first.Value)
       {
-        saveSelection.BeginIndex -= 2;
+        if (saveSelection.BeginIndex > 0)
+        {
+          saveSelection.BeginIndex -= 2;
+        }
       }
       first.Value = false;
       saveSelection.EndIndex -= 2
