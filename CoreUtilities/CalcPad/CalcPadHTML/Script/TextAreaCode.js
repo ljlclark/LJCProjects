@@ -43,9 +43,61 @@ class TextAreaCode
     return retValue;
   }
 
-  MoveText()
+  // 
+  Indent(remove = false)
   {
+    let area = this.Item;
+    let value = area.value;
 
+    // Get the begin selected line index.
+    let text = value.substring(0, area.selectionStart);
+    let beginIndex = text.split("\n").length - 1;
+
+    // Get the end selected line index.
+    text = value.substring(0, area.selectionEnd);
+    let endIndex = text.split("\n").length - 1;
+
+    let saveSelection = this.GetSelection();
+    let first = true;
+    for (let index = beginIndex; index <= endIndex; index++)
+    {
+      let line = this.Lines[index];
+      let selection = this.GetLineSelection(index);
+      this.SetSelection(selection);
+      if (remove)
+      {
+        if (line.startsWith("  "))
+        {
+          line = line.substring(2);
+          this.ReplaceText(line);
+          if (first)
+          {
+            saveSelection.BeginIndex -= 2;
+          }
+          first = false;
+          saveSelection.EndIndex -= 2
+        }
+      }
+      else
+      {
+        this.ReplaceText(`  ${line}`);
+        if (first)
+        {
+          saveSelection.BeginIndex += 2;
+        }
+        first = false;
+        saveSelection.EndIndex += 2
+      }
+      this.ResetLines();
+    }
+    this.SetSelection(saveSelection);
+  }
+
+  // Replace the selected text.
+  ReplaceText(text)
+  {
+    calcPad.setRangeText(text, this.Item.selectionStart
+      , this.Item.selectionEnd, 'end')
   }
 
   // Replaces a line by line index.
@@ -65,6 +117,15 @@ class TextAreaCode
     let frontText = textValue.slice(0, beginIndex);
     let backText = textValue.slice(endIndex);
     this.Item.value = frontText + text + backText;
+  }
+
+  // Gets the selection indexes.
+  GetSelection()
+  {
+    let retValue = new Selection();
+    retValue.BeginIndex = this.Item.selectionStart;
+    retValue.EndIndex = this.Item.selectionEnd;
+    return retValue;
   }
 
   // Sets the selection indexes.

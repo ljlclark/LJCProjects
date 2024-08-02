@@ -22,6 +22,8 @@ class CalcPadEvent
 
     // textarea event handers
     calcPad.addEventListener("keyup", LJC.EventTextRows);
+    calcPad.addEventListener("keydown", CalcPadEvent.Keys);
+    calcPad.addEventListener("contextmenu", CalcPadEvent.ContextMenu);
   }
 
   // Actions
@@ -69,6 +71,13 @@ class CalcPadEvent
 
   // Other Event Handlers.
   // ---------------
+
+  //
+  static ContextMenu(event)
+  {
+    event.preventDefault();
+    CalcPadEvent.ShowMenu(event, calcPadMenu);
+  }
 
   // Handles the Document "mouseout" event.
   static DocumentMouseOut(event)
@@ -120,6 +129,48 @@ class CalcPadEvent
     }
   }
 
+  // 
+  static Keys(event)
+  {
+    if ("Tab" == event.key)
+    {
+      if (calcPad.selectionStart < calcPad.selectionEnd)
+      {
+        event.preventDefault();
+        let calcArea = new TextAreaCode(calcPad);
+        if (event.shiftKey)
+        {
+          calcArea.Indent(true);
+        }
+        else
+        {
+          calcArea.Indent();
+        }
+      }
+      else
+      {
+        if (event.shiftKey)
+        {
+          event.preventDefault();
+          let calcArea = new TextAreaCode(calcPad);
+          calcArea.ReplaceText("\t");
+        }
+      }
+    }
+    //  else
+    //  {
+    //    CalcPadEvent.ShowKey(event);
+    //    if ("i" == event.key)
+    //    {
+    //      if (event.ctrlKey)
+    //      {
+    //        event.preventDefault();
+    //        alert("Insert Tab");
+    //      }
+    //    }
+    //  }
+  }
+
   // Sets the textarea columns
   static TextCols(event = null, width = null)
   {
@@ -161,5 +212,15 @@ class CalcPadEvent
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
     menu.style.visibility = "visible";
+  }
+
+  // 
+  static ShowKey(event)
+  {
+    alert(`key: ${event.key}\r\n`
+      + `code: ${event.code}\r\n`
+      + `CTRL: ${event.ctrlKey}\r\n`
+      + `SHIFT: ${event.shiftKey}\r\n`
+      + `ALT: ${event.altKey}`);
   }
 }
