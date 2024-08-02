@@ -154,6 +154,7 @@ class CalcPadEvent
         if (event.shiftKey)
         {
           event.preventDefault();
+          calcPad.selectionEnd = calcPad.selectionStart;
           let calcArea = new TextAreaCode(calcPad);
           calcArea.ReplaceSelection("\t");
         }
