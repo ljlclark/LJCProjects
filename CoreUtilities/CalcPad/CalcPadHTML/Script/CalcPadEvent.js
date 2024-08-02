@@ -22,7 +22,7 @@ class CalcPadEvent
 
     // textarea event handers
     calcPad.addEventListener("keyup", LJC.EventTextRows);
-    calcPad.addEventListener("keydown", CalcPadEvent.Keys);
+    calcPad.addEventListener("keydown", CalcPadEvent.IndentKeys);
     calcPad.addEventListener("contextmenu", CalcPadEvent.ContextMenu);
   }
 
@@ -129,8 +129,8 @@ class CalcPadEvent
     }
   }
 
-  // 
-  static Keys(event)
+  // Applies tabs and indentation.
+  static IndentKeys(event)
   {
     if ("Tab" == event.key)
     {
@@ -140,20 +140,22 @@ class CalcPadEvent
         let calcArea = new TextAreaCode(calcPad);
         if (event.shiftKey)
         {
-          calcArea.Indent(true);
+          let remove = true;
+          calcArea.DoIndent(remove);
         }
         else
         {
-          calcArea.Indent();
+          calcArea.DoIndent();
         }
       }
       else
       {
+        // Inserts a Tab.
         if (event.shiftKey)
         {
           event.preventDefault();
           let calcArea = new TextAreaCode(calcPad);
-          calcArea.ReplaceText("\t");
+          calcArea.ReplaceSelection("\t");
         }
       }
     }
