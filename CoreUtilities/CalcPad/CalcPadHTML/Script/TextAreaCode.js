@@ -125,6 +125,8 @@ class TextAreaCode
   // 
   FindLineIndex(beginIndex)
   {
+    let retValue = 0;
+
     let indexes = this.LineIndexes;
 
     if (0 == indexes.length)
@@ -134,8 +136,11 @@ class TextAreaCode
 
     let item = indexes.find(x => x > beginIndex);
     // *** Begin *** Add - 8/10/24
-    let retValue = indexes.length - 1;;
-    if (item != null)
+    if (null == item)
+    {
+      retValue = indexes.length - 1;
+    }
+    else
     {
       // *** End *** Add - 8/10/24
       retValue = indexes.indexOf(item);
