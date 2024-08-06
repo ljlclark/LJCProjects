@@ -10,9 +10,9 @@ class TextAreaCode
   // ---------------
 
   // Initializes an object instance.
-  constructor(eItem)
+  constructor(eTextArea)
   {
-    this.Item = eItem;
+    this.Area = eTextArea;
     this.Lines = [];
     this.LineIndexes = [];
     this.ResetLines();
@@ -21,27 +21,38 @@ class TextAreaCode
   // Parses Lines from Item.
   ResetLines()
   {
-    if (LJC.HasValue(this.Item.value))
+    if (LJC.HasValue(this.Area.value))
     {
-      this.Lines = this.Item.value.split("\n");
-      this.CreateLineIndexes();
+      this.Lines = this.Area.value.split("\n");
     }
   }
 
   // Creates the line begin indexes.
-  CreateLineIndexes()
+  CreateLineIndexes(startLineIndex = 0)
   {
-    this.LineIndexes = [];
-    if (this.Lines.length > 0)
+    let indexes = this.LineIndexes;
+    let lines = this.Lines;
+
+    // Force start at end of array.
+    if (startLineIndex > indexes.length)
     {
-      let beginIndex = 0;
-      this.LineIndexes.push(beginIndex);
-      for (let index = 0; index < this.Lines.length - 1; index++)
-      {
-        let line = this.Lines[index];
-        beginIndex += line.length + 1;
-        this.LineIndexes.push(beginIndex);
-      }
+      startLineIndex = indexes.length - 1;
+    }
+
+    // Get lineBeginIndex from previous index;\.
+    let lineBeginIndex = 0;
+    if (startLineIndex > 0)
+    {
+      let prevIndex = startLineIndex - 1;
+      lineBeginIndex = indexes[prevIndex];
+      lineBeginIndex += lines[prevIndex].length + 1;
+    }
+
+    for (let index = startLineIndex; index < this.Lines.length; index++)
+    {
+      let line = this.Lines[index];
+      indexes[index] = lineBeginIndex;
+      lineBeginIndex += line.length + 1;
     }
   }
 
@@ -49,18 +60,13 @@ class TextAreaCode
   // ---------------
 
   // Applies the tab or indents.
-  DoIndent(remove = false)
+  DoIndent(unindent = false)
   {
-    let area = this.Item;
-    let value = area.value;
+    let area = this.Area;
 
-    // Get the begin selected line index.
-    let text = value.substring(0, area.selectionStart);
-    let beginIndex = text.split("\n").length - 1;
-
-    // Get the end selected line index.
-    text = value.substring(0, area.selectionEnd);
-    let endIndex = text.split("\n").length - 1;
+    // Get the begin and end selected line index.
+    let beginIndex = this.FindLineIndex(area.selectionStart);
+    let endIndex = this.FindLineIndex(area.selectionEnd - 1);
 
     let saveSelection = this.GetSelection();
     let first = { Value: true };
@@ -69,7 +75,7 @@ class TextAreaCode
       let line = this.Lines[index];
       let selection = this.GetLineSelection(index);
       this.SetSelection(selection);
-      if (remove)
+      if (unindent)
       {
         this.#Unindent(line, saveSelection, first);
       }
@@ -116,12 +122,39 @@ class TextAreaCode
   // Selection Methods
   // ---------------
 
+  // 
+  FindLineIndex(beginIndex)
+  {
+    let indexes = this.LineIndexes;
+
+    if (0 == indexes.length)
+    {
+      this.CreateLineIndexes();
+    }
+    let item = indexes.find(x => x > beginIndex);
+    let retValue = indexes.indexOf(item);
+    retValue--;
+    return retValue;
+  }
+
   // Get the selection indexes for the provided line index.
   GetLineSelection(lineIndex)
   {
+    let indexes = this.LineIndexes;
+    let lines = this.Lines;
     let retValue = new Selection();
 
-    this.CreateLineIndexes();
+    retValue.BeginIndex = indexes[lineIndex];
+    var line = lines[lineIndex];
+    retValue.EndIndex = retValue.BeginIndex + line.length;
+    return retValue;
+  }
+
+  // Get the selection values without Indexes array.
+  GetLineSelection2(lineIndex)
+  {
+    let retValue = new Selection();
+
     for (let index = 0; index <= lineIndex; index++)
     {
       let line = this.Lines[index];
@@ -141,8 +174,8 @@ class TextAreaCode
   GetSelection()
   {
     let retValue = new Selection();
-    retValue.BeginIndex = this.Item.selectionStart;
-    retValue.EndIndex = this.Item.selectionEnd;
+    retValue.BeginIndex = this.Area.selectionStart;
+    retValue.EndIndex = this.Area.selectionEnd;
     return retValue;
   }
 
@@ -154,34 +187,38 @@ class TextAreaCode
     this.ReplaceSelection(text);
   }
 
-  //// Replaces the already selected text with the provided text.
-  //ReplaceSelection(text)
-  //{
-  //  let beginIndex = this.Item.selectionStart;
-  //  let endIndex = this.Item.selectionEnd;
-  //  let textValue = this.Item.value;
-  //  let frontText = textValue.slice(0, beginIndex);
-  //  let backText = textValue.slice(endIndex);
-  //  this.Item.value = frontText + text + backText;
-  //}
-
   // Replace the selected text.
   ReplaceSelection(text)
   {
-    calcPad.setRangeText(text, this.Item.selectionStart
-      , this.Item.selectionEnd, 'end')
+    let lineIndex = this.FindLineIndex(this.Area.selectionStart);
+    calcPad.setRangeText(text, this.Area.selectionStart
+      , this.Area.selectionEnd, 'end');
+    // *** Next Statement *** - Add 8/6/24
+    this.ResetLines();
+    this.CreateLineIndexes(lineIndex);
+  }
+
+  // Replaces the already selected text with the provided text.
+  ReplaceSelection2(text)
+  {
+    let beginIndex = this.Area.selectionStart;
+    let endIndex = this.Area.selectionEnd;
+    let textValue = this.Area.value;
+    let frontText = textValue.slice(0, beginIndex);
+    let backText = textValue.slice(endIndex);
+    this.Area.value = frontText + text + backText;
   }
 
   // Sets the selection indexes.
   SetSelection(selection)
   {
-    this.Item.focus();
-    this.Item.selectionStart = selection.BeginIndex;
-    this.Item.selectionEnd = selection.EndIndex;
+    this.Area.focus();
+    this.Area.selectionStart = selection.BeginIndex;
+    this.Area.selectionEnd = selection.EndIndex;
   }
 }
 
-// 
+// represents a Selection region.
 class Selection
 {
   // Initializes an object instance.

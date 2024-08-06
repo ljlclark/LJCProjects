@@ -140,8 +140,8 @@ class CalcPadEvent
         let calcArea = new TextAreaCode(calcPad);
         if (event.shiftKey)
         {
-          let remove = true;
-          calcArea.DoIndent(remove);
+          let unindent = true;
+          calcArea.DoIndent(unindent);
         }
         else
         {
@@ -154,7 +154,6 @@ class CalcPadEvent
         if (event.shiftKey)
         {
           event.preventDefault();
-          calcPad.selectionEnd = calcPad.selectionStart;
           let calcArea = new TextAreaCode(calcPad);
           calcArea.ReplaceSelection("\t");
         }
