@@ -24,6 +24,7 @@ class TextAreaCode
     if (LJC.HasValue(this.Area.value))
     {
       this.Lines = this.Area.value.split("\n");
+      this.CreateLineIndexes();
     }
   }
 
@@ -125,14 +126,8 @@ class TextAreaCode
   // 
   FindLineIndex(beginIndex)
   {
-    let retValue = 0;
-
     let indexes = this.LineIndexes;
-
-    if (0 == indexes.length)
-    {
-      this.CreateLineIndexes();
-    }
+    let retValue = 0;
 
     let item = indexes.find(x => x > beginIndex);
     // *** Begin *** Add - 8/10/24
@@ -141,8 +136,8 @@ class TextAreaCode
       retValue = indexes.length - 1;
     }
     else
+    // *** End *** Add - 8/10/24
     {
-      // *** End *** Add - 8/10/24
       retValue = indexes.indexOf(item);
       retValue--;
     }
@@ -207,7 +202,6 @@ class TextAreaCode
       , this.Area.selectionEnd, 'end');
     // *** Next Statement *** - Add 8/6/24
     this.ResetLines();
-    this.CreateLineIndexes(lineIndex);
   }
 
   // Replaces the already selected text with the provided text.
