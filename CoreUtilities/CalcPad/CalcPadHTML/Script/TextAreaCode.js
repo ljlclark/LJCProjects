@@ -78,11 +78,11 @@ class TextAreaCode
       this.SetSelection(selection);
       if (unindent)
       {
-        this.#Unindent(line, saveSelection, first);
+        this.#Unindent(line, saveSelection, index, first);
       }
       else
       {
-        this.#Indent(line, saveSelection, first);
+        this.#Indent(line, saveSelection, index, first);
       }
       this.ResetLines();
     }
@@ -90,19 +90,25 @@ class TextAreaCode
   }
 
   // Indent the selected text.
-  #Indent(line, saveSelection, first)
+  #Indent(line, saveSelection, lineIndex, first)
   {
     this.ReplaceSelection(`  ${line}`);
     if (first.Value)
     {
-      saveSelection.BeginIndex += 2;
+      // *** Begin *** Add - 8/7/24
+      let lineBeginIndex = this.LineIndexes[lineIndex];
+      if (lineBeginIndex != saveSelection.BeginIndex)
+      {
+        // *** End *** Add - 8/7/24
+        saveSelection.BeginIndex += 2;
+      }
     }
     first.Value = false;
     saveSelection.EndIndex += 2
   }
 
   // Unindent the selected text.
-  #Unindent(line, saveSelection, first)
+  #Unindent(line, saveSelection, lineIndex, first)
   {
     if (line.startsWith("  "))
     {
@@ -110,7 +116,11 @@ class TextAreaCode
       this.ReplaceSelection(line);
       if (first.Value)
       {
-        if (saveSelection.BeginIndex > 0)
+        //if (saveSelection.BeginIndex > 0)
+        // *** Begin *** Add - 8/7/24
+        let lineBeginIndex = this.LineIndexes[lineIndex];
+        if (lineBeginIndex != saveSelection.BeginIndex)
+        // *** End *** Add - 8/7/24
         {
           saveSelection.BeginIndex -= 2;
         }
