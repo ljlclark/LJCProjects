@@ -15,7 +15,7 @@ class CalcPadCode
   {
   }
 
-  // Public sMethods
+  // Public Methods
   // ---------------
 
   // Perform the calculations.
@@ -52,9 +52,9 @@ class CalcPadCode
           continue;
         }
 
-        let refLineType = new RefLineType();
+        let refLineType = new RefLineType("None");
         let lineItemRef = this.#ParseItem(line, refLineType);
-        switch (refLineType.Name.toLowerCase())
+        switch (refLineType.getName())
         {
           case "assignment":
             this.#DoCalc(lineItemRef);
@@ -83,7 +83,7 @@ class CalcPadCode
   {
     let retValue = null;  // Item
 
-    refLineType.Name = "None";
+    refLineType.setName("None");
     let tokens = this.#SplitChars(" ", line);
     if (tokens.length > 0)
     {
@@ -111,15 +111,15 @@ class CalcPadCode
   {
     let retValue = null; // Item
 
-    refLineType.Name = "None";
+    refLineType.setName("None");
     if (tokens != null
       && tokens.length > 1
       && ("=" == tokens[1]))
     {
-      refLineType.Name = "Assignment";
+      refLineType.setName("Assignment");
       let tokenCount = tokens.length;
       let line = tokens.join(" ");
-      let refSuccess = new RefSuccess(true);
+      let refSuccess = new RefBool(true);
 
       // Name = name/value operator name/value.
       if (tokenCount < 3
@@ -187,12 +187,12 @@ class CalcPadCode
   {
     let retValue = null;  // Item
 
-    refLineType.Name = "None";
+    refLineType.setName("None");
     if (tokens != null
       && tokens.length > 1
       && "is" == tokens[1].toLowerCase())
     {
-      refLineType.Name = "Formula";
+      refLineType.setName("Formula");
       let tokenCount = tokens.length;
       let line = tokens.join(" ");
       let success = true;
@@ -259,7 +259,7 @@ class CalcPadCode
   {
     let retValue = null;  // Item
 
-    refLineType.Name = "None";
+    refLineType.setName("None");
     if (tokens != null
       && tokens.length > 0)
     {
@@ -270,11 +270,11 @@ class CalcPadCode
         // Name/AltName
         if (token.includes("|"))
         {
-          refLineType.Name = "Name";
+          refLineType.setName("Name");
           retValue = new Item(null, 0);
 
           // Remove extra spaces.
-          let refSuccess = new RefSuccess(true);
+          let refSuccess = new RefBool(true);
           let text = tokens.join("");
           let names = this.#SplitChars("|", text);
           if (0 == names.length)
@@ -306,12 +306,12 @@ class CalcPadCode
   {
     let retValue = null;  // Item
 
-    refLineType.Name = "None";
+    refLineType.setName("None");
     if (tokens != null
       && tokens.length > 1
       && "value:" == tokens[0].toLowerCase())
     {
-      refLineType.Name = "Value";
+      refLineType.setName("Value");
       let tokenCount = tokens.length;
       let line = tokens.join(" ");
 
@@ -476,13 +476,20 @@ class CalcPadCode
     }
 
     // Calculate larger formula totals.
-    prevItemRef = lineItemRef;
-    nextItemRef = this.#GetItemWithFormula(lineItemRef);
-    while (nextItemRef != null)
+    // *** Begin ***
+    let items = this.#GetItemsWithFormula(lineItemRef);
+    for (let index = 0; index < items.length; index++)
     {
-      nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
-      prevItemRef = nextItemRef;
-      nextItemRef = this.#GetItemWithFormula(nextItemRef);
+      // *** End ***
+      prevItemRef = lineItemRef;
+      //nextItemRef = this.#GetItemWithFormula(lineItemRef);
+      nextItemRef = items[index];
+      while (nextItemRef != null)
+      {
+        nextItemRef.Value = prevItemRef.Value / nextItemRef.FormulaValue;
+        prevItemRef = nextItemRef;
+        nextItemRef = this.#GetItemWithFormula(nextItemRef);
+      }
     }
   }
 
@@ -500,7 +507,9 @@ class CalcPadCode
           break;
 
         case "round":
-          retValue = Math.round(value);
+          //retValue = Math.round(value);
+          let text = value.toFixed(2);
+          retValue = parseFloat(text);
           break;
 
         case "floor":
@@ -528,7 +537,39 @@ class CalcPadCode
     return retValue;
   }
 
-  // Gets the Formula name by Item's Name or AltNames
+  // Gets all where the Formula name = item's Name or AltName.
+  #GetItemsWithFormula(findItem)
+  {
+    let retValue = [];
+    for (let index = 0; index < this.#Items.length; index++)
+    {
+      let success = false;
+      let item = this.#Items[index];
+
+      if (LJC.HasValue(findItem.Name))
+      {
+        let name = findItem.Name.toLowerCase();
+        if (item.FormulaName.toLowerCase() == name)
+        {
+          success = true;
+          retValue.push(item);
+        }
+      }
+
+      if (!success
+        && LJC.HasValue(findItem.AltName))
+      {
+        let altName = findItem.AltName.toLowerCase();
+        if (item.FormulaName.toLowerCase() == altName)
+        {
+          retValue.push(item);
+        }
+      }
+    }
+    return retValue;
+  }
+
+  // Gets first where the Formula name = item's Name or AltName.
   #GetItemWithFormula(item)
   {
     let retValue = null;  // Item
@@ -540,6 +581,7 @@ class CalcPadCode
         let name = item.Name.toLowerCase();
         retValue = this.#Items.find(x => x.FormulaName.toLowerCase() == name);
       }
+
       if (null == retValue
         && LJC.HasValue(item.AltName))
       {
@@ -562,7 +604,7 @@ class CalcPadCode
     else
     {
       // Update Item values.
-      switch (refLineType.Name.toLowerCase())
+      switch (refLineType.getName())
       {
         case "assignment":
           retValue.Value = lineItem.Value;
@@ -609,12 +651,29 @@ class CalcPadCode
 
 class RefLineType
 {
+  #Name = "";
+
   // Initializes an object instance.
   constructor(name = "None")
   {
-    if (LJC.HasValue(name))
+    this.setName(name);
+  }
+
+  getName()
+  {
+    return this.#Name;
+  }
+
+  setName(name)
+  {
+    let value = name.toLowerCase();
+    if (value == "assignment"
+      || value == "formula"
+      || value == "name"
+      || value == "none"
+      || value == "value")
     {
-      this.Name = name;
+      this.#Name = value;
     }
   }
 }
@@ -633,7 +692,7 @@ class RefNumber
 }
 
 // Represents a boolean value that can be modified in a called method.
-class RefSuccess
+class RefBool
 {
   // Initializes an object instance.
   constructor(value = true)
