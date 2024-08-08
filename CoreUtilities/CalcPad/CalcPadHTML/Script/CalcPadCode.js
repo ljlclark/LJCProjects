@@ -507,14 +507,19 @@ class CalcPadCode
           break;
 
         case "round":
-          //retValue = Math.round(value);
-          let text = value.toFixed(2);
-          retValue = parseFloat(text);
+          retValue = Math.round(value);
           break;
 
         case "floor":
           retValue = Math.floor(value);
           break;
+      }
+
+      if (rounding.toLowerCase().startsWith("round:"))
+      {
+        let tokens = rounding.split(":");
+        let text = value.toFixed(tokens[1]);
+        retValue = parseFloat(text);
       }
     }
     return retValue;
