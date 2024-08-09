@@ -52,10 +52,10 @@ class CalcPadCode
     b.Line("Value: Tents Ceiling");
     b.Line("Value: LitersOfWaterPerDay");
     b.Line("Value: Taps Ceiling");
-    b.Line("Value: WaterCollectionContainers Ceiling");
-    b.Line("Value: WaterStorageContainers Ceiling");
+    b.Line("Value: WaterCollectionContainers");
+    b.Line("Value: WaterStorageContainers");
     b.Line("Value: Toilets Ceiling");
-    b.Line("Value: RefuseContainers Ceiling</pre > ");
+    b.Line("Value: RefuseContainers Ceiling");
     let retValue = b.ToString();
     return retValue;
   }
