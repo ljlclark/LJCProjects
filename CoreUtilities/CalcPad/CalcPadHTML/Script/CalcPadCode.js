@@ -10,6 +10,56 @@ class CalcPadCode
   // The defined items.
   #Items = [];
 
+  // 
+  static NeedsAssesment()
+  {
+    let b = new StringBuilder();
+    b.Line("// DataItem Definitions");
+    b.Line("Person | Persons");
+    b.Line("Family | Families");
+    b.Line("Community | Communities");
+    b.Line("Village | Villages");
+    b.Line("Tent | Tents");
+    b.Line("LitersOfWaterPerDay");
+    b.Line("Tap | Taps");
+    b.Line("WaterCollectionContainer | WaterCollectionContainers");
+    b.Line("WaterStorageContainer | WaterStorageContainers");
+    b.Line("Toilet | Toilets");
+    b.Line("RefuseContainer | RefuseContainers");
+    b.Line("");
+    b.Line("// Conversion Formulas");
+    b.Line("Family is 5 Persons");
+    b.Line("Community is 16 Families");
+    b.Line("Village is 4 Communities");
+    b.Line("");
+    b.Line("// Initialize Values");
+    b.Line("Families = 100");
+    b.Line("");
+    b.Line("// Calculate Needs");
+    b.Line("Tents = Persons / 6");
+    b.Line("LitersOfWaterPerDay = 15 * Persons");
+    b.Line("Taps = Persons / 125");
+    b.Line("WaterCollectionContainers = Families * 2");
+    b.Line("WaterStorageContainers = Families");
+    b.Line("Toilets = Persons / 20");
+    b.Line("RefuseContainers = Families / 10");
+    b.Line("");
+    b.Line("// Show Calculated Needs");
+    b.Line("Value: Persons Ceiling");
+    b.Line("Value: Families Ceiling");
+    b.Line("Value: Communities Ceiling");
+    b.Line("Value: Villages Ceiling");
+    b.Line("Value: Tents Ceiling");
+    b.Line("Value: LitersOfWaterPerDay");
+    b.Line("Value: Taps Ceiling");
+    b.Line("Value: WaterCollectionContainers Ceiling");
+    b.Line("Value: WaterStorageContainers Ceiling");
+    b.Line("Value: Toilets Ceiling");
+    b.Line("Value: RefuseContainers Ceiling</pre > ");
+    let retValue = b.ToString();
+    return retValue;
+  }
+
   // Initializes an object instance.
   constructor()
   {
@@ -465,7 +515,7 @@ class CalcPadCode
   {
     // "LeftName" is # "RightName"
 
-    // Calculate smaller formula totals.
+    // Calculate RightName formula totals.
     let prevItemRef = lineItemRef;
     let nextItemRef = this.#GetItem(prevItemRef.FormulaName);
     while (nextItemRef != null)
@@ -475,7 +525,7 @@ class CalcPadCode
       nextItemRef = this.#GetItem(nextItemRef.FormulaName);
     }
 
-    // Calculate larger formula totals.
+    // Calculate LeftName formula totals.
     // *** Begin ***
     let items = this.#GetItemsWithFormula(lineItemRef);
     for (let index = 0; index < items.length; index++)

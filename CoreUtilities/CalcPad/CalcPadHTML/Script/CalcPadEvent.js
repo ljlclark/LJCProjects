@@ -48,6 +48,11 @@ class CalcPadEvent
           CalcPadEvent.ShowMenu(event, calcPadMenu);
           break;
 
+        case "needs":
+          calcPad.value = CalcPadCode.NeedsAssesment();
+          LJC.SetTextRows(calcPad);
+          break;
+
         case "help":
           window.location = "CalcPadHelp.html";
           //window.open("CalcPadHelp.html");
@@ -66,7 +71,6 @@ class CalcPadEvent
           break;
       }
     }
-
   }
 
   // Other Event Handlers.
@@ -98,6 +102,12 @@ class CalcPadEvent
         eTarget.style.backgroundColor = backColor;
         break;
 
+      case "needs":
+        parent = eTarget.parentElement;
+        backColor = LJC.ElementStyle(parent, "background-color");
+        eTarget.style.backgroundColor = backColor;
+        break;
+
       case "help":
         parent = eTarget.parentElement;
         backColor = LJC.ElementStyle(parent, "background-color");
@@ -120,6 +130,11 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
+        eTarget.style.backgroundColor = dropItemColor;
+        //CalcPadEvents.TextCols();
+        break;
+
+      case "needs":
         eTarget.style.backgroundColor = dropItemColor;
         break;
 
