@@ -48,6 +48,10 @@ class CalcPadEvent
           CalcPadEvent.ShowMenu(event, calcPadMenu);
           break;
 
+        case "setLines":
+          LJC.SetTextRows(calcPad);
+          break;
+
         case "needs":
           calcPad.value = CalcPadCode.NeedsAssesment();
           LJC.SetTextRows(calcPad);
@@ -97,17 +101,8 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
-        parent = eTarget.parentElement;
-        backColor = LJC.ElementStyle(parent, "background-color");
-        eTarget.style.backgroundColor = backColor;
-        break;
-
+      case "setLines":
       case "needs":
-        parent = eTarget.parentElement;
-        backColor = LJC.ElementStyle(parent, "background-color");
-        eTarget.style.backgroundColor = backColor;
-        break;
-
       case "help":
         parent = eTarget.parentElement;
         backColor = LJC.ElementStyle(parent, "background-color");
@@ -130,14 +125,8 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
-        eTarget.style.backgroundColor = dropItemColor;
-        //CalcPadEvents.TextCols();
-        break;
-
+      case "setLines":
       case "needs":
-        eTarget.style.backgroundColor = dropItemColor;
-        break;
-
       case "help":
         eTarget.style.backgroundColor = dropItemColor;
         break;
