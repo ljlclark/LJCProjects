@@ -15,15 +15,15 @@ class TextGenEvent
   // Sets the Event handlers.
   static SetEvents()
   {
-    // window Event Handlers.
+    // window event handlers.
     window.addEventListener("resize", TextGenEvent.PageTextCols);
 
-    // document event handlers.
+    // document event handlers
     addEventListener("click", TextGenEvent.DocumentClick);
     addEventListener("mouseover", TextGenEvent.DocumentMouseOver)
     addEventListener("mouseout", TextGenEvent.DocumentMouseOut)
 
-    // textarea elements
+    // textarea event handers
     template.addEventListener("keyup", LJC.EventTextRows);
     textData.addEventListener("keyup", LJC.EventTextRows);
     output.addEventListener("keyup", LJC.EventTextRows);
@@ -31,6 +31,7 @@ class TextGenEvent
   }
 
   // Actions
+  // ---------------
 
   // Handles the Document "click" event.
   static DocumentClick(event)
@@ -41,6 +42,8 @@ class TextGenEvent
     const js = "/JavascriptCommon/TextGenLib/Templates";
 
     let eItem = event.target;
+
+    // Hide Menus
     tableDataMenu.style.visibility = "hidden";
     templateMenu.style.visibility = "hidden";
 
@@ -119,6 +122,7 @@ class TextGenEvent
   }
 
   // Other Events
+  // ---------------
 
   // Handles the Document "mouseout" event.
   static DocumentMouseOut(event)
