@@ -444,7 +444,7 @@ class CalcPadCode
     let retValue = "";
 
     refSuccess.Value = true;
-    if ("+-*/".includes(token))
+    if ("+-*/^".includes(token))
     {
       retValue = token;
     }
@@ -504,6 +504,9 @@ class CalcPadCode
           break;
         case "/":
           retValue = firstValue / secondValue;
+          break;
+        case "^":
+          retValue = firstValue ** secondValue;
           break;
       }
     }
