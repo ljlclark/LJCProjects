@@ -22,6 +22,8 @@ class CalcPadEvent
 
     // textarea event handers
     calcPad.addEventListener("keyup", LJC.EventTextRows);
+    calcPad.addEventListener("keydown", CalcPadEvent.IndentKeys);
+    calcPad.addEventListener("contextmenu", CalcPadEvent.ContextMenu);
   }
 
   // Actions
@@ -46,8 +48,18 @@ class CalcPadEvent
           CalcPadEvent.ShowMenu(event, calcPadMenu);
           break;
 
+        case "setLines":
+          LJC.SetTextRows(calcPad);
+          break;
+
+        case "needs":
+          calcPad.value = CalcPadCode.NeedsAssesment();
+          LJC.SetTextRows(calcPad);
+          break;
+
         case "help":
           window.location = "CalcPadHelp.html";
+          //window.open("CalcPadHelp.html");
           break;
       }
     }
@@ -63,17 +75,24 @@ class CalcPadEvent
           break;
       }
     }
-
   }
 
   // Other Event Handlers.
   // ---------------
+
+  //
+  static ContextMenu(event)
+  {
+    event.preventDefault();
+    CalcPadEvent.ShowMenu(event, calcPadMenu);
+  }
 
   // Handles the Document "mouseout" event.
   static DocumentMouseOut(event)
   {
     let eTarget = event.target;
     let backColor = null;
+    let parent = null;
     switch (eTarget.id)
     {
       case "options":
@@ -82,11 +101,8 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
-        let parent = eTarget.parentElement;
-        backColor = LJC.ElementStyle(parent, "background-color");
-        eTarget.style.backgroundColor = backColor;
-        break;
-
+      case "setLines":
+      case "needs":
       case "help":
         parent = eTarget.parentElement;
         backColor = LJC.ElementStyle(parent, "background-color");
@@ -109,13 +125,56 @@ class CalcPadEvent
         break;
 
       case "doCalcs":
-        eTarget.style.backgroundColor = dropItemColor;
-        break;
-
+      case "setLines":
+      case "needs":
       case "help":
         eTarget.style.backgroundColor = dropItemColor;
         break;
     }
+  }
+
+  // Applies tabs and indentation.
+  static IndentKeys(event)
+  {
+    if ("Tab" == event.key)
+    {
+      if (calcPad.selectionStart < calcPad.selectionEnd)
+      {
+        event.preventDefault();
+        let calcArea = new TextAreaCode(calcPad);
+        if (event.shiftKey)
+        {
+          let unindent = true;
+          calcArea.DoIndent(unindent);
+        }
+        else
+        {
+          calcArea.DoIndent();
+        }
+      }
+      else
+      {
+        // Inserts a Tab.
+        if (event.shiftKey)
+        {
+          event.preventDefault();
+          let calcArea = new TextAreaCode(calcPad);
+          calcArea.ReplaceSelection("\t");
+        }
+      }
+    }
+    //  else
+    //  {
+    //    CalcPadEvent.ShowKey(event);
+    //    if ("i" == event.key)
+    //    {
+    //      if (event.ctrlKey)
+    //      {
+    //        event.preventDefault();
+    //        alert("Insert Tab");
+    //      }
+    //    }
+    //  }
   }
 
   // Sets the textarea columns
@@ -159,5 +218,15 @@ class CalcPadEvent
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
     menu.style.visibility = "visible";
+  }
+
+  // 
+  static ShowKey(event)
+  {
+    alert(`key: ${event.key}\r\n`
+      + `code: ${event.code}\r\n`
+      + `CTRL: ${event.ctrlKey}\r\n`
+      + `SHIFT: ${event.shiftKey}\r\n`
+      + `ALT: ${event.altKey}`);
   }
 }

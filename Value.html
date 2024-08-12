@@ -4,63 +4,134 @@
 <!-- CalcPad.html -->
 <html lang="en">
 <head>
-  <title>CalcPad</title>
+  <title>Value</title>
   <meta charset="utf-8" />
   <meta name="description" content="A Calculation Pad page." />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='CSS/CodeDoc.css' />
 </head>
 <body>
-  <p>
-    Output Value
-  </p>
-  <p>
-    An Output Value is used to display the current value of a Data Item. It has
-    the following format:
-  </p>
-  <p>
-    Value: DataItemName Rounding
-  </p>
-  <p>
-    The Value lines will contain the current Data Item value after the
-    "Do Calculations" menu item is selected from the "Options" menu.
-  </p>
-  <p>
-    Value: DataItemName Rounding (CurrentValue)
-  </p>
-  <p>
-    The Rounding value is optional and can be:
-  </p>
-  <p>
-    Ceiling - Rounds up to the next whole (integer) value.
-  </p>
-  <p>
-    Floor - Rounds down to the whole (integer) value.
-  </p>
-  <p>
-    Round - If .5 or higher, rounds up to the next integer else rounds down
-    to the integer value..
-  </p>
-  <p>
-    The following statements will show the results in the current values.
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="CalcPad.html">Calculations</a>
+      / <a href="CalcPadHelp.html">Home</a>
+      / Value
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>Value Statement</div>
+    </div>
+    <div class='Text'>
+      <p>
+        An Output Value is used to display the current value of a Data Item. It has
+        the following format:
+      </p>
+      <p>
+        Value: DataItemName Rounding
+      </p>
+      <p>
+        The Value lines will contain the current Data Item value after the
+        "Do Calculations" menu item is selected from the "Options" menu.
+      </p>
+      <p>
+        Value: DataItemName Rounding (CurrentValue)
+      </p>
+      <p>
+        The Rounding value is optional and can be:
+      </p>
+      <p>
+        Ceiling - Rounds up to the next whole (integer) value.
+      </p>
+      <p>
+        Floor - Rounds down to the whole (integer) value.
+      </p>
+      <p>
+        Round - If .5 or higher, rounds up to the next integer else rounds down
+        to the integer value..
+      </p>
+      <p>
+        Round:number - Rounds to the provided number of decimal places.
+      </p>
+      <p>
+        The following statements will show the results in the current values.
+      </p>
+      <h5>Rapid Needs Assesment Calculation Template</h5>
 <pre>
-    Person|Persons
-    Family|Families
-    Community|Communities
-    Village|Villages
-    Tap|Taps
+  // DataItem Definitions
+  Person|Persons
+  Family|Families
+  Community|Communities
+  Village|Villages
+  Tent|Tents
+  LitersOfWaterPerDay
+  Tap|Taps
+  WaterCollectionContainer|WaterCollectionContainers
+  WaterStorageContainer|WaterStorageContainers
+  Toilet|Toilets
+  RefuseContainer|RefuseContainers
 
-    Family is 5 Persons
-    Community is 16 Families
-    Village is 4 Communities
+  // Conversion Formulas
+  Family is 5 Persons
+  Community is 16 Families
+  Village is 4 Communities
 
-    Families = 100
-    Taps = Persons / 125
+  // Initialize Values
+  Families = 100
 
-    Value: Persons Ceiling
-    Value: Families Ceiling
-    Value: Communities Ceiling
-    Value: Villages Ceiling
-    Value: Taps Ceiling</pre>
+  // Calculate Needs
+  Tents = Persons / 6
+  LitersOfWaterPerDay = 15 * Persons
+  Taps = Persons / 125
+  WaterCollectionContainers = Families * 2
+  WaterStorageContainers = Families
+  Toilets = Persons / 20
+  RefuseContainers = Families / 10
+
+  // Show Calculated Needs
+  Value: Persons Ceiling
+  Value: Families Ceiling
+  Value: Communities Ceiling
+  Value: Villages Ceiling
+  Value: Tents Ceiling
+  Value: LitersOfWaterPerDay
+  Value: Taps Ceiling
+  Value: WaterCollectionContainers
+  Value: WaterStorageContainers
+  Value: Toilets Ceiling
+  Value: RefuseContainers Ceiling</pre>
+      <h5>Sample Units of Length Calculation Template</h5>
+      <pre>
+  kilometer|km
+  meter|m
+  centimeter|cm
+  milimeter|mm
+  feet|ft
+
+  kilometer is 1000 m
+  meter is 100 cm
+  centimeter is 10 mm
+  feet is 0.3048 m
+
+  meter = 1000
+
+  Value: km
+  Value: m
+  Value: cm
+  Value: mm
+  Value: ft</pre>
+    </div>
+    <!-- End Text -->
+    <div class="PathText">
+      / <a href="CalcPad.html">Calculations</a>
+      / <a href="CalcPadHelp.html">Home</a>
+      / Value
+    </div>
+    <br />
+    <div class='SmallText'>Copyright &copy; Lester J. Clark  and Contributors.</div>
+    <div class='SmallText'>Licensed under the MIT License.</div>
+  </div>
+  <!-- End page -->
 </body>
 </html>
