@@ -175,7 +175,7 @@ class CalcPadCode
       if (tokenCount < 3
         || tokenCount > 5)
       {
-        success.Value = false;
+        refSuccess.Value = false;
         Error.TokenCount(line, Error.SyntaxAssignment());
       }
 
@@ -184,7 +184,7 @@ class CalcPadCode
       {
         let token = tokens[0];
         retValue = new Item(token, 0);
-        if (!"string" == typeof token[0])
+        if (!"string" == typeof token)
         {
           success.Value = false;
           Error.NameFormat(line, token);
@@ -196,9 +196,7 @@ class CalcPadCode
       if (refSuccess.Value
         && tokenCount > 2)
       {
-        let token = tokens[2];
-        firstValue = this.#GetItemValue(line, token, refSuccess
-          , Error.SyntaxAssignment());
+        firstValue = this.#GetValue(line, tokens[2], refSuccess);
         if (3 == tokenCount)
         {
           retValue.Value = firstValue;
@@ -210,17 +208,14 @@ class CalcPadCode
       if (refSuccess.Value
         && tokenCount > 3)
       {
-        let token = tokens[3];
-        operation = this.#GetOperation(line, token, refSuccess);
+        operation = this.#GetOperation(line, tokens[3], refSuccess);
       }
 
       if (refSuccess.Value
         && tokenCount > 4)
       {
         // Get second value.
-        let token = tokens[4];
-        let secondValue = this.#GetItemValue(line, token
-          , refSuccess, Error.SyntaxAssignment());
+        let secondValue = this.#GetValue(line, tokens[4], refSuccess);
         retValue.Value = this.#Calc(firstValue, operation, secondValue);
       }
 
@@ -395,6 +390,30 @@ class CalcPadCode
   // Other Parse Methods
   // ---------------
 
+  // Perform the Math function.
+  #CalcMathValue(mathName, calcValue, refSuccess)
+  {
+    let retValue = -1.0;
+
+    refSuccess.Value = true;
+    switch (mathName.toLowerCase())
+    {
+      case "cos":
+        retValue = Math.cos(calcValue);
+        break;
+      case "sin":
+        retValue = Math.sin(calcValue);
+        break;
+      case "sqrt":
+        retValue = Math.sqrt(calcValue);
+        break;
+      default:
+        refSuccess.Value = false;
+        break;
+    }
+    return retValue;
+  }
+
   // Clears the old value.
   #ClearValue(line)
   {
@@ -426,13 +445,33 @@ class CalcPadCode
         let findItem = this.#GetItem(token);
         if (null == findItem)
         {
-          success.Value = false;
+          refSuccess.Value = false;
           Error.ItemNotFound(line, token, syntax);
         }
         else
         {
           retValue = findItem.Value;
         }
+      }
+    }
+    return retValue;
+  }
+
+  // Return the MathValues object.
+  #GetMathValues(token, refSuccess)
+  {
+    let retValue = { FunctionName: "", ValueToken: "", CalcValue: 0.0 };
+
+    refSuccess.Value = false;
+    if (token.includes("("))
+    {
+      let mathTokens = token.split("(");
+      if (2 == mathTokens.length)
+      {
+        refSuccess.Value = true;
+        retValue.FunctionName = mathTokens[0].trim();
+        let valueToken = mathTokens[1].trim();
+        retValue.ValueToken = valueToken.substring(0, valueToken.length - 1);
       }
     }
     return retValue;
@@ -452,6 +491,38 @@ class CalcPadCode
     {
       refSuccess.Value = false;
       Error.Operation(line);
+    }
+    return retValue;
+  }
+
+  // 
+  #GetValue(line, token, refSuccess)
+  {
+    let retValue = -1.0;
+
+    refSuccess.Value = true;
+    let isFunction = false;
+    let mathName = "";
+    let valueToken = "";
+    let mathValues = this.#GetMathValues(token, refSuccess);
+    if (refSuccess.Value)
+    {
+      isFunction = true;
+      mathName = mathValues.FunctionName;
+      valueToken = mathValues.ValueToken;
+      let retValue = this.#GetItemValue(line, valueToken, refSuccess
+        , Error.SyntaxAssignment());
+      if (refSuccess.Value)
+      {
+        retValue = this.#CalcMathValue(mathName, retValue, refSuccess);
+      }
+      return retValue;
+    }
+
+    if (!isFunction)
+    {
+      retValue = this.#GetItemValue(line, token, refSuccess
+        , Error.SyntaxAssignment());
     }
     return retValue;
   }
@@ -529,13 +600,10 @@ class CalcPadCode
     }
 
     // Calculate LeftName formula totals.
-    // *** Begin ***
     let items = this.#GetItemsWithFormula(lineItemRef);
     for (let index = 0; index < items.length; index++)
     {
-      // *** End ***
       prevItemRef = lineItemRef;
-      //nextItemRef = this.#GetItemWithFormula(lineItemRef);
       nextItemRef = items[index];
       while (nextItemRef != null)
       {
@@ -707,6 +775,7 @@ class CalcPadCode
   }
 }
 
+// Represents the LineType.
 class RefLineType
 {
   #Name = "";
@@ -807,7 +876,7 @@ class Item
     refNumber.Value = 0;
     if (0 == Value % 1)
     {
-      refNumber.Value = this.Value; // (int)
+      refNumber.Value = this.Value;
       retValue = true;
     }
     return retValue;
