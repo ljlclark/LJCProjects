@@ -401,6 +401,9 @@ class CalcPadCode
       case "cos":
         retValue = Math.cos(calcValue);
         break;
+      case "radians":
+        retValue = calcValue * (Math.PI / 180);
+        break;
       case "sin":
         retValue = Math.sin(calcValue);
         break;
