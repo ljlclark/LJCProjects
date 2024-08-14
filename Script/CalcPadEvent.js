@@ -58,7 +58,7 @@ class CalcPadEvent
           break;
 
         case "help":
-          window.location = "CalcPadHelp.html";
+          window.location = "HTML/CalcPadHelp.html";
           //window.open("CalcPadHelp.html");
           break;
       }
