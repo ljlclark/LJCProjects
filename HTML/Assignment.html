@@ -37,23 +37,39 @@
         function with one argument.
       </p>
       <p>
-        The available functions are: cos(), radians(), sin() or sqrt().
+        The available functions are: cos(), radians(), sin(), sqrt() and tan().
       </p>
       <p>
         The function names are not case sensitive.
       </p>
-      <p>
-        cos(radians) - Takes the angle in radians and returns the cosine.<br />
-        Radians(degrees) - Takes the angle in degrees and returns the angle in radians.<br />
-        sin(radians) - Takes the angle in radians and returns the sine.<br />
-        sqrt(4) - Takes a number and returns the square root.
-      </p>
+      <table>
+        <tr>
+          <td>cos(radians)</td>
+          <td>Takes the angle in radians and returns the cosine.</td>
+        </tr>
+        <tr>
+          <td>radians(degrees)</td>
+          <td>Takes the angle in degrees and returns the angle in radians.</td>
+        </tr>
+        <tr>
+          <td>sin(radians)</td>
+          <td>Takes the angle in radians and returns the sine.</td>
+        </tr>
+        <tr>
+          <td>sqrt(4)</td>
+          <td>Takes a number and returns the square root.</td>
+        </tr>
+        <tr>
+          <td>tan(radians)</td>
+          <td>Takes the angle in radians and returns the tangent.</td>
+        </tr>
+      </table>
       <p>
         This is an example of how to calculate the sides of a 3, 4, 5 triangle.
       </p>
       <pre>
   radius = 5
-  angle = Radians(53.13)
+  angle = radians(53.13)
   // cos(angle) = a/h | multiply both sides by h | Cos(angle) * h = a
   // sin(angle) = o/h | multiply both sides by h | Sin(angle) * h = o
   x = cos(angle) * radius
