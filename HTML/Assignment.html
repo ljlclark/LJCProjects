@@ -9,7 +9,7 @@
   <meta name="description" content="A Calculation Pad page." />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width initial-scale=1" />
-  <link rel='stylesheet' type='text/css' href='CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
 </head>
 <body>
   <div class="page">
@@ -43,9 +43,9 @@
         The function names are not case sensitive.
       </p>
       <p>
+        cos(radians) - Takes the angle in radians and returns the cosine.<br />
         Radians(degrees) - Takes the angle in degrees and returns the angle in radians.<br />
         sin(radians) - Takes the angle in radians and returns the sine.<br />
-        cos(radians) - Takes the angle in radians and returns the cosine.<br />
         sqrt(4) - Takes a number and returns the square root.
       </p>
       <p>
@@ -54,7 +54,8 @@
       <pre>
   radius = 5
   angle = Radians(53.13)
-  // cos(angle) = a/h |  multiply both sides by h | Cos(angle) * h = a
+  // cos(angle) = a/h | multiply both sides by h | Cos(angle) * h = a
+  // sin(angle) = o/h | multiply both sides by h | Sin(angle) * h = o
   x = cos(angle) * radius
   y = sin(angle) * radius
   value: x round
