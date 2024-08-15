@@ -33,8 +33,32 @@
   or
   DataItemName = DataItemName/Number Operation DataItemName/Number</pre>
       <p>
-        The second and fourth positions can be a DataItem name or a number.
+        The second and fourth positions can be a DataItem name, number or a
+        function with one argument.
       </p>
+      <p>
+        The available functions are: cos(), radians(), sin() or sqrt().
+      </p>
+      <p>
+        The function names are not case sensitive.
+      </p>
+      <p>
+        Radians(degrees) - Takes the angle in degrees and returns the angle in radians.<br />
+        sin(radians) - Takes the angle in radians and returns the sine.<br />
+        cos(radians) - Takes the angle in radians and returns the cosine.<br />
+        sqrt(4) - Takes a number and returns the square root.
+      </p>
+      <p>
+        This is an example of how to calculate the sides of a 3, 4, 5 triangle.
+      </p>
+      <pre>
+  radius = 5
+  angle = Radians(53.13)
+  // cos(angle) = a/h |  multiply both sides by h | Cos(angle) * h = a
+  x = cos(angle) * radius
+  y = sin(angle) * radius
+  value: x round
+  value: y round</pre>
       <p>
         The Operation can be one of the following: "+", "-", "*", "/" or "^".
       </p>
