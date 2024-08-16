@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="Graphics.js"></script>
+  <style>
+    .border {
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" class="border" height="250" width="500"></canvas>
+  <script>
+    let g = new Graphics(canvas);
+    let beginPoint = new GPoint(0, 0);
+    let endPoint = new GPoint(250, 125);
+    g.Line(beginPoint, endPoint);
+
+    g.Polygon(endPoint, 20, 5);
+
+    endRadians = 360 * g.Radian;
+    g.Arc(endPoint, 30, endRadians);
+
+    g.Text("What?", endPoint);
+  </script>
+</body>
+</html>
