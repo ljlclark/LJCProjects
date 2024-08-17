@@ -85,8 +85,11 @@ class Graphics
 
     ctx.strokeStyle = strokeStyle;
     ctx.stroke();
-    ctx.fillStyle = fillStyle;
-    ctx.fill();
+    if (LJC.HasValue(fillStyle))
+    {
+      ctx.fillStyle = fillStyle;
+      ctx.fill();
+    }
   }
 
   // Draw a rectangle.
@@ -95,8 +98,11 @@ class Graphics
     let ctx = this.Context;
     fillStyle = this.#GetFillStyle(fillStyle);
 
+    ctx.beginPath();
+    ctx.rect(beginPoint.X, beginPoint.Y, width, height);
+    ctx.stroke();
     ctx.fillStyle = fillStyle;
-    ctx.fillRect(beginPoint.X, beginPoint.Y, width, height);
+    ctx.fill();
   }
 
   // Draw text.

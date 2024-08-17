@@ -25,6 +25,7 @@
 
     let radius = 20;
     let verticeCount = 5;
+    g.FillStyle = "";
     g.Polygon(endPoint, radius, verticeCount);
 
     // Circle
@@ -42,11 +43,12 @@
     radius = 40;
     g.Arc(endPoint, radius, endRadians, beginRadians);
 
+    g.FillStyle = "";
     g.Rectangle(endPoint, 50, 25);
 
     g.Animate();
 
-    g.Text("What?", endPoint);
+    g.Text("What?", endPoint, null, "white");
   </script>
 </body>
 </html>
