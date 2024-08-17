@@ -6,7 +6,10 @@ class Graphics
     this.Canvas = canvas;
     this.Context = canvas.getContext("2d");
     this.Radian = Math.PI / 180;
-    this.DefaultStyle = this.#GetDefaultStyle(this.Canvas, "");
+    this.StrokeStyle = this.#GetDefaultStyle(this.Canvas, "");
+    this.FillStyle = this.#GetDefaultStyle(this.Canvas, "");
+    this.X = 0;
+    this.PrevX = 0;
   }
 
   // Draw Methods
@@ -16,9 +19,11 @@ class Graphics
   Arc(centerPoint, radius, endRadians, beginRadians = 0, strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStyle(strokeStyle);
+    strokeStyle = this.#GetStrokeStyle(strokeStyle);
+
     ctx.beginPath();
     ctx.arc(centerPoint.X, centerPoint.Y, radius, beginRadians, endRadians);
+
     ctx.strokeStyle = strokeStyle;
     ctx.stroke();
   }
@@ -27,9 +32,11 @@ class Graphics
   Line(beginPoint, endPoint, strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStyle(strokeStyle);
+    strokeStyle = this.#GetStrokeStyle(strokeStyle);
+
     ctx.moveTo(beginPoint.X, beginPoint.Y)
     ctx.lineTo(endPoint.X, endPoint.Y);
+
     ctx.strokeStyle = strokeStyle;
     ctx.stroke();
   }
@@ -44,36 +51,60 @@ class Graphics
   NextLine(endPoint, strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStyle(strokeStyle);
+    strokeStyle = this.#GetStrokeStyle(strokeStyle);
+
     ctx.lineTo(endPoint.X, endPoint.Y);
+
     ctx.strokeStyle = strokeStyle;
     ctx.stroke();
   }
 
   // Draw a polygon.
-  Polygon(centerPoint, radius, verticeCount)
+  Polygon(centerPoint, radius, verticeCount, strokeStyle = "", fillStyle = "")
   {
+    let ctx = this.Context;
+    strokeStyle = this.#GetStrokeStyle(strokeStyle);
+    fillStyle = this.#GetFillStyle(fillStyle);
+
     let arc = (Math.PI * 2) / verticeCount;
     let radians = arc;
-    let prevPoint = new GPoint(centerPoint.X + radius, centerPoint.Y);
-    for (let index = 0; index < verticeCount; index++)
+    let beginPoint = new GPoint(centerPoint.X + radius, centerPoint.Y);
+    ctx.beginPath();
+    ctx.moveTo(beginPoint.X, beginPoint.Y); // Add
+    for (let index = 0; index < verticeCount - 1; index++)
     {
       let x = radius * Math.cos(radians) + centerPoint.X;
       let y = radius * Math.sin(radians) + centerPoint.Y;
       let sx = Math.round(x);
       let sy = Math.round(y);
       let endPoint = new GPoint(sx, sy);
-      this.Line(prevPoint, endPoint);
-      prevPoint = endPoint;
+      this.NextLine(endPoint, strokeStyle);
       radians += arc;
     }
+    ctx.closePath();
+
+    ctx.strokeStyle = strokeStyle;
+    ctx.stroke();
+    ctx.fillStyle = fillStyle;
+    ctx.fill();
+  }
+
+  // Draw a rectangle.
+  Rectangle(beginPoint, width, height, fillStyle = "")
+  {
+    let ctx = this.Context;
+    fillStyle = this.#GetFillStyle(fillStyle);
+
+    ctx.fillStyle = fillStyle;
+    ctx.fillRect(beginPoint.X, beginPoint.Y, width, height);
   }
 
   // Draw text.
   Text(text, beginPoint, font = "10px san-serif", fillStyle = "")
   {
     let ctx = this.Context;
-    fillStyle = this.#GetStyle(fillStyle);
+    fillStyle = this.#GetFillStyle(fillStyle);
+
     ctx.font = font;
     ctx.fillStyle = fillStyle;
     ctx.fillText(text, beginPoint.X, beginPoint.Y);
@@ -82,11 +113,36 @@ class Graphics
   // Other Methods
   // ***************
 
-  // Gets the default style color.
-  #GetDefaultStyle(eItem, strokeStyle)
+  // 
+  Animate()
   {
-    let retValue = strokeStyle;
-    if (!LJC.HasValue(strokeStyle))
+    let ctx = this.Context;
+
+    let y = 100;
+    let width = 50;
+    let height = 50;
+
+    ctx.clearRect(this.PrevX - 1, y - 1, width + 1, height + 2);
+    ctx.strokeStyle = this.strokeStyle;
+
+    ctx.strokeRect(this.X, y, width, height);
+    ctx.fillStyle = 'red';
+    ctx.fillRect(this.X, y, width, height);
+
+    this.PrevX = this.X;
+    this.X += 2;
+    if (this.X < this.Canvas.width - 50)
+    {
+      requestAnimationFrame(this.Animate.bind(this));
+    }
+  }
+
+  // Gets the default style color.
+  #GetDefaultStyle(eItem, style)
+  {
+    let retValue = style;
+
+    if (!LJC.HasValue(style))
     {
       retValue = "black";
       let backColor = LJC.ElementStyle(eItem, "background-color");
@@ -99,12 +155,25 @@ class Graphics
   }
 
   // Get provided style or class Style.
-  #GetStyle(style)
+  #GetFillStyle(fillStyle)
   {
-    let retValue = style;
-    if (!LJC.HasValue(style))
+    let retValue = fillStyle;
+
+    if (!LJC.HasValue(fillStyle))
     {
-      retValue = this.DefaultStyle;
+      retValue = this.FillStyle;
+    }
+    return retValue;
+  }
+
+  // Get provided style or class Style.
+  #GetStrokeStyle(strokeStyle)
+  {
+    let retValue = strokeStyle;
+
+    if (!LJC.HasValue(strokeStyle))
+    {
+      retValue = this.StrokeStyle;
     }
     return retValue;
   }

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- CanvasTest.html -->
 <html lang="en">
 <head>
   <script src="Graphics.js"></script>
@@ -13,7 +16,8 @@
   <canvas id="canvas" class="border" height="250" width="500"></canvas>
   <script>
     let g = new Graphics(canvas);
-    g.DefaultStyle = "cyan";
+    g.StrokeStyle = "cyan";
+    g.FillStyle = "cyan";
 
     let beginPoint = new GPoint(0, 0);
     let endPoint = new GPoint(250, 125);
@@ -23,17 +27,24 @@
     let verticeCount = 5;
     g.Polygon(endPoint, radius, verticeCount);
 
+    // Circle
     radius = 30;
     endRadians = 360 * g.Radian;
     g.Arc(endPoint, radius, endRadians);
 
+    // Red Circle
     // Uses the default beginRadians = 0;
     radius = 35;
-    g.Arc(endPoint, radius, endRadians, null, "cyan");
+    g.Arc(endPoint, radius, endRadians, null, "red");
 
+    // Dome Shape
     let beginRadians = Math.PI;
     radius = 40;
     g.Arc(endPoint, radius, endRadians, beginRadians);
+
+    g.Rectangle(endPoint, 50, 25);
+
+    g.Animate();
 
     g.Text("What?", endPoint);
   </script>
