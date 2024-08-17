@@ -6,7 +6,7 @@ class Graphics
     this.Canvas = canvas;
     this.Context = canvas.getContext("2d");
     this.Radian = Math.PI / 180;
-    this.Style = this.#DefaultStyle(this.Canvas, "");
+    this.DefaultStyle = this.#GetDefaultStyle(this.Canvas, "");
   }
 
   // Draw Methods
@@ -83,7 +83,7 @@ class Graphics
   // ***************
 
   // Gets the default style color.
-  #DefaultStyle(eItem, strokeStyle)
+  #GetDefaultStyle(eItem, strokeStyle)
   {
     let retValue = strokeStyle;
     if (!LJC.HasValue(strokeStyle))
@@ -104,7 +104,7 @@ class Graphics
     let retValue = style;
     if (!LJC.HasValue(style))
     {
-      retValue = this.Style;
+      retValue = this.DefaultStyle;
     }
     return retValue;
   }

@@ -13,6 +13,8 @@
   <canvas id="canvas" class="border" height="250" width="500"></canvas>
   <script>
     let g = new Graphics(canvas);
+    g.DefaultStyle = "cyan";
+
     let beginPoint = new GPoint(0, 0);
     let endPoint = new GPoint(250, 125);
     g.Line(beginPoint, endPoint);
