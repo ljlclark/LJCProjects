@@ -1,3 +1,8 @@
+// Copyright(c) Lester J.Clark and Contributors. -- >
+// Licensed under the MIT License.-- >
+// Graphics.js
+
+// 
 class Graphics
 {
   // The Constructor method.
@@ -26,6 +31,12 @@ class Graphics
 
     ctx.strokeStyle = strokeStyle;
     ctx.stroke();
+  }
+
+  // 
+  BeginPath()
+  {
+    this.Context.beginPath();
   }
 
   // Draw a line from beginPoint to endPoint.
@@ -141,6 +152,26 @@ class Graphics
     {
       requestAnimationFrame(this.Animate.bind(this));
     }
+  }
+
+  // Close out the path.
+  ClosePath()
+  {
+    this.Context.closePath();
+  }
+
+  // Show the line path.
+  Stroke(strokeStyle = "")
+  {
+    strokeStyle = this.#GetStrokeStyle(strokeStyle);
+    this.Context.stroke();
+  }
+
+  // Show the fill path.
+  Fill(fillStyle = "")
+  {
+    fillStyle = this.#GetFillStyle(fillStyle);
+    this.Context.fill();
   }
 
   // Gets the default style color.

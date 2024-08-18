@@ -4,8 +4,9 @@
 <!-- CanvasTest.html -->
 <html lang="en">
 <head>
-  <script src="Graphics.js"></script>
   <script src="../Script/LJCCommon.js"></script>
+  <script src="Graphics.js"></script>
+  <script src="Object3D.js"></script>
   <style>
     .border {
       border: 1px solid white;
@@ -19,36 +20,49 @@
     g.StrokeStyle = "cyan";
     g.FillStyle = "cyan";
 
-    let beginPoint = new GPoint(0, 0);
-    let endPoint = new GPoint(250, 125);
-    g.Line(beginPoint, endPoint);
+    let object1 = new Object3D(g);
+    let name = "Polygon1";
+    let radius = 30;
+    let beginPoint = new Point3D(radius, 0, 0);
+    let translatePoint = new Point3D(g.Canvas.width / 2, g.Canvas.height / 2, 0);
+    let vertices = 4;
+    let path = object1.CreatePolygonPath(name, beginPoint, translatePoint
+      , radius, vertices);
+    object1.Paths.push(path);
 
-    let radius = 20;
-    let verticeCount = 5;
-    g.FillStyle = "";
-    g.Polygon(endPoint, radius, verticeCount);
+    object1.Show();
 
-    // Circle
-    radius = 30;
-    endRadians = 360 * g.Radian;
-    g.Arc(endPoint, radius, endRadians);
 
-    // Red Circle
-    // Uses the default beginRadians = 0;
-    radius = 35;
-    g.Arc(endPoint, radius, endRadians, null, "red");
+    //let beginPoint = new GPoint(0, 0);
+    //let endPoint = new GPoint(250, 125);
+    //g.Line(beginPoint, endPoint);
 
-    // Dome Shape
-    let beginRadians = Math.PI;
-    radius = 40;
-    g.Arc(endPoint, radius, endRadians, beginRadians);
+    //let radius = 20;
+    //let verticeCount = 5;
+    //g.FillStyle = "";
+    //g.Polygon(endPoint, radius, verticeCount);
 
-    g.FillStyle = "";
-    g.Rectangle(endPoint, 50, 25);
+    //// Circle
+    //radius = 30;
+    //endRadians = 360 * g.Radian;
+    //g.Arc(endPoint, radius, endRadians);
 
-    g.Animate();
+    //// Red Circle
+    //// Uses the default beginRadians = 0;
+    //radius = 35;
+    //g.Arc(endPoint, radius, endRadians, null, "red");
 
-    g.Text("What?", endPoint, null, "white");
+    //// Dome Shape
+    //let beginRadians = Math.PI;
+    //radius = 40;
+    //g.Arc(endPoint, radius, endRadians, beginRadians);
+
+    //g.FillStyle = "";
+    //g.Rectangle(endPoint, 50, 25);
+
+    //g.Animate();
+
+    //g.Text("What?", endPoint, null, "white");
   </script>
 </body>
 </html>
