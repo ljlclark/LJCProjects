@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- CanvasTest.html -->
+<html lang="en">
+<head>
+  <script src="../../Core/Common/Script/LJCCommon.js"></script>
+  <script src="../../Core/Graphics/Script/LJCScene.js"></script>
+  <script src="../../Core/Graphics/Script/LJCMesh.js"></script>
+  <script src="../../Core/Graphics/Script/LJCPath.js"></script>
+  <script src="../../Core/Graphics/Script/LJCPathPoint.js"></script>
+  <script src="../../Core/Graphics/Script/LJCPoint.js"></script>
+  <script src="../../Core/Graphics/Script/LJCGraphics.js"></script>
+  <style>
+    .border {
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" class="border" height="250" width="500"></canvas>
+  <script>
+    let gLJCGraphics = new LJCGraphics(canvas);
+    gLJCGraphics.StrokeStyle = "cyan";
+    gLJCGraphics.FillStyle = "cyan";
+
+    let gScene = new LJCScene("Cube");
+    gScene.AddCube(30);
+    gScene.Show();
+
+    let rotateXY = 5 * gLJCGraphics.Radian;
+    let cube = gScene.Meshes[0];
+    //cube.AddRotateXY(rotateXY);
+    //gScene.Show();
+    cube.AddXY = rotateXY;
+    cube.Animate();
+  </script>
+</body>
+</html>
