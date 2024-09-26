@@ -12,17 +12,18 @@
   <script src="../../Core/Graphics/Script/LJCPoint.js"></script>
   <script src="../../Core/Graphics/Script/LJCGraphics.js"></script>
   <style>
-    .border {
+    .canvas {
       border: 1px solid white;
+      background-color: black;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas" class="border" height="250" width="500"></canvas>
+  <canvas id="canvas" class="canvas" height="250" width="500"></canvas>
   <script>
     let gLJCGraphics = new LJCGraphics(canvas);
-    gLJCGraphics.StrokeStyle = "cyan";
     gLJCGraphics.FillStyle = "cyan";
+    gLJCGraphics.StrokeStyle = "cyan";
 
     let gScene = new LJCScene("Cube");
     gScene.AddCube(30);

@@ -170,6 +170,7 @@ class LJCPath
             break;
         }
       }
+
       switch (this.CloseType.toLowerCase())
       {
         case "close":

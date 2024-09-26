@@ -76,15 +76,13 @@ class LJCMesh
       ctx.clearRect(rect.Left - x, rect.Top - y
         , rect.Width + width, rect.Height + height);
     }
-    //ctx.strokeStyle = this.strokeStyle;
-
-    let mesh = null;
 
     // Testing
     let rotate = "XY";
     rotate = "XYTip";
     //rotate = "XZ";
     //rotate = "ZY";
+    let mesh = null;
     switch (rotate)
     {
       case "XY":
@@ -97,7 +95,6 @@ class LJCMesh
         // Main Rotation accumulates.
         // Rotate clockwise
         this.AddRotateXY(this.AddXY);
-        mesh = this.Clone();
 
         // Tip Angle is one time.
         mesh = this.Clone();
@@ -122,7 +119,6 @@ class LJCMesh
 
     this.PrevRect = mesh.GetRectangle();
     mesh.Show();
-
     requestAnimationFrame(this.Animate.bind(this));
   }
 
@@ -156,9 +152,6 @@ class LJCMesh
       radians += arc;
     }
 
-    // *** Add ***
-    retPath.Normal = new LJCPoint();
-
     // Get Cross Product
     if (retPath.PathPoints.length > 1)
     {
@@ -167,7 +160,8 @@ class LJCMesh
       let point3 = retPath.PathPoints[1].getPoint();
       let xProduct = this.GetCrossProduct(point1, point2, point3);
     }
-    // Next Statement *** Add
+
+    retPath.Normal = new LJCPoint();
     retPath.Translate();
     return retPath;
   }

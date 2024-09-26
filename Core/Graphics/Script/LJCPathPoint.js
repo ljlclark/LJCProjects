@@ -12,14 +12,13 @@ class LJCPathPoint
   // The Constructor method.
   constructor(itemType, nextPoint)
   {
+    this.FillStyle = "";
     // ItemType: Arc, Line, Rectangle
     this.ItemType = itemType;
     this.#Point = nextPoint;
     this.#ScreenPoint = nextPoint;
-    this.Translate();
-
-    this.FillStyle = "";
     this.StrokeStyle = "";
+    this.Translate();
   }
 
   // Data Methods
@@ -39,6 +38,9 @@ class LJCPathPoint
 
   // Class Methods
   // ---------------
+  // AddRotateXY(addRadians)
+  // AddRotateXZ(addRadians)
+  // AddRotateZY(addRadians)
   // Move(x, y, z)
   // RotateXY(radians)
   // RotateXZ(radians)

@@ -60,12 +60,9 @@ class LJCGraphics
   // Draw a point.
   Point(point)
   {
-    let g = gLJCGraphics;
-    let ctx = g.Context;
-
     let point1 = new LJCPoint(point.X + 0.4
       , point.Y + 0.4);
-    g.Line(point, point1);
+    this.Line(point, point1);
   }
 
   // Draw a rectangle.
@@ -77,8 +74,6 @@ class LJCGraphics
     ctx.beginPath();
     ctx.rect(beginPoint.X, beginPoint.Y, width, height);
     ctx.fillStyle = fillStyle;
-    //ctx.stroke();
-    //ctx.fill();
   }
 
   // Draw text.
