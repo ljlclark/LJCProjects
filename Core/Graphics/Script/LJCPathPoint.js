@@ -12,12 +12,10 @@ class LJCPathPoint
   // The Constructor method.
   constructor(itemType, nextPoint)
   {
-    this.FillStyle = "";
     // ItemType: Arc, Line, Rectangle
     this.ItemType = itemType;
     this.#Point = nextPoint;
     this.#ScreenPoint = nextPoint;
-    this.StrokeStyle = "";
     this.Translate();
   }
 
@@ -31,8 +29,6 @@ class LJCPathPoint
     let point = this.#Point.Clone();
     let retPathPoint = new LJCPathPoint(this.ItemType
       , point);
-    retPathPoint.FillStyle = this.FillStyle;
-    retPathPoint.SrokeStyle = this.StrokeStyle;
     return retPathPoint;
   }
 

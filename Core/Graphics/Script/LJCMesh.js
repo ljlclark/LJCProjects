@@ -12,14 +12,16 @@ class LJCMesh
   {
     let g = gLJCGraphics;
 
-    this.MoveValue = 0;
+    // Animate values.
     this.AddXY = 0;
     this.AddXZ = 0;
     this.AddZY = 0;
+    this.MoveValue = 0;
+    this.PrevRect;
+
     this.CloseType = "None";
     this.Name = name;
     this.Paths = [];
-    this.PrevRect;
   }
 
   // Data Methods
@@ -30,13 +32,15 @@ class LJCMesh
   Clone()
   {
     let retMesh = new LJCMesh(this.Name);
-    retMesh.MoveValue = this.MoveValue;
+
+    // Animate values.
     retMesh.AddXY = this.AddXY;
     retMesh.AddXZ = this.AddXZ;
     retMesh.AddZY = this.AddZY;
-    retMesh.CloseType = this.CloseType;
+    retMesh.MoveValue = this.MoveValue;
     retMesh.PrevRect = this.PrevRect;
 
+    retMesh.CloseType = this.CloseType;
     for (let path of this.Paths)
     {
       retMesh.Paths.push(path.Clone());
@@ -162,6 +166,7 @@ class LJCMesh
     }
 
     retPath.Normal = new LJCPoint();
+    retPath.StrokeStyle = "cyan";
     retPath.Translate();
     return retPath;
   }

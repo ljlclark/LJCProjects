@@ -26,63 +26,88 @@ class LJCGraphics
   // Text(text, beginPoint, font = "10px san-serif", fillStyle = "")
 
   // Draw an arc from the beginRadians to the endRdians.
-  Arc(centerPoint, radius, endRadians, beginRadians = 0, strokeStyle = "")
+  Arc(centerPoint, radius, endRadians, beginRadians = 0
+      , fillStyle = "", strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStrokeStyle(strokeStyle);
 
     ctx.beginPath();
     ctx.arc(centerPoint.X, centerPoint.Y, radius, beginRadians, endRadians);
-    ctx.strokeStyle = strokeStyle;
+    if (LJC.HasValue(fillStyle))
+    {
+      this.Fill(fillStyle);
+    }
+    if (LJC.HasValue(strokeStyle))
+    {
+      this.Stroke(strokeStyle);
+    }
   }
 
   // Draw a line from beginPoint to endPoint.
   Line(beginPoint, endPoint, strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStrokeStyle(strokeStyle);
 
     ctx.moveTo(beginPoint.X, beginPoint.Y)
     ctx.lineTo(endPoint.X, endPoint.Y);
-    ctx.strokeStyle = strokeStyle;
+    if (LJC.HasValue(strokeStyle))
+    {
+      this.Stroke(strokeStyle);
+    }
   }
 
   // Draw a line from the previous end point to the provided endPoint.
+  //NextLine(endPoint, strokeStyle = "")
   NextLine(endPoint, strokeStyle = "")
   {
     let ctx = this.Context;
-    strokeStyle = this.#GetStrokeStyle(strokeStyle);
 
     ctx.lineTo(endPoint.X, endPoint.Y);
-    ctx.strokeStyle = strokeStyle;
+    if (LJC.HasValue(strokeStyle))
+    {
+      this.Stroke(strokeStyle);
+    }
   }
 
   // Draw a point.
-  Point(point)
+  Point(point, strokeStyle = "")
   {
     let point1 = new LJCPoint(point.X + 0.4
       , point.Y + 0.4);
-    this.Line(point, point1);
+    this.Line(point, point1, strokeStyle);
   }
 
   // Draw a rectangle.
-  Rectangle(beginPoint, width, height, fillStyle = "")
+  //Rectangle(beginPoint, width, height, fillStyle = "")
+  Rectangle(beginPoint, width, height, fillStyle = ""
+    , strokeStyle = "")
   {
     let ctx = this.Context;
-    fillStyle = this.#GetFillStyle(fillStyle);
 
-    ctx.beginPath();
+    //ctx.beginPath();  // ?
     ctx.rect(beginPoint.X, beginPoint.Y, width, height);
-    ctx.fillStyle = fillStyle;
+    if (LJC.HasValue(fillStyle))
+    {
+      this.Fill(fillStyle);
+    }
+    if (LJC.HasValue(strokeStyle))
+    {
+      this.Stroke(strokeStyle);
+    }
   }
 
   // Draw text.
-  Text(text, beginPoint, font = "10px san-serif", fillStyle = "")
+  Text(text, beginPoint, font = "10px san-serif"
+    , fillStyle = "", strokeStyle= "")
   {
     let ctx = this.Context;
     fillStyle = this.#GetFillStyle(fillStyle);
 
     ctx.font = font;
+    if (LJC.HasValue(strokeStyle))
+    {
+      this.Stroke(strokeStyle);
+    }
     ctx.fillStyle = fillStyle;
     ctx.fillText(text, beginPoint.X, beginPoint.Y);
   }
@@ -92,7 +117,6 @@ class LJCGraphics
   // BeginPath()
   // ClosePath()
   // MoveTo(point)
-  // Square(value)
 
   // Performs the Ctx.beginPath() method.
   BeginPath()
@@ -112,19 +136,13 @@ class LJCGraphics
     this.Context.moveTo(point.X, point.Y);
   }
 
-  // Squares a value.
-  Square(value)
-  {
-    let retValue = Math.pow(value, 2);
-    return retValue;
-  }
-
   // Get Radius and Rotation Methods
   // ---------------
   // CrossProduct(point1, point2)
   // GetPointRadius(point)
   // GetRadius(adjacent, opposite)
   // GetRotation(adjacent, opposite)
+  // Square(value)
 
   // Get the cross product of two vectors.
   CrossProduct(point1, point2)
@@ -195,6 +213,13 @@ class LJCGraphics
       retRotation = Math.PI * 2 - retRotation;
     }
     return retRotation;
+  }
+
+  // Squares a value.
+  Square(value)
+  {
+    let retValue = Math.pow(value, 2);
+    return retValue;
   }
 
   // Fill and Stroke Methods

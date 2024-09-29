@@ -30,14 +30,17 @@ class LJCScene
 
     let base = cube.CreateFace("Base", radius
       , 4);
+    base.StrokeStyle = "cyan";
 
     let square = base.Clone();
     square.Name = "Front";
+    square.FillStyle = "Red";
     square.Move(0, 0, square.PathRadius);
     cube.Paths.push(square);
 
     square = base.Clone();
     square.Name = "Back";
+    square.FillStyle = "green";
     // Rotate clockwise.
     square.AddRotateXZ(square.Arc * 2);
     square.Move(0, 0, -square.PathRadius);
@@ -45,6 +48,7 @@ class LJCScene
 
     square = base.Clone();
     square.Name = "Left";
+    square.FillStyle = "steelblue";
     // Rotate clockwise.
     square.AddRotateXZ(square.Arc);
     square.Move(-square.PathRadius, 0, 0);
@@ -52,6 +56,7 @@ class LJCScene
 
     square = base.Clone();
     square.Name = "Right";
+    square.FillStyle = "yellow";
     // Rotate counter.
     square.AddRotateXZ(-square.Arc);
     square.Move(square.PathRadius, 0, 0);
@@ -59,16 +64,16 @@ class LJCScene
 
     square = base.Clone();
     square.Name = "Top";
+    square.FillStyle = "lightsteelblue";
     // Rotate clockwise.
-    // *** Next Statement *** Change
     square.AddRotateZY(square.Arc);
     square.Move(0, -square.PathRadius, 0);
     cube.Paths.push(square);
 
     square = base.Clone();
     square.Name = "Bottom";
+    square.FillStyle = "lightgreen";
     // Rotate counter.
-    // *** Next Statement *** Change
     square.AddRotateZY(-square.Arc);
     square.Move(0, square.PathRadius, 0);
     cube.Paths.push(square);

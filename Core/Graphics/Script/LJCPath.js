@@ -14,7 +14,7 @@ class LJCPath
     this.Name = name;
     this.Arc = 0;
     this.BeginPoint = beginPoint;
-    this.CloseType = "Close";
+    this.DoClose = "true";
     this.FillStyle = "";
     this.Normal = new LJCPoint();
     this.PathPoints = [];
@@ -35,7 +35,7 @@ class LJCPath
     let beginPoint = this.BeginPoint.Clone();
     let retPath = new LJCPath(this.Name, beginPoint);
     retPath.Arc = this.Arc;
-    retPath.CloseType = this.CloseType;
+    retPath.DoClose = this.DoClose;
     retPath.FillStyle = this.FillStyle;
     retPath.Normal = this.Normal.Clone();
     for (let pathPoint of this.PathPoints)
@@ -44,33 +44,21 @@ class LJCPath
     }
     retPath.PathRadius = this.PathRadius;
     retPath.ScreenNormal = this.ScreenNormal;
-    retPath.SrokeStyle = this.StrokeStyle;
+    retPath.StrokeStyle = this.StrokeStyle;
     return retPath;
   }
 
   // Class Methods
   // ---------------
-  // Move(x, y, z)
   // AddRotateXY(addRadians);
   // AddRotateXZ(addRadians);
   // AddRotateZY(addRadians);
+  // Move(x, y, z)
   // RotateXY(radians);
   // RotateXZ(radians);
   // RotateZY(radians);
   // Show()
   // Translate()
-
-  // Moves the path.
-  Move(x, y, z)
-  {
-    this.BeginPoint.Move(x, y, z);
-    this.Normal.Move(x, y, z);
-    for (let pathPoint of this.PathPoints)
-    {
-      pathPoint.Move(x, y, z);
-    }
-    this.Translate();
-  }
 
   // Add rotation on the XY plane.
   AddRotateXY(addRadians)
@@ -104,6 +92,18 @@ class LJCPath
     for (let pathPoint of this.PathPoints)
     {
       pathPoint.AddRotateZY(addRadians);
+    }
+    this.Translate();
+  }
+
+  // Moves the path.
+  Move(x, y, z)
+  {
+    this.BeginPoint.Move(x, y, z);
+    this.Normal.Move(x, y, z);
+    for (let pathPoint of this.PathPoints)
+    {
+      pathPoint.Move(x, y, z);
     }
     this.Translate();
   }
@@ -163,7 +163,8 @@ class LJCPath
 
           case "line":
             let screenPoint = pathPoint.getScreenPoint();
-            g.NextLine(screenPoint, pathPoint.StrokeStyle);
+            //g.NextLine(screenPoint, pathPoint.StrokeStyle);
+            g.NextLine(screenPoint);
             break;
 
           case "rectangle":
@@ -171,18 +172,20 @@ class LJCPath
         }
       }
 
-      switch (this.CloseType.toLowerCase())
+      g.Context.strokeStyle = this.StrokeStyle;
+      if (this.DoClose)
       {
-        case "close":
-          g.ClosePath();
-          break;
-        case "fill":
-          // *** Add ***
-          g.Context.fillStyle = this.FillStyle;
-          g.Context.fill();
-          break;
+        g.ClosePath();
       }
-      g.Stroke();
+      else
+      {
+        g.Stroke();
+      }
+      if (LJC.HasValue(this.FillStyle))
+      {
+        g.Context.fillStyle = this.FillStyle;
+        g.Context.fill();
+      }
     }
   }
 
