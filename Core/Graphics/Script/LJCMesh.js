@@ -123,6 +123,13 @@ class LJCMesh
 
     this.PrevRect = mesh.GetRectangle();
     mesh.Show();
+
+    setTimeout(this.DoAnimation.bind(this), 35);  // 30
+    //requestAnimationFrame(this.Animate.bind(this));
+  }
+
+  DoAnimation()
+  {
     requestAnimationFrame(this.Animate.bind(this));
   }
 
@@ -298,8 +305,59 @@ class LJCMesh
   // Shows the object.
   Show()
   {
+    let g = gLJCGraphics;
+
     for (let path of this.Paths)
     {
+      let normal = path.Normal;
+      let rotation = g.GetRotation(normal.X, normal.Z);
+      let angle = rotation / g.Radian;
+
+      if (angle > 0
+        && angle < 30)
+      {
+        path.FillStyle = gShades[0].GetStyle();
+      }
+      if (angle >= 30
+        && angle < 60)
+      {
+        path.FillStyle = gShades[1].GetStyle();
+      }
+      if (angle >= 60
+        && angle < 85)
+      {
+        path.FillStyle = gShades[2].GetStyle();
+      }
+      if (angle >= 85
+        && angle < 110)
+      {
+        path.FillStyle = gShades[3].GetStyle();
+      }
+      if (angle >= 110
+        && angle < 120)
+      {
+        path.FillStyle = gShades[4].GetStyle();
+      }
+      if (angle >= 120
+        && angle < 130)
+      {
+        path.FillStyle = gShades[5].GetStyle();
+      }
+      if (angle >= 130
+        && angle < 140)
+      {
+        path.FillStyle = gShades[6].GetStyle();
+      }
+      if (angle >= 140
+        && angle < 180)
+      {
+        path.FillStyle = gShades[7].GetStyle();
+      }
+      if ("Front" == path.Name)
+      {
+        path.FillStyle = gShades[2].GetStyle();
+      }
+
       path.Show();
     }
   }

@@ -34,7 +34,7 @@ class LJCScene
 
     let square = base.Clone();
     square.Name = "Front";
-    square.FillStyle = "Red";
+    square.FillStyle = "red";
     square.Move(0, 0, square.PathRadius);
     cube.Paths.push(square);
 

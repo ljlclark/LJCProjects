@@ -26,13 +26,22 @@ class LJCGraphics
   // Text(text, beginPoint, font = "10px san-serif", fillStyle = "")
 
   // Draw an arc from the beginRadians to the endRdians.
-  Arc(centerPoint, radius, endRadians, beginRadians = 0
-      , fillStyle = "", strokeStyle = "")
+  Arc(centerPoint, radius, endRadians = Math.PI * 2
+    , beginRadians = 0, fillStyle = "", strokeStyle = "")
   {
     let ctx = this.Context;
 
-    ctx.beginPath();
-    ctx.arc(centerPoint.X, centerPoint.Y, radius, beginRadians, endRadians);
+    if (null == endRadians)
+    {
+      endRadians = Math.PI * 2;
+    }
+    if (null == beginRadians)
+    {
+      beginRadians = 0;
+    }
+
+    ctx.arc(centerPoint.X, centerPoint.Y, radius
+      , beginRadians, endRadians);
     if (LJC.HasValue(fillStyle))
     {
       this.Fill(fillStyle);
@@ -57,7 +66,6 @@ class LJCGraphics
   }
 
   // Draw a line from the previous end point to the provided endPoint.
-  //NextLine(endPoint, strokeStyle = "")
   NextLine(endPoint, strokeStyle = "")
   {
     let ctx = this.Context;
@@ -78,17 +86,18 @@ class LJCGraphics
   }
 
   // Draw a rectangle.
-  //Rectangle(beginPoint, width, height, fillStyle = "")
   Rectangle(beginPoint, width, height, fillStyle = ""
     , strokeStyle = "")
   {
     let ctx = this.Context;
 
-    //ctx.beginPath();  // ?
     ctx.rect(beginPoint.X, beginPoint.Y, width, height);
     if (LJC.HasValue(fillStyle))
     {
-      this.Fill(fillStyle);
+      //this.Fill(fillStyle);
+      ctx.fillStyle = fillStyle;
+      ctx.fillRect(beginPoint.X, beginPoint.Y, width
+        , height)
     }
     if (LJC.HasValue(strokeStyle))
     {
@@ -97,13 +106,18 @@ class LJCGraphics
   }
 
   // Draw text.
-  Text(text, beginPoint, font = "10px san-serif"
-    , fillStyle = "", strokeStyle= "")
+  Text(text, beginPoint, font = "12px san-serif"
+    , fillStyle = "", strokeStyle = "")
   {
     let ctx = this.Context;
+
+    if (null == font)
+    {
+      font = "12px san-serif";
+    }
+    ctx.font = font;
     fillStyle = this.#GetFillStyle(fillStyle);
 
-    ctx.font = font;
     if (LJC.HasValue(strokeStyle))
     {
       this.Stroke(strokeStyle);
@@ -230,15 +244,19 @@ class LJCGraphics
   // Show the fill path.
   Fill(fillStyle = "")
   {
-    fillStyle = this.#GetFillStyle(fillStyle);
-    this.Context.fill();
+    let ctx = this.Context;
+
+    ctx.fillStyle = this.#GetFillStyle(fillStyle);
+    ctx.fill();
   }
 
   // Show the line path.
   Stroke(strokeStyle = "")
   {
-    strokeStyle = this.#GetStrokeStyle(strokeStyle);
-    this.Context.stroke();
+    let ctx = this.Context;
+
+    ctx.strokeStyle = this.#GetStrokeStyle(strokeStyle);
+    ctx.stroke();
   }
 
   // Gets the default style color.

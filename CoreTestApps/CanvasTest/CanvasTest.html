@@ -11,6 +11,7 @@
   <script src="../../Core/Graphics/Script/LJCPathPoint.js"></script>
   <script src="../../Core/Graphics/Script/LJCPoint.js"></script>
   <script src="../../Core/Graphics/Script/LJCGraphics.js"></script>
+  <script src="../../Core/Graphics/Script/LJCColors.js"></script>
   <style>
     .canvas {
       border: 1px solid white;
@@ -20,16 +21,33 @@
 </head>
 <body>
   <canvas id="canvas" class="canvas" height="250" width="500"></canvas>
+
   <script>
     let gLJCGraphics = new LJCGraphics(canvas);
-    gLJCGraphics.FillStyle = "cyan";
-    gLJCGraphics.StrokeStyle = "cyan";
+    let g = gLJCGraphics;
+
+
+    let color = new LJCColor(0xffff00);
+    let gShades = color.GetShades(0xffff00, 0x111100
+      , 8, true, true, false);
+
+    let y = 0;
+    for (let shade of gShades)
+    {
+      y += 10;
+      let point = new LJCPoint(0, y);
+      let fillStyle = shade.GetStyle();
+      g.Rectangle(point, 20, 10, fillStyle);
+    }
+
+    g.FillStyle = "cyan";
+    g.StrokeStyle = "cyan";
 
     let gScene = new LJCScene("Cube");
     gScene.AddCube(30);
     gScene.Show();
 
-    let rotateXY = 5 * gLJCGraphics.Radian;
+    let rotateXY = 5 * g.Radian;
     let cube = gScene.Meshes[0];
     //cube.AddRotateXY(rotateXY);
     //gScene.Show();
