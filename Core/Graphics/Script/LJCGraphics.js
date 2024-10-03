@@ -94,7 +94,6 @@ class LJCGraphics
     ctx.rect(beginPoint.X, beginPoint.Y, width, height);
     if (LJC.HasValue(fillStyle))
     {
-      //this.Fill(fillStyle);
       ctx.fillStyle = fillStyle;
       ctx.fillRect(beginPoint.X, beginPoint.Y, width
         , height)
@@ -166,6 +165,8 @@ class LJCGraphics
     let retResult = new LJCPoint();
 
     retResult.X = a.Y * b.Z - a.Z * b.Y;
+    // switch first and second multiplication to
+    // equal // negative.
     retResult.Y = a.Z * b.X - a.X * b.Z;
     retResult.Z = a.X * b.Y - a.Y * b.X;
     return retResult;
@@ -197,8 +198,8 @@ class LJCGraphics
   // Get the radians of an angle with sides.
   GetRotation(adjacent, opposite)
   {
-    let retRotation = 0.0;
     let radian = gLJCGraphics.Radian;
+    let retRotation = 0.0;
 
     retRotation = Math.atan2(opposite, adjacent);
     if (retRotation < 0)

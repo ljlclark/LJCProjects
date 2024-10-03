@@ -33,6 +33,7 @@ class LJCColor
   // ---------------
   // Clone();
 
+  // Creates a Clone of this object.
   Clone()
   {
     let retColor = new LJCColor();

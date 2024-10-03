@@ -163,7 +163,6 @@ class LJCPath
 
           case "line":
             let screenPoint = pathPoint.getScreenPoint();
-            //g.NextLine(screenPoint, pathPoint.StrokeStyle);
             g.NextLine(screenPoint);
             break;
 
