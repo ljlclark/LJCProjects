@@ -12,13 +12,6 @@ class LJCMesh
   {
     let g = gLJCGraphics;
 
-    // Animate values.
-    this.AddXY = 0;
-    this.AddXZ = 0;
-    this.AddZY = 0;
-    this.MoveValue = 0;
-    this.PrevRect;
-
     this.CloseType = "None";
     this.Name = name;
     this.Paths = [];
@@ -33,13 +26,6 @@ class LJCMesh
   {
     let retMesh = new LJCMesh(this.Name);
 
-    // Animate values.
-    retMesh.AddXY = this.AddXY;
-    retMesh.AddXZ = this.AddXZ;
-    retMesh.AddZY = this.AddZY;
-    retMesh.MoveValue = this.MoveValue;
-    retMesh.PrevRect = this.PrevRect;
-
     retMesh.CloseType = this.CloseType;
     for (let path of this.Paths)
     {
@@ -50,7 +36,6 @@ class LJCMesh
 
   // Class Methods
   // ---------------
-  // Animate()
   // CreateFace(name, beginPoint, radius, verticeCount)
   // AddMove(x, y, z)
   // AddRotateXY(addRadians)
@@ -63,75 +48,6 @@ class LJCMesh
   // RotateZY(radians)
   // Show()
   // Translate()
-
-  // Test Animation
-  Animate()
-  {
-    let g = gLJCGraphics;
-    let ctx = g.Context;
-
-    if (this.PrevRect != null)
-    {
-      let rect = this.PrevRect;
-      let x = 1;
-      let y = 1;
-      let width = 2 + x;
-      let height = 2 + y;
-      ctx.clearRect(rect.Left - x, rect.Top - y
-        , rect.Width + width, rect.Height + height);
-    }
-
-    // Testing
-    let rotate = "XY";
-    rotate = "XYTip";
-    //rotate = "XZ";
-    //rotate = "ZY";
-    let mesh = null;
-    switch (rotate)
-    {
-      case "XY":
-        // Rotate clockwise
-        this.AddRotateXY(this.AddXY);
-        mesh = this.Clone();
-        break;
-
-      case "XYTip":
-        // Main Rotation accumulates.
-        // Rotate clockwise
-        this.AddRotateXY(this.AddXY);
-
-        // Tip Angle is one time.
-        mesh = this.Clone();
-        // Rotate counter
-        mesh.AddRotateZY(-55 * g.Radian);
-        // Rotate clockwise
-        mesh.AddRotateXZ(-5 * g.Radian);
-        break;
-
-      case "XZ":
-        // Rotate clockwise
-        this.AddRotateXZ(this.AddXY);
-        mesh = this.Clone();
-        break;
-
-      case "ZY":
-        // Rotate counter
-        this.AddRotateZY(this.AddXY);
-        mesh = this.Clone();
-        break;
-    }
-
-    this.PrevRect = mesh.GetRectangle();
-    mesh.Show();
-
-    setTimeout(this.DoAnimation.bind(this), 35);  // 30
-    //requestAnimationFrame(this.Animate.bind(this));
-  }
-
-  DoAnimation()
-  {
-    requestAnimationFrame(this.Animate.bind(this));
-  }
 
   // Creates a Polygon path.
   CreateFace(name, radius, verticeCount)
@@ -305,58 +221,58 @@ class LJCMesh
   // Shows the object.
   Show()
   {
-    let g = gLJCGraphics;
+    //let g = gLJCGraphics;
 
     for (let path of this.Paths)
     {
-      let normal = path.Normal;
-      let rotation = g.GetRotation(normal.X, normal.Z);
-      let angle = rotation / g.Radian;
+      //let normal = path.Normal;
+      //let rotation = g.GetRotation(normal.X, normal.Z);
+      //let angle = rotation / g.Radian;
 
-      if (angle > 0
-        && angle < 30)
-      {
-        path.FillStyle = gShades[0].GetStyle();
-      }
-      if (angle >= 30
-        && angle < 60)
-      {
-        path.FillStyle = gShades[1].GetStyle();
-      }
-      if (angle >= 60
-        && angle < 85)
-      {
-        path.FillStyle = gShades[2].GetStyle();
-      }
-      if (angle >= 85
-        && angle < 110)
-      {
-        path.FillStyle = gShades[3].GetStyle();
-      }
-      if (angle >= 110
-        && angle < 120)
-      {
-        path.FillStyle = gShades[4].GetStyle();
-      }
-      if (angle >= 120
-        && angle < 130)
-      {
-        path.FillStyle = gShades[5].GetStyle();
-      }
-      if (angle >= 130
-        && angle < 140)
-      {
-        path.FillStyle = gShades[6].GetStyle();
-      }
-      if (angle >= 140
-        && angle < 180)
-      {
-        path.FillStyle = gShades[7].GetStyle();
-      }
-      if ("Front" == path.Name)
-      {
-        path.FillStyle = gShades[2].GetStyle();
-      }
+      //if (angle > 0
+      //  && angle < 40)
+      //{
+      //  path.FillStyle = gShades[0].GetStyle();
+      //}
+      //if (angle >= 40
+      //  && angle < 70)
+      //{
+      //  path.FillStyle = gShades[1].GetStyle();
+      //}
+      //if (angle >= 70
+      //  && angle < 100)
+      //{
+      //  path.FillStyle = gShades[2].GetStyle();
+      //}
+      //if (angle >= 100
+      //  && angle < 125)
+      //{
+      //  path.FillStyle = gShades[3].GetStyle();
+      //}
+      //if (angle >= 125
+      //  && angle < 145)
+      //{
+      //  path.FillStyle = gShades[4].GetStyle();
+      //}
+      //if (angle >= 145
+      //  && angle < 155)
+      //{
+      //  path.FillStyle = gShades[5].GetStyle();
+      //}
+      //if (angle >= 155
+      //  && angle < 165)
+      //{
+      //  path.FillStyle = gShades[6].GetStyle();
+      //}
+      //if (angle >= 165
+      //  && angle < 180)
+      //{
+      //  path.FillStyle = gShades[7].GetStyle();
+      //}
+      //if ("Front" == path.Name)
+      //{
+      //  path.FillStyle = gShades[2].GetStyle();
+      //}
 
       path.Show();
     }

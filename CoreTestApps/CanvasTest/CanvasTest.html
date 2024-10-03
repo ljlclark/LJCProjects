@@ -12,6 +12,8 @@
   <script src="../../Core/Graphics/Script/LJCPoint.js"></script>
   <script src="../../Core/Graphics/Script/LJCGraphics.js"></script>
   <script src="../../Core/Graphics/Script/LJCColor.js"></script>
+
+  <script src="../../CoreTestApps/CanvasTest/AnimatedCube.js"></script>
   <style>
     .canvas {
       border: 1px solid white;
@@ -26,11 +28,12 @@
     let gLJCGraphics = new LJCGraphics(canvas);
     let g = gLJCGraphics;
 
-
+    // Get shades.
     let color = new LJCColor(0xffff00);
     let gShades = color.GetShades(0xffff00, 0x111100
       , 8, true, true, false);
 
+    // Show shades.
     let y = 0;
     for (let shade of gShades)
     {
@@ -40,19 +43,22 @@
       g.Rectangle(point, 20, 10, fillStyle);
     }
 
+    // Default styles.
     g.FillStyle = "cyan";
     g.StrokeStyle = "cyan";
 
     let gScene = new LJCScene("Cube");
     gScene.AddCube(30);
-    gScene.Show();
+    //gScene.Show();
 
-    let rotateXY = 5 * g.Radian;
+    let rotateXY = 2.12 * g.Radian;
     let cube = gScene.Meshes[0];
     //cube.AddRotateXY(rotateXY);
     //gScene.Show();
-    cube.AddXY = rotateXY;
-    cube.Animate();
+
+    let animatedCube = new AnimatedCube(cube);
+    animatedCube.AddXY = rotateXY;
+    animatedCube.Animate();
   </script>
 </body>
 </html>
