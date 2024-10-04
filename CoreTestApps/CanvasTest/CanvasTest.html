@@ -22,11 +22,20 @@
   </style>
 </head>
 <body>
+  <input type="radio" id="XY" " name="XY">XY
+  <input type="radio" id="XYTip" " name="XYTip">XYTip
+  <input type="radio" id="XZ" name="XZ">XZ
+  <input type="radio" id="ZY" name="ZY">ZY
+  <br />
   <canvas id="canvas" class="canvas" height="250" width="500"></canvas>
 
   <script>
     let gLJCGraphics = new LJCGraphics(canvas);
     let g = gLJCGraphics;
+
+    // Default styles.
+    g.FillStyle = "cyan";
+    g.StrokeStyle = "cyan";
 
     // Get shades.
     let color = new LJCColor(0xffff00);
@@ -43,22 +52,83 @@
       g.Rectangle(point, 20, 10, fillStyle);
     }
 
-    // Default styles.
-    g.FillStyle = "cyan";
-    g.StrokeStyle = "cyan";
+    let gScene = null;
+    let gAnimatedCube = null;
 
-    let gScene = new LJCScene("Cube");
-    gScene.AddCube(30);
-    //gScene.Show();
+    // Handle options click.
+    function OptionClick(target)
+    {
+      if (gAnimatedCube != null)
+      {
+        gAnimatedCube.Stop = true;
+      }
 
-    let rotateXY = 2.12 * g.Radian;
-    let cube = gScene.Meshes[0];
-    //cube.AddRotateXY(rotateXY);
-    //gScene.Show();
+      let rectangle = null;
+      if (gScene != null)
+      {
+        let cube = gScene.Meshes[0];
+        rectangle = gAnimatedCube.MaxRectangle;
+      }
 
-    let animatedCube = new AnimatedCube(cube);
-    animatedCube.AddXY = rotateXY;
-    animatedCube.Animate();
+      let rotateXY = 2.12 * g.Radian;
+      switch (target.id)
+      {
+        case "XY":
+          XYTip.checked = false;
+          XZ.checked = false;
+          ZY.checked = false;
+          gAnimatedCube = AnimatedCube.Create(gAnimatedCube);
+          gAnimatedCube.AddXY = rotateXY;
+          gAnimatedCube.RotateType = "XY";
+          break;
+
+        case "XYTip":
+          XY.checked = false;
+          XZ.checked = false;
+          ZY.checked = false;
+          gAnimatedCube = AnimatedCube.Create(gAnimatedCube);
+          gAnimatedCube.AddXY = rotateXY;
+          gAnimatedCube.RotateType = "XYTip";
+          break;
+
+        case "XZ":
+          XY.checked = false;
+          XYTip.checked = false;
+          ZY.checked = false;
+          gAnimatedCube = AnimatedCube.Create(gAnimatedCube);
+          gAnimatedCube.AddXY = rotateXY;
+          gAnimatedCube.RotateType = "XZ";
+          break;
+
+        case "ZY":
+          XY.checked = false;
+          XYTip.checked = false;
+          XZ.checked = false;
+          gAnimatedCube = AnimatedCube.Create(gAnimatedCube);
+          gAnimatedCube.AddXY = rotateXY;
+          gAnimatedCube.RotateType = "ZY";
+          break;
+      }
+      gAnimatedCube.FirstRectangle = rectangle;
+      gAnimatedCube.Animate();
+    }
+
+    // Radio Click event handler.
+    function RadioClick(event)
+    {
+      if (LJC.HasValue(event.target.id))
+      {
+        OptionClick(event.target);
+      }
+    }
+
+    XY.addEventListener("click", RadioClick);
+    XYTip.addEventListener("click", RadioClick);
+    XZ.addEventListener("click", RadioClick);
+    ZY.addEventListener("click", RadioClick);
+
+    XYTip.checked = true;
+    OptionClick(XYTip);
   </script>
 </body>
 </html>
