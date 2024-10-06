@@ -22,7 +22,6 @@ class LJCColor
     this.VaryBlue = 0;
     this.VaryGreen = 0;
     this.VaryRed = 0;
-    this.VaryRange = 0;
     this.VaryValue = 0;
   }
 
@@ -48,7 +47,6 @@ class LJCColor
     retColor.VaryBlue = this.VaryBlue;
     retColor.VaryGreen = this.VaryGreen;
     retColor.VaryRed = this.VaryRed;
-    retColor.VaryRange = this.VaryRange;
     retColor.VaryValue = this.VaryValue;
     return retColor;
   }
@@ -133,7 +131,7 @@ class LJCColor
     let retShadeColor = shadeColor;
 
     if (isVary
-      && factor < 180)
+      && factor < 360)
     {
       let vary = this.VaryValue * factor;
       if (vary > 0
@@ -215,7 +213,7 @@ class LJCColor
   }
 
   // Sets the available vary range;
-  SetVaryRange(beginValue, endValue, varyRed, varyGreen
+  SetVaryValue(beginValue, endValue, varyRed, varyGreen
     , varyBlue)
   {
     this.VaryRed = varyRed;
@@ -248,8 +246,7 @@ class LJCColor
         varyRange = blueDiff;
       }
     }
-    this.VaryRange = varyRange;
-    this.VaryValue = varyRange / 180;
+    this.VaryValue = varyRange / 360;
   }
 
   // Convert style, hex or decimal to Hex.

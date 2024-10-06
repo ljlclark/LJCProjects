@@ -194,18 +194,8 @@ class AnimatedCube
       {
         let rotation = g.GetRotation(normal.X
           , normal.Z);
-
-        // Testing
-        let xy = 0;
-        if (normal.X > 0)
-        {
-          xy = g.GetRotation(normal.X
-            , Math.abs(normal.Y));
-        }
-        if (rotation - xy > 0)
-        {
-          //rotation = rotation - xy;
-        }
+        rotation += g.GetRotation(normal.X
+          , Math.abs(normal.Y));
 
         let angle = rotation / g.Radian;
         path.FillStyle = this.#BaseColor.GetShadeStyle(angle);
@@ -228,7 +218,7 @@ class AnimatedCube
     , varyGreen, varyBlue)
   {
     this.#BaseColor = new LJCColor(beginColorValue);
-    this.#BaseColor.SetVaryRange(beginColorValue, endColorValue
+    this.#BaseColor.SetVaryValue(beginColorValue, endColorValue
       , varyRed, varyGreen, varyBlue);
   }
 }
