@@ -6,6 +6,8 @@
 // ***************
 class AnimatedCube
 {
+  #BaseColor;
+
   // Create AnimatedCube object.
   static Create(animatedCube)
   {
@@ -20,8 +22,10 @@ class AnimatedCube
     return retAnimatedCube;
   }
 
+  // The Constructor methods.
+  // ---------------
+
   // The Constructor method.
-  //constructor(name)
   constructor(cube)
   {
     let g = gLJCGraphics;
@@ -32,6 +36,8 @@ class AnimatedCube
     this.AddXY = 0;
     this.AddXZ = 0;
     this.AddZY = 0;
+    this.setBaseColor(0xffff00, 0x111100, true, true
+      , false);
     this.FirstRectangle;
     this.MaxRectangle;
     this.MoveValue = 0;
@@ -181,59 +187,48 @@ class AnimatedCube
   {
     let g = gLJCGraphics;
 
-    //for (let path of this.Paths)
     for (let path of cube.Paths)
     {
       let normal = path.Normal;
-      let rotation = g.GetRotation(normal.X, normal.Z);
-      let angle = rotation / g.Radian;
+      if (normal.Z > 0)
+      {
+        let rotation = g.GetRotation(normal.X
+          , normal.Z);
 
-      if (angle > 0
-        && angle < 40)
-      {
-        path.FillStyle = gShades[0].GetStyle();
-      }
-      if (angle >= 40
-        && angle < 70)
-      {
-        path.FillStyle = gShades[1].GetStyle();
-      }
-      if (angle >= 70
-        && angle < 100)
-      {
-        path.FillStyle = gShades[2].GetStyle();
-      }
-      if (angle >= 100
-        && angle < 125)
-      {
-        path.FillStyle = gShades[3].GetStyle();
-      }
-      if (angle >= 125
-        && angle < 145)
-      {
-        path.FillStyle = gShades[4].GetStyle();
-      }
-      if (angle >= 145
-        && angle < 155)
-      {
-        path.FillStyle = gShades[5].GetStyle();
-      }
-      if (angle >= 155
-        && angle < 165)
-      {
-        path.FillStyle = gShades[6].GetStyle();
-      }
-      if (angle >= 165
-        && angle < 180)
-      {
-        path.FillStyle = gShades[7].GetStyle();
-      }
-      if ("Front" == path.Name)
-      {
-        path.FillStyle = gShades[2].GetStyle();
-      }
+        // Testing
+        let xy = 0;
+        if (normal.X > 0)
+        {
+          xy = g.GetRotation(normal.X
+            , Math.abs(normal.Y));
+        }
+        if (rotation - xy > 0)
+        {
+          //rotation = rotation - xy;
+        }
 
+        let angle = rotation / g.Radian;
+        path.FillStyle = this.#BaseColor.GetShadeStyle(angle);
+      }
       path.Show();
     }
+  }
+
+  // Getters and Setters
+  // ---------------
+
+  // Gets the BaseColor object.
+  getBaseColor()
+  {
+    return this.#BaseColor;
+  }
+
+  // Sets the BaseColor object.
+  setBaseColor(beginColorValue, endColorValue, varyRed
+    , varyGreen, varyBlue)
+  {
+    this.#BaseColor = new LJCColor(beginColorValue);
+    this.#BaseColor.SetVaryRange(beginColorValue, endColorValue
+      , varyRed, varyGreen, varyBlue);
   }
 }

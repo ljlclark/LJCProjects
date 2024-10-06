@@ -23,6 +23,7 @@ class LJCColor
     this.VaryGreen = 0;
     this.VaryRed = 0;
     this.VaryRange = 0;
+    this.VaryValue = 0;
   }
 
   // Sets the color decimal values.
@@ -48,6 +49,7 @@ class LJCColor
     retColor.VaryGreen = this.VaryGreen;
     retColor.VaryRed = this.VaryRed;
     retColor.VaryRange = this.VaryRange;
+    retColor.VaryValue = this.VaryValue;
     return retColor;
   }
 
@@ -99,113 +101,13 @@ class LJCColor
     return retStyle;
   }
 
-  // Vary the shade value.
-  GetShade(shadeColor, vary)
-  {
-    let retShadeColor = shadeColor;
-
-    if (vary > 0
-      && shadeColor < 255 + vary)
-    {
-      retShadeColor += vary;
-    }
-    if (vary < 0
-      && shadeColor > 0 - vary)
-    {
-      retShadeColor += vary;
-    }
-    return retShadeColor;
-  }
-
-  // Gets the shade style.
-  GetShadeStyle(factor)
-  {
-    let red = this.GetShade(this.#Red
-      , this.VaryRed * factor);
-    let green = this.GetShade(this.#Green
-      , this.VaryGreen);
-    let blue = this.GetShade(this.#Blue
-      , this.VaryBlue * factor);
-    let retStyle = GetColorsStyle(red, green, blue);
-    return retStyle;
-  }
-
-  // Sets the available vary range;
-  SetVaryRange(beginValue, endValue, varyRed, varyGreen
-      , varyBlue)
-  {
-    this.VaryRed = varyRed;
-    this.VaryGreen = varyGreen;
-    this.VaryBlue = varyBlue;
-
-    let beginColor = this.CreateColor(beginValue);
-    let endColor = this.CreateColor(endValue);
-
-    let blueDiff = beginColor.getBlue() - endColor.getBlue();
-    let greenDiff = beginColor.getGreen() - endColor.getGreen();
-    let redDiff = beginColor.getRed() - endColor.getRed();
-
-    let varyRange = 255;
-    if (varyRed)
-    {
-      varyRange = redDiff;
-    }
-    if (varyGreen)
-    {
-      if (greenDiff < varyRange)
-      {
-        varyRange = greenDiff;
-      }
-    }
-    if (varyBlue)
-    {
-      if (blueDiff < varyRange)
-      {
-        varyRange = blueDiff;
-      }
-    }
-    this.VaryRange = varyRange;
-  }
-
-  // Gets color shades.
-  GetShades(beginValue, endValue, count, varyRed
-    , varyGreen, varyBlue)
-  {
-    let retShades = [];
-
-    this.SetVaryRange(beginValue, endValue, varyRed
-      , varyGreen, varyBlue);
-    let varyValue = Math.round(this.VaryRange / count);
-
-    let beginColor = this.CreateColor(beginValue);
-    let shade = beginColor.Clone();
-    retShades.push(shade);
-    for (let index = 0; index < count - 1; index++)
-    {
-      shade = shade.Clone();
-      if (varyBlue)
-      {
-        shade.setBlue(shade.#Blue - varyValue);
-      }
-      if (varyGreen)
-      {
-        shade.setGreen(shade.#Green - varyValue);
-      }
-      if (varyRed)
-      {
-        shade.setRed(shade.#Red - varyValue);
-      }
-      retShades.push(shade);
-    }
-    return retShades;
-  }
-
   // Gets a style from the color values.
   GetColorsStyle(redValue, greenValue, blueValue)
   {
     let retStyle = "";
 
-    let red = redValue.toString(16);
+    let red = this.ValueToInt(redValue);
+    red = red.toString(16);
     if ("0" == red)
     {
       red = "00";
@@ -220,8 +122,42 @@ class LJCColor
     {
       blue = "00";
     }
-
     retStyle = `#${red}${green}${blue}`;
+    return retStyle;
+  }
+
+
+  // Vary the shade value.
+  GetShade(shadeColor, factor, isVary)
+  {
+    let retShadeColor = shadeColor;
+
+    if (isVary
+      && factor < 180)
+    {
+      let vary = this.VaryValue * factor;
+      if (vary > 0
+        && shadeColor > 0 + vary)
+      {
+        retShadeColor -= vary;
+      }
+      if (vary < 0
+        && shadeColor < 255 - vary)
+      {
+        retShadeColor -= vary;
+      }
+    }
+    retShadeColor = this.ValueToInt(retShadeColor);
+    return retShadeColor;
+  }
+
+  // Gets the shade style.
+  GetShadeStyle(factor)
+  {
+    let red = this.GetShade(this.#Red, factor, this.VaryRed);
+    let green = this.GetShade(this.#Green, factor, this.VaryGreen);
+    let blue = this.GetShade(this.#Blue, factor, this.VaryBlue);
+    let retStyle = this.GetColorsStyle(red, green, blue);
     return retStyle;
   }
 
@@ -276,6 +212,44 @@ class LJCColor
       retValue = parseInt(retValue);
     }
     return retValue;
+  }
+
+  // Sets the available vary range;
+  SetVaryRange(beginValue, endValue, varyRed, varyGreen
+    , varyBlue)
+  {
+    this.VaryRed = varyRed;
+    this.VaryGreen = varyGreen;
+    this.VaryBlue = varyBlue;
+
+    let beginColor = this.CreateColor(beginValue);
+    let endColor = this.CreateColor(endValue);
+
+    let blueDiff = beginColor.getBlue() - endColor.getBlue();
+    let greenDiff = beginColor.getGreen() - endColor.getGreen();
+    let redDiff = beginColor.getRed() - endColor.getRed();
+
+    let varyRange = 255;
+    if (varyRed)
+    {
+      varyRange = redDiff;
+    }
+    if (varyGreen)
+    {
+      if (greenDiff < varyRange)
+      {
+        varyRange = greenDiff;
+      }
+    }
+    if (varyBlue)
+    {
+      if (blueDiff < varyRange)
+      {
+        varyRange = blueDiff;
+      }
+    }
+    this.VaryRange = varyRange;
+    this.VaryValue = varyRange / 180;
   }
 
   // Convert style, hex or decimal to Hex.
