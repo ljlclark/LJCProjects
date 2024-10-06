@@ -11,6 +11,10 @@ class LJCColor
   #Red;
   #Value;
 
+  // Constructor methods.
+  // ---------------
+  // SetColors(colorValue)
+
   // The Constructor method.
   constructor(colorValue = 0)
   {
@@ -53,12 +57,17 @@ class LJCColor
 
   // Color Methods
   // ---------------
-  // GetShades(beginValue, endValue, count, varyRed
-  //   , varyGreen, varyBlue)
+  // CreateColor(colorValue)
+  // CreateStyle(colorValue)
+  // GetColorsStyle(redValue, greenValue, blueValue)
+  // GetShade(shadeColor, factor, isVary)
+  // GetShadeStyle(factor)
   // GetStyle()
   // ParseBlue(colorValue)
   // ParseGreen(colorValue)
   // ParseRed(colorValue)
+  // SetVaryValue(beginValue, endValue, varyRed, varyGreen
+  //   , varyBlue)
   // ValueToHex(colorValue)
   // ValueToInt(colorValue)
   // ValueToStyle(colorValue)
@@ -223,9 +232,9 @@ class LJCColor
     let beginColor = this.CreateColor(beginValue);
     let endColor = this.CreateColor(endValue);
 
-    let blueDiff = beginColor.getBlue() - endColor.getBlue();
-    let greenDiff = beginColor.getGreen() - endColor.getGreen();
     let redDiff = beginColor.getRed() - endColor.getRed();
+    let greenDiff = beginColor.getGreen() - endColor.getGreen();
+    let blueDiff = beginColor.getBlue() - endColor.getBlue();
 
     let varyRange = 255;
     if (varyRed)
