@@ -22,9 +22,6 @@ class AnimatedCube
     return retAnimatedCube;
   }
 
-  // The Constructor methods.
-  // ---------------
-
   // The Constructor method.
   constructor(cube)
   {
@@ -69,7 +66,15 @@ class AnimatedCube
     return retMesh;
   }
 
-  // Test Animation
+  // Animate Methods
+  // ---------------
+  // Animate()
+  // ClearRectangle(rectangle)
+  // DoAnimate()
+  // SetMaxRectangle()
+  // Show(cube)
+
+  // Animate the cube.
   Animate()
   {
     let g = gLJCGraphics;
@@ -122,7 +127,7 @@ class AnimatedCube
           break;
       }
 
-      this.PrevRectangle = cube.GetRectangle();
+      this.PrevRectangle = cube.Rectangle();
       this.SetMaxRectangle();
       this.Show(cube);
       //setTimeout(this.DoAnimate.bind(this), 5);
@@ -192,13 +197,13 @@ class AnimatedCube
       let normal = path.Normal;
       if (normal.Z > 0)
       {
-        let rotation = g.GetRotation(normal.X
-          , normal.Z);
-        rotation += g.GetRotation(normal.X
-          , Math.abs(normal.Y));
-
-        let angle = rotation / g.Radian;
-        path.FillStyle = this.#BaseColor.GetShadeStyle(angle);
+        let rotation = g.PointRotation(normal);
+        let lightPoint = new LJCPoint(10, 0, 10);
+        let lightRotation = g.PointRotation(lightPoint);;
+        let shadeRotation = Math.abs(rotation - lightRotation);
+        let shadeFactor = g.ToAngle(shadeRotation);
+        path.FillStyle
+          = this.#BaseColor.ShadeStyle(shadeFactor);
       }
       path.Show();
     }

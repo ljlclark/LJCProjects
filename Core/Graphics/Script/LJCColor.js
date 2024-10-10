@@ -59,10 +59,10 @@ class LJCColor
   // ---------------
   // CreateColor(colorValue)
   // CreateStyle(colorValue)
-  // GetColorsStyle(redValue, greenValue, blueValue)
-  // GetShade(shadeColor, factor, isVary)
-  // GetShadeStyle(factor)
-  // GetStyle()
+  // ColorsStyle(redValue, greenValue, blueValue)
+  // Shade(shadeColor, factor, isVary)
+  // ShadeStyle(factor)
+  // Style()
   // ParseBlue(colorValue)
   // ParseGreen(colorValue)
   // ParseRed(colorValue)
@@ -109,7 +109,7 @@ class LJCColor
   }
 
   // Gets a style from the color values.
-  GetColorsStyle(redValue, greenValue, blueValue)
+  ColorsStyle(redValue, greenValue, blueValue)
   {
     let retStyle = "";
 
@@ -135,12 +135,12 @@ class LJCColor
 
 
   // Vary the shade value.
-  GetShade(shadeColor, factor, isVary)
+  Shade(shadeColor, factor, isVary)
   {
     let retShadeColor = shadeColor;
 
     if (isVary
-      && factor < 360)
+      && factor < 180)
     {
       let vary = this.VaryValue * factor;
       if (vary > 0
@@ -159,19 +159,19 @@ class LJCColor
   }
 
   // Gets the shade style.
-  GetShadeStyle(factor)
+  ShadeStyle(factor)
   {
-    let red = this.GetShade(this.#Red, factor, this.VaryRed);
-    let green = this.GetShade(this.#Green, factor, this.VaryGreen);
-    let blue = this.GetShade(this.#Blue, factor, this.VaryBlue);
-    let retStyle = this.GetColorsStyle(red, green, blue);
+    let red = this.Shade(this.#Red, factor, this.VaryRed);
+    let green = this.Shade(this.#Green, factor, this.VaryGreen);
+    let blue = this.Shade(this.#Blue, factor, this.VaryBlue);
+    let retStyle = this.ColorsStyle(red, green, blue);
     return retStyle;
   }
 
   // Gets the current color as a style value.
-  GetStyle()
+  Style()
   {
-    let retStyle = this.GetColorsStyle(this.#Red, this.#Green
+    let retStyle = this.ColorsStyle(this.#Red, this.#Green
       , this.#Blue);
     return retStyle;
   }
@@ -255,7 +255,7 @@ class LJCColor
         varyRange = blueDiff;
       }
     }
-    this.VaryValue = varyRange / 360;
+    this.VaryValue = varyRange / 180;
   }
 
   // Convert style, hex or decimal to Hex.
@@ -325,7 +325,7 @@ class LJCColor
   setBlue(blueValue)
   {
     this.#Blue = this.ValueToInt(blueValue);
-    let style = this.GetStyle();
+    let style = this.Style();
     let value = this.ValueToInt(style);
     this.#Value = value;
   }
@@ -340,7 +340,7 @@ class LJCColor
   setGreen(greenValue)
   {
     this.#Green = this.ValueToInt(greenValue);
-    let style = this.GetStyle();
+    let style = this.Style();
     let value = this.ValueToInt(style);
     this.#Value = value;
   }
@@ -355,7 +355,7 @@ class LJCColor
   setRed(redValue)
   {
     this.#Red = this.ValueToInt(redValue);
-    let style = this.GetStyle();
+    let style = this.Style();
     let value = this.ValueToInt(style);
     this.#Value = value;
   }

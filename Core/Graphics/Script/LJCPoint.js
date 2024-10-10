@@ -45,7 +45,7 @@ class LJCPoint
   {
     let g = gLJCGraphics;
 
-    let rotation = g.GetRotation(this.X
+    let rotation = g.Rotation(this.X
       , this.Y);
     rotation += addRadians;
     this.RotateXY(rotation);
@@ -56,7 +56,7 @@ class LJCPoint
   {
     let g = gLJCGraphics;
 
-    let rotation = g.GetRotation(this.X
+    let rotation = g.Rotation(this.X
       , this.Z);
     rotation += addRadians;
     this.RotateXZ(rotation);
@@ -67,7 +67,7 @@ class LJCPoint
   {
     let g = gLJCGraphics;
 
-    let rotation = g.GetRotation(this.Z
+    let rotation = g.Rotation(this.Z
       , this.Y);
     rotation += addRadians;
     this.RotateZY(rotation);
@@ -164,16 +164,16 @@ class LJCPoint
     // cos(radians) = a/h
     // Multiply both sides by h.
     // a = h * cos(radians)
-    let radius = g.GetRadius(adjacent, opposite);
+    let radius = g.Radius(adjacent, opposite);
     retPoint.X = radius * Math.cos(rotation);
     retPoint.Y = radius * Math.sin(rotation);
-    retPoint.X = this.#GetValue(retPoint.X);
-    retPoint.Y = this.#GetValue(retPoint.Y);
+    retPoint.X = this.#Value(retPoint.X);
+    retPoint.Y = this.#Value(retPoint.Y);
     return retPoint;
   }
 
   // Gets small values as zero.
-  #GetValue(value)
+  #Value(value)
   {
     let retValue = value;
 

@@ -114,7 +114,7 @@ class CanvasTestEvent
         ZY.checked = false;
         break;
 
-      case "zx":
+      case "zy":
         XY.checked = false;
         XYTip.checked = false;
         XZ.checked = false;

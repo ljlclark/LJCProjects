@@ -41,7 +41,7 @@ class LJCMesh
   // AddRotateXY(addRadians)
   // AddRotateXZ(addRadians)
   // AddRotateZY(addRadians)
-  // GetRectangle()
+  // Rectangle()
   // Move(x, y, z)
   // RotateXY(radians)
   // RotateXZ(radians)
@@ -85,7 +85,7 @@ class LJCMesh
       let point1 = beginPoint;
       let point2 = retPath.PathPoints[0].getPoint();
       let point3 = retPath.PathPoints[1].getPoint();
-      let xProduct = this.GetCrossProduct(point1, point2, point3);
+      let xProduct = this.CrossProduct(point1, point2, point3);
     }
 
     retPath.Normal = new LJCPoint();
@@ -95,7 +95,7 @@ class LJCMesh
   }
 
   // Get the cross product of two vectors.
-  GetCrossProduct(point1, point2, point3)
+  CrossProduct(point1, point2, point3)
   {
     let g = gLJCGraphics;
     let retProduct = null;
@@ -158,7 +158,7 @@ class LJCMesh
   }
 
   // Gets the mesh area rectangle.
-  GetRectangle()
+  Rectangle()
   {
     let tPoint = gScene.TranslatePoint;
     let retRectangle = { Left: 0, Top: 0, Width: 0, Height: 0 };

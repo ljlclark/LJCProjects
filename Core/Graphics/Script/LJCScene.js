@@ -56,7 +56,7 @@ class LJCScene
 
     square = base.Clone();
     square.Name = "Right";
-    square.FillStyle = "yellow";
+    square.FillStyle = "lightblue";
     // Rotate counter.
     square.AddRotateXZ(-square.Arc);
     square.Move(square.PathRadius, 0, 0);
