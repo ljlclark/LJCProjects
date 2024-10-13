@@ -81,31 +81,44 @@ class LJCPoint
     this.Z += z;
   }
 
+  // Creates the point based on rotation and radius.
+  RotatedPoint(rotation, radius)
+  {
+    let retPoint = new LJCPoint();
+
+    retPoint.Radius = radius;
+    retPoint.X = radius * Math.cos(rotation);
+    retPoint.Y = radius * Math.sin(rotation);
+    retPoint.X = this.#Value(retPoint.X);
+    retPoint.Y = this.#Value(retPoint.Y);
+    return retPoint;
+  }
+
   // Rotate from beginning on the XY plane.
   RotateXY(rotation)
   {
-    let calcPoint = this.#CalcPoint(rotation
+    let point = this.#Rotate(rotation
       , this.X, this.Y);
-    this.X = calcPoint.X;
-    this.Y = calcPoint.Y;
+    this.X = point.X;
+    this.Y = point.Y;
   }
 
   // Rotate from beginning on the XZ plane.
   RotateXZ(rotation)
   {
-    let calcPoint = this.#CalcPoint(rotation
+    let point = this.#Rotate(rotation
       , this.X, this.Z);
-    this.X = calcPoint.X;
-    this.Z = calcPoint.Y;
+    this.X = point.X;
+    this.Z = point.Y;
   }
 
   // Rotate from beginning on the ZY plane.
   RotateZY(rotation)
   {
-    let calcPoint = this.#CalcPoint(rotation
-      , this.Z, this.Y);
-    this.Z = calcPoint.X;
-    this.Y = calcPoint.Y;
+    let point = this.#Rotate(rotation, this.Z
+      , this.Y);
+    this.Z = point.X;
+    this.Y = point.Y;
   }
 
   // 
@@ -155,20 +168,17 @@ class LJCPoint
     }
   }
 
-  // Calculate rotated point.
-  #CalcPoint(rotation, adjacent, opposite)
+  // Create rotated point.
+  #Rotate(rotation, adjacent, opposite)
   {
     let g = gLJCGraphics;
     let retPoint = new LJCPoint();
 
     // cos(radians) = a/h
-    // Multiply both sides by h.
+    // Multiply both sides by h and switch.
     // a = h * cos(radians)
     let radius = g.Radius(adjacent, opposite);
-    retPoint.X = radius * Math.cos(rotation);
-    retPoint.Y = radius * Math.sin(rotation);
-    retPoint.X = this.#Value(retPoint.X);
-    retPoint.Y = this.#Value(retPoint.Y);
+    retPoint = this.RotatedPoint(rotation, radius);
     return retPoint;
   }
 

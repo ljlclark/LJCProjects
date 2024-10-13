@@ -6,7 +6,7 @@
 class LJCScene
 {
   // The Constructor method.
-  constructor(name)
+  constructor(name = "Main")
   {
     this.Name = name;
     let canvas = gLJCGraphics.Canvas;

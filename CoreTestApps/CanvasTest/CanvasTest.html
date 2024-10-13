@@ -14,6 +14,7 @@
   <script src="../../Core/Graphics/Script/LJCColor.js"></script>
 
   <script src="../../CoreTestApps/CanvasTest/CanvasTestEvent.js"></script>
+  <script src="../../CoreTestApps/CanvasTest/CanvasTestTesting.js"></script>
   <script src="../../CoreTestApps/CanvasTest/AnimatedCube.js"></script>
   <style>
     .canvas {
@@ -23,35 +24,53 @@
   </style>
 </head>
 <body>
-  <input type="radio" id="XY" " name="XY">XY
-  <input type="radio" id="XYTip" " name="XYTip">XYTip
-  <input type="radio" id="XZ" name="XZ">XZ
-  <input type="radio" id="ZY" name="ZY">ZY
+  <!-- Animation -->
+  <input id="eXY" type="radio" name="XY">
+  <label id="eXYLabel" for="XY">XY</label>
+  <input id="eXYTip" type="radio" name="XYTip">
+  <label id="eXYTipLabel" for="XYTip">XYTip</label>
+  <input id="eXZ" type="radio" name="XZ">
+  <label id="eXZLabel" for="XZ">XZ</label>
+  <input id="eZY" type="radio" name="ZY">
+  <label id="eZYLabel" for="ZY">ZY</label>
   <br />
-  <canvas id="canvas" class="canvas" height="250" width="500"></canvas>
+
+  <canvas id="eCanvas" class="canvas" height="250" width="500"></canvas>
 
   <script>
-    let gLJCGraphics = new LJCGraphics(canvas);
+    let gLJCGraphics = new LJCGraphics(eCanvas);
+    let gScene = new LJCScene();
     let g = gLJCGraphics;
 
     // Default styles.
     g.FillStyle = "cyan";
     g.StrokeStyle = "cyan";
 
-    let gScene = null;
+    let gEvents = new CanvasTestEvent();
+    gEvents.SetEvents();
+
+    // Testing
     let gAnimatedCube = null;
+    let test = CanvasTestTesting;
 
-    let beginColor = 0xffff00;
-    let endColor = 0x111100;
-    let varyRed = true;
-    let varyGreen = true;
-    let varyBlue = false;
-    let events = new CanvasTestEvent(beginColor, endColor
-      , varyRed, varyGreen, varyBlue);
-    events.SetEvents();
+    test.Options("Hide");
+    let testType = "Animation";
+    //testType = "Rotate";
+    //testType = "AddRotate";
+    switch (testType.toLowerCase())
+    {
+      case "animation":
+        test.Animate();
+        break;
 
-    XYTip.checked = true;
-    events.OptionClick(XYTip);
+      case "rotate":
+        test.RotateXY();
+        break;
+
+      case "addrotate":
+        test.AddRotateXY();
+        break;
+    }
   </script>
 </body>
 </html>

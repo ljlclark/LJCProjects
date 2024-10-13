@@ -151,13 +151,28 @@ class LJCGraphics
 
   // Get Radius and Rotation Methods
   // ---------------
+  // DotProduct(point1, point2)
   // CrossProduct(point1, point2)
   // PointRadius(point)
   // PointRotation()
   // Radius(adjacent, opposite)
   // Rotation(adjacent, opposite)
+  // RotationBetween(point1, poin2)
   // Square(value)
   // ToAngle(rotation)
+
+  // Get the dot product of two vectors
+  DotProduct(point1, point2)
+  {
+    let a = point1;
+    let b = point2;
+    let retResult = 0.0;
+
+    retResult = a.X * b.X;
+    retResult += a.Y * b.Y;
+    retResult += a.Z * b.Z;
+    return retResult;
+  }
 
   // Get the cross product of two vectors.
   CrossProduct(point1, point2)
@@ -186,13 +201,15 @@ class LJCGraphics
     return retRadius;
   }
 
-  // Gets the point rotation in radians.
+  // Gets the point rotation in radians. ?
   PointRotation(point)
   {
     let retRotation = 0.0;
 
     let zOpposite = this.Radius(point.Z, point.Y);
     retRotation = this.Rotation(point.X, zOpposite);
+    // Testing
+    let angle = this.ToAngle(retRotation);
     return retRotation;
   }
 
@@ -206,7 +223,6 @@ class LJCGraphics
     retRadius = Math.sqrt(sides);
     return retRadius;
   }
-
 
   // Get the rotation in radians with sides.
   Rotation(adjacent, opposite)
@@ -240,7 +256,21 @@ class LJCGraphics
     {
       retRotation = Math.PI * 2 - retRotation;
     }
+    // Testing
+    let angle = this.ToAngle(retRotation);
     return retRotation;
+  }
+
+  // Radians between two points.
+  RotationBetween(point1, poin2)
+  {
+    let a = point1;
+    let b = point2;
+
+    // tan ? = tan (a2-a1) = (tan a2 – tan a1) / (1 + tan a1 * tan a2)
+    // tan ? = (m2 – m1) / (1 + m1 * m2)
+    let m1 = Math.tan(a.Y / a.X);
+    m1 = a.Y / a.X;
   }
 
   // Squares a value.

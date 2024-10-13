@@ -10,7 +10,18 @@ class CanvasTestEvent
   // ---------------
 
   // The Constructor method.
-  constructor(beginColor = 0xffff00, endColor = 0x111100
+  constructor()
+  {
+    // Shade values.
+    this.BeginColor = 0xffff00;
+    this.EndColor = 0x111100;
+    this.VaryRed = true;
+    this.VaryGreen = true;
+    this.VaryBlue = false;
+  }
+
+  // Sets the shade values.
+  SetShadeValues(beginColor = 0xffff00, endColor = 0x111100
     , varyRed = true, varyGreen = true, varyBlue = false)
   {
     this.BeginColor = beginColor;
@@ -23,10 +34,10 @@ class CanvasTestEvent
   // Sets the event handlers.
   SetEvents()
   {
-    XY.addEventListener("click", this.RadioClick.bind(this));
-    XYTip.addEventListener("click", this.RadioClick.bind(this));
-    XZ.addEventListener("click", this.RadioClick.bind(this));
-    ZY.addEventListener("click", this.RadioClick.bind(this));
+    eXY.addEventListener("click", this.RadioClick.bind(this));
+    eXYTip.addEventListener("click", this.RadioClick.bind(this));
+    eXZ.addEventListener("click", this.RadioClick.bind(this));
+    eZY.addEventListener("click", this.RadioClick.bind(this));
   }
 
   // Radio Click event handler.
@@ -46,35 +57,35 @@ class CanvasTestEvent
       gAnimatedCube.Stop = true;
     }
 
+    let rotateXY = 1.7 * g.Radian;
+    switch (target.id)
+    {
+      case "eXY":
+        this.#CreateAnimatedCube("XY");
+        gAnimatedCube.AddXY = rotateXY;
+        break;
+
+      case "eXYTip":
+        this.#CreateAnimatedCube("XYTip");
+        gAnimatedCube.AddXY = rotateXY;
+        break;
+
+      case "eXZ":
+        this.#CreateAnimatedCube("XZ");
+        gAnimatedCube.AddXY = rotateXY;
+        break;
+
+      case "eZY":
+        this.#CreateAnimatedCube("ZY");
+        gAnimatedCube.AddXY = rotateXY;
+        break;
+    }
+
     let rectangle = null;
     if (gScene != null)
     {
       let cube = gScene.Meshes[0];
       rectangle = gAnimatedCube.MaxRectangle;
-    }
-
-    let rotateXY = 2.12 * g.Radian;
-    switch (target.id)
-    {
-      case "XY":
-        this.#CreateAnimatedCube("XY");
-        gAnimatedCube.AddXY = rotateXY;
-        break;
-
-      case "XYTip":
-        this.#CreateAnimatedCube("XYTip");
-        gAnimatedCube.AddXY = rotateXY;
-        break;
-
-      case "XZ":
-        this.#CreateAnimatedCube("XZ");
-        gAnimatedCube.AddXY = rotateXY;
-        break;
-
-      case "ZY":
-        this.#CreateAnimatedCube("ZY");
-        gAnimatedCube.AddXY = rotateXY;
-        break;
     }
     gAnimatedCube.FirstRectangle = rectangle;
     gAnimatedCube.Animate();
@@ -97,27 +108,27 @@ class CanvasTestEvent
     switch (rotateType.toLowerCase())
     {
       case "xy":
-        XYTip.checked = false;
-        XZ.checked = false;
-        ZY.checked = false;
+        eXYTip.checked = false;
+        eXZ.checked = false;
+        eZY.checked = false;
         break;
 
       case "xytip":
-        XY.checked = false;
-        XZ.checked = false;
-        ZY.checked = false;
+        eXY.checked = false;
+        eXZ.checked = false;
+        eZY.checked = false;
         break;
 
       case "xz":
-        XY.checked = false;
-        XYTip.checked = false;
-        ZY.checked = false;
+        eXY.checked = false;
+        eXYTip.checked = false;
+        eZY.checked = false;
         break;
 
       case "zy":
-        XY.checked = false;
-        XYTip.checked = false;
-        XZ.checked = false;
+        eXY.checked = false;
+        eXYTip.checked = false;
+        eXZ.checked = false;
         break;
     }
   }
