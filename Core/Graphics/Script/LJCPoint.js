@@ -35,6 +35,7 @@ class LJCPoint
   // AddRotateXZ(addRadians)
   // AddRotateZY(addRadians)
   // Move(x, y, z)
+  // RotatedPoint(rotation, radius)
   // RotateXY(rotation)
   // RotateXZ(rotation)
   // RotateZY(rotation)

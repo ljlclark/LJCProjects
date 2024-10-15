@@ -199,14 +199,18 @@ class AnimatedCube
       {
         //if ("Back" == path.Name)
         //{
+        // Testing
         let rotation = g.PointRotation(normal);
         let normalAngle = g.ToAngle(rotation);
 
-        let lightPoint = new LJCPoint(5, 60, 10);
-        let lightRotation = g.PointRotation(lightPoint);;
+        let lightPoint = new LJCPoint(5, 5, 10);
+
+        // Testing
+        let lightRotation = g.PointRotation(lightPoint);
         let ligntAngle = g.ToAngle(lightRotation);
 
-        let shadeRotation = Math.abs(rotation - lightRotation);
+        //let shadeRotation = Math.abs(rotation - lightRotation);
+        let shadeRotation = g.RotationBetween(normal, lightPoint);
         let shadeFactor = g.ToAngle(shadeRotation);
         path.FillStyle
           = this.#BaseColor.ShadeStyle(shadeFactor);

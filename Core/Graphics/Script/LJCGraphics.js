@@ -161,7 +161,7 @@ class LJCGraphics
   // Square(value)
   // ToAngle(rotation)
 
-  // Get the dot product of two vectors
+  // Get the dot (scalar) product of two vectors
   DotProduct(point1, point2)
   {
     let a = point1;
@@ -174,7 +174,7 @@ class LJCGraphics
     return retResult;
   }
 
-  // Get the cross product of two vectors.
+  // Get the cross (vector) product of two vectors.
   CrossProduct(point1, point2)
   {
     let a = point1;
@@ -208,8 +208,10 @@ class LJCGraphics
 
     let zOpposite = this.Radius(point.Z, point.Y);
     retRotation = this.Rotation(point.X, zOpposite);
+
     // Testing
     let angle = this.ToAngle(retRotation);
+
     return retRotation;
   }
 
@@ -256,21 +258,30 @@ class LJCGraphics
     {
       retRotation = Math.PI * 2 - retRotation;
     }
+
     // Testing
     let angle = this.ToAngle(retRotation);
+
     return retRotation;
   }
 
   // Radians between two points.
-  RotationBetween(point1, poin2)
+  RotationBetween(point1, point2)
   {
     let a = point1;
     let b = point2;
 
-    // tan ? = tan (a2-a1) = (tan a2 – tan a1) / (1 + tan a1 * tan a2)
-    // tan ? = (m2 – m1) / (1 + m1 * m2)
-    let m1 = Math.tan(a.Y / a.X);
-    m1 = a.Y / a.X;
+    let dotProduct = this.DotProduct(a, b);
+    let sizeA = this.PointRadius(a);
+    let sizeB = this.PointRadius(b);
+    let divisor = Math.abs(sizeA) * Math.abs(sizeB);
+    let value = dotProduct / divisor;
+    let retRotation = Math.acos(value);
+
+    // Testing
+    let angle = this.ToAngle(retRotation);
+
+    return retRotation;
   }
 
   // Squares a value.

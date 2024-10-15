@@ -6,8 +6,14 @@
 // ***************
 class CanvasTestTesting
 {
-  // The Constructor methods.
+  // The static methods.
   // ---------------
+
+  // static AddRotateXY()
+  // static Animate()
+  // static Options(typeName = "Hide")
+  // static RotationBetween()
+  // static RotateXY()
 
   // Test AddRotateXY and graphics Point().
   static AddRotateXY()
@@ -58,7 +64,7 @@ class CanvasTestTesting
     this.Options("Show");
 
     let beginColor = 0xffff00;
-    let endColor = 0x111100;
+    let endColor = 0x222200;
     let varyRed = true;
     let varyGreen = true;
     let varyBlue = false;
@@ -97,6 +103,16 @@ class CanvasTestTesting
     eZYLabel.style.display = display;
   }
 
+  // Test rotation between vectors.
+  static RotationBetween()
+  {
+    let point1 = new LJCPoint(2, 3, -1);
+    let point2 = new LJCPoint(1, -3, 5);
+    let retResult = gLJCGraphics.RotationBetween(point1
+      , point2);
+    return retResult;
+  }
+
   // Test Rotate XY and graphics Point();
   static RotateXY()
   {
@@ -108,18 +124,22 @@ class CanvasTestTesting
       {
         case 90:
           radians = Math.PI / 2;
+          // 1.5707963267948966
           break;
 
         case 180:
           radians = Math.PI;
+          // 3.141592653589793
           break;
 
         case 270:
           radians = Math.PI + (Math.PI / 2);
+          // 4.71238898038469
           break;
 
         case 360:
           radians = Math.PI * 2;
+          // 6.283185307179586
           break;
       }
 
