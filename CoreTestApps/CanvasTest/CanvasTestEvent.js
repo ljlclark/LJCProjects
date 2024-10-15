@@ -20,17 +20,6 @@ class CanvasTestEvent
     this.VaryBlue = false;
   }
 
-  // Sets the shade values.
-  SetShadeValues(beginColor = 0xffff00, endColor = 0x111100
-    , varyRed = true, varyGreen = true, varyBlue = false)
-  {
-    this.BeginColor = beginColor;
-    this.EndColor = endColor;
-    this.VaryRed = varyRed;
-    this.VaryGreen = varyGreen;
-    this.VaryBlue = varyBlue;
-  }
-
   // Sets the event handlers.
   SetEvents()
   {
@@ -41,13 +30,19 @@ class CanvasTestEvent
     eZY.addEventListener("click", this.RadioClick.bind(this));
   }
 
+  // The event handlers.
+  // ---------------
+
+  // the eCanvas click event handler.
   CanvasClick(event)
   {
     let point = new LJCPoint();
     point.X = event.clientX - gScene.TranslatePoint.X;
     point.Y = event.clientY - gScene.TranslatePoint.Y;
-    gAnimatedCube.LightPoint.X = point.X;
-    gAnimatedCube.LightPoint.Y = point.Y;
+    let lightPoint = gAnimatedCube.LightPoint;
+    lightPoint.X = point.X;
+    lightPoint.Y = point.Y;
+    this.#SetSourceText();
   }
 
   // Radio Click event handler.
@@ -58,6 +53,9 @@ class CanvasTestEvent
       this.OptionClick(event.target);
     }
   }
+
+  // Public Static methods.
+  // ---------------
 
   // Handle options click.
   OptionClick(target)
@@ -101,6 +99,20 @@ class CanvasTestEvent
     gAnimatedCube.Animate();
   }
 
+  // Sets the shade values.
+  SetShadeValues(beginColor = 0xffff00, endColor = 0x111100
+    , varyRed = true, varyGreen = true, varyBlue = false)
+  {
+    this.BeginColor = beginColor;
+    this.EndColor = endColor;
+    this.VaryRed = varyRed;
+    this.VaryGreen = varyGreen;
+    this.VaryBlue = varyBlue;
+  }
+
+  // Private Static methods.
+  // ---------------
+
   // Creates the AnimatedCube.
   #CreateAnimatedCube(rotateType)
   {
@@ -110,6 +122,7 @@ class CanvasTestEvent
       , this.VaryBlue);
     gAnimatedCube.RotateType = rotateType;
     this.#ResetOptions(rotateType);
+    this.#SetSourceText();
   }
 
   // Unchecks the unused options.
@@ -141,5 +154,13 @@ class CanvasTestEvent
         eXZ.checked = false;
         break;
     }
+  }
+
+  // Sets the light source position text.
+  #SetSourceText()
+  {
+    let lightPoint = gAnimatedCube.LightPoint;
+    eSource.innerText = `Light Source X:${lightPoint.X}`
+    eSource.innerText += `  Y:${lightPoint.Y}  Z:${lightPoint.Z}`;
   }
 }
