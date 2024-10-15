@@ -36,6 +36,7 @@ class AnimatedCube
     this.setBaseColor(0xffff00, 0x111100, true, true
       , false);
     this.FirstRectangle;
+    this.LightPoint = new LJCPoint(5, 5, 10);
     this.MaxRectangle;
     this.MoveValue = 0;
     this.PrevRectangle;
@@ -197,24 +198,11 @@ class AnimatedCube
       let normal = path.Normal;
       if (normal.Z > 0)
       {
-        //if ("Back" == path.Name)
-        //{
-        // Testing
-        let rotation = g.PointRotation(normal);
-        let normalAngle = g.ToAngle(rotation);
-
-        let lightPoint = new LJCPoint(5, 5, 10);
-
-        // Testing
-        let lightRotation = g.PointRotation(lightPoint);
-        let ligntAngle = g.ToAngle(lightRotation);
-
-        //let shadeRotation = Math.abs(rotation - lightRotation);
-        let shadeRotation = g.RotationBetween(normal, lightPoint);
+        let shadeRotation = g.RotationBetween(normal
+          , this.LightPoint);
         let shadeFactor = g.ToAngle(shadeRotation);
         path.FillStyle
           = this.#BaseColor.ShadeStyle(shadeFactor);
-        //}
       }
       path.Show();
     }

@@ -34,10 +34,20 @@ class CanvasTestEvent
   // Sets the event handlers.
   SetEvents()
   {
+    eCanvas.addEventListener("click", this.CanvasClick.bind(this));
     eXY.addEventListener("click", this.RadioClick.bind(this));
     eXYTip.addEventListener("click", this.RadioClick.bind(this));
     eXZ.addEventListener("click", this.RadioClick.bind(this));
     eZY.addEventListener("click", this.RadioClick.bind(this));
+  }
+
+  CanvasClick(event)
+  {
+    let point = new LJCPoint();
+    point.X = event.clientX - gScene.TranslatePoint.X;
+    point.Y = event.clientY - gScene.TranslatePoint.Y;
+    gAnimatedCube.LightPoint.X = point.X;
+    gAnimatedCube.LightPoint.Y = point.Y;
   }
 
   // Radio Click event handler.
