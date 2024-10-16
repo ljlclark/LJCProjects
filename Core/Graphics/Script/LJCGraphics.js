@@ -52,6 +52,20 @@ class LJCGraphics
     }
   }
 
+  // Clears an area.
+  Clear(left, top, width, height)
+  {
+    this.Context.clearRect(left, top, width, height);
+  }
+
+  // Clears an area using a rectangle.
+  ClearRectange(rectangle)
+  {
+    let rect = rectangle;
+    this.Context.clearRect(rect.Left, rect.Top
+      , rect.Width, rect.Height);
+  }
+
   // Draw a line from beginPoint to endPoint.
   Line(beginPoint, endPoint, strokeStyle = "")
   {
@@ -151,15 +165,15 @@ class LJCGraphics
 
   // Get Radius and Rotation Methods
   // ---------------
-  // DotProduct(point1, point2)
-  // CrossProduct(point1, point2)
-  // PointRadius(point)
-  // PointRotation()
-  // Radius(adjacent, opposite)
-  // Rotation(adjacent, opposite)
-  // RotationBetween(point1, poin2)
-  // Square(value)
-  // ToAngle(rotation)
+  // result = DotProduct(point1, point2)
+  // result = CrossProduct(point1, point2)
+  // radus = PointRadius(point)
+  // rotation = PointRotation()
+  // radius = Radius(adjacent, opposite)
+  // rotation = Rotation(adjacent, opposite)
+  // rotation = RotationBetween(point1, poin2)
+  // value = Square(value)
+  // angle = ToAngle(rotation)
 
   // Get the dot (scalar) product of two vectors
   DotProduct(point1, point2)

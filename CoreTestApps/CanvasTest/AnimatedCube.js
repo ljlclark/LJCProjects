@@ -149,7 +149,9 @@ class AnimatedCube
       let y = 1;
       let width = 2 + x;
       let height = 2 + y;
-      ctx.clearRect(rect.Left - x, rect.Top - y
+      //ctx.clearRect(rect.Left - x, rect.Top - y
+      //  , rect.Width + width, rect.Height + height);
+      g.Clear(rect.Left - x, rect.Top - y
         , rect.Width + width, rect.Height + height);
     }
   }

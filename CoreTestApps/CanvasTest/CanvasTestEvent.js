@@ -18,12 +18,14 @@ class CanvasTestEvent
     this.VaryRed = true;
     this.VaryGreen = true;
     this.VaryBlue = false;
+    this.PrevPoint = null;
   }
 
   // Sets the event handlers.
   SetEvents()
   {
     eCanvas.addEventListener("click", this.CanvasClick.bind(this));
+    eCanvas.addEventListener("mousemove", this.MouseMove.bind(this));
     eXY.addEventListener("click", this.RadioClick.bind(this));
     eXYTip.addEventListener("click", this.RadioClick.bind(this));
     eXZ.addEventListener("click", this.RadioClick.bind(this));
@@ -36,13 +38,62 @@ class CanvasTestEvent
   // the eCanvas click event handler.
   CanvasClick(event)
   {
-    let point = new LJCPoint();
-    point.X = event.clientX - gScene.TranslatePoint.X;
-    point.Y = event.clientY - gScene.TranslatePoint.Y;
+    let modelPoint = this.ModelPoint(event.clientX
+      , event.clientY);
     let lightPoint = gAnimatedCube.LightPoint;
-    lightPoint.X = point.X;
-    lightPoint.Y = point.Y;
+    lightPoint.X = modelPoint.X;
+    lightPoint.Y = modelPoint.Y;
+    lightPoint.Z = modelPoint.Z;
     this.#SetSourceText();
+  }
+
+  // Gets the model point.
+  ModelPoint(clientX, clientY)
+  {
+    let g = gLJCGraphics;
+
+    let canvas = g.Canvas;
+    let tPoint = gScene.TranslatePoint;
+    let radius = tPoint.Y;
+
+    let canvasPoint = new LJCPoint();
+    canvasPoint.X = clientX - canvas.offsetLeft;
+    canvasPoint.Y = clientY - canvas.offsetTop;
+
+    // Calculate model rotation.
+    let retModelPoint = canvasPoint.Clone();
+    retModelPoint.X -= tPoint.X;
+    retModelPoint.Y -= tPoint.Y;
+
+    // Get z value.
+    let radiusPoint = this.RadiusPoint(retModelPoint);
+    let diffX = Math.abs(radiusPoint.X - canvasPoint.X);
+    let diffY = Math.abs(radiusPoint.Y - canvasPoint.Y);
+    retModelPoint.Z = Math.round(g.Radius(diffX, diffY));
+    return retModelPoint;
+  }
+
+  // the eCanvas mouse move event handler.
+  MouseMove(event)
+  {
+    let g = gLJCGraphics;
+
+    let canvas = g.Canvas;
+    let tPoint = gScene.TranslatePoint;
+    let radius = tPoint.Y;
+
+    let modelPoint = this.ModelPoint(event.clientX, event.clientY);
+    let radiusPoint = this.RadiusPoint(modelPoint);
+    if (this.PrevPoint != null)
+    {
+      g.Clear(0, 0, canvas.width, canvas.height);
+    }
+    this.PrevPoint = radiusPoint;
+    g.Arc(radiusPoint, 2, null, null, "cyan");
+
+    let p = modelPoint;
+    eMouse.innerText = `Mouse Position X:${p.X}  Y:${p.Y}`;
+    eMouse.innerText += `  Z:${p.Z}`;
   }
 
   // Radio Click event handler.
@@ -54,7 +105,7 @@ class CanvasTestEvent
     }
   }
 
-  // Public Static methods.
+  // Public methods.
   // ---------------
 
   // Handle options click.
@@ -99,6 +150,21 @@ class CanvasTestEvent
     gAnimatedCube.Animate();
   }
 
+  // Get show radius point.
+  RadiusPoint(modelPoint)
+  {
+    let tPoint = gScene.TranslatePoint;
+    let radius = tPoint.Y;
+
+    let rotation = g.Rotation(modelPoint.X
+      , modelPoint.Y);
+    let retRadiusPoint = tPoint.RotatedPoint(rotation
+      , radius);
+    retRadiusPoint.X += tPoint.X;
+    retRadiusPoint.Y += tPoint.Y;
+    return retRadiusPoint;
+  }
+
   // Sets the shade values.
   SetShadeValues(beginColor = 0xffff00, endColor = 0x111100
     , varyRed = true, varyGreen = true, varyBlue = false)
@@ -110,7 +176,7 @@ class CanvasTestEvent
     this.VaryBlue = varyBlue;
   }
 
-  // Private Static methods.
+  // Private methods.
   // ---------------
 
   // Creates the AnimatedCube.
@@ -160,7 +226,7 @@ class CanvasTestEvent
   #SetSourceText()
   {
     let lightPoint = gAnimatedCube.LightPoint;
-    eSource.innerText = `Light Source X:${lightPoint.X}`
-    eSource.innerText += `  Y:${lightPoint.Y}  Z:${lightPoint.Z}`;
+    eSource.innerText = `Light Source X:${lightPoint.X} `
+    eSource.innerText += `  Y:${lightPoint.Y} Z:${lightPoint.Z} `;
   }
 }
