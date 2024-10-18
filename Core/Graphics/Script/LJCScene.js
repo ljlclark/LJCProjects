@@ -12,7 +12,7 @@ class LJCScene
     let canvas = gLJCGraphics.Canvas;
     this.TranslatePoint = new LJCPoint(canvas.width / 2
       , canvas.height / 2);
-    this.TranslatePoint.ViewZ = 90;
+    this.TranslatePoint.ViewZ = 130;
     this.Meshes = [];
   }
 

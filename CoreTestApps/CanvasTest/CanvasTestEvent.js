@@ -27,6 +27,7 @@ class CanvasTestEvent
   {
     eCanvas.addEventListener("click", this.CanvasClick.bind(this));
     eCanvas.addEventListener("mousemove", this.MouseMove.bind(this));
+    eCanvas.addEventListener("wheel", this.CanvasWheel.bind(this));
     eXY.addEventListener("click", this.RadioClick.bind(this));
     eXYTip.addEventListener("click", this.RadioClick.bind(this));
     eXZ.addEventListener("click", this.RadioClick.bind(this));
@@ -39,7 +40,7 @@ class CanvasTestEvent
   // MouseMove(event)
   // RadioClick(event)
 
-  // the eCanvas click event handler.
+  // The eCanvas click event handler.
   CanvasClick(event)
   {
     let modelPoint = this.ModelPoint(event.clientX
@@ -49,6 +50,21 @@ class CanvasTestEvent
     lightPoint.Y = modelPoint.Y;
     lightPoint.Z = modelPoint.Z;
     this.#SetSourceText();
+  }
+
+  // The eCanvas wheel event handler.
+  CanvasWheel(event)
+  {
+    if (event.deltaY < 0)
+    {
+      gScene.TranslatePoint.ViewZ++;
+    }
+    if (event.deltaY > 0)
+    {
+      gScene.TranslatePoint.ViewZ--;
+    }
+    let viewZ = gScene.TranslatePoint.ViewZ;
+    eWheel.innerText = `ViewZ: ${viewZ}`;
   }
 
   // the eCanvas mouse move event handler.
