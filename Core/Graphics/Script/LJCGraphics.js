@@ -19,6 +19,8 @@ class LJCGraphics
   // Draw Methods
   // ---------------
   // Arc(centerPoint, radius, endRadians, beginRadians = 0, strokeStyle = "")
+  // Clear(left, top, width, height)
+  // ClearRectange(rectangle)
   // Line(beginPoint, endPoint, strokeStyle = "")
   // NextLine(endPoint, strokeStyle = "")
   // Point(point)

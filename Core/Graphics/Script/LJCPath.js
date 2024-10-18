@@ -27,7 +27,7 @@ class LJCPath
 
   // Data Methods
   // ---------------
-  // Clone();
+  // path = Clone();
 
   // Creates a Clone of this object.
   Clone()
@@ -206,7 +206,6 @@ class LJCPath
 
   // Getters and Setters
   // ---------------
-  // getScreenBeginPoint()
 
   // Gets the ScreenBeginPoint value.
   getScreenBeginPoint()

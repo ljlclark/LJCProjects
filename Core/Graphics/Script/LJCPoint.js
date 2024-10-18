@@ -18,7 +18,7 @@ class LJCPoint
 
   // Data Methods
   // ---------------
-  // Clone()
+  // point = Clone()
 
   // Creates a Clone of this object.
   Clone()
@@ -142,20 +142,8 @@ class LJCPoint
       // ad = bc (divide by a)  // cross multiply equation
       // d = bc / a
 
-      // Example
-      // c = viewZ = tPoint.Z = 90;
-      // a = adjacent = Z = (-20)
-      // a = 90 - (-20) = 110
-      // b = opposite = 21
-      // a/b = 110 / 21 = 5.23809
-      // d = bc / a
-      // d = 21 * 90 / 110 = 17.181818
-      // c/d = 5.23809
-
       // Perspective
       let viewZ = tPoint.ViewZ;
-      // Z negative toward viewer
-      //let a = viewZ + this.Z;
       // Z positive toward viewer
       let a = viewZ - this.Z;
       let sx = this.X * viewZ / a;

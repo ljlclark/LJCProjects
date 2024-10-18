@@ -6,8 +6,9 @@
 // ***************
 class CanvasTestEvent
 {
-  // The Constructor methods.
+  // Constructor methods.
   // ---------------
+  // SetEvents()
 
   // The Constructor method.
   constructor()
@@ -32,8 +33,11 @@ class CanvasTestEvent
     eZY.addEventListener("click", this.RadioClick.bind(this));
   }
 
-  // The event handlers.
+  // Event handlers.
   // ---------------
+  // CanvasClick(event)
+  // MouseMove(event)
+  // RadioClick(event)
 
   // the eCanvas click event handler.
   CanvasClick(event)
@@ -45,32 +49,6 @@ class CanvasTestEvent
     lightPoint.Y = modelPoint.Y;
     lightPoint.Z = modelPoint.Z;
     this.#SetSourceText();
-  }
-
-  // Gets the model point.
-  ModelPoint(clientX, clientY)
-  {
-    let g = gLJCGraphics;
-
-    let canvas = g.Canvas;
-    let tPoint = gScene.TranslatePoint;
-    let radius = tPoint.Y;
-
-    let canvasPoint = new LJCPoint();
-    canvasPoint.X = clientX - canvas.offsetLeft;
-    canvasPoint.Y = clientY - canvas.offsetTop;
-
-    // Calculate model rotation.
-    let retModelPoint = canvasPoint.Clone();
-    retModelPoint.X -= tPoint.X;
-    retModelPoint.Y -= tPoint.Y;
-
-    // Get z value.
-    let radiusPoint = this.RadiusPoint(retModelPoint);
-    let diffX = Math.abs(radiusPoint.X - canvasPoint.X);
-    let diffY = Math.abs(radiusPoint.Y - canvasPoint.Y);
-    retModelPoint.Z = Math.round(g.Radius(diffX, diffY));
-    return retModelPoint;
   }
 
   // the eCanvas mouse move event handler.
@@ -107,6 +85,37 @@ class CanvasTestEvent
 
   // Public methods.
   // ---------------
+  // modelPoint = ModelPoint(clientX, clientY)
+  // OptionClick(target)
+  // radiusPoint = RadiusPoint(modelPoint)
+  // SetShadeValues(beginColor = 0xffff00, endColor = 0x111100
+  //   , varyRed = true, varyGreen = true, varyBlue = false)
+
+  // Gets the model point.
+  ModelPoint(clientX, clientY)
+  {
+    let g = gLJCGraphics;
+
+    let canvas = g.Canvas;
+    let tPoint = gScene.TranslatePoint;
+    let radius = tPoint.Y;
+
+    let canvasPoint = new LJCPoint();
+    canvasPoint.X = clientX - canvas.offsetLeft;
+    canvasPoint.Y = clientY - canvas.offsetTop;
+
+    // Calculate model rotation.
+    let retModelPoint = canvasPoint.Clone();
+    retModelPoint.X -= tPoint.X;
+    retModelPoint.Y -= tPoint.Y;
+
+    // Get z value.
+    let radiusPoint = this.RadiusPoint(retModelPoint);
+    let diffX = Math.abs(radiusPoint.X - canvasPoint.X);
+    let diffY = Math.abs(radiusPoint.Y - canvasPoint.Y);
+    retModelPoint.Z = Math.round(g.Radius(diffX, diffY));
+    return retModelPoint;
+  }
 
   // Handle options click.
   OptionClick(target)
@@ -178,6 +187,9 @@ class CanvasTestEvent
 
   // Private methods.
   // ---------------
+  // #CreateAnimatedCube(rotateType)
+  // #ResetOptions(rotateType)
+  // #SetSourceText()
 
   // Creates the AnimatedCube.
   #CreateAnimatedCube(rotateType)

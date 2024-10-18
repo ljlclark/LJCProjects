@@ -39,7 +39,7 @@ class LJCColor
 
   // Data Methods
   // ---------------
-  // Clone();
+  // color = Clone();
 
   // Creates a Clone of this object.
   Clone()
@@ -57,20 +57,20 @@ class LJCColor
 
   // Color Methods
   // ---------------
-  // CreateColor(colorValue)
-  // CreateStyle(colorValue)
-  // ColorsStyle(redValue, greenValue, blueValue)
-  // Shade(shadeColor, factor, isVary)
-  // ShadeStyle(factor)
-  // Style()
-  // ParseBlue(colorValue)
-  // ParseGreen(colorValue)
-  // ParseRed(colorValue)
+  // color = CreateColor(colorValue)
+  // style = CreateStyle(colorValue)
+  // style = ColorsStyle(redValue, greenValue, blueValue)
+  // shadeColor = Shade(shadeColor, factor, isVary)
+  // shadeStyle = ShadeStyle(factor)
+  // syle = Style()
+  // value = ParseBlue(colorValue)
+  // value = ParseGreen(colorValue)
+  // value = ParseRed(colorValue)
   // SetVaryValue(beginValue, endValue, varyRed, varyGreen
   //   , varyBlue)
-  // ValueToHex(colorValue)
-  // ValueToInt(colorValue)
-  // ValueToStyle(colorValue)
+  // value = ValueToHex(colorValue)
+  // value = ValueToInt(colorValue)
+  // style = ValueToStyle(colorValue)
 
   // Creates color object from style, hex or decimal value.
   CreateColor(colorValue)
@@ -307,13 +307,13 @@ class LJCColor
 
   // Getters and Setters
   // ---------------
-  // getBlue()
-  // setBlue()
-  // getGreen()
-  // setGreen()
-  // getRed()
-  // setRed()
-  // getValue()
+  // blue = getBlue()
+  // setBlue(blueValue)
+  // green = getGreen()
+  // setGreen(greenValue)
+  // red = getRed()
+  // setRed(redValue)
+  // value = getValue()
 
   // Gets the decimal blue value.
   getBlue()

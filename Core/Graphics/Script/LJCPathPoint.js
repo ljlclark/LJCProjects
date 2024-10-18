@@ -21,7 +21,7 @@ class LJCPathPoint
 
   // Data Methods
   // ---------------
-  // Clone()
+  // pathPoint = Clone()
 
   // Creates a Clone of this object.
   Clone()

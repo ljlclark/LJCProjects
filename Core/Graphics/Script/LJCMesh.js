@@ -7,7 +7,6 @@
 class LJCMesh
 {
   // The Constructor method.
-  //constructor(name)
   constructor(name)
   {
     let g = gLJCGraphics;
@@ -19,7 +18,7 @@ class LJCMesh
 
   // Data Methods
   // ---------------
-  // Clone()
+  // mesh = Clone()
 
   // Creates a Clone of this object.
   Clone()
@@ -36,12 +35,13 @@ class LJCMesh
 
   // Class Methods
   // ---------------
-  // CreateFace(name, beginPoint, radius, verticeCount)
+  // path = CreateFace(name, beginPoint, radius, verticeCount)
+  // product = CrossProduct(point1, point2, point3)
   // AddMove(x, y, z)
   // AddRotateXY(addRadians)
   // AddRotateXZ(addRadians)
   // AddRotateZY(addRadians)
-  // Rectangle()
+  // rectangle = Rectangle()
   // Move(x, y, z)
   // RotateXY(radians)
   // RotateXZ(radians)
@@ -221,59 +221,8 @@ class LJCMesh
   // Shows the object.
   Show()
   {
-    //let g = gLJCGraphics;
-
     for (let path of this.Paths)
     {
-      //let normal = path.Normal;
-      //let rotation = g.GetRotation(normal.X, normal.Z);
-      //let angle = rotation / g.Radian;
-
-      //if (angle > 0
-      //  && angle < 40)
-      //{
-      //  path.FillStyle = gShades[0].GetStyle();
-      //}
-      //if (angle >= 40
-      //  && angle < 70)
-      //{
-      //  path.FillStyle = gShades[1].GetStyle();
-      //}
-      //if (angle >= 70
-      //  && angle < 100)
-      //{
-      //  path.FillStyle = gShades[2].GetStyle();
-      //}
-      //if (angle >= 100
-      //  && angle < 125)
-      //{
-      //  path.FillStyle = gShades[3].GetStyle();
-      //}
-      //if (angle >= 125
-      //  && angle < 145)
-      //{
-      //  path.FillStyle = gShades[4].GetStyle();
-      //}
-      //if (angle >= 145
-      //  && angle < 155)
-      //{
-      //  path.FillStyle = gShades[5].GetStyle();
-      //}
-      //if (angle >= 155
-      //  && angle < 165)
-      //{
-      //  path.FillStyle = gShades[6].GetStyle();
-      //}
-      //if (angle >= 165
-      //  && angle < 180)
-      //{
-      //  path.FillStyle = gShades[7].GetStyle();
-      //}
-      //if ("Front" == path.Name)
-      //{
-      //  path.FillStyle = gShades[2].GetStyle();
-      //}
-
       path.Show();
     }
   }
