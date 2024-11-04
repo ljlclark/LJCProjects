@@ -31,8 +31,8 @@ namespace LJCViewEditor
       LJCRecord = null;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-			EndColor = Color.LightSkyBlue;
+      BeginColor = Color.LightBlue;
+			EndColor = Color.SkyBlue;
 		}
 		#endregion
 
@@ -66,8 +66,8 @@ namespace LJCViewEditor
 		{
 			base.OnPaintBackground(e);
 
-			FormCommon.CreateGradient(e.Graphics, ClientRectangle
-				, BeginColor, EndColor);
+			//FormCommon.CreateGradient(e.Graphics, ClientRectangle
+			//	, BeginColor, EndColor);
 		}
 		#endregion
 
@@ -249,7 +249,8 @@ namespace LJCViewEditor
         , mSettings.DataConfigName);
 
       // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      // *** Next Statement *** Delete
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
       FirstValueCombo.MaxLength = ViewCondition.LengthFirstValue;
 			SecondValueTextbox.MaxLength = ViewCondition.LengthSecondValue;

@@ -45,8 +45,8 @@ namespace _Namespace_
       LJCRecord = null;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
+      BeginColor = Color.LightBlue;
+      EndColor = Color.SkyBlue;
     }
     #endregion
 
@@ -285,7 +285,8 @@ namespace _Namespace_
       //};
 
       // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      // *** Next Statement *** Delete
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
       DescriptionText.MaxLength = _ClassName_.LengthDescription;
 

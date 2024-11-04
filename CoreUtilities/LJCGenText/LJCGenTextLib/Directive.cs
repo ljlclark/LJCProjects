@@ -15,7 +15,7 @@ namespace LJCGenTextLib
     /// Checks line for directive and returns the directive object.
     /// </summary>
     public static Directive GetDirective(string line
-      , string commentChars)
+      , string commentChars = "//")
     {
       string[] values;
       char[] separator = { ' ' };

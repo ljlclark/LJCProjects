@@ -65,8 +65,8 @@ namespace LJCViewEditor
     {
       base.OnPaintBackground(e);
 
-      FormCommon.CreateGradient(e.Graphics, ClientRectangle
-        , BeginColor, EndColor);
+      //FormCommon.CreateGradient(e.Graphics, ClientRectangle
+      //  , BeginColor, EndColor);
     }
     #endregion
 

@@ -57,7 +57,8 @@ namespace LJCGenTextEdit
       {
         EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
 
-        mTemplateRtControl.Font = new Font("Courier New", 9.0f);
+        mTemplateRtControl.Font = new Font("Courier New", 12f
+          , FontStyle.Bold);
         mTemplateRtControl.WordWrap = false;
         mTemplateRtControl.LJCLoadFromFile(targetFileSpec);
 
@@ -77,7 +78,7 @@ namespace LJCGenTextEdit
         }
 
         EditList.CreateColorSettings(mTemplateRtControl);
-        EditList.SetTextColor(mTemplateRtControl);
+        //EditList.SetTextColor(mTemplateRtControl);
       }
     }
 
@@ -89,7 +90,8 @@ namespace LJCGenTextEdit
       //var templatePath = Path.GetDirectoryName(filePaths.TemplatePath);
       //var templateFile = EditList.TemplateTextbox.Text.Trim();
       //var templateFileSpec = Path.Combine(templatePath, templateFile);
-      mOutputRtControl.Font = new Font("Courier New", 9.0f);
+      mOutputRtControl.Font = new Font("Courier New", 12f
+        , FontStyle.Bold);
       mOutputRtControl.WordWrap = false;
 
       // Get data.
@@ -103,7 +105,7 @@ namespace LJCGenTextEdit
       mOutputRtControl.Text = textGenLib.TextGen(sections, templateLines);
 
       EditList.CreateColorSettings(mOutputRtControl);
-      EditList.SetTextColor(mOutputRtControl);
+      //EditList.SetTextColor(mOutputRtControl);
     }
 
     // Save the Template file.

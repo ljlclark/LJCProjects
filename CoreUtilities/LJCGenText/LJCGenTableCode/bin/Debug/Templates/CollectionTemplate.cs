@@ -88,8 +88,8 @@ namespace _Namespace_
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.AddMissingArgument(message, name);
-      NetString.ThrowInvalidArgument(message);
+      NetString.ArgError(ref message, name);
+      NetString.ThrowArgError(message);
 
       retValue = LJCSearchUnique(name);
       if (null == retValue)

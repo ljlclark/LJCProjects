@@ -175,7 +175,8 @@ namespace _Namespace_
 			// Splitter is not in the first TabPage.
 			//Split.Resize += Split_Resize;
 
-			BackColor = mSettings.BeginColor;
+      // *** Next Statement *** Delete
+			//BackColor = mSettings.BeginColor;
 			//MainTools.BackColor = mSettings.BeginColor;
 		}
 

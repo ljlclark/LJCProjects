@@ -181,21 +181,25 @@
     </Compile>
     <EmbeddedResource Include="Forms\Condition\ViewConditionDetail.resx">
       <DependentUpon>ViewConditionDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Condition\ViewConditionSetDetail.resx">
       <DependentUpon>ViewConditionSetDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filter\ViewFilterDetail.resx">
       <DependentUpon>ViewFilterDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Column\ViewColumnDetail.resx">
       <DependentUpon>ViewColumnDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewEditSplash.resx">
       <DependentUpon>ViewEditSplash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\View\ViewDataDetail.resx">
       <DependentUpon>ViewDataDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewEditorList.resx">
       <DependentUpon>ViewEditorList.cs</DependentUpon>

@@ -31,6 +31,7 @@ namespace LJCGenTextEdit
       // Set default class data.
       BeginColor = Color.AliceBlue;
       //EndColor = Color.LightSkyBlue;
+      //EndColor = Color.SkyBlue;
       mSyntaxColors = new SyntaxColors();
       mTokenizer = new CodeTokenizer();
       mTokenizer.InitializeKeywords();
@@ -511,7 +512,7 @@ namespace LJCGenTextEdit
     {
       if (!e.Control)
       {
-        mTemplateTextCode.DoSetLineColors(e.KeyCode, TemplateRichText, mTokenizer);
+        //mTemplateTextCode.DoSetLineColors(e.KeyCode, TemplateRichText, mTokenizer);
       }
     }
     #endregion
@@ -805,7 +806,7 @@ namespace LJCGenTextEdit
     {
       if (!e.Control)
       {
-        mTemplateTextCode.DoSetLineColors(e.KeyCode, OutputRichText, mTokenizer);
+        //mTemplateTextCode.DoSetLineColors(e.KeyCode, OutputRichText, mTokenizer);
       }
     }
     #endregion

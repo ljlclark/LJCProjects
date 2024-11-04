@@ -29,16 +29,16 @@
 		private void InitializeComponent()
 		{
       this.components = new System.ComponentModel.Container();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       this.MainSplit = new System.Windows.Forms.SplitContainer();
       this.ViewSplit = new System.Windows.Forms.SplitContainer();
       this.ViewHeading = new LJCWinFormControls.LJCHeaderBox();
@@ -61,7 +61,7 @@
       this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
       this.ViewMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.ViewMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
-      this.ViewTabs = new LJCWinFormControls.LJCTabControl(this.components);
+      this.ViewTabs = new LJCWinFormControls.LJCTabControl();
       this.ColumnPage = new System.Windows.Forms.TabPage();
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ColumnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -88,7 +88,7 @@
       this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
       this.JoinMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
-      this.JoinTabs = new LJCWinFormControls.LJCTabControl(this.components);
+      this.JoinTabs = new LJCWinFormControls.LJCTabControl();
       this.JoinOnPage = new System.Windows.Forms.TabPage();
       this.JoinOnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.JoinOnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -126,7 +126,7 @@
       this.FilterMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
       this.FilterMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
-      this.ConditionSetTabs = new LJCWinFormControls.LJCTabControl(this.components);
+      this.ConditionSetTabs = new LJCWinFormControls.LJCTabControl();
       this.ConditionSetPage = new System.Windows.Forms.TabPage();
       this.ConditionSetGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ConditionSetMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -241,7 +241,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.MainSplit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.MainSplit.Location = new System.Drawing.Point(4, 90);
+      this.MainSplit.Location = new System.Drawing.Point(4, 82);
       this.MainSplit.Name = "MainSplit";
       this.MainSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
@@ -255,8 +255,8 @@
       this.MainSplit.Panel2.Controls.Add(this.DataGrid);
       this.MainSplit.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
       this.MainSplit.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.MainSplit.Size = new System.Drawing.Size(944, 618);
-      this.MainSplit.SplitterDistance = 461;
+      this.MainSplit.Size = new System.Drawing.Size(772, 562);
+      this.MainSplit.SplitterDistance = 420;
       this.MainSplit.TabIndex = 2;
       // 
       // ViewSplit
@@ -279,8 +279,8 @@
       // 
       this.ViewSplit.Panel2.Controls.Add(this.ViewTabs);
       this.ViewSplit.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.ViewSplit.Size = new System.Drawing.Size(949, 467);
-      this.ViewSplit.SplitterDistance = 142;
+      this.ViewSplit.Size = new System.Drawing.Size(775, 425);
+      this.ViewSplit.SplitterDistance = 130;
       this.ViewSplit.TabIndex = 0;
       // 
       // ViewHeading
@@ -288,11 +288,11 @@
       this.ViewHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ViewHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ViewHeading.LJCEndColor = System.Drawing.Color.SteelBlue;
+      this.ViewHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
       this.ViewHeading.Location = new System.Drawing.Point(0, 0);
-      this.ViewHeading.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.ViewHeading.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ViewHeading.Name = "ViewHeading";
-      this.ViewHeading.Size = new System.Drawing.Size(941, 34);
+      this.ViewHeading.Size = new System.Drawing.Size(769, 31);
       this.ViewHeading.TabIndex = 0;
       this.ViewHeading.TabStop = false;
       this.ViewHeading.Text = "View";
@@ -302,35 +302,33 @@
       this.ViewGrid.AllowUserToAddRows = false;
       this.ViewGrid.AllowUserToDeleteRows = false;
       this.ViewGrid.AllowUserToResizeRows = false;
-      this.ViewGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.ViewGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.ViewGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ViewGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ViewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ViewGrid.ContextMenuStrip = this.ViewMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ViewGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ViewGrid.DefaultCellStyle = dataGridViewCellStyle9;
+      this.ViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ViewGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ViewGrid.LJCAllowSelectionChange = false;
       this.ViewGrid.LJCDragDataName = null;
       this.ViewGrid.LJCLastRowIndex = -1;
       this.ViewGrid.LJCRowHeight = 0;
-      this.ViewGrid.Location = new System.Drawing.Point(0, 35);
-      this.ViewGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.ViewGrid.Location = new System.Drawing.Point(0, 0);
+      this.ViewGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ViewGrid.MultiSelect = false;
       this.ViewGrid.Name = "ViewGrid";
       this.ViewGrid.RowHeadersVisible = false;
       this.ViewGrid.RowHeadersWidth = 62;
       this.ViewGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ViewGrid.ShowCellToolTips = false;
-      this.ViewGrid.Size = new System.Drawing.Size(945, 102);
+      this.ViewGrid.Size = new System.Drawing.Size(771, 126);
       this.ViewGrid.TabIndex = 2;
       this.ViewGrid.Text = "LJCDataGrid";
       this.ViewGrid.SelectionChanged += new System.EventHandler(this.ViewGrid_SelectionChanged);
@@ -488,17 +486,17 @@
       this.ViewTabs.Location = new System.Drawing.Point(0, 0);
       this.ViewTabs.Name = "ViewTabs";
       this.ViewTabs.SelectedIndex = 0;
-      this.ViewTabs.Size = new System.Drawing.Size(944, 316);
+      this.ViewTabs.Size = new System.Drawing.Size(770, 286);
       this.ViewTabs.TabIndex = 0;
       this.ViewTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewTabs_MouseDown);
       // 
       // ColumnPage
       // 
       this.ColumnPage.Controls.Add(this.ColumnGrid);
-      this.ColumnPage.Location = new System.Drawing.Point(4, 31);
+      this.ColumnPage.Location = new System.Drawing.Point(4, 29);
       this.ColumnPage.Name = "ColumnPage";
       this.ColumnPage.Padding = new System.Windows.Forms.Padding(3);
-      this.ColumnPage.Size = new System.Drawing.Size(936, 281);
+      this.ColumnPage.Size = new System.Drawing.Size(762, 253);
       this.ColumnPage.TabIndex = 0;
       this.ColumnPage.Text = "Column";
       this.ColumnPage.UseVisualStyleBackColor = true;
@@ -508,18 +506,18 @@
       this.ColumnGrid.AllowUserToAddRows = false;
       this.ColumnGrid.AllowUserToDeleteRows = false;
       this.ColumnGrid.AllowUserToResizeRows = false;
-      this.ColumnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.ColumnGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ColumnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ColumnGrid.ContextMenuStrip = this.ColumnMenu;
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.ColumnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ColumnGrid.LJCAllowSelectionChange = false;
@@ -527,14 +525,14 @@
       this.ColumnGrid.LJCLastRowIndex = -1;
       this.ColumnGrid.LJCRowHeight = 0;
       this.ColumnGrid.Location = new System.Drawing.Point(3, 3);
-      this.ColumnGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.ColumnGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ColumnGrid.MultiSelect = false;
       this.ColumnGrid.Name = "ColumnGrid";
       this.ColumnGrid.RowHeadersVisible = false;
       this.ColumnGrid.RowHeadersWidth = 62;
       this.ColumnGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ColumnGrid.ShowCellToolTips = false;
-      this.ColumnGrid.Size = new System.Drawing.Size(930, 275);
+      this.ColumnGrid.Size = new System.Drawing.Size(756, 247);
       this.ColumnGrid.TabIndex = 1;
       this.ColumnGrid.Text = "LJCDataGrid";
       this.ColumnGrid.SelectionChanged += new System.EventHandler(this.ColumnGrid_SelectionChanged);
@@ -631,10 +629,10 @@
       // JoinPage
       // 
       this.JoinPage.Controls.Add(this.JoinSplit);
-      this.JoinPage.Location = new System.Drawing.Point(4, 31);
+      this.JoinPage.Location = new System.Drawing.Point(4, 29);
       this.JoinPage.Name = "JoinPage";
       this.JoinPage.Padding = new System.Windows.Forms.Padding(3);
-      this.JoinPage.Size = new System.Drawing.Size(936, 281);
+      this.JoinPage.Size = new System.Drawing.Size(762, 253);
       this.JoinPage.TabIndex = 1;
       this.JoinPage.Text = "Join";
       this.JoinPage.UseVisualStyleBackColor = true;
@@ -658,8 +656,8 @@
       // 
       this.JoinSplit.Panel2.Controls.Add(this.JoinTabs);
       this.JoinSplit.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.JoinSplit.Size = new System.Drawing.Size(933, 286);
-      this.JoinSplit.SplitterDistance = 109;
+      this.JoinSplit.Size = new System.Drawing.Size(762, 253);
+      this.JoinSplit.SplitterDistance = 100;
       this.JoinSplit.TabIndex = 0;
       // 
       // JoinGrid
@@ -667,18 +665,18 @@
       this.JoinGrid.AllowUserToAddRows = false;
       this.JoinGrid.AllowUserToDeleteRows = false;
       this.JoinGrid.AllowUserToResizeRows = false;
-      this.JoinGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.JoinGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.JoinGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinGrid.ContextMenuStrip = this.JoinMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinGrid.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinGrid.DefaultCellStyle = dataGridViewCellStyle10;
       this.JoinGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinGrid.LJCAllowSelectionChange = false;
@@ -686,14 +684,14 @@
       this.JoinGrid.LJCLastRowIndex = -1;
       this.JoinGrid.LJCRowHeight = 0;
       this.JoinGrid.Location = new System.Drawing.Point(0, 0);
-      this.JoinGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.JoinGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.JoinGrid.MultiSelect = false;
       this.JoinGrid.Name = "JoinGrid";
       this.JoinGrid.RowHeadersVisible = false;
       this.JoinGrid.RowHeadersWidth = 62;
       this.JoinGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.JoinGrid.ShowCellToolTips = false;
-      this.JoinGrid.Size = new System.Drawing.Size(929, 105);
+      this.JoinGrid.Size = new System.Drawing.Size(758, 96);
       this.JoinGrid.TabIndex = 7;
       this.JoinGrid.Text = "LJCDataGrid";
       this.JoinGrid.SelectionChanged += new System.EventHandler(this.JoinGrid_SelectionChanged);
@@ -788,17 +786,17 @@
       this.JoinTabs.Location = new System.Drawing.Point(0, 0);
       this.JoinTabs.Name = "JoinTabs";
       this.JoinTabs.SelectedIndex = 0;
-      this.JoinTabs.Size = new System.Drawing.Size(934, 170);
+      this.JoinTabs.Size = new System.Drawing.Size(761, 146);
       this.JoinTabs.TabIndex = 0;
       this.JoinTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.JoinTabs_MouseDown);
       // 
       // JoinOnPage
       // 
       this.JoinOnPage.Controls.Add(this.JoinOnGrid);
-      this.JoinOnPage.Location = new System.Drawing.Point(4, 31);
+      this.JoinOnPage.Location = new System.Drawing.Point(4, 29);
       this.JoinOnPage.Name = "JoinOnPage";
       this.JoinOnPage.Padding = new System.Windows.Forms.Padding(3);
-      this.JoinOnPage.Size = new System.Drawing.Size(926, 135);
+      this.JoinOnPage.Size = new System.Drawing.Size(753, 113);
       this.JoinOnPage.TabIndex = 0;
       this.JoinOnPage.Text = "JoinOn";
       this.JoinOnPage.UseVisualStyleBackColor = true;
@@ -808,18 +806,18 @@
       this.JoinOnGrid.AllowUserToAddRows = false;
       this.JoinOnGrid.AllowUserToDeleteRows = false;
       this.JoinOnGrid.AllowUserToResizeRows = false;
-      this.JoinOnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.JoinOnGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.JoinOnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinOnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinOnGrid.ContextMenuStrip = this.JoinOnMenu;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinOnGrid.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinOnGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.JoinOnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinOnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinOnGrid.LJCAllowSelectionChange = false;
@@ -827,14 +825,14 @@
       this.JoinOnGrid.LJCLastRowIndex = -1;
       this.JoinOnGrid.LJCRowHeight = 0;
       this.JoinOnGrid.Location = new System.Drawing.Point(3, 3);
-      this.JoinOnGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.JoinOnGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.JoinOnGrid.MultiSelect = false;
       this.JoinOnGrid.Name = "JoinOnGrid";
       this.JoinOnGrid.RowHeadersVisible = false;
       this.JoinOnGrid.RowHeadersWidth = 62;
       this.JoinOnGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.JoinOnGrid.ShowCellToolTips = false;
-      this.JoinOnGrid.Size = new System.Drawing.Size(920, 129);
+      this.JoinOnGrid.Size = new System.Drawing.Size(747, 107);
       this.JoinOnGrid.TabIndex = 9;
       this.JoinOnGrid.Text = "LJCDataGrid";
       this.JoinOnGrid.SelectionChanged += new System.EventHandler(this.JoinOnGrid_SelectionChanged);
@@ -922,10 +920,10 @@
       // JoinColumnPage
       // 
       this.JoinColumnPage.Controls.Add(this.JoinColumnGrid);
-      this.JoinColumnPage.Location = new System.Drawing.Point(4, 31);
+      this.JoinColumnPage.Location = new System.Drawing.Point(4, 29);
       this.JoinColumnPage.Name = "JoinColumnPage";
       this.JoinColumnPage.Padding = new System.Windows.Forms.Padding(3);
-      this.JoinColumnPage.Size = new System.Drawing.Size(926, 135);
+      this.JoinColumnPage.Size = new System.Drawing.Size(753, 113);
       this.JoinColumnPage.TabIndex = 1;
       this.JoinColumnPage.Text = "Join Column";
       this.JoinColumnPage.UseVisualStyleBackColor = true;
@@ -935,18 +933,18 @@
       this.JoinColumnGrid.AllowUserToAddRows = false;
       this.JoinColumnGrid.AllowUserToDeleteRows = false;
       this.JoinColumnGrid.AllowUserToResizeRows = false;
-      this.JoinColumnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.JoinColumnGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.JoinColumnGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.JoinColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JoinColumnGrid.ContextMenuStrip = this.JoinColumnMenu;
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JoinColumnGrid.DefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JoinColumnGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.JoinColumnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JoinColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.JoinColumnGrid.LJCAllowSelectionChange = false;
@@ -954,14 +952,14 @@
       this.JoinColumnGrid.LJCLastRowIndex = -1;
       this.JoinColumnGrid.LJCRowHeight = 0;
       this.JoinColumnGrid.Location = new System.Drawing.Point(3, 3);
-      this.JoinColumnGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.JoinColumnGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.JoinColumnGrid.MultiSelect = false;
       this.JoinColumnGrid.Name = "JoinColumnGrid";
       this.JoinColumnGrid.RowHeadersVisible = false;
       this.JoinColumnGrid.RowHeadersWidth = 62;
       this.JoinColumnGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.JoinColumnGrid.ShowCellToolTips = false;
-      this.JoinColumnGrid.Size = new System.Drawing.Size(920, 129);
+      this.JoinColumnGrid.Size = new System.Drawing.Size(747, 107);
       this.JoinColumnGrid.TabIndex = 11;
       this.JoinColumnGrid.Text = "LJCDataGrid";
       this.JoinColumnGrid.SelectionChanged += new System.EventHandler(this.JoinColumnGrid_SelectionChanged);
@@ -1049,9 +1047,9 @@
       // FilterPage
       // 
       this.FilterPage.Controls.Add(this.FilterSplit);
-      this.FilterPage.Location = new System.Drawing.Point(4, 31);
+      this.FilterPage.Location = new System.Drawing.Point(4, 29);
       this.FilterPage.Name = "FilterPage";
-      this.FilterPage.Size = new System.Drawing.Size(936, 281);
+      this.FilterPage.Size = new System.Drawing.Size(762, 253);
       this.FilterPage.TabIndex = 2;
       this.FilterPage.Text = "Filter";
       this.FilterPage.UseVisualStyleBackColor = true;
@@ -1075,8 +1073,8 @@
       // 
       this.FilterSplit.Panel2.Controls.Add(this.ConditionSetTabs);
       this.FilterSplit.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.FilterSplit.Size = new System.Drawing.Size(933, 286);
-      this.FilterSplit.SplitterDistance = 109;
+      this.FilterSplit.Size = new System.Drawing.Size(762, 253);
+      this.FilterSplit.SplitterDistance = 100;
       this.FilterSplit.TabIndex = 1;
       // 
       // FilterGrid
@@ -1084,18 +1082,18 @@
       this.FilterGrid.AllowUserToAddRows = false;
       this.FilterGrid.AllowUserToDeleteRows = false;
       this.FilterGrid.AllowUserToResizeRows = false;
-      this.FilterGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.FilterGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.FilterGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.FilterGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.FilterGrid.ContextMenuStrip = this.FilterMenu;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FilterGrid.DefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.FilterGrid.DefaultCellStyle = dataGridViewCellStyle11;
       this.FilterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.FilterGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.FilterGrid.LJCAllowSelectionChange = false;
@@ -1103,14 +1101,14 @@
       this.FilterGrid.LJCLastRowIndex = -1;
       this.FilterGrid.LJCRowHeight = 0;
       this.FilterGrid.Location = new System.Drawing.Point(0, 0);
-      this.FilterGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.FilterGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.FilterGrid.MultiSelect = false;
       this.FilterGrid.Name = "FilterGrid";
       this.FilterGrid.RowHeadersVisible = false;
       this.FilterGrid.RowHeadersWidth = 62;
       this.FilterGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.FilterGrid.ShowCellToolTips = false;
-      this.FilterGrid.Size = new System.Drawing.Size(929, 105);
+      this.FilterGrid.Size = new System.Drawing.Size(758, 96);
       this.FilterGrid.TabIndex = 7;
       this.FilterGrid.Text = "LJCDataGrid";
       this.FilterGrid.SelectionChanged += new System.EventHandler(this.FilterGrid_SelectionChanged);
@@ -1205,17 +1203,17 @@
       this.ConditionSetTabs.Location = new System.Drawing.Point(0, 0);
       this.ConditionSetTabs.Name = "ConditionSetTabs";
       this.ConditionSetTabs.SelectedIndex = 0;
-      this.ConditionSetTabs.Size = new System.Drawing.Size(934, 170);
+      this.ConditionSetTabs.Size = new System.Drawing.Size(761, 146);
       this.ConditionSetTabs.TabIndex = 0;
       this.ConditionSetTabs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ConditionSetTabs_MouseDown);
       // 
       // ConditionSetPage
       // 
       this.ConditionSetPage.Controls.Add(this.ConditionSetGrid);
-      this.ConditionSetPage.Location = new System.Drawing.Point(4, 31);
+      this.ConditionSetPage.Location = new System.Drawing.Point(4, 29);
       this.ConditionSetPage.Name = "ConditionSetPage";
       this.ConditionSetPage.Padding = new System.Windows.Forms.Padding(3);
-      this.ConditionSetPage.Size = new System.Drawing.Size(926, 135);
+      this.ConditionSetPage.Size = new System.Drawing.Size(753, 113);
       this.ConditionSetPage.TabIndex = 0;
       this.ConditionSetPage.Text = "Condition Set";
       this.ConditionSetPage.UseVisualStyleBackColor = true;
@@ -1225,18 +1223,18 @@
       this.ConditionSetGrid.AllowUserToAddRows = false;
       this.ConditionSetGrid.AllowUserToDeleteRows = false;
       this.ConditionSetGrid.AllowUserToResizeRows = false;
-      this.ConditionSetGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.ConditionSetGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.ConditionSetGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ConditionSetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ConditionSetGrid.ContextMenuStrip = this.ConditionSetMenu;
-      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ConditionSetGrid.DefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ConditionSetGrid.DefaultCellStyle = dataGridViewCellStyle4;
       this.ConditionSetGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ConditionSetGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ConditionSetGrid.LJCAllowSelectionChange = false;
@@ -1244,14 +1242,14 @@
       this.ConditionSetGrid.LJCLastRowIndex = -1;
       this.ConditionSetGrid.LJCRowHeight = 0;
       this.ConditionSetGrid.Location = new System.Drawing.Point(3, 3);
-      this.ConditionSetGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.ConditionSetGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ConditionSetGrid.MultiSelect = false;
       this.ConditionSetGrid.Name = "ConditionSetGrid";
       this.ConditionSetGrid.RowHeadersVisible = false;
       this.ConditionSetGrid.RowHeadersWidth = 62;
       this.ConditionSetGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ConditionSetGrid.ShowCellToolTips = false;
-      this.ConditionSetGrid.Size = new System.Drawing.Size(920, 129);
+      this.ConditionSetGrid.Size = new System.Drawing.Size(747, 107);
       this.ConditionSetGrid.TabIndex = 9;
       this.ConditionSetGrid.Text = "LJCDataGrid";
       this.ConditionSetGrid.SelectionChanged += new System.EventHandler(this.ConditionSetGrid_SelectionChanged);
@@ -1339,10 +1337,10 @@
       // ConditionPage
       // 
       this.ConditionPage.Controls.Add(this.ConditionGrid);
-      this.ConditionPage.Location = new System.Drawing.Point(4, 31);
+      this.ConditionPage.Location = new System.Drawing.Point(4, 29);
       this.ConditionPage.Name = "ConditionPage";
       this.ConditionPage.Padding = new System.Windows.Forms.Padding(3);
-      this.ConditionPage.Size = new System.Drawing.Size(926, 135);
+      this.ConditionPage.Size = new System.Drawing.Size(753, 113);
       this.ConditionPage.TabIndex = 1;
       this.ConditionPage.Text = "Condition";
       this.ConditionPage.UseVisualStyleBackColor = true;
@@ -1356,14 +1354,14 @@
       this.ConditionGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.ConditionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ConditionGrid.ContextMenuStrip = this.ConditionMenu;
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ConditionGrid.DefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ConditionGrid.DefaultCellStyle = dataGridViewCellStyle6;
       this.ConditionGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ConditionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ConditionGrid.LJCAllowSelectionChange = false;
@@ -1371,14 +1369,14 @@
       this.ConditionGrid.LJCLastRowIndex = -1;
       this.ConditionGrid.LJCRowHeight = 0;
       this.ConditionGrid.Location = new System.Drawing.Point(3, 3);
-      this.ConditionGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.ConditionGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ConditionGrid.MultiSelect = false;
       this.ConditionGrid.Name = "ConditionGrid";
       this.ConditionGrid.RowHeadersVisible = false;
       this.ConditionGrid.RowHeadersWidth = 62;
       this.ConditionGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ConditionGrid.ShowCellToolTips = false;
-      this.ConditionGrid.Size = new System.Drawing.Size(920, 129);
+      this.ConditionGrid.Size = new System.Drawing.Size(747, 107);
       this.ConditionGrid.TabIndex = 11;
       this.ConditionGrid.Text = "LJCDataGrid";
       this.ConditionGrid.SelectionChanged += new System.EventHandler(this.ConditionGrid_SelectionChanged);
@@ -1466,9 +1464,9 @@
       // OrderByPage
       // 
       this.OrderByPage.Controls.Add(this.OrderByGrid);
-      this.OrderByPage.Location = new System.Drawing.Point(4, 31);
+      this.OrderByPage.Location = new System.Drawing.Point(4, 29);
       this.OrderByPage.Name = "OrderByPage";
-      this.OrderByPage.Size = new System.Drawing.Size(936, 281);
+      this.OrderByPage.Size = new System.Drawing.Size(762, 253);
       this.OrderByPage.TabIndex = 3;
       this.OrderByPage.Text = "Order By";
       this.OrderByPage.UseVisualStyleBackColor = true;
@@ -1478,18 +1476,18 @@
       this.OrderByGrid.AllowUserToAddRows = false;
       this.OrderByGrid.AllowUserToDeleteRows = false;
       this.OrderByGrid.AllowUserToResizeRows = false;
-      this.OrderByGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.OrderByGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.OrderByGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.OrderByGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.OrderByGrid.ContextMenuStrip = this.OrderByMenu;
-      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.OrderByGrid.DefaultCellStyle = dataGridViewCellStyle9;
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.OrderByGrid.DefaultCellStyle = dataGridViewCellStyle7;
       this.OrderByGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.OrderByGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.OrderByGrid.LJCAllowSelectionChange = false;
@@ -1497,14 +1495,14 @@
       this.OrderByGrid.LJCLastRowIndex = -1;
       this.OrderByGrid.LJCRowHeight = 0;
       this.OrderByGrid.Location = new System.Drawing.Point(0, 0);
-      this.OrderByGrid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.OrderByGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.OrderByGrid.MultiSelect = false;
       this.OrderByGrid.Name = "OrderByGrid";
       this.OrderByGrid.RowHeadersVisible = false;
       this.OrderByGrid.RowHeadersWidth = 62;
       this.OrderByGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.OrderByGrid.ShowCellToolTips = false;
-      this.OrderByGrid.Size = new System.Drawing.Size(936, 281);
+      this.OrderByGrid.Size = new System.Drawing.Size(762, 253);
       this.OrderByGrid.TabIndex = 6;
       this.OrderByGrid.Text = "LJCDataGrid";
       this.OrderByGrid.SelectionChanged += new System.EventHandler(this.OrderByGrid_SelectionChanged);
@@ -1594,18 +1592,18 @@
       this.DataGrid.AllowUserToAddRows = false;
       this.DataGrid.AllowUserToDeleteRows = false;
       this.DataGrid.AllowUserToResizeRows = false;
-      this.DataGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.DataGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
       this.DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.DataGrid.ContextMenuStrip = this.DataMenu;
-      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGrid.DefaultCellStyle = dataGridViewCellStyle10;
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DataGrid.DefaultCellStyle = dataGridViewCellStyle5;
       this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.DataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.DataGrid.LJCAllowSelectionChange = false;
@@ -1620,7 +1618,7 @@
       this.DataGrid.RowTemplate.Height = 28;
       this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.DataGrid.ShowCellToolTips = false;
-      this.DataGrid.Size = new System.Drawing.Size(940, 149);
+      this.DataGrid.Size = new System.Drawing.Size(768, 134);
       this.DataGrid.TabIndex = 0;
       this.DataGrid.Text = "LJCDataGrid";
       this.DataGrid.SelectionChanged += new System.EventHandler(this.DataGrid_SelectionChanged);
@@ -1707,21 +1705,21 @@
       // 
       // TableLabel
       // 
-      this.TableLabel.Location = new System.Drawing.Point(14, 51);
+      this.TableLabel.Location = new System.Drawing.Point(12, 49);
       this.TableLabel.Name = "TableLabel";
-      this.TableLabel.Size = new System.Drawing.Size(141, 32);
+      this.TableLabel.Size = new System.Drawing.Size(115, 20);
       this.TableLabel.TabIndex = 0;
       this.TableLabel.Text = "Table";
       // 
       // TableCombo
       // 
-      this.TableCombo.BackColor = System.Drawing.SystemColors.Control;
+      this.TableCombo.BackColor = System.Drawing.Color.AliceBlue;
       this.TableCombo.ContextMenuStrip = this.TableMenu;
       this.TableCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.TableCombo.FormattingEnabled = true;
-      this.TableCombo.Location = new System.Drawing.Point(161, 50);
+      this.TableCombo.Location = new System.Drawing.Point(131, 45);
       this.TableCombo.Name = "TableCombo";
-      this.TableCombo.Size = new System.Drawing.Size(364, 30);
+      this.TableCombo.Size = new System.Drawing.Size(298, 28);
       this.TableCombo.TabIndex = 1;
       this.TableCombo.SelectedIndexChanged += new System.EventHandler(this.TableCombo_SelectedIndexChanged);
       // 
@@ -1752,13 +1750,13 @@
       // 
       // ConfigCombo
       // 
-      this.ConfigCombo.BackColor = System.Drawing.SystemColors.Control;
+      this.ConfigCombo.BackColor = System.Drawing.Color.AliceBlue;
       this.ConfigCombo.ContextMenuStrip = this.DataConfigMenu;
       this.ConfigCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.ConfigCombo.FormattingEnabled = true;
-      this.ConfigCombo.Location = new System.Drawing.Point(161, 11);
+      this.ConfigCombo.Location = new System.Drawing.Point(131, 10);
       this.ConfigCombo.Name = "ConfigCombo";
-      this.ConfigCombo.Size = new System.Drawing.Size(364, 30);
+      this.ConfigCombo.Size = new System.Drawing.Size(298, 28);
       this.ConfigCombo.TabIndex = 10;
       this.ConfigCombo.SelectedIndexChanged += new System.EventHandler(this.ConfigCombo_SelectedIndexChanged);
       // 
@@ -1788,24 +1786,23 @@
       // 
       // ConfigLabel
       // 
-      this.ConfigLabel.Location = new System.Drawing.Point(14, 12);
+      this.ConfigLabel.Location = new System.Drawing.Point(12, 14);
       this.ConfigLabel.Name = "ConfigLabel";
-      this.ConfigLabel.Size = new System.Drawing.Size(141, 32);
+      this.ConfigLabel.Size = new System.Drawing.Size(115, 20);
       this.ConfigLabel.TabIndex = 9;
       this.ConfigLabel.Text = "Data Config";
       // 
       // ViewEditorList
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(950, 711);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.ClientSize = new System.Drawing.Size(778, 646);
       this.Controls.Add(this.ConfigCombo);
       this.Controls.Add(this.ConfigLabel);
       this.Controls.Add(this.TableCombo);
       this.Controls.Add(this.TableLabel);
       this.Controls.Add(this.MainSplit);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.MinimumSize = new System.Drawing.Size(850, 654);
+      this.MinimumSize = new System.Drawing.Size(700, 600);
       this.Name = "ViewEditorList";
       this.Text = "View Editor";
       this.Load += new System.EventHandler(this.ViewEditorList_Load);

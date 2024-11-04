@@ -64,6 +64,9 @@
       this.AssemblyGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.AssemblyViewCombo = new LJCDBViewControls.ViewCombo();
+      this.AssemblyViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.AssemblyViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.AssemblyItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.AssemblyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AssemblyHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +88,9 @@
       this.AssemblyLabel = new System.Windows.Forms.Label();
       this.ClassSplit = new System.Windows.Forms.SplitContainer();
       this.ClassGroupViewCombo = new LJCDBViewControls.ViewCombo();
+      this.ClassGroupViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassGroupViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ClassGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,6 +110,9 @@
       this.ClassGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.ClassViewCombo = new LJCDBViewControls.ViewCombo();
+      this.ClassViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+      this.ClassViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.ClassItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ClassMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ClassHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +134,9 @@
       this.ClassLabel = new System.Windows.Forms.Label();
       this.MethodSplit = new System.Windows.Forms.SplitContainer();
       this.MethodGroupViewCombo = new LJCDBViewControls.ViewCombo();
+      this.MethodGroupViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodGroupViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.MethodGroupGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodGroupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodGroupHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,6 +156,9 @@
       this.MethodGroupHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.MethodGroupHeader = new LJCWinFormControls.LJCHeaderBox();
       this.MethodViewCombo = new LJCDBViewControls.ViewCombo();
+      this.MethodViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+      this.MethodViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       this.MethodItemGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.MethodItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.MethodItemHeading = new System.Windows.Forms.ToolStripMenuItem();
@@ -163,21 +178,6 @@
       this.TileTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.TileTabsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.TileTabsMove = new System.Windows.Forms.ToolStripMenuItem();
-      this.AssemblyViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-      this.AssemblyViewEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassGroupViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassGroupViewEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-      this.ClassViewEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.MethodGroupViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-      this.MethodGroupViewEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.MethodViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-      this.MethodViewEdit = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.TabsSplit)).BeginInit();
       this.TabsSplit.Panel1.SuspendLayout();
       this.TabsSplit.Panel2.SuspendLayout();
@@ -192,6 +192,7 @@
       this.AssemblyGroupViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.AssemblyGroupGrid)).BeginInit();
       this.AssemblyGroupMenu.SuspendLayout();
+      this.AssemblyViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.AssemblyItemGrid)).BeginInit();
       this.AssemblyMenu.SuspendLayout();
       this.ClassTab.SuspendLayout();
@@ -199,8 +200,10 @@
       this.ClassSplit.Panel1.SuspendLayout();
       this.ClassSplit.Panel2.SuspendLayout();
       this.ClassSplit.SuspendLayout();
+      this.ClassGroupViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ClassGroupGrid)).BeginInit();
       this.ClassGroupMenu.SuspendLayout();
+      this.ClassViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ClassItemGrid)).BeginInit();
       this.ClassMenu.SuspendLayout();
       this.MethodTab.SuspendLayout();
@@ -208,16 +211,13 @@
       this.MethodSplit.Panel1.SuspendLayout();
       this.MethodSplit.Panel2.SuspendLayout();
       this.MethodSplit.SuspendLayout();
+      this.MethodGroupViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.MethodGroupGrid)).BeginInit();
       this.MethodGroupMenu.SuspendLayout();
+      this.MethodViewMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.MethodItemGrid)).BeginInit();
       this.MethodItemMenu.SuspendLayout();
       this.TileTabsMenu.SuspendLayout();
-      this.AssemblyViewMenu.SuspendLayout();
-      this.ClassGroupViewMenu.SuspendLayout();
-      this.ClassViewMenu.SuspendLayout();
-      this.MethodGroupViewMenu.SuspendLayout();
-      this.MethodViewMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // TabsSplit
@@ -347,7 +347,7 @@
       this.AssemblyGroupGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.AssemblyGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.AssemblyGroupGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.AssemblyGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.AssemblyGroupGrid.ContextMenuStrip = this.AssemblyGroupMenu;
       dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -508,7 +508,7 @@
       this.AssemblyGroupHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.AssemblyGroupHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.AssemblyGroupHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.AssemblyGroupHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.AssemblyGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyGroupHeader.Name = "AssemblyGroupHeader";
@@ -530,6 +530,30 @@
       this.AssemblyViewCombo.TabIndex = 3;
       this.AssemblyViewCombo.SelectedIndexChanged += new System.EventHandler(this.AssemblyViewCombo_SelectedIndexChanged);
       // 
+      // AssemblyViewMenu
+      // 
+      this.AssemblyViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.AssemblyViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.AssemblyViewEdit});
+      this.AssemblyViewMenu.Name = "AssemblyMenu";
+      this.AssemblyViewMenu.Size = new System.Drawing.Size(277, 68);
+      // 
+      // toolStripMenuItem2
+      // 
+      this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(276, 32);
+      this.toolStripMenuItem2.Text = "Assembly Combo Menu";
+      // 
+      // AssemblyViewEdit
+      // 
+      this.AssemblyViewEdit.Name = "AssemblyViewEdit";
+      this.AssemblyViewEdit.ShortcutKeyDisplayString = "ENTER";
+      this.AssemblyViewEdit.Size = new System.Drawing.Size(276, 32);
+      this.AssemblyViewEdit.Text = "&Edit";
+      this.AssemblyViewEdit.Click += new System.EventHandler(this.AssemblyViewEdit_Click);
+      // 
       // AssemblyItemGrid
       // 
       this.AssemblyItemGrid.AllowDrop = true;
@@ -539,7 +563,7 @@
       this.AssemblyItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.AssemblyItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.AssemblyItemGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.AssemblyItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.AssemblyItemGrid.ContextMenuStrip = this.AssemblyMenu;
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -685,7 +709,7 @@
       this.AssemblyItemHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.AssemblyItemHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.AssemblyItemHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.AssemblyItemHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.AssemblyItemHeader.Location = new System.Drawing.Point(0, 0);
       this.AssemblyItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.AssemblyItemHeader.Name = "AssemblyItemHeader";
@@ -760,6 +784,30 @@
       this.ClassGroupViewCombo.TabIndex = 3;
       this.ClassGroupViewCombo.SelectedIndexChanged += new System.EventHandler(this.ClassGroupViewCombo_SelectedIndexChanged);
       // 
+      // ClassGroupViewMenu
+      // 
+      this.ClassGroupViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.ClassGroupViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.ClassGroupViewEdit});
+      this.ClassGroupViewMenu.Name = "AssemblyMenu";
+      this.ClassGroupViewMenu.Size = new System.Drawing.Size(295, 68);
+      // 
+      // toolStripMenuItem3
+      // 
+      this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+      this.toolStripMenuItem3.Size = new System.Drawing.Size(294, 32);
+      this.toolStripMenuItem3.Text = "Class Group Combo Menu";
+      // 
+      // ClassGroupViewEdit
+      // 
+      this.ClassGroupViewEdit.Name = "ClassGroupViewEdit";
+      this.ClassGroupViewEdit.ShortcutKeyDisplayString = "ENTER";
+      this.ClassGroupViewEdit.Size = new System.Drawing.Size(294, 32);
+      this.ClassGroupViewEdit.Text = "&Edit";
+      this.ClassGroupViewEdit.Click += new System.EventHandler(this.ClassGroupViewEdit_Click);
+      // 
       // ClassGroupGrid
       // 
       this.ClassGroupGrid.AllowDrop = true;
@@ -769,7 +817,7 @@
       this.ClassGroupGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.ClassGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.ClassGroupGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ClassGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ClassGroupGrid.ContextMenuStrip = this.ClassGroupMenu;
       dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -929,7 +977,7 @@
       this.ClassGroupHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ClassGroupHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ClassGroupHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ClassGroupHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.ClassGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassGroupHeader.Name = "ClassGroupHeader";
@@ -951,6 +999,30 @@
       this.ClassViewCombo.TabIndex = 3;
       this.ClassViewCombo.SelectedIndexChanged += new System.EventHandler(this.ClassViewCombo_SelectedIndexChanged);
       // 
+      // ClassViewMenu
+      // 
+      this.ClassViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.ClassViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem4,
+            this.ClassViewEdit});
+      this.ClassViewMenu.Name = "AssemblyMenu";
+      this.ClassViewMenu.Size = new System.Drawing.Size(240, 68);
+      // 
+      // toolStripMenuItem4
+      // 
+      this.toolStripMenuItem4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+      this.toolStripMenuItem4.Size = new System.Drawing.Size(239, 32);
+      this.toolStripMenuItem4.Text = "Class Combo Menu";
+      // 
+      // ClassViewEdit
+      // 
+      this.ClassViewEdit.Name = "ClassViewEdit";
+      this.ClassViewEdit.ShortcutKeyDisplayString = "ENTER";
+      this.ClassViewEdit.Size = new System.Drawing.Size(239, 32);
+      this.ClassViewEdit.Text = "&Edit";
+      this.ClassViewEdit.Click += new System.EventHandler(this.ClassViewEdit_Click);
+      // 
       // ClassItemGrid
       // 
       this.ClassItemGrid.AllowDrop = true;
@@ -960,7 +1032,7 @@
       this.ClassItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.ClassItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.ClassItemGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ClassItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ClassItemGrid.ContextMenuStrip = this.ClassMenu;
       dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1106,7 +1178,7 @@
       this.ClassItemHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ClassItemHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ClassItemHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ClassItemHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.ClassItemHeader.Location = new System.Drawing.Point(0, 0);
       this.ClassItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ClassItemHeader.Name = "ClassItemHeader";
@@ -1180,6 +1252,30 @@
       this.MethodGroupViewCombo.TabIndex = 3;
       this.MethodGroupViewCombo.SelectedIndexChanged += new System.EventHandler(this.MethodGroupViewCombo_SelectedIndexChanged);
       // 
+      // MethodGroupViewMenu
+      // 
+      this.MethodGroupViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.MethodGroupViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5,
+            this.MethodGroupViewEdit});
+      this.MethodGroupViewMenu.Name = "AssemblyMenu";
+      this.MethodGroupViewMenu.Size = new System.Drawing.Size(318, 68);
+      // 
+      // toolStripMenuItem5
+      // 
+      this.toolStripMenuItem5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+      this.toolStripMenuItem5.Size = new System.Drawing.Size(317, 32);
+      this.toolStripMenuItem5.Text = "Method Group Combo Menu";
+      // 
+      // MethodGroupViewEdit
+      // 
+      this.MethodGroupViewEdit.Name = "MethodGroupViewEdit";
+      this.MethodGroupViewEdit.ShortcutKeyDisplayString = "ENTER";
+      this.MethodGroupViewEdit.Size = new System.Drawing.Size(317, 32);
+      this.MethodGroupViewEdit.Text = "&Edit";
+      this.MethodGroupViewEdit.Click += new System.EventHandler(this.MethodGroupViewEdit_Click);
+      // 
       // MethodGroupGrid
       // 
       this.MethodGroupGrid.AllowDrop = true;
@@ -1189,7 +1285,7 @@
       this.MethodGroupGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.MethodGroupGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.MethodGroupGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.MethodGroupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.MethodGroupGrid.ContextMenuStrip = this.MethodGroupMenu;
       dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1349,7 +1445,7 @@
       this.MethodGroupHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.MethodGroupHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.MethodGroupHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.MethodGroupHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.MethodGroupHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodGroupHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodGroupHeader.Name = "MethodGroupHeader";
@@ -1371,6 +1467,30 @@
       this.MethodViewCombo.TabIndex = 3;
       this.MethodViewCombo.SelectedIndexChanged += new System.EventHandler(this.MethodViewCombo_SelectedIndexChanged);
       // 
+      // MethodViewMenu
+      // 
+      this.MethodViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.MethodViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.MethodViewEdit});
+      this.MethodViewMenu.Name = "AssemblyMenu";
+      this.MethodViewMenu.Size = new System.Drawing.Size(263, 68);
+      // 
+      // toolStripMenuItem6
+      // 
+      this.toolStripMenuItem6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+      this.toolStripMenuItem6.Size = new System.Drawing.Size(262, 32);
+      this.toolStripMenuItem6.Text = "Method Combo Menu";
+      // 
+      // MethodViewEdit
+      // 
+      this.MethodViewEdit.Name = "MethodViewEdit";
+      this.MethodViewEdit.ShortcutKeyDisplayString = "ENTER";
+      this.MethodViewEdit.Size = new System.Drawing.Size(262, 32);
+      this.MethodViewEdit.Text = "&Edit";
+      this.MethodViewEdit.Click += new System.EventHandler(this.MethodViewEdit_Click);
+      // 
       // MethodItemGrid
       // 
       this.MethodItemGrid.AllowDrop = true;
@@ -1380,7 +1500,7 @@
       this.MethodItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.MethodItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.MethodItemGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.MethodItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.MethodItemGrid.ContextMenuStrip = this.MethodItemMenu;
       dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1526,7 +1646,7 @@
       this.MethodItemHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.MethodItemHeader.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.MethodItemHeader.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.MethodItemHeader.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.MethodItemHeader.Location = new System.Drawing.Point(0, 0);
       this.MethodItemHeader.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.MethodItemHeader.Name = "MethodItemHeader";
@@ -1563,126 +1683,6 @@
       this.TileTabsMove.Text = "Move Left";
       this.TileTabsMove.Click += new System.EventHandler(this.TileTabsMove_Click);
       // 
-      // AssemblyViewMenu
-      // 
-      this.AssemblyViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.AssemblyViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.AssemblyViewEdit});
-      this.AssemblyViewMenu.Name = "AssemblyMenu";
-      this.AssemblyViewMenu.Size = new System.Drawing.Size(277, 68);
-      // 
-      // toolStripMenuItem2
-      // 
-      this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(276, 32);
-      this.toolStripMenuItem2.Text = "Assembly Combo Menu";
-      // 
-      // AssemblyViewEdit
-      // 
-      this.AssemblyViewEdit.Name = "AssemblyViewEdit";
-      this.AssemblyViewEdit.ShortcutKeyDisplayString = "ENTER";
-      this.AssemblyViewEdit.Size = new System.Drawing.Size(276, 32);
-      this.AssemblyViewEdit.Text = "&Edit";
-      this.AssemblyViewEdit.Click += new System.EventHandler(this.AssemblyViewEdit_Click);
-      // 
-      // ClassGroupViewMenu
-      // 
-      this.ClassGroupViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.ClassGroupViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.ClassGroupViewEdit});
-      this.ClassGroupViewMenu.Name = "AssemblyMenu";
-      this.ClassGroupViewMenu.Size = new System.Drawing.Size(295, 68);
-      // 
-      // toolStripMenuItem3
-      // 
-      this.toolStripMenuItem3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-      this.toolStripMenuItem3.Size = new System.Drawing.Size(294, 32);
-      this.toolStripMenuItem3.Text = "Class Group Combo Menu";
-      // 
-      // ClassGroupViewEdit
-      // 
-      this.ClassGroupViewEdit.Name = "ClassGroupViewEdit";
-      this.ClassGroupViewEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ClassGroupViewEdit.Size = new System.Drawing.Size(294, 32);
-      this.ClassGroupViewEdit.Text = "&Edit";
-      this.ClassGroupViewEdit.Click += new System.EventHandler(this.ClassGroupViewEdit_Click);
-      // 
-      // ClassViewMenu
-      // 
-      this.ClassViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.ClassViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem4,
-            this.ClassViewEdit});
-      this.ClassViewMenu.Name = "AssemblyMenu";
-      this.ClassViewMenu.Size = new System.Drawing.Size(240, 68);
-      // 
-      // toolStripMenuItem4
-      // 
-      this.toolStripMenuItem4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-      this.toolStripMenuItem4.Size = new System.Drawing.Size(239, 32);
-      this.toolStripMenuItem4.Text = "Class Combo Menu";
-      // 
-      // ClassViewEdit
-      // 
-      this.ClassViewEdit.Name = "ClassViewEdit";
-      this.ClassViewEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ClassViewEdit.Size = new System.Drawing.Size(239, 32);
-      this.ClassViewEdit.Text = "&Edit";
-      this.ClassViewEdit.Click += new System.EventHandler(this.ClassViewEdit_Click);
-      // 
-      // MethodGroupViewMenu
-      // 
-      this.MethodGroupViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.MethodGroupViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5,
-            this.MethodGroupViewEdit});
-      this.MethodGroupViewMenu.Name = "AssemblyMenu";
-      this.MethodGroupViewMenu.Size = new System.Drawing.Size(318, 68);
-      // 
-      // toolStripMenuItem5
-      // 
-      this.toolStripMenuItem5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-      this.toolStripMenuItem5.Size = new System.Drawing.Size(317, 32);
-      this.toolStripMenuItem5.Text = "Method Group Combo Menu";
-      // 
-      // MethodGroupViewEdit
-      // 
-      this.MethodGroupViewEdit.Name = "MethodGroupViewEdit";
-      this.MethodGroupViewEdit.ShortcutKeyDisplayString = "ENTER";
-      this.MethodGroupViewEdit.Size = new System.Drawing.Size(317, 32);
-      this.MethodGroupViewEdit.Text = "&Edit";
-      this.MethodGroupViewEdit.Click += new System.EventHandler(this.MethodGroupViewEdit_Click);
-      // 
-      // MethodViewMenu
-      // 
-      this.MethodViewMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.MethodViewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem6,
-            this.MethodViewEdit});
-      this.MethodViewMenu.Name = "AssemblyMenu";
-      this.MethodViewMenu.Size = new System.Drawing.Size(263, 68);
-      // 
-      // toolStripMenuItem6
-      // 
-      this.toolStripMenuItem6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-      this.toolStripMenuItem6.Size = new System.Drawing.Size(262, 32);
-      this.toolStripMenuItem6.Text = "Method Combo Menu";
-      // 
-      // MethodViewEdit
-      // 
-      this.MethodViewEdit.Name = "MethodViewEdit";
-      this.MethodViewEdit.ShortcutKeyDisplayString = "ENTER";
-      this.MethodViewEdit.Size = new System.Drawing.Size(262, 32);
-      this.MethodViewEdit.Text = "&Edit";
-      this.MethodViewEdit.Click += new System.EventHandler(this.MethodViewEdit_Click);
-      // 
       // LJCGenDocList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1706,6 +1706,7 @@
       this.AssemblyGroupViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.AssemblyGroupGrid)).EndInit();
       this.AssemblyGroupMenu.ResumeLayout(false);
+      this.AssemblyViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.AssemblyItemGrid)).EndInit();
       this.AssemblyMenu.ResumeLayout(false);
       this.ClassTab.ResumeLayout(false);
@@ -1713,8 +1714,10 @@
       this.ClassSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ClassSplit)).EndInit();
       this.ClassSplit.ResumeLayout(false);
+      this.ClassGroupViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ClassGroupGrid)).EndInit();
       this.ClassGroupMenu.ResumeLayout(false);
+      this.ClassViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ClassItemGrid)).EndInit();
       this.ClassMenu.ResumeLayout(false);
       this.MethodTab.ResumeLayout(false);
@@ -1722,16 +1725,13 @@
       this.MethodSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MethodSplit)).EndInit();
       this.MethodSplit.ResumeLayout(false);
+      this.MethodGroupViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MethodGroupGrid)).EndInit();
       this.MethodGroupMenu.ResumeLayout(false);
+      this.MethodViewMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MethodItemGrid)).EndInit();
       this.MethodItemMenu.ResumeLayout(false);
       this.TileTabsMenu.ResumeLayout(false);
-      this.AssemblyViewMenu.ResumeLayout(false);
-      this.ClassGroupViewMenu.ResumeLayout(false);
-      this.ClassViewMenu.ResumeLayout(false);
-      this.MethodGroupViewMenu.ResumeLayout(false);
-      this.MethodViewMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }

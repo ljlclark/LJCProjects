@@ -457,7 +457,7 @@
       this.SectionHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.SectionHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.SectionHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.SectionHeading.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.SectionHeading.Location = new System.Drawing.Point(0, 0);
       this.SectionHeading.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.SectionHeading.Name = "SectionHeading";
@@ -547,7 +547,7 @@
       this.SectionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.SectionGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.SectionGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.SectionGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.SectionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.SectionGrid.ContextMenuStrip = this.SectionMenu;
@@ -555,8 +555,8 @@
       dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
       dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.SectionGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.SectionGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -739,7 +739,7 @@
       this.ItemHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ItemHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ItemHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ItemHeading.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.ItemHeading.Location = new System.Drawing.Point(0, 0);
       this.ItemHeading.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ItemHeading.Name = "ItemHeading";
@@ -829,7 +829,7 @@
       this.ItemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.ItemGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.ItemGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ItemGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.ItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ItemGrid.ContextMenuStrip = this.ItemMenu;
@@ -981,7 +981,7 @@
       this.ReplacementHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ReplacementHeading.LJCBeginColor = System.Drawing.Color.AliceBlue;
-      this.ReplacementHeading.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ReplacementHeading.LJCEndColor = System.Drawing.Color.SkyBlue;
       this.ReplacementHeading.Location = new System.Drawing.Point(0, 0);
       this.ReplacementHeading.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ReplacementHeading.Name = "ReplacementHeading";
@@ -1071,7 +1071,7 @@
       this.ReplacementGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.ReplacementGrid.BackgroundColor = System.Drawing.Color.AliceBlue;
+      this.ReplacementGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ReplacementGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.ReplacementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ReplacementGrid.ContextMenuStrip = this.ReplacementMenu;

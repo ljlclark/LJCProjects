@@ -45,6 +45,8 @@ namespace LJCDataAccess
         pair = GetPair("Password", password);
         connectionBuilder.Add(pair[0], pair[1]);
       }
+
+      // Get any additional pairs separated with "|".
       if (pairs != null)
       {
         foreach (var value in pairs)

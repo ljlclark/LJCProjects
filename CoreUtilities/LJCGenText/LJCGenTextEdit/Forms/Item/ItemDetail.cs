@@ -48,8 +48,8 @@ namespace LJCGenTextEdit
     {
       base.OnPaintBackground(e);
 
-      FormCommon.CreateGradient(e.Graphics, ClientRectangle
-        , BeginColor, EndColor);
+      //FormCommon.CreateGradient(e.Graphics, ClientRectangle
+      //  , BeginColor, EndColor);
     }
     #endregion
 
@@ -213,10 +213,11 @@ namespace LJCGenTextEdit
     private void InitializeControls()
     {
       BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
+      //EndColor = Color.LightSkyBlue;
+      EndColor = Color.SkyBlue;
 
       // Initialize Class Data.
-      NameLabel.BackColor = BeginColor;
+      //NameLabel.BackColor = BeginColor;
 
       NameTextbox.MaxLength = 60;
 

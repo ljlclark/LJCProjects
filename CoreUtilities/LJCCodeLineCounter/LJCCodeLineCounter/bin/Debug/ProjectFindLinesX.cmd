@@ -1,4 +1,4 @@
-set Find=".Split("
+set Find="indent"
 
 if %1. == . goto default
 set folder=%1

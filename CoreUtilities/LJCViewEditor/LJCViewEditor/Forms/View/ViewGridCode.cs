@@ -330,6 +330,7 @@ namespace LJCViewEditor
         {
           sql = dbSqlBuilder.CreateUpdateSql();
           mInfoWindow.LJCInfoData = sql;
+          mInfoWindow.Show(ViewEditorList);
         }
       }
     }

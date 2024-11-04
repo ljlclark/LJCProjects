@@ -66,10 +66,10 @@ namespace _Namespace_
       else
       {
         // Case sensitive.
-        //retValue = _CompareToName_.CompareTo(other._CompareToName_);
+        retValue = _CompareToName_.CompareTo(other._CompareToName_);
 
         // Not case sensitive.
-        retValue = string.Compare(_CompareToName_, other._CompareToName_, true);
+        //retValue = string.Compare(_CompareToName_, other._CompareToName_, true);
       }
       return retValue;
     }
@@ -78,8 +78,8 @@ namespace _Namespace_
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      // $"{mSequence}){mName}:{mID}-{mValue}";
-      return m_ToStringName_;
+      var retValue = $"{mSequence} {m_ToStringName_}:{mID}-{mValue}";
+      return retValue;
     }
     #endregion
 
@@ -180,10 +180,10 @@ namespace _Namespace_
         if (-2 == retValue)
         {
           // Case sensitive.
-          //retValue = x._ComparerName_.CompareTo(y._ComparerName_);
+          retValue = x._ComparerName_.CompareTo(y._ComparerName_);
 
           // Not case sensitive.
-          retValue = string.Compare(x._ComparerName_, y._ComparerName_, true);
+          //retValue = string.Compare(x._ComparerName_, y._ComparerName_, true);
         }
       }
       return retValue;

@@ -67,8 +67,8 @@ namespace LJCViewEditor
 		{
 			base.OnPaintBackground(e);
 
-			FormCommon.CreateGradient(e.Graphics, ClientRectangle
-				, BeginColor, EndColor);
+			//FormCommon.CreateGradient(e.Graphics, ClientRectangle
+			//	, BeginColor, EndColor);
 		}
 		#endregion
 
@@ -277,7 +277,7 @@ namespace LJCViewEditor
       EndColor = mSettings.EndColor;
 
       // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
       JoinTableCombo.MaxLength = ViewColumn.LengthColumnName;
       JoinTypeTextbox.MaxLength = ViewColumn.LengthDataTypeName;
 

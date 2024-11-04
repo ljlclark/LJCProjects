@@ -234,7 +234,8 @@ namespace LJCViewEditor
       JoinSplit.Resize += JoinSplit_Resize;
       FilterSplit.Resize += FilterSplit_Resize;
 
-      BackColor = BeginColor;
+      // *** Next Statement *** Delete
+      //BackColor = BeginColor;
     }
 
     // Initialize the Class Data.

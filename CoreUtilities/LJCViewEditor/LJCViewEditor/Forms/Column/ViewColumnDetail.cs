@@ -33,8 +33,8 @@ namespace LJCViewEditor
       LJCRecord = null;
 
       // Set default class data.
-      BeginColor = Color.AliceBlue;
-      EndColor = Color.LightSkyBlue;
+      BeginColor = Color.LightBlue;
+      EndColor = Color.SkyBlue;
       mAllowTemplateGetValues = true;
     }
     #endregion
@@ -67,8 +67,8 @@ namespace LJCViewEditor
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
-      FormCommon.CreateGradient(e.Graphics, ClientRectangle
-        , BeginColor, EndColor);
+      //FormCommon.CreateGradient(e.Graphics, ClientRectangle
+      //  , BeginColor, EndColor);
     }
     #endregion
 
@@ -287,7 +287,7 @@ namespace LJCViewEditor
       mDataDbView = new DataDbView(Managers);
 
       // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
       ColumnNameTextbox.MaxLength = ViewColumn.LengthColumnName;
       PropertyTextbox.MaxLength = ViewColumn.LengthPropertyName;

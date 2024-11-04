@@ -172,7 +172,7 @@ namespace LJCGenTextEdit
       {
         mFilePaths = new FilePaths();
       }
-      BackColor = BeginColor;
+      //BackColor = BeginColor;
     }
 
     // Restores the control values.
@@ -260,7 +260,7 @@ namespace LJCGenTextEdit
     // Setup the grid columns.
     private void SetupGridSection()
     {
-      SectionGrid.BackgroundColor = BeginColor;
+      //SectionGrid.BackgroundColor = BeginColor;
 
       if (0 == SectionGrid.Columns.Count)
       {
@@ -278,7 +278,7 @@ namespace LJCGenTextEdit
     // Setup the grid columns.
     private void SetupGridItem()
     {
-      ItemGrid.BackgroundColor = BeginColor;
+      //ItemGrid.BackgroundColor = BeginColor;
 
       if (0 == ItemGrid.Columns.Count)
       {
@@ -296,7 +296,7 @@ namespace LJCGenTextEdit
     // Setup the grid columns.
     private void SetupGridReplacement()
     {
-      ReplacementGrid.BackgroundColor = BeginColor;
+      //ReplacementGrid.BackgroundColor = BeginColor;
 
       if (0 == ReplacementGrid.Columns.Count)
       {

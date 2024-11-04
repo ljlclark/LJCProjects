@@ -57,56 +57,56 @@
       // 
       // DataTypeLabel
       // 
-      this.DataTypeLabel.Location = new System.Drawing.Point(13, 233);
-      this.DataTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.DataTypeLabel.Location = new System.Drawing.Point(16, 253);
+      this.DataTypeLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.DataTypeLabel.Name = "DataTypeLabel";
-      this.DataTypeLabel.Size = new System.Drawing.Size(153, 20);
+      this.DataTypeLabel.Size = new System.Drawing.Size(187, 32);
       this.DataTypeLabel.TabIndex = 12;
       this.DataTypeLabel.Text = "Data Type Name";
       // 
       // ColumnNameTextbox
       // 
-      this.ColumnNameTextbox.Location = new System.Drawing.Point(167, 86);
-      this.ColumnNameTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ColumnNameTextbox.Location = new System.Drawing.Point(204, 95);
+      this.ColumnNameTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.ColumnNameTextbox.Name = "ColumnNameTextbox";
-      this.ColumnNameTextbox.Size = new System.Drawing.Size(433, 26);
+      this.ColumnNameTextbox.Size = new System.Drawing.Size(528, 28);
       this.ColumnNameTextbox.TabIndex = 5;
       // 
       // ColumnNameLabel
       // 
-      this.ColumnNameLabel.Location = new System.Drawing.Point(13, 89);
-      this.ColumnNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.ColumnNameLabel.Location = new System.Drawing.Point(16, 95);
+      this.ColumnNameLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.ColumnNameLabel.Name = "ColumnNameLabel";
-      this.ColumnNameLabel.Size = new System.Drawing.Size(153, 20);
+      this.ColumnNameLabel.Size = new System.Drawing.Size(187, 32);
       this.ColumnNameLabel.TabIndex = 4;
       this.ColumnNameLabel.Text = "Column Name";
       // 
       // ParentTextbox
       // 
-      this.ParentTextbox.Location = new System.Drawing.Point(167, 14);
-      this.ParentTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ParentTextbox.Location = new System.Drawing.Point(204, 15);
+      this.ParentTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.ParentTextbox.Name = "ParentTextbox";
       this.ParentTextbox.ReadOnly = true;
-      this.ParentTextbox.Size = new System.Drawing.Size(433, 26);
+      this.ParentTextbox.Size = new System.Drawing.Size(528, 28);
       this.ParentTextbox.TabIndex = 1;
       this.ParentTextbox.TabStop = false;
       // 
       // ParentLabel
       // 
-      this.ParentLabel.Location = new System.Drawing.Point(13, 17);
-      this.ParentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.ParentLabel.Location = new System.Drawing.Point(14, 16);
+      this.ParentLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.ParentLabel.Name = "ParentLabel";
-      this.ParentLabel.Size = new System.Drawing.Size(153, 20);
+      this.ParentLabel.Size = new System.Drawing.Size(187, 32);
       this.ParentLabel.TabIndex = 0;
       this.ParentLabel.Text = "View Name";
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(489, 367);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.FormCancelButton.Location = new System.Drawing.Point(598, 404);
+      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.FormCancelButton.Name = "FormCancelButton";
-      this.FormCancelButton.Size = new System.Drawing.Size(112, 35);
+      this.FormCancelButton.Size = new System.Drawing.Size(137, 38);
       this.FormCancelButton.TabIndex = 20;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
@@ -115,10 +115,10 @@
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(369, 368);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.OKButton.Location = new System.Drawing.Point(451, 405);
+      this.OKButton.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.OKButton.Name = "OKButton";
-      this.OKButton.Size = new System.Drawing.Size(112, 34);
+      this.OKButton.Size = new System.Drawing.Size(137, 37);
       this.OKButton.TabIndex = 19;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
@@ -126,69 +126,69 @@
       // 
       // CaptionTextbox
       // 
-      this.CaptionTextbox.Location = new System.Drawing.Point(167, 194);
-      this.CaptionTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.CaptionTextbox.Location = new System.Drawing.Point(204, 213);
+      this.CaptionTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.CaptionTextbox.Name = "CaptionTextbox";
-      this.CaptionTextbox.Size = new System.Drawing.Size(433, 26);
+      this.CaptionTextbox.Size = new System.Drawing.Size(528, 28);
       this.CaptionTextbox.TabIndex = 11;
       // 
       // CaptionLabel
       // 
-      this.CaptionLabel.Location = new System.Drawing.Point(13, 197);
-      this.CaptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.CaptionLabel.Location = new System.Drawing.Point(16, 214);
+      this.CaptionLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.CaptionLabel.Name = "CaptionLabel";
-      this.CaptionLabel.Size = new System.Drawing.Size(153, 20);
+      this.CaptionLabel.Size = new System.Drawing.Size(187, 32);
       this.CaptionLabel.TabIndex = 10;
       this.CaptionLabel.Text = "Caption";
       // 
       // ValueTextbox
       // 
-      this.ValueTextbox.Location = new System.Drawing.Point(167, 266);
-      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.ValueTextbox.Location = new System.Drawing.Point(204, 293);
+      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(433, 26);
+      this.ValueTextbox.Size = new System.Drawing.Size(528, 28);
       this.ValueTextbox.TabIndex = 15;
       // 
       // ValueLabel
       // 
-      this.ValueLabel.Location = new System.Drawing.Point(13, 269);
-      this.ValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.ValueLabel.Location = new System.Drawing.Point(16, 293);
+      this.ValueLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.ValueLabel.Name = "ValueLabel";
-      this.ValueLabel.Size = new System.Drawing.Size(153, 20);
+      this.ValueLabel.Size = new System.Drawing.Size(187, 32);
       this.ValueLabel.TabIndex = 14;
       this.ValueLabel.Text = "Value";
       // 
       // RenameTextbox
       // 
-      this.RenameTextbox.Location = new System.Drawing.Point(167, 158);
-      this.RenameTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.RenameTextbox.Location = new System.Drawing.Point(204, 174);
+      this.RenameTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.RenameTextbox.Name = "RenameTextbox";
-      this.RenameTextbox.Size = new System.Drawing.Size(433, 26);
+      this.RenameTextbox.Size = new System.Drawing.Size(528, 28);
       this.RenameTextbox.TabIndex = 9;
       // 
       // RenameLabel
       // 
-      this.RenameLabel.Location = new System.Drawing.Point(13, 161);
-      this.RenameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.RenameLabel.Location = new System.Drawing.Point(16, 174);
+      this.RenameLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.RenameLabel.Name = "RenameLabel";
-      this.RenameLabel.Size = new System.Drawing.Size(153, 20);
+      this.RenameLabel.Size = new System.Drawing.Size(187, 32);
       this.RenameLabel.TabIndex = 8;
       this.RenameLabel.Text = "Rename As";
       // 
       // PropertyTextbox
       // 
-      this.PropertyTextbox.Location = new System.Drawing.Point(167, 122);
-      this.PropertyTextbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.PropertyTextbox.Location = new System.Drawing.Point(204, 134);
+      this.PropertyTextbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.PropertyTextbox.Name = "PropertyTextbox";
-      this.PropertyTextbox.Size = new System.Drawing.Size(433, 26);
+      this.PropertyTextbox.Size = new System.Drawing.Size(528, 28);
       this.PropertyTextbox.TabIndex = 7;
       // 
       // PropertyLabel
       // 
-      this.PropertyLabel.Location = new System.Drawing.Point(13, 125);
-      this.PropertyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.PropertyLabel.Location = new System.Drawing.Point(16, 135);
+      this.PropertyLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.PropertyLabel.Name = "PropertyLabel";
-      this.PropertyLabel.Size = new System.Drawing.Size(153, 20);
+      this.PropertyLabel.Size = new System.Drawing.Size(187, 32);
       this.PropertyLabel.TabIndex = 6;
       this.PropertyLabel.Text = "Property Name";
       // 
@@ -196,37 +196,39 @@
       // 
       this.DataTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.DataTypeCombo.FormattingEnabled = true;
-      this.DataTypeCombo.Location = new System.Drawing.Point(167, 229);
+      this.DataTypeCombo.Location = new System.Drawing.Point(204, 252);
+      this.DataTypeCombo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
       this.DataTypeCombo.Name = "DataTypeCombo";
-      this.DataTypeCombo.Size = new System.Drawing.Size(433, 28);
+      this.DataTypeCombo.Size = new System.Drawing.Size(528, 30);
       this.DataTypeCombo.TabIndex = 13;
       // 
       // TemplateColumnCombo
       // 
       this.TemplateColumnCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.TemplateColumnCombo.FormattingEnabled = true;
-      this.TemplateColumnCombo.Location = new System.Drawing.Point(167, 49);
-      this.TemplateColumnCombo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+      this.TemplateColumnCombo.Location = new System.Drawing.Point(204, 54);
+      this.TemplateColumnCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 3);
       this.TemplateColumnCombo.Name = "TemplateColumnCombo";
-      this.TemplateColumnCombo.Size = new System.Drawing.Size(300, 28);
+      this.TemplateColumnCombo.Size = new System.Drawing.Size(366, 30);
       this.TemplateColumnCombo.TabIndex = 3;
       this.TemplateColumnCombo.SelectedIndexChanged += new System.EventHandler(this.TemplateCombo_SelectedIndexChanged);
       // 
       // TemplateColumnLabel
       // 
-      this.TemplateColumnLabel.Location = new System.Drawing.Point(13, 53);
-      this.TemplateColumnLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.TemplateColumnLabel.Location = new System.Drawing.Point(16, 55);
+      this.TemplateColumnLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.TemplateColumnLabel.Name = "TemplateColumnLabel";
-      this.TemplateColumnLabel.Size = new System.Drawing.Size(153, 20);
+      this.TemplateColumnLabel.Size = new System.Drawing.Size(187, 32);
       this.TemplateColumnLabel.TabIndex = 2;
       this.TemplateColumnLabel.Text = "Template Column";
       // 
       // PrimaryKeyCheckBox
       // 
       this.PrimaryKeyCheckBox.AutoSize = true;
-      this.PrimaryKeyCheckBox.Location = new System.Drawing.Point(167, 336);
+      this.PrimaryKeyCheckBox.Location = new System.Drawing.Point(204, 370);
+      this.PrimaryKeyCheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
       this.PrimaryKeyCheckBox.Name = "PrimaryKeyCheckBox";
-      this.PrimaryKeyCheckBox.Size = new System.Drawing.Size(117, 24);
+      this.PrimaryKeyCheckBox.Size = new System.Drawing.Size(144, 26);
       this.PrimaryKeyCheckBox.TabIndex = 18;
       this.PrimaryKeyCheckBox.Text = "Primary Key";
       this.PrimaryKeyCheckBox.UseVisualStyleBackColor = true;
@@ -249,26 +251,26 @@
       // 
       // SequenceText
       // 
-      this.SequenceText.Location = new System.Drawing.Point(167, 302);
-      this.SequenceText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.SequenceText.Location = new System.Drawing.Point(204, 332);
+      this.SequenceText.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
       this.SequenceText.Name = "SequenceText";
-      this.SequenceText.Size = new System.Drawing.Size(65, 26);
+      this.SequenceText.Size = new System.Drawing.Size(79, 28);
       this.SequenceText.TabIndex = 17;
       // 
       // SequenceLabel
       // 
-      this.SequenceLabel.Location = new System.Drawing.Point(13, 305);
-      this.SequenceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.SequenceLabel.Location = new System.Drawing.Point(16, 333);
+      this.SequenceLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
       this.SequenceLabel.Name = "SequenceLabel";
-      this.SequenceLabel.Size = new System.Drawing.Size(153, 20);
+      this.SequenceLabel.Size = new System.Drawing.Size(187, 32);
       this.SequenceLabel.TabIndex = 16;
       this.SequenceLabel.Text = "Sequence";
       // 
       // ViewColumnDetail
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(614, 416);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+      this.ClientSize = new System.Drawing.Size(750, 458);
       this.ContextMenuStrip = this.ViewColumnMenu;
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.SequenceLabel);
@@ -291,8 +293,10 @@
       this.Controls.Add(this.ParentLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
+      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.KeyPreview = true;
+      this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "ViewColumnDetail";
