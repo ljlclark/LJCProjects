@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- XMLBuilder.xml -->
+<items>
+  <ToString>
+    <summary>
+      Retrieves the XML text.
+    </summary>
+    <returns>The XML text.</returns>
+  </ToString>
+  <Begin>
+    <summary>
+      Creates the element begin tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="text">The element text.</param>
+    <param name="xmlAttributes">The element attributes.</param>
+    <returns>The element begin tag.</returns>
+  </Begin>
+  <Element>
+    <summary>
+      Creates an XML element.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="text">The element text.</param>
+    <param name="xmlAttributes">The element attributes.</param>
+    <returns>The XML element.</returns>
+  </Element>
+  <End>
+    <summary>
+      Creates the element end tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <returns>The element end tag.</returns>
+  </End>
+  <StartAttributes>
+    <summary>
+      Creates the XML start attributes.
+    </summary>
+    <returns>The XML start attributes.</returns>
+  </StartAttributes>
+</items>

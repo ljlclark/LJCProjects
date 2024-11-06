@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataUtility", "LJCDataUtility\LJCDataUtility.csproj", "{D7CEE7DD-3F53-4F62-B4E2-35C6FB384326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataUtilityDAL", "LJCDataUtilityDAL\LJCDataUtilityDAL.csproj", "{0AB8D6B2-C475-4AB4-A645-88779851B1E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{03770850-5F9B-434B-9218-A6785EFAE5DC}"
+	ProjectSection(SolutionItems) = preProject
+		LJCDataUtility\CollectionTemplate.cs = LJCDataUtility\CollectionTemplate.cs
+		LJCDataUtility\ConfigSampleTemplate.cs = LJCDataUtility\ConfigSampleTemplate.cs
+		LJCDataUtility\DataManagerTemplate.cs = LJCDataUtility\DataManagerTemplate.cs
+		LJCDataUtility\DataTemplate.cs = LJCDataUtility\DataTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7CEE7DD-3F53-4F62-B4E2-35C6FB384326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7CEE7DD-3F53-4F62-B4E2-35C6FB384326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7CEE7DD-3F53-4F62-B4E2-35C6FB384326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7CEE7DD-3F53-4F62-B4E2-35C6FB384326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3D13A05-FB58-44F2-B217-3EBE17B72142}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- XMLAttribute.xml -->
+<items>
+  <CXMLAttribute>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="name">The attribuet name.</param>
+    <param name="value">The attribute value.</param>
+  </CXMLAttribute>
+</items>
