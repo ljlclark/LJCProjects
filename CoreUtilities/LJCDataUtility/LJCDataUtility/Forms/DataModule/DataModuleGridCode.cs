@@ -16,9 +16,10 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
-      ModuleGrid = UtilityList.MapTableGrid;
+      ModuleGrid = UtilityList.ModuleGrid;
       Managers = UtilityList.Managers;
       ModuleManager = Managers.DataModuleManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       ModuleGrid.Font = new Font(fontFamily, 12, style);

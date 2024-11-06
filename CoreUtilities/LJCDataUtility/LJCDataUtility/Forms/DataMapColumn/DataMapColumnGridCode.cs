@@ -16,9 +16,10 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
-      MapColumnGrid = UtilityList.KeyGrid;
+      MapColumnGrid = UtilityList.MapColumnGrid;
       Managers = UtilityList.Managers;
       MapColumnManager = Managers.DataMapColumnManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       MapColumnGrid.Font = new Font(fontFamily, 12, style);

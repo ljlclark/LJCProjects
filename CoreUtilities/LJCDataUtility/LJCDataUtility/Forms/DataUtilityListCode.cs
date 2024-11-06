@@ -110,21 +110,22 @@ namespace LJCDataUtility
     private void SetupGridCode()
     {
       ModuleGridCode = new DataModuleGridCode(this);
-      mTableGridCode = new DataTableGridCode(this);
-      mColumnGridCode = new DataColumnGridCode(this);
-      mKeyGridCode = new DataKeyGridCode(this);
-      mMapTableGridCode = new DataMapTableGridCode(this);
-      mMapColumnGridCode = new DataMapColumnGridCode(this);
+      TableGridCode = new DataTableGridCode(this);
+      ColumnGridCode = new DataColumnGridCode(this);
+      KeyGridCode = new DataKeyGridCode(this);
+      MapTableGridCode = new DataMapTableGridCode(this);
+      MapColumnGridCode = new DataMapColumnGridCode(this);
     }
 
     // Setup the data grids.
     private void SetupGrids()
     {
       ModuleGridCode.SetupGrid();
-      mColumnGridCode.SetupGrid();
-      mKeyGridCode.SetupGrid();
-      mMapTableGridCode.SetupGrid();
-      mMapColumnGridCode.SetupGrid();
+      TableGridCode.SetupGrid();
+      ColumnGridCode.SetupGrid();
+      KeyGridCode.SetupGrid();
+      MapTableGridCode.SetupGrid();
+      MapColumnGridCode.SetupGrid();
     }
     #endregion
     #endregion
@@ -133,25 +134,27 @@ namespace LJCDataUtility
 
     internal ManagersDataUtility Managers;
 
-    private DataColumnGridCode mColumnGridCode;
-    private string mControlValuesFileName;
-    private DataKeyGridCode mKeyGridCode;
-    private DataMapColumnGridCode mMapColumnGridCode;
-    private DataMapTableGridCode mMapTableGridCode;
+    // Grid Code
+    private DataColumnGridCode ColumnGridCode { get; set; }
+    private DataKeyGridCode KeyGridCode { get; set; }
+    private DataMapColumnGridCode MapColumnGridCode { get; set; }
+    private DataMapTableGridCode MapTableGridCode { get; set; }
     private DataModuleGridCode ModuleGridCode { get; set; }
+    private DataTableGridCode TableGridCode { get; set; }
+
+    private string mControlValuesFileName;
     private StandardUISettings mSettings;
-    private DataTableGridCode mTableGridCode;
     private ValuesDataUtility mValues;
     #endregion
 
     private void Testing()
     {
       ModuleGridCode.DataRetrieve();
-      mTableGridCode.DataRetrieve();
-      mColumnGridCode.DataRetrieve();
-      mKeyGridCode.DataRetrieve();
-      mMapTableGridCode.DataRetrieve();
-      mMapColumnGridCode.DataRetrieve();
+      TableGridCode.DataRetrieve();
+      ColumnGridCode.DataRetrieve();
+      KeyGridCode.DataRetrieve();
+      MapTableGridCode.DataRetrieve();
+      MapColumnGridCode.DataRetrieve();
     }
 
 

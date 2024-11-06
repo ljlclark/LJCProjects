@@ -19,6 +19,7 @@ namespace LJCDataUtility
       KeyGrid = UtilityList.KeyGrid;
       Managers = UtilityList.Managers;
       KeyManager = Managers.DataKeyManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       KeyGrid.Font = new Font(fontFamily, 12, style);

@@ -19,6 +19,7 @@ namespace LJCDataUtility
       ColumnGrid = UtilityList.ColumnGrid;
       Managers = UtilityList.Managers;
       ColumnManager = Managers.DataColumnManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       ColumnGrid.Font = new Font(fontFamily, 12, style);

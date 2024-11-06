@@ -16,9 +16,10 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
-      TableGrid = UtilityList.MapTableGrid;
+      TableGrid = UtilityList.TableGrid;
       Managers = UtilityList.Managers;
-      TableManager = Managers.DataModuleManager;
+      TableManager = Managers.DataTableManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       TableGrid.Font = new Font(fontFamily, 12, style);
@@ -79,7 +80,7 @@ namespace LJCDataUtility
     private LJCDataGrid TableGrid { get; set; }
 
     // Gets or sets the Manager reference.
-    private DataModuleManager TableManager { get; set; }
+    private DataTableManager TableManager { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList UtilityList { get; set; }

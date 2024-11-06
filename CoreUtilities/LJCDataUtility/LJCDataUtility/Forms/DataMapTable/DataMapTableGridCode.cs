@@ -17,6 +17,7 @@ namespace LJCDataUtility
       MapTableGrid = UtilityList.MapTableGrid;
       Managers = UtilityList.Managers;
       MapTableManager = Managers.DataMapTableManager;
+
       var fontFamily = "Microsoft Sans Serif";
       var style = FontStyle.Bold;
       MapTableGrid.Font = new Font(fontFamily, 12, style);
