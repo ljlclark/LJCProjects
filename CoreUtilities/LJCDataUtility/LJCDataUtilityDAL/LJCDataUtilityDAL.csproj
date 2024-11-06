@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="LJCDataAccess">
       <HintPath>External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBClientLib">
       <HintPath>External\LJCDBClientLib.dll</HintPath>

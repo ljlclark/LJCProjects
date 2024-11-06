@@ -331,14 +331,6 @@ namespace _Namespace_
 		// Gets or sets the _ClassName_GridCode value.
 		private _ClassName_GridCode _ClassName_GridCode { get; set; }
 		#endregion
-
-		#region Class Data
-
-		private string mControlValuesFileName;
-		private StandardUISettings mSettings;
-
-		// Foreign Keys
-		#endregion
 	}
 }
 // #SectionEnd Class
