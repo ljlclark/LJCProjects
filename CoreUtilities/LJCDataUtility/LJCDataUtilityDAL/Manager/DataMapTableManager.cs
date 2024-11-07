@@ -139,6 +139,12 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
+    /// <summary>Gets the affected record count.</summary>
+    public int AffectedCount
+    {
+      get { return Manager.AffectedCount; }
+    }
+
     /// <summary>Gets or sets the DataManager reference.</summary>
     public DataManager Manager { get; set; }
 

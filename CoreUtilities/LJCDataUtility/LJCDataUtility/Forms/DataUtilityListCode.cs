@@ -1,4 +1,7 @@
-﻿using LJCDataUtilityDAL;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataUtilityListCode.cs
+using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -11,56 +14,55 @@ namespace LJCDataUtility
 {
   public partial class DataUtilityList : Form
   {
-    // Sets the config values.
-    private void SetConfig()
-    {
-      // Set config values before using anywhere else in the program.
-      mValues = ValuesDataUtility.Instance;
-      mValues.SetConfigFile("LJCDataUtility.exe.config");
-      var errors = mValues.Errors;
-      if (NetString.HasValue(errors))
-      {
-        MessageBox.Show(errors, "Config Errors", MessageBoxButtons.OK
-          , MessageBoxIcon.Error);
-      }
-      mSettings = mValues.StandardSettings;
-      Text += $" - {mSettings.DataConfigName}";
-    }
-
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
+      InitializeClassData();
       InitialControlValues();
       SetupGridCode();
       SetupGrids();
       Cursor = Cursors.Default;
     }
+    #endregion
 
     #region Setup Support
+
+    // Initialize the Class Data.
+    private void InitializeClassData()
+    {
+      Values = ValuesDataUtility.Instance;
+      Values.SetConfigFile("LJCDataUtility.exe.config");
+      var errors = Values.Errors;
+      if (NetString.HasValue(errors))
+      {
+        MessageBox.Show(errors, "Config Errors", MessageBoxButtons.OK
+          , MessageBoxIcon.Error);
+      }
+      Managers = Values.Managers;
+      Settings = Values.StandardSettings;
+      Text += $" - {Settings.DataConfigName}";
+    }
 
     // Set initial Control values.
     private void InitialControlValues()
     {
       NetFile.CreateFolder("ExportFiles");
       NetFile.CreateFolder("ControlValues");
-      mControlValuesFileName = @"ControlValues\DataUtility.xml";
+      ControlValuesFileName = @"ControlValues\DataUtility.xml";
     }
-
-    /// <summary>Gets or sets the ControlValues item.</summary>
-    private ControlValues ControlValues { get; set; }
 
     // Restores the control values.
     private void RestoreControlValues()
     {
       ControlValue controlValue;
 
-      if (File.Exists(mControlValuesFileName))
+      if (File.Exists(ControlValuesFileName))
       {
         ControlValues = NetCommon.XmlDeserialize(typeof(ControlValues)
-          , mControlValuesFileName) as ControlValues;
+          , ControlValuesFileName) as ControlValues;
 
         if (ControlValues != null)
         {
@@ -103,7 +105,7 @@ namespace LJCDataUtility
         , Width, Height);
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
-        , mControlValuesFileName);
+        , ControlValuesFileName);
     }
 
     // Setup the grid code references.
@@ -128,7 +130,6 @@ namespace LJCDataUtility
       MapColumnGridCode.SetupGrid();
     }
     #endregion
-    #endregion
 
     #region Class Data
 
@@ -142,9 +143,11 @@ namespace LJCDataUtility
     private DataModuleGridCode ModuleGridCode { get; set; }
     private DataTableGridCode TableGridCode { get; set; }
 
-    private string mControlValuesFileName;
-    private StandardUISettings mSettings;
-    private ValuesDataUtility mValues;
+    /// <summary>Gets or sets the ControlValues item.</summary>
+    private ControlValues ControlValues { get; set; }
+    private string ControlValuesFileName { get; set; }
+    private StandardUISettings Settings { get; set; }
+    private ValuesDataUtility Values { get; set; }
     #endregion
 
     private void Testing()

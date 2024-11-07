@@ -36,48 +36,91 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
       this.ModuleMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.ModuleHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.ModuleRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ljcTabControl1 = new LJCWinFormControls.LJCTabControl(this.components);
       this.ModulePage = new System.Windows.Forms.TabPage();
       this.ModuleGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.TablePage = new System.Windows.Forms.TabPage();
       this.TableGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.TableMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.TableHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ColymnPage = new System.Windows.Forms.TabPage();
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.ColumnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.ColumnHeading = new System.Windows.Forms.ToolStripMenuItem();
+      this.ColumnRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.ColumnExit = new System.Windows.Forms.ToolStripMenuItem();
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.KeyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.keyMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.KeyRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.KeyExit = new System.Windows.Forms.ToolStripMenuItem();
       this.MapTablePage = new System.Windows.Forms.TabPage();
       this.MapTableGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.MapTableMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.mapTableMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.MapTableRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.MapTableExit = new System.Windows.Forms.ToolStripMenuItem();
       this.MapColumnPage = new System.Windows.Forms.TabPage();
       this.MapColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.MapColumnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.mapColumnMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.MapColumnRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.MapColumnExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.ljcTabControl1.SuspendLayout();
       this.ModulePage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ModuleGrid)).BeginInit();
       this.TablePage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).BeginInit();
+      this.TableMenu.SuspendLayout();
       this.ColymnPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ColumnGrid)).BeginInit();
+      this.ColumnMenu.SuspendLayout();
       this.KeyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).BeginInit();
+      this.KeyMenu.SuspendLayout();
       this.MapTablePage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.MapTableGrid)).BeginInit();
+      this.MapTableMenu.SuspendLayout();
       this.MapColumnPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.MapColumnGrid)).BeginInit();
+      this.MapColumnMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // ModuleMenu
       // 
       this.ModuleMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.ModuleMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ModuleHeading,
+            this.ModuleRefresh,
             this.ModuleExit});
       this.ModuleMenu.Name = "ModuleMenu";
-      this.ModuleMenu.Size = new System.Drawing.Size(112, 36);
+      this.ModuleMenu.Size = new System.Drawing.Size(196, 100);
+      // 
+      // ModuleHeading
+      // 
+      this.ModuleHeading.BackColor = System.Drawing.SystemColors.Highlight;
+      this.ModuleHeading.Name = "ModuleHeading";
+      this.ModuleHeading.Size = new System.Drawing.Size(195, 32);
+      this.ModuleHeading.Text = "Module Menu";
+      // 
+      // ModuleRefresh
+      // 
+      this.ModuleRefresh.Name = "ModuleRefresh";
+      this.ModuleRefresh.Size = new System.Drawing.Size(195, 32);
+      this.ModuleRefresh.Text = "&Refresh";
+      this.ModuleRefresh.Click += new System.EventHandler(this.ModuleRefresh_Click);
       // 
       // ModuleExit
       // 
       this.ModuleExit.Name = "ModuleExit";
-      this.ModuleExit.Size = new System.Drawing.Size(111, 32);
+      this.ModuleExit.Size = new System.Drawing.Size(195, 32);
       this.ModuleExit.Text = "E&xit";
       this.ModuleExit.Click += new System.EventHandler(this.ModuleExit_Click);
       // 
@@ -163,7 +206,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.TableGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.TableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.TableGrid.ContextMenuStrip = this.ModuleMenu;
+      this.TableGrid.ContextMenuStrip = this.TableMenu;
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -188,6 +231,37 @@
       this.TableGrid.TabIndex = 2;
       this.TableGrid.Text = "LJCDataGrid";
       // 
+      // TableMenu
+      // 
+      this.TableMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.TableMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TableHeading,
+            this.TableRefresh,
+            this.TableExit});
+      this.TableMenu.Name = "TableMenu";
+      this.TableMenu.Size = new System.Drawing.Size(175, 100);
+      // 
+      // TableHeading
+      // 
+      this.TableHeading.BackColor = System.Drawing.SystemColors.Highlight;
+      this.TableHeading.Name = "TableHeading";
+      this.TableHeading.Size = new System.Drawing.Size(174, 32);
+      this.TableHeading.Text = "Table Menu";
+      // 
+      // TableRefresh
+      // 
+      this.TableRefresh.Name = "TableRefresh";
+      this.TableRefresh.Size = new System.Drawing.Size(174, 32);
+      this.TableRefresh.Text = "&Refresh";
+      this.TableRefresh.Click += new System.EventHandler(this.TableRefresh_Click);
+      // 
+      // TableExit
+      // 
+      this.TableExit.Name = "TableExit";
+      this.TableExit.Size = new System.Drawing.Size(174, 32);
+      this.TableExit.Text = "E&xit";
+      this.TableExit.Click += new System.EventHandler(this.ModuleExit_Click);
+      // 
       // ColymnPage
       // 
       this.ColymnPage.Controls.Add(this.ColumnGrid);
@@ -208,7 +282,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ColumnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.ColumnGrid.ContextMenuStrip = this.ModuleMenu;
+      this.ColumnGrid.ContextMenuStrip = this.ColumnMenu;
       dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -233,6 +307,37 @@
       this.ColumnGrid.TabIndex = 2;
       this.ColumnGrid.Text = "LJCDataGrid";
       // 
+      // ColumnMenu
+      // 
+      this.ColumnMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.ColumnMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ColumnHeading,
+            this.ColumnRefresh,
+            this.ColumnExit});
+      this.ColumnMenu.Name = "ColumnMenu";
+      this.ColumnMenu.Size = new System.Drawing.Size(197, 100);
+      // 
+      // ColumnHeading
+      // 
+      this.ColumnHeading.BackColor = System.Drawing.SystemColors.Highlight;
+      this.ColumnHeading.Name = "ColumnHeading";
+      this.ColumnHeading.Size = new System.Drawing.Size(196, 32);
+      this.ColumnHeading.Text = "Column Menu";
+      // 
+      // ColumnRefresh
+      // 
+      this.ColumnRefresh.Name = "ColumnRefresh";
+      this.ColumnRefresh.Size = new System.Drawing.Size(196, 32);
+      this.ColumnRefresh.Text = "&Refresh";
+      this.ColumnRefresh.Click += new System.EventHandler(this.ColumnRefresh_Click);
+      // 
+      // ColumnExit
+      // 
+      this.ColumnExit.Name = "ColumnExit";
+      this.ColumnExit.Size = new System.Drawing.Size(196, 32);
+      this.ColumnExit.Text = "E&xit";
+      this.ColumnExit.Click += new System.EventHandler(this.ModuleExit_Click);
+      // 
       // KeyPage
       // 
       this.KeyPage.Controls.Add(this.KeyGrid);
@@ -253,7 +358,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.KeyGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.KeyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.KeyGrid.ContextMenuStrip = this.ModuleMenu;
+      this.KeyGrid.ContextMenuStrip = this.KeyMenu;
       dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -278,6 +383,39 @@
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
       // 
+      // KeyMenu
+      // 
+      this.KeyMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.KeyMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.KeyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.keyMenuToolStripMenuItem,
+            this.KeyRefresh,
+            this.KeyExit});
+      this.KeyMenu.Name = "KeyMenu";
+      this.KeyMenu.Size = new System.Drawing.Size(163, 100);
+      // 
+      // keyMenuToolStripMenuItem
+      // 
+      this.keyMenuToolStripMenuItem.Name = "keyMenuToolStripMenuItem";
+      this.keyMenuToolStripMenuItem.Size = new System.Drawing.Size(162, 32);
+      this.keyMenuToolStripMenuItem.Text = "Key Menu";
+      // 
+      // KeyRefresh
+      // 
+      this.KeyRefresh.BackColor = System.Drawing.SystemColors.Control;
+      this.KeyRefresh.Name = "KeyRefresh";
+      this.KeyRefresh.Size = new System.Drawing.Size(162, 32);
+      this.KeyRefresh.Text = "&Refresh";
+      this.KeyRefresh.Click += new System.EventHandler(this.KeyRefresh_Click);
+      // 
+      // KeyExit
+      // 
+      this.KeyExit.BackColor = System.Drawing.SystemColors.Control;
+      this.KeyExit.Name = "KeyExit";
+      this.KeyExit.Size = new System.Drawing.Size(162, 32);
+      this.KeyExit.Text = "E&xit";
+      this.KeyExit.Click += new System.EventHandler(this.ModuleExit_Click);
+      // 
       // MapTablePage
       // 
       this.MapTablePage.Controls.Add(this.MapTableGrid);
@@ -298,7 +436,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.MapTableGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.MapTableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.MapTableGrid.ContextMenuStrip = this.ModuleMenu;
+      this.MapTableGrid.ContextMenuStrip = this.MapTableMenu;
       dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -323,6 +461,39 @@
       this.MapTableGrid.TabIndex = 2;
       this.MapTableGrid.Text = "LJCDataGrid";
       // 
+      // MapTableMenu
+      // 
+      this.MapTableMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.MapTableMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.MapTableMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mapTableMenuToolStripMenuItem,
+            this.MapTableRefresh,
+            this.MapTableExit});
+      this.MapTableMenu.Name = "MapTableMenu";
+      this.MapTableMenu.Size = new System.Drawing.Size(216, 100);
+      // 
+      // mapTableMenuToolStripMenuItem
+      // 
+      this.mapTableMenuToolStripMenuItem.Name = "mapTableMenuToolStripMenuItem";
+      this.mapTableMenuToolStripMenuItem.Size = new System.Drawing.Size(215, 32);
+      this.mapTableMenuToolStripMenuItem.Text = "Map Table Menu";
+      // 
+      // MapTableRefresh
+      // 
+      this.MapTableRefresh.BackColor = System.Drawing.SystemColors.Control;
+      this.MapTableRefresh.Name = "MapTableRefresh";
+      this.MapTableRefresh.Size = new System.Drawing.Size(215, 32);
+      this.MapTableRefresh.Text = "&Refresh";
+      this.MapTableRefresh.Click += new System.EventHandler(this.MapTableRefresh_Click);
+      // 
+      // MapTableExit
+      // 
+      this.MapTableExit.BackColor = System.Drawing.SystemColors.Control;
+      this.MapTableExit.Name = "MapTableExit";
+      this.MapTableExit.Size = new System.Drawing.Size(215, 32);
+      this.MapTableExit.Text = "E&xit";
+      this.MapTableExit.Click += new System.EventHandler(this.ModuleExit_Click);
+      // 
       // MapColumnPage
       // 
       this.MapColumnPage.Controls.Add(this.MapColumnGrid);
@@ -343,13 +514,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.MapColumnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.MapColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.MapColumnGrid.ContextMenuStrip = this.ModuleMenu;
+      this.MapColumnGrid.ContextMenuStrip = this.MapColumnMenu;
       dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
       dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
       dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.MapColumnGrid.DefaultCellStyle = dataGridViewCellStyle6;
       this.MapColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -368,6 +539,39 @@
       this.MapColumnGrid.TabIndex = 2;
       this.MapColumnGrid.Text = "LJCDataGrid";
       // 
+      // MapColumnMenu
+      // 
+      this.MapColumnMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.MapColumnMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.MapColumnMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mapColumnMenuToolStripMenuItem,
+            this.MapColumnRefresh,
+            this.MapColumnExit});
+      this.MapColumnMenu.Name = "MapColumnMenu";
+      this.MapColumnMenu.Size = new System.Drawing.Size(238, 100);
+      // 
+      // mapColumnMenuToolStripMenuItem
+      // 
+      this.mapColumnMenuToolStripMenuItem.Name = "mapColumnMenuToolStripMenuItem";
+      this.mapColumnMenuToolStripMenuItem.Size = new System.Drawing.Size(237, 32);
+      this.mapColumnMenuToolStripMenuItem.Text = "Map Column Menu";
+      // 
+      // MapColumnRefresh
+      // 
+      this.MapColumnRefresh.BackColor = System.Drawing.SystemColors.Control;
+      this.MapColumnRefresh.Name = "MapColumnRefresh";
+      this.MapColumnRefresh.Size = new System.Drawing.Size(237, 32);
+      this.MapColumnRefresh.Text = "&Refresh";
+      this.MapColumnRefresh.Click += new System.EventHandler(this.MapColumnRefresh_Click);
+      // 
+      // MapColumnExit
+      // 
+      this.MapColumnExit.BackColor = System.Drawing.SystemColors.Control;
+      this.MapColumnExit.Name = "MapColumnExit";
+      this.MapColumnExit.Size = new System.Drawing.Size(237, 32);
+      this.MapColumnExit.Text = "E&xit";
+      this.MapColumnExit.Click += new System.EventHandler(this.ModuleExit_Click);
+      // 
       // DataUtilityList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -382,22 +586,27 @@
       ((System.ComponentModel.ISupportInitialize)(this.ModuleGrid)).EndInit();
       this.TablePage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).EndInit();
+      this.TableMenu.ResumeLayout(false);
       this.ColymnPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ColumnGrid)).EndInit();
+      this.ColumnMenu.ResumeLayout(false);
       this.KeyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).EndInit();
+      this.KeyMenu.ResumeLayout(false);
       this.MapTablePage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MapTableGrid)).EndInit();
+      this.MapTableMenu.ResumeLayout(false);
       this.MapColumnPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MapColumnGrid)).EndInit();
+      this.MapColumnMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
 
     #endregion
-    private System.Windows.Forms.ContextMenuStrip ModuleMenu;
+    internal System.Windows.Forms.ContextMenuStrip ModuleMenu;
     private System.Windows.Forms.ToolStripMenuItem ModuleExit;
-    private LJCWinFormControls.LJCTabControl ljcTabControl1;
+    internal LJCWinFormControls.LJCTabControl ljcTabControl1;
     private System.Windows.Forms.TabPage ModulePage;
     private System.Windows.Forms.TabPage TablePage;
     private System.Windows.Forms.TabPage ColymnPage;
@@ -410,6 +619,28 @@
     internal LJCWinFormControls.LJCDataGrid KeyGrid;
     internal LJCWinFormControls.LJCDataGrid MapTableGrid;
     internal LJCWinFormControls.LJCDataGrid MapColumnGrid;
+    private System.Windows.Forms.ToolStripMenuItem ModuleRefresh;
+    internal System.Windows.Forms.ContextMenuStrip TableMenu;
+    private System.Windows.Forms.ToolStripMenuItem TableRefresh;
+    private System.Windows.Forms.ToolStripMenuItem TableExit;
+    internal System.Windows.Forms.ContextMenuStrip ColumnMenu;
+    private System.Windows.Forms.ToolStripMenuItem ColumnHeading;
+    private System.Windows.Forms.ToolStripMenuItem ColumnRefresh;
+    private System.Windows.Forms.ToolStripMenuItem ColumnExit;
+    private System.Windows.Forms.ToolStripMenuItem TableHeading;
+    private System.Windows.Forms.ToolStripMenuItem ModuleHeading;
+    internal System.Windows.Forms.ContextMenuStrip KeyMenu;
+    private System.Windows.Forms.ToolStripMenuItem keyMenuToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem KeyRefresh;
+    private System.Windows.Forms.ToolStripMenuItem KeyExit;
+    internal System.Windows.Forms.ContextMenuStrip MapTableMenu;
+    private System.Windows.Forms.ToolStripMenuItem mapTableMenuToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem MapTableRefresh;
+    private System.Windows.Forms.ToolStripMenuItem MapTableExit;
+    internal System.Windows.Forms.ContextMenuStrip MapColumnMenu;
+    private System.Windows.Forms.ToolStripMenuItem mapColumnMenuToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem MapColumnRefresh;
+    private System.Windows.Forms.ToolStripMenuItem MapColumnExit;
   }
 }
 
