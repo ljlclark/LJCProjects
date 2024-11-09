@@ -94,8 +94,10 @@ namespace LJCDataUtility
         {
           size--;
         }
-        var fontFamily = "Microsoft Sans Serif";
-        var style = FontStyle.Bold;
+        //var fontFamily = "Microsoft Sans Serif";
+        //var style = FontStyle.Bold;
+        var fontFamily = grid.Font.FontFamily;
+        var style = grid.Font.Style;
         grid.Font = new Font(fontFamily, size, style);
       }
     }

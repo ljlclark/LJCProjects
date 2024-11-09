@@ -70,11 +70,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DataColumn\DataColumnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataColumn\DataColumnDetail.Designer.cs">
+      <DependentUpon>DataColumnDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataColumn\DataColumnGridCode.cs" />
+    <Compile Include="Forms\DataKey\DataKeyDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataKey\DataKeyDetail.Designer.cs">
+      <DependentUpon>DataKeyDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataKey\DataKeyGridCode.cs" />
+    <Compile Include="Forms\DataMapColumn\DataMapColumnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataMapColumn\DataMapColumnDetail.Designer.cs">
+      <DependentUpon>DataMapColumnDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataMapColumn\DataMapColumnGridCode.cs" />
+    <Compile Include="Forms\DataMapTable\DataMapTableDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataMapTable\DataMapTableDetail.Designer.cs">
+      <DependentUpon>DataMapTableDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataMapTable\DataMapTableGridCode.cs" />
+    <Compile Include="Forms\DataModule\DataModuleDetai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataModule\DataModuleDetai.Designer.cs">
+      <DependentUpon>DataModuleDetai.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataModule\DataModuleGridCode.cs" />
+    <Compile Include="Forms\DataTable\DadtaTableDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataTable\DadtaTableDetail.Designer.cs">
+      <DependentUpon>DadtaTableDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataTable\DataTableGridCode.cs" />
     <Compile Include="Forms\DataUtilityList.cs">
       <SubType>Form</SubType>
@@ -91,6 +127,24 @@
     <Compile Include="XMLAttribute.cs" />
     <Compile Include="XMLAttributes.cs" />
     <Compile Include="XMLBuilder.cs" />
+    <EmbeddedResource Include="Forms\DataColumn\DataColumnDetail.resx">
+      <DependentUpon>DataColumnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataKey\DataKeyDetail.resx">
+      <DependentUpon>DataKeyDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataMapColumn\DataMapColumnDetail.resx">
+      <DependentUpon>DataMapColumnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataMapTable\DataMapTableDetail.resx">
+      <DependentUpon>DataMapTableDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataModule\DataModuleDetai.resx">
+      <DependentUpon>DataModuleDetai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataTable\DadtaTableDetail.resx">
+      <DependentUpon>DadtaTableDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataUtilityList.resx">
       <DependentUpon>DataUtilityList.cs</DependentUpon>
     </EmbeddedResource>

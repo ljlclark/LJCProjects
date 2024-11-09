@@ -28,32 +28,35 @@ namespace _Namespace_
 	// Provides _ClassName_Grid methods for the _AppName_List window.
 	internal class _ClassName_GridCode
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		internal _ClassName_GridCode(_FullAppName_List parentList)
+    // Initializes an object instance.
+    // ********************
+    internal _ClassName_GridCode(_FullAppName_List parentList)
 		{
 			// Initialize property values.
 			parentList.Cursor = Cursors.WaitCursor;
 			_AppName_List = parentList;
-			_ClassName_Grid = _AppName_List._ClassName_Grid;
-			_ParentName_Grid = _AppName_List._ParentName_Grid;
+      _ParentName_Grid = _AppName_List._ParentName_Grid;
+      _ClassName_Grid = _AppName_List._ClassName_Grid;
 			ResetData();
 			_AppName_List.Cursor = Cursors.Default;
 		}
 
-		// Resets the DataConfig dependent objects.
-		internal void ResetData()
+    // Resets the DataConfig dependent objects.
+    // ********************
+    internal void ResetData()
 		{
 			Managers = _AppName_List.Managers;
 			_ClassName_Manager = Managers._ClassName_Manager;
 		}
-		#endregion
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Retrieves the combo items.
-		internal void DataRetrieveCombo()
+    // Retrieves the combo items.
+    // ********************
+    internal void DataRetrieveCombo()
 		{
 			//ComboRecords dataRecords;
 
@@ -76,8 +79,9 @@ namespace _Namespace_
 			//Cursor = Cursors.Default;
 		}
 
-		// Retrieves the list rows.
-		internal void DataRetrieve()
+    // Retrieves the list rows.
+    // ********************
+    internal void DataRetrieve()
 		{
 			_AppName_List.Cursor = Cursors.WaitCursor;
 			_ClassName_Grid.LJCRowsClear();
@@ -101,8 +105,9 @@ namespace _Namespace_
 			_AppName_List.DoChange(Change._ClassName_);
 		}
 
-		// Adds a grid row and updates it with the record values.
-		private LJCGridRow RowAdd(_ClassName_ dataRecord)
+    // Adds a grid row and updates it with the record values.
+    // ********************
+    private LJCGridRow RowAdd(_ClassName_ dataRecord)
 		{
 			var retValue = _ClassName_Grid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
@@ -110,8 +115,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Adds a grid row and updates it with the result values.
-		private LJCGridRow RowAddValues(DbValues dbValues)
+    // Adds a grid row and updates it with the result values.
+    // ********************
+    private LJCGridRow RowAddValues(DbValues dbValues)
 		{
 			var retValue = _ClassName_Grid.LJCRowAdd();
 
@@ -123,8 +129,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Selects a row based on the key record values.
-		private bool RowSelect(_ClassName_ dataRecord)
+    // Selects a row based on the key record values.
+    // ********************
+    private bool RowSelect(_ClassName_ dataRecord)
 		{
 			bool retValue = false;
 
@@ -147,8 +154,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Updates the current row with the record values.
-		private void RowUpdate(_ClassName_ dataRecord)
+    // Updates the current row with the record values.
+    // ********************
+    private void RowUpdate(_ClassName_ dataRecord)
 		{
 			if (_ClassName_Grid.CurrentRow is LJCGridRow row)
 			{
@@ -157,17 +165,19 @@ namespace _Namespace_
 			}
 		}
 
-		// Sets the row stored values.
-		private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
+    // Sets the row stored values.
+    // ********************
+    private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
 		{
 			row.LJCSetInt32(_ClassName_.ColumnID, dataRecord.ID);
 		}
-		#endregion
+    #endregion
 
-		#region Action Methods
+    #region Action Methods
 
-		// Performs the default list action.
-		internal void DoDefault()
+    // Performs the default list action.
+    // ********************
+    internal void DoDefault()
 		{
 			if (LJCIsSelect)
 			{
@@ -179,8 +189,9 @@ namespace _Namespace_
 			}
 		}
 
-		// Deletes the selected row.
-		internal void DoDelete()
+    // Deletes the selected row.
+    // ********************
+    internal void DoDelete()
 		{
 			bool success = false;
 			var row = _ClassName_Grid.CurrentRow as LJCGridRow;
@@ -223,8 +234,9 @@ namespace _Namespace_
 			}
 		}
 
-		// Displays a detail dialog to edit a record.
-		internal void DoEdit()
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void DoEdit()
 		{
 			if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
 				&& _ClassName_Grid.CurrentRow is LJCGridRow row)
@@ -248,15 +260,17 @@ namespace _Namespace_
 			}
 		}
 
-		// Shows the help page
-		internal void DoHelp()
+    // Shows the help page
+    // ********************
+    internal void DoHelp()
 		{
 			Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
 				, "_ClassName_List.html");
 		}
 
-		// Displays a detail dialog for a new record.
-		internal void DoNew()
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void DoNew()
 		{
 			if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
 			{
@@ -277,8 +291,9 @@ namespace _Namespace_
 			}
 		}
 
-		// Refreshes the list.
-		internal void DoRefresh()
+    // Refreshes the list.
+    // ********************
+    internal void DoRefresh()
 		{
 			_AppName_List.Cursor = Cursors.WaitCursor;
 			int id = 0;
@@ -301,8 +316,9 @@ namespace _Namespace_
 			_AppName_List.Cursor = Cursors.Default;
 		}
 
-		// Sets the selected item and returns to the parent form.
-		internal void DoSelect()
+    // Sets the selected item and returns to the parent form.
+    // ********************
+    internal void DoSelect()
 		{
 			LJCSelectedRecord = null;
 			if (_ClassName_Grid.CurrentRow is LJCGridRow row)
@@ -322,8 +338,9 @@ namespace _Namespace_
 			_AppName_List.DialogResult = DialogResult.OK;
 		}
 
-		// Adds new row or updates row with control values.
-		private void Detail_Change(object sender, EventArgs e)
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
 		{
 			var detail = sender as _ClassName_Detail;
 			var record = detail.LJCRecord;
@@ -346,12 +363,13 @@ namespace _Namespace_
 				}
 			}
 		}
-		#endregion
+    #endregion
 
-		#region Setup and Other Methods
+    #region Setup and Other Methods
 
-		// Configures the _ClassName_ Grid.
-		internal void SetupGrid()
+    // Configures the _ClassName_ Grid.
+    // ********************
+    internal void SetupGrid()
 		{
 			// Setup default grid columns if no columns are defined.
 			if (0 == _ClassName_Grid.Columns.Count)
@@ -371,12 +389,13 @@ namespace _Namespace_
 				//m_ClassName_Grid.LJCDragDataName = "_ClassName_";
 			}
 		}
-		#endregion
+    #endregion
 
-		#region Get Data Methods
+    #region Get Data Methods
 
-		// Retrieves the row item.
-		private _ClassName_ Get_ClassName_(LJCGridRow row = null)
+    // Retrieves the row item.
+    // ********************
+    private _ClassName_ Get_ClassName_(LJCGridRow row = null)
 		{
 			_ClassName_ retValue = null;
 
@@ -392,8 +411,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Retrieves the current row item ID.
-		private long _ClassName_ID(LJCGridRow row = null)
+    // Retrieves the current row item ID.
+    // ********************
+    private long _ClassName_ID(LJCGridRow row = null)
 		{
 			long retValue = 0;
 
@@ -407,19 +427,21 @@ namespace _Namespace_
 			}
 			return retValue;
 		}
-		#endregion
+    #endregion
 
-		#region Private Methods
+    #region Private Methods
 
-		// Checks for Previous and Next items.
-		private void CheckPreviousAndNext(_ClassName_Detail detail)
+    // Checks for Previous and Next items.
+    // ********************
+    private void CheckPreviousAndNext(_ClassName_Detail detail)
 		{
 			PreviousItem(detail);
 			NextItem(detail);
 		}
 
-		// Checks for Next item.
-		private void NextItem(_ClassName_Detail detail)
+    // Checks for Next item.
+    // ********************
+    private void NextItem(_ClassName_Detail detail)
 		{
 			if (detail.LJCNext)
 			{
@@ -439,8 +461,9 @@ namespace _Namespace_
 			}
 		}
 
-		// Checks for Previous item.
-		private void PreviousItem(_ClassName_Detail detail)
+    // Checks for Previous item.
+    // ********************
+    private void PreviousItem(_ClassName_Detail detail)
 		{
 			if (detail.LJCPrevious)
 			{

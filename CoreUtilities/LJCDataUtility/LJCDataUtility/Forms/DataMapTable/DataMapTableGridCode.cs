@@ -18,50 +18,56 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initialize property values.
+    // ********************
     internal DataMapTableGridCode(DataUtilityList parentList)
     {
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+      TableGrid = UtilityList.TableGrid;
       MapTableGrid = UtilityList.MapTableGrid;
       Managers = UtilityList.Managers;
       MapTableManager = Managers.DataMapTableManager;
 
       MapTableGrid.KeyDown += MapTableGrid_KeyDown;
 
-      var fontFamily = "Microsoft Sans Serif";
-      var style = FontStyle.Bold;
+      var fontFamily = UtilityList.Font.FontFamily;
+      var style = UtilityList.Font.Style;
       MapTableGrid.Font = new Font(fontFamily, 12, style);
       _ = new GridFont(UtilityList, MapTableGrid);
       UtilityList.Cursor = Cursors.Default;
-    }
-
-    private void MapTableGrid_KeyDown1(object sender, KeyEventArgs e)
-    {
-      throw new NotImplementedException();
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves the list rows.
+    // ********************
     internal void DataRetrieve()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
       MapTableGrid.LJCRowsClear();
 
-      var items = MapTableManager.Load();
-      if (NetCommon.HasItems(items))
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
       {
-        foreach (var item in items)
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+
+        var keyColumns = MapTableManager.GetKey(parentID);
+        var items = MapTableManager.Load(keyColumns);
+        if (NetCommon.HasItems(items))
         {
-          RowAdd(item);
+          foreach (var item in items)
+          {
+            RowAdd(item);
+          }
         }
       }
       UtilityList.Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
+    // ********************
     private LJCGridRow RowAdd(DataMapTable dataRecord)
     {
       var retValue = MapTableGrid.LJCRowAdd();
@@ -71,6 +77,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
+    // ********************
     private bool RowSelect(DataMapTable dataRecord)
     {
       bool retValue = false;
@@ -94,7 +101,19 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Updates the current row with the record values.
+    // ********************
+    //private void RowUpdate(MapDataColumn dataRecord)
+    //{
+    //  if (MapColumnGrid.CurrentRow is LJCGridRow row)
+    //  {
+    //    SetStoredValues(row, dataRecord);
+    //    row.LJCSetValues(MapColumnGrid, dataRecord);
+    //  }
+    //}
+
     // Sets the row stored values.
+    // ********************
     private void SetStoredValues(LJCGridRow row, DataMapTable dataRecord)
     {
       row.LJCSetInt32(DataMapTable.ColumnDataTableID, dataRecord.DataTableID);
@@ -104,6 +123,7 @@ namespace LJCDataUtility
     #region Action Methods
 
     // Deletes the selected row.
+    // ********************
     internal void Delete()
     {
       bool success = false;
@@ -146,14 +166,20 @@ namespace LJCDataUtility
       }
     }
 
-    // Shows the help page
-    internal void ShowHelp()
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void Edit()
     {
-      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
-      //  , "_ClassName_List.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void New()
+    {
     }
 
     // Refreshes the list.
+    // ********************
     internal void Refresh()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -176,11 +202,25 @@ namespace LJCDataUtility
       }
       UtilityList.Cursor = Cursors.Default;
     }
+
+    // Shows the help page
+    internal void ShowHelp()
+    {
+      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+      //  , "_ClassName_List.html");
+    }
+
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
+    {
+    }
     #endregion
 
     #region Setup and Other Methods
 
     // Configures the Grid.
+    // ********************
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -204,6 +244,7 @@ namespace LJCDataUtility
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
+    // ********************
     private void MapTableGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
@@ -259,6 +300,9 @@ namespace LJCDataUtility
 
     // Gets or sets the Manager reference.
     private DataMapTableManager MapTableManager { get; set; }
+
+    // Gets or sets the parent Grid reference.
+    private LJCDataGrid TableGrid { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList UtilityList { get; set; }

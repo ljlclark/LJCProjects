@@ -147,6 +147,17 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
+    /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns GetParentKey(int parentID)
+    {
+      var retValue = new DbColumns()
+      {
+        { DataColumn.ColumnDataTableID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DbColumns GetUniqueKey(int dataTableID, string name)
     {

@@ -18,19 +18,21 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
+    // ********************
     internal DataTableGridCode(DataUtilityList parentList)
     {
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+      ModuleGrid = UtilityList.ModuleGrid;
       TableGrid = UtilityList.TableGrid;
       Managers = UtilityList.Managers;
       TableManager = Managers.DataTableManager;
 
       TableGrid.KeyDown += TableGrid_KeyDown;
 
-      var fontFamily = "Microsoft Sans Serif";
-      var style = FontStyle.Bold;
+      var fontFamily = UtilityList.Font.FontFamily;
+      var style = UtilityList.Font.Style;
       TableGrid.Font = new Font(fontFamily, 12, style);
       _ = new GridFont(UtilityList, TableGrid);
       UtilityList.Cursor = Cursors.Default;
@@ -40,24 +42,33 @@ namespace LJCDataUtility
     #region Data Methods
 
     // Retrieves the list rows.
+    // ********************
     internal void DataRetrieve()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      var items = TableManager.Load();
-      if (items != null
-        && items.Count > 0)
+      if (ModuleGrid.CurrentRow is LJCGridRow parentRow)
       {
-        foreach (var item in items)
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
+
+        var keyColumns = TableManager.GetIDKey(parentID);
+        var items = TableManager.Load(keyColumns);
+        if (items != null
+          && items.Count > 0)
         {
-          RowAdd(item);
+          foreach (var item in items)
+          {
+            RowAdd(item);
+          }
         }
       }
       UtilityList.Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
+    // ********************
     private LJCGridRow RowAdd(DataTable dataRecord)
     {
       var retValue = TableGrid.LJCRowAdd();
@@ -67,6 +78,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
+    // ********************
     private bool RowSelect(DataTable dataRecord)
     {
       bool retValue = false;
@@ -90,7 +102,19 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Updates the current row with the record values.
+    // ********************
+    //private void RowUpdate(MapDataColumn dataRecord)
+    //{
+    //  if (MapColumnGrid.CurrentRow is LJCGridRow row)
+    //  {
+    //    SetStoredValues(row, dataRecord);
+    //    row.LJCSetValues(MapColumnGrid, dataRecord);
+    //  }
+    //}
+
     // Sets the row stored values.
+    // ********************
     private void SetStoredValues(LJCGridRow row, DataTable dataRecord)
     {
       row.LJCSetInt32(DataTable.ColumnID, dataRecord.ID);
@@ -100,6 +124,7 @@ namespace LJCDataUtility
     #region Action Methods
 
     // Deletes the selected row.
+    // ********************
     internal void Delete()
     {
       bool success = false;
@@ -142,14 +167,20 @@ namespace LJCDataUtility
       }
     }
 
-    // Shows the help page
-    internal void ShowHelp()
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void Edit()
     {
-      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
-      //  , "_ClassName_List.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void New()
+    {
     }
 
     // Refreshes the list.
+    // ********************
     internal void Refresh()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -171,6 +202,20 @@ namespace LJCDataUtility
         RowSelect(record);
       }
       UtilityList.Cursor = Cursors.Default;
+    }
+
+    // Shows the help page
+    // ********************
+    internal void ShowHelp()
+    {
+      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+      //  , "_ClassName_List.html");
+    }
+
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
+    {
     }
     #endregion
 
@@ -201,6 +246,7 @@ namespace LJCDataUtility
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
+    // ********************
     private void TableGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
@@ -250,6 +296,9 @@ namespace LJCDataUtility
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent Grid reference.
+    private LJCDataGrid ModuleGrid { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid TableGrid { get; set; }

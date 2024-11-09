@@ -18,21 +18,34 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
+    // ********************
     internal DataColumnGridCode(DataUtilityList parentList)
     {
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+      TableGrid = UtilityList.TableGrid;
       ColumnGrid = UtilityList.ColumnGrid;
       Managers = UtilityList.Managers;
       ColumnManager = Managers.DataColumnManager;
 
-      ColumnGrid.KeyDown += ColumnGrid_KeyDown;
-
-      var fontFamily = "Microsoft Sans Serif";
-      var style = FontStyle.Bold;
-      ColumnGrid.Font = new Font(fontFamily, 12, style);
+      var fontFamily = UtilityList.Font.FontFamily;
+      var style = UtilityList.Font.Style;
+      ColumnGrid.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, ColumnGrid);
+
+      // Menu item events.
+      var list = UtilityList;
+      list.ColumnNew.Click += ColumnNew_Click;
+      list.ColumnEdit.Click += ColumnEdit_Click;
+      list.ColumnDelete.Click += ColumnDelete_Click;
+      list.ColumnRefresh.Click += ColumnRefresh_Click;
+
+      // Grid events.
+      var grid = ColumnGrid;
+      grid.DoubleClick += ColumnGrid_DoubleClick;
+      grid.KeyDown += ColumnGrid_KeyDown;
+
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -40,23 +53,32 @@ namespace LJCDataUtility
     #region Data Methods
 
     // Retrieves the list rows.
+    // ********************
     internal void DataRetrieve()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
       ColumnGrid.LJCRowsClear();
 
-      var items = ColumnManager.Load();
-      if (NetCommon.HasItems(items))
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
       {
-        foreach (var item in items)
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+
+        var keyColumns = ColumnManager.GetParentKey(parentID);
+        var items = ColumnManager.Load(keyColumns);
+        if (NetCommon.HasItems(items))
         {
-          RowAdd(item);
+          foreach (var item in items)
+          {
+            RowAdd(item);
+          }
         }
       }
       UtilityList.Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
+    // ********************
     private LJCGridRow RowAdd(DataColumn dataRecord)
     {
       var retValue = ColumnGrid.LJCRowAdd();
@@ -66,6 +88,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
+    // ********************
     private bool RowSelect(DataColumn dataRecord)
     {
       bool retValue = false;
@@ -89,7 +112,19 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Updates the current row with the record values.
+    // ********************
+    //private void RowUpdate(DataColumn dataRecord)
+    //{
+    //  if (ColumnGrid.CurrentRow is LJCGridRow row)
+    //  {
+    //    SetStoredValues(row, dataRecord);
+    //    row.LJCSetValues(ColumnGrid, dataRecord);
+    //  }
+    //}
+
     // Sets the row stored values.
+    // ********************
     private void SetStoredValues(LJCGridRow row, DataColumn dataRecord)
     {
       row.LJCSetInt32(DataColumn.ColumnID, dataRecord.ID);
@@ -99,12 +134,12 @@ namespace LJCDataUtility
     #region Action Methods
 
     // Deletes the selected row.
+    // ********************
     internal void Delete()
     {
       bool success = false;
       var row = ColumnGrid.CurrentRow as LJCGridRow;
-      if (ColumnGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -118,11 +153,11 @@ namespace LJCDataUtility
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataTable.ColumnID);
+        var id = row.LJCGetInt32(DataColumn.ColumnID);
 
         var keyColumns = new DbColumns()
         {
-          { DataTable.ColumnID, id }
+          { DataColumn.ColumnID, id }
         };
         //ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
@@ -141,7 +176,37 @@ namespace LJCDataUtility
       }
     }
 
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void Edit()
+    {
+    }
+
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void New()
+    {
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from list items.
+        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+        string parentName = parentRow.LJCGetString(DataTable.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(TableGrid);
+        var detail = new DataColumnDetail
+        {
+          //LJCLocation = location,
+          //LJCManagers = Managers,
+          //LJCParentID = parentID,
+          //LJCParentName = parentName
+        };
+        //detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
+    }
+
     // Refreshes the list.
+    // ********************
     internal void Refresh()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -164,11 +229,26 @@ namespace LJCDataUtility
       }
       UtilityList.Cursor = Cursors.Default;
     }
+
+    // Shows the help page
+    // ********************
+    internal void ShowHelp()
+    {
+      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+      //  , "_ClassName_List.html");
+    }
+
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
+    {
+    }
     #endregion
 
     #region Setup and Other Methods
 
     // Configures the Grid.
+    // ********************
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -195,18 +275,49 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // ********************
+    private void ColumnNew_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // ********************
+    private void ColumnEdit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // ********************
+    private void ColumnDelete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // ********************
+    private void ColumnRefresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+
+    // ********************
+    private void ColumnGrid_DoubleClick(object sender, EventArgs e)
+    {
+      New();
+    }
+
     // Handles the Grid KeyDown event.
+    // ********************
     private void ColumnGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          //Edit();
+          Edit();
           e.Handled = true;
           break;
 
         case Keys.F1:
-          //Help();
+          //ShowHelp();
           e.Handled = true;
           break;
 
@@ -251,6 +362,9 @@ namespace LJCDataUtility
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent Grid reference.
+    private LJCDataGrid TableGrid { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList UtilityList { get; set; }

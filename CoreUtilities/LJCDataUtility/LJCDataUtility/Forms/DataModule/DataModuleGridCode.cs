@@ -16,6 +16,7 @@ namespace LJCDataUtility
   {
     #region Constructors
 
+    // ********************
     internal DataModuleGridCode(DataUtilityList parentList)
     {
       // Initialize property values.
@@ -27,22 +28,18 @@ namespace LJCDataUtility
 
       ModuleGrid.KeyDown += ModuleGrid_KeyDown;
 
-      var fontFamily = "Microsoft Sans Serif";
-      var style = FontStyle.Bold;
+      var fontFamily = UtilityList.Font.FontFamily;
+      var style = UtilityList.Font.Style;
       ModuleGrid.Font = new Font(fontFamily, 12, style);
       _ = new GridFont(UtilityList, ModuleGrid);
       UtilityList.Cursor = Cursors.Default;
-    }
-
-    private void ModuleGrid_KeyDown1(object sender, KeyEventArgs e)
-    {
-      throw new NotImplementedException();
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves the list rows.
+    // ********************
     internal void DataRetrieve()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -61,6 +58,7 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
+    // ********************
     private LJCGridRow RowAdd(DataModule dataRecord)
     {
       var retValue = ModuleGrid.LJCRowAdd();
@@ -70,6 +68,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
+    // ********************
     private bool RowSelect(DataModule dataRecord)
     {
       bool retValue = false;
@@ -93,7 +92,19 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Updates the current row with the record values.
+    // ********************
+    //private void RowUpdate(DataModule dataRecord)
+    //{
+    //  if (ModuleGrid.CurrentRow is LJCGridRow row)
+    //  {
+    //    SetStoredValues(row, dataRecord);
+    //    row.LJCSetValues(ModuleGrid, dataRecord);
+    //  }
+    //}
+
     // Sets the row stored values.
+    // ********************
     private void SetStoredValues(LJCGridRow row, DataModule dataRecord)
     {
       row.LJCSetInt32(DataModule.ColumnID, dataRecord.ID);
@@ -103,6 +114,7 @@ namespace LJCDataUtility
     #region Action Methods
 
     // Deletes the selected row.
+    // ********************
     internal void Delete()
     {
       bool success = false;
@@ -145,14 +157,20 @@ namespace LJCDataUtility
       }
     }
 
-    // Shows the help page
-    internal void ShowHelp()
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void Edit()
     {
-      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
-      //  , "_ClassName_List.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void New()
+    {
     }
 
     // Refreshes the list.
+    // ********************
     internal void Refresh()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -175,11 +193,26 @@ namespace LJCDataUtility
       }
       UtilityList.Cursor = Cursors.Default;
     }
+
+    // Shows the help page
+    // ********************
+    internal void ShowHelp()
+    {
+      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+      //  , "_ClassName_List.html");
+    }
+
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
+    {
+    }
     #endregion
 
     #region Setup and Other Methods
 
     // Configures the Grid.
+    // ********************
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -203,6 +236,7 @@ namespace LJCDataUtility
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
+    // ********************
     private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)

@@ -18,50 +18,66 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
+    // ********************
     internal DataKeyGridCode(DataUtilityList parentList)
     {
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+      TableGrid = UtilityList.TableGrid;
       KeyGrid = UtilityList.KeyGrid;
       Managers = UtilityList.Managers;
       KeyManager = Managers.DataKeyManager;
 
-      KeyGrid.KeyDown += KeyGrid_KeyDown;
-
-      var fontFamily = "Microsoft Sans Serif";
-      var style = FontStyle.Bold;
+      var fontFamily = UtilityList.Font.FontFamily;
+      var style = UtilityList.Font.Style;
       KeyGrid.Font = new Font(fontFamily, 12, style);
       _ = new GridFont(UtilityList, KeyGrid);
-      UtilityList.Cursor = Cursors.Default;
-    }
 
-    private void KeyGrid_KeyDown1(object sender, KeyEventArgs e)
-    {
-      throw new NotImplementedException();
+      // Menu item events.
+      var list = UtilityList;
+      list.KeyNew.Click += KeyNew_Click;
+      list.KeyEdit.Click += KeyEdit_Click;
+      list.KeyDelete.Click += KeyDelete_Click;
+      list.KeyRefresh.Click += KeyRefresh_Click;
+
+      // Grid events.
+      var grid = KeyGrid;
+      grid.KeyDown += KeyGrid_KeyDown;
+      grid.DoubleClick += KeyGrid_DoubleClick;
+      UtilityList.Cursor = Cursors.Default;
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves the list rows.
+    // ********************
     internal void DataRetrieve()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
       KeyGrid.LJCRowsClear();
 
-      var items = KeyManager.Load();
-      if (NetCommon.HasItems(items))
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
       {
-        foreach (var item in items)
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+
+        var keyColumns = KeyManager.GetIDKey(parentID);
+        var items = KeyManager.Load(keyColumns);
+        if (NetCommon.HasItems(items))
         {
-          RowAdd(item);
+          foreach (var item in items)
+          {
+            RowAdd(item);
+          }
         }
       }
       UtilityList.Cursor = Cursors.Default;
     }
 
     // Adds a grid row and updates it with the record values.
+    // ********************
     private LJCGridRow RowAdd(DataKey dataRecord)
     {
       var retValue = KeyGrid.LJCRowAdd();
@@ -71,6 +87,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
+    // ********************
     private bool RowSelect(DataKey dataRecord)
     {
       bool retValue = false;
@@ -94,49 +111,34 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Updates the current row with the record values.
+    // ********************
+    //private void RowUpdate(DataKey dataRecord)
+    //{
+    //  if (KeyGrid.CurrentRow is LJCGridRow row)
+    //  {
+    //    SetStoredValues(row, dataRecord);
+    //    row.LJCSetValues(KeyGrid, dataRecord);
+    //  }
+    //}
+
     // Sets the row stored values.
+    // ********************
     private void SetStoredValues(LJCGridRow row, DataKey dataRecord)
     {
       row.LJCSetInt32(DataKey.ColumnID, dataRecord.ID);
     }
     #endregion
 
-    #region Setup and Other Methods
-
-    // Configures the Grid.
-    internal void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == KeyGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DataKey.ColumnDataTableID,
-          DataKey.ColumnName,
-          DataKey.ColumnKeyType,
-          DataKey.ColumnSourceColumnName,
-          DataKey.ColumnTargetTableName,
-          DataKey.ColumnTargetColumnName
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var gridColumns = KeyManager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        KeyGrid.LJCAddColumns(gridColumns);
-      }
-    }
-    #endregion
-
     #region Action Methods
 
     // Deletes the selected row.
+    // ********************
     internal void Delete()
     {
       bool success = false;
       var row = KeyGrid.CurrentRow as LJCGridRow;
-      if (KeyGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -173,14 +175,20 @@ namespace LJCDataUtility
       }
     }
 
-    // Shows the help page
-    internal void ShowHelp()
+    // Displays a detail dialog to edit a record.
+    // ********************
+    internal void Edit()
     {
-      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
-      //  , "_ClassName_List.html");
+    }
+
+    // Displays a detail dialog for a new record.
+    // ********************
+    internal void New()
+    {
     }
 
     // Refreshes the list.
+    // ********************
     internal void Refresh()
     {
       UtilityList.Cursor = Cursors.WaitCursor;
@@ -203,11 +211,84 @@ namespace LJCDataUtility
       }
       UtilityList.Cursor = Cursors.Default;
     }
+
+    // Shows the help page
+    // ********************
+    internal void ShowHelp()
+    {
+      //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+      //  , "_ClassName_List.html");
+    }
+
+    // Adds new row or updates row with control values.
+    // ********************
+    private void Detail_Change(object sender, EventArgs e)
+    {
+    }
+    #endregion
+
+    #region Setup and Other Methods
+
+    // Configures the Grid.
+    // ********************
+    internal void SetupGrid()
+    {
+      // Setup default grid columns if no columns are defined.
+      if (0 == KeyGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string>()
+        {
+          DataKey.ColumnDataTableID,
+          DataKey.ColumnName,
+          DataKey.ColumnKeyType,
+          DataKey.ColumnSourceColumnName,
+          DataKey.ColumnTargetTableName,
+          DataKey.ColumnTargetColumnName
+        };
+
+        // Get the grid columns from the manager Data Definition.
+        var gridColumns = KeyManager.GetColumns(propertyNames);
+
+        // Setup the grid columns.
+        KeyGrid.LJCAddColumns(gridColumns);
+      }
+    }
     #endregion
 
     #region Control Event Handlers
 
+    // ********************
+    private void KeyNew_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // ********************
+    private void KeyEdit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // ********************
+    private void KeyDelete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // ********************
+    private void KeyRefresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+
+    // ********************
+    private void KeyGrid_DoubleClick(object sender, EventArgs e)
+    {
+      New();
+    }
+
     // Handles the Grid KeyDown event.
+    // ********************
     private void KeyGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
@@ -218,7 +299,7 @@ namespace LJCDataUtility
           break;
 
         case Keys.F1:
-          //Help();
+          //ShowHelp();
           e.Handled = true;
           break;
 
@@ -263,6 +344,9 @@ namespace LJCDataUtility
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent Grid reference.
+    private LJCDataGrid TableGrid { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList UtilityList { get; set; }
