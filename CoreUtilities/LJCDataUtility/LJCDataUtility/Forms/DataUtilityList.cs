@@ -27,7 +27,13 @@ namespace LJCDataUtility
       InitializeControls();
       RestoreControlValues();
 
-      Testing();
+      // Testing
+      ModuleGridCode.DataRetrieve();
+      TableGridCode.DataRetrieve();
+      ColumnGridCode.DataRetrieve();
+      KeyGridCode.DataRetrieve();
+      MapTableGridCode.DataRetrieve();
+      MapColumnGridCode.DataRetrieve();
     }
 
     #region Action Event Handlers

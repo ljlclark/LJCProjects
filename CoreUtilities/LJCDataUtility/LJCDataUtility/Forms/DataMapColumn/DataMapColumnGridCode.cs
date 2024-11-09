@@ -24,16 +24,20 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+
       TableGrid = UtilityList.TableGrid;
       ColumnGrid = UtilityList.ColumnGrid;
       MapColumnGrid = UtilityList.MapColumnGrid;
+      var mapColumnMenu = UtilityList.MapColumnMenu;
       Managers = UtilityList.Managers;
       MapColumnManager = Managers.DataMapColumnManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
-      MapColumnGrid.Font = new Font(fontFamily, 12, style);
+      MapColumnGrid.Font = new Font(fontFamily, 11, style);
+      mapColumnMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, MapColumnGrid);
+      _ = new MenuFont(mapColumnMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -46,7 +50,6 @@ namespace LJCDataUtility
       var grid = ColumnGrid;
       grid.DoubleClick += MapColumnGrid_DoubleClick;
       grid.KeyDown += MapColumnGrid_KeyDown;
-
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -117,14 +120,14 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    //private void RowUpdate(MapDataColumn dataRecord)
-    //{
-    //  if (MapColumnGrid.CurrentRow is LJCGridRow row)
-    //  {
-    //    SetStoredValues(row, dataRecord);
-    //    row.LJCSetValues(MapColumnGrid, dataRecord);
-    //  }
-    //}
+    private void RowUpdate(DataMapColumn dataRecord)
+    {
+      if (MapColumnGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(MapColumnGrid, dataRecord);
+      }
+    }
 
     // Sets the row stored values.
     // ********************
@@ -266,30 +269,35 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the New menu item event.
     // ********************
     private void MapColumnNew_Click(object sender, EventArgs e)
     {
       New();
     }
 
+    // Handles the Edit menu item event.
     // ********************
     private void MapColumnEdit_Click(object sender, EventArgs e)
     {
       Edit();
     }
 
+    // Handles the Delete menu item event.
     // ********************
     private void MapColumnDelete_Click(object sender, EventArgs e)
     {
       Delete();
     }
 
+    // Handles the Refresh menu item event.
     // ********************
     private void MapColumnRefresh_Click(object sender, EventArgs e)
     {
       Refresh();
     }
 
+    // Handles the Grid Doubleclick event.
     // ********************
     private void MapColumnGrid_DoubleClick(object sender, EventArgs e)
     {
@@ -303,12 +311,12 @@ namespace LJCDataUtility
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          //Edit();
+          Edit();
           e.Handled = true;
           break;
 
         case Keys.F1:
-          //Help();
+          ShowHelp();
           e.Handled = true;
           break;
 

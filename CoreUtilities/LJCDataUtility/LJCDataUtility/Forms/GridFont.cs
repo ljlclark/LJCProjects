@@ -26,12 +26,13 @@ namespace LJCDataUtility
       grid.MouseWheel += new MouseEventHandler(Grid_MouseWheel);
     }
 
+    #region Control Event Handlers
+
+    // Handles the grid Click event.
     private void Grid_Click(object sender, EventArgs e)
     {
       IsClicked = true;
     }
-
-    #region Control Event Handlers
 
     // Handles the grid KeyDown event.
     private void Grid_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -56,6 +57,7 @@ namespace LJCDataUtility
       PrevControl = null;
     }
 
+    // Handles the grid MouseEnter event.
     private void Grid_MouseEnter(object sender, EventArgs e)
     {
       if (null == PrevControl)
@@ -95,9 +97,12 @@ namespace LJCDataUtility
           size--;
         }
         //var fontFamily = "Microsoft Sans Serif";
-        //var style = FontStyle.Bold;
         var fontFamily = grid.Font.FontFamily;
         var style = grid.Font.Style;
+        if (size > 10)
+        {
+          //style = FontStyle.Bold;
+        }
         grid.Font = new Font(fontFamily, size, style);
       }
     }

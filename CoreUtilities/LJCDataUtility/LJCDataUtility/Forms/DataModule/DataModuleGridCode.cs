@@ -22,16 +22,30 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+
       ModuleGrid = UtilityList.ModuleGrid;
+      var moduleMenu = UtilityList.ModuleMenu;
       Managers = UtilityList.Managers;
       ModuleManager = Managers.DataModuleManager;
 
-      ModuleGrid.KeyDown += ModuleGrid_KeyDown;
-
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
-      ModuleGrid.Font = new Font(fontFamily, 12, style);
+      ModuleGrid.Font = new Font(fontFamily, 11, style);
+      moduleMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, ModuleGrid);
+      _ = new MenuFont(moduleMenu);
+
+      // Menu item events.
+      var list = UtilityList;
+      list.ModuleNew.Click += ModuleNew_Click;
+      list.ModuleEdit.Click += ModuleEdit_Click;
+      list.ModuleDelete.Click += ModuleDelete_Click;
+      list.ModuleRefresh.Click += ModuleRefresh_Click;
+
+      // Grid events.
+      var grid = ModuleGrid;
+      grid.DoubleClick += ModuleGrid_DoubleClick;
+      grid.KeyDown += ModuleGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -94,14 +108,14 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    //private void RowUpdate(DataModule dataRecord)
-    //{
-    //  if (ModuleGrid.CurrentRow is LJCGridRow row)
-    //  {
-    //    SetStoredValues(row, dataRecord);
-    //    row.LJCSetValues(ModuleGrid, dataRecord);
-    //  }
-    //}
+    private void RowUpdate(DataModule dataRecord)
+    {
+      if (ModuleGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(ModuleGrid, dataRecord);
+      }
+    }
 
     // Sets the row stored values.
     // ********************
@@ -235,6 +249,42 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the New menu item event.
+    // ********************
+    private void ModuleNew_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // Handles the Edit menu item event.
+    // ********************
+    private void ModuleEdit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // Handles the Delete menu item event.
+    // ********************
+    private void ModuleDelete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // Handles the Refresh menu item event.
+    // ********************
+    private void ModuleRefresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+
+    // Handles the Grid Doubleclick event.
+    // ********************
+    private void ModuleGrid_DoubleClick(object sender, EventArgs e)
+    {
+      New();
+    }
+
+
     // Handles the Grid KeyDown event.
     // ********************
     private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
@@ -242,12 +292,12 @@ namespace LJCDataUtility
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          //Edit();
+          Edit();
           e.Handled = true;
           break;
 
         case Keys.F1:
-          //Help();
+          ShowHelp();
           e.Handled = true;
           break;
 

@@ -71,7 +71,6 @@
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.ColumnRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.ColumnExit = new System.Windows.Forms.ToolStripMenuItem();
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
@@ -103,12 +102,12 @@
       this.mapColumnMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.MapColumnNew = new System.Windows.Forms.ToolStripMenuItem();
       this.MapColumnEdit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
       this.MapColumnDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
       this.MapColumnRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
       this.MapColumnExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
       this.ModuleMenu.SuspendLayout();
       this.ljcTabControl1.SuspendLayout();
       this.ModulePage.SuspendLayout();
@@ -432,10 +431,9 @@
             this.toolStripSeparator4,
             this.ColumnRefresh,
             this.toolStripSeparator1,
-            this.toolStripSeparator3,
             this.ColumnExit});
       this.ColumnMenu.Name = "ColumnMenu";
-      this.ColumnMenu.Size = new System.Drawing.Size(197, 220);
+      this.ColumnMenu.Size = new System.Drawing.Size(197, 214);
       // 
       // ColumnHeading
       // 
@@ -482,11 +480,6 @@
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(193, 6);
       // 
       // ColumnExit
       // 
@@ -542,7 +535,7 @@
       // 
       // KeyMenu
       // 
-      this.KeyMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.KeyMenu.BackColor = System.Drawing.SystemColors.Control;
       this.KeyMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.KeyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.keyMenuToolStripMenuItem,
@@ -559,6 +552,7 @@
       // 
       // keyMenuToolStripMenuItem
       // 
+      this.keyMenuToolStripMenuItem.BackColor = System.Drawing.SystemColors.Highlight;
       this.keyMenuToolStripMenuItem.Name = "keyMenuToolStripMenuItem";
       this.keyMenuToolStripMenuItem.Size = new System.Drawing.Size(162, 32);
       this.keyMenuToolStripMenuItem.Text = "Key Menu";
@@ -664,7 +658,7 @@
       // 
       // MapTableMenu
       // 
-      this.MapTableMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.MapTableMenu.BackColor = System.Drawing.SystemColors.Control;
       this.MapTableMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.MapTableMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mapTableMenuToolStripMenuItem,
@@ -681,6 +675,7 @@
       // 
       // mapTableMenuToolStripMenuItem
       // 
+      this.mapTableMenuToolStripMenuItem.BackColor = System.Drawing.SystemColors.Highlight;
       this.mapTableMenuToolStripMenuItem.Name = "mapTableMenuToolStripMenuItem";
       this.mapTableMenuToolStripMenuItem.Size = new System.Drawing.Size(215, 32);
       this.mapTableMenuToolStripMenuItem.Text = "Map Table Menu";
@@ -710,7 +705,7 @@
       this.MapTableDelete.BackColor = System.Drawing.SystemColors.Control;
       this.MapTableDelete.Name = "MapTableDelete";
       this.MapTableDelete.Size = new System.Drawing.Size(215, 32);
-      this.MapTableDelete.Text = "&Deete";
+      this.MapTableDelete.Text = "&Delete";
       // 
       // toolStripSeparator12
       // 
@@ -786,7 +781,7 @@
       // 
       // MapColumnMenu
       // 
-      this.MapColumnMenu.BackColor = System.Drawing.SystemColors.Highlight;
+      this.MapColumnMenu.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.MapColumnMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mapColumnMenuToolStripMenuItem,
@@ -799,67 +794,68 @@
             this.toolStripSeparator17,
             this.MapColumnExit});
       this.MapColumnMenu.Name = "MapColumnMenu";
-      this.MapColumnMenu.Size = new System.Drawing.Size(241, 247);
+      this.MapColumnMenu.Size = new System.Drawing.Size(238, 214);
       // 
       // mapColumnMenuToolStripMenuItem
       // 
+      this.mapColumnMenuToolStripMenuItem.BackColor = System.Drawing.SystemColors.Highlight;
       this.mapColumnMenuToolStripMenuItem.Name = "mapColumnMenuToolStripMenuItem";
-      this.mapColumnMenuToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+      this.mapColumnMenuToolStripMenuItem.Size = new System.Drawing.Size(237, 32);
       this.mapColumnMenuToolStripMenuItem.Text = "Map Column Menu";
       // 
       // MapColumnNew
       // 
       this.MapColumnNew.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnNew.Name = "MapColumnNew";
-      this.MapColumnNew.Size = new System.Drawing.Size(240, 32);
+      this.MapColumnNew.Size = new System.Drawing.Size(237, 32);
       this.MapColumnNew.Text = "&New";
       // 
       // MapColumnEdit
       // 
       this.MapColumnEdit.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnEdit.Name = "MapColumnEdit";
-      this.MapColumnEdit.Size = new System.Drawing.Size(240, 32);
+      this.MapColumnEdit.Size = new System.Drawing.Size(237, 32);
       this.MapColumnEdit.Text = "&Edit";
+      // 
+      // toolStripSeparator19
+      // 
+      this.toolStripSeparator19.BackColor = System.Drawing.SystemColors.Control;
+      this.toolStripSeparator19.Name = "toolStripSeparator19";
+      this.toolStripSeparator19.Size = new System.Drawing.Size(234, 6);
       // 
       // MapColumnDelete
       // 
       this.MapColumnDelete.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnDelete.Name = "MapColumnDelete";
-      this.MapColumnDelete.Size = new System.Drawing.Size(240, 32);
+      this.MapColumnDelete.Size = new System.Drawing.Size(237, 32);
       this.MapColumnDelete.Text = "&Delete";
+      // 
+      // toolStripSeparator18
+      // 
+      this.toolStripSeparator18.BackColor = System.Drawing.SystemColors.Control;
+      this.toolStripSeparator18.Name = "toolStripSeparator18";
+      this.toolStripSeparator18.Size = new System.Drawing.Size(234, 6);
       // 
       // MapColumnRefresh
       // 
       this.MapColumnRefresh.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnRefresh.Name = "MapColumnRefresh";
-      this.MapColumnRefresh.Size = new System.Drawing.Size(240, 32);
+      this.MapColumnRefresh.Size = new System.Drawing.Size(237, 32);
       this.MapColumnRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator17
       // 
       this.toolStripSeparator17.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator17.Name = "toolStripSeparator17";
-      this.toolStripSeparator17.Size = new System.Drawing.Size(237, 6);
+      this.toolStripSeparator17.Size = new System.Drawing.Size(234, 6);
       // 
       // MapColumnExit
       // 
       this.MapColumnExit.BackColor = System.Drawing.SystemColors.Control;
       this.MapColumnExit.Name = "MapColumnExit";
-      this.MapColumnExit.Size = new System.Drawing.Size(240, 32);
+      this.MapColumnExit.Size = new System.Drawing.Size(237, 32);
       this.MapColumnExit.Text = "E&xit";
       this.MapColumnExit.Click += new System.EventHandler(this.Exit_Click);
-      // 
-      // toolStripSeparator18
-      // 
-      this.toolStripSeparator18.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator18.Name = "toolStripSeparator18";
-      this.toolStripSeparator18.Size = new System.Drawing.Size(237, 6);
-      // 
-      // toolStripSeparator19
-      // 
-      this.toolStripSeparator19.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(237, 6);
       // 
       // DataUtilityList
       // 
@@ -908,9 +904,9 @@
     internal LJCWinFormControls.LJCDataGrid KeyGrid;
     internal LJCWinFormControls.LJCDataGrid MapTableGrid;
     internal LJCWinFormControls.LJCDataGrid MapColumnGrid;
-    private System.Windows.Forms.ToolStripMenuItem ModuleRefresh;
+    internal System.Windows.Forms.ToolStripMenuItem ModuleRefresh;
     internal System.Windows.Forms.ContextMenuStrip TableMenu;
-    private System.Windows.Forms.ToolStripMenuItem TableRefresh;
+    internal System.Windows.Forms.ToolStripMenuItem TableRefresh;
     private System.Windows.Forms.ToolStripMenuItem TableExit;
     internal System.Windows.Forms.ContextMenuStrip ColumnMenu;
     private System.Windows.Forms.ToolStripMenuItem ColumnHeading;
@@ -924,7 +920,7 @@
     private System.Windows.Forms.ToolStripMenuItem KeyExit;
     internal System.Windows.Forms.ContextMenuStrip MapTableMenu;
     private System.Windows.Forms.ToolStripMenuItem mapTableMenuToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem MapTableRefresh;
+    internal System.Windows.Forms.ToolStripMenuItem MapTableRefresh;
     private System.Windows.Forms.ToolStripMenuItem MapTableExit;
     internal System.Windows.Forms.ContextMenuStrip MapColumnMenu;
     private System.Windows.Forms.ToolStripMenuItem mapColumnMenuToolStripMenuItem;
@@ -936,24 +932,23 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-    private System.Windows.Forms.ToolStripMenuItem ModuleNew;
-    private System.Windows.Forms.ToolStripMenuItem ModuleEdit;
+    internal System.Windows.Forms.ToolStripMenuItem ModuleNew;
+    internal System.Windows.Forms.ToolStripMenuItem ModuleEdit;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-    private System.Windows.Forms.ToolStripMenuItem ModuleDelete;
+    internal System.Windows.Forms.ToolStripMenuItem ModuleDelete;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-    private System.Windows.Forms.ToolStripMenuItem TableNew;
-    private System.Windows.Forms.ToolStripMenuItem TableEdit;
+    internal System.Windows.Forms.ToolStripMenuItem TableNew;
+    internal System.Windows.Forms.ToolStripMenuItem TableEdit;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-    private System.Windows.Forms.ToolStripMenuItem TableDelete;
+    internal System.Windows.Forms.ToolStripMenuItem TableDelete;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     internal System.Windows.Forms.ToolStripMenuItem KeyNew;
     internal System.Windows.Forms.ToolStripMenuItem KeyEdit;
     internal System.Windows.Forms.ToolStripMenuItem KeyDelete;
-    private System.Windows.Forms.ToolStripMenuItem MapTableNew;
-    private System.Windows.Forms.ToolStripMenuItem MapTableEdit;
+    internal System.Windows.Forms.ToolStripMenuItem MapTableNew;
+    internal System.Windows.Forms.ToolStripMenuItem MapTableEdit;
     internal System.Windows.Forms.ToolStripMenuItem MapTableDelete;
     internal System.Windows.Forms.ToolStripMenuItem MapColumnNew;
     internal System.Windows.Forms.ToolStripMenuItem MapColumnEdit;

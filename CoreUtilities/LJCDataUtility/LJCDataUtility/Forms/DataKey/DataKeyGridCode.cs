@@ -24,15 +24,19 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+
       TableGrid = UtilityList.TableGrid;
       KeyGrid = UtilityList.KeyGrid;
+      var keyMenu = UtilityList.KeyMenu;
       Managers = UtilityList.Managers;
       KeyManager = Managers.DataKeyManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
-      KeyGrid.Font = new Font(fontFamily, 12, style);
+      KeyGrid.Font = new Font(fontFamily, 11, style);
+      keyMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, KeyGrid);
+      _ = new MenuFont(keyMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -113,14 +117,14 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    //private void RowUpdate(DataKey dataRecord)
-    //{
-    //  if (KeyGrid.CurrentRow is LJCGridRow row)
-    //  {
-    //    SetStoredValues(row, dataRecord);
-    //    row.LJCSetValues(KeyGrid, dataRecord);
-    //  }
-    //}
+    private void RowUpdate(DataKey dataRecord)
+    {
+      if (KeyGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(KeyGrid, dataRecord);
+      }
+    }
 
     // Sets the row stored values.
     // ********************
@@ -257,30 +261,35 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the New menu item event.
     // ********************
     private void KeyNew_Click(object sender, EventArgs e)
     {
       New();
     }
 
+    // Handles the Edit menu item event.
     // ********************
     private void KeyEdit_Click(object sender, EventArgs e)
     {
       Edit();
     }
 
+    // Handles the Delete menu item event.
     // ********************
     private void KeyDelete_Click(object sender, EventArgs e)
     {
       Delete();
     }
 
+    // Handles the Refresh menu item event.
     // ********************
     private void KeyRefresh_Click(object sender, EventArgs e)
     {
       Refresh();
     }
 
+    // Handles the Grid Doubleclick event.
     // ********************
     private void KeyGrid_DoubleClick(object sender, EventArgs e)
     {
@@ -294,12 +303,12 @@ namespace LJCDataUtility
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          //Edit();
+          Edit();
           e.Handled = true;
           break;
 
         case Keys.F1:
-          //ShowHelp();
+          ShowHelp();
           e.Handled = true;
           break;
 

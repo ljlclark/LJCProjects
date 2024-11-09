@@ -150,17 +150,6 @@ namespace LJCDataUtility
     private ValuesDataUtility Values { get; set; }
     #endregion
 
-    private void Testing()
-    {
-      ModuleGridCode.DataRetrieve();
-      TableGridCode.DataRetrieve();
-      ColumnGridCode.DataRetrieve();
-      KeyGridCode.DataRetrieve();
-      MapTableGridCode.DataRetrieve();
-      MapColumnGridCode.DataRetrieve();
-    }
-
-
     // Test the XMLBuilder class.
     private string TestXML()
     {

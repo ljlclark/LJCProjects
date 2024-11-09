@@ -24,17 +24,31 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+
       ModuleGrid = UtilityList.ModuleGrid;
       TableGrid = UtilityList.TableGrid;
+      var tableMenu = UtilityList.TableMenu;
       Managers = UtilityList.Managers;
       TableManager = Managers.DataTableManager;
 
-      TableGrid.KeyDown += TableGrid_KeyDown;
-
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
-      TableGrid.Font = new Font(fontFamily, 12, style);
+      TableGrid.Font = new Font(fontFamily, 11, style);
+      tableMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, TableGrid);
+      _ = new MenuFont(tableMenu);
+
+      // Menu item events.
+      var list = UtilityList;
+      list.TableNew.Click += TableNew_Click;
+      list.TableEdit.Click += TableEdit_Click;
+      list.TableDelete.Click += TableDelete_Click;
+      list.TableRefresh.Click += TableRefresh_Click;
+
+      // Grid events.
+      var grid = TableGrid;
+      grid.DoubleClick += TableGrid_DoubleClick;
+      grid.KeyDown += TableGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -104,14 +118,14 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    //private void RowUpdate(MapDataColumn dataRecord)
-    //{
-    //  if (MapColumnGrid.CurrentRow is LJCGridRow row)
-    //  {
-    //    SetStoredValues(row, dataRecord);
-    //    row.LJCSetValues(MapColumnGrid, dataRecord);
-    //  }
-    //}
+    private void RowUpdate(DataTable dataRecord)
+    {
+      if (TableGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(TableGrid, dataRecord);
+      }
+    }
 
     // Sets the row stored values.
     // ********************
@@ -129,8 +143,7 @@ namespace LJCDataUtility
     {
       bool success = false;
       var row = TableGrid.CurrentRow as LJCGridRow;
-      if (TableGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -245,6 +258,41 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the New menu item event.
+    // ********************
+    private void TableNew_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // Handles the Edit menu item event.
+    // ********************
+    private void TableEdit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // Handles the Delete menu item event.
+    // ********************
+    private void TableDelete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // Handles the Refresh menu item event.
+    // ********************
+    private void TableRefresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+
+    // Handles the Grid Doubleclick event.
+    // ********************
+    private void TableGrid_DoubleClick(object sender, EventArgs e)
+    {
+      New();
+    }
+
     // Handles the Grid KeyDown event.
     // ********************
     private void TableGrid_KeyDown(object sender, KeyEventArgs e)
@@ -252,12 +300,12 @@ namespace LJCDataUtility
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          //Edit();
+          Edit();
           e.Handled = true;
           break;
 
         case Keys.F1:
-          //Help();
+          ShowHelp();
           e.Handled = true;
           break;
 

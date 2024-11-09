@@ -24,15 +24,19 @@ namespace LJCDataUtility
       // Initialize property values.
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
+
       TableGrid = UtilityList.TableGrid;
       ColumnGrid = UtilityList.ColumnGrid;
+      var columnMenu = UtilityList.ColumnMenu;
       Managers = UtilityList.Managers;
       ColumnManager = Managers.DataColumnManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       ColumnGrid.Font = new Font(fontFamily, 11, style);
+      columnMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, ColumnGrid);
+      _ = new MenuFont(columnMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -45,7 +49,6 @@ namespace LJCDataUtility
       var grid = ColumnGrid;
       grid.DoubleClick += ColumnGrid_DoubleClick;
       grid.KeyDown += ColumnGrid_KeyDown;
-
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -114,14 +117,14 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    //private void RowUpdate(DataColumn dataRecord)
-    //{
-    //  if (ColumnGrid.CurrentRow is LJCGridRow row)
-    //  {
-    //    SetStoredValues(row, dataRecord);
-    //    row.LJCSetValues(ColumnGrid, dataRecord);
-    //  }
-    //}
+    private void RowUpdate(DataColumn dataRecord)
+    {
+      if (ColumnGrid.CurrentRow is LJCGridRow row)
+      {
+        SetStoredValues(row, dataRecord);
+        row.LJCSetValues(ColumnGrid, dataRecord);
+      }
+    }
 
     // Sets the row stored values.
     // ********************
@@ -275,30 +278,35 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the New menu item event.
     // ********************
     private void ColumnNew_Click(object sender, EventArgs e)
     {
       New();
     }
 
+    // Handles the Edit menu item event.
     // ********************
     private void ColumnEdit_Click(object sender, EventArgs e)
     {
       Edit();
     }
 
+    // Handles the Delete menu item event.
     // ********************
     private void ColumnDelete_Click(object sender, EventArgs e)
     {
       Delete();
     }
 
+    // Handles the Refresh menu item event.
     // ********************
     private void ColumnRefresh_Click(object sender, EventArgs e)
     {
       Refresh();
     }
 
+    // Handles the Grid Doubleclick event.
     // ********************
     private void ColumnGrid_DoubleClick(object sender, EventArgs e)
     {
@@ -317,7 +325,7 @@ namespace LJCDataUtility
           break;
 
         case Keys.F1:
-          //ShowHelp();
+          ShowHelp();
           e.Handled = true;
           break;
 
@@ -366,7 +374,7 @@ namespace LJCDataUtility
     // Gets or sets the parent Grid reference.
     private LJCDataGrid TableGrid { get; set; }
 
-    // Gets or sets the Parent List reference.
+    // Gets or sets the parent List reference.
     private DataUtilityList UtilityList { get; set; }
     #endregion
   }
