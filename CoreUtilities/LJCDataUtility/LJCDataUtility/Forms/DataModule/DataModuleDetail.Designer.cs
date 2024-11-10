@@ -1,6 +1,6 @@
 ﻿namespace LJCDataUtility
 {
-  partial class DataKeyDetail
+  partial class DataModuleDetail
   {
     /// <summary>
     /// Required designer variable.
@@ -39,7 +39,7 @@
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 20;
+      this.FormCancelButton.TabIndex = 22;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
@@ -51,12 +51,12 @@
       this.OKButton.Margin = new System.Windows.Forms.Padding(6);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 19;
+      this.OKButton.TabIndex = 21;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // DataKeyDetail
+      // DataModuleDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -64,9 +64,9 @@
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Name = "DataKeyDetail";
-      this.Text = "DataKey Detail";
-      this.Load += new System.EventHandler(this.DataKeyDetail_Load);
+      this.Name = "DataModuleDetail";
+      this.Text = "DataModule Detai";
+      this.Load += new System.EventHandler(this.DataModuleDetai_Load);
       this.ResumeLayout(false);
 
     }

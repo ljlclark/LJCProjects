@@ -44,7 +44,7 @@ namespace LJCDataUtility
 
       // Grid events.
       var grid = ModuleGrid;
-      grid.DoubleClick += ModuleGrid_DoubleClick;
+      grid.MouseDoubleClick += ModuleGrid_MouseDoubleClick;
       grid.KeyDown += ModuleGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
@@ -181,6 +181,16 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
+      var location = FormCommon.GetDialogScreenPoint(ModuleGrid);
+      var detail = new DataModuleDetail
+      {
+        //LJCLocation = location,
+        //LJCManagers = Managers,
+        //LJCParentID = parentID,
+        //LJCParentName = parentName
+      };
+      //detail.LJCChange += Detail_Change;
+      detail.ShowDialog();
     }
 
     // Refreshes the list.
@@ -279,9 +289,12 @@ namespace LJCDataUtility
 
     // Handles the Grid Doubleclick event.
     // ********************
-    private void ModuleGrid_DoubleClick(object sender, EventArgs e)
+    private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      New();
+      if (ModuleGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
     }
 
 
@@ -306,16 +319,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.M:
-          if (e.Control)
-          {
-            var position = FormCommon.GetMenuScreenPoint(ModuleGrid
-              , Control.MousePosition);
-            UtilityList.ModuleMenu.Show(position);
-            UtilityList.ModuleMenu.Select();
-            e.Handled = true;
-          }
-          break;
+        //case Keys.M:
+        //  if (e.Control)
+        //  {
+        //    var position = FormCommon.GetMenuScreenPoint(ModuleGrid
+        //      , Control.MousePosition);
+        //    UtilityList.ModuleMenu.Show(position);
+        //    UtilityList.ModuleMenu.Select();
+        //    e.Handled = true;
+        //  }
+        //  break;
 
         case Keys.Tab:
           if (e.Shift)

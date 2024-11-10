@@ -48,7 +48,7 @@ namespace LJCDataUtility
 
       // Grid events.
       var grid = ColumnGrid;
-      grid.DoubleClick += MapColumnGrid_DoubleClick;
+      grid.MouseDoubleClick += MapColumnGrid_MouseDoubleClick;
       grid.KeyDown += MapColumnGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
@@ -197,6 +197,23 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
+      if (ColumnGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from list items.
+        int parentID = parentRow.LJCGetInt32(DataColumn.ColumnID);
+        string parentName = parentRow.LJCGetString(DataColumn.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(MapColumnGrid);
+        var detail = new DataMapColumnDetail
+        {
+          //LJCLocation = location,
+          //LJCManagers = Managers,
+          //LJCParentID = parentID,
+          //LJCParentName = parentName
+        };
+        //detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Refreshes the list.
@@ -299,9 +316,12 @@ namespace LJCDataUtility
 
     // Handles the Grid Doubleclick event.
     // ********************
-    private void MapColumnGrid_DoubleClick(object sender, EventArgs e)
+    private void MapColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      New();
+      if (MapColumnGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
     }
 
     // Handles the Grid KeyDown event.
@@ -325,16 +345,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.M:
-          if (e.Control)
-          {
-            var position = FormCommon.GetMenuScreenPoint(MapColumnGrid
-              , Control.MousePosition);
-            UtilityList.MapColumnMenu.Show(position);
-            UtilityList.MapColumnMenu.Select();
-            e.Handled = true;
-          }
-          break;
+        //case Keys.M:
+        //  if (e.Control)
+        //  {
+        //    var position = FormCommon.GetMenuScreenPoint(MapColumnGrid
+        //      , Control.MousePosition);
+        //    UtilityList.MapColumnMenu.Show(position);
+        //    UtilityList.MapColumnMenu.Select();
+        //    e.Handled = true;
+        //  }
+        //  break;
 
         case Keys.Tab:
           if (e.Shift)

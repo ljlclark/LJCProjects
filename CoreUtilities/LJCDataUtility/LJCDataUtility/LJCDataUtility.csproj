@@ -98,18 +98,18 @@
       <DependentUpon>DataMapTableDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataMapTable\DataMapTableGridCode.cs" />
-    <Compile Include="Forms\DataModule\DataModuleDetai.cs">
+    <Compile Include="Forms\DataModule\DataModuleDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DataModule\DataModuleDetai.Designer.cs">
-      <DependentUpon>DataModuleDetai.cs</DependentUpon>
+    <Compile Include="Forms\DataModule\DataModuleDetail.Designer.cs">
+      <DependentUpon>DataModuleDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataModule\DataModuleGridCode.cs" />
-    <Compile Include="Forms\DataTable\DadtaTableDetail.cs">
+    <Compile Include="Forms\DataTable\DataTableDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DataTable\DadtaTableDetail.Designer.cs">
-      <DependentUpon>DadtaTableDetail.cs</DependentUpon>
+    <Compile Include="Forms\DataTable\DataTableDetail.Designer.cs">
+      <DependentUpon>DataTableDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataTable\DataTableGridCode.cs" />
     <Compile Include="Forms\DataUtilityList.cs">
@@ -140,11 +140,11 @@
     <EmbeddedResource Include="Forms\DataMapTable\DataMapTableDetail.resx">
       <DependentUpon>DataMapTableDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataModule\DataModuleDetai.resx">
-      <DependentUpon>DataModuleDetai.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DataModule\DataModuleDetail.resx">
+      <DependentUpon>DataModuleDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataTable\DadtaTableDetail.resx">
-      <DependentUpon>DadtaTableDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DataTable\DataTableDetail.resx">
+      <DependentUpon>DataTableDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataUtilityList.resx">
       <DependentUpon>DataUtilityList.cs</DependentUpon>

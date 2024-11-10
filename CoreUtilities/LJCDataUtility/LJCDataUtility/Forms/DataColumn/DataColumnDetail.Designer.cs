@@ -52,14 +52,15 @@
       // ParentNameTextbox
       // 
       this.ParentNameTextbox.Location = new System.Drawing.Point(254, 22);
-      this.ParentNameTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.ParentNameTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.ParentNameTextbox.Name = "ParentNameTextbox";
       this.ParentNameTextbox.ReadOnly = true;
-      this.ParentNameTextbox.Size = new System.Drawing.Size(594, 32);
+      this.ParentNameTextbox.Size = new System.Drawing.Size(500, 32);
       this.ParentNameTextbox.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
+      this.ParentNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ParentNameLabel.Location = new System.Drawing.Point(23, 28);
       this.ParentNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.ParentNameLabel.Name = "ParentNameLabel";
@@ -70,13 +71,14 @@
       // ValueTextbox
       // 
       this.ValueTextbox.Location = new System.Drawing.Point(254, 116);
-      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(594, 32);
+      this.ValueTextbox.Size = new System.Drawing.Size(500, 32);
       this.ValueTextbox.TabIndex = 5;
       // 
       // ValueLabel
       // 
+      this.ValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ValueLabel.Location = new System.Drawing.Point(23, 122);
       this.ValueLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.ValueLabel.Name = "ValueLabel";
@@ -87,8 +89,8 @@
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(674, 454);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.FormCancelButton.Location = new System.Drawing.Point(578, 454);
+      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
       this.FormCancelButton.TabIndex = 18;
@@ -99,8 +101,8 @@
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(483, 454);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.OKButton.Location = new System.Drawing.Point(387, 454);
+      this.OKButton.Margin = new System.Windows.Forms.Padding(6);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(174, 46);
       this.OKButton.TabIndex = 17;
@@ -111,13 +113,14 @@
       // NameTextbox
       // 
       this.NameTextbox.Location = new System.Drawing.Point(254, 69);
-      this.NameTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+      this.NameTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(594, 32);
+      this.NameTextbox.Size = new System.Drawing.Size(500, 32);
       this.NameTextbox.TabIndex = 3;
       // 
       // NameLabel
       // 
+      this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.NameLabel.Location = new System.Drawing.Point(23, 75);
       this.NameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.NameLabel.Name = "NameLabel";
@@ -130,11 +133,12 @@
       this.textBox1.Location = new System.Drawing.Point(254, 163);
       this.textBox1.Margin = new System.Windows.Forms.Padding(6);
       this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(594, 32);
+      this.textBox1.Size = new System.Drawing.Size(500, 32);
       this.textBox1.TabIndex = 7;
       // 
       // label1
       // 
+      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.Location = new System.Drawing.Point(23, 169);
       this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label1.Name = "label1";
@@ -152,6 +156,7 @@
       // 
       // label3
       // 
+      this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label3.Location = new System.Drawing.Point(23, 263);
       this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label3.Name = "label3";
@@ -169,6 +174,7 @@
       // 
       // label4
       // 
+      this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label4.Location = new System.Drawing.Point(23, 310);
       this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label4.Name = "label4";
@@ -186,6 +192,7 @@
       // 
       // label5
       // 
+      this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label5.Location = new System.Drawing.Point(23, 357);
       this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label5.Name = "label5";
@@ -198,11 +205,12 @@
       this.textBox6.Location = new System.Drawing.Point(254, 210);
       this.textBox6.Margin = new System.Windows.Forms.Padding(6);
       this.textBox6.Name = "textBox6";
-      this.textBox6.Size = new System.Drawing.Size(594, 32);
+      this.textBox6.Size = new System.Drawing.Size(500, 32);
       this.textBox6.TabIndex = 9;
       // 
       // label6
       // 
+      this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label6.Location = new System.Drawing.Point(23, 216);
       this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.label6.Name = "label6";
@@ -215,7 +223,7 @@
       this.checkBox1.AutoSize = true;
       this.checkBox1.Location = new System.Drawing.Point(254, 398);
       this.checkBox1.Name = "checkBox1";
-      this.checkBox1.Size = new System.Drawing.Size(145, 30);
+      this.checkBox1.Size = new System.Drawing.Size(135, 30);
       this.checkBox1.TabIndex = 16;
       this.checkBox1.Text = "Allow Null";
       this.checkBox1.UseVisualStyleBackColor = true;
@@ -224,7 +232,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(873, 514);
+      this.ClientSize = new System.Drawing.Size(778, 514);
       this.Controls.Add(this.checkBox1);
       this.Controls.Add(this.textBox6);
       this.Controls.Add(this.label6);
@@ -244,7 +252,8 @@
       this.Controls.Add(this.OKButton);
       this.Controls.Add(this.NameTextbox);
       this.Controls.Add(this.NameLabel);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
       this.Name = "DataColumnDetail";
       this.Text = "DataColumn Detail";

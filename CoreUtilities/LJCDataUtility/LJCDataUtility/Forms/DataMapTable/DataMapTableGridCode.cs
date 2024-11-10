@@ -47,7 +47,7 @@ namespace LJCDataUtility
 
       // Grid events.
       var grid = MapTableGrid;
-      grid.DoubleClick += MapTableGrid_DoubleClick;
+      grid.MouseDoubleClick += MapTableGrid_MouseDoubleClick;
       grid.KeyDown += MapTableGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
@@ -190,6 +190,23 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from list items.
+        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+        string parentName = parentRow.LJCGetString(DataTable.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(MapTableGrid);
+        var detail = new DataMapTableDetail
+        {
+          //LJCLocation = location,
+          //LJCManagers = Managers,
+          //LJCParentID = parentID,
+          //LJCParentName = parentName
+        };
+        //detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Refreshes the list.
@@ -287,9 +304,12 @@ namespace LJCDataUtility
 
     // Handles the Grid Doubleclick event.
     // ********************
-    private void MapTableGrid_DoubleClick(object sender, EventArgs e)
+    private void MapTableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      New();
+      if (MapTableGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
     }
 
     // Handles the Grid KeyDown event.
@@ -313,16 +333,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.M:
-          if (e.Control)
-          {
-            var position = FormCommon.GetMenuScreenPoint(MapTableGrid
-              , Control.MousePosition);
-            UtilityList.MapTableMenu.Show(position);
-            UtilityList.MapTableMenu.Select();
-            e.Handled = true;
-          }
-          break;
+        //case Keys.M:
+        //  if (e.Control)
+        //  {
+        //    var position = FormCommon.GetMenuScreenPoint(MapTableGrid
+        //      , Control.MousePosition);
+        //    UtilityList.MapTableMenu.Show(position);
+        //    UtilityList.MapTableMenu.Select();
+        //    e.Handled = true;
+        //  }
+        //  break;
 
         case Keys.Tab:
           if (e.Shift)

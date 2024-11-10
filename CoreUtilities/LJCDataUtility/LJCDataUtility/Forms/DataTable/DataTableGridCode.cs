@@ -47,7 +47,7 @@ namespace LJCDataUtility
 
       // Grid events.
       var grid = TableGrid;
-      grid.DoubleClick += TableGrid_DoubleClick;
+      grid.MouseDoubleClick += TableGrid_MouseDoubleClick;
       grid.KeyDown += TableGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
@@ -190,6 +190,23 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
+      if (ModuleGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from list items.
+        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
+        string parentName = parentRow.LJCGetString(DataModule.ColumnName);
+
+        var location = FormCommon.GetDialogScreenPoint(TableGrid);
+        var detail = new DataTableDetail
+        {
+          //LJCLocation = location,
+          //LJCManagers = Managers,
+          //LJCParentID = parentID,
+          //LJCParentName = parentName
+        };
+        //detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Refreshes the list.
@@ -288,9 +305,12 @@ namespace LJCDataUtility
 
     // Handles the Grid Doubleclick event.
     // ********************
-    private void TableGrid_DoubleClick(object sender, EventArgs e)
+    private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      New();
+      if (TableGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
     }
 
     // Handles the Grid KeyDown event.
@@ -314,16 +334,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.M:
-          if (e.Control)
-          {
-            var position = FormCommon.GetMenuScreenPoint(TableGrid
-              , Control.MousePosition);
-            UtilityList.TableMenu.Show(position);
-            UtilityList.TableMenu.Select();
-            e.Handled = true;
-          }
-          break;
+        //case Keys.M:
+        //  if (e.Control)
+        //  {
+        //    var position = FormCommon.GetMenuScreenPoint(TableGrid
+        //      , Control.MousePosition);
+        //    UtilityList.TableMenu.Show(position);
+        //    UtilityList.TableMenu.Select();
+        //    e.Handled = true;
+        //  }
+        //  break;
 
         case Keys.Tab:
           if (e.Shift)

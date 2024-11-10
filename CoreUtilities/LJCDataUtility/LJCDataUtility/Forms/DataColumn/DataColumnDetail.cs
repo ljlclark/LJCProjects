@@ -25,17 +25,20 @@ namespace LJCDataUtility
 
     private void ColumnDetail_Load(object sender, EventArgs e)
     {
+      AcceptButton = OKButton;
+      CancelButton = FormCancelButton;
 
+      CenterToParent();
     }
 
     private void OKButton_Click(object sender, EventArgs e)
     {
-
+      Close();
     }
 
     private void FormCancelButton_Click(object sender, EventArgs e)
     {
-
+      Close();
     }
   }
 }

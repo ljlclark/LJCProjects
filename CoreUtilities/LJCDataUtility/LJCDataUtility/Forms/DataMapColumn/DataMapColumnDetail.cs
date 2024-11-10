@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LJCDataUtility.Forms.DataMapColumn
+namespace LJCDataUtility
 {
   /// <summary>
   /// 
@@ -25,7 +25,20 @@ namespace LJCDataUtility.Forms.DataMapColumn
 
     private void DataMapColumnDetail_Load(object sender, EventArgs e)
     {
+      AcceptButton = OKButton;
+      CancelButton = FormCancelButton;
 
+      CenterToParent();
+    }
+
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      Close();
+    }
+
+    private void FormCancelButton_Click(object sender, EventArgs e)
+    {
+      Close();
     }
   }
 }

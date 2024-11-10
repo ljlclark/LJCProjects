@@ -47,7 +47,7 @@ namespace LJCDataUtility
 
       // Grid events.
       var grid = ColumnGrid;
-      grid.DoubleClick += ColumnGrid_DoubleClick;
+      grid.MouseDoubleClick += ColumnGrid_MouseDoubleClick;
       grid.KeyDown += ColumnGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
     }
@@ -195,7 +195,7 @@ namespace LJCDataUtility
         int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
         string parentName = parentRow.LJCGetString(DataTable.ColumnName);
 
-        var location = FormCommon.GetDialogScreenPoint(TableGrid);
+        var location = FormCommon.GetDialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
           //LJCLocation = location,
@@ -308,9 +308,12 @@ namespace LJCDataUtility
 
     // Handles the Grid Doubleclick event.
     // ********************
-    private void ColumnGrid_DoubleClick(object sender, EventArgs e)
+    private void ColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
-      New();
+      if (ColumnGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
     }
 
     // Handles the Grid KeyDown event.
@@ -339,9 +342,10 @@ namespace LJCDataUtility
           {
             var position = FormCommon.GetMenuScreenPoint(ColumnGrid
               , Control.MousePosition);
-            UtilityList.ColumnMenu.Show(position);
-            UtilityList.ColumnMenu.Select();
-            e.Handled = true;
+            var menu = UtilityList.ColumnMenu;
+            menu.Show(position);
+            //menu.Select();
+            //e.Handled = true;
           }
           break;
 

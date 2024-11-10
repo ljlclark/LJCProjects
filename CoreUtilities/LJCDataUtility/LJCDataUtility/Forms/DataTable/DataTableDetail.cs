@@ -13,17 +13,17 @@ namespace LJCDataUtility
   /// <summary>
   /// 
   /// </summary>
-  public partial class DataMapTableDetail : Form
+  public partial class DataTableDetail : Form
   {
     /// <summary>
     /// 
     /// </summary>
-    public DataMapTableDetail()
+    public DataTableDetail()
     {
       InitializeComponent();
     }
 
-    private void DataMapTableDetail_Load(object sender, EventArgs e)
+    private void DataTableDetail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
@@ -31,12 +31,12 @@ namespace LJCDataUtility
       CenterToParent();
     }
 
-    private void OKButton_Click(object sender, EventArgs e)
+    private void FormCancelButton_Click(object sender, EventArgs e)
     {
       Close();
     }
 
-    private void FormCancelButton_Click(object sender, EventArgs e)
+    private void OKButton_Click(object sender, EventArgs e)
     {
       Close();
     }

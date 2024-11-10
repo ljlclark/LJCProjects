@@ -1,4 +1,4 @@
-﻿namespace LJCDataUtility.Forms.DataMapTable
+﻿namespace LJCDataUtility
 {
   partial class DataMapTableDetail
   {
@@ -28,20 +28,52 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.FormCancelButton = new System.Windows.Forms.Button();
+      this.OKButton = new System.Windows.Forms.Button();
       this.SuspendLayout();
+      // 
+      // FormCancelButton
+      // 
+      this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.FormCancelButton.Location = new System.Drawing.Point(578, 284);
+      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6);
+      this.FormCancelButton.Name = "FormCancelButton";
+      this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
+      this.FormCancelButton.TabIndex = 24;
+      this.FormCancelButton.Text = "Cancel";
+      this.FormCancelButton.UseVisualStyleBackColor = true;
+      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
+      // 
+      // OKButton
+      // 
+      this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.OKButton.Location = new System.Drawing.Point(387, 284);
+      this.OKButton.Margin = new System.Windows.Forms.Padding(6);
+      this.OKButton.Name = "OKButton";
+      this.OKButton.Size = new System.Drawing.Size(174, 46);
+      this.OKButton.TabIndex = 23;
+      this.OKButton.Text = "&OK";
+      this.OKButton.UseVisualStyleBackColor = true;
+      this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
       // DataMapTableDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
+      this.ClientSize = new System.Drawing.Size(778, 344);
+      this.Controls.Add(this.FormCancelButton);
+      this.Controls.Add(this.OKButton);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "DataMapTableDetail";
-      this.Text = "DataMapTableDetail";
+      this.Text = "DataMapTable Detail";
       this.Load += new System.EventHandler(this.DataMapTableDetail_Load);
       this.ResumeLayout(false);
 
     }
 
     #endregion
+
+    private System.Windows.Forms.Button FormCancelButton;
+    private System.Windows.Forms.Button OKButton;
   }
 }

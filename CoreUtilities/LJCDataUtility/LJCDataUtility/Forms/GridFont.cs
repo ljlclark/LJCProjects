@@ -10,10 +10,12 @@ namespace LJCDataUtility
   {
 
     // Initializes an object instance.
-    internal GridFont(ContainerControl parent, LJCDataGrid grid)
+    internal GridFont(ContainerControl parent, LJCDataGrid grid
+      , bool autoSelect = true)
     {
       Parent = parent;
       Grid = grid;
+      AutoSelect = autoSelect;
       IsClicked = false;
 
       // Set event handlers.
@@ -60,12 +62,13 @@ namespace LJCDataUtility
     // Handles the grid MouseEnter event.
     private void Grid_MouseEnter(object sender, EventArgs e)
     {
-      if (null == PrevControl)
+      if (AutoSelect
+        && null == PrevControl)
       {
         PrevControl = Parent.ActiveControl;
         if (PrevControl != null)
         {
-          Grid.Focus();
+          Grid.Select();
         }
       }
     }
@@ -73,7 +76,8 @@ namespace LJCDataUtility
     // Handles the grid MouseLeave event.
     private void Grid_MouseLeave(object sender, EventArgs e)
     {
-      if (!IsClicked)
+      if (AutoSelect
+        && !IsClicked)
       {
         PrevControl?.Focus();
       }
@@ -109,6 +113,8 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    internal bool AutoSelect { get; set; }
 
     // The LJCDataGrid control.
     private LJCDataGrid Grid { get; set; }
