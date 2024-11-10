@@ -126,7 +126,7 @@
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(225, 26);
       this.NameLabel.TabIndex = 2;
-      this.NameLabel.Text = "Column Name";
+      this.NameLabel.Text = "Name";
       // 
       // textBox1
       // 
@@ -221,7 +221,7 @@
       // checkBox1
       // 
       this.checkBox1.AutoSize = true;
-      this.checkBox1.Location = new System.Drawing.Point(254, 398);
+      this.checkBox1.Location = new System.Drawing.Point(254, 399);
       this.checkBox1.Name = "checkBox1";
       this.checkBox1.Size = new System.Drawing.Size(135, 30);
       this.checkBox1.TabIndex = 16;
