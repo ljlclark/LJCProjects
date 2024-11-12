@@ -61,12 +61,24 @@ namespace LJCWinFormCommon
     /// Sets the grid columns to not sortable.
     /// </summary>
     /// <param name="grid">The DataGridView object.</param>
-    public static  void NotSortable(DataGridView grid)
+    public static void NotSortable(DataGridView grid)
     {
       var notSortable = DataGridViewColumnSortMode.NotSortable;
       foreach (DataGridViewColumn column in grid.Columns)
       {
         column.SortMode = notSortable;
+      }
+    }
+
+    /// <summary></summary>
+    public static void RestoreMenuFontSize(ContextMenuStrip menu
+      , ControlValues controlValues)
+    {
+      var controlValue = controlValues.LJCSearchName($"{menu.Name}.FontSize");
+      if (controlValue != null)
+      {
+        var size = controlValue.Left;
+        menu.Font = new Font(menu.Font.FontFamily, size, menu.Font.Style);
       }
     }
 
@@ -84,6 +96,14 @@ namespace LJCWinFormCommon
           splitContainer.SplitterDistance = controlValue.Height;
         }
       }
+    }
+
+    /// <summary></summary>
+    public static void SaveMenuFontSize(ContextMenuStrip menu
+      , ControlValues controlValues)
+    {
+      var size = (int)menu.Font.Size;
+      controlValues.Add($"{menu.Name}.FontSize", size);
     }
 
     // Sets the BackColor for the labels.

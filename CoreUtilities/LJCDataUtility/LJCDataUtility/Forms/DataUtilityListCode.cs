@@ -77,7 +77,7 @@ namespace LJCDataUtility
             Height = controlValue.Height;
           }
 
-          // Restore Splitter, Grid and other values.
+          // Restore other values.
           ModuleGrid.LJCRestoreColumnValues(ControlValues);
           TableGrid.LJCRestoreColumnValues(ControlValues);
           ColumnGrid.LJCRestoreColumnValues(ControlValues);
@@ -91,6 +91,13 @@ namespace LJCDataUtility
           KeyGrid.LJCRestoreFontSize(ControlValues);
           MapTableGrid.LJCRestoreFontSize(ControlValues);
           MapColumnGrid.LJCRestoreFontSize(ControlValues);
+
+          FormCommon.RestoreMenuFontSize(ModuleMenu, ControlValues);
+          FormCommon.RestoreMenuFontSize(TableMenu, ControlValues);
+          FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
+          FormCommon.RestoreMenuFontSize(KeyMenu, ControlValues);
+          FormCommon.RestoreMenuFontSize(MapTableMenu, ControlValues);
+          FormCommon.RestoreMenuFontSize(MapColumnMenu, ControlValues);
         }
       }
     }
@@ -100,7 +107,11 @@ namespace LJCDataUtility
     {
       ControlValues controlValues = new ControlValues();
 
-      // Save Grid Column values.
+      // Save Window values.
+      controlValues.Add(Name, Left, Top
+        , Width, Height);
+
+      // Save other values.
       ModuleGrid.LJCSaveColumnValues(controlValues);
       TableGrid.LJCSaveColumnValues(controlValues);
       ColumnGrid.LJCSaveColumnValues(controlValues);
@@ -108,18 +119,19 @@ namespace LJCDataUtility
       MapTableGrid.LJCSaveColumnValues(controlValues);
       MapColumnGrid.LJCSaveColumnValues(controlValues);
 
-      // Save Window values.
-      // Tabs Parent is not this module form.
-      controlValues.Add(Name, Left, Top
-        , Width, Height);
-
-      // Save other values.
       ModuleGrid.LJCSaveFontSize(controlValues);
       TableGrid.LJCSaveFontSize(controlValues);
       ColumnGrid.LJCSaveFontSize(controlValues);
       KeyGrid.LJCSaveFontSize(controlValues);
       MapTableGrid.LJCSaveFontSize(controlValues);
       MapColumnGrid.LJCSaveFontSize(controlValues);
+
+      FormCommon.SaveMenuFontSize(ModuleMenu, controlValues);
+      FormCommon.SaveMenuFontSize(TableMenu, controlValues);
+      FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);
+      FormCommon.SaveMenuFontSize(KeyMenu, controlValues);
+      FormCommon.SaveMenuFontSize(MapTableMenu, controlValues);
+      FormCommon.SaveMenuFontSize(MapColumnMenu, controlValues);
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , ControlValuesFileName);
