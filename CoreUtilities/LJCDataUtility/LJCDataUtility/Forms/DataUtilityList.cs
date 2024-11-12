@@ -3,6 +3,7 @@
 // DataUtilityList.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,6 @@ namespace LJCDataUtility
       SaveControlValues();
       Close();
     }
-    #endregion
-
-    #region Control Event Handlers
     #endregion
   }
 }

@@ -7,6 +7,7 @@ using LJCGenTextLib;
 using LJCNetCommon;
 using System;
 using System.IO;
+using System.Runtime.Remoting.Contexts;
 
 namespace LJCGenDocLib
 {
@@ -45,7 +46,8 @@ namespace LJCGenDocLib
         Console.WriteLine($"Generating Assembly Page: {HTMLFileSpec}");
         CreateAssemblyXml createAssemblyXml
           = new CreateAssemblyXml(dataAssembly);
-        string dataFileSpec = $"XMLFiles\\{dataAssembly.Name}.xml";
+        // *** Next Statement *** Delete // GenText
+        //string dataFileSpec = $"XMLFiles\\{dataAssembly.Name}.xml";
         string dataXml = createAssemblyXml.GetXmlData();
         if (!NetString.HasValue(dataXml))
         {
@@ -62,9 +64,20 @@ namespace LJCGenDocLib
 
           Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
             , dataXml) as Sections;
-          GenerateText generateText = new GenerateText("<!--");
-          generateText.Generate(templateLines, sections, dataFileSpec
-            , HTMLFileSpec, true);
+
+          // *** Begin *** Delete // GenText
+          //GenerateText generateText = new GenerateText("<!--");
+          //generateText.Generate(templateLines, sections, dataFileSpec
+          //  , HTMLFileSpec, true);
+          // *** End   *** Delete
+
+          // *** Begin *** Add // GenText
+          // Generate text.
+          var textGenLib = new TextGenLib();
+          var outputText = textGenLib.TextGen(sections, templateLines);
+
+          File.WriteAllText(HTMLFileSpec, outputText);
+          // *** End   *** Add
           ValuesGenDoc.Instance.GenPageCount++;
         }
       }

@@ -35,30 +35,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJCDataAccessConfig">
-      <HintPath>External\LJCDataAccessConfig.dll</HintPath>
+      <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib">
       <HintPath>External\LJCDBClientLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="LJCDBMessage, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>External\LJCDBMessage.dll</HintPath>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
     <Reference Include="LJCGenTextLib">
       <HintPath>External\LJCGenTextLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
-      <HintPath>External\LJCNetCommon.dll</HintPath>
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
     <Reference Include="LJCWinFormCommon">
-      <HintPath>External\LJCWinFormCommon.dll</HintPath>
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
     </Reference>
     <Reference Include="LJCWinFormControls">
-      <HintPath>..\..\..\CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll</HintPath>
+      <HintPath>..\External\LJCWinFormControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,7 +66,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\ControlValues\DataUtility.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\LJCDataUtility.xml" />
     <Content Include="bin\Debug\SQLScript\Add\sp_DataColumnAdd.sql" />
@@ -211,6 +211,5 @@
       <Name>LJCDataUtilityDAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

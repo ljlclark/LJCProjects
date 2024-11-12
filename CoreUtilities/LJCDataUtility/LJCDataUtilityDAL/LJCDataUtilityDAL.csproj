@@ -36,16 +36,16 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBClientLib">
-      <HintPath>External\LJCDBClientLib.dll</HintPath>
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess">
-      <HintPath>External\LJCDBDataAccess.dll</HintPath>
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
-      <HintPath>External\LJCDBMessage.dll</HintPath>
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon">
-      <HintPath>External\LJCNetCommon.dll</HintPath>
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +78,9 @@
     <Compile Include="Manager\DataTableManager,.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesDataUtility.CS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\LJCGenText\External\LJCNetCommon.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

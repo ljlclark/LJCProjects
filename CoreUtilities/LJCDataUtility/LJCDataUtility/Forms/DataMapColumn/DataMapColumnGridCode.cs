@@ -47,7 +47,7 @@ namespace LJCDataUtility
       list.MapColumnRefresh.Click += MapColumnRefresh_Click;
 
       // Grid events.
-      var grid = ColumnGrid;
+      var grid = MapColumnGrid;
       grid.MouseDoubleClick += MapColumnGrid_MouseDoubleClick;
       grid.KeyDown += MapColumnGrid_KeyDown;
       UtilityList.Cursor = Cursors.Default;
@@ -345,16 +345,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        //case Keys.M:
-        //  if (e.Control)
-        //  {
-        //    var position = FormCommon.GetMenuScreenPoint(MapColumnGrid
-        //      , Control.MousePosition);
-        //    UtilityList.MapColumnMenu.Show(position);
-        //    UtilityList.MapColumnMenu.Select();
-        //    e.Handled = true;
-        //  }
-        //  break;
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(MapColumnGrid
+              , Control.MousePosition);
+            UtilityList.MapColumnMenu.Show(position);
+            UtilityList.MapColumnMenu.Select();
+            e.Handled = true;
+          }
+          break;
 
         case Keys.Tab:
           if (e.Shift)

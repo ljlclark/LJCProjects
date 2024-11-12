@@ -30,9 +30,9 @@
     {
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.ValueTextbox = new System.Windows.Forms.TextBox();
-      this.ValueLabel = new System.Windows.Forms.Label();
-      this.NameTextbox = new System.Windows.Forms.TextBox();
+      this.DescriptionText = new System.Windows.Forms.TextBox();
+      this.DescriptionLabel = new System.Windows.Forms.Label();
+      this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
@@ -46,7 +46,6 @@
       this.FormCancelButton.TabIndex = 5;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
-      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
       // 
       // OKButton
       // 
@@ -60,36 +59,36 @@
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // ValueTextbox
+      // DescriptionText
       // 
-      this.ValueTextbox.Location = new System.Drawing.Point(254, 69);
-      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(500, 26);
-      this.ValueTextbox.TabIndex = 3;
+      this.DescriptionText.Location = new System.Drawing.Point(254, 69);
+      this.DescriptionText.Margin = new System.Windows.Forms.Padding(6);
+      this.DescriptionText.Name = "DescriptionText";
+      this.DescriptionText.Size = new System.Drawing.Size(500, 32);
+      this.DescriptionText.TabIndex = 3;
       // 
-      // ValueLabel
+      // DescriptionLabel
       // 
-      this.ValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ValueLabel.Location = new System.Drawing.Point(23, 75);
-      this.ValueLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-      this.ValueLabel.Name = "ValueLabel";
-      this.ValueLabel.Size = new System.Drawing.Size(225, 26);
-      this.ValueLabel.TabIndex = 2;
-      this.ValueLabel.Text = "Description";
+      this.DescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.DescriptionLabel.Location = new System.Drawing.Point(23, 68);
+      this.DescriptionLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.DescriptionLabel.Name = "DescriptionLabel";
+      this.DescriptionLabel.Size = new System.Drawing.Size(225, 26);
+      this.DescriptionLabel.TabIndex = 2;
+      this.DescriptionLabel.Text = "Description";
       // 
-      // NameTextbox
+      // NameText
       // 
-      this.NameTextbox.Location = new System.Drawing.Point(254, 22);
-      this.NameTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(500, 26);
-      this.NameTextbox.TabIndex = 1;
+      this.NameText.Location = new System.Drawing.Point(254, 22);
+      this.NameText.Margin = new System.Windows.Forms.Padding(6);
+      this.NameText.Name = "NameText";
+      this.NameText.Size = new System.Drawing.Size(500, 32);
+      this.NameText.TabIndex = 1;
       // 
       // NameLabel
       // 
       this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.NameLabel.Location = new System.Drawing.Point(23, 28);
+      this.NameLabel.Location = new System.Drawing.Point(23, 20);
       this.NameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(225, 26);
@@ -101,12 +100,13 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
       this.ClientSize = new System.Drawing.Size(778, 185);
-      this.Controls.Add(this.ValueTextbox);
-      this.Controls.Add(this.ValueLabel);
-      this.Controls.Add(this.NameTextbox);
+      this.Controls.Add(this.DescriptionText);
+      this.Controls.Add(this.DescriptionLabel);
+      this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
+      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "DataModuleDetail";
       this.Text = "DataModule Detai";
@@ -120,9 +120,9 @@
 
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
-    private System.Windows.Forms.TextBox ValueTextbox;
-    private System.Windows.Forms.Label ValueLabel;
-    private System.Windows.Forms.TextBox NameTextbox;
+    private System.Windows.Forms.TextBox DescriptionText;
+    private System.Windows.Forms.Label DescriptionLabel;
+    private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
   }
 }

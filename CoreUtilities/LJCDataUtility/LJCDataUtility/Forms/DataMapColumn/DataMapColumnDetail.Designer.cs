@@ -72,7 +72,7 @@
       this.checkBox1.AutoSize = true;
       this.checkBox1.Location = new System.Drawing.Point(254, 258);
       this.checkBox1.Name = "checkBox1";
-      this.checkBox1.Size = new System.Drawing.Size(82, 24);
+      this.checkBox1.Size = new System.Drawing.Size(101, 30);
       this.checkBox1.TabIndex = 10;
       this.checkBox1.Text = "Delete";
       this.checkBox1.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
       this.textBox6.Location = new System.Drawing.Point(254, 210);
       this.textBox6.Margin = new System.Windows.Forms.Padding(6);
       this.textBox6.Name = "textBox6";
-      this.textBox6.Size = new System.Drawing.Size(35, 26);
+      this.textBox6.Size = new System.Drawing.Size(35, 32);
       this.textBox6.TabIndex = 9;
       // 
       // label6
@@ -100,7 +100,7 @@
       this.textBox1.Location = new System.Drawing.Point(254, 163);
       this.textBox1.Margin = new System.Windows.Forms.Padding(6);
       this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(35, 26);
+      this.textBox1.Size = new System.Drawing.Size(35, 32);
       this.textBox1.TabIndex = 7;
       // 
       // label1
@@ -119,7 +119,7 @@
       this.ParentNameTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.ParentNameTextbox.Name = "ParentNameTextbox";
       this.ParentNameTextbox.ReadOnly = true;
-      this.ParentNameTextbox.Size = new System.Drawing.Size(500, 26);
+      this.ParentNameTextbox.Size = new System.Drawing.Size(500, 32);
       this.ParentNameTextbox.TabIndex = 1;
       // 
       // ParentNameLabel
@@ -137,7 +137,7 @@
       this.ValueTextbox.Location = new System.Drawing.Point(254, 116);
       this.ValueTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(500, 26);
+      this.ValueTextbox.Size = new System.Drawing.Size(500, 32);
       this.ValueTextbox.TabIndex = 5;
       // 
       // ValueLabel
@@ -155,7 +155,7 @@
       this.NameTextbox.Location = new System.Drawing.Point(254, 69);
       this.NameTextbox.Margin = new System.Windows.Forms.Padding(6);
       this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(500, 26);
+      this.NameTextbox.Size = new System.Drawing.Size(500, 32);
       this.NameTextbox.TabIndex = 3;
       // 
       // NameLabel
@@ -186,6 +186,7 @@
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
+      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "DataMapColumnDetail";
       this.Text = "DataMapColumn Detail";

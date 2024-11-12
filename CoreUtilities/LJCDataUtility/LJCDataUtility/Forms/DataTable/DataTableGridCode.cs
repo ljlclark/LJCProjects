@@ -334,16 +334,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        //case Keys.M:
-        //  if (e.Control)
-        //  {
-        //    var position = FormCommon.GetMenuScreenPoint(TableGrid
-        //      , Control.MousePosition);
-        //    UtilityList.TableMenu.Show(position);
-        //    UtilityList.TableMenu.Select();
-        //    e.Handled = true;
-        //  }
-        //  break;
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(TableGrid
+              , Control.MousePosition);
+            UtilityList.TableMenu.Show(position);
+            UtilityList.TableMenu.Select();
+            e.Handled = true;
+          }
+          break;
 
         case Keys.Tab:
           if (e.Shift)

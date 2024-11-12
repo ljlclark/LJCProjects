@@ -17,15 +17,27 @@ namespace LJCGenDocLib
     {
       CreateRootXml createRootXml = new CreateRootXml(DataRoot.AssemblyGroups);
       string dataXml = createRootXml.GetXmlData();
-      string dataFileSpec = "XMLFiles\\Root.xml";
+      // *** Next Statement *** Delete // GenText
+      //string dataFileSpec = "XMLFiles\\Root.xml";
       //File.WriteAllText(dataFileSpec, dataXml);  // Testing
       Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
         , dataXml) as Sections;
 
-      GenerateText generateText = new GenerateText("<!--");
+      // *** Begin *** Delete // GenText
+      //GenerateText generateText = new GenerateText("<!--");
+      //string[] templateLines = File.ReadAllLines("Templates\\RootTemplate.htm");
+      //generateText.Generate(templateLines, sections, dataFileSpec
+      //  , HTMLFileSpec, true);
+      // *** End   *** Delete
+
+      // *** Begin *** Add // GenText
       string[] templateLines = File.ReadAllLines("Templates\\RootTemplate.htm");
-      generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
-        , true);
+      // Generate text.
+      var textGenLib = new TextGenLib();
+      var outputText = textGenLib.TextGen(sections, templateLines);
+
+      File.WriteAllText(HTMLFileSpec, outputText);
+      // *** End   *** Add
     }
     #endregion
   }

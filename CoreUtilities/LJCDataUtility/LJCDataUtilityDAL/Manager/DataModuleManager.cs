@@ -108,7 +108,7 @@ namespace LJCDataUtilityDAL
     {
       DataModule retValue;
 
-      var keyColumns = GetIDKey(id);
+      var keyColumns = IDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -132,7 +132,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns IDKey(int id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);

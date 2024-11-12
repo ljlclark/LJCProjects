@@ -374,6 +374,20 @@ namespace LJCWinFormControls
       }
     }
 
+    /// <summary>Saves the grid Font size.</summary>
+    public void LJCRestoreFontSize(ControlValues controlValues)
+    {
+      string controlName = $"{Name}.FontSize";
+      var controlValue = controlValues.LJCSearchName(controlName);
+      if (controlValue != null)
+      {
+        var fontFamily = this.Font.FontFamily;
+        var style = this.Font.Style;
+        var size = controlValue.Left;
+        this.Font = new Font(fontFamily, size, style);
+      }
+    }
+
     // Saves the grid column values.
     /// <include path='items/LJCSaveColumnValues/*' file='Doc/LJCDataGrid.xml'/>
     public void LJCSaveColumnValues(ControlValues controlValues)
@@ -383,6 +397,14 @@ namespace LJCWinFormControls
         string controlName = $"{Name}.{column.Name}";
         controlValues.Add(controlName, 0, 0, column.Width, 0);
       }
+    }
+
+    /// <summary>Saves the grid Font size.</summary>
+    public void LJCSaveFontSize(ControlValues controlValues)
+    {
+      string controlName = $"{Name}.FontSize";
+      var size = (int)this.Font.Size;
+      controlValues.Add(controlName, size, 0, 0, 0);
     }
 
     // Sets the column width from the supplied character width value.

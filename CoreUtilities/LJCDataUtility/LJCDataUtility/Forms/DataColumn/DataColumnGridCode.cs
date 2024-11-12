@@ -344,8 +344,8 @@ namespace LJCDataUtility
               , Control.MousePosition);
             var menu = UtilityList.ColumnMenu;
             menu.Show(position);
-            //menu.Select();
-            //e.Handled = true;
+            menu.Select();
+            e.Handled = true;
           }
           break;
 

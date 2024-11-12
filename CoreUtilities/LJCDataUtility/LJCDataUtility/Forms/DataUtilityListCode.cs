@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -76,12 +77,20 @@ namespace LJCDataUtility
             Height = controlValue.Height;
           }
 
+          // Restore Splitter, Grid and other values.
           ModuleGrid.LJCRestoreColumnValues(ControlValues);
           TableGrid.LJCRestoreColumnValues(ControlValues);
           ColumnGrid.LJCRestoreColumnValues(ControlValues);
           KeyGrid.LJCRestoreColumnValues(ControlValues);
           MapTableGrid.LJCRestoreColumnValues(ControlValues);
           MapColumnGrid.LJCRestoreColumnValues(ControlValues);
+
+          ModuleGrid.LJCRestoreFontSize(ControlValues);
+          TableGrid.LJCRestoreFontSize(ControlValues);
+          ColumnGrid.LJCRestoreFontSize(ControlValues);
+          KeyGrid.LJCRestoreFontSize(ControlValues);
+          MapTableGrid.LJCRestoreFontSize(ControlValues);
+          MapColumnGrid.LJCRestoreFontSize(ControlValues);
         }
       }
     }
@@ -103,6 +112,14 @@ namespace LJCDataUtility
       // Tabs Parent is not this module form.
       controlValues.Add(Name, Left, Top
         , Width, Height);
+
+      // Save other values.
+      ModuleGrid.LJCSaveFontSize(controlValues);
+      TableGrid.LJCSaveFontSize(controlValues);
+      ColumnGrid.LJCSaveFontSize(controlValues);
+      KeyGrid.LJCSaveFontSize(controlValues);
+      MapTableGrid.LJCSaveFontSize(controlValues);
+      MapColumnGrid.LJCSaveFontSize(controlValues);
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , ControlValuesFileName);

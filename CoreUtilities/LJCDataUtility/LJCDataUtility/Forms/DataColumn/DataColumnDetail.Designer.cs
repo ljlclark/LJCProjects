@@ -255,6 +255,8 @@
       this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+      this.MaximizeBox = false;
+      this.MinimizeBox = false;
       this.Name = "DataColumnDetail";
       this.Text = "DataColumn Detail";
       this.Load += new System.EventHandler(this.ColumnDetail_Load);

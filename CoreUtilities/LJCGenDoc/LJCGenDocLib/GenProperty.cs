@@ -49,7 +49,8 @@ namespace LJCGenDocLib
     {
       CreatePropertyXml createPropertyXml = new CreatePropertyXml(GenAssembly
         , DataAssembly, DataType, DataProperty, assemblyReflect);
-      string dataFileSpec = $"XMLFiles\\{DataProperty.Name}.xml";
+      // *** Next Statement *** Delete // GenText
+      //string dataFileSpec = $"XMLFiles\\{DataProperty.Name}.xml";
       string dataXml = createPropertyXml.GetXmlData();
       if (!NetString.HasValue(dataXml))
       {
@@ -66,9 +67,20 @@ namespace LJCGenDocLib
 
         Sections sections = NetCommon.XmlDeserializeMessage(typeof(Sections)
           , dataXml) as Sections;
-        GenerateText generateText = new GenerateText("<!--");
-        generateText.Generate(templateLines, sections, dataFileSpec, HTMLFileSpec
-          , true);
+
+        // *** Begin *** Delete // GenText
+        //GenerateText generateText = new GenerateText("<!--");
+        //generateText.Generate(templateLines, sections, dataFileSpec
+        //  , HTMLFileSpec, true);
+        // *** End   *** Delete
+
+        // *** Begin *** Add // GenText
+        // Generate text.
+        var textGenLib = new TextGenLib();
+        var outputText = textGenLib.TextGen(sections, templateLines);
+
+        File.WriteAllText(HTMLFileSpec, outputText);
+        // *** End   *** Add
         ValuesGenDoc.Instance.GenPageCount++;
       }
     }

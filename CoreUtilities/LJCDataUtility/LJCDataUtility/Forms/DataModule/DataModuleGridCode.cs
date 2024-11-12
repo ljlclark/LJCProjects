@@ -12,10 +12,12 @@ using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
+  // Provides DataModuleGrid methods for the DataUtilityList window.
   internal class DataModuleGridCode
   {
     #region Constructors
 
+    // Initializes an object instance.
     // ********************
     internal DataModuleGridCode(DataUtilityList parentList)
     {
@@ -133,8 +135,7 @@ namespace LJCDataUtility
     {
       bool success = false;
       var row = ModuleGrid.CurrentRow as LJCGridRow;
-      if (ModuleGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -175,19 +176,32 @@ namespace LJCDataUtility
     // ********************
     internal void Edit()
     {
+      if (ModuleGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        int id = row.LJCGetInt32(DataModule.ColumnID);
+
+        //var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
+        var detail = new DataModuleDetail()
+        {
+          LJCID = id,
+          //LJCLocation = location,
+          Managers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
     // ********************
     internal void New()
     {
-      var location = FormCommon.GetDialogScreenPoint(ModuleGrid);
+      //var location = FormCommon.GetDialogScreenPoint(ModuleGrid);
       var detail = new DataModuleDetail
       {
         //LJCLocation = location,
-        //LJCManagers = Managers,
-        //LJCParentID = parentID,
-        //LJCParentName = parentName
+        Managers = Managers,
       };
       //detail.LJCChange += Detail_Change;
       detail.ShowDialog();
@@ -230,6 +244,22 @@ namespace LJCDataUtility
     // ********************
     private void Detail_Change(object sender, EventArgs e)
     {
+      var detail = sender as DataModuleDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          ModuleGrid.LJCSetCurrentRow(row, true);
+          //_AppName_List.TimedChange(Change._ClassName_);
+        }
+      }
     }
     #endregion
 
@@ -293,7 +323,7 @@ namespace LJCDataUtility
     {
       if (ModuleGrid.LJCGetMouseRow(e) != null)
       {
-        New();
+        Edit();
       }
     }
 
@@ -319,16 +349,16 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        //case Keys.M:
-        //  if (e.Control)
-        //  {
-        //    var position = FormCommon.GetMenuScreenPoint(ModuleGrid
-        //      , Control.MousePosition);
-        //    UtilityList.ModuleMenu.Show(position);
-        //    UtilityList.ModuleMenu.Select();
-        //    e.Handled = true;
-        //  }
-        //  break;
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(ModuleGrid
+              , Control.MousePosition);
+            UtilityList.ModuleMenu.Show(position);
+            UtilityList.ModuleMenu.Select();
+            e.Handled = true;
+          }
+          break;
 
         case Keys.Tab:
           if (e.Shift)
