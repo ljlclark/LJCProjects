@@ -9,6 +9,12 @@ namespace LJCWinFormCommon
   /// <include path='items/ControlValue/*' file='Doc/ControlValue.xml'/>
   public class ControlValue : IComparable<ControlValue>
   {
+    /// <summary></summary>
+    public override string ToString()
+    {
+      return $"{ControlName}";
+    }
+
     #region Methods
 
     // Provides the default Sort functionality.

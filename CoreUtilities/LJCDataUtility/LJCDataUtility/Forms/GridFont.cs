@@ -1,4 +1,7 @@
-﻿using LJCWinFormControls;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// GridFont.cs
+using LJCWinFormControls;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,7 +11,6 @@ namespace LJCDataUtility
   // Provides Grid MouseWheel Font sizing.
   internal class GridFont
   {
-
     // Initializes an object instance.
     internal GridFont(ContainerControl parent, LJCDataGrid grid
       , bool autoSelect = true)
@@ -36,6 +38,20 @@ namespace LJCDataUtility
       IsClicked = true;
     }
 
+    // Handles the grid MouseEnter event.
+    private void Grid_MouseEnter(object sender, EventArgs e)
+    {
+      if (AutoSelect
+        && null == PrevControl)
+      {
+        PrevControl = Parent.ActiveControl;
+        if (PrevControl != null)
+        {
+          Grid.Select();
+        }
+      }
+    }
+
     // Handles the grid KeyDown event.
     private void Grid_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
     {
@@ -57,20 +73,6 @@ namespace LJCDataUtility
       IsClicked = false;
       IsControlKey = false;
       PrevControl = null;
-    }
-
-    // Handles the grid MouseEnter event.
-    private void Grid_MouseEnter(object sender, EventArgs e)
-    {
-      if (AutoSelect
-        && null == PrevControl)
-      {
-        PrevControl = Parent.ActiveControl;
-        if (PrevControl != null)
-        {
-          Grid.Select();
-        }
-      }
     }
 
     // Handles the grid MouseLeave event.

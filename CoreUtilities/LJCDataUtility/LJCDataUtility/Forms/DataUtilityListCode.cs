@@ -92,6 +92,7 @@ namespace LJCDataUtility
           MapTableGrid.LJCRestoreFontSize(ControlValues);
           MapColumnGrid.LJCRestoreFontSize(ControlValues);
 
+          FormCommon.RestoreTabsFontSize(ljcTabControl1, ControlValues);
           FormCommon.RestoreMenuFontSize(ModuleMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(TableMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
@@ -126,6 +127,7 @@ namespace LJCDataUtility
       MapTableGrid.LJCSaveFontSize(controlValues);
       MapColumnGrid.LJCSaveFontSize(controlValues);
 
+      FormCommon.SaveTabFontSize(ljcTabControl1, controlValues);
       FormCommon.SaveMenuFontSize(ModuleMenu, controlValues);
       FormCommon.SaveMenuFontSize(TableMenu, controlValues);
       FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);

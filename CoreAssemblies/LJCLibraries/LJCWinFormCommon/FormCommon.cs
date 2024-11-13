@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // FormCommon.cs
+using LJCNetCommon;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -8,7 +9,6 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using LJCNetCommon;
 
 namespace LJCWinFormCommon
 {
@@ -99,11 +99,31 @@ namespace LJCWinFormCommon
     }
 
     /// <summary></summary>
+    public static void RestoreTabsFontSize(TabControl tabs
+      , ControlValues controlValues)
+    {
+      var controlValue = controlValues.LJCSearchName($"{tabs.Name}.FontSize");
+      if (controlValue != null)
+      {
+        var size = controlValue.Left;
+        tabs.Font = new Font(tabs.Font.FontFamily, size, tabs.Font.Style);
+      }
+    }
+
+    /// <summary></summary>
     public static void SaveMenuFontSize(ContextMenuStrip menu
       , ControlValues controlValues)
     {
       var size = (int)menu.Font.Size;
       controlValues.Add($"{menu.Name}.FontSize", size);
+    }
+
+    /// <summary></summary>
+    public static void SaveTabFontSize(TabControl tabs
+      , ControlValues controlValues)
+    {
+      var size = (int)tabs.Font.Size;
+      controlValues.Add($"{tabs.Name}.FontSize", size);
     }
 
     // Sets the BackColor for the labels.

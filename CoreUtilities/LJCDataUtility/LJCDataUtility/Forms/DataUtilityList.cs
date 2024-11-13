@@ -28,6 +28,8 @@ namespace LJCDataUtility
       InitializeControls();
       RestoreControlValues();
 
+      _ = new TabsFont(ljcTabControl1);
+
       // Testing
       ModuleGridCode.DataRetrieve();
       TableGridCode.DataRetrieve();
