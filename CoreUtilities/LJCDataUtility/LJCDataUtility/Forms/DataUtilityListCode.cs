@@ -6,18 +6,18 @@ using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
-  public partial class DataUtilityList : Form
+  internal partial class DataUtilityList : Form
   {
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
+    // ********************
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
@@ -25,29 +25,29 @@ namespace LJCDataUtility
       InitialControlValues();
       SetupGridCode();
       SetupGrids();
+      StartChangeProcessing();
       Cursor = Cursors.Default;
     }
-    #endregion
-
-    #region Setup Support
 
     // Initialize the Class Data.
+    // ********************
     private void InitializeClassData()
     {
-      Values = ValuesDataUtility.Instance;
-      Values.SetConfigFile("LJCDataUtility.exe.config");
-      var errors = Values.Errors;
+      var values = ValuesDataUtility.Instance;
+      values.SetConfigFile("LJCDataUtility.exe.config");
+      var errors = values.Errors;
       if (NetString.HasValue(errors))
       {
         MessageBox.Show(errors, "Config Errors", MessageBoxButtons.OK
           , MessageBoxIcon.Error);
       }
-      Managers = Values.Managers;
-      Settings = Values.StandardSettings;
+      Managers = values.Managers;
+      Settings = values.StandardSettings;
       Text += $" - {Settings.DataConfigName}";
     }
 
     // Set initial Control values.
+    // ********************
     private void InitialControlValues()
     {
       NetFile.CreateFolder("ExportFiles");
@@ -55,7 +55,31 @@ namespace LJCDataUtility
       ControlValuesFileName = @"ControlValues\DataUtility.xml";
     }
 
+    // Setup the grid code references.
+    // ********************
+    private void SetupGridCode()
+    {
+      ModuleGridCode = new DataModuleGridCode(this);
+      TableGridCode = new DataTableGridCode(this);
+      ColumnGridCode = new DataColumnGridCode(this);
+      KeyGridCode = new DataKeyGridCode(this);
+    }
+
+    // Setup the data grids.
+    // ********************
+    private void SetupGrids()
+    {
+      ModuleGridCode.SetupGrid();
+      TableGridCode.SetupGrid();
+      ColumnGridCode.SetupGrid();
+      KeyGridCode.SetupGrid();
+    }
+    #endregion
+
+    #region Private Methods
+
     // Restores the control values.
+    // ********************
     private void RestoreControlValues()
     {
       ControlValue controlValue;
@@ -77,33 +101,30 @@ namespace LJCDataUtility
             Height = controlValue.Height;
           }
 
-          // Restore other values.
+          // Restore Grid column sizes.
           ModuleGrid.LJCRestoreColumnValues(ControlValues);
           TableGrid.LJCRestoreColumnValues(ControlValues);
           ColumnGrid.LJCRestoreColumnValues(ControlValues);
           KeyGrid.LJCRestoreColumnValues(ControlValues);
-          MapTableGrid.LJCRestoreColumnValues(ControlValues);
-          MapColumnGrid.LJCRestoreColumnValues(ControlValues);
 
+          // Restore Font sizes.
+          FormCommon.RestoreTabsFontSize(MainTabs, ControlValues);
           ModuleGrid.LJCRestoreFontSize(ControlValues);
           TableGrid.LJCRestoreFontSize(ControlValues);
           ColumnGrid.LJCRestoreFontSize(ControlValues);
           KeyGrid.LJCRestoreFontSize(ControlValues);
-          MapTableGrid.LJCRestoreFontSize(ControlValues);
-          MapColumnGrid.LJCRestoreFontSize(ControlValues);
 
-          FormCommon.RestoreTabsFontSize(ljcTabControl1, ControlValues);
+          // Restore Menu Font sizes.
           FormCommon.RestoreMenuFontSize(ModuleMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(TableMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(KeyMenu, ControlValues);
-          FormCommon.RestoreMenuFontSize(MapTableMenu, ControlValues);
-          FormCommon.RestoreMenuFontSize(MapColumnMenu, ControlValues);
         }
       }
     }
 
     // Saves the control values. 
+    // ********************
     private void SaveControlValues()
     {
       ControlValues controlValues = new ControlValues();
@@ -112,104 +133,45 @@ namespace LJCDataUtility
       controlValues.Add(Name, Left, Top
         , Width, Height);
 
-      // Save other values.
+      // Save Grid column sizes.
       ModuleGrid.LJCSaveColumnValues(controlValues);
       TableGrid.LJCSaveColumnValues(controlValues);
       ColumnGrid.LJCSaveColumnValues(controlValues);
       KeyGrid.LJCSaveColumnValues(controlValues);
-      MapTableGrid.LJCSaveColumnValues(controlValues);
-      MapColumnGrid.LJCSaveColumnValues(controlValues);
 
+      // Save Font sizes.
+      FormCommon.SaveTabFontSize(MainTabs, controlValues);
       ModuleGrid.LJCSaveFontSize(controlValues);
       TableGrid.LJCSaveFontSize(controlValues);
       ColumnGrid.LJCSaveFontSize(controlValues);
       KeyGrid.LJCSaveFontSize(controlValues);
-      MapTableGrid.LJCSaveFontSize(controlValues);
-      MapColumnGrid.LJCSaveFontSize(controlValues);
 
-      FormCommon.SaveTabFontSize(ljcTabControl1, controlValues);
+      // Save Menu Font sizes.
       FormCommon.SaveMenuFontSize(ModuleMenu, controlValues);
       FormCommon.SaveMenuFontSize(TableMenu, controlValues);
       FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);
       FormCommon.SaveMenuFontSize(KeyMenu, controlValues);
-      FormCommon.SaveMenuFontSize(MapTableMenu, controlValues);
-      FormCommon.SaveMenuFontSize(MapColumnMenu, controlValues);
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , ControlValuesFileName);
     }
-
-    // Setup the grid code references.
-    private void SetupGridCode()
-    {
-      ModuleGridCode = new DataModuleGridCode(this);
-      TableGridCode = new DataTableGridCode(this);
-      ColumnGridCode = new DataColumnGridCode(this);
-      KeyGridCode = new DataKeyGridCode(this);
-      MapTableGridCode = new DataMapTableGridCode(this);
-      MapColumnGridCode = new DataMapColumnGridCode(this);
-    }
-
-    // Setup the data grids.
-    private void SetupGrids()
-    {
-      ModuleGridCode.SetupGrid();
-      TableGridCode.SetupGrid();
-      ColumnGridCode.SetupGrid();
-      KeyGridCode.SetupGrid();
-      MapTableGridCode.SetupGrid();
-      MapColumnGridCode.SetupGrid();
-    }
     #endregion
 
-    #region Class Data
+    #region Properties
 
-    internal ManagersDataUtility Managers;
+    // The Managers object.
+    internal ManagersDataUtility Managers { get; set; }
 
     // Grid Code
     private DataColumnGridCode ColumnGridCode { get; set; }
     private DataKeyGridCode KeyGridCode { get; set; }
-    private DataMapColumnGridCode MapColumnGridCode { get; set; }
-    private DataMapTableGridCode MapTableGridCode { get; set; }
     private DataModuleGridCode ModuleGridCode { get; set; }
     private DataTableGridCode TableGridCode { get; set; }
 
-    /// <summary>Gets or sets the ControlValues item.</summary>
+    // Gets or sets the ControlValues object.
     private ControlValues ControlValues { get; set; }
     private string ControlValuesFileName { get; set; }
     private StandardUISettings Settings { get; set; }
-    private ValuesDataUtility Values { get; set; }
     #endregion
-
-    // Test the XMLBuilder class.
-    private string TestXML()
-    {
-      var xml = new XMLBuilder();
-      var attributes = xml.StartAttributes();
-
-      xml.Begin("Sections", null, attributes);
-      xml.Begin("Section");
-      xml.Element("Name", "Main");
-
-      xml.Begin("RepeatItems");
-      xml.Begin("RepeatItem");
-      xml.Element("Name", "Item1");
-
-      xml.Begin("Replacements");
-      xml.Begin("Replacement");
-      xml.Element("Name", "_AssemblyName_");
-      xml.Element("Value", "LJCDataAccess");
-      xml.End("Replacement");
-      xml.End("Replacements");
-
-      xml.End("RepeatItem");
-      xml.End("RepeatItems");
-
-      xml.End("Section");
-      xml.End("Sections");
-
-      string retXML = xml.ToString();
-      return retXML;
-    }
   }
 }

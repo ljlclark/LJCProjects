@@ -9,26 +9,27 @@ using System.Collections.Generic;
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataTable table Data Object.</summary>
-  public class DataTable : IComparable<DataTable>
+  public class DataUtilTable : IComparable<DataUtilTable>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataTable()
+    public DataUtilTable()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataTable(DataTable item)
+    public DataUtilTable(DataUtilTable item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
       DataModuleID = item.DataModuleID;
       Name = item.Name;
       Description = item.Description;
+      NewName = item.NewName;
     }
     #endregion
 
@@ -36,15 +37,15 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataTable Clone()
+    public DataUtilTable Clone()
     {
-      var retValue = MemberwiseClone() as DataTable;
+      var retValue = MemberwiseClone() as DataUtilTable;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DataTable other)
+    public int CompareTo(DataUtilTable other)
     {
       int retValue;
 
@@ -128,6 +129,19 @@ namespace LJCDataUtilityDAL
       }
     }
     private String mDescription;
+
+    /// <summary>Gets or sets the NewName value.</summary>
+    //[Column("NewName", TypeName="nvarchar(60")]
+    public String NewName
+    {
+      get { return mNewName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mNewName = ChangedNames.Add(ColumnName, mNewName, value);
+      }
+    }
+    private String mNewName;
     #endregion
 
     #region Class Properties
@@ -153,6 +167,9 @@ namespace LJCDataUtilityDAL
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";
 
+    /// <summary>The NewName column name.</summary>
+    public static string NewColumnName = "NewName";
+
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;
 
@@ -164,11 +181,11 @@ namespace LJCDataUtilityDAL
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DataTableUniqueComparer : IComparer<DataTable>
+  public class DataTableUniqueComparer : IComparer<DataUtilTable>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DataTable x, DataTable y)
+    public int Compare(DataUtilTable x, DataUtilTable y)
     {
       int retValue;
 

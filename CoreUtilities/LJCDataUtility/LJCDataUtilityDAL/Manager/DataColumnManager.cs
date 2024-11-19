@@ -19,11 +19,11 @@ namespace LJCDataUtilityDAL
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<DataColumn, DataColumns>();
+      ResultConverter = new ResultConverter<DataUtilityColumn, DataColumns>();
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(DataColumn.ColumnID, caption: "DataColumn ID");
+      Manager.MapNames(DataUtilityColumn.ColumnID, caption: "DataColumn ID");
 
       // Add Calculated and Join columns.
       // Enables adding Calculated and Join columns to a grid configuration.
@@ -31,14 +31,14 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataColumn.ColumnID
+        DataUtilityColumn.ColumnID
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        DataColumn.ColumnDataTableID,
-        DataColumn.ColumnName
+        DataUtilityColumn.ColumnDataTableID,
+        DataUtilityColumn.ColumnName
       });
     }
 
@@ -46,10 +46,10 @@ namespace LJCDataUtilityDAL
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataColumn Add(DataColumn dataObject
+    public DataUtilityColumn Add(DataUtilityColumn dataObject
       , List<string> propertyNames = null)
     {
-      DataColumn retValue;
+      DataUtilityColumn retValue;
 
       var dbResult = Manager.Add(dataObject, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
@@ -82,11 +82,11 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataColumn Retrieve(DbColumns keyColumns
+    public DataUtilityColumn Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
-      DataColumn retValue;
+      DataUtilityColumn retValue;
 
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateData(dbResult);
@@ -95,7 +95,7 @@ namespace LJCDataUtilityDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public void Update(DataColumn dataObject, DbColumns keyColumns
+    public void Update(DataUtilityColumn dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -106,11 +106,11 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataColumn RetrieveWithID(int id, List<string> propertyNames = null)
+    public DataUtilityColumn RetrieveWithID(int id, List<string> propertyNames = null)
     {
-      DataColumn retValue;
+      DataUtilityColumn retValue;
 
-      var keyColumns = GetIDKey(id);
+      var keyColumns = IDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -118,12 +118,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataColumn RetrieveWithUnique(int dataTableID, string name
+    public DataUtilityColumn RetrieveWithUnique(int dataTableID, string name
       , List<string> propertyNames = null)
     {
-      DataColumn retValue;
+      DataUtilityColumn retValue;
 
-      var keyColumns = GetUniqueKey(dataTableID, name);
+      var keyColumns = UniqueKey(dataTableID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -134,38 +134,38 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns IDKey(int id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataColumn.ColumnID, id }
+        { DataUtilityColumn.ColumnID, id }
       };
       return retValue;
     }
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int parentID)
+    public DbColumns ParentKey(int parentID)
     {
       var retValue = new DbColumns()
       {
-        { DataColumn.ColumnDataTableID, parentID }
+        { DataUtilityColumn.ColumnDataTableID, parentID }
       };
       return retValue;
     }
 
     // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(int dataTableID, string name)
+    public DbColumns UniqueKey(int dataTableID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DataColumn.ColumnDataTableID, dataTableID },
-        { DataColumn.ColumnName, (object)name }
+        { DataUtilityColumn.ColumnDataTableID, dataTableID },
+        { DataUtilityColumn.ColumnName, (object)name }
       };
       return retValue;
     }
@@ -192,7 +192,7 @@ namespace LJCDataUtilityDAL
     public DataManager Manager { get; set; }
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
-    public ResultConverter<DataColumn, DataColumns> ResultConverter { get; set; }
+    public ResultConverter<DataUtilityColumn, DataColumns> ResultConverter { get; set; }
     #endregion
   }
 }

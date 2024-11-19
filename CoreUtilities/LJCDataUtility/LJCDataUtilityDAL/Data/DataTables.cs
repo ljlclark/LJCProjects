@@ -14,7 +14,7 @@ namespace LJCDataUtilityDAL
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
   [XmlRoot("DataTables")]
-  public class DataTables : List<DataTable>
+  public class DataTables : List<DataUtilTable>
   {
     #region Static Functions
 
@@ -59,7 +59,7 @@ namespace LJCDataUtilityDAL
       {
         foreach (var item in items)
         {
-          Add(new DataTable(item));
+          Add(new DataUtilTable(item));
         }
       }
     }
@@ -69,9 +69,9 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataTable Add(int id, int dataModuleID, string name)
+    public DataUtilTable Add(int id, int dataModuleID, string name)
     {
-      DataTable retValue;
+      DataUtilTable retValue;
 
       string message = "";
       if (id <= 0)
@@ -84,7 +84,7 @@ namespace LJCDataUtilityDAL
       retValue = LJCSearchUnique(dataModuleID, name);
       if (null == retValue)
       {
-        retValue = new DataTable()
+        retValue = new DataUtilTable()
         {
           ID = id,
           DataModuleID = dataModuleID,
@@ -105,14 +105,14 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataTables GetCollection(List<DataTable> list)
+    public DataTables GetCollection(List<DataUtilTable> list)
     {
       DataTables retValue = null;
 
       if (NetCommon.HasItems(list))
       {
         retValue = new DataTables();
-        foreach (DataTable item in list)
+        foreach (DataUtilTable item in list)
         {
           retValue.Add(item);
         }
@@ -140,7 +140,7 @@ namespace LJCDataUtilityDAL
     /// <param name="name">The item unique Name value.</param>
     public void LJCRemove(int dataModuleID, string name)
     {
-      DataTable item = Find(x => x.DataModuleID == dataModuleID
+      DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
         && x.Name == name);
       if (item != null)
       {
@@ -164,12 +164,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataTable LJCSearchID(int id)
+    public DataUtilTable LJCSearchID(int id)
     {
-      DataTable retValue = null;
+      DataUtilTable retValue = null;
 
       LJCSortID();
-      DataTable searchItem = new DataTable()
+      DataUtilTable searchItem = new DataUtilTable()
       {
         ID = id
       };
@@ -187,13 +187,13 @@ namespace LJCDataUtilityDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public DataTable LJCSearchUnique(int dataModuleID, string name)
+    public DataUtilTable LJCSearchUnique(int dataModuleID, string name)
     {
-      DataTable retValue = null;
+      DataUtilTable retValue = null;
 
       var comparer = new DataTableUniqueComparer();
       LJCSortUnique(comparer);
-      DataTable searchItem = new DataTable()
+      DataUtilTable searchItem = new DataUtilTable()
       {
         DataModuleID = dataModuleID,
         Name = name
@@ -242,7 +242,7 @@ namespace LJCDataUtilityDAL
 
     // The item for the specified name.
     /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
-    public DataTable this[int dataTableID, string name]
+    public DataUtilTable this[int dataTableID, string name]
     {
       get { return LJCSearchUnique(dataTableID, name); }
     }

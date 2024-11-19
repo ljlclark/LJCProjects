@@ -110,7 +110,7 @@ namespace LJCDataUtilityDAL
     {
       DataKey retValue;
 
-      var keyColumns = GetIDKey(id);
+      var keyColumns = IDKey(id);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -123,7 +123,7 @@ namespace LJCDataUtilityDAL
     {
       DataKey retValue;
 
-      var keyColumns = GetUniqueKey(dataTableID, name);
+      var keyColumns = UniqueKey(dataTableID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -134,7 +134,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public DbColumns IDKey(int id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -147,8 +147,19 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
+    /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbColumns ParentKey(int parentID)
+    {
+      var retValue = new DbColumns()
+      {
+        { DataKey.ColumnDataTableID, parentID }
+      };
+      return retValue;
+    }
+
+    // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(int dataTableID, string name)
+    public DbColumns UniqueKey(int dataTableID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()

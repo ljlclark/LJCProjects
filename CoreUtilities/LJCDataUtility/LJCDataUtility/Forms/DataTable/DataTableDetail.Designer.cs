@@ -30,63 +30,64 @@
     {
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.ValueTextbox = new System.Windows.Forms.TextBox();
-      this.ValueLabel = new System.Windows.Forms.Label();
-      this.NameTextbox = new System.Windows.Forms.TextBox();
+      this.DescriptionText = new System.Windows.Forms.TextBox();
+      this.Descriptonlabel = new System.Windows.Forms.Label();
+      this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
-      this.textBox1 = new System.Windows.Forms.TextBox();
-      this.label1 = new System.Windows.Forms.Label();
+      this.ParentNameText = new System.Windows.Forms.TextBox();
+      this.ParentNameLabel = new System.Windows.Forms.Label();
+      this.NewNameText = new System.Windows.Forms.TextBox();
+      this.NewNameLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 172);
+      this.FormCancelButton.Location = new System.Drawing.Point(578, 217);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 7;
+      this.FormCancelButton.TabIndex = 9;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
-      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 172);
+      this.OKButton.Location = new System.Drawing.Point(387, 217);
       this.OKButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 6;
+      this.OKButton.TabIndex = 8;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // ValueTextbox
+      // DescriptionText
       // 
-      this.ValueTextbox.Location = new System.Drawing.Point(255, 114);
-      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(500, 32);
-      this.ValueTextbox.TabIndex = 5;
+      this.DescriptionText.Location = new System.Drawing.Point(255, 114);
+      this.DescriptionText.Margin = new System.Windows.Forms.Padding(6);
+      this.DescriptionText.Name = "DescriptionText";
+      this.DescriptionText.Size = new System.Drawing.Size(500, 32);
+      this.DescriptionText.TabIndex = 5;
       // 
-      // ValueLabel
+      // Descriptonlabel
       // 
-      this.ValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ValueLabel.Location = new System.Drawing.Point(24, 120);
-      this.ValueLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-      this.ValueLabel.Name = "ValueLabel";
-      this.ValueLabel.Size = new System.Drawing.Size(225, 26);
-      this.ValueLabel.TabIndex = 4;
-      this.ValueLabel.Text = "Description";
+      this.Descriptonlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.Descriptonlabel.Location = new System.Drawing.Point(24, 120);
+      this.Descriptonlabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.Descriptonlabel.Name = "Descriptonlabel";
+      this.Descriptonlabel.Size = new System.Drawing.Size(225, 26);
+      this.Descriptonlabel.TabIndex = 4;
+      this.Descriptonlabel.Text = "Description";
       // 
-      // NameTextbox
+      // NameText
       // 
-      this.NameTextbox.Location = new System.Drawing.Point(255, 67);
-      this.NameTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(500, 32);
-      this.NameTextbox.TabIndex = 3;
+      this.NameText.Location = new System.Drawing.Point(255, 67);
+      this.NameText.Margin = new System.Windows.Forms.Padding(6);
+      this.NameText.Name = "NameText";
+      this.NameText.Size = new System.Drawing.Size(500, 32);
+      this.NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
@@ -98,34 +99,54 @@
       this.NameLabel.TabIndex = 2;
       this.NameLabel.Text = "Name";
       // 
-      // textBox1
+      // ParentNameText
       // 
-      this.textBox1.Location = new System.Drawing.Point(255, 22);
-      this.textBox1.Margin = new System.Windows.Forms.Padding(6);
-      this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(500, 32);
-      this.textBox1.TabIndex = 1;
+      this.ParentNameText.Location = new System.Drawing.Point(255, 22);
+      this.ParentNameText.Margin = new System.Windows.Forms.Padding(6);
+      this.ParentNameText.Name = "ParentNameText";
+      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
+      this.ParentNameText.TabIndex = 1;
       // 
-      // label1
+      // ParentNameLabel
       // 
-      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(24, 28);
-      this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(225, 26);
-      this.label1.TabIndex = 0;
-      this.label1.Text = "Module";
+      this.ParentNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ParentNameLabel.Location = new System.Drawing.Point(24, 28);
+      this.ParentNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.ParentNameLabel.Name = "ParentNameLabel";
+      this.ParentNameLabel.Size = new System.Drawing.Size(225, 26);
+      this.ParentNameLabel.TabIndex = 0;
+      this.ParentNameLabel.Text = "Module";
+      // 
+      // NewNameText
+      // 
+      this.NewNameText.Location = new System.Drawing.Point(255, 161);
+      this.NewNameText.Margin = new System.Windows.Forms.Padding(6);
+      this.NewNameText.Name = "NewNameText";
+      this.NewNameText.Size = new System.Drawing.Size(500, 32);
+      this.NewNameText.TabIndex = 7;
+      // 
+      // NewNameLabel
+      // 
+      this.NewNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.NewNameLabel.Location = new System.Drawing.Point(24, 167);
+      this.NewNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.NewNameLabel.Name = "NewNameLabel";
+      this.NewNameLabel.Size = new System.Drawing.Size(225, 26);
+      this.NewNameLabel.TabIndex = 6;
+      this.NewNameLabel.Text = "New Name";
       // 
       // DataTableDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 232);
-      this.Controls.Add(this.textBox1);
-      this.Controls.Add(this.label1);
-      this.Controls.Add(this.ValueTextbox);
-      this.Controls.Add(this.ValueLabel);
-      this.Controls.Add(this.NameTextbox);
+      this.ClientSize = new System.Drawing.Size(778, 277);
+      this.Controls.Add(this.NewNameText);
+      this.Controls.Add(this.NewNameLabel);
+      this.Controls.Add(this.ParentNameText);
+      this.Controls.Add(this.ParentNameLabel);
+      this.Controls.Add(this.DescriptionText);
+      this.Controls.Add(this.Descriptonlabel);
+      this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
@@ -144,11 +165,13 @@
 
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
-    private System.Windows.Forms.TextBox ValueTextbox;
-    private System.Windows.Forms.Label ValueLabel;
-    private System.Windows.Forms.TextBox NameTextbox;
+    private System.Windows.Forms.TextBox DescriptionText;
+    private System.Windows.Forms.Label Descriptonlabel;
+    private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
-    private System.Windows.Forms.TextBox textBox1;
-    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.TextBox ParentNameText;
+    private System.Windows.Forms.Label ParentNameLabel;
+    private System.Windows.Forms.TextBox NewNameText;
+    private System.Windows.Forms.Label NewNameLabel;
   }
 }

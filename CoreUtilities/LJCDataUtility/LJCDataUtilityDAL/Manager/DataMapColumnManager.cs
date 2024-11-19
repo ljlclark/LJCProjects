@@ -95,12 +95,15 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataMapColumn RetrieveWithID(int dataMapTAbleID, int dataColumnID
+    //public DataMapColumn RetrieveWithIDs(int dataMapTableID, int dataColumnID
+    //  , List<string> propertyNames = null)
+    public DataMapColumn RetrieveWithIDs(int dataColumnID
       , List<string> propertyNames = null)
     {
       DataMapColumn retValue;
 
-      var keyColumns = GetKey(dataMapTAbleID, dataColumnID);
+      //var keyColumns = IDKeys(dataMapTAbleID, dataColumnID);
+      var keyColumns = IDKeys(dataColumnID);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -111,14 +114,15 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetKey(int dataMapTableID, int dataColumnID)
+    //public DbColumns IDKeys(int dataMapTableID, int dataColumnID)
+    public DbColumns IDKeys(int dataColumnID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataMapColumn.ColumnDataTableMapID, dataMapTableID },
+        //{ DataMapColumn.ColumnDataTableMapID, dataMapTableID },
         { DataMapColumn.ColumnDataColumnID, dataColumnID }
       };
       return retValue;

@@ -9,20 +9,20 @@ using System.Collections.Generic;
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataColumn Data Object.</summary>
-  public class DataColumn : IComparable<DataColumn>
+  public class DataUtilityColumn : IComparable<DataUtilityColumn>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataColumn()
+    public DataUtilityColumn()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataColumn(DataColumn item)
+    public DataUtilityColumn(DataUtilityColumn item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
@@ -36,6 +36,9 @@ namespace LJCDataUtilityDAL
       IdentityIncrement = item.IdentityIncrement;
       MaxLength = item.MaxLength;
       AllowNull = item.AllowNull;
+      NewName = item.NewName;
+      NewSequence = item.NewSequence;
+      NewMaxLength = item.NewMaxLength;
     }
     #endregion
 
@@ -43,15 +46,15 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataColumn Clone()
+    public DataUtilityColumn Clone()
     {
-      var retValue = MemberwiseClone() as DataColumn;
+      var retValue = MemberwiseClone() as DataUtilityColumn;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DataColumn other)
+    public int CompareTo(DataUtilityColumn other)
     {
       int retValue;
 
@@ -103,7 +106,8 @@ namespace LJCDataUtilityDAL
       get { return mDataTableID; }
       set
       {
-        mDataTableID = ChangedNames.Add(ColumnDataTableID, mDataTableID, value);
+        mDataTableID = ChangedNames.Add(ColumnDataTableID
+          , mDataTableID, value);
       }
     }
     private Int32 mDataTableID;
@@ -131,7 +135,8 @@ namespace LJCDataUtilityDAL
       set
       {
         value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+        mDescription = ChangedNames.Add(ColumnDescription
+          , mDescription, value);
       }
     }
     private String mDescription;
@@ -144,7 +149,8 @@ namespace LJCDataUtilityDAL
       get { return mSequence; }
       set
       {
-        mSequence = ChangedNames.Add(ColumnSequence, mSequence, value);
+        mSequence = ChangedNames.Add(ColumnSequence
+          , mSequence, value);
       }
     }
     private Int32 mSequence;
@@ -158,7 +164,8 @@ namespace LJCDataUtilityDAL
       set
       {
         value = NetString.InitString(value);
-        mTypeName = ChangedNames.Add(ColumnTypeName, mTypeName, value);
+        mTypeName = ChangedNames.Add(ColumnTypeName
+          , mTypeName, value);
       }
     }
     private String mTypeName;
@@ -170,7 +177,8 @@ namespace LJCDataUtilityDAL
       get { return mIsIdentity; }
       set
       {
-        mIsIdentity = ChangedNames.Add(ColumnIsIdentity, mIsIdentity, value);
+        mIsIdentity = ChangedNames.Add(ColumnIsIdentity
+          , mIsIdentity, value);
       }
     }
     private Boolean mIsIdentity;
@@ -182,7 +190,8 @@ namespace LJCDataUtilityDAL
       get { return mIdentityStart; }
       set
       {
-        mIdentityStart = ChangedNames.Add(ColumnIdentityStart, mIdentityStart, value);
+        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
+          , mIdentityStart, value);
       }
     }
     private Int16 mIdentityStart;
@@ -194,19 +203,22 @@ namespace LJCDataUtilityDAL
       get { return mIdentityIncrement; }
       set
       {
-        mIdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement, mIdentityIncrement, value);
+        mIdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
+          , mIdentityIncrement, value);
       }
     }
     private Int16 mIdentityIncrement;
 
     /// <summary>Gets or sets the MaxLength value.</summary>
+    //[Required]
     //[Column("MaxLength", TypeName="smallint")]
     public Int16 MaxLength
     {
       get { return mMaxLength; }
       set
       {
-        mMaxLength = ChangedNames.Add(ColumnMaxLength, mMaxLength, value);
+        mMaxLength = ChangedNames.Add(ColumnMaxLength
+          , mMaxLength, value);
       }
     }
     private Int16 mMaxLength;
@@ -218,10 +230,53 @@ namespace LJCDataUtilityDAL
       get { return mAllowNull; }
       set
       {
-        mAllowNull = ChangedNames.Add(ColumnAllowNull, mAllowNull, value);
+        mAllowNull = ChangedNames.Add(ColumnAllowNull
+          , mAllowNull, value);
       }
     }
     private Boolean mAllowNull;
+
+    /// <summary>Gets or sets the NewName value.</summary>
+    //[Column("NewName", TypeName="nvarchar(60")]
+    public String NewName
+    {
+      get { return mNewName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mNewName = ChangedNames.Add(ColumnNewName
+          , mName, value);
+      }
+    }
+    private String mNewName;
+
+    /// <summary>Gets or sets the NewSequence value.</summary>
+    //[Required]
+    //[Column("NewSequence", TypeName="int")]
+    public Int32 NewSequence
+    {
+      get { return mNewSequence; }
+      set
+      {
+        mNewSequence = ChangedNames.Add(ColumnNewSequence
+          , mNewSequence, value);
+      }
+    }
+    private Int32 mNewSequence;
+
+    /// <summary>Gets or sets the MaxLength value.</summary>
+    //[Required]
+    //[Column("NewMaxLength", TypeName="smallint")]
+    public Int16 NewMaxLength
+    {
+      get { return mNewMaxLength; }
+      set
+      {
+        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
+          , mNewMaxLength, value);
+      }
+    }
+    private Int16 mNewMaxLength;
     #endregion
 
     #region Class Properties
@@ -268,6 +323,15 @@ namespace LJCDataUtilityDAL
     /// <summary>The AllowNull column name.</summary>
     public static string ColumnAllowNull = "AllowNull";
 
+    /// <summary>The Name column name.</summary>
+    public static string ColumnNewName = "NewName";
+
+    /// <summary>The Sequence column name.</summary>
+    public static string ColumnNewSequence = "NewSequence";
+
+    /// <summary>The MaxLength column name.</summary>
+    public static string ColumnNewMaxLength = "NewMaxLength";
+
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;
 
@@ -276,17 +340,20 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The TypeName maximum length.</summary>
     public static int LengthTypeName = 20;
+
+    /// <summary>The Name maximum length.</summary>
+    public static int LengthNewName = 60;
     #endregion
   }
 
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DataColumnUniqueComparer : IComparer<DataColumn>
+  public class DataColumnUniqueComparer : IComparer<DataUtilityColumn>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DataColumn x, DataColumn y)
+    public int Compare(DataUtilityColumn x, DataUtilityColumn y)
     {
       int retValue;
 

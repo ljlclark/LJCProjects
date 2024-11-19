@@ -1,4 +1,7 @@
-﻿using LJCDataUtilityDAL;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataModuleDetail.cs
+using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -16,6 +19,7 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
+    // ********************
     internal DataModuleDetail()
     {
       InitializeComponent();
@@ -29,6 +33,7 @@ namespace LJCDataUtility
 
     #region Form Event Handlers
 
+    // ********************
     private void DataModuleDetai_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
@@ -43,6 +48,7 @@ namespace LJCDataUtility
     #region Data Methods
 
     // Retrieves the initial control data.
+    // ********************
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -51,7 +57,7 @@ namespace LJCDataUtility
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = Managers.DataModuleManager;
+        var manager = LJCManagers.DataModuleManager;
         mOriginalRecord = manager.RetrieveWithID(LJCID);
         GetRecordValues(mOriginalRecord);
       }
@@ -67,6 +73,7 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
+    // ********************
     private void GetRecordValues(DataModule dataRecord)
     {
       if (dataRecord != null)
@@ -78,6 +85,7 @@ namespace LJCDataUtility
     }
 
     // Creates and returns a record object with the data from
+    // ********************
     private DataModule SetRecordValues()
     {
       DataModule retValue = null;
@@ -101,6 +109,7 @@ namespace LJCDataUtility
     }
 
     // Resets the empty record values.
+    // ********************
     private void ResetRecordValues(DataModule dataRecord)
     {
       // In control order.
@@ -108,13 +117,14 @@ namespace LJCDataUtility
     }
 
     // Saves the data.
+    // ********************
     private bool DataSave()
     {
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
-      var manager = Managers.DataModuleManager;
+      var manager = LJCManagers.DataModuleManager;
       //var lookupRecord = manager.RetrieveWithUnique(LJCRecord.Name);
       //if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       //{
@@ -150,6 +160,7 @@ namespace LJCDataUtility
     }
 
     // Check for saved data.
+    // ********************
     private bool IsDataSaved()
     {
       bool retValue = false;
@@ -163,6 +174,7 @@ namespace LJCDataUtility
     }
 
     // Validates the data.
+    // ********************
     private bool IsValid()
     {
       bool retValue = true;
@@ -196,12 +208,13 @@ namespace LJCDataUtility
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
+    // ********************
     private void InitializeControls()
     {
       // Get singleton values.
       Cursor = Cursors.WaitCursor;
       var values = ValuesDataUtility.Instance;
-      Managers = values.Managers;
+      LJCManagers = values.Managers;
 
       // Set control values.
       SetNoSpace();
@@ -211,6 +224,7 @@ namespace LJCDataUtility
     }
 
     // Sets the NoSpace events.
+    // ********************
     private void SetNoSpace()
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
@@ -218,34 +232,17 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Control Event Handlers
-
-    // Fires the Change event.
-    protected void LJCOnChange()
-    {
-      LJCChange?.Invoke(this, new EventArgs());
-    }
-
-    // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
-    {
-      if (IsDataSaved())
-      {
-        LJCOnChange();
-        DialogResult = DialogResult.OK;
-      }
-    }
-    #endregion
-
     #region KeyEdit Event Handlers
 
     // Does not allow spaces.
+    // ********************
     private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
       e.Handled = FormCommon.HandleSpace(e.KeyChar);
     }
 
     // Strips blanks from the text value.
+    // ********************
     private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
       if (sender is TextBox textBox)
@@ -253,6 +250,27 @@ namespace LJCDataUtility
         var prevStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
         textBox.SelectionStart = prevStart;
+      }
+    }
+    #endregion
+
+    #region Control Event Handlers
+
+    // Fires the Change event.
+    // ********************
+    protected void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
+    // Saves the data and closes the form.
+    // ********************
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
       }
     }
     #endregion
@@ -269,7 +287,7 @@ namespace LJCDataUtility
     internal DataModule LJCRecord { get; private set; }
 
     // The Managers object.
-    internal ManagersDataUtility Managers { get; set; }
+    internal ManagersDataUtility LJCManagers { get; set; }
     #endregion
 
     #region Class Data

@@ -1,49 +1,287 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// DataColumDetail.cs
+using LJCDataUtilityDAL;
+using LJCDBClientLib;
+using LJCNetCommon;
+using LJCWinFormCommon;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
- /// <summary>
- /// 
- /// </summary>
-  public partial class DataColumnDetail : Form
+  // The DataColumn detail dialog.
+  internal partial class DataColumnDetail : Form
   {
-   /// <summary>
-   /// 
-   /// </summary>
-    public DataColumnDetail()
+    #region Constructors
+
+    // Initializes an object instance.
+    // ********************
+    internal DataColumnDetail()
     {
       InitializeComponent();
 
+      // Initialize property values.
+      LJCID = 0;
+      LJCIsUpdate = false;
+      LJCParentID = 0;
+      LJCParentName = null;
+      LJCRecord = null;
+
       this.MouseWheel += new MouseEventHandler(Form_MouseWheel);
     }
+    #endregion
 
+    #region Form Event Handlers
+
+    // ********************
     private void ColumnDetail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
-
+      InitializeControls();
+      DataRetrieve();
       CenterToParent();
     }
+    #endregion
 
-    private void OKButton_Click(object sender, EventArgs e)
+    #region Data Methods
+
+    // Retrieves the initial control data.
+    // ********************
+    private void DataRetrieve()
     {
-      Close();
+      Cursor = Cursors.WaitCursor;
+      Text = "DataUtilityColumn Detail";
+      if (LJCID > 0)
+      {
+        Text += " - Edit";
+        LJCIsUpdate = true;
+        var manager = LJCManagers.DataColumnManager;
+        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        GetRecordValues(mOriginalRecord);
+      }
+      else
+      {
+        Text += " - New";
+        LJCIsUpdate = false;
+        LJCRecord = new DataUtilityColumn();
+        ParentNameText.Text = LJCParentName;
+      }
+      NameText.Select();
+      NameText.Select(0, 0);
+      Cursor = Cursors.Default;
     }
 
-    private void FormCancelButton_Click(object sender, EventArgs e)
+    // Gets the record values and copies them to the controls.
+    // ********************
+    private void GetRecordValues(DataUtilityColumn dataRecord)
     {
-      Close();
+      if (dataRecord != null)
+      {
+        // In control order.
+        var data = dataRecord;
+        ParentNameText.Text = LJCParentName;
+        NameText.Text = data.Name;
+        DescriptionText.Text = data.Description;
+        SequenceText.Text = data.Sequence.ToString();
+        TypeNameText.Text = data.TypeName;
+        IdentityStartText.Text = data.IdentityStart.ToString();
+        IdentityIncrementText.Text = data.IdentityIncrement.ToString(); ;
+        MaxLengthText.Text = data.MaxLength.ToString();
+
+        // Reference key values.
+        LJCParentID = data.DataTableID;
+      }
+    }
+
+    // Creates and returns a record object with the data from
+    // ********************
+    private DataUtilityColumn SetRecordValues()
+    {
+      DataUtilityColumn retValue = null;
+
+      if (mOriginalRecord != null)
+      {
+        retValue = mOriginalRecord.Clone();
+      }
+      if (null == retValue)
+      {
+        retValue = new DataUtilityColumn();
+      }
+
+      // In control order.
+      retValue.Name = FormCommon.SetString(NameText.Text);
+      retValue.Description = FormCommon.SetString(DescriptionText.Text);
+
+      // Get Reference key values.
+      retValue.ID = LJCID;
+      retValue.DataTableID = LJCParentID;
+      return retValue;
+    }
+
+    // Resets the empty record values.
+    // ********************
+    private void ResetRecordValues(DataUtilityColumn dataRecord)
+    {
+      // In control order.
+      dataRecord.Description
+        = FormCommon.SetString(dataRecord.Description);
+    }
+
+    // Saves the data.
+    // ********************
+    private bool DataSave()
+    {
+      bool retValue = true;
+
+      Cursor = Cursors.WaitCursor;
+      LJCRecord = SetRecordValues();
+      var manager = LJCManagers.DataColumnManager;
+
+      if (retValue)
+      {
+        if (LJCIsUpdate)
+        {
+          var keyColumns = manager.IDKey(LJCID);
+          LJCRecord.ID = 0;
+          manager.Update(LJCRecord, keyColumns);
+          ResetRecordValues(LJCRecord);
+          LJCRecord.ID = LJCID;
+          retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
+        }
+        else
+        {
+          LJCRecord.ID = 0;
+          var addedRecord = manager.Add(LJCRecord);
+          ResetRecordValues(LJCRecord);
+          if (addedRecord != null)
+          {
+            LJCRecord.ID = addedRecord.ID;
+          }
+          retValue = !FormCommon.AddError(this, manager.AffectedCount);
+        }
+      }
+      Cursor = Cursors.Default;
+      return retValue;
+    }
+
+    // Check for saved data.
+    // ********************
+    private bool IsDataSaved()
+    {
+      bool retValue = false;
+
+      FormCancelButton.Select();
+      if (IsValid() && DataSave())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Validates the data.
+    // ********************
+    private bool IsValid()
+    {
+      bool retValue = true;
+
+      var builder = new StringBuilder(64);
+      builder.AppendLine("Invalid or Missing Data:");
+
+      if (!NetString.HasValue(NameText.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {NameLabel.Text}");
+      }
+
+      if (!retValue)
+      {
+        var title = "Data Entry Error";
+        var message = builder.ToString();
+        MessageBox.Show(message, title, MessageBoxButtons.OK
+          , MessageBoxIcon.Exclamation);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the controls and loads the selection control data.
+    // ********************
+    private void InitializeControls()
+    {
+      // Get singleton values.
+      Cursor = Cursors.WaitCursor;
+      var values = ValuesDataUtility.Instance;
+      LJCManagers = values.Managers;
+      //mSettings = values.StandardSettings;
+
+      // Set control values.
+      SetNoSpace();
+      DescriptionText.MaxLength = DataUtilityColumn.LengthDescription;
+
+      Cursor = Cursors.Default;
+    }
+
+    // Sets the NoSpace events.
+    // ********************
+    private void SetNoSpace()
+    {
+      NameText.KeyPress += TextBoxNoSpace_KeyPress;
+      NameText.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+    #endregion
+
+    #region KeyEdit Event Handlers
+
+    // Does not allow spaces.
+    // ********************
+    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleSpace(e.KeyChar);
+    }
+
+    // Strips blanks from the text value.
+    // ********************
+    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        var prevStart = textBox.SelectionStart;
+        textBox.Text = FormCommon.StripBlanks(textBox.Text);
+        textBox.SelectionStart = prevStart;
+      }
+    }
+    #endregion
+
+    #region Control Event Handlers
+
+    // Fires the Change event.
+    //// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // ********************
+    protected void LJCOnChange()
+    {
+      LJCChange?.Invoke(this, new EventArgs());
+    }
+
+    // Saves the data and closes the form.
+    // ********************
+    private void OKButton_Click(object sender, EventArgs e)
+    {
+      if (IsDataSaved())
+      {
+        LJCOnChange();
+        DialogResult = DialogResult.OK;
+      }
     }
 
     // Handles the grid MouseWheel event.
+    // ********************
     private void Form_MouseWheel(object sender
       , MouseEventArgs e)
     {
@@ -56,10 +294,45 @@ namespace LJCDataUtility
       {
         size--;
       }
-      //var fontFamily = "Microsoft Sans Serif";
       var fontFamily = this.Font.FontFamily;
       var style = this.Font.Style;
       this.Font = new Font(fontFamily, size, style);
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the primary ID value.
+    internal int LJCID { get; set; }
+
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
+
+    // Gets or sets the Parent ID value.
+    internal int LJCParentID { get; set; }
+
+    // Gets or sets the LJCParentName value.
+    internal string LJCParentName
+    {
+      get { return mParentName; }
+      set { mParentName = NetString.InitString(value); }
+    }
+    private string mParentName;
+
+    // Gets a reference to the record object.
+    internal DataUtilityColumn LJCRecord { get; private set; }
+
+    // The Managers object.
+    internal ManagersDataUtility LJCManagers { get; set; }
+    #endregion
+
+    #region Class Data
+
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange;
+
+    private DataUtilityColumn mOriginalRecord;
+    //private StandardUISettings mSettings;
+    #endregion
   }
 }

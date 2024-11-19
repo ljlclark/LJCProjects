@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs
 		GridCodeTemplate2.cs = GridCodeTemplate2.cs
 		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate2.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate2.cs
 		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
+		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate2.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate2.cs
 		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs
 	EndProjectSection
 EndProject

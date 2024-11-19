@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataMapTableGridCode.cs
+using static LJCDataUtility.DataUtilityList;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
-  // Provides DataColumnGrid methods for the _AppName_List window.
+  // Provides DataMapTableGrid methods for the DataUtilityList window.
   internal class DataMapTableGridCode
   {
     #region Constructors
@@ -26,17 +27,17 @@ namespace LJCDataUtility
       UtilityList.Cursor = Cursors.WaitCursor;
 
       TableGrid = UtilityList.TableGrid;
-      MapTableGrid = UtilityList.MapTableGrid;
-      var mapTableMenu = UtilityList.MapTableMenu;
+      //MapTableGrid = UtilityList.MapTableGrid;
+      MapTableMenu = UtilityList.MapTableMenu;
       Managers = UtilityList.Managers;
       MapTableManager = Managers.DataMapTableManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       MapTableGrid.Font = new Font(fontFamily, 11, style);
-      mapTableMenu.Font = new Font(fontFamily, 11, style);
+      MapTableMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, MapTableGrid);
-      _ = new MenuFont(mapTableMenu);
+      _ = new MenuFont(MapTableMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -44,11 +45,14 @@ namespace LJCDataUtility
       list.MapTableEdit.Click += MapTableEdit_Click;
       list.MapTableDelete.Click += MapTableDelete_Click;
       list.MapTableRefresh.Click += MapTableRefresh_Click;
+      list.MapTableExit.Click += list.Exit_Click;
 
       // Grid events.
       var grid = MapTableGrid;
-      grid.MouseDoubleClick += MapTableGrid_MouseDoubleClick;
       grid.KeyDown += MapTableGrid_KeyDown;
+      grid.MouseDoubleClick += MapTableGrid_MouseDoubleClick;
+      grid.MouseDown += MapTableGrid_MouseDown;
+      grid.SelectionChanged += MapTableGrid_SelectionChanged;
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -65,9 +69,9 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
-        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
+        int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
 
-        var keyColumns = MapTableManager.GetKey(parentID);
+        var keyColumns = MapTableManager.ParentKey(parentID);
         var items = MapTableManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
@@ -77,7 +81,9 @@ namespace LJCDataUtility
           }
         }
       }
+      SetControlState();
       UtilityList.Cursor = Cursors.Default;
+      UtilityList.DoChange(Change.MapTable);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -126,11 +132,22 @@ namespace LJCDataUtility
       }
     }
 
+    // Sets the control states based on the current control values.
+    // ********************
+    private void SetControlState()
+    {
+      bool enableNew = TableGrid.CurrentRow != null;
+      bool enableEdit = MapTableGrid.CurrentRow != null;
+      FormCommon.SetMenuState(MapTableMenu, enableNew, enableEdit);
+      UtilityList.MapTableHeading.Enabled = true;
+    }
+
     // Sets the row stored values.
     // ********************
     private void SetStoredValues(LJCGridRow row, DataMapTable dataRecord)
     {
-      row.LJCSetInt32(DataMapTable.ColumnDataTableID, dataRecord.DataTableID);
+      row.LJCSetInt32(DataMapTable.ColumnDataTableID
+        , dataRecord.DataTableID);
     }
     #endregion
 
@@ -142,8 +159,7 @@ namespace LJCDataUtility
     {
       bool success = false;
       var row = MapTableGrid.CurrentRow as LJCGridRow;
-      if (MapTableGrid.CurrentRow is LJCGridRow parentRow
-        && row != null)
+      if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -157,13 +173,13 @@ namespace LJCDataUtility
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataTable.ColumnID);
+        var id = row.LJCGetInt32(DataUtilTable.ColumnID);
 
         var keyColumns = new DbColumns()
         {
-          { DataTable.ColumnID, id }
+          { DataUtilTable.ColumnID, id }
         };
-        //MapTableManager.Delete(keyColumns);
+        MapTableManager.Delete(keyColumns);
         if (0 == MapTableManager.AffectedCount)
         {
           success = false;
@@ -176,7 +192,8 @@ namespace LJCDataUtility
       if (success)
       {
         MapTableGrid.Rows.Remove(row);
-        //UtilityList.TimedChange(Change._ClassName_);
+        SetControlState();
+        UtilityList.TimedChange(Change.MapTable);
       }
     }
 
@@ -184,6 +201,21 @@ namespace LJCDataUtility
     // ********************
     internal void Edit()
     {
+      if (TableGrid.CurrentRow is LJCGridRow parentRow)
+      {
+        // Data from items.
+        int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
+        string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
+
+        var detail = new DataColumnDetail()
+        {
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
@@ -193,18 +225,16 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from list items.
-        int parentID = parentRow.LJCGetInt32(DataTable.ColumnID);
-        string parentName = parentRow.LJCGetString(DataTable.ColumnName);
+        int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
+        string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
 
-        var location = FormCommon.GetDialogScreenPoint(MapTableGrid);
         var detail = new DataMapTableDetail
         {
-          //LJCLocation = location,
-          //LJCManagers = Managers,
-          //LJCParentID = parentID,
-          //LJCParentName = parentName
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName
         };
-        //detail.LJCChange += Detail_Change;
+        detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
@@ -235,6 +265,7 @@ namespace LJCDataUtility
     }
 
     // Shows the help page
+    // ********************
     internal void ShowHelp()
     {
       //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
@@ -245,6 +276,23 @@ namespace LJCDataUtility
     // ********************
     private void Detail_Change(object sender, EventArgs e)
     {
+      var detail = sender as DataMapTableDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          MapTableGrid.LJCSetCurrentRow(row, true);
+          SetControlState();
+          UtilityList.TimedChange(Change.MapTable);
+        }
+      }
     }
     #endregion
 
@@ -272,7 +320,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Control Event Handlers
+    #region Action Event Handlers
 
     // Handles the New menu item event.
     // ********************
@@ -301,16 +349,9 @@ namespace LJCDataUtility
     {
       Refresh();
     }
+    #endregion
 
-    // Handles the Grid Doubleclick event.
-    // ********************
-    private void MapTableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (MapTableGrid.LJCGetMouseRow(e) != null)
-      {
-        New();
-      }
-    }
+    #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
     // ********************
@@ -338,8 +379,9 @@ namespace LJCDataUtility
           {
             var position = FormCommon.GetMenuScreenPoint(MapTableGrid
               , Control.MousePosition);
-            UtilityList.MapTableMenu.Show(position);
-            UtilityList.MapTableMenu.Select();
+            var menu = UtilityList.ColumnMenu;
+            menu.Show(position);
+            menu.Select();
             e.Handled = true;
           }
           break;
@@ -347,34 +389,73 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           else
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           e.Handled = true;
           break;
       }
     }
+
+    // Handles the Grid MouseDoubleClick event.
+    // ********************
+    private void MapTableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (MapTableGrid.LJCGetMouseRow(e) != null)
+      {
+        New();
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void MapTableGrid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        MapTableGrid.Select();
+        if (MapTableGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          MapTableGrid.LJCSetCurrentRow(e);
+          UtilityList.TimedChange(Change.MapTable);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void MapTableGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (MapTableGrid.LJCAllowSelectionChange)
+      {
+        UtilityList.TimedChange(Change.MapTable);
+      }
+      MapTableGrid.LJCAllowSelectionChange = true;
+    }
     #endregion
 
     #region Properties
 
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the Grid reference.
-    private LJCDataGrid MapTableGrid { get; set; }
-
-    // Gets or sets the Manager reference.
-    private DataMapTableManager MapTableManager { get; set; }
+    // Gets or sets the Parent List reference.
+    private DataUtilityList UtilityList { get; set; }
 
     // Gets or sets the parent Grid reference.
     private LJCDataGrid TableGrid { get; set; }
 
-    // Gets or sets the Parent List reference.
-    private DataUtilityList UtilityList { get; set; }
+    // Gets or sets the Grid reference.
+    private LJCDataGrid MapTableGrid { get; set; }
+
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip MapTableMenu { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the Manager reference.
+    private DataMapTableManager MapTableManager { get; set; }
     #endregion
   }
 }

@@ -30,20 +30,20 @@
     {
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.checkBox1 = new System.Windows.Forms.CheckBox();
-      this.textBox6 = new System.Windows.Forms.TextBox();
+      this.ClusteredCheck = new System.Windows.Forms.CheckBox();
+      this.TargetTableText = new System.Windows.Forms.TextBox();
       this.label6 = new System.Windows.Forms.Label();
-      this.textBox3 = new System.Windows.Forms.TextBox();
+      this.TargetColumnText = new System.Windows.Forms.TextBox();
       this.label3 = new System.Windows.Forms.Label();
-      this.textBox1 = new System.Windows.Forms.TextBox();
+      this.SourceColumnText = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
-      this.ParentNameTextbox = new System.Windows.Forms.TextBox();
+      this.ParentNameText = new System.Windows.Forms.TextBox();
       this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.ValueTextbox = new System.Windows.Forms.TextBox();
+      this.KeyTypeText = new System.Windows.Forms.TextBox();
       this.ValueLabel = new System.Windows.Forms.Label();
-      this.NameTextbox = new System.Windows.Forms.TextBox();
+      this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
-      this.checkBox2 = new System.Windows.Forms.CheckBox();
+      this.AscendingCheck = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // FormCancelButton
@@ -56,7 +56,6 @@
       this.FormCancelButton.TabIndex = 15;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
-      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
       // 
       // OKButton
       // 
@@ -70,24 +69,24 @@
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // checkBox1
+      // ClusteredCheck
       // 
-      this.checkBox1.AutoSize = true;
-      this.checkBox1.Location = new System.Drawing.Point(254, 305);
-      this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
-      this.checkBox1.Name = "checkBox1";
-      this.checkBox1.Size = new System.Drawing.Size(131, 30);
-      this.checkBox1.TabIndex = 12;
-      this.checkBox1.Text = "Clustered";
-      this.checkBox1.UseVisualStyleBackColor = true;
+      this.ClusteredCheck.AutoSize = true;
+      this.ClusteredCheck.Location = new System.Drawing.Point(254, 305);
+      this.ClusteredCheck.Margin = new System.Windows.Forms.Padding(4);
+      this.ClusteredCheck.Name = "ClusteredCheck";
+      this.ClusteredCheck.Size = new System.Drawing.Size(131, 30);
+      this.ClusteredCheck.TabIndex = 12;
+      this.ClusteredCheck.Text = "Clustered";
+      this.ClusteredCheck.UseVisualStyleBackColor = true;
       // 
-      // textBox6
+      // TargetTableText
       // 
-      this.textBox6.Location = new System.Drawing.Point(254, 210);
-      this.textBox6.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.textBox6.Name = "textBox6";
-      this.textBox6.Size = new System.Drawing.Size(500, 32);
-      this.textBox6.TabIndex = 9;
+      this.TargetTableText.Location = new System.Drawing.Point(254, 210);
+      this.TargetTableText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.TargetTableText.Name = "TargetTableText";
+      this.TargetTableText.Size = new System.Drawing.Size(500, 32);
+      this.TargetTableText.TabIndex = 9;
       // 
       // label6
       // 
@@ -99,13 +98,13 @@
       this.label6.TabIndex = 8;
       this.label6.Text = "Target Table";
       // 
-      // textBox3
+      // TargetColumnText
       // 
-      this.textBox3.Location = new System.Drawing.Point(254, 257);
-      this.textBox3.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.textBox3.Name = "textBox3";
-      this.textBox3.Size = new System.Drawing.Size(500, 32);
-      this.textBox3.TabIndex = 11;
+      this.TargetColumnText.Location = new System.Drawing.Point(254, 257);
+      this.TargetColumnText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.TargetColumnText.Name = "TargetColumnText";
+      this.TargetColumnText.Size = new System.Drawing.Size(500, 32);
+      this.TargetColumnText.TabIndex = 11;
       // 
       // label3
       // 
@@ -117,13 +116,13 @@
       this.label3.TabIndex = 10;
       this.label3.Text = "Target Column";
       // 
-      // textBox1
+      // SourceColumnText
       // 
-      this.textBox1.Location = new System.Drawing.Point(254, 163);
-      this.textBox1.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(500, 32);
-      this.textBox1.TabIndex = 7;
+      this.SourceColumnText.Location = new System.Drawing.Point(254, 163);
+      this.SourceColumnText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.SourceColumnText.Name = "SourceColumnText";
+      this.SourceColumnText.Size = new System.Drawing.Size(500, 32);
+      this.SourceColumnText.TabIndex = 7;
       // 
       // label1
       // 
@@ -135,14 +134,14 @@
       this.label1.TabIndex = 6;
       this.label1.Text = "Source Column";
       // 
-      // ParentNameTextbox
+      // ParentNameText
       // 
-      this.ParentNameTextbox.Location = new System.Drawing.Point(254, 22);
-      this.ParentNameTextbox.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.ParentNameTextbox.Name = "ParentNameTextbox";
-      this.ParentNameTextbox.ReadOnly = true;
-      this.ParentNameTextbox.Size = new System.Drawing.Size(500, 32);
-      this.ParentNameTextbox.TabIndex = 1;
+      this.ParentNameText.Location = new System.Drawing.Point(254, 22);
+      this.ParentNameText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.ParentNameText.Name = "ParentNameText";
+      this.ParentNameText.ReadOnly = true;
+      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
+      this.ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
@@ -154,13 +153,13 @@
       this.ParentNameLabel.TabIndex = 0;
       this.ParentNameLabel.Text = "Data Table";
       // 
-      // ValueTextbox
+      // KeyTypeText
       // 
-      this.ValueTextbox.Location = new System.Drawing.Point(254, 116);
-      this.ValueTextbox.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.ValueTextbox.Name = "ValueTextbox";
-      this.ValueTextbox.Size = new System.Drawing.Size(500, 32);
-      this.ValueTextbox.TabIndex = 5;
+      this.KeyTypeText.Location = new System.Drawing.Point(254, 116);
+      this.KeyTypeText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.KeyTypeText.Name = "KeyTypeText";
+      this.KeyTypeText.Size = new System.Drawing.Size(500, 32);
+      this.KeyTypeText.TabIndex = 5;
       // 
       // ValueLabel
       // 
@@ -172,13 +171,13 @@
       this.ValueLabel.TabIndex = 4;
       this.ValueLabel.Text = "KeyType";
       // 
-      // NameTextbox
+      // NameText
       // 
-      this.NameTextbox.Location = new System.Drawing.Point(254, 69);
-      this.NameTextbox.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(500, 32);
-      this.NameTextbox.TabIndex = 3;
+      this.NameText.Location = new System.Drawing.Point(254, 69);
+      this.NameText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.NameText.Name = "NameText";
+      this.NameText.Size = new System.Drawing.Size(500, 32);
+      this.NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
@@ -190,35 +189,35 @@
       this.NameLabel.TabIndex = 2;
       this.NameLabel.Text = "Name";
       // 
-      // checkBox2
+      // AscendingCheck
       // 
-      this.checkBox2.AutoSize = true;
-      this.checkBox2.Location = new System.Drawing.Point(254, 352);
-      this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
-      this.checkBox2.Name = "checkBox2";
-      this.checkBox2.Size = new System.Drawing.Size(140, 30);
-      this.checkBox2.TabIndex = 13;
-      this.checkBox2.Text = "Ascending";
-      this.checkBox2.UseVisualStyleBackColor = true;
+      this.AscendingCheck.AutoSize = true;
+      this.AscendingCheck.Location = new System.Drawing.Point(254, 352);
+      this.AscendingCheck.Margin = new System.Windows.Forms.Padding(4);
+      this.AscendingCheck.Name = "AscendingCheck";
+      this.AscendingCheck.Size = new System.Drawing.Size(140, 30);
+      this.AscendingCheck.TabIndex = 13;
+      this.AscendingCheck.Text = "Ascending";
+      this.AscendingCheck.UseVisualStyleBackColor = true;
       // 
       // DataKeyDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
       this.ClientSize = new System.Drawing.Size(778, 467);
-      this.Controls.Add(this.checkBox2);
-      this.Controls.Add(this.checkBox1);
-      this.Controls.Add(this.textBox6);
+      this.Controls.Add(this.AscendingCheck);
+      this.Controls.Add(this.ClusteredCheck);
+      this.Controls.Add(this.TargetTableText);
       this.Controls.Add(this.label6);
-      this.Controls.Add(this.textBox3);
+      this.Controls.Add(this.TargetColumnText);
       this.Controls.Add(this.label3);
-      this.Controls.Add(this.textBox1);
+      this.Controls.Add(this.SourceColumnText);
       this.Controls.Add(this.label1);
-      this.Controls.Add(this.ParentNameTextbox);
+      this.Controls.Add(this.ParentNameText);
       this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.ValueTextbox);
+      this.Controls.Add(this.KeyTypeText);
       this.Controls.Add(this.ValueLabel);
-      this.Controls.Add(this.NameTextbox);
+      this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
@@ -239,19 +238,19 @@
 
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
-    private System.Windows.Forms.CheckBox checkBox1;
-    private System.Windows.Forms.TextBox textBox6;
+    private System.Windows.Forms.CheckBox ClusteredCheck;
+    private System.Windows.Forms.TextBox TargetTableText;
     private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.TextBox textBox3;
+    private System.Windows.Forms.TextBox TargetColumnText;
     private System.Windows.Forms.Label label3;
-    private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.TextBox SourceColumnText;
     private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.TextBox ParentNameTextbox;
+    private System.Windows.Forms.TextBox ParentNameText;
     private System.Windows.Forms.Label ParentNameLabel;
-    private System.Windows.Forms.TextBox ValueTextbox;
+    private System.Windows.Forms.TextBox KeyTypeText;
     private System.Windows.Forms.Label ValueLabel;
-    private System.Windows.Forms.TextBox NameTextbox;
+    private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
-    private System.Windows.Forms.CheckBox checkBox2;
+    private System.Windows.Forms.CheckBox AscendingCheck;
   }
 }

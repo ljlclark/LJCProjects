@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GridFont.cs
+using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Drawing;
@@ -30,26 +31,25 @@ namespace LJCDataUtility
       grid.MouseWheel += new MouseEventHandler(Grid_MouseWheel);
     }
 
+    // Show the grid font size.
+    private void ShowFontSize(DataGridView grid)
+    {
+      var size = grid.Font.Size;
+      var text = Parent.Text;
+      var index = text.IndexOf("[");
+      if (index > 0)
+      {
+        text = Parent.Text.Substring(0, index - 1);
+      }
+      Parent.Text = $"{text} [{size}]";
+    }
+
     #region Control Event Handlers
 
     // Handles the grid Click event.
     private void Grid_Click(object sender, EventArgs e)
     {
       IsClicked = true;
-    }
-
-    // Handles the grid MouseEnter event.
-    private void Grid_MouseEnter(object sender, EventArgs e)
-    {
-      if (AutoSelect
-        && null == PrevControl)
-      {
-        PrevControl = Parent.ActiveControl;
-        if (PrevControl != null)
-        {
-          Grid.Select();
-        }
-      }
     }
 
     // Handles the grid KeyDown event.
@@ -64,6 +64,30 @@ namespace LJCDataUtility
     // Handles the grid KeyUp event.
     private void Grid_KeyUp(object sender, KeyEventArgs e)
     {
+      if (Keys.Up == e.KeyCode
+        || Keys.Down == e.KeyCode)
+      {
+        if (e.Control)
+        {
+          var grid = sender as LJCDataGrid;
+          var size = grid.Font.Size;
+          switch (e.KeyCode)
+          {
+            case Keys.Up:
+              size++;
+              break;
+
+            case Keys.Down:
+              size--;
+              break;
+          }
+          var fontFamily = grid.Font.FontFamily;
+          var style = grid.Font.Style;
+          grid.Font = new Font(fontFamily, size, style);
+          ShowFontSize(grid);
+          e.Handled = true;
+        }
+      }
       IsControlKey = false;
     }
 
@@ -73,6 +97,22 @@ namespace LJCDataUtility
       IsClicked = false;
       IsControlKey = false;
       PrevControl = null;
+    }
+
+    // Handles the grid MouseEnter event.
+    private void Grid_MouseEnter(object sender, EventArgs e)
+    {
+      var grid = sender as LJCDataGrid;
+      ShowFontSize(grid);
+      if (AutoSelect
+        && null == PrevControl)
+      {
+        PrevControl = Parent.ActiveControl;
+        if (PrevControl != null)
+        {
+          Grid.Select();
+        }
+      }
     }
 
     // Handles the grid MouseLeave event.
@@ -102,20 +142,17 @@ namespace LJCDataUtility
         {
           size--;
         }
-        //var fontFamily = "Microsoft Sans Serif";
         var fontFamily = grid.Font.FontFamily;
         var style = grid.Font.Style;
-        if (size > 10)
-        {
-          //style = FontStyle.Bold;
-        }
         grid.Font = new Font(fontFamily, size, style);
+        ShowFontSize(grid);
       }
     }
     #endregion
 
     #region Properties
 
+    // Select the grid on mouse enter.
     internal bool AutoSelect { get; set; }
 
     // The LJCDataGrid control.

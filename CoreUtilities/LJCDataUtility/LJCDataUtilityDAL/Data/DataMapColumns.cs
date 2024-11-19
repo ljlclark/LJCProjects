@@ -69,16 +69,18 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataMapColumn Add(int dataTableMapID, int dataColumnID)
+    //public DataMapColumn Add(int dataTableMapID, int dataColumnID)
+    public DataMapColumn Add(int dataColumnID)
     {
       DataMapColumn retValue;
 
-      retValue = LJCSearch(dataTableMapID, dataColumnID);
+      //retValue = LJCSearch(dataTableMapID, dataColumnID);
+      retValue = LJCSearch(dataColumnID);
       if (null == retValue)
       {
         retValue = new DataMapColumn()
         {
-          DataTableMapID = dataTableMapID,
+          //DataTableMapID = dataTableMapID,
           DataColumnID = dataColumnID
         };
         Add(retValue);
@@ -129,10 +131,12 @@ namespace LJCDataUtilityDAL
     /// Removes an item by name.
     /// </summary>
     /// <param name="name">The item unique Name value.</param>
-    public void LJCRemove(int dataTableMapID, int dataColumnID)
+    //public void LJCRemove(int dataTableMapID, int dataColumnID)
+    public void LJCRemove(int dataColumnID)
     {
-      DataMapColumn item = Find(x => x.DataColumnID == dataColumnID
-        && x.DataTableMapID == dataTableMapID);
+      //DataMapColumn item = Find(x => x.DataColumnID == dataColumnID
+      //  && x.DataTableMapID == dataTableMapID);
+      DataMapColumn item = Find(x => x.DataColumnID == dataColumnID);
       if (item != null)
       {
         Remove(item);
@@ -154,14 +158,15 @@ namespace LJCDataUtilityDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    public DataMapColumn LJCSearch(int dataTableMapID, int dataColumnID)
+    //public DataMapColumn LJCSearch(int dataTableMapID, int dataColumnID)
+    public DataMapColumn LJCSearch(int dataColumnID)
     {
       DataMapColumn retValue = null;
 
       LJCSort();
       DataMapColumn searchItem = new DataMapColumn()
       {
-        DataTableMapID = dataTableMapID,
+        //DataTableMapID = dataTableMapID,
         DataColumnID = dataColumnID
       };
       int index = BinarySearch(searchItem);

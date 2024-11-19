@@ -7,13 +7,13 @@
 // #Value _ClassName_
 // #Value _FullAppName_
 // _ClassName_GridCode.cs
-// #SectionEnd Title
 using _FullAppName_DAL;
+using static _FullAppName_._FullAppName_List;
+// #SectionEnd Title
 using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using static _FullAppName_._FullAppName_List;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -43,7 +43,6 @@ namespace _Namespace_
 
       _ParentName_Grid = _AppName_List._ParentName_Grid;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
-
       var _ClassName_Menu = _AppName_List._ClassName_Menu;
 
       ResetData();
@@ -61,11 +60,14 @@ namespace _Namespace_
       list._ClassName_Edit.Click += _ClassName_Edit_Click;
       list._ClassName_Delete.Click += _ClassName_Delete_Click;
       list._ClassName_Refresh.Click += _ClassName_Refresh_Click;
+      list._ClassName_Exit.Click += list.Exit_Click;
 
       // Grid events.
       var grid = _ClassName_Grid;
-      grid.MouseDoubleClick += _ClassName_Grid_MouseDoubleClick;
       grid.KeyDown += _ClassName_Grid_KeyDown;
+      grid.MouseDoubleClick += _ClassName_Grid_MouseDoubleClick;
+      grid.MouseDown += ColumnGrid_MouseDown;
+      grid.SelectionChanged += ColumnGrid_SelectionChanged;
       _AppName_List.Cursor = Cursors.Default;
     }
 
@@ -112,7 +114,6 @@ namespace _Namespace_
       _AppName_List.Cursor = Cursors.WaitCursor;
       _ClassName_Grid.LJCRowsClear();
 
-      //SetupGrid();
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
       {
         // Data from items.
@@ -196,6 +197,7 @@ namespace _Namespace_
     private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
     {
       row.LJCSetInt32(_ClassName_.ColumnID, dataRecord.ID);
+      row.LJCSetString(_ClassName_.ColumnNamr, dataRecord.Name);
     }
     #endregion
 
@@ -217,7 +219,7 @@ namespace _Namespace_
 
     // Deletes the selected row.
     // ********************
-    internal void DoDelete()
+    internal void Delete()
     {
       bool success = false;
       var row = _ClassName_Grid.CurrentRow as LJCGridRow;
@@ -262,7 +264,7 @@ namespace _Namespace_
 
     // Displays a detail dialog to edit a record.
     // ********************
-    internal void DoEdit()
+    internal void Edit()
     {
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
         && _ClassName_Grid.CurrentRow is LJCGridRow row)
@@ -286,17 +288,9 @@ namespace _Namespace_
       }
     }
 
-    // Shows the help page
-    // ********************
-    internal void DoHelp()
-    {
-      Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
-        , "_ClassName_List.html");
-    }
-
     // Displays a detail dialog for a new record.
     // ********************
-    internal void DoNew()
+    internal void New()
     {
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
       {
@@ -319,7 +313,7 @@ namespace _Namespace_
 
     // Refreshes the list.
     // ********************
-    internal void DoRefresh()
+    internal void Refresh()
     {
       _AppName_List.Cursor = Cursors.WaitCursor;
       int id = 0;
@@ -362,6 +356,14 @@ namespace _Namespace_
         _AppName_List.Cursor = Cursors.Default;
       }
       _AppName_List.DialogResult = DialogResult.OK;
+    }
+
+    // Shows the help page
+    // ********************
+    internal void ShowHelp()
+    {
+      Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
+        , "_ClassName_List.html");
     }
 
     // Adds new row or updates row with control values.
@@ -510,22 +512,139 @@ namespace _Namespace_
     }
     #endregion
 
+    #region Action Event Handlers
+
+    // Handles the New menu item event.
+    // ********************
+    private void _ClassName_New_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // Handles the Edit menu item event.
+    // ********************
+    private void _ClassName_Edit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // Handles the Delete menu item event.
+    // ********************
+    private void _ClassName_Delete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // Handles the Refresh menu item event.
+    // ********************
+    private void _ClassName_Refresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+    #endregion
+
+    #region Control Event Handlers
+
+    // Handles the Grid Doubleclick event.
+    // ********************
+    private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (_ClassName_Grid.LJCGetMouseRow(e) != null)
+      {
+        Edit();
+      }
+    }
+
+    // Handles the Grid KeyDown event.
+    // ********************
+    private void _ClassName_Grid_KeyDown(object sender, KeyEventArgs e)
+    {
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          Edit();
+          e.Handled = true;
+          break;
+
+        case Keys.F1:
+          ShowHelp();
+          e.Handled = true;
+          break;
+
+        case Keys.F5:
+          Refresh();
+          e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormCommon.GetMenuScreenPoint(ColumnGrid
+              , Control.MousePosition);
+            var menu = _AppName_List.ColumnMenu;
+            menu.Show(position);
+            menu.Select();
+            e.Handled = true;
+          }
+          break;
+
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            _AppName_List._AppName_Tabs.Select();
+          }
+          else
+          {
+            _AppName_List._AppName_Tabs.Select();
+          }
+          e.Handled = true;
+          break;
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        _ClassName_Grid.Select();
+        if (_ClassName_Grid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          _ClassName_Grid.LJCSetCurrentRow(e);
+          _AppName_List.TimedChange(Change._ClassName_);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void _ClassName_Grid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (_ClassName_Grid.LJCAllowSelectionChange)
+      {
+        _AppName_List.TimedChange(Change._ClassName_);
+      }
+      _ClassName_Grid.LJCAllowSelectionChange = true;
+    }
+    #endregion
+
     #region Properties
 
     // Gets or sets the Parent List reference.
     private _FullAppName_List _AppName_List { get; set; }
 
+    // Gets or sets the _ParentName_ Grid reference.
+    private LJCDataGrid _ParentName_Grid { get; set; }
+
     // Gets or sets the _ClassName_ Grid reference.
     private LJCDataGrid _ClassName_Grid { get; set; }
-
-    // Gets or sets the Manager reference.
-    private _ClassName_Manager _ClassName_Manager { get; set; }
 
     // Gets or sets the Managers reference.
     private Managers_AppName_ Managers { get; set; }
 
-    // Gets or sets the _ParentName_ Grid reference.
-    private LJCDataGrid _ParentName_Grid { get; set; }
+    // Gets or sets the Manager reference.
+    private _ClassName_Manager _ClassName_Manager { get; set; }
 
     // Gets or sets the Selected Record reference.
     private _ClassName_ LJCSelectedRecord { get; set; }

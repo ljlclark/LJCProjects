@@ -99,12 +99,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataMapTable RetrieveWithID(int dataTableID
+    public DataMapTable RetrieveWithParentID(int dataTableID
       , List<string> propertyNames = null)
     {
       DataMapTable retValue;
 
-      var keyColumns = GetKey(dataTableID);
+      var keyColumns = ParentKey(dataTableID);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -115,14 +115,14 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns GetKey(int id)
+    public DbColumns ParentKey(int parentID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataMapTable.ColumnDataTableID, id }
+        { DataMapTable.ColumnDataTableID, parentID }
       };
       return retValue;
     }

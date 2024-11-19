@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataTableGridCode.cs
+using static LJCDataUtility.DataUtilityList;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
-  // Provides DataTableGrid methods for the _AppName_List window.
+  // Provides DataTableGrid methods for the DataUtilityList window.
   internal class DataTableGridCode
   {
     #region Constructors
@@ -27,16 +28,16 @@ namespace LJCDataUtility
 
       ModuleGrid = UtilityList.ModuleGrid;
       TableGrid = UtilityList.TableGrid;
-      var tableMenu = UtilityList.TableMenu;
+      TableMenu = UtilityList.TableMenu;
       Managers = UtilityList.Managers;
       TableManager = Managers.DataTableManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       TableGrid.Font = new Font(fontFamily, 11, style);
-      tableMenu.Font = new Font(fontFamily, 11, style);
+      TableMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, TableGrid);
-      _ = new MenuFont(tableMenu);
+      _ = new MenuFont(TableMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -44,11 +45,14 @@ namespace LJCDataUtility
       list.TableEdit.Click += TableEdit_Click;
       list.TableDelete.Click += TableDelete_Click;
       list.TableRefresh.Click += TableRefresh_Click;
+      list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
       var grid = TableGrid;
-      grid.MouseDoubleClick += TableGrid_MouseDoubleClick;
       grid.KeyDown += TableGrid_KeyDown;
+      grid.MouseDoubleClick += TableGrid_MouseDoubleClick;
+      grid.MouseDown += TableGrid_MouseDown;
+      grid.SelectionChanged += TableGrid_SelectionChanged;
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -67,10 +71,9 @@ namespace LJCDataUtility
         // Data from items.
         int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
 
-        var keyColumns = TableManager.GetIDKey(parentID);
+        var keyColumns = TableManager.IDKey(parentID);
         var items = TableManager.Load(keyColumns);
-        if (items != null
-          && items.Count > 0)
+        if (NetCommon.HasItems(items))
         {
           foreach (var item in items)
           {
@@ -78,12 +81,14 @@ namespace LJCDataUtility
           }
         }
       }
+      SetControlState();
       UtilityList.Cursor = Cursors.Default;
+      UtilityList.DoChange(Change.Table);
     }
 
     // Adds a grid row and updates it with the record values.
     // ********************
-    private LJCGridRow RowAdd(DataTable dataRecord)
+    private LJCGridRow RowAdd(DataUtilTable dataRecord)
     {
       var retValue = TableGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
@@ -93,7 +98,7 @@ namespace LJCDataUtility
 
     // Selects a row based on the key record values.
     // ********************
-    private bool RowSelect(DataTable dataRecord)
+    private bool RowSelect(DataUtilTable dataRecord)
     {
       bool retValue = false;
 
@@ -102,7 +107,7 @@ namespace LJCDataUtility
         UtilityList.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
-          var rowID = row.LJCGetInt32(DataTable.ColumnID);
+          var rowID = row.LJCGetInt32(DataUtilTable.ColumnID);
           if (rowID == dataRecord.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -118,7 +123,7 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    private void RowUpdate(DataTable dataRecord)
+    private void RowUpdate(DataUtilTable dataRecord)
     {
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
@@ -127,11 +132,24 @@ namespace LJCDataUtility
       }
     }
 
+    // Sets the control states based on the current control values.
+    // ********************
+    private void SetControlState()
+    {
+      bool enableNew = ModuleGrid.CurrentRow != null;
+      bool enableEdit = TableGrid.CurrentRow != null;
+      FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
+      UtilityList.TableHeading.Enabled = true;
+    }
+
     // Sets the row stored values.
     // ********************
-    private void SetStoredValues(LJCGridRow row, DataTable dataRecord)
+    private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
-      row.LJCSetInt32(DataTable.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(DataUtilTable.ColumnID
+        , dataRecord.ID);
+      row.LJCSetString(DataUtilTable.ColumnName
+        , dataRecord.Name);
     }
     #endregion
 
@@ -157,11 +175,11 @@ namespace LJCDataUtility
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataTable.ColumnID);
+        var id = row.LJCGetInt32(DataUtilTable.ColumnID);
 
         var keyColumns = new DbColumns()
         {
-          { DataTable.ColumnID, id }
+          { DataUtilTable.ColumnID, id }
         };
         TableManager.Delete(keyColumns);
         if (0 == TableManager.AffectedCount)
@@ -176,7 +194,8 @@ namespace LJCDataUtility
       if (success)
       {
         TableGrid.Rows.Remove(row);
-        //UtilityList.TimedChange(Change._ClassName_);
+        SetControlState();
+        UtilityList.TimedChange(Change.Table);
       }
     }
 
@@ -184,6 +203,24 @@ namespace LJCDataUtility
     // ********************
     internal void Edit()
     {
+      if (ModuleGrid.CurrentRow is LJCGridRow parentRow
+        && TableGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        int id = row.LJCGetInt32(DataUtilityColumn.ColumnID);
+        int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
+        string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
+
+        var detail = new DataTableDetail()
+        {
+          LJCID = id,
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+      }
     }
 
     // Displays a detail dialog for a new record.
@@ -196,15 +233,13 @@ namespace LJCDataUtility
         int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
         string parentName = parentRow.LJCGetString(DataModule.ColumnName);
 
-        var location = FormCommon.GetDialogScreenPoint(TableGrid);
         var detail = new DataTableDetail
         {
-          //LJCLocation = location,
-          //LJCManagers = Managers,
-          //LJCParentID = parentID,
-          //LJCParentName = parentName
+          LJCManagers = Managers,
+          LJCParentID = parentID,
+          LJCParentName = parentName
         };
-        //detail.LJCChange += Detail_Change;
+        detail.LJCChange += Detail_Change;
         detail.ShowDialog();
       }
     }
@@ -218,14 +253,14 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
-        id = row.LJCGetInt32(DataTable.ColumnID);
+        id = row.LJCGetInt32(DataUtilTable.ColumnID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        var record = new DataTable()
+        var record = new DataUtilTable()
         {
           ID = id
         };
@@ -246,12 +281,30 @@ namespace LJCDataUtility
     // ********************
     private void Detail_Change(object sender, EventArgs e)
     {
+      var detail = sender as DataTableDetail;
+      var record = detail.LJCRecord;
+      if (record != null)
+      {
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          TableGrid.LJCSetCurrentRow(row, true);
+          SetControlState();
+          UtilityList.TimedChange(Change.Table);
+        }
+      }
     }
     #endregion
 
     #region Setup and Other Methods
 
     // Configures the Grid.
+    // ********************
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -259,9 +312,9 @@ namespace LJCDataUtility
       {
         List<string> propertyNames = new List<string>()
         {
-          DataTable.ColumnDataModuleID,
-          DataTable.ColumnName,
-          DataTable.ColumnDescription
+          DataUtilTable.ColumnDataModuleID,
+          DataUtilTable.ColumnName,
+          DataUtilTable.ColumnDescription
         };
 
         // Get the grid columns from the manager Data Definition.
@@ -273,7 +326,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Control Event Handlers
+    #region Action Event Handlers
 
     // Handles the New menu item event.
     // ********************
@@ -302,16 +355,9 @@ namespace LJCDataUtility
     {
       Refresh();
     }
+    #endregion
 
-    // Handles the Grid Doubleclick event.
-    // ********************
-    private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (TableGrid.LJCGetMouseRow(e) != null)
-      {
-        New();
-      }
-    }
+    #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
     // ********************
@@ -348,22 +394,58 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           else
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           e.Handled = true;
           break;
       }
     }
+
+    // Handles the Grid MouseDoubleClick event.
+    // ********************
+    private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (TableGrid.LJCGetMouseRow(e) != null)
+      {
+        Edit();
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void TableGrid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        TableGrid.Select();
+        if (TableGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          TableGrid.LJCSetCurrentRow(e);
+          UtilityList.TimedChange(Change.Table);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void TableGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (TableGrid.LJCAllowSelectionChange)
+      {
+        UtilityList.TimedChange(Change.Table);
+      }
+      TableGrid.LJCAllowSelectionChange = true;
+    }
     #endregion
 
     #region Properties
 
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
+    // Gets or sets the Parent List reference.
+    private DataUtilityList UtilityList { get; set; }
 
     // Gets or sets the parent Grid reference.
     private LJCDataGrid ModuleGrid { get; set; }
@@ -371,11 +453,14 @@ namespace LJCDataUtility
     // Gets or sets the Grid reference.
     private LJCDataGrid TableGrid { get; set; }
 
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip TableMenu { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
     // Gets or sets the Manager reference.
     private DataTableManager TableManager { get; set; }
-
-    // Gets or sets the Parent List reference.
-    private DataUtilityList UtilityList { get; set; }
     #endregion
   }
 }

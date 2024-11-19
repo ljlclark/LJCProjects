@@ -11,7 +11,7 @@ namespace LJCDataUtilityDAL
 {
   /// <summary>Represents a collection of DataColumn objects.</summary>
   [XmlRoot("DataColumns")]
-  public class DataColumns : List<DataColumn>
+  public class DataColumns : List<DataUtilityColumn>
   {
     #region Static Functions
 
@@ -56,7 +56,7 @@ namespace LJCDataUtilityDAL
       {
         foreach (var item in items)
         {
-          Add(new DataColumn(item));
+          Add(new DataUtilityColumn(item));
         }
       }
     }
@@ -66,9 +66,9 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataColumn Add(int id, string name)
+    public DataUtilityColumn Add(int id, string name)
     {
-      DataColumn retValue;
+      DataUtilityColumn retValue;
 
       string message = "";
       if (id <= 0)
@@ -81,7 +81,7 @@ namespace LJCDataUtilityDAL
       retValue = LJCSearchUnique(name);
       if (null == retValue)
       {
-        retValue = new DataColumn()
+        retValue = new DataUtilityColumn()
         {
           ID = id,
           Name = name
@@ -101,14 +101,14 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataColumns GetCollection(List<DataColumn> list)
+    public DataColumns GetCollection(List<DataUtilityColumn> list)
     {
       DataColumns retValue = null;
 
       if (NetCommon.HasItems(list))
       {
         retValue = new DataColumns();
-        foreach (DataColumn item in list)
+        foreach (DataUtilityColumn item in list)
         {
           retValue.Add(item);
         }
@@ -136,7 +136,7 @@ namespace LJCDataUtilityDAL
     /// <param name="name">The item unique Name value.</param>
     public void LJCRemove(string name)
     {
-      DataColumn item = Find(x => x.Name == name);
+      DataUtilityColumn item = Find(x => x.Name == name);
       if (item != null)
       {
         Remove(item);
@@ -159,12 +159,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataColumn LJCSearchID(int id)
+    public DataUtilityColumn LJCSearchID(int id)
     {
-      DataColumn retValue = null;
+      DataUtilityColumn retValue = null;
 
       LJCSortID();
-      DataColumn searchItem = new DataColumn()
+      DataUtilityColumn searchItem = new DataUtilityColumn()
       {
         ID = id
       };
@@ -182,13 +182,13 @@ namespace LJCDataUtilityDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    public DataColumn LJCSearchUnique(string name)
+    public DataUtilityColumn LJCSearchUnique(string name)
     {
-      DataColumn retValue = null;
+      DataUtilityColumn retValue = null;
 
       var comparer = new DataColumnUniqueComparer();
       LJCSortUnique(comparer);
-      DataColumn searchItem = new DataColumn()
+      DataUtilityColumn searchItem = new DataUtilityColumn()
       {
         Name = name
       };
@@ -236,7 +236,7 @@ namespace LJCDataUtilityDAL
 
     // The item for the specified name.
     /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
-    public DataColumn this[string name]
+    public DataUtilityColumn this[string name]
     {
       get { return LJCSearchUnique(name); }
     }

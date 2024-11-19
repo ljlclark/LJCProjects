@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataModuleGridCode.cs
+using static LJCDataUtility.DataUtilityList;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -26,16 +27,16 @@ namespace LJCDataUtility
       UtilityList.Cursor = Cursors.WaitCursor;
 
       ModuleGrid = UtilityList.ModuleGrid;
-      var moduleMenu = UtilityList.ModuleMenu;
+      ModuleMenu = UtilityList.ModuleMenu;
       Managers = UtilityList.Managers;
       ModuleManager = Managers.DataModuleManager;
 
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       ModuleGrid.Font = new Font(fontFamily, 11, style);
-      moduleMenu.Font = new Font(fontFamily, 11, style);
+      ModuleMenu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(UtilityList, ModuleGrid);
-      _ = new MenuFont(moduleMenu);
+      _ = new MenuFont(ModuleMenu);
 
       // Menu item events.
       var list = UtilityList;
@@ -43,11 +44,14 @@ namespace LJCDataUtility
       list.ModuleEdit.Click += ModuleEdit_Click;
       list.ModuleDelete.Click += ModuleDelete_Click;
       list.ModuleRefresh.Click += ModuleRefresh_Click;
+      list.ModuleExit.Click += list.Exit_Click;
 
       // Grid events.
       var grid = ModuleGrid;
-      grid.MouseDoubleClick += ModuleGrid_MouseDoubleClick;
       grid.KeyDown += ModuleGrid_KeyDown;
+      grid.MouseDoubleClick += ModuleGrid_MouseDoubleClick;
+      grid.MouseDown += ModuleGrid_MouseDown;
+      grid.SelectionChanged += ModuleGrid_SelectionChanged;
       UtilityList.Cursor = Cursors.Default;
     }
     #endregion
@@ -62,15 +66,16 @@ namespace LJCDataUtility
       ModuleGrid.LJCRowsClear();
 
       var items = ModuleManager.Load();
-      if (items != null
-        && items.Count > 0)
+      if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
           RowAdd(item);
         }
       }
+      SetControlState();
       UtilityList.Cursor = Cursors.Default;
+      UtilityList.DoChange(Change.Module);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -119,11 +124,22 @@ namespace LJCDataUtility
       }
     }
 
+    // Sets the control states based on the current control values.
+    // ********************
+    private void SetControlState()
+    {
+      bool enableNew = true;
+      bool enableEdit = ModuleGrid.CurrentRow != null;
+      FormCommon.SetMenuState(ModuleMenu, enableNew, enableEdit);
+      UtilityList.ModuleHeading.Enabled = true;
+    }
+
     // Sets the row stored values.
     // ********************
     private void SetStoredValues(LJCGridRow row, DataModule dataRecord)
     {
-      row.LJCSetInt32(DataModule.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(DataModule.ColumnID
+        , dataRecord.ID);
     }
     #endregion
 
@@ -149,11 +165,11 @@ namespace LJCDataUtility
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataTable.ColumnID);
+        var id = row.LJCGetInt32(DataUtilTable.ColumnID);
 
         var keyColumns = new DbColumns()
         {
-          { DataTable.ColumnID, id }
+          { DataUtilTable.ColumnID, id }
         };
         ModuleManager.Delete(keyColumns);
         if (0 == ModuleManager.AffectedCount)
@@ -168,7 +184,8 @@ namespace LJCDataUtility
       if (success)
       {
         ModuleGrid.Rows.Remove(row);
-        //UtilityList.TimedChange(Change._ClassName_);
+        SetControlState();
+        UtilityList.TimedChange(Change.Module);
       }
     }
 
@@ -181,12 +198,10 @@ namespace LJCDataUtility
         // Data from items.
         int id = row.LJCGetInt32(DataModule.ColumnID);
 
-        //var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
         var detail = new DataModuleDetail()
         {
           LJCID = id,
-          //LJCLocation = location,
-          Managers = Managers,
+          LJCManagers = Managers,
         };
         detail.LJCChange += Detail_Change;
         detail.ShowDialog();
@@ -197,13 +212,11 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
-      //var location = FormCommon.GetDialogScreenPoint(ModuleGrid);
       var detail = new DataModuleDetail
       {
-        //LJCLocation = location,
-        Managers = Managers,
+        LJCManagers = Managers,
       };
-      //detail.LJCChange += Detail_Change;
+      detail.LJCChange += Detail_Change;
       detail.ShowDialog();
     }
 
@@ -257,7 +270,8 @@ namespace LJCDataUtility
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var row = RowAdd(record);
           ModuleGrid.LJCSetCurrentRow(row, true);
-          //_AppName_List.TimedChange(Change._ClassName_);
+          SetControlState();
+          UtilityList.TimedChange(Change.Module);
         }
       }
     }
@@ -287,7 +301,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Control Event Handlers
+    #region Action Event Handlers
 
     // Handles the New menu item event.
     // ********************
@@ -316,17 +330,9 @@ namespace LJCDataUtility
     {
       Refresh();
     }
+    #endregion
 
-    // Handles the Grid Doubleclick event.
-    // ********************
-    private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ModuleGrid.LJCGetMouseRow(e) != null)
-      {
-        Edit();
-      }
-    }
-
+    #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
     // ********************
@@ -363,31 +369,69 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           else
           {
-            UtilityList.ljcTabControl1.Select();
+            UtilityList.MainTabs.Select();
           }
           e.Handled = true;
           break;
       }
     }
+
+    // Handles the MouseDoubleClick event.
+    private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (ModuleGrid.LJCGetMouseRow(e) != null)
+      {
+        Edit();
+      }
+    }
+
+    // Handles the MouseDown event.
+    private void ModuleGrid_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
+        ModuleGrid.Select();
+        if (ModuleGrid.LJCIsDifferentRow(e))
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          ModuleGrid.LJCSetCurrentRow(e);
+          UtilityList.TimedChange(Change.Module);
+        }
+      }
+    }
+
+    // Handles the SelectionChanged event.
+    private void ModuleGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (ModuleGrid.LJCAllowSelectionChange)
+      {
+        UtilityList.TimedChange(Change.Module);
+      }
+      ModuleGrid.LJCAllowSelectionChange = true;
+    }
     #endregion
 
     #region Properties
 
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
+    // Gets or sets the Parent List reference.
+    private DataUtilityList UtilityList { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ModuleGrid { get; set; }
 
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip ModuleMenu { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
     // Gets or sets the Manager reference.
     private DataModuleManager ModuleManager { get; set; }
-
-    // Gets or sets the Parent List reference.
-    private DataUtilityList UtilityList { get; set; }
     #endregion
   }
 }

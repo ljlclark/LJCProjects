@@ -31,6 +31,7 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
+    // ********************
     internal _ClassName_Detail()
     {
       InitializeComponent();
@@ -53,6 +54,7 @@ namespace _Namespace_
     #region Form Event Handlers
 
     // Handles the form keys.
+    // ********************
     private void _ClassName_Detail_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
@@ -65,6 +67,7 @@ namespace _Namespace_
     }
 
     // Configures the form and loads the initial control data.
+    // ********************
     private void _ClassName_Detail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
@@ -75,6 +78,7 @@ namespace _Namespace_
     }
 
     // Paint the form background.
+    // ********************
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -86,6 +90,7 @@ namespace _Namespace_
     #region Data Methods
 
     // Retrieves the initial control data.
+    // ********************
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -116,6 +121,7 @@ namespace _Namespace_
     }
 
     // Gets the record values and copies them to the controls.
+    // ********************
     private void GetRecordValues(_ClassName_ dataRecord)
     {
       if (dataRecord != null)
@@ -140,6 +146,7 @@ namespace _Namespace_
     }
 
     // Creates and returns a record object with the data from
+    // ********************
     private _ClassName_ SetRecordValues()
     {
       _ClassName_ retValue = null;
@@ -171,6 +178,7 @@ namespace _Namespace_
     }
 
     // Resets the empty record values.
+    // ********************
     private void ResetRecordValues(_ClassName_ dataRecord)
     {
       // In control order.
@@ -178,6 +186,7 @@ namespace _Namespace_
     }
 
     // Saves the data.
+    // ********************
     private bool DataSave()
     {
       bool retValue = true;
@@ -220,6 +229,7 @@ namespace _Namespace_
     }
 
     // Check for saved data.
+    // ********************
     private bool IsDataSaved()
     {
       bool retValue = false;
@@ -233,6 +243,7 @@ namespace _Namespace_
     }
 
     // Validates the data.
+    // ********************
     private bool IsValid()
     {
       bool retValue = true;
@@ -260,6 +271,7 @@ namespace _Namespace_
     #region Setup Methods
 
     // Configure the initial control settings.
+    // ********************
     private void ConfigureControls()
     {
       if (AutoScaleMode == AutoScaleMode.Font)
@@ -268,6 +280,7 @@ namespace _Namespace_
     }
 
     // Configures the controls and loads the selection control data.
+    // ********************
     private void InitializeControls()
     {
       // Get singleton values.
@@ -306,13 +319,15 @@ namespace _Namespace_
     }
 
     // Sets the NoSpace events.
+    // ********************
     private void SetNoSpace()
     {
       textBox.KeyPress += TextBoxNoSpace_KeyPress;
       textBox.TextChanged += TextBoxNoSpace_TextChanged;
     }
 
-    // Sets the NoSpace events.
+    // Sets the Numeric events.
+    // ********************
     private void SetNumericOnly()
     {
       textBox.KeyPress += TextBoxNumeric_KeyPress;
@@ -321,9 +336,39 @@ namespace _Namespace_
     }
     #endregion
 
+    #region KeyEdit Event Handlers
+
+    // Does not allow spaces.
+    // ********************
+    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleSpace(e.KeyChar);
+    }
+
+    // Strips blanks from the text value.
+    // ********************
+    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        var prevStart = textBox.SelectionStart;
+        textBox.Text = FormCommon.StripBlanks(textBox.Text);
+        textBox.SelectionStart = prevStart;
+      }
+    }
+
+    // Only allows numbers or edit keys.
+    // ********************
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+    }
+    #endregion
+
     #region Action Event Handlers
 
     // Save and setup for a new record.
+    // ********************
     private void DialogNew_Click(object sender, EventArgs e)
     {
       FormCancelButton.Select();
@@ -342,6 +387,7 @@ namespace _Namespace_
     }
 
     // Save and move to the Next record.
+    // ********************
     private void DialogNext_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())
@@ -361,6 +407,7 @@ namespace _Namespace_
     }
 
     // Save and move to the Previous record.
+    // ********************
     private void DialogPrevious_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())
@@ -380,6 +427,7 @@ namespace _Namespace_
     }
 
     // Shows the help page.
+    // ********************
     private void DialogMenuHelp_Click(object sender, EventArgs e)
     {
       Help.ShowHelp(this, LJCHelpFileName, HelpNavigator.Topic
@@ -391,12 +439,14 @@ namespace _Namespace_
 
     // Fires the Change event.
     /// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    // ********************
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
     }
 
     // Saves the data and closes the form.
+    // ********************
     private void OKButton_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())
@@ -404,32 +454,6 @@ namespace _Namespace_
         LJCOnChange();
         DialogResult = DialogResult.OK;
       }
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        var prevStart = textBox.SelectionStart;
-        textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = prevStart;
-      }
-    }
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
     }
     #endregion
 

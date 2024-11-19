@@ -64,36 +64,6 @@ namespace LJCDataUtilityDAL
     }
     private DataKeyManager mDataKeyManager;
 
-    /// <summary>Gets the DataMapColumnManager object.</summary>
-    public DataMapColumnManager DataMapColumnManager
-    {
-      get
-      {
-        if (null == mDataMapColumnManager)
-        {
-          mDataMapColumnManager
-            = new DataMapColumnManager(mDbServiceRef, mDataConfigName);
-        }
-        return mDataMapColumnManager;
-      }
-    }
-    private DataMapColumnManager mDataMapColumnManager;
-
-    /// <summary>Gets the DataMapTableManager object.</summary>
-    public DataMapTableManager DataMapTableManager
-    {
-      get
-      {
-        if (null == mDataMapTableManager)
-        {
-          mDataMapTableManager
-            = new DataMapTableManager(mDbServiceRef, mDataConfigName);
-        }
-        return mDataMapTableManager;
-      }
-    }
-    private DataMapTableManager mDataMapTableManager;
-
     /// <summary>Gets the DataModuleManager object.</summary>
     public DataModuleManager DataModuleManager
     {

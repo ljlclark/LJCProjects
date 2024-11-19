@@ -30,9 +30,9 @@
     {
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
-      this.ParentNameTextbox = new System.Windows.Forms.TextBox();
+      this.ParentNameText = new System.Windows.Forms.TextBox();
       this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.NameTextbox = new System.Windows.Forms.TextBox();
+      this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
@@ -46,7 +46,6 @@
       this.FormCancelButton.TabIndex = 5;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
-      this.FormCancelButton.Click += new System.EventHandler(this.FormCancelButton_Click);
       // 
       // OKButton
       // 
@@ -60,14 +59,14 @@
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
       // 
-      // ParentNameTextbox
+      // ParentNameText
       // 
-      this.ParentNameTextbox.Location = new System.Drawing.Point(254, 22);
-      this.ParentNameTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.ParentNameTextbox.Name = "ParentNameTextbox";
-      this.ParentNameTextbox.ReadOnly = true;
-      this.ParentNameTextbox.Size = new System.Drawing.Size(500, 32);
-      this.ParentNameTextbox.TabIndex = 1;
+      this.ParentNameText.Location = new System.Drawing.Point(254, 22);
+      this.ParentNameText.Margin = new System.Windows.Forms.Padding(6);
+      this.ParentNameText.Name = "ParentNameText";
+      this.ParentNameText.ReadOnly = true;
+      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
+      this.ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
@@ -79,13 +78,13 @@
       this.ParentNameLabel.TabIndex = 0;
       this.ParentNameLabel.Text = "Table";
       // 
-      // NameTextbox
+      // NameText
       // 
-      this.NameTextbox.Location = new System.Drawing.Point(254, 69);
-      this.NameTextbox.Margin = new System.Windows.Forms.Padding(6);
-      this.NameTextbox.Name = "NameTextbox";
-      this.NameTextbox.Size = new System.Drawing.Size(500, 32);
-      this.NameTextbox.TabIndex = 3;
+      this.NameText.Location = new System.Drawing.Point(254, 69);
+      this.NameText.Margin = new System.Windows.Forms.Padding(6);
+      this.NameText.Name = "NameText";
+      this.NameText.Size = new System.Drawing.Size(500, 32);
+      this.NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
@@ -95,16 +94,16 @@
       this.NameLabel.Name = "NameLabel";
       this.NameLabel.Size = new System.Drawing.Size(225, 26);
       this.NameLabel.TabIndex = 2;
-      this.NameLabel.Text = "Column";
+      this.NameLabel.Text = "New Table Name";
       // 
       // DataMapTableDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
       this.ClientSize = new System.Drawing.Size(778, 185);
-      this.Controls.Add(this.ParentNameTextbox);
+      this.Controls.Add(this.ParentNameText);
       this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.NameTextbox);
+      this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
       this.Controls.Add(this.OKButton);
@@ -123,9 +122,9 @@
 
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
-    private System.Windows.Forms.TextBox ParentNameTextbox;
+    private System.Windows.Forms.TextBox ParentNameText;
     private System.Windows.Forms.Label ParentNameLabel;
-    private System.Windows.Forms.TextBox NameTextbox;
+    private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
   }
 }

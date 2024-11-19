@@ -25,7 +25,7 @@ namespace LJCDataUtilityDAL
     public DataMapColumn(DataMapColumn item)
     {
       ChangedNames = new ChangedNames();
-      DataTableMapID = item.DataTableMapID;
+      //DataTableMapID = item.DataTableMapID;
       DataColumnID = item.DataColumnID;
       ColumnName = item.ColumnName;
       Sequence = item.Sequence;
@@ -58,11 +58,11 @@ namespace LJCDataUtilityDAL
       else
       {
         // Case sensitive.
-        retValue = DataTableMapID.CompareTo(other.DataTableMapID);
-        if (0 == retValue)
-        {
+        //retValue = DataTableMapID.CompareTo(other.DataTableMapID);
+        //if (0 == retValue)
+        //{
           retValue = DataColumnID.CompareTo(other.DataColumnID);
-        }
+        //}
 
         // Not case sensitive.
         //retValue = string.Compare(ID, other.ID, true);
@@ -74,7 +74,8 @@ namespace LJCDataUtilityDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      var retValue = $"{mDataTableMapID}: {mColumnName}";
+      //var retValue = $"{mDataTableMapID}: {mColumnName}";
+      var retValue = mColumnName;
       return retValue;
     }
     #endregion
@@ -84,18 +85,18 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the DataTableMapID value.</summary>
-    //[Required]
-    //[Column("DataTableMapID", TypeName="int")]
-    public Int32 DataTableMapID
-    {
-      get { return mDataTableMapID; }
-      set
-      {
-        mDataTableMapID = ChangedNames.Add(ColumnDataTableMapID, mDataTableMapID, value);
-      }
-    }
-    private Int32 mDataTableMapID;
+    ///// <summary>Gets or sets the DataTableMapID value.</summary>
+    ////[Required]
+    ////[Column("DataTableMapID", TypeName="int")]
+    //public Int32 DataTableMapID
+    //{
+    //  get { return mDataTableMapID; }
+    //  set
+    //  {
+    //    mDataTableMapID = ChangedNames.Add(ColumnDataTableMapID, mDataTableMapID, value);
+    //  }
+    //}
+    //private Int32 mDataTableMapID;
 
     /// <summary>Gets or sets the DataColumnID value.</summary>
     //[Required]
