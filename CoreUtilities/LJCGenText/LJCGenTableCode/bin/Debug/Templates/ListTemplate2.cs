@@ -39,7 +39,8 @@ namespace _Namespace_
 
 			// Initialize property values.
 			LJCIsSelect = false;
-		}
+      //_ = new TabsFont(MainTabs);
+    }
     #endregion
 
     #region Form Event Handlers
@@ -80,7 +81,7 @@ namespace _Namespace_
           //_ClassName_Grid.LJCSetCounter(_ClassName_Counter);
           break;
       }
-      SetControlState();
+      //SetControlState();
       Cursor = Cursors.Default;
     }
 
@@ -92,15 +93,6 @@ namespace _Namespace_
       _ClassName_
     }
 
-    #region Item Change Support
-
-    // Starts the Timer with the Change value.
-    // ********************
-    internal void TimedChange(Change change)
-    {
-      ChangeTimer.DoChange(change.ToString());
-    }
-
     // Start the Change processing.
     // ********************
     private void StartChangeProcessing()
@@ -108,6 +100,13 @@ namespace _Namespace_
       ChangeTimer = new ChangeTimer();
       ChangeTimer.ItemChange += ChangeTimer_ItemChange;
       TimedChange(Change.Startup);
+    }
+
+    // Starts the Timer with the Change value.
+    // ********************
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
     }
 
     // Change Event Handler
@@ -123,7 +122,6 @@ namespace _Namespace_
 
     // Gets or sets the ChangeTimer object.
     private ChangeTimer ChangeTimer { get; set; }
-    #endregion
     #endregion
 
     #region Action Event Handlers

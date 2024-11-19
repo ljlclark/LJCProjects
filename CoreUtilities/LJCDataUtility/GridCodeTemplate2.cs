@@ -39,7 +39,7 @@ namespace _Namespace_
     {
       // Initialize property values.
       _AppName_List = parentList;
-      _AppName_tList.Cursor = Cursors.WaitCursor;
+      _AppName_List.Cursor = Cursors.WaitCursor;
 
       _ParentName_Grid = _AppName_List._ParentName_Grid;
       _ClassName_Grid = _AppName_List._ClassName_Grid;
@@ -49,8 +49,8 @@ namespace _Namespace_
 
       var fontFamily = _AppName_List.Font.FontFamily;
       var style = _AppName_List.Font.Style;
-      ModuleGrid.Font = new Font(fontFamily, 11, style);
-      moduleMenu.Font = new Font(fontFamily, 11, style);
+      _ClassName_Grid.Font = new Font(fontFamily, 11, style);
+      _ClassName_Menu.Font = new Font(fontFamily, 11, style);
       _ = new GridFont(_AppName_List, _ClassName_Grid);
       _ = new MenuFont(_ClassName_Menu);
 
@@ -128,6 +128,7 @@ namespace _Namespace_
           }
         }
       }
+      SetControlState();
       _AppName_List.Cursor = Cursors.Default;
       _AppName_List.DoChange(Change._ClassName_);
     }
@@ -192,12 +193,24 @@ namespace _Namespace_
       }
     }
 
+    // Sets the control states based on the current control values.
+    // ********************
+    private void SetControlState()
+    {
+      bool enableNew = ParentGrid.CurrentRow != null;
+      bool enableEdit = _Classname_ColumnGrid.CurrentRow != null;
+      FormCommon.SetMenuState(_Classname_Menu, enableNew, enableEdit);
+      UtilityList._Classname_Heading.Enabled = true;
+    }
+
     // Sets the row stored values.
     // ********************
     private void SetStoredValues(LJCGridRow row, _ClassName_ dataRecord)
     {
-      row.LJCSetInt32(_ClassName_.ColumnID, dataRecord.ID);
-      row.LJCSetString(_ClassName_.ColumnNamr, dataRecord.Name);
+      row.LJCSetInt32(_ClassName_.ColumnID
+        , dataRecord.ID);
+      row.LJCSetString(_ClassName_.ColumnNamr
+        , dataRecord.Name);
     }
     #endregion
 
@@ -258,6 +271,7 @@ namespace _Namespace_
       if (success)
       {
         _ClassName_Grid.Rows.Remove(row);
+        SetControlState();
         _AppName_List.TimedChange(Change._ClassName_);
       }
     }
@@ -386,7 +400,8 @@ namespace _Namespace_
           var row = RowAdd(record);
           _ClassName_Grid.LJCSetCurrentRow(row, true);
           //CheckPreviousAndNext(detail);
-          //DoRefresh();
+          //Refresh();
+          SetControlState();
           _AppName_List.TimedChange(Change._ClassName_);
         }
       }
@@ -545,16 +560,6 @@ namespace _Namespace_
 
     #region Control Event Handlers
 
-    // Handles the Grid Doubleclick event.
-    // ********************
-    private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (_ClassName_Grid.LJCGetMouseRow(e) != null)
-      {
-        Edit();
-      }
-    }
-
     // Handles the Grid KeyDown event.
     // ********************
     private void _ClassName_Grid_KeyDown(object sender, KeyEventArgs e)
@@ -581,7 +586,7 @@ namespace _Namespace_
           {
             var position = FormCommon.GetMenuScreenPoint(ColumnGrid
               , Control.MousePosition);
-            var menu = _AppName_List.ColumnMenu;
+            var menu = _AppName_List._ClassName_Menu;
             menu.Show(position);
             menu.Select();
             e.Handled = true;
@@ -602,7 +607,18 @@ namespace _Namespace_
       }
     }
 
+    // Handles the Grid Doubleclick event.
+    // ********************
+    private void _ClassName_Grid_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (_ClassName_Grid.LJCGetMouseRow(e) != null)
+      {
+        Edit();
+      }
+    }
+
     // Handles the MouseDown event.
+    // ********************
     private void _ClassName_Grid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -619,6 +635,7 @@ namespace _Namespace_
     }
 
     // Handles the SelectionChanged event.
+    // ********************
     private void _ClassName_Grid_SelectionChanged(object sender, EventArgs e)
     {
       if (_ClassName_Grid.LJCAllowSelectionChange)
@@ -639,6 +656,9 @@ namespace _Namespace_
 
     // Gets or sets the _ClassName_ Grid reference.
     private LJCDataGrid _ClassName_Grid { get; set; }
+
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip _ClassName_Menu { get; set; }
 
     // Gets or sets the Managers reference.
     private Managers_AppName_ Managers { get; set; }

@@ -24,8 +24,17 @@ namespace LJCDataUtility
     {
       InitializeComponent();
 
-      InitializeControls();
+      // Initialize property values.
       _ = new TabsFont(MainTabs);
+    }
+    #endregion
+
+    #region Form Event Handlers
+
+    // ********************
+    private void DataUtilityList_Load(object sender, EventArgs e)
+    {
+      InitializeControls();
       CenterToScreen();
     }
     #endregion

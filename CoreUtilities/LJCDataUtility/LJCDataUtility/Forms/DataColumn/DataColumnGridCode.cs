@@ -321,7 +321,8 @@ namespace LJCDataUtility
         };
 
         // Get the grid columns from the manager Data Definition.
-        var gridColumns = ColumnManager.GetColumns(propertyNames);
+        var manager = ColumnManager;
+        var gridColumns = manager.GetColumns(propertyNames);
 
         // Setup the grid columns.
         ColumnGrid.LJCAddColumns(gridColumns);
@@ -420,6 +421,7 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDown event.
+    // ********************
     private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -436,6 +438,7 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
+    // ********************
     private void ColumnGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (ColumnGrid.LJCAllowSelectionChange)

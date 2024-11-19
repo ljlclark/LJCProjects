@@ -768,6 +768,7 @@
       this.Margin = new System.Windows.Forms.Padding(4);
       this.Name = "DataUtilityList";
       this.Text = "Data Utility";
+      this.Load += new System.EventHandler(this.DataUtilityList_Load);
       this.ModuleMenu.ResumeLayout(false);
       this.MainTabs.ResumeLayout(false);
       this.ModulePage.ResumeLayout(false);

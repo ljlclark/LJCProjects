@@ -63,8 +63,6 @@ namespace _Namespace_
 			Cursor = Cursors.Default;
 		}
 
-    #region Setup Support
-
     // Initialize the Class Data.
     // ********************
     private void InitializeClassData()
@@ -161,7 +159,6 @@ namespace _Namespace_
     //}
     //private bool mIsSplitSet;
     #endregion
-    #endregion
 
     #region Private Methods
 
@@ -194,6 +191,16 @@ namespace _Namespace_
             }
           }
 
+          // Restore Grid column sizes.
+          //Grid.LJCRestoreColumnValues(ControlValues);
+
+          // Restore Font sizes.
+          //FormCommon.RestoreTabsFontSize(MainTabs, ControlValues);
+          //Grid.LJCRestoreFontSize(ControlValues);
+
+          // Restore Menu Font sizes.
+          //FormCommon.RestoreMenuFontSize(Menu, ControlValues);
+
           // Restore Splitter, Grid and other values.
           FormCommon.RestoreSplitDistance(_ClassName_Split, ControlValues);
 
@@ -215,9 +222,6 @@ namespace _Namespace_
       Control parent = _ClassName_Tabs.Parent;
       ControlValues controlValues = new ControlValues();
 
-      // Save Grid Column values.
-      _ClassName_Grid.LJCSaveColumnValues(controlValues);
-
       // Save Splitter values.
       controlValues.Add("_ClassName_Split.SplitterDistance", 0, 0, 0
         , _ClassName_Split.SplitterDistance);
@@ -231,6 +235,16 @@ namespace _Namespace_
           , parent.Width, parent.Height);
       }
 
+      // Save Grid column sizes.
+      //Grid.LJCSaveColumnValues(controlValues);
+
+      // Save Font sizes.
+      //FormCommon.SaveTabFontSize(MainTabs, controlValues);
+      //Grid.LJCSaveFontSize(controlValues);
+
+      // Save Menu Font sizes.
+      //FormCommon.SaveMenuFontSize(Menu, controlValues);
+
       // Save other values.
       //mViewDataId = ViewCombo.LJCSelectedItemId();
       //controlValues.Add("View", mViewDataId, 0, 0, 0);
@@ -239,15 +253,15 @@ namespace _Namespace_
         , ControlValuesFileName);
     }
 
-    // Sets the control states based on the current control values.
-    // ********************
-    private void SetControlState()
-		{
-			bool enableNew = Combo.SelectedIndex != -1;
-			bool enableEdit = _ClassName_Grid.CurrentRow != null;
-			FormCommon.SetToolState(_ClassName_Tool, enableNew, enableEdit);
-			FormCommon.SetMenuState(_ClassName_Menu, enableNew, enableEdit);
-		}
+  //  // Sets the control states based on the current control values.
+  //  // ********************
+  //  private void SetControlState()
+		//{
+		//	bool enableNew = Combo.SelectedIndex != -1;
+		//	bool enableEdit = _ClassName_Grid.CurrentRow != null;
+		//	FormCommon.SetToolState(_ClassName_Tool, enableNew, enableEdit);
+		//	FormCommon.SetMenuState(_ClassName_Menu, enableNew, enableEdit);
+		//}
 
     // Sets the tab initial focus control.
     // ********************

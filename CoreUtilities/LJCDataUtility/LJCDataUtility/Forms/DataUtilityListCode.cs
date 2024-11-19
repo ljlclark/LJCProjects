@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
+  // The list form code.
   internal partial class DataUtilityList : Form
   {
     #region Setup Methods
@@ -22,8 +23,8 @@ namespace LJCDataUtility
     {
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
-      InitialControlValues();
       SetupGridCode();
+      InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
       Cursor = Cursors.Default;
@@ -46,15 +47,6 @@ namespace LJCDataUtility
       Text += $" - {Settings.DataConfigName}";
     }
 
-    // Set initial Control values.
-    // ********************
-    private void InitialControlValues()
-    {
-      NetFile.CreateFolder("ExportFiles");
-      NetFile.CreateFolder("ControlValues");
-      ControlValuesFileName = @"ControlValues\DataUtility.xml";
-    }
-
     // Setup the grid code references.
     // ********************
     private void SetupGridCode()
@@ -63,6 +55,15 @@ namespace LJCDataUtility
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
+    }
+
+    // Set initial Control values.
+    // ********************
+    private void InitialControlValues()
+    {
+      NetFile.CreateFolder("ExportFiles");
+      NetFile.CreateFolder("ControlValues");
+      ControlValuesFileName = @"ControlValues\DataUtility.xml";
     }
 
     // Setup the data grids.
