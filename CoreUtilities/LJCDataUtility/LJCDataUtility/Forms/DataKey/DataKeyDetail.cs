@@ -60,7 +60,7 @@ namespace LJCDataUtility
         LJCIsUpdate = true;
         var manager = LJCManagers.DataKeyManager;
         mOriginalRecord = manager.RetrieveWithID(LJCID);
-        GetRecordValues(mOriginalRecord);
+        GetValues(mOriginalRecord);
       }
       else
       {
@@ -76,7 +76,7 @@ namespace LJCDataUtility
 
     // Gets the record values and copies them to the controls.
     // ********************
-    private void GetRecordValues(DataKey dataRecord)
+    private void GetValues(DataKey dataRecord)
     {
       if (dataRecord != null)
       {
@@ -96,41 +96,49 @@ namespace LJCDataUtility
 
     // Creates and returns a record object with the data from
     // ********************
-    private DataKey SetRecordValues()
+    private DataKey SetValues()
     {
-      DataKey retValue = null;
-
-      if (mOriginalRecord != null)
-      {
-        retValue = mOriginalRecord.Clone();
-      }
-      if (null == retValue)
-      {
-        retValue = new DataKey();
-      }
+      var retData = GetRecord();
 
       // In control order.
-      retValue.Name = FormCommon.SetString(NameText.Text);
+      retData.Name = FormCommon.SetString(NameText.Text);
       short.TryParse(KeyTypeText.Text, out short value);
-      retValue.KeyType = value;
-      retValue.SourceColumnName = SourceColumnText.Text;
-      retValue.TargetTableName = TargetTableText.Text;
-      retValue.TargetColumnName = TargetColumnText.Text;
+      retData.KeyType = value;
+      retData.SourceColumnName = SourceColumnText.Text;
+      retData.TargetTableName = TargetTableText.Text;
+      retData.TargetColumnName = TargetColumnText.Text;
 
       // Get Reference key values.
-      retValue.ID = LJCID;
-      retValue.DataTableID = LJCParentID;
-      return retValue;
+      retData.ID = LJCID;
+      retData.DataTableID = LJCParentID;
+      return retData;
     }
 
     // Resets the empty record values.
     // ********************
-    private void ResetRecordValues(DataKey dataRecord)
+    private void ResetValues(DataKey dataRecord)
     {
       // In control order.
       dataRecord.SourceColumnName = FormCommon.SetString(dataRecord.SourceColumnName);
       dataRecord.TargetTableName = FormCommon.SetString(dataRecord.TargetTableName);
       dataRecord.TargetColumnName = FormCommon.SetString(dataRecord.TargetColumnName);
+    }
+
+    // Gets the original or new record.
+    // ********************
+    private DataKey GetRecord()
+    {
+      DataKey retRecord = null;
+
+      if (mOriginalRecord != null)
+      {
+        retRecord = mOriginalRecord.Clone();
+      }
+      if (null == retRecord)
+      {
+        retRecord = new DataKey();
+      }
+      return retRecord;
     }
 
     // Saves the data.
@@ -140,7 +148,7 @@ namespace LJCDataUtility
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
-      LJCRecord = SetRecordValues();
+      LJCRecord = SetValues();
       var manager = LJCManagers.DataKeyManager;
 
       if (retValue)
@@ -150,7 +158,7 @@ namespace LJCDataUtility
           var keyColumns = manager.IDKey(LJCID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           LJCRecord.ID = LJCID;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
@@ -158,7 +166,7 @@ namespace LJCDataUtility
         {
           LJCRecord.ID = 0;
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           if (addedRecord != null)
           {
             LJCRecord.ID = addedRecord.ID;

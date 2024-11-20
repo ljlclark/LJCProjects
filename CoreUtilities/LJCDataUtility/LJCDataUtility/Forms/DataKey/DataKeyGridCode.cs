@@ -26,12 +26,14 @@ namespace LJCDataUtility
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
 
+      // Set Grid vars.
       TableGrid = UtilityList.TableGrid;
       KeyGrid = UtilityList.KeyGrid;
       KeyMenu = UtilityList.KeyMenu;
       Managers = UtilityList.Managers;
       KeyManager = Managers.DataKeyManager;
 
+      // Fonts
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       KeyGrid.Font = new Font(fontFamily, 11, style);
@@ -412,7 +414,7 @@ namespace LJCDataUtility
     {
       if (KeyGrid.LJCGetMouseRow(e) != null)
       {
-        New();
+        Edit();
       }
     }
 

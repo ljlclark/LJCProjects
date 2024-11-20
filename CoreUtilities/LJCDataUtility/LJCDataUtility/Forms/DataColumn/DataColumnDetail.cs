@@ -62,7 +62,7 @@ namespace LJCDataUtility
         LJCIsUpdate = true;
         var manager = LJCManagers.DataColumnManager;
         mOriginalRecord = manager.RetrieveWithID(LJCID);
-        GetRecordValues(mOriginalRecord);
+        GetValues(mOriginalRecord);
       }
       else
       {
@@ -78,7 +78,7 @@ namespace LJCDataUtility
 
     // Gets the record values and copies them to the controls.
     // ********************
-    private void GetRecordValues(DataUtilityColumn dataRecord)
+    private void GetValues(DataUtilityColumn dataRecord)
     {
       if (dataRecord != null)
       {
@@ -100,36 +100,44 @@ namespace LJCDataUtility
 
     // Creates and returns a record object with the data from
     // ********************
-    private DataUtilityColumn SetRecordValues()
+    private DataUtilityColumn SetValues()
     {
-      DataUtilityColumn retValue = null;
-
-      if (mOriginalRecord != null)
-      {
-        retValue = mOriginalRecord.Clone();
-      }
-      if (null == retValue)
-      {
-        retValue = new DataUtilityColumn();
-      }
+      var retData = GetRecord();
 
       // In control order.
-      retValue.Name = FormCommon.SetString(NameText.Text);
-      retValue.Description = FormCommon.SetString(DescriptionText.Text);
+      retData.Name = FormCommon.SetString(NameText.Text);
+      retData.Description = FormCommon.SetString(DescriptionText.Text);
 
       // Get Reference key values.
-      retValue.ID = LJCID;
-      retValue.DataTableID = LJCParentID;
-      return retValue;
+      retData.ID = LJCID;
+      retData.DataTableID = LJCParentID;
+      return retData;
     }
 
     // Resets the empty record values.
     // ********************
-    private void ResetRecordValues(DataUtilityColumn dataRecord)
+    private void ResetValues(DataUtilityColumn dataRecord)
     {
       // In control order.
       dataRecord.Description
         = FormCommon.SetString(dataRecord.Description);
+    }
+
+    // Gets the original or new record.
+    // ********************
+    private DataUtilityColumn GetRecord()
+    {
+      DataUtilityColumn retRecord = null;
+
+      if (mOriginalRecord != null)
+      {
+        retRecord = mOriginalRecord.Clone();
+      }
+      if (null == retRecord)
+      {
+        retRecord = new DataUtilityColumn();
+      }
+      return retRecord;
     }
 
     // Saves the data.
@@ -139,7 +147,7 @@ namespace LJCDataUtility
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
-      LJCRecord = SetRecordValues();
+      LJCRecord = SetValues();
       var manager = LJCManagers.DataColumnManager;
 
       if (retValue)
@@ -149,7 +157,7 @@ namespace LJCDataUtility
           var keyColumns = manager.IDKey(LJCID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           LJCRecord.ID = LJCID;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
@@ -157,7 +165,7 @@ namespace LJCDataUtility
         {
           LJCRecord.ID = 0;
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           if (addedRecord != null)
           {
             LJCRecord.ID = addedRecord.ID;

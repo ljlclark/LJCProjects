@@ -59,7 +59,7 @@ namespace LJCDataUtility
         LJCIsUpdate = true;
         var manager = LJCManagers.DataModuleManager;
         mOriginalRecord = manager.RetrieveWithID(LJCID);
-        GetRecordValues(mOriginalRecord);
+        GetValues(mOriginalRecord);
       }
       else
       {
@@ -74,7 +74,7 @@ namespace LJCDataUtility
 
     // Gets the record values and copies them to the controls.
     // ********************
-    private void GetRecordValues(DataModule dataRecord)
+    private void GetValues(DataModule dataRecord)
     {
       if (dataRecord != null)
       {
@@ -86,34 +86,42 @@ namespace LJCDataUtility
 
     // Creates and returns a record object with the data from
     // ********************
-    private DataModule SetRecordValues()
+    private DataModule SetValues()
     {
-      DataModule retValue = null;
-
-      if (mOriginalRecord != null)
-      {
-        retValue = mOriginalRecord.Clone();
-      }
-      if (null == retValue)
-      {
-        retValue = new DataModule();
-      }
+      var retData = GetRecord();
 
       // In control order.
-      retValue.Name = FormCommon.SetString(NameText.Text);
-      retValue.Description = FormCommon.SetString(DescriptionText.Text);
+      retData.Name = FormCommon.SetString(NameText.Text);
+      retData.Description = FormCommon.SetString(DescriptionText.Text);
 
       // Get Reference key values.
-      retValue.ID = LJCID;
-      return retValue;
+      retData.ID = LJCID;
+      return retData;
     }
 
     // Resets the empty record values.
     // ********************
-    private void ResetRecordValues(DataModule dataRecord)
+    private void ResetValues(DataModule dataRecord)
     {
       // In control order.
       dataRecord.Description = FormCommon.SetString(dataRecord.Description);
+    }
+
+    // Gets the original or new record.
+    // ********************
+    private DataModule GetRecord()
+    {
+      DataModule retRecord = null;
+
+      if (mOriginalRecord != null)
+      {
+        retRecord = mOriginalRecord.Clone();
+      }
+      if (null == retRecord)
+      {
+        retRecord = new DataModule();
+      }
+      return retRecord;
     }
 
     // Saves the data.
@@ -123,7 +131,7 @@ namespace LJCDataUtility
       bool retValue = true;
 
       Cursor = Cursors.WaitCursor;
-      LJCRecord = SetRecordValues();
+      LJCRecord = SetValues();
       var manager = LJCManagers.DataModuleManager;
       //var lookupRecord = manager.RetrieveWithUnique(LJCRecord.Name);
       //if (manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
@@ -139,7 +147,7 @@ namespace LJCDataUtility
           var keyColumns = manager.IDKey(LJCID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           LJCRecord.ID = LJCID;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
@@ -147,7 +155,7 @@ namespace LJCDataUtility
         {
           LJCRecord.ID = 0;
           var addedRecord = manager.Add(LJCRecord);
-          ResetRecordValues(LJCRecord);
+          ResetValues(LJCRecord);
           if (addedRecord != null)
           {
             LJCRecord.ID = addedRecord.ID;

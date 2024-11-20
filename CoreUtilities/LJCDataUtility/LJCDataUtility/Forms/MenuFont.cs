@@ -5,89 +5,111 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace LJCDataUtility
 {
-  // Provides Menu MouseWheel Font sizing.
+  // Provides Menu Font sizing.
   internal class MenuFont
   {
     // Initializes an object instance.
+    // ********************
     internal MenuFont(ToolStripDropDownMenu menu)
     {
-      menu.MouseEnter += Menu_MouseEnter;
-      menu.MouseWheel += new MouseEventHandler(Menu_MouseWheel);
-      menu.KeyUp += Menu_KeyUp;
+      Menu = menu;
+      Menu.MouseEnter += Menu_MouseEnter;
+      Menu.MouseWheel += new MouseEventHandler(Menu_MouseWheel);
+      Menu.KeyUp += Menu_KeyUp;
     }
 
-    // Shpw the menu font size.
-    private void ShowFontSize(ToolStripDropDownMenu menu)
+    #region Methods
+
+    // Sets the font size value.
+    // ********************
+    private void SetFont()
     {
-      var size = menu.Font.Size;
-      var text = menu.Items[0].Text;
+      var fontFamily = Menu.Font.FontFamily;
+      var style = Menu.Font.Style;
+      Menu.Font = new Font(fontFamily, FontSize, style);
+      ShowFontSize();
+    }
+
+    // Show the menu font size.
+    // ********************
+    private void ShowFontSize()
+    {
+      var text = Menu.Items[0].Text;
       var index = text.IndexOf("[");
       if (index > 0)
       {
         text = text.Substring(0, index - 1);
       }
-      menu.Items[0].Text = $"{text} [{size}]";
+      Menu.Items[0].Text = $"{text} [{FontSize}]";
     }
+    #endregion
+
+    #region Event Handlers
 
     // Handles the menu KeyUp event.
     // ********************
     private void Menu_KeyUp(object sender, KeyEventArgs e)
     {
+      var menu = sender as ToolStripDropDownMenu;
+      FontSize = menu.Font.Size;
       if (Keys.Up == e.KeyCode
         || Keys.Down == e.KeyCode)
       {
         if (e.Control)
         {
-          var menu = sender as ToolStripDropDownMenu;
-          var size = menu.Font.Size;
           switch (e.KeyCode)
           {
             case Keys.Up:
-              size++;
+              FontSize++;
               break;
 
             case Keys.Down:
-              size--;
+              FontSize--;
               break;
           }
-          var fontFamily = menu.Font.FontFamily;
-          var style = menu.Font.Style;
-          menu.Font = new Font(fontFamily, size, style);
-          ShowFontSize(menu);
+          SetFont();
           e.Handled = true;
         }
       }
     }
 
     // Handles the MouseEnter event.
+    // ********************
     private void Menu_MouseEnter(object sender, EventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;
-      ShowFontSize(menu);
+      FontSize = menu.Font.Size;
+      ShowFontSize();
     }
 
     // Handles the menu MouseWheel event.
+    // ********************
     private void Menu_MouseWheel(object sender, MouseEventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;
-      var size = menu.Font.Size;
+      FontSize = menu.Font.Size;
       if (e.Delta > 0)
       {
-        size++;
+        FontSize++;
       }
       else
       {
-        size--;
+        FontSize--;
       }
-      var fontFamily = menu.Font.FontFamily;
-      var style = menu.Font.Style;
-      menu.Font = new Font(fontFamily, size, style);
-      ShowFontSize(menu);
+      SetFont();
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the font size value.
+    internal float FontSize { get; set; }
+
+    // Gets or sets the Menu reference.
+    private ToolStripDropDownMenu Menu { get; set; }
+    #endregion
   }
 }

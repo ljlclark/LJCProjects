@@ -26,12 +26,14 @@ namespace LJCDataUtility
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
 
+      // Set Grid vars.
       TableGrid = UtilityList.TableGrid;
       ColumnGrid = UtilityList.ColumnGrid;
       ColumnMenu = UtilityList.ColumnMenu;
       Managers = UtilityList.Managers;
       ColumnManager = Managers.DataColumnManager;
 
+      // Fonts
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       ColumnGrid.Font = new Font(fontFamily, 11, style);

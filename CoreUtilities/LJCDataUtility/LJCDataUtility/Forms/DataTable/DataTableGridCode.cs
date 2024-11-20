@@ -26,12 +26,14 @@ namespace LJCDataUtility
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
 
+      // Set Grid vars.
       ModuleGrid = UtilityList.ModuleGrid;
       TableGrid = UtilityList.TableGrid;
       TableMenu = UtilityList.TableMenu;
       Managers = UtilityList.Managers;
       TableManager = Managers.DataTableManager;
 
+      // Fonts
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       TableGrid.Font = new Font(fontFamily, 11, style);
@@ -416,6 +418,7 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDown event.
+    // ********************
     private void TableGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -432,6 +435,7 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
+    // ********************
     private void TableGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (TableGrid.LJCAllowSelectionChange)

@@ -182,7 +182,8 @@ namespace _Namespace_
     private void ResetRecordValues(_ClassName_ dataRecord)
     {
       // In control order.
-      dataRecord.Description = FormCommon.SetString(dataRecord.Description);
+      dataRecord.Description
+        = FormCommon.SetString(dataRecord.Description);
     }
 
     // Saves the data.

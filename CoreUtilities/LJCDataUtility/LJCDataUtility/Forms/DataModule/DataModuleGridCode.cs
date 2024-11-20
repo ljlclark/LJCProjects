@@ -26,11 +26,13 @@ namespace LJCDataUtility
       UtilityList = parentList;
       UtilityList.Cursor = Cursors.WaitCursor;
 
+      // Set Grid vars.
       ModuleGrid = UtilityList.ModuleGrid;
       ModuleMenu = UtilityList.ModuleMenu;
       Managers = UtilityList.Managers;
       ModuleManager = Managers.DataModuleManager;
 
+      // Fonts
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       ModuleGrid.Font = new Font(fontFamily, 11, style);
@@ -381,6 +383,7 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDoubleClick event.
+    // ********************
     private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
       if (ModuleGrid.LJCGetMouseRow(e) != null)
@@ -390,6 +393,7 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDown event.
+    // ********************
     private void ModuleGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -406,6 +410,7 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
+    // ********************
     private void ModuleGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (ModuleGrid.LJCAllowSelectionChange)
