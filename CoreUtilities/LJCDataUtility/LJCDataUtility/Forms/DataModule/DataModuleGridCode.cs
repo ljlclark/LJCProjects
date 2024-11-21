@@ -37,8 +37,12 @@ namespace LJCDataUtility
       var style = UtilityList.Font.Style;
       ModuleGrid.Font = new Font(fontFamily, 11, style);
       ModuleMenu.Font = new Font(fontFamily, 11, style);
-      _ = new GridFont(UtilityList, ModuleGrid);
-      _ = new MenuFont(ModuleMenu);
+
+      // Font change objects.
+      GridFont = new GridFont(UtilityList, ModuleGrid);
+      GridFont.FontChange += GridFont_FontChange;
+      MenuFont = new MenuFont(ModuleMenu);
+      MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
       var list = UtilityList;
@@ -336,6 +340,33 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the Grid FontChange event.
+    private void GridFont_FontChange(object sender, EventArgs e)
+    {
+      var text = UtilityList.Text;
+      var index = text.IndexOf("[");
+      if (index > 0)
+      {
+        text = UtilityList.Text.Substring(0, index - 1);
+      }
+      var fontSize = GridFont.FontSize;
+      UtilityList.Text = $"{text} [{fontSize}]";
+    }
+
+    // Handles the Menu FontChange event.
+    private void MenuFont_FontChange(object sender, EventArgs e)
+    {
+      var menu = sender as ToolStripDropDownMenu;
+      var text = menu.Items[0].Text;
+      var index = text.IndexOf("[");
+      if (index > 0)
+      {
+        text = text.Substring(0, index - 1);
+      }
+      var fontSize = MenuFont.FontSize;
+      menu.Items[0].Text = $"{text} [{fontSize}]";
+    }
+
     // Handles the Grid KeyDown event.
     // ********************
     private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
@@ -437,6 +468,12 @@ namespace LJCDataUtility
 
     // Gets or sets the Manager reference.
     private DataModuleManager ModuleManager { get; set; }
+
+    // Provides the Grid font event handlers.
+    private GridFont GridFont { get; set; }
+
+    // Provides the menu font event handlers.
+    private MenuFont MenuFont { get; set; }
     #endregion
   }
 }

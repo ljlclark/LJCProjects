@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LJCDataUtility
+namespace LJCWinFormControls
 {
-  // Provides Font sizing.
-  internal class ControlFont
+  /// <summary>Provides Font sizing.</summary>
+  public class ControlFont
   {
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
+    /// <param name="control">The ContainerControl object.</param>
     // ********************
-    internal ControlFont(ContainerControl control)
+    public ControlFont(ContainerControl control)
     {
       Control = control;
 
@@ -32,7 +33,7 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
-    // Fires the font Change event.
+    /// <summary>Fires the font Change event.</summary>
     // ********************
     protected void OnFontChange()
     {
@@ -58,8 +59,8 @@ namespace LJCDataUtility
 
     #region Properties
 
-    // Gets or sets the font size value.
-    internal float FontSize
+    /// <summary>Gets or sets the font size value.</summary>
+    public float FontSize
     {
       get { return mFontSize; }
       set
@@ -74,7 +75,7 @@ namespace LJCDataUtility
     private ContainerControl Control { get; set; }
     #endregion
 
-    // The font Change event.
-    internal event EventHandler<EventArgs> FontChange;
+    /// <summary>The font Change event.</summary>
+    public event EventHandler<EventArgs> FontChange;
   }
 }

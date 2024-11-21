@@ -5,6 +5,7 @@ using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Data;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace LJCDataUtility
       LJCParentName = null;
       LJCRecord = null;
 
-      this.MouseWheel += new MouseEventHandler(Form_MouseWheel);
+      _ = new ControlFont(this);
     }
     #endregion
 
@@ -286,25 +287,6 @@ namespace LJCDataUtility
         LJCOnChange();
         DialogResult = DialogResult.OK;
       }
-    }
-
-    // Handles the grid MouseWheel event.
-    // ********************
-    private void Form_MouseWheel(object sender
-      , MouseEventArgs e)
-    {
-      var size = this.Font.Size;
-      if (e.Delta > 0)
-      {
-        size++;
-      }
-      else
-      {
-        size--;
-      }
-      var fontFamily = this.Font.FontFamily;
-      var style = this.Font.Style;
-      this.Font = new Font(fontFamily, size, style);
     }
     #endregion
 

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace LJCDataUtility
 {
@@ -33,13 +34,17 @@ namespace LJCDataUtility
       Managers = UtilityList.Managers;
       ColumnManager = Managers.DataColumnManager;
 
-      // Fonts
+      // Set Fonts
       var fontFamily = UtilityList.Font.FontFamily;
       var style = UtilityList.Font.Style;
       ColumnGrid.Font = new Font(fontFamily, 11, style);
       ColumnMenu.Font = new Font(fontFamily, 11, style);
-      _ = new GridFont(UtilityList, ColumnGrid);
-      _ = new MenuFont(ColumnMenu);
+
+      // Font change objects.
+      GridFont = new GridFont(UtilityList, ColumnGrid);
+      GridFont.FontChange += GridFont_FontChange;
+      MenuFont = new MenuFont(ColumnMenu);
+      MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
       var list = UtilityList;
@@ -365,6 +370,33 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
+    // Handles the Grid FontChange event.
+    private void GridFont_FontChange(object sender, EventArgs e)
+    {
+      var text = UtilityList.Text;
+      var index = text.IndexOf("[");
+      if (index > 0)
+      {
+        text = UtilityList.Text.Substring(0, index - 1);
+      }
+      var fontSize = GridFont.FontSize;
+      UtilityList.Text = $"{text} [{fontSize}]";
+    }
+
+    // Handles the Menu FontChange event.
+    private void MenuFont_FontChange(object sender, EventArgs e)
+    {
+      var menu = sender as ToolStripDropDownMenu;
+      var text = menu.Items[0].Text;
+      var index = text.IndexOf("[");
+      if (index > 0)
+      {
+        text = text.Substring(0, index - 1);
+      }
+      var fontSize = MenuFont.FontSize;
+      menu.Items[0].Text = $"{text} [{fontSize}]";
+    }
+
     // Handles the Grid KeyDown event.
     // ********************
     private void ColumnGrid_KeyDown(object sender, KeyEventArgs e)
@@ -470,6 +502,12 @@ namespace LJCDataUtility
 
     // Gets or sets the Manager reference.
     private DataColumnManager ColumnManager { get; set; }
+
+    // Provides the Grid font event handlers.
+    private GridFont GridFont { get; set; }
+
+    // Provides the Menu font event handlers.
+    private MenuFont MenuFont { get; set; }
     #endregion
   }
 }

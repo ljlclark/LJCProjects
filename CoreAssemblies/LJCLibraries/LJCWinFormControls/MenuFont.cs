@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace LJCDataUtility
+namespace LJCWinFormControls
 {
-  // Provides Menu Font sizing.
-  internal class MenuFont
+  /// <summary>Provides Menu Font sizing.</summary>
+  public class MenuFont
   {
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
+    /// <param name="menu">The Menu object.</param>
     // ********************
-    internal MenuFont(ToolStripDropDownMenu menu)
+    public MenuFont(ToolStripDropDownMenu menu)
     {
       Menu = menu;
 
@@ -38,7 +38,7 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
-    // Fires the font Change event.
+    /// <summary>Fires the font Change event.</summary>
     // ********************
     protected void OnFontChange()
     {
@@ -94,8 +94,8 @@ namespace LJCDataUtility
 
     #region Properties
 
-    // Gets or sets the font size value.
-    internal float FontSize
+    /// <summary>Gets or sets the font size value.</summary>
+    public float FontSize
     {
       get { return mFontSize; }
       set
@@ -110,7 +110,7 @@ namespace LJCDataUtility
     private ToolStripDropDownMenu Menu { get; set; }
     #endregion
 
-    // The font Change event.
-    internal event EventHandler<EventArgs> FontChange;
+    /// <summary>The font Change event.</summary>
+    public event EventHandler<EventArgs> FontChange;
   }
 }

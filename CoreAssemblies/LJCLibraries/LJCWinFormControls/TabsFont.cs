@@ -6,14 +6,15 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LJCDataUtility
+namespace LJCWinFormControls
 {
-  // Provides Tabs Font sizing.
-  internal class TabsFont
+  /// <summary>Provides Tabs Font sizing.</summary>
+  public class TabsFont
   {
-    // Initializes an object instance.
+    /// <summary>Initializes an object instance.</summary>
+    /// <param name="tabControl">The LJCTabControl object.</param>
     // ********************
-    internal TabsFont(LJCTabControl tabControl)
+    public TabsFont(LJCTabControl tabControl)
     {
       Tabs = tabControl;
 
@@ -38,7 +39,7 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
-    // Fires the font Change event.
+    /// <summary>Fires the font Change event.</summary>
     // ********************
     protected void OnFontChange()
     {
@@ -106,8 +107,8 @@ namespace LJCDataUtility
 
     #region Properties
 
-    // Gets or sets the font size value.
-    internal float FontSize
+    /// <summary>Gets or sets the font size value.</summary>
+    public float FontSize
     {
       get { return mFontSize; }
       set
@@ -125,7 +126,7 @@ namespace LJCDataUtility
     private LJCTabControl Tabs { get; set; }
     #endregion
 
-    // The font Change event.
-    internal event EventHandler<EventArgs> FontChange;
+    /// <summary>The font Change event.</summary>
+    public event EventHandler<EventArgs> FontChange;
   }
 }

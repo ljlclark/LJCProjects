@@ -6,13 +6,16 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LJCDataUtility
+namespace LJCWinFormControls
 {
-  // Provides Grid Font sizing.
-  internal class GridFont
+  /// <summary>Provides Grid Font sizing.</summary>
+  public class GridFont
   {
-    // Initializes an object instance.
-    internal GridFont(ContainerControl parent, LJCDataGrid grid
+    /// <summary>Initializes an object instance.</summary>
+    /// <param name="parent"></param>
+    /// <param name="grid"></param>
+    /// <param name="autoSelect"></param>
+    public GridFont(ContainerControl parent, LJCDataGrid grid
       , bool autoSelect = true)
     {
       Parent = parent;
@@ -44,7 +47,7 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
-    // Fires the font Change event.
+    /// <summary>Fires the font Change event.</summary>
     // ********************
     protected void OnFontChange()
     {
@@ -150,11 +153,11 @@ namespace LJCDataUtility
 
     #region Properties
 
-    // Select the grid on mouse enter.
-    internal bool AutoSelect { get; set; }
+    /// <summary>Select the grid on mouse enter.</summary>
+    public bool AutoSelect { get; set; }
 
-    // Gets or sets the font size value.
-    internal float FontSize
+    /// <summary>Gets or sets the font size value.</summary>
+    public float FontSize
     {
       get { return mFontSize; }
       set
@@ -181,7 +184,7 @@ namespace LJCDataUtility
     private Control PrevControl { get; set; }
     #endregion
 
-    // The font Change event.
-    internal event EventHandler<EventArgs> FontChange;
+    /// <summary>The font Change event.</summary>
+    public event EventHandler<EventArgs> FontChange;
   }
 }
