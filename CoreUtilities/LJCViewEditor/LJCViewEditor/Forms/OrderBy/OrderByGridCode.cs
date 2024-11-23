@@ -140,7 +140,7 @@ namespace LJCViewEditor
         string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
         var grid = OrderByGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewOrderByDetail
         {
           LJCLocation = location,
@@ -149,6 +149,7 @@ namespace LJCViewEditor
           LJCTableName = EditList.TableCombo.Text,
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -165,7 +166,7 @@ namespace LJCViewEditor
         string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
         var grid = OrderByGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewOrderByDetail()
         {
           LJCID = id,
@@ -175,6 +176,7 @@ namespace LJCViewEditor
           LJCTableName = EditList.TableCombo.Text,
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

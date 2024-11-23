@@ -34,13 +34,14 @@ namespace LJCDataUtility
     #region Form Event Handlers
 
     // ********************
-    private void DataModuleDetai_Load(object sender, EventArgs e)
+    private void DataModuleDetail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      CenterToParent();
+      //CenterToParent();
+      Location = LJCLocation;
     }
     #endregion
 
@@ -290,6 +291,9 @@ namespace LJCDataUtility
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
+
+    // The form position.
+    internal Point LJCLocation { get; set; }
 
     // Gets a reference to the record object.
     internal DataModule LJCRecord { get; private set; }

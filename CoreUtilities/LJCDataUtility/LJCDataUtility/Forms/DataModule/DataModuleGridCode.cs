@@ -204,12 +204,15 @@ namespace LJCDataUtility
         // Data from items.
         int id = row.LJCGetInt32(DataModule.ColumnID);
 
+        var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
           LJCID = id,
+          LJCLocation = location,
           LJCManagers = Managers,
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -218,11 +221,14 @@ namespace LJCDataUtility
     // ********************
     internal void New()
     {
+      var location = FormPoint.DialogScreenPoint(ModuleGrid);
       var detail = new DataModuleDetail
       {
+        LJCLocation = location,
         LJCManagers = Managers,
       };
       detail.LJCChange += Detail_Change;
+      detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
       detail.ShowDialog();
     }
 
@@ -391,7 +397,7 @@ namespace LJCDataUtility
         case Keys.M:
           if (e.Control)
           {
-            var position = FormCommon.GetMenuScreenPoint(ModuleGrid
+            var position = FormPoint.MenuScreenPoint(ModuleGrid
               , Control.MousePosition);
             UtilityList.ModuleMenu.Show(position);
             UtilityList.ModuleMenu.Select();

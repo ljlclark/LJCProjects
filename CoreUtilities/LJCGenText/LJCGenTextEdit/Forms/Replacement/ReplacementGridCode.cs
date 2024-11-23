@@ -113,7 +113,7 @@ namespace LJCGenTextEdit
         string sectionName = sectionRow.LJCGetCellText("Name");
         string parentName = parentRow.LJCGetCellText("Name");
 
-        var location = FormCommon.GetDialogScreenPoint(ReplacementGrid);
+        var location = FormPoint.DialogScreenPoint(ReplacementGrid);
         detail = new ReplacementDetail()
         {
           LJCGenDataManager = GenDataManager,
@@ -122,6 +122,7 @@ namespace LJCGenTextEdit
           LJCSectionName = sectionName
         };
         detail.LJCChange += ReplacementDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -138,7 +139,7 @@ namespace LJCGenTextEdit
         string parentName = parentRow.LJCGetCellText("Name");
         string name = row.LJCGetCellText("Name");
 
-        var location = FormCommon.GetDialogScreenPoint(ReplacementGrid);
+        var location = FormPoint.DialogScreenPoint(ReplacementGrid);
         var detail = new ReplacementDetail()
         {
           LJCGenDataManager = EditList.GenDataManager,
@@ -148,6 +149,7 @@ namespace LJCGenTextEdit
           LJCSectionName = sectionName
         };
         detail.LJCChange += ReplacementDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

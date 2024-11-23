@@ -147,7 +147,7 @@ namespace LJCViewEditor
 
         var defaultName = $"Filter{FilterGrid.Rows.Count + 1}";
         var grid = FilterGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewFilterDetail
         {
           LJCDefaultName = defaultName,
@@ -156,6 +156,7 @@ namespace LJCViewEditor
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -171,7 +172,7 @@ namespace LJCViewEditor
         string parentName = parentRow.LJCGetString(ViewData.ColumnName);
 
         var grid = FilterGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewFilterDetail()
         {
           LJCID = id,
@@ -180,6 +181,7 @@ namespace LJCViewEditor
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

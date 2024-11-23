@@ -147,13 +147,14 @@ namespace LJCGenTextEdit
     // Displays a detail dialog for a new record.
     internal void DoNew()
     {
-      var location = FormCommon.GetDialogScreenPoint(SectionGrid);
+      var location = FormPoint.DialogScreenPoint(SectionGrid);
       var detail = new SectionDetail()
       {
         LJCGenDataManager = EditList.GenDataManager,
         LJCLocation = location
       };
       detail.LJCChange += SectionDetail_Change;
+      detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
       detail.ShowDialog();
     }
 
@@ -165,7 +166,7 @@ namespace LJCGenTextEdit
         // Data from items.
         string name = row.LJCGetCellText("Name");
 
-        var location = FormCommon.GetDialogScreenPoint(SectionGrid);
+        var location = FormPoint.DialogScreenPoint(SectionGrid);
         var detail = new SectionDetail()
         {
           LJCGenDataManager = EditList.GenDataManager,
@@ -173,6 +174,7 @@ namespace LJCGenTextEdit
           LJCSectionName = name
         };
         detail.LJCChange += SectionDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

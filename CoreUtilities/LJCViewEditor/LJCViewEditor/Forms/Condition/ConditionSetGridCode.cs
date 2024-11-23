@@ -148,7 +148,7 @@ namespace LJCViewEditor
         string parentName = EditListRow.LJCGetString(ViewFilter.ColumnName);
 
         var grid = ConditionSetGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewConditionSetDetail
         {
           LJCLocation = location,
@@ -156,6 +156,7 @@ namespace LJCViewEditor
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -172,7 +173,7 @@ namespace LJCViewEditor
         string parentName = EditListRow.LJCGetString(ViewFilter.ColumnName);
 
         var grid = ConditionSetGrid;
-        var location = FormCommon.GetDialogScreenPoint(grid);
+        var location = FormPoint.DialogScreenPoint(grid);
         var detail = new ViewConditionSetDetail()
         {
           LJCID = id,
@@ -181,6 +182,7 @@ namespace LJCViewEditor
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

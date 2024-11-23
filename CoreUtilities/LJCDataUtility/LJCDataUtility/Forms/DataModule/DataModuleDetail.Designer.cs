@@ -110,7 +110,7 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "DataModuleDetail";
       this.Text = "DataModule Detai";
-      this.Load += new System.EventHandler(this.DataModuleDetai_Load);
+      this.Load += new System.EventHandler(this.DataModuleDetail_Load);
       this.ResumeLayout(false);
       this.PerformLayout();
 

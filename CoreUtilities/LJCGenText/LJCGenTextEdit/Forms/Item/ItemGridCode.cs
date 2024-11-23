@@ -107,7 +107,7 @@ namespace LJCGenTextEdit
         // Data from items.
         string parentName = parentRow.LJCGetCellText("Name");
 
-        var location = FormCommon.GetDialogScreenPoint(ItemGrid);
+        var location = FormPoint.DialogScreenPoint(ItemGrid);
         var detail = new ItemDetail()
         {
           LJCGenDataManager = EditList.GenDataManager,
@@ -115,6 +115,7 @@ namespace LJCGenTextEdit
           LJCParentName = parentName
         };
         detail.LJCChange += ItemDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -129,7 +130,7 @@ namespace LJCGenTextEdit
         string parentName = parentRow.LJCGetCellText("Name");
         string name = row.LJCGetCellText("Name");
 
-        var location = FormCommon.GetDialogScreenPoint(ItemGrid);
+        var location = FormPoint.DialogScreenPoint(ItemGrid);
         var detail = new ItemDetail()
         {
           LJCGenDataManager = GenDataManager,
@@ -138,6 +139,7 @@ namespace LJCGenTextEdit
           LJCParentName = parentName
         };
         detail.LJCChange += ItemDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }

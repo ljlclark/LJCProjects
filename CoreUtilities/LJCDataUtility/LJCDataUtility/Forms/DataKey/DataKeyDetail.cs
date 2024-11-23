@@ -42,7 +42,8 @@ namespace LJCDataUtility
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      CenterToParent();
+      //CenterToParent();
+      Location = LJCLocation;
     }
     #endregion
 
@@ -300,6 +301,9 @@ namespace LJCDataUtility
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
+
+    // The form position.
+    internal Point LJCLocation { get; set; }
 
     // Gets or sets the Parent ID value.
     internal int LJCParentID { get; set; }

@@ -217,14 +217,17 @@ namespace LJCDataUtility
         int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
         string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
 
+        var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
         {
           LJCID = id,
+          LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -239,13 +242,16 @@ namespace LJCDataUtility
         int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
         string parentName = parentRow.LJCGetString(DataModule.ColumnName);
 
+        var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail
         {
+          LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -416,7 +422,7 @@ namespace LJCDataUtility
         case Keys.M:
           if (e.Control)
           {
-            var position = FormCommon.GetMenuScreenPoint(TableGrid
+            var position = FormPoint.MenuScreenPoint(TableGrid
               , Control.MousePosition);
             UtilityList.TableMenu.Show(position);
             UtilityList.TableMenu.Select();

@@ -160,7 +160,7 @@ namespace LJCViewEditor
         string tableName = ViewEditorList.TableCombo.Text;
 
         var viewTable = TableManager.RetrieveWithUniqueKey(tableName);
-        var location = FormCommon.GetDialogScreenPoint(ViewGrid);
+        var location = FormPoint.DialogScreenPoint(ViewGrid);
         var detail = new ViewDataDetail
         {
           LJCLocation = location,
@@ -168,6 +168,7 @@ namespace LJCViewEditor
           LJCParentName = tableName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -182,7 +183,7 @@ namespace LJCViewEditor
         string tableName = ViewEditorList.TableCombo.Text;
         var viewTable = TableManager.RetrieveWithUniqueKey(tableName);
 
-        var location = FormCommon.GetDialogScreenPoint(ViewGrid);
+        var location = FormPoint.DialogScreenPoint(ViewGrid);
         var detail = new ViewDataDetail()
         {
           LJCID = id,
@@ -191,6 +192,7 @@ namespace LJCViewEditor
           LJCParentName = tableName
         };
         detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
