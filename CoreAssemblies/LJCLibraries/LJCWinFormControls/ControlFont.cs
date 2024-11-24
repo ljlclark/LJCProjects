@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace LJCWinFormControls
@@ -22,16 +24,74 @@ namespace LJCWinFormControls
       Control.MouseWheel += Control_MouseWheel;
     }
 
+    // ******************************
+    #region Methods
+    // ******************************
+
     // Sets the font size value.
     // ********************
     private void SetFont()
     {
+      var rowHeight = RowHeight();
       var fontFamily = Control.Font.FontFamily;
       var style = Control.Font.Style;
       Control.Font = new Font(fontFamily, FontSize, style);
+
+      SetLabelHeight(Control.Font);
     }
 
+    // Sets the label height for the new font.
+    // ********************
+    private void SetLabelHeight(Font font)
+    {
+      foreach (Control control in Control.Controls)
+      {
+        if (control.GetType() == typeof(Label))
+        {
+          control.Font = font;
+          var size = control.Size;
+          control.Size = new Size(size.Width, font.Height + 1);
+        }
+      }
+    }
+
+    // Gets the row spacing.
+    // ********************
+    private int RowHeight()
+    {
+      var controls = Control.Controls;
+      var controlsByIndex
+        = controls.Cast<Control>().OrderBy(x => x.TabIndex);
+
+      var retHeight = 0;
+      var labelHeight = 0;
+      foreach (Control control in controlsByIndex)
+      {
+        if (control.GetType() == typeof(Label))
+        {
+          // First row must contain a label.
+          if (0 == retHeight)
+          {
+            retHeight = control.Top;
+            labelHeight = control.Height;
+          }
+
+          // Second row must contain a label.
+          // Make sure row has changed.
+          if (control.Top > retHeight + labelHeight)
+          {
+            retHeight = control.Top - retHeight;
+            break;
+          }
+        }
+      }
+      return retHeight;
+    }
+    #endregion
+
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     /// <summary>Fires the font Change event.</summary>
     // ********************
@@ -57,7 +117,9 @@ namespace LJCWinFormControls
     }
     #endregion
 
+    // ******************************
     #region Properties
+    // ******************************
 
     /// <summary>Gets or sets the font size value.</summary>
     public float FontSize

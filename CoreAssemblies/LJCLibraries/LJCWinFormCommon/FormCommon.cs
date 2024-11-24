@@ -649,18 +649,6 @@ namespace LJCWinFormCommon
     #region Screen Point Funtions
     // ********************
 
-    //// Gets the Grid target Dialog screen position.
-    ///// <include path='items/GetDialogScreenPoint/*' file='Doc/FormCommon.xml'/>
-    //// ********************
-    //public static Point GetDialogScreenPoint(DataGridView grid)
-    //{
-    //  Rectangle rectangle = GetScreenRectangle(grid);
-    //  Point gridPoint = new Point((rectangle.X + rectangle.Width) / 8
-    //    , (rectangle.Y + rectangle.Height) / 8);
-    //  var retValue = grid.Parent.PointToScreen(gridPoint);
-    //  return retValue;
-    //}
-
     // Converts the Control point to Screen point.
     /// <include path='items/GetScreenPoint/*' file='Doc/FormCommon.xml'/>
     // ********************
