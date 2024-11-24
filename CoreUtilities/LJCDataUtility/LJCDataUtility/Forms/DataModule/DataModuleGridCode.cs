@@ -146,6 +146,8 @@ namespace LJCDataUtility
     {
       row.LJCSetInt32(DataModule.ColumnID
         , dataRecord.ID);
+      row.LJCSetString(DataModule.ColumnName
+        , dataRecord.Name);
     }
     #endregion
 

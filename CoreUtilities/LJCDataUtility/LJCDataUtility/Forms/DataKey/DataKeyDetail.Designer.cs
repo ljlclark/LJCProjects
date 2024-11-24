@@ -32,15 +32,15 @@
       this.OKButton = new System.Windows.Forms.Button();
       this.ClusteredCheck = new System.Windows.Forms.CheckBox();
       this.TargetTableText = new System.Windows.Forms.TextBox();
-      this.label6 = new System.Windows.Forms.Label();
+      this.TargetTableLabel = new System.Windows.Forms.Label();
       this.TargetColumnText = new System.Windows.Forms.TextBox();
-      this.label3 = new System.Windows.Forms.Label();
+      this.TargetColumnLabel = new System.Windows.Forms.Label();
       this.SourceColumnText = new System.Windows.Forms.TextBox();
-      this.label1 = new System.Windows.Forms.Label();
+      this.SourceColumnLabel = new System.Windows.Forms.Label();
       this.ParentNameText = new System.Windows.Forms.TextBox();
       this.ParentNameLabel = new System.Windows.Forms.Label();
       this.KeyTypeText = new System.Windows.Forms.TextBox();
-      this.ValueLabel = new System.Windows.Forms.Label();
+      this.KeyTypeLabel = new System.Windows.Forms.Label();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.AscendingCheck = new System.Windows.Forms.CheckBox();
@@ -88,15 +88,14 @@
       this.TargetTableText.Size = new System.Drawing.Size(500, 32);
       this.TargetTableText.TabIndex = 9;
       // 
-      // label6
+      // TargetTableLabel
       // 
-      this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label6.Location = new System.Drawing.Point(23, 211);
-      this.label6.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-      this.label6.Name = "label6";
-      this.label6.Size = new System.Drawing.Size(225, 34);
-      this.label6.TabIndex = 8;
-      this.label6.Text = "Target Table";
+      this.TargetTableLabel.AutoSize = true;
+      this.TargetTableLabel.Location = new System.Drawing.Point(23, 216);
+      this.TargetTableLabel.Name = "TargetTableLabel";
+      this.TargetTableLabel.Size = new System.Drawing.Size(132, 26);
+      this.TargetTableLabel.TabIndex = 8;
+      this.TargetTableLabel.Text = "Target Table";
       // 
       // TargetColumnText
       // 
@@ -106,15 +105,14 @@
       this.TargetColumnText.Size = new System.Drawing.Size(500, 32);
       this.TargetColumnText.TabIndex = 11;
       // 
-      // label3
+      // TargetColumnLabel
       // 
-      this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label3.Location = new System.Drawing.Point(23, 258);
-      this.label3.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(225, 34);
-      this.label3.TabIndex = 10;
-      this.label3.Text = "Target Column";
+      this.TargetColumnLabel.AutoSize = true;
+      this.TargetColumnLabel.Location = new System.Drawing.Point(23, 263);
+      this.TargetColumnLabel.Name = "TargetColumnLabel";
+      this.TargetColumnLabel.Size = new System.Drawing.Size(155, 26);
+      this.TargetColumnLabel.TabIndex = 10;
+      this.TargetColumnLabel.Text = "Target Column";
       // 
       // SourceColumnText
       // 
@@ -124,15 +122,14 @@
       this.SourceColumnText.Size = new System.Drawing.Size(500, 32);
       this.SourceColumnText.TabIndex = 7;
       // 
-      // label1
+      // SourceColumnLabel
       // 
-      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(23, 164);
-      this.label1.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(225, 34);
-      this.label1.TabIndex = 6;
-      this.label1.Text = "Source Column";
+      this.SourceColumnLabel.AutoSize = true;
+      this.SourceColumnLabel.Location = new System.Drawing.Point(23, 169);
+      this.SourceColumnLabel.Name = "SourceColumnLabel";
+      this.SourceColumnLabel.Size = new System.Drawing.Size(163, 26);
+      this.SourceColumnLabel.TabIndex = 6;
+      this.SourceColumnLabel.Text = "Source Column";
       // 
       // ParentNameText
       // 
@@ -145,11 +142,10 @@
       // 
       // ParentNameLabel
       // 
-      this.ParentNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ParentNameLabel.Location = new System.Drawing.Point(23, 23);
-      this.ParentNameLabel.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+      this.ParentNameLabel.AutoSize = true;
+      this.ParentNameLabel.Location = new System.Drawing.Point(23, 28);
       this.ParentNameLabel.Name = "ParentNameLabel";
-      this.ParentNameLabel.Size = new System.Drawing.Size(225, 34);
+      this.ParentNameLabel.Size = new System.Drawing.Size(117, 26);
       this.ParentNameLabel.TabIndex = 0;
       this.ParentNameLabel.Text = "Data Table";
       // 
@@ -161,15 +157,14 @@
       this.KeyTypeText.Size = new System.Drawing.Size(500, 32);
       this.KeyTypeText.TabIndex = 5;
       // 
-      // ValueLabel
+      // KeyTypeLabel
       // 
-      this.ValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ValueLabel.Location = new System.Drawing.Point(23, 117);
-      this.ValueLabel.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
-      this.ValueLabel.Name = "ValueLabel";
-      this.ValueLabel.Size = new System.Drawing.Size(225, 34);
-      this.ValueLabel.TabIndex = 4;
-      this.ValueLabel.Text = "KeyType";
+      this.KeyTypeLabel.AutoSize = true;
+      this.KeyTypeLabel.Location = new System.Drawing.Point(23, 122);
+      this.KeyTypeLabel.Name = "KeyTypeLabel";
+      this.KeyTypeLabel.Size = new System.Drawing.Size(97, 26);
+      this.KeyTypeLabel.TabIndex = 4;
+      this.KeyTypeLabel.Text = "KeyType";
       // 
       // NameText
       // 
@@ -181,11 +176,10 @@
       // 
       // NameLabel
       // 
-      this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.NameLabel.Location = new System.Drawing.Point(23, 70);
-      this.NameLabel.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
+      this.NameLabel.AutoSize = true;
+      this.NameLabel.Location = new System.Drawing.Point(23, 75);
       this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(225, 34);
+      this.NameLabel.Size = new System.Drawing.Size(71, 26);
       this.NameLabel.TabIndex = 2;
       this.NameLabel.Text = "Name";
       // 
@@ -208,15 +202,15 @@
       this.Controls.Add(this.AscendingCheck);
       this.Controls.Add(this.ClusteredCheck);
       this.Controls.Add(this.TargetTableText);
-      this.Controls.Add(this.label6);
+      this.Controls.Add(this.TargetTableLabel);
       this.Controls.Add(this.TargetColumnText);
-      this.Controls.Add(this.label3);
+      this.Controls.Add(this.TargetColumnLabel);
       this.Controls.Add(this.SourceColumnText);
-      this.Controls.Add(this.label1);
+      this.Controls.Add(this.SourceColumnLabel);
       this.Controls.Add(this.ParentNameText);
       this.Controls.Add(this.ParentNameLabel);
       this.Controls.Add(this.KeyTypeText);
-      this.Controls.Add(this.ValueLabel);
+      this.Controls.Add(this.KeyTypeLabel);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -240,15 +234,15 @@
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.CheckBox ClusteredCheck;
     private System.Windows.Forms.TextBox TargetTableText;
-    private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.Label TargetTableLabel;
     private System.Windows.Forms.TextBox TargetColumnText;
-    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label TargetColumnLabel;
     private System.Windows.Forms.TextBox SourceColumnText;
-    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label SourceColumnLabel;
     private System.Windows.Forms.TextBox ParentNameText;
     private System.Windows.Forms.Label ParentNameLabel;
     private System.Windows.Forms.TextBox KeyTypeText;
-    private System.Windows.Forms.Label ValueLabel;
+    private System.Windows.Forms.Label KeyTypeLabel;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
     private System.Windows.Forms.CheckBox AscendingCheck;

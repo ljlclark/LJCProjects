@@ -5,6 +5,7 @@ using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Data;
 using System.Drawing;
@@ -28,6 +29,8 @@ namespace LJCDataUtility
       LJCID = 0;
       LJCIsUpdate = false;
       LJCRecord = null;
+
+      _ = new ControlFont(this);
     }
     #endregion
 

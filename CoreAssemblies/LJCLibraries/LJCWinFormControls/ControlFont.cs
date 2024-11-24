@@ -32,12 +32,12 @@ namespace LJCWinFormControls
     // ********************
     private void SetFont()
     {
-      var rowHeight = RowHeight();
+      //var rowHeight = RowHeight();
       var fontFamily = Control.Font.FontFamily;
       var style = Control.Font.Style;
       Control.Font = new Font(fontFamily, FontSize, style);
 
-      SetLabelHeight(Control.Font);
+      //SetLabelHeight(Control.Font);
     }
 
     // Sets the label height for the new font.

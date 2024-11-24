@@ -31,7 +31,7 @@
       this.FormCancelButton = new System.Windows.Forms.Button();
       this.OKButton = new System.Windows.Forms.Button();
       this.DescriptionText = new System.Windows.Forms.TextBox();
-      this.Descriptonlabel = new System.Windows.Forms.Label();
+      this.DescriptonLabel = new System.Windows.Forms.Label();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
       this.ParentNameText = new System.Windows.Forms.TextBox();
@@ -71,15 +71,14 @@
       this.DescriptionText.Size = new System.Drawing.Size(500, 32);
       this.DescriptionText.TabIndex = 5;
       // 
-      // Descriptonlabel
+      // DescriptonLabel
       // 
-      this.Descriptonlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.Descriptonlabel.Location = new System.Drawing.Point(24, 120);
-      this.Descriptonlabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-      this.Descriptonlabel.Name = "Descriptonlabel";
-      this.Descriptonlabel.Size = new System.Drawing.Size(225, 26);
-      this.Descriptonlabel.TabIndex = 4;
-      this.Descriptonlabel.Text = "Description";
+      this.DescriptonLabel.AutoSize = true;
+      this.DescriptonLabel.Location = new System.Drawing.Point(24, 120);
+      this.DescriptonLabel.Name = "DescriptonLabel";
+      this.DescriptonLabel.Size = new System.Drawing.Size(121, 26);
+      this.DescriptonLabel.TabIndex = 4;
+      this.DescriptonLabel.Text = "Description";
       // 
       // NameText
       // 
@@ -91,11 +90,10 @@
       // 
       // NameLabel
       // 
-      this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.NameLabel.AutoSize = true;
       this.NameLabel.Location = new System.Drawing.Point(24, 73);
-      this.NameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(225, 26);
+      this.NameLabel.Size = new System.Drawing.Size(71, 26);
       this.NameLabel.TabIndex = 2;
       this.NameLabel.Text = "Name";
       // 
@@ -104,16 +102,16 @@
       this.ParentNameText.Location = new System.Drawing.Point(255, 22);
       this.ParentNameText.Margin = new System.Windows.Forms.Padding(6);
       this.ParentNameText.Name = "ParentNameText";
+      this.ParentNameText.ReadOnly = true;
       this.ParentNameText.Size = new System.Drawing.Size(500, 32);
       this.ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
-      this.ParentNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ParentNameLabel.AutoSize = true;
       this.ParentNameLabel.Location = new System.Drawing.Point(24, 28);
-      this.ParentNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.ParentNameLabel.Name = "ParentNameLabel";
-      this.ParentNameLabel.Size = new System.Drawing.Size(225, 26);
+      this.ParentNameLabel.Size = new System.Drawing.Size(83, 26);
       this.ParentNameLabel.TabIndex = 0;
       this.ParentNameLabel.Text = "Module";
       // 
@@ -127,11 +125,10 @@
       // 
       // NewNameLabel
       // 
-      this.NewNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.NewNameLabel.AutoSize = true;
       this.NewNameLabel.Location = new System.Drawing.Point(24, 167);
-      this.NewNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
       this.NewNameLabel.Name = "NewNameLabel";
-      this.NewNameLabel.Size = new System.Drawing.Size(225, 26);
+      this.NewNameLabel.Size = new System.Drawing.Size(121, 26);
       this.NewNameLabel.TabIndex = 6;
       this.NewNameLabel.Text = "New Name";
       // 
@@ -145,7 +142,7 @@
       this.Controls.Add(this.ParentNameText);
       this.Controls.Add(this.ParentNameLabel);
       this.Controls.Add(this.DescriptionText);
-      this.Controls.Add(this.Descriptonlabel);
+      this.Controls.Add(this.DescriptonLabel);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
       this.Controls.Add(this.FormCancelButton);
@@ -166,7 +163,7 @@
     private System.Windows.Forms.Button FormCancelButton;
     private System.Windows.Forms.Button OKButton;
     private System.Windows.Forms.TextBox DescriptionText;
-    private System.Windows.Forms.Label Descriptonlabel;
+    private System.Windows.Forms.Label DescriptonLabel;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;
     private System.Windows.Forms.TextBox ParentNameText;

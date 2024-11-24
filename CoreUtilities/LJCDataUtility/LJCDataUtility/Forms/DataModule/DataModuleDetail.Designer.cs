@@ -69,11 +69,10 @@
       // 
       // DescriptionLabel
       // 
-      this.DescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.DescriptionLabel.Location = new System.Drawing.Point(23, 68);
-      this.DescriptionLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.DescriptionLabel.AutoSize = true;
+      this.DescriptionLabel.Location = new System.Drawing.Point(23, 75);
       this.DescriptionLabel.Name = "DescriptionLabel";
-      this.DescriptionLabel.Size = new System.Drawing.Size(225, 26);
+      this.DescriptionLabel.Size = new System.Drawing.Size(121, 26);
       this.DescriptionLabel.TabIndex = 2;
       this.DescriptionLabel.Text = "Description";
       // 
@@ -87,11 +86,10 @@
       // 
       // NameLabel
       // 
-      this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.NameLabel.Location = new System.Drawing.Point(23, 20);
-      this.NameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+      this.NameLabel.AutoSize = true;
+      this.NameLabel.Location = new System.Drawing.Point(23, 28);
       this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(225, 26);
+      this.NameLabel.Size = new System.Drawing.Size(71, 26);
       this.NameLabel.TabIndex = 0;
       this.NameLabel.Text = "Name";
       // 

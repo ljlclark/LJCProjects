@@ -213,9 +213,9 @@ namespace LJCDataUtility
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        int id = row.LJCGetInt32(DataUtilityColumn.ColumnID);
-        int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
-        string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
+        int id = row.LJCGetInt32(DataUtilTable.ColumnID);
+        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
+        string parentName = parentRow.LJCGetString(DataModule.ColumnName);
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
