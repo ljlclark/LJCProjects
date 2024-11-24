@@ -46,7 +46,7 @@
       this.MaxLengthLabel = new System.Windows.Forms.Label();
       this.TypeNameText = new System.Windows.Forms.TextBox();
       this.TypeNameLabel = new System.Windows.Forms.Label();
-      this.checkBox1 = new System.Windows.Forms.CheckBox();
+      this.AllowNullCheck = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // ParentNameText
@@ -209,22 +209,22 @@
       this.TypeNameLabel.TabIndex = 8;
       this.TypeNameLabel.Text = "TypeName";
       // 
-      // checkBox1
+      // AllowNullCheck
       // 
-      this.checkBox1.AutoSize = true;
-      this.checkBox1.Location = new System.Drawing.Point(254, 399);
-      this.checkBox1.Name = "checkBox1";
-      this.checkBox1.Size = new System.Drawing.Size(135, 30);
-      this.checkBox1.TabIndex = 16;
-      this.checkBox1.Text = "Allow Null";
-      this.checkBox1.UseVisualStyleBackColor = true;
+      this.AllowNullCheck.AutoSize = true;
+      this.AllowNullCheck.Location = new System.Drawing.Point(254, 399);
+      this.AllowNullCheck.Name = "AllowNullCheck";
+      this.AllowNullCheck.Size = new System.Drawing.Size(135, 30);
+      this.AllowNullCheck.TabIndex = 16;
+      this.AllowNullCheck.Text = "Allow Null";
+      this.AllowNullCheck.UseVisualStyleBackColor = true;
       // 
       // DataColumnDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
       this.ClientSize = new System.Drawing.Size(778, 514);
-      this.Controls.Add(this.checkBox1);
+      this.Controls.Add(this.AllowNullCheck);
       this.Controls.Add(this.TypeNameText);
       this.Controls.Add(this.TypeNameLabel);
       this.Controls.Add(this.MaxLengthText);
@@ -276,6 +276,6 @@
     private System.Windows.Forms.Label MaxLengthLabel;
     private System.Windows.Forms.TextBox TypeNameText;
     private System.Windows.Forms.Label TypeNameLabel;
-    private System.Windows.Forms.CheckBox checkBox1;
+    private System.Windows.Forms.CheckBox AllowNullCheck;
   }
 }

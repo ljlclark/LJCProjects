@@ -92,6 +92,8 @@ namespace LJCDataUtility
         SourceColumnText.Text = data.SourceColumnName;
         TargetTableText.Text = data.TargetTableName;
         TargetColumnText.Text = data.TargetColumnName;
+        ClusteredCheck.Checked = data.IsClustered;
+        AscendingCheck.Checked = data.IsAscending;
 
         // Reference key values.
         LJCParentID = dataRecord.DataTableID;
@@ -108,9 +110,14 @@ namespace LJCDataUtility
       retData.Name = FormCommon.SetString(NameText.Text);
       short.TryParse(KeyTypeText.Text, out short value);
       retData.KeyType = value;
-      retData.SourceColumnName = SourceColumnText.Text;
-      retData.TargetTableName = TargetTableText.Text;
-      retData.TargetColumnName = TargetColumnText.Text;
+      retData.SourceColumnName
+        = FormCommon.SetString(SourceColumnText.Text);
+      retData.TargetTableName
+        = FormCommon.SetString(TargetTableText.Text);
+      retData.TargetColumnName
+        = FormCommon.SetString(TargetColumnText.Text);
+      retData.IsClustered = ClusteredCheck.Checked;
+      retData.IsAscending = AscendingCheck.Checked;
 
       // Get Reference key values.
       retData.ID = LJCID;
@@ -123,9 +130,12 @@ namespace LJCDataUtility
     private void ResetValues(DataKey dataRecord)
     {
       // In control order.
-      dataRecord.SourceColumnName = FormCommon.SetString(dataRecord.SourceColumnName);
-      dataRecord.TargetTableName = FormCommon.SetString(dataRecord.TargetTableName);
-      dataRecord.TargetColumnName = FormCommon.SetString(dataRecord.TargetColumnName);
+      dataRecord.SourceColumnName
+        = FormCommon.SetString(dataRecord.SourceColumnName);
+      dataRecord.TargetTableName
+        = FormCommon.SetString(dataRecord.TargetTableName);
+      dataRecord.TargetColumnName
+        = FormCommon.SetString(dataRecord.TargetColumnName);
     }
 
     // Gets the original or new record.

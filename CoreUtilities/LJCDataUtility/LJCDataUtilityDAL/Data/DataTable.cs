@@ -138,7 +138,7 @@ namespace LJCDataUtilityDAL
       set
       {
         value = NetString.InitString(value);
-        mNewName = ChangedNames.Add(ColumnName, mNewName, value);
+        mNewName = ChangedNames.Add(ColumnNewName, mNewName, value);
       }
     }
     private String mNewName;
@@ -168,7 +168,7 @@ namespace LJCDataUtilityDAL
     public static string ColumnDescription = "Description";
 
     /// <summary>The NewName column name.</summary>
-    public static string NewColumnName = "NewName";
+    public static string ColumnNewName = "NewName";
 
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;

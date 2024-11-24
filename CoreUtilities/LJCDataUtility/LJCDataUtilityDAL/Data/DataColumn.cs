@@ -245,7 +245,7 @@ namespace LJCDataUtilityDAL
       {
         value = NetString.InitString(value);
         mNewName = ChangedNames.Add(ColumnNewName
-          , mName, value);
+          , mNewName, value);
       }
     }
     private String mNewName;

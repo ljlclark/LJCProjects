@@ -94,6 +94,7 @@ namespace LJCDataUtility
         IdentityStartText.Text = data.IdentityStart.ToString();
         IdentityIncrementText.Text = data.IdentityIncrement.ToString(); ;
         MaxLengthText.Text = data.MaxLength.ToString();
+        AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
         LJCParentID = data.DataTableID;
@@ -109,6 +110,22 @@ namespace LJCDataUtility
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
       retData.Description = FormCommon.SetString(DescriptionText.Text);
+
+      int.TryParse(SequenceText.Text, out int intValue);
+      retData.Sequence = intValue;
+
+      retData.TypeName = TypeNameText.Text;
+
+      short.TryParse(IdentityStartText.Text, out short shortValue);
+      retData.IdentityStart = shortValue;
+
+      short.TryParse(IdentityIncrementText.Text, out shortValue);
+      retData.IdentityIncrement = shortValue;
+
+      short.TryParse(MaxLengthText.Text, out shortValue);
+      retData.MaxLength = shortValue;
+
+      retData.AllowNull = AllowNullCheck.Checked;
 
       // Get Reference key values.
       retData.ID = LJCID;

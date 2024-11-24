@@ -77,7 +77,7 @@ namespace LJCDataUtility
         // Data from items.
         int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
 
-        var keyColumns = TableManager.IDKey(parentID);
+        var keyColumns = TableManager.ParentIDKey(parentID);
         var items = TableManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
