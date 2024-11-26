@@ -68,7 +68,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
     public DataUtilityColumn Add(int id, string name)
     {
-      DataUtilityColumn retValue;
+      DataUtilityColumn retValue = null;
 
       string message = "";
       if (id <= 0)
@@ -78,7 +78,14 @@ namespace LJCDataUtilityDAL
       NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
-      retValue = LJCSearchUnique(name);
+      // Prevent search from sorting current items.
+      var checkItems = this.Clone();
+      var duplicate = checkItems.LJCSearchUnique(name);
+      if (duplicate != null)
+      {
+        retValue = duplicate.Clone();
+      }
+
       if (null == retValue)
       {
         retValue = new DataUtilityColumn()
@@ -91,11 +98,46 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
+    // <summary>Creates and adds the object from the provided values.</summary>
+    public DataUtilityColumn Add(string name, string typeName
+      , bool allowNull = true, short maxLength = 0
+      , string defaultValue = null, short identityIncrement = 0)
+    {
+      DataUtilityColumn retValue = null;
+
+      // Prevent search from sorting current items.
+      var checkItems = Clone();
+      var duplicate = checkItems.LJCSearchUnique(name);
+      if (duplicate != null)
+      {
+        retValue = duplicate.Clone();
+      }
+
+      if (null == retValue)
+      {
+        retValue = new DataUtilityColumn()
+        {
+          Name = name,
+          TypeName = typeName,
+          AllowNull = allowNull,
+          MaxLength = maxLength,
+          DefaultValue = defaultValue,
+          IdentityIncrement = identityIncrement
+        };
+        Add(retValue);
+      }
+      return retValue;
+    }
+
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataColumns Clone()
     {
-      var retValue = MemberwiseClone() as DataColumns;
+      var retValue = new DataColumns();
+      foreach (DataUtilityColumn dataColumn in this)
+      {
+        retValue.Add(dataColumn.Clone());
+      }
       return retValue;
     }
 

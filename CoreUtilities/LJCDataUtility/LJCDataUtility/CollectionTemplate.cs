@@ -91,7 +91,14 @@ namespace _Namespace_
       NetString.ArgError(ref message, name);
       NetString.ThrowArgError(message);
 
-      retValue = LJCSearchUnique(name);
+      // Prevent search from sorting current items.
+      var checkItems = Clone();
+      var duplicate = checkItems.LJCSearchUnique(name);
+      if (duplicate != null)
+      {
+        retValue = duplicate.Clone();
+      }
+
       if (null == retValue)
       {
         retValue = new _ClassName_()
@@ -109,6 +116,11 @@ namespace _Namespace_
     public _CollectionName_ Clone()
     {
       var retValue = MemberwiseClone() as _CollectionName_;
+      var retValue = new _CollectionName_();
+      foreach (_ClassName_ item in this)
+      {
+        retValue.Add(item.Clone());
+      }
       return retValue;
     }
 

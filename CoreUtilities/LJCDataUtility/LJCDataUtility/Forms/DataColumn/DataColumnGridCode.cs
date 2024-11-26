@@ -419,11 +419,6 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.F5:
-          Refresh();
-          e.Handled = true;
-          break;
-
         case Keys.M:
           if (e.Control)
           {

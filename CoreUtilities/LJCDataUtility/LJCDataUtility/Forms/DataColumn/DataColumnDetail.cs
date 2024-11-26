@@ -110,21 +110,12 @@ namespace LJCDataUtility
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
       retData.Description = FormCommon.SetString(DescriptionText.Text);
-
-      int.TryParse(SequenceText.Text, out int intValue);
-      retData.Sequence = intValue;
-
+      retData.Sequence = NetCommon.ToInt32(SequenceText.Text);
       retData.TypeName = TypeNameText.Text;
-
-      short.TryParse(IdentityStartText.Text, out short shortValue);
-      retData.IdentityStart = shortValue;
-
-      short.TryParse(IdentityIncrementText.Text, out shortValue);
-      retData.IdentityIncrement = shortValue;
-
-      short.TryParse(MaxLengthText.Text, out shortValue);
-      retData.MaxLength = shortValue;
-
+      retData.IdentityStart = NetCommon.ToInt16(IdentityStartText.Text);
+      retData.IdentityIncrement
+        = NetCommon.ToInt16(IdentityIncrementText.Text);
+      retData.MaxLength = NetCommon.ToInt16(MaxLengthText.Text);
       retData.AllowNull = AllowNullCheck.Checked;
 
       // Get Reference key values.

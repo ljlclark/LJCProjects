@@ -956,6 +956,21 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    /// <summary>Gets an int from a text string.</summary>
+    public static int ToInt32(string text)
+    {
+      int.TryParse(text, out int value);
+      return value;
+    }
+
+    /// <summary>Gets a short from a text string.</summary>
+    public static short ToInt16(string text)
+    {
+      short.TryParse(text, out short value);
+      return value;
+    }
+
     #endregion
 
     #region DataType Names

@@ -20,6 +20,25 @@ namespace LJCDataUtilityDAL
       ChangedNames = new ChangedNames();
     }
 
+    // Initialize with main values.
+    public DataUtilityColumn(string name, string typeName
+      , bool allowNull = true, short maxLength = 0
+      , string defaultValue = null, short identityIncrement = 0)
+    {
+      ChangedNames = new ChangedNames();
+      Name = name;
+      TypeName = typeName;
+      AllowNull = allowNull;
+      MaxLength = maxLength;
+      DefaultValue = defaultValue;
+      IdentityStart = 0;
+      IdentityIncrement = identityIncrement;
+      if (IdentityIncrement > 0)
+      {
+        IdentityStart = 1;
+      }
+    }
+
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataUtilityColumn(DataUtilityColumn item)
@@ -31,11 +50,11 @@ namespace LJCDataUtilityDAL
       Description = item.Description;
       Sequence = item.Sequence;
       TypeName = item.TypeName;
-      IsIdentity = item.IsIdentity;
       IdentityStart = item.IdentityStart;
       IdentityIncrement = item.IdentityIncrement;
       MaxLength = item.MaxLength;
       AllowNull = item.AllowNull;
+      DefaultValue = item.DefaultValue;
       NewName = item.NewName;
       NewSequence = item.NewSequence;
       NewMaxLength = item.NewMaxLength;
@@ -85,18 +104,18 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="int")]
-    public Int32 ID
+    /// <summary>Gets or sets the AllowNull value.</summary>
+    //[Column("AllowNull", TypeName="bit")]
+    public Boolean AllowNull
     {
-      get { return mID; }
+      get { return mAllowNull; }
       set
       {
-        mID = ChangedNames.Add(ColumnID, mID, value);
+        mAllowNull = ChangedNames.Add(ColumnAllowNull
+          , mAllowNull, value);
       }
     }
-    private Int32 mID;
+    private Boolean mAllowNull;
 
     /// <summary>Gets or sets the DataTableID value.</summary>
     //[Required]
@@ -112,19 +131,19 @@ namespace LJCDataUtilityDAL
     }
     private Int32 mDataTableID;
 
-    /// <summary>Gets or sets the Name value.</summary>
+    /// <summary>Gets or sets the DataTableID value.</summary>
     //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
+    //[Column("DefaultValue", TypeName="nvarchar(30)")]
+    public string DefaultValue
     {
-      get { return mName; }
+      get { return mDefaultValue; }
       set
       {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
+        mDefaultValue = ChangedNames.Add(ColumnDefaultValue
+          , mDefaultValue, value);
       }
     }
-    private String mName;
+    private string mDefaultValue;
 
     /// <summary>Gets or sets the Description value.</summary>
     //[Required]
@@ -141,60 +160,18 @@ namespace LJCDataUtilityDAL
     }
     private String mDescription;
 
-    /// <summary>Gets or sets the Sequence value.</summary>
+    /// <summary>Gets or sets the ID value.</summary>
     //[Required]
-    //[Column("Sequence", TypeName="int")]
-    public Int32 Sequence
+    //[Column("ID", TypeName="int")]
+    public Int32 ID
     {
-      get { return mSequence; }
+      get { return mID; }
       set
       {
-        mSequence = ChangedNames.Add(ColumnSequence
-          , mSequence, value);
+        mID = ChangedNames.Add(ColumnID, mID, value);
       }
     }
-    private Int32 mSequence;
-
-    /// <summary>Gets or sets the TypeName value.</summary>
-    //[Required]
-    //[Column("TypeName", TypeName="nvarchar(20")]
-    public String TypeName
-    {
-      get { return mTypeName; }
-      set
-      {
-        value = NetString.InitString(value);
-        mTypeName = ChangedNames.Add(ColumnTypeName
-          , mTypeName, value);
-      }
-    }
-    private String mTypeName;
-
-    /// <summary>Gets or sets the IsIdentity value.</summary>
-    //[Column("IsIdentity", TypeName="bit")]
-    public Boolean IsIdentity
-    {
-      get { return mIsIdentity; }
-      set
-      {
-        mIsIdentity = ChangedNames.Add(ColumnIsIdentity
-          , mIsIdentity, value);
-      }
-    }
-    private Boolean mIsIdentity;
-
-    /// <summary>Gets or sets the IdentityStart value.</summary>
-    //[Column("IdentityStart", TypeName="smallint")]
-    public Int16 IdentityStart
-    {
-      get { return mIdentityStart; }
-      set
-      {
-        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
-          , mIdentityStart, value);
-      }
-    }
-    private Int16 mIdentityStart;
+    private Int32 mID;
 
     /// <summary>Gets or sets the IdentityIncrement value.</summary>
     //[Column("IdentityIncrement", TypeName="smallint")]
@@ -208,6 +185,19 @@ namespace LJCDataUtilityDAL
       }
     }
     private Int16 mIdentityIncrement;
+
+    /// <summary>Gets or sets the IdentityStart value.</summary>
+    //[Column("IdentityStart", TypeName="smallint")]
+    public Int16 IdentityStart
+    {
+      get { return mIdentityStart; }
+      set
+      {
+        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
+          , mIdentityStart, value);
+      }
+    }
+    private Int16 mIdentityStart;
 
     /// <summary>Gets or sets the MaxLength value.</summary>
     //[Required]
@@ -223,18 +213,33 @@ namespace LJCDataUtilityDAL
     }
     private Int16 mMaxLength;
 
-    /// <summary>Gets or sets the AllowNull value.</summary>
-    //[Column("AllowNull", TypeName="bit")]
-    public Boolean AllowNull
+    /// <summary>Gets or sets the Name value.</summary>
+    //[Required]
+    //[Column("Name", TypeName="nvarchar(60")]
+    public String Name
     {
-      get { return mAllowNull; }
+      get { return mName; }
       set
       {
-        mAllowNull = ChangedNames.Add(ColumnAllowNull
-          , mAllowNull, value);
+        value = NetString.InitString(value);
+        mName = ChangedNames.Add(ColumnName, mName, value);
       }
     }
-    private Boolean mAllowNull;
+    private String mName;
+
+    /// <summary>Gets or sets the MaxLength value.</summary>
+    //[Required]
+    //[Column("NewMaxLength", TypeName="smallint")]
+    public Int16 NewMaxLength
+    {
+      get { return mNewMaxLength; }
+      set
+      {
+        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
+          , mNewMaxLength, value);
+      }
+    }
+    private Int16 mNewMaxLength;
 
     /// <summary>Gets or sets the NewName value.</summary>
     //[Column("NewName", TypeName="nvarchar(60")]
@@ -264,19 +269,34 @@ namespace LJCDataUtilityDAL
     }
     private Int32 mNewSequence;
 
-    /// <summary>Gets or sets the MaxLength value.</summary>
+    /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
-    //[Column("NewMaxLength", TypeName="smallint")]
-    public Int16 NewMaxLength
+    //[Column("Sequence", TypeName="int")]
+    public Int32 Sequence
     {
-      get { return mNewMaxLength; }
+      get { return mSequence; }
       set
       {
-        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
-          , mNewMaxLength, value);
+        mSequence = ChangedNames.Add(ColumnSequence
+          , mSequence, value);
       }
     }
-    private Int16 mNewMaxLength;
+    private Int32 mSequence;
+
+    /// <summary>Gets or sets the TypeName value.</summary>
+    //[Required]
+    //[Column("TypeName", TypeName="nvarchar(20")]
+    public String TypeName
+    {
+      get { return mTypeName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mTypeName = ChangedNames.Add(ColumnTypeName
+          , mTypeName, value);
+      }
+    }
+    private String mTypeName;
     #endregion
 
     #region Class Properties
@@ -308,9 +328,6 @@ namespace LJCDataUtilityDAL
     /// <summary>The TypeName column name.</summary>
     public static string ColumnTypeName = "TypeName";
 
-    /// <summary>The IsIdentity column name.</summary>
-    public static string ColumnIsIdentity = "IsIdentity";
-
     /// <summary>The IdentityStart column name.</summary>
     public static string ColumnIdentityStart = "IdentityStart";
 
@@ -322,6 +339,9 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The AllowNull column name.</summary>
     public static string ColumnAllowNull = "AllowNull";
+
+    /// <summary>The DefaultValue column name.</summary>
+    public static string ColumnDefaultValue = "DefaultValue";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnNewName = "NewName";

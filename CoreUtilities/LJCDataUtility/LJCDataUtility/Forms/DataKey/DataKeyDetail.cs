@@ -108,8 +108,7 @@ namespace LJCDataUtility
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
-      short.TryParse(KeyTypeText.Text, out short value);
-      retData.KeyType = value;
+      retData.KeyType = NetCommon.ToInt16(KeyTypeText.Text);
       retData.SourceColumnName
         = FormCommon.SetString(SourceColumnText.Text);
       retData.TargetTableName

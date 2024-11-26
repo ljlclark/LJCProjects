@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text;
+using System.Xml.Linq;
 
 namespace LJCDataUtility
 {
@@ -51,6 +53,8 @@ namespace LJCDataUtility
       list.TableEdit.Click += TableEdit_Click;
       list.TableDelete.Click += TableDelete_Click;
       list.TableRefresh.Click += TableRefresh_Click;
+      list.TableAdd.Click += TableAdd_Click;
+      list.TableCreate.Click += TableCreate_Click;
       list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -340,6 +344,38 @@ namespace LJCDataUtility
 
     #region Action Event Handlers
 
+    // Handles the Generate Add Procedure menu item event.
+    // ********************
+    private void TableAdd_Click(object sender, EventArgs e)
+    {
+    }
+
+    // Handles the Generate Create Procedure menu item event.
+    // ********************
+    private void TableCreate_Click(object sender, EventArgs e)
+    {
+      string dbName = "LJCDataUtility";
+
+      if (TableGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var parentID = row.LJCGetInt32(DataUtilTable.ColumnID);
+        var tableName = row.LJCGetString(DataUtilTable.ColumnName);
+
+        var columnManager = Managers.DataColumnManager;
+        var keyColumns = columnManager.ParentKey(parentID);
+        var items = columnManager.Load(keyColumns);
+        if (NetCommon.HasItems(items))
+        {
+          var proc = new ProcBuilder(dbName, tableName);
+          var primaryKeyList = "ID";
+          var uniqueKeyList = "Name";
+          var value = proc.TableCreateProc(items, primaryKeyList
+            , uniqueKeyList);
+        }
+      }
+    }
+
     // Handles the New menu item event.
     // ********************
     private void TableNew_Click(object sender, EventArgs e)
@@ -411,11 +447,6 @@ namespace LJCDataUtility
 
         case Keys.F1:
           ShowHelp();
-          e.Handled = true;
-          break;
-
-        case Keys.F5:
-          Refresh();
           e.Handled = true;
           break;
 

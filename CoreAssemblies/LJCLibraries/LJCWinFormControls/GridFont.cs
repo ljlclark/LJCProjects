@@ -63,9 +63,9 @@ namespace LJCWinFormControls
     // Handles the grid KeyDown event.
     private void Grid_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
     {
-      if (e.Control)
+      if (e.Alt)
       {
-        IsControlKey = true;
+        IsAltKey = true;
         if (Keys.Up == e.KeyCode
           || Keys.Down == e.KeyCode)
         {
@@ -78,7 +78,7 @@ namespace LJCWinFormControls
     private void Grid_KeyUp(object sender, KeyEventArgs e)
     {
       FontSize = Grid.Font.Size;
-      if (e.Control
+      if (e.Alt
         && (Keys.Up == e.KeyCode
         || Keys.Down == e.KeyCode))
       {
@@ -95,14 +95,14 @@ namespace LJCWinFormControls
         SetFont();
         e.Handled = true;
       }
-      IsControlKey = false;
+      IsAltKey = false;
     }
 
     // Handles the grid Leave event.
     private void Grid_Leave(object sender, EventArgs e)
     {
       IsClicked = false;
-      IsControlKey = false;
+      IsAltKey = false;
       PrevControl = null;
     }
 
@@ -136,7 +136,8 @@ namespace LJCWinFormControls
     private void Grid_MouseWheel(object sender
       , MouseEventArgs e)
     {
-      if (!IsControlKey)
+      //if (!IsControlKey)
+      if (IsAltKey)
       {
         if (e.Delta > 0)
         {
@@ -175,7 +176,7 @@ namespace LJCWinFormControls
     private bool IsClicked { get; set; }
 
     // true if the Control key is held down; otherwise false.
-    private bool IsControlKey { get; set; }
+    private bool IsAltKey { get; set; }
 
     // The parent form.
     private ContainerControl Parent { get; set; }

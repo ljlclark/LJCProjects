@@ -82,26 +82,8 @@
       this.KeyRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
       this.KeyExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapColumnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.MapColumnHeading = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapColumnNew = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapColumnEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapColumnDelete = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapColumnRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapColumnExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapTableMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.MapTableHeading = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapTableNew = new System.Windows.Forms.ToolStripMenuItem();
-      this.MapTableEdit = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapTableDelete = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapTableRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-      this.MapTableExit = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableCreate = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.MainTabs.SuspendLayout();
       this.ModulePage.SuspendLayout();
@@ -115,8 +97,6 @@
       this.KeyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).BeginInit();
       this.KeyMenu.SuspendLayout();
-      this.MapColumnMenu.SuspendLayout();
-      this.MapTableMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // ModuleMenu
@@ -145,12 +125,14 @@
       // ModuleNew
       // 
       this.ModuleNew.Name = "ModuleNew";
+      this.ModuleNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.ModuleNew.Size = new System.Drawing.Size(195, 32);
       this.ModuleNew.Text = "&New";
       // 
       // ModuleEdit
       // 
       this.ModuleEdit.Name = "ModuleEdit";
+      this.ModuleEdit.ShortcutKeyDisplayString = "ENTER";
       this.ModuleEdit.Size = new System.Drawing.Size(195, 32);
       this.ModuleEdit.Text = "&Edit";
       // 
@@ -162,6 +144,7 @@
       // ModuleDelete
       // 
       this.ModuleDelete.Name = "ModuleDelete";
+      this.ModuleDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.ModuleDelete.Size = new System.Drawing.Size(195, 32);
       this.ModuleDelete.Text = "&Delete";
       // 
@@ -173,6 +156,7 @@
       // ModuleRefresh
       // 
       this.ModuleRefresh.Name = "ModuleRefresh";
+      this.ModuleRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.ModuleRefresh.Size = new System.Drawing.Size(195, 32);
       this.ModuleRefresh.Text = "&Refresh";
       // 
@@ -308,61 +292,67 @@
             this.TableDelete,
             this.toolStripSeparator9,
             this.TableRefresh,
+            this.TableCreate,
+            this.TableAdd,
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(175, 214);
+      this.TableMenu.Size = new System.Drawing.Size(256, 278);
       // 
       // TableHeading
       // 
       this.TableHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.TableHeading.Name = "TableHeading";
-      this.TableHeading.Size = new System.Drawing.Size(174, 32);
+      this.TableHeading.Size = new System.Drawing.Size(255, 32);
       this.TableHeading.Text = "Table Menu";
       // 
       // TableNew
       // 
       this.TableNew.Name = "TableNew";
-      this.TableNew.Size = new System.Drawing.Size(174, 32);
+      this.TableNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.TableNew.Size = new System.Drawing.Size(255, 32);
       this.TableNew.Text = "&New";
       // 
       // TableEdit
       // 
       this.TableEdit.Name = "TableEdit";
-      this.TableEdit.Size = new System.Drawing.Size(174, 32);
+      this.TableEdit.ShortcutKeyDisplayString = "ENTER";
+      this.TableEdit.Size = new System.Drawing.Size(255, 32);
       this.TableEdit.Text = "&Edit";
       // 
       // toolStripSeparator8
       // 
       this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator8.Size = new System.Drawing.Size(252, 6);
       // 
       // TableDelete
       // 
       this.TableDelete.Name = "TableDelete";
-      this.TableDelete.Size = new System.Drawing.Size(174, 32);
+      this.TableDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.TableDelete.Size = new System.Drawing.Size(255, 32);
       this.TableDelete.Text = "&Delete";
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(252, 6);
       // 
       // TableRefresh
       // 
       this.TableRefresh.Name = "TableRefresh";
-      this.TableRefresh.Size = new System.Drawing.Size(174, 32);
+      this.TableRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.TableRefresh.Size = new System.Drawing.Size(255, 32);
       this.TableRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator10
       // 
       this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(171, 6);
+      this.toolStripSeparator10.Size = new System.Drawing.Size(252, 6);
       // 
       // TableExit
       // 
       this.TableExit.Name = "TableExit";
-      this.TableExit.Size = new System.Drawing.Size(174, 32);
+      this.TableExit.Size = new System.Drawing.Size(255, 32);
       this.TableExit.Text = "E&xit";
       // 
       // ColymnPage
@@ -438,12 +428,14 @@
       // ColumnNew
       // 
       this.ColumnNew.Name = "ColumnNew";
+      this.ColumnNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
       this.ColumnNew.Size = new System.Drawing.Size(196, 32);
       this.ColumnNew.Text = "&New";
       // 
       // ColumnEdit
       // 
       this.ColumnEdit.Name = "ColumnEdit";
+      this.ColumnEdit.ShortcutKeyDisplayString = "ENTER";
       this.ColumnEdit.Size = new System.Drawing.Size(196, 32);
       this.ColumnEdit.Text = "&Edit";
       // 
@@ -455,6 +447,7 @@
       // ColumnDelete
       // 
       this.ColumnDelete.Name = "ColumnDelete";
+      this.ColumnDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
       this.ColumnDelete.Size = new System.Drawing.Size(196, 32);
       this.ColumnDelete.Text = "&Delete";
       // 
@@ -466,6 +459,7 @@
       // ColumnRefresh
       // 
       this.ColumnRefresh.Name = "ColumnRefresh";
+      this.ColumnRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.ColumnRefresh.Size = new System.Drawing.Size(196, 32);
       this.ColumnRefresh.Text = "&Refresh";
       // 
@@ -542,221 +536,83 @@
             this.toolStripSeparator16,
             this.KeyExit});
       this.KeyMenu.Name = "KeyMenu";
-      this.KeyMenu.Size = new System.Drawing.Size(163, 214);
+      this.KeyMenu.Size = new System.Drawing.Size(184, 214);
       // 
       // KeyHeading
       // 
       this.KeyHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.KeyHeading.Name = "KeyHeading";
-      this.KeyHeading.Size = new System.Drawing.Size(162, 32);
+      this.KeyHeading.Size = new System.Drawing.Size(183, 32);
       this.KeyHeading.Text = "Key Menu";
       // 
       // KeyNew
       // 
       this.KeyNew.BackColor = System.Drawing.SystemColors.Control;
       this.KeyNew.Name = "KeyNew";
-      this.KeyNew.Size = new System.Drawing.Size(162, 32);
+      this.KeyNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+      this.KeyNew.Size = new System.Drawing.Size(183, 32);
       this.KeyNew.Text = "&New";
       // 
       // KeyEdit
       // 
       this.KeyEdit.BackColor = System.Drawing.SystemColors.Control;
       this.KeyEdit.Name = "KeyEdit";
-      this.KeyEdit.Size = new System.Drawing.Size(162, 32);
+      this.KeyEdit.ShortcutKeyDisplayString = "ENTER";
+      this.KeyEdit.Size = new System.Drawing.Size(183, 32);
       this.KeyEdit.Text = "&Edit";
       // 
       // toolStripSeparator14
       // 
       this.toolStripSeparator14.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator14.Name = "toolStripSeparator14";
-      this.toolStripSeparator14.Size = new System.Drawing.Size(159, 6);
+      this.toolStripSeparator14.Size = new System.Drawing.Size(180, 6);
       // 
       // KeyDelete
       // 
       this.KeyDelete.BackColor = System.Drawing.SystemColors.Control;
       this.KeyDelete.Name = "KeyDelete";
-      this.KeyDelete.Size = new System.Drawing.Size(162, 32);
+      this.KeyDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+      this.KeyDelete.Size = new System.Drawing.Size(183, 32);
       this.KeyDelete.Text = "&Delete";
       // 
       // toolStripSeparator15
       // 
       this.toolStripSeparator15.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator15.Name = "toolStripSeparator15";
-      this.toolStripSeparator15.Size = new System.Drawing.Size(159, 6);
+      this.toolStripSeparator15.Size = new System.Drawing.Size(180, 6);
       // 
       // KeyRefresh
       // 
       this.KeyRefresh.BackColor = System.Drawing.SystemColors.Control;
       this.KeyRefresh.Name = "KeyRefresh";
-      this.KeyRefresh.Size = new System.Drawing.Size(162, 32);
+      this.KeyRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+      this.KeyRefresh.Size = new System.Drawing.Size(183, 32);
       this.KeyRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator16
       // 
       this.toolStripSeparator16.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator16.Name = "toolStripSeparator16";
-      this.toolStripSeparator16.Size = new System.Drawing.Size(159, 6);
+      this.toolStripSeparator16.Size = new System.Drawing.Size(180, 6);
       // 
       // KeyExit
       // 
       this.KeyExit.BackColor = System.Drawing.SystemColors.Control;
       this.KeyExit.Name = "KeyExit";
-      this.KeyExit.Size = new System.Drawing.Size(162, 32);
+      this.KeyExit.Size = new System.Drawing.Size(183, 32);
       this.KeyExit.Text = "E&xit";
       // 
-      // MapColumnMenu
+      // TableCreate
       // 
-      this.MapColumnMenu.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.MapColumnMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MapColumnHeading,
-            this.MapColumnNew,
-            this.MapColumnEdit,
-            this.toolStripSeparator19,
-            this.MapColumnDelete,
-            this.toolStripSeparator18,
-            this.MapColumnRefresh,
-            this.toolStripSeparator17,
-            this.MapColumnExit});
-      this.MapColumnMenu.Name = "MapColumnMenu";
-      this.MapColumnMenu.Size = new System.Drawing.Size(238, 214);
+      this.TableCreate.Name = "TableCreate";
+      this.TableCreate.Size = new System.Drawing.Size(255, 32);
+      this.TableCreate.Text = "Gen Create Procedure";
       // 
-      // MapColumnHeading
+      // TableAdd
       // 
-      this.MapColumnHeading.BackColor = System.Drawing.SystemColors.Highlight;
-      this.MapColumnHeading.Name = "MapColumnHeading";
-      this.MapColumnHeading.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnHeading.Text = "Map Column Menu";
-      // 
-      // MapColumnNew
-      // 
-      this.MapColumnNew.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnNew.Name = "MapColumnNew";
-      this.MapColumnNew.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnNew.Text = "&New";
-      // 
-      // MapColumnEdit
-      // 
-      this.MapColumnEdit.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnEdit.Name = "MapColumnEdit";
-      this.MapColumnEdit.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnEdit.Text = "&Edit";
-      // 
-      // toolStripSeparator19
-      // 
-      this.toolStripSeparator19.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator19.Name = "toolStripSeparator19";
-      this.toolStripSeparator19.Size = new System.Drawing.Size(234, 6);
-      // 
-      // MapColumnDelete
-      // 
-      this.MapColumnDelete.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnDelete.Name = "MapColumnDelete";
-      this.MapColumnDelete.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnDelete.Text = "&Delete";
-      // 
-      // toolStripSeparator18
-      // 
-      this.toolStripSeparator18.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator18.Name = "toolStripSeparator18";
-      this.toolStripSeparator18.Size = new System.Drawing.Size(234, 6);
-      // 
-      // MapColumnRefresh
-      // 
-      this.MapColumnRefresh.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnRefresh.Name = "MapColumnRefresh";
-      this.MapColumnRefresh.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnRefresh.Text = "&Refresh";
-      // 
-      // toolStripSeparator17
-      // 
-      this.toolStripSeparator17.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator17.Name = "toolStripSeparator17";
-      this.toolStripSeparator17.Size = new System.Drawing.Size(234, 6);
-      // 
-      // MapColumnExit
-      // 
-      this.MapColumnExit.BackColor = System.Drawing.SystemColors.Control;
-      this.MapColumnExit.Name = "MapColumnExit";
-      this.MapColumnExit.Size = new System.Drawing.Size(237, 32);
-      this.MapColumnExit.Text = "E&xit";
-      // 
-      // MapTableMenu
-      // 
-      this.MapTableMenu.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
-      this.MapTableMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MapTableHeading,
-            this.MapTableNew,
-            this.MapTableEdit,
-            this.toolStripSeparator11,
-            this.MapTableDelete,
-            this.toolStripSeparator12,
-            this.MapTableRefresh,
-            this.toolStripSeparator13,
-            this.MapTableExit});
-      this.MapTableMenu.Name = "MapTableMenu";
-      this.MapTableMenu.Size = new System.Drawing.Size(216, 214);
-      // 
-      // MapTableHeading
-      // 
-      this.MapTableHeading.BackColor = System.Drawing.SystemColors.Highlight;
-      this.MapTableHeading.Name = "MapTableHeading";
-      this.MapTableHeading.Size = new System.Drawing.Size(215, 32);
-      this.MapTableHeading.Text = "Map Table Menu";
-      // 
-      // MapTableNew
-      // 
-      this.MapTableNew.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableNew.Name = "MapTableNew";
-      this.MapTableNew.Size = new System.Drawing.Size(215, 32);
-      this.MapTableNew.Text = "&New";
-      // 
-      // MapTableEdit
-      // 
-      this.MapTableEdit.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableEdit.Name = "MapTableEdit";
-      this.MapTableEdit.Size = new System.Drawing.Size(215, 32);
-      this.MapTableEdit.Text = "&Edit";
-      // 
-      // toolStripSeparator11
-      // 
-      this.toolStripSeparator11.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator11.Name = "toolStripSeparator11";
-      this.toolStripSeparator11.Size = new System.Drawing.Size(212, 6);
-      // 
-      // MapTableDelete
-      // 
-      this.MapTableDelete.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableDelete.Name = "MapTableDelete";
-      this.MapTableDelete.Size = new System.Drawing.Size(215, 32);
-      this.MapTableDelete.Text = "&Delete";
-      // 
-      // toolStripSeparator12
-      // 
-      this.toolStripSeparator12.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator12.Name = "toolStripSeparator12";
-      this.toolStripSeparator12.Size = new System.Drawing.Size(212, 6);
-      // 
-      // MapTableRefresh
-      // 
-      this.MapTableRefresh.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableRefresh.Name = "MapTableRefresh";
-      this.MapTableRefresh.Size = new System.Drawing.Size(215, 32);
-      this.MapTableRefresh.Text = "&Refresh";
-      // 
-      // toolStripSeparator13
-      // 
-      this.toolStripSeparator13.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStripSeparator13.Name = "toolStripSeparator13";
-      this.toolStripSeparator13.Size = new System.Drawing.Size(212, 6);
-      // 
-      // MapTableExit
-      // 
-      this.MapTableExit.BackColor = System.Drawing.SystemColors.Control;
-      this.MapTableExit.Name = "MapTableExit";
-      this.MapTableExit.Size = new System.Drawing.Size(215, 32);
-      this.MapTableExit.Text = "E&xit";
+      this.TableAdd.Name = "TableAdd";
+      this.TableAdd.Size = new System.Drawing.Size(255, 32);
+      this.TableAdd.Text = "Gen Add Procedure";
       // 
       // DataUtilityList
       // 
@@ -782,8 +638,6 @@
       this.KeyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).EndInit();
       this.KeyMenu.ResumeLayout(false);
-      this.MapColumnMenu.ResumeLayout(false);
-      this.MapTableMenu.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -814,14 +668,6 @@
     internal System.Windows.Forms.ToolStripMenuItem KeyHeading;
     internal System.Windows.Forms.ToolStripMenuItem KeyRefresh;
     internal System.Windows.Forms.ToolStripMenuItem KeyExit;
-    internal System.Windows.Forms.ContextMenuStrip MapTableMenu;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableHeading;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableRefresh;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableExit;
-    internal System.Windows.Forms.ContextMenuStrip MapColumnMenu;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnHeading;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnRefresh;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnExit;
     internal System.Windows.Forms.ToolStripMenuItem ColumnNew;
     internal System.Windows.Forms.ToolStripMenuItem ColumnEdit;
     internal System.Windows.Forms.ToolStripMenuItem ColumnDelete;
@@ -843,21 +689,11 @@
     internal System.Windows.Forms.ToolStripMenuItem KeyNew;
     internal System.Windows.Forms.ToolStripMenuItem KeyEdit;
     internal System.Windows.Forms.ToolStripMenuItem KeyDelete;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableNew;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableEdit;
-    internal System.Windows.Forms.ToolStripMenuItem MapTableDelete;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnNew;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnEdit;
-    internal System.Windows.Forms.ToolStripMenuItem MapColumnDelete;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+    internal System.Windows.Forms.ToolStripMenuItem TableCreate;
+    internal System.Windows.Forms.ToolStripMenuItem TableAdd;
   }
 }
 
