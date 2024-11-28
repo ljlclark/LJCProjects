@@ -12,13 +12,56 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Text;
 using System.Xml.Linq;
+using System.Reflection;
+using System.Data;
+
+// Constructors
+//   internal DataTableGridCode(DataUtilityList parentList)
+// Data Methods
+//   internal void DataRetrieve()
+//   private LJCGridRow RowAdd(DataUtilTable dataRecord)
+//   private bool RowSelect(DataUtilTable dataRecord)
+//   private void RowUpdate(DataUtilTable dataRecord)
+//   private void SetControlState()
+//   private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
+// Get Value Methods
+//   private DataColumns DataColumns(out string tableName)
+// Action Methods
+//   internal void Delete()
+//   internal void Edit()
+//   internal void New()
+//   internal void Refresh()
+//   internal void ShowHelp()
+//   private void Detail_Change(object sender, EventArgs e)
+// Setup and Other Methods
+//   internal void SetupGrid()
+// Action Event Handlers
+//   private void TableAdd_Click(object sender, EventArgs e)
+//   private void TableCreate_Click(object sender, EventArgs e)
+//   private void TableNew_Click(object sender, EventArgs e)
+//   private void TableEdit_Click(object sender, EventArgs e)
+//   private void TableDelete_Click(object sender, EventArgs e)
+//   private void TableRefresh_Click(object sender, EventArgs e)
+//   private string AddProc(DataColumns dataColumns, string dbName
+//     , string tableName, string parentTableName = null)
+// Control Event Handlers
+//   private void GridFont_FontChange(object sender, EventArgs e)
+//   private void MenuFont_FontChange(object sender, EventArgs e)
+//   private void TableGrid_KeyDown(object sender, KeyEventArgs e)
+//   private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+//   private void TableGrid_MouseDown(object sender, MouseEventArgs e)
+//   private void TableGrid_SelectionChanged(object sender, EventArgs e)
+// 27 Methods
+// Properties
 
 namespace LJCDataUtility
 {
   // Provides DataTableGrid methods for the DataUtilityList window.
   internal class DataTableGridCode
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     // ********************
@@ -67,7 +110,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Data Methods
+    // ******************************
 
     // Retrieves the list rows.
     // ********************
@@ -163,7 +208,37 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
+    #region Get Value Methods
+    // ******************************
+
+    // Gets the selected row DataColumns.
+    private DataColumns DataColumns(out string tableName)
+    {
+      DataColumns retColumns = null;
+
+      tableName = null;
+      if (TableGrid.CurrentRow is LJCGridRow row)
+      {
+        // Data from items.
+        var parentID = row.LJCGetInt32(DataUtilTable.ColumnID);
+        tableName = row.LJCGetString(DataUtilTable.ColumnName);
+
+        var columnManager = Managers.DataColumnManager;
+        var keyColumns = columnManager.ParentKey(parentID);
+        var items = columnManager.Load(keyColumns);
+        if (NetCommon.HasItems(items))
+        {
+          retColumns = items;
+        }
+      }
+      return retColumns;
+    }
+    #endregion
+
+    // ******************************
     #region Action Methods
+    // ******************************
 
     // Deletes the selected row.
     // ********************
@@ -317,7 +392,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Setup and Other Methods
+    // ******************************
 
     // Configures the Grid.
     // ********************
@@ -342,12 +419,41 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Event Handlers
+    // ******************************
 
     // Handles the Generate Add Procedure menu item event.
     // ********************
     private void TableAdd_Click(object sender, EventArgs e)
     {
+      string dbName = "LJCDataUtility";
+
+      var items = DataColumns(out string tableName);
+      if (NetCommon.HasItems(items))
+      {
+        switch (tableName)
+        {
+          case "DataModule":
+            AddProc(items, dbName, tableName);
+            break;
+
+          case "DataTable":
+            AddProc(items, dbName, tableName
+              , "DataModule");
+            break;
+
+          case "DataColumn":
+            AddProc(items, dbName, tableName
+              , "DataUtilTable");
+            break;
+
+          case "DataKey":
+            AddProc(items, dbName, tableName
+              , "DataUtilTable");
+            break;
+        }
+      }
     }
 
     // Handles the Generate Create Procedure menu item event.
@@ -356,23 +462,14 @@ namespace LJCDataUtility
     {
       string dbName = "LJCDataUtility";
 
-      if (TableGrid.CurrentRow is LJCGridRow row)
+      var items = DataColumns(out string tableName);
+      if (NetCommon.HasItems(items))
       {
-        // Data from items.
-        var parentID = row.LJCGetInt32(DataUtilTable.ColumnID);
-        var tableName = row.LJCGetString(DataUtilTable.ColumnName);
-
-        var columnManager = Managers.DataColumnManager;
-        var keyColumns = columnManager.ParentKey(parentID);
-        var items = columnManager.Load(keyColumns);
-        if (NetCommon.HasItems(items))
-        {
-          var proc = new ProcBuilder(dbName, tableName);
-          var primaryKeyList = "ID";
-          var uniqueKeyList = "Name";
-          var value = proc.TableCreateProc(items, primaryKeyList
-            , uniqueKeyList);
-        }
+        var proc = new ProcBuilder(dbName, tableName);
+        var primaryKeyList = "ID";
+        var uniqueKeyList = "Name";
+        var value = proc.CreateTableProc(items, primaryKeyList
+          , uniqueKeyList);
       }
     }
 
@@ -403,11 +500,78 @@ namespace LJCDataUtility
     {
       Refresh();
     }
+
+    // Create the Add data procedure.
+    // ********************
+    private string AddProc(DataColumns dataColumns, string dbName
+      , string tableName, string parentTableName = null)
+    //, string parentSearchValue = null)
+    {
+      string retString = null;
+
+      if (dataColumns != null)
+      {
+        var proc = new ProcBuilder(dbName, tableName);
+        proc.Begin();
+
+        // Parameters
+        var parmFindName = "";
+        var parentFindColumnName = "Name";
+        var isFirst = true;
+        if (NetString.HasValue(parentTableName))
+        {
+          // "@tableNameFindName"
+          parmFindName = $"@{parentTableName}{parentFindColumnName}";
+          proc.Text($"{parmFindName} nvarchar(60)");
+          isFirst = false;
+        }
+        var parameters = proc.Parameters(dataColumns
+          , isFirst);
+        proc.Line(parameters);
+
+        proc.Line("AS");
+        proc.Line("BEGIN");
+
+        // Parent table.
+        if (NetString.HasValue(parentTableName))
+        {
+          var parentIDColumnName = "ID";
+          var varRefName = $"{parentTableName}{parentIDColumnName}";
+          var line = proc.IFItem(parentTableName
+            , parentIDColumnName, parentFindColumnName
+            , parmFindName);
+          line += "\r\n";
+          line += $"IF {varRefName} IS NOT NULL";
+          proc.Text(line);
+        }
+
+        // Table
+        proc.Line($"IF NOT EXISTS(SELECT ID FROM {tableName}");
+        proc.Line(" WHERE Name = @name)");
+        proc.Line($"  INSERT INTO {tableName}");
+
+        // Column list.
+        var insertList = proc.InsertList(dataColumns);
+        proc.Line(insertList);
+
+        // Values list.
+        var valuesList = proc.ValuesList(dataColumns);
+        proc.Line(valuesList);
+
+        proc.Line("END");
+
+        retString = proc.ToString();
+      }
+      return retString;
+    }
     #endregion
 
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     // Handles the Grid FontChange event.
+    // ********************
     private void GridFont_FontChange(object sender, EventArgs e)
     {
       var text = UtilityList.Text;
@@ -421,6 +585,7 @@ namespace LJCDataUtility
     }
 
     // Handles the Menu FontChange event.
+    // ********************
     private void MenuFont_FontChange(object sender, EventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;
@@ -514,7 +679,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Properties
+    // ******************************
 
     // Gets or sets the Parent List reference.
     private DataUtilityList UtilityList { get; set; }
