@@ -93,10 +93,11 @@ namespace LJCDataUtility
     // ********************
     public string Begin()
     {
+      var addProcName = $"{CreateProcName}Add";
       var b = new StringBuilder(512);
       b.AppendLine("/* Copyright(c) Lester J. Clark and Contributors. */");
       b.AppendLine("/* Licensed under the MIT License. */");
-      b.AppendLine($"/* {CreateProcName} */");
+      b.AppendLine($"/* {addProcName}.sql */");
       b.AppendLine($"USE[{DBName}]");
       b.AppendLine("GO");
       b.AppendLine("SET ANSI_NULLS ON");
@@ -104,11 +105,11 @@ namespace LJCDataUtility
       b.AppendLine("SET QUOTED_IDENTIFIER ON");
       b.AppendLine("GO");
       b.AppendLine("");
-      b.AppendLine($"IF OBJECT_ID('{CreateProcName}', N'p')");
+      b.AppendLine($"IF OBJECT_ID(' [dbo].[{addProcName}]', N'p')");
       b.AppendLine(" IS NOT NULL");
-      b.AppendLine($"  DROP PROCEDURE[dbo].[{CreateProcName}];");
+      b.AppendLine($"  DROP PROCEDURE [dbo].[{addProcName}];");
       b.AppendLine("GO");
-      b.AppendLine($"CREATE PROCEDURE[dbo].[{CreateProcName}]");
+      b.AppendLine($"CREATE PROCEDURE [dbo].[{addProcName}]");
 
       string retString = b.ToString();
       Builder.Append(retString);
@@ -137,23 +138,35 @@ namespace LJCDataUtility
     // ********************
     public string InsertList(DataColumns dataColumns)
     {
-      var retList = "    (";
+      var value = "    (";
+      var retList = value;
+      var lineLength = value.Length;
 
       var first = true;
       foreach (DataUtilityColumn dataColumn in dataColumns)
       {
-        if (retList.Length > 80)
-        {
-          retList += "\r\n";
-        }
         if (dataColumn.Name != "ID")
         {
+          var nameValue = $"{dataColumn.Name}";
+          lineLength += nameValue.Length;
+
+          if (lineLength > 80)
+          {
+            var newLine = "\r\n     ";
+            retList += newLine;
+            lineLength = newLine.Length - 2;
+          }
+
           if (!first)
           {
-            retList += ", ";
+            var firstValue = ", ";
+            retList += firstValue;
+            lineLength += firstValue.Length;
           }
           first = false;
-          retList += dataColumn.Name;
+
+          //lineLength += nameValue.Length;
+          retList += nameValue;
         }
       }
       retList += ")";
@@ -182,7 +195,8 @@ namespace LJCDataUtility
             retParams += ",\r\n";
           }
           isFirst = false;
-          retParams += SQLDeclaration(dataColumn);
+          var declaration = SQLDeclaration(dataColumn);
+          retParams += $"  {declaration}";
         }
       }
       return retParams;
@@ -226,25 +240,43 @@ namespace LJCDataUtility
 
     /// <summary>Creates the Values list.</summary>
     // ********************
-    public string ValuesList(DataColumns dataColumns)
+    public string ValuesList(DataColumns dataColumns
+      , string varRefName = null)
     {
-      var retList = "    VALUES(";
+      var value = "    VALUES(";
+      var retList = value;
+      var lineLength = value.Length;
+
+      if (NetString.HasValue(varRefName))
+      {
+        retList += $"{varRefName}, ";
+        lineLength += varRefName.Length;
+      }
 
       var first = true;
       foreach (DataUtilityColumn dataColumn in dataColumns)
       {
-        if (retList.Length > 80)
+        if (!dataColumn.Name.EndsWith("ID"))
         {
-          retList += "\r\n";
-        }
-        if (dataColumn.Name != "ID")
-        {
+          var nameValue = SQLVarName(dataColumn.Name);
+          lineLength += nameValue.Length;
+
+          if (lineLength > 80)
+          {
+            var newLine = "\r\n     ";
+            retList += newLine;
+            lineLength = newLine.Length - 2;
+          }
+
           if (!first)
           {
-            retList += ", ";
+            var firstValue = ", ";
+            retList += firstValue;
+            lineLength += firstValue.Length;
           }
           first = false;
-          retList += SQLVarName(dataColumn.Name);
+
+          retList += nameValue;
         }
       }
       retList += ");";

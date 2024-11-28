@@ -517,14 +517,17 @@ namespace LJCDataUtility
         // Parameters
         var parmFindName = "";
         var parentFindColumnName = "Name";
+
+        // Include parent table.
         var isFirst = true;
         if (NetString.HasValue(parentTableName))
         {
           // "@tableNameFindName"
           parmFindName = $"@{parentTableName}{parentFindColumnName}";
-          proc.Text($"{parmFindName} nvarchar(60)");
+          proc.Text($"  {parmFindName} nvarchar(60)");
           isFirst = false;
         }
+
         var parameters = proc.Parameters(dataColumns
           , isFirst);
         proc.Line(parameters);
@@ -532,17 +535,18 @@ namespace LJCDataUtility
         proc.Line("AS");
         proc.Line("BEGIN");
 
-        // Parent table.
+        // Include Parent table.
+        var parentIDColumnName = "ID";
+        var varRefName = "";
         if (NetString.HasValue(parentTableName))
         {
-          var parentIDColumnName = "ID";
-          var varRefName = $"{parentTableName}{parentIDColumnName}";
+          varRefName = $"@{parentTableName}{parentIDColumnName}";
           var line = proc.IFItem(parentTableName
             , parentIDColumnName, parentFindColumnName
             , parmFindName);
           line += "\r\n";
           line += $"IF {varRefName} IS NOT NULL";
-          proc.Text(line);
+          proc.Line(line);
         }
 
         // Table
@@ -555,7 +559,7 @@ namespace LJCDataUtility
         proc.Line(insertList);
 
         // Values list.
-        var valuesList = proc.ValuesList(dataColumns);
+        var valuesList = proc.ValuesList(dataColumns, varRefName);
         proc.Line(valuesList);
 
         proc.Line("END");
