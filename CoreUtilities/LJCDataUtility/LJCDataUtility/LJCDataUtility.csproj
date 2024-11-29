@@ -90,6 +90,7 @@
       <DependentUpon>DataModuleDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataModule\DataModuleGridCode.cs" />
+    <Compile Include="Forms\DataTable\AddProcData.cs" />
     <Compile Include="Forms\DataTable\DataTableDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,7 +137,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

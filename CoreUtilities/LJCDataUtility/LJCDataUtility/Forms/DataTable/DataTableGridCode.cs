@@ -460,36 +460,42 @@ namespace LJCDataUtility
     {
       string dbName = "LJCDataUtility";
 
-      var items = TableItemColumns(out string tableName);
-      if (NetCommon.HasItems(items))
+      var tableColumns = TableItemColumns(out string tableName);
+      if (NetCommon.HasItems(tableColumns))
       {
-        string parentTableName;
+        AddProcData procData;
         DataColumns parentColumns;
+        string parentTableName;
         switch (tableName)
         {
           case "DataModule":
-            AddProc(items, tableName, dbName);
+            procData = new AddProcData(dbName, tableColumns
+              , tableName);
+            AddProc(procData);
             break;
 
           case "DataUtilTable":
             parentTableName = "DataModule";
             parentColumns = TableColumns(parentTableName, "Name");
-            AddProc(items, tableName, dbName
-              , parentColumns, parentTableName);
+            procData = new AddProcData(dbName, tableColumns
+              , tableName, parentColumns, parentTableName);
+            AddProc(procData);
             break;
 
           case "DataUtilityColumn":
             parentTableName = "DataUtilTable";
             parentColumns = TableColumns(parentTableName, "Name");
-            AddProc(items, tableName, dbName
-              , parentColumns, parentTableName);
+            procData = new AddProcData(dbName, tableColumns
+              , tableName, parentColumns, parentTableName);
+            AddProc(procData);
             break;
 
           case "DataKey":
             parentTableName = "DataUtilTable";
             parentColumns = TableColumns(parentTableName, "Name");
-            AddProc(items, tableName, dbName
-              , parentColumns, parentTableName);
+            procData = new AddProcData(dbName, tableColumns
+              , tableName, parentColumns, parentTableName);
+            AddProc(procData);
             break;
         }
       }
@@ -542,15 +548,13 @@ namespace LJCDataUtility
 
     // Create the Add data procedure.
     // ********************
-    private string AddProc(DataColumns tableColumns, string tableName
-      , string dbName, DataColumns parentColumns = null
-      , string parentTableName = null)
+    private string AddProc(AddProcData data)
     {
       string retString = null;
 
-      if (tableColumns != null)
+      if (data.TableColumns != null)
       {
-        var proc = new ProcBuilder(dbName, tableName);
+        var proc = new ProcBuilder(data.DBName, data.TableName);
         proc.Begin();
 
         // Parameters
@@ -559,13 +563,13 @@ namespace LJCDataUtility
 
         // Include parent table.
         var isFirst = true;
-        if (NetCommon.HasItems(parentColumns)
-          && NetString.HasValue(parentTableName))
+        if (NetCommon.HasItems(data.ParentColumns)
+          && NetString.HasValue(data.ParentTableName))
         {
           // "@tableNameFindName"
           var typeValue = "nvarchar(60)";
           var findColumn
-            = parentColumns.LJCSearchUnique(parentFindColumnName);
+            = data.ParentColumns.LJCSearchUnique(parentFindColumnName);
           if (findColumn != null)
           {
             typeValue = findColumn.TypeName;
@@ -574,12 +578,13 @@ namespace LJCDataUtility
               typeValue += $"({findColumn.MaxLength})";
             }
           }
-          parmFindName = $"@{parentTableName}{parentFindColumnName}";
+          parmFindName
+            = $"@{data.ParentTableName}{parentFindColumnName}";
           proc.Text($"  {parmFindName} {typeValue}");
           isFirst = false;
         }
 
-        var parameters = proc.Parameters(tableColumns
+        var parameters = proc.Parameters(data.TableColumns
           , isFirst);
         proc.Line(parameters);
 
@@ -589,11 +594,12 @@ namespace LJCDataUtility
         // Include Parent table.
         var parentIDColumnName = "ID";
         var varRefName = "";
-        if (NetCommon.HasItems(parentColumns)
-          && NetString.HasValue(parentTableName))
+        if (NetCommon.HasItems(data.ParentColumns)
+          && NetString.HasValue(data.ParentTableName))
         {
-          varRefName = $"@{parentTableName}{parentIDColumnName}";
-          var line = proc.IFItem(parentTableName
+          varRefName
+            = $"@{data.ParentTableName}{parentIDColumnName}";
+          var line = proc.IFItem(data.ParentTableName
             , parentIDColumnName, parentFindColumnName
             , parmFindName);
           line += "\r\n";
@@ -602,16 +608,17 @@ namespace LJCDataUtility
         }
 
         // Table
-        proc.Line($"IF NOT EXISTS(SELECT ID FROM {tableName}");
+        proc.Line($"IF NOT EXISTS(SELECT ID FROM {data.TableName}");
         proc.Line(" WHERE Name = @name)");
-        proc.Line($"  INSERT INTO {tableName}");
+        proc.Line($"  INSERT INTO {data.TableName}");
 
         // Column list.
-        var insertList = proc.InsertList(tableColumns);
+        var insertList = proc.InsertList(data.TableColumns);
         proc.Line(insertList);
 
         // Values list.
-        var valuesList = proc.ValuesList(tableColumns, varRefName);
+        var valuesList
+          = proc.ValuesList(data.TableColumns, varRefName);
         proc.Line(valuesList);
 
         proc.Line("END");
