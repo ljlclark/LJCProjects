@@ -1,0 +1,37 @@
+/* Copyright(c) Lester J. Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* sp_DataColumnAdd */
+USE[LJCDataUtility]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF OBJECT_ID(' [dbo].[sp_DataColumnAdd]', N'p')
+ IS NOT NULL
+  DROP PROCEDURE [dbo].[sp_DataColumnAdd];
+GO
+CREATE PROCEDURE [dbo].[sp_DataColumnAdd]
+@DataUtilTableName nvarchar(60),
+  @description nvarchar(80),
+  @isIdentity bit,
+  @identityStart int,
+  @identityIncrement int,
+  @msxLength int,
+  @allowNull int
+AS
+BEGIN
+DECLARE @dataUtilTableID int = (SELECT ID FROM DataUtilTable
+ WHERE Name = @DataUtilTableName);
+
+IF @DataUtilTableID IS NOT NULL
+IF NOT EXISTS(SELECT ID FROM DataColumn
+ WHERE Name = @name)
+  INSERT INTO DataColumn
+    (DataTableID, Description, IsIdentity, IdentityStart, IdentityIncrement, MsxLength
+, AllowNull)
+    VALUES(@dataTableID, @description, @isIdentity, @identityStart, @identityIncrement
+, @msxLength
+, @allowNull);
+END

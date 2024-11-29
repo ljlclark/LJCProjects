@@ -10,13 +10,49 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJCDataUtility;
+
+// Constructors
+//   internal DataModuleGridCode(DataUtilityList parentList)
+// Data Methods
+//   internal void DataRetrieve()
+//   private LJCGridRow RowAdd(DataModule dataRecord)
+//   private void RowUpdate(DataModule dataRecord)
+//   private void SetControlState()
+//   private void SetStoredValues(LJCGridRow row, DataModule dataRecord)
+//   private bool RowSelect(DataModule dataRecord)
+// Action Methods
+//   internal void Delete()
+//   internal void Edit()
+//   internal void New()
+//   internal void Refresh()
+//   internal void ShowHelp()
+//   private void Detail_Change(object sender, EventArgs e)
+// Setup and Other Methods
+//   internal void SetupGrid()
+// Action Event Handlers
+//   private void ModuleNew_Click(object sender, EventArgs e)
+//   private void ModuleEdit_Click(object sender, EventArgs e)
+//   private void ModuleDelete_Click(object sender, EventArgs e)
+//   private void ModuleRefresh_Click(object sender, EventArgs e)
+// Control Event Handlers
+//   private void GridFont_FontChange(object sender, EventArgs e)
+//   private void MenuFont_FontChange(object sender, EventArgs e)
+//   private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
+//   private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+//   private void ModuleGrid_MouseDown(object sender, MouseEventArgs e)
+//   private void ModuleGrid_SelectionChanged(object sender, EventArgs e)
+// 24 Methods
+// Properties
 
 namespace LJCDataUtility
 {
   // Provides DataModuleGrid methods for the DataUtilityList window.
   internal class DataModuleGridCode
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     // ********************
@@ -62,7 +98,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Data Methods
+    // ******************************
 
     // Retrieves the list rows.
     // ********************
@@ -151,7 +189,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Methods
+    // ******************************
 
     // Deletes the selected row.
     // ********************
@@ -291,7 +331,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Setup and Other Methods
+    // ******************************
 
     // Configures the Grid.
     // ********************
@@ -315,7 +357,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Event Handlers
+    // ******************************
 
     // Handles the New menu item event.
     // ********************
@@ -346,7 +390,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     // Handles the Grid FontChange event.
     private void GridFont_FontChange(object sender, EventArgs e)

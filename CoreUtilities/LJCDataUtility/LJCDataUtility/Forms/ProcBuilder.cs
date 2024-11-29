@@ -23,7 +23,8 @@ using System.Xml.Linq;
 //   public string SQLDeclaration(DataUtilityColumn dataColumn)
 //   public string SQLVarName(string columnName)
 //   public void Text(string text)
-//   public string ValuesList(DataColumns dataColumns)
+//   public string ValuesList(DataColumns dataColumns
+//     , string varRefName = null)
 // Create Table Methods
 //   public string CreateTableProc(DataColumns columns
 //     , string primaryKeyList = null, string uniqueKeyList = null)
@@ -165,7 +166,6 @@ namespace LJCDataUtility
           }
           first = false;
 
-          //lineLength += nameValue.Length;
           retList += nameValue;
         }
       }
@@ -249,7 +249,8 @@ namespace LJCDataUtility
 
       if (NetString.HasValue(varRefName))
       {
-        retList += $"{varRefName}, ";
+        value = $"{varRefName}, ";
+        retList += value;
         lineLength += varRefName.Length;
       }
 

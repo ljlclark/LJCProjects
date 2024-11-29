@@ -11,13 +11,49 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using LJCDataUtility;
+
+// Constructors
+//   internal DataColumnGridCode(DataUtilityList parentList)
+// Data Methods
+//   internal void DataRetrieve()
+//   private LJCGridRow RowAdd(DataUtilityColumn dataRecord)
+//   private bool RowSelect(DataUtilityColumn dataRecord)
+//   private void RowUpdate(DataUtilityColumn dataRecord)
+//   private void SetControlState()
+//   private void SetStoredValues(LJCGridRow row, DataUtilityColumn dataRecord)
+// Action Methods
+//   internal void Delete()
+//   internal void Edit()
+//   internal void New()
+//   internal void Refresh()
+//   internal void ShowHelp()
+//   private void Detail_Change(object sender, EventArgs e)
+// Setup and Other Methods
+//   internal void SetupGrid()
+// Action Event Handlers
+//   private void ColumnNew_Click(object sender, EventArgs e)
+//   private void ColumnEdit_Click(object sender, EventArgs e)
+//   private void ColumnDelete_Click(object sender, EventArgs e)
+//   private void ColumnRefresh_Click(object sender, EventArgs e)
+// Control Event Handlers
+//   private void GridFont_FontChange(object sender, EventArgs e)
+//   private void MenuFont_FontChange(object sender, EventArgs e)
+//   private void ColumnGrid_KeyDown(object sender, KeyEventArgs e)
+//   private void ColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+//   private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
+//   private void ColumnGrid_SelectionChanged(object sender, EventArgs e)
+// 24 Methods
+// Properties
 
 namespace LJCDataUtility
 {
   // Provides DataColumnGrid methods for the DataUtilityList window.
   internal class DataColumnGridCode
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     // ********************
@@ -64,7 +100,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Data Methods
+    // ******************************
 
     // Retrieves the list rows.
     // ********************
@@ -314,7 +352,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Setup and Other Methods
+    // ******************************
 
     // Configures the DataColumn Grid.
     // ********************
@@ -343,7 +383,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Event Handlers
+    // ******************************
 
     // Handles the New menu item event.
     // ********************
@@ -374,9 +416,12 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     // Handles the Grid FontChange event.
+    // ********************
     private void GridFont_FontChange(object sender, EventArgs e)
     {
       var text = UtilityList.Text;
@@ -390,6 +435,7 @@ namespace LJCDataUtility
     }
 
     // Handles the Menu FontChange event.
+    // ********************
     private void MenuFont_FontChange(object sender, EventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;

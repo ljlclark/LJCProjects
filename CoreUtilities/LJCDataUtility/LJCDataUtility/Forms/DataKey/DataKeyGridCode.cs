@@ -10,13 +10,49 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJCDataUtility;
+
+// Constructors
+//   internal DataKeyGridCode(DataUtilityList parentList)
+// Data Methods
+//   internal void DataRetrieve()
+//   private LJCGridRow RowAdd(DataKey dataRecord)
+//   private bool RowSelect(DataKey dataRecord)
+//   private void RowUpdate(DataKey dataRecord)
+//   private void SetControlState()
+//   private void SetStoredValues(LJCGridRow row, DataKey dataRecord)
+// Action Methods
+//   internal void Delete()
+//   internal void Edit()
+//   internal void New()
+//   internal void Refresh()
+//   internal void ShowHelp()
+//   private void Detail_Change(object sender, EventArgs e)
+// Setup and Other Methods
+//   internal void SetupGrid()
+// Action Event Handlers
+//   private void KeyNew_Click(object sender, EventArgs e)
+//   private void KeyEdit_Click(object sender, EventArgs e)
+//   private void KeyDelete_Click(object sender, EventArgs e)
+//   private void KeyRefresh_Click(object sender, EventArgs e)
+// Control Event Handlers
+//   private void GridFont_FontChange(object sender, EventArgs e)
+//   private void MenuFont_FontChange(object sender, EventArgs e)
+//   private void KeyGrid_KeyDown(object sender, KeyEventArgs e)
+//   private void KeyGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+//   private void KeyGrid_MouseDown(object sender, MouseEventArgs e)
+//   private void KeyGrid_SelectionChanged(object sender, EventArgs e)
+// 24 Methods
+// Properties
 
 namespace LJCDataUtility
 {
   // Provides DataKeyGrid methods for the _AppName_List window.
   internal class DataKeyGridCode
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     // ********************
@@ -63,7 +99,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Data Methods
+    // ******************************
 
     // Retrieves the list rows.
     // ********************
@@ -156,7 +194,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Methods
+    // ******************************
 
     // Deletes the selected row.
     // ********************
@@ -310,7 +350,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Setup and Other Methods
+    // ******************************
 
     // Configures the Grid.
     // ********************
@@ -338,7 +380,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Action Event Handlers
+    // ******************************
 
     // Handles the New menu item event.
     // ********************
@@ -369,9 +413,12 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     // Handles the Grid FontChange event.
+    // ********************
     private void GridFont_FontChange(object sender, EventArgs e)
     {
       var text = UtilityList.Text;
@@ -385,6 +432,7 @@ namespace LJCDataUtility
     }
 
     // Handles the Menu FontChange event.
+    // ********************
     private void MenuFont_FontChange(object sender, EventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;
@@ -451,6 +499,7 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDown event.
+    // ********************
     private void KeyGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -467,6 +516,7 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
+    // ********************
     private void KeyGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (KeyGrid.LJCAllowSelectionChange)
