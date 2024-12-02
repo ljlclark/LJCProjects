@@ -8,15 +8,22 @@ using LJCWinFormControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-//using System.Text;
 using System.Windows.Forms;
+
+// Item Change Processing
+//   internal void DoChange(Change change)
+//   internal void TimedChange(Change change)
+// Action Event Handlers
+//   internal void Exit_Click(object sender, EventArgs e)
 
 namespace LJCDataUtility
 {
   // The list form.
   internal partial class DataUtilityList : Form
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     // ********************
@@ -29,7 +36,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Form Event Handlers
+    // ******************************
 
     // ********************
     private void DataUtilityList_Load(object sender, EventArgs e)
@@ -39,7 +48,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Item Change Processing
+    // ******************************
 
     // Execute the list and related item functions.
     // ********************
@@ -87,6 +98,13 @@ namespace LJCDataUtility
       Key
     }
 
+    // Starts the Timer with the Change value.
+    // ********************
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
     // Start the Change processing.
     // ********************
     private void StartChangeProcessing()
@@ -94,13 +112,6 @@ namespace LJCDataUtility
       ChangeTimer = new ChangeTimer();
       ChangeTimer.ItemChange += ChangeTimer_ItemChange;
       TimedChange(Change.Startup);
-    }
-
-    // Starts the Timer with the Change value.
-    // ********************
-    internal void TimedChange(Change change)
-    {
-      ChangeTimer.DoChange(change.ToString());
     }
 
     // Change Event Handler
@@ -119,7 +130,9 @@ namespace LJCDataUtility
     private ChangeTimer ChangeTimer { get; set; }
     #endregion
 
+    // ******************************
     #region Action Event Handlers
+    // ******************************
 
     // Shared menu Exit event handler.
     // ********************

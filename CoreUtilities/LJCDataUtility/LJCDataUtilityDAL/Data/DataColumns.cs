@@ -7,16 +7,47 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
+// Static Functions
+//   public static DataColumns LJCDeserialize(string fileSpec = null)
+// Constructors
+//   public DataColumns()
+//   public DataColumns(DataColumns items)
+// Collection Methods
+//   public DataUtilColumn Add(int id, string name)
+//   public DataUtilColumn Add(string name, string typeName
+//     , bool allowNull = true, short maxLength = 0
+//     , string defaultValue = null, short identityIncrement = 0)
+//   public DataColumns Clone()
+//   public DataColumns GetCollection(List<DataUtilColumn> list)
+//   public bool HasItems()
+//   public void LJCRemove(string name)
+//   public void LJCSerialize(string fileSpec = null)
+// Search and Sort Methods
+//   public DataUtilColumn LJCSearchID(int id)
+//   public DataUtilColumn LJCSearchUnique(string name)
+//   public void LJCSortID()
+//   public void LJCSortUnique(DataColumnUniqueComparer comparer)
+// Properties
+//   public static string LJCDefaultFileName
+//   public DataUtilColumn this[string name]
+// Class Data
+//   private int mPrevCount;
+//   private SortType mSortType;
+//   private enum SortType
+
 namespace LJCDataUtilityDAL
 {
   /// <summary>Represents a collection of DataColumn objects.</summary>
   [XmlRoot("DataColumns")]
   public class DataColumns : List<DataUtilColumn>
   {
+    // ******************************
     #region Static Functions
+    // ******************************
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public static DataColumns LJCDeserialize(string fileSpec = null)
     {
       DataColumns retValue;
@@ -39,10 +70,13 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataColumns()
     {
       mPrevCount = -1;
@@ -50,6 +84,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public DataColumns(DataColumns items)
     {
       if (NetCommon.HasItems(items))
@@ -62,10 +97,13 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Collection Methods
+    // ******************************
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public DataUtilColumn Add(int id, string name)
     {
       DataUtilColumn retValue = null;
@@ -99,6 +137,7 @@ namespace LJCDataUtilityDAL
     }
 
     // <summary>Creates and adds the object from the provided values.</summary>
+    // ********************
     public DataUtilColumn Add(string name, string typeName
       , bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
@@ -131,6 +170,7 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataColumns Clone()
     {
       var retValue = new DataColumns();
@@ -143,6 +183,7 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public DataColumns GetCollection(List<DataUtilColumn> list)
     {
       DataColumns retValue = null;
@@ -160,6 +201,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public bool HasItems()
     {
       bool retValue = false;
@@ -176,6 +218,7 @@ namespace LJCDataUtilityDAL
     /// Removes an item by name.
     /// </summary>
     /// <param name="name">The item unique Name value.</param>
+    // ********************
     public void LJCRemove(string name)
     {
       DataUtilColumn item = Find(x => x.Name == name);
@@ -187,6 +230,7 @@ namespace LJCDataUtilityDAL
 
     // Serializes the collection to a file.
     /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -197,10 +241,13 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Search and Sort Methods
+    // ******************************
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // ********************
     public DataUtilColumn LJCSearchID(int id)
     {
       DataUtilColumn retValue = null;
@@ -224,6 +271,7 @@ namespace LJCDataUtilityDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
+    // ********************
     public DataUtilColumn LJCSearchUnique(string name)
     {
       DataUtilColumn retValue = null;
@@ -243,6 +291,7 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Sort on Code.</summary>
+    // ********************
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -256,6 +305,7 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>
+    // ********************
     public void LJCSortUnique(DataColumnUniqueComparer comparer)
     {
       if (Count != mPrevCount
@@ -268,7 +318,9 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Properties
+    // ******************************
 
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
@@ -284,7 +336,9 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Class Data
+    // ******************************
 
     private int mPrevCount;
     private SortType mSortType;

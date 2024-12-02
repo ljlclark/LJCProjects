@@ -16,8 +16,6 @@ using System.Reflection;
 using System.Data;
 using System.IO;
 
-// Constructors
-//   internal DataTableGridCode(DataUtilityList parentList)
 // Data Methods
 //   internal void DataRetrieve()
 //   private LJCGridRow RowAdd(DataUtilTable dataRecord)
@@ -26,9 +24,9 @@ using System.IO;
 //   private void SetControlState()
 //   private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
 // Get Value Methods
-//   private DataColumns DataColumns(out string tableName)
-//   private DataColumns TableColumns(string tableName
-//   private DataColumns TableItemColumns(out string tableName)
+//   *private DataColumns DataColumns(out string tableName)
+//   *private DataColumns TableColumns(string tableName
+//   *private DataColumns TableItemColumns(out string tableName)
 // Action Methods
 //   internal void Delete()
 //   internal void Edit()
@@ -39,14 +37,16 @@ using System.IO;
 // Setup and Other Methods
 //   internal void SetupGrid()
 // Action Event Handlers
-//   private void TableAdd_Click(object sender, EventArgs e)
-//   private void TableCreate_Click(object sender, EventArgs e)
+//   *private void TableAdd_Click(object sender, EventArgs e)
+//   *private void TableCreate_Click(object sender, EventArgs e)
 //   private void TableNew_Click(object sender, EventArgs e)
 //   private void TableEdit_Click(object sender, EventArgs e)
 //   private void TableDelete_Click(object sender, EventArgs e)
 //   private void TableRefresh_Click(object sender, EventArgs e)
-//   private string AddProc(DataColumns dataColumns, string dbName
+//   *private string AddProc(DataColumns dataColumns, string dbName
 //     , string tableName, string parentTableName = null)
+//   *private ControlValue ShowInfo(string contents, string name
+//     , ControlValue controlValue = null)
 // Control Event Handlers
 //   private void GridFont_FontChange(object sender, EventArgs e)
 //   private void MenuFont_FontChange(object sender, EventArgs e)
@@ -54,8 +54,6 @@ using System.IO;
 //   private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
 //   private void TableGrid_MouseDown(object sender, MouseEventArgs e)
 //   private void TableGrid_SelectionChanged(object sender, EventArgs e)
-// 28 Methods
-// Properties
 
 namespace LJCDataUtility
 {
@@ -129,7 +127,7 @@ namespace LJCDataUtility
         // Data from items.
         int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
 
-        var keyColumns = TableManager.ParentIDKey(parentID);
+        var keyColumns = TableManager.ParentKey(parentID);
         var items = TableManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
@@ -518,10 +516,10 @@ namespace LJCDataUtility
         var uniqueKeyList = "Name";
         var value = proc.CreateTableProc(items, primaryKeyList
           , uniqueKeyList);
-        var addProc = UtilityList.AddProc;
+        var addProc = UtilityList.InfoValue;
         var controlValue = ShowInfo(value, addProc.ControlName
           , addProc);
-        UtilityList.AddProc = controlValue;
+        UtilityList.InfoValue = controlValue;
       }
     }
 
@@ -636,14 +634,15 @@ namespace LJCDataUtility
 
         retString = proc.ToString();
       }
-      var addProc = UtilityList.AddProc;
+      var addProc = UtilityList.InfoValue;
       var controlValue = ShowInfo(retString, addProc.ControlName
         , addProc);
-      UtilityList.AddProc = controlValue;
+      UtilityList.InfoValue = controlValue;
       return retString;
     }
 
     // Show the info data.
+    // ********************
     private ControlValue ShowInfo(string contents, string name
       , ControlValue controlValue = null)
     {

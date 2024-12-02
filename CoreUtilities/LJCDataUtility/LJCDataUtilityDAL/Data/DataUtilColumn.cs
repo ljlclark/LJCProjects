@@ -5,22 +5,42 @@ using LJCNetCommon;
 using LJCDBClientLib;
 using System;
 using System.Collections.Generic;
+using LJCDataUtilityDAL;
+
+// Constructors
+//   public DataUtilColumn()
+//   public DataUtilColumn(string name, string typeName
+//     , bool allowNull = true, short maxLength = 0
+//     , string defaultValue = null, short identityIncrement = 0)
+//   public DataUtilColumn(DataUtilColumn item)
+// Data Class Methods
+//   public DataUtilColumn Clone()
+//   public int CompareTo(DataUtilColumn other)
+//   public override string ToString()
+// Class Properties
+//   public ChangedNames ChangedNames { get; private set; }
+// Comparers
+//   public class DataColumnUniqueComparer : IComparer<DataUtilColumn>
 
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataColumn Data Object.</summary>
   public class DataUtilColumn : IComparable<DataUtilColumn>
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataUtilColumn()
     {
       ChangedNames = new ChangedNames();
     }
 
     // Initialize with main values.
+    // ********************
     public DataUtilColumn(string name, string typeName
       , bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
@@ -41,6 +61,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataUtilColumn(DataUtilColumn item)
     {
       ChangedNames = new ChangedNames();
@@ -61,10 +82,13 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Data Methods
+    // ******************************
+    #region Data Class Methods
+    // ******************************
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataUtilColumn Clone()
     {
       var retValue = MemberwiseClone() as DataUtilColumn;
@@ -73,6 +97,7 @@ namespace LJCDataUtilityDAL
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public int CompareTo(DataUtilColumn other)
     {
       int retValue;
@@ -92,6 +117,7 @@ namespace LJCDataUtilityDAL
 
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public override string ToString()
     {
       var retValue = $"{mName}:{mID}";
@@ -99,7 +125,9 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Data Properties
+    // ******************************
 
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
@@ -299,13 +327,17 @@ namespace LJCDataUtilityDAL
     private String mTypeName;
     #endregion
 
+    // ******************************
     #region Class Properties
+    // ******************************
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
+    // ******************************
     #region Class Data
+    // ******************************
 
     /// <summary>The table name.</summary>
     public static string TableName = "DataColumn";
@@ -366,7 +398,9 @@ namespace LJCDataUtilityDAL
     #endregion
   }
 
+  // ******************************
   #region Comparers
+  // ******************************
 
   /// <summary>Sort and search on Name value.</summary>
   public class DataColumnUniqueComparer : IComparer<DataUtilColumn>

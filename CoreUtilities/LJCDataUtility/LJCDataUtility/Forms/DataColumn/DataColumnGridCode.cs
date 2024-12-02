@@ -13,8 +13,6 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using LJCDataUtility;
 
-// Constructors
-//   internal DataColumnGridCode(DataUtilityList parentList)
 // Data Methods
 //   internal void DataRetrieve()
 //   private LJCGridRow RowAdd(DataUtilColumn dataRecord)
@@ -43,8 +41,6 @@ using LJCDataUtility;
 //   private void ColumnGrid_MouseDoubleClick(object sender, MouseEventArgs e)
 //   private void ColumnGrid_MouseDown(object sender, MouseEventArgs e)
 //   private void ColumnGrid_SelectionChanged(object sender, EventArgs e)
-// 24 Methods
-// Properties
 
 namespace LJCDataUtility
 {

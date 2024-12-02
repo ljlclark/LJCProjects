@@ -12,9 +12,37 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+// Data Methods
+//   private void DataRetrieve()
+//   private void GetValues(DataUtilColumn dataRecord)
+//   private DataUtilColumn SetValues()
+//   private bool DataSave()
+//   private bool IsValid()
+// Setup Methods
+//   private void InitializeControls()
+//   private void SetNoSpace()
+// KeyEdit Event Handlers
+//   private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+//   private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+// Control Event Handlers
+//   protected void LJCOnChange()
+//   private void OKButton_Click(object sender, EventArgs e)
+// Properties
+//   internal int LJCID { get; set; }
+//   internal bool LJCIsUpdate { get; private set; }
+//   internal Point LJCLocation { get; set; }
+//   internal ManagersDataUtility LJCManagers { get; set; }
+//   internal int LJCParentID { get; set; }
+//   internal string LJCParentName
+//   internal DataUtilColumn LJCRecord { get; private set; }
+// Class Data
+//   internal event EventHandler<EventArgs> LJCChange;
+
 namespace LJCDataUtility
 {
+  // ******************************
   #region Constructors
+  // ******************************
 
   // The DataTable detail dialog.
   internal partial class DataTableDetail : Form
@@ -36,7 +64,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Form Event Handlers
+    // ******************************
 
     // ********************
 
@@ -223,7 +253,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Setup Methods
+    // ******************************
 
     // Configures the controls and loads the selection control data.
     // ********************
@@ -252,7 +284,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region KeyEdit Event Handlers
+    // ******************************
 
     // Does not allow spaces.
     // ********************
@@ -274,7 +308,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Control Event Handlers
+    // ******************************
 
     // Fires the Change event.
     //// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
@@ -296,7 +332,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Properties
+    // ******************************
 
     // Gets or sets the primary ID value.
     internal int LJCID { get; set; }
@@ -306,6 +344,9 @@ namespace LJCDataUtility
 
     // The form position.
     internal Point LJCLocation { get; set; }
+
+    // The Managers object.
+    internal ManagersDataUtility LJCManagers { get; set; }
 
     // Gets or sets the Parent ID value.
     internal int LJCParentID { get; set; }
@@ -320,17 +361,17 @@ namespace LJCDataUtility
 
     // Gets a reference to the record object.
     internal DataUtilTable LJCRecord { get; private set; }
-
-    // The Managers object.
-    internal ManagersDataUtility LJCManagers { get; set; }
     #endregion
 
+    // ******************************
     #region Class Data
+    // ******************************
 
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
 
     private DataUtilTable mOriginalRecord;
+
     //private StandardUISettings mSettings;
     #endregion
   }

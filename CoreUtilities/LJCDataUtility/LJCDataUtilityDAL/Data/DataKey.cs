@@ -5,16 +5,32 @@ using LJCNetCommon;
 using LJCDBClientLib;
 using System;
 using System.Collections.Generic;
+using LJCDataUtilityDAL;
+
+// Constructors
+//   public DataKey()
+//   public DataKey(DataKey item)
+// Data Class Methods
+//   public DataKey Clone()
+//   public int CompareTo(DataKey other)
+//   public override string ToString()
+// Class Properties
+//   public ChangedNames ChangedNames { get; private set; }
+// Comparers
+//   public class DataKeyUniqueComparer : IComparer<DataKey>
 
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataKey table Data Object.</summary>
   public class DataKey : IComparable<DataKey>
   {
+    // ******************************
     #region Constructors
+    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataKey()
     {
       ChangedNames = new ChangedNames();
@@ -22,6 +38,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataKey(DataKey item)
     {
       ChangedNames = new ChangedNames();
@@ -37,10 +54,13 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Data Methods
+    // ******************************
+    #region Data Class Methods
+    // ******************************
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public DataKey Clone()
     {
       var retValue = MemberwiseClone() as DataKey;
@@ -49,6 +69,7 @@ namespace LJCDataUtilityDAL
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public int CompareTo(DataKey other)
     {
       int retValue;
@@ -71,6 +92,7 @@ namespace LJCDataUtilityDAL
 
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    // ********************
     public override string ToString()
     {
       var retValue = $"{mName}:{mID}";
@@ -78,7 +100,9 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    // ******************************
     #region Data Properties
+    // ******************************
 
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
@@ -209,13 +233,17 @@ namespace LJCDataUtilityDAL
     private Boolean mIsAscending;
     #endregion
 
+    // ******************************
     #region Class Properties
+    // ******************************
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
+    // ******************************
     #region Class Data
+    // ******************************
 
     /// <summary>The table name.</summary>
     public static string TableName = "DataKey";
@@ -261,7 +289,9 @@ namespace LJCDataUtilityDAL
     #endregion
   }
 
+  // ******************************
   #region Comparers
+  // ******************************
 
   /// <summary>Sort and search on Name value.</summary>
   public class DataKeyUniqueComparer : IComparer<DataKey>

@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-// Constructors
-//   public ProcBuilder(string dbName, string tableName)
 // Data Class Methods
 //   public override string ToString()
 // Proc Methods

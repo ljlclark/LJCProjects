@@ -12,8 +12,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using LJCDataUtility;
 
-// Constructors
-//   internal DataModuleGridCode(DataUtilityList parentList)
 // Data Methods
 //   internal void DataRetrieve()
 //   private LJCGridRow RowAdd(DataModule dataRecord)
@@ -42,8 +40,6 @@ using LJCDataUtility;
 //   private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
 //   private void ModuleGrid_MouseDown(object sender, MouseEventArgs e)
 //   private void ModuleGrid_SelectionChanged(object sender, EventArgs e)
-// 24 Methods
-// Properties
 
 namespace LJCDataUtility
 {

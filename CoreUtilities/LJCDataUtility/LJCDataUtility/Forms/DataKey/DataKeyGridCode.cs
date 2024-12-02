@@ -12,8 +12,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using LJCDataUtility;
 
-// Constructors
-//   internal DataKeyGridCode(DataUtilityList parentList)
 // Data Methods
 //   internal void DataRetrieve()
 //   private LJCGridRow RowAdd(DataKey dataRecord)
@@ -42,8 +40,6 @@ using LJCDataUtility;
 //   private void KeyGrid_MouseDoubleClick(object sender, MouseEventArgs e)
 //   private void KeyGrid_MouseDown(object sender, MouseEventArgs e)
 //   private void KeyGrid_SelectionChanged(object sender, EventArgs e)
-// 24 Methods
-// Properties
 
 namespace LJCDataUtility
 {
