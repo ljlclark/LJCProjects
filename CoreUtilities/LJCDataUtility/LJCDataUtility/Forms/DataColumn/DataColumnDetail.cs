@@ -70,7 +70,7 @@ namespace LJCDataUtility
       {
         Text += " - New";
         LJCIsUpdate = false;
-        LJCRecord = new DataUtilityColumn();
+        LJCRecord = new DataUtilColumn();
         ParentNameText.Text = LJCParentName;
       }
       NameText.Select();
@@ -80,7 +80,7 @@ namespace LJCDataUtility
 
     // Gets the record values and copies them to the controls.
     // ********************
-    private void GetValues(DataUtilityColumn dataRecord)
+    private void GetValues(DataUtilColumn dataRecord)
     {
       if (dataRecord != null)
       {
@@ -103,7 +103,7 @@ namespace LJCDataUtility
 
     // Creates and returns a record object with the data from
     // ********************
-    private DataUtilityColumn SetValues()
+    private DataUtilColumn SetValues()
     {
       var retData = GetRecord();
 
@@ -126,7 +126,7 @@ namespace LJCDataUtility
 
     // Resets the empty record values.
     // ********************
-    private void ResetValues(DataUtilityColumn dataRecord)
+    private void ResetValues(DataUtilColumn dataRecord)
     {
       // In control order.
       dataRecord.Description
@@ -135,9 +135,9 @@ namespace LJCDataUtility
 
     // Gets the original or new record.
     // ********************
-    private DataUtilityColumn GetRecord()
+    private DataUtilColumn GetRecord()
     {
-      DataUtilityColumn retRecord = null;
+      DataUtilColumn retRecord = null;
 
       if (mOriginalRecord != null)
       {
@@ -145,7 +145,7 @@ namespace LJCDataUtility
       }
       if (null == retRecord)
       {
-        retRecord = new DataUtilityColumn();
+        retRecord = new DataUtilColumn();
       }
       return retRecord;
     }
@@ -241,7 +241,7 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
-      DescriptionText.MaxLength = DataUtilityColumn.LengthDescription;
+      DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
 
       Cursor = Cursors.Default;
     }
@@ -322,7 +322,7 @@ namespace LJCDataUtility
     private string mParentName;
 
     // Gets a reference to the record object.
-    internal DataUtilityColumn LJCRecord { get; private set; }
+    internal DataUtilColumn LJCRecord { get; private set; }
 
     // The Managers object.
     internal ManagersDataUtility LJCManagers { get; set; }
@@ -333,7 +333,7 @@ namespace LJCDataUtility
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
 
-    private DataUtilityColumn mOriginalRecord;
+    private DataUtilColumn mOriginalRecord;
     //private StandardUISettings mSettings;
     #endregion
   }

@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataTable.cs
+// DataUtilTable.cs
 using LJCNetCommon;
 using LJCDBClientLib;
 using System;

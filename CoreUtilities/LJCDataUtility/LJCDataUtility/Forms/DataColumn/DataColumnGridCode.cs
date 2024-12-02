@@ -17,11 +17,11 @@ using LJCDataUtility;
 //   internal DataColumnGridCode(DataUtilityList parentList)
 // Data Methods
 //   internal void DataRetrieve()
-//   private LJCGridRow RowAdd(DataUtilityColumn dataRecord)
-//   private bool RowSelect(DataUtilityColumn dataRecord)
-//   private void RowUpdate(DataUtilityColumn dataRecord)
+//   private LJCGridRow RowAdd(DataUtilColumn dataRecord)
+//   private bool RowSelect(DataUtilColumn dataRecord)
+//   private void RowUpdate(DataUtilColumn dataRecord)
 //   private void SetControlState()
-//   private void SetStoredValues(LJCGridRow row, DataUtilityColumn dataRecord)
+//   private void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
 // Action Methods
 //   internal void Delete()
 //   internal void Edit()
@@ -133,7 +133,7 @@ namespace LJCDataUtility
 
     // Adds a grid row and updates it with the record values.
     // ********************
-    private LJCGridRow RowAdd(DataUtilityColumn dataRecord)
+    private LJCGridRow RowAdd(DataUtilColumn dataRecord)
     {
       var retValue = ColumnGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
@@ -143,7 +143,7 @@ namespace LJCDataUtility
 
     // Selects a row based on the key record values.
     // ********************
-    private bool RowSelect(DataUtilityColumn dataRecord)
+    private bool RowSelect(DataUtilColumn dataRecord)
     {
       bool retValue = false;
 
@@ -152,7 +152,7 @@ namespace LJCDataUtility
         UtilityList.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowID = row.LJCGetInt32(DataUtilityColumn.ColumnID);
+          var rowID = row.LJCGetInt32(DataUtilColumn.ColumnID);
           if (rowID == dataRecord.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -168,7 +168,7 @@ namespace LJCDataUtility
 
     // Updates the current row with the record values.
     // ********************
-    private void RowUpdate(DataUtilityColumn dataRecord)
+    private void RowUpdate(DataUtilColumn dataRecord)
     {
       if (ColumnGrid.CurrentRow is LJCGridRow row)
       {
@@ -189,11 +189,11 @@ namespace LJCDataUtility
 
     // Sets the row stored values.
     // ********************
-    private void SetStoredValues(LJCGridRow row, DataUtilityColumn dataRecord)
+    private void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
     {
-      row.LJCSetInt32(DataUtilityColumn.ColumnID
+      row.LJCSetInt32(DataUtilColumn.ColumnID
         , dataRecord.ID);
-      row.LJCSetString(DataUtilityColumn.ColumnName
+      row.LJCSetString(DataUtilColumn.ColumnName
         , dataRecord.Name);
     }
     #endregion
@@ -220,11 +220,11 @@ namespace LJCDataUtility
       if (success)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataUtilityColumn.ColumnID);
+        var id = row.LJCGetInt32(DataUtilColumn.ColumnID);
 
         var keyColumns = new DbColumns()
         {
-          { DataUtilityColumn.ColumnID, id }
+          { DataUtilColumn.ColumnID, id }
         };
         ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
@@ -252,7 +252,7 @@ namespace LJCDataUtility
         && ColumnGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        int id = row.LJCGetInt32(DataUtilityColumn.ColumnID);
+        int id = row.LJCGetInt32(DataUtilColumn.ColumnID);
         int parentID = parentRow.LJCGetInt32(DataUtilTable.ColumnID);
         string parentName = parentRow.LJCGetString(DataUtilTable.ColumnName);
 
@@ -304,14 +304,14 @@ namespace LJCDataUtility
       if (ColumnGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
-        id = row.LJCGetInt32(DataUtilityColumn.ColumnID);
+        id = row.LJCGetInt32(DataUtilColumn.ColumnID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        var record = new DataUtilityColumn()
+        var record = new DataUtilColumn()
         {
           ID = id
         };
@@ -365,12 +365,12 @@ namespace LJCDataUtility
       {
         List<string> propertyNames = new List<string>()
         {
-          DataUtilityColumn.ColumnDataTableID,
-          DataUtilityColumn.ColumnName,
-          DataUtilityColumn.ColumnDescription,
-          DataUtilityColumn.ColumnSequence,
-          DataUtilityColumn.ColumnTypeName,
-          DataUtilityColumn.ColumnMaxLength
+          DataUtilColumn.ColumnDataTableID,
+          DataUtilColumn.ColumnName,
+          DataUtilColumn.ColumnDescription,
+          DataUtilColumn.ColumnSequence,
+          DataUtilColumn.ColumnTypeName,
+          DataUtilColumn.ColumnMaxLength
         };
 
         // Get the grid columns from the manager Data Definition.

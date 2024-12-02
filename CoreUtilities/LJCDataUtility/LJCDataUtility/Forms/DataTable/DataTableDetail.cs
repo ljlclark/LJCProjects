@@ -237,7 +237,7 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
-      DescriptionText.MaxLength = DataUtilityColumn.LengthDescription;
+      DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
 
       Cursor = Cursors.Default;
     }

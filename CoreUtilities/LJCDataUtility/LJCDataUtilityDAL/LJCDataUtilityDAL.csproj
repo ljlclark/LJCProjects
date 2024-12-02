@@ -58,13 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManagersDataUtility.cs" />
-    <Compile Include="Data\DataColumn.cs" />
+    <Compile Include="Data\DataUtilColumn.cs" />
     <Compile Include="Data\DataColumns.cs" />
     <Compile Include="Data\DataKey.cs" />
     <Compile Include="Data\DataKeys.cs" />
     <Compile Include="Data\DataModule.cs" />
     <Compile Include="Data\DataModules.cs" />
-    <Compile Include="Data\DataTable.cs" />
+    <Compile Include="Data\DataUtilTable.cs" />
     <Compile Include="Manager\DataColumnManager.cs" />
     <Compile Include="Manager\DataKeymanager.cs" />
     <Compile Include="Data\DataTables.cs" />

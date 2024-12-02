@@ -144,7 +144,7 @@ namespace LJCDataUtility
       var lineLength = value.Length;
 
       var first = true;
-      foreach (DataUtilityColumn dataColumn in dataColumns)
+      foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (dataColumn.Name != "ID")
         {
@@ -186,7 +186,7 @@ namespace LJCDataUtility
     {
       var retParams = "";
 
-      foreach (DataUtilityColumn dataColumn in dataColumns)
+      foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (!dataColumn.Name.EndsWith("ID"))
         {
@@ -204,7 +204,7 @@ namespace LJCDataUtility
 
     /// <summary>Creates a SQL Declaration variable from a DataUtilityColumn.</summary>
     // ********************
-    public string SQLDeclaration(DataUtilityColumn dataColumn)
+    public string SQLDeclaration(DataUtilColumn dataColumn)
     {
       var retValue = "";
 
@@ -255,7 +255,7 @@ namespace LJCDataUtility
       }
 
       var first = true;
-      foreach (DataUtilityColumn dataColumn in dataColumns)
+      foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (!dataColumn.Name.EndsWith("ID"))
         {
@@ -299,7 +299,7 @@ namespace LJCDataUtility
       Line("BEGIN");
 
       TableBegin();
-      foreach (DataUtilityColumn column in columns)
+      foreach (DataUtilColumn column in columns)
       {
         if (column.IdentityIncrement > 0)
         {

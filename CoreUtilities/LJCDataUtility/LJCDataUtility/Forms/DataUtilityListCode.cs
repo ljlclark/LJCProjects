@@ -15,7 +15,69 @@ namespace LJCDataUtility
   // The list form code.
   internal partial class DataUtilityList : Form
   {
+    // ******************************
+    #region Methods
+    // ******************************
+
+    internal ControlValue GetControlValue(string name)
+    {
+      ControlValue retValue = null;
+
+      var controlValues = LoadControlValues(ControlValuesFileName);
+      if (controlValues != null)
+      {
+        var findValue = controlValues.LJCSearchName(name);
+        if (findValue != null)
+        {
+          retValue = findValue;
+        }
+      }
+      return retValue;
+    }
+
+    // Loads the ControlValues from an XML file.
+    internal ControlValues LoadControlValues(string fileName)
+    {
+      ControlValues retValues = null;
+
+      if (File.Exists(fileName))
+      {
+        retValues = NetCommon.XmlDeserialize(typeof(ControlValues)
+          , fileName) as ControlValues;
+      }
+      return retValues;
+    }
+
+    // Adds or updates a ControlValue item.
+    internal void SetControlValue(ControlValue controlValue)
+    {
+      var controlValues = LoadControlValues(ControlValuesFileName);
+
+      if (controlValues != null)
+      {
+        var name = controlValue.ControlName;
+        var findValue = ControlValues.LJCSearchName(name);
+        if (findValue != null)
+        {
+          findValue.Height = controlValue.Height;
+          findValue.Left = controlValue.Left;
+          findValue.Top = controlValue.Top;
+          findValue.Width = controlValue.Width;
+        }
+        else
+        {
+          controlValues.Add(controlValue);
+        }
+
+        NetCommon.XmlSerialize(controlValues.GetType(), controlValues
+          , null, ControlValuesFileName);
+      }
+    }
+    #endregion
+
+    // ******************************
     #region Setup Methods
+    // ******************************
 
     // Configures the controls and loads the selection control data.
     // ********************
@@ -77,7 +139,9 @@ namespace LJCDataUtility
     }
     #endregion
 
+    // ******************************
     #region Private Methods
+    // ******************************
 
     // Restores the control values.
     // ********************
@@ -120,6 +184,8 @@ namespace LJCDataUtility
           FormCommon.RestoreMenuFontSize(TableMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(KeyMenu, ControlValues);
+
+          AddProc = ControlValues.LJCSearchName("AddProc");
         }
       }
     }
@@ -153,12 +219,21 @@ namespace LJCDataUtility
       FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);
       FormCommon.SaveMenuFontSize(KeyMenu, controlValues);
 
+      controlValues.Add(AddProc);
+
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , ControlValuesFileName);
     }
     #endregion
 
     #region Properties
+
+    internal ControlValue AddProc { get; set; }
+
+    internal ControlValue CreateTable { get; set; }
+
+    // The ControlValues file name.
+    internal string ControlValuesFileName { get; set; }
 
     // The Managers object.
     internal ManagersDataUtility Managers { get; set; }
@@ -171,7 +246,6 @@ namespace LJCDataUtility
 
     // Gets or sets the ControlValues object.
     private ControlValues ControlValues { get; set; }
-    private string ControlValuesFileName { get; set; }
     private StandardUISettings Settings { get; set; }
     #endregion
   }

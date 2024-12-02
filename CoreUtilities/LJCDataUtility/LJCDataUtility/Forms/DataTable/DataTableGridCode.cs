@@ -14,6 +14,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Reflection;
 using System.Data;
+using System.IO;
 
 // Constructors
 //   internal DataTableGridCode(DataUtilityList parentList)
@@ -26,6 +27,8 @@ using System.Data;
 //   private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
 // Get Value Methods
 //   private DataColumns DataColumns(out string tableName)
+//   private DataColumns TableColumns(string tableName
+//   private DataColumns TableItemColumns(out string tableName)
 // Action Methods
 //   internal void Delete()
 //   internal void Edit()
@@ -482,7 +485,7 @@ namespace LJCDataUtility
             AddProc(procData);
             break;
 
-          case "DataUtilityColumn":
+          case "DataUtilColumn":
             parentTableName = "DataUtilTable";
             parentColumns = TableColumns(parentTableName, "Name");
             procData = new AddProcData(dbName, tableColumns
@@ -515,6 +518,10 @@ namespace LJCDataUtility
         var uniqueKeyList = "Name";
         var value = proc.CreateTableProc(items, primaryKeyList
           , uniqueKeyList);
+        var addProc = UtilityList.AddProc;
+        var controlValue = ShowInfo(value, addProc.ControlName
+          , addProc);
+        UtilityList.AddProc = controlValue;
       }
     }
 
@@ -578,8 +585,10 @@ namespace LJCDataUtility
               typeValue += $"({findColumn.MaxLength})";
             }
           }
-          parmFindName
-            = $"@{data.ParentTableName}{parentFindColumnName}";
+          // *** Begin *** Change
+          parmFindName = proc.SQLVarName(data.ParentTableName);
+          parmFindName += parentFindColumnName;
+          // *** End   *** Change
           proc.Text($"  {parmFindName} {typeValue}");
           isFirst = false;
         }
@@ -597,8 +606,10 @@ namespace LJCDataUtility
         if (NetCommon.HasItems(data.ParentColumns)
           && NetString.HasValue(data.ParentTableName))
         {
-          varRefName
-            = $"@{data.ParentTableName}{parentIDColumnName}";
+          // *** Begin *** Change
+          varRefName = proc.SQLVarName(data.ParentTableName);
+          varRefName += parentIDColumnName;
+          // *** End   *** Change
           var line = proc.IFItem(data.ParentTableName
             , parentIDColumnName, parentFindColumnName
             , parmFindName);
@@ -625,7 +636,40 @@ namespace LJCDataUtility
 
         retString = proc.ToString();
       }
+      var addProc = UtilityList.AddProc;
+      var controlValue = ShowInfo(retString, addProc.ControlName
+        , addProc);
+      UtilityList.AddProc = controlValue;
       return retString;
+    }
+
+    // Show the info data.
+    private ControlValue ShowInfo(string contents, string name
+      , ControlValue controlValue = null)
+    {
+      ControlValue retValue = controlValue;
+
+      Point? location = null;
+      if (retValue != null)
+      {
+        location = new Point(retValue.Left, retValue.Top);
+      }
+      var info = new InfoWindow(name, contents, location);
+      if (retValue != null)
+      {
+        info.Height = retValue.Height;
+        info.Width = retValue.Width;
+      }
+      info.ShowDialog();
+      retValue = new ControlValue()
+      {
+        ControlName = name,
+        Height = info.Height,
+        Left = info.Left,
+        Top = info.Top,
+        Width = info.Width
+      };
+      return retValue;
     }
     #endregion
 

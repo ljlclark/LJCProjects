@@ -2,38 +2,109 @@
 // Licensed under the MIT License.
 // InfoWindow.cs
 using LJCNetCommon;
+using LJCWinFormControls;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
+
+// Constructors
+//   public InfoWindow(Point location, string text = null
+//     , string contents = null)
+// Event Methods
+//   protected void LJCOnClose()
+//   protected override void OnClosing(CancelEventArgs e)
+// Properties
+//   public string LJCContents
+//   public string LJCText
+// Class Data
+//   public event EventHandler<EventArgs> LJCCloseEvent;
 
 namespace LJCWinFormControls
 {
   /// <summary>The Info window.</summary>
   public partial class InfoWindow : Form
   {
-    // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    // ******************************
+    #region Constructors
+    // ******************************
+
+    /// <summary>Initializes an object instance.</summary>
     public InfoWindow()
     {
-      InitializeComponent();
+      // Initialize properties.
+      LJCText = null;
+      LJCContents = null;
     }
 
-    #region Form Event Handlers
+    // Initializes an object instance with the supplied values.
+    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    // ********************
+    public InfoWindow(string text = null, string contents = null
+      , Point? location = null) : this()
+    {
+      InitializeComponent();
 
-    // 
+      LJCLocation = location;
+      LJCText = text;
+      LJCContents = contents;
+    }
+    #endregion
+
+    // ******************************
+    #region Form Event Handlers
+    // ******************************
+
+    // Handles the form Load event.
+    // ********************
     private void InfoWindow_Load(object sender, EventArgs e)
     {
-      CenterToScreen();
+      SetContents();
+      if (null == LJCLocation)
+      {
+        CenterToScreen();
+      }
+      else
+      {
+        Location = (Point)LJCLocation;
+      }
     }
+    #endregion
 
-    // 
-    private void OKButton_Click(object sender, EventArgs e)
+    #region Methods
+
+    /// <summary>Gets the Contents.</summary>
+    public string Contents()
     {
-      Close();
+      return InfoRTBox.Text;
     }
 
-    // Handles the dialog closing.
+    // Sets the contents after the form is loaded.
+    private void SetContents()
+    {
+      if (InfoRTBox != null
+        && NetString.HasValue(LJCContents))
+      {
+        InfoRTBox.Text = LJCContents;
+      }
+    }
+    #endregion
+
+    // ******************************
+    #region Event Methods
+    // ******************************
+
+    // Fires the OnClose event.
+    /// <include path='items/OnClose/*' file='Doc/InfoWindow.xml'/>
+    // ********************
+    protected void LJCOnClose()
+    {
+      LJCCloseEvent?.Invoke(this, new EventArgs());
+    }
+
+    // Fires the OnClosing event.
     /// <include path='items/OnClosing/*' file='Doc/InfoWindow.xml'/>
+    // ********************
     protected override void OnClosing(CancelEventArgs e)
     {
       base.OnClosing(e);
@@ -41,31 +112,52 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    #region Event Methods
+    // ******************************
+    #region Control Event Handlers
+    // ******************************
 
-    // Fires the OnClose event.
-    /// <include path='items/OnClose/*' file='Doc/InfoWindow.xml'/>
-    protected void LJCOnClose()
+    // Handles the OKButton click event.
+    // ********************
+    private void OKButton_Click(object sender, EventArgs e)
     {
-      LJCCloseEvent?.Invoke(this, new EventArgs());
+      Close();
     }
     #endregion
+
+    // ******************************
+    #region Properties
+    // ******************************
+
+    /// <summary>Gets or sets the InfoWindow contents.</summary>
+    public string LJCContents
+    {
+      get { return mLJCContents; }
+      set
+      {
+        mLJCContents = NetString.InitString(value);
+      }
+    }
+    private string mLJCContents;
 
     /// <summary>Gets or sets the form Title text.</summary>
     public string LJCText
     {
       get { return Text; }
-      set { Text = !NetString.HasValue((value)) ? Text : value.Trim(); }
+      set { Text = !NetString.HasValue(value) ? Text : value.Trim(); }
     }
 
-    /// <summary>Gets or sets the Info data.</summary>
-    public string LJCInfoData
-    {
-      get { return InfoRTBox.Text; }
-      set { InfoRTBox.Text = value; }
-    }
+    // The form location.
+    private Point? LJCLocation { get; set; }
+
+    #endregion
+
+    // ******************************
+    #region Class Data
+    // ******************************
 
     /// <summary>The Close event.</summary>
     public event EventHandler<EventArgs> LJCCloseEvent;
+
+    #endregion
   }
 }

@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataColumn.cs
+// DataUtilColumn.cs
 using LJCNetCommon;
 using LJCDBClientLib;
 using System;
@@ -9,19 +9,19 @@ using System.Collections.Generic;
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataColumn Data Object.</summary>
-  public class DataUtilityColumn : IComparable<DataUtilityColumn>
+  public class DataUtilColumn : IComparable<DataUtilColumn>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataUtilityColumn()
+    public DataUtilColumn()
     {
       ChangedNames = new ChangedNames();
     }
 
     // Initialize with main values.
-    public DataUtilityColumn(string name, string typeName
+    public DataUtilColumn(string name, string typeName
       , bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
     {
@@ -41,7 +41,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataUtilityColumn(DataUtilityColumn item)
+    public DataUtilColumn(DataUtilColumn item)
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
@@ -65,15 +65,15 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public DataUtilityColumn Clone()
+    public DataUtilColumn Clone()
     {
-      var retValue = MemberwiseClone() as DataUtilityColumn;
+      var retValue = MemberwiseClone() as DataUtilColumn;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(DataUtilityColumn other)
+    public int CompareTo(DataUtilColumn other)
     {
       int retValue;
 
@@ -369,11 +369,11 @@ namespace LJCDataUtilityDAL
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DataColumnUniqueComparer : IComparer<DataUtilityColumn>
+  public class DataColumnUniqueComparer : IComparer<DataUtilColumn>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int Compare(DataUtilityColumn x, DataUtilityColumn y)
+    public int Compare(DataUtilColumn x, DataUtilColumn y)
     {
       int retValue;
 
