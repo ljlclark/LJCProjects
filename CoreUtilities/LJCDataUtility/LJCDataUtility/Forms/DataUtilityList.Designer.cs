@@ -56,6 +56,8 @@
       this.TableDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.TableRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableGenTableCreateProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableGenTableAddProc = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.TableExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ColymnPage = new System.Windows.Forms.TabPage();
@@ -80,10 +82,9 @@
       this.KeyDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
       this.KeyRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.KeyGenForeignProc = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
       this.KeyExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.TableCreate = new System.Windows.Forms.ToolStripMenuItem();
-      this.TableAdd = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.MainTabs.SuspendLayout();
       this.ModulePage.SuspendLayout();
@@ -292,8 +293,8 @@
             this.TableDelete,
             this.toolStripSeparator9,
             this.TableRefresh,
-            this.TableCreate,
-            this.TableAdd,
+            this.TableGenTableCreateProc,
+            this.TableGenTableAddProc,
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
@@ -343,6 +344,18 @@
       this.TableRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
       this.TableRefresh.Size = new System.Drawing.Size(255, 32);
       this.TableRefresh.Text = "&Refresh";
+      // 
+      // TableGenTableCreateProc
+      // 
+      this.TableGenTableCreateProc.Name = "TableGenTableCreateProc";
+      this.TableGenTableCreateProc.Size = new System.Drawing.Size(255, 32);
+      this.TableGenTableCreateProc.Text = "Gen Create Procedure";
+      // 
+      // TableGenTableAddProc
+      // 
+      this.TableGenTableAddProc.Name = "TableGenTableAddProc";
+      this.TableGenTableAddProc.Size = new System.Drawing.Size(255, 32);
+      this.TableGenTableAddProc.Text = "Gen Add Procedure";
       // 
       // toolStripSeparator10
       // 
@@ -533,16 +546,17 @@
             this.KeyDelete,
             this.toolStripSeparator15,
             this.KeyRefresh,
+            this.KeyGenForeignProc,
             this.toolStripSeparator16,
             this.KeyExit});
       this.KeyMenu.Name = "KeyMenu";
-      this.KeyMenu.Size = new System.Drawing.Size(184, 214);
+      this.KeyMenu.Size = new System.Drawing.Size(254, 246);
       // 
       // KeyHeading
       // 
       this.KeyHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.KeyHeading.Name = "KeyHeading";
-      this.KeyHeading.Size = new System.Drawing.Size(183, 32);
+      this.KeyHeading.Size = new System.Drawing.Size(253, 32);
       this.KeyHeading.Text = "Key Menu";
       // 
       // KeyNew
@@ -550,7 +564,7 @@
       this.KeyNew.BackColor = System.Drawing.SystemColors.Control;
       this.KeyNew.Name = "KeyNew";
       this.KeyNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.KeyNew.Size = new System.Drawing.Size(183, 32);
+      this.KeyNew.Size = new System.Drawing.Size(253, 32);
       this.KeyNew.Text = "&New";
       // 
       // KeyEdit
@@ -558,61 +572,55 @@
       this.KeyEdit.BackColor = System.Drawing.SystemColors.Control;
       this.KeyEdit.Name = "KeyEdit";
       this.KeyEdit.ShortcutKeyDisplayString = "ENTER";
-      this.KeyEdit.Size = new System.Drawing.Size(183, 32);
+      this.KeyEdit.Size = new System.Drawing.Size(253, 32);
       this.KeyEdit.Text = "&Edit";
       // 
       // toolStripSeparator14
       // 
       this.toolStripSeparator14.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator14.Name = "toolStripSeparator14";
-      this.toolStripSeparator14.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator14.Size = new System.Drawing.Size(250, 6);
       // 
       // KeyDelete
       // 
       this.KeyDelete.BackColor = System.Drawing.SystemColors.Control;
       this.KeyDelete.Name = "KeyDelete";
       this.KeyDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.KeyDelete.Size = new System.Drawing.Size(183, 32);
+      this.KeyDelete.Size = new System.Drawing.Size(253, 32);
       this.KeyDelete.Text = "&Delete";
       // 
       // toolStripSeparator15
       // 
       this.toolStripSeparator15.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator15.Name = "toolStripSeparator15";
-      this.toolStripSeparator15.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator15.Size = new System.Drawing.Size(250, 6);
       // 
       // KeyRefresh
       // 
       this.KeyRefresh.BackColor = System.Drawing.SystemColors.Control;
       this.KeyRefresh.Name = "KeyRefresh";
       this.KeyRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.KeyRefresh.Size = new System.Drawing.Size(183, 32);
+      this.KeyRefresh.Size = new System.Drawing.Size(253, 32);
       this.KeyRefresh.Text = "&Refresh";
+      // 
+      // KeyGenForeignProc
+      // 
+      this.KeyGenForeignProc.Name = "KeyGenForeignProc";
+      this.KeyGenForeignProc.Size = new System.Drawing.Size(253, 32);
+      this.KeyGenForeignProc.Text = "Gen Foreign Key Proc";
       // 
       // toolStripSeparator16
       // 
       this.toolStripSeparator16.BackColor = System.Drawing.SystemColors.Control;
       this.toolStripSeparator16.Name = "toolStripSeparator16";
-      this.toolStripSeparator16.Size = new System.Drawing.Size(180, 6);
+      this.toolStripSeparator16.Size = new System.Drawing.Size(250, 6);
       // 
       // KeyExit
       // 
       this.KeyExit.BackColor = System.Drawing.SystemColors.Control;
       this.KeyExit.Name = "KeyExit";
-      this.KeyExit.Size = new System.Drawing.Size(183, 32);
+      this.KeyExit.Size = new System.Drawing.Size(253, 32);
       this.KeyExit.Text = "E&xit";
-      // 
-      // TableCreate
-      // 
-      this.TableCreate.Name = "TableCreate";
-      this.TableCreate.Size = new System.Drawing.Size(255, 32);
-      this.TableCreate.Text = "Gen Create Procedure";
-      // 
-      // TableAdd
-      // 
-      this.TableAdd.Name = "TableAdd";
-      this.TableAdd.Size = new System.Drawing.Size(255, 32);
-      this.TableAdd.Text = "Gen Add Procedure";
       // 
       // DataUtilityList
       // 
@@ -692,8 +700,9 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
-    internal System.Windows.Forms.ToolStripMenuItem TableCreate;
-    internal System.Windows.Forms.ToolStripMenuItem TableAdd;
+    internal System.Windows.Forms.ToolStripMenuItem TableGenTableCreateProc;
+    internal System.Windows.Forms.ToolStripMenuItem TableGenTableAddProc;
+    internal System.Windows.Forms.ToolStripMenuItem KeyGenForeignProc;
   }
 }
 

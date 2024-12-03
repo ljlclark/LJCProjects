@@ -32,6 +32,61 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
+    #region Methods
+
+    // Gets the DataKey by ID.
+    // Move to Managers?
+    // ********************
+    public DataKey GetDataKey(int id)
+    {
+      DataKey retDataKey = null;
+
+      if (id > 0)
+      {
+        var manager = DataKeyManager;
+        if (manager != null)
+        {
+          retDataKey = manager.RetrieveWithID(id);
+        }
+      }
+      return retDataKey;
+    }
+
+    // Gets the DataKey by ID.
+    // Move to Managers?
+    // ********************
+    internal DataUtilTable GetDataTable(int id)
+    {
+      DataUtilTable retDataTable = null;
+
+      if (id > 0)
+      {
+        var manager = DataTableManager;
+        if (manager != null)
+        {
+          retDataTable = manager.RetrieveWithID(id);
+        }
+      }
+      return retDataTable;
+    }
+
+    // Gets the table DataColumns.
+    // ********************
+    public DataColumns TableDataColumns(int tableID)
+    {
+      DataColumns retColumns = null;
+
+      var columnManager = DataColumnManager;
+      var keyColumns = columnManager.ParentKey(tableID);
+      var items = columnManager.Load(keyColumns);
+      if (NetCommon.HasItems(items))
+      {
+        retColumns = items;
+      }
+      return retColumns;
+    }
+    #endregion
+
     #region Properties
 
     /// <summary>Gets the DataColumnManager object.</summary>

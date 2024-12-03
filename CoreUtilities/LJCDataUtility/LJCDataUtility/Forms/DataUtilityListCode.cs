@@ -5,6 +5,7 @@ using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
+using LJCWinFormControls;
 using System;
 using System.Drawing;
 using System.IO;
@@ -25,6 +26,100 @@ namespace LJCDataUtility
   // The list form code.
   internal partial class DataUtilityList : Form
   {
+    // ******************************
+    #region Get Value Methods
+    // ******************************
+
+    // *** DataUtilTable ***
+    // *********************
+
+    // Gets the current Table Grid row.
+    internal LJCGridRow DataTableCurrent()
+    {
+      LJCGridRow retRow = TableGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal int DataTableID(LJCGridRow row = null)
+    {
+      int retTableID = 0;
+
+      if (row == null)
+      {
+        row = DataTableCurrent();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableID = row.LJCGetInt32(DataUtilTable.ColumnID);
+      }
+      return retTableID;
+    }
+
+    // Gets the selected row Name.
+    // ********************
+    internal string DataTableName(LJCGridRow row = null)
+    {
+      string retTableName = null;
+
+      if (row == null)
+      {
+        row = DataTableCurrent();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
+      }
+      return retTableName;
+    }
+
+    // *** DataKey ***
+    // ***************
+
+    // Gets the current Key Grid row.
+    internal LJCGridRow DataKeyCurrent()
+    {
+      LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal int DataKeyID(LJCGridRow row = null)
+    {
+      int retKeyID = 0;
+
+      if (null == row)
+      {
+        row = DataKeyCurrent();
+      }
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
+      {
+        retKeyID = row.LJCGetInt32(DataKey.ColumnID);
+      }
+      return retKeyID;
+    }
+
+    // Gets the selected row Name.
+    // ********************
+    internal string DataKeyName(LJCGridRow row = null)
+    {
+      string retKeyName = null;
+
+      if (null == row)
+      {
+        row = DataKeyCurrent();
+      }
+      if (row is LJCGridRow)
+      {
+        retKeyName = row.LJCGetString(DataKey.ColumnName);
+      }
+      return retKeyName;
+    }
+    #endregion
+
     // ******************************
     #region Setup Methods
     // ******************************

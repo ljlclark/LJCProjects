@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using LJCDataUtility;
+using System.Data;
 
 // Data Methods
 //   internal void DataRetrieve()
@@ -83,6 +84,7 @@ namespace LJCDataUtility
       list.KeyEdit.Click += KeyEdit_Click;
       list.KeyDelete.Click += KeyDelete_Click;
       list.KeyRefresh.Click += KeyRefresh_Click;
+      list.KeyGenForeignProc.Click += KeyGenForeignProc_Click;
       list.KeyExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -399,6 +401,65 @@ namespace LJCDataUtility
     private void KeyDelete_Click(object sender, EventArgs e)
     {
       Delete();
+    }
+
+    public enum KeyType
+    {
+      Primary = 1,
+      Unique,
+      Foreign
+    }
+
+    // Handles the Gen Foreign Key procedure event.
+    private void KeyGenForeignProc_Click(object sender, EventArgs e)
+    {
+      var row = UtilityList.DataKeyCurrent();
+      var id = UtilityList.DataKeyID(row);
+      var dataKey = Managers.GetDataKey(id);
+      if (dataKey != null
+        && dataKey.KeyType == (int)KeyType.Foreign)
+      {
+        var dbName = "DataDataUtility";
+        var fkName = dataKey.Name;
+        var tableRow = UtilityList.DataTableCurrent();
+        var sourceTableName = UtilityList.DataTableName(tableRow);
+        var sourceColumnName = dataKey.SourceColumnName;
+        var targetTableName = dataKey.TargetTableName;
+        var targetColumnName = dataKey.TargetColumnName;
+
+        var proc = new ProcBuilder(dbName, sourceTableName);
+        proc.Begin();
+
+        proc.Line("AS");
+        proc.Line("BEGIN");
+
+        proc.Line($"IF OBJECT_ID('{fkName}', N'f')");
+        proc.Line(" IS NULL");
+        proc.Line("BEGIN");
+        proc.Line($"  ALTER TABLE[dbo].[{sourceTableName}]");
+        proc.Line($"  ADD CONSTRAINT[{fkName}]");
+        proc.Line($"  FOREIGN KEY([{sourceColumnName}])");
+        proc.Line($"  REFERENCES[dbo].[{targetTableName}]([{targetColumnName}])");
+        proc.Line("   ON DELETE NO ACTION ON UPDATE NO ACTION;");
+        proc.Line("END");
+        proc.Line("END");
+        var value = proc.ToString();
+
+        var infoValue = UtilityList.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value, infoValue.ControlName
+          , infoValue);
+        UtilityList.InfoValue = controlValue;
+
+        // IF OBJECT_ID('fk_DataColumnDataTable', N'f')
+        //  IS NULL
+        // BEGIN
+        //   ALTER TABLE[dbo].[DataColumn]
+        //   ADD CONSTRAINT[fk_DataColumnDataTable]
+        //   FOREIGN KEY([DataTableID])
+        //   REFERENCES[dbo].[DataTable]([ID])
+        //   ON DELETE NO ACTION ON UPDATE NO ACTION;
+        // END
+      }
     }
 
     // Handles the Refresh menu item event.

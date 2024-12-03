@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataUtilityCommon.cs" />
     <Compile Include="Forms\DataColumn\DataColumnDetail.cs">
       <SubType>Form</SubType>
     </Compile>
