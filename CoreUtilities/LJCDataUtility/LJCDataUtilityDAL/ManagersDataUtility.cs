@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ManagersDataUtility.cs
 using System;
+using System.Reflection;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
@@ -34,48 +35,68 @@ namespace LJCDataUtilityDAL
 
     #region Methods
 
-    // Gets the DataKey by ID.
-    // Move to Managers?
-    // ********************
+    /// <summary>Gets the DataColumn by ID.</summary>
+    public DataUtilColumn GetDataColumn(int id)
+    {
+      DataUtilColumn retDataColumn = null;
+
+      IDError(id, "GetDataColumn(int id)", "id");
+      var manager = DataColumnManager;
+      if (manager != null)
+      {
+        retDataColumn = manager.RetrieveWithID(id);
+      }
+      return retDataColumn;
+    }
+
+    /// <summary>Gets the DataKey by ID.</summary>
     public DataKey GetDataKey(int id)
     {
       DataKey retDataKey = null;
 
-      if (id > 0)
+      IDError(id, "GetDataKey(int id)", "id");
+      var manager = DataKeyManager;
+      if (manager != null)
       {
-        var manager = DataKeyManager;
-        if (manager != null)
-        {
-          retDataKey = manager.RetrieveWithID(id);
-        }
+        retDataKey = manager.RetrieveWithID(id);
       }
       return retDataKey;
     }
 
-    // Gets the DataKey by ID.
-    // Move to Managers?
-    // ********************
-    internal DataUtilTable GetDataTable(int id)
+    /// <summary>Gets the DataModule by ID.</summary>
+    public DataModule GetDataModule(int id)
+    {
+      DataModule retDataModule = null;
+
+      IDError(id, "GetDataModule(int id)", "id");
+      var manager = DataModuleManager;
+      if (manager != null)
+      {
+        retDataModule = manager.RetrieveWithID(id);
+      }
+      return retDataModule;
+    }
+
+    /// <summary>Gets the DataKey by ID.</summary>
+    public DataUtilTable GetDataTable(int id)
     {
       DataUtilTable retDataTable = null;
 
-      if (id > 0)
+      IDError(id, "GetDataTable(int id)", "id");
+      var manager = DataTableManager;
+      if (manager != null)
       {
-        var manager = DataTableManager;
-        if (manager != null)
-        {
-          retDataTable = manager.RetrieveWithID(id);
-        }
+        retDataTable = manager.RetrieveWithID(id);
       }
       return retDataTable;
     }
 
-    // Gets the table DataColumns.
-    // ********************
+    /// <summary>Gets the table DataColumns.</summary>
     public DataColumns TableDataColumns(int tableID)
     {
       DataColumns retColumns = null;
 
+      IDError(tableID, "TableDataColumns(int tableID)", "tableID");
       var columnManager = DataColumnManager;
       var keyColumns = columnManager.ParentKey(tableID);
       var items = columnManager.Load(keyColumns);
@@ -84,6 +105,19 @@ namespace LJCDataUtilityDAL
         retColumns = items;
       }
       return retColumns;
+    }
+
+    // Throws an ID error if id is less than 1.
+    private void IDError(int id, string methodName, string argument)
+    {
+      if (id < 1)
+      {
+        var argError = new ArgError("ManagersDataUtility");
+        argError.MethodName = methodName;
+        var message = $"Param {argument} must be greater than zero.\r\n";
+        argError.Add(message);
+        NetString.ThrowArgError(argError.ToString());
+      }
     }
     #endregion
 

@@ -11,72 +11,57 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-// Setup Methods
-//   private void InitializeControls()
-// Private Methods
-//   private void RestoreControlValues()
-//   private void SaveControlValues()
-// Properties
-//   internal string ControlValuesFileName { get; set; }
-//   *internal ControlValue InfoValue { get; set; }
-//   internal ManagersDataUtility Managers { get; set; }
-
 namespace LJCDataUtility
 {
   // The list form code.
   internal partial class DataUtilityList : Form
   {
-    // ******************************
     #region Get Value Methods
-    // ******************************
 
-    // *** DataUtilTable ***
-    // *********************
+    // *** DataColumn ***
 
-    // Gets the current Table Grid row.
-    internal LJCGridRow DataTableCurrent()
+    // Gets the current Column Grid row.
+    internal LJCGridRow DataColumnCurrent()
     {
-      LJCGridRow retRow = TableGrid.CurrentRow as LJCGridRow;
+      LJCGridRow retRow = ColumnGrid.CurrentRow as LJCGridRow;
       return retRow;
     }
 
     // Gets the selected row ID.
-    internal int DataTableID(LJCGridRow row = null)
+    internal int DataColumnID(LJCGridRow row = null)
     {
-      int retTableID = 0;
+      int retColumnID = 0;
 
-      if (row == null)
+      if (null == row)
       {
-        row = DataTableCurrent();
+        row = DataColumnCurrent();
       }
       if (row is LJCGridRow
-        && "TableGrid" == row.DataGridView.Name)
+        && "ColumnGrid" == row.DataGridView.Name)
       {
-        retTableID = row.LJCGetInt32(DataUtilTable.ColumnID);
+        retColumnID = row.LJCGetInt32(DataUtilColumn.ColumnID);
       }
-      return retTableID;
+      return retColumnID;
     }
 
     // Gets the selected row Name.
-    // ********************
-    internal string DataTableName(LJCGridRow row = null)
+    internal string DataColumnName(LJCGridRow row = null)
     {
-      string retTableName = null;
+      string retColumnName = null;
 
-      if (row == null)
+      if (null == row)
       {
-        row = DataTableCurrent();
+        row = DataColumnCurrent();
       }
       if (row is LJCGridRow
-        && "TableGrid" == row.DataGridView.Name)
+        && "ColumnGrid" == row.DataGridView.Name)
       {
-        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
+        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
       }
-      return retTableName;
+      return retColumnName;
     }
 
     // *** DataKey ***
-    // ***************
 
     // Gets the current Key Grid row.
     internal LJCGridRow DataKeyCurrent()
@@ -103,7 +88,6 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row Name.
-    // ********************
     internal string DataKeyName(LJCGridRow row = null)
     {
       string retKeyName = null;
@@ -112,20 +96,104 @@ namespace LJCDataUtility
       {
         row = DataKeyCurrent();
       }
-      if (row is LJCGridRow)
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
       {
         retKeyName = row.LJCGetString(DataKey.ColumnName);
       }
       return retKeyName;
     }
+
+    // *** DataModule ***
+
+    // Gets the current Module Grid row.
+    internal LJCGridRow DataModuleCurrent()
+    {
+      LJCGridRow retRow = ModuleGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal int DataModuleID(LJCGridRow row = null)
+    {
+      int retModuleID = 0;
+
+      if (null == row)
+      {
+        row = DataModuleCurrent();
+      }
+      if (row is LJCGridRow
+        && "ModuleGrid" == row.DataGridView.Name)
+      {
+        retModuleID = row.LJCGetInt32(DataModule.ColumnID);
+      }
+      return retModuleID;
+    }
+
+    // Gets the selected row Name.
+    internal string DataModuleName(LJCGridRow row = null)
+    {
+      string retModuleName = null;
+
+      if (null == row)
+      {
+        row = DataModuleCurrent();
+      }
+      if (row is LJCGridRow
+        && "ModuleGrid" == row.DataGridView.Name)
+      {
+        retModuleName = row.LJCGetString(DataModule.ColumnName);
+      }
+      return retModuleName;
+    }
+
+    // *** DataUtilTable ***
+
+    // Gets the current Table Grid row.
+    internal LJCGridRow DataTableCurrent()
+    {
+      LJCGridRow retRow = TableGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal int DataTableID(LJCGridRow row = null)
+    {
+      int retTableID = 0;
+
+      if (row == null)
+      {
+        row = DataTableCurrent();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableID = row.LJCGetInt32(DataUtilTable.ColumnID);
+      }
+      return retTableID;
+    }
+
+    // Gets the selected row Name.
+    internal string DataTableName(LJCGridRow row = null)
+    {
+      string retTableName = null;
+
+      if (row == null)
+      {
+        row = DataTableCurrent();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
+      }
+      return retTableName;
+    }
     #endregion
 
-    // ******************************
     #region Setup Methods
-    // ******************************
 
     // Configures the controls and loads the selection control data.
-    // ********************
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
@@ -138,7 +206,6 @@ namespace LJCDataUtility
     }
 
     // Initialize the Class Data.
-    // ********************
     private void InitializeClassData()
     {
       var values = ValuesDataUtility.Instance;
@@ -155,7 +222,6 @@ namespace LJCDataUtility
     }
 
     // Setup the grid code references.
-    // ********************
     private void SetupGridCode()
     {
       ModuleGridCode = new DataModuleGridCode(this);
@@ -165,7 +231,6 @@ namespace LJCDataUtility
     }
 
     // Set initial Control values.
-    // ********************
     private void InitialControlValues()
     {
       NetFile.CreateFolder("ExportFiles");
@@ -174,7 +239,6 @@ namespace LJCDataUtility
     }
 
     // Setup the data grids.
-    // ********************
     private void SetupGrids()
     {
       ModuleGridCode.SetupGrid();
@@ -184,12 +248,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Private Methods
-    // ******************************
 
     // Restores the control values.
-    // ********************
     private void RestoreControlValues()
     {
       ControlValue controlValue;
@@ -236,7 +297,6 @@ namespace LJCDataUtility
     }
 
     // Saves the control values. 
-    // ********************
     private void SaveControlValues()
     {
       ControlValues controlValues = new ControlValues();
@@ -271,9 +331,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     // The ControlValues file name.
     internal string ControlValuesFileName { get; set; }

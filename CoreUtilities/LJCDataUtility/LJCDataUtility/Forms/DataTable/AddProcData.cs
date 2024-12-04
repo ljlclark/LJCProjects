@@ -1,4 +1,7 @@
-﻿using LJCDataUtilityDAL;
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// AddProcData.cs
+using LJCDataUtilityDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +13,9 @@ namespace LJCDataUtility
   // Data for the DataTableGridCode.AddProc() method.
   internal class AddProcData
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
-    // ********************
     public AddProcData(string dbName, DataColumns tableColumns
       , string tableName, DataColumns parentColumns = null
       , string parentTableName = null)
@@ -28,9 +28,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     // Gets or sets the Database name.
     public string DBName { get; set; }

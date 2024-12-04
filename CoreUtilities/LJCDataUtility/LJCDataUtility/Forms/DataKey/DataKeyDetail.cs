@@ -12,43 +12,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-// Data Methods
-//   private void DataRetrieve()
-//   private void GetValues(DataUtilColumn dataRecord)
-//   private DataUtilColumn SetValues()
-//   private bool DataSave()
-//   private bool IsValid()
-// Setup Methods
-//   private void InitializeControls()
-//   private void SetNoSpace()
-// KeyEdit Event Handlers
-//   private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-//   private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-// Control Event Handlers
-//   protected void LJCOnChange()
-//   private void OKButton_Click(object sender, EventArgs e)
-// Properties
-//   internal int LJCID { get; set; }
-//   internal bool LJCIsUpdate { get; private set; }
-//   internal Point LJCLocation { get; set; }
-//   internal ManagersDataUtility LJCManagers { get; set; }
-//   internal int LJCParentID { get; set; }
-//   internal string LJCParentName
-//   internal DataUtilColumn LJCRecord { get; private set; }
-// Class Data
-//   internal event EventHandler<EventArgs> LJCChange;
-
 namespace LJCDataUtility
 {
   // The DataKey detail dialog.
   internal partial class DataKeyDetail : Form
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
-    // ********************
     internal DataKeyDetail()
     {
       InitializeComponent();
@@ -64,28 +35,22 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Form Event Handlers
-    // ******************************
 
-    // ********************
+    // Configures the form and loads the initial control data.
     private void DataKeyDetail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      //CenterToParent();
       Location = LJCLocation;
     }
     #endregion
 
-    // ******************************
     #region Data Methods
-    // ******************************
 
     // Retrieves the initial control data.
-    // ********************
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -111,7 +76,6 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
-    // ********************
     private void GetValues(DataKey dataRecord)
     {
       if (dataRecord != null)
@@ -133,7 +97,6 @@ namespace LJCDataUtility
     }
 
     // Creates and returns a record object with the data from
-    // ********************
     private DataKey SetValues()
     {
       var retData = GetRecord();
@@ -157,7 +120,6 @@ namespace LJCDataUtility
     }
 
     // Resets the empty record values.
-    // ********************
     private void ResetValues(DataKey dataRecord)
     {
       // In control order.
@@ -170,7 +132,6 @@ namespace LJCDataUtility
     }
 
     // Gets the original or new record.
-    // ********************
     private DataKey GetRecord()
     {
       DataKey retRecord = null;
@@ -187,7 +148,6 @@ namespace LJCDataUtility
     }
 
     // Saves the data.
-    // ********************
     private bool DataSave()
     {
       bool retValue = true;
@@ -224,7 +184,6 @@ namespace LJCDataUtility
     }
 
     // Check for saved data.
-    // ********************
     private bool IsDataSaved()
     {
       bool retValue = false;
@@ -238,7 +197,6 @@ namespace LJCDataUtility
     }
 
     // Validates the data.
-    // ********************
     private bool IsValid()
     {
       bool retValue = true;
@@ -263,12 +221,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Setup Methods
-    // ******************************
 
     // Configures the controls and loads the selection control data.
-    // ********************
     private void InitializeControls()
     {
       // Get singleton values.
@@ -288,7 +243,6 @@ namespace LJCDataUtility
     }
 
     // Sets the NoSpace events.
-    // ********************
     private void SetNoSpace()
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
@@ -296,19 +250,15 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region KeyEdit Event Handlers
-    // ******************************
 
     // Does not allow spaces.
-    // ********************
     private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
       e.Handled = FormCommon.HandleSpace(e.KeyChar);
     }
 
     // Strips blanks from the text value.
-    // ********************
     private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
       if (sender is TextBox textBox)
@@ -320,20 +270,16 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Control Event Handlers
-    // ******************************
 
     // Fires the Change event.
     //// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
-    // ********************
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
     }
 
     // Saves the data and closes the form.
-    // ********************
     private void OKButton_Click(object sender, EventArgs e)
     {
       if (IsDataSaved())
@@ -344,9 +290,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     // Gets or sets the primary ID value.
     internal int LJCID { get; set; }
@@ -375,9 +319,7 @@ namespace LJCDataUtility
     internal DataKey LJCRecord { get; private set; }
     #endregion
 
-    // ******************************
     #region Class Data
-    // ******************************
 
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;

@@ -10,23 +10,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-// Item Change Processing
-//   internal void DoChange(Change change)
-//   internal void TimedChange(Change change)
-// Action Event Handlers
-//   internal void Exit_Click(object sender, EventArgs e)
-
 namespace LJCDataUtility
 {
   // The list form.
   internal partial class DataUtilityList : Form
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
-    // ********************
     internal DataUtilityList()
     {
       InitializeComponent();
@@ -36,11 +27,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Form Event Handlers
-    // ******************************
 
-    // ********************
+    // Configures the form and loads the initial control data.
     private void DataUtilityList_Load(object sender, EventArgs e)
     {
       InitializeControls();
@@ -48,12 +37,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Item Change Processing
-    // ******************************
 
     // Execute the list and related item functions.
-    // ********************
     internal void DoChange(Change change)
     {
       Cursor = Cursors.WaitCursor;
@@ -88,7 +74,6 @@ namespace LJCDataUtility
     }
 
     // The ChangeType values.
-    // ********************
     internal enum Change
     {
       Startup,
@@ -99,14 +84,12 @@ namespace LJCDataUtility
     }
 
     // Starts the Timer with the Change value.
-    // ********************
     internal void TimedChange(Change change)
     {
       ChangeTimer.DoChange(change.ToString());
     }
 
     // Start the Change processing.
-    // ********************
     private void StartChangeProcessing()
     {
       ChangeTimer = new ChangeTimer();
@@ -115,7 +98,6 @@ namespace LJCDataUtility
     }
 
     // Change Event Handler
-    // ********************
     private void ChangeTimer_ItemChange(object sender, EventArgs e)
     {
       Change changeType;
@@ -126,16 +108,12 @@ namespace LJCDataUtility
     }
 
     // Gets or sets the ChangeTimer object.
-    // ********************
     private ChangeTimer ChangeTimer { get; set; }
     #endregion
 
-    // ******************************
     #region Action Event Handlers
-    // ******************************
 
     // Shared menu Exit event handler.
-    // ********************
     internal void Exit_Click(object sender, EventArgs e)
     {
       SaveControlValues();

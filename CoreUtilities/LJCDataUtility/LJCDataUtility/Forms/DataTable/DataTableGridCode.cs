@@ -17,51 +17,14 @@ using System.Data;
 using System.IO;
 using LJCDataUtility;
 
-// Data Methods
-//   internal void DataRetrieve()
-//   private LJCGridRow RowAdd(DataUtilTable dataRecord)
-//   private bool RowSelect(DataUtilTable dataRecord)
-//   private void RowUpdate(DataUtilTable dataRecord)
-//   private void SetControlState()
-//   private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
-// Get Value Methods
-//   *private DataColumns TableColumns(string tableName
-// Action Methods
-//   internal void Delete()
-//   internal void Edit()
-//   internal void New()
-//   internal void Refresh()
-//   internal void ShowHelp()
-//   private void Detail_Change(object sender, EventArgs e)
-// Setup and Other Methods
-//   internal void SetupGrid()
-// Action Event Handlers
-//   private void TableNew_Click(object sender, EventArgs e)
-//   private void TableEdit_Click(object sender, EventArgs e)
-//   private void TableDelete_Click(object sender, EventArgs e)
-//   private void TableRefresh_Click(object sender, EventArgs e)
-//   *private void TableGenTableCreateProc_Click(object sender, EventArgs e)
-//   *private void TableGenTableAddProc_Click(object sender, EventArgs e)
-//   *private string CreateAddProc(AddProcData data)
-// Control Event Handlers
-//   private void GridFont_FontChange(object sender, EventArgs e)
-//   private void MenuFont_FontChange(object sender, EventArgs e)
-//   private void TableGrid_KeyDown(object sender, KeyEventArgs e)
-//   private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-//   private void TableGrid_MouseDown(object sender, MouseEventArgs e)
-//   private void TableGrid_SelectionChanged(object sender, EventArgs e)
-
 namespace LJCDataUtility
 {
   // Provides DataTableGrid methods for the DataUtilityList window.
   internal class DataTableGridCode
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
-    // ********************
     internal DataTableGridCode(DataUtilityList parentList)
     {
       Parent = parentList;
@@ -93,8 +56,8 @@ namespace LJCDataUtility
       Parent.TableEdit.Click += TableEdit_Click;
       Parent.TableDelete.Click += TableDelete_Click;
       Parent.TableRefresh.Click += TableRefresh_Click;
-      Parent.TableGenTableAddProc.Click += TableGenTableAddProc_Click;
-      Parent.TableGenTableCreateProc.Click += TableGenTableCreateProc_Click;
+      Parent.TableAddDataProc.Click += TableAddDataProc_Click;
+      Parent.TableCreateProc.Click += TableCreateProc_Click;
       Parent.TableExit.Click += Parent.Exit_Click;
 
       // Grid events.
@@ -105,14 +68,32 @@ namespace LJCDataUtility
       grid.SelectionChanged += TableGrid_SelectionChanged;
       Parent.Cursor = Cursors.Default;
     }
+
+    // Configures the Grid.
+    internal void SetupGrid()
+    {
+      // Setup default grid columns if no columns are defined.
+      if (0 == TableGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string>()
+        {
+          DataUtilTable.ColumnDataModuleID,
+          DataUtilTable.ColumnName,
+          DataUtilTable.ColumnDescription
+        };
+
+        // Get the grid columns from the manager Data Definition.
+        var gridColumns = TableManager.GetColumns(propertyNames);
+
+        // Setup the grid columns.
+        TableGrid.LJCAddColumns(gridColumns);
+      }
+    }
     #endregion
 
-    // ******************************
     #region Data Methods
-    // ******************************
 
     // Retrieves the list rows.
-    // ********************
     internal void DataRetrieve()
     {
       Parent.Cursor = Cursors.WaitCursor;
@@ -139,7 +120,6 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
-    // ********************
     private LJCGridRow RowAdd(DataUtilTable dataRecord)
     {
       var retValue = TableGrid.LJCRowAdd();
@@ -149,7 +129,6 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
-    // ********************
     private bool RowSelect(DataUtilTable dataRecord)
     {
       bool retValue = false;
@@ -174,7 +153,6 @@ namespace LJCDataUtility
     }
 
     // Updates the current row with the record values.
-    // ********************
     private void RowUpdate(DataUtilTable dataRecord)
     {
       if (TableGrid.CurrentRow is LJCGridRow row)
@@ -185,7 +163,6 @@ namespace LJCDataUtility
     }
 
     // Sets the control states based on the current control values.
-    // ********************
     private void SetControlState()
     {
       bool enableNew = ModuleGrid.CurrentRow != null;
@@ -195,7 +172,6 @@ namespace LJCDataUtility
     }
 
     // Sets the row stored values.
-    // ********************
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
       row.LJCSetInt32(DataUtilTable.ColumnID
@@ -205,12 +181,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
-    #region Action Methods
-    // ******************************
+    #region Common Action Methods
 
     // Deletes the selected row.
-    // ********************
     internal void Delete()
     {
       bool success = false;
@@ -254,7 +227,6 @@ namespace LJCDataUtility
     }
 
     // Displays a detail dialog to edit a record.
-    // ********************
     internal void Edit()
     {
       if (ModuleGrid.CurrentRow is LJCGridRow parentRow
@@ -281,7 +253,6 @@ namespace LJCDataUtility
     }
 
     // Displays a detail dialog for a new record.
-    // ********************
     internal void New()
     {
       if (ModuleGrid.CurrentRow is LJCGridRow parentRow)
@@ -305,7 +276,6 @@ namespace LJCDataUtility
     }
 
     // Refreshes the list.
-    // ********************
     internal void Refresh()
     {
       Parent.Cursor = Cursors.WaitCursor;
@@ -330,7 +300,6 @@ namespace LJCDataUtility
     }
 
     // Shows the help page
-    // ********************
     internal void ShowHelp()
     {
       //Help.ShowHelp(DocList, "_AppName_.chm", HelpNavigator.Topic
@@ -338,7 +307,6 @@ namespace LJCDataUtility
     }
 
     // Adds new row or updates row with control values.
-    // ********************
     private void Detail_Change(object sender, EventArgs e)
     {
       var detail = sender as DataTableDetail;
@@ -361,90 +329,10 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
-    #region Setup and Other Methods
-    // ******************************
+    #region Custom Action Methods
 
-    // Configures the Grid.
-    // ********************
-    internal void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == TableGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DataUtilTable.ColumnDataModuleID,
-          DataUtilTable.ColumnName,
-          DataUtilTable.ColumnDescription
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var gridColumns = TableManager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        TableGrid.LJCAddColumns(gridColumns);
-      }
-    }
-    #endregion
-
-    // ******************************
-    #region Action Event Handlers
-    // ******************************
-
-    // Handles the New menu item event.
-    // ********************
-    private void TableNew_Click(object sender, EventArgs e)
-    {
-      New();
-    }
-
-    // Handles the Edit menu item event.
-    // ********************
-    private void TableEdit_Click(object sender, EventArgs e)
-    {
-      Edit();
-    }
-
-    // Handles the Delete menu item event.
-    // ********************
-    private void TableDelete_Click(object sender, EventArgs e)
-    {
-      Delete();
-    }
-
-    // Handles the Refresh menu item event.
-    // ********************
-    private void TableRefresh_Click(object sender, EventArgs e)
-    {
-      Refresh();
-    }
-
-    // Handles the Generate Create Procedure menu item event.
-    // ********************
-    private void TableGenTableCreateProc_Click(object sender, EventArgs e)
-    {
-      string dbName = "LJCDataUtility";
-      var id = Parent.DataTableID();
-      var items = Managers.TableDataColumns(id);
-      if (NetCommon.HasItems(items))
-      {
-        var tableName = Parent.DataTableName();
-        var proc = new ProcBuilder(dbName, tableName);
-        var primaryKeyList = "ID";
-        var uniqueKeyList = "Name";
-        var value = proc.CreateTableProc(items, primaryKeyList
-          , uniqueKeyList);
-        var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
-          , infoValue.ControlName, infoValue);
-        Parent.InfoValue = controlValue;
-      }
-    }
-
-    // Handles the Generate Add Procedure menu item event.
-    // ********************
-    private void TableGenTableAddProc_Click(object sender, EventArgs e)
+    // Generates the Add data procedure.
+    internal void AddDataProc()
     {
       string dbName = "LJCDataUtility";
 
@@ -492,8 +380,29 @@ namespace LJCDataUtility
       }
     }
 
+    // Generates the create Table procedure.
+    internal void CreateTableProc()
+    {
+      string dbName = "LJCDataUtility";
+      var id = Parent.DataTableID();
+      var items = Managers.TableDataColumns(id);
+      if (NetCommon.HasItems(items))
+      {
+        var tableName = Parent.DataTableName();
+        var proc = new ProcBuilder(dbName, tableName);
+        var primaryKeyList = "ID";
+        var uniqueKeyList = "Name";
+        var value = proc.CreateTableProc(items, primaryKeyList
+          , uniqueKeyList);
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+
     // Create the Add data procedure.
-    // ********************
     private string CreateAddProc(AddProcData data)
     {
       string retString = null;
@@ -501,7 +410,7 @@ namespace LJCDataUtility
       if (data.TableColumns != null)
       {
         var proc = new ProcBuilder(data.DBName, data.TableName);
-        proc.Begin();
+        proc.Begin(proc.AddProcName);
 
         // Parameters
         var parentFindColumnName = "Name";
@@ -575,6 +484,7 @@ namespace LJCDataUtility
 
         retString = proc.ToString();
       }
+
       var infoValue = Parent.InfoValue;
       var controlValue = DataUtilityCommon.ShowInfo(retString
         , infoValue.ControlName, infoValue);
@@ -583,12 +493,51 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
+    #region Common Action Event Handlers
+
+    // Handles the New menu item event.
+    private void TableNew_Click(object sender, EventArgs e)
+    {
+      New();
+    }
+
+    // Handles the Edit menu item event.
+    private void TableEdit_Click(object sender, EventArgs e)
+    {
+      Edit();
+    }
+
+    // Handles the Delete menu item event.
+    private void TableDelete_Click(object sender, EventArgs e)
+    {
+      Delete();
+    }
+
+    // Handles the Refresh menu item event.
+    private void TableRefresh_Click(object sender, EventArgs e)
+    {
+      Refresh();
+    }
+    #endregion
+
+    #region Custom Action Event Handlers
+
+    // Handles the Generate Add Procedure menu item event.
+    private void TableAddDataProc_Click(object sender, EventArgs e)
+    {
+      AddDataProc();
+    }
+
+    // Handles the Generate Create Procedure menu item event.
+    private void TableCreateProc_Click(object sender, EventArgs e)
+    {
+      CreateTableProc();
+    }
+    #endregion
+
     #region Control Event Handlers
-    // ******************************
 
     // Handles the Grid FontChange event.
-    // ********************
     private void GridFont_FontChange(object sender, EventArgs e)
     {
       var text = Parent.Text;
@@ -602,7 +551,6 @@ namespace LJCDataUtility
     }
 
     // Handles the Menu FontChange event.
-    // ********************
     private void MenuFont_FontChange(object sender, EventArgs e)
     {
       var menu = sender as ToolStripDropDownMenu;
@@ -617,7 +565,6 @@ namespace LJCDataUtility
     }
 
     // Handles the Grid KeyDown event.
-    // ********************
     private void TableGrid_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
@@ -658,7 +605,6 @@ namespace LJCDataUtility
     }
 
     // Handles the Grid MouseDoubleClick event.
-    // ********************
     private void TableGrid_MouseDoubleClick(object sender, MouseEventArgs e)
     {
       if (TableGrid.LJCGetMouseRow(e) != null)
@@ -668,7 +614,6 @@ namespace LJCDataUtility
     }
 
     // Handles the MouseDown event.
-    // ********************
     private void TableGrid_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
@@ -685,7 +630,6 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
-    // ********************
     private void TableGrid_SelectionChanged(object sender, EventArgs e)
     {
       if (TableGrid.LJCAllowSelectionChange)
@@ -696,9 +640,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     // Gets or sets the Parent List reference.
     private DataUtilityList Parent { get; set; }
