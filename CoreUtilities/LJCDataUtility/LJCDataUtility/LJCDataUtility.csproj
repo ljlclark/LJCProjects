@@ -166,6 +166,7 @@
     <Content Include="bin\Debug\SQLScript\Data\sp_DataKeyData.sql" />
     <Content Include="bin\Debug\SQLScript\Data\sp_DataModuleData.sql" />
     <Content Include="bin\Debug\SQLScript\Data\sp_DataTableData.sql" />
+    <Content Include="bin\Debug\SQLScript\ForeignKeys\Compare.txt" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\DataUtilityDropFK.sql" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\sp_DataColumnFK.sql" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\sp_DataColumnDropFK.sql" />

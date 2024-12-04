@@ -53,14 +53,14 @@ namespace LJCDataUtility
       b.AppendLine("/* Copyright(c) Lester J. Clark and Contributors. */");
       b.AppendLine("/* Licensed under the MIT License. */");
       b.AppendLine($"/* {procName}.sql */");
-      b.AppendLine($"USE[{DBName}]");
+      b.AppendLine($"USE [{DBName}]");
       b.AppendLine("GO");
       b.AppendLine("SET ANSI_NULLS ON");
       b.AppendLine("GO");
       b.AppendLine("SET QUOTED_IDENTIFIER ON");
       b.AppendLine("GO");
       b.AppendLine("");
-      b.AppendLine($"IF OBJECT_ID(' [dbo].[{procName}]', N'p')");
+      b.AppendLine($"IF OBJECT_ID('[dbo].[{procName}]', N'p')");
       b.AppendLine(" IS NOT NULL");
       b.AppendLine($"  DROP PROCEDURE [dbo].[{procName}];");
       b.AppendLine("GO");
