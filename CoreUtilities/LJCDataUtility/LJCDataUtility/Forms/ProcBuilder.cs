@@ -282,8 +282,13 @@ namespace LJCDataUtility
         }
         else
         {
+          var maxLength = column.MaxLength;
+          if (column.NewMaxLength > 0)
+          {
+            maxLength = column.MaxLength;
+          }
           TableColumn(column.Name, column.TypeName, column.AllowNull
-            , column.MaxLength, column.DefaultValue);
+            , maxLength, column.DefaultValue);
         }
       }
 
@@ -357,7 +362,7 @@ namespace LJCDataUtility
       b.Append(" NULL");
       if (defaultValue != null)
       {
-        b.Append($" default {defaultValue}");
+        b.Append($" DEFAULT {defaultValue}");
       }
 
       HasColumns = true;

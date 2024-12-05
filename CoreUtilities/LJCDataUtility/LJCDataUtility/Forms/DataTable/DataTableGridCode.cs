@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Data;
 using System.IO;
 using LJCDataUtility;
+using static System.Net.WebRequestMethods;
 
 namespace LJCDataUtility
 {
@@ -519,29 +520,93 @@ namespace LJCDataUtility
         string newTableName = $"New{tableName}";
         b.AppendLine($"USE [{dbName}]");
         b.AppendLine($"SET IDENTITY_INSERT {newTableName} ON");
-        b.AppendLine($"INSERT INTO {newTableName}");
+        b.AppendLine();
 
+        b.AppendLine($"INSERT INTO {newTableName}");
         var proc = new ProcBuilder(dbName, newTableName);
         var insertList = proc.ColumnsList(dataColumns, true
           , true, true);
         insertList = insertList.Substring(2);
         b.AppendLine(insertList);
 
-        proc.Reset();
         b.AppendLine("select");
-        var selectList = proc.ColumnsList(dataColumns, false
-          , false, true);
-        selectList = selectList.Substring(2);
+        var selectList = InsertSelectList(dataColumns);
         b.AppendLine(selectList);
         b.AppendLine($"FROM {tableName};");
-        b.AppendLine($"SET IDENTITY_INSERT {newTableName} OFF");
 
-        var retString = b.ToString();
+        b.AppendLine();
+        b.AppendLine($"SET IDENTITY_INSERT {newTableName} OFF");
+        var showText = b.ToString();
+
         var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(retString
+        var controlValue = DataUtilityCommon.ShowInfo(showText
           , infoValue.ControlName, infoValue);
         Parent.InfoValue = controlValue;
       }
+    }
+
+    // Get custom InsertSelect list.
+    private string InsertSelectList(DataColumns dataColumns)
+    {
+      string retSelect;
+
+      var b = new StringBuilder(256);
+      var value = "  ";
+      b.Append(value);
+      var lineLength = value.Length;
+
+      var first = true;
+      foreach (DataUtilColumn column in dataColumns)
+      {
+        var nameValue = column.Name;
+        lineLength += nameValue.Length;
+
+        var addNewline = false;
+        if ("Name" == nameValue)
+        {
+          addNewline = true;
+          nameValue = "Name = ISNULL(NewName, Name)";
+          lineLength = 81;
+        }
+        if ("MaxLength" == nameValue)
+        {
+          addNewline = true;
+          nameValue = "MaxLength =\r\n";
+          nameValue += "      CASE NewMaxLength\r\n";
+          nameValue += "        WHEN 0 THEN MaxLength ELSE NewMaxLength\r\n";
+          nameValue += "      END";
+          lineLength = 81;
+        }
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n    ";
+          b.Append(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          b.Append(firstValue);
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        b.Append(nameValue);
+        if (addNewline)
+        {
+          var newLine = "\r\n    ";
+          b.Append(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+        }
+      }
+      retSelect = b.ToString();
+      return retSelect;
     }
     #endregion
 
