@@ -22,14 +22,26 @@ namespace LJCDataUtility
     /// <summary>Initializes an object instance.</summary>
     public ProcBuilder(string dbName, string tableName)
     {
-      DBName = dbName;
-      TableName = tableName;
-      AddProcName = $"sp_{TableName}Add";
-      CreateProcName = $"sp_{TableName}";
-      ForeignKeyProcName = $"sp_{TableName}FK";
-      ForeignKeyDropProcName = $"sp_{TableName}DropFK";
-      PKName = $"pk_{TableName}";
-      UQName = $"uq_{TableName}";
+      Reset(dbName, tableName);
+    }
+
+    /// <summary>Resets the text values.</summary>
+    public void Reset(string dbName = null, string tableName = null)
+    {
+      if (NetString.HasValue(dbName))
+      {
+        DBName = dbName;
+      }
+      if (NetString.HasValue(tableName))
+      {
+        TableName = tableName;
+        AddProcName = $"sp_{TableName}Add";
+        CreateProcName = $"sp_{TableName}";
+        ForeignKeyProcName = $"sp_{TableName}FK";
+        ForeignKeyDropProcName = $"sp_{TableName}DropFK";
+        PKName = $"pk_{TableName}";
+        UQName = $"uq_{TableName}";
+      }
       Builder = new StringBuilder(512);
       HasColumns = false;
     }
@@ -89,39 +101,56 @@ namespace LJCDataUtility
     }
 
     /// <summary>Creates the insert Columns list.</summary>
-    public string InsertList(DataColumns dataColumns)
+    public string ColumnsList(DataColumns dataColumns
+      , bool includeParens = true, bool useNewNames = false
+      , bool includeID = false)
     {
-      var value = "    (";
+      var value = "    ";
+      if (includeParens)
+      {
+        value += "(";
+      }
       var retList = value;
       var lineLength = value.Length;
 
       var first = true;
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
-        if (dataColumn.Name != "ID")
+        if (!includeID
+          && dataColumn.Name != "ID")
         {
-          var nameValue = $"{dataColumn.Name}";
-          lineLength += nameValue.Length;
-
-          if (lineLength > 80)
-          {
-            var newLine = "\r\n     ";
-            retList += newLine;
-            lineLength = newLine.Length - 2;
-          }
-
-          if (!first)
-          {
-            var firstValue = ", ";
-            retList += firstValue;
-            lineLength += firstValue.Length;
-          }
-          first = false;
-
-          retList += nameValue;
+          continue;
         }
+
+        var nameValue = $"{dataColumn.Name}";
+        if (useNewNames
+          && NetString.HasValue(dataColumn.NewName))
+        {
+          nameValue = dataColumn.NewName;
+        }
+        lineLength += nameValue.Length;
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n     ";
+          retList += newLine;
+          lineLength = newLine.Length - 2;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          retList += firstValue;
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        retList += nameValue;
       }
-      retList += ")";
+      if (includeParens)
+      {
+        retList += ")";
+      }
       return retList;
     }
 
@@ -203,28 +232,30 @@ namespace LJCDataUtility
       var first = true;
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
-        if (!dataColumn.Name.EndsWith("ID"))
+        if (dataColumn.Name.EndsWith("ID"))
         {
-          var nameValue = SQLVarName(dataColumn.Name);
-          lineLength += nameValue.Length;
-
-          if (lineLength > 80)
-          {
-            var newLine = "\r\n     ";
-            retList += newLine;
-            lineLength = newLine.Length - 2;
-          }
-
-          if (!first)
-          {
-            var firstValue = ", ";
-            retList += firstValue;
-            lineLength += firstValue.Length;
-          }
-          first = false;
-
-          retList += nameValue;
+          continue;
         }
+
+        var nameValue = SQLVarName(dataColumn.Name);
+        lineLength += nameValue.Length;
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n     ";
+          retList += newLine;
+          lineLength = newLine.Length - 2;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          retList += firstValue;
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        retList += nameValue;
       }
       retList += ");";
       return retList;

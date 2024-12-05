@@ -16,13 +16,10 @@ namespace LJCWinFormCommon
   /// <include path='items/FormCommon/*' file='Doc/FormCommon.xml'/>
   public class FormCommon
   {
-    // ********************
     #region General Functions
-    // ********************
 
     // Verify create of missing tables.
     /// <include path='items/CreateTablesPrompt/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool CreateTablesPrompt(string exceptionMessage, string[] fileSpecs)
     {
       bool retValue = false;
@@ -60,11 +57,22 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
+    /// <summary>Defaults a numeric value to Zero.</summary>
+    public static string DefaultZero(object value = null)
+    {
+      var retValue = "0";
+
+      if (value != null)
+      {
+        retValue = value.ToString();
+      }
+      return retValue;
+    }
+
     /// <summary>
     /// Sets the grid columns to not sortable.
     /// </summary>
     /// <param name="grid">The DataGridView object.</param>
-    // ********************
     public static void NotSortable(DataGridView grid)
     {
       var notSortable = DataGridViewColumnSortMode.NotSortable;
@@ -75,7 +83,6 @@ namespace LJCWinFormCommon
     }
 
     /// <summary></summary>
-    // ********************
     public static void RestoreMenuFontSize(ContextMenuStrip menu
       , ControlValues controlValues)
     {
@@ -89,7 +96,6 @@ namespace LJCWinFormCommon
 
     // Restore the splitter distance.
     /// <include path='items/RestoreSplitDistance/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void RestoreSplitDistance(SplitContainer splitContainer
       , ControlValues controlValues)
     {
@@ -105,7 +111,6 @@ namespace LJCWinFormCommon
     }
 
     /// <summary></summary>
-    // ********************
     public static void RestoreTabsFontSize(TabControl tabs
       , ControlValues controlValues)
     {
@@ -118,7 +123,6 @@ namespace LJCWinFormCommon
     }
 
     /// <summary></summary>
-    // ********************
     public static void SaveMenuFontSize(ContextMenuStrip menu
       , ControlValues controlValues)
     {
@@ -127,7 +131,6 @@ namespace LJCWinFormCommon
     }
 
     /// <summary></summary>
-    // ********************
     public static void SaveTabFontSize(TabControl tabs
       , ControlValues controlValues)
     {
@@ -137,7 +140,6 @@ namespace LJCWinFormCommon
 
     // Sets the BackColor for the labels.
     /// <include path='items/SetLabelsBackColor/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void SetLabelsBackColor(Control.ControlCollection controls
       , Color backColor)
     {
@@ -155,13 +157,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region Action State Functions
-    // ********************
 
     // Sets the enable state for the menu items.
     /// <include path='items/SetMenuState/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void SetMenuState(ContextMenuStrip contextMenuStrip, bool enableNew
       , bool enableEdit)
     {
@@ -184,7 +183,6 @@ namespace LJCWinFormCommon
 
     // Sets the enable state for the tool items.
     /// <include path='items/SetToolState/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void SetToolState(ToolStrip toolStrip, bool enableNew, bool enableEdit)
     {
       foreach (ToolStripItem toolItem in toolStrip.Items)
@@ -201,13 +199,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region Error Functions
-    // ********************
 
     // Standard Add error message.
     /// <include path='items/AddError/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool AddError(Form form, int affectedCount)
     {
       bool retValue = false;
@@ -226,7 +221,6 @@ namespace LJCWinFormCommon
 
     // Standard Duplicate error message.
     /// <include path='items/DataError/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void DataError(Form form)
     {
       var title = "Data Entry Error";
@@ -237,7 +231,6 @@ namespace LJCWinFormCommon
 
     // Displays the error text if it is not null.
     /// <include path='items/ShowError/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool ShowError(string errorText, string caption = null)
     {
       bool retValue = false;
@@ -253,7 +246,6 @@ namespace LJCWinFormCommon
 
     // Displays the error text if it is not null.
     /// <include path='items/ShowHasError/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool ShowHasError(string errorText, int affectedCount = 1
       , string caption = null)
     {
@@ -274,7 +266,6 @@ namespace LJCWinFormCommon
 
     // Standard Update error message.
     /// <include path='items/UpdateError/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool UpdateError(Form form, int affectedCount)
     {
       bool retValue = false;
@@ -292,13 +283,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region Field Key Handler Functions
-    // ********************
 
     // Checks the key character for a numeric or allowed control value.
     /// <include path='items/HandleNumberOrEditKey/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool HandleNumberOrEditKey(char keyChar)
     {
       // Use in KeyDown
@@ -317,7 +305,6 @@ namespace LJCWinFormCommon
 
     // Checks the key character for a space.
     /// <include path='items/HandleSpace/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static bool HandleSpace(char keyChar)
     {
       bool retValue = false;
@@ -331,7 +318,6 @@ namespace LJCWinFormCommon
 
     // Strips blanks from the string.
     /// <include path='items/StripBlanks/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static string StripBlanks(string text)
     {
       return text.Replace(" ".ToString(), "");
@@ -339,7 +325,6 @@ namespace LJCWinFormCommon
 
     // Strips non-digits from a string.
     /// <include path='items/StripNonDigits/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static string StripNonDigits(string text)
     {
       string retValue = null;
@@ -356,7 +341,6 @@ namespace LJCWinFormCommon
 
     // Only allows numbers or edit keys.
     /// <include path='items/TextBoxNumeric_KeyPress/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
       if (!e.Handled)
@@ -367,7 +351,6 @@ namespace LJCWinFormCommon
 
     // Does not allow spaces.
     /// <include path='items/TextBoxNoSpace_KeyPress/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
     {
       if (!e.Handled)
@@ -378,7 +361,6 @@ namespace LJCWinFormCommon
 
     // Strips blanks from the text value.
     /// <include path='items/TextBoxNoSpace_TextChanged/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
     {
       if (sender is TextBox textBox
@@ -391,9 +373,7 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region File Functions
-    // ********************
 
     // Execute a program with the selected file.
     /// <summary>
@@ -406,7 +386,6 @@ namespace LJCWinFormCommon
     /// Defaults to the current directory if the initialDirectory parameter
     /// is null.
     /// </remarks>
-    // ********************
     public static void ShellFile(string programName = null, string fileSpec = null
       , string initialDirectory = null)
     {
@@ -429,7 +408,6 @@ namespace LJCWinFormCommon
     /// </summary>
     /// <param name="programName">The program name.</param>
     /// <param name="arguments">The program arguments.</param>
-    // ********************
     public static void ShellProgram(string programName, string arguments = null)
     {
       ProcessStartInfo startInfo;
@@ -474,7 +452,6 @@ namespace LJCWinFormCommon
 
     // Displays the Save dialog to select a file.
     /// <include path='items/SaveFile/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static string SaveFile(string filter, string initialDirectory = null
       , string defaultFileSpec = null)
     {
@@ -500,7 +477,6 @@ namespace LJCWinFormCommon
 
     // Displays the Open dialog to select a file.
     /// <include path='items/SelectFile/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static string SelectFile(string filter, string initialDirectory = null
       , string defaultFileSpec = null)
     {
@@ -525,13 +501,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region Image Functions
-    // ********************
 
     // Crops an image.
     /// <include path='items/CropImage/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Image CropImage(Image image, Point cropPoint, Size cropSize)
     {
       Bitmap retValue;
@@ -550,7 +523,6 @@ namespace LJCWinFormCommon
 
     // Draws a gradient in the specified rectangle.
     /// <include path='items/CreateGradient/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static void CreateGradient(Graphics graphics, Rectangle clientRectangle
       , Color beginColor, Color endColor)
     {
@@ -572,7 +544,6 @@ namespace LJCWinFormCommon
 
     // Resizes an image.
     /// <include path='items/ResizeImage/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Image ResizeImage(Image image, Size controlSize
       , bool keepAspectRatio = true)
     {
@@ -615,7 +586,6 @@ namespace LJCWinFormCommon
 
     // Transforms the crop rectangle values of the sample image relative to the
     /// <include path='items/TransformCrop/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Rectangle TransformCrop(Rectangle selection, Image selectionImage, Image originalImage)
     {
       Rectangle retValue = new Rectangle();
@@ -645,13 +615,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region Screen Point Funtions
-    // ********************
 
     // Converts the Control point to Screen point.
     /// <include path='items/GetScreenPoint/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Point GetScreenPoint(Control control, int x, int y)
     {
       Control parent = control.Parent;
@@ -662,7 +629,6 @@ namespace LJCWinFormCommon
 
     // Gets the Control screen rectangle.
     /// <include path='items/GetScreenRectangle/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Rectangle GetScreenRectangle(Control control)
     {
       Point topLeft = GetScreenPoint(control, control.Left, control.Top);
@@ -675,7 +641,6 @@ namespace LJCWinFormCommon
 
     // Get the control target menu screen position.
     /// <include path='items/GetMenuScreenPoint/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static Point GetMenuScreenPoint(Control control
       , Point mousePosition)
     {
@@ -691,13 +656,10 @@ namespace LJCWinFormCommon
     }
     #endregion
 
-    // ********************
     #region String Value Functions
-    // ********************
 
     // Sets the string to "-null" if empty or blanks. and to "" if "-null".
     /// <include path='items/SetString/*' file='Doc/FormCommon.xml'/>
-    // ********************
     public static string SetString(string text)
     {
       string retValue = text;

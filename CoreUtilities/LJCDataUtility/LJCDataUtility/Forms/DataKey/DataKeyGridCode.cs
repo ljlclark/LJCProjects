@@ -332,7 +332,7 @@ namespace LJCDataUtility
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
-        var dbName = "DataDataUtility";
+        var dbName = "LJCDataUtility";
         var fkName = dataKey.Name;
         var tableRow = Parent.DataTableCurrent();
         var sourceTableName = Parent.DataTableName(tableRow);
@@ -374,7 +374,7 @@ namespace LJCDataUtility
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
-        var dbName = "DataDataUtility";
+        var dbName = "LJCDataUtility";
         var fkName = dataKey.Name;
         var tableRow = Parent.DataTableCurrent();
         var tableName = Parent.DataTableName(tableRow);

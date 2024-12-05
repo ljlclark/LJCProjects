@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // ManagersDataUtility.cs
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
@@ -33,7 +34,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Methods
+    #region Data Methods
 
     /// <summary>Gets the DataColumn by ID.</summary>
     public DataUtilColumn GetDataColumn(int id)
@@ -92,13 +93,18 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the table DataColumns.</summary>
-    public DataColumns TableDataColumns(int tableID)
+    public DataColumns TableDataColumns(int tableID
+      , List<string> orderByNames = null)
     {
       DataColumns retColumns = null;
 
       IDError(tableID, "TableDataColumns(int tableID)", "tableID");
       var columnManager = DataColumnManager;
       var keyColumns = columnManager.ParentKey(tableID);
+      if (NetCommon.HasItems(orderByNames))
+      {
+        columnManager.Manager.OrderByNames = orderByNames;
+      }
       var items = columnManager.Load(keyColumns);
       if (NetCommon.HasItems(items))
       {

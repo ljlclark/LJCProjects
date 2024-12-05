@@ -83,9 +83,10 @@
       this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
       this.KeyRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.KeyForeignKeyProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.KeyForeignKeyDropProc = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
       this.KeyExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.KeyForeignKeyDropProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableInsertInto = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.MainTabs.SuspendLayout();
       this.ModulePage.SuspendLayout();
@@ -296,10 +297,11 @@
             this.TableRefresh,
             this.TableAddDataProc,
             this.TableCreateProc,
+            this.TableInsertInto,
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(256, 278);
+      this.TableMenu.Size = new System.Drawing.Size(256, 343);
       // 
       // TableHeading
       // 
@@ -611,6 +613,12 @@
       this.KeyForeignKeyProc.Size = new System.Drawing.Size(299, 32);
       this.KeyForeignKeyProc.Text = "Gen Foreign Key Proc";
       // 
+      // KeyForeignKeyDropProc
+      // 
+      this.KeyForeignKeyDropProc.Name = "KeyForeignKeyDropProc";
+      this.KeyForeignKeyDropProc.Size = new System.Drawing.Size(299, 32);
+      this.KeyForeignKeyDropProc.Text = "Gen Foreign Key Drop Proc";
+      // 
       // toolStripSeparator16
       // 
       this.toolStripSeparator16.BackColor = System.Drawing.SystemColors.Control;
@@ -624,11 +632,11 @@
       this.KeyExit.Size = new System.Drawing.Size(299, 32);
       this.KeyExit.Text = "E&xit";
       // 
-      // KeyForeignKeyDropProc
+      // TableInsertInto
       // 
-      this.KeyForeignKeyDropProc.Name = "KeyForeignKeyDropProc";
-      this.KeyForeignKeyDropProc.Size = new System.Drawing.Size(299, 32);
-      this.KeyForeignKeyDropProc.Text = "Gen Foreign Key Drop Proc";
+      this.TableInsertInto.Name = "TableInsertInto";
+      this.TableInsertInto.Size = new System.Drawing.Size(255, 32);
+      this.TableInsertInto.Text = "Gen Insert Into";
       // 
       // DataUtilityList
       // 
@@ -712,6 +720,7 @@
     internal System.Windows.Forms.ToolStripMenuItem TableAddDataProc;
     internal System.Windows.Forms.ToolStripMenuItem KeyForeignKeyProc;
     internal System.Windows.Forms.ToolStripMenuItem KeyForeignKeyDropProc;
+    internal System.Windows.Forms.ToolStripMenuItem TableInsertInto;
   }
 }
 

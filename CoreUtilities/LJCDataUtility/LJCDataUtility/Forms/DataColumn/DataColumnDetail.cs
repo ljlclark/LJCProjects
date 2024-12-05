@@ -71,6 +71,10 @@ namespace LJCDataUtility
         LJCIsUpdate = false;
         LJCRecord = new DataUtilColumn();
         ParentNameText.Text = LJCParentName;
+        SequenceText.Text = FormCommon.DefaultZero();
+        IdentityStartText.Text = FormCommon.DefaultZero();
+        IdentityIncrementText.Text = FormCommon.DefaultZero();
+        MaxLengthText.Text = FormCommon.DefaultZero();
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -86,12 +90,18 @@ namespace LJCDataUtility
         var data = dataRecord;
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
+        NewNameText.Text = data.NewName;
         DescriptionText.Text = data.Description;
-        SequenceText.Text = data.Sequence.ToString();
+        SequenceText.Text = FormCommon.DefaultZero(data.Sequence);
         TypeNameText.Text = data.TypeName;
-        IdentityStartText.Text = data.IdentityStart.ToString();
-        IdentityIncrementText.Text = data.IdentityIncrement.ToString(); ;
-        MaxLengthText.Text = data.MaxLength.ToString();
+        MaxLengthText.Text = FormCommon.DefaultZero(data.MaxLength);
+        NewMaxLengthText.Text
+          = FormCommon.DefaultZero(data.NewMaxLength);
+        DefaultText.Text = data.DefaultValue;
+        IdentityStartText.Text
+          = FormCommon.DefaultZero(data.IdentityStart);
+        IdentityIncrementText.Text
+          = FormCommon.DefaultZero(data.IdentityIncrement);
         AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
@@ -105,14 +115,17 @@ namespace LJCDataUtility
       var retData = GetRecord();
 
       // In control order.
-      retData.Name = FormCommon.SetString(NameText.Text);
+      retData.Name = NameText.Text;
+      retData.NewName = FormCommon.SetString(NewNameText.Text);
       retData.Description = FormCommon.SetString(DescriptionText.Text);
       retData.Sequence = NetCommon.ToInt32(SequenceText.Text);
       retData.TypeName = TypeNameText.Text;
+      retData.MaxLength = NetCommon.ToInt16(MaxLengthText.Text);
+      retData.NewMaxLength = NetCommon.ToInt16(NewMaxLengthText.Text);
+      retData.DefaultValue = FormCommon.SetString(DefaultText.Text);
       retData.IdentityStart = NetCommon.ToInt16(IdentityStartText.Text);
       retData.IdentityIncrement
         = NetCommon.ToInt16(IdentityIncrementText.Text);
-      retData.MaxLength = NetCommon.ToInt16(MaxLengthText.Text);
       retData.AllowNull = AllowNullCheck.Checked;
 
       // Get Reference key values.

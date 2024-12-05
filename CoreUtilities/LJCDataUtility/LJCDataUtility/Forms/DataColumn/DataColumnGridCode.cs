@@ -76,6 +76,11 @@ namespace LJCDataUtility
       {
         int parentID = Parent.DataTableID();
         var keyColumns = ColumnManager.ParentKey(parentID);
+        var orderByNames = new List<string>()
+        {
+          DataUtilColumn.ColumnSequence
+        };
+        ColumnManager.Manager.OrderByNames = orderByNames;
         var items = ColumnManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
@@ -103,7 +108,8 @@ namespace LJCDataUtility
           DataUtilColumn.ColumnDescription,
           DataUtilColumn.ColumnSequence,
           DataUtilColumn.ColumnTypeName,
-          DataUtilColumn.ColumnMaxLength
+          DataUtilColumn.ColumnMaxLength,
+          DataUtilColumn.ColumnAllowNull
         };
 
         // Get the grid columns from the manager Data Definition.

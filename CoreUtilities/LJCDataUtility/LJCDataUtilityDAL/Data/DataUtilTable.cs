@@ -7,30 +7,15 @@ using System;
 using System.Collections.Generic;
 using LJCDataUtilityDAL;
 
-// Constructors
-//   public DataUtilTable()
-//   public DataUtilTable(DataUtilTable item)
-// Data Class Methods
-//   public DataUtilTable Clone()
-//   public int CompareTo(DataUtilTable other)
-//   public override string ToString()
-// Class Properties
-//   public ChangedNames ChangedNames { get; private set; }
-// Comparers
-//   public class DataTableUniqueComparer : IComparer<DataUtilTable>
-
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataTable table Data Object.</summary>
   public class DataUtilTable : IComparable<DataUtilTable>
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public DataUtilTable()
     {
       ChangedNames = new ChangedNames();
@@ -38,7 +23,6 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public DataUtilTable(DataUtilTable item)
     {
       ChangedNames = new ChangedNames();
@@ -50,13 +34,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Data Class Methods
-    // ******************************
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public DataUtilTable Clone()
     {
       var retValue = MemberwiseClone() as DataUtilTable;
@@ -65,7 +46,6 @@ namespace LJCDataUtilityDAL
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public int CompareTo(DataUtilTable other)
     {
       int retValue;
@@ -85,7 +65,6 @@ namespace LJCDataUtilityDAL
 
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public override string ToString()
     {
       var retValue = $"{mName}:{mID}";
@@ -93,9 +72,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Data Properties
-    // ******************************
 
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
@@ -174,9 +151,7 @@ namespace LJCDataUtilityDAL
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
-    // ******************************
     #region Class Data
-    // ******************************
 
     /// <summary>The table name.</summary>
     public static string TableName = "DataTable";
@@ -204,9 +179,7 @@ namespace LJCDataUtilityDAL
     #endregion
   }
 
-  // ******************************
   #region Comparers
-  // ******************************
 
   /// <summary>Sort and search on Name value.</summary>
   public class DataTableUniqueComparer : IComparer<DataUtilTable>

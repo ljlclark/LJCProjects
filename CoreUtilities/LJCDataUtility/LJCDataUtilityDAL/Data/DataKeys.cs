@@ -7,34 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-// Static Functions
-//   public static DataKeys LJCDeserialize(string fileSpec = null)
-// Constructors
-//   public DataKeys()
-//   public DataKeys(DataColumns items)
-// Collection Methods
-//   public DataKey Add(int id, string name)
-//   public DataKey Add(string name, string typeName
-//     , bool allowNull = true, short maxLength = 0
-//     , string defaultValue = null, short identityIncrement = 0)
-//   public DataKeys Clone()
-//   public DataKeys GetCollection(List<DataKey> list)
-//   public bool HasItems()
-//   public void LJCRemove(string name)
-//   public void LJCSerialize(string fileSpec = null)
-// Search and Sort Methods
-//   public DataKey LJCSearchID(int id)
-//   public DataKey LJCSearchUnique(string name)
-//   public void LJCSortID()
-//   public void LJCSortUnique(DataKeyUniqueComparer comparer)
-// Properties
-//   public static string LJCDefaultFileName
-//   public DataKey this[string name]
-// Class Data
-//   private int mPrevCount;
-//   private SortType mSortType;
-//   private enum SortType
-
 namespace LJCDataUtilityDAL
 {
   /// <summary>Represents a collection of DataKey objects.</summary>
@@ -44,9 +16,7 @@ namespace LJCDataUtilityDAL
   [XmlRoot("DataKeys")]
   public class DataKeys : List<DataKey>
   {
-    // ******************************
     #region Static Functions
-    // ******************************
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -72,9 +42,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
@@ -97,9 +65,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Collection Methods
-    // ******************************
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -194,9 +160,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Search and Sort Methods
-    // ******************************
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -268,9 +232,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
@@ -286,9 +248,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Class Data
-    // ******************************
 
     private int mPrevCount;
     private SortType mSortType;

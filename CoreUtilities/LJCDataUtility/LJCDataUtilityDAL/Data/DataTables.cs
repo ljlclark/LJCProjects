@@ -7,31 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-// Static Functions
-//   public static DataTables LJCDeserialize(string fileSpec = null)
-// Constructors
-//   public DataTables()
-//   public DataTables(DataTables items)
-// Collection Methods
-//   public DataTable Add(int id, string name)
-//   public DataTables Clone()
-//   public DataTables GetCollection(List<DataTable> list)
-//   public bool HasItems()
-//   public void LJCRemove(string name)
-//   public void LJCSerialize(string fileSpec = null)
-// Search and Sort Methods
-//   public DataTable LJCSearchID(int id)
-//   public DataTable LJCSearchUnique(string name)
-//   public void LJCSortID()
-//   public void LJCSortUnique(DataTableUniqueComparer comparer)
-// Properties
-//   public static string LJCDefaultFileName
-//   public DataTable this[string name]
-// Class Data
-//   private int mPrevCount;
-//   private SortType mSortType;
-//   private enum SortType
-
 namespace LJCDataUtilityDAL
 {
   /// <summary>Represents a collection of DataTable objects.</summary>
@@ -39,12 +14,9 @@ namespace LJCDataUtilityDAL
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
   [XmlRoot("DataTables")]
-  // ********************
   public class DataTables : List<DataUtilTable>
   {
-    // ******************************
     #region Static Functions
-    // ******************************
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
@@ -70,13 +42,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public DataTables()
     {
       mPrevCount = -1;
@@ -84,7 +53,6 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public DataTables(DataTables items)
     {
       if (NetCommon.HasItems(items))
@@ -97,13 +65,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Collection Methods
-    // ******************************
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public DataUtilTable Add(int id, int dataModuleID, string name)
     {
       DataUtilTable retValue;
@@ -132,7 +97,6 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    // ********************
     public DataTables Clone()
     {
       var retValue = MemberwiseClone() as DataTables;
@@ -141,7 +105,6 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public DataTables GetCollection(List<DataUtilTable> list)
     {
       DataTables retValue = null;
@@ -159,7 +122,6 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public bool HasItems()
     {
       bool retValue = false;
@@ -176,7 +138,6 @@ namespace LJCDataUtilityDAL
     /// Removes an item by name.
     /// </summary>
     /// <param name="name">The item unique Name value.</param>
-    // ********************
     public void LJCRemove(int dataModuleID, string name)
     {
       DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
@@ -189,7 +150,6 @@ namespace LJCDataUtilityDAL
 
     // Serializes the collection to a file.
     /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -200,13 +160,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Search and Sort Methods
-    // ******************************
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    // ********************
     public DataUtilTable LJCSearchID(int id)
     {
       DataUtilTable retValue = null;
@@ -230,7 +187,6 @@ namespace LJCDataUtilityDAL
     /// </summary>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
-    // ********************
     public DataUtilTable LJCSearchUnique(int dataModuleID, string name)
     {
       DataUtilTable retValue = null;
@@ -251,7 +207,6 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Sort on Code.</summary>
-    // ********************
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -265,7 +220,6 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    // ********************
     public void LJCSortUnique(DataTableUniqueComparer comparer)
     {
       if (Count != mPrevCount
@@ -278,9 +232,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
@@ -296,9 +248,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Class Data
-    // ******************************
 
     private int mPrevCount;
     private SortType mSortType;

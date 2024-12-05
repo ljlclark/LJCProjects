@@ -58,6 +58,7 @@ namespace LJCDataUtility
       Parent.TableRefresh.Click += TableRefresh_Click;
       Parent.TableAddDataProc.Click += TableAddDataProc_Click;
       Parent.TableCreateProc.Click += TableCreateProc_Click;
+      Parent.TableInsertInto.Click += TableInsertInto_Click;
       Parent.TableExit.Click += Parent.Exit_Click;
 
       // Grid events.
@@ -335,12 +336,15 @@ namespace LJCDataUtility
     internal void AddDataProc()
     {
       string dbName = "LJCDataUtility";
-
       var tableID = Parent.DataTableID();
       var tableName = Parent.DataTableName();
-
-      var tableColumns = Managers.TableDataColumns(tableID);
-      if (NetCommon.HasItems(tableColumns))
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var dataColumns = Managers.TableDataColumns(tableID
+        , orderByNames);
+      if (NetCommon.HasItems(dataColumns))
       {
         AddProcData procData;
         DataColumns parentColumns;
@@ -348,23 +352,23 @@ namespace LJCDataUtility
         switch (tableName)
         {
           case "DataModule":
-            procData = new AddProcData(dbName, tableColumns
+            procData = new AddProcData(dbName, dataColumns
               , tableName);
             CreateAddProc(procData);
             break;
 
-          case "DataUtilTable":
+          case "DataTable":
             parentTableName = "DataModule";
             parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, tableColumns
+            procData = new AddProcData(dbName, dataColumns
               , tableName, parentColumns, parentTableName);
             CreateAddProc(procData);
             break;
 
-          case "DataUtilColumn":
+          case "DataColumn":
             parentTableName = "DataUtilTable";
             parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, tableColumns
+            procData = new AddProcData(dbName, dataColumns
               , tableName, parentColumns, parentTableName);
             CreateAddProc(procData);
             break;
@@ -372,7 +376,7 @@ namespace LJCDataUtility
           case "DataKey":
             parentTableName = "DataUtilTable";
             parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, tableColumns
+            procData = new AddProcData(dbName, dataColumns
               , tableName, parentColumns, parentTableName);
             CreateAddProc(procData);
             break;
@@ -384,15 +388,20 @@ namespace LJCDataUtility
     internal void CreateTableProc()
     {
       string dbName = "LJCDataUtility";
-      var id = Parent.DataTableID();
-      var items = Managers.TableDataColumns(id);
-      if (NetCommon.HasItems(items))
+      var tableID = Parent.DataTableID();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var dataColumns = Managers.TableDataColumns(tableID
+        , orderByNames);
+      if (NetCommon.HasItems(dataColumns))
       {
         var tableName = Parent.DataTableName();
         var proc = new ProcBuilder(dbName, tableName);
         var primaryKeyList = "ID";
         var uniqueKeyList = "Name";
-        var value = proc.CreateTableProc(items, primaryKeyList
+        var value = proc.CreateTableProc(dataColumns, primaryKeyList
           , uniqueKeyList);
 
         var infoValue = Parent.InfoValue;
@@ -472,7 +481,7 @@ namespace LJCDataUtility
         proc.Line($"  INSERT INTO {data.TableName}");
 
         // Column list.
-        var insertList = proc.InsertList(data.TableColumns);
+        var insertList = proc.ColumnsList(data.TableColumns);
         proc.Line(insertList);
 
         // Values list.
@@ -490,6 +499,49 @@ namespace LJCDataUtility
         , infoValue.ControlName, infoValue);
       Parent.InfoValue = controlValue;
       return retString;
+    }
+
+    // Create the Insert Into SQL.
+    private void InsertSelectSQL()
+    {
+      var tableID = Parent.DataTableID();
+      var tableName = Parent.DataTableName();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var dataColumns = Managers.TableDataColumns(tableID
+        , orderByNames);
+      if (NetCommon.HasItems(dataColumns))
+      {
+        StringBuilder b = new StringBuilder(256);
+        string dbName = "LJCDataUtility";
+        string newTableName = $"New{tableName}";
+        b.AppendLine($"USE [{dbName}]");
+        b.AppendLine($"SET IDENTITY_INSERT {newTableName} ON");
+        b.AppendLine($"INSERT INTO {newTableName}");
+
+        var proc = new ProcBuilder(dbName, newTableName);
+        var insertList = proc.ColumnsList(dataColumns, true
+          , true, true);
+        insertList = insertList.Substring(2);
+        b.AppendLine(insertList);
+
+        proc.Reset();
+        b.AppendLine("select");
+        var selectList = proc.ColumnsList(dataColumns, false
+          , false, true);
+        selectList = selectList.Substring(2);
+        b.AppendLine(selectList);
+        b.AppendLine($"FROM {tableName};");
+        b.AppendLine($"SET IDENTITY_INSERT {newTableName} OFF");
+
+        var retString = b.ToString();
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(retString
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
     }
     #endregion
 
@@ -532,6 +584,12 @@ namespace LJCDataUtility
     private void TableCreateProc_Click(object sender, EventArgs e)
     {
       CreateTableProc();
+    }
+
+    // Handles the Create Insert Into menu item event.
+    private void TableInsertInto_Click(object sender, EventArgs e)
+    {
+      InsertSelectSQL();
     }
     #endregion
 

@@ -7,44 +7,15 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 
-// Data Methods
-//   public DataModule Add(DataModule dataObject
-//     , List<string> propertyNames = null)
-//   public void Delete(DbColumns keyColumns, DbFilters filters = null)
-//   public DataModules Load(DbColumns keyColumns = null
-//     , List<string> propertyNames = null, DbFilters filters = null
-//     , DbJoins joins = null)
-//   public DataModule Retrieve(DbColumns keyColumns
-//     , List<string> propertyNames = null, DbFilters filters = null
-//     , DbJoins joins = null)
-//   public void Update(DataModule dataObject, DbColumns keyColumns
-//     , List<string> propertyNames = null, DbFilters filters = null)
-// Load/Retrieve Methods
-//   public DataModule RetrieveWithID(int id, List<string> propertyNames = null)
-//   public DataModule RetrieveWithUnique(string name
-//     , List<string> propertyNames = null)
-// GetKey Methods
-//   public DbColumns IDKey(int id)
-//   public DbColumns UniqueKey(int dataTableID, string name)
-// Other Methods
-//   public DbColumns GetColumns(List<string> propertyNames)
-// Properties
-//   public int AffectedCount
-//   public DataManager Manager { get; set; }
-//   public ResultConverter<DataModule, DataModules> ResultConverter { get; set; }
-
 namespace LJCDataUtilityDAL
 {
   /// <summary>Provides table specific data methods.</summary>
   public class DataModuleManager
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModuleManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataModule", string schemaName = null)
     {
@@ -73,13 +44,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region Data Methods
-    // ******************************
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModule Add(DataModule dataObject
       , List<string> propertyNames = null)
     {
@@ -96,7 +64,6 @@ namespace LJCDataUtilityDAL
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
@@ -104,7 +71,6 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModules Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -118,7 +84,6 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModule Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -132,11 +97,16 @@ namespace LJCDataUtilityDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public void Update(DataModule dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
+    }
+
+    // Creates a set of columns that match the supplied list.
+    public DbColumns GetColumns(List<string> propertyNames)
+    {
+      return Manager.DataDefinition.LJCGetColumns(propertyNames);
     }
     #endregion
 
@@ -144,7 +114,6 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModule RetrieveWithID(int id, List<string> propertyNames = null)
     {
       DataModule retValue;
@@ -157,7 +126,6 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DataModule RetrieveWithUnique(string name
       , List<string> propertyNames = null)
     {
@@ -170,13 +138,10 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
     #region GetKey Methods
-    // ******************************
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DbColumns IDKey(int id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -191,7 +156,6 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    // ********************
     public DbColumns UniqueKey(string name)
     {
       // Needs cast for string to select the correct Add overload.
@@ -203,24 +167,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    // ******************************
-    #region Other Methods
-    // ******************************
-
-    // Creates a set of columns that match the supplied list.
-    // ********************
-    public DbColumns GetColumns(List<string> propertyNames)
-    {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
-    }
-    #endregion
-
-    #region Joins
-    #endregion
-
-    // ******************************
     #region Properties
-    // ******************************
 
     /// <summary>Gets the affected record count.</summary>
     public int AffectedCount
