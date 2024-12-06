@@ -481,7 +481,7 @@ namespace LJCDataUtility
         proc.Line(" WHERE Name = @name)");
         proc.Line($"  INSERT INTO {data.TableName}");
 
-        // Column list.
+        // Column list (Parens, not NewName, no IDs).
         var insertList = proc.ColumnsList(data.TableColumns);
         proc.Line(insertList);
 
@@ -524,12 +524,14 @@ namespace LJCDataUtility
 
         b.AppendLine($"INSERT INTO {newTableName}");
         var proc = new ProcBuilder(dbName, newTableName);
+        // Parens, NewName, IDs.
         var insertList = proc.ColumnsList(dataColumns, true
           , true, true);
         insertList = insertList.Substring(2);
         b.AppendLine(insertList);
 
         b.AppendLine("select");
+        // No parens, NewName value, NewMaxLength value.
         var selectList = InsertSelectList(dataColumns);
         b.AppendLine(selectList);
         b.AppendLine($"FROM {tableName};");
@@ -545,11 +547,10 @@ namespace LJCDataUtility
       }
     }
 
-    // Get custom InsertSelect list.
+    // Create custom InsertSelect list.
+    // (No parens, NewName value, NewMaxLength value)
     private string InsertSelectList(DataColumns dataColumns)
     {
-      string retSelect;
-
       var b = new StringBuilder(256);
       var value = "  ";
       b.Append(value);
@@ -561,6 +562,7 @@ namespace LJCDataUtility
         var nameValue = column.Name;
         lineLength += nameValue.Length;
 
+        // Calculate length before adding to insert newline.
         var addNewline = false;
         if ("Name" == nameValue)
         {
@@ -585,6 +587,7 @@ namespace LJCDataUtility
 
           // Do not include crlf in length.
           lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
         }
 
         if (!first)
@@ -605,7 +608,8 @@ namespace LJCDataUtility
           lineLength = newLine.Length - 2;
         }
       }
-      retSelect = b.ToString();
+
+      var retSelect = b.ToString();
       return retSelect;
     }
     #endregion

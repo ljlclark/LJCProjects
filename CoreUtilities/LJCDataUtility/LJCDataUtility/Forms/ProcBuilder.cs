@@ -105,24 +105,27 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
     {
+      var b = new StringBuilder(256);
       var value = "    ";
       if (includeParens)
       {
         value += "(";
       }
-      var retList = value;
+      b.Append(value);
       var lineLength = value.Length;
 
       var first = true;
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (!includeID
-          && dataColumn.Name != "ID")
+          //&& dataColumn.Name != "ID")
+          && "ID" == dataColumn.Name)
         {
           continue;
         }
 
-        var nameValue = $"{dataColumn.Name}";
+        // Calculate length before adding to insert newline.
+        var nameValue = dataColumn.Name;
         if (useNewNames
           && NetString.HasValue(dataColumn.NewName))
         {
@@ -133,24 +136,29 @@ namespace LJCDataUtility
         if (lineLength > 80)
         {
           var newLine = "\r\n     ";
-          retList += newLine;
+          b.Append(newLine);
+
+          // Do not include crlf in length.
           lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
         }
 
         if (!first)
         {
           var firstValue = ", ";
-          retList += firstValue;
+          b.Append(firstValue);
           lineLength += firstValue.Length;
         }
         first = false;
 
-        retList += nameValue;
+        b.Append(nameValue);
       }
+
       if (includeParens)
       {
-        retList += ")";
+        b.Append(")");
       }
+      var retList = b.ToString();
       return retList;
     }
 
@@ -218,14 +226,15 @@ namespace LJCDataUtility
     public string ValuesList(DataColumns dataColumns
       , string varRefName = null)
     {
+      var b = new StringBuilder(256);
       var value = "    VALUES(";
-      var retList = value;
+      b.Append(value);
       var lineLength = value.Length;
 
       if (NetString.HasValue(varRefName))
       {
         value = $"{varRefName}, ";
-        retList += value;
+        b.Append(value);
         lineLength += varRefName.Length;
       }
 
@@ -237,27 +246,33 @@ namespace LJCDataUtility
           continue;
         }
 
+        // Calculate length before adding value.
         var nameValue = SQLVarName(dataColumn.Name);
         lineLength += nameValue.Length;
 
         if (lineLength > 80)
         {
           var newLine = "\r\n     ";
-          retList += newLine;
+          b.Append(newLine);
+
+          // Do not include crlf in length.
           lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
         }
 
         if (!first)
         {
           var firstValue = ", ";
-          retList += firstValue;
+          b.Append(firstValue);
           lineLength += firstValue.Length;
         }
         first = false;
 
-        retList += nameValue;
+        b.Append(nameValue);
       }
-      retList += ");";
+
+      b.Append(");");
+      var retList = b.ToString();
       return retList;
     }
     #endregion
