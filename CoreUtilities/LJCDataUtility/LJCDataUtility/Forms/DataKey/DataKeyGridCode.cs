@@ -501,11 +501,11 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           else
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           e.Handled = true;
           break;

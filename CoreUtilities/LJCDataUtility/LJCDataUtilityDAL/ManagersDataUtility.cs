@@ -19,6 +19,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/DefaultConstructor/*' file='../../CommonData.xml'/>
     public ManagersDataUtility()
     {
+      mArgError = new ArgError("LJCDataUtility.ManagersDataUtility");
     }
 
     /// <summary>
@@ -118,11 +119,10 @@ namespace LJCDataUtilityDAL
     {
       if (id < 1)
       {
-        var argError = new ArgError("ManagersDataUtility");
-        argError.MethodName = methodName;
+        mArgError.MethodName = methodName;
         var message = $"Param {argument} must be greater than zero.\r\n";
-        argError.Add(message);
-        NetString.ThrowArgError(argError.ToString());
+        mArgError.Add(message);
+        NetString.ThrowArgError(mArgError.ToString());
       }
     }
     #endregion
@@ -192,6 +192,7 @@ namespace LJCDataUtilityDAL
 
     #region Class Data
 
+    private ArgError mArgError;
     private DbServiceRef mDbServiceRef;
     private string mDataConfigName;
     #endregion

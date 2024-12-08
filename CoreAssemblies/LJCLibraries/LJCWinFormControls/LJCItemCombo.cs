@@ -1,6 +1,7 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCItemCombo.cs
+using LJCNetCommon;
 using LJCWinFormCommon;
 using System.IO;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace LJCWinFormControls
     public LJCItemCombo()
     {
       InitializeComponent();
+      mArgError = new ArgError("LJCItemCombo");
     }
     #endregion
 
@@ -27,15 +29,23 @@ namespace LJCWinFormControls
     /// <include path='items/LJCAddItem/*' file='Doc/LJCItemCombo.xml'/>
     public LJCItem LJCAddItem(int id, string text)
     {
-      LJCItem retValue = null;
+      mArgError.MethodName = "LJCAddItem";
+      var message = "";
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      mArgError.Add(message);
+      mArgError.Add(text, "text");
+      NetString.ThrowArgError(mArgError.ToString());
 
-      LJCItem item = new LJCItem()
+      var retItem = new LJCItem()
       {
         ID = id,
         Text = text
       };
-      Items.Add(item);
-      return retValue;
+      Items.Add(retItem);
+      return retItem;
     }
 
     // Sets the combo SelectedIndex to the item with the specified ID value.
@@ -103,6 +113,12 @@ namespace LJCWinFormControls
       FormCommon.ShellProgram(null, fileName);
     }
     #endregion
+
+    #region Class Values
+
+    // The ArgError object.
+    private readonly ArgError mArgError;
+    #endregion
   }
 
   // Represents an LJCItemCombo Item.
@@ -134,6 +150,6 @@ namespace LJCWinFormControls
 
     /// <summary>Gets or sets the Text value.</summary>
     public string Text { get; set; }
-    #endregion
+    #endregion 
   }
 }

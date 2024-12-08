@@ -531,9 +531,8 @@ namespace LJCNetCommon
 
     #region Other Functions
 
-    // Adds the missing argument name to the message.
-    /// <include path='items/ArgError/*' file='Doc/NetString.xml'/>
-    public static void ArgError(ref string message, object argument
+    /// <summary>Adds the missing argument name to the message.</summary>
+    public static void AddObjectArgError(ref string message, object argument
       , string name = null, string errorContext = null)
     {
       bool missing = false;
@@ -564,6 +563,15 @@ namespace LJCNetCommon
         }
         message += $"{name} is missing.\r\n";
       }
+    }
+
+    // Adds the missing argument name to the message.
+    /// <include path='items/ArgError/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use AddObjectArgError().")]
+    public static void ArgError(ref string message, object argument
+      , string name = null, string errorContext = null)
+    {
+      AddObjectArgError(ref message, argument, name, errorContext);
     }
 
     // Throws an ArgumentException if the provided message has a value.

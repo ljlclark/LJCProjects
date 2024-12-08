@@ -58,6 +58,7 @@ namespace _Namespace_
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public _CollectionName_()
     {
+      mArgError = new ArgError("_Namespace_._CollectionName_");
       mPrevCount = -1;
     }
 
@@ -88,8 +89,9 @@ namespace _Namespace_
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.ArgError(ref message, name);
-      NetString.ThrowArgError(message);
+      mArgError.Add(message);
+      mArgError.Add(name, "name");
+      NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
       var checkItems = Clone();
@@ -269,6 +271,7 @@ namespace _Namespace_
 
     #region Class Data
 
+    private ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 

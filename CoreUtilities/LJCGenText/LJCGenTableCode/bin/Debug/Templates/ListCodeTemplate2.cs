@@ -39,8 +39,8 @@ namespace _Namespace_
 			{
 				//Split.SplitterWidth = 4;
 
-				ListHelper.SetPanelControls(_ClassName_Split.Panel1, _ClassName_Heading
-					, _ClassName_ToolPanel, _ClassName_Grid);
+				//ListHelper.SetPanelControls(_ClassName_Split.Panel1, _ClassName_Heading
+				//	, _ClassName_ToolPanel, _ClassName_Grid);
 				//_ClassName_Grid.Height = ClientSize.Height - _ClassName_Tools.Height;
 
 				//ListHelper.SetPanelControls(_ClassName_Split.Panel2, ChildHeading

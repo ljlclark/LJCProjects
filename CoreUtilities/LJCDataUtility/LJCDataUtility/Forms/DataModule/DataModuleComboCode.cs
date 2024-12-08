@@ -1,48 +1,33 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataModuleGridCode.cs
+// DataModuleComboCode.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
-using LJCDataUtility;
 using static LJCDataUtility.DataUtilityList;
 
 namespace LJCDataUtility
 {
-  // Provides DataModuleGrid methods for the Parent window.
-  internal class DataModuleGridCode
+  // Provides DataModuleCombo methods for the Parent window.
+  internal class DataModuleComboCode
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal DataModuleGridCode(DataUtilityList parentList)
+    internal DataModuleComboCode(DataUtilityList parentList)
     {
       // Initialize property values.
       Parent = parentList;
       Parent.Cursor = Cursors.WaitCursor;
 
-      // Set Grid vars.
-      ModuleGrid = Parent.ModuleGrid;
+      // Set Combo vars.
+      ModuleCombo = Parent.ModuleCombo;
       ModuleMenu = Parent.ModuleMenu;
       Managers = Parent.Managers;
       ModuleManager = Managers.DataModuleManager;
-
-      // Fonts
-      var fontFamily = Parent.Font.FontFamily;
-      var style = Parent.Font.Style;
-      ModuleGrid.Font = new Font(fontFamily, 11, style);
-      ModuleMenu.Font = new Font(fontFamily, 11, style);
-
-      // Font change objects.
-      GridFont = new GridFont(Parent, ModuleGrid);
-      GridFont.FontChange += GridFont_FontChange;
-      MenuFont = new MenuFont(ModuleMenu);
-      MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
       var list = Parent;
@@ -52,12 +37,10 @@ namespace LJCDataUtility
       list.ModuleRefresh.Click += ModuleRefresh_Click;
       list.ModuleExit.Click += list.Exit_Click;
 
-      // Grid events.
-      var grid = ModuleGrid;
-      grid.KeyDown += ModuleGrid_KeyDown;
-      grid.MouseDoubleClick += ModuleGrid_MouseDoubleClick;
-      grid.MouseDown += ModuleGrid_MouseDown;
-      grid.SelectionChanged += ModuleGrid_SelectionChanged;
+      // Combo events.
+      var combo = ModuleCombo;
+      combo.KeyDown += ModuleGrid_KeyDown;
+      combo.SelectedIndexChanged += ModuleGrid_SelectedIndexChanged;
       Parent.Cursor = Cursors.Default;
     }
     #endregion
@@ -68,47 +51,29 @@ namespace LJCDataUtility
     internal void DataRetrieve()
     {
       Parent.Cursor = Cursors.WaitCursor;
-      ModuleGrid.LJCRowsClear();
+      ModuleCombo.Items.Clear();
 
-      var items = ModuleManager.Load();
-      if (NetCommon.HasItems(items))
+      var dataItems = ModuleManager.Load();
+      if (NetCommon.HasItems(dataItems))
       {
-        foreach (var item in items)
+        foreach (var dataItem in dataItems)
         {
-          RowAdd(item);
+          RowAdd(dataItem);
+        }
+        if (ModuleCombo.Items.Count > 0)
+        {
+          ModuleCombo.SelectedIndex = 0;
         }
       }
-      SetControlState();
+      //SetControlState();
       Parent.Cursor = Cursors.Default;
       Parent.DoChange(Change.Module);
     }
 
-    // Configures the Grid.
-    internal void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == ModuleGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DataModule.ColumnName,
-          DataModule.ColumnDescription
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var gridColumns = ModuleManager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        ModuleGrid.LJCAddColumns(gridColumns);
-      }
-    }
-
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DataModule dataRecord)
+    private LJCItem RowAdd(DataModule dataRecord)
     {
-      var retValue = ModuleGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ModuleGrid, dataRecord);
+      var retValue = ModuleCombo.LJCAddItem(dataRecord.ID, dataRecord.Name);
       return retValue;
     }
 
@@ -120,13 +85,13 @@ namespace LJCDataUtility
       if (id > 0)
       {
         Parent.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in ModuleGrid.Rows)
+        foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = Parent.DataModuleID(row);
+          var rowID = Parent.DataModuleID(item);
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ModuleGrid.LJCSetCurrentRow(row, true);
+            ModuleCombo.LJCSetByItemID(id);
             retValue = true;
             break;
           }
@@ -139,10 +104,9 @@ namespace LJCDataUtility
     // Updates the current row with the record values.
     private void RowUpdate(DataModule dataRecord)
     {
-      if (ModuleGrid.CurrentRow is LJCGridRow row)
+      if (ModuleCombo.SelectedItem is LJCItem)
       {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ModuleGrid, dataRecord);
+        ModuleCombo.Text = dataRecord.Name;
       }
     }
 
@@ -150,18 +114,9 @@ namespace LJCDataUtility
     private void SetControlState()
     {
       bool enableNew = true;
-      bool enableEdit = ModuleGrid.CurrentRow != null;
+      bool enableEdit = ModuleCombo.SelectedItem != null;
       FormCommon.SetMenuState(ModuleMenu, enableNew, enableEdit);
       Parent.ModuleHeading.Enabled = true;
-    }
-
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DataModule dataRecord)
-    {
-      row.LJCSetInt32(DataModule.ColumnID
-        , dataRecord.ID);
-      row.LJCSetString(DataModule.ColumnName
-        , dataRecord.Name);
     }
     #endregion
 
@@ -171,8 +126,8 @@ namespace LJCDataUtility
     internal void Delete()
     {
       bool success = false;
-      var row = ModuleGrid.CurrentRow as LJCGridRow;
-      if (row != null)
+      var item = ModuleCombo.SelectedItem as LJCItem;
+      if (item != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
@@ -202,7 +157,7 @@ namespace LJCDataUtility
 
       if (success)
       {
-        ModuleGrid.Rows.Remove(row);
+        ModuleCombo.Items.Remove(item);
         SetControlState();
         Parent.TimedChange(Change.Module);
       }
@@ -211,18 +166,18 @@ namespace LJCDataUtility
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
-      if (ModuleGrid.CurrentRow is LJCGridRow row)
+      if (ModuleCombo.SelectedItem is LJCItem)
       {
         int id = Parent.DataModuleID();
-        var location = FormPoint.DialogScreenPoint(ModuleGrid);
+        //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
           LJCID = id,
-          LJCLocation = location,
+          //LJCLocation = location,
           LJCManagers = Managers,
         };
         detail.LJCChange += Detail_Change;
-        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
       }
     }
@@ -230,14 +185,14 @@ namespace LJCDataUtility
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      var location = FormPoint.DialogScreenPoint(ModuleGrid);
+      //var location = FormPoint.DialogScreenPoint(ModuleGrid);
       var detail = new DataModuleDetail
       {
-        LJCLocation = location,
+        //LJCLocation = location,
         LJCManagers = Managers,
       };
       detail.LJCChange += Detail_Change;
-      detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+      //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
       detail.ShowDialog();
     }
 
@@ -246,7 +201,7 @@ namespace LJCDataUtility
     {
       Parent.Cursor = Cursors.WaitCursor;
       int id = 0;
-      if (ModuleGrid.CurrentRow is LJCGridRow)
+      if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
         id = Parent.DataModuleID();
@@ -282,8 +237,8 @@ namespace LJCDataUtility
         else
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var row = RowAdd(record);
-          ModuleGrid.LJCSetCurrentRow(row, true);
+          var item = RowAdd(record);
+          ModuleCombo.LJCSetByItemID(item.ID);
           SetControlState();
           Parent.TimedChange(Change.Module);
         }
@@ -320,33 +275,6 @@ namespace LJCDataUtility
 
     #region Control Event Handlers
 
-    // Handles the Grid FontChange event.
-    private void GridFont_FontChange(object sender, EventArgs e)
-    {
-      var text = Parent.Text;
-      var index = text.IndexOf("[");
-      if (index > 0)
-      {
-        text = Parent.Text.Substring(0, index - 1);
-      }
-      var fontSize = GridFont.FontSize;
-      Parent.Text = $"{text} [{fontSize}]";
-    }
-
-    // Handles the Menu FontChange event.
-    private void MenuFont_FontChange(object sender, EventArgs e)
-    {
-      var menu = sender as ToolStripDropDownMenu;
-      var text = menu.Items[0].Text;
-      var index = text.IndexOf("[");
-      if (index > 0)
-      {
-        text = text.Substring(0, index - 1);
-      }
-      var fontSize = MenuFont.FontSize;
-      menu.Items[0].Text = $"{text} [{fontSize}]";
-    }
-
     // Handles the Grid KeyDown event.
     private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
     {
@@ -362,64 +290,25 @@ namespace LJCDataUtility
           e.Handled = true;
           break;
 
-        case Keys.M:
-          if (e.Control)
-          {
-            var position = FormPoint.MenuScreenPoint(ModuleGrid
-              , Control.MousePosition);
-            Parent.ModuleMenu.Show(position);
-            Parent.ModuleMenu.Select();
-            e.Handled = true;
-          }
-          break;
-
         case Keys.Tab:
+          MessageBox.Show("Everywhere");
           if (e.Shift)
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           else
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
       }
     }
 
-    // Handles the MouseDoubleClick event.
-    private void ModuleGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (ModuleGrid.LJCGetMouseRow(e) != null)
-      {
-        Edit();
-      }
-    }
-
-    // Handles the MouseDown event.
-    private void ModuleGrid_MouseDown(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Right)
-      {
-        // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-        ModuleGrid.Select();
-        if (ModuleGrid.LJCIsDifferentRow(e))
-        {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          ModuleGrid.LJCSetCurrentRow(e);
-          Parent.TimedChange(Change.Module);
-        }
-      }
-    }
-
     // Handles the SelectionChanged event.
-    private void ModuleGrid_SelectionChanged(object sender, EventArgs e)
+    private void ModuleGrid_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (ModuleGrid.LJCAllowSelectionChange)
-      {
-        Parent.TimedChange(Change.Module);
-      }
-      ModuleGrid.LJCAllowSelectionChange = true;
+      Parent.TimedChange(Change.Module);
     }
     #endregion
 
@@ -428,8 +317,8 @@ namespace LJCDataUtility
     // Gets or sets the Parent List reference.
     private DataUtilityList Parent { get; set; }
 
-    // Gets or sets the Grid reference.
-    private LJCDataGrid ModuleGrid { get; set; }
+    // Gets or sets the Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
 
     // Gets or sets the Menu reference.
     private ContextMenuStrip ModuleMenu { get; set; }
@@ -439,12 +328,6 @@ namespace LJCDataUtility
 
     // Gets or sets the Manager reference.
     private DataModuleManager ModuleManager { get; set; }
-
-    // Provides the Grid font event handlers.
-    private GridFont GridFont { get; set; }
-
-    // Provides the menu font event handlers.
-    private MenuFont MenuFont { get; set; }
     #endregion
   }
 }

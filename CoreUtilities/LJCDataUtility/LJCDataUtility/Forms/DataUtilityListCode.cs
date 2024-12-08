@@ -104,45 +104,34 @@ namespace LJCDataUtility
       return retKeyName;
     }
 
-    // *** DataModule ***
-
-    // Gets the current Module Grid row.
-    internal LJCGridRow DataModuleCurrent()
-    {
-      LJCGridRow retRow = ModuleGrid.CurrentRow as LJCGridRow;
-      return retRow;
-    }
-
     // Gets the selected row ID.
-    internal int DataModuleID(LJCGridRow row = null)
+    internal int DataModuleID(LJCItem item = null)
     {
       int retModuleID = 0;
 
-      if (null == row)
+      if (null == item)
       {
-        row = DataModuleCurrent();
+        item = ModuleCombo.SelectedItem as LJCItem;
       }
-      if (row is LJCGridRow
-        && "ModuleGrid" == row.DataGridView.Name)
+      if (item is LJCItem)
       {
-        retModuleID = row.LJCGetInt32(DataModule.ColumnID);
+        retModuleID = item.ID;
       }
       return retModuleID;
     }
 
     // Gets the selected row Name.
-    internal string DataModuleName(LJCGridRow row = null)
+    internal string DataModuleName(LJCItem item = null)
     {
       string retModuleName = null;
 
-      if (null == row)
+      if (null == item)
       {
-        row = DataModuleCurrent();
+        item = ModuleCombo.SelectedItem as LJCItem;
       }
-      if (row is LJCGridRow
-        && "ModuleGrid" == row.DataGridView.Name)
+      if (item is LJCItem)
       {
-        retModuleName = row.LJCGetString(DataModule.ColumnName);
+        retModuleName = item.Text;
       }
       return retModuleName;
     }
@@ -193,12 +182,29 @@ namespace LJCDataUtility
 
     #region Setup Methods
 
+    // Configure the initial control settings.
+    // ********************
+    private void ConfigureControls()
+    {
+      if (AutoScaleMode == AutoScaleMode.Dpi)
+      {
+        //Split.SplitterWidth = 4;
+
+        //ListHelper.SetPanelControls(_ClassName_Split.Panel1, _ClassName_Heading
+        //  , _ClassName_ToolPanel, _ClassName_Grid);
+        //_ClassName_Grid.Height = ClientSize.Height - _ClassName_Tools.Height;
+
+        //ListHelper.SetPanelControls(_ClassName_Split.Panel2, ChildHeading
+        //	, ChildToolPanel, ChildGrid);
+      }
+    }
+
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
       InitializeClassData();
-      SetupGridCode();
+      SetupControlCode();
       InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
@@ -222,9 +228,9 @@ namespace LJCDataUtility
     }
 
     // Setup the grid code references.
-    private void SetupGridCode()
+    private void SetupControlCode()
     {
-      ModuleGridCode = new DataModuleGridCode(this);
+      ModuleComboCode = new DataModuleComboCode(this);
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
@@ -241,7 +247,6 @@ namespace LJCDataUtility
     // Setup the data grids.
     private void SetupGrids()
     {
-      ModuleGridCode.SetupGrid();
       TableGridCode.SetupGrid();
       ColumnGridCode.SetupGrid();
       KeyGridCode.SetupGrid();
@@ -273,14 +278,12 @@ namespace LJCDataUtility
           }
 
           // Restore Grid column sizes.
-          ModuleGrid.LJCRestoreColumnValues(ControlValues);
           TableGrid.LJCRestoreColumnValues(ControlValues);
           ColumnGrid.LJCRestoreColumnValues(ControlValues);
           KeyGrid.LJCRestoreColumnValues(ControlValues);
 
           // Restore Font sizes.
-          FormCommon.RestoreTabsFontSize(MainTabs, ControlValues);
-          ModuleGrid.LJCRestoreFontSize(ControlValues);
+          FormCommon.RestoreTabsFontSize(ColumnTabs, ControlValues);
           TableGrid.LJCRestoreFontSize(ControlValues);
           ColumnGrid.LJCRestoreFontSize(ControlValues);
           KeyGrid.LJCRestoreFontSize(ControlValues);
@@ -306,14 +309,12 @@ namespace LJCDataUtility
         , Width, Height);
 
       // Save Grid column sizes.
-      ModuleGrid.LJCSaveColumnValues(controlValues);
       TableGrid.LJCSaveColumnValues(controlValues);
       ColumnGrid.LJCSaveColumnValues(controlValues);
       KeyGrid.LJCSaveColumnValues(controlValues);
 
       // Save Font sizes.
-      FormCommon.SaveTabFontSize(MainTabs, controlValues);
-      ModuleGrid.LJCSaveFontSize(controlValues);
+      FormCommon.SaveTabFontSize(ColumnTabs, controlValues);
       TableGrid.LJCSaveFontSize(controlValues);
       ColumnGrid.LJCSaveFontSize(controlValues);
       KeyGrid.LJCSaveFontSize(controlValues);
@@ -341,10 +342,12 @@ namespace LJCDataUtility
     // The Managers object.
     internal ManagersDataUtility Managers { get; set; }
 
+    // Combo Code
+    private DataModuleComboCode ModuleComboCode { get; set; }
+
     // Grid Code
     private DataColumnGridCode ColumnGridCode { get; set; }
     private DataKeyGridCode KeyGridCode { get; set; }
-    private DataModuleGridCode ModuleGridCode { get; set; }
     private DataTableGridCode TableGridCode { get; set; }
 
     // Gets or sets the ControlValues object.

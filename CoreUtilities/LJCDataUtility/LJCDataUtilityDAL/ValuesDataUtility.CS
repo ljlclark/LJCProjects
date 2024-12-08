@@ -17,7 +17,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ValuesDataUtility()
     {
-      ArgError = new ArgError("LJCDataUtilityDAL.ValuesDataUtility");
+      mArgError = new ArgError("LJCDataUtilityDAL.ValuesDataUtility");
       Errors = "";
       StandardSettings = new StandardUISettings();
     }
@@ -26,12 +26,12 @@ namespace LJCDataUtilityDAL
     /// <param name="fileSpec">The config file name.</param>
     public void SetConfigFile(string fileSpec = "LJCDataUtility.exe.config")
     {
+      mArgError.MethodName = "SetConfigFile(fileSpec)";
       if (!File.Exists(fileSpec))
       {
-        ArgError.MethodName = "SetConfigFile(fileSpec)";
-        var message = ArgError.ToString();
-        message += $"File {fileSpec} was not found.\r\n";
-        Errors += message;
+        var message = $"File {fileSpec} was not found.\r\n";
+        mArgError.Add(message);
+        Errors += mArgError.ToString();
       }
       else
       {
@@ -73,12 +73,12 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets the StandardSettings value.</summary>
     public StandardUISettings StandardSettings { get; private set; }
-
-    // Represents Argument errors.
-    private ArgError ArgError { get; set; }
     #endregion
 
     #region Class Data
+
+    // Represents Argument errors.
+    private ArgError mArgError;
 
     /// <summary>Initialize Singleton.</summary>
     private static readonly ValuesDataUtility mInstance

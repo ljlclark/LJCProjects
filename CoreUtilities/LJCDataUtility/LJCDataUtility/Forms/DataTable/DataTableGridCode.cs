@@ -16,7 +16,6 @@ using System.Reflection;
 using System.Data;
 using System.IO;
 using LJCDataUtility;
-using static System.Net.WebRequestMethods;
 
 namespace LJCDataUtility
 {
@@ -34,7 +33,7 @@ namespace LJCDataUtility
       Parent.Cursor = Cursors.WaitCursor;
 
       // Set Grid vars.
-      ModuleGrid = Parent.ModuleGrid;
+      ModuleCombo = Parent.ModuleCombo;
       TableGrid = Parent.TableGrid;
       TableMenu = Parent.TableMenu;
       Managers = Parent.Managers;
@@ -101,11 +100,9 @@ namespace LJCDataUtility
       Parent.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      if (ModuleGrid.CurrentRow is LJCGridRow parentRow)
+      int parentID = ModuleCombo.LJCSelectedItemID();
+      if (parentID > 0)
       {
-        // Data from items.
-        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
-
         var keyColumns = TableManager.ParentKey(parentID);
         var items = TableManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
@@ -167,7 +164,7 @@ namespace LJCDataUtility
     // Sets the control states based on the current control values.
     private void SetControlState()
     {
-      bool enableNew = ModuleGrid.CurrentRow != null;
+      bool enableNew = ModuleCombo.SelectedItem != null;
       bool enableEdit = TableGrid.CurrentRow != null;
       FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
       Parent.TableHeading.Enabled = true;
@@ -231,13 +228,13 @@ namespace LJCDataUtility
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
-      if (ModuleGrid.CurrentRow is LJCGridRow parentRow
+      if (ModuleCombo.SelectedIndex >= 0
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
         int id = row.LJCGetInt32(DataUtilTable.ColumnID);
-        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
-        string parentName = parentRow.LJCGetString(DataModule.ColumnName);
+        int parentID = ModuleCombo.LJCSelectedItemID();
+        string parentName = ModuleCombo.SelectedText;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
@@ -257,11 +254,11 @@ namespace LJCDataUtility
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      if (ModuleGrid.CurrentRow is LJCGridRow parentRow)
+      if (ModuleCombo.SelectedItem != null)
       {
         // Data from list items.
-        int parentID = parentRow.LJCGetInt32(DataModule.ColumnID);
-        string parentName = parentRow.LJCGetString(DataModule.ColumnName);
+        int parentID = ModuleCombo.LJCSelectedItemID();
+        string parentName = ModuleCombo.SelectedText;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail
@@ -720,11 +717,11 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           else
           {
-            Parent.MainTabs.Select();
+            Parent.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -772,8 +769,8 @@ namespace LJCDataUtility
     // Gets or sets the Parent List reference.
     private DataUtilityList Parent { get; set; }
 
-    // Gets or sets the parent Grid reference.
-    private LJCDataGrid ModuleGrid { get; set; }
+    // Gets or sets the parent Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid TableGrid { get; set; }

@@ -48,6 +48,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataTables()
     {
+      mArgError = new ArgError("LJCDataUtilityDAL.DataTables");
       mPrevCount = -1;
     }
 
@@ -78,7 +79,8 @@ namespace LJCDataUtilityDAL
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.ArgError(ref message, name);
+      mArgError.Add(message);
+      mArgError.Add((object)name, "name");
       NetString.ThrowArgError(message);
 
       retValue = LJCSearchUnique(dataModuleID, name);
@@ -249,6 +251,8 @@ namespace LJCDataUtilityDAL
     #endregion
 
     #region Class Data
+
+    private readonly ArgError mArgError;
 
     private int mPrevCount;
     private SortType mSortType;

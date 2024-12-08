@@ -42,7 +42,7 @@ namespace LJCNetCommon
     /// <param name="name">The argument name.</param>
     public void Add(object argument, string name)
     {
-      NetString.ArgError(ref mMessage, argument, name);
+      NetString.AddObjectArgError(ref mMessage, argument, name);
     }
 
     /// <summary>Adds a message.</summary>

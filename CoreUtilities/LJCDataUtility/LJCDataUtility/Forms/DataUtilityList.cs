@@ -23,7 +23,7 @@ namespace LJCDataUtility
       InitializeComponent();
 
       // Initialize property values.
-      _ = new TabsFont(MainTabs);
+      _ = new TabsFont(ColumnTabs);
     }
     #endregion
 
@@ -46,10 +46,11 @@ namespace LJCDataUtility
       switch (change)
       {
         case Change.Startup:
+          ConfigureControls();
           RestoreControlValues();
 
           // Load first control.
-          ModuleGridCode.DataRetrieve();
+          ModuleComboCode.DataRetrieve();
           break;
 
         case Change.Module:
@@ -59,7 +60,6 @@ namespace LJCDataUtility
         case Change.Table:
           ColumnGridCode.DataRetrieve();
           KeyGridCode.DataRetrieve();
-          //MapTableGridCode.DataRetrieve();
           break;
 
         case Change.Column:

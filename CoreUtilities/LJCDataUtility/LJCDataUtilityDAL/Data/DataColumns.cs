@@ -45,6 +45,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataColumns()
     {
+      mArgError = new ArgError("LJCDataUtilityDAL.DataColumns");
       mPrevCount = -1;
     }
 
@@ -75,8 +76,9 @@ namespace LJCDataUtilityDAL
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.ArgError(ref message, name);
-      NetString.ThrowArgError(message);
+      mArgError.Add(message);
+      mArgError.Add(name, "name");
+      NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
       var checkItems = this.Clone();
@@ -286,6 +288,7 @@ namespace LJCDataUtilityDAL
 
     #region Class Data
 
+    private ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 

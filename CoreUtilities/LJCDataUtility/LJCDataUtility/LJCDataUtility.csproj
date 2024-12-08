@@ -90,7 +90,7 @@
     <Compile Include="Forms\DataModule\DataModuleDetail.Designer.cs">
       <DependentUpon>DataModuleDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DataModule\DataModuleGridCode.cs" />
+    <Compile Include="Forms\DataModule\DataModuleComboCode.cs" />
     <Compile Include="Forms\DataTable\AddProcData.cs" />
     <Compile Include="Forms\DataTable\DataTableDetail.cs">
       <SubType>Form</SubType>
