@@ -294,6 +294,7 @@ namespace LJCDataUtility
           FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
           FormCommon.RestoreMenuFontSize(KeyMenu, ControlValues);
 
+          FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
           InfoValue = ControlValues.LJCSearchName("AddProc");
         }
       }
@@ -325,6 +326,8 @@ namespace LJCDataUtility
       FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);
       FormCommon.SaveMenuFontSize(KeyMenu, controlValues);
 
+      controlValues.Add("MainSplit.SplitterDistance", 0, 0, 0
+        , MainSplit.SplitterDistance);
       controlValues.Add(InfoValue);
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
