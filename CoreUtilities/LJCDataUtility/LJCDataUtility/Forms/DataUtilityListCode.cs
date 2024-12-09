@@ -21,7 +21,7 @@ namespace LJCDataUtility
     // *** DataColumn ***
 
     // Gets the current Column Grid row.
-    internal LJCGridRow DataColumnCurrent()
+    internal LJCGridRow DataColumnRow()
     {
       LJCGridRow retRow = ColumnGrid.CurrentRow as LJCGridRow;
       return retRow;
@@ -34,7 +34,7 @@ namespace LJCDataUtility
 
       if (null == row)
       {
-        row = DataColumnCurrent();
+        row = DataColumnRow();
       }
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
@@ -51,7 +51,7 @@ namespace LJCDataUtility
 
       if (null == row)
       {
-        row = DataColumnCurrent();
+        row = DataColumnRow();
       }
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
@@ -64,7 +64,7 @@ namespace LJCDataUtility
     // *** DataKey ***
 
     // Gets the current Key Grid row.
-    internal LJCGridRow DataKeyCurrent()
+    internal LJCGridRow DataKeyRow()
     {
       LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
       return retRow;
@@ -77,7 +77,7 @@ namespace LJCDataUtility
 
       if (null == row)
       {
-        row = DataKeyCurrent();
+        row = DataKeyRow();
       }
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
@@ -94,7 +94,7 @@ namespace LJCDataUtility
 
       if (null == row)
       {
-        row = DataKeyCurrent();
+        row = DataKeyRow();
       }
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
@@ -103,6 +103,8 @@ namespace LJCDataUtility
       }
       return retKeyName;
     }
+
+    // *** DataModule ***
 
     // Gets the selected row ID.
     internal int DataModuleID(LJCItem item = null)
@@ -136,10 +138,10 @@ namespace LJCDataUtility
       return retModuleName;
     }
 
-    // *** DataUtilTable ***
+    // *** DataTable ***
 
     // Gets the current Table Grid row.
-    internal LJCGridRow DataTableCurrent()
+    internal LJCGridRow DataTableRow()
     {
       LJCGridRow retRow = TableGrid.CurrentRow as LJCGridRow;
       return retRow;
@@ -152,7 +154,7 @@ namespace LJCDataUtility
 
       if (row == null)
       {
-        row = DataTableCurrent();
+        row = DataTableRow();
       }
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
@@ -169,7 +171,7 @@ namespace LJCDataUtility
 
       if (row == null)
       {
-        row = DataTableCurrent();
+        row = DataTableRow();
       }
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)

@@ -326,7 +326,7 @@ namespace LJCDataUtility
     // Generates the create Foreign Key procedure.
     internal void ForeignKeyProc()
     {
-      var row = Parent.DataKeyCurrent();
+      var row = Parent.DataKeyRow();
       var id = Parent.DataKeyID(row);
       var dataKey = Managers.GetDataKey(id);
       if (dataKey != null
@@ -334,7 +334,7 @@ namespace LJCDataUtility
       {
         var dbName = "LJCDataUtility";
         var fkName = dataKey.Name;
-        var tableRow = Parent.DataTableCurrent();
+        var tableRow = Parent.DataTableRow();
         var sourceTableName = Parent.DataTableName(tableRow);
         var sourceColumnName = dataKey.SourceColumnName;
         var targetTableName = dataKey.TargetTableName;
@@ -342,7 +342,6 @@ namespace LJCDataUtility
 
         var proc = new ProcBuilder(dbName, sourceTableName);
         proc.Begin(proc.ForeignKeyProcName);
-
         proc.Line("AS");
         proc.Line("BEGIN");
 
@@ -368,7 +367,7 @@ namespace LJCDataUtility
     // Generates the drop Foreign Key procedure.
     internal void ForeignKeyDropProc()
     {
-      var row = Parent.DataKeyCurrent();
+      var row = Parent.DataKeyRow();
       var id = Parent.DataKeyID(row);
       var dataKey = Managers.GetDataKey(id);
       if (dataKey != null
@@ -376,7 +375,7 @@ namespace LJCDataUtility
       {
         var dbName = "LJCDataUtility";
         var fkName = dataKey.Name;
-        var tableRow = Parent.DataTableCurrent();
+        var tableRow = Parent.DataTableRow();
         var tableName = Parent.DataTableName(tableRow);
 
         var proc = new ProcBuilder(dbName, tableName);

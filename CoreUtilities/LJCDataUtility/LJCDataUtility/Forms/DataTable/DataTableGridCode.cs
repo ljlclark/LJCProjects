@@ -56,8 +56,9 @@ namespace LJCDataUtility
       Parent.TableEdit.Click += TableEdit_Click;
       Parent.TableDelete.Click += TableDelete_Click;
       Parent.TableRefresh.Click += TableRefresh_Click;
-      Parent.TableAddDataProc.Click += TableAddDataProc_Click;
       Parent.TableCreateProc.Click += TableCreateProc_Click;
+      Parent.TableAddDataProc.Click += TableAddDataProc_Click;
+      Parent.TableCreateDataProc.Click += TableCreateDataProc_Click;
       Parent.TableInsertInto.Click += TableInsertInto_Click;
       Parent.TableExit.Click += Parent.Exit_Click;
 
@@ -609,6 +610,148 @@ namespace LJCDataUtility
       var retSelect = b.ToString();
       return retSelect;
     }
+
+    // Create Data Methods
+
+    // Generates the Create data procedure.
+    internal void CreateDataProc()
+    {
+      var tableName = Parent.DataTableName();
+      switch (tableName)
+      {
+        case "DataModule":
+          ModuleDataProc();
+          break;
+
+        case "DataTable":
+          TableDataProc();
+          break;
+
+        case "DataColumn":
+          ColumnDataProc();
+          break;
+
+        case "DataKey":
+          KeyDataProc();
+          break;
+      }
+    }
+
+    // Generates the Create Column data procedure.
+    private void ColumnDataProc()
+    {
+      var columnManager = Managers.DataColumnManager;
+      var dataColumns = columnManager.Load();
+      if (NetCommon.HasItems(dataColumns))
+      {
+        var proc = new ProcBuilder("LJCDataUtility", null);
+        proc.Begin("sp_DataTableData");
+        proc.BodyBegin();
+
+        var tableManager = Managers.DataTableManager;
+        foreach (var data in dataColumns)
+        {
+          var dataTable = tableManager.RetrieveWithID(data.DataTableID);
+          proc.Line($"EXEC sp_DataColumnAdd {dataTable.Name}");
+          proc.Line($" , '{data.Name}', '{data.Description}'");
+          proc.Text($" , {data.Sequence}, {data.TypeName}");
+          proc.Text($", {data.IdentityStart}, {data.IdentityIncrement}");
+          proc.Line($", {data.MaxLength}, {data.AllowNull}");
+        }
+        proc.Line("END");
+        var value = proc.ToString();
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+
+    // Generates the Create Key data procedure.
+    private void KeyDataProc()
+    {
+      var keyManager = Managers.DataKeyManager;
+      var dataKeys = keyManager.Load();
+      if (NetCommon.HasItems(dataKeys))
+      {
+        var proc = new ProcBuilder("LJCDataUtility", null);
+        proc.Begin("sp_DataKeyData");
+        proc.BodyBegin();
+
+        var tableManager = Managers.DataTableManager;
+        foreach (var data in dataKeys)
+        {
+          var dataTable = tableManager.RetrieveWithID(data.DataTableID);
+          proc.Line($"EXEC sp_DataKeyAdd {dataTable.Name}");
+          proc.Line($" , '{data.Name}', {data.KeyType}");
+          proc.Text($" , {data.SourceColumnName}, {data.TargetTableName}");
+          proc.Text($", {data.TargetColumnName}, {data.IsClustered}");
+          proc.Line($", {data.IsAscending}");
+        }
+        proc.Line("END");
+        var value = proc.ToString();
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+
+    // Generates the Create Module data procedure.
+    private void ModuleDataProc()
+    {
+      var moduleManager = Managers.DataModuleManager;
+      var dataTables = moduleManager.Load();
+      if (NetCommon.HasItems(dataTables))
+      {
+        var proc = new ProcBuilder("LJCDataUtility", null);
+        proc.Begin("sp_DataModuleData");
+        proc.BodyBegin();
+
+        foreach (var data in dataTables)
+        {
+          proc.Line("EXEC sp_DataModuleAdd");
+          proc.Line($" '{data.Name}', '{data.Description}'");
+        }
+        proc.Line("END");
+        var value = proc.ToString();
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+
+    // Generates the Create Table data procedure.
+    private void TableDataProc()
+    {
+      var tableManager = Managers.DataTableManager;
+      var dataTables = tableManager.Load();
+      if (NetCommon.HasItems(dataTables))
+      {
+        var proc = new ProcBuilder("LJCDataUtility", null);
+        proc.Begin("sp_DataTableData");
+        proc.BodyBegin();
+
+        var moduleManager = Managers.DataModuleManager;
+        foreach (var data in dataTables)
+        {
+          var dataModule = moduleManager.RetrieveWithID(data.DataModuleID);
+          proc.Line($"EXEC sp_DataTableAdd {dataModule.Name}");
+          proc.Line($" , '{data.Name}', '{data.Description}'");
+        }
+        proc.Line("END");
+        var value = proc.ToString();
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
     #endregion
 
     #region Common Action Event Handlers
@@ -640,16 +783,22 @@ namespace LJCDataUtility
 
     #region Custom Action Event Handlers
 
+    // Handles the Generate Create Table Procedure menu item event.
+    private void TableCreateProc_Click(object sender, EventArgs e)
+    {
+      CreateTableProc();
+    }
+
     // Handles the Generate Add Procedure menu item event.
     private void TableAddDataProc_Click(object sender, EventArgs e)
     {
       AddDataProc();
     }
 
-    // Handles the Generate Create Procedure menu item event.
-    private void TableCreateProc_Click(object sender, EventArgs e)
+    // Handles the Generate Create Data Procedure menu item event.
+    private void TableCreateDataProc_Click(object sender, EventArgs e)
     {
-      CreateTableProc();
+      CreateDataProc();
     }
 
     // Handles the Create Insert Into menu item event.

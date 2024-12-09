@@ -189,6 +189,18 @@ namespace LJCDataUtility
       return retParams;
     }
 
+    /// <summary>Creates the Proc body code.</summary>
+    public string BodyBegin()
+    {
+      var b = new StringBuilder(64);
+      b.AppendLine("AS");
+      b.AppendLine("BEGIN");
+
+      var retValue = b.ToString();
+      Builder.Append(retValue);
+      return retValue;
+    }
+
     /// <summary>Creates a SQL Declaration variable from a DataUtilityColumn.</summary>
     public string SQLDeclaration(DataUtilColumn dataColumn)
     {

@@ -29,8 +29,9 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       this.ModuleMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ModuleHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +88,8 @@
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.TableCreateDataProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.ModuleMenu.SuspendLayout();
       this.TableMenu.SuspendLayout();
       this.ColumnMenu.SuspendLayout();
@@ -188,86 +191,88 @@
             this.TableDelete,
             this.toolStripSeparator9,
             this.TableRefresh,
-            this.TableAddDataProc,
+            this.toolStripSeparator3,
             this.TableCreateProc,
+            this.TableAddDataProc,
+            this.TableCreateDataProc,
             this.TableInsertInto,
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(256, 310);
+      this.TableMenu.Size = new System.Drawing.Size(301, 381);
       // 
       // TableHeading
       // 
       this.TableHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.TableHeading.Name = "TableHeading";
-      this.TableHeading.Size = new System.Drawing.Size(255, 32);
+      this.TableHeading.Size = new System.Drawing.Size(300, 32);
       this.TableHeading.Text = "Table Menu";
       // 
       // TableNew
       // 
       this.TableNew.Name = "TableNew";
       this.TableNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.TableNew.Size = new System.Drawing.Size(255, 32);
+      this.TableNew.Size = new System.Drawing.Size(300, 32);
       this.TableNew.Text = "&New";
       // 
       // TableEdit
       // 
       this.TableEdit.Name = "TableEdit";
       this.TableEdit.ShortcutKeyDisplayString = "ENTER";
-      this.TableEdit.Size = new System.Drawing.Size(255, 32);
+      this.TableEdit.Size = new System.Drawing.Size(300, 32);
       this.TableEdit.Text = "&Edit";
       // 
       // toolStripSeparator8
       // 
       this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(252, 6);
+      this.toolStripSeparator8.Size = new System.Drawing.Size(297, 6);
       // 
       // TableDelete
       // 
       this.TableDelete.Name = "TableDelete";
       this.TableDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.TableDelete.Size = new System.Drawing.Size(255, 32);
+      this.TableDelete.Size = new System.Drawing.Size(300, 32);
       this.TableDelete.Text = "&Delete";
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(252, 6);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(297, 6);
       // 
       // TableRefresh
       // 
       this.TableRefresh.Name = "TableRefresh";
       this.TableRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.TableRefresh.Size = new System.Drawing.Size(255, 32);
+      this.TableRefresh.Size = new System.Drawing.Size(300, 32);
       this.TableRefresh.Text = "&Refresh";
       // 
       // TableAddDataProc
       // 
       this.TableAddDataProc.Name = "TableAddDataProc";
-      this.TableAddDataProc.Size = new System.Drawing.Size(255, 32);
+      this.TableAddDataProc.Size = new System.Drawing.Size(300, 32);
       this.TableAddDataProc.Text = "Gen Add Procedure";
       // 
       // TableCreateProc
       // 
       this.TableCreateProc.Name = "TableCreateProc";
-      this.TableCreateProc.Size = new System.Drawing.Size(255, 32);
-      this.TableCreateProc.Text = "Gen Create Procedure";
+      this.TableCreateProc.Size = new System.Drawing.Size(300, 32);
+      this.TableCreateProc.Text = "Gen Create Table Procedure";
       // 
       // TableInsertInto
       // 
       this.TableInsertInto.Name = "TableInsertInto";
-      this.TableInsertInto.Size = new System.Drawing.Size(255, 32);
+      this.TableInsertInto.Size = new System.Drawing.Size(300, 32);
       this.TableInsertInto.Text = "Gen Insert Into";
       // 
       // toolStripSeparator10
       // 
       this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(252, 6);
+      this.toolStripSeparator10.Size = new System.Drawing.Size(297, 6);
       // 
       // TableExit
       // 
       this.TableExit.Name = "TableExit";
-      this.TableExit.Size = new System.Drawing.Size(255, 32);
+      this.TableExit.Size = new System.Drawing.Size(300, 32);
       this.TableExit.Text = "E&xit";
       // 
       // ColumnMenu
@@ -507,14 +512,14 @@
       this.TableGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.TableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.TableGrid.ContextMenuStrip = this.TableMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.TableGrid.DefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.TableGrid.DefaultCellStyle = dataGridViewCellStyle1;
       this.TableGrid.Dock = System.Windows.Forms.DockStyle.Fill;
       this.TableGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.TableGrid.LJCAllowSelectionChange = false;
@@ -551,7 +556,7 @@
       this.ColymnPage.Location = new System.Drawing.Point(4, 35);
       this.ColymnPage.Margin = new System.Windows.Forms.Padding(4);
       this.ColymnPage.Name = "ColymnPage";
-      this.ColymnPage.Size = new System.Drawing.Size(1148, 291);
+      this.ColymnPage.Size = new System.Drawing.Size(1148, 289);
       this.ColymnPage.TabIndex = 2;
       this.ColymnPage.Text = "Column";
       this.ColymnPage.UseVisualStyleBackColor = true;
@@ -567,14 +572,14 @@
       this.ColumnGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.ColumnGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.ColumnGrid.ContextMenuStrip = this.ColumnMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.ColumnGrid.DefaultCellStyle = dataGridViewCellStyle2;
       this.ColumnGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.ColumnGrid.LJCAllowSelectionChange = false;
       this.ColumnGrid.LJCDragDataName = null;
@@ -614,6 +619,14 @@
       this.KeyGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.KeyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.KeyGrid.ContextMenuStrip = this.KeyMenu;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.KeyGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.KeyGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.KeyGrid.LJCAllowSelectionChange = false;
       this.KeyGrid.LJCDragDataName = null;
@@ -630,6 +643,17 @@
       this.KeyGrid.Size = new System.Drawing.Size(1143, 286);
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
+      // 
+      // TableCreateDataProc
+      // 
+      this.TableCreateDataProc.Name = "TableCreateDataProc";
+      this.TableCreateDataProc.Size = new System.Drawing.Size(300, 32);
+      this.TableCreateDataProc.Text = "Gen Create Data Procedure";
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(297, 6);
       // 
       // DataUtilityList
       // 
@@ -722,6 +746,8 @@
     internal LJCWinFormControls.LJCDataGrid ColumnGrid;
     private System.Windows.Forms.TabPage KeyPage;
     internal LJCWinFormControls.LJCDataGrid KeyGrid;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    internal System.Windows.Forms.ToolStripMenuItem TableCreateDataProc;
   }
 }
 

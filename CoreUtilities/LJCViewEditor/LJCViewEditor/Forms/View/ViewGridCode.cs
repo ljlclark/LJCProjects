@@ -323,7 +323,7 @@ namespace LJCViewEditor
         {
           mInfoWindow = new InfoWindow
           {
-            LJCInfoData = sql
+            LJCText = sql
           };
           mInfoWindow.LJCCloseEvent += ViewEditorList.InfoWindow_CloseEvent;
           mInfoWindow.Show(ViewEditorList);
@@ -331,7 +331,7 @@ namespace LJCViewEditor
         else
         {
           sql = dbSqlBuilder.CreateUpdateSql();
-          mInfoWindow.LJCInfoData = sql;
+          mInfoWindow.LJCText = sql;
           mInfoWindow.Show(ViewEditorList);
         }
       }
@@ -348,14 +348,14 @@ namespace LJCViewEditor
         {
           mInfoWindow = new InfoWindow
           {
-            LJCInfoData = code
+            LJCText = code
           };
           mInfoWindow.LJCCloseEvent += ViewEditorList.InfoWindow_CloseEvent;
           mInfoWindow.Show(ViewEditorList);
         }
         else
         {
-          mInfoWindow.LJCInfoData = code;
+          mInfoWindow.LJCText = code;
         }
       }
     }
