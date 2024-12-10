@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Data;
 using System.IO;
 using LJCDataUtility;
+using LJCDBClientLib;
 
 namespace LJCDataUtility
 {
@@ -56,11 +57,14 @@ namespace LJCDataUtility
       Parent.TableEdit.Click += TableEdit_Click;
       Parent.TableDelete.Click += TableDelete_Click;
       Parent.TableRefresh.Click += TableRefresh_Click;
+      Parent.TableExit.Click += Parent.Exit_Click;
+
+      // Custom menu item events.
+      Parent.TableSetData.Click += TableSetData_Click;
       Parent.TableCreateProc.Click += TableCreateProc_Click;
       Parent.TableAddDataProc.Click += TableAddDataProc_Click;
       Parent.TableCreateDataProc.Click += TableCreateDataProc_Click;
       Parent.TableInsertInto.Click += TableInsertInto_Click;
-      Parent.TableExit.Click += Parent.Exit_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -782,6 +786,167 @@ namespace LJCDataUtility
     #endregion
 
     #region Custom Action Event Handlers
+
+    // Table Set Data
+
+    // Handles the create or update data from table.
+    private void TableSetData_Click(object sender, EventArgs e)
+    {
+      var detail = new CreateDataDetail();
+      var result = detail.ShowDialog();
+      bool success = false;
+      if (DialogResult.OK == result)
+      {
+        success = true;
+      }
+
+      var dataConfigName = detail.DataConfigName;
+      var tableName = detail.TableName;
+      var tableManager = Managers.DataTableManager;
+      DataUtilTable dataTable = null;
+      if (success)
+      {
+        var moduleID = Parent.DataModuleID();
+        dataTable = tableManager.RetrieveWithUnique(moduleID, tableName);
+        if (null == dataTable)
+        {
+          success = false;
+          var message = $"Create data for new DataTable {tableName}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Data"
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateData(moduleID, tableName);
+          }
+        }
+      }
+
+      if (success)
+      {
+        var message = $"Table '{tableName}' already exists.";
+        message += "\r\n Do you want to update the columns?";
+        if (DialogResult.Yes == MessageBox.Show(message, "Update Data"
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          UpdateData(dataConfigName, tableName, dataTable.ID);
+        }
+      }
+    }
+
+    // Creates the DataUtilTable and DataUtilColumn data.
+    private void CreateData(int moduleID, string tableName)
+    {
+      var tableManager = Managers.DataTableManager;
+      var dataTable = new DataUtilTable
+      {
+        DataModuleID = moduleID,
+        Name = tableName,
+        Description = tableName
+      };
+      var newTable = tableManager.Add(dataTable);
+
+      // Create Columns
+      var manager = tableManager.Manager;
+      var columns = manager.BaseDefinition;
+      foreach (var column in columns)
+      {
+        CreateColumn(column, newTable.ID);
+      }
+    }
+
+    // Creates DataUtilColumn data.
+    private void CreateColumn(DbColumn column, int tableID)
+    {
+      var newColumn = new DataUtilColumn
+      {
+        DataTableID = tableID,
+        Name = column.ColumnName,
+        Description = column.ColumnName,
+        Sequence = 0,
+        TypeName = column.SQLTypeName,
+        IdentityStart = 0,
+        IdentityIncrement = 0,
+        MaxLength = (short)column.MaxLength,
+        AllowNull = column.AllowDBNull,
+        DefaultValue = column.DefaultValue,
+        NewSequence = 0,
+        NewMaxLength = 0
+      };
+      if (column.AutoIncrement)
+      {
+        newColumn.IdentityStart = 1;
+        newColumn.IdentityIncrement = 1;
+      }
+      var columnManager = Managers.DataColumnManager;
+      var names = columnManager.Manager.GetPropertyNames();
+      names.Remove("ID");
+      names.Remove("IsIdentity");
+      columnManager.Add(newColumn, names);
+    }
+
+    // Update data values.
+    private void UpdateData(string dataConfigName, string tableName
+      , int dataTableID)
+    {
+      var columnManager = Managers.DataColumnManager;
+      var manager = new DataManager(dataConfigName, tableName);
+      var columns = manager.BaseDefinition;
+      foreach (var column in columns)
+      {
+        var updateColumn = new DataUtilColumn();
+        string compare = "";
+        var dataColumn = columnManager.RetrieveWithUnique(dataTableID
+          , column.ColumnName);
+        if (null == dataColumn)
+        {
+          var message = $"Create {column.ColumnName}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Column"
+              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateColumn(column, dataTableID);
+          }
+          continue;
+        }
+        if (dataColumn.TypeName != column.SQLTypeName)
+        {
+          updateColumn.TypeName = column.SQLTypeName;
+          compare += $"TypeName: {dataColumn.TypeName} = {column.SQLTypeName}";
+          compare += "\r\n";
+        }
+        if (-1 == column.MaxLength)
+        {
+          column.MaxLength = 0;
+        }
+        if (dataColumn.MaxLength != column.MaxLength)
+        {
+          updateColumn.MaxLength = (short)column.MaxLength;
+          compare += $"MaxLength: {dataColumn.MaxLength} = {column.MaxLength}";
+          compare += "\r\n";
+        }
+        if (dataColumn.AllowNull != column.AllowDBNull)
+        {
+          var changes = updateColumn.ChangedNames;
+          updateColumn.AllowNull = column.AllowDBNull;
+          if (!changes.Contains("AllowNull"))
+          {
+            updateColumn.ChangedNames.Add("AllowNull");
+          }
+          compare += $"AllowNull: {dataColumn.AllowNull} = {column.AllowDBNull}";
+          compare += "\r\n";
+        }
+        if (NetString.HasValue(compare))
+        {
+          var message = $"Update {dataColumn.Name}\r\n {compare}";
+          if (DialogResult.Yes == MessageBox.Show(message, "Update"
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            var keyColumns = columnManager.IDKey(dataColumn.ID);
+            columnManager.Update(updateColumn, keyColumns);
+          }
+        }
+      }
+    }
+
+    // Other menu event handlers.
 
     // Handles the Generate Create Table Procedure menu item event.
     private void TableCreateProc_Click(object sender, EventArgs e)

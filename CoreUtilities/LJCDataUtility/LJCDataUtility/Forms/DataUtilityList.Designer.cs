@@ -50,8 +50,10 @@
       this.TableDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
       this.TableRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.TableAddDataProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.TableCreateProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableAddDataProc = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableCreateDataProc = new System.Windows.Forms.ToolStripMenuItem();
       this.TableInsertInto = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.TableExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +90,8 @@
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
-      this.TableCreateDataProc = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+      this.TableSetData = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.TableMenu.SuspendLayout();
       this.ColumnMenu.SuspendLayout();
@@ -192,6 +194,7 @@
             this.toolStripSeparator9,
             this.TableRefresh,
             this.toolStripSeparator3,
+            this.TableSetData,
             this.TableCreateProc,
             this.TableAddDataProc,
             this.TableCreateDataProc,
@@ -199,7 +202,7 @@
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(301, 381);
+      this.TableMenu.Size = new System.Drawing.Size(301, 380);
       // 
       // TableHeading
       // 
@@ -246,17 +249,28 @@
       this.TableRefresh.Size = new System.Drawing.Size(300, 32);
       this.TableRefresh.Text = "&Refresh";
       // 
-      // TableAddDataProc
+      // toolStripSeparator3
       // 
-      this.TableAddDataProc.Name = "TableAddDataProc";
-      this.TableAddDataProc.Size = new System.Drawing.Size(300, 32);
-      this.TableAddDataProc.Text = "Gen Add Procedure";
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(297, 6);
       // 
       // TableCreateProc
       // 
       this.TableCreateProc.Name = "TableCreateProc";
       this.TableCreateProc.Size = new System.Drawing.Size(300, 32);
       this.TableCreateProc.Text = "Gen Create Table Procedure";
+      // 
+      // TableAddDataProc
+      // 
+      this.TableAddDataProc.Name = "TableAddDataProc";
+      this.TableAddDataProc.Size = new System.Drawing.Size(300, 32);
+      this.TableAddDataProc.Text = "Gen Add Procedure";
+      // 
+      // TableCreateDataProc
+      // 
+      this.TableCreateDataProc.Name = "TableCreateDataProc";
+      this.TableCreateDataProc.Size = new System.Drawing.Size(300, 32);
+      this.TableCreateDataProc.Text = "Gen Create Data Procedure";
       // 
       // TableInsertInto
       // 
@@ -359,12 +373,13 @@
             this.KeyDelete,
             this.toolStripSeparator15,
             this.KeyRefresh,
+            this.toolStripSeparator11,
             this.KeyForeignKeyProc,
             this.KeyForeignKeyDropProc,
             this.toolStripSeparator16,
             this.KeyExit});
       this.KeyMenu.Name = "KeyMenu";
-      this.KeyMenu.Size = new System.Drawing.Size(300, 278);
+      this.KeyMenu.Size = new System.Drawing.Size(300, 284);
       // 
       // KeyHeading
       // 
@@ -644,16 +659,16 @@
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
       // 
-      // TableCreateDataProc
+      // toolStripSeparator11
       // 
-      this.TableCreateDataProc.Name = "TableCreateDataProc";
-      this.TableCreateDataProc.Size = new System.Drawing.Size(300, 32);
-      this.TableCreateDataProc.Text = "Gen Create Data Procedure";
+      this.toolStripSeparator11.Name = "toolStripSeparator11";
+      this.toolStripSeparator11.Size = new System.Drawing.Size(296, 6);
       // 
-      // toolStripSeparator3
+      // TableSetData
       // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(297, 6);
+      this.TableSetData.Name = "TableSetData";
+      this.TableSetData.Size = new System.Drawing.Size(300, 32);
+      this.TableSetData.Text = "Set Data from Table";
       // 
       // DataUtilityList
       // 
@@ -748,6 +763,8 @@
     internal LJCWinFormControls.LJCDataGrid KeyGrid;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     internal System.Windows.Forms.ToolStripMenuItem TableCreateDataProc;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+    internal System.Windows.Forms.ToolStripMenuItem TableSetData;
   }
 }
 

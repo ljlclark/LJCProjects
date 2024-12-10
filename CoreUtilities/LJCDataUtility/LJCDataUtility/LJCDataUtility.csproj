@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
+    <Compile Include="Forms\CreateDataDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateDataDetail.Designer.cs">
+      <DependentUpon>CreateDataDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataColumn\DataColumnDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="XMLAttribute.cs" />
     <Compile Include="XMLAttributes.cs" />
     <Compile Include="XMLBuilder.cs" />
+    <EmbeddedResource Include="Forms\CreateDataDetail.resx">
+      <DependentUpon>CreateDataDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataColumn\DataColumnDetail.resx">
       <DependentUpon>DataColumnDetail.cs</DependentUpon>
     </EmbeddedResource>
