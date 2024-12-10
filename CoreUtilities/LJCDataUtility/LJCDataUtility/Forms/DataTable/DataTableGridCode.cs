@@ -17,6 +17,7 @@ using System.Data;
 using System.IO;
 using LJCDataUtility;
 using LJCDBClientLib;
+using LJCDBMessage;
 
 namespace LJCDataUtility
 {
@@ -861,26 +862,35 @@ namespace LJCDataUtility
         DataTableID = tableID,
         Name = column.ColumnName,
         Description = column.ColumnName,
-        Sequence = 0,
+        Sequence = -1,
         TypeName = column.SQLTypeName,
-        IdentityStart = 0,
-        IdentityIncrement = 0,
+        IdentityStart = -1,
+        IdentityIncrement = -1,
         MaxLength = (short)column.MaxLength,
         AllowNull = column.AllowDBNull,
         DefaultValue = column.DefaultValue,
-        NewSequence = 0,
-        NewMaxLength = 0
+        NewSequence = -1,
+        NewMaxLength = -1
       };
       if (column.AutoIncrement)
       {
-        newColumn.IdentityStart = 1;
-        newColumn.IdentityIncrement = 1;
+        newColumn.IdentityStart = -1;
+        newColumn.IdentityIncrement = -1;
       }
       var columnManager = Managers.DataColumnManager;
+
       var names = columnManager.Manager.GetPropertyNames();
-      names.Remove("ID");
-      names.Remove("IsIdentity");
-      columnManager.Add(newColumn, names);
+      var setNames = columnManager.Manager.GetPropertyNames();
+      setNames.Remove("ID");
+      LJCReflect reflect = new LJCReflect(newColumn);
+      foreach (var name in names)
+      {
+        if (!reflect.HasProperty(name))
+        {
+          setNames.Remove(name);
+        }
+      }
+      columnManager.Add(newColumn, setNames);
     }
 
     // Update data values.
@@ -914,7 +924,7 @@ namespace LJCDataUtility
         }
         if (-1 == column.MaxLength)
         {
-          column.MaxLength = 0;
+          column.MaxLength = -1;
         }
         if (dataColumn.MaxLength != column.MaxLength)
         {
