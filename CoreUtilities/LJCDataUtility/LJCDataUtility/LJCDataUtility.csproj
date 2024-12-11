@@ -70,6 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
+    <Compile Include="Forms\DataTable\AddData.cs" />
+    <Compile Include="Forms\DataTable\CreateData.cs" />
+    <Compile Include="Forms\DataTable\InsertInto.cs" />
+    <Compile Include="Forms\DataTable\SetUtilData.cs" />
     <Compile Include="Forms\TableNameSelect.cs">
       <SubType>Form</SubType>
     </Compile>
