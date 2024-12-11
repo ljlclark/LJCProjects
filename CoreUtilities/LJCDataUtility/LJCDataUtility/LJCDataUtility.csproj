@@ -70,10 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
-    <Compile Include="Forms\DataTable\AddData.cs" />
-    <Compile Include="Forms\DataTable\CreateData.cs" />
-    <Compile Include="Forms\DataTable\InsertInto.cs" />
-    <Compile Include="Forms\DataTable\SetUtilData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\InsertInto.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\SetUtilData.cs" />
     <Compile Include="Forms\TableNameSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,7 +102,7 @@
       <DependentUpon>DataModuleDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataModule\DataModuleComboCode.cs" />
-    <Compile Include="Forms\DataTable\AddProcData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\AddProcData.cs" />
     <Compile Include="Forms\DataTable\DataTableDetail.cs">
       <SubType>Form</SubType>
     </Compile>

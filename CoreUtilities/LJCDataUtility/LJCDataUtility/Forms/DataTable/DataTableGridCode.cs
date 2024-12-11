@@ -333,36 +333,6 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Gen Create Table Procedure Methods
-
-    // Generates the create Table procedure.
-    internal void CreateTableProc()
-    {
-      string dbName = "LJCDataUtility";
-      var tableID = Parent.DataTableID();
-      var orderByNames = new List<string>()
-      {
-        DataUtilColumn.ColumnSequence
-      };
-      var dataColumns = Managers.TableDataColumns(tableID
-        , orderByNames);
-      if (NetCommon.HasItems(dataColumns))
-      {
-        var tableName = Parent.DataTableName();
-        var proc = new ProcBuilder(dbName, tableName);
-        var primaryKeyList = "ID";
-        var uniqueKeyList = "Name";
-        var value = proc.CreateTableProc(dataColumns, primaryKeyList
-          , uniqueKeyList);
-
-        var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
-          , infoValue.ControlName, infoValue);
-        Parent.InfoValue = controlValue;
-      }
-    }
-    #endregion
-
     #region Common Action Event Handlers
 
     // Handles the New menu item event.
@@ -402,7 +372,8 @@ namespace LJCDataUtility
     // Handles the "Gen Create Table Procedure" menu item event.
     private void TableCreateProc_Click(object sender, EventArgs e)
     {
-      CreateTableProc();
+      var createTable = new CreateTable(Parent);
+      createTable.CreateTableProc();
     }
 
     // Handles the "Gen Add Procedure" menu item event.
