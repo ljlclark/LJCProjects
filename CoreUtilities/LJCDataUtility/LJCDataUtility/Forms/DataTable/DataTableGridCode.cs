@@ -360,7 +360,7 @@ namespace LJCDataUtility
           if (DialogResult.Yes == MessageBox.Show(message, "Create Data"
             , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            CreateData(moduleID, tableName);
+            CreateData(dataConfigName, tableName, moduleID);
           }
         }
       }
@@ -378,7 +378,8 @@ namespace LJCDataUtility
     }
 
     // Creates the DataUtilTable and DataUtilColumn data.
-    private void CreateData(int moduleID, string tableName)
+    private void CreateData(string dataConfigName, string tableName
+      , int moduleID)
     {
       var tableManager = Managers.DataTableManager;
       var dataTable = new DataUtilTable
@@ -393,33 +394,33 @@ namespace LJCDataUtility
       var newTable = tableManager.Add(dataTable);
 
       // Create Columns
-      var manager = tableManager.Manager;
-      var columns = manager.BaseDefinition;
-      foreach (var column in columns)
+      var manager = new DataManager(dataConfigName, tableName);
+      var dbColumns = manager.BaseDefinition;
+      foreach (var dbColumn in dbColumns)
       {
-        CreateColumn(column, newTable.ID);
+        CreateColumn(dbColumn, newTable.ID);
       }
     }
 
     // Creates DataUtilColumn data.
-    private void CreateColumn(DbColumn column, int tableID)
+    private void CreateColumn(DbColumn dbColumn, int tableID)
     {
       var newColumn = new DataUtilColumn
       {
         DataTableID = tableID,
-        Name = column.ColumnName,
-        Description = column.ColumnName,
+        Name = dbColumn.ColumnName,
+        Description = dbColumn.ColumnName,
         Sequence = -1,
-        TypeName = column.SQLTypeName,
+        TypeName = dbColumn.SQLTypeName,
         IdentityStart = -1,
         IdentityIncrement = -1,
-        MaxLength = (short)column.MaxLength,
-        AllowNull = column.AllowDBNull,
-        DefaultValue = column.DefaultValue,
+        MaxLength = (short)dbColumn.MaxLength,
+        AllowNull = dbColumn.AllowDBNull,
+        DefaultValue = dbColumn.DefaultValue,
         NewSequence = -1,
         NewMaxLength = -1
       };
-      if (column.AutoIncrement)
+      if (dbColumn.AutoIncrement)
       {
         newColumn.IdentityStart = -1;
         newColumn.IdentityIncrement = -1;
