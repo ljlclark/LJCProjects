@@ -114,7 +114,7 @@ namespace LJCDataUtility
 
         // Get the grid columns from the manager Data Definition.
         var manager = ColumnManager;
-        var gridColumns = manager.GetColumns(propertyNames);
+        var gridColumns = manager.Columns(propertyNames);
 
         // Setup the grid columns.
         ColumnGrid.LJCAddColumns(gridColumns);

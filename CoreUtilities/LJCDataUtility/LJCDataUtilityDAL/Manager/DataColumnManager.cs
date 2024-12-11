@@ -50,11 +50,12 @@ namespace LJCDataUtilityDAL
     // Adds a record to the database.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DataUtilColumn Add(DataUtilColumn dataObject
-      , List<string> propertyNames = null)
+      , List<string> propertyNames = null, bool includeNull = false)
     {
       DataUtilColumn retValue;
 
-      var dbResult = Manager.Add(dataObject, propertyNames);
+      var dbResult = Manager.Add(dataObject, propertyNames
+        , includeNull);
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
@@ -105,9 +106,15 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates a set of columns that match the supplied list.
-    public DbColumns GetColumns(List<string> propertyNames)
+    public DbColumns Columns(List<string> propertyNames)
     {
       return Manager.DataDefinition.LJCGetColumns(propertyNames);
+    }
+
+    // Creates a list of BaseDefinition property names.
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
     }
     #endregion
 

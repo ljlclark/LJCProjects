@@ -38,7 +38,8 @@ namespace LJCDBMessage
     // Similar to RequestDataKeys and RequestLookupKeys()
     /// <include path='items/RequestDataColumns/*' file='Doc/DbCommon.xml'/>
     public static DbColumns RequestDataColumns(object dataObject
-      , DbColumns baseDefinition, List<string> propertyNames = null)
+      , DbColumns baseDefinition, List<string> propertyNames = null
+      , bool includeNull = false)
     {
       DbColumns retValue = null;
 
@@ -46,7 +47,7 @@ namespace LJCDBMessage
       {
         DefaultToChangedNames(dataObject, ref propertyNames);
         var requestColumns = RequestColumns(baseDefinition, propertyNames);
-        retValue = DataColumns(dataObject, requestColumns);
+        retValue = DataColumns(dataObject, requestColumns, includeNull);
       }
       return retValue;
     }
@@ -54,7 +55,7 @@ namespace LJCDBMessage
     // Creates DbColumns values from data properties for supplied column list.
     // Similar to RequestKeys(), DataKeys() and LookupKeys()
     private static DbColumns DataColumns(object dataObject
-      , DbColumns requestColumns)
+      , DbColumns requestColumns, bool includeNull = false)
     {
       DbColumns retValue = null;
 
@@ -67,13 +68,15 @@ namespace LJCDBMessage
         {
           // Add DbColumn from request columns and value from dataObject.
           object value = reflect.GetValue(dbColumn.PropertyName);
-          if (value != null)
+          if (!includeNull
+            && null == value)
           {
-            var dbValueColumn = CreateDataColumn(dbColumn, value);
-            if (IsDataColumn(dbValueColumn))
-            {
-              retValue.Add(dbValueColumn);
-            }
+            continue;
+          }
+          var dbValueColumn = CreateDataColumn(dbColumn, value);
+          if (IsDataColumn(dbValueColumn))
+          {
+            retValue.Add(dbValueColumn);
           }
         }
       }
@@ -85,15 +88,16 @@ namespace LJCDBMessage
     {
       DbColumn retValue = null;
 
-      if (dataColumn != null
-        || value != null)
+      // Set value to null if null specifier is present.
+      if (value != null
+        && "-null" == value.ToString())
       {
-        // Set value to null if null specifier is present.
-        if ("-null" == value.ToString())
-        {
-          value = "null";
-        }
+        value = "null";
+      }
 
+      if (dataColumn != null
+        && value != null)
+      {
         retValue = new DbColumn(dataColumn)
         {
           Value = value

@@ -85,13 +85,14 @@ namespace LJCDBClientLib
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='Doc/DataManager.xml'/>
-    public DbResult Add(object dataObject, List<string> propertyNames = null)
+    public DbResult Add(object dataObject, List<string> propertyNames = null
+      , bool includeNull = false)
     {
       DbResult retValue;
 
       // The record must not contain a value for DB Assigned columns.
       var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
-        , propertyNames);
+        , propertyNames, includeNull);
       var keyColumns = DbCommon.RequestLookupKeys(dataObject, BaseDefinition
         , LookupColumnNames);
 

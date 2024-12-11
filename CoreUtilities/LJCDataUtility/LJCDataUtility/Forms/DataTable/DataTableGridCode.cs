@@ -90,7 +90,7 @@ namespace LJCDataUtility
         };
 
         // Get the grid columns from the manager Data Definition.
-        var gridColumns = TableManager.GetColumns(propertyNames);
+        var gridColumns = TableManager.Columns(propertyNames);
 
         // Setup the grid columns.
         TableGrid.LJCAddColumns(gridColumns);
@@ -334,7 +334,207 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Custom Action Methods
+    #region Set Data from Table Methods
+    internal void SetData()
+    {
+      var detail = new TableNameSelect();
+      var result = detail.ShowDialog();
+      bool success = false;
+      if (DialogResult.OK == result)
+      {
+        success = true;
+      }
+
+      var dataConfigName = detail.DataConfigName;
+      var tableName = detail.TableName;
+      DataUtilTable dataTable = null;
+      if (success)
+      {
+        var tableManager = Managers.DataTableManager;
+        var moduleID = Parent.DataModuleID();
+        dataTable = tableManager.RetrieveWithUnique(moduleID, tableName);
+        if (null == dataTable)
+        {
+          success = false;
+          var message = $"Create data for new DataTable {tableName}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Data"
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateData(moduleID, tableName);
+          }
+        }
+      }
+
+      if (success)
+      {
+        var message = $"Table '{tableName}' already exists.";
+        message += "\r\n Do you want to update the columns?";
+        if (DialogResult.Yes == MessageBox.Show(message, "Update Data"
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          UpdateData(dataConfigName, tableName, dataTable.ID);
+        }
+      }
+    }
+
+    // Creates the DataUtilTable and DataUtilColumn data.
+    private void CreateData(int moduleID, string tableName)
+    {
+      var tableManager = Managers.DataTableManager;
+      var dataTable = new DataUtilTable
+      {
+        DataModuleID = moduleID,
+        Name = tableName,
+        Description = tableName
+      };
+      var propertyNames = tableManager.PropertyNames();
+      propertyNames.Remove("ID");
+      dataTable.AddChangedNames(propertyNames);
+      var newTable = tableManager.Add(dataTable);
+
+      // Create Columns
+      var manager = tableManager.Manager;
+      var columns = manager.BaseDefinition;
+      foreach (var column in columns)
+      {
+        CreateColumn(column, newTable.ID);
+      }
+    }
+
+    // Creates DataUtilColumn data.
+    private void CreateColumn(DbColumn column, int tableID)
+    {
+      var newColumn = new DataUtilColumn
+      {
+        DataTableID = tableID,
+        Name = column.ColumnName,
+        Description = column.ColumnName,
+        Sequence = -1,
+        TypeName = column.SQLTypeName,
+        IdentityStart = -1,
+        IdentityIncrement = -1,
+        MaxLength = (short)column.MaxLength,
+        AllowNull = column.AllowDBNull,
+        DefaultValue = column.DefaultValue,
+        NewSequence = -1,
+        NewMaxLength = -1
+      };
+      if (column.AutoIncrement)
+      {
+        newColumn.IdentityStart = -1;
+        newColumn.IdentityIncrement = -1;
+      }
+
+      var columnManager = Managers.DataColumnManager;
+      var names = columnManager.PropertyNames();
+      names.Remove("ID");
+      newColumn.AddChangedNames(names);
+      LJCReflect reflect = new LJCReflect(newColumn);
+      foreach (var name in names)
+      {
+        if (!reflect.HasProperty(name))
+        {
+          newColumn.ChangedNames.Remove(name);
+        }
+      }
+      columnManager.Add(newColumn, includeNull: true);
+    }
+
+    // Update data values.
+    private void UpdateData(string dataConfigName, string tableName
+      , int dataTableID)
+    {
+      var columnManager = Managers.DataColumnManager;
+      var manager = new DataManager(dataConfigName, tableName);
+      var columns = manager.BaseDefinition;
+      foreach (var column in columns)
+      {
+        var updateColumn = new DataUtilColumn();
+        string compare = "";
+        var dataColumn = columnManager.RetrieveWithUnique(dataTableID
+          , column.ColumnName);
+        if (null == dataColumn)
+        {
+          var message = $"Create {column.ColumnName}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Column"
+              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateColumn(column, dataTableID);
+          }
+          continue;
+        }
+        if (dataColumn.TypeName != column.SQLTypeName)
+        {
+          updateColumn.TypeName = column.SQLTypeName;
+          compare += $"TypeName: {dataColumn.TypeName} = {column.SQLTypeName}";
+          compare += "\r\n";
+        }
+        if (-1 == column.MaxLength)
+        {
+          column.MaxLength = -1;
+        }
+        if (dataColumn.MaxLength != column.MaxLength)
+        {
+          updateColumn.MaxLength = (short)column.MaxLength;
+          compare += $"MaxLength: {dataColumn.MaxLength} = {column.MaxLength}";
+          compare += "\r\n";
+        }
+        if (dataColumn.AllowNull != column.AllowDBNull)
+        {
+          var changes = updateColumn.ChangedNames;
+          updateColumn.AllowNull = column.AllowDBNull;
+          if (!changes.Contains("AllowNull"))
+          {
+            updateColumn.ChangedNames.Add("AllowNull");
+          }
+          compare += $"AllowNull: {dataColumn.AllowNull} = {column.AllowDBNull}";
+          compare += "\r\n";
+        }
+        if (NetString.HasValue(compare))
+        {
+          var message = $"Update {dataColumn.Name}\r\n {compare}";
+          if (DialogResult.Yes == MessageBox.Show(message, "Update"
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            var keyColumns = columnManager.IDKey(dataColumn.ID);
+            columnManager.Update(updateColumn, keyColumns);
+          }
+        }
+      }
+    }
+    #endregion
+
+    #region Gen Create Table Procedure Methods
+
+    // Generates the create Table procedure.
+    internal void CreateTableProc()
+    {
+      string dbName = "LJCDataUtility";
+      var tableID = Parent.DataTableID();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var dataColumns = Managers.TableDataColumns(tableID
+        , orderByNames);
+      if (NetCommon.HasItems(dataColumns))
+      {
+        var tableName = Parent.DataTableName();
+        var proc = new ProcBuilder(dbName, tableName);
+        var primaryKeyList = "ID";
+        var uniqueKeyList = "Name";
+        var value = proc.CreateTableProc(dataColumns, primaryKeyList
+          , uniqueKeyList);
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+    #endregion
+
+    #region Gen Add Procedure Methods
 
     // Generates the Add data procedure.
     internal void AddDataProc()
@@ -385,33 +585,6 @@ namespace LJCDataUtility
             CreateAddProc(procData);
             break;
         }
-      }
-    }
-
-    // Generates the create Table procedure.
-    internal void CreateTableProc()
-    {
-      string dbName = "LJCDataUtility";
-      var tableID = Parent.DataTableID();
-      var orderByNames = new List<string>()
-      {
-        DataUtilColumn.ColumnSequence
-      };
-      var dataColumns = Managers.TableDataColumns(tableID
-        , orderByNames);
-      if (NetCommon.HasItems(dataColumns))
-      {
-        var tableName = Parent.DataTableName();
-        var proc = new ProcBuilder(dbName, tableName);
-        var primaryKeyList = "ID";
-        var uniqueKeyList = "Name";
-        var value = proc.CreateTableProc(dataColumns, primaryKeyList
-          , uniqueKeyList);
-
-        var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
-          , infoValue.ControlName, infoValue);
-        Parent.InfoValue = controlValue;
       }
     }
 
@@ -504,119 +677,9 @@ namespace LJCDataUtility
       Parent.InfoValue = controlValue;
       return retString;
     }
+    #endregion
 
-    // Create the Insert Into SQL.
-    private void InsertSelectSQL()
-    {
-      var tableID = Parent.DataTableID();
-      var tableName = Parent.DataTableName();
-      var orderByNames = new List<string>()
-      {
-        DataUtilColumn.ColumnSequence
-      };
-      var dataColumns = Managers.TableDataColumns(tableID
-        , orderByNames);
-      if (NetCommon.HasItems(dataColumns))
-      {
-        StringBuilder b = new StringBuilder(256);
-        string dbName = "LJCDataUtility";
-        string newTableName = $"New{tableName}";
-        b.AppendLine($"USE [{dbName}]");
-        b.AppendLine($"SET IDENTITY_INSERT {newTableName} ON");
-        b.AppendLine();
-
-        b.AppendLine($"INSERT INTO {newTableName}");
-        var proc = new ProcBuilder(dbName, newTableName);
-        // Parens, NewName, IDs.
-        var insertList = proc.ColumnsList(dataColumns, true
-          , true, true);
-        insertList = insertList.Substring(2);
-        b.AppendLine(insertList);
-
-        b.AppendLine("select");
-        // No parens, NewName value, NewMaxLength value.
-        var selectList = InsertSelectList(dataColumns);
-        b.AppendLine(selectList);
-        b.AppendLine($"FROM {tableName};");
-
-        b.AppendLine();
-        b.AppendLine($"SET IDENTITY_INSERT {newTableName} OFF");
-        var showText = b.ToString();
-
-        var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(showText
-          , infoValue.ControlName, infoValue);
-        Parent.InfoValue = controlValue;
-      }
-    }
-
-    // Create custom InsertSelect list.
-    // (No parens, NewName value, NewMaxLength value)
-    private string InsertSelectList(DataColumns dataColumns)
-    {
-      var b = new StringBuilder(256);
-      var value = "  ";
-      b.Append(value);
-      var lineLength = value.Length;
-
-      var first = true;
-      foreach (DataUtilColumn column in dataColumns)
-      {
-        var nameValue = column.Name;
-        lineLength += nameValue.Length;
-
-        // Calculate length before adding to insert newline.
-        var addNewline = false;
-        if ("Name" == nameValue)
-        {
-          addNewline = true;
-          nameValue = "Name = ISNULL(NewName, Name)";
-          lineLength = 81;
-        }
-        if ("MaxLength" == nameValue)
-        {
-          addNewline = true;
-          nameValue = "MaxLength =\r\n";
-          nameValue += "      CASE NewMaxLength\r\n";
-          nameValue += "        WHEN 0 THEN MaxLength ELSE NewMaxLength\r\n";
-          nameValue += "      END";
-          lineLength = 81;
-        }
-
-        if (lineLength > 80)
-        {
-          var newLine = "\r\n    ";
-          b.Append(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-          lineLength += nameValue.Length;
-        }
-
-        if (!first)
-        {
-          var firstValue = ", ";
-          b.Append(firstValue);
-          lineLength += firstValue.Length;
-        }
-        first = false;
-
-        b.Append(nameValue);
-        if (addNewline)
-        {
-          var newLine = "\r\n    ";
-          b.Append(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-        }
-      }
-
-      var retSelect = b.ToString();
-      return retSelect;
-    }
-
-    // Create Data Methods
+    #region Gen Create Data Procedure Methods
 
     // Generates the Create data procedure.
     internal void CreateDataProc()
@@ -759,6 +822,120 @@ namespace LJCDataUtility
     }
     #endregion
 
+    #region Gen Insert Into Methods.
+
+    // Create the Insert Into SQL.
+    internal void InsertInto()
+    {
+      var tableID = Parent.DataTableID();
+      var tableName = Parent.DataTableName();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var dataColumns = Managers.TableDataColumns(tableID
+        , orderByNames);
+      if (NetCommon.HasItems(dataColumns))
+      {
+        StringBuilder b = new StringBuilder(256);
+        string dbName = "LJCDataUtility";
+        string newTableName = $"New{tableName}";
+        b.AppendLine($"USE [{dbName}]");
+        b.AppendLine($"SET IDENTITY_INSERT {newTableName} ON");
+        b.AppendLine();
+
+        b.AppendLine($"INSERT INTO {newTableName}");
+        var proc = new ProcBuilder(dbName, newTableName);
+        // Parens, NewName, IDs.
+        var insertList = proc.ColumnsList(dataColumns, true
+          , true, true);
+        insertList = insertList.Substring(2);
+        b.AppendLine(insertList);
+
+        b.AppendLine("select");
+        // No parens, NewName value, NewMaxLength value.
+        var selectList = InsertSelectList(dataColumns);
+        b.AppendLine(selectList);
+        b.AppendLine($"FROM {tableName};");
+
+        b.AppendLine();
+        b.AppendLine($"SET IDENTITY_INSERT {newTableName} OFF");
+        var showText = b.ToString();
+
+        var infoValue = Parent.InfoValue;
+        var controlValue = DataUtilityCommon.ShowInfo(showText
+          , infoValue.ControlName, infoValue);
+        Parent.InfoValue = controlValue;
+      }
+    }
+
+    // Create custom InsertSelect list.
+    // (No parens, NewName value, NewMaxLength value)
+    private string InsertSelectList(DataColumns dataColumns)
+    {
+      var b = new StringBuilder(256);
+      var value = "  ";
+      b.Append(value);
+      var lineLength = value.Length;
+
+      var first = true;
+      foreach (DataUtilColumn column in dataColumns)
+      {
+        var nameValue = column.Name;
+        lineLength += nameValue.Length;
+
+        // Calculate length before adding to insert newline.
+        var addNewline = false;
+        if ("Name" == nameValue)
+        {
+          addNewline = true;
+          nameValue = "Name = ISNULL(NewName, Name)";
+          lineLength = 81;
+        }
+        if ("MaxLength" == nameValue)
+        {
+          addNewline = true;
+          nameValue = "MaxLength =\r\n";
+          nameValue += "      CASE NewMaxLength\r\n";
+          nameValue += "        WHEN 0 THEN MaxLength ELSE NewMaxLength\r\n";
+          nameValue += "      END";
+          lineLength = 81;
+        }
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n    ";
+          b.Append(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          b.Append(firstValue);
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        b.Append(nameValue);
+        if (addNewline)
+        {
+          var newLine = "\r\n    ";
+          b.Append(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+        }
+      }
+
+      var retSelect = b.ToString();
+      return retSelect;
+    }
+    #endregion
+
     #region Common Action Event Handlers
 
     // Handles the New menu item event.
@@ -788,198 +965,34 @@ namespace LJCDataUtility
 
     #region Custom Action Event Handlers
 
-    // Table Set Data
-
-    // Handles the create or update data from table.
+    // Handles the "Set Data from Table" menu event.
     private void TableSetData_Click(object sender, EventArgs e)
     {
-      var detail = new CreateDataDetail();
-      var result = detail.ShowDialog();
-      bool success = false;
-      if (DialogResult.OK == result)
-      {
-        success = true;
-      }
-
-      var dataConfigName = detail.DataConfigName;
-      var tableName = detail.TableName;
-      var tableManager = Managers.DataTableManager;
-      DataUtilTable dataTable = null;
-      if (success)
-      {
-        var moduleID = Parent.DataModuleID();
-        dataTable = tableManager.RetrieveWithUnique(moduleID, tableName);
-        if (null == dataTable)
-        {
-          success = false;
-          var message = $"Create data for new DataTable {tableName}?";
-          if (DialogResult.Yes == MessageBox.Show(message, "Create Data"
-            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-          {
-            CreateData(moduleID, tableName);
-          }
-        }
-      }
-
-      if (success)
-      {
-        var message = $"Table '{tableName}' already exists.";
-        message += "\r\n Do you want to update the columns?";
-        if (DialogResult.Yes == MessageBox.Show(message, "Update Data"
-          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        {
-          UpdateData(dataConfigName, tableName, dataTable.ID);
-        }
-      }
+      SetData();
     }
 
-    // Creates the DataUtilTable and DataUtilColumn data.
-    private void CreateData(int moduleID, string tableName)
-    {
-      var tableManager = Managers.DataTableManager;
-      var dataTable = new DataUtilTable
-      {
-        DataModuleID = moduleID,
-        Name = tableName,
-        Description = tableName
-      };
-      var newTable = tableManager.Add(dataTable);
-
-      // Create Columns
-      var manager = tableManager.Manager;
-      var columns = manager.BaseDefinition;
-      foreach (var column in columns)
-      {
-        CreateColumn(column, newTable.ID);
-      }
-    }
-
-    // Creates DataUtilColumn data.
-    private void CreateColumn(DbColumn column, int tableID)
-    {
-      var newColumn = new DataUtilColumn
-      {
-        DataTableID = tableID,
-        Name = column.ColumnName,
-        Description = column.ColumnName,
-        Sequence = -1,
-        TypeName = column.SQLTypeName,
-        IdentityStart = -1,
-        IdentityIncrement = -1,
-        MaxLength = (short)column.MaxLength,
-        AllowNull = column.AllowDBNull,
-        DefaultValue = column.DefaultValue,
-        NewSequence = -1,
-        NewMaxLength = -1
-      };
-      if (column.AutoIncrement)
-      {
-        newColumn.IdentityStart = -1;
-        newColumn.IdentityIncrement = -1;
-      }
-      var columnManager = Managers.DataColumnManager;
-
-      var names = columnManager.Manager.GetPropertyNames();
-      var setNames = columnManager.Manager.GetPropertyNames();
-      setNames.Remove("ID");
-      LJCReflect reflect = new LJCReflect(newColumn);
-      foreach (var name in names)
-      {
-        if (!reflect.HasProperty(name))
-        {
-          setNames.Remove(name);
-        }
-      }
-      columnManager.Add(newColumn, setNames);
-    }
-
-    // Update data values.
-    private void UpdateData(string dataConfigName, string tableName
-      , int dataTableID)
-    {
-      var columnManager = Managers.DataColumnManager;
-      var manager = new DataManager(dataConfigName, tableName);
-      var columns = manager.BaseDefinition;
-      foreach (var column in columns)
-      {
-        var updateColumn = new DataUtilColumn();
-        string compare = "";
-        var dataColumn = columnManager.RetrieveWithUnique(dataTableID
-          , column.ColumnName);
-        if (null == dataColumn)
-        {
-          var message = $"Create {column.ColumnName}?";
-          if (DialogResult.Yes == MessageBox.Show(message, "Create Column"
-              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-          {
-            CreateColumn(column, dataTableID);
-          }
-          continue;
-        }
-        if (dataColumn.TypeName != column.SQLTypeName)
-        {
-          updateColumn.TypeName = column.SQLTypeName;
-          compare += $"TypeName: {dataColumn.TypeName} = {column.SQLTypeName}";
-          compare += "\r\n";
-        }
-        if (-1 == column.MaxLength)
-        {
-          column.MaxLength = -1;
-        }
-        if (dataColumn.MaxLength != column.MaxLength)
-        {
-          updateColumn.MaxLength = (short)column.MaxLength;
-          compare += $"MaxLength: {dataColumn.MaxLength} = {column.MaxLength}";
-          compare += "\r\n";
-        }
-        if (dataColumn.AllowNull != column.AllowDBNull)
-        {
-          var changes = updateColumn.ChangedNames;
-          updateColumn.AllowNull = column.AllowDBNull;
-          if (!changes.Contains("AllowNull"))
-          {
-            updateColumn.ChangedNames.Add("AllowNull");
-          }
-          compare += $"AllowNull: {dataColumn.AllowNull} = {column.AllowDBNull}";
-          compare += "\r\n";
-        }
-        if (NetString.HasValue(compare))
-        {
-          var message = $"Update {dataColumn.Name}\r\n {compare}";
-          if (DialogResult.Yes == MessageBox.Show(message, "Update"
-            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-          {
-            var keyColumns = columnManager.IDKey(dataColumn.ID);
-            columnManager.Update(updateColumn, keyColumns);
-          }
-        }
-      }
-    }
-
-    // Other menu event handlers.
-
-    // Handles the Generate Create Table Procedure menu item event.
+    // Handles the "Gen Create Table Procedure" menu item event.
     private void TableCreateProc_Click(object sender, EventArgs e)
     {
       CreateTableProc();
     }
 
-    // Handles the Generate Add Procedure menu item event.
+    // Handles the "Gen Add Procedure" menu item event.
     private void TableAddDataProc_Click(object sender, EventArgs e)
     {
       AddDataProc();
     }
 
-    // Handles the Generate Create Data Procedure menu item event.
+    // Handles the "Gen Create Data Procedure" menu item event.
     private void TableCreateDataProc_Click(object sender, EventArgs e)
     {
       CreateDataProc();
     }
 
-    // Handles the Create Insert Into menu item event.
+    // Handles the "Gen Insert Into" menu item event.
     private void TableInsertInto_Click(object sender, EventArgs e)
     {
-      InsertSelectSQL();
+      InsertInto();
     }
     #endregion
 

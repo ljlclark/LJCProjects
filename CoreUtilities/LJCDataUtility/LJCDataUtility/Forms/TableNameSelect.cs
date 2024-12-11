@@ -12,13 +12,13 @@ using System.Windows.Forms;
 namespace LJCDataUtility
 {
   /// <summary>The CreateData detail dialog.</summary>
-  public partial class CreateDataDetail : Form
+  public partial class TableNameSelect : Form
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public CreateDataDetail()
+    public TableNameSelect()
     {
       InitializeComponent();
 
