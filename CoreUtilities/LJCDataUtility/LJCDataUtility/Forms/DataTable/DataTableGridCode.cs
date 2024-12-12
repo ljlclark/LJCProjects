@@ -64,7 +64,7 @@ namespace LJCDataUtility
       Parent.TableCreateProc.Click += TableCreateProc_Click;
       Parent.TableAddDataProc.Click += TableAddDataProc_Click;
       Parent.TableCreateDataProc.Click += TableCreateDataProc_Click;
-      Parent.TableInsertInto.Click += TableInsertInto_Click;
+      Parent.TableInsertSelect.Click += TableInsertSelect_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -410,10 +410,10 @@ namespace LJCDataUtility
     }
 
     // Handles the "Gen Insert Into" menu item event.
-    private void TableInsertInto_Click(object sender, EventArgs e)
+    private void TableInsertSelect_Click(object sender, EventArgs e)
     {
-      var insertInto = new InsertInto(Parent);
-      insertInto.InsertIntoProc();
+      var insertSelect = new InsertSelect(Parent);
+      insertSelect.InsertSelectProc();
     }
     #endregion
 
