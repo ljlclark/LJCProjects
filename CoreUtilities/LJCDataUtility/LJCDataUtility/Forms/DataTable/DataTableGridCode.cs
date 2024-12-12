@@ -85,7 +85,8 @@ namespace LJCDataUtility
         {
           DataUtilTable.ColumnDataModuleID,
           DataUtilTable.ColumnName,
-          DataUtilTable.ColumnDescription
+          DataUtilTable.ColumnDescription,
+          DataUtilTable.ColumnSequence
         };
 
         // Get the grid columns from the manager Data Definition.
@@ -111,7 +112,7 @@ namespace LJCDataUtility
         var keyColumns = TableManager.ParentKey(parentID);
         var orderBy = new List<string>()
         {
-          DataUtilTable.ColumnName
+          DataUtilTable.ColumnSequence
         };
         TableManager.Manager.OrderByNames = orderBy;
         var items = TableManager.Load(keyColumns);
@@ -256,7 +257,7 @@ namespace LJCDataUtility
         // Data from items.
         int id = row.LJCGetInt32(DataUtilTable.ColumnID);
         int parentID = ModuleCombo.LJCSelectedItemID();
-        string parentName = ModuleCombo.SelectedText;
+        string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
@@ -278,9 +279,9 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem != null)
       {
-        // Data from list items.
+        int sequence = TableGrid.Rows.Count + 1;
         int parentID = ModuleCombo.LJCSelectedItemID();
-        string parentName = ModuleCombo.SelectedText;
+        string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail
@@ -288,7 +289,8 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentName = parentName
+          LJCParentName = parentName,
+          LJCSequence = sequence
         };
         detail.LJCChange += Detail_Change;
         detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);

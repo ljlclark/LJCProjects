@@ -64,6 +64,30 @@ namespace LJCDataUtility
       grid.SelectionChanged += KeyGrid_SelectionChanged;
       Parent.Cursor = Cursors.Default;
     }
+
+    // Configures the Grid.
+    internal void SetupGrid()
+    {
+      // Setup default grid columns if no columns are defined.
+      if (0 == KeyGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string>()
+        {
+          DataKey.ColumnDataTableID,
+          DataKey.ColumnName,
+          DataKey.ColumnKeyType,
+          DataKey.ColumnSourceColumnName,
+          DataKey.ColumnTargetTableName,
+          DataKey.ColumnTargetColumnName
+        };
+
+        // Get the grid columns from the manager Data Definition.
+        var gridColumns = KeyManager.GetColumns(propertyNames);
+
+        // Setup the grid columns.
+        KeyGrid.LJCAddColumns(gridColumns);
+      }
+    }
     #endregion
 
     #region Data Methods
@@ -90,30 +114,6 @@ namespace LJCDataUtility
       SetControlState();
       Parent.Cursor = Cursors.Default;
       Parent.DoChange(Change.Key);
-    }
-
-    // Configures the Grid.
-    internal void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == KeyGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DataKey.ColumnDataTableID,
-          DataKey.ColumnName,
-          DataKey.ColumnKeyType,
-          DataKey.ColumnSourceColumnName,
-          DataKey.ColumnTargetTableName,
-          DataKey.ColumnTargetColumnName
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var gridColumns = KeyManager.GetColumns(propertyNames);
-
-        // Setup the grid columns.
-        KeyGrid.LJCAddColumns(gridColumns);
-      }
     }
 
     // Adds a grid row and updates it with the record values.

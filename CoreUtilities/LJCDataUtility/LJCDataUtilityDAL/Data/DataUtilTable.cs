@@ -144,6 +144,19 @@ namespace LJCDataUtilityDAL
     }
     private String mDescription;
 
+    /// <summary>Gets or sets the Sequence value.</summary>
+    //[Required]
+    //[Column("Sequence", TypeName="int")]
+    public Int32 Sequence
+    {
+      get { return mSequence; }
+      set
+      {
+        mSequence = ChangedNames.Add(ColumnSequence, mSequence, value);
+      }
+    }
+    private Int32 mSequence;
+
     /// <summary>Gets or sets the NewName value.</summary>
     //[Column("NewName", TypeName="nvarchar(60")]
     public String NewName
@@ -180,6 +193,9 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";
+
+    /// <summary>The Sequence column name.</summary>
+    public static string ColumnSequence = "Sequence";
 
     /// <summary>The NewName column name.</summary>
     public static string ColumnNewName = "NewName";

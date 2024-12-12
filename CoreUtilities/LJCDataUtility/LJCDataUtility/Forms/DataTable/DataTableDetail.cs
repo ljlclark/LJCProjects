@@ -32,6 +32,8 @@ namespace LJCDataUtility
       LJCRecord = null;
 
       _ = new ControlFont(this);
+
+      NameText.Leave += NameText_Leave;
     }
     #endregion
 
@@ -70,6 +72,11 @@ namespace LJCDataUtility
         LJCIsUpdate = false;
         LJCRecord = new DataUtilTable();
         ParentNameText.Text = LJCParentName;
+        SequenceText.Text = FormCommon.DefaultZero();
+        if (LJCSequence > 0)
+        {
+          SequenceText.Text = LJCSequence.ToString();
+        }
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -86,6 +93,7 @@ namespace LJCDataUtility
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
         DescriptionText.Text = data.Description;
+        SequenceText.Text = data.Sequence.ToString();
         NewNameText.Text = data.NewName;
 
         // Reference key values.
@@ -102,6 +110,7 @@ namespace LJCDataUtility
       retData.Name = NameText.Text;
       retData.Description
         = FormCommon.SetString(DescriptionText.Text);
+      retData.Sequence = NetCommon.ToInt32(SequenceText.Text);
       retData.NewName
         = FormCommon.SetString(NewNameText.Text);
 
@@ -269,6 +278,15 @@ namespace LJCDataUtility
       LJCChange?.Invoke(this, new EventArgs());
     }
 
+    // Handles the Leave event.
+    private void NameText_Leave(object sender, EventArgs e)
+    {
+      if (!NetString.HasValue(DescriptionText.Text))
+      {
+        DescriptionText.Text = NameText.Text;
+      }
+    }
+
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
@@ -307,6 +325,9 @@ namespace LJCDataUtility
 
     // Gets a reference to the record object.
     internal DataUtilTable LJCRecord { get; private set; }
+
+    // Gets or sets the Sequence value.
+    internal int LJCSequence { get; set; }
     #endregion
 
     #region Class Data

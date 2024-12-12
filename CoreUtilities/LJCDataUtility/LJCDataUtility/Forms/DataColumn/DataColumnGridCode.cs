@@ -61,6 +61,32 @@ namespace LJCDataUtility
       grid.SelectionChanged += ColumnGrid_SelectionChanged;
       Parent.Cursor = Cursors.Default;
     }
+
+    // Configures the DataColumn Grid.
+    internal void SetupGrid()
+    {
+      // Setup default grid columns if no columns are defined.
+      if (0 == ColumnGrid.Columns.Count)
+      {
+        List<string> propertyNames = new List<string>()
+        {
+          DataUtilColumn.ColumnDataTableID,
+          DataUtilColumn.ColumnName,
+          DataUtilColumn.ColumnDescription,
+          DataUtilColumn.ColumnSequence,
+          DataUtilColumn.ColumnTypeName,
+          DataUtilColumn.ColumnMaxLength,
+          DataUtilColumn.ColumnAllowNull
+        };
+
+        // Get the grid columns from the manager Data Definition.
+        var manager = ColumnManager;
+        var gridColumns = manager.Columns(propertyNames);
+
+        // Setup the grid columns.
+        ColumnGrid.LJCAddColumns(gridColumns);
+      }
+    }
     #endregion
 
     #region Data Methods
@@ -92,32 +118,6 @@ namespace LJCDataUtility
       SetControlState();
       Parent.Cursor = Cursors.Default;
       Parent.DoChange(Change.Column);
-    }
-
-    // Configures the DataColumn Grid.
-    internal void SetupGrid()
-    {
-      // Setup default grid columns if no columns are defined.
-      if (0 == ColumnGrid.Columns.Count)
-      {
-        List<string> propertyNames = new List<string>()
-        {
-          DataUtilColumn.ColumnDataTableID,
-          DataUtilColumn.ColumnName,
-          DataUtilColumn.ColumnDescription,
-          DataUtilColumn.ColumnSequence,
-          DataUtilColumn.ColumnTypeName,
-          DataUtilColumn.ColumnMaxLength,
-          DataUtilColumn.ColumnAllowNull
-        };
-
-        // Get the grid columns from the manager Data Definition.
-        var manager = ColumnManager;
-        var gridColumns = manager.Columns(propertyNames);
-
-        // Setup the grid columns.
-        ColumnGrid.LJCAddColumns(gridColumns);
-      }
     }
 
     // Adds a grid row and updates it with the record values.
@@ -254,6 +254,7 @@ namespace LJCDataUtility
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
+        int sequence = ColumnGrid.Rows.Count + 1;
         int parentID = Parent.DataTableID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
@@ -262,7 +263,8 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentName = parentName
+          LJCParentName = parentName,
+          LJCSequence = sequence
         };
         detail.LJCChange += Detail_Change;
         detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);

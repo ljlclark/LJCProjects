@@ -135,7 +135,7 @@
       this.SequenceText.Location = new System.Drawing.Point(254, 210);
       this.SequenceText.Margin = new System.Windows.Forms.Padding(6);
       this.SequenceText.Name = "SequenceText";
-      this.SequenceText.Size = new System.Drawing.Size(500, 32);
+      this.SequenceText.Size = new System.Drawing.Size(55, 32);
       this.SequenceText.TabIndex = 9;
       // 
       // SequenceLabel

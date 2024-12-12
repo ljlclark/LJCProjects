@@ -38,27 +38,29 @@
       this.ParentNameLabel = new System.Windows.Forms.Label();
       this.NewNameText = new System.Windows.Forms.TextBox();
       this.NewNameLabel = new System.Windows.Forms.Label();
+      this.SequenceText = new System.Windows.Forms.TextBox();
+      this.SequenceLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 217);
+      this.FormCancelButton.Location = new System.Drawing.Point(578, 264);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 9;
+      this.FormCancelButton.TabIndex = 11;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 217);
+      this.OKButton.Location = new System.Drawing.Point(387, 264);
       this.OKButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 8;
+      this.OKButton.TabIndex = 10;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -117,26 +119,45 @@
       // 
       // NewNameText
       // 
-      this.NewNameText.Location = new System.Drawing.Point(255, 161);
+      this.NewNameText.Location = new System.Drawing.Point(255, 208);
       this.NewNameText.Margin = new System.Windows.Forms.Padding(6);
       this.NewNameText.Name = "NewNameText";
       this.NewNameText.Size = new System.Drawing.Size(500, 32);
-      this.NewNameText.TabIndex = 7;
+      this.NewNameText.TabIndex = 9;
       // 
       // NewNameLabel
       // 
       this.NewNameLabel.AutoSize = true;
-      this.NewNameLabel.Location = new System.Drawing.Point(24, 167);
+      this.NewNameLabel.Location = new System.Drawing.Point(24, 214);
       this.NewNameLabel.Name = "NewNameLabel";
       this.NewNameLabel.Size = new System.Drawing.Size(121, 26);
-      this.NewNameLabel.TabIndex = 6;
+      this.NewNameLabel.TabIndex = 8;
       this.NewNameLabel.Text = "New Name";
+      // 
+      // SequenceText
+      // 
+      this.SequenceText.Location = new System.Drawing.Point(255, 161);
+      this.SequenceText.Margin = new System.Windows.Forms.Padding(6);
+      this.SequenceText.Name = "SequenceText";
+      this.SequenceText.Size = new System.Drawing.Size(55, 32);
+      this.SequenceText.TabIndex = 7;
+      // 
+      // SequenceLabel
+      // 
+      this.SequenceLabel.AutoSize = true;
+      this.SequenceLabel.Location = new System.Drawing.Point(24, 167);
+      this.SequenceLabel.Name = "SequenceLabel";
+      this.SequenceLabel.Size = new System.Drawing.Size(110, 26);
+      this.SequenceLabel.TabIndex = 6;
+      this.SequenceLabel.Text = "Sequence";
       // 
       // DataTableDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 277);
+      this.ClientSize = new System.Drawing.Size(778, 324);
+      this.Controls.Add(this.SequenceLabel);
+      this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.NewNameText);
       this.Controls.Add(this.NewNameLabel);
       this.Controls.Add(this.ParentNameText);
@@ -170,5 +191,7 @@
     private System.Windows.Forms.Label ParentNameLabel;
     private System.Windows.Forms.TextBox NewNameText;
     private System.Windows.Forms.Label NewNameLabel;
+    private System.Windows.Forms.TextBox SequenceText;
+    private System.Windows.Forms.Label SequenceLabel;
   }
 }

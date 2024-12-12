@@ -40,6 +40,19 @@ namespace LJCDataUtilityDAL
 
     #region Data Class Methods
 
+    // Adds changed propertynames.
+    public void AddChangedNames(List<string> propertyNames)
+    {
+      foreach (string propertyName in propertyNames)
+      {
+        var name = ChangedNames.FindName(propertyName);
+        if (null == name)
+        {
+          ChangedNames.Add(propertyName);
+        }
+      }
+    }
+
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
     public DataKey Clone()

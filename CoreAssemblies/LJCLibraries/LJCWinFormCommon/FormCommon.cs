@@ -57,6 +57,18 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
+    /// <summary>Defaults a numeric value to negative one.</summary>
+    public static string DefaultMinusOne(object value = null)
+    {
+      var retValue = "-1";
+
+      if (value != null)
+      {
+        retValue = value.ToString();
+      }
+      return retValue;
+    }
+
     /// <summary>Defaults a numeric value to Zero.</summary>
     public static string DefaultZero(object value = null)
     {

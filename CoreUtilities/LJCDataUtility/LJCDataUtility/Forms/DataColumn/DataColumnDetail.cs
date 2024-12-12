@@ -33,6 +33,8 @@ namespace LJCDataUtility
       LJCRecord = null;
 
       _ = new ControlFont(this);
+
+      NameText.Leave += NameText_Leave;
     }
     #endregion
 
@@ -72,9 +74,14 @@ namespace LJCDataUtility
         LJCRecord = new DataUtilColumn();
         ParentNameText.Text = LJCParentName;
         SequenceText.Text = FormCommon.DefaultZero();
-        IdentityStartText.Text = FormCommon.DefaultZero();
-        IdentityIncrementText.Text = FormCommon.DefaultZero();
-        MaxLengthText.Text = FormCommon.DefaultZero();
+        if (LJCSequence > 0)
+        {
+          SequenceText.Text = LJCSequence.ToString();
+        }
+        MaxLengthText.Text = FormCommon.DefaultMinusOne();
+        NewMaxLengthText.Text = FormCommon.DefaultMinusOne();
+        IdentityStartText.Text = FormCommon.DefaultMinusOne();
+        IdentityIncrementText.Text = FormCommon.DefaultMinusOne();
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -92,16 +99,18 @@ namespace LJCDataUtility
         NameText.Text = data.Name;
         NewNameText.Text = data.NewName;
         DescriptionText.Text = data.Description;
-        SequenceText.Text = FormCommon.DefaultZero(data.Sequence);
+        SequenceText.Text
+          = FormCommon.DefaultMinusOne(data.Sequence);
         TypeNameText.Text = data.TypeName;
-        MaxLengthText.Text = FormCommon.DefaultZero(data.MaxLength);
+        MaxLengthText.Text
+          = FormCommon.DefaultMinusOne(data.MaxLength);
         NewMaxLengthText.Text
-          = FormCommon.DefaultZero(data.NewMaxLength);
+          = FormCommon.DefaultMinusOne(data.NewMaxLength);
         DefaultText.Text = data.DefaultValue;
         IdentityStartText.Text
-          = FormCommon.DefaultZero(data.IdentityStart);
+          = FormCommon.DefaultMinusOne(data.IdentityStart);
         IdentityIncrementText.Text
-          = FormCommon.DefaultZero(data.IdentityIncrement);
+          = FormCommon.DefaultMinusOne(data.IdentityIncrement);
         AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
@@ -287,6 +296,15 @@ namespace LJCDataUtility
       LJCChange?.Invoke(this, new EventArgs());
     }
 
+    // Handles the Leave event.
+    private void NameText_Leave(object sender, EventArgs e)
+    {
+      if (!NetString.HasValue(DescriptionText.Text))
+      {
+        DescriptionText.Text = NameText.Text;
+      }
+    }
+
     // Saves the data and closes the form.
     private void OKButton_Click(object sender, EventArgs e)
     {
@@ -325,6 +343,9 @@ namespace LJCDataUtility
 
     // Gets a reference to the record object.
     internal DataUtilColumn LJCRecord { get; private set; }
+
+    // Gets or sets the Sequence value.
+    internal int LJCSequence { get; set; }
     #endregion
 
     #region Class Data
