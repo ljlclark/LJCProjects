@@ -109,6 +109,11 @@ namespace LJCDataUtility
       if (parentID > 0)
       {
         var keyColumns = TableManager.ParentKey(parentID);
+        var orderBy = new List<string>()
+        {
+          DataUtilTable.ColumnName
+        };
+        TableManager.Manager.OrderByNames = orderBy;
         var items = TableManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
@@ -121,6 +126,17 @@ namespace LJCDataUtility
       SetControlState();
       Parent.Cursor = Cursors.Default;
       Parent.DoChange(Change.Table);
+    }
+
+    // Selects a row based on the ID value.
+    internal bool RowSelect(int id)
+    {
+      var dataRecord = new DataUtilTable()
+      {
+        ID = id
+      };
+      var retValue = RowSelect(dataRecord);
+      return retValue;
     }
 
     // Adds a grid row and updates it with the record values.
@@ -173,6 +189,7 @@ namespace LJCDataUtility
       bool enableEdit = TableGrid.CurrentRow != null;
       FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
       Parent.TableHeading.Enabled = true;
+      Parent.TableSetData.Enabled = true;
     }
 
     // Sets the row stored values.
