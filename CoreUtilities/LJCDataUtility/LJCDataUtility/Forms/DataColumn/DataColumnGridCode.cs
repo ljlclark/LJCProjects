@@ -76,7 +76,8 @@ namespace LJCDataUtility
           DataUtilColumn.ColumnSequence,
           DataUtilColumn.ColumnTypeName,
           DataUtilColumn.ColumnMaxLength,
-          DataUtilColumn.ColumnAllowNull
+          DataUtilColumn.ColumnAllowNull,
+          DataUtilColumn.ColumnDefaultValue
         };
 
         // Get the grid columns from the manager Data Definition.
