@@ -39,7 +39,7 @@
       this.SourceColumnLabel = new System.Windows.Forms.Label();
       this.ParentNameText = new System.Windows.Forms.TextBox();
       this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.KeyTypeText = new System.Windows.Forms.TextBox();
+      this.KeyTypeText = new LJCWinFormControls.LJCItemCombo();
       this.KeyTypeLabel = new System.Windows.Forms.Label();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
@@ -154,7 +154,7 @@
       this.KeyTypeText.Location = new System.Drawing.Point(254, 116);
       this.KeyTypeText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.KeyTypeText.Name = "KeyTypeText";
-      this.KeyTypeText.Size = new System.Drawing.Size(500, 32);
+      this.KeyTypeText.Size = new System.Drawing.Size(200, 34);
       this.KeyTypeText.TabIndex = 5;
       // 
       // KeyTypeLabel
@@ -241,7 +241,7 @@
     private System.Windows.Forms.Label SourceColumnLabel;
     private System.Windows.Forms.TextBox ParentNameText;
     private System.Windows.Forms.Label ParentNameLabel;
-    private System.Windows.Forms.TextBox KeyTypeText;
+    private LJCWinFormControls.LJCItemCombo KeyTypeText;
     private System.Windows.Forms.Label KeyTypeLabel;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;

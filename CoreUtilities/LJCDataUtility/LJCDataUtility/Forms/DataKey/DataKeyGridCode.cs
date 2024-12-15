@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using LJCDataUtility;
 using System.Data;
+using System.Data.Common;
 
 namespace LJCDataUtility
 {
@@ -122,6 +123,7 @@ namespace LJCDataUtility
       var retValue = KeyGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
       retValue.LJCSetValues(KeyGrid, dataRecord);
+      SetKeyTypeName(retValue, dataRecord.KeyType);
       return retValue;
     }
 
@@ -156,6 +158,7 @@ namespace LJCDataUtility
       {
         SetStoredValues(row, dataRecord);
         row.LJCSetValues(KeyGrid, dataRecord);
+        SetKeyTypeName(row, dataRecord.KeyType);
       }
     }
 
@@ -172,6 +175,14 @@ namespace LJCDataUtility
     private void SetStoredValues(LJCGridRow row, DataKey dataRecord)
     {
       row.LJCSetInt32(DataKey.ColumnID, dataRecord.ID);
+    }
+
+    // Sets the KeyType column value.
+    private string SetKeyTypeName(LJCGridRow row, short keyType)
+    {
+      var retName = Enum.GetName(typeof(KeyType), keyType);
+      row.Cells["KeyType"].Value = retName;
+      return retName;
     }
     #endregion
 

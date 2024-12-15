@@ -441,7 +441,6 @@ namespace LJCDataUtility
             break;
         }
       }
-      b.Text("-");
       var retValue = b.ToString();
       return retValue;
     }

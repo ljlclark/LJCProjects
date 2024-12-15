@@ -84,7 +84,7 @@ namespace LJCDataUtility
         var data = dataRecord;
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
-        KeyTypeText.Text = data.KeyType.ToString();
+        KeyTypeText.LJCSetByItemID(data.KeyType);
         SourceColumnText.Text = data.SourceColumnName;
         TargetTableText.Text = data.TargetTableName;
         TargetColumnText.Text = data.TargetColumnName;
@@ -103,7 +103,7 @@ namespace LJCDataUtility
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
-      retData.KeyType = NetCommon.ToInt16(KeyTypeText.Text);
+      retData.KeyType = (short)KeyTypeText.LJCSelectedItemID();
       retData.SourceColumnName
         = FormCommon.SetString(SourceColumnText.Text);
       retData.TargetTableName
@@ -238,6 +238,13 @@ namespace LJCDataUtility
       SourceColumnText.MaxLength = DataKey.LengthSourceColumnName;
       TargetTableText.MaxLength = DataKey.LengthTargetTableName;
       TargetColumnText.MaxLength = DataKey.LengthTargetColumnName;
+
+      // Load control data.
+      KeyTypeText.LJCAddItem(1, "Primary");
+      KeyTypeText.LJCAddItem(2, "Unique");
+      KeyTypeText.LJCAddItem(3, "Foreign");
+      KeyTypeText.LJCAddItem(4, "Table");
+      KeyTypeText.LJCSetByItemID(1);
 
       Cursor = Cursors.Default;
     }
