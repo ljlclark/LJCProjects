@@ -92,6 +92,7 @@
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.TableRename = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.TableMenu.SuspendLayout();
       this.ColumnMenu.SuspendLayout();
@@ -199,100 +200,101 @@
             this.TableAddDataProc,
             this.TableCreateDataProc,
             this.TableInsertSelect,
+            this.TableRename,
             this.toolStripSeparator10,
             this.TableExit});
       this.TableMenu.Name = "TableMenu";
-      this.TableMenu.Size = new System.Drawing.Size(301, 380);
+      this.TableMenu.Size = new System.Drawing.Size(265, 412);
       // 
       // TableHeading
       // 
       this.TableHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.TableHeading.Name = "TableHeading";
-      this.TableHeading.Size = new System.Drawing.Size(300, 32);
+      this.TableHeading.Size = new System.Drawing.Size(264, 32);
       this.TableHeading.Text = "Table Menu";
       // 
       // TableNew
       // 
       this.TableNew.Name = "TableNew";
       this.TableNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.TableNew.Size = new System.Drawing.Size(300, 32);
+      this.TableNew.Size = new System.Drawing.Size(264, 32);
       this.TableNew.Text = "&New";
       // 
       // TableEdit
       // 
       this.TableEdit.Name = "TableEdit";
       this.TableEdit.ShortcutKeyDisplayString = "ENTER";
-      this.TableEdit.Size = new System.Drawing.Size(300, 32);
+      this.TableEdit.Size = new System.Drawing.Size(264, 32);
       this.TableEdit.Text = "&Edit";
       // 
       // toolStripSeparator8
       // 
       this.toolStripSeparator8.Name = "toolStripSeparator8";
-      this.toolStripSeparator8.Size = new System.Drawing.Size(297, 6);
+      this.toolStripSeparator8.Size = new System.Drawing.Size(261, 6);
       // 
       // TableDelete
       // 
       this.TableDelete.Name = "TableDelete";
       this.TableDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.TableDelete.Size = new System.Drawing.Size(300, 32);
+      this.TableDelete.Size = new System.Drawing.Size(264, 32);
       this.TableDelete.Text = "&Delete";
       // 
       // toolStripSeparator9
       // 
       this.toolStripSeparator9.Name = "toolStripSeparator9";
-      this.toolStripSeparator9.Size = new System.Drawing.Size(297, 6);
+      this.toolStripSeparator9.Size = new System.Drawing.Size(261, 6);
       // 
       // TableRefresh
       // 
       this.TableRefresh.Name = "TableRefresh";
       this.TableRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.TableRefresh.Size = new System.Drawing.Size(300, 32);
+      this.TableRefresh.Size = new System.Drawing.Size(264, 32);
       this.TableRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(297, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(261, 6);
       // 
       // TableSetData
       // 
       this.TableSetData.Name = "TableSetData";
-      this.TableSetData.Size = new System.Drawing.Size(300, 32);
+      this.TableSetData.Size = new System.Drawing.Size(264, 32);
       this.TableSetData.Text = "Set Data from Table";
       // 
       // TableCreateProc
       // 
       this.TableCreateProc.Name = "TableCreateProc";
-      this.TableCreateProc.Size = new System.Drawing.Size(300, 32);
-      this.TableCreateProc.Text = "Gen Create Table Procedure";
+      this.TableCreateProc.Size = new System.Drawing.Size(264, 32);
+      this.TableCreateProc.Text = "Create Table Procedure";
       // 
       // TableAddDataProc
       // 
       this.TableAddDataProc.Name = "TableAddDataProc";
-      this.TableAddDataProc.Size = new System.Drawing.Size(300, 32);
-      this.TableAddDataProc.Text = "Gen Add Procedure";
+      this.TableAddDataProc.Size = new System.Drawing.Size(264, 32);
+      this.TableAddDataProc.Text = "Add Data Procedure";
       // 
       // TableCreateDataProc
       // 
       this.TableCreateDataProc.Name = "TableCreateDataProc";
-      this.TableCreateDataProc.Size = new System.Drawing.Size(300, 32);
-      this.TableCreateDataProc.Text = "Gen Create Data Procedure";
+      this.TableCreateDataProc.Size = new System.Drawing.Size(264, 32);
+      this.TableCreateDataProc.Text = "Create Data Procedure";
       // 
       // TableInsertSelect
       // 
       this.TableInsertSelect.Name = "TableInsertSelect";
-      this.TableInsertSelect.Size = new System.Drawing.Size(300, 32);
-      this.TableInsertSelect.Text = "Gen Insert Select";
+      this.TableInsertSelect.Size = new System.Drawing.Size(264, 32);
+      this.TableInsertSelect.Text = "Insert Select";
       // 
       // toolStripSeparator10
       // 
       this.toolStripSeparator10.Name = "toolStripSeparator10";
-      this.toolStripSeparator10.Size = new System.Drawing.Size(297, 6);
+      this.toolStripSeparator10.Size = new System.Drawing.Size(261, 6);
       // 
       // TableExit
       // 
       this.TableExit.Name = "TableExit";
-      this.TableExit.Size = new System.Drawing.Size(300, 32);
+      this.TableExit.Size = new System.Drawing.Size(264, 32);
       this.TableExit.Text = "E&xit";
       // 
       // ColumnMenu
@@ -670,6 +672,12 @@
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
       // 
+      // TableRename
+      // 
+      this.TableRename.Name = "TableRename";
+      this.TableRename.Size = new System.Drawing.Size(264, 32);
+      this.TableRename.Text = "Table Rename";
+      // 
       // DataUtilityList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -765,6 +773,7 @@
     internal System.Windows.Forms.ToolStripMenuItem TableCreateDataProc;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     internal System.Windows.Forms.ToolStripMenuItem TableSetData;
+    internal System.Windows.Forms.ToolStripMenuItem TableRename;
   }
 }
 

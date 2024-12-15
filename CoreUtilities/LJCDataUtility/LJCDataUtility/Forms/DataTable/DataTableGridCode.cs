@@ -65,6 +65,7 @@ namespace LJCDataUtility
       Parent.TableAddDataProc.Click += TableAddDataProc_Click;
       Parent.TableCreateDataProc.Click += TableCreateDataProc_Click;
       Parent.TableInsertSelect.Click += TableInsertSelect_Click;
+      Parent.TableRename.Click += TableRename_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -390,32 +391,39 @@ namespace LJCDataUtility
       setData.SetData();
     }
 
-    // Handles the "Gen Create Table Procedure" menu item event.
+    // Handles the "Create Table Procedure" menu item event.
     private void TableCreateProc_Click(object sender, EventArgs e)
     {
       var createTable = new CreateTable(Parent);
       createTable.CreateTableProc();
     }
 
-    // Handles the "Gen Add Procedure" menu item event.
+    // Handles the "Add Data Procedure" menu item event.
     private void TableAddDataProc_Click(object sender, EventArgs e)
     {
       var addData = new AddData(Parent);
       addData.AddDataProc();
     }
 
-    // Handles the "Gen Create Data Procedure" menu item event.
+    // Handles the "Create Data Procedure" menu item event.
     private void TableCreateDataProc_Click(object sender, EventArgs e)
     {
       var createData = new CreateData(Parent);
       createData.CreateDataProc();
     }
 
-    // Handles the "Gen Insert Into" menu item event.
+    // Handles the "Insert Select" menu item event.
     private void TableInsertSelect_Click(object sender, EventArgs e)
     {
       var insertSelect = new InsertSelect(Parent);
       insertSelect.InsertSelectProc();
+    }
+
+    // Handles the "Rename Table" menu item event.
+    private void TableRename_Click(object sender, EventArgs e)
+    {
+      var createTable = new CreateTable(Parent);
+      createTable.RenameTableProc();
     }
     #endregion
 

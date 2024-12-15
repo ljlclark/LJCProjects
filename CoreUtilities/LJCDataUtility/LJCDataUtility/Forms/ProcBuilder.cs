@@ -293,14 +293,15 @@ namespace LJCDataUtility
     /// <summary>Adds a foreign key.</summary>
     public string AddForeignKey(string tableName
       , string objectName, string sourceColumnName
-      , string targetColumnName)
+      , string targetTableName, string targetColumnName)
     {
       var b = new TextBuilder(128);
       b.Line(Check(objectName, ObjectType.Foreign, true));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line($"  FOREIGN KEY([{sourceColumnName}])");
-      b.Line($"  REFERENCES[dbo].[{tableName}]([{targetColumnName}])");
+      b.Text($"  REFERENCES[dbo].[{targetTableName}]");
+      b.Line($"([{targetColumnName}])");
       b.Line("  ON DELETE NO ACTION ON UPDATE NO ACTION;");
       b.Line("END");
       var retValue = b.ToString();
@@ -402,7 +403,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");
-
+      b.Line();
       b.Line("/* Remove constraints and foreign keys */");
       foreach (DataKey dataKey in dataKeys)
       {
@@ -411,7 +412,6 @@ namespace LJCDataUtility
           , objectType);
         b.Line(text);
       }
-      b.Line();
       b.Line($"EXEC sp_rename 'dbo.{TableName}', '{TableName}Backup'");
       b.Line($"EXEC sp_rename 'dbo.New{TableName}', '{TableName}'");
       b.Line();
@@ -428,19 +428,20 @@ namespace LJCDataUtility
             break;
 
           case ObjectType.Unique:
-            var columnList = dataKey.TargetColumnName;
+            var columnList = dataKey.SourceColumnName;
             text = AddUniqueKey(TableName, dataKey.Name, columnList);
             b.Line(text);
             break;
 
           case ObjectType.Foreign:
             text = AddForeignKey(TableName, dataKey.Name
-              , dataKey.SourceColumnName
+              , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
             b.Line(text);
             break;
         }
       }
+      b.Text("-");
       var retValue = b.ToString();
       return retValue;
     }
@@ -562,7 +563,7 @@ namespace LJCDataUtility
       var b = new TextBuilder(128);
       b.Line($"IF OBJECT_ID('{objectName}', N'{typeValue}')");
       b.Line($" IS {not} NULL");
-      b.Line("BEGIN");
+      b.Text("BEGIN");
       string retString = b.ToString();
       return retString;
     }
