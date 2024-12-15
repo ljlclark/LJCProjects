@@ -296,7 +296,7 @@ namespace LJCDataUtility
       , string targetTableName, string targetColumnName)
     {
       var b = new TextBuilder(128);
-      b.Line(Check(objectName, ObjectType.Foreign, true));
+      b.Line(Check(objectName, ObjectType.Foreign));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line($"  FOREIGN KEY([{sourceColumnName}])");
@@ -313,7 +313,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
-      b.Line(Check(objectName, ObjectType.Primary, true));
+      b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line("  PRIMARY KEY CLUSTERED");
@@ -330,7 +330,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
-      b.Line(Check(objectName, ObjectType.Unique, true));
+      b.Line(Check(objectName, ObjectType.Unique));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line($"  UNIQUE({columnList});");
@@ -389,9 +389,9 @@ namespace LJCDataUtility
       , string objectName, ObjectType objectType)
     {
       var b = new TextBuilder(128);
-      b.Line(Check(objectName, objectType));
+      b.Line(Check(objectName, objectType, true));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
-      b.Line($"  DROP CONSTRAINT[{objectName}])");
+      b.Line($"  DROP CONSTRAINT[{objectName}]");
       b.Line("END");
       var retValue = b.ToString();
       return retValue;
@@ -450,7 +450,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(128);
       b.Line("/* Create Table */");
-      b.Line(Check(TableName, ObjectType.Table, true));
+      b.Line(Check(TableName, ObjectType.Table));
       b.Line($"CREATE TABLE[dbo].[{TableName}](");
       HasColumns = false;
       string retString = b.ToString();
@@ -529,7 +529,7 @@ namespace LJCDataUtility
       b.Line($"  ADD CONSTRAINT[{PKName}]");
       b.Line("   PRIMARY KEY CLUSTERED");
       b.Line("   (");
-      b.Line($"   [{columnsList}] ASC");
+      b.Line($"    [{columnsList}] ASC");
       b.Line("   )");
       b.Line("END");
       string retString = b.ToString();
@@ -556,12 +556,12 @@ namespace LJCDataUtility
       string not = null;
       if (useNot)
       {
-        not = "NOT";
+        not = " NOT";
       }
       var typeValue = GetObjectTypeValue(objectType);
       var b = new TextBuilder(128);
       b.Line($"IF OBJECT_ID('{objectName}', N'{typeValue}')");
-      b.Line($" IS {not} NULL");
+      b.Line($" IS{not} NULL");
       b.Text("BEGIN");
       string retString = b.ToString();
       return retString;
