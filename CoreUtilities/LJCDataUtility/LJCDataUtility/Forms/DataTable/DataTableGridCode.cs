@@ -142,26 +142,26 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DataUtilTable dataRecord)
+    private LJCGridRow RowAdd(DataUtilTable data)
     {
       var retValue = TableGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(TableGrid, dataRecord);
+      SetStoredValues(retValue, data);
+      retValue.LJCSetValues(TableGrid, data);
       return retValue;
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(DataUtilTable dataRecord)
+    private bool RowSelect(DataUtilTable data)
     {
       bool retValue = false;
 
-      if (dataRecord != null)
+      if (data != null)
       {
         Parent.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
           var rowID = row.LJCGetInt32(DataUtilTable.ColumnID);
-          if (rowID == dataRecord.ID)
+          if (rowID == data.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             TableGrid.LJCSetCurrentRow(row, true);
@@ -175,12 +175,12 @@ namespace LJCDataUtility
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DataUtilTable dataRecord)
+    private void RowUpdate(DataUtilTable data)
     {
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(TableGrid, dataRecord);
+        SetStoredValues(row, data);
+        row.LJCSetValues(TableGrid, data);
       }
     }
 

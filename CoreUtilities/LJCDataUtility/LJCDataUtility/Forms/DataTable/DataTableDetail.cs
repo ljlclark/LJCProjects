@@ -84,12 +84,11 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetValues(DataUtilTable dataRecord)
+    private void GetValues(DataUtilTable data)
     {
-      if (dataRecord != null)
+      if (data != null)
       {
         // In control order.
-        var data = dataRecord;
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
         DescriptionText.Text = data.Description;
@@ -97,14 +96,14 @@ namespace LJCDataUtility
         NewNameText.Text = data.NewName;
 
         // Reference key values.
-        LJCParentID = dataRecord.DataModuleID;
+        LJCParentID = data.DataModuleID;
       }
     }
 
     // Creates and returns a record object with the data from
     private DataUtilTable SetValues()
     {
-      var retData = GetRecord();
+      var retData = Data();
 
       // In control order.
       retData.Name = NameText.Text;
@@ -121,29 +120,29 @@ namespace LJCDataUtility
     }
 
     // Resets the empty record values.
-    private void ResetValues(DataUtilTable dataRecord)
+    private void ResetValues(DataUtilTable data)
     {
       // In control order.
-      dataRecord.Description
-        = FormCommon.SetString(dataRecord.Description);
-      dataRecord.NewName
-        = FormCommon.SetString(dataRecord.NewName);
+      data.Description
+        = FormCommon.SetString(data.Description);
+      data.NewName
+        = FormCommon.SetString(data.NewName);
     }
 
     // Gets the original or new record.
-    private DataUtilTable GetRecord()
+    private DataUtilTable Data()
     {
-      DataUtilTable retRecord = null;
+      DataUtilTable retData = null;
 
       if (mOriginalRecord != null)
       {
-        retRecord = mOriginalRecord.Clone();
+        retData = mOriginalRecord.Clone();
       }
-      if (null == retRecord)
+      if (null == retData)
       {
-        retRecord = new DataUtilTable();
+        retData = new DataUtilTable();
       }
-      return retRecord;
+      return retData;
     }
 
     // Saves the data.

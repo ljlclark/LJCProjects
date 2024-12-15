@@ -89,28 +89,27 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetValues(DataUtilColumn dataRecord)
+    private void GetValues(DataUtilColumn data)
     {
-      if (dataRecord != null)
+      if (data != null)
       {
         // In control order.
-        var data = dataRecord;
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
         NewNameText.Text = data.NewName;
         DescriptionText.Text = data.Description;
         SequenceText.Text
-          = FormCommon.DefaultMinusOne(data.Sequence);
+          = FormCommon.DefaultMinusOne((object)data.Sequence);
         TypeNameText.Text = data.TypeName;
         MaxLengthText.Text
-          = FormCommon.DefaultMinusOne(data.MaxLength);
+          = FormCommon.DefaultMinusOne((object)data.MaxLength);
         NewMaxLengthText.Text
-          = FormCommon.DefaultMinusOne(data.NewMaxLength);
+          = FormCommon.DefaultMinusOne((object)data.NewMaxLength);
         DefaultText.Text = data.DefaultValue;
         IdentityStartText.Text
-          = FormCommon.DefaultMinusOne(data.IdentityStart);
+          = FormCommon.DefaultMinusOne((object)data.IdentityStart);
         IdentityIncrementText.Text
-          = FormCommon.DefaultMinusOne(data.IdentityIncrement);
+          = FormCommon.DefaultMinusOne((object)data.IdentityIncrement);
         AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
@@ -121,7 +120,7 @@ namespace LJCDataUtility
     // Creates and returns a record object with the data from
     private DataUtilColumn SetValues()
     {
-      var retData = GetRecord();
+      var retData = Data();
 
       // In control order.
       retData.Name = NameText.Text;
@@ -152,7 +151,7 @@ namespace LJCDataUtility
     }
 
     // Gets the original or new record.
-    private DataUtilColumn GetRecord()
+    private DataUtilColumn Data()
     {
       DataUtilColumn retRecord = null;
 

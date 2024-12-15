@@ -122,11 +122,11 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DataUtilColumn dataRecord)
+    private LJCGridRow RowAdd(DataUtilColumn data)
     {
       var retValue = ColumnGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ColumnGrid, dataRecord);
+      SetStoredValues(retValue, data);
+      retValue.LJCSetValues(ColumnGrid, data);
       return retValue;
     }
 
@@ -155,12 +155,12 @@ namespace LJCDataUtility
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DataUtilColumn dataRecord)
+    private void RowUpdate(DataUtilColumn data)
     {
       if (ColumnGrid.CurrentRow is LJCGridRow row)
       {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ColumnGrid, dataRecord);
+        SetStoredValues(row, data);
+        row.LJCSetValues(ColumnGrid, data);
       }
     }
 

@@ -76,12 +76,11 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetValues(DataKey dataRecord)
+    private void GetValues(DataKey data)
     {
-      if (dataRecord != null)
+      if (data != null)
       {
         // In control order.
-        var data = dataRecord;
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
         KeyTypeText.LJCSetByItemID(data.KeyType);
@@ -92,14 +91,14 @@ namespace LJCDataUtility
         AscendingCheck.Checked = data.IsAscending;
 
         // Reference key values.
-        LJCParentID = dataRecord.DataTableID;
+        LJCParentID = data.DataTableID;
       }
     }
 
     // Creates and returns a record object with the data from
     private DataKey SetValues()
     {
-      var retData = GetRecord();
+      var retData = GetData();
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
@@ -132,19 +131,19 @@ namespace LJCDataUtility
     }
 
     // Gets the original or new record.
-    private DataKey GetRecord()
+    private DataKey GetData()
     {
-      DataKey retRecord = null;
+      DataKey retData = null;
 
       if (mOriginalRecord != null)
       {
-        retRecord = mOriginalRecord.Clone();
+        retData = mOriginalRecord.Clone();
       }
-      if (null == retRecord)
+      if (null == retData)
       {
-        retRecord = new DataKey();
+        retData = new DataKey();
       }
-      return retRecord;
+      return retData;
     }
 
     // Saves the data.

@@ -118,12 +118,12 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow RowAdd(DataKey dataRecord)
+    private LJCGridRow RowAdd(DataKey data)
     {
       var retValue = KeyGrid.LJCRowAdd();
-      SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(KeyGrid, dataRecord);
-      SetKeyTypeName(retValue, dataRecord.KeyType);
+      SetStoredValues(retValue, data);
+      retValue.LJCSetValues(KeyGrid, data);
+      SetKeyTypeName(retValue, data.KeyType);
       return retValue;
     }
 
@@ -152,13 +152,13 @@ namespace LJCDataUtility
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DataKey dataRecord)
+    private void RowUpdate(DataKey data)
     {
       if (KeyGrid.CurrentRow is LJCGridRow row)
       {
-        SetStoredValues(row, dataRecord);
-        row.LJCSetValues(KeyGrid, dataRecord);
-        SetKeyTypeName(row, dataRecord.KeyType);
+        SetStoredValues(row, data);
+        row.LJCSetValues(KeyGrid, data);
+        SetKeyTypeName(row, data.KeyType);
       }
     }
 
@@ -172,9 +172,9 @@ namespace LJCDataUtility
     }
 
     // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DataKey dataRecord)
+    private void SetStoredValues(LJCGridRow row, DataKey data)
     {
-      row.LJCSetInt32(DataKey.ColumnID, dataRecord.ID);
+      row.LJCSetInt32(DataKey.ColumnID, data.ID);
     }
 
     // Sets the KeyType column value.
@@ -333,7 +333,8 @@ namespace LJCDataUtility
     {
       Primary = 1,
       Unique,
-      Foreign
+      Foreign,
+      Table
     }
 
     // Generates the create Foreign Key procedure.

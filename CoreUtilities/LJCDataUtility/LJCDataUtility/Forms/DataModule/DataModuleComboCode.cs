@@ -71,9 +71,9 @@ namespace LJCDataUtility
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCItem RowAdd(DataModule dataRecord)
+    private LJCItem RowAdd(DataModule data)
     {
-      var retValue = ModuleCombo.LJCAddItem(dataRecord.ID, dataRecord.Name);
+      var retValue = ModuleCombo.LJCAddItem(data.ID, data.Name);
       return retValue;
     }
 
@@ -102,11 +102,11 @@ namespace LJCDataUtility
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DataModule dataRecord)
+    private void RowUpdate(DataModule data)
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        ModuleCombo.Text = dataRecord.Name;
+        ModuleCombo.Text = data.Name;
       }
     }
 

@@ -74,20 +74,20 @@ namespace LJCDataUtility
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetValues(DataModule dataRecord)
+    private void GetValues(DataModule data)
     {
-      if (dataRecord != null)
+      if (data != null)
       {
         // In control order.
-        NameText.Text = dataRecord.Name;
-        DescriptionText.Text = dataRecord.Description;
+        NameText.Text = data.Name;
+        DescriptionText.Text = data.Description;
       }
     }
 
     // Creates and returns a record object with the data from
     private DataModule SetValues()
     {
-      var retData = GetRecord();
+      var retData = Data();
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
@@ -99,26 +99,26 @@ namespace LJCDataUtility
     }
 
     // Resets the empty record values.
-    private void ResetValues(DataModule dataRecord)
+    private void ResetValues(DataModule data)
     {
       // In control order.
-      dataRecord.Description = FormCommon.SetString(dataRecord.Description);
+      data.Description = FormCommon.SetString(data.Description);
     }
 
     // Gets the original or new record.
-    private DataModule GetRecord()
+    private DataModule Data()
     {
-      DataModule retRecord = null;
+      DataModule retData = null;
 
       if (mOriginalRecord != null)
       {
-        retRecord = mOriginalRecord.Clone();
+        retData = mOriginalRecord.Clone();
       }
-      if (null == retRecord)
+      if (null == retData)
       {
-        retRecord = new DataModule();
+        retData = new DataModule();
       }
-      return retRecord;
+      return retData;
     }
 
     // Saves the data.
