@@ -51,13 +51,12 @@ namespace LJCDataUtilityDAL
       Description = item.Description;
       Sequence = item.Sequence;
       TypeName = item.TypeName;
-      IdentityStart = item.IdentityStart;
-      IdentityIncrement = item.IdentityIncrement;
       MaxLength = item.MaxLength;
       AllowNull = item.AllowNull;
       DefaultValue = item.DefaultValue;
+      IdentityStart = item.IdentityStart;
+      IdentityIncrement = item.IdentityIncrement;
       NewName = item.NewName;
-      NewSequence = item.NewSequence;
       NewMaxLength = item.NewMaxLength;
     }
     #endregion
@@ -118,18 +117,18 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the AllowNull value.</summary>
-    //[Column("AllowNull", TypeName="bit")]
-    public Boolean AllowNull
+    /// <summary>Gets or sets the ID value.</summary>
+    //[Required]
+    //[Column("ID", TypeName="int")]
+    public Int32 ID
     {
-      get { return mAllowNull; }
+      get { return mID; }
       set
       {
-        mAllowNull = ChangedNames.Add(ColumnAllowNull
-          , mAllowNull, value);
+        mID = ChangedNames.Add(ColumnID, mID, value);
       }
     }
-    private Boolean mAllowNull;
+    private Int32 mID;
 
     /// <summary>Gets or sets the DataTableID value.</summary>
     //[Required]
@@ -145,88 +144,6 @@ namespace LJCDataUtilityDAL
     }
     private Int32 mDataTableID;
 
-    /// <summary>Gets or sets the Default value.</summary>
-    //[Required]
-    //[Column("DefaultValue", TypeName="nvarchar(30)")]
-    public string DefaultValue
-    {
-      get { return mDefaultValue; }
-      set
-      {
-        mDefaultValue = ChangedNames.Add(ColumnDefaultValue
-          , mDefaultValue, value);
-      }
-    }
-    private string mDefaultValue;
-
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(80")]
-    public String Description
-    {
-      get { return mDescription; }
-      set
-      {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription
-          , mDescription, value);
-      }
-    }
-    private String mDescription;
-
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="int")]
-    public Int32 ID
-    {
-      get { return mID; }
-      set
-      {
-        mID = ChangedNames.Add(ColumnID, mID, value);
-      }
-    }
-    private Int32 mID;
-
-    /// <summary>Gets or sets the IdentityIncrement value.</summary>
-    //[Column("IdentityIncrement", TypeName="smallint")]
-    public Int16 IdentityIncrement
-    {
-      get { return mIdentityIncrement; }
-      set
-      {
-        mIdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
-          , mIdentityIncrement, value);
-      }
-    }
-    private Int16 mIdentityIncrement;
-
-    /// <summary>Gets or sets the IdentityStart value.</summary>
-    //[Column("IdentityStart", TypeName="smallint")]
-    public Int16 IdentityStart
-    {
-      get { return mIdentityStart; }
-      set
-      {
-        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
-          , mIdentityStart, value);
-      }
-    }
-    private Int16 mIdentityStart;
-
-    /// <summary>Gets or sets the MaxLength value.</summary>
-    //[Required]
-    //[Column("MaxLength", TypeName="smallint")]
-    public Int16 MaxLength
-    {
-      get { return mMaxLength; }
-      set
-      {
-        mMaxLength = ChangedNames.Add(ColumnMaxLength
-          , mMaxLength, value);
-      }
-    }
-    private Int16 mMaxLength;
-
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
     //[Column("Name", TypeName="nvarchar(60")]
@@ -241,47 +158,19 @@ namespace LJCDataUtilityDAL
     }
     private String mName;
 
-    /// <summary>Gets or sets the MaxLength value.</summary>
-    //[Required]
-    //[Column("NewMaxLength", TypeName="smallint")]
-    public Int16 NewMaxLength
+    /// <summary>Gets or sets the Description value.</summary>
+    //[Column("Description", TypeName="nvarchar(80")]
+    public String Description
     {
-      get { return mNewMaxLength; }
-      set
-      {
-        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
-          , mNewMaxLength, value);
-      }
-    }
-    private Int16 mNewMaxLength;
-
-    /// <summary>Gets or sets the NewName value.</summary>
-    //[Column("NewName", TypeName="nvarchar(60")]
-    public String NewName
-    {
-      get { return mNewName; }
+      get { return mDescription; }
       set
       {
         value = NetString.InitString(value);
-        mNewName = ChangedNames.Add(ColumnNewName
-          , mNewName, value);
+        mDescription = ChangedNames.Add(ColumnDescription
+          , mDescription, value);
       }
     }
-    private String mNewName;
-
-    /// <summary>Gets or sets the NewSequence value.</summary>
-    //[Required]
-    //[Column("NewSequence", TypeName="int")]
-    public Int32 NewSequence
-    {
-      get { return mNewSequence; }
-      set
-      {
-        mNewSequence = ChangedNames.Add(ColumnNewSequence
-          , mNewSequence, value);
-      }
-    }
-    private Int32 mNewSequence;
+    private String mDescription;
 
     /// <summary>Gets or sets the Sequence value.</summary>
     //[Required]
@@ -311,6 +200,103 @@ namespace LJCDataUtilityDAL
       }
     }
     private String mTypeName;
+
+    /// <summary>Gets or sets the MaxLength value.</summary>
+    //[Required]
+    //[Column("MaxLength", TypeName="smallint")]
+    public Int16 MaxLength
+    {
+      get { return mMaxLength; }
+      set
+      {
+        mMaxLength = ChangedNames.Add(ColumnMaxLength
+          , mMaxLength, value);
+      }
+    }
+    private Int16 mMaxLength;
+
+    /// <summary>Gets or sets the AllowNull value.</summary>
+    //[Required]
+    //[Column("AllowNull", TypeName="bit")]
+    public Boolean AllowNull
+    {
+      get { return mAllowNull; }
+      set
+      {
+        mAllowNull = ChangedNames.Add(ColumnAllowNull
+          , mAllowNull, value);
+      }
+    }
+    private Boolean mAllowNull;
+
+    /// <summary>Gets or sets the Default value.</summary>
+    //[Column("DefaultValue", TypeName="nvarchar(30)")]
+    public string DefaultValue
+    {
+      get { return mDefaultValue; }
+      set
+      {
+        mDefaultValue = ChangedNames.Add(ColumnDefaultValue
+          , mDefaultValue, value);
+      }
+    }
+    private string mDefaultValue;
+
+    /// <summary>Gets or sets the IdentityStart value.</summary>
+    //[Required]
+    //[Column("IdentityStart", TypeName="smallint")]
+    public Int16 IdentityStart
+    {
+      get { return mIdentityStart; }
+      set
+      {
+        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
+          , mIdentityStart, value);
+      }
+    }
+    private Int16 mIdentityStart;
+
+    /// <summary>Gets or sets the IdentityIncrement value.</summary>
+    //[Required]
+    //[Column("IdentityIncrement", TypeName="smallint")]
+    public Int16 IdentityIncrement
+    {
+      get { return mIdentityIncrement; }
+      set
+      {
+        mIdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
+          , mIdentityIncrement, value);
+      }
+    }
+    private Int16 mIdentityIncrement;
+
+    /// <summary>Gets or sets the NewName value.</summary>
+    //[Column("NewName", TypeName="nvarchar(60")]
+    public String NewName
+    {
+      get { return mNewName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mNewName = ChangedNames.Add(ColumnNewName
+          , mNewName, value);
+      }
+    }
+    private String mNewName;
+
+    /// <summary>Gets or sets the MaxLength value.</summary>
+    //[Required]
+    //[Column("NewMaxLength", TypeName="smallint")]
+    public Int16 NewMaxLength
+    {
+      get { return mNewMaxLength; }
+      set
+      {
+        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
+          , mNewMaxLength, value);
+      }
+    }
+    private Int16 mNewMaxLength;
     #endregion
 
     #region Class Properties

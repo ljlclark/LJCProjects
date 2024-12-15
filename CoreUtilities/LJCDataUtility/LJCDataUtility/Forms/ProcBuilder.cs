@@ -11,6 +11,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCDataUtility
 {
@@ -42,7 +43,7 @@ namespace LJCDataUtility
         PKName = $"pk_{TableName}";
         UQName = $"uq_{TableName}";
       }
-      Builder = new StringBuilder(512);
+      Builder = new TextBuilder(512);
       HasColumns = false;
     }
     #endregion
@@ -61,25 +62,24 @@ namespace LJCDataUtility
     /// <summary>Adds the Procedure begin code.</summary>
     public string Begin(string procName)
     {
-      var b = new StringBuilder(512);
-      b.AppendLine("/* Copyright(c) Lester J. Clark and Contributors. */");
-      b.AppendLine("/* Licensed under the MIT License. */");
-      b.AppendLine($"/* {procName}.sql */");
-      b.AppendLine($"USE [{DBName}]");
-      b.AppendLine("GO");
-      b.AppendLine("SET ANSI_NULLS ON");
-      b.AppendLine("GO");
-      b.AppendLine("SET QUOTED_IDENTIFIER ON");
-      b.AppendLine("GO");
-      b.AppendLine("");
-      b.AppendLine($"IF OBJECT_ID('[dbo].[{procName}]', N'p')");
-      b.AppendLine(" IS NOT NULL");
-      b.AppendLine($"  DROP PROCEDURE [dbo].[{procName}];");
-      b.AppendLine("GO");
-      b.AppendLine($"CREATE PROCEDURE [dbo].[{procName}]");
-
+      var b = new TextBuilder(512);
+      b.Line("/* Copyright(c) Lester J. Clark and Contributors. */");
+      b.Line("/* Licensed under the MIT License. */");
+      b.Line($"/* {procName}.sql */");
+      b.Line($"USE [{DBName}]");
+      b.Line("GO");
+      b.Line("SET ANSI_NULLS ON");
+      b.Line("GO");
+      b.Line("SET QUOTED_IDENTIFIER ON");
+      b.Line("GO");
+      b.Line("");
+      b.Line($"IF OBJECT_ID('[dbo].[{procName}]', N'p')");
+      b.Line(" IS NOT NULL");
+      b.Line($"  DROP PROCEDURE [dbo].[{procName}];");
+      b.Line("GO");
+      b.Line($"CREATE PROCEDURE [dbo].[{procName}]");
       string retString = b.ToString();
-      Builder.Append(retString);
+      Text(retString);
       return retString;
     }
 
@@ -92,10 +92,10 @@ namespace LJCDataUtility
       var varRefName
         = SQLVarName($"{parentTableName}{parentIDColumnName}");
 
-      var b = new StringBuilder(128);
-      b.Append($"DECLARE {varRefName} int = ");
-      b.AppendLine($"(SELECT {parentIDColumnName} FROM {parentTableName}");
-      b.AppendLine($" WHERE {parentFindColumnName} = {parmFindName});");
+      var b = new TextBuilder(128);
+      b.Text($"DECLARE {varRefName} int = ");
+      b.Line($"(SELECT {parentIDColumnName} FROM {parentTableName}");
+      b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
       var retIf = b.ToString();
       return retIf;
     }
@@ -105,13 +105,13 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
     {
-      var b = new StringBuilder(256);
+      var b = new TextBuilder(256);
       var value = "    ";
       if (includeParens)
       {
         value += "(";
       }
-      b.Append(value);
+      b.Text(value);
       var lineLength = value.Length;
 
       var first = true;
@@ -136,7 +136,7 @@ namespace LJCDataUtility
         if (lineLength > 80)
         {
           var newLine = "\r\n     ";
-          b.Append(newLine);
+          b.Text(newLine);
 
           // Do not include crlf in length.
           lineLength = newLine.Length - 2;
@@ -146,17 +146,17 @@ namespace LJCDataUtility
         if (!first)
         {
           var firstValue = ", ";
-          b.Append(firstValue);
+          b.Text(firstValue);
           lineLength += firstValue.Length;
         }
         first = false;
 
-        b.Append(nameValue);
+        b.Text(nameValue);
       }
 
       if (includeParens)
       {
-        b.Append(")");
+        b.Text(")");
       }
       var retList = b.ToString();
       return retList;
@@ -165,39 +165,38 @@ namespace LJCDataUtility
     /// <summary>Adds a line to the procedure.</summary>
     public void Line(string text = null)
     {
-      Builder.AppendLine(text);
+      Builder.Line(text);
     }
 
     /// <summary>Creates the Parameters.</summary>
     public string Parameters(DataColumns dataColumns, bool isFirst = true)
     {
-      var retParams = "";
-
+      var b = new TextBuilder(128);
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (!dataColumn.Name.EndsWith("ID"))
         {
           if (!isFirst)
           {
-            retParams += ",\r\n";
+            b.Line(",");
           }
           isFirst = false;
           var declaration = SQLDeclaration(dataColumn);
-          retParams += $"  {declaration}";
+          b.Text($"  {declaration}");
         }
       }
+      var retParams = b.ToString();
       return retParams;
     }
 
     /// <summary>Creates the Proc body code.</summary>
     public string BodyBegin()
     {
-      var b = new StringBuilder(64);
-      b.AppendLine("AS");
-      b.AppendLine("BEGIN");
-
+      var b = new TextBuilder(64);
+      b.Line("AS");
+      b.Line("BEGIN");
       var retValue = b.ToString();
-      Builder.Append(retValue);
+      Text(retValue);
       return retValue;
     }
 
@@ -231,22 +230,22 @@ namespace LJCDataUtility
     /// <summary>Adds text to the procedure.</summary>
     public void Text(string text)
     {
-      Builder.Append(text);
+      Builder.Text(text);
     }
 
     /// <summary>Creates the Values list.</summary>
     public string ValuesList(DataColumns dataColumns
       , string varRefName = null)
     {
-      var b = new StringBuilder(256);
+      var b = new TextBuilder(256);
       var value = "    VALUES(";
-      b.Append(value);
+      b.Text(value);
       var lineLength = value.Length;
 
       if (NetString.HasValue(varRefName))
       {
         value = $"{varRefName}, ";
-        b.Append(value);
+        b.Text(value);
         lineLength += varRefName.Length;
       }
 
@@ -265,7 +264,7 @@ namespace LJCDataUtility
         if (lineLength > 80)
         {
           var newLine = "\r\n     ";
-          b.Append(newLine);
+          b.Text(newLine);
 
           // Do not include crlf in length.
           lineLength = newLine.Length - 2;
@@ -275,15 +274,15 @@ namespace LJCDataUtility
         if (!first)
         {
           var firstValue = ", ";
-          b.Append(firstValue);
+          b.Text(firstValue);
           lineLength += firstValue.Length;
         }
         first = false;
 
-        b.Append(nameValue);
+        b.Text(nameValue);
       }
 
-      b.Append(");");
+      b.Text(");");
       var retList = b.ToString();
       return retList;
     }
@@ -291,8 +290,56 @@ namespace LJCDataUtility
 
     #region Create Table Methods
 
+    /// <summary>Adds a foreign key.</summary>
+    public string AddForeignKey(string tableName
+      , string objectName, string sourceColumnName
+      , string targetColumnName)
+    {
+      var b = new TextBuilder(128);
+      b.Line(Check(objectName, ObjectType.Foreign, true));
+      b.Line($" ALTER TABLE[dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT[{objectName}]");
+      b.Line($"  FOREIGN KEY([{sourceColumnName}])");
+      b.Line($"  REFERENCES[dbo].[{tableName}]([{targetColumnName}])");
+      b.Line("  ON DELETE NO ACTION ON UPDATE NO ACTION;");
+      b.Line("END");
+      var retValue = b.ToString();
+      return retValue;
+    }
+
+    /// <summary>Adds a primary key.</summary>
+    public string AddPrimaryKey(string tableName
+      , string objectName, string columnList)
+    {
+      var b = new TextBuilder(128);
+      b.Line(Check(objectName, ObjectType.Primary, true));
+      b.Line($" ALTER TABLE[dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT[{objectName}]");
+      b.Line("  PRIMARY KEY CLUSTERED");
+      b.Line("  (");
+      b.Line($"   [{columnList}] ASC");
+      b.Line("  )");
+      b.Line("END");
+      var retValue = b.ToString();
+      return retValue;
+    }
+
+    /// <summary>Adds a unique key.</summary>
+    public string AddUniqueKey(string tableName
+      , string objectName, string columnList)
+    {
+      var b = new TextBuilder(128);
+      b.Line(Check(objectName, ObjectType.Unique, true));
+      b.Line($" ALTER TABLE[dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT[{objectName}]");
+      b.Line($"  UNIQUE({columnList});");
+      b.Line("END");
+      var retValue = b.ToString();
+      return retValue;
+    }
+
     /// <summary>Complete Create Table procedure.</summary>
-    public string CreateTableProc(DataColumns columns
+    public string CreateTableProc(DataColumns dataColumns
       , string primaryKeyList = null, string uniqueKeyList = null)
     {
       Begin(CreateProcName);
@@ -300,22 +347,19 @@ namespace LJCDataUtility
       Line("BEGIN");
 
       TableBegin();
-      foreach (DataUtilColumn column in columns)
+      foreach (DataUtilColumn dataColumn in dataColumns)
       {
-        if (column.IdentityIncrement > 0)
+        if (dataColumn.IdentityIncrement > 0)
         {
-          TableIdentity(column.Name, column.TypeName
-            , column.IdentityStart, column.IdentityIncrement);
+          TableIdentity(dataColumn);
         }
         else
         {
-          var maxLength = column.MaxLength;
-          if (column.NewMaxLength > 0)
+          if (dataColumn.NewMaxLength > 0)
           {
-            maxLength = column.MaxLength;
+            dataColumn.MaxLength = dataColumn.NewMaxLength;
           }
-          TableColumn(column.Name, column.TypeName, column.AllowNull
-            , maxLength, column.DefaultValue);
+          TableColumn(dataColumn);
         }
       }
 
@@ -324,108 +368,152 @@ namespace LJCDataUtility
       if (primaryKeyList != null)
       {
         Line();
-        AlterPrimaryKey(primaryKeyList);
+        var text = AlterPrimaryKey(primaryKeyList);
+        Line(text);
       }
       if (uniqueKeyList != null)
       {
         Line();
-        AlterUniqueKey(uniqueKeyList);
+        var text = AlterUniqueKey(uniqueKeyList);
+        Line(text);
       }
 
       Line("END");
-
       var retProc = ToString();
       return retProc;
+    }
+
+    /// <summary>Drops the constraint by provided name.</summary>
+    public string DropConstraint(string tableName
+      , string objectName, ObjectType objectType)
+    {
+      var b = new TextBuilder(128);
+      b.Line(Check(objectName, objectType));
+      b.Line($" ALTER TABLE[dbo].[{tableName}]");
+      b.Line($"  DROP CONSTRAINT[{objectName}])");
+      b.Line("END");
+      var retValue = b.ToString();
+      return retValue;
+    }
+
+    /// <summary>Renames a table.
+    /// Removes old keys and creates new keys.</summary>
+    public string RenameTable(DataKeys dataKeys)
+    {
+      var b = new TextBuilder(512);
+      b.Line($"USE [{DBName}]");
+
+      b.Line("/* Remove constraints and foreign keys */");
+      foreach (DataKey dataKey in dataKeys)
+      {
+        var objectType = (ObjectType)dataKey.KeyType;
+        var text = DropConstraint(TableName, dataKey.Name
+          , objectType);
+        b.Line(text);
+      }
+      b.Line();
+      b.Line($"EXEC sp_rename 'dbo.{TableName}', '{TableName}Backup'");
+      b.Line($"EXEC sp_rename 'dbo.New{TableName}', '{TableName}'");
+      b.Line();
+      b.Line("/* Add constraints and foreign keys. */");
+      foreach (DataKey dataKey in dataKeys)
+      {
+        var objectType = (ObjectType)dataKey.KeyType;
+        switch (objectType)
+        {
+          case ObjectType.Primary:
+            var text = AddPrimaryKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName);
+            b.Line(text);
+            break;
+
+          case ObjectType.Unique:
+            var columnList = dataKey.TargetColumnName;
+            text = AddUniqueKey(TableName, dataKey.Name, columnList);
+            b.Line(text);
+            break;
+
+          case ObjectType.Foreign:
+            text = AddForeignKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName
+              , dataKey.TargetColumnName);
+            b.Line(text);
+            break;
+        }
+      }
+      var retValue = b.ToString();
+      return retValue;
     }
 
     /// <summary>Adds the Table begin code.</summary>
     public string TableBegin()
     {
-      var b = new StringBuilder(128);
-      b.AppendLine("/* Create Table */");
-      b.AppendLine(TableCheck());
-      b.AppendLine($"CREATE TABLE[dbo].[{TableName}](");
-
+      var b = new TextBuilder(128);
+      b.Line("/* Create Table */");
+      b.Line(Check(TableName, ObjectType.Table, true));
+      b.Line($"CREATE TABLE[dbo].[{TableName}](");
       HasColumns = false;
       string retString = b.ToString();
-      Builder.Append(retString);
-      return retString;
-    }
-
-    /// <summary>Checks if table exists.</summary>
-    public string TableCheck()
-    {
-      var b = new StringBuilder(128);
-      b.AppendLine($"IF OBJECT_ID('{TableName}', N'u')");
-      b.AppendLine(" IS NULL");
-      b.AppendLine("BEGIN");
-
-      string retString = b.ToString();
-      Builder.Append(retString);
+      Text(retString);
       return retString;
     }
 
     /// <summary>Adds a table column definition.</summary>
-    public string TableColumn(string name, string typeName
-      , bool allowNull = true, short maxLength = 0
-      , string defaultValue = null)
+    public string TableColumn(DataUtilColumn dataColumn)
     {
-      var b = new StringBuilder(512);
+      var b = new TextBuilder(512);
       if (HasColumns)
       {
-        b.AppendLine(",");
+        b.Line(",");
       }
-      b.Append($"  [{name}]");
-      b.Append($" [{typeName}]");
-      if ("nvarchar" == typeName.Trim().ToLower()
-        || "varchar" == typeName.Trim().ToLower())
+      b.Text($"  [{dataColumn.Name}]");
+      b.Text($" [{dataColumn.TypeName}]");
+      if ("nvarchar" == dataColumn.TypeName.Trim().ToLower()
+        || "varchar" == dataColumn.TypeName.Trim().ToLower())
       {
-        b.Append($"({maxLength})");
+        b.Text($"({dataColumn.MaxLength})");
       }
-      if (!allowNull)
+      if (!dataColumn.AllowNull)
       {
-        b.Append(" NOT");
+        b.Text(" NOT");
       }
-      b.Append(" NULL");
-      if (defaultValue != null)
+      b.Text(" NULL");
+      if (dataColumn.DefaultValue != null)
       {
-        b.Append($" DEFAULT {defaultValue}");
+        b.Text($" DEFAULT {dataColumn.DefaultValue}");
       }
-
       HasColumns = true;
       var retString = b.ToString();
-      Builder.Append(retString);
+      Text(retString);
       return retString;
     }
 
     /// <summary>Creates the Table end code.</summary>
     public string TableEnd()
     {
-      var b = new StringBuilder(64);
-      b.AppendLine("  )");
-      b.AppendLine("END");
-
+      var b = new TextBuilder(64);
+      b.Line("  )");
+      b.Line("END");
       string retString = b.ToString();
-      Builder.Append(retString);
+      Text(retString);
       return retString;
     }
 
     /// <summary>Creates the Identity column.</summary>
-    public string TableIdentity(string name, string typeName
-      , short idBegin = 1, short idIncrement = 1)
+    public string TableIdentity(DataUtilColumn dataColumn)
     {
-      var b = new StringBuilder(64);
+      var b = new TextBuilder(64);
       if (HasColumns)
       {
-        b.AppendLine(",");
+        b.Line(",");
       }
-      b.Append($"  [{name}]");
-      b.Append($" [{typeName}]");
-      b.Append($" IDENTITY({idBegin}, {idIncrement}) NOT NULL");
-
+      b.Text($"  [{dataColumn.Name}]");
+      b.Text($" [{dataColumn.TypeName}]");
+      b.Text($" IDENTITY({dataColumn.IdentityStart}");
+      b.Text($", {dataColumn.IdentityIncrement}) NOT NULL");
       HasColumns = true;
       string retString = b.ToString();
-      Builder.Append(retString);
+      Text(retString);
       return retString;
     }
     #endregion
@@ -435,60 +523,74 @@ namespace LJCDataUtility
     /// <summary>Creates the Primary Key code.</summary>
     public string AlterPrimaryKey(string columnsList)
     {
-      var b = new StringBuilder(128);
-      b.AppendLine(PKCheck());
-      b.AppendLine($"ALTER TABLE[dbo].[{TableName}]");
-      b.AppendLine($"  ADD CONSTRAINT[{PKName}]");
-      b.AppendLine("  PRIMARY KEY CLUSTERED");
-      b.AppendLine("  (");
-      b.AppendLine($"    [{columnsList}] ASC");
-      b.AppendLine("  )");
-      b.AppendLine("END");
-
+      var b = new TextBuilder(128);
+      b.Line(Check(PKName, ObjectType.Primary));
+      b.Line($" ALTER TABLE[dbo].[{TableName}]");
+      b.Line($"  ADD CONSTRAINT[{PKName}]");
+      b.Line("   PRIMARY KEY CLUSTERED");
+      b.Line("   (");
+      b.Line($"   [{columnsList}] ASC");
+      b.Line("   )");
+      b.Line("END");
       string retString = b.ToString();
-      Builder.Append(retString);
       return retString;
     }
 
     /// <summary>Creates the Unique Key code.</summary>
     public string AlterUniqueKey(string columnsList)
     {
-      var b = new StringBuilder(512);
-      b.AppendLine(UQCheck());
-      b.AppendLine("ALTER TABLE[dbo].[{TableName}]");
-      b.AppendLine($"  ADD CONSTRAINT[{UQName}]");
-      b.AppendLine($"  UNIQUE({columnsList});");
-      b.AppendLine("END");
-
+      var b = new TextBuilder(512);
+      b.Line(Check(UQName, ObjectType.Unique));
+      b.Line(" ALTER TABLE[dbo].[{TableName}]");
+      b.Line($"  ADD CONSTRAINT[{UQName}]");
+      b.Line($"  UNIQUE({columnsList});");
+      b.Line("END");
       string retString = b.ToString();
-      Builder.Append(retString);
       return retString;
     }
 
-    /// <summary>Checks for the primary key.</summary>
-    public string PKCheck()
+    /// <summary>Checks for the database object.</summary>
+    public string Check(string objectName, ObjectType objectType
+      , bool useNot = false)
     {
-      var b = new StringBuilder(128);
-      b.AppendLine($"IF OBJECT_ID('{PKName}', N'pk'");
-      b.AppendLine(" IS NULL");
-      b.AppendLine("BEGIN");
-
+      string not = null;
+      if (useNot)
+      {
+        not = "NOT";
+      }
+      var typeValue = GetObjectTypeValue(objectType);
+      var b = new TextBuilder(128);
+      b.Line($"IF OBJECT_ID('{objectName}', N'{typeValue}')");
+      b.Line($" IS {not} NULL");
+      b.Line("BEGIN");
       string retString = b.ToString();
-      Builder.Append(retString);
       return retString;
     }
 
-    /// <summary>Checks for the unique key.</summary>
-    public string UQCheck()
+    /// <summary>Gets the object type value.</summary>
+    public string GetObjectTypeValue(ObjectType objectType)
     {
-      var b = new StringBuilder(128);
-      b.AppendLine($"IF OBJECT_ID('{UQName}', N'uq')");
-      b.AppendLine(" IS NULL");
-      b.AppendLine("BEGIN");
+      string retValue = null;
 
-      string retString = b.ToString();
-      Builder.Append(retString);
-      return retString;
+      switch (objectType)
+      {
+        case ObjectType.Primary:
+          retValue = "pk";
+          break;
+
+        case ObjectType.Unique:
+          retValue = "uq";
+          break;
+
+        case ObjectType.Foreign:
+          retValue = "f";
+          break;
+
+        case ObjectType.Table:
+          retValue = "u";
+          break;
+      }
+      return retValue;
     }
     #endregion
 
@@ -528,12 +630,69 @@ namespace LJCDataUtility
 
     // Gets or sets the
     // StringBuilder object.
-    private StringBuilder Builder { get; set; }
+    private TextBuilder Builder { get; set; }
 
     // Gets or sets an
     // indicator if Create Table already
     // has defined columns.
     private bool HasColumns { get; set; }
+    #endregion
+  }
+
+  /// <summary></summary>
+  public enum ObjectType
+  {
+    /// <summary></summary>
+    Primary = 1,
+    /// <summary></summary>
+    Unique,
+    /// <summary></summary>
+    Foreign,
+    /// <summary></summary>
+    Table
+  }
+
+  /// <summary>A StringBuilder helper class.</summary>
+  public class TextBuilder
+  {
+    #region Constructors
+
+    /// <summary>Initializes an object instance.</summary>
+    public TextBuilder(int capacity, StringBuilder builder = null)
+    {
+      if (null == builder)
+      {
+        builder = new StringBuilder(capacity);
+      }
+      Builder = builder;
+    }
+    #endregion
+
+    #region Methods
+
+    /// <summary>Implents the ToString() method.</summary>
+    public override string ToString()
+    {
+      return Builder.ToString();
+    }
+
+    /// <summary>Adds a line.</summary>
+    public void Line(string text = null)
+    {
+      Builder.AppendLine(text);
+    }
+
+    /// <summary>Adds text.</summary>
+    public void Text(string text)
+    {
+      Builder.Append(text);
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>The internal StringBuilder class.</summary>
+    public StringBuilder Builder { get; set; }
     #endregion
   }
 }

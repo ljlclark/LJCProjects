@@ -239,6 +239,7 @@ namespace LJCDataUtility
         detail.LJCChange += Detail_Change;
         detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
@@ -260,6 +261,7 @@ namespace LJCDataUtility
         detail.LJCChange += Detail_Change;
         detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
         detail.ShowDialog();
+        detail.Dispose();
       }
     }
 

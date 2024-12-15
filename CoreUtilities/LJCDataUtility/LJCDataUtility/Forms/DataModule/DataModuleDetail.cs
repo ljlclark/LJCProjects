@@ -267,6 +267,7 @@ namespace LJCDataUtility
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+        Close();
       }
     }
     #endregion
