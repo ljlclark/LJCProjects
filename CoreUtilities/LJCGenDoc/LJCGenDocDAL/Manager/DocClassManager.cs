@@ -10,11 +10,11 @@ using System.Data;
 
 namespace LJCGenDocDAL
 {
-  #region Constructors
-
   /// <summary>Provides table specific data methods.</summary>
   public class DocClassManager
   {
+    #region Constructors
+
     // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DocClassManager(DbServiceRef dbServiceRef, string dataConfigName

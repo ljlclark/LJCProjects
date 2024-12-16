@@ -87,6 +87,10 @@ namespace _Namespace_
 		{
 			_CollectionName_ retValue;
 
+      if (null == joins)
+      {
+        joins = GetJoins();
+      }
 			var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
 			retValue = ResultConverter.CreateCollection(dbResult);
 			return retValue;
@@ -100,7 +104,11 @@ namespace _Namespace_
 		{
 			_ClassName_ retValue;
 
-			var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
+      if (null == joins)
+      {
+        joins = GetJoins();
+      }
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
 			retValue = ResultConverter.CreateData(dbResult);
 			return retValue;
 		}
@@ -122,8 +130,9 @@ namespace _Namespace_
 		{
 			_ClassName_ retValue;
 
-			var keyColumns = GetIDKey(id);
-			var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var keyColumns = GetIDKey(id);
+      joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
 			retValue = ResultConverter.CreateData(dbResult);
 			return retValue;
 		}

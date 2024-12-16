@@ -36,16 +36,16 @@ namespace LJCDBMessage
     // Similar to RequestDataKeys and RequestLookupKeys()
     /// <include path='items/RequestDataColumns/*' file='Doc/DbCommon.xml'/>
     public static DbColumns RequestDataColumns(object dataObject
-      , DbColumns baseDefinition, List<string> propertyNames = null)
+      , DbColumns baseDefinition, List<string> propertyNames = null
+      , bool includeNull = false)
     {
       DbColumns retValue = null;
 
       if (dataObject != null)
       {
         GetDefaultPropertyNames(dataObject, ref propertyNames);
-
         var requestColumns = RequestColumns(baseDefinition, propertyNames);
-        retValue = DataColumns(dataObject, requestColumns);
+        retValue = DataColumns(dataObject, requestColumns, includeNull);
       }
       return retValue;
     }
@@ -53,7 +53,7 @@ namespace LJCDBMessage
     // Creates DbColumns values from data properties for supplied column list.
     // Similar to RequestKeys() and LookupKeys()
     private static DbColumns DataColumns(object dataObject
-      , DbColumns requestColumns)
+      , DbColumns requestColumns, bool includeNull)
     {
       DbColumns retValue = null;
 
@@ -66,14 +66,22 @@ namespace LJCDBMessage
         {
           // Add DbColumn from request columns and value from dataObject.
           object value = reflect.GetValue(dbColumn.PropertyName);
-          if (value != null)
+          // *** Next Statement *** Delete 12/05/24?
+          //if (value != null)
+          //{
+          // *** Begin *** Add 12/05/24?
+          if (!includeNull
+            && null == value)
           {
-            var dbValueColumn = CreateDataColumn(dbColumn, value);
-            if (IsDataColumn(dbValueColumn))
-            {
-              retValue.Add(dbValueColumn);
-            }
+            continue;
           }
+          // *** End   *** Add
+          var dbValueColumn = CreateDataColumn(dbColumn, value);
+          if (IsDataColumn(dbValueColumn))
+          {
+            retValue.Add(dbValueColumn);
+          }
+          //}
         }
       }
       return retValue;

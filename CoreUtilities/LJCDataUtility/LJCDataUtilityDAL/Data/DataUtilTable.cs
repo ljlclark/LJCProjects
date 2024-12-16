@@ -171,10 +171,22 @@ namespace LJCDataUtilityDAL
     private String mNewName;
     #endregion
 
+    #region Calculated and Join Data Properties
+
+    /// <summary>Gets or sets the Join ModuleName value.</summary>
+    public string ModuleName { get; set; }
+    #endregion
+
     #region Class Properties
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
+    #endregion
+
+    #region Calculated and Join Class Data
+
+    /// <summary>The Join ModuleName column name.</summary>
+    public static string ColumnModuleName = "ModuleName";
     #endregion
 
     #region Class Data

@@ -68,11 +68,13 @@ namespace LJCDBMessage
         {
           // Add DbColumn from request columns and value from dataObject.
           object value = reflect.GetValue(dbColumn.PropertyName);
+          // *** Begin *** Add 12/05/24?
           if (!includeNull
             && null == value)
           {
             continue;
           }
+          // *** End   *** Add
           var dbValueColumn = CreateDataColumn(dbColumn, value);
           if (IsDataColumn(dbValueColumn))
           {
