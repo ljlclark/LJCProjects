@@ -74,7 +74,6 @@ namespace LJCDataUtility
       {
         List<string> propertyNames = new List<string>()
         {
-          DataKey.ColumnDataTableID,
           DataKey.ColumnName,
           DataKey.ColumnKeyType,
           DataKey.ColumnSourceColumnName,

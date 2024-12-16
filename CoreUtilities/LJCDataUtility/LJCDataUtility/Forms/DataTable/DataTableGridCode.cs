@@ -84,7 +84,7 @@ namespace LJCDataUtility
       {
         List<string> propertyNames = new List<string>()
         {
-          DataUtilTable.ColumnModuleName,
+          //DataUtilTable.ColumnModuleName,
           DataUtilTable.ColumnName,
           DataUtilTable.ColumnDescription,
           DataUtilTable.ColumnSequence

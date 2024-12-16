@@ -27,7 +27,7 @@ namespace _Namespace_
 {
 	// The list form.
 	/// <include path='items/ListFormDAW/*' file='../../LJCGenDoc/Common/List.xml'/>
-	internal partial class _FullAppName_List : Form
+	internal partial class _AppName_List : Form
 	{
     #region Constructors
 

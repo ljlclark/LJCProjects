@@ -260,8 +260,7 @@ namespace LJCDBMessage
     /// <include path='items/SetColumns/*' file='Doc/DbResult.xml'/>
     public void SetColumns(DbColumns dataColumns, DbJoins dbJoins = null)
     {
-      // *** Next Statement *** Delete 12/16/24
-      //Columns = dataColumns.Clone();
+      Columns = dataColumns.Clone();
       if (NetCommon.HasItems(dbJoins))
       {
         foreach (DbJoin dbJoin in dbJoins)
@@ -270,7 +269,7 @@ namespace LJCDBMessage
           {
             foreach (DbColumn dbColumn in dbJoin.Columns)
             {
-              dataColumns.Add(dbColumn);
+              Columns.Add(dbColumn);
             }
           }
         }
