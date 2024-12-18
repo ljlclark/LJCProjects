@@ -162,12 +162,28 @@ namespace LJCDataUtility
     }
 
     // Sets the control states based on the current control values.
-    private void SetControlState()
+    internal void SetControlState()
     {
       bool enableNew = TableGrid.CurrentRow != null;
       bool enableEdit = KeyGrid.CurrentRow != null;
       FormCommon.SetMenuState(KeyMenu, enableNew, enableEdit);
       Parent.KeyHeading.Enabled = true;
+
+      // Custom Menu Items
+      Parent.KeyForeignKeyProc.Enabled = false;
+      Parent.KeyForeignKeyDropProc.Enabled = false;
+      var row = Parent.DataKeyRow();
+      var id = Parent.DataKeyID(row);
+      if (id > 1)
+      {
+        var dataKey = Managers.GetDataKey(id);
+        if ((int)KeyType.Foreign == dataKey.KeyType)
+        {
+          Parent.KeyForeignKeyProc.Enabled = true;
+          Parent.KeyForeignKeyDropProc.Enabled = true;
+        }
+      }
+
     }
 
     // Sets the row stored values.

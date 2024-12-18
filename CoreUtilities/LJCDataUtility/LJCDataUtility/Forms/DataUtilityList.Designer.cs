@@ -29,9 +29,8 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.ModuleMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.ModuleHeading = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +55,7 @@
       this.TableAddDataProc = new System.Windows.Forms.ToolStripMenuItem();
       this.TableCreateDataProc = new System.Windows.Forms.ToolStripMenuItem();
       this.TableInsertSelect = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableRename = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
       this.TableExit = new System.Windows.Forms.ToolStripMenuItem();
       this.ColumnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -84,15 +84,13 @@
       this.ModuleCombo = new LJCWinFormControls.LJCItemCombo();
       this.ModuleLabel = new System.Windows.Forms.Label();
       this.MainSplit = new System.Windows.Forms.SplitContainer();
-      this.TableTabs = new System.Windows.Forms.TabControl();
-      this.TablePage1 = new System.Windows.Forms.TabPage();
-      this.TableGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.ColumnTabs = new LJCWinFormControls.LJCTabControl(this.components);
       this.ColymnPage = new System.Windows.Forms.TabPage();
       this.ColumnGrid = new LJCWinFormControls.LJCDataGrid(this.components);
       this.KeyPage = new System.Windows.Forms.TabPage();
       this.KeyGrid = new LJCWinFormControls.LJCDataGrid(this.components);
-      this.TableRename = new System.Windows.Forms.ToolStripMenuItem();
+      this.TableGrid = new LJCWinFormControls.LJCDataGrid(this.components);
+      this.ljcHeaderBox1 = new LJCWinFormControls.LJCHeaderBox();
       this.ModuleMenu.SuspendLayout();
       this.TableMenu.SuspendLayout();
       this.ColumnMenu.SuspendLayout();
@@ -101,14 +99,12 @@
       this.MainSplit.Panel1.SuspendLayout();
       this.MainSplit.Panel2.SuspendLayout();
       this.MainSplit.SuspendLayout();
-      this.TableTabs.SuspendLayout();
-      this.TablePage1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).BeginInit();
       this.ColumnTabs.SuspendLayout();
       this.ColymnPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ColumnGrid)).BeginInit();
       this.KeyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).BeginInit();
       this.SuspendLayout();
       // 
       // ModuleMenu
@@ -285,6 +281,12 @@
       this.TableInsertSelect.Name = "TableInsertSelect";
       this.TableInsertSelect.Size = new System.Drawing.Size(264, 32);
       this.TableInsertSelect.Text = "Insert Select";
+      // 
+      // TableRename
+      // 
+      this.TableRename.Name = "TableRename";
+      this.TableRename.Size = new System.Drawing.Size(264, 32);
+      this.TableRename.Text = "Table Rename";
       // 
       // toolStripSeparator10
       // 
@@ -500,7 +502,8 @@
       // 
       // MainSplit.Panel1
       // 
-      this.MainSplit.Panel1.Controls.Add(this.TableTabs);
+      this.MainSplit.Panel1.Controls.Add(this.ljcHeaderBox1);
+      this.MainSplit.Panel1.Controls.Add(this.TableGrid);
       // 
       // MainSplit.Panel2
       // 
@@ -509,62 +512,6 @@
       this.MainSplit.SplitterDistance = 187;
       this.MainSplit.SplitterWidth = 5;
       this.MainSplit.TabIndex = 3;
-      // 
-      // TableTabs
-      // 
-      this.TableTabs.Controls.Add(this.TablePage1);
-      this.TableTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TableTabs.Location = new System.Drawing.Point(0, 0);
-      this.TableTabs.Margin = new System.Windows.Forms.Padding(0);
-      this.TableTabs.Name = "TableTabs";
-      this.TableTabs.SelectedIndex = 0;
-      this.TableTabs.Size = new System.Drawing.Size(1156, 187);
-      this.TableTabs.TabIndex = 0;
-      // 
-      // TablePage1
-      // 
-      this.TablePage1.Controls.Add(this.TableGrid);
-      this.TablePage1.Location = new System.Drawing.Point(4, 35);
-      this.TablePage1.Name = "TablePage1";
-      this.TablePage1.Padding = new System.Windows.Forms.Padding(3);
-      this.TablePage1.Size = new System.Drawing.Size(1148, 148);
-      this.TablePage1.TabIndex = 0;
-      this.TablePage1.Text = "Table";
-      this.TablePage1.UseVisualStyleBackColor = true;
-      // 
-      // TableGrid
-      // 
-      this.TableGrid.AllowUserToAddRows = false;
-      this.TableGrid.AllowUserToDeleteRows = false;
-      this.TableGrid.AllowUserToResizeRows = false;
-      this.TableGrid.BackgroundColor = System.Drawing.SystemColors.Control;
-      this.TableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.TableGrid.ContextMenuStrip = this.TableMenu;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.TableGrid.DefaultCellStyle = dataGridViewCellStyle1;
-      this.TableGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TableGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-      this.TableGrid.LJCAllowSelectionChange = false;
-      this.TableGrid.LJCDragDataName = null;
-      this.TableGrid.LJCLastRowIndex = -1;
-      this.TableGrid.LJCRowHeight = 0;
-      this.TableGrid.Location = new System.Drawing.Point(3, 3);
-      this.TableGrid.Margin = new System.Windows.Forms.Padding(0);
-      this.TableGrid.MultiSelect = false;
-      this.TableGrid.Name = "TableGrid";
-      this.TableGrid.RowHeadersVisible = false;
-      this.TableGrid.RowHeadersWidth = 62;
-      this.TableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.TableGrid.ShowCellToolTips = false;
-      this.TableGrid.Size = new System.Drawing.Size(1142, 142);
-      this.TableGrid.TabIndex = 3;
-      this.TableGrid.Text = "LJCDataGrid";
       // 
       // ColumnTabs
       // 
@@ -647,14 +594,6 @@
       this.KeyGrid.BackgroundColor = System.Drawing.SystemColors.Control;
       this.KeyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.KeyGrid.ContextMenuStrip = this.KeyMenu;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.KeyGrid.DefaultCellStyle = dataGridViewCellStyle3;
       this.KeyGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
       this.KeyGrid.LJCAllowSelectionChange = false;
       this.KeyGrid.LJCDragDataName = null;
@@ -672,11 +611,53 @@
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
       // 
-      // TableRename
+      // TableGrid
       // 
-      this.TableRename.Name = "TableRename";
-      this.TableRename.Size = new System.Drawing.Size(264, 32);
-      this.TableRename.Text = "Table Rename";
+      this.TableGrid.AllowUserToAddRows = false;
+      this.TableGrid.AllowUserToDeleteRows = false;
+      this.TableGrid.AllowUserToResizeRows = false;
+      this.TableGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.TableGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.TableGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.TableGrid.ContextMenuStrip = this.TableMenu;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.TableGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      this.TableGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+      this.TableGrid.LJCAllowSelectionChange = false;
+      this.TableGrid.LJCDragDataName = null;
+      this.TableGrid.LJCLastRowIndex = -1;
+      this.TableGrid.LJCRowHeight = 0;
+      this.TableGrid.Location = new System.Drawing.Point(0, 30);
+      this.TableGrid.Margin = new System.Windows.Forms.Padding(0);
+      this.TableGrid.MultiSelect = false;
+      this.TableGrid.Name = "TableGrid";
+      this.TableGrid.RowHeadersVisible = false;
+      this.TableGrid.RowHeadersWidth = 62;
+      this.TableGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.TableGrid.ShowCellToolTips = false;
+      this.TableGrid.Size = new System.Drawing.Size(1156, 157);
+      this.TableGrid.TabIndex = 4;
+      this.TableGrid.Text = "LJCDataGrid";
+      // 
+      // ljcHeaderBox1
+      // 
+      this.ljcHeaderBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ljcHeaderBox1.LJCBeginColor = System.Drawing.Color.AliceBlue;
+      this.ljcHeaderBox1.LJCEndColor = System.Drawing.Color.LightSkyBlue;
+      this.ljcHeaderBox1.Location = new System.Drawing.Point(0, 0);
+      this.ljcHeaderBox1.Name = "ljcHeaderBox1";
+      this.ljcHeaderBox1.Size = new System.Drawing.Size(1156, 30);
+      this.ljcHeaderBox1.TabIndex = 5;
+      this.ljcHeaderBox1.Text = "Table";
       // 
       // DataUtilityList
       // 
@@ -699,14 +680,12 @@
       this.MainSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.MainSplit)).EndInit();
       this.MainSplit.ResumeLayout(false);
-      this.TableTabs.ResumeLayout(false);
-      this.TablePage1.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).EndInit();
       this.ColumnTabs.ResumeLayout(false);
       this.ColymnPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ColumnGrid)).EndInit();
       this.KeyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.KeyGrid)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -761,9 +740,6 @@
     internal LJCWinFormControls.LJCItemCombo ModuleCombo;
     private System.Windows.Forms.Label ModuleLabel;
     private System.Windows.Forms.SplitContainer MainSplit;
-    private System.Windows.Forms.TabControl TableTabs;
-    private System.Windows.Forms.TabPage TablePage1;
-    internal LJCWinFormControls.LJCDataGrid TableGrid;
     internal LJCWinFormControls.LJCTabControl ColumnTabs;
     private System.Windows.Forms.TabPage ColymnPage;
     internal LJCWinFormControls.LJCDataGrid ColumnGrid;
@@ -774,6 +750,8 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     internal System.Windows.Forms.ToolStripMenuItem TableSetData;
     internal System.Windows.Forms.ToolStripMenuItem TableRename;
+    internal LJCWinFormControls.LJCDataGrid TableGrid;
+    private LJCWinFormControls.LJCHeaderBox ljcHeaderBox1;
   }
 }
 

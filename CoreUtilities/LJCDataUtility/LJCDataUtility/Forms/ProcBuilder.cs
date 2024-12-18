@@ -313,6 +313,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
+      b.Line();
       b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
@@ -330,6 +331,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
+      b.Line();
       b.Line(Check(objectName, ObjectType.Unique));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
@@ -363,20 +365,19 @@ namespace LJCDataUtility
           TableColumn(dataColumn);
         }
       }
-
-      Line();
       TableEnd();
+
       if (primaryKeyList != null)
       {
-        Line();
-        var text = AlterPrimaryKey(primaryKeyList);
-        Line(text);
+        //var text = AlterPrimaryKey(primaryKeyList);
+        var text = AddPrimaryKey(TableName, PKName, primaryKeyList);
+        Text(text);
       }
       if (uniqueKeyList != null)
       {
-        Line();
-        var text = AlterUniqueKey(uniqueKeyList);
-        Line(text);
+        //var text = AlterUniqueKey(uniqueKeyList);
+        var text = AddUniqueKey(TableName, UQName, uniqueKeyList);
+        Text(text);
       }
 
       Line("END");
@@ -449,6 +450,7 @@ namespace LJCDataUtility
     public string TableBegin()
     {
       var b = new TextBuilder(128);
+      b.Line();
       b.Line("/* Create Table */");
       b.Line(Check(TableName, ObjectType.Table));
       b.Line($"CREATE TABLE[dbo].[{TableName}](");
@@ -492,10 +494,11 @@ namespace LJCDataUtility
     public string TableEnd()
     {
       var b = new TextBuilder(64);
+      b.Line();
       b.Line("  )");
-      b.Line("END");
+      b.Text("END");
       string retString = b.ToString();
-      Text(retString);
+      Line(retString);
       return retString;
     }
 
@@ -520,34 +523,36 @@ namespace LJCDataUtility
 
     #region Alter Methods
 
-    /// <summary>Creates the Primary Key code.</summary>
-    public string AlterPrimaryKey(string columnsList)
-    {
-      var b = new TextBuilder(128);
-      b.Line(Check(PKName, ObjectType.Primary));
-      b.Line($" ALTER TABLE[dbo].[{TableName}]");
-      b.Line($"  ADD CONSTRAINT[{PKName}]");
-      b.Line("   PRIMARY KEY CLUSTERED");
-      b.Line("   (");
-      b.Line($"    [{columnsList}] ASC");
-      b.Line("   )");
-      b.Line("END");
-      string retString = b.ToString();
-      return retString;
-    }
+    ///// <summary>Creates the Primary Key code.</summary>
+    //public string AlterPrimaryKey(string columnsList)
+    //{
+    //  var b = new TextBuilder(128);
+    //  b.Line();
+    //  b.Line(Check(PKName, ObjectType.Primary));
+    //  b.Line($" ALTER TABLE[dbo].[{TableName}]");
+    //  b.Line($"  ADD CONSTRAINT[{PKName}]");
+    //  b.Line("   PRIMARY KEY CLUSTERED");
+    //  b.Line("   (");
+    //  b.Line($"    [{columnsList}] ASC");
+    //  b.Line("   )");
+    //  b.Line("END");
+    //  string retString = b.ToString();
+    //  return retString;
+    //}
 
-    /// <summary>Creates the Unique Key code.</summary>
-    public string AlterUniqueKey(string columnsList)
-    {
-      var b = new TextBuilder(512);
-      b.Line(Check(UQName, ObjectType.Unique));
-      b.Line(" ALTER TABLE[dbo].[{TableName}]");
-      b.Line($"  ADD CONSTRAINT[{UQName}]");
-      b.Line($"  UNIQUE({columnsList});");
-      b.Line("END");
-      string retString = b.ToString();
-      return retString;
-    }
+    ///// <summary>Creates the Unique Key code.</summary>
+    //public string AlterUniqueKey(string columnsList)
+    //{
+    //  var b = new TextBuilder(512);
+    //  b.Line();
+    //  b.Line(Check(UQName, ObjectType.Unique));
+    //  b.Line(" ALTER TABLE[dbo].[{TableName}]");
+    //  b.Line($"  ADD CONSTRAINT[{UQName}]");
+    //  b.Line($"  UNIQUE({columnsList});");
+    //  b.Line("END");
+    //  string retString = b.ToString();
+    //  return retString;
+    //}
 
     /// <summary>Checks for the database object.</summary>
     public string Check(string objectName, ObjectType objectType

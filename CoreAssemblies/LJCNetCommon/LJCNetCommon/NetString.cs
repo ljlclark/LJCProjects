@@ -586,7 +586,7 @@ namespace LJCNetCommon
       {
         message = message.Trim();
         var argMessage = $"Missing or invalid arguments:\r\n{message}";
-        throw new ArgumentException(argMessage);
+        throw new ArgumentException(argMessage.ToString());
       }
     }
     #endregion

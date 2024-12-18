@@ -190,10 +190,10 @@ namespace LJCDataUtility
     {
       if (AutoScaleMode == AutoScaleMode.Dpi)
       {
-        //Split.SplitterWidth = 4;
+        MainSplit.SplitterWidth = 4;
 
-        //ListHelper.SetPanelControls(_ClassName_Split.Panel1, _ClassName_Heading
-        //  , _ClassName_ToolPanel, _ClassName_Grid);
+        ListHelper.SetPanelControls(MainSplit.Panel1, ljcHeaderBox1
+          , null, TableGrid);
         //_ClassName_Grid.Height = ClientSize.Height - _ClassName_Tools.Height;
 
         //ListHelper.SetPanelControls(_ClassName_Split.Panel2, ChildHeading

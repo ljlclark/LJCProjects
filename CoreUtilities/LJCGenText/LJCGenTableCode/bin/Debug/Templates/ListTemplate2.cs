@@ -32,8 +32,7 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    // ********************
-    internal _FullAppName_List()
+    internal _AppName_List()
 		{
 			InitializeComponent();
 
@@ -46,7 +45,6 @@ namespace _Namespace_
     #region Form Event Handlers
 
     // Configures the form and loads the initial control data.
-    // ********************
     private void _ClassName_List_Load(object sender, EventArgs e)
 		{
 			InitializeControls();
@@ -57,7 +55,6 @@ namespace _Namespace_
     #region Item Change Processing
 
     // Execute the list and related item functions.
-    // ********************
     internal void DoChange(Change change)
     {
       Cursor = Cursors.WaitCursor;
@@ -81,7 +78,6 @@ namespace _Namespace_
           //_ClassName_Grid.LJCSetCounter(_ClassName_Counter);
           break;
       }
-      //SetControlState();
       Cursor = Cursors.Default;
     }
 
@@ -93,8 +89,13 @@ namespace _Namespace_
       _ClassName_
     }
 
+    // Starts the Timer with the Change value.
+    internal void TimedChange(Change change)
+    {
+      ChangeTimer.DoChange(change.ToString());
+    }
+
     // Start the Change processing.
-    // ********************
     private void StartChangeProcessing()
     {
       ChangeTimer = new ChangeTimer();
@@ -102,15 +103,7 @@ namespace _Namespace_
       TimedChange(Change.Startup);
     }
 
-    // Starts the Timer with the Change value.
-    // ********************
-    internal void TimedChange(Change change)
-    {
-      ChangeTimer.DoChange(change.ToString());
-    }
-
     // Change Event Handler
-    // ********************
     private void ChangeTimer_ItemChange(object sender, EventArgs e)
     {
       Change changeType;
@@ -127,7 +120,6 @@ namespace _Namespace_
     #region Action Event Handlers
 
     // Shared menu Exit event handler.
-    // ********************
     internal void Exit_Click(object sender, EventArgs e)
     {
       SaveControlValues();
