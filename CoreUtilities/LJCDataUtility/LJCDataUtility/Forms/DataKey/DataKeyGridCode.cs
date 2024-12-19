@@ -388,7 +388,7 @@ namespace LJCDataUtility
 
         var infoValue = Parent.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
-          , "Foreign Key Add Procedure", infoValue);
+          , "Foreign Key Procedure", infoValue);
         Parent.InfoValue = controlValue;
       }
     }

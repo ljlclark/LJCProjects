@@ -85,6 +85,18 @@ namespace LJCDataUtility
       return retString;
     }
 
+    /// <summary>Checks if the builder text ends with a supplied value.</summary>
+    public bool EndsWith(string value)
+    {
+      bool retValue = false;
+      var text = Builder.ToString();
+      if (text.EndsWith(value))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     /// <summary>Gets the Table row IF statement.</summary>
     public string IFItem(string parentTableName
       , string parentIDColumnName, string parentFindColumnName
@@ -298,7 +310,6 @@ namespace LJCDataUtility
       , string targetTableName, string targetColumnName)
     {
       var b = new TextBuilder(128);
-      b.Line();
       b.Line(Check(objectName, ObjectType.Foreign));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
@@ -306,7 +317,7 @@ namespace LJCDataUtility
       b.Text($"  REFERENCES[dbo].[{targetTableName}]");
       b.Line($"([{targetColumnName}])");
       b.Line("  ON DELETE NO ACTION ON UPDATE NO ACTION;");
-      b.Line("END");
+      b.Text("END");
       var retValue = b.ToString();
       return retValue;
     }
@@ -316,7 +327,6 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
-      b.Line();
       b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
@@ -324,7 +334,7 @@ namespace LJCDataUtility
       b.Line("  (");
       b.Line($"   [{columnList}] ASC");
       b.Line("  )");
-      b.Line("END");
+      b.Text("END");
       var retValue = b.ToString();
       return retValue;
     }
@@ -334,12 +344,11 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var b = new TextBuilder(128);
-      b.Line();
       b.Line(Check(objectName, ObjectType.Unique));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line($"  UNIQUE({columnList});");
-      b.Line("END");
+      b.Text("END");
       var retValue = b.ToString();
       return retValue;
     }
@@ -372,15 +381,13 @@ namespace LJCDataUtility
 
       if (primaryKeyList != null)
       {
-        //var text = AlterPrimaryKey(primaryKeyList);
         var text = AddPrimaryKey(TableName, PKName, primaryKeyList);
-        Text(text);
+        Line(text);
       }
       if (uniqueKeyList != null)
       {
-        //var text = AlterUniqueKey(uniqueKeyList);
         var text = AddUniqueKey(TableName, UQName, uniqueKeyList);
-        Text(text);
+        Line(text);
       }
 
       Line("END");
@@ -396,7 +403,7 @@ namespace LJCDataUtility
       b.Line(Check(objectName, objectType, true));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  DROP CONSTRAINT[{objectName}]");
-      b.Line("END");
+      b.Text("END");
       var retValue = b.ToString();
       return retValue;
     }
@@ -439,11 +446,12 @@ namespace LJCDataUtility
         b.Line(text);
       }
 
+      b.Line();
       b.Line($"EXEC sp_rename 'dbo.{TableName}', '{TableName}Backup'");
       b.Line($"EXEC sp_rename 'dbo.New{TableName}', '{TableName}'");
       b.Line();
 
-      b.Line("/* Add constraints and foreign keys. */");
+      b.Text("/* Add constraints and foreign keys. */");
 
       // Create referencing foreign keys.
       foreach (DataKey dataKey in dataKeys)
@@ -477,20 +485,20 @@ namespace LJCDataUtility
           case ObjectType.Primary:
             var text = AddPrimaryKey(TableName, dataKey.Name
               , dataKey.SourceColumnName);
-            b.Text(text);
+            b.Line(text);
             break;
 
           case ObjectType.Unique:
             var columnList = dataKey.SourceColumnName;
             text = AddUniqueKey(TableName, dataKey.Name, columnList);
-            b.Text(text);
+            b.Line(text);
             break;
 
           case ObjectType.Foreign:
             text = AddForeignKey(TableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
-            b.Text(text);
+            b.Line(text);
             break;
         }
       }
@@ -503,7 +511,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(128);
       b.Line();
-      b.Line("/* Create Table */");
+      b.Text("/* Create Table */");
       b.Line(Check(TableName, ObjectType.Table));
       b.Line($"CREATE TABLE[dbo].[{TableName}](");
       HasColumns = false;
@@ -548,7 +556,7 @@ namespace LJCDataUtility
       var b = new TextBuilder(64);
       b.Line();
       b.Line("  )");
-      b.Text("END");
+      b.Line("END");
       string retString = b.ToString();
       Line(retString);
       return retString;
@@ -575,37 +583,6 @@ namespace LJCDataUtility
 
     #region Alter Methods
 
-    ///// <summary>Creates the Primary Key code.</summary>
-    //public string AlterPrimaryKey(string columnsList)
-    //{
-    //  var b = new TextBuilder(128);
-    //  b.Line();
-    //  b.Line(Check(PKName, ObjectType.Primary));
-    //  b.Line($" ALTER TABLE[dbo].[{TableName}]");
-    //  b.Line($"  ADD CONSTRAINT[{PKName}]");
-    //  b.Line("   PRIMARY KEY CLUSTERED");
-    //  b.Line("   (");
-    //  b.Line($"    [{columnsList}] ASC");
-    //  b.Line("   )");
-    //  b.Line("END");
-    //  string retString = b.ToString();
-    //  return retString;
-    //}
-
-    ///// <summary>Creates the Unique Key code.</summary>
-    //public string AlterUniqueKey(string columnsList)
-    //{
-    //  var b = new TextBuilder(512);
-    //  b.Line();
-    //  b.Line(Check(UQName, ObjectType.Unique));
-    //  b.Line(" ALTER TABLE[dbo].[{TableName}]");
-    //  b.Line($"  ADD CONSTRAINT[{UQName}]");
-    //  b.Line($"  UNIQUE({columnsList});");
-    //  b.Line("END");
-    //  string retString = b.ToString();
-    //  return retString;
-    //}
-
     /// <summary>Checks for the database object.</summary>
     public string Check(string objectName, ObjectType objectType
       , bool useNot = false)
@@ -615,8 +592,12 @@ namespace LJCDataUtility
       {
         not = " NOT";
       }
-      var typeValue = GetObjectTypeValue(objectType);
       var b = new TextBuilder(128);
+      if (!EndsWith("\r\n\r\n"))
+      {
+        b.Line();
+      }
+      var typeValue = GetObjectTypeValue(objectType);
       b.Line($"IF OBJECT_ID('{objectName}', N'{typeValue}')");
       b.Line($" IS{not} NULL");
       b.Text("BEGIN");

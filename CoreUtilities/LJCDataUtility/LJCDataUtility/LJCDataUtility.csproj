@@ -192,7 +192,6 @@
     <Content Include="bin\Debug\SQLScript\ForeignKeys\sp_DataTableFK.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\DataUtilityTables.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataColumn.sql" />
-    <Content Include="bin\Debug\SQLScript\SelectTnto.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataKey.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
