@@ -5,6 +5,7 @@ using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Security.Principal;
@@ -27,7 +28,8 @@ namespace LJCDataUtility
     }
 
     /// <summary>Resets the text values.</summary>
-    public void Reset(string dbName = null, string tableName = null)
+    public void Reset(string dbName = null
+      , string tableName = null)
     {
       if (NetString.HasValue(dbName))
       {
@@ -296,6 +298,7 @@ namespace LJCDataUtility
       , string targetTableName, string targetColumnName)
     {
       var b = new TextBuilder(128);
+      b.Line();
       b.Line(Check(objectName, ObjectType.Foreign));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
@@ -400,45 +403,94 @@ namespace LJCDataUtility
 
     /// <summary>Renames a table.
     /// Removes old keys and creates new keys.</summary>
-    public string RenameTable(DataKeys dataKeys)
+    public string RenameTableSQL(int tableID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");
       b.Line();
-      b.Line("/* Remove constraints and foreign keys */");
+      b.Text("/* Remove foreign keys and other constraints. */");
+
+      // Remove referencing foreign keys.
       foreach (DataKey dataKey in dataKeys)
       {
+        if (dataKey.TargetTableName != TableName)
+        {
+          continue;
+        }
+        var objectType = (ObjectType)dataKey.KeyType;
+        if (ObjectType.Foreign == objectType)
+        {
+          var text = DropConstraint(dataKey.DataTableName
+            , dataKey.Name, objectType);
+          b.Line(text);
+        }
+      }
+
+      // Remove reference foreign keys and other constraints.
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.DataTableID != tableID)
+        {
+          continue;
+        }
         var objectType = (ObjectType)dataKey.KeyType;
         var text = DropConstraint(TableName, dataKey.Name
           , objectType);
         b.Line(text);
       }
+
       b.Line($"EXEC sp_rename 'dbo.{TableName}', '{TableName}Backup'");
       b.Line($"EXEC sp_rename 'dbo.New{TableName}', '{TableName}'");
       b.Line();
+
       b.Line("/* Add constraints and foreign keys. */");
+
+      // Create referencing foreign keys.
       foreach (DataKey dataKey in dataKeys)
       {
+        if (dataKey.TargetTableName != TableName)
+        {
+          continue;
+        }
+        var objectType = (ObjectType)dataKey.KeyType;
+        switch (objectType)
+        {
+          case ObjectType.Foreign:
+            var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
+              , dataKey.SourceColumnName, dataKey.TargetTableName
+              , dataKey.TargetColumnName);
+            b.Line(text);
+            break;
+        }
+      }
+
+      // Create reference foreign keys and other constraints.
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.DataTableID != tableID)
+        {
+          continue;
+        }
         var objectType = (ObjectType)dataKey.KeyType;
         switch (objectType)
         {
           case ObjectType.Primary:
             var text = AddPrimaryKey(TableName, dataKey.Name
               , dataKey.SourceColumnName);
-            b.Line(text);
+            b.Text(text);
             break;
 
           case ObjectType.Unique:
             var columnList = dataKey.SourceColumnName;
             text = AddUniqueKey(TableName, dataKey.Name, columnList);
-            b.Line(text);
+            b.Text(text);
             break;
 
           case ObjectType.Foreign:
             text = AddForeignKey(TableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
-            b.Line(text);
+            b.Text(text);
             break;
         }
       }

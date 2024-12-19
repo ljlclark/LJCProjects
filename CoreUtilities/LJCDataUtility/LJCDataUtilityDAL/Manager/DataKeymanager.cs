@@ -78,6 +78,10 @@ namespace LJCDataUtilityDAL
     {
       DataKeys retValue;
 
+      if (null == joins)
+      {
+        joins = GetJoins();
+      }
       var dbResult = Manager.Load(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
@@ -91,6 +95,10 @@ namespace LJCDataUtilityDAL
     {
       DataKey retValue;
 
+      if (null == joins)
+      {
+        joins = GetJoins();
+      }
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, filters, joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -120,7 +128,9 @@ namespace LJCDataUtilityDAL
       DataKey retValue;
 
       var keyColumns = IDKey(id);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames
+        , joins: joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -132,8 +142,10 @@ namespace LJCDataUtilityDAL
     {
       DataKey retValue;
 
+      var joins = GetJoins();
       var keyColumns = UniqueKey(dataTableID, name);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames);
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames
+        , joins: joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
@@ -176,6 +188,49 @@ namespace LJCDataUtilityDAL
         { DataKey.ColumnDataTableID, dataTableID },
         { DataKey.ColumnName, (object)name }
       };
+      return retValue;
+    }
+    #endregion
+
+    #region Joins
+
+    // Creates and returns the Load Joins object.
+    // *** Add *** 12/16/24
+    /// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public DbJoins GetJoins()
+    {
+      DbJoins retValue = new DbJoins();
+
+      // Note: JoinOn Columns must have properties in the DataObject
+      // to receive the join values.
+      // The RenameAs property is required if there is another table column
+      // with the same name.
+      // dbColumns.Add(string columnName, string propertyName = null
+      //   , string renameAs = null, string dataTypeName = "String"
+      //   , string caption = null) 
+
+      // Example SQL additions
+      // DataTable.Name
+      //left join DataTable
+      // on ((DataKey.TableID = DataTable.ID))
+
+      DbJoin dbJoin;
+      dbJoin = new DbJoin
+      {
+        TableName = "DataTable",
+        JoinType = "left",
+        JoinOns = new DbJoinOns()
+        {
+          { DataKey.ColumnDataTableID, DataUtilTable.ColumnID }
+        },
+        Columns = new DbColumns()
+        {
+          // columnName, propertyName = null, renameAs = null
+          //   , dataTypeName = "String", caption = null
+          { DataUtilTable.ColumnName, "DataTableName", "DataTableName" }
+        }
+      };
+      retValue.Add(dbJoin);
       return retValue;
     }
     #endregion

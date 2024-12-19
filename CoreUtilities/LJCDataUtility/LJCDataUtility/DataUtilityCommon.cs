@@ -37,7 +37,7 @@ namespace LJCDataUtility
       info.ShowDialog();
       retValue = new ControlValue()
       {
-        ControlName = text,
+        ControlName = "AddProc",
         Height = info.Height,
         Left = info.Left,
         Top = info.Top,

@@ -387,8 +387,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value, infoValue.ControlName
-          , infoValue);
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , "Foreign Key Add Procedure", infoValue);
         Parent.InfoValue = controlValue;
       }
     }
@@ -421,8 +421,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = Parent.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value, infoValue.ControlName
-          , infoValue);
+        var controlValue = DataUtilityCommon.ShowInfo(value
+          , "Foreign Key Drop Procedure", infoValue);
         Parent.InfoValue = controlValue;
       }
     }

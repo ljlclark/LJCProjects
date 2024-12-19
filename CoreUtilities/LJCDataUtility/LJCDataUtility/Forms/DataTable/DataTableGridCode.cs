@@ -422,8 +422,8 @@ namespace LJCDataUtility
     // Handles the "Rename Table" menu item event.
     private void TableRename_Click(object sender, EventArgs e)
     {
-      var createTable = new CreateTable(Parent);
-      createTable.RenameTableProc();
+      var renameTable = new RenameTable(Parent);
+      renameTable.RenameTableSQL();
     }
     #endregion
 

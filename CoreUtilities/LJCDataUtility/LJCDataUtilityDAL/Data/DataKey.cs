@@ -223,10 +223,22 @@ namespace LJCDataUtilityDAL
     private Boolean mIsAscending;
     #endregion
 
+    #region Calculated and Join Data Properties
+
+    /// <summary>Gets or sets the Join TableName value.</summary>
+    public string DataTableName { get; set; }
+    #endregion
+
     #region Class Properties
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
     public ChangedNames ChangedNames { get; private set; }
+    #endregion
+
+    #region Calculated and Join Class Data
+
+    /// <summary>The Join ModuleName column name.</summary>
+    public static string ColumnDataTableName = "DataTableName";
     #endregion
 
     #region Class Data
