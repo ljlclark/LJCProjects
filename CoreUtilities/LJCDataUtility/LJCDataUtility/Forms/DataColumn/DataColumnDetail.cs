@@ -100,7 +100,8 @@ namespace LJCDataUtility
         DescriptionText.Text = data.Description;
         SequenceText.Text
           = FormCommon.DefaultMinusOne((object)data.Sequence);
-        TypeNameText.Text = data.TypeName;
+        int typeID = TypeNameCombo.FindString(data.TypeName);
+        TypeNameCombo.LJCSetByItemID(typeID + 1);
         MaxLengthText.Text
           = FormCommon.DefaultMinusOne((object)data.MaxLength);
         NewMaxLengthText.Text
@@ -127,7 +128,7 @@ namespace LJCDataUtility
       retData.NewName = FormCommon.SetString(NewNameText.Text);
       retData.Description = FormCommon.SetString(DescriptionText.Text);
       retData.Sequence = NetCommon.ToInt32(SequenceText.Text);
-      retData.TypeName = TypeNameText.Text;
+      retData.TypeName = TypeNameCombo.Text;
       retData.MaxLength = NetCommon.ToInt16(MaxLengthText.Text);
       retData.NewMaxLength = NetCommon.ToInt16(NewMaxLengthText.Text);
       retData.DefaultValue = FormCommon.SetString(DefaultText.Text);
@@ -148,6 +149,8 @@ namespace LJCDataUtility
       // In control order.
       dataRecord.Description
         = FormCommon.SetString(dataRecord.Description);
+      dataRecord.DefaultValue
+        = FormCommon.SetString(dataRecord.DefaultValue);
     }
 
     // Gets the original or new record.
@@ -255,7 +258,39 @@ namespace LJCDataUtility
       SetNoSpace();
       DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
 
+      // Load control data.
+      LoadTypeCombo();
+      TypeNameCombo.LJCSetByItemID(1);
+
       Cursor = Cursors.Default;
+    }
+
+    private void LoadTypeCombo()
+    {
+      TypeNameCombo.LJCAddItem(1, "bigint");
+      TypeNameCombo.LJCAddItem(2, "binary");
+      TypeNameCombo.LJCAddItem(3, "bit");
+      TypeNameCombo.LJCAddItem(4, "char");
+      TypeNameCombo.LJCAddItem(5, "date");
+      TypeNameCombo.LJCAddItem(6, "datetime");
+      TypeNameCombo.LJCAddItem(7, "datetime2");
+      TypeNameCombo.LJCAddItem(8, "datetimeoffset");
+      TypeNameCombo.LJCAddItem(9, "decimal");
+      TypeNameCombo.LJCAddItem(10, "float");
+      TypeNameCombo.LJCAddItem(11, "int");
+      TypeNameCombo.LJCAddItem(12, "money");
+      TypeNameCombo.LJCAddItem(13, "nchar");
+      TypeNameCombo.LJCAddItem(14, "ntext");
+      TypeNameCombo.LJCAddItem(15, "nvarchar");
+      TypeNameCombo.LJCAddItem(16, "real");
+      TypeNameCombo.LJCAddItem(17, "smalldatetime");
+      TypeNameCombo.LJCAddItem(18, "smallint");
+      TypeNameCombo.LJCAddItem(19, "smallmoney");
+      TypeNameCombo.LJCAddItem(20, "text");
+      TypeNameCombo.LJCAddItem(21, "time");
+      TypeNameCombo.LJCAddItem(22, "tinyint");
+      TypeNameCombo.LJCAddItem(23, "varbinary");
+      TypeNameCombo.LJCAddItem(24, "varchar");
     }
 
     // Sets the NoSpace events.

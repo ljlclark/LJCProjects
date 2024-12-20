@@ -44,7 +44,7 @@
       this.IdentityIncrementLabel = new System.Windows.Forms.Label();
       this.MaxLengthText = new System.Windows.Forms.TextBox();
       this.MaxLengthLabel = new System.Windows.Forms.Label();
-      this.TypeNameText = new System.Windows.Forms.TextBox();
+      this.TypeNameCombo = new LJCWinFormControls.LJCItemCombo();
       this.TypeNameLabel = new System.Windows.Forms.Label();
       this.AllowNullCheck = new System.Windows.Forms.CheckBox();
       this.DefaultText = new System.Windows.Forms.TextBox();
@@ -198,13 +198,13 @@
       this.MaxLengthLabel.TabIndex = 12;
       this.MaxLengthLabel.Text = "Max Length";
       // 
-      // TypeNameText
+      // TypeNameCombo
       // 
-      this.TypeNameText.Location = new System.Drawing.Point(254, 257);
-      this.TypeNameText.Margin = new System.Windows.Forms.Padding(6);
-      this.TypeNameText.Name = "TypeNameText";
-      this.TypeNameText.Size = new System.Drawing.Size(500, 32);
-      this.TypeNameText.TabIndex = 11;
+      this.TypeNameCombo.Location = new System.Drawing.Point(254, 257);
+      this.TypeNameCombo.Margin = new System.Windows.Forms.Padding(6);
+      this.TypeNameCombo.Name = "TypeNameCombo";
+      this.TypeNameCombo.Size = new System.Drawing.Size(200, 34);
+      this.TypeNameCombo.TabIndex = 11;
       // 
       // TypeNameLabel
       // 
@@ -288,7 +288,7 @@
       this.Controls.Add(this.DefaultText);
       this.Controls.Add(this.DefaultLabel);
       this.Controls.Add(this.AllowNullCheck);
-      this.Controls.Add(this.TypeNameText);
+      this.Controls.Add(this.TypeNameCombo);
       this.Controls.Add(this.TypeNameLabel);
       this.Controls.Add(this.MaxLengthText);
       this.Controls.Add(this.MaxLengthLabel);
@@ -337,7 +337,7 @@
     private System.Windows.Forms.Label IdentityIncrementLabel;
     private System.Windows.Forms.TextBox MaxLengthText;
     private System.Windows.Forms.Label MaxLengthLabel;
-    private System.Windows.Forms.TextBox TypeNameText;
+    private LJCWinFormControls.LJCItemCombo TypeNameCombo;
     private System.Windows.Forms.Label TypeNameLabel;
     private System.Windows.Forms.CheckBox AllowNullCheck;
     private System.Windows.Forms.TextBox DefaultText;
