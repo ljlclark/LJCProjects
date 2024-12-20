@@ -424,6 +424,7 @@ namespace LJCDataUtility
         {
           continue;
         }
+
         var objectType = (ObjectType)dataKey.KeyType;
         if (ObjectType.Foreign == objectType)
         {
@@ -440,6 +441,7 @@ namespace LJCDataUtility
         {
           continue;
         }
+
         var objectType = (ObjectType)dataKey.KeyType;
         var text = DropConstraint(TableName, dataKey.Name
           , objectType);
@@ -452,6 +454,37 @@ namespace LJCDataUtility
       b.Line();
 
       b.Text("/* Add constraints and foreign keys. */");
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.DataTableID != tableID)
+        {
+          continue;
+        }
+        string text;
+
+        var objectType = (ObjectType)dataKey.KeyType;
+        switch (objectType)
+        {
+          case ObjectType.Primary:
+            text = AddPrimaryKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName);
+            b.Line(text);
+            break;
+
+          case ObjectType.Unique:
+            var columnList = dataKey.SourceColumnName;
+            text = AddUniqueKey(TableName, dataKey.Name, columnList);
+            b.Line(text);
+            break;
+
+          case ObjectType.Foreign:
+            text = AddForeignKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName, dataKey.TargetTableName
+              , dataKey.TargetColumnName);
+            b.Line(text);
+            break;
+        }
+      }
 
       // Create referencing foreign keys.
       foreach (DataKey dataKey in dataKeys)
@@ -472,36 +505,6 @@ namespace LJCDataUtility
         }
       }
 
-      // Create reference foreign keys and other constraints.
-      foreach (DataKey dataKey in dataKeys)
-      {
-        if (dataKey.DataTableID != tableID)
-        {
-          continue;
-        }
-        var objectType = (ObjectType)dataKey.KeyType;
-        switch (objectType)
-        {
-          case ObjectType.Primary:
-            var text = AddPrimaryKey(TableName, dataKey.Name
-              , dataKey.SourceColumnName);
-            b.Line(text);
-            break;
-
-          case ObjectType.Unique:
-            var columnList = dataKey.SourceColumnName;
-            text = AddUniqueKey(TableName, dataKey.Name, columnList);
-            b.Line(text);
-            break;
-
-          case ObjectType.Foreign:
-            text = AddForeignKey(TableName, dataKey.Name
-              , dataKey.SourceColumnName, dataKey.TargetTableName
-              , dataKey.TargetColumnName);
-            b.Line(text);
-            break;
-        }
-      }
       var retValue = b.ToString();
       return retValue;
     }
