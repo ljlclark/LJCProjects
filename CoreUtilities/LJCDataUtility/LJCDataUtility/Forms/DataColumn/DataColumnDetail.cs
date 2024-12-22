@@ -260,7 +260,11 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
+      SetNumericOnly();
+      NameText.MaxLength = DataUtilColumn.LengthName;
+      NewNameText.MaxLength = DataUtilColumn.LengthName;
       DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
+      //DefaultText.MaxLength = DataUtilColumn.LengthDefault;
 
       // Load control data.
       LoadTypeCombo();
@@ -303,6 +307,28 @@ namespace LJCDataUtility
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
       NameText.TextChanged += TextBoxNoSpace_TextChanged;
+      NewNameText.KeyPress += TextBoxNoSpace_KeyPress;
+      NewNameText.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+
+    // Sets the Numeric events.
+    private void SetNumericOnly()
+    {
+      SequenceText.KeyPress += TextBoxNumeric_KeyPress;
+      SequenceText.KeyPress += TextBoxNoSpace_KeyPress;
+      SequenceText.TextChanged += TextBoxNoSpace_TextChanged;
+      MaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
+      MaxLengthText.KeyPress += TextBoxNoSpace_KeyPress;
+      MaxLengthText.TextChanged += TextBoxNoSpace_TextChanged;
+      NewMaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
+      NewMaxLengthText.KeyPress += TextBoxNoSpace_KeyPress;
+      NewMaxLengthText.TextChanged += TextBoxNoSpace_TextChanged;
+      IdentityStartText.KeyPress += TextBoxNumeric_KeyPress;
+      IdentityStartText.KeyPress += TextBoxNoSpace_KeyPress;
+      IdentityStartText.TextChanged += TextBoxNoSpace_TextChanged;
+      IdentityIncrementText.KeyPress += TextBoxNumeric_KeyPress;
+      IdentityIncrementText.KeyPress += TextBoxNoSpace_KeyPress;
+      IdentityIncrementText.TextChanged += TextBoxNoSpace_TextChanged;
     }
     #endregion
 
@@ -323,6 +349,12 @@ namespace LJCDataUtility
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
         textBox.SelectionStart = prevStart;
       }
+    }
+
+    // Only allows numbers or edit keys.
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
     }
     #endregion
 

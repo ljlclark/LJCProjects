@@ -258,6 +258,12 @@ namespace LJCDataUtility
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
       NameText.TextChanged += TextBoxNoSpace_TextChanged;
+      SourceColumnText.KeyPress += TextBoxNoSpace_KeyPress;
+      SourceColumnText.TextChanged += TextBoxNoSpace_TextChanged;
+      TargetTableText.KeyPress += TextBoxNoSpace_KeyPress;
+      TargetTableText.TextChanged += TextBoxNoSpace_TextChanged;
+      TargetColumnText.KeyPress += TextBoxNoSpace_KeyPress;
+      TargetColumnText.TextChanged += TextBoxNoSpace_TextChanged;
     }
     #endregion
 
@@ -295,7 +301,6 @@ namespace LJCDataUtility
     // Sets the default values base on the selected KeyType.
     private void SetKeyTypeValues()
     {
-      var sourceColumnText = SourceColumnText.Text.Trim();
       var keyType = KeyTypeCombo.Text.Trim();
       switch (keyType)
       {

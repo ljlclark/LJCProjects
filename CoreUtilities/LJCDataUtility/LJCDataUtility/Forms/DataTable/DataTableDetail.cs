@@ -234,7 +234,10 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
+      SetNumericOnly();
+      NameText.MaxLength = DataUtilColumn.LengthName;
       DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
+      NewNameText.MaxLength = DataUtilColumn.LengthName;
 
       Cursor = Cursors.Default;
     }
@@ -244,7 +247,16 @@ namespace LJCDataUtility
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
       NameText.TextChanged += TextBoxNoSpace_TextChanged;
+      NewNameText.KeyPress += TextBoxNoSpace_KeyPress;
       NewNameText.TextChanged += TextBoxNoSpace_TextChanged;
+    }
+
+    // Sets the Numeric events.
+    private void SetNumericOnly()
+    {
+      SequenceText.KeyPress += TextBoxNumeric_KeyPress;
+      SequenceText.KeyPress += TextBoxNoSpace_KeyPress;
+      SequenceText.TextChanged += TextBoxNoSpace_TextChanged;
     }
     #endregion
 
@@ -265,6 +277,12 @@ namespace LJCDataUtility
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
         textBox.SelectionStart = prevStart;
       }
+    }
+
+    // Only allows numbers or edit keys.
+    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
     }
     #endregion
 
