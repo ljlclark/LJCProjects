@@ -358,11 +358,20 @@ namespace LJCDataUtilityDAL
     /// <summary>The Description maximum length.</summary>
     public static int LengthDescription = 80;
 
-    /// <summary>The TypeName maximum length.</summary>
-    public static int LengthTypeName = 20;
+    /// <summary>The Sequence maximum length.</summary>
+    public static int LengthSequence = 3;
 
-    /// <summary>The Name maximum length.</summary>
-    public static int LengthNewName = 60;
+    /// <summary>The IdentityStart maximum length.</summary>
+    public static int LengthIdentityStart = 3;
+
+    /// <summary>The IdentityIncrement maximum length.</summary>
+    public static int LengthIdentityIncrement = 3;
+
+    /// <summary>The MaxLength maximum length.</summary>
+    public static int LengthMaxLength = 3;
+
+    /// <summary>The MaxLength maximum length.</summary>
+    public static int LengthDefaualtValue = 30;
     #endregion
   }
 

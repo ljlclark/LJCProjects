@@ -172,7 +172,7 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Margin = new System.Windows.Forms.Padding(4);
       this.Name = "DataTableDetail";
-      this.Text = "DadtaTable Detail";
+      this.Text = "DataTable Detail";
       this.Load += new System.EventHandler(this.DataTableDetail_Load);
       this.ResumeLayout(false);
       this.PerformLayout();

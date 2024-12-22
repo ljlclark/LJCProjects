@@ -264,7 +264,12 @@ namespace LJCDataUtility
       NameText.MaxLength = DataUtilColumn.LengthName;
       NewNameText.MaxLength = DataUtilColumn.LengthName;
       DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
-      //DefaultText.MaxLength = DataUtilColumn.LengthDefault;
+      SequenceText.MaxLength = DataUtilColumn.LengthSequence;
+      MaxLengthText.MaxLength = DataUtilColumn.LengthMaxLength;
+      NewMaxLengthText.MaxLength = DataUtilColumn.LengthMaxLength;
+      DefaultText.MaxLength = DataUtilColumn.LengthDefaualtValue;
+      IdentityStartText.MaxLength = DataUtilColumn.LengthIdentityStart;
+      IdentityIncrementText.MaxLength = DataUtilColumn.LengthIdentityIncrement;
 
       // Load control data.
       LoadTypeCombo();
@@ -365,13 +370,13 @@ namespace LJCDataUtility
     {
       IdentityStartText.Enabled = enable;
       IdentityIncrementText.Enabled = enable;
-      AllowNullCheck.Enabled = true;
+      AllowNullCheck.Enabled = false;
       if (false == IdentityStartText.Enabled
         || false == IdentityIncrementText.Enabled)
       {
         IdentityStartText.Text = "-1";
         IdentityIncrementText.Text = "-1";
-        AllowNullCheck.Enabled = false;
+        AllowNullCheck.Enabled = true;
       }
     }
     #endregion

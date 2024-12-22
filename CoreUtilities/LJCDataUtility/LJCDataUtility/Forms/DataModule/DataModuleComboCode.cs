@@ -6,6 +6,7 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static LJCDataUtility.DataUtilityList;
 
@@ -53,6 +54,11 @@ namespace LJCDataUtility
       Parent.Cursor = Cursors.WaitCursor;
       ModuleCombo.Items.Clear();
 
+      var orderByNames = new List<string>()
+      {
+        "Name"
+      };
+      ModuleManager.Manager.OrderByNames = orderByNames;
       var dataItems = ModuleManager.Load();
       if (NetCommon.HasItems(dataItems))
       {

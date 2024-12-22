@@ -219,6 +219,7 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
+      NameText.MaxLength = DataModule.LengthName;
       DescriptionText.MaxLength = DataModule.LengthDescription;
 
       Cursor = Cursors.Default;

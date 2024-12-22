@@ -235,9 +235,10 @@ namespace LJCDataUtility
       // Set control values.
       SetNoSpace();
       SetNumericOnly();
-      NameText.MaxLength = DataUtilColumn.LengthName;
-      DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
-      NewNameText.MaxLength = DataUtilColumn.LengthName;
+      NameText.MaxLength = DataUtilTable.LengthName;
+      DescriptionText.MaxLength = DataUtilTable.LengthDescription;
+      SequenceText.MaxLength = DataUtilTable.LengthSequence;
+      NewNameText.MaxLength = DataUtilTable.LengthName;
 
       Cursor = Cursors.Default;
     }

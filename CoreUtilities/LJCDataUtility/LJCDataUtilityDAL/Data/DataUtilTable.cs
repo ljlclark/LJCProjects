@@ -217,6 +217,9 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthDescription = 80;
+
+    /// <summary>The Description maximum length.</summary>
+    public static int LengthSequence = 3;
     #endregion
   }
 
