@@ -39,7 +39,7 @@
       this.SourceColumnLabel = new System.Windows.Forms.Label();
       this.ParentNameText = new System.Windows.Forms.TextBox();
       this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.KeyTypeText = new LJCWinFormControls.LJCItemCombo();
+      this.KeyTypeCombo = new LJCWinFormControls.LJCItemCombo();
       this.KeyTypeLabel = new System.Windows.Forms.Label();
       this.NameText = new System.Windows.Forms.TextBox();
       this.NameLabel = new System.Windows.Forms.Label();
@@ -149,13 +149,14 @@
       this.ParentNameLabel.TabIndex = 0;
       this.ParentNameLabel.Text = "Data Table";
       // 
-      // KeyTypeText
+      // KeyTypeCombo
       // 
-      this.KeyTypeText.Location = new System.Drawing.Point(254, 116);
-      this.KeyTypeText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.KeyTypeText.Name = "KeyTypeText";
-      this.KeyTypeText.Size = new System.Drawing.Size(200, 34);
-      this.KeyTypeText.TabIndex = 5;
+      this.KeyTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.KeyTypeCombo.Location = new System.Drawing.Point(254, 116);
+      this.KeyTypeCombo.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+      this.KeyTypeCombo.Name = "KeyTypeCombo";
+      this.KeyTypeCombo.Size = new System.Drawing.Size(200, 34);
+      this.KeyTypeCombo.TabIndex = 5;
       // 
       // KeyTypeLabel
       // 
@@ -209,7 +210,7 @@
       this.Controls.Add(this.SourceColumnLabel);
       this.Controls.Add(this.ParentNameText);
       this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.KeyTypeText);
+      this.Controls.Add(this.KeyTypeCombo);
       this.Controls.Add(this.KeyTypeLabel);
       this.Controls.Add(this.NameText);
       this.Controls.Add(this.NameLabel);
@@ -241,7 +242,7 @@
     private System.Windows.Forms.Label SourceColumnLabel;
     private System.Windows.Forms.TextBox ParentNameText;
     private System.Windows.Forms.Label ParentNameLabel;
-    private LJCWinFormControls.LJCItemCombo KeyTypeText;
+    private LJCWinFormControls.LJCItemCombo KeyTypeCombo;
     private System.Windows.Forms.Label KeyTypeLabel;
     private System.Windows.Forms.TextBox NameText;
     private System.Windows.Forms.Label NameLabel;

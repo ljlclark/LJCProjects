@@ -200,6 +200,7 @@
       // 
       // TypeNameCombo
       // 
+      this.TypeNameCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.TypeNameCombo.Location = new System.Drawing.Point(254, 257);
       this.TypeNameCombo.Margin = new System.Windows.Forms.Padding(6);
       this.TypeNameCombo.Name = "TypeNameCombo";

@@ -11,6 +11,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static LJCDataUtility.DataKeyGridCode;
+using System.Xml.Linq;
 
 namespace LJCDataUtility
 {
@@ -32,6 +34,10 @@ namespace LJCDataUtility
       LJCRecord = null;
 
       _ = new ControlFont(this);
+
+      NameText.Leave += NameText_Leave;
+      KeyTypeCombo.SelectedIndexChanged += KeyTypeCombo_SelectedIndexChanged;
+      SourceColumnText.Leave += SourceColumnText_Leave;
     }
     #endregion
 
@@ -83,7 +89,7 @@ namespace LJCDataUtility
         // In control order.
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
-        KeyTypeText.LJCSetByItemID(data.KeyType);
+        KeyTypeCombo.LJCSetByItemID(data.KeyType);
         SourceColumnText.Text = data.SourceColumnName;
         TargetTableText.Text = data.TargetTableName;
         TargetColumnText.Text = data.TargetColumnName;
@@ -102,7 +108,7 @@ namespace LJCDataUtility
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
-      retData.KeyType = (short)KeyTypeText.LJCSelectedItemID();
+      retData.KeyType = (short)KeyTypeCombo.LJCSelectedItemID();
       retData.SourceColumnName
         = FormCommon.SetString(SourceColumnText.Text);
       retData.TargetTableName
@@ -239,11 +245,10 @@ namespace LJCDataUtility
       TargetColumnText.MaxLength = DataKey.LengthTargetColumnName;
 
       // Load control data.
-      KeyTypeText.LJCAddItem(1, "Primary");
-      KeyTypeText.LJCAddItem(2, "Unique");
-      KeyTypeText.LJCAddItem(3, "Foreign");
-      KeyTypeText.LJCAddItem(4, "Table");
-      KeyTypeText.LJCSetByItemID(1);
+      KeyTypeCombo.LJCAddItem(1, "Primary");
+      KeyTypeCombo.LJCAddItem(2, "Unique");
+      KeyTypeCombo.LJCAddItem(3, "Foreign");
+      KeyTypeCombo.LJCAddItem(4, "Table");
 
       Cursor = Cursors.Default;
     }
@@ -276,6 +281,48 @@ namespace LJCDataUtility
     }
     #endregion
 
+    #region Control Event Methods
+
+    // Sets the Clustered and Ascending check boxes.
+    private void ClusteredChecked(bool enable)
+    {
+      ClusteredCheck.Checked = enable;
+      AscendingCheck.Checked = enable;
+      ClusteredCheck.Enabled = enable;
+      AscendingCheck.Enabled = enable;
+    }
+
+    // Sets the default values base on the selected KeyType.
+    private void SetKeyTypeValues()
+    {
+      var sourceColumnText = SourceColumnText.Text.Trim();
+      var keyType = KeyTypeCombo.Text.Trim();
+      switch (keyType)
+      {
+        case "Primary":
+          SourceColumnText.Text = "ID";
+          TargetTableText.Text = "";
+          TargetColumnText.Text = "";
+          ClusteredChecked(true);
+          break;
+
+        case "Foreign":
+          SourceColumnText.Text = "ReferencingID";
+          TargetTableText.Text = "Referencing";
+          TargetColumnText.Text = "ID";
+          ClusteredChecked(false);
+          break;
+
+        case "Unique":
+          SourceColumnText.Text = "Name";
+          TargetTableText.Text = "";
+          TargetColumnText.Text = "";
+          ClusteredChecked(false);
+          break;
+      }
+    }
+    #endregion
+
     #region Control Event Handlers
 
     // Fires the Change event.
@@ -292,6 +339,58 @@ namespace LJCDataUtility
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+      }
+    }
+
+    // Handles the KeyTypeCombo IndexChanged event.
+    private void KeyTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      SetKeyTypeValues();
+    }
+
+    // Handles the NameText Leave event.
+    private void NameText_Leave(object sender, EventArgs e)
+    {
+      int index;
+      var name = NameText.Text;
+      if (name.ToLower().StartsWith("pk"))
+      {
+        index = KeyTypeCombo.FindString("Primary");
+        KeyTypeCombo.SelectedIndex = index;
+      }
+      if (name.ToLower().StartsWith("fk"))
+      {
+        index = KeyTypeCombo.FindString("Foreign");
+        KeyTypeCombo.SelectedIndex = index;
+      }
+      if (name.ToLower().StartsWith("uq"))
+      {
+        index = KeyTypeCombo.FindString("Unique");
+        KeyTypeCombo.SelectedIndex = index;
+      }
+    }
+
+    // Handles the SourceColumnText Leave event.
+    private void SourceColumnText_Leave(object sender, EventArgs e)
+    {
+      var keyType = KeyTypeCombo.Text.Trim();
+      switch (keyType)
+      {
+        case "Foreign":
+          TargetTableText.Text = "";
+          TargetColumnText.Text = "";
+
+          var sourceColumnText = SourceColumnText.Text.Trim();
+          if (!NetString.HasValue(TargetTableText.Text)
+            && sourceColumnText.ToLower() != "id"
+            && sourceColumnText.EndsWith("ID"))
+          {
+            var length = sourceColumnText.Length - 2;
+            TargetTableText.Text = sourceColumnText.Substring(0, length);
+            TargetColumnText.Text = "ID";
+          }
+          ClusteredChecked(false);
+          break;
       }
     }
     #endregion

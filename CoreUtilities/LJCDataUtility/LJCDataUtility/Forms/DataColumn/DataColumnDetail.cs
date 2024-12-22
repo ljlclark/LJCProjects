@@ -35,6 +35,10 @@ namespace LJCDataUtility
       _ = new ControlFont(this);
 
       NameText.Leave += NameText_Leave;
+
+      //TypeNameCombo.Leave += TypeNameCombo_Leave;
+      TypeNameCombo.SelectedIndexChanged += TypeNameCombo_SelectedIndexChanged;
+      IdentityStartText.TextChanged += IdentityStartText_TextChanged;
     }
     #endregion
 
@@ -100,8 +104,8 @@ namespace LJCDataUtility
         DescriptionText.Text = data.Description;
         SequenceText.Text
           = FormCommon.DefaultMinusOne((object)data.Sequence);
-        int typeID = TypeNameCombo.FindString(data.TypeName);
-        TypeNameCombo.LJCSetByItemID(typeID + 1);
+        int index = TypeNameCombo.FindString(data.TypeName);
+        TypeNameCombo.SelectedIndex = index;
         MaxLengthText.Text
           = FormCommon.DefaultMinusOne((object)data.MaxLength);
         NewMaxLengthText.Text
@@ -260,13 +264,17 @@ namespace LJCDataUtility
 
       // Load control data.
       LoadTypeCombo();
-      TypeNameCombo.LJCSetByItemID(1);
+      //TypeNameCombo.SelectedIndex = 0;
 
       Cursor = Cursors.Default;
     }
 
+    // Loads the TypeName combo.
     private void LoadTypeCombo()
     {
+      TypeNameCombo.LJCAddItem(15, "nvarchar");
+      TypeNameCombo.LJCAddItem(11, "int");
+      TypeNameCombo.LJCAddItem(18, "smallint");
       TypeNameCombo.LJCAddItem(1, "bigint");
       TypeNameCombo.LJCAddItem(2, "binary");
       TypeNameCombo.LJCAddItem(3, "bit");
@@ -277,14 +285,11 @@ namespace LJCDataUtility
       TypeNameCombo.LJCAddItem(8, "datetimeoffset");
       TypeNameCombo.LJCAddItem(9, "decimal");
       TypeNameCombo.LJCAddItem(10, "float");
-      TypeNameCombo.LJCAddItem(11, "int");
       TypeNameCombo.LJCAddItem(12, "money");
       TypeNameCombo.LJCAddItem(13, "nchar");
       TypeNameCombo.LJCAddItem(14, "ntext");
-      TypeNameCombo.LJCAddItem(15, "nvarchar");
       TypeNameCombo.LJCAddItem(16, "real");
       TypeNameCombo.LJCAddItem(17, "smalldatetime");
-      TypeNameCombo.LJCAddItem(18, "smallint");
       TypeNameCombo.LJCAddItem(19, "smallmoney");
       TypeNameCombo.LJCAddItem(20, "text");
       TypeNameCombo.LJCAddItem(21, "time");
@@ -321,6 +326,24 @@ namespace LJCDataUtility
     }
     #endregion
 
+    #region Control Event Methods
+
+    // Sets the Identity control default values.
+    private void IdentityEnable(bool enable)
+    {
+      IdentityStartText.Enabled = enable;
+      IdentityIncrementText.Enabled = enable;
+      AllowNullCheck.Enabled = true;
+      if (false == IdentityStartText.Enabled
+        || false == IdentityIncrementText.Enabled)
+      {
+        IdentityStartText.Text = "-1";
+        IdentityIncrementText.Text = "-1";
+        AllowNullCheck.Enabled = false;
+      }
+    }
+    #endregion
+
     #region Control Event Handlers
 
     // Fires the Change event.
@@ -330,12 +353,48 @@ namespace LJCDataUtility
       LJCChange?.Invoke(this, new EventArgs());
     }
 
-    // Handles the Leave event.
+    // Handles the NameText Leave event.
     private void NameText_Leave(object sender, EventArgs e)
     {
+      // Make sure the SelectedIndexChanged fires.
+      TypeNameCombo.SelectedIndex = -1;
+
+      // Set missing description the same as column name.
+      var columnName = NameText.Text.Trim();
       if (!NetString.HasValue(DescriptionText.Text))
       {
-        DescriptionText.Text = NameText.Text;
+        DescriptionText.Text = columnName;
+      }
+
+      // Set TypeName = "bigint" and Identity values.
+      if ("ID" == columnName)
+      {
+        var index = TypeNameCombo.FindString("bigint");
+        TypeNameCombo.SelectedIndex = index;
+        IdentityEnable(true);
+        IdentityStartText.Text = "1";
+        IdentityIncrementText.Text = "1";
+      }
+
+      // Set TypeName = "bigint".
+      if (columnName.Length > 2
+        && columnName.EndsWith("ID"))
+      {
+        var index = TypeNameCombo.FindString("bigint");
+        TypeNameCombo.SelectedIndex = index;
+        IdentityEnable(false);
+      }
+
+      if ("Name" == columnName)
+      {
+        var index = TypeNameCombo.FindString("nvarchar");
+        TypeNameCombo.SelectedIndex = index;
+      }
+
+      if ("Description" == columnName)
+      {
+        var index = TypeNameCombo.FindString("nvarchar");
+        TypeNameCombo.SelectedIndex = index;
       }
     }
 
@@ -346,6 +405,63 @@ namespace LJCDataUtility
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
+      }
+    }
+
+    private void IdentityStartText_TextChanged(object sender, EventArgs e)
+    {
+      var identityStart = IdentityStartText.Text.Trim();
+      if (identityStart.StartsWith("-"))
+      {
+        IdentityEnable(false);
+        AllowNullCheck.Checked = false;
+        AllowNullCheck.Enabled = true;
+      }
+      else
+      {
+        IdentityEnable(true);
+        IdentityIncrementText.Text = "1";
+        AllowNullCheck.Checked = false;
+        AllowNullCheck.Enabled = false;
+      }
+    }
+
+    private void TypeNameCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      // Set MaxLength.
+      var columnName = NameText.Text.Trim();
+      var typeName = TypeNameCombo.Text.Trim();
+      if ("char" == typeName
+        || "nchar" == typeName
+        || "nvarchar" == typeName
+        || "varchar" == typeName)
+      {
+        IdentityEnable(false);
+        var maxLength = MaxLengthText.Text.Trim();
+        if ("-1" == maxLength
+          || !NetString.HasValue(maxLength))
+        {
+          switch (columnName)
+          {
+            case "Name":
+              MaxLengthText.Text = "60";
+              AllowNullCheck.Checked = false;
+              break;
+
+            case "Description":
+              MaxLengthText.Text = "80";
+              AllowNullCheck.Checked = true;
+              break;
+
+            default:
+              MaxLengthText.Text = "40";
+              break;
+          }
+        }
+      }
+      else
+      {
+        MaxLengthText.Text = "-1";
       }
     }
     #endregion
