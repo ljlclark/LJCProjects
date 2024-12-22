@@ -258,8 +258,8 @@ namespace LJCDataUtility
     {
       NameText.KeyPress += TextBoxNoSpace_KeyPress;
       NameText.TextChanged += TextBoxNoSpace_TextChanged;
-      SourceColumnText.KeyPress += TextBoxNoSpace_KeyPress;
-      SourceColumnText.TextChanged += TextBoxNoSpace_TextChanged;
+      //SourceColumnText.KeyPress += TextBoxNoSpace_KeyPress;
+      //SourceColumnText.TextChanged += TextBoxNoSpace_TextChanged;
       TargetTableText.KeyPress += TextBoxNoSpace_KeyPress;
       TargetTableText.TextChanged += TextBoxNoSpace_TextChanged;
       TargetColumnText.KeyPress += TextBoxNoSpace_KeyPress;
@@ -368,7 +368,8 @@ namespace LJCDataUtility
         index = KeyTypeCombo.FindString("Foreign");
         KeyTypeCombo.SelectedIndex = index;
       }
-      if (name.ToLower().StartsWith("uq"))
+      if (name.ToLower().StartsWith("uq")
+        || name.ToLower().StartsWith("uk"))
       {
         index = KeyTypeCombo.FindString("Unique");
         KeyTypeCombo.SelectedIndex = index;

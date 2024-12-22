@@ -379,6 +379,13 @@ namespace LJCDataUtility
         AllowNullCheck.Enabled = true;
       }
     }
+
+    // Set the combo index by a text value.
+    private void SetComboIndex(string text)
+    {
+      var index = TypeNameCombo.FindString(text);
+      TypeNameCombo.SelectedIndex = index;
+    }
     #endregion
 
     #region Control Event Handlers
@@ -402,13 +409,14 @@ namespace LJCDataUtility
       {
         DescriptionText.Text = columnName;
       }
+      var isTypeSet = false;
 
       // Set TypeName = "bigint" and Identity values.
       if ("ID" == columnName)
       {
-        var index = TypeNameCombo.FindString("bigint");
-        TypeNameCombo.SelectedIndex = index;
-        IdentityEnable(true);
+        isTypeSet = true;
+        SetComboIndex("bigint");
+        //IdentityEnable(true);
         IdentityStartText.Text = "1";
         IdentityIncrementText.Text = "1";
       }
@@ -417,21 +425,14 @@ namespace LJCDataUtility
       if (columnName.Length > 2
         && columnName.EndsWith("ID"))
       {
-        var index = TypeNameCombo.FindString("bigint");
-        TypeNameCombo.SelectedIndex = index;
+        isTypeSet = true;
+        SetComboIndex("bigint");
         IdentityEnable(false);
       }
 
-      if ("Name" == columnName)
+      if (!isTypeSet)
       {
-        var index = TypeNameCombo.FindString("nvarchar");
-        TypeNameCombo.SelectedIndex = index;
-      }
-
-      if ("Description" == columnName)
-      {
-        var index = TypeNameCombo.FindString("nvarchar");
-        TypeNameCombo.SelectedIndex = index;
+        SetComboIndex("varchar");
       }
     }
 
@@ -491,7 +492,7 @@ namespace LJCDataUtility
               break;
 
             default:
-              MaxLengthText.Text = "40";
+              MaxLengthText.Text = "60";
               break;
           }
         }
