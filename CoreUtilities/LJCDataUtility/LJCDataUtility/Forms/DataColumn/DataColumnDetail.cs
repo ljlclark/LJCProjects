@@ -368,8 +368,8 @@ namespace LJCDataUtility
     // Sets the Identity control default values.
     private void IdentityEnable(bool enable)
     {
-      IdentityStartText.Enabled = enable;
-      IdentityIncrementText.Enabled = enable;
+      //IdentityStartText.Enabled = enable;
+      //IdentityIncrementText.Enabled = enable;
       AllowNullCheck.Enabled = false;
       if (false == IdentityStartText.Enabled
         || false == IdentityIncrementText.Enabled)
