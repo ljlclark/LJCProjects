@@ -93,6 +93,14 @@
   </UpdateError>
 
   <!-- Field Key Handler Functions -->
+  <HandleNumber>
+    <summary>
+      Checks the key character for a numeric or allowed control value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="keyChar">The key character.</param>
+    <returns>true if number or control key; otherwise, false.</returns>
+  </HandleNumber>
   <HandleNumberOrEditKey>
     <summary>
       Checks the key character for a numeric or allowed control value.

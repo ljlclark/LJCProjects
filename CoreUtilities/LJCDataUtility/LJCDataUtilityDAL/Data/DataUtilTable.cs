@@ -30,6 +30,7 @@ namespace LJCDataUtilityDAL
       DataModuleID = item.DataModuleID;
       Name = item.Name;
       Description = item.Description;
+      SchemaName = item.SchemaName;
       NewName = item.NewName;
     }
     #endregion
@@ -157,6 +158,19 @@ namespace LJCDataUtilityDAL
     }
     private Int32 mSequence;
 
+    /// <summary>Gets or sets the SchemaName value.</summary>
+    //[Column("SchemaName", TypeName="nvarchar(30")]
+    public String SchemaName
+    {
+      get { return mSchemaName; }
+      set
+      {
+        value = NetString.InitString(value);
+        mSchemaName = ChangedNames.Add(ColumnSchemaName, mSchemaName, value);
+      }
+    }
+    private String mSchemaName;
+
     /// <summary>Gets or sets the NewName value.</summary>
     //[Column("NewName", TypeName="nvarchar(60")]
     public String NewName
@@ -183,12 +197,6 @@ namespace LJCDataUtilityDAL
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
-    #region Calculated and Join Class Data
-
-    /// <summary>The Join ModuleName column name.</summary>
-    public static string ColumnModuleName = "ModuleName";
-    #endregion
-
     #region Class Data
 
     /// <summary>The table name.</summary>
@@ -206,6 +214,9 @@ namespace LJCDataUtilityDAL
     /// <summary>The Description column name.</summary>
     public static string ColumnDescription = "Description";
 
+    /// <summary>The SchemaName column name.</summary>
+    public static string ColumnSchemaName = "SchemaName";
+
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
 
@@ -220,6 +231,12 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthSequence = 3;
+    #endregion
+
+    #region Calculated and Join Class Data
+
+    /// <summary>The Join ModuleName column name.</summary>
+    public static string ColumnModuleName = "ModuleName";
     #endregion
   }
 

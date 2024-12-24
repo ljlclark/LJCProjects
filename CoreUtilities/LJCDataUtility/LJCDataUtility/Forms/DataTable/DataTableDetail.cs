@@ -93,6 +93,7 @@ namespace LJCDataUtility
         NameText.Text = data.Name;
         DescriptionText.Text = data.Description;
         SequenceText.Text = data.Sequence.ToString();
+        SchemaText.Text = data.SchemaName;
         NewNameText.Text = data.NewName;
 
         // Reference key values.
@@ -110,6 +111,7 @@ namespace LJCDataUtility
       retData.Description
         = FormCommon.SetString(DescriptionText.Text);
       retData.Sequence = NetCommon.ToInt32(SequenceText.Text);
+      retData.SchemaName = SchemaText.Text;
       retData.NewName
         = FormCommon.SetString(NewNameText.Text);
 
@@ -256,8 +258,7 @@ namespace LJCDataUtility
     private void SetNumericOnly()
     {
       SequenceText.KeyPress += TextBoxNumeric_KeyPress;
-      SequenceText.KeyPress += TextBoxNoSpace_KeyPress;
-      SequenceText.TextChanged += TextBoxNoSpace_TextChanged;
+      SequenceText.TextChanged += TextBoxNumeric_TextChanged;
     }
     #endregion
 
@@ -274,16 +275,34 @@ namespace LJCDataUtility
     {
       if (sender is TextBox textBox)
       {
-        var prevStart = textBox.SelectionStart;
+        var saveStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = prevStart;
+        textBox.SelectionStart = saveStart;
       }
     }
 
     // Only allows numbers or edit keys.
     private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+      mPrevText = "";
+      if (sender is TextBox textBox)
+      {
+        mPrevText = textBox.Text;
+        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
+      }
+    }
+    private string mPrevText;
+
+    // Resets text to previous value if not a number.
+    private void TextBoxNumeric_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        if (!FormCommon.IsNumber(textBox.Text))
+        {
+          textBox.Text = mPrevText;
+        }
+      }
     }
     #endregion
 

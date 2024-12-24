@@ -297,35 +297,95 @@ namespace LJCWinFormCommon
 
     #region Field Key Handler Functions
 
+    // Checks the string for a allowed numeric values.
+    /// <summary>
+    /// Checks the string for a allowed numeric values.
+    /// </summary>
+    public static bool IsNumber(string text)
+    {
+      bool retValue = true;
+
+      foreach (char ch in text)
+      {
+        if (!char.IsDigit(ch)
+          && ch != '-'
+          && ch != '.')
+        {
+          retValue = false;
+          break;
+        }
+      }
+      return retValue;
+    }
+
+    // Checks the key character for a numeric or allowed control value.
+    /// <include path='items/HandleNumber/*' file='Doc/FormCommon.xml'/>
+    public static bool HandleNumber(string text, char keyChar)
+    {
+      // Use in KeyDown
+      //if (e.KeyData == (Keys.Control | Keys.V))
+      bool retHandled = true;
+
+      // Keys to let through.
+      const char SYN = (char)22;
+      if (SYN == keyChar)
+      {
+        retHandled = false;
+      }
+      if ('-' == keyChar
+        && !text.Contains("-"))
+      {
+        retHandled = false;
+      }
+      if ('.' == keyChar
+        && !text.Contains("."))
+      {
+        retHandled = false;
+      }
+      if (retHandled)
+      {
+        if (char.IsDigit(keyChar)
+          || (char)Keys.Back == keyChar
+          || (char)Keys.Delete == keyChar)
+        {
+          retHandled = false;
+        }
+      }
+      return retHandled;
+    }
+
     // Checks the key character for a numeric or allowed control value.
     /// <include path='items/HandleNumberOrEditKey/*' file='Doc/FormCommon.xml'/>
+    [Obsolete("Use HandleNumber(text, char) instead.")]
     public static bool HandleNumberOrEditKey(char keyChar)
     {
       // Use in KeyDown
       //if (e.KeyData == (Keys.Control | Keys.V))
-      bool retValue = true;
+      bool retHandled = true;
 
+      // Keys to let through.
       if (char.IsDigit(keyChar)
+        || '-' == keyChar
         || '.' == keyChar
         || (char)Keys.Back == keyChar
         || (char)Keys.Delete == keyChar)
       {
-        retValue = false;
+        retHandled = false;
       }
-      return retValue;
+      return retHandled;
     }
 
     // Checks the key character for a space.
     /// <include path='items/HandleSpace/*' file='Doc/FormCommon.xml'/>
     public static bool HandleSpace(char keyChar)
     {
-      bool retValue = false;
+      bool retHandled = false;
 
       if (' ' == keyChar)
       {
-        retValue = true;
+        retHandled = true;
       }
-      return retValue;
+      return retHandled;
     }
 
     // Strips blanks from the string.
@@ -341,11 +401,11 @@ namespace LJCWinFormCommon
     {
       string retValue = null;
 
-      foreach (char character in text)
+      foreach (char ch in text)
       {
-        if (!char.IsDigit(character))
+        if (!char.IsDigit(ch))
         {
-          retValue = retValue.Replace(character.ToString(), "");
+          retValue = retValue.Replace(ch.ToString(), "");
         }
       }
       return retValue;
@@ -357,7 +417,11 @@ namespace LJCWinFormCommon
     {
       if (!e.Handled)
       {
-        e.Handled = HandleNumberOrEditKey(e.KeyChar);
+        if (sender is TextBox textBox)
+        {
+          var text = textBox.Text;
+          e.Handled = HandleNumber(text, e.KeyChar);
+        }
       }
     }
 
@@ -378,9 +442,9 @@ namespace LJCWinFormCommon
       if (sender is TextBox textBox
         && textBox.Text.Contains(" "))
       {
-        int selectionStart = textBox.SelectionStart;
+        int saveStart = textBox.SelectionStart;
         textBox.Text = StripBlanks(textBox.Text);
-        textBox.SelectionStart = selectionStart;
+        textBox.SelectionStart = saveStart;
       }
     }
     #endregion

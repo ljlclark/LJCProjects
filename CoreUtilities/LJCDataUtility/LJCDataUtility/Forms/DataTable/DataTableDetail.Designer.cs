@@ -40,27 +40,29 @@
       this.NewNameLabel = new System.Windows.Forms.Label();
       this.SequenceText = new System.Windows.Forms.TextBox();
       this.SequenceLabel = new System.Windows.Forms.Label();
+      this.SchemaLabel = new System.Windows.Forms.Label();
+      this.SchemaText = new System.Windows.Forms.TextBox();
       this.SuspendLayout();
       // 
       // FormCancelButton
       // 
       this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 264);
+      this.FormCancelButton.Location = new System.Drawing.Point(578, 311);
       this.FormCancelButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.FormCancelButton.Name = "FormCancelButton";
       this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 11;
+      this.FormCancelButton.TabIndex = 13;
       this.FormCancelButton.Text = "Cancel";
       this.FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
       this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 264);
+      this.OKButton.Location = new System.Drawing.Point(387, 311);
       this.OKButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
       this.OKButton.Name = "OKButton";
       this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 10;
+      this.OKButton.TabIndex = 12;
       this.OKButton.Text = "&OK";
       this.OKButton.UseVisualStyleBackColor = true;
       this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -119,19 +121,19 @@
       // 
       // NewNameText
       // 
-      this.NewNameText.Location = new System.Drawing.Point(255, 208);
+      this.NewNameText.Location = new System.Drawing.Point(255, 255);
       this.NewNameText.Margin = new System.Windows.Forms.Padding(6);
       this.NewNameText.Name = "NewNameText";
       this.NewNameText.Size = new System.Drawing.Size(500, 32);
-      this.NewNameText.TabIndex = 9;
+      this.NewNameText.TabIndex = 11;
       // 
       // NewNameLabel
       // 
       this.NewNameLabel.AutoSize = true;
-      this.NewNameLabel.Location = new System.Drawing.Point(24, 214);
+      this.NewNameLabel.Location = new System.Drawing.Point(24, 261);
       this.NewNameLabel.Name = "NewNameLabel";
       this.NewNameLabel.Size = new System.Drawing.Size(121, 26);
-      this.NewNameLabel.TabIndex = 8;
+      this.NewNameLabel.TabIndex = 10;
       this.NewNameLabel.Text = "New Name";
       // 
       // SequenceText
@@ -151,11 +153,30 @@
       this.SequenceLabel.TabIndex = 6;
       this.SequenceLabel.Text = "Sequence";
       // 
+      // SchemaLabel
+      // 
+      this.SchemaLabel.AutoSize = true;
+      this.SchemaLabel.Location = new System.Drawing.Point(24, 214);
+      this.SchemaLabel.Name = "SchemaLabel";
+      this.SchemaLabel.Size = new System.Drawing.Size(93, 26);
+      this.SchemaLabel.TabIndex = 8;
+      this.SchemaLabel.Text = "Schema";
+      // 
+      // SchemaText
+      // 
+      this.SchemaText.Location = new System.Drawing.Point(255, 208);
+      this.SchemaText.Margin = new System.Windows.Forms.Padding(6);
+      this.SchemaText.Name = "SchemaText";
+      this.SchemaText.Size = new System.Drawing.Size(55, 32);
+      this.SchemaText.TabIndex = 9;
+      // 
       // DataTableDetail
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 324);
+      this.ClientSize = new System.Drawing.Size(778, 371);
+      this.Controls.Add(this.SchemaLabel);
+      this.Controls.Add(this.SchemaText);
       this.Controls.Add(this.SequenceLabel);
       this.Controls.Add(this.SequenceText);
       this.Controls.Add(this.NewNameText);
@@ -193,5 +214,7 @@
     private System.Windows.Forms.Label NewNameLabel;
     private System.Windows.Forms.TextBox SequenceText;
     private System.Windows.Forms.Label SequenceLabel;
+    private System.Windows.Forms.Label SchemaLabel;
+    private System.Windows.Forms.TextBox SchemaText;
   }
 }

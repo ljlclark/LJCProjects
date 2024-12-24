@@ -280,9 +280,9 @@ namespace LJCDataUtility
     {
       if (sender is TextBox textBox)
       {
-        var prevStart = textBox.SelectionStart;
+        var saveStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = prevStart;
+        textBox.SelectionStart = saveStart;
       }
     }
     #endregion

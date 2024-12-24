@@ -10,8 +10,10 @@ using LJCWinFormControls;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Security.AccessControl;
 using System.Text;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCDataUtility
 {
@@ -320,20 +322,15 @@ namespace LJCDataUtility
     private void SetNumericOnly()
     {
       SequenceText.KeyPress += TextBoxNumeric_KeyPress;
-      SequenceText.KeyPress += TextBoxNoSpace_KeyPress;
-      SequenceText.TextChanged += TextBoxNoSpace_TextChanged;
+      SequenceText.TextChanged += TextBoxNumeric_TextChanged;
       MaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
-      MaxLengthText.KeyPress += TextBoxNoSpace_KeyPress;
-      MaxLengthText.TextChanged += TextBoxNoSpace_TextChanged;
+      MaxLengthText.TextChanged += TextBoxNumeric_TextChanged;
       NewMaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
-      NewMaxLengthText.KeyPress += TextBoxNoSpace_KeyPress;
-      NewMaxLengthText.TextChanged += TextBoxNoSpace_TextChanged;
+      NewMaxLengthText.TextChanged += TextBoxNumeric_TextChanged;
       IdentityStartText.KeyPress += TextBoxNumeric_KeyPress;
-      IdentityStartText.KeyPress += TextBoxNoSpace_KeyPress;
-      IdentityStartText.TextChanged += TextBoxNoSpace_TextChanged;
+      IdentityStartText.TextChanged += TextBoxNumeric_TextChanged;
       IdentityIncrementText.KeyPress += TextBoxNumeric_KeyPress;
-      IdentityIncrementText.KeyPress += TextBoxNoSpace_KeyPress;
-      IdentityIncrementText.TextChanged += TextBoxNoSpace_TextChanged;
+      IdentityIncrementText.TextChanged += TextBoxNumeric_TextChanged;
     }
     #endregion
 
@@ -350,16 +347,34 @@ namespace LJCDataUtility
     {
       if (sender is TextBox textBox)
       {
-        var prevStart = textBox.SelectionStart;
+        var saveStart = textBox.SelectionStart;
         textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = prevStart;
+        textBox.SelectionStart = saveStart;
       }
     }
 
     // Only allows numbers or edit keys.
     private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+      mPrevText = "";
+      if (sender is TextBox textBox)
+      {
+        mPrevText = textBox.Text;
+        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
+      }
+    }
+    private string mPrevText;
+
+    // Resets text to previous value if not a number.
+    private void TextBoxNumeric_TextChanged(object sender, EventArgs e)
+    {
+      if (sender is TextBox textBox)
+      {
+        if (!FormCommon.IsNumber(textBox.Text))
+        {
+          textBox.Text = mPrevText;
+        }
+      }
     }
     #endregion
 
