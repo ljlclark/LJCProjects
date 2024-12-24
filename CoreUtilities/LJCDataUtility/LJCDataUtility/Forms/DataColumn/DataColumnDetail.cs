@@ -269,7 +269,7 @@ namespace LJCDataUtility
       SequenceText.MaxLength = DataUtilColumn.LengthSequence;
       MaxLengthText.MaxLength = DataUtilColumn.LengthMaxLength;
       NewMaxLengthText.MaxLength = DataUtilColumn.LengthMaxLength;
-      DefaultText.MaxLength = DataUtilColumn.LengthDefaualtValue;
+      DefaultText.MaxLength = DataUtilColumn.LengthDefaultValue;
       IdentityStartText.MaxLength = DataUtilColumn.LengthIdentityStart;
       IdentityIncrementText.MaxLength = DataUtilColumn.LengthIdentityIncrement;
 

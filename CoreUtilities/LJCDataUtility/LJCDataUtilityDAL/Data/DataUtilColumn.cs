@@ -371,7 +371,7 @@ namespace LJCDataUtilityDAL
     public static int LengthMaxLength = 3;
 
     /// <summary>The MaxLength maximum length.</summary>
-    public static int LengthDefaualtValue = 30;
+    public static int LengthDefaultValue = 30;
     #endregion
   }
 
