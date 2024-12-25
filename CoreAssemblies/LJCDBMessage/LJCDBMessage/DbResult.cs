@@ -291,22 +291,49 @@ namespace LJCDBMessage
     public void SetData(DataTable dataTable, DbRequest dbRequest)
     {
       // *** Next Statement *** Add 12/25/24
-      var dbColumns = TableData.GetDbColumns(dataTable.Columns);
+      //var dbColumns = TableData.GetDbColumns(dataTable.Columns);
       // *** Begin *** Change 12/25/24
-      //SetColumns(dbRequest);
-      //SetRows(dataTable, dbRequest.Columns, dbRequest.Joins);
-      SetColumns(dbColumns);
-      SetRows(dataTable, dbColumns, dbRequest.Joins);
+      ////SetColumns(dbRequest);
+      ////SetRows(dataTable, dbRequest.Columns, dbRequest.Joins);
+      //SetColumns(dbColumns);
+      //SetRows(dataTable, dbColumns, dbRequest.Joins);
+      SetRows(dataTable, dbRequest.Joins);
       // *** End   *** Change 12/25/24
     }
 
-    // Sets the result records from the DataTable, principle values and join values.
+    // Sets the result records from the DataTable, principle values
+    // and join values.
     /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
+    public void SetRows(DataTable dataTable, DbJoins dbJoins = null)
+    {
+      if (NetCommon.HasData(dataTable))
+      {
+        // *** Next Statement *** Add 12/25/24
+        var dataColumns = TableData.GetDbColumns(dataTable.Columns);
+        foreach (DataRow dataRow in dataTable.Rows)
+        {
+          DbValues dataValues = GetRowValues(dataColumns, dataRow);
+          AddJoinRowValues(dataValues, dataRow, dbJoins);
+          DbRow row = new DbRow()
+          {
+            Values = dataValues
+          };
+          Rows.Add(row);
+        }
+      }
+    }
+
+    // Sets the result records from the DataTable, principle values
+    // and join values.
+    /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
+    [Obsolete("Use SetRows(DataTable, DbJoins")]
     public void SetRows(DataTable dataTable
       , DbColumns dataColumns, DbJoins dbJoins = null)
     {
       if (NetCommon.HasData(dataTable))
       {
+        // *** Next Statement *** Add 12/25/24
+        dataColumns = TableData.GetDbColumns(dataTable.Columns);
         foreach (DataRow dataRow in dataTable.Rows)
         {
           DbValues dataValues = GetRowValues(dataColumns, dataRow);

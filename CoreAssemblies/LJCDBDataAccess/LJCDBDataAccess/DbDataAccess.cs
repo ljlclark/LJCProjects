@@ -307,7 +307,8 @@ namespace LJCDBDataAccess
         {
           dbRequest.Columns.Add("TABLE_NAME");
         }
-        retValue.SetRows(dataTable, DbRequest.Columns, DbRequest.Joins);
+        //retValue.SetRows(dataTable, DbRequest.Columns, DbRequest.Joins);
+        retValue.SetRows(dataTable, DbRequest.Joins);
       }
       return retValue;
     }
