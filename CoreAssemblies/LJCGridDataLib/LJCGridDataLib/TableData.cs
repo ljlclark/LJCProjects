@@ -194,7 +194,7 @@ namespace LJCGridDataLib
     {
       bool retValue = false;
 
-      if (HasColumns(dataColumns))
+      if (NetCommon.HasColumns(dataColumns))
       {
         retValue = true;
       }

@@ -582,14 +582,17 @@ namespace CVRManager
 		// Only allows numbers or edit keys.
 		private void TemperatureText_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
-		}
-		#endregion
+      if (sender is TextBox textBox)
+      {
+        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
+      }
+    }
+    #endregion
 
-		#region Properties
+    #region Properties
 
-		// Gets or sets the primary ID value.
-		internal long LJCID { get; set; }
+    // Gets or sets the primary ID value.
+    internal long LJCID { get; set; }
 
 		// Gets or sets the Parent ID value.
 		internal int LJCParentID { get; set; }

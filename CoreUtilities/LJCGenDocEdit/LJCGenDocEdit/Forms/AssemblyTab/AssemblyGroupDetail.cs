@@ -420,7 +420,10 @@ namespace LJCGenDocEdit
     // Only allows numbers or edit keys.
     private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
     {
-      e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
+      if (sender is TextBox textBox)
+      {
+        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
+      }
     }
     #endregion
 

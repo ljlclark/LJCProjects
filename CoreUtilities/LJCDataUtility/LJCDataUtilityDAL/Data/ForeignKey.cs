@@ -206,15 +206,15 @@ namespace LJCDataUtilityDAL
     private String mTargetColumn;
 
     /// <summary>Gets or sets the OrdinalPosition value.</summary>
-    public String OrdinalPosition
+    public Int32 OrdinalPosition
     {
       get { return mOrdinalPosition; }
       set
       {
-        mOrdinalPosition = NetString.InitString(value);
+        mOrdinalPosition = value;
       }
     }
-    private String mOrdinalPosition;
+    private Int32 mOrdinalPosition;
     #endregion
 
     #region Class Data

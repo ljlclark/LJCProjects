@@ -1,12 +1,15 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ForeignKeys.cs
+using LJCDataAccess;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
+using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {
@@ -34,41 +37,64 @@ namespace LJCDataUtilityDAL
     {
       ForeignKeys retValue;
 
-      var loadStatement = SQLStatement(Manager.TableName);
-      var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL
-        , loadStatement);
+      //var sql = CreateProcedure(Manager.TableName);
+      //var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+
+      var parms = new ProcedureParameters();
+      var parm = new ProcedureParameter
+      {
+        ParameterName = "@TableName",
+        SqlDbType = SqlDbType.NVarChar,
+        Size = 20,
+        Value = Manager.TableName
+      };
+      parms.Add(parm);
+
+      var headSql = "USE[LJCDataUtility] \r\n";
+      headSql += "SET ANSI_NULLS ON \r\n";
+      headSql += "SET QUOTED_IDENTIFIER ON \r\n";
+      var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
+
+      var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
       retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
     // Gets the SQL Retrieve statement.
-    private string SQLStatement(string tableName)
+    private string CreateProcedure(string tableName)
     {
       StringBuilder b = new StringBuilder(256);
+      b.AppendLine("IF OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')");
+      b.AppendLine(" IS NULL");
+      b.AppendLine("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
+      b.AppendLine("  @TableName nvarchar(20)");
+      b.AppendLine("AS");
+      b.AppendLine("BEGIN");
       b.AppendLine("SELECT");
-      b.AppendLine(" [Constraint_Column_Usage].[TABLE_CATALOG] as DBName");
-      b.AppendLine(" , [Constraint_Column_Usage].[TABLE_SCHEMA] as TableSchema");
-      b.AppendLine(" , [Constraint_Column_Usage].[TABLE_NAME] as TableName");
-      b.AppendLine(" , [Constraint_Column_Usage].[COLUMN_NAME] as ColumnName");
-      b.AppendLine(" , [Constraint_Column_Usage].[CONSTRAINT_CATALOG] as ConstraintDBName");
-      b.AppendLine(" , [Constraint_Column_Usage].[CONSTRAINT_SCHEMA] as ConstrainsSchema");
-      b.AppendLine(" , [Constraint_Column_Usage].[CONSTRAINT_NAME] as ConstraintName");
-      b.AppendLine(" , [Referential_Constraints].[unique_constraint_name] as UniqueConstraintName");
-      b.AppendLine(" , [Referential_Constraints].[update_rule] as UpdateRule");
-      b.AppendLine(" , [Referential_Constraints].[delete_rule] as DeleteRule");
-      b.AppendLine(" , [Key_Column_Usage].[table_name] as TargetTable");
-      b.AppendLine(" , [Key_Column_Usage].[column_name] as TargetColumn");
-      b.AppendLine(" , [Key_Column_Usage].[ordinal_position] as OrdinalPosition");
-      b.AppendLine("from[Information_Schema].[Constraint_Column_Usage] ");
-      b.AppendLine("left join[Information_Schema].[Referential_Constraints]");
-      b.AppendLine(" on[Constraint_Column_Usage].[constraint_name]");
-      b.AppendLine("  = [Referential_Constraints].[constraint_name] ");
-      b.AppendLine("left join[Information_Schema].[Key_Column_Usage]");
-      b.AppendLine(" on[Referential_Constraints].[unique_constraint_name]");
-      b.AppendLine("  = [Key_Column_Usage].[constraint_name] ");
-      b.AppendLine("where([Key_Column_Usage].[column_name] is not null)");
-      b.AppendLine($" and([Constraint_Column_Usage].[TABLE_NAME] = '{tableName}'");
-      b.AppendLine($"  or [Key_Column_Usage].[table_name] = '{tableName}')");
+      b.AppendLine(" ccu.[TABLE_CATALOG] as DBName, ");
+      b.AppendLine(" ccu.[TABLE_SCHEMA] as TableSchema, ");
+      b.AppendLine(" ccu.[TABLE_NAME] as TableName, ");
+      b.AppendLine(" ccu.[COLUMN_NAME] as ColumnName, ");
+      b.AppendLine(" ccu.[CONSTRAINT_CATALOG] as ConstraintDBName, ");
+      b.AppendLine(" ccu.[CONSTRAINT_SCHEMA] as ConstrainsSchema, ");
+      b.AppendLine(" ccu.[CONSTRAINT_NAME] as ConstraintName, ");
+      b.AppendLine(" rc.[unique_constraint_name] as UniqueConstraintName, ");
+      b.AppendLine(" rc.[update_rule] as UpdateRule, ");
+      b.AppendLine(" rc.[delete_rule] as DeleteRule, ");
+      b.AppendLine(" kcu.[table_name] as TargetTable, ");
+      b.AppendLine(" kcu.[column_name] as TargetColumn, ");
+      b.AppendLine(" kcu.[ordinal_position] as OrdinalPosition ");
+      b.AppendLine("from [Information_Schema].[Constraint_Column_Usage] as ccu ");
+      b.AppendLine("left join[Information_Schema].[Referential_Constraints] as rc ");
+      b.AppendLine(" on ccu.[constraint_name] ");
+      b.AppendLine("  = rc.[constraint_name] ");
+      b.AppendLine("left join[Information_Schema].[Key_Column_Usage] as kcu ");
+      b.AppendLine(" on rc.[unique_constraint_name] ");
+      b.AppendLine("  = kcu.[constraint_name] ");
+      b.AppendLine("where (kcu.[column_name] is not null ");
+      b.AppendLine($" and (ccu.[TABLE_NAME] = '{tableName}' ");
+      b.AppendLine($"  or kcu.[table_name] = '{tableName}')) ");
+      b.AppendLine("END");
       var retValue = b.ToString();
       return retValue;
     }

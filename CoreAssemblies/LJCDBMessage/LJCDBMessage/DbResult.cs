@@ -4,6 +4,7 @@
 using System;
 using System.Data;
 using System.Xml.Serialization;
+using LJCGridDataLib;
 using LJCNetCommon;
 
 namespace LJCDBMessage
@@ -289,8 +290,14 @@ namespace LJCDBMessage
     /// <include path='items/SetData/*' file='Doc/DbResult.xml'/>
     public void SetData(DataTable dataTable, DbRequest dbRequest)
     {
-      SetColumns(dbRequest);
-      SetRows(dataTable, dbRequest.Columns, dbRequest.Joins);
+      // *** Next Statement *** Add 12/25/24
+      var dbColumns = TableData.GetDbColumns(dataTable.Columns);
+      // *** Begin *** Change 12/25/24
+      //SetColumns(dbRequest);
+      //SetRows(dataTable, dbRequest.Columns, dbRequest.Joins);
+      SetColumns(dbColumns);
+      SetRows(dataTable, dbColumns, dbRequest.Joins);
+      // *** End   *** Change 12/25/24
     }
 
     // Sets the result records from the DataTable, principle values and join values.

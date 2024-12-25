@@ -82,7 +82,7 @@ namespace LJCDataUtility
         };
 
         // Get the grid columns from the manager Data Definition.
-        var gridColumns = KeyManager.GetColumns(propertyNames);
+        var gridColumns = KeyManager.Columns(propertyNames);
 
         // Setup the grid columns.
         KeyGrid.LJCAddColumns(gridColumns);

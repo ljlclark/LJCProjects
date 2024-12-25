@@ -323,11 +323,14 @@ namespace LJCUnitMeasure
 		// Only allows numbers or edit keys.
 		private void SequenceText_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			e.Handled = FormCommon.HandleNumberOrEditKey(e.KeyChar);
-		}
+      if (sender is TextBox textBox)
+      {
+        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
+      }
+    }
 
-		// Does not allow spaces.
-		private void CodeTextBox_KeyPress(object sender, KeyPressEventArgs e)
+    // Does not allow spaces.
+    private void CodeTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			e.Handled = FormCommon.HandleSpace(e.KeyChar);
 		}
