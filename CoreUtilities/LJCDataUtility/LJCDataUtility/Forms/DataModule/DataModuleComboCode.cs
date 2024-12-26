@@ -70,6 +70,7 @@ namespace LJCDataUtility
         {
           ModuleCombo.SelectedIndex = 0;
         }
+        ModuleCombo.Select();
       }
       //SetControlState();
       Parent.Cursor = Cursors.Default;

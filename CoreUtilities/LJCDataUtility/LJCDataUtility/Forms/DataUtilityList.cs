@@ -54,6 +54,7 @@ namespace LJCDataUtility
           break;
 
         case Change.Module:
+          ModuleCombo.Select();
           TableGridCode.DataRetrieve();
           break;
 
