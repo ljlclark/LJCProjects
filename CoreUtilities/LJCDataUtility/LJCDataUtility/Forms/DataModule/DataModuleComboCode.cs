@@ -132,20 +132,20 @@ namespace LJCDataUtility
     // Deletes the selected row.
     internal void Delete()
     {
-      bool success = false;
+      bool isContinue = true;
       var item = ModuleCombo.SelectedItem as LJCItem;
       if (item != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
-        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-          , MessageBoxIcon.Question) == DialogResult.Yes)
+        if (DialogResult.No == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          success = true;
+          isContinue = false;
         }
       }
 
-      if (success)
+      if (isContinue)
       {
         var id = Parent.DataModuleID();
         var keyColumns = new DbColumns()
@@ -155,14 +155,14 @@ namespace LJCDataUtility
         ModuleManager.Delete(keyColumns);
         if (0 == ModuleManager.AffectedCount)
         {
-          success = false;
+          isContinue = false;
           var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
         }
       }
 
-      if (success)
+      if (isContinue)
       {
         ModuleCombo.Items.Remove(item);
         SetControlState();

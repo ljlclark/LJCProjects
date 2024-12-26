@@ -234,22 +234,22 @@ namespace _Namespace_
     // ********************
     internal void Delete()
     {
-      bool success = false;
+      bool isContinue = true;
       var row = _ClassName_Grid.CurrentRow as LJCGridRow;
       if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow
         && row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
-        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-          , MessageBoxIcon.Question) == DialogResult.Yes)
+        if (DialogResult.No == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          success = true;
+          isContinue = false;
         }
       }
 
       //int id = 0;
-      if (success)
+      if (isContinue)
       {
         // Data from items.
         var id = row.LJCGetInt32(_ClassName_.ColumnID);
@@ -261,14 +261,14 @@ namespace _Namespace_
         _ClassName_Manager.Delete(keyColumns);
         if (0 == _ClassName_Manager.AffectedCount)
         {
-          success = false;
+          isContinue = false;
           var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
         }
       }
 
-      if (success)
+      if (isContinue)
       {
         _ClassName_Grid.Rows.Remove(row);
         SetControlState();

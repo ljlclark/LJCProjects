@@ -187,20 +187,20 @@ namespace LJCDataUtility
     // Deletes the selected row.
     internal void Delete()
     {
-      bool success = false;
+      bool isContinue = true;
       var row = ColumnGrid.CurrentRow as LJCGridRow;
       if (row != null)
       {
         var title = "Delete Confirmation";
         var message = FormCommon.DeleteConfirm;
-        if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
-          , MessageBoxIcon.Question) == DialogResult.Yes)
+        if (DialogResult.No == MessageBox.Show(message, title
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
-          success = true;
+          isContinue = false;
         }
       }
 
-      if (success)
+      if (isContinue)
       {
         var id = Parent.DataColumnID();
         var keyColumns = new DbColumns()
@@ -210,14 +210,14 @@ namespace LJCDataUtility
         ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
         {
-          success = false;
+          isContinue = false;
           var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
         }
       }
 
-      if (success)
+      if (isContinue)
       {
         ColumnGrid.Rows.Remove(row);
         SetControlState();

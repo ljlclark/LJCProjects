@@ -102,15 +102,15 @@ namespace LJCDataUtility
       DataManager dataManager;
       DbResult dbResult;
 
-      bool success = true;
+      bool isContinue = true;
       string dataConfigName = ConfigNameCombo.Text;
       var dataConfig = mDataConfigs.LJCGetByName(dataConfigName);
       if (null == dataConfig)
       {
-        success = false;
+        isContinue = false;
       }
 
-      if (success)
+      if (isContinue)
       {
         dataManager = new DataManager(dataConfigName, null);
         dbResult = dataManager.GetTableNames();
