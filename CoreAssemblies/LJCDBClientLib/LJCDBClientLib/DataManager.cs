@@ -8,6 +8,8 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Security.Principal;
 
 namespace LJCDBClientLib
 {
@@ -82,6 +84,19 @@ namespace LJCDBClientLib
     #endregion
 
     #region Public Data Methods
+
+    //string sqlQuery = String.Format("Insert into Steps (ProjectID, "
+    //    + "Description, Date) Values({0}, '[New Step]', '{1}'); “
+    //    + “Select @@Identity", 
+    //    projectID, DateTime.Today.ToString("yyyy-MM-dd"));
+    //// Create and open a connection
+    //SqlConnection connection = new SqlConnection(m_ConnectionString);
+    //connection.Open();
+    //// Create a Command object
+    //SqlCommand command = new SqlCommand(sqlQuery, connection);
+    //// Execute the command
+    //int stepID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
 
     // Adds a record to the database.
     /// <include path='items/Add/*' file='Doc/DataManager.xml'/>

@@ -30,6 +30,25 @@ namespace LJCDataAccess
       SqlDbType = item.SqlDbType;
       Value = item.Value;
     }
+
+    /// <summary>A Create constructor.</summary>
+    public ProcedureParameter(string parameterName, object dataType
+      , int size, object value = null
+      , ParameterDirection direction = ParameterDirection.Input)
+    {
+      ParameterName = parameterName;
+      if (dataType.GetType() == typeof(SqlDbType))
+      {
+        SqlDbType = (SqlDbType)dataType;
+      }
+      if (dataType.GetType() == typeof(MySqlDbType))
+      {
+        MySqlDbType = (MySqlDbType)dataType;
+      }
+      Size = size;
+      Direction = direction;
+      Value = value;
+    }
     #endregion
 
     #region Methods

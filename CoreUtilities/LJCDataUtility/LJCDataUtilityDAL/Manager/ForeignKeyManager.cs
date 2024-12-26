@@ -8,6 +8,7 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Xml.Linq;
 
@@ -37,35 +38,56 @@ namespace LJCDataUtilityDAL
     {
       ForeignKeys retValue;
 
-      //var sql = CreateProcedure(Manager.TableName);
+      //var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
       //var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+      CreateProcedure();
 
       var parms = new ProcedureParameters();
-      var parm = new ProcedureParameter
-      {
-        ParameterName = "@TableName",
-        SqlDbType = SqlDbType.NVarChar,
-        Size = 20,
-        Value = Manager.TableName
-      };
+      var parm = new ProcedureParameter("@TableName", SqlDbType.NVarChar
+        , 20, Manager.TableName);
       parms.Add(parm);
 
-      var headSql = "USE[LJCDataUtility] \r\n";
-      headSql += "SET ANSI_NULLS ON \r\n";
-      headSql += "SET QUOTED_IDENTIFIER ON \r\n";
-      var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
+      //// ?
+      //var headSql = "USE[LJCDataUtility] \r\n";
+      //headSql += "SET ANSI_NULLS ON \r\n";
+      //headSql += "SET QUOTED_IDENTIFIER ON \r\n";
+      //var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
 
       var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
       retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
-    // Gets the SQL Retrieve statement.
-    private string CreateProcedure(string tableName)
+    // Create the sp_GetForeignKeys procedure.
+    private void CreateProcedure()
+    {
+      var sql = CreateProcedureSql(Manager.TableName);
+      try
+      {
+        Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+      }
+      catch (Exception e)
+      {
+        var isHandled = false;
+        if (e is SqlException)
+        {
+          // ErrorCode -2146232060
+          if (e.Message.StartsWith("There is already an object"))
+          {
+            isHandled = true;
+          }
+        }
+        if (!isHandled)
+        {
+          throw e;
+        }
+      }
+    }
+
+    // Gets the sp_GetForeignKeys procedure SQL.
+    private string CreateProcedureSql(string tableName)
     {
       StringBuilder b = new StringBuilder(256);
-      b.AppendLine("IF OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')");
-      b.AppendLine(" IS NULL");
       b.AppendLine("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
       b.AppendLine("  @TableName nvarchar(20)");
       b.AppendLine("AS");
