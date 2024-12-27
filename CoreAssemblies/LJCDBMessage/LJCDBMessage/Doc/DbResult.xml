@@ -134,7 +134,6 @@
       Sets the result records from the DataTable, principle values and join values.
     </summary>
     <param name="dataTable">The data table.</param>
-    <param name="dataColumns">The principle columns.</param>
     <param name="dbJoins">The joins.</param>
     <remarks>
       <para>

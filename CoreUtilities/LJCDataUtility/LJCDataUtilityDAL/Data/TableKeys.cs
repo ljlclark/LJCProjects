@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// ForeignKeys.cs
+// TableKeys.cs
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
@@ -8,26 +8,26 @@ using System.Collections.Generic;
 namespace LJCDataUtilityDAL
 {
   /// <summary>Represents a collection of ForeignKey objects.</summary>
-  public class ForeignKeys : List<ForeignKey>
+  public class TableKeys : List<TableKey>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ForeignKeys()
+    public TableKeys()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public ForeignKeys(ForeignKeys items)
+    public TableKeys(TableKeys items)
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new ForeignKey(item));
+          Add(new TableKey(item));
         }
       }
     }
@@ -37,10 +37,10 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ForeignKeys Clone()
+    public TableKeys Clone()
     {
-      var retValue = new ForeignKeys();
-      foreach (ForeignKey foreignKey in this)
+      var retValue = new TableKeys();
+      foreach (TableKey foreignKey in this)
       {
         retValue.Add(foreignKey.Clone());
       }
@@ -65,12 +65,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public ForeignKey LJCSearchName(string constraintName)
+    public TableKey LJCSearchName(string constraintName)
     {
-      ForeignKey retValue = null;
+      TableKey retValue = null;
 
       LJCSortName();
-      ForeignKey searchItem = new ForeignKey()
+      TableKey searchItem = new TableKey()
       {
         UpdateRule = constraintName,
       };
@@ -97,7 +97,7 @@ namespace LJCDataUtilityDAL
 
     // The item for the specified name.
     /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
-    public ForeignKey this[string name]
+    public TableKey this[string name]
     {
       get { return LJCSearchName(name); }
     }

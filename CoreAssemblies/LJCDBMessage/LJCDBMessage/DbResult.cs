@@ -323,29 +323,29 @@ namespace LJCDBMessage
       }
     }
 
-    // Sets the result records from the DataTable, principle values
-    // and join values.
-    /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
-    [Obsolete("Use SetRows(DataTable, DbJoins")]
-    public void SetRows(DataTable dataTable
-      , DbColumns dataColumns, DbJoins dbJoins = null)
-    {
-      if (NetCommon.HasData(dataTable))
-      {
-        // *** Next Statement *** Add 12/25/24
-        dataColumns = TableData.GetDbColumns(dataTable.Columns);
-        foreach (DataRow dataRow in dataTable.Rows)
-        {
-          DbValues dataValues = GetRowValues(dataColumns, dataRow);
-          AddJoinRowValues(dataValues, dataRow, dbJoins);
-          DbRow row = new DbRow()
-          {
-            Values = dataValues
-          };
-          Rows.Add(row);
-        }
-      }
-    }
+    //// Sets the result records from the DataTable, principle values
+    //// and join values.
+    ///// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
+    //[Obsolete("Use SetRows(DataTable, DbJoins")]
+    //public void SetRows(DataTable dataTable
+    //  , DbColumns dataColumns, DbJoins dbJoins = null)
+    //{
+    //  if (NetCommon.HasData(dataTable))
+    //  {
+    //    // *** Next Statement *** Add 12/25/24
+    //    dataColumns = TableData.GetDbColumns(dataTable.Columns);
+    //    foreach (DataRow dataRow in dataTable.Rows)
+    //    {
+    //      DbValues dataValues = GetRowValues(dataColumns, dataRow);
+    //      AddJoinRowValues(dataValues, dataRow, dbJoins);
+    //      DbRow row = new DbRow()
+    //      {
+    //        Values = dataValues
+    //      };
+    //      Rows.Add(row);
+    //    }
+    //  }
+    //}
 
     // Gets the result values from the data row.
     /// <include path='items/GetRowValues/*' file='Doc/DbResult.xml'/>

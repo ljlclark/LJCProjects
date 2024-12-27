@@ -69,6 +69,7 @@
     <Compile Include="LJCReflect.cs" />
     <Compile Include="PropertyDelegate.cs" />
     <Compile Include="PropertyDelegates.cs" />
+    <Compile Include="TextBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />

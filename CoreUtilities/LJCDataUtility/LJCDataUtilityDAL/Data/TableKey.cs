@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// ForeignKey.cs
+// TableKey.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using System;
@@ -8,32 +8,30 @@ using System;
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataColumn Data Object.</summary>
-  public class ForeignKey : IComparable<ForeignKey>
+  public class TableKey : IComparable<TableKey>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ForeignKey()
+    public TableKey()
     {
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ForeignKey(ForeignKey item)
+    public TableKey(TableKey item)
     {
       DBName = item.DBName;
       TableSchema = item.TableSchema;
       TableName = item.TableName;
+      KeyType = item.KeyType;
       ColumnName = item.ColumnName;
-      ConstraintDBName = item.ConstraintDBName;
-      ConstraintSchema = item.ConstraintSchema;
       ConstraintName = item.ConstraintName;
-      UniqueConstraintName = item.UniqueConstraintName;
-      UpdateRule = item.UpdateRule;
-      DeleteRule = item.DeleteRule;
       TargetTable = item.TargetTable;
       TargetColumn = item.TargetColumn;
+      UpdateRule = item.UpdateRule;
+      DeleteRule = item.DeleteRule;
       OrdinalPosition = item.OrdinalPosition;
     }
     #endregion
@@ -42,15 +40,15 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public ForeignKey Clone()
+    public TableKey Clone()
     {
-      var retValue = MemberwiseClone() as ForeignKey;
+      var retValue = MemberwiseClone() as TableKey;
       return retValue;
     }
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-    public int CompareTo(ForeignKey other)
+    public int CompareTo(TableKey other)
     {
       int retValue;
 
@@ -106,6 +104,17 @@ namespace LJCDataUtilityDAL
     }
     private String mTableName;
 
+    /// <summary>Gets or sets the KeyType value.</summary>
+    public String KeyType
+    {
+      get { return mKeyType; }
+      set
+      {
+        mKeyType = NetString.InitString(value);
+      }
+    }
+    private String mKeyType;
+
     /// <summary>Gets or sets the ColumnName value.</summary>
     public String ColumnName
     {
@@ -117,27 +126,27 @@ namespace LJCDataUtilityDAL
     }
     private String mColumnName;
 
-    /// <summary>Gets or sets the ConstraintDBName value.</summary>
-    public String ConstraintDBName
-    {
-      get { return mConstraintDBName; }
-      set
-      {
-        mConstraintDBName = NetString.InitString(value);
-      }
-    }
-    private String mConstraintDBName;
+    ///// <summary>Gets or sets the ConstraintDBName value.</summary>
+    //public String ConstraintDBName
+    //{
+    //  get { return mConstraintDBName; }
+    //  set
+    //  {
+    //    mConstraintDBName = NetString.InitString(value);
+    //  }
+    //}
+    //private String mConstraintDBName;
 
-    /// <summary>Gets or sets the ConstraintSchema value.</summary>
-    public String ConstraintSchema
-    {
-      get { return mConstraintSchema; }
-      set
-      {
-        mConstraintSchema = NetString.InitString(value);
-      }
-    }
-    private String mConstraintSchema;
+    ///// <summary>Gets or sets the ConstraintSchema value.</summary>
+    //public String ConstraintSchema
+    //{
+    //  get { return mConstraintSchema; }
+    //  set
+    //  {
+    //    mConstraintSchema = NetString.InitString(value);
+    //  }
+    //}
+    //private String mConstraintSchema;
 
     /// <summary>Gets or sets the ConstraintName value.</summary>
     public String ConstraintName
@@ -150,16 +159,16 @@ namespace LJCDataUtilityDAL
     }
     private String mConstraintName;
 
-    /// <summary>Gets or sets the UniqueConstraintName value.</summary>
-    public String UniqueConstraintName
-    {
-      get { return mUniqueConstraintName; }
-      set
-      {
-        mUniqueConstraintName = NetString.InitString(value);
-      }
-    }
-    private String mUniqueConstraintName;
+    ///// <summary>Gets or sets the UniqueConstraintName value.</summary>
+    //public String UniqueConstraintName
+    //{
+    //  get { return mUniqueConstraintName; }
+    //  set
+    //  {
+    //    mUniqueConstraintName = NetString.InitString(value);
+    //  }
+    //}
+    //private String mUniqueConstraintName;
 
     /// <summary>Gets or sets the UpdateRule value.</summary>
     public String UpdateRule
