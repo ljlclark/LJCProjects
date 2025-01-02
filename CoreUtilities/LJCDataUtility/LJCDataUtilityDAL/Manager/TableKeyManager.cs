@@ -113,9 +113,11 @@ namespace LJCDataUtilityDAL
       b.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
       b.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
       b.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
-      b.Line(" on tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+      b.Line(" on ccu.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+      b.Line("  and ccu.[COLUMN_NAME] = kcu.[COLUMN_NAME] ");
       b.Line($"where tc.[TABLE_NAME] = '{tableName}'");
       b.Line($" and tc.[CONSTRAINT_TYPE] = '{keyType}'");
+      b.Line("order by kcu.[ORDINAL_POSITION];");
       var retValue = b.ToString();
       return retValue;
     }

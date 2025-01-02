@@ -191,6 +191,7 @@ namespace LJCDataUtility
       if (AutoScaleMode == AutoScaleMode.Dpi)
       {
         MainSplit.SplitterWidth = 4;
+        ljcHeaderBox1.Height = 30;
 
         ListHelper.SetPanelControls(MainSplit.Panel1, ljcHeaderBox1
           , null, TableGrid);
@@ -308,8 +309,7 @@ namespace LJCDataUtility
       ControlValues controlValues = new ControlValues();
 
       // Save Window values.
-      controlValues.Add(Name, Left, Top
-        , Width, Height);
+      controlValues.Add(Name, Left, Top, Width, Height);
 
       // Save Grid column sizes.
       TableGrid.LJCSaveColumnValues(controlValues);
