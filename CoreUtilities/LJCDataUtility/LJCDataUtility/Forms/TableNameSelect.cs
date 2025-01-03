@@ -6,6 +6,7 @@ using LJCDBClientLib;
 using LJCDBMessage;
 using LJCWinFormCommon;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -112,7 +113,12 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
+        TableNameCombo.Items.Clear();
         dataManager = new DataManager(dataConfigName, null);
+        dataManager.OrderByNames = new List<string>()
+        {
+          "TableName"
+        };
         dbResult = dataManager.GetTableNames();
         foreach (DbRow dbRow in dbResult.Rows)
         {

@@ -36,32 +36,38 @@ namespace LJCDataUtilityDAL
     /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public TableKeys LoadForeignKeys()
     {
-      TableKeys retValue;
+      //TableKeys retValue;
 
-      //var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
-      //var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
-      CreateForeignKeysProcedure();
+      ////var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
+      ////var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+      //CreateForeignKeysProcedure();
 
-      var parms = new ProcedureParameters();
-      var parm = new ProcedureParameter("@TableName", SqlDbType.NVarChar
-        , 20, Manager.TableName);
-      parms.Add(parm);
+      //var parms = new ProcedureParameters();
+      //var parm = new ProcedureParameter("@TableName", SqlDbType.NVarChar
+      //  , 20, Manager.TableName);
+      //parms.Add(parm);
 
-      //// ?
-      //var headSql = "USE[LJCDataUtility] \r\n";
-      //headSql += "SET ANSI_NULLS ON \r\n";
-      //headSql += "SET QUOTED_IDENTIFIER ON \r\n";
-      //var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
+      ////// ?
+      ////var headSql = "USE[LJCDataUtility] \r\n";
+      ////headSql += "SET ANSI_NULLS ON \r\n";
+      ////headSql += "SET QUOTED_IDENTIFIER ON \r\n";
+      ////var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
 
-      var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
-      retValue = ResultConverter.CreateCollection(dbResult);
+      //var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
+      //retValue = ResultConverter.CreateCollection(dbResult);
+      //return retValue;
+
+      var sql = TableKeySql(Manager.TableName, "FOREIGN KEY");
+      var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
+      var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
     }
 
     // Retrieves a collection of Primary key records.
-    public TableKeys LoadTableKeys(string keyType = "PRIMARY KEY")
+    public TableKeys LoadTableKeys(string keyType = "PRIMARY KEY"
+      , string constraintName = null)
     {
-      var sql = TableKeySql(Manager.TableName, keyType);
+      var sql = TableKeySql(Manager.TableName, keyType, constraintName);
       var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
       var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
@@ -98,26 +104,30 @@ namespace LJCDataUtilityDAL
 
     // Gets the table key values SQL.
     private string TableKeySql(string tableName
-      , string keyType = "PRIMARY KEY")
+      , string keyType = "PRIMARY KEY", string constraintName = null)
     {
       TextBuilder b = new TextBuilder(256);
       b.Line("SELECT");
       b.Line(" tc.[TABLE_CATALOG] as DBName, ");
       b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
       b.Line(" tc.[TABLE_NAME] as TableName, ");
-      b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
       b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
-      b.Line(" ccu.[COLUMN_NAME] as ColumnName, ");
+      b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
+      b.Line(" kcu.[COLUMN_NAME] as ColumnName, ");
       b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition ");
-      b.Line("from [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
-      b.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
-      b.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
-      b.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
-      b.Line(" on ccu.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-      b.Line("  and ccu.[COLUMN_NAME] = kcu.[COLUMN_NAME] ");
-      b.Line($"where tc.[TABLE_NAME] = '{tableName}'");
-      b.Line($" and tc.[CONSTRAINT_TYPE] = '{keyType}'");
-      b.Line("order by kcu.[ORDINAL_POSITION];");
+      b.Line("FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
+      b.Line("LEFT JOIN [INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
+      b.Line(" ON tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+      if (NetString.HasValue(constraintName))
+      {
+        b.Line("WHERE tc.[CONSTRAINT_NAME] = constraintName");
+      }
+      else
+      {
+        b.Line($"WHERE tc.[TABLE_NAME] = '{tableName}'");
+        b.Line($" AND tc.[CONSTRAINT_TYPE] = '{keyType}'");
+      }
+      b.Line("ORDER BY kcu.[ORDINAL_POSITION];");
       var retValue = b.ToString();
       return retValue;
     }

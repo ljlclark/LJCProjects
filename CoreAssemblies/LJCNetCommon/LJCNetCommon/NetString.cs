@@ -66,6 +66,16 @@ namespace LJCNetCommon
 
     #region Formatting a String
 
+    /// <summary>Adds a value to a comma delimited string.</summary>
+    public static void AddDelimitedValue(ref string target, string value)
+    {
+      if (NetString.HasValue(target))
+      {
+        target += ", ";
+      }
+      target += value.Trim();
+    }
+
     // Creates an exception string with outer and inner exception.
     /// <include path='items/ExceptionString/*' file='Doc/NetString.xml'/>
     public static string ExceptionString(Exception e)
@@ -208,6 +218,47 @@ namespace LJCNetCommon
         retValue = value;
       }
       return retValue;
+    }
+
+    /// <summary>Scrubs extra blanks from the comma delimited string.</summary>
+    public static string ScrubDelimitedValues(string values)
+    {
+      string retValues = "";
+
+      if (!values.Contains(","))
+      {
+        retValues = values.Trim();
+      }
+      else
+      {
+        string[] items = Split(values, ",");
+        foreach (string item in items)
+        {
+          if (NetString.HasValue(retValues))
+          {
+            retValues += ", ";
+          }
+          retValues += item.Trim();
+        }
+      }
+      return retValues;
+    }
+
+    /// <summary>Split a string without empty entries.</summary>
+    public static string[] Split(string text, string separator)
+    {
+      var separators = new string[] { separator };
+      string[] retValues = text.Split(separators
+        , StringSplitOptions.RemoveEmptyEntries);
+      return retValues;
+    }
+
+    /// <summary>Split a string without empty entries.</summary>
+    public static string[] Split(string text, string[] separators)
+    {
+      string[] retValues = text.Split(separators
+        , StringSplitOptions.RemoveEmptyEntries);
+      return retValues;
     }
 
     // Truncates a text string to the specified length.

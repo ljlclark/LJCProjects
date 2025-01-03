@@ -161,7 +161,8 @@ namespace LJCDataUtilityDAL
       get { return mSourceColumnName; }
       set
       {
-        value = NetString.InitString(value);
+        //value = NetString.InitString(value);
+        value = NetString.ScrubDelimitedValues(value);
         mSourceColumnName = ChangedNames.Add(ColumnSourceColumnName
           , mSourceColumnName, value);
       }

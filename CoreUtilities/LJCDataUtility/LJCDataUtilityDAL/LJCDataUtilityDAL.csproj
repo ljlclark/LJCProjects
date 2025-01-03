@@ -68,7 +68,7 @@
     <Compile Include="Data\DataModules.cs" />
     <Compile Include="Data\DataUtilTable.cs" />
     <Compile Include="Manager\DataColumnManager.cs" />
-    <Compile Include="Manager\DataKeymanager.cs" />
+    <Compile Include="Manager\DataKeyManager.cs" />
     <Compile Include="Data\DataTables.cs" />
     <Compile Include="Manager\DataModuleManager.cs" />
     <Compile Include="Manager\DataTableManager,.cs" />
@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\LJCGenText\External\LJCNetCommon.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Manager\Compare.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
