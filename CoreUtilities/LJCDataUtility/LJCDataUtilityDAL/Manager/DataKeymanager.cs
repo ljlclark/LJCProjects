@@ -26,6 +26,10 @@ namespace LJCDataUtilityDAL
       // Map table names with property names or captions
       // that differ from the column names.
       Manager.MapNames(DataKey.ColumnID, caption: "DataKey ID");
+      //Manager.MapNames(DataKey.ColumnSourceColumnName
+      //  , DataKey.PropertySourceColumnNames, caption: "Columns");
+      //Manager.MapNames(DataKey.ColumnTargetColumnName
+      //  , DataKey.PropertyTargetColumnNames, caption: "Target Columns");
 
       // Add Calculated and Join columns.
       // Enables adding Calculated and Join columns to a grid configuration.

@@ -73,7 +73,11 @@ namespace LJCNetCommon
       {
         target += ", ";
       }
-      target += value.Trim();
+      if (value != null)
+      {
+        value = value.Trim();
+      }
+      target += value;
     }
 
     // Creates an exception string with outer and inner exception.

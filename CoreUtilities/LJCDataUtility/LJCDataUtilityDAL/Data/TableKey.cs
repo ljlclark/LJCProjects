@@ -29,7 +29,7 @@ namespace LJCDataUtilityDAL
       ColumnName = item.ColumnName;
       ConstraintName = item.ConstraintName;
       TargetTable = item.TargetTable;
-      TargetColumn = item.TargetColumn;
+      TargetColumns = item.TargetColumns;
       UpdateRule = item.UpdateRule;
       DeleteRule = item.DeleteRule;
       OrdinalPosition = item.OrdinalPosition;
@@ -59,8 +59,13 @@ namespace LJCDataUtilityDAL
       }
       else
       {
-        // Case sensitive.
-        retValue = ConstraintName.CompareTo(other.ConstraintName);
+        // Not case sensitive.
+        retValue = string.Compare(ConstraintName, other.ConstraintName, true);
+        if (0 == retValue)
+        {
+          // Case sensitive.
+          retValue = OrdinalPosition.CompareTo(other.OrdinalPosition);
+        }
       }
       return retValue;
     }
@@ -126,28 +131,6 @@ namespace LJCDataUtilityDAL
     }
     private String mColumnName;
 
-    ///// <summary>Gets or sets the ConstraintDBName value.</summary>
-    //public String ConstraintDBName
-    //{
-    //  get { return mConstraintDBName; }
-    //  set
-    //  {
-    //    mConstraintDBName = NetString.InitString(value);
-    //  }
-    //}
-    //private String mConstraintDBName;
-
-    ///// <summary>Gets or sets the ConstraintSchema value.</summary>
-    //public String ConstraintSchema
-    //{
-    //  get { return mConstraintSchema; }
-    //  set
-    //  {
-    //    mConstraintSchema = NetString.InitString(value);
-    //  }
-    //}
-    //private String mConstraintSchema;
-
     /// <summary>Gets or sets the ConstraintName value.</summary>
     public String ConstraintName
     {
@@ -158,17 +141,6 @@ namespace LJCDataUtilityDAL
       }
     }
     private String mConstraintName;
-
-    ///// <summary>Gets or sets the UniqueConstraintName value.</summary>
-    //public String UniqueConstraintName
-    //{
-    //  get { return mUniqueConstraintName; }
-    //  set
-    //  {
-    //    mUniqueConstraintName = NetString.InitString(value);
-    //  }
-    //}
-    //private String mUniqueConstraintName;
 
     /// <summary>Gets or sets the UpdateRule value.</summary>
     public String UpdateRule
@@ -204,15 +176,15 @@ namespace LJCDataUtilityDAL
     private String mTargetTable;
 
     /// <summary>Gets or sets the TargetColumn value.</summary>
-    public String TargetColumn
+    public String TargetColumns
     {
-      get { return mTargetColumn; }
+      get { return mTargetColumns; }
       set
       {
-        mTargetColumn = NetString.InitString(value);
+        mTargetColumns = NetString.InitString(value);
       }
     }
-    private String mTargetColumn;
+    private String mTargetColumns;
 
     /// <summary>Gets or sets the OrdinalPosition value.</summary>
     public Int32 OrdinalPosition
@@ -224,6 +196,17 @@ namespace LJCDataUtilityDAL
       }
     }
     private Int32 mOrdinalPosition;
+
+    /// <summary>Gets or sets the UniqueConstraintName value.</summary>
+    public String UniqueConstraintName
+    {
+      get { return mUniqueConstraintName; }
+      set
+      {
+        mUniqueConstraintName = NetString.InitString(value);
+      }
+    }
+    private String mUniqueConstraintName;
     #endregion
 
     #region Class Data
@@ -236,7 +219,6 @@ namespace LJCDataUtilityDAL
     public static string ColumnConstraintDBName = "ConstraintDBName";
     public static string ColumnConstraintSchema = "ConstraintSchema";
     public static string ColumnConstraintName = "ConstraintName";
-    public static string ColumnUniqueConstraintName = "UniqueConstraintName";
     public static string ColumnUpdateRule = "UpdateRule";
     public static string ColumnDeleteRule = "DeleteRule";
     public static string ColumnTargetTable = "TargetTable";

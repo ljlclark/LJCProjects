@@ -104,7 +104,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the table key values SQL.
     private string TableKeySql(string tableName
-      , string keyType = "PRIMARY KEY", string constraintName = null)
+      , string keyType = "PRIMARY KEY", string uniqueConstraintName = null)
     {
       TextBuilder b = new TextBuilder(256);
       b.Line("SELECT");
@@ -112,22 +112,26 @@ namespace LJCDataUtilityDAL
       b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
       b.Line(" tc.[TABLE_NAME] as TableName, ");
       b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
-      b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
+      b.Line(" tc.[CONSTRAINT_NAME] as ConstraintName, ");
       b.Line(" kcu.[COLUMN_NAME] as ColumnName, ");
-      b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition ");
+      b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
+      b.Line(" rc.[UNIQUE_CONSTRAINT_NAME] as UniqueConstraintName ");
       b.Line("FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
       b.Line("LEFT JOIN [INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
       b.Line(" ON tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-      if (NetString.HasValue(constraintName))
+      b.Line("LEFT JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS as rc");
+      b.Line(" ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME");
+      if (NetString.HasValue(uniqueConstraintName))
       {
-        b.Line("WHERE tc.[CONSTRAINT_NAME] = constraintName");
+        b.Line($"WHERE tc.[CONSTRAINT_NAME] = '{uniqueConstraintName}'");
       }
       else
       {
         b.Line($"WHERE tc.[TABLE_NAME] = '{tableName}'");
         b.Line($" AND tc.[CONSTRAINT_TYPE] = '{keyType}'");
       }
-      b.Line("ORDER BY kcu.[ORDINAL_POSITION];");
+      // *** Next Statement *** Change 1/5/25
+      b.Line("ORDER BY tc.[CONSTRAINT_NAME], kcu.[ORDINAL_POSITION];");
       var retValue = b.ToString();
       return retValue;
     }

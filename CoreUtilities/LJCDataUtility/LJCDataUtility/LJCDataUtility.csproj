@@ -80,6 +80,7 @@
     <Compile Include="Forms\DataTable\CustomActions\InsertSelect.cs" />
     <Compile Include="Forms\DataTable\CustomActions\RenameTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\SetUtilData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\TableKeyGroup.cs" />
     <Compile Include="Forms\TableNameSelect.cs">
       <SubType>Form</SubType>
     </Compile>

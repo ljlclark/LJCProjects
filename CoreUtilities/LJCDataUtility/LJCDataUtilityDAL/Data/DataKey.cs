@@ -262,11 +262,17 @@ namespace LJCDataUtilityDAL
     /// <summary>The SourceColumnName column name.</summary>
     public static string ColumnSourceColumnName = "SourceColumnName";
 
+    /// <summary>The SourceColumnNames column name.</summary>
+    public static string PropertySourceColumnNames = "SourceColumnNames";
+
     /// <summary>The TargetTableName column name.</summary>
     public static string ColumnTargetTableName = "TargetTableName";
 
     /// <summary>The TargetColumnName column name.</summary>
     public static string ColumnTargetColumnName = "TargetColumnName";
+
+    /// <summary>The TargetColumnName column name.</summary>
+    public static string PropertyTargetColumnNames = "TargetColumnNames";
 
     /// <summary>The IsClustered column name.</summary>
     public static string ColumnIsClustered = "IsClustered";
