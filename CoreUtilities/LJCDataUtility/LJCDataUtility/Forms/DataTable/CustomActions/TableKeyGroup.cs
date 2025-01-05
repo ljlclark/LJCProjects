@@ -4,7 +4,6 @@
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System;
-using System.Collections.Generic;
 
 namespace LJCDataUtility
 {
@@ -19,6 +18,12 @@ namespace LJCDataUtility
       TableKeys = tableKeys;
       TableKeys.Sort();
       UsedKeys = new TableKeys();
+      CurrentTableKey = null;
+      if (NetCommon.HasItems(TableKeys))
+      {
+        CurrentTableKey = TableKeys[0];
+        mPrevConstraintName = CurrentTableKey.ConstraintName;
+      }
     }
     #endregion
 
@@ -29,12 +34,8 @@ namespace LJCDataUtility
     {
       string retNames = null;
 
-      CurrentTableKey = null;
       if (NetCommon.HasItems(TableKeys))
       {
-        CurrentTableKey = TableKeys[0];
-        mPrevConstraintName = CurrentTableKey.ConstraintName;
-
         // Find next current value.
         foreach (TableKey sourceKey in TableKeys)
         {
@@ -45,11 +46,13 @@ namespace LJCDataUtility
           {
             if (mPrevConstraintName == sourceKey.ConstraintName)
             {
+              CurrentTableKey = sourceKey;
               NetString.AddDelimitedValue(ref retNames, sourceKey.ColumnName);
               UsedKeys.Add(sourceKey);
             }
             else
             {
+              mPrevConstraintName = sourceKey.ConstraintName;
               break;
             }
             mPrevConstraintName = sourceKey.ConstraintName;
@@ -84,10 +87,13 @@ namespace LJCDataUtility
 
     #region Properties
 
+    // Gets or sets the Current TableKey value.
     internal TableKey CurrentTableKey { get; set; }
 
+    // Gets or sets the TableKeys value.
     private TableKeys TableKeys { get; set; }
 
+    // Gets or sets the UsedKeys value.
     private TableKeys UsedKeys { get; set; }
     #endregion
   }

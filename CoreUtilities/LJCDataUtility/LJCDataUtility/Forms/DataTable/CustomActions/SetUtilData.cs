@@ -29,9 +29,9 @@ namespace LJCDataUtility
     // Selects the table and sets the data.
     internal void SetData()
     {
+      bool isContinue = false;
       var detail = new TableNameSelect();
       var result = detail.ShowDialog();
-      bool isContinue = false;
       if (DialogResult.OK == result)
       {
         isContinue = true;
@@ -88,7 +88,7 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           isContinue = false;
-          MessageBox.Show("Update columns was aborted.");
+          MessageBox.Show("Update columns and constraints was aborted.");
         }
       }
 
@@ -103,6 +103,35 @@ namespace LJCDataUtility
         MessageBox.Show("Create/Update complete");
       }
     }
+    #endregion
+
+    #region Module child Methods
+
+    // Creates DataUtilTable and DataUtilColumn data.
+    private void CreateData(int moduleID)
+    {
+      var tableManager = Managers.DataTableManager;
+      var dataTable = new DataUtilTable
+      {
+        DataModuleID = moduleID,
+        Name = TableName,
+        Description = TableName
+      };
+      var propertyNames = tableManager.PropertyNames();
+      propertyNames.Remove("ID");
+      dataTable.AddChangedNames(propertyNames);
+      var newTable = tableManager.Add(dataTable);
+
+      CreateColumns(newTable.ID);
+      CreateKeys(newTable.ID);
+
+      var tableGridCode = new DataTableGridCode(Parent);
+      tableGridCode.Refresh();
+      tableGridCode.RowSelect(newTable.ID);
+    }
+    #endregion
+
+    #region Column Methods
 
     // Creates DataUtilColumn data.
     private void CreateColumn(DbColumn dbColumn, int tableID
@@ -154,236 +183,6 @@ namespace LJCDataUtility
       {
         sequence++;
         CreateColumn(dbColumn, newTableID, sequence);
-      }
-    }
-
-    // Creates DataUtilTable and DataUtilColumn data.
-    private void CreateData(int moduleID)
-    {
-      var tableManager = Managers.DataTableManager;
-      var dataTable = new DataUtilTable
-      {
-        DataModuleID = moduleID,
-        Name = TableName,
-        Description = TableName
-      };
-      var propertyNames = tableManager.PropertyNames();
-      propertyNames.Remove("ID");
-      dataTable.AddChangedNames(propertyNames);
-      var newTable = tableManager.Add(dataTable);
-
-      CreateColumns(newTable.ID);
-      CreateKeys(newTable.ID);
-
-      var tableGridCode = new DataTableGridCode(Parent);
-      tableGridCode.Refresh();
-      tableGridCode.RowSelect(newTable.ID);
-    }
-
-    // Creates DataKey data.
-    private void CreateKey(TableKey tableKey, int tableID, short keyType)
-    {
-      var newKey = new DataKey()
-      {
-        DataTableID = tableID,
-        Name = tableKey.ConstraintName,
-        KeyType = keyType,
-        SourceColumnName = tableKey.ColumnName,
-        TargetTableName = tableKey.TableName,
-        TargetColumnName = tableKey.ColumnName,
-        IsClustered = false,
-        IsAscending = false
-      };
-
-      var keyManager = Managers.DataKeyManager;
-      var names = keyManager.PropertyNames();
-      names.Remove("ID");
-      newKey.AddChangedNames(names);
-      LJCReflect reflect = new LJCReflect(newKey);
-      foreach (var name in names)
-      {
-        if (!reflect.HasProperty(name))
-        {
-          newKey.ChangedNames.Remove(name);
-        }
-      }
-      keyManager.Add(newKey, includeNull: true);
-    }
-
-    // Creates the new Keys.
-    private void CreateKeys(int newTableID)
-    {
-      var primaryKeys = GetTableKeys();
-      foreach (var primaryKey in primaryKeys)
-      {
-        CreateKey(primaryKey, newTableID, 1);
-      }
-
-      var uniqueKeys = GetTableKeys("UNIQUE");
-      foreach (var uniqueKey in uniqueKeys)
-      {
-        CreateKey(uniqueKey, newTableID, 2);
-      }
-
-      var foreignKeys = GetTableKeys("FOREIGN KEY");
-      foreach (var foreignKey in foreignKeys)
-      {
-        CreateKey(foreignKey, newTableID, 3);
-      }
-    }
-
-    // Loads the foreign keys.
-    private TableKeys GetTableKeys(string keyType = "PRIMARY KEY"
-      , string constraintName = null)
-    {
-      TableKeys retKeys = null;
-
-      var dbServiceRef = new DbServiceRef
-      {
-        DbDataAccess = new DbDataAccess(DataConfigName)
-      };
-      var keyManager = new TableKeyManager(dbServiceRef, DataConfigName
-        , TableName);
-
-      switch (keyType.ToLower())
-      {
-        case "primary key":
-          retKeys = keyManager.LoadTableKeys("PRIMARY KEY", constraintName);
-          break;
-
-        case "unique":
-          retKeys = keyManager.LoadTableKeys("UNIQUE");
-          break;
-
-        case "foreign key":
-          retKeys = keyManager.LoadForeignKeys();
-          break;
-      }
-      return retKeys;
-    }
-
-    // Updates the DataKey keys.
-    private void SetKeysForeign()
-    {
-      // Get the foreign keys for TableName
-      var foreignTableKeys = GetTableKeys("FOREIGN KEY");
-      if (NetCommon.HasItems(foreignTableKeys))
-      {
-        var workForeignTableKey = foreignTableKeys[0].Clone();
-
-        // Get combined SourceColumnNames.
-        var foreignKeyGroup = new TableKeyGroup(foreignTableKeys);
-        var sourceColumnNames = foreignKeyGroup.NextGroupNames();
-        while (sourceColumnNames != null)
-        {
-          // Get Current foreign key values.
-          workForeignTableKey.ColumnName = sourceColumnNames;
-          var currentForeignTableKey = foreignKeyGroup.CurrentTableKey;
-
-          // Get combined TargetColumnNames.
-          var uniqueConstraintName = currentForeignTableKey.UniqueConstraintName;
-          var primaryTableKeys = GetTableKeys("PRIMARY KEY"
-            , uniqueConstraintName);
-          var targetKeyGroup = new TableKeyGroup(primaryTableKeys);
-          var targetColumnNames = targetKeyGroup.NextGroupNames();
-          if (NetString.HasValue(targetColumnNames))
-          {
-            workForeignTableKey.TargetColumns = targetColumnNames;
-
-            // Get TargetTable name.
-            var primaryTableKey = targetKeyGroup.CurrentTableKey;
-            workForeignTableKey.TargetTable = primaryTableKey.TableName;
-
-            // Get foreignDataKey.
-            var dataKeyManager = Managers.DataKeyManager;
-            var foreignDataKey = dataKeyManager.RetrieveWithUnique(TableID
-              , workForeignTableKey.ConstraintName);
-            if (foreignDataKey == null)
-            {
-              var message = $"Create {uniqueConstraintName}?";
-              if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
-                  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-              {
-                CreateKey(workForeignTableKey, TableID, 3);
-              }
-            }
-            else
-            {
-              UpdateKey(workForeignTableKey, foreignDataKey);
-            }
-            sourceColumnNames = foreignKeyGroup.NextGroupNames();
-          }
-        }
-      }
-    }
-
-    // Set primary keys.
-    private void SetKeysPrimary()
-    {
-      var keyManager = Managers.DataKeyManager;
-
-      var primaryKeys = GetTableKeys();
-      if (NetCommon.HasItems(primaryKeys))
-      {
-        // Create comma delimited string.
-        string sourceColumnNames = "";
-        foreach (var key in primaryKeys)
-        {
-          NetString.AddDelimitedValue(ref sourceColumnNames, key.ColumnName);
-        }
-
-        var primaryKey = primaryKeys[0];
-        primaryKey.ColumnName = sourceColumnNames;
-        var constraintName = primaryKey.ConstraintName;
-        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
-        if (dataKey == null)
-        {
-          var message = $"Create {dataKey.Name}?";
-          if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
-              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-          {
-            CreateKey(primaryKey, TableID, 1);
-          }
-        }
-        else
-        {
-          UpdateKey(primaryKey, dataKey);
-        }
-      }
-    }
-
-    // Set unique keys.
-    private void SetKeysUnique()
-    {
-      var keyManager = Managers.DataKeyManager;
-
-      var uniqueKeys = GetTableKeys("UNIQUE");
-      if (NetCommon.HasItems(uniqueKeys))
-      {
-        // Create comma delimited string.
-        string sourceColumnNames = "";
-        foreach (var key in uniqueKeys)
-        {
-          NetString.AddDelimitedValue(ref sourceColumnNames, key.ColumnName);
-        }
-
-        var uniqueKey = uniqueKeys[0];
-        uniqueKey.ColumnName = sourceColumnNames;
-        var constraintName = uniqueKey.ConstraintName;
-        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
-        if (dataKey == null)
-        {
-          var message = $"Create {dataKey.Name}?";
-          if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
-              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-          {
-            CreateKey(uniqueKey, TableID, 2);
-          }
-        }
-        else
-        {
-          UpdateKey(uniqueKey, dataKey);
-        }
       }
     }
 
@@ -456,6 +255,216 @@ namespace LJCDataUtility
         UpdateColumn(dbColumn, dataColumn);
       }
     }
+    #endregion
+
+    #region Key Methods
+
+    // Creates DataKey data.
+    private void CreateKey(TableKey tableKey, int tableID, short keyType)
+    {
+      var newKey = new DataKey()
+      {
+        DataTableID = tableID,
+        Name = tableKey.ConstraintName,
+        KeyType = keyType,
+        SourceColumnName = tableKey.ColumnName,
+        TargetTableName = tableKey.TableName,
+        TargetColumnName = tableKey.ColumnName,
+        IsClustered = false,
+        IsAscending = false
+      };
+
+      var keyManager = Managers.DataKeyManager;
+      var names = keyManager.PropertyNames();
+      names.Remove("ID");
+      newKey.AddChangedNames(names);
+      LJCReflect reflect = new LJCReflect(newKey);
+      foreach (var name in names)
+      {
+        if (!reflect.HasProperty(name))
+        {
+          newKey.ChangedNames.Remove(name);
+        }
+      }
+      keyManager.Add(newKey, includeNull: true);
+    }
+
+    // Creates the new Keys.
+    private void CreateKeys(int newTableID)
+    {
+      var primaryKeys = GetTableKeys();
+      foreach (var primaryKey in primaryKeys)
+      {
+        CreateKey(primaryKey, newTableID, 1);
+      }
+
+      var uniqueKeys = GetTableKeys("UNIQUE");
+      foreach (var uniqueKey in uniqueKeys)
+      {
+        CreateKey(uniqueKey, newTableID, 2);
+      }
+
+      var foreignKeys = GetTableKeys("FOREIGN KEY");
+      foreach (var foreignKey in foreignKeys)
+      {
+        CreateKey(foreignKey, newTableID, 3);
+      }
+    }
+
+    // Loads the keys.
+    private TableKeys GetTableKeys(string keyType = "PRIMARY KEY"
+      , string constraintName = null)
+    {
+      TableKeys retKeys = null;
+
+      var dbServiceRef = new DbServiceRef
+      {
+        DbDataAccess = new DbDataAccess(DataConfigName)
+      };
+      var keyManager = new TableKeyManager(dbServiceRef, DataConfigName
+        , TableName);
+
+      switch (keyType.ToLower())
+      {
+        case "primary key":
+          retKeys = keyManager.LoadTableKeys("PRIMARY KEY", constraintName);
+          break;
+
+        case "unique":
+          retKeys = keyManager.LoadTableKeys("UNIQUE");
+          break;
+
+        case "foreign key":
+          retKeys = keyManager.LoadForeignKeys();
+          break;
+      }
+      return retKeys;
+    }
+
+    // Sets the foreign keys.
+    private void SetKeysForeign()
+    {
+      // Get the foreign keys for TableName
+      var foreignTableKeys = GetTableKeys("FOREIGN KEY");
+      if (NetCommon.HasItems(foreignTableKeys))
+      {
+        //var workForeignTableKey = foreignTableKeys[0].Clone();
+
+        // Get combined SourceColumnNames.
+        var foreignKeyGroup = new TableKeyGroup(foreignTableKeys);
+        var sourceColumnNames = foreignKeyGroup.NextGroupNames();
+        while (sourceColumnNames != null)
+        {
+          // Get Current foreign key values.
+          var workForeignTableKey = foreignKeyGroup.CurrentTableKey.Clone();
+          workForeignTableKey.ColumnName = sourceColumnNames;
+
+          // Get combined TargetColumnNames.
+          var uniqueConstraintName = workForeignTableKey.UniqueConstraintName;
+          var primaryTableKeys = GetTableKeys("PRIMARY KEY"
+            , uniqueConstraintName);
+          var targetKeyGroup = new TableKeyGroup(primaryTableKeys);
+          var targetColumnNames = targetKeyGroup.NextGroupNames();
+          if (NetString.HasValue(targetColumnNames))
+          {
+            workForeignTableKey.TargetColumns = targetColumnNames;
+
+            // Get TargetTable name.
+            var primaryTableKey = targetKeyGroup.CurrentTableKey;
+            workForeignTableKey.TargetTable = primaryTableKey.TableName;
+
+            // Get foreignDataKey.
+            var dataKeyManager = Managers.DataKeyManager;
+            var foreignDataKey = dataKeyManager.RetrieveWithUnique(TableID
+              , workForeignTableKey.ConstraintName);
+            if (foreignDataKey == null)
+            {
+              var message = $"Create {uniqueConstraintName}?";
+              if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
+                  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+              {
+                CreateKey(workForeignTableKey, TableID, 3);
+              }
+            }
+            else
+            {
+              UpdateKey(workForeignTableKey, foreignDataKey);
+            }
+            sourceColumnNames = foreignKeyGroup.NextGroupNames();
+          }
+        }
+      }
+    }
+
+    // Sets the primary keys.
+    private void SetKeysPrimary()
+    {
+      var keyManager = Managers.DataKeyManager;
+
+      var primaryKeys = GetTableKeys();
+      if (NetCommon.HasItems(primaryKeys))
+      {
+        // Create comma delimited string.
+        string sourceColumnNames = "";
+        foreach (var key in primaryKeys)
+        {
+          NetString.AddDelimitedValue(ref sourceColumnNames, key.ColumnName);
+        }
+
+        var primaryKey = primaryKeys[0];
+        primaryKey.ColumnName = sourceColumnNames;
+        var constraintName = primaryKey.ConstraintName;
+        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
+        if (dataKey == null)
+        {
+          var message = $"Create {dataKey.Name}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
+              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateKey(primaryKey, TableID, 1);
+          }
+        }
+        else
+        {
+          UpdateKey(primaryKey, dataKey);
+        }
+      }
+    }
+
+    // Sets the unique keys.
+    private void SetKeysUnique()
+    {
+      var keyManager = Managers.DataKeyManager;
+
+      var uniqueKeys = GetTableKeys("UNIQUE");
+      if (NetCommon.HasItems(uniqueKeys))
+      {
+        // Create comma delimited string.
+        string sourceColumnNames = "";
+        foreach (var key in uniqueKeys)
+        {
+          NetString.AddDelimitedValue(ref sourceColumnNames, key.ColumnName);
+        }
+
+        var uniqueKey = uniqueKeys[0];
+        uniqueKey.ColumnName = sourceColumnNames;
+        var constraintName = uniqueKey.ConstraintName;
+        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
+        if (dataKey == null)
+        {
+          var message = $"Create {dataKey.Name}?";
+          if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
+              , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            CreateKey(uniqueKey, TableID, 2);
+          }
+        }
+        else
+        {
+          UpdateKey(uniqueKey, dataKey);
+        }
+      }
+    }
 
     // Updates the DataKey values.
     private void UpdateKey(TableKey tableKey, DataKey dataKey)
@@ -496,6 +505,7 @@ namespace LJCDataUtility
 
     #region Properties
 
+    // Gets or sets the DataConfig name.
     private string DataConfigName { get; set; }
 
     // Gets or sets the Managers reference.
@@ -504,9 +514,11 @@ namespace LJCDataUtility
     // Gets or sets the Parent List reference.
     private DataUtilityList Parent { get; set; }
 
-    private string TableName { get; set; }
-
+    // Gets or sets the Table ID.
     private int TableID { get; set; }
+
+    // Gets or sets the Table name.
+    private string TableName { get; set; }
     #endregion
   }
 }
