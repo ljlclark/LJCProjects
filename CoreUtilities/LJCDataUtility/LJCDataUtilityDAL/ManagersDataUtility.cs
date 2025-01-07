@@ -52,11 +52,11 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataKey GetDataKey(int id)
+    public DataKey GetDataKey(long id)
     {
       DataKey retDataKey = null;
 
-      IDError(id, "GetDataKey(int id)", "id");
+      IDError(id, "GetDataKey(long id)", "id");
       var manager = DataKeyManager;
       if (manager != null)
       {
@@ -94,7 +94,7 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the table DataColumns.</summary>
-    public DataColumns TableDataColumns(int tableID
+    public DataColumns TableDataColumns(long tableID
       , List<string> orderByNames = null)
     {
       DataColumns retColumns = null;
@@ -115,7 +115,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Throws an ID error if id is less than 1.
-    private void IDError(int id, string methodName, string argument)
+    private void IDError(long id, string methodName, string argument)
     {
       if (id < 1)
       {

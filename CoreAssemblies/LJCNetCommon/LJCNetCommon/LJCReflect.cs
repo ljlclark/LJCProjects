@@ -44,7 +44,8 @@ namespace LJCNetCommon
       retValue = Array.Find(PropertyInfos, (x) => x.Name == propertyName);
       //if (null == retValue)
       //{
-      //	var text = $"Property '{propertyName}' was not found"
+      //  var name = mType.Name;
+      //	var text = $"{name} Property '{propertyName}' was not found"
       //		+ $" in object '{mSource.GetType().Name}'.";
       //	throw new ArgumentException(text);
       //}
@@ -295,7 +296,9 @@ namespace LJCNetCommon
         var propertyInfo = GetPropertyInfo(propertyName);
         if (null == propertyInfo)
         {
-          throw new ArgumentException($"Property {propertyName} was not found.");
+          var name = mType.Name;
+          var text = $"{name} Property {propertyName} was not found.";
+          throw new ArgumentException(text);
         }
         propertyDelegate = mPropertyDelegates.Add(propertyInfo);
       }

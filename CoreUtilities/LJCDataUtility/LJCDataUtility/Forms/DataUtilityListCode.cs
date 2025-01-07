@@ -28,9 +28,9 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal int DataColumnID(LJCGridRow row = null)
+    internal long DataColumnID(LJCGridRow row = null)
     {
-      int retColumnID = 0;
+      long retColumnID = 0;
 
       if (null == row)
       {
@@ -39,7 +39,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
       {
-        retColumnID = row.LJCGetInt32(DataUtilColumn.ColumnID);
+        retColumnID = row.LJCGetInt64(DataUtilColumn.ColumnID);
       }
       return retColumnID;
     }
@@ -71,9 +71,9 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal int DataKeyID(LJCGridRow row = null)
+    internal long DataKeyID(LJCGridRow row = null)
     {
-      int retKeyID = 0;
+      long retKeyID = 0;
 
       if (null == row)
       {
@@ -82,7 +82,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
       {
-        retKeyID = row.LJCGetInt32(DataKey.ColumnID);
+        retKeyID = row.LJCGetInt64(DataKey.ColumnID);
       }
       return retKeyID;
     }
@@ -148,9 +148,9 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal int DataTableID(LJCGridRow row = null)
+    internal long DataTableID(LJCGridRow row = null)
     {
-      int retTableID = 0;
+      long retTableID = 0;
 
       if (row == null)
       {
@@ -159,7 +159,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableID = row.LJCGetInt32(DataUtilTable.ColumnID);
+        retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
       }
       return retTableID;
     }

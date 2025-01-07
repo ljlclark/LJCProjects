@@ -176,17 +176,17 @@
     <Content Include="bin\Debug\ControlValues\DataUtility.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\LJCDataUtility.xml" />
+    <Content Include="bin\Debug\SQLScript\2Add\DropAddProcedures.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataColumnAdd.sql" />
+    <Content Include="bin\Debug\SQLScript\2Add\sp_DataKeyAdd.sql" />
+    <Content Include="bin\Debug\SQLScript\2Add\sp_DataModuleAdd.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataTableAdd.sql" />
     <Content Include="bin\Debug\SQLScript\DataUtilityDB.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\DataUtilityData.sql" />
-    <Content Include="bin\Debug\SQLScript\2Add\sp_DataModuleAdd.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\sp_DataColumnData.sql" />
-    <Content Include="bin\Debug\SQLScript\2Add\sp_DataKeyAdd.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\sp_DataKeyData.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\sp_DataModuleData.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\sp_DataTableData.sql" />
-    <Content Include="bin\Debug\SQLScript\ForeignKeys\Compare.txt" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\DataUtilityDropFK.sql" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\sp_DataColumnFK.sql" />
     <Content Include="bin\Debug\SQLScript\ForeignKeys\sp_DataColumnDropFK.sql" />
@@ -210,5 +210,6 @@
       <Name>LJCDataUtilityDAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

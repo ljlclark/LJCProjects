@@ -114,7 +114,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataModule RetrieveWithID(int id, List<string> propertyNames = null)
+    public DataModule RetrieveWithID(long id, List<string> propertyNames = null)
     {
       DataModule retValue;
 
@@ -142,7 +142,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public DbColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);

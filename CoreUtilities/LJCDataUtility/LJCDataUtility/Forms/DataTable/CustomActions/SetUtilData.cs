@@ -134,7 +134,7 @@ namespace LJCDataUtility
     #region Column Methods
 
     // Creates DataUtilColumn data.
-    private void CreateColumn(DbColumn dbColumn, int tableID
+    private void CreateColumn(DbColumn dbColumn, long tableID
       , int sequence)
     {
       var newColumn = new DataUtilColumn
@@ -174,7 +174,7 @@ namespace LJCDataUtility
     }
 
     // Creates the new columns.
-    private void CreateColumns(int newTableID)
+    private void CreateColumns(long newTableID)
     {
       var manager = new DataManager(DataConfigName, TableName);
       var dbColumns = manager.BaseDefinition;
@@ -194,7 +194,7 @@ namespace LJCDataUtility
       if (dataColumn.TypeName != dbColumn.SQLTypeName)
       {
         updateColumn.TypeName = dbColumn.SQLTypeName;
-        compareText += $"TypeName: {dataColumn.TypeName}";
+        compareText += $"DataColumn.TypeName: {dataColumn.TypeName}";
         compareText += $" = {dbColumn.SQLTypeName}\r\n";
       }
       if (-1 == dbColumn.MaxLength)
@@ -204,7 +204,7 @@ namespace LJCDataUtility
       if (dataColumn.MaxLength != dbColumn.MaxLength)
       {
         updateColumn.MaxLength = (short)dbColumn.MaxLength;
-        compareText += $"MaxLength: {dataColumn.MaxLength}";
+        compareText += $"DataColumn.MaxLength: {dataColumn.MaxLength}";
         compareText += $" = {dbColumn.MaxLength}\r\n";
       }
       if (dataColumn.AllowNull != dbColumn.AllowDBNull)
@@ -215,7 +215,7 @@ namespace LJCDataUtility
         {
           updateColumn.ChangedNames.Add("AllowNull");
         }
-        compareText += $"AllowNull: {dataColumn.AllowNull}";
+        compareText += $"DataColumn.AllowNull: {dataColumn.AllowNull}";
         compareText += $" = {dbColumn.AllowDBNull}\r\n";
       }
       if (NetString.HasValue(compareText))
@@ -260,7 +260,7 @@ namespace LJCDataUtility
     #region Key Methods
 
     // Creates DataKey data.
-    private void CreateKey(TableKey tableKey, int tableID, short keyType)
+    private void CreateKey(TableKey tableKey, long tableID, short keyType)
     {
       var newKey = new DataKey()
       {
@@ -290,7 +290,7 @@ namespace LJCDataUtility
     }
 
     // Creates the new Keys.
-    private void CreateKeys(int newTableID)
+    private void CreateKeys(long newTableID)
     {
       var primaryKeys = GetTableKeys();
       foreach (var primaryKey in primaryKeys)
@@ -472,19 +472,19 @@ namespace LJCDataUtility
       if (dataKey.SourceColumnName != tableKey.ColumnName)
       {
         updateKey.SourceColumnName = tableKey.ColumnName;
-        compare += $"SourceColumnName: {dataKey.SourceColumnName}";
+        compare += $"DataKey.SourceColumnName: {dataKey.SourceColumnName}";
         compare += $" = {tableKey.ColumnName}\r\n";
       }
       if (dataKey.TargetTableName != tableKey.TargetTable)
       {
         updateKey.TargetTableName = tableKey.TargetTable;
-        compare += $"TargetTableName: {dataKey.TargetTableName}";
+        compare += $"DataKey.TargetTableName: {dataKey.TargetTableName}";
         compare += $" = {tableKey.TargetTable}\r\n";
       }
       if (dataKey.TargetColumnName != tableKey.TargetColumns)
       {
         updateKey.TargetColumnName = tableKey.TargetColumns;
-        compare += $"TargetColumnName: {dataKey.TargetColumnName}";
+        compare += $"DataKey.TargetColumnName: {dataKey.TargetColumnName}";
         compare += $" = {tableKey.TargetColumns}\r\n";
       }
       if (NetString.HasValue(compare))
@@ -513,7 +513,7 @@ namespace LJCDataUtility
     private DataUtilityList Parent { get; set; }
 
     // Gets or sets the Table ID.
-    private int TableID { get; set; }
+    private long TableID { get; set; }
 
     // Gets or sets the Table name.
     private string TableName { get; set; }

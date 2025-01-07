@@ -251,7 +251,9 @@ namespace LJCWinFormControls
     {
       bool retValue = false;
 
-      if (LJCGetMouseRow(e) is LJCGridRow row
+      var row = LJCGetMouseRow(e);
+      //if (LJCGetMouseRow(e) is LJCGridRow row
+      if (row != null
         && row.Index != LJCLastRowIndex)
       {
         retValue = true;

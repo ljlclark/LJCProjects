@@ -69,7 +69,7 @@ namespace LJCDataUtility
 
         case Change.Key:
           KeyGrid.LJCSetLastRow();
-          KeyGridCode.SetControlState();
+          //KeyGridCode.SetControlState();
           break;
       }
       Cursor = Cursors.Default;

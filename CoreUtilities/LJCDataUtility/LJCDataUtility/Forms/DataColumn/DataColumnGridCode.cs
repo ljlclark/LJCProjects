@@ -99,7 +99,7 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        int parentID = Parent.DataTableID();
+        var parentID = Parent.DataTableID();
         var keyColumns = ColumnManager.ParentKey(parentID);
         var orderByNames = new List<string>()
         {
@@ -130,7 +130,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(int id)
+    private bool RowSelect(long id)
     {
       bool retValue = false;
 
@@ -175,7 +175,7 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
     {
-      row.LJCSetInt32(DataUtilColumn.ColumnID
+      row.LJCSetInt64(DataUtilColumn.ColumnID
         , dataRecord.ID);
       row.LJCSetString(DataUtilColumn.ColumnName
         , dataRecord.Name);
@@ -231,8 +231,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        int id = Parent.DataColumnID();
-        int parentID = Parent.DataTableID();
+        var id = Parent.DataColumnID();
+        var parentID = Parent.DataTableID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
@@ -256,7 +256,7 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         int sequence = ColumnGrid.Rows.Count + 1;
-        int parentID = Parent.DataTableID();
+        var parentID = Parent.DataTableID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
@@ -278,7 +278,7 @@ namespace LJCDataUtility
     internal void Refresh()
     {
       Parent.Cursor = Cursors.WaitCursor;
-      int id = 0;
+      long id = 0;
       if (ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
@@ -441,6 +441,7 @@ namespace LJCDataUtility
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ColumnGrid.LJCSetCurrentRow(e);
+          SetControlState();
           Parent.TimedChange(Change.Column);
         }
       }
@@ -451,6 +452,7 @@ namespace LJCDataUtility
     {
       if (ColumnGrid.LJCAllowSelectionChange)
       {
+        SetControlState();
         Parent.TimedChange(Change.Column);
       }
       ColumnGrid.LJCAllowSelectionChange = true;

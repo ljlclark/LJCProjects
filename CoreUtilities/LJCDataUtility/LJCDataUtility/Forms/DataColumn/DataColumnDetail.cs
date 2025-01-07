@@ -522,7 +522,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the primary ID value.
-    internal int LJCID { get; set; }
+    internal long LJCID { get; set; }
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
@@ -534,7 +534,7 @@ namespace LJCDataUtility
     internal ManagersDataUtility LJCManagers { get; set; }
 
     // Gets or sets the Parent ID value.
-    internal int LJCParentID { get; set; }
+    internal long LJCParentID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName

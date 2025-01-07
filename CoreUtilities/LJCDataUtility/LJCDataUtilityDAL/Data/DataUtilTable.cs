@@ -94,7 +94,7 @@ namespace LJCDataUtilityDAL
     /// <summary>Gets or sets the ID value.</summary>
     //[Required]
     //[Column("ID", TypeName="int")]
-    public Int32 ID
+    public Int64 ID
     {
       get { return mID; }
       set
@@ -102,12 +102,12 @@ namespace LJCDataUtilityDAL
         mID = ChangedNames.Add(ColumnID, mID, value);
       }
     }
-    private Int32 mID;
+    private Int64 mID;
 
     /// <summary>Gets or sets the DataModuleID value.</summary>
     //[Required]
     //[Column("DataModuleID", TypeName="int")]
-    public Int32 DataModuleID
+    public Int64 DataModuleID
     {
       get { return mDataModuleID; }
       set
@@ -115,7 +115,7 @@ namespace LJCDataUtilityDAL
         mDataModuleID = ChangedNames.Add(ColumnDataModuleID, mDataModuleID, value);
       }
     }
-    private Int32 mDataModuleID;
+    private Int64 mDataModuleID;
 
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]

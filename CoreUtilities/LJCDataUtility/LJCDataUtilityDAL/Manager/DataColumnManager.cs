@@ -122,7 +122,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataUtilColumn RetrieveWithID(int id, List<string> propertyNames = null)
+    public DataUtilColumn RetrieveWithID(long id, List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
 
@@ -134,7 +134,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataUtilColumn RetrieveWithUnique(int dataTableID, string name
+    public DataUtilColumn RetrieveWithUnique(long dataTableID, string name
       , List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
@@ -150,7 +150,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public DbColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -164,7 +164,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns ParentKey(int parentID)
+    public DbColumns ParentKey(long parentID)
     {
       var retValue = new DbColumns()
       {
@@ -175,7 +175,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns UniqueKey(int dataTableID, string name)
+    public DbColumns UniqueKey(long dataTableID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()

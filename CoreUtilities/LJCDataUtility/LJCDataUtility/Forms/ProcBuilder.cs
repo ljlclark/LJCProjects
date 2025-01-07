@@ -410,7 +410,7 @@ namespace LJCDataUtility
 
     /// <summary>Renames a table.
     /// Removes old keys and creates new keys.</summary>
-    public string RenameTableSQL(int tableID, DataKeys dataKeys)
+    public string RenameTableSQL(long tableID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");

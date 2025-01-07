@@ -131,7 +131,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the ID value.
-    internal bool RowSelect(int id)
+    internal bool RowSelect(long id)
     {
       var dataRecord = new DataUtilTable()
       {
@@ -160,7 +160,7 @@ namespace LJCDataUtility
         Parent.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
-          var rowID = row.LJCGetInt32(DataUtilTable.ColumnID);
+          var rowID = row.LJCGetInt64(DataUtilTable.ColumnID);
           if (rowID == data.ID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -197,7 +197,7 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
-      row.LJCSetInt32(DataUtilTable.ColumnID
+      row.LJCSetInt64(DataUtilTable.ColumnID
         , dataRecord.ID);
       row.LJCSetString(DataUtilTable.ColumnName
         , dataRecord.Name);
@@ -225,7 +225,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         // Data from items.
-        var id = row.LJCGetInt32(DataUtilTable.ColumnID);
+        var id = row.LJCGetInt64(DataUtilTable.ColumnID);
 
         var keyColumns = new DbColumns()
         {
@@ -256,7 +256,7 @@ namespace LJCDataUtility
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        int id = row.LJCGetInt32(DataUtilTable.ColumnID);
+        long id = row.LJCGetInt64(DataUtilTable.ColumnID);
         int parentID = ModuleCombo.LJCSelectedItemID();
         string parentName = ModuleCombo.Text;
 
@@ -305,11 +305,11 @@ namespace LJCDataUtility
     internal void Refresh()
     {
       Parent.Cursor = Cursors.WaitCursor;
-      int id = 0;
+      long id = 0;
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
-        id = row.LJCGetInt32(DataUtilTable.ColumnID);
+        id = row.LJCGetInt64(DataUtilTable.ColumnID);
       }
       DataRetrieve();
 
@@ -516,6 +516,7 @@ namespace LJCDataUtility
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           TableGrid.LJCSetCurrentRow(e);
+          SetControlState();
           Parent.TimedChange(Change.Table);
         }
       }
@@ -526,6 +527,7 @@ namespace LJCDataUtility
     {
       if (TableGrid.LJCAllowSelectionChange)
       {
+        SetControlState();
         Parent.TimedChange(Change.Table);
       }
       TableGrid.LJCAllowSelectionChange = true;

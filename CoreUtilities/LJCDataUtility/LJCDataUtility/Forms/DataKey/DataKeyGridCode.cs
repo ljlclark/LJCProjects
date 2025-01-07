@@ -100,7 +100,7 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        int parentID = Parent.DataTableID();
+        var parentID = Parent.DataTableID();
         var keyColumns = KeyManager.ParentKey(parentID);
         var items = KeyManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
@@ -127,7 +127,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(int id)
+    private bool RowSelect(long id)
     {
       bool retValue = false;
 
@@ -189,7 +189,7 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataKey data)
     {
-      row.LJCSetInt32(DataKey.ColumnID, data.ID);
+      row.LJCSetInt64(DataKey.ColumnID, data.ID);
     }
 
     // Sets the KeyType column value.
@@ -250,8 +250,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && KeyGrid.CurrentRow is LJCGridRow)
       {
-        int id = Parent.DataKeyID();
-        int parentID = Parent.DataTableID();
+        var id = Parent.DataKeyID();
+        var parentID = Parent.DataTableID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail()
@@ -274,7 +274,7 @@ namespace LJCDataUtility
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        int parentID = Parent.DataTableID();
+        var parentID = Parent.DataTableID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
@@ -295,7 +295,7 @@ namespace LJCDataUtility
     internal void Refresh()
     {
       Parent.Cursor = Cursors.WaitCursor;
-      int id = 0;
+      long id = 0;
       if (KeyGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
@@ -560,6 +560,7 @@ namespace LJCDataUtility
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           KeyGrid.LJCSetCurrentRow(e);
+          SetControlState();
           Parent.TimedChange(Change.Key);
         }
       }
@@ -570,6 +571,7 @@ namespace LJCDataUtility
     {
       if (KeyGrid.LJCAllowSelectionChange)
       {
+        SetControlState();
         Parent.TimedChange(Change.Key);
       }
       KeyGrid.LJCAllowSelectionChange = true;

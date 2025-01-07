@@ -80,7 +80,8 @@ namespace LJCDataUtility
     // Adds a grid row and updates it with the record values.
     private LJCItem RowAdd(DataModule data)
     {
-      var retValue = ModuleCombo.LJCAddItem(data.ID, data.Name);
+      // *** Next Statement *** Demotion needs correcting.
+      var retValue = ModuleCombo.LJCAddItem((int)data.ID, data.Name);
       return retValue;
     }
 

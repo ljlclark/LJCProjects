@@ -90,7 +90,7 @@ namespace _Namespace_
 			if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from items.
-				int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
+				long parentID = parentRow.LJCGetInt64(_ParentName_.ColumnID);
 
 				var result = _ClassName_Manager.ResultWithParentID(parentID);
 				if (DbResult.HasRows(result))
@@ -122,7 +122,7 @@ namespace _Namespace_
 			var retValue = _ClassName_Grid.LJCRowAdd();
 
 			var columnName = _ClassName_.ColumnID;
-			var id = dbValues.LJCGetInt32(columnName);
+			var id = dbValues.LJCGetInt64(columnName);
 			retValue.LJCSetInt32(columnName, id);
 
 			retValue.LJCSetValues(_ClassName_Grid, dbValues);
@@ -140,7 +140,7 @@ namespace _Namespace_
 				_AppName_List.Cursor = Cursors.WaitCursor;
 				foreach (LJCGridRow row in _ClassName_Grid.Rows)
 				{
-					var rowID = row.LJCGetInt32(_ClassName_.ColumnID);
+					var rowID = row.LJCGetInt64(_ClassName_.ColumnID);
 					if (rowID == dataRecord.ID)
 					{
 						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -211,7 +211,7 @@ namespace _Namespace_
 			if (isContinue)
 			{
 				// Data from items.
-				var id = row.LJCGetInt32(_ClassName_.ColumnID);
+				var id = row.LJCGetInt64(_ClassName_.ColumnID);
 
 				var keyColumns = new DbColumns()
 				{
@@ -241,8 +241,8 @@ namespace _Namespace_
 				&& _ClassName_Grid.CurrentRow is LJCGridRow row)
 			{
 				// Data from items.
-				int id = row.LJCGetInt32(_ClassName_.ColumnID);
-				int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
+				var id = row.LJCGetInt64(_ClassName_.ColumnID);
+				var parentID = parentRow.LJCGetInt64(_ParentName_.ColumnID);
 				string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
 
 				var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
@@ -274,7 +274,7 @@ namespace _Namespace_
 			if (_ParentName_Grid.CurrentRow is LJCGridRow parentRow)
 			{
 				// Data from list items.
-				int parentID = parentRow.LJCGetInt32(_ParentName_.ColumnID);
+				var parentID = parentRow.LJCGetInt64(_ParentName_.ColumnID);
 				string parentName = parentRow.LJCGetString(_ParentName_.ColumnName);
 
 				var location = FormCommon.GetDialogScreenPoint(_ClassName_Grid);
@@ -295,11 +295,11 @@ namespace _Namespace_
     internal void DoRefresh()
 		{
 			_AppName_List.Cursor = Cursors.WaitCursor;
-			int id = 0;
+			long id = 0;
 			if (_ClassName_Grid.CurrentRow is LJCGridRow row)
 			{
 				// Save the original row.
-				id = row.LJCGetInt32(_ClassName_.ColumnID);
+				id = row.LJCGetInt64(_ClassName_.ColumnID);
 			}
 			DataRetrieve();
 
@@ -323,7 +323,7 @@ namespace _Namespace_
 			if (_ClassName_Grid.CurrentRow is LJCGridRow row)
 			{
 				_AppName_List.Cursor = Cursors.WaitCursor;
-				var id = row.LJCGetInt32(_ClassName_.ColumnID);
+				var id = row.LJCGetInt64(_ClassName_.ColumnID);
 
 				var manager = Managers._ClassName_Manager;
 				var keyRecord = manager.GetIDKey(id);
