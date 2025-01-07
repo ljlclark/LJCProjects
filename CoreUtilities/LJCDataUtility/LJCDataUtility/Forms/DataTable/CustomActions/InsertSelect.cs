@@ -32,7 +32,7 @@ namespace LJCDataUtility
     // Generates the InsertSelect SQL.
     internal void InsertSelectProc()
     {
-      // Cannot change Table Name, PK or FK columns.
+      // Cannot change Table Name, PK or FK columns?
       // Decrease Length: Check for truncation.
       // Decrease Int size: Check for truncation.
 
@@ -51,22 +51,23 @@ namespace LJCDataUtility
         var selectColumns = manager.BaseDefinition;
         var columnLists = ColumnLists(insertColumns, selectColumns, "  ");
 
-        StringBuilder b = new StringBuilder(256);
+        TextBuilder b = new TextBuilder(256);
         string dbName = "LJCDataUtility";
         string toTableName = $"New{tableName}";
-        b.AppendLine($"USE [{dbName}]");
-        b.AppendLine($"SET IDENTITY_INSERT {toTableName} ON");
-        b.AppendLine();
+        b.Line($"USE [{dbName}]");
 
-        b.AppendLine($"INSERT INTO {toTableName}");
-        b.AppendLine(columnLists.InsertList);
+        var proc = new ProcBuilder(dbName, toTableName);
+        var createTable = proc.CreateTable(insertColumns);
+        b.Text(createTable);
 
-        b.AppendLine("select");
-        b.AppendLine(columnLists.SelectList);
-        b.AppendLine($"FROM {tableName};");
+        b.Line($"SET IDENTITY_INSERT {toTableName} ON");
+        b.Line($"INSERT INTO {toTableName}");
+        b.Line(columnLists.InsertList);
 
-        b.AppendLine();
-        b.AppendLine($"SET IDENTITY_INSERT {toTableName} OFF");
+        b.Line("select");
+        b.Line(columnLists.SelectList);
+        b.Line($"FROM {tableName};");
+        b.Line($"SET IDENTITY_INSERT {toTableName} OFF");
         var showText = b.ToString();
 
         var infoValue = Parent.InfoValue;

@@ -85,33 +85,21 @@ namespace LJCDataUtility
       return retString;
     }
 
-    /// <summary>Checks if the builder text ends with a supplied value.</summary>
-    public bool EndsWith(string value)
+    /// <summary>Creates the Proc body code.</summary>
+    public string BodyBegin()
     {
-      bool retValue = false;
-      var text = Builder.ToString();
-      if (text.EndsWith(value))
-      {
-        retValue = true;
-      }
+      var b = new TextBuilder(64);
+      b.Line("AS");
+      b.Line("BEGIN");
+      var retValue = b.ToString();
+      Text(retValue);
       return retValue;
     }
 
-    /// <summary>Gets the Table row IF statement.</summary>
-    public string IFItem(string parentTableName
-      , string parentIDColumnName, string parentFindColumnName
-      , string parmFindName)
+    /// <summary>Clears the Builder text.</summary>
+    public void ClearText()
     {
-      // Reference name "TableNameParentID".
-      var varRefName
-        = SQLVarName($"{parentTableName}{parentIDColumnName}");
-
-      var b = new TextBuilder(128);
-      b.Text($"DECLARE {varRefName} int = ");
-      b.Line($"(SELECT {parentIDColumnName} FROM {parentTableName}");
-      b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
-      var retIf = b.ToString();
-      return retIf;
+      Builder = new TextBuilder(512);
     }
 
     /// <summary>Creates the insert Columns list.</summary>
@@ -176,6 +164,35 @@ namespace LJCDataUtility
       return retList;
     }
 
+    /// <summary>Checks if the builder text ends with a supplied value.</summary>
+    public bool EndsWith(string value)
+    {
+      bool retValue = false;
+      var text = Builder.ToString();
+      if (text.EndsWith(value))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Gets the Table row IF statement.</summary>
+    public string IFItem(string parentTableName
+      , string parentIDColumnName, string parentFindColumnName
+      , string parmFindName)
+    {
+      // Reference name "TableNameParentID".
+      var varRefName
+        = SQLVarName($"{parentTableName}{parentIDColumnName}");
+
+      var b = new TextBuilder(128);
+      b.Text($"DECLARE {varRefName} int = ");
+      b.Line($"(SELECT {parentIDColumnName} FROM {parentTableName}");
+      b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
+      var retIf = b.ToString();
+      return retIf;
+    }
+
     /// <summary>Adds a line to the procedure.</summary>
     public void Line(string text = null)
     {
@@ -201,17 +218,6 @@ namespace LJCDataUtility
       }
       var retParams = b.ToString();
       return retParams;
-    }
-
-    /// <summary>Creates the Proc body code.</summary>
-    public string BodyBegin()
-    {
-      var b = new TextBuilder(64);
-      b.Line("AS");
-      b.Line("BEGIN");
-      var retValue = b.ToString();
-      Text(retValue);
-      return retValue;
     }
 
     /// <summary>Creates a SQL Declaration variable from a DataUtilityColumn.</summary>
@@ -353,14 +359,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Complete Create Table procedure.</summary>
-    public string CreateTableProc(DataColumns dataColumns
-      , string primaryKeyList = null, string uniqueKeyList = null)
+    /// <summary>Returns Create Table SQL.</summary>
+    public string CreateTable(DataColumns dataColumns)
     {
-      Begin(CreateProcName);
-      Line("AS");
-      Line("BEGIN");
-
       TableBegin();
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
@@ -378,6 +379,36 @@ namespace LJCDataUtility
         }
       }
       TableEnd();
+      var retProc = ToString();
+      return retProc;
+    }
+
+    /// <summary>Complete Create Table procedure.</summary>
+    public string CreateTableProc(DataColumns dataColumns
+      , string primaryKeyList = null, string uniqueKeyList = null)
+    {
+      Begin(CreateProcName);
+      Line("AS");
+      Line("BEGIN");
+
+      //TableBegin();
+      //foreach (DataUtilColumn dataColumn in dataColumns)
+      //{
+      //  if (dataColumn.IdentityIncrement > 0)
+      //  {
+      //    TableIdentity(dataColumn);
+      //  }
+      //  else
+      //  {
+      //    if (dataColumn.NewMaxLength > 0)
+      //    {
+      //      dataColumn.MaxLength = dataColumn.NewMaxLength;
+      //    }
+      //    TableColumn(dataColumn);
+      //  }
+      //}
+      //TableEnd();
+      CreateTable(dataColumns);
 
       if (primaryKeyList != null)
       {
