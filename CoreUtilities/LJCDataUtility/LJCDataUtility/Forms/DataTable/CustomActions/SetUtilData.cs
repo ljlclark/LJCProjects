@@ -348,8 +348,6 @@ namespace LJCDataUtility
       var foreignTableKeys = GetTableKeys("FOREIGN KEY");
       if (NetCommon.HasItems(foreignTableKeys))
       {
-        //var workForeignTableKey = foreignTableKeys[0].Clone();
-
         // Get combined SourceColumnNames.
         var foreignKeyGroup = new TableKeyGroup(foreignTableKeys);
         var sourceColumnNames = foreignKeyGroup.NextGroupNames();
@@ -379,7 +377,7 @@ namespace LJCDataUtility
               , workForeignTableKey.ConstraintName);
             if (foreignDataKey == null)
             {
-              var message = $"Create {uniqueConstraintName}?";
+              var message = $"Create {workForeignTableKey.ConstraintName}?";
               if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
                   , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
               {

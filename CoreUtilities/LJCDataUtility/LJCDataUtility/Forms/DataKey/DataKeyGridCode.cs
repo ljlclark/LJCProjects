@@ -206,7 +206,7 @@ namespace LJCDataUtility
     // Deletes the selected row.
     internal void Delete()
     {
-      bool isContinue = false;
+      bool isContinue = true;
       var row = KeyGrid.CurrentRow as LJCGridRow;
       if (row != null)
       {
@@ -221,10 +221,10 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = Parent.DataTableID();
+        var id = Parent.DataKeyID();
         var keyColumns = new DbColumns()
         {
-          { DataUtilTable.ColumnID, id }
+          { DataKey.ColumnID, id }
         };
         KeyManager.Delete(keyColumns);
         if (0 == KeyManager.AffectedCount)
