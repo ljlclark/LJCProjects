@@ -1,4 +1,4 @@
-set Find="StringSplitOptions"
+set Find="AddObjectArgError"
 
 if %1. == . goto default
 set folder=%1

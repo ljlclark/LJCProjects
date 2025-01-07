@@ -3,6 +3,7 @@
 // ControlDataItems.cs
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 
 namespace LJCDataDetailDAL
 {
@@ -16,7 +17,9 @@ namespace LJCDataDetailDAL
     public ControlDataItems()
     {
       mPrevCount = -1;
+      mArgError = new ArgError("LJCDataDetail.ControlDataItems");
     }
+    private ArgError mArgError;
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='Doc/ControlColumns.xml'/>
@@ -40,18 +43,19 @@ namespace LJCDataDetailDAL
     {
       ControlData retValue;
 
-      string message = "";
+      mArgError.MethodName = "Add";
+      string message;
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message = "id must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
       if (controlDetailID <= 0)
       {
-        message += "controlDetailID must be greater than zero.\r\n";
-        NetString.AddMissingArgument(message
-          , ControlData.ColumnControlDetailID);
+        message = "controlDetailID must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(mArgError.ToString());
 
       retValue = new ControlData()
       {

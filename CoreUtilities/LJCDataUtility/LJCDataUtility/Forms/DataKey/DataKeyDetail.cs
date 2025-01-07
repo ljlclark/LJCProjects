@@ -256,34 +256,14 @@ namespace LJCDataUtility
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      NameText.KeyPress += TextBoxNoSpace_KeyPress;
-      NameText.TextChanged += TextBoxNoSpace_TextChanged;
-      //SourceColumnText.KeyPress += TextBoxNoSpace_KeyPress;
-      //SourceColumnText.TextChanged += TextBoxNoSpace_TextChanged;
-      TargetTableText.KeyPress += TextBoxNoSpace_KeyPress;
-      TargetTableText.TextChanged += TextBoxNoSpace_TextChanged;
-      TargetColumnText.KeyPress += TextBoxNoSpace_KeyPress;
-      TargetColumnText.TextChanged += TextBoxNoSpace_TextChanged;
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        var saveStart = textBox.SelectionStart;
-        textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = saveStart;
-      }
+      NameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      NameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      //SourceColumnText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      //SourceColumnText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      TargetTableText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      TargetTableText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      TargetColumnText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      TargetColumnText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
     }
     #endregion
 

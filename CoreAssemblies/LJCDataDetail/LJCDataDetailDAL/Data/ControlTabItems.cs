@@ -39,7 +39,9 @@ namespace LJCDataDetailDAL
     public ControlTabItems()
     {
       mPrevCount = -1;
+      mArgError = new ArgError("LJCDataDetail.ControlTabItems");
     }
+    private readonly ArgError mArgError;
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='Doc/ControlTabs.xml'/>
@@ -63,17 +65,19 @@ namespace LJCDataDetailDAL
     {
       ControlTab retValue;
 
-      string message = "";
+      mArgError.MethodName = "Add";
+      string message;
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message = "id must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
       if (controlDetailID <= 0)
       {
-        message += "controlDetailID must be greater than zero.\r\n";
-        NetString.AddMissingArgument(message, ControlDetail.ColumnID);
+        message = "controlDetailID must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
-      NetString.ThrowInvalidArgument(message);
+      NetString.ThrowArgError(mArgError.ToString());
 
       retValue = LJCSearchUnique(controlDetailID, tabIndex);
       if (null == retValue)

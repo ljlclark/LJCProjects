@@ -361,6 +361,7 @@ namespace LJCDataAccess
             catch (Exception e)
             {
               string message = NetString.ExceptionString(e);
+              message += "\r\n" + sql;
               throw new Exception(message);
             }
             retValue.TableName = GetTableName(sql, retValue.TableName);

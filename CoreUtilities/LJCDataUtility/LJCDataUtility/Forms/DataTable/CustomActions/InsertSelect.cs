@@ -33,8 +33,8 @@ namespace LJCDataUtility
     internal void InsertSelectProc()
     {
       // Cannot change Table Name, PK or FK columns?
-      // Decrease Length: Check for truncation.
-      // Decrease Int size: Check for truncation.
+      // Decrease Length: Check for truncation?
+      // Decrease Int size: Check for truncation?
 
       var tableID = Parent.DataTableID();
       var tableName = Parent.DataTableName();
@@ -56,6 +56,7 @@ namespace LJCDataUtility
         string toTableName = $"New{tableName}";
         b.Line($"USE [{dbName}]");
 
+        // Create new Table.
         var proc = new ProcBuilder(dbName, toTableName);
         var createTable = proc.CreateTable(insertColumns);
         b.Text(createTable);

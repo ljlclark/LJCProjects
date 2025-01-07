@@ -39,7 +39,9 @@ namespace LJCDataDetailDAL
     public ControlRows()
     {
       mPrevCount = -1;
+      mArgError = new ArgError("LJCDataDetail.ControlRows");
     }
+    private readonly ArgError mArgError;
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='Doc/ControlRows.xml'/>
@@ -63,17 +65,20 @@ namespace LJCDataDetailDAL
     {
       ControlRow retValue;
 
+      mArgError.MethodName = "Add";
       string message = "";
       if (id <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message = "id must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
       if (controlColumnID <= 0)
       {
-        message += "controlColumnID must be greater than zero.\r\n";
+        message = "controlColumnID must be greater than zero.\r\n";
+        mArgError.Add(message);
       }
-      NetString.AddMissingArgument(message, dataValueName);
-      NetString.ThrowInvalidArgument(message);
+      NetString.AddObjectArgError(ref message, dataValueName, "dataValueName");
+      NetString.ThrowArgError(mArgError.ToString());
 
       retValue = LJCSearchUnique(controlColumnID, dataValueName);
       if (null == retValue)

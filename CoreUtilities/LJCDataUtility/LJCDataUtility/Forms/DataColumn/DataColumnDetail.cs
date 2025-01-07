@@ -8,12 +8,10 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Data;
+//using System.Data;
 using System.Drawing;
-using System.Security.AccessControl;
 using System.Text;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCDataUtility
 {
@@ -312,10 +310,10 @@ namespace LJCDataUtility
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      NameText.KeyPress += TextBoxNoSpace_KeyPress;
-      NameText.TextChanged += TextBoxNoSpace_TextChanged;
-      NewNameText.KeyPress += TextBoxNoSpace_KeyPress;
-      NewNameText.TextChanged += TextBoxNoSpace_TextChanged;
+      NameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      NameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      NewNameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
+      NewNameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
     }
 
     // Sets the Numeric events.
@@ -335,23 +333,6 @@ namespace LJCDataUtility
     #endregion
 
     #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        var saveStart = textBox.SelectionStart;
-        textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = saveStart;
-      }
-    }
 
     // Only allows numbers or edit keys.
     private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)

@@ -186,7 +186,7 @@ namespace LJCDataUtility
         = SQLVarName($"{parentTableName}{parentIDColumnName}");
 
       var b = new TextBuilder(128);
-      b.Text($"DECLARE {varRefName} int = ");
+      b.Text($"DECLARE {varRefName} bigint = ");
       b.Line($"(SELECT {parentIDColumnName} FROM {parentTableName}");
       b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
       var retIf = b.ToString();
@@ -391,25 +391,7 @@ namespace LJCDataUtility
       Line("AS");
       Line("BEGIN");
 
-      //TableBegin();
-      //foreach (DataUtilColumn dataColumn in dataColumns)
-      //{
-      //  if (dataColumn.IdentityIncrement > 0)
-      //  {
-      //    TableIdentity(dataColumn);
-      //  }
-      //  else
-      //  {
-      //    if (dataColumn.NewMaxLength > 0)
-      //    {
-      //      dataColumn.MaxLength = dataColumn.NewMaxLength;
-      //    }
-      //    TableColumn(dataColumn);
-      //  }
-      //}
-      //TableEnd();
       CreateTable(dataColumns);
-
       if (primaryKeyList != null)
       {
         var text = AddPrimaryKey(TableName, PKName, primaryKeyList);
