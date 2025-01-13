@@ -257,35 +257,8 @@ namespace LJCDataUtility
     // Sets the Numeric events.
     private void SetNumericOnly()
     {
-      SequenceText.KeyPress += TextBoxNumeric_KeyPress;
-      SequenceText.TextChanged += TextBoxNumeric_TextChanged;
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      mPrevText = "";
-      if (sender is TextBox textBox)
-      {
-        mPrevText = textBox.Text;
-        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
-      }
-    }
-    private string mPrevText;
-
-    // Resets text to previous value if not a number.
-    private void TextBoxNumeric_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        if (!FormCommon.IsNumber(textBox.Text))
-        {
-          textBox.Text = mPrevText;
-        }
-      }
+      SequenceText.KeyPress += mSequence.KeyPress;
+      SequenceText.TextChanged += mSequence.TextChanged;
     }
     #endregion
 
@@ -358,6 +331,8 @@ namespace LJCDataUtility
     private DataUtilTable mOriginalRecord;
 
     //private StandardUISettings mSettings;
+
+    private readonly TextNumber mSequence = new TextNumber();
     #endregion
   }
 }

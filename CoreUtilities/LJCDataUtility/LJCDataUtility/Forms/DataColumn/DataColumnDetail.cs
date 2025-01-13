@@ -319,43 +319,16 @@ namespace LJCDataUtility
     // Sets the Numeric events.
     private void SetNumericOnly()
     {
-      SequenceText.KeyPress += TextBoxNumeric_KeyPress;
-      SequenceText.TextChanged += TextBoxNumeric_TextChanged;
-      MaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
-      MaxLengthText.TextChanged += TextBoxNumeric_TextChanged;
-      NewMaxLengthText.KeyPress += TextBoxNumeric_KeyPress;
-      NewMaxLengthText.TextChanged += TextBoxNumeric_TextChanged;
-      IdentityStartText.KeyPress += TextBoxNumeric_KeyPress;
-      IdentityStartText.TextChanged += TextBoxNumeric_TextChanged;
-      IdentityIncrementText.KeyPress += TextBoxNumeric_KeyPress;
-      IdentityIncrementText.TextChanged += TextBoxNumeric_TextChanged;
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      mPrevText = "";
-      if (sender is TextBox textBox)
-      {
-        mPrevText = textBox.Text;
-        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
-      }
-    }
-    private string mPrevText;
-
-    // Resets text to previous value if not a number.
-    private void TextBoxNumeric_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        if (!FormCommon.IsNumber(textBox.Text))
-        {
-          textBox.Text = mPrevText;
-        }
-      }
+      SequenceText.KeyPress += mSequence.KeyPress;
+      SequenceText.TextChanged += mSequence.TextChanged;
+      MaxLengthText.KeyPress += mMaxLength.KeyPress;
+      MaxLengthText.TextChanged += mMaxLength.TextChanged;
+      NewMaxLengthText.KeyPress += mNewMaxLength.KeyPress;
+      NewMaxLengthText.TextChanged += mNewMaxLength.TextChanged;
+      IdentityStartText.KeyPress += mIdentityStart.KeyPress;
+      IdentityStartText.TextChanged += mIdentityStart.TextChanged;
+      IdentityIncrementText.KeyPress += mIdentityIncrement.KeyPress;
+      IdentityIncrementText.TextChanged += mIdentityIncrement.TextChanged;
     }
     #endregion
 
@@ -539,6 +512,12 @@ namespace LJCDataUtility
 
     private DataUtilColumn mOriginalRecord;
     //private StandardUISettings mSettings;
+
+    private readonly TextNumber mSequence = new TextNumber();
+    private readonly TextNumber mMaxLength = new TextNumber();
+    private readonly TextNumber mNewMaxLength = new TextNumber();
+    private readonly TextNumber mIdentityStart = new TextNumber();
+    private readonly TextNumber mIdentityIncrement = new TextNumber();
     #endregion
   }
 }
