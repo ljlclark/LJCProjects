@@ -186,7 +186,7 @@
       this.MaxLengthText.Location = new System.Drawing.Point(254, 304);
       this.MaxLengthText.Margin = new System.Windows.Forms.Padding(6);
       this.MaxLengthText.Name = "MaxLengthText";
-      this.MaxLengthText.Size = new System.Drawing.Size(55, 32);
+      this.MaxLengthText.Size = new System.Drawing.Size(75, 32);
       this.MaxLengthText.TabIndex = 13;
       // 
       // MaxLengthLabel
@@ -265,7 +265,7 @@
       this.NewMaxLengthText.Location = new System.Drawing.Point(254, 351);
       this.NewMaxLengthText.Margin = new System.Windows.Forms.Padding(6);
       this.NewMaxLengthText.Name = "NewMaxLengthText";
-      this.NewMaxLengthText.Size = new System.Drawing.Size(55, 32);
+      this.NewMaxLengthText.Size = new System.Drawing.Size(75, 32);
       this.NewMaxLengthText.TabIndex = 15;
       // 
       // NewMaxLengthLabel

@@ -105,9 +105,9 @@ namespace LJCDataUtility
         SequenceText.Text
           = FormCommon.DefaultMinusOne((object)data.Sequence);
         int index = TypeNameCombo.FindString(data.TypeName);
-        TypeNameCombo.SelectedIndex = index;
         MaxLengthText.Text
           = FormCommon.DefaultMinusOne((object)data.MaxLength);
+        TypeNameCombo.SelectedIndex = index;
         NewMaxLengthText.Text
           = FormCommon.DefaultMinusOne((object)data.NewMaxLength);
         DefaultText.Text = data.DefaultValue;
@@ -352,6 +352,9 @@ namespace LJCDataUtility
     // Set the combo index by a text value.
     private void SetComboIndex(string text)
     {
+      // Make sure SelectedIndexChanged fires.
+      TypeNameCombo.SelectedIndex = -1;
+
       var index = TypeNameCombo.FindString(text);
       TypeNameCombo.SelectedIndex = index;
     }
@@ -369,9 +372,6 @@ namespace LJCDataUtility
     // Handles the NameText Leave event.
     private void NameText_Leave(object sender, EventArgs e)
     {
-      // Make sure the SelectedIndexChanged fires.
-      TypeNameCombo.SelectedIndex = -1;
-
       // Set missing description the same as column name.
       var columnName = NameText.Text.Trim();
       if (!NetString.HasValue(DescriptionText.Text))
@@ -384,8 +384,10 @@ namespace LJCDataUtility
       if ("ID" == columnName)
       {
         isTypeSet = true;
-        SetComboIndex("bigint");
-        //IdentityEnable(true);
+        if (-1 == TypeNameCombo.SelectedIndex)
+        {
+          SetComboIndex("bigint");
+        }
         IdentityStartText.Text = "1";
         IdentityIncrementText.Text = "1";
       }
@@ -395,13 +397,19 @@ namespace LJCDataUtility
         && columnName.EndsWith("ID"))
       {
         isTypeSet = true;
-        SetComboIndex("bigint");
+        if (-1 == TypeNameCombo.SelectedIndex)
+        {
+          SetComboIndex("bigint");
+        }
         IdentityEnable(false);
       }
 
       if (!isTypeSet)
       {
-        SetComboIndex("varchar");
+        if (-1 == TypeNameCombo.SelectedIndex)
+        {
+          SetComboIndex("varchar");
+        }
       }
     }
 
@@ -415,6 +423,7 @@ namespace LJCDataUtility
       }
     }
 
+    // Handles the TextChanged event.
     private void IdentityStartText_TextChanged(object sender, EventArgs e)
     {
       var identityStart = IdentityStartText.Text.Trim();
@@ -433,6 +442,7 @@ namespace LJCDataUtility
       }
     }
 
+    // Handles the SelectedIndexChanged event.
     private void TypeNameCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
       // Set MaxLength.
@@ -451,17 +461,26 @@ namespace LJCDataUtility
           switch (columnName)
           {
             case "Name":
-              MaxLengthText.Text = "60";
+              if (!NetString.HasValue(MaxLengthText.Text))
+              {
+                MaxLengthText.Text = "60";
+              }
               AllowNullCheck.Checked = false;
               break;
 
             case "Description":
-              MaxLengthText.Text = "80";
+              if (!NetString.HasValue(MaxLengthText.Text))
+              {
+                MaxLengthText.Text = "80";
+              }
               AllowNullCheck.Checked = true;
               break;
 
             default:
-              MaxLengthText.Text = "60";
+              if (!NetString.HasValue(MaxLengthText.Text))
+              {
+                MaxLengthText.Text = "60";
+              }
               break;
           }
         }

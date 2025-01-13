@@ -368,7 +368,7 @@ namespace LJCDataUtilityDAL
     public static int LengthIdentityIncrement = 3;
 
     /// <summary>The MaxLength maximum length.</summary>
-    public static int LengthMaxLength = 3;
+    public static int LengthMaxLength = 5;
 
     /// <summary>The MaxLength maximum length.</summary>
     public static int LengthDefaultValue = 30;
