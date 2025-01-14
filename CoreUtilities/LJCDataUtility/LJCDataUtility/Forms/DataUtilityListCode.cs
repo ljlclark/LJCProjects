@@ -206,8 +206,14 @@ namespace LJCDataUtility
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
+      ColumnTabs.MouseDown += ColumnTabs_MouseDown;
+      TileTabs.MouseDown += TileTabs_MouseDown;
+      ColumnTabMove.Click += ColumnTabMove_Click;
+      KeyTabMove.Click += KeyTabMove_Click;
+
       InitializeClassData();
       SetupControlCode();
+      ControlSetup();
       InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
@@ -237,6 +243,13 @@ namespace LJCDataUtility
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
+    }
+
+    // Initial Control setup.
+    private void ControlSetup()
+    {
+      // Provides additional Drag features between split LJCTabControls.
+      var _ = new LJCPanelManager(ColumnsSplit, ColumnTabs, TileTabs);
     }
 
     // Set initial Control values.
@@ -334,6 +347,59 @@ namespace LJCDataUtility
 
       NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
         , ControlValuesFileName);
+    }
+
+    // Sets the tab initial focus control.
+    private void SetFocusTab(MouseEventArgs e)
+    {
+      var tabPage = ColumnTabs.LJCGetTabPage(e);
+      switch (tabPage.Name)
+      {
+        case "ColumnPage":
+          ColumnGrid.Select();
+          break;
+        case "KeyPage":
+          KeyGrid.Select();
+          break;
+      }
+    }
+    #endregion
+
+    #region Action Event Handlers
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void ColumnTabMove_Click(object sender, EventArgs e)
+    {
+      ColumnTabs.LJCMoveTabPageRight(TileTabs, ColumnsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void KeyTabMove_Click(object sender, EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(ColumnTabs, ColumnsSplit);
+    }
+    #endregion
+
+    #region Control Event Handlers
+
+    // Handles the MouseDown event.
+    private void ColumnTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        ColumnTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
+    }
+
+    // Handles the MouseDown event.
+    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+        TileTabs.LJCSetCurrentTabPage(e);
+      }
+      SetFocusTab(e);
     }
     #endregion
 
