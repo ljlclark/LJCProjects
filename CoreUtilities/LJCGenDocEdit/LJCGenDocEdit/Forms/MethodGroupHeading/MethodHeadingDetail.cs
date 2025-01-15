@@ -331,26 +331,25 @@ namespace LJCGenDocEdit
 
       // Set control values.
       FormCommon.SetLabelsBackColor(Controls, BeginColor);
-      SetNoSpace(NameText);
-      SetNumericOnly(SequenceText);
+      SetNoSpace();
+      SetNumeric();
 
       ConfigureControls();
       Cursor = Cursors.Default;
     }
 
     // Sets the NoSpace events.
-    private void SetNoSpace(TextBox textBox)
+    private void SetNoSpace()
     {
-      textBox.KeyPress += TextBoxNoSpace_KeyPress;
-      textBox.TextChanged += TextBoxNoSpace_TextChanged;
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
 
-    // Sets the NoSpace events.
-    private void SetNumericOnly(TextBox textBox)
+    // Sets the Numeric events.
+    private void SetNumeric()
     {
-      textBox.KeyPress += TextBoxNumeric_KeyPress;
-      textBox.KeyPress += TextBoxNoSpace_KeyPress;
-      textBox.TextChanged += TextBoxNoSpace_TextChanged;
+      SequenceText.KeyPress += mSequence.KeyPress;
+      SequenceText.TextChanged += mSequence.TextChanged;
     }
     #endregion
 
@@ -371,35 +370,6 @@ namespace LJCGenDocEdit
       {
         LJCOnChange();
         DialogResult = DialogResult.OK;
-      }
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        var prevStart = textBox.SelectionStart;
-        textBox.Text = FormCommon.StripBlanks(textBox.Text);
-        textBox.SelectionStart = prevStart;
-      }
-    }
-
-    // Only allows numbers or edit keys.
-    private void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      if (sender is TextBox textBox)
-      {
-        e.Handled = FormCommon.HandleNumber(textBox.Text, e.KeyChar);
       }
     }
     #endregion
@@ -441,6 +411,8 @@ namespace LJCGenDocEdit
 
     // The standard configuration settings.
     private StandardUISettings mSettings;
+
+    private readonly TextNumber mSequence = new TextNumber();
     #endregion
   }
 }

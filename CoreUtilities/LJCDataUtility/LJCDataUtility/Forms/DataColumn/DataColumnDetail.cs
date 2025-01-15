@@ -260,7 +260,7 @@ namespace LJCDataUtility
 
       // Set control values.
       SetNoSpace();
-      SetNumericOnly();
+      SetNumeric();
       NameText.MaxLength = DataUtilColumn.LengthName;
       NewNameText.MaxLength = DataUtilColumn.LengthName;
       DescriptionText.MaxLength = DataUtilColumn.LengthDescription;
@@ -310,14 +310,14 @@ namespace LJCDataUtility
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      NameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
-      NameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
-      NewNameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
-      NewNameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
+      NewNameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NewNameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
 
     // Sets the Numeric events.
-    private void SetNumericOnly()
+    private void SetNumeric()
     {
       SequenceText.KeyPress += mSequence.KeyPress;
       SequenceText.TextChanged += mSequence.TextChanged;

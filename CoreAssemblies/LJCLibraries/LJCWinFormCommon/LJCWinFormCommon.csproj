@@ -56,6 +56,7 @@
     <Compile Include="ModuleReference.cs" />
     <Compile Include="ModuleReferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\ChangeTimer.xml" />

@@ -68,8 +68,6 @@
       this.JoinTableCombo.Name = "JoinTableCombo";
       this.JoinTableCombo.Size = new System.Drawing.Size(528, 30);
       this.JoinTableCombo.TabIndex = 3;
-      this.JoinTableCombo.TextChanged += new System.EventHandler(this.TableNameTextbox_TextChanged);
-      this.JoinTableCombo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TableNameTextbox_KeyPress);
       // 
       // JoinTableLabel
       // 

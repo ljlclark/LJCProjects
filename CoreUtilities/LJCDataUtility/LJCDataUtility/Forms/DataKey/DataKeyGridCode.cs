@@ -555,7 +555,6 @@ namespace LJCDataUtility
       if (e.Button == MouseButtons.Right)
       {
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-        KeyGrid.Select();
         if (KeyGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.

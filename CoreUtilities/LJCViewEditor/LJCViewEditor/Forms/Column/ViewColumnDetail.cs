@@ -327,12 +327,12 @@ namespace LJCViewEditor
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      ColumnNameTextbox.KeyPress += TextboxNoSpace_KeyPress;
-      PropertyTextbox.KeyPress += TextboxNoSpace_KeyPress;
-      RenameTextbox.KeyPress += TextboxNoSpace_KeyPress;
-      ColumnNameTextbox.TextChanged += TextboxNoSpace_TextChanged;
-      PropertyTextbox.TextChanged += TextboxNoSpace_TextChanged;
-      RenameTextbox.TextChanged += TextboxNoSpace_TextChanged;
+      ColumnNameTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      PropertyTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      RenameTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      ColumnNameTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
+      PropertyTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
+      RenameTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 
@@ -382,26 +382,6 @@ namespace LJCViewEditor
       mAllowTemplateGetValues = true;
     }
     private bool mAllowTemplateGetValues;
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextboxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextboxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textbox)
-      {
-        var prevStart = textbox.SelectionStart;
-        textbox.Text = FormCommon.StripBlanks(ColumnNameTextbox.Text);
-        textbox.SelectionStart = prevStart;
-      }
-    }
     #endregion
 
     #region Properties

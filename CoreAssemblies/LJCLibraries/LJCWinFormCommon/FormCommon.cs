@@ -411,23 +411,9 @@ namespace LJCWinFormCommon
       return retValue;
     }
 
-    // Only allows numbers or edit keys.
-    /// <include path='items/TextBoxNumeric_KeyPress/*' file='Doc/FormCommon.xml'/>
-    public static void TextBoxNumeric_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      if (!e.Handled)
-      {
-        if (sender is TextBox textBox)
-        {
-          var text = textBox.Text;
-          e.Handled = HandleNumber(text, e.KeyChar);
-        }
-      }
-    }
-
     // Does not allow spaces.
     /// <include path='items/TextBoxNoSpace_KeyPress/*' file='Doc/FormCommon.xml'/>
-    public static void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
+    public static void TextNoSpaceKeyPress(object sender, KeyPressEventArgs e)
     {
       if (!e.Handled)
       {
@@ -437,7 +423,7 @@ namespace LJCWinFormCommon
 
     // Strips blanks from the text value.
     /// <include path='items/TextBoxNoSpace_TextChanged/*' file='Doc/FormCommon.xml'/>
-    public static void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
+    public static void TextNoSpaceChanged(object sender, EventArgs e)
     {
       if (sender is TextBox textBox
         && textBox.Text.Contains(" "))
@@ -445,6 +431,13 @@ namespace LJCWinFormCommon
         int saveStart = textBox.SelectionStart;
         textBox.Text = StripBlanks(textBox.Text);
         textBox.SelectionStart = saveStart;
+      }
+      if (sender is ComboBox combobox
+        && combobox.Text.Contains(" "))
+      {
+        int saveStart = combobox.SelectionStart;
+        combobox.Text = FormCommon.StripBlanks(combobox.Text);
+        combobox.SelectionStart = saveStart;
       }
     }
     #endregion

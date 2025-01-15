@@ -272,12 +272,12 @@ namespace LJCViewEditor
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      FirstValueCombo.KeyPress += TextBoxNoSpace_KeyPress;
-      SecondValueTextbox.KeyPress += TextBoxNoSpace_KeyPress;
-      ComparisonTextbox.KeyPress += TextBoxNoSpace_KeyPress;
-      FirstValueCombo.TextChanged += TextBoxNoSpace_TextChanged;
-      SecondValueTextbox.TextChanged += TextBoxNoSpace_TextChanged;
-      ComparisonTextbox.TextChanged += TextBoxNoSpace_TextChanged;
+      FirstValueCombo.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      SecondValueTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      ComparisonTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      FirstValueCombo.TextChanged += FormCommon.TextNoSpaceChanged;
+      SecondValueTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
+      ComparisonTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 

@@ -92,8 +92,6 @@
       this.NameTextbox.Name = "NameTextbox";
       this.NameTextbox.Size = new System.Drawing.Size(528, 28);
       this.NameTextbox.TabIndex = 3;
-      this.NameTextbox.TextChanged += new System.EventHandler(this.NameTextbox_TextChanged);
-      this.NameTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextbox_KeyPress);
       // 
       // NameLabel
       // 

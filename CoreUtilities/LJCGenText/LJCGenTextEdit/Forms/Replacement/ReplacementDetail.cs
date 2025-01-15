@@ -78,8 +78,8 @@ namespace LJCGenTextEdit
         Text += " - New";
         LJCIsUpdate = false;
         LJCRecord = new Replacement();
-        ParentNameTextbox.Text = LJCParentName;
-        NameTextbox.Select();
+        ParentNameText.Text = LJCParentName;
+        NameText.Select();
       }
       Cursor = Cursors.Default;
     }
@@ -90,8 +90,8 @@ namespace LJCGenTextEdit
     {
       if (dataRecord != null)
       {
-        ParentNameTextbox.Text = LJCParentName;
-        NameTextbox.Text = dataRecord.Name;
+        ParentNameText.Text = LJCParentName;
+        NameText.Text = dataRecord.Name;
         ValueTextbox.Text = dataRecord.Value;
       }
     }
@@ -103,7 +103,7 @@ namespace LJCGenTextEdit
     {
       Replacement retValue = new Replacement()
       {
-        Name = NameTextbox.Text.Trim(),
+        Name = NameText.Text.Trim(),
         Value = ValueTextbox.Text.Trim()
       };
       return retValue;
@@ -199,7 +199,7 @@ namespace LJCGenTextEdit
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (!NetString.HasValue(NameTextbox.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
@@ -234,12 +234,21 @@ namespace LJCGenTextEdit
       //NameLabel.BackColor = BeginColor;
       //ValueLabel.BackColor = BeginColor;
 
-      NameTextbox.MaxLength = 60;
+      // Set control values.
+      SetNoSpace();
+      NameText.MaxLength = 60;
       ValueTextbox.MaxLength = 100;
 
       // Load control data.
 
       // Set control layout.
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 

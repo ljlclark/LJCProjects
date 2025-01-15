@@ -216,11 +216,20 @@ namespace LJCGenTextEdit
       // Initialize Class Data.
       //NameLabel.BackColor = BeginColor;
 
+      // Set control values.
+      SetNoSpace();
       NameTextbox.MaxLength = 60;
 
       // Load control data.
 
       // Set control layout.
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      NameTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 

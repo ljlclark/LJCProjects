@@ -289,12 +289,12 @@ namespace LJCViewEditor
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      FromColumnCombo.KeyPress += TextBoxNoSpace_KeyPress;
-      ToColumnCombo.KeyPress += TextBoxNoSpace_KeyPress;
-      OperatorTextbox.KeyPress += TextBoxNoSpace_KeyPress;
-      FromColumnCombo.TextChanged += TextBoxNoSpace_TextChanged;
-      ToColumnCombo.TextChanged += TextBoxNoSpace_TextChanged;
-      OperatorTextbox.TextChanged += TextBoxNoSpace_TextChanged;
+      FromColumnCombo.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      FromColumnCombo.TextChanged += FormCommon.TextNoSpaceChanged;
+      ToColumnCombo.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      ToColumnCombo.TextChanged += FormCommon.TextNoSpaceChanged;
+      OperatorTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      OperatorTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 
@@ -330,32 +330,6 @@ namespace LJCViewEditor
     private void FormCancelButton_Click(object sender, EventArgs e)
     {
       Close();
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void TextBoxNoSpace_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void TextBoxNoSpace_TextChanged(object sender, EventArgs e)
-    {
-      if (sender is TextBox textbox)
-      {
-        var prevStart = textbox.SelectionStart;
-        textbox.Text = FormCommon.StripBlanks(textbox.Text);
-        textbox.SelectionStart = prevStart;
-      }
-      if (sender is ComboBox combobox)
-      {
-        var prevStart = combobox.SelectionStart;
-        combobox.Text = FormCommon.StripBlanks(combobox.Text);
-        combobox.SelectionStart = prevStart;
-      }
     }
     #endregion
 

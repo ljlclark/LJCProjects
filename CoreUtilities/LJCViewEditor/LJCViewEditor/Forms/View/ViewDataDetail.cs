@@ -258,8 +258,16 @@ namespace LJCViewEditor
       // Set control values.
       // *** Next Statement *** Delete
       //FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      SetNoSpace();
       NameTextbox.MaxLength = ViewData.LengthName;
       DescriptionTextbox.MaxLength = ViewData.LengthDescription;
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      NameTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 
@@ -295,23 +303,6 @@ namespace LJCViewEditor
     private void FormCancelButton_Click(object sender, EventArgs e)
     {
       Close();
-    }
-    #endregion
-
-    #region KeyEdit Event Handlers
-
-    // Does not allow spaces.
-    private void NameTextbox_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      e.Handled = FormCommon.HandleSpace(e.KeyChar);
-    }
-
-    // Strips blanks from the text value.
-    private void NameTextbox_TextChanged(object sender, EventArgs e)
-    {
-      var prevStart = NameTextbox.SelectionStart;
-      NameTextbox.Text = FormCommon.StripBlanks(NameTextbox.Text);
-      NameTextbox.SelectionStart = prevStart;
     }
     #endregion
 

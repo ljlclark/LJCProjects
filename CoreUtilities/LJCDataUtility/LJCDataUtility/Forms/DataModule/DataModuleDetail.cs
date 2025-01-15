@@ -228,8 +228,8 @@ namespace LJCDataUtility
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      NameText.KeyPress += FormCommon.TextBoxNoSpace_KeyPress;
-      NameText.TextChanged += FormCommon.TextBoxNoSpace_TextChanged;
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 

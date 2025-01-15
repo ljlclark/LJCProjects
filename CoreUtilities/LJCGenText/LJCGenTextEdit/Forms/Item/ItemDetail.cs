@@ -88,7 +88,7 @@ namespace LJCGenTextEdit
       if (dataRecord != null)
       {
         ParentNameTextbox.Text = LJCParentName;
-        NameTextbox.Text = dataRecord.Name;
+        NameText.Text = dataRecord.Name;
       }
     }
 
@@ -99,7 +99,7 @@ namespace LJCGenTextEdit
     {
       RepeatItem retValue = new RepeatItem()
       {
-        Name = FormCommon.SetString(NameTextbox.Text),
+        Name = FormCommon.SetString(NameText.Text),
       };
       return retValue;
     }
@@ -190,7 +190,7 @@ namespace LJCGenTextEdit
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (!NetString.HasValue(NameTextbox.Text))
+      if (!NetString.HasValue(NameText.Text))
       {
         retValue = false;
         builder.AppendLine("  {NameLabel.Text}");
@@ -219,11 +219,20 @@ namespace LJCGenTextEdit
       // Initialize Class Data.
       //NameLabel.BackColor = BeginColor;
 
-      NameTextbox.MaxLength = 60;
+      // Set control values.
+      SetNoSpace();
+      NameText.MaxLength = 60;
 
       // Load control data.
 
       // Set control layout.
+    }
+
+    // Sets the NoSpace events.
+    private void SetNoSpace()
+    {
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 
