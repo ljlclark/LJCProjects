@@ -27,52 +27,48 @@ namespace LJCDataUtility
     // Generates the AddData procedure.
     internal void AddDataProc()
     {
-      string dbName = "LJCDataUtility";
       var tableID = Parent.DataTableID();
-      var tableName = Parent.DataTableName();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
       var dataColumns = Managers.TableDataColumns(tableID
         , orderByNames);
+
       if (NetCommon.HasItems(dataColumns))
       {
-        AddProcData procData;
-        DataColumns parentColumns;
-        string parentTableName;
+        var tableName = Parent.DataTableName();
+        string parentTableName = null;
         switch (tableName)
         {
-          case "DataModule":
-            procData = new AddProcData(dbName, dataColumns
-              , tableName);
-            CreateAddProc(procData);
-            break;
-
           case "DataTable":
             parentTableName = "DataModule";
-            parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, dataColumns
-              , tableName, parentColumns, parentTableName);
-            CreateAddProc(procData);
             break;
 
           case "DataColumn":
-            parentTableName = "DataUtilTable";
-            parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, dataColumns
-              , tableName, parentColumns, parentTableName);
-            CreateAddProc(procData);
-            break;
-
           case "DataKey":
             parentTableName = "DataUtilTable";
-            parentColumns = Managers.TableDataColumns(tableID);
-            procData = new AddProcData(dbName, dataColumns
-              , tableName, parentColumns, parentTableName);
-            CreateAddProc(procData);
+            break;
+
+          case "DataEntry":
+          case "DataEntrySite":
+            parentTableName = "DataSite";
             break;
         }
+
+        DataColumns parentColumns = null;
+        if (tableName != "DataModule"
+          && tableName != "DataSite")
+        {
+          parentColumns = Managers.TableDataColumns(tableID);
+        }
+
+        // ToDo: Get DB name.
+        string dbName = "LJCDataUtility";
+
+        var procData = new AddProcData(dbName, dataColumns
+          , tableName, parentColumns, parentTableName);
+        CreateAddProc(procData);
       }
     }
 

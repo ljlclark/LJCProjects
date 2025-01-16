@@ -427,4 +427,17 @@ namespace LJCDataUtility
     private StandardUISettings Settings { get; set; }
     #endregion
   }
+
+  /// <summary></summary>
+  public enum KeyType : short
+  {
+    /// <summary></summary>
+    Primary = 1,
+    /// <summary></summary>
+    Unique,
+    /// <summary></summary>
+    Foreign,
+    /// <summary></summary>
+    Table
+  }
 }

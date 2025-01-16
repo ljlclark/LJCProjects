@@ -17,8 +17,8 @@ namespace LJCDataUtility
     public CreateTable(DataUtilityList parentList)
     {
       // Initialize property values.
-      Parent = parentList;
-      Managers = Parent.Managers;
+      ParentList = parentList;
+      Managers = ParentList.Managers;
     }
     #endregion
 
@@ -27,27 +27,45 @@ namespace LJCDataUtility
     // Generates the CreateTable procedure.
     internal void CreateTableProc()
     {
-      string dbName = "LJCDataUtility";
-      var tableID = Parent.DataTableID();
+      var parentTableID = ParentList.DataTableID();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var dataColumns = Managers.TableDataColumns(tableID
+      var dataColumns = Managers.TableDataColumns(parentTableID
         , orderByNames);
+
       if (NetCommon.HasItems(dataColumns))
       {
-        var tableName = Parent.DataTableName();
+        // ToDo: Get DB name.
+        string dbName = "LJCDataUtility";
+
+        var tableName = ParentList.DataTableName();
         var proc = new ProcBuilder(dbName, tableName);
-        var primaryKeyList = "ID";
-        var uniqueKeyList = "Name";
+
+        string primaryKeyList = null;
+        string uniqueKeyList = null;
+        var keyManager = Managers.DataKeyManager;
+        var dataKey = keyManager.RetrieveWithType(parentTableID
+          , (short)KeyType.Primary);
+        if (dataKey != null)
+        {
+          primaryKeyList = dataKey.SourceColumnName;
+        }
+        dataKey = keyManager.RetrieveWithType(parentTableID
+          , (short)KeyType.Unique);
+        if (dataKey != null)
+        {
+          uniqueKeyList = dataKey.SourceColumnName;
+        }
+
         var value = proc.CreateTableProc(dataColumns, primaryKeyList
           , uniqueKeyList);
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Create Table Procedure", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
     #endregion
@@ -55,7 +73,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentList { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

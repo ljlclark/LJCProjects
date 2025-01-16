@@ -6,6 +6,7 @@ using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {
@@ -136,28 +137,36 @@ namespace LJCDataUtilityDAL
     /// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
     public DataKey RetrieveWithID(long id, List<string> propertyNames = null)
     {
-      DataKey retValue;
-
       var keyColumns = IDKey(id);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DataKey RetrieveWithUnique(long dataTableID, string name
+    public DataKey RetrieveWithUnique(long parentTableID, string name
       , List<string> propertyNames = null)
     {
-      DataKey retValue;
-
       var joins = GetJoins();
-      var keyColumns = UniqueKey(dataTableID, name);
+      var keyColumns = UniqueKey(parentTableID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
-      retValue = ResultConverter.CreateData(dbResult);
+      var retValue = ResultConverter.CreateData(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a record with the supplied values.
+    public DataKey RetrieveWithType(long parentTableID, short keyType
+      , List<string> propertyNames = null)
+    {
+      var joins = GetJoins();
+      var keyColumns = TypeKey(parentTableID, keyType);
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames
+        , joins: joins);
+      var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
     #endregion
@@ -189,15 +198,26 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the ID key columns.
+    // Gets the Unique key columns.
     /// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-    public DbColumns UniqueKey(long dataTableID, string name)
+    public DbColumns UniqueKey(long parentTableID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
-        { DataKey.ColumnDataTableID, dataTableID },
+        { DataKey.ColumnDataTableID, parentTableID },
         { DataKey.ColumnName, (object)name }
+      };
+      return retValue;
+    }
+
+    // Gets the Type key columns.
+    public DbColumns TypeKey(long parentTableID, int keyType)
+    {
+      var retValue = new DbColumns()
+      {
+        { DataKey.ColumnDataTableID, parentTableID },
+        { DataKey.ColumnKeyType, keyType }
       };
       return retValue;
     }

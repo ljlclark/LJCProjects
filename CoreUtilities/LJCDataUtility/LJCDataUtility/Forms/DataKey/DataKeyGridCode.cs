@@ -343,15 +343,6 @@ namespace LJCDataUtility
 
     #region Custom Action Methods
 
-    // The key types.
-    public enum KeyType
-    {
-      Primary = 1,
-      Unique,
-      Foreign,
-      Table
-    }
-
     // Generates the create Foreign Key procedure.
     internal void ForeignKeyProc()
     {
