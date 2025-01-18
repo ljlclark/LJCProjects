@@ -2,9 +2,10 @@
 // Licensed under the MIT License.
 // DbResult.cs
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Xml.Serialization;
-using LJCGridDataLib;
+//using LJCGridDataLib;
 using LJCNetCommon;
 
 namespace LJCDBMessage
@@ -33,6 +34,72 @@ namespace LJCDBMessage
       }
       return retValue;
     }
+
+    #region TableData Methods?
+
+    /// <summary>
+    /// Creates a DbColumn object from a DataColumn object. 
+    /// </summary>
+    /// <param name="dataColumn">The DataColumn reference.</param>
+    /// <returns>The DbColumn Object.</returns>
+    // Note: Also in LJCGridDataLib.TableData
+    public static DbColumn GetDbColumn(DataColumn dataColumn)
+    {
+      DbColumn retValue;
+
+      retValue = new DbColumn()
+      {
+        AllowDBNull = dataColumn.AllowDBNull,
+        AutoIncrement = dataColumn.AutoIncrement,
+        Caption = dataColumn.ColumnName,
+        ColumnName = dataColumn.ColumnName,
+        DataTypeName = dataColumn.DataType.Name,
+        MaxLength = dataColumn.MaxLength,
+        PropertyName = dataColumn.ColumnName,
+        Unique = dataColumn.Unique
+      };
+      return retValue;
+    }
+
+    /// <summary>
+    /// Creates a DbColumns collection from a DataColumns collection.
+    /// </summary>
+    /// <param name="dataColumns">The DataColumnCollection reference.</param>
+    /// <returns>The DbColumns object.</returns>
+    // Note: Also in LJCGridDataLib.TableData
+    public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
+    {
+      DbColumns retValue = null;
+
+      if (HasColumns(dataColumns))
+      {
+        retValue = new DbColumns();
+        foreach (DataColumn dataColumn in dataColumns)
+        {
+          DbColumn dbColumn = GetDbColumn(dataColumn);
+          retValue.Add(dbColumn);
+        }
+      }
+      return retValue;
+    }
+
+    /// <summary>
+    /// Checks the DataColumnCollection object for items.
+    /// </summary>
+    /// <param name="dataColumns">The DataColumnCollection reference.</param>
+    /// <returns>true if there are items; otherwise false.</returns>
+    // Note: Also in LJCGridDataLib.TableData
+    public static bool HasColumns(DataColumnCollection dataColumns)
+    {
+      bool retValue = false;
+
+      if (NetCommon.HasColumns(dataColumns))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
 
     // Checks if the result has Columns.
     /// <include path='items/HasColumns1/*' file='Doc/DbResult.xml'/>
@@ -309,7 +376,7 @@ namespace LJCDBMessage
       if (NetCommon.HasData(dataTable))
       {
         // *** Next Statement *** Add 12/25/24
-        var dataColumns = TableData.GetDbColumns(dataTable.Columns);
+        var dataColumns = GetDbColumns(dataTable.Columns);
         foreach (DataRow dataRow in dataTable.Rows)
         {
           DbValues dataValues = GetRowValues(dataColumns, dataRow);

@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TableData.cs
+//using LJCDBMessage;
 using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormControls;
@@ -73,6 +74,7 @@ namespace LJCGridDataLib
 
     // Creates a DbColumn object from a DataColumn object.
     /// <include path='items/GetDbColumn/*' file='Doc/TableData.xml'/>
+    // Note: Also in LJCDBMessage.DbResult
     public static DbColumn GetDbColumn(DataColumn dataColumn)
     {
       DbColumn retValue;
@@ -97,6 +99,7 @@ namespace LJCGridDataLib
     /// </summary>
     /// <param name="dataColumns"></param>
     /// <returns></returns>
+    // Note: Also in LJCDBMessage.DbResult
     public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
     {
       DbColumns retValue = null;
@@ -187,9 +190,11 @@ namespace LJCGridDataLib
     }
 
     /// <summary>
-    /// 
+    /// Checks the DataColumnCollection object for items.
     /// </summary>
-    /// <param name="dataColumns"></param>
+    /// <param name="dataColumns">The DataColumnCollection reference.</param>
+    /// <returns>true if there are items; otherwise false.</returns>
+    // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection dataColumns)
     {
       bool retValue = false;

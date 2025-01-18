@@ -98,6 +98,14 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
+set src=%utilRoot%LJCGenDoc\LJCGenDocDAL\%bin%
+echo copy %src%\LJCGenDocDAL.dll %to%
+copy %src%\LJCGenDocDAL.dll %to%
+
+set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
+echo copy %src%\LJCGridDataLib.dll %to%
+copy %src%\LJCGridDataLib.dll %to%
+
 set src=%utilRoot%LJCViewEditor\LJCViewEditor\%bin%
 echo copy %src%\LJCViewEditor.exe %to%
 copy %src%\LJCViewEditor.exe %to%

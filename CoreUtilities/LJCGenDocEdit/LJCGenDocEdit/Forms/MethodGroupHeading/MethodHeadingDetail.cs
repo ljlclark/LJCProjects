@@ -51,8 +51,9 @@ namespace LJCGenDocEdit
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
-      FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
-        , EndColor);
+      //*** Next Statement*** Delete 1 / 17 / 25
+      //FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
+      //  , EndColor);
     }
     #endregion
 
@@ -330,7 +331,8 @@ namespace LJCGenDocEdit
       EndColor = mSettings.EndColor;
 
       // Set control values.
-      FormCommon.SetLabelsBackColor(Controls, BeginColor);
+      // *** Next Statement *** Delete 1/17/25
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
       SetNoSpace();
       SetNumeric();
 

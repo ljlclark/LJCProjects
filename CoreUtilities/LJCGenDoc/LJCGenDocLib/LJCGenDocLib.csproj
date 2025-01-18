@@ -37,7 +37,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDBDataAccess">
-      <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBDataAccess.dll</HintPath>
+      <HintPath>..\..\LJCDataUtility\External\LJCDBDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage">
       <HintPath>..\..\..\CoreAssemblies\LJCDBViewDAL\External\LJCDBMessage.dll</HintPath>

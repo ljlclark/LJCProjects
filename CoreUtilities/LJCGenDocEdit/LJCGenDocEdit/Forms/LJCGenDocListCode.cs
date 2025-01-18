@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // LJCGenDocListCode.cs
 using LJCDBClientLib;
-// *** Next Statement *** Add - Data Views
 using LJCDBViewControls;
 using LJCGenDocDAL;
 using LJCNetCommon;

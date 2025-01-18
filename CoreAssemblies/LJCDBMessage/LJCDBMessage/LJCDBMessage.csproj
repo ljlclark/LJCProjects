@@ -37,10 +37,6 @@
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="LJCGridDataLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
-    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>

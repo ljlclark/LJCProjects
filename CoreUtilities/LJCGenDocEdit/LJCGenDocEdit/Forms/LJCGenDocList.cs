@@ -24,7 +24,9 @@ namespace LJCGenDocEdit
 
       // Set default class data.
       // Set DAL config before using anywhere else in the program.
-      var configValues = ValuesGenDoc.Instance;
+      // *** Next Statement *** Change 1/17/25
+      //var configValues = ValuesGenDoc.Instance;
+      var configValues = ValuesGenDocEdit.Instance;
       configValues.SetConfigFile("LJCGenDocEdit.exe.config");
       mErrors = configValues.Errors;
       var settings = configValues.StandardSettings;

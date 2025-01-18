@@ -26,6 +26,10 @@ set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
 echo copy %src%\LJCDBDataAccess.dll %to%
 copy %src%\LJCDBDataAccess.dll %to%
 
+set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
+echo copy %src%\LJCDBClientLib.dll %to%
+copy %src%\LJCDBClientLib.dll %to%
+
 set src=%utilRoot%LJCGenDoc\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
 copy %src%\LJCDocObjLib.dll %to%
