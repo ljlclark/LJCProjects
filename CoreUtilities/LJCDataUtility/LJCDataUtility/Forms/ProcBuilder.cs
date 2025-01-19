@@ -332,13 +332,14 @@ namespace LJCDataUtility
     public string AddPrimaryKey(string tableName
       , string objectName, string columnList)
     {
+      var columnNames = NetString.DelimitValues(columnList, "[", "]");
       var b = new TextBuilder(128);
       b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT[{objectName}]");
       b.Line("  PRIMARY KEY CLUSTERED");
       b.Line("  (");
-      b.Line($"   [{columnList}] ASC");
+      b.Line($"    {columnNames} ASC");
       b.Line("  )");
       b.Text("END");
       var retValue = b.ToString();
@@ -421,13 +422,15 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Renames a table.
-    /// Removes old keys and creates new keys.</summary>
+    /// <summary>
+    /// Renames a table. Removes old keys and creates new keys.
+    /// </summary>
     public string RenameTableSQL(long tableID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");
       b.Line();
+      b.Line("/*");
       b.Text("/* Remove foreign keys and other constraints. */");
 
       // Remove referencing foreign keys.
@@ -517,6 +520,7 @@ namespace LJCDataUtility
             break;
         }
       }
+      b.Line("*/");
 
       var retValue = b.ToString();
       return retValue;

@@ -80,6 +80,30 @@ namespace LJCNetCommon
       target += value;
     }
 
+    /// <summary>
+    /// Adds delimiters to one or more values.
+    /// </summary>
+    /// <param name="values">The value list.</param>
+    /// <param name="beginDelimiter">The begin delimiter.</param>
+    /// <param name="endDelimiter">The end delimiter.</param>
+    /// <returns>The delimited value list.</returns>
+    public static string DelimitValues(string values, string beginDelimiter
+      , string endDelimiter)
+    {
+      string retName = "";
+
+      var names = NetString.Split(values, ",");
+      foreach (var name in names)
+      {
+        if (NetString.HasValue(retName))
+        {
+          retName += ", ";
+        }
+        retName += $"{beginDelimiter}{name.Trim()}{endDelimiter}";
+      }
+      return retName;
+    }
+
     // Creates an exception string with outer and inner exception.
     /// <include path='items/ExceptionString/*' file='Doc/NetString.xml'/>
     public static string ExceptionString(Exception e)
