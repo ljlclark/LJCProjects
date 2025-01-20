@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ValuesDataUtility.cs
+using LJCDataSiteDAL;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
@@ -46,6 +47,9 @@ namespace LJCDataUtilityDAL
           Managers = new ManagersDataUtility();
           Managers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
+          SiteManagers = new ManagersDataSite();
+          SiteManagers.SetDBProperties(settings.DbServiceRef
+            , settings.DataConfigName);
         }
       }
     }
@@ -71,6 +75,9 @@ namespace LJCDataUtilityDAL
     /// <summary>Gets or sets the Managers class reference.</summary>
     public ManagersDataUtility Managers { get; set; }
 
+    /// <summary>Gets or sets the SiteManagers class reference.</summary>
+    public ManagersDataSite SiteManagers { get; set; }
+
     /// <summary>Gets the StandardSettings value.</summary>
     public StandardUISettings StandardSettings { get; private set; }
     #endregion
@@ -78,7 +85,7 @@ namespace LJCDataUtilityDAL
     #region Class Data
 
     // Represents Argument errors.
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
 
     /// <summary>Initialize Singleton.</summary>
     private static readonly ValuesDataUtility mInstance

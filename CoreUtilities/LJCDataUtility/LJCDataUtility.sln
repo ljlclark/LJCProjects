@@ -7,21 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataUtility", "LJCDataUt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataUtilityDAL", "LJCDataUtilityDAL\LJCDataUtilityDAL.csproj", "{0AB8D6B2-C475-4AB4-A645-88779851B1E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{03770850-5F9B-434B-9218-A6785EFAE5DC}"
-	ProjectSection(SolutionItems) = preProject
-		LJCDataUtility\CollectionTemplate.cs = LJCDataUtility\CollectionTemplate.cs
-		LJCDataUtility\ConfigSampleTemplate.cs = LJCDataUtility\ConfigSampleTemplate.cs
-		LJCDataUtility\DataManagerTemplate.cs = LJCDataUtility\DataManagerTemplate.cs
-		LJCDataUtility\DataTemplate.cs = LJCDataUtility\DataTemplate.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DetailTemplate.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\GridCodeTemplate.cs
-		GridCodeTemplate2.cs = GridCodeTemplate2.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate2.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListCodeTemplate2.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate2.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ListTemplate2.cs
-		..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs = ..\LJCGenText\LJCGenTableCode\bin\Debug\Templates\ManagerTemplate.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataSiteDAL", "LJCDataSiteDAL\LJCDataSiteDAL.csproj", "{BBCA1660-57D0-4156-86FA-65999F556231}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +23,10 @@ Global
 		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AB8D6B2-C475-4AB4-A645-88779851B1E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBCA1660-57D0-4156-86FA-65999F556231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBCA1660-57D0-4156-86FA-65999F556231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBCA1660-57D0-4156-86FA-65999F556231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCA1660-57D0-4156-86FA-65999F556231}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

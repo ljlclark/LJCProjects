@@ -99,7 +99,16 @@ namespace LJCNetCommon
         {
           retName += ", ";
         }
-        retName += $"{beginDelimiter}{name.Trim()}{endDelimiter}";
+        var tempName = name.Trim();
+        if (!tempName.StartsWith(beginDelimiter))
+        {
+          retName += beginDelimiter;
+        }
+        retName += tempName;
+        if (!tempName.EndsWith(endDelimiter))
+        {
+          retName += endDelimiter;
+        }
       }
       return retName;
     }

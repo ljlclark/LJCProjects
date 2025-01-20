@@ -82,5 +82,11 @@
   <ItemGroup>
     <Content Include="Manager\Compare.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJCDataSiteDAL\LJCDataSiteDAL.csproj">
+      <Project>{bbca1660-57d0-4156-86fa-65999f556231}</Project>
+      <Name>LJCDataSiteDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

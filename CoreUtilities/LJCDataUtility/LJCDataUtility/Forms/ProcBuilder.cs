@@ -312,16 +312,18 @@ namespace LJCDataUtility
 
     /// <summary>Adds a foreign key.</summary>
     public string AddForeignKey(string tableName
-      , string objectName, string sourceColumnName
-      , string targetTableName, string targetColumnName)
+      , string objectName, string sourceColumnList
+      , string targetTableName, string targetColumnList)
     {
+      var sourceNames = NetString.DelimitValues(sourceColumnList, "[", "]");
+      var targetNames = NetString.DelimitValues(targetColumnList, "[", "]");
       var b = new TextBuilder(128);
       b.Line(Check(objectName, ObjectType.Foreign));
-      b.Line($" ALTER TABLE[dbo].[{tableName}]");
-      b.Line($"  ADD CONSTRAINT[{objectName}]");
-      b.Line($"  FOREIGN KEY([{sourceColumnName}])");
-      b.Text($"  REFERENCES[dbo].[{targetTableName}]");
-      b.Line($"([{targetColumnName}])");
+      b.Line($" ALTER TABLE [dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT [{objectName}]");
+      b.Line($"  FOREIGN KEY ({sourceNames})");
+      b.Text($"  REFERENCES [dbo].[{targetTableName}]");
+      b.Line($" ({targetNames})");
       b.Line("  ON DELETE NO ACTION ON UPDATE NO ACTION;");
       b.Text("END");
       var retValue = b.ToString();
@@ -335,8 +337,8 @@ namespace LJCDataUtility
       var columnNames = NetString.DelimitValues(columnList, "[", "]");
       var b = new TextBuilder(128);
       b.Line(Check(objectName, ObjectType.Primary));
-      b.Line($" ALTER TABLE[dbo].[{tableName}]");
-      b.Line($"  ADD CONSTRAINT[{objectName}]");
+      b.Line($" ALTER TABLE [dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT [{objectName}]");
       b.Line("  PRIMARY KEY CLUSTERED");
       b.Line("  (");
       b.Line($"    {columnNames} ASC");
@@ -350,11 +352,12 @@ namespace LJCDataUtility
     public string AddUniqueKey(string tableName
       , string objectName, string columnList)
     {
+      var columnNames = NetString.DelimitValues(columnList, "[", "]");
       var b = new TextBuilder(128);
       b.Line(Check(objectName, ObjectType.Unique));
-      b.Line($" ALTER TABLE[dbo].[{tableName}]");
-      b.Line($"  ADD CONSTRAINT[{objectName}]");
-      b.Line($"  UNIQUE({columnList});");
+      b.Line($" ALTER TABLE [dbo].[{tableName}]");
+      b.Line($"  ADD CONSTRAINT [{objectName}]");
+      b.Line($"  UNIQUE ({columnNames});");
       b.Text("END");
       var retValue = b.ToString();
       return retValue;

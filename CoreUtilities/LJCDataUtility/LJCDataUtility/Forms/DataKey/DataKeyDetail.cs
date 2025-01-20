@@ -258,12 +258,8 @@ namespace LJCDataUtility
     {
       NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
       NameText.TextChanged += FormCommon.TextNoSpaceChanged;
-      //SourceColumnText.KeyPress += FormCommon.TextNoSpaceKeyPress;
-      //SourceColumnText.TextChanged += FormCommon.TextNoSpaceChanged;
       TargetTableText.KeyPress += FormCommon.TextNoSpaceKeyPress;
       TargetTableText.TextChanged += FormCommon.TextNoSpaceChanged;
-      TargetColumnText.KeyPress += FormCommon.TextNoSpaceKeyPress;
-      TargetColumnText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 

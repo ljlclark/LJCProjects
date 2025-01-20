@@ -192,7 +192,7 @@ namespace LJCDataUtilityDAL
 
     #region Class Data
 
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
     private DbServiceRef mDbServiceRef;
     private string mDataConfigName;
     #endregion

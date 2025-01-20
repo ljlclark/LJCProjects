@@ -91,6 +91,8 @@ namespace _Namespace_
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
+      //var context = "Add()";
+      //NetString.AddObjectArgError(ref message, object, "object", context);
       NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
@@ -186,11 +188,11 @@ namespace _Namespace_
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public _ClassName_ LJCSearchCode(string code)
+    public _ClassName_ LJCSearchDefault(string code)
     {
       _ClassName_ retValue = null;
 
-      LJCSortCode();
+      LJCSortDefault();
       _ClassName_ searchItem = new _ClassName_()
       {
         Code = code
@@ -228,14 +230,14 @@ namespace _Namespace_
     }
 
     /// <summary>Sort on Code.</summary>
-    public void LJCSortCode()
+    public void LJCSortDefault()
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.Code) != 0)
+        || mSortType.CompareTo(SortType.Default) != 0)
       {
         mPrevCount = Count;
         Sort();
-        mSortType = SortType.Code;
+        mSortType = SortType.Default;
       }
     }
 
@@ -271,13 +273,13 @@ namespace _Namespace_
 
     #region Class Data
 
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 
     private enum SortType
     {
-      Code,
+      Default,
       Unique
     }
     #endregion

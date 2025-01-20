@@ -23,9 +23,11 @@ namespace _Namespace_
 	/// <summary>Provides table specific data methods.</summary>
 	public class _ClassName_Manager
 	{
-		// Initializes an object instance.
-		/// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_Manager(DbServiceRef dbServiceRef, string dataConfigName
+    #region Constructors
+
+    // Initializes an object instance.
+    /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public _ClassName_Manager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "_TableName_", string schemaName = null)
 		{
 			Manager = new DataManager(dbServiceRef, dataConfigName, tableName
@@ -53,12 +55,13 @@ namespace _Namespace_
 				_ClassName_.ColumnName
 			});
 		}
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Adds a record to the database.
-		/// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ Add(_ClassName_ dataObject
+    // Adds a record to the database.
+    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public _ClassName_ Add(_ClassName_ dataObject
 			, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
@@ -126,11 +129,11 @@ namespace _Namespace_
 
 		// Retrieves a record with the supplied value.
 		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ RetrieveWithID(int id, List<string> propertyNames = null)
+		public _ClassName_ RetrieveWithPrimary(int id, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
 
-      var keyColumns = GetIDKey(id);
+      var keyColumns = PrimaryKey(id);
       joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
 			retValue = ResultConverter.CreateData(dbResult);
@@ -144,7 +147,7 @@ namespace _Namespace_
 		{
 			_ClassName_ retValue;
 
-			var keyColumns = GetUniqueKey(name);
+			var keyColumns = UniqueKey(name);
 			var joins = GetJoins();
 			var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
 			retValue = ResultConverter.CreateData(dbResult);
@@ -156,7 +159,7 @@ namespace _Namespace_
 
 		// Gets the ID key columns.
 		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public DbColumns PrimaryKey(int id)
 		{
 			// Add(columnName, propertyName = null, renameAs = null
 			//   , datatypeName = "String", caption = null);
@@ -170,7 +173,7 @@ namespace _Namespace_
 
 		// Gets the ID key columns.
 		/// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbColumns GetUniqueKey(string name)
+		public DbColumns UniqueKey(string name)
 		{
 			// Needs cast for string to select the correct Add overload.
 			var retValue = new DbColumns()

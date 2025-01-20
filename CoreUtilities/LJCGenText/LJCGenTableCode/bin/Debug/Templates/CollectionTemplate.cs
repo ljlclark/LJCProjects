@@ -43,11 +43,8 @@ namespace _Namespace_
         string errorText = $"File '{fileSpec}' was not found.";
         throw new FileNotFoundException(errorText);
       }
-      else
-      {
-        retValue = NetCommon.XmlDeserialize(typeof(_CollectionName_), fileSpec)
+      retValue = NetCommon.XmlDeserialize(typeof(_CollectionName_), fileSpec)
         as _CollectionName_;
-      }
       return retValue;
     }
     #endregion
@@ -58,6 +55,7 @@ namespace _Namespace_
     /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
     public _CollectionName_()
     {
+      mArgError = new ArgError("_Namespace_._ClassName_");
       mPrevCount = -1;
     }
 
@@ -88,7 +86,8 @@ namespace _Namespace_
       {
         message += "id must be greater than zero.\r\n";
       }
-      NetString.ArgError(ref message, name);
+      mArgError.Add(message);
+      mArgError.Add((object)name, "name");
       NetString.ThrowArgError(message);
 
       retValue = LJCSearchUnique(name);
@@ -172,11 +171,11 @@ namespace _Namespace_
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public _ClassName_ LJCSearchCode(string code)
+    public _ClassName_ LJCSearchPrimary(string code)
     {
       _ClassName_ retValue = null;
 
-      LJCSortCode();
+      LJCSortPrimary();
       _ClassName_ searchItem = new _ClassName_()
       {
         Code = code
@@ -213,15 +212,15 @@ namespace _Namespace_
       return retValue;
     }
 
-    /// <summary>Sort on Code.</summary>
-    public void LJCSortCode()
+    /// <summary>Sort on Primary key.</summary>
+    public void LJCSortPrimary()
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.Code) != 0)
+        || mSortType.CompareTo(SortType.Primary) != 0)
       {
         mPrevCount = Count;
         Sort();
-        mSortType = SortType.Code;
+        mSortType = SortType.Primary;
       }
     }
 
@@ -257,12 +256,13 @@ namespace _Namespace_
 
     #region Class Data
 
+    private ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 
     private enum SortType
     {
-      Code,
+      Primary,
       Unique
     }
     #endregion

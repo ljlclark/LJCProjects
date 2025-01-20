@@ -266,8 +266,10 @@ namespace LJCNetCommon
             break;
 
           case TypeString:
-            if (0 == string.Compare(oldValue.ToString(), newValue.ToString()
-              , true))
+            // *** Next Statement *** Change 1/19/25
+            //if (0 == string.Compare(oldValue.ToString(), newValue.ToString()
+            //  , true))
+            if (0 == string.Compare(oldValue.ToString(), newValue.ToString()))
             {
               retValue = true;
             }
