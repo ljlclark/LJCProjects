@@ -1,10 +1,12 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataColumnManager.cs
+using LJCDataSiteDAL;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using System;
 using System.Collections.Generic;
 
 namespace LJCDataUtilityDAL
@@ -42,6 +44,10 @@ namespace LJCDataUtilityDAL
         DataUtilColumn.ColumnDataTableID,
         DataUtilColumn.ColumnName
       });
+
+      var values = ValuesDataUtility.Instance;
+      var ManagersDataSite = values.SiteManagers;
+      EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
 
@@ -60,6 +66,7 @@ namespace LJCDataUtilityDAL
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
+        EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
     }
@@ -69,6 +76,7 @@ namespace LJCDataUtilityDAL
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
+      EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Retrieves a collection of data records.
@@ -103,6 +111,7 @@ namespace LJCDataUtilityDAL
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
+      EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Creates a set of columns that match the supplied list.
@@ -200,6 +209,9 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets or sets the ResultConverter reference.</summary>
     public ResultConverter<DataUtilColumn, DataColumns> ResultConverter { get; set; }
+
+    /// <summary>Gets or sets the DataManager reference.</summary>
+    private DataEntryManager EntryManager { get; set; }
     #endregion
   }
 }

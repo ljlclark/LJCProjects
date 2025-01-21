@@ -77,6 +77,7 @@ namespace LJCDataUtility
         {
           SequenceText.Text = LJCSequence.ToString();
         }
+        SchemaText.Text = "dbo";
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -94,6 +95,10 @@ namespace LJCDataUtility
         DescriptionText.Text = data.Description;
         SequenceText.Text = data.Sequence.ToString();
         SchemaText.Text = data.SchemaName;
+        if (!NetString.HasValue(data.SchemaName))
+        {
+          SchemaText.Text = "dbo";
+        }
         NewNameText.Text = data.NewName;
 
         // Reference key values.
