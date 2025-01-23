@@ -183,9 +183,8 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
-          // ToDo: Get from a definition.
           // *** Next Statement *** Add 1/23/25
-          LJCRecord.DataSiteID = 1;
+          LJCRecord.DataSiteID = mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -246,7 +245,7 @@ namespace LJCDataUtility
       Cursor = Cursors.WaitCursor;
       var values = ValuesDataUtility.Instance;
       LJCManagers = values.Managers;
-      //mSettings = values.StandardSettings;
+      mSettings = values.StandardSettings;
 
       // Set control values.
       SetNoSpace();
@@ -439,7 +438,7 @@ namespace LJCDataUtility
 
     private DataKey mOriginalRecord;
 
-    //private StandardUISettings mSettings;
+    private StandardUISettings mSettings;
     #endregion
   }
 }

@@ -46,6 +46,10 @@ namespace LJCDBClientLib
       {
         ExportTextExtension = "txt";
       }
+
+      string siteID = AppSettings.GetString("SiteID");
+      long.TryParse(siteID, out long id);
+      SiteID = id;
     }
     #endregion
 
@@ -84,6 +88,9 @@ namespace LJCDBClientLib
       set { mExportTextExtension = NetString.InitString(value); }
     }
     private string mExportTextExtension;
+
+    /// <summary>The SiteID.</summary>
+    public long SiteID { get; private set; }
     #endregion
   }
 }
