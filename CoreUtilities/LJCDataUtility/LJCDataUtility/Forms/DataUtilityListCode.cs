@@ -44,6 +44,24 @@ namespace LJCDataUtility
       return retColumnID;
     }
 
+    // Gets the selected row SiteID.
+    // *** New Method *** 1/23/25
+    internal long DataColumnSiteID(LJCGridRow row = null)
+    {
+      long retColumnSiteID = 0;
+
+      if (null == row)
+      {
+        row = DataColumnRow();
+      }
+      if (row is LJCGridRow
+        && "ColumnGrid" == row.DataGridView.Name)
+      {
+        retColumnSiteID = row.LJCGetInt64(DataUtilColumn.ColumnDataSiteID);
+      }
+      return retColumnSiteID;
+    }
+
     // Gets the selected row Name.
     internal string DataColumnName(LJCGridRow row = null)
     {
@@ -87,6 +105,24 @@ namespace LJCDataUtility
       return retKeyID;
     }
 
+    // Gets the selected row SiteID.
+    // *** New Method *** 1/23/25
+    internal long DataKeySiteID(LJCGridRow row = null)
+    {
+      long retKeySiteID = 0;
+
+      if (null == row)
+      {
+        row = DataKeyRow();
+      }
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
+      {
+        retKeySiteID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
+      }
+      return retKeySiteID;
+    }
+
     // Gets the selected row Name.
     internal string DataKeyName(LJCGridRow row = null)
     {
@@ -120,6 +156,24 @@ namespace LJCDataUtility
         retModuleID = item.ID;
       }
       return retModuleID;
+    }
+
+    // Gets the selected row SiteID.
+    // *** New Method *** 1/23/25
+    internal int DataModuleSiteID(LJCItem item = null)
+    {
+      int retModuleSiteID = 0;
+
+      if (null == item)
+      {
+        item = ModuleCombo.SelectedItem as LJCItem;
+      }
+      if (item is LJCItem)
+      {
+        // ToDo: ?
+        retModuleSiteID = 1;
+      }
+      return retModuleSiteID;
     }
 
     // Gets the selected row Name.
@@ -162,6 +216,24 @@ namespace LJCDataUtility
         retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
       }
       return retTableID;
+    }
+
+    // Gets the selected row SiteID.
+    // *** New Method *** 1/23/25
+    internal long DataTableSiteID(LJCGridRow row = null)
+    {
+      long retTableSiteID = 0;
+
+      if (row == null)
+      {
+        row = DataTableRow();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableSiteID = row.LJCGetInt64(DataUtilTable.ColumnDataSiteID);
+      }
+      return retTableSiteID;
     }
 
     // Gets the selected row Name.

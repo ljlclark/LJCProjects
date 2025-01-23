@@ -122,7 +122,7 @@ namespace _Namespace_
 
     // Gets the record values and copies them to the controls.
     // ********************
-    private void GetRecordValues(_ClassName_ dataRecord)
+    private void GetValues(_ClassName_ dataRecord)
     {
       if (dataRecord != null)
       {
@@ -133,7 +133,9 @@ namespace _Namespace_
         //ItemTypeCombo.LJCSetByItemID(LJCItemTypeID);
 
         // Reference key values.
+        LJCSiteID = data.DataSiteID;
         //LJCParentID = record.ParentId;
+        //LJCParentSiteID = data.ParentSiteID;
 
         // Get foreign key values.
         var item = GetItemWithID(dataRecord.ForeignKeyID);
@@ -147,18 +149,9 @@ namespace _Namespace_
 
     // Creates and returns a record object with the data from
     // ********************
-    private _ClassName_ SetRecordValues()
+    private _ClassName_ SetValues()
     {
-      _ClassName_ retValue = null;
-
-      if (mOriginalRecord != null)
-      {
-        retValue = mOriginalRecord.Clone();
-      }
-      if (null == retValue)
-      {
-        retValue = new _ClassName_();
-      }
+      var retData = Data();
 
       // In control order.
       //retValue.ItemTypeID = ItemTypeCombo.LJCSelectedItemID(),
@@ -169,7 +162,9 @@ namespace _Namespace_
 
       // Get Reference key values.
       retValue.ID = LJCID;
+      retData.DataSiteID = LJCSiteID;
       //retValue.ParentID = LJCParentID;
+      //retData.ParentSiteID = LJCParentSiteID;
       //ForeignKeyID = mForeignKeyID,
 
       // Get control join display values.
@@ -179,11 +174,27 @@ namespace _Namespace_
 
     // Resets the empty record values.
     // ********************
-    private void ResetRecordValues(_ClassName_ dataRecord)
+    private void ResetValues(_ClassName_ dataRecord)
     {
       // In control order.
       dataRecord.Description
         = FormCommon.SetString(dataRecord.Description);
+    }
+
+    // Gets the original or new record.
+    private _ClassName_ Data()
+    {
+      _ClassName_ retRecord = null;
+
+      if (mOriginalRecord != null)
+      {
+        retRecord = mOriginalRecord.Clone();
+      }
+      if (null == retRecord)
+      {
+        retRecord = new _ClassName_();
+      }
+      return retRecord;
     }
 
     // Saves the data.
@@ -479,6 +490,9 @@ namespace _Namespace_
     // Gets or sets the primary ID value.
     internal int LJCID { get; set; }
 
+    // Gets or sets the primary ID value.
+    internal long LJCSiteID { get; set; }
+
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
@@ -493,6 +507,9 @@ namespace _Namespace_
 
     // Gets or sets the Parent ID value.
     internal int LJCParentID { get; set; }
+
+    // Gets or sets the ParentSite ID value.
+    internal long LJCParentSiteID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName

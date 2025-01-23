@@ -177,8 +177,9 @@ namespace LJCDataUtility
     {
       row.LJCSetInt64(DataUtilColumn.ColumnID
         , dataRecord.ID);
-      row.LJCSetString(DataUtilColumn.ColumnName
-        , dataRecord.Name);
+      // *** Next Statement *** Add 1/23/25
+      row.LJCSetInt64(DataUtilColumn.ColumnDataSiteID, dataRecord.DataSiteID);
+      row.LJCSetString(DataUtilColumn.ColumnName, dataRecord.Name);
     }
     #endregion
 
@@ -257,6 +258,8 @@ namespace LJCDataUtility
       {
         int sequence = ColumnGrid.Rows.Count + 1;
         var parentID = Parent.DataTableID();
+        // *** Next Statement *** Add 1/23/25
+        var parentSiteID = Parent.DataTableSiteID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
@@ -264,6 +267,8 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
+          // *** Next Statement *** Add 1/23/25
+          LJCParentSiteID = parentSiteID,
           LJCParentName = parentName,
           LJCSequence = sequence
         };

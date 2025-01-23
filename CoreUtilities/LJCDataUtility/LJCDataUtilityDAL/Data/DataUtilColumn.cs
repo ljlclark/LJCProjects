@@ -46,7 +46,9 @@ namespace LJCDataUtilityDAL
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
+      DataSiteID = item.DataSiteID;
       DataTableID = item.DataTableID;
+      DataTableSiteID = item.DataTableSiteID;
       Name = item.Name;
       Description = item.Description;
       Sequence = item.Sequence;
@@ -88,17 +90,26 @@ namespace LJCDataUtilityDAL
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
     public int CompareTo(DataUtilColumn other)
     {
-      int retValue;
+      int retValue = -2;
 
+      var isContinue = true;
       if (null == other)
       {
         // This value is greater than null.
         retValue = 1;
+        isContinue = false;
       }
-      else
+      if (isContinue)
       {
-        // Case sensitive.
         retValue = ID.CompareTo(other.ID);
+        if (retValue != 0)
+        {
+          isContinue = false;
+        }
+      }
+      if (isContinue)
+      {
+        retValue = DataSiteID.CompareTo(other.DataSiteID);
       }
       return retValue;
     }
@@ -119,7 +130,7 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets or sets the ID value.</summary>
     //[Required]
-    //[Column("ID", TypeName="int")]
+    //[Column("ID", TypeName="bigint")]
     public Int64 ID
     {
       get { return mID; }
@@ -130,9 +141,22 @@ namespace LJCDataUtilityDAL
     }
     private Int64 mID;
 
+    /// <summary>Gets or sets the ID value.</summary>
+    //[Required]
+    //[Column("ID", TypeName="bigint")]
+    public Int64 DataSiteID
+    {
+      get { return mDataSiteID; }
+      set
+      {
+        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+      }
+    }
+    private Int64 mDataSiteID;
+
     /// <summary>Gets or sets the DataTableID value.</summary>
     //[Required]
-    //[Column("DataTableID", TypeName="int")]
+    //[Column("DataTableID", TypeName="bigint")]
     public Int64 DataTableID
     {
       get { return mDataTableID; }
@@ -143,6 +167,20 @@ namespace LJCDataUtilityDAL
       }
     }
     private Int64 mDataTableID;
+
+    /// <summary>Gets or sets the DataTableID value.</summary>
+    //[Required]
+    //[Column("DataTableSiteID", TypeName="bigint")]
+    public Int64 DataTableSiteID
+    {
+      get { return mDataTableSiteID; }
+      set
+      {
+        mDataTableSiteID = ChangedNames.Add(ColumnDataTableSiteID
+          , mDataTableSiteID, value);
+      }
+    }
+    private Int64 mDataTableSiteID;
 
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
@@ -313,8 +351,14 @@ namespace LJCDataUtilityDAL
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
+    /// <summary>The ID column name.</summary>
+    public static string ColumnDataSiteID = "DataSiteID";
+
     /// <summary>The DataTableID column name.</summary>
     public static string ColumnDataTableID = "DataTableID";
+
+    /// <summary>The DataTableSiteID column name.</summary>
+    public static string ColumnDataTableSiteID = "DataTableSiteID";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -386,22 +430,31 @@ namespace LJCDataUtilityDAL
     {
       int retValue;
 
+      var isContinue = true;
       retValue = NetCommon.CompareNull(x, y);
-      if (-2 == retValue)
+      if (retValue != -2)
+      {
+        isContinue = false;
+      }
+      if (isContinue)
       {
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (-2 == retValue)
+        if (retValue != -2)
         {
-          // Case sensitive.
-          retValue = x.DataTableID.CompareTo(y.DataTableID);
-          if (0 == retValue)
-          {
-            retValue = x.Name.CompareTo(y.Name);
-          }
-
-          // Not case sensitive.
-          //retValue = string.Compare(x.Name, y.Name, true);
+          isContinue = false;
         }
+      }
+      if (isContinue)
+      {
+        retValue = x.DataTableID.CompareTo(y.DataTableID);
+        if (retValue != 0)
+        {
+          isContinue = false;
+        }
+      }
+      if (isContinue)
+      {
+        retValue = x.DataTableSiteID.CompareTo(y.DataTableSiteID);
       }
       return retValue;
     }

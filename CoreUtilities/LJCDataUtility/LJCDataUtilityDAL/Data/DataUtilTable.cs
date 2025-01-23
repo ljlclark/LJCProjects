@@ -62,16 +62,17 @@ namespace LJCDataUtilityDAL
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
     public int CompareTo(DataUtilTable other)
     {
-      int retValue;
+      int retValue = -2;
 
+      var isContinue = true;
       if (null == other)
       {
         // This value is greater than null.
         retValue = 1;
+        isContinue = false;
       }
-      else
+      if (isContinue)
       {
-        // Case sensitive.
         retValue = ID.CompareTo(other.ID);
       }
       return retValue;
@@ -93,7 +94,7 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets or sets the ID value.</summary>
     //[Required]
-    //[Column("ID", TypeName="int")]
+    //[Column("ID", TypeName="bigint")]
     public Int64 ID
     {
       get { return mID; }
@@ -104,9 +105,22 @@ namespace LJCDataUtilityDAL
     }
     private Int64 mID;
 
+    /// <summary>Gets or sets the DataSiteID value.</summary>
+    //[Required]
+    //[Column("DataSiteID", TypeName="bigint")]
+    public Int64 DataSiteID
+    {
+      get { return mDataSiteID; }
+      set
+      {
+        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+      }
+    }
+    private Int64 mDataSiteID;
+
     /// <summary>Gets or sets the DataModuleID value.</summary>
     //[Required]
-    //[Column("DataModuleID", TypeName="int")]
+    //[Column("DataModuleID", TypeName="bigint")]
     public Int64 DataModuleID
     {
       get { return mDataModuleID; }
@@ -116,6 +130,20 @@ namespace LJCDataUtilityDAL
       }
     }
     private Int64 mDataModuleID;
+
+    /// <summary>Gets or sets the DataModuleSiteID value.</summary>
+    //[Required]
+    //[Column("DataModuleSiteID", TypeName="bigint")]
+    public Int64 DataModuleSiteID
+    {
+      get { return mDataModuleID; }
+      set
+      {
+        mDataModuleSiteID = ChangedNames.Add(ColumnDataModuleSiteID
+          , mDataModuleSiteID, value);
+      }
+    }
+    private Int64 mDataModuleSiteID;
 
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
@@ -205,8 +233,14 @@ namespace LJCDataUtilityDAL
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
+    /// <summary>The DataSiteID column name.</summary>
+    public static string ColumnDataSiteID = "DataSiteID";
+
     /// <summary>The DataModuleID column name.</summary>
     public static string ColumnDataModuleID = "DataModuleID";
+
+    /// <summary>The DataModuleSiteID column name.</summary>
+    public static string ColumnDataModuleSiteID = "DataModuleSiteID";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -251,22 +285,31 @@ namespace LJCDataUtilityDAL
     {
       int retValue;
 
+      var isContinue = true;
       retValue = NetCommon.CompareNull(x, y);
-      if (-2 == retValue)
+      if (retValue != -2)
+      {
+        isContinue = false;
+      }
+      if (isContinue)
       {
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (-2 == retValue)
+        if (retValue != -2)
         {
-          // Case sensitive.
-          retValue = x.DataModuleID.CompareTo(y.DataModuleID);
-          if (0 == retValue)
-          {
-            retValue = x.Name.CompareTo(y.Name);
-          }
-
-          // Not case sensitive.
-          //retValue = string.Compare(x.Name, y.Name, true);
+          isContinue = false;
         }
+      }
+      if (isContinue)
+      {
+        retValue = x.DataModuleID.CompareTo(y.DataModuleID);
+        if (retValue != 0)
+        {
+          isContinue = false;
+        }
+      }
+      if (isContinue)
+      {
+        retValue = x.Name.CompareTo(y.Name);
       }
       return retValue;
     }

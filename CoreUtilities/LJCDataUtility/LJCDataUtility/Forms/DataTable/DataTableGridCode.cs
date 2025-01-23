@@ -197,10 +197,10 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
-      row.LJCSetInt64(DataUtilTable.ColumnID
-        , dataRecord.ID);
-      row.LJCSetString(DataUtilTable.ColumnName
-        , dataRecord.Name);
+      row.LJCSetInt64(DataUtilTable.ColumnID, dataRecord.ID);
+      // *** Next Statement *** Add 1/23/25
+      row.LJCSetInt64(DataUtilTable.ColumnDataSiteID, dataRecord.DataSiteID);
+      row.LJCSetString(DataUtilTable.ColumnName, dataRecord.Name);
     }
     #endregion
 
@@ -283,6 +283,8 @@ namespace LJCDataUtility
       {
         int sequence = TableGrid.Rows.Count + 1;
         int parentID = ModuleCombo.LJCSelectedItemID();
+        // *** Next Statement *** Add 1/23/25
+        var parentSiteID = Parent.DataModuleSiteID();
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -291,6 +293,8 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
+          // *** Next Statement *** Add 1/23/25
+          LJCParentSiteID = parentSiteID,
           LJCParentName = parentName,
           LJCSequence = sequence
         };

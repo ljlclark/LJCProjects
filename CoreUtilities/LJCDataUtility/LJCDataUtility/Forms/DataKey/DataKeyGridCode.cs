@@ -190,6 +190,8 @@ namespace LJCDataUtility
     private void SetStoredValues(LJCGridRow row, DataKey data)
     {
       row.LJCSetInt64(DataKey.ColumnID, data.ID);
+      // *** Next Statement *** Add 1/23/25
+      row.LJCSetInt64(DataKey.ColumnDataSiteID, data.DataSiteID);
     }
 
     // Sets the KeyType column value.
@@ -275,6 +277,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         var parentID = Parent.DataTableID();
+        // *** Next Statement *** Add 1/23/25
+        var parentSiteID = Parent.DataKeySiteID();
         string parentName = Parent.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
@@ -282,6 +286,8 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
+          // *** Next Statement *** Add 1/23/25
+          LJCParentSiteID = parentSiteID,
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;

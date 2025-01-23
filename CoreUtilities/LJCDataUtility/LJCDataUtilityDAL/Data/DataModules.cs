@@ -70,7 +70,7 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
-    public DataModule Add(int id, string name)
+    public DataModule Add(long id, long dataSiteID, string name)
     {
       DataModule retValue;
 
@@ -78,6 +78,10 @@ namespace LJCDataUtilityDAL
       if (id <= 0)
       {
         message += "id must be greater than zero.\r\n";
+      }
+      if (dataSiteID <= 0)
+      {
+        message += "dataSiteID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -89,6 +93,7 @@ namespace LJCDataUtilityDAL
         retValue = new DataModule()
         {
           ID = id,
+          DataSiteID = dataSiteID,
           Name = name
         };
         Add(retValue);

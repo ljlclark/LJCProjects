@@ -27,6 +27,7 @@ namespace LJCDataUtilityDAL
     {
       ChangedNames = new ChangedNames();
       ID = item.ID;
+      DataSiteID = item.DataSiteID;
       Name = item.Name;
       Description = item.Description;
     }
@@ -59,17 +60,26 @@ namespace LJCDataUtilityDAL
     /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
     public int CompareTo(DataModule other)
     {
-      int retValue;
+      int retValue = -2;
 
+      var isContinue = true;
       if (null == other)
       {
         // This value is greater than null.
         retValue = 1;
+        isContinue = false;
       }
-      else
+      if (isContinue)
       {
-        // Case sensitive.
         retValue = ID.CompareTo(other.ID);
+        if (retValue != 0)
+        {
+          isContinue = false;
+        }
+      }
+      if (isContinue)
+      {
+        retValue = DataSiteID.CompareTo(other.DataSiteID);
       }
       return retValue;
     }
@@ -78,7 +88,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
     public override string ToString()
     {
-      var retValue =  $"{mName}:{mID}";
+      var retValue = $"{mName}:{mID}";
       return retValue;
     }
     #endregion
@@ -90,7 +100,7 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets or sets the ID value.</summary>
     //[Required]
-    //[Column("ID", TypeName="int")]
+    //[Column("ID", TypeName="bigint")]
     public Int64 ID
     {
       get { return mID; }
@@ -100,6 +110,19 @@ namespace LJCDataUtilityDAL
       }
     }
     private Int64 mID;
+
+    /// <summary>Gets or sets the DataModuleID value.</summary>
+    //[Required]
+    //[Column("DataSiteID", TypeName="bigint")]
+    public Int64 DataSiteID
+    {
+      get { return mDataSiteID; }
+      set
+      {
+        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+      }
+    }
+    private Int64 mDataSiteID;
 
     /// <summary>Gets or sets the Name value.</summary>
     //[Required]
@@ -144,6 +167,9 @@ namespace LJCDataUtilityDAL
     /// <summary>The ID column name.</summary>
     public static string ColumnID = "ID";
 
+    /// <summary>The DataSiteID column name.</summary>
+    public static string ColumnDataSiteID = "DataSiteID";
+
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
 
@@ -169,18 +195,23 @@ namespace LJCDataUtilityDAL
     {
       int retValue;
 
+      var isContinue = true;
       retValue = NetCommon.CompareNull(x, y);
-      if (-2 == retValue)
+      if (retValue != -2)
+      {
+        isContinue = false;
+      }
+      if (isContinue)
       {
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (-2 == retValue)
+        if (retValue != -2)
         {
-          // Case sensitive.
-          retValue = x.Name.CompareTo(y.Name);
-
-          // Not case sensitive.
-          //retValue = string.Compare(x.Name, y.Name, true);
+          isContinue = false;
         }
+      }
+      if (isContinue)
+      {
+        retValue = x.Name.CompareTo(y.Name);
       }
       return retValue;
     }

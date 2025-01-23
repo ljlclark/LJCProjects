@@ -81,6 +81,10 @@ namespace LJCDataUtility
         // In control order.
         NameText.Text = data.Name;
         DescriptionText.Text = data.Description;
+
+        // Reference key values.
+        // *** Next Statement *** Add 1/23/25
+        LJCSiteID = data.DataSiteID;
       }
     }
 
@@ -95,6 +99,8 @@ namespace LJCDataUtility
 
       // Get Reference key values.
       retData.ID = LJCID;
+      // *** Next Statement *** Add 1/23/25
+      retData.DataSiteID = LJCSiteID;
       return retData;
     }
 
@@ -150,6 +156,9 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
+          // ToDo: Get from a definition.
+          // *** Next Statement *** Add 1/23/25
+          LJCRecord.DataSiteID = 1;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -257,6 +266,10 @@ namespace LJCDataUtility
 
     // Gets or sets the primary ID value.
     internal int LJCID { get; set; }
+
+    // Gets or sets the primary ID value.
+    // *** Next Statement *** Add 1/23/25
+    internal long LJCSiteID { get; set; }
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }

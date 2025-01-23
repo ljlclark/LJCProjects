@@ -102,7 +102,11 @@ namespace LJCDataUtility
         NewNameText.Text = data.NewName;
 
         // Reference key values.
+        // *** Next Statement *** Add 1/23/25
+        LJCSiteID = data.DataSiteID;
         LJCParentID = data.DataModuleID;
+        // *** Next Statement *** Add 1/23/25
+        LJCParentSiteID = data.DataModuleSiteID;
       }
     }
 
@@ -122,7 +126,11 @@ namespace LJCDataUtility
 
       // Get Reference key values.
       retData.ID = LJCID;
+      // *** Next Statement *** Add 1/23/25
+      retData.DataSiteID = LJCSiteID;
       retData.DataModuleID = LJCParentID;
+      // *** Next Statement *** Add 1/23/25
+      retData.DataModuleSiteID = LJCParentSiteID;
       return retData;
     }
 
@@ -176,6 +184,9 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
+          // ToDo: Get from a definition.
+          // *** Next Statement *** Add 1/23/25
+          LJCRecord.DataSiteID = 1;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -301,6 +312,10 @@ namespace LJCDataUtility
     // Gets or sets the primary ID value.
     internal long LJCID { get; set; }
 
+    // Gets or sets the primary ID value.
+    // *** Next Statement *** Add 1/23/25
+    internal long LJCSiteID { get; set; }
+
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
 
@@ -312,6 +327,10 @@ namespace LJCDataUtility
 
     // Gets or sets the Parent ID value.
     internal long LJCParentID { get; set; }
+
+    // Gets or sets the ParentSite ID value.
+    // *** Next Statement *** Add 1/23/25
+    internal long LJCParentSiteID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName
