@@ -16,8 +16,8 @@ namespace LJCDataUtility
     internal CreateData(DataUtilityList parentList)
     {
       // Initialize property values.
-      Parent = parentList;
-      Managers = Parent.Managers;
+      ParentList = parentList;
+      Managers = ParentList.Managers;
     }
     #endregion
 
@@ -26,7 +26,7 @@ namespace LJCDataUtility
     // Generates the CreateData procedure.
     internal void CreateDataProc()
     {
-      var tableName = Parent.DataTableName();
+      var tableName = ParentList.DataTableName();
       switch (tableName)
       {
         case "DataModule":
@@ -54,7 +54,8 @@ namespace LJCDataUtility
       var dataColumns = columnManager.Load();
       if (NetCommon.HasItems(dataColumns))
       {
-        var proc = new ProcBuilder("LJCDataUtility", null);
+        string dbName = ParentList.DataConfigCombo.Text;
+        var proc = new ProcBuilder(dbName, null);
         proc.Begin("sp_DataColumnData");
         proc.BodyBegin();
 
@@ -71,10 +72,10 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Column Data Procedure", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
 
@@ -85,7 +86,8 @@ namespace LJCDataUtility
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        var proc = new ProcBuilder("LJCDataUtility", null);
+        string dbName = ParentList.DataConfigCombo.Text;
+        var proc = new ProcBuilder(dbName, null);
         proc.Begin("sp_DataKeyData");
         proc.BodyBegin();
 
@@ -102,10 +104,10 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Key Data Procedure", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
 
@@ -116,7 +118,8 @@ namespace LJCDataUtility
       var dataTables = moduleManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var proc = new ProcBuilder("LJCDataUtility", null);
+        string dbName = ParentList.DataConfigCombo.Text;
+        var proc = new ProcBuilder(dbName, null);
         proc.Begin("sp_DataModuleData");
         proc.BodyBegin();
 
@@ -128,10 +131,10 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Module Data Procedure", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
 
@@ -142,7 +145,8 @@ namespace LJCDataUtility
       var dataTables = tableManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var proc = new ProcBuilder("LJCDataUtility", null);
+        string dbName = ParentList.DataConfigCombo.Text;
+        var proc = new ProcBuilder(dbName, null);
         proc.Begin("sp_DataTableData");
         proc.BodyBegin();
 
@@ -159,10 +163,10 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Table Data Procedure", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
     #endregion
@@ -170,7 +174,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentList { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

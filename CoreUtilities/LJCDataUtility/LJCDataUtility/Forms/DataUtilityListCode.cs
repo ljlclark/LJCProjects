@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilityListCode.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
@@ -285,6 +286,7 @@ namespace LJCDataUtility
 
       InitializeClassData();
       SetupControlCode();
+      LoadControlData();
       ControlSetup();
       InitialControlValues();
       SetupGrids();
@@ -315,6 +317,21 @@ namespace LJCDataUtility
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
+    }
+
+    // Loads the initial Control data.
+    private void LoadControlData()
+    {
+      mDataConfigs = new DataConfigs();
+      mDataConfigs.LJCLoadData();
+      foreach (DataConfig dataConfig in mDataConfigs)
+      {
+        DataConfigCombo.Items.Add(dataConfig.Database);
+      }
+      if (DataConfigCombo.Items.Count > 0)
+      {
+        DataConfigCombo.SelectedIndex = 0;
+      }
     }
 
     // Initial Control setup.
@@ -498,6 +515,8 @@ namespace LJCDataUtility
 
     private StandardUISettings Settings { get; set; }
     #endregion
+
+    private DataConfigs mDataConfigs;
   }
 
   /// <summary></summary>

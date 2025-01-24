@@ -37,10 +37,8 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        // ToDo: Get DB name.
-        string dbName = "LJCDataUtility";
-
         var tableName = ParentList.DataTableName();
+        string dbName = ParentList.DataConfigCombo.Text;
         var proc = new ProcBuilder(dbName, tableName);
 
         string primaryKeyList = null;

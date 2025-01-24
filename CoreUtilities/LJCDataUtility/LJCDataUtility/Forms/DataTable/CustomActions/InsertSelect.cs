@@ -22,8 +22,8 @@ namespace LJCDataUtility
     public InsertSelect(DataUtilityList parentList)
     {
       // Initialize property values.
-      Parent = parentList;
-      Managers = Parent.Managers;
+      ParentList = parentList;
+      Managers = ParentList.Managers;
     }
     #endregion
 
@@ -36,8 +36,8 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var tableID = Parent.DataTableID();
-      var tableName = Parent.DataTableName();
+      var tableID = ParentList.DataTableID();
+      var tableName = ParentList.DataTableName();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -52,8 +52,8 @@ namespace LJCDataUtility
         var columnLists = ColumnLists(insertColumns, selectColumns, "  ");
 
         TextBuilder b = new TextBuilder(256);
-        string dbName = "LJCDataUtility";
         string toTableName = $"New{tableName}";
+        string dbName = ParentList.DataConfigCombo.Text;
         b.Line($"USE [{dbName}]");
 
         // Create new Table.
@@ -71,10 +71,10 @@ namespace LJCDataUtility
         b.Line($"SET IDENTITY_INSERT {toTableName} OFF");
         var showText = b.ToString();
 
-        var infoValue = Parent.InfoValue;
+        var infoValue = ParentList.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText
           , "Insert Select SQL", infoValue);
-        Parent.InfoValue = controlValue;
+        ParentList.InfoValue = controlValue;
       }
     }
 
@@ -343,7 +343,7 @@ namespace LJCDataUtility
     private int SelectLength { get; set; }
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentList { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

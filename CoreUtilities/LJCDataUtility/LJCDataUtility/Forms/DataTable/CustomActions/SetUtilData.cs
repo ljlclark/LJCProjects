@@ -19,8 +19,8 @@ namespace LJCDataUtility
     internal SetUtilData(DataUtilityList parentList)
     {
       // Initialize property values.
-      Parent = parentList;
-      Managers = Parent.Managers;
+      ParentList = parentList;
+      Managers = ParentList.Managers;
     }
     #endregion
 
@@ -42,7 +42,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var itemName = Parent.DataTableName();
+        var itemName = ParentList.DataTableName();
         if (itemName != TableName)
         {
           var message = $"Table name '{itemName}' does not match selected name";
@@ -61,7 +61,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var tableManager = Managers.DataTableManager;
-        var moduleID = Parent.DataModuleID();
+        var moduleID = ParentList.DataModuleID();
         dataTable = tableManager.RetrieveWithUnique(moduleID, TableName);
         if (null == dataTable)
         {
@@ -99,7 +99,7 @@ namespace LJCDataUtility
         SetKeysPrimary();
         SetKeysUnique();
         SetKeysForeign();
-        Parent.ModuleCombo.Select();
+        ParentList.ModuleCombo.Select();
         MessageBox.Show("Create/Update complete");
       }
     }
@@ -125,7 +125,7 @@ namespace LJCDataUtility
       CreateColumns(newTable.ID);
       CreateKeys(newTable.ID);
 
-      var tableGridCode = new DataTableGridCode(Parent);
+      var tableGridCode = new DataTableGridCode(ParentList);
       tableGridCode.Refresh();
       tableGridCode.RowSelect(newTable.ID);
     }
@@ -510,7 +510,7 @@ namespace LJCDataUtility
     private ManagersDataUtility Managers { get; set; }
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentList { get; set; }
 
     // Gets or sets the Table ID.
     private long TableID { get; set; }

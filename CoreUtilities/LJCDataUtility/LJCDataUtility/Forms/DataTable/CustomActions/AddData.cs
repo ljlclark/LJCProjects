@@ -17,8 +17,8 @@ namespace LJCDataUtility
     internal AddData(DataUtilityList parentList)
     {
       // Initialize property values.
-      Parent = parentList;
-      Managers = Parent.Managers;
+      ParentList = parentList;
+      Managers = ParentList.Managers;
     }
     #endregion
 
@@ -27,7 +27,7 @@ namespace LJCDataUtility
     // Generates the AddData procedure.
     internal void AddDataProc()
     {
-      var tableID = Parent.DataTableID();
+      var tableID = ParentList.DataTableID();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -37,7 +37,7 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        var tableName = Parent.DataTableName();
+        var tableName = ParentList.DataTableName();
         string parentTableName = null;
         switch (tableName)
         {
@@ -64,8 +64,7 @@ namespace LJCDataUtility
         }
 
         // ToDo: Get DB name.
-        string dbName = "LJCDataUtility";
-
+        string dbName = ParentList.DataConfigCombo.Text;
         var procData = new AddProcData(dbName, dataColumns
           , tableName, parentColumns, parentTableName);
         CreateAddProc(procData);
@@ -155,10 +154,10 @@ namespace LJCDataUtility
         retString = proc.ToString();
       }
 
-      var infoValue = Parent.InfoValue;
+      var infoValue = ParentList.InfoValue;
       var controlValue = DataUtilityCommon.ShowInfo(retString
         , "Add Data Procedure", infoValue);
-      Parent.InfoValue = controlValue;
+      ParentList.InfoValue = controlValue;
       return retString;
     }
     #endregion
@@ -166,7 +165,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentList { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
