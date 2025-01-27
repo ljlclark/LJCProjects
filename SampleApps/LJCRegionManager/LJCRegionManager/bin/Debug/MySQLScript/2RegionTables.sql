@@ -1,30 +1,28 @@
-CREATE TABLE if not exists `TestData`.`Region` (
+CREATE TABLE IF NOT EXISTS `TestData`.`Region` (
   `RegionID` int NOT NULL auto_increment,
   `Number` varchar(5) NOT NULL,
   `Name` varchar(60) NOT NULL,
   `Description` varchar(100) NULL,
-  PRIMARY KEY  (`RegionID`),
-  unique index `UKRegionNumber`
-    (`Number` asc) visible
+  PRIMARY KEY (`RegionID`),
+  UNIQUE INDEX `uq_Region`
+    (`Number` asc)
 );
 
-CREATE TABLE if not exists `TestData`.`Province`(
+CREATE TABLE IF NOT EXISTS `TestData`.`Province` (
   `ProvinceID` int NOT NULL auto_increment,
   `RegionID` int NOT NULL,
   `Name` varchar(60) NOT NULL,
   `Description` varchar(100) NULL,
   `Abbreviation` char(3) NULL,
   PRIMARY KEY (`ProvinceID`),
-  unique index `UKProvinceName`
-    (`Name` asc) visible,
-  constraint `FKProvinceRegion`
-    foreign key (`RegionID`)
-    references `TestData`.`Region` (`RegionID`)
-    on delete no action
-    on update no action
+  UNIQUE INDEX `uq_Province`
+    (`Name` asc),
+  CONSTRAINT `fk_Province_Region`
+    FOREIGN KEY (`RegionID`)
+    REFERENCES `TestData`.`Region` (`RegionID`)
 );
 
-CREATE TABLE if not exists `TestData`.`City`(
+CREATE TABLE IF NOT EXISTS `TestData`.`City` (
   `CityID` int NOT NULL auto_increment,
   `ProvinceID` int NOT NULL,
   `Name` varchar(60) NOT NULL,
@@ -33,16 +31,14 @@ CREATE TABLE if not exists `TestData`.`City`(
   `ZipCode` char(4) NULL,
   `District` smallint NULL,
   PRIMARY KEY (`CityID`),
-  unique index `UKProvinceName`
-    (`Name` asc) visible,
-  constraint `FKCityProvince`
-    foreign key (`ProvinceID`)
-    references `TestData`.`Province` (`ProvinceID`)
-    on delete no action
-    on update no action
+  UNIQUE INDEX `uq_City`
+    (`Name` asc),
+  CONSTRAINT `fk_City_Province`
+    FOREIGN KEY (`ProvinceID`)
+    REFERENCES `TestData`.`Province` (`ProvinceID`)
 );
 
-CREATE TABLE if not exists `TestData`.`CitySection`(
+CREATE TABLE IF NOT EXISTS `TestData`.`CitySection` (
   `ID` int NOT NULL auto_increment,
   `CityID` int NOT NULL,
   `Name` varchar(60) NOT NULL,
@@ -50,11 +46,11 @@ CREATE TABLE if not exists `TestData`.`CitySection`(
   `ZoneType` varchar(25) NULL,
   `Contact` varchar(60) NULL,
   PRIMARY KEY (`ID`),
-  unique index `UKProvinceName`
-    (`CityID`, `Name` asc) visible,
-  constraint `FKCitySectionCity`
-    foreign key (`CityID`)
-    references `TestData`.`City` (`CityID`)
+  unique index `uq_Province`
+    (`CityID`, `Name` asc) VISIBLE,
+  constraint `FK_CitySection_City`
+    FOREIGN KEY (`CityID`)
+    REFERENCES `TestData`.`City` (`CityID`)
     on delete no action
     on update no action
 );

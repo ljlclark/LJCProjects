@@ -3,16 +3,6 @@
 // ProcBuilder.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Data;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCDataUtility
 {
@@ -28,13 +18,13 @@ namespace LJCDataUtility
     }
 
     /// <summary>Resets the text values.</summary>
-    public void Reset(string dbName = null
-      , string tableName = null)
+    public void Reset(string dbName = null, string tableName = null)
     {
       if (NetString.HasValue(dbName))
       {
         DBName = dbName;
       }
+
       if (NetString.HasValue(tableName))
       {
         TableName = tableName;
@@ -45,6 +35,9 @@ namespace LJCDataUtility
         PKName = $"pk_{TableName}";
         UQName = $"uq_{TableName}";
       }
+
+      BeginDelimiter = "[";
+      EndDelimiter = "]";
       Builder = new TextBuilder(512);
       HasColumns = false;
     }
@@ -536,7 +529,7 @@ namespace LJCDataUtility
       b.Line();
       b.Text("/* Create Table */");
       b.Line(Check(TableName, ObjectType.Table));
-      b.Line($"CREATE TABLE[dbo].[{TableName}](");
+      b.Line($"CREATE TABLE [dbo].[{TableName}] (");
       HasColumns = false;
       string retString = b.ToString();
       Text(retString);
@@ -547,29 +540,31 @@ namespace LJCDataUtility
     public string TableColumn(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder(512);
-      if (HasColumns)
-      {
-        b.Line(",");
-      }
-      b.Text($"  [{dataColumn.Name}]");
-      b.Text($" [{dataColumn.TypeName}]");
-      if ("nvarchar" == dataColumn.TypeName.Trim().ToLower()
-        || "varchar" == dataColumn.TypeName.Trim().ToLower())
+      b.Text(ItemEnd(HasColumns));
+      b.Text(NameAndType(dataColumn));
+      var typeName = dataColumn.TypeName.Trim().ToLower();
+      if ("nvarchar" == typeName
+        || "varchar" == typeName)
       {
         b.Text($"({dataColumn.MaxLength})");
       }
+
+      // AllowNull
       if (!dataColumn.AllowNull)
       {
         b.Text(" NOT");
       }
       b.Text(" NULL");
+
       if (dataColumn.DefaultValue != null)
       {
         b.Text($" DEFAULT {dataColumn.DefaultValue}");
       }
-      HasColumns = true;
+
+      // Add to Builder property and also return.
       var retString = b.ToString();
       Text(retString);
+      HasColumns = true;
       return retString;
     }
 
@@ -589,18 +584,47 @@ namespace LJCDataUtility
     public string TableIdentity(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder(64);
-      if (HasColumns)
-      {
-        b.Line(",");
-      }
-      b.Text($"  [{dataColumn.Name}]");
-      b.Text($" [{dataColumn.TypeName}]");
-      b.Text($" IDENTITY({dataColumn.IdentityStart}");
+      b.Text(ItemEnd(HasColumns));
+      b.Text(NameAndType(dataColumn));
+      b.Text($" IDENTITY ({dataColumn.IdentityStart}");
       b.Text($", {dataColumn.IdentityIncrement}) NOT NULL");
-      HasColumns = true;
-      string retString = b.ToString();
+
+      // Add to Builder property and also return.
+      var retString = b.ToString();
       Text(retString);
+      HasColumns = true;
       return retString;
+    }
+
+    /// <summary>Get column name and type.</summary>
+    public string NameAndType(DataUtilColumn dataColumn)
+    {
+      var b = new TextBuilder(64);
+
+      // Column Name
+      b.Text($"  {BeginDelimiter}");
+      b.Text($"{dataColumn.Name}");
+      b.Text($"{EndDelimiter}");
+
+      // Type Name
+      b.Text($" {BeginDelimiter}");
+      b.Text($"{dataColumn.TypeName}");
+      b.Text($"{EndDelimiter}");
+
+      var retString = b.ToString();
+      return retString;
+    }
+
+    // Adds a comma and new line.
+    private string ItemEnd(bool hasValue)
+    {
+      string retValue = null;
+
+      if (hasValue)
+      {
+        retValue = $",\r\n";
+      }
+      return retValue;
     }
     #endregion
 
@@ -661,6 +685,9 @@ namespace LJCDataUtility
     /// Add data Procedure Name.</summary>
     public string AddProcName { get; set; }
 
+    /// <summary>The beginning identifier delimiter.</summary>
+    public string BeginDelimiter { get; set; }
+
     /// <summary>Gets or sets the
     /// Create Table Procedure Name.</summary>
     public string CreateProcName { get; set; }
@@ -668,6 +695,9 @@ namespace LJCDataUtility
     /// <summary>Gets or sets the
     /// Database Name.</summary>
     public string DBName { get; set; }
+
+    /// <summary>The ending identifier delimiter.</summary>
+    public string EndDelimiter { get; set; }
 
     /// <summary>Gets or sets the
     /// Create Foreign Key Drop Procedure Name.</summary>

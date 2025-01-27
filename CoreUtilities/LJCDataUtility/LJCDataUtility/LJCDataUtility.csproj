@@ -75,12 +75,14 @@
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
+    <Compile Include="Forms\DataTable\CustomActions\Class1.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\InsertSelect.cs" />
     <Compile Include="Forms\DataTable\CustomActions\RenameTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\SetUtilData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\TableKeyGroup.cs" />
+    <Compile Include="Forms\MySQLBuilder.cs" />
     <Compile Include="Forms\TableNameSelect.cs">
       <SubType>Form</SubType>
     </Compile>

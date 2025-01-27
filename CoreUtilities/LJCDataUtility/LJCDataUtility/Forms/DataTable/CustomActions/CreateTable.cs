@@ -3,7 +3,6 @@
 // CreateTable.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
 
 namespace LJCDataUtility
@@ -40,6 +39,10 @@ namespace LJCDataUtility
         var tableName = ParentList.DataTableName();
         string dbName = ParentList.DataConfigCombo.Text;
         var proc = new ProcBuilder(dbName, tableName);
+
+        // Testing
+        var mySQLBuilder = new MySQLBuilder(ParentList, dbName, tableName);
+        var sql = mySQLBuilder.CreateTableProc(dataColumns);
 
         string primaryKeyList = null;
         string uniqueKeyList = null;
