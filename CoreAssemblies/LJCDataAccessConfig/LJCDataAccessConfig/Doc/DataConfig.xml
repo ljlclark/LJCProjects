@@ -70,7 +70,7 @@
 		<summary>
 			Creates the populated connection string from the ConnectionType name.
 		</summary>
-		<param name="connectionTypeName">The ConnectionType name.</param>
+		<param name="connectionType">The ConnectionType name.</param>
 		<returns>The connection string.</returns>
 		<example>
 			<code>

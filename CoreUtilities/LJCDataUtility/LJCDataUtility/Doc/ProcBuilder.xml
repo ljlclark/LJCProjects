@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcBuilder.xml -->
+<items>
+  <!-- Constructor Methods -->
+  <CProcBuilder>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="parentObject">The parent object.</param>
+    <param name="dbName">The database name.</param>
+    <param name="tableName">The table name.</param>
+  </CProcBuilder>
+  <Reset>
+    <summary>
+      Resets the text values.
+    </summary>
+    <param name="dbName">The database name.</param>
+    <param name="tableName">The table name.</param>
+  </Reset>
+
+  <!-- Builder Methods -->
+  <EndsWith>
+    <summary>
+      Checks if the builder text ends with a supplied value.
+    </summary>
+    <param name="value">The ending value.</param>
+    <returns>
+      true if the internal builder ends with the value; otherwise false.
+    </returns>
+  </EndsWith>
+
+  <!-- Procedure Methods -->
+  <Begin>
+    <summary>
+      Adds the Procedure begin code.
+    </summary>
+    <param name="procedureName"></param>
+    <returns>The code text.</returns>
+  </Begin>
+  <ColumnsList>
+    <summary>
+      Creates the insert Columns list.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="includeParens">The include parentheses indicator.</param>
+    <param name="useNewNames">The use new names indicator.</param>
+    <param name="includeID">The include ID indicator.</param>
+    <returns>The columns list SQL text.</returns>
+  </ColumnsList>
+  <IFItem>
+    <summary>
+      Gets the Table row IF statement.
+    </summary>
+    <param name="parentTableName">The parent table name.</param>
+    <param name="parentIDColumnName">The parent ID column name.</param>
+    <param name="parentFindColumnName">The parent find column name.</param>
+    <param name="parmFindName">The find name.</param>
+    <returns>The IF SQL text.</returns>
+  </IFItem>
+  <Parameters>
+    <summary>
+      Creates the Parameters.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="isFirst">The first indicator.</param>
+    <returns>The parameters SQL text.</returns>
+  </Parameters>
+  <SQLDeclaration>
+    <summary>
+      Creates a SQL Declaration variable from a DataUtilityColumn.
+    </summary>
+    <param name="dataColumn">The DataUtilColumn object.</param>
+    <returns>The declaration SQL text.</returns>
+  </SQLDeclaration>
+  <SQLVarName>
+    <summary>
+      Creates a SQL variable name from a column name.
+    </summary>
+    <param name="columnName">The column name.</param>
+    <returns>The SQL variable name.</returns>
+  </SQLVarName>
+  <ValuesList>
+    <summary>
+      Creates the Values list.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="varRefName">The optional variable reference name.</param>
+    <returns>The values list SQL text.</returns>
+  </ValuesList>
+  
+  <!-- Create Table Methods -->
+  <AddForeignKey>
+    <summary>
+      Adds a foreign key.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="objectName">The DB object name.</param>
+    <param name="sourceColumnList">The source column values.</param>
+    <param name="targetTableName">The target table name.</param>
+    <param name="targetColumnList">The target column values.</param>
+    <returns>The foreign key Alter SQL text.</returns>
+  </AddForeignKey>
+  <AddPrimaryKey>
+    <summary>
+      Adds a primary key.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="objectName">The DB object name.</param>
+    <param name="columnList">The column values.</param>
+    <returns>The primary key Alter SQL text.</returns>
+  </AddPrimaryKey>
+  <AddUniqueKey>
+    <summary>
+      Adds a unique key.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="objectName">The DB object name.</param>
+    <param name="columnList">The column values.</param>
+    <returns>The unique key Alter SQL text.</returns>
+  </AddUniqueKey>
+  <CreateTable>
+    <summary>
+      Returns Create Table SQL.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <returns>The create table SQL text.</returns>
+  </CreateTable>
+  <CreateTableProc>
+    <summary>
+      Complete Create Table procedure.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <returns>The create table procedure SQL text.</returns>
+  </CreateTableProc>
+  <DropConstraint>
+    <summary>
+      Drops the constraint by provided name.
+    </summary>
+    <param name="tableName">The table name.</param>
+    <param name="objectName">The constraint object name.</param>
+    <param name="objectType">The constraint object type name.</param>
+    <returns>The drop constraint procedure SQL text.</returns>
+  </DropConstraint>
+  <NameAndType>
+    <summary>
+      Get column name and type.
+    </summary>
+    <param name="dataColumn">The DataUtilColumn object.</param>
+    <returns>The name and type SQL text.</returns>
+  </NameAndType>
+  <RenameTableSQL>
+    <summary>
+      Renames a table. Removes old keys and creates new keys.
+    </summary>
+    <param name="tableID">The table ID.</param>
+    <param name="dataKeys">The DataKeys collection.</param>
+    <returns>The rename table SQL text.</returns>
+  </RenameTableSQL>
+  <TableColumn>
+    <summary>
+      Adds a table column definition.
+    </summary>
+    <param name="dataColumn">The DataUtilColumn object.</param>
+    <returns>The table column SQL text.</returns>
+  </TableColumn>
+  <TableIdentity>
+    <summary>
+      Creates the Identity column.
+    </summary>
+    <param name="dataColumn">The DataUtilColumn object.</param>
+    <returns>The table identity column SQL text.</returns>
+  </TableIdentity>
+  
+  <!-- Alter Methods -->
+  <Check>
+    <summary>
+      Checks for the database object.
+    </summary>
+    <param name="objectName">The DB object name.</param>
+    <param name="objectType">The DB object type name.</param>
+    <param name="useNot">The use "NOT" indicator.</param>
+    <returns>The IF SQL text.</returns>
+  </Check>
+  <GetObjectTypeValue>
+    <summary>
+      Gets the object type prefix value.
+    </summary>
+    <param name="objectType">The object type name.</param>
+    <returns>The object type prefix.</returns>
+  </GetObjectTypeValue>
+</items>

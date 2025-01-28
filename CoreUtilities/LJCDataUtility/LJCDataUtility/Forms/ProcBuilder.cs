@@ -6,19 +6,24 @@ using LJCNetCommon;
 
 namespace LJCDataUtility
 {
-  /// <summary>Provides Procedure SQL code.</summary>
-  public class ProcBuilder
+  /// <summary>Provides procedure SQL code.</summary>
+  internal class ProcBuilder
   {
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
-    public ProcBuilder(string dbName, string tableName)
+    // Initializes an object instance.
+    /// <include path='items/CProcBuilder/*' file='Doc/ProcBuilder.xml'/>
+    internal ProcBuilder(DataUtilityList parentObject, string dbName
+      , string tableName = null)
     {
+      ParentObject = parentObject;
+      Managers = ParentObject.Managers;
       Reset(dbName, tableName);
     }
 
-    /// <summary>Resets the text values.</summary>
-    public void Reset(string dbName = null, string tableName = null)
+    // Resets the text values.
+    /// <include path='items/Reset/*' file='Doc/ProcBuilder.xml'/>
+    internal void Reset(string dbName = null, string tableName = null)
     {
       if (NetString.HasValue(dbName))
       {
@@ -45,22 +50,59 @@ namespace LJCDataUtility
 
     #region Data Class Methods
 
-    /// <summary>Returns the built procedure string.</summary>
+    /// <summary>Returns the builder string.</summary>
     public override string ToString()
     {
       return Builder.ToString();
     }
     #endregion
 
-    #region Proc Methods
+    #region Builder Methods
 
-    /// <summary>Adds the Procedure begin code.</summary>
-    public string Begin(string procName)
+    /// <summary>Clears the Builder text.</summary>
+    internal void ClearText()
+    {
+      Builder = new TextBuilder(512);
+    }
+
+    // Checks if the builder text ends with a supplied value.
+    /// <include path='items/EndsWith/*' file='Doc/ProcBuilder.xml'/>
+    internal bool EndsWith(string value)
+    {
+      bool retValue = false;
+      var text = Builder.ToString();
+      if (text.EndsWith(value))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    /// <summary>Adds a line to the builder.</summary>
+    /// <param name="text">The optional text value.</param>
+    internal void Line(string text = null)
+    {
+      Builder.Line(text);
+    }
+
+    /// <summary>Adds text to the builder.</summary>
+    /// <param name="text">The text value.</param>
+    internal void Text(string text)
+    {
+      Builder.Text(text);
+    }
+    #endregion
+
+    #region Procedure Methods
+
+    // Adds the Procedure begin code.
+    /// <include path='items/Begin/*' file='Doc/ProcBuilder.xml'/>
+    internal string Begin(string procedureName)
     {
       var b = new TextBuilder(512);
       b.Line("/* Copyright(c) Lester J. Clark and Contributors. */");
       b.Line("/* Licensed under the MIT License. */");
-      b.Line($"/* {procName}.sql */");
+      b.Line($"/* {procedureName}.sql */");
       b.Line($"USE [{DBName}]");
       b.Line("GO");
       b.Line("SET ANSI_NULLS ON");
@@ -68,18 +110,18 @@ namespace LJCDataUtility
       b.Line("SET QUOTED_IDENTIFIER ON");
       b.Line("GO");
       b.Line("");
-      b.Line($"IF OBJECT_ID('[dbo].[{procName}]', N'p')");
+      b.Line($"IF OBJECT_ID('[dbo].[{procedureName}]', N'p')");
       b.Line(" IS NOT NULL");
-      b.Line($"  DROP PROCEDURE [dbo].[{procName}];");
+      b.Line($"  DROP PROCEDURE [dbo].[{procedureName}];");
       b.Line("GO");
-      b.Line($"CREATE PROCEDURE [dbo].[{procName}]");
+      b.Line($"CREATE PROCEDURE [dbo].[{procedureName}]");
       string retString = b.ToString();
       Text(retString);
       return retString;
     }
 
     /// <summary>Creates the Proc body code.</summary>
-    public string BodyBegin()
+    internal string BodyBegin()
     {
       var b = new TextBuilder(64);
       b.Line("AS");
@@ -89,14 +131,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Clears the Builder text.</summary>
-    public void ClearText()
-    {
-      Builder = new TextBuilder(512);
-    }
-
-    /// <summary>Creates the insert Columns list.</summary>
-    public string ColumnsList(DataColumns dataColumns
+    // Creates the insert Columns list.
+    /// <include path='items/ColumnsList/*' file='Doc/ProcBuilder.xml'/>
+    internal string ColumnsList(DataColumns dataColumns
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
     {
@@ -157,20 +194,9 @@ namespace LJCDataUtility
       return retList;
     }
 
-    /// <summary>Checks if the builder text ends with a supplied value.</summary>
-    public bool EndsWith(string value)
-    {
-      bool retValue = false;
-      var text = Builder.ToString();
-      if (text.EndsWith(value))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    /// <summary>Gets the Table row IF statement.</summary>
-    public string IFItem(string parentTableName
+    // Gets the Table row IF statement.
+    /// <include path='items/IFItem/*' file='Doc/ProcBuilder.xml'/>
+    internal string IFItem(string parentTableName
       , string parentIDColumnName, string parentFindColumnName
       , string parmFindName)
     {
@@ -186,14 +212,9 @@ namespace LJCDataUtility
       return retIf;
     }
 
-    /// <summary>Adds a line to the procedure.</summary>
-    public void Line(string text = null)
-    {
-      Builder.Line(text);
-    }
-
-    /// <summary>Creates the Parameters.</summary>
-    public string Parameters(DataColumns dataColumns, bool isFirst = true)
+    // Creates the Parameters.
+    /// <include path='items/Parameters/*' file='Doc/ProcBuilder.xml'/>
+    internal string Parameters(DataColumns dataColumns, bool isFirst = true)
     {
       var b = new TextBuilder(128);
       foreach (DataUtilColumn dataColumn in dataColumns)
@@ -213,8 +234,9 @@ namespace LJCDataUtility
       return retParams;
     }
 
-    /// <summary>Creates a SQL Declaration variable from a DataUtilityColumn.</summary>
-    public string SQLDeclaration(DataUtilColumn dataColumn)
+    // Creates a SQL Declaration variable from a DataUtilityColumn.
+    /// <include path='items/SQLDeclaration/*' file='Doc/ProcBuilder.xml'/>
+    internal string SQLDeclaration(DataUtilColumn dataColumn)
     {
       var retValue = "";
 
@@ -228,8 +250,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Creates a SQL variable name from a column name.</summary>
-    public string SQLVarName(string columnName)
+    // Creates a SQL variable name from a column name.
+    /// <include path='items/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
+    internal string SQLVarName(string columnName)
     {
       var retName = "";
 
@@ -240,14 +263,9 @@ namespace LJCDataUtility
       return retName;
     }
 
-    /// <summary>Adds text to the procedure.</summary>
-    public void Text(string text)
-    {
-      Builder.Text(text);
-    }
-
-    /// <summary>Creates the Values list.</summary>
-    public string ValuesList(DataColumns dataColumns
+    // Creates the Values list.
+    /// <include path='items/ValuesList/*' file='Doc/ProcBuilder.xml'/>
+    internal string ValuesList(DataColumns dataColumns
       , string varRefName = null)
     {
       var b = new TextBuilder(256);
@@ -303,8 +321,9 @@ namespace LJCDataUtility
 
     #region Create Table Methods
 
-    /// <summary>Adds a foreign key.</summary>
-    public string AddForeignKey(string tableName
+    // Adds a foreign key.
+    /// <include path='items/AddForeignKey/*' file='Doc/ProcBuilder.xml'/>
+    internal string AddForeignKey(string tableName
       , string objectName, string sourceColumnList
       , string targetTableName, string targetColumnList)
     {
@@ -323,8 +342,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Adds a primary key.</summary>
-    public string AddPrimaryKey(string tableName
+    // Adds a primary key.
+    /// <include path='items/AddPrimaryKey/*' file='Doc/ProcBuilder.xml'/>
+    internal string AddPrimaryKey(string tableName
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "[", "]");
@@ -341,8 +361,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Adds a unique key.</summary>
-    public string AddUniqueKey(string tableName
+    // Adds a unique key.
+    /// <include path='items/AddUniqueKey/*' file='Doc/ProcBuilder.xml'/>
+    internal string AddUniqueKey(string tableName
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "[", "]");
@@ -356,8 +377,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Returns Create Table SQL.</summary>
-    public string CreateTable(DataColumns dataColumns)
+    // Returns Create Table SQL.
+    /// <include path='items/CreateTable/*' file='Doc/ProcBuilder.xml'/>
+    internal string CreateTable(DataColumns dataColumns)
     {
       TableBegin();
       foreach (DataUtilColumn dataColumn in dataColumns)
@@ -380,24 +402,30 @@ namespace LJCDataUtility
       return retProc;
     }
 
-    /// <summary>Complete Create Table procedure.</summary>
-    public string CreateTableProc(DataColumns dataColumns
-      , string primaryKeyList = null, string uniqueKeyList = null)
+    // Complete Create Table procedure.
+    /// <include path='items/CreateTableProc/*' file='Doc/ProcBuilder.xml'/>
+    internal string CreateTableProc(DataColumns dataColumns)
     {
       Begin(CreateProcName);
       Line("AS");
       Line("BEGIN");
 
       CreateTable(dataColumns);
-      if (primaryKeyList != null)
+
+      var keyValues = PrimaryKeyValues();
+      if (NetString.HasValue(keyValues))
       {
-        var text = AddPrimaryKey(TableName, PKName, primaryKeyList);
-        Line(text);
+        Line();
+        var text = AddPrimaryKey(TableName, PKName, keyValues);
+        Text(text);
       }
-      if (uniqueKeyList != null)
+
+      keyValues = UniqueKeyValues();
+      if (NetString.HasValue(keyValues))
       {
-        var text = AddUniqueKey(TableName, UQName, uniqueKeyList);
-        Line(text);
+        Line();
+        var text = AddUniqueKey(TableName, UQName, keyValues);
+        Text(text);
       }
 
       Line("END");
@@ -405,8 +433,9 @@ namespace LJCDataUtility
       return retProc;
     }
 
-    /// <summary>Drops the constraint by provided name.</summary>
-    public string DropConstraint(string tableName
+    // Drops the constraint by provided name.
+    /// <include path='items/DropConstraint/*' file='Doc/ProcBuilder.xml'/>
+    internal string DropConstraint(string tableName
       , string objectName, ObjectType objectType)
     {
       var b = new TextBuilder(128);
@@ -418,10 +447,29 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>
-    /// Renames a table. Removes old keys and creates new keys.
-    /// </summary>
-    public string RenameTableSQL(long tableID, DataKeys dataKeys)
+    // Get column name and type.
+    /// <include path='items/NameAndType/*' file='Doc/ProcBuilder.xml'/>
+    internal string NameAndType(DataUtilColumn dataColumn)
+    {
+      var b = new TextBuilder(64);
+
+      // Column Name
+      b.Text($"  {BeginDelimiter}");
+      b.Text($"{dataColumn.Name}");
+      b.Text($"{EndDelimiter}");
+
+      // Type Name
+      b.Text($" {BeginDelimiter}");
+      b.Text($"{dataColumn.TypeName}");
+      b.Text($"{EndDelimiter}");
+
+      var retString = b.ToString();
+      return retString;
+    }
+
+    // Renames a table. Removes old keys and creates new keys.
+    /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
+    internal string RenameTableSQL(long tableID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");
@@ -522,8 +570,9 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Adds the Table begin code.</summary>
-    public string TableBegin()
+    /// <summary>Adds the Table begin SQL.</summary>
+    /// <returns>The table begin SQL text.</returns>
+    internal string TableBegin()
     {
       var b = new TextBuilder(128);
       b.Line();
@@ -536,8 +585,9 @@ namespace LJCDataUtility
       return retString;
     }
 
-    /// <summary>Adds a table column definition.</summary>
-    public string TableColumn(DataUtilColumn dataColumn)
+    // Adds a table column definition.
+    /// <include path='items/TableColumn/*' file='Doc/ProcBuilder.xml'/>
+    internal string TableColumn(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder(512);
       b.Text(ItemEnd(HasColumns));
@@ -569,7 +619,8 @@ namespace LJCDataUtility
     }
 
     /// <summary>Creates the Table end code.</summary>
-    public string TableEnd()
+    /// <returns>The table end SQL text.</returns>
+    internal string TableEnd()
     {
       var b = new TextBuilder(64);
       b.Line();
@@ -580,8 +631,9 @@ namespace LJCDataUtility
       return retString;
     }
 
-    /// <summary>Creates the Identity column.</summary>
-    public string TableIdentity(DataUtilColumn dataColumn)
+    // Creates the Identity column.
+    /// <include path='items/TableIdentity/*' file='Doc/ProcBuilder.xml'/>
+    internal string TableIdentity(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder(64);
       b.Text(ItemEnd(HasColumns));
@@ -593,25 +645,6 @@ namespace LJCDataUtility
       var retString = b.ToString();
       Text(retString);
       HasColumns = true;
-      return retString;
-    }
-
-    /// <summary>Get column name and type.</summary>
-    public string NameAndType(DataUtilColumn dataColumn)
-    {
-      var b = new TextBuilder(64);
-
-      // Column Name
-      b.Text($"  {BeginDelimiter}");
-      b.Text($"{dataColumn.Name}");
-      b.Text($"{EndDelimiter}");
-
-      // Type Name
-      b.Text($" {BeginDelimiter}");
-      b.Text($"{dataColumn.TypeName}");
-      b.Text($"{EndDelimiter}");
-
-      var retString = b.ToString();
       return retString;
     }
 
@@ -630,8 +663,9 @@ namespace LJCDataUtility
 
     #region Alter Methods
 
-    /// <summary>Checks for the database object.</summary>
-    public string Check(string objectName, ObjectType objectType
+    // Checks for the database object.
+    /// <include path='items/Check/*' file='Doc/ProcBuilder.xml'/>
+    internal string Check(string objectName, ObjectType objectType
       , bool useNot = false)
     {
       string not = null;
@@ -652,8 +686,8 @@ namespace LJCDataUtility
       return retString;
     }
 
-    /// <summary>Gets the object type value.</summary>
-    public string GetObjectTypeValue(ObjectType objectType)
+    // Gets the object type prefix value.
+    internal string GetObjectTypeValue(ObjectType objectType)
     {
       string retValue = null;
 
@@ -679,59 +713,99 @@ namespace LJCDataUtility
     }
     #endregion
 
+    #region Data Methods
+
+    /// <summary>Retrieve the Primary key list.</summary>
+    /// <returns>The primary key values text.</returns>
+    internal string PrimaryKeyValues()
+    {
+      string retList = null;
+
+      var parentTableID = ParentObject.DataTableID();
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithType(parentTableID
+        , (short)KeyType.Primary);
+      if (dataKey != null)
+      {
+        retList = dataKey.SourceColumnName;
+      }
+      return retList;
+    }
+
+    /// <summary>Retrieve the Unique key list.</summary>
+    /// <returns>The unique key values text.</returns>
+    internal string UniqueKeyValues()
+    {
+      string retList = null;
+
+      var parentTableID = ParentObject.DataTableID();
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithType(parentTableID
+        , (short)KeyType.Unique);
+      if (dataKey != null)
+      {
+        retList = dataKey.SourceColumnName;
+      }
+      return retList;
+    }
+    #endregion
+
     #region Properties
 
-    /// <summary>Gets or sets the
-    /// Add data Procedure Name.</summary>
-    public string AddProcName { get; set; }
+    /// <summary>Gets or sets the Add data Procedure Name.</summary>
+    internal string AddProcName { get; set; }
 
     /// <summary>The beginning identifier delimiter.</summary>
-    public string BeginDelimiter { get; set; }
+    internal string BeginDelimiter { get; set; }
 
     /// <summary>Gets or sets the
     /// Create Table Procedure Name.</summary>
-    public string CreateProcName { get; set; }
+    internal string CreateProcName { get; set; }
 
     /// <summary>Gets or sets the
     /// Database Name.</summary>
-    public string DBName { get; set; }
+    internal string DBName { get; set; }
 
     /// <summary>The ending identifier delimiter.</summary>
-    public string EndDelimiter { get; set; }
+    internal string EndDelimiter { get; set; }
 
     /// <summary>Gets or sets the
     /// Create Foreign Key Drop Procedure Name.</summary>
-    public string ForeignKeyDropProcName { get; set; }
+    internal string ForeignKeyDropProcName { get; set; }
 
     /// <summary>Gets or sets the
     /// Create Foreign Key Procedure Name.</summary>
-    public string ForeignKeyProcName { get; set; }
+    internal string ForeignKeyProcName { get; set; }
 
     /// <summary>Gets or sets the
     /// Primary Key Name.</summary>
-    public string PKName { get; set; }
+    internal string PKName { get; set; }
 
     /// <summary>Gets or sets the
     /// Table Name.</summary>
-    public string TableName { get; set; }
+    internal string TableName { get; set; }
 
     /// <summary>Gets or sets the
     /// Unique Key Name.</summary>
-    public string UQName { get; set; }
+    internal string UQName { get; set; }
 
     // Gets or sets the
     // StringBuilder object.
     private TextBuilder Builder { get; set; }
 
-    // Gets or sets an
-    // indicator if Create Table already
-    // has defined columns.
+    // Gets or sets an indicator if Create Table already has defined columns.
     private bool HasColumns { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent object reference.
+    private DataUtilityList ParentObject { get; set; }
     #endregion
   }
 
   /// <summary></summary>
-  public enum ObjectType
+  internal enum ObjectType
   {
     /// <summary></summary>
     Primary = 1,

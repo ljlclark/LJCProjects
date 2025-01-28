@@ -75,14 +75,13 @@
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
-    <Compile Include="Forms\DataTable\CustomActions\Class1.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\InsertSelect.cs" />
     <Compile Include="Forms\DataTable\CustomActions\RenameTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\SetUtilData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\TableKeyGroup.cs" />
-    <Compile Include="Forms\MySQLBuilder.cs" />
+    <Compile Include="Forms\MyProcBuilder.cs" />
     <Compile Include="Forms\TableNameSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +201,8 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataKey.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
+    <Content Include="Doc\MyProcBuilder.xml" />
+    <Content Include="Doc\ProcBuilder.xml" />
     <Content Include="Doc\XMLAttribute.xml" />
     <Content Include="Doc\XMLAttributes.xml" />
     <Content Include="Doc\XMLBuilder.xml" />

@@ -13,11 +13,11 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    public CreateTable(DataUtilityList parentList)
+    public CreateTable(DataUtilityList parentObject)
     {
       // Initialize property values.
-      ParentList = parentList;
-      Managers = ParentList.Managers;
+      ParentObject = parentObject;
+      Managers = ParentObject.Managers;
     }
     #endregion
 
@@ -26,7 +26,7 @@ namespace LJCDataUtility
     // Generates the CreateTable procedure.
     internal void CreateTableProc()
     {
-      var parentTableID = ParentList.DataTableID();
+      var parentTableID = ParentObject.DataTableID();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -36,37 +36,35 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        var tableName = ParentList.DataTableName();
-        string dbName = ParentList.DataConfigCombo.Text;
-        var proc = new ProcBuilder(dbName, tableName);
+        var tableName = ParentObject.DataTableName();
+        string dbName = ParentObject.DataConfigCombo.Text;
 
-        // Testing
-        var mySQLBuilder = new MySQLBuilder(ParentList, dbName, tableName);
-        var sql = mySQLBuilder.CreateTableProc(dataColumns);
-
-        string primaryKeyList = null;
-        string uniqueKeyList = null;
-        var keyManager = Managers.DataKeyManager;
-        var dataKey = keyManager.RetrieveWithType(parentTableID
-          , (short)KeyType.Primary);
-        if (dataKey != null)
+        // *** Begin *** Add 1/29/25
+        string value = null;
+        var connectionType = ParentObject.ConnectionType;
+        if (!NetString.HasValue(connectionType))
         {
-          primaryKeyList = dataKey.SourceColumnName;
+          // Testing
+          connectionType = "MySQL";
         }
-        dataKey = keyManager.RetrieveWithType(parentTableID
-          , (short)KeyType.Unique);
-        if (dataKey != null)
+        switch (connectionType.ToLower())
         {
-          uniqueKeyList = dataKey.SourceColumnName;
+          case "mysql":
+            var mySQLBuilder = new MyProcBuilder(ParentObject, dbName, tableName);
+            value = mySQLBuilder.CreateTableProc(dataColumns);
+            break;
+
+          case "sqlserver":
+            var proc = new ProcBuilder(ParentObject, dbName, tableName);
+            value = proc.CreateTableProc(dataColumns);
+            break;
         }
+        // *** End   *** Add 1/29/25
 
-        var value = proc.CreateTableProc(dataColumns, primaryKeyList
-          , uniqueKeyList);
-
-        var infoValue = ParentList.InfoValue;
+        var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Create Table Procedure", infoValue);
-        ParentList.InfoValue = controlValue;
+        ParentObject.InfoValue = controlValue;
       }
     }
     #endregion
@@ -74,7 +72,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList ParentList { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

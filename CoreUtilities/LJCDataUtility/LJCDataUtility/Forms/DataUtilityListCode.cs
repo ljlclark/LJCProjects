@@ -305,6 +305,7 @@ namespace LJCDataUtility
         MessageBox.Show(errors, "Config Errors", MessageBoxButtons.OK
           , MessageBoxIcon.Error);
       }
+      ConnectionType = values.ConnectionType;
       Managers = values.Managers;
       Settings = values.StandardSettings;
       Text += $" - {Settings.DataConfigName}";
@@ -493,6 +494,9 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    // Gets or sets the connection type value.
+    internal string ConnectionType { get; set; }
 
     // The ControlValues file name.
     internal string ControlValuesFileName { get; set; }

@@ -22,13 +22,17 @@ set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
 echo copy %src%\LJCDataAccess.dll %to%
 copy %src%\LJCDataAccess.dll %to%
 
+set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%
+copy %src%\LJCDataAccessConfig.dll %to%
+
 set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
 echo copy %src%\LJCDBClientLib.dll %to%
 copy %src%\LJCDBClientLib.dll %to%
 
 set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
 echo copy %src%\LJCDBDataAccess.dll %to%
-rem *** copy %src%\LJCDBDataAccess.dll %to%
+copy %src%\LJCDBDataAccess.dll %to%
 
 set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
 echo copy %src%\LJCDBMessage.dll %to%
@@ -76,7 +80,7 @@ copy %src%\LJCDBClientLib.dll %to%
 
 set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
 echo copy %src%\LJCDBDataAccess.dll %to%
-copy %src%\LJCDBDataAccess.dll %to%
+rem *** copy %src%\LJCDBDataAccess.dll %to%
 
 set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
 echo copy %src%\LJCDBMessage.dll %to%

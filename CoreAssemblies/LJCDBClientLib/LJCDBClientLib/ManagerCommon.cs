@@ -69,7 +69,7 @@ namespace LJCDBClientLib
       DataConfigs dataConfigs = new DataConfigs();
       dataConfigs.LJCLoadData();
       DataConfig dataConfig = dataConfigs.LJCGetByName(dataConfigName);
-      connectionType = dataConfig.ConnectionTypeName;
+      connectionType = dataConfig.ConnectionType;
       connectionString = dataConfig.GetConnectionString();
       providerName = dataConfig.GetProviderName();
     }

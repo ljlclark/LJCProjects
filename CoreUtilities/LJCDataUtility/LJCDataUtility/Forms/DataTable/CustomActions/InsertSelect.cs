@@ -19,11 +19,11 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    public InsertSelect(DataUtilityList parentList)
+    public InsertSelect(DataUtilityList parentObject)
     {
       // Initialize property values.
-      ParentList = parentList;
-      Managers = ParentList.Managers;
+      ParentObject = parentObject;
+      Managers = ParentObject.Managers;
     }
     #endregion
 
@@ -36,8 +36,8 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var tableID = ParentList.DataTableID();
-      var tableName = ParentList.DataTableName();
+      var tableID = ParentObject.DataTableID();
+      var tableName = ParentObject.DataTableName();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -53,11 +53,11 @@ namespace LJCDataUtility
 
         TextBuilder b = new TextBuilder(256);
         string toTableName = $"New{tableName}";
-        string dbName = ParentList.DataConfigCombo.Text;
+        string dbName = ParentObject.DataConfigCombo.Text;
         b.Line($"USE [{dbName}]");
 
         // Create new Table.
-        var proc = new ProcBuilder(dbName, toTableName);
+        var proc = new ProcBuilder(ParentObject, dbName, toTableName);
         var createTable = proc.CreateTable(insertColumns);
         b.Text(createTable);
 
@@ -71,10 +71,10 @@ namespace LJCDataUtility
         b.Line($"SET IDENTITY_INSERT {toTableName} OFF");
         var showText = b.ToString();
 
-        var infoValue = ParentList.InfoValue;
+        var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText
           , "Insert Select SQL", infoValue);
-        ParentList.InfoValue = controlValue;
+        ParentObject.InfoValue = controlValue;
       }
     }
 
@@ -343,7 +343,7 @@ namespace LJCDataUtility
     private int SelectLength { get; set; }
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList ParentList { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

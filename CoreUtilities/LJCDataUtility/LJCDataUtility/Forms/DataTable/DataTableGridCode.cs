@@ -27,45 +27,45 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    internal DataTableGridCode(DataUtilityList parentList)
+    internal DataTableGridCode(DataUtilityList parentObject)
     {
       // Initialize property values.
-      Parent = parentList;
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject = parentObject;
+      ParentObject.Cursor = Cursors.WaitCursor;
 
       // Set Grid vars.
-      ModuleCombo = Parent.ModuleCombo;
-      TableGrid = Parent.TableGrid;
-      TableMenu = Parent.TableMenu;
-      Managers = Parent.Managers;
+      ModuleCombo = ParentObject.ModuleCombo;
+      TableGrid = ParentObject.TableGrid;
+      TableMenu = ParentObject.TableMenu;
+      Managers = ParentObject.Managers;
       TableManager = Managers.DataTableManager;
 
       // Fonts
-      var fontFamily = Parent.Font.FontFamily;
-      var style = Parent.Font.Style;
+      var fontFamily = ParentObject.Font.FontFamily;
+      var style = ParentObject.Font.Style;
       TableGrid.Font = new Font(fontFamily, 11, style);
       TableMenu.Font = new Font(fontFamily, 11, style);
 
       // Font change objects.
-      GridFont = new GridFont(Parent, TableGrid);
+      GridFont = new GridFont(ParentObject, TableGrid);
       GridFont.FontChange += GridFont_FontChange;
       MenuFont = new MenuFont(TableMenu);
       MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
-      Parent.TableNew.Click += TableNew_Click;
-      Parent.TableEdit.Click += TableEdit_Click;
-      Parent.TableDelete.Click += TableDelete_Click;
-      Parent.TableRefresh.Click += TableRefresh_Click;
-      Parent.TableExit.Click += Parent.Exit_Click;
+      ParentObject.TableNew.Click += TableNew_Click;
+      ParentObject.TableEdit.Click += TableEdit_Click;
+      ParentObject.TableDelete.Click += TableDelete_Click;
+      ParentObject.TableRefresh.Click += TableRefresh_Click;
+      ParentObject.TableExit.Click += ParentObject.Exit_Click;
 
       // Custom menu item events.
-      Parent.TableSetData.Click += TableSetData_Click;
-      Parent.TableCreateProc.Click += TableCreateProc_Click;
-      Parent.TableAddDataProc.Click += TableAddDataProc_Click;
-      Parent.TableCreateDataProc.Click += TableCreateDataProc_Click;
-      Parent.TableInsertSelect.Click += TableInsertSelect_Click;
-      Parent.TableRename.Click += TableRename_Click;
+      ParentObject.TableSetData.Click += TableSetData_Click;
+      ParentObject.TableCreateProc.Click += TableCreateProc_Click;
+      ParentObject.TableAddDataProc.Click += TableAddDataProc_Click;
+      ParentObject.TableCreateDataProc.Click += TableCreateDataProc_Click;
+      ParentObject.TableInsertSelect.Click += TableInsertSelect_Click;
+      ParentObject.TableRename.Click += TableRename_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -73,7 +73,7 @@ namespace LJCDataUtility
       grid.MouseDoubleClick += TableGrid_MouseDoubleClick;
       grid.MouseDown += TableGrid_MouseDown;
       grid.SelectionChanged += TableGrid_SelectionChanged;
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Configures the Grid.
@@ -104,7 +104,7 @@ namespace LJCDataUtility
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
       int parentID = ModuleCombo.LJCSelectedItemID();
@@ -126,8 +126,8 @@ namespace LJCDataUtility
         }
       }
       SetControlState();
-      Parent.Cursor = Cursors.Default;
-      Parent.DoChange(Change.Table);
+      ParentObject.Cursor = Cursors.Default;
+      ParentObject.DoChange(Change.Table);
     }
 
     // Selects a row based on the ID value.
@@ -157,7 +157,7 @@ namespace LJCDataUtility
 
       if (data != null)
       {
-        Parent.Cursor = Cursors.WaitCursor;
+        ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
           var rowID = row.LJCGetInt64(DataUtilTable.ColumnID);
@@ -169,7 +169,7 @@ namespace LJCDataUtility
             break;
           }
         }
-        Parent.Cursor = Cursors.Default;
+        ParentObject.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -190,8 +190,8 @@ namespace LJCDataUtility
       bool enableNew = ModuleCombo.SelectedItem != null;
       bool enableEdit = TableGrid.CurrentRow != null;
       FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
-      Parent.TableHeading.Enabled = true;
-      Parent.TableSetData.Enabled = true;
+      ParentObject.TableHeading.Enabled = true;
+      ParentObject.TableSetData.Enabled = true;
     }
 
     // Sets the row stored values.
@@ -245,7 +245,7 @@ namespace LJCDataUtility
       {
         TableGrid.Rows.Remove(row);
         SetControlState();
-        Parent.TimedChange(Change.Table);
+        ParentObject.TimedChange(Change.Table);
       }
     }
 
@@ -284,7 +284,7 @@ namespace LJCDataUtility
         int sequence = TableGrid.Rows.Count + 1;
         int parentID = ModuleCombo.LJCSelectedItemID();
         // *** Next Statement *** Add 1/23/25
-        var parentSiteID = Parent.DataModuleSiteID();
+        var parentSiteID = ParentObject.DataModuleSiteID();
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -308,7 +308,7 @@ namespace LJCDataUtility
     // Refreshes the list.
     internal void Refresh()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
@@ -326,7 +326,7 @@ namespace LJCDataUtility
         };
         RowSelect(record);
       }
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Shows the help page
@@ -353,7 +353,7 @@ namespace LJCDataUtility
           var row = RowAdd(record);
           TableGrid.LJCSetCurrentRow(row, true);
           SetControlState();
-          Parent.TimedChange(Change.Table);
+          ParentObject.TimedChange(Change.Table);
         }
       }
     }
@@ -391,42 +391,42 @@ namespace LJCDataUtility
     // Handles the "Set Data from Table" menu event.
     private void TableSetData_Click(object sender, EventArgs e)
     {
-      var setData = new SetUtilData(Parent);
+      var setData = new SetUtilData(ParentObject);
       setData.SetData();
     }
 
     // Handles the "Create Table Procedure" menu item event.
     private void TableCreateProc_Click(object sender, EventArgs e)
     {
-      var createTable = new CreateTable(Parent);
+      var createTable = new CreateTable(ParentObject);
       createTable.CreateTableProc();
     }
 
     // Handles the "Add Data Procedure" menu item event.
     private void TableAddDataProc_Click(object sender, EventArgs e)
     {
-      var addData = new AddData(Parent);
+      var addData = new AddData(ParentObject);
       addData.AddDataProc();
     }
 
     // Handles the "Create Data Procedure" menu item event.
     private void TableCreateDataProc_Click(object sender, EventArgs e)
     {
-      var createData = new CreateData(Parent);
+      var createData = new CreateData(ParentObject);
       createData.CreateDataProc();
     }
 
     // Handles the "Insert Select" menu item event.
     private void TableInsertSelect_Click(object sender, EventArgs e)
     {
-      var insertSelect = new InsertSelect(Parent);
+      var insertSelect = new InsertSelect(ParentObject);
       insertSelect.InsertSelectProc();
     }
 
     // Handles the "Rename Table" menu item event.
     private void TableRename_Click(object sender, EventArgs e)
     {
-      var renameTable = new RenameTable(Parent);
+      var renameTable = new RenameTable(ParentObject);
       renameTable.RenameTableSQL();
     }
     #endregion
@@ -436,14 +436,14 @@ namespace LJCDataUtility
     // Handles the Grid FontChange event.
     private void GridFont_FontChange(object sender, EventArgs e)
     {
-      var text = Parent.Text;
+      var text = ParentObject.Text;
       var index = text.IndexOf("[");
       if (index > 0)
       {
-        text = Parent.Text.Substring(0, index - 1);
+        text = ParentObject.Text.Substring(0, index - 1);
       }
       var fontSize = GridFont.FontSize;
-      Parent.Text = $"{text} [{fontSize}]";
+      ParentObject.Text = $"{text} [{fontSize}]";
     }
 
     // Handles the Menu FontChange event.
@@ -480,8 +480,8 @@ namespace LJCDataUtility
           {
             var position = FormPoint.MenuScreenPoint(TableGrid
               , Control.MousePosition);
-            Parent.TableMenu.Show(position);
-            Parent.TableMenu.Select();
+            ParentObject.TableMenu.Show(position);
+            ParentObject.TableMenu.Select();
             e.Handled = true;
           }
           break;
@@ -489,11 +489,11 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           else
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -520,7 +520,7 @@ namespace LJCDataUtility
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           TableGrid.LJCSetCurrentRow(e);
           SetControlState();
-          Parent.TimedChange(Change.Table);
+          ParentObject.TimedChange(Change.Table);
         }
       }
     }
@@ -531,7 +531,7 @@ namespace LJCDataUtility
       if (TableGrid.LJCAllowSelectionChange)
       {
         SetControlState();
-        Parent.TimedChange(Change.Table);
+        ParentObject.TimedChange(Change.Table);
       }
       TableGrid.LJCAllowSelectionChange = true;
     }
@@ -540,7 +540,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the parent Combo reference.
     private LJCItemCombo ModuleCombo { get; set; }

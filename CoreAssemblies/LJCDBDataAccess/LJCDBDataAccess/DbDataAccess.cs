@@ -344,10 +344,10 @@ namespace LJCDBDataAccess
       }
       else
       {
-        if (null == retValue.ConnectionTypeName)
+        if (null == retValue.ConnectionType)
         {
           // Default connection type to SQL Server.
-          retValue.ConnectionTypeName = ConnectionType.SqlServer.ToString();
+          retValue.ConnectionType = ConnectionType.SqlServer.ToString();
         }
       }
       return retValue;
@@ -361,7 +361,7 @@ namespace LJCDBDataAccess
       DatabaseName = dataConfig.Database;
       ConnectionString = dataConfig.GetConnectionString();
       mDataAccess.ConnectionString = ConnectionString;
-      ProviderName = DataConfig.GetProviderName(dataConfig.ConnectionTypeName);
+      ProviderName = DataConfig.GetProviderName(dataConfig.ConnectionType);
     }
     #endregion
 

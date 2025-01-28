@@ -22,33 +22,33 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    internal DataKeyGridCode(DataUtilityList parentList)
+    internal DataKeyGridCode(DataUtilityList parentObject)
     {
       // Initialize property values.
-      ParentList = parentList;
-      ParentList.Cursor = Cursors.WaitCursor;
+      ParentObject = parentObject;
+      ParentObject.Cursor = Cursors.WaitCursor;
 
       // Set Grid vars.
-      TableGrid = ParentList.TableGrid;
-      KeyGrid = ParentList.KeyGrid;
-      KeyMenu = ParentList.KeyMenu;
-      Managers = ParentList.Managers;
+      TableGrid = ParentObject.TableGrid;
+      KeyGrid = ParentObject.KeyGrid;
+      KeyMenu = ParentObject.KeyMenu;
+      Managers = ParentObject.Managers;
       KeyManager = Managers.DataKeyManager;
 
       // Fonts
-      var fontFamily = ParentList.Font.FontFamily;
-      var style = ParentList.Font.Style;
+      var fontFamily = ParentObject.Font.FontFamily;
+      var style = ParentObject.Font.Style;
       KeyGrid.Font = new Font(fontFamily, 11, style);
       KeyMenu.Font = new Font(fontFamily, 11, style);
 
       // Font change objects.
-      GridFont = new GridFont(ParentList, KeyGrid);
+      GridFont = new GridFont(ParentObject, KeyGrid);
       GridFont.FontChange += GridFont_FontChange;
       MenuFont = new MenuFont(KeyMenu);
       MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
-      var list = ParentList;
+      var list = ParentObject;
       list.KeyNew.Click += KeyNew_Click;
       list.KeyEdit.Click += KeyEdit_Click;
       list.KeyDelete.Click += KeyDelete_Click;
@@ -63,7 +63,7 @@ namespace LJCDataUtility
       grid.MouseDoubleClick += KeyGrid_MouseDoubleClick;
       grid.MouseDown += KeyGrid_MouseDown;
       grid.SelectionChanged += KeyGrid_SelectionChanged;
-      ParentList.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Configures the Grid.
@@ -95,12 +95,12 @@ namespace LJCDataUtility
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      ParentList.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       KeyGrid.LJCRowsClear();
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentList.DataTableID();
+        var parentID = ParentObject.DataTableID();
         var keyColumns = KeyManager.ParentKey(parentID);
         var items = KeyManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
@@ -112,8 +112,8 @@ namespace LJCDataUtility
         }
       }
       SetControlState();
-      ParentList.Cursor = Cursors.Default;
-      ParentList.DoChange(Change.Key);
+      ParentObject.Cursor = Cursors.Default;
+      ParentObject.DoChange(Change.Key);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -133,10 +133,10 @@ namespace LJCDataUtility
 
       if (id > 0)
       {
-        ParentList.Cursor = Cursors.WaitCursor;
+        ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in KeyGrid.Rows)
         {
-          var rowID = ParentList.DataTableID();
+          var rowID = ParentObject.DataTableID();
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -145,7 +145,7 @@ namespace LJCDataUtility
             break;
           }
         }
-        ParentList.Cursor = Cursors.Default;
+        ParentObject.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -167,20 +167,20 @@ namespace LJCDataUtility
       bool enableNew = TableGrid.CurrentRow != null;
       bool enableEdit = KeyGrid.CurrentRow != null;
       FormCommon.SetMenuState(KeyMenu, enableNew, enableEdit);
-      ParentList.KeyHeading.Enabled = true;
+      ParentObject.KeyHeading.Enabled = true;
 
       // Custom Menu Items
-      ParentList.KeyForeignKeyProc.Enabled = false;
-      ParentList.KeyForeignKeyDropProc.Enabled = false;
-      var row = ParentList.DataKeyRow();
-      var id = ParentList.DataKeyID(row);
+      ParentObject.KeyForeignKeyProc.Enabled = false;
+      ParentObject.KeyForeignKeyDropProc.Enabled = false;
+      var row = ParentObject.DataKeyRow();
+      var id = ParentObject.DataKeyID(row);
       if (id > 1)
       {
         var dataKey = Managers.GetDataKey(id);
         if ((int)KeyType.Foreign == dataKey.KeyType)
         {
-          ParentList.KeyForeignKeyProc.Enabled = true;
-          ParentList.KeyForeignKeyDropProc.Enabled = true;
+          ParentObject.KeyForeignKeyProc.Enabled = true;
+          ParentObject.KeyForeignKeyDropProc.Enabled = true;
         }
       }
 
@@ -223,7 +223,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentList.DataKeyID();
+        var id = ParentObject.DataKeyID();
         var keyColumns = new DbColumns()
         {
           { DataKey.ColumnID, id }
@@ -242,7 +242,7 @@ namespace LJCDataUtility
       {
         KeyGrid.Rows.Remove(row);
         SetControlState();
-        ParentList.TimedChange(Change.Key);
+        ParentObject.TimedChange(Change.Key);
       }
     }
 
@@ -252,9 +252,9 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && KeyGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentList.DataKeyID();
-        var parentID = ParentList.DataTableID();
-        string parentName = ParentList.DataTableName();
+        var id = ParentObject.DataKeyID();
+        var parentID = ParentObject.DataTableID();
+        string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail()
         {
@@ -276,10 +276,10 @@ namespace LJCDataUtility
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentList.DataTableID();
+        var parentID = ParentObject.DataTableID();
         // *** Next Statement *** Add 1/23/25
-        var parentSiteID = ParentList.DataKeySiteID();
-        string parentName = ParentList.DataTableName();
+        var parentSiteID = ParentObject.DataKeySiteID();
+        string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
         {
@@ -300,12 +300,12 @@ namespace LJCDataUtility
     // Refreshes the list.
     internal void Refresh()
     {
-      ParentList.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
       if (KeyGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentList.DataKeyID();
+        id = ParentObject.DataKeyID();
       }
       DataRetrieve();
 
@@ -314,7 +314,7 @@ namespace LJCDataUtility
       {
         RowSelect(id);
       }
-      ParentList.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Shows the help page
@@ -341,7 +341,7 @@ namespace LJCDataUtility
           var row = RowAdd(record);
           KeyGrid.LJCSetCurrentRow(row, true);
           SetControlState();
-          ParentList.TimedChange(Change.Key);
+          ParentObject.TimedChange(Change.Key);
         }
       }
     }
@@ -352,23 +352,23 @@ namespace LJCDataUtility
     // Generates the create Foreign Key procedure.
     internal void ForeignKeyProc()
     {
-      var row = ParentList.DataKeyRow();
-      var id = ParentList.DataKeyID(row);
+      var row = ParentObject.DataKeyRow();
+      var id = ParentObject.DataKeyID(row);
       var dataKey = Managers.GetDataKey(id);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
         var fkName = dataKey.Name;
-        var tableRow = ParentList.DataTableRow();
-        var sourceTableName = ParentList.DataTableName(tableRow);
+        var tableRow = ParentObject.DataTableRow();
+        var sourceTableName = ParentObject.DataTableName(tableRow);
         var sourceNames = NetString.DelimitValues(dataKey.SourceColumnName
           , "[", "]");
         var targetTableName = dataKey.TargetTableName;
         var targetNames = NetString.DelimitValues(dataKey.TargetColumnName
           , "[", "]");
 
-        string dbName = ParentList.DataConfigCombo.Text;
-        var proc = new ProcBuilder(dbName, sourceTableName);
+        string dbName = ParentObject.DataConfigCombo.Text;
+        var proc = new ProcBuilder(ParentObject, dbName, sourceTableName);
         proc.Begin(proc.ForeignKeyProcName);
         proc.Line("AS");
         proc.Line("BEGIN");
@@ -385,28 +385,28 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentList.InfoValue;
+        var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Foreign Key Procedure", infoValue);
-        ParentList.InfoValue = controlValue;
+        ParentObject.InfoValue = controlValue;
       }
     }
 
     // Generates the drop Foreign Key procedure.
     internal void ForeignKeyDropProc()
     {
-      var row = ParentList.DataKeyRow();
-      var id = ParentList.DataKeyID(row);
+      var row = ParentObject.DataKeyRow();
+      var id = ParentObject.DataKeyID(row);
       var dataKey = Managers.GetDataKey(id);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
         var fkName = dataKey.Name;
-        var tableRow = ParentList.DataTableRow();
-        var tableName = ParentList.DataTableName(tableRow);
+        var tableRow = ParentObject.DataTableRow();
+        var tableName = ParentObject.DataTableName(tableRow);
 
-        string dbName = ParentList.DataConfigCombo.Text;
-        var proc = new ProcBuilder(dbName, tableName);
+        string dbName = ParentObject.DataConfigCombo.Text;
+        var proc = new ProcBuilder(ParentObject, dbName, tableName);
         proc.Begin(proc.ForeignKeyDropProcName);
 
         proc.Line("AS");
@@ -419,10 +419,10 @@ namespace LJCDataUtility
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentList.InfoValue;
+        var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Foreign Key Drop Procedure", infoValue);
-        ParentList.InfoValue = controlValue;
+        ParentObject.InfoValue = controlValue;
       }
     }
     #endregion
@@ -474,14 +474,14 @@ namespace LJCDataUtility
     // Handles the Grid FontChange event.
     private void GridFont_FontChange(object sender, EventArgs e)
     {
-      var text = ParentList.Text;
+      var text = ParentObject.Text;
       var index = text.IndexOf("[");
       if (index > 0)
       {
-        text = ParentList.Text.Substring(0, index - 1);
+        text = ParentObject.Text.Substring(0, index - 1);
       }
       var fontSize = GridFont.FontSize;
-      ParentList.Text = $"{text} [{fontSize}]";
+      ParentObject.Text = $"{text} [{fontSize}]";
     }
 
     // Handles the Menu FontChange event.
@@ -518,7 +518,7 @@ namespace LJCDataUtility
           {
             var position = FormPoint.MenuScreenPoint(KeyGrid
               , Control.MousePosition);
-            var menu = ParentList.KeyMenu;
+            var menu = ParentObject.KeyMenu;
             menu.Show(position);
             menu.Select();
             e.Handled = true;
@@ -528,11 +528,11 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            ParentList.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           else
           {
-            ParentList.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -559,7 +559,7 @@ namespace LJCDataUtility
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           KeyGrid.LJCSetCurrentRow(e);
           SetControlState();
-          ParentList.TimedChange(Change.Key);
+          ParentObject.TimedChange(Change.Key);
         }
       }
     }
@@ -570,7 +570,7 @@ namespace LJCDataUtility
       if (KeyGrid.LJCAllowSelectionChange)
       {
         SetControlState();
-        ParentList.TimedChange(Change.Key);
+        ParentObject.TimedChange(Change.Key);
       }
       KeyGrid.LJCAllowSelectionChange = true;
     }
@@ -579,7 +579,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList ParentList { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the parent Grid reference.
     private LJCDataGrid TableGrid { get; set; }

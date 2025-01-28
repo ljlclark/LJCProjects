@@ -13,11 +13,11 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    public RenameTable(DataUtilityList parentList)
+    public RenameTable(DataUtilityList parentObject)
     {
       // Initialize property values.
-      ParentList = parentList;
-      Managers = ParentList.Managers;
+      ParentObject = parentObject;
+      Managers = ParentObject.Managers;
     }
     #endregion
 
@@ -26,20 +26,20 @@ namespace LJCDataUtility
     // Generates the Rename Table SQL.
     internal void RenameTableSQL()
     {
-      var tableID = ParentList.DataTableID();
+      var tableID = ParentObject.DataTableID();
       var keyManager = Managers.DataKeyManager;
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        var tableName = ParentList.DataTableName();
-        string dbName = ParentList.DataConfigCombo.Text;
-        var proc = new ProcBuilder(dbName, tableName);
+        var tableName = ParentObject.DataTableName();
+        string dbName = ParentObject.DataConfigCombo.Text;
+        var proc = new ProcBuilder(ParentObject, dbName, tableName);
         var value = proc.RenameTableSQL(tableID, dataKeys);
 
-        var infoValue = ParentList.InfoValue;
+        var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(value
           , "Rename Table SQL", infoValue);
-        ParentList.InfoValue = controlValue;
+        ParentObject.InfoValue = controlValue;
       }
     }
     #endregion
@@ -47,7 +47,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList ParentList { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

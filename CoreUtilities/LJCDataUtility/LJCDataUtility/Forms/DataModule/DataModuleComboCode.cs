@@ -18,20 +18,20 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    internal DataModuleComboCode(DataUtilityList parentList)
+    internal DataModuleComboCode(DataUtilityList parentObject)
     {
       // Initialize property values.
-      Parent = parentList;
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject = parentObject;
+      ParentObject.Cursor = Cursors.WaitCursor;
 
       // Set Combo vars.
-      ModuleCombo = Parent.ModuleCombo;
-      ModuleMenu = Parent.ModuleMenu;
-      Managers = Parent.Managers;
+      ModuleCombo = ParentObject.ModuleCombo;
+      ModuleMenu = ParentObject.ModuleMenu;
+      Managers = ParentObject.Managers;
       ModuleManager = Managers.DataModuleManager;
 
       // Menu item events.
-      var list = Parent;
+      var list = ParentObject;
       list.ModuleNew.Click += ModuleNew_Click;
       list.ModuleEdit.Click += ModuleEdit_Click;
       list.ModuleDelete.Click += ModuleDelete_Click;
@@ -42,7 +42,7 @@ namespace LJCDataUtility
       var combo = ModuleCombo;
       combo.KeyDown += ModuleGrid_KeyDown;
       combo.SelectedIndexChanged += ModuleGrid_SelectedIndexChanged;
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
     #endregion
 
@@ -51,7 +51,7 @@ namespace LJCDataUtility
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       ModuleCombo.Items.Clear();
 
       var orderByNames = new List<string>()
@@ -73,8 +73,8 @@ namespace LJCDataUtility
         ModuleCombo.Select();
       }
       //SetControlState();
-      Parent.Cursor = Cursors.Default;
-      Parent.DoChange(Change.Module);
+      ParentObject.Cursor = Cursors.Default;
+      ParentObject.DoChange(Change.Module);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -92,10 +92,10 @@ namespace LJCDataUtility
 
       if (id > 0)
       {
-        Parent.Cursor = Cursors.WaitCursor;
+        ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = Parent.DataModuleID(item);
+          var rowID = ParentObject.DataModuleID(item);
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -104,7 +104,7 @@ namespace LJCDataUtility
             break;
           }
         }
-        Parent.Cursor = Cursors.Default;
+        ParentObject.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -124,7 +124,7 @@ namespace LJCDataUtility
       bool enableNew = true;
       bool enableEdit = ModuleCombo.SelectedItem != null;
       FormCommon.SetMenuState(ModuleMenu, enableNew, enableEdit);
-      Parent.ModuleHeading.Enabled = true;
+      ParentObject.ModuleHeading.Enabled = true;
     }
     #endregion
 
@@ -148,7 +148,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = Parent.DataModuleID();
+        var id = ParentObject.DataModuleID();
         var keyColumns = new DbColumns()
         {
           { DataModule.ColumnID, id }
@@ -167,7 +167,7 @@ namespace LJCDataUtility
       {
         ModuleCombo.Items.Remove(item);
         SetControlState();
-        Parent.TimedChange(Change.Module);
+        ParentObject.TimedChange(Change.Module);
       }
     }
 
@@ -176,7 +176,7 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        int id = Parent.DataModuleID();
+        int id = ParentObject.DataModuleID();
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
@@ -207,12 +207,12 @@ namespace LJCDataUtility
     // Refreshes the list.
     internal void Refresh()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       int id = 0;
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
-        id = Parent.DataModuleID();
+        id = ParentObject.DataModuleID();
       }
       DataRetrieve();
 
@@ -221,7 +221,7 @@ namespace LJCDataUtility
       {
         RowSelect(id);
       }
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Shows the help page
@@ -248,7 +248,7 @@ namespace LJCDataUtility
           var item = RowAdd(record);
           ModuleCombo.LJCSetByItemID(item.ID);
           SetControlState();
-          Parent.TimedChange(Change.Module);
+          ParentObject.TimedChange(Change.Module);
         }
       }
     }
@@ -302,11 +302,11 @@ namespace LJCDataUtility
           MessageBox.Show("Everywhere");
           if (e.Shift)
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           else
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -316,14 +316,14 @@ namespace LJCDataUtility
     // Handles the SelectionChanged event.
     private void ModuleGrid_SelectedIndexChanged(object sender, EventArgs e)
     {
-      Parent.TimedChange(Change.Module);
+      ParentObject.TimedChange(Change.Module);
     }
     #endregion
 
     #region Properties
 
     // Gets or sets the Parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the Combo reference.
     private LJCItemCombo ModuleCombo { get; set; }

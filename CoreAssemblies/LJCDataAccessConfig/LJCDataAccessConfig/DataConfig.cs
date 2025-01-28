@@ -70,19 +70,19 @@ namespace LJCDataAccessConfig
     /// <include path='items/GetProviderName2/*' file='Doc/DataConfig.xml'/>
     public string GetProviderName()
     {
-      return GetProviderName(ConnectionTypeName);
+      return GetProviderName(ConnectionType);
     }
 
     // Creates the populated connection string.
     /// <include path='items/GetConnectionString1/*' file='Doc/DataConfig.xml'/>
     public string GetConnectionString()
     {
-      return GetConnectionString(ConnectionTypeName);
+      return GetConnectionString(ConnectionType);
     }
 
     // Creates the populated connection string from the ConnectionType name.
     /// <include path='items/GetConnectionString2/*' file='Doc/DataConfig.xml'/>
-    public string GetConnectionString(string connectionTypeName)
+    public string GetConnectionString(string connectionType)
     {
       ConnectionTemplates connectionTemplates;
       ConnectionTemplate connectionTemplate;
@@ -90,7 +90,7 @@ namespace LJCDataAccessConfig
 
       connectionTemplates = new ConnectionTemplates();
       connectionTemplates.LJCLoadData();
-      connectionTemplate = connectionTemplates.LJCGetByName(connectionTypeName);
+      connectionTemplate = connectionTemplates.LJCGetByName(connectionType);
       retValue = GetConnectionStringFromText(connectionTemplate.Template);
       return retValue;
     }
@@ -241,12 +241,12 @@ namespace LJCDataAccessConfig
     private string mDatabase;
 
     /// <summary>Gets or sets the ConnectionType value.</summary>
-    public string ConnectionTypeName
+    public string ConnectionType
     {
-      get { return mConnectionTypeName; }
-      set { mConnectionTypeName = NetString.InitString(value); }
+      get { return mConnectionType; }
+      set { mConnectionType = NetString.InitString(value); }
     }
-    private string mConnectionTypeName;
+    private string mConnectionType;
 
     /// <summary>Gets or sets the User ID.</summary>
     public string UserID

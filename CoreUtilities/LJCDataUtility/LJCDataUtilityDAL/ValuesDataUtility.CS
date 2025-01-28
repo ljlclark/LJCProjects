@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ValuesDataUtility.cs
+using LJCDataAccessConfig;
 using LJCDataSiteDAL;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
@@ -50,12 +51,22 @@ namespace LJCDataUtilityDAL
           SiteManagers = new ManagersDataSite();
           SiteManagers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
+
+          // *** Begin *** Add 1/29/25
+          var dataConfigs = new DataConfigs();
+          dataConfigs.LJCLoadData();
+          var dataConfig = dataConfigs.LJCGetByName(settings.DataConfigName);
+          ConnectionType = dataConfig.ConnectionType;
+          // *** End   *** Add 1/29/25
         }
       }
     }
     #endregion
 
     #region Properties
+
+    /// <summary>Gets or sets the connection type value.</summary>
+    public string ConnectionType { get; set; }
 
     /// <summary>Gets the Error message</summary>
     public string Errors { get; private set; }

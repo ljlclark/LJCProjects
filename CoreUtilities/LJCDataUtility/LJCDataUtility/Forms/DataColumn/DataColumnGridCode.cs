@@ -20,33 +20,33 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    internal DataColumnGridCode(DataUtilityList parentList)
+    internal DataColumnGridCode(DataUtilityList parentObject)
     {
       // Initialize property values.
-      Parent = parentList;
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject = parentObject;
+      ParentObject.Cursor = Cursors.WaitCursor;
 
       // Set Grid vars.
-      TableGrid = Parent.TableGrid;
-      ColumnGrid = Parent.ColumnGrid;
-      ColumnMenu = Parent.ColumnMenu;
-      Managers = Parent.Managers;
+      TableGrid = ParentObject.TableGrid;
+      ColumnGrid = ParentObject.ColumnGrid;
+      ColumnMenu = ParentObject.ColumnMenu;
+      Managers = ParentObject.Managers;
       ColumnManager = Managers.DataColumnManager;
 
       // Set Fonts
-      var fontFamily = Parent.Font.FontFamily;
-      var style = Parent.Font.Style;
+      var fontFamily = ParentObject.Font.FontFamily;
+      var style = ParentObject.Font.Style;
       ColumnGrid.Font = new Font(fontFamily, 11, style);
       ColumnMenu.Font = new Font(fontFamily, 11, style);
 
       // Font change objects.
-      GridFont = new GridFont(Parent, ColumnGrid);
+      GridFont = new GridFont(ParentObject, ColumnGrid);
       GridFont.FontChange += GridFont_FontChange;
       MenuFont = new MenuFont(ColumnMenu);
       MenuFont.FontChange += MenuFont_FontChange;
 
       // Menu item events.
-      var list = Parent;
+      var list = ParentObject;
       list.ColumnNew.Click += ColumnNew_Click;
       list.ColumnEdit.Click += ColumnEdit_Click;
       list.ColumnDelete.Click += ColumnDelete_Click;
@@ -59,7 +59,7 @@ namespace LJCDataUtility
       grid.MouseDoubleClick += ColumnGrid_MouseDoubleClick;
       grid.MouseDown += ColumnGrid_MouseDown;
       grid.SelectionChanged += ColumnGrid_SelectionChanged;
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Configures the DataColumn Grid.
@@ -94,12 +94,12 @@ namespace LJCDataUtility
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       ColumnGrid.LJCRowsClear();
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = Parent.DataTableID();
+        var parentID = ParentObject.DataTableID();
         var keyColumns = ColumnManager.ParentKey(parentID);
         var orderByNames = new List<string>()
         {
@@ -116,8 +116,8 @@ namespace LJCDataUtility
         }
       }
       SetControlState();
-      Parent.Cursor = Cursors.Default;
-      Parent.DoChange(Change.Column);
+      ParentObject.Cursor = Cursors.Default;
+      ParentObject.DoChange(Change.Column);
     }
 
     // Adds a grid row and updates it with the record values.
@@ -136,10 +136,10 @@ namespace LJCDataUtility
 
       if (id > 0)
       {
-        Parent.Cursor = Cursors.WaitCursor;
+        ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowID = Parent.DataColumnID(row);
+          var rowID = ParentObject.DataColumnID(row);
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -148,7 +148,7 @@ namespace LJCDataUtility
             break;
           }
         }
-        Parent.Cursor = Cursors.Default;
+        ParentObject.Cursor = Cursors.Default;
       }
       return retValue;
     }
@@ -169,7 +169,7 @@ namespace LJCDataUtility
       bool enableNew = TableGrid.CurrentRow != null;
       bool enableEdit = ColumnGrid.CurrentRow != null;
       FormCommon.SetMenuState(ColumnMenu, enableNew, enableEdit);
-      Parent.ColumnHeading.Enabled = true;
+      ParentObject.ColumnHeading.Enabled = true;
     }
 
     // Sets the row stored values.
@@ -203,7 +203,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = Parent.DataColumnID();
+        var id = ParentObject.DataColumnID();
         var keyColumns = new DbColumns()
         {
           { DataUtilColumn.ColumnID, id }
@@ -222,7 +222,7 @@ namespace LJCDataUtility
       {
         ColumnGrid.Rows.Remove(row);
         SetControlState();
-        Parent.TimedChange(Change.Column);
+        ParentObject.TimedChange(Change.Column);
       }
     }
 
@@ -232,9 +232,9 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        var id = Parent.DataColumnID();
-        var parentID = Parent.DataTableID();
-        string parentName = Parent.DataTableName();
+        var id = ParentObject.DataColumnID();
+        var parentID = ParentObject.DataTableID();
+        string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
         {
@@ -257,10 +257,10 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         int sequence = ColumnGrid.Rows.Count + 1;
-        var parentID = Parent.DataTableID();
+        var parentID = ParentObject.DataTableID();
         // *** Next Statement *** Add 1/23/25
-        var parentSiteID = Parent.DataTableSiteID();
-        string parentName = Parent.DataTableName();
+        var parentSiteID = ParentObject.DataTableSiteID();
+        string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
@@ -282,12 +282,12 @@ namespace LJCDataUtility
     // Refreshes the list.
     internal void Refresh()
     {
-      Parent.Cursor = Cursors.WaitCursor;
+      ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
       if (ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = Parent.DataColumnID();
+        id = ParentObject.DataColumnID();
       }
       DataRetrieve();
 
@@ -296,7 +296,7 @@ namespace LJCDataUtility
       {
         RowSelect(id);
       }
-      Parent.Cursor = Cursors.Default;
+      ParentObject.Cursor = Cursors.Default;
     }
 
     // Shows the help page
@@ -323,7 +323,7 @@ namespace LJCDataUtility
           var row = RowAdd(record);
           ColumnGrid.LJCSetCurrentRow(row, true);
           SetControlState();
-          Parent.TimedChange(Change.Column);
+          ParentObject.TimedChange(Change.Column);
         }
       }
     }
@@ -361,14 +361,14 @@ namespace LJCDataUtility
     // Handles the Grid FontChange event.
     private void GridFont_FontChange(object sender, EventArgs e)
     {
-      var text = Parent.Text;
+      var text = ParentObject.Text;
       var index = text.IndexOf("[");
       if (index > 0)
       {
-        text = Parent.Text.Substring(0, index - 1);
+        text = ParentObject.Text.Substring(0, index - 1);
       }
       var fontSize = GridFont.FontSize;
-      Parent.Text = $"{text} [{fontSize}]";
+      ParentObject.Text = $"{text} [{fontSize}]";
     }
 
     // Handles the Menu FontChange event.
@@ -405,7 +405,7 @@ namespace LJCDataUtility
           {
             var position = FormPoint.MenuScreenPoint(ColumnGrid
               , Control.MousePosition);
-            var menu = Parent.ColumnMenu;
+            var menu = ParentObject.ColumnMenu;
             menu.Show(position);
             menu.Select();
             e.Handled = true;
@@ -415,11 +415,11 @@ namespace LJCDataUtility
         case Keys.Tab:
           if (e.Shift)
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           else
           {
-            Parent.ColumnTabs.Select();
+            ParentObject.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -446,7 +446,7 @@ namespace LJCDataUtility
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           ColumnGrid.LJCSetCurrentRow(e);
           SetControlState();
-          Parent.TimedChange(Change.Column);
+          ParentObject.TimedChange(Change.Column);
         }
       }
     }
@@ -457,7 +457,7 @@ namespace LJCDataUtility
       if (ColumnGrid.LJCAllowSelectionChange)
       {
         SetControlState();
-        Parent.TimedChange(Change.Column);
+        ParentObject.TimedChange(Change.Column);
       }
       ColumnGrid.LJCAllowSelectionChange = true;
     }
@@ -466,7 +466,7 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the parent List reference.
-    private DataUtilityList Parent { get; set; }
+    private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the parent Grid reference.
     private LJCDataGrid TableGrid { get; set; }
