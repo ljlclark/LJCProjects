@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCDataUtilityDAL.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -83,6 +84,7 @@
     <Analyzer Include="..\..\LJCGenText\External\LJCNetCommon.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Doc\ManagersDataUtility.xml" />
     <Content Include="Manager\Compare.txt" />
   </ItemGroup>
   <ItemGroup>

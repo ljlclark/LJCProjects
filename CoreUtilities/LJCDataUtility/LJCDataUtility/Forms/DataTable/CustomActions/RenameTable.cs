@@ -13,7 +13,7 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    public RenameTable(DataUtilityList parentObject)
+    internal RenameTable(DataUtilityList parentObject)
     {
       // Initialize property values.
       ParentObject = parentObject;

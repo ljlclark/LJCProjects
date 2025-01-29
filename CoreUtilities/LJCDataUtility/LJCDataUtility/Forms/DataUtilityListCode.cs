@@ -524,15 +524,11 @@ namespace LJCDataUtility
   }
 
   /// <summary></summary>
-  public enum KeyType : short
+  internal enum KeyType : short
   {
-    /// <summary></summary>
     Primary = 1,
-    /// <summary></summary>
     Unique,
-    /// <summary></summary>
     Foreign,
-    /// <summary></summary>
     Table
   }
 }

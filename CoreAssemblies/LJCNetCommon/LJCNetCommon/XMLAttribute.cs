@@ -1,9 +1,8 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // XMLAttribute.cs
-using LJCNetCommon;
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
   /// <summary>
   /// Represents an XML element attribute.
@@ -23,37 +22,27 @@ namespace LJCDataUtility
 
     #region Properties
 
-    /// <summary>
-    /// Gets or sets the attribute name.
-    /// </summary>
+    /// <summary>Gets or sets the attribute name.</summary>
     public string Name
     {
-      get
-      {
-        return name;
-      }
+      get { return mName; }
       set
       {
-        name = NetString.InitString(value);
+        mName = NetString.InitString(value);
       }
     }
-    private string name;
+    private string mName;
 
-    /// <summary>
-    /// Gets or sets the attribute value.
-    /// </summary>
+    /// <summary>Gets or sets the attribute value.</summary>
     public string Value
     {
-      get
-      {
-        return attributeValue;
-      }
+      get { return mAttributeValue; }
       set
       {
-        attributeValue = NetString.InitString(value);
+        mAttributeValue = NetString.InitString(value);
       }
     }
-    private string attributeValue;
+    private string mAttributeValue;
     #endregion
   }
 }

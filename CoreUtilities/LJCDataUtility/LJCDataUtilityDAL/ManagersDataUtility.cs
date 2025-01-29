@@ -16,17 +16,14 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../CommonData.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ManagersDataUtility()
     {
       mArgError = new ArgError("LJCDataUtility.ManagersDataUtility");
     }
 
-    /// <summary>
-    /// Sets the DB properties.
-    /// </summary>
-    /// <param name="dbServiceRef">The database service reference object.</param>
-    /// <param name="dataConfigName">The data configuration name.</param>
+    // Sets the DB properties.
+    /// <include path='items/DefaultConstructor/*' file='Doc/ManagersDataUtility.xml'/>
     public void SetDBProperties(DbServiceRef dbServiceRef
       , string dataConfigName)
     {

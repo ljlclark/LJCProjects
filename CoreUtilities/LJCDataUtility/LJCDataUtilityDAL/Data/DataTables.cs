@@ -19,7 +19,7 @@ namespace LJCDataUtilityDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataTables LJCDeserialize(string fileSpec = null)
     {
       DataTables retValue;
@@ -45,7 +45,7 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataTables()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataTables");
@@ -53,7 +53,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataTables(DataTables items)
     {
       if (NetCommon.HasItems(items))
@@ -68,8 +68,14 @@ namespace LJCDataUtilityDAL
 
     #region Collection Methods
 
-    // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    // Creates and adds the object from the supplied values.
+    /// <summary>
+    /// Creates and adds the object from the supplied values.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="dataModuleID"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public DataUtilTable Add(int id, int dataModuleID, string name)
     {
       DataUtilTable retValue;
@@ -98,7 +104,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataTables Clone()
     {
       var retValue = MemberwiseClone() as DataTables;
@@ -106,7 +112,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataTables GetCollection(List<DataUtilTable> list)
     {
       DataTables retValue = null;
@@ -123,7 +129,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -139,6 +145,7 @@ namespace LJCDataUtilityDAL
     /// <summary>
     /// Removes an item by name.
     /// </summary>
+    /// <param name="dataModuleID"></param>
     /// <param name="name">The item unique Name value.</param>
     public void LJCRemove(int dataModuleID, string name)
     {
@@ -151,7 +158,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -165,7 +172,7 @@ namespace LJCDataUtilityDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataUtilTable LJCSearchID(int id)
     {
       DataUtilTable retValue = null;
@@ -187,6 +194,7 @@ namespace LJCDataUtilityDAL
     /// <summary>
     /// Retrieve the collection element with unique values.
     /// </summary>
+    /// <param name="dataModuleID"></param>
     /// <param name="name">The item name.</param>
     /// <returns>A reference to the matching item.</returns>
     public DataUtilTable LJCSearchUnique(int dataModuleID, string name)
@@ -242,8 +250,13 @@ namespace LJCDataUtilityDAL
       get { return "DataTables.xml"; }
     }
 
-    // The item for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    // The item for the supplied name.
+    /// <summary>
+    /// The item for the supplied name.
+    /// </summary>
+    /// <param name="dataTableID"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public DataUtilTable this[int dataTableID, string name]
     {
       get { return LJCSearchUnique(dataTableID, name); }

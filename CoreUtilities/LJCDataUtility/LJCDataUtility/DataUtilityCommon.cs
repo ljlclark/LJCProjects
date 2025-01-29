@@ -12,13 +12,13 @@ using System.Net;
 
 namespace LJCDataUtility
 {
-  /// <summary>Common DataUtility Methods.</summary>
-  public class DataUtilityCommon
+  // Common DataUtility Methods.
+  internal class DataUtilityCommon
   {
     #region Functions
 
-    /// <summary>Show the info data.</summary>
-    public static ControlValue ShowInfo(string contents, string text
+    // Show the info data.
+    internal static ControlValue ShowInfo(string contents, string text
       , ControlValue controlValue = null)
     {
       ControlValue retValue = controlValue;

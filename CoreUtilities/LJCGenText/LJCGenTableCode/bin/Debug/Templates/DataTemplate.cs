@@ -27,14 +27,14 @@ namespace _Namespace_
 		#region Constructors
 
 		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public _ClassName_()
 		{
 			ChangedNames = new ChangedNames();
 		}
 
 		// The Copy constructor.
-		/// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public _ClassName_(_ClassName_ item)
 		{
 			ChangedNames = new ChangedNames();
@@ -45,16 +45,16 @@ namespace _Namespace_
 		#region Data Methods
 
 		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+		/// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
 		public _ClassName_ Clone()
 		{
 			var retValue = MemberwiseClone() as _ClassName_;
 			return retValue;
 		}
 
-		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public int CompareTo(_ClassName_ other)
+    // Provides the default Sort functionality.
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public int CompareTo(_ClassName_ other)
 		{
 			int retValue;
 
@@ -74,9 +74,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public override string ToString()
+    // The object string identifier.
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public override string ToString()
 		{
 			var retValue = $"{mSequence} {m_ToStringName_}:{mID}-{mValue}";
 			return retValue;
@@ -167,9 +167,9 @@ namespace _Namespace_
 	/// <summary>Sort and search on Name value.</summary>
 	public class _ClassName_UniqueComparer : IComparer<_ClassName_>
 	{
-		// Compares two objects.
-		/// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
-		public int Compare(_ClassName_ x, _ClassName_ y)
+    // Compares two objects.
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public int Compare(_ClassName_ x, _ClassName_ y)
 		{
 			int retValue;
 

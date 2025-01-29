@@ -15,13 +15,22 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataUtilColumn()
     {
       ChangedNames = new ChangedNames();
     }
 
     // Initialize with main values.
+    /// <summary>
+    /// Initialize with main values.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="typeName"></param>
+    /// <param name="allowNull"></param>
+    /// <param name="maxLength"></param>
+    /// <param name="defaultValue"></param>
+    /// <param name="identityIncrement"></param>
     public DataUtilColumn(string name, string typeName
       , bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
@@ -41,7 +50,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataUtilColumn(DataUtilColumn item)
     {
       ChangedNames = new ChangedNames();
@@ -66,6 +75,10 @@ namespace LJCDataUtilityDAL
     #region Data Class Methods
 
     // Adds changed propertynames.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyNames"></param>
     public void AddChangedNames(List<string> propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -79,7 +92,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataUtilColumn Clone()
     {
       var retValue = MemberwiseClone() as DataUtilColumn;
@@ -87,7 +100,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(DataUtilColumn other)
     {
       int retValue = -2;
@@ -115,7 +128,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       var retValue = $"{mName}:{mID}";
@@ -425,7 +438,7 @@ namespace LJCDataUtilityDAL
   public class DataColumnUniqueComparer : IComparer<DataUtilColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(DataUtilColumn x, DataUtilColumn y)
     {
       int retValue;

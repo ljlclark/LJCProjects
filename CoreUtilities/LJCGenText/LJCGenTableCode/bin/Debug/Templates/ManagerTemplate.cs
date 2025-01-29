@@ -26,7 +26,7 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public _ClassName_Manager(DbServiceRef dbServiceRef, string dataConfigName
 			, string tableName = "_TableName_", string schemaName = null)
 		{
@@ -60,7 +60,7 @@ namespace _Namespace_
     #region Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public _ClassName_ Add(_ClassName_ dataObject
 			, List<string> propertyNames = null)
 		{
@@ -75,16 +75,16 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Deletes the records with the specified key values.
-		/// <include path='items/Delete/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    // Deletes the records with the specified key values.
+    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public void Delete(DbColumns keyColumns, DbFilters filters = null)
 		{
 			Manager.Delete(keyColumns, filters);
 		}
 
-		// Retrieves a collection of data records.
-		/// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _CollectionName_ Load(DbColumns keyColumns = null
+    // Retrieves a collection of data records.
+    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public _CollectionName_ Load(DbColumns keyColumns = null
 			, List<string> propertyNames = null, DbFilters filters = null
 			, DbJoins joins = null)
 		{
@@ -99,9 +99,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Retrieves a record from the database.
-		/// <include path='items/Retrieve/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ Retrieve(DbColumns keyColumns
+    // Retrieves a record from the database.
+    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public _ClassName_ Retrieve(DbColumns keyColumns
 			, List<string> propertyNames = null, DbFilters filters = null
 			, DbJoins joins = null)
 		{
@@ -116,20 +116,20 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Updates the record.
-		/// <include path='items/Update/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public void Update(_ClassName_ dataObject, DbColumns keyColumns
+    // Updates the record.
+    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public void Update(_ClassName_ dataObject, DbColumns keyColumns
 			, List<string> propertyNames = null, DbFilters filters = null)
 		{
 			Manager.Update(dataObject, keyColumns, propertyNames, filters);
 		}
-		#endregion
+    #endregion
 
-		#region Load/Retrieve Methods
+    #region Load/Retrieve Methods
 
-		// Retrieves a record with the supplied value.
-		/// <include path='items/RetrieveWithID/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ RetrieveWithPrimary(int id, List<string> propertyNames = null)
+    // Retrieves a record with the supplied value.
+    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public _ClassName_ RetrieveWithPrimary(int id, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
 
@@ -140,9 +140,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Retrieves a record with the supplied unique values.
-		/// <include path='items/RetrieveWithName/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public _ClassName_ RetrieveWithUnique(string name
+    // Retrieves a record with the supplied unique values.
+    /// <include path='items/RetrieveWithName/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public _ClassName_ RetrieveWithUnique(string name
 			, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
@@ -153,13 +153,13 @@ namespace _Namespace_
 			retValue = ResultConverter.CreateData(dbResult);
 			return retValue;
 		}
-		#endregion
+    #endregion
 
-		#region GetKey Methods
+    #region GetKey Methods
 
-		// Gets the ID key columns.
-		/// <include path='items/GetIDKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbColumns PrimaryKey(int id)
+    // Gets the ID key columns.
+    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns PrimaryKey(int id)
 		{
 			// Add(columnName, propertyName = null, renameAs = null
 			//   , datatypeName = "String", caption = null);
@@ -171,9 +171,9 @@ namespace _Namespace_
 			return retValue;
 		}
 
-		// Gets the ID key columns.
-		/// <include path='items/GetNameKey/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbColumns UniqueKey(string name)
+    // Gets the ID key columns.
+    /// <include path='items/GetNameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns UniqueKey(string name)
 		{
 			// Needs cast for string to select the correct Add overload.
 			var retValue = new DbColumns()
@@ -182,13 +182,13 @@ namespace _Namespace_
 			};
 			return retValue;
 		}
-		#endregion
+    #endregion
 
-		#region Joins
+    #region Joins
 
-		// Creates and returns the Load Joins object.
-		/// <include path='items/GetLoadJoins/*' file='../../LJCDocLib/Common/Manager.xml'/>
-		public DbJoins GetJoins()
+    // Creates and returns the Load Joins object.
+    /// <include path='items/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbJoins GetJoins()
 		{
 			DbJoin dbJoin;
 			DbJoins retValue = new DbJoins();

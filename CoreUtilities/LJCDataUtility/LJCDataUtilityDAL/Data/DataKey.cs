@@ -15,14 +15,14 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKey()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKey(DataKey item)
     {
       ChangedNames = new ChangedNames();
@@ -43,6 +43,10 @@ namespace LJCDataUtilityDAL
     #region Data Class Methods
 
     // Adds changed propertynames.
+    /// <summary>
+    /// Adds changed propertynames.
+    /// </summary>
+    /// <param name="propertyNames">The property name list.</param>
     public void AddChangedNames(List<string> propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -56,7 +60,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKey Clone()
     {
       var retValue = MemberwiseClone() as DataKey;
@@ -64,7 +68,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(DataKey other)
     {
       int retValue;
@@ -86,7 +90,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       var retValue = $"{mName}:{mID}";
@@ -335,7 +339,7 @@ namespace LJCDataUtilityDAL
   public class DataKeyUniqueComparer : IComparer<DataKey>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(DataKey x, DataKey y)
     {
       int retValue;

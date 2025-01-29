@@ -98,7 +98,7 @@ namespace LJCDataUtilityDAL
     // Represents Argument errors.
     private readonly ArgError mArgError;
 
-    /// <summary>Initialize Singleton.</summary>
+    // Initialize Singleton.
     private static readonly ValuesDataUtility mInstance
       = new ValuesDataUtility();
     #endregion

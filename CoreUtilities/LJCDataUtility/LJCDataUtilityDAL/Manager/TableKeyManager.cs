@@ -20,7 +20,7 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public TableKeyManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "", string schemaName = null)
     {
@@ -33,7 +33,10 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public TableKeys LoadForeignKeys()
     {
       //TableKeys retValue;
@@ -64,6 +67,12 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a collection of Primary key records.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keyType"></param>
+    /// <param name="constraintName"></param>
+    /// <returns></returns>
     public TableKeys LoadTableKeys(string keyType = "PRIMARY KEY"
       , string constraintName = null)
     {

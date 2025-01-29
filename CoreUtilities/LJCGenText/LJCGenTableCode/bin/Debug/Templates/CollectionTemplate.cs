@@ -29,7 +29,7 @@ namespace _Namespace_
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static _CollectionName_ LJCDeserialize(string fileSpec = null)
     {
       _CollectionName_ retValue;
@@ -52,7 +52,7 @@ namespace _Namespace_
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public _CollectionName_()
     {
       mArgError = new ArgError("_Namespace_._ClassName_");
@@ -60,7 +60,7 @@ namespace _Namespace_
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _CollectionName_(_CollectionName_ items)
     {
       if (NetCommon.HasItems(items))
@@ -76,7 +76,7 @@ namespace _Namespace_
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _ClassName_ Add(int id, string name)
     {
       _ClassName_ retValue;
@@ -104,7 +104,7 @@ namespace _Namespace_
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public _CollectionName_ Clone()
     {
       var retValue = MemberwiseClone() as _CollectionName_;
@@ -112,7 +112,7 @@ namespace _Namespace_
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _CollectionName_ GetCollection(List<_ClassName_> list)
     {
       _CollectionName_ retValue = null;
@@ -129,7 +129,7 @@ namespace _Namespace_
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -156,7 +156,7 @@ namespace _Namespace_
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -170,7 +170,7 @@ namespace _Namespace_
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchCode/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _ClassName_ LJCSearchPrimary(string code)
     {
       _ClassName_ retValue = null;

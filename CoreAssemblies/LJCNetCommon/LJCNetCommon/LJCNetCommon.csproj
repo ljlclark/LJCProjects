@@ -70,6 +70,9 @@
     <Compile Include="PropertyDelegate.cs" />
     <Compile Include="PropertyDelegates.cs" />
     <Compile Include="TextBuilder.cs" />
+    <Compile Include="XMLAttribute.cs" />
+    <Compile Include="XMLAttributes.cs" />
+    <Compile Include="XMLBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />
@@ -104,6 +107,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\PropertyDelegates.xml" />
+    <Content Include="Doc\XMLAttribute.xml" />
+    <Content Include="Doc\XMLAttributes.xml" />
+    <Content Include="Doc\XMLBuilder.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -13,13 +13,13 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKey()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKey(TableKey item)
     {
       DBName = item.DBName;
@@ -39,7 +39,7 @@ namespace LJCDataUtilityDAL
     #region Data Class Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKey Clone()
     {
       var retValue = MemberwiseClone() as TableKey;
@@ -47,7 +47,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(TableKey other)
     {
       int retValue;
@@ -213,16 +213,27 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The ID column name.</summary>
     public static string ColumnDBName = "TableCatalog";
+    /// <summary></summary>
     public static string ColumnTableSchema = "TableSchema";
+    /// <summary></summary>
     public static string ColumnTableName = "TableName";
+    /// <summary></summary>
     public static string ColumnColumnName = "ColumnName";
+    /// <summary></summary>
     public static string ColumnConstraintDBName = "ConstraintDBName";
+    /// <summary></summary>
     public static string ColumnConstraintSchema = "ConstraintSchema";
+    /// <summary></summary>
     public static string ColumnConstraintName = "ConstraintName";
+    /// <summary></summary>
     public static string ColumnUpdateRule = "UpdateRule";
+    /// <summary></summary>
     public static string ColumnDeleteRule = "DeleteRule";
+    /// <summary></summary>
     public static string ColumnTargetTable = "TargetTable";
+    /// <summary></summary>
     public static string ColumnTargetColumn = "TargetColumn";
+    /// <summary></summary>
     public static string ColumnOrdinalPosition = "OrdinalPosition";
     #endregion
   }

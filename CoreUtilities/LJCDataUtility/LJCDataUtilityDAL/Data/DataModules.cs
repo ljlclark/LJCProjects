@@ -19,7 +19,7 @@ namespace LJCDataUtilityDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataModules LJCDeserialize(string fileSpec = null)
     {
       DataModules retValue;
@@ -45,7 +45,7 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataModules()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataModules");
@@ -53,7 +53,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModules(DataModules items)
     {
       if (NetCommon.HasItems(items))
@@ -69,7 +69,13 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <summary>
+    /// Creates and adds the object from the provided values.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="dataSiteID"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public DataModule Add(long id, long dataSiteID, string name)
     {
       DataModule retValue;
@@ -102,7 +108,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataModules Clone()
     {
       var retValue = MemberwiseClone() as DataModules;
@@ -110,7 +116,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModules GetCollection(List<DataModule> list)
     {
       DataModules retValue = null;
@@ -127,7 +133,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -154,7 +160,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -168,7 +174,7 @@ namespace LJCDataUtilityDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule LJCSearchID(int id)
     {
       DataModule retValue = null;
@@ -244,8 +250,12 @@ namespace LJCDataUtilityDAL
       get { return "DataModules.xml"; }
     }
 
-    // The item for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    // The item for the supplied name.
+    /// <summary>
+    /// The item for the supplied name.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public DataModule this[string name]
     {
       get { return LJCSearchUnique(name); }

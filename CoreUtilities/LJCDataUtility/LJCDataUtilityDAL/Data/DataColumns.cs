@@ -16,7 +16,7 @@ namespace LJCDataUtilityDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataColumns LJCDeserialize(string fileSpec = null)
     {
       DataColumns retValue;
@@ -42,7 +42,7 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataColumns()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataColumns");
@@ -50,7 +50,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataColumns(DataColumns items)
     {
       if (NetCommon.HasItems(items))
@@ -66,7 +66,7 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataUtilColumn Add(int id, string name)
     {
       DataUtilColumn retValue = null;
@@ -100,7 +100,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // <summary>Creates and adds the object from the provided values.</summary>
+    /// <summary>Creates and adds the object from the provided values.</summary>
     public DataUtilColumn Add(string name, string typeName
       , bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
@@ -132,7 +132,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataColumns Clone()
     {
       var retValue = new DataColumns();
@@ -144,7 +144,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataColumns GetCollection(List<DataUtilColumn> list)
     {
       DataColumns retValue = null;
@@ -161,7 +161,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -188,7 +188,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -202,7 +202,7 @@ namespace LJCDataUtilityDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataUtilColumn LJCSearchID(int id)
     {
       DataUtilColumn retValue = null;
@@ -279,7 +279,11 @@ namespace LJCDataUtilityDAL
     }
 
     // The item for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    /// <summary>
+    /// The item for the supplied name.
+    /// </summary>
+    /// <param name="name">The item name.</param>
+    /// <returns>The selected item.</returns>
     public DataUtilColumn this[string name]
     {
       get { return LJCSearchUnique(name); }

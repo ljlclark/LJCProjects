@@ -129,9 +129,6 @@
     <Compile Include="Forms\ProcBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMLAttribute.cs" />
-    <Compile Include="XMLAttributes.cs" />
-    <Compile Include="XMLBuilder.cs" />
     <EmbeddedResource Include="Forms\TableNameSelect.resx">
       <DependentUpon>TableNameSelect.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,9 +200,6 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
     <Content Include="Doc\MyProcBuilder.xml" />
     <Content Include="Doc\ProcBuilder.xml" />
-    <Content Include="Doc\XMLAttribute.xml" />
-    <Content Include="Doc\XMLAttributes.xml" />
-    <Content Include="Doc\XMLBuilder.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDataUtilityDAL\LJCDataUtilityDAL.csproj">

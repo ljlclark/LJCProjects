@@ -13,14 +13,14 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKeys()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public TableKeys(TableKeys items)
     {
       if (NetCommon.HasItems(items))
@@ -36,7 +36,7 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCDocLib/Common/Data.xml'/>
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKeys Clone()
     {
       var retValue = new TableKeys();
@@ -48,7 +48,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -64,7 +64,7 @@ namespace LJCDataUtilityDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCDocLib/Common/Collection.xml'/>
+    /// <include path='items/LJCSearchUnique/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public TableKey LJCSearchName(string constraintName)
     {
       TableKey retValue = null;
@@ -96,7 +96,11 @@ namespace LJCDataUtilityDAL
     #region Properties
 
     // The item for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public TableKey this[string name]
     {
       get { return LJCSearchName(name); }

@@ -1,28 +1,23 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // XMLBuilder.cs
-using LJCNetCommon;
-using System.CodeDom.Compiler;
-using System.Reflection;
 using System.Text;
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
   /// <summary>
   /// Provides methods for creating XML text.
   /// </summary>
   public class XMLBuilder
   {
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
+    /// <summary>Initializes an object instance.</summary>
     public XMLBuilder()
     {
       Indent = 0;
       XML = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
     }
 
-    #region Public Methods
+    #region Methods
 
     // Retrieves the XML text.
     /// <include path='items/ToString/*' file='Doc/XMLBuilder.xml'/>
@@ -86,9 +81,6 @@ namespace LJCDataUtility
         , "http://www.w3.org/2001/XMLSchema-instance");
       return retAttributes;
     }
-    #endregion
-
-    #region Private Methods
 
     // Creates the XML element.
     private string CreateElement(string name

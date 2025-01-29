@@ -3,7 +3,7 @@
 // XMLAttributes.cs
 using System.Collections.Generic;
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
   /// <summary>
   /// Represents a collection of XMLAttribute elements.

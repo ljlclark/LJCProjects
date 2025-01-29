@@ -19,7 +19,7 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    public InsertSelect(DataUtilityList parentObject)
+    internal InsertSelect(DataUtilityList parentObject)
     {
       // Initialize property values.
       ParentObject = parentObject;
@@ -351,12 +351,12 @@ namespace LJCDataUtility
   }
 
   /// <summary></summary>
-  public class ColumnLists
+  internal class ColumnLists
   {
     /// <summary>The insert column list.</summary>
-    public string InsertList { get; set; }
+    internal string InsertList { get; set; }
 
     /// <summary>The select column/value list.</summary>
-    public string SelectList { get; set; }
+    internal string SelectList { get; set; }
   }
 }
