@@ -69,13 +69,7 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <summary>
-    /// Creates and adds the object from the provided values.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="dataTableID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/Add/*' file='Doc/DataKeys.xml'/>
     public DataKey Add(int id, int dataTableID, string name)
     {
       DataKey retValue;
@@ -142,11 +136,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="dataTableID"></param>
-    /// <param name="name">The item unique Name value.</param>
+    /// <include path='items/LJCRemove/*' file='Doc/DataKeys.xml'/>
     public void LJCRemove(int dataTableID, string name)
     {
       DataKey item = Find(x => x.DataTableID == dataTableID
@@ -191,12 +181,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="dataTableID"></param>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCSearchUnique/*' file='Doc/DataKeys.xml'/>
     public DataKey LJCSearchUnique(int dataTableID, string name)
     {
       DataKey retValue = null;
@@ -251,12 +236,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The item for the supplied name.
-    /// <summary>
-    /// The item for the supplied name.
-    /// </summary>
-    /// <param name="dataTableID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/NameIndexer/*' file='Doc/DataKeys.xml'/>
     public DataKey this[int dataTableID, string name]
     {
       get { return LJCSearchUnique(dataTableID, name); }

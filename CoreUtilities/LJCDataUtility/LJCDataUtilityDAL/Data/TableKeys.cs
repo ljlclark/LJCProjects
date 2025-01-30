@@ -65,14 +65,14 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchUnique/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public TableKey LJCSearchName(string constraintName)
+    public TableKey LJCSearchName(string name)
     {
       TableKey retValue = null;
 
       LJCSortName();
       TableKey searchItem = new TableKey()
       {
-        UpdateRule = constraintName,
+        UpdateRule = name,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)

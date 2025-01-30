@@ -140,7 +140,7 @@ namespace LJCDataUtilityDAL
     {
       DataModule retValue;
 
-      var keyColumns = UniqueKey(name);
+      var keyColumns = NameKey(name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -150,7 +150,7 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -164,8 +164,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetNameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(string name)
+    /// <include path='items/NameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns NameKey(string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()

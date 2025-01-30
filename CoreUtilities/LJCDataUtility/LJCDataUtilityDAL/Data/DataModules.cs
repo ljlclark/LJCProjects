@@ -69,13 +69,7 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <summary>
-    /// Creates and adds the object from the provided values.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="dataSiteID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/Add/*' file='Doc/DataModules.xml'/>
     public DataModule Add(long id, long dataSiteID, string name)
     {
       DataModule retValue;
@@ -93,7 +87,7 @@ namespace LJCDataUtilityDAL
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCSearchUnique(name);
+      retValue = LJCSearchName(name);
       if (null == retValue)
       {
         retValue = new DataModule()
@@ -146,10 +140,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="name">The item unique Name value.</param>
+    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCRemove(string name)
     {
       DataModule item = Find(x => x.Name == name);
@@ -193,12 +184,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
-    public DataModule LJCSearchUnique(string name)
+    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public DataModule LJCSearchName(string name)
     {
       DataModule retValue = null;
 
@@ -216,7 +203,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    /// <summary>Sort on Code.</summary>
+    /// <summary>Sort on ID.</summary>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -251,14 +238,10 @@ namespace LJCDataUtilityDAL
     }
 
     // The item for the supplied name.
-    /// <summary>
-    /// The item for the supplied name.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule this[string name]
     {
-      get { return LJCSearchUnique(name); }
+      get { return LJCSearchName(name); }
     }
     #endregion
 

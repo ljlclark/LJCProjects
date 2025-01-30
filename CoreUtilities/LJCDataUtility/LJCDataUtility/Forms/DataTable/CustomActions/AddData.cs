@@ -93,7 +93,7 @@ namespace LJCDataUtility
           // "@tableNameFindName"
           var typeValue = "nvarchar(60)";
           var findColumn
-            = data.ParentColumns.LJCSearchUnique(parentFindColumnName);
+            = data.ParentColumns.LJCSearchName(parentFindColumnName);
           if (findColumn != null)
           {
             typeValue = findColumn.TypeName;

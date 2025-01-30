@@ -129,11 +129,11 @@ namespace _Namespace_
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public _ClassName_ RetrieveWithPrimary(int id, List<string> propertyNames = null)
+    public _ClassName_ RetrieveWithID(int id, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
 
-      var keyColumns = PrimaryKey(id);
+      var keyColumns = IDKey(id);
       joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames, joins: joins);
 			retValue = ResultConverter.CreateData(dbResult);
@@ -142,7 +142,7 @@ namespace _Namespace_
 
     // Retrieves a record with the supplied unique values.
     /// <include path='items/RetrieveWithName/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public _ClassName_ RetrieveWithUnique(string name
+    public _ClassName_ RetrieveWithName(string name
 			, List<string> propertyNames = null)
 		{
 			_ClassName_ retValue;
@@ -158,8 +158,8 @@ namespace _Namespace_
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns PrimaryKey(int id)
+    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns IDKey(int id)
 		{
 			// Add(columnName, propertyName = null, renameAs = null
 			//   , datatypeName = "String", caption = null);
@@ -172,8 +172,8 @@ namespace _Namespace_
 		}
 
     // Gets the ID key columns.
-    /// <include path='items/GetNameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(string name)
+    /// <include path='items/NameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns NameKey(string name)
 		{
 			// Needs cast for string to select the correct Add overload.
 			var retValue = new DbColumns()

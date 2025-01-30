@@ -82,7 +82,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkItems = this.Clone();
-      var duplicate = checkItems.LJCSearchUnique(name);
+      var duplicate = checkItems.LJCSearchName(name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -109,7 +109,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkItems = Clone();
-      var duplicate = checkItems.LJCSearchUnique(name);
+      var duplicate = checkItems.LJCSearchName(name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -221,16 +221,12 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
-    public DataUtilColumn LJCSearchUnique(string name)
+    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public DataUtilColumn LJCSearchName(string name)
     {
       DataUtilColumn retValue = null;
 
-      var comparer = new DataColumnUniqueComparer();
+      var comparer = new DataColumnUnique();
       LJCSortUnique(comparer);
       DataUtilColumn searchItem = new DataUtilColumn()
       {
@@ -244,7 +240,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    /// <summary>Sort on Code.</summary>
+    /// <summary>Sort on ID.</summary>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -258,7 +254,7 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>
-    public void LJCSortUnique(DataColumnUniqueComparer comparer)
+    public void LJCSortUnique(DataColumnUnique comparer)
     {
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Unique) != 0)
@@ -286,7 +282,7 @@ namespace LJCDataUtilityDAL
     /// <returns>The selected item.</returns>
     public DataUtilColumn this[string name]
     {
-      get { return LJCSearchUnique(name); }
+      get { return LJCSearchName(name); }
     }
     #endregion
 

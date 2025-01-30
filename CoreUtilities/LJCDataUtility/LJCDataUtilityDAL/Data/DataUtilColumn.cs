@@ -435,7 +435,7 @@ namespace LJCDataUtilityDAL
   #region Comparers
 
   /// <summary>Sort and search on Name value.</summary>
-  public class DataColumnUniqueComparer : IComparer<DataUtilColumn>
+  public class DataColumnUnique : IComparer<DataUtilColumn>
   {
     // Compares two objects.
     /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>

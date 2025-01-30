@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Doc\DataModules.xml" />
     <Compile Include="Data\TableKey.cs" />
     <Compile Include="Data\TableKeys.cs" />
     <Compile Include="ManagersDataUtility.cs" />
@@ -79,13 +80,16 @@
     <Compile Include="Manager\TableKeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesDataUtility.CS" />
+    <Content Include="Manager\Doc\DataColumnManager.xml" />
+    <Content Include="Manager\Doc\DataKeyManager.xml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\LJCGenText\External\LJCNetCommon.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Doc\DataKeys.xml" />
+    <Content Include="Data\Doc\DataTables.xml" />
     <Content Include="Doc\ManagersDataUtility.xml" />
-    <Content Include="Manager\Compare.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDataSiteDAL\LJCDataSiteDAL.csproj">

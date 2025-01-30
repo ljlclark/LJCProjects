@@ -49,7 +49,7 @@ namespace _Namespace_
     }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
@@ -75,7 +75,7 @@ namespace _Namespace_
 
     #region Collection Methods
 
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object from the supplied values.
     /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _ClassName_ Add(int id, string name)
     {
@@ -112,8 +112,8 @@ namespace _Namespace_
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public _CollectionName_ GetCollection(List<_ClassName_> list)
+    /// <include path='items/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public _CollectionName_ LJCGetCollection(List<_ClassName_> list)
     {
       _CollectionName_ retValue = null;
 
@@ -129,8 +129,8 @@ namespace _Namespace_
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
+    /// <include path='items/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public bool LJCHasItems()
     {
       bool retValue = false;
 
@@ -141,11 +141,8 @@ namespace _Namespace_
       return retValue;
     }
 
-    // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="name">The item unique Name value.</param>
+    // Removes an item by keys.
+    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCRemove(string name)
     {
       _ClassName_ item = Find(x => x.Name == name);
@@ -170,15 +167,15 @@ namespace _Namespace_
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchCode/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public _ClassName_ LJCSearchPrimary(string code)
+    /// <include path='items/LJCSearchPrimary/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public _ClassName_ LJCSearchPrimary(long id)
     {
       _ClassName_ retValue = null;
 
       LJCSortPrimary();
       _ClassName_ searchItem = new _ClassName_()
       {
-        Code = code
+        ID = id
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -189,16 +186,12 @@ namespace _Namespace_
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCSearchUnique/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _ClassName_ LJCSearchUnique(string name)
     {
       _ClassName_ retValue = null;
 
-      var comparer = new _ClassName_UniqueComparer();
+      var comparer = new _ClassName_Unique();
       LJCSortUnique(comparer);
       _ClassName_ searchItem = new _ClassName_()
       {
@@ -247,7 +240,7 @@ namespace _Namespace_
     }
 
     // The item for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    /// <include path='items/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public _ClassName_ this[string name]
     {
       get { return LJCSearchUnique(name); }

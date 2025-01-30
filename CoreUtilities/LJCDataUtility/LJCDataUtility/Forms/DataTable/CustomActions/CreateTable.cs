@@ -40,29 +40,30 @@ namespace LJCDataUtility
         string dbName = ParentObject.DataConfigCombo.Text;
 
         // *** Begin *** Add 1/29/25
-        string value = null;
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
           // Testing
           connectionType = "MySQL";
         }
+
+        string showText = null;
         switch (connectionType.ToLower())
         {
           case "mysql":
             var mySQLBuilder = new MyProcBuilder(ParentObject, dbName, tableName);
-            value = mySQLBuilder.CreateTableProc(dataColumns);
+            showText = mySQLBuilder.CreateTableProc(dataColumns);
             break;
 
           case "sqlserver":
             var proc = new ProcBuilder(ParentObject, dbName, tableName);
-            value = proc.CreateTableProc(dataColumns);
+            showText = proc.CreateTableProc(dataColumns);
             break;
         }
         // *** End   *** Add 1/29/25
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var controlValue = DataUtilityCommon.ShowInfo(showText
           , "Create Table Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }

@@ -60,13 +60,7 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Adds a Data Record to the database.
-    /// <summary>
-    /// Adds a Data Record to the database.
-    /// </summary>
-    /// <param name = "dataObject" > The data record.</param>
-    /// <param name = "propertyNames" > The included property names.</param>
-    /// <param name="includeNull"></param>
-    /// <returns>The Data Object with the DB assigned key values.</returns>
+    /// <include path='items/Add/*' file='Doc/DataKeyManager.xml'/>
     public DataKey Add(DataKey dataObject
       , List<string> propertyNames = null, bool includeNull = false)
     {
@@ -177,13 +171,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record with the supplied values.
-    /// <summary>
-    /// Retrieves a record with the supplied values.
-    /// </summary>
-    /// <param name = "parentID" > The parent ID.</param>
-    /// <param name="keyType"></param>
-    /// <param name = "propertyNames" > The included property names.</param>
-    /// <returns>The retrieved record object.</returns>
+    /// <include path='items/RetrieveWithType/*' file='Doc/DataKeyManager.xml'/>
     public DataKey RetrieveWithType(long parentID, short keyType
       , List<string> propertyNames = null)
     {
@@ -199,7 +187,7 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -213,7 +201,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='items/ParentKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns ParentKey(long parentID)
     {
       var retValue = new DbColumns()
@@ -237,12 +225,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the Type key columns.
-    /// <summary>
-    /// Gets the Type key columns.
-    /// </summary>
-    /// <param name="parentID">The Parent ID value.</param>
-    /// <param name="keyType"></param>
-    /// <returns>The type keys object.</returns>
+    /// <include path='items/TypeKey/*' file='Doc/DataKeyManager.xml'/>
     public DbColumns TypeKey(long parentID, int keyType)
     {
       var retValue = new DbColumns()

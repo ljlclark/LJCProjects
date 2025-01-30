@@ -47,35 +47,68 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(insertColumns))
       {
         var dataConfigName = "DataUtility";
-        var manager = new DataManager(dataConfigName, tableName);
-        var selectColumns = manager.BaseDefinition;
-        var columnLists = ColumnLists(insertColumns, selectColumns, "  ");
 
-        TextBuilder b = new TextBuilder(256);
-        string toTableName = $"New{tableName}";
-        string dbName = ParentObject.DataConfigCombo.Text;
-        b.Line($"USE [{dbName}]");
+        // *** Begin *** Add 1/31/25
+        var connectionType = ParentObject.ConnectionType;
+        if (!NetString.HasValue(connectionType))
+        {
+          connectionType = "SQLServer";
+        }
 
-        // Create new Table.
-        var proc = new ProcBuilder(ParentObject, dbName, toTableName);
-        var createTable = proc.CreateTable(insertColumns);
-        b.Text(createTable);
+        string showText = null;
+        switch (connectionType.ToLower())
+        {
+          case "mysql":
+            showText = MyInsertSelect();
+            break;
 
-        b.Line($"SET IDENTITY_INSERT {toTableName} ON");
-        b.Line($"INSERT INTO {toTableName}");
-        b.Line(columnLists.InsertList);
-
-        b.Line("select");
-        b.Line(columnLists.SelectList);
-        b.Line($"FROM {tableName};");
-        b.Line($"SET IDENTITY_INSERT {toTableName} OFF");
-        var showText = b.ToString();
+          case "sqlserver":
+            showText = SQLInsertSelect(dataConfigName, tableName, insertColumns);
+            break;
+        }
+        // *** End   *** Add 1/31/25
 
         var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText
           , "Insert Select SQL", infoValue);
         ParentObject.InfoValue = controlValue;
       }
+    }
+
+    // Generates the MySQL InsertSelect SQL.
+    internal string MyInsertSelect()
+    {
+      return null;
+    }
+
+    // Generates the SQLServer InsertSelect SQL.
+    internal string SQLInsertSelect(string dataConfigName, string tableName
+      , DataColumns insertColumns)
+    {
+      var manager = new DataManager(dataConfigName, tableName);
+      var selectColumns = manager.BaseDefinition;
+      var columnLists = ColumnLists(insertColumns, selectColumns, "  ");
+
+      TextBuilder b = new TextBuilder(256);
+      string toTableName = $"New{tableName}";
+      string dbName = ParentObject.DataConfigCombo.Text;
+      b.Line($"USE [{dbName}]");
+
+      // Create new Table.
+      var proc = new ProcBuilder(ParentObject, dbName, toTableName);
+      var createTable = proc.CreateTable(insertColumns);
+      b.Text(createTable);
+
+      b.Line($"SET IDENTITY_INSERT {toTableName} ON");
+      b.Line($"INSERT INTO {toTableName}");
+      b.Line(columnLists.InsertList);
+
+      b.Line("select");
+      b.Line(columnLists.SelectList);
+      b.Line($"FROM {tableName};");
+      b.Line($"SET IDENTITY_INSERT {toTableName} OFF");
+      var retSQL = b.ToString();
+      return retSQL;
     }
 
     // Adds a newline.

@@ -69,13 +69,7 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the supplied values.
-    /// <summary>
-    /// Creates and adds the object from the supplied values.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="dataModuleID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/Add/*' file='Doc/DataTables.xml'/>
     public DataUtilTable Add(int id, int dataModuleID, string name)
     {
       DataUtilTable retValue;
@@ -142,11 +136,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="dataModuleID"></param>
-    /// <param name="name">The item unique Name value.</param>
+    /// <include path='items/LJCRemove/*' file='Doc/DataTables.xml'/>
     public void LJCRemove(int dataModuleID, string name)
     {
       DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
@@ -191,12 +181,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="dataModuleID"></param>
-    /// <param name="name">The item name.</param>
-    /// <returns>A reference to the matching item.</returns>
+    /// <include path='items/LJCSearchUnique/*' file='Doc/DataTables.xml'/>
     public DataUtilTable LJCSearchUnique(int dataModuleID, string name)
     {
       DataUtilTable retValue = null;
@@ -251,12 +236,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The item for the supplied name.
-    /// <summary>
-    /// The item for the supplied name.
-    /// </summary>
-    /// <param name="dataTableID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    /// <include path='items/NameIndexer/*' file='Doc/DataTables.xml'/>
     public DataUtilTable this[int dataTableID, string name]
     {
       get { return LJCSearchUnique(dataTableID, name); }

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // DataColumnManager.cs
 using LJCDataSiteDAL;
-using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -54,13 +53,7 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Adds a Data Record to the database.
-    /// <summary>
-    /// Adds a Data Record to the database.
-    /// </summary>
-    /// <param name="dataObject">The data record.</param>
-    /// <param name="propertyNames">The included property names.</param>
-    /// <param name="includeNull"></param>
-    /// <returns>The Data Object with the DB assigned key values.</returns>
+    /// <include path='items/Add/*' file='Doc/DataColumnManager.xml'/>
     public DataUtilColumn Add(DataUtilColumn dataObject
       , List<string> propertyNames = null, bool includeNull = false)
     {
@@ -166,7 +159,7 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -180,7 +173,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='items/ParentKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns ParentKey(long parentID)
     {
       var retValue = new DbColumns()
