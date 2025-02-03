@@ -43,12 +43,12 @@ namespace LJCDocObjLib
         foreach (DocAssembly groupAssembly in groupAssemblies)
         {
           // Check if assembly file is HTML.
-          success = false;
+          // *** Next Statement *** Change 1/31/25
+          success = true;
           bool isHtml = ".html" == Path.GetExtension(groupAssembly.FileSpec).ToLower();
           if (!isHtml)
           {
             // Check if assembly XML file exists.
-            success = true;
             if (!File.Exists(groupAssembly.FileSpec))
             {
               success = false;

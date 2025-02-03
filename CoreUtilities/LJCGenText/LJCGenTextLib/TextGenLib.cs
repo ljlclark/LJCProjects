@@ -3,7 +3,9 @@
 // TextGenLib.cs
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenTextLib
 {
@@ -34,24 +36,31 @@ namespace LJCGenTextLib
       Sections = sections;
       Lines = templateLines;
 
-      for (var lineIndex = 0; lineIndex < templateLines.Length
-        ; lineIndex++)
+      for (var lineIndex = 0; lineIndex < templateLines.Length; lineIndex++)
       {
         var line = Lines[lineIndex];
-        if (IsConfig(line))
+        if (IsConfig(line, out Directive directive))
         {
           continue;
         }
+        if (directive != null)
+        {
+          var name = directive.Name;
+          if (IsInValues(name, "#sectionEnd", "#value", "#ifbegin"
+            , "#ifelse", "#ifend"))
+          {
+            continue;
+          }
+        }
 
-        var directive = Directive.GetDirective(line, CommentChars);
         if (directive != null
-          && directive.IsSectionBegin())
+        && directive.IsSectionBegin())
         {
           var section = Sections.Retrieve(directive.Name);
           if (null == section)
           {
             // No Section data.
-            lineIndex = SkipSection(lineIndex);
+            lineIndex = SkipSection(lineIndex, directive.Name);
           }
           else
           {
@@ -59,11 +68,42 @@ namespace LJCGenTextLib
             section.BeginLineIndex = lineIndex;
             DoItems(section, ref lineIndex);
           }
-          continue;
         }
+
         AddOutput(line);
       }
       return Output;
+    }
+
+    // Performs replacement from active replacement value.
+    private string ActiveReplacement(string line, string replacementName)
+    {
+      string retValue = line;
+
+      var value = ActiveValue(replacementName);
+      if (NetString.HasValue(value))
+      {
+        retValue = retValue.Replace(replacementName, value);
+      }
+      return retValue;
+    }
+
+    // Gets the active replacement value.
+    private string ActiveValue(string replacementName)
+    {
+      string retValue = null;
+
+      var active = ActiveReplacements;
+      for (var index = active.Count - 1; index >= 0; index--)
+      {
+        var replacement = active[index].Retrieve(replacementName);
+        if (replacement != null)
+        {
+          retValue = replacement.Value;
+          break;
+        }
+      }
+      return retValue;
     }
 
     // Process the #IfBegin directive.
@@ -82,21 +122,24 @@ namespace LJCGenTextLib
       // Check replacement value against directive value.
       if (success)
       {
+        // *** Next Line *** Add
+        isIf = true;
+
+        string value;
         var replacement = replacements.Retrieve(directive.Name);
-        if ("hasvalue" == directive.Value.ToLower())
+        if (replacement != null)
         {
-          isIf = true;
-          if (replacement != null
-            && NetString.HasValue(replacement.Value))
-          {
-            isMatch = true;
-          }
+          value = replacement.Value;
         }
         else
         {
-          isIf = true;
-          if (replacement != null
-            && replacement.Value == directive.Value)
+          value = ActiveValue(directive.Name);
+        }
+
+        if (NetString.HasValue(value))
+        {
+          if ("hasvalue" == directive.Value.ToLower()
+            || value == directive.Value)
           {
             isMatch = true;
           }
@@ -133,29 +176,30 @@ namespace LJCGenTextLib
     private void DoItems(Section section, ref int lineIndex)
     {
       var success = true;
-      var items = section.RepeatItems;
+      var repeatItems = section.RepeatItems;
 
       // No Section data.
-      if (!NetCommon.HasItems(items))
+      if (!NetCommon.HasItems(repeatItems))
       {
         success = false;
-        lineIndex = SkipSection(lineIndex);
+        lineIndex = SkipSection(lineIndex, section.Name);
         lineIndex++;
       }
 
       if (success)
       {
-        for (var itemIndex = 0; itemIndex < items.Count; itemIndex++)
+        // Process each RepeatItem.
+        for (var itemIndex = 0; itemIndex < repeatItems.Count; itemIndex++)
         {
-          var item = items[itemIndex];
+          var repeatItem = repeatItems[itemIndex];
 
           // No Replacement data.
-          if (!NetCommon.HasItems(item.Replacements))
+          if (!NetCommon.HasItems(repeatItem.Replacements))
           {
-            lineIndex = SkipSection(lineIndex);
+            lineIndex = SkipSection(lineIndex, section.Name);
 
             // If not last item.
-            if (itemIndex < items.Count - 1)
+            if (itemIndex < repeatItems.Count - 1)
             {
               // Do section again for following items.
               lineIndex = section.BeginLineIndex;
@@ -169,58 +213,76 @@ namespace LJCGenTextLib
             lineIndex = index;
 
             var directive = Directive.GetDirective(line, CommentChars);
-            if (directive != null)
+
+            // Skip unprocessed directives.
+            if (directive != null
+              && IsNotProcessValues(directive.ID))
             {
-              if (directive.IsSectionBegin())
-              {
-                var nextSection = GetBeginSection(line);
-                if (null == nextSection)
-                {
-                  // No Section data.
-                  index = SkipSection(lineIndex);
-                  continue;
-                }
-
-                // RepeatItem processing starts with first line.
-                lineIndex++;
-                nextSection.BeginLineIndex = lineIndex;
-
-                AddActive(item);
-                DoItems(nextSection, ref lineIndex);
-                RemoveActive();
-
-                // Continue with returned line index after the processed section.
-                index = lineIndex;
-              }
-
-              if (directive.IsSectionEnd())
-              {
-                // If not last item.
-                if (itemIndex < items.Count - 1)
-                {
-                  // Do section again for following items.
-                  lineIndex = section.BeginLineIndex;
-                  break;
-                }
-              }
-
-              if (directive.IsIfBegin())
-              {
-                DoIf(directive, item.Replacements, ref lineIndex);
-              }
-              index = lineIndex;
+              continue;
             }
 
-            // Does not output directives.
-            DoOutput(item.Replacements, line);
+            // Do output if directive is null or is not a processed directive.
+            if (directive == null
+              || (directive != null
+              && !IsProcessValues(directive.ID)))
+            {
+              DoOutput(repeatItem.Replacements, line);
+              continue;
+            }
+
+            if (directive.IsSectionBegin())
+            {
+              var currentSection = GetBeginSection(line);
+              if (null == currentSection)
+              {
+                // No Section data.
+                index = SkipSection(lineIndex, directive.Name);
+                continue;
+              }
+
+              // RepeatItem processing starts with first line.
+              lineIndex++;
+              currentSection.BeginLineIndex = lineIndex;
+
+              AddActive(repeatItem);
+              DoItems(currentSection, ref lineIndex);
+              RemoveActive();
+              index = lineIndex;
+              continue;
+            }
+
+            // *** Next Statement *** Change 2/1/25
+            if (directive.IsSectionEnd()
+              && directive.Name == section.Name)
+            {
+              // If not last item.
+              if (itemIndex < repeatItems.Count - 1)
+              {
+                // Do section again for following items.
+                // *** Next 2 Statements *** Change 2/3/25
+                //index = section.BeginLineIndex;
+                //continue;
+                lineIndex = section.BeginLineIndex;
+                break;
+              }
+            }
+
+            if (directive.IsIfBegin())
+            {
+              DoIf(directive, repeatItem.Replacements, ref lineIndex);
+              index = lineIndex;
+              continue;
+            }
           }
         }
       }
     }
 
     // If not directive, process replacements and add to output.
-    private void DoOutput(Replacements replacements, string line)
+    private string DoOutput(Replacements replacements, string line)
     {
+      string retValue = null;
+
       if (!Directive.IsDirective(line, CommentChars))
       {
         if (line != null
@@ -228,8 +290,9 @@ namespace LJCGenTextLib
         {
           DoReplacements(replacements, ref line);
         }
-        AddOutput(line);
+        retValue = AddOutput(line);
       }
+      return retValue;
     }
 
     // Perform the line replacements.
@@ -253,26 +316,14 @@ namespace LJCGenTextLib
           }
           else
           {
-            // Replacement not found in current collection.
-            // Search active replacements.
-            var active = ActiveReplacements;
-            for (var activeIndex = active.Count - 1; activeIndex >= 0
-              ; activeIndex--)
-            {
-              replacement = active[activeIndex].Retrieve(match.Value);
-              if (replacement != null)
-              {
-                lineItem = lineItem.Replace(match.Value, replacement.Value);
-                break;
-              }
-            }
+            lineItem = ActiveReplacement(lineItem, match.Value);
           }
         }
       }
     }
 
     // Skips to the end of the current section.
-    private int SkipSection(int lineIndex)
+    private int SkipSection(int lineIndex, string name)
     {
       var retValue = lineIndex;
 
@@ -280,7 +331,11 @@ namespace LJCGenTextLib
       for (var index = lineIndex; index < Lines.Length; index++)
       {
         var line = Lines[index];
-        if (Directive.IsSectionEnd(line, CommentChars))
+
+        // *** Next Statement *** Add 2/1/25
+        var directive = Directive.GetDirective(line, CommentChars);
+        if (Directive.IsSectionEnd(line, CommentChars)
+          && directive.Name == name)
         {
           retValue = index++;
           break;
@@ -302,13 +357,20 @@ namespace LJCGenTextLib
     }
 
     // Add the line to the output.
-    private void AddOutput(string line)
+    private string AddOutput(string line)
     {
-      if (Output.Length > 0)
+      string retValue = null;
+
+      if (!line.Trim().StartsWith("<!--X"))
       {
-        Output += "\r\n";
+        if (Output.Length > 0)
+        {
+          Output += "\r\n";
+        }
+        Output += line;
+        retValue = line;
       }
-      Output += line;
+      return retValue;
     }
 
     // Gets the begin section.
@@ -320,14 +382,23 @@ namespace LJCGenTextLib
     }
 
     // Sets the configuration values.
-    private bool IsConfig(string line)
+    private bool IsConfig(string line, out Directive directive)
     {
       var retValue = false;
 
       // Sets the configuration.
-      if (Directive.IsDirective(line, CommentChars))
+      if (line.ToLower().Contains("#commentchars"))
       {
-        var directive = Directive.GetDirective(line, CommentChars);
+        string[] values = NetString.Split(line, " ");
+        if (values.Length >= 2)
+        {
+          CommentChars = values[2];
+        }
+      }
+
+      directive = Directive.GetDirective(line, CommentChars);
+      if (directive != null)
+      {
         switch (directive.ID.ToLower())
         {
           case "#commentchars":
@@ -346,6 +417,37 @@ namespace LJCGenTextLib
             break;
         }
       }
+      return retValue;
+    }
+
+    // Checks if a value is in a list of names.
+    private bool IsInValues(string text, params string[] values)
+    {
+      bool retValue = false;
+
+      foreach (var value in values)
+      {
+        if (value.ToLower() == text.ToLower())
+        {
+          retValue = true;
+          break;
+        }
+      }
+      return retValue;
+    }
+
+    // true if not DoItems process values; otherwise false.
+    private bool IsNotProcessValues(string name)
+    {
+      var retValue = IsInValues(name, "#Value", "#IfElse", "#IfEnd");
+      return retValue;
+    }
+
+    // true if DoItems process values; otherwise false.
+    private bool IsProcessValues(string name)
+    {
+      var retValue = IsInValues(name, "#SectionBegin", "#SectionEnd"
+        , "#IfBegin");
       return retValue;
     }
 

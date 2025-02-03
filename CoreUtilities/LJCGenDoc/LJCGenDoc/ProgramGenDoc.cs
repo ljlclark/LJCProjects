@@ -54,6 +54,7 @@ namespace LJCGenDoc
         // Creates the LJCDocObjLib.DataRoot.DataAssemblies collection with
         // the deserialized "Doc" XML converted to the "Data" XML format.
         DataRoot dataRoot = new DataRoot(assemblyGroups);
+
         // * Create XML Data from "Doc" XML data
         // LJCDocObjLib.DataType.DataType();
         // LJCDocObjLib.DataType.CreateMethodsData();

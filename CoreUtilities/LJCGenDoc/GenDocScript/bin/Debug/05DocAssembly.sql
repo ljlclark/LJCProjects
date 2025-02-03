@@ -93,9 +93,9 @@ exec sp_DAAddUnique @groupName, 'LJCDataAccess',
   '..\..\..\..\..\CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.xml',
   '', @seq;
 set @seq += 1;
-exec sp_DAAddUnique @groupName, 'LJCDBDataAccessLib',
+exec sp_DAAddUnique @groupName, 'LJCDBDataAccess',
   'The Message Data Access library. (DE4)',
-  '..\..\..\..\..\CoreAssemblies\LJCDBServiceLib\LJCDBDataAccessLib\bin\Debug\LJCDBDataAccessLib.xml',
+  '..\..\..\..\..\CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.xml',
   '', @seq;
 set @seq += 1;
 exec sp_DAAddUnique @groupName, 'LJCDataAccessConfig',

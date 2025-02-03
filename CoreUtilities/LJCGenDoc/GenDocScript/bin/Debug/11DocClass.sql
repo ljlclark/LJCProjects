@@ -362,6 +362,14 @@ exec sp_DCAddUnique @assemblyName, @headingName,
 
 /* LJCDBMessage */
 set @assemblyName = 'LJCDBMessage';
+set @headingName = '';
+set @seq = 1;
+exec sp_DCAddUnique @assemblyName, @headingName,
+  'DbCommon',
+  'Common data message methods.',
+  @seq;
+
+set @assemblyName = 'LJCDBMessage';
 set @headingName = 'Request';
 set @seq = 1;
 exec sp_DCAddUnique @assemblyName, @headingName,

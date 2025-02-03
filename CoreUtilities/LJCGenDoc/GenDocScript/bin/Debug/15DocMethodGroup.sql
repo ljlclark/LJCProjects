@@ -140,6 +140,16 @@ exec sp_DMGAddUnique @className, 'Constructor',
 exec sp_DMGAddUnique @className, 'Data',
  '',  3
 
+set @className= 'DbValues';
+exec sp_DMGAddUnique @className, 'Static',
+ '',  1
+exec sp_DMGAddUnique @className, 'Constructor',
+ '',  2
+exec sp_DMGAddUnique @className, 'Collection',
+ '',  3
+exec sp_DMGAddUnique @className, 'Value',
+ '',  4
+
 set @className= 'LJCAssemblyReflect';
 exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
@@ -495,3 +505,7 @@ exec sp_DMGAddUnique @className, 'Constructor',
  '',  1
 exec sp_DMGAddUnique @className, 'Data',
  '',  2
+
+set @className= 'DbCommon';
+exec sp_DMGAddUnique @className, 'RequestColumns',
+ 'Request Columns',  1

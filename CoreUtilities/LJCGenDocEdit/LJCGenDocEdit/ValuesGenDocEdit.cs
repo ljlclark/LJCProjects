@@ -3,6 +3,7 @@
 // ValuesGenDocEdit.cs
 using LJCDBClientLib;
 using LJCNetCommon;
+using System;
 using System.IO;
 
 namespace LJCGenDocEdit

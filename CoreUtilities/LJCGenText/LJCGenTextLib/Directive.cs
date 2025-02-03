@@ -28,8 +28,10 @@ namespace LJCGenTextLib
         int index = line.IndexOf('#');
         if (index > -1)
         {
-          retValue = new Directive();
-          retValue.CommentChars = commentChars;
+          retValue = new Directive
+          {
+            CommentChars = commentChars
+          };
           values = line.Substring(index).Split(separator
             , StringSplitOptions.RemoveEmptyEntries);
           if (values.Length > 0)
@@ -67,6 +69,7 @@ namespace LJCGenTextLib
           || lowerName == SectionEnd
           || lowerName == ValueDirective
           || lowerName == IfBegin
+          || lowerName == IfElse
           || lowerName == IfEnd)
         {
           retValue = true;

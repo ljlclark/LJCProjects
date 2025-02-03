@@ -27,7 +27,17 @@ namespace LJCGenDocEdit
       // *** Next Statement *** Change 1/17/25
       //var configValues = ValuesGenDoc.Instance;
       var configValues = ValuesGenDocEdit.Instance;
-      configValues.SetConfigFile("LJCGenDocEdit.exe.config");
+      try
+      {
+        configValues.SetConfigFile("LJCGenDocEdit.exe.config");
+      }
+      catch (Exception ex)
+      {
+        // *** Next Statement *** Add 1/31/25
+        MessageBox.Show(ex.Message, "Config Error", MessageBoxButtons.OK
+          , MessageBoxIcon.Stop);
+        throw ex;
+      }
       mErrors = configValues.Errors;
       var settings = configValues.StandardSettings;
       Text += $" - {settings.DataConfigName}";

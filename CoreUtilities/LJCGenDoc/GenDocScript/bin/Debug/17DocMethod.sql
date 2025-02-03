@@ -150,11 +150,6 @@ set @headingName = 'Constructor';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   '#ctor',
-  'Initializes an object instance.',
-  @seq;
-set @seq += 1;
-exec sp_DMAddUnique @docClassName, @headingName,
-  '#ctor',
   'Initializes an object instance with the provided values.',
   @seq, 1, 'ctor1';
 
@@ -1053,6 +1048,11 @@ set @docClassName = 'DataManager';
 set @headingName = 'DataAccess';
 set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Adds a record to the database.      (RE)',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
   'CreateLoadRequest',
   'Creates and returns the Load      DbRequest      object.',
   @seq;
@@ -1126,6 +1126,29 @@ exec sp_DMAddUnique @docClassName, @headingName,
   @seq;
 
 /* LJCDBMessage */
+set @docClassName = 'DbCommon';
+set @headingName = 'RequestColumns';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RequestColumns',
+  'Gets Request columns from the baseDefinition using the propertyNames.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RequestDataColumns',
+  'Gets Request data columns from the baseDefinition using the propertyNames.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RequestKeys',
+  'Gets Request Key columns from the baseDefinition using the keyColumns and dbJoins.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'RequestDataKeys',
+  'Get Request Key columns from the baseDefinition using the keyColumns.',
+  @seq;
+
 set @docClassName = 'DbCondition';
 set @headingName = 'Constructor';
 set @seq = 1;
@@ -1835,6 +1858,128 @@ set @seq = 1;
 exec sp_DMAddUnique @docClassName, @headingName,
   'op_Implicit',
   'Creates a      DbValue      object from a      DbColumn      object. (E)',
+  @seq;
+
+set @docClassName = 'DbValues';
+set @headingName = 'Collection';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Add',
+  'Creates the Object from the arguments and adds it to the collection.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'Clone',
+  'Clones the structure of the object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'HasItems',
+  'Checks if the collection has items.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCCreateColumns',
+  'Creates combined      DbColumns from      DbColumns and      DbValues.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSerialize',
+  'Serializes the collection to a file.',
+  @seq;
+
+set @docClassName = 'DbValues';
+set @headingName = 'Constructor';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'Initializes an object instance.',
+  @seq, 1, 'ctor';
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  '#ctor',
+  'The Copy constructor.',
+  @seq, 1, 'ctor1';
+
+set @docClassName = 'DbValues';
+set @headingName = 'Static';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCDeserialize',
+  'Deserializes from the specified XML file.',
+  @seq;
+
+set @docClassName = 'DbValues';
+set @headingName = 'Value';
+set @seq = 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetBoolean',
+  'Gets the column object value as a bool.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetByte',
+  'Gets the column object value as a byte.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetChar',
+  'Gets the column object value as a char.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetDbDateTime',
+  'Gets the column object value as a      DateTime.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetDecimal',
+  'Gets the column object value as a      decimal      value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetDouble',
+  'Gets the column object value as a double.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt16',
+  'Gets the column object value as a      short int.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt32',
+  'Gets the column object value as an      int.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetInt64',
+  'Gets the column object value as a      long int.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetObject',
+  'Gets the column object value as an object.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetMinSqlDate',
+  'Get the minimum date value.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetSingle',
+  'Gets the column object value as a single.',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCGetString',
+  'Missing Summary',
+  @seq;
+set @seq += 1;
+exec sp_DMAddUnique @docClassName, @headingName,
+  'LJCSetValue',
+  'Sets the object value for the column with the specified name.',
   @seq;
 
 set @docClassName = 'Keywords';

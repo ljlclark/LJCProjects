@@ -76,6 +76,7 @@ namespace LJCGenDocLib
           var textGenLib = new TextGenLib();
           var outputText = textGenLib.TextGen(sections, templateLines);
 
+          NetFile.CreateFolder(HTMLFileSpec);
           File.WriteAllText(HTMLFileSpec, outputText);
           // *** End   *** Add
           ValuesGenDoc.Instance.GenPageCount++;

@@ -16,7 +16,7 @@ order by Sequence;
 
 exec sp_DAGAddUnique 'CommonLibraries', 'Common Libraries'  , 1
 exec sp_DAGAddUnique 'DataLibraries', 'Data Libraries'  , 2
-exec sp_DAGAddUnique 'GenText', 'Code Generator Utility'  , 3
+exec sp_DAGAddUnique 'GenText', 'Text Generator Utility'  , 3
 exec sp_DAGAddUnique 'GenDoc', 'HTML Documentation Generator'  , 4
 exec sp_DAGAddUnique 'DBViewDAL', 'Data View Data Access Layer'  , 5
 exec sp_DAGAddUnique 'ViewBuilder', 'Data View Builder'  , 6
