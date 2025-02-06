@@ -294,8 +294,12 @@ namespace LJCGenTextLib
       if (lineItem.Contains(PlaceholderBegin))
       {
         replacements.Sort();
-        var line = lineItem;
 
+        if (lineItem.Contains("'_blank'"))
+        {
+          lineItem = lineItem.Replace("'_blank'", "'blank'");
+        }
+        var line = lineItem;
         var pattern = $"{PlaceholderBegin}.+?{PlaceholderEnd}";
         var matches = Regex.Matches(line, pattern);
         for (var index = 0; index < matches.Count; index++)
@@ -310,6 +314,10 @@ namespace LJCGenTextLib
           {
             lineItem = ActiveReplacement(lineItem, match.Value);
           }
+        }
+        if (lineItem.Contains("'blank'"))
+        {
+          lineItem = lineItem.Replace("'blank'", "'_blank'");
         }
       }
     }

@@ -224,8 +224,9 @@ namespace LJCGenDocLib
           builder.AppendLine("        configuration file changes.");
           builder.AppendLine("      </li>");
           builder.AppendLine("      <li>");
-          builder.AppendLine("        Scale between Client/Server, Local Message Based, Remote Data Service");
-          builder.AppendLine("        or Web Data Service data access with only configuration changes.");
+          builder.Append("        Scale between Client/Server, Local Message");
+          builder.Append("        Based or Remote Data Service data access");
+          builder.AppendLine("        with only configuration changes.");
           builder.AppendLine("      </li>");
           builder.AppendLine("    </ol>");
           builder.AppendLine("    <p>");
