@@ -76,6 +76,7 @@
     <Content Include="Doc\Replacements.xml" />
     <Content Include="Doc\Section.xml" />
     <Content Include="Doc\Sections.xml" />
+    <Content Include="Doc\TextGenLib.xml" />
     <Content Include="Doc\XMLData.xml" />
     <Content Include="Flow.txt" />
   </ItemGroup>

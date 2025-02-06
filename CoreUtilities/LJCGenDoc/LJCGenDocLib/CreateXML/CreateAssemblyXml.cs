@@ -67,18 +67,20 @@ namespace LJCGenDocLib
 
       AddLinks(sections, replacements);
 
+      // Default heading if no groups.
       var classListHeading = "Classes";
-      mOtherTypes = new List<DataType>();
+      mRemainingTypes = new List<DataType>();
       foreach (var dataType in DataAssembly.DataTypes)
       {
-        mOtherTypes.Add(dataType);
+        mRemainingTypes.Add(dataType);
       }
       if (AddClassGroups(sections))
       {
+        // Remaining classes heading if any section has class groups.
         classListHeading = "Other Classes";
       }
 
-      if (NetCommon.HasItems(mOtherTypes))
+      if (NetCommon.HasItems(mRemainingTypes))
       {
         replacements.Add("_HasClasses_", "true");
         replacements.Add("_ClassListHeading_", classListHeading);
@@ -108,6 +110,7 @@ namespace LJCGenDocLib
       // Get the DocClassGroups for the DocAssembly.
       if (docAssembly != null)
       {
+        // Load the assembly class groups.
         var classGroupManager = managers.DocClassGroupManager;
         var orderColumns = new List<string>()
         {
@@ -115,6 +118,7 @@ namespace LJCGenDocLib
         };
         classGroupManager.SetOrderBy(orderColumns);
         var classGroups = classGroupManager.LoadWithParentID(docAssembly.ID);
+
         if (NetCommon.HasItems(classGroups))
         {
           var section = sections.Add("ClassGroups");
@@ -126,7 +130,7 @@ namespace LJCGenDocLib
               continue;
             }
 
-            // Get the DocClasses for the DocClassGroup.
+            // Load the group classes.
             var classManager = managers.DocClassManager;
             orderColumns = new List<string>()
             {
@@ -135,22 +139,27 @@ namespace LJCGenDocLib
             classManager.SetOrderBy(orderColumns);
             var docClasses
               = classManager.LoadWithGroup(classGroup.ID);
+
             if (NetCommon.HasItems(docClasses))
             {
               retValue = true;
+
+              // Add the class group heading replacement.
               var repeatItem = repeatItems.Add(classGroup.HeadingName);
               repeatItem.Replacements.Add("_Heading_", classGroup.HeadingName);
 
+              // Add the subsection.
               repeatItem.Subsection = new Section("Subsection");
               var subRepeatItems = repeatItem.Subsection.RepeatItems;
+
+              // Add the subsection repeatitems and replacements.
               foreach (var docClass in docClasses)
               {
                 var className = docClass.Name;
-
-                var dataType = mOtherTypes.Find(x => x.Name == className);
+                var dataType = mRemainingTypes.Find(x => x.Name == className);
                 if (dataType != null)
                 {
-                  mOtherTypes.Remove(dataType);
+                  mRemainingTypes.Remove(dataType);
                   var subRepeatItem = subRepeatItems.Add(className);
                   var subReplacements = subRepeatItem.Replacements;
                   subReplacements.Add("_HTMLFileName_", $"{className}.html");
@@ -172,7 +181,7 @@ namespace LJCGenDocLib
       RepeatItem repeatItem;
       Replacements replacements;
 
-      foreach (DataType dataType in mOtherTypes)
+      foreach (DataType dataType in mRemainingTypes)
       {
         if (!NetString.HasValue(dataType.Summary)
           || (dataType.Summary != null
@@ -291,6 +300,6 @@ namespace LJCGenDocLib
     private DataAssembly DataAssembly { get; }
     #endregion
 
-    private List<DataType> mOtherTypes;
+    private List<DataType> mRemainingTypes;
   }
 }

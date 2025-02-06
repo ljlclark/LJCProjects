@@ -102,6 +102,7 @@
     <Content Include="Doc\GenMethod.xml" />
     <Content Include="Doc\GenProperty.xml" />
     <Content Include="Doc\GenRoot.xml" />
+    <Content Include="Doc\GenTextLib.xml" />
     <Content Include="Doc\GenType.xml" />
     <Content Include="Doc\ProjectDocGenLib.xml" />
     <Content Include="Doc\SyntaxHighlight.xml" />

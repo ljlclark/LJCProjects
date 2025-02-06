@@ -1,0 +1,14 @@
+﻿<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- GenTextLib.xml -->
+<items>
+  <TextGen>
+    <summary>
+      Generate the Output text.
+    </summary>
+    <param name="sections">The Sections object.</param>
+    <param name="templateLines">The template lines.</param>
+    <returns>The output text.</returns>
+  </TextGen>
+</items>
+

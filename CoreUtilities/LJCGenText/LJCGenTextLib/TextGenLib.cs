@@ -26,11 +26,8 @@ namespace LJCGenTextLib
 
     #region Main Processing Methods
 
-    /// <summary>
-    /// Generate the Output text.
-    /// </summary>
-    /// <param name="sections">The Sections object.</param>
-    /// <param name="templateLines">The template lines.</param>
+    // Generate the Output text.
+    /// <include path='items/TextGen/*' file='Doc/TextGenLib.xml'/>
     public string TextGen(Sections sections, string[] templateLines)
     {
       Sections = sections;
@@ -43,18 +40,19 @@ namespace LJCGenTextLib
         {
           continue;
         }
+
+        // Only SectionBegin is valid. Other directives should not appear.
         if (directive != null)
         {
-          var name = directive.Name;
-          if (IsInValues(name, "#sectionEnd", "#value", "#ifbegin"
-            , "#ifelse", "#ifend"))
+          var name = directive.ID;
+          if (name.ToLower() != "#sectionbegin")
           {
             continue;
           }
         }
 
         if (directive != null
-        && directive.IsSectionBegin())
+          && directive.IsSectionBegin())
         {
           var section = Sections.Retrieve(directive.Name);
           if (null == section)
@@ -67,9 +65,12 @@ namespace LJCGenTextLib
             lineIndex++;
             section.BeginLineIndex = lineIndex;
             DoItems(section, ref lineIndex);
+            // *** Next Statement *** Add 2/4/25
+            continue;
           }
         }
 
+        // Add text before first section and after last section.
         AddOutput(line);
       }
       return Output;
@@ -173,7 +174,7 @@ namespace LJCGenTextLib
     }
 
     // Process the RepeatItems.
-    private void DoItems(Section section, ref int lineIndex)
+    private void DoItems(Section section, ref int nextLineIndex)
     {
       var success = true;
       var repeatItems = section.RepeatItems;
@@ -182,8 +183,8 @@ namespace LJCGenTextLib
       if (!NetCommon.HasItems(repeatItems))
       {
         success = false;
-        lineIndex = SkipSection(lineIndex, section.Name);
-        lineIndex++;
+        nextLineIndex = SkipSection(nextLineIndex, section.Name);
+        nextLineIndex++;
       }
 
       if (success)
@@ -196,21 +197,21 @@ namespace LJCGenTextLib
           // No Replacement data.
           if (!NetCommon.HasItems(repeatItem.Replacements))
           {
-            lineIndex = SkipSection(lineIndex, section.Name);
+            nextLineIndex = SkipSection(nextLineIndex, section.Name);
 
             // If not last item.
             if (itemIndex < repeatItems.Count - 1)
             {
               // Do section again for following items.
-              lineIndex = section.BeginLineIndex;
+              nextLineIndex = section.BeginLineIndex;
             }
             continue;
           }
 
-          for (var index = lineIndex; index < Lines.Length; index++)
+          for (var lineIndex = nextLineIndex; lineIndex < Lines.Length; lineIndex++)
           {
-            var line = Lines[index];
-            lineIndex = index;
+            var line = Lines[lineIndex];
+            nextLineIndex = lineIndex;
 
             var directive = Directive.GetDirective(line, CommentChars);
 
@@ -232,28 +233,37 @@ namespace LJCGenTextLib
 
             if (directive.IsSectionBegin())
             {
-              var currentSection = GetBeginSection(line);
-              if (null == currentSection)
+              // Do subsection.
+              if (directive.Name.ToLower() == "subsection")
               {
-                // No Section data.
-                index = SkipSection(lineIndex, directive.Name);
+                if (repeatItem.Subsection != null)
+                {
+                  var subSection = repeatItem.Subsection;
+                  if (subSection != null)
+                  {
+                    ProcessItems(subSection, repeatItem, ref nextLineIndex);
+                    lineIndex = nextLineIndex;
+                  }
+                }
                 continue;
               }
 
-              // RepeatItem processing starts with first line.
-              lineIndex++;
-              currentSection.BeginLineIndex = lineIndex;
+              var nextSection = GetBeginSection(line);
+              if (null == nextSection)
+              {
+                // No Section data.
+                lineIndex = SkipSection(nextLineIndex, directive.Name);
+                continue;
+              }
 
-              AddActive(repeatItem);
-              DoItems(currentSection, ref lineIndex);
-              RemoveActive();
-              index = lineIndex;
+              ProcessItems(nextSection, repeatItem, ref nextLineIndex);
+              lineIndex = nextLineIndex;
               continue;
             }
 
             // *** Next Statement *** Change 2/1/25
-            if (directive.IsSectionEnd()
-              && directive.Name == section.Name)
+            if (directive.IsSectionEnd())
+            //&& directive.Name == section.Name)
             {
               // If not last item.
               if (itemIndex < repeatItems.Count - 1)
@@ -262,15 +272,18 @@ namespace LJCGenTextLib
                 // *** Next 2 Statements *** Change 2/3/25
                 //index = section.BeginLineIndex;
                 //continue;
-                lineIndex = section.BeginLineIndex;
-                break;
+                nextLineIndex = section.BeginLineIndex;
+                // *** Next Statement *** Delete 2/4/25
+                //break;
               }
+              // *** Next Statement *** Add 2/4/25
+              break;
             }
 
             if (directive.IsIfBegin())
             {
-              DoIf(directive, repeatItem.Replacements, ref lineIndex);
-              index = lineIndex;
+              DoIf(directive, repeatItem.Replacements, ref nextLineIndex);
+              lineIndex = nextLineIndex;
               continue;
             }
           }
@@ -320,6 +333,18 @@ namespace LJCGenTextLib
           }
         }
       }
+    }
+
+    // Process the repeat items.
+    private void ProcessItems(Section section, RepeatItem repeatItem, ref int nextLineIndex)
+    {
+      // RepeatItem processing starts with first line.
+      nextLineIndex++;
+      section.BeginLineIndex = nextLineIndex;
+
+      AddActive(repeatItem);
+      DoItems(section, ref nextLineIndex);
+      RemoveActive();
     }
 
     // Skips to the end of the current section.
