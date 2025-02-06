@@ -29,12 +29,10 @@ namespace LJCGenTextLib
       bool IsSectionDirective;
       Sections retValue;
 
-      // *** Begin *** Add
       if (null == CommentChars)
       {
         CommentChars = "//";
       }
-      // *** End   *** Add
 
       DefaultValues defaultValues = NetCommon.XmlDeserialize(typeof(DefaultValues)
         , "DefaultValues.xml") as DefaultValues;

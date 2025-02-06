@@ -3,9 +3,7 @@
 // TextGenLib.cs
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text.RegularExpressions;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenTextLib
 {
@@ -65,7 +63,6 @@ namespace LJCGenTextLib
             lineIndex++;
             section.BeginLineIndex = lineIndex;
             DoItems(section, ref lineIndex);
-            // *** Next Statement *** Add 2/4/25
             continue;
           }
         }
@@ -123,7 +120,6 @@ namespace LJCGenTextLib
       // Check replacement value against directive value.
       if (success)
       {
-        // *** Next Line *** Add
         isIf = true;
 
         string value;
@@ -199,7 +195,7 @@ namespace LJCGenTextLib
           {
             nextLineIndex = SkipSection(nextLineIndex, section.Name);
 
-            // If not last item.
+            // If not last repeat item.
             if (itemIndex < repeatItems.Count - 1)
             {
               // Do section again for following items.
@@ -208,6 +204,7 @@ namespace LJCGenTextLib
             continue;
           }
 
+          // Process template lines.
           for (var lineIndex = nextLineIndex; lineIndex < Lines.Length; lineIndex++)
           {
             var line = Lines[lineIndex];
@@ -233,18 +230,9 @@ namespace LJCGenTextLib
 
             if (directive.IsSectionBegin())
             {
-              // Do subsection.
-              if (directive.Name.ToLower() == "subsection")
+              if (DoSubsection(directive, repeatItem, ref nextLineIndex))
               {
-                if (repeatItem.Subsection != null)
-                {
-                  var subSection = repeatItem.Subsection;
-                  if (subSection != null)
-                  {
-                    ProcessItems(subSection, repeatItem, ref nextLineIndex);
-                    lineIndex = nextLineIndex;
-                  }
-                }
+                lineIndex = nextLineIndex;
                 continue;
               }
 
@@ -261,22 +249,14 @@ namespace LJCGenTextLib
               continue;
             }
 
-            // *** Next Statement *** Change 2/1/25
             if (directive.IsSectionEnd())
-            //&& directive.Name == section.Name)
             {
               // If not last item.
               if (itemIndex < repeatItems.Count - 1)
               {
                 // Do section again for following items.
-                // *** Next 2 Statements *** Change 2/3/25
-                //index = section.BeginLineIndex;
-                //continue;
                 nextLineIndex = section.BeginLineIndex;
-                // *** Next Statement *** Delete 2/4/25
-                //break;
               }
-              // *** Next Statement *** Add 2/4/25
               break;
             }
 
@@ -284,7 +264,6 @@ namespace LJCGenTextLib
             {
               DoIf(directive, repeatItem.Replacements, ref nextLineIndex);
               lineIndex = nextLineIndex;
-              continue;
             }
           }
         }
@@ -335,8 +314,27 @@ namespace LJCGenTextLib
       }
     }
 
+    private bool DoSubsection(Directive directive, RepeatItem repeatItem
+      , ref int nextLineIndex)
+    {
+      bool retValue = false;
+
+      if (directive.Name.ToLower() == "subsection"
+        && repeatItem.Subsection != null)
+      {
+        var subSection = repeatItem.Subsection;
+        if (subSection != null)
+        {
+          ProcessItems(subSection, repeatItem, ref nextLineIndex);
+          retValue = true;
+        }
+      }
+      return retValue;
+    }
+
     // Process the repeat items.
-    private void ProcessItems(Section section, RepeatItem repeatItem, ref int nextLineIndex)
+    private void ProcessItems(Section section, RepeatItem repeatItem
+      , ref int nextLineIndex)
     {
       // RepeatItem processing starts with first line.
       nextLineIndex++;
@@ -357,7 +355,6 @@ namespace LJCGenTextLib
       {
         var line = Lines[index];
 
-        // *** Next Statement *** Add 2/1/25
         var directive = Directive.GetDirective(line, CommentChars);
         if (Directive.IsSectionEnd(line, CommentChars)
           && directive.Name == name)

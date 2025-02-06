@@ -54,12 +54,10 @@ namespace LJCGenTextLib
       Add("      <Name>_Namespace_</Name>");
       Add("      <Value>{0}</Value>", defaultValues.Namespace);
       Add("    </Replacement>");
-      // *** Begin *** Add - 12/25/23
       Add("    <Replacement>");
       Add("      <Name>_ParentName_</Name>");
       Add("      <Value>{0}</Value>", defaultValues.ParentName);
       Add("    </Replacement>");
-      // *** End   *** Add - 12/25/23
       Add("    <Replacement>");
       Add("      <Name>_TableName_</Name>");
       Add("      <Value>{0}</Value>", defaultValues.TableName);
