@@ -180,6 +180,14 @@ namespace LJCDataUtility
         }
       }
 
+      // *** Begin *** Add 2/9/25
+      if (isAutoIncrement)
+      {
+        Line(", ");
+        Text("  PRIMARY KEY (`ID`)");
+      }
+      // *** End  ***
+
       Line();
       Text(")");
       if (isAutoIncrement)
@@ -202,15 +210,17 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      var keyValues = PrimaryKeyValues();
-      if (NetString.HasValue(keyValues))
-      {
-        Line();
-        var text = AddPrimaryKey(TableName, PKName, keyValues);
-        Text(text);
-      }
+      // *** Begin *** Delete 2/9/25
+      //var keyValues = PrimaryKeyValues();
+      //if (NetString.HasValue(keyValues))
+      //{
+      //  Line();
+      //  var text = AddPrimaryKey(TableName, PKName, keyValues);
+      //  Text(text);
+      //}
+      // *** End  ***
 
-      keyValues = UniqueKeyValues();
+      var keyValues = UniqueKeyValues();
       if (NetString.HasValue(keyValues))
       {
         Line();
