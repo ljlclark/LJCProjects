@@ -1,9 +1,11 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateTable.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -36,14 +38,25 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        var tableName = ParentObject.DataTableName();
-        string dbName = ParentObject.DataConfigCombo.Text;
+        var parentTableName = ParentObject.DataTableName();
+        // *** Begin *** Add 2/7/25
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+        // *** End   ***
 
-        // *** Begin *** Add 1/29/25
+        // *** Begin *** Add #MySQL 1/29/25
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
-          // Testing
+          // Default value.
+          connectionType = "SQLServer";
+        }
+
+        // Testing
+        if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
           connectionType = "MySQL";
         }
 
@@ -51,16 +64,16 @@ namespace LJCDataUtility
         switch (connectionType.ToLower())
         {
           case "mysql":
-            var mySQLBuilder = new MyProcBuilder(ParentObject, dbName, tableName);
-            showText = mySQLBuilder.CreateTableProc(dataColumns);
+            var myProc = new MyProcBuilder(ParentObject, dbName, parentTableName);
+            showText = myProc.CreateTableProc(dataColumns);
             break;
 
           case "sqlserver":
-            var proc = new ProcBuilder(ParentObject, dbName, tableName);
+            var proc = new ProcBuilder(ParentObject, dbName, parentTableName);
             showText = proc.CreateTableProc(dataColumns);
             break;
         }
-        // *** End   *** Add 1/29/25
+        // *** End   ***
 
         var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText

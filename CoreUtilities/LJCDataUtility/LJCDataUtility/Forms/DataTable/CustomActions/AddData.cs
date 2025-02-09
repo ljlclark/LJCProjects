@@ -102,10 +102,8 @@ namespace LJCDataUtility
               typeValue += $"({findColumn.MaxLength})";
             }
           }
-          // *** Begin *** Change
           parmFindName = proc.SQLVarName(data.ParentTableName);
           parmFindName += parentFindColumnName;
-          // *** End   *** Change
           proc.Text($"  {parmFindName} {typeValue}");
           isFirst = false;
         }
@@ -123,10 +121,8 @@ namespace LJCDataUtility
         if (NetCommon.HasItems(data.ParentColumns)
           && NetString.HasValue(data.ParentTableName))
         {
-          // *** Begin *** Change
           varRefName = proc.SQLVarName(data.ParentTableName);
           varRefName += parentIDColumnName;
-          // *** End   *** Change
           var line = proc.IFItem(data.ParentTableName
             , parentIDColumnName, parentFindColumnName
             , parmFindName);

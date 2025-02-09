@@ -17,9 +17,7 @@ namespace LJCDataUtility
   // The list form code.
   internal partial class DataUtilityList : Form
   {
-    #region Get Value Methods
-
-    // *** DataColumn ***
+    #region Get DataColumn value methods.
 
     // Gets the current Column Grid row.
     internal LJCGridRow DataColumnRow()
@@ -46,7 +44,6 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    // *** New Method *** 1/23/25
     internal long DataColumnSiteID(LJCGridRow row = null)
     {
       long retColumnSiteID = 0;
@@ -79,10 +76,10 @@ namespace LJCDataUtility
       }
       return retColumnName;
     }
+    #endregion
 
-    // *** DataKey ***
+    #region Get DataKey value methods.
 
-    // Gets the current Key Grid row.
     internal LJCGridRow DataKeyRow()
     {
       LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
@@ -107,7 +104,6 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    // *** New Method *** 1/23/25
     internal long DataKeySiteID(LJCGridRow row = null)
     {
       long retKeySiteID = 0;
@@ -140,10 +136,10 @@ namespace LJCDataUtility
       }
       return retKeyName;
     }
+    #endregion
 
-    // *** DataModule ***
+    #region Get DataModule value methods.
 
-    // Gets the selected row ID.
     internal int DataModuleID(LJCItem item = null)
     {
       int retModuleID = 0;
@@ -160,7 +156,6 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    // *** New Method *** 1/23/25
     internal int DataModuleSiteID(LJCItem item = null)
     {
       int retModuleSiteID = 0;
@@ -192,10 +187,10 @@ namespace LJCDataUtility
       }
       return retModuleName;
     }
+    #endregion
 
-    // *** DataTable ***
+    #region Get DataTable value methods.
 
-    // Gets the current Table Grid row.
     internal LJCGridRow DataTableRow()
     {
       LJCGridRow retRow = TableGrid.CurrentRow as LJCGridRow;
@@ -220,7 +215,6 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    // *** New Method *** 1/23/25
     internal long DataTableSiteID(LJCGridRow row = null)
     {
       long retTableSiteID = 0;
@@ -258,7 +252,6 @@ namespace LJCDataUtility
     #region Setup Methods
 
     // Configure the initial control settings.
-    // ********************
     private void ConfigureControls()
     {
       if (AutoScaleMode == AutoScaleMode.Dpi)
@@ -327,7 +320,9 @@ namespace LJCDataUtility
       mDataConfigs.LJCLoadData();
       foreach (DataConfig dataConfig in mDataConfigs)
       {
-        DataConfigCombo.Items.Add(dataConfig.Database);
+        // *** Next Statement *** Change 2/7/25
+        //DataConfigCombo.Items.Add(dataConfig.Database);
+        DataConfigCombo.Items.Add(dataConfig);
       }
       if (DataConfigCombo.Items.Count > 0)
       {
@@ -498,26 +493,32 @@ namespace LJCDataUtility
     // Gets or sets the connection type value.
     internal string ConnectionType { get; set; }
 
-    // The ControlValues file name.
+    // Gets or sets the ControlValues file name.
     internal string ControlValuesFileName { get; set; }
 
+    // Gets or sets the InfoValue item.
     internal ControlValue InfoValue { get; set; }
 
-    // The Managers object.
+    // Gets or sets the Managers object.
     internal ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the configuration settings.
+    internal StandardUISettings Settings { get; set; }
 
     // Combo Code
     private DataModuleComboCode ModuleComboCode { get; set; }
 
-    // Grid Code
+    // Gets or sets the DataColumnGridCode reference.
     private DataColumnGridCode ColumnGridCode { get; set; }
+
+    // Gets or sets the KeyGridCode reference.
     private DataKeyGridCode KeyGridCode { get; set; }
+
+    // Gets or sets the DataTableGridCode reference.
     private DataTableGridCode TableGridCode { get; set; }
 
     // Gets or sets the ControlValues object.
     private ControlValues ControlValues { get; set; }
-
-    private StandardUISettings Settings { get; set; }
     #endregion
 
     private DataConfigs mDataConfigs;

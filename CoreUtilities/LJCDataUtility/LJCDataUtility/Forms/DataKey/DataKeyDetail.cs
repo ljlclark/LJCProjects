@@ -97,10 +97,8 @@ namespace LJCDataUtility
         AscendingCheck.Checked = data.IsAscending;
 
         // Reference key values.
-        // *** Next Statement *** Add 1/23/25
         LJCSiteID = data.DataSiteID;
         LJCParentID = data.DataTableID;
-        // *** Next Statement *** Add 1/23/25
         LJCParentSiteID = data.DataTableSiteID;
       }
     }
@@ -124,10 +122,8 @@ namespace LJCDataUtility
 
       // Get Reference key values.
       retData.ID = LJCID;
-      // *** Next Statement *** Add 1/23/25
       retData.DataSiteID = LJCSiteID;
       retData.DataTableID = LJCParentID;
-      // *** Next Statement *** Add 1/23/25
       retData.DataTableSiteID = LJCParentSiteID;
       return retData;
     }
@@ -183,7 +179,6 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
-          // *** Next Statement *** Add 1/23/25
           LJCRecord.DataSiteID = mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
@@ -377,13 +372,11 @@ namespace LJCDataUtility
             && sourceColumnText.ToLower() != "id"
             && sourceColumnText.EndsWith("ID"))
           {
-            // *** Begin *** Add 1/23/25
             if (sourceColumnText.Contains(","))
             {
               var index = sourceColumnText.IndexOf(",");
               sourceColumnText = sourceColumnText.Substring(0, index);
             }
-            // *** End   *** Add 1/23/25
             var length = sourceColumnText.Length - 2;
             TargetTableText.Text = sourceColumnText.Substring(0, length);
             TargetColumnText.Text = "ID";
@@ -400,7 +393,6 @@ namespace LJCDataUtility
     internal long LJCID { get; set; }
 
     // Gets or sets the primary ID value.
-    // *** Next Statement *** Add 1/23/25
     internal long LJCSiteID { get; set; }
 
     // Gets the LJCIsUpdate value.
@@ -416,7 +408,6 @@ namespace LJCDataUtility
     internal long LJCParentID { get; set; }
 
     // Gets or sets the ParentSite ID value.
-    // *** Next Statement *** Add 1/23/25
     internal long LJCParentSiteID { get; set; }
 
     // Gets or sets the LJCParentName value.

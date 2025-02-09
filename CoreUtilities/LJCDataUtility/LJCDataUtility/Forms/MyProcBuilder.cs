@@ -3,6 +3,7 @@
 // MyProcBuilder.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
+using System.Xml.Linq;
 
 namespace LJCDataUtility
 {
@@ -33,9 +34,9 @@ namespace LJCDataUtility
       if (NetString.HasValue(tableName))
       {
         TableName = tableName;
-        PKName = $"pk_{TableName}";
-        UQName = $"uq_{TableName}";
-        CreateProcName = $"sp_{TableName}";
+        PKName = $"mypk_{TableName}";
+        UQName = $"myuq_{TableName}";
+        CreateProcName = $"mysp_{TableName}";
       }
 
       BeginDelimiter = "`";
@@ -179,22 +180,6 @@ namespace LJCDataUtility
         }
       }
 
-      //var keyValues = PrimaryKeyValues();
-      //if (NetString.HasValue(keyValues))
-      //{
-      //  var keyNames = NetString.DelimitValues(keyValues, "`", "`");
-      //  Text(ItemEnd(HasColumns));
-      //  Text($"  PRIMARY KEY ({keyNames})");
-      //}
-
-      //keyValues = UniqueKeyValues();
-      //if (NetString.HasValue(keyValues))
-      //{
-      //  var keyNames = NetString.DelimitValues(keyValues, "`", "`");
-      //  Text(ItemEnd(HasColumns));
-      //  Text($"  UNIQUE INDEX `{UQName}` ({keyNames})");
-      //}
-
       Line();
       Text(")");
       if (isAutoIncrement)
@@ -234,7 +219,6 @@ namespace LJCDataUtility
       }
 
       Line("END//");
-      //Line("//");
       Line("DELIMITER ;");
       var retProc = ToString();
       return retProc;
@@ -274,6 +258,106 @@ namespace LJCDataUtility
       return retString;
     }
 
+    // Renames a table. Removes old keys and creates new keys.
+    /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
+    internal string RenameTableSQL(long tableID, DataKeys dataKeys)
+    {
+      var b = new TextBuilder(512);
+      //b.Line($"USE [{DBName}]");
+      //b.Line();
+      b.Line("/*");
+      b.Text("/* Remove foreign keys and other constraints. */");
+
+      // Remove referencing foreign keys.
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.TargetTableName != TableName)
+        {
+          continue;
+        }
+
+        var objectType = (ObjectType)dataKey.KeyType;
+        if (ObjectType.Foreign == objectType)
+        {
+          var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
+          b.Line(text);
+        }
+      }
+
+      // Remove reference foreign keys and other constraints.
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.DataTableID != tableID)
+        {
+          continue;
+        }
+
+        var text = DropConstraint(TableName, dataKey.Name);
+        b.Line(text);
+      }
+
+      b.Line();
+      b.Line($"RENAME TABLE {TableName} TO {TableName}Backup");
+      b.Line($"RENAME TABLE New{TableName} TO {TableName}");
+      b.Line();
+
+      b.Text("/* Add constraints and foreign keys. */");
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.DataTableID != tableID)
+        {
+          continue;
+        }
+        string text;
+
+        var objectType = (ObjectType)dataKey.KeyType;
+        switch (objectType)
+        {
+          case ObjectType.Primary:
+            text = AddPrimaryKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName);
+            b.Line(text);
+            break;
+
+          case ObjectType.Unique:
+            var columnList = dataKey.SourceColumnName;
+            text = AddUniqueKey(TableName, dataKey.Name, columnList);
+            b.Line(text);
+            break;
+
+          case ObjectType.Foreign:
+            text = AddForeignKey(TableName, dataKey.Name
+              , dataKey.SourceColumnName, dataKey.TargetTableName
+              , dataKey.TargetColumnName);
+            b.Line(text);
+            break;
+        }
+      }
+
+      // Create referencing foreign keys.
+      foreach (DataKey dataKey in dataKeys)
+      {
+        if (dataKey.TargetTableName != TableName)
+        {
+          continue;
+        }
+        var objectType = (ObjectType)dataKey.KeyType;
+        switch (objectType)
+        {
+          case ObjectType.Foreign:
+            var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
+              , dataKey.SourceColumnName, dataKey.TargetTableName
+              , dataKey.TargetColumnName);
+            b.Line(text);
+            break;
+        }
+      }
+      b.Line("*/");
+
+      var retValue = b.ToString();
+      return retValue;
+    }
+
     /// <summary>Adds the table begin code.</summary>
     /// <returns>The table begin SQL text.</returns>
     internal string TableBegin()
@@ -281,6 +365,12 @@ namespace LJCDataUtility
       var b = new TextBuilder(128);
       b.Line();
       b.Text($"CREATE TABLE IF NOT EXISTS ");
+      if (NetString.HasValue(DBName))
+      {
+        b.Text($"{BeginDelimiter}");
+        b.Text($"{DBName}");
+        b.Text($"{EndDelimiter}.");
+      }
       b.Text($"{BeginDelimiter}");
       b.Text($"{TableName}");
       b.Text($"{EndDelimiter} (");

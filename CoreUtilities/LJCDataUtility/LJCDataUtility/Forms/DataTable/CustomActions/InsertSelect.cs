@@ -1,9 +1,11 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InsertSelect.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
+using LJCWinFormCommon;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -36,37 +38,53 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var tableID = ParentObject.DataTableID();
-      var tableName = ParentObject.DataTableName();
+      var parentTableID = ParentObject.DataTableID();
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var insertColumns = Managers.TableDataColumns(tableID
+      var insertColumns = Managers.TableDataColumns(parentTableID
         , orderByNames);
       if (NetCommon.HasItems(insertColumns))
       {
-        var dataConfigName = "DataUtility";
+        var parentTableName = ParentObject.DataTableName();
 
-        // *** Begin *** Add 1/31/25
+        //var dataConfigName = "DataUtility";
+        // *** Begin *** Add 2/7/25
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dataConfigName = dataConfig.Name;
+        // *** End   ***
+
+        // *** Begin *** Add #MySQL 1/31/25
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
+          // Default value.
           connectionType = "SQLServer";
+        }
+
+        // Testing
+        if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          connectionType = "MySQL";
         }
 
         string showText = null;
         switch (connectionType.ToLower())
         {
           case "mysql":
-            showText = MyInsertSelect();
+            showText = MyInsertSelect(dataConfigName, parentTableName
+              , insertColumns);
             break;
 
           case "sqlserver":
-            showText = SQLInsertSelect(dataConfigName, tableName, insertColumns);
+            showText = SQLInsertSelect(dataConfigName, parentTableName
+              , insertColumns);
             break;
         }
-        // *** End   *** Add 1/31/25
+        // *** End   ***
 
         var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText
@@ -76,9 +94,35 @@ namespace LJCDataUtility
     }
 
     // Generates the MySQL InsertSelect SQL.
-    internal string MyInsertSelect()
+    internal string MyInsertSelect(string dataConfigName, string tableName
+      , DataColumns insertColumns)
     {
-      return null;
+      var manager = new DataManager(dataConfigName, tableName);
+      var selectColumns = manager.BaseDefinition;
+      var columnLists = ColumnLists(insertColumns, selectColumns, "  "
+        , "MySql");
+
+      TextBuilder b = new TextBuilder(256);
+      string toTableName = $"New{tableName}";
+      // *** Begin *** 2/7/25
+      var configCombo = ParentObject.DataConfigCombo;
+      var dataConfig = configCombo.SelectedItem as DataConfig;
+      string dbName = dataConfig.Database;
+      // *** End   ***
+
+      // Create new Table.
+      var myProc = new MyProcBuilder(ParentObject, dbName, toTableName);
+      var createTable = myProc.CreateTable(insertColumns);
+      b.Text(createTable);
+
+      b.Line($"INSERT INTO `{toTableName}`");
+      b.Line(columnLists.InsertList);
+
+      b.Line("select");
+      b.Line(columnLists.SelectList);
+      b.Line($"FROM `{tableName}`;");
+      var retSQL = b.ToString();
+      return retSQL;
     }
 
     // Generates the SQLServer InsertSelect SQL.
@@ -147,7 +191,8 @@ namespace LJCDataUtility
 
     // Creates the column lists.
     private ColumnLists ColumnLists(DataColumns insertColumns
-      , DbColumns selectColumns, string indent = null)
+      , DbColumns selectColumns, string indent = null
+      , string connectionType = "SqlServer")
     {
       ColumnLists retLists = null;
 
@@ -230,8 +275,17 @@ namespace LJCDataUtility
           isFirst = false;
 
           // Add the list values.
-          InsertBuilder.Append(insertName);
-          SelectBuilder.Append(selectName);
+          // *** Change *** 2/7/25
+          if ("sqlserver" == connectionType.ToLower())
+          {
+            InsertBuilder.Append(insertName);
+            SelectBuilder.Append(selectName);
+          }
+          else
+          {
+            InsertBuilder.Append($"`{insertName}`");
+            SelectBuilder.Append($"`{selectName}`");
+          }
 
           // Add newline after default.
           if (useDefault)
