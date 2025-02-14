@@ -52,6 +52,13 @@ namespace LJCDataUtility
       {
         row = DataColumnRow();
       }
+      // *** Begin *** Add 2/10/25
+      if (null == row)
+      {
+        retColumnSiteID = Settings.SiteID;
+      }
+      // *** Begin *** Add 2/10/25
+
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
       {
@@ -112,6 +119,13 @@ namespace LJCDataUtility
       {
         row = DataKeyRow();
       }
+      // *** Begin *** Add 2/10/25
+      if (null == row)
+      {
+        retKeySiteID = Settings.SiteID;
+      }
+      // *** Begin *** Add 2/10/25
+
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
       {
@@ -156,9 +170,9 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal int DataModuleSiteID(LJCItem item = null)
+    internal long DataModuleSiteID(LJCItem item = null)
     {
-      int retModuleSiteID = 0;
+      long retModuleSiteID = 0;
 
       if (null == item)
       {
@@ -166,8 +180,8 @@ namespace LJCDataUtility
       }
       if (item is LJCItem)
       {
-        // ToDo: ?
-        retModuleSiteID = 1;
+        // *** Next Statement *** Changed 2/10/25
+        retModuleSiteID = Settings.SiteID;
       }
       return retModuleSiteID;
     }
@@ -223,6 +237,13 @@ namespace LJCDataUtility
       {
         row = DataTableRow();
       }
+      // *** Begin *** Add 2/10/25
+      if (null == row)
+      {
+        retTableSiteID = Settings.SiteID;
+      }
+      // *** Begin *** Add 2/10/25
+
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
       {

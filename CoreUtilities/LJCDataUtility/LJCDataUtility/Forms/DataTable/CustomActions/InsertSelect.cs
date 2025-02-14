@@ -8,8 +8,6 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -56,7 +54,6 @@ namespace LJCDataUtility
         var dataConfigName = dataConfig.Name;
         // *** End   ***
 
-        // *** Begin *** Add #MySQL 1/31/25
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
@@ -84,7 +81,6 @@ namespace LJCDataUtility
               , insertColumns);
             break;
         }
-        // *** End   ***
 
         var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText
@@ -143,6 +139,7 @@ namespace LJCDataUtility
       var createTable = proc.CreateTable(insertColumns);
       b.Text(createTable);
 
+      b.Line();
       b.Line($"SET IDENTITY_INSERT {toTableName} ON");
       b.Line($"INSERT INTO {toTableName}");
       b.Line(columnLists.InsertList);
@@ -275,7 +272,6 @@ namespace LJCDataUtility
           isFirst = false;
 
           // Add the list values.
-          // *** Change *** 2/7/25
           if ("sqlserver" == connectionType.ToLower())
           {
             InsertBuilder.Append(insertName);

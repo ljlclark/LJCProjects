@@ -63,7 +63,6 @@ namespace LJCDataUtility
           parentColumns = Managers.TableDataColumns(tableID);
         }
 
-        // ToDo: Get DB name.
         string dbName = ParentObject.DataConfigCombo.Text;
         var procData = new AddProcData(dbName, dataColumns
           , tableName, parentColumns, parentTableName);
@@ -82,6 +81,7 @@ namespace LJCDataUtility
         proc.Begin(proc.AddProcName);
 
         // Parameters
+        // ToDo: Get data.
         var parentFindColumnName = "Name";
         var parmFindName = "";
 
@@ -116,6 +116,7 @@ namespace LJCDataUtility
         proc.Line("BEGIN");
 
         // Include Parent table.
+        // ToDo: Get data.
         var parentIDColumnName = "ID";
         var varRefName = "";
         if (NetCommon.HasItems(data.ParentColumns)
@@ -148,6 +149,92 @@ namespace LJCDataUtility
         proc.Line("END");
 
         retString = proc.ToString();
+      }
+
+      var infoValue = ParentObject.InfoValue;
+      var controlValue = DataUtilityCommon.ShowInfo(retString
+        , "Add Data Procedure", infoValue);
+      ParentObject.InfoValue = controlValue;
+      return retString;
+    }
+
+    private string MySQLAddProc(AddProcData data)
+    {
+      string retString = null;
+
+      if (data.TableColumns != null)
+      {
+        var myProc = new MyProcBuilder(ParentObject, data.DBName, data.TableName);
+        myProc.Begin(myProc.AddProcName);
+
+        // Parameters
+        // ToDo: Get data.
+        var parentFindColumnName = "Code";
+        var parmFindName = "";
+
+        // Include parent table.
+        var isFirst = true;
+        if (NetCommon.HasItems(data.ParentColumns)
+          && NetString.HasValue(data.ParentTableName))
+        {
+          // "@tableNameFindName"
+          var typeValue = "nvarchar(5)";
+          var findColumn
+            = data.ParentColumns.LJCSearchName(parentFindColumnName);
+          if (findColumn != null)
+          {
+            typeValue = findColumn.TypeName;
+            if (findColumn.MaxLength > 0)
+            {
+              typeValue += $"({findColumn.MaxLength})";
+            }
+          }
+          parmFindName = myProc.SQLVarName(data.ParentTableName);
+          parmFindName += parentFindColumnName;
+          myProc.Text($"  {parmFindName} {typeValue}");
+          isFirst = false;
+        }
+
+        var parameters = myProc.Parameters(data.TableColumns
+          , isFirst);
+        myProc.Line(parameters);
+
+        myProc.Line(")");
+        myProc.Line("BEGIN");
+
+        // Include Parent table.
+        // ToDo: Get data.
+        var parentIDColumnName = "ID";
+        var varRefName = "";
+        if (NetCommon.HasItems(data.ParentColumns)
+          && NetString.HasValue(data.ParentTableName))
+        {
+          varRefName = myProc.SQLVarName(data.ParentTableName);
+          varRefName += parentIDColumnName;
+          var line = myProc.IFItem(data.ParentTableName
+            , parentIDColumnName, parentFindColumnName
+            , parmFindName);
+          line += "\r\n";
+          line += $"IF {varRefName} IS NOT NULL";
+          myProc.Line(line);
+        }
+
+        // Table
+        myProc.Line($"IF NOT EXISTS(SELECT 1 FROM {data.TableName}");
+        myProc.Line(" WHERE Name = @name)");
+        myProc.Line($"  INSERT INTO {data.TableName}");
+
+        // Column list (Parens, not NewName, no IDs).
+        var insertList = myProc.ColumnsList(data.TableColumns);
+        myProc.Line(insertList);
+
+        // Values list.
+        var valuesList
+          = myProc.ValuesList(data.TableColumns, varRefName);
+        myProc.Line(valuesList);
+
+        myProc.Line("END");
+        retString = myProc.ToString();
       }
 
       var infoValue = ParentObject.InfoValue;

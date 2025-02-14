@@ -34,6 +34,7 @@ namespace LJCDataUtility
       if (NetString.HasValue(tableName))
       {
         TableName = tableName;
+        AddProcName = $"mysp_{TableName}Add";
         PKName = $"mypk_{TableName}";
         UQName = $"myuq_{TableName}";
         CreateProcName = $"mysp_{TableName}";
@@ -102,10 +103,202 @@ namespace LJCDataUtility
       b.Line("-- Licensed under the MIT License.");
       b.Line($"-- {procedureName}.sql");
       b.Line("DELIMITER //");
-      b.Line($"CREATE PROCEDURE `{procedureName}` (");
+      b.Line($"CREATE PROCEDURE ");
+      if (NetString.HasValue(DBName))
+      {
+        b.Line($"`{DBName}`.");
+      }
+      b.Line($"{procedureName}` (");
       string retString = b.ToString();
       Text(retString);
       return retString;
+    }
+
+    // Creates the insert Columns list.
+    /// <include path='items/ColumnsList/*' file='Doc/ProcBuilder.xml'/>
+    internal string ColumnsList(DataColumns dataColumns
+      , bool includeParens = true, bool useNewNames = false
+      , bool includeID = false)
+    {
+      var b = new TextBuilder(256);
+      var value = "    ";
+      if (includeParens)
+      {
+        value += "(";
+      }
+      b.Text(value);
+      var lineLength = value.Length;
+
+      var first = true;
+      foreach (DataUtilColumn dataColumn in dataColumns)
+      {
+        if (!includeID
+          //&& dataColumn.Name != "ID")
+          && "ID" == dataColumn.Name)
+        {
+          continue;
+        }
+
+        // Calculate length before adding to insert newline.
+        var nameValue = dataColumn.Name;
+        if (useNewNames
+          && NetString.HasValue(dataColumn.NewName))
+        {
+          nameValue = dataColumn.NewName;
+        }
+        lineLength += nameValue.Length;
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n     ";
+          b.Text(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          b.Text(firstValue);
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        b.Text(nameValue);
+      }
+
+      if (includeParens)
+      {
+        b.Text(")");
+      }
+      var retList = b.ToString();
+      return retList;
+    }
+
+    // Gets the Table row IF statement.
+    /// <include path='items/IFItem/*' file='Doc/ProcBuilder.xml'/>
+    internal string IFItem(string parentTableName
+      , string parentIDColumnName, string parentFindColumnName
+      , string parmFindName)
+    {
+      // Reference name "TableNameParentID".
+      var varRefName
+        = SQLVarName($"{parentTableName}{parentIDColumnName}");
+
+      var b = new TextBuilder(128);
+      b.Line($"(SET {varRefName} = (SELECT {parentIDColumnName}");
+      b.Line($" FROM {parentTableName}");
+      b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
+      var retIf = b.ToString();
+      return retIf;
+    }
+
+    // Creates the Parameters.
+    /// <include path='items/Parameters/*' file='Doc/ProcBuilder.xml'/>
+    internal string Parameters(DataColumns dataColumns, bool isFirst = true)
+    {
+      var b = new TextBuilder(128);
+      foreach (DataUtilColumn dataColumn in dataColumns)
+      {
+        if (!dataColumn.Name.EndsWith("ID"))
+        {
+          if (!isFirst)
+          {
+            b.Line(",");
+          }
+          isFirst = false;
+          var declaration = SQLDeclaration(dataColumn);
+          b.Text($"  {declaration}");
+        }
+      }
+      var retParams = b.ToString();
+      return retParams;
+    }
+
+    // Creates a SQL Declaration variable from a DataUtilityColumn.
+    /// <include path='items/SQLDeclaration/*' file='Doc/ProcBuilder.xml'/>
+    internal string SQLDeclaration(DataUtilColumn dataColumn)
+    {
+      var retValue = "";
+
+      // @name nvarchar(60)
+      retValue += SQLVarName(dataColumn.Name);
+      retValue += $" {dataColumn.TypeName}";
+      if (dataColumn.MaxLength > 0)
+      {
+        retValue += $"({dataColumn.MaxLength})";
+      }
+      return retValue;
+    }
+
+    // Creates a SQL variable name from a column name.
+    /// <include path='items/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
+    internal string SQLVarName(string columnName)
+    {
+      var retName = "";
+
+      // @name
+      var startChar = columnName.ToLower()[0];
+      retName += $"@{startChar}";
+      retName += columnName.Substring(1);
+      return retName;
+    }
+
+    // Creates the Values list.
+    /// <include path='items/ValuesList/*' file='Doc/ProcBuilder.xml'/>
+    internal string ValuesList(DataColumns dataColumns
+      , string varRefName = null)
+    {
+      var b = new TextBuilder(256);
+      var value = "    VALUES(";
+      b.Text(value);
+      var lineLength = value.Length;
+
+      if (NetString.HasValue(varRefName))
+      {
+        value = $"{varRefName}, ";
+        b.Text(value);
+        lineLength += varRefName.Length;
+      }
+
+      var first = true;
+      foreach (DataUtilColumn dataColumn in dataColumns)
+      {
+        if (dataColumn.Name.EndsWith("ID"))
+        {
+          continue;
+        }
+
+        // Calculate length before adding value.
+        var nameValue = SQLVarName(dataColumn.Name);
+        lineLength += nameValue.Length;
+
+        if (lineLength > 80)
+        {
+          var newLine = "\r\n     ";
+          b.Text(newLine);
+
+          // Do not include crlf in length.
+          lineLength = newLine.Length - 2;
+          lineLength += nameValue.Length;
+        }
+
+        if (!first)
+        {
+          var firstValue = ", ";
+          b.Text(firstValue);
+          lineLength += firstValue.Length;
+        }
+        first = false;
+
+        b.Text(nameValue);
+      }
+
+      b.Text(");");
+      var retList = b.ToString();
+      return retList;
     }
     #endregion
 
@@ -124,7 +317,7 @@ namespace LJCDataUtility
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Line($"   FOREIGN KEY ({sourceNames})");
       b.Text($"   REFERENCES `{targetTableName}`");
-      b.Line($" ({targetNames})");
+      b.Text($" ({targetNames});");
       var retValue = b.ToString();
       return retValue;
     }
@@ -138,7 +331,7 @@ namespace LJCDataUtility
       var b = new TextBuilder(128);
       b.Line($" ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
-      b.Line($"  PRIMARY KEY ({columnNames});");
+      b.Text($"  PRIMARY KEY ({columnNames});");
       var retValue = b.ToString();
       return retValue;
     }
@@ -152,7 +345,7 @@ namespace LJCDataUtility
       var b = new TextBuilder(128);
       b.Line($" ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
-      b.Line($"  UNIQUE ({columnNames});");
+      b.Text($"  UNIQUE ({columnNames});");
       var retValue = b.ToString();
       return retValue;
     }
@@ -180,13 +373,11 @@ namespace LJCDataUtility
         }
       }
 
-      // *** Begin *** Add 2/9/25
       if (isAutoIncrement)
       {
         Line(", ");
         Text("  PRIMARY KEY (`ID`)");
       }
-      // *** End  ***
 
       Line();
       Text(")");
@@ -210,16 +401,6 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      // *** Begin *** Delete 2/9/25
-      //var keyValues = PrimaryKeyValues();
-      //if (NetString.HasValue(keyValues))
-      //{
-      //  Line();
-      //  var text = AddPrimaryKey(TableName, PKName, keyValues);
-      //  Text(text);
-      //}
-      // *** End  ***
-
       var keyValues = UniqueKeyValues();
       if (NetString.HasValue(keyValues))
       {
@@ -241,7 +422,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(128);
       b.Line($" ALTER TABLE `{tableName}`");
-      b.Line($"  DROP CONSTRAINT `{objectName}`;");
+      b.Text($"  DROP CONSTRAINT `{objectName}`;");
       var retValue = b.ToString();
       return retValue;
     }
@@ -257,6 +438,7 @@ namespace LJCDataUtility
       b.Text($"{dataColumn.Name}");
       b.Text($"{EndDelimiter}");
 
+      // Type Name
       var typeName = dataColumn.TypeName.ToLower();
       if (typeName.StartsWith("n"))
       {
@@ -273,8 +455,6 @@ namespace LJCDataUtility
     internal string RenameTableSQL(long tableID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
-      //b.Line($"USE [{DBName}]");
-      //b.Line();
       b.Line("/*");
       b.Text("/* Remove foreign keys and other constraints. */");
 
@@ -290,6 +470,7 @@ namespace LJCDataUtility
         if (ObjectType.Foreign == objectType)
         {
           var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
+          b.Line();
           b.Line(text);
         }
       }
@@ -302,15 +483,20 @@ namespace LJCDataUtility
           continue;
         }
 
-        var text = DropConstraint(TableName, dataKey.Name);
-        b.Line(text);
+        //var objectType = (ObjectType)dataKey.KeyType;
+        if (dataKey.KeyType != (short)ObjectType.Primary)
+        {
+          var text = DropConstraint(TableName, dataKey.Name);
+          b.Line();
+          b.Line(text);
+        }
       }
 
       b.Line();
-      b.Line($"RENAME TABLE {TableName} TO {TableName}Backup");
-      b.Line($"RENAME TABLE New{TableName} TO {TableName}");
-      b.Line();
+      b.Line($"RENAME TABLE `{TableName}` TO `{TableName}Backup`;");
+      b.Line($"RENAME TABLE `New{TableName}` TO `{TableName}`;");
 
+      b.Line();
       b.Text("/* Add constraints and foreign keys. */");
       foreach (DataKey dataKey in dataKeys)
       {
@@ -318,20 +504,15 @@ namespace LJCDataUtility
         {
           continue;
         }
-        string text;
 
+        string text;
         var objectType = (ObjectType)dataKey.KeyType;
         switch (objectType)
         {
-          case ObjectType.Primary:
-            text = AddPrimaryKey(TableName, dataKey.Name
-              , dataKey.SourceColumnName);
-            b.Line(text);
-            break;
-
           case ObjectType.Unique:
             var columnList = dataKey.SourceColumnName;
             text = AddUniqueKey(TableName, dataKey.Name, columnList);
+            b.Line();
             b.Line(text);
             break;
 
@@ -339,6 +520,7 @@ namespace LJCDataUtility
             text = AddForeignKey(TableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
+            b.Line();
             b.Line(text);
             break;
         }
@@ -358,6 +540,7 @@ namespace LJCDataUtility
             var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
+            b.Line();
             b.Line(text);
             break;
         }
@@ -515,6 +698,9 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    /// <summary>Gets or sets the Add data Procedure Name.</summary>
+    internal string AddProcName { get; set; }
 
     /// <summary>The beginning identifier delimiter.</summary>
     internal string BeginDelimiter { get; set; }

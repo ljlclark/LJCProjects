@@ -428,6 +428,8 @@ namespace LJCDataUtility
         Text(text);
       }
 
+      // *** Next Statement *** Add 2/12/25
+      Line();
       Line("END");
       var retProc = ToString();
       return retProc;
@@ -490,6 +492,7 @@ namespace LJCDataUtility
         {
           var text = DropConstraint(dataKey.DataTableName
             , dataKey.Name, objectType);
+          b.Line();
           b.Line(text);
         }
       }
@@ -505,14 +508,15 @@ namespace LJCDataUtility
         var objectType = (ObjectType)dataKey.KeyType;
         var text = DropConstraint(TableName, dataKey.Name
           , objectType);
+        b.Line();
         b.Line(text);
       }
 
       b.Line();
       b.Line($"EXEC sp_rename 'dbo.{TableName}', '{TableName}Backup'");
       b.Line($"EXEC sp_rename 'dbo.New{TableName}', '{TableName}'");
-      b.Line();
 
+      b.Line();
       b.Text("/* Add constraints and foreign keys. */");
       foreach (DataKey dataKey in dataKeys)
       {
@@ -520,20 +524,22 @@ namespace LJCDataUtility
         {
           continue;
         }
-        string text;
 
+        string text;
         var objectType = (ObjectType)dataKey.KeyType;
         switch (objectType)
         {
           case ObjectType.Primary:
             text = AddPrimaryKey(TableName, dataKey.Name
               , dataKey.SourceColumnName);
+            b.Line();
             b.Line(text);
             break;
 
           case ObjectType.Unique:
             var columnList = dataKey.SourceColumnName;
             text = AddUniqueKey(TableName, dataKey.Name, columnList);
+            b.Line();
             b.Line(text);
             break;
 
@@ -541,6 +547,7 @@ namespace LJCDataUtility
             text = AddForeignKey(TableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
+            b.Line();
             b.Line(text);
             break;
         }
@@ -560,6 +567,7 @@ namespace LJCDataUtility
             var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
               , dataKey.SourceColumnName, dataKey.TargetTableName
               , dataKey.TargetColumnName);
+            b.Line();
             b.Line(text);
             break;
         }
@@ -592,6 +600,7 @@ namespace LJCDataUtility
       var b = new TextBuilder(512);
       b.Text(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
+
       var typeName = dataColumn.TypeName.Trim().ToLower();
       if ("nvarchar" == typeName
         || "varchar" == typeName)
@@ -612,9 +621,9 @@ namespace LJCDataUtility
       }
 
       // Add to Builder property and also return.
+      HasColumns = true;
       var retString = b.ToString();
       Text(retString);
-      HasColumns = true;
       return retString;
     }
 
@@ -627,7 +636,9 @@ namespace LJCDataUtility
       b.Line("  )");
       b.Line("END");
       string retString = b.ToString();
-      Line(retString);
+
+      // *** Next Statement *** Change 2/12/25
+      Text(retString);
       return retString;
     }
 
@@ -642,9 +653,9 @@ namespace LJCDataUtility
       b.Text($", {dataColumn.IdentityIncrement}) NOT NULL");
 
       // Add to Builder property and also return.
+      HasColumns = true;
       var retString = b.ToString();
       Text(retString);
-      HasColumns = true;
       return retString;
     }
 
