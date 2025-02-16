@@ -48,11 +48,9 @@ namespace LJCDataUtility
         var parentTableName = ParentObject.DataTableName();
 
         //var dataConfigName = "DataUtility";
-        // *** Begin *** Add 2/7/25
         var configCombo = ParentObject.DataConfigCombo;
         var dataConfig = configCombo.SelectedItem as DataConfig;
         var dataConfigName = dataConfig.Name;
-        // *** End   ***
 
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
@@ -100,11 +98,9 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder(256);
       string toTableName = $"New{tableName}";
-      // *** Begin *** 2/7/25
       var configCombo = ParentObject.DataConfigCombo;
       var dataConfig = configCombo.SelectedItem as DataConfig;
       string dbName = dataConfig.Database;
-      // *** End   ***
 
       // Create new Table.
       var myProc = new MyProcBuilder(ParentObject, dbName, toTableName);

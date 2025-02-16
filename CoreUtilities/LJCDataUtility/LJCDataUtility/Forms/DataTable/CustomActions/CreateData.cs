@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateData.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System;
@@ -54,7 +55,11 @@ namespace LJCDataUtility
       var dataColumns = columnManager.Load();
       if (NetCommon.HasItems(dataColumns))
       {
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataColumnData");
         proc.BodyBegin();
@@ -86,7 +91,11 @@ namespace LJCDataUtility
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataKeyData");
         proc.BodyBegin();
@@ -118,7 +127,11 @@ namespace LJCDataUtility
       var dataTables = moduleManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataModuleData");
         proc.BodyBegin();
@@ -145,7 +158,11 @@ namespace LJCDataUtility
       var dataTables = tableManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataTableData");
         proc.BodyBegin();

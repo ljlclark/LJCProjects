@@ -1,0 +1,21 @@
+﻿/* Copyright(c) Lester J. Clark and Contributors. */
+/* Licensed under the MIT License. */
+/* mysp_UnitCategoryAdd.sql */
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS `TestData`.`mysp_UnitCategoryAdd``;
+
+CREATE PROCEDURE `TestData`.`mysp_UnitCategoryAdd` (
+  `@Code` varchar(5)
+  `@Name` varchar(30)
+)
+BEGIN
+  IF (NOT EXISTS (SELECT 1 FROM UnitCategory
+    WHERE Code = `@code`) THEN
+    INSERT INTO UnitCategory
+      (`Code`, `Name`)
+      VALUES (`@Code`, `@Name`);
+  END IF;
+END
+//
+DELIMITER ;

@@ -36,7 +36,6 @@ namespace LJCDataUtility
         var parentTableName = ParentObject.DataTableName();
         string dbName = ParentObject.DataConfigCombo.Text;
 
-        // *** Begin *** Add #MySQL 2/7/25
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {

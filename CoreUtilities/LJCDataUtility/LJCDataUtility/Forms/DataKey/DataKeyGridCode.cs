@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using LJCDataUtility;
 using System.Data;
 using System.Data.Common;
+using LJCDataAccessConfig;
 
 namespace LJCDataUtility
 {
@@ -364,7 +365,11 @@ namespace LJCDataUtility
         var targetNames = NetString.DelimitValues(dataKey.TargetColumnName
           , "[", "]");
 
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, sourceTableName);
         proc.Begin(proc.ForeignKeyProcName);
         proc.Line("AS");
@@ -402,7 +407,11 @@ namespace LJCDataUtility
         var tableRow = ParentObject.DataTableRow();
         var tableName = ParentObject.DataTableName(tableRow);
 
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var proc = new ProcBuilder(ParentObject, dbName, tableName);
         proc.Begin(proc.ForeignKeyDropProcName);
 

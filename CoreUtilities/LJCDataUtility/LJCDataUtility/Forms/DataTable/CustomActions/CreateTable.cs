@@ -39,13 +39,12 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataColumns))
       {
         var parentTableName = ParentObject.DataTableName();
-        // *** Begin *** Add 2/7/25
+
+        // Get DataConfig
         var configCombo = ParentObject.DataConfigCombo;
         var dataConfig = configCombo.SelectedItem as DataConfig;
         var dbName = dataConfig.Database;
-        // *** End   ***
 
-        // *** Begin *** Add #MySQL 1/29/25
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
@@ -73,7 +72,6 @@ namespace LJCDataUtility
             showText = proc.CreateTableProc(dataColumns);
             break;
         }
-        // *** End   ***
 
         var infoValue = ParentObject.InfoValue;
         var controlValue = DataUtilityCommon.ShowInfo(showText

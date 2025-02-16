@@ -102,13 +102,11 @@ namespace LJCDataUtility
       b.Line("-- Copyright(c) Lester J. Clark and Contributors.");
       b.Line("-- Licensed under the MIT License.");
       b.Line($"-- {procedureName}.sql");
+      var qualifiedName = QualifiedName(DBName, procedureName);
       b.Line("DELIMITER //");
-      b.Line($"CREATE PROCEDURE ");
-      if (NetString.HasValue(DBName))
-      {
-        b.Line($"`{DBName}`.");
-      }
-      b.Line($"{procedureName}` (");
+      b.Line($"DROP PROCEDURE {qualifiedName};");
+      b.Line();
+      b.Line($"CREATE PROCEDURE {qualifiedName} (");
       string retString = b.ToString();
       Text(retString);
       return retString;
@@ -217,6 +215,19 @@ namespace LJCDataUtility
       return retParams;
     }
 
+    // Creates the qualified name.
+    internal string QualifiedName(string dbName, string name)
+    {
+      string retValue = null;
+
+      if (NetString.HasValue(dbName))
+      {
+        retValue += $"`{DBName}`.";
+      }
+      retValue += $"`{name}`";
+      return retValue;
+    }
+
     // Creates a SQL Declaration variable from a DataUtilityColumn.
     /// <include path='items/SQLDeclaration/*' file='Doc/ProcBuilder.xml'/>
     internal string SQLDeclaration(DataUtilColumn dataColumn)
@@ -224,7 +235,10 @@ namespace LJCDataUtility
       var retValue = "";
 
       // @name nvarchar(60)
+      // If value is a variable, it needs an Identifier Quote.
+      retValue += "`";
       retValue += SQLVarName(dataColumn.Name);
+      retValue += "`";
       retValue += $" {dataColumn.TypeName}";
       if (dataColumn.MaxLength > 0)
       {
@@ -256,6 +270,7 @@ namespace LJCDataUtility
       b.Text(value);
       var lineLength = value.Length;
 
+      // Use the variable reference instead of a value.
       if (NetString.HasValue(varRefName))
       {
         value = $"{varRefName}, ";
@@ -271,8 +286,10 @@ namespace LJCDataUtility
           continue;
         }
 
-        // Calculate length before adding value.
+        // Get the projected length.
         var nameValue = SQLVarName(dataColumn.Name);
+        // If value is a variable, it needs an Identifier Quote.
+        nameValue = $"`{nameValue}`";
         lineLength += nameValue.Length;
 
         if (lineLength > 80)
@@ -282,6 +299,7 @@ namespace LJCDataUtility
 
           // Do not include crlf in length.
           lineLength = newLine.Length - 2;
+          // Get the projected length.
           lineLength += nameValue.Length;
         }
 

@@ -139,7 +139,6 @@ namespace LJCDataUtilityDAL
         b.Line($"WHERE tc.[TABLE_NAME] = '{tableName}'");
         b.Line($" AND tc.[CONSTRAINT_TYPE] = '{keyType}'");
       }
-      // *** Next Statement *** Change 1/5/25
       b.Line("ORDER BY tc.[CONSTRAINT_NAME], kcu.[ORDINAL_POSITION];");
       var retValue = b.ToString();
       return retValue;

@@ -1,10 +1,12 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddData.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -63,10 +65,38 @@ namespace LJCDataUtility
           parentColumns = Managers.TableDataColumns(tableID);
         }
 
-        string dbName = ParentObject.DataConfigCombo.Text;
+        // Get DataConfig
+        var configCombo = ParentObject.DataConfigCombo;
+        var dataConfig = configCombo.SelectedItem as DataConfig;
+        var dbName = dataConfig.Database;
+
         var procData = new AddProcData(dbName, dataColumns
           , tableName, parentColumns, parentTableName);
-        CreateAddProc(procData);
+
+        var connectionType = ParentObject.ConnectionType;
+        if (!NetString.HasValue(connectionType))
+        {
+          // Default value.
+          connectionType = "SQLServer";
+        }
+
+        // Testing
+        if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
+          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        {
+          connectionType = "MySQL";
+        }
+
+        switch (connectionType.ToLower())
+        {
+          case "mysql":
+            MySQLAddProc(procData);
+            break;
+
+          case "sqlserver":
+            CreateAddProc(procData);
+            break;
+        }
       }
     }
 
@@ -191,7 +221,8 @@ namespace LJCDataUtility
           }
           parmFindName = myProc.SQLVarName(data.ParentTableName);
           parmFindName += parentFindColumnName;
-          myProc.Text($"  {parmFindName} {typeValue}");
+          // *** Next Line *** Change 2/16/25
+          myProc.Text($"  `{parmFindName}` {typeValue}");
           isFirst = false;
         }
 
@@ -220,9 +251,9 @@ namespace LJCDataUtility
         }
 
         // Table
-        myProc.Line($"IF NOT EXISTS(SELECT 1 FROM {data.TableName}");
-        myProc.Line(" WHERE Name = @name)");
-        myProc.Line($"  INSERT INTO {data.TableName}");
+        myProc.Line($"IF NOT EXISTS(SELECT 1 FROM `{data.TableName}`");
+        myProc.Line(" WHERE Name = @name) THEN");
+        myProc.Line($"  INSERT INTO `{data.TableName}`");
 
         // Column list (Parens, not NewName, no IDs).
         var insertList = myProc.ColumnsList(data.TableColumns);
@@ -232,8 +263,11 @@ namespace LJCDataUtility
         var valuesList
           = myProc.ValuesList(data.TableColumns, varRefName);
         myProc.Line(valuesList);
+        myProc.Line("END IF;");
 
         myProc.Line("END");
+        myProc.Line("//");
+        myProc.Line("DELIMITER ;");
         retString = myProc.ToString();
       }
 

@@ -52,12 +52,10 @@ namespace LJCDataUtilityDAL
           SiteManagers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
 
-          // *** Begin *** Add 1/29/25
           var dataConfigs = new DataConfigs();
           dataConfigs.LJCLoadData();
           var dataConfig = dataConfigs.LJCGetByName(settings.DataConfigName);
           ConnectionType = dataConfig.ConnectionType;
-          // *** End   *** Add 1/29/25
         }
       }
     }

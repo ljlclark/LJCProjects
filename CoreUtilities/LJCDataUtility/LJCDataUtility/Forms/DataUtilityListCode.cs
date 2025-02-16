@@ -51,13 +51,11 @@ namespace LJCDataUtility
       if (null == row)
       {
         row = DataColumnRow();
+        if (null == row)
+        {
+          retColumnSiteID = Settings.SiteID;
+        }
       }
-      // *** Begin *** Add 2/10/25
-      if (null == row)
-      {
-        retColumnSiteID = Settings.SiteID;
-      }
-      // *** Begin *** Add 2/10/25
 
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
@@ -118,13 +116,11 @@ namespace LJCDataUtility
       if (null == row)
       {
         row = DataKeyRow();
+        if (null == row)
+        {
+          retKeySiteID = Settings.SiteID;
+        }
       }
-      // *** Begin *** Add 2/10/25
-      if (null == row)
-      {
-        retKeySiteID = Settings.SiteID;
-      }
-      // *** Begin *** Add 2/10/25
 
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
@@ -180,7 +176,6 @@ namespace LJCDataUtility
       }
       if (item is LJCItem)
       {
-        // *** Next Statement *** Changed 2/10/25
         retModuleSiteID = Settings.SiteID;
       }
       return retModuleSiteID;
@@ -236,13 +231,11 @@ namespace LJCDataUtility
       if (row == null)
       {
         row = DataTableRow();
+        if (null == row)
+        {
+          retTableSiteID = Settings.SiteID;
+        }
       }
-      // *** Begin *** Add 2/10/25
-      if (null == row)
-      {
-        retTableSiteID = Settings.SiteID;
-      }
-      // *** Begin *** Add 2/10/25
 
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
@@ -337,12 +330,11 @@ namespace LJCDataUtility
     // Loads the initial Control data.
     private void LoadControlData()
     {
+      // Get DataConfigs
       mDataConfigs = new DataConfigs();
       mDataConfigs.LJCLoadData();
       foreach (DataConfig dataConfig in mDataConfigs)
       {
-        // *** Next Statement *** Change 2/7/25
-        //DataConfigCombo.Items.Add(dataConfig.Database);
         DataConfigCombo.Items.Add(dataConfig);
       }
       if (DataConfigCombo.Items.Count > 0)

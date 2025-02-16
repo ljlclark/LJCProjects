@@ -240,7 +240,6 @@ namespace LJCDataUtilityDAL
     #region Joins
 
     // Creates and returns the Load Joins object.
-    // *** Add *** 12/16/24
     /// <include path='items/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbJoins GetJoins()
     {

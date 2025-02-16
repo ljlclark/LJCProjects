@@ -428,7 +428,6 @@ namespace LJCDataUtility
         Text(text);
       }
 
-      // *** Next Statement *** Add 2/12/25
       Line();
       Line("END");
       var retProc = ToString();
@@ -637,7 +636,6 @@ namespace LJCDataUtility
       b.Line("END");
       string retString = b.ToString();
 
-      // *** Next Statement *** Change 2/12/25
       Text(retString);
       return retString;
     }
