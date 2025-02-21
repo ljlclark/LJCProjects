@@ -39,7 +39,15 @@
     <param name="procedureName"></param>
     <returns>The code text.</returns>
   </Begin>
-  
+  <ValuesList>
+    <summary>
+      Creates the Values list.
+    </summary>
+    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="varRefNames">The optional variable reference names.</param>
+    <returns>The values list SQL text.</returns>
+  </ValuesList>
+
   <!-- Create Table Methods -->
   <AddForeignKey>
     <summary>

@@ -17,14 +17,12 @@ namespace LJCDataUtility
 
     // Initializes an object instance.
     internal AddProcData(string dbName, DataColumns tableColumns
-      , string tableName, DataColumns parentColumns = null
-      , string parentTableName = null)
+      , string tableName)
     {
       DBName = dbName;
       TableColumns = tableColumns;
       TableName = tableName;
-      ParentColumns = parentColumns;
-      ParentTableName = parentTableName;
+      ParentUniqueColumns = null;
     }
     #endregion
 
@@ -33,11 +31,14 @@ namespace LJCDataUtility
     // Gets or sets the Database name.
     internal string DBName { get; set; }
 
-    // Gets or sets the Parent columns.
+    // Gets or sets the parent columns.
     internal DataColumns ParentColumns { get; set; }
 
-    // Gets or sets the Parent table name.
-    internal string ParentTableName { get; set; }
+    // Gets or sets the ParentKeys collection.
+    internal DataKeys ParentKeys { get; set; }
+
+    // Gets or sets the parent unique columns.
+    internal DataColumns ParentUniqueColumns { get; set; }
 
     // Gets or sets the table columns.
     internal DataColumns TableColumns { get; set; }

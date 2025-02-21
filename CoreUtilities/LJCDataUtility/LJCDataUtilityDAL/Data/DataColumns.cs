@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Represents a collection of DataColumn objects.</summary>
+  /// <summary>Represents a collection of DataUtilColumn objects.</summary>
   [XmlRoot("DataColumns")]
   public class DataColumns : List<DataUtilColumn>
   {
@@ -66,13 +66,20 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilColumn Add(int id, string name)
+    /// <summary>
+    /// Creates and adds the object from the provided values.
+    /// </summary>
+    /// <param name="parentTableID"></param>
+    /// <param name="parentSiteID"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public DataUtilColumn Add(long parentTableID, long parentSiteID
+      , string name)
     {
       DataUtilColumn retValue = null;
 
       string message = "";
-      if (id <= 0)
+      if (parentTableID <= 0)
       {
         message += "id must be greater than zero.\r\n";
       }
@@ -81,8 +88,9 @@ namespace LJCDataUtilityDAL
       NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
-      var checkItems = this.Clone();
-      var duplicate = checkItems.LJCSearchName(name);
+      var checkColumns = this.Clone();
+      var duplicate = checkColumns.LJCSearchUnique(parentTableID
+        , parentSiteID, name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -92,7 +100,7 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          ID = id,
+          ID = parentTableID,
           Name = name
         };
         Add(retValue);
@@ -101,15 +109,24 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Creates and adds the object from the provided values.</summary>
-    public DataUtilColumn Add(string name, string typeName
-      , bool allowNull = true, short maxLength = 0
+    /// <param name="parentTableID">The parent table ID.</param>
+    /// <param name="parentSiteID"></param>
+    /// <param name="name">The item name value.</param>
+    /// <param name="typeName"></param>
+    /// <param name="allowNull"></param>
+    /// <param name="maxLength"></param>
+    /// <param name="defaultValue"></param>
+    /// <param name="identityIncrement"></param>
+    public DataUtilColumn Add(long parentTableID, long parentSiteID
+      , string name, string typeName, bool allowNull = true, short maxLength = 0
       , string defaultValue = null, short identityIncrement = 0)
     {
       DataUtilColumn retValue = null;
 
       // Prevent search from sorting current items.
-      var checkItems = Clone();
-      var duplicate = checkItems.LJCSearchName(name);
+      var checkColumns = Clone();
+      var duplicate = checkColumns.LJCSearchUnique(parentTableID, parentSiteID
+        , name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -177,10 +194,12 @@ namespace LJCDataUtilityDAL
     /// <summary>
     /// Removes an item by name.
     /// </summary>
-    /// <param name="name">The item unique Name value.</param>
-    public void LJCRemove(string name)
+    /// <param name="parentTableID"></param>
+    /// <param name="name">The item name value.</param>
+    public void LJCRemove(long parentTableID, string name)
     {
-      DataUtilColumn item = Find(x => x.Name == name);
+      DataUtilColumn item = Find(x => x.DataTableID == parentTableID
+        && x.Name == name);
       if (item != null)
       {
         Remove(item);
@@ -221,8 +240,15 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilColumn LJCSearchName(string name)
+    /// <summary>
+    /// Retrieve the collection element with unique values.
+    /// </summary>
+    /// <param name="parentTableID">The parent dataTable ID.</param>
+    /// <param name="parentSiteID">The parent dataTable site ID</param>
+    /// <param name="name">The dataTable name.</param>
+    /// <returns>The data column object.</returns>
+    public DataUtilColumn LJCSearchUnique(long parentTableID, long parentSiteID
+      , string name)
     {
       DataUtilColumn retValue = null;
 
@@ -230,6 +256,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilColumn searchItem = new DataUtilColumn()
       {
+        DataTableID = parentTableID,
+        DataTableSiteID = parentSiteID,
         Name = name
       };
       int index = BinarySearch(searchItem, comparer);
@@ -278,17 +306,23 @@ namespace LJCDataUtilityDAL
     /// <summary>
     /// The item for the supplied name.
     /// </summary>
+    /// <param name="parentTableID">The parent ID value.</param>
+    /// <param name="parentSiteID"></param>
     /// <param name="name">The item name.</param>
     /// <returns>The selected item.</returns>
-    public DataUtilColumn this[string name]
+    public DataUtilColumn this[long parentTableID, long parentSiteID
+      , string name]
     {
-      get { return LJCSearchName(name); }
+      get
+      {
+        return LJCSearchUnique(parentTableID, parentSiteID, name);
+      }
     }
     #endregion
 
     #region Class Data
 
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 

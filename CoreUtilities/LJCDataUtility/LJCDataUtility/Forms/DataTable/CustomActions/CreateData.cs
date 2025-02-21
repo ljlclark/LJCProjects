@@ -55,10 +55,7 @@ namespace LJCDataUtility
       var dataColumns = columnManager.Load();
       if (NetCommon.HasItems(dataColumns))
       {
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataColumnData");
@@ -91,10 +88,7 @@ namespace LJCDataUtility
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataKeyData");
@@ -127,10 +121,7 @@ namespace LJCDataUtility
       var dataTables = moduleManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataModuleData");
@@ -158,10 +149,7 @@ namespace LJCDataUtility
       var dataTables = tableManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataTableData");

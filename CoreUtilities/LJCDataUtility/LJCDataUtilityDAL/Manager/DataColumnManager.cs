@@ -173,12 +173,18 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/ParentKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentKey(long parentID)
+    /// <summary>
+    /// Gets the ID key columns.
+    /// </summary>
+    /// <param name="parentID">The parent table ID.</param>
+    /// <param name="parentSiteID">The parent site ID.</param>
+    /// <returns></returns>
+    public DbColumns ParentKey(long parentID, long parentSiteID)
     {
       var retValue = new DbColumns()
       {
-        { DataUtilColumn.ColumnDataTableID, parentID }
+        { DataUtilColumn.ColumnDataTableID, parentID },
+        { DataUtilColumn.ColumnDataTableSiteID, parentSiteID }
       };
       return retValue;
     }

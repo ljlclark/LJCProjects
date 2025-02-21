@@ -28,22 +28,19 @@ namespace LJCDataUtility
     // Generates the CreateTable procedure.
     internal void CreateTableProc()
     {
-      var parentTableID = ParentObject.DataTableID();
+      var parentID = ParentObject.DataTableID(out long parentSiteID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var dataColumns = Managers.TableDataColumns(parentTableID
+      var dataColumns = Managers.TableDataColumns(parentID, parentSiteID
         , orderByNames);
 
       if (NetCommon.HasItems(dataColumns))
       {
         var parentTableName = ParentObject.DataTableName();
 
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var connectionType = ParentObject.ConnectionType;
         if (!NetString.HasValue(connectionType))

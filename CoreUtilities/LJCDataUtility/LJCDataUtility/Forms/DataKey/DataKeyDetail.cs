@@ -66,7 +66,7 @@ namespace LJCDataUtility
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataKeyManager;
-        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        mOriginalRecord = manager.RetrieveWithID(LJCID, LJCSiteID);
         GetValues(mOriginalRecord);
       }
       else
@@ -169,7 +169,7 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKey(LJCID);
+          var keyColumns = manager.IDKey(LJCID, LJCSiteID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);

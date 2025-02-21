@@ -101,8 +101,8 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableID();
-        var keyColumns = KeyManager.ParentKey(parentID);
+        var parentID = ParentObject.DataTableID(out long parentSiteID);
+        var keyColumns = KeyManager.ParentKey(parentID, parentSiteID);
         var items = KeyManager.Load(keyColumns);
         if (NetCommon.HasItems(items))
         {
@@ -128,7 +128,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(long id)
+    private bool RowSelect(long id, long siteID)
     {
       bool retValue = false;
 
@@ -137,8 +137,9 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in KeyGrid.Rows)
         {
-          var rowID = ParentObject.DataTableID();
-          if (rowID == id)
+          var rowID = ParentObject.DataTableID(out long tableSiteID);
+          if (rowID == id
+            && siteID == tableSiteID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             KeyGrid.LJCSetCurrentRow(row, true);
@@ -174,10 +175,10 @@ namespace LJCDataUtility
       ParentObject.KeyForeignKeyProc.Enabled = false;
       ParentObject.KeyForeignKeyDropProc.Enabled = false;
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyID(row);
+      var id = ParentObject.DataKeyID(out long siteID, row);
       if (id > 1)
       {
-        var dataKey = Managers.GetDataKey(id);
+        var dataKey = Managers.GetDataKey(id, siteID);
         if ((int)KeyType.Foreign == dataKey.KeyType)
         {
           ParentObject.KeyForeignKeyProc.Enabled = true;
@@ -223,10 +224,11 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataKeyID();
+        var id = ParentObject.DataKeyID(out long siteID);
         var keyColumns = new DbColumns()
         {
-          { DataKey.ColumnID, id }
+          { DataKey.ColumnID, id },
+          { DataKey.ColumnDataSiteID, siteID }
         };
         KeyManager.Delete(keyColumns);
         if (0 == KeyManager.AffectedCount)
@@ -252,16 +254,18 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && KeyGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataKeyID();
-        var parentID = ParentObject.DataTableID();
+        var id = ParentObject.DataKeyID(out long siteID);
+        var parentID = ParentObject.DataTableID(out long parentSiteID);
         string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail()
         {
           LJCID = id,
+          LJCSiteID = siteID,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
+          LJCParentSiteID = parentSiteID,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
@@ -276,8 +280,7 @@ namespace LJCDataUtility
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableID();
-        var parentSiteID = ParentObject.DataKeySiteID();
+        var parentID = ParentObject.DataTableID(out long parentSiteID);
         string parentName = ParentObject.DataTableName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
@@ -300,17 +303,18 @@ namespace LJCDataUtility
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
+      long siteID = 0;
       if (KeyGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentObject.DataKeyID();
+        id = ParentObject.DataKeyID(out siteID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        RowSelect(id);
+        RowSelect(id, siteID);
       }
       ParentObject.Cursor = Cursors.Default;
     }
@@ -351,8 +355,8 @@ namespace LJCDataUtility
     internal void ForeignKeyProc()
     {
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyID(row);
-      var dataKey = Managers.GetDataKey(id);
+      var id = ParentObject.DataKeyID(out long siteID, row);
+      var dataKey = Managers.GetDataKey(id, siteID);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
@@ -365,10 +369,7 @@ namespace LJCDataUtility
         var targetNames = NetString.DelimitValues(dataKey.TargetColumnName
           , "[", "]");
 
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, sourceTableName);
         proc.Begin(proc.ForeignKeyProcName);
@@ -398,8 +399,8 @@ namespace LJCDataUtility
     internal void ForeignKeyDropProc()
     {
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyID(row);
-      var dataKey = Managers.GetDataKey(id);
+      var id = ParentObject.DataKeyID(out long siteID, row);
+      var dataKey = Managers.GetDataKey(id, siteID);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
       {
@@ -407,10 +408,7 @@ namespace LJCDataUtility
         var tableRow = ParentObject.DataTableRow();
         var tableName = ParentObject.DataTableName(tableRow);
 
-        // Get DataConfig
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dbName = dataConfig.Database;
+        var dbName = ParentObject.ComboConfigValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, tableName);
         proc.Begin(proc.ForeignKeyDropProcName);

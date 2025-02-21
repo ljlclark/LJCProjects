@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TextBuilder.xml -->
+<items>
+  <AddExpanded>
+    <summary>
+      Adds a delimiter if not the first list item
+      and adds a newline if line length is greater than CharLength.
+    </summary>
+    <param name="text">Next append value.</param>
+    <returns>The new text value.</returns>
+  </AddExpanded>
+  <AddWithBreak>
+    <summary>
+      Adds a newline if line length is greater than CharLength.
+    </summary>
+    <param name="text">Next append value.</param>
+    <returns>The new text value.</returns>
+  </AddWithBreak>
+  <AddWithDelimiter>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+    <param name="text">Next append value.</param>
+    <returns>The new text value.</returns>
+  </AddWithDelimiter>
+  <GetWithBreak>
+    <summary>
+      Adds a newline if line length is greater than CharLength.
+    </summary>
+    <param name="text">The next append value.</param>
+    <returns>The new text value.</returns>
+  </GetWithBreak>
+  <GetWithDelimiter>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+    <param name="text">The next append value.</param>
+    <returns>The new text value.</returns>
+  </GetWithDelimiter>
+</items>

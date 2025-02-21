@@ -35,11 +35,11 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     /// <summary>Gets the DataColumn by ID.</summary>
-    public DataUtilColumn GetDataColumn(int id)
+    public DataUtilColumn GetDataColumn(long id)
     {
       DataUtilColumn retDataColumn = null;
 
-      IDError(id, "GetDataColumn(int id)", "id");
+      IDError(id, "GetDataColumn(long id)", "id");
       var manager = DataColumnManager;
       if (manager != null)
       {
@@ -49,7 +49,7 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataKey GetDataKey(long id)
+    public DataKey GetDataKey(long id, long siteID)
     {
       DataKey retDataKey = null;
 
@@ -57,17 +57,17 @@ namespace LJCDataUtilityDAL
       var manager = DataKeyManager;
       if (manager != null)
       {
-        retDataKey = manager.RetrieveWithID(id);
+        retDataKey = manager.RetrieveWithID(id, siteID);
       }
       return retDataKey;
     }
 
     /// <summary>Gets the DataModule by ID.</summary>
-    public DataModule GetDataModule(int id)
+    public DataModule GetDataModule(long id)
     {
       DataModule retDataModule = null;
 
-      IDError(id, "GetDataModule(int id)", "id");
+      IDError(id, "GetDataModule(long id)", "id");
       var manager = DataModuleManager;
       if (manager != null)
       {
@@ -77,11 +77,11 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataUtilTable GetDataTable(int id)
+    public DataUtilTable GetDataTable(long id)
     {
       DataUtilTable retDataTable = null;
 
-      IDError(id, "GetDataTable(int id)", "id");
+      IDError(id, "GetDataTable(long id)", "id");
       var manager = DataTableManager;
       if (manager != null)
       {
@@ -91,14 +91,14 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the table DataColumns.</summary>
-    public DataColumns TableDataColumns(long tableID
+    public DataColumns TableDataColumns(long tableID, long siteID
       , List<string> orderByNames = null)
     {
       DataColumns retColumns = null;
 
       IDError(tableID, "TableDataColumns(int tableID)", "tableID");
       var columnManager = DataColumnManager;
-      var keyColumns = columnManager.ParentKey(tableID);
+      var keyColumns = columnManager.ParentKey(tableID, siteID);
       if (NetCommon.HasItems(orderByNames))
       {
         columnManager.Manager.OrderByNames = orderByNames;

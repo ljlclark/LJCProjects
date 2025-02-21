@@ -36,12 +36,12 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var parentTableID = ParentObject.DataTableID();
+      var parentID = ParentObject.DataTableID(out long parentSiteID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var insertColumns = Managers.TableDataColumns(parentTableID
+      var insertColumns = Managers.TableDataColumns(parentID, parentSiteID
         , orderByNames);
       if (NetCommon.HasItems(insertColumns))
       {
@@ -98,9 +98,7 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder(256);
       string toTableName = $"New{tableName}";
-      var configCombo = ParentObject.DataConfigCombo;
-      var dataConfig = configCombo.SelectedItem as DataConfig;
-      string dbName = dataConfig.Database;
+      var dbName = ParentObject.ComboConfigValue("Database");
 
       // Create new Table.
       var myProc = new MyProcBuilder(ParentObject, dbName, toTableName);
@@ -127,7 +125,7 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder(256);
       string toTableName = $"New{tableName}";
-      string dbName = ParentObject.DataConfigCombo.Text;
+      var dbName = ParentObject.ComboConfigValue("Database");
       b.Line($"USE [{dbName}]");
 
       // Create new Table.
@@ -148,40 +146,6 @@ namespace LJCDataUtility
       return retSQL;
     }
 
-    // Adds a newline.
-    private void AddInsertNewLine()
-    {
-      InsertBuilder.AppendLine();
-      InsertLength = 0;
-      var value = $"{Indent} ";
-      InsertLength += value.Length;
-      InsertBuilder.Append(value);
-    }
-
-    // Adds a newline.
-    private void AddSelectNewLine()
-    {
-      SelectBuilder.AppendLine();
-      SelectLength = 0;
-      var value = $"{Indent} ";
-      SelectLength += value.Length;
-      SelectBuilder.Append(value);
-    }
-
-    // Appends a value.
-    private void AppendInsert(string value)
-    {
-      InsertLength += value.Length;
-      InsertBuilder.Append(value);
-    }
-
-    // Appends a value.
-    private void AppendSelect(string value)
-    {
-      SelectLength += value.Length;
-      SelectBuilder.Append(value);
-    }
-
     // Creates the column lists.
     private ColumnLists ColumnLists(DataColumns insertColumns
       , DbColumns selectColumns, string indent = null
@@ -194,18 +158,22 @@ namespace LJCDataUtility
         && NetCommon.HasItems(selectColumns))
       {
         retLists = new ColumnLists();
-        InsertBuilder = new StringBuilder(256);
-        SelectBuilder = new StringBuilder(256);
-        InsertLength = 0;
-        SelectLength = 0;
+        InsertBuilder = new TextBuilder(256)
+        {
+          NewLinePrefix = $"{Indent} "
+        };
+        SelectBuilder = new TextBuilder(256)
+        {
+          NewLinePrefix = $"{Indent} "
+        };
 
         // Add beginning value.
-        AppendInsert($"{indent}(");
-        AppendSelect(indent);
+        InsertBuilder.Text($"{indent}(");
+        SelectBuilder.Text(indent);
 
         // Remove column.
         // Columns not in insertColumns will not be included.
-        var isFirst = true;
+        InsertBuilder.IsFirst = true;
         foreach (var insertColumn in insertColumns)
         {
           // Get Insert list value.
@@ -215,8 +183,6 @@ namespace LJCDataUtility
             // Rename column.
             insertName = insertColumn.NewName;
           }
-          // Calculate length before adding to insert newline.
-          InsertLength += insertName.Length;
 
           // Get Select list value.
           var selectName = insertColumn.Name;
@@ -227,8 +193,6 @@ namespace LJCDataUtility
             // Add column uses the default value.
             selectName = DefaultValue(insertColumn); ;
           }
-          // Calculate length before adding to insert newline.
-          SelectLength += selectName.Length;
 
           // Null to not null.
           var useDefault = false;
@@ -239,53 +203,28 @@ namespace LJCDataUtility
             useDefault = true;
             var defaultValue = DefaultValue(insertColumn);
             selectName = DefaultNameValue(selectName, defaultValue);
-            SelectLength = 81;
+            SelectBuilder.Line();
           }
-
-          // Add NewLine.
-          if (InsertLength > 80)
-          {
-            AddInsertNewLine();
-          }
-          if (SelectLength > 80)
-          {
-            if (!HasNewLine(SelectBuilder))
-            {
-              AddSelectNewLine();
-            }
-          }
-
-          // Add comma separator.
-          if (!isFirst)
-          {
-            var value = ", ";
-            AppendInsert(value);
-            if (!useDefault)
-            {
-              AppendSelect(value);
-            }
-          }
-          isFirst = false;
 
           // Add the list values.
           if ("sqlserver" == connectionType.ToLower())
           {
-            InsertBuilder.Append(insertName);
-            SelectBuilder.Append(selectName);
+            InsertBuilder.AddExpanded(insertName);
+            SelectBuilder.AddExpanded(selectName);
           }
           else
           {
-            InsertBuilder.Append($"`{insertName}`");
-            SelectBuilder.Append($"`{selectName}`");
+            InsertBuilder.AddExpanded($"`{insertName}`");
+            SelectBuilder.AddExpanded($"`{selectName}`");
           }
 
           // Add newline after default.
           if (useDefault)
           {
-            AddSelectNewLine();
+            SelectBuilder.Line();
           }
         }
-        InsertBuilder.Append(")");
+        InsertBuilder.Text(")");
         retLists.InsertList = InsertBuilder.ToString();
         retLists.SelectList = SelectBuilder.ToString();
       }
@@ -342,7 +281,7 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    //// Create custom InsertSelect list.
+    //// Save *** Create custom InsertSelect list.
     //// (No parens, NewName value, NewMaxLength value)
     //private string InsertSelectList(DataColumns selectColumns)
     //{
@@ -413,11 +352,11 @@ namespace LJCDataUtility
 
     private string Indent { get; set; }
 
-    private StringBuilder InsertBuilder { get; set; }
+    private TextBuilder InsertBuilder { get; set; }
 
     private int InsertLength { get; set; }
 
-    private StringBuilder SelectBuilder { get; set; }
+    private TextBuilder SelectBuilder { get; set; }
 
     private int SelectLength { get; set; }
 

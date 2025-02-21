@@ -17,7 +17,7 @@ namespace LJCDataUtility
   // The list form code.
   internal partial class DataUtilityList : Form
   {
-    #region Get DataColumn value methods.
+    #region DataColumn value methods.
 
     // Gets the current Column Grid row.
     internal LJCGridRow DataColumnRow()
@@ -43,6 +43,23 @@ namespace LJCDataUtility
       return retColumnID;
     }
 
+    // Gets the selected row Name.
+    internal string DataColumnName(LJCGridRow row = null)
+    {
+      string retColumnName = null;
+
+      if (null == row)
+      {
+        row = DataColumnRow();
+      }
+      if (row is LJCGridRow
+        && "ColumnGrid" == row.DataGridView.Name)
+      {
+        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
+      }
+      return retColumnName;
+    }
+
     // Gets the selected row SiteID.
     internal long DataColumnSiteID(LJCGridRow row = null)
     {
@@ -64,27 +81,55 @@ namespace LJCDataUtility
       }
       return retColumnSiteID;
     }
+    #endregion
 
-    // Gets the selected row Name.
-    internal string DataColumnName(LJCGridRow row = null)
+    #region DataConfig value methods.
+
+    // Gets the DataConfig object.
+    internal DataConfig ComboDataConfig()
     {
-      string retColumnName = null;
+      var configCombo = DataConfigCombo;
+      var retConfig = configCombo.SelectedItem as DataConfig;
+      return retConfig;
+    }
 
-      if (null == row)
+    // Gets the DataConfig object.
+    internal string ComboConfigValue(string propertyName)
+    {
+      string retValue = null;
+
+      var dataConfig = ComboDataConfig();
+      if (dataConfig != null)
       {
-        row = DataColumnRow();
+        switch (propertyName.ToLower())
+        {
+          case "database":
+            retValue = dataConfig.Database;
+            break;
+          case "dbserver":
+            retValue = dataConfig.DbServer;
+            break;
+          case "name":
+            retValue = dataConfig.Name;
+            break;
+          case "providername":
+            retValue = dataConfig.GetProviderName();
+            break;
+          case "pswd":
+            retValue = dataConfig.Pswd;
+            break;
+          case "userid":
+            retValue = dataConfig.UserID;
+            break;
+        }
       }
-      if (row is LJCGridRow
-        && "ColumnGrid" == row.DataGridView.Name)
-      {
-        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
-      }
-      return retColumnName;
+      return retValue;
     }
     #endregion
 
-    #region Get DataKey value methods.
+    #region DataKey value methods.
 
+    // Gets the current DataKey grid row.
     internal LJCGridRow DataKeyRow()
     {
       LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
@@ -92,10 +137,11 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataKeyID(LJCGridRow row = null)
+    internal long DataKeyID(out long siteID, LJCGridRow row = null)
     {
       long retKeyID = 0;
 
+      siteID = 0;
       if (null == row)
       {
         row = DataKeyRow();
@@ -104,8 +150,26 @@ namespace LJCDataUtility
         && "KeyGrid" == row.DataGridView.Name)
       {
         retKeyID = row.LJCGetInt64(DataKey.ColumnID);
+        retKeyID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
       }
       return retKeyID;
+    }
+
+    // Gets the selected row Name.
+    internal string DataKeyName(LJCGridRow row = null)
+    {
+      string retKeyName = null;
+
+      if (null == row)
+      {
+        row = DataKeyRow();
+      }
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
+      {
+        retKeyName = row.LJCGetString(DataKey.ColumnName);
+      }
+      return retKeyName;
     }
 
     // Gets the selected row SiteID.
@@ -130,25 +194,53 @@ namespace LJCDataUtility
       return retKeySiteID;
     }
 
-    // Gets the selected row Name.
-    internal string DataKeyName(LJCGridRow row = null)
+    /// <summary>Retrieve the Foreign keys.</summary>
+    /// <returns>The foreign key collection.</returns>
+    internal DataKeys ForeignKeys()
     {
-      string retKeyName = null;
+      var tableID = DataTableID(out long siteID);
+      var keyManager = Managers.DataKeyManager;
+      var retKeys = keyManager.LoadWithType(tableID, siteID
+        , (short)KeyType.Foreign);
+      return retKeys;
+    }
 
-      if (null == row)
+    /// <summary>Retrieve the Primary key list.</summary>
+    /// <returns>The primary key values text.</returns>
+    internal string PrimaryKeyValues()
+    {
+      string retList = null;
+
+      var parentID = DataTableID(out long parentSiteID);
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithType(parentID, parentSiteID
+        , (short)KeyType.Primary);
+      if (dataKey != null)
       {
-        row = DataKeyRow();
+        retList = dataKey.SourceColumnName;
       }
-      if (row is LJCGridRow
-        && "KeyGrid" == row.DataGridView.Name)
+      return retList;
+    }
+
+    /// <summary>Retrieve the Unique key list.</summary>
+    /// <returns>The unique key values text.</returns>
+    internal string UniqueKeyValues()
+    {
+      string retList = null;
+
+      var parentID = DataTableID(out long parentSiteID);
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithType(parentID, parentSiteID
+        , (short)KeyType.Unique);
+      if (dataKey != null)
       {
-        retKeyName = row.LJCGetString(DataKey.ColumnName);
+        retList = dataKey.SourceColumnName;
       }
-      return retKeyName;
+      return retList;
     }
     #endregion
 
-    #region Get DataModule value methods.
+    #region DataModule value methods.
 
     internal int DataModuleID(LJCItem item = null)
     {
@@ -163,22 +255,6 @@ namespace LJCDataUtility
         retModuleID = item.ID;
       }
       return retModuleID;
-    }
-
-    // Gets the selected row SiteID.
-    internal long DataModuleSiteID(LJCItem item = null)
-    {
-      long retModuleSiteID = 0;
-
-      if (null == item)
-      {
-        item = ModuleCombo.SelectedItem as LJCItem;
-      }
-      if (item is LJCItem)
-      {
-        retModuleSiteID = Settings.SiteID;
-      }
-      return retModuleSiteID;
     }
 
     // Gets the selected row Name.
@@ -196,9 +272,25 @@ namespace LJCDataUtility
       }
       return retModuleName;
     }
+
+    // Gets the selected row SiteID.
+    internal long DataModuleSiteID(LJCItem item = null)
+    {
+      long retModuleSiteID = 0;
+
+      if (null == item)
+      {
+        item = ModuleCombo.SelectedItem as LJCItem;
+      }
+      if (item is LJCItem)
+      {
+        retModuleSiteID = Settings.SiteID;
+      }
+      return retModuleSiteID;
+    }
     #endregion
 
-    #region Get DataTable value methods.
+    #region DataTable value methods.
 
     internal LJCGridRow DataTableRow()
     {
@@ -207,10 +299,11 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataTableID(LJCGridRow row = null)
+    internal long DataTableID(out long siteID, LJCGridRow row = null)
     {
       long retTableID = 0;
 
+      siteID = 0;
       if (row == null)
       {
         row = DataTableRow();
@@ -219,8 +312,44 @@ namespace LJCDataUtility
         && "TableGrid" == row.DataGridView.Name)
       {
         retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
+        siteID = row.LJCGetInt64(DataUtilTable.ColumnDataSiteID);
       }
       return retTableID;
+    }
+
+    // Gets the target table ID.
+    internal long ParentDataTableID(string targetTableName, out long siteID)
+    {
+      long retTableID = 0;
+
+      siteID = 0;
+      var moduleID = DataModuleID();
+      var tableManager = Managers.DataTableManager;
+      var targetTable = tableManager.RetrieveWithUnique(moduleID
+        , targetTableName);
+      if (targetTable != null)
+      {
+        retTableID = targetTable.ID;
+        siteID = targetTable.DataSiteID;
+      }
+      return retTableID;
+    }
+
+    // Gets the selected row Name.
+    internal string DataTableName(LJCGridRow row = null)
+    {
+      string retTableName = null;
+
+      if (row == null)
+      {
+        row = DataTableRow();
+      }
+      if (row is LJCGridRow
+        && "TableGrid" == row.DataGridView.Name)
+      {
+        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
+      }
+      return retTableName;
     }
 
     // Gets the selected row SiteID.
@@ -243,23 +372,6 @@ namespace LJCDataUtility
         retTableSiteID = row.LJCGetInt64(DataUtilTable.ColumnDataSiteID);
       }
       return retTableSiteID;
-    }
-
-    // Gets the selected row Name.
-    internal string DataTableName(LJCGridRow row = null)
-    {
-      string retTableName = null;
-
-      if (row == null)
-      {
-        row = DataTableRow();
-      }
-      if (row is LJCGridRow
-        && "TableGrid" == row.DataGridView.Name)
-      {
-        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
-      }
-      return retTableName;
     }
     #endregion
 
@@ -518,7 +630,7 @@ namespace LJCDataUtility
     // Gets or sets the configuration settings.
     internal StandardUISettings Settings { get; set; }
 
-    // Combo Code
+    // Gets or sets the ModuleComboCode reference.
     private DataModuleComboCode ModuleComboCode { get; set; }
 
     // Gets or sets the DataColumnGridCode reference.

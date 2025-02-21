@@ -390,7 +390,7 @@ namespace _Namespace_
 		}
     #endregion
 
-    #region Get Data Methods
+    #region Data Value Methods
 
     // Retrieves the row item.
     // ********************

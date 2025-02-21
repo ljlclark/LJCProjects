@@ -45,6 +45,7 @@ namespace LJCDataUtility
       EndDelimiter = "]";
       Builder = new TextBuilder(512);
       HasColumns = false;
+      IsFirst = true;
     }
     #endregion
 
@@ -63,6 +64,7 @@ namespace LJCDataUtility
     internal void ClearText()
     {
       Builder = new TextBuilder(512);
+      IsFirst = true;
     }
 
     // Checks if the builder text ends with a supplied value.
@@ -144,46 +146,28 @@ namespace LJCDataUtility
         value += "(";
       }
       b.Text(value);
-      var lineLength = value.Length;
+      //var lineLength = value.Length;
 
-      var first = true;
-      foreach (DataUtilColumn dataColumn in dataColumns)
+      if (NetCommon.HasItems(dataColumns))
       {
-        if (!includeID
-          //&& dataColumn.Name != "ID")
-          && "ID" == dataColumn.Name)
+        //var first = true;
+        b.IsFirst = true;
+        foreach (DataUtilColumn dataColumn in dataColumns)
         {
-          continue;
+          if (!includeID
+            && "ID" == dataColumn.Name)
+          {
+            continue;
+          }
+
+          var nameValue = dataColumn.Name;
+          if (useNewNames
+            && NetString.HasValue(dataColumn.NewName))
+          {
+            nameValue = dataColumn.NewName;
+          }
+          b.AddExpanded(nameValue);
         }
-
-        // Calculate length before adding to insert newline.
-        var nameValue = dataColumn.Name;
-        if (useNewNames
-          && NetString.HasValue(dataColumn.NewName))
-        {
-          nameValue = dataColumn.NewName;
-        }
-        lineLength += nameValue.Length;
-
-        if (lineLength > 80)
-        {
-          var newLine = "\r\n     ";
-          b.Text(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-          lineLength += nameValue.Length;
-        }
-
-        if (!first)
-        {
-          var firstValue = ", ";
-          b.Text(firstValue);
-          lineLength += firstValue.Length;
-        }
-        first = false;
-
-        b.Text(nameValue);
       }
 
       if (includeParens)
@@ -269,48 +253,26 @@ namespace LJCDataUtility
       , string varRefName = null)
     {
       var b = new TextBuilder(256);
-      var value = "    VALUES(";
-      b.Text(value);
-      var lineLength = value.Length;
+      b.Text("    VALUES(");
 
       if (NetString.HasValue(varRefName))
       {
-        value = $"{varRefName}, ";
-        b.Text(value);
-        lineLength += varRefName.Length;
+        b.Text($"{varRefName}, ");
       }
 
-      var first = true;
-      foreach (DataUtilColumn dataColumn in dataColumns)
+      if (NetCommon.HasItems(dataColumns))
       {
-        if (dataColumn.Name.EndsWith("ID"))
+        b.IsFirst = true;
+        foreach (DataUtilColumn dataColumn in dataColumns)
         {
-          continue;
+          if (dataColumn.Name.EndsWith("ID"))
+          {
+            continue;
+          }
+
+          var nameValue = SQLVarName(dataColumn.Name);
+          b.Text(nameValue);
         }
-
-        // Calculate length before adding value.
-        var nameValue = SQLVarName(dataColumn.Name);
-        lineLength += nameValue.Length;
-
-        if (lineLength > 80)
-        {
-          var newLine = "\r\n     ";
-          b.Text(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-          lineLength += nameValue.Length;
-        }
-
-        if (!first)
-        {
-          var firstValue = ", ";
-          b.Text(firstValue);
-          lineLength += firstValue.Length;
-        }
-        first = false;
-
-        b.Text(nameValue);
       }
 
       b.Text(");");
@@ -412,7 +374,7 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      var keyValues = PrimaryKeyValues();
+      var keyValues = ParentObject.PrimaryKeyValues();
       if (NetString.HasValue(keyValues))
       {
         Line();
@@ -420,7 +382,7 @@ namespace LJCDataUtility
         Text(text);
       }
 
-      keyValues = UniqueKeyValues();
+      keyValues = ParentObject.UniqueKeyValues();
       if (NetString.HasValue(keyValues))
       {
         Line();
@@ -470,7 +432,7 @@ namespace LJCDataUtility
 
     // Renames a table. Removes old keys and creates new keys.
     /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
-    internal string RenameTableSQL(long tableID, DataKeys dataKeys)
+    internal string RenameTableSQL(long tableID, long siteID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line($"USE [{DBName}]");
@@ -499,7 +461,8 @@ namespace LJCDataUtility
       // Remove reference foreign keys and other constraints.
       foreach (DataKey dataKey in dataKeys)
       {
-        if (dataKey.DataTableID != tableID)
+        if (dataKey.DataTableID != tableID
+          && dataKey.DataSiteID != siteID)
         {
           continue;
         }
@@ -519,7 +482,8 @@ namespace LJCDataUtility
       b.Text("/* Add constraints and foreign keys. */");
       foreach (DataKey dataKey in dataKeys)
       {
-        if (dataKey.DataTableID != tableID)
+        if (dataKey.DataTableID != tableID
+          && dataKey.DataSiteID != siteID)
         {
           continue;
         }
@@ -722,43 +686,6 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Data Methods
-
-    /// <summary>Retrieve the Primary key list.</summary>
-    /// <returns>The primary key values text.</returns>
-    internal string PrimaryKeyValues()
-    {
-      string retList = null;
-
-      var parentTableID = ParentObject.DataTableID();
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentTableID
-        , (short)KeyType.Primary);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
-    }
-
-    /// <summary>Retrieve the Unique key list.</summary>
-    /// <returns>The unique key values text.</returns>
-    internal string UniqueKeyValues()
-    {
-      string retList = null;
-
-      var parentTableID = ParentObject.DataTableID();
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentTableID
-        , (short)KeyType.Unique);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
-    }
-    #endregion
-
     #region Properties
 
     /// <summary>Gets or sets the Add data Procedure Name.</summary>
@@ -785,6 +712,13 @@ namespace LJCDataUtility
     /// <summary>Gets or sets the
     /// Create Foreign Key Procedure Name.</summary>
     internal string ForeignKeyProcName { get; set; }
+
+    /// <summary>Gets or sets the first item indicator.</summary>
+    public bool IsFirst
+    {
+      get { return Builder.IsFirst; }
+      set { Builder.IsFirst = value; }
+    }
 
     /// <summary>Gets or sets the
     /// Primary Key Name.</summary>

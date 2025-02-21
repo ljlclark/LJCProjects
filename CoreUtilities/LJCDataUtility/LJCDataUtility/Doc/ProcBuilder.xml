@@ -155,6 +155,7 @@
       Renames a table. Removes old keys and creates new keys.
     </summary>
     <param name="tableID">The table ID.</param>
+    <param name="siteID">The site ID.</param>
     <param name="dataKeys">The DataKeys collection.</param>
     <returns>The rename table SQL text.</returns>
   </RenameTableSQL>

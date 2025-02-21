@@ -145,11 +145,28 @@ namespace LJCDataUtilityDAL
 
     #region Load/Retrieve Methods
 
-    // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataKey RetrieveWithID(long id, List<string> propertyNames = null)
+    // Loads records with the supplied values.
+    /// <include path='items/LoaWithType/*' file='Doc/DataKeyManager.xml'/>
+    public DataKeys LoadWithType(long parentID, long parentSiteID, short keyType
+      , List<string> propertyNames = null)
     {
-      var keyColumns = IDKey(id);
+      var keyColumns = TypeKey(parentID, parentSiteID, keyType);
+      var retKeys = Load(keyColumns, propertyNames);
+      return retKeys;
+    }
+
+    // Retrieves a record with the supplied value.
+    /// <summary>
+    /// Retrieves a record with the supplied value.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="siteID"></param>
+    /// <param name="propertyNames"></param>
+    /// <returns></returns>
+    public DataKey RetrieveWithID(long id, long siteID
+      , List<string> propertyNames = null)
+    {
+      var keyColumns = IDKey(id, siteID);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -172,11 +189,11 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied values.
     /// <include path='items/RetrieveWithType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKey RetrieveWithType(long parentID, short keyType
-      , List<string> propertyNames = null)
+    public DataKey RetrieveWithType(long parentID, long parentSiteID
+      , short keyType, List<string> propertyNames = null)
     {
       var joins = GetJoins();
-      var keyColumns = TypeKey(parentID, keyType);
+      var keyColumns = TypeKey(parentID, parentSiteID, keyType);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -187,26 +204,38 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(long id)
+    /// <summary>
+    /// Gets the ID key columns.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="siteID"></param>
+    /// <returns></returns>
+    public DbColumns IDKey(long id, long siteID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataKey.ColumnID, id }
+        { DataKey.ColumnID, id },
+        { DataKey.ColumnDataSiteID, siteID }
       };
       return retValue;
     }
 
     // Gets the ID key columns.
-    /// <include path='items/ParentKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentKey(long parentID)
+    /// <summary>
+    /// Gets the ID key columns.
+    /// </summary>
+    /// <param name="parentID"></param>
+    /// <param name="parentSiteID"></param>
+    /// <returns></returns>
+    public DbColumns ParentKey(long parentID, long parentSiteID)
     {
       var retValue = new DbColumns()
       {
-        { DataKey.ColumnDataTableID, parentID }
+        { DataKey.ColumnDataTableID, parentID },
+        { DataKey.ColumnDataTableSiteID, parentSiteID }
       };
       return retValue;
     }
@@ -226,11 +255,12 @@ namespace LJCDataUtilityDAL
 
     // Gets the Type key columns.
     /// <include path='items/TypeKey/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns TypeKey(long parentID, int keyType)
+    public DbColumns TypeKey(long parentID, long parentSiteID, int keyType)
     {
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
+        { DataKey.ColumnDataTableSiteID, parentSiteID },
         { DataKey.ColumnKeyType, keyType }
       };
       return retValue;

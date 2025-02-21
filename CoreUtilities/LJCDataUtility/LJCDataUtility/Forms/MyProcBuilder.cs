@@ -3,6 +3,7 @@
 // MyProcBuilder.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace LJCDataUtility
@@ -125,51 +126,31 @@ namespace LJCDataUtility
         value += "(";
       }
       b.Text(value);
-      var lineLength = value.Length;
 
-      var first = true;
-      foreach (DataUtilColumn dataColumn in dataColumns)
+      if (NetCommon.HasItems(dataColumns))
       {
-        if (!includeID
-          //&& dataColumn.Name != "ID")
-          && "ID" == dataColumn.Name)
+        b.IsFirst = true;
+        foreach (DataUtilColumn dataColumn in dataColumns)
         {
-          continue;
+          if (!includeID
+            && "ID" == dataColumn.Name)
+          {
+            continue;
+          }
+
+          var nameValue = dataColumn.Name;
+          if (useNewNames
+            && NetString.HasValue(dataColumn.NewName))
+          {
+            nameValue = dataColumn.NewName;
+          }
+          b.AddExpanded(nameValue);
         }
 
-        // Calculate length before adding to insert newline.
-        var nameValue = dataColumn.Name;
-        if (useNewNames
-          && NetString.HasValue(dataColumn.NewName))
+        if (includeParens)
         {
-          nameValue = dataColumn.NewName;
+          b.Text(")");
         }
-        lineLength += nameValue.Length;
-
-        if (lineLength > 80)
-        {
-          var newLine = "\r\n     ";
-          b.Text(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-          lineLength += nameValue.Length;
-        }
-
-        if (!first)
-        {
-          var firstValue = ", ";
-          b.Text(firstValue);
-          lineLength += firstValue.Length;
-        }
-        first = false;
-
-        b.Text(nameValue);
-      }
-
-      if (includeParens)
-      {
-        b.Text(")");
       }
       var retList = b.ToString();
       return retList;
@@ -261,57 +242,40 @@ namespace LJCDataUtility
     }
 
     // Creates the Values list.
-    /// <include path='items/ValuesList/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='items/ValuesList/*' file='Doc/MyProcBuilder.xml'/>
     internal string ValuesList(DataColumns dataColumns
-      , string varRefName = null)
+      , List<string> varRefNames = null)
     {
-      var b = new TextBuilder(256);
-      var value = "    VALUES(";
-      b.Text(value);
-      var lineLength = value.Length;
-
-      // Use the variable reference instead of a value.
-      if (NetString.HasValue(varRefName))
+      var b = new TextBuilder(256)
       {
-        value = $"{varRefName}, ";
-        b.Text(value);
-        lineLength += varRefName.Length;
+        NewLinePrefix = "     "
+      };
+      b.Text("    VALUES(");
+
+      // Use the variable references instead of value.
+      if (NetCommon.HasItems(varRefNames))
+      {
+        b.IsFirst = true;
+        foreach (string varRefName in varRefNames)
+        {
+          b.AddExpanded(varRefName);
+        }
       }
 
-      var first = true;
-      foreach (DataUtilColumn dataColumn in dataColumns)
+      if (NetCommon.HasItems(dataColumns))
       {
-        if (dataColumn.Name.EndsWith("ID"))
+        b.IsFirst = true;
+        foreach (DataUtilColumn dataColumn in dataColumns)
         {
-          continue;
+          if (dataColumn.Name.EndsWith("ID"))
+          {
+            continue;
+          }
+
+          var nameValue = SQLVarName(dataColumn.Name);
+          nameValue = $"`{nameValue}`";
+          b.AddExpanded(nameValue);
         }
-
-        // Get the projected length.
-        var nameValue = SQLVarName(dataColumn.Name);
-        // If value is a variable, it needs an Identifier Quote.
-        nameValue = $"`{nameValue}`";
-        lineLength += nameValue.Length;
-
-        if (lineLength > 80)
-        {
-          var newLine = "\r\n     ";
-          b.Text(newLine);
-
-          // Do not include crlf in length.
-          lineLength = newLine.Length - 2;
-          // Get the projected length.
-          lineLength += nameValue.Length;
-        }
-
-        if (!first)
-        {
-          var firstValue = ", ";
-          b.Text(firstValue);
-          lineLength += firstValue.Length;
-        }
-        first = false;
-
-        b.Text(nameValue);
       }
 
       b.Text(");");
@@ -419,7 +383,7 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      var keyValues = UniqueKeyValues();
+      var keyValues = ParentObject.UniqueKeyValues();
       if (NetString.HasValue(keyValues))
       {
         Line();
@@ -470,7 +434,7 @@ namespace LJCDataUtility
 
     // Renames a table. Removes old keys and creates new keys.
     /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
-    internal string RenameTableSQL(long tableID, DataKeys dataKeys)
+    internal string RenameTableSQL(long tableID, long siteID, DataKeys dataKeys)
     {
       var b = new TextBuilder(512);
       b.Line("/*");
@@ -496,7 +460,8 @@ namespace LJCDataUtility
       // Remove reference foreign keys and other constraints.
       foreach (DataKey dataKey in dataKeys)
       {
-        if (dataKey.DataTableID != tableID)
+        if (dataKey.DataTableID != tableID
+          && dataKey.DataSiteID != siteID)
         {
           continue;
         }
@@ -518,7 +483,8 @@ namespace LJCDataUtility
       b.Text("/* Add constraints and foreign keys. */");
       foreach (DataKey dataKey in dataKeys)
       {
-        if (dataKey.DataTableID != tableID)
+        if (dataKey.DataTableID != tableID
+          && dataKey.DataTableSiteID != siteID)
         {
           continue;
         }
@@ -675,43 +641,6 @@ namespace LJCDataUtility
         retValue = $",\r\n";
       }
       return retValue;
-    }
-    #endregion
-
-    #region Data Methods
-
-    /// <summary>Retrieve the Primary key list.</summary>
-    /// <returns>The primary key values text.</returns>
-    internal string PrimaryKeyValues()
-    {
-      string retList = null;
-
-      var parentTableID = ParentObject.DataTableID();
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentTableID
-        , (short)KeyType.Primary);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
-    }
-
-    /// <summary>Retrieve the Unique key list.</summary>
-    /// <returns>The unique key values text.</returns>
-    internal string UniqueKeyValues()
-    {
-      string retList = null;
-
-      var parentTableID = ParentObject.DataTableID();
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentTableID
-        , (short)KeyType.Unique);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
     }
     #endregion
 
