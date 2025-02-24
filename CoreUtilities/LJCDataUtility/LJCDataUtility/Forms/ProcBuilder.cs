@@ -139,14 +139,16 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
     {
-      var b = new TextBuilder(256);
-      var value = "    ";
+      var b = new TextBuilder(256)
+      {
+        IndentCount = 2
+      };
+      var value = b.GetIndentString();
       if (includeParens)
       {
         value += "(";
       }
       b.Text(value);
-      //var lineLength = value.Length;
 
       if (NetCommon.HasItems(dataColumns))
       {
@@ -166,7 +168,7 @@ namespace LJCDataUtility
           {
             nameValue = dataColumn.NewName;
           }
-          b.AddExpanded(nameValue);
+          b.Format(nameValue);
         }
       }
 

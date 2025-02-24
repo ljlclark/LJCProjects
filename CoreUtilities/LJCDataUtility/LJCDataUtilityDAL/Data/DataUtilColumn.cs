@@ -469,6 +469,10 @@ namespace LJCDataUtilityDAL
       {
         retValue = x.DataTableSiteID.CompareTo(y.DataTableSiteID);
       }
+      if (isContinue)
+      {
+        retValue = string.Compare(x.Name, y.Name, true);
+      }
       return retValue;
     }
   }

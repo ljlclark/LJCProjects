@@ -144,7 +144,7 @@ namespace LJCDataUtility
           {
             nameValue = dataColumn.NewName;
           }
-          b.AddExpanded(nameValue);
+          b.Format(nameValue);
         }
 
         if (includeParens)
@@ -248,7 +248,8 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(256)
       {
-        NewLinePrefix = "     "
+        IndentCount = 2,
+        WrapPrefix = " "
       };
       b.Text("    VALUES(");
 
@@ -258,7 +259,7 @@ namespace LJCDataUtility
         b.IsFirst = true;
         foreach (string varRefName in varRefNames)
         {
-          b.AddExpanded(varRefName);
+          b.Format(varRefName);
         }
       }
 
@@ -274,7 +275,7 @@ namespace LJCDataUtility
 
           var nameValue = SQLVarName(dataColumn.Name);
           nameValue = $"`{nameValue}`";
-          b.AddExpanded(nameValue);
+          b.Format(nameValue);
         }
       }
 

@@ -13,7 +13,8 @@ namespace LJCNetCommon
     /// <summary>Initializes an object instance.</summary>
     public XMLBuilder()
     {
-      Indent = 0;
+      IndentCharCount = 2;
+      IndentCount = 0;
       XML = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
     }
 
@@ -56,13 +57,13 @@ namespace LJCNetCommon
       {
         builder.AppendLine();
       }
-      if (Indent > 0)
+      if (IndentCount > 0)
       {
-        Indent--;
+        IndentCount--;
       }
-      if (Indent > 0)
+      if (IndentCount > 0)
       {
-        builder.Append(new string(' ', Indent * 2));
+        builder.Append(GetIndentString());
       }
       builder.Append($"<\\{name}>");
       retEnd = builder.ToString();
@@ -93,9 +94,9 @@ namespace LJCNetCommon
       {
         builder.AppendLine();
       }
-      if (Indent > 0)
+      if (IndentCount > 0)
       {
-        builder.Append(new string(' ', Indent * 2));
+        builder.Append(GetIndentString());
       }
       builder.Append($"<{name}");
       if (NetCommon.HasItems(xmlAttributes))
@@ -126,16 +127,29 @@ namespace LJCNetCommon
       XML += retElement;
       if (false == close)
       {
-        Indent++;
+        IndentCount++;
       }
       return retElement;
     }
     #endregion
 
+    #region Other Methods
+
+    /// <summary>Returns the current indent string.</summary>
+    public string GetIndentString()
+    {
+      var retValue = new string(' ', IndentCount * IndentCharCount);
+      return retValue;
+    }
+    #endregion
+
     #region Properties
 
+    /// <summary>Gets or sets the indent character count.</summary>
+    public int IndentCharCount { get; set; }
+
     // Gets or sets the current indent value.
-    private int Indent { get; set; }
+    private int IndentCount { get; set; }
 
     // Gets or sets the XML text.
     private string XML { get; set; }

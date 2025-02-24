@@ -158,14 +158,8 @@ namespace LJCDataUtility
         && NetCommon.HasItems(selectColumns))
       {
         retLists = new ColumnLists();
-        InsertBuilder = new TextBuilder(256)
-        {
-          NewLinePrefix = $"{Indent} "
-        };
-        SelectBuilder = new TextBuilder(256)
-        {
-          NewLinePrefix = $"{Indent} "
-        };
+        InsertBuilder = new TextBuilder(256);
+        SelectBuilder = new TextBuilder(256);
 
         // Add beginning value.
         InsertBuilder.Text($"{indent}(");
@@ -209,13 +203,13 @@ namespace LJCDataUtility
           // Add the list values.
           if ("sqlserver" == connectionType.ToLower())
           {
-            InsertBuilder.AddExpanded(insertName);
-            SelectBuilder.AddExpanded(selectName);
+            InsertBuilder.Format(insertName);
+            SelectBuilder.Format(selectName);
           }
           else
           {
-            InsertBuilder.AddExpanded($"`{insertName}`");
-            SelectBuilder.AddExpanded($"`{selectName}`");
+            InsertBuilder.Format($"`{insertName}`");
+            SelectBuilder.Format($"`{selectName}`");
           }
 
           // Add newline after default.

@@ -103,6 +103,9 @@ namespace LJCDataUtility
       {
         switch (propertyName.ToLower())
         {
+          case "connectiontype":
+            retValue = dataConfig.ConnectionType;
+            break;
           case "database":
             retValue = dataConfig.Database;
             break;

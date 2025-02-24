@@ -12,79 +12,106 @@ namespace LJCNetCommon
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    public TextBuilder(int capacity, StringBuilder builder = null)
+    public TextBuilder(int capacity = 32, StringBuilder builder = null)
     {
       if (null == builder)
       {
         builder = new StringBuilder(capacity);
-        NewLinePrefix = "  ";
         Delimiter = ", ";
-        CharLimit = 80;
-        IsNewLine = false;
+        LineLimit = 80;
+        IndentCharCount = 2;
+        IndentCount = 0;
         IsFirst = true;
-        Length = 0;
+        LineLength = 0;
+        WrapPrefix = "  ";
       }
       Builder = builder;
     }
     #endregion
 
-    #region Methods
+    #region Data Class Methods
 
     /// <summary>Implements the ToString() method.</summary>
     public override string ToString()
     {
       return Builder.ToString();
     }
+    #endregion
+
+    #region Append Methods
+
+    // Adds a delimiter if not the first list item.
+    /// <include path='items/Delimit/*' file='Doc/TextBuilder.xml'/>
+    public string Delimit(string text)
+    {
+      var retText = GetDelimit(text);
+      Text(retText);
+      return retText;
+    }
 
     // Adds a delimiter if not the first list item
-    /// <include path='items/AddExpanded/*' file='Doc/TextBuilder.xml'/>
-    public string AddDelimitBreak(string text)
+    /// <include path='items/Format/*' file='Doc/TextBuilder.xml'/>
+    public string Format(string text)
     {
-      var retText = GetWithDelimiter(text);
-      AddWithBreak(retText);
+      var retText = GetDelimit(text);
+      Wrap(retText);
       return retText;
     }
 
-    // Adds a newline if line length is greater than CharLength.
-    /// <include path='items/AddWithBreak/*' file='Doc/TextBuilder.xml'/>
-    public string AddWithBreak(string text)
+    /// <summary>Adds a line.</summary>
+    /// <param name="text">The next append value.</param>
+    public string Line(string text = null)
     {
-      var retText = GetWithBreak(text);
-      Text(retText);
-      if (IsNewLine)
+      var retText = GetIndented(text);
+
+      // Adds a new line even if text is null.
+      Builder.AppendLine(retText);
+      LineLength = retText.Length;
+
+      // Allow add of blank characters.
+      if (text != null
+        && text != string.Empty)
       {
-        Length = NewLinePrefix.Length;
+        IsFirst = false;
+        LineLength += retText.Length;
       }
       return retText;
     }
 
-    // Adds a delimiter if not the first list item.
-    /// <include path='items/AddWithDelimiter/*' file='Doc/TextBuilder.xml'/>
-    public string AddWithDelimiter(string text)
+    /// <summary>Adds text.</summary>
+    /// <param name="text">The next append value.</param>
+    public string Text(string text)
     {
-      var retText = GetWithDelimiter(text);
-      Text(retText);
-      return retText;
-    }
-
-    // Adds a newline if line length is greater than CharLength.
-    /// <include path='items/GetWithBreak/*' file='Doc/TextBuilder.xml'/>
-    public string GetWithBreak(string text)
-    {
-      string retText = text;
-
-      IsNewLine = false;
-      if (Length > CharLimit)
+      var retText = GetIndented(text);
+      if (retText != null
+        && retText != string.Empty)
       {
-        retText += "\r\n" + NewLinePrefix;
-        IsNewLine = true;
+        Builder.Append(retText);
+        IsFirst = false;
+        LineLength += retText.Length;
       }
       return retText;
     }
 
+    // Adds a newline if line length is greater than LineLimit.
+    /// <include path='items/Break/*' file='Doc/TextBuilder.xml'/>
+    public string Wrap(string text)
+    {
+      var retText = GetWrap(text, out bool isNewLine);
+      Text(retText);
+      if (isNewLine)
+      {
+        LineLength = retText.Length - 2;
+      }
+      return retText;
+    }
+    #endregion
+
+    #region Get Modified String Methods
+
     // Adds a delimiter if not the first list item.
-    /// <include path='items/GetWithDelimiter/*' file='Doc/TextBuilder.xml'/>
-    public string GetWithDelimiter(string text)
+    /// <include path='items/GetDelimit/*' file='Doc/TextBuilder.xml'/>
+    public string GetDelimit(string text)
     {
       string retText = text;
 
@@ -95,28 +122,54 @@ namespace LJCNetCommon
       return retText;
     }
 
-    /// <summary>Adds a line.</summary>
-    /// <param name="text">The next append value.</param>
-    public void Line(string text = null)
+    /// <summary>Gets a new line with prefixed indent.</summary>
+    public string GetIndented(string text)
     {
-      Builder.AppendLine(text);
+      string retText = "";
+
+      // Add indent to a new line with no indent.
+      if (0 == LineLength
+        && text != null)
+      {
+        retText = GetIndentString();
+      }
+
+      // Allow add of blank characters.
       if (text != null)
       {
-        IsFirst = false;
-        Length += text.Length;
+        retText += text;
       }
+      return retText;
     }
 
-    /// <summary>Adds text.</summary>
-    /// <param name="text">The next append value.</param>
-    public void Text(string text)
+    // Adds a newline if line length is greater than LineLimit.
+    /// <include path='items/GetBreak/*' file='Doc/TextBuilder.xml'/>
+    public string GetWrap(string text, out bool isNewLine)
     {
-      if (text != null)
+      string retText = text;
+
+      isNewLine = false;
+      var resultLength = LineLength + text.Length;
+
+      // Don't wrap a new line.
+      if (LineLength > GetIndentString().Length
+        && resultLength > LineLimit)
       {
-        Builder.Append(text);
-        IsFirst = false;
-        Length += text.Length;
+        var indent = GetIndentString();
+        retText = $"\r\n{indent}{WrapPrefix}{text}";
+        isNewLine = true;
       }
+      return retText;
+    }
+    #endregion
+
+    #region Other Methods
+
+    /// <summary>Returns the current indent string.</summary>
+    public string GetIndentString()
+    {
+      var retValue = new string(' ', IndentCount * IndentCharCount);
+      return retValue;
     }
     #endregion
 
@@ -125,23 +178,26 @@ namespace LJCNetCommon
     /// <summary>The internal StringBuilder class.</summary>
     public StringBuilder Builder { get; set; }
 
-    /// <summary>Gets or sets the character limit.</summary>
-    public int CharLimit { get; set; }
-
     /// <summary>Gets or sets the delimiter.</summary>
     public string Delimiter { get; set; }
+
+    /// <summary>Gets or sets the indent character count.</summary>
+    public int IndentCharCount { get; set; }
+
+    /// <summary>Gets or sets the indent count.</summary>
+    public int IndentCount { get; set; }
 
     /// <summary>Gets or sets the first item indicator.</summary>
     public bool IsFirst { get; set; }
 
-    /// <summary>Indicates if the text starts on a new line.</summary>
-    private bool IsNewLine { get; set; }
-
     /// <summary>Gets the current length.</summary>
-    public int Length { get; private set; }
+    public int LineLength { get; private set; }
+
+    /// <summary>Gets or sets the character limit.</summary>
+    public int LineLimit { get; set; }
 
     /// <summary>Gets or sets the new line prefix.</summary>
-    public string NewLinePrefix { get; set; }
+    public string WrapPrefix { get; set; }
     #endregion
   }
 }

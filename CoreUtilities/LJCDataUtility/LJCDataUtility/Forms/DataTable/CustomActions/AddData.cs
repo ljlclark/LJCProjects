@@ -47,20 +47,7 @@ namespace LJCDataUtility
           ParentKeys = ParentObject.ForeignKeys()
         };
 
-        var connectionType = ParentObject.ConnectionType;
-        if (!NetString.HasValue(connectionType))
-        {
-          // Default value.
-          connectionType = "SQLServer";
-        }
-
-        // Testing
-        if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
-          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        {
-          connectionType = "MySQL";
-        }
-
+        var connectionType = ParentObject.ComboConfigValue("ConnectionType");
         switch (connectionType.ToLower())
         {
           case "mysql":
@@ -187,7 +174,6 @@ namespace LJCDataUtility
         myProc.Begin(myProc.AddProcName);
 
         // Referenced table parameters.
-        string parentFindColumnName = null;
         string parmFindName = null;
         var isFirst = true;
         if (NetCommon.HasItems(data.ParentKeys))
@@ -197,7 +183,7 @@ namespace LJCDataUtility
             // "@tableNameFindName"
             var typeValue = TargetColumnType(dataKey);
             parmFindName = myProc.SQLVarName(dataKey.TargetTableName);
-            parmFindName += parentFindColumnName;
+            parmFindName += dataKey.TargetColumnName;
             myProc.Text($"  `{parmFindName}` {typeValue}");
             isFirst = false;
           }
