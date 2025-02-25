@@ -4,14 +4,7 @@
 <!-- TextBuilder.xml -->
 <items>
   <!-- Append Methods -->
-  <Delimit>
-    <summary>
-      Adds a delimiter if not the first list item.
-    </summary>
-    <param name="text">Next append value.</param>
-    <returns>The potentially indented and delimited new text value.</returns>
-  </Delimit>
-  <Format>
+  <Item>
     <summary>
       Adds a delimiter if not the first list item
       and adds a newline if line length is greater than CharLength.
@@ -20,24 +13,17 @@
     <returns>
       The potentially indented, delimited and wrapped new text value.
     </returns>
-  </Format>
+  </Item>
   <Line>
     <summary>Adds a line.</summary>
     <param name="text">Next append value.</param>
-    <returns>The potentially indented new text value.</returns>
+    <returns>The potentially indented and wrapped new text value.</returns>
   </Line>
   <Text>
     <summary>Adds text.</summary>
     <param name="text">The next append value.</param>
-    <returns>The potentially indented new text value.</returns>
+    <returns>The potentially indented and wrapped new text value.</returns>
   </Text>
-  <Wrap>
-    <summary>
-      Adds a newline if line length is greater than CharLength.
-    </summary>
-    <param name="text">Next append value.</param>
-    <returns>The potentially wrapped and indented new text value.</returns>
-  </Wrap>
   <!-- -->
   <!-- Get Modified String Methods -->
   <GetDelimited>

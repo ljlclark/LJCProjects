@@ -17,13 +17,14 @@ namespace LJCNetCommon
       {
         builder = new StringBuilder(capacity);
         Delimiter = ", ";
-        LineLimit = 80;
         IndentCharCount = 2;
         IndentCount = 0;
         IsFirst = true;
         LineLength = 0;
-        WrapPrefix = "  ";
+        LineLimit = 80;
         WrapAtDelimiter = true;
+        WrapEnabled = true;
+        WrapPrefix = "  ";
       }
       Builder = builder;
     }
@@ -40,69 +41,55 @@ namespace LJCNetCommon
 
     #region Append Methods
 
-    // Adds a delimiter if not the first list item.
-    /// <include path='items/Delimit/*' file='Doc/TextBuilder.xml'/>
-    public string Delimit(string text)
-    {
-      var retText = GetDelimited(text);
-      Text(retText);
-      return retText;
-    }
-
-    // Adds a delimiter if not the first list item
-    // and adds a newline if line length is greater than LineLimit.
-    /// <include path='items/Format/*' file='Doc/TextBuilder.xml'/>
-    public string Format(string text)
-    {
-      var retText = GetDelimited(text);
-      Wrap(retText);
-      return retText;
-    }
-
     // Adds a line.
     /// <include path='items/Line/*' file='Doc/TextBuilder.xml'/>
     public string Line(string text = null)
     {
-      var retText = GetIndented(text);
-
-      // Adds a new line even if text is null.
-      Builder.AppendLine(retText);
-      LineLength = retText.Length;
-
-      // Allow add of blank characters.
-      if (text != null
-        && text != string.Empty)
+      var retText = Text(text);
+      if (null == text)
       {
-        IsFirst = false;
-        LineLength += retText.Length;
+        LineLength = 0;
       }
+      retText += "\r\n";
+      Builder.AppendLine();
       return retText;
     }
 
-    // Adds text.
-    /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
-    public string Text(string text)
+    // Adds a delimiter if not the first list item
+    /// <include path='items/Item/*' file='Doc/TextBuilder.xml'/>
+    public string Item(string text)
     {
-      var retText = GetIndented(text);
-      if (retText != null
-        && retText != string.Empty)
-      {
-        Builder.Append(retText);
-        IsFirst = false;
-        LineLength += retText.Length;
-      }
+      var retText = GetDelimited(text);
+      Text(retText);
       return retText;
     }
 
     // Adds a newline if line length is greater than LineLimit.
-    /// <include path='items/Wrap/*' file='Doc/TextBuilder.xml'/>
-    public string Wrap(string text)
+    /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
+    public string Text(string text)
     {
-      var retText = GetWrapped(text, out bool isNewLine
-        , out string wrapText);
-      Text(retText);
-      if (isNewLine)
+      string wrapText = null;
+
+      var retText = GetIndented(text);
+
+      var isNewLine = false;
+      if (WrapEnabled)
       {
+        retText = GetWrapped(retText, out isNewLine, out wrapText);
+      }
+
+      Builder.Append(retText);
+      if (retText != null
+        && retText != string.Empty)
+      {
+        IsFirst = false;
+        LineLength += retText.Length;
+      }
+
+      if (WrapEnabled
+        && isNewLine)
+      {
+        LineLength = retText.Length - 2;
         if (wrapText != null)
         {
           LineLength = wrapText.Length;
@@ -111,10 +98,6 @@ namespace LJCNetCommon
           {
             LineLength += WrapPrefix.Length;
           }
-        }
-        else
-        {
-          LineLength = retText.Length - 2;
         }
       }
       return retText;
@@ -205,7 +188,11 @@ namespace LJCNetCommon
     {
       int retIndex = -1;
 
-      var resultLength = LineLength + text.Length;
+      var resultLength = LineLength;
+      if (text != null)
+      {
+        resultLength += text.Length;
+      }
       if (resultLength > LineLimit)
       {
         // Index of additional characters that will fit in LineLimit.
@@ -283,9 +270,12 @@ namespace LJCNetCommon
     public int LineLimit { get; set; }
 
     /// <summary>
-    /// Indicates that a wrap should occur at the a leading delimiter.
+    /// Indicates that a wrap should occur at a leading delimiter.
     /// </summary>
     public bool WrapAtDelimiter { get; set; }
+
+    /// <summary>Indicates if line wrapping is enabled.</summary>
+    public bool WrapEnabled { get; set; }
 
     /// <summary>Gets or sets the new line prefix.</summary>
     public string WrapPrefix { get; set; }
