@@ -170,7 +170,8 @@ namespace LJCDataUtility
 
       if (data.TableColumns != null)
       {
-        var myProc = new MyProcBuilder(ParentObject, data.DBName, data.TableName);
+        var myProc = new MyProcBuilder(ParentObject, data.DBName
+          , data.TableName);
         myProc.Begin(myProc.AddProcName);
 
         // Referenced table parameters.

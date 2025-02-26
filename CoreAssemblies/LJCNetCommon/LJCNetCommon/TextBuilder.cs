@@ -41,17 +41,25 @@ namespace LJCNetCommon
 
     #region Append Methods
 
+    // Adds text without processing.
+    public void Add(string text)
+    {
+      Builder.Append(text);
+    }
+
     // Adds a line.
     /// <include path='items/Line/*' file='Doc/TextBuilder.xml'/>
     public string Line(string text = null)
     {
       var retText = Text(text);
-      if (null == text)
-      {
-        LineLength = 0;
-      }
+      //if (null == text)
+      //{
+      //  LineLength = 0;
+      //}
       retText += "\r\n";
       Builder.AppendLine();
+      // *** Next Statement *** Add 2/26/25
+      LineLength = 0;
       return retText;
     }
 
@@ -68,11 +76,10 @@ namespace LJCNetCommon
     /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
     public string Text(string text)
     {
-      string wrapText = null;
-
       var retText = GetIndented(text);
 
       var isNewLine = false;
+      string wrapText = null;
       if (WrapEnabled)
       {
         retText = GetWrapped(retText, out isNewLine, out wrapText);

@@ -58,9 +58,9 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Builder Methods
+    #region TextBuilder Methods
 
-    /// <summary>Clears the Builder text.</summary>
+    // Clears the Builder text.
     internal void ClearText()
     {
       Builder = new TextBuilder(512);
@@ -68,7 +68,6 @@ namespace LJCDataUtility
     }
 
     // Checks if the builder text ends with a supplied value.
-    /// <include path='items/EndsWith/*' file='Doc/ProcBuilder.xml'/>
     internal bool EndsWith(string value)
     {
       bool retValue = false;
@@ -80,18 +79,32 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Adds a line to the builder.</summary>
-    /// <param name="text">The optional text value.</param>
-    internal void Line(string text = null)
+    // Returns the current indent string.
+    internal string GetIndentString()
     {
-      Builder.Line(text);
+      var retValue = Builder.GetIndentString();
+      return retValue;
     }
 
-    /// <summary>Adds text to the builder.</summary>
-    /// <param name="text">The text value.</param>
-    internal void Text(string text)
+    // Changes the IndentCount by the supplied value.
+    internal int Indent(int count = 1)
     {
-      Builder.Text(text);
+      var retCount = Builder.Indent(count);
+      return retCount;
+    }
+
+    // Adds a line to the builder.
+    internal string Line(string text = null)
+    {
+      var retLine = Builder.Line(text);
+      return retLine;
+    }
+
+    // Adds text to the builder.
+    internal string Text(string text)
+    {
+      var retText = Builder.Text(text);
+      return retText;
     }
     #endregion
 
@@ -118,6 +131,7 @@ namespace LJCDataUtility
       b.Line("GO");
       b.Line($"CREATE PROCEDURE [dbo].[{procedureName}]");
       string retString = b.ToString();
+
       Text(retString);
       return retString;
     }
@@ -129,6 +143,7 @@ namespace LJCDataUtility
       b.Line("AS");
       b.Line("BEGIN");
       var retValue = b.ToString();
+
       Text(retValue);
       return retValue;
     }
@@ -168,7 +183,7 @@ namespace LJCDataUtility
           {
             nameValue = dataColumn.NewName;
           }
-          b.Format(nameValue);
+          b.Item(nameValue);
         }
       }
 
@@ -715,13 +730,6 @@ namespace LJCDataUtility
     /// Create Foreign Key Procedure Name.</summary>
     internal string ForeignKeyProcName { get; set; }
 
-    /// <summary>Gets or sets the first item indicator.</summary>
-    public bool IsFirst
-    {
-      get { return Builder.IsFirst; }
-      set { Builder.IsFirst = value; }
-    }
-
     /// <summary>Gets or sets the
     /// Primary Key Name.</summary>
     internal string PKName { get; set; }
@@ -734,10 +742,6 @@ namespace LJCDataUtility
     /// Unique Key Name.</summary>
     internal string UQName { get; set; }
 
-    // Gets or sets the
-    // StringBuilder object.
-    private TextBuilder Builder { get; set; }
-
     // Gets or sets an indicator if Create Table already has defined columns.
     private bool HasColumns { get; set; }
 
@@ -746,6 +750,39 @@ namespace LJCDataUtility
 
     // Gets or sets the parent object reference.
     private DataUtilityList ParentObject { get; set; }
+    #endregion
+
+    #region TextBuilder Properties
+
+    // Gets or sets the delimiter.
+    internal string Delimiter {
+      get { return Builder.Delimiter; }
+      set { Builder.Delimiter = value; }
+    }
+
+    // Gets or sets the indent character count.
+    internal int IndentCharCount
+    {
+      get { return Builder.IndentCharCount; }
+      set { Builder.IndentCharCount = value; }
+    }
+
+    // Gets or sets the indent count.
+    internal int IndentCount
+    {
+      get { return Builder.IndentCount; }
+      set { Builder.IndentCount = value; }
+    }
+
+    // Gets or sets the first item indicator.
+    internal bool IsFirst
+    {
+      get { return Builder.IsFirst; }
+      set { Builder.IsFirst = value; }
+    }
+
+    // Gets or sets the TextBuilder object.
+    private TextBuilder Builder { get; set; }
     #endregion
   }
 

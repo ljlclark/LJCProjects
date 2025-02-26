@@ -203,13 +203,13 @@ namespace LJCDataUtility
           // Add the list values.
           if ("sqlserver" == connectionType.ToLower())
           {
-            InsertBuilder.Format(insertName);
-            SelectBuilder.Format(selectName);
+            InsertBuilder.Item(insertName);
+            SelectBuilder.Item(selectName);
           }
           else
           {
-            InsertBuilder.Format($"`{insertName}`");
-            SelectBuilder.Format($"`{selectName}`");
+            InsertBuilder.Item($"`{insertName}`");
+            SelectBuilder.Item($"`{selectName}`");
           }
 
           // Add newline after default.
