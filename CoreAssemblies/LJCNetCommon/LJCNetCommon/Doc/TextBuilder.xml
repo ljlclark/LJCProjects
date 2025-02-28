@@ -4,6 +4,10 @@
 <!-- TextBuilder.xml -->
 <items>
   <!-- Append Methods -->
+  <Add>
+    <summary>Adds text without processing.</summary>
+    <param name="text">Next append value.</param>
+  </Add>
   <Item>
     <summary>
       Adds a delimiter if not the first list item
@@ -46,7 +50,9 @@
     </summary>
     <param name="text">The next append value.</param>
     <param name="isNewLine">returns true if new line; otherwise false.</param>
-    <param name="wrapText">The new line wrapped text.</param>
+    <param name="removeLength">
+      The length to remove for new line characters.
+    </param>
     <returns>The potentially wrapped and indented new text value.</returns>
   </GetWrapped>
   <Indent>
