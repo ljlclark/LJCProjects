@@ -50,9 +50,6 @@
     </summary>
     <param name="text">The next append value.</param>
     <param name="isNewLine">returns true if new line; otherwise false.</param>
-    <param name="removeLength">
-      The length to remove for new line characters.
-    </param>
     <returns>The potentially wrapped and indented new text value.</returns>
   </GetWrapped>
   <Indent>

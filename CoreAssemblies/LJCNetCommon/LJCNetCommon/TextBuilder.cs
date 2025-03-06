@@ -84,42 +84,38 @@ namespace LJCNetCommon
 
       if (!isContinue)
       {
-        retText = GetWrapped(retText, out bool isNewLine
-          , out int removeLength);
+        retText = GetWrapped(retText, out bool isNewLine);
         SaveLine(retText);
 
+        // The text is wrapped.
         if (isNewLine)
         {
-          var lastIndex = retText.LastIndexOf("\r\n");
-
-          // Remove newlines from lineCount.
-          var textLastIndex = ToIndex(retText.Length);
-          var newLineCount = retText.Count(x => x == '\n');
-          textLastIndex -= newLineCount * 2;
-
-          if (lastIndex > -1
-            && lastIndex < textLastIndex)
-          {
-            // Skip last newline.
-            lastIndex += 2;
-            var lastLength = ToLength(lastIndex);
-            LineLength = retText.Length - lastLength + 1;
-          }
+          LineLength = NewLineLength(retText);
         }
       }
       return retText;
     }
 
-    private int ToLength(int index)
+    // Gets the new line length.
+    private int NewLineLength(string text)
     {
-      int retLength = index + 1;
-      return retLength;
-    }
+      var lastIndex = text.LastIndexOf("\r\n");
+      var retLineLength = LineLength;
 
-    private int ToIndex(int length)
-    {
-      int retLength = length - 1;
-      return retLength;
+      // Remove newlines from lineCount.
+      var textLastIndex = ToIndex(text.Length);
+      var newLineCount = text.Count(x => x == '\n');
+      textLastIndex -= newLineCount * 2;
+
+      if (lastIndex > -1
+        && lastIndex < textLastIndex)
+      {
+        // Skip last newline.
+        lastIndex += 2;
+        var lastLength = ToLength(lastIndex);
+        retLineLength = text.Length - lastLength + 1;
+      }
+      return retLineLength;
     }
 
     // Writes the line to the builder.
@@ -132,6 +128,20 @@ namespace LJCNetCommon
         LineLength += text.Length;
       }
       IsFirst = false;
+    }
+
+    // Convert length to index.
+    private int ToIndex(int length)
+    {
+      int retLength = length - 1;
+      return retLength;
+    }
+
+    // Convert index to length.
+    private int ToLength(int index)
+    {
+      int retLength = index + 1;
+      return retLength;
     }
     #endregion
 
@@ -173,38 +183,46 @@ namespace LJCNetCommon
 
     // Adds a newline if line length is greater than LineLimit.
     /// <include path='items/GetWrapped/*' file='Doc/TextBuilder.xml'/>
-    public string GetWrapped(string text, out bool isNewLine
-      , out int removeLength)
+    public string GetWrapped(string text, out bool isNewLine)
     {
       string retText = text;
 
       isNewLine = false;
-      removeLength = 0;
 
       var indent = GetIndentString();
       string buildText = "";
       var workText = text;
-      var workLength = TotalLength(workText);
-      while (workLength > LineLimit)
+      // Total of current LineLength + (not null)workText.Length;
+      var totalLength = TotalLength(workText);
+      while (totalLength > LineLimit)
       {
+        // Index where text can be added to current line
+        // and the remainder is wrapped.
         var wrapIndex = WrapIndex(workText);
         if (wrapIndex > -1)
         {
-          var addText = retText.Substring(0, wrapIndex);
+          // If wrap on space, includes the trailing wrap space.
+          var addLength = wrapIndex;
+          var addText = retText.Substring(0, addLength);
+          // Add a leading space.
           buildText += $" {addText}\r\n";
-          removeLength += 2;
 
-          string wrapText = workText.Substring(wrapIndex);
-          var wrapValue = $"{indent}{WrapPrefix}{wrapText}";
-          buildText += wrapValue;
-
-          workText = wrapText;
-          workLength = wrapText.Length;
-          if (workLength > LineLimit)
+          // Get next text up to LineLimit.
+          var nextLength = LineLimit;
+          if (workText.Length - wrapIndex < LineLimit)
           {
-            var line = wrapText.Substring(0, LineLimit);
-            buildText += $"{indent}{WrapPrefix}{line}";
-            workText = wrapText.Substring(LineLimit);
+            nextLength = workText.Length - wrapIndex;
+          }
+          string wrapText = workText.Substring(wrapIndex, nextLength);
+          buildText += $"{indent}{WrapPrefix}{wrapText}";
+
+          // End loop unless there is more text.
+          totalLength = 0;
+          var nextIndex = wrapIndex + ToIndex(nextLength);
+          if (ToIndex(workText.Length) < nextIndex)
+          {
+            workText = workText.Substring(nextIndex);
+            totalLength = workText.Length;
           }
           isNewLine = true;
         }
@@ -239,14 +257,24 @@ namespace LJCNetCommon
       if (totalLength > LineLimit)
       {
         // Index of additional characters that will fit in LineLimit.
-        var endIndex = LineLimit - LineLength;
+        //var wrapIndex = LineLimit - LineLength;
+
+        // Only get up to next LineLimit length;
+        var addLength = LineLength;
+        if (addLength > LineLimit)
+        {
+          addLength = LineLimit;
+        }
+        var wrapLength = LineLimit - addLength;
 
         // Get wrap point in allowed length.
         var onSpace = true;
         if (WrapAtDelimiter)
         {
           onSpace = false;
-          retIndex = text.LastIndexOf(Delimiter, endIndex);
+          // Wrap on the delimiter.
+          // Don't include the delimiter in the added value.
+          retIndex = text.LastIndexOf(Delimiter, wrapLength);
           if (-1 == retIndex)
           {
             onSpace = true;
@@ -256,10 +284,10 @@ namespace LJCNetCommon
         if (onSpace)
         {
           // Wrap on a space.
-          retIndex = text.LastIndexOf(" ", endIndex);
+          retIndex = text.LastIndexOf(" ", wrapLength);
           if (retIndex > -1)
           {
-            // Include the space in the wrapped value.
+            // Include the space in the added value.
             retIndex++;
           }
           else
