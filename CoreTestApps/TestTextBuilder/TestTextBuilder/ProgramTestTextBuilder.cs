@@ -15,7 +15,7 @@ namespace TestTextBuilder
       {
         WrapPrefix = "  "
       };
-      b.LineLimit = 20;
+      //b.LineLimit = 20;
 
       // Build a wrapping Item.
       b.Indent();

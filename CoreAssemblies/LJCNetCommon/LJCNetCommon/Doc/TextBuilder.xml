@@ -49,7 +49,6 @@
       Adds a newline if line length is greater than CharLength.
     </summary>
     <param name="text">The next append value.</param>
-    <param name="isNewLine">returns true if new line; otherwise false.</param>
     <returns>The potentially wrapped and indented new text value.</returns>
   </GetWrapped>
   <Indent>

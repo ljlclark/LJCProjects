@@ -84,64 +84,10 @@ namespace LJCNetCommon
 
       if (!isContinue)
       {
-        retText = GetWrapped(retText, out bool isNewLine);
+        retText = GetWrapped(retText);
         SaveLine(retText);
-
-        // The text is wrapped.
-        if (isNewLine)
-        {
-          LineLength = NewLineLength(retText);
-        }
       }
       return retText;
-    }
-
-    // Gets the new line length.
-    private int NewLineLength(string text)
-    {
-      var lastIndex = text.LastIndexOf("\r\n");
-      var retLineLength = LineLength;
-
-      // Remove newlines from lineCount.
-      var textLastIndex = ToIndex(text.Length);
-      var newLineCount = text.Count(x => x == '\n');
-      textLastIndex -= newLineCount * 2;
-
-      if (lastIndex > -1
-        && lastIndex < textLastIndex)
-      {
-        // Skip last newline.
-        lastIndex += 2;
-        var lastLength = ToLength(lastIndex);
-        retLineLength = text.Length - lastLength + 1;
-      }
-      return retLineLength;
-    }
-
-    // Writes the line to the builder.
-    private void SaveLine(string text)
-    {
-      Builder.Append(text);
-      if (text != null
-        && text != string.Empty)
-      {
-        LineLength += text.Length;
-      }
-      IsFirst = false;
-    }
-
-    // Convert length to index.
-    private int ToIndex(int length)
-    {
-      int retLength = length - 1;
-      return retLength;
-    }
-
-    // Convert index to length.
-    private int ToLength(int index)
-    {
-      int retLength = index + 1;
-      return retLength;
     }
     #endregion
 
@@ -183,13 +129,10 @@ namespace LJCNetCommon
 
     // Adds a newline if line length is greater than LineLimit.
     /// <include path='items/GetWrapped/*' file='Doc/TextBuilder.xml'/>
-    public string GetWrapped(string text, out bool isNewLine)
+    public string GetWrapped(string text)
     {
       string retText = text;
 
-      isNewLine = false;
-
-      var indent = GetIndentString();
       string buildText = "";
       var workText = text;
       // Total of current LineLength + (not null)workText.Length;
@@ -201,30 +144,32 @@ namespace LJCNetCommon
         var wrapIndex = WrapIndex(workText);
         if (wrapIndex > -1)
         {
-          // If wrap on space, includes the trailing wrap space.
           var addLength = wrapIndex;
-          var addText = retText.Substring(0, addLength);
-          // Add a leading space.
-          buildText += $" {addText}\r\n";
+          var addText = AddText(retText, addLength);
+          buildText += $"{addText}\r\n";
 
           // Get next text up to LineLimit.
-          var nextLength = LineLimit;
-          if (workText.Length - wrapIndex < LineLimit)
-          {
-            nextLength = workText.Length - wrapIndex;
-          }
-          string wrapText = workText.Substring(wrapIndex, nextLength);
-          buildText += $"{indent}{WrapPrefix}{wrapText}";
+          string wrapText = WrapText(workText, ref wrapIndex);
+          var indent = GetIndentString();
+          var saveText = $"{indent}{WrapPrefix}{wrapText}";
+          LineLength = saveText.Length;
+          buildText += saveText;
 
           // End loop unless there is more text.
           totalLength = 0;
-          var nextIndex = wrapIndex + ToIndex(nextLength);
-          if (ToIndex(workText.Length) < nextIndex)
+          var nextIndex = addLength + wrapText.Length + 1;
+          if (workText.Length > ToLength(nextIndex)
+            && ' ' == workText[nextIndex])
           {
-            workText = workText.Substring(nextIndex);
-            totalLength = workText.Length;
+            nextIndex++;
           }
-          isNewLine = true;
+          if (nextIndex < ToIndex(workText.Length))
+          {
+            var tempText = workText.Substring(nextIndex);
+            workText = tempText;
+            // Total of current LineLength + (not null)workText.Length;
+            totalLength = TotalLength(workText);
+          }
         }
       }
 
@@ -234,6 +179,53 @@ namespace LJCNetCommon
         retText = buildText;
       }
       return retText;
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Gets the text to add to the existing line.
+    private string AddText(string text, int addLength)
+    {
+      var retText = text.Substring(0, addLength);
+      if (LineLength > 0
+        && addLength > 0)
+      {
+        // Add a leading space.
+        retText = $" {retText}";
+      }
+      return retText;
+    }
+
+    // Writes the line to the builder.
+    private void SaveLine(string text)
+    {
+      Builder.Append(text);
+      if (text != null
+        && text != string.Empty)
+      {
+        LineLength += text.Length;
+      }
+      IsFirst = false;
+    }
+
+    // Convert length to index.
+    private int ToIndex(int length)
+    {
+      var retIndex = 0;
+
+      if (length > 0)
+      {
+        retIndex = length - 1;
+      }
+      return retIndex;
+    }
+
+    // Convert index to length.
+    private int ToLength(int index)
+    {
+      int retLength = index + 1;
+      return retLength;
     }
 
     // Gets the combined current line and text length.
@@ -256,9 +248,7 @@ namespace LJCNetCommon
       var totalLength = TotalLength(text);
       if (totalLength > LineLimit)
       {
-        // Index of additional characters that will fit in LineLimit.
-        //var wrapIndex = LineLimit - LineLength;
-
+        // Length of additional characters that fit in LineLimit.
         // Only get up to next LineLimit length;
         var addLength = LineLength;
         if (addLength > LineLimit)
@@ -288,7 +278,7 @@ namespace LJCNetCommon
           if (retIndex > -1)
           {
             // Include the space in the added value.
-            retIndex++;
+            //retIndex++;
           }
           else
           {
@@ -298,6 +288,28 @@ namespace LJCNetCommon
         }
       }
       return retIndex;
+    }
+
+    // Gets the text to wrap to a new line.
+    private string WrapText(string text, ref int wrapIndex)
+    {
+      var nextLength = LineLimit;
+      if (text.Length - wrapIndex < LineLimit)
+      {
+        nextLength = text.Length - wrapIndex;
+      }
+      if (LineLimit == nextLength)
+      {
+        var tempText = text.Substring(wrapIndex);
+        if (tempText.StartsWith(" "))
+        {
+          tempText = tempText.Substring(1);
+          wrapIndex++;
+        }
+        nextLength = tempText.LastIndexOf(" ", nextLength);
+      }
+      string retText = text.Substring(wrapIndex, nextLength);
+      return retText;
     }
     #endregion
 
