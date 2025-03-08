@@ -275,12 +275,7 @@ namespace LJCNetCommon
         {
           // Wrap on a space.
           retIndex = text.LastIndexOf(" ", wrapLength);
-          if (retIndex > -1)
-          {
-            // Include the space in the added value.
-            //retIndex++;
-          }
-          else
+          if (-1 == retIndex)
           {
             // Start wrap at the new text.
             retIndex = 0;
@@ -293,12 +288,24 @@ namespace LJCNetCommon
     // Gets the text to wrap to a new line.
     private string WrapText(string text, ref int wrapIndex)
     {
+      string retText = null;
+
+      // Default
       var nextLength = LineLimit;
+
+      // Get text at the wrap index.
       if (text.Length - wrapIndex < LineLimit)
       {
         nextLength = text.Length - wrapIndex;
+        retText = text.Substring(wrapIndex, nextLength);
+        if (retText.StartsWith(" "))
+        {
+          retText = retText.Substring(1);
+        }
       }
-      if (LineLimit == nextLength)
+
+      // Default to get text from next section.
+      if (nextLength == LineLimit)
       {
         var tempText = text.Substring(wrapIndex);
         if (tempText.StartsWith(" "))
@@ -307,8 +314,8 @@ namespace LJCNetCommon
           wrapIndex++;
         }
         nextLength = tempText.LastIndexOf(" ", nextLength);
+        retText = text.Substring(wrapIndex, nextLength);
       }
-      string retText = text.Substring(wrapIndex, nextLength);
       return retText;
     }
     #endregion
