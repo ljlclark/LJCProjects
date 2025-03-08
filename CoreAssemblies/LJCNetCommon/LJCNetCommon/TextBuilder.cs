@@ -290,12 +290,10 @@ namespace LJCNetCommon
     {
       string retText = null;
 
-      // Default
-      var nextLength = LineLimit;
-
-      // Get text at the wrap index.
-      if (text.Length - wrapIndex < LineLimit)
+      var nextLength = text.Length - wrapIndex;
+      if (nextLength <= LineLimit)
       {
+        // Get text at the wrap index.
         nextLength = text.Length - wrapIndex;
         retText = text.Substring(wrapIndex, nextLength);
         if (retText.StartsWith(" "))
@@ -303,16 +301,16 @@ namespace LJCNetCommon
           retText = retText.Substring(1);
         }
       }
-
-      // Default to get text from next section.
-      if (nextLength == LineLimit)
+      else
       {
+        // Get text from next section.
         var tempText = text.Substring(wrapIndex);
         if (tempText.StartsWith(" "))
         {
           tempText = tempText.Substring(1);
           wrapIndex++;
         }
+        nextLength = LineLimit;
         nextLength = tempText.LastIndexOf(" ", nextLength);
         retText = text.Substring(wrapIndex, nextLength);
       }

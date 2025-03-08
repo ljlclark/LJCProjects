@@ -47,6 +47,8 @@ namespace TestTextBuilder
         + "Now is the time for all good men to come to the aid of their country.");
       var result = b.ToString();
       Console.WriteLine(result);
+      Console.WriteLine("Press ENTER to continue . . .");
+      Console.ReadLine();
     }
   }
 }
