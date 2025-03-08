@@ -37,7 +37,7 @@ namespace TestTextBuilder
       b.Line();
       b.Line("That is a Item.");
       b.Line();
-      b.WrapPrefix = null;
+      //b.WrapPrefix = null;
       b.Text("Now is the time for all good men to come to the aid of their country.");
       b.Text("Now is the time for all good men to come to the aid of their country.");
       b.Text("Now is the time for all good men to come to the aid of their country.");

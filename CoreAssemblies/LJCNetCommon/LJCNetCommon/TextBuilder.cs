@@ -135,8 +135,8 @@ namespace LJCNetCommon
 
       string buildText = "";
       var workText = text;
-      // Total of current LineLength + (not null)workText.Length;
       var totalLength = TotalLength(workText);
+      UpdateLineLength(workText);
       while (totalLength > LineLimit)
       {
         // Index where text can be added to current line
@@ -167,7 +167,6 @@ namespace LJCNetCommon
           {
             var tempText = workText.Substring(nextIndex);
             workText = tempText;
-            // Total of current LineLength + (not null)workText.Length;
             totalLength = TotalLength(workText);
           }
         }
@@ -201,11 +200,6 @@ namespace LJCNetCommon
     private void SaveLine(string text)
     {
       Builder.Append(text);
-      if (text != null
-        && text != string.Empty)
-      {
-        LineLength += text.Length;
-      }
       IsFirst = false;
     }
 
@@ -238,6 +232,20 @@ namespace LJCNetCommon
         retLength += text.Length;
       }
       return retLength;
+    }
+
+    // Add text length to line length.
+    private void UpdateLineLength(string text)
+    {
+      int totalLength = TotalLength(text);
+      if (totalLength < LineLimit)
+      {
+        if (text != null
+          && text != string.Empty)
+        {
+          LineLength += text.Length;
+        }
+      }
     }
 
     // Calculates the index at which to wrap the text.
@@ -277,7 +285,7 @@ namespace LJCNetCommon
           retIndex = text.LastIndexOf(" ", wrapLength);
           if (-1 == retIndex)
           {
-            // Start wrap at the new text.
+            // Wrap index not found; Wrap at new text.
             retIndex = 0;
           }
         }
