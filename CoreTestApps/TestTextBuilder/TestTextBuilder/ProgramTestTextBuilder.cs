@@ -39,12 +39,12 @@ namespace TestTextBuilder
       b.Line();
       //b.WrapPrefix = null;
       b.Text("Now is the time for all good men to come to the aid of their country.");
-      b.Text("Now is the time for all good men to come to the aid of their country.");
-      b.Text("Now is the time for all good men to come to the aid of their country.");
+      b.Text("To be or not to be, that is the question on my lips at this moment.");
+      b.Text("Two roads converged in the woods into a yellow brick road and which one should I take now.");
       b.Line();
       b.Text("Now is the time for all good men to come to the aid of their country. "
-        + "Now is the time for all good men to come to the aid of their country. "
-        + "Now is the time for all good men to come to the aid of their country.");
+        + "To be or not to be, that is the question on my lips at this moment. "
+        + "Two roads converged in the woods into a yellow brick road and which one should I take now.");
       var result = b.ToString();
       Console.WriteLine(result);
       Console.WriteLine("Press ENTER to continue . . .");
@@ -52,9 +52,3 @@ namespace TestTextBuilder
     }
   }
 }
-//  Now is the time for all good men to come to the aid of their country. Now is 
-//  the time for all good men to come to the aid of their country. Now is the time 
-//  for all good men to come to the aid of their country.
-//         1         2         3         4         5         6         7         8 
-//12345678901234567890123456789012345678901234567890123456789012345678901234567890
-//  Now is the time for all good men to come to the aid of their country. Now is the time for all good men to come to the aid of their country. Now is the time for all good men to come to the aid of their country.
