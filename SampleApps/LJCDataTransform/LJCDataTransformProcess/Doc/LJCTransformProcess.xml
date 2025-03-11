@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTransformProcess.xml -->
+<items>
+  <TransformProcess>
+    <summary>
+      The DataTransform processing.
+    </summary>
+  </TransformProcess>
+  <TransformProcessC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dataConfigName">The Data Configuration name.</param>
+  </TransformProcessC>
+  <StartProcess>
+    <summary>
+      Starts the DataTransform processing.
+    </summary>
+    <param name="processGroupID">The ProcessGroup ID value.</param>
+    <param name="dataProcessID">The DataProcess ID value.</param>
+  </StartProcess>
+  <ProcessStepTask>
+    <summary>
+      Executes a Step Task.
+    </summary>
+    <param name="stepTask">The StepTask object.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </ProcessStepTask>
+</items>

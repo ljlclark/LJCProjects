@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TransformMaps.xml -->
+<items>
+  <TransformMaps>
+    <summary>
+      Represents a collection of TransformMap objects.
+    </summary>
+  </TransformMaps>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="mapID">The record ID.</param>
+    <param name="transformID">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCSearchID>
+    <summary>
+      Retrieve the collection element with name.
+    </summary>
+    <param name="mapID">The item name.</param>
+  </LJCSearchID>
+  <LJCSearchSourceID>
+    <summary>
+      Retrieve the collection element with Source ID.
+    </summary>
+    <param name="transformID">The Transform ID.</param>
+    <param name="sourceID">The Source ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchSourceID>
+  <LJCSearchTargetID>
+    <summary>
+      Retrieve the collection element with Target ID.
+    </summary>
+    <param name="transformID">The Transform ID.</param>
+    <param name="targetID">The Target ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchTargetID>
+  <LJCSearchColumnIDs>
+    <summary>
+      Retrieve the collection element with Source and Target IDs.
+    </summary>
+    <param name="transformID">The Transform ID.</param>
+    <param name="sourceColumnID">The Source ID.</param>
+    <param name="targetColumnID">The Target ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchColumnIDs>
+</items>

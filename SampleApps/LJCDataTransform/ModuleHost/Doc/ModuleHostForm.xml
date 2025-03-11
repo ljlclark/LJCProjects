@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ModuleHostForm.xml -->
+<items>
+  <ModuleHostFormC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="fileName">The file name.</param>
+    <param name="moduleName">The module name.</param>
+  </ModuleHostFormC>
+</items>

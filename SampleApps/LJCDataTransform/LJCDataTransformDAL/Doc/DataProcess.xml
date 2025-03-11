@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataProcess.xml -->
+<items>
+  <StatusName>
+    <summary>
+      Returns the ProcessStatus enum name from the enum value.
+    </summary>
+    <param name="StatusValue">The ProcessStatus enum value.</param>
+    <returns>The ProcessStatus enum name.</returns>
+  </StatusName>
+</items>

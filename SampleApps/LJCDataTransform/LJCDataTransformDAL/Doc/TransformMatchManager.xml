@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TransformMatchManager.xml -->
+<items>
+  <TransformMatchManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public TransformMatchManager(IDBService dbService, string dataConfigName
+        , string tableName = "TransformMatch")
+      </para>
+    </remarks>
+  </TransformMatchManagerC>
+  <LoadBySequence>
+    <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary>
+    <returns>The collection of data records.</returns>
+  </LoadBySequence>
+  <LoadWithTransformID>
+    <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary>
+    <param name="transformID">The TransformID value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadWithTransformID>
+  <GetTransformIDKey>
+    <summary>
+      Get the TransformID key record.
+    </summary>
+    <param name="transformID">The TransformID value.</param>
+    <returns>The TransformID key record.</returns>
+  </GetTransformIDKey>
+  <SetOrderBySequence>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderBySequence>
+</items>

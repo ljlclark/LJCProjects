@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LayoutColumnManager.xml -->
+<items>
+  <LayoutColumnManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public LayoutColumnManager(IDBService dbService, string dataConfigName
+          , string tableName = "LayoutColumn")
+      </para>
+    </remarks>
+  </LayoutColumnManagerC>
+  <LoadWithLayoutID>
+    <summary>
+      Retrieves a list of items by LayoutID.
+    </summary>
+    <param name="layoutID">The LayoutID value.</param>
+    <returns>The object collection.</returns>
+  </LoadWithLayoutID>
+  <LoadWithPrimaryKey>
+    <summary>
+      Retrieves a list of items by LayoutID where PrimaryKey is true.
+    </summary>
+    <param name="layoutID">The LayoutID value.</param>
+    <returns>The object collection.</returns>
+  </LoadWithPrimaryKey>
+  <RetrieveWithLayoutID>
+    <summary>
+    </summary>
+    <param name="layoutID"></param>
+    <returns></returns>
+  </RetrieveWithLayoutID>
+  <GetLayoutIDKey>
+    <summary>
+      Gets the LayoutID key.
+    </summary>
+    <param name="layoutID">The LayoutID value.</param>
+    <returns></returns>
+  </GetLayoutIDKey>
+</items>

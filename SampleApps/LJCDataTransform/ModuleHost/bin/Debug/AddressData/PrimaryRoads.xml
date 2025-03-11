@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ArrayOfPrimaryRoad xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>BYP</Code>
+    <Name>Bypass</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>CNTY</Code>
+    <Name>County</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>CR</Code>
+    <Name>County Road</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>EXPY</Code>
+    <Name>Expressway</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>HWY</Code>
+    <Name>Highway</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>I</Code>
+    <Name>Interstate</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>RD</Code>
+    <Name>Road</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>RT</Code>
+    <Name>Route</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>SR</Code>
+    <Name>State Road</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>ST</Code>
+    <Name>State</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>TSR</Code>
+    <Name>Township Road</Name>
+  </PrimaryRoad>
+  <PrimaryRoad>
+    <CountryCode>USA</CountryCode>
+    <Code>US</Code>
+    <Name>US</Name>
+  </PrimaryRoad>
+</ArrayOfPrimaryRoad>

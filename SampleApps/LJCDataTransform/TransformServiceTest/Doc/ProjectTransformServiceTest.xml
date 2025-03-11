@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectTransformServiceTest.xml -->
+<items>
+  <LJCTransformService>
+    <summary>
+      Represents the Data Transform Service.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>Data Transform Service</para>
+      <para>
+        The Data Transform Service executes a Transform Process for each
+        Transform Process in the specified Transform Process Group.
+      </para>
+      <para>
+        The Transform Service is currently in testing mode. In testing mode it
+        directly executes the LJCTransformProcess.StartProcess() method for each
+        Transform Process.&lt;br /&gt;
+        In production mode it will start a separate windows process for each
+        Transform Process.
+      </para>
+      <para>
+        The Data Transform Service is TransformServiceTest.LJCTransformService.
+      </para>
+      <para>
+        The Transform Process class is LJC.DataTransformProcess.LJCTransformProcess.
+      </para>
+      <para>
+        Projects TransformServiceTest and LJC.DataTransformProcess are part of the 
+        LJC.DataTransform solution.
+      </para>
+    </remarks>
+  </LJCTransformService>
+</items>

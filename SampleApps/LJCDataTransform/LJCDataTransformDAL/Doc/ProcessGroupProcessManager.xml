@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcessGroupProcessManager.xml -->
+<items>
+  <ProcessGroupProcessManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public ProcessGroupProcessManager(IDBService dbService, string dataConfigName
+        	, string tableName = "ProcessGroupProcess")
+      </para>
+    </remarks>
+  </ProcessGroupProcessManagerC>
+  <RetrieveWithIDs>
+    <summary>
+      Retrieves a data record with the supplied value.
+    </summary>
+    <param name="processGroupID">The ProcessGroupID value.</param>
+    <param name="processID">The ProcessID value.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithIDs>
+  <GetIDKeys>
+    <summary>
+      Get the ID key record.
+    </summary>
+    <param name="processGroupID">The ProcessGroupID value.</param>
+    <param name="processID">The ProcessID value.</param>
+    <returns>The ID key record.</returns>
+  </GetIDKeys>
+  <GetMaxSequence>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <param name="groupID">The GroupID value.</param>
+    <returns>The ProcessGroupProcess object.</returns>
+  </GetMaxSequence>
+</items>

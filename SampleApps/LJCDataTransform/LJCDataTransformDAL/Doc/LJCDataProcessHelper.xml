@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDataProcessHelper.xml -->
+<items>
+  <DataProcessHelper>
+    <summary>
+      Provides process helper methods.
+    </summary>
+  </DataProcessHelper>
+  <DataProcessHelperC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The DbServiceRef object.</param>
+    <param name="dataConfigName">The DataConfigName value.</param>
+  </DataProcessHelperC>
+  <ActivateGroupProcesses>
+    <summary>
+      Attempts to Activate the DataProcesses for a ProcessGroup.
+    </summary>
+    <param name="processGroupID">The ProcessGroup ID value.</param>
+    <returns></returns>
+  </ActivateGroupProcesses>
+  <!-- Status Methods -->
+  <ResetToStatus1>
+    <summary>
+      Resets the DataProcesses and associated Steps and StepTasks to the provided status.
+    </summary>
+    <param name="processGroupID">The ProcessGroup ID value.</param>
+    <param name="stepTaskStatus">The StepTask status.</param>
+    <param name="resetProcessesOnly">Indicates if only processes are reset.</param>
+    <returns>True if successfull, otherwise false.</returns>
+  </ResetToStatus1>
+  <ResetToStatus2>
+    <summary>
+      Resets the DataProcesses and associated Steps and StepTasks to the provided status.
+    </summary>
+    <param name="dataProcesses">The DataProcess collection.</param>
+    <param name="stepTaskStatus">The StepTask status.</param>
+    <param name="resetProcessesOnly">Indicates if only processes are reset.</param>
+    <returns>True if successfull, otherwise false.</returns>
+  </ResetToStatus2>
+  <AllStepsAndTasksInStatus>
+    <summary>
+      Check if all associated Steps and StepTasks are in the provided status.
+    </summary>
+    <param name="dataProcesses">The Processes collection.</param>
+    <param name="stepTaskStatus">The StepTask status.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </AllStepsAndTasksInStatus>
+  <!-- Get Data Methods -->
+  <RetrieveProcessGroup>
+    <summary>
+      Retrieves the ProcessGroup.
+    </summary>
+    <param name="processGroupID">The ProcessGroup ID.</param>
+    <returns>The ProcessGroup record.</returns>
+  </RetrieveProcessGroup>
+  <LoadGroupProcesses>
+    <summary>
+      Loads the ProcessGroup Processes.
+    </summary>
+    <param name="processGroupID">The ProcessGroup ID value.</param>
+    <returns>The Processes collection.</returns>
+  </LoadGroupProcesses>
+</items>

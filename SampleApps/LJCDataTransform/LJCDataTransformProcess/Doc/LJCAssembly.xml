@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCAssembly.xml -->
+<items>
+  <LJCAssembly>
+    <summary>
+      Provides Assembly reflection.
+    </summary>
+  </LJCAssembly>
+  <MethodInvoke>
+    <summary>
+      Invokes the method.
+    </summary>
+    <param name="parameters">An object array of method parameters.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </MethodInvoke>
+  <SetAssembly>
+    <summary>
+      Creates the Assembly property value.
+    </summary>
+    <param name="nameSpace">The namespace value.</param>
+    <param name="assemblyFileName">The file name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </SetAssembly>
+  <SetMethodInfo>
+    <summary>
+      Creates the MethodInfo property value.
+    </summary>
+    <param name="methodName">The method name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </SetMethodInfo>
+  <SetObjectInstance>
+    <summary>
+      Creates the ObjectInstance property value.
+    </summary>
+    <returns>True if successful, otherwise false.</returns>
+  </SetObjectInstance>
+  <SetObjectType>
+    <summary>
+      Creates the ObjectType property value.
+    </summary>
+    <param name="objectName">The reflection object name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </SetObjectType>
+</items>

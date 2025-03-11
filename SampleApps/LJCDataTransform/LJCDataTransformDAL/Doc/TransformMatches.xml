@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TransformMatches.xml -->
+<items>
+  <TransformMatches>
+    <summary>
+      Represents a collection of TransformMatch objects.
+    </summary>
+  </TransformMatches>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="matchID">The record ID.</param>
+    <param name="transformID">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <SearchID>
+    <summary>
+      Retrieve the collection element by name.
+    </summary>
+    <param name="matchID">The item name.</param>
+  </SearchID>
+</items>

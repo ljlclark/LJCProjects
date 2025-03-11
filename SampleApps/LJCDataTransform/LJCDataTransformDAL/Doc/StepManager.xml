@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- StepManager.xml -->
+<items>
+  <StepManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public StepManager(IDBService dbService, string dataConfigName
+        	, string tableName = "Step")
+      </para>
+    </remarks>
+  </StepManagerC>
+  <LoadWithProcessID>
+    <summary>
+      Retrieves a data record with the supplied value.
+    </summary>
+    <param name="processID">The process ID value.</param>
+    <returns>The data record.</returns>
+  </LoadWithProcessID>
+  <GetProcessIDKey>
+    <summary>
+      Get the process ID key record.
+    </summary>
+    <param name="processID">The ID value.</param>
+    <returns>The key record.</returns>
+  </GetProcessIDKey>
+  <SetOrderBySequence>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderBySequence>
+  <UpdateStatus>
+    <summary>
+      Update the Data Record status.
+    </summary>
+    <param name="dataRecord">The Data Record object.</param>
+  </UpdateStatus>
+</items>

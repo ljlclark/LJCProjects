@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableViewer.xml -->
+<items>
+  <TableViewerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The DbServiceRef object.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="tableName">The Table name.</param>
+  </TableViewerC>
+  <Reset>
+    <summary>
+      Resets the data access values.
+    </summary>
+    <param name="dbServiceRef">The DbServiceRef object.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="tableName">The Table name.</param>
+  </Reset>
+</items>

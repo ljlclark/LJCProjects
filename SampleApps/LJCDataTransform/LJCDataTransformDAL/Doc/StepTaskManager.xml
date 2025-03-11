@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- StepTaskManager.xml -->
+<items>
+  <TaskManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public TaskManager(IDBService dbService, string dataConfigName
+        	, string tableName = "Task")
+      </para>
+    </remarks>
+  </TaskManagerC>
+  <LoadWithStepID>
+    <summary>
+      Loads the StepTasks by StepID.
+    </summary>
+    <param name="stepID">The Step ID value.</param>
+    <returns>The StepTasks collection.</returns>
+  </LoadWithStepID>
+  <GetStepIDKey>
+    <summary>
+      Get the Step ID key record.
+    </summary>
+    <param name="stepID">The Step ID value.</param>
+    <returns>The Step ID key record.</returns>
+  </GetStepIDKey>
+  <UpdateStatus>
+    <summary>
+      Update the Data Record status.
+    </summary>
+    <param name="dataRecord">The Data Record object.</param>
+  </UpdateStatus>
+</items>

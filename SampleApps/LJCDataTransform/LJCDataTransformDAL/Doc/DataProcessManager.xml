@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataProcessManager.xml -->
+<items>
+  <DataProcessManager>
+    <summary>
+      Provides DataProcess specific data manipulation methods.
+    </summary>
+  </DataProcessManager>
+  <DataProcessManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data config name.</param>
+    <param name="tableName">The table name.</param>
+  </DataProcessManagerC>
+  <GetColumns>
+    <summary>
+      Returns a set of columns that match the supplied list.
+    </summary>
+    <param name="columnNames">The column names.</param>
+    <returns>The created object.</returns>
+  </GetColumns>
+  <Retrieve>
+    <summary>
+      Retrieves a Data Record from the database.
+    </summary>
+    <param name="keyColumns">The key record object.</param>
+    <param name="columnNames">The incuded column names.</param>
+    <param name="filters">The filter values.</param>
+    <param name="joins">The join values.</param>
+    <returns>The Data Object.</returns>
+  </Retrieve>
+  <!-- Custom Public Methods -->
+  <UpdateStatus>
+    <summary>
+      Updates the DataProcess status.
+    </summary>
+    <param name="dataRecord">The record value.</param>
+  </UpdateStatus>
+  <!-- Public Methods -->
+  <LoadNotInGroup>
+    <summary>
+      Loads the DataProcess records that are not in the group.
+    </summary>
+    <returns>The DataProcesses collection.</returns>
+  </LoadNotInGroup>
+  <LoadWithGroupID>
+    <summary>
+      Loads the DataProcess records with join on GroupID.
+    </summary>
+    <param name="groupID">The GroupID value.</param>
+    <returns>The DataProcesses collection.</returns>
+  </LoadWithGroupID>
+  <RetrieveWithGroupID>
+    <summary>
+      Retrieves the DataProcess record with join on GroupID.
+    </summary>
+    <param name="groupID">The GroupID value.</param>
+    <param name="processID">The ProcessID value.</param>
+    <returns>The DataProcess object.</returns>
+  </RetrieveWithGroupID>
+  <!-- Joins -->
+  <GetGroupIDJoins>
+    <summary>
+      Get Join on GroupID.
+    </summary>
+    <param name="outerJoin">The outer join indicator.</param>
+    <returns>The DbJoins object.</returns>
+  </GetGroupIDJoins>
+  <GetGroupIDJoinFilter>
+    <summary>
+      Get Filter with GroupID and ProcessID.
+    </summary>
+    <param name="groupID">The GroupID value.</param>
+    <param name="processID">The ProcessID value.</param>
+    <returns>The DbFilters object.</returns>
+  </GetGroupIDJoinFilter>
+  <GetNotInGroupFilter>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <returns>The DbFilters object.</returns>
+  </GetNotInGroupFilter>
+</items>

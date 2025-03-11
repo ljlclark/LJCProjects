@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectCommonModuleLib.xml -->
+<items>
+  <ColumnMapping>
+    <summary>
+      Represents a Column Mapping.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The CommonModule library contains classes for standard Task Transforms and
+        Task Source Actions.
+      </para>
+      <para>
+        The LJC.CommonModuleLib library is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+  </ColumnMapping>
+</items>

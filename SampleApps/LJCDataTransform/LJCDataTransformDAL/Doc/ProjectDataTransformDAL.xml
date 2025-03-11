@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectDataTransformDAL.xml -->
+<items>
+  <DataProcess>
+    <summary>
+      The Process table Data Record.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJC.DataTransform
+        programs.
+      </para>
+      <para>
+        The LJCDataTransformDAL library contains Data and Manager classes for
+        presenting an object oriented view of the Data Transform database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DataAccess to communicate
+        with the database.
+      </para>
+      <para>
+        The DataTransformDAL library is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+  </DataProcess>
+</items>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataSourceManager.xml -->
+<items>
+  <LoadNotInStepTask>
+    <summary>
+      Loads the DataSource records that are not in TaskSource.
+    </summary>
+    <param name="stepTaskID">The StepTask ID.</param>
+    <returns>The DataSources collection.</returns>
+  </LoadNotInStepTask>
+  <LoadWithTaskID>
+    <summary>
+      Loads a collection of data records with the supplied value.
+    </summary>
+    <param name="stepTaskID">The StepTask ID value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadWithTaskID>
+  <GetLoadFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <param name="stepTaskID">The StepTask ID value.</param>
+    <returns>The DbFilters object.</returns>
+  </GetLoadFilters>
+  <GetNotInTaskSourceFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <param name="stepTaskID">The StepTask ID.</param>
+    <returns>The DbFilters object.</returns>
+  </GetNotInTaskSourceFilters>
+</items>

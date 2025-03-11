@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TransformCommon.xml -->
+<items>
+  <CheckDependencies>
+    <summary>
+      Check for Depencency files.
+    </summary>
+    <returns>An Error string if there is an error.</returns>
+  </CheckDependencies>
+  <SetStatusColor>
+    <summary>
+      Sets the Grid Cell color based on the Status value.
+    </summary>
+    <param name="cell">The Cell object.</param>
+    <param name="statusID">The StatusID value.</param>
+  </SetStatusColor>
+</items>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectransformManager.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <link file="ProcessTables.html">--Process DB Diagram</link>
+    <link file="SourceLayoutTables.html">--SourceLayout DB Diagram</link>
+    <link file="TaskSourceTables.html">--TaskSource DB Diagram</link>
+    <link file="TransformTables.html">--Transform DB Diagram</link>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The Transform Manager modules are used to create and edit Transform
+        Process data.
+      </para>
+      <para>
+        The TransformManager program is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

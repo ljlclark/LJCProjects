@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<ArrayOfRoadLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Bypass</LookupName>
+    <LSoundex>BYPS</LSoundex>
+    <PSoundex>BYPS</PSoundex>
+    <Code>BYP</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>County</LookupName>
+    <LSoundex>CNTY</LSoundex>
+    <PSoundex>KNTY</PSoundex>
+    <Code>CNTY</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>County Road</LookupName>
+    <LSoundex>CNTY RD</LSoundex>
+    <PSoundex>KNTY RD</PSoundex>
+    <Code>CR</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Expressway</LookupName>
+    <LSoundex>EXPRSWY</LSoundex>
+    <PSoundex>EXPRSWY</PSoundex>
+    <Code>EXPY</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Highway</LookupName>
+    <LSoundex>HGHWY</LSoundex>
+    <PSoundex>HGHWY</PSoundex>
+    <Code>HWY</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>HIWAY</LookupName>
+    <LSoundex>HWY</LSoundex>
+    <PSoundex>HWY</PSoundex>
+    <Code>HWY</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>HIWY</LookupName>
+    <LSoundex>HWY</LSoundex>
+    <PSoundex>HWY</PSoundex>
+    <Code>HWY</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Interstate</LookupName>
+    <LSoundex>INTRSTT</LSoundex>
+    <PSoundex>INTRSTT</PSoundex>
+    <Code>I</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Road</LookupName>
+    <LSoundex>RD</LSoundex>
+    <PSoundex>RD</PSoundex>
+    <Code>RD</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Route</LookupName>
+    <LSoundex>RT</LSoundex>
+    <PSoundex>RT</PSoundex>
+    <Code>RT</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>State</LookupName>
+    <LSoundex>STT</LSoundex>
+    <PSoundex>STT</PSoundex>
+    <Code>ST</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>State Road</LookupName>
+    <LSoundex>STT RD</LSoundex>
+    <PSoundex>STT RD</PSoundex>
+    <Code>SR</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>Township Road</LookupName>
+    <LSoundex>TWNSHP RD</LSoundex>
+    <PSoundex>TWNSHP RD</PSoundex>
+    <Code>TSR</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>US</LookupName>
+    <LSoundex>US</LSoundex>
+    <PSoundex>US</PSoundex>
+    <Code>US</Code>
+  </RoadLookup>
+  <RoadLookup>
+    <CountryCode>USA</CountryCode>
+    <LookupName>IH</LookupName>
+    <LSoundex>IH</LSoundex>
+    <PSoundex>IH</PSoundex>
+    <Code>I</Code>
+  </RoadLookup>
+</ArrayOfRoadLookup>

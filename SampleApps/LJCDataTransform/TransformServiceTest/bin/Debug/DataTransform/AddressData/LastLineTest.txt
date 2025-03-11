@@ -1,0 +1,8 @@
+LastLine
+"New Orleans, LA 12345-1234"
+"New Orleans,LA 12345 - 1234"
+"New Orleans ,LA 12345 -1234"
+"New Orleans , LA 12345- 1234"
+"New Orleans LX 12345"
+"New Orleans, LA 1234"
+"New Orleans, LA 123"

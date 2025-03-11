@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{158C9B41-266B-44C0-BE18-E37BE45D7E6C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LJCTransformManager</RootNamespace>
+    <AssemblyName>LJCTransformManager</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCTransformManager.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJCDataAccess">
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBServiceLib">
+      <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCGridDataLib">
+      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCTextDataReaderLib">
+      <HintPath>..\External\LJCTextDataReaderLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormCommon">
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormControls">
+      <HintPath>..\External\LJCWinFormControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\DataSource\DataSourceGridCode.cs" />
+    <Compile Include="Forms\DataSource\DataSourceListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataViewer.cs" />
+    <Compile Include="Forms\LayoutColumn\List\LayoutColumnGridCode.cs" />
+    <Compile Include="Forms\LayoutColumn\List\LayoutColumnList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\List\LayoutColumnList.Designer.cs">
+      <DependentUpon>LayoutColumnList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\List\LayoutColumnListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\Module\LayoutColumnModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\Module\LayoutColumnModule.Designer.cs">
+      <DependentUpon>LayoutColumnModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\Module\LayoutColumnModuleCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\LayoutColumn\List\LayoutGridCode.cs" />
+    <Compile Include="Forms\LayoutColumn\Module\ModuleLayoutColumnGridCode.cs" />
+    <Compile Include="Forms\LayoutColumn\Module\ModuleLayoutGridCode.cs" />
+    <Compile Include="Forms\ProcessGroup\List\DataProcessDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\List\DataProcessDetail.Designer.cs">
+      <DependentUpon>DataProcessDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\List\DataProcessGridCode.cs" />
+    <Compile Include="Forms\ProcessGroup\Module\ModuleProcessGridCode.cs" />
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupGridCode.cs" />
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupDetail.Designer.cs">
+      <DependentUpon>ProcessGroupDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupModule.Designer.cs">
+      <DependentUpon>ProcessGroupModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\Module\ProcessGroupModuleCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\List\ProcessList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\List\ProcessList.Designer.cs">
+      <DependentUpon>ProcessList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessGroup\List\ProcessListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\List\StepGridCode.cs" />
+    <Compile Include="Forms\ProcessStep\Module\ModuleStepGridCode.cs" />
+    <Compile Include="Forms\ProcessStep\Module\ModuleTaskGridCode.cs" />
+    <Compile Include="Forms\ProcessStep\Module\ProcessStepModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\Module\ProcessStepModule.Designer.cs">
+      <DependentUpon>ProcessStepModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\Module\ProcessStepModuleCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\List\StepList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\List\StepList.Designer.cs">
+      <DependentUpon>StepList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\List\StepListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\SourceLayoutColumnGridCode.cs" />
+    <Compile Include="Forms\TaskSource\SourceGridCode.cs" />
+    <Compile Include="Forms\TaskSource\TaskGridCode.cs" />
+    <Compile Include="Forms\TaskSource\TransformGridCode.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\ProcessStep\List\StepDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\List\StepDetail.Designer.cs">
+      <DependentUpon>StepDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\Module\TaskDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessStep\Module\TaskDetail.Designer.cs">
+      <DependentUpon>TaskDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\LayoutColumnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\LayoutColumnDetail.Designer.cs">
+      <DependentUpon>LayoutColumnDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\LayoutDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\LayoutDetail.Designer.cs">
+      <DependentUpon>LayoutDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\SourceLayoutModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\SourceLayoutModule.Designer.cs">
+      <DependentUpon>SourceLayoutModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataSource\DataSourceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataSource\DataSourceDetail.Designer.cs">
+      <DependentUpon>DataSourceDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataSource\DataSourceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataSource\DataSourceList.Designer.cs">
+      <DependentUpon>DataSourceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SourceLayout\SourceLayoutModuleCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\MergeMapList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\MergeMapList.Designer.cs">
+      <DependentUpon>MergeMapList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskSource\MatchList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\MatchList.Designer.cs">
+      <DependentUpon>MatchList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TableViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TableViewer.Designer.cs">
+      <DependentUpon>TableViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TaskSourceModuleCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TaskSourceModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TaskSourceModule.Designer.cs">
+      <DependentUpon>TaskSourceModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TransformDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TransformDetail.Designer.cs">
+      <DependentUpon>TransformDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskSource\TransformDetailCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransformCommon.cs" />
+    <Compile Include="ValuesTransformManager.cs" />
+    <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="bin\Debug\SQLScript\CreateTransformDataDB.sql" />
+    <Content Include="bin\Debug\SQLScript\CreateTransformDataTables.sql" />
+    <Content Include="Doc\TableViewer.xml" />
+    <Content Include="Doc\TransformCommon.xml" />
+    <EmbeddedResource Include="Forms\DataSource\DataSourceList.resx">
+      <DependentUpon>DataSourceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LayoutColumn\List\LayoutColumnList.resx">
+      <DependentUpon>LayoutColumnList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LayoutColumn\Module\LayoutColumnModule.resx">
+      <DependentUpon>LayoutColumnModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessGroup\List\DataProcessDetail.resx">
+      <DependentUpon>DataProcessDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessGroup\Module\ProcessGroupDetail.resx">
+      <DependentUpon>ProcessGroupDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessGroup\Module\ProcessGroupModule.resx">
+      <DependentUpon>ProcessGroupModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessGroup\List\ProcessList.resx">
+      <DependentUpon>ProcessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessStep\Module\ProcessStepModule.resx">
+      <DependentUpon>ProcessStepModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessStep\List\StepList.resx">
+      <DependentUpon>StepList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\ProcessStep\List\StepDetail.resx">
+      <DependentUpon>StepDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessStep\Module\TaskDetail.resx">
+      <DependentUpon>TaskDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SourceLayout\LayoutColumnDetail.resx">
+      <DependentUpon>LayoutColumnDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SourceLayout\LayoutDetail.resx">
+      <DependentUpon>LayoutDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SourceLayout\SourceLayoutModule.resx">
+      <DependentUpon>SourceLayoutModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataSource\DataSourceDetail.resx">
+      <DependentUpon>DataSourceDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskSource\MergeMapList.resx">
+      <DependentUpon>MergeMapList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskSource\MatchList.resx">
+      <DependentUpon>MatchList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskSource\TableViewer.resx">
+      <DependentUpon>TableViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskSource\TaskSourceModule.resx">
+      <DependentUpon>TaskSourceModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskSource\TransformDetail.resx">
+      <DependentUpon>TransformDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJCDataTransformDAL\LJCDataTransformDAL.csproj">
+      <Project>{7a328382-47b3-48c0-ab67-d4da086f7af6}</Project>
+      <Name>LJCDataTransformDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJCDataTransformProcess\LJCDataTransformProcess.csproj">
+      <Project>{E8896FB5-E6BF-4BB4-A6CF-C905190CFD92}</Project>
+      <Name>LJCDataTransformProcess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Doc\DataViewer.xml" />
+    <Content Include="Doc\ProjectTransformManager.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

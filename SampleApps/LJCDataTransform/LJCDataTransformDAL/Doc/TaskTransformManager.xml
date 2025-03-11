@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TaskTransformManager.xml -->
+<items>
+  <TaskTransformManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public TaskTransformManager(IDBService dbService, string dataConfigName
+        , string tableName = "TaskTransform")
+      </para>
+    </remarks>
+  </TaskTransformManagerC>
+  <LoadByName>
+    <summary>
+      Loads a collection of data records ordered by Name.
+    </summary>
+    <returns>The collection of data records.</returns>
+  </LoadByName>
+  <LoadWithTaskID>
+    <summary>
+      Gets the TaskTransform data records by StepTaskID.
+    </summary>
+    <param name="stepTaskID">The StepTaskID value.</param>
+    <returns>The StepTask data records.</returns>
+  </LoadWithTaskID>
+  <GetTaskIDKey>
+    <summary>
+      Get the StepTaskID key.
+    </summary>
+    <param name="stepTaskID">The StepTaskID value.</param>
+    <returns>The StepTaskID key.</returns>
+  </GetTaskIDKey>
+  <SetOrderByName>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderByName>
+</items>

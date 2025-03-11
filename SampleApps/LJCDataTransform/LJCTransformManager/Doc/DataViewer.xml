@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataViewer.xml -->
+<items>
+  <DataViewerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The DbServiceRef object.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+  </DataViewerC>
+  <Show>
+    <summary>
+      Displays the Source data.
+    </summary>
+    <param name="dataSourceID">The DataSource ID.</param>
+  </Show>
+</items>

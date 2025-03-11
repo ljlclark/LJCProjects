@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTransformService.xml -->
+<items>
+  <StartTransform>
+    <summary>
+      Executes the Transform Processes for the Process Group.
+    </summary>
+    <param name="processGroupID">The ProcessGroupID value.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </StartTransform>
+</items>

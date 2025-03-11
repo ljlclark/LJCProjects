@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcessGroupProcesses.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="processGroupID">The Process Group ID.</param>
+    <param name="processID">The Process ID.</param>
+    <param name="sequence">The sequence value.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <GetMaxSequence>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <param name="groupID">The group ID.</param>
+    <returns>The DbFilters object.</returns>
+  </GetMaxSequence>
+</items>

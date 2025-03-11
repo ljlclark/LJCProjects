@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectDataTransformProcess.xml -->
+<items>
+  <Program>
+    <summary>
+      The Transform Process process entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The Transform Process library provides classes to execute Data Transform
+        Processes.
+      </para>
+      <para>
+        A Transform DataProcess contains Steps which are defined in the Transform
+        Process Data. Each Step in the DataProcess is executed in Sequence order.
+      </para>
+      <para>
+        A Transform Process Step contains StepTasks which are defined in the
+        Transform Process Data. Each StepTask in the Step is executed in
+        Sequence order.
+      </para>
+      <para>
+        The LJC.DataTransformProcess program is part of the LJC.DataTransform
+        solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

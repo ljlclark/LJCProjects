@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CommonModuleLib.xml -->
+<items>
+  <CommonModule>
+    <summary>
+      Executes an Action for all sources of a task.
+    </summary>
+  </CommonModule>
+  <Init>
+    <summary>
+      Executes the specified action.
+    </summary>
+    <param name="processID">The Process ID value.</param>
+    <param name="taskID">The Task ID value.</param>
+    <param name="actionName">The action name.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <returns>True if successful, otherwise false.</returns>
+  </Init>
+</items>

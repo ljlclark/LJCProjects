@@ -1,0 +1,11 @@
+﻿SSN, Address,Name,City1,State,Zip
+1, Victoria Country Homes Block 8 lot 6, Les Clark, "Obay, Polonco", ZN, 7106
+2, Victoria Country Homes Block 8 lot 6, Les Clark, "Obay, Polonco", ZN, "7103, 1234"
+3, Victoria Country Homes Block 8 , Cherrymae Clark, "Obay, Polonco", , 7104
+4, Victoria Country Homes Block 8 lot 6, Isabelle Clark, Polonco, ZN, 7105
+5, Victoria Country Homes Block 8 lot 6, CJ Clark, "Obay, Polonco", ZN, 7106
+6, Victoria Country Homes Block 8 lot 6, Les Clark, "Obay, Polonco", ZN, 7103
+7, Victoria Country Homes Block 8, Cherrymae Clark, "Obay, Polonco", ZN, 7104
+8, Victoria Country Homes Block 8 lot 6, Isabelle Clark, Polonco, ZN, 7105
+9, Victoria Country Homes Block 8 lot 6, CJ Clark, "Obay, Polonco", ZN, 7106
+10, Victoria Country Homes Block 8 lot 6, Les Clark, "Obay, Polonco", ZN, 7103

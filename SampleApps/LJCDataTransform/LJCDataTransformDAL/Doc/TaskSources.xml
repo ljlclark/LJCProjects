@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TaskSources.xml -->
+<items>
+  <TaskSources>
+    <summary>
+      Represents a collection of TaskSource objects.
+    </summary>
+  </TaskSources>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="stepTaskID">The record ID.</param>
+    <param name="dataSourceID">The item name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+</items>

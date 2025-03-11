@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ColumnMappings.xml -->
+<items>
+  <ColumnMappings>
+    <summary>
+      Represents a collection of ColumnMap objects.
+    </summary>
+  </ColumnMappings>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="sourceColumn">The "Source" column.</param>
+    <param name="targetColumn">The "Target" column.</param>
+    <param name="mapTypeID">The MapType ID.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+</items>

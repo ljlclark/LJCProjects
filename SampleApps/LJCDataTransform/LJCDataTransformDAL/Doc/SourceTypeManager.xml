@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- SourceTypeManager.xml -->
+<items>
+  <SourceTypeManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public SourceTypeManager(IDBService dbService, string dataConfigName
+        	, string tableName = "SourceType")
+      </para>
+    </remarks>
+  </SourceTypeManagerC>
+</items>

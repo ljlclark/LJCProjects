@@ -1,0 +1,64 @@
+AddressLine1
+P OBOX 321
+P. O. Box 123
+P. O.Box 234
+P.O. Box 345
+P.O.Box 456
+PO BOX 567
+POBOX 890
+123A North East Street South East Apartment E
+"123A North Street South North Apartment E"
+"123 N South Street E Front"
+"123 South Street # 1"
+A123 North West #1
+A123 North West Main street #1
+123B NorthWest Main Street
+123B Main Street Northwest
+123 County Highway 1
+123 CNTY HWY 2
+123 CNTY HIWY 3
+123 County Road A
+123 CNTY RD B
+123 CR C
+123 Florida CNTY RD D
+123 California CR E
+123 Expressway 1
+123 Highway 2
+1231 HWY 3 Bypass
+123F Highway 3 BYP
+1231 HIWAY 4 BYP Road
+123F Highway 4 Bypass RD
+123 HWY 5 Frontage RD
+1231 I10
+1232 I 10
+1233 IH10
+1234 Interstate HWY 10
+123F Interstate 10
+1231 I 10 Bypass
+123F Interstate 10 BYP
+1231 I 10 BYP Road
+1232 I10 BYP RD
+123F Interstate 10 Bypass RD
+123 I10 Frontage RD
+123 Loop 1
+1231 RD A
+123F Road B
+1231 RT 66
+1232 RTE 66
+123F Route 66
+1231 ST HWY 10
+123F State Highway 10
+1231 SR A
+1232 ST RD B
+123F State Road C
+1231 ST RT A
+1232 ST RTE A
+123F State Route A
+1231 US 41 Southwest
+1232 US HWY 41
+123F US Highway 41
+1231 Florida 440
+1232 Florida HWY 440
+123F FL Highway 440
+1231 AL ST HWY 50
+123F AL State Highway 50

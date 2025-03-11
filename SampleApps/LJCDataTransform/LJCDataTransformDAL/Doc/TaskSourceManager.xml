@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TaskSourceManager.xml -->
+<items>
+  <TaskSourceManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public TaskSourceManager(IDBService dbService, string dataConfigName
+        	, string tableName = "TaskSource")
+      </para>
+    </remarks>
+  </TaskSourceManagerC>
+  <RetrieveWithIDs>
+    <summary>
+      Retrieves a data record with the supplied value.
+    </summary>
+    <param name="stepTaskID">The StepTaskID value.</param>
+    <param name="dataSourceID">The DataSourceID value.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithIDs>
+  <GetIDKeys>
+    <summary>
+      Get the ID key record.
+    </summary>
+    <param name="stepTaskID">The StepTaskID value.</param>
+    <param name="dataSourceID">The DataSourceID value.</param>
+    <returns>The ID key record.</returns>
+  </GetIDKeys>
+</items>

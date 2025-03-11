@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TransformMapManager.xml -->
+<items>
+  <TransformMapManagerC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+    <remarks>
+      <para>
+        Syntax: public TransformMapManager(IDBService dbService, string dataConfigName
+        , string tableName = "TransformMap")
+      </para>
+    </remarks>
+  </TransformMapManagerC>
+  <LoadWithInValues>
+    <summary>
+      Loads a collection of data records using the DataSource ID.
+    </summary>
+    <param name="transformID">The Transform ID.</param>
+    <param name="sourceOrigin">Source or Target.</param>
+    <param name="inValues">The in values.</param>
+    <returns>The collection of data records.</returns>
+    <remarks>
+      Parameter sourceType 1 = Source, 2 = Target.
+    </remarks>
+  </LoadWithInValues>
+  <LoadWithTransformID>
+    <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary>
+    <param name="transformID">The TransformID value.</param>
+    <returns>The collection of data records.</returns>
+  </LoadWithTransformID>
+  <RetrieveWithID>
+    <summary>
+      Retrieves a Data Record with the supplied values.
+    </summary>
+    <param name="id">The ID value.</param>
+    <param name="transformID">The Transform ID.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithID>
+  <GetTransformIDKey>
+    <summary>
+      Get the TransformID key record.
+    </summary>
+    <param name="transformID">The TransformID value.</param>
+    <returns>The TransformID key record.</returns>
+  </GetTransformIDKey>
+  <GetInValueJoins>
+    <summary>
+      Creates and returns the Load Joins object.
+    </summary>
+    <param name="transformID">The TransformID value.</param>
+    <param name="sourceOrigin">Source or Target.</param>
+    <returns>The DBJoins object.</returns>
+  </GetInValueJoins>
+  <GetInValueFilters>
+    <summary>
+      Creates and returns the filters object.
+    </summary>
+    <param name="columnName">The From column name.</param>
+    <param name="inValues">The To column value.</param>
+    <returns>The DbFilters object.</returns>
+  </GetInValueFilters>
+  <SetOrderBySequence>
+    <summary>Sets the current OrderBy names.</summary>
+    <remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+  </SetOrderBySequence>
+</items>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- StepTask.xml -->
+<items>
+  <StepTask>
+    <summary>The Task table Data Record.</summary>
+    <remarks>
+      <para>
+        if the TaskType is "Program" then the ActionItemName contains three parts
+        separated with a forward slash. These parts are: AssemblyName, ClassName
+        and MethodName. E.G. LJC.CommonModuleLib/CommonModule/CreateTable&lt;br /&gt;
+        The assembly namespace must be the same as the assembly name.
+      </para>
+      <para>
+        If the TaskType is "StoredProcedure" then the ActionItemName is the name of
+        the stored procedure.
+      </para>
+    </remarks>
+  </StepTask>
+</items>

@@ -1,0 +1,1083 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AddressParser</name>
+    </assembly>
+    <members>
+        <member name="T:AddressParser.Directional">
+            <summary>
+      Represents an Address Directional component.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+      <para>Address Parsing Classes</para>
+      <para>
+        The main parsing class is StandardAddress. It contains methods for parsing
+        address strings and parsed component properties which contain the
+        standardized data.&lt;br /&gt;
+        The line parsing methods are: ParseMixedAddress(), ParseDeliveryAddressLine()
+        and ParseLastLine().
+      </para>
+      <para>Directional Standardizing Classes</para>
+      <para>
+        The Directional classes are for standardizing the Predirectionals and
+        Postdirectionals.&lt;br /&gt;
+        Examples of a Directional are: North(N), South(S) and Northwest(NW).&lt;br /&gt;
+        The Directional classes are: Directionals, Directional, NameComparer
+        and SpanishNameComparer.
+      </para>
+      <para>Suffix Standardizing Classes</para>
+      <para>
+        The Suffix classes are for standardizing the Suffix value.&lt;br /&gt;
+        Examples of a Suffix are: Street(ST), Drive(DR) and Avenue(AVE).&lt;br /&gt;
+        The Suffix classes are: Suffixes, Suffix, SuffixLookups, SuffixLookup,
+        SuffixCodeComparer, SuffixLSoundexComparer and SuffixPSoundexComparer.
+      </para>
+      <para>Unit Standardizing Objects</para>
+      <para>
+        The Unit classes are for standardizing the Secondary Address (Unit) value.&lt;br /&gt;
+        Examples of a Unit are: Apartment(APT), Building(BLDG) and Department(DEPT).&lt;br /&gt;
+        The Unit classes are: Units, Unit, UnitLookups, UnitLookup, UnitCodeComparer,
+        UnitNameComparer, UnitLSoundexComparer and UnitPSoundexComparer.
+      </para>
+      <para>State Standardizing Objects</para>
+      <para>
+        The State classes are for standardizing the State or Province value.&lt;br /&gt;
+        The State classes are: States, State, StateLookups, StateLookup,
+        StateLSoundexComparer and StatePSoundexComparer, .
+      </para>
+      <para>
+        The AddressParser program is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Directional.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Directional.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.Directional.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.Directional.CompareTo(AddressParser.Directional)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.Directional.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:AddressParser.Directional.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:AddressParser.Directional.SpanishName">
+            <summary>Gets or sets the SpanishName value.</summary>
+        </member>
+        <member name="T:AddressParser.NameComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:AddressParser.NameComparer.Compare(AddressParser.Directional,AddressParser.Directional)">
+            <summary>Compares two objects.</summary>
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.SpanishNameComparer">
+            <summary>Sort and search on Spanish Name value.</summary>
+        </member>
+        <member name="M:AddressParser.SpanishNameComparer.Compare(AddressParser.Directional,AddressParser.Directional)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.Directionals">
+            <summary>
+      Represents a collection of Directional objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Directionals.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns><remarks>
+      If the requested file does not exist, a default file will be created with
+      eight standard values. These are: "N", "NE", "NW", "S", "SE", "SW", "E"
+      and "W".
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Directionals.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Directionals.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="code">The Directional code.</param><param name="name">The Directional name.</param><param name="spanishName">The Spanish name.</param><returns>The Directional object.</returns>
+        </member>
+        <member name="M:AddressParser.Directionals.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:AddressParser.Directionals.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:AddressParser.Directionals.LJCSearchSpanishName(System.String)">
+            <summary>
+      Retrieve the collection element.
+    </summary><param name="spanishName">The Spanish Name value.</param><returns>The Directional object.</returns>
+        </member>
+        <member name="M:AddressParser.Directionals.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.Directionals.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.ErrorMessage">
+            <summary>
+            Represents an Address Parsing error.
+            </summary>
+        </member>
+        <member name="P:AddressParser.ErrorMessage.Line">
+            <summary>Gets or sets the error line.</summary>
+        </member>
+        <member name="P:AddressParser.ErrorMessage.Message">
+            <summary>Gets or sets the error message.</summary>
+        </member>
+        <member name="T:AddressParser.ErrorMessages">
+            <summary>
+            Represents a collection of ErrorMessage objects.
+            </summary>
+        </member>
+        <member name="T:AddressParser.StandardAddress">
+            <summary>
+      Provides methods to parse Address information into standardized component
+      properties. (R)
+    </summary><remarks>
+      Conforms to USPS AIS (Address Information System) products such as Zip+4
+      and City State files. Based on the USPS Pub28 PDF.
+      <para>
+        The line parsing methods are: ParseMixedAddress(), ParseDeliveryAddressLine()
+        and ParseLastLine().
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseMixedAddress(System.String)">
+            <summary>
+      Parses the combined Delivery Address and Last Line values.
+    </summary><param name="mixedAddress">The mixed address value.</param><returns>True if no errors, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseDeliveryAddressLine(System.String)">
+            <summary>
+      Parses the Delivery Address into the standardized DeliveryAddressLine
+      Property. It also parses the Delivery Address into the Component
+      Properties. (R)
+    </summary><param name="deliveryAddress">The Delivery Address line.</param><returns>True if no errors, otherwise false.</returns><remarks>
+      The 7 Delivery Address Component Properties are: AddressNumber,
+      Predirectional, StreetName, Suffix, Postdirectional, UnitType and
+      UnitNumber.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseLastLine(System.String)">
+            <summary>
+      Parses the Last Line into the standardized LastLine Property. It
+      also parses the Last Line into the Component Properties.
+      (R)
+    </summary><param name="lastLine">The Last Line value.</param><returns>True if no errors, otherwise falses.</returns><remarks>
+      The 4 Last Line Component Properties are: City, StateOrProvince,
+      Zipcode and Zip4.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParsePredirectional(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the Predirectional Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a Predirectional, otherwise false.</returns><remarks>
+      Decrements currentIndex by one if the token is a Predirectional.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParsePostdirectional(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the Postdirectional Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a Postdirectional, otherwise false.</returns><remarks>
+      Decrements currentIndex by one if the token is a Postdirectional.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseUnit(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the Unit Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a Unit, otherwise false.</returns><remarks>
+      Decrements currentIndex by one if the token is a non-range Unit.
+      Decrements currentIndex by two if the token is a range Unit.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseSuffix(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the Suffix Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a Suffix, otherwise false.</returns><remarks>
+      Decrements currentIndex by one if the token is a Suffix.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseAddressNumber(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the AddressNumber Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is an AddressNumber, otherwise false.</returns><remarks>
+      Does not change the currentIndex value.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseStreetName(System.Int32@)">
+            <summary>
+      Parses the tokens from the currentIndex to the appropriate end Index.
+    </summary><param name="currentIndex">The token index value.</param><returns>True if the token is a StreetName, otherwise false.</returns><remarks>
+      The end index is the first occurence of Postdirectional, UnitType
+      or UnitNumber.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.CreateDeliveryLine">
+            <summary>
+      Creates the Standardized Delivery Address Line from the Delivery Address
+      Properties.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LookupDirectional(System.String)">
+            <summary>
+      Search Directional Code and Name.
+    </summary><param name="lookupText">The lookup text.</param><returns>The Directional object.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LookupUnit(System.String)">
+            <summary>
+      Search Units Name and Code.
+    </summary><param name="lookupText">The lookup text.</param><returns>The Unit object.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LookupSuffix(System.String)">
+            <summary>
+      Search the SuffixLookup LookupName and Code.
+    </summary><param name="lookupText">The lookup text.</param><returns>The Suffix object.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseZipCode(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the Zipcode Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a Zipcode, otherwise false.</returns><remarks>
+      Decrements the currentIndex by one if Zipcode only.
+      Decrements the currentIndex by two if Zipcode and Zip4.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseState(System.String,System.Int32@)">
+            <summary>
+      Parses a token into the StateOrProvince Property.
+    </summary><param name="currentToken">The token value.</param><param name="currentIndex">The token index value.</param><returns>True if the token is a State, otherwise false.</returns><remarks>
+      Decrements the currentIndex by one if the token is a State.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LookupState(System.String)">
+            <summary>
+      Search the StateLookup LookupName, LSoundex and PSoundex.
+    </summary><param name="lookupText">The lookup text.</param><returns>The State object.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.ParseCity(System.Int32@)">
+            <summary>
+      Parses the tokens from index zero to the currentIndex.
+    </summary><param name="currentIndex">The token index value.</param><returns>True if the token is a City, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.CreateLastLine">
+            <summary>
+      Creates the standardized Last Line form the Last Line Properties.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StandardAddress.GetSeparatedValue(System.Boolean@,System.String)">
+            <summary>
+      Gets the value with a preceding blank if the value exists.
+    </summary><param name="valueStarted">
+      Indicates if the target string was already
+      populated with some values.
+    </param><param name="value">The value.</param><returns>The value preceded with a blank if valueStarted is true.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.DeliveryAddressPreviousIndex(System.Int32@)">
+            <summary>
+      Sets the currentIndex value to the previous index value if
+      it is within the token index range.
+    </summary><param name="currentIndex">The token index value.</param><returns>True if the index was decremented, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.DeliveryAddressToken(System.Int32)">
+            <summary>
+      Retrieves the token at the specified index.
+    </summary><param name="index">The token index value.</param><returns>The token value.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.IsCurrentTokenZip4(System.Int32,System.String@)">
+            <summary>
+      Checks if the current token is the Zip4 value.
+    </summary><param name="currentIndex">The token index value.</param><param name="currentToken">The current token value.</param><returns>True if the current token is the Zip4 value, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.IsCurrentTokenZipcode(System.Int32,System.String@)">
+            <summary>
+      Checks if the current token is the Zipcode value.
+    </summary><param name="currentIndex">The token index value.</param><param name="currentToken">The current token value.</param><returns>True if the current token is the Zipcode value, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LastLinePreviousIndex(System.Int32@)">
+            <summary>
+      Sets the currentIndex value to the previous index value if
+      it is within the token index range.
+    </summary><param name="currentIndex">The token index value.</param><returns>True if the index was decremented, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.LastLineToken(System.Int32)">
+            <summary>
+      Retrieves the token at the specified index.
+    </summary><param name="index">The token index value.</param><returns>The token value.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.IsDigits(System.String,System.Int32)">
+            <summary>
+      Checks a token value for digits.
+    </summary><param name="token">The token value.</param><param name="length">The required number of digits.</param><returns>True if it is digits, otherwise false.</returns>
+        </member>
+        <member name="M:AddressParser.StandardAddress.IsInt(System.String)">
+            <summary>
+      Checks a token value for an integer.
+    </summary><param name="token">The token value.</param><returns>True if it is an integer, otherwise false.</returns>
+        </member>
+        <member name="P:AddressParser.StandardAddress.AttentionLine">
+            <summary>Gets or sets the Attention Line.</summary>
+            <remarks>The Address Block Line 1.</remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.RecipientLine">
+            <summary>Gets or sets the Recipient Line.</summary>
+            <remarks>The Address Block Line 2.</remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.PhysicalAddressLine">
+            <summary>Gets or sets the Physical Address Line.</summary><remarks>
+      <para>The Address Block Line 3.</para>
+      <para>
+        This line is optional.
+        It may be used with P.O. numbers on Delivery Address Line.
+      </para>
+    </remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.SecondaryAddressLine">
+            <summary>Gets or sets the Secondary Address Line.</summary><remarks>
+      <para>The Address Block Line 4.</para>
+      <para>
+        This line is optional.
+        Alternate Secondary Address (Unit) information if it does not fit at the
+        end of the Delivery Address Line.
+      </para>
+    </remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.DeliveryAddressLine">
+            <summary>Gets or sets the Delivery Address Line.</summary><remarks>
+      <para>The Address Block Line 5.</para>
+      <para>This line contains up to 7 standard parts.</para>
+    </remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.LastLine">
+            <summary>Gets or sets the Last Line.</summary><remarks>
+      <para>The Address Block Line 6.</para>
+      <para>The Last Line contains (City State Zip-Zip4)</para>
+    </remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.CountryLine">
+            <summary>Gets or sets the Country Line.</summary>
+            <remarks>The Address Block Line 7.</remarks>
+        </member>
+        <member name="P:AddressParser.StandardAddress.DeliveryAddressTokens">
+            <summary>Gets or sets the Delivery Address Tokens.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.AddressNumber">
+            <summary>Gets or sets the Address Number value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Predirectional">
+            <summary>Gets or sets the Pre Directional value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.StreetName">
+            <summary>Gets or sets the Street Name value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Suffix">
+            <summary>Gets or sets the Suffix value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Postdirectional">
+            <summary>Gets or sets the Post Directional value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.UnitType">
+            <summary>Gets or sets the Unit Identifier.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.UnitNumber">
+            <summary>Gets or sets the Secondary Unit Number value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.LastLineTokens">
+            <summary>Gets or sets the Last Line Tokens.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.City">
+            <summary>Gets or sets the City value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.StateOrProvince">
+            <summary>Gets or sets the State or Province value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Zipcode">
+            <summary>Gets or sets the Zipcode value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Zip4">
+            <summary>Gets or sets the Zip4 value.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Directionals">
+            <summary>Gets or sets the Directionals collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.UnitLookups">
+            <summary>Gets or sets the Units Lookup collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Units">
+            <summary>Gets or sets the Unit collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.SuffixLookups">
+            <summary>Gets or sets the Suffix Lookup collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.Suffixes">
+            <summary>Gets or sets the Suffix collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.StateLookups">
+            <summary>Gets or sets the State Lookup collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.States">
+            <summary>Gets or sets the State collection.</summary>
+        </member>
+        <member name="P:AddressParser.StandardAddress.ErrorMessages">
+            <summary>Gets or sets the ErrorMessages value.</summary>
+        </member>
+        <member name="T:AddressParser.State">
+            <summary>
+      Represents an Address State component
+    </summary>
+        </member>
+        <member name="M:AddressParser.State.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.State.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.State.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.State.CompareTo(AddressParser.State)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.State.CountryCode">
+            <summary>Gets or sets the CountryCode value.</summary>
+        </member>
+        <member name="P:AddressParser.State.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:AddressParser.State.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="T:AddressParser.StateLookup">
+            <summary>
+      Represents a StateLookup component.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StateLookup.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StateLookup.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookup.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookup.CompareTo(AddressParser.StateLookup)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.StateLookup.CountryCode">
+            <summary>Gets or sets the CountryCode value.</summary>
+        </member>
+        <member name="P:AddressParser.StateLookup.LookupName">
+            <summary>Gets or sets the LookupName value.</summary>
+        </member>
+        <member name="P:AddressParser.StateLookup.LSoundex">
+            <summary>Gets or sets the Letter Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.StateLookup.PSoundex">
+            <summary>Gets or sets the Phonetic Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.StateLookup.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="T:AddressParser.StateLSoundexComparer">
+            <summary>Sort and search on Letter Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.StateLSoundexComparer.Compare(AddressParser.StateLookup,AddressParser.StateLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.StatePSoundexComparer">
+            <summary>Sort and search on Phonetic Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.StatePSoundexComparer.Compare(AddressParser.StateLookup,AddressParser.StateLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.StateLookups">
+            <summary>
+      Represents a colletion of StateLookup objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        from the State XML file.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StateLookups.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.StateLookups.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="countryCode">The Country code.</param><param name="code">The code value.</param><param name="lookupName">The lookup name.</param><returns>The StateLookup object.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCSearchLookupName(System.String,System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="countryCode">The Country code.</param><param name="lookupName">The lookup name.</param><returns>The StateLookup object.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCSearchLSoundex(System.String,System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="countryCode">The Country code.</param><param name="lSoundex">The Letter Soundex value.</param><returns>The StateLookup object.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCSearchPSoundex(System.String,System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="countryCode">The Country code.</param><param name="pSoundex">The Phonetic Soundex value.</param><returns>The StateLookup object.</returns>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.StateLookups.LJCGenerateSoundex">
+            <summary>
+      Generates the Soundex values.
+    </summary>
+        </member>
+        <member name="P:AddressParser.StateLookups.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.States">
+            <summary>
+      Represents a collection of State objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.States.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        with the fifty U.S. states, plus American Samoa(AS),
+        District of Columbia(DC), Federated States of Micronesia(FM), Guam(GU),
+        Marshall Islands(MH), Northern Mariana Islands(MP), Palau(PW),
+        Puerto Rico(PR) and Virgin Islands(VI).
+      </para>
+      <para>
+        A default StateLookup XML file will also be created if it does not exist.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.States.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.States.Add(System.String,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="countryCode">The Country code.</param><param name="code">The State code.</param><param name="name">The State name.</param><returns>The State object.</returns>
+        </member>
+        <member name="M:AddressParser.States.LJCSearchCode(System.String,System.String)">
+            <summary>
+      Retrieve the collection element.
+    </summary><param name="countryCode">The Country code.</param><param name="code">The code.</param><returns>The State object.</returns>
+        </member>
+        <member name="M:AddressParser.States.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.States.LJCUpdateLookups(AddressParser.StateLookups)">
+            <summary>
+      Updates the Lookups object.
+    </summary><param name="stateLookups">The StateLookups object.</param><returns>The updated object.</returns>
+        </member>
+        <member name="P:AddressParser.States.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.Suffix">
+            <summary>
+      Represents a Suffix component.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Suffix.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Suffix.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.Suffix.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.Suffix.CompareTo(AddressParser.Suffix)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.Suffix.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:AddressParser.Suffix.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="T:AddressParser.Suffixes">
+            <summary>
+      Represents a colletion of StateLookup objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Suffixes.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created with
+        202 standard Suffixes.
+      </para>
+      <para>
+        A default SuffixLookup XML file will also be created if it does not exist.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Suffixes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Suffixes.Add(System.String,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="code">The item code.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:AddressParser.Suffixes.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:AddressParser.Suffixes.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Suffixes.LJCUpdateLookups(AddressParser.SuffixLookups)">
+            <summary>
+      Updates the Lookups object.
+    </summary><param name="suffixLookups">The SuffixLookups object.</param><returns>The updated object.</returns>
+        </member>
+        <member name="P:AddressParser.Suffixes.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.SuffixLookup">
+            <summary>
+      Represents a SuffixLookup component.
+    </summary>
+        </member>
+        <member name="M:AddressParser.SuffixLookup.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.SuffixLookup.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookup.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookup.CompareTo(AddressParser.SuffixLookup)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.SuffixLookup.LookupName">
+            <summary>Gets or sets the LookupName value.</summary>
+        </member>
+        <member name="P:AddressParser.SuffixLookup.LSoundex">
+            <summary>Gets or sets the Letter Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.SuffixLookup.PSoundex">
+            <summary>Gets or sets the Phonetic Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.SuffixLookup.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="T:AddressParser.SuffixLSoundexComparer">
+            <summary>Sort and search on Letter Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.SuffixLSoundexComparer.Compare(AddressParser.SuffixLookup,AddressParser.SuffixLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.SuffixPSoundexComparer">
+            <summary>Sort and search on Phonetic Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.SuffixPSoundexComparer.Compare(AddressParser.SuffixLookup,AddressParser.SuffixLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.SuffixLookups">
+            <summary>
+      Represents a colletion of SuffixLookup objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        from the Suffix XML file and 48 standard lookup values.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.Add(System.String,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="code">The code value.</param><param name="lookupName">The lookup name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCSearchLookupName(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="lookupName">The lookup name.</param><returns>The SuffixLookup value.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCSearchLSoundex(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="lSoundex">The Letter Soundex value.</param><returns>The SuffixLookup value.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCSearchPSoundex(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="pSoundex">The Phonetic Soundex value.</param><returns>The SuffixLookup value.</returns>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.SuffixLookups.LJCGenerateSoundex">
+            <summary>
+      Generates the Soundex values.
+    </summary>
+        </member>
+        <member name="P:AddressParser.SuffixLookups.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.Unit">
+            <summary>
+      Represents a Unit component.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Unit.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Unit.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.Unit.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.Unit.CompareTo(AddressParser.Unit)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.Unit.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="P:AddressParser.Unit.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:AddressParser.Unit.RequiresRange">
+            <summary>Gets or sets the RequiresRange value.</summary>
+        </member>
+        <member name="T:AddressParser.UnitNameComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:AddressParser.UnitNameComparer.Compare(AddressParser.Unit,AddressParser.Unit)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.UnitLookup">
+            <summary>
+      Represents a UnitLookup component.
+    </summary>
+        </member>
+        <member name="M:AddressParser.UnitLookup.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.UnitLookup.Clone">
+            <summary>
+      Creates and returns a clone of this object.
+    </summary><returns>A reference to the cloned object.</returns>
+        </member>
+        <member name="M:AddressParser.UnitLookup.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:AddressParser.UnitLookup.CompareTo(AddressParser.UnitLookup)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the object.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:AddressParser.UnitLookup.LookupName">
+            <summary>Gets or sets the LookupName value.</summary>
+        </member>
+        <member name="P:AddressParser.UnitLookup.LSoundex">
+            <summary>Gets or sets the Letter Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.UnitLookup.PSoundex">
+            <summary>Gets or sets the Phonetic Soundex value.</summary>
+        </member>
+        <member name="P:AddressParser.UnitLookup.Code">
+            <summary>Gets or sets the Code value.</summary>
+        </member>
+        <member name="T:AddressParser.UnitLSoundexComparer">
+            <summary>Sort and search on Letter Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.UnitLSoundexComparer.Compare(AddressParser.UnitLookup,AddressParser.UnitLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.UnitPSoundexComparer">
+            <summary>Sort and search on Phonetic Soundex value.</summary>
+        </member>
+        <member name="M:AddressParser.UnitPSoundexComparer.Compare(AddressParser.UnitLookup,AddressParser.UnitLookup)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:AddressParser.UnitLookups">
+            <summary>
+      Represents a colletion of SuffixLookup objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        from the Unit XML file.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.UnitLookups.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.UnitLookups.Add(System.String,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="code">The code value.</param><param name="lookupName">The lookup name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCSearchLookupName(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="lookupName">The lookup name.</param><returns />
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCSearchLSoundex(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="lSoundex">The Letter Soundex value.</param><returns />
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCSearchPSoundex(System.String)">
+            <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary><param name="pSoundex">The Phonetic Soundex value.</param><returns />
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.UnitLookups.LJCGenerateSoundex">
+            <summary>
+      Generates the Soundex values.
+    </summary>
+        </member>
+        <member name="P:AddressParser.UnitLookups.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:AddressParser.Units">
+            <summary>
+      Represents a colletion of Unit objects.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Units.LJCDeserialize(System.String@,System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="errorText">The error text.</param><param name="fileSpec">The XML file specification.</param><returns>The deserialized object.</returns><remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created with
+        24 standard Units.
+      </para>
+      <para>
+        A default UnitLookup XML file will also be created if it does not exist.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Units.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:AddressParser.Units.Add(System.String,System.String,System.Boolean)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="code">The Code value.</param><param name="name">The Name value.</param><param name="requiresRange">The RequiresRange value.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:AddressParser.Units.LJCSearchCode(System.String)">
+            <summary>
+      Retrieve the collection element with code.
+    </summary><param name="code">The item code.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:AddressParser.Units.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:AddressParser.Units.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:AddressParser.Units.LJCUpdateLookups(AddressParser.UnitLookups)">
+            <summary>
+      Updates the Lookups object.
+    </summary><param name="unitLookups">The UnitLookups object.</param><returns>The updated object.</returns>
+        </member>
+        <member name="P:AddressParser.Units.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+    </members>
+</doc>
