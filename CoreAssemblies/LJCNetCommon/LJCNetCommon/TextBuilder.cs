@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextBuilder.cs
-using System.Linq;
 using System.Text;
 
 namespace LJCNetCommon
@@ -212,7 +211,6 @@ namespace LJCNetCommon
     private int TextLength(string text)
     {
       int retLength = 0;
-      //if (NetString.HasValue(text))
       if (text != null)
       {
         retLength = text.Length;
@@ -327,7 +325,6 @@ namespace LJCNetCommon
           tempText = tempText.Substring(1);
           startIndex++;
         }
-        // *** Next Statement *** Add 3/11/25
         nextLength = LineLimit - TextLength(WrapPrepend());
         nextLength = tempText.LastIndexOf(" ", nextLength);
         retText = text.Substring(startIndex, nextLength);
@@ -347,27 +344,14 @@ namespace LJCNetCommon
 
     // Changes the IndentCount by the supplied value.
     /// <include path='items/Indent/*' file='Doc/TextBuilder.xml'/>
-    public int Indent(int count = 1)
+    public int Indent(int increment = 1)
     {
-      IndentCount += count;
+      IndentCount += increment;
       if (IndentCount < 0)
       {
         IndentCount = 0;
       }
       return IndentCount;
-    }
-
-    // Check for wrap at the delimiter.
-    private bool IsWrapAtDelimiter(char wrapChar)
-    {
-      bool retValue = false;
-
-      if (WrapAtDelimiter
-        && Delimiter[0] == wrapChar)
-      {
-        retValue = true;
-      }
-      return retValue;
     }
     #endregion
 

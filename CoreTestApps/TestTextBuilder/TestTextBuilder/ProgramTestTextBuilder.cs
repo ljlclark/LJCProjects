@@ -40,12 +40,12 @@ namespace TestTextBuilder
       //b.WrapPrefix = null;
       b.Text("Now is the time for all good men to come to the aid of their country.");
       b.Text("To be or not to be, that is the question on my lips at this moment.");
-      b.Text("Two roads converged in the woods into a yellow brick road and which one should I take now.");
+      b.Text("Two roads converged in the woods into a yellow brick road and which one should I take now. ");
       b.Text("This should be my final test.");
       b.Line();
       b.Text("Now is the time for all good men to come to the aid of their country. "
         + "To be or not to be, that is the question on my lips at this moment. "
-        + "Two roads converged in the woods into a yellow brick road and which one should I take now."
+        + "Two roads converged in the woods into a yellow brick road and which one should I take now. "
         + "This should be my final test.");
       var result = b.ToString();
       Console.WriteLine(result);

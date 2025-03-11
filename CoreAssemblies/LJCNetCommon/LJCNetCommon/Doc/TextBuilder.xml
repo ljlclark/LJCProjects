@@ -55,7 +55,7 @@
     <summary>
       Changes the IndentCount by the supplied value.
     </summary>
-    <param name="count">The amount to change.</param>
+    <param name="increment">The amount to change.</param>
     <returns>The current IndentCount value.</returns>
   </Indent>
 </items>
