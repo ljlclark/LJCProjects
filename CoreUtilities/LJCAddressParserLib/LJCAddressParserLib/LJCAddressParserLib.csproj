@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A9BDB14-8CC2-4292-BA12-274C11C84766}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LJCAddressParserLib</RootNamespace>
+    <AssemblyName>LJCAddressParserLib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCAddressParserLib.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Directional.cs" />
+    <Compile Include="Directionals.cs" />
+    <Compile Include="ErrorMessage.cs" />
+    <Compile Include="ErrorMessages.cs" />
+    <Compile Include="PrimaryRoad.cs" />
+    <Compile Include="PrimaryRoads.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoadLookup.cs" />
+    <Compile Include="RoadLookups.cs" />
+    <Compile Include="StandardAddress.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="StateLookup.cs" />
+    <Compile Include="StateLookups.cs" />
+    <Compile Include="States.cs" />
+    <Compile Include="Suffix.cs" />
+    <Compile Include="Suffixes.cs" />
+    <Compile Include="SuffixLookup.cs" />
+    <Compile Include="SuffixLookups.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="UnitLookup.cs" />
+    <Compile Include="UnitLookups.cs" />
+    <Compile Include="Units.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Doc\Directionals.xml" />
+    <Content Include="Doc\PrimaryRoads.xml" />
+    <Content Include="Doc\ProjectAddressParser.xml" />
+    <Content Include="Doc\RoadLookups.xml" />
+    <Content Include="Doc\StandardAddress.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Doc\State.xml" />
+    <Content Include="Doc\StateLookup.xml" />
+    <Content Include="Doc\StateLookups.xml" />
+    <Content Include="Doc\States.xml" />
+    <Content Include="Doc\Suffix.xml" />
+    <Content Include="Doc\Suffixes.xml" />
+    <Content Include="Doc\SuffixLookup.xml" />
+    <Content Include="Doc\SuffixLookups.xml" />
+    <Content Include="Doc\Unit.xml" />
+    <Content Include="Doc\UnitLookup.xml" />
+    <Content Include="Doc\UnitLookups.xml" />
+    <Content Include="Doc\Units.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

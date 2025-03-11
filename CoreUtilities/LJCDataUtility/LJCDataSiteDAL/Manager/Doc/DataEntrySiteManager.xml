@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcBuilder.xml -->
+<items>
+  <RetrieveWithPrimary>
+    <summary>
+      Retrieves a record with the supplied values.
+    </summary>
+    <param name="dataEntryID">The Entry ID.</param>
+    <param name="dataEntrySiteID">The Entry site ID.</param>
+    <param name="dataSiteID">The site ID.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithPrimary>
+  <PrimaryKey>
+    <summary>
+      Gets the primary key columns.
+    </summary>
+    <param name="dataEntryID">The Entry ID.</param>
+    <param name="dataEntrySiteID">The Entry site ID.</param>
+    <param name="dataSiteID">The site ID.</param>
+    <returns>The primary keys object.</returns>
+  </PrimaryKey>
+</items>

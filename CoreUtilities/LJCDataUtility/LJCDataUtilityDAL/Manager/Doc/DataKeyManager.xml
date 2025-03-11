@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataColumnManager.xml -->
+<items>
+  <Add>
+    <summary>
+      Adds a Data Record to the database.
+    </summary>
+    <param name="dataObject">The data record.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="includeNull">Include null indicator.</param>
+    <returns>The Data Object with the DB assigned key values.</returns>
+  </Add>
+  <LoadWithType>
+    <summary>
+      Loads records with the supplied values.
+    </summary>
+    <param name="parentID">The parent ID.</param>
+    <param name="keyType">The key type name.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns></returns>
+  </LoadWithType>
+  <RetrieveWithType>
+    <summary>
+      Retrieves a record with the supplied values.
+    </summary>
+    <param name="parentID">The parent ID.</param>
+    <param name="parentSiteID">The parent site ID.</param>
+    <param name="keyType">The key type name.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The retrieved record object.</returns>
+  </RetrieveWithType>
+  <TypeKey>
+    <summary>
+      Gets the Type key columns.
+    </summary>
+    <param name="parentID">The Parent ID value.</param>
+    <param name="parentSiteID">The parent site ID.</param>
+    <param name="keyType">The key type name.</param>
+    <returns>The type keys object.</returns>
+  </TypeKey>
+</items>

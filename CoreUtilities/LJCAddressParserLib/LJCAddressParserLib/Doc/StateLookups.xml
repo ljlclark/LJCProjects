@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- StateLookups.xml -->
+<items>
+  <StateLookups>
+    <summary>
+      Represents a colletion of StateLookup objects.
+    </summary>
+  </StateLookups>
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="fileSpec">The XML file specification.</param>
+    <returns>The deserialized object.</returns>
+    <remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        from the State XML file.
+      </para>
+    </remarks>
+  </LJCDeserialize>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="code">The code value.</param>
+    <param name="lookupName">The lookup name.</param>
+    <returns>The StateLookup object.</returns>
+  </Add>
+  <LJCSearchLookupName>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="lookupName">The lookup name.</param>
+    <returns>The StateLookup object.</returns>
+  </LJCSearchLookupName>
+  <LJCSearchLSoundex>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="lSoundex">The Letter Soundex value.</param>
+    <returns>The StateLookup object.</returns>
+  </LJCSearchLSoundex>
+  <LJCSearchPSoundex>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="pSoundex">The Phonetic Soundex value.</param>
+    <returns>The StateLookup object.</returns>
+  </LJCSearchPSoundex>
+  <LJCGenerateSoundex>
+    <summary>
+      Generates the Soundex values.
+    </summary>
+  </LJCGenerateSoundex>
+</items>

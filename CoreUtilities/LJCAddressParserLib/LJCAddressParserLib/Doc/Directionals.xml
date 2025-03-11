@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Directionals.xml -->
+<items>
+  <Directionals>
+    <summary>
+      Represents a collection of Directional objects.
+    </summary>
+  </Directionals>
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="errorText">The error text.</param>
+    <param name="fileSpec">The file specification value.</param>
+    <returns>The deserialized object.</returns>
+    <remarks>
+      If the requested file does not exist, a default file will be created with
+      eight standard values. These are: "N", "NE", "NW", "S", "SE", "SW", "E"
+      and "W".
+    </remarks>
+  </LJCDeserialize>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="code">The Directional code.</param>
+    <param name="name">The Directional name.</param>
+    <param name="spanishName">The Spanish name.</param>
+    <returns>The Directional object.</returns>
+  </Add>
+  <LJCSearchSpanishName>
+    <summary>
+      Retrieve the collection element.
+    </summary>
+    <param name="spanishName">The Spanish Name value.</param>
+    <returns>The Directional object.</returns>
+  </LJCSearchSpanishName>
+</items>

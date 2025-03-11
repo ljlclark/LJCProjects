@@ -1,0 +1,4 @@
+Parsing continues by checking the current token for a Post-directional.
+                             |
+123A North East Street South East Apartment E
+

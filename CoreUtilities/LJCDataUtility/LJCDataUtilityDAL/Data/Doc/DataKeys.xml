@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataKeys.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The item ID.</param>
+    <param name="dataTableID">The parent ID.</param>
+    <param name="name">The name value.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCRemove>
+    <summary>
+      Removes an item by name.
+    </summary>
+    <param name="dataTableID">The parent ID.</param>
+    <param name="name">The item unique Name value.</param>
+  </LJCRemove>
+  <LJCSearchUnique>
+    <summary>
+      Retrieve the collection element with unique values.
+    </summary>
+    <param name="dataTableID">The parent ID.</param>
+    <param name="name">The item name.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchUnique>
+  <NameIndexer>
+    <summary>
+      The item for the supplied name.
+    </summary>
+    <param name="dataTableID">The parent ID.</param>
+    <param name="name">The name value.</param>
+    <returns>The element item object.</returns>
+  </NameIndexer>
+</items>

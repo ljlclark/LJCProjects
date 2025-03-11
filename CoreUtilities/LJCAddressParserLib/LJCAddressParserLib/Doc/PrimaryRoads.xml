@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- PrimaryRoads.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="name">The Road name.</param>
+    <param name="code">The Road code.</param>
+    <param name="stateCode">The State code.</param>
+    <returns>The added PrimaryRoad object.</returns>
+  </Add>
+  <LJCSearchCode>
+    <summary>
+      Retrieve the collection element.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="code">The Road code.</param>
+    <returns>The PrimaryRoad object.</returns>
+  </LJCSearchCode>
+</items>

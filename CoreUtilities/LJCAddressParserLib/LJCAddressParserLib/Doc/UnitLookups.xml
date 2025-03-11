@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- UnitLookups.xml -->
+<items>
+  <UnitLookups>
+    <summary>
+      Represents a colletion of SuffixLookup objects.
+    </summary>
+  </UnitLookups>
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="errorText">The error text.</param>
+    <param name="fileSpec">The XML file specification.</param>
+    <returns>The deserialized object.</returns>
+    <remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        from the Unit XML file.
+      </para>
+    </remarks>
+  </LJCDeserialize>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="code">The code value.</param>
+    <param name="lookupName">The lookup name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCSearchLookupName>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="lookupName">The lookup name.</param>
+    <returns></returns>
+  </LJCSearchLookupName>
+  <LJCSearchLSoundex>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="lSoundex">The Letter Soundex value.</param>
+    <returns></returns>
+  </LJCSearchLSoundex>
+  <LJCSearchPSoundex>
+    <summary>
+      Finds and returns the object that contains the supplied values.
+    </summary>
+    <param name="pSoundex">The Phonetic Soundex value.</param>
+    <returns></returns>
+  </LJCSearchPSoundex>
+  <LJCGenerateSoundex>
+    <summary>
+      Generates the Soundex values.
+    </summary>
+  </LJCGenerateSoundex>
+</items>

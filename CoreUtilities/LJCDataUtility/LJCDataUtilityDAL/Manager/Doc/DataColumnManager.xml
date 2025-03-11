@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataColumnManager.xml -->
+<items>
+  <Add>
+    <summary>
+      Adds a Data Record to the database.
+    </summary>
+    <param name="dataObject">The data record.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="includeNull">Include null indicator.</param>
+    <returns>The Data Object with the DB assigned key values.</returns>
+  </Add>
+</items>

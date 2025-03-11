@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- StandardAddress.xml -->
+<items>
+  <StandardAddress>
+    <summary>
+      Provides methods to parse Address information into standardized component
+      properties. (R)
+    </summary>
+    <remarks>
+      Conforms to USPS AIS (Address Information System) products such as Zip+4
+      and City State files. Based on the USPS Pub28 PDF.
+      <para>
+        The line parsing methods are: ParseMixedAddress(), ParseDeliveryAddressLine()
+        and ParseLastLine().
+      </para>
+    </remarks>
+  </StandardAddress>
+  <!-- Public Methods -->
+  <ParseMixedAddress>
+    <summary>
+      Parses the combined Delivery Address and Last Line values.
+    </summary>
+    <param name="mixedAddress">The mixed address value.</param>
+    <returns>true if no errors; otherwise, false.</returns>
+  </ParseMixedAddress>
+  <ParseDeliveryAddressLine>
+    <summary>
+      Parses the Delivery Address into the standardized DeliveryAddressLine
+      Property. It also parses the Delivery Address into the Component
+      Properties. (R)
+    </summary>
+    <param name="deliveryAddress">The Delivery Address line.</param>
+    <returns>true if no errors; otherwise, false.</returns>
+    <remarks>
+      The 7 Delivery Address Component Properties are: AddressNumber,
+      Predirectional, StreetName, Suffix, Postdirectional, UnitType and
+      UnitNumber.
+    </remarks>
+  </ParseDeliveryAddressLine>
+  <ParseLastLine>
+    <summary>
+      Parses the Last Line into the standardized LastLine Property. It
+      also parses the Last Line into the Component Properties.
+      (R)
+    </summary>
+    <param name="lastLine">The Last Line value.</param>
+    <returns>true if no errors; otherwise, falses.</returns>
+    <remarks>
+      The 4 Last Line Component Properties are: City, StateOrProvince,
+      Zipcode and Zip4.
+    </remarks>
+  </ParseLastLine>
+  <!-- Delivery Address Methods -->
+  <ParsePreDirectional>
+    <summary>
+      Parses a token into the PreDirectional Property.
+    </summary>
+    <param name="currentToken">The token value.</param>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a Predirectional; otherwise, false.</returns>
+    <remarks>
+      <para>
+        Increments currentIndex by one if the token is a PreDirectional.
+      </para>
+      <para>
+        &lt;pre&gt;
+The vertical bar indicates the Current Token Index.
+
+Check current token for PreDirectional.
+  If the token appears to be a PreDirectional.
+    a. If there is &lt;u&gt;not&lt;/u&gt; at least one available value after the directional
+       and before the first post-street value, then the current token must be
+       the street name.
+                   |
+       Before: 123 North Street
+     
+       Do not use the current token as a PreDirectional.
+     
+       The PreDirectional Parsing ends.
+
+    b. If there is at least one available value after the directional and before
+       the first post-street value, then the current token is not the street name.
+                   |
+       Before: 123 North East &lt;u&gt;Main&lt;/u&gt; Street
+
+       Set the PreDirectional property to the current token and increment the
+       current token index.
+
+       PreDirectional = "N".
+                        |
+       After: 123 North East Main Street
+
+       Check for Multi-word PreDirectional.
+
+         If the preceding directional is "N" or "S" and the current directional
+         is "E" or "W".
+
+           If there is at least one available value including the directional and
+           before the first post-street value.
+                               |
+             Before: 123 North East &lt;u&gt;Main&lt;/u&gt; Street
+       
+             Create the two character PreDirectional and increment the current
+             token index.
+
+             PreDirectional = "NE".
+                                   |
+             After: 123 North East Main Street
+             
+        &lt;/pre&gt;
+      </para>
+    </remarks>
+  </ParsePreDirectional>
+  <ParsePostDirectional>
+    <summary>
+      Parses a token into the PostDirectional Property.
+    </summary>
+    <param name="currentToken">The token value.</param>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a Postdirectional; otherwise, false.</returns>
+    <remarks>
+      <para>
+        Decrements currentIndex by one if the token is a PostDirectional.
+      </para>
+      <para>
+        &lt;pre&gt;
+The vertical bar indicates the Current Token Index.
+
+Check current token for PostDirectional.
+  If the token appears to be a PostDirectional.
+    a. If The current token index is 1, then check if the first token(0) is an
+       AddressNumber.
+                   |
+       Before: 123 South
+
+       If it is an AddressNumber, then the current token must be the StreetName
+       so do not use the current token as a PostDirectional.
+     
+       PostDirectional = null.
+                  |
+       After: 123 South
+     
+       The PostDirectional Parsing ends
+     
+    b. If the first token is not an AddressNumber, then it is considered a street name.
+       Use the current token as a PostDirectional.
+                    |
+       Before: Main South
+
+       PostDirectional = "S".
+              |
+       After: Main South
+       
+    c. If the current token index is greater than 1, then use the current token as
+       a PostDirectional.
+                              |
+       Before: 123 Main South East
+       
+       PostDirectional = "E".
+                       |
+       After: 123 Main South East 
+       
+   Check for a Multi-word PostDirectional.
+
+   If the following directional is "E", or "W" and the current directional is "N" or "S".
+     a. If the current token index is 1, then check if the first token is an
+        AddressNumber.
+
+        If the first token is an AddressNumber, then the current token must
+        be the StreetName, so do not create a combined PostDirectional.
+                    |
+        Before: 123 North East
+        
+        PostDirectional = "E".
+                   |
+        After: 123 North East
+
+        The PostDirectional parsing ends.
+
+     b. If the first token is not an AddressNumber, then it is considered a
+        StreetName.
+                     |
+        Before: Main North East
+
+        Create the two character PostDirectional and decrement the current
+        token index by 1.
+        
+        PostDirectional = "NE".
+               |
+        After: Main North East
+        
+     c. If the current token index is greater than 1, then use the current token
+        as a PostDirectional.
+                         |
+        Before: 123 Main North East
+        
+        Create the two character PostDirectional and decrement the current
+        token index by 1.
+        
+        PostDirectional = "NE".
+                   |
+        After: 123 Main North East
+        &lt;/pre&gt;
+      </para>
+    </remarks>
+  </ParsePostDirectional>
+  <LookupDirectional>
+    <summary>
+      Search Directional Code and Name.
+    </summary>
+    <param name="lookupText">The lookup text.</param>
+    <returns>The Directional object.</returns>
+  </LookupDirectional>
+  <ParseUnit>
+    <summary>
+      Parses a token into the Unit Property.
+    </summary>
+    <param name="currentToken">The token value.</param>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a Unit; otherwise, false.</returns>
+    <remarks>
+      <para>
+        Decrements currentIndex by one if the token is a non-range Unit.&lt;br / &gt;
+        Decrements currentIndex by two if the token is a range Unit.
+      </para>
+      <para>
+        &lt;pre&gt;
+The vertical bar indicates the Current Token Index.
+
+1. Check for UnitNumber with unspecified UnitType.
+  If the current token starts with "#" it is a UnitNumber for an unspecified UnitType.
+  The UnitNumber property is set to the value following the "#" and the UnitType
+  property is set to "#".
+                                |
+  Before: 123 Main Street North #3
+
+  UnitType = "#", UnitNumber = "3".
+
+  If the Unit values are found, then the current token index is decremented and the
+  Unit Parsing ends.
+                         |
+  After: 123 Main Street North #3
+
+2. Check for UnitType that does not require a UnitNumber(Range).
+  If the current token is a UnitType that does not require a UnitNumber(Range), then
+  the UnitType property is set to the current token value.
+                          |
+  Before: 123 Main Street Front
+
+  UnitType = "Front", UnitNumber = null.
+
+  If the Unit values are found, then the current token index is decremented and the
+  Unit Parsing ends.
+                  |
+  After: 123 Main Street Front
+
+3. Check for preceding token UnitType of "#".
+  If the preceding token is "#" then the UnitNumber property is set to the current
+  token value and the UnitType property is set to "#" value.
+                            |
+  Before: 123 Main Street # 3
+
+  UnitType = "#", UnitNumber = "3".
+
+  If the Unit values are found, then the current token index is decremented by 2
+  and the Unit Parsing ends.
+                  |
+  After: 123 Main Street # 3
+
+4. Check for preceding token UnitType.
+  If the preceding token is a UnitType, then the UnitType property is set to the
+  preceding token and the UnitNumber property is set to the current token.
+                                    |
+  Before: 123 Main Street Apartment 3
+  
+  UnitType = "APT", UnitNumber = "3"
+
+  If the Unit values are found, then the current token index is decremented by 2.
+                  |
+  After: 123 Main Street Apartment 3
+        &lt;/pre&gt;
+      </para>
+    </remarks>
+  </ParseUnit>
+  <LookupUnit>
+    <summary>
+      Search Units Name and Code.
+    </summary>
+    <param name="lookupText">The lookup text.</param>
+    <returns>The Unit object.</returns>
+  </LookupUnit>
+  <ParseSuffix>
+    <summary>
+      Parses any preceding suffix token into the Suffix Property.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a Suffix; otherwise, false.</returns>
+    <remarks>
+      Decrements currentIndex by one if the token is a Suffix.
+    </remarks>
+  </ParseSuffix>
+  <LookupSuffix>
+    <summary>
+      Search the SuffixLookup LookupName and Code.
+    </summary>
+    <param name="lookupText">The lookup text.</param>
+    <returns>The Suffix object.</returns>
+  </LookupSuffix>
+  <ParseAddressNumber>
+    <summary>
+      Parses a token into the AddressNumber Property.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is an AddressNumber; otherwise, false.</returns>
+    <remarks>
+      Increments the currentIndex by one if the token is an AddressNumber.
+    </remarks>
+  </ParseAddressNumber>
+  <ParseStreetName>
+    <summary>
+      Parses the tokens from the currentIndex to the appropriate end Index.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a StreetName; otherwise, false.</returns>
+    <remarks>
+      The end index is the first occurence of Suffix, Postdirectional, UnitType
+      or UnitNumber.
+    </remarks>
+  </ParseStreetName>
+  <CreateDeliveryLine>
+    <summary>
+      Creates the Standardized Delivery Address Line from the Delivery Address
+      Properties.
+    </summary>
+  </CreateDeliveryLine>
+  <!-- Last Line Methods -->
+  <ParseZipCode>
+    <summary>
+      Parses a token into the Zipcode Property.
+    </summary>
+    <param name="currentToken">The token value.</param>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a Zipcode; otherwise, false.</returns>
+    <remarks>
+      Decrements the currentIndex by one if Zipcode only.
+      Decrements the currentIndex by two if Zipcode and Zip4.
+    </remarks>
+  </ParseZipCode>
+  <ParseState>
+    <summary>
+      Parses a token into the StateOrProvince Property.
+    </summary>
+    <param name="currentToken">The token value.</param>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a State; otherwise, false.</returns>
+    <remarks>
+      Decrements the currentIndex by one if the token is a State.
+    </remarks>
+  </ParseState>
+  <LookupState>
+    <summary>
+      Search the StateLookup LookupName, LSoundex and PSoundex.
+    </summary>
+    <param name="lookupText">The lookup text.</param>
+    <returns>The State object.</returns>
+  </LookupState>
+  <ParseCity>
+    <summary>
+      Parses the tokens from index zero to the currentIndex.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the token is a City; otherwise, false.</returns>
+  </ParseCity>
+  <CreateLastLine>
+    <summary>
+      Creates the standardized Last Line form the Last Line Properties.
+    </summary>
+  </CreateLastLine>
+  <GetSeparatedValue>
+    <summary>
+      Gets the value with a preceding blank if the value exists.
+    </summary>
+    <param name="valueStarted">
+      Indicates if the target string was already
+      populated with some values.
+    </param>
+    <param name="value">The value.</param>
+    <returns>The value preceded with a blank if valueStarted is true.</returns>
+  </GetSeparatedValue>
+  <!-- Delivery Address Helper Methods -->
+  <GetAddressPreviousIndex>
+    <summary>
+      Sets the currentIndex value to the previous index value if
+      it is within the token index range.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the index was decremented; otherwise, false.</returns>
+  </GetAddressPreviousIndex>
+  <DeliveryAddressToken>
+    <summary>
+      Retrieves the token at the specified index.
+    </summary>
+    <param name="index">The token index value.</param>
+    <returns>The token value.</returns>
+  </DeliveryAddressToken>
+  <!-- Last Line Helper Methods -->
+  <IsCurrentTokenZip4>
+    <summary>
+      Checks if the current token is the Zip4 value.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <param name="currentToken">The current token value.</param>
+    <returns>true if the current token is the Zip4 value; otherwise, false.</returns>
+  </IsCurrentTokenZip4>
+  <IsCurrentTokenZipcode>
+    <summary>
+      Checks if the current token is the Zipcode value.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <param name="currentToken">The current token value.</param>
+    <returns>true if the current token is the Zipcode value; otherwise, false.</returns>
+  </IsCurrentTokenZipcode>
+  <LastLinePreviousIndex>
+    <summary>
+      Sets the currentIndex value to the previous index value if
+      it is within the token index range.
+    </summary>
+    <param name="currentIndex">The token index value.</param>
+    <returns>true if the index was decremented; otherwise, false.</returns>
+  </LastLinePreviousIndex>
+  <LastLineToken>
+    <summary>
+      Retrieves the token at the specified index.
+    </summary>
+    <param name="index">The token index value.</param>
+    <returns>The token value.</returns>
+  </LastLineToken>
+  <IsDigits>
+    <summary>
+      Checks a token value for digits.
+    </summary>
+    <param name="token">The token value.</param>
+    <param name="length">The required number of digits.</param>
+    <returns>true if it is digits; otherwise, false.</returns>
+  </IsDigits>
+  <IsInt>
+    <summary>
+      Checks a token value for an integer.
+    </summary>
+    <param name="token">The token value.</param>
+    <returns>true if it is an integer; otherwise, false.</returns>
+  </IsInt>
+  <!-- Address Block Line Properties -->
+  <PhysicalAddressLine>
+    <summary>Gets or sets the Physical Address Line.</summary>
+    <remarks>
+      <para>The Address Block Line 3.</para>
+      <para>
+        This line is optional.
+        It may be used with P.O. numbers on Delivery Address Line.
+      </para>
+    </remarks>
+  </PhysicalAddressLine>
+  <SecondaryAddressLine>
+    <summary>Gets or sets the Secondary Address Line.</summary>
+    <remarks>
+      <para>The Address Block Line 4.</para>
+      <para>
+        This line is optional.
+        Alternate Secondary Address (Unit) information if it does not fit at the
+        end of the Delivery Address Line.
+      </para>
+    </remarks>
+  </SecondaryAddressLine>
+  <DeliveryAddressLine>
+    <summary>Gets or sets the Delivery Address Line.</summary>
+    <remarks>
+      <para>The Address Block Line 5.</para>
+      <para>This line contains up to 7 standard parts.</para>
+    </remarks>
+  </DeliveryAddressLine>
+  <LastLine>
+    <summary>Gets or sets the Last Line.</summary>
+    <remarks>
+      <para>The Address Block Line 6.</para>
+      <para>The Last Line contains (City State Zip-Zip4)</para>
+    </remarks>
+  </LastLine>
+</items>

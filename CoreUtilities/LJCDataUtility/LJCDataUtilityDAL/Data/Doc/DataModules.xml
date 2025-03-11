@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataKeys.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The item ID.</param>
+    <param name="dataSiteID">The parent ID.</param>
+    <param name="name">The name value.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+</items>

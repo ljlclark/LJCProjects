@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Suffix.xml -->
+<items>
+  <Suffix>
+    <summary>
+      Represents a Suffix component.
+    </summary>
+  </Suffix>
+</items>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- States.xml -->
+<items>
+  <States>
+    <summary>
+      Represents a collection of State objects.
+    </summary>
+  </States>
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="errorText">The error text.</param>
+    <param name="fileSpec">The XML file specification.</param>
+    <returns>The deserialized object.</returns>
+    <remarks>
+      <para>
+        If the requested XML file does not exist, a default file will be created
+        with the fifty U.S. states, plus American Samoa(AS),
+        District of Columbia(DC), Federated States of Micronesia(FM), Guam(GU),
+        Marshall Islands(MH), Northern Mariana Islands(MP), Palau(PW),
+        Puerto Rico(PR) and Virgin Islands(VI).
+      </para>
+      <para>
+        A default StateLookup XML file will also be created if it does not exist.
+      </para>
+    </remarks>
+  </LJCDeserialize>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="code">The State code.</param>
+    <param name="name">The State name.</param>
+    <returns>The State object.</returns>
+  </Add>
+  <LJCSearchCode>
+    <summary>
+      Retrieve the collection element.
+    </summary>
+    <param name="countryCode">The Country code.</param>
+    <param name="code">The code.</param>
+    <returns>The State object.</returns>
+  </LJCSearchCode>
+  <LJCUpdateLookups>
+    <summary>
+      Updates the Lookups object.
+    </summary>
+    <param name="stateLookups">The StateLookups object.</param>
+    <returns>The updated object.</returns>
+  </LJCUpdateLookups>
+</items>

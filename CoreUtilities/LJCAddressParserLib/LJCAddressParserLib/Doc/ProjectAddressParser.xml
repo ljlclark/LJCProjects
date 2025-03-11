@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectAddressParser.xml -->
+<items>
+  <Directional>
+    <summary>
+      Represents an Address Directional component.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>Address Parsing Classes</para>
+      <para>
+        The main parsing class is StandardAddress. It contains methods for parsing
+        address strings and parsed component properties which contain the
+        standardized data.&lt;br /&gt;
+        The line parsing methods are: ParseMixedAddress(), ParseDeliveryAddressLine()
+        and ParseLastLine().
+      </para>
+      <para>Directional Standardizing Classes</para>
+      <para>
+        The Directional classes are for standardizing the Predirectionals and
+        Postdirectionals.&lt;br /&gt;
+        Examples of a Directional are: North(N), South(S) and Northwest(NW).&lt;br /&gt;
+        The Directional classes are: Directionals, Directional, NameComparer
+        and SpanishNameComparer.
+      </para>
+      <para>Suffix Standardizing Classes</para>
+      <para>
+        The Suffix classes are for standardizing the Suffix value.&lt;br /&gt;
+        Examples of a Suffix are: Street(ST), Drive(DR) and Avenue(AVE).&lt;br /&gt;
+        The Suffix classes are: Suffixes, Suffix, SuffixLookups, SuffixLookup,
+        SuffixCodeComparer, SuffixLSoundexComparer and SuffixPSoundexComparer.
+      </para>
+      <para>Unit Standardizing Objects</para>
+      <para>
+        The Unit classes are for standardizing the Secondary Address (Unit) value.&lt;br /&gt;
+        Examples of a Unit are: Apartment(APT), Building(BLDG) and Department(DEPT).&lt;br /&gt;
+        The Unit classes are: Units, Unit, UnitLookups, UnitLookup, UnitCodeComparer,
+        UnitNameComparer, UnitLSoundexComparer and UnitPSoundexComparer.
+      </para>
+      <para>State Standardizing Objects</para>
+      <para>
+        The State classes are for standardizing the State or Province value.&lt;br /&gt;
+        The State classes are: States, State, StateLookups, StateLookup,
+        StateLSoundexComparer and StatePSoundexComparer, .
+      </para>
+    </remarks>
+  </Directional>
+</items>
