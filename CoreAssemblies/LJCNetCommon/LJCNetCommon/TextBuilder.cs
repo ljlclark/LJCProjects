@@ -131,7 +131,7 @@ namespace LJCNetCommon
       return retText;
     }
 
-    // Adds a newline if line length is greater than LineLimit.
+    // Adds added text and new wrapped line if combined line > LineLimit.
     /// <include path='items/GetWrapped/*' file='Doc/TextBuilder.xml'/>
     public string GetWrapped(string text)
     {
@@ -139,7 +139,6 @@ namespace LJCNetCommon
 
       string buildText = "";
       var workText = text;
-
       var totalLength = LineLength + TextLength(workText);
       if (totalLength < LineLimit)
       {
@@ -149,31 +148,34 @@ namespace LJCNetCommon
 
       while (totalLength > LineLimit)
       {
-        // Index where text can be added to current line
+        // Index where text can be added to the current line
         // and the remainder is wrapped.
         var wrapIndex = WrapIndex(workText);
         if (wrapIndex > -1)
         {
-          var addLength = wrapIndex;
-          var addText = AddText(retText, addLength);
+          // Adds leading space if line exists and wrapIndex > 0.
+          var addText = AddText(retText, wrapIndex);
           buildText += $"{addText}\r\n";
 
-          // Get next text up to LineLimit.
-          string wrapText = WrapText(workText, ref wrapIndex);
-          addText = $"{Prepend()}{wrapText}";
-          LineLength = addText.Length;
-          buildText += addText;
+          // Next text up to LineLimit - prepend length without leading space.
+          string wrapText = WrapText(workText, wrapIndex);
+          var lineText = $"{WrapPrepend()}{wrapText}";
+          LineLength = lineText.Length;
+          buildText += lineText;
 
           // End loop unless there is more text.
           totalLength = 0;
-          var nextIndex = addLength + wrapText.Length + 1;
-          if (workText.Length > nextIndex
-            && ' ' == workText[nextIndex])
+
+          // Get index of next section.
+          var nextIndex = wrapIndex + wrapText.Length;
+          if (!workText.StartsWith(","))
           {
+            // Adjust for removed leading space.
             nextIndex++;
           }
 
-          if (nextIndex < ToIndex(workText.Length))
+          // Get next work text if available.
+          if (nextIndex < workText.Length)
           {
             var tempText = workText.Substring(nextIndex);
             workText = tempText;
@@ -204,21 +206,6 @@ namespace LJCNetCommon
         retText = $" {retText}";
       }
       return retText;
-    }
-
-    // Get the wrap prepend value.
-    private string Prepend()
-    {
-      var indent = GetIndentString();
-      var retValue = $"{indent}{WrapPrefix}";
-      return retValue;
-    }
-
-    // Get the wrap prepend value.
-    private int PrependLength()
-    {
-      var retLength = TextLength(Prepend());
-      return retLength;
     }
 
     // Gets the text length if not null.
@@ -262,12 +249,12 @@ namespace LJCNetCommon
       {
         // Length of additional characters that fit in LineLimit.
         // Only get up to next LineLimit length;
-        var addLength = LineLength;
-        if (addLength > LineLimit)
+        var currentLength = LineLength;
+        if (currentLength > LineLimit)
         {
-          addLength = LineLimit;
+          currentLength = LineLimit;
         }
-        var wrapLength = LineLimit - addLength;
+        var wrapLength = LineLimit - currentLength;
 
         // Get wrap point in allowed length.
         var onSpace = true;
@@ -297,19 +284,36 @@ namespace LJCNetCommon
       return retIndex;
     }
 
-    // Gets the text to wrap to a new line.
-    private string WrapText(string text, ref int wrapIndex)
+    // Get the wrap prepend value.
+    private string WrapPrepend()
+    {
+      var indent = GetIndentString();
+      var retValue = $"{indent}{WrapPrefix}";
+      return retValue;
+    }
+
+    // Get the wrap prepend value.
+    private int WrapPrependLength()
+    {
+      var retLength = TextLength(WrapPrepend());
+      return retLength;
+    }
+
+    // Get next text up to LineLimit without leading space.
+    private string WrapText(string text, int wrapIndex)
     {
       string retText;
 
       var nextLength = text.Length - wrapIndex;
-      // *** Next Statement *** Change 3/11/25
-      if (nextLength <= LineLimit - PrependLength())
+
+      // Leave room for prepend text.
+      if (nextLength <= LineLimit - WrapPrependLength())
       {
         // Get text at the wrap index.
         retText = text.Substring(wrapIndex, nextLength);
         if (retText.StartsWith(" "))
         {
+          // Remove leading space.
           retText = retText.Substring(1);
         }
       }
@@ -324,7 +328,7 @@ namespace LJCNetCommon
           startIndex++;
         }
         // *** Next Statement *** Add 3/11/25
-        nextLength = LineLimit - TextLength(Prepend());
+        nextLength = LineLimit - TextLength(WrapPrepend());
         nextLength = tempText.LastIndexOf(" ", nextLength);
         retText = text.Substring(startIndex, nextLength);
       }
