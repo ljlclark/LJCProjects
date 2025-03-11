@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectAppManager.xml -->
+<items>
+  <Program>
+    <summary>
+      The main entry point class.
+    </summary>
+    <link file="AppManagerTables.html">--AppManager DB Diagram</link>
+    <remarks>
+      These tabs display the data items and related data.
+      <para>-- Project Level Remarks</para>
+      <para>
+        &lt;b&gt;The User forms/classes.&lt;/b&gt;&lt;br /&gt;
+        These forms/classes manage the User data. They include: UserModule
+        , UserDetail, ProgramList, ProgramDetail, ModuleList and ModuleDetail.
+      </para>
+      <include path='items/Plugin/*' file='../../../CoreUtilities/LJCGenDoc/Common/ModulePlugin.xml'/>
+    </remarks>
+  </Program>
+</items>

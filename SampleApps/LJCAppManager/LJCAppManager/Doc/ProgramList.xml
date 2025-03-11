@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProgramList.xml -->
+<items>
+  <ProgramList>
+    <summary>
+      The Program list form.
+    </summary>
+    <remarks>
+      This form displays the Plugin Programs and allows for New, Edit and Delete
+      of those items.
+      <include path='items/Grid/*' file='../../../CoreUtilities/LJCGenDoc/Common/ListDAW.xml'/>
+    </remarks>
+  </ProgramList>
+</items>

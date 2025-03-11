@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Logon.xml -->
+<items>
+  <LogonUser>
+    <summary>
+      Retrieves the logged on user.
+    </summary>
+    <param name="userName">The domain user name.</param>
+    <param name="domainName">The domain name.</param>
+    <param name="password">The user password.</param>
+    <param name="LogonType">The logon type.</param>
+    <param name="LogonProvider">The logon provider.</param>
+    <param name="phToken">The pointer to the token handler.</param>
+    <returns>True if the user exists, othwerwise false.</returns>
+  </LogonUser>
+</items>

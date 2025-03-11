@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AppModules.xml -->
+<items>
+  <AppModules>
+    <summary>
+      Represents a collection of AppModule objects.
+    </summary>  
+  </AppModules>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="programID">The program ID.</param>
+    <param name="typeName">The type name value.</param>
+    <param name="title">The title value.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+</items>

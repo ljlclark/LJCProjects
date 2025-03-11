@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectAppManagerDAL.xml -->
+<items>
+  <AppModule>
+    <summary>
+      The AppModule table Data Record.
+    </summary>
+    <remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The LJC.AppManagerDAL library contains Data classes and Manager classes for
+        presenting an object oriented view of the App Manager database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DBMessage and LJC.DBServiceLib to communicate
+        with the database.
+      </para>
+      <para>
+        The Manager classes contain the LJC.DBMessage.DataManager class. This is
+        the common manager class that uses the LJC.DbService.DbService class to
+        communicate with the database.
+      </para>
+      <para>
+        The AppManagerDAL library is part of the LJC.AppManager solution.
+      </para>
+    </remarks>
+  </AppModule>
+</items>

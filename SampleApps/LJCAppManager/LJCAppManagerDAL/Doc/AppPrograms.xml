@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AppPrograms.xml -->
+<items>
+  <AppPrograms>
+    <summary>
+      Represents a collection of AppProgram objects.
+    </summary>
+  </AppPrograms>
+  <AppProgramsC>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="fileName">The file name.</param>
+    <param name="title">The title.</param>
+    <returns>A reference to the added item.</returns>
+  </AppProgramsC>
+</items>

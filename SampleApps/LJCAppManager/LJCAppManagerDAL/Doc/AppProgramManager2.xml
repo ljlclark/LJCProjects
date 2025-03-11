@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AppProgramManager2.xml -->
+<items>
+  <AppProgramManager2>
+    <summary>
+      Provides AppProgram specific data manipulation methods.
+    </summary>
+  </AppProgramManager2>
+  <AppProgramManager2C>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="dbServiceRef">The database service reference object.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+    <param name="tableName">The table name.</param>
+  </AppProgramManager2C>
+</items>

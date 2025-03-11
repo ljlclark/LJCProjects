@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- UserAppPrograms.xml -->
+<items>
+  <UserAppPrograms>
+    <summary>
+      Represents a collection of UserAppProgram objects.
+    </summary>
+  </UserAppPrograms>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="programID">The program ID.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+</items>

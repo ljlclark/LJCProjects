@@ -1,0 +1,522 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCAppManagerDAL</name>
+    </assembly>
+    <members>
+        <member name="T:LJCAppManagerDAL.AppManagers">
+            <summary>Creates the GenealogyDAL Manager objects.</summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppManagers.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="dbServiceRef">The database service reference object.</param>
+            <param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppManagers.AppUserManager">
+            <summary>Gets the AppUserManager object.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppManagers.AppProgramManager">
+            <summary>Gets the AppProgramManager object.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppManagers.AppModuleManager">
+            <summary>Gets the AppModuleManager object.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppManagers.UserAppProgramManager">
+            <summary>Gets the UserAppProgramManager object.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppManagers.UserAppModuleManager">
+            <summary>Gets the UserAppModuleManager object.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppModule">
+            <summary>
+      The AppModule table Data Record.
+    </summary><remarks>
+      <para>-- Project Level Remarks</para>
+      <para>
+        The LJC.AppManagerDAL library contains Data classes and Manager classes for
+        presenting an object oriented view of the App Manager database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DBMessage and LJC.DBServiceLib to communicate
+        with the database.
+      </para>
+      <para>
+        The Manager classes contain the LJC.DBMessage.DataManager class. This is
+        the common manager class that uses the LJC.DbService.DbService class to
+        communicate with the database.
+      </para>
+      <para>
+        The AppManagerDAL library is part of the LJC.AppManager solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModule.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModule.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModule.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.AppProgramID">
+            <summary>Gets or sets the AppProgramID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.TypeName">
+            <summary>Gets or sets the TypeName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.Title">
+            <summary>Gets or sets the Title value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.Active">
+            <summary>Gets or sets the Active value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.FileName">
+            <summary>Gets or sets the join FileName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.ProgramTitle">
+            <summary>Gets or sets the join ProgramTitle value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppModule.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.PropertyID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.ColumnAppProgramID">
+            <summary>The AppProgramID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.PropertyAppProgramID">
+            <summary>The AppProgramID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.ColumnTypeName">
+            <summary>The TypeName column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.ColumnTitle">
+            <summary>The Title column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.ColumnActive">
+            <summary>The Active column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.LengthTypeName">
+            <summary>The TypeName maximum length.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppModule.LengthTitle">
+            <summary>The Title maximum length.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppModules">
+            <summary>
+      Represents a collection of AppModule objects.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModules.Add(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="programID">The program ID.</param><param name="typeName">The type name value.</param><param name="title">The title value.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppPrograms">
+            <summary>
+      Represents a collection of AppProgram objects.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppPrograms.Add(System.Int32,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="fileName">The file name.</param><param name="title">The title.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppUsers">
+            <summary>
+      Represents a collection of AppManagerUser objects.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUsers.Add(System.Int32,System.String,System.String)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="name">The item name.</param><param name="userID">The user ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUsers.SearchByUserID(System.String)">
+            <summary>
+      Retrieve the collection element by windows user ID.
+    </summary><param name="userID">The windows user ID.</param>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppUser">
+            <summary>The AppManagerUser table Data Record.</summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUser.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUser.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUser.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUser.CompareTo(LJCAppManagerDAL.AppUser)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppUser.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppUser.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppUser.UserID">
+            <summary>Gets or sets the UserID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppUser.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.PropertyID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.ColumnUserID">
+            <summary>The UserID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.PropertyUserID">
+            <summary>The UserID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppUser.LengthUserID">
+            <summary>The UserID maximum length.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppProgram">
+            <summary>The AppProgram table Data Record.</summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppProgram.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppProgram.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppProgram.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppProgram.ID">
+            <summary>Gets or sets the ID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppProgram.FileName">
+            <summary>Gets or sets the FileName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppProgram.Title">
+            <summary>Gets or sets the Title value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppProgram.Active">
+            <summary>Gets or sets the Active value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.AppProgram.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.ColumnID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.PropertyID">
+            <summary>The ID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.ColumnFileName">
+            <summary>The FileName column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.ColumnTitle">
+            <summary>The Title column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.ColumnActive">
+            <summary>The Active column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.LengthFileName">
+            <summary>The FileName maximum length.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.AppProgram.LengthTitle">
+            <summary>The Title maximum length.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppModule">
+            <summary>The UserAppModule table Data Record.</summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModule.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModule.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.AppManagerUserID">
+            <summary>Gets or sets the AppManagerUserID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.AppProgramID">
+            <summary>Gets or sets the AppProgramID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.AppModuleID">
+            <summary>Gets or sets the AppModuleID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.Active">
+            <summary>Gets or sets the Active value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.Name">
+            <summary>Gets or sets the join Name value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.UserID">
+            <summary>Gets or sets the join UserID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.FileName">
+            <summary>Gets or sets the join FileName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.Title">
+            <summary>Gets or sets the join Title value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.TypeName">
+            <summary>Gets or sets the join TypeName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.ModuleTitle">
+            <summary>Gets or sets the join ModuleTitle value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppModule.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.ColumnAppManagerUserID">
+            <summary>The AppManagerUserID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.PropertyAppManagerUserID">
+            <summary>The AppManagerUserID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.ColumnAppProgramID">
+            <summary>The AppProgramID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.PropertyAppProgramID">
+            <summary>the AppProgramID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.ColumnAppModuleID">
+            <summary>The AppModuleID column name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.PropertyAppModuleID">
+            <summary>the AppModuleID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppModule.ColumnActive">
+            <summary>The Active column name.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppModules">
+            <summary>
+      Represents a collection of UserAppModule objects.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModules.Add(System.Int32,System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="programID">The program ID.</param><param name="moduleID">The module ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppProgram">
+            <summary>The UserAppProgram table Data Record.</summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppProgram.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppProgram.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.AppManagerUserID">
+            <summary>Gets or sets the AppManagerUserID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.AppProgramID">
+            <summary>Gets or sets the AppProgramID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.Active">
+            <summary>Gets or sets the Active value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.UserName">
+            <summary>Gets or sets the join user name.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.UserID">
+            <summary>Gets or sets the join UserID value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.FileName">
+            <summary>Gets or sets the join FileName value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.Title">
+            <summary>Gets or sets the join Title value.</summary>
+        </member>
+        <member name="P:LJCAppManagerDAL.UserAppProgram.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.TableName">
+            <summary>The table name value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.ColumnAppManagerUserID">
+            <summary>The AppManagerUserID value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.PropertyAppManagerUserID">
+            <summary>the AppManagerUserID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.ColumnAppProgramID">
+            <summary>The AppProgramID value.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.PropertyAppProgramID">
+            <summary>the AppProgramID property name.</summary>
+        </member>
+        <member name="F:LJCAppManagerDAL.UserAppProgram.ColumnActive">
+            <summary>The Active value.</summary>
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppPrograms">
+            <summary>
+      Represents a collection of UserAppProgram objects.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppPrograms.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="id">The record ID.</param><param name="programID">The program ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppModuleManager2">
+            <summary>
+      Provides AppModule specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModuleManager2.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            Initializes an object instance.
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service refrerence object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModuleManager2.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCAppManagerDAL.AppModuleManager2.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.AppProgramManager2">
+            <summary>
+      Provides AppProgram specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppProgramManager2.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppProgramManager2.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCAppManagerDAL.AppUserManager2">
+            <summary>
+      Provides AppUser specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUserManager2.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCAppManagerDAL.AppUserManager2.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppModuleManager2">
+            <summary>
+      Provides UserAppModule specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModuleManager2.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            Initializes an object instance.
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModuleManager2.GetIDKeys(System.Int32,System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKeys/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModuleManager2.GetUserIDKeys(System.Int32,System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKeys/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppModuleManager2.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="T:LJCAppManagerDAL.UserAppProgramManager2">
+            <summary>
+      Provides UserAppProgram specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppProgramManager2.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppProgramManager2.GetIDKeys(System.Int32,System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKeys/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCAppManagerDAL.UserAppProgramManager2.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+    </members>
+</doc>

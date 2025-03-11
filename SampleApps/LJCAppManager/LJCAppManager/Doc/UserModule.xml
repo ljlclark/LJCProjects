@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- UserModule.xml -->
+<items>
+  <UserModule>
+    <summary>
+      The tab composite user control.
+    </summary>
+  </UserModule>
+  <LJCTabs>
+    <summary>
+      Returns a reference to the module tab control.
+    </summary>
+    <returns>A reference to the module tab control.</returns>
+  </LJCTabs>
+  <ClosePage>
+    <summary>
+      Closes the current page.
+    </summary>
+    <param name="tabPage">The selected tab page.</param>
+  </ClosePage>
+</items>

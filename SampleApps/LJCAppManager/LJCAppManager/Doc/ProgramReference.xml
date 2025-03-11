@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProgramReference.xml -->
+<items>
+  <ProgramReference>
+    <summary>
+      Represents a program reference.
+    </summary>
+  </ProgramReference>
+  <GetAssembly>
+    <summary>
+      Retrieves the Assembly reference.
+    </summary>
+    <returns>The assembly reference.</returns>
+  </GetAssembly>
+</items>

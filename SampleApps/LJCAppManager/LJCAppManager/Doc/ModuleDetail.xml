@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ModuleDetail.xml -->
+<items>
+  <ModuleDetail>
+    <summary>
+      The Module detail dialog.
+    </summary>
+  </ModuleDetail>
+  <LJCUserID>
+    <summary>Gets or sets the user parent ID value. (R)</summary>
+    <remarks>
+      This property is so the UserModule can do a direct update
+      of the user related module record.
+    </remarks>
+  </LJCUserID>
+</items>

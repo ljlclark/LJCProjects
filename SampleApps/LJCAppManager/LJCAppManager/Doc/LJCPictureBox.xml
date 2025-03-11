@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCPictureBox.xml -->
+<items>
+  <LJCPictureBox>
+    <summary>
+      Provides additional functionality for a PictureBox control.
+    </summary>
+  </LJCPictureBox>
+  <OnMouseDown>
+    <summary>
+      Override for the MouseDown event.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnMouseDown>
+  <OnMouseMove>
+    <summary>
+      Override for the MouseMove event.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnMouseMove>
+  <OnMouseUp>
+    <summary>
+      Override for the MouseUp event.
+    </summary>
+    <param name="e">The event arguments.</param>
+  </OnMouseUp>
+  <OnPaint>
+    <summary>
+      Override for the Paint event.
+    </summary>
+    <param name="pe">The event arguments.</param>
+  </OnPaint>
+  <ReleaseResources>
+    <summary>
+      Releases the active resources.
+    </summary>
+  </ReleaseResources>
+  <LoadFromFile>
+    <summary>
+      Loads the specified image file.
+    </summary>
+    <param name="imageFileName">The image file name.</param>
+    <param name="defaultImagePath">The default image path.</param>
+  </LoadFromFile>
+  <Load>
+    <summary>
+      Loads the specified image.
+    </summary>
+    <param name="image">The Image object.</param>
+  </Load>
+  <SelectImageFile>
+    <summary>
+      Displays a file selection dialog and loads the selected image file.
+    </summary>
+    <param name="defaultImagePath">The default image path.</param>
+  </SelectImageFile>
+  <SaveImageFile>
+    <summary>
+      Saves the image to a file.
+    </summary>
+    <param name="imageFileName">The image file name.</param>
+    <param name="defaultImagePath">the default image path.</param>
+  </SaveImageFile>
+  <RotateLeft>
+    <summary>
+      Rotates the image 90 degrees left.
+    </summary>
+  </RotateLeft>
+  <RotateRight>
+    <summary>
+      Rotates the image 90 degrees right.
+    </summary>
+  </RotateRight>
+</items>

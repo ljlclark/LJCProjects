@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProgramReferences.xml -->
+<items>
+  <ProgramReferences>
+    <summary>
+      Represents a collection of ProgramReference objects.
+    </summary>
+  </ProgramReferences>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="fileName">The file name.</param>
+    <param name="displayName">The display name.</param>
+    <returns></returns>
+  </Add>
+  <BinarySearch1>
+    <summary>
+      Retrieve the app program by display name.
+    </summary>
+    <param name="displayName">The display name.</param>
+  </BinarySearch1>
+  <BinarySearch2>
+    <summary>
+      Retrieve the app program by file name.
+    </summary>
+    <param name="fileName">The file name.</param>
+    <param name="fileNameComparer">The comparer.</param>
+    <returns>The ProgramReference object.</returns>
+  </BinarySearch2>
+  <ProgramFileNameComparer>
+    <summary>
+      Sort and search program on file name.
+    </summary>
+  </ProgramFileNameComparer>
+</items>

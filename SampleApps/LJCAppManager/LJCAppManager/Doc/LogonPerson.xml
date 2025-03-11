@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LogonPerson.xml -->
+<items>
+  <IsAuthenticated>
+    <summary>
+      Verifies the current windows user.
+    </summary>
+    <returns>True if the user is authenticated otherwise false.</returns>
+  </IsAuthenticated>
+  <GetUserData>
+    <summary>
+      Get the person data.
+    </summary>
+    <returns>The AppUser record.</returns>
+  </GetUserData>
+</items>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AppManagerSplash.xml -->
+<items>
+  <AppManagerSplash>
+    <summary>
+      The AppManager Splash and About dialog.
+    </summary>
+  </AppManagerSplash>
+  <AppManagerSplashC>
+    <summary>
+      Displays the Splash/About dialog.
+    </summary>
+    <param name="isSplash">Indicates if it is a Splash screen or About box.</param>
+  </AppManagerSplashC>
+</items>

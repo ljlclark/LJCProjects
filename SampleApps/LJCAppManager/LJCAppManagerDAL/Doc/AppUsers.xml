@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AppUsers.xml -->
+<items>
+  <AppUsers>
+    <summary>
+      Represents a collection of AppManagerUser objects.
+    </summary>
+  </AppUsers>
+  <Add>
+    <summary>
+      Creates and adds the object from the provided values.
+    </summary>
+    <param name="id">The record ID.</param>
+    <param name="name">The item name.</param>
+    <param name="userID">The user ID.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <SearchByUserID>
+    <summary>
+      Retrieve the collection element by windows user ID.
+    </summary>
+    <param name="userID">The windows user ID.</param>
+  </SearchByUserID>
+</items>

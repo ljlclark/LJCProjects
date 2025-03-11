@@ -1,0 +1,41 @@
+*** AppManager ***
+AppManager.chm
+ConnectionTemplates.xml
+DataConfigs.xml
+LJC.AppManager.exe
+LJC.AppManagerDAL.dll
+LJC.DataAccess.dll
+LJC.DBClientLib.dll
+LJC.DBDataAccessLib.dll
+LJC.DBMessage.dll
+LJC.DBServiceLib.dll
+LJC.Net.Common.dll
+LJC.QueryGridLib.dll
+LJC.WinForm.Common.dll
+LJC.WinForm.Control.dll
+
+*** TransformManager ***
+LJC.CommonModuleLib.dll
+LJC.DataTransformDAL.dll
+LJC.TextDataReaderLib.dll
+LJC.TransformManager.exe
+
+*** TransformServiceTest ***
+TransformServiceTest.exe
+
+*** DataTransformProcess ***
+LJC.DataAccessConfig.dll
+LJC.DataTransformProcess.exe
+
+*** FacilityManager ***
+FacilityManager.chm
+LJC.DBViewDAL.dll
+LJC.FacilityManager.exe
+LJC.FacilityManagerDAL.dll
+LJC.SQLUtilLib.dll
+*LJC.SQLUtilLibDAL.dll
+LJC.ViewBuilder.exe
+
+*** RegionManager ***
+LJC.RegionManager.exe
+LJC.RegionManagerDAL.dll
