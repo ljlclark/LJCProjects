@@ -1,0 +1,71 @@
+﻿In this context the term "Grid" refers to an LJCDataGrid control.
+
+List Windows typically use the associated Data Object class name to make Grid
+methods and other Grid related values unique. The text "_ClassName_" is used to
+represent the Data Object class name.
+
+List Window with standard LJCDataGrids:
+  
+  The InitializeControls() method calls the SetupGrids() method to setup the
+  individual grids.
+
+  The individual grid setup methods are called SetupGrid_ClassName_.
+
+  If the Grid does not already have defined columns:
+
+    The hard coded default grid columns are definded and saved in a member
+	variable.
+
+	The Grid is configured with the default grid columns.
+
+	On "Startup", the RestoreControlValues() and DataRetrieve() methods are called.
+
+	The RestoreControlValues() method restores the window defaults and the Grid
+	column widths for all the Grid controls.
+
+
+List Window with View Enabled LJCDataGrids:
+
+  A ViewHelper instance contains methods to access all of the View data.
+
+  A supporting class named **(View_ClassName_) contains methods for accessing View
+  data for the Grid.
+
+  On **("Startup"), the RestoreControlValues() method is called which restores the
+  window defaults and the Grid column widths for all the Grids except for View
+  Enabled Grids.
+  
+  The View Dropdown List loads ViewData entries for the target
+  ViewTable.
+
+  The **(SetupGrid_ClassName_()) method is called when the View Dropdown List selection
+  is changed.
+
+    The ViewHelper.GetGridColumns() method is called with the selected View ID
+	value to retrieve the grid columns.
+
+    If no grid columns are returned, then the View_ClassName_
+	SaveDefaultGridColumns() method is called. Is saves a default set of display
+	columns for a default view.
+
+	The View_ClassName_.ResultGridData property contains the ResultGridData object
+	which has methods for using data from a Data Source who's layout is not known
+	in advance.
+
+	The ResultGridData.SetGridColumns() method is called with the grid columns.
+
+    The Grid.LJCAddColumns() method is called to add the grid columns.
+
+	The Grid.LJCRestoreColumnValues() method is called to restore the column widths.
+
+  The **(Grid.DataRetrieve_ClassName_View()) method is called.
+
+    The ViewHelper.GetViewData() method is called with the View_ClassName_ TableName
+	and ViewDataID properties.
+
+	If no View data is returned, the View_ClassName_.CreateStandardView() method is
+	called to create a standard view.
+	  The View Dropdown List LJCLoad() method is called to load and select the new
+	  standard view.
+
+    

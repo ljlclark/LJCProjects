@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- BusinessDetail.xml -->
+<items>
+  <BusinessDetail>
+    <summary>The Business detail dialog.</summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt;The Business forms/classes.&lt;/b&gt;&lt;br /&gt;
+        These forms/classes manage the Business data. They include:
+        &lt;span class="userType"&gt;BusinessModule&lt;/span&gt;,
+        &lt;span class="userType"&gt;BusinessList&lt;/span&gt; and
+        &lt;span class="userType"&gt;BusinessDetail&lt;/span&gt;.
+      </para>
+    </remarks>
+  </BusinessDetail>
+</items>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- AccountDetail.xml -->
+<items>
+  <AccountDetail>
+    <summary>The Account detail dialog.</summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt;The Person forms/classes.&lt;/b&gt;&lt;br /&gt;
+        These forms/classes manage the Person/Individual data.They include:
+        &lt;span class="userType"&gt;PersonModule&lt;/span&gt;,
+        &lt;span class="userType"&gt;PersonList&lt;/span&gt;,
+        &lt;span class="userType"&gt;PersonDetail&lt;/span&gt;,
+        &lt;span class="userType"&gt;RelationDetail&lt;/span&gt;,
+        &lt;span class="userType"&gt;UnitPersonDetail&lt;/span&gt; and
+        &lt;span class="userType"&gt;AccountDetail&lt;/span&gt;.
+      </para>
+    </remarks>
+  </AccountDetail>
+</items>

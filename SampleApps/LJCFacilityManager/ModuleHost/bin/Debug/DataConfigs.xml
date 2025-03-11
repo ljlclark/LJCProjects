@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataConfig>
+    <Name>AppManager</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>AppManagerData</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>FacilityManager</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>LJCData</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>LJCData</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>LJCData</Database>
+    <ConnectionTypeName>SQLServer</ConnectionTypeName>
+  </DataConfig>
+  <DataConfig>
+    <Name>RegionManager</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>FacilityData</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>ProcessData</Name>
+    <DbServer>DESKTOP-PDPBE34\SQL2016</DbServer>
+    <Database>DataTransform</Database>
+  </DataConfig>
+</DataConfigs>

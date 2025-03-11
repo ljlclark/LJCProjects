@@ -1,0 +1,50 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=FacilityManager.chm
+Contents file=FacilityManager.hhc
+Default topic=AddressList.htm
+Display compile progress=No
+Language=0x409 English (United States)
+
+
+[FILES]
+AddressList.htm
+AddressDetail.htm
+BusinessDetail.htm
+BusinessList.htm
+BusinessAddressList.htm
+PersonAddressList.htm
+BusinessPersonList.htm
+PersonDetail.htm
+PersonList.htm
+ContactList.htm
+ContactDetail.htm
+BusAddressDetail.htm
+BusAddressList.htm
+AccountDetail.htm
+AccountList.htm
+CodeTypeDetail.htm
+EquipmentDetail.htm
+EquipmentList.htm
+FacilityDetail.htm
+FacilityList.htm
+FixtureDetail.htm
+FixtureList.htm
+RelationDetail.htm
+RelationList.htm
+UnitDetail.htm
+UnitList.htm
+PersonUnitList.htm
+PersonUnitDetail.htm
+ProvinceDetail.htm
+ProvinceList.htm
+CodeTypeList.htm
+FacilityManager.htm
+BusinessModule.htm
+FacilityModule.htm
+PersonModule.htm
+ProvinceModule.htm
+CodeTypeModule.htm
+
+[INFOTYPES]
+

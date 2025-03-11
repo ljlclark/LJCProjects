@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- UnitManager.xml -->
+<items>
+  <RetrieveWithCode>
+    <summary>
+      Retrieves a data record with the supplied value.
+    </summary>
+    <param name="code">The code value.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithCode>
+  <RetrieveWithLookup>
+    <summary>
+      Retrieves a data record with the supplied value.
+    </summary>
+    <param name="description">The description value.</param>
+    <returns>The data record.</returns>
+  </RetrieveWithLookup>
+  <GetCodeKey>
+    <summary>
+      Get the Code key record.
+    </summary>
+    <param name="code">The code value.</param>
+    <returns>The code key record.</returns>
+  </GetCodeKey>
+  <GetDescriptionKey>
+    <summary>
+      Gets the Description key record.
+    </summary>
+    <param name="description">The description value.</param>
+    <returns>The description key record.</returns>
+  </GetDescriptionKey>
+</items>

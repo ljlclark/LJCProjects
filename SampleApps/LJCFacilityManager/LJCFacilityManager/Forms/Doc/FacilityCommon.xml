@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- FacilityCommon.xml -->
+<items>
+  <GetSelectedDate>
+    <summary>
+      Display the Calendar control to select a date.
+    </summary>
+    <link file="BusinessTables.html">--Business DB Diagram</link>
+    <link file="FacilityTables.html">--Facility DB Diagram</link>
+    <link file="PersonTables.html">--Person DB Diagram</link>
+    <param name="startDate">The start date.</param>
+    <returns>The selected date string.</returns>
+  </GetSelectedDate>
+  <GetAdministrator>
+    <summary>
+      Returns the Administrator Person object.
+    </summary>
+    <param name="currentPersonID">The person ID.</param>
+    <returns>The Person object.</returns>
+  </GetAdministrator>
+</items>

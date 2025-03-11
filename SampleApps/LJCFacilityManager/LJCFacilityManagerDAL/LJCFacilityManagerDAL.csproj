@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81593C6C-2A91-4CDB-9014-FDB75A4023CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LJCFacilityManagerDAL</RootNamespace>
+    <AssemblyName>LJCFacilityManagerDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCFacilityManagerDAL.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJCDataAccess">
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBServiceLib, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionDAL">
+      <HintPath>..\External\LJCRegionDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataCommonFacility.cs" />
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\Accounts.cs" />
+    <Compile Include="Data\Address.cs" />
+    <Compile Include="Data\Addresses.cs" />
+    <Compile Include="Data\BusinessAddress.cs" />
+    <Compile Include="Data\Businesses.cs" />
+    <Compile Include="Data\BusinessPerson.cs" />
+    <Compile Include="Data\Business.cs" />
+    <Compile Include="Data\CodeTypeClass.cs" />
+    <Compile Include="Data\CodeType.cs" />
+    <Compile Include="Data\CodeTypes.cs" />
+    <Compile Include="Data\Equipment.cs" />
+    <Compile Include="Data\Facility.cs" />
+    <Compile Include="Data\Fixture.cs" />
+    <Compile Include="Data\PersonAddress.cs" />
+    <Compile Include="Data\Person.cs" />
+    <Compile Include="Data\PersonRelation.cs" />
+    <Compile Include="Data\UnitPerson.cs" />
+    <Compile Include="Data\Unit.cs" />
+    <Compile Include="FacilityManagers.cs" />
+    <Compile Include="Manager\AccountManager.cs" />
+    <Compile Include="Manager\AddressManager.cs" />
+    <Compile Include="Manager\BusinessAddressManager.cs" />
+    <Compile Include="Manager\BusinessManager.cs" />
+    <Compile Include="Manager\BusinessPersonManager.cs" />
+    <Compile Include="Manager\CodeTypeClassManager.cs" />
+    <Compile Include="Manager\CodeTypeManager.cs" />
+    <Compile Include="Manager\EquipmentManager.cs" />
+    <Compile Include="Manager\FacilityDbManager.cs" />
+    <Compile Include="Manager\FixtureManager.cs" />
+    <Compile Include="Manager\PersonAddressManager.cs" />
+    <Compile Include="Manager\PersonManager.cs" />
+    <Compile Include="Manager\PersonRelationManager.cs" />
+    <Compile Include="Manager\UnitManager.cs" />
+    <Compile Include="Manager\UnitPersonManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DBScript\1CreateFacilityDataDB.sql" />
+    <Content Include="DBScript\2CreateFacilityDataTables.sql" />
+    <Content Include="Doc\Account.xml" />
+    <Content Include="Doc\DataCommonFacility.xml" />
+    <Content Include="Doc\Facility.xml" />
+    <Content Include="Doc\Fixture.xml" />
+    <Content Include="Doc\ProjectFacilityManagerDAL.xml" />
+    <Content Include="Doc\Unit.xml" />
+    <Content Include="Doc\UnitManager.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)..\Output\$(TargetFileName)"
+copy "$(TargetDir)$(TargetName).pdb" "$(ProjectDir)..\Output\$(TargetName).pdb"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

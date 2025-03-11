@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectFacilityManagerDAL.xml -->
+<items>
+  <Account>
+    <summary>
+      The Account table Data record.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the
+        &lt;span class="commonType"&gt;LJCFacilityManager&lt;/span&gt;
+        program.
+      </para>
+      <para>
+        The &lt;span class="commonType"&gt;LJCFacilityManagerDAL&lt;/span&gt;
+        library contains Data and Manager classes for
+        presenting an object oriented view of the Facility Manager database data.
+      </para>
+      <para>
+        The Manager classes use
+        &lt;span class="commonType"&gt;LJCDataAccess&lt;/span&gt;
+        to communicate with the database.
+      </para>
+      <para>
+        The &lt;span class="commonType"&gt;LJCFacilityManagerDAL&lt;/span&gt;
+        project is part of the
+        &lt;span class="commonType"&gt;LJCFacilityManager&lt;/span&gt;
+        solution.
+      </para>
+    </remarks>
+  </Account>
+</items>

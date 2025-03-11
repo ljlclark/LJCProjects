@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TraceFile.xml -->
+<items>
+  <TraceFileC>
+    <summary>
+      Initalizes an object instance.
+    </summary>
+    <param name="formName">The form name.</param>
+  </TraceFileC>
+  <Write>
+    <summary>
+      Writes data to the trace file.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="grid">The grid object.</param>
+    <param name="row">The grid row.</param>
+  </Write>
+</items>

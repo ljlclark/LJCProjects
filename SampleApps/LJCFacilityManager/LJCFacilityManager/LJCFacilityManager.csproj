@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9D18625-5681-46C2-9427-B22ACF1B6EB0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LJCFacilityManager</RootNamespace>
+    <AssemblyName>LJCFacilityManager</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCFacilityManager.xml</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJCDataAccess">
+      <HintPath>..\External\LJCDataAccess.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="LJCDataAccessConfig">
+      <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBClientLib">
+      <HintPath>..\External\LJCDBClientLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess">
+      <HintPath>..\External\LJCDBDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage">
+      <HintPath>..\External\LJCDBMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBServiceLib">
+      <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBViewControls">
+      <HintPath>..\External\LJCDBViewControls.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBViewDAL">
+      <HintPath>..\External\LJCDBViewDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCGridDataLib">
+      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon">
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionDAL, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCRegionDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionForm, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCRegionForm.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCRegionManager, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\LJCRegionManager.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCSQLUtilLib">
+      <HintPath>..\External\LJCSQLUtilLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCViewBuilder">
+      <HintPath>..\External\LJCViewBuilder.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCViewEditor">
+      <HintPath>..\External\LJCViewEditor.exe</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormCommon">
+      <HintPath>..\External\LJCWinFormCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCWinFormControls">
+      <HintPath>..\External\LJCWinFormControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Facility\Equipment\EquipmentGridCode.cs" />
+    <Compile Include="Forms\Facility\Fixture\FixtureGridCode.cs" />
+    <Compile Include="Forms\Facility\Module\FacilityGridCode.cs" />
+    <Compile Include="Forms\Facility\Unit\UnitGridCode.cs" />
+    <Compile Include="Forms\Person\Account\AccountGridCode.cs" />
+    <Compile Include="Forms\Person\Address\AddressGridCode.cs" />
+    <Compile Include="Forms\Person\Module\GridCodePerson.cs" />
+    <Compile Include="Forms\Person\Module\ViewInfo.cs" />
+    <Compile Include="Forms\Person\Relation\GridCodeRelation.cs" />
+    <Compile Include="Forms\Person\UnitPerson\UnitPersonGridCode.cs" />
+    <Compile Include="ValuesFacility.cs" />
+    <Compile Include="Controls\FacilityCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FacilityCombo.Designer.cs">
+      <DependentUpon>FacilityCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitCombo.Designer.cs">
+      <DependentUpon>UnitCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Address\AddressDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Address\AddressDetail.Designer.cs">
+      <DependentUpon>AddressDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Address\AddressList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Address\AddressList.Designer.cs">
+      <DependentUpon>AddressList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessDetail.Designer.cs">
+      <DependentUpon>BusinessDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessList.Designer.cs">
+      <DependentUpon>BusinessList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessModule.Designer.cs">
+      <DependentUpon>BusinessModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CodeType\CodeTypeDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeType\CodeTypeDetail.Designer.cs">
+      <DependentUpon>CodeTypeDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CodeType\CodeTypeModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeType\CodeTypeModule.Designer.cs">
+      <DependentUpon>CodeTypeModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CodeTypeClassCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CodeTypeClassCombo.Designer.cs">
+      <DependentUpon>CodeTypeClassCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CodeTypeCombo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CodeTypeCombo.Designer.cs">
+      <DependentUpon>CodeTypeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\Equipment\EquipmentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\Equipment\EquipmentDetail.Designer.cs">
+      <DependentUpon>EquipmentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\Module\FacilityDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\Module\FacilityDetail.Designer.cs">
+      <DependentUpon>FacilityDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\FacilityForm.Designer.cs">
+      <DependentUpon>FacilityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\Module\FacilityModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\Module\FacilityModule.Designer.cs">
+      <DependentUpon>FacilityModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\Fixture\FixtureDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\Fixture\FixtureDetail.Designer.cs">
+      <DependentUpon>FixtureDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\Account\AccountDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\Account\AccountDetail.Designer.cs">
+      <DependentUpon>AccountDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\Module\LJCPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\Module\PersonDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\Module\PersonDetail.Designer.cs">
+      <DependentUpon>PersonDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\List\PersonList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\List\PersonList.Designer.cs">
+      <DependentUpon>PersonList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\Module\PersonModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\Module\PersonModule.Designer.cs">
+      <DependentUpon>PersonModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\Relation\RelationDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\Relation\RelationDetail.Designer.cs">
+      <DependentUpon>RelationDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Person\UnitPerson\UnitPersonDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Person\UnitPerson\UnitPersonDetail.Designer.cs">
+      <DependentUpon>UnitPersonDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Facility\Unit\UnitDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Facility\Unit\UnitDetail.Designer.cs">
+      <DependentUpon>UnitDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FacilityCommon.cs" />
+    <Compile Include="Forms\Logon\Crypto.cs" />
+    <Compile Include="Forms\Logon\Logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Logon\Logon.Designer.cs">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Logon\Password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Logon\Password.Designer.cs">
+      <DependentUpon>Password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TraceFile.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="bin\Debug\ConnectionTemplates.xml" />
+    <Content Include="bin\Debug\DataConfigs.xml" />
+    <Content Include="bin\Debug\SQLScript\1CreateFacilityDataDB.sql" />
+    <Content Include="bin\Debug\SQLScript\2CreateFacilityDataTables.sql" />
+    <Content Include="Forms\Person\Module\ViewList.txt" />
+    <Content Include="Help\BusinessModule.htm" />
+    <Content Include="Help\CodeTypeModule.htm" />
+    <Content Include="Help\EquipmentDetail.htm" />
+    <Content Include="Help\EquipmentList.htm" />
+    <Content Include="Help\FacilityModule.htm" />
+    <Content Include="Help\FacilityManager.htm" />
+    <Content Include="Help\FixtureDetail.htm" />
+    <Content Include="Help\FixtureList.htm" />
+    <Content Include="Help\PersonModule.htm" />
+    <Content Include="Help\ProvinceDetail.htm" />
+    <Content Include="Help\ProvinceList.htm" />
+    <Content Include="Help\ProvinceModule.htm" />
+    <Content Include="Help\UnitDetail.htm" />
+    <Content Include="Help\UnitList.htm" />
+    <Content Include="Forms\Business\Doc\BusinessDetail.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Forms\CodeType\Doc\CodeTypeDetail.xml" />
+    <Content Include="Forms\Doc\TraceFile.xml" />
+    <Content Include="Forms\Facility\Doc\EquipmentDetail.xml" />
+    <Content Include="Forms\Person\Doc\AccountDetail.xml" />
+    <Content Include="Forms\Doc\FacilityCommon.xml" />
+    <Content Include="Forms\Person\Doc\LJCPictureBox.xml" />
+    <Content Include="Forms\Person\Doc\PersonModule.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Forms\Person\Doc\RtfHelper.xml" />
+    <EmbeddedResource Include="Forms\Address\AddressDetail.resx">
+      <DependentUpon>AddressDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Address\AddressList.resx">
+      <DependentUpon>AddressList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\BusinessDetail.resx">
+      <DependentUpon>BusinessDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\BusinessList.resx">
+      <DependentUpon>BusinessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\BusinessModule.resx">
+      <DependentUpon>BusinessModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CodeType\CodeTypeDetail.resx">
+      <DependentUpon>CodeTypeDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CodeType\CodeTypeModule.resx">
+      <DependentUpon>CodeTypeModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\Equipment\EquipmentDetail.resx">
+      <DependentUpon>EquipmentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\Module\FacilityDetail.resx">
+      <DependentUpon>FacilityDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\FacilityForm.resx">
+      <DependentUpon>FacilityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\Module\FacilityModule.resx">
+      <DependentUpon>FacilityModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\Fixture\FixtureDetail.resx">
+      <DependentUpon>FixtureDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\Account\AccountDetail.resx">
+      <DependentUpon>AccountDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\Module\PersonDetail.resx">
+      <DependentUpon>PersonDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\List\PersonList.resx">
+      <DependentUpon>PersonList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\Module\PersonModule.resx">
+      <DependentUpon>PersonModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\Relation\RelationDetail.resx">
+      <DependentUpon>RelationDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Person\UnitPerson\UnitPersonDetail.resx">
+      <DependentUpon>UnitPersonDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Facility\Unit\UnitDetail.resx">
+      <DependentUpon>UnitDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Logon\Logon.resx">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Logon\Password.resx">
+      <DependentUpon>Password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="Help\AccountDetail.htm" />
+    <Content Include="Help\FacilityDetail.htm" />
+    <Content Include="Help\FacilityList.htm" />
+    <Content Include="Help\PersonUnitDetail.htm" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJCFacilityManagerDAL\LJCFacilityManagerDAL.csproj">
+      <Project>{81593c6c-2a91-4cdb-9014-fdb75a4023cf}</Project>
+      <Name>LJCFacilityManagerDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Help\AccountList.htm" />
+    <Content Include="Help\AddressDetail.htm" />
+    <Content Include="Help\BusAddressDetail.htm" />
+    <Content Include="Help\BusAddressList.htm" />
+    <Content Include="Help\BusinessAddressList.htm" />
+    <Content Include="Help\BusinessDetail.htm" />
+    <Content Include="Help\BusinessList.htm" />
+    <Content Include="Help\AddressList.htm" />
+    <Content Include="Help\BusinessPersonList.htm" />
+    <Content Include="Help\CodeTypeDetail.htm" />
+    <Content Include="Help\CodeTypeList.htm" />
+    <Content Include="Help\ContactDetail.htm" />
+    <Content Include="Help\ContactList.htm" />
+    <Content Include="Help\PersonAddressList.htm" />
+    <Content Include="Help\PersonDetail.htm" />
+    <Content Include="Help\PersonList.htm" />
+    <Content Include="Help\PersonUnitList.htm" />
+    <Content Include="Help\RelationDetail.htm" />
+    <Content Include="Help\RelationList.htm" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)..\Output\$(TargetFileName)"
+copy "$(TargetDir)$(TargetName).pdb" "$(ProjectDir)..\Output\$(TargetName).pdb"
+copy "$(TargetDir)$(TargetName).exe.config" "$(ProjectDir)..\Output\$(TargetName).exe.config"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

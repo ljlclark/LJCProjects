@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- RtfHelper.xml -->
+<items>
+  <RtfHelperC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="rtfTextBox">The RTF control.</param>
+  </RtfHelperC>
+  <Append1>
+    <summary>
+      Appends text to the RTF control.
+    </summary>
+    <param name="text">The text value.</param>
+  </Append1>
+  <Append2>
+    <summary>
+      Appends text to the RTF control with the specified font.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The Font style.</param>
+  </Append2>
+  <Append3>
+    <summary>
+      Appends text to the RTF control with the specified Font and color.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The Font style.</param>
+    <param name="color">The Color value.</param>
+  </Append3>
+  <AppendLine1>
+    <summary>
+      Appends a text line to the RTF control.
+    </summary>
+    <param name="text">The text value.</param>
+  </AppendLine1>
+  <AppendLine2>
+    <summary>
+      Appends a text line to the RTF control with the specified font.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The Font style.</param>
+  </AppendLine2>
+  <AppendLine3>
+    <summary>
+      Appends a text line to the RTF control with the specified Font and color.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="fontStyle">The Font style.</param>
+    <param name="color">The Color value.</param>
+  </AppendLine3>
+  <SetFontStyle>
+    <summary>
+      Set the Font style.
+    </summary>
+    <param name="style">The font style.</param>
+    <returns>The created Font value.</returns>
+  </SetFontStyle>
+</items>

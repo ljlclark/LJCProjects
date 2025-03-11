@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ViewPerson.xml -->
+<items>
+  <ViewPerson>
+    <summary>
+      Provides Person View specific methods and data.
+    </summary>
+  </ViewPerson>
+  <ViewPersonC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="tableName">The TableName value.</param>
+    <param name="personManager">The PersonManager object.</param>
+    <param name="dbServiceRef">The DbServiceRef object.</param>
+    <param name="dataConfigName">The DataConfig name.</param>
+    <param name="grid">The Grid control.</param>
+  </ViewPersonC>
+  <DataLoadView>
+    <summary>
+      Retrieves the combo items.
+    </summary>
+  </DataLoadView>
+  <CreateStandardView>
+    <summary>
+      Create a standard view.
+    </summary>
+    <remarks>
+      This is required if no views are available or the requested
+      view was not found.
+    </remarks>
+  </CreateStandardView>
+  <GetDefaultDisplayColumns>
+    <summary>
+      Gets the Default Grid columns DbColumns object.
+    </summary>
+    <returns>The DbColumns object.</returns>
+  </GetDefaultDisplayColumns>
+  <SaveDefaultDisplayColumns>
+    <summary>
+      Saves the Default Display Query to the View tables.
+    </summary>
+    <returns>The DbColumns object.</returns>
+  </SaveDefaultDisplayColumns>
+  <GetDefaultDisplayColumnsQuery>
+    <summary>
+      Gets the Default Grid columns Query object.
+    </summary>
+    <returns>The DbQuery object.</returns>
+  </GetDefaultDisplayColumnsQuery>
+</items>

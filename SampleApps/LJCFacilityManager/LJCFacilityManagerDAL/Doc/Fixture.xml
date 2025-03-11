@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Fixture.xml -->
+<items>
+  <Fixture>
+    <summary>
+      The Fixture table Data Record.
+    </summary>
+    <remarks>
+      A Fixture defines an item in a Unit. The item may be fixed such
+      as a sink, shower or light fixture or may be moveable such
+      as a washer, dryer or item of furniture.
+    </remarks>
+  </Fixture>
+</items>

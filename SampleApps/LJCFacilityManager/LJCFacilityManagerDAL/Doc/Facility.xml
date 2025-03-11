@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Facility.xml -->
+<items>
+  <Facility>
+    <summary>
+      Represents a facility data record.
+    </summary>
+    <remarks>
+      A Facility defines a structure that can contain Units. Usually a Facility
+      is a building with apartments, rooms or other divisions that can be defined
+      as Units. A carport could be defined as a Facility and the individual parking
+      spaces defined as Units.
+    </remarks>
+  </Facility>
+</items>

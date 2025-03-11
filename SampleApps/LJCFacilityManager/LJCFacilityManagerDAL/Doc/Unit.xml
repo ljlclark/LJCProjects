@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Unit.xml -->
+<items>
+  <Unit>
+    <summary>
+      Represents a data record.
+    </summary>
+    <remarks>
+      A Unit defines a part of a Facility. Usually a Unit is an appartment, room
+      or other division of a Facility.
+      A parking space can be a unit of a carport facility.
+    </remarks>
+  </Unit>
+</items>

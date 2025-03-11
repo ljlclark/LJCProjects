@@ -1,0 +1,1 @@
+call ModuleHost.exe LJC.FacilityManager.exe LJC.FacilityManager.BusinessModule

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- CodeTypeDetail.xml -->
+<items>
+  <CodeTypeDetail>
+    <summary>The CodeType detail dialog.</summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt;The Code Type forms/classes.&lt;/b&gt;&lt;br /&gt;
+        These forms/classes manage the Code Type data. They include:
+        &lt;span class="userType"&gt;CodeTypeModule&lt;/span&gt; and
+        &lt;span class="userType"&gt;CodeTypeDetail&lt;/span&gt;.
+      </para>
+    </remarks>
+  </CodeTypeDetail>
+</items>

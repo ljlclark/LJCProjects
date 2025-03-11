@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataCommonFacility.xml -->
+<items>
+  <GetFacility>
+    <summary>
+      Retrieves the facility by ID.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="facilityID">The facility ID.</param>
+    <returns>The Facility object.</returns>
+  </GetFacility>
+  <GetUnit>
+    <summary>
+      Retrieves the Unit by ID.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="unitID">The unit ID.</param>
+    <returns>The Unit object.</returns>
+  </GetUnit>
+  <GetPerson1>
+    <summary>
+      Retrieves the Person by ID.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="personID">The person ID.</param>
+    <returns>The Person object.</returns>
+  </GetPerson1>
+  <GetPerson2>
+    <summary>
+      Retrieves the Person by ID with the specified columns.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="columnNames">The included column names.</param>
+    <param name="personID">The person ID.</param>
+    <returns>The Person object.</returns>
+  </GetPerson2>
+  <GetFacilityText>
+    <summary>
+      Retrieves the Facility description.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="facilityID">The facility ID.</param>
+    <returns>The facility description.</returns>
+  </GetFacilityText>
+  <GetUnitText>
+    <summary>
+      Retrieves the Unit description.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="unitID">The unit ID.</param>
+    <returns>The unit description.</returns>
+  </GetUnitText>
+  <GetPersonName>
+    <summary>
+      Retrieves the Person name.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="personID">The person ID.</param>
+    <returns>The person name.</returns>
+  </GetPersonName>
+  <GetBusinessName>
+    <summary>
+      Retrieves the Business name.
+    </summary>
+    <param name="manager">The facility manager object.</param>
+    <param name="businessID">The business ID.</param>
+    <returns>The business name.</returns>
+  </GetBusinessName>
+</items>

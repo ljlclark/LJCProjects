@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectFacilityForm.xml -->
+<items>
+  <Program>
+    <summary>
+      The program entry point class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The &lt;span class="commonType"&gt;FacilityForm&lt;/span&gt;
+        project is part of the
+        &lt;span class="commonType"&gt;LJCFacilityManager&lt;/span&gt; solution.
+      </para>
+    </remarks>
+  </Program>
+</items>

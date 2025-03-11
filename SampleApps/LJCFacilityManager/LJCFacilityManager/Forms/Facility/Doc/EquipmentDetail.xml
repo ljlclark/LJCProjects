@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- EquipmentDetail.xml -->
+<items>
+  <EquipmentDetail>
+    <summary>The Equipment detail dialog.</summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        &lt;b&gt;The Facility forms/classes.&lt;/b&gt;&lt;br /&gt;
+        These forms/classes manage the Facility data. They include:
+        &lt;span class="userType"&gt;FacilityModule&lt;/span&gt;,
+        &lt;span class="userType"&gt;FacilityDetail&lt;/span&gt;,
+        &lt;span class="userType"&gt;UnitDetail&lt;/span&gt;,
+        &lt;span class="userType"&gt;FixtureDetail&lt;/span&gt; and
+        &lt;span class="userType"&gt;EquipmentDetail&lt;/span&gt;.
+      </para>
+    </remarks>
+  </EquipmentDetail>
+</items>

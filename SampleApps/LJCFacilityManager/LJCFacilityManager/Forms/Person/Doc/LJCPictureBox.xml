@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCPictureBox.xml -->
+<items>
+  <OnMouseDown>
+    <summary>
+      Overrides the OnMouseDown event method.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      Creates a selection rectangle that resizes in the MouseMove event.
+    </remarks>
+  </OnMouseDown>
+  <OnMouseMove>
+    <summary>
+      Overrides the OnMouseMove event method.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      Resizes the selection rectangle.
+    </remarks>
+  </OnMouseMove>
+  <OnMouseUp>
+    <summary>
+      Overrides the OnMouseUp event method.
+    </summary>
+    <param name="e">The event arguments.</param>
+    <remarks>
+      Crops the picture to the selection rectangle.
+    </remarks>
+  </OnMouseUp>
+  <OnPaint>
+    <summary>
+      Overrides the OnPaint event method.
+    </summary>
+    <param name="pe">The event arguments.</param>
+  </OnPaint>
+  <LoadFromFile>
+    <summary>
+      Loads the specified image file.
+    </summary>
+    <param name="imageFileName">The image file name.</param>
+    <param name="defaultImagePath">The default image path.</param>
+  </LoadFromFile>
+  <Load>
+    <summary>
+      Loads the specified image.
+    </summary>
+    <param name="image">The Image object.</param>
+  </Load>
+  <SelectImageFile>
+    <summary>
+      Displays a file selection dialog and loads the selected image file.
+    </summary>
+    <param name="defaultImagePath">The default image path.</param>
+  </SelectImageFile>
+  <SaveImageFile>
+    <summary>
+      Saves the image to a file.
+    </summary>
+    <param name="imageFileName">The image file name.</param>
+    <param name="defaultImagePath">the default image path.</param>
+  </SaveImageFile>
+</items>
