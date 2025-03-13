@@ -11,13 +11,24 @@ namespace TestTextBuilder
   {
     static void Main()
     {
-      var b = new TextBuilder()
-      {
-        WrapPrefix = "  "
-      };
-      //b.LineLimit = 20;
+      var x = new XMLBuilder();
+      var attributes = x.StartAttributes();
+      x.BeginElement("html", xmlAttributes: attributes);
+      x.BeginElement("body", isIndented: false);
+
+      x.CreateElement("Junk", "What?");
+      var text = "Now is the time for all good men to come to the aid or their"
+        + " country or follow the Yellow Brick Road.";
+      x.CreateElement("Text", text);
+
+      x.EndElement("body", false);
+      x.EndElement("html");
+      var xml = x.ToString();
+      Console.WriteLine(xml);
+      Console.WriteLine();
 
       // Build a wrapping Item.
+      var b = new TextBuilder();
       b.Indent();
       b.Item("First");
       b.Item("Second");

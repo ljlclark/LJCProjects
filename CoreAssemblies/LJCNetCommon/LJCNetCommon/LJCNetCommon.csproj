@@ -72,7 +72,7 @@
     <Compile Include="TextBuilder.cs" />
     <Compile Include="XMLAttribute.cs" />
     <Compile Include="XMLAttributes.cs" />
-    <Compile Include="XMLBuilder.cs" />
+    <Compile Include="XmlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />

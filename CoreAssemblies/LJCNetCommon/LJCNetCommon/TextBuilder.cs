@@ -94,7 +94,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Modified String Methods
+    #region Get Modified Methods
 
     // Adds a delimiter if not the first list item.
     /// <include path='items/GetDelimited/*' file='Doc/TextBuilder.xml'/>

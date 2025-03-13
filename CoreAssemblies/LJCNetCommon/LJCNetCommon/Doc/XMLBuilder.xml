@@ -9,31 +9,35 @@
     </summary>
     <returns>The XML text.</returns>
   </ToString>
-  <Begin>
+  <BeginElement>
     <summary>
       Creates the element begin tag.
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element text.</param>
     <param name="xmlAttributes">The element attributes.</param>
+    <param name="isIndented">Indicates if the element should be indented.</param>
     <returns>The element begin tag.</returns>
-  </Begin>
-  <Element>
+  </BeginElement>
+  <CreateElement>
     <summary>
       Creates an XML element.
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element text.</param>
     <param name="xmlAttributes">The element attributes.</param>
+    <param name="isIndented">Indicates if the element should be indented.</param>
+    <param name="close">Indicates if the element will be closed.</param>
     <returns>The XML element.</returns>
-  </Element>
-  <End>
+  </CreateElement>
+  <EndElement>
     <summary>
       Creates the element end tag.
     </summary>
     <param name="name">The element name.</param>
+    <param name="isIndented">Indicates if the element should be indented.</param>
     <returns>The element end tag.</returns>
-  </End>
+  </EndElement>
   <StartAttributes>
     <summary>
       Creates the XML start attributes.
