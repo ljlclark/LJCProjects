@@ -52,19 +52,20 @@ namespace LJCDataUtility
         var dataConfig = configCombo.SelectedItem as DataConfig;
         var dataConfigName = dataConfig.Name;
 
-        var connectionType = ParentObject.ConnectionType;
+        //var connectionType = ParentObject.ConnectionType;
+        var connectionType = ParentObject.ComboConfigValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
           connectionType = "SQLServer";
         }
 
-        // Testing
-        if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
-          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        {
-          connectionType = "MySQL";
-        }
+        //// Testing
+        //if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
+        //  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        //{
+        //  connectionType = "MySQL";
+        //}
 
         string showText = null;
         switch (connectionType.ToLower())

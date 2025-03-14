@@ -4,7 +4,6 @@
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace LJCDataUtility
 {
@@ -104,7 +103,7 @@ namespace LJCDataUtility
       b.Line($"-- {procedureName}.sql");
       var qualifiedName = QualifiedName(DBName, procedureName);
       b.Line("DELIMITER //");
-      b.Line($"DROP PROCEDURE {qualifiedName};");
+      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};");
       b.Line();
       b.Line($"CREATE PROCEDURE {qualifiedName} (");
       string retString = b.ToString();
@@ -390,7 +389,13 @@ namespace LJCDataUtility
         Text(text);
       }
 
-      Line("END//");
+      // *** Next Statement *** Add 3/14/25
+      if (!EndsWith("\n\r"))
+      {
+        Line();
+      }
+      Line("END");
+      Line("//");
       Line("DELIMITER ;");
       var retProc = ToString();
       return retProc;
@@ -402,7 +407,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(128);
       b.Line($" ALTER TABLE `{tableName}`");
-      b.Text($"  DROP CONSTRAINT `{objectName}`;");
+      b.Text($"  DROP CONSTRAINT IF EXISTS `{objectName}`;");
       var retValue = b.ToString();
       return retValue;
     }

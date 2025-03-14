@@ -48,6 +48,12 @@ namespace LJCDataUtility
         };
 
         var connectionType = ParentObject.ComboConfigValue("ConnectionType");
+        if (!NetString.HasValue(connectionType))
+        {
+          // Default value.
+          connectionType = "SQLServer";
+        }
+
         switch (connectionType.ToLower())
         {
           case "mysql":
@@ -199,7 +205,6 @@ namespace LJCDataUtility
         myProc.Line("BEGIN");
 
         // Get IF for referenced variables.
-        // *** Next Statement *** Add 2/17/25
         List<string> varRefNames = new List<string>();
         if (NetCommon.HasItems(data.ParentKeys))
         {
