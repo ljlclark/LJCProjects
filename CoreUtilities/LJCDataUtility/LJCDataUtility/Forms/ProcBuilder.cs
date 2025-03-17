@@ -455,35 +455,25 @@ namespace LJCDataUtility
       b.Line($"USE [{DBName}]");
       b.Line();
       b.Line("/*");
-      b.Text("/* Remove foreign keys and other constraints. */");
+      b.Text("/* Drop foreign keys and other constraints. */");
 
-      // Remove referencing foreign keys.
-      foreach (DataKey dataKey in dataKeys)
+      // Drop referencing foreign keys.
+      var foreignKeys = dataKeys.FindAll(x => x.TargetTableName == TableName
+        && x.KeyType == (short)ObjectType.Foreign);
+      foreach (DataKey dataKey in foreignKeys)
       {
-        if (dataKey.TargetTableName != TableName)
-        {
-          continue;
-        }
-
-        var objectType = (ObjectType)dataKey.KeyType;
-        if (ObjectType.Foreign == objectType)
-        {
-          var text = DropConstraint(dataKey.DataTableName
-            , dataKey.Name, objectType);
-          b.Line();
-          b.Line(text);
-        }
+        var text = DropConstraint(dataKey.DataTableName
+          , dataKey.Name, ObjectType.Foreign);
+        b.Line();
+        b.Line(text);
       }
 
-      // Remove reference foreign keys and other constraints.
-      foreach (DataKey dataKey in dataKeys)
+      // Drop constraints and foreign keys.
+      var otherKeys = dataKeys.FindAll(x => x.DataTableID == tableID
+        && x.DataTableSiteID == siteID
+        && x.KeyType != (short)ObjectType.Primary);
+      foreach (DataKey dataKey in otherKeys)
       {
-        if (dataKey.DataTableID != tableID
-          && dataKey.DataSiteID != siteID)
-        {
-          continue;
-        }
-
         var objectType = (ObjectType)dataKey.KeyType;
         var text = DropConstraint(TableName, dataKey.Name
           , objectType);
@@ -497,17 +487,10 @@ namespace LJCDataUtility
 
       b.Line();
       b.Text("/* Add constraints and foreign keys. */");
-      foreach (DataKey dataKey in dataKeys)
+      foreach (DataKey dataKey in otherKeys)
       {
-        if (dataKey.DataTableID != tableID
-          && dataKey.DataSiteID != siteID)
-        {
-          continue;
-        }
-
         string text;
-        var objectType = (ObjectType)dataKey.KeyType;
-        switch (objectType)
+        switch ((ObjectType)dataKey.KeyType)
         {
           case ObjectType.Primary:
             text = AddPrimaryKey(TableName, dataKey.Name
@@ -533,27 +516,17 @@ namespace LJCDataUtility
         }
       }
 
-      // Create referencing foreign keys.
+      // Add referencing foreign keys.
       foreach (DataKey dataKey in dataKeys)
       {
-        if (dataKey.TargetTableName != TableName)
-        {
-          continue;
-        }
-        var objectType = (ObjectType)dataKey.KeyType;
-        switch (objectType)
-        {
-          case ObjectType.Foreign:
-            var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
-              , dataKey.SourceColumnName, dataKey.TargetTableName
-              , dataKey.TargetColumnName);
-            b.Line();
-            b.Line(text);
-            break;
-        }
+        var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
+          , dataKey.SourceColumnName, dataKey.TargetTableName
+          , dataKey.TargetColumnName);
+        b.Line();
+        b.Line(text);
+        break;
       }
       b.Line("*/");
-
       var retValue = b.ToString();
       return retValue;
     }
@@ -755,7 +728,8 @@ namespace LJCDataUtility
     #region TextBuilder Properties
 
     // Gets or sets the delimiter.
-    internal string Delimiter {
+    internal string Delimiter
+    {
       get { return Builder.Delimiter; }
       set { Builder.Delimiter = value; }
     }

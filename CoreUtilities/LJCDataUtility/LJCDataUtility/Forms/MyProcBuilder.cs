@@ -120,8 +120,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(256)
       {
-        IndentCount = indentCount,
-        WrapPrefix = "  "
+        IndentCount = indentCount
       };
       var value = "    ";
       if (includeParens)
@@ -250,8 +249,7 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(256)
       {
-        IndentCount = indentCount,
-        WrapPrefix = "  "
+        IndentCount = indentCount
       };
       b.Text("    VALUES(");
 
@@ -297,7 +295,7 @@ namespace LJCDataUtility
       var sourceNames = NetString.DelimitValues(sourceColumnList, "`", "`");
       var targetNames = NetString.DelimitValues(targetColumnList, "`", "`");
       var b = new TextBuilder(128);
-      b.Line($" ALTER TABLE `{tableName}`");
+      b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Line($"   FOREIGN KEY ({sourceNames})");
       b.Text($"   REFERENCES `{targetTableName}`");
@@ -312,7 +310,7 @@ namespace LJCDataUtility
     {
       var columnNames = NetString.DelimitValues(columnList, "`", "`");
       var b = new TextBuilder(128);
-      b.Line($" ALTER TABLE `{tableName}`");
+      b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Text($"  PRIMARY KEY ({columnNames});");
       var retValue = b.ToString();
@@ -325,7 +323,7 @@ namespace LJCDataUtility
     {
       var columnNames = NetString.DelimitValues(columnList, "`", "`");
       var b = new TextBuilder(128);
-      b.Line($" ALTER TABLE `{tableName}`");
+      b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Text($"  UNIQUE ({columnNames});");
       var retValue = b.ToString();
@@ -406,7 +404,7 @@ namespace LJCDataUtility
       , string objectName)
     {
       var b = new TextBuilder(128);
-      b.Line($" ALTER TABLE `{tableName}`");
+      b.Line($"ALTER TABLE `{tableName}`");
       b.Text($"  DROP CONSTRAINT IF EXISTS `{objectName}`;");
       var retValue = b.ToString();
       return retValue;
@@ -439,41 +437,27 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(512);
       b.Line("/*");
-      b.Text("/* Remove foreign keys and other constraints. */");
+      b.Text("/* Drop foreign keys and constraints. */");
 
-      // Remove referencing foreign keys.
-      foreach (DataKey dataKey in dataKeys)
+      // Drop referencing foreign keys.
+      var foreignKeys = dataKeys.FindAll(x => x.TargetTableName == TableName
+        && x.KeyType == (short)ObjectType.Foreign);
+      foreach (DataKey dataKey in foreignKeys)
       {
-        if (dataKey.TargetTableName != TableName)
-        {
-          continue;
-        }
-
-        var objectType = (ObjectType)dataKey.KeyType;
-        if (ObjectType.Foreign == objectType)
-        {
-          var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
-          b.Line();
-          b.Line(text);
-        }
+        var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
+        b.Line();
+        b.Line(text);
       }
 
-      // Remove reference foreign keys and other constraints.
-      foreach (DataKey dataKey in dataKeys)
+      // Drop constraints and foreign keys.
+      var otherKeys = dataKeys.FindAll(x => x.DataTableID == tableID
+        && x.DataTableSiteID == siteID
+        && x.KeyType != (short)ObjectType.Primary);
+      foreach (DataKey dataKey in otherKeys)
       {
-        if (dataKey.DataTableID != tableID
-          && dataKey.DataSiteID != siteID)
-        {
-          continue;
-        }
-
-        //var objectType = (ObjectType)dataKey.KeyType;
-        if (dataKey.KeyType != (short)ObjectType.Primary)
-        {
-          var text = DropConstraint(TableName, dataKey.Name);
-          b.Line();
-          b.Line(text);
-        }
+        var text = DropConstraint(TableName, dataKey.Name);
+        b.Line();
+        b.Line(text);
       }
 
       b.Line();
@@ -482,17 +466,10 @@ namespace LJCDataUtility
 
       b.Line();
       b.Text("/* Add constraints and foreign keys. */");
-      foreach (DataKey dataKey in dataKeys)
+      foreach (DataKey dataKey in otherKeys)
       {
-        if (dataKey.DataTableID != tableID
-          && dataKey.DataTableSiteID != siteID)
-        {
-          continue;
-        }
-
         string text;
-        var objectType = (ObjectType)dataKey.KeyType;
-        switch (objectType)
+        switch ((ObjectType)dataKey.KeyType)
         {
           case ObjectType.Unique:
             var columnList = dataKey.SourceColumnName;
@@ -511,27 +488,17 @@ namespace LJCDataUtility
         }
       }
 
-      // Create referencing foreign keys.
-      foreach (DataKey dataKey in dataKeys)
+      // Add referencing foreign keys.
+      foreach (DataKey dataKey in foreignKeys)
       {
-        if (dataKey.TargetTableName != TableName)
-        {
-          continue;
-        }
-        var objectType = (ObjectType)dataKey.KeyType;
-        switch (objectType)
-        {
-          case ObjectType.Foreign:
-            var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
-              , dataKey.SourceColumnName, dataKey.TargetTableName
-              , dataKey.TargetColumnName);
-            b.Line();
-            b.Line(text);
-            break;
-        }
+        var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
+          , dataKey.SourceColumnName, dataKey.TargetTableName
+          , dataKey.TargetColumnName);
+        b.Line();
+        b.Line(text);
+        break;
       }
       b.Line("*/");
-
       var retValue = b.ToString();
       return retValue;
     }

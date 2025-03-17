@@ -23,7 +23,7 @@ namespace LJCNetCommon
         LineLength = 0;
         LineLimit = 80;
         WrapAtDelimiter = true;
-        WrapEnabled = true;
+        WrapEnabled = false;
         WrapPrefix = "  ";
       }
       Builder = builder;

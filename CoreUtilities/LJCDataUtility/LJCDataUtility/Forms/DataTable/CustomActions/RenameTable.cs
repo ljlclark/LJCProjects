@@ -44,13 +44,6 @@ namespace LJCDataUtility
           connectionType = "SQLServer";
         }
 
-        //// Testing
-        //if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
-        //  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        //{
-        //  connectionType = "MySQL";
-        //}
-
         string showText = null;
         switch (connectionType.ToLower())
         {

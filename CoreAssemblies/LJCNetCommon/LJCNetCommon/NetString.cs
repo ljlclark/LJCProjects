@@ -1,11 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // NetString.xml
-using Microsoft.Win32;
 using System;
-using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace LJCNetCommon
@@ -69,7 +65,7 @@ namespace LJCNetCommon
     /// <summary>Adds a value to a comma delimited string.</summary>
     public static void AddDelimitedValue(ref string target, string value)
     {
-      if (NetString.HasValue(target))
+      if (HasValue(target))
       {
         target += ", ";
       }
@@ -92,22 +88,25 @@ namespace LJCNetCommon
     {
       string retName = "";
 
-      var names = NetString.Split(values, ",");
-      foreach (var name in names)
+      var names = Split(values, ",");
+      if (NetCommon.HasItems(names))
       {
-        if (NetString.HasValue(retName))
+        foreach (var name in names)
         {
-          retName += ", ";
-        }
-        var tempName = name.Trim();
-        if (!tempName.StartsWith(beginDelimiter))
-        {
-          retName += beginDelimiter;
-        }
-        retName += tempName;
-        if (!tempName.EndsWith(endDelimiter))
-        {
-          retName += endDelimiter;
+          if (NetString.HasValue(retName))
+          {
+            retName += ", ";
+          }
+          var tempName = name.Trim();
+          if (!tempName.StartsWith(beginDelimiter))
+          {
+            retName += beginDelimiter;
+          }
+          retName += tempName;
+          if (!tempName.EndsWith(endDelimiter))
+          {
+            retName += endDelimiter;
+          }
         }
       }
       return retName;
@@ -284,17 +283,27 @@ namespace LJCNetCommon
     /// <summary>Split a string without empty entries.</summary>
     public static string[] Split(string text, string separator)
     {
-      var separators = new string[] { separator };
-      string[] retValues = text.Split(separators
-        , StringSplitOptions.RemoveEmptyEntries);
+      string[] retValues = null;
+
+      if (HasValue(text))
+      {
+        var separators = new string[] { separator };
+        retValues = text.Split(separators
+          , StringSplitOptions.RemoveEmptyEntries);
+      }
       return retValues;
     }
 
     /// <summary>Split a string without empty entries.</summary>
     public static string[] Split(string text, string[] separators)
     {
-      string[] retValues = text.Split(separators
-        , StringSplitOptions.RemoveEmptyEntries);
+      string[] retValues = null;
+
+      if (HasValue(text))
+      {
+        retValues = text.Split(separators
+          , StringSplitOptions.RemoveEmptyEntries);
+      }
       return retValues;
     }
 
@@ -304,7 +313,6 @@ namespace LJCNetCommon
     {
       var retValue = text;
 
-      // *** Next Statement *** Change - 10/30/23
       if (HasValue(text)
         && text.Length > length)
       {

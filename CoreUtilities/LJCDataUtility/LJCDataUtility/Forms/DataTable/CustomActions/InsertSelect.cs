@@ -47,25 +47,16 @@ namespace LJCDataUtility
       {
         var parentTableName = ParentObject.DataTableName();
 
-        //var dataConfigName = "DataUtility";
         var configCombo = ParentObject.DataConfigCombo;
         var dataConfig = configCombo.SelectedItem as DataConfig;
         var dataConfigName = dataConfig.Name;
 
-        //var connectionType = ParentObject.ConnectionType;
         var connectionType = ParentObject.ComboConfigValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
           connectionType = "SQLServer";
         }
-
-        //// Testing
-        //if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
-        //  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        //{
-        //  connectionType = "MySQL";
-        //}
 
         string showText = null;
         switch (connectionType.ToLower())
@@ -165,6 +156,8 @@ namespace LJCDataUtility
         // Add beginning value.
         InsertBuilder.Text($"{indent}(");
         SelectBuilder.Text(indent);
+        // *** Next Statement *** Add 3/16/25
+        SelectBuilder.IsFirst = true;
 
         // Remove column.
         // Columns not in insertColumns will not be included.
