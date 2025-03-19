@@ -57,7 +57,7 @@ namespace LJCDataUtilityDAL
       var manager = DataKeyManager;
       if (manager != null)
       {
-        retDataKey = manager.RetrieveWithID(id, siteID);
+        retDataKey = manager.RetrieveWithIDs(id, siteID);
       }
       return retDataKey;
     }

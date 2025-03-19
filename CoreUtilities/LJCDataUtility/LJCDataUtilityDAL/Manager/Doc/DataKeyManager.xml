@@ -12,31 +12,93 @@
     <param name="includeNull">Include null indicator.</param>
     <returns>The Data Object with the DB assigned key values.</returns>
   </Add>
+  <!-- Load Methods -->
+  <LoadWithForeign>
+    <summary>
+      Loads records with the supplied values.
+    </summary>
+    <param name="tableName">The target table name.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The retrieved records collection.</returns>
+  </LoadWithForeign>
+  <LoadWithParent>
+    <summary>
+      Loads records with the supplied values.
+    </summary>
+    <param name="parentID">The parent table ID.</param>
+    <param name="parentSiteID">The parent database ID.</param>"
+    <param name="propertyNames">The included property names.</param>
+    <returns>The retrieved records collection.</returns>
+  </LoadWithParent>
   <LoadWithType>
     <summary>
       Loads records with the supplied values.
     </summary>
-    <param name="parentID">The parent ID.</param>
+    <param name="id">The table ID.</param>
+    <param name="siteID">The database ID.</param>"
     <param name="keyType">The key type name.</param>
     <param name="propertyNames">The included property names.</param>
-    <returns></returns>
+    <returns>The retrieved records collection.</returns>
   </LoadWithType>
-  <RetrieveWithType>
+  <!-- Retrieve Methods -->
+  <RetrieveWithIDs>
+    <summary>
+      Retrieves a record with the supplied value.
+    </summary>
+    <param name="id">The table ID.</param>
+    <param name="siteID">The database ID.</param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </RetrieveWithIDs>
+  <RetrieveWithParentType>
     <summary>
       Retrieves a record with the supplied values.
     </summary>
-    <param name="parentID">The parent ID.</param>
-    <param name="parentSiteID">The parent site ID.</param>
+    <param name="parentID">The parent table ID.</param>
+    <param name="parentSiteID">The parent database ID.</param>
     <param name="keyType">The key type name.</param>
     <param name="propertyNames">The included property names.</param>
     <returns>The retrieved record object.</returns>
-  </RetrieveWithType>
+  </RetrieveWithParentType>
+  <!-- GetKey Methods -->
+  <ForeignKey>
+    <summary>
+      Gets the foreign key columns.
+    </summary>
+    <param name="targetTableName">The target table name.</param>
+    <returns>The Foreign keys.</returns>
+  </ForeignKey>
+  <IDKeys>
+    <summary>
+      Gets the primary key columns.
+    </summary>
+    <param name="id">The table ID.</param>
+    <param name="siteID">The database ID.</param>
+    <returns>The primary keys.</returns>
+  </IDKeys>
+  <ParentKey>
+    <summary>
+      Gets the parent key columns.
+    </summary>
+    <param name="parentID">The parent (Table) ID.</param>
+    <param name="parentSiteID">The parent (Table) database ID.</param>
+    <returns>The parent (Table) keys.</returns>
+  </ParentKey>
+  <ParentTypeKey>
+    <summary>
+      Gets the parent by type key columns.
+    </summary>
+    <param name="parentID">The parent table ID.</param>
+    <param name="parentSiteID">The parent site ID.</param>
+    <param name="keyType">The key type name.</param>
+    <returns>The type keys object.</returns>
+  </ParentTypeKey>
   <TypeKey>
     <summary>
-      Gets the Type key columns.
+      Gets the type key columns.
     </summary>
-    <param name="parentID">The Parent ID value.</param>
-    <param name="parentSiteID">The parent site ID.</param>
+    <param name="id">The table ID.</param>
+    <param name="siteID">The database ID.</param>
     <param name="keyType">The key type name.</param>
     <returns>The type keys object.</returns>
   </TypeKey>

@@ -50,7 +50,8 @@ namespace LJCDataUtility
           case "mysql":
             var myProc = new MyProcBuilder(ParentObject, dbName
               , parentTableName);
-            showText = myProc.RenameTableSQL(parentID, parentSiteID, dataKeys);
+            //showText = myProc.RenameTableSQL(parentID, parentSiteID, dataKeys);
+            showText = myProc.RenameTableSQL(parentID, parentSiteID);
             break;
 
           case "sqlserver":

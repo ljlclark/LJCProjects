@@ -203,7 +203,7 @@ namespace LJCDataUtility
     {
       var tableID = DataTableID(out long siteID);
       var keyManager = Managers.DataKeyManager;
-      var retKeys = keyManager.LoadWithType(tableID, siteID
+      var retKeys = keyManager.LoadWithParentType(tableID, siteID
         , (short)KeyType.Foreign);
       return retKeys;
     }
@@ -216,7 +216,7 @@ namespace LJCDataUtility
 
       var parentID = DataTableID(out long parentSiteID);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentID, parentSiteID
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
         , (short)KeyType.Primary);
       if (dataKey != null)
       {
@@ -233,7 +233,7 @@ namespace LJCDataUtility
 
       var parentID = DataTableID(out long parentSiteID);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithType(parentID, parentSiteID
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
         , (short)KeyType.Unique);
       if (dataKey != null)
       {

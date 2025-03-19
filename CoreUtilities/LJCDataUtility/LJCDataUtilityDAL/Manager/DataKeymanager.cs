@@ -9,6 +9,7 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
@@ -143,31 +144,71 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Load Methods
 
     // Loads records with the supplied values.
-    /// <include path='items/LoaWithType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKeys LoadWithType(long parentID, long parentSiteID, short keyType
+    /// <include path='items/LoadWithForeign/*' file='Doc/DataKeyManager.xml'/>
+    public DataKeys LoadWithForeign(string tableName
       , List<string> propertyNames = null)
     {
-      var keyColumns = TypeKey(parentID, parentSiteID, keyType);
+      var keyColumns = ForeignKey(tableName);
       var retKeys = Load(keyColumns, propertyNames);
       return retKeys;
     }
 
-    // Retrieves a record with the supplied value.
-    /// <summary>
-    /// Retrieves a record with the supplied value.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="siteID"></param>
-    /// <param name="propertyNames"></param>
-    /// <returns></returns>
-    public DataKey RetrieveWithID(long id, long siteID
+    // Loads records with the supplied values.
+    /// <include path='items/LoadWithParent/*' file='Doc/DataKeyManager.xml'/>
+    public DataKeys LoadWithParent(long parentID, long parentSiteID
       , List<string> propertyNames = null)
     {
-      var keyColumns = IDKey(id, siteID);
+      var keyColumns = ParentKey(parentID, parentSiteID);
+      var retKeys = Load(keyColumns, propertyNames);
+      return retKeys;
+    }
+
+    // Loads records with the supplied values.
+    /// <include path='items/LoadWithParentType/*' file='Doc/DataKeyManager.xml'/>
+    public DataKeys LoadWithParentType(long parentID, long parentSiteID
+      , int keyType, List<string> propertyNames = null)
+    {
+      var keyColumns = ParentTypeKey(parentID, parentSiteID, keyType);
+      var retKeys = Load(keyColumns, propertyNames);
+      return retKeys;
+    }
+
+    // Loads records with the supplied values.
+    /// <include path='items/LoadWithType/*' file='Doc/DataKeyManager.xml'/>
+    public DataKeys LoadWithType(long id, long siteID, short keyType
+      , List<string> propertyNames = null)
+    {
+      var keyColumns = TypeKey(id, siteID, keyType);
+      var retKeys = Load(keyColumns, propertyNames);
+      return retKeys;
+    }
+    #endregion
+
+    #region The Retrieve Methods
+
+    // Retrieves a record with the supplied value.
+    /// <include path='items/RetrieveWithIDs/*' file='Doc/DataKeyManager.xml'/>
+    public DataKey RetrieveWithIDs(long id, long siteID
+      , List<string> propertyNames = null)
+    {
+      var keyColumns = IDKeys(id, siteID);
       var joins = GetJoins();
+      var dbResult = Manager.Retrieve(keyColumns, propertyNames
+        , joins: joins);
+      var retValue = ResultConverter.CreateData(dbResult);
+      return retValue;
+    }
+
+    // Retrieves a record with the supplied values.
+    /// <include path='items/RetrieveWithParentType/*' file='Doc/DataKeyManager.xml'/>
+    public DataKey RetrieveWithParentType(long parentID, long parentSiteID
+      , short keyType, List<string> propertyNames = null)
+    {
+      var joins = GetJoins();
+      var keyColumns = ParentTypeKey(parentID, parentSiteID, keyType);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -186,31 +227,25 @@ namespace LJCDataUtilityDAL
       var retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
-
-    // Retrieves a record with the supplied values.
-    /// <include path='items/RetrieveWithType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKey RetrieveWithType(long parentID, long parentSiteID
-      , short keyType, List<string> propertyNames = null)
-    {
-      var joins = GetJoins();
-      var keyColumns = TypeKey(parentID, parentSiteID, keyType);
-      var dbResult = Manager.Retrieve(keyColumns, propertyNames
-        , joins: joins);
-      var retValue = ResultConverter.CreateData(dbResult);
-      return retValue;
-    }
     #endregion
 
     #region GetKey Methods
 
-    // Gets the ID key columns.
-    /// <summary>
-    /// Gets the ID key columns.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="siteID"></param>
-    /// <returns></returns>
-    public DbColumns IDKey(long id, long siteID)
+    /// Gets the foreign key columns.
+    public DbColumns ForeignKey(string targetTableName)
+    {
+      var foreignKeyType = 3;
+      var retValue = new DbColumns()
+      {
+        { DataKey.ColumnTargetTableName, (object)targetTableName },
+        { DataKey.ColumnKeyType, foreignKeyType }
+      };
+      return retValue;
+    }
+
+    // Gets the primary key columns.
+    /// <include path='items/IDKeys/*' file='Doc/DataKeyManager.xml'/>
+    public DbColumns IDKeys(long id, long siteID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
@@ -223,13 +258,8 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the ID key columns.
-    /// <summary>
-    /// Gets the ID key columns.
-    /// </summary>
-    /// <param name="parentID"></param>
-    /// <param name="parentSiteID"></param>
-    /// <returns></returns>
+    // Gets the parent key columns.
+    /// <include path='items/ParentKey/*' file='Doc/DataKeyManager.xml'/>
     public DbColumns ParentKey(long parentID, long parentSiteID)
     {
       var retValue = new DbColumns()
@@ -240,7 +270,33 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the Unique key columns.
+    // Gets the parent by type key columns.
+    /// <include path='items/ParentTypeKey/*' file='Doc/DataKeyManager.xml'/>
+    public DbColumns ParentTypeKey(long parentID, long parentSiteID, int keyType)
+    {
+      var retValue = new DbColumns()
+      {
+        { DataKey.ColumnDataTableID, parentID },
+        { DataKey.ColumnDataTableSiteID, parentSiteID },
+        { DataKey.ColumnKeyType, keyType }
+      };
+      return retValue;
+    }
+
+    // Gets the parent by type key columns.
+    /// <include path='items/TypeKey/*' file='Doc/DataKeyManager.xml'/>
+    public DbColumns TypeKey(long id, long siteID, int keyType)
+    {
+      var retValue = new DbColumns()
+      {
+        { DataKey.ColumnDataTableID, id },
+        { DataKey.ColumnDataTableSiteID, siteID },
+        { DataKey.ColumnKeyType, keyType }
+      };
+      return retValue;
+    }
+
+    // Gets the unique key columns.
     /// <include path='items/UniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns UniqueKey(long parentID, string name)
     {
@@ -249,19 +305,6 @@ namespace LJCDataUtilityDAL
       {
         { DataKey.ColumnDataTableID, parentID },
         { DataKey.ColumnName, (object)name }
-      };
-      return retValue;
-    }
-
-    // Gets the Type key columns.
-    /// <include path='items/TypeKey/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns TypeKey(long parentID, long parentSiteID, int keyType)
-    {
-      var retValue = new DbColumns()
-      {
-        { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentSiteID },
-        { DataKey.ColumnKeyType, keyType }
       };
       return retValue;
     }

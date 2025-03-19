@@ -433,15 +433,15 @@ namespace LJCDataUtility
     }
 
     // Renames a table. Removes old keys and creates new keys.
-    internal string RenameTableSQL(long tableID, long siteID, DataKeys dataKeys)
+    internal string RenameTableSQL(long tableID, long siteID)
     {
+      var keyManager = Managers.DataKeyManager;
       var b = new TextBuilder(512);
       b.Line("/*");
       b.Text("/* Drop foreign keys and constraints. */");
 
       // Drop referencing foreign keys.
-      var foreignKeys = dataKeys.FindAll(x => x.TargetTableName == TableName
-        && x.KeyType == (short)ObjectType.Foreign);
+      var foreignKeys = keyManager.LoadWithForeign(TableName);
       foreach (DataKey dataKey in foreignKeys)
       {
         var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
@@ -450,14 +450,15 @@ namespace LJCDataUtility
       }
 
       // Drop constraints and foreign keys.
-      var otherKeys = dataKeys.FindAll(x => x.DataTableID == tableID
-        && x.DataTableSiteID == siteID
-        && x.KeyType != (short)ObjectType.Primary);
+      var otherKeys = keyManager.LoadWithParent(tableID, siteID);
       foreach (DataKey dataKey in otherKeys)
       {
-        var text = DropConstraint(TableName, dataKey.Name);
-        b.Line();
-        b.Line(text);
+        if (dataKey.KeyType != (short)ObjectType.Primary)
+        {
+          var text = DropConstraint(TableName, dataKey.Name);
+          b.Line();
+          b.Line(text);
+        }
       }
 
       b.Line();
