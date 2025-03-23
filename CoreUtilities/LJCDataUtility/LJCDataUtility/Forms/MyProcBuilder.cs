@@ -102,7 +102,7 @@ namespace LJCDataUtility
       b.Line("-- Licensed under the MIT License.");
       b.Line($"-- {procedureName}.sql");
       var qualifiedName = QualifiedName(DBName, procedureName);
-      b.Line("DELIMITER //");
+      b.Line("DELIMITER $$");
       b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};");
       b.Line();
       b.Line($"CREATE PROCEDURE {qualifiedName} (");
@@ -392,8 +392,8 @@ namespace LJCDataUtility
       {
         Line();
       }
-      Line("END");
-      Line("//");
+      Line("END$$");
+      Line();
       Line("DELIMITER ;");
       var retProc = ToString();
       return retProc;

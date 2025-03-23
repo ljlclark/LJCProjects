@@ -17,9 +17,11 @@ namespace TestTextBuilder
       x.BeginElement("body", isIndented: false);
 
       x.CreateElement("Junk", "What?");
-      var text = "Now is the time for all good men to come to the aid or their"
+      var text = "Now is the time for all good men to come to the aid of their"
         + " country or follow the Yellow Brick Road.";
       x.CreateElement("Text", text);
+      x.BeginElement("What", text);
+      x.EndElement("What");
 
       x.EndElement("body", false);
       x.EndElement("html");
@@ -28,7 +30,10 @@ namespace TestTextBuilder
       Console.WriteLine();
 
       // Build a wrapping Item.
-      var b = new TextBuilder();
+      var b = new TextBuilder()
+      {
+        WrapEnabled = true
+      };
       b.Indent();
       b.Item("First");
       b.Item("Second");
@@ -48,7 +53,7 @@ namespace TestTextBuilder
       b.Line();
       b.Line("That is a Item.");
       b.Line();
-      //b.WrapPrefix = null;
+      b.WrapPrefix = null;
       b.Text("Now is the time for all good men to come to the aid of their country.");
       b.Text("To be or not to be, that is the question on my lips at this moment.");
       b.Text("Two roads converged in the woods into a yellow brick road and which one should I take now. ");
