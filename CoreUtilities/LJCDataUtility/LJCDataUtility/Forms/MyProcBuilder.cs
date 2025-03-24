@@ -103,7 +103,7 @@ namespace LJCDataUtility
       b.Line($"-- {procedureName}.sql");
       var qualifiedName = QualifiedName(DBName, procedureName);
       b.Line("DELIMITER $$");
-      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};");
+      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName}; $$");
       b.Line();
       b.Line($"CREATE PROCEDURE {qualifiedName} (");
       string retString = b.ToString();
