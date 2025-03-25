@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<DataConfigs
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+  <DataConfig>
+    <Name>DataUtility</Name>
+    <ConnectionType>SQLServer</ConnectionType>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
+    <Database>LJCDataUtility</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>LJCData</Name>
+    <ConnectionType>SQLServer</ConnectionType>
+    <DbServer>DESKTOP-PDPBE34</DbServer>
+    <Database>LJCData</Database>
+  </DataConfig>
+  <DataConfig>
+    <Name>TestMySql</Name>
+    <ConnectionType>MySql</ConnectionType>
+    <DbServer>LocalHost</DbServer>
+    <Database>TestData</Database>
+    <UserID>root</UserID>
+    <Pswd>Unifies1</Pswd>
+  </DataConfig>
+</DataConfigs>
