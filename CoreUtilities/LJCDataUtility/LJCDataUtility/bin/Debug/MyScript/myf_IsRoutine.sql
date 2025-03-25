@@ -22,8 +22,7 @@ if exists (
   select 1
   from Information_Schema.Routines
   where Routine_Name = routineName
-    and Routine_Type = routineTypeName)
-then
+    and Routine_Type = routineTypeName) then
   set result = 1;
 end if;
 return result;

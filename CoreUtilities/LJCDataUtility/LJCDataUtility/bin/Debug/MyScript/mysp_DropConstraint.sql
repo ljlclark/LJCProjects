@@ -9,8 +9,7 @@ create procedure `TestData`.`mysp_DropConstraint` (
   in constraintName varchar(30)
 )
 begin
-if (myf_IsConstraint(tableName, constraintName))
-then
+if (myf_IsConstraint(tableName, constraintName)) then
   set @drop = concat(
     'alter table ', tableName,
     ' drop constraint ', constraintName,

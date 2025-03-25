@@ -17,8 +17,7 @@ if exists (
   select 1
   from Information_Schema.Table_Constraints
   where Table_Name = tableName
-    and Constraint_Name = constraintName)
-then
+    and Constraint_Name = constraintName) then
   set result = 1;
 end if;
 return result;

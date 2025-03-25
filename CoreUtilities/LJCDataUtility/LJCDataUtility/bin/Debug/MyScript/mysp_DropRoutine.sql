@@ -10,8 +10,7 @@ create procedure `TestData`.`mysp_DropRoutine` (
 )
 begin
   declare typeName varchar(20);
-  if (myf_IsRoutine(routineName, routineType))  
-  then
+  if (myf_IsRoutine(routineName, routineType)) then
     set typeName = 'procedure';
     if (routinetype = 'f') then
       set typeName = 'function';
