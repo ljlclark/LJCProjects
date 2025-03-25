@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace LJCDataUtility
 {
-  //Provides MySQL procedure SQL code.
+  //Provides methods to create MySQL procedure SQL code.
   internal class MyProcBuilder
   {
     #region Constructor Methods
@@ -56,6 +56,7 @@ namespace LJCDataUtility
 
     #region Builder Methods
 
+    // Adds text to the builder, no indent or wrap.
     internal void Add(string text)
     {
       Builder.Add(text);
@@ -79,13 +80,13 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    // Adds a line to the builder.
+    // Adds a line to the builder with indent and wrap.
     internal void Line(string text = null)
     {
       Builder.Line(text);
     }
 
-    // Adds text to the builder.
+    // Adds text to the builder with indent and wrap.
     internal void Text(string text)
     {
       Builder.Text(text);
@@ -104,11 +105,9 @@ namespace LJCDataUtility
       var qualifiedName = QualifiedName(DBName, procedureName);
       b.Line("DELIMITER $$");
       b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName}; $$");
-      b.Line();
       b.Line($"CREATE PROCEDURE {qualifiedName} (");
       string retString = b.ToString();
 
-      //Text(retString);
       Add(retString);
       return retString;
     }
@@ -373,7 +372,7 @@ namespace LJCDataUtility
     internal string CreateTableProc(DataColumns dataColumns)
     {
       Begin(CreateProcName);
-      //Line("  IN parm varchar(60)");
+      //Line("  IN parmName varchar(60)");
       Line(")");
       Text("BEGIN");
 
@@ -387,13 +386,11 @@ namespace LJCDataUtility
         Text(text);
       }
 
-      // *** Next Statement *** Add 3/14/25
-      if (!EndsWith("\n\r"))
+      if (!EndsWith("\r\n"))
       {
         Line();
       }
       Line("END$$");
-      Line();
       Line("DELIMITER ;");
       var retProc = ToString();
       return retProc;

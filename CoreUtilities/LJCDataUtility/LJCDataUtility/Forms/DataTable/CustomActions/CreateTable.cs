@@ -1,11 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateTable.cs
-using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -39,23 +37,13 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataColumns))
       {
         var parentTableName = ParentObject.DataTableName();
-
         var dbName = ParentObject.ComboConfigValue("Database");
-
-        //var connectionType = ParentObject.ConnectionType;
         var connectionType = ParentObject.ComboConfigValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
           connectionType = "SQLServer";
         }
-
-        //// Testing
-        //if (DialogResult.Yes == MessageBox.Show("Use MySQL?", "MySQL"
-        //  , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-        //{
-        //  connectionType = "MySQL";
-        //}
 
         string showText = null;
         switch (connectionType.ToLower())

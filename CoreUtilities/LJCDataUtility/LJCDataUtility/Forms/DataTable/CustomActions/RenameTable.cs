@@ -3,9 +3,6 @@
 // RenameTable.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
-using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -36,7 +33,6 @@ namespace LJCDataUtility
         var parentTableName = ParentObject.DataTableName();
         string dbName = ParentObject.DataConfigCombo.Text;
 
-        //var connectionType = ParentObject.ConnectionType;
         var connectionType = ParentObject.ComboConfigValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
@@ -50,7 +46,6 @@ namespace LJCDataUtility
           case "mysql":
             var myProc = new MyProcBuilder(ParentObject, dbName
               , parentTableName);
-            //showText = myProc.RenameTableSQL(parentID, parentSiteID, dataKeys);
             showText = myProc.RenameTableSQL(parentID, parentSiteID);
             break;
 

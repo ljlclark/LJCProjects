@@ -1,13 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddData.cs
-using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -85,7 +81,6 @@ namespace LJCDataUtility
         proc.IsFirst = true;
         if (NetCommon.HasItems(data.ParentKeys))
         {
-          // *** Next Statement *** Add 2/17/25
           foreach (DataKey dataKey in data.ParentKeys)
           {
             // "@tableNameFindName"
@@ -108,7 +103,7 @@ namespace LJCDataUtility
               }
             }
 
-            // Create the 
+            // Create the reference parameters.
             parmFindName = proc.SQLVarName(dataKey.TargetTableName);
             parmFindName += parentFindColumnName;
             proc.Text($"  {parmFindName} {typeValue}");
@@ -125,7 +120,6 @@ namespace LJCDataUtility
 
         List<string> varRefNames = new List<string>();
 
-        // *** Next Statement *** Change 2/21/25
         if (NetCommon.HasItems(data.ParentKeys))
         {
           foreach (DataKey dataKey in data.ParentKeys)
@@ -159,7 +153,6 @@ namespace LJCDataUtility
         proc.Line(valuesList);
 
         proc.Line("END");
-
         retString = proc.ToString();
       }
 
@@ -240,10 +233,9 @@ namespace LJCDataUtility
         var valuesList
           = myProc.ValuesList(data.TableColumns, varRefNames);
         myProc.Line(valuesList);
-        myProc.Line("END IF;");
 
-        myProc.Line("END");
-        myProc.Line("//");
+        myProc.Line("END IF;");
+        myProc.Line("END$$");
         myProc.Line("DELIMITER ;");
         retString = myProc.ToString();
       }

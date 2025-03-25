@@ -177,6 +177,10 @@
     <Content Include="bin\Debug\ControlValues\DataUtility.xml" />
     <Content Include="bin\Debug\DataConfigs.xml" />
     <Content Include="bin\Debug\LJCDataUtility.xml" />
+    <Content Include="bin\Debug\MyScript\myf_IsConstraint.sql" />
+    <Content Include="bin\Debug\MyScript\myf_IsRoutine.sql" />
+    <Content Include="bin\Debug\MyScript\mysp_DropConstraint.sql" />
+    <Content Include="bin\Debug\MyScript\mysp_DropRoutine.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\DropAddProcedures.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataColumnAdd.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataKeyAdd.sql" />
