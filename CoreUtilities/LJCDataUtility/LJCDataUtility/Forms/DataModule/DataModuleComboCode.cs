@@ -95,7 +95,7 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = ParentObject.DataModuleID(item);
+          var rowID = ParentObject.DataModuleItemID(item);
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -148,7 +148,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataModuleID();
+        var id = ParentObject.DataModuleItemID();
         var keyColumns = new DbColumns()
         {
           { DataModule.ColumnID, id }
@@ -176,7 +176,7 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        int id = ParentObject.DataModuleID();
+        int id = ParentObject.DataModuleItemID();
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
@@ -212,7 +212,7 @@ namespace LJCDataUtility
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
-        id = ParentObject.DataModuleID();
+        id = ParentObject.DataModuleItemID();
       }
       DataRetrieve();
 

@@ -186,6 +186,7 @@
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataKeyAdd.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataModuleAdd.sql" />
     <Content Include="bin\Debug\SQLScript\2Add\sp_DataTableAdd.sql" />
+    <Content Include="bin\Debug\DataModule.jpg" />
     <Content Include="bin\Debug\SQLScript\DataUtilityDB.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\DataUtilityData.sql" />
     <Content Include="bin\Debug\SQLScript\3Data\sp_DataColumnData.sql" />

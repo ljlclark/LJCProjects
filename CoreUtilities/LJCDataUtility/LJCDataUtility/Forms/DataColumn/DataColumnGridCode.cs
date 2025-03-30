@@ -100,7 +100,7 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         long parentSiteID = 0;
-        var parentID = ParentObject.DataTableID(out parentSiteID);
+        var parentID = ParentObject.DataTableRowID(out parentSiteID);
         var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
         var orderByNames = new List<string>()
         {
@@ -140,7 +140,7 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowID = ParentObject.DataColumnID(row);
+          var rowID = ParentObject.DataColumnRowID(row);
           if (rowID == id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
@@ -203,7 +203,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataColumnID();
+        var id = ParentObject.DataColumnRowID();
         var keyColumns = new DbColumns()
         {
           { DataUtilColumn.ColumnID, id }
@@ -232,9 +232,9 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataColumnID();
-        var parentID = ParentObject.DataTableID(out long parentSiteID);
-        string parentName = ParentObject.DataTableName();
+        var id = ParentObject.DataColumnRowID();
+        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+        string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
         {
@@ -258,8 +258,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         int sequence = ColumnGrid.Rows.Count + 1;
-        var parentID = ParentObject.DataTableID(out long parentSiteID);
-        string parentName = ParentObject.DataTableName();
+        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+        string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
@@ -285,7 +285,7 @@ namespace LJCDataUtility
       if (ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentObject.DataColumnID();
+        id = ParentObject.DataColumnRowID();
       }
       DataRetrieve();
 

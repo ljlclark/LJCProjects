@@ -22,6 +22,9 @@ namespace LJCDataUtility
       DBName = dbName;
       TableColumns = tableColumns;
       TableName = tableName;
+
+      ForeignKeys = null;
+      ParentColumns = null;
       ParentUniqueColumns = null;
     }
     #endregion
@@ -31,11 +34,11 @@ namespace LJCDataUtility
     // Gets or sets the Database name.
     internal string DBName { get; set; }
 
+    // Gets or sets the ParentKeys collection.
+    internal DataKeys ForeignKeys { get; set; }
+
     // Gets or sets the parent columns.
     internal DataColumns ParentColumns { get; set; }
-
-    // Gets or sets the ParentKeys collection.
-    internal DataKeys ParentKeys { get; set; }
 
     // Gets or sets the parent unique columns.
     internal DataColumns ParentUniqueColumns { get; set; }

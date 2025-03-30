@@ -282,7 +282,7 @@ namespace LJCDataUtility
       {
         int sequence = TableGrid.Rows.Count + 1;
         int parentID = ModuleCombo.LJCSelectedItemID();
-        var parentSiteID = ParentObject.DataModuleSiteID();
+        var parentSiteID = ParentObject.DataModuleItemSiteID();
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);

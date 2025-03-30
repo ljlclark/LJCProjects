@@ -151,6 +151,29 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="array"></param>
+    /// <returns></returns>
+    public static bool HasElements(object array)
+    {
+      bool retValue = false;
+
+      object[] setArray = null;
+      if (array != null
+        && array.GetType().IsArray)
+      {
+        setArray = (object[])array;
+      }
+      if (setArray != null
+        && setArray.Length > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Checks an IList collection for items.
     /// <include path='items/HasItems/*' file='Doc/NetCommon.xml'/>
     public static bool HasItems(IList list)

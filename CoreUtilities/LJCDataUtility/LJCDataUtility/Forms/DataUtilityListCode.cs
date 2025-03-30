@@ -8,7 +8,6 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -17,6 +16,8 @@ namespace LJCDataUtility
   // The list form code.
   internal partial class DataUtilityList : Form
   {
+    #region Control Item Value Methods
+
     #region DataColumn value methods.
 
     // Gets the current Column Grid row.
@@ -27,7 +28,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataColumnID(LJCGridRow row = null)
+    internal long DataColumnRowID(LJCGridRow row = null)
     {
       long retColumnID = 0;
 
@@ -44,7 +45,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row Name.
-    internal string DataColumnName(LJCGridRow row = null)
+    internal string DataColumnRowName(LJCGridRow row = null)
     {
       string retColumnName = null;
 
@@ -61,7 +62,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal long DataColumnSiteID(LJCGridRow row = null)
+    internal long DataColumnRowSiteID(LJCGridRow row = null)
     {
       long retColumnSiteID = 0;
 
@@ -86,7 +87,7 @@ namespace LJCDataUtility
     #region DataConfig value methods.
 
     // Gets the DataConfig object.
-    internal DataConfig ComboDataConfig()
+    internal DataConfig DataConfigItem()
     {
       var configCombo = DataConfigCombo;
       var retConfig = configCombo.SelectedItem as DataConfig;
@@ -94,11 +95,11 @@ namespace LJCDataUtility
     }
 
     // Gets the DataConfig object.
-    internal string ComboConfigValue(string propertyName)
+    internal string DataConfigItemValue(string propertyName)
     {
       string retValue = null;
 
-      var dataConfig = ComboDataConfig();
+      var dataConfig = DataConfigItem();
       if (dataConfig != null)
       {
         switch (propertyName.ToLower())
@@ -140,7 +141,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataKeyID(out long siteID, LJCGridRow row = null)
+    internal long DataKeyRowID(out long siteID, LJCGridRow row = null)
     {
       long retKeyID = 0;
 
@@ -153,13 +154,13 @@ namespace LJCDataUtility
         && "KeyGrid" == row.DataGridView.Name)
       {
         retKeyID = row.LJCGetInt64(DataKey.ColumnID);
-        retKeyID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
+        siteID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
       }
       return retKeyID;
     }
 
     // Gets the selected row Name.
-    internal string DataKeyName(LJCGridRow row = null)
+    internal string DataKeyRowName(LJCGridRow row = null)
     {
       string retKeyName = null;
 
@@ -176,7 +177,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal long DataKeySiteID(LJCGridRow row = null)
+    internal long DataKeyRowSiteID(LJCGridRow row = null)
     {
       long retKeySiteID = 0;
 
@@ -201,20 +202,20 @@ namespace LJCDataUtility
     /// <returns>The foreign key collection.</returns>
     internal DataKeys ForeignKeys()
     {
-      var tableID = DataTableID(out long siteID);
+      var tableID = DataTableRowID(out long siteID);
       var keyManager = Managers.DataKeyManager;
       var retKeys = keyManager.LoadWithParentType(tableID, siteID
         , (short)KeyType.Foreign);
       return retKeys;
     }
 
-    /// <summary>Retrieve the Primary key list.</summary>
-    /// <returns>The primary key values text.</returns>
-    internal string PrimaryKeyValues()
+    /// <summary>Retrieve the Primary key column list.</summary>
+    /// <returns>The primary key columns text.</returns>
+    internal string PrimaryKeyColumns()
     {
       string retList = null;
 
-      var parentID = DataTableID(out long parentSiteID);
+      var parentID = DataTableRowID(out long parentSiteID);
       var keyManager = Managers.DataKeyManager;
       var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
         , (short)KeyType.Primary);
@@ -225,13 +226,13 @@ namespace LJCDataUtility
       return retList;
     }
 
-    /// <summary>Retrieve the Unique key list.</summary>
-    /// <returns>The unique key values text.</returns>
-    internal string UniqueKeyValues()
+    /// <summary>Retrieve the Unique key column list.</summary>
+    /// <returns>The unique key columns text.</returns>
+    internal string UniqueKeyColumns()
     {
       string retList = null;
 
-      var parentID = DataTableID(out long parentSiteID);
+      var parentID = DataTableRowID(out long parentSiteID);
       var keyManager = Managers.DataKeyManager;
       var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
         , (short)KeyType.Unique);
@@ -245,7 +246,7 @@ namespace LJCDataUtility
 
     #region DataModule value methods.
 
-    internal int DataModuleID(LJCItem item = null)
+    internal int DataModuleItemID(LJCItem item = null)
     {
       int retModuleID = 0;
 
@@ -261,7 +262,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row Name.
-    internal string DataModuleName(LJCItem item = null)
+    internal string DataModuleItemName(LJCItem item = null)
     {
       string retModuleName = null;
 
@@ -277,7 +278,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal long DataModuleSiteID(LJCItem item = null)
+    internal long DataModuleItemSiteID(LJCItem item = null)
     {
       long retModuleSiteID = 0;
 
@@ -302,7 +303,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataTableID(out long siteID, LJCGridRow row = null)
+    internal long DataTableRowID(out long siteID, LJCGridRow row = null)
     {
       long retTableID = 0;
 
@@ -320,26 +321,8 @@ namespace LJCDataUtility
       return retTableID;
     }
 
-    // Gets the target table ID.
-    internal long ParentDataTableID(string targetTableName, out long siteID)
-    {
-      long retTableID = 0;
-
-      siteID = 0;
-      var moduleID = DataModuleID();
-      var tableManager = Managers.DataTableManager;
-      var targetTable = tableManager.RetrieveWithUnique(moduleID
-        , targetTableName);
-      if (targetTable != null)
-      {
-        retTableID = targetTable.ID;
-        siteID = targetTable.DataSiteID;
-      }
-      return retTableID;
-    }
-
     // Gets the selected row Name.
-    internal string DataTableName(LJCGridRow row = null)
+    internal string DataTableRowName(LJCGridRow row = null)
     {
       string retTableName = null;
 
@@ -356,7 +339,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal long DataTableSiteID(LJCGridRow row = null)
+    internal long DataTableRowSiteID(LJCGridRow row = null)
     {
       long retTableSiteID = 0;
 
@@ -376,6 +359,25 @@ namespace LJCDataUtility
       }
       return retTableSiteID;
     }
+
+    // Gets the target table ID.
+    internal long TargetDataTableID(string targetTableName, out long siteID)
+    {
+      long retTableID = 0;
+
+      siteID = 0;
+      var moduleID = DataModuleItemID();
+      var tableManager = Managers.DataTableManager;
+      var targetTable = tableManager.RetrieveWithUnique(moduleID
+        , targetTableName);
+      if (targetTable != null)
+      {
+        retTableID = targetTable.ID;
+        siteID = targetTable.DataSiteID;
+      }
+      return retTableID;
+    }
+    #endregion
     #endregion
 
     #region Setup Methods
@@ -401,10 +403,14 @@ namespace LJCDataUtility
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
-      ColumnTabs.MouseDown += ColumnTabs_MouseDown;
-      TileTabs.MouseDown += TileTabs_MouseDown;
+
+      // Action Event Handlers
       ColumnTabMove.Click += ColumnTabMove_Click;
       KeyTabMove.Click += KeyTabMove_Click;
+
+      // Control Event Handlers
+      ColumnTabs.MouseDown += ColumnTabs_MouseDown;
+      TileTabs.MouseDown += TileTabs_MouseDown;
 
       InitializeClassData();
       SetupControlCode();
@@ -446,9 +452,9 @@ namespace LJCDataUtility
     private void LoadControlData()
     {
       // Get DataConfigs
-      mDataConfigs = new DataConfigs();
-      mDataConfigs.LJCLoadData();
-      foreach (DataConfig dataConfig in mDataConfigs)
+      var dataConfigs = new DataConfigs();
+      dataConfigs.LJCLoadData();
+      foreach (DataConfig dataConfig in dataConfigs)
       {
         DataConfigCombo.Items.Add(dataConfig);
       }
@@ -648,8 +654,6 @@ namespace LJCDataUtility
     // Gets or sets the ControlValues object.
     private ControlValues ControlValues { get; set; }
     #endregion
-
-    private DataConfigs mDataConfigs;
   }
 
   /// <summary></summary>

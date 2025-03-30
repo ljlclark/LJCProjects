@@ -42,7 +42,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var itemName = ParentObject.DataTableName();
+        var itemName = ParentObject.DataTableRowName();
         if (itemName != TableName)
         {
           var message = $"Table name '{itemName}' does not match selected name";
@@ -61,7 +61,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var tableManager = Managers.DataTableManager;
-        var moduleID = ParentObject.DataModuleID();
+        var moduleID = ParentObject.DataModuleItemID();
         dataTable = tableManager.RetrieveWithUnique(moduleID, TableName);
         if (null == dataTable)
         {

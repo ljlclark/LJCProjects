@@ -80,6 +80,12 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    // Adds a delimiter if not the first list item
+    internal void Item(string text)
+    {
+      Builder.Item(text);
+    }
+
     // Adds a line to the builder with indent and wrap.
     internal void Line(string text = null)
     {
@@ -104,7 +110,7 @@ namespace LJCDataUtility
       b.Line($"-- {procedureName}.sql");
       var qualifiedName = QualifiedName(DBName, procedureName);
       b.Line("DELIMITER $$");
-      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName}; $$");
+      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};$$");
       b.Line($"CREATE PROCEDURE {qualifiedName} (");
       string retString = b.ToString();
 
@@ -378,7 +384,7 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      var keyValues = ParentObject.UniqueKeyValues();
+      var keyValues = ParentObject.UniqueKeyColumns();
       if (NetString.HasValue(keyValues))
       {
         Line();

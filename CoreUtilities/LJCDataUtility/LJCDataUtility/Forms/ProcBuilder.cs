@@ -9,6 +9,22 @@ namespace LJCDataUtility
   /// <summary>Provides procedure SQL code.</summary>
   internal class ProcBuilder
   {
+    #region Static Methods
+
+    // Creates a SQL variable name from a column name.
+    /// <include path='items/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
+    internal static string SQLVarName(string columnName)
+    {
+      var retName = "";
+
+      // @name
+      var startChar = columnName.ToLower()[0];
+      retName += $"@{startChar}";
+      retName += columnName.Substring(1);
+      return retName;
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -156,9 +172,12 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(256)
       {
-        IndentCount = 2
+        IndentCount = 2,
+        WrapAtDelimiter = true,
+        WrapEnabled = true,
       };
-      var value = b.GetIndentString();
+      //var value = b.GetIndentString();
+      var value = "";
       if (includeParens)
       {
         value += "(";
@@ -201,9 +220,7 @@ namespace LJCDataUtility
       , string parentIDColumnName, string parentFindColumnName
       , string parmFindName)
     {
-      // Reference name "TableNameParentID".
-      var varRefName
-        = SQLVarName($"{parentTableName}{parentIDColumnName}");
+      var varRefName = SQLVarName(parentIDColumnName);
 
       var b = new TextBuilder(128);
       b.Text($"DECLARE {varRefName} bigint = ");
@@ -249,19 +266,6 @@ namespace LJCDataUtility
         retValue += $"({dataColumn.MaxLength})";
       }
       return retValue;
-    }
-
-    // Creates a SQL variable name from a column name.
-    /// <include path='items/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
-    internal string SQLVarName(string columnName)
-    {
-      var retName = "";
-
-      // @name
-      var startChar = columnName.ToLower()[0];
-      retName += $"@{startChar}";
-      retName += columnName.Substring(1);
-      return retName;
     }
 
     // Creates the Values list.
@@ -391,7 +395,7 @@ namespace LJCDataUtility
 
       CreateTable(dataColumns);
 
-      var keyValues = ParentObject.PrimaryKeyValues();
+      var keyValues = ParentObject.PrimaryKeyColumns();
       if (NetString.HasValue(keyValues))
       {
         Line();
@@ -399,7 +403,7 @@ namespace LJCDataUtility
         Text(text);
       }
 
-      keyValues = ParentObject.UniqueKeyValues();
+      keyValues = ParentObject.UniqueKeyColumns();
       if (NetString.HasValue(keyValues))
       {
         Line();

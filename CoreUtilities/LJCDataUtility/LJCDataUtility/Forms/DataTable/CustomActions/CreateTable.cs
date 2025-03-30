@@ -26,7 +26,7 @@ namespace LJCDataUtility
     // Generates the CreateTable procedure.
     internal void CreateTableProc()
     {
-      var parentID = ParentObject.DataTableID(out long parentSiteID);
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -36,9 +36,9 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        var parentTableName = ParentObject.DataTableName();
-        var dbName = ParentObject.ComboConfigValue("Database");
-        var connectionType = ParentObject.ComboConfigValue("ConnectionType");
+        var parentTableName = ParentObject.DataTableRowName();
+        var dbName = ParentObject.DataConfigItemValue("Database");
+        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.

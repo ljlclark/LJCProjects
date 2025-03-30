@@ -36,7 +36,7 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var parentID = ParentObject.DataTableID(out long parentSiteID);
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
@@ -45,13 +45,13 @@ namespace LJCDataUtility
         , orderByNames);
       if (NetCommon.HasItems(insertColumns))
       {
-        var parentTableName = ParentObject.DataTableName();
+        var parentTableName = ParentObject.DataTableRowName();
 
         var configCombo = ParentObject.DataConfigCombo;
         var dataConfig = configCombo.SelectedItem as DataConfig;
         var dataConfigName = dataConfig.Name;
 
-        var connectionType = ParentObject.ComboConfigValue("ConnectionType");
+        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
@@ -90,7 +90,7 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder(256);
       string toTableName = $"New{tableName}";
-      var dbName = ParentObject.ComboConfigValue("Database");
+      var dbName = ParentObject.DataConfigItemValue("Database");
 
       // Create new Table.
       var myProc = new MyProcBuilder(ParentObject, dbName, toTableName);
@@ -117,7 +117,7 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder(256);
       string toTableName = $"New{tableName}";
-      var dbName = ParentObject.ComboConfigValue("Database");
+      var dbName = ParentObject.DataConfigItemValue("Database");
       b.Line($"USE [{dbName}]");
 
       // Create new Table.

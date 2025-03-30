@@ -281,7 +281,7 @@ namespace LJCNetCommon
     }
 
     /// <summary>Split a string without empty entries.</summary>
-    public static string[] Split(string text, string separator)
+    public static string[] Split(string text, string separator = ",")
     {
       string[] retValues = null;
 

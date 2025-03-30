@@ -27,7 +27,7 @@ namespace LJCDataUtility
     // Generates the CreateData procedure.
     internal void CreateDataProc()
     {
-      var tableName = ParentObject.DataTableName();
+      var tableName = ParentObject.DataTableRowName();
       switch (tableName)
       {
         case "DataModule":
@@ -55,7 +55,7 @@ namespace LJCDataUtility
       var dataColumns = columnManager.Load();
       if (NetCommon.HasItems(dataColumns))
       {
-        var dbName = ParentObject.ComboConfigValue("Database");
+        var dbName = ParentObject.DataConfigItemValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataColumnData");
@@ -88,7 +88,7 @@ namespace LJCDataUtility
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        var dbName = ParentObject.ComboConfigValue("Database");
+        var dbName = ParentObject.DataConfigItemValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataKeyData");
@@ -121,7 +121,7 @@ namespace LJCDataUtility
       var dataTables = moduleManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var dbName = ParentObject.ComboConfigValue("Database");
+        var dbName = ParentObject.DataConfigItemValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataModuleData");
@@ -149,7 +149,7 @@ namespace LJCDataUtility
       var dataTables = tableManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var dbName = ParentObject.ComboConfigValue("Database");
+        var dbName = ParentObject.DataConfigItemValue("Database");
 
         var proc = new ProcBuilder(ParentObject, dbName, null);
         proc.Begin("sp_DataTableData");

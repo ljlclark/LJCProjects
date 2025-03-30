@@ -25,15 +25,15 @@ namespace LJCDataUtility
     // Generates the Rename Table SQL.
     internal void RenameTableSQL()
     {
-      var parentID = ParentObject.DataTableID(out long parentSiteID);
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
       var keyManager = Managers.DataKeyManager;
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        var parentTableName = ParentObject.DataTableName();
+        var parentTableName = ParentObject.DataTableRowName();
         string dbName = ParentObject.DataConfigCombo.Text;
 
-        var connectionType = ParentObject.ComboConfigValue("ConnectionType");
+        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
