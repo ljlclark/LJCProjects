@@ -210,6 +210,7 @@
     <Content Include="Doc\ProcBuilder.xml" />
     <Content Include="Forms\DataTable\ACreate.txt" />
     <Content Include="Forms\DataTable\BCreate.txt" />
+    <Content Include="Naming.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDataUtilityDAL\LJCDataUtilityDAL.csproj">

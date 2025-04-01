@@ -1,0 +1,7 @@
+﻿Array of values "nameItems": NetCommon.HasElements(nameItems).
+List<string> collection "nameNames": NetCommon.HasItems(nameNames).
+Comma delimited list "nameList": NetString.HasValue(nameList)
+Covert List to Names: nameNames = new List<string>
+  NetString.ToNames(nameList).
+Type safe collection is plural of elements: items = new List<item>()
+  NetCommon.HasItems(items).
