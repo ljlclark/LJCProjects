@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- XMLBuilder.xml -->
+<!-- HTMLBuilder.xml -->
 <items>
   <!-- Data Class Methods -->
   <ToString>
     <summary>
-      Retrieves the XML text.
+      Retrieves the HTML text.
     </summary>
-    <returns>The XML text.</returns>
+    <returns>The HTML text.</returns>
   </ToString>
   <!-- Append Methods -->
   <Begin>
@@ -63,16 +63,124 @@
     <summary>
       Adds a modified text line to the builder.
     </summary>
-    <param name="text">The text value.</param>
+    <param name="text">The append text.</param>
     <returns>The added text line.</returns>
   </Line>
   <Text>
     <summary>
       Adds modified text to the builder.
     </summary>
-    <param name="text">The text value.</param>
+    <param name="text">The append text.</param>
     <returns>The added text.</returns>
   </Text>
+  <!-- Create Methods -->
+  <CreateHTMLBegin>
+    <summary>
+      Creates the HTML beginning up to and including &lt;head&gt;.
+    </summary>
+    <param name="copyright"></param>
+    <param name="fileName"></param>
+    <returns></returns>
+  </CreateHTMLBegin>
+  <CreateLink>
+    <summary>
+      Creates a &lt;link&gt; element for a style sheet.
+    </summary>
+    <param name="fileName"></param>
+    <returns></returns>
+  </CreateLink>
+  <CreateMeta>
+    <summary>
+      Creates a &lt;meta&gt; element.
+    </summary>
+    <param name="name"></param>
+    <param name="content"></param>
+    <returns></returns>
+  </CreateMeta>
+  <CreateMetas>
+    <summary>
+      Creates common &lt;meta&gt; elements.
+    </summary>
+    <param name="author"></param>
+    <param name="description"></param>
+    <param name="keywords"></param>
+    <param name="charSet"></param>
+    <returns></returns>
+  </CreateMetas>
+  <CreateScript>
+    <summary>
+      Creates a &lt;script&gt; element.
+    </summary>
+    <param name="fileName"></param>
+    <returns></returns>
+  </CreateScript>
+  <!-- Create Get Methods -->
+  <GetHTMLBegin>
+    <summary>
+      Gets the HTML beginning up to and including &lt;head&gt;.
+    </summary>
+    <param name="copyright"></param>
+    <param name="fileName"></param>
+    <returns></returns>
+  </GetHTMLBegin>
+  <GetLink>
+    <summary>
+      Gets the &lt;link&gt; element for a style sheet.
+    </summary>
+    <param name="fileName"></param>
+    <returns></returns>
+  </GetLink>
+  <GetMeta>
+    <summary>
+      Gets a &lt;meta&gt; element.
+    </summary>
+    <param name="name"></param>
+    <param name="content"></param>
+    <returns></returns>
+  </GetMeta>
+  <GetMetas>
+    <summary>
+      Gets common &lt;meta&gt; elements.
+    </summary>
+    <param name="author"></param>
+    <param name="description"></param>
+    <param name="keywords"></param>
+    <param name="charSet"></param>
+    <returns></returns>
+  </GetMetas>
+  <GetScript>
+    <summary>
+      Gets a &lt;script&gt; element.
+    </summary>
+    <param name="fileName"></param>
+    <returns></returns>
+  </GetScript>
+  <!-- Attribs Methods -->
+  <Attribs>
+    <summary>
+      Gets common element attributes.
+    </summary>
+    <param name="className">The class attribute.</param>
+    <param name="id">The id attribute.</param>
+    <returns>The common element attributes collection.</returns>
+  </Attribs>
+  <StartAttribs>
+    <summary>
+      Creates the HTML start attributes.
+    </summary>
+    <returns>The HTML start attributes.</returns>
+  </StartAttribs>
+  <TableAttribs>
+    <summary>
+      Gets common table attributes.
+    </summary>
+    <param name="border">The border attribute.</param>
+    <param name="cellSpacing">The cellspacing attribute</param>
+    <param name="cellPadding">The cellpadding attribute</param>
+    <param name="className">The class attribute.</param>
+    <param name="id">The id attribute.</param>
+    <returns>The common table attributes.</returns>
+  </TableAttribs>
   <!-- Other Methods -->
   <Indent>
     <summary>
@@ -81,13 +189,7 @@
     <param name="increment">The amount to increment or decrement the count.</param>
     <returns>The current indent count.</returns>
   </Indent>
-  <StartAttributes>
-    <summary>
-      Creates the XML start attributes.
-    </summary>
-    <returns>The XML start attributes.</returns>
-  </StartAttributes>
-  <!-- Get Modified Methods -->
+  <!-- Get Modified Text Methods -->
   <GetAttribs>
     <summary>
       Gets the attributes text.
@@ -106,4 +208,41 @@
       builder.Text(text);
     </code>
   </GetAttribs>
+  <GetIndented>
+    <summary>
+      Gets a new line with indent.
+    </summary>
+    <param name="text">The append text.</param>
+    <returns>The potentially indented new text value.</returns>
+  </GetIndented>
+  <GetIndentString>
+    <summary>
+      Returns the current indent string.
+    </summary>
+    <returns>The current indent string.</returns>
+  </GetIndentString>
+  <GetLine>
+    <summary>
+      Gets a modified text line.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The modified text line.</returns>
+  </GetLine>
+  <GetText>
+    <summary>
+      Gets modified text.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The modified text.</returns>
+    <remarks>
+      Adds a newline if line length is greater than LineLimit.
+    </remarks>
+  </GetText>
+  <GetWrapped>
+    <summary>
+      Adds added text and new wrapped line if combined line > LineLimit.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The modified text.</returns>
+  </GetWrapped>
 </items>

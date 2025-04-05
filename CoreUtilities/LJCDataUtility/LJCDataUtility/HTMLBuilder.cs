@@ -154,7 +154,8 @@ namespace LJCDataUtility
 
     #region Create Methods
 
-    /// <summary>Creates the HTML beginning up to &lt;head&gt;</summary>.
+    // Creates the HTML beginning up to and including <head>.
+    /// <include path='items/CreateHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
     public string CreateHTMLBegin(string[] copyright = null
       , string fileName = null)
     {
@@ -163,7 +164,28 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Creates a Meta element.</summary>
+    // Creates a <link> element for a style sheet.
+    /// <include path='items/CreateLink/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateLink(string fileName)
+    {
+      var retValue = GetLink(fileName);
+      Line();
+      Text(retValue);
+      return retValue;
+    }
+
+    // Creates a <meta> element.
+    /// <include path='items/CreateMeta/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateMeta(string name, string content)
+    {
+      var retValue = GetMeta(name, content);
+      Line();
+      Text(retValue);
+      return retValue;
+    }
+
+    // Creates common <meta> elements.
+    /// <include path='items/CreateMetas/*' file='Doc/HTMLBuilder.xml'/>
     public string CreateMetas(string author, string description = null
       , string keywords = null, string charSet = "utf-8")
     {
@@ -173,25 +195,8 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Creates a Link element for a style sheet.</summary>
-    public string CreateLink(string fileName)
-    {
-      var retValue = GetLink(fileName);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-
-    /// <summary>Creates a Meta element.</summary>
-    public string CreateMeta(string name, string content)
-    {
-      var retValue = GetMeta(name, content);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-
-    /// <summary>Creates a Link element for a style sheet.</summary>
+    // Creates a <link> element for a style sheet.
+    /// <include path='items/CreateScript/*' file='Doc/HTMLBuilder.xml'/>
     public string CreateScript(string fileName)
     {
       var retValue = GetScript(fileName);
@@ -203,22 +208,8 @@ namespace LJCDataUtility
 
     #region Create Get Methods
 
-    /// <summary>Gets common element attributes.</summary>
-    public HTMLAttribs GetAttribs(string className, string id = null)
-    {
-      var retAttribs = new HTMLAttribs();
-      if (NetString.HasValue(id))
-      {
-        retAttribs.Add("id", id);
-      }
-      if (NetString.HasValue(className))
-      {
-        retAttribs.Add("class", className);
-      }
-      return retAttribs;
-    }
-
-    /// <summary>Gets the HTML beginning up to &lt;head&gt;</summary>.
+    // Gets the HTML beginning up to <head>.
+    /// <include path='items/GetHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
     public string GetHTMLBegin(string[] copyright = null
       , string fileName = null)
     {
@@ -251,7 +242,8 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Gets the Link element.</summary>
+    // Gets the <link> element for a style sheet.
+    /// <include path='items/GetLink/*' file='Doc/HTMLBuilder.xml'/>
     public string GetLink(string fileName)
     {
       var hb = new HTMLBuilder();
@@ -267,7 +259,8 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Gets the Meta element.</summary>
+    // Gets a <meta> element.
+    /// <include path='items/GetMeta/*' file='Doc/HTMLBuilder.xml'/>
     public string GetMeta(string name, string content)
     {
       var hb = new HTMLBuilder();
@@ -282,7 +275,8 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Gets the common Meta elements.</summary>
+    // Gets common <meta> elements.
+    /// <include path='items/GetMetas/*' file='Doc/HTMLBuilder.xml'/>
     public string GetMetas(string author, string description = null
       , string keywords = null, string charSet = "utf-8")
     {
@@ -308,7 +302,8 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    /// <summary>Gets the Script element.</summary>
+    // Gets the <script> element.
+    /// <include path='items/GetScript/*' file='Doc/HTMLBuilder.xml'/>
     public string GetScript(string fileName)
     {
       var hb = new HTMLBuilder();
@@ -321,12 +316,15 @@ namespace LJCDataUtility
       var retValue = hb.ToString();
       return retValue;
     }
+    #endregion
 
-    /// <summary>Gets common table attributes.</summary>
-    public HTMLAttribs GetTableAttribs(int border = 1, int cellSpacing = 0
-      , int cellPadding = 2, string id = null, string className = null)
+    #region Attribs Methods
+
+    // Gets common element attributes.
+    /// <include path='items/Attribs/*' file='Doc/HTMLBuilder.xml'/>
+    public HTMLAttribs Attribs(string className = null, string id = null)
     {
-      var retAttribs = GetAttribs(className, id);
+      var retAttribs = new HTMLAttribs();
       if (NetString.HasValue(id))
       {
         retAttribs.Add("id", id);
@@ -335,6 +333,27 @@ namespace LJCDataUtility
       {
         retAttribs.Add("class", className);
       }
+      return retAttribs;
+    }
+
+    // Creates the HTML element attributes.
+    /// <include path='items/StartAttribs/*' file='Doc/HTMLBuilder.xml'/>
+    public HTMLAttribs StartAttribs()
+    {
+      var retAttributes = new HTMLAttribs()
+      {
+        { "lang", "en" },
+        { "xmlns", "http://www.w3.org/1999/xhtml" },
+      };
+      return retAttributes;
+    }
+
+    // Gets common table attributes.
+    /// <include path='items/TableAttribs/*' file='Doc/HTMLBuilder.xml'/>
+    public HTMLAttribs TableAttribs(int border = 1, int cellSpacing = 0
+      , int cellPadding = 2, string className = null, string id = null)
+    {
+      var retAttribs = Attribs(className, id);
       retAttribs.Add("border", border.ToString());
       retAttribs.Add("cellspacing", cellSpacing.ToString());
       retAttribs.Add("cellpadding", cellPadding.ToString());
@@ -355,51 +374,9 @@ namespace LJCDataUtility
       }
       return IndentCount;
     }
-
-    // Creates the HTML element attributes.
-    /// <include path='items/StartAttributes/*' file='Doc/HTMLBuilder.xml'/>
-    public HTMLAttribs StartAttribs()
-    {
-      var retAttributes = new HTMLAttribs()
-      {
-        { "lang", "en" },
-        { "xmlns", "http://www.w3.org/1999/xhtml" },
-      };
-      return retAttributes;
-    }
-
-    // Creates the content text.
-    private string Content(string text, bool isEmpty
-      , out bool isWrapped)
-    {
-      string retValue = "";
-
-      isWrapped = false;
-      // Add text content.
-      if (!isEmpty
-        && NetString.HasValue(text))
-      {
-        if (text.Length > 80 - IndentLength)
-        {
-          isWrapped = true;
-          retValue += "\r\n";
-          Indent();
-          var textValue = GetText(text);
-          retValue += textValue;
-          Indent(-1);
-          retValue += "\r\n";
-        }
-        else
-        {
-          retValue += text;
-        }
-        LineLength = 0;
-      }
-      return retValue;
-    }
     #endregion
 
-    #region Get Modified Methods
+    #region Get Modified Text Methods
 
     /// <summary>Gets the attributes text.</summary>
     /// <include path='items/GetAttribs/*' file='Doc/HTMLBuilder.xml'/>
@@ -435,7 +412,7 @@ namespace LJCDataUtility
       return retText;
     }
 
-    /// <summary>Gets a new line with indent.</summary>
+    // Gets a new line with indent.
     /// <include path='items/GetIndented/*' file='Doc/HTMLBuilder.xml'/>
     public string GetIndented(string text)
     {
@@ -450,14 +427,16 @@ namespace LJCDataUtility
       return retText;
     }
 
-    /// <summary>Returns the current XML indent string.</summary>
+    // Returns the current indent string.
+    /// <include path='items/GetIndentString/*' file='Doc/HTMLBuilder.xml'/>
     public string GetIndentString()
     {
       var retValue = new string(' ', IndentLength);
       return retValue;
     }
 
-    /// <summary>Gets a modified text line.</summary>
+    // Gets a modified text line.
+    /// <include path='items/GetLine/*' file='Doc/HTMLBuilder.xml'/>
     public string GetLine(string text)
     {
       var retLine = GetText(text);
@@ -465,9 +444,8 @@ namespace LJCDataUtility
       return retLine;
     }
 
-    // Gets a modified text line.
-    // Adds a newline if line length is greater than LineLimit.
-    /// <include path='items/Text/*' file='Doc/HTMLBuilder.xml'/>
+    // Gets modified text.
+    /// <include path='items/GetText/*' file='Doc/HTMLBuilder.xml'/>
     public string GetText(string text)
     {
       var retText = GetIndented(text);
@@ -561,6 +539,36 @@ namespace LJCDataUtility
         retText = $" {retText}";
       }
       return retText;
+    }
+
+    // Creates the content text.
+    private string Content(string text, bool isEmpty
+      , out bool isWrapped)
+    {
+      string retValue = "";
+
+      isWrapped = false;
+      // Add text content.
+      if (!isEmpty
+        && NetString.HasValue(text))
+      {
+        if (text.Length > 80 - IndentLength)
+        {
+          isWrapped = true;
+          retValue += "\r\n";
+          Indent();
+          var textValue = GetText(text);
+          retValue += textValue;
+          Indent(-1);
+          retValue += "\r\n";
+        }
+        else
+        {
+          retValue += text;
+        }
+        LineLength = 0;
+      }
+      return retValue;
     }
 
     // Gets the text length if not null.

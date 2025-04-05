@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- HTMLData.xml -->
+<items>
+  <ResultTableHeadings>
+    <summary>
+      Create table headings from result.
+    </summary>
+    <param name="dbResult"></param>
+    <returns></returns>
+  </ResultTableHeadings>
+  <ResultTableRows>
+    <summary>
+      Create table rows from result.
+    </summary>
+    <param name="dbResult"></param>
+    <returns></returns>
+  </ResultTableRows>
+</items>

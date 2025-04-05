@@ -132,6 +132,7 @@
     <Compile Include="HTMLAttrib.cs" />
     <Compile Include="HTMLAttribs.cs" />
     <Compile Include="HTMLBuilder.cs" />
+    <Compile Include="HTMLData.cs" />
     <Compile Include="LJC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,6 +212,7 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
     <Content Include="Doc\HTML.html" />
+    <Content Include="Doc\HTMLData.xml" />
     <Content Include="Doc\HTMLAttrib.xml" />
     <Content Include="Doc\HTMLAttribs.xml" />
     <Content Include="Doc\HTMLBuilder.xml" />

@@ -196,14 +196,28 @@ namespace LJCDataUtility
         {
           DataUtilColumn.ColumnSequence
         };
+        var propertyNames = new List<string>()
+        {
+          DataUtilColumn.ColumnName,
+          DataUtilColumn.ColumnDescription,
+          DataUtilColumn.ColumnTypeName,
+          DataUtilColumn.ColumnMaxLength,
+          DataUtilColumn.ColumnSequence,
+          DataUtilColumn.ColumnAllowNull,
+          DataUtilColumn.ColumnDefaultValue,
+        };
 
-        // Get DataTable
+        // Get Data Collection
+
+        // Get DbResult
         var dataManager = ColumnManager.Manager;
-        var dataRequest = dataManager.CreateLoadRequest(keyColumns, orderByNames);
+        var dataRequest = dataManager.CreateLoadRequest(keyColumns, propertyNames);
         var sqlBuilder = new DbSqlBuilder(dataRequest);
-        var loadSQL = sqlBuilder.CreateLoadSql();
+        var loadSQL = sqlBuilder.CreateLoadSql(dataRequest);
         // Gets all columns.
         var dbResult = dataManager.ExecuteClientSql(RequestType.Load, loadSQL);
+
+        // Get DataTable
 
         // Create HTML Table.
         const bool NoIndent = false;
@@ -216,10 +230,10 @@ namespace LJCDataUtility
 
         if (NetCommon.HasItems(dbResult.Rows))
         {
-          var attribs = hb.GetTableAttribs();
+          var attribs = hb.TableAttribs();
           hb.Begin("table", null, attribs);
-          hb.Text(ResultHeadings(dbResult));
-          hb.Text(ResultRows(dbResult));
+          hb.Text(HTMLData.ResultTableHeadings(dbResult));
+          hb.Text(HTMLData.ResultTableRows(dbResult, 5));
           hb.End("table");
         }
 
@@ -228,52 +242,6 @@ namespace LJCDataUtility
         var html = hb.ToString();
       }
       ParentObject.Cursor = Cursors.Default;
-    }
-
-    // Create table headings from result.
-    private string ResultHeadings(DbResult dbResult)
-    {
-      string retValue = null;
-
-      if (DbResult.HasRows(dbResult))
-      {
-        var hb = new HTMLBuilder();
-        hb.Begin("tr");
-        foreach (var value in dbResult.Rows[0].Values)
-        {
-          hb.Create("th", value.PropertyName);
-        }
-        hb.End("tr");
-        retValue = hb.ToString();
-      }
-      return retValue;
-    }
-
-    // Create table rows from result.
-    private string ResultRows(DbResult dbResult)
-    {
-      string retValue = null;
-
-      if (DbResult.HasRows(dbResult))
-      {
-        var hb = new HTMLBuilder();
-        foreach (var row in dbResult.Rows)
-        {
-          hb.Begin("tr");
-          foreach (var value in row.Values)
-          {
-            string valueText = null;
-            if (value.Value != null)
-            {
-              valueText = value.Value.ToString();
-            }
-            hb.Create("td", valueText);
-          }
-          hb.End("tr");
-        }
-        retValue = hb.ToString();
-      }
-      return retValue;
     }
 
     private string ColumnHtmlHead(string author = null)
