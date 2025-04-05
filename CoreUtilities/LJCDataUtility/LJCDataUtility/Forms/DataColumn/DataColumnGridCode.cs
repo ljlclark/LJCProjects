@@ -203,7 +203,7 @@ namespace LJCDataUtility
         var sqlBuilder = new DbSqlBuilder(dataRequest);
         var loadSQL = sqlBuilder.CreateLoadSql();
         // Gets all columns.
-        var dataTable = dataManager.ExecuteClientSql(RequestType.Load, loadSQL);
+        var dbResult = dataManager.ExecuteClientSql(RequestType.Load, loadSQL);
 
         // Create HTML Table.
         const bool NoIndent = false;
@@ -214,16 +214,66 @@ namespace LJCDataUtility
         hb.End("head", NoIndent);
         hb.Begin("body", null, null, NoIndent);
 
-        hb.Indent();
-        hb.Line();
-        hb.Text("This is an HTML document");
-        hb.Indent(-1);
+        if (NetCommon.HasItems(dbResult.Rows))
+        {
+          var attribs = hb.GetTableAttribs();
+          hb.Begin("table", null, attribs);
+          hb.Text(ResultHeadings(dbResult));
+          hb.Text(ResultRows(dbResult));
+          hb.End("table");
+        }
 
         hb.End("body", NoIndent);
         hb.End("html", NoIndent);
         var html = hb.ToString();
       }
       ParentObject.Cursor = Cursors.Default;
+    }
+
+    // Create table headings from result.
+    private string ResultHeadings(DbResult dbResult)
+    {
+      string retValue = null;
+
+      if (DbResult.HasRows(dbResult))
+      {
+        var hb = new HTMLBuilder();
+        hb.Begin("tr");
+        foreach (var value in dbResult.Rows[0].Values)
+        {
+          hb.Create("th", value.PropertyName);
+        }
+        hb.End("tr");
+        retValue = hb.ToString();
+      }
+      return retValue;
+    }
+
+    // Create table rows from result.
+    private string ResultRows(DbResult dbResult)
+    {
+      string retValue = null;
+
+      if (DbResult.HasRows(dbResult))
+      {
+        var hb = new HTMLBuilder();
+        foreach (var row in dbResult.Rows)
+        {
+          hb.Begin("tr");
+          foreach (var value in row.Values)
+          {
+            string valueText = null;
+            if (value.Value != null)
+            {
+              valueText = value.Value.ToString();
+            }
+            hb.Create("td", valueText);
+          }
+          hb.End("tr");
+        }
+        retValue = hb.ToString();
+      }
+      return retValue;
     }
 
     private string ColumnHtmlHead(string author = null)

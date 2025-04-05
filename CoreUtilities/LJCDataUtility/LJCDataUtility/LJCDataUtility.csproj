@@ -219,6 +219,7 @@
     <Content Include="Forms\DataTable\ACreate.txt" />
     <Content Include="Forms\DataTable\BCreate.txt" />
     <Content Include="Naming.txt" />
+    <Content Include="Test.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDataUtilityDAL\LJCDataUtilityDAL.csproj">

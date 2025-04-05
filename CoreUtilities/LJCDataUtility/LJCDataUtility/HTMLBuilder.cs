@@ -118,14 +118,16 @@ namespace LJCDataUtility
 
       if (applyIndent)
       {
+        builder.Append($"{GetIndentString()}");
+      }
+      builder.Append($"</{name}>");
+      if (applyIndent)
+      {
         if (IndentCount > 0)
         {
           IndentCount--;
         }
-        builder.Append($"{GetIndentString()}");
       }
-
-      builder.Append($"</{name}>");
       retEnd = builder.ToString();
       HTML += retEnd;
       return retEnd;
@@ -200,6 +202,21 @@ namespace LJCDataUtility
     #endregion
 
     #region Create Get Methods
+
+    /// <summary>Gets common element attributes.</summary>
+    public HTMLAttribs GetAttribs(string className, string id = null)
+    {
+      var retAttribs = new HTMLAttribs();
+      if (NetString.HasValue(id))
+      {
+        retAttribs.Add("id", id);
+      }
+      if (NetString.HasValue(className))
+      {
+        retAttribs.Add("class", className);
+      }
+      return retAttribs;
+    }
 
     /// <summary>Gets the HTML beginning up to &lt;head&gt;</summary>.
     public string GetHTMLBegin(string[] copyright = null
@@ -303,6 +320,25 @@ namespace LJCDataUtility
       hb.Create("script", null, attribs);
       var retValue = hb.ToString();
       return retValue;
+    }
+
+    /// <summary>Gets common table attributes.</summary>
+    public HTMLAttribs GetTableAttribs(int border = 1, int cellSpacing = 0
+      , int cellPadding = 2, string id = null, string className = null)
+    {
+      var retAttribs = GetAttribs(className, id);
+      if (NetString.HasValue(id))
+      {
+        retAttribs.Add("id", id);
+      }
+      if (NetString.HasValue(className))
+      {
+        retAttribs.Add("class", className);
+      }
+      retAttribs.Add("border", border.ToString());
+      retAttribs.Add("cellspacing", cellSpacing.ToString());
+      retAttribs.Add("cellpadding", cellPadding.ToString());
+      return retAttribs;
     }
     #endregion
 
