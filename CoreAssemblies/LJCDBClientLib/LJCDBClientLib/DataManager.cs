@@ -97,7 +97,6 @@ namespace LJCDBClientLib
     //// Execute the command
     //int stepID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
-
     // Adds a record to the database.
     /// <include path='items/Add/*' file='Doc/DataManager.xml'/>
     public DbResult Add(object dataObject, List<string> propertyNames = null

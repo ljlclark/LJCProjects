@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using LJCDataUtility;
+using LJCDBMessage;
 
 namespace LJCDataUtility
 {
@@ -51,6 +51,7 @@ namespace LJCDataUtility
       list.ColumnEdit.Click += ColumnEdit_Click;
       list.ColumnDelete.Click += ColumnDelete_Click;
       list.ColumnRefresh.Click += ColumnRefresh_Click;
+      list.ColumnHTML.Click += ColumnHTML_Click;
       list.ColumnExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -99,8 +100,7 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        long parentSiteID = 0;
-        var parentID = ParentObject.DataTableRowID(out parentSiteID);
+        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
         var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
         var orderByNames = new List<string>()
         {
@@ -184,6 +184,63 @@ namespace LJCDataUtility
     #endregion
 
     #region Action Methods
+
+    internal void ColumnHTML()
+    {
+      ParentObject.Cursor = Cursors.WaitCursor;
+      if (TableGrid.CurrentRow is LJCGridRow)
+      {
+        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+        var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
+        var orderByNames = new List<string>()
+        {
+          DataUtilColumn.ColumnSequence
+        };
+
+        // Get DataTable
+        var dataManager = ColumnManager.Manager;
+        var dataRequest = dataManager.CreateLoadRequest(keyColumns, orderByNames);
+        var sqlBuilder = new DbSqlBuilder(dataRequest);
+        var loadSQL = sqlBuilder.CreateLoadSql();
+        // Gets all columns.
+        var dataTable = dataManager.ExecuteClientSql(RequestType.Load, loadSQL);
+
+        // Create HTML Table.
+        const bool NoIndent = false;
+        var hb = new HTMLBuilder();
+        hb.Text(LJC.HTMLBegin("File.html"));
+        hb.Line();
+        hb.Text(ColumnHtmlHead(LJC.Author()));
+        hb.End("head", NoIndent);
+        hb.Begin("body", null, null, NoIndent);
+
+        hb.Indent();
+        hb.Line();
+        hb.Text("This is an HTML document");
+        hb.Indent(-1);
+
+        hb.End("body", NoIndent);
+        hb.End("html", NoIndent);
+        var html = hb.ToString();
+      }
+      ParentObject.Cursor = Cursors.Default;
+    }
+
+    private string ColumnHtmlHead(string author = null)
+    {
+      // Create HTML Table.
+      var hb = new HTMLBuilder();
+      if (!NetString.HasValue(author))
+      {
+        author = LJC.Author();
+      }
+      hb.Create("title", "Creates an HTML Document");
+      hb.CreateMetas(author, "Create HTML Document");
+      hb.CreateLink("Style.css");
+      hb.CreateScript("Source.js");
+      var retValue = hb.ToString();
+      return retValue;
+    }
 
     // Deletes the selected row.
     internal void Delete()
@@ -345,6 +402,12 @@ namespace LJCDataUtility
     private void ColumnDelete_Click(object sender, EventArgs e)
     {
       Delete();
+    }
+
+    // Handles the Column HTML menu item event.
+    private void ColumnHTML_Click(object sender, EventArgs e)
+    {
+      ColumnHTML();
     }
 
     // Handles the Refresh menu item event.

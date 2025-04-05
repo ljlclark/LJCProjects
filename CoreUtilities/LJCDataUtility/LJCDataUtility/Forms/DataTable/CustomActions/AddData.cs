@@ -76,11 +76,11 @@ namespace LJCDataUtility
         var proc = new ProcBuilder(ParentObject, data.DBName, data.TableName);
         proc.Begin(proc.AddProcName);
 
-        var foreignKeyValues = ForeignKeyValues(data.ForeignKeys);
-        if (NetCommon.HasItems(foreignKeyValues))
+        var keyValues = KeyValues(data.ForeignKeys);
+        if (NetCommon.HasItems(keyValues))
         {
-          var uniqueKeyParams = UniqueKeyParamList(foreignKeyValues);
-          proc.Text(uniqueKeyParams);
+          var uniqueParamValueList = UniqueParamValueList(keyValues);
+          proc.Text(uniqueParamValueList);
         }
 
         // Data parameters.
@@ -92,29 +92,24 @@ namespace LJCDataUtility
         proc.Line("BEGIN");
 
         List<string> foreignKeyVars = new List<string>();
-        if (NetCommon.HasItems(foreignKeyValues))
+        if (NetCommon.HasItems(keyValues))
         {
           var line = "";
-          foreach (ForeignKeyValues foreignKeyParam in foreignKeyValues)
+          foreach (KeyValues keyValueObject in keyValues)
           {
             // Include Referenced table.
-            //var foreignKeyVar = foreignKeyParam.TargetTableName;
-            var keyColumnNames = foreignKeyParam.ForeignKeyColumnNames;
-            var targetColumnNames = foreignKeyParam.UniqueColumnNames;
-            for (int index = 0; index < keyColumnNames.Count - 1; index++)
+            var foreignKeyColumnNames = keyValueObject.ForeignKeyColumnNames;
+            for (int index = 0; index < foreignKeyColumnNames.Count - 1; index++)
             {
-              var foreignKeyColumnName = keyColumnNames[index];
-              var targetColumnName = TargetColumnNameItem(targetColumnNames
-                , index);
+              var foreignKeyColumnName = foreignKeyColumnNames[index];
+              var foreignTableName = keyValueObject.ForeignTableName;
+              var uniqueColumnName = UniqueColumnName(keyValueObject, index);
+              var uniqueVar = UniqueVar(keyValueObject, index);
+              line = proc.IFItem(foreignTableName, foreignKeyColumnName
+                , uniqueColumnName, uniqueVar);
+
               var foreignKeyVar = ProcBuilder.SQLVarName(foreignKeyColumnName);
               foreignKeyVars.Add(foreignKeyVar);
-
-              var foreignUniqueVars = foreignKeyParam.UniqueVarNames;
-              var foreignUniqueVar = ForeignUniqueVarItem(foreignUniqueVars
-                , index);
-              line = proc.IFItem(foreignKeyParam.ForeignTableName
-                , foreignKeyColumnName, targetColumnName
-                , foreignUniqueVar);
             }
           }
 
@@ -157,7 +152,7 @@ namespace LJCDataUtility
             continue;
 
           var columnName = tableColumn.Name;
-          if (IsForeignKeyColumn(foreignKeyValues, columnName))
+          if (IsForeignKeyColumn(keyValues, columnName))
           {
             columnName = ProcBuilder.SQLVarName(columnName);
           }
@@ -178,9 +173,9 @@ namespace LJCDataUtility
     }
 
     // Gets the referenced parameters.
-    private List<ForeignKeyValues> ForeignKeyValues(DataKeys foreignKeys)
+    private List<KeyValues> KeyValues(DataKeys foreignKeys)
     {
-      List<ForeignKeyValues> retValues = new List<ForeignKeyValues>();
+      List<KeyValues> retValues = new List<KeyValues>();
 
       if (NetCommon.HasItems(foreignKeys))
       {
@@ -213,7 +208,7 @@ namespace LJCDataUtility
               // @dataModuleName nvarchar(60)
               uniqueParamValues.Add($"{uniqueVarName} {typeValue}");
 
-              var foreignKeyValue = new ForeignKeyValues()
+              var foreignKeyValue = new KeyValues()
               {
                 ForeignKeyColumnNames = foreignKeyColumnNames,
                 UniqueColumnNames = uniqueColumnNames,
@@ -230,10 +225,11 @@ namespace LJCDataUtility
     }
 
     // Gets the foreign unique var name.
-    private string ForeignUniqueVarItem(List<string> vars, int index)
+    private string UniqueVar(KeyValues keyValueObject, int index)
     {
       string retValue = null;
 
+      var vars = keyValueObject.UniqueVarNames;
       if (NetCommon.HasItems(vars)
         && vars.Count > 0
         && vars.Count <= index + 1)
@@ -243,7 +239,7 @@ namespace LJCDataUtility
       return retValue;
     }
 
-    private bool IsForeignKeyColumn(List<ForeignKeyValues> foreignKeyParams
+    private bool IsForeignKeyColumn(List<KeyValues> foreignKeyParams
       , string columnName)
     {
       bool retValue = false;
@@ -353,11 +349,11 @@ namespace LJCDataUtility
     }
 
     // Creates a collection of names from a comma separated string.
-    private List<string> ToNames(string nameList)
+    private List<string> ToNames(string nameList, string separator = ",")
     {
       var retItems = new List<string>();
 
-      var nameItems = NetString.Split(nameList, ",");
+      var nameItems = NetString.Split(nameList, separator);
       if (NetCommon.HasElements(nameItems))
       {
         foreach (var name in nameItems)
@@ -369,10 +365,11 @@ namespace LJCDataUtility
     }
 
     // Gets the target column name.
-    private string TargetColumnNameItem(List<string> names, int index)
+    private string UniqueColumnName(KeyValues keyValues, int index)
     {
       string retValue = null;
 
+      var names = keyValues.UniqueColumnNames;
       if (NetCommon.HasItems(names)
         && names.Count > 0
         && names.Count <= index + 1)
@@ -440,22 +437,22 @@ namespace LJCDataUtility
     }
 
     // Gets the unique key param delimited list.
-    private string UniqueKeyParamList(List<ForeignKeyValues> foreignKeyParams)
+    private string UniqueParamValueList(List<KeyValues> foreignKeyParams)
     {
       string retText = "";
 
       var isFirst = true;
       foreach (var foreignKeyParam in foreignKeyParams)
       {
-        var foreignUniqueParams = foreignKeyParam.UniqueParamValues;
-        foreach (var foreignUniqueParam in foreignUniqueParams)
+        var uniqueParamValues = foreignKeyParam.UniqueParamValues;
+        foreach (var uniqueParamValue in uniqueParamValues)
         {
           if (!isFirst)
           {
             retText += ",\r\n";
           }
           isFirst = false;
-          retText += $"  {foreignUniqueParam}";
+          retText += $"  {uniqueParamValue}";
         }
       }
       return retText;
@@ -497,7 +494,7 @@ namespace LJCDataUtility
     #endregion
   }
 
-  internal class ForeignKeyValues
+  internal class KeyValues
   {
 
     public List<string> ForeignKeyColumnNames { get; set; }

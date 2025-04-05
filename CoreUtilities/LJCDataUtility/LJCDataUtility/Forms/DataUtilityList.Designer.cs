@@ -100,6 +100,8 @@
       this.KeyTabMove = new System.Windows.Forms.ToolStripMenuItem();
       this.DataConfigLabel = new System.Windows.Forms.Label();
       this.DataConfigCombo = new LJCWinFormControls.LJCItemCombo();
+      this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+      this.ColumnHTML = new System.Windows.Forms.ToolStripMenuItem();
       this.ModuleMenu.SuspendLayout();
       this.TableMenu.SuspendLayout();
       this.ColumnMenu.SuspendLayout();
@@ -326,64 +328,66 @@
             this.toolStripSeparator4,
             this.ColumnRefresh,
             this.toolStripSeparator1,
+            this.ColumnHTML,
+            this.toolStripSeparator12,
             this.ColumnExit});
       this.ColumnMenu.Name = "ColumnMenu";
-      this.ColumnMenu.Size = new System.Drawing.Size(197, 214);
+      this.ColumnMenu.Size = new System.Drawing.Size(241, 285);
       // 
       // ColumnHeading
       // 
       this.ColumnHeading.BackColor = System.Drawing.SystemColors.Highlight;
       this.ColumnHeading.Name = "ColumnHeading";
-      this.ColumnHeading.Size = new System.Drawing.Size(196, 32);
+      this.ColumnHeading.Size = new System.Drawing.Size(240, 32);
       this.ColumnHeading.Text = "Column Menu";
       // 
       // ColumnNew
       // 
       this.ColumnNew.Name = "ColumnNew";
       this.ColumnNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.ColumnNew.Size = new System.Drawing.Size(196, 32);
+      this.ColumnNew.Size = new System.Drawing.Size(240, 32);
       this.ColumnNew.Text = "&New";
       // 
       // ColumnEdit
       // 
       this.ColumnEdit.Name = "ColumnEdit";
       this.ColumnEdit.ShortcutKeyDisplayString = "ENTER";
-      this.ColumnEdit.Size = new System.Drawing.Size(196, 32);
+      this.ColumnEdit.Size = new System.Drawing.Size(240, 32);
       this.ColumnEdit.Text = "&Edit";
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(193, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(237, 6);
       // 
       // ColumnDelete
       // 
       this.ColumnDelete.Name = "ColumnDelete";
       this.ColumnDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-      this.ColumnDelete.Size = new System.Drawing.Size(196, 32);
+      this.ColumnDelete.Size = new System.Drawing.Size(240, 32);
       this.ColumnDelete.Text = "&Delete";
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(193, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(237, 6);
       // 
       // ColumnRefresh
       // 
       this.ColumnRefresh.Name = "ColumnRefresh";
       this.ColumnRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-      this.ColumnRefresh.Size = new System.Drawing.Size(196, 32);
+      this.ColumnRefresh.Size = new System.Drawing.Size(240, 32);
       this.ColumnRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
       // 
       // ColumnExit
       // 
       this.ColumnExit.Name = "ColumnExit";
-      this.ColumnExit.Size = new System.Drawing.Size(196, 32);
+      this.ColumnExit.Size = new System.Drawing.Size(240, 32);
       this.ColumnExit.Text = "E&xit";
       // 
       // KeyMenu
@@ -666,7 +670,7 @@
       this.ColumnGrid.RowHeadersWidth = 62;
       this.ColumnGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.ColumnGrid.ShowCellToolTips = false;
-      this.ColumnGrid.Size = new System.Drawing.Size(1083, 330);
+      this.ColumnGrid.Size = new System.Drawing.Size(1083, 336);
       this.ColumnGrid.TabIndex = 0;
       this.ColumnGrid.Text = "LJCDataGrid";
       // 
@@ -713,7 +717,7 @@
       this.KeyGrid.RowHeadersWidth = 62;
       this.KeyGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.KeyGrid.ShowCellToolTips = false;
-      this.KeyGrid.Size = new System.Drawing.Size(1083, 328);
+      this.KeyGrid.Size = new System.Drawing.Size(1083, 334);
       this.KeyGrid.TabIndex = 2;
       this.KeyGrid.Text = "LJCDataGrid";
       // 
@@ -760,6 +764,17 @@
       this.DataConfigCombo.Name = "DataConfigCombo";
       this.DataConfigCombo.Size = new System.Drawing.Size(250, 34);
       this.DataConfigCombo.TabIndex = 3;
+      // 
+      // toolStripSeparator12
+      // 
+      this.toolStripSeparator12.Name = "toolStripSeparator12";
+      this.toolStripSeparator12.Size = new System.Drawing.Size(237, 6);
+      // 
+      // ColumnHTML
+      // 
+      this.ColumnHTML.Name = "ColumnHTML";
+      this.ColumnHTML.Size = new System.Drawing.Size(240, 32);
+      this.ColumnHTML.Text = "HTML";
       // 
       // DataUtilityList
       // 
@@ -870,6 +885,8 @@
     internal System.Windows.Forms.ToolStripMenuItem KeyTabMove;
     private System.Windows.Forms.Label DataConfigLabel;
     internal LJCWinFormControls.LJCItemCombo DataConfigCombo;
+    internal System.Windows.Forms.ToolStripMenuItem ColumnHTML;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
   }
 }
 

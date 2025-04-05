@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- HTMLAttribute.xml -->
+<items>
+  <CHTMLAttribute>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="name">The attribute name.</param>
+    <param name="value">The attribute value.</param>
+  </CHTMLAttribute>
+</items>
