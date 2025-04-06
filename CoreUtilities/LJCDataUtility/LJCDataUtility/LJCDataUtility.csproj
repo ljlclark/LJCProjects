@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDataAccess, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LJCDataUtilityDAL\bin\Debug\LJCDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>
@@ -74,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
+    <Compile Include="Forms\DataColumn\ColumnHtml.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
@@ -129,7 +134,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProcBuilder.cs" />
-    <Compile Include="HTMLAttrib.cs" />
+    <Compile Include="Attribute.cs" />
     <Compile Include="HTMLAttribs.cs" />
     <Compile Include="HTMLBuilder.cs" />
     <Compile Include="HTMLData.cs" />
@@ -221,7 +226,6 @@
     <Content Include="Forms\DataTable\ACreate.txt" />
     <Content Include="Forms\DataTable\BCreate.txt" />
     <Content Include="Naming.txt" />
-    <Content Include="Test.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDataUtilityDAL\LJCDataUtilityDAL.csproj">

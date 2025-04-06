@@ -3,18 +3,50 @@
 <!-- Licensed under the MIT License. -->
 <!-- HTMLData.xml -->
 <items>
-  <ResultTableHeadings>
+  <DataTableHeadings>
+    <summary>
+      Create table headings from DataTable.
+    </summary>
+    <param name="dataTable"></param>
+    <returns></returns>
+  </DataTableHeadings>
+  <DataTableHTML>
+    <summary>
+      Creates an HTML table from DataTable.
+    </summary>
+    <param name="dataTable"></param>
+    <param name="maxRows"></param>
+    <returns></returns>
+  </DataTableHTML>
+  <DataTableRows>
+    <summary>
+      Creates table rows from DataTable.
+    </summary>
+    <param name="dataTable"></param>
+    <param name="maxRows"></param>
+    <returns></returns>
+  </DataTableRows>
+  <ResultHeadings>
     <summary>
       Create table headings from result.
     </summary>
     <param name="dbResult"></param>
     <returns></returns>
-  </ResultTableHeadings>
-  <ResultTableRows>
+  </ResultHeadings>
+  <ResultHTML>
+    <summary>
+      Creates an HTML table from DbResult.
+    </summary>
+    <param name="dbResult"></param>
+    <param name="maxRows"></param>
+    <returns></returns>
+  </ResultHTML>
+  <ResultRows>
     <summary>
       Create table rows from result.
     </summary>
     <param name="dbResult"></param>
+    <param name="maxRows"></param>
     <returns></returns>
-  </ResultTableRows>
+  </ResultRows>
 </items>

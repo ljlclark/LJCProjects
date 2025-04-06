@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using LJCDBMessage;
+using System.IO;
 
 namespace LJCDataUtility
 {
@@ -185,79 +186,22 @@ namespace LJCDataUtility
 
     #region Action Methods
 
-    internal void ColumnHTML()
+    internal void ColumnTableHTML()
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
-        var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
-        var orderByNames = new List<string>()
-        {
-          DataUtilColumn.ColumnSequence
-        };
-        var propertyNames = new List<string>()
-        {
-          DataUtilColumn.ColumnName,
-          DataUtilColumn.ColumnDescription,
-          DataUtilColumn.ColumnTypeName,
-          DataUtilColumn.ColumnMaxLength,
-          DataUtilColumn.ColumnSequence,
-          DataUtilColumn.ColumnAllowNull,
-          DataUtilColumn.ColumnDefaultValue,
-        };
+        var fileName = "Temp.html";
+        var columnHTML = new ColumnHTML(ParentObject, ColumnManager, fileName);
+        var dataType = "DataTable";
+        //var dataType = "DbResult";
+        string html = columnHTML.GetHTML(dataType);
 
-        // Get Data Collection
-
-        // Get DbResult
-        var dataManager = ColumnManager.Manager;
-        var dataRequest = dataManager.CreateLoadRequest(keyColumns, propertyNames);
-        var sqlBuilder = new DbSqlBuilder(dataRequest);
-        var loadSQL = sqlBuilder.CreateLoadSql(dataRequest);
-        // Gets all columns.
-        var dbResult = dataManager.ExecuteClientSql(RequestType.Load, loadSQL);
-
-        // Get DataTable
-
-        // Create HTML Table.
-        const bool NoIndent = false;
-        var hb = new HTMLBuilder();
-        hb.Text(LJC.HTMLBegin("File.html"));
-        hb.Line();
-        hb.Text(ColumnHtmlHead(LJC.Author()));
-        hb.End("head", NoIndent);
-        hb.Begin("body", null, null, NoIndent);
-
-        if (NetCommon.HasItems(dbResult.Rows))
-        {
-          var attribs = hb.TableAttribs();
-          hb.Begin("table", null, attribs);
-          hb.Text(HTMLData.ResultTableHeadings(dbResult));
-          hb.Text(HTMLData.ResultTableRows(dbResult, 5));
-          hb.End("table");
-        }
-
-        hb.End("body", NoIndent);
-        hb.End("html", NoIndent);
-        var html = hb.ToString();
+        File.WriteAllText(fileName, html);
+        ParentObject.Cursor = Cursors.Default;
+        NetFile.ShellProgram(null, fileName);
       }
       ParentObject.Cursor = Cursors.Default;
-    }
-
-    private string ColumnHtmlHead(string author = null)
-    {
-      // Create HTML Table.
-      var hb = new HTMLBuilder();
-      if (!NetString.HasValue(author))
-      {
-        author = LJC.Author();
-      }
-      hb.Create("title", "Creates an HTML Document");
-      hb.CreateMetas(author, "Create HTML Document");
-      hb.CreateLink("Style.css");
-      hb.CreateScript("Source.js");
-      var retValue = hb.ToString();
-      return retValue;
     }
 
     // Deletes the selected row.
@@ -422,16 +366,16 @@ namespace LJCDataUtility
       Delete();
     }
 
-    // Handles the Column HTML menu item event.
-    private void ColumnHTML_Click(object sender, EventArgs e)
-    {
-      ColumnHTML();
-    }
-
     // Handles the Refresh menu item event.
     private void ColumnRefresh_Click(object sender, EventArgs e)
     {
       Refresh();
+    }
+
+    // Handles the Column HTML menu item event.
+    private void ColumnHTML_Click(object sender, EventArgs e)
+    {
+      ColumnTableHTML();
     }
     #endregion
 

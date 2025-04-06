@@ -5,7 +5,7 @@
 namespace LJCNetCommon
 {
   /// <summary>
-  /// Represents an XML element attribute.
+  /// Represents an element or node attribute.
   /// </summary>
   public class XMLAttribute
   {
@@ -36,13 +36,13 @@ namespace LJCNetCommon
     /// <summary>Gets or sets the attribute value.</summary>
     public string Value
     {
-      get { return mAttributeValue; }
+      get { return mValue; }
       set
       {
-        mAttributeValue = NetString.InitString(value);
+        mValue = NetString.InitString(value);
       }
     }
-    private string mAttributeValue;
+    private string mValue;
     #endregion
   }
 }

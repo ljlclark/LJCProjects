@@ -34,12 +34,27 @@ namespace LJCDataUtility
     }
     #endregion
 
+    #region Methods
+
+    // Changes the IndentCount by the supplied value.
+    /// <include path='items/Indent/*' file='Doc/HTMLBuilder.xml'/>
+    public int Indent(int increment = 1)
+    {
+      IndentCount += increment;
+      if (IndentCount < 0)
+      {
+        IndentCount = 0;
+      }
+      return IndentCount;
+    }
+    #endregion
+
     #region Append Methods
 
     // Creates the element begin tag.
     /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
     public string Begin(string name, string text = null
-      , HTMLAttribs htmlAttributes = null, bool applyIndent = true)
+      , Attributes htmlAttributes = null, bool applyIndent = true)
     {
       return Create(name, text, htmlAttributes, applyIndent, false
         , false);
@@ -48,7 +63,7 @@ namespace LJCDataUtility
     // Creates an element. No new line.
     /// <include path='items/Create/*' file='Doc/HTMLBuilder.xml'/>
     public string Create(string name, string text = null
-      , HTMLAttribs htmlAttributes = null, bool applyIndent = true
+      , Attributes htmlAttributes = null, bool applyIndent = true
       , bool isEmpty = false, bool close = true)
     {
       var builder = new StringBuilder(128);
@@ -213,7 +228,6 @@ namespace LJCDataUtility
     public string GetHTMLBegin(string[] copyright = null
       , string fileName = null)
     {
-      const bool NoIndent = false;
       var hb = new HTMLBuilder();
       hb.Text("<!DOCTYPE html>");
       if (NetCommon.HasElements(copyright))
@@ -242,13 +256,23 @@ namespace LJCDataUtility
       return retValue;
     }
 
+    /// <summary>Gets the HTML end &lt;body&gt; and &lt;html&gt;.</summary>
+    public string GetHTMLEnd()
+    {
+      var hb = new HTMLBuilder();
+      hb.End("body", NoIndent);
+      hb.End("html", NoIndent);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
     // Gets the <link> element for a style sheet.
     /// <include path='items/GetLink/*' file='Doc/HTMLBuilder.xml'/>
     public string GetLink(string fileName)
     {
       var hb = new HTMLBuilder();
       hb.Indent(IndentCount);
-      var attribs = new HTMLAttribs()
+      var attribs = new Attributes()
       {
         { "rel", "stylesheet" },
         { "type", "text/css" },
@@ -265,7 +289,7 @@ namespace LJCDataUtility
     {
       var hb = new HTMLBuilder();
       hb.Indent(IndentCount);
-      var attribs = new HTMLAttribs()
+      var attribs = new Attributes()
       {
         { "name", name },
         { "content", content },
@@ -282,7 +306,7 @@ namespace LJCDataUtility
     {
       var hb = new HTMLBuilder();
       hb.Indent(IndentCount);
-      var attribs = new HTMLAttribs()
+      var attribs = new Attributes()
       {
         { "charset", charSet }
       };
@@ -308,7 +332,7 @@ namespace LJCDataUtility
     {
       var hb = new HTMLBuilder();
       hb.Indent(IndentCount);
-      var attribs = new HTMLAttribs()
+      var attribs = new Attributes()
       {
         { "src", fileName },
       };
@@ -318,69 +342,11 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Attribs Methods
-
-    // Gets common element attributes.
-    /// <include path='items/Attribs/*' file='Doc/HTMLBuilder.xml'/>
-    public HTMLAttribs Attribs(string className = null, string id = null)
-    {
-      var retAttribs = new HTMLAttribs();
-      if (NetString.HasValue(id))
-      {
-        retAttribs.Add("id", id);
-      }
-      if (NetString.HasValue(className))
-      {
-        retAttribs.Add("class", className);
-      }
-      return retAttribs;
-    }
-
-    // Creates the HTML element attributes.
-    /// <include path='items/StartAttribs/*' file='Doc/HTMLBuilder.xml'/>
-    public HTMLAttribs StartAttribs()
-    {
-      var retAttributes = new HTMLAttribs()
-      {
-        { "lang", "en" },
-        { "xmlns", "http://www.w3.org/1999/xhtml" },
-      };
-      return retAttributes;
-    }
-
-    // Gets common table attributes.
-    /// <include path='items/TableAttribs/*' file='Doc/HTMLBuilder.xml'/>
-    public HTMLAttribs TableAttribs(int border = 1, int cellSpacing = 0
-      , int cellPadding = 2, string className = null, string id = null)
-    {
-      var retAttribs = Attribs(className, id);
-      retAttribs.Add("border", border.ToString());
-      retAttribs.Add("cellspacing", cellSpacing.ToString());
-      retAttribs.Add("cellpadding", cellPadding.ToString());
-      return retAttribs;
-    }
-    #endregion
-
-    #region Other Methods
-
-    // Changes the IndentCount by the supplied value.
-    /// <include path='items/Indent/*' file='Doc/HTMLBuilder.xml'/>
-    public int Indent(int increment = 1)
-    {
-      IndentCount += increment;
-      if (IndentCount < 0)
-      {
-        IndentCount = 0;
-      }
-      return IndentCount;
-    }
-    #endregion
-
     #region Get Modified Text Methods
 
     /// <summary>Gets the attributes text.</summary>
     /// <include path='items/GetAttribs/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetAttribs(HTMLAttribs htmlAttribs)
+    public string GetAttribs(Attributes htmlAttribs)
     {
       string retText = "";
 
@@ -388,7 +354,7 @@ namespace LJCDataUtility
       {
         var tb = new TextBuilder();
         var isFirst = true;
-        foreach (HTMLAttrib htmlAttrib in htmlAttribs)
+        foreach (Attribute htmlAttrib in htmlAttribs)
         {
           if (!isFirst)
           {
@@ -523,6 +489,49 @@ namespace LJCDataUtility
         retText = buildText;
       }
       return retText;
+    }
+    #endregion
+
+    #region Attribs Methods
+
+    // Gets common element attributes.
+    /// <include path='items/Attribs/*' file='Doc/HTMLBuilder.xml'/>
+    public Attributes Attribs(string className = null, string id = null)
+    {
+      var retAttribs = new Attributes();
+      if (NetString.HasValue(id))
+      {
+        retAttribs.Add("id", id);
+      }
+      if (NetString.HasValue(className))
+      {
+        retAttribs.Add("class", className);
+      }
+      return retAttribs;
+    }
+
+    // Creates the HTML element attributes.
+    /// <include path='items/StartAttribs/*' file='Doc/HTMLBuilder.xml'/>
+    public Attributes StartAttribs()
+    {
+      var retAttributes = new Attributes()
+      {
+        { "lang", "en" },
+        { "xmlns", "http://www.w3.org/1999/xhtml" },
+      };
+      return retAttributes;
+    }
+
+    // Gets common table attributes.
+    /// <include path='items/TableAttribs/*' file='Doc/HTMLBuilder.xml'/>
+    public Attributes TableAttribs(int border = 1, int cellSpacing = 0
+      , int cellPadding = 2, string className = null, string id = null)
+    {
+      var retAttribs = Attribs(className, id);
+      retAttribs.Add("border", border.ToString());
+      retAttribs.Add("cellspacing", cellSpacing.ToString());
+      retAttribs.Add("cellpadding", cellPadding.ToString());
+      return retAttribs;
     }
     #endregion
 
@@ -678,6 +687,11 @@ namespace LJCDataUtility
 
     // Gets or sets the XML text.
     private string HTML { get; set; }
+    #endregion
+
+    #region Class Values
+
+    const bool NoIndent = false;
     #endregion
   }
 }

@@ -21,7 +21,7 @@ namespace LJCDataUtility
     /// </summary>
     /// <param name="fileName">The HTML document file name.</param>
     /// <returns>The HTML begin text.</returns>
-    public static string HTMLBegin(string fileName = null)
+    public static string GetHTMLBegin(string fileName = null)
     {
       var hb = new HTMLBuilder();
       string[] copyright = new string[]

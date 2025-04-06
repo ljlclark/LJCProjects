@@ -1,24 +1,24 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// HTMLAttribs.cs
+// Attributes.cs
 using System.Collections.Generic;
 
 namespace LJCDataUtility
 {
   /// <summary>
-  /// Represents a collection of HTMLAttribute elements.
+  /// Represents a collection of Attribute elements.
   /// </summary>
-  public class HTMLAttribs : List<HTMLAttrib>
+  public class Attributes : List<Attribute>
   {
     #region Collection Methods
 
-    // Creates and adds an XMLAttribute.
+    // Creates and adds an Attribute.
     /// <include path='items/Add/*' file='Doc/HTMLAttribs.xml'/>
-    public HTMLAttrib Add(string name, string value)
+    public Attribute Add(string name, string value)
     {
-      var retHTMLAttribute = new HTMLAttrib(name, value);
-      Add(retHTMLAttribute);
-      return retHTMLAttribute;
+      var retAttribute = new Attribute(name, value);
+      Add(retAttribute);
+      return retAttribute;
     }
     #endregion
   }

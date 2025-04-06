@@ -1,21 +1,21 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// HTMLAttrib.cs
+// Attribute.cs
 
 using LJCNetCommon;
 
 namespace LJCDataUtility
 {
   /// <summary>
-  /// Represents an XML element attribute.
+  /// Represents an HTML or XML element attribute.
   /// </summary>
-  public class HTMLAttrib
+  public class Attribute
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/CHTMLAttribute/*' file='Doc/HTMLAttrib.xml'/>
-    public HTMLAttrib(string name, string value = null)
+    public Attribute(string name, string value = null)
     {
       Name = name;
       Value = value;
@@ -38,13 +38,13 @@ namespace LJCDataUtility
     /// <summary>Gets or sets the attribute value.</summary>
     public string Value
     {
-      get { return mAttributeValue; }
+      get { return mValue; }
       set
       {
-        mAttributeValue = NetString.InitString(value);
+        mValue = NetString.InitString(value);
       }
     }
-    private string mAttributeValue;
+    private string mValue;
     #endregion
   }
 }
