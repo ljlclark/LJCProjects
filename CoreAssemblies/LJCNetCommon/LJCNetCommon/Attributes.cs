@@ -3,8 +3,9 @@
 // Attributes.cs
 using System.Collections.Generic;
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
+  // Move to LJCNetCommon
   /// <summary>
   /// Represents a collection of Attribute elements.
   /// </summary>
@@ -13,7 +14,7 @@ namespace LJCDataUtility
     #region Collection Methods
 
     // Creates and adds an Attribute.
-    /// <include path='items/Add/*' file='Doc/HTMLAttribs.xml'/>
+    /// <include path='items/Add/*' file='Doc/Attributes.xml'/>
     public Attribute Add(string name, string value)
     {
       var retAttribute = new Attribute(name, value);

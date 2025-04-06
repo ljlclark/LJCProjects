@@ -9,15 +9,16 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
   /// <summary>Custom DataColumn HTML methods.</summary>
-  internal class ColumnHTML
+  internal class ColumnHTMLTable
   {
     #region Constructors
-    internal ColumnHTML(DataUtilityList parentObject
+    internal ColumnHTMLTable(DataUtilityList parentObject
       , DataColumnManager columnManager, string fileName)
     {
       // Initialize property values.
@@ -31,27 +32,22 @@ namespace LJCDataUtility
 
     #region HTML Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    // Gets the HTML Table document from DataTable.
+    /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataTableHTML()
     {
       var hb = new HTMLBuilder();
       hb.Text(GetBegin());
 
       var dataTable = GetDataTable();
-      hb.Text(HTMLData.DataTableHTML(dataTable));
+      hb.Text(HTMLTableData.DataTableHTML(dataTable));
       hb.Text(hb.GetHTMLEnd());
       var retValue = hb.ToString();
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="dataType"></param>
-    /// <returns></returns>
+    // Gets the HTML Table document.
+    /// <include path='items/GetHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string GetHTML(string dataType)
     {
       var hb = new HTMLBuilder();
@@ -60,6 +56,7 @@ namespace LJCDataUtility
       switch (dataType.ToLower())
       {
         case "dataobject":
+          hb.Text(DataHTML());
           break;
 
         case "datatable":
@@ -75,16 +72,37 @@ namespace LJCDataUtility
     }
 
     /// <summary>
-    /// 
+    /// Gets the HTML Table document from a DataObject.
     /// </summary>
     /// <returns></returns>
+    internal string DataHTML()
+    {
+      var hb = new HTMLBuilder();
+      hb.Text(GetBegin());
+
+      var dataColumns = GetDataColumns();
+      if (NetCommon.HasItems(dataColumns))
+      {
+        // Tricky Bit
+        var dataObjects = dataColumns.ToList<object>();
+
+        var propertyNames = GetPropertyNames();
+        hb.Text(HTMLTableData.DataHTML(dataObjects, propertyNames));
+        hb.Text(hb.GetHTMLEnd());
+      }
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the HTML Table document from DbResult.
+    /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ResultHTML()
     {
       var hb = new HTMLBuilder();
       hb.Text(GetBegin());
 
       var dbResult = GetResult();
-      hb.Text(HTMLData.ResultHTML(dbResult));
+      hb.Text(HTMLTableData.ResultHTML(dbResult));
       hb.Text(hb.GetHTMLEnd());
       var retValue = hb.ToString();
       return retValue;
@@ -93,6 +111,8 @@ namespace LJCDataUtility
 
     #region Data Methods
 
+    // Gets the DataTable object.
+    /// <include path='items/GetDataTable/*' file='Doc/ColumnHtmlTable.xml'/>
     internal DataTable GetDataTable()
     {
       SetConfigData();
@@ -102,6 +122,19 @@ namespace LJCDataUtility
       return retTable;
     }
 
+    // Gets the Data Object.
+    internal DataColumns GetDataColumns()
+    {
+      var keyColumns = GetKeyColumns();
+      var propertyNames = GetPropertyNames();
+      var orderByNames = GetOrderByNames();
+      ColumnManager.Manager.OrderByNames = orderByNames;
+      var retData = ColumnManager.Load(keyColumns, propertyNames);
+      return retData;
+    }
+
+    // Gets the DbResult object.
+    /// <include path='items/GetResult/*' file='Doc/ColumnHtmlTable.xml'/>
     internal DbResult GetResult()
     {
       var manager = ColumnManager.Manager;
@@ -117,7 +150,7 @@ namespace LJCDataUtility
     private string GetBegin()
     {
       var hb = new HTMLBuilder();
-      hb.Text(LJC.GetHTMLBegin(FileName));
+      hb.Text(LJCHTML.GetHTMLBegin(FileName));
       hb.Line();
       hb.Text(HTMLHead());
       hb.End("head", NoIndent);
@@ -184,7 +217,7 @@ namespace LJCDataUtility
       var hb = new HTMLBuilder();
       if (!NetString.HasValue(author))
       {
-        author = LJC.Author();
+        author = LJCHTML.Author();
       }
       hb.Create("title", "Creates an HTML Document");
       hb.CreateMetas(author, "Create HTML Document");

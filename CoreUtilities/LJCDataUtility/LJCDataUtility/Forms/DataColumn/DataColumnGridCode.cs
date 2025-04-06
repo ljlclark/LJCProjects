@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using LJCDBMessage;
 using System.IO;
 
 namespace LJCDataUtility
@@ -192,10 +191,13 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         var fileName = "Temp.html";
-        var columnHTML = new ColumnHTML(ParentObject, ColumnManager, fileName);
-        var dataType = "DataTable";
-        //var dataType = "DbResult";
-        string html = columnHTML.GetHTML(dataType);
+        var htmlTable = new ColumnHTMLTable(ParentObject, ColumnManager
+          , fileName);
+
+        var dataType = "DataObject";
+        //dataType = "DataTable";
+        dataType = "DbResult";
+        string html = htmlTable.GetHTML(dataType);
 
         File.WriteAllText(fileName, html);
         ParentObject.Cursor = Cursors.Default;

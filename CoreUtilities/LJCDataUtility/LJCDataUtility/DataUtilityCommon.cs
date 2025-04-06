@@ -1,14 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilityCommon.cs
-using LJCDataUtilityDAL;
-using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Net;
 
 namespace LJCDataUtility
 {

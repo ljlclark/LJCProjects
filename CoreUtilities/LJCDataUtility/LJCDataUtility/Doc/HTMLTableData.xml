@@ -3,6 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- HTMLData.xml -->
 <items>
+  <!-- Static DataTable Functions -->
   <DataTableHeadings>
     <summary>
       Create table headings from DataTable.
@@ -26,6 +27,34 @@
     <param name="maxRows"></param>
     <returns></returns>
   </DataTableRows>
+  <!-- Static Data Object Functions -->
+  <DataHeadings>
+    <summary>
+      Create table headings from a Data Object.
+    </summary>
+    <param name="dataObjects"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </DataHeadings>
+  <DataHTML>
+    <summary>
+      Create an HTML table from a Data Object.
+    </summary>
+    <param name="dataObjects"></param>
+    <param name="propertyNames"></param>
+    <param name="maxRows"></param>
+    <returns></returns>
+  </DataHTML>
+  <DataRows>
+    <summary>
+      Create table rows from a Data Object.
+    </summary>
+    <param name="dataObjects"></param>
+    <param name="propertyNames"></param>
+    <param name="maxRows"></param>
+    <returns></returns>
+  </DataRows>
+  <!-- Static DbResult Functions -->
   <ResultHeadings>
     <summary>
       Create table headings from result.

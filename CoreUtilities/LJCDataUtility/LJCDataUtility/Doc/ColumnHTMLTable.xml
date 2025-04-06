@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ColumnHTML.xml -->
+<items>
+  <!-- HTML Methods -->
+  <DataTableHTML>
+    <summary>
+      Gets the HTML Table document from DataTable.
+    </summary>
+    <returns>The HTML document.</returns>
+  </DataTableHTML>
+  <GetHTML>
+    <summary>
+      Gets the HTML Table document.
+    </summary>
+    <param name="dataType"></param>
+    <returns></returns>
+  </GetHTML>
+  <ResultHTML>
+    <summary>
+      Gets the HTML Table document from DbResult.
+    </summary>
+    <returns>The HTML document.</returns>
+  </ResultHTML>
+  <!-- Data Methods -->
+  <GetDataTable>
+    <summary>
+      Gets the DataTable object.
+    </summary>
+    <returns>The DataTable object.</returns>
+  </GetDataTable>
+  <GetResult>
+    <summary>
+      Gets the DbResult object.
+    </summary>
+    <returns>The DbResult object.</returns>
+  </GetResult>
+</items>

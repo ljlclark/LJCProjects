@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
-    <Compile Include="Forms\DataColumn\ColumnHtml.cs" />
+    <Compile Include="Forms\DataColumn\ColumnHtmlTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
@@ -134,11 +134,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProcBuilder.cs" />
-    <Compile Include="Attribute.cs" />
-    <Compile Include="HTMLAttribs.cs" />
-    <Compile Include="HTMLBuilder.cs" />
-    <Compile Include="HTMLData.cs" />
-    <Compile Include="LJC.cs" />
+    <Compile Include="HTMLTableData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\TableNameSelect.resx">
@@ -216,11 +212,8 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataKey.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
-    <Content Include="Doc\HTML.html" />
-    <Content Include="Doc\HTMLData.xml" />
-    <Content Include="Doc\HTMLAttrib.xml" />
-    <Content Include="Doc\HTMLAttribs.xml" />
-    <Content Include="Doc\HTMLBuilder.xml" />
+    <Content Include="Doc\ColumnHTMLTable.xml" />
+    <Content Include="Doc\HTMLTableData.xml" />
     <Content Include="Doc\MyProcBuilder.xml" />
     <Content Include="Doc\ProcBuilder.xml" />
     <Content Include="Forms\DataTable\ACreate.txt" />

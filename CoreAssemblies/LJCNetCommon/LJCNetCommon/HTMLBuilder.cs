@@ -1,11 +1,11 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // HTMLBuilder.cs
-using LJCNetCommon;
 using System.Text;
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
+  // Move to LJCNetCommon
   /// <summary>
   /// Provides methods for creating HTML text.
   /// </summary>

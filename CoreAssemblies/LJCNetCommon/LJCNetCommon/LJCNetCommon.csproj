@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="ArgError.cs" />
+    <Compile Include="Attribute.cs" />
+    <Compile Include="Attributes.cs" />
     <Compile Include="CodeTokens\CodeTokenizer.cs" />
     <Compile Include="CodeTokens\CommonDataTypes.cs" />
     <Compile Include="CodeTokens\CommonModifiers.cs" />
@@ -57,11 +59,13 @@
     <Compile Include="DbColumns.cs" />
     <Compile Include="DbValue.cs" />
     <Compile Include="DbValues.cs" />
+    <Compile Include="HTMLBuilder.cs" />
     <Compile Include="KeyItem.cs" />
     <Compile Include="KeyItems.cs" />
     <Compile Include="CodeTokens\CommonKeywords.cs" />
     <Compile Include="LJCAssemblyReflect.cs" />
     <Compile Include="LJCCryptography.cs" />
+    <Compile Include="LJCHTML.cs" />
     <Compile Include="NetCommon.cs" />
     <Compile Include="NetFile.cs" />
     <Compile Include="NetString.cs" />
@@ -72,7 +76,7 @@
     <Compile Include="TextBuilder.cs" />
     <Compile Include="XMLAttribute.cs" />
     <Compile Include="XMLAttributes.cs" />
-    <Compile Include="XmlBuilder.cs" />
+    <Compile Include="XMLBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />
@@ -89,6 +93,9 @@
     <Content Include="Doc\DbValues.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Doc\Attribute.xml" />
+    <Content Include="Doc\Attributes.xml" />
+    <Content Include="Doc\HTMLBuilder.xml" />
     <Content Include="Doc\KeyItem.xml" />
     <Content Include="Doc\KeyItems.xml" />
     <Content Include="Doc\LJCAssemblyReflect.xml">

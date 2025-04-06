@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 // LJC.cs
 
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
   /// <summary>LJC specific methods.</summary>
-  public class LJC
+  public class LJCHTML
   {
     #region Static Functions
 

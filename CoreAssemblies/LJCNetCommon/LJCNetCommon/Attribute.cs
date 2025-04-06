@@ -2,10 +2,9 @@
 // Licensed under the MIT License.
 // Attribute.cs
 
-using LJCNetCommon;
-
-namespace LJCDataUtility
+namespace LJCNetCommon
 {
+  // Move to LJCNetCommon
   /// <summary>
   /// Represents an HTML or XML element attribute.
   /// </summary>
@@ -14,7 +13,7 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/CHTMLAttribute/*' file='Doc/HTMLAttrib.xml'/>
+    /// <include path='items/CHTMLAttribute/*' file='Doc/Attribute.xml'/>
     public Attribute(string name, string value = null)
     {
       Name = name;
